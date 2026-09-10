@@ -1,8 +1,18 @@
+---
+title: "Get Run"
+description: "Get a run by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/thread-runs/get-run"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, thread-runs, get-run]
+---
+
 # Get Run
 
 > Get a run by ID.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /threads/{thread_id}/runs/{run_id}**
 
 ````yaml
 openapi: 3.1.0

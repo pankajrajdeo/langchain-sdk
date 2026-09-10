@@ -1,3 +1,11 @@
+---
+title: "SAP HANA Cloud Knowledge Graph Engine"
+description: "SAP HANA Cloud Knowledge Graph is a fully integrated knowledge graph solution within the SAP HANA Cloud database."
+source: "https://docs.langchain.com/oss/python/integrations/graphs/sap_hana_rdf_graph"
+category: "docs"
+tags: [docs, integrations, graphs, sap_hana_rdf_graph]
+---
+
 # SAP HANA Cloud Knowledge Graph Engine
 
 [SAP HANA Cloud Knowledge Graph](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-knowledge-graph-guide/sap-hana-cloud-sap-hana-database-knowledge-graph-engine-guide) is a fully integrated knowledge graph solution within the `SAP HANA Cloud` database.
@@ -259,7 +267,7 @@ P2,http://www.w3.org/1999/02/22-rdf-syntax-ns#type,Puppet
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/sap_hana_rdf_graph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

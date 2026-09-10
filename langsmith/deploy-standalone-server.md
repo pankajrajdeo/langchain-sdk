@@ -1,3 +1,11 @@
+---
+title: "Self-host standalone servers"
+description: "Deploy standalone Agent Servers using Docker, Docker Compose, or Kubernetes without the LangSmith control plane."
+source: "https://docs.langchain.com/langsmith/deploy-standalone-server"
+category: "docs"
+tags: [docs, langsmith, deploy-standalone-server]
+---
+
 # Self-host standalone servers
 
 > Deploy standalone Agent Servers using Docker, Docker Compose, or Kubernetes without the LangSmith control plane.
@@ -251,7 +259,7 @@ Assuming everything is running correctly, you should see a response like:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-standalone-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

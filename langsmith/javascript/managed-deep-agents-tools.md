@@ -1,3 +1,11 @@
+---
+title: "Add custom tools to Managed Deep Agents"
+description: "Define authored tools for Managed Deep Agents projects."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-tools]
+---
+
 # Add custom tools to Managed Deep Agents
 
 > Define authored tools for Managed Deep Agents projects.
@@ -22,6 +30,8 @@ my-agent/
 
 ## Add a tool module
 
+**tools/customer.ts**
+
 ```ts
 import { tool } from "langchain";
 import { z } from "zod";
@@ -41,6 +51,8 @@ export const lookupCustomer = tool(
 ## Attach tools to the agent
 
 Import the tools into the project-root agent entry and pass them in the `tools` list.
+
+**agent.ts**
 
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
@@ -66,6 +78,8 @@ Pause the agent before sensitive tool calls so a person can approve, edit, or re
 
 Set `interruptOn` in the agent definition, and optionally set `permissions` to gate tool and filesystem access.
 
+**agent.ts**
+
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
 
@@ -81,9 +95,9 @@ export const agent = defineDeepAgent({
 });
 ```
 
-The `interruptOn` field applies the same interrupt behavior as LangChain's [human-in-the-loop middleware](https://docs.langchain.com/oss/javascript/langchain/guardrails#human-in-the-loop).
+The `interruptOn` field applies the same interrupt behavior as LangChain's [human-in-the-loop middleware](../../javascript/langchain/guardrails.md#human-in-the-loop).
 
-For decision types (approve, edit, reject), conditional interrupts, and permission rules, see the Deep Agents [Human-in-the-loop](https://docs.langchain.com/oss/javascript/deepagents/human-in-the-loop) and [Permissions](https://docs.langchain.com/oss/javascript/deepagents/permissions) guides.
+For decision types (approve, edit, reject), conditional interrupts, and permission rules, see the Deep Agents [Human-in-the-loop](../../javascript/deepagents/human-in-the-loop.md) and [Permissions](../../javascript/deepagents/permissions.md) guides.
 
 ### Respond to an interrupt
 
@@ -104,12 +118,12 @@ If a tool requires an API key or OAuth token, use a connection to resolve the cr
 
 ## Access runtime context
 
-For per-run values such as request metadata or feature flags, use the normal LangChain runtime context patterns for tools. See [how to access context from within your tools](https://docs.langchain.com/oss/javascript/langchain/tools#access-context).
+For per-run values such as request metadata or feature flags, use the normal LangChain runtime context patterns for tools. See [how to access context from within your tools](../../javascript/langchain/tools.md#access-context).
 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

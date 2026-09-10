@@ -1,3 +1,11 @@
+---
+title: "Studio troubleshooting"
+description: "Safari blocks plain-HTTP traffic on localhost. When running Studio with langgraph dev, you may see \"Failed to load assistants\" errors."
+source: "https://docs.langchain.com/langsmith/troubleshooting-studio"
+category: "docs"
+tags: [docs, langsmith, troubleshooting-studio]
+---
+
 # Studio troubleshooting
 
 ## Safari connection issues
@@ -163,7 +171,7 @@ When you run an experiment, any attached evaluators are scheduled for execution 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/troubleshooting-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

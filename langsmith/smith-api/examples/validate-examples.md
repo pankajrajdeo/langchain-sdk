@@ -1,8 +1,18 @@
+---
+title: "Validate examples"
+description: "Validate examples in bulk."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/validate-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, validate-examples]
+---
+
 # Validate examples
 
 > Validate examples in bulk.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/examples/validate/bulk**
 
 ````yaml
 openapi: 3.1.0

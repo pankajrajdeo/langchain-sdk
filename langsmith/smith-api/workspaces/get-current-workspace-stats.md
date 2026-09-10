@@ -1,6 +1,16 @@
+---
+title: "Get current workspace stats"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/stats"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/get-current-workspace-stats"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, get-current-workspace-stats]
+---
+
 # Get current workspace stats
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/stats**
 
 ````yaml
 openapi: 3.1.0

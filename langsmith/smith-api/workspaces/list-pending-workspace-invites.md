@@ -1,8 +1,18 @@
+---
+title: "List pending workspace invites"
+description: "Get all workspaces visible to this auth"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/list-pending-workspace-invites"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, list-pending-workspace-invites]
+---
+
 # List pending workspace invites
 
 > Get all workspaces visible to this auth
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/pending**
 
 ````yaml
 openapi: 3.1.0

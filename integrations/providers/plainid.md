@@ -1,3 +1,11 @@
+---
+title: "PlainID integrations"
+description: "Integrate with PlainID using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/plainid"
+category: "docs"
+tags: [docs, integrations, providers, plainid]
+---
+
 # PlainID integrations
 
 > Integrate with PlainID using LangChain Python.
@@ -14,6 +22,8 @@ With `langchain-plainid`, you can:
 
 First, install the partner package:
 
+**pip**
+
 ```bash
 pip install langchain_plainid
 ```
@@ -23,6 +33,8 @@ pip install langchain_plainid
 Next, you need to configure the provider with credentials from your PlainID tenant. You will need your Client ID, Client Secret, and Base URL.
 
 You can set these as environment variables:
+
+**Environment Variables**
 
 ```bash
 export PLAINID_CLIENT_ID="your-client-id"
@@ -55,7 +67,7 @@ For more detailed information and full examples, refer to the [langchain\_plaini
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/plainid.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

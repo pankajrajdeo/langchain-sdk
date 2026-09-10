@@ -1,3 +1,11 @@
+---
+title: "Configure Context Hub commit webhooks"
+description: "Send Context Hub commit events to an external HTTPS endpoint and verify that LangSmith signed each request."
+source: "https://docs.langchain.com/langsmith/context-hub-webhooks"
+category: "docs"
+tags: [docs, langsmith, context-hub-webhooks]
+---
+
 # Configure Context Hub commit webhooks
 
 > Send Context Hub commit events to an external HTTPS endpoint and verify that LangSmith signed each request.
@@ -12,7 +20,7 @@ Each webhook applies to the entire workspace. Every configured endpoint receives
 
 To add a webhook:
 
-1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-context-hub-webhooks), go to **Settings** → **Integrations** → **Context Hub webhooks**.
+1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-context-hub-webhooks), go to **Settings** > **Integrations** > **Context Hub webhooks**.
 2. Click **Add webhook**.
 3. Enter a publicly reachable HTTPS URL.
 4. (Optional) Add custom request headers, such as an `Authorization` header.
@@ -59,6 +67,8 @@ sha256=<lowercase hex HMAC-SHA256 digest>
 
 Compute the HMAC-SHA256 digest over the exact raw request body bytes with the webhook's signing secret. Verify the signature before parsing the JSON, and compare the complete header value in constant time. Parsing and reserializing the body before verification can change its bytes and invalidate the signature.
 
+**Python**
+
 ```python
 import hashlib
 import hmac
@@ -81,6 +91,8 @@ def verify_langsmith_signature(
 
     return hmac.compare_digest(expected, signature_header)
 ```
+
+**TypeScript**
 
 ```typescript
 import { createHmac, timingSafeEqual } from "node:crypto";
@@ -194,7 +206,7 @@ A breaking change to `data.commit` uses a new event type suffix, such as `.v2`. 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/context-hub-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

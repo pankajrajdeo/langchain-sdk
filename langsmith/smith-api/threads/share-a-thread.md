@@ -1,9 +1,19 @@
+---
+title: "Share a thread"
+description: "Mints a public share token for a thread. Idempotent: sharing an already-shared thread returns the existing token."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/share-a-thread"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, share-a-thread]
+---
+
 # Share a thread
 
 > Mints a public share token for a thread. Idempotent: sharing an
 already-shared thread returns the existing token.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/threads/{thread_id}/share**
 
 ````yaml
 openapi: 3.1.0

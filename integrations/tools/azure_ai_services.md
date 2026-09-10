@@ -1,3 +1,11 @@
+---
+title: "Microsoft Foundry Tools (formerly Azure AI Services) tools integration"
+description: "Integrate with Microsoft Foundry Tools (formerly Azure AI Services) using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services"
+category: "docs"
+tags: [docs, integrations, tools, azure_ai_services]
+---
+
 # Microsoft Foundry Tools (formerly Azure AI Services) tools integration
 
 > Integrate with Microsoft Foundry Tools (formerly Azure AI Services) using LangChain Python.
@@ -35,9 +43,13 @@ Install the integration package, configure either an Azure AI Foundry project en
 
 Install the package with the `tools` extra:
 
+**pip**
+
 ```bash
 pip install -U "langchain-azure-ai[tools]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-azure-ai[tools]"
@@ -48,6 +60,8 @@ This extra installs the service-specific dependencies used by these tools, inclu
 ### Credentials
 
 Pass either `DefaultAzureCredential()` or an API-key string through the `credential` argument. If you use a Foundry project endpoint, use a Microsoft Entra ID credential such as `DefaultAzureCredential()`.
+
+**Initialize credential**
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -64,6 +78,8 @@ The service tools support two endpoint styles:
 
 If both are available, prefer `project_endpoint` because it resolves the backing service endpoint automatically for Foundry-based workflows.
 
+**Configure endpoint**
+
 ```bash
 export AZURE_AI_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/projects/<project>"
 ```
@@ -71,6 +87,8 @@ export AZURE_AI_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/p
 ### Instantiate a tool
 
 If `AZURE_AI_PROJECT_ENDPOINT` is already set, you can usually omit `project_endpoint` during instantiation.
+
+**Initialize tool**
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -89,6 +107,8 @@ print(result)
 ## Use with an agent
 
 Pass one or more tools to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent).
+
+**Agent with tools**
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -369,7 +389,7 @@ from langchain_azure_ai.tools import (
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_ai_services.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

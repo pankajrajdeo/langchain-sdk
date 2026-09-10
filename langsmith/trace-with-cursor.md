@@ -1,3 +1,11 @@
+---
+title: "Trace Cursor sessions"
+description: "Capture Cursor agent turns, tool calls, model metadata, token usage, attachments, and subagents in LangSmith."
+source: "https://docs.langchain.com/langsmith/trace-with-cursor"
+category: "docs"
+tags: [docs, langsmith, trace-with-cursor]
+---
+
 # Trace Cursor sessions
 
 > Capture Cursor agent turns, tool calls, model metadata, token usage, attachments, and subagents in LangSmith.
@@ -18,7 +26,7 @@ Before setting up tracing, ensure you have:
 
 Install the plugin directly from the GitHub repository in Cursor's settings:
 
-1. Open **Cursor → Settings → Plugins**.
+1. Open **Cursor > Settings > Plugins**.
 2. Paste `https://github.com/langchain-ai/langsmith-cursor-plugins` into the plugin link field.
 3. Confirm to add **LangSmith Tracing for Cursor**.
 
@@ -176,7 +184,7 @@ If traces do not appear in LangSmith:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-cursor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

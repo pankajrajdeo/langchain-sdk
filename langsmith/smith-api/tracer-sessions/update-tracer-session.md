@@ -1,8 +1,18 @@
+---
+title: "Update tracer session"
+description: "Update a project."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/update-tracer-session"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, update-tracer-session]
+---
+
 # Update tracer session
 
 > Update a project.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/sessions/{session_id}**
 
 ````yaml
 openapi: 3.1.0

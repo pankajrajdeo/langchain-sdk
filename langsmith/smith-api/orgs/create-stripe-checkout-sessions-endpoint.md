@@ -1,8 +1,18 @@
+---
+title: "Create stripe checkout sessions endpoint"
+description: "Kick off a Stripe checkout session flow."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/create-stripe-checkout-sessions-endpoint"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, create-stripe-checkout-sessions-endpoint]
+---
+
 # Create stripe checkout sessions endpoint
 
 > Kick off a Stripe checkout session flow.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/stripe_checkout_session**
 
 ````yaml
 openapi: 3.1.0

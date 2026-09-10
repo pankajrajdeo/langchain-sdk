@@ -1,3 +1,11 @@
+---
+title: "Permissions"
+description: "Control filesystem access with declarative permission rules for Deep Agents"
+source: "https://docs.langchain.com/oss/python/deepagents/permissions"
+category: "docs"
+tags: [docs, deepagents, permissions]
+---
+
 # Permissions
 
 > Control filesystem access with declarative permission rules for Deep Agents
@@ -336,7 +344,7 @@ except NotImplementedError:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/permissions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Managed Deep Agents CLI reference"
+description: "Reference for mda commands, project files, and deploy behavior."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-cli"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-cli]
+---
+
 # Managed Deep Agents CLI reference
 
 > Reference for mda commands, project files, and deploy behavior.
@@ -14,6 +22,8 @@ For the fastest end-to-end path, see the [quickstart](managed-deep-agents-quicks
 ## Install
 
 `mda init` declares `managed-deepagents` as a project dependency, so run the `mda` binary from the project.
+
+**uv**
 
 ```bash
 uvx --from managed-deepagents mda init my-agent
@@ -33,6 +43,8 @@ The package provides agent, identity, schedule, and sandbox authoring APIs with 
 3. `LANGCHAIN_API_KEY`
 
 The CLI reads those values from the project `.env` file first, then from the process environment. If no key is found in an interactive terminal, `mda deploy` prompts for a LangSmith API key and saves it to the project `.env` file.
+
+**.env**
 
 ```text
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
@@ -308,7 +320,7 @@ uv run mda delete
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

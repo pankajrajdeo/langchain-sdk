@@ -1,0 +1,117 @@
+---
+title: "Add custom middleware to Managed Deep Agents"
+description: "Add built-in or custom middleware to Managed Deep Agents projects."
+source: "https://docs.langchain.com/langsmith/managed-deep-agents-middleware"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-middleware]
+---
+
+# Add custom middleware to Managed Deep Agents
+
+> Add built-in or custom middleware to Managed Deep Agents projects.
+
+Managed Deep Agents support the Deep Agents `middleware` configuration surface.
+
+Add LangChain middleware to `define_deep_agent` to monitor tool calls, add guardrails, redact data, retry transient failures, or customize model calls.
+
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](release-stages.md)** and available on [LangSmith Cloud](cloud.md) in the US region only.
+
+## Project structure
+
+Keep the agent entry point at the project root and custom middleware under `middleware/`:
+
+```text
+my-agent/
+  agent.py
+  middleware/
+    audit.py
+```
+
+The managed runtime still owns `backend`, `store`, `checkpointer`, `memory`, `skills`, and the system prompt. Middleware should focus on agent behavior around model calls, tool calls, and lifecycle hooks.
+
+For deeper hook, state, and context details, see [custom middleware](../langchain/middleware/custom.md).
+
+## Use prebuilt middleware
+
+You can use LangChain [prebuilt middleware](../langchain/middleware/built-in.md) directly in the agent definition.
+
+**agent.py**
+
+```python
+from langchain.agents.middleware import ModelCallLimitMiddleware, PIIMiddleware
+from managed_deepagents import define_deep_agent
+
+agent = define_deep_agent(
+    name="support-agent",
+    model="openai:gpt-5.5",
+    middleware=[
+        PIIMiddleware("email", strategy="redact", apply_to_input=True),
+        ModelCallLimitMiddleware(run_limit=50),
+    ],
+)
+```
+
+Middleware is the right place for cross-cutting behavior such as PII handling, rate limits, retry policies, model fallbacks, dynamic model selection, and tool-call monitoring.
+
+## Add a custom middleware module
+
+For a more advanced option, you can also define [custom middleware](../langchain/middleware/custom.md).
+
+> [!NOTE]
+> Managed Deep Agents use `ainvoke` and `astream`, so custom middleware must use async hooks. Synchronous hooks remain supported with Deep Agents `invoke` and `stream`.
+
+**middleware/audit.py**
+
+```python
+from collections.abc import Awaitable, Callable
+
+from langchain.agents.middleware import wrap_tool_call
+from langchain.messages import ToolMessage
+from langchain.tools.tool_node import ToolCallRequest
+from langgraph.types import Command
+
+@wrap_tool_call
+async def log_tool_calls(
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], Awaitable[ToolMessage | Command]],
+) -> ToolMessage | Command:
+    print(f"Calling tool: {request.tool_call['name']}")
+    result = await handler(request)
+    print(f"Finished tool: {request.tool_call['name']}")
+    return result
+```
+
+Import the middleware into the project-root agent entry and pass it in the `middleware` list.
+
+**agent.py**
+
+```python
+from managed_deepagents import define_deep_agent
+
+from middleware.audit import log_tool_calls
+
+agent = define_deep_agent(
+    name="support-agent",
+    model="openai:gpt-5.5",
+    middleware=[log_tool_calls],
+)
+```
+
+`mda dev` and `mda deploy` copy the project files into the compiled build.
+
+Your middleware imports should work the same way they do in a normal local Python project.
+
+## Use runtime context
+
+Middleware can read per-run context through the normal LangChain runtime APIs. Use context for user IDs, organization IDs, feature flags, request metadata, or credentials that should not be part of the model prompt by default.
+
+For examples, see [Custom middleware](../langchain/middleware/custom.md).
+
+***
+
+> [!NOTE]
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-middleware.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

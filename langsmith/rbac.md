@@ -1,3 +1,11 @@
+---
+title: "Role-based access control"
+description: "This reference explains LangSmith's Role-Based Access Control (RBAC) system for managing organization-level and workspace-level permissions."
+source: "https://docs.langchain.com/langsmith/rbac"
+category: "docs"
+tags: [docs, langsmith, rbac]
+---
+
 # Role-based access control
 
 This reference explains LangSmith's Role-Based Access Control (RBAC) system for managing organization-level and workspace-level permissions.
@@ -42,6 +50,8 @@ Organization roles are **distinct from the workspace RBAC feature** and are used
 * `organization:manage` - Full control over organization settings, SSO, security, billing
 * `organization:read` - Read access to all organization information
 * `organization:pats:create` - Create organization-level [personal access tokens](administration-overview.md#personal-access-tokens-pats)
+* `organization:pats:read` - View every organization member's personal access tokens
+* `organization:pats:manage` - Revoke or delete any organization member's personal access token
 
 For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](organization-workspace-operations.md).
 
@@ -52,6 +62,7 @@ For a comprehensive list of required permissions along with the operations and r
 * Manage [billing](billing.md) and subscription plans
 * Create and delete [workspaces](set-up-hierarchy.md)
 * Invite and remove organization members
+* View, revoke, and delete any member's [personal access tokens](administration-overview.md#personal-access-tokens-pats)
 * Assign organization and workspace roles to members
 * Create and manage [custom roles](#custom-roles)
 * Configure RBAC and ABAC (Attribute-Based Access Control) policies
@@ -69,6 +80,8 @@ Management access for day-to-day operations including workspace and user managem
 * `organization:manage` - Control over organization settings, workspaces, and non-admin users
 * `organization:read` - Read access to all organization information
 * `organization:pats:create` - Create personal access tokens
+* `organization:pats:read` - View every organization member's personal access tokens
+* `organization:pats:manage` - Revoke or delete any organization member's personal access token
 
 For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](organization-workspace-operations.md).
 
@@ -77,6 +90,7 @@ For a comprehensive list of required permissions along with the operations and r
 * Create and manage [workspaces](set-up-hierarchy.md#set-up-a-workspace)
 * Invite organization members (all roles except Organization Admin)
 * Manage non-admin organization members (modify and remove Organization Users, Viewers, and Operators)
+* View, revoke, and delete any member's [personal access tokens](administration-overview.md#personal-access-tokens-pats)
 * Assign workspace roles to members
 * Create workspace-scoped service keys and service accounts
 * View organization [usage](usage-and-billing.md#usage-limits) and analytics
@@ -250,7 +264,7 @@ Some permissions offer granular control when used in custom roles:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/rbac.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

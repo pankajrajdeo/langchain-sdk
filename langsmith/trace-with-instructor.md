@@ -1,3 +1,11 @@
+---
+title: "Trace Instructor applications"
+description: "LangSmith provides a convenient integration with Instructor, a popular open-source library for generating structured output with LLMs."
+source: "https://docs.langchain.com/langsmith/trace-with-instructor"
+category: "docs"
+tags: [docs, langsmith, trace-with-instructor]
+---
+
 # Trace Instructor applications
 
 LangSmith provides a convenient integration with [Instructor](https://python.useinstructor.com/), a popular open-source library for generating structured output with LLMs.
@@ -12,9 +20,13 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 
 Next, you will need to install the LangSmith SDK:
 
+**pip**
+
 ```bash
 pip install -U langsmith
 ```
+
+**uv**
 
 ```bash
 uv add langsmith
@@ -77,7 +89,7 @@ my_function("Jason is 25 years old")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-instructor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Versioning"
+description: "Our OSS version numbers follow the format: MAJOR.MINOR.PATCH, as defined by Semantic Versioning."
+source: "https://docs.langchain.com/oss/python/versioning"
+category: "docs"
+tags: [docs, versioning]
+---
+
 # Versioning
 
 Our OSS version numbers follow the format: `MAJOR.MINOR.PATCH`, as defined by [Semantic Versioning](https://semver.org/).
@@ -112,10 +120,14 @@ For detailed information about release status and support timelines, see the [Re
 
 To check your installed version:
 
+**LangChain**
+
 ```python
 import langchain_core
 print(langchain_core.__version__)
 ```
+
+**LangGraph**
 
 ```python
 import langgraph
@@ -123,6 +135,8 @@ print(langgraph.__version__)
 ```
 
 ## Upgrade
+
+**LangChain**
 
 ```bash
 # Upgrade to the latest version
@@ -132,6 +146,8 @@ pip install -U langchain-core langchain
 pip install langchain-core==1.0.0
 ```
 
+**LangGraph**
+
 ```bash
 # Upgrade to the latest version
 pip install -U langgraph
@@ -139,6 +155,8 @@ pip install -U langgraph
 # Upgrade to a specific version
 pip install langgraph==1.0.0
 ```
+
+**Deep Agents**
 
 ```bash
 # Upgrade to the latest version
@@ -163,7 +181,7 @@ We occasionally release alpha and beta versions for early testing:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/versioning.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

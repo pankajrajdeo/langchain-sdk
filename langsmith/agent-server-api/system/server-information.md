@@ -1,8 +1,18 @@
+---
+title: "Server Information"
+description: "Get server version information, feature flags, and metadata."
+source: "https://docs.langchain.com/langsmith/agent-server-api/system/server-information"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, system, server-information]
+---
+
 # Server Information
 
 > Get server version information, feature flags, and metadata.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /info**
 
 ````yaml
 openapi: 3.1.0

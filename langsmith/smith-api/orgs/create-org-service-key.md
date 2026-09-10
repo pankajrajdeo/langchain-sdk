@@ -1,8 +1,18 @@
+---
+title: "Create org service key"
+description: "Create org-scoped service key. If workspaces is None, key is org-wide."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/create-org-service-key"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, create-org-service-key]
+---
+
 # Create org service key
 
 > Create org-scoped service key. If workspaces is None, key is org-wide.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/service-keys**
 
 ````yaml
 openapi: 3.1.0
@@ -287,6 +297,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

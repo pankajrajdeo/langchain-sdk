@@ -1,8 +1,18 @@
+---
+title: "Delete feedback"
+description: "Delete a feedback."
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/delete-feedback"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, delete-feedback]
+---
+
 # Delete feedback
 
 > Delete a feedback.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/feedback/{feedback_id}**
 
 ````yaml
 openapi: 3.1.0

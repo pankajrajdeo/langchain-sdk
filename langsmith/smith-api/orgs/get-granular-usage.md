@@ -1,3 +1,11 @@
+---
+title: "Get granular usage"
+description: "Get granular usage data with flexible grouping."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/get-granular-usage"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, get-granular-usage]
+---
+
 # Get granular usage
 
 > Get granular usage data with flexible grouping.
@@ -19,6 +27,8 @@ workspaces the user can read are included (avoids enumerating every
 workspace id in the URL, which can exceed proxy header limits).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/billing/granular-usage**
 
 ````yaml
 openapi: 3.1.0

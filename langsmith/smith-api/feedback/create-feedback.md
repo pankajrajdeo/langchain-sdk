@@ -1,3 +1,11 @@
+---
+title: "Create feedback"
+description: "Create a new feedback."
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/create-feedback"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, create-feedback]
+---
+
 # Create feedback
 
 > Create a new feedback.
@@ -6,6 +14,8 @@
 belongs to.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/feedback**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "AgentSystems Notary"
+description: "Cryptographically verifiable audit trails for LangChain applications."
+source: "https://docs.langchain.com/oss/python/integrations/callbacks/agentsystems_notary"
+category: "docs"
+tags: [docs, integrations, callbacks, agentsystems_notary]
+---
+
 # AgentSystems Notary
 
 > Cryptographically verifiable audit trails for LangChain applications.
@@ -159,7 +167,7 @@ Alternatively, the [Verify UI](https://verify.agentsystems.ai?utm_source=langcha
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/callbacks/agentsystems_notary.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

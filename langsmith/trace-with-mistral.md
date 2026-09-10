@@ -1,3 +1,11 @@
+---
+title: "Trace Mistral applications"
+description: "Mistral provides hosted access to open-weight language models via a simple API."
+source: "https://docs.langchain.com/langsmith/trace-with-mistral"
+category: "docs"
+tags: [docs, langsmith, trace-with-mistral]
+---
+
 # Trace Mistral applications
 
 [Mistral](https://mistral.ai/) provides hosted access to open-weight language models via a simple API.
@@ -8,9 +16,13 @@ This guide shows you how to trace Mistral API calls with LangSmith, allowing you
 
 Install Mistral’s official library and LangSmith:
 
+**Python**
+
 ```bash
 pip install mistralai langsmith
 ```
+
+**JavaScript**
 
 ```bash
 npm install @mistralai/mistralai langsmith dotenv
@@ -38,6 +50,8 @@ export LANGSMITH_PROJECT="<your_project_name>"  # optional
 
 1. Instrument the Mistral API call with LangSmith. In your script, create a Mistral client and wrap a call in a traced function:
 
+**Python**
+
 ```python
    import os
    from mistralai import Mistral
@@ -61,6 +75,8 @@ export LANGSMITH_PROJECT="<your_project_name>"  # optional
    result = query_mistral("Hello, how are you?")
    print("Mistral response:", result.content)
 ```
+
+**TypeScript**
 
 ```typescript
    import { Client } from "langsmith";
@@ -115,9 +131,13 @@ export LANGSMITH_PROJECT="<your_project_name>"  # optional
 
 2. Execute your script to generate a trace. For example:
 
+**Python**
+
 ```bash
    python mistral_trace.py
 ```
+
+**JavaScript**
 
 ```bash
    node index.js
@@ -149,7 +169,7 @@ Once enabled, costs appear directly in the LangSmith UI alongside each traced Mi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-mistral.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

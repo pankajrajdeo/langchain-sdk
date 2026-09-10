@@ -1,3 +1,11 @@
+---
+title: "Get a gateway policy"
+description: "Returns a single gateway policy by id. Cross-org access is rejected with 404"
+source: "https://docs.langchain.com/langsmith/smith-api/gateway-policies/get-a-gateway-policy"
+category: "docs"
+tags: [docs, langsmith, smith-api, gateway-policies, get-a-gateway-policy]
+---
+
 # Get a gateway policy
 
 > Returns a single gateway policy by id. Cross-org access is
@@ -9,6 +17,8 @@ read per-policy cost without hitting a separate endpoint.
 Guard policies leave it null.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/gateway-policies/{id}**
 
 ````yaml
 openapi: 3.1.0

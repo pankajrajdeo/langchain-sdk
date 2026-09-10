@@ -1,8 +1,18 @@
+---
+title: "Delete annotation queue items"
+description: "Remove RUN or THREAD items from a single annotation queue by item ID."
+source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/delete-annotation-queue-items"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation_queues, delete-annotation-queue-items]
+---
+
 # Delete annotation queue items
 
 > Remove RUN or THREAD items from a single annotation queue by item ID.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/annotation-queues/{queue_id}/items/delete**
 
 ````yaml
 openapi: 3.1.0

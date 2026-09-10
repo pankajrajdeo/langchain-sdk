@@ -1,3 +1,11 @@
+---
+title: "LangChain Python integrations"
+description: "Integrate with providers using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers"
+category: "docs"
+tags: [docs, integrations, providers]
+---
+
 # LangChain Python integrations
 
 > Integrate with providers using LangChain Python.
@@ -79,7 +87,7 @@ To see a full list of integrations by component type, refer to the categories in
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

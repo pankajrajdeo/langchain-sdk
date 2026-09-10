@@ -1,6 +1,16 @@
+---
+title: "Add member to current org"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/members"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/add-member-to-current-org"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, add-member-to-current-org]
+---
+
 # Add member to current org
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/members**
 
 ````yaml
 openapi: 3.1.0

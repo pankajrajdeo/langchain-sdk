@@ -1,6 +1,16 @@
+---
+title: "Cancel Run"
+description: "/langsmith/agent-server-openapi.json post /threads/{thread_id}/runs/{run_id}/cancel"
+source: "https://docs.langchain.com/langsmith/agent-server-api/thread-runs/cancel-run"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, thread-runs, cancel-run]
+---
+
 # Cancel Run
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/{thread_id}/runs/{run_id}/cancel**
 
 ````yaml
 openapi: 3.1.0

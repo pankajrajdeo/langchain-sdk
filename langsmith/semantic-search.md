@@ -1,3 +1,11 @@
+---
+title: "How to add semantic search to your agent deployment"
+description: "Semantic search lets your agent recall stored memories and documents by meaning rather than exact wording. For example, a query for \"UI preferences\" surfaces a memory written as \"user prefers dark..."
+source: "https://docs.langchain.com/langsmith/semantic-search"
+category: "docs"
+tags: [docs, langsmith, semantic-search]
+---
+
 # How to add semantic search to your agent deployment
 
 Semantic search lets your agent recall stored memories and documents by meaning rather than exact wording. For example, a query for "UI preferences" surfaces a memory written as "user prefers dark interfaces". This guide shows you how to enable semantic search on your deployment's cross-thread [store](../langgraph/stores.md) so your agent retains context across conversations and personalizes responses based on prior interactions.
@@ -151,7 +159,7 @@ results["items"][0]["score"]     # 0.92 (similarity score)
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/semantic-search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

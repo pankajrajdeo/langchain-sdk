@@ -1,3 +1,11 @@
+---
+title: "Mcp toolbox for databases integration"
+description: "Integrate with the Mcp toolbox for databases tool using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/mcp_toolbox"
+category: "docs"
+tags: [docs, integrations, tools, mcp_toolbox]
+---
+
 # Mcp toolbox for databases integration
 
 > Integrate with the Mcp toolbox for databases tool using LangChain Python.
@@ -257,7 +265,7 @@ We encourage you to get involved with the community:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/mcp_toolbox.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

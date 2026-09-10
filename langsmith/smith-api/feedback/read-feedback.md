@@ -1,8 +1,18 @@
+---
+title: "Read feedback"
+description: "Get a specific feedback."
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/read-feedback"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, read-feedback]
+---
+
 # Read feedback
 
 > Get a specific feedback.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/feedback/{feedback_id}**
 
 ````yaml
 openapi: 3.1.0

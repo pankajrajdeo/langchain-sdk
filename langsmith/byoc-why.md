@@ -1,3 +1,11 @@
+---
+title: "Why BYOC"
+description: "Compare LangSmith BYOC with self-hosted LangSmith to decide which deployment model fits your organization."
+source: "https://docs.langchain.com/langsmith/byoc-why"
+category: "docs"
+tags: [docs, langsmith, byoc-why]
+---
+
 # Why BYOC
 
 > Compare LangSmith BYOC with self-hosted LangSmith to decide which deployment model fits your organization.
@@ -42,7 +50,7 @@ To plan a migration, [contact our sales team](https://www.langchain.com/contact-
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-why.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

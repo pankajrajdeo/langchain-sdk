@@ -1,8 +1,18 @@
+---
+title: "List job logs"
+description: "List all logs for a specific prompt optimization job."
+source: "https://docs.langchain.com/langsmith/smith-api/optimization-jobs/list-job-logs"
+category: "docs"
+tags: [docs, langsmith, smith-api, optimization-jobs, list-job-logs]
+---
+
 # List job logs
 
 > List all logs for a specific prompt optimization job.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/repos/{owner}/{repo}/optimization-jobs/{job_id}/logs**
 
 ````yaml
 openapi: 3.1.0

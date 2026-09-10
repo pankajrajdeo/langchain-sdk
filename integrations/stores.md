@@ -1,3 +1,11 @@
+---
+title: "Store integrations"
+description: "Integrate with stores using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/stores"
+category: "docs"
+tags: [docs, integrations, stores]
+---
+
 # Store integrations
 
 > Integrate with stores using LangChain Python.
@@ -49,7 +57,7 @@ You can also implement your own custom store by extending the [`BaseStore`](http
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Self-hosted Agent Server environment variables"
+description: "Environment variables supported by the LangSmith Agent Server when deployed on self-hosted infrastructure."
+source: "https://docs.langchain.com/langsmith/env-var-self-hosted"
+category: "docs"
+tags: [docs, langsmith, env-var-self-hosted]
+---
+
 # Self-hosted Agent Server environment variables
 
 > Environment variables supported by the LangSmith Agent Server when deployed on self-hosted infrastructure.
@@ -292,7 +300,7 @@ Specify `REDIS_URI_CUSTOM` to use a custom Redis instance. The value of `REDIS_U
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/env-var-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

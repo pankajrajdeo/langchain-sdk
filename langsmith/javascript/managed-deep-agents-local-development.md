@@ -1,3 +1,11 @@
+---
+title: "Develop locally with LangSmith Studio"
+description: "Run and test a Managed Deep Agent locally with mda dev and LangSmith Studio."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-local-development"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-local-development]
+---
+
 # Develop locally with LangSmith Studio
 
 > Run and test a Managed Deep Agent locally with mda dev and LangSmith Studio.
@@ -13,13 +21,19 @@ Install the project dependencies and add the model provider credentials to `.env
 
 From the project root, run:
 
+**npm**
+
 ```bash
 npx mda dev
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda dev
 ```
+
+**bun**
 
 ```bash
 bunx mda dev
@@ -64,7 +78,7 @@ These defaults differ from a deployed agent. Test identity and sandbox behavior 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-local-development.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

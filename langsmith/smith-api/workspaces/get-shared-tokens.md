@@ -1,8 +1,18 @@
+---
+title: "Get shared tokens"
+description: "List all shared entities and their tokens by the workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/get-shared-tokens"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, get-shared-tokens]
+---
+
 # Get shared tokens
 
 > List all shared entities and their tokens by the workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/shared**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Get stats for a public shared thread"
+description: "Returns aggregate stats for the thread identified by the share token."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/get-stats-for-a-public-shared-thread"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, get-stats-for-a-public-shared-thread]
+---
+
 # Get stats for a public shared thread
 
 > Returns aggregate stats for the thread identified by the share token.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/public/threads/{share_token}/stats**
 
 ````yaml
 openapi: 3.1.0
@@ -190,9 +200,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Selects
       responses:
         '200':

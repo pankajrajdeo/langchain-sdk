@@ -1,3 +1,11 @@
+---
+title: "Collect feedback with presigned URLs"
+description: "Use presigned feedback tokens to collect user feedback from client-side applications without exposing your LangSmith API key."
+source: "https://docs.langchain.com/langsmith/presigned-feedback-tokens"
+category: "docs"
+tags: [docs, langsmith, presigned-feedback-tokens]
+---
+
 # Collect feedback with presigned URLs
 
 > Use presigned feedback tokens to collect user feedback from client-side applications without exposing your LangSmith API key.
@@ -17,6 +25,8 @@ This is useful when:
 
 Use [`create_presigned_feedback_token()`](https://reference.langchain.com/python/langsmith/client/Client/create_presigned_feedback_token) / [`createPresignedFeedbackToken`](https://reference.langchain.com/javascript/classes/langsmith.client.Client.html#createpresignedfeedbacktoken) to generate a token for a specific run and feedback key. The returned object includes a `url` that clients can call to submit feedback:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -32,6 +42,8 @@ token = client.create_presigned_feedback_token(
 print(token.url)
 # https://api.smith.langchain.com/api/v1/feedback/tokens/<token_id>
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -50,6 +62,8 @@ console.log(token.url);
 
 Tokens expire after 3 hours by default. Pass `expiration` to customize this with either a `timedelta` (relative) or a `datetime` (absolute):
 
+**Python**
+
 ```python
 import datetime
 from langsmith import Client
@@ -64,6 +78,8 @@ token = client.create_presigned_feedback_token(
     expiration=datetime.timedelta(hours=24),
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -80,6 +96,8 @@ const token = await client.createPresignedFeedbackToken(runId, "user_score", {
 ### Constrain feedback values
 
 Pass `feedback_config` to restrict what values clients can submit. This is useful for enforcing a specific feedback schema (e.g., thumbs up/down, 1–5 stars, or categorical labels):
+
+**Python**
 
 ```python
 from langsmith import Client
@@ -98,6 +116,8 @@ token = client.create_presigned_feedback_token(
     },
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -118,6 +138,8 @@ const token = await client.createPresignedFeedbackToken(runId, "user_score", {
 ### Create tokens in batch (Python only)
 
 Use `create_presigned_feedback_tokens` (plural) to generate tokens for multiple feedback keys in a single call:
+
+**Python**
 
 ```python
 from langsmith import Client
@@ -168,6 +190,8 @@ curl --request GET \
 
 You can also submit feedback from a presigned token using the SDK, which is useful for server-side workflows where you received a token URL from another service.
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -179,6 +203,8 @@ client.create_feedback_from_token(
     comment="This response was helpful!",
 )
 ```
+
+**TypeScript**
 
 ```typescript
 // Use a direct HTTP request to the presigned URL
@@ -196,6 +222,8 @@ await fetch(tokenUrl, {
 
 Retrieve all presigned feedback tokens for a run using `list_presigned_feedback_tokens` / `listPresignedFeedbackTokens`.
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -206,6 +234,8 @@ run_id = "<run_id>"
 for token in client.list_presigned_feedback_tokens(run_id):
     print(f"ID: {token.id}, URL: {token.url}, Expires: {token.expires_at}")
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -227,7 +257,7 @@ for await (const token of client.listPresignedFeedbackTokens(runId)) {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/presigned-feedback-tokens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

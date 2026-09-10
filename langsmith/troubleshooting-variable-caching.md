@@ -1,3 +1,11 @@
+---
+title: "Troubleshoot variable caching"
+description: "If you're not seeing traces in your tracing project or notice traces logged to the wrong project/workspace, the issue might be due to LangSmith's default environment variable caching. This is..."
+source: "https://docs.langchain.com/langsmith/troubleshooting-variable-caching"
+category: "docs"
+tags: [docs, langsmith, troubleshooting-variable-caching]
+---
+
 # Troubleshoot variable caching
 
 If you're not seeing traces in your tracing project or notice traces logged to the wrong project/workspace, the issue might be due to LangSmith's default environment variable caching. This is especially common when running LangSmith within a Jupyter notebook. Follow these steps to diagnose and resolve the issue:
@@ -41,7 +49,7 @@ If you continue to experience issues, please reach out to us via a shared Slack 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/troubleshooting-variable-caching.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

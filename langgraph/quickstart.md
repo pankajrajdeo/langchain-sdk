@@ -1,3 +1,11 @@
+---
+title: "Quickstart"
+description: "This quickstart demonstrates how to build a calculator agent using the LangGraph Graph API or the Functional API."
+source: "https://docs.langchain.com/oss/python/langgraph/quickstart"
+category: "docs"
+tags: [docs, langgraph, quickstart]
+---
+
 # Quickstart
 
 This quickstart demonstrates how to build a calculator agent using the LangGraph Graph API or the Functional API.
@@ -10,7 +18,7 @@ Build a LangGraph calculator agent in this working directory by following the La
 Detect whether this project uses Python or TypeScript/JavaScript. Fetch and follow the matching page; treat it as the source of truth for package names, model strings, and code:
 
 * Python: [https://docs.langchain.com/oss/python/langgraph/quickstart.md](quickstart.md)
-* TypeScript: [https://docs.langchain.com/oss/javascript/langgraph/quickstart.md](https://docs.langchain.com/oss/javascript/langgraph/quickstart.md)
+* TypeScript: [https://docs.langchain.com/oss/javascript/langgraph/quickstart.md](../javascript/langgraph/quickstart.md)
 
 Ask the user whether to use the Graph API or the Functional API. If they have no preference, use the Graph API path.
 
@@ -35,7 +43,7 @@ Implement the selected quickstart path end to end: tools for add, multiply, and 
 > [!TIP]
 > **Using an AI coding assistant?**
 >
-> * Install the [LangChain Docs MCP servers](https://docs.langchain.com/use-these-docs) to give your agent access to up-to-date LangChain documentation and examples.
+> * Install the [LangChain Docs MCP servers](../use-these-docs.md) to give your agent access to up-to-date LangChain documentation and examples.
 >
 > > **Prompt:** Connect LangChain docs MCP servers
 >     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
@@ -45,7 +53,7 @@ Implement the selected quickstart path end to end: tools for add, multiply, and 
 >     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
 >     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
 >
->     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](https://docs.langchain.com/use-these-docs.md):
+>     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
 >
 >     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
 >     * Codex CLI: `codex mcp add` with each server URL.
@@ -658,7 +666,7 @@ for snapshot in stream.values:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

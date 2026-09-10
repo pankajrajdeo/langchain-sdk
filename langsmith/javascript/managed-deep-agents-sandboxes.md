@@ -1,3 +1,11 @@
+---
+title: "Add a sandbox to Managed Deep Agents"
+description: "Configure an isolated filesystem and shell for Managed Deep Agents."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-sandboxes"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-sandboxes]
+---
+
 # Add a sandbox to Managed Deep Agents
 
 > Configure an isolated filesystem and shell for Managed Deep Agents.
@@ -30,6 +38,8 @@ Managed Deep Agents uses [LangSmith Sandboxes](../sandboxes.md) for this backend
 
 Declare the sandbox with `defineSandbox`:
 
+**sandbox/index.ts**
+
 ```ts
 import { defineSandbox } from "managed-deepagents";
 
@@ -49,6 +59,8 @@ export const sandbox = defineSandbox({
 If `sandbox/setup.sh` exists, `mda deploy` and `mda dev` run the script once and save the resulting environment as a snapshot. Modifications from that run, such as cloned repositories and installed packages, persist in the snapshot. New threads clone that snapshot instead of running `setup.sh`. The snapshot is reused until `setup.sh` changes, at which point it is rebuilt.
 
 The script runs with `bash -e`. A non-zero exit fails the snapshot and the deploy or `mda dev` session. LangSmith does not update the live deployment to the failed snapshot. Any previously successful snapshot continues to serve.
+
+**sandbox/setup.sh**
 
 ```bash
 #!/usr/bin/env bash
@@ -72,6 +84,8 @@ With no bake base, LangSmith's default sandbox template is the starting point. T
 | `snapshotId`   | LangSmith snapshot id.                     |
 | `dockerImage`  | Published Docker image.                    |
 
+**sandbox/index.ts**
+
 ```ts
 import { defineSandbox } from "managed-deepagents";
 
@@ -84,6 +98,8 @@ export const sandbox = defineSandbox({
 For a private image, pass the image and a `registry`. Managed Deep Agents creates or updates a deployment-owned Host registry at bake time. Only the variable name is compiled; the credential value does not enter the build or the snapshot.
 
 Name the password in `passwordEnv`:
+
+**sandbox/index.ts**
 
 ```ts
 import { defineSandbox } from "managed-deepagents";
@@ -113,7 +129,7 @@ Managed Deep Agents owns sandbox naming, recipe bake, reuse, recovery, and clean
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

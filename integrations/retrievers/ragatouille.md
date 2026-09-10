@@ -1,3 +1,11 @@
+---
+title: "Ragatouille integration"
+description: "Integrate with the Ragatouille retriever using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/retrievers/ragatouille"
+category: "docs"
+tags: [docs, integrations, retrievers, ragatouille]
+---
+
 # Ragatouille integration
 
 > Integrate with the Ragatouille retriever using LangChain Python.
@@ -313,7 +321,7 @@ Miyazaki founded Studio Ghibli.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/ragatouille.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

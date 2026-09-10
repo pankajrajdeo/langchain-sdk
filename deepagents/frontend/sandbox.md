@@ -1,3 +1,11 @@
+---
+title: "Sandbox"
+description: "Build an IDE-like UI for a coding agent backed by a sandbox environment"
+source: "https://docs.langchain.com/oss/python/deepagents/frontend/sandbox"
+category: "docs"
+tags: [docs, deepagents, frontend, sandbox]
+---
+
 # Sandbox
 
 > Build an IDE-like UI for a coding agent backed by a sandbox environment
@@ -119,6 +127,8 @@ lookup function between them.
 
 ### Resolve the sandbox from thread metadata
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -147,6 +157,8 @@ def agent():
         ),
     )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -177,6 +189,8 @@ def agent():
     )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -205,6 +219,8 @@ def agent():
         ),
     )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -235,6 +251,8 @@ def agent():
     )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -264,6 +282,8 @@ def agent():
     )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -292,6 +312,8 @@ def agent():
         ),
     )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -524,6 +546,8 @@ from file-mutating tools. When a `write_file` or `edit_file` tool call
 completes, refresh that specific file. When `execute` completes, refresh
 everything (since a shell command could modify any file):
 
+**React**
+
 ```tsx
 import { useStream } from "@langchain/react";
 import { ToolMessage, AIMessage } from "langchain";
@@ -569,6 +593,8 @@ export function IDEPreview() {
   }, [stream.messages]);
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -619,6 +645,8 @@ watch(
 </script>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -663,6 +691,8 @@ watch(
   });
 </script>
 ```
+
+**Angular**
 
 ```ts
 import { Component, effect } from "@angular/core";
@@ -887,7 +917,7 @@ Reconnect to a running coding session after a page reload without losing the san
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/sandbox.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

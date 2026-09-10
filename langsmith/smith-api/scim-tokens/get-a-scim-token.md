@@ -1,8 +1,18 @@
+---
+title: "Get a SCIM token"
+description: "Retrieve a specific SCIM token by ID for the current organization. The full token value is not returned."
+source: "https://docs.langchain.com/langsmith/smith-api/scim-tokens/get-a-scim-token"
+category: "docs"
+tags: [docs, langsmith, smith-api, scim-tokens, get-a-scim-token]
+---
+
 # Get a SCIM token
 
 > Retrieve a specific SCIM token by ID for the current organization. The full token value is not returned.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/orgs/current/scim/tokens/{scim_token_id}**
 
 ````yaml
 openapi: 3.1.0

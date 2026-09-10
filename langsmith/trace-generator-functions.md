@@ -1,8 +1,18 @@
+---
+title: "Trace generator functions"
+description: "In most LLM applications, you will want to stream outputs to minimize the time to the first token seen by the user."
+source: "https://docs.langchain.com/langsmith/trace-generator-functions"
+category: "docs"
+tags: [docs, langsmith, trace-generator-functions]
+---
+
 # Trace generator functions
 
 In most LLM applications, you will want to stream outputs to minimize the time to the first token seen by the user.
 
 LangSmith's tracing functionality natively supports streamed outputs via `generator` functions. Below is an example.
+
+**Python**
 
 ```python
 from langsmith import traceable
@@ -26,6 +36,8 @@ async def main():
 asyncio.run(main())
 ```
 
+**TypeScript**
+
 ```typescript
 import { traceable } from "langsmith/traceable";
 const myGenerator = traceable(function* () {
@@ -44,6 +56,8 @@ By default, the `outputs` of the traced function are aggregated into a single ar
 
 > [!NOTE]
 > Aggregating outputs **only** impacts the traced representation of the outputs. It doesn not alter the values returned by your function.
+
+**Python**
 
 ```python
 from langsmith import traceable
@@ -69,6 +83,8 @@ async def main():
 asyncio.run(main())
 ```
 
+**TypeScript**
+
 ```typescript
 import { traceable } from "langsmith/traceable";
 const concatenateStrings = (outputs: string[]) => outputs.join("");
@@ -85,7 +101,7 @@ for (const output of await myGenerator()) {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-generator-functions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

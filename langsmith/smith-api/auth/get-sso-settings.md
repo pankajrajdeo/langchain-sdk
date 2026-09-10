@@ -1,8 +1,18 @@
+---
+title: "Get SSO settings"
+description: "Get SSO provider settings from login slug."
+source: "https://docs.langchain.com/langsmith/smith-api/auth/get-sso-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, auth, get-sso-settings]
+---
+
 # Get SSO settings
 
 > Get SSO provider settings from login slug.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/sso/settings/{sso_login_slug}**
 
 ````yaml
 openapi: 3.1.0

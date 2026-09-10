@@ -1,8 +1,18 @@
+---
+title: "Delete dataset"
+description: "Delete a specific dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/delete-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, delete-dataset]
+---
+
 # Delete dataset
 
 > Delete a specific dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/datasets/{dataset_id}**
 
 ````yaml
 openapi: 3.1.0

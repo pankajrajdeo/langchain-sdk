@@ -1,8 +1,18 @@
+---
+title: "Delete tracer sessions"
+description: "Delete projects."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/delete-tracer-sessions"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, delete-tracer-sessions]
+---
+
 # Delete tracer sessions
 
 > Delete projects.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/sessions**
 
 ````yaml
 openapi: 3.1.0

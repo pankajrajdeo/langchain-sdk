@@ -1,8 +1,18 @@
+---
+title: "Grep a sandbox filesystem"
+description: "Search files under a root path for a literal text pattern (not a regex)."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/grep-a-sandbox-filesystem"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, grep-a-sandbox-filesystem]
+---
+
 # Grep a sandbox filesystem
 
 > Search files under a root path for a literal text pattern (not a regex).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/{sandbox_id}/grep**
 
 ````yaml
 openapi: 3.1.0

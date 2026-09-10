@@ -1,3 +1,11 @@
+---
+title: "Case studies"
+description: "This list of companies using LangGraph and their success stories is compiled from public sources. If your company uses LangGraph, we'd love for you to share your story and add it to the list. You’re..."
+source: "https://docs.langchain.com/oss/python/langgraph/case-studies"
+category: "docs"
+tags: [docs, langgraph, case-studies]
+---
+
 # Case studies
 
 This list of companies using LangGraph and their success stories is compiled from public sources. If your company uses LangGraph, we'd love for you to share your story and add it to the list. You’re also welcome to contribute updates based on publicly available information from other companies, such as blog posts or press releases.
@@ -49,7 +57,7 @@ This list of companies using LangGraph and their success stories is compiled fro
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/case-studies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

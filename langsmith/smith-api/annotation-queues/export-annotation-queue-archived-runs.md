@@ -1,6 +1,16 @@
+---
+title: "Export annotation queue archived runs"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/annotation-queues/{queue_id}/export"
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/export-annotation-queue-archived-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, export-annotation-queue-archived-runs]
+---
+
 # Export annotation queue archived runs
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/annotation-queues/{queue_id}/export**
 
 ````yaml
 openapi: 3.1.0

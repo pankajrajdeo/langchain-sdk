@@ -1,3 +1,11 @@
+---
+title: "Delete the issues agent for a session (Beta)"
+description: "Beta: This endpoint is in active development and may change without notice."
+source: "https://docs.langchain.com/langsmith/smith-api/issues-agent/delete-the-issues-agent-for-a-session-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, issues-agent, delete-the-issues-agent-for-a-session-beta]
+---
+
 # Delete the issues agent for a session (Beta)
 
 > **Beta:** This endpoint is in active development and may change without notice.
@@ -5,6 +13,8 @@
 Removes the agent config, its issues, and the agent-overview hub repo.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/sessions/{session_id}/issues-agent**
 
 ````yaml
 openapi: 3.1.0

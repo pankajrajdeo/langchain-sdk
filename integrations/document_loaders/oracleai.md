@@ -1,3 +1,11 @@
+---
+title: "Oracle AI vector search document processing integration"
+description: "Integrate with the Oracle AI vector search document processing document loader using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/document_loaders/oracleai"
+category: "docs"
+tags: [docs, integrations, document_loaders, oracleai]
+---
+
 # Oracle AI vector search document processing integration
 
 > Integrate with the Oracle AI vector search document processing document loader using LangChain Python.
@@ -19,9 +27,13 @@ If you are just starting with Oracle Database, consider exploring the [free Orac
 
 Install `langchain-oracledb`. The `python-oracledb` driver will be installed automatically as a dependency.
 
+**pip**
+
 ```bash
 pip install -qU langchain-oracledb
 ```
+
+**uv**
 
 ```bash
 uv add langchain-oracledb
@@ -168,7 +180,7 @@ Please refer to our complete demo guide [Oracle AI Vector Search End-to-End Demo
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

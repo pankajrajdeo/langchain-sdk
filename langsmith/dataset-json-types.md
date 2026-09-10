@@ -1,3 +1,11 @@
+---
+title: "Dataset prebuilt JSON schema types"
+description: "LangSmith recommends that you set a schema on the inputs and outputs of your dataset schemas to ensure data consistency and that your examples are in the right format for downstream processing, like..."
+source: "https://docs.langchain.com/langsmith/dataset-json-types"
+category: "docs"
+tags: [docs, langsmith, dataset-json-types]
+---
+
 # Dataset prebuilt JSON schema types
 
 LangSmith recommends that you set a schema on the inputs and outputs of your dataset schemas to ensure data consistency and that your examples are in the right format for downstream processing, like running evals.
@@ -14,7 +22,7 @@ LangSmith lets you define a series of transformations that collect the above pre
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/dataset-json-types.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

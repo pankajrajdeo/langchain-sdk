@@ -1,3 +1,11 @@
+---
+title: "ChatAnthropic integration"
+description: "Integrate with the ChatAnthropic chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/anthropic"
+category: "docs"
+tags: [docs, integrations, chat, anthropic]
+---
+
 # ChatAnthropic integration
 
 > Integrate with the ChatAnthropic chat model using LangChain Python.
@@ -36,9 +44,13 @@ To access Anthropic (Claude) models you'll need to install the `langchain-anthro
 
 ### Installation
 
+**pip**
+
 ```bash
 pip install -U langchain-anthropic
 ```
+
+**uv**
 
 ```bash
 uv add langchain-anthropic
@@ -586,6 +598,8 @@ Claude supports image and PDF inputs as content blocks, both in Anthropic's nati
 
 Provide image inputs along with text using a [`HumanMessage`](https://reference.langchain.com/python/langchain-core/messages/human/HumanMessage) with list content format.
 
+**URL**
+
 ```python
 from langchain_anthropic import ChatAnthropic
 from langchain.messages import HumanMessage
@@ -603,6 +617,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Base64 encoded**
 
 ```python
 import base64
@@ -627,6 +643,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Files API**
 
 ```python
 import anthropic
@@ -659,6 +677,8 @@ response = model.invoke([message])
 
 Provide PDF file inputs along with text.
 
+**URL**
+
 ```python
 from langchain_anthropic import ChatAnthropic
 from langchain.messages import HumanMessage
@@ -677,6 +697,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Base64 encoded**
 
 ```python
 import base64
@@ -701,6 +723,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Files API**
 
 ```python
 import anthropic
@@ -739,6 +763,8 @@ To use extended thinking, specify the `thinking` parameter when initializing [`C
 
 For Claude Sonnet and earlier models, you will need to specify a token budget. For Claude Opus 4.6+, you can use adaptive thinking which automatically determines the budget.
 
+**With token budget**
+
 ```python
 import json
 from langchain_anthropic import ChatAnthropic
@@ -753,6 +779,8 @@ response = model.invoke("What is the cube root of 50.653?")
 print(json.dumps(response.content_blocks, indent=2))
 ```
 
+**Adaptive (Opus 4.6+)**
+
 ```python
 import json
 from langchain_anthropic import ChatAnthropic
@@ -766,6 +794,8 @@ model = ChatAnthropic(
 response = model.invoke("What is the cube root of 50.653?")
 print(json.dumps(response.content_blocks, indent=2))
 ```
+
+**Invocation param**
 
 ```python
 import json
@@ -2935,7 +2965,7 @@ For detailed documentation of all features and configuration options, head to th
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

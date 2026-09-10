@@ -1,8 +1,18 @@
+---
+title: "Get bulk exports"
+description: "Get the current workspace's bulk exports"
+source: "https://docs.langchain.com/langsmith/smith-api/bulk-exports/get-bulk-exports"
+category: "docs"
+tags: [docs, langsmith, smith-api, bulk-exports, get-bulk-exports]
+---
+
 # Get bulk exports
 
 > Get the current workspace's bulk exports
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/bulk-exports**
 
 ````yaml
 openapi: 3.1.0

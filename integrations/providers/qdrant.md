@@ -1,3 +1,11 @@
+---
+title: "Qdrant integrations"
+description: "Integrate with Qdrant using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/qdrant"
+category: "docs"
+tags: [docs, integrations, providers, qdrant]
+---
+
 # Qdrant integrations
 
 > Integrate with Qdrant using LangChain Python.
@@ -10,9 +18,13 @@
 
 Install the Python partner package:
 
+**pip**
+
 ```bash
 pip install langchain-qdrant
 ```
+
+**uv**
 
 ```bash
 uv add langchain-qdrant
@@ -48,7 +60,7 @@ For a more detailed walkthrough of the Qdrant wrapper, see [this notebook](../ve
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/qdrant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

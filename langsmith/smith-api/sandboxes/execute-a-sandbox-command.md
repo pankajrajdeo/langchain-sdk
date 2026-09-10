@@ -1,8 +1,18 @@
+---
+title: "Execute a sandbox command"
+description: "Execute a command inside a sandbox and return stdout, stderr, and exit code. Use the streaming execute endpoints for long-running commands that may exceed the synchronous request deadline."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/execute-a-sandbox-command"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, execute-a-sandbox-command]
+---
+
 # Execute a sandbox command
 
 > Execute a command inside a sandbox and return stdout, stderr, and exit code. Use the streaming execute endpoints for long-running commands that may exceed the synchronous request deadline.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/{sandbox_id}/execute**
 
 ````yaml
 openapi: 3.1.0

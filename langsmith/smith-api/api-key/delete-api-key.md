@@ -1,8 +1,18 @@
+---
+title: "Delete API key"
+description: "Delete an api key for the user"
+source: "https://docs.langchain.com/langsmith/smith-api/api-key/delete-api-key"
+category: "docs"
+tags: [docs, langsmith, smith-api, api-key, delete-api-key]
+---
+
 # Delete API key
 
 > Delete an api key for the user
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/api-key/{api_key_id}**
 
 ````yaml
 openapi: 3.1.0
@@ -228,6 +238,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

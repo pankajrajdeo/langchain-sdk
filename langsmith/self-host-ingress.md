@@ -1,3 +1,11 @@
+---
+title: "Create an Ingress for installations (Kubernetes)"
+description: "By default, LangSmith will provision a LoadBalancer service for the langsmith-frontend. Depending on your cloud provider, this may result in a public IP address being assigned to the service. If you..."
+source: "https://docs.langchain.com/langsmith/self-host-ingress"
+category: "docs"
+tags: [docs, langsmith, self-host-ingress]
+---
+
 # Create an Ingress for installations (Kubernetes)
 
 By default, LangSmith will provision a LoadBalancer service for the `langsmith-frontend`. Depending on your cloud provider, this may result in a public IP address being assigned to the service. If you would like to use a custom domain or have more control over the routing of traffic to your LangSmith installation, you can configure an Ingress, Gateway API, or Istio Gateway.
@@ -172,7 +180,7 @@ kubectl get virtualservice
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ingress.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

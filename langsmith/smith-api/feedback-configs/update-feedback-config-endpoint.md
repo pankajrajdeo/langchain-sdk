@@ -1,6 +1,16 @@
+---
+title: "Update feedback config endpoint"
+description: "/langsmith/langsmith-platform-openapi.json patch /api/v1/feedback-configs"
+source: "https://docs.langchain.com/langsmith/smith-api/feedback-configs/update-feedback-config-endpoint"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback-configs, update-feedback-config-endpoint]
+---
+
 # Update feedback config endpoint
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/feedback-configs**
 
 ````yaml
 openapi: 3.1.0

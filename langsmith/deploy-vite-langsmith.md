@@ -1,3 +1,11 @@
+---
+title: "Deploy with LangSmith and Vite"
+description: "Deploy a LangChain deep agent to LangSmith Deployment and stream from a Vite React chat UI on Vercel, Netlify, or Cloudflare Pages."
+source: "https://docs.langchain.com/langsmith/deploy-vite-langsmith"
+category: "docs"
+tags: [docs, langsmith, deploy-vite-langsmith]
+---
+
 # Deploy with LangSmith and Vite
 
 > Deploy a LangChain deep agent to LangSmith Deployment and stream from a Vite React chat UI on Vercel, Netlify, or Cloudflare Pages.
@@ -296,7 +304,7 @@ The frontend deploys through your static host's Git integration (for example Ver
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-vite-langsmith.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

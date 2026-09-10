@@ -1,8 +1,18 @@
+---
+title: "Create a SCIM token"
+description: "Create a new SCIM bearer token for the current organization. The full token value is only returned once upon creation."
+source: "https://docs.langchain.com/langsmith/smith-api/scim-tokens/create-a-scim-token"
+category: "docs"
+tags: [docs, langsmith, smith-api, scim-tokens, create-a-scim-token]
+---
+
 # Create a SCIM token
 
 > Create a new SCIM bearer token for the current organization. The full token value is only returned once upon creation.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/orgs/current/scim/tokens**
 
 ````yaml
 openapi: 3.1.0

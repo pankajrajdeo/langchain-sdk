@@ -1,3 +1,11 @@
+---
+title: "Manage contexts with the SDK"
+description: "Use the LangSmith SDK to push, pull, list, and delete agent and skill repos in the Context Hub programmatically."
+source: "https://docs.langchain.com/langsmith/manage-contexts-sdk"
+category: "docs"
+tags: [docs, langsmith, manage-contexts-sdk]
+---
+
 # Manage contexts with the SDK
 
 > Use the LangSmith SDK to push, pull, list, and delete agent and skill repos in the Context Hub programmatically.
@@ -11,13 +19,19 @@ Use the LangSmith [Python](smith-python-sdk.md) and [TypeScript](smith-js-ts-sdk
 
 1. Install packages:
 
+**pip**
+
 ```bash
    pip install -U langsmith
 ```
 
+**uv**
+
 ```bash
    uv add langsmith
 ```
+
+**TypeScript**
 
 ```bash
    yarn add langsmith
@@ -41,6 +55,8 @@ those fields are patched only when explicitly passed.
 
 The method returns a URL pointing to the new commit in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-manage-contexts-sdk):
 
+**Python**
+
 ```python
 from langsmith import Client
 from langsmith.schemas import FileEntry
@@ -61,6 +77,8 @@ url = client.push_agent(
 )
 print(url)
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -87,6 +105,8 @@ console.log(url);
 Identical surface to `push_agent`, but commits to a skill repo. Use
 this for reusable capabilities that other agents can depend on:
 
+**Python**
+
 ```python
 from langsmith import Client
 from langsmith.schemas import FileEntry
@@ -103,6 +123,8 @@ url = client.push_skill(
 )
 print(url)
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -130,6 +152,8 @@ content across repos. For example, an agent that delegates to a shared skill.
 
 If you omit `commit_id`, LangSmith links to the latest commit of that repo when you push this commit. If the linked repo updates later, LangSmith propagates that update to parent repos that reference it.
 
+**Python**
+
 ```python
 from langsmith import Client
 from langsmith.schemas import AgentEntry, FileEntry, SkillEntry
@@ -149,6 +173,8 @@ url = client.push_agent(
 )
 print(url)
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -196,6 +222,8 @@ Pull a snapshot of an agent repo. By default the latest commit is returned; pass
 > The optional `version` argument overrides any version embedded in the
 > identifier. If neither is provided, the latest commit is returned.
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -211,6 +239,8 @@ pinned = client.pull_agent("email-assistant", version="7ca95573")
 # Pull a tagged commit (for example, the production tag).
 prod = client.pull_agent("email-assistant:production")
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -234,6 +264,8 @@ const prod = await client.pullAgent("email-assistant:production");
 
 Pull a snapshot of a skill repo. Works identically to `pull_agent` but returns a `SkillContext`:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -242,6 +274,8 @@ client = Client()
 skill = client.pull_skill("deep-research")
 print(skill.files["SKILL.md"].content)
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -271,6 +305,8 @@ Both `pull_agent` / `pullAgent` and `pull_skill` / `pullSkill` accept the follow
 Use these methods to check whether an agent or skill repo exists in your
 workspace before pushing or pulling:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -282,6 +318,8 @@ if client.agent_exists("email-assistant"):
 if not client.skill_exists("deep-research"):
     print("skill not found")
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -301,6 +339,8 @@ if (!(await client.skillExists("deep-research"))) {
 
 List repos of either type, with optional filters for visibility, archived state, and a search query:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -313,6 +353,8 @@ for repo in result.repos:
 
 skills = client.list_skills(is_public=True)
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -351,6 +393,8 @@ for await (const skill of client.listSkills({ isPublic: true })) {
 
 Delete an agent or skill repo from your workspace:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -359,6 +403,8 @@ client = Client()
 client.delete_agent("email-assistant")
 client.delete_skill("deep-research")
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -372,7 +418,7 @@ await client.deleteSkill("deep-research");
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-contexts-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

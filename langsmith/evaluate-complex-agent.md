@@ -1,3 +1,11 @@
+---
+title: "Evaluate a complex agent"
+description: "In this tutorial, we'll build a customer support bot that helps users navigate a digital music store. Then, we'll go through the three most effective types of evaluations to run on chat bots:"
+source: "https://docs.langchain.com/langsmith/evaluate-complex-agent"
+category: "docs"
+tags: [docs, langsmith, evaluate-complex-agent]
+---
+
 # Evaluate a complex agent
 
 In this tutorial, we'll build a customer support bot that helps users navigate a digital music store. Then, we'll go through the three most effective types of evaluations to run on chat bots:
@@ -14,9 +22,13 @@ We'll build our agent using [LangGraph](https://github.com/langchain-ai/langgrap
 
 Let's install the required dependencies:
 
+**pip**
+
 ```bash
 pip install -U langgraph "langchain[openai]"
 ```
+
+**uv**
 
 ```bash
 uv add langgraph "langchain[openai]"
@@ -1577,7 +1589,7 @@ experiment_results.to_pandas()
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-complex-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

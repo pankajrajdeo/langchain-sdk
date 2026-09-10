@@ -1,8 +1,18 @@
+---
+title: "List annotation queue items"
+description: "List RUN and THREAD items in a single annotation queue for one review status section, with opaque cursor pagination. Optional item_type=RUN|THREAD filters the page. direction=backward returns items..."
+source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/list-annotation-queue-items"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation_queues, list-annotation-queue-items]
+---
+
 # List annotation queue items
 
 > List RUN and THREAD items in a single annotation queue for one review status section, with opaque cursor pagination. Optional item_type=RUN|THREAD filters the page. direction=backward returns items before the supplied cursor. The response contains item metadata only, not expanded run or thread payloads. status=archived returns items whose queue review requirements have been satisfied, not merely items the caller personally marked completed.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/annotation-queues/{queue_id}/items**
 
 ````yaml
 openapi: 3.1.0
@@ -184,18 +194,18 @@ paths:
           in: query
           required: true
           schema:
+            type: string
             enum:
               - needs_my_review
               - needs_others_review
               - archived
-            type: string
             title: Status
         - description: Page size (max 100)
           name: page_size
           in: query
           schema:
-            default: 20
             type: integer
+            default: 20
             title: Page Size
         - description: Opaque pagination cursor
           name: cursor
@@ -207,20 +217,20 @@ paths:
           name: item_type
           in: query
           schema:
+            type: string
             enum:
               - RUN
               - THREAD
-            type: string
             title: Item Type
         - description: Pagination direction. backward requires cursor
           name: direction
           in: query
           schema:
+            type: string
             default: forward
             enum:
               - forward
               - backward
-            type: string
             title: Direction
       responses:
         '200':

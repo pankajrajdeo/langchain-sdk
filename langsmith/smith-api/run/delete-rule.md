@@ -1,8 +1,18 @@
+---
+title: "Delete rule"
+description: "Delete a run rule."
+source: "https://docs.langchain.com/langsmith/smith-api/run/delete-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, delete-rule]
+---
+
 # Delete rule
 
 > Delete a run rule.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/runs/rules/{rule_id}**
 
 ````yaml
 openapi: 3.1.0

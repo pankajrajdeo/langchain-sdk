@@ -1,3 +1,11 @@
+---
+title: "Using standard tests"
+description: "Standard tests ensure your integration works as expected."
+source: "https://docs.langchain.com/oss/python/contributing/standard-tests-langchain"
+category: "docs"
+tags: [docs, contributing, standard-tests-langchain]
+---
+
 # Using standard tests
 
 **Standard tests ensure your integration works as expected.**
@@ -17,10 +25,14 @@ Provides the standard tests and `pytest` plugins necessary to run them
 > [!WARNING]
 > Because added tests in new versions of `langchain-tests` can break your CI/CD pipelines, we recommend pinning to the latest version of [`langchain-tests`](https://pypi.org/project/langchain-tests/#history) to avoid unexpected changes.
 
+**pip**
+
 ```bash
 pip install -U langchain-core
 pip install -U langchain-tests
 ```
+
+**uv**
 
 ```bash
 uv add langchain-core
@@ -60,6 +72,8 @@ Depending on your integration type, you will need to implement either or both un
 By subclassing the standard test suite for your integration type, you get the full collection of standard tests for that type. For a test run to be successful, a given test should pass only if the model supports the capability being tested. Otherwise, the test should be skipped.
 
 Because different integrations offer unique sets of features, most standard tests provided by LangChain are **opt-in by default** to prevent false positives. Consequently, you will need to override properties to indicate which features your integration supports - see the below example for an illustration.
+
+**tests/integration_tests/test_standard.py**
 
 ```python
 # Indicate that a chat model supports image inputs
@@ -143,7 +157,7 @@ For a full list of the standard test suites that are available, as well as infor
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/standard-tests-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

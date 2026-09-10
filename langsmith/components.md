@@ -1,3 +1,11 @@
+---
+title: "LangSmith Deployment components"
+description: "Overview of Agent Server, LangGraph CLI, Studio, SDKs, RemoteGraph, control plane, and data plane components."
+source: "https://docs.langchain.com/langsmith/components"
+category: "docs"
+tags: [docs, langsmith, components]
+---
+
 # LangSmith Deployment components
 
 > Overview of Agent Server, LangGraph CLI, Studio, SDKs, RemoteGraph, control plane, and data plane components.
@@ -29,7 +37,7 @@ flowchart
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/components.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

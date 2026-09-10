@@ -1,3 +1,11 @@
+---
+title: "ChatFireworks integration"
+description: "Integrate with the ChatFireworks chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/fireworks"
+category: "docs"
+tags: [docs, integrations, chat, fireworks]
+---
+
 # ChatFireworks integration
 
 > Integrate with the ChatFireworks chat model using LangChain Python.
@@ -21,7 +29,10 @@ This doc helps you get started with Fireworks AI [chat models](../../langchain/m
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
+|                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
+
+> [!NOTE]
+> Image input requires a vision-capable model (e.g. Kimi K3). Not all models served by Fireworks support multimodal inputs.
 
 ## Setup
 
@@ -127,7 +138,7 @@ For detailed documentation of all features and configuration options, head to th
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

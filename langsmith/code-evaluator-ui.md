@@ -1,3 +1,11 @@
+---
+title: "How to define a code evaluator"
+description: "Code evaluators in the LangSmith UI allow you to write custom evaluation logic using Python or TypeScript code directly in the interface. Unlike LLM-as-a-judge evaluators that use a model to evaluate..."
+source: "https://docs.langchain.com/langsmith/code-evaluator-ui"
+category: "docs"
+tags: [docs, langsmith, code-evaluator-ui]
+---
+
 # How to define a code evaluator
 
 Code evaluators in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-code-evaluator-ui) allow you to write custom evaluation logic using Python or TypeScript code directly in the interface. Unlike [LLM-as-a-judge](llm-as-judge.md) evaluators that use a model to evaluate outputs, code evaluators use deterministic logic you define.
@@ -98,7 +106,7 @@ Once created, you can use your code evaluator:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/code-evaluator-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

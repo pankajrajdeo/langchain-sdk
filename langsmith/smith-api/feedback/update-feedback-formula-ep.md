@@ -1,3 +1,11 @@
+---
+title: "Update feedback formula ep"
+description: "Update a feedback formula"
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/update-feedback-formula-ep"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, update-feedback-formula-ep]
+---
+
 # Update feedback formula ep
 
 > Update a feedback formula
@@ -5,6 +13,8 @@
 Deprecated: superseded by composite-feedback v2, where composites are code evaluators with run rules
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/feedback/formulas/{feedback_formula_id}**
 
 ````yaml
 openapi: 3.1.0

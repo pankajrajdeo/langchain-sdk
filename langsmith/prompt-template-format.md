@@ -1,3 +1,11 @@
+---
+title: "Prompt template format guide"
+description: "This page describes the prompt template formats supported in the Playground, prompt hub, and evaluators. Prompt templates allow you to create reusable prompts with dynamic placeholders that get..."
+source: "https://docs.langchain.com/langsmith/prompt-template-format"
+category: "docs"
+tags: [docs, langsmith, prompt-template-format]
+---
+
 # Prompt template format guide
 
 This page describes the [prompt template](prompt-engineering-concepts.md#prompts-vs-prompt-templates) formats supported in the [Playground](prompt-engineering-concepts.md#playground), [prompt hub](manage-prompts.md#public-prompt-hub), and [evaluators](evaluation-concepts.md#evaluators). Prompt templates allow you to create reusable prompts with dynamic placeholders that get filled in at runtime.
@@ -612,7 +620,7 @@ If you try to convert a mustache template with these features, LangSmith will ei
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/prompt-template-format.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

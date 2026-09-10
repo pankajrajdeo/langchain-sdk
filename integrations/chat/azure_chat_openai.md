@@ -1,3 +1,11 @@
+---
+title: "AzureChatOpenAI integration"
+description: "Integrate with the AzureChatOpenAI chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai"
+category: "docs"
+tags: [docs, integrations, chat, azure_chat_openai]
+---
+
 # AzureChatOpenAI integration
 
 > Integrate with the AzureChatOpenAI chat model using LangChain Python.
@@ -43,9 +51,13 @@ To access Azure OpenAI models you'll need to [create an Azure account](https://a
 
 ### Installation
 
+**pip**
+
 ```bash
 pip install -U langchain-openai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-openai
@@ -397,7 +409,7 @@ For detailed documentation of all features and configuration options, head to th
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/azure_chat_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

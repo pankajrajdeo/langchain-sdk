@@ -1,3 +1,11 @@
+---
+title: "Configure custom TLS certificates"
+description: "Use this guide to configure TLS in LangSmith. Start by mounting internal certificate authorities (CAs) so your deployment trusts the right roots system‑wide, for database or external service calls..."
+source: "https://docs.langchain.com/langsmith/self-host-custom-tls-certificates"
+category: "docs"
+tags: [docs, langsmith, self-host-custom-tls-certificates]
+---
+
 # Configure custom TLS certificates
 
 Use this guide to configure TLS in LangSmith. Start by mounting internal certificate authorities (CAs) so your deployment trusts the right roots system‑wide, for database or external service calls. You can then configure [Playground](prompt-engineering-concepts.md#playground)-specific mTLS for communicating securely with supported model providers.
@@ -31,6 +39,8 @@ Use this approach to make internal/public CAs trusted system‑wide by LangSmith
    kubectl create secret generic <SECRET_NAME> --from-file=<SECRET_KEY>=<CA_BUNDLE_FILE_PATH> -n <NAMESPACE>
 ```
 3. If using custom CA for TLS with your databases and other external services, provide the following values to your LangSmith helm chart:
+**Helm**
+
 ```yaml
    config:
      customCa:
@@ -72,7 +82,7 @@ Once you have set these environment variables, enter the Playground **Settings**
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-custom-tls-certificates.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

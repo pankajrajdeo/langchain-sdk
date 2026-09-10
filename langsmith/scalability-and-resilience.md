@@ -1,3 +1,11 @@
+---
+title: "Scalability & resilience"
+description: "LangSmith is designed to scale horizontally with your workload. Each instance of the service is stateless, and keeps no resources in memory. The service is designed to gracefully handle new instances..."
+source: "https://docs.langchain.com/langsmith/scalability-and-resilience"
+category: "docs"
+tags: [docs, langsmith, scalability-and-resilience]
+---
+
 # Scalability & resilience
 
 LangSmith is designed to scale horizontally with your workload. Each instance of the service is stateless, and keeps no resources in memory. The service is designed to gracefully handle new instances being added or removed, including hard shutdown cases.
@@ -37,7 +45,7 @@ All communication with Redis implements retries for retry-able errors. If Redis 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/scalability-and-resilience.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

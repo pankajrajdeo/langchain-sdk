@@ -1,3 +1,11 @@
+---
+title: "Trace DeepSeek applications"
+description: "DeepSeek provides high-performance, OpenAI-compatible language models including deepseek-chat (for general conversations) and deepseek-reasoner (for advanced reasoning tasks). Using LangSmith allows..."
+source: "https://docs.langchain.com/langsmith/trace-deepseek"
+category: "docs"
+tags: [docs, langsmith, trace-deepseek]
+---
+
 # Trace DeepSeek applications
 
 [DeepSeek](https://deepseek.com/) provides high-performance, OpenAI-compatible language models including `deepseek-chat` (for general conversations) and `deepseek-reasoner` (for advanced reasoning tasks). Using LangSmith allows you to debug, monitor, and evaluate your LLM applications by capturing structured traces of inputs, outputs, and metadata.
@@ -8,13 +16,19 @@ This guide shows you how to integrate DeepSeek with LangSmith in both Python and
 
 Install [OpenAI](https://platform.openai.com/docs/libraries) and LangSmith:
 
+**pip**
+
 ```bash
 pip install openai langsmith
 ```
 
+**uv**
+
 ```bash
 uv add openai langsmith
 ```
+
+**npm**
 
 ```bash
 npm install openai langsmith dotenv
@@ -41,6 +55,8 @@ export DEEPSEEK_API_KEY="your-deepseek-api-key"
 ## Configure tracing
 
 1. Instrument the DeepSeek API call with LangSmith. In your script, create an OpenAI client configured to use DeepSeek's API endpoint and wrap a call in a traced function:
+
+**Python**
 
 ```python
    import os
@@ -73,6 +89,8 @@ export DEEPSEEK_API_KEY="your-deepseek-api-key"
        result = call_deepseek(messages=messages)
        print("Model reply:", result.content)
 ```
+
+**TypeScript**
 
 ```typescript
    import { config } from "dotenv";
@@ -144,9 +162,13 @@ export DEEPSEEK_API_KEY="your-deepseek-api-key"
 
 2. Execute your script to generate a trace:
 
+**Python**
+
 ```bash
    python deepseek_trace.py
 ```
+
+**TypeScript**
 
 ```bash
    node deepseek_trace.js
@@ -178,7 +200,7 @@ Once enabled, costs appear directly in the LangSmith UI alongside each traced De
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-deepseek.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

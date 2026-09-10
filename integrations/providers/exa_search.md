@@ -1,3 +1,11 @@
+---
+title: "Exa integrations"
+description: "Integrate with Exa using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/exa_search"
+category: "docs"
+tags: [docs, integrations, providers, exa_search]
+---
+
 # Exa integrations
 
 > Integrate with Exa using LangChain Python.
@@ -145,7 +153,7 @@ All Exa tools support the following common parameters:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/exa_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

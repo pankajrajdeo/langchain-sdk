@@ -1,6 +1,16 @@
+---
+title: "Upsert current workspace secrets"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/secrets"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/upsert-current-workspace-secrets"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, upsert-current-workspace-secrets]
+---
+
 # Upsert current workspace secrets
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/secrets**
 
 ````yaml
 openapi: 3.1.0

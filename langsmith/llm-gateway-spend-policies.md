@@ -1,3 +1,11 @@
+---
+title: "Spend policies"
+description: "Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers."
+source: "https://docs.langchain.com/langsmith/llm-gateway-spend-policies"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-spend-policies]
+---
+
 # Spend policies
 
 > Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
@@ -51,7 +59,7 @@ You can apply multiple time windows to the same scope. For example, a workspace 
 > [!WARNING]
 > Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
-1. Go to **Settings → Gateway → LLM Gateway** and select **Cost Controls**.
+1. Go to **LLM Gateway** and select **Cost Controls**.
 2. Click **Create spend limit**.
 3. Select the scope (organization, workspace, API key, or user).
 4. (Optional) To apply the same default limit independently to every custom header value, apply the limit to every subject of the selected type by default, select **Separate limits by custom header**, and enter the header name.
@@ -78,12 +86,12 @@ This is useful for diagnosing whether a blocked request represents a genuine cos
 ## Next steps
 
 * [Per-customer policies](llm-gateway-header-policies.md): split a cap by a custom request header so each end customer gets its own limit.
-* [Data protection](llm-gateway-data-protection.md): add data protection policies alongside cost controls.
+* [Data policy](llm-gateway-data-policy.md): add data policies alongside cost controls.
 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-spend-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

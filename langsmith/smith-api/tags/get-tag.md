@@ -1,6 +1,16 @@
+---
+title: "Get tag"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/repos/{owner}/{repo}/tags/{tag_name}"
+source: "https://docs.langchain.com/langsmith/smith-api/tags/get-tag"
+category: "docs"
+tags: [docs, langsmith, smith-api, tags, get-tag]
+---
+
 # Get tag
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/repos/{owner}/{repo}/tags/{tag_name}**
 
 ````yaml
 openapi: 3.1.0

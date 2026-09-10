@@ -1,3 +1,11 @@
+---
+title: "How to audit evaluator scores"
+description: "LLM-as-a-judge evaluators don't always get it right. Because of this, it is often useful for a human to manually audit the scores left by an evaluator and correct them where necessary. LangSmith..."
+source: "https://docs.langchain.com/langsmith/audit-evaluator-scores"
+category: "docs"
+tags: [docs, langsmith, audit-evaluator-scores]
+---
+
 # How to audit evaluator scores
 
 LLM-as-a-judge evaluators don't always get it right. Because of this, it is often useful for a human to manually audit the scores left by an evaluator and correct them where necessary. LangSmith allows you to make corrections on evaluator scores in the UI or SDK.
@@ -18,6 +26,8 @@ In the runs table, find the "Feedback" column and click on the feedback tag to b
 
 Corrections can be made via the SDK's `update_feedback` function, with the `correction` dict. You must specify a `score` key which corresponds to a number for it to be rendered in the UI.
 
+**Python**
+
 ```python
 import langsmith
 
@@ -30,6 +40,8 @@ client.update_feedback(
     },
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from 'langsmith';
@@ -49,7 +61,7 @@ await client.updateFeedback(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/audit-evaluator-scores.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

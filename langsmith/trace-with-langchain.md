@@ -1,3 +1,11 @@
+---
+title: "Trace LangChain applications (Python and JS/TS)"
+description: "LangSmith integrates seamlessly with LangChain (Python and JavaScript), the popular open-source framework for building LLM applications."
+source: "https://docs.langchain.com/langsmith/trace-with-langchain"
+category: "docs"
+tags: [docs, langsmith, trace-with-langchain]
+---
+
 # Trace LangChain applications (Python and JS/TS)
 
 LangSmith integrates seamlessly with LangChain (Python and JavaScript), the popular open-source framework for building LLM applications.
@@ -8,17 +16,25 @@ Install the following for Python or JS (the code snippets use the OpenAI integra
 
 For a full list of packages available, see the [LangChain docs](../integrations/providers/overview.md).
 
+**pip**
+
 ```bash
 pip install langchain_openai
 ```
+
+**yarn**
 
 ```bash
 yarn add @langchain/openai @langchain/core
 ```
 
+**npm**
+
 ```bash
 npm install @langchain/openai @langchain/core
 ```
+
+**pnpm**
 
 ```bash
 pnpm add @langchain/openai @langchain/core
@@ -109,6 +125,8 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 
 No extra code is needed to log a trace to LangSmith. Just run your LangChain code as you normally would.
 
+**Python**
+
 ```python
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -128,6 +146,8 @@ context = "During this morning's meeting, we solved all world conflict."
 
 chain.invoke({"question": question, "context": context})
 ```
+
+**TypeScript**
 
 ```typescript
 import { ChatOpenAI } from "@langchain/openai";
@@ -161,6 +181,8 @@ There are two ways to do this in Python: by manually passing in a `LangChainTrac
 
 In JS/TS, you can pass a [`LangChainTracer`](https://reference.langchain.com/javascript/classes/_langchain_core.tracers_tracer_langchain.LangChainTracer.html) instance as a callback.
 
+**Python**
+
 ```python
 # You can opt-in to specific invocations..
 import langsmith as ls
@@ -175,6 +197,8 @@ chain.invoke({"question": "Am I being traced?", "context": "I'm not being traced
 with ls.tracing_context(enabled=False):
     chain.invoke({"question": "Am I being traced?", "context": "I'm not being traced"})
 ```
+
+**TypeScript**
 
 ```typescript
 // You can configure a LangChainTracer instance to trace a specific invocation.
@@ -201,11 +225,13 @@ export LANGSMITH_PROJECT=my-project
 ```
 
 > [!WARNING]
-> The `LANGSMITH_PROJECT` flag is only supported in JS SDK versions >= 0.2.16, use `LANGCHAIN_PROJECT` instead if you are using an older version.
+> The `LANGSMITH_PROJECT` flag is only supported in JS SDK 0.2.16 or later, use `LANGCHAIN_PROJECT` instead if you are using an older version.
 
 ### Dynamically
 
 This largely builds off of the [previous section](#trace-selectively) and allows you to set the project name for a specific `LangChainTracer` instance or as parameters to the `tracing_context` context manager in Python.
+
+**Python**
 
 ```python
 # You can set the project name using the project_name parameter.
@@ -214,6 +240,8 @@ import langsmith as ls
 with ls.tracing_context(project_name="My Project", enabled=True):
     chain.invoke({"question": "Am I using a context manager?", "context": "I'm using a context manager"})
 ```
+
+**TypeScript**
 
 ```typescript
 // You can set the project name for a specific tracer instance:
@@ -236,6 +264,8 @@ You can annotate your traces with arbitrary metadata and tags by providing them 
 > [!NOTE]
 > When you attach metadata or tags to a runnable (either through the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) or at runtime with invocation params), they are inherited by all child runnables of that runnable.
 
+**Python**
+
 ```python
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -256,6 +286,8 @@ chain = (prompt | chat_model | output_parser).with_config({"tags": ["config-tag"
 # Tags and metadata can also be passed at runtime
 chain.invoke({"input": "What is the meaning of life?"}, {"tags": ["invoke-tag"], "metadata": {"invoke-key": "invoke-value"}})
 ```
+
+**TypeScript**
 
 ```typescript
 import { ChatOpenAI } from "@langchain/openai";
@@ -282,6 +314,8 @@ await chain.invoke({input: "What is the meaning of life?"}, {tags: ["invoke-tag"
 
 You can customize the name of a given run when invoking or streaming your LangChain code by providing it in the [Config](https://reference.langchain.com/python/langchain_core/runnables/?h=runnablecon#langchain_core.runnables.RunnableConfig). This name is used to identify the run in LangSmith and can be used to filter and group runs. The name is also used as the title of the run in the LangSmith UI. This can be done by setting a `run_name` in the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) object at construction or by passing a `run_name` in the invocation parameters in JS/TS.
 
+**Python**
+
 ```python
 # When tracing within LangChain, run names default to the class name of the traced object (e.g., 'ChatOpenAI').
 configured_chain = chain.with_config({"run_name": "MyCustomChain"})
@@ -290,6 +324,8 @@ configured_chain.invoke({"input": "What is the meaning of life?"})
 # You can also configure the run name at invocation time, like below
 chain.invoke({"input": "What is the meaning of life?"}, {"run_name": "MyCustomChain"})
 ```
+
+**TypeScript**
 
 ```typescript
 // When tracing within LangChain, run names default to the class name of the traced object (e.g., 'ChatOpenAI').
@@ -319,6 +355,8 @@ This is particularly useful when:
 * Creating aliases for models to make traces more readable for your team.
 * Standardizing model names across different deployment environments.
 
+**Python**
+
 ```python
 from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
@@ -345,6 +383,8 @@ llm_factual = ChatOpenAI(
 # The metadata is inherited when the model is used in a chain
 result = llm.invoke("What is the meaning of life?")
 ```
+
+**TypeScript**
 
 ```typescript
 import { ChatOpenAI } from "@langchain/openai";
@@ -385,6 +425,8 @@ You can customize the ID of a given run when invoking or streaming your LangChai
 > [!NOTE]
 > This feature is not currently supported directly for LLM objects.
 
+**Python**
+
 ```python
 import uuid
 
@@ -393,6 +435,8 @@ my_uuid = uuid.uuid4()
 # You can configure the run ID at invocation time:
 chain.invoke({"input": "What is the meaning of life?"}, {"run_id": my_uuid})
 ```
+
+**TypeScript**
 
 ```typescript
 const myUuid = crypto.randomUUID();
@@ -408,6 +452,8 @@ Note that if you do this at the **root** of a trace (i.e., the top-level run, th
 When you invoke a LangChain object, you can manually specify the run ID of the invocation. This run ID can be used to query the run in LangSmith.
 
 In JS/TS, you can use a `RunCollectorCallbackHandler` instance to access the run ID.
+
+**Python**
 
 ```python
 import uuid
@@ -431,6 +477,8 @@ my_uuid = uuid.uuid4()
 result = chain.invoke({"question": question, "context": context}, {"run_id": my_uuid})
 print(my_uuid)
 ```
+
+**TypeScript**
 
 ```typescript
 import { ChatOpenAI } from "@langchain/openai";
@@ -466,6 +514,8 @@ You can make callbacks synchronous by setting the `LANGCHAIN_CALLBACKS_BACKGROUN
 
 For both languages, LangChain exposes methods to wait for traces to be submitted before exiting your application. Below is an example:
 
+**Python**
+
 ```python
 from langchain_openai import ChatOpenAI
 from langchain_core.tracers.langchain import wait_for_all_tracers
@@ -477,6 +527,8 @@ try:
 finally:
   wait_for_all_tracers()
 ```
+
+**TypeScript**
 
 ```typescript
 import { awaitAllCallbacks } from "@langchain/core/callbacks/promises";
@@ -504,6 +556,8 @@ However, in some environments, it is not possible to set environment variables. 
 
 This largely builds off of the [previous section](#trace-selectively).
 
+**Python**
+
 ```python
 import langsmith as ls
 
@@ -517,6 +571,8 @@ client = ls.Client(
 with ls.tracing_context(client=client, project_name="test-no-env", enabled=True):
     chain.invoke({"question": "Am I using a callback?", "context": "I'm using a callback"})
 ```
+
+**TypeScript**
 
 ```typescript
 import { LangChainTracer } from "@langchain/core/tracers/tracer_langchain";
@@ -672,6 +728,8 @@ const parrot = new RunnableLambda({
 
 Alternatively, you can convert LangChain's [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) to a equivalent RunTree object by using `RunTree.fromRunnableConfig` or pass the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) as the first argument of `traceable`-wrapped function.
 
+**Traceable**
+
 ```typescript
 import { traceable } from "langsmith/traceable";
 import { RunnableLambda } from "@langchain/core/runnables";
@@ -689,6 +747,8 @@ const parrot = new RunnableLambda({
   },
 });
 ```
+
+**Run Tree**
 
 ```typescript
 import { RunTree } from "langsmith/run_trees";
@@ -718,7 +778,7 @@ If you prefer a video tutorial, check out the [Alternative Ways to Trace video](
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

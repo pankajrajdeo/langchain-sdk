@@ -1,8 +1,18 @@
+---
+title: "Disable a model for a feature"
+description: "Adds a model to the disabled list for a feature in the workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/features/disable-a-model-for-a-feature"
+category: "docs"
+tags: [docs, langsmith, smith-api, features, disable-a-model-for-a-feature]
+---
+
 # Disable a model for a feature
 
 > Adds a model to the disabled list for a feature in the workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/platform/features/{feature}/disabled-models**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Trace LiveKit applications"
+description: "This integration is in beta, so its API may change."
+source: "https://docs.langchain.com/langsmith/trace-with-livekit"
+category: "docs"
+tags: [docs, langsmith, trace-with-livekit]
+---
+
 # Trace LiveKit applications
 
 > [!NOTE]
@@ -14,9 +22,13 @@ Each conversation appears as one LangSmith trace with its pipeline events, laten
 
 Install the integration along with the LiveKit plugins your agent uses:
 
+**pip**
+
 ```bash
 pip install "langsmith[livekit]" "livekit-agents[openai,silero,turn-detector]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[livekit]" "livekit-agents[openai,silero,turn-detector]"
@@ -25,6 +37,8 @@ uv add "langsmith[livekit]" "livekit-agents[openai,silero,turn-detector]"
 ## Set environment variables
 
 The integration reads your LangSmith credentials from the environment and exports to LangSmith for you via OpenTelemetry:
+
+**.env**
 
 ```bash
 LANGSMITH_API_KEY=<your-langsmith-api-key>
@@ -267,7 +281,7 @@ Attach the conversation audio recording to your trace.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-livekit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

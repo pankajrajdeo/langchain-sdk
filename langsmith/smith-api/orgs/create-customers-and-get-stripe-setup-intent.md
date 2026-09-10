@@ -1,6 +1,16 @@
+---
+title: "Create customers and get stripe setup intent"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/setup"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/create-customers-and-get-stripe-setup-intent"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, create-customers-and-get-stripe-setup-intent]
+---
+
 # Create customers and get stripe setup intent
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/setup**
 
 ````yaml
 openapi: 3.1.0

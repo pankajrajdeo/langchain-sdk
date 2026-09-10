@@ -1,8 +1,18 @@
+---
+title: "Get annotation queue item placement"
+description: "Resolve a RUN or THREAD item to its current review section and zero-based position for deep linking."
+source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/get-annotation-queue-item-placement"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation_queues, get-annotation-queue-item-placement]
+---
+
 # Get annotation queue item placement
 
 > Resolve a RUN or THREAD item to its current review section and zero-based position for deep linking.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/annotation-queues/{queue_id}/items/{item_id}/placement**
 
 ````yaml
 openapi: 3.1.0

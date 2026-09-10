@@ -1,8 +1,18 @@
+---
+title: "Create a run"
+description: "Queues a single run for ingestion. The request body must be a JSON-encoded run object that follows the Run schema."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/create-a-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, create-a-run]
+---
+
 # Create a run
 
 > Queues a single run for ingestion. The request body must be a JSON-encoded run object that follows the Run schema.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs**
 
 ````yaml
 openapi: 3.1.0

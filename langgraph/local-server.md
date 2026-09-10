@@ -1,3 +1,11 @@
+---
+title: "Run a local server"
+description: "This guide shows you how to run a LangGraph application locally."
+source: "https://docs.langchain.com/oss/python/langgraph/local-server"
+category: "docs"
+tags: [docs, langgraph, local-server]
+---
+
 # Run a local server
 
 This guide shows you how to run a LangGraph application locally.
@@ -10,10 +18,14 @@ Before you begin, ensure you have the following:
 
 ## 1. Install the LangGraph CLI
 
+**pip**
+
 ```bash
 # Python >= 3.11 is required.
 pip install -U "langgraph-cli[inmem]"
 ```
+
+**uv**
 
 ```bash
 # Python >= 3.11 is required.
@@ -36,10 +48,14 @@ langgraph new path/to/your/app --template new-langgraph-project-python
 
 In the root of your new LangGraph app, install the dependencies in `edit` mode so your local changes are used by the server:
 
+**pip**
+
 ```bash
 cd path/to/your/app
 pip install -e .
 ```
+
+**uv**
 
 ```bash
 cd path/to/your/app
@@ -199,7 +215,7 @@ Now that you have a LangGraph app running locally, take your journey further by 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/local-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Get playground settings"
+description: "Get a single playground settings by ID."
+source: "https://docs.langchain.com/langsmith/smith-api/playground-settings/get-playground-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, playground-settings, get-playground-settings]
+---
+
 # Get playground settings
 
 > Get a single playground settings by ID.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/playground-settings/{playground_settings_id}**
 
 ````yaml
 openapi: 3.1.0

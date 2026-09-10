@@ -1,6 +1,16 @@
+---
+title: "Delete org service key"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/current/service-keys/{api_key_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/delete-org-service-key"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, delete-org-service-key]
+---
+
 # Delete org service key
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/current/service-keys/{api_key_id}**
 
 ````yaml
 openapi: 3.1.0
@@ -226,6 +236,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

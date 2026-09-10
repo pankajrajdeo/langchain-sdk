@@ -1,3 +1,11 @@
+---
+title: "Log retriever traces"
+description: "Log retrieval steps in LangSmith traces for document-level visibility into your RAG pipeline."
+source: "https://docs.langchain.com/langsmith/log-retriever-trace"
+category: "docs"
+tags: [docs, langsmith, log-retriever-trace]
+---
+
 # Log retriever traces
 
 > Log retrieval steps in LangSmith traces for document-level visibility into your RAG pipeline.
@@ -35,6 +43,8 @@ Return a list of dictionaries (Python) or objects (TypeScript) from your retriev
 
 The following examples show a complete retriever implementation with both requirements applied:
 
+**Python**
+
 ```python
 from langsmith import traceable
 
@@ -57,6 +67,8 @@ def retrieve_docs(query):
 
 retrieve_docs("User query")
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -98,7 +110,7 @@ In the LangSmith UI, you'll find each retrieved document with its contents and m
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-retriever-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

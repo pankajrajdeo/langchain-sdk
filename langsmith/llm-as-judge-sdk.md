@@ -1,3 +1,11 @@
+---
+title: "How to define an LLM-as-a-judge evaluator"
+description: "LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer."
+source: "https://docs.langchain.com/langsmith/llm-as-judge-sdk"
+category: "docs"
+tags: [docs, langsmith, llm-as-judge-sdk]
+---
+
 # How to define an LLM-as-a-judge evaluator
 
 LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
@@ -83,6 +91,8 @@ results = evaluate(
 
 When your dataset examples include reference outputs (expected answers), you can pass `reference_outputs` as a parameter to your evaluator function. LangSmith automatically provides the example's reference outputs to any evaluator that declares this parameter.
 
+**Python**
+
 ```python
 from langsmith import evaluate, traceable, wrappers, Client
 from openai import OpenAI
@@ -141,6 +151,8 @@ results = evaluate(
     evaluators=[matches_expected]
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { evaluate } from "langsmith/evaluation";
@@ -207,7 +219,7 @@ For more information on how to write a custom evaluator, refer to [How to define
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

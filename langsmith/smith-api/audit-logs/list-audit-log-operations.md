@@ -1,3 +1,11 @@
+---
+title: "List audit log operations"
+description: "List all possible audit log operation names, for populating filter UI."
+source: "https://docs.langchain.com/langsmith/smith-api/audit-logs/list-audit-log-operations"
+category: "docs"
+tags: [docs, langsmith, smith-api, audit-logs, list-audit-log-operations]
+---
+
 # List audit log operations
 
 > List all possible audit log operation names, for populating filter UI.
@@ -5,6 +13,8 @@
 Independent of any operations actually recorded so far for the organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/audit-logs/operations**
 
 ````yaml
 openapi: 3.1.0

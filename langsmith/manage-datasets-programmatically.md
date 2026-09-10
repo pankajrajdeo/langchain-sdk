@@ -1,3 +1,11 @@
+---
+title: "How to create and manage datasets programmatically"
+description: "You can use the Python and TypeScript SDK to manage datasets programmatically. This includes creating, updating, and deleting datasets, as well as adding examples to them."
+source: "https://docs.langchain.com/langsmith/manage-datasets-programmatically"
+category: "docs"
+tags: [docs, langsmith, manage-datasets-programmatically]
+---
+
 # How to create and manage datasets programmatically
 
 You can use the Python and TypeScript SDK to manage datasets programmatically. This includes creating, updating, and deleting datasets, as well as adding examples to them.
@@ -12,6 +20,8 @@ Note that you can add arbitrary metadata to each example, such as a note or a so
 
 > [!TIP]
 > If you have many examples to create, consider using the `create_examples`/`createExamples` method to create multiple examples in a single request. If creating a single example, you can use the `create_example`/`createExample` method.
+
+**Python**
 
 ```python
 from langsmith import Client
@@ -55,6 +65,8 @@ client.create_examples(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 import { Client } from "langsmith";
 
@@ -91,6 +103,8 @@ await client.createExamples({
   datasetId: dataset.id,
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -180,6 +194,8 @@ public class CreateDatasetExample {
 
 To create datasets from the runs (spans) of your traces, you can use the same approach. For **many** more examples of how to fetch and filter runs, see the [export traces](export-traces.md) guide. Below is an example:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -204,6 +220,8 @@ client.create_examples(
   examples=examples
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client, Run } from "langsmith";
@@ -237,6 +255,8 @@ await client.createExamples({
   datasetId: dataset.id,
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -348,6 +368,8 @@ In this section, we will demonstrate how you can create a dataset by uploading a
 
 First, ensure your CSV file is properly formatted with columns that represent your input and output keys. These keys will be utilized to map your data properly during the upload. You can specify an optional name and description for your dataset. Otherwise, the file name will be used as the dataset name and no description will be provided.
 
+**Python**
+
 ```python
 from langsmith import Client
 import os
@@ -367,6 +389,8 @@ dataset = client.upload_csv(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 import { Client } from "langsmith";
 
@@ -384,6 +408,8 @@ const dataset = await client.uploadCsv({
   dataType: "kv"
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -443,17 +469,23 @@ You can programmatically fetch datasets from LangSmith using the `list_datasets`
 > [!NOTE]
 > Initialize the client before running the below code snippets.
 
+**Python**
+
 ```python
 from langsmith import Client
 
 client = Client()
 ```
 
+**TypeScript**
+
 ```typescript
 import { Client } from "langsmith";
 
 const client = new Client();
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -464,13 +496,19 @@ LangsmithClient client = LangsmithOkHttpClient.fromEnv();
 
 ### Query all datasets
 
+**Python**
+
 ```python
 datasets = client.list_datasets()
 ```
 
+**TypeScript**
+
 ```typescript
 const datasets = await client.listDatasets();
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.datasets.DatasetListParams;
@@ -483,15 +521,21 @@ var datasets = client.datasets().list(listParams);
 
 If you want to search by the exact name, you can do the following:
 
+**Python**
+
 ```python
 datasets = client.list_datasets(dataset_name="My Test Dataset 1")
 ```
+
+**TypeScript**
 
 ```typescript
 const datasets = await client.listDatasets({
   datasetName: "My Test Dataset 1"
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.datasets.DatasetListParams;
@@ -504,15 +548,21 @@ var datasets = client.datasets().list(listParams);
 
 If you want to do a case-invariant substring search, try the following:
 
+**Python**
+
 ```python
 datasets = client.list_datasets(dataset_name_contains="some substring")
 ```
+
+**TypeScript**
 
 ```typescript
 const datasets = await client.listDatasets({
   datasetNameContains: "some substring"
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.datasets.DatasetListParams;
@@ -527,15 +577,21 @@ var datasets = client.datasets().list(listParams);
 
 You can filter datasets by type:
 
+**Python**
+
 ```python
 datasets = client.list_datasets(data_type="kv")
 ```
+
+**TypeScript**
 
 ```typescript
 const datasets = await client.listDatasets({
   dataType: "kv"
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.datasets.DatasetListParams;
@@ -553,17 +609,23 @@ You can programmatically fetch examples from LangSmith using the `list_examples`
 > [!NOTE]
 > Initialize the client before running the below code snippets.
 
+**Python**
+
 ```python
 from langsmith import Client
 
 client = Client()
 ```
 
+**TypeScript**
+
 ```typescript
 import { Client } from "langsmith";
 
 const client = new Client();
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -576,15 +638,21 @@ LangsmithClient client = LangsmithOkHttpClient.fromEnv();
 
 You can filter by dataset ID:
 
+**Python**
+
 ```python
 examples = client.list_examples(dataset_id="c9ace0d8-a82c-4b6c-13d2-83401d68e9ab")
 ```
+
+**TypeScript**
 
 ```typescript
 const examples = await client.listExamples({
   datasetId: "c9ace0d8-a82c-4b6c-13d2-83401d68e9ab"
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.examples.ExampleListParams;
@@ -597,9 +665,13 @@ var examples = client.examples().list(listParams);
 
 Or you can filter by dataset name (this must exactly match the dataset name you want to query)
 
+**Python**
+
 ```python
 examples = client.list_examples(dataset_name="My Test Dataset")
 ```
+
+**TypeScript**
 
 ```typescript
 const examples = await client.listExamples({
@@ -611,6 +683,8 @@ const examples = await client.listExamples({
 
 You can also list multiple examples all by ID.
 
+**Python**
+
 ```python
 example_ids = [
   '734fc6a0-c187-4266-9721-90b7a025751a',
@@ -620,6 +694,8 @@ example_ids = [
 
 examples = client.list_examples(example_ids=example_ids)
 ```
+
+**TypeScript**
 
 ```typescript
 const exampleIds = [
@@ -632,6 +708,8 @@ const examples = await client.listExamples({
   exampleIds: exampleIds
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.examples.ExampleListParams;
@@ -655,9 +733,13 @@ You can also filter examples by metadata. Below is an example querying for examp
 
 For example, if you have an example with metadata `{"foo": "bar", "baz": "qux"}`, both `{foo: bar}` and `{baz: qux}` would match, as would `{foo: bar, baz: qux}`.
 
+**Python**
+
 ```python
 examples = client.list_examples(dataset_name=dataset_name, metadata={"foo": "bar"})
 ```
+
+**TypeScript**
 
 ```typescript
 const examples = await client.listExamples({
@@ -665,6 +747,8 @@ const examples = await client.listExamples({
   metadata: {foo: "bar"}
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.examples.ExampleListParams;
@@ -687,6 +771,8 @@ Similar to how you can use the structured filter query language to [fetch runs](
 
 You can use the `has` operator to fetch examples with metadata fields that contain specific key/value pairs and the `exists` operator to fetch examples with metadata fields that contain a specific key. Additionally, you can chain multiple filters together using the `and` operator and negate a filter using the `not` operator.
 
+**Python**
+
 ```python
 examples = client.list_examples(
   dataset_name=dataset_name,
@@ -694,12 +780,16 @@ examples = client.list_examples(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 const examples = await client.listExamples({
   datasetName: datasetName,
   filter: 'and(not(has(metadata, \'{"foo": "bar"}\')), exists(metadata, "tenant_id"))'
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.examples.ExampleListParams;
@@ -719,6 +809,8 @@ var examples = client.examples().list(listParams);
 
 You can programmatically update examples from LangSmith using the `update_example`/`updateExample` method in the Python and TypeScript SDKs. Below is an example.
 
+**Python**
+
 ```python
 client.update_example(
   example_id=example.id,
@@ -729,6 +821,8 @@ client.update_example(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 await client.updateExample(example.id, {
   inputs: { input: "updated input" },
@@ -737,6 +831,8 @@ await client.updateExample(example.id, {
   split: "train",
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.core.JsonValue;
@@ -771,6 +867,8 @@ ExampleUpdateResponse updateResponse = client.examples().update(example.id(), up
 
 You can also programmatically update multiple examples in a single request with the `update_examples`/`updateExamples` method in the Python and TypeScript SDKs. Below is an example.
 
+**Python**
+
 ```python
 client.update_examples(
   example_ids=[example.id, example_2.id],
@@ -783,6 +881,8 @@ client.update_examples(
   splits=[["training", "foo"], "training"] # Splits can be arrays or standalone strings
 )
 ```
+
+**TypeScript**
 
 ```typescript
 await client.updateExamples([
@@ -802,6 +902,8 @@ await client.updateExamples([
   },
 ]);
 ```
+
+**Java**
 
 ```java
 Map<String, String> inputs1 = Map.of("question", "What is the capital of France?")
@@ -845,7 +947,7 @@ client.examples().bulk().patchAll(bulkParamsBuilder.build());
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets-programmatically.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

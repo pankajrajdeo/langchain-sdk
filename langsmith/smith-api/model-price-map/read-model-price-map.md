@@ -1,6 +1,16 @@
+---
+title: "Read model price map"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/model-price-map"
+source: "https://docs.langchain.com/langsmith/smith-api/model-price-map/read-model-price-map"
+category: "docs"
+tags: [docs, langsmith, smith-api, model-price-map, read-model-price-map]
+---
+
 # Read model price map
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/model-price-map**
 
 ````yaml
 openapi: 3.1.0

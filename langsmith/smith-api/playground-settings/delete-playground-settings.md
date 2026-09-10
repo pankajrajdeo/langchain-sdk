@@ -1,8 +1,18 @@
+---
+title: "Delete playground settings"
+description: "Delete playground settings."
+source: "https://docs.langchain.com/langsmith/smith-api/playground-settings/delete-playground-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, playground-settings, delete-playground-settings]
+---
+
 # Delete playground settings
 
 > Delete playground settings.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/playground-settings/{playground_settings_id}**
 
 ````yaml
 openapi: 3.1.0

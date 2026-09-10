@@ -1,8 +1,18 @@
+---
+title: "Create insights job (Beta)"
+description: "Create an insights job."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/create-insights-job-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, create-insights-job-beta]
+---
+
 # Create insights job (Beta)
 
 > Create an insights job.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/sessions/{session_id}/insights**
 
 ````yaml
 openapi: 3.1.0

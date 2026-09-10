@@ -1,3 +1,11 @@
+---
+title: "Attribute-based access control"
+description: "This reference explains LangSmith's Attribute-Based Access Control (ABAC) system, which enables fine-grained access control based on resource attributes, complementing RBAC. For automated user..."
+source: "https://docs.langchain.com/langsmith/abac"
+category: "docs"
+tags: [docs, langsmith, abac]
+---
+
 # Attribute-based access control
 
 This reference explains LangSmith's Attribute-Based Access Control (ABAC) system, which enables fine-grained access control based on resource attributes, complementing [RBAC](rbac.md). For automated user provisioning into roles, see [SCIM](user-management.md#set-up-scim-for-your-organization).
@@ -338,7 +346,7 @@ For full details and examples, see [Tag a resource at creation time](set-up-reso
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/abac.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

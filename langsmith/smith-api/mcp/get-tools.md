@@ -1,3 +1,11 @@
+---
+title: "Get tools"
+description: "Return MCP tools — from cache if fresh, otherwise by fetching from remote."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp/get-tools"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp, get-tools]
+---
+
 # Get tools
 
 > Return MCP tools — from cache if fresh, otherwise by fetching from remote.
@@ -12,6 +20,8 @@ remote server (the result is still cached via upsert for future requests).
 subject. ``ls_user_id`` overrides are limited to service identities.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/mcp/tools**
 
 ````yaml
 openapi: 3.1.0

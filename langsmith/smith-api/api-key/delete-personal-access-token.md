@@ -1,8 +1,18 @@
+---
+title: "Delete personal access token"
+description: "DEPRECATED: Use /orgs/current/personal-access-tokens/{pat_id} instead"
+source: "https://docs.langchain.com/langsmith/smith-api/api-key/delete-personal-access-token"
+category: "docs"
+tags: [docs, langsmith, smith-api, api-key, delete-personal-access-token]
+---
+
 # Delete personal access token
 
 > DEPRECATED: Use /orgs/current/personal-access-tokens/{pat_id} instead
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/api-key/current/{pat_id}**
 
 ````yaml
 openapi: 3.1.0
@@ -229,6 +239,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

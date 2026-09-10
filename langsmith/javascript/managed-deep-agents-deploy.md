@@ -1,3 +1,11 @@
+---
+title: "Deploy a Managed Deep Agent"
+description: "Test and deploy a Managed Deep Agent with the mda CLI."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-deploy"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-deploy]
+---
+
 # Deploy a Managed Deep Agent
 
 > Test and deploy a Managed Deep Agent with the mda CLI.
@@ -29,13 +37,19 @@ The CLI targets US LangSmith Cloud by default.
 
 Deploy the local project:
 
+**npm**
+
 ```bash
 npx mda deploy
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda deploy
 ```
+
+**bun**
 
 ```bash
 bunx mda deploy
@@ -53,13 +67,19 @@ bunx mda deploy
 
 Set the deployment name explicitly when the directory name is not the name you want:
 
+**npm**
+
 ```bash
 npx mda deploy --name research-assistant
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda deploy --name research-assistant
 ```
+
+**bun**
 
 ```bash
 bunx mda deploy --name research-assistant
@@ -67,13 +87,19 @@ bunx mda deploy --name research-assistant
 
 Use `--deployment-type prod` when creating a production deployment:
 
+**npm**
+
 ```bash
 npx mda deploy --deployment-type prod
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda deploy --deployment-type prod
 ```
+
+**bun**
 
 ```bash
 bunx mda deploy --deployment-type prod
@@ -81,13 +107,19 @@ bunx mda deploy --deployment-type prod
 
 Use `--no-wait` to trigger the build without polling for completion:
 
+**npm**
+
 ```bash
 npx mda deploy --no-wait
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda deploy --no-wait
 ```
+
+**bun**
 
 ```bash
 bunx mda deploy --no-wait
@@ -100,6 +132,8 @@ On success, the CLI prints the LangSmith deployment dashboard URL. For the full 
 ## Secrets and environment files
 
 `mda deploy` reads project `.env` values before shell environment variables. Use `.env` for the LangSmith API key that authenticates the deploy and for runtime secrets the hosted deployment needs:
+
+**.env**
 
 ```text
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
@@ -139,7 +173,7 @@ Look up every `mda` command and flag.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

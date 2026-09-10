@@ -1,3 +1,11 @@
+---
+title: "Learn"
+description: "Tutorials, conceptual guides, and resources to help you get started."
+source: "https://docs.langchain.com/oss/python/learn"
+category: "docs"
+tags: [docs, learn]
+---
+
 # Learn
 
 > Tutorials, conceptual guides, and resources to help you get started.
@@ -88,7 +96,7 @@ See how teams are using LangChain and LangGraph in production.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/learn.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

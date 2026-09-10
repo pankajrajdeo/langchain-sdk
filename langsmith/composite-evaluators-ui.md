@@ -1,3 +1,11 @@
+---
+title: "How to create a composite evaluator"
+description: "Composite evaluators are a way to combine multiple evaluator scores into a single score. This is useful when you want to evaluate multiple aspects of your application and combine the results into a..."
+source: "https://docs.langchain.com/langsmith/composite-evaluators-ui"
+category: "docs"
+tags: [docs, langsmith, composite-evaluators-ui]
+---
+
 # How to create a composite evaluator
 
 *Composite evaluators* are a way to combine multiple evaluator scores into a single [score](evaluation-concepts.md#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
@@ -54,7 +62,7 @@ Composite scores are attached to a run as **feedback**, similarly to feedback fr
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/composite-evaluators-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

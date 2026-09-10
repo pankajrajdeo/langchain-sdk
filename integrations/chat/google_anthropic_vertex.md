@@ -1,3 +1,11 @@
+---
+title: "ChatAnthropicVertex integration"
+description: "Integrate with the ChatAnthropicVertex chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/google_anthropic_vertex"
+category: "docs"
+tags: [docs, integrations, chat, google_anthropic_vertex]
+---
+
 # ChatAnthropicVertex integration
 
 > Integrate with the ChatAnthropicVertex chat model using LangChain Python.
@@ -107,7 +115,7 @@ for token in stream.text:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_anthropic_vertex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

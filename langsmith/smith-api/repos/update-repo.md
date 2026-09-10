@@ -1,8 +1,18 @@
+---
+title: "Update repo"
+description: "Update a repo."
+source: "https://docs.langchain.com/langsmith/smith-api/repos/update-repo"
+category: "docs"
+tags: [docs, langsmith, smith-api, repos, update-repo]
+---
+
 # Update repo
 
 > Update a repo.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/repos/{owner}/{repo}**
 
 ````yaml
 openapi: 3.1.0

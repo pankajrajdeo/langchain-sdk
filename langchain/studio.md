@@ -1,3 +1,11 @@
+---
+title: "LangSmith Studio"
+description: "When building agents with LangChain locally, it's helpful to visualize what's happening inside your agent, interact with it in real-time, and debug issues as they occur. LangSmith Studio is a free..."
+source: "https://docs.langchain.com/oss/python/langchain/studio"
+category: "docs"
+tags: [docs, langchain, studio]
+---
+
 # LangSmith Studio
 
 When building agents with LangChain locally, it's helpful to visualize what's happening inside your agent, interact with it in real-time, and debug issues as they occur. **LangSmith Studio** is a free visual interface for developing and testing your LangChain agents from your local machine.
@@ -20,10 +28,14 @@ Before you begin, ensure you have the following:
 
 The [LangGraph CLI](../langsmith/cli.md) provides a local development server (also called [Agent Server](../langsmith/agent-server.md)) that connects your agent to Studio.
 
+**pip**
+
 ```bash
 # Python >= 3.11 is required.
 pip install -U "langgraph-cli[inmem]"
 ```
+
+**uv**
 
 ```bash
 # Python >= 3.11 is required.
@@ -62,6 +74,8 @@ Studio requires a LangSmith API key to connect your local agent. Create a `.env`
 > [!WARNING]
 > Ensure your `.env` file is not committed to version control, such as Git.
 
+**.env**
+
 ```bash
 LANGSMITH_API_KEY=lsv2...
 ```
@@ -99,9 +113,13 @@ my-app/
 
 Install your project dependencies from the root directory:
 
+**pip**
+
 ```shell
 pip install langchain langchain-openai
 ```
+
+**uv**
 
 ```shell
 uv add langchain langchain-openai
@@ -145,7 +163,7 @@ For more information on how to run Studio, refer to the following guides in the 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Graph API overview"
+description: "At its core, LangGraph models agent workflows as graphs. You define the behavior of your agents using three key components:"
+source: "https://docs.langchain.com/oss/python/langgraph/graph-api"
+category: "docs"
+tags: [docs, langgraph, graph-api]
+---
+
 # Graph API overview
 
 ## Graphs
@@ -108,6 +116,9 @@ graph.invoke({"user_input": "My"})
 # {'graph_output': 'My name is Lance'}
 ```
 
+#### [View example trace](https://smith.langchain.com/public/db7e0ca9-0d20-4958-9b72-48bcc6564c0e/r)
+Open a public LangSmith run for this example.
+
 There are two subtle and important points to note here:
 
 1. We pass `state: InputState` as the input schema to `node_1`. But, we write out to `foo`, a channel in `OverallState`. How can we write out to a state channel that is not included in the input schema? This is because a node *can write to any state channel in the graph state.* The graph state is the union of the state channels defined at initialization, which includes `OverallState` and the filters `InputState` and `OutputState`.
@@ -142,6 +153,9 @@ There are two subtle and important points to note here:
 > # {'foo': 'My name', 'user_input': 'My', 'bar': 'My name is'}        # <-- private channel
 > # {'foo': 'My name', 'user_input': 'My', 'graph_output': 'My name is Lance', 'bar': 'My name is'}
 > ```
+>
+> #### [View example trace](https://smith.langchain.com/public/41466c41-ad4c-4ca8-965a-bfae7b03ab67/r)
+> Open a public LangSmith run for this example.
 >
 > To restrict the streamed values to a specific set of channels (e.g. only the output schema), pass `output_keys`:
 >
@@ -575,6 +589,9 @@ config = {"configurable": {"thread_id": thread_id}}
 graph.invoke({"url": "https://www.example.com"}, config)
 ```
 
+#### [View example trace](https://smith.langchain.com/public/ecb04879-c086-47c3-9244-405be60f0c26/r)
+Open a public LangSmith run for this example.
+
 #### With task
 ```python
 from typing import NotRequired
@@ -614,6 +631,9 @@ config = {"configurable": {"thread_id": thread_id}}
 
 graph.invoke({"urls": ["https://www.example.com"]}, config)
 ```
+
+#### [View example trace](https://smith.langchain.com/public/cc6bd7b8-a3c0-45bb-80e1-a8428c1fcd4d/r)
+Open a public LangSmith run for this example.
 
 ### `START` node
 
@@ -899,6 +919,9 @@ resumed = graph.stream_events(Command(resume="yes"), config, version="v3")
 final = resumed.output
 ```
 
+#### [View example trace](https://smith.langchain.com/public/55c552d5-6214-4be2-8271-571acd47e3e3/r)
+Open a public LangSmith run for this example.
+
 Check out the [interrupts conceptual guide](interrupts.md) for full details on interrupt patterns, including multiple interrupts and validation loops.
 
 ### Return from tools
@@ -1139,7 +1162,7 @@ To trace, debug and evaluate your agents, use [LangSmith](../langsmith/observabi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

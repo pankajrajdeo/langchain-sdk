@@ -1,3 +1,11 @@
+---
+title: "Chat model integrations"
+description: "Integrate with chat models using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat"
+category: "docs"
+tags: [docs, integrations, chat]
+---
+
 # Chat model integrations
 
 > Integrate with chat models using LangChain Python.
@@ -160,7 +168,7 @@ Certain model providers offer endpoints that are compatible with OpenAI's [Chat 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

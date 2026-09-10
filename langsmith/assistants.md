@@ -1,3 +1,11 @@
+---
+title: "Assistants"
+description: "Assistants are an Agent Server concept that allow you to manage configurations (e.g., prompts, LLM selection, tools) separately from your graph's core logic. This enables you to create multiple..."
+source: "https://docs.langchain.com/langsmith/assistants"
+category: "docs"
+tags: [docs, langsmith, assistants]
+---
+
 # Assistants
 
 *Assistants* are an [Agent Server](agent-server.md) concept that allow you to manage configurations (e.g., prompts, LLM selection, tools) separately from your graph's core logic. This enables you to create multiple, specialized versions of the same graph architecture with different behavior at runtime. Through configuration variations (rather than structural graph changes), each assistant is optimized for a different [use case](#use-cases).
@@ -123,7 +131,7 @@ For more details on how to manage assistant versions, refer to the [Manage assis
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/assistants.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

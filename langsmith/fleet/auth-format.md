@@ -1,3 +1,11 @@
+---
+title: "Auth-aware tool responses"
+description: "Format tool responses to trigger OAuth flows and resume execution automatically."
+source: "https://docs.langchain.com/langsmith/fleet/auth-format"
+category: "docs"
+tags: [docs, langsmith, fleet, auth-format]
+---
+
 # Auth-aware tool responses
 
 > Format tool responses to trigger OAuth flows and resume execution automatically.
@@ -30,7 +38,7 @@ If you want your custom tools to reuse the same authentication required interrup
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/auth-format.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,16 @@
+---
+title: "Create tagging"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/taggings"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/create-tagging"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, create-tagging]
+---
+
 # Create tagging
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/taggings**
 
 ````yaml
 openapi: 3.1.0

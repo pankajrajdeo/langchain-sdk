@@ -1,8 +1,18 @@
+---
+title: "Create evaluator"
+description: "Create a new LLM or code evaluator for the current workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/evaluators/create-evaluator"
+category: "docs"
+tags: [docs, langsmith, smith-api, evaluators, create-evaluator]
+---
+
 # Create evaluator
 
 > Create a new LLM or code evaluator for the current workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/evaluators**
 
 ````yaml
 openapi: 3.1.0

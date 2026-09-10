@@ -1,3 +1,11 @@
+---
+title: "Todo list"
+description: "Track agent progress with a real-time todo list synced from agent state"
+source: "https://docs.langchain.com/oss/python/deepagents/frontend/todo-list"
+category: "docs"
+tags: [docs, deepagents, frontend, todo-list]
+---
+
 # Todo list
 
 > Track agent progress with a real-time todo list synced from agent state
@@ -35,6 +43,8 @@ The flow looks like this:
 
 Enable [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) on the agent.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -44,6 +54,8 @@ agent = create_deep_agent(
     middleware=[TodoListMiddleware()],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -55,6 +67,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -64,6 +78,8 @@ agent = create_deep_agent(
     middleware=[TodoListMiddleware()],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -75,6 +91,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -85,6 +103,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -94,6 +114,8 @@ agent = create_deep_agent(
     middleware=[TodoListMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -109,7 +131,9 @@ Then point [`useStream`](https://reference.langchain.com/javascript/langchain-re
 read the `todos` from `stream.values`.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -134,6 +158,8 @@ export function TodoAgent() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -162,6 +188,8 @@ const todos = computed(() => stream.values.value?.todos ?? []);
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -183,6 +211,8 @@ const todos = computed(() => stream.values.value?.todos ?? []);
   {/each}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component, computed } from "@angular/core";
@@ -462,7 +492,7 @@ Pause and resume plan execution when the agent needs user approval or input.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/todo-list.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

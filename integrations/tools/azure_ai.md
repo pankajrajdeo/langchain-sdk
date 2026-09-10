@@ -1,3 +1,11 @@
+---
+title: "Microsoft Foundry tools integration"
+description: "Integrate with Microsoft Foundry model tools using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/azure_ai"
+category: "docs"
+tags: [docs, integrations, tools, azure_ai]
+---
+
 # Microsoft Foundry tools integration
 
 > Integrate with Microsoft Foundry model tools using LangChain Python.
@@ -27,9 +35,13 @@ Install dependencies, create the resources used by the tools, and provide creden
 
 Install the integration package:
 
+**pip**
+
 ```bash
 pip install -U "langchain-azure-ai[tools]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-azure-ai[tools]"
@@ -38,6 +50,8 @@ uv add "langchain-azure-ai[tools]"
 ### Credentials
 
 Pass either `DefaultAzureCredential()` or an API-key string through the `credential` argument (except for `AzureAIProjectToolbox` which doesn't support keys.)
+
+**Initialize credential**
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -55,6 +69,8 @@ The tools support two endpoint styles:
 * A direct OpenAI-compatible endpoint via `endpoint` or `OPENAI_BASE_URL`, for example `https://<resource>.services.ai.azure.com/openai/v1`.
 
 If both are available, prefer `project_endpoint` because it resolves the backing service endpoint automatically for Foundry-based workflows.
+
+**Configure endpoint**
 
 ```bash
     export AZURE_AI_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/projects/<project>"
@@ -404,9 +420,13 @@ OAuth access token for the MCP server.
 
 Install required dependencies:
 
+**pip**
+
 ```bash
 pip install -U "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
@@ -502,6 +522,8 @@ async with AzureAIProjectToolbox(toolbox_name="my-toolbox") as toolbox:
 
 The `get_tools()` method returns a list of `BaseTool` instances ready for use with any LangChain agent pattern:
 
+**Agent with AzureAIProjectToolbox**
+
 ```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAIProjectToolbox
@@ -550,7 +572,7 @@ from langchain_azure_ai.tools.builtin import (
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

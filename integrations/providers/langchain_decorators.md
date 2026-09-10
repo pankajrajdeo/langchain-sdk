@@ -1,3 +1,11 @@
+---
+title: "LangChain decorators integrations"
+description: "Integrate with LangChain decorators using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/langchain_decorators"
+category: "docs"
+tags: [docs, integrations, providers, langchain_decorators]
+---
+
 # LangChain decorators integrations
 
 > Integrate with LangChain decorators using LangChain Python.
@@ -45,6 +53,8 @@ write_me_short_post(topic="starwars", platform="redit")
 ```bash
 pip install langchain_decorators
 ```
+
+**uv**
 
 ```bash
 uv add langchain_decorators
@@ -224,11 +234,15 @@ def simulate_conversation(human_input:str, agent_role:str="a pirate"):
 
 (we are using the real role that are enforced by the LLM - GPT supports system, assistant, user)
 
+**prompt:user**
+
 ```
 Helo, who are you
 ```
 
 a reply:
+
+**prompt:assistant**
 
 ````
 \``` python <<- escaping inner code block with \ that should be part of the prompt
@@ -239,9 +253,13 @@ def hello():
 
 we can also add some history using placeholder
 
+**prompt:placeholder**
+
 ```
 {history}
 ```
+
+**prompt:user**
 
 ```
 {human_input}
@@ -353,6 +371,8 @@ class AssistantPersonality(BaseModel):
         You are an assistant named {assistant_name}.
         Your role is to act as {assistant_role}
 ````
+
+**prompt:user**
 
 ```
 Introduce your self (in less than 20 words)

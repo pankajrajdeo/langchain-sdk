@@ -1,3 +1,11 @@
+---
+title: "List issues agent configs (Beta)"
+description: "Beta: This endpoint is in active development and may change without notice."
+source: "https://docs.langchain.com/langsmith/smith-api/issues-agent/list-issues-agent-configs-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, issues-agent, list-issues-agent-configs-beta]
+---
+
 # List issues agent configs (Beta)
 
 > **Beta:** This endpoint is in active development and may change without notice.
@@ -5,6 +13,8 @@
 Returns every issues agent config configured for the authenticated tenant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/issues-agent**
 
 ````yaml
 openapi: 3.1.0

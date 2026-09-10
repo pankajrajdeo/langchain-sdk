@@ -1,6 +1,16 @@
+---
+title: "Get total size from annotation queue"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/annotation-queues/{queue_id}/total_size"
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/get-total-size-from-annotation-queue"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, get-total-size-from-annotation-queue]
+---
+
 # Get total size from annotation queue
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/annotation-queues/{queue_id}/total_size**
 
 ````yaml
 openapi: 3.1.0

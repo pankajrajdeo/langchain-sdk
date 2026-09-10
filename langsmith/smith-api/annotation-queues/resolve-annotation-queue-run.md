@@ -1,8 +1,18 @@
+---
+title: "Resolve annotation queue run"
+description: "Resolve a queue run ID to its section and run data for deep linking."
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/resolve-annotation-queue-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, resolve-annotation-queue-run]
+---
+
 # Resolve annotation queue run
 
 > Resolve a queue run ID to its section and run data for deep linking.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/annotation-queues/{queue_id}/runs/resolve/{queue_run_id}**
 
 ````yaml
 openapi: 3.1.0

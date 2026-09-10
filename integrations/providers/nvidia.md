@@ -1,3 +1,11 @@
+---
+title: "NVIDIA"
+description: "Integrate with NVIDIA using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/nvidia"
+category: "docs"
+tags: [docs, integrations, providers, nvidia]
+---
+
 # NVIDIA
 
 > Integrate with NVIDIA using LangChain Python.
@@ -344,7 +352,7 @@ NVIDIA and LangChain have collaborated on [full stack examples](https://github.c
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

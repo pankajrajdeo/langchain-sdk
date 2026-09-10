@@ -1,8 +1,18 @@
+---
+title: "Count Threads"
+description: "Get the count of threads matching the specified criteria."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/count-threads"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, count-threads]
+---
+
 # Count Threads
 
 > Get the count of threads matching the specified criteria.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/count**
 
 ````yaml
 openapi: 3.1.0

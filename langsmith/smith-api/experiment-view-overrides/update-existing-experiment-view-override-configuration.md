@@ -1,3 +1,11 @@
+---
+title: "Update existing experiment view override configuration"
+description: "Updates an existing experiment view override configuration by completely replacing the column overrides for the specified dataset and override ID."
+source: "https://docs.langchain.com/langsmith/smith-api/experiment-view-overrides/update-existing-experiment-view-override-configuration"
+category: "docs"
+tags: [docs, langsmith, smith-api, experiment-view-overrides, update-existing-experiment-view-override-configuration]
+---
+
 # Update existing experiment view override configuration
 
 > Updates an existing experiment view override configuration by completely replacing
@@ -30,6 +38,8 @@ Example request body:
 Both the dataset and override must exist and be accessible by the authenticated user.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /datasets/{dataset_id}/experiment-view-overrides/{id}**
 
 ````yaml
 openapi: 3.1.0

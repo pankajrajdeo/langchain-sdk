@@ -1,6 +1,16 @@
+---
+title: "Create new model price"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/model-price-map"
+source: "https://docs.langchain.com/langsmith/smith-api/model-price-map/create-new-model-price"
+category: "docs"
+tags: [docs, langsmith, smith-api, model-price-map, create-new-model-price]
+---
+
 # Create new model price
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/model-price-map**
 
 ````yaml
 openapi: 3.1.0

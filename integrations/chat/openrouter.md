@@ -1,3 +1,11 @@
+---
+title: "ChatOpenRouter integration"
+description: "Integrate with the ChatOpenRouter chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/openrouter"
+category: "docs"
+tags: [docs, integrations, chat, openrouter]
+---
+
 # ChatOpenRouter integration
 
 > Integrate with the ChatOpenRouter chat model using LangChain Python.
@@ -33,9 +41,13 @@ To access models via OpenRouter you'll need to create an [OpenRouter account](ht
 
 The LangChain OpenRouter integration lives in the `langchain-openrouter` package:
 
+**pip**
+
 ```bash
 pip install -U langchain-openrouter
 ```
+
+**uv**
 
 ```bash
 uv add langchain-openrouter
@@ -308,6 +320,8 @@ OpenRouter supports [multimodal inputs](../../langchain/messages.md#multimodal) 
 
 Provide image inputs along with text using a [`HumanMessage`](https://reference.langchain.com/python/langchain-core/messages/human/HumanMessage) with list content format.
 
+**URL**
+
 ```python
 from langchain_openrouter import ChatOpenRouter
 from langchain.messages import HumanMessage
@@ -325,6 +339,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Base64 encoded**
 
 ```python
 import base64
@@ -381,6 +397,8 @@ response = model.invoke([message])
 
 Video inputs are automatically converted to OpenRouter's `video_url` format.
 
+**URL**
+
 ```python
 from langchain_openrouter import ChatOpenRouter
 from langchain.messages import HumanMessage
@@ -398,6 +416,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Base64 encoded**
 
 ```python
 import base64
@@ -426,6 +446,8 @@ response = model.invoke([message])
 
 Provide PDF file inputs along with text.
 
+**URL**
+
 ```python
 from langchain_openrouter import ChatOpenRouter
 from langchain.messages import HumanMessage
@@ -444,6 +466,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Base64 encoded**
 
 ```python
 import base64
@@ -766,7 +790,7 @@ For more information about OpenRouter's platform, models, and features, see the 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

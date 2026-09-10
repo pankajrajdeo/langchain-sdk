@@ -1,3 +1,11 @@
+---
+title: "LangSmith data plane"
+description: "The data plane consists of your Agent Servers (deployments), their supporting infrastructure, and the \"listener\" application that continuously polls for updates from the LangSmith control plane."
+source: "https://docs.langchain.com/langsmith/data-plane"
+category: "docs"
+tags: [docs, langsmith, data-plane]
+---
+
 # LangSmith data plane
 
 The *data plane* consists of your [Agent Servers](agent-server.md) (deployments), their supporting infrastructure, and the "listener" application that continuously polls for updates from the [LangSmith control plane](control-plane.md).
@@ -99,7 +107,7 @@ Agent Server is automatically configured to perform license key validation. See 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

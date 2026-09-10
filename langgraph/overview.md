@@ -1,3 +1,11 @@
+---
+title: "LangGraph overview"
+description: "Gain control with LangGraph to design agents that reliably handle complex tasks"
+source: "https://docs.langchain.com/oss/python/langgraph/overview"
+category: "docs"
+tags: [docs, langgraph]
+---
+
 # LangGraph overview
 
 > Gain control with LangGraph to design agents that reliably handle complex tasks
@@ -24,9 +32,13 @@ Read [Frameworks, runtimes, and harnesses](../concepts/products.md) for a compar
 
 ##  Install
 
+**pip**
+
 ```bash
 pip install -U langgraph
 ```
+
+**uv**
 
 ```bash
 uv add langgraph
@@ -83,7 +95,7 @@ LangGraph is inspired by [Pregel](https://research.google/pubs/pub37252/) and [A
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Delete a gateway policy"
+description: "Deletes a gateway policy. Subsequent reads return 404."
+source: "https://docs.langchain.com/langsmith/smith-api/gateway-policies/delete-a-gateway-policy"
+category: "docs"
+tags: [docs, langsmith, smith-api, gateway-policies, delete-a-gateway-policy]
+---
+
 # Delete a gateway policy
 
 > Deletes a gateway policy. Subsequent reads return 404.
@@ -7,6 +15,8 @@
 materialized from it.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/gateway-policies/{id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Messages view integrations"
+description: "Frameworks and SDKs that render in the LangSmith Messages view and the metadata each one sets."
+source: "https://docs.langchain.com/langsmith/messages-view-integrations"
+category: "docs"
+tags: [docs, langsmith, messages-view-integrations]
+---
+
 # Messages view integrations
 
 > Frameworks and SDKs that render in the LangSmith Messages view and the metadata each one sets.
@@ -44,6 +52,8 @@ When you chain calls to the OpenAI Responses API by passing `previous_response_i
 
 Set `thread_id` on each call. Use this when one wrapped client serves multiple threads (for example, one client per process, many concurrent conversations).
 
+**Python**
+
 ```python
 import openai
 from langsmith import uuid7
@@ -67,6 +77,8 @@ res2 = client.responses.create(
     langsmith_extra={"metadata": {"thread_id": thread_id}},
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -96,6 +108,8 @@ const res2 = await client.responses.create({
 
 Set `thread_id` once when wrapping the client. Every call made through this wrapper is tagged with the same thread. Use this when a wrapped client serves exactly one thread for its lifetime (for example, a per-conversation worker).
 
+**Python**
+
 ```python
 import openai
 from langsmith import uuid7
@@ -121,6 +135,8 @@ res2 = client.responses.create(
     store=True,
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -149,6 +165,8 @@ const res2 = await client.responses.create({
 
 When you write your own guardrail, policy check, or middleware function around an LLM or tool call, wrap it in `@traceable` and set `ls_agent_type: "middleware"` on the metadata. The Messages view filters these runs out of the main conversation.
 
+**Python**
+
 ```python
 from langsmith import traceable
 
@@ -160,6 +178,8 @@ def entry_guardrail(prompt: str) -> dict:
     # Your guardrail logic
     return {"decision": "allow"}
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -362,7 +382,7 @@ If you trace without one of the wrappers in [Supported integrations](#supported-
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/messages-view-integrations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

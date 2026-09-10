@@ -1,3 +1,11 @@
+---
+title: "Trace without setting environment variables"
+description: "The following environment variables allow you to configure tracing enabled, the API endpoint, the API key, and the tracing project:"
+source: "https://docs.langchain.com/langsmith/trace-without-env-vars"
+category: "docs"
+tags: [docs, langsmith, trace-without-env-vars]
+---
+
 # Trace without setting environment variables
 
 The following environment variables allow you to configure tracing enabled, the API endpoint, the API key, and the tracing project:
@@ -14,6 +22,8 @@ If you need to trace runs with a custom configuration, are working in an environ
 
 * Python: The recommended way to do this in Python is to use the [`tracing_context`](annotate-code.md#use-the-trace-context-manager-python-only) context manager. This works for both code annotated with `traceable` and code within the `trace` context manager.
 * TypeScript: You can pass in both the client and the `tracingEnabled` flag to the [`traceable`](https://reference.langchain.com/javascript/langsmith/traceable) decorator.
+
+**Python**
 
 ```python
 import openai
@@ -49,6 +59,8 @@ with tracing_context(enabled=True):
   # Use langsmith_extra to pass in a custom client
   chat_pipeline("Can you summarize this morning's meetings?", langsmith_extra={"client": langsmith_client})
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -96,7 +108,7 @@ If you need to dynamically enable or disable tracing based on runtime conditions
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-without-env-vars.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Alerts in LangSmith"
+description: "Self-hosted version requirement: Access to alerts requires Helm chart version 0.10.3 or later."
+source: "https://docs.langchain.com/langsmith/alerts"
+category: "docs"
+tags: [docs, langsmith, alerts]
+---
+
 # Alerts in LangSmith
 
 > [!NOTE]
@@ -101,7 +109,7 @@ If on a custom deployment of LangSmith, make sure there are no firewall settings
 ### 1. Create a Service in PagerDuty
 
 1. Log in to your PagerDuty account
-2. Navigate to **Services → Service Directory**
+2. Navigate to **Services > Service Directory**
 3. Click **+ New Service**
 4. Complete the following fields:
    * **Name**: Provide a descriptive name (e.g., "LangSmith Monitoring")
@@ -333,7 +341,7 @@ You also need the channel ID to configure the webhook alert in LangSmith. You ca
 **Step 5: Configure the webhook alert in LangSmith**
 
 1. In LangSmith, navigate to your project.
-2. Select **Alerts → Create Alert**.
+2. Select **Alerts > Create Alert**.
 3. Define your alert metrics and conditions.
 4. In the notification section, select **Webhook**.
 5. Configure the webhook with the following settings:
@@ -446,7 +454,7 @@ The default workflow posts the raw JSON body as a card. To format alert details,
 **Step 3: Configure the webhook alert in LangSmith**
 
 1. In LangSmith, navigate to your project.
-2. Select **Alerts → Create Alert**.
+2. Select **Alerts > Create Alert**.
 3. Define your alert metrics and conditions.
 4. In the notification section, select **Webhook**.
 5. Configure the webhook with the following settings:
@@ -503,20 +511,20 @@ Here is an example for configuring LangSmith alerts to send email notifications 
 **Step 1: Create a SendGrid API key**
 
 1. Log in to your [SendGrid dashboard](https://app.sendgrid.com).
-2. Navigate to **Settings → API Keys**.
+2. Navigate to **Settings > API Keys**.
 3. Click **Create API Key**.
-4. Choose **Restricted Access** and enable **Mail Send → Full Access**.
+4. Choose **Restricted Access** and enable **Mail Send > Full Access**.
 5. Click **Create & View**, copy the key, and store it securely.
 
 **Step 2: Verify your sender email**
 
-1. In SendGrid, navigate to **Settings → Sender Authentication**.
+1. In SendGrid, navigate to **Settings > Sender Authentication**.
 2. Complete either **Domain Authentication** (recommended) or **Single Sender Verification** for the address you want to send from.
 
 **Step 3: Configure the webhook alert in LangSmith**
 
 1. In LangSmith, navigate to your project.
-2. Select **Alerts → Create Alert**.
+2. Select **Alerts > Create Alert**.
 3. Define your alert metrics and conditions.
 4. In the notification section, select **Webhook**.
 5. Configure the webhook with the following settings:
@@ -606,7 +614,7 @@ This approach uses a small HTTP handler that receives the LangSmith webhook, ext
 
 **Prerequisites**
 
-* A Google Chat space with an incoming webhook configured. In Google Chat, open the space → **Apps & integrations** → **Add webhooks**, create a webhook, and copy the URL.
+* A Google Chat space with an incoming webhook configured. In Google Chat, open the space, then go to **Apps & integrations** > **Add webhooks**, create a webhook, and copy the URL.
 * A Google Cloud project with Cloud Run or Cloud Functions enabled, or equivalent hosting.
 
 **Step 1: Deploy the handler**
@@ -718,7 +726,7 @@ function doPost(e) {
 }
 ```
 
-Set `GCHAT_WEBHOOK_URL` and `LANGSMITH_SHARED_SECRET` in **Project Settings → Script Properties**.
+Set `GCHAT_WEBHOOK_URL` and `LANGSMITH_SHARED_SECRET` in **Project Settings > Script Properties**.
 
 > [!WARNING]
 > Apps Script web apps cannot read custom HTTP request headers, so the shared secret must be passed as a **query string parameter** (`?secret=...`) rather than a header. Include it in the LangSmith webhook URL rather than the Headers field.
@@ -744,7 +752,7 @@ Set `GCHAT_WEBHOOK_URL` and `LANGSMITH_SHARED_SECRET` in **Project Settings → 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/alerts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Generative UI overview"
+description: "Understand the generative UI spectrum from controlled to declarative to open-ended interfaces"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview"
+category: "docs"
+tags: [docs, langchain, frontend, generative-ui-overview]
+---
+
 # Generative UI overview
 
 > Understand the generative UI spectrum from controlled to declarative to open-ended interfaces
@@ -122,7 +130,7 @@ Render UI created elsewhere, such as sandboxed MCP Apps.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/generative-ui-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

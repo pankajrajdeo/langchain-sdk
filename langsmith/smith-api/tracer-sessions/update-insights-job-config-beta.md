@@ -1,8 +1,18 @@
+---
+title: "Update insights job config (Beta)"
+description: "Update an insights job config."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/update-insights-job-config-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, update-insights-job-config-beta]
+---
+
 # Update insights job config (Beta)
 
 > Update an insights job config.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/sessions/{session_id}/insights/configs/{config_id}**
 
 ````yaml
 openapi: 3.1.0

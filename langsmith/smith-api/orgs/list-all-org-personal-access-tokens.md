@@ -1,8 +1,18 @@
+---
+title: "List all org personal access tokens"
+description: "List every organization member's personal access tokens."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/list-all-org-personal-access-tokens"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, list-all-org-personal-access-tokens]
+---
+
 # List all org personal access tokens
 
 > List every organization member's personal access tokens.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/members/personal-access-tokens**
 
 ````yaml
 openapi: 3.1.0
@@ -243,6 +253,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

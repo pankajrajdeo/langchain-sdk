@@ -1,3 +1,11 @@
+---
+title: "LangSmith CLI"
+description: "Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal"
+source: "https://docs.langchain.com/langsmith/langsmith-cli"
+category: "docs"
+tags: [docs, langsmith, langsmith-cli]
+---
+
 # LangSmith CLI
 
 > Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal
@@ -6,26 +14,38 @@ The LangSmith CLI is a command-line tool for querying and managing your LangSmit
 
 ## Install
 
+**macOS / Linux (recommended)**
+
 ```bash
 curl -fsSL https://cli.langsmith.com/install.sh | sh
 ```
+
+**Windows**
 
 ```powershell
 irm https://cli.langsmith.com/install.ps1 | iex
 ```
 
+**Homebrew**
+
 ```bash
 brew install langchain-ai/tap/langsmith-cli
 ```
+
+**Scoop**
 
 ```powershell
 scoop install langsmith-cli
 ```
 
+**GitHub Releases**
+
 ```bash
 # Download the latest binary for your platform:
 # https://github.com/langchain-ai/langsmith-cli/releases
 ```
+
+**Go install**
 
 ```bash
 go install github.com/langchain-ai/langsmith-cli/cmd/langsmith@latest
@@ -393,7 +413,7 @@ Most `trace` and `run` commands share these filters:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

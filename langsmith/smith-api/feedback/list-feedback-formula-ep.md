@@ -1,3 +1,11 @@
+---
+title: "List feedback formula ep"
+description: "List feedback formulas for a given dataset or tracing project"
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/list-feedback-formula-ep"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, list-feedback-formula-ep]
+---
+
 # List feedback formula ep
 
 > List feedback formulas for a given dataset or tracing project
@@ -5,6 +13,8 @@
 Deprecated: superseded by composite-feedback v2, where composites are code evaluators with run rules.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/feedback/formulas**
 
 ````yaml
 openapi: 3.1.0

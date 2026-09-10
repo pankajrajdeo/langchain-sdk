@@ -1,3 +1,11 @@
+---
+title: "How to add custom routes"
+description: "When deploying agents to LangSmith Deployment, your server automatically exposes routes for creating runs and threads, interacting with the long-term memory store, managing configurable assistants..."
+source: "https://docs.langchain.com/langsmith/custom-routes"
+category: "docs"
+tags: [docs, langsmith, custom-routes]
+---
+
 # How to add custom routes
 
 When deploying agents to LangSmith Deployment, your server automatically exposes routes for creating runs and threads, interacting with the long-term memory store, managing configurable assistants, and other core functionality ([see all default API endpoints](server-api-ref.md)).
@@ -117,7 +125,7 @@ Now that you've added a custom route to your deployment, you can use this same t
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-routes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

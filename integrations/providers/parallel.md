@@ -1,3 +1,11 @@
+---
+title: "Parallel integrations"
+description: "Integrate with Parallel using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/parallel"
+category: "docs"
+tags: [docs, integrations, providers, parallel]
+---
+
 # Parallel integrations
 
 > Integrate with Parallel using LangChain Python.
@@ -8,9 +16,13 @@ This page covers all LangChain integrations with [Parallel](https://platform.par
 
 The `Parallel` integration lives in its own [partner package](https://pypi.org/project/langchain-parallel/):
 
+**pip**
+
 ```bash
 pip install -U langchain-parallel
 ```
+
+**uv**
 
 ```bash
 uv add langchain-parallel
@@ -48,7 +60,7 @@ Schedule a query on a recurring cadence and receive events when relevant new con
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

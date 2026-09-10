@@ -1,8 +1,18 @@
+---
+title: "Update insights job (Beta)"
+description: "Update a session cluster job."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/update-insights-job-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, update-insights-job-beta]
+---
+
 # Update insights job (Beta)
 
 > Update a session cluster job.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/sessions/{session_id}/insights/{job_id}**
 
 ````yaml
 openapi: 3.1.0

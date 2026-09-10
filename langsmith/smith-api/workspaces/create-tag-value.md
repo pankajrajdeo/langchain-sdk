@@ -1,6 +1,16 @@
+---
+title: "Create tag value"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/create-tag-value"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, create-tag-value]
+---
+
 # Create tag value
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Get Thread State"
+description: "Get state for a thread."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-state"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, get-thread-state]
+---
+
 # Get Thread State
 
 > Get state for a thread.
@@ -5,6 +13,8 @@
 The latest state of the thread (i.e. latest checkpoint) is returned.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /threads/{thread_id}/state**
 
 ````yaml
 openapi: 3.1.0

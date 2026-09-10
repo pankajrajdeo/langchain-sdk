@@ -1,3 +1,11 @@
+---
+title: "List runs of one trace in a public shared thread"
+description: "Returns every run in the given trace, provided that trace's root belongs to the shared thread."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/list-runs-of-one-trace-in-a-public-shared-thread"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, list-runs-of-one-trace-in-a-public-shared-thread]
+---
+
 # List runs of one trace in a public shared thread
 
 > Returns every run in the given trace, provided that trace's root belongs to the shared thread.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/public/threads/{share_token}/traces/{trace_id}/runs**
 
 ````yaml
 openapi: 3.1.0
@@ -198,9 +208,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Selects
       responses:
         '200':

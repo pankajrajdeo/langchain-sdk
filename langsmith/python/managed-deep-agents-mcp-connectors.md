@@ -1,3 +1,11 @@
+---
+title: "Connect to MCP servers"
+description: "Add tools from remote MCP servers to Managed Deep Agents."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-mcp-connectors"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-mcp-connectors]
+---
+
 # Connect to MCP servers
 
 > Add tools from remote MCP servers to Managed Deep Agents.
@@ -25,6 +33,8 @@ The module must export a module-level `mcp`.
 ## Add MCP servers
 
 Use `define_mcp` to declare one or more remote servers:
+
+**tools/mcp.py**
 
 ```python
 from managed_deepagents import define_mcp
@@ -99,7 +109,7 @@ For create modes, owners, and runtime authorization, see [Manage connections](ma
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-mcp-connectors.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

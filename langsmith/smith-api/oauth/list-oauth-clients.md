@@ -1,8 +1,18 @@
+---
+title: "List oauth clients"
+description: "Lists the OAuth clients owned by the caller's organization."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/list-oauth-clients"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, list-oauth-clients]
+---
+
 # List oauth clients
 
 > Lists the OAuth clients owned by the caller's organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/oauth/clients**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Self-hosted platform features"
+description: "Self-hosted-only platform features for LangSmith Deployment, including custom databases, listeners, and resource customization."
+source: "https://docs.langchain.com/langsmith/self-hosted-platform-features"
+category: "docs"
+tags: [docs, langsmith, self-hosted-platform-features]
+---
+
 # Self-hosted platform features
 
 > Self-hosted-only platform features for LangSmith Deployment, including custom databases, listeners, and resource customization.
@@ -29,7 +37,7 @@ Resources for self-hosted deployments can be fully customized. Unlike Cloud, whi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-platform-features.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

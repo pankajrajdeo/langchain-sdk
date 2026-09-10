@@ -1,3 +1,11 @@
+---
+title: "Self-hosted LangSmith"
+description: "Self-hosted LangSmith is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to Pricing. Contact our sales team if you want to get a..."
+source: "https://docs.langchain.com/langsmith/self-hosted"
+category: "docs"
+tags: [docs, langsmith, self-hosted]
+---
+
 # Self-hosted LangSmith
 
 > [!NOTE]
@@ -73,7 +81,7 @@ To install, follow the [Kubernetes setup guide](kubernetes.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

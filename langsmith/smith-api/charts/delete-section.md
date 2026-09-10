@@ -1,8 +1,18 @@
+---
+title: "Delete section"
+description: "Delete a section."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/delete-section"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, delete-section]
+---
+
 # Delete section
 
 > Delete a section.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/charts/section/{section_id}**
 
 ````yaml
 openapi: 3.1.0

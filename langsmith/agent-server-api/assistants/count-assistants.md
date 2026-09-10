@@ -1,8 +1,18 @@
+---
+title: "Count Assistants"
+description: "Get the count of assistants matching the specified criteria."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/count-assistants"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, count-assistants]
+---
+
 # Count Assistants
 
 > Get the count of assistants matching the specified criteria.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /assistants/count**
 
 ````yaml
 openapi: 3.1.0

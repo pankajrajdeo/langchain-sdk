@@ -1,3 +1,11 @@
+---
+title: "Security policy"
+description: "LangChain has a large ecosystem of integrations with various external resources like local and remote file systems, APIs and databases. These integrations allow developers to create versatile..."
+source: "https://docs.langchain.com/oss/python/security-policy"
+category: "docs"
+tags: [docs, security-policy]
+---
+
 # Security policy
 
 LangChain has a large ecosystem of integrations with various external resources like local and remote file systems, APIs and databases. These integrations allow developers to create versatile applications that combine the power of LLMs with the ability to access, interact with and manipulate external resources.
@@ -69,7 +77,7 @@ For any other security concerns, please contact us at `security@langchain.dev`.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/security-policy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

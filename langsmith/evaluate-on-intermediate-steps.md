@@ -1,3 +1,11 @@
+---
+title: "How to evaluate an application's intermediate steps"
+description: "While, in many scenarios, it is sufficient to evaluate the final output of your task, in some cases you might want to evaluate the intermediate steps of your pipeline."
+source: "https://docs.langchain.com/langsmith/evaluate-on-intermediate-steps"
+category: "docs"
+tags: [docs, langsmith, evaluate-on-intermediate-steps]
+---
+
 # How to evaluate an application's intermediate steps
 
 While, in many scenarios, it is sufficient to evaluate the final output of your task, in some cases you might want to evaluate the intermediate steps of your pipeline.
@@ -15,15 +23,21 @@ In order to evaluate the intermediate steps of your pipeline, your evaluator fun
 
 The below RAG pipeline consists of 1) generating a Wikipedia query given the input question, 2) retrieving relevant documents from Wikipedia, and 3) generating an answer given the retrieved documents.
 
+**Python**
+
 ```bash
 pip install -U langsmith langchain[openai] wikipedia
 ```
+
+**TypeScript**
 
 ```bash
 yarn add langsmith langchain @langchain/openai wikipedia
 ```
 
 Requires `langsmith>=0.3.13`
+
+**Python**
 
 ```python
 import wikipedia as wp
@@ -90,6 +104,8 @@ def qa_pipeline(question: str) -> str:
     context = "\n\n".join([doc["page_content"] for doc in retrieve(query)])
     return generate_answer(question, context)
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -187,6 +203,8 @@ We are building a very simple dataset with a couple of examples to evaluate the 
 
 Requires `langsmith>=0.3.13`
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -204,6 +222,8 @@ if not ls_client.has_dataset(dataset_name=dataset_name):
       examples=examples,
     )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -233,6 +253,8 @@ As mentioned above, we will define two evaluators: one that evaluates the releva
 The key here is that the evaluator function should traverse the `run` / `rootRun` argument to access the intermediate steps of the pipeline. The evaluator can then process the inputs and outputs of the intermediate steps to evaluate according to the desired criteria.
 
 Example uses `langchain` for convenience, this is not required.
+
+**Python**
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -293,6 +315,8 @@ def no_hallucination(run: Run) -> bool:
     grade = grader_llm.invoke(messages)
     return grade.is_grounded
 ```
+
+**TypeScript**
 
 ```typescript
 import { EvaluationResult } from "langsmith/evaluation";
@@ -375,6 +399,8 @@ async function hallucination(
 
 Finally, we'll run `evaluate` with the custom evaluators defined above.
 
+**Python**
+
 ```python
 def qa_wrapper(inputs: dict) -> dict:
   """Wrap the qa_pipeline so it can accept the Example.inputs dict as input."""
@@ -387,6 +413,8 @@ experiment_results = ls_client.evaluate(
     experiment_prefix="rag-wiki-oai"
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { evaluate } from "langsmith/evaluation";
@@ -407,7 +435,7 @@ The experiment will contain the results of the evaluation, including the scores 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-on-intermediate-steps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

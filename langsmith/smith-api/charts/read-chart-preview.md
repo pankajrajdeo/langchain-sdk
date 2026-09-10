@@ -1,8 +1,18 @@
+---
+title: "Read chart preview"
+description: "Get a preview for a chart without actually creating it."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/read-chart-preview"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, read-chart-preview]
+---
+
 # Read chart preview
 
 > Get a preview for a chart without actually creating it.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/charts/preview**
 
 ````yaml
 openapi: 3.1.0

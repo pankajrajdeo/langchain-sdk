@@ -1,3 +1,11 @@
+---
+title: "Cross encoder reranker integration"
+description: "Rerank retrieved documents with open-source cross-encoder models using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/document_transformers/cross_encoder_reranker"
+category: "docs"
+tags: [docs, integrations, document_transformers, cross_encoder_reranker]
+---
+
 # Cross encoder reranker integration
 
 > Rerank retrieved documents with open-source cross-encoder models using LangChain Python.
@@ -138,7 +146,7 @@ def transform_fn(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/cross_encoder_reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

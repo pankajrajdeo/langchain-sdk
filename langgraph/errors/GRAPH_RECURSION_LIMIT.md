@@ -1,3 +1,11 @@
+---
+title: "GRAPH_RECURSION_LIMIT"
+description: "Your LangGraph StateGraph reached the maximum number of steps before hitting a stop condition. This is often due to an infinite loop caused by code like the example below:"
+source: "https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT"
+category: "docs"
+tags: [docs, langgraph, errors, graph_recursion_limit]
+---
+
 # GRAPH_RECURSION_LIMIT
 
 Your LangGraph [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) reached the maximum number of steps before hitting a stop condition.
@@ -36,7 +44,7 @@ graph.invoke({...}, {"recursion_limit": 1000})
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/GRAPH_RECURSION_LIMIT.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

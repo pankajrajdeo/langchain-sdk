@@ -1,3 +1,11 @@
+---
+title: "Model providers"
+description: "The Playground supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts."
+source: "https://docs.langchain.com/langsmith/playground-model-providers"
+category: "docs"
+tags: [docs, langsmith, playground-model-providers]
+---
+
 # Model providers
 
 The [Playground](prompt-engineering-concepts.md#playground) supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
@@ -314,7 +322,7 @@ Gemini Enterprise Agent Platform uses a **service account JSON key** for authent
 
 #### Step 1: Create a service account
 
-1. Go to the [Google Cloud Console → IAM & Admin → Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts).
+1. Go to the [Google Cloud Console > IAM & Admin > Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts).
 2. Select your project and click **Create Service Account**.
 3. Give it a name (e.g., `langsmith-vertex-ai`) and click **Create and Continue**.
 4. Assign the role **Vertex AI User** (`roles/aiplatform.user`) and click **Done**.
@@ -322,7 +330,7 @@ Gemini Enterprise Agent Platform uses a **service account JSON key** for authent
 #### Step 2: Download the JSON key
 
 1. Click on the service account you just created.
-2. Go to the **Keys** tab and click **Add Key → Create new key**.
+2. Go to the **Keys** tab and click **Add Key > Create new key**.
 3. Choose **JSON** and click **Create**. A `.json` file will download to your machine.
 
 The downloaded file looks like this:
@@ -621,7 +629,7 @@ Get started building prompts with your chosen model provider.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/playground-model-providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

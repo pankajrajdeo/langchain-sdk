@@ -1,8 +1,18 @@
+---
+title: "Lookup SSO by email"
+description: "Look up SSO providers available for a SCIM-provisioned email address."
+source: "https://docs.langchain.com/langsmith/smith-api/auth/lookup-sso-by-email"
+category: "docs"
+tags: [docs, langsmith, smith-api, auth, lookup-sso-by-email]
+---
+
 # Lookup SSO by email
 
 > Look up SSO providers available for a SCIM-provisioned email address.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/sso/email-lookup**
 
 ````yaml
 openapi: 3.1.0

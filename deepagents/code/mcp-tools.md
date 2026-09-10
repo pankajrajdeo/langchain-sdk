@@ -1,3 +1,11 @@
+---
+title: "MCP tools"
+description: "Load additional tools from MCP (Model Context Protocol) servers"
+source: "https://docs.langchain.com/oss/deepagents/code/mcp-tools"
+category: "docs"
+tags: [docs, deepagents, code, mcp-tools]
+---
+
 # MCP tools
 
 > Load additional tools from MCP (Model Context Protocol) servers
@@ -6,7 +14,7 @@
 
 Add MCP servers by adding a `.mcp.json` config file to your project for project-level scope, or at user-level to apply to all projects.
 
-Paste this prompt into your coding agent to connect the servers, or follow the steps below for Deep Agents Code specifically. For other editors, see [Use docs programmatically](https://docs.langchain.com/use-these-docs).
+Paste this prompt into your coding agent to connect the servers, or follow the steps below for Deep Agents Code specifically. For other editors, see [Use docs programmatically](../../use-these-docs.md).
 
 > **Prompt:** Connect LangChain docs MCP servers
 Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
@@ -16,7 +24,7 @@ Servers to add:
 * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
 * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
 
-Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](https://docs.langchain.com/use-these-docs.md):
+Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../../use-these-docs.md):
 
 * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
 * Codex CLI: `codex mcp add` with each server URL.
@@ -542,7 +550,7 @@ Export the variable in the parent shell, add it to `~/.deepagents/.env`, or give
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/mcp-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

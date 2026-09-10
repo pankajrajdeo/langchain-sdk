@@ -1,3 +1,11 @@
+---
+title: "All LangChain Python integration providers"
+description: "Browse the complete collection of integrations available for Python. LangChain Python offers the most extensive ecosystem with 1000+ integrations across LLMs, chat models, retrievers, vector stores..."
+source: "https://docs.langchain.com/oss/python/integrations/providers/all_providers"
+category: "docs"
+tags: [docs, integrations, providers, all_providers]
+---
+
 # All LangChain Python integration providers
 
 Browse the complete collection of integrations available for Python. LangChain Python offers the most extensive ecosystem with 1000+ integrations across LLMs, chat models, retrievers, vector stores, document loaders, and more.
@@ -220,6 +228,9 @@ Multilingual audio and localization services supporting 140+ languages.
 #### [Capsule](https://github.com/mavdol/langchain-capsule)
 Run Python and JavaScript code in isolated WebAssembly sandboxes.
 
+#### [Capslane](https://capslane.com/integrations/langchain)
+Loads timestamped video transcript passages into LangChain Documents with playback citations and optional asynchronous transcription.
+
 #### [Cerebras](cerebras.md)
 AI compute platform with specialized processors.
 
@@ -405,6 +416,9 @@ Financial market data and analytics API.
 
 #### [Football Charts](https://www.football-charts.com/developers)
 Football statistics, model probabilities, and Monte Carlo season projections for 90+ leagues.
+
+#### [FoxNose](https://langchain-foxnose.readthedocs.io/)
+Retriever, document loader and agent tool for FoxNose collections, with text, vector, hybrid and vector-boosted search over the Flux delivery API.
 
 #### [Galaxia](https://smabbler.gitbook.io/smabbler/api-rag/smabblers-api-rag)
 Prompt-driven engineering assistant.
@@ -1339,7 +1353,7 @@ Reference management and research tool.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/all_providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

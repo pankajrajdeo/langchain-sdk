@@ -1,8 +1,18 @@
+---
+title: "Update current org member"
+description: "This is used for updating a user's role (all auth modes) or full_name/password (basic auth)"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/update-current-org-member"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, update-current-org-member]
+---
+
 # Update current org member
 
 > This is used for updating a user's role (all auth modes) or full_name/password (basic auth)
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/orgs/current/members/{identity_id}**
 
 ````yaml
 openapi: 3.1.0

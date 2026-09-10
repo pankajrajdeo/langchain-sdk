@@ -1,8 +1,18 @@
+---
+title: "Update Cron"
+description: "Update a cron job by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/crons/update-cron"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, crons, update-cron]
+---
+
 # Update Cron
 
 > Update a cron job by ID.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json patch /runs/crons/{cron_id}**
 
 ````yaml
 openapi: 3.1.0

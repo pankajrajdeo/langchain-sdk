@@ -1,3 +1,11 @@
+---
+title: "Errors"
+description: "This page contains guides around resolving common errors you may find while building with LangChain and LangGraph."
+source: "https://docs.langchain.com/oss/python/common-errors"
+category: "docs"
+tags: [docs, common-errors]
+---
+
 # Errors
 
 This page contains guides around resolving common errors you may find while building with LangChain and LangGraph.
@@ -23,7 +31,7 @@ Errors referenced below will have an `lc_error_code` property corresponding to o
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/common-errors.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

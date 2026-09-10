@@ -1,8 +1,18 @@
+---
+title: "Delete comparative experiment"
+description: "Delete a specific comparative experiment."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/delete-comparative-experiment"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, delete-comparative-experiment]
+---
+
 # Delete comparative experiment
 
 > Delete a specific comparative experiment.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/datasets/comparative/{comparative_experiment_id}**
 
 ````yaml
 openapi: 3.1.0

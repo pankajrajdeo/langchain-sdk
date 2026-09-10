@@ -1,3 +1,11 @@
+---
+title: "How to use Studio"
+description: "This page describes the core workflows you’ll use in Studio. It explains how to run your application, manage assistant configurations, and work with conversation threads. Each section includes steps..."
+source: "https://docs.langchain.com/langsmith/use-studio"
+category: "docs"
+tags: [docs, langsmith, use-studio]
+---
+
 # How to use Studio
 
 This page describes the core workflows you’ll use in Studio. It explains how to run your application, manage assistant configurations, and work with conversation threads. Each section includes steps in both graph mode (full-featured view of your graph’s execution) and chat mode (lightweight conversational interface):
@@ -117,7 +125,7 @@ Refer to the following guides for more detail on tasks you can complete in Studi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

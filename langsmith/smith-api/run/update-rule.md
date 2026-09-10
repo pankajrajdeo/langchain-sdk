@@ -1,8 +1,18 @@
+---
+title: "Update rule"
+description: "Update a run rule."
+source: "https://docs.langchain.com/langsmith/smith-api/run/update-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, update-rule]
+---
+
 # Update rule
 
 > Update a run rule.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/runs/rules/{rule_id}**
 
 ````yaml
 openapi: 3.1.0

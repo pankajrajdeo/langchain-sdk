@@ -1,8 +1,18 @@
+---
+title: "Org update section"
+description: "Deprecated: organization usage charts have been retired (HTTP 410)."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/org-update-section"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, org-update-section]
+---
+
 # Org update section
 
 > Deprecated: organization usage charts have been retired (HTTP 410).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/org-charts/section/{section_id}**
 
 ````yaml
 openapi: 3.1.0

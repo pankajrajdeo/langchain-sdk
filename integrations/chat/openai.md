@@ -1,3 +1,11 @@
+---
+title: "ChatOpenAI integration"
+description: "Integrate with the ChatOpenAI chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/openai"
+category: "docs"
+tags: [docs, integrations, chat, openai]
+---
+
 # ChatOpenAI integration
 
 > Integrate with the ChatOpenAI chat model using LangChain Python.
@@ -34,9 +42,13 @@ To access OpenAI models you'll need to install the `langchain-openai` integratio
 
 ### Installation
 
+**pip**
+
 ```bash
 pip install -U langchain-openai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-openai
@@ -315,6 +327,22 @@ ai_msg.tool_calls
 ```
 
 For more on binding tools and tool call outputs, head to the [tool calling](../../langchain/tools.md) docs.
+
+### Async tools
+
+[Async tool calling](https://developers.openai.com/api/docs/guides/async-tool-calling) lets the model continue working after issuing a tool call, without waiting for the result. When using the Responses API, `ChatOpenAI` supports this by passing `extras={"async": True}` to `@tool`:
+
+```python
+from langchain.tools import tool
+
+@tool(extras={"async": True})  # [!code highlight]
+def lookup_price(sku: str) -> str:
+    """Look up the price of a product."""
+    return "1200"
+```
+
+> [!NOTE]
+> Async tools are only supported via the Responses API (`use_responses_api=True`). The `async` flag is round-tripped through the message history so that prompt-cache prefixes remain intact across turns.
 
 ### Custom tools
 
@@ -1176,6 +1204,8 @@ response_2.text
 
 OpenAI implements a [code interpreter](https://platform.openai.com/docs/guides/tools-code-interpreter) tool to support the sandboxed generation and execution of code.
 
+**Example use**
+
 ```python
 from langchain_openai import ChatOpenAI
 
@@ -1293,6 +1323,8 @@ follow_up = llm_with_tools.invoke(
 ### Remote MCP
 
 OpenAI implements a [remote MCP](https://platform.openai.com/docs/guides/tools-remote-mcp) tool that allows for model-generated calls to MCP servers.
+
+**Example use**
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -1527,6 +1559,33 @@ llm = ChatOpenAI(model="gpt-5-nano", reasoning_effort="medium")
 > [!NOTE]
 > `reasoning_effort` as a standard parameter requires `langchain-openai>=1.4.1`.
 
+### Changing reasoning effort mid-conversation
+
+Use a [`configuration_update`](https://developers.openai.com/api/docs/guides/reasoning?api-mode=responses#change-reasoning-mid-conversation) content block to change reasoning effort between turns without modifying the request-level `reasoning_effort` parameter — keeping the prompt prefix cacheable. Embed the block directly in a `HumanMessage`:
+
+```python
+from langchain_openai import ChatOpenAI
+from langchain.messages import HumanMessage
+
+llm = ChatOpenAI(model="gpt-6-astra", use_responses_api=True, reasoning_effort="low")
+
+first = llm.invoke("Hello")
+
+# Raise reasoning effort from this message onward
+response = llm.invoke(
+    [
+        "Hello",
+        first,
+        HumanMessage(
+            [
+                {"type": "configuration_update", "reasoning": {"effort": "high"}},  # [!code highlight]
+                {"type": "text", "text": "How many distinct 5-card poker hands are a full house?"},
+            ]
+        ),
+    ]
+)
+```
+
 > [!TIP]
 > **Troubleshooting: Empty responses from reasoning models**
 >
@@ -1587,6 +1646,8 @@ See below for examples of content blocks.
 
 Refer to examples in the [multimodal messages how-to guide](../../langchain/messages.md#multimodal).
 
+**URLs**
+
 ```python
 # LangChain format
 content_block = {
@@ -1600,6 +1661,8 @@ content_block = {
     "image_url": {"url": url_string},
 }
 ```
+
+**In-line base64 data**
 
 ```python
 # LangChain format
@@ -1629,6 +1692,8 @@ Read more about [OpenAI file names for multimodal messages](../../langchain/mess
 
 Refer to examples in the [PDF documents how-to guide](../../langchain/messages.md#multimodal).
 
+**In-line base64 data**
+
 ```python
 # LangChain format
 content_block = {
@@ -1656,6 +1721,8 @@ content_block = {
 See [supported models](https://platform.openai.com/docs/models), e.g., `"gpt-4o-audio-preview"`.
 
 Refer to examples in the [audio how-to guide](../../langchain/messages.md#multimodal).
+
+**In-line base64 data**
 
 ```python
 # LangChain format
@@ -2020,7 +2087,7 @@ For detailed documentation of all features and configuration options, head to th
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

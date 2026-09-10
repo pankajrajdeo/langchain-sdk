@@ -1,8 +1,18 @@
+---
+title: "Get bulk export destination"
+description: "Get a single bulk export destination by ID"
+source: "https://docs.langchain.com/langsmith/smith-api/bulk-exports/get-bulk-export-destination"
+category: "docs"
+tags: [docs, langsmith, smith-api, bulk-exports, get-bulk-export-destination]
+---
+
 # Get bulk export destination
 
 > Get a single bulk export destination by ID
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/bulk-exports/destinations/{destination_id}**
 
 ````yaml
 openapi: 3.1.0

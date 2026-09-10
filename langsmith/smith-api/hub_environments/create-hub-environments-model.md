@@ -1,8 +1,18 @@
+---
+title: "Create hub environments model"
+description: "Creates the hub environments configuration for the current tenant."
+source: "https://docs.langchain.com/langsmith/smith-api/hub_environments/create-hub-environments-model"
+category: "docs"
+tags: [docs, langsmith, smith-api, hub_environments, create-hub-environments-model]
+---
+
 # Create hub environments model
 
 > Creates the hub environments configuration for the current tenant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/hub/environments**
 
 ````yaml
 openapi: 3.1.0

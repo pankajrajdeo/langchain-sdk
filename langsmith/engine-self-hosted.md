@@ -1,3 +1,11 @@
+---
+title: "LangSmith Engine on Self-hosted"
+description: "Install LangSmith Engine on a self-hosted LangSmith instance, and understand what it depends on outside your environment and how it handles your data."
+source: "https://docs.langchain.com/langsmith/engine-self-hosted"
+category: "docs"
+tags: [docs, langsmith, engine-self-hosted]
+---
+
 # LangSmith Engine on Self-hosted
 
 > Install LangSmith Engine on a self-hosted LangSmith instance, and understand what it depends on outside your environment and how it handles your data.
@@ -350,7 +358,7 @@ Engine stops dispatching runs. Insights shares the same deployment, so the `stan
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

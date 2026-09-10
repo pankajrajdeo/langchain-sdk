@@ -1,6 +1,16 @@
+---
+title: "Get org usage"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/billing/usage"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/get-org-usage"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, get-org-usage]
+---
+
 # Get org usage
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/billing/usage**
 
 ````yaml
 openapi: 3.1.0

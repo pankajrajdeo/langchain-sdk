@@ -1,3 +1,11 @@
+---
+title: "Release policy"
+description: "This page explains the LangChain and LangGraph release policies. Click on the tabs below to view the release policies for each:"
+source: "https://docs.langchain.com/oss/python/release-policy"
+category: "docs"
+tags: [docs, release-policy]
+---
+
 # Release policy
 
 This page explains the LangChain and LangGraph release policies. Click on the tabs below to view the release policies for each:
@@ -224,7 +232,7 @@ After 1.0, Deep Agents will follow the same semantic versioning and LTS policies
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/release-policy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

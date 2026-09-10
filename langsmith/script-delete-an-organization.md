@@ -1,3 +1,11 @@
+---
+title: "Delete organizations"
+description: "The LangSmith UI does not currently support the deletion of an individual organization from a self-hosted instance of LangSmith. This, however, can be accomplished by directly removing all traces..."
+source: "https://docs.langchain.com/langsmith/script-delete-an-organization"
+category: "docs"
+tags: [docs, langsmith, script-delete-an-organization]
+---
+
 # Delete organizations
 
 The LangSmith UI does not currently support the deletion of an individual organization from a self-hosted instance of LangSmith. This, however, can be accomplished by directly removing all traces from all materialized views in ClickHouse (except the runs\_history views) and the runs and feedbacks tables and then removing the Organization from the Postgres tenants table.
@@ -72,7 +80,7 @@ If you visit the LangSmith UI, you should now see organization is no longer pres
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-delete-an-organization.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

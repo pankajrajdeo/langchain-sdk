@@ -1,3 +1,11 @@
+---
+title: "Subagents"
+description: "Learn how to use subagents to delegate work and keep context clean"
+source: "https://docs.langchain.com/oss/python/deepagents/subagents"
+category: "docs"
+tags: [docs, deepagents, subagents]
+---
+
 # Subagents
 
 > Learn how to use subagents to delegate work and keep context clean
@@ -148,6 +156,8 @@ You can create a custom subagent using LangChain's [`create_agent`](https://refe
 
 If you're creating a custom LangGraph graph, make sure that the graph has a [state key called `"messages"`](../langgraph/quickstart.md#2-define-state):
 
+**Google**
+
 ```python
 from deepagents import CompiledSubAgent, create_deep_agent
 from langchain.agents import create_agent
@@ -183,6 +193,8 @@ agent = create_deep_agent(
     subagents=subagents,
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import CompiledSubAgent, create_deep_agent
@@ -220,6 +232,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import CompiledSubAgent, create_deep_agent
 from langchain.agents import create_agent
@@ -255,6 +269,8 @@ agent = create_deep_agent(
     subagents=subagents,
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import CompiledSubAgent, create_deep_agent
@@ -292,6 +308,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import CompiledSubAgent, create_deep_agent
 from langchain.agents import create_agent
@@ -328,6 +346,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import CompiledSubAgent, create_deep_agent
 from langchain.agents import create_agent
@@ -363,6 +383,8 @@ agent = create_deep_agent(
     subagents=subagents,
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import CompiledSubAgent, create_deep_agent
@@ -473,6 +495,9 @@ result = agent.invoke(
 )
 ```
 
+#### [View example trace](https://smith.langchain.com/public/715bb23d-3529-4c28-b994-c174a89513ef/r)
+Open a public LangSmith run for this example.
+
 ### How it works
 
 A fork does not get a fresh task description. It gets the parent's own conversation, with one change: the trailing call that delegated to it is dropped and replaced with a short preamble marking the messages above as a continuation, not a fresh request. When the fork finishes, its answer comes back as a normal tool result, and the parent picks up right where it left off.
@@ -527,13 +552,19 @@ Reach for dynamic subagents when work spans many independent units (reviewing ev
 
 Dynamic subagents become available as soon as the agent has both subagents and the interpreter middleware. Install the QuickJS interpreter package, then add `CodeInterpreterMiddleware` to your agent.
 
+**pip**
+
 ```bash
 pip install -U "deepagents[quickjs]"
 ```
 
+**uv**
+
 ```bash
 uv add "deepagents[quickjs]"
 ```
+
+**Google**
 
 ```python
 from deepagents import create_deep_agent
@@ -550,6 +581,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -564,6 +597,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Anthropic**
 
 ```python
 from deepagents import create_deep_agent
@@ -580,6 +615,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -594,6 +631,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Fireworks**
 
 ```python
 from deepagents import create_deep_agent
@@ -610,6 +649,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -624,6 +665,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -641,7 +684,7 @@ agent = create_deep_agent(
 ```
 
 > [!NOTE]
-> Dynamic subagent dispatch is on by default whenever the agent has subagents and the interpreter middleware. Pass `CodeInterpreterMiddleware(subagents=False)` to require dispatch through the normal `task` tool path. Interpreters require `langchain-quickjs>=0.2.0` and Python `>=3.11`.
+> Dynamic subagent dispatch is on by default whenever the agent has subagents and the interpreter middleware. Pass `CodeInterpreterMiddleware(subagents=False)` to require dispatch through the normal `task` tool path. Interpreters require `langchain-quickjs>=0.2.0` and Python 3.11 or later.
 
 ### Trigger dynamic orchestration
 
@@ -694,6 +737,8 @@ Use [`stream_events`](event-streaming.md) to get typed projections—separate it
 
 The simplest pattern is to iterate `stream.subagents` to track each delegated task as it starts, runs, and completes. Each subagent handle exposes `.name`, `.messages`, `.tool_calls`, and `.output`.
 
+**Google**
+
 ```python
 from deepagents import (
     create_deep_agent
@@ -748,6 +793,8 @@ if __name__ == "__main__":
                 print(f"[{item.name}]", message.text)
             print(f"[{item.name}] status: {item.status}")
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import (
@@ -804,6 +851,8 @@ if __name__ == "__main__":
             print(f"[{item.name}] status: {item.status}")
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import (
     create_deep_agent
@@ -858,6 +907,8 @@ if __name__ == "__main__":
                 print(f"[{item.name}]", message.text)
             print(f"[{item.name}] status: {item.status}")
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import (
@@ -914,6 +965,8 @@ if __name__ == "__main__":
             print(f"[{item.name}] status: {item.status}")
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import (
     create_deep_agent
@@ -968,6 +1021,8 @@ if __name__ == "__main__":
                 print(f"[{item.name}]", message.text)
             print(f"[{item.name}] status: {item.status}")
 ```
+
+**Baseten**
 
 ```python
 from deepagents import (
@@ -1024,6 +1079,8 @@ if __name__ == "__main__":
             print(f"[{item.name}] status: {item.status}")
 ```
 
+**Ollama**
+
 ```python
 from deepagents import (
     create_deep_agent
@@ -1078,6 +1135,9 @@ if __name__ == "__main__":
                 print(f"[{item.name}]", message.text)
             print(f"[{item.name}] status: {item.status}")
 ```
+
+#### [View example trace](https://smith.langchain.com/public/a833f9e2-dc76-440a-81ff-3d24cd9cb6d3/r)
+Open a public LangSmith run for this example.
 
 ### LangSmith tracing
 
@@ -1141,6 +1201,8 @@ Subagents support [structured output](../langchain/structured-output.md), so the
 
 Pass `response_format` on the subagent config. When the subagent finishes, its structured response is JSON-serialized and returned as the `ToolMessage` content to the parent agent. The schema accepts anything supported by [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent): Pydantic models, `ToolStrategy(...)`, `ProviderStrategy(...)`, or a raw schema type.
 
+**Google**
+
 ```python
 import asyncio
 
@@ -1183,6 +1245,8 @@ result = asyncio.run(main())
 # The parent's ToolMessage contains JSON-serialized structured data:
 # '{"summary": "...", "confidence": 0.87, "sources": ["https://..."]}'
 ```
+
+**OpenAI**
 
 ```python
 import asyncio
@@ -1227,6 +1291,8 @@ result = asyncio.run(main())
 # '{"summary": "...", "confidence": 0.87, "sources": ["https://..."]}'
 ```
 
+**Anthropic**
+
 ```python
 import asyncio
 
@@ -1269,6 +1335,8 @@ result = asyncio.run(main())
 # The parent's ToolMessage contains JSON-serialized structured data:
 # '{"summary": "...", "confidence": 0.87, "sources": ["https://..."]}'
 ```
+
+**OpenRouter**
 
 ```python
 import asyncio
@@ -1313,6 +1381,8 @@ result = asyncio.run(main())
 # '{"summary": "...", "confidence": 0.87, "sources": ["https://..."]}'
 ```
 
+**Fireworks**
+
 ```python
 import asyncio
 
@@ -1356,6 +1426,8 @@ result = asyncio.run(main())
 # '{"summary": "...", "confidence": 0.87, "sources": ["https://..."]}'
 ```
 
+**Baseten**
+
 ```python
 import asyncio
 
@@ -1398,6 +1470,8 @@ result = asyncio.run(main())
 # The parent's ToolMessage contains JSON-serialized structured data:
 # '{"summary": "...", "confidence": 0.87, "sources": ["https://..."]}'
 ```
+
+**Ollama**
 
 ```python
 import asyncio
@@ -1459,6 +1533,8 @@ In addition to any user-defined subagents, every deep agent has access to a `gen
 
 Include a subagent with `name="general-purpose"` in your `subagents` list to replace the default. Use this to configure a different model, tools, or system prompt for the general-purpose subagent:
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -1481,6 +1557,8 @@ agent = create_deep_agent(
     ],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1505,6 +1583,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -1527,6 +1607,8 @@ agent = create_deep_agent(
     ],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1551,6 +1633,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -1574,6 +1658,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -1596,6 +1682,8 @@ agent = create_deep_agent(
     ],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1769,6 +1857,8 @@ data_analyst = {
 
 Create specialized subagents for different domains:
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -1799,6 +1889,8 @@ agent = create_deep_agent(
     subagents=subagents,
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1831,6 +1923,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -1861,6 +1955,8 @@ agent = create_deep_agent(
     subagents=subagents,
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1893,6 +1989,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -1924,6 +2022,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -1954,6 +2054,8 @@ agent = create_deep_agent(
     subagents=subagents,
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -2002,6 +2104,8 @@ When you invoke a parent agent with [runtime context](../langchain/runtime.md), 
 
 This means tools running inside any subagent can access the same context values you provided to the parent:
 
+**Google**
+
 ```python
 from dataclasses import dataclass
 
@@ -2039,6 +2143,8 @@ result = agent.invoke(
     context=Context(user_id="user-123", session_id="abc"),
 )
 ```
+
+**OpenAI**
 
 ```python
 from dataclasses import dataclass
@@ -2078,6 +2184,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from dataclasses import dataclass
 
@@ -2115,6 +2223,8 @@ result = agent.invoke(
     context=Context(user_id="user-123", session_id="abc"),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from dataclasses import dataclass
@@ -2154,6 +2264,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from dataclasses import dataclass
 
@@ -2192,6 +2304,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from dataclasses import dataclass
 
@@ -2229,6 +2343,8 @@ result = agent.invoke(
     context=Context(user_id="user-123", session_id="abc"),
 )
 ```
+
+**Ollama**
 
 ```python
 from dataclasses import dataclass
@@ -2272,6 +2388,8 @@ result = agent.invoke(
 
 All subagents receive the same parent context. To pass configuration that is specific to a particular subagent, use **namespaced keys** (prefix keys with the subagent name, for example `researcher:max_depth`) in a flat `context` mapping, **or** model those settings as separate fields on your context type:
 
+**Google**
+
 ```python
 from dataclasses import dataclass
 
@@ -2315,6 +2433,8 @@ result = agent.invoke(
     ),
 )
 ```
+
+**OpenAI**
 
 ```python
 from dataclasses import dataclass
@@ -2360,6 +2480,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from dataclasses import dataclass
 
@@ -2403,6 +2525,8 @@ result = agent.invoke(
     ),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from dataclasses import dataclass
@@ -2448,6 +2572,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from dataclasses import dataclass
 
@@ -2492,6 +2618,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from dataclasses import dataclass
 
@@ -2535,6 +2663,8 @@ result = agent.invoke(
     ),
 )
 ```
+
+**Ollama**
 
 ```python
 from dataclasses import dataclass
@@ -2653,6 +2783,8 @@ def flexible_search(query: str, runtime: ToolRuntime[Context]) -> str:
 
 2. **Instruct main agent to delegate:**
 
+**Google**
+
 ```python
    from deepagents import create_deep_agent
 
@@ -2671,6 +2803,8 @@ def flexible_search(query: str, runtime: ToolRuntime[Context]) -> str:
        ],
    )
 ```
+
+**OpenAI**
 
 ```python
    from deepagents import create_deep_agent
@@ -2691,6 +2825,8 @@ def flexible_search(query: str, runtime: ToolRuntime[Context]) -> str:
    )
 ```
 
+**Anthropic**
+
 ```python
    from deepagents import create_deep_agent
 
@@ -2709,6 +2845,8 @@ def flexible_search(query: str, runtime: ToolRuntime[Context]) -> str:
        ],
    )
 ```
+
+**OpenRouter**
 
 ```python
    from deepagents import create_deep_agent
@@ -2729,6 +2867,8 @@ def flexible_search(query: str, runtime: ToolRuntime[Context]) -> str:
    )
 ```
 
+**Fireworks**
+
 ```python
    from deepagents import create_deep_agent
 
@@ -2748,6 +2888,8 @@ def flexible_search(query: str, runtime: ToolRuntime[Context]) -> str:
    )
 ```
 
+**Baseten**
+
 ```python
    from deepagents import create_deep_agent
 
@@ -2766,6 +2908,8 @@ def flexible_search(query: str, runtime: ToolRuntime[Context]) -> str:
        ],
    )
 ```
+
+**Ollama**
 
 ```python
    from deepagents import create_deep_agent
@@ -2837,7 +2981,7 @@ subagents = [
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

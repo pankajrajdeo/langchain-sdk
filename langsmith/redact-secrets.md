@@ -1,3 +1,11 @@
+---
+title: "Redact secrets from traces"
+description: "Prevent API keys, tokens, and other secrets from appearing in LangSmith traces using the SDK anonymizer."
+source: "https://docs.langchain.com/langsmith/redact-secrets"
+category: "docs"
+tags: [docs, langsmith, redact-secrets]
+---
+
 # Redact secrets from traces
 
 > Prevent API keys, tokens, and other secrets from appearing in LangSmith traces using the SDK anonymizer.
@@ -5,7 +13,7 @@
 When your application handles API keys, tokens, or other credentials, those values can appear in LangSmith traces if they are passed as part of inputs or outputs. Use the LangSmith SDK's built-in anonymizer to redact secrets before they are sent to the backend.
 
 > [!NOTE]
-> This page covers redacting secrets (API keys, tokens, credentials) from trace data via the SDK. For redacting personally identifiable information (PII) such as emails, names, or SSNs, see [Prevent logging of sensitive data in traces](mask-inputs-outputs.md). To redact secrets at the LLM Gateway layer, see [Data protection](llm-gateway-data-protection.md).
+> This page covers redacting secrets (API keys, tokens, credentials) from trace data via the SDK. For redacting personally identifiable information (PII) such as emails, names, or SSNs, see [Prevent logging of sensitive data in traces](mask-inputs-outputs.md). To redact secrets at the LLM Gateway layer, see [Data policy](llm-gateway-data-policy.md).
 
 ## Use the SDK anonymizer
 
@@ -18,6 +26,8 @@ When your application handles API keys, tokens, or other credentials, those valu
 The `create_anonymizer` function accepts a list of regex patterns and replacement strings. Pass the resulting anonymizer to the [Client](https://reference.langchain.com/python/langsmith/client/Client) constructor, and it will automatically apply to all run inputs and outputs before they reach LangSmith.
 
 The following example redacts common secret formats, including OpenAI API keys, generic bearer tokens, and `sk-` prefixed keys:
+
+**Python**
 
 ```python
 from langsmith.anonymizer import create_anonymizer
@@ -47,6 +57,8 @@ call_external_api(
     prompt="What is LangSmith?",
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { createAnonymizer } from "langsmith/anonymizer";
@@ -94,6 +106,8 @@ anonymizer = create_anonymizer(
 
 If your redaction logic is more complex, pass a function instead of a list of patterns. The function receives a string and returns the redacted string:
 
+**Python**
+
 ```python
 import re
 from langsmith.anonymizer import create_anonymizer
@@ -112,6 +126,8 @@ def redact_secret_values(text: str) -> str:
 anonymizer = create_anonymizer(redact_secret_values)
 client = Client(anonymizer=anonymizer)
 ```
+
+**TypeScript**
 
 ```typescript
 import { createAnonymizer } from "langsmith/anonymizer";
@@ -141,7 +157,7 @@ For more options, including hiding all inputs and outputs, hiding metadata, func
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/redact-secrets.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

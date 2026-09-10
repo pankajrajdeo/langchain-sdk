@@ -1,3 +1,11 @@
+---
+title: "Build a voice agent with LangChain"
+description: "Chat interfaces have dominated how we interact with AI, but recent breakthroughs in multimodal AI are opening up exciting new possibilities. High-quality generative models and expressive..."
+source: "https://docs.langchain.com/oss/python/langchain/voice-agent"
+category: "docs"
+tags: [docs, langchain, voice-agent]
+---
+
 # Build a voice agent with LangChain
 
 ## Overview
@@ -493,7 +501,7 @@ For more on building agents with LangChain, see the [Agents guide](agents.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/voice-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

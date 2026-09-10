@@ -1,8 +1,18 @@
+---
+title: "Execute a sandbox command over WebSocket"
+description: "Open a WebSocket connection for streaming command execution inside a sandbox."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/execute-a-sandbox-command-over-websocket"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, execute-a-sandbox-command-over-websocket]
+---
+
 # Execute a sandbox command over WebSocket
 
 > Open a WebSocket connection for streaming command execution inside a sandbox.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/{sandbox_id}/execute/ws**
 
 ````yaml
 openapi: 3.1.0

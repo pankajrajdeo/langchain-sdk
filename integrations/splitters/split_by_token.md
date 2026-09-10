@@ -1,3 +1,11 @@
+---
+title: "Splitting by token - Text splitter integration guide"
+description: "Language models have a token limit. You should not exceed the token limit. When you split your text into chunks it is therefore a good idea to count the number of tokens. There are many tokenizers..."
+source: "https://docs.langchain.com/oss/python/integrations/splitters/split_by_token"
+category: "docs"
+tags: [docs, integrations, splitters, split_by_token]
+---
+
 # Splitting by token - Text splitter integration guide
 
 Language models have a token limit. You should not exceed the token limit. When you [split your text](../splitters.md) into chunks it is therefore a good idea to count the number of tokens. There are many tokenizers. When you count tokens in your text you should use the same tokenizer as used in the language model.
@@ -373,7 +381,7 @@ With a duty to one another to the American people to the Constitution.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/split_by_token.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

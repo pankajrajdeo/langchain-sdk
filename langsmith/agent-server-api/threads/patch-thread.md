@@ -1,8 +1,18 @@
+---
+title: "Patch Thread"
+description: "Update a thread."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/patch-thread"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, patch-thread]
+---
+
 # Patch Thread
 
 > Update a thread.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json patch /threads/{thread_id}**
 
 ````yaml
 openapi: 3.1.0

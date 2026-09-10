@@ -1,3 +1,11 @@
+---
+title: "Set up multi-turn online evaluators"
+description: "Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent—not just individual exchanges. They measure end-to-end interaction quality across all turns in a..."
+source: "https://docs.langchain.com/langsmith/online-evaluations-multi-turn"
+category: "docs"
+tags: [docs, langsmith, online-evaluations-multi-turn]
+---
+
 # Set up multi-turn online evaluators
 
 Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent—not just individual exchanges. They measure end-to-end interaction quality across all turns in a thread.
@@ -104,7 +112,7 @@ In this tab, you can see the inputs passed into the LLM-as-a-judge evaluator. If
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-multi-turn.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

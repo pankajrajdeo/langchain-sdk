@@ -1,3 +1,11 @@
+---
+title: "Enable TTL and data retention"
+description: "LangSmith Self-Hosted allows enablement of automatic TTL and Data Retention of traces. This can be useful if you're complying with data privacy regulations, or if you want to have more efficient..."
+source: "https://docs.langchain.com/langsmith/self-host-ttl"
+category: "docs"
+tags: [docs, langsmith, self-host-ttl]
+---
+
 # Enable TTL and data retention
 
 LangSmith Self-Hosted allows enablement of automatic TTL and Data Retention of traces. This can be useful if you're complying with data privacy regulations, or if you want to have more efficient space usage and auto cleanup of your traces. Traces will also have their data retention period automatically extended based on certain actions or run rule applications.
@@ -11,6 +19,8 @@ You can configure retention through helm or environment variable settings. There
 
 * *Enabled:* Whether data retention is enabled or disabled. If enabled, via the UI you can your default organization and project TTL tiers to apply to traces (see [data retention guide](usage-and-billing.md#data-retention) for details).
 * *Retention Periods:* You can configure system-wide retention periods for shortlived and longlived traces. Once configured, you can manage the retention level at each project as well as set an organization-wide default for new projects.
+
+**Helm**
 
 ```yaml
 config:
@@ -145,7 +155,7 @@ If backups are present, copy them to an external filesystem or blob storage (e.g
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ttl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

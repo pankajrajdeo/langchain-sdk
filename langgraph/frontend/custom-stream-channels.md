@@ -1,3 +1,11 @@
+---
+title: "Custom stream channels"
+description: "Stream custom server-side data to the frontend and read it with useExtension and useChannel"
+source: "https://docs.langchain.com/oss/python/langgraph/frontend/custom-stream-channels"
+category: "docs"
+tags: [docs, langgraph, frontend, custom-stream-channels]
+---
+
 # Custom stream channels
 
 > Stream custom server-side data to the frontend and read it with useExtension and useChannel
@@ -101,7 +109,9 @@ Wire up [`useStream`](https://reference.langchain.com/javascript/langchain-react
 `stream` handle returned here.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -117,6 +127,8 @@ export function RedactionChat() {
   return <RedactionStatsPanel stream={stream} />;
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -135,6 +147,8 @@ const stream = useStream<typeof myAgent>({
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -149,6 +163,8 @@ const stream = useStream<typeof myAgent>({
 
 <RedactionStatsPanel {stream} />
 ```
+
+**Angular**
 
 ```ts
 import { Component } from "@angular/core";
@@ -177,12 +193,16 @@ counter, progress percentage, or status badge.
 
 Pass the bare channel name (`"redaction-stats"`), not the `custom:` prefix:
 
+**React**
+
 ```tsx
 import { useExtension } from "@langchain/react";
 
 const latest = useExtension<RedactionStatsEvent>(stream, "redaction-stats");
 // latest?.total, latest?.counts.email, latest?.delta
 ```
+
+**Vue**
 
 ```vue
 import { useExtension } from "@langchain/vue";
@@ -191,12 +211,16 @@ const latest = useExtension<RedactionStatsEvent>(stream, "redaction-stats");
 // latest.value?.total
 ```
 
+**Svelte**
+
 ```svelte
 import { useExtension } from "@langchain/svelte";
 
 const latest = useExtension<RedactionStatsEvent>(stream, "redaction-stats");
 // latest?.total
 ```
+
+**Angular**
 
 ```ts
 import { injectExtension } from "@langchain/angular";
@@ -224,11 +248,15 @@ that no higher-level selector covers.
 
 Pass the full channel id (`"custom:redaction-stats"`):
 
+**React**
+
 ```tsx
 import { useChannel } from "@langchain/react";
 
 const rawEvents = useChannel(stream, ["custom:redaction-stats"]);
 ```
+
+**Vue**
 
 ```vue
 import { useChannel } from "@langchain/vue";
@@ -237,11 +265,15 @@ const rawEvents = useChannel(stream, ["custom:redaction-stats"]);
 // rawEvents.value
 ```
 
+**Svelte**
+
 ```svelte
 import { useChannel } from "@langchain/svelte";
 
 const rawEvents = useChannel(stream, ["custom:redaction-stats"]);
 ```
+
+**Angular**
 
 ```ts
 import { injectChannel } from "@langchain/angular";
@@ -328,7 +360,7 @@ messages, tool calls, or graph state:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/custom-stream-channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

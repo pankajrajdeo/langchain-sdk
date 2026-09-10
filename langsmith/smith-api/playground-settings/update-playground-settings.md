@@ -1,8 +1,18 @@
+---
+title: "Update playground settings"
+description: "Update playground settings."
+source: "https://docs.langchain.com/langsmith/smith-api/playground-settings/update-playground-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, playground-settings, update-playground-settings]
+---
+
 # Update playground settings
 
 > Update playground settings.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/playground-settings/{playground_settings_id}**
 
 ````yaml
 openapi: 3.1.0

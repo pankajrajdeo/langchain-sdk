@@ -1,3 +1,11 @@
+---
+title: "Set a sampling rate for traces"
+description: "When working with high-volume applications, you may not want to log every trace to LangSmith. Sampling rates allow you to control what percentage of traces are logged, helping you balance..."
+source: "https://docs.langchain.com/langsmith/sample-traces"
+category: "docs"
+tags: [docs, langsmith, sample-traces]
+---
+
 # Set a sampling rate for traces
 
 When working with high-volume applications, you may not want to log every trace to LangSmith. Sampling rates allow you to control what percentage of traces are logged, helping you balance observability needs with cost considerations.
@@ -65,7 +73,7 @@ You can combine both approaches for fine-grained control over your observability
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sample-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

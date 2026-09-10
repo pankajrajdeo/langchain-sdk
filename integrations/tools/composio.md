@@ -1,3 +1,11 @@
+---
+title: "Composio integration"
+description: "Give agents secure access to 1,000+ toolkits and 20,000+ tools through Composio's unified API platform, with OAuth handling, event-driven workflows, and multi-user support."
+source: "https://docs.langchain.com/oss/python/integrations/tools/composio"
+category: "docs"
+tags: [docs, integrations, tools, composio]
+---
+
 # Composio integration
 
 > Give agents secure access to 1,000+ toolkits and 20,000+ tools through Composio's unified API platform, with OAuth handling, event-driven workflows, and multi-user support.
@@ -29,9 +37,13 @@ See the [Composio JS integration docs](https://js.langchain.com/docs/integration
 
 The integration lives in the `composio-langchain` package.
 
+**pip**
+
 ```bash
 pip install -U composio-langchain langchain langchain-openai
 ```
+
+**uv**
 
 ```bash
 uv add composio-langchain langchain langchain-openai
@@ -281,7 +293,7 @@ For detailed documentation of Composio features and configuration options, see:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/composio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

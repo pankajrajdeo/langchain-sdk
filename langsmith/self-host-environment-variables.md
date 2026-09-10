@@ -1,3 +1,11 @@
+---
+title: "Configure environment variables in the Helm chart"
+description: "How to use commonEnv and extraEnv to configure environment variables across LangSmith services in the Helm chart."
+source: "https://docs.langchain.com/langsmith/self-host-environment-variables"
+category: "docs"
+tags: [docs, langsmith, self-host-environment-variables]
+---
+
 # Configure environment variables in the Helm chart
 
 > How to use commonEnv and extraEnv to configure environment variables across LangSmith services in the Helm chart.
@@ -123,7 +131,7 @@ commonEnv:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-environment-variables.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

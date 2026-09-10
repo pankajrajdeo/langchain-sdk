@@ -1,3 +1,11 @@
+---
+title: "Short-term memory with MongoDB Atlas"
+description: "Persist agent short-term memory with MongoDBSaver and MongoDB Atlas."
+source: "https://docs.langchain.com/oss/python/integrations/memory/mongodb-short-term-memory"
+category: "docs"
+tags: [docs, integrations, memory, mongodb-short-term-memory]
+---
+
 # Short-term memory with MongoDB Atlas
 
 > Persist agent short-term memory with MongoDBSaver and MongoDB Atlas.
@@ -13,9 +21,13 @@ MongoDB stores conversation state as documents in a collection, so threads can r
 
 ### Installation
 
+**pip**
+
 ```bash
 pip install -U langgraph-checkpoint-mongodb pymongo
 ```
+
+**uv**
 
 ```bash
 uv add langgraph-checkpoint-mongodb pymongo
@@ -91,7 +103,7 @@ with MongoDBSaver.from_conn_string(MONGODB_ATLAS_URI) as checkpointer:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/memory/mongodb-short-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

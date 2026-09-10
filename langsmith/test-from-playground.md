@@ -1,3 +1,11 @@
+---
+title: "Test from the Playground"
+description: "Test prompts and model configurations over datasets in the LangSmith Playground without writing code."
+source: "https://docs.langchain.com/langsmith/test-from-playground"
+category: "docs"
+tags: [docs, langsmith, test-from-playground]
+---
+
 # Test from the Playground
 
 > Test prompts and model configurations over datasets in the LangSmith Playground without writing code.
@@ -29,7 +37,7 @@ To test a prompt or model configuration over a dataset and score the results, [r
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/test-from-playground.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

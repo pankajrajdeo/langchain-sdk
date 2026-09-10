@@ -1,3 +1,11 @@
+---
+title: "Trace with Temporal"
+description: "Learn how to trace Temporal workflows and activities in LangSmith using OpenTelemetry."
+source: "https://docs.langchain.com/langsmith/trace-with-temporal"
+category: "docs"
+tags: [docs, langsmith, trace-with-temporal]
+---
+
 # Trace with Temporal
 
 > Learn how to trace Temporal workflows and activities in LangSmith using OpenTelemetry.
@@ -153,6 +161,8 @@ func MyActivity(ctx context.Context, input string) (string, error) {
 
 ### Execute workflow
 In a separate client application, initialize the tracer and execute the workflow:
+
+**client.go**
 
 ```go
 // In a separate function or client application
@@ -331,6 +341,8 @@ if __name__ == "__main__":
 ### Execute workflow
 In a separate script, connect to Temporal with the tracing interceptor and execute the workflow:
 
+**client.py**
+
 ```python
 import asyncio
 from temporalio.client import Client
@@ -381,6 +393,8 @@ npm install @opentelemetry/resources @opentelemetry/semantic-conventions
 ### Initialize tracer
 Create a `NodeTracerProvider` with an OTLP exporter configured to send traces to LangSmith:
 
+**tracer.ts**
+
 ```typescript
 import { Resource } from '@opentelemetry/resources';
 import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
@@ -415,6 +429,8 @@ export function initTracerProvider(): NodeTracerProvider {
 ### Define workflow
 Define a workflow that proxies activities with a timeout configuration:
 
+**workflows.ts**
+
 ```typescript
 import { proxyActivities } from '@temporalio/workflow';
 import type * as activities from './activities';
@@ -430,6 +446,8 @@ export async function myWorkflow(input: string): Promise<string> {
 
 ### Define activity
 Define an activity that demonstrates how to add custom span attributes for LangSmith visibility:
+
+**activities.ts**
 
 ```typescript
 import { log } from '@temporalio/activity';
@@ -453,6 +471,8 @@ export async function processActivity(input: string): Promise<string> {
 
 ### Run worker
 Create a worker with OpenTelemetry interceptors for activities and a workflow exporter for workflow spans:
+
+**worker.ts**
 
 ```typescript
 import { Worker, NativeConnection } from '@temporalio/worker';
@@ -508,6 +528,8 @@ run().catch((err) => {
 ### Execute workflow
 In a separate client file, connect to Temporal and execute the workflow:
 
+**client.ts**
+
 ```typescript
 import { Client, Connection } from '@temporalio/client';
 import { initTracerProvider } from './tracer';
@@ -550,17 +572,23 @@ Once configured, traces will appear in your LangSmith project:
 
 Set a custom service name to distinguish different Temporal workers or services:
 
+**Go**
+
 ```go
 ls, err := langsmith.NewTracer(
     langsmith.WithServiceName("my-temporal-worker"),
 )
 ```
 
+**Python**
+
 ```python
 resource = Resource.create({
     SERVICE_NAME: "my-temporal-worker",
 })
 ```
+
+**TypeScript**
 
 ```typescript
 const provider = new NodeTracerProvider({
@@ -574,6 +602,8 @@ const provider = new NodeTracerProvider({
 
 Add custom attributes to enrich your traces:
 
+**Go**
+
 ```go
 import "go.opentelemetry.io/otel/attribute"
 
@@ -584,6 +614,8 @@ span.SetAttributes(
 )
 ```
 
+**Python**
+
 ```python
 from opentelemetry import trace
 
@@ -591,6 +623,8 @@ span = trace.get_current_span()
 span.set_attribute("user.id", user_id)
 span.set_attribute("workflow.version", "v2")
 ```
+
+**TypeScript**
 
 ```typescript
 import { trace } from '@opentelemetry/api';
@@ -604,6 +638,8 @@ span?.setAttribute('workflow.version', 'v2');
 
 For high-volume workflows, configure sampling to reduce trace volume:
 
+**Go**
+
 ```go
 // Note: langsmith.NewTracer() uses default sampling
 // For custom sampling, use the TracerProvider directly
@@ -613,6 +649,8 @@ tp := sdktrace.NewTracerProvider(
 )
 ```
 
+**Python**
+
 ```python
 from opentelemetry.sdk.trace.sampling import TraceIdRatioBased
 
@@ -621,6 +659,8 @@ provider = TracerProvider(
     sampler=TraceIdRatioBased(0.1),  # 10% sampling
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { TraceIdRatioBasedSampler } from '@opentelemetry/sdk-trace-base';
@@ -658,14 +698,20 @@ Verify propagators are configured correctly:
 
 If traces aren't flushing, ensure you're calling the shutdown method with proper timeout:
 
+**Go**
+
 ```go
 defer ls.Shutdown(context.Background())
 ```
+
+**Python**
 
 ```python
 finally:
     provider.shutdown()
 ```
+
+**TypeScript**
 
 ```typescript
 finally {
@@ -690,7 +736,7 @@ finally {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-temporal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

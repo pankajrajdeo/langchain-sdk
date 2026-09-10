@@ -1,8 +1,18 @@
+---
+title: "Create section"
+description: "Create a new section."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/create-section"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, create-section]
+---
+
 # Create section
 
 > Create a new section.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/charts/section**
 
 ````yaml
 openapi: 3.1.0

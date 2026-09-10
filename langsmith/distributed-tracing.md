@@ -1,3 +1,11 @@
+---
+title: "Implement distributed tracing"
+description: "Sometimes, you need to trace a request across multiple services."
+source: "https://docs.langchain.com/langsmith/distributed-tracing"
+category: "docs"
+tags: [docs, langsmith, distributed-tracing]
+---
+
 # Implement distributed tracing
 
 Sometimes, you need to trace a request across multiple services.
@@ -102,7 +110,7 @@ async def fake_route(request: Request):
 ## Distributed tracing in TypeScript
 
 > [!NOTE]
-> Distributed tracing in TypeScript requires `langsmith` version `>=0.1.31`
+> Distributed tracing in TypeScript requires `langsmith>=0.1.31`
 
 First, we obtain the current run tree from the client and convert it to `langsmith-trace` and `baggage` header values, which we can pass to the server:
 
@@ -128,6 +136,8 @@ Then, the server converts the headers back to a run tree, which it uses to furth
 
 To pass the newly created run tree to a traceable function, we can use the `withRunTree` helper, which will ensure the run tree is propagated within traceable invocations.
 
+**Express.JS**
+
 ```typescript
 // server.mts
 import { RunTree } from "langsmith";
@@ -149,6 +159,8 @@ app.post("/", async (req, res) => {
     res.send(result);
 });
 ```
+
+**Hono**
 
 ```typescript
 // server.mts
@@ -174,7 +186,7 @@ app.post("/", async (c) => {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/distributed-tracing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

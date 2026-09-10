@@ -1,8 +1,18 @@
+---
+title: "Generate personal access token"
+description: "DEPRECATED: Use /orgs/current/personal-access-tokens instead"
+source: "https://docs.langchain.com/langsmith/smith-api/api-key/generate-personal-access-token"
+category: "docs"
+tags: [docs, langsmith, smith-api, api-key, generate-personal-access-token]
+---
+
 # Generate personal access token
 
 > DEPRECATED: Use /orgs/current/personal-access-tokens instead
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/api-key/current**
 
 ````yaml
 openapi: 3.1.0
@@ -289,6 +299,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

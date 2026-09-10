@@ -1,8 +1,18 @@
+---
+title: "List MCP servers for a vendor"
+description: "Returns the MCP gateways from the vendor for the workspace's configured org/project."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp_vendors/list-mcp-servers-for-a-vendor"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp_vendors, list-mcp-servers-for-a-vendor]
+---
+
 # List MCP servers for a vendor
 
 > Returns the MCP gateways from the vendor for the workspace's configured org/project.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/mcp-vendors/{vendor_slug}/mcp-servers**
 
 ````yaml
 openapi: 3.1.0

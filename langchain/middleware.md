@@ -1,3 +1,11 @@
+---
+title: "Overview"
+description: "Control and customize agent execution at every step"
+source: "https://docs.langchain.com/oss/python/langchain/middleware"
+category: "docs"
+tags: [docs, langchain, middleware]
+---
+
 # Overview
 
 > Control and customize agent execution at every step
@@ -24,6 +32,9 @@ agent = create_agent(
     ],
 )
 ```
+
+<a id="anthropic-prompt-caching"></a>
+<a id="human-in-the-loop"></a>
 
 ## The agent loop
 
@@ -69,12 +80,16 @@ graph = (
 
 The HITL interrupt, summarization, PII redaction, retries, and any custom hooks all travel with the agent node. See [Use subgraphs](../langgraph/use-subgraphs.md) for the full set of composition patterns, including subgraph checkpointer scoping (per-invocation versus per-thread).
 
+<a id="after-model"></a>
 <a id="dynamic-model"></a>
 <a id="llm-tool-selector"></a>
+<a id="modify-model-request"></a>
 <a id="pii-detection"></a>
 <a id="summarization"></a>
 
 ## Additional resources
+
+<a id="before-model"></a>
 
 #### [Built-in middleware](middleware/built-in.md)
 Explore built-in middleware for common use cases.
@@ -96,7 +111,7 @@ Test your agents with LangSmith.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/middleware/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

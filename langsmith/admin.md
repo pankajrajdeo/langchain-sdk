@@ -1,3 +1,11 @@
+---
+title: "Account"
+description: "Set up your LangSmith account, including API keys, profile configuration, integrations, and pricing tiers."
+source: "https://docs.langchain.com/langsmith/admin"
+category: "docs"
+tags: [docs, langsmith, admin]
+---
+
 # Account
 
 > Set up your LangSmith account, including API keys, profile configuration, integrations, and pricing tiers.
@@ -11,7 +19,7 @@ Sign up at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&ut
 You can log in with **Google**, **GitHub**, or **email**.
 
 ### Create an API key
-Go to your [Settings page](https://smith.langchain.com/settings) → **API Keys** → **Create API Key**.
+Go to your [Settings page](https://smith.langchain.com/settings) > **API Keys** > **Create API Key**.
 Copy the key and save it securely.
 
 ## Explore
@@ -35,7 +43,7 @@ Enterprise capabilities, support, and onboarding.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/admin.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

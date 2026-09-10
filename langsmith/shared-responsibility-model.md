@@ -1,3 +1,11 @@
+---
+title: "LangSmith shared responsibility model"
+description: "Overview of how LangChain and customers share security responsibilities for the LangSmith platform."
+source: "https://docs.langchain.com/langsmith/shared-responsibility-model"
+category: "docs"
+tags: [docs, langsmith, shared-responsibility-model]
+---
+
 # LangSmith shared responsibility model
 
 > Overview of how LangChain and customers share security responsibilities for the LangSmith platform.
@@ -43,7 +51,7 @@ To align with the security assumptions in our SOC 2 Type II framework, we recomm
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/shared-responsibility-model.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

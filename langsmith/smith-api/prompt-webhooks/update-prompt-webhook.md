@@ -1,8 +1,18 @@
+---
+title: "Update prompt webhook"
+description: "Update a specific prompt webhook."
+source: "https://docs.langchain.com/langsmith/smith-api/prompt-webhooks/update-prompt-webhook"
+category: "docs"
+tags: [docs, langsmith, smith-api, prompt-webhooks, update-prompt-webhook]
+---
+
 # Update prompt webhook
 
 > Update a specific prompt webhook.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/prompt-webhooks/{webhook_id}**
 
 ````yaml
 openapi: 3.1.0

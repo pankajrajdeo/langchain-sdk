@@ -1,3 +1,11 @@
+---
+title: "MCP endpoint in Agent Server"
+description: "The Model Context Protocol (MCP) is an open protocol for describing tools and data sources in a model-agnostic format, enabling LLMs to discover and use them via a structured API."
+source: "https://docs.langchain.com/langsmith/server-mcp"
+category: "docs"
+tags: [docs, langsmith, server-mcp]
+---
+
 # MCP endpoint in Agent Server
 
 The Model Context Protocol (MCP) is an open protocol for describing tools and data sources in a model-agnostic format, enabling LLMs to discover and use them via a structured API.
@@ -53,9 +61,13 @@ To use MCP, ensure you have the following dependencies installed:
 
 Install them with:
 
+**pip**
+
 ```bash
 pip install "langgraph-api>=0.2.3" "langgraph-sdk>=0.1.61"
 ```
+
+**uv**
 
 ```bash
 uv add "langgraph-api>=0.2.3" "langgraph-sdk>=0.1.61"
@@ -292,7 +304,7 @@ This will prevent the server from exposing the `/mcp` endpoint.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/server-mcp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "API formats"
+description: "Use OpenAI Chat Completions, Anthropic Messages, or OpenAI Responses requests to call models across providers through the LLM Gateway."
+source: "https://docs.langchain.com/langsmith/llm-gateway-api-formats"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-api-formats]
+---
+
 # API formats
 
 > Use OpenAI Chat Completions, Anthropic Messages, or OpenAI Responses requests to call models across providers through the LLM Gateway.
@@ -23,12 +31,16 @@ For bring-your-own-key models, set `model` to `<provider>/<model>`, such as `ope
 
 Point an OpenAI-compatible client at `https://gateway.smith.langchain.com/v1`. For the full request and response schema, see the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat).
 
+**cURL**
+
 ```bash
 curl https://gateway.smith.langchain.com/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
 ```
+
+**Python**
 
 ```python
 import os
@@ -44,6 +56,8 @@ response = client.chat.completions.create(
     messages=[{"role": "user", "content": "Hello!"}],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -62,12 +76,16 @@ const response = await client.chat.completions.create({
 
 Point an Anthropic client at `https://gateway.smith.langchain.com`. For the full request and response schema, see the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages).
 
+**cURL**
+
 ```bash
 curl https://gateway.smith.langchain.com/v1/messages \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"model":"openai/gpt-5.4-mini","max_tokens":1024,"messages":[{"role":"user","content":"Hello!"}]}'
 ```
+
+**Python**
 
 ```python
 import os
@@ -84,6 +102,8 @@ message = client.messages.create(
     messages=[{"role": "user", "content": "Hello!"}],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -103,12 +123,16 @@ const message = await client.messages.create({
 
 Point an OpenAI-compatible client at `https://gateway.smith.langchain.com/v1`. For the full request and response schema, see the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses).
 
+**cURL**
+
 ```bash
 curl https://gateway.smith.langchain.com/v1/responses \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"model":"anthropic/claude-sonnet-4-6","input":"Hello!"}'
 ```
+
+**Python**
 
 ```python
 import os
@@ -124,6 +148,8 @@ response = client.responses.create(
     input="Hello!",
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -151,6 +177,8 @@ Anthropic models and some older OpenAI models require explicit opt-in to prompt 
 
 Include `prompt_cache_options` with a `ttl` value:
 
+**cURL**
+
 ```bash
 curl https://gateway.smith.langchain.com/v1/responses \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
@@ -161,6 +189,8 @@ curl https://gateway.smith.langchain.com/v1/responses \
       "prompt_cache_options": {"ttl": "30m"}
     }'
 ```
+
+**Python**
 
 ```python
 import os
@@ -177,6 +207,8 @@ response = client.responses.create(
     extra_body={"prompt_cache_options": {"ttl": "30m"}},
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -195,6 +227,8 @@ const response = await client.responses.create({
 
 The same field works with the Chat Completions endpoint:
 
+**cURL**
+
 ```bash
 curl https://gateway.smith.langchain.com/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
@@ -210,6 +244,8 @@ curl https://gateway.smith.langchain.com/v1/chat/completions \
 
 Some older OpenAI models support explicit cache control via `prompt_cache_retention`. Set it to `"in_memory"` for most models. For `gpt-5.5` specifically, use `"24h"`:
 
+**cURL (most older models)**
+
 ```bash
 curl https://gateway.smith.langchain.com/v1/responses \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
@@ -220,6 +256,8 @@ curl https://gateway.smith.langchain.com/v1/responses \
       "prompt_cache_retention": "in_memory"
     }'
 ```
+
+**cURL (gpt-5.5 specifically)**
 
 ```bash
 curl https://gateway.smith.langchain.com/v1/responses \
@@ -292,12 +330,16 @@ The LLM Gateway is also available on [BYOC](byoc.md), where it runs inside your 
 
 Authenticate with an API key scoped to a workspace in that data plane. Pass it as an `Authorization: Bearer` token:
 
+**cURL**
+
 ```bash
 curl https://<data_plane_host>/gateway/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
 ```
+
+**Python**
 
 ```python
 import os
@@ -314,6 +356,8 @@ response = client.chat.completions.create(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 import OpenAI from "openai";
 
@@ -329,6 +373,8 @@ const response = await client.chat.completions.create({
 
 Or pass it as the provider API key. For example, an Anthropic Messages request sends the key in the `X-Api-Key` header:
 
+**cURL**
+
 ```bash
 curl https://<data_plane_host>/gateway/v1/messages \
     -H "X-Api-Key: $LANGSMITH_API_KEY" \
@@ -336,6 +382,8 @@ curl https://<data_plane_host>/gateway/v1/messages \
     -H "Content-Type: application/json" \
     -d '{"model":"openai/gpt-5.4-mini","max_tokens":1024,"messages":[{"role":"user","content":"Hello!"}]}'
 ```
+
+**Python**
 
 ```python
 import os
@@ -352,6 +400,8 @@ message = client.messages.create(
     messages=[{"role": "user", "content": "Hello!"}],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -393,7 +443,7 @@ For setup-specific resolutions, see the [Quickstart](llm-gateway-quickstart.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-api-formats.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

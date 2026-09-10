@@ -1,8 +1,18 @@
+---
+title: "Get evaluator spend"
+description: "Returns per-day LLM evaluator spend for the requested 7-day period, grouped by evaluator, resource, or run rule. Exactly one of group_by, evaluator_id, session_id, or dataset_id is required..."
+source: "https://docs.langchain.com/langsmith/smith-api/evaluators/get-evaluator-spend"
+category: "docs"
+tags: [docs, langsmith, smith-api, evaluators, get-evaluator-spend]
+---
+
 # Get evaluator spend
 
 > Returns per-day LLM evaluator spend for the requested 7-day period, grouped by evaluator, resource, or run rule. Exactly one of group_by, evaluator_id, session_id, or dataset_id is required. resource_id, type, feedback_key, and tag_value_id may be supplied with group_by to narrow listing aggregations.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/evaluators/spend**
 
 ````yaml
 openapi: 3.1.0
@@ -211,9 +221,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Resource Id
         - description: >-
             Filter grouped results by evaluator type: 'llm' or 'code'. Only
@@ -239,9 +249,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Tag Value Id
         - description: Start of the 7-day window (YYYY-MM-DD).
           name: period_start

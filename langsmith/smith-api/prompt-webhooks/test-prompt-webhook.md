@@ -1,8 +1,18 @@
+---
+title: "Test prompt webhook"
+description: "Test a specific prompt webhook."
+source: "https://docs.langchain.com/langsmith/smith-api/prompt-webhooks/test-prompt-webhook"
+category: "docs"
+tags: [docs, langsmith, smith-api, prompt-webhooks, test-prompt-webhook]
+---
+
 # Test prompt webhook
 
 > Test a specific prompt webhook.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/prompt-webhooks/test**
 
 ````yaml
 openapi: 3.1.0

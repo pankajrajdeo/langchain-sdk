@@ -1,6 +1,16 @@
+---
+title: "Delete tagging"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/taggings/{tagging_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/delete-tagging"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, delete-tagging]
+---
+
 # Delete tagging
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/taggings/{tagging_id}**
 
 ````yaml
 openapi: 3.1.0

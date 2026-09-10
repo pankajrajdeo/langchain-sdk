@@ -1,3 +1,11 @@
+---
+title: "Agent platform comparison"
+description: "Compare LangSmith Fleet with Claude Cowork, Amazon Quick, Google Workspace Studio, and Microsoft Copilot to choose the right enterprise agent platform for your team"
+source: "https://docs.langchain.com/langsmith/fleet/comparison"
+category: "docs"
+tags: [docs, langsmith, fleet, comparison]
+---
+
 # Agent platform comparison
 
 > Compare LangSmith Fleet with Claude Cowork, Amazon Quick, Google Workspace Studio, and Microsoft Copilot to choose the right enterprise agent platform for your team
@@ -128,7 +136,7 @@ For pricing and SLA information, [contact our sales team](https://www.langchain.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/comparison.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Patch current workspace pending member"
+description: "Update the role on a pending workspace member invite."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/patch-current-workspace-pending-member"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, patch-current-workspace-pending-member]
+---
+
 # Patch current workspace pending member
 
 > Update the role on a pending workspace member invite.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/current/members/{identity_id}/pending**
 
 ````yaml
 openapi: 3.1.0

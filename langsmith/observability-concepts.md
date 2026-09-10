@@ -1,3 +1,11 @@
+---
+title: "Observability concepts"
+description: "How LangSmith structures observability data as runs, traces, threads, and trajectories, and how to send traces."
+source: "https://docs.langchain.com/langsmith/observability-concepts"
+category: "docs"
+tags: [docs, langsmith, observability-concepts]
+---
+
 # Observability concepts
 
 > How LangSmith structures observability data as runs, traces, threads, and trajectories, and how to send traces.
@@ -111,7 +119,7 @@ To delete traces before their expiration date, see [Manage a trace](manage-trace
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

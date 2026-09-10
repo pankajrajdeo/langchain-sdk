@@ -1,8 +1,18 @@
+---
+title: "Get vendor account"
+description: "Resolves OAuth token and returns the vendor's account info."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp_vendors/get-vendor-account"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp_vendors, get-vendor-account]
+---
+
 # Get vendor account
 
 > Resolves OAuth token and returns the vendor's account info.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/mcp-vendors/{vendor_slug}/account**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Datadog tracing integrations"
+description: "Integrate with Datadog tracing using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/datadog"
+category: "docs"
+tags: [docs, integrations, providers, datadog]
+---
+
 # Datadog tracing integrations
 
 > Integrate with Datadog tracing using LangChain Python.
@@ -34,9 +42,13 @@ docker run -d --cgroupns host \
 
 2. Install the Datadog APM Python library.
 
+**pip**
+
 ```shell
 pip install "ddtrace>=1.17"
 ```
+
+**uv**
 
 ```shell
 uv add "ddtrace>=1.17"
@@ -94,7 +106,7 @@ Need help? Create an issue on [ddtrace](https://github.com/DataDog/dd-trace-py) 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/datadog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

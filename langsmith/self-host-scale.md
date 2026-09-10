@@ -1,3 +1,11 @@
+---
+title: "Configure LangSmith for scale"
+description: "The scaling guidance and example configurations on this page apply to LangSmith version v0.13.0 or higher."
+source: "https://docs.langchain.com/langsmith/self-host-scale"
+category: "docs"
+tags: [docs, langsmith, self-host-scale]
+---
+
 # Configure LangSmith for scale
 
 > [!WARNING]
@@ -420,7 +428,7 @@ commonEnv:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-scale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Run support queries against PostgreSQL"
+description: "This Helm repository contains queries to produce output that the LangSmith UI does not currently support directly (e.g. obtaining trace counts for multiple organizations in a single query)."
+source: "https://docs.langchain.com/langsmith/script-running-pg-support-queries"
+category: "docs"
+tags: [docs, langsmith, script-running-pg-support-queries]
+---
+
 # Run support queries against PostgreSQL
 
 This Helm repository contains queries to produce output that the LangSmith UI does not currently support directly (e.g. obtaining trace counts for multiple organizations in a single query).
@@ -122,7 +130,7 @@ sh run_support_query_pg.sh <postgres_url> \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-running-pg-support-queries.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

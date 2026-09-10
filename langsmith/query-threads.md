@@ -1,3 +1,11 @@
+---
+title: "Query threads using the SDK"
+description: "Programmatically fetch and inspect multi-turn conversation threads from your LangSmith projects."
+source: "https://docs.langchain.com/langsmith/query-threads"
+category: "docs"
+tags: [docs, langsmith, query-threads]
+---
+
 # Query threads using the SDK
 
 > Programmatically fetch and inspect multi-turn conversation threads from your LangSmith projects.
@@ -23,6 +31,8 @@ Each run you create can carry a `thread_id` in its metadata. LangSmith uses this
 
 If you're using a [tracing integration](integrations.md), pass `thread_id` in the run metadata:
 
+**Python**
+
 ```python
 from langsmith import traceable, uuid7
 
@@ -32,6 +42,8 @@ THREAD_ID = str(uuid7())
 def my_agent(user_message: str) -> str:
     ...
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -51,6 +63,8 @@ const myAgent = traceable(
 
 `list_threads` / `listThreads` fetches all threads in a project and groups their runs together. Results are sorted by most recent activity first.
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -63,6 +77,8 @@ for thread in threads:
     print(f"  {thread['count']} runs")
     print(f"  last active: {thread['max_start_time']}")
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -79,6 +95,8 @@ for (const thread of threads) {
 ```
 
 Results are sorted by most recent activity:
+
+**Output**
 
 ```text
 conv-abc123
@@ -119,6 +137,8 @@ A list of thread objects, each containing:
 
 When you already know the `thread_id`, use `read_thread` / `readThread`. It returns an iterator over the thread's runs directly, without fetching all threads first.
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -130,6 +150,8 @@ for run in client.read_thread(
 ):
     print(run.id, run.name, run.start_time)
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -145,6 +167,8 @@ for await (const run of client.readThread({
 ```
 
 Unlike `list_threads`, each item here is a `Run` object directly — there is no grouping wrapper. Runs are returned in ascending chronological order by default.
+
+**Output**
 
 ```python
 [
@@ -177,12 +201,16 @@ An iterator ([Python](https://reference.langchain.com/python/langsmith)) or asyn
 
 Pass a filter expression to narrow results using [LangSmith trace query syntax](trace-query-syntax.md). For example, to surface only threads containing at least one failed run:
 
+**Python**
+
 ```python
 threads = client.list_threads(
     project_name="my-project",
     filter='eq(status, "error")',
 )
 ```
+
+**TypeScript**
 
 ```typescript
 const threads = await client.listThreads({
@@ -195,6 +223,8 @@ const threads = await client.listThreads({
 
 By default, `list_threads` only surfaces threads with runs from the last day. Pass `start_time` to widen the window:
 
+**Python**
+
 ```python
 import datetime
 
@@ -203,6 +233,8 @@ threads = client.list_threads(
     start_time=datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=2),
 )
 ```
+
+**TypeScript**
 
 ```typescript
 const threads = await client.listThreads({
@@ -214,6 +246,8 @@ const threads = await client.listThreads({
 ### Reconstruct a conversation
 
 Use `read_thread` with `order="asc"` to replay a conversation turn by turn:
+
+**Python**
 
 ```python
 runs = list(
@@ -231,6 +265,8 @@ for run in runs:
     print(f"Assistant: {assistant_msg}")
     print()
 ```
+
+**TypeScript**
 
 ```typescript
 const runs: Run[] = [];
@@ -254,7 +290,7 @@ for (const run of runs) {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/query-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

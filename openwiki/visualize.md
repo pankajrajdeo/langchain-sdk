@@ -1,3 +1,11 @@
+---
+title: "Visualize your wiki"
+description: "Explore an OpenWiki Markdown wiki with a local interactive node graph and reader"
+source: "https://docs.langchain.com/oss/openwiki/visualize"
+category: "docs"
+tags: [docs, openwiki, visualize]
+---
+
 # Visualize your wiki
 
 > Explore an OpenWiki Markdown wiki with a local interactive node graph and reader
@@ -64,7 +72,7 @@ The export contains `index.html`, `client.js`, `client-lib.js`, `styles.css`, an
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/visualize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

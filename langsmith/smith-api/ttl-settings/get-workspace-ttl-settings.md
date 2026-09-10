@@ -1,8 +1,18 @@
+---
+title: "Get workspace TTL settings"
+description: "Get the longlived trace TTL settings for a workspace"
+source: "https://docs.langchain.com/langsmith/smith-api/ttl-settings/get-workspace-ttl-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, ttl-settings, get-workspace-ttl-settings]
+---
+
 # Get workspace TTL settings
 
 > Get the longlived trace TTL settings for a workspace
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /workspaces/current/ttl-settings**
 
 ````yaml
 openapi: 3.1.0

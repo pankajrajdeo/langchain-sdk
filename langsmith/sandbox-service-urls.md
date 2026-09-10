@@ -1,3 +1,11 @@
+---
+title: "Sandbox service URLs"
+description: "Access HTTP services running inside sandboxes via authenticated URLs, from a browser or programmatically."
+source: "https://docs.langchain.com/langsmith/sandbox-service-urls"
+category: "docs"
+tags: [docs, langsmith, sandbox-service-urls]
+---
+
 # Sandbox service URLs
 
 > Access HTTP services running inside sandboxes via authenticated URLs, from a browser or programmatically.
@@ -205,7 +213,7 @@ To share a single file rather than a running service, use a **[download link](sa
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-service-urls.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

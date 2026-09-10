@@ -1,3 +1,11 @@
+---
+title: "Hard delete examples"
+description: "This endpoint hard deletes all versions of a dataset example(s). Deletion is performed by setting inputs, outputs, and metadata to null and deleting attachment files while keeping the example ID..."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/hard-delete-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, hard-delete-examples]
+---
+
 # Hard delete examples
 
 > This endpoint hard deletes *all* versions of a dataset example(s).
@@ -5,6 +13,8 @@ Deletion is performed by setting inputs, outputs, and metadata to null and delet
 IMPORTANT: attachment files can take up to 7 days to be deleted. inputs, outputs and metadata are nullified immediately.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/datasets/examples/delete**
 
 ````yaml
 openapi: 3.1.0

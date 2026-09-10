@@ -1,8 +1,18 @@
+---
+title: "Rename filter view"
+description: "Rename a filter view (display_name and description only)."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/rename-filter-view"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, rename-filter-view]
+---
+
 # Rename filter view
 
 > Rename a filter view (display_name and description only).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/sessions/{session_id}/views/{view_id}/rename**
 
 ````yaml
 openapi: 3.1.0

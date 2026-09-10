@@ -1,3 +1,11 @@
+---
+title: "Build a data analysis agent"
+description: "Build an agent that analyzes data files, generates visualizations, and shares results"
+source: "https://docs.langchain.com/oss/python/deepagents/data-analysis"
+category: "docs"
+tags: [docs, deepagents, data-analysis]
+---
+
 # Build a data analysis agent
 
 > Build an agent that analyzes data files, generates visualizations, and shares results
@@ -30,6 +38,8 @@ This tutorial covers:
 
 Install the core dependencies:
 
+**pip**
+
 ```bash
 pip install deepagents
 ```
@@ -40,6 +50,8 @@ For this tutorial, we'll use:
 
 * [Slack Python SDK](https://docs.slack.dev/tools/python-slack-sdk/) for sharing results ([token setup](https://docs.slack.dev/authentication/tokens/))
 * A [LangSmith sandbox](../langsmith/sandboxes.md) for code execution
+
+**pip**
 
 ```bash
 pip install "langsmith[sandbox]" slack-sdk
@@ -76,9 +88,13 @@ Deep Agents use [backends](backends.md) to execute code in sandboxed environment
 The examples below use a [LangSmith sandbox](../langsmith/sandboxes.md). For other providers, see [available providers](sandboxes.md#available-providers).
 
 #### LangSmith
+**pip**
+
 ```bash
 pip install "langsmith[sandbox]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[sandbox]"
@@ -108,9 +124,13 @@ backend = LocalShellBackend(
 ```
 
 #### AgentCore
+**pip**
+
 ```bash
 pip install langchain-agentcore-codeinterpreter
 ```
+
+**uv**
 
 ```bash
 uv add langchain-agentcore-codeinterpreter
@@ -126,9 +146,13 @@ backend = AgentCoreSandbox(interpreter=interpreter)
 ```
 
 #### Daytona
+**pip**
+
 ```bash
 pip install langchain-daytona
 ```
+
+**uv**
 
 ```bash
 uv add langchain-daytona
@@ -152,9 +176,13 @@ print(result)
 ```
 
 #### E2B
+**pip**
+
 ```bash
 pip install langchain-e2b
 ```
+
+**uv**
 
 ```bash
 uv add langchain-e2b
@@ -180,9 +208,13 @@ backend = ModalSandbox(sandbox=modal_sandbox)
 ```
 
 #### Runloop
+**pip**
+
 ```bash
 pip install langchain-runloop
 ```
+
+**uv**
 
 ```bash
 uv add langchain-runloop
@@ -714,7 +746,7 @@ Now that you've built a data analysis agent, explore these resources to extend i
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/data-analysis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

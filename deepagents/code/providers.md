@@ -1,3 +1,11 @@
+---
+title: "Model providers"
+description: "Configure any LangChain-compatible model provider for Deep Agents Code"
+source: "https://docs.langchain.com/oss/deepagents/code/providers"
+category: "docs"
+tags: [docs, deepagents, code, providers]
+---
+
 # Model providers
 
 > Configure any LangChain-compatible model provider for Deep Agents Code
@@ -12,9 +20,13 @@ Deep Agents Code integrates automatically with the [following model providers](#
 
    Each model provider requires its corresponding LangChain integration package. These ship as optional extras to keep the application lightweight. OpenAI, Anthropic, and Gemini are included by default. Install any other extra from within a session with `/install`, or from the shell with `dcode --install`:
 
+**In session**
+
 ```txt
    /install groq
 ```
+
+**Shell**
 
 ```bash
    dcode --install groq
@@ -81,9 +93,13 @@ To use the provider:
 
 1. Install the Gemini Enterprise Agent Platform extra:
 
+**In session**
+
 ```txt
      /install vertex
 ```
+
+**Shell**
 
 ```bash
      dcode --install vertex
@@ -106,9 +122,13 @@ To use the provider:
 
 4. Select a Claude model with the `google_anthropic_vertex` provider:
 
+**In session**
+
 ```txt
      /model google_anthropic_vertex:claude-sonnet-4-6
 ```
+
+**Shell**
 
 ```bash
      dcode --model google_anthropic_vertex:claude-sonnet-4-6
@@ -162,9 +182,13 @@ Use the dedicated integration packages for these services:
 
 **OpenRouter** is a built-in provider—install the extra and use it directly:
 
+**In session**
+
 ```txt
 /install openrouter
 ```
+
+**Shell**
 
 ```bash
 dcode --install openrouter
@@ -172,9 +196,13 @@ dcode --install openrouter
 
 **LiteLLM** is also a built-in provider:
 
+**In session**
+
 ```txt
 /install litellm
 ```
+
+**Shell**
 
 ```bash
 dcode --install litellm
@@ -246,9 +274,13 @@ If you want to use an open weights model, there are two common paths depending o
 
 2. Install the Ollama extra:
 
+**In session**
+
 ```txt
    /install ollama
 ```
+
+**Shell**
 
 ```bash
    dcode --install ollama
@@ -256,9 +288,13 @@ If you want to use an open weights model, there are two common paths depending o
 
 3. Select the model:
 
+**In session**
+
 ```txt
    /model
 ```
+
+**Shell**
 
 ```bash
    dcode --model ollama:qwen3:4b
@@ -272,9 +308,13 @@ If you want to use an open weights model, there are two common paths depending o
 
 2. Install the Groq extra:
 
+**In session**
+
 ```txt
    /install groq
 ```
+
+**Shell**
 
 ```bash
    dcode --install groq
@@ -282,9 +322,13 @@ If you want to use an open weights model, there are two common paths depending o
 
 3. Select a model:
 
+**In session**
+
 ```txt
    /model
 ```
+
+**Shell**
 
 ```bash
    GROQ_API_KEY="your-api-key" dcode --model groq:openai/gpt-oss-120b
@@ -294,10 +338,14 @@ If you want to use an open weights model, there are two common paths depending o
 
 **Fireworks** is another popular cloud provider for open weights models:
 
+**In session**
+
 ```txt
 /install fireworks
 /model
 ```
+
+**Shell**
 
 ```bash
 dcode --install fireworks
@@ -308,10 +356,14 @@ Use the interactive switcher, or pass the model directly with `/model fireworks:
 
 **Baseten** is another cloud provider for open weights models:
 
+**In session**
+
 ```txt
 /install baseten
 /model
 ```
+
+**Shell**
 
 ```bash
 dcode --install baseten
@@ -424,7 +476,7 @@ For detailed configuration of provider params, profile overrides, custom base UR
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Get Thread"
+description: "Get a thread by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, get-thread]
+---
+
 # Get Thread
 
 > Get a thread by ID.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /threads/{thread_id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Command reference"
+description: "Deep Agents Code command-line flags and management subcommands"
+source: "https://docs.langchain.com/oss/deepagents/code/cli-reference"
+category: "docs"
+tags: [docs, deepagents, code, cli-reference]
+---
+
 # Command reference
 
 > Deep Agents Code command-line flags and management subcommands
@@ -115,10 +123,14 @@ Add `--package` to install an arbitrary provider package via `uv --with` (see [A
 
 Remove one installed extra while preserving the rest of the Deep Agents Code installation:
 
+**Shell**
+
 ```bash
 dcode uninstall groq
 dcode --uninstall groq
 ```
+
+**In session**
 
 ```text
 /uninstall groq
@@ -562,7 +574,7 @@ Destructive commands (`agents reset`, `skills delete`, `threads delete`) support
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/cli-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

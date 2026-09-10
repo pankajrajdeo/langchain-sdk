@@ -1,3 +1,11 @@
+---
+title: "Analyze an experiment"
+description: "This page describes some of the essential tasks for working with experiments in LangSmith:"
+source: "https://docs.langchain.com/langsmith/analyze-an-experiment"
+category: "docs"
+tags: [docs, langsmith, analyze-an-experiment]
+---
+
 # Analyze an experiment
 
 This page describes some of the essential tasks for working with [*experiments*](evaluation-concepts.md#experiment) in LangSmith:
@@ -102,6 +110,8 @@ If you've run your experiment with [*repetitions*](repetition.md), click any row
 
 In the top right of the experiment view, you can select another experiment to compare to. This will open up a comparison view, where you can see how the two experiments compare. To learn more about the comparison view, see [how to compare experiment results](compare-experiment-results.md).
 
+<a id="set-a-baseline-in-the-experiments-view"></a>
+
 ## Set a baseline in the Experiments tab view
 
 While you may run dozens of tests, you typically have a specific benchmark you are trying to outperform. Setting a *baseline* anchors your results against this reference point, which allows you to identify improvements or regressions in a crowded experiment list.
@@ -185,7 +195,7 @@ You can rename an experiment in the LangSmith UI in the following places:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/analyze-an-experiment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

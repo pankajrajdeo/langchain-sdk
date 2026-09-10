@@ -1,6 +1,16 @@
+---
+title: "Invoke prompt"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/prompts/invoke_prompt"
+source: "https://docs.langchain.com/langsmith/smith-api/prompts/invoke-prompt"
+category: "docs"
+tags: [docs, langsmith, smith-api, prompts, invoke-prompt]
+---
+
 # Invoke prompt
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/prompts/invoke_prompt**
 
 ````yaml
 openapi: 3.1.0

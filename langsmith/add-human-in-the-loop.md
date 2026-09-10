@@ -1,3 +1,11 @@
+---
+title: "Human-in-the-loop using server API"
+description: "To review, edit, and approve tool calls in an agent or workflow, use LangGraph's human-in-the-loop features."
+source: "https://docs.langchain.com/langsmith/add-human-in-the-loop"
+category: "docs"
+tags: [docs, langsmith, add-human-in-the-loop]
+---
+
 # Human-in-the-loop using server API
 
 To review, edit, and approve tool calls in an agent or workflow, use LangGraph's [human-in-the-loop](../langgraph/interrupts.md) features.
@@ -461,7 +469,7 @@ curl --request POST \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/add-human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

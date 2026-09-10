@@ -1,8 +1,18 @@
+---
+title: "Create comparative experiment"
+description: "Create a comparative experiment."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/create-comparative-experiment"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, create-comparative-experiment]
+---
+
 # Create comparative experiment
 
 > Create a comparative experiment.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/datasets/comparative**
 
 ````yaml
 openapi: 3.1.0

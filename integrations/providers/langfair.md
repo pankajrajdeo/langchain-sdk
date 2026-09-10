@@ -1,3 +1,11 @@
+---
+title: "Langfair integrations"
+description: "Integrate with Langfair using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/langfair"
+category: "docs"
+tags: [docs, integrations, providers, langfair]
+---
+
 # Langfair integrations
 
 > Integrate with Langfair using LangChain Python.
@@ -16,9 +24,13 @@ We recommend creating a new virtual environment using `venv` before installing L
 
 The latest version can be installed from PyPI:
 
+**pip**
+
 ```bash
 pip install langfair
 ```
+
+**uv**
 
 ```bash
 uv add langfair
@@ -154,7 +166,7 @@ results['metrics']
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langfair.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

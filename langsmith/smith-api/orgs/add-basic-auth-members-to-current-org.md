@@ -1,8 +1,18 @@
+---
+title: "Add basic auth members to current org"
+description: "Batch add up to 500 users to the org and specified workspaces in basic auth mode."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/add-basic-auth-members-to-current-org"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, add-basic-auth-members-to-current-org]
+---
+
 # Add basic auth members to current org
 
 > Batch add up to 500 users to the org and specified workspaces in basic auth mode.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/members/basic/batch**
 
 ````yaml
 openapi: 3.1.0

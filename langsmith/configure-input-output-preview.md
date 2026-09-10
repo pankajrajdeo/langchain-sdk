@@ -1,3 +1,11 @@
+---
+title: "Configure run input and output preview"
+description: "Customize what appears in the Input and Output columns of the Runs table by configuring custom preview paths for specific trace types."
+source: "https://docs.langchain.com/langsmith/configure-input-output-preview"
+category: "docs"
+tags: [docs, langsmith, configure-input-output-preview]
+---
+
 # Configure run input and output preview
 
 > Customize what appears in the Input and Output columns of the Runs table by configuring custom preview paths for specific trace types.
@@ -109,7 +117,7 @@ Or, use negative indexing for the last message:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-input-output-preview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

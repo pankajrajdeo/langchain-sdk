@@ -1,3 +1,11 @@
+---
+title: "Tool calling"
+description: "Display agent tool calls with rich, type-safe UI cards"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/tool-calling"
+category: "docs"
+tags: [docs, langchain, frontend, tool-calling]
+---
+
 # Tool calling
 
 > Display agent tool calls with rich, type-safe UI cards
@@ -30,7 +38,9 @@ reactive state including a `toolCalls` array that updates in real time as the
 agent streams.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -52,6 +62,8 @@ export function Chat() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -77,6 +89,8 @@ const stream = useStream<typeof myAgent>({
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -95,6 +109,8 @@ const stream = useStream<typeof myAgent>({
   {/each}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component } from "@angular/core";
@@ -344,7 +360,7 @@ Follow these guidelines when building tool call UIs:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/tool-calling.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

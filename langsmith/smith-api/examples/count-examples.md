@@ -1,8 +1,18 @@
+---
+title: "Count examples"
+description: "Count all examples by query params"
+source: "https://docs.langchain.com/langsmith/smith-api/examples/count-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, count-examples]
+---
+
 # Count examples
 
 > Count all examples by query params
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/examples/count**
 
 ````yaml
 openapi: 3.1.0

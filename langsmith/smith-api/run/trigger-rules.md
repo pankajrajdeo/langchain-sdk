@@ -1,8 +1,18 @@
+---
+title: "Trigger rules"
+description: "Trigger an array of run rules manually."
+source: "https://docs.langchain.com/langsmith/smith-api/run/trigger-rules"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, trigger-rules]
+---
+
 # Trigger rules
 
 > Trigger an array of run rules manually.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/rules/trigger**
 
 ````yaml
 openapi: 3.1.0

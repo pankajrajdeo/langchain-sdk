@@ -1,8 +1,18 @@
+---
+title: "Create examples"
+description: "Create bulk examples."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/create-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, create-examples]
+---
+
 # Create examples
 
 > Create bulk examples.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/examples/bulk**
 
 ````yaml
 openapi: 3.1.0

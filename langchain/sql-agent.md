@@ -1,3 +1,11 @@
+---
+title: "Build a SQL agent"
+description: "In this tutorial, you will learn how to build an agent that can answer questions about a SQL database using LangChain agents."
+source: "https://docs.langchain.com/oss/python/langchain/sql-agent"
+category: "docs"
+tags: [docs, langchain, sql-agent]
+---
+
 # Build a SQL agent
 
 ## Overview
@@ -29,6 +37,8 @@ The following tutorial covers the following concepts:
 ## Setup
 
 ### Install dependencies
+**pip**
+
 ```bash
 pip install langchain langgraph
 ```
@@ -49,13 +59,19 @@ Select a model that supports [tool-calling](../integrations/providers/overview.m
 #### OpenAI
 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[openai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[openai]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -65,6 +81,8 @@ os.environ["OPENAI_API_KEY"] = "sk-..."
 
 model = init_chat_model("gpt-5.5")
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -78,13 +96,19 @@ model = ChatOpenAI(model="gpt-5.5")
 #### Anthropic
 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[anthropic]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[anthropic]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -94,6 +118,8 @@ os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 
 model = init_chat_model("claude-sonnet-4-6")
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -107,13 +133,19 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 #### Azure
 👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[openai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[openai]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -128,6 +160,8 @@ model = init_chat_model(
     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
 )
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -146,13 +180,19 @@ model = AzureChatOpenAI(
 #### Google Gemini
 👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[google-genai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[google-genai]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -162,6 +202,8 @@ os.environ["GOOGLE_API_KEY"] = "..."
 
 model = init_chat_model("google_genai:gemini-3.7-flash")
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -175,13 +217,19 @@ model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
 #### AWS Bedrock
 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[aws]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[aws]"
 ```
+
+**init_chat_model**
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -195,6 +243,8 @@ model = init_chat_model(
 )
 ```
 
+**Model Class**
+
 ```python
 from langchain_aws import ChatBedrock
 
@@ -204,13 +254,19 @@ model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 #### HuggingFace
 👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[huggingface]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[huggingface]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -225,6 +281,8 @@ model = init_chat_model(
     max_tokens=1024,
 )
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -243,13 +301,19 @@ model = ChatHuggingFace(llm=llm)
 #### OpenRouter
 👉 Read the [OpenRouter chat model integration docs](../integrations/chat/openrouter.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain-openrouter"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain-openrouter"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -262,6 +326,8 @@ model = init_chat_model(
     model_provider="openrouter",
 )
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -906,7 +972,7 @@ For deeper customization, check out [this tutorial](../langgraph/sql-agent.md) f
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/sql-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

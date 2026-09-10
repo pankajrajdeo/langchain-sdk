@@ -1,3 +1,11 @@
+---
+title: "Unit testing"
+description: "Test agent logic without API calls using fake chat models and in-memory persistence."
+source: "https://docs.langchain.com/oss/python/langchain/test/unit-testing"
+category: "docs"
+tags: [docs, langchain, test, unit-testing]
+---
+
 # Unit testing
 
 > Test agent logic without API calls using fake chat models and in-memory persistence.
@@ -63,7 +71,7 @@ Learn how to test your agent with real model provider APIs in [Integration testi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/unit-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

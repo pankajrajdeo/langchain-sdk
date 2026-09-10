@@ -1,8 +1,18 @@
+---
+title: "Search Crons"
+description: "Search all active crons"
+source: "https://docs.langchain.com/langsmith/agent-server-api/crons/search-crons"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, crons, search-crons]
+---
+
 # Search Crons
 
 > Search all active crons
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /runs/crons/search**
 
 ````yaml
 openapi: 3.1.0

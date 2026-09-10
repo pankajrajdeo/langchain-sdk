@@ -1,3 +1,11 @@
+---
+title: "OCI Generative AI Integration for LangChain"
+description: "Integrate with OCI Generative AI using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/oci"
+category: "docs"
+tags: [docs, integrations, providers, oci]
+---
+
 # OCI Generative AI Integration for LangChain
 
 > Integrate with OCI Generative AI using LangChain Python.
@@ -6,9 +14,13 @@ This page covers all LangChain integrations with [Oracle Cloud Infrastructure (O
 
 ## Installation and Setup
 
+**pip**
+
 ```bash
 pip install langchain-oci oci
 ```
+
+**uv**
 
 ```bash
 uv add langchain-oci oci
@@ -335,7 +347,7 @@ For comprehensive guides covering all features, see the [langchain-oci samples](
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/oci.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

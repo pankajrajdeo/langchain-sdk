@@ -1,3 +1,11 @@
+---
+title: "Run an evaluation from the Playground"
+description: "LangSmith allows you to run evaluations directly in the UI. The Playground allows you to test your prompt or model configuration over a series of inputs to see how well it scores across different..."
+source: "https://docs.langchain.com/langsmith/playground-link"
+category: "docs"
+tags: [docs, langsmith, playground-link]
+---
+
 # Run an evaluation from the Playground
 
 LangSmith allows you to run evaluations directly in the UI. The [**Playground**](prompt-engineering-concepts.md#playground) allows you to test your prompt or model configuration over a series of inputs to see how well it scores across different contexts or scenarios, without having to write any code.
@@ -37,7 +45,7 @@ To learn more about adding evaluators in via UI, visit [how to define an LLM-as-
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-evaluation-from-playground.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

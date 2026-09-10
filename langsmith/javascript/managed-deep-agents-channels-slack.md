@@ -1,3 +1,11 @@
+---
+title: "Connect a Managed Deep Agent to Slack"
+description: "Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-channels-slack"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-channels-slack]
+---
+
 # Connect a Managed Deep Agent to Slack
 
 > Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations.
@@ -26,13 +34,19 @@ The channel declaration lives at `channels/slack.ts`.
 
 To include Slack when you create a project, pass `--channel slack`:
 
+**npm**
+
 ```bash
 npx managed-deepagents init my-agent --channel slack
 ```
 
+**pnpm**
+
 ```bash
 pnpm dlx managed-deepagents init my-agent --channel slack
 ```
+
+**bun**
 
 ```bash
 bunx managed-deepagents init my-agent --channel slack
@@ -40,17 +54,25 @@ bunx managed-deepagents init my-agent --channel slack
 
 To add Slack to an existing project, run the channel initialization command from the project root:
 
+**npm**
+
 ```bash
 npx mda channels init slack
 ```
+
+**pnpm**
 
 ```bash
 pnpm exec mda channels init slack
 ```
 
+**bun**
+
 ```bash
 bunx mda channels init slack
 ```
+
+**channels/slack.ts**
 
 ```ts
 import { channels } from "managed-deepagents";
@@ -84,6 +106,8 @@ my-agent/
     support-agent.png
 ```
 
+**channels/slack.ts**
+
 ```ts
 import { channels } from "managed-deepagents";
 
@@ -110,13 +134,19 @@ During deployment, Managed Deep Agents provisions your agent in Slack from the c
 ### Deploy your agent
 Run the deployment command from the project root:
 
+**npm**
+
 ```bash
 npx mda deploy
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda deploy
 ```
+
+**bun**
 
 ```bash
 bunx mda deploy
@@ -148,7 +178,7 @@ After you change the agent's name, description, icon, or background color in the
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels-slack.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

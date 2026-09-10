@@ -1,3 +1,11 @@
+---
+title: "Deploy full-stack web apps"
+description: "Deploy LangChain agents as full-stack web apps on Next.js, SvelteKit, Nuxt, Cloudflare Workers, Deno Deploy, and Vite with streaming UI and thread history."
+source: "https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms"
+category: "docs"
+tags: [docs, langsmith, deploy-frameworks-and-platforms]
+---
+
 # Deploy full-stack web apps
 
 > Deploy LangChain agents as full-stack web apps on Next.js, SvelteKit, Nuxt, Cloudflare Workers, Deno Deploy, and Vite with streaming UI and thread history.
@@ -89,7 +97,7 @@ These bindings ship no components of their own. Hooks like `useStream` return pl
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-frameworks-and-platforms.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

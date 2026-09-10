@@ -1,3 +1,11 @@
+---
+title: "Get tag transition history"
+description: "Returns the paginated audit log of transitions for a specific tag in a repository. Each entry records a commit change (from_commit → to_commit) along with who performed it."
+source: "https://docs.langchain.com/langsmith/smith-api/tag-transitions/get-tag-transition-history"
+category: "docs"
+tags: [docs, langsmith, smith-api, tag-transitions, get-tag-transition-history]
+---
+
 # Get tag transition history
 
 > Returns the paginated audit log of transitions for a specific
@@ -5,6 +13,8 @@ tag in a repository. Each entry records a commit change
 (from_commit → to_commit) along with who performed it.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /repos/{owner}/{repo}/tags/{tag_name}/history**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "Glob a sandbox filesystem"
+description: "Find files under a root path matching a glob pattern (supports ). Entries are returned in lexical order by path."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/glob-a-sandbox-filesystem"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, glob-a-sandbox-filesystem]
+---
+
 # Glob a sandbox filesystem
 
 > Find files under a root path matching a glob pattern (supports **). Entries are returned in lexical order by path.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/{sandbox_id}/glob**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "Get MCP vendor"
+description: "Returns vendor metadata and current settings."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp_vendors/get-mcp-vendor"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp_vendors, get-mcp-vendor]
+---
+
 # Get MCP vendor
 
 > Returns vendor metadata and current settings.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/mcp-vendors/{vendor_slug}**
 
 ````yaml
 openapi: 3.1.0

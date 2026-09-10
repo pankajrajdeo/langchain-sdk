@@ -1,3 +1,11 @@
+---
+title: "Self-hosted LangSmith on GCP"
+description: "When running LangSmith on Google Cloud Platform (GCP), self-hosted mode deploys a complete LangSmith platform with observability functionality."
+source: "https://docs.langchain.com/langsmith/gcp-self-hosted"
+category: "docs"
+tags: [docs, langsmith, gcp-self-hosted]
+---
+
 # Self-hosted LangSmith on GCP
 
 When running LangSmith on [Google Cloud Platform (GCP)](https://cloud.google.com/), [self-hosted](self-hosted.md) mode deploys a complete LangSmith platform with observability functionality.
@@ -146,7 +154,7 @@ Integrate with:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/gcp-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

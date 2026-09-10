@@ -1,6 +1,16 @@
+---
+title: "List namespaces with optional match conditions."
+description: "/langsmith/agent-server-openapi.json post /store/namespaces"
+source: "https://docs.langchain.com/langsmith/agent-server-api/store/list-namespaces-with-optional-match-conditions"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, store, list-namespaces-with-optional-match-conditions]
+---
+
 # List namespaces with optional match conditions.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /store/namespaces**
 
 ````yaml
 openapi: 3.1.0

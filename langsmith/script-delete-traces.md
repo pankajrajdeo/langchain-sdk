@@ -1,3 +1,11 @@
+---
+title: "Delete traces"
+description: "The LangSmith UI does not currently support the deletion of an individual trace. This, however, can be accomplished by directly removing the trace from all materialized views in ClickHouse (except..."
+source: "https://docs.langchain.com/langsmith/script-delete-traces"
+category: "docs"
+tags: [docs, langsmith, script-delete-traces]
+---
+
 # Delete traces
 
 The LangSmith UI does not currently support the deletion of an individual trace. This, however, can be accomplished by directly removing the trace from all materialized views in ClickHouse (except the runs\_history views) and the runs and feedback table themselves.
@@ -98,7 +106,7 @@ If you experience issues after a large deletion, contact [support](https://suppo
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-delete-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

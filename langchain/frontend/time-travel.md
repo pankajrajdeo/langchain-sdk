@@ -1,3 +1,11 @@
+---
+title: "Time travel"
+description: "Inspect, navigate, and resume from any checkpoint in the conversation history"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/time-travel"
+category: "docs"
+tags: [docs, langchain, frontend, time-travel]
+---
+
 # Time travel
 
 > Inspect, navigate, and resume from any checkpoint in the conversation history
@@ -34,7 +42,9 @@ the LangGraph client for the active thread. Resuming from a checkpoint uses
 `forkFrom: { checkpointId }`.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -71,6 +81,8 @@ export function TimeTravelChat() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -114,6 +126,8 @@ function resumeFrom(cp: ThreadState) {
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -152,6 +166,8 @@ function resumeFrom(cp: ThreadState) {
   <TimelineSidebar {history} onSelect={resumeFrom} />
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component, effect, signal } from "@angular/core";
@@ -499,7 +515,7 @@ function TimelineEntry({
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/time-travel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

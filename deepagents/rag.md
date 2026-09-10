@@ -1,3 +1,11 @@
+---
+title: "Retrieval Augmented Generation (RAG) with Deep Agents"
+description: "RAG patterns for Deep Agents, including skills-guided retrieval, rubric grading, and a tutorial that indexes LangChain docs, offloads chunks to the filesystem, and delegates analysis to subagents"
+source: "https://docs.langchain.com/oss/python/deepagents/rag"
+category: "docs"
+tags: [docs, deepagents, rag]
+---
+
 # Retrieval Augmented Generation (RAG) with Deep Agents
 
 > RAG patterns for Deep Agents, including skills-guided retrieval, rubric grading, and a tutorial that indexes LangChain docs, offloads chunks to the filesystem, and delegates analysis to subagents
@@ -8,7 +16,7 @@ These applications use a technique known as Retrieval Augmented Generation, or [
 
 [Deep Agents](overview.md) gives you primitives for RAG: custom retrieval tools, a [filesystem backend](backends.md), [subagents](subagents.md), [skills](skills.md), and [grading rubrics](rubric.md). You can combine them in different ways depending on your corpus size, latency requirements, and how strictly answers must be grounded in source data.
 
-This guide introduces several RAG patterns and walks through one end-to-end example: a documentation Q\&A agent that indexes a subset of [docs.langchain.com](https://docs.langchain.com), retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents so the orchestrator context stays clean.
+This guide introduces several RAG patterns and walks through one end-to-end example: a documentation Q\&A agent that indexes a subset of [docs.langchain.com](../home.md), retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents so the orchestrator context stays clean.
 
 ## RAG patterns
 
@@ -36,6 +44,8 @@ This tutorial uses one question throughout:
 
 Pass that question to a [Deep Agent](overview.md) with no custom tools and no access to the documentation corpus, to see what the model comes up with:
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.messages import HumanMessage
@@ -57,6 +67,8 @@ result = baseline_agent.invoke(
 
 print(result["messages"][-1].text)
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -80,6 +92,8 @@ result = baseline_agent.invoke(
 print(result["messages"][-1].text)
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.messages import HumanMessage
@@ -101,6 +115,8 @@ result = baseline_agent.invoke(
 
 print(result["messages"][-1].text)
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -124,6 +140,8 @@ result = baseline_agent.invoke(
 print(result["messages"][-1].text)
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.messages import HumanMessage
@@ -145,6 +163,8 @@ result = baseline_agent.invoke(
 
 print(result["messages"][-1].text)
 ```
+
+**Baseten**
 
 ```python
 from deepagents import create_deep_agent
@@ -168,6 +188,8 @@ result = baseline_agent.invoke(
 print(result["messages"][-1].text)
 ```
 
+**Ollama**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.messages import HumanMessage
@@ -189,6 +211,9 @@ result = baseline_agent.invoke(
 
 print(result["messages"][-1].text)
 ```
+
+#### [View example trace](https://smith.langchain.com/public/cc30c5b2-c787-41ea-800c-a0f835bdcce5/r)
+Open a public LangSmith run for this example.
 
 Without retrieval, the agent cannot look up current LangChain documentation. Responses tend to be generic, may omit guidance such as [subagent streaming](frontend/subagent-streaming.md), or include outdated information.
 
@@ -217,9 +242,13 @@ cd docs-rag-agent
 ```
 
 ### Install dependencies
+**pip**
+
 ```bash
 pip install deepagents "langchain[openai]" langchain-text-splitters requests numpy
 ```
+
+**uv**
 
 ```bash
 uv init
@@ -936,6 +965,8 @@ Your role is to coordinate chunk analysis by delegating to the chunk-analyst sub
 ### Create the agent
 Add model initialization and agent creation to `agent.py`:
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.chat_models import init_chat_model
@@ -971,6 +1002,8 @@ agent = create_deep_agent(
     subagents=[chunk_analyst_subagent],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1008,6 +1041,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.chat_models import init_chat_model
@@ -1043,6 +1078,8 @@ agent = create_deep_agent(
     subagents=[chunk_analyst_subagent],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1080,6 +1117,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.chat_models import init_chat_model
@@ -1116,6 +1155,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.chat_models import init_chat_model
@@ -1151,6 +1192,8 @@ agent = create_deep_agent(
     subagents=[chunk_analyst_subagent],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1231,7 +1274,7 @@ For more on this topic, see research on [prompt injection](https://simonwillison
 
 ## Full code
 
-The following is the complete script for the agent using Gemini. For other models please see the step-by-step approach to see what changes:
+The following is the complete script for the agent using one set of example models. For other models please see the step-by-step approach to see what changes:
 
 Save as `agent.py` and run with `python agent.py`:
 
@@ -1246,7 +1289,7 @@ from langchain.messages import HumanMessage
 from langchain.tools import tool
 from langchain_core.documents import Document
 from langchain_core.vectorstores import InMemoryVectorStore
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 DOCS_BASE = "https://docs.langchain.com"
@@ -1292,7 +1335,7 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20
 all_splits = text_splitter.split_documents(docs)
 print(f"Split documentation into {len(all_splits)} chunks.")
 
-embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 vector_store = InMemoryVectorStore(embedding=embeddings)
 vector_store.add_documents(documents=all_splits)
 print(f"Indexed {len(all_splits)} chunks.")
@@ -1392,7 +1435,7 @@ chunk_analyst_subagent = {
     "system_prompt": CHUNK_ANALYST_INSTRUCTIONS,
 }
 
-model = init_chat_model(model="google_genai:gemini-3.6-flash")
+model = init_chat_model(model="anthropic:claude-sonnet-4-6")
 
 agent = create_deep_agent(
     model=model,
@@ -1427,7 +1470,7 @@ You implemented one RAG pattern with [`create_deep_agent`](https://reference.lan
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

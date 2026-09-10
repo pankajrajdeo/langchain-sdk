@@ -1,8 +1,18 @@
+---
+title: "Create dataset"
+description: "Create a new dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/create-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, create-dataset]
+---
+
 # Create dataset
 
 > Create a new dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/datasets**
 
 ````yaml
 openapi: 3.1.0

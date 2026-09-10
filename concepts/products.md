@@ -1,3 +1,11 @@
+---
+title: "Runtimes, frameworks, and harnesses"
+description: "Understand the differences between LangChain, LangGraph, and Deep Agents and when to use each one"
+source: "https://docs.langchain.com/oss/python/concepts/products"
+category: "docs"
+tags: [docs, concepts, products]
+---
+
 # Runtimes, frameworks, and harnesses
 
 > Understand the differences between LangChain, LangGraph, and Deep Agents and when to use each one
@@ -135,7 +143,7 @@ While you can accomplish similar tasks with LangChain, LangGraph, and Deep Agent
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/concepts/products.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

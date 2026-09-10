@@ -1,3 +1,11 @@
+---
+title: "Google calendar toolkit integration"
+description: "Integrate with the Google calendar toolkit using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/google_calendar"
+category: "docs"
+tags: [docs, integrations, tools, google_calendar]
+---
+
 # Google calendar toolkit integration
 
 > Integrate with the Google calendar toolkit using LangChain Python.
@@ -202,7 +210,7 @@ I have created a green event for your run this afternoon. You can view it [in Go
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_calendar.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

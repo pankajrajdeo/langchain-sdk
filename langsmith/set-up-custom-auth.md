@@ -1,3 +1,11 @@
+---
+title: "Set up custom authentication"
+description: "In this tutorial, we will build a chatbot that only lets specific users access it. We'll start with the LangGraph template and add token-based security step by step. By the end, you'll have a working..."
+source: "https://docs.langchain.com/langsmith/set-up-custom-auth"
+category: "docs"
+tags: [docs, langsmith, set-up-custom-auth]
+---
+
 # Set up custom authentication
 
 In this tutorial, we will build a chatbot that only lets specific users access it. We'll start with the LangGraph template and add token-based security step by step. By the end, you'll have a working chatbot that checks for valid tokens before allowing access.
@@ -20,11 +28,15 @@ This guide assumes basic familiarity with the following concepts:
 
 Create a new chatbot using the LangGraph starter template:
 
+**pip**
+
 ```bash
 pip install -U "langgraph-cli[inmem]"
 langgraph new --template=new-langgraph-project-python custom-auth
 cd custom-auth
 ```
+
+**uv**
 
 ```bash
 uv add "langgraph-cli[inmem]"
@@ -34,15 +46,21 @@ cd custom-auth
 
 The template gives us a placeholder LangGraph app. Try it out by installing the local dependencies and running the development server:
 
+**pip**
+
 ```bash
 pip install -e .
 langgraph dev
 ```
 
+**uv**
+
 ```bash
 uv add .
 langgraph dev
 ```
+
+**npm**
 
 ```bash
 npx @langchain/langgraph-cli dev
@@ -205,7 +223,7 @@ Now that you can control who accesses your bot, you might want to:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/set-up-custom-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

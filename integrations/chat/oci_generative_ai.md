@@ -1,3 +1,11 @@
+---
+title: "OCI Generative AI Integration for LangChain"
+description: "Integrate with OCI Generative AI chat models using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/oci_generative_ai"
+category: "docs"
+tags: [docs, integrations, chat, oci_generative_ai]
+---
+
 # OCI Generative AI Integration for LangChain
 
 > Integrate with OCI Generative AI chat models using LangChain Python.
@@ -24,9 +32,13 @@ For detailed documentation, see the [OCI Generative AI documentation](https://do
 
 ### Installation
 
+**pip**
+
 ```bash
 pip install -qU langchain-oci oci
 ```
+
+**uv**
 
 ```bash
 uv add langchain-oci oci
@@ -373,7 +385,7 @@ For detailed documentation of all `ChatOCIGenAI` features and configurations, he
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/oci_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

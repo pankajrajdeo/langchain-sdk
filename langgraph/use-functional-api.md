@@ -1,3 +1,11 @@
+---
+title: "Use the functional API"
+description: "The Functional API allows you to add LangGraph's key features (persistence, memory, human-in-the-loop, and streaming) to your applications with minimal changes to your existing code."
+source: "https://docs.langchain.com/oss/python/langgraph/use-functional-api"
+category: "docs"
+tags: [docs, langgraph, use-functional-api]
+---
+
 # Use the functional API
 
 The [**Functional API**](functional-api.md) allows you to add LangGraph's key features ([persistence](persistence.md), [memory](add-memory.md), [human-in-the-loop](interrupts.md), and [streaming](streaming.md)) to your applications with minimal changes to your existing code.
@@ -274,6 +282,9 @@ for mode, chunk in stream.interleave("values"):
     print(f"{mode}: {chunk}")
 # values: 10
 ```
+
+#### [View example trace](https://smith.langchain.com/public/1b3e500b-749a-4587-9906-5a92c0471ffe/r)
+Open a public LangSmith run for this example.
 
 1. Import [`get_stream_writer`](https://reference.langchain.com/python/langgraph/config/get_stream_writer) from `langgraph.config`.
 2. Obtain a stream writer instance within the entrypoint.
@@ -836,7 +847,7 @@ for snapshot in stream.values:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-functional-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

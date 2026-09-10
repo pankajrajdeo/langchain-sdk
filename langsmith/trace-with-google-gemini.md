@@ -1,3 +1,11 @@
+---
+title: "Trace Google Gemini applications"
+description: "This guide shows you how to trace and log Google's Gemini models in LangSmith. You'll instrument Gemini calls using the latest google-genai SDK (Python) or @google/genai SDK (JavaScript), wrap the..."
+source: "https://docs.langchain.com/langsmith/trace-with-google-gemini"
+category: "docs"
+tags: [docs, langsmith, trace-with-google-gemini]
+---
+
 # Trace Google Gemini applications
 
 This guide shows you how to trace and log [Google's Gemini](https://ai.google.dev/gemini-api/docs) models in LangSmith. You'll instrument Gemini calls using the latest [`google-genai` SDK](https://googleapis.github.io/python-genai/) (Python) or [`@google/genai` SDK](https://googleapis.github.io/js-genai/release_docs/index.html) (JavaScript), wrap the Gemini client for tracing, and try examples including basic prompts, metadata tagging, and multi-turn conversations.
@@ -9,9 +17,13 @@ This guide shows you how to trace and log [Google's Gemini](https://ai.google.de
 
 Install the required packages using your preferred package manager:
 
+**pip**
+
 ```bash
 pip install langsmith google-genai
 ```
+
+**npm**
 
 ```bash
 npm install langsmith@latest @google/genai
@@ -33,6 +45,8 @@ To create a Google API key, refer to [Google AI Studio](https://aistudio.google.
 ## Configure tracing
 
 To trace Gemini API calls, use LangSmith's [`wrap_gemini`](https://reference.langchain.com/python/langsmith/wrappers/_gemini/wrap_gemini) (Python) or [`wrapGemini`](https://reference.langchain.com/javascript/functions/langsmith.wrappers_gemini.wrapGemini.html) (JavaScript) wrapper function. This wrapper intercepts calls to the Gemini client and automatically logs them as traces in LangSmith. The wrapper preserves all of the original client's functionality while adding observability:
+
+**Python**
 
 ```python
 from google import genai
@@ -64,6 +78,8 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+**JavaScript**
 
 ```javascript
 import { GoogleGenAI } from "@google/genai";
@@ -123,7 +139,7 @@ After running your application, you can view traces in the [LangSmith UI](https:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-google-gemini.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

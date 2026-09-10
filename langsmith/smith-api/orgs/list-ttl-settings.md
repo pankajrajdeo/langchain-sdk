@@ -1,8 +1,18 @@
+---
+title: "List TTL settings"
+description: "List out the configured TTL settings for a given org (org-level and tenant-level)."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/list-ttl-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, list-ttl-settings]
+---
+
 # List TTL settings
 
 > List out the configured TTL settings for a given org (org-level and tenant-level).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/ttl-settings**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Search gateway policies by subject value set"
+description: "Batch variant of GET /v1/platform/gateway-policies for fetching policies that match a set of subject_matcher_values under one subject_matcher_key. Accepts the values in a JSON body so callers can..."
+source: "https://docs.langchain.com/langsmith/smith-api/gateway-policies/search-gateway-policies-by-subject-value-set"
+category: "docs"
+tags: [docs, langsmith, smith-api, gateway-policies, search-gateway-policies-by-subject-value-set]
+---
+
 # Search gateway policies by subject value set
 
 > Batch variant of GET /v1/platform/gateway-policies for
@@ -12,6 +20,8 @@ empty (or omitted) this returns the same result as GET
 with only `policy_type` set.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/gateway-policies/search**
 
 ````yaml
 openapi: 3.1.0

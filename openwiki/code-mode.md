@@ -1,3 +1,11 @@
+---
+title: "Code mode"
+description: "Generate and maintain repository documentation for coding agents with OpenWiki"
+source: "https://docs.langchain.com/oss/openwiki/code-mode"
+category: "docs"
+tags: [docs, openwiki, code-mode]
+---
+
 # Code mode
 
 > Generate and maintain repository documentation for coding agents with OpenWiki
@@ -119,7 +127,7 @@ Normal `--init` and `--update` runs do not rewrite this file.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/code-mode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

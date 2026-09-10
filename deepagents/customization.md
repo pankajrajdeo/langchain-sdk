@@ -1,8 +1,18 @@
+---
+title: "Customize Deep Agents"
+description: "Learn how to customize Deep Agents with system prompts, tools, subagents, and more"
+source: "https://docs.langchain.com/oss/python/deepagents/customization"
+category: "docs"
+tags: [docs, deepagents, customization]
+---
+
 # Customize Deep Agents
 
 > Learn how to customize Deep Agents with system prompts, tools, subagents, and more
 
 Build the harness around your goal. `create_deep_agent` gives you a production-ready foundation: connect it to your data, shape its behavior, and add the capabilities your use case needs.
+
+**Google**
 
 ```python
 from deepagents import create_deep_agent
@@ -16,6 +26,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -27,6 +39,8 @@ agent = create_deep_agent(
     skills=["./skills/"],
 )
 ```
+
+**Anthropic**
 
 ```python
 from deepagents import create_deep_agent
@@ -40,6 +54,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -51,6 +67,8 @@ agent = create_deep_agent(
     skills=["./skills/"],
 )
 ```
+
+**Fireworks**
 
 ```python
 from deepagents import create_deep_agent
@@ -64,6 +82,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -75,6 +95,8 @@ agent = create_deep_agent(
     skills=["./skills/"],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -151,13 +173,19 @@ Pass a `model` string in `provider:model` format, or an initialized model instan
 #### OpenAI
 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[openai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[openai]"
 ```
+
+**default parameters**
 
 ```python
 import os
@@ -170,6 +198,8 @@ agent = create_deep_agent(model="openai:gpt-5.5")
 # to use specific model parameters, use init_chat_model directly
 ```
 
+**init_chat_model**
+
 ```python
 import os
 from langchain.chat_models import init_chat_model
@@ -180,6 +210,8 @@ os.environ["OPENAI_API_KEY"] = "sk-..."
 model = init_chat_model(model="openai:gpt-5.5")
 agent = create_deep_agent(model=model)
 ```
+
+**model class**
 
 ```python
 import os
@@ -195,13 +227,19 @@ agent = create_deep_agent(model=model)
 #### Anthropic
 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[anthropic]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[anthropic]"
 ```
+
+**default parameters**
 
 ```python
 import os
@@ -214,6 +252,8 @@ agent = create_deep_agent(model="anthropic:claude-sonnet-4-6")
 # to use specific model parameters, use init_chat_model directly
 ```
 
+**init_chat_model**
+
 ```python
 import os
 from langchain.chat_models import init_chat_model
@@ -224,6 +264,8 @@ os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 model = init_chat_model(model="claude-sonnet-4-6")
 agent = create_deep_agent(model=model)
 ```
+
+**model class**
 
 ```python
 import os
@@ -239,13 +281,19 @@ agent = create_deep_agent(model=model)
 #### Azure
 👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[openai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[openai]"
 ```
+
+**default parameters**
 
 ```python
 import os
@@ -259,6 +307,8 @@ agent = create_deep_agent(model="azure_openai:gpt-5.5")
 # this calls init_chat_model for the specified model with default parameters
 # to use specific model parameters, use init_chat_model directly
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -275,6 +325,8 @@ model = init_chat_model(
 )
 agent = create_deep_agent(model=model)
 ```
+
+**model class**
 
 ```python
 import os
@@ -295,13 +347,19 @@ agent = create_deep_agent(model=model)
 #### Google Gemini
 👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[google-genai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[google-genai]"
 ```
+
+**default parameters**
 
 ```python
 import os
@@ -314,6 +372,8 @@ agent = create_deep_agent(model="google_genai:gemini-3.6-flash")
 # to use specific model parameters, use init_chat_model directly
 ```
 
+**init_chat_model**
+
 ```python
 import os
 from langchain.chat_models import init_chat_model
@@ -324,6 +384,8 @@ os.environ["GOOGLE_API_KEY"] = "..."
 model = init_chat_model(model="google_genai:gemini-3.6-flash")
 agent = create_deep_agent(model=model)
 ```
+
+**model class**
 
 ```python
 import os
@@ -339,13 +401,19 @@ agent = create_deep_agent(model=model)
 #### AWS Bedrock
 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[aws]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[aws]"
 ```
+
+**default parameters**
 
 ```python
 from deepagents import create_deep_agent
@@ -361,6 +429,8 @@ agent = create_deep_agent(
 # to use specific model parameters, use init_chat_model directly
 ```
 
+**init_chat_model**
+
 ```python
 from langchain.chat_models import init_chat_model
 from deepagents import create_deep_agent
@@ -374,6 +444,8 @@ model = init_chat_model(
 )
 agent = create_deep_agent(model=model)
 ```
+
+**model class**
 
 ```python
 from langchain_aws import ChatBedrock
@@ -389,13 +461,19 @@ agent = create_deep_agent(model=model)
 #### HuggingFace
 👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[huggingface]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[huggingface]"
 ```
+
+**default parameters**
 
 ```python
 import os
@@ -413,6 +491,8 @@ agent = create_deep_agent(
 # to use specific model parameters, use init_chat_model directly
 ```
 
+**init_chat_model**
+
 ```python
 import os
 from langchain.chat_models import init_chat_model
@@ -428,6 +508,8 @@ model = init_chat_model(
 )
 agent = create_deep_agent(model=model)
 ```
+
+**model class**
 
 ```python
 import os
@@ -448,19 +530,27 @@ agent = create_deep_agent(model=model)
 #### Other
 Pass any [supported model string](models.md#supported-models), or an initialized model instance. For example:
 
+**pip**
+
 ```bash
 pip install -U "langchain[deepseek]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[deepseek]"
 ```
+
+**default parameters**
 
 ```python
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(model="provider:model-name")
 ```
+
+**init_chat_model**
 
 ```python
 from deepagents import create_deep_agent
@@ -469,6 +559,8 @@ from langchain.chat_models import init_chat_model
 model = init_chat_model("provider:model-name")
 agent = create_deep_agent(model=model)
 ```
+
+**model class**
 
 ```python
 from langchain_<provider> import Chat<Provider>
@@ -488,6 +580,8 @@ agent = create_deep_agent(model=model)
 ## Tools
 
 In addition to [built-in tools](overview.md#execution-environment) for file management and subagent spawning, you can provide custom tools:
+
+**Google**
 
 ```python
 import os
@@ -517,6 +611,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 import os
 from typing import Literal
@@ -544,6 +640,8 @@ agent = create_deep_agent(
     tools=[internet_search],
 )
 ```
+
+**Anthropic**
 
 ```python
 import os
@@ -573,6 +671,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 import os
 from typing import Literal
@@ -600,6 +700,8 @@ agent = create_deep_agent(
     tools=[internet_search],
 )
 ```
+
+**Fireworks**
 
 ```python
 import os
@@ -629,6 +731,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 import os
 from typing import Literal
@@ -656,6 +760,8 @@ agent = create_deep_agent(
     tools=[internet_search],
 )
 ```
+
+**Ollama**
 
 ```python
 import os
@@ -696,6 +802,8 @@ Install LangChain with the `mcp` extra to connect to MCP servers:
 pip install "langchain[mcp]"
 ```
 
+**Google**
+
 ```python
 import asyncio
 
@@ -719,6 +827,8 @@ async def main():
             config={"configurable": {"thread_id": "1"}},
         )
 ```
+
+**OpenAI**
 
 ```python
 import asyncio
@@ -744,6 +854,8 @@ async def main():
         )
 ```
 
+**Anthropic**
+
 ```python
 import asyncio
 
@@ -755,7 +867,7 @@ async def main():
     async with MCPAdapter(config) as adapter:
         tools = await adapter.list_tools()
         agent = create_deep_agent(
-            model="anthropic:claude-sonnet-5",
+            model="anthropic:claude-sonnet-4-6",
             tools=tools,
         )
         await agent.ainvoke(
@@ -767,6 +879,8 @@ async def main():
             config={"configurable": {"thread_id": "1"}},
         )
 ```
+
+**OpenRouter**
 
 ```python
 import asyncio
@@ -792,6 +906,8 @@ async def main():
         )
 ```
 
+**Fireworks**
+
 ```python
 import asyncio
 
@@ -816,6 +932,8 @@ async def main():
         )
 ```
 
+**Baseten**
+
 ```python
 import asyncio
 
@@ -839,6 +957,8 @@ async def main():
             config={"configurable": {"thread_id": "1"}},
         )
 ```
+
+**Ollama**
 
 ```python
 import asyncio
@@ -870,6 +990,8 @@ For detailed configuration options including stdio servers, OAuth authentication
 
 Pass `system_prompt=` to give the agent your own instructions:
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -883,6 +1005,8 @@ agent = create_deep_agent(
     system_prompt=research_instructions,
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -898,6 +1022,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -911,6 +1037,8 @@ agent = create_deep_agent(
     system_prompt=research_instructions,
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -926,6 +1054,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -940,6 +1070,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -953,6 +1085,8 @@ agent = create_deep_agent(
     system_prompt=research_instructions,
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1086,6 +1220,8 @@ For provider-specific middleware that is optimized for specific LLM providers, s
 
 You can provide additional middleware to extend functionality, add tools, or implement custom hooks:
 
+**Google**
+
 ```python
 from langchain.agents.middleware import wrap_tool_call
 from langchain.tools import tool
@@ -1121,6 +1257,8 @@ agent = create_deep_agent(
     middleware=[log_tool_calls],
 )
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents.middleware import wrap_tool_call
@@ -1158,6 +1296,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents.middleware import wrap_tool_call
 from langchain.tools import tool
@@ -1193,6 +1333,8 @@ agent = create_deep_agent(
     middleware=[log_tool_calls],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents.middleware import wrap_tool_call
@@ -1230,6 +1372,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents.middleware import wrap_tool_call
 from langchain.tools import tool
@@ -1266,6 +1410,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents.middleware import wrap_tool_call
 from langchain.tools import tool
@@ -1301,6 +1447,8 @@ agent = create_deep_agent(
     middleware=[log_tool_calls],
 )
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents.middleware import wrap_tool_call
@@ -1493,6 +1641,8 @@ See [Restricting filesystem tools](overview.md#virtual-filesystem-access) for mo
 
 Use [interpreters](interpreters.md) to add an `eval` tool that runs JavaScript in a scoped QuickJS runtime. Interpreters are useful when the agent needs to compose tools programmatically, batch work, handle errors in code, or transform structured data without a full shell environment.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1502,6 +1652,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1513,6 +1665,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1522,6 +1676,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1533,6 +1689,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1543,6 +1701,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1552,6 +1712,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1620,6 +1782,8 @@ A thread-scoped filesystem backend stored in `langgraph` state.
 
 Files persist across turns within a thread (via your checkpointer) and are not shared across threads.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -1633,6 +1797,8 @@ agent2 = create_deep_agent(
     backend=StateBackend(),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1648,6 +1814,8 @@ agent2 = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -1661,6 +1829,8 @@ agent2 = create_deep_agent(
     backend=StateBackend(),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1676,6 +1846,8 @@ agent2 = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -1690,6 +1862,8 @@ agent2 = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -1703,6 +1877,8 @@ agent2 = create_deep_agent(
     backend=StateBackend(),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1726,6 +1902,8 @@ The local machine's filesystem.
 > Use with caution and only in appropriate environments.
 > For more information, see [`FilesystemBackend`](backends.md#filesystembackend-local-disk).
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -1735,6 +1913,8 @@ agent = create_deep_agent(
     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1746,6 +1926,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -1755,6 +1937,8 @@ agent = create_deep_agent(
     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1766,6 +1950,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -1776,6 +1962,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -1785,6 +1973,8 @@ agent = create_deep_agent(
     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1807,6 +1997,8 @@ A filesystem with shell execution directly on the host. Provides filesystem tool
 > Use with extreme caution and only in appropriate environments.
 > For more information, see [`LocalShellBackend`](backends.md#localshellbackend-local-shell).
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LocalShellBackend
@@ -1816,6 +2008,8 @@ agent = create_deep_agent(
     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1827,6 +2021,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LocalShellBackend
@@ -1836,6 +2032,8 @@ agent = create_deep_agent(
     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1847,6 +2045,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LocalShellBackend
@@ -1857,6 +2057,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LocalShellBackend
@@ -1866,6 +2068,8 @@ agent = create_deep_agent(
     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1880,6 +2084,8 @@ agent = create_deep_agent(
 #### StoreBackend
 A filesystem that provides long-term storage that is *persisted across threads*.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
@@ -1893,6 +2099,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1908,6 +2116,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
@@ -1921,6 +2131,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1936,6 +2148,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
@@ -1950,6 +2164,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
@@ -1963,6 +2179,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1987,6 +2205,8 @@ agent = create_deep_agent(
 #### ContextHubBackend
 Durable filesystem storage in a LangSmith Hub repo.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import ContextHubBackend
@@ -1996,6 +2216,8 @@ agent = create_deep_agent(
     backend=ContextHubBackend("my-agent"),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -2007,6 +2229,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import ContextHubBackend
@@ -2016,6 +2240,8 @@ agent = create_deep_agent(
     backend=ContextHubBackend("my-agent"),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -2027,6 +2253,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import ContextHubBackend
@@ -2037,6 +2265,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import ContextHubBackend
@@ -2046,6 +2276,8 @@ agent = create_deep_agent(
     backend=ContextHubBackend("my-agent"),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -2062,6 +2294,8 @@ For more details, see [`ContextHubBackend`](backends.md#contexthubbackend).
 #### CompositeBackend
 A flexible backend where you can specify different routes in the filesystem to point towards different backends.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -2078,6 +2312,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -2096,6 +2332,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -2112,6 +2350,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -2130,6 +2370,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -2147,6 +2389,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -2163,6 +2407,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -2191,9 +2437,13 @@ Use a sandbox backend when you want your deep agent to write files, install depe
 You configure sandboxes by passing a sandbox backend to `backend` when creating your deep agent:
 
 #### LangSmith
+**pip**
+
 ```bash
 pip install "langsmith[sandbox]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[sandbox]"
@@ -2230,9 +2480,13 @@ finally:
 ```
 
 #### Daytona
+**pip**
+
 ```bash
 pip install langchain-daytona
 ```
+
+**uv**
 
 ```bash
 uv add langchain-daytona
@@ -2269,9 +2523,13 @@ finally:
 ```
 
 #### E2B
+**pip**
+
 ```bash
 pip install langchain-e2b
 ```
+
+**uv**
 
 ```bash
 uv add langchain-e2b
@@ -2308,9 +2566,13 @@ finally:
 ```
 
 #### Modal
+**pip**
+
 ```bash
 pip install langchain-modal
 ```
+
+**uv**
 
 ```bash
 uv add langchain-modal
@@ -2347,9 +2609,13 @@ finally:
 ```
 
 #### Runloop
+**pip**
+
 ```bash
 pip install langchain-runloop
 ```
+
+**uv**
 
 ```bash
 uv add langchain-runloop
@@ -2390,9 +2656,13 @@ finally:
 ```
 
 #### Vercel
+**pip**
+
 ```bash
 pip install langchain-vercel-sandbox
 ```
+
+**uv**
 
 ```bash
 uv add langchain-vercel-sandbox
@@ -2435,6 +2705,8 @@ For more information, see [Sandboxes](sandboxes.md).
 Some tool operations may be sensitive and require human approval before execution.
 You can configure the approval for each tool:
 
+**Google**
+
 ```python
 from langchain.tools import tool
 from deepagents import create_deep_agent
@@ -2469,6 +2741,8 @@ agent = create_deep_agent(
     checkpointer=checkpointer,  # Required!
 )
 ```
+
+**OpenAI**
 
 ```python
 from langchain.tools import tool
@@ -2505,6 +2779,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from langchain.tools import tool
 from deepagents import create_deep_agent
@@ -2539,6 +2815,8 @@ agent = create_deep_agent(
     checkpointer=checkpointer,  # Required!
 )
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.tools import tool
@@ -2575,6 +2853,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from langchain.tools import tool
 from deepagents import create_deep_agent
@@ -2610,6 +2890,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.tools import tool
 from deepagents import create_deep_agent
@@ -2644,6 +2926,8 @@ agent = create_deep_agent(
     checkpointer=checkpointer,  # Required!
 )
 ```
+
+**Ollama**
 
 ```python
 from langchain.tools import tool
@@ -2695,6 +2979,8 @@ For example skills, see [Deep Agents example skills](https://github.com/langchai
 To add skills to your deep agent, pass them as an argument to `create_deep_agent`:
 
 #### StateBackend
+**Google**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -2729,6 +3015,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**OpenAI**
 
 ```python
 from urllib.request import urlopen
@@ -2765,6 +3053,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -2799,6 +3089,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**OpenRouter**
 
 ```python
 from urllib.request import urlopen
@@ -2835,6 +3127,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -2870,6 +3164,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -2904,6 +3200,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**Ollama**
 
 ```python
 from urllib.request import urlopen
@@ -3021,6 +3319,8 @@ Use [`AGENTS.md` files](https://agents.md/) to provide extra context to your dee
 You can pass one or more file paths to the `memory` parameter when creating your deep agent:
 
 #### StateBackend
+**Google**
+
 ```python
 from urllib.request import urlopen
 
@@ -3056,6 +3356,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "123456"}},
 )
 ```
+
+**OpenAI**
 
 ```python
 from urllib.request import urlopen
@@ -3093,6 +3395,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from urllib.request import urlopen
 
@@ -3128,6 +3432,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "123456"}},
 )
 ```
+
+**OpenRouter**
 
 ```python
 from urllib.request import urlopen
@@ -3165,6 +3471,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from urllib.request import urlopen
 
@@ -3201,6 +3509,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from urllib.request import urlopen
 
@@ -3236,6 +3546,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "123456"}},
 )
 ```
+
+**Ollama**
 
 ```python
 from urllib.request import urlopen
@@ -3274,6 +3586,8 @@ result = agent.invoke(
 ```
 
 #### StoreBackend
+**Google**
+
 ```python
 from urllib.request import urlopen
 
@@ -3316,6 +3630,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**OpenAI**
 
 ```python
 from urllib.request import urlopen
@@ -3360,6 +3676,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from urllib.request import urlopen
 
@@ -3402,6 +3720,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**OpenRouter**
 
 ```python
 from urllib.request import urlopen
@@ -3446,6 +3766,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from urllib.request import urlopen
 
@@ -3489,6 +3811,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from urllib.request import urlopen
 
@@ -3531,6 +3855,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**Ollama**
 
 ```python
 from urllib.request import urlopen
@@ -3576,6 +3902,8 @@ result = agent.invoke(
 ```
 
 #### FilesystemBackend
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -3610,6 +3938,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -3646,6 +3976,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -3680,6 +4012,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -3716,6 +4050,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -3751,6 +4087,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -3785,6 +4123,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -3902,6 +4242,9 @@ print(result["structured_response"])
 # location='San Francisco, California' temperature=18.3 condition='Sunny' humidity=48 wind_speed=7.6 forecast='Pleasant sunny conditions expected to continue with temperatures around 64°F (18°C) during the day, dropping to around 52°F (11°C) at night. Clear skies with minimal precipitation expected.'
 ```
 
+#### [View example trace](https://smith.langchain.com/public/b8e8bfe6-1853-4907-a3d4-a178338f8924/r)
+Open a public LangSmith run for this example.
+
 For more information and examples, see [response format](../langchain/structured-output.md#response-format).
 
 ## Advanced
@@ -3911,7 +4254,7 @@ For more information and examples, see [response format](../langchain/structured
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/customization.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

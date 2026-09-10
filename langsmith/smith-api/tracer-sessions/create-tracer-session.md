@@ -1,8 +1,18 @@
+---
+title: "Create tracer session"
+description: "Create a new project."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/create-tracer-session"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, create-tracer-session]
+---
+
 # Create tracer session
 
 > Create a new project.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/sessions**
 
 ````yaml
 openapi: 3.1.0

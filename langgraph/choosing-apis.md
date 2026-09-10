@@ -1,3 +1,11 @@
+---
+title: "Choosing between Graph and Functional APIs"
+description: "LangGraph provides two different APIs to build agent workflows: the Graph API and the Functional API. Both APIs share the same underlying runtime and can be used together in the same application, but..."
+source: "https://docs.langchain.com/oss/python/langgraph/choosing-apis"
+category: "docs"
+tags: [docs, langgraph, choosing-apis]
+---
+
 # Choosing between Graph and Functional APIs
 
 LangGraph provides two different APIs to build agent workflows: the **Graph API** and the **Functional API**. Both APIs share the same underlying runtime and can be used together in the same application, but they are designed for different use cases and development preferences.
@@ -310,7 +318,7 @@ Both APIs provide the same core LangGraph features (persistence, streaming, huma
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/choosing-apis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

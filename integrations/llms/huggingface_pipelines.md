@@ -1,3 +1,11 @@
+---
+title: "Hugging Face local pipelines integration"
+description: "Integrate with the Hugging Face local pipelines LLM using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/llms/huggingface_pipelines"
+category: "docs"
+tags: [docs, integrations, llms, huggingface_pipelines]
+---
+
 # Hugging Face local pipelines integration
 
 > Integrate with the Hugging Face local pipelines LLM using LangChain Python.
@@ -203,7 +211,7 @@ For more information refer to [OpenVINO LLM guide](https://docs.openvino.ai/2024
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/huggingface_pipelines.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

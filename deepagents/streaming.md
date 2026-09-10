@@ -1,3 +1,11 @@
+---
+title: "Streaming"
+description: "Stream real-time updates from deep agent runs and subagent execution"
+source: "https://docs.langchain.com/oss/python/deepagents/streaming"
+category: "docs"
+tags: [docs, deepagents, streaming]
+---
+
 # Streaming
 
 > Stream real-time updates from deep agent runs and subagent execution
@@ -17,6 +25,8 @@ What's possible with deep agent streaming:
 ## Enable subgraph streaming
 
 Deep Agents use LangGraph's subgraph streaming to surface events from subagent execution. To receive subagent events, enable `stream_subgraphs` when streaming.
+
+**Google**
 
 ```python
 from deepagents import create_deep_agent
@@ -49,6 +59,8 @@ for chunk in agent.stream(
         print(chunk["data"])
 ```
 
+**OpenAI**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -79,6 +91,8 @@ for chunk in agent.stream(
             print("[main agent]")
         print(chunk["data"])
 ```
+
+**Anthropic**
 
 ```python
 from deepagents import create_deep_agent
@@ -111,6 +125,8 @@ for chunk in agent.stream(
         print(chunk["data"])
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -141,6 +157,8 @@ for chunk in agent.stream(
             print("[main agent]")
         print(chunk["data"])
 ```
+
+**Fireworks**
 
 ```python
 from deepagents import create_deep_agent
@@ -173,6 +191,8 @@ for chunk in agent.stream(
         print(chunk["data"])
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -203,6 +223,8 @@ for chunk in agent.stream(
             print("[main agent]")
         print(chunk["data"])
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -274,6 +296,8 @@ for chunk in agent.stream(
 
 Use `stream_mode="updates"` to track subagent progress as each step completes. This is useful for showing which subagents are active and what work they've completed.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -321,6 +345,8 @@ for chunk in agent.stream(
             for node_name, data in chunk["data"].items():
                 print(f"  [{chunk['ns'][0]}] step: {node_name}")
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -370,6 +396,8 @@ for chunk in agent.stream(
                 print(f"  [{chunk['ns'][0]}] step: {node_name}")
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -417,6 +445,8 @@ for chunk in agent.stream(
             for node_name, data in chunk["data"].items():
                 print(f"  [{chunk['ns'][0]}] step: {node_name}")
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -466,6 +496,8 @@ for chunk in agent.stream(
                 print(f"  [{chunk['ns'][0]}] step: {node_name}")
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -514,6 +546,8 @@ for chunk in agent.stream(
                 print(f"  [{chunk['ns'][0]}] step: {node_name}")
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -561,6 +595,8 @@ for chunk in agent.stream(
             for node_name, data in chunk["data"].items():
                 print(f"  [{chunk['ns'][0]}] step: {node_name}")
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -707,6 +743,8 @@ print()
 
 Use [`get_stream_writer`](https://reference.langchain.com/python/langgraph/config/get_stream_writer) inside your subagent tools to emit custom progress events:
 
+**Google**
+
 ```python
 import time
 from langchain.tools import tool
@@ -771,6 +809,8 @@ for chunk in agent.stream(
         else:
             print("[main]", chunk["data"])
 ```
+
+**OpenAI**
 
 ```python
 import time
@@ -837,6 +877,8 @@ for chunk in agent.stream(
             print("[main]", chunk["data"])
 ```
 
+**Anthropic**
+
 ```python
 import time
 from langchain.tools import tool
@@ -901,6 +943,8 @@ for chunk in agent.stream(
         else:
             print("[main]", chunk["data"])
 ```
+
+**OpenRouter**
 
 ```python
 import time
@@ -967,6 +1011,8 @@ for chunk in agent.stream(
             print("[main]", chunk["data"])
 ```
 
+**Fireworks**
+
 ```python
 import time
 from langchain.tools import tool
@@ -1032,6 +1078,8 @@ for chunk in agent.stream(
             print("[main]", chunk["data"])
 ```
 
+**Baseten**
+
 ```python
 import time
 from langchain.tools import tool
@@ -1096,6 +1144,8 @@ for chunk in agent.stream(
         else:
             print("[main]", chunk["data"])
 ```
+
+**Ollama**
 
 ```python
 import time
@@ -1294,11 +1344,13 @@ for sub_id, sub in active_subagents.items():
 ## v2 streaming format
 
 > [!NOTE]
-> Requires LangGraph >= 1.1.
+> Requires LangGraph 1.1 or later.
 
 All examples on this page use the v2 streaming format (`version="v2"`), which is the recommended approach. Every chunk is a `StreamPart` dict with `type`, `ns`, and `data` keys — the same shape regardless of stream mode, number of modes, or subgraph settings.
 
 The v2 format eliminates nested tuple unpacking, making it straightforward to handle subgraph streaming in Deep Agents. Compare the two formats:
+
+**v2 (recommended)**
 
 ```python
 # Unified format — no nested tuple unpacking
@@ -1312,6 +1364,8 @@ for chunk in agent.stream(
     print(chunk["ns"])    # () for main agent, ("tools:<id>",) for subagent
     print(chunk["data"])  # payload
 ```
+
+**v1 (legacy)**
 
 ```python
 # Must handle (namespace, (mode, data)) nested tuples
@@ -1337,7 +1391,7 @@ See the [LangGraph streaming docs](../langgraph/streaming.md#stream-output-forma
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Skills"
+description: "In the skills architecture, specialized capabilities are packaged as invocable \"skills\" that augment an agent's behavior. Skills are primarily prompt-driven specializations that an agent can invoke..."
+source: "https://docs.langchain.com/oss/python/langchain/multi-agent/skills"
+category: "docs"
+tags: [docs, langchain, multi-agent, skills]
+---
+
 # Skills
 
 In the **skills** architecture, specialized capabilities are packaged as invocable "skills" that augment an [agent's](../agents.md) behavior. Skills are primarily prompt-driven specializations that an agent can invoke on-demand.
@@ -86,7 +94,7 @@ When writing custom implementations, you can extend the basic skills pattern in 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

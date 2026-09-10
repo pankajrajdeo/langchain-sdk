@@ -1,3 +1,11 @@
+---
+title: "Trace query syntax"
+description: "The LangSmith SDK and REST API let you filter, query, and export runs programmatically using a set of filter arguments and a structured filter query language. This page documents the filter arguments..."
+source: "https://docs.langchain.com/langsmith/trace-query-syntax"
+category: "docs"
+tags: [docs, langsmith, trace-query-syntax]
+---
+
 # Trace query syntax
 
 The [LangSmith SDK](https://reference.langchain.com/python/langsmith/) and [REST API](smith-api-ref.md) let you filter, query, and export [runs](observability-concepts.md#runs) programmatically using a set of filter arguments and a structured filter query language. This page documents the filter arguments and query language, with examples for common queries.
@@ -196,7 +204,7 @@ eq(name, "ExpandQuery")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-query-syntax.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

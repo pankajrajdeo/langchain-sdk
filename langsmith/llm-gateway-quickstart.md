@@ -1,3 +1,11 @@
+---
+title: "Quickstart"
+description: "Make your first LLM Gateway request with cURL, Python, or TypeScript."
+source: "https://docs.langchain.com/langsmith/llm-gateway-quickstart"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-quickstart]
+---
+
 # Quickstart
 
 > Make your first LLM Gateway request with cURL, Python, or TypeScript.
@@ -38,15 +46,21 @@ To preserve a provider's native API without format translation, use a [direct pr
 
 [LangChain](../langchain/overview.md) chat models and [Deep Agents](../deepagents/overview.md) (including [Deep Agents Code](../deepagents/code/overview.md)) support the gateway through two convenience environment variables:
 
+**Bash**
+
 ```bash
 export LANGSMITH_GATEWAY="true"
 ```
+
+**Python**
 
 ```python
 import os
 
 os.environ["LANGSMITH_GATEWAY"] = "true"
 ```
+
+**TypeScript**
 
 ```typescript
 process.env.LANGSMITH_GATEWAY = "true";
@@ -111,9 +125,9 @@ The following table shows how the base URL and key are resolved, using OpenAI as
 #### TypeScript
 Supported chat models:
 
-* [Anthropic](https://docs.langchain.com/oss/javascript/integrations/chat/anthropic) (`@langchain/anthropic >= 1.5.4`)
-* [Fireworks](https://docs.langchain.com/oss/javascript/integrations/chat/fireworks) (`@langchain/fireworks >= 0.2.7`)
-* [OpenAI](https://docs.langchain.com/oss/javascript/integrations/chat/openai) (`@langchain/openai >= 1.5.7`)
+* [Anthropic](../javascript/integrations/chat/anthropic.md) (`@langchain/anthropic >= 1.5.4`)
+* [Fireworks](../javascript/integrations/chat/fireworks.md) (`@langchain/fireworks >= 0.2.7`)
+* [OpenAI](../javascript/integrations/chat/openai.md) (`@langchain/openai >= 1.5.7`)
 
 Provider-specific base URLs take precedence over the gateway, so you can still route an individual provider elsewhere. For example, with the gateway enabled, `OPENAI_BASE_URL` sends OpenAI to that URL while every other provider continues to use the gateway:
 
@@ -145,12 +159,16 @@ The following table shows how the base URL and key are resolved, using OpenAI as
 
 ## 2. Make a call
 
+**cURL**
+
 ```bash
 curl "$LANGSMITH_GATEWAY_BASE_URL/chat/completions" \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"model":"anthropic/claude-opus-5","messages":[{"role":"user","content":"ping"}]}'
 ```
+
+**OpenAI SDK**
 
 ```python
 import os
@@ -168,6 +186,8 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
+**OpenAI SDK (TypeScript)**
+
 ```typescript
 import OpenAI from "openai";
 
@@ -181,6 +201,8 @@ const response = await client.chat.completions.create({
 });
 console.log(response.choices[0].message.content);
 ```
+
+**LangChain**
 
 ```python
 import os
@@ -210,7 +232,7 @@ Open the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=
 
 ## 4. Set a spend policy (optional)
 
-Go to **Settings → Gateway → LLM Gateway** in LangSmith to create a spend policy. For example, you can set a daily \$10 cap on your API key. When the cap is reached, the gateway returns a `402` response with the message: `"Request blocked by gateway policies: R&D Spend Cap"`.
+Go to **LLM Gateway** in LangSmith to create a spend policy. For example, you can set a daily \$10 cap on your API key. When the cap is reached, the gateway returns a `402` response with the message: `"Request blocked by gateway policies: R&D Spend Cap"`.
 
 See [Spend policies](llm-gateway-spend-policies.md) for the full guide on policy dimensions, time windows, and conflict resolution.
 
@@ -232,12 +254,12 @@ The gateway performs these steps for each standard endpoint request:
 * [Direct model access](llm-gateway-direct-model-access.md): use provider-native request and response formats.
 * [Prompt Hub with the gateway](manage-prompts-programmatically.md#use-with-the-langsmith-gateway): route Prompt Hub model calls through the gateway using two environment variables.
 * [Spend policies](llm-gateway-spend-policies.md): configure cost limits across your organization.
-* [Data protection](llm-gateway-data-protection.md): prevent sensitive data from reaching providers.
+* [Data policy](llm-gateway-data-policy.md): prevent sensitive data from reaching providers.
 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Update a SCIM token"
+description: "Update the description of an existing SCIM token for the current organization."
+source: "https://docs.langchain.com/langsmith/smith-api/scim-tokens/update-a-scim-token"
+category: "docs"
+tags: [docs, langsmith, smith-api, scim-tokens, update-a-scim-token]
+---
+
 # Update a SCIM token
 
 > Update the description of an existing SCIM token for the current organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/platform/orgs/current/scim/tokens/{scim_token_id}**
 
 ````yaml
 openapi: 3.1.0

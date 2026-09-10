@@ -1,3 +1,11 @@
+---
+title: "AWS (Amazon) integrations"
+description: "Integrate with AWS (Amazon) using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/aws"
+category: "docs"
+tags: [docs, integrations, providers, aws]
+---
+
 # AWS (Amazon) integrations
 
 > Integrate with AWS (Amazon) using LangChain Python.
@@ -116,9 +124,13 @@ See a [usage example](../vectorstores/valkey.md).
 
 We need to install the `langchain-aws` library.
 
+**pip**
+
 ```bash
 pip install langchain-aws
 ```
+
+**uv**
 
 ```bash
 uv add langchain-aws
@@ -137,9 +149,13 @@ from langchain_aws import AmazonKnowledgeBasesRetriever
 > [Amazon Bedrock AgentCore Browser](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/browser-tool.html)
 > enables agents to interact with web pages through a managed Chrome browser for navigation, content extraction, and web automation.
 
+**pip**
+
 ```bash
 pip install langchain-aws bedrock-agentcore playwright beautifulsoup4
 ```
+
+**uv**
 
 ```bash
 uv add langchain-aws bedrock-agentcore playwright beautifulsoup4
@@ -170,9 +186,13 @@ await toolkit.cleanup()
 > [Amazon Bedrock AgentCore Code Interpreter](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/code-interpreter-tool.html)
 > enables agents to execute Python, JavaScript, and TypeScript code in secure, managed sandbox environments for calculations, data analysis, and visualizations.
 
+**pip**
+
 ```bash
 pip install langchain-aws bedrock-agentcore
 ```
+
+**uv**
 
 ```bash
 uv add langchain-aws bedrock-agentcore
@@ -212,9 +232,13 @@ Amazon Bedrock AgentCore Code Interpreter sandbox backend for deepagents.
 
 For the Cypher and SPARQL integrations below, we need to install the `langchain-aws` library.
 
+**pip**
+
 ```bash
 pip install langchain-aws
 ```
+
+**uv**
 
 ```bash
 uv add langchain-aws
@@ -244,9 +268,13 @@ from langchain_aws.chains import create_neptune_sparql_qa_chain
 > [Amazon Bedrock AgentCore Memory](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory.html) provides
 > managed persistence for LangGraph agents, enabling conversation history and state management across sessions with automatic scaling and high availability.
 
+**pip**
+
 ```bash
 pip install langgraph-checkpoint-aws
 ```
+
+**uv**
 
 ```bash
 uv add langgraph-checkpoint-aws
@@ -315,9 +343,13 @@ def pre_model_hook(state, config, *, store):
 
 We need to install the `boto3` and `nltk` libraries.
 
+**pip**
+
 ```bash
 pip install boto3 nltk
 ```
+
+**uv**
 
 ```bash
 uv add boto3 nltk
@@ -339,9 +371,13 @@ from langchain_experimental.comprehend_moderation import AmazonComprehendModerat
 > [Amazon Bedrock AgentCore Runtime](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agents-tools-runtime.html) provides
 > managed, serverless execution for LangGraph agents with built-in observability, automatic scaling, and seamless integration with other AgentCore services.
 
+**pip**
+
 ```bash
 pip install bedrock-agentcore
 ```
+
+**uv**
 
 ```bash
 uv add bedrock-agentcore
@@ -373,7 +409,7 @@ agentcore launch -e your_agent.py
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Set up feedback criteria"
+description: "Recommended Reading"
+source: "https://docs.langchain.com/langsmith/set-up-feedback-criteria"
+category: "docs"
+tags: [docs, langsmith, set-up-feedback-criteria]
+---
+
 # Set up feedback criteria
 
 > [!TIP]
@@ -34,7 +42,7 @@ Both the category label and the score will be logged as feedback in `value` and 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/set-up-feedback-criteria.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Generate a sandbox file download link"
+description: "Generate a tokenized link that downloads a single file from a sandbox with no further authentication. This mints a token rather than creating an addressable resource, so it returns 200 with no..."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/generate-a-sandbox-file-download-link"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, generate-a-sandbox-file-download-link]
+---
+
 # Generate a sandbox file download link
 
 > Generate a tokenized link that downloads a single file from a sandbox with no further authentication. This mints a token rather than creating an addressable resource, so it returns 200 with no Location header. The token pins the sandbox, the file path, and the response content type and disposition, so a link cannot be repointed at another file. Links never expire unless expires_in_seconds is set. The link is served from the sandbox service domain, not the API host.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/boxes/{name}/download-url**
 
 ````yaml
 openapi: 3.1.0

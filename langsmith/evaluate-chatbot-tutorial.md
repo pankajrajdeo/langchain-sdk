@@ -1,3 +1,11 @@
+---
+title: "Evaluate a chatbot"
+description: "In this guide we will set up evaluations for a chatbot. These allow you to measure how well your application is performing over a set of data. Being able to get this insight quickly and reliably will..."
+source: "https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial"
+category: "docs"
+tags: [docs, langsmith, evaluate-chatbot-tutorial]
+---
+
 # Evaluate a chatbot
 
 In this guide we will set up evaluations for a chatbot. These allow you to measure how well your application is performing over a set of data. Being able to get this insight quickly and reliably will allow you to iterate with confidence.
@@ -19,9 +27,13 @@ Lots to cover, let's dive in!
 
 First install the required dependencies for this tutorial. We happen to use OpenAI, but LangSmith can be used with any model:
 
+**pip**
+
 ```bash
 pip install -U langsmith openai
 ```
+
+**uv**
 
 ```bash
 uv add langsmith openai
@@ -399,7 +411,7 @@ experiment_results_v3 = client.evaluate(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-chatbot-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

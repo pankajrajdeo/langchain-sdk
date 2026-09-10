@@ -1,8 +1,18 @@
+---
+title: "List agent versions for a project"
+description: "Returns all agent versions (commit SHAs) seen in the given tracing project, ordered by first_seen_at descending."
+source: "https://docs.langchain.com/langsmith/smith-api/sessions/list-agent-versions-for-a-project"
+category: "docs"
+tags: [docs, langsmith, smith-api, sessions, list-agent-versions-for-a-project]
+---
+
 # List agent versions for a project
 
 > Returns all agent versions (commit SHAs) seen in the given tracing project, ordered by first_seen_at descending.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/sessions/{sessionID}/agent-versions**
 
 ````yaml
 openapi: 3.1.0

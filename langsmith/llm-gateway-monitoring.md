@@ -1,3 +1,11 @@
+---
+title: "Monitor LLM Gateway spend"
+description: "View and analyze LLM Gateway costs by user, API key, and model."
+source: "https://docs.langchain.com/langsmith/llm-gateway-monitoring"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-monitoring]
+---
+
 # Monitor LLM Gateway spend
 
 > View and analyze LLM Gateway costs by user, API key, and model.
@@ -74,7 +82,7 @@ The detailed view has its own entity filter, time range, and granularity control
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-monitoring.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Generate query for shared dataset runs"
+description: "Get runs in projects run over a dataset that has been shared."
+source: "https://docs.langchain.com/langsmith/smith-api/public/generate-query-for-shared-dataset-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, generate-query-for-shared-dataset-runs]
+---
+
 # Generate query for shared dataset runs
 
 > Get runs in projects run over a dataset that has been shared.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/public/{share_token}/datasets/runs/generate-query**
 
 ````yaml
 openapi: 3.1.0

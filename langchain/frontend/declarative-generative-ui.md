@@ -1,3 +1,11 @@
+---
+title: "Declarative generative UI"
+description: "Compose agent-generated interfaces from a registered component catalog using json-render and A2UI"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui"
+category: "docs"
+tags: [docs, langchain, frontend, declarative-generative-ui]
+---
+
 # Declarative generative UI
 
 > Compose agent-generated interfaces from a registered component catalog using json-render and A2UI
@@ -103,6 +111,8 @@ The registry maps each catalog component to its actual rendering implementation.
 Use `defineRegistry` to get type-safe bindings between the catalog props and
 your component functions:
 
+**React**
+
 ```tsx
 import { defineRegistry, Renderer, JSONUIProvider } from "@json-render/react";
 
@@ -133,6 +143,8 @@ const { registry } = defineRegistry(catalog, {
   },
 });
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -166,6 +178,8 @@ The agent uses structured output to return a json-render spec. Set up `useStream
 with your agent's assistant ID, then extract the spec from the AI message's
 `tool_calls`:
 
+**React**
+
 ```tsx
 import { useStream } from "@langchain/react";
 import { AIMessage } from "langchain";
@@ -183,6 +197,8 @@ function GenerativeUI() {
 }
 ```
 
+**Vue**
+
 ```vue
 <script setup lang="ts">
 import { useStream } from "@langchain/vue";
@@ -199,6 +215,8 @@ const rawSpec = computed(() => aiMessage.value?.tool_calls?.[0]?.args);
 </script>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -213,6 +231,8 @@ const rawSpec = computed(() => aiMessage.value?.tool_calls?.[0]?.args);
   const rawSpec = $derived(aiMessage?.tool_calls?.[0]?.args);
 </script>
 ```
+
+**Angular**
 
 ```ts
 import { Component } from "@angular/core";
@@ -361,7 +381,7 @@ wire CopilotKit to a LangGraph deployment, see [CopilotKit](integrations/copilot
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/declarative-generative-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

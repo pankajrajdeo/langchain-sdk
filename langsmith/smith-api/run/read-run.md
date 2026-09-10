@@ -1,8 +1,18 @@
+---
+title: "Read run"
+description: "Get a specific run."
+source: "https://docs.langchain.com/langsmith/smith-api/run/read-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, read-run]
+---
+
 # Read run
 
 > Get a specific run.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/runs/{run_id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Include multimodal content in a prompt"
+description: "Some applications are based around multimodal content, like a chatbot that can answer questions about a PDF or image. In these cases, you'll want to include multimodal content in your prompt and test..."
+source: "https://docs.langchain.com/langsmith/multimodal-content"
+category: "docs"
+tags: [docs, langsmith, multimodal-content]
+---
+
 # Include multimodal content in a prompt
 
 Some applications are based around multimodal content, like a chatbot that can answer questions about a PDF or image. In these cases, you'll want to include multimodal content in your prompt and test the model's ability to answer questions about the content.
@@ -39,7 +47,7 @@ After testing out your prompt manually, you can [run an evaluation](evaluate-wit
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/multimodal-content.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

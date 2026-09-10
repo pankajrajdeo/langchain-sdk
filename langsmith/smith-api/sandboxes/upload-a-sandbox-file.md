@@ -1,8 +1,18 @@
+---
+title: "Upload a sandbox file"
+description: "Upload a file to a sandbox filesystem path."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/upload-a-sandbox-file"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, upload-a-sandbox-file]
+---
+
 # Upload a sandbox file
 
 > Upload a file to a sandbox filesystem path.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/{sandbox_id}/upload**
 
 ````yaml
 openapi: 3.1.0

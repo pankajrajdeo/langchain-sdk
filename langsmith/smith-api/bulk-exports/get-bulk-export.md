@@ -1,8 +1,18 @@
+---
+title: "Get bulk export"
+description: "Get a single bulk export by ID"
+source: "https://docs.langchain.com/langsmith/smith-api/bulk-exports/get-bulk-export"
+category: "docs"
+tags: [docs, langsmith, smith-api, bulk-exports, get-bulk-export]
+---
+
 # Get bulk export
 
 > Get a single bulk export by ID
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/bulk-exports/{bulk_export_id}**
 
 ````yaml
 openapi: 3.1.0

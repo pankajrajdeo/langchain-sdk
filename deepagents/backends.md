@@ -1,3 +1,11 @@
+---
+title: "Backends"
+description: "Choose and configure filesystem backends for Deep Agents. You can specify routes to different backends, implement virtual filesystems, and enforce policies."
+source: "https://docs.langchain.com/oss/python/deepagents/backends"
+category: "docs"
+tags: [docs, deepagents, backends]
+---
+
 # Backends
 
 > Choose and configure filesystem backends for Deep Agents. You can specify routes to different backends, implement virtual filesystems, and enforce policies.
@@ -74,7 +82,11 @@ graph TB
 
 ## Built-in backends
 
+<a id="statebackend-ephemeral"></a>
+
 ### StateBackend
+
+**Google**
 
 ```python
 from deepagents import create_deep_agent
@@ -90,6 +102,8 @@ agent2 = create_deep_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -103,6 +117,8 @@ agent2 = create_deep_agent(
     backend=StateBackend(),
 )
 ```
+
+**Anthropic**
 
 ```python
 from deepagents import create_deep_agent
@@ -118,6 +134,8 @@ agent2 = create_deep_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -131,6 +149,8 @@ agent2 = create_deep_agent(
     backend=StateBackend(),
 )
 ```
+
+**Fireworks**
 
 ```python
 from deepagents import create_deep_agent
@@ -146,6 +166,8 @@ agent2 = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -159,6 +181,8 @@ agent2 = create_deep_agent(
     backend=StateBackend(),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -222,6 +246,8 @@ even after that subagent's execution is complete. Those files will continue to b
 >
 >    Note that the default (`virtual_mode=False`) provides no security even with `root_dir` set.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -231,6 +257,8 @@ agent = create_deep_agent(
     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -242,6 +270,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -251,6 +281,8 @@ agent = create_deep_agent(
     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -262,6 +294,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -272,6 +306,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -281,6 +317,8 @@ agent = create_deep_agent(
     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -361,6 +399,8 @@ For a durable repository wiki that agents can read with these filesystem tools (
 >
 > **Note:** `virtual_mode=True` provides no security with shell access enabled, since commands can access any path on the system.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LocalShellBackend
@@ -370,6 +410,8 @@ agent = create_deep_agent(
     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -381,6 +423,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LocalShellBackend
@@ -390,6 +434,8 @@ agent = create_deep_agent(
     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -401,6 +447,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LocalShellBackend
@@ -411,6 +459,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LocalShellBackend
@@ -420,6 +470,8 @@ agent = create_deep_agent(
     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -445,6 +497,8 @@ agent = create_deep_agent(
 
 ### StoreBackend (LangGraph store)
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
@@ -458,6 +512,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -473,6 +529,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
@@ -486,6 +544,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -501,6 +561,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
@@ -515,6 +577,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
@@ -528,6 +592,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -623,6 +689,8 @@ Namespace components must contain only alphanumeric characters, hyphens, undersc
 
 This means your agent's context is intentionally spread across repos: one repo per agent, separate repos per skill. That separation lets skills be versioned, shared, and reused across multiple agents independently. If this feels fragmented, see [Linked repos](../langsmith/context-engineering-concepts.md#linked-repos) for the rationale.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import ContextHubBackend
@@ -632,6 +700,8 @@ agent = create_deep_agent(
     backend=ContextHubBackend("my-agent"),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -643,6 +713,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import ContextHubBackend
@@ -652,6 +724,8 @@ agent = create_deep_agent(
     backend=ContextHubBackend("my-agent"),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -663,6 +737,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import ContextHubBackend
@@ -673,6 +749,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import ContextHubBackend
@@ -682,6 +760,8 @@ agent = create_deep_agent(
     backend=ContextHubBackend("my-agent"),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -717,6 +797,8 @@ Construct it with a repo identifier in `owner/name` or `name` format.
 
 ### CompositeBackend (router)
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -733,6 +815,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -751,6 +835,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -767,6 +853,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -785,6 +873,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -802,6 +892,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -818,6 +910,8 @@ agent = create_deep_agent(
     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1161,7 +1255,7 @@ Supporting types:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/backends.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

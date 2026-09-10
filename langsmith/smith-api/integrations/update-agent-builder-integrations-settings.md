@@ -1,8 +1,18 @@
+---
+title: "Update agent builder integrations settings"
+description: "Replaces default policy and integration overrides for the current workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/integrations/update-agent-builder-integrations-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, integrations, update-agent-builder-integrations-settings]
+---
+
 # Update agent builder integrations settings
 
 > Replaces default policy and integration overrides for the current workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /v1/agent-builder/integrations**
 
 ````yaml
 openapi: 3.1.0

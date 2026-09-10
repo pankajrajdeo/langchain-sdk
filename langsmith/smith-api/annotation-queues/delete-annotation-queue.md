@@ -1,6 +1,16 @@
+---
+title: "Delete annotation queue"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/annotation-queues/{queue_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/delete-annotation-queue"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, delete-annotation-queue]
+---
+
 # Delete annotation queue
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/annotation-queues/{queue_id}**
 
 ````yaml
 openapi: 3.1.0

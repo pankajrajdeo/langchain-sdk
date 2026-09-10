@@ -1,3 +1,11 @@
+---
+title: "Parallel FindAll integration"
+description: "Integrate with the ParallelFindAllTool tool using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/parallel_findall"
+category: "docs"
+tags: [docs, integrations, tools, parallel_findall]
+---
+
 # Parallel FindAll integration
 
 > Integrate with the ParallelFindAllTool tool using LangChain Python.
@@ -18,9 +26,13 @@
 
 The integration lives in the `langchain-parallel` package.
 
+**pip**
+
 ```bash
 pip install -U langchain-parallel
 ```
+
+**uv**
 
 ```bash
 uv add langchain-parallel
@@ -204,7 +216,7 @@ For detailed documentation, head to the [`ParallelFindAllTool`](https://referenc
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_findall.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

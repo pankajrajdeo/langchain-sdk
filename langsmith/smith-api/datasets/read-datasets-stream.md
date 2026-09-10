@@ -1,8 +1,18 @@
+---
+title: "Read datasets stream"
+description: "Stream all datasets by query params and owner as JSON patches."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/read-datasets-stream"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, read-datasets-stream]
+---
+
 # Read datasets stream
 
 > Stream all datasets by query params and owner as JSON patches.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/stream**
 
 ````yaml
 openapi: 3.1.0

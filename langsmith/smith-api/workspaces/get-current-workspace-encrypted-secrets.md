@@ -1,8 +1,18 @@
+---
+title: "Get current workspace encrypted secrets"
+description: "Get encrypted workspace secrets for use with Fleet and external services."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/get-current-workspace-encrypted-secrets"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, get-current-workspace-encrypted-secrets]
+---
+
 # Get current workspace encrypted secrets
 
 > Get encrypted workspace secrets for use with Fleet and external services.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/secrets/encrypted**
 
 ````yaml
 openapi: 3.1.0

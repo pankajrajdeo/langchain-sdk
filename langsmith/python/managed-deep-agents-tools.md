@@ -1,3 +1,11 @@
+---
+title: "Add custom tools to Managed Deep Agents"
+description: "Define authored tools for Managed Deep Agents projects."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-tools"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-tools]
+---
+
 # Add custom tools to Managed Deep Agents
 
 > Define authored tools for Managed Deep Agents projects.
@@ -22,6 +30,8 @@ my-agent/
 
 ## Add a tool module
 
+**tools/customer.py**
+
 ```python
 from langchain.tools import tool
 
@@ -38,6 +48,8 @@ def lookup_customer(customer_id: str) -> str:
 ## Attach tools to the agent
 
 Import the tools into the project-root agent entry and pass them in the `tools` list.
+
+**agent.py**
 
 ```python
 from managed_deepagents import define_deep_agent
@@ -62,6 +74,8 @@ Use clear, unique tool names to avoid collisions.
 Pause the agent before sensitive tool calls so a person can approve, edit, or reject them.
 
 Set `interrupt_on` in the agent definition, and optionally set `permissions` to gate tool and filesystem access.
+
+**agent.py**
 
 ```python
 from managed_deepagents import define_deep_agent
@@ -103,7 +117,7 @@ For per-run values such as request metadata or feature flags, use the normal Lan
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

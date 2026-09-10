@@ -1,3 +1,11 @@
+---
+title: "LangSmith Tool Server"
+description: "The LangSmith Tool Server is a standalone MCP framework for building and deploying tools with built-in authentication and authorization. Use the Tool Server when you want to:"
+source: "https://docs.langchain.com/langsmith/fleet/mcp-framework"
+category: "docs"
+tags: [docs, langsmith, fleet, mcp-framework]
+---
+
 # LangSmith Tool Server
 
 The LangSmith Tool Server is a standalone MCP framework for building and deploying tools with built-in authentication and authorization. Use the Tool Server when you want to:
@@ -181,7 +189,7 @@ The handler runs on every request and must return a dict with `identity` (and op
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/mcp-framework.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

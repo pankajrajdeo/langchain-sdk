@@ -1,8 +1,18 @@
+---
+title: "Org create section"
+description: "Deprecated: organization usage charts have been retired (HTTP 410)."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/org-create-section"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, org-create-section]
+---
+
 # Org create section
 
 > Deprecated: organization usage charts have been retired (HTTP 410).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/org-charts/section**
 
 ````yaml
 openapi: 3.1.0

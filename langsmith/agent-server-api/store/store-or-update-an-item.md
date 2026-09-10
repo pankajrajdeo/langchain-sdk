@@ -1,6 +1,16 @@
+---
+title: "Store or update an item."
+description: "/langsmith/agent-server-openapi.json put /store/items"
+source: "https://docs.langchain.com/langsmith/agent-server-api/store/store-or-update-an-item"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, store, store-or-update-an-item]
+---
+
 # Store or update an item.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json put /store/items**
 
 ````yaml
 openapi: 3.1.0

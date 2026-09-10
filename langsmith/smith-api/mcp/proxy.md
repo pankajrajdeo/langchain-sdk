@@ -1,6 +1,16 @@
+---
+title: "Proxy"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/mcp/proxy"
+source: "https://docs.langchain.com/langsmith/smith-api/mcp/proxy"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp, proxy]
+---
+
 # Proxy
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/mcp/proxy**
 
 ````yaml
 openapi: 3.1.0

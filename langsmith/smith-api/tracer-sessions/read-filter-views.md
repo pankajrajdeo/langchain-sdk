@@ -1,8 +1,18 @@
+---
+title: "Read filter views"
+description: "Get all filter views for a session."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/read-filter-views"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, read-filter-views]
+---
+
 # Read filter views
 
 > Get all filter views for a session.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/sessions/{session_id}/views**
 
 ````yaml
 openapi: 3.1.0

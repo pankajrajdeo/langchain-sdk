@@ -1,3 +1,11 @@
+---
+title: "How to use the REST API"
+description: "The Python and TypeScript SDKs are the recommended way to run evaluations in LangSmith. They include optimizations and features that enhance performance and reliability."
+source: "https://docs.langchain.com/langsmith/run-evals-api-only"
+category: "docs"
+tags: [docs, langsmith, run-evals-api-only]
+---
+
 # How to use the REST API
 
 The [Python](https://reference.langchain.com/python/langsmith/) and [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html) SDKs are the recommended way to run [evaluations](evaluation-concepts.md) in LangSmith. They include optimizations and features that enhance performance and reliability.
@@ -354,7 +362,7 @@ for example_id, runs in example_id_to_runs_map.items():
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-evals-api-only.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

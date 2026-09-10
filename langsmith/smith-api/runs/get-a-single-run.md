@@ -1,3 +1,11 @@
+---
+title: "Get a single run"
+description: "Returns one run by ID for the given session. Use the selects query parameter (repeatable) to select fields to return."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/get-a-single-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, get-a-single-run]
+---
+
 # Get a single run
 
 > Returns one run by ID for the given session. Use the `selects` query parameter (repeatable) to select fields to return.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/runs/{run_id}**
 
 ````yaml
 openapi: 3.1.0
@@ -189,8 +199,8 @@ paths:
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
         - description: >-
             `selects` lists which properties to include on the returned run
@@ -201,6 +211,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - ID
@@ -250,7 +261,6 @@ paths:
                 - FEEDBACK_STATS
                 - LS_USER_ID
               type: string
-            type: array
             title: Selects
         - description: >-
             `start_time` is the run's `start_time` (RFC3339 date-time).

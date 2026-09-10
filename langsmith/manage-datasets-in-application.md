@@ -1,3 +1,11 @@
+---
+title: "Create and manage datasets in the UI"
+description: "Datasets enable you to perform repeatable evaluations over time using consistent data. Datasets are made up of examples, which store inputs, outputs, and optionally, reference outputs."
+source: "https://docs.langchain.com/langsmith/manage-datasets-in-application"
+category: "docs"
+tags: [docs, langsmith, manage-datasets-in-application]
+---
+
 # Create and manage datasets in the UI
 
 [*Datasets*](evaluation-concepts.md#datasets) enable you to perform repeatable evaluations over time using consistent data. Datasets are made up of [*examples*](evaluation-concepts.md#examples), which store inputs, outputs, and optionally, reference outputs.
@@ -174,7 +182,7 @@ You may add multiple filters, and only examples that satisfy all of the filters 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets-in-application.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

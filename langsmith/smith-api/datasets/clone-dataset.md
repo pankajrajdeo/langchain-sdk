@@ -1,8 +1,18 @@
+---
+title: "Clone dataset"
+description: "Clone a dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/clone-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, clone-dataset]
+---
+
 # Clone dataset
 
 > Clone a dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/datasets/clone**
 
 ````yaml
 openapi: 3.1.0

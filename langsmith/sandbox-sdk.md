@@ -1,3 +1,11 @@
+---
+title: "Sandbox SDK usage"
+description: "Create and manage sandboxes programmatically with the Python or TypeScript SDK."
+source: "https://docs.langchain.com/langsmith/sandbox-sdk"
+category: "docs"
+tags: [docs, langsmith, sandbox-sdk]
+---
+
 # Sandbox SDK usage
 
 > Create and manage sandboxes programmatically with the Python or TypeScript SDK.
@@ -6,6 +14,8 @@ The [LangSmith SDK](reference.md) provides a programmatic interface to create an
 
 ## Install
 
+**Python**
+
 ```bash
 # uv
 uv add "langsmith[sandbox]"
@@ -13,6 +23,8 @@ uv add "langsmith[sandbox]"
 # pip
 pip install "langsmith[sandbox]"
 ```
+
+**TypeScript**
 
 ```bash
 npm install langsmith
@@ -39,6 +51,8 @@ export LANGSMITH_ENDPOINT="<LANGSMITH_ENDPOINT>"
 
 Pass a snapshot ID or name when you want to boot from a reusable custom filesystem image; see [Snapshots](sandbox-snapshots.md) for that flow.
 
+**Python**
+
 ```python
 from langsmith.sandbox import SandboxClient
 
@@ -51,6 +65,8 @@ with client.sandbox() as sb:
     print(result.stdout)  # "4\n"
     print(result.success)  # True
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient } from "langsmith/sandbox";
@@ -71,6 +87,8 @@ await sandbox.delete();
 
 Every `run()` call returns an `ExecutionResult` with `stdout`, `stderr`, `exit_code`, and `success`.
 
+**Python**
+
 ```python
 with client.sandbox() as sb:
     result = sb.run("echo 'Hello, World!'")
@@ -85,6 +103,8 @@ with client.sandbox() as sb:
     print(result.success)    # False
     print(result.exit_code)  # 1
 ```
+
+**TypeScript**
 
 ```ts
 const sandbox = await client.createSandbox();
@@ -111,6 +131,8 @@ For long-running commands, stream output in real time using callbacks or a `Comm
 
 ### Stream with callbacks
 
+**Python**
+
 ```python
 import sys
 
@@ -123,6 +145,8 @@ with client.sandbox() as sb:
     )
     print(f"\nBuild {'succeeded' if result.success else 'failed'}")
 ```
+
+**TypeScript**
 
 ```ts
 const result = await sandbox.run("make build", {
@@ -137,6 +161,8 @@ console.log(`Exit code: ${result.exit_code}`);
 
 Set `wait=False` to get a `CommandHandle` for full control over the output stream.
 
+**Python**
+
 ```python
 with client.sandbox() as sb:
     handle = sb.run("make build", timeout=600, wait=False)
@@ -150,6 +176,8 @@ with client.sandbox() as sb:
     result = handle.result
     print(f"\nExit code: {result.exit_code}")
 ```
+
+**TypeScript**
 
 ```ts
 const handle = await sandbox.run("python train.py", {
@@ -174,6 +202,8 @@ console.log(`Exit code: ${result.exit_code}`);
 
 ### Send stdin and kill commands
 
+**Python**
+
 ```python
 with client.sandbox() as sb:
     handle = sb.run(
@@ -190,6 +220,8 @@ with client.sandbox() as sb:
     result = handle.result
 ```
 
+**TypeScript**
+
 ```ts
 const handle = await sandbox.run("python -i", { wait: false });
 
@@ -204,6 +236,8 @@ for await (const chunk of handle) {
 
 Kill a running command:
 
+**Python**
+
 ```python
 with client.sandbox() as sb:
     handle = sb.run("python server.py", timeout=0, wait=False)
@@ -215,6 +249,8 @@ with client.sandbox() as sb:
 
     handle.kill()
 ```
+
+**TypeScript**
 
 ```ts
 const handle = await sandbox.run("sleep 300", { wait: false });
@@ -228,6 +264,8 @@ console.log(result.exit_code); // non-zero
 
 If a client disconnects, reconnect using the command ID:
 
+**Python**
+
 ```python
 with client.sandbox() as sb:
     handle = sb.run("make build", timeout=600, wait=False)
@@ -239,6 +277,8 @@ with client.sandbox() as sb:
         print(chunk.data, end="")
     result = handle.result
 ```
+
+**TypeScript**
 
 ```ts
 const handle = await sandbox.run("long-task", { wait: false });
@@ -254,6 +294,8 @@ for await (const chunk of newHandle) {
 ## File operations
 
 Read and write files in the sandbox:
+
+**Python**
 
 ```python
 with client.sandbox() as sb:
@@ -271,6 +313,8 @@ with client.sandbox() as sb:
     # Write binary files
     sb.write("/app/data.bin", b"\x00\x01\x02\x03")
 ```
+
+**TypeScript**
 
 ```ts
 const sandbox = await client.createSandbox();
@@ -297,10 +341,14 @@ try {
 
 To hand one file to something that cannot send an API key, such as a browser tab, an `<a href>`, or a webhook consumer, mint a download link instead of reading the bytes yourself:
 
+**Python**
+
 ```python
 link = sb.generate_download_url("/app/report.csv", expires_in_seconds=3600)
 print(link.download_url)
 ```
+
+**TypeScript**
 
 ```ts
 const link = await sandbox.generateDownloadURL("/app/report.csv", {
@@ -319,6 +367,8 @@ Mount a [Context Hub](use-the-context-hub.md) repo to give sandbox code filesyst
 > Context Hub mounts are **read-only**. The sync is one-way, from the repo into the sandbox: files an agent writes under the mount path are never pushed back to the repo, and the next sync overwrites them. Write sandbox output to a path outside the mount, and [push it with the SDK](manage-contexts-sdk.md) if it belongs in the repo.
 
 Pass the mount through `mount_config`. The API key that creates the sandbox must have access to the repo, otherwise creation fails with a `403`.
+
+**Python**
 
 ```python
 from langsmith.sandbox import AsyncSandboxClient, context_hub_mount, mount_config
@@ -340,6 +390,8 @@ async def main():
             result = await sb.run("ls /memories")
             print(result.stdout)
 ```
+
+**TypeScript**
 
 ```ts
 import {
@@ -379,6 +431,8 @@ For sync behavior, sync limits, and mounting buckets and Git repositories alongs
 
 Pass `vcpus`, `mem_bytes`, and `fs_capacity_bytes` (`vCpus`, `memBytes`, `fsCapacityBytes` in TypeScript) to size a sandbox at creation. Omit them and the sandbox gets the defaults below.
 
+**Python**
+
 ```python
 sb = client.create_sandbox(
     name="big-vm",
@@ -387,6 +441,8 @@ sb = client.create_sandbox(
     fs_capacity_bytes=32 * 1024**3, # 32 GiB
 )
 ```
+
+**TypeScript**
 
 ```ts
 const sb = await client.createSandbox({
@@ -426,6 +482,8 @@ running ──(idle for idle_ttl_seconds)──▶ stopped ──(delete_after_s
 
 You can also call `stop_sandbox` / `stopSandbox` explicitly to release resources before the idle timeout fires; that also populates `stopped_at` and starts the deletion timer. You do not need to start it again afterwards: a stopped sandbox wakes on the next command, file operation, or service-URL request.
 
+**Python**
+
 ```python
 # Default retention (server defaults: 10-min idle stop, 14-day delete)
 with client.sandbox() as sb:
@@ -450,6 +508,8 @@ sb = client.update_sandbox(
     delete_after_stop_seconds=2592000,  # 30 days
 )
 ```
+
+**TypeScript**
 
 ```ts
 // Default retention (server defaults applied)
@@ -483,6 +543,8 @@ The sandbox daemon manages command session lifecycles with two timeout mechanism
 
 ### Combine lifecycle options
 
+**Python**
+
 ```python
 with client.sandbox() as sb:
     # Long-running task: 30-min idle timeout, 1-hour session TTL
@@ -503,6 +565,8 @@ with client.sandbox() as sb:
         wait=False,
     )
 ```
+
+**TypeScript**
 
 ```ts
 const sandbox = await client.createSandbox();
@@ -624,6 +688,8 @@ async def main():
 
 Pass LangSmith tracing environment variables through the `env` parameter on `run()` to send traces from code running inside a sandbox. Call `flush()` before the process exits to ensure all traces are delivered.
 
+**Python**
+
 ```python
 from langsmith.sandbox import SandboxClient
 
@@ -641,6 +707,8 @@ with client.sandbox() as sandbox:
     result = sandbox.run("python3 my_agent.py", env=tracing_env)
     print(result.stdout)
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient } from "langsmith/sandbox";
@@ -673,6 +741,8 @@ Inside the sandbox, any LangSmith-instrumented code (`@traceable`, LangChain, La
 
 Both SDKs provide typed exceptions for specific error handling:
 
+**Python**
+
 ```python
 from langsmith.sandbox import (
     SandboxClientError,       # Base exception
@@ -695,6 +765,8 @@ except ResourceNotFoundError as e:
 except SandboxClientError as e:
     print(f"Error: {e}")
 ```
+
+**TypeScript**
 
 ```ts
 import {
@@ -726,7 +798,7 @@ try {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

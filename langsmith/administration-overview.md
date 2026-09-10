@@ -1,3 +1,11 @@
+---
+title: "Overview"
+description: "This overview covers topics related to managing users, organizations, workspaces, and applications within LangSmith."
+source: "https://docs.langchain.com/langsmith/administration-overview"
+category: "docs"
+tags: [docs, langsmith, administration-overview]
+---
+
 # Overview
 
 This overview covers topics related to managing users, organizations, workspaces, and applications within LangSmith.
@@ -103,6 +111,10 @@ Personal Access Tokens (PATs) are used to authenticate requests to the LangSmith
 
 PATs are prefixed with `lsv2_pt_`
 
+Members can revoke or delete their own PATs. [Organization Admins](rbac.md#organization-admin) and [Organization Operators](rbac.md#organization-operator) can also list, revoke, and delete any member's PAT. For the steps, refer to [Create an account and API key](create-account-api-key.md).
+
+Revoking a token stops it from authenticating but keeps its record, listed with a **Revoked** badge, so the token, its owner, and its last use stay visible. Deleting removes the record entirely. Because authentication results are cached, a revoked or deleted token stops working within a minute rather than instantly. Service keys can only be deleted, not revoked.
+
 #### Service keys
 
 Service keys are similar to PATs, but are used to authenticate requests to the LangSmith API on behalf of a service account. Only admins can create service keys. We recommend using these for applications / services that need to interact with the LangSmith API, such as LangGraph agents or other integrations. Service keys may be scoped to a single workspace, multiple workspaces, or the entire organization, and can be used to authenticate requests to the LangSmith API for whichever workspace(s) it has access to.
@@ -147,6 +159,7 @@ The following table provides an overview of organization level permissions:
 | View data retention settings                | ✅                   | ✅                 | ✅                  |
 | View usage limits                           | ✅                   | ✅                 | ✅                  |
 | Create personal access tokens (PATs)        | ❌                   | ✅                 | ✅                  |
+| View, revoke, and delete any member's PATs  | ❌                   | ❌                 | ✅                  |
 | Admin access to all workspaces              | ❌                   | ❌                 | ✅                  |
 | Manage billing settings                     | ❌                   | ❌                 | ✅                  |
 | Create workspaces                           | ❌                   | ❌                 | ✅                  |
@@ -443,7 +456,7 @@ Like workspace limits, per-project and per-user limits are evaluated per calenda
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/administration-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Connect to an external Redis or Valkey database"
+description: "LangSmith uses Redis to back our queuing/caching operations. By default, LangSmith Self-Hosted will use an internal Redis instance. However, you can configure LangSmith to use an external Redis..."
+source: "https://docs.langchain.com/langsmith/self-host-external-redis"
+category: "docs"
+tags: [docs, langsmith, self-host-external-redis]
+---
+
 # Connect to an external Redis or Valkey database
 
 LangSmith uses Redis to back our queuing/caching operations. By default, LangSmith Self-Hosted will use an internal Redis instance. However, you can configure LangSmith to use an external Redis instance. By configuring an external Redis instance, you can more easily manage backups, scaling, and other operational tasks for your Redis instance.
@@ -24,7 +32,7 @@ LangSmith uses Redis to back our queuing/caching operations. By default, LangSmi
   * [Google Cloud Memorystore](https://cloud.google.com/memorystore) (Redis or Valkey)
   * [Azure Cache for Redis](https://azure.microsoft.com/en-us/services/cache/)
 
-* **Supported versions:** Redis >= 6.2, or Valkey 8. Valkey is treated as a drop-in replacement for Redis throughout this guide.
+* **Supported versions:** Redis 6.2 or later, or Valkey 8. Valkey is treated as a drop-in replacement for Redis throughout this guide.
 
 * We support both Standalone and Redis Cluster (including Valkey Cluster). See the appropriate sections for deployment instructions.
 
@@ -83,6 +91,8 @@ rediss://<iam-identity>@host:6380
 
 With your connection string in hand, you can configure your LangSmith instance to use an external Redis instance. You can do this by modifying the `values` file for your LangSmith Helm Chart installation.
 
+**Helm**
+
 ```yaml
 redis:
   external:
@@ -91,6 +101,8 @@ redis:
 ```
 
 You can also store the connection URL in an existing Kubernetes Secret and reference it in your Helm values.
+
+**Helm (using an existing Secret)**
 
 ```yaml
 redis:
@@ -101,6 +113,8 @@ redis:
     # Key in the Secret that stores the connection URL (default shown)
     connectionUrlSecretKey: "connection_url"
 ```
+
+**Kubernetes Secret**
 
 ```yaml
 apiVersion: v1
@@ -147,6 +161,8 @@ When connecting to an external Redis Cluster, configure the Helm values under `r
 * Provide node URIs and (optionally) a password directly in `values.yaml`.
 * Or reference an existing Kubernetes `Secret` containing node URIs and password.
 
+**Helm (inline values)**
+
 ```yaml
 redis:
   external:
@@ -164,6 +180,8 @@ redis:
       tlsEnabled: true
 ```
 
+**Helm (using an existing Secret)**
+
 ```yaml
 redis:
   external:
@@ -179,6 +197,8 @@ redis:
 ```
 
 If using an existing Secret, it should contain:
+
+**Kubernetes Secret**
 
 ```yaml
 apiVersion: v1
@@ -244,6 +264,8 @@ To validate the Redis server certificate:
 > [!WARNING]
 > Mount a custom CA only when your Redis server uses an internal or private CA. Publicly trusted CAs do not require this configuration.
 
+**Helm (Standalone - server TLS)**
+
 ```yaml
 config:
   customCa:
@@ -255,6 +277,8 @@ redis:
     # Use rediss:// and include password if required by your server
     connectionUrl: "rediss://host:6380/0?password=<PASSWORD>"
 ```
+
+**Helm (Cluster - server TLS)**
 
 ```yaml
 config:
@@ -273,6 +297,8 @@ redis:
         - "redis://redis-node-2:6379"
       password: "<PASSWORD>"
 ```
+
+**Kubernetes Secret (CA bundle)**
 
 ```yaml
 apiVersion: v1
@@ -298,6 +324,8 @@ If your Redis server requires client certificate authentication:
 * For Standalone Redis, keep using `rediss://` in the connection URL.
 * For Redis Cluster, `redis.external.cluster.tlsEnabled` defaults to `true`. Ensure it is not set to `false`.
 
+**Helm (client Auth)**
+
 ```yaml
 redis:
   external:
@@ -318,6 +346,8 @@ redis:
         - "redis://redis-node-2:6379"
       password: "<PASSWORD>"
 ```
+
+**Kubernetes Secret (client cert/key)**
 
 ```yaml
 apiVersion: v1
@@ -632,7 +662,7 @@ See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/c
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-external-redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

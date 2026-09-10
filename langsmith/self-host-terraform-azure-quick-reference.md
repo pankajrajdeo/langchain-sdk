@@ -1,3 +1,11 @@
+---
+title: "Azure Terraform quick reference"
+description: "Make targets, Terraform, kubectl, Azure CLI, and Helm commands for LangSmith self-hosted on AKS."
+source: "https://docs.langchain.com/langsmith/self-host-terraform-azure-quick-reference"
+category: "docs"
+tags: [docs, langsmith, self-host-terraform-azure-quick-reference]
+---
+
 # Azure Terraform quick reference
 
 > Make targets, Terraform, kubectl, Azure CLI, and Helm commands for LangSmith self-hosted on AKS.
@@ -218,7 +226,7 @@ make clean       # removes local secrets, config, helm values, and tfstate files
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-azure-quick-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

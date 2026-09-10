@@ -1,3 +1,11 @@
+---
+title: "How to add custom middleware"
+description: "When deploying agents to LangSmith, you can add custom middleware to your server to handle concerns like logging request metrics, injecting or checking headers, and enforcing security policies..."
+source: "https://docs.langchain.com/langsmith/custom-middleware"
+category: "docs"
+tags: [docs, langsmith, custom-middleware]
+---
+
 # How to add custom middleware
 
 When deploying agents to LangSmith, you can add custom middleware to your server to handle concerns like logging request metrics, injecting or checking headers, and enforcing security policies without modifying core server logic. This works the same way as [adding custom routes](custom-routes.md). You just need to provide your own [`Starlette`](https://starlette.dev/applications/) app (including [`FastAPI`](https://fastapi.tiangolo.com/), [`FastHTML`](https://fastht.ml/) and other compatible apps).
@@ -97,7 +105,7 @@ Now that you've added custom middleware to your deployment, you can use similar 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-middleware.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

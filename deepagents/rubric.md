@@ -1,3 +1,11 @@
+---
+title: "Grading rubrics"
+description: "LLM-as-a-judge grading for agents that iterate against a rubric until done"
+source: "https://docs.langchain.com/oss/python/deepagents/rubric"
+category: "docs"
+tags: [docs, deepagents, rubric]
+---
+
 # Grading rubrics
 
 > LLM-as-a-judge grading for agents that iterate against a rubric until done
@@ -41,6 +49,8 @@ graph LR
 
 Add `RubricMiddleware` to the `middleware` list when you call `create_deep_agent`:
 
+**Google**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -56,6 +66,8 @@ agent = create_deep_agent(
     checkpointer=InMemorySaver(),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -73,6 +85,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -88,6 +102,8 @@ agent = create_deep_agent(
     checkpointer=InMemorySaver(),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -105,6 +121,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -121,6 +139,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -136,6 +156,8 @@ agent = create_deep_agent(
     checkpointer=InMemorySaver(),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -237,6 +259,8 @@ When the deep agent finishes reasoning and has an output, the LLM-as-a-judge gra
 
 `on_evaluation` is a callback that fires after each grading iteration with the grader's verdict, whether you call `invoke()` or `stream_events()`. If you are not reading rubric events from `stream.custom` (with `CustomTransformer`) or [tracing the run with LangSmith](../langsmith/trace-with-langgraph.md), it is the main way to inspect what happened during grading.
 
+**Google**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from deepagents.middleware.rubric import RubricEvaluation
@@ -269,6 +293,8 @@ agent.invoke(
     config=config,
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -303,6 +329,8 @@ agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from deepagents.middleware.rubric import RubricEvaluation
@@ -335,6 +363,8 @@ agent.invoke(
     config=config,
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -369,6 +399,8 @@ agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from deepagents.middleware.rubric import RubricEvaluation
@@ -402,6 +434,8 @@ agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from deepagents.middleware.rubric import RubricEvaluation
@@ -434,6 +468,8 @@ agent.invoke(
     config=config,
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -503,6 +539,8 @@ Rather than asking the grader to reason abstractly about correctness, the exampl
 ### Define RubricMiddleware
 This middleware adds an LLM-as-a-judge grader loop on top of the base agent. Configure the grader model, optional custom prompt, tools for evidence gathering, and a maximum iteration cap.
 
+**Google**
+
 ```python
 from deepagents import RubricMiddleware
 from langchain.tools import tool
@@ -544,6 +582,8 @@ rubric_middleware = RubricMiddleware(
     max_iterations=5,
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import RubricMiddleware
@@ -587,6 +627,8 @@ rubric_middleware = RubricMiddleware(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import RubricMiddleware
 from langchain.tools import tool
@@ -628,6 +670,8 @@ rubric_middleware = RubricMiddleware(
     max_iterations=5,
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import RubricMiddleware
@@ -671,6 +715,8 @@ rubric_middleware = RubricMiddleware(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import RubricMiddleware
 from langchain.tools import tool
@@ -713,6 +759,8 @@ rubric_middleware = RubricMiddleware(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import RubricMiddleware
 from langchain.tools import tool
@@ -754,6 +802,8 @@ rubric_middleware = RubricMiddleware(
     max_iterations=5,
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import RubricMiddleware
@@ -800,6 +850,8 @@ rubric_middleware = RubricMiddleware(
 ### Pass it to a deep agent
 The agent's `system_prompt` tells it how to do the work, while the rubric tells the grader how to judge the work.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -814,6 +866,8 @@ agent = create_deep_agent(
     checkpointer=InMemorySaver(),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -830,6 +884,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -844,6 +900,8 @@ agent = create_deep_agent(
     checkpointer=InMemorySaver(),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -860,6 +918,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -875,6 +935,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -889,6 +951,8 @@ agent = create_deep_agent(
     checkpointer=InMemorySaver(),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -937,7 +1001,7 @@ After the agent produces output, the grader takes over and checks the output for
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/rubric.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

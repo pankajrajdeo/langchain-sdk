@@ -1,3 +1,11 @@
+---
+title: "Set up online code evaluators"
+description: "Online evaluations provide real-time feedback on your production traces. This is useful to continuously monitor the performance of your application: identify issues, measure improvements, and ensure..."
+source: "https://docs.langchain.com/langsmith/online-evaluations-code"
+category: "docs"
+tags: [docs, langsmith, online-evaluations-code]
+---
+
 # Set up online code evaluators
 
 [Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production [traces](observability-concepts.md#traces). This is useful to continuously monitor the performance of your application: identify issues, measure improvements, and ensure consistent quality over time.
@@ -80,6 +88,8 @@ They return a single value:
 
 The following example shows a function that validates that each run in the experiment has a known JSON field:
 
+**Python**
+
 ```python
 import json
 
@@ -103,6 +113,8 @@ def perform_eval(run):
 
   return {"formatted": True}
 ```
+
+**JavaScript**
 
 ```javascript
 function perform_eval(run) {
@@ -141,7 +153,7 @@ If you prefer a video tutorial, check out the [Online Evaluations video](https:/
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

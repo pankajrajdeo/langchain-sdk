@@ -1,0 +1,41 @@
+---
+title: "get_by_ids"
+description: "Get documents by their ids."
+source: "https://reference.langchain.com/python/langchain-core/vectorstores/in_memory/InMemoryVectorStore/get_by_ids"
+category: "reference"
+tags: [reference, langchain-core, vectorstores, in_memory, inmemoryvectorstore, get_by_ids]
+---
+
+# get_by_ids
+
+> **Method** in `langchain_core`
+
+📖 [View in docs](https://reference.langchain.com/python/langchain-core/vectorstores/in_memory/InMemoryVectorStore/get_by_ids)
+
+Get documents by their ids.
+
+## Signature
+
+```python
+get_by_ids(
+    self,
+    ids: Sequence[str],
+    /,
+) -> list[Document]
+```
+
+## Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `ids` | `Sequence[str]` | Yes | The IDs of the documents to get. |
+
+## Returns
+
+`list[Document]`
+
+A list of `Document` objects.
+
+---
+
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/8215039dea978372bd3fd95b88663a11b0159043/libs/core/langchain_core/vectorstores/in_memory.py#L255)

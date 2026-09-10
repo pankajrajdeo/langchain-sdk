@@ -1,3 +1,11 @@
+---
+title: "Streaming API"
+description: "The LangGraph SDK lets you stream outputs from the LangSmith Deployment API in multiple modes, from full state snapshots after each step to token-by-token LLM output. Thread streaming also supports..."
+source: "https://docs.langchain.com/langsmith/streaming"
+category: "docs"
+tags: [docs, langsmith, streaming]
+---
+
 # Streaming API
 
 The [LangGraph SDK](langgraph-python-sdk.md) lets you stream outputs from the [LangSmith Deployment API](server-api-ref.md) in multiple modes, from full state snapshots after each step to token-by-token LLM output. Thread streaming also supports resumability: if a connection drops, reconnect with the last event ID to pick up where you left off.
@@ -1017,7 +1025,7 @@ For API usage and implementation, refer to the [API reference](server-api-ref.md
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

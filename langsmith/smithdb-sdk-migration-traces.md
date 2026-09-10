@@ -1,3 +1,11 @@
+---
+title: "Migrate trace methods to SmithDB"
+description: "Migrate the LangSmith SDK trace methods to their SmithDB-backed equivalents."
+source: "https://docs.langchain.com/langsmith/smithdb-sdk-migration-traces"
+category: "docs"
+tags: [docs, langsmith, smithdb-sdk-migration-traces]
+---
+
 # Migrate trace methods to SmithDB
 
 > Migrate the LangSmith SDK trace methods to their SmithDB-backed equivalents.
@@ -140,6 +148,8 @@ Fetch every trace (root run) in a project, replacing `list_runs(is_root=True)`.
 
 #### Python
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -152,6 +162,8 @@ for root_run in root_runs:
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 from datetime import datetime, timedelta, timezone
@@ -178,6 +190,8 @@ asyncio.run(main())
 
 #### TypeScript
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -190,6 +204,8 @@ for await (const run of client.listRuns({ projectId: project.id, isRoot: true, l
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -210,6 +226,8 @@ for await (const trace of client.traces.query({
 
 #### Java
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -235,6 +253,8 @@ for (run in rootRuns) {
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -266,6 +286,8 @@ for (trace in traces) {
 
 #### Go
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -304,6 +326,8 @@ func main() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -390,6 +414,8 @@ Read a trace's token and cost totals from `trace_aggregates` instead of the root
 
 #### Python
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -403,6 +429,8 @@ for root_run in root_runs:
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 from datetime import datetime, timedelta, timezone
@@ -434,6 +462,8 @@ asyncio.run(main())
 
 #### TypeScript
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -446,6 +476,8 @@ for await (const rootRun of client.listRuns({ projectId: project.id, isRoot: tru
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -470,6 +502,8 @@ for await (const trace of client.traces.query({
 The Before example reads `totalTokens` only. `totalCost` is omitted because reading it on the v1 `RunSchema` type triggers a known deserialization bug in the current Java binding (it expects a string, the API returns a number).
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -499,6 +533,8 @@ for (rootRun in rootRuns) {
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -539,6 +575,8 @@ for (trace in traces) {
 
 #### Go
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -578,6 +616,8 @@ func main() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -670,6 +710,8 @@ Filter traces by status (for example, errored) with `trace_filter`, or skip filt
 
 #### Python
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -689,6 +731,8 @@ for run in error_traces:
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 from datetime import datetime, timedelta, timezone
@@ -727,6 +771,8 @@ asyncio.run(main())
 
 #### TypeScript
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -746,6 +792,8 @@ for await (const run of client.listRuns({
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -779,6 +827,8 @@ for await (const trace of client.traces.query({
 
 #### Java
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -807,6 +857,8 @@ for (run in runs) {
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -854,6 +906,8 @@ for (trace in knownTraces) {
 
 #### Go
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -895,6 +949,8 @@ func main() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1114,6 +1170,8 @@ Fetch all the runs that belong to one trace, given its trace ID.
 
 #### Python
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1126,6 +1184,8 @@ for run in runs:
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 from datetime import datetime, timedelta, timezone
@@ -1149,6 +1209,8 @@ asyncio.run(main())
 
 #### TypeScript
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1165,6 +1227,8 @@ for (const run of runs) {
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1182,6 +1246,8 @@ for (const run of response.items ?? []) {
 
 #### Java
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1208,6 +1274,8 @@ for (run in runs) {
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -1242,6 +1310,8 @@ for (run in response.items().getOrNull() ?: emptyList()) {
 
 #### Go
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1280,6 +1350,8 @@ func main() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1356,6 +1428,8 @@ Narrow a trace's runs down to a specific run type, for example just the LLM call
 
 #### Python
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1372,6 +1446,8 @@ llm_runs = list(
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 from datetime import datetime, timedelta, timezone
@@ -1395,6 +1471,8 @@ asyncio.run(main())
 
 #### TypeScript
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1412,6 +1490,8 @@ for await (const run of client.listRuns({
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1428,6 +1508,8 @@ const llmRuns = response.items ?? [];
 
 #### Java
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1452,6 +1534,8 @@ client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -1482,6 +1566,8 @@ client.traces().listRuns(
 
 #### Go
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1517,6 +1603,8 @@ func main() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1592,7 +1680,7 @@ curl -G "https://api.smith.langchain.com/api/v2/traces/$TRACE_ID/runs" \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

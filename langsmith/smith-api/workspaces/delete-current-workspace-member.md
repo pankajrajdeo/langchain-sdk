@@ -1,6 +1,16 @@
+---
+title: "Delete current workspace member"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/members/{identity_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/delete-current-workspace-member"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, delete-current-workspace-member]
+---
+
 # Delete current workspace member
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/members/{identity_id}**
 
 ````yaml
 openapi: 3.1.0

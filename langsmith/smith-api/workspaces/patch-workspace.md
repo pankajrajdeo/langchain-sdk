@@ -1,8 +1,18 @@
+---
+title: "Patch workspace"
+description: "Update a workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/patch-workspace"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, patch-workspace]
+---
+
 # Patch workspace
 
 > Update a workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/{workspace_id}**
 
 ````yaml
 openapi: 3.1.0

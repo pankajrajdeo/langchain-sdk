@@ -1,8 +1,18 @@
+---
+title: "Get bulk export run"
+description: "Get a single bulk export's run by ID"
+source: "https://docs.langchain.com/langsmith/smith-api/bulk-exports/get-bulk-export-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, bulk-exports, get-bulk-export-run]
+---
+
 # Get bulk export run
 
 > Get a single bulk export's run by ID
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/bulk-exports/{bulk_export_id}/runs/{run_id}**
 
 ````yaml
 openapi: 3.1.0

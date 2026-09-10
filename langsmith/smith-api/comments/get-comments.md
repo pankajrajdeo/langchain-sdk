@@ -1,6 +1,16 @@
+---
+title: "Get comments"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/comments/{owner}/{repo}"
+source: "https://docs.langchain.com/langsmith/smith-api/comments/get-comments"
+category: "docs"
+tags: [docs, langsmith, smith-api, comments, get-comments]
+---
+
 # Get comments
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/comments/{owner}/{repo}**
 
 ````yaml
 openapi: 3.1.0

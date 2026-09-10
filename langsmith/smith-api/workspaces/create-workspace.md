@@ -1,8 +1,18 @@
+---
+title: "Create workspace"
+description: "Create a new workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/create-workspace"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, create-workspace]
+---
+
 # Create workspace
 
 > Create a new workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces**
 
 ````yaml
 openapi: 3.1.0

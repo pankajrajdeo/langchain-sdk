@@ -1,8 +1,18 @@
+---
+title: "Upload csv dataset"
+description: "Create a new dataset from a CSV or JSONL file."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/upload-csv-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, upload-csv-dataset]
+---
+
 # Upload csv dataset
 
 > Create a new dataset from a CSV or JSONL file.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/datasets/upload**
 
 ````yaml
 openapi: 3.1.0

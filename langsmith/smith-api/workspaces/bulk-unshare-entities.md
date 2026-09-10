@@ -1,8 +1,18 @@
+---
+title: "Bulk unshare entities"
+description: "Bulk unshare entities by share tokens for the workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/bulk-unshare-entities"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, bulk-unshare-entities]
+---
+
 # Bulk unshare entities
 
 > Bulk unshare entities by share tokens for the workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/shared**
 
 ````yaml
 openapi: 3.1.0

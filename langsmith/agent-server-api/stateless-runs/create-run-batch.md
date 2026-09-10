@@ -1,8 +1,18 @@
+---
+title: "Create Run Batch"
+description: "Create a batch of runs and return immediately."
+source: "https://docs.langchain.com/langsmith/agent-server-api/stateless-runs/create-run-batch"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, stateless-runs, create-run-batch]
+---
+
 # Create Run Batch
 
 > Create a batch of runs and return immediately.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /runs/batch**
 
 ````yaml
 openapi: 3.1.0

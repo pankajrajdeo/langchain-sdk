@@ -1,3 +1,11 @@
+---
+title: "Azure OpenAI integration"
+description: "Integrate with the Azure OpenAI LLM using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/llms/azure_openai"
+category: "docs"
+tags: [docs, integrations, llms, azure_openai]
+---
+
 # Azure OpenAI integration
 
 > Integrate with the Azure OpenAI LLM using LangChain Python.
@@ -144,7 +152,7 @@ Params: {'deployment_name': 'gpt-35-turbo-instruct-0914', 'model_name': 'gpt-3.5
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/azure_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

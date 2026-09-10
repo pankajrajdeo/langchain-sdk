@@ -1,3 +1,11 @@
+---
+title: "Reference"
+description: "Comprehensive API reference documentation for the LangChain and LangGraph Python and TypeScript libraries."
+source: "https://docs.langchain.com/oss/python/reference/overview"
+category: "docs"
+tags: [docs, reference]
+---
+
 # Reference
 
 Comprehensive API reference documentation for the LangChain and LangGraph Python and TypeScript libraries.
@@ -22,7 +30,7 @@ Use Model Context Protocol (MCP) tools within LangChain and LangGraph applicatio
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/reference/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

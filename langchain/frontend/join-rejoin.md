@@ -1,3 +1,11 @@
+---
+title: "Join & rejoin streams"
+description: "Disconnect from and reconnect to running agent streams"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/join-rejoin"
+category: "docs"
+tags: [docs, langchain, frontend, join-rejoin]
+---
+
 # Join & rejoin streams
 
 > Disconnect from and reconnect to running agent streams
@@ -42,7 +50,9 @@ the same thread ID, the stream attaches to the thread's current state and any
 in-flight run.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -91,6 +101,8 @@ function Chat() {
 }
 ```
 
+**Vue**
+
 ```vue
 <script setup lang="ts">
 import { useStream } from "@langchain/vue";
@@ -136,6 +148,8 @@ function rejoin() {
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -176,6 +190,8 @@ function rejoin() {
   />
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component, signal } from "@angular/core";
@@ -281,7 +297,7 @@ After rejoining:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/join-rejoin.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

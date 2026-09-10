@@ -1,8 +1,18 @@
+---
+title: "Delete a sandbox"
+description: "Delete a sandbox by name or UUID. Tears down the sandbox runtime and removes the DB record."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/delete-a-sandbox"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, delete-a-sandbox]
+---
+
 # Delete a sandbox
 
 > Delete a sandbox by name or UUID. Tears down the sandbox runtime and removes the DB record.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v2/sandboxes/boxes/{name}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Manage a trace"
+description: "Share traces publicly, and view server logs from the Details view in LangSmith."
+source: "https://docs.langchain.com/langsmith/manage-trace"
+category: "docs"
+tags: [docs, langsmith, manage-trace]
+---
+
 # Manage a trace
 
 > Share traces publicly, and view server logs from the Details view in LangSmith.
@@ -22,7 +30,7 @@ Shared traces are accessible to anyone with the link, even without a LangSmith a
 To unshare a trace, use either of the following methods:
 
 1. Open the shared trace, click **Public** in the toolbar at the top of the Details view, then click **Unshare** in the dialog.
-2. Go to **Settings** → **Shared URLs** to view all publicly shared traces in the selected workspace. Click **Unshare** next to the trace you want to unshare.
+2. Go to **Settings** > **Shared URLs** to view all publicly shared traces in the selected workspace. Click **Unshare** next to the trace you want to unshare.
 
 ## View server logs
 
@@ -76,7 +84,7 @@ For full API usage, including code examples, the 1000-trace-per-request limit, d
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

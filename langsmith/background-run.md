@@ -1,3 +1,11 @@
+---
+title: "How to kick off background runs"
+description: "This guide covers how to kick off background runs for your agent. This can be useful for long running jobs."
+source: "https://docs.langchain.com/langsmith/background-run"
+category: "docs"
+tags: [docs, langsmith, background-run]
+---
+
 # How to kick off background runs
 
 This guide covers how to kick off background runs for your agent.
@@ -440,7 +448,7 @@ The search results provide the current weather conditions in San Francisco. Acco
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/background-run.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

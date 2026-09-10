@@ -1,3 +1,11 @@
+---
+title: "Configure your collector for LangSmith telemetry"
+description: "The various services in a LangSmith deployment emit telemetry data in the form of logs, metrics, and traces. You may already have telemetry collectors set up in your Kubernetes cluster, or would like..."
+source: "https://docs.langchain.com/langsmith/langsmith-collector"
+category: "docs"
+tags: [docs, langsmith, langsmith-collector]
+---
+
 # Configure your collector for LangSmith telemetry
 
 The various services in a LangSmith deployment emit telemetry data in the form of logs, metrics, and traces. You may already have telemetry collectors set up in your Kubernetes cluster, or would like to deploy one to monitor your application.
@@ -259,7 +267,7 @@ config:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-collector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

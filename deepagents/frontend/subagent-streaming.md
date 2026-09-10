@@ -1,3 +1,11 @@
+---
+title: "Subagent streaming"
+description: "Display specialist subagents with streaming content, progress tracking, and collapsible cards"
+source: "https://docs.langchain.com/oss/python/deepagents/frontend/subagent-streaming"
+category: "docs"
+tags: [docs, deepagents, frontend, subagent-streaming]
+---
+
 # Subagent streaming
 
 > Display specialist subagents with streaming content, progress tracking, and collapsible cards
@@ -44,7 +52,9 @@ Point the stream at your deep agent, render coordinator messages from `stream.me
 tool-call ID that spawned them so each card appears under the coordinator turn that delegated the work.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -85,6 +95,8 @@ export function DeepAgentChat() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -134,6 +146,8 @@ function subagentsForMessage(msg: unknown) {
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -155,6 +169,8 @@ function subagentsForMessage(msg: unknown) {
   {/each}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component, computed } from "@angular/core";
@@ -392,7 +408,7 @@ Surface model thinking inside subagent cards using collapsible reasoning blocks.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/subagent-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

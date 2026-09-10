@@ -1,8 +1,18 @@
+---
+title: "Get runs from insights job (Beta)"
+description: "Get all runs for a cluster job, optionally filtered by cluster."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-runs-from-insights-job-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, get-runs-from-insights-job-beta]
+---
+
 # Get runs from insights job (Beta)
 
 > Get all runs for a cluster job, optionally filtered by cluster.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/sessions/{session_id}/insights/{job_id}/runs**
 
 ````yaml
 openapi: 3.1.0

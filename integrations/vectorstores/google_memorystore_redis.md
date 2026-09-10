@@ -1,3 +1,11 @@
+---
+title: "Google memorystore for Redis integration"
+description: "Integrate with the Google memorystore for Redis vector store using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/vectorstores/google_memorystore_redis"
+category: "docs"
+tags: [docs, integrations, vectorstores, google_memorystore_redis]
+---
+
 # Google memorystore for Redis integration
 
 > Integrate with the Google memorystore for Redis vector store using LangChain Python.
@@ -232,7 +240,7 @@ RedisVectorStore.drop_index(client=redis_client, index_name="my_vector_index")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_memorystore_redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

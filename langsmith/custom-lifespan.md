@@ -1,3 +1,11 @@
+---
+title: "How to add custom lifespan events"
+description: "When deploying agents to LangSmith, you often need to initialize resources like database connections when your server starts up, and ensure they're properly closed when it shuts down. Lifespan events..."
+source: "https://docs.langchain.com/langsmith/custom-lifespan"
+category: "docs"
+tags: [docs, langsmith, custom-lifespan]
+---
+
 # How to add custom lifespan events
 
 When deploying agents to LangSmith, you often need to initialize resources like database connections when your server starts up, and ensure they're properly closed when it shuts down. Lifespan events let you hook into your server's startup and shutdown sequence to handle these critical setup and teardown tasks.
@@ -83,7 +91,7 @@ Now that you've added lifespan events to your deployment, you can use similar te
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-lifespan.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

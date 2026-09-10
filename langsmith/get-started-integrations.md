@@ -1,3 +1,11 @@
+---
+title: "Integrations"
+description: "LangSmith provides integrations for a growing set of popular LLM providers and agent frameworks as well as Deep Agents, LangChain, and LangGraph. For setup and usage, refer to the guides listed on..."
+source: "https://docs.langchain.com/langsmith/get-started-integrations"
+category: "docs"
+tags: [docs, langsmith, get-started-integrations]
+---
+
 # Integrations
 
 [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-integrations) provides integrations for a growing set of popular [LLM providers](#llm-providers) and [agent frameworks](#agent-frameworks) as well as [Deep Agents](../deepagents/overview.md), [LangChain](../langchain/overview.md), and [LangGraph](../langgraph/overview.md). For setup and usage, refer to the guides listed on this page.
@@ -92,7 +100,7 @@ These coding agent integrations follow a shared [metadata contract](coding-agent
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/integrations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

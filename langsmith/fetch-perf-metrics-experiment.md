@@ -1,3 +1,11 @@
+---
+title: "How to fetch performance metrics for an experiment"
+description: "Tracing projects and experiments use the same underlying data structure in our backend, which is called a \"session.\""
+source: "https://docs.langchain.com/langsmith/fetch-perf-metrics-experiment"
+category: "docs"
+tags: [docs, langsmith, fetch-perf-metrics-experiment]
+---
+
 # How to fetch performance metrics for an experiment
 
 > [!TIP]
@@ -115,6 +123,8 @@ client.create_examples(dataset_id=dataset.id, examples=examples)
 
 Next, we will create an experiment, retrieve the experiment name from the result of `evaluate`, then fetch the performance metrics for the experiment.
 
+**Python**
+
 ```python
 from langsmith.schemas import Example, Run
 dataset_name = "HelloDataset"
@@ -134,6 +144,8 @@ results = evaluate(
 resp = client.read_project(project_name=results.experiment_name, include_stats=True)
 print(resp.model_dump_json(indent=2))
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -169,7 +181,7 @@ console.log(JSON.stringify(resp, null, 2))
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fetch-perf-metrics-experiment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

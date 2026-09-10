@@ -1,3 +1,11 @@
+---
+title: "How to use a custom store"
+description: "Replace the built-in Postgres store with a custom BaseStore implementation in your agent deployment."
+source: "https://docs.langchain.com/langsmith/custom-store"
+category: "docs"
+tags: [docs, langsmith, custom-store]
+---
+
 # How to use a custom store
 
 > Replace the built-in Postgres store with a custom BaseStore implementation in your agent deployment.
@@ -93,7 +101,7 @@ You can deploy this app as-is to LangSmith or to your self-hosted platform.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-store.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

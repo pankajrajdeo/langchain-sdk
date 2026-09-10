@@ -1,3 +1,11 @@
+---
+title: "Data purging for compliance"
+description: "This guide covers the various features available after data reaches LangSmith Cloud servers to help you achieve your privacy goals."
+source: "https://docs.langchain.com/langsmith/data-purging-compliance"
+category: "docs"
+tags: [docs, langsmith, data-purging-compliance]
+---
+
 # Data purging for compliance
 
 This guide covers the various features available after data reaches LangSmith Cloud servers to help you achieve your privacy goals.
@@ -182,7 +190,7 @@ curl -X POST "https://api.smith.langchain.com/v1/platform/datasets/examples/dele
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-purging-compliance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Upload files with traces"
+description: "When you trace with the @traceable decorator or traceable wrapper, LangSmith supports uploading binary files (such as images, audio, videos, PDFs, and CSVs) alongside your traces. This is..."
+source: "https://docs.langchain.com/langsmith/upload-files-with-traces"
+category: "docs"
+tags: [docs, langsmith, upload-files-with-traces]
+---
+
 # Upload files with traces
 
 When you trace with the [`@traceable` decorator or `traceable` wrapper](annotate-code.md#use-%40traceable-%2F-traceable), LangSmith supports uploading binary files (such as images, audio, videos, PDFs, and CSVs) alongside your traces. This is particularly useful when working with LLM pipelines using multimodal inputs or outputs.
@@ -22,6 +30,8 @@ There are two ways to provide file data:
 >   The `dangerously_allow_filesystem` flag exists as a safeguard for server and multi-tenant environments, where user-controlled input could influence a file path. In a trusted environment (a local script or a controlled pipeline where you own the file paths), it is safe to enable.
 
 Decorate a function with `@traceable` and include your `Attachment` instances as arguments. The following example demonstrates both approaches: loading file bytes manually into an `Attachment`, and passing a `Path` object with `dangerously_allow_filesystem=True`:
+
+**Python**
 
 ```python
 from langsmith import traceable
@@ -89,6 +99,8 @@ In the TypeScript SDK, the `extractAttachments` function is an optional paramete
 
 Wrap your function with `traceable` and include your attachments within the `extractAttachments` option. The signature is:
 
+**TypeScript**
+
 ```typescript
 type AttachmentData = Uint8Array | ArrayBuffer;
 type Attachments = Record<string, [string, AttachmentData]>;
@@ -99,6 +111,8 @@ extractAttachments?: (
 ```
 
 The following example shows a full implementation:
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -164,7 +178,7 @@ const result = await traceableWithAttachments(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/upload-files-with-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

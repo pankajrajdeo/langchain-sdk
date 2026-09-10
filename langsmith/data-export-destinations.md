@@ -1,3 +1,11 @@
+---
+title: "Manage bulk export destinations"
+description: "Configure and manage S3-compatible export destinations for LangSmith bulk exports."
+source: "https://docs.langchain.com/langsmith/data-export-destinations"
+category: "docs"
+tags: [docs, langsmith, data-export-destinations]
+---
+
 # Manage bulk export destinations
 
 > Configure and manage S3-compatible export destinations for LangSmith bulk exports.
@@ -136,7 +144,7 @@ Use the returned `id` to reference this destination in subsequent bulk export op
 
 ### Credentials configuration
 
-**Requires LangSmith Helm version >= `0.10.34` (application version >= `0.10.91`)**
+**Requires LangSmith Helm version `0.10.34` or later (application version `0.10.91` or later)**
 
 We support the following additional credentials formats besides static `access_key_id` and `secret_access_key`:
 
@@ -325,6 +333,8 @@ Pass `aws_role_arn` instead of `credentials` to use IAM role assumption.
 
 Create an AWS IAM role with a trust policy that permits web identity federation from the three subject IDs for your region. Grant the role access to your export bucket. Select your LangSmith region to use the corresponding subject IDs. Each Terraform example uses the minimum required `s3:PutObject` permission:
 
+**US**
+
 ```hcl
 resource "aws_iam_role" "langsmith_bulk_export" {
   name                 = "langsmith-bulk-export"
@@ -363,6 +373,8 @@ resource "aws_iam_role" "langsmith_bulk_export" {
 }
 ```
 
+**EU**
+
 ```hcl
 resource "aws_iam_role" "langsmith_bulk_export" {
   name                 = "langsmith-bulk-export"
@@ -400,6 +412,8 @@ resource "aws_iam_role" "langsmith_bulk_export" {
   }
 }
 ```
+
+**APAC**
 
 ```hcl
 resource "aws_iam_role" "langsmith_bulk_export" {
@@ -561,7 +575,7 @@ Here are some common errors:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-destinations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

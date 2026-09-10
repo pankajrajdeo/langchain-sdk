@@ -1,3 +1,11 @@
+---
+title: "Cost tracking"
+description: "Building agents at scale introduces non-trivial, usage-based costs that can be difficult to track. LangSmith automatically records LLM token usage and costs for major providers, and also allows you..."
+source: "https://docs.langchain.com/langsmith/cost-tracking"
+category: "docs"
+tags: [docs, langsmith, cost-tracking]
+---
+
 # Cost tracking
 
 Building agents at scale introduces non-trivial, usage-based costs that can be difficult to track. LangSmith automatically records LLM token usage and costs for major providers, and also allows you to submit custom cost data for any additional components.
@@ -70,6 +78,8 @@ To compute cost automatically from token usage, you need to provide **token coun
 
    * Set a `usage_metadata` field on the run’s metadata. The advantage of this approach is that you do not need to change your traced function’s runtime outputs:
 
+**Python**
+
 ```python
      from langsmith import traceable, get_current_run_tree
 
@@ -105,6 +115,8 @@ To compute cost automatically from token usage, you need to provide **token coun
 
      chat_model(inputs)
 ```
+
+**TypeScript**
 
 ```typescript
      import { traceable, getCurrentRunTree } from "langsmith/traceable";
@@ -148,6 +160,8 @@ To compute cost automatically from token usage, you need to provide **token coun
 
      await chatModel({ messages: inputs });
 ```
+
+**Java**
 
 ```java
      import com.langchain.smith.client.LangsmithClient;
@@ -237,6 +251,8 @@ To compute cost automatically from token usage, you need to provide **token coun
      }
 ```
 
+**Kotlin**
+
 ```kotlin
      import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
      import com.langchain.smith.tracing.RunType
@@ -303,6 +319,8 @@ To compute cost automatically from token usage, you need to provide **token coun
 
    * Return a `usage_metadata` field in your traced function's outputs. Include the `usage_metadata` key directly within the object returned by your traced function. LangSmith will extract it from the output:
 
+**Python**
+
 ```python
      from langsmith import traceable
 
@@ -336,6 +354,8 @@ To compute cost automatically from token usage, you need to provide **token coun
 
      chat_model(inputs)
 ```
+
+**TypeScript**
 
 ```typescript
      import { traceable } from "langsmith/traceable";
@@ -381,6 +401,8 @@ To compute cost automatically from token usage, you need to provide **token coun
 
      await chatModel({ messages });
 ```
+
+**Java**
 
 ```java
      import com.langchain.smith.client.LangsmithClient;
@@ -467,6 +489,8 @@ To compute cost automatically from token usage, you need to provide **token coun
        }
      }
 ```
+
+**Kotlin**
 
 ```kotlin
      import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -639,6 +663,8 @@ Once you have set up the model pricing map, LangSmith will automatically calcula
 
 Gemini 2.5 Pro Preview and Gemini 2.5 Pro use a stepwise cost function, which LangSmith supports by default. For any other model with non-linear pricing, calculate costs client-side and send them as `usage_metadata` as shown in the following code:
 
+**Python**
+
 ```python
 from langsmith import traceable, get_current_run_tree
 
@@ -674,6 +700,8 @@ def chat_model(messages: list):
 
 chat_model(inputs)
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable, getCurrentRunTree } from "langsmith/traceable";
@@ -721,6 +749,8 @@ const chatModel = traceable(
 
 await chatModel(messages);
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -798,6 +828,8 @@ class CostTrackingLlmCostDirect {
 }
 ```
 
+**Kotlin**
+
 ```kotlin
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
 import com.langchain.smith.tracing.RunType
@@ -857,9 +889,14 @@ try {
 }
 ```
 
+#### [View example trace](https://smith.langchain.com/public/fcb46808-1b10-4847-a3c9-164c47413524/r)
+Open a public LangSmith run for this example.
+
 ### Other runs: Send costs
 
 You can also send cost information for any non-LLM runs, such as tool calls. Specify the cost in the `total_cost` field of the run’s `usage_metadata`:
+
+**Python**
 
 ```python
 from langsmith import traceable, get_current_run_tree
@@ -886,6 +923,8 @@ def get_weather(city: str):
 
 tool_response = get_weather("San Francisco")
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable, getCurrentRunTree } from "langsmith/traceable";
@@ -920,6 +959,8 @@ const getWeather = traceable(
 
 const toolResponse = await getWeather({ city: "San Francisco" });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -976,6 +1017,8 @@ class CostTrackingToolCostRun {
 }
 ```
 
+**Kotlin**
+
 ```kotlin
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
 import com.langchain.smith.tracing.RunType
@@ -1022,6 +1065,8 @@ try {
 
 Alternatively, include `usage_metadata` directly in your traced function's return value:
 
+**Python**
+
 ```python
 from langsmith import traceable
 
@@ -1045,6 +1090,8 @@ def get_weather(city: str):
 
 tool_response = get_weather("San Francisco")
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -1075,6 +1122,8 @@ const getWeather = traceable(
 
 const toolResponse = await getWeather({ city: "San Francisco" });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -1133,6 +1182,8 @@ class CostTrackingToolCostOutput {
 }
 ```
 
+**Kotlin**
+
 ```kotlin
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
 import com.langchain.smith.tracing.RunType
@@ -1175,7 +1226,7 @@ try {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cost-tracking.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

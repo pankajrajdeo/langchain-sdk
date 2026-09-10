@@ -1,3 +1,11 @@
+---
+title: "Run backtests on a new version of an agent"
+description: "Deploying your application is just the beginning of a continuous improvement process. After you deploy to production, you'll want to refine your system by enhancing prompts, language models, tools..."
+source: "https://docs.langchain.com/langsmith/run-backtests-new-agent"
+category: "docs"
+tags: [docs, langsmith, run-backtests-new-agent]
+---
+
 # Run backtests on a new version of an agent
 
 Deploying your application is just the beginning of a continuous improvement process. After you deploy to production, you'll want to refine your system by enhancing prompts, language models, tools, and architectures. Backtesting involves assessing new versions of your application using historical data and comparing the new outputs to the original ones. Compared to evaluations using pre-production datasets, backtesting offers a clearer indication of whether the new version of your application is an improvement over the current deployment.
@@ -22,9 +30,13 @@ Install and set environment variables. This guide requires `langsmith>=0.2.4`.
 > [!NOTE]
 > For convenience we'll use the LangChain OSS framework in this tutorial, but the LangSmith functionality shown is framework-agnostic.
 
+**pip**
+
 ```bash
 pip install -U langsmith langchain langchain-anthropic langchainhub emoji
 ```
+
+**uv**
 
 ```bash
 uv add langsmith langchain langchain-anthropic langchainhub emoji
@@ -278,7 +290,7 @@ This insight demonstrates the value of backtesting - it helped us identify poten
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-backtests-new-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

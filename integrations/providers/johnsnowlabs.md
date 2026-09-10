@@ -1,3 +1,11 @@
+---
+title: "Johnsnowlabs integrations"
+description: "Integrate with Johnsnowlabs using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/johnsnowlabs"
+category: "docs"
+tags: [docs, integrations, providers, johnsnowlabs]
+---
+
 # Johnsnowlabs integrations
 
 > Integrate with Johnsnowlabs using LangChain Python.
@@ -8,9 +16,13 @@ For all 24.000+ models, see the [John Snow Labs Model Models Hub](https://nlp.jo
 
 ## Installation and setup
 
+**pip**
+
 ```bash
 pip install johnsnowlabs
 ```
+
+**uv**
 
 ```bash
 uv add johnsnowlabs
@@ -98,7 +110,7 @@ Models are loaded with [nlp.load](https://nlp.johnsnowlabs.com/docs/en/jsl/load_
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/johnsnowlabs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

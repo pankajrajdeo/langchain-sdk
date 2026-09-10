@@ -1,8 +1,18 @@
+---
+title: "Stats runs"
+description: "Get all runs by query in body payload."
+source: "https://docs.langchain.com/langsmith/smith-api/run/stats-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, stats-runs]
+---
+
 # Stats runs
 
 > Get all runs by query in body payload.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/stats**
 
 ````yaml
 openapi: 3.1.0

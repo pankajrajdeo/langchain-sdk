@@ -1,8 +1,18 @@
+---
+title: "Get sandbox resource usage"
+description: "Get current sandbox resource usage and quota limits for the workspace"
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/get-sandbox-resource-usage"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, get-sandbox-resource-usage]
+---
+
 # Get sandbox resource usage
 
 > Get current sandbox resource usage and quota limits for the workspace
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/usage**
 
 ````yaml
 openapi: 3.1.0

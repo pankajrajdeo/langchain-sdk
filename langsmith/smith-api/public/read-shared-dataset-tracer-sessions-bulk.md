@@ -1,8 +1,18 @@
+---
+title: "Read shared dataset tracer sessions bulk"
+description: "Get sessions from multiple datasets using share tokens."
+source: "https://docs.langchain.com/langsmith/smith-api/public/read-shared-dataset-tracer-sessions-bulk"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, read-shared-dataset-tracer-sessions-bulk]
+---
+
 # Read shared dataset tracer sessions bulk
 
 > Get sessions from multiple datasets using share tokens.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/datasets/sessions-bulk**
 
 ````yaml
 openapi: 3.1.0

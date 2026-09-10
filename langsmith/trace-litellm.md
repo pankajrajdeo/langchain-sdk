@@ -1,3 +1,11 @@
+---
+title: "Trace LiteLLM applications"
+description: "LiteLLM provides a unified interface for calling LLM providers using a consistent OpenAI-compatible API. It can be used either as a Python SDK embedded directly in your application, or as a proxy..."
+source: "https://docs.langchain.com/langsmith/trace-litellm"
+category: "docs"
+tags: [docs, langsmith, trace-litellm]
+---
+
 # Trace LiteLLM applications
 
 [LiteLLM](https://www.litellm.ai/) provides a unified interface for calling LLM providers using a consistent OpenAI-compatible API. It can be used either as a [Python SDK](https://docs.litellm.ai/docs/#litellm-python-sdk) embedded directly in your application, or as a [proxy server](https://docs.litellm.ai/docs/simple_proxy) that exposes an OpenAI-compatible endpoint for client applications.
@@ -12,9 +20,13 @@ This guide shows you how to trace LiteLLM calls with LangSmith using:
 
 Install the following when using either the LiteLLM Python SDK or LiteLLM Proxy:
 
+**Python SDK**
+
 ```bash
 pip install litellm langsmith openai
 ```
+
+**Proxy usage**
 
 ```bash
 npm install openai langsmith
@@ -190,6 +202,8 @@ The LiteLLM proxy runs as a standalone server and exposes an OpenAI-compatible A
 
 4. Call the proxy from another terminal window:
 
+**Python**
+
 ```python
    from openai import OpenAI
 
@@ -207,6 +221,8 @@ The LiteLLM proxy runs as a standalone server and exposes an OpenAI-compatible A
 
    print(response.choices[0].message.content)
 ```
+
+**JavaScript**
 
 ```javascript
    import OpenAI from "openai";
@@ -237,7 +253,7 @@ The LiteLLM proxy runs as a standalone server and exposes an OpenAI-compatible A
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-litellm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Export granular usage csv"
+description: "Export granular usage data as CSV."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/export-granular-usage-csv"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, export-granular-usage-csv]
+---
+
 # Export granular usage csv
 
 > Export granular usage data as CSV.
@@ -10,6 +18,8 @@ vary by kind:
 Dimension columns are identical across kinds.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/billing/granular-usage/export**
 
 ````yaml
 openapi: 3.1.0

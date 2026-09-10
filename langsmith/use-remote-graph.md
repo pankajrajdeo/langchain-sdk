@@ -1,3 +1,11 @@
+---
+title: "How to interact with a deployment using RemoteGraph"
+description: "RemoteGraph is a client-side interface that allows you to interact with your deployment as if it were a local graph. It provides API parity with CompiledGraph, which means that you can use the same..."
+source: "https://docs.langchain.com/langsmith/use-remote-graph"
+category: "docs"
+tags: [docs, langsmith, use-remote-graph]
+---
+
 # How to interact with a deployment using RemoteGraph
 
 [`RemoteGraph`](https://reference.langchain.com/python/langgraph/pregel/remote/RemoteGraph) is a client-side interface that allows you to interact with your [deployment](deployment.md) as if it were a local graph. It provides API parity with [`CompiledGraph`](../langgraph/graph-api.md#compiling-your-graph), which means that you can use the same methods (`invoke()`, `stream()`, `get_state()`, etc.) in your development and production environments. This page describes how to initialize a `RemoteGraph` and interact with it.
@@ -39,6 +47,8 @@ Additionally, you have to provide one of the following:
 
 ### Use a URL
 
+**Python**
+
 ```python
 from langgraph.pregel.remote import RemoteGraph
 
@@ -52,6 +62,8 @@ remote_graph = RemoteGraph(graph_name, url=url)
 assistant_id = "<ASSISTANT_ID>"
 remote_graph = RemoteGraph(assistant_id, url=url)
 ```
+
+**JavaScript**
 
 ```typescript
 import { RemoteGraph } from "@langchain/langgraph/remote";
@@ -69,6 +81,8 @@ const remoteGraph = new RemoteGraph({ graphId: assistantId, url });
 
 ### Use a client
 
+**Python**
+
 ```python
 from langgraph_sdk import get_client, get_sync_client
 from langgraph.pregel.remote import RemoteGraph
@@ -85,6 +99,8 @@ remote_graph = RemoteGraph(graph_name, client=client, sync_client=sync_client)
 assistant_id = "<ASSISTANT_ID>"
 remote_graph = RemoteGraph(assistant_id, client=client, sync_client=sync_client)
 ```
+
+**JavaScript**
 
 ```typescript
 import { Client } from "@langchain/langgraph-sdk";
@@ -110,6 +126,8 @@ const remoteGraph = new RemoteGraph({ graphId: assistantId, client });
 > [!NOTE]
 > To use the graph asynchronously, you must provide either the `url` or `client` when initializing the `RemoteGraph`.
 
+**Python**
+
 ```python
 # invoke the graph
 result = await remote_graph.ainvoke({
@@ -122,6 +140,8 @@ async for chunk in remote_graph.astream({
 }):
     print(chunk)
 ```
+
+**JavaScript**
 
 ```typescript
 // invoke the graph
@@ -141,6 +161,8 @@ for await (const chunk of await remoteGraph.stream({
 > [!NOTE]
 > To use the graph synchronously, you must provide either the `url` or `sync_client` when initializing the `RemoteGraph`.
 
+**Python**
+
 ```python
 # invoke the graph
 result = remote_graph.invoke({
@@ -159,6 +181,8 @@ for chunk in remote_graph.stream({
 By default, graph runs (for example, calls made with `.invoke()` or `.stream()`) are stateless, which means that intermediate checkpoints and the final state are not persisted after a run.
 
 If you want to preserve the outputs of a run—for example, to support human-in-the-loop workflows—you can create a thread and pass its ID through the `config` argument. This works the same way as with a regular compiled graph:
+
+**Python**
 
 ```python
 from langgraph_sdk import get_sync_client
@@ -181,6 +205,8 @@ result = remote_graph.invoke({
 thread_state = remote_graph.get_state(config)
 print(thread_state)
 ```
+
+**JavaScript**
 
 ```typescript
 import { Client } from "@langchain/langgraph-sdk";
@@ -214,6 +240,8 @@ A graph can also call out to multiple `RemoteGraph` instances as [*subgraph*](..
 
 `RemoteGraph` exposes the same interface as a regular `CompiledGraph`, so you can use it directly as a subgraph inside another graph. For example:
 
+**Python**
+
 ```python
 from langgraph_sdk import get_sync_client
 from langgraph.graph import StateGraph, MessagesState, START
@@ -242,6 +270,8 @@ for chunk in graph.stream({
 }, subgraphs=True):
     print(chunk)
 ```
+
+**JavaScript**
 
 ```typescript
 import { MessagesAnnotation, StateGraph, START } from "@langchain/langgraph";
@@ -274,7 +304,7 @@ for await (const chunk of await graph.stream({
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-remote-graph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,16 @@
+---
+title: "Read shared feedbacks"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/feedbacks"
+source: "https://docs.langchain.com/langsmith/smith-api/public/read-shared-feedbacks"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, read-shared-feedbacks]
+---
+
 # Read shared feedbacks
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/feedbacks**
 
 ````yaml
 openapi: 3.1.0

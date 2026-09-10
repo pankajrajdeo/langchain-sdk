@@ -1,8 +1,18 @@
+---
+title: "List rule logs"
+description: "List logs for a particular rule"
+source: "https://docs.langchain.com/langsmith/smith-api/run/list-rule-logs"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, list-rule-logs]
+---
+
 # List rule logs
 
 > List logs for a particular rule
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/runs/rules/{rule_id}/logs**
 
 ````yaml
 openapi: 3.1.0

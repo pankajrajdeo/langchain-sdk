@@ -1,3 +1,11 @@
+---
+title: "LangSmith Observability"
+description: "Instrument your LLM application, investigate traces, and monitor performance in production with LangSmith."
+source: "https://docs.langchain.com/langsmith/home"
+category: "docs"
+tags: [docs, langsmith]
+---
+
 # LangSmith Observability
 
 > Instrument your LLM application, investigate traces, and monitor performance in production with LangSmith.
@@ -14,7 +22,7 @@ Sign up at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&ut
 You can log in with **Google**, **GitHub**, or **email**.
 
 ### Create an API key
-Go to your [Settings page](https://smith.langchain.com/settings) → **API Keys** → **Create API Key**.
+Go to your [Settings page](https://smith.langchain.com/settings) > **API Keys** > **Create API Key**.
 Copy the key and save it securely.
 
 Once your account and API key are ready, set up tracing:
@@ -50,7 +58,7 @@ For terminology and core concepts, refer to [Observability concepts](observabili
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

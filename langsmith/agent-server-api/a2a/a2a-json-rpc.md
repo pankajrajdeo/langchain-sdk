@@ -1,3 +1,11 @@
+---
+title: "A2A JSON-RPC"
+description: "Communicate with an assistant using the Agent-to-Agent (A2A) Protocol over JSON-RPC 2.0. This endpoint accepts a JSON-RPC envelope and dispatches based on method."
+source: "https://docs.langchain.com/langsmith/agent-server-api/a2a/a2a-json-rpc"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, a2a, a2a-json-rpc]
+---
+
 # A2A JSON-RPC
 
 > Communicate with an assistant using the Agent-to-Agent (A2A) Protocol over JSON-RPC 2.0.
@@ -18,6 +26,8 @@ This endpoint accepts a JSON-RPC envelope and dispatches based on `method`.
 - Text parts require the assistant input schema to include a `messages` field.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /a2a/{assistant_id}**
 
 ````yaml
 openapi: 3.1.0

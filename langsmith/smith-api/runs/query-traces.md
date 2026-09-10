@@ -1,3 +1,11 @@
+---
+title: "Query traces"
+description: "Returns a paginated list of traces (root runs) for a single tracing project. Each item carries the trace's root run plus optional trace-wide aggregates (total_tokens, total_cost, first_token_time)..."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/query-traces"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, query-traces]
+---
+
 # Query traces
 
 > Returns a paginated list of traces (root runs) for a single tracing project. Each item carries the trace's root run plus optional trace-wide aggregates (`total_tokens`, `total_cost`, `first_token_time`) under `trace_aggregates`, so clients never have to merge by `trace_id`.
@@ -9,6 +17,8 @@ Supports filters (`trace_filter`, `tree_filter`), cursor pagination (`cursor`), 
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/traces/query**
 
 ````yaml
 openapi: 3.1.0

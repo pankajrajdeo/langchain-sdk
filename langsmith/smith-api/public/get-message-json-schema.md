@@ -1,6 +1,16 @@
+---
+title: "Get message JSON schema"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/public/schemas/{version}/message.json"
+source: "https://docs.langchain.com/langsmith/smith-api/public/get-message-json-schema"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, get-message-json-schema]
+---
+
 # Get message JSON schema
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/schemas/{version}/message.json**
 
 ````yaml
 openapi: 3.1.0

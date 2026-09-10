@@ -1,3 +1,11 @@
+---
+title: "Query threads"
+description: "Query threads within a project (session), with cursor-based pagination. Returns threads matching the given time range and optional filters."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/query-threads"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, query-threads]
+---
+
 # Query threads
 
 > Query threads within a project (session), with cursor-based pagination.
@@ -6,6 +14,8 @@ Returns threads matching the given time range and optional filters.
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/threads/query**
 
 ````yaml
 openapi: 3.1.0

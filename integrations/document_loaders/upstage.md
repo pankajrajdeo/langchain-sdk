@@ -1,3 +1,11 @@
+---
+title: "Upstage integration"
+description: "Integrate with the Upstage document loader using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/document_loaders/upstage"
+category: "docs"
+tags: [docs, integrations, document_loaders, upstage]
+---
+
 # Upstage integration
 
 > Integrate with the Upstage document loader using LangChain Python.
@@ -50,7 +58,7 @@ page_content="Properties Instruction Training Datasets Alignment\n Alpaca-GPT4 O
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/upstage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

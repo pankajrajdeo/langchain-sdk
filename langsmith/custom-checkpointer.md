@@ -1,3 +1,11 @@
+---
+title: "How to use a custom checkpointer"
+description: "Replace the built-in Postgres checkpointer with a custom BaseCheckpointSaver implementation in your agent deployment."
+source: "https://docs.langchain.com/langsmith/custom-checkpointer"
+category: "docs"
+tags: [docs, langsmith, custom-checkpointer]
+---
+
 # How to use a custom checkpointer
 
 > Replace the built-in Postgres checkpointer with a custom BaseCheckpointSaver implementation in your agent deployment.
@@ -158,7 +166,7 @@ You can deploy this app as-is to LangSmith or to your self-hosted platform.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-checkpointer.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Deploy LangSmith on Azure with Terraform"
+description: "End-to-end walkthrough for provisioning LangSmith self-hosted on Azure AKS using the LangChain Terraform modules."
+source: "https://docs.langchain.com/langsmith/self-host-terraform-azure-deploy"
+category: "docs"
+tags: [docs, langsmith, self-host-terraform-azure-deploy]
+---
+
 # Deploy LangSmith on Azure with Terraform
 
 > End-to-end walkthrough for provisioning LangSmith self-hosted on Azure AKS using the LangChain Terraform modules.
@@ -712,7 +720,7 @@ create_dns_zone        = true
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-azure-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

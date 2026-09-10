@@ -1,3 +1,11 @@
+---
+title: "Access the current run (span) within a traced function"
+description: "In some cases you will want to access the current run (span) within a traced function. This can be useful for extracting UUIDs, tags, or other information from the current run."
+source: "https://docs.langchain.com/langsmith/access-current-span"
+category: "docs"
+tags: [docs, langsmith, access-current-span]
+---
+
 # Access the current run (span) within a traced function
 
 In some cases you will want to access the current run (span) within a traced function. This can be useful for extracting UUIDs, tags, or other information from the current run.
@@ -5,6 +13,8 @@ In some cases you will want to access the current run (span) within a traced fun
 You can access the current run by calling the `get_current_run_tree`/`getCurrentRunTree` function in the Python or TypeScript SDK, respectively.
 
 For a full list of available properties on the `RunTree` object, see [this reference](run-data-format.md).
+
+**Python**
 
 ```python
 from langsmith import traceable
@@ -59,6 +69,8 @@ from openai import Client
 
 run_pipeline()
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable, getCurrentRunTree } from "langsmith/traceable";
@@ -128,7 +140,7 @@ await runPipeline();
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/access-current-span.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

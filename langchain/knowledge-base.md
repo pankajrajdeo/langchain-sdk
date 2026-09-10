@@ -1,3 +1,11 @@
+---
+title: "Build a semantic search engine with LangChain"
+description: "Build a semantic search engine over a PDF with LangChain embeddings and vector stores. Use it to retrieve passages similar to a query, then plug the retriever into retrieval-augmented generation..."
+source: "https://docs.langchain.com/oss/python/langchain/knowledge-base"
+category: "docs"
+tags: [docs, langchain, knowledge-base]
+---
+
 # Build a semantic search engine with LangChain
 
 ## Overview
@@ -29,13 +37,19 @@ This tutorial focuses on text retrieval and covers the following concepts:
 
 This tutorial reads a PDF using the `pypdf` package:
 
+**pip**
+
 ```bash
 pip install pypdf
 ```
 
+**conda**
+
 ```bash
 conda install pypdf -c conda-forge
 ```
+
+**uv**
 
 ```bash
 uv add pypdf
@@ -784,7 +798,7 @@ For more on RAG:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/knowledge-base.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "View trace counts across your organization"
+description: "This feature is available on Helm chart versions 0.9.5 and later."
+source: "https://docs.langchain.com/langsmith/self-host-organization-charts"
+category: "docs"
+tags: [docs, langsmith, self-host-organization-charts]
+---
+
 # View trace counts across your organization
 
 > [!NOTE]
@@ -45,7 +53,7 @@ For more detailed information about running support queries, see the [Run suppor
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-organization-charts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "assistant-ui"
+description: "Headless React AI chat framework with a full runtime layer, bridged to useStream"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/integrations/assistant-ui"
+category: "docs"
+tags: [docs, langchain, frontend, integrations, assistant-ui]
+---
+
 # assistant-ui
 
 > Headless React AI chat framework with a full runtime layer, bridged to useStream
@@ -166,7 +174,7 @@ function CustomThread() {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/assistant-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

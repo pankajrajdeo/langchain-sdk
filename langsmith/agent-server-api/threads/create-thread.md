@@ -1,8 +1,18 @@
+---
+title: "Create Thread"
+description: "Create a thread."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/create-thread"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, create-thread]
+---
+
 # Create Thread
 
 > Create a thread.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads**
 
 ````yaml
 openapi: 3.1.0

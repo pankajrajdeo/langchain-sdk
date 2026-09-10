@@ -1,8 +1,18 @@
+---
+title: "Register an OAuth2 dynamic client"
+description: "Public RFC 7591 Dynamic Client Registration endpoint. Only mints public clients with allowed loopback, HTTPS, or native client redirect URIs. Body limit 8 KB."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/register-an-oauth2-dynamic-client"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, register-an-oauth2-dynamic-client]
+---
+
 # Register an OAuth2 dynamic client
 
 > Public RFC 7591 Dynamic Client Registration endpoint. Only mints public clients with allowed loopback, HTTPS, or native client redirect URIs. Body limit 8 KB.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /oauth/register**
 
 ````yaml
 openapi: 3.1.0

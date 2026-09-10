@@ -1,3 +1,11 @@
+---
+title: "Contributing to documentation"
+description: "We welcome contributions to LangChain documentation, including new features, integrations, and improvements to existing docs."
+source: "https://docs.langchain.com/oss/python/contributing/documentation"
+category: "docs"
+tags: [docs, contributing, documentation]
+---
+
 # Contributing to documentation
 
 We welcome contributions to LangChain documentation, including new features, [integrations](publish-langchain.md), and improvements to existing docs.
@@ -14,6 +22,12 @@ git clone https://github.com/langchain-ai/docs.git
 cd docs
 ```
 
+Install the pinned toolchain with [mise](https://mise.jdx.dev/getting-started.html), which reads the versions of Python, Node.js, uv, Vale, and the Mintlify CLI from `.mise.toml` and installs the repository's git hooks:
+
+```bash
+mise trust && mise install
+```
+
 ```bash
 make install
 ```
@@ -27,7 +41,7 @@ This starts a development server with hot reload at `http://localhost:3000`. Edi
 > [!TIP]
 > **Using an AI coding agent?**
 >
-> * Install the [LangChain Docs MCP servers](https://docs.langchain.com/use-these-docs) to give your agent access to up-to-date LangChain documentation and examples.
+> * Install the [LangChain Docs MCP servers](../use-these-docs.md) to give your agent access to up-to-date LangChain documentation and examples.
 >
 > > **Prompt:** Connect LangChain docs MCP servers
 >     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
@@ -37,7 +51,7 @@ This starts a development server with hot reload at `http://localhost:3000`. Edi
 >     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
 >     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
 >
->     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](https://docs.langchain.com/use-these-docs.md):
+>     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
 >
 >     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
 >     * Codex CLI: `codex mcp add` with each server URL.
@@ -63,6 +77,7 @@ This starts a development server with hot reload at `http://localhost:3000`. Edi
 > ```
 >
 >     Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
+> * This repository ships its own authoring skills in `.agents/skills/`, covering page creation, navigation placement, and redirects. Most agents read that path directly. For Claude Code, run `make skills` to link them.
 
 > [!TIP]
 > If you are having issues with you local preview, try running `mint update` to ensure you're using the latest Mintlify version.
@@ -70,11 +85,13 @@ This starts a development server with hot reload at `http://localhost:3000`. Edi
 <details>
 <summary>Prerequisites</summary>
 
+**Recommended:** run `mise trust && mise install` to get every pinned version at once. `.mise.toml` is the canonical pin for the toolchain, and its postinstall hook wires up the pre-commit and pre-push hooks.
+
 **Required:**
 
 * Python 3.13+
-* [uv](https://docs.astral.sh/uv/) - Python package manager
-* [Node.js](https://nodejs.org/en) and npm
+* [uv](https://docs.astral.sh/uv/) 0.9.26 or later - Python package manager
+* [Node.js](https://nodejs.org/en) 22.x and npm. Mintlify does not support Node 25 or later
 * [Make](https://www.gnu.org/software/make/)
 * [Git](https://git-scm.com/)
 
@@ -478,7 +495,7 @@ Our goal is to have the simplest developer setup possible. Should you experience
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/documentation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

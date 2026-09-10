@@ -1,3 +1,11 @@
+---
+title: "Granular billable usage"
+description: "Retrieve detailed trace and LangSmith Deployment usage data broken down by workspace, project, user, or API key."
+source: "https://docs.langchain.com/langsmith/granular-usage"
+category: "docs"
+tags: [docs, langsmith, granular-usage]
+---
+
 # Granular billable usage
 
 > Retrieve detailed trace and LangSmith Deployment usage data broken down by workspace, project, user, or API key.
@@ -122,6 +130,8 @@ Existing callers that omit `kind` continue to get trace usage with the same resp
 
 #### Example: Get trace usage by workspace
 
+**Python**
+
 ```python
 import httpx
 from datetime import datetime, timedelta, timezone
@@ -149,6 +159,8 @@ for record in data["usage"]:
     print(f"{record['time_bucket']}: {record['traces']} traces")
 ```
 
+**TypeScript**
+
 ```typescript
 const response = await fetch(
   `https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?` +
@@ -171,6 +183,8 @@ for (const record of data.usage) {
 }
 ```
 
+**cURL**
+
 ```bash
 curl -X GET "https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?\
 start_time=2026-01-01T00:00:00Z&\
@@ -181,6 +195,8 @@ group_by=workspace" \
 ```
 
 #### Example: Get trace usage by user, filtered to long-lived retention only
+
+**Python**
 
 ```python
 response = client.get(
@@ -248,6 +264,8 @@ Each record carries three metrics together so a single fetch powers the whole De
 
 #### Example: Get Deployment usage by workspace
 
+**Python**
+
 ```python
 response = client.get(
     "/api/v1/orgs/current/billing/granular-usage",
@@ -269,6 +287,8 @@ for record in data["usage"]:
         f"{record['agent_uptime_seconds']}s uptime"
     )
 ```
+
+**TypeScript**
 
 ```typescript
 const response = await fetch(
@@ -295,6 +315,8 @@ for (const record of data.usage) {
   );
 }
 ```
+
+**cURL**
 
 ```bash
 curl -X GET "https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?\
@@ -329,6 +351,8 @@ For `kind=traces`, the value column is `Traces`. For `kind=langsmith_deployments
 
 Cells whose value would start with `=`, `+`, `-`, `@`, tab, or carriage-return are tab-prefixed to neutralize spreadsheet formula evaluation in Excel / Google Sheets / LibreOffice.
 
+**Python**
+
 ```python
 response = client.get(
     "/api/v1/orgs/current/billing/granular-usage/export",
@@ -344,6 +368,8 @@ response = client.get(
 with open("deployment_usage_report.csv", "wb") as f:
     f.write(response.content)
 ```
+
+**cURL**
 
 ```bash
 curl -X GET "https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage/export?\
@@ -377,7 +403,7 @@ For trace usage, "project" refers to the [LangSmith tracer session](observabilit
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/granular-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

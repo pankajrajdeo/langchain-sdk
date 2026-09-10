@@ -1,3 +1,11 @@
+---
+title: "How to evaluate agents"
+description: "This guide shows you how to run an evaluation on an agent using the LangSmith SDK."
+source: "https://docs.langchain.com/langsmith/evaluate-llm-application"
+category: "docs"
+tags: [docs, langsmith, evaluate-llm-application]
+---
+
 # How to evaluate agents
 
 This guide shows you how to run an evaluation on an agent using the LangSmith SDK.
@@ -17,6 +25,8 @@ In this guide we'll go over how to evaluate an application using the [evaluate()
 ## Define an application
 
 First we need an application to evaluate. Let's create a simple toxicity classifier for this example.
+
+**Python**
 
 ```python
 from langsmith import traceable, wrappers
@@ -42,6 +52,8 @@ def toxicity_classifier(inputs: dict) -> dict:
     )
     return {"class": result.choices[0].message.content}
 ```
+
+**TypeScript**
 
 ```typescript
 import { OpenAI } from "openai";
@@ -80,6 +92,8 @@ We need a [Dataset](evaluation-concepts.md#datasets) to evaluate our application
 
 Requires `langsmith>=0.3.13`
 
+**Python**
+
 ```python
 from langsmith import Client
 ls_client = Client()
@@ -117,6 +131,8 @@ ls_client.create_examples(
   examples=examples,
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -164,10 +180,14 @@ There are two main ways to define an evaluator.
 * Python: Requires `langsmith>=0.3.13`
 * TypeScript: Requires `langsmith>=0.2.9`
 
+**Python**
+
 ```python
 def correct(inputs: dict, outputs: dict, reference_outputs: dict) -> bool:
     return outputs["class"] == reference_outputs["label"]
 ```
+
+**TypeScript**
 
 ```typescript
 import type { EvaluationResult } from "langsmith/evaluation";
@@ -200,6 +220,8 @@ The key arguments are:
 * `metadata` - an optional object to attach to the experiment. Pass `models`, `prompts`, and `tools` keys to populate the corresponding columns in the experiment table view.
 
 Python: Requires `langsmith>=0.3.13`
+
+**Python**
 
 ```python
 # optional metadata, used to populate model/prompt/tool columns in UI
@@ -239,6 +261,8 @@ results = ls_client.evaluate(
     metadata=EXPERIMENT_METADATA,  # optional, used to populate model/prompt/tool columns in UI
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { evaluate } from "langsmith/evaluation";
@@ -331,6 +355,8 @@ Click an example to open its details panel, which includes inputs, outputs, refe
 
 <details>
 <summary>Click to see a consolidated code snippet</summary>
+
+**Python**
 
 ```python
 from langsmith import Client, traceable, wrappers
@@ -431,6 +457,8 @@ results = ls_client.evaluate(
     metadata=EXPERIMENT_METADATA,  # optional, used to populate model/prompt/tool columns in UI
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { OpenAI } from "openai";
@@ -543,7 +571,7 @@ await evaluate((inputs) => toxicityClassifier(inputs["input"]), {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-llm-application.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

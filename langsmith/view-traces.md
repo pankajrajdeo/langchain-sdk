@@ -1,3 +1,11 @@
+---
+title: "View traces"
+description: "Inspect agent threads in LangSmith using the Messages view or Details view."
+source: "https://docs.langchain.com/langsmith/view-traces"
+category: "docs"
+tags: [docs, langsmith, view-traces]
+---
+
 # View traces
 
 > Inspect agent threads in LangSmith using the Messages view or Details view.
@@ -126,7 +134,7 @@ From the Details view, you can also:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/view-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

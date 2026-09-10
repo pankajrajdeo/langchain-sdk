@@ -1,8 +1,18 @@
+---
+title: "List tools for a vendor"
+description: "Returns the tool catalog for this vendor."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp_vendors/list-tools-for-a-vendor"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp_vendors, list-tools-for-a-vendor]
+---
+
 # List tools for a vendor
 
 > Returns the tool catalog for this vendor.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/mcp-vendors/{vendor_slug}/tools**
 
 ````yaml
 openapi: 3.1.0

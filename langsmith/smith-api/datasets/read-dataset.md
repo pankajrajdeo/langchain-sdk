@@ -1,8 +1,18 @@
+---
+title: "Read dataset"
+description: "Get a specific dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/read-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, read-dataset]
+---
+
 # Read dataset
 
 > Get a specific dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}**
 
 ````yaml
 openapi: 3.1.0

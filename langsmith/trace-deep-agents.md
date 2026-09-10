@@ -1,3 +1,11 @@
+---
+title: "Trace Deep Agents applications"
+description: "deepagents is an open-source agent framework built on top of LangGraph, designed for complex, multi-step tasks that require planning, tool usage, and sub-agent delegation. Deep Agents supports native..."
+source: "https://docs.langchain.com/langsmith/trace-deep-agents"
+category: "docs"
+tags: [docs, langsmith, trace-deep-agents]
+---
+
 # Trace Deep Agents applications
 
 [`deepagents`](../deepagents/overview.md) is an open-source agent framework built on top of LangGraph, designed for complex, multi-step tasks that require planning, tool usage, and sub-agent delegation. Deep Agents supports native LangSmith tracing.
@@ -8,9 +16,13 @@ This guide shows you how to enable LangSmith tracing for Deep Agents, view trace
 
 Install `deepagents` in your Python environment:
 
+**pip**
+
 ```bash
 pip install deepagents
 ```
+
+**uv**
 
 ```bash
 uv add deepagents
@@ -187,9 +199,13 @@ Install and use `langsmith` if you want to:
 * Add custom tags or metadata for filtering in the UI.
 * Override the project name at runtime.
 
+**pip**
+
 ```bash
 pip install langsmith
 ```
+
+**uv**
 
 ```bash
 uv add langsmith
@@ -319,7 +335,7 @@ In this example, the agent is invoked twice, but only the invocation inside `tra
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-deep-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

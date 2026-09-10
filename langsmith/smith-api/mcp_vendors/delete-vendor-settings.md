@@ -1,8 +1,18 @@
+---
+title: "Delete vendor settings"
+description: "Removes vendor settings."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp_vendors/delete-vendor-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp_vendors, delete-vendor-settings]
+---
+
 # Delete vendor settings
 
 > Removes vendor settings.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/mcp-vendors/{vendor_slug}/settings**
 
 ````yaml
 openapi: 3.1.0

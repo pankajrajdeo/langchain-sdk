@@ -1,3 +1,11 @@
+---
+title: "Connect LangSmith Engine to GitHub"
+description: "Connect LangSmith Engine to GitHub in LangSmith Cloud, or create and configure your own GitHub App for a self-hosted deployment."
+source: "https://docs.langchain.com/langsmith/engine-github"
+category: "docs"
+tags: [docs, langsmith, engine-github]
+---
+
 # Connect LangSmith Engine to GitHub
 
 > Connect LangSmith Engine to GitHub in LangSmith Cloud, or create and configure your own GitHub App for a self-hosted deployment.
@@ -150,7 +158,7 @@ The connected repository lets Engine use your source code for diagnosis and open
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-github.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

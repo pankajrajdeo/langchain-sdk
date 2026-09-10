@@ -1,3 +1,11 @@
+---
+title: "Bulk export trace data"
+description: "Export LangSmith trace data to an S3-compatible bucket in Parquet format."
+source: "https://docs.langchain.com/langsmith/data-export"
+category: "docs"
+tags: [docs, langsmith, data-export]
+---
+
 # Bulk export trace data
 
 > Export LangSmith trace data to an S3-compatible bucket in Parquet format.
@@ -133,7 +141,7 @@ The same `all_experiments` flag works with [scheduled exports](#schedule-recurri
 ### Schedule recurring exports
 
 > [!NOTE]
-> Requires LangSmith Helm version >= `0.10.42` (application version >= `0.10.109`)
+> Requires LangSmith Helm version `0.10.42` or later (application version `0.10.109` or later)
 
 Scheduled exports collect runs periodically and export to the configured destination. To create a scheduled export, include `interval_hours` and omit `end_time`:
 
@@ -183,7 +191,7 @@ If a scheduled bulk export is created with `start_time=2025-07-16T00:00:00Z` and
 ### Limit exported fields
 
 > [!NOTE]
-> Requires LangSmith Helm version >= `0.12.11` (application version >= `0.12.42`). Supported in both one-time and scheduled exports.
+> Requires LangSmith Helm version `0.12.11` or later (application version `0.12.42` or later). Supported in both one-time and scheduled exports.
 
 You can improve export speed and reduce file size by limiting which fields are included using the `export_fields` parameter. If you omit `export_fields`, all fields except `feedbacks` are included.
 
@@ -308,7 +316,7 @@ Refer to [Monitor and troubleshoot bulk exports](data-export-monitor.md) for how
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

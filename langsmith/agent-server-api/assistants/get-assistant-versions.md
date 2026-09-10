@@ -1,8 +1,18 @@
+---
+title: "Get Assistant Versions"
+description: "Get all versions of an assistant."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-versions"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, get-assistant-versions]
+---
+
 # Get Assistant Versions
 
 > Get all versions of an assistant.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /assistants/{assistant_id}/versions**
 
 ````yaml
 openapi: 3.1.0

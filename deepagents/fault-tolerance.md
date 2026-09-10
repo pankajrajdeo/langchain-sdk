@@ -1,3 +1,11 @@
+---
+title: "Fault tolerance"
+description: "Make your deep agent resilient with rate limiting, retries, fallbacks, and error handling"
+source: "https://docs.langchain.com/oss/python/deepagents/fault-tolerance"
+category: "docs"
+tags: [docs, deepagents, fault-tolerance]
+---
+
 # Fault tolerance
 
 > Make your deep agent resilient with rate limiting, retries, fallbacks, and error handling
@@ -245,7 +253,7 @@ For the full configuration options and usage patterns, including async handlers 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

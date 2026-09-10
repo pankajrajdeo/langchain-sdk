@@ -1,3 +1,11 @@
+---
+title: "Salesforce integration"
+description: "Connect LangSmith Fleet to Salesforce so your agents can query records, navigate schemas, and read custom fields."
+source: "https://docs.langchain.com/langsmith/fleet/salesforce"
+category: "docs"
+tags: [docs, langsmith, fleet, salesforce]
+---
+
 # Salesforce integration
 
 > Connect LangSmith Fleet to Salesforce so your agents can query records, navigate schemas, and read custom fields.
@@ -114,7 +122,7 @@ Require approval before the agent takes sensitive actions
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/salesforce.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

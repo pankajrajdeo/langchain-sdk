@@ -1,3 +1,11 @@
+---
+title: "Filter traces"
+description: "Tracing projects can accumulate large amounts of data across threads, traces, and runs. LangSmith's filtering tools let you navigate and analyze that data precisely."
+source: "https://docs.langchain.com/langsmith/filter-traces-in-application"
+category: "docs"
+tags: [docs, langsmith, filter-traces-in-application]
+---
+
 # Filter traces
 
 Tracing projects can accumulate large amounts of data across [threads](observability-concepts.md#threads), [traces](observability-concepts.md#traces), and [runs](observability-concepts.md#runs). LangSmith's filtering tools let you navigate and analyze that data precisely.
@@ -279,7 +287,7 @@ Extending the [tool call filtering example](#example-filtering-for-tool-calls), 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/filter-traces-in-application.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

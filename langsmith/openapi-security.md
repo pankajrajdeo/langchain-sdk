@@ -1,3 +1,11 @@
+---
+title: "Document API authentication in OpenAPI"
+description: "This guide shows how to customize the OpenAPI security schema for your LangSmith API documentation. A well-documented security schema helps API consumers understand how to authenticate with your API..."
+source: "https://docs.langchain.com/langsmith/openapi-security"
+category: "docs"
+tags: [docs, langsmith, openapi-security]
+---
+
 # Document API authentication in OpenAPI
 
 This guide shows how to customize the OpenAPI security schema for your LangSmith API documentation. A well-documented security schema helps API consumers understand how to authenticate with your API and even enables automatic client generation. See the [Authentication & Access Control conceptual guide](auth.md) for more details about LangGraph's authentication system.
@@ -99,7 +107,7 @@ After updating your configuration:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/openapi-security.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

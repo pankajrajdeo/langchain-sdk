@@ -1,3 +1,11 @@
+---
+title: "Model fallbacks"
+description: "Automatically retry a request against backup models when the primary model rate-limits, errors, or returns another configured status code."
+source: "https://docs.langchain.com/langsmith/llm-gateway-fallbacks"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-fallbacks]
+---
+
 # Model fallbacks
 
 > Automatically retry a request against backup models when the primary model rate-limits, errors, or returns another configured status code.
@@ -33,7 +41,7 @@ Each attempt is traced and counted against [spend policies](llm-gateway-spend-po
 
 To create a fallback chain:
 
-1. Go to **Settings → Gateway → LLM Gateway** and select the **Model Fallbacks** tab.
+1. Go to **LLM Gateway** and select the **Model Fallbacks** tab.
 2. Click **Create fallback chain**.
 3. Select the **Workspace** where the chain applies.
 4. Select the primary provider and model. Requests to this provider-prefixed model ID use the chain when the primary attempt fails.
@@ -47,12 +55,16 @@ A provider and model can have one fallback chain in each workspace. To change it
 
 Call the standard LLM Gateway endpoint with the primary provider-prefixed model ID. You do not need a route-specific URL or additional request fields:
 
+**Cloud**
+
 ```bash
 curl https://gateway.smith.langchain.com/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
 ```
+
+**BYOC**
 
 ```bash
 curl https://<data_plane_host>/gateway/v1/chat/completions \
@@ -83,7 +95,7 @@ For example, configure `anthropic/claude-sonnet-4-6` as the primary model, `open
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-fallbacks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

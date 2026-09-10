@@ -1,3 +1,11 @@
+---
+title: "Delete runs"
+description: "DELETE with body payload — removes the runs identified by the request payload."
+source: "https://docs.langchain.com/langsmith/smith-api/run/delete-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, delete-runs]
+---
+
 # Delete runs
 
 > DELETE with body payload — removes the runs identified by the request payload.
@@ -10,6 +18,8 @@ onward. Add `end_time` to bound the range; with both bounds set `metadata`
 is optional, and omitting it deletes every trace that started in the range.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/delete**
 
 ````yaml
 openapi: 3.1.0

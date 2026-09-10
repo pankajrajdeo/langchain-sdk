@@ -1,6 +1,16 @@
+---
+title: "Claim pending workspace invite"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/pending/{workspace_id}/claim"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/claim-pending-workspace-invite"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, claim-pending-workspace-invite]
+---
+
 # Claim pending workspace invite
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/pending/{workspace_id}/claim**
 
 ````yaml
 openapi: 3.1.0

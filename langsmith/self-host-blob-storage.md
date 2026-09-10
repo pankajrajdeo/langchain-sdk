@@ -1,3 +1,11 @@
+---
+title: "Enable blob storage"
+description: "By default, LangSmith stores run inputs, outputs, errors, manifests, extras, and events in ClickHouse. If you so choose, you can instead store this information in blob storage, which has a couple of..."
+source: "https://docs.langchain.com/langsmith/self-host-blob-storage"
+category: "docs"
+tags: [docs, langsmith, self-host-blob-storage]
+---
+
 # Enable blob storage
 
 By default, LangSmith stores run inputs, outputs, errors, manifests, extras, and events in ClickHouse. If you so choose, you can instead store this information in blob storage, which has a couple of notable benefits. For the best results in production deployments, we **strongly** recommend using blob storage, which offers the following benefits:
@@ -134,6 +142,8 @@ By default, LangSmith will still store tokens for search in ClickHouse. If you a
 ## Configuration
 
 After creating your bucket and obtaining the necessary credentials, you can configure LangSmith to use your blob storage system.
+
+**Helm**
 
 ```yaml
 config:
@@ -414,7 +424,7 @@ resource "azurerm_storage_management_policy" "example" {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-blob-storage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

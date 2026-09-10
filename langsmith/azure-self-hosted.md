@@ -1,3 +1,11 @@
+---
+title: "Self-hosted LangSmith on Azure"
+description: "When running LangSmith on Microsoft Azure, self-hosted mode deploys a complete LangSmith platform with observability functionality."
+source: "https://docs.langchain.com/langsmith/azure-self-hosted"
+category: "docs"
+tags: [docs, langsmith, azure-self-hosted]
+---
+
 # Self-hosted LangSmith on Azure
 
 When running LangSmith on [Microsoft Azure](https://azure.microsoft.com/), [self-hosted](self-hosted.md) mode deploys a complete LangSmith platform with observability functionality.
@@ -205,7 +213,7 @@ Ensure LangSmith services emit logs to stdout/stderr and forward them via [Fluen
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/azure-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

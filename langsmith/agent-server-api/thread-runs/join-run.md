@@ -1,8 +1,18 @@
+---
+title: "Join Run"
+description: "Wait for a run to finish."
+source: "https://docs.langchain.com/langsmith/agent-server-api/thread-runs/join-run"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, thread-runs, join-run]
+---
+
 # Join Run
 
 > Wait for a run to finish.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /threads/{thread_id}/runs/{run_id}/join**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "LangSmith control plane"
+description: "The control plane is the part of LangSmith that manages deployments. It includes the control plane UI, where users create and update Agent Servers, and the control plane APIs, which support the UI..."
+source: "https://docs.langchain.com/langsmith/control-plane"
+category: "docs"
+tags: [docs, langsmith, control-plane]
+---
+
 # LangSmith control plane
 
 The *control plane* is the part of LangSmith that manages deployments. It includes the control plane UI, where users create and update [Agent Servers](agent-server.md), and the control plane APIs, which support the UI and provide programmatic access.
@@ -75,7 +83,7 @@ When a deployment is deleted, the traces and the tracing project are not deleted
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

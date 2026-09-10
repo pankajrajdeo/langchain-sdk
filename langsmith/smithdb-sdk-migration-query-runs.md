@@ -1,3 +1,11 @@
+---
+title: "Migrate run queries to SmithDB"
+description: "Migrate the LangSmith SDK run query methods to their SmithDB-backed equivalents."
+source: "https://docs.langchain.com/langsmith/smithdb-sdk-migration-query-runs"
+category: "docs"
+tags: [docs, langsmith, smithdb-sdk-migration-query-runs]
+---
+
 # Migrate run queries to SmithDB
 
 > Migrate the LangSmith SDK run query methods to their SmithDB-backed equivalents.
@@ -551,6 +559,8 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 `runs.query` does not accept a project name directly. Resolve the project UUID with `client.aread_project()` first, then pass it as a string in `project_ids`.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -559,6 +569,8 @@ runs = client.list_runs(project_name="default")
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -576,6 +588,8 @@ asyncio.run(main())
 `client.runs.query` does not accept a project name directly. Resolve the project UUID with `client.readProject()` first, then pass it as a string in `project_ids`.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -584,6 +598,8 @@ const runs = client.listRuns({ projectName: "default" });
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -596,6 +612,8 @@ const runs = client.runs.query({ project_ids: [project.id] });
 `queryV2()` does not accept a project name directly. Resolve the project UUID with `client.sessions().list()` first, then pass it as a string in `projectIds()`.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -613,6 +631,8 @@ val runs = client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -633,6 +653,8 @@ val runs = client.runs().queryV2(
 `QueryV2()` does not accept a project name directly. Resolve the project UUID with `client.Sessions.List()` first, then pass it as a string in `ProjectIDs`.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -657,6 +679,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -711,6 +735,8 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 `list_runs` returns a default set of fields with no selection needed. `runs.query` returns only `id` by default—pass `selects=[...]` to request more. Field names are now uppercase (`"name"` → `"NAME"`).
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -722,6 +748,8 @@ for run in runs:
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -744,6 +772,8 @@ asyncio.run(main())
 `listRuns` returns a default set of fields with no selection needed. `client.runs.query` returns only `id` by default—pass `selects: [...]` to request more. Field names are now uppercase (`"name"` → `"NAME"`).
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -756,6 +786,8 @@ for await (const run of runs) {
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -774,6 +806,8 @@ for await (const run of client.runs.query({
 `query()` returns a default set of fields with no selection needed. `queryV2()` returns only `id` by default—call `.addSelect(RunQueryV2Params.Select.X)` for each field you need.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -795,6 +829,8 @@ for (run in runs) {
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -829,6 +865,8 @@ for (run in runs) {
 `Query` returns a default set of fields with no selection needed. `QueryV2` returns only `ID` by default—pass `Selects` with the uppercase field constants you need (e.g. `RunQueryV2ParamsSelectName`).
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -858,6 +896,8 @@ for _, run := range runs.Runs {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -926,6 +966,8 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 `start_time` is renamed to `min_start_time`, and `run_type` values are now uppercase (`"llm"` → `"LLM"`).
 
 #### Before
+**Before**
+
 ```python
 from datetime import datetime, timedelta
 
@@ -940,6 +982,8 @@ runs = client.list_runs(
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 from datetime import datetime, timedelta
@@ -962,6 +1006,8 @@ asyncio.run(main())
 `startTime` (camelCase) becomes `min_start_time` (snake\_case, matching the v2 request body), and `runType` values are now uppercase (`"llm"` → `"LLM"`).
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -974,6 +1020,8 @@ const runs = client.listRuns({
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -991,6 +1039,8 @@ const runs = client.runs.query({
 `.startTime()` is renamed to `.minStartTime()`, and `.runType()` now takes the new `RunQueryV2Params.RunType` enum instead of `RunTypeEnum`.
 
 #### Before
+**Before**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -1015,6 +1065,8 @@ val runs = client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -1042,6 +1094,8 @@ val runs = client.runs().queryV2(
 `StartTime` is renamed to `MinStartTime`, and `RunType` now takes the new `RunQueryV2ParamsRunType` enum instead of `RunTypeEnum`.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1069,6 +1123,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1126,6 +1182,8 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 `is_root` is unchanged.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1134,6 +1192,8 @@ runs = client.list_runs(project_name="default", is_root=True)
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -1151,6 +1211,8 @@ asyncio.run(main())
 `isRoot` (camelCase) becomes `is_root` (snake\_case, matching the v2 request body).
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1159,6 +1221,8 @@ const runs = client.listRuns({ projectName: "default", isRoot: true });
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1174,6 +1238,8 @@ const runs = client.runs.query({
 `.isRoot()` is unchanged.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1191,6 +1257,8 @@ val runs = client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1211,6 +1279,8 @@ val runs = client.runs().queryV2(
 `IsRoot` is unchanged.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1236,6 +1306,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1293,6 +1365,8 @@ To enumerate traces specifically, use `traces.query` instead of `is_root=True`. 
 `id=[...]` is renamed to `ids=[...]`. `project_ids` is now required even when filtering by run IDs—v1 allowed omitting the project context.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1301,6 +1375,8 @@ runs = client.list_runs(id=["<run-id-1>", "<run-id-2>"])
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -1321,6 +1397,8 @@ asyncio.run(main())
 `id: [...]` is renamed to `ids: [...]`. `project_ids` is now required even when filtering by run IDs—v1 allowed omitting the project context.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1329,6 +1407,8 @@ const runs = client.listRuns({ id: ["<run-id-1>", "<run-id-2>"] });
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1344,6 +1424,8 @@ const runs = client.runs.query({
 `.addId(...)` is unchanged—call it once per run ID. `.addProjectId(...)` is now required even when filtering by run IDs—v1 allowed omitting the project context.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1367,6 +1449,8 @@ val runs = client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1391,6 +1475,8 @@ val runs = client.runs().queryV2(
 `ID: [...]` is renamed to `IDs: [...]`. `ProjectIDs` is now required even when filtering by run IDs—v1 allowed omitting the project context.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1418,6 +1504,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1478,6 +1566,8 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 `list_runs` auto-paginates transparently, fetching up to 100 runs per API call and stopping once `limit` results are returned. `runs.query` does not accept a total `limit`; iterate with `async for` and `break` once you have enough, or use the returned page's `has_next_page()`/`get_next_page()` for manual page-by-page control.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1486,6 +1576,8 @@ runs = client.list_runs(project_name="default", limit=150)
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -1509,6 +1601,8 @@ asyncio.run(main())
 `listRuns` auto-paginates transparently. `client.runs.query` returns an async iterable of individual runs—use `for await` and `break` once you have enough.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1521,6 +1615,8 @@ for await (const run of client.listRuns({ projectName: "default" })) {
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1539,6 +1635,8 @@ for await (const run of client.runs.query({
 `.autoPager()` is used the same way on both `query()` and `queryV2()`—break out of the loop once you have enough runs.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1560,6 +1658,8 @@ for (run in client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1584,6 +1684,8 @@ for (run in client.runs().queryV2(
 `QueryAutoPaging` is renamed to `QueryV2AutoPaging`; both use the same `iter.Next()`/`iter.Current()` pattern—break out of the loop once you have enough runs.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1615,6 +1717,8 @@ for iter.Next() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1687,6 +1791,8 @@ done
 `error=True/False` is renamed to `has_error=True/False`.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1695,6 +1801,8 @@ runs = client.list_runs(project_name="default", error=True)
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -1712,6 +1820,8 @@ asyncio.run(main())
 `error: true/false` is renamed to `has_error: true/false`.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1720,6 +1830,8 @@ const runs = client.listRuns({ projectName: "default", error: true });
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1735,6 +1847,8 @@ const runs = client.runs.query({
 `.error(true/false)` is renamed to `.hasError(true/false)`.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1752,6 +1866,8 @@ val runs = client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1772,6 +1888,8 @@ val runs = client.runs().queryV2(
 `Error` is renamed to `HasError`.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1797,6 +1915,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1852,6 +1972,8 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 The `filter` string syntax is unchanged: `eq(metadata_key, ...)` checks for key presence, combined with `eq(metadata_value, ...)` to match a specific value.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1861,6 +1983,8 @@ runs = client.list_runs(project_name="default", filter=filter_str)
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -1879,6 +2003,8 @@ asyncio.run(main())
 The `filter` string syntax is unchanged: `eq(metadata_key, ...)` checks for key presence, combined with `eq(metadata_value, ...)` to match a specific value.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1888,6 +2014,8 @@ const runs = client.listRuns({ projectName: "default", filter: filterStr });
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1904,6 +2032,8 @@ const runs = client.runs.query({
 The `.filter(...)` string syntax is unchanged: `eq(metadata_key, ...)` checks for key presence, combined with `eq(metadata_value, ...)` to match a specific value.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1922,6 +2052,8 @@ val runs = client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1943,6 +2075,8 @@ val runs = client.runs().queryV2(
 The `Filter` string syntax is unchanged: `eq(metadata_key, ...)` checks for key presence, combined with `eq(metadata_value, ...)` to match a specific value.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1969,6 +2103,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -2029,6 +2165,8 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 Nested `and()` / `or()` filter expressions are unchanged.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -2042,6 +2180,8 @@ runs = client.list_runs(project_name="default", filter=filter_str)
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -2064,6 +2204,8 @@ asyncio.run(main())
 Nested `and()` / `or()` filter expressions are unchanged.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -2076,6 +2218,8 @@ const runs = client.listRuns({ projectName: "default", filter: filterStr });
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -2095,6 +2239,8 @@ const runs = client.runs.query({
 Nested `and()` / `or()` filter expressions are unchanged.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -2115,6 +2261,8 @@ val runs = client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -2138,6 +2286,8 @@ val runs = client.runs().queryV2(
 Nested `and()` / `or()` filter expressions are unchanged.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -2164,6 +2314,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -2224,6 +2376,8 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 `filter`, `trace_filter`, and `tree_filter` are unchanged. `filter` applies to the matched run, `trace_filter` to the root of its trace, and `tree_filter` to other runs in the trace tree (siblings and children).
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -2237,6 +2391,8 @@ runs = client.list_runs(
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -2259,6 +2415,8 @@ asyncio.run(main())
 `filter`, `trace_filter`, and `tree_filter` are unchanged. `filter` applies to the matched run, `trace_filter` to the root of its trace, and `tree_filter` to other runs in the trace tree (siblings and children).
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -2272,6 +2430,8 @@ const runs = client.listRuns({
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -2289,6 +2449,8 @@ const runs = client.runs.query({
 `.filter()`, `.traceFilter()`, and `.treeFilter()` are unchanged. `filter` applies to the matched run, `traceFilter` to the root of its trace, and `treeFilter` to other runs in the trace tree (siblings and children).
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -2311,6 +2473,8 @@ val runs = client.runs().query(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -2336,6 +2500,8 @@ val runs = client.runs().queryV2(
 `Filter`, `TraceFilter`, and `TreeFilter` are unchanged. `Filter` applies to the matched run, `TraceFilter` to the root of its trace, and `TreeFilter` to other runs in the trace tree (siblings and children).
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -2363,6 +2529,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -2441,7 +2609,7 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-query-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

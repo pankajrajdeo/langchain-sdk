@@ -1,8 +1,18 @@
+---
+title: "Get openid connect userinfo"
+description: "Returns identity claims for the user represented by a LangSmith access token whose audience is the identity resource or the API resource. The token is passed as a Bearer credential in the..."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/get-openid-connect-userinfo"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, get-openid-connect-userinfo]
+---
+
 # Get openid connect userinfo
 
 > Returns identity claims for the user represented by a LangSmith access token whose audience is the identity resource or the API resource. The token is passed as a Bearer credential in the Authorization header (OpenID Connect Core 1.0 §5.3).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /userinfo**
 
 ````yaml
 openapi: 3.1.0

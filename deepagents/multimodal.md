@@ -1,3 +1,11 @@
+---
+title: "Multimodal inputs and outputs"
+description: "Use images, audio, video, and documents with Deep Agents when your model supports multimodal inputs and tool results"
+source: "https://docs.langchain.com/oss/python/deepagents/multimodal"
+category: "docs"
+tags: [docs, deepagents, multimodal]
+---
+
 # Multimodal inputs and outputs
 
 > Use images, audio, video, and documents with Deep Agents when your model supports multimodal inputs and tool results
@@ -113,7 +121,7 @@ See [Context compression](context-engineering.md#context-compression) for offloa
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/multimodal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

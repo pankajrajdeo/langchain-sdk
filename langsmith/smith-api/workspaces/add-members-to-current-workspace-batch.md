@@ -1,8 +1,18 @@
+---
+title: "Add members to current workspace batch"
+description: "Batch invite up to 500 users to the current workspace and organization."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/add-members-to-current-workspace-batch"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, add-members-to-current-workspace-batch]
+---
+
 # Add members to current workspace batch
 
 > Batch invite up to 500 users to the current workspace and organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/members/batch**
 
 ````yaml
 openapi: 3.1.0

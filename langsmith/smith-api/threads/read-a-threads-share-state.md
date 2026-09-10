@@ -1,3 +1,11 @@
+---
+title: "Read a thread's share state"
+description: "Returns the share token for a thread. The token is omitted when the thread is not shared. Gated on runs:share so the control's state matches the control's permission."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/read-a-threads-share-state"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, read-a-threads-share-state]
+---
+
 # Read a thread's share state
 
 > Returns the share token for a thread. The token is omitted when
@@ -5,6 +13,8 @@ the thread is not shared. Gated on runs:share so the control's
 state matches the control's permission.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/threads/{thread_id}/share**
 
 ````yaml
 openapi: 3.1.0
@@ -182,8 +192,8 @@ paths:
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
       responses:
         '200':

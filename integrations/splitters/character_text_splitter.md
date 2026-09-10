@@ -1,3 +1,11 @@
+---
+title: "Splitting by character - Text splitter integration guide"
+description: "Character-based splitting is the simplest approach to text splitting. It divides text using a specified character sequence (default: \"\\n\\n\"), with chunk length measured by the number of characters."
+source: "https://docs.langchain.com/oss/python/integrations/splitters/character_text_splitter"
+category: "docs"
+tags: [docs, integrations, splitters, character_text_splitter]
+---
+
 # Splitting by character - Text splitter integration guide
 
 Character-based splitting is the simplest approach to text splitting. It divides text using a specified character sequence (default: `"\n\n"`), with chunk length measured by the number of characters.
@@ -65,7 +73,7 @@ text_splitter.split_text(state_of_the_union)[0]
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/character_text_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

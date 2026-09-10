@@ -1,3 +1,11 @@
+---
+title: "LLM Gateway"
+description: "Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data-protection policies."
+source: "https://docs.langchain.com/langsmith/llm-gateway"
+category: "docs"
+tags: [docs, langsmith, llm-gateway]
+---
+
 # LLM Gateway
 
 > Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data-protection policies.
@@ -19,6 +27,8 @@ Use one [LangSmith API key](create-account-api-key.md) to call models across con
 
 Set your key and make a standard Chat Completions request. This example assumes the workspace has an Anthropic provider secret:
 
+**Cloud**
+
 ```bash
 export LANGSMITH_API_KEY="lsv2_..._....cbed3e"
 
@@ -27,6 +37,8 @@ curl https://gateway.smith.langchain.com/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
 ```
+
+**BYOC**
 
 ```bash
 export LANGSMITH_API_KEY="lsv2_..._....cbed3e"
@@ -44,7 +56,7 @@ A `200` response confirms that the gateway, your LangSmith API key, permissions,
 * **One key, multiple providers:** Developers authenticate with a LangSmith API key instead of storing provider keys locally.
 * **One request format, multiple models:** Use Chat Completions, Messages, or Responses with models across configured providers.
 * **Built-in observability:** Every gateway call appears as a [LangSmith trace](llm-gateway-access.md).
-* **Central governance:** Apply [spend limits](llm-gateway-spend-policies.md), [rate limits](llm-gateway-rate-limit-policies.md), and [data-protection policies](llm-gateway-data-protection.md).
+* **Central governance:** Apply [spend limits](llm-gateway-spend-policies.md), [rate limits](llm-gateway-rate-limit-policies.md), and [data policies](llm-gateway-data-policy.md).
 
 ## Use the standard API
 
@@ -87,7 +99,7 @@ Enable the gateway, add provider credentials, and grant developer access.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

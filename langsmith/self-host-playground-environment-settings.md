@@ -1,3 +1,11 @@
+---
+title: "Use environment variables for model providers"
+description: "This feature is only available on Helm chart versions 0.10.27 (application version 0.10.74) and later."
+source: "https://docs.langchain.com/langsmith/self-host-playground-environment-settings"
+category: "docs"
+tags: [docs, langsmith, self-host-playground-environment-settings]
+---
+
 # Use environment variables for model providers
 
 > [!NOTE]
@@ -15,6 +23,8 @@ Many model providers support setting credentials and other configuration options
 ## Configuration
 
 With the parameters from above, you can configure your LangSmith instance to use environment variables for model providers. You can do this by modifying the `langsmith_config.yaml` file for your LangSmith Helm Chart installation.
+
+**Helm**
 
 ```yaml
 playground:
@@ -39,6 +49,8 @@ You can configure Gemini Enterprise Agent Platform credentials for the playgroun
 ### Using secrets
 
 Configure Gemini Enterprise Agent Platform credentials using Kubernetes secrets:
+
+**Helm**
 
 ```yaml
 playground:
@@ -79,6 +91,8 @@ You can configure the playground service account to use GCP Workload Identity to
 
 For GKE clusters, use GCP Workload Identity:
 
+**Helm**
+
 ```yaml
 playground:
   deployment:
@@ -104,6 +118,8 @@ playground:
 
 For EKS clusters, you can use AWS IRSA (IAM Roles for Service Accounts) to grant the `playground` service account access to AWS resources without storing credentials. Annotate the service account with your IAM role ARN:
 
+**Helm**
+
 ```yaml
 playground:
   serviceAccount:
@@ -118,7 +134,7 @@ playground:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-playground-environment-settings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

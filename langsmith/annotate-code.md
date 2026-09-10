@@ -1,3 +1,11 @@
+---
+title: "Custom instrumentation"
+description: "Instrument your code directly to control which functions are traced and how they appear in LangSmith."
+source: "https://docs.langchain.com/langsmith/annotate-code"
+category: "docs"
+tags: [docs, langsmith, annotate-code]
+---
+
 # Custom instrumentation
 
 > Instrument your code directly to control which functions are traced and how they appear in LangSmith.
@@ -41,6 +49,8 @@ The following example traces a simple pipeline: `run_pipeline` calls `format_pro
 
 Each function is individually traced, and because they're called from within `run_pipeline` (also traced), LangSmith automatically nests them as child runs. `invoke_llm` uses `run_type="llm"` to mark it as an LLM call so LangSmith can render token counts and latency correctly:
 
+**Python**
+
 ```python
 from langsmith import traceable
 from openai import Client
@@ -78,6 +88,8 @@ def run_pipeline():
 
 run_pipeline()
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -128,6 +140,8 @@ const runPipeline = traceable(
 await runPipeline();
 ```
 
+**Java**
+
 ```java
 import com.langchain.smith.tracing.RunType;
 import com.langchain.smith.tracing.TraceConfig;
@@ -173,9 +187,8 @@ public class TraceablePipeline {
                     .completions()
                     .create(
                         ChatCompletionCreateParams.builder()
-                            .model(ChatModel.GPT_5_CHAT_LATEST)
+                            .model(ChatModel.GPT_5_5)
                             .messages(messages)
-                            .temperature(0.0)
                             .build()),
             TraceConfig.builder().name("invoke_llm").runType(RunType.LLM).build());
 
@@ -195,6 +208,11 @@ public class TraceablePipeline {
   }
 }
 ```
+
+#### [View example trace](https://smith.langchain.com/public/5e686a13-436f-41ec-9e21-7f38d8babcb8/r)
+Open a public LangSmith run for this example.
+
+**Kotlin**
 
 ```kotlin
 import com.langchain.smith.tracing.RunType
@@ -235,9 +253,8 @@ val invokeLlm =
         { messages: List<ChatCompletionMessageParam> ->
             openai.chat().completions().create(
                 ChatCompletionCreateParams.builder()
-                    .model(ChatModel.GPT_5_CHAT_LATEST)
+                    .model(ChatModel.GPT_5_5)
                     .messages(messages)
-                    .temperature(0.0)
                     .build(),
             )
         },
@@ -260,6 +277,9 @@ val runPipeline =
 
 println(runPipeline("colorful socks"))
 ```
+
+#### [View example trace](https://smith.langchain.com/public/397a7c30-a236-43bb-b104-89f8d9e3145c/r)
+Open a public LangSmith run for this example.
 
 In the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-annotate-code), you'll find a `run_pipeline` trace with `format_prompt`, `invoke_llm`, and `parse_output` as nested child runs.
 
@@ -314,6 +334,8 @@ Another, more explicit way to log traces to LangSmith is via the `RunTree` API. 
 
 This method is not recommended for most use cases; manually managing trace context is error-prone compared to `@traceable`, which handles context propagation automatically.
 
+**Python**
+
 ```python
 import openai
 from langsmith.run_trees import RunTree
@@ -357,6 +379,8 @@ pipeline.end(outputs={"answer": chat_completion.choices[0].message.content})
 pipeline.patch()
 ```
 
+**TypeScript**
+
 ```typescript
 import OpenAI from "openai";
 import { RunTree } from "langsmith";
@@ -399,6 +423,8 @@ await childRun.patchRun();
 pipeline.end({ outputs: { answer: chatCompletion.choices[0].message.content } });
 await pipeline.patchRun();
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -462,7 +488,7 @@ public class RunTreeExample {
 
             ChatCompletion chatCompletion = openai.chat().completions().create(
                 ChatCompletionCreateParams.builder()
-                    .model(ChatModel.GPT_5_CHAT_LATEST)
+                    .model(ChatModel.GPT_5_5)
                     .messages(messages)
                     .build());
 
@@ -487,6 +513,8 @@ public class RunTreeExample {
     }
 }
 ```
+
+**Kotlin**
 
 ```kotlin
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -552,7 +580,7 @@ try {
     val chatCompletion =
         openai.chat().completions().create(
             ChatCompletionCreateParams.builder()
-                .model(ChatModel.GPT_5_CHAT_LATEST)
+                .model(ChatModel.GPT_5_5)
                 .messages(messages)
                 .build(),
         )
@@ -650,6 +678,8 @@ Use one of the following:
 
 * `@traceable`: pass `run_id` inside `langsmith_extra` when calling a `@traceable` function (Python), or pass `id` in the config object passed to `traceable` (TypeScript):
 
+**Python**
+
 ```python
   from langsmith import traceable, uuid7
 
@@ -662,6 +692,8 @@ Use one of the following:
 
   # run_id can now be used to attach feedback, query the run, etc.
 ```
+
+**TypeScript**
 
 ```typescript
   import { traceable } from "langsmith/traceable";
@@ -683,6 +715,8 @@ Use one of the following:
 
 * `trace` context manager (Python only): Pass `run_id` directly to the [trace](https://reference.langchain.com/python/langsmith/run_helpers/trace) context manager constructor:
 
+**Python**
+
 ```python
   from langsmith import trace, uuid7
 
@@ -702,6 +736,8 @@ LangSmith performs tracing in a background thread to avoid obstructing your prod
 * If you are using LangChain, refer to the [LangChain tracing guide](trace-with-langchain.md#ensure-all-traces-are-submitted-before-exiting).
 * If you are using the [LangSmith SDK](reference.md) standalone, you can use the `flush` method before exit:
 
+**Python**
+
 ```python
   from langsmith import Client
 
@@ -717,6 +753,8 @@ LangSmith performs tracing in a background thread to avoid obstructing your prod
   finally:
   await client.flush()
 ```
+
+**TypeScript**
 
 ```typescript
   import { Client } from "langsmith";
@@ -747,7 +785,7 @@ LangSmith performs tracing in a background thread to avoid obstructing your prod
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotate-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Sandbox mounts"
+description: "Mount S3 buckets, GCS buckets, public Git repositories, and Context Hub repos into LangSmith sandboxes."
+source: "https://docs.langchain.com/langsmith/sandbox-mounts"
+category: "docs"
+tags: [docs, langsmith, sandbox-mounts]
+---
+
 # Sandbox mounts
 
 > Mount S3 buckets, GCS buckets, public Git repositories, and Context Hub repos into LangSmith sandboxes.
@@ -30,6 +38,8 @@ Mount IDs can contain ASCII letters, digits, underscores, and hyphens. Do not re
 ## Mount an S3 bucket
 
 S3 mounts require AWS auth. The SDK creates an AWS auth proxy rule from `aws_auth` / `awsAuth`, so the sandbox can access the bucket without seeing the real access keys.
+
+**Python**
 
 ```python
 from langsmith.sandbox import (
@@ -66,6 +76,8 @@ with client.sandbox(name="s3-mount-sandbox", mount_config=mount_cfg) as sb:
     result = sb.run("ls /mnt/mounts/customer-data")
     print(result.stdout)
 ```
+
+**TypeScript**
 
 ```ts
 import {
@@ -117,6 +129,8 @@ GCS mounts require GCP auth. The OAuth scope is supplied by the backend, derived
 
 Because a single `mount_config` resolves to one scope, all of its GCS mounts must agree: mixing read-only and writable GCS mounts in one config is rejected. Use writable mounts throughout, or create separate sandboxes.
 
+**Python**
+
 ```python
 from langsmith.sandbox import (
     SandboxClient,
@@ -151,6 +165,8 @@ with client.sandbox(name="gcs-mount-sandbox", mount_config=mount_cfg) as sb:
     result = sb.run("ls /mnt/mounts/eval-datasets")
     print(result.stdout)
 ```
+
+**TypeScript**
 
 ```ts
 import {
@@ -197,6 +213,8 @@ try {
 
 Public Git mounts do not require AWS or GCP auth. Use an HTTPS remote URL and optionally pin a branch or tag.
 
+**Python**
+
 ```python
 from langsmith.sandbox import SandboxClient, git_mount, mount_config
 
@@ -218,6 +236,8 @@ with client.sandbox(name="git-mount-sandbox", mount_config=mount_cfg) as sb:
     result = sb.run("ls /mnt/mounts/repo")
     print(result.stdout)
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient, gitMount, mountConfig } from "langsmith/sandbox";
@@ -257,6 +277,8 @@ A Context Hub mount mirrors the latest commit of an agent or skill repo into the
 
 Identify the repo as `owner/repo`. Use `-` as the owner for a repo in the current workspace, such as `-/my-agent`. The caller's API key must have read access to the repo. LangSmith rejects sandbox creation for a repo private to another workspace, and does not distinguish a missing repo from an inaccessible one. Context Hub mounts do not require AWS or GCP auth.
 
+**Python**
+
 ```python
 from langsmith.sandbox import SandboxClient, context_hub_mount, mount_config
 
@@ -278,6 +300,8 @@ with client.sandbox(
     result = sb.run("ls /memories")
     print(result.stdout)
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient, contextHubMount, mountConfig } from "langsmith/sandbox";
@@ -319,6 +343,8 @@ A mount always tracks the latest commit. To read a fixed version, pull the commi
 
 Pass `initial_pull_only` / `initialPullOnly` to sync once at startup and then stop polling:
 
+**Python**
+
 ```python
 context_hub_mount(
     id="memories",
@@ -327,6 +353,8 @@ context_hub_mount(
     initial_pull_only=True,
 )
 ```
+
+**TypeScript**
 
 ```ts
 contextHubMount({
@@ -351,6 +379,8 @@ LangSmith retries a failed refresh and keeps serving the last commit it publishe
 ## Combine mounts
 
 A sandbox can mount multiple sources, including a Context Hub repo alongside bucket and Git mounts. Build one `mount_config` / `mountConfig` with all mount specs, and include provider auth for every bucket provider used by those specs.
+
+**Python**
 
 ```python
 from langsmith.sandbox import (
@@ -394,6 +424,8 @@ mount_cfg = mount_config(
     ],
 )
 ```
+
+**TypeScript**
 
 ```ts
 import {
@@ -453,6 +485,8 @@ specific local cache cap. For writable mounts, keep `writeback_seconds` low when
 another process needs to read the objects from S3 or GCS soon after the sandbox
 writes them.
 
+**Python**
+
 ```python
 s3_mount(
     id="customer_data",
@@ -464,6 +498,8 @@ s3_mount(
     },
 )
 ```
+
+**TypeScript**
 
 ```ts
 s3Mount({
@@ -479,6 +515,8 @@ s3Mount({
 
 The same cache settings can be used on GCS mounts:
 
+**Python**
+
 ```python
 gcs_mount(
     id="eval_datasets",
@@ -490,6 +528,8 @@ gcs_mount(
     },
 )
 ```
+
+**TypeScript**
 
 ```ts
 gcsMount({
@@ -517,7 +557,7 @@ gcsMount({
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-mounts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

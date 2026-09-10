@@ -1,3 +1,11 @@
+---
+title: "Fetch experiment runs for dataset examples"
+description: "Returns a paginated page of dataset examples with runs from the requested experiments. Response uses the canonical {items, next_cursor} envelope."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/fetch-experiment-runs-for-dataset-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, fetch-experiment-runs-for-dataset-examples]
+---
+
 # Fetch experiment runs for dataset examples
 
 > Returns a paginated page of dataset examples with runs from the requested experiments.
@@ -6,6 +14,8 @@ Response uses the canonical `{items, next_cursor}` envelope.
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/datasets/{dataset_id}/experiment-runs**
 
 ````yaml
 openapi: 3.1.0

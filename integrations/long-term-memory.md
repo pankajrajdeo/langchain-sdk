@@ -1,3 +1,11 @@
+---
+title: "Store integrations"
+description: "Integrate with store backends for LangGraph long-term memory."
+source: "https://docs.langchain.com/oss/python/integrations/long-term-memory"
+category: "docs"
+tags: [docs, integrations, long-term-memory]
+---
+
 # Store integrations
 
 > Integrate with store backends for LangGraph long-term memory.
@@ -18,7 +26,7 @@ To implement your own store for a custom storage backend, see [Build a custom st
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/long-term-memory/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

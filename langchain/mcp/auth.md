@@ -1,3 +1,11 @@
+---
+title: "Authentication"
+description: "Authenticate MCP connections with bearer tokens, OAuth 2.1, or per-user credentials in LangChain."
+source: "https://docs.langchain.com/oss/python/langchain/mcp/auth"
+category: "docs"
+tags: [docs, langchain, mcp, auth]
+---
+
 # Authentication
 
 > Authenticate MCP connections with bearer tokens, OAuth 2.1, or per-user credentials in LangChain.
@@ -111,7 +119,7 @@ In production, `token_for` stands in for whatever the deployment already has: an
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

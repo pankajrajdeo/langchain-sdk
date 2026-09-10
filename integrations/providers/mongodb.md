@@ -1,3 +1,11 @@
+---
+title: "MongoDB integrations"
+description: "Integrate with MongoDB using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/mongodb"
+category: "docs"
+tags: [docs, integrations, providers, mongodb]
+---
+
 # MongoDB integrations
 
 > Integrate with MongoDB using LangChain Python.
@@ -10,9 +18,13 @@ Install `langchain-mongodb` for both self-managed and Atlas integration points. 
 
 Install the Python package:
 
+**pip**
+
 ```bash
 pip install langchain-mongodb
 ```
+
+**uv**
 
 ```bash
 uv add langchain-mongodb
@@ -80,7 +92,7 @@ See the [MongoDB Atlas integrations](mongodb_atlas.md) page for imports and usag
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mongodb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

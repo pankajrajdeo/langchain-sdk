@@ -1,8 +1,18 @@
+---
+title: "Create rule"
+description: "Create a new run rule."
+source: "https://docs.langchain.com/langsmith/smith-api/run/create-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, create-rule]
+---
+
 # Create rule
 
 > Create a new run rule.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/rules**
 
 ````yaml
 openapi: 3.1.0

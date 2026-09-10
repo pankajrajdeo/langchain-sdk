@@ -1,3 +1,11 @@
+---
+title: "Share a run"
+description: "Creates or returns a share token for a run. Child runs share their trace root."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/share-a-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, share-a-run]
+---
+
 # Share a run
 
 > Creates or returns a share token for a run. Child runs share their trace root.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/runs/{run_id}/share**
 
 ````yaml
 openapi: 3.1.0

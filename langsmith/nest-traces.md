@@ -1,3 +1,11 @@
+---
+title: "Troubleshoot trace nesting"
+description: "When tracing with the LangSmith SDK, LangGraph, and LangChain, tracing should automatically propagate the correct context so that code executed within a parent trace will be rendered in the expected..."
+source: "https://docs.langchain.com/langsmith/nest-traces"
+category: "docs"
+tags: [docs, langsmith, nest-traces]
+---
+
 # Troubleshoot trace nesting
 
 When tracing with the LangSmith SDK, LangGraph, and LangChain, tracing should automatically propagate the correct context so that code executed within a parent trace will be rendered in the expected location in the UI.
@@ -173,7 +181,7 @@ Both methods ensure that the inner function calls are correctly aggregated under
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/nest-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Prompt engineering quickstart"
+description: "Prompts guide the behavior of Large Language Models (LLM). Prompt engineering is the process of crafting, testing, and refining the instructions you give to an LLM so it produces reliable and useful..."
+source: "https://docs.langchain.com/langsmith/prompt-engineering-quickstart"
+category: "docs"
+tags: [docs, langsmith, prompt-engineering-quickstart]
+---
+
 # Prompt engineering quickstart
 
 Prompts guide the behavior of Large Language Models (LLM). [*Prompt engineering*](prompt-engineering-concepts.md) is the process of crafting, testing, and refining the instructions you give to an LLM so it produces reliable and useful responses.
@@ -78,12 +86,16 @@ To improve your prompts:
 
 1. In your terminal, prepare your environment:
 
+**Python**
+
 ```bash
        mkdir ls-prompt-quickstart && cd ls-prompt-quickstart
        python -m venv .venv
        source .venv/bin/activate
        pip install -qU langsmith openai langchain_core
 ```
+
+**TypeScript**
 
 ```bash
        mkdir ls-prompt-quickstart-ts && cd ls-prompt-quickstart-ts
@@ -110,6 +122,8 @@ Use the language-specific constructor and push method:
 
 1. Add the following code to a `create_prompt` file:
 
+**Python**
+
 ```python
        from langsmith import Client
        from langchain_core.prompts import ChatPromptTemplate
@@ -123,6 +137,8 @@ Use the language-specific constructor and push method:
 
        client.push_prompt("prompt-quickstart", object=prompt)
 ```
+
+**TypeScript**
 
 ```typescript
        import { Client } from "langsmith";
@@ -144,9 +160,13 @@ Use the language-specific constructor and push method:
 
 2. Run `create_prompt`:
 
+**Python**
+
 ```python
        python create_prompt.py
 ```
+
+**TypeScript**
 
 ```typescript
        npx tsx create_prompt.ts
@@ -161,6 +181,8 @@ In this step, you'll pull the prompt you created in [step 2](#2-create-a-prompt)
 Then, you'll iterate on the prompt by creating a new version. Members of your workspace can open an existing prompt, experiment with changes in the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-prompt-engineering-quickstart), and save those changes as a new commit on the same prompt, which preserves history for the whole team.
 
 1. Add the following to a `test_prompt` file:
+
+**Python**
 
 ```python
        from langsmith import Client
@@ -181,6 +203,8 @@ Then, you'll iterate on the prompt by creating a new version. Members of your wo
            messages=convert_to_openai_messages(formatted_prompt.messages),
        )
 ```
+
+**TypeScript**
 
 ```typescript
        import { OpenAI } from "openai";
@@ -204,9 +228,13 @@ Then, you'll iterate on the prompt by creating a new version. Members of your wo
 
 2. Run `test_prompt` :
 
+**Python**
+
 ```python
        python test_prompt.py
 ```
+
+**TypeScript**
 
 ```typescript
        npx tsx test_prompt.ts
@@ -215,6 +243,8 @@ Then, you'll iterate on the prompt by creating a new version. Members of your wo
 3. To create a new version of a prompt, call the same push method you used initially with the same prompt name and your updated template. LangSmith will record it as a new commit and preserve prior versions.
 
    Copy the following code to an `iterate_prompt` file:
+
+**Python**
 
 ```python
        from langsmith import Client
@@ -229,6 +259,8 @@ Then, you'll iterate on the prompt by creating a new version. Members of your wo
 
        client.push_prompt("prompt-quickstart", object=new_prompt)
 ```
+
+**TypeScript**
 
 ```typescript
        import { Client } from "langsmith";
@@ -248,9 +280,13 @@ Then, you'll iterate on the prompt by creating a new version. Members of your wo
 
 4. Run `iterate_prompt` :
 
+**Python**
+
 ```python
        python iterate_prompt.py
 ```
+
+**TypeScript**
 
 ```typescript
        npx tsx iterate_prompt.ts
@@ -277,7 +313,7 @@ To improve your prompts:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/prompt-engineering-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

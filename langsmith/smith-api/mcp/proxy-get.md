@@ -1,6 +1,16 @@
+---
+title: "Proxy get"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/mcp/proxy"
+source: "https://docs.langchain.com/langsmith/smith-api/mcp/proxy-get"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp, proxy-get]
+---
+
 # Proxy get
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/mcp/proxy**
 
 ````yaml
 openapi: 3.1.0

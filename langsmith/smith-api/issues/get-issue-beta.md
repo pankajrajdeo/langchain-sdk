@@ -1,3 +1,11 @@
+---
+title: "Get issue (Beta)"
+description: "Beta: This endpoint is in active development and may change without notice."
+source: "https://docs.langchain.com/langsmith/smith-api/issues/get-issue-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, issues, get-issue-beta]
+---
+
 # Get issue (Beta)
 
 > **Beta:** This endpoint is in active development and may change without notice.
@@ -5,6 +13,8 @@
 Returns one issue for the authenticated tenant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/issues/{id}**
 
 ````yaml
 openapi: 3.1.0

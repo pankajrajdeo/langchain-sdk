@@ -1,3 +1,11 @@
+---
+title: "CopilotKit"
+description: "Use CopilotKit with LangGraph, Deep Agents, and React with custom endpoints, the Python AG-UI bridge, structured generative UI, and messaging-platform channels"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit"
+category: "docs"
+tags: [docs, langchain, frontend, integrations, copilotkit]
+---
+
 # CopilotKit
 
 > Use CopilotKit with LangGraph, Deep Agents, and React with custom endpoints, the Python AG-UI bridge, structured generative UI, and messaging-platform channels
@@ -79,9 +87,13 @@ uv add copilotkit ag-ui-langgraph fastapi uvicorn
 
 The middleware package sits alongside the Deep Agents stack. Install it with your [chat model](../../../integrations/chat.md) package (this example uses OpenAI):
 
+**pip**
+
 ```python
 pip install -U deepagents copilotkit langchain-openai
 ```
+
+**uv**
 
 ```python
 uv add deepagents copilotkit langchain-openai
@@ -136,6 +148,8 @@ In `langgraph.json`, point `http.app` at your custom app entrypoint:
 ```
 
 In Python, create a `FastAPI` app and expose the LangGraph agent through CopilotKit's AG-UI bridge:
+
+**main.py**
 
 ```python
 from typing import Any, TypedDict
@@ -427,15 +441,21 @@ Platform credentials never enter the agent process. Create a managed Channel in 
 
 Install the tested SDK pair, then the TypeScript tooling:
 
+**npm**
+
 ```bash
 npm install --save-exact @copilotkit/channels@0.6.1 @copilotkit/runtime@1.65.0
 npm install -D tsx typescript @types/node
 ```
 
+**pnpm**
+
 ```bash
 pnpm add --save-exact @copilotkit/channels@0.6.1 @copilotkit/runtime@1.65.0
 pnpm add -D tsx typescript @types/node
 ```
+
+**yarn**
 
 ```bash
 yarn add --exact @copilotkit/channels@0.6.1 @copilotkit/runtime@1.65.0
@@ -561,12 +581,16 @@ server.listen(port, () => {
 
 Set the runtime secrets, then start the process:
 
+**.env**
+
 ```bash
 INTELLIGENCE_API_KEY=<project-api-key>
 CHANNEL_CODE=support-slack
 LANGGRAPH_DEPLOYMENT_URL=http://127.0.0.1:2024
 PORT=3000
 ```
+
+**Terminal**
 
 ```bash
 node --env-file=.env --import tsx channel.ts
@@ -595,7 +619,7 @@ Managed Slack is generally available. Managed Teams is a controlled integration 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/copilotkit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

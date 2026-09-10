@@ -1,8 +1,18 @@
+---
+title: "List data planes for the current organization"
+description: "Returns up to 50 data planes owned by the caller's organization across all lifecycle states. Sorted by status priority (active first), then newest first. Requires BYOC to be enabled for the org."
+source: "https://docs.langchain.com/langsmith/smith-api/data_planes/list-data-planes-for-the-current-organization"
+category: "docs"
+tags: [docs, langsmith, smith-api, data_planes, list-data-planes-for-the-current-organization]
+---
+
 # List data planes for the current organization
 
-> Returns up to 50 data planes owned by the caller's organization. Sorted status priority (active first), then newest first. Requires BYOC to be enabled for the org.
+> Returns up to 50 data planes owned by the caller's organization across all lifecycle states. Sorted by status priority (active first), then newest first. Requires BYOC to be enabled for the org.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /orgs/current/data-planes**
 
 ````yaml
 openapi: 3.1.0
@@ -165,9 +175,9 @@ paths:
         - data_planes
       summary: List data planes for the current organization
       description: >-
-        Returns up to 50 data planes owned by the caller's organization. Sorted
-        status priority (active first), then newest first. Requires BYOC to be
-        enabled for the org.
+        Returns up to 50 data planes owned by the caller's organization across
+        all lifecycle states. Sorted by status priority (active first), then
+        newest first. Requires BYOC to be enabled for the org.
       parameters: []
       responses:
         '200':

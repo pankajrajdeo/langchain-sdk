@@ -1,8 +1,18 @@
+---
+title: "Update chart"
+description: "Update a chart or text block."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/update-chart"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, update-chart]
+---
+
 # Update chart
 
 > Update a chart or text block.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/charts/{chart_id}**
 
 ````yaml
 openapi: 3.1.0

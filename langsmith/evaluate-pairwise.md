@@ -1,3 +1,11 @@
+---
+title: "How to run a pairwise evaluation"
+description: "Concept: Pairwise evaluations"
+source: "https://docs.langchain.com/langsmith/evaluate-pairwise"
+category: "docs"
+tags: [docs, langsmith, evaluate-pairwise]
+---
+
 # How to run a pairwise evaluation
 
 > [!NOTE]
@@ -8,7 +16,7 @@ LangSmith supports evaluating **existing** experiments in a comparative manner. 
 ## Prerequisites
 
 * If you haven't already created experiments to compare, check out the [quick start](evaluation-quickstart.md) or the [how-to guide](evaluate-llm-application.md) to get started with evaluations.
-* This guide requires `langsmith` Python version `>=0.2.0` or JS version `>=0.2.9`.
+* This guide requires `langsmith>=0.2.0` for Python or `langsmith>=0.2.9` for JS.
 
 > [!NOTE]
 > You can also use [`evaluate_comparative()`](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate_comparative) with more than two existing experiments.
@@ -80,6 +88,8 @@ The following example uses [a prompt](https://smith.langchain.com/hub/langchain-
 * Python: Requires `langsmith>=0.2.0`
 * TypeScript: Requires `langsmith>=0.2.9`
 
+**Python**
+
 ```python
 from langchain_classic import hub
 from langchain.chat_models import init_chat_model
@@ -113,6 +123,8 @@ evaluate(
     max_concurrency=4,
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { evaluate} from "langsmith/evaluation";
@@ -234,7 +246,7 @@ You may filter to runs where the first experiment was better or vice versa by cl
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-pairwise.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Reasoning tokens"
+description: "Display model thinking and reasoning processes in collapsible blocks"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/reasoning-tokens"
+category: "docs"
+tags: [docs, langchain, frontend, reasoning-tokens]
+---
+
 # Reasoning tokens
 
 > Display model thinking and reasoning processes in collapsible blocks
@@ -69,7 +77,9 @@ the last message while `stream.isLoading` is true so thinking blocks update as
 tokens arrive.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -103,6 +113,8 @@ function Chat() {
 }
 ```
 
+**Vue**
+
 ```vue
 <script setup lang="ts">
 import { useStream } from "@langchain/vue";
@@ -128,6 +140,8 @@ const stream = useStream<typeof myAgent>({
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -152,6 +166,8 @@ const stream = useStream<typeof myAgent>({
   {/each}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component } from "@angular/core";
@@ -330,7 +346,7 @@ message.contentBlocks.forEach((block) => {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/reasoning-tokens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

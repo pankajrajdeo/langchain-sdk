@@ -1,3 +1,11 @@
+---
+title: "LangSmith Engine issue categories"
+description: "Reference for the issue categories LangSmith Engine assigns to detected issues, including descriptions and examples."
+source: "https://docs.langchain.com/langsmith/engine-issue-categories"
+category: "docs"
+tags: [docs, langsmith, engine-issue-categories]
+---
+
 # LangSmith Engine issue categories
 
 > Reference for the issue categories LangSmith Engine assigns to detected issues, including descriptions and examples.
@@ -115,7 +123,7 @@ A better-fit tool existed but the agent chose the wrong one for the user's reque
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-issue-categories.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

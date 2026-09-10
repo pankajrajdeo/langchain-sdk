@@ -1,8 +1,18 @@
+---
+title: "Add a reviewer to an annotation queue"
+description: "Assigns a single identity as a reviewer for the queue. Idempotent."
+source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/add-a-reviewer-to-an-annotation-queue"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation_queues, add-a-reviewer-to-an-annotation-queue]
+---
+
 # Add a reviewer to an annotation queue
 
 > Assigns a single identity as a reviewer for the queue. Idempotent.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/annotation-queues/{queue_id}/reviewers**
 
 ````yaml
 openapi: 3.1.0

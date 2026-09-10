@@ -1,8 +1,18 @@
+---
+title: "Delete Cron"
+description: "Delete a cron by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/crons/delete-cron"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, crons, delete-cron]
+---
+
 # Delete Cron
 
 > Delete a cron by ID.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json delete /runs/crons/{cron_id}**
 
 ````yaml
 openapi: 3.1.0

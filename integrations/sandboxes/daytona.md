@@ -1,3 +1,11 @@
+---
+title: "DaytonaSandbox integration"
+description: "Integrate with the DaytonaSandbox sandbox backend using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/sandboxes/daytona"
+category: "docs"
+tags: [docs, integrations, sandboxes, daytona]
+---
+
 # DaytonaSandbox integration
 
 > Integrate with the DaytonaSandbox sandbox backend using LangChain Python.
@@ -6,9 +14,13 @@
 
 ## Installation
 
+**pip**
+
 ```bash
 pip install langchain-daytona
 ```
+
+**uv**
 
 ```bash
 uv add langchain-daytona
@@ -67,7 +79,7 @@ See also: [Sandboxes](../../deepagents/sandboxes.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/daytona.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

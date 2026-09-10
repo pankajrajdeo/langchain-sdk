@@ -1,8 +1,18 @@
+---
+title: "Read tracer session"
+description: "Get a specific project."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/read-tracer-session"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, read-tracer-session]
+---
+
 # Read tracer session
 
 > Get a specific project.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/sessions/{session_id}**
 
 ````yaml
 openapi: 3.1.0

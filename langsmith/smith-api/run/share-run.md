@@ -1,8 +1,18 @@
+---
+title: "Share run"
+description: "Share a run."
+source: "https://docs.langchain.com/langsmith/smith-api/run/share-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, share-run]
+---
+
 # Share run
 
 > Share a run.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/runs/{run_id}/share**
 
 ````yaml
 openapi: 3.1.0

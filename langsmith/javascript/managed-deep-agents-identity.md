@@ -1,3 +1,11 @@
+---
+title: "Add identity to Managed Deep Agents"
+description: "Authenticate callers to a Managed Deep Agents deployment with a LangSmith API key or Supabase."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-identity"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-identity]
+---
+
 # Add identity to Managed Deep Agents
 
 > Authenticate callers to a Managed Deep Agents deployment with a LangSmith API key or Supabase.
@@ -19,6 +27,8 @@ That default answers whether a caller is allowed. To also keep each signed-in pe
 ## Default: LangSmith API key
 
 `mda init` scaffolds this secure default. Callers must present a valid LangSmith workspace API key. Managed Deep Agents verifies the key with LangSmith Cloud.
+
+**identity.ts**
 
 ```ts
 import { auth, defineIdentity } from "managed-deepagents";
@@ -51,6 +61,8 @@ To configure Supabase authentication:
 1. In the Supabase dashboard, enable the auth provider you will use (for example email/password).
 2. Copy the project reference: the subdomain before `.supabase.co` in your project URL.
 3. Declare identity with that project reference:
+
+**identity.ts**
 
 ```ts
 import { auth, defineIdentity } from "managed-deepagents";
@@ -91,7 +103,7 @@ Authentication failures return 401. For the LangSmith API-key default, confirm t
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-identity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Quickstart"
+description: "Install OpenWiki, configure a model provider, and generate your first wiki."
+source: "https://docs.langchain.com/oss/openwiki/quickstart"
+category: "docs"
+tags: [docs, openwiki, quickstart]
+---
+
 # Quickstart
 
 > Install OpenWiki, configure a model provider, and generate your first wiki.
@@ -105,7 +113,7 @@ To enrich the repository wiki from LangSmith traces (separate from tracing OpenW
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

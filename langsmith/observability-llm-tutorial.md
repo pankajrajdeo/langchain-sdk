@@ -1,3 +1,11 @@
+---
+title: "Trace an LLM application tutorial"
+description: "Add LangSmith observability to an LLM application across prototyping, beta testing, and production."
+source: "https://docs.langchain.com/langsmith/observability-llm-tutorial"
+category: "docs"
+tags: [docs, langsmith, observability-llm-tutorial]
+---
+
 # Trace an LLM application tutorial
 
 > Add LangSmith observability to an LLM application across prototyping, beta testing, and production.
@@ -24,9 +32,13 @@ Before you begin, make sure you have:
 
 Install the required packages:
 
+**Python**
+
 ```bash
 pip install langsmith openai
 ```
+
+**TypeScript**
 
 ```bash
 npm install langsmith openai
@@ -57,6 +69,8 @@ To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment v
 Start by tracing your OpenAI calls, where the model is actually invoked. This gives you immediate visibility into the prompts your app sends and the responses the model returns.
 
 Wrap the OpenAI client with [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_openai/wrap_openai) (Python) or [`wrapOpenAI`](https://reference.langchain.com/javascript/langsmith/wrappers/wrapOpenAI) (TypeScript). Create a file called `app.py` (or `app.ts`) with the following code:
+
+**Python**
 
 ```python
 from openai import OpenAI
@@ -92,6 +106,8 @@ def support_bot(question: str) -> str:
 if __name__ == "__main__":
     print(support_bot("How many users can I have on the Starter plan?"))
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -136,6 +152,8 @@ Calling `support_bot("How many users can I have on the Starter plan?")` produces
 
 Tracing the LLM call is useful, but tracing the full pipeline (including retrieval) gives you a complete overview of your application's behavior. Add [`@traceable`](https://reference.langchain.com/python/langsmith/run_helpers/traceable) (Python) or [`traceable`](https://reference.langchain.com/javascript/langsmith/traceable) (TypeScript) to the main function:
 
+**Python**
+
 ```python
 from openai import OpenAI
 from langsmith import traceable
@@ -172,6 +190,8 @@ def support_bot(question: str) -> str:
 if __name__ == "__main__":
     print(support_bot("How many users can I have on the Starter plan?"))
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -239,6 +259,8 @@ Once your app is working well in prototyping, you release it to a small group of
 
 Linking [user feedback](attach-user-feedback.md) to specific traces lets you identify which responses were helpful or unhelpful. Update `app.py` (or `app.ts`) from the previous step to add a run ID to each call and attach a score afterward:
 
+**Python**
+
 ```python
 import os  # [!code highlight]
 
@@ -288,6 +310,8 @@ if __name__ == "__main__":
         run_id, key="user-score", score=1.0, session_id=session_id  # [!code highlight]
     )  # [!code highlight]
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -358,6 +382,8 @@ The feedback appears in the **Feedback** tab when you inspect the run in the UI.
 
 The following example traces both the retriever (with `run_type="retriever"`) and the main function (with a `metadata` attribute for the model name):
 
+**Python**
+
 ```python
 from openai import OpenAI
 from langsmith import traceable
@@ -395,6 +421,8 @@ def support_bot(question: str) -> str:
 if __name__ == "__main__":
     support_bot("How many users can I have on the Starter plan?")
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -482,7 +510,7 @@ For more, see:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-llm-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

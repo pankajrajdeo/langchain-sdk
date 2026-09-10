@@ -1,3 +1,11 @@
+---
+title: "Agent Chat UI"
+description: "Agent Chat UI is a Next.js application that provides a conversational interface for interacting with any LangChain agent. It supports real-time chat, tool visualization, and advanced features like..."
+source: "https://docs.langchain.com/oss/python/langgraph/ui"
+category: "docs"
+tags: [docs, langgraph, ui]
+---
+
 # Agent Chat UI
 
 [Agent Chat UI](https://github.com/langchain-ai/agent-chat-ui) is a Next.js application that provides a conversational interface for interacting with any LangChain agent. It supports real-time chat, tool visualization, and advanced features like time-travel debugging and state forking. Agent Chat UI works seamlessly with agents created using [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and provides interactive experiences for your agents with minimal setup, whether you're running locally or in a deployed context (such as [LangSmith](../langsmith/observability.md)).
@@ -21,6 +29,8 @@ The fastest way to get started is using the hosted version:
 
 For customization or local development, you can run Agent Chat UI locally:
 
+**Use npx**
+
 ```bash
 # Create a new Agent Chat UI project
 npx create-agent-chat-app --project-name my-chat-ui
@@ -30,6 +40,8 @@ cd my-chat-ui
 pnpm install
 pnpm dev
 ```
+
+**Clone repository**
 
 ```bash
 # Clone the repository
@@ -59,7 +71,7 @@ Once configured, Agent Chat UI will automatically fetch and display any interrup
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

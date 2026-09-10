@@ -1,3 +1,11 @@
+---
+title: "Subagents"
+description: "In the subagents architecture, a central main agent (often referred to as a supervisor) coordinates subagents by calling them as tools. The main agent decides which subagent to invoke, what input to..."
+source: "https://docs.langchain.com/oss/python/langchain/multi-agent/subagents"
+category: "docs"
+tags: [docs, langchain, multi-agent, subagents]
+---
+
 # Subagents
 
 In the **subagents** architecture, a central main [agent](../agents.md) (often referred to as a **supervisor**) coordinates subagents by calling them as [tools](../tools.md). The main agent decides which subagent to invoke, what input to provide, and how to combine results. By default, subagents are stateless—they don't remember past interactions, with all conversation memory maintained by the main agent. This provides [context](../context-engineering.md) isolation: each subagent invocation works in a clean context window, preventing context bloat in the main conversation.
@@ -432,6 +440,8 @@ main_agent = create_agent(
 
 Customize what context the subagent receives to execute its task. Add input that isn't practical to capture in a static prompt—full message history, prior results, or task metadata—by pulling from the agent's state.
 
+**Subagent inputs example**
+
 ```python
 from langchain.agents import AgentState
 from langchain.tools import tool, ToolRuntime
@@ -471,6 +481,8 @@ Customize what the main agent receives back so it can make good decisions. Two s
 
 1. **Prompt the sub-agent**: Specify exactly what should be returned. A common failure mode is that the sub-agent performs tool calls or reasoning but doesn't include results in its final message—remind it that the supervisor only sees the final output.
 2. **Format in code**: Adjust or enrich the response before returning it. For example, pass specific state keys back in addition to the final text using a [`Command`](../../langgraph/graph-api.md#command).
+
+**Subagent outputs example**
 
 ```python
 from typing import Annotated
@@ -513,7 +525,7 @@ The langgraph-supervisor package is no longer actively maintained. Learn how to 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

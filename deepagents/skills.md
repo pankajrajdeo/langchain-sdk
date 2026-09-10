@@ -1,3 +1,11 @@
+---
+title: "Skills"
+description: "Learn how to extend your deep agent's capabilities with skills"
+source: "https://docs.langchain.com/oss/python/deepagents/skills"
+category: "docs"
+tags: [docs, deepagents, skills]
+---
+
 # Skills
 
 > Learn how to extend your deep agent's capabilities with skills
@@ -271,6 +279,8 @@ Deep Agents supports different backends depending on how you want to store and m
 * `FilesystemBackend`: Reads and writes skill files from disk under a configurable `root_dir`.
 
 #### StateBackend
+**Google**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -305,6 +315,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**OpenAI**
 
 ```python
 from urllib.request import urlopen
@@ -341,6 +353,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -375,6 +389,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**OpenRouter**
 
 ```python
 from urllib.request import urlopen
@@ -411,6 +427,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -446,6 +464,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -480,6 +500,8 @@ result = agent.invoke(
     config={"configurable": {"thread_id": "12345"}},
 )
 ```
+
+**Ollama**
 
 ```python
 from urllib.request import urlopen
@@ -737,6 +759,8 @@ These patterns work alongside the read and write controls below. For example, yo
 
 To share skills without letting agents modify them, route `/skills/` to a shared store and deny write operations under `/skills/**` with [filesystem permissions](permissions.md). The agent can discover and read skills; only your application code or an admin workflow updates the store.
 
+**Google**
+
 ```python
 from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -765,6 +789,8 @@ agent = create_deep_agent(
     store=store,
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import FilesystemPermission, create_deep_agent
@@ -795,6 +821,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -823,6 +851,8 @@ agent = create_deep_agent(
     store=store,
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import FilesystemPermission, create_deep_agent
@@ -853,6 +883,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -882,6 +914,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -910,6 +944,8 @@ agent = create_deep_agent(
     store=store,
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import FilesystemPermission, create_deep_agent
@@ -1051,6 +1087,8 @@ The agent can *read* scripts from any backend, but to *execute* them, the agent 
 * **`before_agent`**: Read skill files from the backend and upload them into the sandbox so the agent can execute scripts from the start.
 * **`after_agent`**: Download any updated or newly created skill files from the sandbox and write them back to the backend so changes persist across runs.
 
+**Google**
+
 ```python
 import asyncio
 from pathlib import Path
@@ -1139,6 +1177,8 @@ async def main() -> None:
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+**OpenAI**
 
 ```python
 import asyncio
@@ -1229,6 +1269,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+**Anthropic**
+
 ```python
 import asyncio
 from pathlib import Path
@@ -1317,6 +1359,8 @@ async def main() -> None:
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+**OpenRouter**
 
 ```python
 import asyncio
@@ -1407,6 +1451,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+**Fireworks**
+
 ```python
 import asyncio
 from pathlib import Path
@@ -1496,6 +1542,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+**Baseten**
+
 ```python
 import asyncio
 from pathlib import Path
@@ -1584,6 +1632,8 @@ async def main() -> None:
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+**Ollama**
 
 ```python
 import asyncio
@@ -1796,7 +1846,7 @@ For more example skills, see [Deep Agents example skills](https://github.com/lan
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

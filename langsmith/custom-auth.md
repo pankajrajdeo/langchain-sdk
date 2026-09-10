@@ -1,3 +1,11 @@
+---
+title: "Add custom authentication"
+description: "This guide shows you how to add custom authentication to your LangSmith application. The steps on this page apply to both cloud and self-hosted deployments. It does not apply to isolated usage of the..."
+source: "https://docs.langchain.com/langsmith/custom-auth"
+category: "docs"
+tags: [docs, langsmith, custom-auth]
+---
+
 # Add custom authentication
 
 This guide shows you how to add custom authentication to your LangSmith application. The steps on this page apply to both [cloud](cloud.md) and [self-hosted](self-hosted.md) deployments. It does not apply to isolated usage of the [LangGraph open source library](../langgraph/overview.md) in your own custom server.
@@ -168,7 +176,7 @@ Only use this if you want to permit developer access to a graph deployed on the 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

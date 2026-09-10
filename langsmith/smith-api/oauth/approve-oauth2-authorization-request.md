@@ -1,8 +1,18 @@
+---
+title: "Approve OAuth2 authorization request"
+description: "Issues an authorization code after the authenticated user approves the request. Called by the frontend consent page. Requires authentication."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/approve-oauth2-authorization-request"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, approve-oauth2-authorization-request]
+---
+
 # Approve OAuth2 authorization request
 
 > Issues an authorization code after the authenticated user approves the request. Called by the frontend consent page. Requires authentication.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /oauth/authorize/approve**
 
 ````yaml
 openapi: 3.1.0

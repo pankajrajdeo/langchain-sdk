@@ -1,3 +1,11 @@
+---
+title: "Generate query stats"
+description: "As part of troubleshooting your self-hosted instance of LangSmith, the LangChain team may ask you to generate LangSmith query statistics that will help us understand the performance of various..."
+source: "https://docs.langchain.com/langsmith/script-generate-query-stats"
+category: "docs"
+tags: [docs, langsmith, script-generate-query-stats]
+---
+
 # Generate query stats
 
 As part of troubleshooting your self-hosted instance of LangSmith, the LangChain team may ask you to generate LangSmith query statistics that will help us understand the performance of various queries that drive the LangSmith product experience.
@@ -51,7 +59,7 @@ and after running this command you should see a file, query\_stats.csv, has been
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-generate-query-stats.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

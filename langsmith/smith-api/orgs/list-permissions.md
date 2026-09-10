@@ -1,6 +1,16 @@
+---
+title: "List permissions"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/permissions"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/list-permissions"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, list-permissions]
+---
+
 # List permissions
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/permissions**
 
 ````yaml
 openapi: 3.1.0

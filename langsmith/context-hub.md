@@ -1,3 +1,11 @@
+---
+title: "Prompt & Context Hub"
+description: "Store, version, and update the prompts and contexts your agents use in production."
+source: "https://docs.langchain.com/langsmith/context-hub"
+category: "docs"
+tags: [docs, langsmith, context-hub]
+---
+
 # Prompt & Context Hub
 
 > Store, version, and update the prompts and contexts your agents use in production.
@@ -46,7 +54,7 @@ Send every agent and skill commit in your workspace to an external HTTPS endpoin
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/prompt-context-hub.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

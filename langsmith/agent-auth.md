@@ -1,3 +1,11 @@
+---
+title: "Set up Agent Auth"
+description: "Enable secure access from agents to any system using OAuth 2.0 credentials with Agent Auth."
+source: "https://docs.langchain.com/langsmith/agent-auth"
+category: "docs"
+tags: [docs, langsmith, agent-auth]
+---
+
 # Set up Agent Auth
 
 > Enable secure access from agents to any system using OAuth 2.0 credentials with Agent Auth.
@@ -7,9 +15,13 @@ Agent Auth is in **[beta](release-stages.md)** and under active development. To 
 ## Installation
 
 #### Python
+**pip**
+
 ```bash
 pip install langchain-auth
 ```
+
+**uv**
 
 ```bash
 uv add langchain-auth
@@ -227,7 +239,7 @@ https://your-instance.com/host-oauth-callback/{provider_id}
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

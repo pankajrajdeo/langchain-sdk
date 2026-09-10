@@ -1,3 +1,11 @@
+---
+title: "Cloud platform features"
+description: "Cloud-only platform features for LangSmith Deployment, including data regions, static IP addresses, payload limits, and deployment types."
+source: "https://docs.langchain.com/langsmith/cloud-platform-features"
+category: "docs"
+tags: [docs, langsmith, cloud-platform-features]
+---
+
 # Cloud platform features
 
 > Cloud-only platform features for LangSmith Deployment, including data regions, static IP addresses, payload limits, and deployment types.
@@ -113,7 +121,7 @@ Application-level scaling levers (durability modes, async patterns, avoiding syn
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cloud-platform-features.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

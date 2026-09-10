@@ -1,3 +1,11 @@
+---
+title: "Add custom middleware to Managed Deep Agents"
+description: "Add built-in or custom middleware to Managed Deep Agents projects."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-middleware"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-middleware]
+---
+
 # Add custom middleware to Managed Deep Agents
 
 > Add built-in or custom middleware to Managed Deep Agents projects.
@@ -22,11 +30,13 @@ my-agent/
 
 The managed runtime still owns `backend`, `store`, `checkpointer`, `memory`, `skills`, and the system prompt. Middleware should focus on agent behavior around model calls, tool calls, and lifecycle hooks.
 
-For deeper hook, state, and context details, see [custom middleware](https://docs.langchain.com/oss/javascript/langchain/middleware/custom).
+For deeper hook, state, and context details, see [custom middleware](../../javascript/langchain/middleware/custom.md).
 
 ## Use prebuilt middleware
 
-You can use LangChain [prebuilt middleware](https://docs.langchain.com/oss/javascript/langchain/middleware/built-in) directly in the agent definition.
+You can use LangChain [prebuilt middleware](../../javascript/langchain/middleware/built-in.md) directly in the agent definition.
+
+**agent.ts**
 
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
@@ -46,7 +56,9 @@ Middleware is the right place for cross-cutting behavior such as PII handling, r
 
 ## Add a custom middleware module
 
-For a more advanced option, you can also define [custom middleware](https://docs.langchain.com/oss/javascript/langchain/middleware/custom).
+For a more advanced option, you can also define [custom middleware](../../javascript/langchain/middleware/custom.md).
+
+**middleware/audit.ts**
 
 ```ts
 import { createMiddleware } from "langchain";
@@ -63,6 +75,8 @@ export const logToolCalls = createMiddleware({
 ```
 
 Import the middleware into the project-root agent entry and pass it in the `middleware` list.
+
+**agent.ts**
 
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
@@ -84,12 +98,12 @@ Your middleware imports should work the same way they do in a normal local TypeS
 
 Middleware can read per-run context through the normal LangChain runtime APIs. Use context for user IDs, organization IDs, feature flags, request metadata, or credentials that should not be part of the model prompt by default.
 
-For examples, see [Custom middleware](https://docs.langchain.com/oss/javascript/langchain/middleware/custom).
+For examples, see [Custom middleware](../../javascript/langchain/middleware/custom.md).
 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-middleware.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

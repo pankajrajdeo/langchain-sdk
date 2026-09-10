@@ -1,3 +1,11 @@
+---
+title: "Log user feedback using the SDK"
+description: "LangSmith makes it easy to attach feedback to traces. This feedback can come from users, annotators, automated evaluators, and so on, which is crucial for monitoring and evaluating applications."
+source: "https://docs.langchain.com/langsmith/attach-user-feedback"
+category: "docs"
+tags: [docs, langsmith, attach-user-feedback]
+---
+
 # Log user feedback using the SDK
 
 LangSmith makes it easy to attach [feedback](observability-concepts.md#feedback) to [traces](observability-concepts.md#traces). This feedback can come from users, annotators, automated evaluators, and so on, which is crucial for monitoring and evaluating applications.
@@ -17,6 +25,8 @@ This page details how to log feedback using the [SDK](reference.md). For the str
 > This is essential for low-latency environments, where you want to make sure your application isn't blocked on feedback creation.
 
 The following example creates a trace with two child runs, then logs feedback against the root run and against one of the child runs. The TypeScript snippet shows the equivalent `createFeedback` call shape, assuming a `runId` is already available from your application.
+
+**Python**
 
 ```python
 from langsmith import Client, trace, traceable
@@ -64,6 +74,8 @@ client.create_feedback(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 import { Client } from "langsmith";
 const client = new Client();
@@ -96,7 +108,7 @@ To learn more about how to filter traces based on various attributes, including 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/attach-user-feedback.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

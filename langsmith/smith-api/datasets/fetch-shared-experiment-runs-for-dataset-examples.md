@@ -1,3 +1,11 @@
+---
+title: "Fetch shared experiment runs for dataset examples"
+description: "Public share-token variant of POST /v2/datasets/{dataset_id}/experiment-runs. Returns a paginated page of dataset examples with runs from the requested experiments."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/fetch-shared-experiment-runs-for-dataset-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, fetch-shared-experiment-runs-for-dataset-examples]
+---
+
 # Fetch shared experiment runs for dataset examples
 
 > Public share-token variant of POST /v2/datasets/{dataset_id}/experiment-runs.
@@ -6,6 +14,8 @@ Returns a paginated page of dataset examples with runs from the requested experi
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/datasets/public/{share_token}/experiment-runs**
 
 ````yaml
 openapi: 3.1.0

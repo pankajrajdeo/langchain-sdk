@@ -1,3 +1,11 @@
+---
+title: "Tracing quickstart"
+description: "Add LangSmith tracing to an LLM application in minutes."
+source: "https://docs.langchain.com/langsmith/observability-quickstart"
+category: "docs"
+tags: [docs, langsmith, observability-quickstart]
+---
+
 # Tracing quickstart
 
 > Add LangSmith tracing to an LLM application in minutes.
@@ -23,11 +31,15 @@ This example uses OpenAI as the LLM provider. You can adapt it for your own prov
 
 1. Create a project directory, install the dependencies, and configure the required environment variables:
 
+**Python**
+
 ```bash
    mkdir ls-quickstart && cd ls-quickstart
    python -m venv .venv && source .venv/bin/activate
    pip install -U langsmith openai
 ```
+
+**TypeScript**
 
 ```bash
    mkdir ls-quickstart-ts && cd ls-quickstart-ts
@@ -35,6 +47,8 @@ This example uses OpenAI as the LLM provider. You can adapt it for your own prov
    npm install langsmith openai
    npm install -D typescript tsx
 ```
+
+**Java/Kotlin (Gradle)**
 
 ```kotlin
    implementation("com.langchain.smith:langsmith-java:0.1.0-alpha.28")
@@ -122,6 +136,8 @@ The `assistant` function calls a tool (`get_context`) to retrieve relevant conte
 
 Create a file called `app.py`, `index.ts`, `App.java`, or `App.kt` with the following code:
 
+**Python**
+
 ```python
 from openai import OpenAI
 from langsmith.wrappers import wrap_openai
@@ -152,6 +168,8 @@ def assistant(question: str) -> str:
 if __name__ == "__main__":
     print(assistant("How long are LangSmith traces stored?"))
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -187,6 +205,8 @@ const assistant = traceable(async function assistant(question: string) { // capt
     console.log(await assistant("How long are LangSmith traces stored?"));
 })();
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.tracing.RunType;
@@ -226,7 +246,7 @@ class ObservabilityQuickstartApp {
                       .completions()
                       .create(
                           ChatCompletionCreateParams.builder()
-                              .model(ChatModel.GPT_5_CHAT_LATEST)
+                              .model(ChatModel.GPT_5_5)
                               .addMessage(
                                   ChatCompletionMessageParam.ofSystem(
                                       ChatCompletionSystemMessageParam.builder()
@@ -249,6 +269,11 @@ class ObservabilityQuickstartApp {
   }
 }
 ```
+
+#### [View example trace](https://smith.langchain.com/public/e2529a15-5c87-4c29-9c34-9aa9a899bcf1/r)
+Open a public LangSmith run for this example.
+
+**Kotlin**
 
 ```kotlin
 import com.langchain.smith.tracing.RunType
@@ -278,7 +303,7 @@ val assistant =
             val response =
                 client.chat().completions().create(
                     ChatCompletionCreateParams.builder()
-                        .model(ChatModel.GPT_5_CHAT_LATEST)
+                        .model(ChatModel.GPT_5_5)
                         .addMessage(
                             ChatCompletionMessageParam.ofSystem(
                                 ChatCompletionSystemMessageParam.builder()
@@ -303,15 +328,24 @@ val assistant =
 println(assistant("How long are LangSmith traces stored?"))
 ```
 
+#### [View example trace](https://smith.langchain.com/public/95567c68-5e7b-44f2-9355-7705ac00de5a/r)
+Open a public LangSmith run for this example.
+
 ## 3. Run the app
+
+**Python**
 
 ```bash
 python app.py
 ```
 
+**TypeScript**
+
 ```bash
 npx tsx index.ts
 ```
+
+**Java/Kotlin**
 
 ```bash
 ./gradlew run
@@ -343,7 +377,7 @@ The outer span captures your `assistant` function's inputs and outputs. The nest
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

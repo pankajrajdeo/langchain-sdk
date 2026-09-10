@@ -1,6 +1,16 @@
+---
+title: "Delete an item."
+description: "/langsmith/agent-server-openapi.json delete /store/items"
+source: "https://docs.langchain.com/langsmith/agent-server-api/store/delete-an-item"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, store, delete-an-item]
+---
+
 # Delete an item.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json delete /store/items**
 
 ````yaml
 openapi: 3.1.0

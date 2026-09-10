@@ -1,3 +1,11 @@
+---
+title: "Mirror images for your LangSmith installation"
+description: "By default, LangSmith will pull images from our public Docker registry. However, if you are running LangSmith in an environment that does not have internet access, or if you would like to use a..."
+source: "https://docs.langchain.com/langsmith/self-host-mirroring-images"
+category: "docs"
+tags: [docs, langsmith, self-host-mirroring-images]
+---
+
 # Mirror images for your LangSmith installation
 
 By default, LangSmith will pull images from our public Docker registry. However, if you are running LangSmith in an environment that does not have internet access, or if you would like to use a private Docker registry, you can mirror the images to your own registry and then configure your LangSmith installation to use those images.
@@ -340,7 +348,7 @@ You can pass the resulting `langsmith-backend.cdx.json` directly to scanners suc
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-mirroring-images.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

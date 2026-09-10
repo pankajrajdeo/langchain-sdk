@@ -1,3 +1,11 @@
+---
+title: "Set up SSO with OAuth2.0 and OIDC"
+description: "LangSmith Self-Hosted provides SSO via OAuth2.0 and OIDC, which delegates authentication to your Identity Provider (IdP) to manage access to LangSmith."
+source: "https://docs.langchain.com/langsmith/self-host-sso"
+category: "docs"
+tags: [docs, langsmith, self-host-sso]
+---
+
 # Set up SSO with OAuth2.0 and OIDC
 
 LangSmith [Self-Hosted](self-hosted.md) provides SSO via OAuth2.0 and OIDC, which delegates authentication to your Identity Provider (IdP) to manage access to LangSmith.
@@ -33,6 +41,8 @@ You must have the following to complete the [Provider setup](#provider-setup):
 * To terminate the IdP session on logout (so users must re-authenticate), register your LangSmith URL (e.g., `https://<host>`) as a **post-logout redirect URI** (sometimes called "Sign-out redirect URI") in your IdP, then set `OAUTH_IDP_LOGOUT_ENABLED=true` in your environment via `commonEnv` in Helm.
 * You will need to provide the `oauthClientId`, `oauthClientSecret`, `hostname`, and `oauthIssuerUrl` in your `values.yaml` file. This is where you will configure your LangSmith instance.
 * If you have **not** already configured OAuth with client secret or if you only have personal orgs, you must provide an email address to assign as the `initialOrgAdminEmail` for the newly provisioned SSO org. If you are upgrading from [basic auth](self-host-basic-auth.md), LangSmith will reuse your existing org instead.
+
+**Helm**
 
 ```yaml
 config:
@@ -93,6 +103,8 @@ Without this step, LangSmith blocks login with the error `Your identity provider
 
 Apply the values from the previous steps to your Helm configuration:
 
+**Helm**
+
 ```yaml
 config:
   authType: mixed
@@ -124,7 +136,7 @@ You can use Google Workspace as a single sign-on (SSO) provider using [OAuth2.0 
 
 2. After you have created the project, open the [Credentials](https://console.developers.google.com/apis/credentials) page in the Google API Console (making sure the project in the top left corner is correct)
 
-3. Create new credentials: `Create Credentials → OAuth client ID`
+3. Create new credentials: `Create Credentials > OAuth client ID`
 
 4. Choose `Web application` as the `Application type` and enter a name for the application e.g. `LangSmith`
 
@@ -193,6 +205,8 @@ For details on SCIM setup, refer to [Set up SCIM for your organization](user-man
 13. Click **Save**.
 14. Configure LangSmith to use this OAuth application (see [general configuration section](#configuration) for details about `initialOrgAdminEmail`):
 
+**Helm**
+
 ```yaml
 config:
   authType: mixed
@@ -231,6 +245,8 @@ For details on SCIM setup, refer to [Set up SCIM for your organization](user-man
 13. (Recommended) Under **General > Login > Email verification experience** fill in the **Callback URI** with the LangSmith URL, e.g., `https://langsmith.yourdomain.com`.
 14. Configure LangSmith to use this OAuth application (see [general configuration section](#configuration) for details about `initialOrgAdminEmail`):
 
+**Helm**
+
 ```yaml
 config:
   authType: mixed
@@ -263,6 +279,8 @@ Users can sign in using the **Login via SSO** button on the LangSmith homepage.
 ### Scope encoding for strict identity providers
 
 By default, LangSmith encodes the spaces between `oauthScopes` in the authorization request as `+` (the `application/x-www-form-urlencoded` convention). Most identity providers accept this, but some (for example, CA SiteMinder) do not decode `+` as a space and reject the login with an `invalid_scope` error. If your IdP rejects multi-scope logins for this reason, set `urlEncodeScopeSpaces: true` in Helm to encode the spaces as `%20` instead, which is the encoding accepted by all OIDC-compliant providers. This applies only to `authType: mixed` with an OAuth client secret, and defaults to off.
+
+**Helm**
 
 ```yaml
 config:
@@ -313,6 +331,8 @@ ISSUER_SUB_CLAIM_OVERRIDES='{"https://login.microsoftonline.com/": "oid", "https
 
 If your IdP requires an additional OIDC scope to include groups in the token (commonly `groups`), add it to `oauthScopes`:
 
+**Helm**
+
 ```yaml
 config:
   authType: mixed
@@ -332,7 +352,7 @@ The exact scope name (`groups`, `roles`, etc.) depends on your IdP. Check your I
 Per-provider SSO Groups Sync settings are stored on the SSO provider record and toggled via the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-self-host-sso) or [API](reference.md) (not via Helm values).
 
 #### UI
-Once your IdP emits the groups claim, configure SSO Groups Sync from the UI in **Settings** → **Members and roles** → **SSO Configuration** → **SSO Groups Sync**. The claim name configured in the **Groups claim field** must match the claim emitted by your IdP.
+Once your IdP emits the groups claim, configure SSO Groups Sync from the UI in **Settings** > **Members and roles** > **SSO Configuration** > **SSO Groups Sync**. The claim name configured in the **Groups claim field** must match the claim emitted by your IdP.
 
 #### API
 To configure SSO Groups Sync via the API, first `GET` the current SSO settings to retrieve the provider `id`, then `PATCH` using that `id`:
@@ -449,6 +469,8 @@ There are a couple of requirements for using OAuth SSO with LangSmith:
 * You will need to set the callback URL in your IdP to `http://<host>/oauth-callback`, where host is the domain or IP you have provisioned for your LangSmith instance. This is where your IdP will redirect the user after they have authenticated.
 * You will need to provide the `oauthClientId` and `oauthIssuerUrl` in your `values.yaml` file. This is where you will configure your LangSmith instance.
 
+**Helm**
+
 ```yaml
 config:
   oauth:
@@ -460,7 +482,7 @@ config:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-sso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

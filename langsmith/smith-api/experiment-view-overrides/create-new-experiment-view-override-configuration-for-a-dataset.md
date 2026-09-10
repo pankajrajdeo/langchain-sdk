@@ -1,3 +1,11 @@
+---
+title: "Create new experiment view override configuration for a dataset"
+description: "Creates a new experiment view override configuration for a dataset with column display settings. This endpoint allows you to customize how experiment results are displayed by configuring..."
+source: "https://docs.langchain.com/langsmith/smith-api/experiment-view-overrides/create-new-experiment-view-override-configuration-for-a-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, experiment-view-overrides, create-new-experiment-view-override-configuration-for-a-dataset]
+---
+
 # Create new experiment view override configuration for a dataset
 
 > Creates a new experiment view override configuration for a dataset with column display settings.
@@ -29,6 +37,8 @@ Example request body:
 This operation fails if an override already exists for the dataset (use PATCH to update).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /datasets/{dataset_id}/experiment-view-overrides**
 
 ````yaml
 openapi: 3.1.0

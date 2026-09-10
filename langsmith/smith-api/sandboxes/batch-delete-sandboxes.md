@@ -1,8 +1,18 @@
+---
+title: "Batch delete sandboxes"
+description: "Delete multiple sandboxes by name or UUID in a single request."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/batch-delete-sandboxes"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, batch-delete-sandboxes]
+---
+
 # Batch delete sandboxes
 
 > Delete multiple sandboxes by name or UUID in a single request.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/boxes/batch-delete**
 
 ````yaml
 openapi: 3.1.0

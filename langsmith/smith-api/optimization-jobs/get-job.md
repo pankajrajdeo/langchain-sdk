@@ -1,8 +1,18 @@
+---
+title: "Get job"
+description: "Get a specific optimization job."
+source: "https://docs.langchain.com/langsmith/smith-api/optimization-jobs/get-job"
+category: "docs"
+tags: [docs, langsmith, smith-api, optimization-jobs, get-job]
+---
+
 # Get job
 
 > Get a specific optimization job.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/repos/{owner}/{repo}/optimization-jobs/{job_id}**
 
 ````yaml
 openapi: 3.1.0

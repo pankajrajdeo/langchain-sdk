@@ -1,8 +1,18 @@
+---
+title: "Delete repo"
+description: "Delete a repo."
+source: "https://docs.langchain.com/langsmith/smith-api/repos/delete-repo"
+category: "docs"
+tags: [docs, langsmith, smith-api, repos, delete-repo]
+---
+
 # Delete repo
 
 > Delete a repo.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/repos/{owner}/{repo}**
 
 ````yaml
 openapi: 3.1.0

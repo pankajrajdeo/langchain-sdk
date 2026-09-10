@@ -1,3 +1,11 @@
+---
+title: "Use threads"
+description: "This guide shows you how to create, view, and inspect threads. Threads work with assistants to enable stateful execution of your deployed graphs."
+source: "https://docs.langchain.com/langsmith/use-threads"
+category: "docs"
+tags: [docs, langsmith, use-threads]
+---
+
 # Use threads
 
 This guide shows you how to create, view, and inspect *threads*. Threads work with [assistants](assistants.md) to enable [stateful](../langgraph/persistence.md) execution of your [deployed graphs](deployment.md).
@@ -61,6 +69,8 @@ To run your graph with state persistence, you must first create a thread:
 
 To create a new thread, use one of:
 
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -74,6 +84,8 @@ thread = await client.threads.create()
 print(thread)
 ```
 
+**JavaScript**
+
 ```javascript
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -86,6 +98,8 @@ const thread = await client.threads.create();
 
 console.log(thread);
 ```
+
+**cURL**
 
 ```bash
 curl --request POST \
@@ -113,17 +127,23 @@ Output:
 
 Alternatively, if you already have a thread in your application whose state you wish to copy, you can use the `copy` method. This will create an independent thread whose history is identical to the original thread at the time of the operation:
 
+**Python**
+
 ```python
 # Copy an existing thread
 # The new thread will have the same state as the original at the time of copying
 copied_thread = await client.threads.copy(thread["thread_id"])
 ```
 
+**JavaScript**
+
 ```javascript
 // Copy an existing thread
 // The new thread will have the same state as the original at the time of copying
 const copiedThread = await client.threads.copy(thread["thread_id"]);
 ```
+
+**cURL**
 
 ```bash
 curl --request POST --url <DEPLOYMENT_URL>/threads/thread["thread_id"]/copy \
@@ -142,6 +162,8 @@ You can create a thread with an arbitrary pre-defined state by providing a list 
 * Resume conversations from a previous session.
 
 For more information on checkpoints and state management, refer to the [LangGraph persistence documentation](../langgraph/persistence.md).
+
+**Python**
 
 ```python
 from langgraph_sdk import get_client
@@ -197,6 +219,8 @@ thread = await client.threads.create(
 print(thread)
 ```
 
+**JavaScript**
+
 ```javascript
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -251,6 +275,8 @@ const thread = await client.threads.create({
 
 console.log(thread);
 ```
+
+**cURL**
 
 ```bash
 curl --request POST \
@@ -319,17 +345,23 @@ To list threads, use the `search` method. This will list the threads in the appl
 
 Use the `status` field to filter threads based on their status. Supported values are `idle`, `busy`, `interrupted`, and `error`. For example, to view `idle` threads:
 
+**Python**
+
 ```python
 # Search for idle threads
 # The status filter accepts: idle, busy, interrupted, error
 print(await client.threads.search(status="idle", limit=1))
 ```
 
+**JavaScript**
+
 ```javascript
 // Search for idle threads
 // The status filter accepts: idle, busy, interrupted, error
 console.log(await client.threads.search({ status: "idle", limit: 1 }));
 ```
+
+**cURL**
 
 ```bash
 curl --request POST \
@@ -376,13 +408,19 @@ You can also filter on any custom metadata you attach when creating or updating 
 
 #### Filter by graph
 
+**Python**
+
 ```python
 print(await client.threads.search(metadata={"graph_id": "agent"}, limit=1))
 ```
 
+**JavaScript**
+
 ```javascript
 console.log(await client.threads.search({ metadata: { "graph_id": "agent" }, limit: 1 }));
 ```
+
+**cURL**
 
 ```bash
 curl --request POST \
@@ -412,6 +450,8 @@ Output:
 
 #### Filter by assistant
 
+**Python**
+
 ```python
 print(await client.threads.search(
     metadata={"assistant_id": "fe096781-5601-53d2-b2f6-0d3403f7e9ca"},
@@ -419,12 +459,16 @@ print(await client.threads.search(
 ))
 ```
 
+**JavaScript**
+
 ```javascript
 console.log(await client.threads.search({
   metadata: { "assistant_id": "fe096781-5601-53d2-b2f6-0d3403f7e9ca" },
   limit: 1,
 }));
 ```
+
+**cURL**
 
 ```bash
 curl --request POST \
@@ -435,6 +479,8 @@ curl --request POST \
 
 #### Filter by cron job
 
+**Python**
+
 ```python
 print(await client.threads.search(
     metadata={"cron_id": "8b98a268-e49a-4228-a0d3-1a354e3a54d0"},
@@ -442,12 +488,16 @@ print(await client.threads.search(
 ))
 ```
 
+**JavaScript**
+
 ```javascript
 console.log(await client.threads.search({
   metadata: { "cron_id": "8b98a268-e49a-4228-a0d3-1a354e3a54d0" },
   limit: 10,
 }));
 ```
+
+**cURL**
 
 ```bash
 curl --request POST \
@@ -479,17 +529,23 @@ This will load a table of all threads in your deployment.
 
 To view a specific thread given its `thread_id`, use the [`get`](https://reference.langchain.com/python/langgraph-sdk/_async/threads/ThreadsClient#member-get-0) method:
 
+**Python**
+
 ```python
 # Retrieve a specific thread by its ID
 # Returns the thread metadata including status, creation time, and metadata
 print((await client.threads.get(thread["thread_id"])))
 ```
 
+**JavaScript**
+
 ```javascript
 // Retrieve a specific thread by its ID
 // Returns the thread metadata including status, creation time, and metadata
 console.log((await client.threads.get(thread["thread_id"])));
 ```
+
+**cURL**
 
 ```bash
 curl --request GET \
@@ -520,17 +576,23 @@ For more information, refer to the [Python](https://reference.langchain.com/pyth
 
 To view the current state of a given thread, use the [`get_state`](https://reference.langchain.com/python/langgraph-sdk/_async/threads/ThreadsClient/get_state) method. This returns the current values, next nodes to execute, and checkpoint information:
 
+**Python**
+
 ```python
 # Get the current state of a thread
 # Returns values, next nodes, tasks, checkpoint info, and metadata
 print((await client.threads.get_state(thread["thread_id"])))
 ```
 
+**JavaScript**
+
 ```javascript
 // Get the current state of a thread
 // Returns values, next nodes, tasks, checkpoint info, and metadata
 console.log((await client.threads.getState(thread["thread_id"])));
 ```
+
+**cURL**
 
 ```bash
 curl --request GET \
@@ -609,17 +671,23 @@ Optionally, to view the state of a thread at a given checkpoint, pass in the che
 
 First, get the checkpoint ID from the thread's history:
 
+**Python**
+
 ```python
 # Get the thread history to find checkpoint IDs
 history = await client.threads.get_history(thread_id=thread["thread_id"])
 checkpoint_id = history[0]["checkpoint_id"]  # Get the most recent checkpoint
 ```
 
+**JavaScript**
+
 ```javascript
 // Get the thread history to find checkpoint IDs
 const history = await client.threads.getHistory(thread["thread_id"]);
 const checkpointId = history[0].checkpoint_id;  // Get the most recent checkpoint
 ```
+
+**cURL**
 
 ```bash
 # Get the thread history to find checkpoint IDs
@@ -631,6 +699,8 @@ curl --request POST \
 
 Then use the checkpoint ID to get the state at that specific point:
 
+**Python**
+
 ```python
 # Get thread state at a specific checkpoint
 # Useful for inspecting historical state or debugging
@@ -640,11 +710,15 @@ thread_state = await client.threads.get_state(
 )
 ```
 
+**JavaScript**
+
 ```javascript
 // Get thread state at a specific checkpoint
 // Useful for inspecting historical state or debugging
 const threadState = await client.threads.getState(thread["thread_id"], checkpointId);
 ```
+
+**cURL**
 
 ```bash
 curl --request GET \
@@ -655,6 +729,8 @@ curl --request GET \
 ### Inspect full thread history
 
 To view a thread's history, use the [`get_history`](https://reference.langchain.com/python/langgraph-sdk/_async/threads/ThreadsClient/get_history) method. This returns a list of every state the thread experienced, allowing you to trace the full execution path:
+
+**Python**
 
 ```python
 # Get the full history of a thread
@@ -668,6 +744,8 @@ for state in history:
     print(f"Checkpoint: {state['checkpoint_id']}")
     print(f"Step: {state['metadata']['step']}")
 ```
+
+**JavaScript**
 
 ```javascript
 // Get the full history of a thread
@@ -684,6 +762,8 @@ for (const state of history) {
   console.log(`Step: ${state.metadata.step}`);
 }
 ```
+
+**cURL**
 
 ```bash
 curl --request POST \
@@ -713,7 +793,7 @@ To view the full thread history and perform detailed debugging, click **Open in 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

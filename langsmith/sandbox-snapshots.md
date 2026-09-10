@@ -1,3 +1,11 @@
+---
+title: "Sandbox snapshots"
+description: "Build and capture reusable filesystem images for sandboxes."
+source: "https://docs.langchain.com/langsmith/sandbox-snapshots"
+category: "docs"
+tags: [docs, langsmith, sandbox-snapshots]
+---
+
 # Sandbox snapshots
 
 > Build and capture reusable filesystem images for sandboxes.
@@ -79,6 +87,8 @@ Point your filesystem or SBOM scanner at `$SNAPSHOT_WORKDIR/rootfs`. The scanner
 
 Build a snapshot by pointing at any container image. The call blocks until the snapshot is ready (default timeout is 60 seconds; bump it for large images).
 
+**Python**
+
 ```python
 from langsmith.sandbox import SandboxClient
 
@@ -92,6 +102,8 @@ snapshot = client.create_snapshot(
 
 print(snapshot.id)
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient } from "langsmith/sandbox";
@@ -119,7 +131,29 @@ LangSmith supplies its required runtime tools separately when the sandbox starts
 
 ### Private registries
 
-To pull from a private registry, create a registry once with its credentials, then reference it by id when building a snapshot. Registries persist, so reuse one across snapshots.
+To pull from a private registry, create a registry once with its credentials, then reference it by ID when building a snapshot. Registries persist, so reuse one across snapshots.
+
+#### Find repositories and tags
+
+In the LangSmith UI, the **Container Image URI** field suggests repositories and tags from Docker Hub or the selected private registry. Search behavior depends on the registry provider and authentication method:
+
+| Source                                                              | Repository discovery                                                                                       | Tag discovery                                               |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Docker Hub, without a saved registry                                | Searches Docker Official Images for a bare image name or a specified Docker Hub namespace                  | Searches tags after you select or enter a repository        |
+| Docker Registry                                                     | Searches the registry catalog when the registry supports it                                                | Searches tags after you select or enter a repository        |
+| Harbor                                                              | Searches the accessible catalog                                                                            | Searches tags after you select or enter a repository        |
+| GitHub Container Registry (GHCR)                                    | Searches within a specified GitHub owner                                                                   | Searches tags after you select or enter a repository        |
+| Google Artifact Registry (GAR)                                      | Searches repositories within a project and location, then searches packages within the selected repository | Searches tags after you select or enter an image repository |
+| Amazon Elastic Container Registry (ECR), with username and password | Requires you to enter a complete repository                                                                | Searches tags after you enter a repository                  |
+| Amazon ECR, with an AWS IAM role                                    | Searches repositories across the configured AWS account                                                    | Searches tags after you select or enter a repository        |
+
+Repository and tag discovery is advisory and bounded. You can always enter a known repository, tag, or digest manually, including when a provider does not support search or returns no matches. Use a digest-qualified image URI when you need an immutable snapshot source.
+
+#### Authenticate with username and password
+
+Username and password authentication works with all supported private registry providers. For ECR, the password is an ECR authorization token and expires after 12 hours. Update the saved registry credentials when the token expires.
+
+**Python**
 
 ```python
 import os
@@ -139,6 +173,8 @@ snapshot = client.create_snapshot(
     timeout=600,
 )
 ```
+
+**TypeScript**
 
 ```ts
 const registry = await client.registries.create({
@@ -161,11 +197,81 @@ const snapshot = await client.createSnapshot(
 
 List, inspect, update, and delete registries with `client.registries.list()`, `client.registries.retrieve(name)`, `client.registries.update(name, ...)`, and `client.registries.delete(name)`.
 
+#### Authenticate to ECR with an AWS IAM role
+
+AWS IAM role authentication avoids storing an expiring ECR authorization token in LangSmith. It supports private ECR registries in the commercial AWS partition. Public ECR, AWS GovCloud, AWS China, and custom ECR-compatible domains continue to use username and password authentication.
+
+> [!NOTE]
+> The **AWS IAM role** authentication method appears only when your LangSmith deployment supports it. If the option is unavailable, use username and password authentication.
+
+To register an ECR role:
+
+1. In LangSmith, open **Sandboxes > Registries**, select **Register Private Registry**, and enter your registry URL in the form `<aws-account-id>.dkr.ecr.<aws-region>.amazonaws.com`.
+2. Select **AWS IAM role** under **Authentication method**. Copy the AWS principal ARN and workspace ID that LangSmith displays. LangSmith uses the workspace ID as `sts:ExternalId`.
+3. In AWS, create an IAM role or update an existing role with a trust policy that uses the exact values shown in LangSmith:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "<principal-arn-shown-in-langsmith>"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringEquals": {
+          "sts:ExternalId": "<workspace-id-shown-in-langsmith>"
+        }
+      }
+    }
+  ]
+}
+```
+
+4. Give the role permission to discover and pull the required ECR images. The following policy grants access to every repository in one AWS account and region. Replace the placeholders, or narrow the repository resource to the repositories LangSmith can use:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "GetAuthorizationToken",
+      "Effect": "Allow",
+      "Action": "ecr:GetAuthorizationToken",
+      "Resource": "*"
+    },
+    {
+      "Sid": "DiscoverAndPullImages",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:DescribeRepositories",
+        "ecr:ListImages",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+      ],
+      "Resource": "arn:aws:ecr:<aws-region>:<aws-account-id>:repository/*"
+    }
+  ]
+}
+```
+
+5. For hosted LangSmith, add the `LangSmithSandboxECR=true` tag to the IAM role.
+6. Return to LangSmith, enter the role ARN in **AWS role ARN**, then register the private registry.
+
+LangSmith assumes the role separately for repository discovery, tag discovery, and each snapshot build attempt. It obtains a fresh ECR authorization token for delayed jobs and retries, and does not persist temporary AWS credentials or generated ECR tokens.
+
+For self-hosted deployments, administrators must set `SANDBOX_ECR_AWS_ROLE_PRINCIPAL_ARN` and provide the platform backend and snapshot workers with a compatible AWS SDK credential source. Leaving the setting unset hides AWS IAM role authentication and preserves username and password authentication.
+
 ## Build a snapshot from a Dockerfile
 
 When you have a local `Dockerfile` but don't want to publish the image to a registry first, build a snapshot directly from the `Dockerfile` and its build context. LangSmith spins up a temporary builder sandbox, uploads the context, runs the build inside it with [BuildKit](https://docs.docker.com/build/buildkit/), and captures the resulting image as a snapshot. The builder sandbox is torn down automatically once the build finishes.
 
 The call blocks until the snapshot is ready (default timeout is 60 seconds; raise it for large or slow builds). `fs_capacity_bytes` must be large enough to hold the build context, the intermediate layers, and the final image.
+
+**Python**
 
 ```python
 from langsmith.sandbox import SandboxClient
@@ -181,6 +287,8 @@ snapshot = client.create_snapshot_from_dockerfile(
 
 print(snapshot.id)
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient } from "langsmith/sandbox";
@@ -204,6 +312,8 @@ console.log(snapshot.id);
 
 Pass `build_args` / `buildArgs` to set Docker `ARG` values, and `target` to stop at a specific stage of a multi-stage build.
 
+**Python**
+
 ```python
 snapshot = client.create_snapshot_from_dockerfile(
     "my-app",
@@ -213,6 +323,8 @@ snapshot = client.create_snapshot_from_dockerfile(
     target="runtime",
 )
 ```
+
+**TypeScript**
 
 ```ts
 const snapshot = await client.createSnapshotFromDockerfile(
@@ -230,6 +342,8 @@ const snapshot = await client.createSnapshotFromDockerfile(
 
 Pass a callback to `on_build_log` / `onBuildLog` to receive the build's stdout and stderr as it runs, which is useful for surfacing progress or debugging a failing build.
 
+**Python**
+
 ```python
 snapshot = client.create_snapshot_from_dockerfile(
     "my-app",
@@ -238,6 +352,8 @@ snapshot = client.create_snapshot_from_dockerfile(
     on_build_log=lambda line: print(line, end=""),
 )
 ```
+
+**TypeScript**
 
 ```ts
 const snapshot = await client.createSnapshotFromDockerfile(
@@ -252,6 +368,8 @@ const snapshot = await client.createSnapshotFromDockerfile(
 
 `vcpus` / `vCpus` and `mem_bytes` / `memBytes` size the temporary builder sandbox. The build runs BuildKit plus the native snapshotter's layer copies inside it, which contend for the builder's default 0.5 vCPU, so giving the builder more CPU can cut a cold build's wall time substantially. Memory is tied to CPU at 4 GiB per vCPU and must stay within 50% of that target, so a 2-vCPU builder accepts 4 to 12 GiB. Omit memory and it follows the ratio.
 
+**Python**
+
 ```python
 snapshot = client.create_snapshot_from_dockerfile(
     "my-app",
@@ -262,6 +380,8 @@ snapshot = client.create_snapshot_from_dockerfile(
     timeout=600,
 )
 ```
+
+**TypeScript**
 
 ```ts
 const snapshot = await client.createSnapshotFromDockerfile(
@@ -283,6 +403,8 @@ const snapshot = await client.createSnapshotFromDockerfile(
 
 Start a sandbox from an existing snapshot, install packages or prepare data, then capture the result as a new snapshot. The returned snapshot has its `source_sandbox_id` set to the sandbox it was captured from, and can be used as the `snapshot_id` for any later `create_sandbox` call.
 
+**Python**
+
 ```python
 sb = client.create_sandbox(snapshot_id=base_snapshot_id, name="setup-box")
 sb.run("pip install numpy pandas scikit-learn", timeout=180)
@@ -299,6 +421,8 @@ with client.sandbox(snapshot_id=snapshot.id) as sb:
     sb.run("python -c 'import numpy; print(numpy.__version__)'")
     assert sb.read("/opt/config.yaml") == b"model: gpt-5\n"
 ```
+
+**TypeScript**
 
 ```ts
 const running = await client.createSandbox(baseSnapshotId, { name: "setup-box" });
@@ -326,9 +450,13 @@ try {
 > [!TIP]
 > You can boot a sandbox from a snapshot by **name** instead of ID — handy when you know the human-readable label you captured with:
 >
+> **Python**
+>
 > ```python
 > sb = client.create_sandbox(snapshot_name="ml-ready")
 > ```
+>
+> **TypeScript**
 >
 > ```ts
 > const sb = await client.createSandbox({ snapshotName: "ml-ready" });
@@ -340,9 +468,13 @@ try {
 
 `capture_snapshot` blocks until the new snapshot is ready. Raise the `timeout` kwarg (default 60s) if your filesystem is large or your storage backend is slow.
 
+**Python**
+
 ```python
 snapshot = sb.capture_snapshot("ml-ready-v2", timeout=600)
 ```
+
+**TypeScript**
 
 ```ts
 const snapshot = await sb.captureSnapshot("ml-ready-v2", { timeout: 600 });
@@ -392,6 +524,8 @@ Capturing memory from a **stopped** sandbox only works when that sandbox was cre
 
 ## List, fetch, and delete snapshots
 
+**Python**
+
 ```python
 # List all snapshots in the workspace
 snapshots = client.list_snapshots()
@@ -404,6 +538,8 @@ snapshot = client.get_snapshot("550e8400-e29b-41d4-a716-446655440000")
 # Delete a snapshot (fails if any sandbox still references it)
 client.delete_snapshot(snapshot.id)
 ```
+
+**TypeScript**
 
 ```ts
 const snapshots = await client.listSnapshots();
@@ -419,9 +555,13 @@ await client.deleteSnapshot(snapshot.id);
 > [!NOTE]
 > `list_snapshots` / `listSnapshots` paginates server-side (default page size 50, max 500) and accepts optional filters: `name_contains` / `nameContains` (case-insensitive substring on name), `limit` (1–500), and `offset` (≥ 0). Page through results by advancing `offset`.
 >
+> **Python**
+>
 > ```python
 > page = client.list_snapshots(name_contains="ml", limit=100)
 > ```
+>
+> **TypeScript**
 >
 > ```ts
 > const page = await client.listSnapshots({ nameContains: "ml", limit: 100 });
@@ -430,6 +570,8 @@ await client.deleteSnapshot(snapshot.id);
 ## Stopped sandboxes
 
 A stopped sandbox keeps its filesystem, and the next request wakes it automatically. You do not need to start it yourself: send the command you wanted to run and the sandbox comes back up to serve it.
+
+**Python**
 
 ```python
 sb = client.create_sandbox(snapshot_id=snapshot.id, name="my-vm")
@@ -442,6 +584,8 @@ sb.stop()
 result = sb.run("cat /tmp/state.txt")
 assert result.stdout.strip() == "hello"
 ```
+
+**TypeScript**
 
 ```ts
 const sb = await client.createSandbox(snapshot.id, { name: "my-vm" });
@@ -464,7 +608,7 @@ The first request after a stop pays the boot cost, so it is slower than the ones
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-snapshots.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

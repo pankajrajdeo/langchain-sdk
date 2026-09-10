@@ -1,3 +1,11 @@
+---
+title: "Use subagents in Deep Agents Code"
+description: "Define custom Deep Agents Code subagents as AGENTS.md files with YAML frontmatter. Covers project and user paths, optional model overrides, and examples."
+source: "https://docs.langchain.com/oss/deepagents/code/subagents"
+category: "docs"
+tags: [docs, deepagents, code, subagents]
+---
+
 # Use subagents in Deep Agents Code
 
 > Define custom Deep Agents Code subagents as AGENTS.md files with YAML frontmatter. Covers project and user paths, optional model overrides, and examples.
@@ -80,7 +88,7 @@ This overrides the built-in general-purpose subagent, routing all delegated task
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

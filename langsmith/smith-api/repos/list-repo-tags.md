@@ -1,8 +1,18 @@
+---
+title: "List repo tags"
+description: "Get all repo tags."
+source: "https://docs.langchain.com/langsmith/smith-api/repos/list-repo-tags"
+category: "docs"
+tags: [docs, langsmith, smith-api, repos, list-repo-tags]
+---
+
 # List repo tags
 
 > Get all repo tags.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/repos/tags**
 
 ````yaml
 openapi: 3.1.0

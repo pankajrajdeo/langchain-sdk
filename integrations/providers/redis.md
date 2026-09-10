@@ -1,3 +1,11 @@
+---
+title: "Redis integrations"
+description: "Integrate with Redis using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/redis"
+category: "docs"
+tags: [docs, integrations, providers, redis]
+---
+
 # Redis integrations
 
 > Integrate with Redis using LangChain Python.
@@ -15,9 +23,13 @@ It is broken into two parts: installation and setup, and then references to spec
 
 Install the Python SDK and LangChain Redis integration:
 
+**pip**
+
 ```bash
 pip install redis langchain-redis
 ```
+
+**uv**
 
 ```bash
 uv add redis langchain-redis
@@ -140,7 +152,7 @@ call `.as_retriever()` on the base vectorstore class.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Update org service key"
+description: "Update an API key's role(s) in place without rotating the key."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/update-org-service-key"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, update-org-service-key]
+---
+
 # Update org service key
 
 > Update an API key's role(s) in place without rotating the key.
@@ -6,6 +14,8 @@ Restricted to org admins (ORGANIZATION_MANAGE). Applies to both
 org-scoped and workspace-scoped keys listed in /orgs/current/service-keys.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/orgs/current/service-keys/{api_key_id}**
 
 ````yaml
 openapi: 3.1.0
@@ -267,6 +277,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

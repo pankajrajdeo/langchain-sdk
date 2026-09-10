@@ -1,3 +1,11 @@
+---
+title: "Implement a LangChain integration"
+description: "Integration packages are Python packages that users can install for use in their projects. They implement one or more components that adhere to the LangChain interface standards."
+source: "https://docs.langchain.com/oss/python/contributing/implement-langchain"
+category: "docs"
+tags: [docs, contributing, implement-langchain]
+---
+
 # Implement a LangChain integration
 
 Integration packages are Python packages that users can install for use in their projects. They implement one or more components that adhere to the LangChain interface standards.
@@ -68,6 +76,8 @@ Sandbox integrations enable [Deep Agents](../deepagents/overview.md) to run code
 Implement the [`SandboxBackendProtocol`](https://reference.langchain.com/python/deepagents/backends/protocol/SandboxBackendProtocol) from Deep Agents. This protocol includes `execute()`, async variants, and the filesystem tool methods such as `ls`, `read`, `write`, `edit`, `glob`, and `grep`.
 
 In practice, if your sandbox environment can run shell commands and has `python3` available, you should usually subclass [`BaseSandbox`](https://reference.langchain.com/python/deepagents/backends/sandbox/BaseSandbox). `BaseSandbox` provides the filesystem operations through `python3`, so you mainly need to implement `execute()`, `upload_files()`, `download_files()`, and `id`.
+
+**Example BaseSandbox scaffold**
 
 ```python
 from __future__ import annotations
@@ -147,6 +157,8 @@ class MySandbox(BaseSandbox):
 
 Validate your integration with the [sandbox standard test suite](standard-tests-langchain.md#sandbox-integrations). The Python suite uses `SandboxIntegrationTests` from `langchain_tests.integration_tests`; subclass it and provide a `sandbox` fixture that yields a clean `SandboxBackendProtocol` instance.
 
+**Example sandbox standard test setup**
+
 ```python
 from __future__ import annotations
 
@@ -178,7 +190,7 @@ Put this in a file such as `tests/integration_tests/test_sandbox.py`. The standa
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/implement-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,13 +1,21 @@
+---
+title: "Control plane API reference for LangSmith Deployment"
+description: "The control plane API is part of LangSmith Deployment. With the control plane API, you can programmatically create, manage, and automate your Agent Server deployments—for example, as part of a custom..."
+source: "https://docs.langchain.com/langsmith/api-ref-control-plane"
+category: "docs"
+tags: [docs, langsmith, api-ref-control-plane]
+---
+
 # Control plane API reference for LangSmith Deployment
 
 The control plane API is part of [LangSmith Deployment](deployment.md). With the control plane API, you can programmatically create, manage, and automate your [Agent Server](agent-server.md) deployments—for example, as part of a custom CI/CD workflow.
 
 Browse the full API reference in the **Control Plane API** section in the sidebar, or refer to the endpoint groups:
 
-* [Integrations (v1)](https://docs.langchain.com/api-reference/integrations-v1/list-github-integrations): GitHub integrations and repository listings
-* [Deployments (v2)](https://docs.langchain.com/api-reference/deployments-v2): Create, manage, and update Agent Server deployments
-* [Listeners (v2)](https://docs.langchain.com/api-reference/listeners-v2): Listener resources for self-hosted enterprise organizations
-* [Auth Service (v2)](https://docs.langchain.com/api-reference/auth-service-v2): OAuth provider configuration and authentication flows
+* [Integrations (v1)](../api-reference/integrations-v1/list-github-integrations.md): GitHub integrations and repository listings
+* [Deployments (v2)](../api-reference/deployments-v2.md): Create, manage, and update Agent Server deployments
+* [Listeners (v2)](../api-reference/listeners-v2.md): Listener resources for self-hosted enterprise organizations
+* [Auth Service (v2)](../api-reference/auth-service-v2.md): OAuth provider configuration and authentication flows
 
 ## Host
 
@@ -301,7 +309,7 @@ if __name__ == "__main__":
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/api-ref-control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

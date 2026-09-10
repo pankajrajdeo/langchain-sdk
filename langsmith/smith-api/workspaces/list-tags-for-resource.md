@@ -1,6 +1,16 @@
+---
+title: "List tags for resource"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tags/resource"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/list-tags-for-resource"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, list-tags-for-resource]
+---
+
 # List tags for resource
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tags/resource**
 
 ````yaml
 openapi: 3.1.0

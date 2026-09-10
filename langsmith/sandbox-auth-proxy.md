@@ -1,3 +1,11 @@
+---
+title: "Sandbox auth proxy"
+description: "Inject credentials into outbound requests and control which destinations a sandbox can reach."
+source: "https://docs.langchain.com/langsmith/sandbox-auth-proxy"
+category: "docs"
+tags: [docs, langsmith, sandbox-auth-proxy]
+---
+
 # Sandbox auth proxy
 
 > Inject credentials into outbound requests and control which destinations a sandbox can reach.
@@ -73,6 +81,8 @@ The connection to `db.example.com:5432` is passed through at the TCP layer with 
 
 ### Configure via SDK
 
+**Python**
+
 ```python
 from langsmith.sandbox import SandboxClient
 
@@ -87,6 +97,8 @@ client.create_sandbox(
     },
 )
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient } from "langsmith/sandbox";
@@ -194,6 +206,8 @@ curl -X POST "$LANGSMITH_ENDPOINT/v2/sandboxes/boxes" \
 
 ### Configure AWS auth via SDK
 
+**Python**
+
 ```python
 from langsmith.sandbox import (
     SandboxClient,
@@ -216,6 +230,8 @@ client.create_sandbox(
     ),
 )
 ```
+
+**TypeScript**
 
 ```ts
 import {
@@ -293,6 +309,8 @@ curl -X POST "$LANGSMITH_ENDPOINT/v2/sandboxes/boxes" \
 
 ### Configure GCP auth via SDK
 
+**Python**
+
 ```python
 from langsmith.sandbox import (
     SandboxClient,
@@ -315,6 +333,8 @@ client.create_sandbox(
     ),
 )
 ```
+
+**TypeScript**
 
 ```ts
 import {
@@ -439,6 +459,8 @@ Configure two rules:
 | `api.github.com`             | `Authorization: Bearer <github-token>` for `gh` and REST API calls                                                         |
 | `github.com`, `*.github.com` | `Authorization: Basic <base64("x-access-token:<github-token>")>` for Git over HTTPS operations like clone, fetch, and push |
 
+**Python**
+
 ```python
 import base64
 import os
@@ -504,6 +526,8 @@ The placeholder never leaves the sandbox. The proxy injects the real `Authorizat
 
 ## Configure via SDK
 
+**Python**
+
 ```python
 from langsmith.sandbox import SandboxClient
 
@@ -528,6 +552,8 @@ client.create_sandbox(
     },
 )
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient } from "langsmith/sandbox";
@@ -626,6 +652,8 @@ curl -X POST "$LANGSMITH_ENDPOINT/v2/sandboxes/boxes" \
 
 ### Configure via SDK
 
+**Python**
+
 ```python
 from langsmith.sandbox import SandboxClient
 
@@ -651,6 +679,8 @@ client.create_sandbox(
     },
 )
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient } from "langsmith/sandbox";
@@ -681,7 +711,7 @@ await client.createSandbox({
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-auth-proxy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

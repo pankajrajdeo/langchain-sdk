@@ -1,3 +1,11 @@
+---
+title: "Unshare a run"
+description: "Deletes the share token for the trace identified by trace_id and session_id. Idempotent: returns 204 whether or not a share token existed."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/unshare-a-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, unshare-a-run]
+---
+
 # Unshare a run
 
 > Deletes the share token for the trace identified by trace_id and session_id. Idempotent: returns 204 whether or not a share token existed.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v2/runs/{trace_id}/share**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "VoyageAI integrations"
+description: "Integrate with VoyageAI using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/voyageai"
+category: "docs"
+tags: [docs, integrations, providers, voyageai]
+---
+
 # VoyageAI integrations
 
 > Integrate with VoyageAI using LangChain Python.
@@ -10,9 +18,13 @@ All functionality related to VoyageAI
 
 Install the integration package with
 
+**pip**
+
 ```bash
 pip install langchain-voyageai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-voyageai
@@ -39,7 +51,7 @@ from langchain_voyageai import VoyageAIRerank
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/voyageai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

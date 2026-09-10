@@ -1,8 +1,18 @@
+---
+title: "Fork repo"
+description: "Fork a repo."
+source: "https://docs.langchain.com/langsmith/smith-api/repos/fork-repo"
+category: "docs"
+tags: [docs, langsmith, smith-api, repos, fork-repo]
+---
+
 # Fork repo
 
 > Fork a repo.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/repos/{owner}/{repo}/fork**
 
 ````yaml
 openapi: 3.1.0

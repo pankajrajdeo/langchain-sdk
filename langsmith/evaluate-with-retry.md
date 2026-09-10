@@ -1,3 +1,11 @@
+---
+title: "How to retry failed runs in experiments (Python only)"
+description: "When running evaluations on large datasets, you may encounter failures on a small subset of examples due to rate limits, network issues, or other transient errors. Rather than re-running the entire..."
+source: "https://docs.langchain.com/langsmith/evaluate-with-retry"
+category: "docs"
+tags: [docs, langsmith, evaluate-with-retry]
+---
+
 # How to retry failed runs in experiments (Python only)
 
 When running [evaluations](evaluation-concepts.md#evaluation-lifecycle) on large [datasets](evaluation-concepts.md#datasets), you may encounter failures on a small subset of examples due to rate limits, network issues, or other transient errors. Rather than re-running the entire evaluation, you can identify and retry only the failed examples on an [experiment](evaluation-concepts.md#experiment).
@@ -58,7 +66,7 @@ results_retry = await client.aevaluate(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-with-retry.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

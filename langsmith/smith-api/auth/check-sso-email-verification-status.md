@@ -1,8 +1,18 @@
+---
+title: "Check SSO email verification status"
+description: "Retrieve the email verification status of an SSO user."
+source: "https://docs.langchain.com/langsmith/smith-api/auth/check-sso-email-verification-status"
+category: "docs"
+tags: [docs, langsmith, smith-api, auth, check-sso-email-verification-status]
+---
+
 # Check SSO email verification status
 
 > Retrieve the email verification status of an SSO user.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/sso/email-verification/status**
 
 ````yaml
 openapi: 3.1.0

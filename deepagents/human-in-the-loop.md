@@ -1,3 +1,11 @@
+---
+title: "Human-in-the-loop"
+description: "Learn how to configure human approval for sensitive tool operations"
+source: "https://docs.langchain.com/oss/python/deepagents/human-in-the-loop"
+category: "docs"
+tags: [docs, deepagents, human-in-the-loop]
+---
+
 # Human-in-the-loop
 
 > Learn how to configure human approval for sensitive tool operations
@@ -38,6 +46,8 @@ The `interrupt_on` parameter accepts a dictionary mapping tool names to interrup
 * **`InterruptOnConfig`**: Custom configuration. Set `allowed_decisions` to control review options.
   In Python, add an optional `when` predicate to interrupt only specific calls (see [Conditional interrupts](#conditional-interrupts)).
 
+**Google**
+
 ```python
 from langchain.tools import tool
 from deepagents import create_deep_agent
@@ -72,6 +82,8 @@ agent = create_deep_agent(
     checkpointer=checkpointer,  # Required!
 )
 ```
+
+**OpenAI**
 
 ```python
 from langchain.tools import tool
@@ -108,6 +120,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from langchain.tools import tool
 from deepagents import create_deep_agent
@@ -142,6 +156,8 @@ agent = create_deep_agent(
     checkpointer=checkpointer,  # Required!
 )
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.tools import tool
@@ -178,6 +194,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from langchain.tools import tool
 from deepagents import create_deep_agent
@@ -213,6 +231,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.tools import tool
 from deepagents import create_deep_agent
@@ -247,6 +267,8 @@ agent = create_deep_agent(
     checkpointer=checkpointer,  # Required!
 )
 ```
+
+**Ollama**
 
 ```python
 from langchain.tools import tool
@@ -321,6 +343,8 @@ By default, every tool call listed in `interrupt_on` pauses for review. To pause
 > [!NOTE]
 > Conditional interrupts require `langchain>=1.3.3`.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import ToolCallRequest
@@ -342,6 +366,8 @@ agent = create_deep_agent(
     checkpointer=MemorySaver(),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -365,6 +391,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import ToolCallRequest
@@ -386,6 +414,8 @@ agent = create_deep_agent(
     checkpointer=MemorySaver(),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -409,6 +439,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import ToolCallRequest
@@ -431,6 +463,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import ToolCallRequest
@@ -452,6 +486,8 @@ agent = create_deep_agent(
     checkpointer=MemorySaver(),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -893,7 +929,7 @@ interrupt_on = {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

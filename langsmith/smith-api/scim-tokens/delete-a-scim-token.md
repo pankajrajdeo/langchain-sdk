@@ -1,8 +1,18 @@
+---
+title: "Delete a SCIM token"
+description: "Delete a SCIM bearer token from the current organization."
+source: "https://docs.langchain.com/langsmith/smith-api/scim-tokens/delete-a-scim-token"
+category: "docs"
+tags: [docs, langsmith, smith-api, scim-tokens, delete-a-scim-token]
+---
+
 # Delete a SCIM token
 
 > Delete a SCIM bearer token from the current organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/orgs/current/scim/tokens/{scim_token_id}**
 
 ````yaml
 openapi: 3.1.0

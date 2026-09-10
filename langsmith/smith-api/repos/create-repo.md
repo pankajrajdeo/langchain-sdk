@@ -1,8 +1,18 @@
+---
+title: "Create repo"
+description: "Create a repo."
+source: "https://docs.langchain.com/langsmith/smith-api/repos/create-repo"
+category: "docs"
+tags: [docs, langsmith, smith-api, repos, create-repo]
+---
+
 # Create repo
 
 > Create a repo.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/repos**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "List traces in a public shared thread"
+description: "Returns a page of root traces belonging to the thread identified by the share token. The share token supplies the tenant, project, and thread scope."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/list-traces-in-a-public-shared-thread"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, list-traces-in-a-public-shared-thread]
+---
+
 # List traces in a public shared thread
 
 > Returns a page of root traces belonging to the thread identified by the share token. The share token supplies the tenant, project, and thread scope.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/public/threads/{share_token}/traces**
 
 ````yaml
 openapi: 3.1.0
@@ -187,9 +197,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Selects
         - description: opaque cursor from a previous page
           name: cursor

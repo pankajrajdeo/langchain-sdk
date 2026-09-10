@@ -1,8 +1,18 @@
+---
+title: "Create feedback with token post"
+description: "Create a new feedback with a token."
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/create-feedback-with-token-post"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, create-feedback-with-token-post]
+---
+
 # Create feedback with token post
 
 > Create a new feedback with a token.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/feedback/tokens/{token}**
 
 ````yaml
 openapi: 3.1.0

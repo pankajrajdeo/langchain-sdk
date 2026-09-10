@@ -1,8 +1,18 @@
+---
+title: "Read dataset share state"
+description: "Get the state of sharing a dataset"
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/read-dataset-share-state"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, read-dataset-share-state]
+---
+
 # Read dataset share state
 
 > Get the state of sharing a dataset
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}/share**
 
 ````yaml
 openapi: 3.1.0

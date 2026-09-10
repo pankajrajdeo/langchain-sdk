@@ -1,3 +1,11 @@
+---
+title: "Sap hana cloud vector engine integration"
+description: "Integrate with the Sap hana cloud vector engine vector store using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/vectorstores/sap_hanavector"
+category: "docs"
+tags: [docs, integrations, vectorstores, sap_hanavector]
+---
+
 # Sap hana cloud vector engine integration
 
 > Integrate with the Sap hana cloud vector engine vector store using LangChain Python.
@@ -1090,7 +1098,7 @@ Let each of us here tonight in this Chamber send an unmistakable signal to Ukrai
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/sap_hanavector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

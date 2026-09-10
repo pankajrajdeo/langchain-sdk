@@ -1,3 +1,11 @@
+---
+title: "What's new in LangChain v1"
+description: "LangChain v1 is a focused, production-ready foundation for building agents. We've streamlined the framework around three core improvements:"
+source: "https://docs.langchain.com/oss/python/releases/langchain-v1"
+category: "docs"
+tags: [docs, releases, langchain-v1]
+---
+
 # What's new in LangChain v1
 
 **LangChain v1 is a focused, production-ready foundation for building agents.** We've streamlined the framework around three core improvements:
@@ -13,9 +21,13 @@ The `langchain` namespace has been streamlined to focus on essential building bl
 
 To upgrade,
 
+**pip**
+
 ```bash
 pip install -U langchain
 ```
+
+**uv**
 
 ```bash
 uv add langchain
@@ -318,9 +330,13 @@ Legacy functionality has moved to [`langchain-classic`](https://pypi.org/project
 
 If you use any of this functionality, install [`langchain-classic`](https://pypi.org/project/langchain-classic):
 
+**pip**
+
 ```bash
 pip install langchain-classic
 ```
+
+**uv**
 
 ```bash
 uv add langchain-classic
@@ -378,7 +394,7 @@ Report issues or contribute
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/langchain-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

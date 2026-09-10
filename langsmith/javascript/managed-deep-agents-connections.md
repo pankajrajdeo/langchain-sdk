@@ -1,3 +1,11 @@
+---
+title: "Manage connections"
+description: "Store API keys and OAuth grants so Managed Deep Agents can authenticate with external services at runtime."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-connections"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-connections]
+---
+
 # Manage connections
 
 > Store API keys and OAuth grants so Managed Deep Agents can authenticate with external services at runtime.
@@ -77,6 +85,8 @@ Ownership decides what the agent does with a credential. The create mode decides
 
 For example:
 
+**npm**
+
 ```bash
 # Opaque secret: store a fixed API key for the agent
 npx mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
@@ -89,6 +99,8 @@ npx mda connections create frontend-github --oauth github \
 npx mda connections create engineering-notion --mcp https://mcp.notion.com/mcp
 ```
 
+**pnpm**
+
 ```bash
 # Opaque secret: store a fixed API key for the agent
 pnpm exec mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
@@ -100,6 +112,8 @@ pnpm exec mda connections create frontend-github --oauth github \
 # MCP OAuth: let the MCP server register a client for you
 pnpm exec mda connections create engineering-notion --mcp https://mcp.notion.com/mcp
 ```
+
+**bun**
 
 ```bash
 # Opaque secret: store a fixed API key for the agent
@@ -132,13 +146,19 @@ Store a fixed secret for the agent. Read the value from an environment variable,
 
 Put the source value in the shell environment or project `.env` file, then create the connection from that variable. Run the command from the project root. The CLI requires a LangSmith API key and workspace ID.
 
+**npm**
+
 ```bash
 npx mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
 ```
+
+**bun**
 
 ```bash
 bunx mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
@@ -159,6 +179,8 @@ Issue a key that belongs to the agent rather than reusing a personal key. A dedi
 ### Use an opaque secret in a custom tool
 
 The following tool resolves the `organization-tavily` connection for the agent, then sends it to the Tavily API:
+
+**tools/search-web.ts**
 
 ```ts
 import { tool } from "langchain";
@@ -200,13 +222,19 @@ The catalog is not a gate on which providers you can use. For a service it does 
 
 List the catalog with:
 
+**npm**
+
 ```bash
 npx mda connections catalog
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections catalog
 ```
+
+**bun**
 
 ```bash
 bunx mda connections catalog
@@ -251,6 +279,8 @@ Notion is one of them. `--oauth notion-api` registers an app against Notion's RE
 
 GitHub requires an OAuth client ID and client secret. Set `GITHUB_CLIENT_SECRET`, then create the connection. Replace `********` with the client ID:
 
+**npm**
+
 ```bash
 npx mda connections create frontend-github \
   --oauth github \
@@ -258,12 +288,16 @@ npx mda connections create frontend-github \
   --secret-from-env GITHUB_CLIENT_SECRET
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections create frontend-github \
   --oauth github \
   --client-id "********" \
   --secret-from-env GITHUB_CLIENT_SECRET
 ```
+
+**bun**
 
 ```bash
 bunx mda connections create frontend-github \
@@ -285,6 +319,8 @@ Optional flags:
 
 For a service the catalog does not cover, pass both endpoints plus a client ID and scopes:
 
+**npm**
+
 ```bash
 npx mda connections create acme \
   --authorize-url https://auth.acme.com/authorize \
@@ -294,6 +330,8 @@ npx mda connections create acme \
   --scope read
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections create acme \
   --authorize-url https://auth.acme.com/authorize \
@@ -302,6 +340,8 @@ pnpm exec mda connections create acme \
   --secret-from-env ACME_CLIENT_SECRET \
   --scope read
 ```
+
+**bun**
 
 ```bash
 bunx mda connections create acme \
@@ -322,6 +362,8 @@ Use `--authorize` when the provider offers no application identity and its API a
 
 By default, an OAuth connection collects a grant from each caller at runtime. Pass `--authorize` to sign in once yourself and store the grant for the deployment. Every caller then acts as that one account, and no caller sees an authorization prompt:
 
+**npm**
+
 ```bash
 npx mda connections create support-linear \
   --oauth linear \
@@ -331,6 +373,8 @@ npx mda connections create support-linear \
   --authorize
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections create support-linear \
   --oauth linear \
@@ -339,6 +383,8 @@ pnpm exec mda connections create support-linear \
   --scope read --scope write \
   --authorize
 ```
+
+**bun**
 
 ```bash
 bunx mda connections create support-linear \
@@ -373,6 +419,8 @@ Use an agent-owned OAuth account when every caller should act as one shared acco
 ### Access an OAuth token in a custom tool
 
 This tool resolves the authenticated caller's GitHub connection and calls the GitHub REST API:
+
+**tools/get-github-user.ts**
 
 ```ts
 import { tool } from "langchain";
@@ -410,6 +458,8 @@ For remote MCP servers that support OAuth client registration, Managed Deep Agen
 
 Add the server in `tools/mcp.ts` and reference the connection slug.
 
+**tools/mcp.ts**
+
 ```ts
 import { connections, defineMcp } from "managed-deepagents";
 
@@ -430,13 +480,19 @@ For more information, see [Connect to MCP servers](managed-deep-agents-mcp-conne
 
 When the slug matches exactly one user-owned MCP connection in the project, create with the slug alone. The CLI reads the server URL from the MCP declaration:
 
+**npm**
+
 ```bash
 npx mda connections create engineering-notion
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections create engineering-notion
 ```
+
+**bun**
 
 ```bash
 bunx mda connections create engineering-notion
@@ -446,13 +502,19 @@ bunx mda connections create engineering-notion
 
 Pass `--mcp` when you want to name the server URL explicitly, or when the slug is not yet declared in the project:
 
+**npm**
+
 ```bash
 npx mda connections create engineering-notion --mcp https://mcp.notion.com/mcp
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections create engineering-notion --mcp https://mcp.notion.com/mcp
 ```
+
+**bun**
 
 ```bash
 bunx mda connections create engineering-notion --mcp https://mcp.notion.com/mcp
@@ -474,7 +536,7 @@ User-owned connections require an authenticated caller. Anonymous or agent-only 
 
 ### Interrupt payload
 
-With [`useStream`](https://docs.langchain.com/oss/javascript/langchain/frontend/human-in-the-loop#setting-up-usestream) (`@langchain/react`, `@langchain/vue`, `@langchain/svelte`) or `injectStream` (`@langchain/angular`), the pending interrupt is on `stream.interrupt`. The credential gate payload is `stream.interrupt.value`.
+With [`useStream`](../../javascript/langchain/frontend/human-in-the-loop.md#setting-up-usestream) (`@langchain/react`, `@langchain/vue`, `@langchain/svelte`) or `injectStream` (`@langchain/angular`), the pending interrupt is on `stream.interrupt`. The credential gate payload is `stream.interrupt.value`.
 
 For a missing OAuth grant, each entry in `credentials` carries the URL where the caller completes consent:
 
@@ -510,6 +572,8 @@ One interrupt lists every missing grant. Handle each entry before resuming. An e
 The frontend that renders this interrupt is a web application, so these examples are TypeScript whether the agent is written in Python or TypeScript.
 
 Detect the credential gate payload on `stream.interrupt`, render a connect card, then resume with `stream.respond` after every grant is stored:
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -567,6 +631,8 @@ export function Chat() {
 }
 ```
 
+**Vue**
+
 ```vue
 <script setup lang="ts">
 import { computed } from "vue";
@@ -605,6 +671,8 @@ async function onComplete(connectedSlugs: string[]) {
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -636,6 +704,8 @@ async function onComplete(connectedSlugs: string[]) {
   {/if}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component, computed } from "@angular/core";
@@ -676,7 +746,7 @@ export class ChatComponent {
 }
 ```
 
-For the general interrupt lifecycle (`stream.interrupt`, resume, checkpoints), see [Human-in-the-loop](https://docs.langchain.com/oss/javascript/langchain/frontend/human-in-the-loop).
+For the general interrupt lifecycle (`stream.interrupt`, resume, checkpoints), see [Human-in-the-loop](../../javascript/langchain/frontend/human-in-the-loop.md).
 
 ### Handle OAuth grants (`kind: "oauth2"`)
 
@@ -716,17 +786,23 @@ When the agent runs through the Slack channel, Slack renders OAuth entries that 
 
 Use `list` or `get` to inspect connection metadata. `list` shows every connection in the workspace, not only the ones this project uses:
 
+**npm**
+
 ```bash
 npx mda connections list
 npx mda connections get organization-tavily
 npx mda connections delete organization-tavily
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections list
 pnpm exec mda connections get organization-tavily
 pnpm exec mda connections delete organization-tavily
 ```
+
+**bun**
 
 ```bash
 bunx mda connections list
@@ -784,13 +860,13 @@ Agent Auth reuses the existing connection for that slug and attaches the caller'
 * [Add custom tools](managed-deep-agents-tools.md)
 * [Add identity to Managed Deep Agents](managed-deep-agents-identity.md)
 * [Deploy an agent](managed-deep-agents-deploy.md)
-* [Human-in-the-loop](https://docs.langchain.com/oss/javascript/langchain/frontend/human-in-the-loop)
+* [Human-in-the-loop](../../javascript/langchain/frontend/human-in-the-loop.md)
 * [Set up Agent Auth](../agent-auth.md)
 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-connections.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

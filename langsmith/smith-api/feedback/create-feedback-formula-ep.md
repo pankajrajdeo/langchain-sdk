@@ -1,3 +1,11 @@
+---
+title: "Create feedback formula ep"
+description: "Create a new feedback formula"
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/create-feedback-formula-ep"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, create-feedback-formula-ep]
+---
+
 # Create feedback formula ep
 
 > Create a new feedback formula
@@ -5,6 +13,8 @@
 Deprecated: use POST /api/v1/feedback/composite-evaluators instead to create a code evaluator from the feedback formula.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/feedback/formulas**
 
 ````yaml
 openapi: 3.1.0

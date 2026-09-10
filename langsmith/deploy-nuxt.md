@@ -1,3 +1,11 @@
+---
+title: "Deploy with Nuxt"
+description: "Deploy a LangChain deep agent in a Nuxt 4 app with Nitro server routes, Vue composables, and subagent-aware chat UI."
+source: "https://docs.langchain.com/langsmith/deploy-nuxt"
+category: "docs"
+tags: [docs, langsmith, deploy-nuxt]
+---
+
 # Deploy with Nuxt
 
 > Deploy a LangChain deep agent in a Nuxt 4 app with Nitro server routes, Vue composables, and subagent-aware chat UI.
@@ -225,7 +233,7 @@ pnpm typecheck  # vue-tsc over the project
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-nuxt.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

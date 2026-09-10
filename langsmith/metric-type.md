@@ -1,3 +1,11 @@
+---
+title: "How to return categorical vs numerical metrics"
+description: "LangSmith supports both categorical and numerical metrics, and you can return either when writing a custom evaluator."
+source: "https://docs.langchain.com/langsmith/metric-type"
+category: "docs"
+tags: [docs, langsmith, metric-type]
+---
+
 # How to return categorical vs numerical metrics
 
 LangSmith supports both categorical and numerical metrics, and you can return either when writing a custom evaluator.
@@ -17,6 +25,8 @@ Here are some examples:
 * Python: Requires `langsmith>=0.2.0`
 * TypeScript: Support for multiple scores is available in `langsmith@0.1.32` and higher
 
+**Python**
+
 ```python
 def numerical_metric(inputs: dict, outputs: dict, reference_outputs: dict) -> float:
     # Evaluation logic...
@@ -34,6 +44,8 @@ def categorical_metric(inputs: dict, outputs: dict, reference_outputs: dict) -> 
     # Or
     # return {"score": "english"}
 ```
+
+**TypeScript**
 
 ```typescript
 import type { Run, Example } from "langsmith/schemas";
@@ -56,7 +68,7 @@ function categoricalMetric(run: Run, example: Example) {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/metric-type.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

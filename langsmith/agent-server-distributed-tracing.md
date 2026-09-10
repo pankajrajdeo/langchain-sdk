@@ -1,3 +1,11 @@
+---
+title: "Distributed tracing with Agent Server"
+description: "Unify traces when calling your deployed Agent Server from another service using RemoteGraph or the SDK."
+source: "https://docs.langchain.com/langsmith/agent-server-distributed-tracing"
+category: "docs"
+tags: [docs, langsmith, agent-server-distributed-tracing]
+---
+
 # Distributed tracing with Agent Server
 
 > Unify traces when calling your deployed Agent Server from another service using RemoteGraph or the SDK.
@@ -123,7 +131,7 @@ result = await call_remote_agent("What's the weather in SF?")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-distributed-tracing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

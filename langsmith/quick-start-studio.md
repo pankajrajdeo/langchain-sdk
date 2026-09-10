@@ -1,3 +1,11 @@
+---
+title: "Get started with Studio"
+description: "Studio in the LangSmith Deployment UI supports connecting to two types of graphs:"
+source: "https://docs.langchain.com/langsmith/quick-start-studio"
+category: "docs"
+tags: [docs, langsmith, quick-start-studio]
+---
+
 # Get started with Studio
 
 [Studio](studio.md) in the [LangSmith Deployment UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) supports connecting to two types of graphs:
@@ -26,15 +34,21 @@ To test your application locally using Studio:
 
 1. Install the [LangGraph CLI](cli.md):
 
+**pip**
+
 ```bash
    pip install -U "langgraph-cli[inmem]"
    langgraph dev
 ```
 
+**uv**
+
 ```bash
    uv add "langgraph-cli[inmem]"
    langgraph dev
 ```
+
+**npm**
 
 ```bash
    npx @langchain/langgraph-cli dev
@@ -71,12 +85,16 @@ To test your application locally using Studio:
 
 For step-by-step debugging with breakpoints and variable inspection, run the following:
 
+**pip**
+
 ```bash
 # Install debugpy package
 pip install debugpy
 # Start server with debugging enabled
 langgraph dev --debug-port 5678
 ```
+
+**uv**
 
 ```bash
 # Install debugpy package
@@ -103,7 +121,7 @@ Add this configuration to `launch.json`:
 ```
 
 #### PyCharm
-1. Go to Run → Edit Configurations
+1. Go to Run > Edit Configurations
 2. Click + and select "Python Debug Server"
 3. Set IDE host name: `localhost`
 4. Set port: `5678` (or the port number you chose in the previous step)
@@ -126,7 +144,7 @@ For more information on how to run Studio, refer to the following guides:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/quick-start-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

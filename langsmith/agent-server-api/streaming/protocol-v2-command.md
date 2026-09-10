@@ -1,3 +1,11 @@
+---
+title: "Protocol v2 Command"
+description: "Send a single protocol command scoped to a thread. The request body is a ProtocolCommand envelope with a method (e.g. run.start, input.respond, agent.getTree) and method-specific params. The response..."
+source: "https://docs.langchain.com/langsmith/agent-server-api/streaming/protocol-v2-command"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, streaming, protocol-v2-command]
+---
+
 # Protocol v2 Command
 
 > Send a single protocol command scoped to a thread. The request body is a `ProtocolCommand` envelope with a `method` (e.g. `run.start`, `input.respond`, `agent.getTree`) and method-specific `params`. The response is either a `ProtocolSuccess` (with method-specific `result`) or a `ProtocolError`.
@@ -7,6 +15,8 @@ Commands that create runs (`run.start`, `input.respond`) leave the run executing
 WebSocket clients use the same command envelope in-band on `/threads/{thread_id}/stream/events` and additionally have access to `subscription.subscribe` / `subscription.unsubscribe` over the same connection.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/{thread_id}/commands**
 
 ````yaml
 openapi: 3.1.0

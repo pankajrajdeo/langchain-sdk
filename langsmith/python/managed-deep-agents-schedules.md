@@ -1,3 +1,11 @@
+---
+title: "Add schedules to Managed Deep Agents"
+description: "Declare managed cron schedules for Managed Deep Agents deployments."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-schedules]
+---
+
 # Add schedules to Managed Deep Agents
 
 > Declare managed cron schedules for Managed Deep Agents deployments.
@@ -24,6 +32,8 @@ The file name becomes the managed schedule name.
 
 The schedule module must define a named `schedule` declaration.
 
+**schedules/daily_digest.py**
+
 ```python
 from managed_deepagents import define_schedule
 
@@ -40,6 +50,8 @@ Each schedule must define exactly one of:
 
 * `prompt`: A natural-language prompt. Managed Deep Agents converts it to a user message when the cron fires.
 * `input`: A structured LangGraph input object. Use this when you need to pass custom graph input instead of a single prompt.
+
+**schedules/nightly_sweep.py**
 
 ```python
 from managed_deepagents import define_schedule
@@ -65,6 +77,8 @@ Use a persistent thread only when scheduled runs should accumulate durable threa
 > [!NOTE]
 > The following example requires [durable memory](managed-deep-agents-memory.md).
 
+**schedules/nightly_memory.py**
+
 ```python
 from managed_deepagents import define_schedule
 
@@ -83,6 +97,8 @@ Use a Slack channel ID because scheduled runs have no originating thread.
 
 > [!NOTE]
 > Schedule delivery requires `managed-deepagents>=0.4.0`.
+
+**schedules/monday_greeting.py**
 
 ```python
 from managed_deepagents import define_schedule
@@ -144,7 +160,7 @@ Look up `mda deploy` flags and troubleshooting.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-schedules.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "LangSmith skills"
+description: "Use Agent Skills to work with LangSmith traces, datasets, and evaluators from your coding agent."
+source: "https://docs.langchain.com/langsmith/skills"
+category: "docs"
+tags: [docs, langsmith, skills]
+---
+
 # LangSmith skills
 
 > Use Agent Skills to work with LangSmith traces, datasets, and evaluators from your coding agent.
@@ -11,13 +19,19 @@ Agent Skills are reusable, on‑demand capabilities that bundle instructions plu
 
 Install only the LangSmith skills (trace, dataset, evaluator) using `npx skills`:
 
+**Local (current project)**
+
 ```bash
 npx skills add langchain-ai/langsmith-skills --skill '*' --yes
 ```
 
+**Global (all projects)**
+
 ```bash
 npx skills add langchain-ai/langsmith-skills --skill '*' --yes --global
 ```
+
+**Link to a specific agent (e.g., Claude Code)**
 
 ```bash
 npx skills add langchain-ai/langsmith-skills --agent claude-code --skill '*' --yes --global
@@ -81,7 +95,7 @@ Included LangSmith skills:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

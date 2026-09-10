@@ -1,3 +1,11 @@
+---
+title: "Azure Logic Apps integration"
+description: "Integrate with Azure Logic Apps using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/azure_logic_apps"
+category: "docs"
+tags: [docs, integrations, tools, azure_logic_apps]
+---
+
 # Azure Logic Apps integration
 
 > Integrate with Azure Logic Apps using LangChain Python.
@@ -28,9 +36,13 @@ Install the integration package and configure your Azure credentials.
 
 Install the package with the `tools` extra:
 
+**pip**
+
 ```bash
 pip install -U "langchain-azure-ai[tools]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-azure-ai[tools]"
@@ -50,6 +62,8 @@ Before using this tool, you need:
 
 The tool uses `DefaultAzureCredential()` by default, which supports various authentication methods including environment variables, managed identity, and interactive login.
 
+**Initialize credential**
+
 ```python
 from azure.identity import DefaultAzureCredential
 
@@ -67,6 +81,8 @@ credential = ManagedIdentityCredential()
 ## Basic usage
 
 ### Instantiate the tool
+
+**Initialize tool**
 
 ```python
 from langchain_azure_ai.tools import AzureLogicAppTool
@@ -101,6 +117,8 @@ print(result)
 ## Use with an agent
 
 Pass the tool to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent).
+
+**Agent with Logic Apps**
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -209,7 +227,7 @@ from langchain_azure_ai.tools import AzureLogicAppTool
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_logic_apps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

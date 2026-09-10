@@ -1,3 +1,11 @@
+---
+title: "Mcp toolbox integrations"
+description: "Integrate with Mcp toolbox using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/toolbox"
+category: "docs"
+tags: [docs, integrations, providers, toolbox]
+---
+
 # Mcp toolbox integrations
 
 > Integrate with Mcp toolbox using LangChain Python.
@@ -14,9 +22,13 @@ This is particularly useful when you have an agent that needs to perform a varie
 
 To get started, you'll need to install the necessary package:
 
+**pip**
+
 ```bash
 pip install toolbox-langchain
 ```
+
+**uv**
 
 ```bash
 uv add toolbox-langchain
@@ -31,7 +43,7 @@ For a complete, step-by-step guide on how to create, configure, and use MCP Tool
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/toolbox.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

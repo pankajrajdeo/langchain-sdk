@@ -1,3 +1,11 @@
+---
+title: "Experiment configuration"
+description: "LangSmith supports several configuration options for experiments:"
+source: "https://docs.langchain.com/langsmith/experiment-configuration"
+category: "docs"
+tags: [docs, langsmith, experiment-configuration]
+---
+
 # Experiment configuration
 
 LangSmith supports several configuration options for experiments:
@@ -33,7 +41,7 @@ The `max_concurrency` argument uses a semaphore to limit concurrent tasks. `aeva
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/experiment-configuration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

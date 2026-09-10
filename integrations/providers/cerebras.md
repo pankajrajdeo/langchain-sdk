@@ -1,3 +1,11 @@
+---
+title: "Cerebras integrations"
+description: "Integrate with Cerebras using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/cerebras"
+category: "docs"
+tags: [docs, integrations, providers, cerebras]
+---
+
 # Cerebras integrations
 
 > Integrate with Cerebras using LangChain Python.
@@ -20,9 +28,13 @@ For more information about Cerebras Cloud, visit [cloud.cerebras.ai](https://clo
 
 Install the integration package:
 
+**pip**
+
 ```bash
 pip install langchain-cerebras
 ```
+
+**uv**
 
 ```bash
 uv add langchain-cerebras
@@ -43,7 +55,7 @@ See a [usage example](../chat/cerebras.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cerebras.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

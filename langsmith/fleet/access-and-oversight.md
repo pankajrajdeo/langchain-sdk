@@ -1,3 +1,11 @@
+---
+title: "Access & oversight"
+description: "Control who can access agents, how they authenticate, and audit everything they do."
+source: "https://docs.langchain.com/langsmith/fleet/access-and-oversight"
+category: "docs"
+tags: [docs, langsmith, fleet, access-and-oversight]
+---
+
 # Access & oversight
 
 > Control who can access agents, how they authenticate, and audit everything they do.
@@ -133,7 +141,7 @@ For setup instructions, see [Human-in-the-loop](essentials.md#human-in-the-loop)
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/access-and-oversight.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

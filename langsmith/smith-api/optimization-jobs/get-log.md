@@ -1,8 +1,18 @@
+---
+title: "Get log"
+description: "Get a specific prompt optimization job log."
+source: "https://docs.langchain.com/langsmith/smith-api/optimization-jobs/get-log"
+category: "docs"
+tags: [docs, langsmith, smith-api, optimization-jobs, get-log]
+---
+
 # Get log
 
 > Get a specific prompt optimization job log.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/repos/{owner}/{repo}/optimization-jobs/{job_id}/logs/{log_id}**
 
 ````yaml
 openapi: 3.1.0

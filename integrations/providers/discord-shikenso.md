@@ -1,3 +1,11 @@
+---
+title: "Discord integrations"
+description: "Integrate with Discord using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/discord-shikenso"
+category: "docs"
+tags: [docs, integrations, providers, discord-shikenso]
+---
+
 # Discord integrations
 
 > Integrate with Discord using LangChain Python.
@@ -8,9 +16,13 @@
 
 Install the `langchain-discord-shikenso` package:
 
+**pip**
+
 ```bash
 pip install langchain-discord-shikenso
 ```
+
+**uv**
 
 ```bash
 uv add langchain-discord-shikenso
@@ -73,7 +85,7 @@ Check the [Discord Developer Docs](https://discord.com/developers/docs/intro) fo
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/discord-shikenso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

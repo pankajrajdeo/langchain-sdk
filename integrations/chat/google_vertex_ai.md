@@ -1,3 +1,11 @@
+---
+title: "ChatVertexAI integration"
+description: "Integrate with the ChatVertexAI chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/google_vertex_ai"
+category: "docs"
+tags: [docs, integrations, chat, google_vertex_ai]
+---
+
 # ChatVertexAI integration
 
 > Integrate with the ChatVertexAI chat model using LangChain Python.
@@ -149,7 +157,7 @@ For detailed documentation of all features and configuration options, head to th
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

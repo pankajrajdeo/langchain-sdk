@@ -1,3 +1,11 @@
+---
+title: "Feature Store on Gemini Enterprise Agent Platform integration"
+description: "Integrate with the Feature Store on Gemini Enterprise Agent Platform vector store using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_feature_store"
+category: "docs"
+tags: [docs, integrations, vectorstores, google_vertex_ai_feature_store]
+---
+
 # Feature Store on Gemini Enterprise Agent Platform integration
 
 > Integrate with the Feature Store on Gemini Enterprise Agent Platform vector store using LangChain Python.
@@ -184,7 +192,7 @@ store.to_bq_vector_store()  # pass optional VertexFSVectorStore parameters as ar
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_vertex_ai_feature_store.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

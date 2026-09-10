@@ -1,3 +1,11 @@
+---
+title: "How to set up an application with pyproject.toml"
+description: "An application must be configured with a configuration file in order to be deployed to LangSmith (or to be self-hosted). This how-to guide discusses the basic steps to set up an application for..."
+source: "https://docs.langchain.com/langsmith/setup-pyproject"
+category: "docs"
+tags: [docs, langsmith, setup-pyproject]
+---
+
 # How to set up an application with pyproject.toml
 
 An application must be configured with a [configuration file](cli.md#configuration-file) in order to be deployed to LangSmith (or to be self-hosted). This how-to guide discusses the basic steps to set up an application for deployment using `pyproject.toml` to define your package's dependencies.
@@ -220,7 +228,7 @@ After you setup your project and place it in a GitHub repository, it's time to [
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/setup-pyproject.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Start a sandbox"
+description: "Start a stopped or failed sandbox. This endpoint is not idempotent."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/start-a-sandbox"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, start-a-sandbox]
+---
+
 # Start a sandbox
 
 > Start a stopped or failed sandbox. This endpoint is not idempotent.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/boxes/{name}/start**
 
 ````yaml
 openapi: 3.1.0

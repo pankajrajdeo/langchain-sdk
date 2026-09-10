@@ -1,8 +1,18 @@
+---
+title: "Create Background Run"
+description: "Create a run and return the run ID immediately. Don't wait for the final run output."
+source: "https://docs.langchain.com/langsmith/agent-server-api/stateless-runs/create-background-run"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, stateless-runs, create-background-run]
+---
+
 # Create Background Run
 
 > Create a run and return the run ID immediately. Don't wait for the final run output.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /runs**
 
 ````yaml
 openapi: 3.1.0

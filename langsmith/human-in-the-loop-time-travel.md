@@ -1,3 +1,11 @@
+---
+title: "Time travel using the server API"
+description: "LangGraph provides the time travel functionality to resume execution from a prior checkpoint, either replaying the same state or modifying it to explore alternatives. In all cases, resuming past..."
+source: "https://docs.langchain.com/langsmith/human-in-the-loop-time-travel"
+category: "docs"
+tags: [docs, langsmith, human-in-the-loop-time-travel]
+---
+
 # Time travel using the server API
 
 LangGraph provides the [**time travel**](../langgraph/use-time-travel.md) functionality to resume execution from a prior checkpoint, either replaying the same state or modifying it to explore alternatives. In all cases, resuming past execution produces a new fork in the history.
@@ -228,7 +236,7 @@ curl --request POST \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/human-in-the-loop-time-travel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

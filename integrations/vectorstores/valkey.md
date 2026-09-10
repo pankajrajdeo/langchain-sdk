@@ -1,3 +1,11 @@
+---
+title: "Valkey"
+description: "Valkey is an open source, high-performance key/value datastore that supports workloads such as caching, message queues, and can act as a primary database. Valkey can run as either a standalone daemon..."
+source: "https://docs.langchain.com/oss/python/integrations/vectorstores/valkey"
+category: "docs"
+tags: [docs, integrations, vectorstores, valkey]
+---
+
 # Valkey
 
 > [Valkey](https://valkey.io/) is an open source, high-performance key/value datastore that supports workloads such as caching, message queues, and can act as a primary database. Valkey can run as either a standalone daemon or in a cluster, with options for replication and high availability.
@@ -8,9 +16,13 @@ This page covers how to use the Valkey vector store with [Amazon ElastiCache for
 
 Install the required dependencies:
 
+**pip**
+
 ```bash
 pip install "langchain-aws[valkey]"
 ```
+
+**uv**
 
 ```bash
 uv add langchain-aws --extra valkey
@@ -176,7 +188,7 @@ For detailed API documentation, see [`ValkeyVectorStore`](https://reference.lang
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/valkey.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

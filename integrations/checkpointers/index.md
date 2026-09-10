@@ -1,3 +1,11 @@
+---
+title: "Checkpointer integrations"
+description: "Integrate with checkpointer backends for LangGraph persistence."
+source: "https://docs.langchain.com/oss/python/integrations/checkpointers/index"
+category: "docs"
+tags: [docs, integrations, checkpointers]
+---
+
 # Checkpointer integrations
 
 > Integrate with checkpointer backends for LangGraph persistence.
@@ -26,7 +34,7 @@ To implement your own checkpointer for a custom storage backend, see [Build a cu
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/checkpointers/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

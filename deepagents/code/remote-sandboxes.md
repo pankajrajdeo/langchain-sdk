@@ -1,3 +1,11 @@
+---
+title: "Use remote sandboxes"
+description: "Run Deep Agents Code tool execution in LangSmith, AgentCore, Daytona, Modal, Runloop, Vercel, or E2B sandboxes. Install provider dependencies, set credentials, and use flags and setup scripts."
+source: "https://docs.langchain.com/oss/deepagents/code/remote-sandboxes"
+category: "docs"
+tags: [docs, deepagents, code, remote-sandboxes]
+---
+
 # Use remote sandboxes
 
 > Run Deep Agents Code tool execution in LangSmith, AgentCore, Daytona, Modal, Runloop, Vercel, or E2B sandboxes. Install provider dependencies, set credentials, and use flags and setup scripts.
@@ -13,45 +21,65 @@ Each built-in provider ships as an optional extra. Install one from within a ses
 Included by default when installing `deepagents-code`. No extra installation needed.
 
 #### AgentCore
+**In session**
+
 ```txt
 /install agentcore
 ```
+
+**Shell**
 
 ```bash
 dcode --install agentcore
 ```
 
 #### Daytona
+**In session**
+
 ```txt
 /install daytona
 ```
+
+**Shell**
 
 ```bash
 dcode --install daytona
 ```
 
 #### Modal
+**In session**
+
 ```txt
 /install modal
 ```
+
+**Shell**
 
 ```bash
 dcode --install modal
 ```
 
 #### Runloop
+**In session**
+
 ```txt
 /install runloop
 ```
+
+**Shell**
 
 ```bash
 dcode --install runloop
 ```
 
 #### Vercel
+**In session**
+
 ```txt
 /install vercel
 ```
+
+**Shell**
 
 ```bash
 dcode --install vercel
@@ -60,9 +88,13 @@ dcode --install vercel
 #### E2B
 E2B is a [third-party provider](#third-party-providers) published by the `langchain-e2b` package. Install it as a package, not a `deepagents-code` extra:
 
+**In session**
+
 ```txt
 /install langchain-e2b --package
 ```
+
+**Shell**
 
 ```bash
 dcode --install langchain-e2b --package
@@ -340,7 +372,7 @@ Deep Agents Code expands `${VAR}` references in setup scripts using your local e
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/remote-sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

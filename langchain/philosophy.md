@@ -1,3 +1,11 @@
+---
+title: "Philosophy"
+description: "LangChain exists to be the easiest place to start building with LLMs, while also being flexible and production-ready."
+source: "https://docs.langchain.com/oss/python/langchain/philosophy"
+category: "docs"
+tags: [docs, langchain, philosophy]
+---
+
 # Philosophy
 
 > LangChain exists to be the easiest place to start building with LLMs, while also being flexible and production-ready.
@@ -107,7 +115,7 @@ While LangChain provides flexible building blocks for custom agent architectures
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/philosophy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

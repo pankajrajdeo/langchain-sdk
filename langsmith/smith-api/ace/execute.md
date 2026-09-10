@@ -1,8 +1,18 @@
+---
+title: "Execute"
+description: "Execute some custom code for testing purposes."
+source: "https://docs.langchain.com/langsmith/smith-api/ace/execute"
+category: "docs"
+tags: [docs, langsmith, smith-api, ace, execute]
+---
+
 # Execute
 
 > Execute some custom code for testing purposes.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/ace/execute**
 
 ````yaml
 openapi: 3.1.0

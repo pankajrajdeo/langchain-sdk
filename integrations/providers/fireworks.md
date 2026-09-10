@@ -1,3 +1,11 @@
+---
+title: "Fireworks integrations"
+description: "Integrate with Fireworks AI using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/fireworks"
+category: "docs"
+tags: [docs, integrations, providers, fireworks]
+---
+
 # Fireworks integrations
 
 > Integrate with Fireworks AI using LangChain Python.
@@ -6,9 +14,13 @@
 
 ## Installation and setup
 
+**pip**
+
 ```bash
 pip install langchain-fireworks
 ```
+
+**uv**
 
 ```bash
 uv add langchain-fireworks
@@ -27,7 +39,7 @@ Embedding models served by Fireworks AI.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

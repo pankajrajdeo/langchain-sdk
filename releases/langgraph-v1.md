@@ -1,3 +1,11 @@
+---
+title: "What's new in LangGraph v1"
+description: "LangGraph v1 is a stability-focused release for the agent runtime. It keeps the core graph APIs and execution model unchanged, while refining type safety, docs, and developer ergonomics."
+source: "https://docs.langchain.com/oss/python/releases/langgraph-v1"
+category: "docs"
+tags: [docs, releases, langgraph-v1]
+---
+
 # What's new in LangGraph v1
 
 **LangGraph v1 is a stability-focused release for the agent runtime.** It keeps the core graph APIs and execution model unchanged, while refining type safety, docs, and developer ergonomics.
@@ -15,9 +23,13 @@ LangChain's `create_agent` runs on LangGraph. Use LangChain for a fast start; dr
 
 To upgrade,
 
+**pip**
+
 ```bash
 pip install -U langgraph
 ```
+
+**uv**
 
 ```bash
 uv add langgraph
@@ -62,7 +74,7 @@ Report issues or contribute
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

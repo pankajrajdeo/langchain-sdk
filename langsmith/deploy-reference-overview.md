@@ -1,3 +1,11 @@
+---
+title: "Reference"
+description: "Reference for the LangSmith Deployment SDKs, CLI, and APIs for deploying and interacting with agents."
+source: "https://docs.langchain.com/langsmith/deploy-reference-overview"
+category: "docs"
+tags: [docs, langsmith, deploy-reference-overview]
+---
+
 # Reference
 
 > Reference for the LangSmith Deployment SDKs, CLI, and APIs for deploying and interacting with agents.
@@ -31,7 +39,7 @@ Version history and release notes for the Agent Server runtime.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-reference-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Remove repo owner"
+description: "Remove an owner from a repo."
+source: "https://docs.langchain.com/langsmith/smith-api/ownerships/remove-repo-owner"
+category: "docs"
+tags: [docs, langsmith, smith-api, ownerships, remove-repo-owner]
+---
+
 # Remove repo owner
 
 > Remove an owner from a repo.
@@ -5,6 +13,8 @@
 Requires being an existing owner of the repo.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/repos/{owner}/{repo}/owners**
 
 ````yaml
 openapi: 3.1.0

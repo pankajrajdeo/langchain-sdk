@@ -1,3 +1,11 @@
+---
+title: "MODEL_RATE_LIMIT"
+description: "Currently only used in langchainjs (JavaScript/TypeScript)."
+source: "https://docs.langchain.com/oss/python/langchain/errors/MODEL_RATE_LIMIT"
+category: "docs"
+tags: [docs, langchain, errors, model_rate_limit]
+---
+
 # MODEL_RATE_LIMIT
 
 > [!NOTE]
@@ -23,7 +31,7 @@ To resolve this error, you can:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_RATE_LIMIT.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Get experiment view override configuration by specific ID"
+description: "Retrieves a specific experiment view override configuration using both dataset ID and override ID. This endpoint provides more precise access to experiment view overrides when you have the specific..."
+source: "https://docs.langchain.com/langsmith/smith-api/experiment-view-overrides/get-experiment-view-override-configuration-by-specific-id"
+category: "docs"
+tags: [docs, langsmith, smith-api, experiment-view-overrides, get-experiment-view-override-configuration-by-specific-id]
+---
+
 # Get experiment view override configuration by specific ID
 
 > Retrieves a specific experiment view override configuration using both dataset ID and override ID.
@@ -13,6 +21,8 @@ The response includes the same column override information as the dataset-level 
 Both the dataset and override must exist and be accessible by the authenticated user.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /datasets/{dataset_id}/experiment-view-overrides/{id}**
 
 ````yaml
 openapi: 3.1.0

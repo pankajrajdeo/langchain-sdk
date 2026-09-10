@@ -1,8 +1,18 @@
+---
+title: "Read shared dataset feedback"
+description: "Get feedback for runs in projects run over a dataset that has been shared."
+source: "https://docs.langchain.com/langsmith/smith-api/public/read-shared-dataset-feedback"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, read-shared-dataset-feedback]
+---
+
 # Read shared dataset feedback
 
 > Get feedback for runs in projects run over a dataset that has been shared.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/datasets/feedback**
 
 ````yaml
 openapi: 3.1.0

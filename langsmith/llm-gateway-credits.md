@@ -1,3 +1,11 @@
+---
+title: "Gateway Credits"
+description: "Use Gateway Credits to access models without a provider key, just authenticate with LangSmith."
+source: "https://docs.langchain.com/langsmith/llm-gateway-credits"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-credits]
+---
+
 # Gateway Credits
 
 > Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
@@ -49,12 +57,16 @@ Before using Gateway Credits:
 
 Point an OpenAI-compatible client at `https://gateway.smith.langchain.com/v1`, authenticate with your LangSmith API key, and set `model` to a hosted model ID.
 
+**cURL**
+
 ```bash
 curl https://gateway.smith.langchain.com/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"model":"moonshotai/kimi-k3","messages":[{"role":"user","content":"ping"}]}'
 ```
+
+**OpenAI SDK**
 
 ```python
 import os
@@ -71,6 +83,8 @@ response = client.chat.completions.create(
 )
 print(response.choices[0].message.content)
 ```
+
+**LangChain**
 
 ```python
 import os
@@ -119,7 +133,7 @@ Like all gateway traffic, hosted-model calls are traced to LangSmith. For where 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-credits.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

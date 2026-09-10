@@ -1,3 +1,11 @@
+---
+title: "Models"
+description: "Configure model providers and parameters for Deep Agents"
+source: "https://docs.langchain.com/oss/python/deepagents/models"
+category: "docs"
+tags: [docs, deepagents, models]
+---
+
 # Models
 
 > Configure model providers and parameters for Deep Agents
@@ -51,6 +59,8 @@ Pass a model string to [`create_deep_agent`](https://reference.langchain.com/pyt
 
 To configure model-specific parameters, use [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model) or instantiate a provider model class directly:
 
+**init_chat_model**
+
 ```python
 from langchain.chat_models import init_chat_model
 from deepagents import create_deep_agent
@@ -61,6 +71,8 @@ model = init_chat_model(
 )
 agent = create_deep_agent(model=model)
 ```
+
+**Provider package**
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -147,6 +159,9 @@ result = agent.invoke(
 )
 ```
 
+#### [View example trace](https://smith.langchain.com/public/7dd40477-eaed-45b0-beb8-59be80e1758d/r)
+Open a public LangSmith run for this example.
+
 > [!TIP]
 > For more dynamic model patterns (for example routing based on conversation complexity or cost optimization), see [Dynamic model](../langchain/models.md#dynamic-model-selection) in the LangChain agents guide.
 
@@ -157,7 +172,7 @@ result = agent.invoke(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/models.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

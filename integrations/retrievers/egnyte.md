@@ -1,3 +1,11 @@
+---
+title: "EgnyteRetriever"
+description: "This will help you get started with the Egnyte retriever. For detailed documentation of all EgnyteRetriever features and configurations head to the API reference."
+source: "https://docs.langchain.com/oss/python/integrations/retrievers/egnyte"
+category: "docs"
+tags: [docs, integrations, retrievers, egnyte]
+---
+
 # EgnyteRetriever
 
 This will help you get started with the Egnyte [retriever](../../deepagents/retrieval.md). For detailed documentation of all `EgnyteRetriever` features and configurations head to the [API reference](https://github.com/egnyte/egnyte-langchain-connector).
@@ -197,7 +205,7 @@ If you have questions, check out the [Egnyte developer documentation](https://de
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/egnyte.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Get agent builder integrations settings"
+description: "Returns default policy, integration overrides, and known integrations for the current workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/integrations/get-agent-builder-integrations-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, integrations, get-agent-builder-integrations-settings]
+---
+
 # Get agent builder integrations settings
 
 > Returns default policy, integration overrides, and known integrations for the current workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /v1/agent-builder/integrations**
 
 ````yaml
 openapi: 3.1.0

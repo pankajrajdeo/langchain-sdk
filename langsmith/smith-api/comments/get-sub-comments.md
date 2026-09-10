@@ -1,6 +1,16 @@
+---
+title: "Get sub comments"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/comments/{owner}/{repo}/{parent_comment_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/comments/get-sub-comments"
+category: "docs"
+tags: [docs, langsmith, smith-api, comments, get-sub-comments]
+---
+
 # Get sub comments
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/comments/{owner}/{repo}/{parent_comment_id}**
 
 ````yaml
 openapi: 3.1.0

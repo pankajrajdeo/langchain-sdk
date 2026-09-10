@@ -1,8 +1,18 @@
+---
+title: "Delete a tool by handle"
+description: "Deletes a tool identified by its handle."
+source: "https://docs.langchain.com/langsmith/smith-api/tools/delete-a-tool-by-handle"
+category: "docs"
+tags: [docs, langsmith, smith-api, tools, delete-a-tool-by-handle]
+---
+
 # Delete a tool by handle
 
 > Deletes a tool identified by its handle.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/tools/{handle}**
 
 ````yaml
 openapi: 3.1.0

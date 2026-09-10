@@ -1,8 +1,18 @@
+---
+title: "Delete SSO settings"
+description: "Delete SSO provider settings for the current organization."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/delete-sso-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, delete-sso-settings]
+---
+
 # Delete SSO settings
 
 > Delete SSO provider settings for the current organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/current/sso-settings/{id}**
 
 ````yaml
 openapi: 3.1.0

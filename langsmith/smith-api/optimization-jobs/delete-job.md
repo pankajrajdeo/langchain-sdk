@@ -1,8 +1,18 @@
+---
+title: "Delete job"
+description: "Delete a prompt optimization job."
+source: "https://docs.langchain.com/langsmith/smith-api/optimization-jobs/delete-job"
+category: "docs"
+tags: [docs, langsmith, smith-api, optimization-jobs, delete-job]
+---
+
 # Delete job
 
 > Delete a prompt optimization job.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/repos/{owner}/{repo}/optimization-jobs/{job_id}**
 
 ````yaml
 openapi: 3.1.0

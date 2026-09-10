@@ -1,8 +1,18 @@
+---
+title: "Remove member from current org"
+description: "Remove a user from the current organization."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/remove-member-from-current-org"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, remove-member-from-current-org]
+---
+
 # Remove member from current org
 
 > Remove a user from the current organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/current/members/{identity_id}**
 
 ````yaml
 openapi: 3.1.0

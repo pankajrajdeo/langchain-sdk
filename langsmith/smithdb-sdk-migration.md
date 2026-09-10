@@ -1,3 +1,11 @@
+---
+title: "Migrate to SmithDB-backed SDK methods"
+description: "Migrate your existing LangSmith SDK methods to their SmithDB-backed equivalents for faster agent observability."
+source: "https://docs.langchain.com/langsmith/smithdb-sdk-migration"
+category: "docs"
+tags: [docs, langsmith, smithdb-sdk-migration]
+---
+
 # Migrate to SmithDB-backed SDK methods
 
 > Migrate your existing LangSmith SDK methods to their SmithDB-backed equivalents for faster agent observability.
@@ -35,7 +43,7 @@ The [LangSmith CLI](langsmith-cli.md) queries the same SmithDB-backed endpoints 
 
 ## About self-hosted
 
-* The new methods documented in this guide require `>=0.16` self-hosted version, independent of the data store used.
+* The new methods documented in this guide require self-hosted version 0.16 or later, independent of the data store used.
 * The deprecated methods stop working once ClickHouse is disabled.
 * Where possible, the SDK raises a warning or error identifying the version to upgrade to, instead of failing without explanation.
 
@@ -178,7 +186,7 @@ The following methods are discontinued. They call the retired `/feedback/formula
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

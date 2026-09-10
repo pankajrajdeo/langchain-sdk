@@ -1,3 +1,11 @@
+---
+title: "Validate rule"
+description: "Validate a rule by executing it with test data without creating a saved rule."
+source: "https://docs.langchain.com/langsmith/smith-api/run/validate-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, validate-rule]
+---
+
 # Validate rule
 
 > Validate a rule by executing it with test data without creating a saved rule.
@@ -12,6 +20,8 @@ The evaluator execution traces are written to the database (in the "evaluators"
 project), which allows users to see the evaluator execution history.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/rules/validate**
 
 ````yaml
 openapi: 3.1.0

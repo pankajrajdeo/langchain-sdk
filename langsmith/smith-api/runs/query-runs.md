@@ -1,3 +1,11 @@
+---
+title: "Query runs"
+description: "Returns a paginated list of runs for the given projects within min/max start_time. Supports filters, cursor pagination, and selects to select fields to return."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/query-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, query-runs]
+---
+
 # Query runs
 
 > Returns a paginated list of runs for the given projects within min/max start_time. Supports filters, cursor pagination, and `selects` to select fields to return.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/runs/query**
 
 ````yaml
 openapi: 3.1.0

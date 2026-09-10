@@ -1,3 +1,11 @@
+---
+title: "Test a ReAct agent with Pytest/Vitest and LangSmith"
+description: "This tutorial will show you how to use LangSmith's integrations with popular testing tools (Pytest, Vitest, and Jest) to evaluate your LLM application. We will create a ReAct agent that answers..."
+source: "https://docs.langchain.com/langsmith/test-react-agent-pytest"
+category: "docs"
+tags: [docs, langsmith, test-react-agent-pytest]
+---
+
 # Test a ReAct agent with Pytest/Vitest and LangSmith
 
 This tutorial will show you how to use LangSmith's integrations with popular testing tools (Pytest, Vitest, and Jest) to evaluate your LLM application. We will create a ReAct agent that answers questions about publicly traded stocks and write a comprehensive test suite for it.
@@ -10,9 +18,13 @@ This tutorial uses [LangGraph](https://langchain-ai.github.io/langgraph/tutorial
 
 First, install the packages required for making the agent:
 
+**Python**
+
 ```bash
 pip install -U langgraph langchain[openai] langchain-community e2b-code-interpreter
 ```
+
+**TypeScript**
 
 ```bash
 yarn add @langchain/openai @langchain/community @langchain/langgraph @langchain/core @e2b/code-interpreter @polygon.io/client-js openai zod
@@ -20,14 +32,20 @@ yarn add @langchain/openai @langchain/community @langchain/langgraph @langchain/
 
 Next, install the testing framework:
 
+**Pytest**
+
 ```bash
 # Make sure you have langsmith>=0.3.1
 pip install -U "langsmith[pytest]"
 ```
 
+**Vitest**
+
 ```bash
 yarn add -D langsmith vitest
 ```
+
+**Jest**
 
 ```bash
 yarn add -D langsmith jest
@@ -60,6 +78,8 @@ First we are going to define the tools we are going to use in our agent. There a
 
 > [!WARNING]
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
+
+**Python**
 
 ```python
 from langchain_community.tools import TavilySearchResults
@@ -106,6 +126,8 @@ def ticker_tool(query: TickerToolInput) -> str:
 
 > [!WARNING]
 > The `@langchain/community` package is no longer maintained. Examples that import from `@langchain/community` may be outdated or broken. Use with caution.
+
+**TypeScript**
 
 ```typescript
 import { TavilySearchResults } from "@langchain/community/tools/tavily_search";
@@ -172,6 +194,8 @@ const tickerTool = tool(async (query) => {
 
 Now that we have defined all of our tools, we can use [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) to create our agent.
 
+**Python**
+
 ```python
 from typing_extensions import Annotated, TypedDict
 from langchain.agents import create_agent
@@ -188,6 +212,8 @@ agent = create_agent(
     system_prompt="You are a financial expert. Respond to the users query accurately",
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { z } from "zod";
@@ -218,6 +244,8 @@ Now that we have defined our agent, let's write a few tests to ensure basic func
 
 We need to first set up a test file and add the imports needed at the top of the file.
 
+**Pytest**
+
 ```python
 Create a `tests/test_agent.py` file.
 
@@ -225,6 +253,8 @@ from app import agent, polygon_aggregates, search_tool # import from wherever yo
 import pytest
 from langsmith import testing as t
 ```
+
+**Vitest**
 
 ```typescript
 Name your test file `agent.vitest.eval.ts`
@@ -238,6 +268,8 @@ ls.describe("Agent Tests", () => {
   // PLACE TESTS Here
 });
 ```
+
+**Jest**
 
 ```typescript
 Name your test file `agent.jest.eval.ts`
@@ -255,6 +287,8 @@ ls.describe("Agent Tests", () => {
 ### Test 1: Handle off-topic questions
 
 The first test will be a simple check that the agent does not use tools on irrelevant queries.
+
+**Pytest**
 
 ```python
 @pytest.mark.langsmith
@@ -279,6 +313,8 @@ def test_no_tools_on_offtopic_query(query: str) -> None:
   assert actual == expected
 ```
 
+**Vitest**
+
 ```typescript
 ls.test.each([
   { inputs: { query: "Hello!" }, expected: { numMessages: 2 } },
@@ -294,6 +330,8 @@ ls.test.each([
   }
 );
 ```
+
+**Jest**
 
 ```typescript
 ls.test.each([
@@ -314,6 +352,8 @@ ls.test.each([
 ### Test 2: Simple tool calling
 
 For tool calling, we are going to verify that the agent calls the correct tool with the correct parameters.
+
+**Pytest**
 
 ```python
 @pytest.mark.langsmith
@@ -337,6 +377,8 @@ def test_searches_for_correct_ticker() -> None:
   # Check that the right ticker was queried
   assert actual == expected
 ```
+
+**Vitest**
 
 ```typescript
 ls.test(
@@ -363,6 +405,8 @@ ls.test(
   }
 );
 ```
+
+**Jest**
 
 ```typescript
 ls.test(
@@ -393,6 +437,8 @@ ls.test(
 ### Test 3: Complex tool calling
 
 Some tool calls are easier to test than others. With the ticker lookup, we can assert that the correct ticker is searched. With the coding tool, the inputs and outputs of the tool are much less constrained, and there are lots of ways to get to the right answer. In this case, it's simpler to test that the tool is used correctly by running the full agent and asserting that it both calls the coding tool and that it ends up with the right answer.
+
+**Pytest**
 
 ```python
 @pytest.mark.langsmith
@@ -426,6 +472,8 @@ def test_executes_code_when_needed() -> None:
   assert abs(result["structured_response"]["numeric_answer"] - expected) <= 0.01
 ```
 
+**Vitest**
+
 ```typescript
 ls.test(
   "should execute code when needed",
@@ -456,6 +504,8 @@ ls.test(
   }
 );
 ```
+
+**Jest**
 
 ```typescript
 ls.test(
@@ -490,6 +540,8 @@ ls.test(
 ### Test 4: LLM-as-a-judge
 
 We are going to ensure that the agent's answer is grounded in the search results by running an LLM-as-a-judge evaluation. In order to trace the LLM-as-a-Judge call separately from our agent, we will use the LangSmith provided `trace_feedback` context manager in Python and `wrapEvaluator` function in JS/TS.
+
+**Pytest**
 
 ```python
 from typing_extensions import Annotated, TypedDict
@@ -547,6 +599,8 @@ def test_grounded_in_source_info() -> None:
   assert grade['score']
 ```
 
+**Vitest**
+
 ```typescript
 // THIS CODE GOES OUTSIDE THE TEST - IT IS JUST A HELPER FUNCTION
 const judgeLLM = new ChatOpenAI({ model: "gpt-5.5" });
@@ -588,6 +642,8 @@ ls.test(
   }
 );
 ```
+
+**Jest**
 
 ```typescript
 // THIS CODE GOES OUTSIDE THE TEST - IT IS JUST A HELPER FUNCTION
@@ -638,6 +694,8 @@ Once you have setup your config files (if you are using Vitest or Jest), you can
 <details>
 <summary>Config files for Vitest/Jest</summary>
 
+**Vitest**
+
 ```typescript
 Create a `ls.vitest.config.ts` file:
 
@@ -652,6 +710,8 @@ export default defineConfig({
   },
 });
 ```
+
+**Jest**
 
 ```javascript
 Create a `ls.jest.config.ts` file:
@@ -674,13 +734,19 @@ module.exports = {
 
 </details>
 
+**Pytest**
+
 ```bash
 pytest --langsmith-output tests
 ```
 
+**Vitest**
+
 ```bash
 yarn vitest --config ls.vitest.config.ts
 ```
+
+**Jest**
 
 ```bash
 yarn jest --config ls.jest.config.ts
@@ -697,6 +763,8 @@ Remember to also add the config files for Vitest and Jest to your project.
 
 > [!WARNING]
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
+
+**Python**
 
 ```python
 from e2b_code_interpreter import Sandbox
@@ -740,6 +808,8 @@ agent = create_agent(
 
 > [!WARNING]
 > The `@langchain/community` package is no longer maintained. Examples that import from `@langchain/community` may be outdated or broken. Use with caution.
+
+**TypeScript**
 
 ```typescript
 import { ChatOpenAI } from "@langchain/openai";
@@ -823,6 +893,8 @@ export default agent;
 
 <details>
 <summary>Test code</summary>
+
+**Pytest**
 
 ```python
 # from app import agent, polygon_aggregates, search_tool # import from wherever your agent is defined
@@ -955,6 +1027,8 @@ def test_grounded_in_source_info() -> None:
   assert grade["score"]
 ```
 
+**Vitest**
+
 ```typescript
 import { expect } from "vitest";
 import * as ls from "langsmith/vitest";
@@ -1062,6 +1136,8 @@ ls.describe("Agent Tests", () => {
   );
 });
 ```
+
+**Jest**
 
 ```typescript
 import { expect } from "@jest/globals";
@@ -1171,7 +1247,7 @@ ls.describe("Agent Tests", () => {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/test-react-agent-pytest.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

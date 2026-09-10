@@ -1,8 +1,18 @@
+---
+title: "Restart a backfill job"
+description: "Deletes the backfill job record, causing the backfill to restart from the beginning on the next cron tick. Requires instance admin access."
+source: "https://docs.langchain.com/langsmith/smith-api/backfills/restart-a-backfill-job"
+category: "docs"
+tags: [docs, langsmith, smith-api, backfills, restart-a-backfill-job]
+---
+
 # Restart a backfill job
 
 > Deletes the backfill job record, causing the backfill to restart from the beginning on the next cron tick. Requires instance admin access.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/ops/backfills/restart**
 
 ````yaml
 openapi: 3.1.0

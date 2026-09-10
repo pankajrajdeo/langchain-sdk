@@ -1,3 +1,11 @@
+---
+title: "Implement a CI/CD pipeline using LangSmith Deployment and Evaluation"
+description: "This guide demonstrates how to implement a comprehensive CI/CD pipeline for AI agent applications deployed in LangSmith Deployment. In this example, you'll use the LangGraph open source framework for..."
+source: "https://docs.langchain.com/langsmith/cicd-pipeline-example"
+category: "docs"
+tags: [docs, langsmith, cicd-pipeline-example]
+---
+
 # Implement a CI/CD pipeline using LangSmith Deployment and Evaluation
 
 This guide demonstrates how to implement a comprehensive CI/CD pipeline for AI agent applications deployed in LangSmith Deployment. In this example, you'll use the [LangGraph](../langgraph/overview.md) open source framework for orchestrating and building the agent, [LangSmith](observability.md) for observability and evaluations. This pipeline is based on the [cicd-pipeline-example repository](https://github.com/langchain-ai/cicd-pipeline-example).
@@ -466,7 +474,7 @@ For self-hosted LangSmith instances, use `http(s)://<langsmith-url>/api-host` wh
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cicd-pipeline-example.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

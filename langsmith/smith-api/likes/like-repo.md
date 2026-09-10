@@ -1,8 +1,18 @@
+---
+title: "Like repo"
+description: "Like a repo."
+source: "https://docs.langchain.com/langsmith/smith-api/likes/like-repo"
+category: "docs"
+tags: [docs, langsmith, smith-api, likes, like-repo]
+---
+
 # Like repo
 
 > Like a repo.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/likes/{owner}/{repo}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "Get Assistant Subgraphs by Namespace"
+description: "Get an assistant's subgraphs filtered by namespace."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-subgraphs-by-namespace"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, get-assistant-subgraphs-by-namespace]
+---
+
 # Get Assistant Subgraphs by Namespace
 
 > Get an assistant's subgraphs filtered by namespace.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /assistants/{assistant_id}/subgraphs/{namespace}**
 
 ````yaml
 openapi: 3.1.0

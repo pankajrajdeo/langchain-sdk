@@ -1,8 +1,18 @@
+---
+title: "Update workspace TTL settings"
+description: "Update the longlived trace TTL for a workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/ttl-settings/update-workspace-ttl-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, ttl-settings, update-workspace-ttl-settings]
+---
+
 # Update workspace TTL settings
 
 > Update the longlived trace TTL for a workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /workspaces/current/ttl-settings**
 
 ````yaml
 openapi: 3.1.0

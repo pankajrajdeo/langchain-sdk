@@ -1,3 +1,11 @@
+---
+title: "Agent Client Protocol (ACP)"
+description: "Expose Deep Agents over the Agent Client Protocol (ACP) to integrate with code editors and IDEs."
+source: "https://docs.langchain.com/oss/python/deepagents/acp"
+category: "docs"
+tags: [docs, deepagents, acp]
+---
+
 # Agent Client Protocol (ACP)
 
 > Expose Deep Agents over the Agent Client Protocol (ACP) to integrate with code editors and IDEs.
@@ -12,9 +20,13 @@ With the ACP protocol, you can make use of your custom deep agents with any ACP-
 
 Install the ACP integration package:
 
+**pip**
+
 ```bash
 pip install deepagents-acp
 ```
+
+**uv**
 
 ```bash
 uv add deepagents-acp
@@ -23,6 +35,8 @@ uv add deepagents-acp
 Then expose a deep agent over ACP.
 
 This starts an ACP server in stdio mode (it reads requests from stdin and writes responses to stdout). In practice, you usually run this as a command launched by an ACP client (for example, your editor), which then communicates with the server over stdio.
+
+**Google**
 
 ```python
 import asyncio
@@ -49,6 +63,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+**OpenAI**
+
 ```python
 import asyncio
 
@@ -73,6 +89,8 @@ async def main() -> None:
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+**Anthropic**
 
 ```python
 import asyncio
@@ -99,6 +117,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+**OpenRouter**
+
 ```python
 import asyncio
 
@@ -123,6 +143,8 @@ async def main() -> None:
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+**Fireworks**
 
 ```python
 import asyncio
@@ -149,6 +171,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+**Baseten**
+
 ```python
 import asyncio
 
@@ -173,6 +197,8 @@ async def main() -> None:
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+**Ollama**
 
 ```python
 import asyncio
@@ -268,7 +294,7 @@ toad acp "uv run python path/to/your_server.py" .
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/acp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

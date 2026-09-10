@@ -1,3 +1,11 @@
+---
+title: "Deploy Google ADK agents"
+description: "Deploy Google Agent Development Kit (ADK) agents to LangSmith Agent Server using the deployments-wrap-sdk package."
+source: "https://docs.langchain.com/langsmith/deploy-google-adk"
+category: "docs"
+tags: [docs, langsmith, deploy-google-adk]
+---
+
 # Deploy Google ADK agents
 
 > Deploy Google Agent Development Kit (ADK) agents to LangSmith Agent Server using the deployments-wrap-sdk package.
@@ -33,6 +41,8 @@ pip install "deployments-wrap-sdk[google-adk]"
 This minimal example builds an agent that returns the input as its response and does not require a model API key. The agent bypasses the LLM call so you can verify that the deployment works correctly before connecting a real model.
 
 Create `agent.py`:
+
+**agent.py**
 
 ```python
 from google.adk.agents import Agent
@@ -111,6 +121,8 @@ my-adk-agent/
 
 [`langgraph.json`](application-structure.md#configuration-file-concepts) points Agent Server at the exported symbol:
 
+**langgraph.json**
+
 ```json
 {
   "$schema": "https://langgra.ph/schema.json",
@@ -123,6 +135,8 @@ my-adk-agent/
 ```
 
 `pyproject.toml` declares dependencies:
+
+**pyproject.toml**
 
 ```toml
 [project]
@@ -177,6 +191,8 @@ For environment configuration, deployment types, and revision management, refer 
 ## Enable tracing
 
 `wrap()` calls `langsmith.integrations.google_adk.configure_google_adk()` automatically whenever LangSmith tracing is enabled, so all you need to do is set the environment variables on the deployment:
+
+**.env**
 
 ```bash
 LANGSMITH_API_KEY=your-langsmith-api-key
@@ -248,7 +264,7 @@ This means ADK's own session/state semantics are preserved end-to-end while the 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-google-adk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Managed Deep Agents"
+description: "Build your agent as a directory of files while LangSmith runs the harness and runtime."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents]
+---
+
 # Managed Deep Agents
 
 > Build your agent as a directory of files while LangSmith runs the harness and runtime.
@@ -6,7 +14,7 @@ Managed Deep Agents (MDA) is the simplest way to build and deploy production age
 
 You write the agent's intelligence: its instructions, the tools it can call, the skills it follows, and you select the model that drives it. MDA provides everything underneath:
 
-* **The Deep Agents harness**: The agent loop that plans, calls tools, manages a filesystem, and delegates to subagents. See [Deep Agents](https://docs.langchain.com/oss/javascript/deepagents/overview).
+* **The Deep Agents harness**: The agent loop that plans, calls tools, manages a filesystem, and delegates to subagents. See [Deep Agents](../../javascript/deepagents/overview.md).
 * **A managed runtime**: [LangSmith Deployment's Agent Server](../agent-server-overview.md) hosts and operates the agent, and keeps sessions running across restarts.
 
 ```mermaid
@@ -75,7 +83,7 @@ Add a custom search tool, durable memory, and a daily schedule.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

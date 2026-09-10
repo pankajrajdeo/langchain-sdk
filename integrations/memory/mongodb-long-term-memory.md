@@ -1,3 +1,11 @@
+---
+title: "Long-term memory with MongoDB Atlas"
+description: "Persist agent long-term memory with MongoDBStore and MongoDB Atlas."
+source: "https://docs.langchain.com/oss/python/integrations/memory/mongodb-long-term-memory"
+category: "docs"
+tags: [docs, integrations, memory, mongodb-long-term-memory]
+---
+
 # Long-term memory with MongoDB Atlas
 
 > Persist agent long-term memory with MongoDBStore and MongoDB Atlas.
@@ -15,9 +23,13 @@ MongoDB stores memories as documents in a collection. With an Atlas Vector Searc
 
 Install the store package (`langgraph-store-mongodb`):
 
+**pip**
+
 ```bash
 pip install -U langgraph-store-mongodb pymongo
 ```
+
+**uv**
 
 ```bash
 uv add langgraph-store-mongodb pymongo
@@ -200,7 +212,7 @@ with MongoDBStore.from_conn_string(MONGODB_ATLAS_URI) as store:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/memory/mongodb-long-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

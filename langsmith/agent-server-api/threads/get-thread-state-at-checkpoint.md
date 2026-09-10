@@ -1,8 +1,18 @@
+---
+title: "Get Thread State At Checkpoint"
+description: "Get state for a thread at a specific checkpoint."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-state-at-checkpoint"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, get-thread-state-at-checkpoint]
+---
+
 # Get Thread State At Checkpoint
 
 > Get state for a thread at a specific checkpoint.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /threads/{thread_id}/state/{checkpoint_id}**
 
 ````yaml
 openapi: 3.1.0

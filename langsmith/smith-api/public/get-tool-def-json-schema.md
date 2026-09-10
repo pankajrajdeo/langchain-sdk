@@ -1,6 +1,16 @@
+---
+title: "Get tool def JSON schema"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/public/schemas/{version}/tooldef.json"
+source: "https://docs.langchain.com/langsmith/smith-api/public/get-tool-def-json-schema"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, get-tool-def-json-schema]
+---
+
 # Get tool def JSON schema
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/schemas/{version}/tooldef.json**
 
 ````yaml
 openapi: 3.1.0

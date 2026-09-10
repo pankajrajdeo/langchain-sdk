@@ -1,3 +1,11 @@
+---
+title: "Quickstart"
+description: "Build your first agent in minutes"
+source: "https://docs.langchain.com/oss/python/langchain/quickstart"
+category: "docs"
+tags: [docs, langchain, quickstart]
+---
+
 # Quickstart
 
 > Build your first agent in minutes
@@ -12,7 +20,7 @@ Build a basic LangChain agent in this working directory by following the LangCha
 Detect whether this project uses Python or TypeScript/JavaScript. Fetch and follow the matching page; treat it as the source of truth for package names, model strings, and code:
 
 * Python: [https://docs.langchain.com/oss/python/langchain/quickstart.md](quickstart.md)
-* TypeScript: [https://docs.langchain.com/oss/javascript/langchain/quickstart.md](https://docs.langchain.com/oss/javascript/langchain/quickstart.md)
+* TypeScript: [https://docs.langchain.com/oss/javascript/langchain/quickstart.md](../javascript/langchain/quickstart.md)
 
 ## Step 2: Install dependencies
 
@@ -39,7 +47,7 @@ Ask the user if they want tracing. If yes, ask them to set `LANGSMITH_TRACING=tr
 > [!TIP]
 > **Using an AI coding assistant?**
 >
-> * Install the [LangChain Docs MCP servers](https://docs.langchain.com/use-these-docs) to give your agent access to up-to-date LangChain documentation and examples.
+> * Install the [LangChain Docs MCP servers](../use-these-docs.md) to give your agent access to up-to-date LangChain documentation and examples.
 >
 > > **Prompt:** Connect LangChain docs MCP servers
 >     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
@@ -49,7 +57,7 @@ Ask the user if they want tracing. If yes, ask them to set `LANGSMITH_TRACING=tr
 >     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
 >     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
 >
->     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](https://docs.langchain.com/use-these-docs.md):
+>     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
 >
 >     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
 >     * Codex CLI: `codex mcp add` with each server URL.
@@ -80,6 +88,8 @@ Ask the user if they want tracing. If yes, ask them to set `LANGSMITH_TRACING=tr
 
 Install the following packages to follow along:
 
+**uv**
+
 ```bash
 uv python pin 3.11
 uv init
@@ -87,10 +97,14 @@ uv add langchain
 uv sync
 ```
 
+**pip**
+
 ```bash
 # Install Python 3.11+ separately if needed.
 pip install -U langchain
 ```
+
+**venv**
 
 ```bash
 # Install Python 3.11+ separately if needed.
@@ -107,65 +121,93 @@ Get an API key from [any supported model provider](../integrations/providers/ove
 Set the API keys in your shell or in a `.env` file, for example:
 
 #### OpenAI
+**Shell**
+
 ```bash
 export OPENAI_API_KEY="your-api-key"
 ```
+
+**.env**
 
 ```bash
 OPENAI_API_KEY=your-api-key
 ```
 
 #### Google Gemini
+**Shell**
+
 ```bash
 export GOOGLE_API_KEY="your-api-key"
 ```
+
+**.env**
 
 ```bash
 GOOGLE_API_KEY=your-api-key
 ```
 
 #### Claude (Anthropic)
+**Shell**
+
 ```bash
 export ANTHROPIC_API_KEY="your-api-key"
 ```
+
+**.env**
 
 ```bash
 ANTHROPIC_API_KEY=your-api-key
 ```
 
 #### OpenRouter
+**Shell**
+
 ```bash
 export OPENROUTER_API_KEY="your-api-key"
 ```
+
+**.env**
 
 ```bash
 OPENROUTER_API_KEY=your-api-key
 ```
 
 #### Fireworks
+**Shell**
+
 ```bash
 export FIREWORKS_API_KEY="your-api-key"
 ```
+
+**.env**
 
 ```bash
 FIREWORKS_API_KEY=your-api-key
 ```
 
 #### Baseten
+**Shell**
+
 ```bash
 export BASETEN_API_KEY="your-api-key"
 ```
+
+**.env**
 
 ```bash
 BASETEN_API_KEY=your-api-key
 ```
 
 #### Ollama
+**Shell**
+
 ```bash
 # Local: Ollama must be running (https://ollama.com)
 # Cloud: Set your Ollama API key for hosted inference
 export OLLAMA_API_KEY="your-api-key"
 ```
+
+**.env**
 
 ```bash
 # Local: Ollama must be running (https://ollama.com)
@@ -174,11 +216,15 @@ OLLAMA_API_KEY=your-api-key
 ```
 
 #### Azure
+**Shell**
+
 ```bash
 export AZURE_OPENAI_API_KEY="your-api-key"
 export AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com"
 export AZURE_OPENAI_DEPLOYMENT_NAME="your-deployment"
 ```
+
+**.env**
 
 ```bash
 AZURE_OPENAI_API_KEY=your-api-key
@@ -187,11 +233,15 @@ AZURE_OPENAI_DEPLOYMENT_NAME=your-deployment
 ```
 
 #### AWS Bedrock
+**Shell**
+
 ```bash
 export AWS_ACCESS_KEY_ID="your-access-key"
 export AWS_SECRET_ACCESS_KEY="your-secret-key"
 export AWS_REGION="us-east-1"
 ```
+
+**.env**
 
 ```bash
 AWS_ACCESS_KEY_ID=your-access-key
@@ -200,9 +250,13 @@ AWS_REGION=us-east-1
 ```
 
 #### HuggingFace
+**Shell**
+
 ```bash
 export HUGGINGFACEHUB_API_TOKEN="hf_..."
 ```
+
+**.env**
 
 ```bash
 HUGGINGFACEHUB_API_TOKEN=hf_...
@@ -221,6 +275,8 @@ To load a `.env` file, use [`python-dotenv`](https://pypi.org/project/python-dot
 ## Build a basic agent
 
 Start by creating a simple agent that can answer questions and call tools. The agent in this example uses the chosen language model, a basic weather function as a tool, and a simple prompt to guide its behavior:
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -241,6 +297,8 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+**Google Gemini**
+
 ```python
 from langchain.agents import create_agent
 
@@ -259,6 +317,8 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content_blocks)
 ```
+
+**Claude (Anthropic)**
 
 ```python
 from langchain.agents import create_agent
@@ -279,6 +339,8 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+**OpenRouter**
+
 ```python
 from langchain.agents import create_agent
 
@@ -297,6 +359,8 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content_blocks)
 ```
+
+**Fireworks**
 
 ```python
 from langchain.agents import create_agent
@@ -317,6 +381,8 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 
@@ -336,6 +402,8 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+**Ollama**
+
 ```python
 from langchain.agents import create_agent
 
@@ -354,6 +422,8 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content_blocks)
 ```
+
+**Azure**
 
 ```python
 import os
@@ -380,6 +450,8 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+**AWS Bedrock**
+
 ```python
 from langchain.agents import create_agent
 
@@ -398,6 +470,8 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content_blocks)
 ```
+
+**HuggingFace**
 
 ```python
 from langchain.agents import create_agent
@@ -487,6 +561,8 @@ def fetch_text_from_url(url: str) -> str:
 ### Configure your model
 Set up your [language model](models.md) with the right parameters for your use case. For example:
 
+**OpenAI**
+
 ```python
 from langchain.chat_models import init_chat_model
 
@@ -497,6 +573,8 @@ model = init_chat_model(
     max_tokens=25000,
 )
 ```
+
+**Google Gemini**
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -511,6 +589,8 @@ model = init_chat_model(
 )
 ```
 
+**Claude (Anthropic)**
+
 ```python
 from langchain.chat_models import init_chat_model
 
@@ -523,6 +603,8 @@ model = init_chat_model(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from langchain.chat_models import init_chat_model
 
@@ -533,6 +615,8 @@ model = init_chat_model(
     max_tokens=25000,
 )
 ```
+
+**Fireworks**
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -545,6 +629,8 @@ model = init_chat_model(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.chat_models import init_chat_model
 
@@ -556,6 +642,8 @@ model = init_chat_model(
 )
 ```
 
+**Ollama**
+
 ```python
 from langchain.chat_models import init_chat_model
 
@@ -566,6 +654,8 @@ model = init_chat_model(
     max_tokens=25000,
 )
 ```
+
+**Azure**
 
 ```python
 import os
@@ -580,6 +670,8 @@ model = init_chat_model(
 )
 ```
 
+**AWS Bedrock**
+
 ```python
 from langchain.chat_models import init_chat_model
 
@@ -591,6 +683,8 @@ model = init_chat_model(
     max_tokens=25000,
 )
 ```
+
+**HuggingFace**
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -631,9 +725,13 @@ Use deep agents when you want maximum capability with minimal setup; choose Lang
 
 To compare both in this step, install the `deepagents` package:
 
+**uv**
+
 ```bash
 uv add deepagents
 ```
+
+**pip**
 
 ```bash
 pip install -U deepagents
@@ -865,7 +963,7 @@ Continue with:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

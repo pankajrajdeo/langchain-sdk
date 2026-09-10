@@ -1,3 +1,11 @@
+---
+title: "Test multi-turn conversations"
+description: "This how-to guide walks you through the various ways you can set up the Playground for multi-turn conversations, which will allow you to test different tool configurations and system prompts against..."
+source: "https://docs.langchain.com/langsmith/multiple-messages"
+category: "docs"
+tags: [docs, langsmith, multiple-messages]
+---
+
 # Test multi-turn conversations
 
 This how-to guide walks you through the various ways you can set up the Playground for multi-turn conversations, which will allow you to test different tool configurations and system prompts against longer threads of messages.
@@ -45,7 +53,7 @@ You can also read [these how-to guides](create-a-prompt.md) to learn more about 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/multiple-messages.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

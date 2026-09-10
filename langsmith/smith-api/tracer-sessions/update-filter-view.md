@@ -1,8 +1,18 @@
+---
+title: "Update filter view"
+description: "Update a filter view."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/update-filter-view"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, update-filter-view]
+---
+
 # Update filter view
 
 > Update a filter view.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/sessions/{session_id}/views/{view_id}**
 
 ````yaml
 openapi: 3.1.0

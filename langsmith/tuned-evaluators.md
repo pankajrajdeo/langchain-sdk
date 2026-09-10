@@ -1,3 +1,11 @@
+---
+title: "Set up LangChain Tuned Evaluators"
+description: "Use specialized LangChain-managed judges to attach quality feedback to traces."
+source: "https://docs.langchain.com/langsmith/tuned-evaluators"
+category: "docs"
+tags: [docs, langsmith, tuned-evaluators]
+---
+
 # Set up LangChain Tuned Evaluators
 
 > Use specialized LangChain-managed judges to attach quality feedback to traces.
@@ -116,7 +124,7 @@ Organization settings can take a few seconds to propagate. If LangSmith reports 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/tuned-evaluators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

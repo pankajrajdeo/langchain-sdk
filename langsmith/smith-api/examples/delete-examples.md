@@ -1,8 +1,18 @@
+---
+title: "Delete examples"
+description: "Soft delete examples. Only deletes the examples in the 'latest' version of the dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/delete-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, delete-examples]
+---
+
 # Delete examples
 
 > Soft delete examples. Only deletes the examples in the 'latest' version of the dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/examples**
 
 ````yaml
 openapi: 3.1.0

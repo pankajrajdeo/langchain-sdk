@@ -1,3 +1,11 @@
+---
+title: "Monitor projects with dashboards"
+description: "Dashboards give you high-level insights into your trace data, helping you spot trends and monitor the health of your applications. Dashboards are available in Monitoring in the LangSmith UI."
+source: "https://docs.langchain.com/langsmith/dashboards"
+category: "docs"
+tags: [docs, langsmith, dashboards]
+---
+
 # Monitor projects with dashboards
 
 Dashboards give you high-level insights into your [trace](observability-concepts.md#traces) data, helping you spot trends and monitor the health of your applications. Dashboards are available in **Monitoring** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-dashboards).
@@ -217,7 +225,7 @@ Now you can visualize the decisions made at the `triage_input` node over time.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/dashboards.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

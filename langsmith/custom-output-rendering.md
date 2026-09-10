@@ -1,3 +1,11 @@
+---
+title: "Custom output rendering"
+description: "Custom output rendering allows you to visualize run outputs and dataset reference outputs using your own custom HTML pages. This is particularly useful for:"
+source: "https://docs.langchain.com/langsmith/custom-output-rendering"
+category: "docs"
+tags: [docs, langsmith, custom-output-rendering]
+---
+
 # Custom output rendering
 
 Custom output rendering allows you to visualize run outputs and dataset reference outputs using your own custom HTML pages. This is particularly useful for:
@@ -141,7 +149,7 @@ When enabled, your custom rendering will replace the default output view in:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-output-rendering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

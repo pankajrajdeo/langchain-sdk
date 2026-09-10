@@ -1,8 +1,18 @@
+---
+title: "List playground settings"
+description: "Get all playground settings for this tenant id."
+source: "https://docs.langchain.com/langsmith/smith-api/playground-settings/list-playground-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, playground-settings, list-playground-settings]
+---
+
 # List playground settings
 
 > Get all playground settings for this tenant id.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/playground-settings**
 
 ````yaml
 openapi: 3.1.0

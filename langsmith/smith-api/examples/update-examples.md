@@ -1,9 +1,19 @@
+---
+title: "Update examples"
+description: "This endpoint allows clients to update existing examples in a specified dataset by sending a multipart/form-data PATCH request. Each form part contains either JSON-encoded data or binary attachment..."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/update-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, update-examples]
+---
+
 # Update examples
 
 > This endpoint allows clients to update existing examples in a specified dataset by sending a multipart/form-data PATCH request.
 Each form part contains either JSON-encoded data or binary attachment files to update an example.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/platform/datasets/{dataset_id}/examples**
 
 ````yaml
 openapi: 3.1.0

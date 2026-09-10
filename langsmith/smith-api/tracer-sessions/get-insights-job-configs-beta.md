@@ -1,8 +1,18 @@
+---
+title: "Get insights job configs (Beta)"
+description: "Get all insights job configs for a session."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-insights-job-configs-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, get-insights-job-configs-beta]
+---
+
 # Get insights job configs (Beta)
 
 > Get all insights job configs for a session.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/sessions/{session_id}/insights/configs**
 
 ````yaml
 openapi: 3.1.0

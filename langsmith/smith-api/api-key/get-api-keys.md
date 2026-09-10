@@ -1,8 +1,18 @@
+---
+title: "Get API keys"
+description: "Get the current tenant's API keys"
+source: "https://docs.langchain.com/langsmith/smith-api/api-key/get-api-keys"
+category: "docs"
+tags: [docs, langsmith, smith-api, api-key, get-api-keys]
+---
+
 # Get API keys
 
 > Get the current tenant's API keys
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/api-key**
 
 ````yaml
 openapi: 3.1.0
@@ -217,6 +227,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

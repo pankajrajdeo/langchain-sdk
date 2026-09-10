@@ -1,3 +1,11 @@
+---
+title: "Agent Server"
+description: "Configure and operate the LangSmith Agent Server runtime, including capabilities, application structure, auth, and customization."
+source: "https://docs.langchain.com/langsmith/develop-agents-overview"
+category: "docs"
+tags: [docs, langsmith, develop-agents-overview]
+---
+
 # Agent Server
 
 > Configure and operate the LangSmith Agent Server runtime, including capabilities, application structure, auth, and customization.
@@ -42,7 +50,7 @@ Full REST API reference for assistants, threads, runs, crons, store, A2A, MCP, a
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

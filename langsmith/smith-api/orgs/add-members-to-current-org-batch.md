@@ -1,8 +1,18 @@
+---
+title: "Add members to current org batch"
+description: "Batch invite up to 500 users to the current org."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/add-members-to-current-org-batch"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, add-members-to-current-org-batch]
+---
+
 # Add members to current org batch
 
 > Batch invite up to 500 users to the current org.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/members/batch**
 
 ````yaml
 openapi: 3.1.0

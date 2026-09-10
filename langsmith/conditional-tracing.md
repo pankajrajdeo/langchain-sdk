@@ -1,3 +1,11 @@
+---
+title: "Conditional tracing"
+description: "When you have the environment variable LANGSMITH_TRACING=true set globally, traces are automatically sent to LangSmith. This guide shows you how to disable or customize tracing selectively for..."
+source: "https://docs.langchain.com/langsmith/conditional-tracing"
+category: "docs"
+tags: [docs, langsmith, conditional-tracing]
+---
+
 # Conditional tracing
 
 When you have the environment variable `LANGSMITH_TRACING=true` set globally, traces are automatically sent to LangSmith. This guide shows you how to disable or customize tracing selectively for specific requests.
@@ -164,6 +172,8 @@ with ls.tracing_context(
 
 When you nest `tracing_context` blocks, the innermost context takes precedence.
 
+**Python**
+
 ```python
 import langsmith as ls
 
@@ -274,6 +284,8 @@ async def make_graph(runtime: ServerRuntime):
 ## Reusable tracing wrapper
 
 Create a decorator to automatically apply conditional tracing logic.
+
+**Python**
 
 ```python
 import functools
@@ -467,7 +479,7 @@ You can combine both approaches for fine-grained control.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/conditional-tracing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Managed Deep Agents project structure"
+description: "Understand the files and directories in a Managed Deep Agents project."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-project-structure"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-project-structure]
+---
+
 # Managed Deep Agents project structure
 
 > Understand the files and directories in a Managed Deep Agents project.
@@ -10,6 +18,8 @@ It is a regular Python project.
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project layout
+
+**Project layout**
 
 ```text
 my-agent/
@@ -63,7 +73,7 @@ The layout above shows the common `.py` names.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-project-structure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

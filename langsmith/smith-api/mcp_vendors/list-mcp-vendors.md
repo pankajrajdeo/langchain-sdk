@@ -1,8 +1,18 @@
+---
+title: "List MCP vendors"
+description: "Returns the catalog of available MCP vendors."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp_vendors/list-mcp-vendors"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp_vendors, list-mcp-vendors]
+---
+
 # List MCP vendors
 
 > Returns the catalog of available MCP vendors.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/mcp-vendors**
 
 ````yaml
 openapi: 3.1.0

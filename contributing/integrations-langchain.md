@@ -1,3 +1,11 @@
+---
+title: "Contributing integrations"
+description: "Integrations are a core component of LangChain."
+source: "https://docs.langchain.com/oss/python/contributing/integrations-langchain"
+category: "docs"
+tags: [docs, contributing, integrations-langchain]
+---
+
 # Contributing integrations
 
 **Integrations are a core component of LangChain.**
@@ -81,7 +89,7 @@ For full steps, eligibility details, and rejection criteria, see [Publish an int
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/integrations-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

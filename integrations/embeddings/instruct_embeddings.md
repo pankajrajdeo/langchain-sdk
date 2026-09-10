@@ -1,3 +1,11 @@
+---
+title: "Instructor embeddings on Hugging Face integration"
+description: "Integrate with Instructor-style embedding models on Hugging Face using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/embeddings/instruct_embeddings"
+category: "docs"
+tags: [docs, integrations, embeddings, instruct_embeddings]
+---
+
 # Instructor embeddings on Hugging Face integration
 
 > Integrate with Instructor-style embedding models on Hugging Face using LangChain Python.
@@ -38,7 +46,7 @@ query_result = embeddings.embed_query("This is a test document.")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/instruct_embeddings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

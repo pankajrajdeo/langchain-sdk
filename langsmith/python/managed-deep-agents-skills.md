@@ -1,3 +1,11 @@
+---
+title: "Add skills to Managed Deep Agents"
+description: "Add reusable task-specific instructions to a Managed Deep Agent."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-skills"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-skills]
+---
+
 # Add skills to Managed Deep Agents
 
 > Add reusable task-specific instructions to a Managed Deep Agent.
@@ -22,6 +30,8 @@ my-agent/
 ## Add a skill
 
 Each skill directory needs a `SKILL.md` file with `name` and `description` frontmatter:
+
+**skills/research/SKILL.md**
 
 ```markdown
 ---
@@ -65,7 +75,7 @@ For skill authoring patterns and the complete format, see [Skills](../../deepage
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

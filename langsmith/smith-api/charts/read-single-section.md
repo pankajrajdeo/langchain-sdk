@@ -1,8 +1,18 @@
+---
+title: "Read single section"
+description: "Get a single section by ID."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/read-single-section"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, read-single-section]
+---
+
 # Read single section
 
 > Get a single section by ID.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/charts/section/{section_id}**
 
 ````yaml
 openapi: 3.1.0

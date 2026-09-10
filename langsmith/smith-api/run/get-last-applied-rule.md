@@ -1,8 +1,18 @@
+---
+title: "Get last applied rule"
+description: "Get the last applied rule."
+source: "https://docs.langchain.com/langsmith/smith-api/run/get-last-applied-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, get-last-applied-rule]
+---
+
 # Get last applied rule
 
 > Get the last applied rule.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/runs/rules/{rule_id}/last_applied**
 
 ````yaml
 openapi: 3.1.0

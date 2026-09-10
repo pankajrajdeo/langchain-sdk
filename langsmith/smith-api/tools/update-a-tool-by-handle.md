@@ -1,8 +1,18 @@
+---
+title: "Update a tool by handle"
+description: "Updates an existing tool identified by its handle."
+source: "https://docs.langchain.com/langsmith/smith-api/tools/update-a-tool-by-handle"
+category: "docs"
+tags: [docs, langsmith, smith-api, tools, update-a-tool-by-handle]
+---
+
 # Update a tool by handle
 
 > Updates an existing tool identified by its handle.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/platform/tools/{handle}**
 
 ````yaml
 openapi: 3.1.0

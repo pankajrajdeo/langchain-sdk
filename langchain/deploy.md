@@ -1,3 +1,11 @@
+---
+title: "Deployment"
+description: "Deploy LangChain agents to production with LangSmith Cloud or JavaScript frameworks and hosting platforms."
+source: "https://docs.langchain.com/oss/python/langchain/deploy"
+category: "docs"
+tags: [docs, langchain, deploy]
+---
+
 # Deployment
 
 > Deploy LangChain agents to production with LangSmith Cloud or JavaScript frameworks and hosting platforms.
@@ -57,9 +65,13 @@ You can now test the API:
 #### Python
 1. Install LangGraph Python:
 
+**pip**
+
 ```bash
 pip install -U langgraph-sdk
 ```
+
+**uv**
 
 ```bash
 uv add langgraph-sdk
@@ -114,7 +126,7 @@ curl -s --request POST \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

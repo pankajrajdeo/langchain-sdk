@@ -1,3 +1,11 @@
+---
+title: "Interpreters"
+description: "Run lightweight code inside Deep Agents to compose tools, orchestrate subagents, and transform structured data"
+source: "https://docs.langchain.com/oss/python/deepagents/interpreters"
+category: "docs"
+tags: [docs, deepagents, interpreters]
+---
+
 # Interpreters
 
 > Run lightweight code inside Deep Agents to compose tools, orchestrate subagents, and transform structured data
@@ -10,7 +18,7 @@ Where [sandboxes](sandboxes.md) are a code-first way for acting on an environmen
 > Interpreters are in [**beta**](../versioning.md). APIs and lifecycle behavior may change between releases.
 
 > [!NOTE]
-> Interpreters require `langchain-quickjs>=0.2.0` and Python `>=3.11`.
+> Interpreters require `langchain-quickjs>=0.2.0` and Python 3.11 or later.
 
 ## Why use interpreters?
 
@@ -48,13 +56,19 @@ Use [sandboxes](sandboxes.md) for code against an environment: shell commands, p
 
 Install the QuickJS middleware package, then pass interpreter middleware using the `middleware` argument on `create_deep_agent`.
 
+**pip**
+
 ```bash
 pip install -U "deepagents[quickjs]"
 ```
 
+**uv**
+
 ```bash
 uv add "deepagents[quickjs]"
 ```
+
+**Google**
 
 ```python
 from deepagents import create_deep_agent
@@ -66,6 +80,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -75,6 +91,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Anthropic**
 
 ```python
 from deepagents import create_deep_agent
@@ -86,6 +104,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -95,6 +115,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Fireworks**
 
 ```python
 from deepagents import create_deep_agent
@@ -106,6 +128,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -115,6 +139,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -177,6 +203,8 @@ const result: string = await tools.webSearch({
 
 Enable PTC with an explicit allowlist:
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -186,6 +214,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(ptc=["web_search"])],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -197,6 +227,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -206,6 +238,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(ptc=["web_search"])],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -217,6 +251,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -227,6 +263,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -236,6 +274,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(ptc=["web_search"])],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -313,6 +353,8 @@ Snapshots preserve interpreter memory, not outside-world effects. If interpreter
 
 Cross-turn persistence does not require a checkpointer:
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -326,6 +368,8 @@ agent = create_deep_agent(
     ],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -341,6 +385,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -354,6 +400,8 @@ agent = create_deep_agent(
     ],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -369,6 +417,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -383,6 +433,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -396,6 +448,8 @@ agent = create_deep_agent(
     ],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -413,6 +467,8 @@ agent = create_deep_agent(
 
 Because interpreter snapshots are stored in graph state, a [checkpointer](../langgraph/checkpointers.md) also captures them in checkpoint history. Add one when you need durable threads or [time travel](../langgraph/use-time-travel.md):
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -424,6 +480,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(mode="thread")],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -437,6 +495,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -448,6 +508,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(mode="thread")],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -461,6 +523,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -473,6 +537,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -484,6 +550,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(mode="thread")],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -543,7 +611,7 @@ Every tool you expose through PTC is an outside capability that interpreter code
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/interpreters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

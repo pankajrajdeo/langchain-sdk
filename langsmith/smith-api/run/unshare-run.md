@@ -1,8 +1,18 @@
+---
+title: "Unshare run"
+description: "Unshare a run."
+source: "https://docs.langchain.com/langsmith/smith-api/run/unshare-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, unshare-run]
+---
+
 # Unshare run
 
 > Unshare a run.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/runs/{run_id}/share**
 
 ````yaml
 openapi: 3.1.0

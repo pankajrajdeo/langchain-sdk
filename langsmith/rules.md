@@ -1,3 +1,11 @@
+---
+title: "Set up automation rules"
+description: "While you can manually sift through and process production logs from your LLM application, it often becomes difficult as your application scales to more users. LangSmith provides Automations that..."
+source: "https://docs.langchain.com/langsmith/rules"
+category: "docs"
+tags: [docs, langsmith, rules]
+---
+
 # Set up automation rules
 
 While you can manually sift through and process production logs from your LLM application, it often becomes difficult as your application scales to more users. LangSmith provides **Automations** that allow you to trigger certain actions on your trace data. You define an automation by an **item type**, **filter**, **sampling rate**, and **action**.
@@ -121,7 +129,7 @@ The logs tab allows you to:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/rules.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

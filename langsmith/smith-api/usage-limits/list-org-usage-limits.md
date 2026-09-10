@@ -1,8 +1,18 @@
+---
+title: "List org usage limits"
+description: "List out the configured usage limits for a given organization."
+source: "https://docs.langchain.com/langsmith/smith-api/usage-limits/list-org-usage-limits"
+category: "docs"
+tags: [docs, langsmith, smith-api, usage-limits, list-org-usage-limits]
+---
+
 # List org usage limits
 
 > List out the configured usage limits for a given organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/usage-limits/org**
 
 ````yaml
 openapi: 3.1.0

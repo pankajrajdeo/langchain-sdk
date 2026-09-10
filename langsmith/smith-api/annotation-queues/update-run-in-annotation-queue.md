@@ -1,6 +1,16 @@
+---
+title: "Update run in annotation queue"
+description: "/langsmith/langsmith-platform-openapi.json patch /api/v1/annotation-queues/{queue_id}/runs/{queue_run_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/update-run-in-annotation-queue"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, update-run-in-annotation-queue]
+---
+
 # Update run in annotation queue
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/annotation-queues/{queue_id}/runs/{queue_run_id}**
 
 ````yaml
 openapi: 3.1.0

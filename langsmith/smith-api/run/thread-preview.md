@@ -1,8 +1,18 @@
+---
+title: "Thread preview"
+description: "Get preview of a thread."
+source: "https://docs.langchain.com/langsmith/smith-api/run/thread-preview"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, thread-preview]
+---
+
 # Thread preview
 
 > Get preview of a thread.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/runs/threads/{thread_id}**
 
 ````yaml
 openapi: 3.1.0

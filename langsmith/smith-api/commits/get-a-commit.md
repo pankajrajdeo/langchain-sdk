@@ -1,3 +1,11 @@
+---
+title: "Get a commit"
+description: "Retrieves a specific commit by hash, tag, or \"latest\" for a repository. This endpoint supports both authenticated and unauthenticated access. Authenticated users can access private repos, while..."
+source: "https://docs.langchain.com/langsmith/smith-api/commits/get-a-commit"
+category: "docs"
+tags: [docs, langsmith, smith-api, commits, get-a-commit]
+---
+
 # Get a commit
 
 > Retrieves a specific commit by hash, tag, or "latest" for a repository.
@@ -9,6 +17,8 @@ Commit resolution logic:
 - 8 or more characters: Prioritize commit hash over tag, check both
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/commits/{owner}/{repo}/{commit}**
 
 ````yaml
 openapi: 3.1.0
@@ -207,8 +217,8 @@ paths:
         - name: get_examples
           in: query
           schema:
-            default: false
             type: boolean
+            default: false
             title: Get Examples
         - description: 'Comma-separated list of optional fields: "model", "is_draft"'
           name: include
@@ -220,14 +230,14 @@ paths:
           name: include_model
           in: query
           schema:
-            default: false
             type: boolean
+            default: false
             title: Include Model
         - name: is_view
           in: query
           schema:
-            default: false
             type: boolean
+            default: false
             title: Is View
       responses:
         '200':

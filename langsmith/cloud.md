@@ -1,3 +1,11 @@
+---
+title: "Cloud (SaaS)"
+description: "The Cloud hosting option is a fully managed model where LangChain hosts and operates all LangSmith infrastructure and services:"
+source: "https://docs.langchain.com/langsmith/cloud"
+category: "docs"
+tags: [docs, langsmith, cloud]
+---
+
 # Cloud (SaaS)
 
 The **Cloud** hosting option is a fully managed model where LangChain hosts and operates all LangSmith infrastructure and services:
@@ -173,6 +181,8 @@ Customers on **AWS** can connect to LangSmith via [AWS PrivateLink](https://docs
 
 **2. Create an Interface VPC Endpoint** in your AWS account. Attach a security group that allows **TCP 443 inbound** from your VPC CIDR (or from the instances that need to reach LangSmith):
 
+**AWS CLI**
+
 ```bash
 aws ec2 create-vpc-endpoint \
   --vpc-id <YOUR_VPC_ID> \
@@ -182,6 +192,8 @@ aws ec2 create-vpc-endpoint \
   --security-group-ids <YOUR_SECURITY_GROUP_ID> \
   --region <YOUR_REGION>
 ```
+
+**Terraform**
 
 ```hcl
 resource "aws_vpc_endpoint" "langsmith" {
@@ -210,6 +222,8 @@ aws ec2 describe-vpc-endpoints \
 
 Then, create a CNAME record for `aws.api.smith.langchain.com` pointing to that DNS name. Here's an example using Route 53:
 
+**AWS CLI**
+
 ```bash
 aws route53 create-hosted-zone \
   --name aws.api.smith.langchain.com \
@@ -231,6 +245,8 @@ aws route53 change-resource-record-sets \
     }]
   }'
 ```
+
+**Terraform**
 
 ```hcl
 resource "aws_route53_zone" "langsmith_privatelink" {
@@ -292,6 +308,8 @@ After access is granted, create a PSC endpoint and configure DNS using either th
 
 Create a forwarding rule in your VPC targeting the service attachment:
 
+**gcloud CLI**
+
 ```bash
 # Create the PSC endpoint
 gcloud compute forwarding-rules create langsmith-psc-endpoint \
@@ -306,6 +324,8 @@ gcloud compute forwarding-rules describe langsmith-psc-endpoint \
   --region=<REGION> \
   --format="value(IPAddress)"
 ```
+
+**Terraform**
 
 ```hcl
 resource "google_compute_forwarding_rule" "langsmith_psc" {
@@ -323,6 +343,8 @@ resource "google_compute_forwarding_rule" "langsmith_psc" {
 
 Create a private DNS zone in your VPC and add an A record pointing to the PSC endpoint IP:
 
+**gcloud CLI**
+
 ```bash
 # Create a private DNS zone
 gcloud dns managed-zones create langsmith-psc \
@@ -336,6 +358,8 @@ gcloud dns record-sets create "<REGION>.p.api.smith.langchain.com." \
   --type=A \
   --rrdatas=<PSC_ENDPOINT_IP>
 ```
+
+**Terraform**
 
 ```hcl
 resource "google_dns_managed_zone" "langsmith_psc" {
@@ -434,7 +458,7 @@ For more information on rate limits and other service limits, refer to the [Admi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

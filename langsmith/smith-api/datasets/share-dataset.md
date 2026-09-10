@@ -1,8 +1,18 @@
+---
+title: "Share dataset"
+description: "Share a dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/share-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, share-dataset]
+---
+
 # Share dataset
 
 > Share a dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/datasets/{dataset_id}/share**
 
 ````yaml
 openapi: 3.1.0

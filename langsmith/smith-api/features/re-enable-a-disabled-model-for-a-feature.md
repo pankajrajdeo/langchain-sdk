@@ -1,8 +1,18 @@
+---
+title: "Re-enable a disabled model for a feature"
+description: "Removes a model from the disabled list for a feature in the workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/features/re-enable-a-disabled-model-for-a-feature"
+category: "docs"
+tags: [docs, langsmith, smith-api, features, re-enable-a-disabled-model-for-a-feature]
+---
+
 # Re-enable a disabled model for a feature
 
 > Removes a model from the disabled list for a feature in the workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/features/{feature}/disabled-models/{model}**
 
 ````yaml
 openapi: 3.1.0

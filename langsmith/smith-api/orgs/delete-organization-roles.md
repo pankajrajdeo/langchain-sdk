@@ -1,6 +1,16 @@
+---
+title: "Delete organization roles"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/current/roles/{role_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/delete-organization-roles"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, delete-organization-roles]
+---
+
 # Delete organization roles
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/current/roles/{role_id}**
 
 ````yaml
 openapi: 3.1.0

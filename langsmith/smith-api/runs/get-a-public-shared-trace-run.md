@@ -1,3 +1,11 @@
+---
+title: "Get a public shared trace run"
+description: "Returns one run within the trace identified by the share token. The request supplies only the run ID and that run's exact start_time coordinate."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/get-a-public-shared-trace-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, get-a-public-shared-trace-run]
+---
+
 # Get a public shared trace run
 
 > Returns one run within the trace identified by the share token. The request supplies only the run ID and that run's exact start_time coordinate.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/public/{share_token}/run/{run_id}**
 
 ````yaml
 openapi: 3.1.0
@@ -207,9 +217,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Selects
       responses:
         '200':

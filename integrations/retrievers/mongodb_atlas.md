@@ -1,3 +1,11 @@
+---
+title: "MongoDB Atlas"
+description: "Integrate with the MongoDBAtlasHybridSearchRetriever using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/retrievers/mongodb_atlas"
+category: "docs"
+tags: [docs, integrations, retrievers, mongodb_atlas]
+---
+
 # MongoDB Atlas
 
 > Integrate with the MongoDBAtlasHybridSearchRetriever using LangChain Python.
@@ -39,9 +47,13 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Install `langchain-mongodb`. The following examples also use Voyage AI embeddings:
 
+**pip**
+
 ```bash
 pip install -qU langchain-mongodb langchain-voyageai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-mongodb langchain-voyageai
@@ -170,7 +182,7 @@ For full-text search, see [`MongoDBAtlasFullTextSearchRetriever`](https://refere
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

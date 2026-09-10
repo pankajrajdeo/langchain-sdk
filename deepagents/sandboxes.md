@@ -1,3 +1,11 @@
+---
+title: "Sandboxes"
+description: "Execute code in isolated environments with sandbox backends"
+source: "https://docs.langchain.com/oss/python/deepagents/sandboxes"
+category: "docs"
+tags: [docs, deepagents, sandboxes]
+---
+
 # Sandboxes
 
 > Execute code in isolated environments with sandbox backends
@@ -56,13 +64,19 @@ Sandboxes are especially useful for:
 These examples assume you have already created a sandbox/devbox using the provider's SDK and have credentials set up. For signup, authentication, and provider-specific lifecycle details, see [Available providers](#available-providers).
 
 #### LangSmith
+**pip**
+
 ```bash
 pip install "langsmith[sandbox]"
 ```
 
+**uv**
+
 ```bash
 uv add "langsmith[sandbox]"
 ```
+
+**Google**
 
 ```python
 from deepagents import create_deep_agent
@@ -94,6 +108,8 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
+**OpenAI**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LangSmithSandbox
@@ -123,6 +139,8 @@ try:
 finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
+
+**Anthropic**
 
 ```python
 from deepagents import create_deep_agent
@@ -154,6 +172,8 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LangSmithSandbox
@@ -183,6 +203,8 @@ try:
 finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
+
+**Fireworks**
 
 ```python
 from deepagents import create_deep_agent
@@ -214,6 +236,8 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LangSmithSandbox
@@ -243,6 +267,8 @@ try:
 finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -274,14 +300,23 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
+#### [View example trace](https://smith.langchain.com/public/9f84b0dd-2df7-4f4d-9ba1-4094e58d429e/r)
+Open a public LangSmith run for this example.
+
 #### Daytona
+**pip**
+
 ```bash
 pip install langchain-daytona
 ```
 
+**uv**
+
 ```bash
 uv add langchain-daytona
 ```
+
+**Google**
 
 ```python
 from daytona import Daytona
@@ -313,6 +348,8 @@ finally:
     sandbox.stop()
 ```
 
+**OpenAI**
+
 ```python
 from daytona import Daytona
 from deepagents import create_deep_agent
@@ -342,6 +379,8 @@ try:
 finally:
     sandbox.stop()
 ```
+
+**Anthropic**
 
 ```python
 from daytona import Daytona
@@ -373,6 +412,8 @@ finally:
     sandbox.stop()
 ```
 
+**OpenRouter**
+
 ```python
 from daytona import Daytona
 from deepagents import create_deep_agent
@@ -402,6 +443,8 @@ try:
 finally:
     sandbox.stop()
 ```
+
+**Fireworks**
 
 ```python
 from daytona import Daytona
@@ -433,6 +476,8 @@ finally:
     sandbox.stop()
 ```
 
+**Baseten**
+
 ```python
 from daytona import Daytona
 from deepagents import create_deep_agent
@@ -462,6 +507,8 @@ try:
 finally:
     sandbox.stop()
 ```
+
+**Ollama**
 
 ```python
 from daytona import Daytona
@@ -494,9 +541,13 @@ finally:
 ```
 
 #### E2B
+**pip**
+
 ```bash
 pip install langchain-e2b
 ```
+
+**uv**
 
 ```bash
 uv add langchain-e2b
@@ -533,9 +584,13 @@ finally:
 ```
 
 #### Modal
+**pip**
+
 ```bash
 pip install langchain-modal
 ```
+
+**uv**
 
 ```bash
 uv add langchain-modal
@@ -572,9 +627,13 @@ finally:
 ```
 
 #### Runloop
+**pip**
+
 ```bash
 pip install langchain-runloop
 ```
+
+**uv**
 
 ```bash
 uv add langchain-runloop
@@ -615,9 +674,13 @@ finally:
 ```
 
 #### Vercel
+**pip**
+
 ```bash
 pip install langchain-vercel-sandbox
 ```
+
+**uv**
 
 ```bash
 uv add langchain-vercel-sandbox
@@ -677,6 +740,8 @@ Each conversation gets its own sandbox. The first run creates it; follow-up turn
 > [!TIP]
 > When users can return after idle time, configure a TTL on the sandbox so the provider deletes or archives idle environments automatically.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -705,6 +770,8 @@ async def agent(config: RunnableConfig):
         backend=LangSmithSandbox(sandbox=ls_sandbox),
     )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -735,6 +802,8 @@ async def agent(config: RunnableConfig):
     )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -763,6 +832,8 @@ async def agent(config: RunnableConfig):
         backend=LangSmithSandbox(sandbox=ls_sandbox),
     )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -793,6 +864,8 @@ async def agent(config: RunnableConfig):
     )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -822,6 +895,8 @@ async def agent(config: RunnableConfig):
     )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -850,6 +925,8 @@ async def agent(config: RunnableConfig):
         backend=LangSmithSandbox(sandbox=ls_sandbox),
     )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -887,6 +964,8 @@ Every thread on the same assistant reuses one sandbox. Files, installed packages
 > [!WARNING]
 > Assistant-scoped sandboxes accumulate in-sandbox state over time. Configure a TTL with your sandbox provider, use snapshots to reset periodically, or implement cleanup logic so disk and memory do not grow without bound.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -912,6 +991,8 @@ async def agent(config: RunnableConfig):
         backend=LangSmithSandbox(sandbox=ls_sandbox),
     )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -939,6 +1020,8 @@ async def agent(config: RunnableConfig):
     )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -964,6 +1047,8 @@ async def agent(config: RunnableConfig):
         backend=LangSmithSandbox(sandbox=ls_sandbox),
     )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -991,6 +1076,8 @@ async def agent(config: RunnableConfig):
     )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -1017,6 +1104,8 @@ async def agent(config: RunnableConfig):
     )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -1042,6 +1131,8 @@ async def agent(config: RunnableConfig):
         backend=LangSmithSandbox(sandbox=ls_sandbox),
     )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1117,6 +1208,8 @@ Trade-offs:
 
 * 🔴 Network latency on each execution call.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -1147,6 +1240,8 @@ try:
 finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1179,6 +1274,8 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -1209,6 +1306,8 @@ try:
 finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1241,6 +1340,8 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -1271,6 +1372,8 @@ try:
 finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
+
+**Baseten**
 
 ```python
 from deepagents import create_deep_agent
@@ -1303,6 +1406,8 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
+**Ollama**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -1333,6 +1438,9 @@ try:
 finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
+
+#### [View example trace](https://smith.langchain.com/public/f7f985ac-d3be-4ce3-b23e-ec1b441ee466/r)
+Open a public LangSmith run for this example.
 
 The examples in this doc use the sandbox as a tool pattern.
 Choose the agent in sandbox pattern when your provider's SDK handles the communication layer and you want production to mirror local development.
@@ -1398,9 +1506,13 @@ print(result.output)
 ```
 
 #### AgentCore
+**pip**
+
 ```bash
 pip install langchain-agentcore-codeinterpreter
 ```
+
+**uv**
 
 ```bash
 uv add langchain-agentcore-codeinterpreter
@@ -1424,9 +1536,13 @@ finally:
 ```
 
 #### Daytona
+**pip**
+
 ```bash
 pip install langchain-daytona
 ```
+
+**uv**
 
 ```bash
 uv add langchain-daytona
@@ -1445,9 +1561,13 @@ print(result.output)
 ```
 
 #### E2B
+**pip**
+
 ```bash
 pip install langchain-e2b
 ```
+
+**uv**
 
 ```bash
 uv add langchain-e2b
@@ -1482,9 +1602,13 @@ print(result.output)
 ```
 
 #### NVIDIA OpenShell
+**pip**
+
 ```bash
 pip install langchain-nvidia-openshell
 ```
+
+**uv**
 
 ```bash
 uv add langchain-nvidia-openshell
@@ -1503,9 +1627,13 @@ with openshell.Sandbox(delete_on_exit=True) as sandbox:
 ```
 
 #### Runloop
+**pip**
+
 ```bash
 pip install langchain-runloop
 ```
+
+**uv**
 
 ```bash
 uv add langchain-runloop
@@ -1530,9 +1658,13 @@ finally:
 ```
 
 #### Vercel
+**pip**
+
 ```bash
 pip install langchain-vercel-sandbox
 ```
+
+**uv**
 
 ```bash
 uv add langchain-vercel-sandbox
@@ -1632,9 +1764,13 @@ backend.upload_files(
 ```
 
 #### AgentCore
+**pip**
+
 ```bash
 pip install langchain-agentcore-codeinterpreter
 ```
+
+**uv**
 
 ```bash
 uv add langchain-agentcore-codeinterpreter
@@ -1659,9 +1795,13 @@ backend.upload_files(
 ```
 
 #### Daytona
+**pip**
+
 ```bash
 pip install langchain-daytona
 ```
+
+**uv**
 
 ```bash
 uv add langchain-daytona
@@ -1684,9 +1824,13 @@ backend.upload_files(
 ```
 
 #### E2B
+**pip**
+
 ```bash
 pip install langchain-e2b
 ```
+
+**uv**
 
 ```bash
 uv add langchain-e2b
@@ -1729,9 +1873,13 @@ backend.upload_files(
 ```
 
 #### Runloop
+**pip**
+
 ```bash
 pip install langchain-runloop
 ```
+
+**uv**
 
 ```bash
 uv add langchain-runloop
@@ -1757,9 +1905,13 @@ backend.upload_files(
 ```
 
 #### Vercel
+**pip**
+
 ```bash
 pip install langchain-vercel-sandbox
 ```
+
+**uv**
 
 ```bash
 uv add langchain-vercel-sandbox
@@ -1803,9 +1955,13 @@ for result in results:
 ```
 
 #### AgentCore
+**pip**
+
 ```bash
 pip install langchain-agentcore-codeinterpreter
 ```
+
+**uv**
 
 ```bash
 uv add langchain-agentcore-codeinterpreter
@@ -1832,9 +1988,13 @@ interpreter.stop()
 ```
 
 #### Daytona
+**pip**
+
 ```bash
 pip install langchain-daytona
 ```
+
+**uv**
 
 ```bash
 uv add langchain-daytona
@@ -1857,9 +2017,13 @@ for result in results:
 ```
 
 #### E2B
+**pip**
+
 ```bash
 pip install langchain-e2b
 ```
+
+**uv**
 
 ```bash
 uv add langchain-e2b
@@ -1902,9 +2066,13 @@ for result in results:
 ```
 
 #### Runloop
+**pip**
+
 ```bash
 pip install langchain-runloop
 ```
+
+**uv**
 
 ```bash
 uv add langchain-runloop
@@ -1930,9 +2098,13 @@ for result in results:
 ```
 
 #### Vercel
+**pip**
+
 ```bash
 pip install langchain-vercel-sandbox
 ```
+
+**uv**
 
 ```bash
 uv add langchain-vercel-sandbox
@@ -1992,7 +2164,7 @@ If your agent needs to call authenticated APIs or access protected resources, yo
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

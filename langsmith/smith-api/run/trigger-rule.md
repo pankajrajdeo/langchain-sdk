@@ -1,8 +1,18 @@
+---
+title: "Trigger rule"
+description: "Trigger a run rule manually."
+source: "https://docs.langchain.com/langsmith/smith-api/run/trigger-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, trigger-rule]
+---
+
 # Trigger rule
 
 > Trigger a run rule manually.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/rules/{rule_id}/trigger**
 
 ````yaml
 openapi: 3.1.0

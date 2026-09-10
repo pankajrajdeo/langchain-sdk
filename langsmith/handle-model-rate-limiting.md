@@ -1,3 +1,11 @@
+---
+title: "How to handle model rate limits"
+description: "A common issue when running large evaluation jobs is running into third-party API rate limits, usually from model providers. There are a few ways to deal with rate limits."
+source: "https://docs.langchain.com/langsmith/handle-model-rate-limiting"
+category: "docs"
+tags: [docs, langsmith, handle-model-rate-limiting]
+---
+
 # How to handle model rate limits
 
 A common issue when running large evaluation jobs is running into third-party API rate limits, usually from model providers. There are a few ways to deal with rate limits.
@@ -37,11 +45,15 @@ A very common way to deal with rate limit errors is retrying with exponential ba
 
 If you're using `langchain` components you can add retries to all model calls with the `.with_retry(...)` / `.withRetry()` method:
 
+**Python**
+
 ```python
 from langchain import init_chat_model
 
 model_with_retry = init_chat_model("gpt-5.4-mini").with_retry(stop_after_attempt=6)
 ```
+
+**TypeScript**
 
 ```typescript
 import { initChatModel } from "langchain";
@@ -63,6 +75,8 @@ If you're not using `langchain` you can use other libraries like `tenacity` (Pyt
 
 Limiting the number of concurrent calls you're making to your application and evaluators is another way to decrease the frequency of model calls you're making, and in that way avoid rate limit errors. `max_concurrency` can be set directly on the [evaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) / [aevaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._arunner.aevaluate) functions. This parallelizes evaluation by effectively splitting the dataset across threads.
 
+**Python**
+
 ```python
 from langsmith import aevaluate
 
@@ -71,6 +85,8 @@ results = await aevaluate(
     max_concurrency=4,
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { evaluate } from "langsmith/evaluation";
@@ -84,7 +100,7 @@ await evaluate(..., {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/handle-model-rate-limiting.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Update current user"
+description: "Update a user's full_name/password (basic auth only)"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/update-current-user"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, update-current-user]
+---
+
 # Update current user
 
 > Update a user's full_name/password (basic auth only)
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/orgs/members/basic**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "List Runs"
+description: "List runs for a thread."
+source: "https://docs.langchain.com/langsmith/agent-server-api/thread-runs"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, thread-runs]
+---
+
 # List Runs
 
 > List runs for a thread.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /threads/{thread_id}/runs**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Streaming"
+description: "Stream real-time updates from agent runs"
+source: "https://docs.langchain.com/oss/python/langchain/streaming"
+category: "docs"
+tags: [docs, langchain, streaming]
+---
+
 # Streaming
 
 > Stream real-time updates from agent runs
@@ -45,6 +53,8 @@ For example, if you have an agent that calls a tool once, you should see the fol
 
 Pass a `thread_id` via `config` so the conversation is checkpointed and follow-up turns can resume the same history. `thread_id` is independent of `stream_mode`; you can also pass `context` alongside it for per-run data your tools read from `runtime.context`.
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 from langchain_core.utils.uuid import uuid7
@@ -77,6 +87,8 @@ for kind, item in stream.interleave("messages", "tool_calls"):  # [!code highlig
 
 final_state = stream.output  # [!code highlight]
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -111,6 +123,8 @@ for kind, item in stream.interleave("messages", "tool_calls"):  # [!code highlig
 final_state = stream.output  # [!code highlight]
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 from langchain_core.utils.uuid import uuid7
@@ -143,6 +157,8 @@ for kind, item in stream.interleave("messages", "tool_calls"):  # [!code highlig
 
 final_state = stream.output  # [!code highlight]
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -177,6 +193,8 @@ for kind, item in stream.interleave("messages", "tool_calls"):  # [!code highlig
 final_state = stream.output  # [!code highlight]
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 from langchain_core.utils.uuid import uuid7
@@ -209,6 +227,8 @@ for kind, item in stream.interleave("messages", "tool_calls"):  # [!code highlig
 
 final_state = stream.output  # [!code highlight]
 ```
+
+**Baseten**
 
 ```python
 from langchain.agents import create_agent
@@ -243,6 +263,8 @@ for kind, item in stream.interleave("messages", "tool_calls"):  # [!code highlig
 final_state = stream.output  # [!code highlight]
 ```
 
+**Ollama**
+
 ```python
 from langchain.agents import create_agent
 from langchain_core.utils.uuid import uuid7
@@ -275,6 +297,9 @@ for kind, item in stream.interleave("messages", "tool_calls"):  # [!code highlig
 
 final_state = stream.output  # [!code highlight]
 ```
+
+#### [View example trace](https://smith.langchain.com/public/a52e36fe-3aeb-4273-9ff3-f8a42d0d218b/r)
+Open a public LangSmith run for this example.
 
 ```shell
 step: model
@@ -529,6 +554,9 @@ for message in stream.messages:
     for token in message.text:
         print(token, end="", flush=True)
 ```
+
+#### [View example trace](https://smith.langchain.com/public/603f06aa-a85d-4b00-a85a-dd4f75755aee/r)
+Open a public LangSmith run for this example.
 
 ```shell
 [thinking] The user is asking about the weather in San Francisco. I have a tool
@@ -1092,9 +1120,11 @@ See the [LangGraph streaming guide](../langgraph/streaming.md#disable-streaming-
 ## v2 streaming format
 
 > [!NOTE]
-> Requires LangGraph >= 1.1.
+> Requires LangGraph 1.1 or later.
 
 Pass `version="v2"` to `stream()` or `astream()` to get a unified output format. Every chunk is a `StreamPart` dict with `type`, `ns`, and `data` keys — the same shape regardless of stream mode or number of modes:
+
+**v2 (new)**
 
 ```python
 # Unified format — no more tuple unpacking
@@ -1106,6 +1136,8 @@ for chunk in agent.stream(
     print(chunk["type"])  # "updates" or "custom"
     print(chunk["data"])  # payload
 ```
+
+**v1 (current default)**
 
 ```python
 # Must unpack (mode, data) tuples
@@ -1142,7 +1174,7 @@ See the [LangGraph streaming docs](../langgraph/streaming.md#stream-output-forma
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

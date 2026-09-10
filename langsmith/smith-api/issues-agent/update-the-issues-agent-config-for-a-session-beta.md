@@ -1,3 +1,11 @@
+---
+title: "Update the issues agent config for a session (Beta)"
+description: "Beta: This endpoint is in active development and may change without notice."
+source: "https://docs.langchain.com/langsmith/smith-api/issues-agent/update-the-issues-agent-config-for-a-session-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, issues-agent, update-the-issues-agent-config-for-a-session-beta]
+---
+
 # Update the issues agent config for a session (Beta)
 
 > **Beta:** This endpoint is in active development and may change without notice.
@@ -7,6 +15,8 @@ the GitHub repo changes, setting agent_overview_repo_id) happen in a
 single CRUD transaction. Omitted fields are left unchanged.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/platform/sessions/{session_id}/issues-agent**
 
 ````yaml
 openapi: 3.1.0

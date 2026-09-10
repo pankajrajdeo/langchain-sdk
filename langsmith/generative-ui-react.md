@@ -1,3 +1,11 @@
+---
+title: "How to implement generative user interfaces with LangGraph"
+description: "Prerequisites"
+source: "https://docs.langchain.com/langsmith/generative-ui-react"
+category: "docs"
+tags: [docs, langsmith, generative-ui-react]
+---
+
 # How to implement generative user interfaces with LangGraph
 
 > [!NOTE]
@@ -508,7 +516,7 @@ ui.delete(message.id);
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/generative-ui-react.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

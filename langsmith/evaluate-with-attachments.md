@@ -1,3 +1,11 @@
+---
+title: "Run an evaluation with multimodal content"
+description: "Learn how to create dataset examples with file attachments and use them in prompts and evaluators when running LangSmith evaluations with multimodal content."
+source: "https://docs.langchain.com/langsmith/evaluate-with-attachments"
+category: "docs"
+tags: [docs, langsmith, evaluate-with-attachments]
+---
+
 # Run an evaluation with multimodal content
 
 > Learn how to create dataset examples with file attachments and use them in prompts and evaluators when running LangSmith evaluations with multimodal content.
@@ -162,7 +170,7 @@ ls_client.create_examples(
 
 #### TypeScript
 
-Requires version >= 0.2.13
+Requires version 0.2.13 or later
 
 You can use the `uploadExamplesMultipart` method to upload examples with attachments.
 
@@ -416,6 +424,8 @@ The exact same rules apply as above to determine whether the evaluator should re
 
 The evaluator below uses an LLM to judge if the reasoning and the answer are consistent. To learn more about how to define llm-based evaluators, please see [How to define an LLM-as-a-judge evaluator](llm-as-judge.md).
 
+**Python**
+
 ```python
 # Assumes you've installed pydantic
 from pydantic import BaseModel
@@ -456,6 +466,8 @@ ls_client.evaluate(
   evaluators=[valid_image_description],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { zodResponseFormat } from 'openai/helpers/zod';
@@ -526,6 +538,8 @@ Note that:
 * An error will be raised if you pass in a non-existent attachment name to `retain` or `rename`.
 * New attachments take precedence over existing attachments in case the same attachment name appears in the `attachments` and `attachment_operations` fields.
 
+**Python**
+
 ```python
 example_update = {
   "id": example_id,
@@ -549,6 +563,8 @@ example_update = {
 
 ls_client.update_examples(dataset_id=dataset.id, updates=[example_update])
 ```
+
+**TypeScript**
 
 ```typescript
 import { ExampleUpdateWithAttachments } from "langsmith/schemas";
@@ -580,7 +596,7 @@ await langsmithClient.updateExamplesMultipart(dataset.id, [exampleUpdate]);
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-with-attachments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

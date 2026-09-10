@@ -1,3 +1,11 @@
+---
+title: "Query thread stats"
+description: "GET with body payload — no resources created. Returns aggregate statistics for threads in a tracing project. The response includes the thread counts, run counts, latency percentiles, rates, token..."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/query-thread-stats"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, query-thread-stats]
+---
+
 # Query thread stats
 
 > GET with body payload — no resources created. Returns aggregate statistics for threads in a tracing project.
@@ -6,6 +14,8 @@ The response includes the thread counts, run counts, latency percentiles, rates,
 Self-hosted deployments require LangSmith `v0.17` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/threads/stats**
 
 ````yaml
 openapi: 3.1.0

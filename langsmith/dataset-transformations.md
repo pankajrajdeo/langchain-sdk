@@ -1,3 +1,11 @@
+---
+title: "Dataset transformations"
+description: "LangSmith allows you to attach transformations to fields in your dataset's schema that apply to your data before it is added to your dataset, whether that be from UI, API, or run rules."
+source: "https://docs.langchain.com/langsmith/dataset-transformations"
+category: "docs"
+tags: [docs, langsmith, dataset-transformations]
+---
+
 # Dataset transformations
 
 LangSmith allows you to attach transformations to fields in your dataset's schema that apply to your data before it is added to your dataset, whether that be from UI, API, or run rules.
@@ -112,7 +120,7 @@ And the transformations look as follows:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/dataset-transformations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

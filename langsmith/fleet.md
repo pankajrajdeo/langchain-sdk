@@ -1,3 +1,11 @@
+---
+title: "No-code agents with LangSmith Fleet"
+description: "Create helpful AI agents without code. Start from a template, connect your accounts, and let the agent handle routine work while you stay in control."
+source: "https://docs.langchain.com/langsmith/fleet"
+category: "docs"
+tags: [docs, langsmith, fleet]
+---
+
 # No-code agents with LangSmith Fleet
 
 > Create helpful AI agents without code. Start from a template, connect your accounts, and let the agent handle routine work while you stay in control.
@@ -70,7 +78,7 @@ Fleet uses the following approach to AI:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

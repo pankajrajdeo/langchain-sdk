@@ -1,3 +1,11 @@
+---
+title: "OpenAI middleware integration"
+description: "Integrate with the OpenAI middleware using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/middleware/openai"
+category: "docs"
+tags: [docs, integrations, middleware, openai]
+---
+
 # OpenAI middleware integration
 
 > Integrate with the OpenAI middleware using LangChain Python.
@@ -153,7 +161,7 @@ agent_replace = create_agent(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Add a custom search tool, memory, and a schedule"
+description: "Replace provider search with a Tavily tool, then add durable memory and a daily schedule to the research assistant from the quickstart."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tutorial"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-tutorial]
+---
+
 # Add a custom search tool, memory, and a schedule
 
 > Replace provider search with a Tavily tool, then add durable memory and a daily schedule to the research assistant from the quickstart.
@@ -21,25 +29,35 @@ Built-in provider search is convenient for a first run. Authored tools give you 
 
 Add a [Tavily API key](https://app.tavily.com) to `.env`:
 
+**.env**
+
 ```text
 TAVILY_API_KEY=<TAVILY_API_KEY>
 ```
 
 Install the Tavily client:
 
+**npm**
+
 ```bash
 npm install @langchain/tavily
 ```
 
+**pnpm**
+
 ```bash
 pnpm add @langchain/tavily
 ```
+
+**bun**
 
 ```bash
 bun add @langchain/tavily
 ```
 
 Create a custom `internet_search` tool:
+
+**tools/search.ts**
 
 ```ts
 import { TavilySearch } from "@langchain/tavily";
@@ -69,6 +87,8 @@ export const internetSearch = tool(
 
 Replace the provider search tool dict with your authored tool. Keep the `model` value from the quickstart:
 
+**agent.ts**
+
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
 
@@ -92,6 +112,8 @@ Confirm the agent calls `internet_search` and returns an answer with citations. 
 ### Update the instructions for memory
 Extend `instructions.md` so the agent knows what shared knowledge to keep. Keep the research behavior and add a memory policy:
 
+**instructions.md**
+
 ```markdown
 # Research assistant
 
@@ -108,6 +130,8 @@ keep notes, and return concise answers with citations.
 ### Enable and use durable memory
 Durable memory is opt-in. Before asking the agent to remember anything, add a memory declaration at the project root:
 
+**memory.ts**
+
 ```ts
 import { defineMemory } from "managed-deepagents";
 
@@ -122,6 +146,8 @@ See [Memory](managed-deep-agents-memory.md) for details.
 
 ### Schedule a daily digest
 Add a `schedules/` module so the agent runs on a cron cadence without a user message. This schedule runs every weekday at 8am Pacific:
+
+**schedules/daily-digest.ts**
 
 ```ts
 import { defineSchedule } from "managed-deepagents";
@@ -148,13 +174,19 @@ For thread behavior and constraints, see [Schedules](managed-deep-agents-schedul
 ### Deploy and inspect
 Deploy the project to LangSmith:
 
+**npm**
+
 ```bash
 npx mda deploy
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda deploy
 ```
+
+**bun**
 
 ```bash
 bunx mda deploy
@@ -184,7 +216,7 @@ Develop Harbor evals with a coding agent and the eval-engineering skill.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

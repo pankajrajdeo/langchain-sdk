@@ -1,8 +1,18 @@
+---
+title: "Get service accounts"
+description: "Get the current organization's service accounts."
+source: "https://docs.langchain.com/langsmith/smith-api/service-accounts/get-service-accounts"
+category: "docs"
+tags: [docs, langsmith, smith-api, service-accounts, get-service-accounts]
+---
+
 # Get service accounts
 
 > Get the current organization's service accounts.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/service-accounts**
 
 ````yaml
 openapi: 3.1.0

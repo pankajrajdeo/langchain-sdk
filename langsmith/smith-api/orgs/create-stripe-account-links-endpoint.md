@@ -1,8 +1,18 @@
+---
+title: "Create stripe account links endpoint"
+description: "Kick off a Stripe account link flow."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/create-stripe-account-links-endpoint"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, create-stripe-account-links-endpoint]
+---
+
 # Create stripe account links endpoint
 
 > Kick off a Stripe account link flow.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/stripe_account_links**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Delete experiment view override configuration"
+description: "Permanently deletes an experiment view override configuration for a dataset. This operation removes all column override settings including color gradients, precision configurations, and visibility..."
+source: "https://docs.langchain.com/langsmith/smith-api/experiment-view-overrides/delete-experiment-view-override-configuration"
+category: "docs"
+tags: [docs, langsmith, smith-api, experiment-view-overrides, delete-experiment-view-override-configuration]
+---
+
 # Delete experiment view override configuration
 
 > Permanently deletes an experiment view override configuration for a dataset.
@@ -13,6 +21,8 @@ The operation will fail if the override doesn't exist or if the user doesn't hav
 appropriate permissions for the dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /datasets/{dataset_id}/experiment-view-overrides/{id}**
 
 ````yaml
 openapi: 3.1.0

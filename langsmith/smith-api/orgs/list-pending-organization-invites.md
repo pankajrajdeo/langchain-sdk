@@ -1,8 +1,18 @@
+---
+title: "List pending organization invites"
+description: "Get all pending orgs visible to this auth"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/list-pending-organization-invites"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, list-pending-organization-invites]
+---
+
 # List pending organization invites
 
 > Get all pending orgs visible to this auth
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/pending**
 
 ````yaml
 openapi: 3.1.0

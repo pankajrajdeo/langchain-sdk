@@ -1,3 +1,11 @@
+---
+title: "Trace OpenAI Agents SDK applications"
+description: "Trace OpenAI Agents SDK Python and JavaScript applications with LangSmith."
+source: "https://docs.langchain.com/langsmith/trace-with-openai-agents-sdk"
+category: "docs"
+tags: [docs, langsmith, trace-with-openai-agents-sdk]
+---
+
 # Trace OpenAI Agents SDK applications
 
 > Trace OpenAI Agents SDK Python and JavaScript applications with LangSmith.
@@ -14,9 +22,13 @@ Use LangSmith to trace OpenAI Agents SDK runs, including agent steps, model call
 
 Install LangSmith with OpenAI Agents support:
 
+**pip**
+
 ```bash
 pip install "langsmith[openai-agents]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[openai-agents]"
@@ -25,6 +37,8 @@ uv add "langsmith[openai-agents]"
 This installs both the LangSmith library and the OpenAI Agents SDK.
 
 ## Environment configuration
+
+**Shell**
 
 ```bash
 export LANGSMITH_API_KEY=<your-api-key>
@@ -72,19 +86,27 @@ The agent's execution flow, including spans and their details, is logged to Lang
 
 Install LangSmith and the OpenAI Agents SDK:
 
+**npm**
+
 ```bash
 npm install langsmith @openai/agents zod
 ```
 
+**yarn**
+
 ```bash
 yarn add langsmith @openai/agents zod
 ```
+
+**pnpm**
 
 ```bash
 pnpm add langsmith @openai/agents zod
 ```
 
 ## Environment configuration
+
+**Shell**
 
 ```bash
 export LANGSMITH_API_KEY=<your-api-key>
@@ -241,7 +263,7 @@ try {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-openai-agents-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

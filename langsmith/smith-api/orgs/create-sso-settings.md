@@ -1,8 +1,18 @@
+---
+title: "Create SSO settings"
+description: "Create SSO provider settings for the current organization."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/create-sso-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, create-sso-settings]
+---
+
 # Create SSO settings
 
 > Create SSO provider settings for the current organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/sso-settings**
 
 ````yaml
 openapi: 3.1.0

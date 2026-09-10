@@ -1,3 +1,11 @@
+---
+title: "MongoDB atlas integrations"
+description: "Integrate with MongoDB atlas using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/mongodb_atlas"
+category: "docs"
+tags: [docs, integrations, providers, mongodb_atlas]
+---
+
 # MongoDB atlas integrations
 
 > Integrate with MongoDB atlas using LangChain Python.
@@ -12,9 +20,13 @@ See [detail configuration instructions](../vectorstores/mongodb_atlas.md).
 
 We need to install `langchain-mongodb` python package.
 
+**pip**
+
 ```bash
 pip install langchain-mongodb
 ```
+
+**uv**
 
 ```bash
 uv add langchain-mongodb
@@ -115,7 +127,7 @@ set_llm_cache(MongoDBAtlasSemanticCache(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

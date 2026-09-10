@@ -1,3 +1,11 @@
+---
+title: "Prediction guard integrations"
+description: "Integrate with Prediction guard using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/predictionguard"
+category: "docs"
+tags: [docs, integrations, providers, predictionguard]
+---
+
 # Prediction guard integrations
 
 > Integrate with Prediction guard using LangChain Python.
@@ -12,9 +20,13 @@ package.
 
 * Install the PredictionGuard LangChain partner package:
 
+**pip**
+
 ```bash
 pip install langchain-predictionguard
 ```
+
+**uv**
 
 ```bash
 uv add langchain-predictionguard
@@ -93,7 +105,7 @@ llm.invoke("Tell me a joke about bears")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/predictionguard.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

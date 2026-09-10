@@ -1,3 +1,11 @@
+---
+title: "Query thread traces"
+description: "Retrieve all traces belonging to a specific thread within a project."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/query-thread-traces"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, query-thread-traces]
+---
+
 # Query thread traces
 
 > Retrieve all traces belonging to a specific thread within a project.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/threads/{thread_id}/traces**
 
 ````yaml
 openapi: 3.1.0
@@ -208,9 +218,9 @@ paths:
           name: page_size
           in: query
           schema:
-            default: 20
             maximum: 100
             type: integer
+            default: 20
             minimum: 1
             title: Page Size
         - description: '`project_id` is the tracing project UUID (required).'
@@ -218,8 +228,8 @@ paths:
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
         - example:
             - NAME
@@ -234,6 +244,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - THREAD_ID
@@ -261,7 +272,6 @@ paths:
                 - NAME
                 - ERROR_PREVIEW
               type: string
-            type: array
             title: Selects
       responses:
         '200':

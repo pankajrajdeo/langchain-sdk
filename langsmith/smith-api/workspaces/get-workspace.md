@@ -1,8 +1,18 @@
+---
+title: "Get workspace"
+description: "Get a single workspace by ID, scoped to the current org and identity."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/get-workspace"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, get-workspace]
+---
+
 # Get workspace
 
 > Get a single workspace by ID, scoped to the current org and identity.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/{workspace_id}**
 
 ````yaml
 openapi: 3.1.0

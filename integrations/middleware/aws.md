@@ -1,3 +1,11 @@
+---
+title: "AWS middleware integration"
+description: "Integrate with AWS middleware using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/middleware/aws"
+category: "docs"
+tags: [docs, integrations, middleware, aws]
+---
+
 # AWS middleware integration
 
 > Integrate with AWS middleware using LangChain Python.
@@ -30,6 +38,8 @@ Supported models:
 
 **API reference:** [`BedrockPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-aws/middleware/prompt_caching/BedrockPromptCachingMiddleware)
 
+**ChatBedrockConverse**
+
 ```python
 from langchain_aws import ChatBedrockConverse
 from langchain_aws.middleware.prompt_caching import BedrockPromptCachingMiddleware
@@ -41,6 +51,8 @@ agent = create_agent(
     middleware=[BedrockPromptCachingMiddleware(ttl="1h")], # [!code highlight]
 )
 ```
+
+**ChatBedrock**
 
 ```python
 from langchain_aws import ChatBedrock
@@ -324,6 +336,8 @@ For your own tools to work with auto-payment, they need two things:
 
 **1. Signal 402 (output)**: The tool must indicate a 402 response in its return value. Three formats are supported:
 
+**PAYMENT_REQUIRED marker (recommended)**
+
 ```python
 import json
 
@@ -339,6 +353,8 @@ def my_api(query: str, headers: dict = None) -> str:
         return f"PAYMENT_REQUIRED: {json.dumps(payload)}" # [!code highlight]
     return resp.text
 ```
+
+**Raw JSON (fallback detection)**
 
 ```python
 import json
@@ -356,6 +372,8 @@ def my_api(query: str, headers: dict = None) -> str:
         "body": resp.json(),
     })
 ```
+
+**Custom handler**
 
 ```python
 config = AgentCorePaymentsConfig(
@@ -555,6 +573,8 @@ Tools not in the list pass through untouched. When `None` (default), all tools a
 
 For payment managers using `CUSTOM_JWT` authorizer:
 
+**Static token**
+
 ```python
 config = AgentCorePaymentsConfig(
     payment_manager_arn="arn:aws:bedrock-agentcore:us-east-1:123456789012:payment-manager/pm-abc123",
@@ -563,6 +583,8 @@ config = AgentCorePaymentsConfig(
     auto_session=True,
 )
 ```
+
+**Dynamic token provider (recommended)**
 
 ```python
 config = AgentCorePaymentsConfig(
@@ -642,6 +664,8 @@ Install FastAPI to run the asynchronous web server example:
 pip install -U fastapi
 ```
 
+**Async in FastAPI**
+
 ```python
 from bedrock_agentcore.payments.integrations.langgraph import (
     AgentCorePaymentsConfig,
@@ -673,6 +697,8 @@ async def chat(message: str):
     result = await agent.ainvoke({"messages": [{"role": "user", "content": message}]})
     return result
 ```
+
+**Sync in a script**
 
 ```python
 from bedrock_agentcore.payments.integrations.langgraph import (
@@ -771,7 +797,7 @@ Compatible tools that meet the [custom tool integration contract](#custom-tool-i
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

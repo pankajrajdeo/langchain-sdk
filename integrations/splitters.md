@@ -1,10 +1,22 @@
+---
+title: "Text splitter integrations"
+description: "Integrate with text splitters using LangChain."
+source: "https://docs.langchain.com/oss/python/integrations/splitters"
+category: "docs"
+tags: [docs, integrations, splitters]
+---
+
 # Text splitter integrations
 
 > Integrate with text splitters using LangChain.
 
+**pip**
+
 ```bash
 pip install -U langchain-text-splitters
 ```
+
+**uv**
 
 ```bash
 uv add langchain-text-splitters
@@ -92,7 +104,7 @@ Examples of structure-based splitting:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

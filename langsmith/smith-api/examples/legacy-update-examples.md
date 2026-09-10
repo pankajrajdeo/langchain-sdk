@@ -1,8 +1,18 @@
+---
+title: "Legacy update examples"
+description: "Legacy update examples in bulk. For update involving attachments, use PATCH /v1/platform/datasets/{dataset_id}/examples instead."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/legacy-update-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, legacy-update-examples]
+---
+
 # Legacy update examples
 
 > Legacy update examples in bulk. For update involving attachments, use PATCH /v1/platform/datasets/{dataset_id}/examples instead.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/examples/bulk**
 
 ````yaml
 openapi: 3.1.0

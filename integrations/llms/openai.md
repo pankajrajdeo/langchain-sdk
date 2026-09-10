@@ -1,3 +1,11 @@
+---
+title: "OpenAI integration"
+description: "Integrate with the OpenAI LLM using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/llms/openai"
+category: "docs"
+tags: [docs, integrations, llms, openai]
+---
+
 # OpenAI integration
 
 > Integrate with the OpenAI LLM using LangChain Python.
@@ -130,7 +138,7 @@ For detailed documentation of all [`OpenAI`](https://reference.langchain.com/pyt
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

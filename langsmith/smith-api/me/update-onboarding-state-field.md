@@ -1,3 +1,11 @@
+---
+title: "Update onboarding state field"
+description: "Update a specific onboarding completion field for the current user."
+source: "https://docs.langchain.com/langsmith/smith-api/me/update-onboarding-state-field"
+category: "docs"
+tags: [docs, langsmith, smith-api, me, update-onboarding-state-field]
+---
+
 # Update onboarding state field
 
 > Update a specific onboarding completion field for the current user.
@@ -10,6 +18,8 @@ Valid fields:
 - success_viewed_at
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/me/onboarding_state/{field}**
 
 ````yaml
 openapi: 3.1.0

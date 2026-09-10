@@ -1,8 +1,18 @@
+---
+title: "Get a tool by handle"
+description: "Returns a tool identified by its handle."
+source: "https://docs.langchain.com/langsmith/smith-api/tools/get-a-tool-by-handle"
+category: "docs"
+tags: [docs, langsmith, smith-api, tools, get-a-tool-by-handle]
+---
+
 # Get a tool by handle
 
 > Returns a tool identified by its handle.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/tools/{handle}**
 
 ````yaml
 openapi: 3.1.0

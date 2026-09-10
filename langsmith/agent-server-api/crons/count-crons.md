@@ -1,8 +1,18 @@
+---
+title: "Count Crons"
+description: "Get the count of crons matching the specified criteria."
+source: "https://docs.langchain.com/langsmith/agent-server-api/crons/count-crons"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, crons, count-crons]
+---
+
 # Count Crons
 
 > Get the count of crons matching the specified criteria.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /runs/crons/count**
 
 ````yaml
 openapi: 3.1.0

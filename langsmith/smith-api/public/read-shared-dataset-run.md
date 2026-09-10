@@ -1,8 +1,18 @@
+---
+title: "Read shared dataset run"
+description: "Get runs in projects run over a dataset that has been shared."
+source: "https://docs.langchain.com/langsmith/smith-api/public/read-shared-dataset-run"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, read-shared-dataset-run]
+---
+
 # Read shared dataset run
 
 > Get runs in projects run over a dataset that has been shared.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/datasets/runs/{run_id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Add memory to Managed Deep Agents"
+description: "Opt in to deployment-shared durable memory for Managed Deep Agents."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-memory"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-memory]
+---
+
 # Add memory to Managed Deep Agents
 
 > Opt in to deployment-shared durable memory for Managed Deep Agents.
@@ -32,6 +40,8 @@ Memory is not your system prompt. Define always-on behavior in [instructions](ma
 ## Enable memory
 
 Export a named `memory` declaration with the `"agent"` scope:
+
+**memory.ts**
 
 ```ts
 import { defineMemory } from "managed-deepagents";
@@ -91,7 +101,7 @@ write fails, do not claim that you remembered it.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

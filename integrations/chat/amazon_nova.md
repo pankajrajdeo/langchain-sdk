@@ -1,3 +1,11 @@
+---
+title: "ChatAmazonNova integration"
+description: "Integrate with the ChatAmazonNova chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/amazon_nova"
+category: "docs"
+tags: [docs, integrations, chat, amazon_nova]
+---
+
 # ChatAmazonNova integration
 
 > Integrate with the ChatAmazonNova chat model using LangChain Python.
@@ -35,9 +43,13 @@ To access Amazon Nova models, you'll need to [obtain API credentials](https://no
 
 ### Installation
 
+**pip**
+
 ```bash
 pip install -U langchain-amazon-nova
 ```
+
+**uv**
 
 ```bash
 uv add langchain-amazon-nova
@@ -569,7 +581,7 @@ For Amazon Nova-specific features, model details, and API specifications, see th
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/amazon_nova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Disaster recovery for self-hosted LangSmith"
+description: "This page describes how to plan, configure, and operate disaster recovery (DR) for self-hosted LangSmith Observability and Evaluation. It covers what data must be protected, where it lives, how to..."
+source: "https://docs.langchain.com/langsmith/self-host-disaster-recovery"
+category: "docs"
+tags: [docs, langsmith, self-host-disaster-recovery]
+---
+
 # Disaster recovery for self-hosted LangSmith
 
 This page describes how to plan, configure, and operate disaster recovery (DR) for self-hosted LangSmith Observability and Evaluation. It covers what data must be protected, where it lives, how to back it up, and how to recover the platform after a regional or zonal failure.
@@ -262,7 +270,7 @@ A backup is only as good as the last successful restore. Schedule the following 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-disaster-recovery.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

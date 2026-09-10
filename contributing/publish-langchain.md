@@ -1,3 +1,11 @@
+---
+title: "Publish an integration"
+description: "Make your integration available to the community."
+source: "https://docs.langchain.com/oss/python/contributing/publish-langchain"
+category: "docs"
+tags: [docs, contributing, publish-langchain]
+---
+
 # Publish an integration
 
 **Make your integration available to the community.**
@@ -136,7 +144,7 @@ Get in touch with the LangChain marketing team to explore co-marketing opportuni
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/publish-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "ChatPerplexity integration"
+description: "Integrate with the ChatPerplexity chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/perplexity"
+category: "docs"
+tags: [docs, integrations, chat, perplexity]
+---
+
 # ChatPerplexity integration
 
 > Integrate with the ChatPerplexity chat model using LangChain Python.
@@ -245,7 +253,7 @@ AnswerFormat(first_name='Michael', last_name='Jordan', year_of_birth=1963, num_s
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

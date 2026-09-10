@@ -1,8 +1,18 @@
+---
+title: "Generate query for runs"
+description: "Get runs filter expression query for a given natural language query."
+source: "https://docs.langchain.com/langsmith/smith-api/run/generate-query-for-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, generate-query-for-runs]
+---
+
 # Generate query for runs
 
 > Get runs filter expression query for a given natural language query.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/generate-query**
 
 ````yaml
 openapi: 3.1.0

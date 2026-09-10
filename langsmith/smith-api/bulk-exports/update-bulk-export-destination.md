@@ -1,8 +1,18 @@
+---
+title: "Update bulk export destination"
+description: "Update a bulk export destination"
+source: "https://docs.langchain.com/langsmith/smith-api/bulk-exports/update-bulk-export-destination"
+category: "docs"
+tags: [docs, langsmith, smith-api, bulk-exports, update-bulk-export-destination]
+---
+
 # Update bulk export destination
 
 > Update a bulk export destination
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/bulk-exports/destinations/{destination_id}**
 
 ````yaml
 openapi: 3.1.0

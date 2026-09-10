@@ -1,3 +1,11 @@
+---
+title: "OracleAI vector search integrations"
+description: "Integrate with OracleAI vector search using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/oracleai"
+category: "docs"
+tags: [docs, integrations, providers, oracleai]
+---
+
 # OracleAI vector search integrations
 
 > Integrate with OracleAI vector search using LangChain Python.
@@ -14,9 +22,13 @@ Oracle AI Database is built for AI workloads where you query data by **meaning**
 
 Install `langchain-oracledb`. The `python-oracledb` driver will be installed automatically as a dependency.
 
+**pip**
+
 ```bash
 pip install -qU langchain-oracledb
 ```
+
+**uv**
 
 ```bash
 uv add langchain-oracledb
@@ -75,7 +87,7 @@ Please check the [Oracle AI Vector Search End-to-End Demo Guide](https://github.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

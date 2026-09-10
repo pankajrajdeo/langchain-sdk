@@ -1,6 +1,16 @@
+---
+title: "Update model price"
+description: "/langsmith/langsmith-platform-openapi.json put /api/v1/model-price-map/{id}"
+source: "https://docs.langchain.com/langsmith/smith-api/model-price-map/update-model-price"
+category: "docs"
+tags: [docs, langsmith, smith-api, model-price-map, update-model-price]
+---
+
 # Update model price
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/model-price-map/{id}**
 
 ````yaml
 openapi: 3.1.0

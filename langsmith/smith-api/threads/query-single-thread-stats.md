@@ -1,3 +1,11 @@
+---
+title: "Query single thread stats"
+description: "Compute aggregate stats for a single thread (turn count, latency percentiles, token/cost sums, and detail breakdowns) within a project."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/query-single-thread-stats"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, query-single-thread-stats]
+---
+
 # Query single thread stats
 
 > Compute aggregate stats for a single thread (turn count, latency percentiles, token/cost sums, and detail breakdowns) within a project.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/threads/{thread_id}/stats**
 
 ````yaml
 openapi: 3.1.0
@@ -205,6 +215,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - TURNS
@@ -225,7 +236,6 @@ paths:
                 - COMPLETION_COST_DETAILS
                 - FEEDBACK_STATS
               type: string
-            type: array
             title: Selects
         - description: '`session_id` is the tracing project (session) UUID (required).'
           name: session_id

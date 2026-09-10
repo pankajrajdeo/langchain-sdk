@@ -1,3 +1,11 @@
+---
+title: "NVIDIA middleware integration"
+description: "Integrate with the NVIDIA middleware using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/middleware/nvidia"
+category: "docs"
+tags: [docs, integrations, middleware, nvidia]
+---
+
 # NVIDIA middleware integration
 
 > Integrate with the NVIDIA middleware using LangChain Python.
@@ -39,6 +47,8 @@ Configure `NVIDIA_API_KEY` as described in the [ChatNVIDIA setup guide](../chat/
 ### Use the built-in profile
 
 Create a deep agent with the Nemotron 3 Ultra model. Deep Agents recognizes the model and applies the profile automatically, so you do not need to instantiate or pass its middleware:
+
+**Create a profiled deep agent**
 
 ```python
 from deepagents import create_deep_agent
@@ -105,6 +115,8 @@ The OpenRouter example requires `OPENROUTER_API_KEY`. Confirm that your account 
 
 Create two LangChain chat models, adapt them as Switchyard targets, and construct the routing middleware. The order of the targets passed to `stage_router` matters: pass the capable target first and the efficient target second.
 
+**Initialize middleware**
+
 ```python
 from langchain_openrouter import ChatOpenRouter
 
@@ -130,6 +142,8 @@ Stage routing is signal-driven. It can route ordinary turns to the efficient tar
 ### Use with a deep agent
 
 Pass the middleware to [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). Deep Agents requires a base model, but the middleware replaces it for each routed call. Reuse one configured target to avoid constructing an unused model.
+
+**Agent with middleware**
 
 ```python
 from deepagents import create_deep_agent
@@ -164,6 +178,8 @@ The asynchronous `ainvoke` path is canonical. Use `agent.invoke(...)` in ordinar
 
 Every routed `AIMessage` contains the complete ordered decision trace in `response_metadata["switchyard"]`:
 
+**Inspect routing**
+
 ```python
 from langchain.messages import AIMessage
 
@@ -195,7 +211,7 @@ Some algorithms make more than one decision. Use `decisions` for the full trace;
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

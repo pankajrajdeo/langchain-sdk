@@ -1,8 +1,18 @@
+---
+title: "Create filter view"
+description: "Create a new filter view."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/create-filter-view"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, create-filter-view]
+---
+
 # Create filter view
 
 > Create a new filter view.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/sessions/{session_id}/views**
 
 ````yaml
 openapi: 3.1.0

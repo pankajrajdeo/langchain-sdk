@@ -1,3 +1,11 @@
+---
+title: "Anthropic middleware integration"
+description: "Integrate with the Anthropic middleware using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/middleware/anthropic"
+category: "docs"
+tags: [docs, integrations, middleware, anthropic]
+---
+
 # Anthropic middleware integration
 
 > Integrate with the Anthropic middleware using LangChain Python.
@@ -325,6 +333,8 @@ The text editor middleware is useful for the following:
 * [`StateClaudeTextEditorMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/anthropic_tools/StateClaudeTextEditorMiddleware)
 * [`FilesystemClaudeTextEditorMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/anthropic_tools/FilesystemClaudeTextEditorMiddleware)
 
+**State-based text editor**
+
 ```python
 from langchain_anthropic import ChatAnthropic
 from langchain_anthropic.middleware import StateClaudeTextEditorMiddleware
@@ -336,6 +346,8 @@ agent = create_agent(
     middleware=[StateClaudeTextEditorMiddleware()], # [!code highlight]
 )
 ```
+
+**Filesystem-based text editor**
 
 ```python
 from langchain_anthropic import ChatAnthropic
@@ -476,6 +488,8 @@ The memory middleware is useful for the following:
 
 **API reference:** [`StateClaudeMemoryMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/anthropic_tools/StateClaudeMemoryMiddleware), [`FilesystemClaudeMemoryMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/anthropic_tools/FilesystemClaudeMemoryMiddleware)
 
+**State-based memory**
+
 ```python
 from langchain_anthropic import ChatAnthropic
 from langchain_anthropic.middleware import StateClaudeMemoryMiddleware
@@ -487,6 +501,8 @@ agent = create_agent(
     middleware=[StateClaudeMemoryMiddleware()], # [!code highlight]
 )
 ```
+
+**Filesystem-based memory**
 
 ```python
 from langchain_anthropic import ChatAnthropic
@@ -784,7 +800,7 @@ Is there anything specific about these deadlines you'd like to know or update?
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

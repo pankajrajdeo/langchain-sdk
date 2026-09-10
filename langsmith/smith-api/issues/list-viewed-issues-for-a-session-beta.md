@@ -1,3 +1,11 @@
+---
+title: "List viewed issues for a session (Beta)"
+description: "Beta: Returns the issues in this session that the current user has opened, with timestamps. Used by the UI to derive the per-row \"unread\" indicator and the Engine tab badge."
+source: "https://docs.langchain.com/langsmith/smith-api/issues/list-viewed-issues-for-a-session-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, issues, list-viewed-issues-for-a-session-beta]
+---
+
 # List viewed issues for a session (Beta)
 
 > **Beta:** Returns the issues in this session that the current
@@ -5,6 +13,8 @@ user has opened, with timestamps. Used by the UI to derive
 the per-row "unread" indicator and the Engine tab badge.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/sessions/{session_id}/issues/views**
 
 ````yaml
 openapi: 3.1.0

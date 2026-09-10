@@ -1,3 +1,11 @@
+---
+title: "OpenUI"
+description: "Generate complete, interactive dashboards and reports using the OpenUI component library and openui-lang"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/integrations/openui"
+category: "docs"
+tags: [docs, langchain, frontend, integrations, openui]
+---
+
 # OpenUI
 
 > Generate complete, interactive dashboards and reports using the OpenUI component library and openui-lang
@@ -523,6 +531,8 @@ graph LR
 
 Use the same library object on the server (to generate the panel prompt) and on the client (as the `Renderer` prop) so the components the model is told about always match the ones the renderer can draw:
 
+**library.ts**
+
 ```ts
 import { openuiChatLibrary, openuiChatPromptOptions } from "@openuidev/react-ui";
 
@@ -591,6 +601,8 @@ The coordinator never writes openui-lang. Each panel agent calls its tools, then
 ### Register the graph
 
 Point `langgraph.json` at the exported coordinator:
+
+**langgraph.json**
 
 ```json
 {
@@ -690,7 +702,7 @@ Because the SDK keeps subagent token events out of the root store and each `Pane
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/openui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Trace Gemini Live applications"
+description: "Trace Gemini Live voice agents in LangSmith using the LangSmith SDK."
+source: "https://docs.langchain.com/langsmith/trace-gemini-live"
+category: "docs"
+tags: [docs, langsmith, trace-gemini-live]
+---
+
 # Trace Gemini Live applications
 
 > Trace Gemini Live voice agents in LangSmith using the LangSmith SDK.
@@ -24,9 +32,13 @@ LangSmith provides a tracing integration for each way to connect to Gemini Live:
 
 Install the `gemini-live` extra for a raw `google-genai` connection:
 
+**pip**
+
 ```bash
 pip install "langsmith[gemini-live]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[gemini-live]"
@@ -36,9 +48,13 @@ uv add "langsmith[gemini-live]"
 
 Install the `google-adk-live` extra for an ADK application:
 
+**pip**
+
 ```bash
 pip install "langsmith[google-adk-live]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[google-adk-live]"
@@ -48,6 +64,8 @@ uv add "langsmith[google-adk-live]"
 > The ADK Live integration requires `langsmith[google-adk-live]>=0.9.7`. This extra is separate from the `langsmith[google-adk]` batch integration.
 
 ## Set environment variables
+
+**.env**
 
 ```bash
 LANGSMITH_API_KEY=<your-langsmith-api-key>
@@ -229,7 +247,7 @@ Attach the conversation audio recording to your trace.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-gemini-live.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "List evaluators"
+description: "List evaluators for the current workspace, with optional filtering by type, name, tag, feedback key, or resource ID."
+source: "https://docs.langchain.com/langsmith/smith-api/evaluators/list-evaluators"
+category: "docs"
+tags: [docs, langsmith, smith-api, evaluators, list-evaluators]
+---
+
 # List evaluators
 
 > List evaluators for the current workspace, with optional filtering by type, name, tag, feedback key, or resource ID.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/evaluators**
 
 ````yaml
 openapi: 3.1.0
@@ -186,9 +196,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Tag Value Id
         - description: Filter by feedback key
           name: feedback_key
@@ -202,9 +212,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Resource Id
         - description: Field to sort by
           name: sort_by
@@ -222,8 +232,8 @@ paths:
           name: limit
           in: query
           schema:
-            default: 100
             type: integer
+            default: 100
             title: Limit
         - description: Offset for pagination
           name: offset

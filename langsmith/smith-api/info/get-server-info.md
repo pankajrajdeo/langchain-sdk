@@ -1,3 +1,11 @@
+---
+title: "Get server info"
+description: "Returns information about the current LangSmith deployment: version, instance feature flags, batch-ingest limits, and max SDK versions. Unauthenticated by default; set..."
+source: "https://docs.langchain.com/langsmith/smith-api/info/get-server-info"
+category: "docs"
+tags: [docs, langsmith, smith-api, info, get-server-info]
+---
+
 # Get server info
 
 > Returns information about the current LangSmith deployment: version,
@@ -5,6 +13,8 @@ instance feature flags, batch-ingest limits, and max SDK versions.
 Unauthenticated by default; set FF_INFO_ENDPOINT_AUTH_REQUIRED=true to require auth.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/info**
 
 ````yaml
 openapi: 3.1.0

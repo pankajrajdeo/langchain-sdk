@@ -1,6 +1,16 @@
+---
+title: "Upsert TTL settings"
+description: "/langsmith/langsmith-platform-openapi.json put /api/v1/orgs/ttl-settings"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/upsert-ttl-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, upsert-ttl-settings]
+---
+
 # Upsert TTL settings
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/orgs/ttl-settings**
 
 ````yaml
 openapi: 3.1.0

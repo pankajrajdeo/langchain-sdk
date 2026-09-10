@@ -1,3 +1,11 @@
+---
+title: "How to run an evaluation locally (Python only)"
+description: "Sometimes it is helpful to run an evaluation locally without uploading any results to LangSmith. For example, if you're quickly iterating on a prompt and want to smoke test it on a few examples, or..."
+source: "https://docs.langchain.com/langsmith/local"
+category: "docs"
+tags: [docs, langsmith, local]
+---
+
 # How to run an evaluation locally (Python only)
 
 Sometimes it is helpful to run an evaluation locally without uploading any results to LangSmith. For example, if you're quickly iterating on a prompt and want to smoke test it on a few examples, or if you're validating that your target and evaluator functions are defined correctly, you may not want to record these evaluations.
@@ -74,7 +82,7 @@ df[["inputs.question", "outputs.answer", "reference.answer", "feedback.is_concis
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/local.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

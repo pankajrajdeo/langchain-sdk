@@ -1,3 +1,11 @@
+---
+title: "Splitting code text splitter integration guide"
+description: "RecursiveCharacterTextSplitter includes prebuilt lists of separators that are useful for splitting text in a specific programming language."
+source: "https://docs.langchain.com/oss/python/integrations/splitters/code_splitter"
+category: "docs"
+tags: [docs, integrations, splitters, code_splitter]
+---
+
 # Splitting code text splitter integration guide
 
 [RecursiveCharacterTextSplitter](https://reference.langchain.com/python/langchain-text-splitters/character/RecursiveCharacterTextSplitter) includes prebuilt lists of separators that are useful for [splitting text](../splitters.md) in a specific programming language.
@@ -530,7 +538,7 @@ visualbasic6_docs
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/code_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

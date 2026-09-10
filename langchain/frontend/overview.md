@@ -1,3 +1,11 @@
+---
+title: "Overview"
+description: "Build generative UIs with real-time streaming from LangChain agents"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/overview"
+category: "docs"
+tags: [docs, langchain, frontend]
+---
+
 # Overview
 
 > Build generative UIs with real-time streaming from LangChain agents
@@ -63,6 +71,8 @@ need:
 These primitives let you design UIs where users can inspect, steer, pause,
 resume, and fork agent work while it is happening.
 
+**agent.py**
+
 ```python
 from langchain import create_agent
 from langgraph.checkpoint.memory import MemorySaver
@@ -74,11 +84,15 @@ agent = create_agent(
 )
 ```
 
+**types.ts**
+
 ```ts
 export interface GraphState {
   messages: BaseMessage[];
 }
 ```
+
+**Chat.tsx**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -216,7 +230,7 @@ Generative UI library for data-rich reports and dashboards using the openui-lang
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

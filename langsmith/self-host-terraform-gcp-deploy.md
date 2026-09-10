@@ -1,3 +1,11 @@
+---
+title: "Deploy LangSmith on GCP with Terraform"
+description: "End-to-end walkthrough for provisioning LangSmith self-hosted on GCP GKE using the LangChain Terraform modules."
+source: "https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy"
+category: "docs"
+tags: [docs, langsmith, self-host-terraform-gcp-deploy]
+---
+
 # Deploy LangSmith on GCP with Terraform
 
 > End-to-end walkthrough for provisioning LangSmith self-hosted on GCP GKE using the LangChain Terraform modules.
@@ -470,7 +478,7 @@ kubectl get pods -n keda
 You can enable Fleet with `enable_fleet`. Unlike the deprecated `enable_agent_builder` path, it does not require LangSmith Deployment. Terraform provisions a dedicated `fleet` database on Cloud SQL and wires the `langsmith-fleet-postgres` and `langsmith-fleet-redis` secrets to the existing Cloud SQL and Memorystore instances. Fleet reuses `langsmith_agent_builder_encryption_key`, so migrating from `enable_agent_builder` keeps the same key and data.
 
 > [!NOTE]
-> Fleet requires the LangSmith Helm chart `>=0.15.0` and the Agent Builder or Fleet entitlement in your license.
+> Fleet requires the LangSmith Helm chart 0.15.0 or later and the Agent Builder or Fleet entitlement in your license.
 
 ```hcl
 # infra/terraform.tfvars
@@ -580,7 +588,7 @@ kubectl get pods -n langsmith -w
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-gcp-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

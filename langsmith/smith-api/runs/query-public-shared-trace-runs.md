@@ -1,3 +1,11 @@
+---
+title: "Query public shared trace runs"
+description: "Returns all runs within the trace identified by the share token. The share token supplies the tenant, project, and trace scope."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/query-public-shared-trace-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, query-public-shared-trace-runs]
+---
+
 # Query public shared trace runs
 
 > Returns all runs within the trace identified by the share token. The share token supplies the tenant, project, and trace scope.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/public/{share_token}/runs/query**
 
 ````yaml
 openapi: 3.1.0

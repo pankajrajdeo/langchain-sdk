@@ -1,8 +1,18 @@
+---
+title: "Get sandbox status"
+description: "Retrieve the lightweight status of a sandbox for polling."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/get-sandbox-status"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, get-sandbox-status]
+---
+
 # Get sandbox status
 
 > Retrieve the lightweight status of a sandbox for polling.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/boxes/{name}/status**
 
 ````yaml
 openapi: 3.1.0

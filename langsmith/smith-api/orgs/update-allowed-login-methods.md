@@ -1,8 +1,18 @@
+---
+title: "Update allowed login methods"
+description: "Update allowed login methods for the current organization."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/update-allowed-login-methods"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, update-allowed-login-methods]
+---
+
 # Update allowed login methods
 
 > Update allowed login methods for the current organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/orgs/current/login-methods**
 
 ````yaml
 openapi: 3.1.0

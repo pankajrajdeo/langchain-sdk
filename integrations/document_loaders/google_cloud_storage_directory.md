@@ -1,3 +1,11 @@
+---
+title: "Google cloud storage directory integration"
+description: "Integrate with the Google cloud storage directory document loader using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_storage_directory"
+category: "docs"
+tags: [docs, integrations, document_loaders, google_cloud_storage_directory]
+---
+
 # Google cloud storage directory integration
 
 > Integrate with the Google cloud storage directory document loader using LangChain Python.
@@ -73,7 +81,7 @@ loader.load()
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_cloud_storage_directory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

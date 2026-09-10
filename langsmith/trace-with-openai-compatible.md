@@ -1,3 +1,11 @@
+---
+title: "Trace OpenAI-compatible providers"
+description: "Trace LLM calls from any OpenAI-compatible provider to LangSmith."
+source: "https://docs.langchain.com/langsmith/trace-with-openai-compatible"
+category: "docs"
+tags: [docs, langsmith, trace-with-openai-compatible]
+---
+
 # Trace OpenAI-compatible providers
 
 > Trace LLM calls from any OpenAI-compatible provider to LangSmith.
@@ -17,9 +25,13 @@ To trace OpenAI directly, refer to [Trace OpenAI applications](trace-openai.md).
 
 ## Setup
 
+**Python**
+
 ```bash
 pip install langsmith openai
 ```
+
+**npm**
 
 ```bash
 npm install langsmith openai
@@ -31,6 +43,8 @@ export LANGSMITH_TRACING=true
 ```
 
 ## Trace API calls
+
+**Python**
 
 ```python
 import os
@@ -51,6 +65,8 @@ completion = client.chat.completions.create(
 )
 print(completion.choices[0].message.content)
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -126,7 +142,7 @@ Some providers have dedicated setup guides that use `@traceable` or a native cal
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-openai-compatible.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

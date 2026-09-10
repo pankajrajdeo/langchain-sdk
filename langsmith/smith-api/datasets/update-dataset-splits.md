@@ -1,6 +1,16 @@
+---
+title: "Update dataset splits"
+description: "/langsmith/langsmith-platform-openapi.json put /api/v1/datasets/{dataset_id}/splits"
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/update-dataset-splits"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, update-dataset-splits]
+---
+
 # Update dataset splits
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/datasets/{dataset_id}/splits**
 
 ````yaml
 openapi: 3.1.0

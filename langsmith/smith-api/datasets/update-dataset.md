@@ -1,8 +1,18 @@
+---
+title: "Update dataset"
+description: "Update a specific dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/update-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, update-dataset]
+---
+
 # Update dataset
 
 > Update a specific dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/datasets/{dataset_id}**
 
 ````yaml
 openapi: 3.1.0

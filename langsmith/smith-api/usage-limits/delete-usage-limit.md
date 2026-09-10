@@ -1,8 +1,18 @@
+---
+title: "Delete usage limit"
+description: "Delete a specific usage limit."
+source: "https://docs.langchain.com/langsmith/smith-api/usage-limits/delete-usage-limit"
+category: "docs"
+tags: [docs, langsmith, smith-api, usage-limits, delete-usage-limit]
+---
+
 # Delete usage limit
 
 > Delete a specific usage limit.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/usage-limits/{usage_limit_id}**
 
 ````yaml
 openapi: 3.1.0

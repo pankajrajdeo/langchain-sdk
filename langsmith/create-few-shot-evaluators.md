@@ -1,3 +1,11 @@
+---
+title: "How to improve your evaluator with few-shot examples"
+description: "Using LLM-as-a-judge evaluators can be very helpful when you can't evaluate your system programmatically. However, their effectiveness depends on their quality and how well they align with human..."
+source: "https://docs.langchain.com/langsmith/create-few-shot-evaluators"
+category: "docs"
+tags: [docs, langsmith, create-few-shot-evaluators]
+---
+
 # How to improve your evaluator with few-shot examples
 
 Using LLM-as-a-judge evaluators can be very helpful when you can't evaluate your system programmatically. However, their effectiveness depends on their quality and how well they align with human reviewer feedback. LangSmith provides the ability to improve the alignment of LLM-as-a-judge evaluator to human preferences using few-shot examples.
@@ -60,7 +68,7 @@ Head to your dataset of corrections linked in the **Improve evaluator accuracy u
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/create-few-shot-evaluators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

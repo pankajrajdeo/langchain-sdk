@@ -1,3 +1,11 @@
+---
+title: "INVALID_GRAPH_NODE_RETURN_VALUE"
+description: "A LangGraph StateGraph received a non-dict return type from a node. Here's an example:"
+source: "https://docs.langchain.com/oss/python/langgraph/errors/INVALID_GRAPH_NODE_RETURN_VALUE"
+category: "docs"
+tags: [docs, langgraph, errors, invalid_graph_node_return_value]
+---
+
 # INVALID_GRAPH_NODE_RETURN_VALUE
 
 A LangGraph [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph)
@@ -44,7 +52,7 @@ The following may help resolve this error:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/INVALID_GRAPH_NODE_RETURN_VALUE.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

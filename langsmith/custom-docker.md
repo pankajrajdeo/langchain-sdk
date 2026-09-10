@@ -1,3 +1,11 @@
+---
+title: "How to customize the Dockerfile"
+description: "Users can add an array of additional lines to add to the Dockerfile following the import from the parent LangGraph image. In order to do this, you simply need to modify your langgraph.json file by..."
+source: "https://docs.langchain.com/langsmith/custom-docker"
+category: "docs"
+tags: [docs, langsmith, custom-docker]
+---
+
 # How to customize the Dockerfile
 
 Users can add an array of additional lines to add to the Dockerfile following the import from the parent LangGraph image. In order to do this, you simply need to modify your `langgraph.json` file by passing in the commands you want run to the `dockerfile_lines` key. For example, if we wanted to use `Pillow` in our graph you would need to add the following dependencies:
@@ -21,7 +29,7 @@ This would install the system packages required to use Pillow if we were working
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-docker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

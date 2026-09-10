@@ -1,3 +1,11 @@
+---
+title: "MODEL_NOT_FOUND"
+description: "Currently only used in langchainjs (JavaScript/TypeScript)."
+source: "https://docs.langchain.com/oss/python/langchain/errors/MODEL_NOT_FOUND"
+category: "docs"
+tags: [docs, langchain, errors, model_not_found]
+---
+
 # MODEL_NOT_FOUND
 
 > [!NOTE]
@@ -17,7 +25,7 @@ The error typically stems from either a typo in the model name string itself or 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_NOT_FOUND.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

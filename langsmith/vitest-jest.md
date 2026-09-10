@@ -1,3 +1,11 @@
+---
+title: "How to run evaluations with Vitest/Jest"
+description: "LangSmith provides integrations with Vitest and Jest that allow JavaScript and TypeScript developers to define their datasets and evaluate using familiar syntax."
+source: "https://docs.langchain.com/langsmith/vitest-jest"
+category: "docs"
+tags: [docs, langsmith, vitest-jest]
+---
+
 # How to run evaluations with Vitest/Jest
 
 LangSmith provides integrations with [Vitest](https://vitest.dev/) and [Jest](https://jestjs.io/) that allow JavaScript and TypeScript developers to define their [datasets](evaluation-concepts.md#datasets) and evaluate using familiar syntax.
@@ -26,13 +34,19 @@ This ensures that the custom test reporter and other LangSmith touchpoints do no
 
 Install the required development dependencies if you have not already:
 
+**yarn**
+
 ```bash
 yarn add -D vitest dotenv
 ```
 
+**npm**
+
 ```bash
 npm install -D vitest dotenv
 ```
+
+**pnpm**
 
 ```bash
 pnpm add -D vitest dotenv
@@ -40,13 +54,19 @@ pnpm add -D vitest dotenv
 
 The following examples also require `openai` (and `langsmith`) as a dependency:
 
+**yarn**
+
 ```bash
 yarn add langsmith openai
 ```
 
+**npm**
+
 ```bash
 npm install langsmith openai
 ```
+
+**pnpm**
 
 ```bash
 pnpm add langsmith openai
@@ -98,13 +118,19 @@ Note that this script disables Vitest's default watch mode for running evals sin
 
 Install the required development dependencies if you have not already:
 
+**yarn**
+
 ```bash
 yarn add -D jest dotenv
 ```
 
+**npm**
+
 ```bash
 npm install -D jest dotenv
 ```
+
+**pnpm**
 
 ```bash
 pnpm add -D jest dotenv
@@ -112,13 +138,19 @@ pnpm add -D jest dotenv
 
 The examples below also require `openai` (and `langsmith`) as a dependency:
 
+**yarn**
+
 ```bash
 yarn add langsmith openai
 ```
 
+**npm**
+
 ```bash
 npm install langsmith openai
 ```
+
+**pnpm**
 
 ```bash
 pnpm add langsmith openai
@@ -241,13 +273,19 @@ LANGSMITH_TRACING="true"
 
 Now use the `eval` script we set up in the previous step to run the test:
 
+**yarn**
+
 ```bash
 yarn run eval
 ```
 
+**npm**
+
 ```bash
 npm run eval
 ```
+
+**pnpm**
 
 ```bash
 pnpm run eval
@@ -416,6 +454,8 @@ Instead of defining [examples](evaluation-concepts.md#examples) inline, you can 
 * Use [`client.listExamples()`](https://reference.langchain.com/javascript/classes/langsmith.client.Client.html#listexamples) to fetch examples from a dataset that already exists in LangSmith.
 * Collect the examples into an array (e.g., `testExamples`) by iterating through the async generator.
 * Pass the array to [`ls.test.each()`](https://reference.langchain.com/javascript/modules/langsmith.vitest.html#test) to run your test logic against each example from the dataset.
+
+**{3,30-43,47}**
 
 ```typescript
 import * as ls from "langsmith/vitest";
@@ -600,7 +640,7 @@ The tests will run as normal, but the experiment logs will not be sent to LangSm
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/vitest-jest.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

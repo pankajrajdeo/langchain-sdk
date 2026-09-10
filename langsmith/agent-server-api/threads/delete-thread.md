@@ -1,8 +1,18 @@
+---
+title: "Delete Thread"
+description: "Delete a thread by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/delete-thread"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, delete-thread]
+---
+
 # Delete Thread
 
 > Delete a thread by ID.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json delete /threads/{thread_id}**
 
 ````yaml
 openapi: 3.1.0

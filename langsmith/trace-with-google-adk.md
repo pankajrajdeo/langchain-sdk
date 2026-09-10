@@ -1,3 +1,11 @@
+---
+title: "Trace Google ADK applications"
+description: "This guide shows you how to trace Google Agent Development Kit (ADK) agents in LangSmith. You'll configure automatic tracing for your ADK applications to capture agent invocations, tool calls, and..."
+source: "https://docs.langchain.com/langsmith/trace-with-google-adk"
+category: "docs"
+tags: [docs, langsmith, trace-with-google-adk]
+---
+
 # Trace Google ADK applications
 
 This guide shows you how to trace [Google Agent Development Kit (ADK)](https://github.com/google/adk-python) agents in LangSmith. You'll configure automatic tracing for your ADK applications to capture agent invocations, tool calls, and LLM interactions.
@@ -9,9 +17,13 @@ This guide shows you how to trace [Google Agent Development Kit (ADK)](https://g
 
 Install the required packages using your preferred package manager:
 
+**uv**
+
 ```bash
 uv add "langsmith[google-adk]"
 ```
+
+**pip**
 
 ```bash
 pip install langsmith[google-adk]
@@ -21,6 +33,8 @@ pip install langsmith[google-adk]
 
 Set your [API keys](create-account-api-key.md):
 
+**shell**
+
 ```bash
 export LANGSMITH_TRACING=true
 export LANGSMITH_ENDPOINT=https://api.smith.langchain.com
@@ -29,6 +43,8 @@ export LANGSMITH_PROJECT=<your_langsmith_project>
 
 export GOOGLE_API_KEY=<your_google_api_key>
 ```
+
+**.env**
 
 ```dotenv
 LANGSMITH_TRACING=true
@@ -226,7 +242,7 @@ if __name__ == "__main__":
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-google-adk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

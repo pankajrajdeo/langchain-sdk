@@ -1,3 +1,11 @@
+---
+title: "Add repo owner"
+description: "Add an owner to a repo."
+source: "https://docs.langchain.com/langsmith/smith-api/ownerships/add-repo-owner"
+category: "docs"
+tags: [docs, langsmith, smith-api, ownerships, add-repo-owner]
+---
+
 # Add repo owner
 
 > Add an owner to a repo.
@@ -5,6 +13,8 @@
 Requires being an existing owner of the repo.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/repos/{owner}/{repo}/owners**
 
 ````yaml
 openapi: 3.1.0

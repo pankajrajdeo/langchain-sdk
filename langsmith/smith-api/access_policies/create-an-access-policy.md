@@ -1,8 +1,18 @@
+---
+title: "Create an access policy"
+description: "Creates a new access policy."
+source: "https://docs.langchain.com/langsmith/smith-api/access_policies/create-an-access-policy"
+category: "docs"
+tags: [docs, langsmith, smith-api, access_policies, create-an-access-policy]
+---
+
 # Create an access policy
 
 > Creates a new access policy.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/orgs/current/access-policies**
 
 ````yaml
 openapi: 3.1.0

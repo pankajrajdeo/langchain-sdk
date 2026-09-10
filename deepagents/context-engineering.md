@@ -1,3 +1,11 @@
+---
+title: "Context engineering in Deep Agents"
+description: "Control what context your deep agent has access to and how it is managed across long-running tasks"
+source: "https://docs.langchain.com/oss/python/deepagents/context-engineering"
+category: "docs"
+tags: [docs, deepagents, context-engineering]
+---
+
 # Context engineering in Deep Agents
 
 > Control what context your deep agent has access to and how it is managed across long-running tasks
@@ -43,6 +51,8 @@ Instructions for using built-in tools or custom tools.
 
 Your custom system prompt is prepended to the built-in system prompt, which includes guidance for filesystem tools and subagents. Use it to define the agent's role, behavior, and knowledge:
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -54,6 +64,8 @@ agent = create_deep_agent(
     ),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -67,6 +79,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -78,6 +92,8 @@ agent = create_deep_agent(
     ),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -91,6 +107,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -103,6 +121,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -114,6 +134,8 @@ agent = create_deep_agent(
     ),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -141,12 +163,16 @@ You do **not** need middleware when tools alone use context or `runtime.store`; 
 
 Memory files ([`AGENTS.md`](https://agents.md/)) provide persistent context that is **always loaded** into the system prompt. Use memory for project conventions, user preferences, and critical guidelines that should apply to every conversation:
 
+**Google**
+
 ```python
 agent = create_deep_agent(
     model="google_genai:gemini-3.6-flash",
     memory=["/project/AGENTS.md", "~/.deepagents/preferences.md"],
 )
 ```
+
+**OpenAI**
 
 ```python
 agent = create_deep_agent(
@@ -155,12 +181,16 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 agent = create_deep_agent(
     model="anthropic:claude-sonnet-4-6",
     memory=["/project/AGENTS.md", "~/.deepagents/preferences.md"],
 )
 ```
+
+**OpenRouter**
 
 ```python
 agent = create_deep_agent(
@@ -169,6 +199,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 agent = create_deep_agent(
     model="fireworks:accounts/fireworks/models/glm-5p2",
@@ -176,12 +208,16 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 agent = create_deep_agent(
     model="baseten:zai-org/GLM-5.2",
     memory=["/project/AGENTS.md", "~/.deepagents/preferences.md"],
 )
 ```
+
+**Ollama**
 
 ```python
 agent = create_deep_agent(
@@ -198,12 +234,16 @@ To generate a repository wiki that coding agents discover through `AGENTS.md`, s
 
 Skills provide **on-demand** capabilities. The agent reads frontmatter from each `SKILL.md` at startup, then loads full skill content only when it determines the skill is relevant. This reduces token usage while still providing specialized workflows:
 
+**Google**
+
 ```python
 agent = create_deep_agent(
     model="google_genai:gemini-3.6-flash",
     skills=["/skills/"],
 )
 ```
+
+**OpenAI**
 
 ```python
 agent = create_deep_agent(
@@ -212,12 +252,16 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 agent = create_deep_agent(
     model="anthropic:claude-sonnet-4-6",
     skills=["/skills/"],
 )
 ```
+
+**OpenRouter**
 
 ```python
 agent = create_deep_agent(
@@ -226,6 +270,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 agent = create_deep_agent(
     model="fireworks:accounts/fireworks/models/glm-5p2",
@@ -233,12 +279,16 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 agent = create_deep_agent(
     model="baseten:zai-org/GLM-5.2",
     skills=["/skills/"],
 )
 ```
+
+**Ollama**
 
 ```python
 agent = create_deep_agent(
@@ -320,6 +370,8 @@ Define the shape of that data with `context_schema`: use a `dataclasses.dataclas
 
 Inside tools, read context from the injected [ToolRuntime](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime):
 
+**Google**
+
 ```python
 from dataclasses import dataclass
 
@@ -348,6 +400,8 @@ result = agent.invoke(
     context=Context(user_id="user-123", api_key="sk-..."),
 )
 ```
+
+**OpenAI**
 
 ```python
 from dataclasses import dataclass
@@ -378,6 +432,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from dataclasses import dataclass
 
@@ -406,6 +462,8 @@ result = agent.invoke(
     context=Context(user_id="user-123", api_key="sk-..."),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from dataclasses import dataclass
@@ -436,6 +494,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from dataclasses import dataclass
 
@@ -465,6 +525,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from dataclasses import dataclass
 
@@ -493,6 +555,8 @@ result = agent.invoke(
     context=Context(user_id="user-123", api_key="sk-..."),
 )
 ```
+
+**Ollama**
 
 ```python
 from dataclasses import dataclass
@@ -541,6 +605,8 @@ Use `state_schema` when data must be part of the agent's mutable graph state, ch
 
 Custom state schemas must subclass [DeepAgentState](https://reference.langchain.com/python/deepagents/graph/DeepAgentState). This preserves the built-in `DeltaChannel` reducer on `messages`, which keeps checkpoint growth linear as conversations get longer.
 
+**Google**
+
 ```python
 from deepagents import DeepAgentState, create_deep_agent
 from langchain.tools import ToolRuntime, tool
@@ -568,6 +634,8 @@ result = agent.invoke(
     },
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import DeepAgentState, create_deep_agent
@@ -597,6 +665,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import DeepAgentState, create_deep_agent
 from langchain.tools import ToolRuntime, tool
@@ -624,6 +694,8 @@ result = agent.invoke(
     },
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import DeepAgentState, create_deep_agent
@@ -653,6 +725,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import DeepAgentState, create_deep_agent
 from langchain.tools import ToolRuntime, tool
@@ -681,6 +755,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import DeepAgentState, create_deep_agent
 from langchain.tools import ToolRuntime, tool
@@ -708,6 +784,8 @@ result = agent.invoke(
     },
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import DeepAgentState, create_deep_agent
@@ -817,6 +895,8 @@ Separately, you can give the agent a `compact_conversation` [tool](../langchain/
 
 Enable the tool by passing [`create_summarization_tool_middleware`](https://reference.langchain.com/python/deepagents/middleware/summarization/create_summarization_tool_middleware) using the `middleware` argument on `create_deep_agent`. Custom middleware is inserted into the [Deep Agents stack](customization.md#deep-agents-stack) after [`PatchToolCallsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware):
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -832,6 +912,8 @@ agent = create_deep_agent(
     ],  # [!code highlight]
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -849,6 +931,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -864,6 +948,8 @@ agent = create_deep_agent(
     ],  # [!code highlight]
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -881,6 +967,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -897,6 +985,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -912,6 +1002,8 @@ agent = create_deep_agent(
     ],  # [!code highlight]
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -975,6 +1067,8 @@ Deep agents can use long-term memory for storing user preferences, accumulated k
 To use long-term memory, you must use a `CompositeBackend` that routes specific paths (typically `/memories/`) to a LangGraph Store, which provides durable cross-thread persistence.
 The `CompositeBackend` is a hybrid storage system where some files persist indefinitely while others remain scoped to a single thread.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -995,6 +1089,8 @@ agent = create_deep_agent(
     /memories/user_preferences.txt so you remember them in future conversations.""",
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1017,6 +1113,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -1037,6 +1135,8 @@ agent = create_deep_agent(
     /memories/user_preferences.txt so you remember them in future conversations.""",
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1059,6 +1159,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -1080,6 +1182,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -1100,6 +1204,8 @@ agent = create_deep_agent(
     /memories/user_preferences.txt so you remember them in future conversations.""",
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1154,7 +1260,7 @@ See [Long-term memory](memory.md) for setup and use cases.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/context-engineering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Export LangSmith telemetry to your observability backend"
+description: "This section is only applicable for Kubernetes deployments."
+source: "https://docs.langchain.com/langsmith/export-backend"
+category: "docs"
+tags: [docs, langsmith, export-backend]
+---
+
 # Export LangSmith telemetry to your observability backend
 
 > [!WARNING]
@@ -71,7 +79,7 @@ config:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/export-backend.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

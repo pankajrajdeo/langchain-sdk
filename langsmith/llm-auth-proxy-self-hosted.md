@@ -1,3 +1,11 @@
+---
+title: "Set up the LLM auth proxy"
+description: "Deploy an Envoy-based auth proxy that validates LangSmith-signed JWTs and routes LLM requests to your upstream provider or gateway."
+source: "https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted"
+category: "docs"
+tags: [docs, langsmith, llm-auth-proxy-self-hosted]
+---
+
 # Set up the LLM auth proxy
 
 > Deploy an Envoy-based auth proxy that validates LangSmith-signed JWTs and routes LLM requests to your upstream provider or gateway.
@@ -824,7 +832,7 @@ For the full list of configurable values, see the [Helm chart README](https://gi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-auth-proxy-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Model Context Protocol (MCP)"
+description: "Connect LangChain agents to MCP servers with the MCPAdapter, built on FastMCP."
+source: "https://docs.langchain.com/oss/python/deepagents/mcp"
+category: "docs"
+tags: [docs, deepagents, mcp]
+---
+
 # Model Context Protocol (MCP)
 
 > Connect LangChain agents to MCP servers with the MCPAdapter, built on FastMCP.
@@ -15,9 +23,13 @@
 
 Install LangChain with the `mcp` extra, which pulls in FastMCP:
 
+**pip**
+
 ```bash
 pip install "langchain[mcp]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain[mcp]"
@@ -41,7 +53,7 @@ async def main():
 <details>
 <summary>Example: Query LangChain docs</summary>
 
-The [LangChain docs MCP server](https://docs.langchain.com/use-these-docs) is a public HTTP endpoint at `https://docs.langchain.com/mcp`. Connect an agent to it to search and read documentation without writing custom tools:
+The [LangChain docs MCP server](../use-these-docs.md) is a public HTTP endpoint at `https://docs.langchain.com/mcp`. Connect an agent to it to search and read documentation without writing custom tools:
 
 ```python
 from langchain.agents import create_agent
@@ -64,7 +76,7 @@ async def main():
 ```
 
 > [!NOTE]
-> The docs MCP server is public and does not require an API key. For IDE and coding-agent setup (Claude Code, Cursor, and others), see [Use docs programmatically](https://docs.langchain.com/use-these-docs).
+> The docs MCP server is public and does not require an API key. For IDE and coding-agent setup (Claude Code, Cursor, and others), see [Use docs programmatically](../use-these-docs.md).
 
 The server exposes these tools:
 
@@ -121,7 +133,7 @@ Load MCP tools into agents, control their execution, and handle their outputs.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

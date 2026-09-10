@@ -1,3 +1,11 @@
+---
+title: "Trace Claude Managed Agents"
+description: "Automatically trace Claude Managed Agent sessions and events with LangSmith."
+source: "https://docs.langchain.com/langsmith/trace-with-claude-managed-agents"
+category: "docs"
+tags: [docs, langsmith, trace-with-claude-managed-agents]
+---
+
 # Trace Claude Managed Agents
 
 > Automatically trace Claude Managed Agent sessions and events with LangSmith.
@@ -9,15 +17,21 @@
 
 ## Installation
 
+**npm**
+
 ```bash
 npm install langsmith @anthropic-ai/sdk
 ```
+
+**yarn**
 
 ```bash
 yarn add langsmith @anthropic-ai/sdk
 ```
 
 ## Environment setup
+
+**Shell**
 
 ```bash
 export LANGSMITH_TRACING=true
@@ -28,6 +42,8 @@ export ANTHROPIC_API_KEY=<your-anthropic-api-key>
 ## Trace Claude Managed Agents
 
 Wrap the Anthropic client with `wrapAnthropic`. The wrapper will automatically trace agent creation, session creation, and all events that flow through the session.
+
+**TypeScript**
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -101,7 +117,7 @@ for await (const event of stream) {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-claude-managed-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

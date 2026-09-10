@@ -1,3 +1,11 @@
+---
+title: "Docugami integrations"
+description: "Integrate with Docugami using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/docugami"
+category: "docs"
+tags: [docs, integrations, providers, docugami]
+---
+
 # Docugami integrations
 
 > Integrate with Docugami using LangChain Python.
@@ -8,10 +16,14 @@
 
 ## Installation and setup
 
+**pip**
+
 ```bash
 pip install dgml-utils
 pip install docugami-langchain
 ```
+
+**uv**
 
 ```bash
 uv add dgml-utils
@@ -29,7 +41,7 @@ from docugami_langchain.document_loaders import DocugamiLoader
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/docugami.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

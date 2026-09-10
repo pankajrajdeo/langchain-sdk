@@ -1,3 +1,11 @@
+---
+title: "Branching chat"
+description: "Edit messages and regenerate responses by forking from checkpoints"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/branching-chat"
+category: "docs"
+tags: [docs, langchain, frontend, branching-chat]
+---
+
 # Branching chat
 
 > Edit messages and regenerate responses by forking from checkpoints
@@ -33,7 +41,9 @@ the component that renders each message. The metadata includes the parent
 checkpoint ID to fork from.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -55,6 +65,8 @@ export function Chat() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -80,6 +92,8 @@ const stream = useStream<typeof myAgent>({
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -101,6 +115,8 @@ const stream = useStream<typeof myAgent>({
   {/each}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component } from "@angular/core";
@@ -291,7 +307,7 @@ timeline view across checkpoints.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/branching-chat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

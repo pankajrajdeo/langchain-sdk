@@ -1,3 +1,11 @@
+---
+title: "Get feedback formula ep"
+description: "Get a feedback formula by id"
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/get-feedback-formula-ep"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, get-feedback-formula-ep]
+---
+
 # Get feedback formula ep
 
 > Get a feedback formula by id
@@ -5,6 +13,8 @@
 Deprecated: superseded by composite-feedback v2, where composites are code evaluators with run rules
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/feedback/formulas/{feedback_formula_id}**
 
 ````yaml
 openapi: 3.1.0

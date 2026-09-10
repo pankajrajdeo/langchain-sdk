@@ -1,3 +1,11 @@
+---
+title: "How to simulate multi-turn interactions"
+description: "AI applications with conversational interfaces, like chatbots, operate over multiple interactions with a user, also called conversation turns. When evaluating the performance of such applications..."
+source: "https://docs.langchain.com/langsmith/multi-turn-simulation"
+category: "docs"
+tags: [docs, langsmith, multi-turn-simulation]
+---
+
 # How to simulate multi-turn interactions
 
 AI applications with conversational interfaces, like chatbots, operate over multiple interactions with a user, also called conversation *turns*. When evaluating the performance of such applications, core concepts such as [building a dataset](evaluation-concepts.md#datasets) and defining [evaluators](evaluation-concepts.md#evaluators) and metrics to judge your app outputs remain useful. However, you may also find it useful to run a *simulation* between your app and a user, then evaluate this dynamically created trajectory.
@@ -18,9 +26,13 @@ This guide will show you how to simulate multi-turn interactions and evaluate th
 
 First, ensure you have the required dependencies installed:
 
+**Python**
+
 ```bash
 pip install -U langsmith openevals
 ```
+
+**TypeScript**
 
 ```bash
 npm install langsmith openevals
@@ -47,6 +59,8 @@ There are two primary components you'll need to get started:
 The simulator in `openevals` passes a single chat message to your `app` from the `user` for each turn. Therefore you should statefully track the current history internally based on `thread_id` if needed.
 
 Here's an example that simulates a multi-turn customer support interaction. This guide uses a simple chat app that wraps a single call to the OpenAI chat completions API, however this is where you would call your application or agent. In this example, our simulated user is playing the role of a particularly aggressive customer:
+
+**Python**
 
 ```python
 from openevals.simulators import run_multiturn_simulation, create_llm_simulated_user
@@ -90,6 +104,8 @@ simulator_result = run_multiturn_simulation(
 )
 print(simulator_result)
 ```
+
+**TypeScript**
 
 ```typescript
 import { OpenAI } from "openai";
@@ -197,6 +213,8 @@ If you are using one of the [LangSmith test framework integrations](pytest.md), 
 
 Here's an example:
 
+**Python**
+
 ```python
 from openevals.simulators import run_multiturn_simulation, create_llm_simulated_user
 from openevals.llm import create_llm_as_judge
@@ -255,6 +273,8 @@ def test_multiturn_message_with_openai():
     # This will cause the overall test case to fail if "score" is False.
     assert res["evaluator_results"][0]["score"]
 ```
+
+**TypeScript**
 
 ```typescript
 import { OpenAI } from "openai";
@@ -351,6 +371,8 @@ You can also use the [`evaluate`](evaluate-llm-application.md) runner to evaluat
 
 Here's an example:
 
+**Python**
+
 ```python
 from openevals.simulators import run_multiturn_simulation, create_llm_simulated_user
 from openevals.llm import create_llm_as_judge
@@ -419,6 +441,8 @@ results = ls_client.evaluate(
     evaluators=[trajectory_evaluator],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { OpenAI } from "openai";
@@ -505,6 +529,8 @@ await evaluate(target, {
 
 The above examples run using the same simulated user persona for all input examples, defined by the `system` parameter passed into `create_llm_simulated_user`. If you would like to use a different persona for specific items in your dataset, you can update your dataset examples to also contain an extra field with the desired `system` prompt, then pass that field in when creating your simulated user like this:
 
+**Python**
+
 ```python
 from openevals.simulators import run_multiturn_simulation, create_llm_simulated_user
 from openevals.llm import create_llm_as_judge
@@ -580,6 +606,8 @@ results = ls_client.evaluate(
     evaluators=[trajectory_evaluator],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { OpenAI } from "openai";
@@ -694,7 +722,7 @@ You can also explore the [OpenEvals readme](https://github.com/langchain-ai/open
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/multi-turn-simulation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

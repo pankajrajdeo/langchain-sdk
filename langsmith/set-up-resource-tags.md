@@ -1,3 +1,11 @@
+---
+title: "Set up resource tags"
+description: "Create and manage resource tags to organize projects, datasets, prompts, and other resources within a LangSmith workspace."
+source: "https://docs.langchain.com/langsmith/set-up-resource-tags"
+category: "docs"
+tags: [docs, langsmith, set-up-resource-tags]
+---
+
 # Set up resource tags
 
 > Create and manage resource tags to organize projects, datasets, prompts, and other resources within a LangSmith workspace.
@@ -226,7 +234,7 @@ For a full list of request/response fields, refer to the [API reference](smith-a
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/set-up-resource-tags.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

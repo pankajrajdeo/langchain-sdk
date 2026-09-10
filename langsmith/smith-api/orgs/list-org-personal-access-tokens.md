@@ -1,6 +1,16 @@
+---
+title: "List org personal access tokens"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/personal-access-tokens"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/list-org-personal-access-tokens"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, list-org-personal-access-tokens]
+---
+
 # List org personal access tokens
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/personal-access-tokens**
 
 ````yaml
 openapi: 3.1.0
@@ -234,6 +244,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

@@ -1,8 +1,18 @@
+---
+title: "Read run share state"
+description: "Get the state of sharing of a run."
+source: "https://docs.langchain.com/langsmith/smith-api/run/read-run-share-state"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, read-run-share-state]
+---
+
 # Read run share state
 
 > Get the state of sharing of a run.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/runs/{run_id}/share**
 
 ````yaml
 openapi: 3.1.0

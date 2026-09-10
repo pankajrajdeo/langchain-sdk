@@ -1,8 +1,18 @@
+---
+title: "Get Assistant Subgraphs"
+description: "Get an assistant's subgraphs."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-subgraphs"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, get-assistant-subgraphs]
+---
+
 # Get Assistant Subgraphs
 
 > Get an assistant's subgraphs.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /assistants/{assistant_id}/subgraphs**
 
 ````yaml
 openapi: 3.1.0

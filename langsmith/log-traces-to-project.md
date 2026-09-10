@@ -1,3 +1,11 @@
+---
+title: "Log traces to a specific project"
+description: "Route LangSmith traces to a named project instead of the default project using environment variables or the SDK."
+source: "https://docs.langchain.com/langsmith/log-traces-to-project"
+category: "docs"
+tags: [docs, langsmith, log-traces-to-project]
+---
+
 # Log traces to a specific project
 
 > Route LangSmith traces to a named project instead of the default project using environment variables or the SDK.
@@ -21,7 +29,7 @@ export LANGSMITH_PROJECT=my-custom-project
 ```
 
 > [!WARNING]
-> The `LANGSMITH_PROJECT` flag is only supported in JS SDK versions >= 0.2.16, use `LANGCHAIN_PROJECT` instead if you are using an older version.
+> The `LANGSMITH_PROJECT` flag is only supported in JS SDK 0.2.16 or later, use `LANGCHAIN_PROJECT` instead if you are using an older version.
 
 If the project specified does not exist, LangSmith will automatically create it when the first trace is ingested.
 
@@ -35,6 +43,8 @@ You can also set the project name at program runtime in various ways, depending 
 
 > [!NOTE]
 > Setting the project name dynamically using one of the following methods overrides the project name set by the `LANGSMITH_PROJECT` environment variable.
+
+**Python**
 
 ```python
 import openai
@@ -100,6 +110,8 @@ rt.end(outputs=chat_completion)
 rt.post()
 ```
 
+**TypeScript**
+
 ```typescript
 import OpenAI from "openai";
 import { traceable } from "langsmith/traceable";
@@ -140,6 +152,8 @@ await rt.postRun();
 rt.end({outputs: chatCompletion});
 await rt.patchRun();
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.otel.OtelConfig;
@@ -237,6 +251,8 @@ Use this approach for general applications where you want to dynamically route t
 3. Pass workspace configuration through your application's runtime config.
 4. Override both the workspace and project name per route to organize traces further within each workspace.
 
+**Python**
+
 ```python
 import os
 import contextlib
@@ -286,6 +302,8 @@ def handle_customer_request(customer_id: str, request_data: dict):
 handle_customer_request("premium_user_123", {"query": "Hello"})
 handle_customer_request("standard_user_456", {"query": "Hi"})
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -356,6 +374,8 @@ await handleCustomerRequest("standard_user_456", { query: "Hi" });
 ### Override default workspace for LangSmith deployments
 
 When [deploying agents](deployment.md) to LangSmith, you can override the default workspace that traces are sent to by using a graph lifespan context manager. This is useful when you want to route traces from a deployed agent to different workspaces based on runtime configuration passed through the `config` parameter.
+
+**Python**
 
 ```python
 import os
@@ -436,6 +456,8 @@ async def graph(config):
 # await graph({"configurable": {"workspace_id": "workspace_a"}})
 # await graph({"configurable": {"workspace_id": "workspace_b"}})
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -566,6 +588,8 @@ Set the `LANGSMITH_RUNS_ENDPOINTS` environment variable to a JSON value. Two for
 
 You can also pass replicas directly in code, which is useful when destinations vary per request or tenant.
 
+**Python**
+
 ```python
 from langsmith import traceable, tracing_context
 from langsmith.run_trees import WriteReplica, ApiKeyAuth
@@ -593,6 +617,8 @@ replicas = [
 with tracing_context(replicas=replicas):
     my_pipeline("What is LangSmith?")
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -633,6 +659,8 @@ You can also use the `updates` field to merge additional fields (such as [metada
 
 If all your replicas use the same LangSmith server, you can omit `api_url` and `auth` and specify only a `project_name`. The SDK reuses the default client credentials:
 
+**Python**
+
 ```python
 from langsmith import traceable, tracing_context
 from langsmith.run_trees import WriteReplica
@@ -649,6 +677,8 @@ with tracing_context(
 ):
     my_pipeline("What is LangSmith?")
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -672,6 +702,8 @@ await myPipeline("What is LangSmith?");
 When you use replicas, each replica receives a copy of every run. To submit feedback for a run on a specific replica, you need that replica's run ID. Starting in **Python SDK 0.10.8** and **JS SDK 0.8.5**, you can designate one replica as the **primary** and use `compute_run_id_for_secondary_replica` to deterministically calculate the run IDs for all other replicas.
 
 The **primary** replica keeps the original run ID unchanged. Each **secondary** replica receives a deterministic run ID derived from the original run ID and the secondary replica's project name. Use `compute_run_id_for_secondary_replica(original_run_id, project_name)` to compute the secondary run ID and pass it when calling `create_feedback`.
+
+**Python**
 
 ```python
 from langsmith import (
@@ -730,6 +762,8 @@ secondary_client.create_feedback(
     session_id=secondary_session_id,
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -805,7 +839,7 @@ if (primaryRunId) {
 ```
 
 > [!NOTE]
-> The `compute_run_id_for_secondary_replica` / `computeRunIdForSecondaryReplica` helper is available in Python SDK >= 0.10.8 and JS SDK >= 0.8.5. If you are using an earlier SDK version, upgrade to use this feature.
+> The `compute_run_id_for_secondary_replica` / `computeRunIdForSecondaryReplica` helper is available in Python SDK 0.10.8 or later and JS SDK 0.8.5 or later. If you are using an earlier SDK version, upgrade to use this feature.
 
 ### Route between LangSmith and OpenTelemetry destinations
 
@@ -821,6 +855,8 @@ Set the tracing mode using the `tracing_mode` constructor argument or the `LANGS
 > If you are using the deprecated `otel_enabled` parameter on `Client` (Python only), migrate to `tracing_mode`: `Client(otel_enabled=True)` → `Client(tracing_mode="hybrid")`. The `otel_enabled` parameter will be removed in the next minor version.
 
 Pass a configured `Client` directly into a replica to apply the desired mode at runtime:
+
+**Python**
 
 ```python
 from langsmith import Client, traceable, tracing_context
@@ -868,6 +904,8 @@ with tracing_context(replicas=get_replicas(send_to_otel=True)):   # LangSmith + 
 with tracing_context(replicas=get_replicas(send_to_otel=False)):  # LangSmith only
     joke()
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -921,7 +959,7 @@ The `tracing_mode` on each `Client` determines that replica's export path. In Py
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-traces-to-project.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

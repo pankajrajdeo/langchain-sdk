@@ -1,8 +1,18 @@
+---
+title: "Set tenant handle"
+description: "Set tenant handle."
+source: "https://docs.langchain.com/langsmith/smith-api/settings/set-tenant-handle"
+category: "docs"
+tags: [docs, langsmith, smith-api, settings, set-tenant-handle]
+---
+
 # Set tenant handle
 
 > Set tenant handle.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/settings/handle**
 
 ````yaml
 openapi: 3.1.0

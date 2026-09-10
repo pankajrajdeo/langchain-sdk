@@ -1,3 +1,11 @@
+---
+title: "How to compare experiment results"
+description: "When you are iterating on your LLM application (such as changing the model or the prompt), you may want to compare the results of different experiments."
+source: "https://docs.langchain.com/langsmith/compare-experiment-results"
+category: "docs"
+tags: [docs, langsmith, compare-experiment-results]
+---
+
 # How to compare experiment results
 
 When you are iterating on your LLM application (such as changing the model or the prompt), you may want to compare the results of different [*experiments*](evaluation-concepts.md#experiment).
@@ -116,7 +124,7 @@ Select a metadata key from the **Charts** dropdown at the top-right of the compa
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/compare-experiment-results.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

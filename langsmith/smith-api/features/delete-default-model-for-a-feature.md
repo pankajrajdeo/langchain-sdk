@@ -1,8 +1,18 @@
+---
+title: "Delete default model for a feature"
+description: "Removes the default model for a feature in the workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/features/delete-default-model-for-a-feature"
+category: "docs"
+tags: [docs, langsmith, smith-api, features, delete-default-model-for-a-feature]
+---
+
 # Delete default model for a feature
 
 > Removes the default model for a feature in the workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/features/{feature}/default-model**
 
 ````yaml
 openapi: 3.1.0

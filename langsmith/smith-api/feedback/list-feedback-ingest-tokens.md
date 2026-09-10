@@ -1,8 +1,18 @@
+---
+title: "List feedback ingest tokens"
+description: "List all feedback ingest tokens for a run."
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/list-feedback-ingest-tokens"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, list-feedback-ingest-tokens]
+---
+
 # List feedback ingest tokens
 
 > List all feedback ingest tokens for a run.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/feedback/tokens**
 
 ````yaml
 openapi: 3.1.0

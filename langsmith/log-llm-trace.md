@@ -1,3 +1,11 @@
+---
+title: "Log LLM calls"
+description: "When you call an LLM directly, outside of LangChain or a LangSmith supported integration, you need to provide specific metadata so that LangSmith can display token counts, calculate costs, and let..."
+source: "https://docs.langchain.com/langsmith/log-llm-trace"
+category: "docs"
+tags: [docs, langsmith, log-llm-trace]
+---
+
 # Log LLM calls
 
 When you call an LLM directly, outside of [LangChain](../langchain/overview.md) or a LangSmith [supported integration](integrations.md), you need to provide specific metadata so that LangSmith can display token counts, calculate costs, and let you open the [run](observability-concepts.md#runs) in the [Playground](prompt-engineering-concepts.md#playground) with the correct provider and model.
@@ -159,6 +167,8 @@ Must match the <code>id</code> of a prior <code>assistant</code> message’s <co
 #### `usage_metadata` — `object`
 Use this field to send token counts and/or costs with your model's output. See [Provide token and cost information](#provide-token-and-cost-information) for more details.
 
+**Text and reasoning**
+
 ```python
  inputs = {
   "messages": [
@@ -193,6 +203,8 @@ outputs = {
 }
 
 ```
+
+**Tool calls**
 
 ```python
 input = {
@@ -238,6 +250,8 @@ outputs = {
 }
 ```
 
+**Multimodal**
+
 ```python
 inputs = {
   "messages": [
@@ -274,6 +288,8 @@ outputs = {
   ]
 }
 ```
+
+**Server-side tool calls**
 
 ```python
 input = {
@@ -362,6 +378,8 @@ When using a custom model, it is recommended to also provide the following `meta
 * `ls_provider`: The provider of the model, e.g., `"openai"`, `"anthropic"`.
 * `ls_model_name`: The name of the model, e.g., `"gpt-5.4-mini"`, `"claude-opus-4-8"`.
 
+**Python**
+
 ```python
 from langsmith import traceable
 
@@ -389,6 +407,8 @@ def chat_model(messages: list):
 
 chat_model(inputs)
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -510,6 +530,8 @@ If you are using `traceable` or one of the SDK wrappers, LangSmith will automati
 
 Here's an example:
 
+**Python**
+
 ```python
 from langsmith.run_trees import RunTree
 run_tree = RunTree(
@@ -529,6 +551,8 @@ for token in llm_stream:
 run_tree.end(outputs={ ... })
 run_tree.patch()
 ```
+
+**TypeScript**
 
 ```typescript
 import { RunTree } from "langsmith";
@@ -563,7 +587,7 @@ await runTree.patchRun();
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-llm-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

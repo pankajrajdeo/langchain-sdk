@@ -1,8 +1,18 @@
+---
+title: "Validate example"
+description: "Validate an example."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/validate-example"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, validate-example]
+---
+
 # Validate example
 
 > Validate an example.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/examples/validate**
 
 ````yaml
 openapi: 3.1.0

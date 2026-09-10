@@ -1,3 +1,11 @@
+---
+title: "Trace Vercel AI SDK applications (JS/TS only)"
+description: "Trace Vercel AI SDK applications with LangSmith for AI SDK v5, v6, and v7."
+source: "https://docs.langchain.com/langsmith/trace-with-vercel-ai-sdk"
+category: "docs"
+tags: [docs, langsmith, trace-with-vercel-ai-sdk]
+---
+
 # Trace Vercel AI SDK applications (JS/TS only)
 
 > Trace Vercel AI SDK applications with LangSmith for AI SDK v5, v6, and v7.
@@ -12,13 +20,19 @@ Install the Vercel AI SDK, a model provider package, and LangSmith. This guide u
 > [!NOTE]
 > `LangSmithTelemetry` requires AI SDK v7 and is available in `langsmith>=0.7.2`.
 
+**npm**
+
 ```bash
 npm install ai @ai-sdk/openai zod langsmith
 ```
 
+**yarn**
+
 ```bash
 yarn add ai @ai-sdk/openai zod langsmith
 ```
+
+**pnpm**
 
 ```bash
 pnpm add ai @ai-sdk/openai zod langsmith
@@ -28,19 +42,27 @@ pnpm add ai @ai-sdk/openai zod langsmith
 > [!NOTE]
 > `wrapAISDK` supports AI SDK v6 and requires `langsmith>=0.3.63`. If you are using an older version of the AI SDK or `langsmith`, refer to the [OpenTelemetry (OTEL) based approach](legacy-trace-with-vercel-ai-sdk.md).
 
+**npm**
+
 ```bash
 npm install ai @ai-sdk/openai zod langsmith
 ```
 
+**yarn**
+
 ```bash
 yarn add ai @ai-sdk/openai zod langsmith
 ```
+
+**pnpm**
 
 ```bash
 pnpm add ai @ai-sdk/openai zod langsmith
 ```
 
 ## Environment configuration
+
+**Shell**
 
 ```bash
 export LANGSMITH_TRACING=true
@@ -680,7 +702,7 @@ The `traceable` return type is complex, which makes the cast necessary. You may 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-vercel-ai-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

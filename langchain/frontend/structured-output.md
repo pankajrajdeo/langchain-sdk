@@ -1,3 +1,11 @@
+---
+title: "Structured output"
+description: "Render structured agent responses with custom UI components instead of plain text"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/structured-output"
+category: "docs"
+tags: [docs, langchain, frontend, structured-output]
+---
+
 # Structured output
 
 > Render structured agent responses with custom UI components instead of plain text
@@ -73,7 +81,9 @@ while `stream.isLoading` is true (tool arguments may stream in gradually), and
 use `stream.submit()` to send the next prompt.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -100,6 +110,8 @@ function MathSolutionChat() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -130,6 +142,8 @@ function handleSubmit(text: string) {
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -159,6 +173,8 @@ function handleSubmit(text: string) {
   {/if}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component, computed } from "@angular/core";
@@ -311,7 +327,7 @@ function ProgressiveSolutionCard({ messages }: { messages: any[] }) {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

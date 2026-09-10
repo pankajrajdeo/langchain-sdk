@@ -1,3 +1,11 @@
+---
+title: "Yeager.ai integrations"
+description: "Integrate with Yeager.ai using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/yeagerai"
+category: "docs"
+tags: [docs, integrations, providers, yeagerai]
+---
+
 # Yeager.ai integrations
 
 > Integrate with Yeager.ai using LangChain Python.
@@ -16,10 +24,14 @@ Low code generative agent designed to help you build, prototype, and deploy Lang
 
 ### How to use?
 
+**pip**
+
 ```bash
 pip install yeagerai-agent
 yeagerai-agent
 ```
+
+**uv**
 
 ```bash
 uv add yeagerai-agent
@@ -56,7 +68,7 @@ For more information, see [yAgents' GitHub](https://github.com/yeagerai/yeagerai
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/yeagerai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

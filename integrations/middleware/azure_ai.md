@@ -1,3 +1,11 @@
+---
+title: "Microsoft Foundry middleware integration"
+description: "Integrate with the Azure AI middleware using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/middleware/azure_ai"
+category: "docs"
+tags: [docs, integrations, middleware, azure_ai]
+---
+
 # Microsoft Foundry middleware integration
 
 > Integrate with the Azure AI middleware using LangChain Python.
@@ -36,9 +44,13 @@ To use the Azure AI Content Safety middleware, install the integration package, 
 
 Install the package:
 
+**pip**
+
 ```bash
 pip install -U langchain-azure-ai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-ai
@@ -47,6 +59,8 @@ uv add langchain-azure-ai
 ### Credentials
 
 For authentication, pass either `DefaultAzureCredential()` or an API-key string through the `credential` argument. Using a Foundry Project requires the use of Microsoft Entra ID for authentication.
+
+**Initialize credential**
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -63,6 +77,8 @@ The middleware supports two endpoint styles:
 
 If both are available, prefer `project_endpoint` because it gives better defaults for Azure AI Foundry-based workflows. In most setups, you can set the environment variable once and omit `endpoint` or `project_endpoint` from each middleware instantiation.
 
+**Configure endpoint**
+
 ```python
 import os
 
@@ -70,6 +86,8 @@ os.environ["AZURE_AI_PROJECT_ENDPOINT"] = "https://<resource>.services.ai.azure.
 ```
 
 Import and configure your middleware from `langchain_azure_ai.agents.middleware`.
+
+**Initialize middleware**
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -86,6 +104,8 @@ middleware = AzureContentModerationMiddleware(
 ## Use with an agent
 
 Pass middleware to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) in order. You can combine Azure AI middleware with [built-in middleware](../../langchain/middleware/built-in.md).
+
+**Agent with middleware**
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -327,7 +347,7 @@ For the full public API, see the middleware exports in [`langchain_azure_ai.agen
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

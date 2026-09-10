@@ -1,3 +1,11 @@
+---
+title: "Add custom middleware to Managed Deep Agents"
+description: "Add built-in or custom middleware to Managed Deep Agents projects."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-middleware"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-middleware]
+---
+
 # Add custom middleware to Managed Deep Agents
 
 > Add built-in or custom middleware to Managed Deep Agents projects.
@@ -28,6 +36,8 @@ For deeper hook, state, and context details, see [custom middleware](../../langc
 
 You can use LangChain [prebuilt middleware](../../langchain/middleware/built-in.md) directly in the agent definition.
 
+**agent.py**
+
 ```python
 from langchain.agents.middleware import ModelCallLimitMiddleware, PIIMiddleware
 from managed_deepagents import define_deep_agent
@@ -51,6 +61,8 @@ For a more advanced option, you can also define [custom middleware](../../langch
 > [!NOTE]
 > Managed Deep Agents use `ainvoke` and `astream`, so custom middleware must use async hooks. Synchronous hooks remain supported with Deep Agents `invoke` and `stream`.
 
+**middleware/audit.py**
+
 ```python
 from collections.abc import Awaitable, Callable
 
@@ -71,6 +83,8 @@ async def log_tool_calls(
 ```
 
 Import the middleware into the project-root agent entry and pass it in the `middleware` list.
+
+**agent.py**
 
 ```python
 from managed_deepagents import define_deep_agent
@@ -97,7 +111,7 @@ For examples, see [Custom middleware](../../langchain/middleware/custom.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-middleware.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

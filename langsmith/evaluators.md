@@ -1,3 +1,11 @@
+---
+title: "Manage evaluators"
+description: "View and manage evaluators at the workspace level in LangSmith."
+source: "https://docs.langchain.com/langsmith/evaluators"
+category: "docs"
+tags: [docs, langsmith, evaluators]
+---
+
 # Manage evaluators
 
 > View and manage evaluators at the workspace level in LangSmith.
@@ -58,6 +66,8 @@ Use the LangSmith SDK to create evaluators programmatically. The SDK is availabl
 > [!NOTE]
 > Managing evaluators through the SDK requires `langsmith>=0.9.8` (Python, PyPI) or `langsmith>=0.7.16` (TypeScript, npm).
 
+**Python**
+
 ```python
 import asyncio
 
@@ -78,6 +88,8 @@ async def main():
 
 asyncio.run(main())
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -161,7 +173,7 @@ You cannot delete an evaluator while it is attached to a tracing project or data
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

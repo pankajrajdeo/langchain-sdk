@@ -1,3 +1,11 @@
+---
+title: "Splitting recursively - Text splitter integration guide"
+description: "This text splitter is the recommended one for generic text. It is parameterized by a list of characters. It tries to split on them in order until the chunks are small enough. The default list is..."
+source: "https://docs.langchain.com/oss/python/integrations/splitters/recursive_text_splitter"
+category: "docs"
+tags: [docs, integrations, splitters, recursive_text_splitter]
+---
+
 # Splitting recursively - Text splitter integration guide
 
 This [text splitter](../splitters.md) is the recommended one for generic text. It is parameterized by a list of characters. It tries to split on them in order until the chunks are small enough. The default list is `["\n\n", "\n", " ", ""]`. This has the effect of trying to keep all paragraphs (and then sentences, and then words) together as long as possible, as those would generically seem to be the strongest semantically related pieces of text.
@@ -85,7 +93,7 @@ text_splitter = RecursiveCharacterTextSplitter(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/recursive_text_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

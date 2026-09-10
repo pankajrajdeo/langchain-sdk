@@ -1,3 +1,11 @@
+---
+title: "Deploy other frameworks"
+description: "Deploy agents built with Claude Agent SDK, Strands, CrewAI, AutoGen, and other frameworks to LangSmith Deployment."
+source: "https://docs.langchain.com/langsmith/deploy-other-frameworks"
+category: "docs"
+tags: [docs, langsmith, deploy-other-frameworks]
+---
+
 # Deploy other frameworks
 
 > Deploy agents built with Claude Agent SDK, Strands, CrewAI, AutoGen, and other frameworks to LangSmith Deployment.
@@ -292,6 +300,8 @@ For full setup details, see [Trace AutoGen applications](trace-with-autogen.md).
 The following examples combine agent definition, Functional API wrapping, tracing setup, and export of the `agent` symbol in a single `agent.py` file. Pick the tab for your framework.
 
 #### Claude Agent SDK
+**agent.py**
+
 ```python
 import operator
 
@@ -328,6 +338,8 @@ async def agent(messages: list[dict], previous: list[dict] | None = None):
 ```
 
 #### Strands Agents
+**agent.py**
+
 ```python
 import operator
 
@@ -356,6 +368,8 @@ def agent(messages: list[Message], previous: list[Message] | None = None):
 ```
 
 #### CrewAI
+**agent.py**
+
 ```python
 import operator
 
@@ -397,6 +411,8 @@ def agent(messages: list[dict], previous: list[dict] | None = None):
 ```
 
 #### AutoGen
+**agent.py**
+
 ```python
 import operator
 
@@ -451,6 +467,8 @@ my-agent/
 [`langgraph.json`](application-structure.md#configuration-file-concepts) points Agent Server at the exported symbol:
 
 #### Claude Agent SDK
+**langgraph.json**
+
 ```json
 {
   "$schema": "https://langgra.ph/schema.json",
@@ -461,6 +479,8 @@ my-agent/
   "env": ".env"
 }
 ```
+
+**pyproject.toml**
 
 ```toml
 [project]
@@ -473,6 +493,8 @@ dependencies = [
 ]
 ```
 
+**.env**
+
 ```bash
 LANGSMITH_API_KEY=your-langsmith-api-key
 LANGSMITH_TRACING=true
@@ -481,6 +503,8 @@ ANTHROPIC_API_KEY=your-anthropic-api-key
 ```
 
 #### Strands Agents
+**langgraph.json**
+
 ```json
 {
   "$schema": "https://langgra.ph/schema.json",
@@ -491,6 +515,8 @@ ANTHROPIC_API_KEY=your-anthropic-api-key
   "env": ".env"
 }
 ```
+
+**pyproject.toml**
 
 ```toml
 [project]
@@ -505,6 +531,8 @@ dependencies = [
 ]
 ```
 
+**.env**
+
 ```bash
 LANGSMITH_API_KEY=your-langsmith-api-key
 LANGSMITH_TRACING=true
@@ -516,6 +544,8 @@ AWS_PROFILE=your-aws-profile
 ```
 
 #### CrewAI
+**langgraph.json**
+
 ```json
 {
   "$schema": "https://langgra.ph/schema.json",
@@ -526,6 +556,8 @@ AWS_PROFILE=your-aws-profile
   "env": ".env"
 }
 ```
+
+**pyproject.toml**
 
 ```toml
 [project]
@@ -541,6 +573,8 @@ dependencies = [
 ]
 ```
 
+**.env**
+
 ```bash
 LANGSMITH_API_KEY=your-langsmith-api-key
 LANGSMITH_PROJECT=my-crewai-agent
@@ -548,6 +582,8 @@ OPENAI_API_KEY=your-openai-api-key
 ```
 
 #### AutoGen
+**langgraph.json**
+
 ```json
 {
   "$schema": "https://langgra.ph/schema.json",
@@ -558,6 +594,8 @@ OPENAI_API_KEY=your-openai-api-key
   "env": ".env"
 }
 ```
+
+**pyproject.toml**
 
 ```toml
 [project]
@@ -572,6 +610,8 @@ dependencies = [
     "opentelemetry-instrumentation-openai>=0.1.0",
 ]
 ```
+
+**.env**
 
 ```bash
 LANGSMITH_API_KEY=your-langsmith-api-key
@@ -669,7 +709,7 @@ For environment configuration, deployment types, and revision management, see [D
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-other-frameworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,9 +1,19 @@
+---
+title: "Ingest runs (batch json)"
+description: "Ingests a batch of runs in a single JSON payload. The payload must have post and/or patch arrays containing run objects. Prefer this endpoint over single‑run ingestion when submitting hundreds of..."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/ingest-runs-batch-json"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, ingest-runs-batch-json]
+---
+
 # Ingest runs (batch json)
 
 > Ingests a batch of runs in a single JSON payload. The payload must have `post` and/or `patch` arrays containing run objects.
 Prefer this endpoint over single‑run ingestion when submitting hundreds of runs, but `/runs/multipart` offers better handling for very large fields and attachments.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/batch**
 
 ````yaml
 openapi: 3.1.0

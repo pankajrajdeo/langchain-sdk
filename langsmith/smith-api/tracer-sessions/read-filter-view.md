@@ -1,8 +1,18 @@
+---
+title: "Read filter view"
+description: "Get a specific filter view."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/read-filter-view"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, read-filter-view]
+---
+
 # Read filter view
 
 > Get a specific filter view.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/sessions/{session_id}/views/{view_id}**
 
 ````yaml
 openapi: 3.1.0

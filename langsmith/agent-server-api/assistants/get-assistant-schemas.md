@@ -1,8 +1,18 @@
+---
+title: "Get Assistant Schemas"
+description: "Get an assistant by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-schemas"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, get-assistant-schemas]
+---
+
 # Get Assistant Schemas
 
 > Get an assistant by ID.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /assistants/{assistant_id}/schemas**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "Search or list items within a namespace prefix."
+description: "Lists items ordered by last updated time. If a query is provided, performs a natural language search instead. Supports pagination via limit and offset, and filtering via filter."
+source: "https://docs.langchain.com/langsmith/agent-server-api/store/search-or-list-items-within-a-namespace-prefix"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, store, search-or-list-items-within-a-namespace-prefix]
+---
+
 # Search or list items within a namespace prefix.
 
 > Lists items ordered by last updated time. If a `query` is provided, performs a natural language search instead. Supports pagination via `limit` and `offset`, and filtering via `filter`.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /store/items/search**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Comparison with Claude Agent SDK"
+description: "Compare LangChain Deep Agents with the Claude Agent SDK to choose the right tool for your use case."
+source: "https://docs.langchain.com/oss/python/deepagents/comparison"
+category: "docs"
+tags: [docs, deepagents, comparison]
+---
+
 # Comparison with Claude Agent SDK
 
 > Compare LangChain Deep Agents with the Claude Agent SDK to choose the right tool for your use case.
@@ -82,7 +90,7 @@ The Claude Agent SDK is purpose-built for Claude and Anthropic's product surface
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/comparison.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Delete a registry"
+description: "Delete a sandbox registry by name."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/delete-a-registry"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, delete-a-registry]
+---
+
 # Delete a registry
 
 > Delete a sandbox registry by name.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v2/sandboxes/registries/{name}**
 
 ````yaml
 openapi: 3.1.0

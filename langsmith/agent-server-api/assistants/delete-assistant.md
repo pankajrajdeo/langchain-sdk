@@ -1,3 +1,11 @@
+---
+title: "Delete Assistant"
+description: "Delete an assistant by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/delete-assistant"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, delete-assistant]
+---
+
 # Delete Assistant
 
 > Delete an assistant by ID.
@@ -5,6 +13,8 @@
 All versions of the assistant will be deleted as well.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json delete /assistants/{assistant_id}**
 
 ````yaml
 openapi: 3.1.0

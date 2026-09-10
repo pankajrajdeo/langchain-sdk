@@ -1,6 +1,16 @@
+---
+title: "Get current workspace members"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/members"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/get-current-workspace-members"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, get-current-workspace-members]
+---
+
 # Get current workspace members
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/members**
 
 ````yaml
 openapi: 3.1.0

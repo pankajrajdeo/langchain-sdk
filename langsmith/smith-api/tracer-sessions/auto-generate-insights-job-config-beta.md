@@ -1,8 +1,18 @@
+---
+title: "Auto-generate insights job config (Beta)"
+description: "Auto-generate an insights job config."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/auto-generate-insights-job-config-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, auto-generate-insights-job-config-beta]
+---
+
 # Auto-generate insights job config (Beta)
 
 > Auto-generate an insights job config.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/sessions/{session_id}/insights/configs/generate**
 
 ````yaml
 openapi: 3.1.0

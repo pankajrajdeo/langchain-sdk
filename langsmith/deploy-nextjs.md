@@ -1,3 +1,11 @@
+---
+title: "Deploy with Next.js"
+description: "Deploy a LangChain deep agent in a Next.js App Router project with streaming chat, subagents, and thread history."
+source: "https://docs.langchain.com/langsmith/deploy-nextjs"
+category: "docs"
+tags: [docs, langsmith, deploy-nextjs]
+---
+
 # Deploy with Next.js
 
 > Deploy a LangChain deep agent in a Next.js App Router project with streaming chat, subagents, and thread history.
@@ -161,7 +169,7 @@ pnpm lint    # eslint
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-nextjs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

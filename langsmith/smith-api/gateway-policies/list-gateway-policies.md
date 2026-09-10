@@ -1,3 +1,11 @@
+---
+title: "List gateway policies"
+description: "Returns every gateway policy in the current organization. The response includes both admin-created policies and runtime-materialized children of default_spend_cap and default_rate_limit policies..."
+source: "https://docs.langchain.com/langsmith/smith-api/gateway-policies/list-gateway-policies"
+category: "docs"
+tags: [docs, langsmith, smith-api, gateway-policies, list-gateway-policies]
+---
+
 # List gateway policies
 
 > Returns every gateway policy in the current organization.
@@ -21,6 +29,8 @@ values in a JSON body and avoids the URL-length ceiling
 that a repeated query param would hit at scale.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/gateway-policies**
 
 ````yaml
 openapi: 3.1.0

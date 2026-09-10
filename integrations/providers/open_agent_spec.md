@@ -1,3 +1,11 @@
+---
+title: "Open agent spec integrations"
+description: "Integrate with Open agent spec using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/open_agent_spec"
+category: "docs"
+tags: [docs, integrations, providers, open_agent_spec]
+---
+
 # Open agent spec integrations
 
 > Integrate with Open agent spec using LangChain Python.
@@ -89,7 +97,7 @@ async def main():
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/open_agent_spec.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

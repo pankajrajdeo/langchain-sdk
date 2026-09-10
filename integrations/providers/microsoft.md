@@ -1,3 +1,11 @@
+---
+title: "Microsoft integrations"
+description: "Integrate with Microsoft using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/microsoft"
+category: "docs"
+tags: [docs, integrations, providers, microsoft]
+---
+
 # Microsoft integrations
 
 > Integrate with Microsoft using LangChain Python.
@@ -65,9 +73,13 @@ Microsoft offers three main options for accessing chat models through Azure:
 
 Microsoft Foundry provides project-level access to models and Azure services. Use `AzureAIOpenAIApiChatModel` from `langchain-azure-ai` when your application uses a Foundry project, Azure credentials, or other Foundry capabilities.
 
+**pip**
+
 ```bash
 pip install -U langchain-azure-ai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-ai
@@ -97,9 +109,13 @@ For a complete setup guide, see the [Microsoft Foundry chat model integration](.
 
 For direct Azure OpenAI access, [create an Azure deployment](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) and install the `langchain-openai` package:
 
+**pip**
+
 ```bash
 pip install -U langchain-openai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-openai
@@ -200,9 +216,13 @@ Microsoft offers two main options for accessing LLMs through Azure:
 
 See a [usage example](../llms/azure_openai.md).
 
+**pip**
+
 ```bash
 pip install -U langchain-openai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-openai
@@ -252,9 +272,13 @@ Choose an embeddings integration based on how your application connects to Azure
 
 Install `langchain-azure-ai`:
 
+**pip**
+
 ```bash
 pip install -U langchain-azure-ai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-ai
@@ -287,9 +311,13 @@ For more information, see the [Microsoft Foundry embeddings integration](azure_a
 
 See a [usage example](../embeddings/azure_openai.md).
 
+**pip**
+
 ```bash
 pip install -U langchain-openai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-openai
@@ -336,9 +364,13 @@ vector = embeddings.embed_query("LangChain makes agents easy.")
 
 Install the middleware package:
 
+**pip**
+
 ```bash
 pip install -U langchain-azure-ai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-ai
@@ -365,9 +397,13 @@ from langchain_azure_ai.agents.middleware import AzureContentModerationMiddlewar
 * Storing data for backup and restore, disaster recovery, and archiving.
 * Storing data for analysis by an on-premises or Azure-hosted service.
 
+**pip**
+
 ```bash
 pip install langchain-azure-storage
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-storage
@@ -390,9 +426,13 @@ from langchain_azure_storage.document_loaders import AzureBlobStorageLoader
 
 Install with the `deepagents` extra (requires Python 3.11+):
 
+**pip**
+
 ```bash
 pip install -U "langchain-azure-storage[deepagents]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-azure-storage[deepagents]"
@@ -431,9 +471,13 @@ For more information, see [Backend integrations](../backends.md). See the [packa
 
 > [Azure Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/) provides chat message history storage for conversational AI applications, enabling you to persist and retrieve conversation history with low latency and high availability.
 
+**pip**
+
 ```bash
 pip install langchain-azure-cosmosdb
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-cosmosdb
@@ -465,9 +509,13 @@ For async usage, import `AsyncCosmosDBChatMessageHistory` from the same package.
 
 > [`AzureCosmosDBNoSqlSemanticCache`](https://github.com/langchain-ai/langchain-azure/tree/main/libs/azure-cosmosdb) caches LLM responses in Azure Cosmos DB for NoSQL using vector similarity, returning cached results when a semantically similar prompt is seen again.
 
+**pip**
+
 ```bash
 pip install langchain-azure-cosmosdb
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-cosmosdb
@@ -517,9 +565,13 @@ See [detailed configuration instructions](../vectorstores/azure_cosmos_db_mongo_
 
 We need to install `langchain-azure-ai` and `pymongo` python packages.
 
+**pip**
+
 ```bash
 pip install langchain-azure-ai pymongo
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-ai pymongo
@@ -554,9 +606,13 @@ See [detail configuration instructions](../vectorstores/azure_cosmos_db_no_sql.m
 
 We need to install `langchain-azure-cosmosdb` and `azure-cosmos` python packages.
 
+**pip**
+
 ```bash
 pip install langchain-azure-cosmosdb azure-cosmos
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-cosmosdb azure-cosmos
@@ -631,9 +687,13 @@ Microsoft Foundry exposes LangChain service tools for Azure AI Content Understan
 
 Install the package with the `tools` extra:
 
+**pip**
+
 ```bash
 pip install -U "langchain-azure-ai[tools]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-azure-ai[tools]"
@@ -722,9 +782,13 @@ See the [Azure dynamic sessions setup instructions](../tools/azure_dynamic_sessi
 
 We need to install a python package.
 
+**pip**
+
 ```bash
 pip install langchain-azure-dynamic-sessions
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-dynamic-sessions
@@ -742,9 +806,13 @@ Trigger Azure Logic Apps workflows to automate business processes and integratio
 
 Install the package with the `tools` extra:
 
+**pip**
+
 ```bash
 pip install -U "langchain-azure-ai[tools]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-azure-ai[tools]"
@@ -764,9 +832,13 @@ Load tools dynamically from an Azure AI Foundry Toolbox via the Model Context Pr
 
 Install the package with the `tools` extra:
 
+**pip**
+
 ```bash
 pip install -U "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
@@ -782,9 +854,13 @@ from langchain_azure_ai.tools import AzureAIProjectToolbox
 
 Install the integration package:
 
+**pip**
+
 ```bash
 pip install -U "langchain-azure-ai[tools]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-azure-ai[tools]"
@@ -888,7 +964,7 @@ The Microsoft Learn guide includes complete examples for both protocols, convers
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/microsoft.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

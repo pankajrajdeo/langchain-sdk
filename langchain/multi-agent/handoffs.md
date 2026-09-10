@@ -1,3 +1,11 @@
+---
+title: "Handoffs"
+description: "In the handoffs architecture, behavior changes dynamically based on state. The core mechanism: tools update a state variable (e.g., current_step or active_agent) that persists across turns, and the..."
+source: "https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs"
+category: "docs"
+tags: [docs, langchain, multi-agent, handoffs]
+---
+
 # Handoffs
 
 In the **handoffs** architecture, behavior changes dynamically based on state. The core mechanism: [tools](../tools.md) update a state variable (e.g., `current_step` or `active_agent`) that persists across turns, and the system reads this variable to adjust behavior—either applying different configuration (system prompt, tools) or routing to a different [agent](../agents.md). This pattern supports both handoffs between distinct agents and dynamic configuration changes within a single agent.
@@ -416,7 +424,7 @@ As you design your multi-agent system, consider:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/handoffs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

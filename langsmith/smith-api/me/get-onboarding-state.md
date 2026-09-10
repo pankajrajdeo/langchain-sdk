@@ -1,8 +1,18 @@
+---
+title: "Get onboarding state"
+description: "Get onboarding state for the current user."
+source: "https://docs.langchain.com/langsmith/smith-api/me/get-onboarding-state"
+category: "docs"
+tags: [docs, langsmith, smith-api, me, get-onboarding-state]
+---
+
 # Get onboarding state
 
 > Get onboarding state for the current user.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/me/onboarding_state**
 
 ````yaml
 openapi: 3.1.0

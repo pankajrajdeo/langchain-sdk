@@ -1,3 +1,11 @@
+---
+title: "Audit logs"
+description: "Track and review administrative actions across your LangSmith organization for security, compliance, and operational visibility."
+source: "https://docs.langchain.com/langsmith/audit-logs"
+category: "docs"
+tags: [docs, langsmith, audit-logs]
+---
+
 # Audit logs
 
 > Track and review administrative actions across your LangSmith organization for security, compliance, and operational visibility.
@@ -89,15 +97,16 @@ curl -G \
 
 Audit log events are returned in [OCSF v1.7.0 API Activity (Class UID 6003)](https://schema.ocsf.io/1.7.0/classes/api_activity) format. Key fields:
 
-| Field                         | Description                                                                                                                                                  |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `actor.user.uid`              | UUID of the user who performed the action.                                                                                                                   |
-| `actor.user.credential_uid`   | UUID of the API key, PAT, or service key used to authenticate the request. `null` if the user authenticated via session (e.g., the UI).                      |
-| `api.operation`               | The LangSmith operation name (e.g., `create_api_key`, `delete_workspace`). See [tracked operations reference](#tracked-operations-reference) for all values. |
-| `status`                      | `Success`, `Failure`, or `Unknown`.                                                                                                                          |
-| `resources`                   | List of UUIDs for the resources affected by the operation (e.g., the role that was updated, the workspace that was created).                                 |
-| `metadata.uid`                | Unique identifier for this audit log event.                                                                                                                  |
-| `unmapped.original_audit_log` | The full LangSmith-native audit log record, including `organization_id` and `workspace_id`.                                                                  |
+| Field                                                               | Description                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `actor.user.uid`                                                    | UUID of the user who performed the action.                                                                                                                                                                                                                   |
+| `actor.user.credential_uid`                                         | UUID of the API key, PAT, or service key used to authenticate the request. `null` if the user authenticated via session (e.g., the UI).                                                                                                                      |
+| `api.operation`                                                     | The LangSmith operation name (e.g., `create_api_key`, `delete_workspace`). See [tracked operations reference](#tracked-operations-reference) for all values.                                                                                                 |
+| `status`                                                            | `Success`, `Failure`, or `Unknown`.                                                                                                                                                                                                                          |
+| `resources`                                                         | List of UUIDs for the resources affected by the operation (e.g., the role that was updated, the workspace that was created).                                                                                                                                 |
+| `metadata.uid`                                                      | Unique identifier for this audit log event.                                                                                                                                                                                                                  |
+| `unmapped.original_audit_log`                                       | The full LangSmith-native audit log record, including `organization_id` and `workspace_id`.                                                                                                                                                                  |
+| `unmapped.original_audit_log.enrichments.resource_owner_ls_user_id` | UUID of the member who owns the resource the operation acted on, for the operations that record it, such as revoking or deleting a personal access token. A value different from `actor.user.uid` means an administrator acted on another member's resource. |
 
 ## Forwarding to external systems
 
@@ -107,7 +116,7 @@ To forward audit log events to an external SIEM or logging platform, you can run
 
 | Category                          | Operations (`api.operation`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **API keys & credentials**        | `create_api_key`, `delete_api_key`, `create_personal_access_token`, `delete_personal_access_token`, `create_service_key`, `delete_service_key`, `update_service_key`, `create_service_account`, `delete_service_account`, `list_org_personal_access_tokens`, `list_org_service_keys`                                                                                                                                                                                                                                                                                         |
+| **API keys & credentials**        | `create_api_key`, `delete_api_key`, `create_personal_access_token`, `delete_personal_access_token`, `create_service_key`, `delete_service_key`, `update_service_key`, `create_service_account`, `delete_service_account`, `revoke_personal_access_token`, `list_org_personal_access_tokens`, `list_all_org_personal_access_tokens`, `list_org_service_keys`                                                                                                                                                                                                                  |
 | **Roles**                         | `create_role`, `update_role`, `delete_role`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **Organizations**                 | `create_organization`, `create_provisioned_saas_org`, `create_tenant`, `invite_provisioned_org_member`, `claim_pending_organization_invite`, `delete_pending_organization_invite`                                                                                                                                                                                                                                                                                                                                                                                            |
 | **Organization members**          | `invite_user_to_org`, `invite_users_to_org_batch`, `update_org_member`, `delete_org_member`, `delete_org_pending_member`, `add_basic_auth_users_to_org`, `update_basic_auth_user`                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -250,7 +259,7 @@ The [Open Cybersecurity Schema Framework (OCSF)](https://schema.ocsf.io/) is an 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/audit-logs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

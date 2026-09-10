@@ -1,6 +1,16 @@
+---
+title: "Create feedback config endpoint"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/feedback-configs"
+source: "https://docs.langchain.com/langsmith/smith-api/feedback-configs/create-feedback-config-endpoint"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback-configs, create-feedback-config-endpoint]
+---
+
 # Create feedback config endpoint
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/feedback-configs**
 
 ````yaml
 openapi: 3.1.0

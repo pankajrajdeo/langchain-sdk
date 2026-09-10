@@ -1,3 +1,11 @@
+---
+title: "Pinecone integrations"
+description: "Integrate with Pinecone using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/pinecone"
+category: "docs"
+tags: [docs, integrations, providers, pinecone]
+---
+
 # Pinecone integrations
 
 > Integrate with Pinecone using LangChain Python.
@@ -8,9 +16,13 @@
 
 Install the Python SDK:
 
+**pip**
+
 ```bash
 pip install langchain-pinecone
 ```
+
+**uv**
 
 ```bash
 uv add langchain-pinecone
@@ -77,7 +89,7 @@ Pinecone vector store can be used as a retriever for self-querying.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/pinecone.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

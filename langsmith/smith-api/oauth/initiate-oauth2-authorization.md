@@ -1,8 +1,18 @@
+---
+title: "Initiate OAuth2 authorization"
+description: "Validates authorization request parameters and redirects to the frontend consent page per RFC 6749."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/initiate-oauth2-authorization"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, initiate-oauth2-authorization]
+---
+
 # Initiate OAuth2 authorization
 
 > Validates authorization request parameters and redirects to the frontend consent page per RFC 6749.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /oauth/authorize**
 
 ````yaml
 openapi: 3.1.0

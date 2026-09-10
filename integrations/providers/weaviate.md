@@ -1,3 +1,11 @@
+---
+title: "Weaviate integrations"
+description: "Integrate with Weaviate using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/weaviate"
+category: "docs"
+tags: [docs, integrations, providers, weaviate]
+---
+
 # Weaviate integrations
 
 > Integrate with Weaviate using LangChain Python.
@@ -22,9 +30,13 @@ What is `Weaviate`?
 
 Install the Python SDK:
 
+**pip**
+
 ```bash
 pip install langchain-weaviate
 ```
+
+**uv**
 
 ```bash
 uv add langchain-weaviate
@@ -46,7 +58,7 @@ For a more detailed walkthrough of the Weaviate wrapper, see [this notebook](../
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/weaviate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

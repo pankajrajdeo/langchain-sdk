@@ -1,3 +1,11 @@
+---
+title: "How to filter experiments in the UI"
+description: "LangSmith lets you filter your previous experiments by feedback scores and metadata to make it easy to find only the experiments you care about."
+source: "https://docs.langchain.com/langsmith/filter-experiments-ui"
+category: "docs"
+tags: [docs, langsmith, filter-experiments-ui]
+---
+
 # How to filter experiments in the UI
 
 LangSmith lets you filter your previous experiments by feedback scores and metadata to make it easy to find only the experiments you care about.
@@ -79,7 +87,7 @@ Finally, we can clear and reset filters. For example, if we see there is clear t
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/filter-experiments-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Manage model configurations"
+description: "Manage model configurations and control their availability across LangSmith features."
+source: "https://docs.langchain.com/langsmith/model-configurations"
+category: "docs"
+tags: [docs, langsmith, model-configurations]
+---
+
 # Manage model configurations
 
 > Manage model configurations and control their availability across LangSmith features.
@@ -215,7 +223,7 @@ Yes. Routing is per-configuration. Configurations with OAuth enabled use OAuth; 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/model-configurations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

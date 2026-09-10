@@ -1,3 +1,11 @@
+---
+title: "Modelscope integrations"
+description: "Integrate with Modelscope using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/modelscope"
+category: "docs"
+tags: [docs, integrations, providers, modelscope]
+---
+
 # Modelscope integrations
 
 > Integrate with Modelscope using LangChain Python.
@@ -9,9 +17,13 @@ It is broken into two parts: installation and setup, and then references to spec
 
 ## Installation
 
+**pip**
+
 ```bash
 pip install -U langchain-modelscope-integration
 ```
+
+**uv**
 
 ```bash
 uv add langchain-modelscope-integration
@@ -59,7 +71,7 @@ llm.invoke("The meaning of life is")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/modelscope.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

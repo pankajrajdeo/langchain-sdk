@@ -1,8 +1,18 @@
+---
+title: "Get current SSO settings"
+description: "Get SSO provider settings for the current organization."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/get-current-sso-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, get-current-sso-settings]
+---
+
 # Get current SSO settings
 
 > Get SSO provider settings for the current organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/sso-settings**
 
 ````yaml
 openapi: 3.1.0

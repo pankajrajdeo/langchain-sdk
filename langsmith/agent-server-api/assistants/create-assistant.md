@@ -1,3 +1,11 @@
+---
+title: "Create Assistant"
+description: "Create an assistant."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/create-assistant"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, create-assistant]
+---
+
 # Create Assistant
 
 > Create an assistant.
@@ -5,6 +13,8 @@
 An initial version of the assistant will be created and the assistant is set to that version. To change versions, use the `POST /assistants/{assistant_id}/latest` endpoint.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /assistants**
 
 ````yaml
 openapi: 3.1.0

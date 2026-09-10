@@ -1,3 +1,11 @@
+---
+title: "Get experiment view override configurations for a dataset"
+description: "Retrieves all experiment view override configurations for a specific dataset. This endpoint returns column display overrides including color gradients, precision settings, and column visibility..."
+source: "https://docs.langchain.com/langsmith/smith-api/experiment-view-overrides/get-experiment-view-override-configurations-for-a-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, experiment-view-overrides, get-experiment-view-override-configurations-for-a-dataset]
+---
+
 # Get experiment view override configurations for a dataset
 
 > Retrieves all experiment view override configurations for a specific dataset.
@@ -12,6 +20,8 @@ The response includes all column overrides with their display settings:
 - Hide flags to control column visibility
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /datasets/{dataset_id}/experiment-view-overrides**
 
 ````yaml
 openapi: 3.1.0

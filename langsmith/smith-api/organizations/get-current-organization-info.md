@@ -1,8 +1,18 @@
+---
+title: "Get current organization info"
+description: "Returns organization info for the authenticated user's current organization."
+source: "https://docs.langchain.com/langsmith/smith-api/organizations/get-current-organization-info"
+category: "docs"
+tags: [docs, langsmith, smith-api, organizations, get-current-organization-info]
+---
+
 # Get current organization info
 
 > Returns organization info for the authenticated user's current organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/orgs/current/info**
 
 ````yaml
 openapi: 3.1.0
@@ -341,6 +351,14 @@ components:
         byoc_enabled:
           description: Indicates whether this org can provision BYOC data planes.
           type: boolean
+        byoc_external_id:
+          readOnly: true
+          description: >-
+            ByocExternalID is the organization's assigned AWS external ID,
+            stored only in org config.
+          anyOf:
+            - type: string
+            - type: 'null'
         byoc_max_data_planes:
           description: >-
             ByocMaxDataPlanes is the maximum number of BYOC data planes this org

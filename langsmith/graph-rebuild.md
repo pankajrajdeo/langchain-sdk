@@ -1,3 +1,11 @@
+---
+title: "Rebuild graph at runtime"
+description: "Rebuild your graph with different configurations for each run using ServerRuntime."
+source: "https://docs.langchain.com/langsmith/graph-rebuild"
+category: "docs"
+tags: [docs, langsmith, graph-rebuild]
+---
+
 # Rebuild graph at runtime
 
 > Rebuild your graph with different configurations for each run using ServerRuntime.
@@ -184,7 +192,7 @@ See more info on the [LangGraph API configuration file](cli.md#configuration-fil
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/graph-rebuild.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

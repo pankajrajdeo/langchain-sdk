@@ -1,3 +1,11 @@
+---
+title: "Evaluate experiment adhoc"
+description: "Evaluate an existing experiment with a specific evaluator."
+source: "https://docs.langchain.com/langsmith/smith-api/experiments/evaluate-experiment-adhoc"
+category: "docs"
+tags: [docs, langsmith, smith-api, experiments, evaluate-experiment-adhoc]
+---
+
 # Evaluate experiment adhoc
 
 > Evaluate an existing experiment with a specific evaluator.
@@ -6,6 +14,8 @@ This triggers immediate evaluation using the run_over_dataset approach,
 processing runs in batches to handle large experiments efficiently.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/experiments/{experiment_id}/evaluate**
 
 ````yaml
 openapi: 3.1.0

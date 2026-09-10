@@ -1,3 +1,11 @@
+---
+title: "Agent User Interaction Protocol (AG-UI)"
+description: "Expose deep agents over the Agent User Interaction Protocol (AG-UI) to stream events to any AG-UI client or frontend."
+source: "https://docs.langchain.com/oss/python/deepagents/ag-ui"
+category: "docs"
+tags: [docs, deepagents, ag-ui]
+---
+
 # Agent User Interaction Protocol (AG-UI)
 
 > Expose deep agents over the Agent User Interaction Protocol (AG-UI) to stream events to any AG-UI client or frontend.
@@ -21,9 +29,13 @@ Serve a deep agent as a LangGraph graph, then connect the TypeScript `@ag-ui/lan
 
 Install Deep Agents and the LangGraph CLI to serve the graph. The AG-UI adapter used in later steps is TypeScript (`@ag-ui/langgraph`). For a Python CopilotKit or AG-UI FastAPI bridge, see [CopilotKit](../langchain/frontend/integrations/copilotkit.md).
 
+**pip**
+
 ```bash
 pip install deepagents "langgraph-cli[inmem]"
 ```
+
+**uv**
 
 ```bash
 uv add deepagents "langgraph-cli[inmem]"
@@ -201,7 +213,7 @@ To seed input, pass `initialMessages` to the constructor, or call `addMessage` o
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/ag-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

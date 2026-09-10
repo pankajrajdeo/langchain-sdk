@@ -1,3 +1,11 @@
+---
+title: "Workload isolation"
+description: "LangSmith uses a hierarchical structure to organize your work: organizations, workspaces, applications, and resources. This structure lets you balance collaboration with access control, allowing you..."
+source: "https://docs.langchain.com/langsmith/workload-isolation"
+category: "docs"
+tags: [docs, langsmith, workload-isolation]
+---
+
 # Workload isolation
 
 LangSmith uses a hierarchical structure to organize your work: [*organizations*](administration-overview.md#organizations), [*workspaces*](administration-overview.md#workspaces), [*applications*](administration-overview.md#applications), and [*resources*](administration-overview.md#resources). This structure lets you balance collaboration with access control, allowing you to choose the right level of isolation for your team's needs.
@@ -172,7 +180,7 @@ graph LR
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/workload-isolation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

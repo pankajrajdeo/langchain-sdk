@@ -1,3 +1,11 @@
+---
+title: "Router"
+description: "In the router architecture, a routing step classifies input and directs it to specialized agents. This is useful when you have distinct verticals (separate knowledge domains that each require their..."
+source: "https://docs.langchain.com/oss/python/langchain/multi-agent/router"
+category: "docs"
+tags: [docs, langchain, multi-agent, router]
+---
+
 # Router
 
 In the **router** architecture, a routing step classifies input and directs it to specialized [agents](../agents.md). This is useful when you have distinct **verticals** (separate knowledge domains that each require their own agent).
@@ -137,7 +145,7 @@ If you need the router itself to maintain state, use [persistence](../short-term
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/router.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

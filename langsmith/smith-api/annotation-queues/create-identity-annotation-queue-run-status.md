@@ -1,6 +1,16 @@
+---
+title: "Create identity annotation queue run status"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/annotation-queues/status/{annotation_queue_run_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/create-identity-annotation-queue-run-status"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, create-identity-annotation-queue-run-status]
+---
+
 # Create identity annotation queue run status
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/annotation-queues/status/{annotation_queue_run_id}**
 
 ````yaml
 openapi: 3.1.0

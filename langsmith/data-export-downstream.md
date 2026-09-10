@@ -1,3 +1,11 @@
+---
+title: "Import exported data"
+description: "Import LangSmith bulk-exported Parquet data into BigQuery, Snowflake, Redshift, Clickhouse, or DuckDB."
+source: "https://docs.langchain.com/langsmith/data-export-downstream"
+category: "docs"
+tags: [docs, langsmith, data-export-downstream]
+---
+
 # Import exported data
 
 > Import LangSmith bulk-exported Parquet data into BigQuery, Snowflake, Redshift, Clickhouse, or DuckDB.
@@ -35,7 +43,7 @@ You can query the data from S3 in-memory with SQL using DuckDB. See [S3 import D
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-downstream.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

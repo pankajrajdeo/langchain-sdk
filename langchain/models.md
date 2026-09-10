@@ -1,3 +1,11 @@
+---
+title: "Models"
+description: "LLMs are powerful AI tools that can interpret and generate text like humans. They're versatile enough to write content, translate languages, summarize, and answer questions without needing..."
+source: "https://docs.langchain.com/oss/python/langchain/models"
+category: "docs"
+tags: [docs, langchain, models]
+---
+
 # Models
 
 [LLMs](https://en.wikipedia.org/wiki/Large_language_model) are powerful AI tools that can interpret and generate text like humans. They're versatile enough to write content, translate languages, summarize, and answer questions without needing specialized training for each task.
@@ -38,13 +46,19 @@ The easiest way to get started with a standalone model in LangChain is to use [`
 #### OpenAI
 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[openai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[openai]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -54,6 +68,8 @@ os.environ["OPENAI_API_KEY"] = "sk-..."
 
 model = init_chat_model("gpt-5.5")
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -67,13 +83,19 @@ model = ChatOpenAI(model="gpt-5.5")
 #### Anthropic
 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[anthropic]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[anthropic]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -83,6 +105,8 @@ os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 
 model = init_chat_model("claude-sonnet-4-6")
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -96,13 +120,19 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 #### Azure
 👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[openai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[openai]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -117,6 +147,8 @@ model = init_chat_model(
     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
 )
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -135,13 +167,19 @@ model = AzureChatOpenAI(
 #### Google Gemini
 👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[google-genai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[google-genai]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -151,6 +189,8 @@ os.environ["GOOGLE_API_KEY"] = "..."
 
 model = init_chat_model("google_genai:gemini-3.7-flash")
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -164,13 +204,19 @@ model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
 #### AWS Bedrock
 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[aws]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[aws]"
 ```
+
+**init_chat_model**
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -184,6 +230,8 @@ model = init_chat_model(
 )
 ```
 
+**Model Class**
+
 ```python
 from langchain_aws import ChatBedrock
 
@@ -193,13 +241,19 @@ model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 #### HuggingFace
 👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[huggingface]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[huggingface]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -214,6 +268,8 @@ model = init_chat_model(
     max_tokens=1024,
 )
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -232,13 +288,19 @@ model = ChatHuggingFace(llm=llm)
 #### OpenRouter
 👉 Read the [OpenRouter chat model integration docs](../integrations/chat/openrouter.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain-openrouter"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain-openrouter"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -251,6 +313,8 @@ model = init_chat_model(
     model_provider="openrouter",
 )
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -311,6 +375,8 @@ The maximum number of attempts the system will make to resend a request if it fa
 
 Using [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model), pass these parameters as inline `**kwargs`:
 
+**Initialize using model parameters**
+
 ```python
 model = init_chat_model(
     "claude-sonnet-4-6",
@@ -358,6 +424,8 @@ A chat model must be invoked to generate an output. There are three primary invo
 
 The most straightforward way to call a model is to use [`invoke()`](https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel/invoke) with a single message or a list of messages.
 
+**Single message**
+
 ```python
 response = model.invoke("Why do parrots have colorful feathers?")
 print(response)
@@ -366,6 +434,8 @@ print(response)
 A list of messages can be provided to a chat model to represent conversation history. Each message has a role that models use to indicate who sent the message in the conversation.
 
 See the [messages](messages.md) guide for more detail on roles, types, and content.
+
+**Dictionary format**
 
 ```python
 conversation = [
@@ -378,6 +448,8 @@ conversation = [
 response = model.invoke(conversation)
 print(response)  # AIMessage("J'adore créer des applications.")
 ```
+
+**Message objects**
 
 ```python
 from langchain.messages import HumanMessage, AIMessage, SystemMessage
@@ -402,10 +474,14 @@ Most models can stream their output content while it is being generated. By disp
 
 Calling [`stream()`](https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel/stream) returns an iterator that yields output chunks as they are produced. You can use a loop to process each chunk in real-time:
 
+**Basic text streaming**
+
 ```python
 for chunk in model.stream("Why do parrots have colorful feathers?"):
     print(chunk.text, end="|", flush=True)
 ```
+
+**Stream tool calls, reasoning, and other content**
 
 ```python
 for chunk in model.stream("What color is the sky?"):
@@ -421,6 +497,8 @@ for chunk in model.stream("What color is the sky?"):
 ```
 
 As opposed to [`invoke()`](#invoke), which returns a single [`AIMessage`](https://reference.langchain.com/python/langchain-core/messages/ai/AIMessage) after the model has finished generating its full response, `stream()` returns multiple [`AIMessageChunk`](https://reference.langchain.com/python/langchain-core/messages/ai/AIMessageChunk) objects, each containing a portion of the output text. Importantly, each chunk in a stream is designed to be gathered into a full message via summation:
+
+**Construct an AIMessage**
 
 ```python
 full = None  # None | AIMessageChunk
@@ -508,6 +586,8 @@ Callback events allow LangGraph `stream()` and `astream_events()` to surface the
 
 Batching a collection of independent requests to a model can significantly improve performance and reduce costs, as the processing can be done in parallel:
 
+**Batch**
+
 ```python
 responses = model.batch([
     "Why do parrots have colorful feathers?",
@@ -525,6 +605,8 @@ for response in responses:
 
 By default, [`batch()`](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.chat_models.BaseChatModel.batch) will only return the final output for the entire batch. If you want to receive the output for each individual input as it finishes generating, you can stream results with [`batch_as_completed()`](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.chat_models.BaseChatModel.batch_as_completed):
 
+**Yield batch responses upon completion**
+
 ```python
 for response in model.batch_as_completed([
     "Why do parrots have colorful feathers?",
@@ -540,6 +622,8 @@ for response in model.batch_as_completed([
 > [!TIP]
 > When processing a large number of inputs using [`batch()`](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.chat_models.BaseChatModel.batch) or [`batch_as_completed()`](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.chat_models.BaseChatModel.batch_as_completed), you may want to control the maximum number of parallel calls. This can be done by setting the [`max_concurrency`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) attribute in the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) dictionary.
 >
+> **Batch with max concurrency**
+>
 > ```python
 > model.batch(
 >     list_of_inputs,
@@ -554,6 +638,8 @@ for response in model.batch_as_completed([
 For more details on batching, see the [reference](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.chat_models.BaseChatModel.batch).
 
 ***
+
+<a id="forcing-tool-calls"></a>
 
 ## Tool calling
 
@@ -597,6 +683,8 @@ Some model providers offer built-in tools that can be enabled via model or invoc
 > [!TIP]
 > See the [tools guide](tools.md) for details and other options for creating tools.
 
+**Binding user tools**
+
 ```python
 from langchain.tools import tool
 
@@ -624,6 +712,8 @@ Below, we show some common ways you can use tool calling.
 When a model returns tool calls, you need to execute the tools and pass the results back to the model. This creates a conversation loop where the model can use tool results to generate its final response. LangChain includes [agent](agents.md) abstractions that handle this orchestration for you.
 
 Here's a simple example of how to do this:
+
+**Tool execution loop**
 
 ```python
 # Bind (potentially multiple) tools to the model
@@ -655,9 +745,13 @@ Each [`ToolMessage`](https://reference.langchain.com/python/langchain-core/messa
 
 By default, the model has the freedom to choose which bound tool to use based on the user's input. However, you might want to force choosing a tool, ensuring the model uses either a particular tool or **any** tool from a given list:
 
+**Force use of any tool**
+
 ```python
 model_with_tools = model.bind_tools([tool_1], tool_choice="any")
 ```
+
+**Force use of specific tools**
 
 ```python
 model_with_tools = model.bind_tools([tool_1], tool_choice="tool_1")
@@ -669,6 +763,8 @@ model_with_tools = model.bind_tools([tool_1], tool_choice="tool_1")
 <summary>Parallel tool calls</summary>
 
 Many models support calling multiple tools in parallel when appropriate. This allows the model to gather information from different sources simultaneously.
+
+**Parallel tool calls**
 
 ```python
 model_with_tools = model.bind_tools([get_weather])
@@ -709,6 +805,8 @@ The model intelligently determines when parallel execution is appropriate based 
 
 When streaming responses, tool calls are progressively built through [`ToolCallChunk`](https://reference.langchain.com/python/langchain-core/messages/tool/ToolCallChunk). This allows you to see tool calls as they're being generated rather than waiting for the complete response.
 
+**Streaming tool calls**
+
 ```python
 for chunk in model_with_tools.stream(
     "What's the weather in Boston and Tokyo?"
@@ -741,6 +839,8 @@ for chunk in model_with_tools.stream(
 
 You can accumulate chunks to build complete tool calls:
 
+**Accumulate tool calls**
+
 ```python
 gathered = None
 for chunk in model_with_tools.stream("What's the weather in Boston?"):
@@ -751,6 +851,8 @@ for chunk in model_with_tools.stream("What's the weather in Boston?"):
 </details>
 
 ***
+
+<a id="structured-outputs"></a>
 
 ## Structured output
 
@@ -878,6 +980,8 @@ response
 
 Schemas can be nested:
 
+**Pydantic BaseModel**
+
 ```python
 from pydantic import BaseModel, Field
 
@@ -894,6 +998,8 @@ class MovieDetails(BaseModel):
 
 model_with_structure = model.with_structured_output(MovieDetails)
 ```
+
+**TypedDict**
 
 ```python
 from typing_extensions import Annotated, TypedDict
@@ -983,9 +1089,13 @@ Model profile data can be updated through the following process:
 2. (If needed) update additional fields and overrides in `langchain_<package>/data/profile_augmentations.toml` through a pull request to the LangChain [integration package](../integrations/providers/overview.md)\`.
 3. Use the [`langchain-model-profiles`](https://pypi.org/project/langchain-model-profiles/) CLI tool to pull the latest data from [models.dev](https://models.dev/), merge in the augmentations and update the profile data:
 
+**pip**
+
 ```bash
 pip install -U langchain-model-profiles
 ```
+
+**uv**
 
 ```bash
 uv add langchain-model-profiles
@@ -1027,6 +1137,8 @@ See the [multimodal section](messages.md#multimodal) of the messages guide for d
 
 Some models can return multimodal data as part of their response. If invoked to do so, the resulting [`AIMessage`](https://reference.langchain.com/python/langchain-core/messages/ai/AIMessage) will have content blocks with multimodal types.
 
+**Multimodal output**
+
 ```python
 response = model.invoke("Create a picture of a cat")
 print(response.content_blocks)
@@ -1044,11 +1156,15 @@ Many models are capable of performing multi-step reasoning to arrive at a conclu
 
 **If supported by the underlying model,** you can surface this reasoning process to better understand how the model arrived at its final answer.
 
+**Stream reasoning output**
+
 ```python
 for chunk in model.stream("Why do parrots have colorful feathers?"):
     reasoning_steps = [r for r in chunk.content_blocks if r["type"] == "reasoning"]
     print(reasoning_steps if reasoning_steps else chunk.text)
 ```
+
+**Complete reasoning output**
 
 ```python
 response = model.invoke("Why do parrots have colorful feathers?")
@@ -1115,6 +1231,8 @@ Some providers support server-side [tool-calling](#tool-calling) loops: models c
 
 If a model invokes a tool server-side, the content of the response message will include content representing the invocation and result of the tool. Accessing the [content blocks](messages.md#standard-content-blocks) of the response will return the server-side tool calls and results in a provider-agnostic format:
 
+**Invoke with server-side tool use**
+
 ```python
 from langchain.chat_models import init_chat_model
 
@@ -1126,6 +1244,8 @@ model_with_tools = model.bind_tools([tool])
 response = model_with_tools.invoke("What was a positive news story from today?")
 print(response.content_blocks)
 ```
+
+**Result**
 
 ```python
 [
@@ -1206,6 +1326,8 @@ To help manage rate limits, chat model integrations accept a `rate_limiter` para
 <summary>Initialize and use a rate limiter</summary>
 
 LangChain comes with (an optional) built-in [`InMemoryRateLimiter`](https://reference.langchain.com/python/langchain-core/rate_limiters/InMemoryRateLimiter). This limiter is thread safe and can be shared by multiple threads in the same process.
+
+**Define a rate limiter**
 
 ```python
 from langchain.rate_limiters import InMemoryRateLimiter
@@ -1370,6 +1492,8 @@ with get_usage_metadata_callback() as cb:
 When invoking a model, you can pass additional configuration through the `config` parameter using a [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) dictionary. This provides run-time control over execution behavior, callbacks, and metadata tracking.
 
 Common configuration options include:
+
+**Invocation with config**
 
 ```python
 response = model.invoke(
@@ -1580,7 +1704,7 @@ agent = create_agent(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/models.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

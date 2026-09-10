@@ -1,3 +1,11 @@
+---
+title: "LangSmith Remote MCP"
+description: "Connect MCP-compatible clients to LangSmith over OAuth, or authenticate programmatic clients with a LangSmith API key."
+source: "https://docs.langchain.com/langsmith/langsmith-remote-mcp"
+category: "docs"
+tags: [docs, langsmith, langsmith-remote-mcp]
+---
+
 # LangSmith Remote MCP
 
 > Connect MCP-compatible clients to LangSmith over OAuth, or authenticate programmatic clients with a LangSmith API key.
@@ -267,7 +275,7 @@ For deployments on earlier versions, run the [standalone LangSmith MCP Server](l
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-remote-mcp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

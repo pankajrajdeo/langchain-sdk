@@ -1,8 +1,18 @@
+---
+title: "Copy Thread"
+description: "Create a new thread with a copy of the state and checkpoints from an existing thread."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/copy-thread"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, copy-thread]
+---
+
 # Copy Thread
 
 > Create a new thread with a copy of the state and checkpoints from an existing thread.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/{thread_id}/copy**
 
 ````yaml
 openapi: 3.1.0

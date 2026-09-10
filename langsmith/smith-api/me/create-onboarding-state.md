@@ -1,8 +1,18 @@
+---
+title: "Create onboarding state"
+description: "Initialize onboarding state for the current user."
+source: "https://docs.langchain.com/langsmith/smith-api/me/create-onboarding-state"
+category: "docs"
+tags: [docs, langsmith, smith-api, me, create-onboarding-state]
+---
+
 # Create onboarding state
 
 > Initialize onboarding state for the current user.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/me/onboarding_state**
 
 ````yaml
 openapi: 3.1.0

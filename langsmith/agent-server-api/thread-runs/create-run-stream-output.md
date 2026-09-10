@@ -1,8 +1,18 @@
+---
+title: "Create Run, Stream Output"
+description: "Create a run in existing thread. Stream the output."
+source: "https://docs.langchain.com/langsmith/agent-server-api/thread-runs/create-run-stream-output"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, thread-runs, create-run-stream-output]
+---
+
 # Create Run, Stream Output
 
 > Create a run in existing thread. Stream the output.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/{thread_id}/runs/stream**
 
 ````yaml
 openapi: 3.1.0

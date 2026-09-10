@@ -1,3 +1,11 @@
+---
+title: "Build a SQL assistant with on-demand skills"
+description: "This tutorial shows how to use progressive disclosure - a context management technique where the agent loads information on-demand rather than upfront - to implement skills (specialized prompt-based..."
+source: "https://docs.langchain.com/oss/python/langchain/multi-agent/skills-sql-assistant"
+category: "docs"
+tags: [docs, langchain, multi-agent, skills-sql-assistant]
+---
+
 # Build a SQL assistant with on-demand skills
 
 This tutorial shows how to use **progressive disclosure** - a context management technique where the agent loads information on-demand rather than upfront - to implement **skills** (specialized prompt-based instructions). The agent loads skills via tool calls, rather than dynamically changing the system prompt, discovering and loading only the skills it needs for each task.
@@ -78,13 +86,19 @@ flowchart TD
 
 This tutorial requires the `langchain` package:
 
+**pip**
+
 ```bash
 pip install langchain
 ```
 
+**uv**
+
 ```bash
 uv add langchain
 ```
+
+**conda**
 
 ```bash
 conda install langchain -c conda-forge
@@ -96,10 +110,14 @@ For more details, see our [Installation guide](../install.md).
 
 Set up [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-multi-agent-skills-sql-assistant) to inspect what is happening inside your agent. Then set the following environment variables:
 
+**Shell**
+
 ```bash
 export LANGSMITH_TRACING="true"
 export LANGSMITH_API_KEY="..."
 ```
+
+**Python**
 
 ```python
 import getpass
@@ -116,13 +134,19 @@ Select a chat model from LangChain's suite of integrations:
 #### OpenAI
 👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[openai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[openai]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -132,6 +156,8 @@ os.environ["OPENAI_API_KEY"] = "sk-..."
 
 model = init_chat_model("gpt-5.5")
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -145,13 +171,19 @@ model = ChatOpenAI(model="gpt-5.5")
 #### Anthropic
 👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[anthropic]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[anthropic]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -161,6 +193,8 @@ os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 
 model = init_chat_model("claude-sonnet-4-6")
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -174,13 +208,19 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 #### Azure
 👉 Read the [Azure chat model integration docs](../../integrations/chat/azure_chat_openai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[openai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[openai]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -195,6 +235,8 @@ model = init_chat_model(
     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
 )
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -213,13 +255,19 @@ model = AzureChatOpenAI(
 #### Google Gemini
 👉 Read the [Google GenAI chat model integration docs](../../integrations/chat/google_generative_ai.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[google-genai]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[google-genai]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -229,6 +277,8 @@ os.environ["GOOGLE_API_KEY"] = "..."
 
 model = init_chat_model("google_genai:gemini-3.7-flash")
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -242,13 +292,19 @@ model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
 #### AWS Bedrock
 👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[aws]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[aws]"
 ```
+
+**init_chat_model**
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -262,6 +318,8 @@ model = init_chat_model(
 )
 ```
 
+**Model Class**
+
 ```python
 from langchain_aws import ChatBedrock
 
@@ -271,13 +329,19 @@ model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 #### HuggingFace
 👉 Read the [HuggingFace chat model integration docs](../../integrations/chat/huggingface.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain[huggingface]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[huggingface]"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -292,6 +356,8 @@ model = init_chat_model(
     max_tokens=1024,
 )
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -310,13 +376,19 @@ model = ChatHuggingFace(llm=llm)
 #### OpenRouter
 👉 Read the [OpenRouter chat model integration docs](../../integrations/chat/openrouter.md)
 
+**pip**
+
 ```bash
 pip install -U "langchain-openrouter"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain-openrouter"
 ```
+
+**init_chat_model**
 
 ```python
 import os
@@ -329,6 +401,8 @@ model = init_chat_model(
     model_provider="openrouter",
 )
 ```
+
+**Model Class**
 
 ```python
 import os
@@ -1192,7 +1266,7 @@ This combination of progressive disclosure (loading schemas on-demand) and dynam
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/skills-sql-assistant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

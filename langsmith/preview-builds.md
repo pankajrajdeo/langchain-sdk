@@ -1,3 +1,11 @@
+---
+title: "Preview builds"
+description: "Create temporary preview deployments for pull requests to test Agent Server changes before merging."
+source: "https://docs.langchain.com/langsmith/preview-builds"
+category: "docs"
+tags: [docs, langsmith, preview-builds]
+---
+
 # Preview builds
 
 > Create temporary preview deployments for pull requests to test Agent Server changes before merging.
@@ -45,7 +53,7 @@ Deleting the parent deployment deletes all of its preview deployments.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/preview-builds.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "LangChain v1 migration guide"
+description: "Prompt: Migrate a codebase to LangChain v1. Migrate this codebase to LangChain v1 (requires langchain>=1.0.0, langchain-core>=1.0.0, and Python 3.10+)."
+source: "https://docs.langchain.com/oss/python/migrate/langchain-v1"
+category: "docs"
+tags: [docs, migrate, langchain-v1]
+---
+
 # LangChain v1 migration guide
 
 > **Prompt:** Migrate a codebase to LangChain v1.
@@ -43,6 +51,8 @@ If you were using any of the following from the `langchain` package, you'll need
 * [`langchain-community`](https://pypi.org/project/langchain-community) re-exports
 * Other deprecated functionality
 
+**v1 (new)**
+
 ```python
 # Chains
 from langchain_classic.chains import LLMChain
@@ -56,6 +66,8 @@ from langchain_classic.indexes import ...
 # Hub
 from langchain_classic import hub
 ```
+
+**v0 (old)**
 
 ```python
 # Chains
@@ -73,9 +85,13 @@ from langchain import hub
 
 Install with:
 
+**pip**
+
 ```bash
 pip install langchain-classic
 ```
+
+**uv**
 
 ```bash
 uv add langchain-classic
@@ -123,6 +139,8 @@ For more information, see [Agents](../langchain/agents.md).
 
 The `prompt` parameter has been renamed to [`system_prompt`](https://reference.langchain.com/python/langchain/agents/#langchain.agents.create_agent\(system_prompt\)):
 
+**v1 (new)**
+
 ```python
 from langchain.agents import create_agent
 
@@ -132,6 +150,8 @@ agent = create_agent(
     system_prompt="You are a helpful assistant"  # [!code highlight]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from langgraph.prebuilt import create_react_agent
@@ -147,6 +167,8 @@ agent = create_react_agent(
 
 If using [`SystemMessage`](https://reference.langchain.com/python/langchain-core/messages/system/SystemMessage) objects in the system prompt, extract the string content:
 
+**v1 (new)**
+
 ```python
 from langchain.agents import create_agent
 
@@ -156,6 +178,8 @@ agent = create_agent(
     system_prompt="You are a helpful assistant"  # [!code highlight]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from langchain.messages import SystemMessage
@@ -171,6 +195,8 @@ agent = create_react_agent(
 #### Dynamic prompts
 
 Dynamic prompts are a core context engineering pattern—they adapt what you tell the model based on the current conversation state. To do this, use the [`@dynamic_prompt`](https://reference.langchain.com/python/langchain/agents/middleware/types/dynamic_prompt) decorator:
+
+**v1 (new)**
 
 ```python
 from dataclasses import dataclass
@@ -214,6 +240,8 @@ agent.invoke(
     context=Context(user_role="expert")
 )
 ```
+
+**v0 (old)**
 
 ```python
 from dataclasses import dataclass
@@ -264,6 +292,8 @@ Common use cases include:
 
 v1 now has summarization middleware as a built in option:
 
+**v1 (new)**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import SummarizationMiddleware
@@ -279,6 +309,8 @@ agent = create_agent(
     ]  # [!code highlight]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from langgraph.prebuilt import create_react_agent, AgentState
@@ -307,6 +339,8 @@ Common use cases include:
 
 v1 has a built in middleware for human in the loop approval for tool calls:
 
+**v1 (new)**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
@@ -326,6 +360,8 @@ agent = create_agent(
     ]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from langgraph.prebuilt import create_react_agent
@@ -358,6 +394,8 @@ Custom state extends the default agent state with additional fields. You can def
 
 Use the [`state_schema`](https://reference.langchain.com/python/langchain/middleware/#langchain.agents.middleware.AgentMiddleware.state_schema) parameter when your custom state needs to be accessed by tools:
 
+**v1 (new)**
+
 ```python
 from langchain.tools import tool, ToolRuntime
 from langchain.agents import create_agent, AgentState  # [!code highlight]
@@ -380,6 +418,8 @@ agent = create_agent(  # [!code highlight]
     state_schema=CustomState  # [!code highlight]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from typing import Annotated
@@ -441,6 +481,8 @@ See the [middleware documentation](../langchain/middleware.md#custom-state-schem
 
 [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) only supports `TypedDict` for state schemas. Pydantic models and dataclasses are no longer supported.
 
+**v1 (new)**
+
 ```python
 from langchain.agents import AgentState, create_agent
 
@@ -454,6 +496,8 @@ agent = create_agent(
     state_schema=CustomAgentState  # [!code highlight]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from typing_extensions import Annotated
@@ -485,6 +529,8 @@ This functionality has been ported to the middleware interface in v1.
 
 #### Dynamic model selection
 
+**v1 (new)**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import (
@@ -515,6 +561,8 @@ agent = create_agent(
     middleware=[DynamicModelMiddleware(messages_threshold=10)]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from langgraph.prebuilt import create_react_agent, AgentState
@@ -561,6 +609,8 @@ The [`tools`](https://reference.langchain.com/python/langchain/agents/factory/cr
 
 The argument will no longer accept [`ToolNode`](https://reference.langchain.com/python/langgraph/agents/#langgraph.prebuilt.tool_node.ToolNode) instances.
 
+**v1 (new)**
+
 ```python
 from langchain.agents import create_agent
 
@@ -569,6 +619,8 @@ agent = create_agent(
     tools=[check_weather, search_web]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from langgraph.prebuilt import create_react_agent, ToolNode
@@ -582,6 +634,8 @@ agent = create_react_agent(
 #### Handling tool errors
 
 You can now configure the handling of tool errors with middleware implementing the `wrap_tool_call` method.
+
+**v1 (new)**
 
 ```python
 from langchain.agents import create_agent
@@ -614,6 +668,8 @@ agent = create_agent(
 )
 ```
 
+**v0 (old)**
+
 ```python
 from langgraph.prebuilt import create_react_agent, ToolNode
 from langchain.messages import ToolMessage
@@ -645,6 +701,8 @@ In v1, there are two new structured output strategies:
 * `ToolStrategy` uses artificial tool calling to generate structured output
 * `ProviderStrategy` uses provider-native structured output generation
 
+**v1 (new)**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy, ProviderStrategy
@@ -662,6 +720,8 @@ agent = create_agent(
     response_format=ToolStrategy(OutputSchema)  # [!code highlight]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from langgraph.prebuilt import create_react_agent
@@ -706,6 +766,8 @@ When you invoke an agent, it's often the case that you want to pass two types of
 
 In v1, static context is supported by setting the `context` parameter to `invoke` and `stream`.
 
+**v1 (new)**
+
 ```python
 from dataclasses import dataclass
 
@@ -727,6 +789,8 @@ result = agent.invoke(
     context=Context(user_id="123", session_id="abc")  # [!code highlight]
 )
 ```
+
+**v0 (old)**
 
 ```python
 from langgraph.prebuilt import create_react_agent
@@ -762,6 +826,8 @@ In v1, messages gain provider-agnostic standard content blocks. Access them via 
 
 ### Read standardized content
 
+**v1 (new)**
+
 ```python
 from langchain.chat_models import init_chat_model
 
@@ -774,6 +840,8 @@ for block in response.content_blocks:
     elif block["type"] == "text":
         print(block.get("text"))
 ```
+
+**v0 (old)**
 
 ```python
 # Provider-native formats vary; you needed per-provider handling
@@ -789,6 +857,8 @@ for item in response.content:
 
 ### Create multimodal messages
 
+**v1 (new)**
+
 ```python
 from langchain.messages import HumanMessage
 
@@ -798,6 +868,8 @@ message = HumanMessage(content_blocks=[
 ])
 res = model.invoke([message])
 ```
+
+**v0 (old)**
 
 ```python
 from langchain.messages import HumanMessage
@@ -833,9 +905,13 @@ See the content blocks [reference](../langchain/messages.md#content-block-refere
 
 Standard content blocks are **not serialized** into the `content` attribute by default. If you need to access standard content blocks in the `content` attribute (e.g., when sending messages to a client), you can opt-in to serializing them into `content`.
 
+**Environment variable**
+
 ```bash
 export LC_OUTPUT_VERSION=v1
 ```
+
+**Initialization parameter**
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -861,11 +937,15 @@ All LangChain packages now require **Python 3.10 or higher**. Python 3.9 reaches
 
 The return type signature for chat model invocation has been fixed from [`BaseMessage`](https://reference.langchain.com/python/langchain-core/messages/base/BaseMessage) to [`AIMessage`](https://reference.langchain.com/python/langchain-core/messages/ai/AIMessage). Custom chat models implementing [`bind_tools`](https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel/bind_tools) should update their return signature:
 
+**v1 (new)**
+
 ```python
 def bind_tools(
         ...
     ) -> Runnable[LanguageModelInput, AIMessage]:
 ```
+
+**v0 (old)**
 
 ```python
 def bind_tools(
@@ -930,7 +1010,7 @@ Old docs are archived for reference:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langchain-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

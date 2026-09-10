@@ -1,3 +1,11 @@
+---
+title: "Set up composite online evaluators"
+description: "Online evaluations provide real-time feedback on your production traces. This is useful to continuously monitor the performance of your application: to identify issues, measure improvements, and..."
+source: "https://docs.langchain.com/langsmith/online-evaluations-composite"
+category: "docs"
+tags: [docs, langsmith, online-evaluations-composite]
+---
+
 # Set up composite online evaluators
 
 [Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production [traces](observability-concepts.md#traces). This is useful to continuously monitor the performance of your application: to identify issues, measure improvements, and ensure consistent quality over time.
@@ -47,7 +55,7 @@ Composite scores are attached to a run as **feedback**, similarly to feedback fr
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-composite.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

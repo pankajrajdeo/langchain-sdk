@@ -1,3 +1,11 @@
+---
+title: "Sambanova integrations"
+description: "Integrate with Sambanova using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/sambanova"
+category: "docs"
+tags: [docs, integrations, providers, sambanova]
+---
+
 # Sambanova integrations
 
 > Integrate with Sambanova using LangChain Python.
@@ -15,6 +23,8 @@ Install the integration package:
 ```bash
 pip install langchain-sambanova
 ```
+
+**uv**
 
 ```bash
 uv add langchain-sambanova
@@ -58,7 +68,7 @@ from langchain_sambanova import SambaNovaEmbeddings
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/sambanova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

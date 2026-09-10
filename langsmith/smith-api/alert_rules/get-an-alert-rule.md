@@ -1,8 +1,18 @@
+---
+title: "Get an alert rule"
+description: "Gets an alert rule."
+source: "https://docs.langchain.com/langsmith/smith-api/alert_rules/get-an-alert-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, alert_rules, get-an-alert-rule]
+---
+
 # Get an alert rule
 
 > Gets an alert rule.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/alerts/{session_id}/{alert_rule_id}**
 
 ````yaml
 openapi: 3.1.0

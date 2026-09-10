@@ -1,3 +1,11 @@
+---
+title: "Migrate run retrieval to SmithDB"
+description: "Migrate the LangSmith SDK methods that retrieve a single run or build a run URL."
+source: "https://docs.langchain.com/langsmith/smithdb-sdk-migration-runs"
+category: "docs"
+tags: [docs, langsmith, smithdb-sdk-migration-runs]
+---
+
 # Migrate run retrieval to SmithDB
 
 > Migrate the LangSmith SDK methods that retrieve a single run or build a run URL.
@@ -470,6 +478,8 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 `runs.retrieve` requires an additional `project_id` (UUID) parameter that `read_run` did not need. It also accepts an optional `start_time`—providing it speeds up retrieval but is not required. Resolve the project UUID via `client.aread_project()` first.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -479,6 +489,8 @@ run = client.read_run(run_id)
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -502,6 +514,8 @@ asyncio.run(main())
 `client.runs.retrieve` requires an additional `project_id` (UUID) parameter that `readRun` did not need. It also accepts an optional `start_time`—providing it speeds up retrieval but is not required. Resolve the project UUID via `client.readProject()` first.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -511,6 +525,8 @@ await client.readRun(runId);
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -528,6 +544,8 @@ await client.runs.retrieve(runId, {
 `retrieveV2()` requires an additional `projectId()` (UUID) parameter that `client.runs().retrieve()` did not need. It also accepts an optional `startTime()`—providing it speeds up retrieval but is not required. Resolve the project UUID via `client.sessions().list()` first.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -539,6 +557,8 @@ client.runs().retrieve(runId)
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -568,6 +588,8 @@ client.runs().retrieveV2(
 `GetV2()` requires an additional `ProjectID` (UUID) parameter that `client.Runs.Get()` did not need. It also accepts an optional `StartTime`—providing it speeds up retrieval but is not required. Resolve the project UUID via `client.Sessions.List()` first.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -585,6 +607,8 @@ run, err := client.Runs.Get(ctx, runID, langsmith.RunGetParams{})
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -636,6 +660,8 @@ curl "https://api.smith.langchain.com/api/v2/runs/$RUN_ID?project_id=$PROJECT_ID
 `read_run` returns a full run object with no selection needed. `runs.retrieve` returns only `id` by default—pass `selects=[...]` to request more.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -646,6 +672,8 @@ print(run.name, run.status, run.total_tokens)
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -671,6 +699,8 @@ asyncio.run(main())
 `readRun` returns a full run object with no selection needed. `client.runs.retrieve` returns only `id` by default—pass `selects: [...]` to request more.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -681,6 +711,8 @@ console.log(retrievedRun.name, retrievedRun.status, retrievedRun.total_tokens);
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -700,6 +732,8 @@ console.log(retrievedRun.name, retrievedRun.status, retrievedRun.total_tokens);
 `.retrieve()` returns a full run object with no selection needed. `.retrieveV2()` returns only `id` by default—call `.addSelect(...)` for each field you need.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -712,6 +746,8 @@ println("${run.name()} ${run.status()} ${run.totalTokens()}")
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -745,6 +781,8 @@ println("${run.name()} ${run.status()} ${run.totalTokens()}")
 `Get` returns a full run struct with no selection needed. `GetV2` returns only `ID` by default—pass `Selects` with the fields you need.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -764,6 +802,8 @@ fmt.Println(run.Name, run.Status, run.TotalTokens)
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -822,6 +862,8 @@ curl "https://api.smith.langchain.com/api/v2/runs/$RUN_ID?project_id=$PROJECT_ID
 `read_run` raised `LangSmithNotFoundError` from `langsmith.utils` for a missing run. `runs.retrieve` raises `NotFoundError` from `langsmith` instead.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 from langsmith.utils import LangSmithNotFoundError
@@ -836,6 +878,8 @@ except LangSmithNotFoundError:
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -864,6 +908,8 @@ asyncio.run(main())
 `client.runs.retrieve` raises `NotFoundError` for a missing run.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -880,6 +926,8 @@ try {
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client, NotFoundError } from "langsmith";
 
@@ -904,6 +952,8 @@ try {
 `.retrieve()` and `.retrieveV2()` both raise `com.langchain.smith.errors.NotFoundException`—unchanged, since the Java SDK was already Stainless-generated before SmithDB.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -920,6 +970,8 @@ try {
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -954,6 +1006,8 @@ try {
 `Get` and `GetV2` both return a `*langsmith.Error` you can inspect with `errors.As`—unchanged, since the Go SDK was already Stainless-generated before SmithDB. Check `StatusCode` for `404`.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -981,6 +1035,8 @@ if err != nil {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1055,6 +1111,8 @@ The `load_child_runs` flag and the nested `child_runs` field are removed. Fetch 
 Replace `read_run(run_id, load_child_runs=True)` with `client.traces.list_runs`.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1071,6 +1129,8 @@ print(len(run.child_run_ids or []), "descendants")
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 from collections import defaultdict
@@ -1123,6 +1183,8 @@ asyncio.run(main())
 Replace the `loadChildRuns` option with `client.traces.listRuns`.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1140,6 +1202,8 @@ console.log((run.child_run_ids ?? []).length, "descendants");
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1325,6 +1389,8 @@ The REST API has no legacy equivalent for retrieving a run's UI URL.
 `get_run_url` accepts a full run object. `runs.get_url` is async and needs the run's `project_id` (its `session_id` under the old v1 schema) and `trace_id` passed individually, with `start_time` optional.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1336,6 +1402,8 @@ print(url)
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -1360,6 +1428,8 @@ asyncio.run(main())
 `getRunUrl` accepts a full run object. `runs.getURL` needs the run's `project_id` (its `session_id` under the old v1 schema) and `trace_id` passed individually, with `start_time` optional.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1370,6 +1440,8 @@ console.log(url);
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1386,6 +1458,8 @@ console.log(response.url);
 
 #### Java
 The Java SDK has no legacy equivalent. `runs().getUrl` needs the run's `projectId()` and `traceId()`, with `startTime()` optional.
+
+**After**
 
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
@@ -1412,6 +1486,8 @@ fun main() {
 
 #### Go
 The Go SDK has no legacy equivalent. `Runs.GetURL` needs the run's `ProjectID` and `TraceID`, with `StartTime` optional.
+
+**After**
 
 ```go
 package main
@@ -1471,7 +1547,7 @@ curl "https://api.smith.langchain.com/api/v2/runs/$RUN_ID/url?project_id=$PROJEC
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

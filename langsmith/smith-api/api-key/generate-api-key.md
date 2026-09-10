@@ -1,8 +1,18 @@
+---
+title: "Generate API key"
+description: "Generate an api key for the user."
+source: "https://docs.langchain.com/langsmith/smith-api/api-key/generate-api-key"
+category: "docs"
+tags: [docs, langsmith, smith-api, api-key, generate-api-key]
+---
+
 # Generate API key
 
 > Generate an api key for the user.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/api-key**
 
 ````yaml
 openapi: 3.1.0
@@ -289,6 +299,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

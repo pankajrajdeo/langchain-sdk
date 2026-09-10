@@ -1,3 +1,11 @@
+---
+title: "Invalidate tools cache"
+description: "Invalidate cached MCP tools for a given server URL."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp/invalidate-tools-cache"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp, invalidate-tools-cache]
+---
+
 # Invalidate tools cache
 
 > Invalidate cached MCP tools for a given server URL.
@@ -6,6 +14,8 @@ Called when a tool call fails with a stale-tools error, so subsequent
 requests to GET /mcp/tools will re-fetch from the remote server.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/mcp/tools**
 
 ````yaml
 openapi: 3.1.0

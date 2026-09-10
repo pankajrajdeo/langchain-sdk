@@ -1,3 +1,11 @@
+---
+title: "OpenAI integrations"
+description: "Integrate with OpenAI using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/openai"
+category: "docs"
+tags: [docs, integrations, providers, openai]
+---
+
 # OpenAI integrations
 
 > Integrate with OpenAI using LangChain Python.
@@ -32,7 +40,7 @@ Detect text that could be hateful, violent, etc.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

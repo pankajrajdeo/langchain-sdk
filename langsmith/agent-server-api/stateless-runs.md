@@ -1,8 +1,18 @@
+---
+title: "Create Run, Stream Output"
+description: "Create a run and stream the output."
+source: "https://docs.langchain.com/langsmith/agent-server-api/stateless-runs"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, stateless-runs]
+---
+
 # Create Run, Stream Output
 
 > Create a run and stream the output.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /runs/stream**
 
 ````yaml
 openapi: 3.1.0

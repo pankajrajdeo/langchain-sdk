@@ -1,3 +1,11 @@
+---
+title: "Connect an authentication provider"
+description: "In the last tutorial, you added resource authorization to give users private conversations. However, you are still using hard-coded tokens for authentication, which is not secure. Now you'll replace..."
+source: "https://docs.langchain.com/langsmith/add-auth-server"
+category: "docs"
+tags: [docs, langsmith, add-auth-server]
+---
+
 # Connect an authentication provider
 
 In [the last tutorial](resource-auth.md), you added resource authorization to give users private conversations. However, you are still using hard-coded tokens for authentication, which is not secure. Now you'll replace those tokens with real user accounts using [OAuth2](deployment-quickstart.md).
@@ -45,10 +53,14 @@ Before you start this tutorial, ensure you have:
 
 Install the required dependencies. Start in your `custom-auth` directory and ensure you have the `langgraph-cli` installed:
 
+**pip**
+
 ```bash
 cd custom-auth
 pip install -U "langgraph-cli[inmem]"
 ```
+
+**uv**
 
 ```bash
 cd custom-auth
@@ -281,7 +293,7 @@ Now that you have production authentication, consider:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/add-auth-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "List snapshots"
+description: "List sandbox snapshots for the authenticated tenant, with optional filtering, sorting, and pagination. Page with page_size and cursor: replay the response's next_cursor until it comes back null..."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-snapshots"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, list-snapshots]
+---
+
 # List snapshots
 
 > List sandbox snapshots for the authenticated tenant, with optional filtering, sorting, and pagination.
@@ -5,6 +13,8 @@ Page with page_size and cursor: replay the response's next_cursor until it comes
 Cursors are opaque and only valid on this endpoint; do not parse or construct one.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/snapshots**
 
 ````yaml
 openapi: 3.1.0
@@ -180,8 +190,8 @@ paths:
           name: page_size
           in: query
           schema:
-            default: 20
             type: integer
+            default: 20
             title: Page Size
         - description: Opaque pagination cursor from a prior response's next_cursor
           name: cursor
@@ -193,8 +203,8 @@ paths:
           name: limit
           in: query
           schema:
-            default: 50
             type: integer
+            default: 50
             title: Limit
         - description: 'Deprecated: use cursor. Pagination offset'
           name: offset
@@ -229,30 +239,30 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Label
         - description: Sort column (name, status, created_at)
           name: sort_by
           in: query
           schema:
-            default: created_at
             type: string
+            default: created_at
             title: Sort By
         - description: Sort direction (asc, desc)
           name: sort_order
           in: query
           schema:
-            default: desc
             type: string
+            default: desc
             title: Sort Order
         - description: 'Deprecated: use sort_order. Sort direction (asc, desc)'
           name: sort_direction
           in: query
           schema:
-            default: desc
             type: string
+            default: desc
             title: Sort Direction
       responses:
         '200':

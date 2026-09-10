@@ -1,8 +1,18 @@
+---
+title: "Optimize prompt job"
+description: "Optimize prompt"
+source: "https://docs.langchain.com/langsmith/smith-api/repos/optimize-prompt-job"
+category: "docs"
+tags: [docs, langsmith, smith-api, repos, optimize-prompt-job]
+---
+
 # Optimize prompt job
 
 > Optimize prompt
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/repos/optimize-job**
 
 ````yaml
 openapi: 3.1.0

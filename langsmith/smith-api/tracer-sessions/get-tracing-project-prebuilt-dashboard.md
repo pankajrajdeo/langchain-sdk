@@ -1,8 +1,18 @@
+---
+title: "Get tracing project prebuilt dashboard"
+description: "Get a prebuilt dashboard for a tracing project."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-tracing-project-prebuilt-dashboard"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, get-tracing-project-prebuilt-dashboard]
+---
+
 # Get tracing project prebuilt dashboard
 
 > Get a prebuilt dashboard for a tracing project.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/sessions/{session_id}/dashboard**
 
 ````yaml
 openapi: 3.1.0

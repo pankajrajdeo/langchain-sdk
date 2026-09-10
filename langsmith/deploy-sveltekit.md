@@ -1,3 +1,11 @@
+---
+title: "Deploy with SvelteKit"
+description: "Deploy a LangChain deep agent in a SvelteKit project on Cloudflare Workers with streaming chat and thread history."
+source: "https://docs.langchain.com/langsmith/deploy-sveltekit"
+category: "docs"
+tags: [docs, langsmith, deploy-sveltekit]
+---
+
 # Deploy with SvelteKit
 
 > Deploy a LangChain deep agent in a SvelteKit project on Cloudflare Workers with streaming chat and thread history.
@@ -125,7 +133,7 @@ npx wrangler dev .svelte-kit/cloudflare/_worker.js
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-sveltekit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

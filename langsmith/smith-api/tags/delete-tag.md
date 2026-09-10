@@ -1,8 +1,18 @@
+---
+title: "Delete tag"
+description: "Delete a tag. Requires repo ownership, prompts:tag permission, or ABAC grant."
+source: "https://docs.langchain.com/langsmith/smith-api/tags/delete-tag"
+category: "docs"
+tags: [docs, langsmith, smith-api, tags, delete-tag]
+---
+
 # Delete tag
 
 > Delete a tag. Requires repo ownership, prompts:tag permission, or ABAC grant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/repos/{owner}/{repo}/tags/{tag_name}**
 
 ````yaml
 openapi: 3.1.0

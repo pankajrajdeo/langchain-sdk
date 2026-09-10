@@ -1,3 +1,11 @@
+---
+title: "Agent Server changelog"
+description: "Subscribe: Our changelog includes an RSS feed that can integrate with Slack, email, Discord bots like Readybot or RSS Feeds to Discord Bot, and other subscription tools."
+source: "https://docs.langchain.com/langsmith/agent-server-changelog"
+category: "docs"
+tags: [docs, langsmith, agent-server-changelog]
+---
+
 # Agent Server changelog
 
 > [!NOTE]
@@ -2403,7 +2411,7 @@ Added locking mechanism to prevent errors in pipelined executions.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

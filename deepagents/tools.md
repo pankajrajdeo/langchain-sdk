@@ -1,9 +1,19 @@
+---
+title: "Tools"
+description: "Connect Deep Agents to custom functions, APIs, databases, and any MCP server"
+source: "https://docs.langchain.com/oss/python/deepagents/tools"
+category: "docs"
+tags: [docs, deepagents, tools]
+---
+
 # Tools
 
 > Connect Deep Agents to custom functions, APIs, databases, and any MCP server
 
 Deep Agents can call any tool you define, any [LangChain tool](https://python.langchain.com/docs/concepts/tools/), and tools from any [MCP server](#mcp-tools).
 Pass them to `create_deep_agent` via the `tools=` parameter alongside the [built-in harness tools](overview.md#execution-environment) for file management and subagent spawning.
+
+**Google**
 
 ```python
 from deepagents import create_deep_agent
@@ -14,6 +24,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -22,6 +34,8 @@ agent = create_deep_agent(
     tools=[search, fetch_url, run_query],
 )
 ```
+
+**Anthropic**
 
 ```python
 from deepagents import create_deep_agent
@@ -32,6 +46,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -40,6 +56,8 @@ agent = create_deep_agent(
     tools=[search, fetch_url, run_query],
 )
 ```
+
+**Fireworks**
 
 ```python
 from deepagents import create_deep_agent
@@ -50,6 +68,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -58,6 +78,8 @@ agent = create_deep_agent(
     tools=[search, fetch_url, run_query],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -73,6 +95,8 @@ agent = create_deep_agent(
 Pass any callable, such as plain functions, LangChain `@tool`-decorated functions, or tool dicts—directly to `tools=`.
 Deep Agents infers the tool schema from the function signature and docstring, so you don't need to define a separate schema in most cases.
 
+**Google**
+
 ```python
 import os
 from typing import Literal
@@ -100,6 +124,8 @@ agent = create_deep_agent(
     tools=[internet_search],
 )
 ```
+
+**OpenAI**
 
 ```python
 import os
@@ -129,6 +155,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 import os
 from typing import Literal
@@ -156,6 +184,8 @@ agent = create_deep_agent(
     tools=[internet_search],
 )
 ```
+
+**OpenRouter**
 
 ```python
 import os
@@ -185,6 +215,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 import os
 from typing import Literal
@@ -213,6 +245,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 import os
 from typing import Literal
@@ -240,6 +274,8 @@ agent = create_deep_agent(
     tools=[internet_search],
 )
 ```
+
+**Ollama**
 
 ```python
 import os
@@ -280,13 +316,19 @@ MCP is an open protocol that lets agents connect to a growing ecosystem of serve
 
 Install LangChain with the `mcp` extra to connect to MCP servers:
 
+**pip**
+
 ```bash
 pip install "langchain[mcp]"
 ```
 
+**uv**
+
 ```bash
 uv add "langchain[mcp]"
 ```
+
+**Google**
 
 ```python
 import asyncio
@@ -312,6 +354,8 @@ async def main():
         )
 ```
 
+**OpenAI**
+
 ```python
 import asyncio
 
@@ -336,6 +380,8 @@ async def main():
         )
 ```
 
+**Anthropic**
+
 ```python
 import asyncio
 
@@ -347,7 +393,7 @@ async def main():
     async with MCPAdapter(config) as adapter:
         tools = await adapter.list_tools()
         agent = create_deep_agent(
-            model="anthropic:claude-sonnet-5",
+            model="anthropic:claude-sonnet-4-6",
             tools=tools,
         )
         await agent.ainvoke(
@@ -359,6 +405,8 @@ async def main():
             config={"configurable": {"thread_id": "1"}},
         )
 ```
+
+**OpenRouter**
 
 ```python
 import asyncio
@@ -384,6 +432,8 @@ async def main():
         )
 ```
 
+**Fireworks**
+
 ```python
 import asyncio
 
@@ -408,6 +458,8 @@ async def main():
         )
 ```
 
+**Baseten**
+
 ```python
 import asyncio
 
@@ -431,6 +483,8 @@ async def main():
             config={"configurable": {"thread_id": "1"}},
         )
 ```
+
+**Ollama**
 
 ```python
 import asyncio
@@ -487,7 +541,7 @@ Return a string for text-only results, or an ordered list of content blocks for 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

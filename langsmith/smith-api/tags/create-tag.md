@@ -1,8 +1,18 @@
+---
+title: "Create tag"
+description: "Create a tag. Requires repo ownership, prompts:tag permission, or ABAC grant."
+source: "https://docs.langchain.com/langsmith/smith-api/tags/create-tag"
+category: "docs"
+tags: [docs, langsmith, smith-api, tags, create-tag]
+---
+
 # Create tag
 
 > Create a tag. Requires repo ownership, prompts:tag permission, or ABAC grant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/repos/{owner}/{repo}/tags**
 
 ````yaml
 openapi: 3.1.0

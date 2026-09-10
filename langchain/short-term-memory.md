@@ -1,3 +1,11 @@
+---
+title: "Short-term memory"
+description: "Memory is a system that remembers information about previous interactions. For AI agents, memory is crucial because it lets them remember previous interactions, learn from feedback, and adapt to user..."
+source: "https://docs.langchain.com/oss/python/langchain/short-term-memory"
+category: "docs"
+tags: [docs, langchain, short-term-memory]
+---
+
 # Short-term memory
 
 ## Overview
@@ -31,6 +39,8 @@ To add short-term memory (thread-level persistence) to an agent, you need to spe
 >
 > Short-term memory updates when the agent is invoked or a step (like a tool call) is completed, and the state is read at the start of each step.
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
@@ -60,6 +70,8 @@ response = agent.invoke(
 
 print(response)  # "You are Bob!"
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -91,6 +103,8 @@ response = agent.invoke(
 print(response)  # "You are Bob!"
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
@@ -120,6 +134,8 @@ response = agent.invoke(
 
 print(response)  # "You are Bob!"
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -151,6 +167,8 @@ response = agent.invoke(
 print(response)  # "You are Bob!"
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
@@ -180,6 +198,8 @@ response = agent.invoke(
 
 print(response)  # "You are Bob!"
 ```
+
+**Baseten**
 
 ```python
 from langchain.agents import create_agent
@@ -211,6 +231,8 @@ response = agent.invoke(
 print(response)  # "You are Bob!"
 ```
 
+**Ollama**
+
 ```python
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
@@ -241,13 +263,20 @@ response = agent.invoke(
 print(response)  # "You are Bob!"
 ```
 
+#### [View example trace](https://smith.langchain.com/public/958890cd-88c9-4f06-a277-de708a44ee55/r)
+Open a public LangSmith run for this example.
+
 ### In production
 
 In production, use a checkpointer backed by a database:
 
+**pip**
+
 ```bash
 pip install -U langgraph-checkpoint-postgres "psycopg[binary]"
 ```
+
+**uv**
 
 ```bash
 uv add langgraph-checkpoint-postgres "psycopg[binary]"
@@ -843,7 +872,7 @@ agent = create_agent(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/short-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

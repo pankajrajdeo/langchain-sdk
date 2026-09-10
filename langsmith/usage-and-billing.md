@@ -1,3 +1,11 @@
+---
+title: "Usage and billing"
+description: "Understand LangSmith trace data retention tiers, pricing, rate limits, and usage limits."
+source: "https://docs.langchain.com/langsmith/usage-and-billing"
+category: "docs"
+tags: [docs, langsmith, usage-and-billing]
+---
+
 # Usage and billing
 
 > Understand LangSmith trace data retention tiers, pricing, rate limits, and usage limits.
@@ -224,7 +232,7 @@ Usage limits can be updated from the `Settings` page under `Usage and Billing`. 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/usage-and-billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

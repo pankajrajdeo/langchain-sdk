@@ -1,3 +1,11 @@
+---
+title: "Agent Server metrics"
+description: "Reference for Agent Server OpenTelemetry metrics on self-hosted deployments, including Deployment UI metrics, internal metrics, and Datadog export."
+source: "https://docs.langchain.com/langsmith/self-hosted-agent-server-metrics"
+category: "docs"
+tags: [docs, langsmith, self-hosted-agent-server-metrics]
+---
+
 # Agent Server metrics
 
 > Reference for Agent Server OpenTelemetry metrics on self-hosted deployments, including Deployment UI metrics, internal metrics, and Datadog export.
@@ -134,7 +142,7 @@ These metrics have `lsd_web_metric=false`. By default they are exported to Datad
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-agent-server-metrics.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

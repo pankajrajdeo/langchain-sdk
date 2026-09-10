@@ -1,3 +1,11 @@
+---
+title: "PerplexityEmbeddings integration"
+description: "Integrate with Perplexity's embedding models using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/embeddings/perplexity"
+category: "docs"
+tags: [docs, integrations, embeddings, perplexity]
+---
+
 # PerplexityEmbeddings integration
 
 > Integrate with Perplexity's embedding models using LangChain Python.
@@ -140,7 +148,7 @@ For detailed documentation on `PerplexityEmbeddings` features and configuration 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

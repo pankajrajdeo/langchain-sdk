@@ -1,3 +1,11 @@
+---
+title: "List runs in a trace"
+description: "Returns runs for a trace ID within min/max start time. Optional filter; repeatable selects to select fields to return."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/list-runs-in-a-trace"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, list-runs-in-a-trace]
+---
+
 # List runs in a trace
 
 > Returns runs for a trace ID within min/max start time. Optional `filter`; repeatable `selects` to select fields to return.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/traces/{trace_id}/runs**
 
 ````yaml
 openapi: 3.1.0
@@ -205,8 +215,8 @@ paths:
           name: max_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Max Start Time
         - description: >-
             `min_start_time` is the optional inclusive lower bound for run
@@ -215,16 +225,16 @@ paths:
           name: min_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Min Start Time
         - description: '`project_id` is the UUID of the tracing project that owns the trace.'
           name: project_id
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
         - description: >-
             `selects` lists which properties to include on each returned run
@@ -235,6 +245,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - ID
@@ -284,7 +295,6 @@ paths:
                 - FEEDBACK_STATS
                 - LS_USER_ID
               type: string
-            type: array
             title: Selects
       responses:
         '200':

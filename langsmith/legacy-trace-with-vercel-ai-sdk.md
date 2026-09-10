@@ -1,3 +1,11 @@
+---
+title: "Trace with the Vercel AI SDK (Legacy)"
+description: "This page documents an older method of tracing AI SDK runs. For a simpler and more general method that does not require OTEL setup, see the new guide."
+source: "https://docs.langchain.com/langsmith/legacy-trace-with-vercel-ai-sdk"
+category: "docs"
+tags: [docs, langsmith, legacy-trace-with-vercel-ai-sdk]
+---
+
 # Trace with the Vercel AI SDK (Legacy)
 
 > [!WARNING]
@@ -14,25 +22,37 @@ You can use LangSmith to trace runs from the Vercel AI SDK using OpenTelemetry (
 
 Install the Vercel AI SDK and required OTEL packages. We use their OpenAI integration for the code snippets below, but you can use any of their other options as well.
 
+**npm**
+
 ```bash
 npm install ai @ai-sdk/openai zod
 ```
+
+**yarn**
 
 ```bash
 yarn add ai @ai-sdk/openai zod
 ```
 
+**pnpm**
+
 ```bash
 pnpm add ai @ai-sdk/openai zod
 ```
+
+**npm**
 
 ```bash
 npm install @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-proto @opentelemetry/context-async-hooks
 ```
 
+**yarn**
+
 ```bash
 yarn add @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-proto @opentelemetry/context-async-hooks
 ```
+
+**pnpm**
 
 ```bash
 pnpm add @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-proto @opentelemetry/context-async-hooks
@@ -186,13 +206,19 @@ The resulting trace will look [like this](https://smith.langchain.com/public/296
 
 First, install the [`@vercel/otel`](https://www.npmjs.com/package/@vercel/otel) package:
 
+**npm**
+
 ```bash
 npm install @vercel/otel
 ```
 
+**yarn**
+
 ```bash
 yarn add @vercel/otel
 ```
+
+**pnpm**
 
 ```bash
 pnpm add @vercel/otel
@@ -248,13 +274,19 @@ If you're using Sentry, you can attach the LangSmith trace exporter to Sentry's 
 > [!WARNING]
 > At time of writing, Sentry only supports OTEL v1 packages. LangSmith supports both v1 and v2, but you **must** make sure you install OTEL v1 packages in order to make instrumentation work.
 >
+> **npm**
+>
 > ```bash
 > npm install @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
 > ```
 >
+> **yarn**
+>
 > ```bash
 > yarn add @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
 > ```
+>
+> **pnpm**
 >
 > ```bash
 > pnpm add @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
@@ -353,7 +385,7 @@ await generateText({
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/legacy-trace-with-vercel-ai-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

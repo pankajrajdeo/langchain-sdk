@@ -1,3 +1,11 @@
+---
+title: "Connect a Managed Deep Agent to Slack"
+description: "Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-channels-slack"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-channels-slack]
+---
+
 # Connect a Managed Deep Agent to Slack
 
 > Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations.
@@ -36,6 +44,8 @@ To add Slack to an existing project, run the channel initialization command from
 uv run mda channels init slack
 ```
 
+**channels/slack.py**
+
 ```python
 from managed_deepagents import channels
 
@@ -67,6 +77,8 @@ my-agent/
     slack.py
     support-agent.png
 ```
+
+**channels/slack.py**
 
 ```python
 from managed_deepagents import channels
@@ -124,7 +136,7 @@ After you change the agent's name, description, icon, or background color in the
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels-slack.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

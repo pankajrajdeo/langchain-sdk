@@ -1,3 +1,11 @@
+---
+title: "BYOC onboarding"
+description: "Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately."
+source: "https://docs.langchain.com/langsmith/byoc-onboarding"
+category: "docs"
+tags: [docs, langsmith, byoc-onboarding]
+---
+
 # BYOC onboarding
 
 > Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately.
@@ -60,7 +68,7 @@ For more information, see [Migrate to BYOC](byoc-migration.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-onboarding.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

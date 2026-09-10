@@ -1,3 +1,11 @@
+---
+title: "IBM watsonx.ai integration"
+description: "Integrate with the IBM watsonx.ai tool using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/ibm_watsonx"
+category: "docs"
+tags: [docs, integrations, tools, ibm_watsonx]
+---
+
 # IBM watsonx.ai integration
 
 > Integrate with the IBM watsonx.ai tool using LangChain Python.
@@ -307,7 +315,7 @@ For detailed documentation of all `WatsonxToolkit` features and configurations h
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

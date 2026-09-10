@@ -1,3 +1,11 @@
+---
+title: "Hybrid"
+description: "A LangSmith Deployment setup where you self-host Agent Servers in your infrastructure and send traces to LangSmith Cloud or a self-hosted LangSmith instance."
+source: "https://docs.langchain.com/langsmith/hybrid"
+category: "docs"
+tags: [docs, langsmith, hybrid]
+---
+
 # Hybrid
 
 > A LangSmith Deployment setup where you self-host Agent Servers in your infrastructure and send traces to LangSmith Cloud or a self-hosted LangSmith instance.
@@ -95,7 +103,7 @@ In both cases, authenticate with a [LangSmith API key](create-account-api-key.md
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/hybrid.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Update an alert rule"
+description: "Updates an alert rule."
+source: "https://docs.langchain.com/langsmith/smith-api/alert_rules/update-an-alert-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, alert_rules, update-an-alert-rule]
+---
+
 # Update an alert rule
 
 > Updates an alert rule.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/platform/alerts/{session_id}/{alert_rule_id}**
 
 ````yaml
 openapi: 3.1.0

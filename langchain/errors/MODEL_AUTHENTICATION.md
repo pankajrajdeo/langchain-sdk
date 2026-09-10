@@ -1,3 +1,11 @@
+---
+title: "MODEL_AUTHENTICATION"
+description: "Currently only used in langchainjs (JavaScript/TypeScript)."
+source: "https://docs.langchain.com/oss/python/langchain/errors/MODEL_AUTHENTICATION"
+category: "docs"
+tags: [docs, langchain, errors, model_authentication]
+---
+
 # MODEL_AUTHENTICATION
 
 > [!NOTE]
@@ -26,7 +34,7 @@ model = ChatOpenAI(api_key="YOUR_KEY_HERE")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_AUTHENTICATION.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

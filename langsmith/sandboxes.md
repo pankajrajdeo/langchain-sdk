@@ -1,3 +1,11 @@
+---
+title: "LangSmith Sandboxes"
+description: "Use LangSmith managed sandboxes to safely execute code and interact with the filesystem in isolated environments."
+source: "https://docs.langchain.com/langsmith/sandboxes"
+category: "docs"
+tags: [docs, langsmith, sandboxes]
+---
+
 # LangSmith Sandboxes
 
 > Use LangSmith managed sandboxes to safely execute code and interact with the filesystem in isolated environments.
@@ -27,6 +35,8 @@ For self-hosted LangSmith deployments, see [Enable Sandboxes on self-hosted depl
 
 ### 1. Install the SDK
 
+**Python**
+
 ```bash
 # uv
 uv add "langsmith[sandbox]"
@@ -34,6 +44,8 @@ uv add "langsmith[sandbox]"
 # pip
 pip install "langsmith[sandbox]"
 ```
+
+**TypeScript**
 
 ```bash
 npm install langsmith
@@ -47,6 +59,8 @@ export LANGSMITH_API_KEY="<your-api-key>"
 
 ### 3. Create and run a sandbox
 
+**Python**
+
 ```python
 from langsmith.sandbox import SandboxClient
 
@@ -56,6 +70,8 @@ with client.sandbox() as sb:
     result = sb.run("python -c 'print(2 + 2)'")
     print(result.stdout)  # "4\n"
 ```
+
+**TypeScript**
 
 ```ts
 import { SandboxClient } from "langsmith/sandbox";
@@ -110,7 +126,7 @@ Run Harbor evaluations and rollouts on LangSmith sandboxes.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

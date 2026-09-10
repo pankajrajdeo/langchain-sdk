@@ -1,3 +1,11 @@
+---
+title: "Interact with your self-hosted instance of LangSmith"
+description: "This guide will walk you through the process of using your self-hosted instance of LangSmith."
+source: "https://docs.langchain.com/langsmith/self-host-usage"
+category: "docs"
+tags: [docs, langsmith, self-host-usage]
+---
+
 # Interact with your self-hosted instance of LangSmith
 
 This guide will walk you through the process of using your self-hosted instance of LangSmith.
@@ -62,7 +70,7 @@ To access the API reference, navigate to `http://<host>/api/docs` in your browse
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

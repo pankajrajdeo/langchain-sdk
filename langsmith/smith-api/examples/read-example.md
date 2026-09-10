@@ -1,8 +1,18 @@
+---
+title: "Read example"
+description: "Get a specific example."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/read-example"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, read-example]
+---
+
 # Read example
 
 > Get a specific example.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/examples/{example_id}**
 
 ````yaml
 openapi: 3.1.0

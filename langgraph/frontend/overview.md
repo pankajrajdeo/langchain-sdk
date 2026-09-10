@@ -1,3 +1,11 @@
+---
+title: "Overview"
+description: "Render LangGraph agents to the frontend"
+source: "https://docs.langchain.com/oss/python/langgraph/frontend/overview"
+category: "docs"
+tags: [docs, langgraph, frontend]
+---
+
 # Overview
 
 > Render LangGraph agents to the frontend
@@ -127,7 +135,7 @@ The [LangChain frontend patterns](../../langchain/frontend/overview.md)—markdo
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/overview.md) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

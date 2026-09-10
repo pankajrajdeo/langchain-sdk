@@ -1,3 +1,11 @@
+---
+title: "Metal integrations"
+description: "Integrate with Metal using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/metal"
+category: "docs"
+tags: [docs, integrations, providers, metal]
+---
+
 # Metal integrations
 
 > Integrate with Metal using LangChain Python.
@@ -27,7 +35,7 @@ docs = retriever.invoke("search term")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/metal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

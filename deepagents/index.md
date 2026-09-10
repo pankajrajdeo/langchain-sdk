@@ -1,3 +1,11 @@
+---
+title: "Deep Agents overview"
+description: "Build agents that can plan, use subagents, and leverage file systems for complex tasks"
+source: "https://docs.langchain.com/oss/python/deepagents"
+category: "docs"
+tags: [docs, deepagents]
+---
+
 # Deep Agents overview
 
 > Build agents that can plan, use subagents, and leverage file systems for complex tasks
@@ -23,6 +31,8 @@ See [Core capabilities](#core-capabilities) for a full breakdown of each compone
 
 ## Quickstart
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -41,6 +51,8 @@ agent.invoke(
     {"messages": [{"role": "user", "content": "what is the weather in sf"}]}
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -61,6 +73,8 @@ agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -79,6 +93,8 @@ agent.invoke(
     {"messages": [{"role": "user", "content": "what is the weather in sf"}]}
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -99,6 +115,8 @@ agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -117,6 +135,8 @@ agent.invoke(
     {"messages": [{"role": "user", "content": "what is the weather in sf"}]}
 )
 ```
+
+**Baseten**
 
 ```python
 from deepagents import create_deep_agent
@@ -137,6 +157,8 @@ agent.invoke(
 )
 ```
 
+**Ollama**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -155,6 +177,9 @@ agent.invoke(
     {"messages": [{"role": "user", "content": "what is the weather in sf"}]}
 )
 ```
+
+#### [View example trace](https://smith.langchain.com/public/6303999e-5e08-4c66-b14c-ba5648f32f88/r)
+Open a public LangSmith run for this example.
 
 See the [Quickstart](quickstart.md) and [Customization guide](customization.md) to get started building your own agents and applications with Deep Agents.
 
@@ -405,6 +430,8 @@ Planning is often useful for:
 
 Pass [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) to the middleware parameter to give the agent a `write_todos` tool for maintaining a structured task list during execution.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -414,6 +441,8 @@ agent = create_deep_agent(
     middleware=[TodoListMiddleware()],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -425,6 +454,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -434,6 +465,8 @@ agent = create_deep_agent(
     middleware=[TodoListMiddleware()],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -445,6 +478,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -455,6 +490,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -464,6 +501,8 @@ agent = create_deep_agent(
     middleware=[TodoListMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -535,7 +574,7 @@ See the `deepagents` API reference
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

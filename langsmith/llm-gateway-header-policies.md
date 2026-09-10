@@ -1,3 +1,11 @@
+---
+title: "Per-customer policies"
+description: "Split gateway spend caps and rate limits by a custom request header so each of your end customers gets its own limit under a single API key."
+source: "https://docs.langchain.com/langsmith/llm-gateway-header-policies"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-header-policies]
+---
+
 # Per-customer policies
 
 > Split gateway spend caps and rate limits by a custom request header so each of your end customers gets its own limit under a single API key.
@@ -35,7 +43,7 @@ Default spend bucketing follows these rules:
 
 To separate a default spend limit by header:
 
-1. Go to **Settings → Gateway → LLM Gateway** and select **Cost Controls**.
+1. Go to **LLM Gateway** and select **Cost Controls**.
 2. Click **Create spend limit**.
 3. Select **Workspace**, **User**, or **API Key**, then select the option to apply the limit to every subject of that type by default.
 4. Select **Separate limits by custom header**.
@@ -58,7 +66,7 @@ Explicit header conditions follow these rules:
 * **Every matching policy is enforced**: A request that matches both a plain subject policy and a policy with a header condition counts against both, and either one can block it.
 * **At most 10 conditions**: A policy carries no more than 10 subject conditions in total.
 
-1. Go to **Settings → Gateway → LLM Gateway**.
+1. Go to **LLM Gateway**.
 2. Click **Create policy**.
 3. Select the policy type and subject scope, then set the limits.
 4. Under **Custom header condition (optional)**, enter the **Header name** without its `X-Gateway-` prefix (for example, `Customer-Id`) and the **Header value** to match (for example, `acme`).
@@ -74,6 +82,8 @@ A reseller or multi-tenant application usually calls the gateway from its own ba
 
 Attach the header to each request your backend makes on behalf of an end customer:
 
+**curl**
+
 ```bash
 curl https://gateway.smith.langchain.com/openai/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
@@ -81,6 +91,8 @@ curl https://gateway.smith.langchain.com/openai/v1/chat/completions \
     -H "X-Gateway-Customer-Id: acme" \
     -d '{"model":"gpt-4o-mini","messages":[{"role":"user","content":"ping"}]}'
 ```
+
+**OpenAI SDK**
 
 ```python
 import os
@@ -107,6 +119,8 @@ print(response.choices[0].message.content)
 
 Create one spend policy per end customer through the [LangSmith REST API](smith-api-ref.md):
 
+**curl**
+
 ```bash
 curl -X POST "https://api.smith.langchain.com/v1/platform/gateway-policies" \
     -H "X-Api-Key: $LANGSMITH_API_KEY" \
@@ -122,6 +136,8 @@ curl -X POST "https://api.smith.langchain.com/v1/platform/gateway-policies" \
           "config": {"window": "monthly", "limit_usd": 250}
         }'
 ```
+
+**Python**
 
 ```python
 import os
@@ -280,7 +296,7 @@ The sync script in [step 3](#step-3-sync-policies-with-your-customer-list) appli
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-header-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

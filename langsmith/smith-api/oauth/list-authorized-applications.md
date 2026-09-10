@@ -1,8 +1,18 @@
+---
+title: "List authorized applications"
+description: "Lists the third-party applications the authenticated user has authorized to sign in with LangSmith."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/list-authorized-applications"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, list-authorized-applications]
+---
+
 # List authorized applications
 
 > Lists the third-party applications the authenticated user has authorized to sign in with LangSmith.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/oauth/authorized-apps**
 
 ````yaml
 openapi: 3.1.0

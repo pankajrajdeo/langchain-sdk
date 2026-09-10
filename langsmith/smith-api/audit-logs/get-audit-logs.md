@@ -1,3 +1,11 @@
+---
+title: "Get audit logs"
+description: "Retrieve audit log records for the authenticated user's organization in OCSF format."
+source: "https://docs.langchain.com/langsmith/smith-api/audit-logs/get-audit-logs"
+category: "docs"
+tags: [docs, langsmith, smith-api, audit-logs, get-audit-logs]
+---
+
 # Get audit logs
 
 > Retrieve audit log records for the authenticated user's organization in OCSF format.
@@ -10,6 +18,8 @@ which is compatible with security monitoring and SIEM tools.
 Reference: https://schema.ocsf.io/1.7.0/classes/api_activity
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/audit-logs**
 
 ````yaml
 openapi: 3.1.0
@@ -319,6 +329,7 @@ components:
         - delete_api_key
         - create_personal_access_token
         - delete_personal_access_token
+        - revoke_personal_access_token
         - create_service_key
         - delete_service_key
         - update_service_key
@@ -359,6 +370,7 @@ components:
         - read_workspace_encrypted_secrets
         - update_workspace_secrets
         - delete_workspace_secret
+        - read_org_encrypted_secrets
         - update_org_secrets
         - unshare_entities
         - upsert_github_app_configuration

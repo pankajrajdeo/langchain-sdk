@@ -1,3 +1,11 @@
+---
+title: "Manage datasets"
+description: "LangSmith provides tools for managing and working with your datasets. This page describes dataset operations including:"
+source: "https://docs.langchain.com/langsmith/manage-datasets"
+category: "docs"
+tags: [docs, langsmith, manage-datasets]
+---
+
 # Manage datasets
 
 LangSmith provides tools for managing and working with your [*datasets*](evaluation-concepts.md#datasets). This page describes dataset operations including:
@@ -72,6 +80,8 @@ To run an evaluation on a particular tagged version of a dataset, refer to the [
 
 You can use `evaluate` / `aevaluate` to pass in an iterable of examples to evaluate on a particular version of a dataset. Use `list_examples` / `listExamples` to fetch examples from a particular version tag using `as_of` / `asOf` and pass that into the `data` argument.
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -93,6 +103,8 @@ results = ls_client.evaluate(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 import { evaluate } from "langsmith/evaluation";
 
@@ -104,6 +116,8 @@ await evaluate((inputs) => labelText(inputs["input"]), {
   evaluators: [correctLabel],
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.examples.ExampleListParams;
@@ -130,6 +144,8 @@ You can use the `list_examples` / `listExamples` method to [fetch](manage-datase
 
 One common workflow is to fetch examples that have a certain metadata key-value pair.
 
+**Python**
+
 ```python
 from langsmith import evaluate
 
@@ -140,6 +156,8 @@ results = evaluate(
     experiment_prefix="Toxic Queries",
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { evaluate } from "langsmith/evaluation";
@@ -153,6 +171,8 @@ await evaluate((inputs) => labelText(inputs["input"]), {
   experimentPrefix: "Toxic Queries",
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.examples.ExampleListParams;
@@ -170,6 +190,8 @@ For more filtering capabilities, refer to this [how-to guide](manage-datasets-pr
 
 You can use the `list_examples` / `listExamples` method to evaluate on one or multiple [splits](evaluation-concepts.md#dataset-organization) of your dataset. The `splits` parameter takes a list of the splits you would like to evaluate.
 
+**Python**
+
 ```python
 from langsmith import evaluate
 
@@ -180,6 +202,8 @@ results = evaluate(
     experiment_prefix="Toxic Queries",
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { evaluate } from "langsmith/evaluation";
@@ -193,6 +217,8 @@ await evaluate((inputs) => labelText(inputs["input"]), {
   experimentPrefix: "Toxic Queries",
 });
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.examples.ExampleListParams;
@@ -262,7 +288,7 @@ After applying the filter on the project, we can multi-select runs to add to the
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

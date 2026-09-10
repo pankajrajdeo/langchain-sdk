@@ -1,3 +1,11 @@
+---
+title: "Markdown messages"
+description: "Render LLM responses as rich, formatted markdown with proper streaming support"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/markdown-messages"
+category: "docs"
+tags: [docs, langchain, frontend, markdown-messages]
+---
+
 # Markdown messages
 
 > Render LLM responses as rich, formatted markdown with proper streaming support
@@ -28,7 +36,9 @@ The markdown pattern uses a simple chat agent with no special configuration.
 Wire up [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) with your agent URL and assistant ID.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -57,6 +67,8 @@ export function Chat() {
 }
 ```
 
+**Vue**
+
 ```vue
 <script setup lang="ts">
 import { useStream } from "@langchain/vue";
@@ -79,6 +91,8 @@ const stream = useStream<typeof myAgent>({
   </div>
 </template>
 ```
+
+**Svelte**
 
 ```svelte
 <script lang="ts">
@@ -103,6 +117,8 @@ const stream = useStream<typeof myAgent>({
   {/each}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component } from "@angular/core";
@@ -145,6 +161,8 @@ Each framework has a natural choice for markdown rendering:
 
 ## Building the Markdown component
 
+**React**
+
 ```tsx
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -159,6 +177,8 @@ export function Markdown({ children }: { children: string }) {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -187,6 +207,8 @@ const html = computed(() => {
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { marked } from "marked";
@@ -206,6 +228,8 @@ const html = computed(() => {
   {@html html}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component, Input, computed, signal } from "@angular/core";
@@ -299,7 +323,7 @@ For very long responses (> 50 KB), consider these optimizations:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/markdown-messages.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

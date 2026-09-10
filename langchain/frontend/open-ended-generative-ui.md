@@ -1,3 +1,11 @@
+---
+title: "Open-ended generative UI"
+description: "Render UI created outside your application, such as sandboxed MCP Apps, at the open end of the generative UI spectrum"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui"
+category: "docs"
+tags: [docs, langchain, frontend, open-ended-generative-ui]
+---
+
 # Open-ended generative UI
 
 > Render UI created outside your application, such as sandboxed MCP Apps, at the open end of the generative UI spectrum
@@ -57,7 +65,7 @@ it contains the expressive range rather than limiting it.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/open-ended-generative-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

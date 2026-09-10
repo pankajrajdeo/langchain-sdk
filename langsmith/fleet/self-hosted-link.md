@@ -1,3 +1,11 @@
+---
+title: "Enable additional LangSmith features"
+description: "Enable LangSmith Deployment, Fleet, Insights, Chat, Sandboxes, and Engine on a self-hosted LangSmith instance."
+source: "https://docs.langchain.com/langsmith/fleet/self-hosted-link"
+category: "docs"
+tags: [docs, langsmith, fleet, self-hosted-link]
+---
+
 # Enable additional LangSmith features
 
 > Enable LangSmith Deployment, Fleet, Insights, Chat, Sandboxes, and Engine on a self-hosted LangSmith instance.
@@ -761,7 +769,7 @@ polly:
 ## Enable Sandboxes
 
 > [!NOTE]
-> Self-hosted Sandboxes require LangSmith Helm chart v17 (`0.17.x`).
+> Self-hosted Sandboxes on Azure require LangSmith Helm chart v17 (`0.17.x`).
 
 Sandboxes are disabled by default. After installation, see [LangSmith Sandboxes](../sandboxes.md) for user workflows in the LangSmith UI and APIs.
 
@@ -1181,6 +1189,8 @@ Replace the values with your registry credentials:
 ### Configure the deployment template in your langsmith_config.yaml
 To enable agent server deployments to use the private registry secret, add `imagePullSecrets` to the operator's deployment template:
 
+**{21-22}**
+
 ```yaml
 operator:
   templates:
@@ -1305,7 +1315,7 @@ Once LangSmith Deployment is enabled, see [Deploy with control plane](../deploy-
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-self-hosted-full-platform.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

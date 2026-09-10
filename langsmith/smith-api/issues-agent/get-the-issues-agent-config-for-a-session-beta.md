@@ -1,3 +1,11 @@
+---
+title: "Get the issues agent config for a session (Beta)"
+description: "Beta: This endpoint is in active development and may change without notice."
+source: "https://docs.langchain.com/langsmith/smith-api/issues-agent/get-the-issues-agent-config-for-a-session-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, issues-agent, get-the-issues-agent-config-for-a-session-beta]
+---
+
 # Get the issues agent config for a session (Beta)
 
 > **Beta:** This endpoint is in active development and may change without notice.
@@ -5,6 +13,8 @@
 Returns the issues agent config attached to the given tracer session.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/sessions/{session_id}/issues-agent**
 
 ````yaml
 openapi: 3.1.0

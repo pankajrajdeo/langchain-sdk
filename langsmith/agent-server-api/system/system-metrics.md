@@ -1,8 +1,18 @@
+---
+title: "System Metrics"
+description: "Get system metrics in Prometheus or JSON format for monitoring and observability."
+source: "https://docs.langchain.com/langsmith/agent-server-api/system/system-metrics"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, system, system-metrics]
+---
+
 # System Metrics
 
 > Get system metrics in Prometheus or JSON format for monitoring and observability.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /metrics**
 
 ````yaml
 openapi: 3.1.0

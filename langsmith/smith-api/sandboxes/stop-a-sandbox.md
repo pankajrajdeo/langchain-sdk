@@ -1,8 +1,18 @@
+---
+title: "Stop a sandbox"
+description: "Stop a ready sandbox. This endpoint is not idempotent; the filesystem is preserved for later restart."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/stop-a-sandbox"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, stop-a-sandbox]
+---
+
 # Stop a sandbox
 
 > Stop a ready sandbox. This endpoint is not idempotent; the filesystem is preserved for later restart.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/boxes/{name}/stop**
 
 ````yaml
 openapi: 3.1.0

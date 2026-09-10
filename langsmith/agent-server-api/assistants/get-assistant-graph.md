@@ -1,8 +1,18 @@
+---
+title: "Get Assistant Graph"
+description: "Get an assistant by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-graph"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, get-assistant-graph]
+---
+
 # Get Assistant Graph
 
 > Get an assistant by ID.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /assistants/{assistant_id}/graph**
 
 ````yaml
 openapi: 3.1.0

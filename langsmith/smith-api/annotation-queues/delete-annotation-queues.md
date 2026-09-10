@@ -1,3 +1,11 @@
+---
+title: "Delete annotation queues"
+description: "Delete multiple annotation queues with partial success support."
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/delete-annotation-queues"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, delete-annotation-queues]
+---
+
 # Delete annotation queues
 
 > Delete multiple annotation queues with partial success support.
@@ -7,6 +15,8 @@ Returns:
     - 207: Some queues deleted successfully, some failed
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/annotation-queues**
 
 ````yaml
 openapi: 3.1.0

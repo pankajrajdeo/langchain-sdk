@@ -1,3 +1,11 @@
+---
+title: "Backend integrations"
+description: "Filesystem backends for Deep Agents."
+source: "https://docs.langchain.com/oss/python/integrations/backends"
+category: "docs"
+tags: [docs, integrations, backends]
+---
+
 # Backend integrations
 
 > Filesystem backends for Deep Agents.
@@ -29,7 +37,7 @@ Have a backend to share? [Open a PR](https://github.com/langchain-ai/docs) to ad
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/backends/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

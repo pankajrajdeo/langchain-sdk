@@ -1,3 +1,11 @@
+---
+title: "Set up hierarchy"
+description: "This page describes setting up and managing your LangSmith organization and workspaces:"
+source: "https://docs.langchain.com/langsmith/set-up-hierarchy"
+category: "docs"
+tags: [docs, langsmith, set-up-hierarchy]
+---
+
 # Set up hierarchy
 
 This page describes setting up and managing your LangSmith [*organization*](administration-overview.md#organizations) and [*workspaces*](administration-overview.md#workspaces):
@@ -107,7 +115,7 @@ You can view all resources within a workspace by selecting **All applications** 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/set-up-hierarchy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

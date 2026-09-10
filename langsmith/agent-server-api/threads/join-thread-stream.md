@@ -1,8 +1,18 @@
+---
+title: "Join Thread Stream"
+description: "This endpoint streams output in real-time from a thread. The stream will include the output of each run executed sequentially on the thread and will remain open indefinitely. It is the responsibility..."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/join-thread-stream"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, join-thread-stream]
+---
+
 # Join Thread Stream
 
 > This endpoint streams output in real-time from a thread. The stream will include the output of each run executed sequentially on the thread and will remain open indefinitely. It is the responsibility of the calling client to close the connection.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /threads/{thread_id}/stream**
 
 ````yaml
 openapi: 3.1.0

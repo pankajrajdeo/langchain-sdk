@@ -1,3 +1,11 @@
+---
+title: "Manage assistants"
+description: "This page describes how to create, configure, and manage assistants. Assistants allow you to customize your deployed graph's behavior through configuration—such as model selection, prompts, and tool..."
+source: "https://docs.langchain.com/langsmith/configuration-cloud"
+category: "docs"
+tags: [docs, langsmith, configuration-cloud]
+---
+
 # Manage assistants
 
 This page describes how to create, configure, and manage [assistants](assistants.md). Assistants allow you to customize your [deployed](deployment.md) graph's behavior through configuration—such as model selection, prompts, and tool availability—without changing the underlying graph code.
@@ -9,6 +17,8 @@ You can work with the [SDK](https://reference.langchain.com/python/langsmith/dep
 Assistants store *context* values that customize graph behavior at runtime. You define a context schema in your graph code, then provide specific context values when creating an assistant via the [`context` parameter](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.AssistantsClient.create).
 
 Consider this example of a `call_model` node that reads the `model_name` from the context:
+
+**Python**
 
 ```python
 class ContextSchema(TypedDict):
@@ -22,6 +32,8 @@ def call_model(state, runtime: Runtime[ContextSchema]):
     response = model.invoke(messages)
     return {"messages": [response]}
 ```
+
+**JavaScript**
 
 ```javascript
 import { Annotation } from "@langchain/langgraph";
@@ -58,6 +70,8 @@ Use the [`assistants.create`](https://reference.langchain.com/python/langsmith/d
 
 The following example creates an assistant with `model_name` set to `openai`:
 
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -76,6 +90,8 @@ print(openai_assistant)
 # Output includes the assistant_id (UUID) that uniquely identifies this assistant
 ```
 
+**JavaScript**
+
 ```javascript
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -92,6 +108,8 @@ const openAIAssistant = await client.assistants.create({
 console.log(openAIAssistant);
 // Output includes the assistant_id (UUID) that uniquely identifies this assistant
 ```
+
+**cURL**
 
 ```bash
 curl --request POST \
@@ -139,6 +157,8 @@ The `assistant_id` (a UUID like `"62e209ca-9154-432a-b9e9-2d75c7a9219b"`) unique
 
 To use an assistant, pass its `assistant_id` when creating a run. The example below uses the assistant we created above:
 
+**Python**
+
 ```python
 # Create a thread for the conversation
 thread = await client.threads.create()
@@ -158,6 +178,8 @@ async for event in client.runs.stream(
     print(event.data)
     print("\n\n")
 ```
+
+**JavaScript**
 
 ```javascript
 // Create a thread for the conversation
@@ -183,6 +205,8 @@ for await (const event of streamResponse) {
   console.log("\n\n");
 }
 ```
+
+**cURL**
 
 ```bash
 # First, create a thread
@@ -265,6 +289,8 @@ Use the [`assistants.update`](https://reference.langchain.com/python/langsmith/d
 
 For example, to add a system prompt to the assistant:
 
+**Python**
+
 ```python
 # Update the assistant with a new configuration
 # IMPORTANT: Include ALL configuration fields, not just the ones you're changing
@@ -279,6 +305,8 @@ openai_assistant_v2 = await client.assistants.update(
 # This creates version 2 and sets it as the active version
 # Future runs using this assistant_id will use version 2
 ```
+
+**JavaScript**
 
 ```javascript
 // Update the assistant with a new configuration
@@ -297,6 +325,8 @@ const openaiAssistantV2 = await client.assistants.update(
 // Future runs using this assistant_id will use version 2
 ```
 
+**cURL**
+
 ```bash
 curl --request PATCH \
 --url <DEPLOYMENT_URL>/assistants/<ASSISTANT_ID> \
@@ -312,6 +342,8 @@ The update creates a new version and automatically sets it as active. All future
 
 Use the `setLatest` method to change which version is active:
 
+**Python**
+
 ```python
 # Roll back to version 1 of the assistant
 await client.assistants.set_latest(
@@ -322,6 +354,8 @@ await client.assistants.set_latest(
 # All future runs using this assistant_id will now use version 1
 ```
 
+**JavaScript**
+
 ```javascript
 // Roll back to version 1 of the assistant
 await client.assistants.setLatest(
@@ -331,6 +365,8 @@ await client.assistants.setLatest(
 
 // All future runs using this assistant_id will now use version 1
 ```
+
+**cURL**
 
 ```bash
 curl --request POST \
@@ -402,7 +438,7 @@ This updates the assistant to use the selected version for all future runs.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configuration-cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

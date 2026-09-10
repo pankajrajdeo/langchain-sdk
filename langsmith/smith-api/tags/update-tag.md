@@ -1,8 +1,18 @@
+---
+title: "Update tag"
+description: "Update a tag. Requires repo ownership, prompts:tag permission, or ABAC grant."
+source: "https://docs.langchain.com/langsmith/smith-api/tags/update-tag"
+category: "docs"
+tags: [docs, langsmith, smith-api, tags, update-tag]
+---
+
 # Update tag
 
 > Update a tag. Requires repo ownership, prompts:tag permission, or ABAC grant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/repos/{owner}/{repo}/tags/{tag_name}**
 
 ````yaml
 openapi: 3.1.0

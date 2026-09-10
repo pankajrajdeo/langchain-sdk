@@ -1,8 +1,18 @@
+---
+title: "Read datasets"
+description: "Get all datasets by query params and owner."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/read-datasets"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, read-datasets]
+---
+
 # Read datasets
 
 > Get all datasets by query params and owner.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets**
 
 ````yaml
 openapi: 3.1.0

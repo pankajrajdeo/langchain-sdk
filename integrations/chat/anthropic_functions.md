@@ -1,3 +1,11 @@
+---
+title: "(Deprecated) experimental Anthropic tools wrapper integration"
+description: "Integrate with (Deprecated) experimental Anthropic tools wrapper chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/anthropic_functions"
+category: "docs"
+tags: [docs, integrations, chat, anthropic_functions]
+---
+
 # (Deprecated) experimental Anthropic tools wrapper integration
 
 > Integrate with (Deprecated) experimental Anthropic tools wrapper chat model using LangChain Python.
@@ -53,7 +61,7 @@ Person(name='Erick', age=27)
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/anthropic_functions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

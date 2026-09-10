@@ -1,3 +1,11 @@
+---
+title: "Kùzu integrations"
+description: "Integrate with Kùzu using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/kuzu"
+category: "docs"
+tags: [docs, integrations, providers, kuzu]
+---
+
 # Kùzu integrations
 
 > Integrate with Kùzu using LangChain Python.
@@ -19,9 +27,13 @@
 
 Install the Python SDK as follows:
 
+**pip**
+
 ```bash
 pip install -U langchain-kuzu
 ```
+
+**uv**
 
 ```bash
 uv add langchain-kuzu
@@ -48,7 +60,7 @@ from langchain_kuzu.chains.graph_qa.kuzu import KuzuQAChain
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/kuzu.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

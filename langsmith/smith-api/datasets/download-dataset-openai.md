@@ -1,8 +1,18 @@
+---
+title: "Download dataset openai"
+description: "Download a dataset as OpenAI Evals Jsonl format."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/download-dataset-openai"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, download-dataset-openai]
+---
+
 # Download dataset openai
 
 > Download a dataset as OpenAI Evals Jsonl format.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}/openai**
 
 ````yaml
 openapi: 3.1.0

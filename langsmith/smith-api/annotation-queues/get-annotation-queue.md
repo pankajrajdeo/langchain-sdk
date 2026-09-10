@@ -1,6 +1,16 @@
+---
+title: "Get annotation queue"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/annotation-queues/{queue_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/get-annotation-queue"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, get-annotation-queue]
+---
+
 # Get annotation queue
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/annotation-queues/{queue_id}**
 
 ````yaml
 openapi: 3.1.0

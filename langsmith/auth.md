@@ -1,3 +1,11 @@
+---
+title: "Authentication & access control"
+description: "LangSmith provides a flexible authentication and authorization system that can integrate with most authentication schemes."
+source: "https://docs.langchain.com/langsmith/auth"
+category: "docs"
+tags: [docs, langsmith, auth]
+---
+
 # Authentication & access control
 
 LangSmith provides a flexible authentication and authorization system that can integrate with most authentication schemes.
@@ -495,7 +503,7 @@ For implementation details:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

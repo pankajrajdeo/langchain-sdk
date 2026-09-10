@@ -1,3 +1,11 @@
+---
+title: "Connect to an external ClickHouse database"
+description: "ClickHouse is a high-performance, column-oriented database system. It allows for fast ingestion of data and is optimized for analytical queries."
+source: "https://docs.langchain.com/langsmith/self-host-external-clickhouse"
+category: "docs"
+tags: [docs, langsmith, self-host-external-clickhouse]
+---
+
 # Connect to an external ClickHouse database
 
 ClickHouse is a high-performance, column-oriented database system. It allows for fast ingestion of data and is optimized for analytical queries.
@@ -26,7 +34,7 @@ However, you can configure LangSmith to use an external ClickHouse database for 
 * A provisioned ClickHouse instance that your LangSmith application will have network access to (see above for options).
 * A user with admin access to the ClickHouse database. This user will be used to create the necessary tables, indexes, and views.
 * We support both standalone ClickHouse and externally managed clustered deployments. For clustered deployments, ensure all nodes are running the same version. Note that clustered setups are not supported with bundled ClickHouse installations.
-* We only support ClickHouse versions >= 23.9. Use of ClickHouse versions >= 24.2 requires LangSmith v0.6 or later.
+* We only support ClickHouse 23.9 or later. Use of ClickHouse 24.2 or later requires LangSmith v0.6 or later.
 
 > [!WARNING]
 > Downgrading ClickHouse to an earlier version can cause data corruption of system tables and result in significant downtime. If you need assistance with a ClickHouse version change or are experiencing issues after an upgrade, contact support at [support.langchain.com](https://support.langchain.com) before attempting a downgrade.
@@ -110,6 +118,8 @@ You will need to provide several parameters to your LangSmith installation to co
 
 With these parameters in hand, you can configure your LangSmith instance to use the provisioned ClickHouse database. You can do this by modifying the `config.yaml` file for your LangSmith Helm Chart installation.
 
+**Helm**
+
 ```yaml
 clickhouse:
   external:
@@ -141,6 +151,8 @@ To enable TLS for ClickHouse connections:
 > [!WARNING]
 > Mount a custom CA only when your ClickHouse server uses an internal or private CA. Publicly trusted CAs do not require this configuration.
 
+**Helm (server TLS)**
+
 ```yaml
 config:
   customCa:
@@ -157,6 +169,8 @@ clickhouse:
     database: "default"
     tls: true
 ```
+
+**Kubernetes Secret (CA bundle)**
 
 ```yaml
 apiVersion: v1
@@ -180,6 +194,8 @@ If your ClickHouse server requires client certificate authentication:
 * Provide a Secret with your client certificate and key.
 * Reference it via `clickhouse.external.clientCert.secretName` and specify the keys with `certSecretKey` and `keySecretKey`.
 
+**Helm (client auth)**
+
 ```yaml
 clickhouse:
   external:
@@ -196,6 +212,8 @@ clickhouse:
       certSecretKey: "tls.crt"
       keySecretKey: "tls.key"
 ```
+
+**Kubernetes Secret (client cert/key)**
 
 ```yaml
 apiVersion: v1
@@ -251,7 +269,7 @@ If you need more granular control, add the `fsGroup` to each pod's security cont
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-external-clickhouse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

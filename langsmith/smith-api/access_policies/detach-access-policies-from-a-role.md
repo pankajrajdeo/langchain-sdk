@@ -1,8 +1,18 @@
+---
+title: "Detach access policies from a role"
+description: "Detaches one or more access policies from a specific role."
+source: "https://docs.langchain.com/langsmith/smith-api/access_policies/detach-access-policies-from-a-role"
+category: "docs"
+tags: [docs, langsmith, smith-api, access_policies, detach-access-policies-from-a-role]
+---
+
 # Detach access policies from a role
 
 > Detaches one or more access policies from a specific role.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/orgs/current/roles/{role_id}/access-policies**
 
 ````yaml
 openapi: 3.1.0
@@ -179,9 +189,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Access Policy Ids
       responses:
         '204':

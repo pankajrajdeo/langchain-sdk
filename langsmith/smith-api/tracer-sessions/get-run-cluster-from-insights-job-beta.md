@@ -1,8 +1,18 @@
+---
+title: "Get run cluster from insights job (Beta)"
+description: "Get a specific cluster for a session."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-run-cluster-from-insights-job-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, get-run-cluster-from-insights-job-beta]
+---
+
 # Get run cluster from insights job (Beta)
 
 > Get a specific cluster for a session.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/sessions/{session_id}/insights/{job_id}/clusters/{cluster_id}**
 
 ````yaml
 openapi: 3.1.0

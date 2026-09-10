@@ -1,8 +1,18 @@
+---
+title: "Delete a data plane"
+description: "Verifies that the stored customer AWS role has delete permissions, removes linked workspaces, and starts asynchronous deprovisioning for an active or provisioning_failed data plane owned by the..."
+source: "https://docs.langchain.com/langsmith/smith-api/data_planes/delete-a-data-plane"
+category: "docs"
+tags: [docs, langsmith, smith-api, data_planes, delete-a-data-plane]
+---
+
 # Delete a data plane
 
-> Verifies that the stored customer AWS role has delete permissions, removes linked workspaces, and starts asynchronous deprovisioning for a data plane owned by the caller's organization. Requires BYOC to be enabled for the org and org admin permissions.
+> Verifies that the stored customer AWS role has delete permissions, removes linked workspaces, and starts asynchronous deprovisioning for an active or provisioning_failed data plane owned by the caller's organization. Requires BYOC to be enabled for the org and org admin permissions.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /orgs/current/data-planes/{id}**
 
 ````yaml
 openapi: 3.1.0
@@ -166,9 +176,10 @@ paths:
       summary: Delete a data plane
       description: >-
         Verifies that the stored customer AWS role has delete permissions,
-        removes linked workspaces, and starts asynchronous deprovisioning for a
-        data plane owned by the caller's organization. Requires BYOC to be
-        enabled for the org and org admin permissions.
+        removes linked workspaces, and starts asynchronous deprovisioning for an
+        active or provisioning_failed data plane owned by the caller's
+        organization. Requires BYOC to be enabled for the org and org admin
+        permissions.
       parameters:
         - description: Data plane ID
           name: id
@@ -214,7 +225,7 @@ paths:
                 additionalProperties:
                   type: string
         '409':
-          description: Data plane is not active
+          description: Data plane cannot be deleted from its current status
           content:
             application/json:
               schema:

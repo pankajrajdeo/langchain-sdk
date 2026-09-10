@@ -1,8 +1,18 @@
+---
+title: "Create a registry"
+description: "Create a sandbox registry for pulling private images."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/create-a-registry"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, create-a-registry]
+---
+
 # Create a registry
 
 > Create a sandbox registry for pulling private images.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/registries**
 
 ````yaml
 openapi: 3.1.0

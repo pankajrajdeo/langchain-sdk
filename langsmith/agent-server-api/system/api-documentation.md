@@ -1,8 +1,18 @@
+---
+title: "API Documentation"
+description: "A local reference to the Agent Server API documentation."
+source: "https://docs.langchain.com/langsmith/agent-server-api/system/api-documentation"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, system, api-documentation]
+---
+
 # API Documentation
 
 > A local reference to the Agent Server API documentation.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /docs**
 
 ````yaml
 openapi: 3.1.0

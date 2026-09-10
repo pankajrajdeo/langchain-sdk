@@ -1,3 +1,11 @@
+---
+title: "INVALID_CONCURRENT_GRAPH_UPDATE"
+description: "A LangGraph StateGraph received concurrent updates to its state from multiple nodes to a state property that doesn't support it."
+source: "https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE"
+category: "docs"
+tags: [docs, langgraph, errors, invalid_concurrent_graph_update]
+---
+
 # INVALID_CONCURRENT_GRAPH_UPDATE
 
 A LangGraph [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) received concurrent updates to its state from multiple nodes to a state property that doesn't
@@ -54,7 +62,7 @@ The following may help resolve this error:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

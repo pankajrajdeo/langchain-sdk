@@ -1,3 +1,11 @@
+---
+title: "LangSmith Engine security"
+description: "How LangSmith Engine handles your data, the GitHub and model subprocessor controls that govern its access, and its compliance posture."
+source: "https://docs.langchain.com/langsmith/engine-security"
+category: "docs"
+tags: [docs, langsmith, engine-security]
+---
+
 # LangSmith Engine security
 
 > How LangSmith Engine handles your data, the GitHub and model subprocessor controls that govern its access, and its compliance posture.
@@ -91,7 +99,7 @@ For security questions, contact [trust@langchain.dev](mailto:trust@langchain.dev
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-security.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Manage user access in SSO organizations"
+description: "LangSmith provides flexible controls for managing how users join your organization when using Single Sign-On (SSO) authentication. You can independently enable or disable both Just-In-Time (JIT)..."
+source: "https://docs.langchain.com/langsmith/jit-invite-sso"
+category: "docs"
+tags: [docs, langsmith, jit-invite-sso]
+---
+
 # Manage user access in SSO organizations
 
 LangSmith provides flexible controls for managing how users join your [organization](administration-overview.md#organizations) when using [Single Sign-On (SSO) authentication](authentication-methods.md). You can independently enable or disable both Just-In-Time (JIT) provisioning and user invites to match your organization's security and onboarding requirements.
@@ -25,9 +33,9 @@ You can update these settings in the LangSmith UI or with the LangSmith API:
 #### UI
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-jit-invite-sso):
 
-1. Navigate to **Settings** → **Organization** → **Access and Security** → **General**.
+1. Navigate to **Settings** > **Organization** > **Access and Security** > **General**.
 2. Toggle **Enable JIT provisioning** and **Allow invites** as needed.
-3. [Configure SSO default workspaces and roles](#configure-default-sso-settings) in **Settings** → **Organization** → **SSO Configuration**.
+3. [Configure SSO default workspaces and roles](#configure-default-sso-settings) in **Settings** > **Organization** > **SSO Configuration**.
 
 #### API
 Update organization settings programmatically using the [Update organization info](smith-api/orgs/update-current-organization-info.md) endpoint:
@@ -184,7 +192,7 @@ When [JIT provisioning](#jit-provisioning) is enabled, configure default setting
 
 2. Default workspaces. Select one or more workspaces that users are automatically added to. Users receive the same role in all selected workspaces. To configure:
 
-   1. Go to **Settings** → **Organization** → **SSO Configuration**.
+   1. Go to **Settings** > **Organization** > **SSO Configuration**.
    2. Set **Default workspace role**.
    3. Select **Default workspaces**.
    4. Save your configuration.
@@ -219,7 +227,7 @@ We recommend choosing one of SCIM or SSO Groups Sync per organization, not both,
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/jit-invite-sso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "How to add evaluators to an existing experiment (Python only)"
+description: "Evaluation of existing experiments is currently only supported in the Python SDK."
+source: "https://docs.langchain.com/langsmith/evaluate-existing-experiment"
+category: "docs"
+tags: [docs, langsmith, evaluate-existing-experiment]
+---
+
 # How to add evaluators to an existing experiment (Python only)
 
 Evaluation of existing experiments is currently only supported in the Python SDK.
@@ -28,7 +36,7 @@ evaluate(experiment_name, evaluators=[always_half])
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-existing-experiment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

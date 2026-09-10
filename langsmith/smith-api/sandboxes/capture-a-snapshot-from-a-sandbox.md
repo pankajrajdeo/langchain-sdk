@@ -1,8 +1,18 @@
+---
+title: "Capture a snapshot from a sandbox"
+description: "Create a snapshot by capturing the current state of a sandbox or promoting an existing checkpoint."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/capture-a-snapshot-from-a-sandbox"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, capture-a-snapshot-from-a-sandbox]
+---
+
 # Capture a snapshot from a sandbox
 
 > Create a snapshot by capturing the current state of a sandbox or promoting an existing checkpoint.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/boxes/{name}/snapshot**
 
 ````yaml
 openapi: 3.1.0

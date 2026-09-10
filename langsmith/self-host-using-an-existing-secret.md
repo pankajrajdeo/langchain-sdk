@@ -1,3 +1,11 @@
+---
+title: "Use an existing secret for your installation (Kubernetes)"
+description: "By default, LangSmith will provision several Kubernetes secrets to store sensitive information such as license keys, salts, and other configuration parameters. However, you may want to use an..."
+source: "https://docs.langchain.com/langsmith/self-host-using-an-existing-secret"
+category: "docs"
+tags: [docs, langsmith, self-host-using-an-existing-secret]
+---
+
 # Use an existing secret for your installation (Kubernetes)
 
 By default, LangSmith will provision several Kubernetes secrets to store sensitive information such as license keys, salts, and other configuration parameters. However, you may want to use an existing secret that you have already created in your Kubernetes cluster (or provisioned via some sort of secrets operator). This can be useful if you want to manage sensitive information in a centralized way or if you have specific security requirements.
@@ -103,7 +111,7 @@ CLICKHOUSE_DB:                            <set to the key 'clickhouse_db' in sec
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-using-an-existing-secret.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

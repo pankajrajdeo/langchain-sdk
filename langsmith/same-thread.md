@@ -1,3 +1,11 @@
+---
+title: "How to run multiple assistants on the same thread"
+description: "In LangSmith Deployment, a thread is not explicitly associated with a particular assistant. This means that you can run multiple assistants on the same thread, which allows a different assistant to..."
+source: "https://docs.langchain.com/langsmith/same-thread"
+category: "docs"
+tags: [docs, langsmith, same-thread]
+---
+
 # How to run multiple assistants on the same thread
 
 In LangSmith Deployment, a thread is not explicitly associated with a particular assistant.
@@ -308,7 +316,7 @@ Receiving event of type: updates
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/same-thread.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

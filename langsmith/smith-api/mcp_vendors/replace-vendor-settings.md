@@ -1,8 +1,18 @@
+---
+title: "Replace vendor settings"
+description: "Replaces vendor settings."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp_vendors/replace-vendor-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp_vendors, replace-vendor-settings]
+---
+
 # Replace vendor settings
 
 > Replaces vendor settings.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/platform/mcp-vendors/{vendor_slug}/settings**
 
 ````yaml
 openapi: 3.1.0

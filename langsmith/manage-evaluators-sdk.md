@@ -1,3 +1,11 @@
+---
+title: "Manage evaluators with the SDK"
+description: "Create, retrieve, update, list, and delete LangSmith evaluators programmatically with the SDK."
+source: "https://docs.langchain.com/langsmith/manage-evaluators-sdk"
+category: "docs"
+tags: [docs, langsmith, manage-evaluators-sdk]
+---
+
 # Manage evaluators with the SDK
 
 > Create, retrieve, update, list, and delete LangSmith evaluators programmatically with the SDK.
@@ -24,6 +32,8 @@ In the following examples, replace placeholders such as `<evaluator-uuid>` with 
 
 A code evaluator scores each run or example with a function that you define.
 
+**Python**
+
 ```python
 import asyncio
 
@@ -45,6 +55,8 @@ async def main():
 
 asyncio.run(main())
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -69,6 +81,8 @@ An LLM-as-a-judge evaluator references a prompt from the [prompt hub](prompt-eng
 
 > [!NOTE]
 > The prompt must be a structured prompt (type `StructuredPrompt`). A `StructuredPrompt` combines a prompt template with an output schema, ensuring the model returns data in a defined structure.
+
+**Python**
 
 ```python
 import asyncio
@@ -96,6 +110,8 @@ async def main():
 asyncio.run(main())
 ```
 
+**TypeScript**
+
 ```typescript
 const created = await client.evaluators.create({
   name: "LLM judge",
@@ -118,6 +134,8 @@ The `prompt_repo_handle` is the prompt's internal repository name, not its displ
 * `promptName` (for private prompts), for example `my-prompt`.
 * `owner/promptName` (for public prompts), for example `langchain-ai/correctness`.
 
+**Python**
+
 ```python
 # List workspace prompts and read each repo handle
 for prompt in client.list_prompts(limit=10).repos:
@@ -129,6 +147,8 @@ for prompt in client.list_prompts(limit=10).repos:
 prompt = client.get_prompt("<prompt-identifier>")
 print("prompt-repo-handle:", prompt.repo_handle)
 ```
+
+**TypeScript**
 
 ```typescript
 // List workspace prompts and read each repo handle.
@@ -153,6 +173,8 @@ console.log("prompt-repo-handle:", prompt.repo_handle);
 
 Fetch a single evaluator by its ID to read its configuration, including its name, type, feedback keys, and run rules.
 
+**Python**
+
 ```python
 import asyncio
 
@@ -171,6 +193,8 @@ async def main():
 asyncio.run(main())
 ```
 
+**TypeScript**
+
 ```typescript
 const evaluator = await client.evaluators.retrieve(evaluatorId);
 console.log(evaluator.name);
@@ -182,6 +206,8 @@ console.log(evaluator.run_rules);
 ## Update an evaluator
 
 Pass the field that matches the evaluator type: `code_evaluator` for a code evaluator or `llm_evaluator` for an LLM-as-a-judge evaluator. `update` changes only the fields you pass.
+
+**Python**
 
 ```python
 import asyncio
@@ -219,6 +245,8 @@ async def main():
 asyncio.run(main())
 ```
 
+**TypeScript**
+
 ```typescript
 // Update a code evaluator
 const codeEvaluatorId = "<code-evaluator-uuid>";
@@ -254,6 +282,8 @@ An LLM-as-a-judge evaluator accepts additional settings that control how it scor
 > [!NOTE]
 > These settings take effect on the next evaluation run, not when you call `update`.
 
+**Python**
+
 ```python
 import asyncio
 
@@ -280,6 +310,8 @@ async def main():
 asyncio.run(main())
 ```
 
+**TypeScript**
+
 ```typescript
 const llmEvaluatorId = "<llm-evaluator-uuid>";
 
@@ -300,6 +332,8 @@ await client.evaluators.update(llmEvaluatorId, {
 ## List evaluators
 
 Filter by name, type, feedback key, attached resource, or tag value, and sort or paginate the results. `list()` auto-paginates through every match when you iterate the returned object directly. `limit` sets the per-request page size (1 to 100), not the total number of results. `sort_by` is optional, accepts `created_at` or `updated_at`, and defaults to `created_at`.
+
+**Python**
 
 ```python
 import asyncio
@@ -339,6 +373,8 @@ async def main():
 
 asyncio.run(main())
 ```
+
+**TypeScript**
 
 ```typescript
 // Read a single page of results
@@ -385,6 +421,8 @@ Retrieve estimated USD spend and trace counts for your evaluators:
 
 > [!NOTE]
 > Pass exactly one of `group_by`, `evaluator_id`, `session_id` (the LangSmith tracing project UUID), or `dataset_id`.
+
+**Python**
 
 ```python
 import asyncio
@@ -437,6 +475,8 @@ async def main():
 asyncio.run(main())
 ```
 
+**TypeScript**
+
 ```typescript
 const evaluatorUUID = "<evaluator-uuid>";
 const startDate = "<period-start-date>"; // for example, "2026-06-29"
@@ -488,6 +528,8 @@ for (const group of spendByRunRule.groups ?? []) {
 
 You cannot delete an evaluator while it is attached to a tracing project or dataset. Set `delete_run_rules` to `true` to delete the run rules that reference the evaluator before deleting the evaluator.
 
+**Python**
+
 ```python
 import asyncio
 
@@ -504,6 +546,8 @@ async def main():
 
 asyncio.run(main())
 ```
+
+**TypeScript**
 
 ```typescript
 const evaluatorId = "<evaluator-uuid>";
@@ -522,7 +566,7 @@ await client.evaluators.delete(evaluatorId, {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-evaluators-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

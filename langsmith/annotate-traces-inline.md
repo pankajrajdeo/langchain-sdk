@@ -1,3 +1,11 @@
+---
+title: "Annotate traces and runs inline"
+description: "LangSmith allows you to manually annotate traces with feedback within the application. This can be useful for adding context to a trace, such as a user's comment or a note about a specific issue. You..."
+source: "https://docs.langchain.com/langsmith/annotate-traces-inline"
+category: "docs"
+tags: [docs, langsmith, annotate-traces-inline]
+---
+
 # Annotate traces and runs inline
 
 LangSmith allows you to manually annotate traces with feedback within the application. This can be useful for adding context to a trace, such as a user's comment or a note about a specific issue.
@@ -23,7 +31,7 @@ You can use the labeled keyboard shortcuts to streamline the annotation process.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotate-traces-inline.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

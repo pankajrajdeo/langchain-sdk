@@ -1,3 +1,11 @@
+---
+title: "LangGraph v1 migration guide"
+description: "Prompt: Migrate a codebase to LangGraph v1. Migrate this codebase to LangGraph v1 (requires langgraph>=1.0.0, langchain-core>=0.3.0)."
+source: "https://docs.langchain.com/oss/python/migrate/langgraph-v1"
+category: "docs"
+tags: [docs, migrate, langgraph-v1]
+---
+
 # LangGraph v1 migration guide
 
 > **Prompt:** Migrate a codebase to LangGraph v1.
@@ -19,9 +27,13 @@ This guide outlines changes in LangGraph v1 and how to migrate from previous ver
 
 To upgrade:
 
+**pip**
+
 ```bash
 pip install -U langgraph langchain-core
 ```
+
+**uv**
 
 ```bash
 uv add langgraph langchain-core
@@ -57,6 +69,8 @@ See the LangChain v1 docs for details:
 * [Release notes](../releases/langchain-v1.md#create_agent)
 * [Migration guide](langchain-v1.md#migrate-to-create_agent)
 
+**v1 (new)**
+
 ```python
 from langchain.agents import create_agent
 
@@ -66,6 +80,8 @@ agent = create_agent(  # [!code highlight]
     system_prompt="You are a helpful assistant.",
 )
 ```
+
+**v0 (old)**
 
 ```python
 from langgraph.prebuilt import create_react_agent
@@ -86,7 +102,7 @@ All LangChain packages now require **Python 3.10 or higher**. Python 3.9 reached
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

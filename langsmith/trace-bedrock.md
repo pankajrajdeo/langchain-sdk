@@ -1,3 +1,11 @@
+---
+title: "Trace Amazon Bedrock applications"
+description: "This guide shows you how to trace Amazon Bedrock model calls with LangSmith using the native AWS SDKs. LangSmith also works seamlessly with LangChain's Bedrock integrations. Either approach provides..."
+source: "https://docs.langchain.com/langsmith/trace-bedrock"
+category: "docs"
+tags: [docs, langsmith, trace-bedrock]
+---
+
 # Trace Amazon Bedrock applications
 
 This guide shows you how to trace [Amazon Bedrock](https://aws.amazon.com/bedrock) model calls with LangSmith using the native AWS SDKs. LangSmith also works seamlessly with [LangChain's Bedrock integrations](../integrations/providers/aws.md). Either approach provides insights into:
@@ -10,9 +18,13 @@ This guide shows you how to trace [Amazon Bedrock](https://aws.amazon.com/bedroc
 
 ## Installation
 
+**pip**
+
 ```bash
 pip install boto3 langsmith
 ```
+
+**npm**
 
 ```bash
 npm install @aws-sdk/client-bedrock-runtime langsmith
@@ -51,6 +63,8 @@ Once your environment variables are set, you can trace Bedrock model calls by wr
 
 The following example demonstrates how to use the Bedrock Converse API with LangSmith tracing. The Converse API is AWS's recommended unified interface for foundation models, providing consistent request and response handling across different model providers. You can enhance traces with custom tags and metadata—tags help you categorize traces (e.g., by environment, feature, or test type), while metadata allows you to attach arbitrary key-value pairs for detailed context:
 
+**Python**
+
 ```python
 import boto3
 from langsmith import traceable
@@ -81,6 +95,8 @@ def generate_text(prompt: str) -> str:
 result = generate_text("How can I trace AWS Bedrock model outputs to LangSmith for debugging?")
 print(result)
 ```
+
+**TypeScript**
 
 ```typescript
 import { BedrockRuntimeClient, ConverseCommand } from "@aws-sdk/client-bedrock-runtime";
@@ -152,7 +168,7 @@ You can filter traces by tags (e.g., `aws-bedrock` or `integration-test`), searc
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

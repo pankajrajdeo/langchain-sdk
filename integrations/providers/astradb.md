@@ -1,3 +1,11 @@
+---
+title: "Astra DB integrations"
+description: "Integrate with Astra DB using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/astradb"
+category: "docs"
+tags: [docs, integrations, providers, astradb]
+---
+
 # Astra DB integrations
 
 > Integrate with Astra DB using LangChain Python.
@@ -10,9 +18,13 @@ See a [tutorial provided by DataStax](https://docs.datastax.com/en/astra/astra-d
 
 Install the following Python package:
 
+**pip**
+
 ```bash
 pip install "langchain-astradb>=0.6,<0.7"
 ```
+
+**uv**
 
 ```bash
 uv add langchain-astradb>=0.6,<0.7
@@ -182,7 +194,7 @@ See the API reference for the [AstraDBByteStore](https://reference.langchain.com
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/astradb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

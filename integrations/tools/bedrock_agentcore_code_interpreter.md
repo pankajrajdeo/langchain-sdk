@@ -1,3 +1,11 @@
+---
+title: "Amazon Bedrock agentcore code interpreter integration"
+description: "Integrate with the Amazon Bedrock agentcore code interpreter tool using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_code_interpreter"
+category: "docs"
+tags: [docs, integrations, tools, bedrock_agentcore_code_interpreter]
+---
+
 # Amazon Bedrock agentcore code interpreter integration
 
 > Integrate with the Amazon Bedrock agentcore code interpreter tool using LangChain Python.
@@ -40,9 +48,13 @@ The toolkit provides multiple tools for code execution and file management:
 
 The integration lives in the `langchain-aws` package, which wraps the `bedrock-agentcore` SDK.
 
+**pip**
+
 ```bash
 pip install -U langchain-aws bedrock-agentcore
 ```
+
+**uv**
 
 ```bash
 uv add langchain-aws bedrock-agentcore
@@ -249,7 +261,7 @@ For detailed documentation of all features and configurations, see:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_code_interpreter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Validate runs query"
+description: "Validate runs query syntax, returns errors for broken queries."
+source: "https://docs.langchain.com/langsmith/smith-api/run/validate-runs-query"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, validate-runs-query]
+---
+
 # Validate runs query
 
 > Validate runs query syntax, returns errors for broken queries.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/query/validate**
 
 ````yaml
 openapi: 3.1.0

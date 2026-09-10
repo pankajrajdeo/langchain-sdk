@@ -1,8 +1,18 @@
+---
+title: "Set default model for a feature"
+description: "Sets or replaces the default model for a feature in the workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/features/set-default-model-for-a-feature"
+category: "docs"
+tags: [docs, langsmith, smith-api, features, set-default-model-for-a-feature]
+---
+
 # Set default model for a feature
 
 > Sets or replaces the default model for a feature in the workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/platform/features/{feature}/default-model**
 
 ````yaml
 openapi: 3.1.0

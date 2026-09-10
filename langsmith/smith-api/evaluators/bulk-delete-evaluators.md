@@ -1,8 +1,18 @@
+---
+title: "Bulk delete evaluators"
+description: "Delete multiple evaluators by their IDs. Returns per-item success/failure."
+source: "https://docs.langchain.com/langsmith/smith-api/evaluators/bulk-delete-evaluators"
+category: "docs"
+tags: [docs, langsmith, smith-api, evaluators, bulk-delete-evaluators]
+---
+
 # Bulk delete evaluators
 
 > Delete multiple evaluators by their IDs. Returns per-item success/failure.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/evaluators**
 
 ````yaml
 openapi: 3.1.0
@@ -175,9 +185,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Evaluator Ids
         - description: >-
             When true, delete all run rules for this evaluator before deleting

@@ -1,8 +1,18 @@
+---
+title: "Add member to current workspace"
+description: "Add an existing organization member to the current workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/add-member-to-current-workspace"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, add-member-to-current-workspace]
+---
+
 # Add member to current workspace
 
 > Add an existing organization member to the current workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/members**
 
 ````yaml
 openapi: 3.1.0

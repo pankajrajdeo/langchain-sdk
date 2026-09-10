@@ -1,3 +1,11 @@
+---
+title: "Memgraph integrations"
+description: "Integrate with Memgraph using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/memgraph"
+category: "docs"
+tags: [docs, integrations, providers, memgraph]
+---
+
 # Memgraph integrations
 
 > Integrate with Memgraph using LangChain Python.
@@ -47,7 +55,7 @@ from langchain_memgraph import MemgraphToolkit
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/memgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

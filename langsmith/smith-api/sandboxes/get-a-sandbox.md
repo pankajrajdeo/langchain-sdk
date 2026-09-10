@@ -1,8 +1,18 @@
+---
+title: "Get a sandbox"
+description: "Retrieve a sandbox by name. Stale provisioning sandboxes are auto-failed."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/get-a-sandbox"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, get-a-sandbox]
+---
+
 # Get a sandbox
 
 > Retrieve a sandbox by name. Stale provisioning sandboxes are auto-failed.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/boxes/{name}**
 
 ````yaml
 openapi: 3.1.0

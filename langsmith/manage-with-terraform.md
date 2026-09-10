@@ -1,3 +1,11 @@
+---
+title: "Manage LangSmith with Terraform"
+description: "Use the official LangSmith Terraform provider to manage workspaces, access controls, resource tags, evaluators, run rules, and alert rules as code."
+source: "https://docs.langchain.com/langsmith/manage-with-terraform"
+category: "docs"
+tags: [docs, langsmith, manage-with-terraform]
+---
+
 # Manage LangSmith with Terraform
 
 > Use the official LangSmith Terraform provider to manage workspaces, access controls, resource tags, evaluators, run rules, and alert rules as code.
@@ -206,7 +214,7 @@ Browse the complete reference for all resources and data sources.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-with-terraform.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Deploy with Deno Deploy"
+description: "Deploy a LangChain deep agent on Deno Deploy with Hono route handlers and a Vite React SPA served from one entrypoint."
+source: "https://docs.langchain.com/langsmith/deploy-deno"
+category: "docs"
+tags: [docs, langsmith, deploy-deno]
+---
+
 # Deploy with Deno Deploy
 
 > Deploy a LangChain deep agent on Deno Deploy with Hono route handlers and a Vite React SPA served from one entrypoint.
@@ -171,7 +179,7 @@ Open [http://localhost:8000](http://localhost:8000).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-deno.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

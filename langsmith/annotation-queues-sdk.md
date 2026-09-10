@@ -1,3 +1,11 @@
+---
+title: "Manage feedback & annotation queues programmatically"
+description: "Use the LangSmith SDK to manage feedback configurations and annotation queue rubrics programmatically, and to add runs and threads to a queue for review. Define reusable feedback schemas at the..."
+source: "https://docs.langchain.com/langsmith/annotation-queues-sdk"
+category: "docs"
+tags: [docs, langsmith, annotation-queues-sdk]
+---
+
 # Manage feedback & annotation queues programmatically
 
 Use the LangSmith SDK to manage feedback configurations and [annotation queue](evaluation-concepts.md#human) rubrics programmatically, and to add runs and threads to a queue for review. Define reusable feedback schemas at the organization level (like accuracy scores or pass/fail judgments), then assign them to specific queues with custom instructions. This enables version control, automation across projects, and consistency—particularly useful for CI/CD pipelines or replicating evaluation setups across environments.
@@ -24,6 +32,8 @@ Feedback configs define the schema for a feedback key—whether it's a continuou
 
 > [!NOTE]
 > Calling [`create_feedback_config`](https://reference.langchain.com/python/langsmith/client/Client/create_feedback_config) with an identical config that already exists returns the existing config. If a different config already exists for the same key, the system raises a 400 error.
+
+**Python**
 
 ```python
 from langsmith import Client
@@ -59,6 +69,8 @@ client.create_feedback_config(
     feedback_config={"type": "freeform"},
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -99,6 +111,8 @@ await client.createFeedbackConfig({
 
 Retrieve feedback configs to see what evaluation criteria are available in your organization with [`list_feedback_configs`](https://reference.langchain.com/python/langsmith/client/Client/list_feedback_configs). You can list all configs or filter by specific keys. Each returned config object includes the key, type, configuration details (like `min`/`max` or `categories`), and metadata like `is_lower_score_better`:
 
+**Python**
+
 ```python
 # List all configs
 for config in client.list_feedback_configs():
@@ -110,6 +124,8 @@ for config in client.list_feedback_configs(
 ):
     print(config.feedback_key)
 ```
+
+**TypeScript**
 
 ```typescript
 // List all configs
@@ -129,12 +145,16 @@ for await (const config of client.listFeedbackConfigs({
 
 Modify an existing feedback config with [`update_feedback_config`](https://reference.langchain.com/python/langsmith/client/Client/update_feedback_config) by updating specific fields. The method only changes the fields you provide—the rest remain unchanged. This is a partial update that preserves other configuration settings:
 
+**Python**
+
 ```python
 client.update_feedback_config(
     "accuracy",
     is_lower_score_better=True,
 )
 ```
+
+**TypeScript**
 
 ```typescript
 await client.updateFeedbackConfig("accuracy", {
@@ -146,9 +166,13 @@ await client.updateFeedbackConfig("accuracy", {
 
 Remove a feedback config from your organization with [`delete_feedback_config`](https://reference.langchain.com/python/langsmith/client/Client/delete_feedback_config). This performs a soft delete, which marks the config as deleted but doesn't permanently remove it from the system. You can recreate a config with the same key later if needed:
 
+**Python**
+
 ```python
 client.delete_feedback_config("accuracy")
 ```
+
+**TypeScript**
 
 ```typescript
 await client.deleteFeedbackConfig("accuracy");
@@ -163,6 +187,8 @@ Rubric items assign feedback configs to a specific annotation queue. They contro
 Create an annotation queue with [`create_annotation_queue`](https://reference.langchain.com/python/langsmith/client/Client/create_annotation_queue) and assign feedback configs to it through rubric items. Each rubric item references a feedback config by its key and customizes how it appears to annotators in this specific queue.
 
 The example creates a queue with three rubric items. The queue-level `rubric_instructions` provides general guidance shown at the top of the annotation interface:
+
+**Python**
 
 ```python
 queue = client.create_annotation_queue(
@@ -196,6 +222,8 @@ queue = client.create_annotation_queue(
     ],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 const queue = await client.createAnnotationQueue({
@@ -238,6 +266,8 @@ You'll need the queue ID, which you get when you create the queue or by listing 
 > [!NOTE]
 > Updating rubric items replaces the full list. Include all items you want to keep.
 
+**Python**
+
 ```python
 client.update_annotation_queue(
     queue.id,
@@ -252,6 +282,8 @@ client.update_annotation_queue(
     ],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 await client.updateAnnotationQueue(queue.id, {
@@ -291,6 +323,8 @@ To extend trace retention for the added run items, pass `extend_trace_retention=
 
 > [!NOTE]
 > In Python, `annotation_queues.items.create` is async, so `await` it inside an event loop.
+
+**Python**
 
 ```python
 import asyncio
@@ -338,6 +372,8 @@ async def main():
 
 asyncio.run(main())
 ```
+
+**TypeScript**
 
 ```typescript
 const queueName = "<queue_name>";
@@ -393,6 +429,8 @@ for (const item of response.items ?? []) {
 
 Continuous configs define numeric rating scales with minimum and maximum values. Annotators can select any value within the range, making this ideal for scoring dimensions like accuracy, quality, or relevance on a numeric scale:
 
+**Python**
+
 ```python
 # Simple continuous score
 client.create_feedback_config(
@@ -419,6 +457,8 @@ client.create_feedback_config(
     },
 )
 ```
+
+**TypeScript**
 
 ```typescript
 await client.createFeedbackConfig({
@@ -449,6 +489,8 @@ Categorical configs provide a discrete set of predefined options for annotators 
 
 Use categorical configs for binary decisions (pass/fail, correct/incorrect), multi-class classifications (sentiment, topic categories), or any evaluation with a fixed set of discrete options. Do not set `min` or `max` for categorical configs:
 
+**Python**
+
 ```python
 # Binary pass/fail
 client.create_feedback_config(
@@ -475,6 +517,8 @@ client.create_feedback_config(
     },
 )
 ```
+
+**TypeScript**
 
 ```typescript
 await client.createFeedbackConfig({
@@ -509,12 +553,16 @@ Freeform configs allow annotators to provide open-ended text feedback without an
 
 Freeform feedback is valuable for capturing nuanced insights but is harder to aggregate and analyze compared to structured feedback types:
 
+**Python**
+
 ```python
 client.create_feedback_config(
     "notes",
     feedback_config={"type": "freeform"},
 )
 ```
+
+**TypeScript**
 
 ```typescript
 await client.createFeedbackConfig({
@@ -554,7 +602,7 @@ await client.createFeedbackConfig({
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotation-queues-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

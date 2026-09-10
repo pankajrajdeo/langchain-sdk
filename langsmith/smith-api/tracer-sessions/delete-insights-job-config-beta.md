@@ -1,8 +1,18 @@
+---
+title: "Delete insights job config (Beta)"
+description: "Delete an insights job config."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/delete-insights-job-config-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, delete-insights-job-config-beta]
+---
+
 # Delete insights job config (Beta)
 
 > Delete an insights job config.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/sessions/{session_id}/insights/configs/{config_id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Set up LLM-as-a-judge online evaluators"
+description: "Online evaluations provide real-time feedback on your production traces. This is useful to monitor the performance of your application continuously—to identify issues, measure improvements, and..."
+source: "https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge"
+category: "docs"
+tags: [docs, langsmith, online-evaluations-llm-as-judge]
+---
+
 # Set up LLM-as-a-judge online evaluators
 
 [Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production traces. This is useful to monitor the performance of your application continuously—to identify issues, measure improvements, and ensure consistent quality over time.
@@ -97,7 +105,7 @@ The evaluator can then access these attachments when evaluating the trace. This 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-llm-as-judge.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

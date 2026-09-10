@@ -1,8 +1,18 @@
+---
+title: "Get settings"
+description: "Get settings."
+source: "https://docs.langchain.com/langsmith/smith-api/settings/get-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, settings, get-settings]
+---
+
 # Get settings
 
 > Get settings.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/settings**
 
 ````yaml
 openapi: 3.1.0

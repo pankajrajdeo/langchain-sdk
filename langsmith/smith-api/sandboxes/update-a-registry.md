@@ -1,8 +1,18 @@
+---
+title: "Update a registry"
+description: "Update a sandbox registry's name and/or credentials."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/update-a-registry"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, update-a-registry]
+---
+
 # Update a registry
 
 > Update a sandbox registry's name and/or credentials.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v2/sandboxes/registries/{name}**
 
 ````yaml
 openapi: 3.1.0

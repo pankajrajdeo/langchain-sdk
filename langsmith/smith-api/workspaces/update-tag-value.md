@@ -1,6 +1,16 @@
+---
+title: "Update tag value"
+description: "/langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values/{tag_value_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/update-tag-value"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, update-tag-value]
+---
+
 # Update tag value
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values/{tag_value_id}**
 
 ````yaml
 openapi: 3.1.0

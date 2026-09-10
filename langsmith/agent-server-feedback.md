@@ -1,3 +1,11 @@
+---
+title: "How to collect user feedback for Agent Server runs"
+description: "This tutorial shows you how to collect user feedback for Agent Server runs and automatically link them to traces in LangSmith. When creating a run, include the keys in the feedback_keys field of the..."
+source: "https://docs.langchain.com/langsmith/agent-server-feedback"
+category: "docs"
+tags: [docs, langsmith, agent-server-feedback]
+---
+
 # How to collect user feedback for Agent Server runs
 
 This tutorial shows you how to collect user feedback for [Agent Server](agent-server.md) runs and automatically link them to [traces](observability-concepts.md#traces) in LangSmith. When creating a run, include the keys in the `feedback_keys` field of the request body. The response will return a pre-signed URL for each key, which your client can use to collect user feedback for the Agent Server run.
@@ -174,7 +182,7 @@ Example high-level implementation:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-feedback.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

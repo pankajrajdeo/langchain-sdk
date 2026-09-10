@@ -1,3 +1,11 @@
+---
+title: "Plugins and marketplaces"
+description: "Install plugins from marketplaces or package skills, MCP servers, hooks, and Python extensions for dcode"
+source: "https://docs.langchain.com/oss/deepagents/code/plugins"
+category: "docs"
+tags: [docs, deepagents, code, plugins]
+---
+
 # Plugins and marketplaces
 
 > Install plugins from marketplaces or package skills, MCP servers, hooks, and Python extensions for dcode
@@ -255,7 +263,7 @@ dcode plugin install code-review@acme-tools
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/plugins.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

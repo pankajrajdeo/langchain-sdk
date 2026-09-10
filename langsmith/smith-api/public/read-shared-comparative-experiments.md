@@ -1,8 +1,18 @@
+---
+title: "Read shared comparative experiments"
+description: "Get all comparative experiments for a given dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/public/read-shared-comparative-experiments"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, read-shared-comparative-experiments]
+---
+
 # Read shared comparative experiments
 
 > Get all comparative experiments for a given dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/datasets/comparative**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Dell powerscale integration"
+description: "Integrate with the Dell powerscale document loader using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/document_loaders/powerscale"
+category: "docs"
+tags: [docs, integrations, document_loaders, powerscale]
+---
+
 # Dell powerscale integration
 
 > Integrate with the Dell powerscale document loader using LangChain Python.
@@ -136,7 +144,7 @@ For detailed documentation of all PowerScale Document Loader features and config
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/powerscale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

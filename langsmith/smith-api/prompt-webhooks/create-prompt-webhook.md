@@ -1,8 +1,18 @@
+---
+title: "Create prompt webhook"
+description: "Create a new prompt webhook."
+source: "https://docs.langchain.com/langsmith/smith-api/prompt-webhooks/create-prompt-webhook"
+category: "docs"
+tags: [docs, langsmith, smith-api, prompt-webhooks, create-prompt-webhook]
+---
+
 # Create prompt webhook
 
 > Create a new prompt webhook.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/prompt-webhooks**
 
 ````yaml
 openapi: 3.1.0

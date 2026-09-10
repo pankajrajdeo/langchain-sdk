@@ -1,3 +1,11 @@
+---
+title: "Graph RAG integration"
+description: "Integrate with the Graph RAG retriever using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/retrievers/graph_rag"
+category: "docs"
+tags: [docs, integrations, retrievers, graph_rag]
+---
+
 # Graph RAG integration
 
 > Integrate with the Graph RAG retriever using LangChain Python.
@@ -43,9 +51,13 @@ retrieval over an **existing** vector store.
 
 This retriever lives in the `langchain-graph-retriever` package.
 
+**pip**
+
 ```bash
 pip install -qU langchain-graph-retriever
 ```
+
+**uv**
 
 ```bash
 uv add langchain-graph-retriever
@@ -269,7 +281,7 @@ To explore all available parameters and advanced configurations, refer to the
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/graph_rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

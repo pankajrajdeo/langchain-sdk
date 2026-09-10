@@ -1,3 +1,11 @@
+---
+title: "Google cloud document AI integration"
+description: "Integrate with the Google cloud document AI document transformer using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/document_transformers/google_docai"
+category: "docs"
+tags: [docs, integrations, document_transformers, google_docai]
+---
+
 # Google cloud document AI integration
 
 > Integrate with the Google cloud document AI document transformer using LangChain Python.
@@ -120,7 +128,7 @@ print(len(docs))
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/google_docai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

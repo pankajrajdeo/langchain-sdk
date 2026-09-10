@@ -1,3 +1,11 @@
+---
+title: "ChatBaseten integration"
+description: "Integrate with the ChatBaseten chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/baseten"
+category: "docs"
+tags: [docs, integrations, chat, baseten]
+---
+
 # ChatBaseten integration
 
 > Integrate with the ChatBaseten chat model using LangChain Python.
@@ -32,6 +40,8 @@ Head to [the Baseten website](https://app.baseten.co) to create an account and g
 
 ### Credentials
 
+**Set API key**
+
 ```python
 import getpass
 import os
@@ -42,6 +52,8 @@ if "BASETEN_API_KEY" not in os.environ:
 
 To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
+**Enable tracing**
+
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -51,9 +63,13 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain Baseten integration lives in the `langchain-baseten` package:
 
+**pip**
+
 ```python
 pip install -U langchain-baseten
 ```
+
+**uv**
 
 ```python
 uv add langchain-baseten
@@ -70,6 +86,8 @@ Baseten offers two ways to access chat models:
 
 Both approaches are supported with automatic endpoint normalization.
 
+**Initialize with model slug**
+
 ```python
 from langchain_baseten import ChatBaseten
 
@@ -79,6 +97,8 @@ model = ChatBaseten(
     api_key="your-api-key",  # Or set BASETEN_API_KEY env var
 )
 ```
+
+**Initialize with model URL**
 
 ```python
 from langchain_baseten import ChatBaseten
@@ -94,6 +114,8 @@ model = ChatBaseten(
 
 ## Invocation
 
+**Basic invocation**
+
 ```python
 # Use the chat model
 response = model.invoke("Hello, how are you?")
@@ -105,6 +127,8 @@ Hello! I'm doing well, thank you for asking! How about you?
 ```
 
 You can also use message objects for more complex conversations:
+
+**Dictionary format**
 
 ```python
 messages = [
@@ -125,7 +149,7 @@ content='Buds yawn open wide—\na robin stitches the hush\nwith threads of firs
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/baseten.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

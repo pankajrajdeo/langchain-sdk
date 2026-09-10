@@ -1,3 +1,11 @@
+---
+title: "Build a data analysis agent from scratch"
+description: "Build a data analysis agent step by step using create_agent and Deep Agents middleware."
+source: "https://docs.langchain.com/oss/python/langchain/deep-agent-from-scratch"
+category: "docs"
+tags: [docs, langchain, deep-agent-from-scratch]
+---
+
 # Build a data analysis agent from scratch
 
 > Build a data analysis agent step by step using create_agent and Deep Agents middleware.
@@ -42,7 +50,7 @@ pip install deepagents langsmith
 This tutorial uses [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox), which provisions sandboxes through `SandboxClient`. That client authenticates with LangSmith using `LANGSMITH_API_KEY` from your environment, so an API key is required to run the tutorial. Setting up LangSmith also allows you to see traces of what happens when your agent runs.
 
 1. [Sign up for a free account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-deep-agent-from-scratch). You can use Google, GitHub, or email.
-2. [Create an API key](../langsmith/create-account-api-key.md) in **Settings → API Keys**.
+2. [Create an API key](../langsmith/create-account-api-key.md) in **Settings > API Keys**.
 3. Export the LangSmith API key:
 
 ```bash
@@ -58,29 +66,43 @@ export LANGSMITH_TRACING=true
 ### Add a model provider API key
 Export the API key for the model provider you use in the code samples:
 
+**Google**
+
 ```bash
 export GOOGLE_API_KEY=...
 ```
+
+**OpenAI**
 
 ```bash
 export OPENAI_API_KEY=...
 ```
 
+**Anthropic**
+
 ```bash
 export ANTHROPIC_API_KEY=...
 ```
+
+**OpenRouter**
 
 ```bash
 export OPENROUTER_API_KEY=...
 ```
 
+**Fireworks**
+
 ```bash
 export FIREWORKS_API_KEY=...
 ```
 
+**Baseten**
+
 ```bash
 export BASETEN_API_KEY=...
 ```
+
+**Ollama**
 
 ```bash
 # Local: Ollama must be running on your machine
@@ -96,11 +118,15 @@ A data analysis agent needs more than a chat loop, but to begin with, start with
 
 Use [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and specify the model that you want to use:
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="google_genai:gemini-3.6-flash", tools=[])
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -108,11 +134,15 @@ from langchain.agents import create_agent
 agent = create_agent(model="openai:gpt-5.5", tools=[])
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="anthropic:claude-sonnet-4-6", tools=[])
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -120,17 +150,23 @@ from langchain.agents import create_agent
 agent = create_agent(model="openrouter:z-ai/glm-5.2", tools=[])
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="fireworks:accounts/fireworks/models/glm-5p2", tools=[])
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="baseten:zai-org/GLM-5.2", tools=[])
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents import create_agent
@@ -154,6 +190,8 @@ To analyze data efficiently, the agent needs to run code on files. This requires
 
 Replace the agent from the previous step with one that includes [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware):
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -161,7 +199,6 @@ from deepagents.middleware import FilesystemMiddleware
 from langsmith.sandbox import SandboxClient
 
 client = SandboxClient()
-sandbox = None
 sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
 backend = LangSmithSandbox(sandbox=sandbox)
 
@@ -172,6 +209,8 @@ agent = create_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -179,7 +218,6 @@ from deepagents.middleware import FilesystemMiddleware
 from langsmith.sandbox import SandboxClient
 
 client = SandboxClient()
-sandbox = None
 sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
 backend = LangSmithSandbox(sandbox=sandbox)
 
@@ -190,6 +228,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -197,7 +237,6 @@ from deepagents.middleware import FilesystemMiddleware
 from langsmith.sandbox import SandboxClient
 
 client = SandboxClient()
-sandbox = None
 sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
 backend = LangSmithSandbox(sandbox=sandbox)
 
@@ -208,6 +247,8 @@ agent = create_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -215,7 +256,6 @@ from deepagents.middleware import FilesystemMiddleware
 from langsmith.sandbox import SandboxClient
 
 client = SandboxClient()
-sandbox = None
 sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
 backend = LangSmithSandbox(sandbox=sandbox)
 
@@ -226,6 +266,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -233,7 +275,6 @@ from deepagents.middleware import FilesystemMiddleware
 from langsmith.sandbox import SandboxClient
 
 client = SandboxClient()
-sandbox = None
 sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
 backend = LangSmithSandbox(sandbox=sandbox)
 
@@ -244,6 +285,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -251,7 +294,6 @@ from deepagents.middleware import FilesystemMiddleware
 from langsmith.sandbox import SandboxClient
 
 client = SandboxClient()
-sandbox = None
 sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
 backend = LangSmithSandbox(sandbox=sandbox)
 
@@ -262,6 +304,8 @@ agent = create_agent(
 )
 ```
 
+**Ollama**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -269,7 +313,6 @@ from deepagents.middleware import FilesystemMiddleware
 from langsmith.sandbox import SandboxClient
 
 client = SandboxClient()
-sandbox = None
 sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
 backend = LangSmithSandbox(sandbox=sandbox)
 
@@ -338,6 +381,8 @@ After step 2, every tool result stays in the message history. A real analysis se
 
 Update your agent from step 2 by adding [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware) to the middleware list:
 
+**Google**
+
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
@@ -352,6 +397,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
@@ -368,6 +415,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
@@ -382,6 +431,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
@@ -398,6 +449,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
@@ -413,6 +466,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
@@ -427,6 +482,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
@@ -495,6 +552,8 @@ backend.upload_files(skill_files)
 
 Then create your agent with your skills by adding [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware):
 
+**Google**
+
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
 
@@ -510,6 +569,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
@@ -527,6 +588,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
 
@@ -542,6 +605,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
@@ -559,6 +624,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
 
@@ -575,6 +642,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
 
@@ -590,6 +659,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
@@ -617,6 +688,8 @@ One example where using a subagent makes sense is chart generation. Plotting oft
 
 Update your agent from step 4 by adding [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) and [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware):
 
+**Google**
+
 ```python
 from deepagents import SubAgent
 from deepagents.middleware import (
@@ -649,6 +722,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import SubAgent
@@ -683,6 +758,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import SubAgent
 from deepagents.middleware import (
@@ -715,6 +792,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import SubAgent
@@ -749,6 +828,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import SubAgent
 from deepagents.middleware import (
@@ -782,6 +863,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import SubAgent
 from deepagents.middleware import (
@@ -814,6 +897,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import SubAgent
@@ -872,7 +957,7 @@ To work with the pre-assembled version, see [Customize Deep Agents](../deepagent
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/deep-agent-from-scratch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

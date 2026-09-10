@@ -1,3 +1,11 @@
+---
+title: "Evaluate a RAG application"
+description: "Retrieval Augmented Generation (RAG) is a technique that enhances Large Language Models (LLMs) by providing them with relevant external knowledge. It has become one of the most widely used approaches..."
+source: "https://docs.langchain.com/langsmith/evaluate-rag-tutorial"
+category: "docs"
+tags: [docs, langsmith, evaluate-rag-tutorial]
+---
+
 # Evaluate a RAG application
 
 Retrieval Augmented Generation (RAG) is a technique that enhances Large Language Models (LLMs) by providing them with relevant external knowledge. It has become one of the most widely used approaches for building LLM applications. To build a RAG application first, see [RAG with Deep Agents](../deepagents/rag.md).
@@ -24,12 +32,16 @@ This tutorial builds and evaluates a bot that answers questions about a few of [
 
 Set environment variables:
 
+**Python**
+
 ```python
 import os
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = "YOUR LANGSMITH API KEY"
 os.environ["OPENAI_API_KEY"] = "YOUR OPENAI API KEY"
 ```
+
+**TypeScript**
 
 ```typescript
 process.env.LANGSMITH_TRACING = "true";
@@ -39,17 +51,25 @@ process.env.OPENAI_API_KEY = "YOUR OPENAI API KEY";
 
 Install dependencies:
 
+**Python**
+
 ```bash
 pip install -U langsmith langchain[openai] langchain-text-splitters bs4 requests
 ```
+
+**npm**
 
 ```bash
 npm i langsmith langchain @langchain/classic @langchain/openai @langchain/textsplitters cheerio
 ```
 
+**yarn**
+
 ```bash
 yarn add langsmith langchain @langchain/classic @langchain/openai @langchain/textsplitters cheerio
 ```
+
+**pnpm**
 
 ```bash
 pnpm add langsmith langchain @langchain/classic @langchain/openai @langchain/textsplitters cheerio
@@ -69,6 +89,8 @@ Build a minimal RAG app with three stages:
 #### Index documents
 
 Load the blog posts and index them:
+
+**Python**
 
 ```python
 import bs4
@@ -117,6 +139,8 @@ vectorstore = InMemoryVectorStore.from_documents(
 # With langchain we can easily turn any vector store into a retrieval component:
 retriever = vectorstore.as_retriever(k=6)
 ```
+
+**TypeScript**
 
 ```ts
 import * as cheerio from "cheerio";
@@ -171,6 +195,8 @@ await vectorStore.addDocuments(allSplits);
 
 Define the generative pipeline:
 
+**Python**
+
 ```python
 from langchain_openai import ChatOpenAI
 from langsmith import traceable
@@ -199,6 +225,8 @@ def rag_bot(question: str) -> dict:
     )
     return {"answer": ai_msg.content, "documents": docs}
 ```
+
+**TypeScript**
 
 ```ts
 import { ChatOpenAI } from "@langchain/openai";
@@ -244,6 +272,8 @@ const ragBot = traceable(async (question: string) => {
 
 Now that you have your application, create a small dataset of example questions and reference answers to evaluate it. This example uses an example set of inputs and outputs:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -273,6 +303,8 @@ client.create_examples(
     examples=examples
 )
 ```
+
+**TypeScript**
 
 ```ts
 import { Client } from "langsmith";
@@ -339,6 +371,8 @@ For more on these evaluator types, see [Evaluate RAG applications](evaluation-ap
 
 Use an LLM-as-judge to compare the generated answer to the reference answer in the dataset:
 
+**Python**
+
 ```python
 from typing_extensions import Annotated, TypedDict
 
@@ -379,6 +413,8 @@ STUDENT ANSWER: {outputs['answer']}"""
     ])
     return grade["correct"]
 ```
+
+**TypeScript**
 
 ```ts
 import type { EvaluationResult } from "langsmith/evaluation";
@@ -434,6 +470,8 @@ async function correctness({
 
 Compare `inputs` and `outputs` without `reference_outputs`. You cannot score accuracy without a reference answer, but you can still score whether the model addressed the question:
 
+**Python**
+
 ```python
 # Grade output schema
 class RelevanceGrade(TypedDict):
@@ -468,6 +506,8 @@ def relevance(inputs: dict, outputs: dict) -> bool:
     ])
     return grade["relevant"]
 ```
+
+**TypeScript**
 
 ```ts
 // Grade prompt
@@ -519,6 +559,8 @@ STUDENT ANSWER: ${outputs.answer}`;
 
 Another useful way to evaluate responses is to check whether the response is justified by (grounded in) the retrieved documents, without a reference answer:
 
+**Python**
+
 ```python
 # Grade output schema
 class GroundedGrade(TypedDict):
@@ -553,6 +595,8 @@ def groundedness(inputs: dict, outputs: dict) -> bool:
     ])
     return grade["grounded"]
 ```
+
+**TypeScript**
 
 ```ts
 // Grade prompt
@@ -605,6 +649,8 @@ async function groundedness({
 
 Use an LLM-as-judge to score whether the retrieved documents are relevant to the user question:
 
+**Python**
+
 ```python
 # Grade output schema
 class RetrievalRelevanceGrade(TypedDict):
@@ -643,6 +689,8 @@ def retrieval_relevance(inputs: dict, outputs: dict) -> bool:
     ])
     return grade["relevant"]
 ```
+
+**TypeScript**
 
 ```ts
 // Grade prompt
@@ -699,6 +747,8 @@ async function retrievalRelevance({
 
 Run the evaluation with all of the evaluators:
 
+**Python**
+
 ```python
 def target(inputs: dict) -> dict:
     return rag_bot(inputs["question"])
@@ -714,6 +764,8 @@ experiment_results = client.evaluate(
 # Explore results locally as a dataframe if you have pandas installed
 # experiment_results.to_pandas()
 ```
+
+**TypeScript**
 
 ```ts
 import { evaluate } from "langsmith/evaluation";
@@ -736,6 +788,8 @@ View an example of the results in [this LangSmith experiment](https://smith.lang
 
 <details>
 <summary>Here</summary>
+
+**Python**
 
 ```python
 import bs4
@@ -996,6 +1050,8 @@ experiment_results = client.evaluate(
 # Explore results locally as a dataframe if you have pandas installed
 # experiment_results.to_pandas()
 ```
+
+**TypeScript**
 
 ```ts
 import * as cheerio from "cheerio";
@@ -1308,7 +1364,7 @@ const experimentResults = await evaluate(targetFunc, {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-rag-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

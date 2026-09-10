@@ -1,8 +1,18 @@
+---
+title: "Update section"
+description: "Update a section."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/update-section"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, update-section]
+---
+
 # Update section
 
 > Update a section.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/charts/section/{section_id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Monitor and troubleshoot bulk exports"
+description: "Monitor bulk export status, manage running exports, and troubleshoot failures."
+source: "https://docs.langchain.com/langsmith/data-export-monitor"
+category: "docs"
+tags: [docs, langsmith, data-export-monitor]
+---
+
 # Monitor and troubleshoot bulk exports
 
 > Monitor bulk export status, manage running exports, and troubleshoot failures.
@@ -187,7 +195,7 @@ For storage-related errors, you can test your destination configuration using th
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-monitor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

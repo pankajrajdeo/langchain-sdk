@@ -1,8 +1,18 @@
+---
+title: "List jobs"
+description: "List all prompt optimization jobs."
+source: "https://docs.langchain.com/langsmith/smith-api/optimization-jobs/list-jobs"
+category: "docs"
+tags: [docs, langsmith, smith-api, optimization-jobs, list-jobs]
+---
+
 # List jobs
 
 > List all prompt optimization jobs.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/repos/{owner}/{repo}/optimization-jobs**
 
 ````yaml
 openapi: 3.1.0

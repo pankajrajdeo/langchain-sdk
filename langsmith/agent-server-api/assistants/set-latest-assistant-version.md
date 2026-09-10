@@ -1,8 +1,18 @@
+---
+title: "Set Latest Assistant Version"
+description: "Set the latest version for an assistant."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/set-latest-assistant-version"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, set-latest-assistant-version]
+---
+
 # Set Latest Assistant Version
 
 > Set the latest version for an assistant.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /assistants/{assistant_id}/latest**
 
 ````yaml
 openapi: 3.1.0

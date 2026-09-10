@@ -1,3 +1,11 @@
+---
+title: "Model access policies"
+description: "Control which model providers and models are accessible through the LLM Gateway for your organization, workspaces, users, or API keys."
+source: "https://docs.langchain.com/langsmith/llm-gateway-model-access-policies"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-model-access-policies]
+---
+
 # Model access policies
 
 > Control which model providers and models are accessible through the LLM Gateway for your organization, workspaces, users, or API keys.
@@ -39,7 +47,7 @@ When a request matches policies at multiple tiers, only the most specific tier a
 > [!WARNING]
 > Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
-1. Go to **Settings → Gateway → LLM Gateway** and select **Model Access**.
+1. Go to **LLM Gateway** and select **Model Access**.
 2. Click **Create model access**.
 3. Enter a **Policy name**.
 4. Select the scope under **Applies to** (organization, workspace, user, or API key).
@@ -58,7 +66,7 @@ Policies take effect immediately.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-model-access-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

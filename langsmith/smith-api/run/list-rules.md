@@ -1,8 +1,18 @@
+---
+title: "List rules"
+description: "List all run rules."
+source: "https://docs.langchain.com/langsmith/smith-api/run/list-rules"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, list-rules]
+---
+
 # List rules
 
 > List all run rules.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/runs/rules**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Sandbox integrations"
+description: "Integrate with sandbox providers using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/sandboxes"
+category: "docs"
+tags: [docs, integrations, sandboxes]
+---
+
 # Sandbox integrations
 
 > Integrate with sandbox providers using LangChain Python.
@@ -30,7 +38,7 @@ If you'd like to contribute a sandbox, see [Implement a sandbox integration](../
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

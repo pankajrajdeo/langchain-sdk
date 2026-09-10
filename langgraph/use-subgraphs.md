@@ -1,3 +1,11 @@
+---
+title: "Subgraphs"
+description: "This guide explains the mechanics of using subgraphs. A subgraph is a graph that is used as a node in another graph."
+source: "https://docs.langchain.com/oss/python/langgraph/use-subgraphs"
+category: "docs"
+tags: [docs, langgraph, use-subgraphs]
+---
+
 # Subgraphs
 
 This guide explains the mechanics of using subgraphs. A subgraph is a [graph](graph-api.md#graphs) that is used as a [node](graph-api.md#nodes) in another graph.
@@ -10,9 +18,13 @@ Subgraphs are useful for:
 
 ## Setup
 
+**pip**
+
 ```bash
 pip install -U langgraph
 ```
+
+**uv**
 
 ```bash
 uv add langgraph
@@ -436,6 +448,9 @@ resumed = agent.stream_events(Command(resume=True), config=config, version="v3")
 final = resumed.output
 ```
 
+#### [View example trace](https://smith.langchain.com/public/b9877a82-7701-4a9b-9430-bf5cb8740be0/r)
+Open a public LangSmith run for this example.
+
 #### Multi-turn
 Each invocation starts with a fresh subagent state. The subagent does not remember previous calls:
 
@@ -557,6 +572,9 @@ output = stream.output  # drive the stream to completion
 resumed = agent.stream_events(Command(resume=True), config=config, version="v3")
 final = resumed.output
 ```
+
+#### [View example trace](https://smith.langchain.com/public/b9877a82-7701-4a9b-9430-bf5cb8740be0/r)
+Open a public LangSmith run for this example.
 
 #### Multi-turn
 State accumulates across invocations—the subagent remembers past conversations:
@@ -821,7 +839,7 @@ for event in stream:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-subgraphs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

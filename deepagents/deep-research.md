@@ -1,3 +1,11 @@
+---
+title: "Build a deep research agent"
+description: "Build a multi-step web research agent with subagent delegation"
+source: "https://docs.langchain.com/oss/python/deepagents/deep-research"
+category: "docs"
+tags: [docs, deepagents, deep-research]
+---
+
 # Build a deep research agent
 
 > Build a multi-step web research agent with subagent delegation
@@ -41,9 +49,13 @@ cd deep-research-agent
 
 ### Install dependencies
 #### Claude
+**pip**
+
 ```bash
 pip install deepagents tavily-python httpx markdownify langchain-anthropic langchain-core
 ```
+
+**uv**
 
 ```bash
 uv init
@@ -52,9 +64,13 @@ uv sync
 ```
 
 #### Gemini
+**pip**
+
 ```bash
 pip install deepagents tavily-python httpx markdownify langchain-google-genai langchain-core
 ```
+
+**uv**
 
 ```bash
 uv init
@@ -466,7 +482,7 @@ For more information on the concepts in this tutorial, check out the following r
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/deep-research.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

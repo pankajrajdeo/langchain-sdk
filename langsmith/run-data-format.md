@@ -1,3 +1,11 @@
+---
+title: "Run (span) data format"
+description: "LangSmith stores each run as a structured record. Understanding this format is useful when exporting traces, querying the API, or building integrations."
+source: "https://docs.langchain.com/langsmith/run-data-format"
+category: "docs"
+tags: [docs, langsmith, run-data-format]
+---
+
 # Run (span) data format
 
 LangSmith stores each [run](observability-concepts.md) as a structured record. Understanding this format is useful when exporting traces, querying the API, or building integrations.
@@ -111,6 +119,8 @@ The `run_type` field identifies the kind of operation a span represents. LangSmi
 
 Set [`run_type`](https://reference.langchain.com/python/langsmith/schemas/RunBase/run_type) when instrumenting with [`@traceable`](annotate-code.md#use-%40traceable-%2F-traceable) or [`RunTree`](annotate-code.md#use-the-runtree-api):
 
+**Python**
+
 ```python
 from langsmith import traceable
 
@@ -118,6 +128,8 @@ from langsmith import traceable
 def my_tool(query: str) -> str:
     ...
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -177,7 +189,7 @@ Note a few invariants:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-data-format.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

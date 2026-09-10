@@ -1,6 +1,16 @@
+---
+title: "Get organization billing info"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/billing"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/get-organization-billing-info"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, get-organization-billing-info]
+---
+
 # Get organization billing info
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/billing**
 
 ````yaml
 openapi: 3.1.0
@@ -374,6 +384,15 @@ components:
           type: boolean
           title: Byoc Enabled
           default: false
+        byoc_external_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Byoc External Id
+          description: >-
+            The organization's assigned AWS external ID for BYOC role trust
+            policies.
+          readOnly: true
         byoc_max_data_planes:
           type: integer
           title: Byoc Max Data Planes

@@ -1,3 +1,11 @@
+---
+title: "LangSmith Observability"
+description: "Traces are a series of steps that your application takes to go from input to output. Each of these individual steps is represented by a run. You can use LangSmith to visualize these execution steps..."
+source: "https://docs.langchain.com/oss/python/langgraph/observability"
+category: "docs"
+tags: [docs, langgraph, observability]
+---
+
 # LangSmith Observability
 
 Traces are a series of steps that your application takes to go from input to output. Each of these individual steps is represented by a run. You can use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-observability) to visualize these execution steps. To use it, [enable tracing for your application](../langsmith/trace-with-langgraph.md). This enables you to do the following:
@@ -111,6 +119,8 @@ This custom metadata and tags will be attached to the trace in LangSmith.
 You may want to mask sensitive data to prevent it from being logged to LangSmith. You can create [anonymizers](../langsmith/mask-inputs-outputs.md#rule-based-masking-of-inputs-and-outputs) and apply them to
 your graph using configuration. This example will redact anything matching the Social Security Number format XXX-XX-XXXX from traces sent to LangSmith.
 
+**Python**
+
 ```python
 from langchain_core.tracers.langchain import LangChainTracer
 from langgraph.graph import StateGraph, MessagesState
@@ -136,7 +146,7 @@ graph = (
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

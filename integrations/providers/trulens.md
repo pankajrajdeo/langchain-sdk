@@ -1,3 +1,11 @@
+---
+title: "Trulens integrations"
+description: "Integrate with Trulens using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/trulens"
+category: "docs"
+tags: [docs, integrations, providers, trulens]
+---
+
 # Trulens integrations
 
 > Integrate with Trulens using LangChain Python.
@@ -10,9 +18,13 @@ This page covers how to use [TruLens](https://trulens.org) to evaluate and track
 
 Install the `trulens-eval` python package.
 
+**pip**
+
 ```bash
 pip install trulens-eval
 ```
+
+**uv**
 
 ```bash
 uv add trulens-eval
@@ -89,7 +101,7 @@ For more information on TruLens, visit [trulens.org](https://www.trulens.org/)
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/trulens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Voyage AI integration"
+description: "Integrate with the Voyage AI embedding model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/embeddings/voyageai"
+category: "docs"
+tags: [docs, integrations, embeddings, voyageai]
+---
+
 # Voyage AI integration
 
 > Integrate with the Voyage AI embedding model using LangChain Python.
@@ -113,7 +121,7 @@ An LLMChain is a chain that composes basic LLM functionality. It consists of a P
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/voyageai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

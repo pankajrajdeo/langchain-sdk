@@ -1,3 +1,11 @@
+---
+title: "Personal mode"
+description: "Build a local personal brain wiki from configured sources with OpenWiki."
+source: "https://docs.langchain.com/oss/openwiki/personal-mode"
+category: "docs"
+tags: [docs, openwiki, personal-mode]
+---
+
 # Personal mode
 
 > Build a local personal brain wiki from configured sources with OpenWiki.
@@ -137,7 +145,7 @@ openwiki cron delete <source|all>
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/personal-mode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Update data plane settings"
+description: "Update specific settings for a data plane owned by the caller's organization."
+source: "https://docs.langchain.com/langsmith/smith-api/data_planes/update-data-plane-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, data_planes, update-data-plane-settings]
+---
+
 # Update data plane settings
 
 > Update specific settings for a data plane owned by the caller's organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /orgs/current/data-planes/{id}**
 
 ````yaml
 openapi: 3.1.0

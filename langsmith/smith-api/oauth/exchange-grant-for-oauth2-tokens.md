@@ -1,8 +1,18 @@
+---
+title: "Exchange grant for OAuth2 tokens"
+description: "Token endpoint that dispatches by grant_type: authorization_code, urn:ietf:params:oauth:grant-type:device_code, or refresh_token."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/exchange-grant-for-oauth2-tokens"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, exchange-grant-for-oauth2-tokens]
+---
+
 # Exchange grant for OAuth2 tokens
 
 > Token endpoint that dispatches by grant_type: authorization_code, urn:ietf:params:oauth:grant-type:device_code, or refresh_token.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /oauth/token**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "Unshare dataset"
+description: "Unshare a dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/unshare-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, unshare-dataset]
+---
+
 # Unshare dataset
 
 > Unshare a dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/datasets/{dataset_id}/share**
 
 ````yaml
 openapi: 3.1.0

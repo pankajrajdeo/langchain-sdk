@@ -1,6 +1,16 @@
+---
+title: "Create organization"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/orgs"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/create-organization"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, create-organization]
+---
+
 # Create organization
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs**
 
 ````yaml
 openapi: 3.1.0

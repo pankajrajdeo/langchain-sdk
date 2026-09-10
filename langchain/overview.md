@@ -1,3 +1,11 @@
+---
+title: "LangChain overview"
+description: "LangChain provides create_agent: a minimal, highly configurable agent harness. Compose exactly the agent your use case needs from model, tools, prompt, and middleware."
+source: "https://docs.langchain.com/oss/python/langchain/overview"
+category: "docs"
+tags: [docs, langchain]
+---
+
 # LangChain overview
 
 > LangChain provides create_agent: a minimal, highly configurable agent harness. Compose exactly the agent your use case needs from model, tools, prompt, and middleware.
@@ -19,6 +27,8 @@
 
 This example demonstrates how to create a simple LangChain agent with a custom tool:
 
+**OpenAI**
+
 ```python
 # pip install -qU langchain "langchain[openai]"
 from langchain.agents import create_agent
@@ -38,6 +48,8 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content_blocks)
 ```
+
+**Google Gemini**
 
 ```python
 # pip install -qU langchain "langchain[google-genai]"
@@ -59,6 +71,8 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+**Claude (Anthropic)**
+
 ```python
 # pip install -qU langchain "langchain[anthropic]"
 from langchain.agents import create_agent
@@ -78,6 +92,8 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content_blocks)
 ```
+
+**OpenRouter**
 
 ```python
 # pip install -qU langchain langchain-openrouter
@@ -99,6 +115,8 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+**Fireworks**
+
 ```python
 # pip install -qU langchain langchain-fireworks
 from langchain.agents import create_agent
@@ -118,6 +136,8 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content_blocks)
 ```
+
+**Baseten**
 
 ```python
 # pip install -qU langchain langchain-baseten
@@ -139,6 +159,8 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+**Ollama**
+
 ```python
 # pip install -qU langchain langchain-ollama
 from langchain.agents import create_agent
@@ -158,6 +180,8 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content_blocks)
 ```
+
+**Azure**
 
 ```python
 # pip install -qU langchain "langchain[openai]"
@@ -185,6 +209,8 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+**AWS Bedrock**
+
 ```python
 # pip install -qU langchain langchain-aws
 from langchain.agents import create_agent
@@ -205,6 +231,8 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content_blocks)
 ```
+
+**HuggingFace**
 
 ```python
 # pip install -qU langchain "langchain[huggingface]"
@@ -248,7 +276,7 @@ Inspect traces, tool calls, state transitions, and latency in one place. Find fa
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

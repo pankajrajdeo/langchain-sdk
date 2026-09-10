@@ -1,3 +1,11 @@
+---
+title: "AstraDBByteStore integration"
+description: "Integrate with the AstraDBByteStore store using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/stores/astradb"
+category: "docs"
+tags: [docs, integrations, stores, astradb]
+---
+
 # AstraDBByteStore integration
 
 > Integrate with the AstraDBByteStore store using LangChain Python.
@@ -110,7 +118,7 @@ For detailed documentation of all `AstraDBByteStore` features and configurations
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/astradb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

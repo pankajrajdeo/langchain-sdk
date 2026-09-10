@@ -1,8 +1,18 @@
+---
+title: "Remove a reviewer from an annotation queue"
+description: "Unassigns an identity as a reviewer for the queue. Idempotent."
+source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/remove-a-reviewer-from-an-annotation-queue"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation_queues, remove-a-reviewer-from-an-annotation-queue]
+---
+
 # Remove a reviewer from an annotation queue
 
 > Unassigns an identity as a reviewer for the queue. Idempotent.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/annotation-queues/{queue_id}/reviewers/{identity_id}**
 
 ````yaml
 openapi: 3.1.0

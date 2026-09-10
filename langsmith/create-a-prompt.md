@@ -1,3 +1,11 @@
+---
+title: "Create a prompt"
+description: "In the LangSmith UI, navigate to the Playground in the left-hand sidebar or from the application homepage."
+source: "https://docs.langchain.com/langsmith/create-a-prompt"
+category: "docs"
+tags: [docs, langsmith, create-a-prompt]
+---
+
 # Create a prompt
 
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-create-a-prompt), navigate to the **Playground** in the left-hand sidebar or from the application homepage.
@@ -83,7 +91,7 @@ Now that you've created a prompt, you can use it in your application code. See [
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/create-a-prompt.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

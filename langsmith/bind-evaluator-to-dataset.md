@@ -1,3 +1,11 @@
+---
+title: "Automatically run evaluators on experiments"
+description: "LangSmith supports two ways to grade experiments created via the SDK:"
+source: "https://docs.langchain.com/langsmith/bind-evaluator-to-dataset"
+category: "docs"
+tags: [docs, langsmith, bind-evaluator-to-dataset]
+---
+
 # Automatically run evaluators on experiments
 
 LangSmith supports two ways to grade experiments created via the SDK:
@@ -35,6 +43,8 @@ For custom code evaluators bound to a dataset, the evaluator function takes in t
 
 The code below shows an example of a simple evaluator function that checks that the outputs exactly equal the reference outputs.
 
+**Python**
+
 ```python
 import numpy as np
 
@@ -47,6 +57,8 @@ def perform_eval(run, example):
 
     return { "exact_match": output_match }
 ```
+
+**JavaScript**
 
 ```javascript
 function perform_eval(run, example) {
@@ -70,7 +82,7 @@ function perform_eval(run, example) {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/bind-evaluator-to-dataset.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

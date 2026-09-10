@@ -1,8 +1,19 @@
+---
+title: "Create a new data plane"
+description: "Creates a new data plane object. Persists the rendered data plane spec, and returns 202 with the data plane in status=requested. Requires BYOC enabled org and org admin. Uses the organization's..."
+source: "https://docs.langchain.com/langsmith/smith-api/data_planes/create-a-new-data-plane"
+category: "docs"
+tags: [docs, langsmith, smith-api, data_planes, create-a-new-data-plane]
+---
+
 # Create a new data plane
 
 > Creates a new data plane object. Persists the rendered data plane spec, and returns 202 with the data plane in status=requested. Requires BYOC enabled org and org admin.
+Uses the organization's assigned external ID to assume the AWS role. Configure that ID in the role's trust policy before creating a data plane.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /orgs/current/data-planes**
 
 ````yaml
 openapi: 3.1.0
@@ -168,6 +179,10 @@ paths:
         Creates a new data plane object. Persists the rendered data plane spec,
         and returns 202 with the data plane in status=requested. Requires BYOC
         enabled org and org admin.
+
+        Uses the organization's assigned external ID to assume the AWS role.
+        Configure that ID in the role's trust policy before creating a data
+        plane.
       parameters: []
       requestBody:
         required: true
@@ -201,11 +216,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/data_planes.ErrorResponse'
         '409':
-          description: Name already exists for this organization
+          description: >-
+            Name already exists or the organization's external ID needs
+            configuration
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/data_planes.ErrorResponse'
+                $ref: '#/components/schemas/data_planes.CreateErrorResponse'
         '422':
           description: Customer AWS resource conflict or quota exceeded
           content:
@@ -253,8 +270,6 @@ components:
           type: array
           items:
             type: string
-        external_id:
-          type: string
         name:
           type: string
         public_load_balancer:

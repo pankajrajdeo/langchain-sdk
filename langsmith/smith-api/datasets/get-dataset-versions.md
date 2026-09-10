@@ -1,8 +1,18 @@
+---
+title: "Get dataset versions"
+description: "Get dataset versions."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/get-dataset-versions"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, get-dataset-versions]
+---
+
 # Get dataset versions
 
 > Get dataset versions.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}/versions**
 
 ````yaml
 openapi: 3.1.0

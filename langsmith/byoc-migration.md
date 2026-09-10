@@ -1,3 +1,11 @@
+---
+title: "Migrate to BYOC"
+description: "Copy users, datasets, prompts, experiments, Fleet resources, and other data from an existing LangSmith instance into a BYOC data plane."
+source: "https://docs.langchain.com/langsmith/byoc-migration"
+category: "docs"
+tags: [docs, langsmith, byoc-migration]
+---
+
 # Migrate to BYOC
 
 > Copy users, datasets, prompts, experiments, Fleet resources, and other data from an existing LangSmith instance into a BYOC data plane.
@@ -128,7 +136,7 @@ For more information, see [LangSmith Deployment](deployment.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-migration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

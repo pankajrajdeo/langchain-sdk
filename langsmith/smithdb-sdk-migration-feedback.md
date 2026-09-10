@@ -1,3 +1,11 @@
+---
+title: "Migrate feedback and sharing methods to SmithDB"
+description: "Migrate the LangSmith SDK feedback, annotation queue, and public run methods to their SmithDB-backed equivalents."
+source: "https://docs.langchain.com/langsmith/smithdb-sdk-migration-feedback"
+category: "docs"
+tags: [docs, langsmith, smithdb-sdk-migration-feedback]
+---
+
 # Migrate feedback and sharing methods to SmithDB
 
 > Migrate the LangSmith SDK feedback, annotation queue, and public run methods to their SmithDB-backed equivalents.
@@ -119,6 +127,8 @@ No change. `POST /runs/by-key` returns the array of created queue-run records (`
 `run_ids=` takes a plain list of run IDs. `runs=` takes each run's full lookup key—read `run_id`, `session_id`, and `start_time` off the run objects you already have.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -129,6 +139,8 @@ client.add_runs_to_annotation_queue(queue_id, run_ids=[run.id for run in runs])
 ```
 
 #### After
+**After**
+
 ```python
 from langsmith import Client
 
@@ -152,6 +164,8 @@ client.add_runs_to_annotation_queue(
 Pass an array of run-ID strings for the legacy path, or an array of `RunKey` objects (`runId`, `sessionId`, `startTime`) built from the run objects you already have.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -168,6 +182,8 @@ await client.addRunsToAnnotationQueue(
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -191,6 +207,8 @@ await client.addRunsToAnnotationQueue(
 `create()` takes run IDs via `bodyOfRunsUuidArray`. `createByKey()` takes a `Body` per run with `runId`, `sessionId`, and `startTime`.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -216,6 +234,8 @@ client.annotationQueues().runs().create(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -249,6 +269,8 @@ client.annotationQueues().runs().createByKey(params.build())
 `New()` takes run IDs via `AnnotationQueueRunNewParamsBodyRunsUuidArray`. `NewByKey()` takes an `AnnotationQueueRunNewByKeyParamsBody` per run with `RunID`, `SessionID`, and `StartTime`.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -278,6 +300,8 @@ _, err = client.AnnotationQueues.Runs.New(ctx, queueID, langsmith.AnnotationQueu
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -673,6 +697,8 @@ The method name and endpoint are unchanged. Only the session (project) ID requir
 `create_feedback` now requires `session_id` in addition to `run_id`.
 
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -686,6 +712,8 @@ client.create_feedback(
 ```
 
 #### After
+**After**
+
 ```python
 from langsmith import Client
 
@@ -704,6 +732,8 @@ client.create_feedback(
 `client.createFeedback` now requires `sessionId` in addition to `runId`.
 
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -715,6 +745,8 @@ await client.createFeedback(runId, "user_feedback", {
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -731,6 +763,8 @@ await client.createFeedback(runId, "user_feedback", {
 `.create()` now requires `.sessionId()` in addition to `.runId()`.
 
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -749,6 +783,8 @@ client.feedback().create(
 ```
 
 #### After
+**After**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -772,6 +808,8 @@ client.feedback().create(
 `Feedback.New` now requires `SessionID` in addition to `RunID`.
 
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -797,6 +835,8 @@ _, err = client.Feedback.New(ctx, langsmith.FeedbackNewParams{
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -856,7 +896,7 @@ curl -X POST "https://api.smith.langchain.com/api/v1/feedback" \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-feedback.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

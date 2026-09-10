@@ -1,3 +1,11 @@
+---
+title: "Voice tracing fundamentals"
+description: "Best practices for tracing voice and audio agents in LangSmith, including conversation audio, single-trace conversations, and the audio modality flag."
+source: "https://docs.langchain.com/langsmith/trace-voice-fundamentals"
+category: "docs"
+tags: [docs, langsmith, trace-voice-fundamentals]
+---
+
 # Voice tracing fundamentals
 
 > Best practices for tracing voice and audio agents in LangSmith, including conversation audio, single-trace conversations, and the audio modality flag.
@@ -87,6 +95,8 @@ Record at the client. A common approach is a stereo WAV with the user's micropho
 
 Attach the file using the [attachments API](upload-files-with-traces.md):
 
+**Python**
+
 ```python
 from langsmith import traceable
 from langsmith.schemas import Attachment
@@ -105,6 +115,8 @@ def run_conversation(session_id: str, conversation_audio: bytes):
 ### Mark the trace as audio
 
 Set the `ls_modality` metadata field to `"audio"` on the root run. This flags the trace as a voice trace so LangSmith can render it appropriately and so you can [filter](filter-traces-in-application.md) for voice traces in your project.
+
+**Python**
 
 ```python
 from langsmith import traceable
@@ -143,7 +155,7 @@ Render audio and other media in the LangSmith UI.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-voice-fundamentals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

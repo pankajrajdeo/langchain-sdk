@@ -1,3 +1,11 @@
+---
+title: "Prebuilt middleware"
+description: "Prebuilt middleware for common agent use cases"
+source: "https://docs.langchain.com/oss/python/langchain/middleware/built-in"
+category: "docs"
+tags: [docs, langchain, middleware, built-in]
+---
+
 # Prebuilt middleware
 
 > Prebuilt middleware for common agent use cases
@@ -1368,6 +1376,8 @@ Some tasks have a clear definition of "done" that an agent cannot reliably hit o
 
 **API reference:** [`RubricMiddleware`](https://reference.langchain.com/python/deepagents/middleware/rubric/RubricMiddleware)
 
+**Google**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -1383,6 +1393,8 @@ agent = create_deep_agent(
     checkpointer=InMemorySaver(),
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -1400,6 +1412,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -1415,6 +1429,8 @@ agent = create_deep_agent(
     checkpointer=InMemorySaver(),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -1432,6 +1448,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -1448,6 +1466,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -1463,6 +1483,8 @@ agent = create_deep_agent(
     checkpointer=InMemorySaver(),
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -1760,7 +1782,7 @@ Content moderation middleware for OpenAI models.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/middleware/built-in.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

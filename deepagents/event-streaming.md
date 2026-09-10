@@ -1,3 +1,11 @@
+---
+title: "Event streaming"
+description: "Stream subagents, messages, tool calls, and final output from Deep Agents."
+source: "https://docs.langchain.com/oss/python/deepagents/event-streaming"
+category: "docs"
+tags: [docs, deepagents, event-streaming]
+---
+
 # Event streaming
 
 > Stream subagents, messages, tool calls, and final output from Deep Agents.
@@ -27,6 +35,9 @@ for subagent in stream.subagents:
 
     subagent_names.append(subagent.name)
 ```
+
+#### [View example trace](https://smith.langchain.com/public/3a85e9e6-9081-44ff-8291-2f7a7a478d6d/r)
+Open a public LangSmith run for this example.
 
 ## Subagent stream fields
 
@@ -70,6 +81,9 @@ for subagent in stream.subagents:
         print(f"{subagent.name}: failed")
 ```
 
+#### [View example trace](https://smith.langchain.com/public/f44ddc62-d081-4373-bfec-361fc211fced/r)
+Open a public LangSmith run for this example.
+
 ## Stream messages
 
 Deep Agents can emit messages from the coordinator agent and from delegated subagents. Use `stream.messages` for top-level messages and `subagent.messages` for each delegated subagent.
@@ -86,6 +100,9 @@ for subagent in stream.subagents:
     for message in subagent.messages:
         print(f"[{subagent.name}]", message.text)
 ```
+
+#### [View example trace](https://smith.langchain.com/public/91503d73-11d1-4016-90f1-c1ac52e32f3b/r)
+Open a public LangSmith run for this example.
 
 ## Stream tool calls
 
@@ -112,6 +129,9 @@ for subagent in stream.subagents:
             print(call.error)
 ```
 
+#### [View example trace](https://smith.langchain.com/public/c3a01f68-bece-422d-add0-703090a068a5/r)
+Open a public LangSmith run for this example.
+
 ## Stream nested work
 
 You can recurse into a subagent stream to observe nested subagents, messages, and tool calls.
@@ -133,6 +153,9 @@ for subagent in stream.subagents:
 
     subagent_names.append(subagent.name)
 ```
+
+#### [View example trace](https://smith.langchain.com/public/85a499ed-bde5-4fa7-8154-25522617d724/r)
+Open a public LangSmith run for this example.
 
 ## Consume concurrently
 
@@ -170,6 +193,9 @@ for name, item in stream.interleave("messages", "subagents"):
             print(f"[{item.name}]", message.text)
 ```
 
+#### [View example trace](https://smith.langchain.com/public/22b2e253-4b17-4633-9eb0-c036cb548ce1/r)
+Open a public LangSmith run for this example.
+
 When you need exact arrival order across the coordinator and all subagents, iterate raw protocol events and use `namespace` to identify the source:
 
 ```python
@@ -193,6 +219,9 @@ for event in stream:
         text_deltas.append(block["text"])
 ```
 
+#### [View example trace](https://smith.langchain.com/public/ffce9a73-0179-440a-9b4a-96b448b39c3c/r)
+Open a public LangSmith run for this example.
+
 ## Subagents versus subgraphs
 
 `stream.subgraphs` shows graph execution structure. `stream.subagents` shows product-level Deep Agents task delegations. Use `stream.subagents` for user-facing UI because it hides internal graph nodes and exposes the subagent concept directly.
@@ -206,7 +235,7 @@ for event in stream:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

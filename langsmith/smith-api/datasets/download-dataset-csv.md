@@ -1,8 +1,18 @@
+---
+title: "Download dataset csv"
+description: "Download a dataset as CSV format."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/download-dataset-csv"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, download-dataset-csv]
+---
+
 # Download dataset csv
 
 > Download a dataset as CSV format.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}/csv**
 
 ````yaml
 openapi: 3.1.0

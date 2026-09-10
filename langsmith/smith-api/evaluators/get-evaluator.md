@@ -1,8 +1,18 @@
+---
+title: "Get evaluator"
+description: "Retrieve a single evaluator by its ID."
+source: "https://docs.langchain.com/langsmith/smith-api/evaluators/get-evaluator"
+category: "docs"
+tags: [docs, langsmith, smith-api, evaluators, get-evaluator]
+---
+
 # Get evaluator
 
 > Retrieve a single evaluator by its ID.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/evaluators/{evaluator_id}**
 
 ````yaml
 openapi: 3.1.0

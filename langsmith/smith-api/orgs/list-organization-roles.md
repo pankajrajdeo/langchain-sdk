@@ -1,6 +1,16 @@
+---
+title: "List organization roles"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/roles"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/list-organization-roles"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, list-organization-roles]
+---
+
 # List organization roles
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/roles**
 
 ````yaml
 openapi: 3.1.0

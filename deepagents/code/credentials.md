@@ -1,3 +1,11 @@
+---
+title: "Provider credentials"
+description: "Add and manage API keys for model providers, Tavily web search, and LangSmith tracing"
+source: "https://docs.langchain.com/oss/deepagents/code/credentials"
+category: "docs"
+tags: [docs, deepagents, code, credentials]
+---
+
 # Provider credentials
 
 > Add and manage API keys for model providers, Tavily web search, and LangSmith tracing
@@ -159,7 +167,7 @@ In an existing session, run `/reload` to re-read `.env` files. On the next launc
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/credentials.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

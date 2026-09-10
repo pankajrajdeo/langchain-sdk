@@ -1,3 +1,11 @@
+---
+title: "Managed Deep Agents CLI reference"
+description: "Reference for mda commands, project files, and deploy behavior."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-cli"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-cli]
+---
+
 # Managed Deep Agents CLI reference
 
 > Reference for mda commands, project files, and deploy behavior.
@@ -15,6 +23,8 @@ For the fastest end-to-end path, see the [quickstart](managed-deep-agents-quicks
 
 `mda init` declares `managed-deepagents` as a project dependency, so run the `mda` binary from the project.
 
+**npm**
+
 ```bash
 npx managed-deepagents init my-agent
 cd my-agent
@@ -22,12 +32,16 @@ npm install
 npx mda --version
 ```
 
+**pnpm**
+
 ```bash
 pnpm dlx managed-deepagents init my-agent
 cd my-agent
 pnpm install
 pnpm exec mda --version
 ```
+
+**bun**
 
 ```bash
 bunx managed-deepagents init my-agent
@@ -47,6 +61,8 @@ The package provides agent, identity, schedule, and sandbox authoring APIs.
 3. `LANGCHAIN_API_KEY`
 
 The CLI reads those values from the project `.env` file first, then from the process environment. If no key is found in an interactive terminal, `mda deploy` prompts for a LangSmith API key and saves it to the project `.env` file.
+
+**.env**
 
 ```text
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
@@ -79,13 +95,19 @@ The LangSmith API key authenticates the deploy. The agent's model provider also 
 
 Use `mda init` to create a new project directory:
 
+**npm**
+
 ```bash
 npx managed-deepagents init my-agent
 ```
 
+**pnpm**
+
 ```bash
 pnpm dlx managed-deepagents init my-agent
 ```
+
+**bun**
 
 ```bash
 bunx managed-deepagents init my-agent
@@ -104,13 +126,19 @@ bunx managed-deepagents init my-agent
 
 To include Slack in a new project:
 
+**npm**
+
 ```bash
 npx managed-deepagents init my-agent --channel slack
 ```
 
+**pnpm**
+
 ```bash
 pnpm dlx managed-deepagents init my-agent --channel slack
 ```
+
+**bun**
 
 ```bash
 bunx managed-deepagents init my-agent --channel slack
@@ -135,13 +163,19 @@ Eval tasks are opt-in and are not created by `mda init`. Run `mda evals init -i`
 
 Run the following command from the root of an existing managed deep agent project:
 
+**npm**
+
 ```bash
 npx mda channels init slack
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda channels init slack
 ```
+
+**bun**
 
 ```bash
 bunx mda channels init slack
@@ -153,13 +187,19 @@ The command creates a Slack channel declaration in the `channels/` directory. Th
 
 Use `mda build` to compile a project into a managed LangGraph app without deploying it:
 
+**npm**
+
 ```bash
 npx mda build
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda build
 ```
+
+**bun**
 
 ```bash
 bunx mda build
@@ -174,13 +214,19 @@ bunx mda build
 
 Use `mda evals init` to initialize a Harbor workspace. Use the interactive handoff to develop complete tasks with a coding agent and the `eval-engineering` skill.
 
+**npm**
+
 ```bash
 npx mda evals init -i
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda evals init -i
 ```
+
+**bun**
 
 ```bash
 bunx mda evals init -i
@@ -201,13 +247,19 @@ For workflow guidance, see [Evals](managed-deep-agents-evals.md).
 
 Use `mda dev` to compile a project and run the local LangGraph dev server:
 
+**npm**
+
 ```bash
 npx mda dev
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda dev
 ```
+
+**bun**
 
 ```bash
 bunx mda dev
@@ -249,13 +301,19 @@ The first argument to `mda connections create` is a slug, which is your name for
 
 The OAuth catalog saves you from looking up a provider's OAuth settings. When you pass a listed service to `--oauth`, the CLI supplies its authorization URL, token URL, token endpoint authentication method, authorization parameters, and default scopes, so you provide only your client ID and client secret. The catalog does not limit which providers you can use: for anything else, pass `--authorize-url` and `--token-url`. Catalog names include `github`, `google`, `linear`, `slack`, `atlassian`, and `notion-api`:
 
+**npm**
+
 ```bash
 npx mda connections catalog
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections catalog
 ```
+
+**bun**
 
 ```bash
 bunx mda connections catalog
@@ -263,13 +321,19 @@ bunx mda connections catalog
 
 Create an agent-owned API key for a custom Tavily tool:
 
+**npm**
+
 ```bash
 npx mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
 ```
+
+**bun**
 
 ```bash
 bunx mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
@@ -304,13 +368,19 @@ For credential owners, create modes, caller identity, and runtime examples, see 
 
 Use `mda deploy` to compile and deploy a project to LangSmith:
 
+**npm**
+
 ```bash
 npx mda deploy
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda deploy
 ```
+
+**bun**
 
 ```bash
 bunx mda deploy
@@ -346,13 +416,19 @@ On success, the CLI prints the LangSmith deployment dashboard URL. For secrets r
 
 Use `mda logs` to tail Agent Server logs for a deployed agent:
 
+**npm**
+
 ```bash
 npx mda logs
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda logs
 ```
+
+**bun**
 
 ```bash
 bunx mda logs
@@ -372,13 +448,19 @@ bunx mda logs
 
 Use `mda delete` to delete a deployed Managed Deep Agent and the LangSmith resources it created. `mda destroy` is an alias.
 
+**npm**
+
 ```bash
 npx mda delete
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda delete
 ```
+
+**bun**
 
 ```bash
 bunx mda delete
@@ -407,7 +489,7 @@ bunx mda delete
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

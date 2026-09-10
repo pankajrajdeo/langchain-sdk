@@ -1,3 +1,11 @@
+---
+title: "Discover errors and usage patterns with Insights"
+description: "Use LangSmith Insights to automatically analyze traces, detect usage patterns, identify common agent behaviors, and surface failure modes without manual trace review."
+source: "https://docs.langchain.com/langsmith/insights"
+category: "docs"
+tags: [docs, langsmith, insights]
+---
+
 # Discover errors and usage patterns with Insights
 
 > Use LangSmith Insights to automatically analyze traces, detect usage patterns, identify common agent behaviors, and surface failure modes without manual trace review.
@@ -36,6 +44,8 @@ When you call `generate_insights()`, the SDK will:
 1. Upload your chat histories as traces to a new LangSmith project.
 2. Generate an Insights Report over those uploaded traces.
 3. Return a link to your results in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-insights).
+
+**Python**
 
 ```python
 import os
@@ -226,7 +236,7 @@ Select from previously saved configs in the dropdown in the top-left corner of t
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/insights.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

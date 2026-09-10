@@ -1,3 +1,11 @@
+---
+title: "Add a custom search tool, memory, and a schedule"
+description: "Replace provider search with a Tavily tool, then add durable memory and a daily schedule to the research assistant from the quickstart."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-tutorial"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-tutorial]
+---
+
 # Add a custom search tool, memory, and a schedule
 
 > Replace provider search with a Tavily tool, then add durable memory and a daily schedule to the research assistant from the quickstart.
@@ -21,6 +29,8 @@ Built-in provider search is convenient for a first run. Authored tools give you 
 
 Add a [Tavily API key](https://app.tavily.com) to `.env`:
 
+**.env**
+
 ```text
 TAVILY_API_KEY=<TAVILY_API_KEY>
 ```
@@ -32,6 +42,8 @@ uv add tavily-python
 ```
 
 Create a custom `internet_search` tool:
+
+**tools/search.py**
 
 ```python
 import os
@@ -58,6 +70,8 @@ def internet_search(
 
 Replace the provider search tool dict with your authored tool. Keep the `model` value from the quickstart:
 
+**agent.py**
+
 ```python
 from managed_deepagents import define_deep_agent
 
@@ -81,6 +95,8 @@ Confirm the agent calls `internet_search` and returns an answer with citations. 
 ### Update the instructions for memory
 Extend `instructions.md` so the agent knows what shared knowledge to keep. Keep the research behavior and add a memory policy:
 
+**instructions.md**
+
 ```markdown
 # Research assistant
 
@@ -97,6 +113,8 @@ keep notes, and return concise answers with citations.
 ### Enable and use durable memory
 Durable memory is opt-in. Before asking the agent to remember anything, add a memory declaration at the project root:
 
+**memory.py**
+
 ```python
 from managed_deepagents import define_memory
 
@@ -111,6 +129,8 @@ See [Memory](managed-deep-agents-memory.md) for details.
 
 ### Schedule a daily digest
 Add a `schedules/` module so the agent runs on a cron cadence without a user message. This schedule runs every weekday at 8am Pacific:
+
+**schedules/daily_digest.py**
 
 ```python
 from managed_deepagents import define_schedule
@@ -166,7 +186,7 @@ Develop Harbor evals with a coding agent and the eval-engineering skill.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

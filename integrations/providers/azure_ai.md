@@ -1,3 +1,11 @@
+---
+title: "Azure AI integrations"
+description: "Integrate with Azure AI using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/azure_ai"
+category: "docs"
+tags: [docs, integrations, providers, azure_ai]
+---
+
 # Azure AI integrations
 
 > Integrate with Azure AI using LangChain Python.
@@ -15,9 +23,13 @@ We recommend developers start with the (`langchain-azure-ai`) to access all the 
 
 Access models like Azure OpenAI, DeepSeek R1, Cohere, Phi and Mistral using the `AzureAIOpenAIApiChatModel` class.
 
+**pip**
+
 ```bash
 pip install -U langchain-azure-ai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-ai
@@ -45,9 +57,13 @@ llm.invoke('Tell me a joke and include some emojis')
 
 ### Azure AI model inference for embeddings
 
+**pip**
+
 ```bash
 pip install -U langchain-azure-ai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-ai
@@ -84,9 +100,13 @@ embed_model = AzureAIOpenAIApiEmbeddingsModel(
 
 We need to install the `langchain-azure-cosmosdb` and `azure-cosmos` packages to use this vector store.
 
+**pip**
+
 ```bash
 pip install -qU langchain-azure-cosmosdb azure-cosmos
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-cosmosdb azure-cosmos
@@ -121,9 +141,13 @@ See a [usage example](../vectorstores/azure_cosmos_db_no_sql.md).
 
 We need to install the `pymongo` package to use this vector store.
 
+**pip**
+
 ```bash
 pip install -qU pymongo
 ```
+
+**uv**
 
 ```bash
 uv add pymongo
@@ -147,7 +171,7 @@ See a [usage example](../vectorstores/azure_cosmos_db_mongo_vcore.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

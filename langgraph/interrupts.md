@@ -1,3 +1,11 @@
+---
+title: "Interrupts"
+description: "Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. This enables human-in-the-loop patterns where you need external input to proceed. When..."
+source: "https://docs.langchain.com/oss/python/langgraph/interrupts"
+category: "docs"
+tags: [docs, langgraph, interrupts]
+---
+
 # Interrupts
 
 Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. This enables human-in-the-loop patterns where you need external input to proceed. When an interrupt is triggered, LangGraph saves the graph state using its [persistence](persistence.md) layer and waits indefinitely until you resume execution.
@@ -74,6 +82,9 @@ resumed = graph.stream_events(Command(resume=True), config=config, version="v3")
 final = resumed.output
 ```
 
+#### [View example trace](https://smith.langchain.com/public/924527bc-da7c-4e0a-8986-4194e622140a/r)
+Open a public LangSmith run for this example.
+
 > [!NOTE]
 > The default `graph.invoke(...)` API still works and surfaces interrupts under `result["__interrupt__"]`. Use it when you don't need streamed projections; otherwise prefer `graph.stream_events(..., version="v3")`.
 
@@ -130,6 +141,9 @@ while True:
     user_response = get_user_input(interrupt_info)
     stream_input = Command(resume=user_response)
 ```
+
+#### [View example trace](https://smith.langchain.com/public/a1d09dc8-80ac-4bad-a70c-59e4b7cdbff8/r)
+Open a public LangSmith run for this example.
 
 * **`stream.messages`**: Chat-model output as content blocks; iterate each `message.text` for token deltas. For nested subgraphs, read message chunks from `stream.subgraphs[*].messages`.
 * **`stream.values`**: Full state snapshots after each step
@@ -190,6 +204,9 @@ resumed = graph.stream_events(Command(resume=resume_map), config, version="v3")
 print("Final state:", resumed.output)
 # Final state: {'vals': ['a:answer for question_a', 'b:answer for question_b']}
 ```
+
+#### [View example trace](https://smith.langchain.com/public/0db5e7bd-c53b-490a-9ed2-650ac477cd2d/r)
+Open a public LangSmith run for this example.
 
 ### Approve or reject
 
@@ -281,6 +298,9 @@ resumed = graph.stream_events(Command(resume=True), config=config, version="v3")
 print(resumed.output["status"])
 ```
 
+#### [View example trace](https://smith.langchain.com/public/dc8614c9-bbb7-4231-b852-7a5899964e10/r)
+Open a public LangSmith run for this example.
+
 </details>
 
 ### Review and edit state
@@ -357,6 +377,9 @@ final_state = graph.stream_events(
 )
 print(final_state.output["generated_text"])  # -> "Improved draft after review"
 ```
+
+#### [View example trace](https://smith.langchain.com/public/cf03e7a5-8261-499d-9612-57b0d775c4ab/r)
+Open a public LangSmith run for this example.
 
 </details>
 
@@ -604,6 +627,8 @@ The way that [`interrupt`](https://reference.langchain.com/python/langgraph/type
 * ✅ Separate [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls from error-prone code
 * ✅ Use specific exception types in try/except blocks
 
+**Separating logic**
+
 ```python
 def node_a(state: State):
     # ✅ Good: interrupting first, then handling
@@ -615,6 +640,8 @@ def node_a(state: State):
         print(e)
     return state
 ```
+
+**Explicit exception handling**
 
 ```python
 def node_a(state: State):
@@ -666,6 +693,8 @@ def node_a(state: State):
 * 🔴 Do not conditionally skip [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls within a node
 * 🔴 Do not loop [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls using logic that isn't deterministic across executions, including `while True` validation loops. Use a conditional edge instead (see [Validating human input](#validating-human-input))
 
+**Skipping interrupts**
+
 ```python
 def node_a(state: State):
     # ❌ Bad: conditionally skipping interrupts changes the order
@@ -680,6 +709,8 @@ def node_a(state: State):
 
     return {"name": name, "city": city}
 ```
+
+**Looping interrupts**
 
 ```python
 def node_a(state: State):
@@ -700,6 +731,8 @@ Depending on which checkpointer is used, complex values may not be serializable 
 * ✅ Pass simple, JSON-serializable types to [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt)
 * ✅ Pass dictionaries/objects with simple values
 
+**Simple values**
+
 ```python
 def node_a(state: State):
     # ✅ Good: passing simple types that are serializable
@@ -709,6 +742,8 @@ def node_a(state: State):
 
     return {"name": name, "count": count, "approved": approved}
 ```
+
+**Structured data**
 
 ```python
 def node_a(state: State):
@@ -724,6 +759,8 @@ def node_a(state: State):
 
 * 🔴 Do not pass functions, class instances, or other complex objects to [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt)
 
+**Functions**
+
 ```python
 def validate_input(value):
     return len(value) > 0
@@ -737,6 +774,8 @@ def node_a(state: State):
     })
     return {"name": response}
 ```
+
+**Class instances**
 
 ```python
 class DataProcessor:
@@ -765,6 +804,8 @@ As an example, you might have an API call to update a record inside of a node. I
 * ✅ Place side effects after [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls
 * ✅ Separate side effects into separate nodes when possible
 
+**Idempotent operations**
+
 ```python
 def node_a(state: State):
     # ✅ Good: using upsert operation which is idempotent
@@ -778,6 +819,8 @@ def node_a(state: State):
 
     return {"approved": approved}
 ```
+
+**Side effects after interrupt**
 
 ```python
 def node_a(state: State):
@@ -793,6 +836,8 @@ def node_a(state: State):
 
     return {"approved": approved}
 ```
+
+**Separating into different nodes**
 
 ```python
 def approval_node(state: State):
@@ -816,6 +861,8 @@ def notification_node(state: State):
 * 🔴 Do not perform non-idempotent operations before [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt)
 * 🔴 Do not create new records without checking if they exist
 
+**Creating records**
+
 ```python
 def node_a(state: State):
     # ❌ Bad: creating a new record before interrupt
@@ -830,6 +877,8 @@ def node_a(state: State):
 
     return {"approved": approved, "audit_id": audit_id}
 ```
+
+**Appending to lists**
 
 ```python
 def node_a(state: State):
@@ -934,7 +983,7 @@ You can use [LangSmith Studio](../langsmith/studio.md) to set static interrupts 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/interrupts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

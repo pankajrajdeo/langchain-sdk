@@ -1,8 +1,18 @@
+---
+title: "Get directory contents"
+description: "Resolves the flattened file tree for an agent or skill repository at a specific commit, tag, or latest."
+source: "https://docs.langchain.com/langsmith/smith-api/directories/get-directory-contents"
+category: "docs"
+tags: [docs, langsmith, smith-api, directories, get-directory-contents]
+---
+
 # Get directory contents
 
 > Resolves the flattened file tree for an agent or skill repository at a specific commit, tag, or latest.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/hub/repos/{owner}/{repo}/directories**
 
 ````yaml
 openapi: 3.1.0

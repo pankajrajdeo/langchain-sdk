@@ -1,3 +1,11 @@
+---
+title: "Predictionguard integration"
+description: "Integrate with the Predictionguard LLM using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/llms/predictionguard"
+category: "docs"
+tags: [docs, integrations, llms, predictionguard]
+---
+
 # Predictionguard integration
 
 > Integrate with the Predictionguard LLM using LangChain Python.
@@ -161,7 +169,7 @@ llm_chain.invoke({"question": question})
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/predictionguard.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Contributing"
+description: "Welcome! Thank you for your interest in contributing."
+source: "https://docs.langchain.com/oss/python/contributing/overview"
+category: "docs"
+tags: [docs, contributing]
+---
+
 # Contributing
 
 **Welcome! Thank you for your interest in contributing.**
@@ -116,7 +124,7 @@ You may use AI assistants to help draft or revise contributions when you **verif
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

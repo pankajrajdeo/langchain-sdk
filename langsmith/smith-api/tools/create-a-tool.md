@@ -1,8 +1,18 @@
+---
+title: "Create a tool"
+description: "Creates a new tool in the workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/tools/create-a-tool"
+category: "docs"
+tags: [docs, langsmith, smith-api, tools, create-a-tool]
+---
+
 # Create a tool
 
 > Creates a new tool in the workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/tools**
 
 ````yaml
 openapi: 3.1.0

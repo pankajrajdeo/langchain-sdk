@@ -1,8 +1,18 @@
+---
+title: "Update hub environments model"
+description: "Replaces the environments array on an existing model."
+source: "https://docs.langchain.com/langsmith/smith-api/hub_environments/update-hub-environments-model"
+category: "docs"
+tags: [docs, langsmith, smith-api, hub_environments, update-hub-environments-model]
+---
+
 # Update hub environments model
 
 > Replaces the environments array on an existing model.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/hub/environments/{id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Trace OpenAI applications"
+description: "The wrap_openai / wrapOpenAI methods in Python/TypeScript allow you to wrap your OpenAI client in order to automatically log traces -- no decorator or function wrapping required! Using the wrapper..."
+source: "https://docs.langchain.com/langsmith/trace-openai"
+category: "docs"
+tags: [docs, langsmith, trace-openai]
+---
+
 # Trace OpenAI applications
 
 The [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_openai/wrap_openai) / [`wrapOpenAI`](https://reference.langchain.com/javascript/langsmith/wrappers/wrapOpenAI) methods in Python/TypeScript allow you to wrap your OpenAI client in order to automatically log traces -- no decorator or function wrapping required! Using the wrapper ensures that messages, including tool calls and multimodal content blocks will be rendered nicely in LangSmith. Also note that the wrapper works seamlessly with the [`@traceable`](https://reference.langchain.com/python/langsmith/run_helpers/traceable) decorator or [`traceable`](https://reference.langchain.com/javascript/langsmith/traceable/traceable) function and you can use both in the same application.
@@ -5,11 +13,13 @@ The [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_o
 > [!NOTE]
 > The `LANGSMITH_TRACING` environment variable must be set to `'true'` in order for traces to be logged to LangSmith, even when using [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_openai/wrap_openai) or [`wrapOpenAI`](https://reference.langchain.com/javascript/langsmith/wrappers/wrapOpenAI). This allows you to toggle tracing on and off without changing your code.
 >
-> Additionally, you will need to set the `LANGSMITH_API_KEY` environment variable to your API key (see [Setup](https://docs.langchain.com/) for more information).
+> Additionally, you will need to set the `LANGSMITH_API_KEY` environment variable to your API key (see [Setup](../home.md) for more information).
 >
 > If your LangSmith API key is linked to multiple workspaces, set the `LANGSMITH_WORKSPACE_ID` environment variable to specify which workspace to use.
 >
 > By default, the traces will be logged to a project named `default`. To log traces to a different project, see [Log traces to a specific project](log-traces-to-project.md).
+
+**Python**
 
 ```python
 import openai
@@ -36,6 +46,8 @@ def chat_pipeline(question: str):
 
 chat_pipeline("Can you summarize this morning's meetings?")
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -73,7 +85,7 @@ To trace a provider with an OpenAI-compatible API, refer to [Trace OpenAI-compat
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

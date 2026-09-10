@@ -1,3 +1,11 @@
+---
+title: "Trace LangGraph applications"
+description: "LangSmith smoothly integrates with LangGraph (Python and JS) to help you trace agents, whether you're using LangChain modules or other SDKs."
+source: "https://docs.langchain.com/langsmith/trace-with-langgraph"
+category: "docs"
+tags: [docs, langsmith, trace-with-langgraph]
+---
+
 # Trace LangGraph applications
 
 LangSmith smoothly integrates with LangGraph (Python and JS) to help you trace agents, whether you're using LangChain modules or other SDKs.
@@ -12,19 +20,27 @@ This guide will walk through a basic example. For more detailed information on c
 
 Install the LangGraph library and the OpenAI integration for Python and JS (we use the OpenAI integration for the code snippets below).
 
-For a full list of packages available, see the [LangChain Python docs](../integrations/providers/overview.md) and [LangChain JS docs](https://docs.langchain.com/oss/javascript/integrations/providers/overview).
+For a full list of packages available, see the [LangChain Python docs](../integrations/providers/overview.md) and [LangChain JS docs](../javascript/integrations/providers/overview.md).
+
+**pip**
 
 ```bash
 pip install langchain_openai langgraph
 ```
 
+**yarn**
+
 ```bash
 yarn add @langchain/openai @langchain/langgraph
 ```
 
+**npm**
+
 ```bash
 npm install @langchain/openai @langchain/langgraph
 ```
+
+**pnpm**
 
 ```bash
 pnpm add @langchain/openai @langchain/langgraph
@@ -115,6 +131,8 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 
 Once you've set up your environment, you can call LangChain runnables as normal. LangSmith will infer the proper tracing config:
 
+**Python**
+
 ```python
 from typing import Literal
 from langchain.messages import HumanMessage
@@ -167,6 +185,8 @@ final_state = app.invoke(
 
 final_state["messages"][-1].content
 ```
+
+**TypeScript**
 
 ```typescript
 import { HumanMessage, AIMessage } from "@langchain/core/messages";
@@ -261,17 +281,25 @@ Here's an example. You can also see this page for more information.
 
 Install the LangGraph library and the OpenAI SDK for Python and JS (we use the OpenAI integration for the code snippets below).
 
+**pip**
+
 ```bash
 pip install openai langsmith langgraph
 ```
+
+**yarn**
 
 ```bash
 yarn add openai langsmith @langchain/langgraph
 ```
 
+**npm**
+
 ```bash
 npm install openai langsmith @langchain/langgraph
 ```
+
+**pnpm**
 
 ```bash
 pnpm add openai langsmith @langchain/langgraph
@@ -359,6 +387,8 @@ export OPENAI_API_KEY=<your-openai-api-key>
 ### 3. Log a trace
 
 Once you've set up your environment, [wrap or decorate the custom functions/SDKs](annotate-code.md#use-%40traceable-%2F-traceable) you want to trace. LangSmith will then infer the proper tracing config:
+
+**Python**
 
 ```python
 import json
@@ -453,6 +483,8 @@ final_state = app.invoke(
 
 final_state["messages"][-1]["content"]
 ```
+
+**TypeScript**
 
 ```typescript
 **Note:** The below example requires `langsmith>=0.1.39` and `@langchain/langgraph>=0.0.31`
@@ -581,7 +613,7 @@ The **Messages** view in the LangSmith UI shows a simplified conversation histor
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-langgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

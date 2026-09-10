@@ -1,8 +1,18 @@
+---
+title: "List SCIM tokens"
+description: "List all SCIM bearer tokens for the current organization. The full token values are not returned."
+source: "https://docs.langchain.com/langsmith/smith-api/scim-tokens/list-scim-tokens"
+category: "docs"
+tags: [docs, langsmith, smith-api, scim-tokens, list-scim-tokens]
+---
+
 # List SCIM tokens
 
 > List all SCIM bearer tokens for the current organization. The full token values are not returned.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/orgs/current/scim/tokens**
 
 ````yaml
 openapi: 3.1.0

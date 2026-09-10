@@ -1,3 +1,11 @@
+---
+title: "Streaming"
+description: "For new applications, we recommend event streaming—the typed-projection API introduced in LangGraph v1.2. Event streaming gives you separate iterators per projection (messages, values, subgraphs..."
+source: "https://docs.langchain.com/oss/python/langgraph/streaming"
+category: "docs"
+tags: [docs, langgraph, streaming]
+---
+
 # Streaming
 
 > [!TIP]
@@ -79,7 +87,7 @@ Node generate_joke updated: {'joke': 'Why did the ice cream go to school? To get
 ### Stream output format (v2)
 
 > [!NOTE]
-> Requires LangGraph >= 1.1. All examples on this page use `version="v2"`.
+> Requires LangGraph 1.1 or later. All examples on this page use `version="v2"`.
 
 Pass `version="v2"` to `stream()` or `astream()` to get a unified output format. Every chunk is a `StreamPart` dict with a consistent shape — regardless of stream mode, number of modes, or subgraph settings:
 
@@ -95,12 +103,16 @@ Each stream mode has a corresponding `TypedDict` containing [`ValuesStreamPart`]
 
 With v1 (default), the output format changes based on your streaming options (single mode returns raw data, multiple modes return `(mode, data)` tuples, subgraphs return `(namespace, data)` tuples). With v2, the format is always the same:
 
+**v2 (new)**
+
 ```python
 for chunk in graph.stream(inputs, stream_mode="updates", version="v2"):
     print(chunk["type"])  # "updates"
     print(chunk["ns"])    # ()
     print(chunk["data"])  # {"node_name": {"key": "value"}}
 ```
+
+**v1 (current default)**
 
 ```python
 for chunk in graph.stream(inputs, stream_mode="updates"):
@@ -414,6 +426,9 @@ initial_state: State = {"topic": "AI", "answer": "", "notes": ""}
 stream = graph.stream_events(initial_state, version="v3")
 ```
 
+#### [View example trace](https://smith.langchain.com/public/e17f4132-e295-47d7-a61d-eb85ca98fbfa/r)
+Open a public LangSmith run for this example.
+
 #### Filter by node
 
 To stream tokens only from specific nodes, use `stream_mode="messages"` and filter the outputs by the `langgraph_node` field in the streamed metadata:
@@ -566,19 +581,19 @@ To include outputs from [subgraphs](use-subgraphs.md) in the streamed outputs, y
 
 The outputs will be streamed as tuples `(namespace, data)`, where `namespace` is a tuple with the path to the node where a subgraph is invoked, e.g. `("parent_node:<task_id>", "child_node:<task_id>")`.
 
-= 1.1)">
-  With `version="v2"`, subgraph events use the same `StreamPart` format. The `ns` field identifies the source:
+#### v2 (LangGraph 1.1 or later)
+With `version="v2"`, subgraph events use the same `StreamPart` format. The `ns` field identifies the source:
 
 ```python
-  for chunk in graph.stream(
-      {"foo": "foo"},
-      subgraphs=True,  # [!code highlight]
-      stream_mode="updates",
-      version="v2", # [!code highlight]
-  ):
-      print(chunk["type"])  # "updates"
-      print(chunk["ns"])    # () for root, ("node_name:<task_id>",) for subgraph
-      print(chunk["data"])  # {"node_name": {"key": "value"}}
+for chunk in graph.stream(
+    {"foo": "foo"},
+    subgraphs=True,  # [!code highlight]
+    stream_mode="updates",
+    version="v2", # [!code highlight]
+):
+    print(chunk["type"])  # "updates"
+    print(chunk["ns"])    # () for root, ("node_name:<task_id>",) for subgraph
+    print(chunk["data"])  # {"node_name": {"key": "value"}}
 ```
 
 #### v1 (default)
@@ -765,6 +780,8 @@ You can pass a list as the `stream_mode` parameter to stream multiple modes at o
 
 With `version="v2"`, every chunk is a `StreamPart` dict. Use `chunk["type"]` to distinguish between modes:
 
+**v2**
+
 ```python
 for chunk in graph.stream(inputs, stream_mode=["updates", "custom"], version="v2"):
     if chunk["type"] == "updates":
@@ -773,6 +790,8 @@ for chunk in graph.stream(inputs, stream_mode=["updates", "custom"], version="v2
     elif chunk["type"] == "custom":
         print(f"Custom event: {chunk['data']}")
 ```
+
+**v1**
 
 ```python
 for mode, chunk in graph.stream(inputs, stream_mode=["updates", "custom"]):
@@ -1002,6 +1021,8 @@ With any stream mode other than the default `"values"`, `invoke(..., stream_mode
 
 This separates state from interrupt metadata. With v1, interrupts are embedded in the returned dict under `__interrupt__`:
 
+**v2 (new)**
+
 ```python
 config = {"configurable": {"thread_id": "thread-1"}}
 result = graph.invoke(inputs, config=config, version="v2")
@@ -1010,6 +1031,8 @@ if result.interrupts:
     print(result.interrupts[0].value)
     graph.invoke(Command(resume=True), config=config, version="v2")
 ```
+
+**v1 (current default)**
 
 ```python
 config = {"configurable": {"thread_id": "thread-1"}}
@@ -1135,7 +1158,7 @@ async for chunk in graph.astream(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

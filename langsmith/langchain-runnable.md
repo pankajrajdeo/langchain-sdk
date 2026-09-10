@@ -1,7 +1,15 @@
+---
+title: "How to evaluate a runnable"
+description: "langchain: Python and JS/TS Runnable: Python and JS/TS"
+source: "https://docs.langchain.com/langsmith/langchain-runnable"
+category: "docs"
+tags: [docs, langsmith, langchain-runnable]
+---
+
 # How to evaluate a runnable
 
 > [!NOTE]
-> * `langchain`: [Python](../langchain/overview.md) and [JS/TS](https://docs.langchain.com/oss/javascript/langchain/overview)
+> * `langchain`: [Python](../langchain/overview.md) and [JS/TS](../javascript/langchain/overview.md)
 > * Runnable: [Python](https://reference.langchain.com/python/langchain_core/runnables/) and [JS/TS](https://reference.langchain.com/javascript/classes/_langchain_core.runnables.Runnable.html)
 
 `langchain` [`Runnable`](https://reference.langchain.com/python/langchain_core/runnables/) objects (such as chat models, retrievers, chains, etc.) can be passed directly into `evaluate()` / `aevaluate()`.
@@ -10,15 +18,21 @@
 
 Let's define a simple chain to evaluate. First, install all the required packages:
 
+**Python**
+
 ```bash
 pip install -U langsmith langchain[openai]
 ```
+
+**TypeScript**
 
 ```bash
 yarn add langsmith @langchain/openai
 ```
 
 Now define a chain:
+
+**Python**
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -39,6 +53,8 @@ model = init_chat_model("gpt-5.5")
 chain = prompt | model | StrOutputParser()
 ```
 
+**TypeScript**
+
 ```typescript
 import { ChatOpenAI } from "@langchain/openai";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
@@ -57,6 +73,8 @@ const chain = prompt.pipe(chatModel).pipe(outputParser);
 ## Evaluate
 
 To evaluate our chain we can pass it directly to the `evaluate()` / `aevaluate()` method. Note that the input variables of the chain must match the keys of the example inputs. In this case, the example inputs should have the form `{"text": "..."}`.
+
+**Python**
 
 ```python
 import asyncio
@@ -90,6 +108,8 @@ async def main():
 asyncio.run(main())
 ```
 
+**TypeScript**
+
 ```typescript
 import { evaluate } from "langsmith/evaluation";
 import { Client } from "langsmith";
@@ -119,7 +139,7 @@ The runnable is traced appropriately for each output.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langchain-runnable.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

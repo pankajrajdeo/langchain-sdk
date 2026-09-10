@@ -1,8 +1,18 @@
+---
+title: "Delete hub environments model"
+description: "Deletes the hub environments configuration. Tenant reverts to defaults."
+source: "https://docs.langchain.com/langsmith/smith-api/hub_environments/delete-hub-environments-model"
+category: "docs"
+tags: [docs, langsmith, smith-api, hub_environments, delete-hub-environments-model]
+---
+
 # Delete hub environments model
 
 > Deletes the hub environments configuration. Tenant reverts to defaults.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/hub/environments/{id}**
 
 ````yaml
 openapi: 3.1.0

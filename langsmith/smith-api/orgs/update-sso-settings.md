@@ -1,8 +1,18 @@
+---
+title: "Update SSO settings"
+description: "Update SSO provider settings defaults for the current organization."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/update-sso-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, update-sso-settings]
+---
+
 # Update SSO settings
 
 > Update SSO provider settings defaults for the current organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/orgs/current/sso-settings/{id}**
 
 ````yaml
 openapi: 3.1.0

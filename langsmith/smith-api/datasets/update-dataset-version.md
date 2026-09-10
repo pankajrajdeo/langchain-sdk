@@ -1,8 +1,18 @@
+---
+title: "Update dataset version"
+description: "Set a tag on a dataset version."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/update-dataset-version"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, update-dataset-version]
+---
+
 # Update dataset version
 
 > Set a tag on a dataset version.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/datasets/{dataset_id}/tags**
 
 ````yaml
 openapi: 3.1.0

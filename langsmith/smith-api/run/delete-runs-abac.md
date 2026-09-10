@@ -1,8 +1,18 @@
+---
+title: "Delete runs abac"
+description: "Delete specific runs by trace IDs."
+source: "https://docs.langchain.com/langsmith/smith-api/run/delete-runs-abac"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, delete-runs-abac]
+---
+
 # Delete runs abac
 
 > Delete specific runs by trace IDs.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/delete/traces**
 
 ````yaml
 openapi: 3.1.0

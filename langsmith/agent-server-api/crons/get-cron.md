@@ -1,8 +1,18 @@
+---
+title: "Get Cron"
+description: "Get a cron by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/crons/get-cron"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, crons, get-cron]
+---
+
 # Get Cron
 
 > Get a cron by ID.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /runs/crons/{cron_id}**
 
 ````yaml
 openapi: 3.1.0

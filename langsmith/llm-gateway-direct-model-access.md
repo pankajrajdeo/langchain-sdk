@@ -1,3 +1,11 @@
+---
+title: "Direct model access"
+description: "Access provider APIs directly through provider-specific LLM Gateway paths without using the gateway standardization layer."
+source: "https://docs.langchain.com/langsmith/llm-gateway-direct-model-access"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-direct-model-access]
+---
+
 # Direct model access
 
 > Access provider APIs directly through provider-specific LLM Gateway paths without using the gateway standardization layer.
@@ -46,6 +54,8 @@ export GOOGLE_API_KEY="$LANGSMITH_API_KEY"
 
 The gateway resolves the actual provider key from your workspace's Provider Secrets, so the provider key does not need to be stored locally.
 
+**OpenAI SDK**
+
 ```python
 import os
 
@@ -61,6 +71,8 @@ response = client.chat.completions.create(
 )
 print(response.choices[0].message.content)
 ```
+
+**Anthropic SDK**
 
 ```python
 import os
@@ -125,7 +137,7 @@ If your LangSmith account is on a regional instance, use the corresponding [regi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-direct-model-access.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

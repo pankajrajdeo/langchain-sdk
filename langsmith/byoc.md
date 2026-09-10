@@ -1,3 +1,11 @@
+---
+title: "Bring Your Own Cloud (BYOC)"
+description: "Deploy LangSmith services and store data in your own cloud environment while LangChain operates, scales, and upgrades the infrastructure."
+source: "https://docs.langchain.com/langsmith/byoc"
+category: "docs"
+tags: [docs, langsmith, byoc]
+---
+
 # Bring Your Own Cloud (BYOC)
 
 > Deploy LangSmith services and store data in your own cloud environment while LangChain operates, scales, and upgrades the infrastructure.
@@ -66,7 +74,7 @@ Before LangChain can provision a data plane, you need the following:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

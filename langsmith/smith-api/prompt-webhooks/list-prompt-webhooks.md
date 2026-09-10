@@ -1,8 +1,18 @@
+---
+title: "List prompt webhooks"
+description: "List all prompt webhooks for the current tenant."
+source: "https://docs.langchain.com/langsmith/smith-api/prompt-webhooks/list-prompt-webhooks"
+category: "docs"
+tags: [docs, langsmith, smith-api, prompt-webhooks, list-prompt-webhooks]
+---
+
 # List prompt webhooks
 
 > List all prompt webhooks for the current tenant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/prompt-webhooks**
 
 ````yaml
 openapi: 3.1.0

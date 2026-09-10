@@ -1,3 +1,11 @@
+---
+title: "Configure prompt settings"
+description: "The Playground enables you to control various settings for your prompts. The Prompt Settings window contains:"
+source: "https://docs.langchain.com/langsmith/managing-model-configurations"
+category: "docs"
+tags: [docs, langsmith, managing-model-configurations]
+---
+
 # Configure prompt settings
 
 The [Playground](prompt-engineering-concepts.md#playground) enables you to control various settings for your prompts. The **Prompt Settings** window contains:
@@ -80,7 +88,7 @@ The **Prompt Format** tab allows you to specify:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managing-model-configurations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

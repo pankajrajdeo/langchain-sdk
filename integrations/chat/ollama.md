@@ -1,3 +1,11 @@
+---
+title: "ChatOllama integration"
+description: "Integrate with the ChatOllama chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/ollama"
+category: "docs"
+tags: [docs, integrations, chat, ollama]
+---
+
 # ChatOllama integration
 
 > Integrate with the ChatOllama chat model using LangChain Python.
@@ -342,7 +350,7 @@ For detailed documentation of all `ChatOllama` features and configurations head 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

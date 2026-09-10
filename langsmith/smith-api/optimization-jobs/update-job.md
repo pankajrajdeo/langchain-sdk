@@ -1,8 +1,18 @@
+---
+title: "Update job"
+description: "Replace an existing prompt optimization job with a new, modified job."
+source: "https://docs.langchain.com/langsmith/smith-api/optimization-jobs/update-job"
+category: "docs"
+tags: [docs, langsmith, smith-api, optimization-jobs, update-job]
+---
+
 # Update job
 
 > Replace an existing prompt optimization job with a new, modified job.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/repos/{owner}/{repo}/optimization-jobs/{job_id}**
 
 ````yaml
 openapi: 3.1.0

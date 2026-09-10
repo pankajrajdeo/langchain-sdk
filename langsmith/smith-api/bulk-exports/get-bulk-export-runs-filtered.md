@@ -1,8 +1,18 @@
+---
+title: "Get bulk export runs filtered"
+description: "Get bulk export runs for exports that were created from a scheduled bulk export"
+source: "https://docs.langchain.com/langsmith/smith-api/bulk-exports/get-bulk-export-runs-filtered"
+category: "docs"
+tags: [docs, langsmith, smith-api, bulk-exports, get-bulk-export-runs-filtered]
+---
+
 # Get bulk export runs filtered
 
 > Get bulk export runs for exports that were created from a scheduled bulk export
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/bulk-exports/runs**
 
 ````yaml
 openapi: 3.1.0

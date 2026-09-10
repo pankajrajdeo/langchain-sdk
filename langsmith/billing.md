@@ -1,3 +1,11 @@
+---
+title: "Manage billing in your account"
+description: "This page describes how to manage billing for your LangSmith organization:"
+source: "https://docs.langchain.com/langsmith/billing"
+category: "docs"
+tags: [docs, langsmith, billing]
+---
+
 # Manage billing in your account
 
 This page describes how to manage billing for your LangSmith organization:
@@ -182,7 +190,7 @@ If you have questions about further managing your spend, please contact support 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

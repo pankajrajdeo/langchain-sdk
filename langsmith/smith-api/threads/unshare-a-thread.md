@@ -1,3 +1,11 @@
+---
+title: "Unshare a thread"
+description: "Deletes the share token for a thread. Idempotent: returns 204 whether or not a share token existed. Deliberately does not verify the thread still exists."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/unshare-a-thread"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, unshare-a-thread]
+---
+
 # Unshare a thread
 
 > Deletes the share token for a thread. Idempotent: returns 204
@@ -5,6 +13,8 @@ whether or not a share token existed. Deliberately does not
 verify the thread still exists.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v2/threads/{thread_id}/share**
 
 ````yaml
 openapi: 3.1.0
@@ -182,8 +192,8 @@ paths:
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
       responses:
         '204':

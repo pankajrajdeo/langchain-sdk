@@ -1,3 +1,11 @@
+---
+title: "Data storage and privacy"
+description: "This document describes how data is processed in the LangGraph CLI and the Agent Server for both the in-memory server (langgraph dev) and the local Docker server (langgraph up). It also describes..."
+source: "https://docs.langchain.com/langsmith/data-storage-and-privacy"
+category: "docs"
+tags: [docs, langsmith, data-storage-and-privacy]
+---
+
 # Data storage and privacy
 
 This document describes how data is processed in the LangGraph CLI and the Agent Server for both the in-memory server (`langgraph dev`) and the local Docker server (`langgraph up`). It also describes what data is tracked when interacting with the hosted Studio frontend.
@@ -65,7 +73,7 @@ In summary, you can opt-out of server-side telemetry by turning off CLI analytic
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-storage-and-privacy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

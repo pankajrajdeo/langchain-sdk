@@ -1,3 +1,11 @@
+---
+title: "Manage prompts programmatically"
+description: "You can use the LangSmith Python, TypeScript, and Java SDKs to manage prompts programmatically."
+source: "https://docs.langchain.com/langsmith/manage-prompts-programmatically"
+category: "docs"
+tags: [docs, langsmith, manage-prompts-programmatically]
+---
+
 # Manage prompts programmatically
 
 You can use the LangSmith Python, TypeScript, and Java SDKs to manage prompts programmatically.
@@ -11,17 +19,25 @@ In Python, you can directly use the LangSmith SDK (*recommended, full functional
 
 In TypeScript, you must use the LangChain npm package for pulling prompts (it also allows pushing). For all other functionality, use the LangSmith package.
 
+**pip**
+
 ```bash
 pip install -U langsmith # version >= 0.1.99
 ```
+
+**uv**
 
 ```bash
 uv add langsmith  # version >= 0.1.99
 ```
 
+**TypeScript**
+
 ```bash
 yarn add langsmith langchain # langsmith version >= 0.1.99 and langchain version >= 0.2.14
 ```
+
+**Java/Kotlin (Gradle)**
 
 ```kotlin
 implementation("com.langchain.smith:langsmith-java:0.1.0-beta.4")
@@ -46,6 +62,8 @@ export LANGSMITH_API_KEY="lsv2_..."
 
 To create a new prompt or update an existing prompt, you can use the `push prompt` method.
 
+**Python**
+
 ```python
 from langsmith import Client
 from langchain_core.prompts import ChatPromptTemplate
@@ -57,6 +75,8 @@ url = client.push_prompt("joke-generator", object=prompt)
 print(url)
 ```
 
+**LangChain (Python)**
+
 ```python
 from langchain_classic import hub as prompts
 from langchain_core.prompts import ChatPromptTemplate
@@ -66,6 +86,8 @@ url = prompts.push("joke-generator", prompt)
 # url is a link to the prompt in the UI
 print(url)
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -78,6 +100,8 @@ const url = hub.push("joke-generator", {
 // url is a link to the prompt in the UI
 console.log(url);
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -118,6 +142,8 @@ client.commits().create(
 
 You can also push a prompt as a RunnableSequence of a prompt and a model. This is useful for storing the model configuration you want to use with this prompt. The provider must be supported by the Playground, see [supported model providers](playground-model-providers.md).
 
+**Python**
+
 ```python
 from langsmith import Client
 from langchain_core.prompts import ChatPromptTemplate
@@ -129,6 +155,8 @@ prompt = ChatPromptTemplate.from_template("tell me a joke about {topic}")
 chain = prompt | model
 client.push_prompt("joke-generator-with-model", object=chain)
 ```
+
+**LangChain (Python)**
 
 ```python
 from langchain_classic import hub as prompts
@@ -142,6 +170,8 @@ url = prompts.push("joke-generator-with-model", chain)
 # url is a link to the prompt in the UI
 print(url)
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -164,6 +194,8 @@ A `StructuredPrompt` combines a prompt template with an output schema, ensuring 
 
 Push the structured prompt on its own when you want to store the template and schema independently of any model configuration.
 
+**Python**
+
 ```python
 from langsmith import Client
 from langchain_core.prompts.structured import StructuredPrompt
@@ -184,6 +216,8 @@ client = Client()
 url = client.push_prompt("sentiment-evaluator", object=prompt)
 print(url)
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -216,6 +250,8 @@ console.log(url);
 ### With a model
 
 Push the structured prompt as a RunnableSequence with a model to store the full pipeline, including model configuration, in the hub.
+
+**Python**
 
 ```python
 from langsmith import Client
@@ -250,6 +286,8 @@ To pull a **private prompt** you do not need to specify the owner handle (though
 
 To pull a **public prompt** from the LangChain Hub, you need to specify the handle of the prompt's author.
 
+**Python**
+
 ```python
 from langsmith import Client
 from langchain_openai import ChatOpenAI
@@ -261,6 +299,8 @@ chain = prompt | model
 chain.invoke({"topic": "cats"})
 ```
 
+**LangChain (Python)**
+
 ```python
 from langchain_classic import hub as prompts
 from langchain_openai import ChatOpenAI
@@ -271,6 +311,8 @@ chain = prompt | model
 chain.invoke({"topic": "cats"})
 ```
 
+**TypeScript**
+
 ```typescript
 import * as hub from "langchain/hub";
 import { ChatOpenAI } from "@langchain/openai";
@@ -280,6 +322,8 @@ const model = new ChatOpenAI({ model: "gpt-5.4-mini" });
 const chain = prompt.pipe(model);
 await chain.invoke({"topic": "cats"});
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -299,6 +343,8 @@ PromptValue formattedPrompt = prompt.invoke(Map.of("topic", "cats"));
 
 Similar to pushing a prompt, you can also pull a prompt as a RunnableSequence of a prompt and a model. Just specify include\_model when pulling the prompt. If the stored prompt includes a model, it will be returned as a RunnableSequence. Make sure you have the proper environment variables set for the model you are using.
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -307,12 +353,16 @@ chain = client.pull_prompt("joke-generator-with-model", include_model=True)
 chain.invoke({"topic": "cats"})
 ```
 
+**LangChain (Python)**
+
 ```python
 from langchain_classic import hub as prompts
 
 chain = prompts.pull("joke-generator-with-model", include_model=True)
 chain.invoke({"topic": "cats"})
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -324,17 +374,25 @@ await chain.invoke({"topic": "cats"});
 
 When pulling a prompt, you can also specify a specific commit hash or [commit tag](manage-prompts.md#commit-tags) to pull a specific version of the prompt.
 
+**Python**
+
 ```python
 prompt = client.pull_prompt("joke-generator:12344e88")
 ```
+
+**LangChain (Python)**
 
 ```python
 prompt = prompts.pull("joke-generator:12344e88")
 ```
 
+**TypeScript**
+
 ```typescript
 const prompt = await hub.pull("joke-generator:12344e88")
 ```
+
+**Java**
 
 ```java
 String commitHash = "12344e88";
@@ -343,17 +401,25 @@ Prompt promptAtCommit = promptClient.pull("joke-generator:" + commitHash);
 
 To pull a public prompt from the LangChain Hub, you need to specify the handle of the prompt's author.
 
+**Python**
+
 ```python
 prompt = client.pull_prompt("efriis/my-first-prompt")
 ```
+
+**LangChain (Python)**
 
 ```python
 prompt = prompts.pull("efriis/my-first-prompt")
 ```
 
+**TypeScript**
+
 ```typescript
 const prompt = await hub.pull("efriis/my-first-prompt")
 ```
+
+**Java**
 
 ```java
 Prompt publicPrompt = promptClient.pull("efriis/my-first-prompt");
@@ -382,6 +448,8 @@ export LANGSMITH_GATEWAY="https://eu.gateway.smith.langchain.com"
 > If you need to use a different API key for gateway calls than your default `LANGSMITH_API_KEY`, set `LANGSMITH_GATEWAY_API_KEY` as an override. It must be a workspace-scoped key with the `gateway:invoke` permission.
 
 Once the environment variables are set, pull and invoke a prompt with a model as normal:
+
+**Python**
 
 ```python
 from langsmith import Client
@@ -425,6 +493,8 @@ When refreshing, the global cache will use the last client that requested a give
 
 By default, all clients use the global prompt cache. No configuration is needed:
 
+**Python**
+
 ```python
 from langsmith import Client
 # Obtain a reference to the global cache just for logging metrics
@@ -444,6 +514,8 @@ print(f"Cache hits: {prompt_cache_singleton.metrics.hits}")
 print(f"Cache misses: {prompt_cache_singleton.metrics.misses}")
 print(f"Hit rate: {prompt_cache_singleton.metrics.hit_rate:.1%}")
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -466,6 +538,8 @@ console.log(`Hit rate: ${(promptCacheSingleton.hitRate * 100).toFixed(1)}%`);
 ### Configuring the global cache
 
 You can configure the global prompt cache that all clients use by default. This is useful when you want to customize caching behavior across your entire application:
+
+**Python**
 
 ```python
 from langsmith import Client
@@ -494,6 +568,8 @@ print(f"Global cache hits: {prompt_cache_singleton.metrics.hits}")
 print(f"Global cache misses: {prompt_cache_singleton.metrics.misses}")
 ```
 
+**TypeScript**
+
 ```typescript
 import * as hub from "langchain/hub";
 import {
@@ -521,6 +597,8 @@ console.log(`Global cache misses: ${promptCacheSingleton.metrics.misses}`);
 
 To disable caching for a specific client, pass `disable_prompt_cache=True`. You can also configure a max size of zero globally:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -530,6 +608,8 @@ client = Client(disable_prompt_cache=True)
 # Every pull will fetch from the API
 prompt = client.pull_prompt("joke-generator")
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -546,10 +626,14 @@ const prompt = await hub.pull("joke-generator");
 
 To bypass the cache and fetch a fresh prompt from the API for an individual request, use the `skip_cache` parameter:
 
+**Python**
+
 ```python
 # Force a fresh fetch, ignoring any cached version
 prompt = client.pull_prompt("joke-generator", skip_cache=True)
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -565,6 +649,8 @@ This is useful when you need to ensure you have the latest version of a prompt, 
 For environments with limited or no network connectivity, you can pre-populate the cache and use it offline. Set `ttl_seconds` to `None` (Python) or `null` (TypeScript) to prevent cache entries from expiring and disable background refresh.
 
 **Step 1: Export your prompts to a cache file (while online)**
+
+**Python**
 
 ```python
 from langsmith import Client
@@ -582,6 +668,8 @@ client.pull_prompt("prompt-3")
 prompt_cache_singleton.dump("prompts_cache.json")
 ```
 
+**TypeScript**
+
 ```typescript
 import * as hub from "langchain/hub";
 import { promptCacheSingleton } from "langsmith";
@@ -598,6 +686,8 @@ promptCacheSingleton.dump("prompts_cache.json");
 ```
 
 **Step 2: Load the cache file in your offline environment**
+
+**Python**
 
 ```python
 from langsmith import Client
@@ -618,6 +708,8 @@ client = Client()
 # Uses cached version without any API calls
 prompt = client.pull_prompt("prompt-1")
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -640,6 +732,8 @@ const prompt = await hub.pull("prompt-1");
 
 The cache supports several operations for managing cached prompts:
 
+**Python**
+
 ```python
 from langsmith import Client
 from langsmith.prompt_cache import prompt_cache_singleton
@@ -661,6 +755,8 @@ if prompt_cache_singleton._refresh_thread is not None:
     print("Background refresh is active")
 ```
 
+**TypeScript**
+
 ```typescript
 import { promptCacheSingleton } from "langsmith";
 
@@ -678,9 +774,13 @@ promptCacheSingleton.resetMetrics();
 
 You can manually call `stop()` to stop the background refresh task:
 
+**Python**
+
 ```python
 prompt_cache_singleton.stop()
 ```
+
+**TypeScript**
 
 ```typescript
 promptCacheSingleton.stop();
@@ -697,13 +797,19 @@ These conversion methods rely on logic from within LangChain integration package
 
 ### OpenAI
 
+**Python**
+
 ```bash
 pip install -U langchain_openai
 ```
 
+**TypeScript**
+
 ```bash
 yarn add @langchain/openai @langchain/core # @langchain/openai version >= 0.3.2
 ```
+
+**Python**
 
 ```python
 from openai import OpenAI
@@ -720,6 +826,8 @@ prompt_value = prompt.invoke({"topic": "cats"})
 openai_payload = convert_prompt_to_openai_format(prompt_value)
 openai_response = oai_client.chat.completions.create(**openai_payload)
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -738,6 +846,8 @@ const openAIResponse = await openAIClient.chat.completions.create({
   messages,
 });
 ```
+
+**Java**
 
 ```java
 import static com.langchain.smith.prompts.PromptConverters.convertToOpenAIParams;
@@ -768,13 +878,19 @@ ChatCompletion completion = openai.chat().completions().create(
 
 ### Anthropic
 
+**Python**
+
 ```bash
 pip install -U langchain_anthropic
 ```
 
+**TypeScript**
+
 ```bash
 yarn add @langchain/anthropic @langchain/core # @langchain/anthropic version >= 0.3.3
 ```
+
+**Python**
 
 ```python
 from anthropic import Anthropic
@@ -791,6 +907,8 @@ prompt_value = prompt.invoke({"topic": "cats"})
 anthropic_payload = convert_prompt_to_anthropic_format(prompt_value)
 anthropic_response = anthropic_client.messages.create(**anthropic_payload)
 ```
+
+**TypeScript**
 
 ```typescript
 import * as hub from "langchain/hub";
@@ -812,6 +930,8 @@ const anthropicResponse = await anthropicClient.messages.create({
   stream: false,
 });
 ```
+
+**Java**
 
 ```java
 import static com.langchain.smith.prompts.PromptConverters.convertToAnthropicParams;
@@ -845,6 +965,8 @@ Message message = anthropic.messages().create(
 
 You can also list, delete, and like/unlike prompts using the `list prompts`, `delete prompt`, `like prompt` and `unlike prompt` methods. See the [LangSmith SDK client](https://github.com/langchain-ai/langsmith-sdk) for extensive documentation on these methods.
 
+**Python**
+
 ```python
 # List all prompts in my workspace
 prompts = client.list_prompts()
@@ -861,6 +983,8 @@ client.like_prompt("efriis/my-first-prompt")
 # Unlike a prompt
 client.unlike_prompt("efriis/my-first-prompt")
 ```
+
+**TypeScript**
 
 ```typescript
 // List all prompts in my workspace
@@ -885,6 +1009,8 @@ client.likePrompt("efriis/my-first-prompt");
 // Unlike a prompt
 client.unlikePrompt("efriis/my-first-prompt");
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -922,7 +1048,7 @@ client.repos().delete(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-prompts-programmatically.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Get dataset version"
+description: "Get dataset version by as_of or exact tag."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/get-dataset-version"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, get-dataset-version]
+---
+
 # Get dataset version
 
 > Get dataset version by as_of or exact tag.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}/version**
 
 ````yaml
 openapi: 3.1.0

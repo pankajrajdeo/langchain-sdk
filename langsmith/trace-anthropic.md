@@ -1,3 +1,11 @@
+---
+title: "Trace Anthropic applications"
+description: "The Anthropic wrapper methods in Python (wrap_anthropic) and Typescript (wrapAnthropic) allow you to wrap your Anthropic client in order to log traces automatically. Using the wrapper ensures that..."
+source: "https://docs.langchain.com/langsmith/trace-anthropic"
+category: "docs"
+tags: [docs, langsmith, trace-anthropic]
+---
+
 # Trace Anthropic applications
 
 The Anthropic wrapper methods in Python ([`wrap_anthropic`](https://reference.langchain.com/python/langsmith/wrappers/_anthropic/wrap_anthropic)) and Typescript ([`wrapAnthropic`](https://reference.langchain.com/javascript/functions/langsmith.wrappers_anthropic.wrapAnthropic.html)) allow you to wrap your Anthropic client in order to log traces automatically. Using the wrapper ensures that messages, including tool calls and multimodal content blocks will be rendered nicely in LangSmith. The wrapper works seamlessly alongside the `@traceable` decorator (Python) or `traceable` function (TypeScript), so you can trace your Anthropic calls with the wrapper and trace other parts of your application with the decorator or function.
@@ -7,11 +15,13 @@ The wrapper also supports [Claude managed agents](https://docs.anthropic.com/en/
 > [!NOTE]
 > The `LANGSMITH_TRACING` environment variable must be set to `'true'` in order for traces to be logged to LangSmith, even when using `wrap_anthropic` or `wrapAnthropic`. This allows you to toggle tracing on and off without changing your code.
 >
-> Additionally, you will need to set the `LANGSMITH_API_KEY` environment variable to your API key (see [Setup](https://docs.langchain.com/) for more information).
+> Additionally, you will need to set the `LANGSMITH_API_KEY` environment variable to your API key (see [Setup](../home.md) for more information).
 >
 > If your LangSmith API key is linked to multiple workspaces, set the `LANGSMITH_WORKSPACE_ID` environment variable to specify which workspace to use.
 >
 > By default, the traces will be logged to a project named `default`. To log traces to a different project, see [Log traces to a specific project](log-traces-to-project.md).
+
+**Python**
 
 ```python
 import anthropic
@@ -40,6 +50,8 @@ def chat_pipeline(question: str):
 
 chat_pipeline("Can you summarize this morning's meetings?")
 ```
+
+**TypeScript**
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -72,6 +84,8 @@ await chatPipeline("Can you summarize this morning's meetings?");
 ## Trace Claude managed agents
 
 The `wrapAnthropic` wrapper also supports [Claude managed agents](https://docs.anthropic.com/en/docs/claude-code/managed-agents) (TypeScript only). Wrap the Anthropic client with `wrapAnthropic`. The wrapper will automatically trace agent creation, session creation, and all events that flow through the session.
+
+**TypeScript**
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -139,7 +153,7 @@ for await (const event of stream) {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

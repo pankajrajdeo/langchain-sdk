@@ -1,8 +1,18 @@
+---
+title: "Create playground settings"
+description: "Create playground settings."
+source: "https://docs.langchain.com/langsmith/smith-api/playground-settings/create-playground-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, playground-settings, create-playground-settings]
+---
+
 # Create playground settings
 
 > Create playground settings.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/playground-settings**
 
 ````yaml
 openapi: 3.1.0

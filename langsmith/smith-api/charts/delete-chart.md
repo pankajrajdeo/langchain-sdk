@@ -1,8 +1,18 @@
+---
+title: "Delete chart"
+description: "Delete a chart."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/delete-chart"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, delete-chart]
+---
+
 # Delete chart
 
 > Delete a chart.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/charts/{chart_id}**
 
 ````yaml
 openapi: 3.1.0

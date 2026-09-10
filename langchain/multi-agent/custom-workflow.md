@@ -1,3 +1,11 @@
+---
+title: "Custom workflow"
+description: "In the custom workflow architecture, you define your own bespoke execution flow using LangGraph. You have complete control over the graph structure—including sequential steps, conditional branches..."
+source: "https://docs.langchain.com/oss/python/langchain/multi-agent/custom-workflow"
+category: "docs"
+tags: [docs, langchain, multi-agent, custom-workflow]
+---
+
 # Custom workflow
 
 In the **custom workflow** architecture, you define your own bespoke execution flow using [LangGraph](../../langgraph/overview.md). You have complete control over the graph structure—including sequential steps, conditional branches, loops, and parallel execution.
@@ -193,7 +201,7 @@ print(result["answer"])
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/custom-workflow.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

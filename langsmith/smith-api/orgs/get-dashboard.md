@@ -1,6 +1,16 @@
+---
+title: "Get dashboard"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/dashboard"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/get-dashboard"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, get-dashboard]
+---
+
 # Get dashboard
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/dashboard**
 
 ````yaml
 openapi: 3.1.0

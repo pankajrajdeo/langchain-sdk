@@ -1,8 +1,18 @@
+---
+title: "List repos"
+description: "Get all repos."
+source: "https://docs.langchain.com/langsmith/smith-api/repos/list-repos"
+category: "docs"
+tags: [docs, langsmith, smith-api, repos, list-repos]
+---
+
 # List repos
 
 > Get all repos.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/repos**
 
 ````yaml
 openapi: 3.1.0

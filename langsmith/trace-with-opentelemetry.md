@@ -1,3 +1,11 @@
+---
+title: "Trace with OpenTelemetry"
+description: "Configure OpenTelemetry tracing in LangSmith, including LANGSMITH_OTEL_ENABLED and OTEL fanout with the OpenTelemetry Collector."
+source: "https://docs.langchain.com/langsmith/trace-with-opentelemetry"
+category: "docs"
+tags: [docs, langsmith, trace-with-opentelemetry]
+---
+
 # Trace with OpenTelemetry
 
 > Configure OpenTelemetry tracing in LangSmith, including LANGSMITH_OTEL_ENABLED and OTEL fanout with the OpenTelemetry Collector.
@@ -44,6 +52,8 @@ If you're using LangChain or LangGraph, use the built-in integration to trace yo
 
 1. Install the LangSmith package with OpenTelemetry support:
 
+**pip**
+
 ```bash
    pip install "langsmith[otel]"
    pip install langchain
@@ -53,6 +63,8 @@ If you're using LangChain or LangGraph, use the built-in integration to trace yo
 >    Requires Python SDK version `langsmith>=0.3.18`. We recommend `langsmith>=0.4.25` to benefit from important OpenTelemetry fixes.
 
 2. In your LangChain/LangGraph App, enable the OpenTelemetry integration by setting the `LANGSMITH_OTEL_ENABLED` environment variable:
+
+**Shell**
 
 ```bash
    LANGSMITH_OTEL_ENABLED=true
@@ -87,6 +99,8 @@ For non-LangChain applications or custom instrumentation, you can trace your app
 
 1. Install the OpenTelemetry SDK, OpenTelemetry exporter packages, as well as the OpenAI package:
 
+**pip**
+
 ```bash
    pip install openai
    pip install opentelemetry-sdk
@@ -94,6 +108,8 @@ For non-LangChain applications or custom instrumentation, you can trace your app
 ```
 
 2. Setup environment variables for the endpoint, substitute your specific values:
+
+**Shell**
 
 ```bash
    OTEL_EXPORTER_OTLP_ENDPOINT=https://api.smith.langchain.com/otel
@@ -107,6 +123,8 @@ For non-LangChain applications or custom instrumentation, you can trace your app
 >    If you're self-hosting LangSmith, replace the base endpoint with your LangSmith api endpoint and append `/api/v1`. For example: `OTEL_EXPORTER_OTLP_ENDPOINT=https://ai-company.com/api/v1/otel`
 
    Optional: Specify a custom project name other than "default":
+
+**Shell**
 
 ```bash
    OTEL_EXPORTER_OTLP_ENDPOINT=https://api.smith.langchain.com/otel
@@ -825,7 +843,7 @@ if __name__ == "__main__":
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-opentelemetry.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

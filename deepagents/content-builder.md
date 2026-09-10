@@ -1,3 +1,11 @@
+---
+title: "Build a content builder agent"
+description: "Build a content writing agent with brand memory, skills, subagents, and image generation"
+source: "https://docs.langchain.com/oss/python/deepagents/content-builder"
+category: "docs"
+tags: [docs, deepagents, content-builder]
+---
+
 # Build a content builder agent
 
 > Build a content writing agent with brand memory, skills, subagents, and image generation
@@ -45,9 +53,13 @@ cd content-builder-agent
 ```
 
 ### Install dependencies
+**pip**
+
 ```bash
 pip install deepagents google-genai pillow pyyaml rich tavily-python langchain
 ```
+
+**uv**
 
 ```bash
 uv init
@@ -632,6 +644,8 @@ def load_subagents(config_path: Path) -> list:
 ### Create the agent
 When creating the deep agent with [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent), pass memory paths, the skills directory, image tools, subagents from YAML, and a [FilesystemBackend](backends.md) rooted at the example directory so paths like `./AGENTS.md` and `./skills/` resolve correctly.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -647,6 +661,8 @@ def create_content_writer():
         backend=FilesystemBackend(root_dir=EXAMPLE_DIR),
     )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -664,6 +680,8 @@ def create_content_writer():
     )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -679,6 +697,8 @@ def create_content_writer():
         backend=FilesystemBackend(root_dir=EXAMPLE_DIR),
     )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -696,6 +716,8 @@ def create_content_writer():
     )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -712,6 +734,8 @@ def create_content_writer():
     )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
@@ -727,6 +751,8 @@ def create_content_writer():
         backend=FilesystemBackend(root_dir=EXAMPLE_DIR),
     )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -777,9 +803,13 @@ if __name__ == "__main__":
 
 From the project directory you can invoke the agent without passing an argument or by passing the prompt as an argument:
 
+**Default**
+
 ```bash
 python content_writer.py
 ```
+
+**With prompt**
 
 ```bash
 python content_writer.py Write a blog post about prompt engineering
@@ -816,7 +846,7 @@ Browse the complete [content-builder-agent example](https://github.com/langchain
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/content-builder.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

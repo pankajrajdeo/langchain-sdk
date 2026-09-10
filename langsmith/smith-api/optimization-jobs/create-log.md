@@ -1,8 +1,18 @@
+---
+title: "Create log"
+description: "Create a new log entry for a prompt optimization job."
+source: "https://docs.langchain.com/langsmith/smith-api/optimization-jobs/create-log"
+category: "docs"
+tags: [docs, langsmith, smith-api, optimization-jobs, create-log]
+---
+
 # Create log
 
 > Create a new log entry for a prompt optimization job.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/repos/{owner}/{repo}/optimization-jobs/{job_id}/logs**
 
 ````yaml
 openapi: 3.1.0

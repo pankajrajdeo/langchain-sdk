@@ -1,3 +1,11 @@
+---
+title: "Event streaming"
+description: "Stream real-time updates from LangChain agent runs"
+source: "https://docs.langchain.com/oss/python/langchain/event-streaming"
+category: "docs"
+tags: [docs, langchain, event-streaming]
+---
+
 # Event streaming
 
 > Stream real-time updates from LangChain agent runs
@@ -284,7 +292,7 @@ See [Build your own projection](../langgraph/event-streaming.md#build-your-own-p
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

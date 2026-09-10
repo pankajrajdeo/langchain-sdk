@@ -1,3 +1,11 @@
+---
+title: "Vector store integrations"
+description: "Integrate with vector stores using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/vectorstores"
+category: "docs"
+tags: [docs, integrations, vectorstores]
+---
+
 # Vector store integrations
 
 > Integrate with vector stores using LangChain Python.
@@ -110,9 +118,13 @@ vector_store.similarity_search(
 <details>
 <summary>OpenAI</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-openai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-openai
@@ -453,9 +465,13 @@ model = init_chat_model("deepseek-chat", model_provider="deepseek")
 <details>
 <summary>In-memory</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-core
 ```
+
+**uv**
 
 ```bash
 uv add langchain-core
@@ -471,6 +487,8 @@ vector_store = InMemoryVectorStore(embeddings)
 
 <details>
 <summary>Amazon OpenSearch</summary>
+
+**pip**
 
 ```bash
 pip install -qU boto3
@@ -504,9 +522,13 @@ vector_store = OpenSearchVectorSearch.from_documents(
 <details>
 <summary>Astra DB</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-astradb
 ```
+
+**uv**
 
 ```bash
 uv add langchain-astradb
@@ -529,9 +551,13 @@ vector_store = AstraDBVectorStore(
 <details>
 <summary>Azure Cosmos DB NoSQL</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-azure-cosmosdb azure-cosmos
 ```
+
+**uv**
 
 ```bash
 uv add langchain-azure-cosmosdb azure-cosmos
@@ -560,9 +586,13 @@ vector_search = AzureCosmosDBNoSqlVectorSearch.from_documents(
 <details>
 <summary>Azure Cosmos DB Mongo vCore</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-azure-ai pymongo
 ```
+
+**uv**
 
 ```bash
 uv add pymongo
@@ -586,9 +616,13 @@ vectorstore = AzureCosmosDBMongoVCoreVectorSearch.from_documents(
 <details>
 <summary>Chroma</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-chroma
 ```
+
+**uv**
 
 ```bash
 uv add langchain-chroma
@@ -609,9 +643,13 @@ vector_store = Chroma(
 <details>
 <summary>CockroachDB</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-cockroachdb
 ```
+
+**uv**
 
 ```bash
 uv add langchain-cockroachdb
@@ -671,9 +709,13 @@ vector_store = ElasticsearchStore(
 <details>
 <summary>Google AlloyDB</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-google-alloydb-pg
 ```
+
+**uv**
 
 ```bash
 uv add langchain-google-alloydb-pg
@@ -702,9 +744,13 @@ vector_store = AlloyDBVectorStore.create_sync(
 <details>
 <summary>Milvus</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-milvus
 ```
+
+**uv**
 
 ```bash
 uv add langchain-milvus
@@ -749,9 +795,13 @@ For more information, see the [MongoDB LangChain integration docs](https://www.m
 <details>
 <summary>PGVector</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-postgres
 ```
+
+**uv**
 
 ```bash
 uv add langchain-postgres
@@ -772,9 +822,13 @@ vector_store = PGVector(
 <details>
 <summary>PGVectorStore</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-postgres
 ```
+
+**uv**
 
 ```bash
 uv add langchain-postgres
@@ -799,9 +853,13 @@ vector_store = PGVectorStore.create_sync(
 <details>
 <summary>Pinecone</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-pinecone
 ```
+
+**uv**
 
 ```bash
 uv add langchain-pinecone
@@ -822,9 +880,13 @@ vector_store = PineconeVectorStore(embedding=embeddings, index=index)
 <details>
 <summary>Qdrant</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-qdrant
 ```
+
+**uv**
 
 ```bash
 uv add langchain-qdrant
@@ -856,9 +918,13 @@ vector_store = QdrantVectorStore(
 <details>
 <summary>Redis</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-redis
 ```
+
+**uv**
 
 ```bash
 uv add langchain-redis
@@ -882,9 +948,13 @@ vector_store = RedisVectorStore(embeddings=embeddings, config=config)
 <details>
 <summary>Oracle AI Database</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-oracledb
 ```
+
+**uv**
 
 ```bash
 uv add langchain-oracledb
@@ -918,9 +988,13 @@ vector_store = OracleVS(
 <details>
 <summary>turbopuffer</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-turbopuffer
 ```
+
+**uv**
 
 ```bash
 uv add langchain-turbopuffer
@@ -941,9 +1015,13 @@ vector_store = TurbopufferVectorStore(embedding=embeddings, namespace=ns)
 <details>
 <summary>Valkey</summary>
 
+**pip**
+
 ```bash
 pip install -qU "langchain-aws[valkey]"
 ```
+
+**uv**
 
 ```bash
 uv add langchain-aws --extra valkey
@@ -964,9 +1042,13 @@ vector_store = ValkeyVectorStore(
 <details>
 <summary>Weaviate</summary>
 
+**pip**
+
 ```bash
 pip install -qU langchain-weaviate
 ```
+
+**uv**
 
 ```bash
 uv add langchain-weaviate
@@ -1092,7 +1174,7 @@ vector_store = WeaviateVectorStore(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

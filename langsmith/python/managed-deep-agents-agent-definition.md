@@ -1,3 +1,11 @@
+---
+title: "Define a Managed Deep Agent"
+description: "Configure the model and core capabilities of a Managed Deep Agent."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-agent-definition]
+---
+
 # Define a Managed Deep Agent
 
 > Configure the model and core capabilities of a Managed Deep Agent.
@@ -22,6 +30,8 @@ Export the agent definition as a named `agent`.
 
 Use `define_deep_agent`:
 
+**OpenAI**
+
 ```python
 from managed_deepagents import define_deep_agent
 
@@ -31,6 +41,8 @@ agent = define_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from managed_deepagents import define_deep_agent
 
@@ -39,6 +51,8 @@ agent = define_deep_agent(
     model="anthropic:claude-sonnet-4-6",
 )
 ```
+
+**Google Gemini**
 
 ```python
 from managed_deepagents import define_deep_agent
@@ -70,6 +84,8 @@ Managed Deep Agents uses the name as the LangGraph assistant ID and the default 
 
 Set `model` to the chat model the agent uses. The simplest option is a `provider:model` string. Add the provider's API key to `.env` so the model works locally and in the deployment.
 
+**OpenAI**
+
 ```python
 from managed_deepagents import define_deep_agent
 
@@ -79,6 +95,8 @@ agent = define_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from managed_deepagents import define_deep_agent
 
@@ -87,6 +105,8 @@ agent = define_deep_agent(
     model="anthropic:claude-sonnet-4-6",
 )
 ```
+
+**Google Gemini**
 
 ```python
 from managed_deepagents import define_deep_agent
@@ -158,7 +178,7 @@ Configure the system prompt, skills, memory, sandbox, identity, channels, and sc
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-agent-definition.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

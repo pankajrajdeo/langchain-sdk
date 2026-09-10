@@ -1,6 +1,16 @@
+---
+title: "Claim pending organization invite"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/pending/{organization_id}/claim"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/claim-pending-organization-invite"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, claim-pending-organization-invite]
+---
+
 # Claim pending organization invite
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/pending/{organization_id}/claim**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "BYOC shared responsibility model"
+description: "How LangChain and your organization divide responsibility for a LangSmith BYOC deployment across operations, security, support, and compliance."
+source: "https://docs.langchain.com/langsmith/byoc-shared-responsibility"
+category: "docs"
+tags: [docs, langsmith, byoc-shared-responsibility]
+---
+
 # BYOC shared responsibility model
 
 > How LangChain and your organization divide responsibility for a LangSmith BYOC deployment across operations, security, support, and compliance.
@@ -61,7 +69,7 @@ The IAM permissions that scope LangChain access are described in [Cross-account 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-shared-responsibility.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

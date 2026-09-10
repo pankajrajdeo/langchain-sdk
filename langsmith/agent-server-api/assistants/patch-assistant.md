@@ -1,8 +1,18 @@
+---
+title: "Patch Assistant"
+description: "Update an assistant."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/patch-assistant"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, patch-assistant]
+---
+
 # Patch Assistant
 
 > Update an assistant.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json patch /assistants/{assistant_id}**
 
 ````yaml
 openapi: 3.1.0

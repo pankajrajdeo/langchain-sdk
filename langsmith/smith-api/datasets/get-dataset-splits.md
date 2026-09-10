@@ -1,6 +1,16 @@
+---
+title: "Get dataset splits"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}/splits"
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/get-dataset-splits"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, get-dataset-splits]
+---
+
 # Get dataset splits
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}/splits**
 
 ````yaml
 openapi: 3.1.0

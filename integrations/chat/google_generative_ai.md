@@ -1,3 +1,11 @@
+---
+title: "ChatGoogleGenerativeAI integration"
+description: "Integrate with the ChatGoogleGenerativeAI chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai"
+category: "docs"
+tags: [docs, integrations, chat, google_generative_ai]
+---
+
 # ChatGoogleGenerativeAI integration
 
 > Integrate with the ChatGoogleGenerativeAI chat model using LangChain Python.
@@ -277,9 +285,13 @@ ai_msg = model.invoke(messages)
 ai_msg
 ```
 
+**Gemini 3**
+
 ```plaintext
 AIMessage(content=[{'type': 'text', 'text': "J'adore la programmation.", 'extras': {'signature': 'EpoWCpc...'}}], additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-3.7-flash', 'safety_ratings': [], 'model_provider': 'google_genai'}, id='lc_run--fb732b64-1ab4-4a28-b93b-dcfb2a164a3d-0', usage_metadata={'input_tokens': 21, 'output_tokens': 779, 'total_tokens': 800, 'input_token_details': {'cache_read': 0}, 'output_token_details': {'reasoning': 772}})
 ```
+
+**Gemini 2.5**
 
 ```plaintext
 AIMessage(content="J'adore la programmation.", additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-2.5-flash', 'safety_ratings': []}, id='run-3b28d4b8-8a62-4e6c-ad4e-b53e6e825749-0', usage_metadata={'input_tokens': 20, 'output_tokens': 7, 'total_tokens': 27, 'input_token_details': {'cache_read': 0}})
@@ -351,6 +363,8 @@ Once uploaded, you can reference the file in any of the media-specific sections 
 
 Provide image inputs along with text using a [`HumanMessage`](https://reference.langchain.com/python/langchain-core/messages/human/HumanMessage) with a list content format.
 
+**Image URL**
+
 ```python
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -369,6 +383,8 @@ message = HumanMessage(
 response = model.invoke([message])
 ```
 
+**Chat Completions image_url format**
+
 ```python
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -383,6 +399,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Base64 encoded**
 
 ```python
 import base64
@@ -407,6 +425,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Uploaded file**
 
 ```python
 import time
@@ -444,6 +464,8 @@ Other supported image formats:
 
 Provide PDF file inputs along with text.
 
+**URL**
+
 ```python
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -461,6 +483,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Base64 encoded**
 
 ```python
 import base64
@@ -485,6 +509,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Uploaded file**
 
 ```python
 import time
@@ -518,6 +544,8 @@ response = model.invoke([message])
 
 Provide audio file inputs along with text.
 
+**URL**
+
 ```python
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -535,6 +563,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Base64 encoded**
 
 ```python
 import base64
@@ -559,6 +589,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Uploaded file**
 
 ```python
 import time
@@ -592,6 +624,8 @@ response = model.invoke([message])
 
 Provide video file inputs along with text.
 
+**Base64 encoded**
+
 ```python
 import base64
 from langchain.messages import HumanMessage
@@ -615,6 +649,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**Uploaded file**
 
 ```python
 import time
@@ -643,6 +679,8 @@ message = HumanMessage(
 )
 response = model.invoke([message])
 ```
+
+**YouTube URL**
 
 ```python
 from langchain.messages import HumanMessage
@@ -747,6 +785,8 @@ By default, image generation models may return both text and images (e.g. *"Ok! 
 
 You can request that the model only return images by setting the `response_modalities` parameter:
 
+**Instantiation**
+
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI, Modality
 
@@ -758,6 +798,8 @@ model = ChatGoogleGenerativeAI(
 # All invocations will return only images
 response = model.invoke("Generate a photorealistic image of a cuddly cat wearing a hat.")
 ```
+
+**Invocation**
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI, Modality
@@ -1062,6 +1104,8 @@ Google Gemini supports a variety of built-in tools, which can be bound to the mo
 
 See [Gemini docs](https://ai.google.dev/gemini-api/docs/grounding/search-suggestions) for detail.
 
+**Bind to model**
+
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -1072,6 +1116,8 @@ response = model_with_search.invoke("When is the next total solar eclipse in US?
 
 response.content_blocks
 ```
+
+**Use on invocation**
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -1106,6 +1152,8 @@ response.content_blocks
 
 Certain models support grounding using Google Maps. Maps grounding connects Gemini's generative capabilities with Google Maps' current, factual location data. This enables location-aware applications that provide accurate, geographically specific responses. See [Gemini docs](https://ai.google.dev/gemini-api/docs/maps-grounding) for detail.
 
+**Bind to model**
+
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -1116,6 +1164,8 @@ response = model_with_maps.invoke(
     "What are some good Italian restaurants near the Eiffel Tower in Paris?"
 )
 ```
+
+**Use on invocation**
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -1131,6 +1181,8 @@ response = model.invoke(
 The response will include grounding metadata with location information from Google Maps.
 
 You can optionally provide a specific location context using `tool_config` with `lat_lng`. This is useful when you want to ground queries relative to a specific geographic point.
+
+**Bind to model**
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -1155,6 +1207,8 @@ response = model_with_maps.invoke(
 )
 ```
 
+**Use on invocation**
+
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -1178,6 +1232,8 @@ response = model.invoke(
 
 The URL context tool enables the model to access and analyze content from URLs you provide in your prompt. This is useful for tasks like summarizing web pages, extracting data from multiple sources, or answering questions about online content. See [Gemini docs](https://ai.google.dev/gemini-api/docs/url-context) for detail and limitations.
 
+**Bind to model**
+
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -1188,6 +1244,8 @@ response = model_with_url_context.invoke(
     "Summarize the content at https://docs.langchain.com"
 )
 ```
+
+**Use on invocation**
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -1204,6 +1262,8 @@ response = model.invoke(
 
 See [Gemini docs](https://ai.google.dev/gemini-api/docs/code-execution?lang=python) for detail.
 
+**Bind to model**
+
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -1214,6 +1274,8 @@ response = model_with_code_interpreter.invoke("Use Python to calculate 3^3.")
 
 response.content_blocks
 ```
+
+**Use on invocation**
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -1251,6 +1313,8 @@ The Gemini 2.5 Computer Use model (`gemini-2.5-computer-use-preview-10-2025`) ca
 >
 > The Computer Use model is in preview and may produce unexpected behavior. Always supervise automated tasks and avoid use with sensitive data or critical operations. See the [Gemini API docs](https://ai.google.dev/gemini-api/docs/computer-use) for safety best practices.
 
+**Bind to model**
+
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -1261,6 +1325,8 @@ response = model_with_computer.invoke("Please navigate to example.com")
 
 response.content_blocks
 ```
+
+**Use on invocation**
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -1283,6 +1349,8 @@ response.content_blocks
 ```
 
 You can configure the environment and exclude specific UI actions:
+
+**Advanced configuration**
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI, Environment
@@ -1479,7 +1547,7 @@ For detailed documentation of all features and configuration options, head to th
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

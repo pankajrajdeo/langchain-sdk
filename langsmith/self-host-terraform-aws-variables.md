@@ -1,3 +1,11 @@
+---
+title: "AWS Terraform variables reference"
+description: "Complete reference of Terraform variables for LangSmith self-hosted on AWS EKS."
+source: "https://docs.langchain.com/langsmith/self-host-terraform-aws-variables"
+category: "docs"
+tags: [docs, langsmith, self-host-terraform-aws-variables]
+---
+
 # AWS Terraform variables reference
 
 > Complete reference of Terraform variables for LangSmith self-hosted on AWS EKS.
@@ -170,7 +178,7 @@ Sourcing `infra/scripts/setup-env.sh` writes these to AWS SSM Parameter Store. E
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-aws-variables.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

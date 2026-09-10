@@ -1,8 +1,18 @@
+---
+title: "Confirm SSO user email"
+description: "Confirm the email of an SSO user."
+source: "https://docs.langchain.com/langsmith/smith-api/auth/confirm-sso-user-email"
+category: "docs"
+tags: [docs, langsmith, smith-api, auth, confirm-sso-user-email]
+---
+
 # Confirm SSO user email
 
 > Confirm the email of an SSO user.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/sso/email-verification/confirm**
 
 ````yaml
 openapi: 3.1.0

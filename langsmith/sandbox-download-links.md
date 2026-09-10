@@ -1,3 +1,11 @@
+---
+title: "Sandbox download links"
+description: "Share a single file from a sandbox as a link that needs no LangSmith credential."
+source: "https://docs.langchain.com/langsmith/sandbox-download-links"
+category: "docs"
+tags: [docs, langsmith, sandbox-download-links]
+---
+
 # Sandbox download links
 
 > Share a single file from a sandbox as a link that needs no LangSmith credential.
@@ -39,6 +47,8 @@ Links are served from the sandbox service domain, on the sandbox's own host, nev
 
 ## Create a link
 
+**Python**
+
 ```python
 # Never expires
 link = sb.generate_download_url("/app/report.csv")
@@ -56,6 +66,8 @@ link = sb.generate_download_url(
 print(link.download_url)
 print(link.expires_at)  # None when the link never expires
 ```
+
+**TypeScript**
 
 ```ts
 // Never expires
@@ -78,9 +90,13 @@ console.log(link.expires_at); // null when the link never expires
 
 Call it on the client instead of a sandbox instance to mint a link by sandbox name:
 
+**Python**
+
 ```python
 link = client.generate_download_url("my-sandbox", "/app/report.csv")
 ```
+
+**TypeScript**
 
 ```ts
 const link = await client.generateDownloadURL("my-sandbox", "/app/report.csv");
@@ -173,7 +189,7 @@ Use a download link to hand one file to an outside consumer. Use `read()` to pul
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-download-links.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

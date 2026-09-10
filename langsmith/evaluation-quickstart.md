@@ -1,3 +1,11 @@
+---
+title: "Evaluation quickstart"
+description: "Evaluations are a quantitative way to measure the performance of LLM applications. LLMs can behave unpredictably, even small changes to prompts, models, or inputs can significantly affect results..."
+source: "https://docs.langchain.com/langsmith/evaluation-quickstart"
+category: "docs"
+tags: [docs, langsmith, evaluation-quickstart]
+---
+
 # Evaluation quickstart
 
 [*Evaluations*](evaluation-concepts.md) are a quantitative way to measure the performance of LLM applications. LLMs can behave unpredictably, even small changes to prompts, models, or inputs can significantly affect results. Evaluations provide a structured way to identify failures, compare versions, and build more reliable AI applications.
@@ -95,12 +103,16 @@ The [Playground](prompt-engineering-concepts.md#playground) makes it possible to
 
 In your terminal, create a directory for your project and install the dependencies in your environment:
 
+**Python**
+
 ```bash
 mkdir ls-evaluation-quickstart && cd ls-evaluation-quickstart
 python -m venv .venv && source .venv/bin/activate
 python -m pip install --upgrade pip
 pip install -U langsmith openevals openai
 ```
+
+**TypeScript**
 
 ```bash
 mkdir ls-evaluation-quickstart-ts && cd ls-evaluation-quickstart-ts
@@ -140,6 +152,8 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
    * Define example [*inputs* and *outputs*](evaluation-concepts.md#examples).
    * Associate the input and output pairs with that dataset in LangSmith so they can be used in evaluations.
 
+**Python**
+
 ```python
        # dataset.py
        from langsmith import Client
@@ -173,6 +187,8 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
            main()
 
 ```
+
+**TypeScript**
 
 ```typescript
        // dataset.ts
@@ -215,9 +231,13 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
 
 2. In your terminal, run the `dataset` file to create the datasets you'll use to evaluate your app:
 
+**Python**
+
 ```bash
        python dataset.py
 ```
+
+**TypeScript**
 
 ```bash
        npx ts-node dataset.ts
@@ -234,6 +254,8 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
 Define a [target function](define-target-function.md) that contains what you're evaluating. In this guide, you'll define a target function that contains a single LLM call to answer a question.
 
 Add the following to an `eval` file:
+
+**Python**
 
 ```python
 # eval.py
@@ -255,6 +277,8 @@ def target(inputs: dict) -> dict:
     )
     return {"answer": response.choices[0].message.content.strip()}
 ```
+
+**TypeScript**
 
 ```typescript
 // eval.ts
@@ -294,6 +318,8 @@ The evaluator compares:
 
 Add the following highlighted code to your `eval` file:
 
+**Python**
+
 ```python
 from langsmith import Client, wrappers
 from openai import OpenAI
@@ -327,6 +353,8 @@ def correctness_evaluator(inputs: dict, outputs: dict, reference_outputs: dict):
         reference_outputs=reference_outputs
     )
 ```
+
+**TypeScript**
 
 ```typescript
 import { evaluate } from "langsmith/evaluation";
@@ -380,6 +408,8 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
 
 1. Add the highlighted code to your `eval` file:
 
+**Python**
+
 ```python
        from langsmith import Client, wrappers
        from openai import OpenAI
@@ -431,6 +461,8 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
        if __name__ == "__main__":
            main()
 ```
+
+**TypeScript**
 
 ```typescript
        import { evaluate } from "langsmith/evaluation";
@@ -494,9 +526,13 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
 
 2. Run your evaluator:
 
+**Python**
+
 ```bash
        python eval.py
 ```
+
+**TypeScript**
 
 ```bash
        npx ts-node eval.ts
@@ -528,7 +564,7 @@ Here are some topics you might want to explore next:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Create Thread Cron"
+description: "Create a cron to schedule runs on a thread."
+source: "https://docs.langchain.com/langsmith/agent-server-api/crons"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, crons]
+---
+
 # Create Thread Cron
 
 > Create a cron to schedule runs on a thread.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/{thread_id}/runs/crons**
 
 ````yaml
 openapi: 3.1.0

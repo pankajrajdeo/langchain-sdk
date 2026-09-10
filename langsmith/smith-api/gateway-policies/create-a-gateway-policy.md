@@ -1,3 +1,11 @@
+---
+title: "Create a gateway policy"
+description: "Creates a gateway policy for the calling organization."
+source: "https://docs.langchain.com/langsmith/smith-api/gateway-policies/create-a-gateway-policy"
+category: "docs"
+tags: [docs, langsmith, smith-api, gateway-policies, create-a-gateway-policy]
+---
+
 # Create a gateway policy
 
 > Creates a gateway policy for the calling organization.
@@ -43,6 +51,8 @@ by matchers — name must be unique per organization (409 on
 conflict). Returns 201 either way.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/gateway-policies**
 
 ````yaml
 openapi: 3.1.0

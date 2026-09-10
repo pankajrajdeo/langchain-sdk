@@ -1,3 +1,11 @@
+---
+title: "LangSmith Evaluation"
+description: "Evaluate and test agent quality at scale with datasets, evaluators, prompts, and Studio."
+source: "https://docs.langchain.com/langsmith/evaluation"
+category: "docs"
+tags: [docs, langsmith, evaluation]
+---
+
 # LangSmith Evaluation
 
 > Evaluate and test agent quality at scale with datasets, evaluators, prompts, and Studio.
@@ -25,7 +33,7 @@ Sign up at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&ut
 You can log in with **Google**, **GitHub**, or **email**.
 
 ### Create an API key
-Go to your [Settings page](https://smith.langchain.com/settings) → **API Keys** → **Create API Key**.
+Go to your [Settings page](https://smith.langchain.com/settings) > **API Keys** > **Create API Key**.
 Copy the key and save it securely.
 
 Once your account and API key are ready, [run your first evaluation](evaluation-quickstart.md).
@@ -95,7 +103,7 @@ Use an interactive environment for developing and debugging agents.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

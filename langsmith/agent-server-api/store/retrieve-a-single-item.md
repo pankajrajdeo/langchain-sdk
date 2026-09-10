@@ -1,6 +1,16 @@
+---
+title: "Retrieve a single item."
+description: "/langsmith/agent-server-openapi.json get /store/items"
+source: "https://docs.langchain.com/langsmith/agent-server-api/store/retrieve-a-single-item"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, store, retrieve-a-single-item]
+---
+
 # Retrieve a single item.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /store/items**
 
 ````yaml
 openapi: 3.1.0

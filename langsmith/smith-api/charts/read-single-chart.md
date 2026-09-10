@@ -1,8 +1,18 @@
+---
+title: "Read single chart"
+description: "Get a single chart or text block by ID."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/read-single-chart"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, read-single-chart]
+---
+
 # Read single chart
 
 > Get a single chart or text block by ID.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/charts/{chart_id}**
 
 ````yaml
 openapi: 3.1.0

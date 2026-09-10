@@ -1,8 +1,18 @@
+---
+title: "List tenants"
+description: "Get all tenants visible to this auth"
+source: "https://docs.langchain.com/langsmith/smith-api/tenant/list-tenants"
+category: "docs"
+tags: [docs, langsmith, smith-api, tenant, list-tenants]
+---
+
 # List tenants
 
 > Get all tenants visible to this auth
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/tenants**
 
 ````yaml
 openapi: 3.1.0

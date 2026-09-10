@@ -1,3 +1,11 @@
+---
+title: "Connect to a custom model"
+description: "The Playground allows you to use your own custom models. You can deploy a model server that exposes your model's API via LangServe, an open source library for serving LangChain applications. Behind..."
+source: "https://docs.langchain.com/langsmith/custom-endpoint"
+category: "docs"
+tags: [docs, langsmith, custom-endpoint]
+---
+
 # Connect to a custom model
 
 The Playground allows you to use your own custom models. You can deploy a model server that exposes your model's API via [LangServe](https://github.com/langchain-ai/langserve), an open source library for serving LangChain applications. Behind the scenes, the Playground will interact with your model server to generate responses.
@@ -42,7 +50,7 @@ For more information, see [how to store your model configuration for later use](
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-endpoint.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

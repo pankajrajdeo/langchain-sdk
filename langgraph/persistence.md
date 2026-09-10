@@ -1,3 +1,11 @@
+---
+title: "Persistence"
+description: "LangGraph's persistence layer gives agents short-term memory through checkpointers and long-term memory through stores."
+source: "https://docs.langchain.com/oss/python/langgraph/persistence"
+category: "docs"
+tags: [docs, langgraph, persistence]
+---
+
 # Persistence
 
 > LangGraph's persistence layer gives agents short-term memory through checkpointers and long-term memory through stores.
@@ -108,7 +116,7 @@ When a subgraph updates state, the parent graph may not see the changes immediat
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/persistence.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

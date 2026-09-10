@@ -1,3 +1,11 @@
+---
+title: "Stateless runs"
+description: "Most of the time, you provide a thread_id to your client when you run your graph in order to keep track of prior runs through the persistent state implemented in LangSmith Deployment. However, if you..."
+source: "https://docs.langchain.com/langsmith/stateless-runs"
+category: "docs"
+tags: [docs, langsmith, stateless-runs]
+---
+
 # Stateless runs
 
 Most of the time, you provide a `thread_id` to your client when you run your graph in order to keep track of prior runs through the persistent state implemented in LangSmith Deployment. However, if you don't need to persist the runs you don't need to use the built-in persistent state and can create stateless runs.
@@ -173,7 +181,7 @@ Output:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/stateless-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

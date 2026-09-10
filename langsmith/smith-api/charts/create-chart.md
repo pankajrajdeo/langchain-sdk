@@ -1,8 +1,18 @@
+---
+title: "Create chart"
+description: "Create a chart or dashboard text block."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/create-chart"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, create-chart]
+---
+
 # Create chart
 
 > Create a chart or dashboard text block.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/charts/create**
 
 ````yaml
 openapi: 3.1.0

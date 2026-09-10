@@ -1,6 +1,16 @@
+---
+title: "Create sub comment"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/comments/{owner}/{repo}/{parent_comment_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/comments/create-sub-comment"
+category: "docs"
+tags: [docs, langsmith, smith-api, comments, create-sub-comment]
+---
+
 # Create sub comment
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/comments/{owner}/{repo}/{parent_comment_id}**
 
 ````yaml
 openapi: 3.1.0

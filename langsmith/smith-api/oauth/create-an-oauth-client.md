@@ -1,8 +1,18 @@
+---
+title: "Create an oauth client"
+description: "Registers a new OAuth 2.0 / OIDC client owned by the caller's organization. For confidential clients the response includes a client_secret that is shown only once."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/create-an-oauth-client"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, create-an-oauth-client]
+---
+
 # Create an oauth client
 
 > Registers a new OAuth 2.0 / OIDC client owned by the caller's organization. For confidential clients the response includes a client_secret that is shown only once.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/oauth/clients**
 
 ````yaml
 openapi: 3.1.0

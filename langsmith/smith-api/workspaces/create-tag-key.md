@@ -1,6 +1,16 @@
+---
+title: "Create tag key"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/tag-keys"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/create-tag-key"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, create-tag-key]
+---
+
 # Create tag key
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/tag-keys**
 
 ````yaml
 openapi: 3.1.0

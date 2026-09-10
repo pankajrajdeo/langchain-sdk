@@ -1,3 +1,11 @@
+---
+title: "Delete feedback config endpoint"
+description: "Soft delete a feedback config by marking it as deleted."
+source: "https://docs.langchain.com/langsmith/smith-api/feedback-configs/delete-feedback-config-endpoint"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback-configs, delete-feedback-config-endpoint]
+---
+
 # Delete feedback config endpoint
 
 > Soft delete a feedback config by marking it as deleted.
@@ -6,6 +14,8 @@ The config can be recreated later with the same key (simple reuse pattern).
 Existing feedback records with this key will remain unchanged.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/feedback-configs**
 
 ````yaml
 openapi: 3.1.0

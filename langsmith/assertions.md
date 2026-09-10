@@ -1,3 +1,11 @@
+---
+title: "Use assertions"
+description: "Capture free-form acceptance criteria as dataset examples by writing assertions while reviewing runs in an annotation queue."
+source: "https://docs.langchain.com/langsmith/assertions"
+category: "docs"
+tags: [docs, langsmith, assertions]
+---
+
 # Use assertions
 
 > Capture free-form acceptance criteria as dataset examples by writing assertions while reviewing runs in an annotation queue.
@@ -82,7 +90,7 @@ How you score each claim is up to you. Three patterns are common and can be comb
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/assertions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

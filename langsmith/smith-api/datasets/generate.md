@@ -1,8 +1,18 @@
+---
+title: "Generate"
+description: "Generate synthetic examples for a dataset."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/generate"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, generate]
+---
+
 # Generate
 
 > Generate synthetic examples for a dataset.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/datasets/{dataset_id}/generate**
 
 ````yaml
 openapi: 3.1.0

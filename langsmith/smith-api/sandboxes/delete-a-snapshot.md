@@ -1,8 +1,18 @@
+---
+title: "Delete a snapshot"
+description: "Delete a snapshot by ID or by a Docker-style name[:tag] reference. The underlying storage is reclaimed asynchronously."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/delete-a-snapshot"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, delete-a-snapshot]
+---
+
 # Delete a snapshot
 
 > Delete a snapshot by ID or by a Docker-style name[:tag] reference. The underlying storage is reclaimed asynchronously.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v2/sandboxes/snapshots/{snapshot_id}**
 
 ````yaml
 openapi: 3.1.0

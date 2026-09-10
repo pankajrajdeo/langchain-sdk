@@ -1,3 +1,11 @@
+---
+title: "Get a public shared thread's manifest"
+description: "Returns the thread and project a share token is scoped to, plus the project's conversations config."
+source: "https://docs.langchain.com/langsmith/smith-api/threads/get-a-public-shared-threads-manifest"
+category: "docs"
+tags: [docs, langsmith, smith-api, threads, get-a-public-shared-threads-manifest]
+---
+
 # Get a public shared thread's manifest
 
 > Returns the thread and project a share token is scoped to, plus the project's conversations config.
@@ -5,6 +13,8 @@
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/public/threads/{share_token}**
 
 ````yaml
 openapi: 3.1.0

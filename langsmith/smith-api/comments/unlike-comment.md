@@ -1,6 +1,16 @@
+---
+title: "Unlike comment"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/comments/{owner}/{repo}/{parent_comment_id}/like"
+source: "https://docs.langchain.com/langsmith/smith-api/comments/unlike-comment"
+category: "docs"
+tags: [docs, langsmith, smith-api, comments, unlike-comment]
+---
+
 # Unlike comment
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/comments/{owner}/{repo}/{parent_comment_id}/like**
 
 ````yaml
 openapi: 3.1.0

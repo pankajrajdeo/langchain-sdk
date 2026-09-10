@@ -1,8 +1,18 @@
+---
+title: "Health Check"
+description: "Check the health status of the server. Optionally check database connectivity."
+source: "https://docs.langchain.com/langsmith/agent-server-api/system/health-check"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, system, health-check]
+---
+
 # Health Check
 
 > Check the health status of the server. Optionally check database connectivity.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /ok**
 
 ````yaml
 openapi: 3.1.0

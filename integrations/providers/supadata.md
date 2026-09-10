@@ -1,3 +1,11 @@
+---
+title: "Supadata"
+description: "This page covers how to use the Supadata ecosystem within LangChain. It allows you to load data from YouTube, TikTok, and other platforms."
+source: "https://docs.langchain.com/oss/python/integrations/providers/supadata"
+category: "docs"
+tags: [docs, integrations, providers, supadata]
+---
+
 # Supadata
 
 # Supadata
@@ -65,7 +73,7 @@ For detailed usage examples and API documentation, please refer to the [official
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/supadata.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

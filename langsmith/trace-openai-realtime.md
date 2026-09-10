@@ -1,3 +1,11 @@
+---
+title: "Trace OpenAI Realtime applications"
+description: "Trace OpenAI Realtime voice agents in LangSmith using the LangSmith SDK."
+source: "https://docs.langchain.com/langsmith/trace-openai-realtime"
+category: "docs"
+tags: [docs, langsmith, trace-openai-realtime]
+---
+
 # Trace OpenAI Realtime applications
 
 > Trace OpenAI Realtime voice agents in LangSmith using the LangSmith SDK.
@@ -20,15 +28,21 @@ There are two ways to build with the OpenAI Realtime API, and LangSmith provides
 
 The `langsmith[openai-realtime]>=0.9.7` extra provides both wrappers:
 
+**pip**
+
 ```bash
 pip install "langsmith[openai-realtime]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[openai-realtime]"
 ```
 
 ## Set environment variables
+
+**.env**
 
 ```bash
 LANGSMITH_API_KEY=<your-langsmith-api-key>
@@ -168,7 +182,7 @@ Attach the conversation audio recording to your trace.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-openai-realtime.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

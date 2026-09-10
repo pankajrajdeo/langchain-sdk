@@ -1,3 +1,11 @@
+---
+title: "Add instructions to Managed Deep Agents"
+description: "Define the system prompt for a Managed Deep Agent in instructions.md."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-instructions"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-instructions]
+---
+
 # Add instructions to Managed Deep Agents
 
 > Define the system prompt for a Managed Deep Agent in instructions.md.
@@ -20,6 +28,8 @@ my-agent/
 ## Add instructions
 
 Create or modify `instructions.md`:
+
+**instructions.md**
 
 ```markdown
 # Assistant
@@ -44,7 +54,7 @@ Use [skills](managed-deep-agents-skills.md) for task-specific procedures that th
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-instructions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

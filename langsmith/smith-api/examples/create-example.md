@@ -1,8 +1,18 @@
+---
+title: "Create example"
+description: "Create a new example."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/create-example"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, create-example]
+---
+
 # Create example
 
 > Create a new example.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/examples**
 
 ````yaml
 openapi: 3.1.0

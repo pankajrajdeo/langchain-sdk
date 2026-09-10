@@ -1,8 +1,18 @@
+---
+title: "Group runs"
+description: "Get runs grouped by an expression"
+source: "https://docs.langchain.com/langsmith/smith-api/run/group-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, group-runs]
+---
+
 # Group runs
 
 > Get runs grouped by an expression
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/group**
 
 ````yaml
 openapi: 3.1.0

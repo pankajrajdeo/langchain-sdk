@@ -1,3 +1,11 @@
+---
+title: "Dynamic subagents"
+description: "Use interpreters to dispatch and orchestrate Deep Agents subagents from code"
+source: "https://docs.langchain.com/oss/python/deepagents/dynamic-subagents"
+category: "docs"
+tags: [docs, deepagents, dynamic-subagents]
+---
+
 # Dynamic subagents
 
 > Use interpreters to dispatch and orchestrate Deep Agents subagents from code
@@ -10,11 +18,13 @@ Use this pattern when work spans many independent units, needs multiple perspect
 > Dynamic subagents use the interpreter runtime, which is in [**beta**](../versioning.md). APIs and lifecycle behavior may change between releases.
 
 > [!NOTE]
-> Interpreters require `langchain-quickjs>=0.2.0` and Python `>=3.11`.
+> Interpreters require `langchain-quickjs>=0.2.0` and Python 3.11 or later.
 
 ## Quickstart
 
 Dynamic subagents require [interpreter](interpreters.md) middleware. Install and wire up the interpreter first. The built-in [general-purpose subagent](subagents.md#default-subagent) handles basic fan-out without extra configuration.
+
+**Google**
 
 ```python
 from deepagents import create_deep_agent
@@ -31,6 +41,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -45,6 +57,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Anthropic**
 
 ```python
 from deepagents import create_deep_agent
@@ -61,6 +75,8 @@ agent = create_deep_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -75,6 +91,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Fireworks**
 
 ```python
 from deepagents import create_deep_agent
@@ -91,6 +109,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -105,6 +125,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -204,6 +226,8 @@ graph LR
 
 **What you configure**
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -230,6 +254,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -258,6 +284,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -284,6 +312,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -312,6 +342,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -339,6 +371,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -365,6 +399,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -438,6 +474,8 @@ Discovering files from interpreter code requires [programmatic tool calling (PTC
 
 **What you configure**
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -452,6 +490,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(ptc=["glob"])],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -468,6 +508,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -482,6 +524,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(ptc=["glob"])],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -498,6 +542,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -513,6 +559,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -527,6 +575,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(ptc=["glob"])],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -592,6 +642,8 @@ graph LR
 
 **What you configure**
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -613,6 +665,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -636,6 +690,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -657,6 +713,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -680,6 +738,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -702,6 +762,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -723,6 +785,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -795,6 +859,8 @@ graph LR
 
 **What you configure**
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -809,6 +875,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -825,6 +893,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -839,6 +909,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -855,6 +927,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -870,6 +944,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -884,6 +960,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -943,6 +1021,8 @@ graph LR
 
 **What you configure**
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -964,6 +1044,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -987,6 +1069,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1008,6 +1092,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1031,6 +1117,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1053,6 +1141,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1074,6 +1164,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1143,6 +1235,8 @@ graph LR
 
 **What you configure**
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1157,6 +1251,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1173,6 +1269,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1187,6 +1285,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1203,6 +1303,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1218,6 +1320,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1232,6 +1336,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1277,6 +1383,8 @@ found;
 
 Subagent dispatch is on by default whenever the agent has subagents. Disable it if you want subagents to be available only through the normal `task` tool path. For other middleware options, see [Configuration](interpreters.md#configuration) on the interpreters page.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1287,6 +1395,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(subagents=False)],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -1299,6 +1409,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1309,6 +1421,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(subagents=False)],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -1321,6 +1435,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1332,6 +1448,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
@@ -1342,6 +1460,8 @@ agent = create_deep_agent(
     middleware=[CodeInterpreterMiddleware(subagents=False)],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -1363,7 +1483,7 @@ agent = create_deep_agent(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/dynamic-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

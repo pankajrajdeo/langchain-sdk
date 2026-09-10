@@ -1,8 +1,18 @@
+---
+title: "Diff dataset versions"
+description: "Get diff between two dataset versions."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/diff-dataset-versions"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, diff-dataset-versions]
+---
+
 # Diff dataset versions
 
 > Get diff between two dataset versions.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}/versions/diff**
 
 ````yaml
 openapi: 3.1.0

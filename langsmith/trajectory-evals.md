@@ -1,3 +1,11 @@
+---
+title: "How to evaluate your agent with trajectory evaluations"
+description: "Many agent behaviors only emerge when using a real LLM, such as which tool the agent decides to call, how it formats responses, or whether a prompt modification affects the entire execution..."
+source: "https://docs.langchain.com/langsmith/trajectory-evals"
+category: "docs"
+tags: [docs, langsmith, trajectory-evals]
+---
+
 # How to evaluate your agent with trajectory evaluations
 
 Many agent behaviors only emerge when using a real LLM, such as which tool the agent decides to call, how it formats responses, or whether a prompt modification affects the entire execution trajectory. LangChain's [`agentevals`](https://github.com/langchain-ai/agentevals) package provides evaluators specifically designed for testing agent trajectories with live models.
@@ -19,9 +27,13 @@ More flexible and can assess nuanced aspects like efficiency and appropriateness
 
 ## Installing AgentEvals
 
+**Python**
+
 ```bash
 pip install agentevals
 ```
+
+**TypeScript**
 
 ```bash
 npm install agentevals @langchain/core
@@ -45,6 +57,8 @@ You can use the following modes:
 ### Strict match
 
 The `strict` mode ensures trajectories contain identical messages in the same order with the same tool calls, though it allows for differences in message content. This is useful when you need to enforce a specific sequence of operations, such as requiring a policy lookup before authorizing an action.
+
+**Python**
 
 ```python
 from langchain.agents import create_agent
@@ -88,6 +102,8 @@ def test_weather_tool_called_strict():
     # }
     assert evaluation["score"] is True
 ```
+
+**TypeScript**
 
 ```ts
 import { createAgent, tool, HumanMessage, AIMessage, ToolMessage } from "langchain"
@@ -153,6 +169,8 @@ async function testWeatherToolCalledStrict() {
 
 The `unordered` mode allows the same tool calls in any order, which is helpful when you want to verify that the correct set of tools are being invoked but don't care about the sequence. For example, an agent might need to check both weather and events for a city, but the order doesn't matter.
 
+**Python**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -202,6 +220,8 @@ def test_multiple_tools_any_order():
     # }
     assert evaluation["score"] is True
 ```
+
+**TypeScript**
 
 ```ts
 import { createAgent, tool, HumanMessage, AIMessage, ToolMessage } from "langchain"
@@ -286,6 +306,8 @@ The `superset` and `subset` modes focus on which tools are called rather than th
 
 The following example demonstrates `superset` mode, where the reference trajectory only requires the `get_weather` tool, but the agent can call additional tools:
 
+**Python**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -334,6 +356,8 @@ def test_agent_calls_required_tools_plus_extra():
     # }
     assert evaluation["score"] is True
 ```
+
+**TypeScript**
 
 ```ts
 import { createAgent } from "langchain"
@@ -419,6 +443,8 @@ You can also use an LLM to evaluate the agent's execution path. Unlike the traje
 
 ### Without reference trajectory
 
+**Python**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -452,6 +478,8 @@ def test_trajectory_quality():
     # }
     assert evaluation["score"] is True
 ```
+
+**TypeScript**
 
 ```ts
 import { createAgent } from "langchain"
@@ -502,6 +530,8 @@ async function testTrajectoryQuality() {
 
 If you have a reference trajectory, you can add an extra variable to your prompt and pass in the reference trajectory. Below, we use the prebuilt `TRAJECTORY_ACCURACY_PROMPT_WITH_REFERENCE` prompt and configure the `reference_outputs` variable:
 
+**Python**
+
 ```python
 evaluator = create_trajectory_llm_as_judge(
     model="openai:o3-mini",
@@ -512,6 +542,8 @@ evaluation = evaluator(
     reference_outputs=reference_trajectory,
 )
 ```
+
+**TypeScript**
 
 ```ts
 import { TRAJECTORY_ACCURACY_PROMPT_WITH_REFERENCE } from "agentevals";
@@ -561,7 +593,7 @@ async def test_async_evaluation():
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trajectory-evals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

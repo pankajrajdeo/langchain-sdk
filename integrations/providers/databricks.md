@@ -1,3 +1,11 @@
+---
+title: "Databricks integrations"
+description: "Integrate with Databricks using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/databricks"
+category: "docs"
+tags: [docs, integrations, providers, databricks]
+---
+
 # Databricks integrations
 
 > Integrate with Databricks using LangChain Python.
@@ -16,9 +24,13 @@ Databricks embraces the LangChain ecosystem in various ways:
 
 First-party Databricks integrations are now available in the databricks-langchain partner package.
 
+**pip**
+
 ```bash
 pip install databricks-langchain
 ```
+
+**uv**
 
 ```bash
 uv add databricks-langchain
@@ -105,7 +117,7 @@ llm.invoke("What is DBRX model?")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/databricks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

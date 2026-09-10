@@ -1,3 +1,11 @@
+---
+title: "Trace Pipecat applications"
+description: "This integration is in beta, so its API may change."
+source: "https://docs.langchain.com/langsmith/trace-with-pipecat"
+category: "docs"
+tags: [docs, langsmith, trace-with-pipecat]
+---
+
 # Trace Pipecat applications
 
 > [!NOTE]
@@ -14,9 +22,13 @@ The integration hooks into the spans Pipecat already emits and maps them onto La
 
 Install the integration along with the Pipecat service extras your pipeline uses:
 
+**pip**
+
 ```bash
 pip install "langsmith[pipecat]" "pipecat-ai[openai,local,tracing]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[pipecat]" "pipecat-ai[openai,local,tracing]"
@@ -25,6 +37,8 @@ uv add "langsmith[pipecat]" "pipecat-ai[openai,local,tracing]"
 ## Set environment variables
 
 The integration reads your LangSmith credentials from the environment and exports to LangSmith for you via OpenTelemetry:
+
+**.env**
 
 ```bash
 LANGSMITH_API_KEY=<your-langsmith-api-key>
@@ -176,7 +190,7 @@ Attach the conversation audio recording to your trace.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-pipecat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

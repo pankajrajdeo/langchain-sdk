@@ -1,3 +1,11 @@
+---
+title: "Amazon memorydb integration"
+description: "Integrate with the Amazon memorydb vector store using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/vectorstores/memorydb"
+category: "docs"
+tags: [docs, integrations, vectorstores, memorydb]
+---
+
 # Amazon memorydb integration
 
 > Integrate with the Amazon memorydb vector store using LangChain Python.
@@ -292,7 +300,7 @@ True
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/memorydb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Read examples"
+description: "Get all examples by query params"
+source: "https://docs.langchain.com/langsmith/smith-api/examples/read-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, read-examples]
+---
+
 # Read examples
 
 > Get all examples by query params
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/examples**
 
 ````yaml
 openapi: 3.1.0

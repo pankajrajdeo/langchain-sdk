@@ -1,8 +1,18 @@
+---
+title: "Create a snapshot"
+description: "Create a snapshot from a Docker image (async build)."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/create-a-snapshot"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, create-a-snapshot]
+---
+
 # Create a snapshot
 
 > Create a snapshot from a Docker image (async build).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/snapshots**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Graph execution"
+description: "Visualize multi-step graph pipelines with per-node status and streaming content"
+source: "https://docs.langchain.com/oss/python/langgraph/frontend/graph-execution"
+category: "docs"
+tags: [docs, langgraph, frontend, graph-execution]
+---
+
 # Graph execution
 
 > Visualize multi-step graph pipelines with per-node status and streaming content
@@ -58,7 +66,9 @@ current run). Pass each discovered subgraph snapshot to a selector to read the
 messages scoped to that node.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -80,6 +90,8 @@ export function PipelineChat() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -108,6 +120,8 @@ const stream = useStream<typeof myAgent>({
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -129,6 +143,8 @@ const stream = useStream<typeof myAgent>({
   />
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component, computed } from "@angular/core";
@@ -421,7 +437,7 @@ current execution, avoiding empty placeholder cards.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/graph-execution.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

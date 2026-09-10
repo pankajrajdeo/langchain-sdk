@@ -1,8 +1,18 @@
+---
+title: "Read sections"
+description: "Get all sections for the tenant."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/read-sections"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, read-sections]
+---
+
 # Read sections
 
 > Get all sections for the tenant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/charts/section**
 
 ````yaml
 openapi: 3.1.0

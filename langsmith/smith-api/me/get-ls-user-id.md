@@ -1,8 +1,18 @@
+---
+title: "Get ls user ID"
+description: "Get the LangSmith user ID for the current user."
+source: "https://docs.langchain.com/langsmith/smith-api/me/get-ls-user-id"
+category: "docs"
+tags: [docs, langsmith, smith-api, me, get-ls-user-id]
+---
+
 # Get ls user ID
 
 > Get the LangSmith user ID for the current user.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/me/ls_user_id**
 
 ````yaml
 openapi: 3.1.0

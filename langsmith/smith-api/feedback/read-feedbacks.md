@@ -1,8 +1,18 @@
+---
+title: "Read feedbacks"
+description: "List all Feedback by query params."
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/read-feedbacks"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, read-feedbacks]
+---
+
 # Read feedbacks
 
 > List all Feedback by query params.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/feedback**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Deploy LangSmith on AWS with Terraform"
+description: "End-to-end walkthrough for provisioning LangSmith self-hosted on AWS EKS using the LangChain Terraform modules."
+source: "https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy"
+category: "docs"
+tags: [docs, langsmith, self-host-terraform-aws-deploy]
+---
+
 # Deploy LangSmith on AWS with Terraform
 
 > End-to-end walkthrough for provisioning LangSmith self-hosted on AWS EKS using the LangChain Terraform modules.
@@ -414,7 +422,7 @@ You can enable Fleet with `enable_fleet`. On AWS, it requires `enable_deployment
 Terraform creates a dedicated `langsmith_fleet` database on RDS and wires the `langsmith-fleet-postgres` and `langsmith-fleet-redis` secrets to the existing RDS and ElastiCache instances. Fleet reuses `langsmith_agent_builder_encryption_key`, so migrating from `enable_agent_builder` keeps the same key and data.
 
 > [!NOTE]
-> Fleet requires the LangSmith Helm chart `>=0.15.0` and the Agent Builder or Fleet entitlement in your license.
+> Fleet requires the LangSmith Helm chart 0.15.0 or later and the Agent Builder or Fleet entitlement in your license.
 
 Fleet installs the `standalone-fleet-api-server`, `standalone-fleet-tool-server`, `standalone-fleet-trigger-server`, and `standalone-fleet-queue` services.
 
@@ -487,7 +495,7 @@ This grants the `langsmith-host-backend` ServiceAccount read access to pods, pod
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-aws-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

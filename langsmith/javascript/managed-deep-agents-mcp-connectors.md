@@ -1,8 +1,16 @@
+---
+title: "Connect to MCP servers"
+description: "Add tools from remote MCP servers to Managed Deep Agents."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-mcp-connectors"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-mcp-connectors]
+---
+
 # Connect to MCP servers
 
 > Add tools from remote MCP servers to Managed Deep Agents.
 
-Connect a managed deep agent to remote [Model Context Protocol (MCP)](https://docs.langchain.com/oss/javascript/deepagents/mcp) servers to add their tools to the agent. Managed Deep Agents creates the MCP client and loads the tools.
+Connect a managed deep agent to remote [Model Context Protocol (MCP)](../../javascript/deepagents/mcp.md) servers to add their tools to the agent. Managed Deep Agents creates the MCP client and loads the tools.
 
 Most remote MCP servers require authentication. A [connection](managed-deep-agents-connections.md) supplies it, and declaring the connection as user-owned makes each caller authorize their own account.
 
@@ -25,6 +33,8 @@ The module must export a named `mcp`.
 ## Add MCP servers
 
 Use `defineMcp` to declare one or more remote servers:
+
+**tools/mcp.ts**
 
 ```ts
 import { defineMcp } from "managed-deepagents";
@@ -99,7 +109,7 @@ For create modes, owners, and runtime authorization, see [Manage connections](ma
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-mcp-connectors.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "How to define a code evaluator"
+description: "Code evaluators are functions that take a dataset example and the resulting application output, and return one or more metrics. These functions can be passed directly into the evaluate() or..."
+source: "https://docs.langchain.com/langsmith/code-evaluator-sdk"
+category: "docs"
+tags: [docs, langsmith, code-evaluator-sdk]
+---
+
 # How to define a code evaluator
 
 Code evaluators are functions that take a dataset example and the resulting application output, and return one or more metrics. These functions can be passed directly into the [`evaluate()`](https://reference.langchain.com/python/langsmith/client/Client/evaluate) or [`aevaluate()`](https://reference.langchain.com/python/langsmith/client/Client/aevaluate) functions.
@@ -6,6 +14,8 @@ Code evaluators are functions that take a dataset example and the resulting appl
 > To define code evaluators in the LangSmith UI, refer to [How to define a code evaluator (UI)](code-evaluator-ui.md). To grade outputs against assertions saved on dataset examples, refer to [Use assertions](assertions.md).
 
 ## Basic example
+
+**Python**
 
 ```python
 from langsmith import evaluate
@@ -23,6 +33,8 @@ results = evaluate(
     evaluators=[correct]
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import type { EvaluationResult } from "langsmith/evaluation";
@@ -67,6 +79,8 @@ Python only
 ## Additional examples
 
 Requires `langsmith>=0.2.0`
+
+**Python**
 
 ```python
 from langsmith import evaluate, wrappers
@@ -114,6 +128,8 @@ results = evaluate(
     evaluators=[correct_old_signature, concision, valid_reasoning]
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -221,7 +237,7 @@ const results = await evaluate(dummyApp, {
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/code-evaluator-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

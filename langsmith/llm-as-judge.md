@@ -1,3 +1,11 @@
+---
+title: "How to define an LLM-as-a-judge evaluator"
+description: "LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer."
+source: "https://docs.langchain.com/langsmith/llm-as-judge"
+category: "docs"
+tags: [docs, langsmith, llm-as-judge]
+---
+
 # How to define an LLM-as-a-judge evaluator
 
 LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
@@ -82,7 +90,7 @@ Once you are finished configuring, save your changes.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

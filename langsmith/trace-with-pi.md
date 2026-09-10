@@ -1,3 +1,11 @@
+---
+title: "Trace Pi coding agent sessions"
+description: "Trace Pi coding agent invocations to LangSmith to observe turns, debug tool calls, track token usage, and inspect individual LLM invocations."
+source: "https://docs.langchain.com/langsmith/trace-with-pi"
+category: "docs"
+tags: [docs, langsmith, trace-with-pi]
+---
+
 # Trace Pi coding agent sessions
 
 > Trace Pi coding agent invocations to LangSmith to observe turns, debug tool calls, track token usage, and inspect individual LLM invocations.
@@ -119,7 +127,7 @@ Each replica entry can include an `updates` object to override metadata or tags 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-pi.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Use cron jobs"
+description: "There are many situations in which it is useful to run an assistant on a schedule."
+source: "https://docs.langchain.com/langsmith/cron-jobs"
+category: "docs"
+tags: [docs, langsmith, cron-jobs]
+---
+
 # Use cron jobs
 
 There are many situations in which it is useful to run an assistant on a schedule.
@@ -255,7 +263,7 @@ curl --request POST \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cron-jobs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

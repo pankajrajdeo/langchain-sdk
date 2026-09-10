@@ -1,3 +1,11 @@
+---
+title: "Quickstart"
+description: "Build your first deep agent in minutes"
+source: "https://docs.langchain.com/oss/python/deepagents/quickstart"
+category: "docs"
+tags: [docs, deepagents, quickstart]
+---
+
 # Quickstart
 
 > Build your first deep agent in minutes
@@ -12,7 +20,7 @@ Build a Deep Agents research agent in this working directory by following the De
 Detect whether this project uses Python or TypeScript/JavaScript. Fetch and follow the matching page; treat it as the source of truth for package names, model strings, search-tool setup, and code:
 
 * Python: [https://docs.langchain.com/oss/python/deepagents/quickstart.md](quickstart.md)
-* TypeScript: [https://docs.langchain.com/oss/javascript/deepagents/quickstart.md](https://docs.langchain.com/oss/javascript/deepagents/quickstart.md)
+* TypeScript: [https://docs.langchain.com/oss/javascript/deepagents/quickstart.md](../javascript/deepagents/quickstart.md)
 
 ## Step 2: Install dependencies
 
@@ -40,7 +48,7 @@ Follow the quickstart steps in order:
 > [!TIP]
 > **Using an AI coding assistant?**
 >
-> * Install the [LangChain Docs MCP servers](https://docs.langchain.com/use-these-docs) to give your agent access to up-to-date LangChain documentation and examples.
+> * Install the [LangChain Docs MCP servers](../use-these-docs.md) to give your agent access to up-to-date LangChain documentation and examples.
 >
 > > **Prompt:** Connect LangChain docs MCP servers
 >     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
@@ -50,7 +58,7 @@ Follow the quickstart steps in order:
 >     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
 >     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
 >
->     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](https://docs.langchain.com/use-these-docs.md):
+>     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
 >
 >     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
 >     * Codex CLI: `codex mcp add` with each server URL.
@@ -86,9 +94,13 @@ Before you begin, make sure you have an API key from a model provider (e.g., Gem
 
 ## Step 1: Install dependencies
 
+**pip**
+
 ```bash
 pip install deepagents
 ```
+
+**uv**
 
 ```bash
 uv init
@@ -165,6 +177,8 @@ Deep Agents work with any [LangChain chat model](models.md#supported-models). Se
 Google, OpenAI, and Anthropic offer built-in web search tools that run server-side: no extra package or API key needed. Pass a provider tool dict directly to `create_deep_agent`.
 
 #### Provider search (recommended)
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -172,12 +186,16 @@ from deepagents import create_deep_agent
 internet_search = {"google_search": {}}
 ```
 
+**OpenAI**
+
 ```python
 from deepagents import create_deep_agent
 
 # OpenAI's built-in web search — no extra install or API key needed
 internet_search = {"type": "web_search"}
 ```
+
+**Anthropic**
 
 ```python
 from deepagents import create_deep_agent
@@ -215,6 +233,8 @@ def internet_search(
 
 Pass your search tool and model to `create_deep_agent`. Pass a `model` string in `provider:model` format, or an [initialized model instance](models.md#configure-model-parameters). See [supported models](models.md#supported-models) for all providers and [suggested models](models.md#suggested-models) for tested recommendations.
 
+**Google**
+
 ```python
 # System prompt to steer the agent to be an expert researcher
 research_instructions = """You are an expert researcher. Your job is to conduct thorough research and then write a polished report.
@@ -232,6 +252,8 @@ agent = create_deep_agent(
     system_prompt=research_instructions,
 )
 ```
+
+**OpenAI**
 
 ```python
 # System prompt to steer the agent to be an expert researcher
@@ -251,6 +273,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 # System prompt to steer the agent to be an expert researcher
 research_instructions = """You are an expert researcher. Your job is to conduct thorough research and then write a polished report.
@@ -268,6 +292,8 @@ agent = create_deep_agent(
     system_prompt=research_instructions,
 )
 ```
+
+**OpenRouter**
 
 ```python
 # System prompt to steer the agent to be an expert researcher
@@ -287,6 +313,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 # System prompt to steer the agent to be an expert researcher
 research_instructions = """You are an expert researcher. Your job is to conduct thorough research and then write a polished report.
@@ -305,6 +333,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 # System prompt to steer the agent to be an expert researcher
 research_instructions = """You are an expert researcher. Your job is to conduct thorough research and then write a polished report.
@@ -322,6 +352,8 @@ agent = create_deep_agent(
     system_prompt=research_instructions,
 )
 ```
+
+**Ollama**
 
 ```python
 # System prompt to steer the agent to be an expert researcher
@@ -393,7 +425,7 @@ Now that you've built your first deep agent:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

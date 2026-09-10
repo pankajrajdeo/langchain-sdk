@@ -1,6 +1,16 @@
+---
+title: "Delete an oauth client"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/oauth/clients/{id}"
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/delete-an-oauth-client"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, delete-an-oauth-client]
+---
+
 # Delete an oauth client
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/oauth/clients/{id}**
 
 ````yaml
 openapi: 3.1.0

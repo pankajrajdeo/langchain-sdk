@@ -1,3 +1,11 @@
+---
+title: "Functional API overview"
+description: "The Functional API allows you to add LangGraph's key features (persistence, memory, human-in-the-loop, and streaming) to your applications with minimal changes to your existing code."
+source: "https://docs.langchain.com/oss/python/langgraph/functional-api"
+category: "docs"
+tags: [docs, langgraph, functional-api]
+---
+
 # Functional API overview
 
 The **Functional API** allows you to add LangGraph's key features ([persistence](persistence.md), [memory](add-memory.md), [human-in-the-loop](interrupts.md), and [streaming](streaming.md)) to your applications with minimal changes to your existing code.
@@ -660,7 +668,7 @@ def my_workflow(inputs: dict) -> int:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/functional-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

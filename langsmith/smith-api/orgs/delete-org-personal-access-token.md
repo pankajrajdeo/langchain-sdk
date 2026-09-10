@@ -1,3 +1,11 @@
+---
+title: "Delete org personal access token"
+description: "Delete a personal access token, removing the record entirely."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/delete-org-personal-access-token"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, delete-org-personal-access-token]
+---
+
 # Delete org personal access token
 
 > Delete a personal access token, removing the record entirely.
@@ -6,6 +14,8 @@ Callers may always delete their own tokens; organization admins may delete
 any member's.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/current/personal-access-tokens/{pat_id}**
 
 ````yaml
 openapi: 3.1.0
@@ -246,6 +256,12 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        revoked_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Revoked At
         workspace_names:
           anyOf:
             - items:

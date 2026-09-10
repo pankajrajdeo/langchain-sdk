@@ -1,8 +1,18 @@
+---
+title: "Authorize a device code"
+description: "Marks a device code as authorized for the authenticated user. Called by the /activate page when the user enters their user code. Requires authentication."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/authorize-a-device-code"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, authorize-a-device-code]
+---
+
 # Authorize a device code
 
 > Marks a device code as authorized for the authenticated user. Called by the /activate page when the user enters their user code. Requires authentication.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /oauth/device/authorize**
 
 ````yaml
 openapi: 3.1.0

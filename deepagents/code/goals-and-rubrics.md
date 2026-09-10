@@ -1,3 +1,11 @@
+---
+title: "Goals and rubrics"
+description: "Define objectives and acceptance criteria for Deep Agents Code sessions"
+source: "https://docs.langchain.com/oss/deepagents/code/goals-and-rubrics"
+category: "docs"
+tags: [docs, deepagents, code, goals-and-rubrics]
+---
+
 # Goals and rubrics
 
 > Define objectives and acceptance criteria for Deep Agents Code sessions
@@ -134,7 +142,7 @@ dcode -n "implement OAuth refresh handling" \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/goals-and-rubrics.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

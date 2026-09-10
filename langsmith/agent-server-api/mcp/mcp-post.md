@@ -1,3 +1,11 @@
+---
+title: "MCP Post"
+description: "Implemented according to the Streamable HTTP Transport specification. Sends a JSON-RPC 2.0 message to the server."
+source: "https://docs.langchain.com/langsmith/agent-server-api/mcp/mcp-post"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, mcp, mcp-post]
+---
+
 # MCP Post
 
 > Implemented according to the Streamable HTTP Transport specification.
@@ -10,6 +18,8 @@ Sends a JSON-RPC 2.0 message to the server.
 - Stateless: Sessions are not persisted across requests.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /mcp/**
 
 ````yaml
 openapi: 3.1.0

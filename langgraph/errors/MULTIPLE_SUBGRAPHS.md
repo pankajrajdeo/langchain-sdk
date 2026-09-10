@@ -1,3 +1,11 @@
+---
+title: "MULTIPLE_SUBGRAPHS"
+description: "This error occurs when you call a subgraph inside a node multiple times, and the subgraph is compiled with checkpointer=True (continuations mode)."
+source: "https://docs.langchain.com/oss/python/langgraph/errors/MULTIPLE_SUBGRAPHS"
+category: "docs"
+tags: [docs, langgraph, errors, multiple_subgraphs]
+---
+
 # MULTIPLE_SUBGRAPHS
 
 This error occurs when you [call a subgraph inside a node](../use-subgraphs.md#call-a-subgraph-inside-a-node) multiple times, and the subgraph is compiled with `checkpointer=True` (continuations mode).
@@ -27,7 +35,7 @@ Choose one of the following based on your requirements:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/MULTIPLE_SUBGRAPHS.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

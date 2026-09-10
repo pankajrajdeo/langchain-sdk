@@ -1,3 +1,11 @@
+---
+title: "Fault tolerance"
+description: "Configure per-node timeouts, retries, and error handlers in LangGraph."
+source: "https://docs.langchain.com/oss/python/langgraph/fault-tolerance"
+category: "docs"
+tags: [docs, langgraph, fault-tolerance]
+---
+
 # Fault tolerance
 
 > Configure per-node timeouts, retries, and error handlers in LangGraph.
@@ -666,7 +674,7 @@ except GraphDrained as e:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

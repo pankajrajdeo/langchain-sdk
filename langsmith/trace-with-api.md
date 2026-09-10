@@ -1,3 +1,11 @@
+---
+title: "Trace with API"
+description: "Learn how to trace LLM applications using the LangSmith REST API directly."
+source: "https://docs.langchain.com/langsmith/trace-with-api"
+category: "docs"
+tags: [docs, langsmith, trace-with-api]
+---
+
 # Trace with API
 
 > Learn how to trace LLM applications using the LangSmith REST API directly.
@@ -314,7 +322,7 @@ batch_ingest_runs(api_url, api_key, patches=patches)
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

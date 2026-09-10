@@ -1,3 +1,11 @@
+---
+title: "Split JSON data - text splitter integration"
+description: "Integrate with the Split JSON data text splitter using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/splitters/recursive_json_splitter"
+category: "docs"
+tags: [docs, integrations, splitters, recursive_json_splitter]
+---
+
 # Split JSON data - text splitter integration
 
 > Integrate with the Split JSON data text splitter using LangChain Python.
@@ -136,7 +144,7 @@ Document(page_content='{"paths": {"/api/v1/sessions/{session_id}": {"get": {"tag
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/splitters/recursive_json_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

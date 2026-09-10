@@ -1,3 +1,11 @@
+---
+title: "Custom model providers"
+description: "Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model."
+source: "https://docs.langchain.com/langsmith/llm-gateway-custom-providers"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-custom-providers]
+---
+
 # Custom model providers
 
 > Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model.
@@ -9,7 +17,7 @@ In addition to the [built-in providers](llm-gateway-direct-model-access.md#choos
 
 ## How it works
 
-A custom provider is defined by a [model configuration](model-configurations.md) that you save under **Settings → Model configurations** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-custom-providers). The provider you select in that configuration sets the format the gateway speaks to your upstream:
+A custom provider is defined by a [model configuration](model-configurations.md) that you save under **Settings > Model configurations** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-custom-providers). The provider you select in that configuration sets the format the gateway speaks to your upstream:
 
 | Configuration provider         | Wire format        | Example endpoints                                     |
 | ------------------------------ | ------------------ | ----------------------------------------------------- |
@@ -36,8 +44,8 @@ Both routes look up the same configuration, resolve the same secret, and proxy t
 
 ## 1. Create a custom provider configuration
 
-1. Add the upstream endpoint's API key as a workspace secret under **Settings → Integrations → Provider Secrets**. Give it a descriptive name (for example, `MY_PROVIDER_API_KEY`).
-2. Go to **Settings → Model configurations** and create a configuration with **OpenAI Compatible Endpoint** or **Anthropic** as the provider.
+1. Add the upstream endpoint's API key as a workspace secret under **Settings > Integrations > Provider Secrets**. Give it a descriptive name (for example, `MY_PROVIDER_API_KEY`).
+2. Go to **Settings > Model configurations** and create a configuration with **OpenAI Compatible Endpoint** or **Anthropic** as the provider.
 3. Set the **Base URL** to your upstream endpoint (for example, `https://my-inference-server.example.com/v1`) and the **Model Name** to a model identifier the endpoint expects.
 4. Set the **API Key Name** to the secret you created.
 5. Save the configuration with a **name**. This name is what you'll use in the gateway route.
@@ -53,12 +61,16 @@ Call the saved configuration by name (`my-custom-openai-endpoint` and `my-anthro
 
 Use this route when the upstream serves multiple models and you want callers to pick which one:
 
+**OpenAI-compatible**
+
 ```bash
 curl https://gateway.smith.langchain.com/providers/my-custom-openai-endpoint/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"model":"llama3.1:8b","messages":[{"role":"user","content":"ping"}]}'
 ```
+
+**Anthropic**
 
 ```bash
 curl https://gateway.smith.langchain.com/providers/my-anthropic-endpoint/v1/messages \
@@ -73,12 +85,16 @@ The gateway forwards the request body's `model` field to the upstream as-is.
 
 Use this route to pin every call through this configuration to a single model, regardless of what the client requests—useful for enforcing model behavior for a team or application:
 
+**OpenAI-compatible**
+
 ```bash
 curl https://gateway.smith.langchain.com/models/my-custom-openai-endpoint/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"messages":[{"role":"user","content":"ping"}]}'
 ```
+
+**Anthropic**
 
 ```bash
 curl https://gateway.smith.langchain.com/models/my-anthropic-endpoint/v1/messages \
@@ -93,12 +109,12 @@ The gateway overrides the request body's `model` field with the model name from 
 
 * [Model fallbacks](llm-gateway-fallbacks.md): chain these configurations so a backup takes over when one rate-limits or errors.
 * [Spend policies](llm-gateway-spend-policies.md): apply cost limits to custom providers.
-* [Data protection](llm-gateway-data-protection.md): redact sensitive data before it reaches your endpoint.
+* [Data policy](llm-gateway-data-policy.md): redact sensitive data before it reaches your endpoint.
 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-custom-providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

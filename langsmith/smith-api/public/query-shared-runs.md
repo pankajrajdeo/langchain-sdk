@@ -1,8 +1,18 @@
+---
+title: "Query shared runs"
+description: "Get run by ids or the shared run if not specifed."
+source: "https://docs.langchain.com/langsmith/smith-api/public/query-shared-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, query-shared-runs]
+---
+
 # Query shared runs
 
 > Get run by ids or the shared run if not specifed.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/public/{share_token}/runs/query**
 
 ````yaml
 openapi: 3.1.0

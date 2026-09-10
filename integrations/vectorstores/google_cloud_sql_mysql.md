@@ -1,3 +1,11 @@
+---
+title: "Google cloud SQL for mysql integration"
+description: "Integrate with the Google cloud SQL for mysql vector store using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/vectorstores/google_cloud_sql_mysql"
+category: "docs"
+tags: [docs, integrations, vectorstores, google_cloud_sql_mysql]
+---
+
 # Google cloud SQL for mysql integration
 
 > Integrate with the Google cloud SQL for mysql vector store using LangChain Python.
@@ -16,7 +24,7 @@ To run this notebook, you will need to do the following:
 
 * [Create a Google Cloud Project](https://developers.google.com/workspace/guides/create-project)
 * [Enable the Cloud SQL Admin API.](https://console.cloud.google.com/flows/enableapi?apiid=sqladmin.googleapis.com)
-* [Create a Cloud SQL instance.](https://cloud.google.com/sql/docs/mysql/connect-instance-auth-proxy#create-instance) (version must be >= **8.0.36** with **cloudsql\_vector** database flag configured to "On")
+* [Create a Cloud SQL instance.](https://cloud.google.com/sql/docs/mysql/connect-instance-auth-proxy#create-instance) (version must be **8.0.36** or later with **cloudsql\_vector** database flag configured to "On")
 * [Create a Cloud SQL database.](https://cloud.google.com/sql/docs/mysql/create-manage-databases)
 * [Add a User to the database.](https://cloud.google.com/sql/docs/mysql/create-manage-users)
 
@@ -76,7 +84,7 @@ PROJECT_ID = "my-project-id"  # @param {type:"string"}
 
 Find your database values, in the [Cloud SQL Instances page](https://console.cloud.google.com/sql?_ga=2.223735448.2062268965.1707700487-2088871159.1707257687).
 
-**Note:** MySQL vector support is only available on MySQL instances with version **>= 8.0.36**.
+**Note:** MySQL vector support is only available on MySQL instances with version **8.0.36** or later.
 
 For existing instances, you may need to perform a [self-service maintenance update](https://cloud.google.com/sql/docs/mysql/self-service-maintenance) to update your maintenance version to **MYSQL\_8\_0\_36.R20240401.03\_00** or greater. Once updated, [configure your database flags](https://cloud.google.com/sql/docs/mysql/flags) to have the new **cloudsql\_vector** flag to "On".
 
@@ -301,7 +309,7 @@ print(docs)
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_cloud_sql_mysql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

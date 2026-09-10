@@ -1,3 +1,11 @@
+---
+title: "Agents"
+description: "An agent is a model calling tools in a loop until a given task is complete."
+source: "https://docs.langchain.com/oss/python/langchain/agents"
+category: "docs"
+tags: [docs, langchain, agents]
+---
+
 # Agents
 
 An agent is a model calling tools in a loop until a given task is complete.
@@ -13,11 +21,15 @@ A harness is everything around that loop: the prompt, the tools, and any middlew
 
 [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is a highly configurable harness. At its simplest, you can create one with:
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools)
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -25,11 +37,15 @@ from langchain.agents import create_agent
 agent = create_agent(model="openai:gpt-5.5", tools=tools)
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="anthropic:claude-sonnet-4-6", tools=tools)
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -37,17 +53,23 @@ from langchain.agents import create_agent
 agent = create_agent(model="openrouter:z-ai/glm-5.2", tools=tools)
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="fireworks:accounts/fireworks/models/glm-5p2", tools=tools)
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="baseten:zai-org/GLM-5.2", tools=tools)
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents import create_agent
@@ -68,11 +90,15 @@ Building on that, you can configure the basics directly with the `model=`, `tool
 
 Pass a model identifier string (`"provider:model"`) or an initialized model instance to select the model for your agent. See [Models](models.md) for parameters, provider setup, and dynamic model selection.
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools)
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -80,11 +106,15 @@ from langchain.agents import create_agent
 agent = create_agent(model="openai:gpt-5.5", tools=tools)
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="anthropic:claude-sonnet-4-6", tools=tools)
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -92,17 +122,23 @@ from langchain.agents import create_agent
 agent = create_agent(model="openrouter:z-ai/glm-5.2", tools=tools)
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="fireworks:accounts/fireworks/models/glm-5p2", tools=tools)
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 
 agent = create_agent(model="baseten:zai-org/GLM-5.2", tools=tools)
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents import create_agent
@@ -113,6 +149,8 @@ agent = create_agent(model="ollama:north-mini-code-1.0", tools=tools)
 ### Tools
 
 To provide the agent with tools, pass any Python callable, LangChain tool, or tool dict. See [Tools](tools.md) for tool definition, context access, and dynamic tool selection.
+
+**Google**
 
 ```python
 from langchain.agents import create_agent
@@ -126,6 +164,8 @@ def search(query: str) -> str:
 agent = create_agent(model="google_genai:gemini-3.6-flash", tools=[search])
 ```
 
+**OpenAI**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -137,6 +177,8 @@ def search(query: str) -> str:
 
 agent = create_agent(model="openai:gpt-5.5", tools=[search])
 ```
+
+**Anthropic**
 
 ```python
 from langchain.agents import create_agent
@@ -150,6 +192,8 @@ def search(query: str) -> str:
 agent = create_agent(model="anthropic:claude-sonnet-4-6", tools=[search])
 ```
 
+**OpenRouter**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -161,6 +205,8 @@ def search(query: str) -> str:
 
 agent = create_agent(model="openrouter:z-ai/glm-5.2", tools=[search])
 ```
+
+**Fireworks**
 
 ```python
 from langchain.agents import create_agent
@@ -174,6 +220,8 @@ def search(query: str) -> str:
 agent = create_agent(model="fireworks:accounts/fireworks/models/glm-5p2", tools=[search])
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -185,6 +233,8 @@ def search(query: str) -> str:
 
 agent = create_agent(model="baseten:zai-org/GLM-5.2", tools=[search])
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents import create_agent
@@ -202,6 +252,8 @@ agent = create_agent(model="ollama:north-mini-code-1.0", tools=[search])
 
 Shape how the agent approaches tasks. The system prompt parameter accepts a string or `SystemMessage`. For dynamic prompts at runtime, use [middleware](middleware.md).
 
+**Google**
+
 ```python
 agent = create_agent(
     model="google_genai:gemini-3.6-flash",
@@ -209,6 +261,8 @@ agent = create_agent(
     system_prompt="You are a helpful assistant. Be concise and accurate.",
 )
 ```
+
+**OpenAI**
 
 ```python
 agent = create_agent(
@@ -218,6 +272,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 agent = create_agent(
     model="anthropic:claude-sonnet-4-6",
@@ -225,6 +281,8 @@ agent = create_agent(
     system_prompt="You are a helpful assistant. Be concise and accurate.",
 )
 ```
+
+**OpenRouter**
 
 ```python
 agent = create_agent(
@@ -234,6 +292,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 agent = create_agent(
     model="fireworks:accounts/fireworks/models/glm-5p2",
@@ -242,6 +302,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 agent = create_agent(
     model="baseten:zai-org/GLM-5.2",
@@ -249,6 +311,8 @@ agent = create_agent(
     system_prompt="You are a helpful assistant. Be concise and accurate.",
 )
 ```
+
+**Ollama**
 
 ```python
 agent = create_agent(
@@ -261,6 +325,8 @@ agent = create_agent(
 ### Structured output
 
 Return a validated schema from the agent using `response_format=`. See [Structured output](structured-output.md) for strategies and examples.
+
+**Google**
 
 ```python
 from pydantic import BaseModel
@@ -275,6 +341,8 @@ result = agent.invoke({"messages": [{"role": "user", "content": "Summarize AI tr
 result["structured_response"]  # Answer(summary=..., confidence=...)
 ```
 
+**OpenAI**
+
 ```python
 from pydantic import BaseModel
 from langchain.agents import create_agent
@@ -287,6 +355,8 @@ agent = create_agent(model="openai:gpt-5.5", tools=tools, response_format=Answer
 result = agent.invoke({"messages": [{"role": "user", "content": "Summarize AI trends"}]})
 result["structured_response"]  # Answer(summary=..., confidence=...)
 ```
+
+**Anthropic**
 
 ```python
 from pydantic import BaseModel
@@ -301,6 +371,8 @@ result = agent.invoke({"messages": [{"role": "user", "content": "Summarize AI tr
 result["structured_response"]  # Answer(summary=..., confidence=...)
 ```
 
+**OpenRouter**
+
 ```python
 from pydantic import BaseModel
 from langchain.agents import create_agent
@@ -313,6 +385,8 @@ agent = create_agent(model="openrouter:z-ai/glm-5.2", tools=tools, response_form
 result = agent.invoke({"messages": [{"role": "user", "content": "Summarize AI trends"}]})
 result["structured_response"]  # Answer(summary=..., confidence=...)
 ```
+
+**Fireworks**
 
 ```python
 from pydantic import BaseModel
@@ -327,6 +401,8 @@ result = agent.invoke({"messages": [{"role": "user", "content": "Summarize AI tr
 result["structured_response"]  # Answer(summary=..., confidence=...)
 ```
 
+**Baseten**
+
 ```python
 from pydantic import BaseModel
 from langchain.agents import create_agent
@@ -339,6 +415,8 @@ agent = create_agent(model="baseten:zai-org/GLM-5.2", tools=tools, response_form
 result = agent.invoke({"messages": [{"role": "user", "content": "Summarize AI trends"}]})
 result["structured_response"]  # Answer(summary=..., confidence=...)
 ```
+
+**Ollama**
 
 ```python
 from pydantic import BaseModel
@@ -367,6 +445,8 @@ The built-in field is:
 
 To add custom fields (for example, a `user_id` or a counter), subclass `AgentState` and pass the subclass to `create_agent` via `state_schema=`:
 
+**Google**
+
 ```python
 from langchain.agents import AgentState, create_agent
 
@@ -380,6 +460,8 @@ agent = create_agent(
     state_schema=MyState,  # [!code highlight]
 )
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import AgentState, create_agent
@@ -395,6 +477,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import AgentState, create_agent
 
@@ -408,6 +492,8 @@ agent = create_agent(
     state_schema=MyState,  # [!code highlight]
 )
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import AgentState, create_agent
@@ -423,6 +509,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import AgentState, create_agent
 
@@ -437,6 +525,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import AgentState, create_agent
 
@@ -450,6 +540,8 @@ agent = create_agent(
     state_schema=MyState,  # [!code highlight]
 )
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents import AgentState, create_agent
@@ -474,6 +566,8 @@ For full details, examples, and middleware-level state schemas, see [Short-term 
 
 You can invoke an agent with a message. Behind the scenes that passes an update to the agent's [`State`](../langgraph/graph-api.md#state). All agents include a [sequence of messages](../langgraph/use-graph-api.md#messagesstate) in their state; to invoke the agent, pass a new message along with a `thread_id` so the agent can persist and resume conversation history:
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 from langchain_core.utils.uuid import uuid7
@@ -498,6 +592,8 @@ result = agent.invoke(
     config=config,
 )
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -524,6 +620,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 from langchain_core.utils.uuid import uuid7
@@ -548,6 +646,8 @@ result = agent.invoke(
     config=config,
 )
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -574,6 +674,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 from langchain_core.utils.uuid import uuid7
@@ -598,6 +700,8 @@ result = agent.invoke(
     config=config,
 )
 ```
+
+**Baseten**
 
 ```python
 from langchain.agents import create_agent
@@ -624,6 +728,8 @@ result = agent.invoke(
 )
 ```
 
+**Ollama**
+
 ```python
 from langchain.agents import create_agent
 from langchain_core.utils.uuid import uuid7
@@ -648,12 +754,17 @@ result = agent.invoke(
     config=config,
 )
 ```
+
+#### [View example trace](https://smith.langchain.com/public/b220516f-9133-4c86-bc5a-073ef63e3f7f/r)
+Open a public LangSmith run for this example.
 
 > [!NOTE]
 > Persisting conversation history with `thread_id` requires the agent to be configured with a [checkpointer](long-term-memory.md). When deployed on [LangSmith](../langsmith/deployment.md), a checkpointer is provisioned automatically. Locally, pass one explicitly, for example `create_agent(..., checkpointer=InMemorySaver())`.
 
 If you also need to pass per-run configuration (such as a user ID, API keys, or feature flags) to tools and middleware, pass it as `context` alongside `config`. Define the shape of that data with `context_schema` and access it through `runtime.context`:
 
+**Google**
+
 ```python
 from dataclasses import dataclass
 
@@ -678,6 +789,8 @@ result = agent.invoke(
     context=Context(user_id="user-123"),
 )
 ```
+
+**OpenAI**
 
 ```python
 from dataclasses import dataclass
@@ -704,6 +817,8 @@ result = agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from dataclasses import dataclass
 
@@ -728,6 +843,8 @@ result = agent.invoke(
     context=Context(user_id="user-123"),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from dataclasses import dataclass
@@ -754,6 +871,8 @@ result = agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from dataclasses import dataclass
 
@@ -778,6 +897,8 @@ result = agent.invoke(
     context=Context(user_id="user-123"),
 )
 ```
+
+**Baseten**
 
 ```python
 from dataclasses import dataclass
@@ -804,6 +925,8 @@ result = agent.invoke(
 )
 ```
 
+**Ollama**
+
 ```python
 from dataclasses import dataclass
 
@@ -828,6 +951,9 @@ result = agent.invoke(
     context=Context(user_id="user-123"),
 )
 ```
+
+#### [View example trace](https://smith.langchain.com/public/fb33392a-cf5d-4673-a9b2-c58a5abeffd0/r)
+Open a public LangSmith run for this example.
 
 `thread_id` scopes the *conversation* (message history, checkpoints), while `context` carries *per-run* data your tools and middleware read at invocation time. Both are commonly passed together. See [tool context](tools.md#context) and [Runtime](runtime.md) for more.
 
@@ -854,8 +980,13 @@ for snapshot in stream.values:
         print(f"Calling tools: {[tc['name'] for tc in latest_message.tool_calls]}")
 ```
 
+#### [View example trace](https://smith.langchain.com/public/502a2e8a-a9aa-412a-b2e0-ef2ab0290175/r)
+Open a public LangSmith run for this example.
+
 > [!TIP]
 > For streaming modes, event types, and UI patterns, see [Streaming](streaming.md).
+
+<a id="tool-use-in-the-react-loop"></a>
 
 ## Configure the harness
 
@@ -892,6 +1023,8 @@ Human-in-the-loop approval before high-impact actions
 
 Agents are especially useful when they can take action rather than just generate text. The execution environment gives the agent a workspace: tools it can call, a filesystem for reading and writing files across turns, and code execution for running scripts or shell commands.
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends import StateBackend
@@ -903,6 +1036,8 @@ agent = create_agent(
     middleware=[FilesystemMiddleware(backend=StateBackend())],
 )
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -916,6 +1051,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends import StateBackend
@@ -927,6 +1064,8 @@ agent = create_agent(
     middleware=[FilesystemMiddleware(backend=StateBackend())],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -940,6 +1079,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends import StateBackend
@@ -952,6 +1093,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 from deepagents.backends import StateBackend
@@ -963,6 +1106,8 @@ agent = create_agent(
     middleware=[FilesystemMiddleware(backend=StateBackend())],
 )
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents import create_agent
@@ -981,9 +1126,13 @@ See [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/m
 > [!NOTE]
 > This example imports from the `deepagents` package. Install it with:
 >
+> **pip**
+>
 > ```bash
 > pip install deepagents
 > ```
+>
+> **uv**
 >
 > ```bash
 > uv add deepagents
@@ -992,6 +1141,8 @@ See [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/m
 ### Context management
 
 Every model call has a fixed context window. As an agent runs, that window fills with accumulating history, tool results, and intermediate steps. Summarization compresses history before overflow hits; memory loads persistent instructions at startup so knowledge carries across sessions; skills surface domain knowledge on demand rather than loading everything upfront.
+
+**Google**
 
 ```python
 from deepagents.backends import StateBackend
@@ -1012,6 +1163,8 @@ agent = create_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
@@ -1030,6 +1183,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Anthropic**
 
 ```python
 from deepagents.backends import StateBackend
@@ -1050,6 +1205,8 @@ agent = create_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
@@ -1068,6 +1225,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Fireworks**
 
 ```python
 from deepagents.backends import StateBackend
@@ -1088,6 +1247,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
@@ -1106,6 +1267,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents.backends import StateBackend
@@ -1131,9 +1294,13 @@ See [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain
 > [!NOTE]
 > This example imports from the `deepagents` package. Install it with:
 >
+> **pip**
+>
 > ```bash
 > pip install deepagents
 > ```
+>
+> **uv**
 >
 > ```bash
 > uv add deepagents
@@ -1142,6 +1309,8 @@ See [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain
 ### Planning and delegation
 
 Complex tasks often exceed what one context window can handle. Delegation lets the main agent break work into pieces, hand them to subagents that each run in their own isolated context, and stay focused on coordination rather than execution. Work can run in parallel; the main agent's context stays clean.
+
+**Google**
 
 ```python
 from deepagents.backends import StateBackend
@@ -1181,6 +1350,8 @@ agent = create_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware
@@ -1218,6 +1389,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Anthropic**
 
 ```python
 from deepagents.backends import StateBackend
@@ -1257,6 +1430,8 @@ agent = create_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware
@@ -1294,6 +1469,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Fireworks**
 
 ```python
 from deepagents.backends import StateBackend
@@ -1333,6 +1510,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware
@@ -1370,6 +1549,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents.backends import StateBackend
@@ -1414,9 +1595,13 @@ See [Subagents](multi-agent/subagents.md).
 > [!NOTE]
 > This example imports from the `deepagents` package. Install it with:
 >
+> **pip**
+>
 > ```bash
 > pip install deepagents
 > ```
+>
+> **uv**
 >
 > ```bash
 > uv add deepagents
@@ -1426,29 +1611,43 @@ See [Subagents](multi-agent/subagents.md).
 
 Optionally use an identifier for the agent. This is especially useful when embedding the agent as a subgraph in [multi-agent](multi-agent.md) systems.
 
+**Google**
+
 ```python
 agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools, name="research_assistant")
 ```
+
+**OpenAI**
 
 ```python
 agent = create_agent(model="openai:gpt-5.5", tools=tools, name="research_assistant")
 ```
 
+**Anthropic**
+
 ```python
 agent = create_agent(model="anthropic:claude-sonnet-4-6", tools=tools, name="research_assistant")
 ```
+
+**OpenRouter**
 
 ```python
 agent = create_agent(model="openrouter:z-ai/glm-5.2", tools=tools, name="research_assistant")
 ```
 
+**Fireworks**
+
 ```python
 agent = create_agent(model="fireworks:accounts/fireworks/models/glm-5p2", tools=tools, name="research_assistant")
 ```
 
+**Baseten**
+
 ```python
 agent = create_agent(model="baseten:zai-org/GLM-5.2", tools=tools, name="research_assistant")
 ```
+
+**Ollama**
 
 ```python
 agent = create_agent(model="ollama:north-mini-code-1.0", tools=tools, name="research_assistant")
@@ -1457,6 +1656,8 @@ agent = create_agent(model="ollama:north-mini-code-1.0", tools=tools, name="rese
 ### Fault tolerance
 
 Agents in production encounter failures that rarely appear in development: rate limits, model timeouts, transient API errors. Fault tolerance middleware handles these at the infrastructure level so your tools and business logic don't need try/catch around every call.
+
+**Google**
 
 ```python
 from langchain.agents import create_agent
@@ -1478,6 +1679,8 @@ agent = create_agent(
 )
 ```
 
+**OpenAI**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import ModelRetryMiddleware, ToolRetryMiddleware
@@ -1497,6 +1700,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Anthropic**
 
 ```python
 from langchain.agents import create_agent
@@ -1518,6 +1723,8 @@ agent = create_agent(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import ModelRetryMiddleware, ToolRetryMiddleware
@@ -1537,6 +1744,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Fireworks**
 
 ```python
 from langchain.agents import create_agent
@@ -1558,6 +1767,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import ModelRetryMiddleware, ToolRetryMiddleware
@@ -1577,6 +1788,8 @@ agent = create_agent(
     ],
 )
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents import create_agent
@@ -1604,6 +1817,8 @@ See [`ModelRetryMiddleware`](https://reference.langchain.com/python/langchain/ag
 
 Some policies can't live in a prompt—they need to be enforced deterministically regardless of what the model does. Guardrails intercept data as it flows through the agent loop, applying compliance rules or content policies before tool results reach the model's context.
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import PIIMiddleware
@@ -1620,6 +1835,8 @@ agent = create_agent(
     middleware=[PIIMiddleware("email")],
 )
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -1638,6 +1855,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import PIIMiddleware
@@ -1654,6 +1873,8 @@ agent = create_agent(
     middleware=[PIIMiddleware("email")],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -1672,6 +1893,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import PIIMiddleware
@@ -1689,6 +1912,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import PIIMiddleware
@@ -1705,6 +1930,8 @@ agent = create_agent(
     middleware=[PIIMiddleware("email")],
 )
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents import create_agent
@@ -1729,6 +1956,8 @@ See [`PIIMiddleware`](https://reference.langchain.com/python/langchain/agents/mi
 
 Full autonomy isn't always appropriate. Steering lets you place humans at specific decision points—before destructive writes, expensive API calls, or anything requiring judgment—without restructuring your agent. The agent pauses and waits; a human approves, edits, or rejects; execution continues.
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
@@ -1745,6 +1974,8 @@ agent = create_agent(
     middleware=[HumanInTheLoopMiddleware(interrupt_on={"write_file": True})],
 )
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -1763,6 +1994,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
@@ -1779,6 +2012,8 @@ agent = create_agent(
     middleware=[HumanInTheLoopMiddleware(interrupt_on={"write_file": True})],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -1797,6 +2032,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
@@ -1814,6 +2051,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
@@ -1830,6 +2069,8 @@ agent = create_agent(
     middleware=[HumanInTheLoopMiddleware(interrupt_on={"write_file": True})],
 )
 ```
+
+**Ollama**
 
 ```python
 from langchain.agents import create_agent
@@ -1864,7 +2105,7 @@ Write your own hooks for business logic, PII scrubbing, and more
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

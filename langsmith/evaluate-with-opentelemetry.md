@@ -1,3 +1,11 @@
+---
+title: "How to evaluate with OpenTelemetry"
+description: "This guide shows you how to run an evaluation using OpenTelemetry tracing with LangSmith."
+source: "https://docs.langchain.com/langsmith/evaluate-with-opentelemetry"
+category: "docs"
+tags: [docs, langsmith, evaluate-with-opentelemetry]
+---
+
 # How to evaluate with OpenTelemetry
 
 This guide shows you how to run an evaluation using OpenTelemetry tracing with LangSmith.
@@ -27,9 +35,13 @@ This tutorial uses Strands agents as example implementations, but the approach w
 
 Install dependencies:
 
+**Python**
+
 ```bash
 pip install langsmith strands-agents strands-agents-tools opentelemetry-sdk opentelemetry-exporter-otlp
 ```
+
+**TypeScript**
 
 ```bash
 npm install langsmith @strands-agents/sdk @opentelemetry/api @opentelemetry/sdk-trace-node @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-http @opentelemetry/resources
@@ -60,6 +72,8 @@ This guide assumes that a dataset has been created in LangSmith with examples to
 
 An experiment session groups all evaluation traces together. Create one using the LangSmith client:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -78,6 +92,8 @@ project = client.create_project(
 
 experiment_id = str(project.id)
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -109,6 +125,8 @@ First, you need an application that uses OpenTelemetry for tracing. This example
 
 > [!NOTE]
 > TypeScript examples are not provided for this step as the `Strands TypeScript SDK` does not currently support `OpenTelemetry` observability (as of February 2026).
+
+**Python**
 
 ```python
 import os
@@ -150,6 +168,8 @@ The following attributes are relevant for experiment evaluation:
 
 For a complete list of supported OpenTelemetry attributes, see [Trace with OpenTelemetry](trace-with-opentelemetry.md#supported-opentelemetry-attribute-and-event-mapping).
 
+**Python**
+
 ```python
 from opentelemetry import trace
 
@@ -176,6 +196,8 @@ def evaluate_with_opentelemetry(agent, example_id: str, example_input: str, expe
 
         return output_text
 ```
+
+**TypeScript**
 
 ```typescript
 import { trace, Span } from "@opentelemetry/api";
@@ -220,6 +242,8 @@ async function evaluateWithAgent(
 
 Each experiment run creates traces in LangSmith that are linked to your dataset examples.
 
+**Python**
+
 ```python
 # Iterate through dataset examples
 for example in client.list_examples(dataset_name=dataset_name):
@@ -236,6 +260,8 @@ for example in client.list_examples(dataset_name=dataset_name):
         experiment_id=experiment_id
     )
 ```
+
+**TypeScript**
 
 ```typescript
 // Iterate through dataset examples
@@ -265,7 +291,7 @@ Navigate to your experiment in the [LangSmith UI](https://smith.langchain.com?ut
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-with-opentelemetry.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Search Assistants"
+description: "Search for assistants."
+source: "https://docs.langchain.com/langsmith/agent-server-api/assistants/search-assistants"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, assistants, search-assistants]
+---
+
 # Search Assistants
 
 > Search for assistants.
@@ -5,6 +13,8 @@
 This endpoint also functions as the endpoint to list all assistants.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /assistants/search**
 
 ````yaml
 openapi: 3.1.0

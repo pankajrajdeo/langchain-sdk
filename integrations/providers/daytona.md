@@ -1,3 +1,11 @@
+---
+title: "Daytona integrations"
+description: "Integrate with Daytona using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/daytona"
+category: "docs"
+tags: [docs, integrations, providers, daytona]
+---
+
 # Daytona integrations
 
 > Integrate with Daytona using LangChain Python.
@@ -13,7 +21,7 @@ Data analysis tool powered by Daytona sandboxes.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/daytona.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

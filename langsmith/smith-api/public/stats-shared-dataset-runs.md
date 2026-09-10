@@ -1,8 +1,18 @@
+---
+title: "Stats shared dataset runs"
+description: "Get run stats in projects run over a dataset that has been shared."
+source: "https://docs.langchain.com/langsmith/smith-api/public/stats-shared-dataset-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, stats-shared-dataset-runs]
+---
+
 # Stats shared dataset runs
 
 > Get run stats in projects run over a dataset that has been shared.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/public/{share_token}/datasets/runs/stats**
 
 ````yaml
 openapi: 3.1.0

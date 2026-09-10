@@ -1,3 +1,11 @@
+---
+title: "Amazon Bedrock agentcore browser integration"
+description: "Integrate with the Amazon Bedrock agentcore browser tool using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_browser"
+category: "docs"
+tags: [docs, integrations, tools, bedrock_agentcore_browser]
+---
+
 # Amazon Bedrock agentcore browser integration
 
 > Integrate with the Amazon Bedrock agentcore browser tool using LangChain Python.
@@ -40,10 +48,14 @@ The toolkit provides multiple tools for browser automation:
 
 The integration lives in the `langchain-aws` package. It also requires `playwright` and `beautifulsoup4` for browser automation and HTML parsing.
 
+**pip**
+
 ```bash
 pip install -U langchain-aws bedrock-agentcore playwright beautifulsoup4
 playwright install chromium
 ```
+
+**uv**
 
 ```bash
 uv add langchain-aws bedrock-agentcore playwright beautifulsoup4
@@ -387,7 +399,7 @@ For detailed documentation of all features and configurations, see:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_browser.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Delete prompt webhook"
+description: "Delete a specific prompt webhook."
+source: "https://docs.langchain.com/langsmith/smith-api/prompt-webhooks/delete-prompt-webhook"
+category: "docs"
+tags: [docs, langsmith, smith-api, prompt-webhooks, delete-prompt-webhook]
+---
+
 # Delete prompt webhook
 
 > Delete a specific prompt webhook.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/prompt-webhooks/{webhook_id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "Org read single chart"
+description: "Deprecated: organization usage charts have been retired (HTTP 410)."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/org-read-single-chart"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, org-read-single-chart]
+---
+
 # Org read single chart
 
 > Deprecated: organization usage charts have been retired (HTTP 410).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/org-charts/{chart_id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,6 +1,16 @@
+---
+title: "Get current active org members"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/members/active"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/get-current-active-org-members"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, get-current-active-org-members]
+---
+
 # Get current active org members
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/members/active**
 
 ````yaml
 openapi: 3.1.0

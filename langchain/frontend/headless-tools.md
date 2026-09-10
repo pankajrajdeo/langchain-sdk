@@ -1,3 +1,11 @@
+---
+title: "Headless tools"
+description: "Run browser and device APIs on the client with headless tool implementations"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/headless-tools"
+category: "docs"
+tags: [docs, langchain, frontend, headless-tools]
+---
+
 # Headless tools
 
 > Run browser and device APIs on the client with headless tool implementations
@@ -33,6 +41,8 @@ execution.
 Define normal tools on the server that immediately call `interrupt()`, then
 mirror the same tool names and argument fields in a
 frontend `tools.ts` file.
+
+**agent.py**
 
 ```python
 from typing import Any
@@ -110,6 +120,8 @@ Each tool interrupts with a structured payload the frontend can handle, then
 returns the value provided when the run resumes. Mirror the same tool names and
 schemas on the client so the frontend can attach implementations.
 
+**tools.ts**
+
 ```ts
 import * as z from "zod";
 import { tool } from "langchain";
@@ -147,6 +159,8 @@ Put the client-only behavior in a separate module and attach it with
 `.implement(...)`. The real playground includes a fuller IndexedDB store with
 search, listing, expiration, and delete operations. The following example shows
 the same shape at a higher level:
+
+**impl.ts**
 
 ```ts
 import {
@@ -203,11 +217,15 @@ call, the hook runs the client implementation and resumes the run for you.
 Define a TypeScript interface matching your agent's state schema and pass it as
 a type parameter to `useStream` for type-safe access to state values:
 
+**types.ts**
+
 ```ts
 export interface AgentState {
   messages: BaseMessage[];
 }
 ```
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -227,6 +245,8 @@ export function Chat() {
   return <ChatView messages={stream.messages} toolCalls={stream.toolCalls} />;
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -252,6 +272,8 @@ const stream = useStream<AgentState>({
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -270,6 +292,8 @@ const stream = useStream<AgentState>({
 
 <ChatView messages={$messages} toolCalls={$toolCalls} />
 ```
+
+**Angular**
 
 ```ts
 import { Component } from "@angular/core";
@@ -357,7 +381,7 @@ client:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/headless-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

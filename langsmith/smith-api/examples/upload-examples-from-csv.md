@@ -1,3 +1,11 @@
+---
+title: "Upload examples from csv"
+description: "Upload examples from a CSV file."
+source: "https://docs.langchain.com/langsmith/smith-api/examples/upload-examples-from-csv"
+category: "docs"
+tags: [docs, langsmith, smith-api, examples, upload-examples-from-csv]
+---
+
 # Upload examples from csv
 
 > Upload examples from a CSV file.
@@ -6,6 +14,8 @@ Note: For non-csv upload, please use
 the POST /v1/platform/datasets/{dataset_id}/examples endpoint which provides more efficient upload.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/examples/upload/{dataset_id}**
 
 ````yaml
 openapi: 3.1.0

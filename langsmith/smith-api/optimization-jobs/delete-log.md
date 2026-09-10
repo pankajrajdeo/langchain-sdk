@@ -1,8 +1,18 @@
+---
+title: "Delete log"
+description: "Delete a prompt optimization job log."
+source: "https://docs.langchain.com/langsmith/smith-api/optimization-jobs/delete-log"
+category: "docs"
+tags: [docs, langsmith, smith-api, optimization-jobs, delete-log]
+---
+
 # Delete log
 
 > Delete a prompt optimization job log.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/repos/{owner}/{repo}/optimization-jobs/{job_id}/logs/{log_id}**
 
 ````yaml
 openapi: 3.1.0

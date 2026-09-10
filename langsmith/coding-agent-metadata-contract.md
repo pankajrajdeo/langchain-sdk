@@ -1,3 +1,11 @@
+---
+title: "Coding agent metadata contract"
+description: "The metadata schema that standardizes what trace metadata coding agents must emit when sending runs to LangSmith."
+source: "https://docs.langchain.com/langsmith/coding-agent-metadata-contract"
+category: "docs"
+tags: [docs, langsmith, coding-agent-metadata-contract]
+---
+
 # Coding agent metadata contract
 
 > The metadata schema that standardizes what trace metadata coding agents must emit when sending runs to LangSmith.
@@ -103,7 +111,7 @@ Interrupted runs carry the same fields as `root` runs. The run type itself signa
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/coding-agent-metadata-contract.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

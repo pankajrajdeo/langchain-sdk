@@ -1,3 +1,11 @@
+---
+title: "How to evaluate with repetitions"
+description: "Running multiple repetitions can give a more accurate estimate of the performance of your system since LLM outputs are not deterministic. Outputs can differ from one repetition to the next..."
+source: "https://docs.langchain.com/langsmith/repetition"
+category: "docs"
+tags: [docs, langsmith, repetition]
+---
+
 # How to evaluate with repetitions
 
 Running multiple repetitions can give a more accurate estimate of the performance of your system since LLM outputs are not deterministic. Outputs can differ from one repetition to the next. Repetitions are a way to reduce noise in systems prone to high variability, such as agents.
@@ -5,6 +13,8 @@ Running multiple repetitions can give a more accurate estimate of the performanc
 ## Configuring repetitions on an experiment
 
 Add the optional `num_repetitions` param to the `evaluate` / `aevaluate` function ([Python](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate), [TypeScript](https://docs.smith.langchain.com/reference/js/interfaces/evaluation.EvaluateOptions#numrepetitions)) to specify how many times to evaluate over each example in your dataset. For instance, if you have 5 examples in the dataset and set `num_repetitions=5`, each example will be run 5 times, for a total of 25 runs.
+
+**Python**
 
 ```python
 from langsmith import evaluate
@@ -17,6 +27,8 @@ results = evaluate(
     num_repetitions=3,
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { evaluate } from "langsmith/evaluation";
@@ -38,7 +50,7 @@ If you've run your experiment with [repetitions](repetition.md), there will be a
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/repetition.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

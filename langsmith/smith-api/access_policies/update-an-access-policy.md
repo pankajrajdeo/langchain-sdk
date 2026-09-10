@@ -1,8 +1,18 @@
+---
+title: "Update an access policy"
+description: "Updates one or more fields on an access policy."
+source: "https://docs.langchain.com/langsmith/smith-api/access_policies/update-an-access-policy"
+category: "docs"
+tags: [docs, langsmith, smith-api, access_policies, update-an-access-policy]
+---
+
 # Update an access policy
 
 > Updates one or more fields on an access policy.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/platform/orgs/current/access-policies/{access_policy_id}**
 
 ````yaml
 openapi: 3.1.0

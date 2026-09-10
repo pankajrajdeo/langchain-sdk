@@ -1,8 +1,18 @@
+---
+title: "Delete directory repository"
+description: "Deletes an agent or skill repository and its owned child file repositories."
+source: "https://docs.langchain.com/langsmith/smith-api/directories/delete-directory-repository"
+category: "docs"
+tags: [docs, langsmith, smith-api, directories, delete-directory-repository]
+---
+
 # Delete directory repository
 
 > Deletes an agent or skill repository and its owned child file repositories.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/hub/repos/{owner}/{repo}/directories**
 
 ````yaml
 openapi: 3.1.0
@@ -184,10 +194,10 @@ paths:
           name: repo_type
           in: query
           schema:
+            type: string
             enum:
               - agent
               - skill
-            type: string
             title: Repo Type
       responses:
         '204':

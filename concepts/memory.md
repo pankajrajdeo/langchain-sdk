@@ -1,3 +1,11 @@
+---
+title: "Memory overview"
+description: "Memory is a system that remembers information about previous interactions. For AI agents, memory is crucial because it lets them remember previous interactions, learn from feedback, and adapt to user..."
+source: "https://docs.langchain.com/oss/python/concepts/memory"
+category: "docs"
+tags: [docs, concepts, memory]
+---
+
 # Memory overview
 
 [Memory](../langgraph/add-memory.md) is a system that remembers information about previous interactions. For AI agents, memory is crucial because it lets them remember previous interactions, learn from feedback, and adapt to user preferences. As agents tackle more complex tasks with numerous user interactions, this capability becomes essential for both efficiency and user satisfaction.
@@ -186,7 +194,7 @@ For more information about the memory store, see the [Persistence](../langgraph/
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/concepts/memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

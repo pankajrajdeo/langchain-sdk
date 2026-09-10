@@ -1,8 +1,18 @@
+---
+title: "Create a sandbox"
+description: "Create a new sandbox from a snapshot. Provide at most one of snapshot_id or snapshot_name; if neither is provided, the server uses the default snapshot. snapshot_name accepts a Docker-style name or..."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/create-a-sandbox"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, create-a-sandbox]
+---
+
 # Create a sandbox
 
 > Create a new sandbox from a snapshot. Provide at most one of `snapshot_id` or `snapshot_name`; if neither is provided, the server uses the default snapshot. `snapshot_name` accepts a Docker-style `name` or `name:tag` reference (a bare name resolves to `name:latest`).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/boxes**
 
 ````yaml
 openapi: 3.1.0

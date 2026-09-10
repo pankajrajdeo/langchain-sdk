@@ -1,3 +1,11 @@
+---
+title: "ChatCohere integration"
+description: "Integrate with the Cohere chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/cohere"
+category: "docs"
+tags: [docs, integrations, chat, cohere]
+---
+
 # ChatCohere integration
 
 > Integrate with the Cohere chat model using LangChain Python.
@@ -131,7 +139,7 @@ AIMessage(content='The value of magic_function(2) is 12.', additional_kwargs={'d
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

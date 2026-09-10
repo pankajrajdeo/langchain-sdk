@@ -1,3 +1,11 @@
+---
+title: "Profile configuration"
+description: "Configure LangSmith SDK credentials and endpoints with a local profile file."
+source: "https://docs.langchain.com/langsmith/profile-configuration"
+category: "docs"
+tags: [docs, langsmith, profile-configuration]
+---
+
 # Profile configuration
 
 > Configure LangSmith SDK credentials and endpoints with a local profile file.
@@ -207,11 +215,15 @@ If a profile contains both `oauth.access_token` and `api_key`, SDKs use the OAut
 
 When the profile file is present, create the client normally:
 
+**Python**
+
 ```python
 from langsmith import Client
 
 client = Client()
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -221,11 +233,15 @@ const client = new Client();
 
 To override a profile in code, pass the value explicitly:
 
+**Python**
+
 ```python
 from langsmith import Client
 
 client = Client(api_key="<LANGSMITH_API_KEY>")
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -315,7 +331,7 @@ For hosted [LangSmith Cloud](cloud.md), configure these values as environment va
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/profile-configuration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

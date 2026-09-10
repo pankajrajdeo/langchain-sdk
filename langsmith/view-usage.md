@@ -1,3 +1,11 @@
+---
+title: "View usage"
+description: "What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted."
+source: "https://docs.langchain.com/langsmith/view-usage"
+category: "docs"
+tags: [docs, langsmith, view-usage]
+---
+
 # View usage
 
 > What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted.
@@ -18,7 +26,7 @@ LangSmith provides several views into your [organization's](administration-overv
 
 The usage graph shows aggregate trace consumption for your [organization](administration-overview.md#organizations), broken down by [workspace](administration-overview.md#workspaces). It covers the current billing period and does not show spend—for spend, refer to the invoice.
 
-Navigate to **Settings** → **Billing and Usage** → **Usage Graph**.
+Navigate to **Settings** > **Billing and Usage** > **Usage Graph**.
 
 ### Billable metrics
 
@@ -39,7 +47,7 @@ For more details on trace retention tiers, refer to [Data retention](usage-and-b
 
 Enterprise customers with prepaid commitments can view how much of their contract has been consumed.
 
-Navigate to **Settings** → **Usage Configuration** → **Contract Usage**.
+Navigate to **Settings** > **Usage Configuration** > **Contract Usage**.
 
 This view shows:
 
@@ -58,13 +66,13 @@ This view shows:
 
 Invoices are available on **self-serve Cloud plans only**. Enterprise Cloud organizations have a separate usage view for tracking spend.
 
-Navigate to **Settings** → **Billing and Usage** → **Invoices** to see how your usage translates to spend. The first invoice shown is a draft of your current month's invoice, reflecting your running spend to date.
+Navigate to **Settings** > **Billing and Usage** > **Invoices** to see how your usage translates to spend. The first invoice shown is a draft of your current month's invoice, reflecting your running spend to date.
 
 ## Granular usage
 
 Granular usage gives you trace counts broken down by a dimension you choose (workspace, project, user, or API key) over a time range you select. This is useful for internal chargebacks, identifying high-usage teams, or auditing trace activity.
 
-Navigate to **Settings** → **Billing and Usage** → **Granular Usage**, or use the [granular usage API](granular-usage.md).
+Navigate to **Settings** > **Billing and Usage** > **Granular Usage**, or use the [granular usage API](granular-usage.md).
 
 ### What "traces" means here
 
@@ -104,7 +112,7 @@ Granular usage is available on [Self-hosted](self-hosted.md) but requires explic
 
 ### Aggregate usage on Self-hosted
 
-The usage graph is available on [Self-hosted](self-hosted.md) running Helm chart 0.9.5 or later. LangSmith automatically generates and syncs organization usage charts, available under **Settings** → **Usage and billing** → **Usage graph**:
+The usage graph is available on [Self-hosted](self-hosted.md) running Helm chart 0.9.5 or later. LangSmith automatically generates and syncs organization usage charts, available under **Settings** > **Usage and billing** > **Usage graph**:
 
 * **Usage by Workspace**: trace counts (root runs) per workspace
 * **Organization Usage**: total trace counts across the organization
@@ -124,7 +132,7 @@ For programmatic access to trace counts, see [View trace counts across your orga
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/view-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Manage connections"
+description: "Store API keys and OAuth grants so Managed Deep Agents can authenticate with external services at runtime."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-connections"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-connections]
+---
+
 # Manage connections
 
 > Store API keys and OAuth grants so Managed Deep Agents can authenticate with external services at runtime.
@@ -129,6 +137,8 @@ Issue a key that belongs to the agent rather than reusing a personal key. A dedi
 ### Use an opaque secret in a custom tool
 
 The following tool resolves the `organization-tavily` connection for the agent, then sends it to the Tavily API:
+
+**tools/search_web.py**
 
 ```python
 import httpx
@@ -283,6 +293,8 @@ Use an agent-owned OAuth account when every caller should act as one shared acco
 
 This tool resolves the authenticated caller's GitHub connection and calls the GitHub REST API:
 
+**tools/get_github_user.py**
+
 ```python
 import httpx
 from langchain.tools import tool
@@ -309,6 +321,8 @@ For remote MCP servers that support OAuth client registration, Managed Deep Agen
 ### Declare the MCP server first
 
 Add the server in `tools/mcp.py` and reference the connection slug.
+
+**tools/mcp.py**
 
 ```python
 from managed_deepagents import connections, define_mcp
@@ -395,6 +409,8 @@ The frontend that renders this interrupt is a web application, so these examples
 
 Detect the credential gate payload on `stream.interrupt`, render a connect card, then resume with `stream.respond` after every grant is stored:
 
+**React**
+
 ```tsx
 import { useStream } from "@langchain/react";
 
@@ -451,6 +467,8 @@ export function Chat() {
 }
 ```
 
+**Vue**
+
 ```vue
 <script setup lang="ts">
 import { computed } from "vue";
@@ -489,6 +507,8 @@ async function onComplete(connectedSlugs: string[]) {
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -520,6 +540,8 @@ async function onComplete(connectedSlugs: string[]) {
   {/if}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component, computed } from "@angular/core";
@@ -662,7 +684,7 @@ Agent Auth reuses the existing connection for that slug and attaches the caller'
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-connections.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

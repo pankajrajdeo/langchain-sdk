@@ -1,3 +1,11 @@
+---
+title: "Structured output"
+description: "Structured output allows agents to return data in a specific, predictable format. Instead of parsing natural language responses, you get structured data in the form of JSON objects, Pydantic models..."
+source: "https://docs.langchain.com/oss/python/langchain/structured-output"
+category: "docs"
+tags: [docs, langchain, structured-output]
+---
+
 # Structured output
 
 Structured output allows agents to return data in a specific, predictable format. Instead of parsing natural language responses, you get structured data in the form of JSON objects, [Pydantic models](https://docs.pydantic.dev/latest/concepts/models/#basic-model-usage), or dataclasses that your application can use directly.
@@ -79,6 +87,8 @@ Optional boolean parameter to enable strict schema adherence. Supported by some 
 
 LangChain automatically uses `ProviderStrategy` when you pass a schema type directly to [`create_agent.response_format`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and the model supports native structured output:
 
+**Pydantic Model**
+
 ```python
 from pydantic import BaseModel, Field
 from langchain.agents import create_agent
@@ -101,6 +111,8 @@ result = agent.invoke({
 print(result["structured_response"])
 # ContactInfo(name='John Doe', email='john@example.com', phone='(555) 123-4567')
 ```
+
+**Dataclass**
 
 ```python
 from dataclasses import dataclass
@@ -127,6 +139,8 @@ result["structured_response"]
 # {'name': 'John Doe', 'email': 'john@example.com', 'phone': '(555) 123-4567'}
 ```
 
+**TypedDict**
+
 ```python
 from typing_extensions import TypedDict
 from langchain.agents import create_agent
@@ -150,6 +164,8 @@ result = agent.invoke({
 result["structured_response"]
 # {'name': 'John Doe', 'email': 'john@example.com', 'phone': '(555) 123-4567'}
 ```
+
+**JSON Schema**
 
 ```python
 from langchain.agents import create_agent
@@ -230,6 +246,8 @@ Error handling strategy for structured output validation failures. Defaults to `
 * **`Callable[[Exception], str]`**: Custom function that returns error message
 * **`False`**: No retry, let exceptions propagate
 
+**Pydantic Model**
+
 ```python
 from pydantic import BaseModel, Field
 from typing import Literal
@@ -254,6 +272,8 @@ result = agent.invoke({
 result["structured_response"]
 # ProductReview(rating=5, sentiment='positive', key_points=['fast shipping', 'expensive'])
 ```
+
+**Dataclass**
 
 ```python
 from dataclasses import dataclass
@@ -281,6 +301,8 @@ result["structured_response"]
 # {'rating': 5, 'sentiment': 'positive', 'key_points': ['fast shipping', 'expensive']}
 ```
 
+**TypedDict**
+
 ```python
 from typing import Literal
 from typing_extensions import TypedDict
@@ -305,6 +327,8 @@ result = agent.invoke({
 result["structured_response"]
 # {'rating': 5, 'sentiment': 'positive', 'key_points': ['fast shipping', 'expensive']}
 ```
+
+**JSON Schema**
 
 ```python
 from langchain.agents import create_agent
@@ -347,6 +371,8 @@ result = agent.invoke({
 result["structured_response"]
 # {'rating': 5, 'sentiment': 'positive', 'key_points': ['fast shipping', 'expensive']}
 ```
+
+**Union Types**
 
 ```python
 from pydantic import BaseModel, Field
@@ -685,7 +711,7 @@ response_format = ToolStrategy(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

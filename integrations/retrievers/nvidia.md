@@ -1,3 +1,11 @@
+---
+title: "NVIDIARAGRetriever integration"
+description: "Integrate with the NVIDIARAGRetriever using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/retrievers/nvidia"
+category: "docs"
+tags: [docs, integrations, retrievers, nvidia]
+---
+
 # NVIDIARAGRetriever integration
 
 > Integrate with the NVIDIARAGRetriever using LangChain Python.
@@ -105,7 +113,7 @@ For detailed documentation of all `NVIDIARAGRetriever` features and configuratio
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Agent Server"
+description: "LangSmith Deployment's Agent Server offers an API for creating and managing agent-based applications. It is built on the concept of assistants, which are agents configured for specific tasks, and..."
+source: "https://docs.langchain.com/langsmith/agent-server"
+category: "docs"
+tags: [docs, langsmith, agent-server]
+---
+
 # Agent Server
 
 LangSmith Deployment's **Agent Server** offers an API for creating and managing agent-based applications. It is built on the concept of [assistants](assistants.md), which are agents configured for specific tasks, and includes built-in [persistence](../langgraph/persistence.md#memory-store) and a [task queue](#task-queue). This versatile API supports a wide range of agentic application use cases, from background processing to real-time interactions.
@@ -150,7 +158,7 @@ Each worker executes up to [`N_JOBS_PER_WORKER`](env-var-self-hosted.md) runs co
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

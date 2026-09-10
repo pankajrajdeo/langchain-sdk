@@ -1,3 +1,11 @@
+---
+title: "Migrate thread methods to SmithDB"
+description: "Migrate the LangSmith SDK thread methods to their SmithDB-backed equivalents."
+source: "https://docs.langchain.com/langsmith/smithdb-sdk-migration-threads"
+category: "docs"
+tags: [docs, langsmith, smithdb-sdk-migration-threads]
+---
+
 # Migrate thread methods to SmithDB
 
 > Migrate the LangSmith SDK thread methods to their SmithDB-backed equivalents.
@@ -191,6 +199,8 @@ Fetch every thread with activity in a project during a time range.
 
 #### Python
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -201,6 +211,8 @@ for thread in threads:
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 from datetime import datetime, timedelta, timezone
@@ -222,6 +234,8 @@ asyncio.run(main())
 
 #### TypeScript
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -233,6 +247,8 @@ for (const thread of threads) {
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -249,6 +265,8 @@ for await (const thread of client.threads.query({
 
 #### Java
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -275,6 +293,8 @@ for (run in rootRuns) {
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -303,6 +323,8 @@ for (thread in threads) {
 
 #### Go
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -352,6 +374,8 @@ func main() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -433,6 +457,8 @@ Find threads that had a turn end in an error.
 
 #### Python
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -443,6 +469,8 @@ for thread in threads:
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 from datetime import datetime, timedelta, timezone
@@ -465,6 +493,8 @@ asyncio.run(main())
 
 #### TypeScript
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -479,6 +509,8 @@ for (const thread of threads) {
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -496,6 +528,8 @@ for await (const thread of client.threads.query({
 
 #### Java
 #### Before
+**Before**
+
 ```kotlin
 import com.langchain.smith.client.LangsmithClient
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -522,6 +556,8 @@ for (run in rootRuns) {
 ```
 
 #### After
+**After**
+
 ```kotlin
 import java.time.OffsetDateTime
 
@@ -552,6 +588,8 @@ for (thread in threads) {
 
 #### Go
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -601,6 +639,8 @@ func main() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -887,6 +927,8 @@ Fetch all the traces (conversation turns) that belong to one thread.
 
 #### Python
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -897,6 +939,8 @@ for run in client.read_thread(thread_id=thread_id, project_name="default"):
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -916,6 +960,8 @@ asyncio.run(main())
 
 #### TypeScript
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -927,6 +973,8 @@ for await (const run of client.readThread({ threadId, projectName: "default" }))
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -943,6 +991,8 @@ for await (const trace of client.threads.listTraces(threadId, {
 
 #### Java
 #### Before
+**Before**
+
 ```kotlin
 
 import com.langchain.smith.client.LangsmithClient
@@ -971,6 +1021,8 @@ for (run in runs) {
 ```
 
 #### After
+**After**
+
 ```kotlin
 
 import com.langchain.smith.client.LangsmithClient
@@ -1001,6 +1053,8 @@ for (trace in traces) {
 
 #### Go
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1041,6 +1095,8 @@ func main() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1113,6 +1169,8 @@ Request just the fields you need instead of every field, to reduce response size
 
 #### Python
 #### Before
+**Before**
+
 ```python
 from langsmith import Client
 
@@ -1127,6 +1185,8 @@ for run in client.read_thread(
 ```
 
 #### After
+**After**
+
 ```python
 import asyncio
 
@@ -1148,6 +1208,8 @@ asyncio.run(main())
 
 #### TypeScript
 #### Before
+**Before**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1163,6 +1225,8 @@ for await (const run of client.readThread({
 ```
 
 #### After
+**After**
+
 ```ts
 import { Client } from "langsmith";
 
@@ -1181,6 +1245,8 @@ for await (const trace of client.threads.listTraces(threadId, {
 The Before example omits `total_cost` here. Selecting it on the legacy `RunSchema` type triggers a known deserialization bug in the current Java binding (it expects a string, the API returns a number).
 
 #### Before
+**Before**
+
 ```kotlin
 
 import com.langchain.smith.client.LangsmithClient
@@ -1215,6 +1281,8 @@ for (run in runs) {
 ```
 
 #### After
+**After**
+
 ```kotlin
 
 import com.langchain.smith.client.LangsmithClient
@@ -1247,6 +1315,8 @@ for (trace in traces) {
 
 #### Go
 #### Before
+**Before**
+
 ```go
 package main
 
@@ -1292,6 +1362,8 @@ func main() {
 ```
 
 #### After
+**After**
+
 ```go
 package main
 
@@ -1372,7 +1444,7 @@ curl -G "https://api.smith.langchain.com/api/v2/threads/$THREAD_ID/traces" \
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

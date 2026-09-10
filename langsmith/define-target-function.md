@@ -1,3 +1,11 @@
+---
+title: "How to define a target function to evaluate"
+description: "There are three main pieces need to run an evaluation:"
+source: "https://docs.langchain.com/langsmith/define-target-function"
+category: "docs"
+tags: [docs, langsmith, define-target-function]
+---
+
 # How to define a target function to evaluate
 
 There are three main pieces need to run an evaluation:
@@ -41,6 +49,8 @@ results = client.evaluate(
 
 ## Example: Single LLM call
 
+**Python**
+
 ```python
 from langsmith import wrappers
 from openai import OpenAI
@@ -60,6 +70,8 @@ def target(inputs: dict) -> dict:
   return {"answer": response.choices[0].message.content}
 ```
 
+**TypeScript**
+
 ```typescript
 import OpenAI from 'openai';
 import { wrapOpenAI } from "langsmith/wrappers";
@@ -78,6 +90,8 @@ const target = async(inputs) => {
 }
 ```
 
+**Python (LangChain)**
+
 ```python
 from langchain.chat_models import init_chat_model
 
@@ -89,6 +103,8 @@ def target(inputs: dict) -> dict:
   response = model.invoke(messages)
   return {"answer": response.content}
 ```
+
+**TypeScript (LangChain)**
 
 ```typescript
 import { ChatOpenAI } from '@langchain/openai';
@@ -104,6 +120,8 @@ const target = async(inputs) => {
 ```
 
 ## Example: Non-LLM component
+
+**Python**
 
 ```python
 from langsmith import traceable
@@ -131,6 +149,8 @@ def target(inputs: dict) -> dict:
   result = calculator_tool(operation, number1, number2)
   return {"result": result}
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -165,6 +185,8 @@ return { result };
 
 ## Example: Application or agent
 
+**Python**
+
 ```python
 from my_agent import agent
 
@@ -177,6 +199,8 @@ def target(inputs: dict) -> dict:
   # This assumes your agent output is in the right format
   return response
 ```
+
+**TypeScript**
 
 ```typescript
 import { agent } from 'my_agent';
@@ -205,7 +229,7 @@ return response;
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/define-target-function.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

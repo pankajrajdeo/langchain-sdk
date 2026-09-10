@@ -1,3 +1,11 @@
+---
+title: "Export trace data to BigQuery"
+description: "Load LangSmith trace data into BigQuery using bulk export to GCS."
+source: "https://docs.langchain.com/langsmith/big-query-bulk-export"
+category: "docs"
+tags: [docs, langsmith, big-query-bulk-export]
+---
+
 # Export trace data to BigQuery
 
 > Load LangSmith trace data into BigQuery using bulk export to GCS.
@@ -71,7 +79,7 @@ gcloud storage hmac create \
   langsmith-bulk-export@YOUR_PROJECT.iam.gserviceaccount.com
 ```
 
-Save the `accessId` and `secret` from the output. You can also generate HMAC keys in the GCP Console under **Cloud Storage → Settings → Interoperability → Create a key for a service account**.
+Save the `accessId` and `secret` from the output. You can also generate HMAC keys in the GCP Console under **Cloud Storage > Settings > Interoperability > Create a key for a service account**.
 
 ## 4. Create a bulk export destination
 
@@ -280,7 +288,7 @@ For additional error codes and export status details, see [Monitor and troublesh
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/big-query-bulk-export.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

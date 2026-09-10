@@ -1,3 +1,11 @@
+---
+title: "Thinking in LangGraph"
+description: "Learn how to think about building agents with LangGraph"
+source: "https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph"
+category: "docs"
+tags: [docs, langgraph, thinking-in-langgraph]
+---
+
 # Thinking in LangGraph
 
 > Learn how to think about building agents with LangGraph
@@ -643,6 +651,9 @@ final_state = resumed.output
 print("Email sent successfully!")
 ```
 
+#### [View example trace](https://smith.langchain.com/public/2636e51a-5dcd-4a33-8b4d-23678e364ef2/r)
+Open a public LangSmith run for this example.
+
 </details>
 
 The graph pauses when it hits `interrupt()`, saves everything to the checkpointer, and waits. It can resume days later, picking up exactly where it left off. The `thread_id` ensures all state for this conversation is preserved together.
@@ -730,7 +741,7 @@ Implement retry logic with exponential backoff for failed operations
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/thinking-in-langgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

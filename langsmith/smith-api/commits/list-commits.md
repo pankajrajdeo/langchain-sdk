@@ -1,3 +1,11 @@
+---
+title: "List commits"
+description: "List commits for a repository, with pagination support. This endpoint supports both authenticated and unauthenticated access. Authenticated users can access private repositories; unauthenticated..."
+source: "https://docs.langchain.com/langsmith/smith-api/commits/list-commits"
+category: "docs"
+tags: [docs, langsmith, smith-api, commits, list-commits]
+---
+
 # List commits
 
 > List commits for a repository, with pagination support.
@@ -6,6 +14,8 @@ Authenticated users can access private repositories; unauthenticated users can o
 The include_stats parameter controls whether download and view statistics are computed (defaults to true).
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/commits/{owner}/{repo}**
 
 ````yaml
 openapi: 3.1.0
@@ -196,8 +206,8 @@ paths:
           name: include_stats
           in: query
           schema:
-            default: true
             type: boolean
+            default: true
             title: Include Stats
         - description: Limit is the pagination limit
           name: limit

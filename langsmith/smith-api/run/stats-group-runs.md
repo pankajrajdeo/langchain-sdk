@@ -1,8 +1,18 @@
+---
+title: "Stats group runs"
+description: "Get stats for the grouped runs."
+source: "https://docs.langchain.com/langsmith/smith-api/run/stats-group-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, stats-group-runs]
+---
+
 # Stats group runs
 
 > Get stats for the grouped runs.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/group/stats**
 
 ````yaml
 openapi: 3.1.0

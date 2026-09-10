@@ -1,6 +1,16 @@
+---
+title: "Login"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/login"
+source: "https://docs.langchain.com/langsmith/smith-api/auth/login"
+category: "docs"
+tags: [docs, langsmith, smith-api, auth, login]
+---
+
 # Login
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/login**
 
 ````yaml
 openapi: 3.1.0

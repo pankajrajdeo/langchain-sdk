@@ -1,3 +1,11 @@
+---
+title: "Approval modes"
+description: "Choose how Deep Agents Code reviews gated tool calls with Manual, Auto, and YOLO modes"
+source: "https://docs.langchain.com/oss/deepagents/code/approval-modes"
+category: "docs"
+tags: [docs, deepagents, code, approval-modes]
+---
+
 # Approval modes
 
 > Choose how Deep Agents Code reviews gated tool calls with Manual, Auto, and YOLO modes
@@ -211,7 +219,7 @@ For flag and configuration precedence, see [Startup approval mode](config-file.m
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/approval-modes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

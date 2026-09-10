@@ -1,8 +1,18 @@
+---
+title: "Create insights job config (Beta)"
+description: "Save an insights job config."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/create-insights-job-config-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, create-insights-job-config-beta]
+---
+
 # Create insights job config (Beta)
 
 > Save an insights job config.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/sessions/{session_id}/insights/configs**
 
 ````yaml
 openapi: 3.1.0

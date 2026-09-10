@@ -1,3 +1,11 @@
+---
+title: "Managed Deep Agents quickstart"
+description: "Create and deploy your first Managed Deep Agent with the mda CLI."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-quickstart"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-quickstart]
+---
+
 # Managed Deep Agents quickstart
 
 > Create and deploy your first Managed Deep Agent with the mda CLI.
@@ -73,6 +81,8 @@ You now have all the scaffolding for your agent.
 ### Add your keys
 Add your model provider API key to `.env`:
 
+**.env**
+
 ```text
 OPENAI_API_KEY=<OPENAI_API_KEY>
 # ANTHROPIC_API_KEY=<ANTHROPIC_API_KEY>
@@ -93,12 +103,16 @@ To create a LangSmith API key, open [Settings](https://smith.langchain.com/setti
 
 Add your LangSmith API key to `.env`:
 
+**.env**
+
 ```text
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
 ```
 
 ### Edit the instructions
 Open `instructions.md` and describe how the agent should behave:
+
+**instructions.md**
 
 ```markdown
 # Research assistant
@@ -114,6 +128,8 @@ Now set the model and a built-in web search tool. Google, OpenAI, and Anthropic 
 
 Open `agent.py`:
 
+**OpenAI**
+
 ```python
 from managed_deepagents import define_deep_agent
 
@@ -125,6 +141,8 @@ agent = define_deep_agent(
 )
 ```
 
+**Google**
+
 ```python
 from managed_deepagents import define_deep_agent
 
@@ -135,6 +153,8 @@ agent = define_deep_agent(
     tools=[{"google_search": {}}],
 )
 ```
+
+**Anthropic**
 
 ```python
 from managed_deepagents import define_deep_agent
@@ -155,6 +175,8 @@ The agent name is also the default deployment name. For model concepts and provi
 You can use a Tavily search tool instead.
 Add a [Tavily API key](https://app.tavily.com) to `.env`:
 
+**.env**
+
 ```text
 TAVILY_API_KEY=<TAVILY_API_KEY>
 ```
@@ -166,6 +188,8 @@ uv add tavily-python
 ```
 
 Create a custom `internet_search` tool:
+
+**tools/search.py**
 
 ```python
 import os
@@ -191,6 +215,8 @@ def internet_search(
 ```
 
 Import the tool and add it to the agent:
+
+**agent.py**
 
 ```python
 from managed_deepagents import define_deep_agent
@@ -253,7 +279,7 @@ Authenticate with external services, as the agent or as the caller.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

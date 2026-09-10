@@ -1,6 +1,16 @@
+---
+title: "Studio experiment"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/datasets/studio_experiment"
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/studio-experiment"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, studio-experiment]
+---
+
 # Studio experiment
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/datasets/studio_experiment**
 
 ````yaml
 openapi: 3.1.0

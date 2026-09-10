@@ -1,8 +1,18 @@
+---
+title: "Get run from annotation queue"
+description: "Get a run from an annotation queue"
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/get-run-from-annotation-queue"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, get-run-from-annotation-queue]
+---
+
 # Get run from annotation queue
 
 > Get a run from an annotation queue
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/annotation-queues/{queue_id}/run/{index}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Deploy your app to cloud"
+description: "Deploy your first application to LangSmith Cloud (AWS and GCP) using the LangGraph CLI."
+source: "https://docs.langchain.com/langsmith/deployment-quickstart"
+category: "docs"
+tags: [docs, langsmith, deployment-quickstart]
+---
+
 # Deploy your app to cloud
 
 > Deploy your first application to LangSmith Cloud (AWS and GCP) using the LangGraph CLI.
@@ -221,7 +229,7 @@ Kick off background runs for long-running jobs and stream results back to your c
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deployment-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

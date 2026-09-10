@@ -1,3 +1,11 @@
+---
+title: "Add metadata and tags to traces"
+description: "LangSmith supports sending arbitrary metadata and tags along with traces."
+source: "https://docs.langchain.com/langsmith/add-metadata-tags"
+category: "docs"
+tags: [docs, langsmith, add-metadata-tags]
+---
+
 # Add metadata and tags to traces
 
 LangSmith supports sending arbitrary metadata and tags along with traces.
@@ -5,6 +13,8 @@ LangSmith supports sending arbitrary metadata and tags along with traces.
 Tags are strings that can be used to categorize or label a trace. Metadata is a dictionary of key-value pairs that can be used to store additional information about a trace.
 
 Both are useful for associating additional information with a trace, such as the environment in which it was executed, the user who initiated it, or an internal correlation ID. For more information on tags and metadata, see the [Concepts](observability-concepts.md#tags) page. For information on how to query traces and runs by metadata and tags, see the [Filter traces in the application](filter-traces-in-application.md) page.
+
+**Python**
 
 ```python
 import openai
@@ -81,6 +91,8 @@ chat_completion = patched_client.chat.completions.create(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 import OpenAI from "openai";
 import { traceable, getCurrentRunTree } from "langsmith/traceable";
@@ -124,7 +136,7 @@ await traceableCallOpenAI(messages);
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/add-metadata-tags.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

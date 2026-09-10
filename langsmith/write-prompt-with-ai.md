@@ -1,3 +1,11 @@
+---
+title: "Write your prompt with AI"
+description: "The prompt canvas makes it easy to edit a prompt with the help of an LLM. This allows you to iterate faster on long prompts and also makes it easier to make overarching stylisting or tonal changes to..."
+source: "https://docs.langchain.com/langsmith/write-prompt-with-ai"
+category: "docs"
+tags: [docs, langsmith, write-prompt-with-ai]
+---
+
 # Write your prompt with AI
 
 The prompt canvas makes it easy to edit a prompt with the help of an LLM. This allows you to iterate faster on long prompts and also makes it easier to make overarching stylisting or tonal changes to your prompt. You can enter the promp canvas by clicking the glowing wand over any message in your prompt:
@@ -40,7 +48,7 @@ Lastly, you can save the prompt you have created in the canvas by clicking the "
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/write-prompt-with-ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

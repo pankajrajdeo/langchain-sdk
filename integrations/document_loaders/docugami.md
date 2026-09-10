@@ -1,3 +1,11 @@
+---
+title: "Docugami integration"
+description: "Integrate with the Docugami document loader using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/document_loaders/docugami"
+category: "docs"
+tags: [docs, integrations, document_loaders, docugami]
+---
+
 # Docugami integration
 
 > Integrate with the Docugami document loader using LangChain Python.
@@ -407,7 +415,7 @@ for chunk in retrieved_parent_docs:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/docugami.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

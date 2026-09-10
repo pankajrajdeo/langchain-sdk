@@ -1,3 +1,11 @@
+---
+title: "Providers and models"
+description: "Understand how LangChain uses providers to give you a single API for any model from any provider"
+source: "https://docs.langchain.com/oss/python/concepts/providers-and-models"
+category: "docs"
+tags: [docs, concepts, providers-and-models]
+---
+
 # Providers and models
 
 > Understand how LangChain uses providers to give you a single API for any model from any provider
@@ -73,11 +81,15 @@ For a full list of provider packages, see the [integrations page](../integration
 
 Each provider supports specific model names that you pass when initializing a chat model. There are two ways to specify a model:
 
+**Provider prefix format**
+
 ```python
 from langchain.chat_models import init_chat_model
 
 model = init_chat_model("openai:gpt-5.5")
 ```
+
+**Direct class instantiation**
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -170,7 +182,7 @@ Build agents that use models as their reasoning engine.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/concepts/providers-and-models.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

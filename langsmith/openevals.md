@@ -1,3 +1,11 @@
+---
+title: "Run evals with openevals package"
+description: "Run evaluations using the open-source openevals and agentevals packages with LangSmith."
+source: "https://docs.langchain.com/langsmith/openevals"
+category: "docs"
+tags: [docs, langsmith, openevals]
+---
+
 # Run evals with openevals package
 
 > Run evaluations using the open-source openevals and agentevals packages with LangSmith.
@@ -11,9 +19,13 @@ LangSmith integrates with the open-source `openevals` package to provide a suite
 
 You'll need to install the `openevals` package to use the LLM-as-a-judge evaluator.
 
+**Python**
+
 ```bash
 pip install -U openevals
 ```
+
+**TypeScript**
 
 ```bash
 yarn add openevals @langchain/core
@@ -34,6 +46,8 @@ The general flow is simple: import the evaluator or factory function from `opene
 Note that not all evaluators will require each parameter (the exact match evaluator only requires outputs and reference outputs, for example). Additionally, if your LLM-as-a-judge prompt requires additional variables, passing them in as kwargs will format them into the prompt.
 
 Set up your test file like this:
+
+**Python**
 
 ```python
 import pytest
@@ -67,6 +81,8 @@ def test_correctness():
         reference_outputs=reference_outputs
     )
 ```
+
+**TypeScript**
 
 ```typescript
 import * as ls from "langsmith/vitest";
@@ -112,6 +128,8 @@ Running the eval in your terminal will result in something like the following:
 
 You can also pass evaluators directly into the `evaluate` method if you have already created a dataset in LangSmith. If using Python, this requires `langsmith>=0.3.11`:
 
+**Python**
+
 ```python
 from langsmith import Client
 from openevals.llm import create_llm_as_judge
@@ -134,6 +152,8 @@ experiment_results = client.evaluate(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 import { evaluate } from "langsmith/evaluation";
 import { createLLMAsJudge, CONCISENESS_PROMPT } from "openevals";
@@ -155,7 +175,7 @@ For a complete list of available evaluation utilities and prompts, see the [open
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/openevals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

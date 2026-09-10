@@ -1,9 +1,19 @@
+---
+title: "Create a commit"
+description: "Creates a new commit in a repository. Requires authentication and write access to the repository."
+source: "https://docs.langchain.com/langsmith/smith-api/commits/create-a-commit"
+category: "docs"
+tags: [docs, langsmith, smith-api, commits, create-a-commit]
+---
+
 # Create a commit
 
 > Creates a new commit in a repository.
 Requires authentication and write access to the repository.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/commits/{owner}/{repo}**
 
 ````yaml
 openapi: 3.1.0

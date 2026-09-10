@@ -1,3 +1,11 @@
+---
+title: "Evaluation concepts"
+description: "LLM outputs are non-deterministic, which makes response quality hard to assess. Evaluations (evals) are a way to breakdown what \"good\" looks like and measure it. LangSmith Evaluation provides a..."
+source: "https://docs.langchain.com/langsmith/evaluation-concepts"
+category: "docs"
+tags: [docs, langsmith, evaluation-concepts]
+---
+
 # Evaluation concepts
 
 LLM outputs are non-deterministic, which makes response quality hard to assess. Evaluations (evals) are a way to breakdown what "good" looks like and measure it. LangSmith Evaluation provides a framework for measuring quality throughout the application lifecycle, from pre-deployment testing to production monitoring.
@@ -339,7 +347,7 @@ The following table summarizes the key differences between offline and online ev
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

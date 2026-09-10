@@ -1,8 +1,18 @@
+---
+title: "Get shared run by ID"
+description: "Get the shared run."
+source: "https://docs.langchain.com/langsmith/smith-api/public/get-shared-run-by-id"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, get-shared-run-by-id]
+---
+
 # Get shared run by ID
 
 > Get the shared run.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/run/{id}**
 
 ````yaml
 openapi: 3.1.0

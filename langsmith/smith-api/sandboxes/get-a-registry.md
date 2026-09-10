@@ -1,8 +1,18 @@
+---
+title: "Get a registry"
+description: "Get a sandbox registry by name."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/get-a-registry"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, get-a-registry]
+---
+
 # Get a registry
 
 > Get a sandbox registry by name.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/registries/{name}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "Create feedback ingest token"
+description: "Create a new feedback ingest token."
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/create-feedback-ingest-token"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, create-feedback-ingest-token]
+---
+
 # Create feedback ingest token
 
 > Create a new feedback ingest token.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/feedback/tokens**
 
 ````yaml
 openapi: 3.1.0

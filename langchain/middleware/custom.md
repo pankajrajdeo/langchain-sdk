@@ -1,3 +1,11 @@
+---
+title: "Custom middleware"
+description: "Build custom middleware by implementing hooks that run at specific points in the agent execution flow."
+source: "https://docs.langchain.com/oss/python/langchain/middleware/custom"
+category: "docs"
+tags: [docs, langchain, middleware, custom]
+---
+
 # Custom middleware
 
 Build custom middleware by implementing hooks that run at specific points in the agent execution flow.
@@ -935,7 +943,7 @@ class CachedContextMiddleware(AgentMiddleware):
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/middleware/custom.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

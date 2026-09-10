@@ -1,3 +1,11 @@
+---
+title: "Deploy LangSmith with Terraform"
+description: "Provision LangSmith self-hosted on AWS, Azure, or GCP using LangChain's production-ready Terraform modules."
+source: "https://docs.langchain.com/langsmith/self-host-terraform"
+category: "docs"
+tags: [docs, langsmith, self-host-terraform]
+---
+
 # Deploy LangSmith with Terraform
 
 > Provision LangSmith self-hosted on AWS, Azure, or GCP using LangChain's production-ready Terraform modules.
@@ -81,7 +89,7 @@ Each module exposes flags for the optional LangSmith add-ons. Toggle each in the
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

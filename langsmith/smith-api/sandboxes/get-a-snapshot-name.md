@@ -1,8 +1,18 @@
+---
+title: "Get a snapshot name"
+description: "Get a snapshot name and every tag under it, with the snapshot each tag resolves to. To fetch one snapshot, use /api/v2/sandboxes/snapshots/{snapshot_id}."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/get-a-snapshot-name"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, get-a-snapshot-name]
+---
+
 # Get a snapshot name
 
 > Get a snapshot name and every tag under it, with the snapshot each tag resolves to. To fetch one snapshot, use /api/v2/sandboxes/snapshots/{snapshot_id}.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/snapshots-by-name/{name}**
 
 ````yaml
 openapi: 3.1.0

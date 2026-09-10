@@ -1,3 +1,11 @@
+---
+title: "Custom Apps"
+description: "Build and deploy custom UIs that run inside LangSmith and talk to the LangSmith API."
+source: "https://docs.langchain.com/langsmith/custom-apps"
+category: "docs"
+tags: [docs, langsmith, custom-apps]
+---
+
 # Custom Apps
 
 > Build and deploy custom UIs that run inside LangSmith and talk to the LangSmith API.
@@ -45,7 +53,7 @@ langsmith apps push
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-apps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

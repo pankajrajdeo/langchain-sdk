@@ -1,3 +1,11 @@
+---
+title: "Trace Claude Agent SDK applications"
+description: "The Claude Agent SDK is an SDK for building agentic applications with Claude. LangSmith provides native integration with the Claude Agent SDK to automatically trace your agent executions, tool calls..."
+source: "https://docs.langchain.com/langsmith/trace-claude-agent-sdk"
+category: "docs"
+tags: [docs, langsmith, trace-claude-agent-sdk]
+---
+
 # Trace Claude Agent SDK applications
 
 The [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) is an SDK for building agentic applications with Claude. LangSmith provides native integration with the Claude Agent SDK to automatically trace your agent executions, tool calls, and interactions with Claude models.
@@ -6,17 +14,25 @@ The [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) i
 
 Install the LangSmith integration for Claude Agent SDK
 
+**uv**
+
 ```bash
 uv add "langsmith[claude-agent-sdk]"
 ```
+
+**pip**
 
 ```bash
 pip install langsmith[claude-agent-sdk]
 ```
 
+**pnpm**
+
 ```bash
 pnpm add @anthropic-ai/claude-agent-sdk langsmith zod
 ```
+
+**npm**
 
 ```bash
 npm install @anthropic-ai/claude-agent-sdk langsmith zod
@@ -26,6 +42,8 @@ npm install @anthropic-ai/claude-agent-sdk langsmith zod
 
 Set your [API keys](create-account-api-key.md):
 
+**shell**
+
 ```bash
 export LANGSMITH_TRACING=true
 export LANGSMITH_ENDPOINT=https://api.smith.langchain.com
@@ -34,6 +52,8 @@ export LANGSMITH_PROJECT=<your_langsmith_project>
 
 export ANTHROPIC_API_KEY=<your_anthropic_api_key>
 ```
+
+**.env**
 
 ```dotenv
 LANGSMITH_TRACING=true
@@ -51,6 +71,8 @@ For an Anthropic API key, refer to the [Claude console](https://console.anthropi
 ## Quickstart
 
 To enable LangSmith tracing for your Claude Agent SDK application, call `configure_claude_agent_sdk()` at the start of your application:
+
+**Python**
 
 ```python
 import asyncio
@@ -105,6 +127,8 @@ async def main() -> None:
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+**TypeScript**
 
 ```typescript
 import * as originalSdk from '@anthropic-ai/claude-agent-sdk';
@@ -166,7 +190,7 @@ Once configured, all Claude Agent SDK operations will be automatically traced to
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-claude-agent-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

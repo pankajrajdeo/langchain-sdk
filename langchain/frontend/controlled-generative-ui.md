@@ -1,3 +1,11 @@
+---
+title: "Controlled generative UI"
+description: "Render agent output with components you author using components as tools, tool-call rendering, state rendering, and reasoning"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui"
+category: "docs"
+tags: [docs, langchain, frontend, controlled-generative-ui]
+---
+
 # Controlled generative UI
 
 > Render agent output with components you author using components as tools, tool-call rendering, state rendering, and reasoning
@@ -80,7 +88,7 @@ See the [Reasoning tokens](reasoning-tokens.md) pattern.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/controlled-generative-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

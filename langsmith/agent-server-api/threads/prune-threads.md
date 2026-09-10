@@ -1,8 +1,18 @@
+---
+title: "Prune Threads"
+description: "Prune threads by ID. The 'delete' strategy removes threads entirely. The 'keep_latest' strategy prunes old checkpoints but keeps threads and their latest state."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/prune-threads"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, prune-threads]
+---
+
 # Prune Threads
 
 > Prune threads by ID. The 'delete' strategy removes threads entirely. The 'keep_latest' strategy prunes old checkpoints but keeps threads and their latest state.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/prune**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "BYOC billing"
+description: "How LangSmith BYOC is billed across your AWS account and your LangSmith contract, which AWS services carry cost, and the account quotas to check before you deploy."
+source: "https://docs.langchain.com/langsmith/byoc-billing"
+category: "docs"
+tags: [docs, langsmith, byoc-billing]
+---
+
 # BYOC billing
 
 > How LangSmith BYOC is billed across your AWS account and your LangSmith contract, which AWS services carry cost, and the account quotas to check before you deploy.
@@ -66,7 +74,7 @@ If provisioning stalls or fails, an exhausted quota is a common cause, alongside
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,16 @@
+---
+title: "On payment method created"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/payment-method"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/on-payment-method-created"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, on-payment-method-created]
+---
+
 # On payment method created
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/payment-method**
 
 ````yaml
 openapi: 3.1.0

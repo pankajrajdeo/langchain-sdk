@@ -1,3 +1,11 @@
+---
+title: "Trace JS functions in serverless environments"
+description: "This section is relevant for those using the LangSmith JS SDK version 0.2.0 and higher. If you are tracing using LangChain.js or LangGraph.js in serverless environments, see this guide."
+source: "https://docs.langchain.com/langsmith/serverless-environments"
+category: "docs"
+tags: [docs, langsmith, serverless-environments]
+---
+
 # Trace JS functions in serverless environments
 
 > [!NOTE]
@@ -63,7 +71,7 @@ Note that this will prevent runs from appearing in the LangSmith UI until you ca
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/serverless-environments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

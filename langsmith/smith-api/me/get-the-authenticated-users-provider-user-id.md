@@ -1,8 +1,18 @@
+---
+title: "Get the authenticated user's provider user ID"
+description: "Returns the provider user ID associated with the authenticated user for a given provider type, or null if not set. Scoped to the current tenant."
+source: "https://docs.langchain.com/langsmith/smith-api/me/get-the-authenticated-users-provider-user-id"
+category: "docs"
+tags: [docs, langsmith, smith-api, me, get-the-authenticated-users-provider-user-id]
+---
+
 # Get the authenticated user's provider user ID
 
 > Returns the provider user ID associated with the authenticated user for a given provider type, or null if not set. Scoped to the current tenant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /me/providers/{providerType}**
 
 ````yaml
 openapi: 3.1.0

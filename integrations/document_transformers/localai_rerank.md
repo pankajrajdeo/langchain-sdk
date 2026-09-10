@@ -1,3 +1,11 @@
+---
+title: "Localai reranker integration"
+description: "Integrate with the Localai reranker document transformer using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/document_transformers/localai_rerank"
+category: "docs"
+tags: [docs, integrations, document_transformers, localai_rerank]
+---
+
 # Localai reranker integration
 
 > Integrate with the Localai reranker document transformer using LangChain Python.
@@ -40,7 +48,7 @@ reranked_docs = reranker.compress_documents(
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/localai_rerank.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

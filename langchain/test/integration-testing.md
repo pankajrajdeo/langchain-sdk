@@ -1,3 +1,11 @@
+---
+title: "Integration testing"
+description: "Test agents with real LLM APIs by organizing tests, managing keys, handling flakiness, and controlling costs."
+source: "https://docs.langchain.com/oss/python/langchain/test/integration-testing"
+category: "docs"
+tags: [docs, langchain, test, integration-testing]
+---
+
 # Integration testing
 
 > Test agents with real LLM APIs by organizing tests, managing keys, handling flakiness, and controlling costs.
@@ -28,12 +36,16 @@ def test_agent_with_real_model():
 
 Configure pytest to recognize the marker and exclude integration tests from default runs:
 
+**pytest.ini**
+
 ```ini
 [pytest]
 markers =
     integration: tests that call real LLM APIs
 addopts = -m "not integration"
 ```
+
+**pyproject.toml**
 
 ```toml
 [tool.pytest.ini_options]
@@ -67,9 +79,13 @@ def check_api_keys():
 
 For local development, store keys in a `.env` file and load them with [`python-dotenv`](https://pypi.org/project/python-dotenv/):
 
+**.env**
+
 ```bash
 OPENAI_API_KEY=sk-...
 ```
+
+**conftest.py**
 
 ```python
 from dotenv import load_dotenv
@@ -137,6 +153,8 @@ For tests that run frequently in CI, you can record HTTP interactions on the fir
 
 Set up your `conftest.py` to filter sensitive information from cassettes:
 
+**conftest.py**
+
 ```py
 import pytest
 
@@ -156,12 +174,16 @@ def vcr_config():
 
 Configure your project to recognize the `vcr` marker:
 
+**pytest.ini**
+
 ```ini
 [pytest]
 markers =
     vcr: record/replay HTTP via VCR
 addopts = --record-mode=once
 ```
+
+**pyproject.toml**
 
 ```toml
 [tool.pytest.ini_options]
@@ -207,7 +229,7 @@ Learn how to evaluate agent trajectories with deterministic matching or LLM-as-j
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/integration-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

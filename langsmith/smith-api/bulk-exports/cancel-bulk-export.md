@@ -1,8 +1,18 @@
+---
+title: "Cancel bulk export"
+description: "Cancel a bulk export by ID"
+source: "https://docs.langchain.com/langsmith/smith-api/bulk-exports/cancel-bulk-export"
+category: "docs"
+tags: [docs, langsmith, smith-api, bulk-exports, cancel-bulk-export]
+---
+
 # Cancel bulk export
 
 > Cancel a bulk export by ID
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/bulk-exports/{bulk_export_id}**
 
 ````yaml
 openapi: 3.1.0

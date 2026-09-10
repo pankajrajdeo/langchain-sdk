@@ -1,6 +1,16 @@
+---
+title: "Get an oauth client"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/platform/oauth/clients/{id}"
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/get-an-oauth-client"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, get-an-oauth-client]
+---
+
 # Get an oauth client
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/oauth/clients/{id}**
 
 ````yaml
 openapi: 3.1.0

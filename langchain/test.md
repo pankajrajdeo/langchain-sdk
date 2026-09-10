@@ -1,3 +1,11 @@
+---
+title: "Test"
+description: "Strategies for testing LangChain agents, including unit tests, integration tests, and trajectory evaluations."
+source: "https://docs.langchain.com/oss/python/langchain/test"
+category: "docs"
+tags: [docs, langchain, test]
+---
+
 # Test
 
 > Strategies for testing LangChain agents, including unit tests, integration tests, and trajectory evaluations.
@@ -27,7 +35,7 @@ Evaluate agent trajectories with deterministic matching or LLM-as-judge evaluato
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

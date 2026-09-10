@@ -1,3 +1,11 @@
+---
+title: "Use the Context Hub"
+description: "Learn how to create, view, and promote context in the LangSmith Context Hub."
+source: "https://docs.langchain.com/langsmith/use-the-context-hub"
+category: "docs"
+tags: [docs, langsmith, use-the-context-hub]
+---
+
 # Use the Context Hub
 
 > Learn how to create, view, and promote context in the LangSmith Context Hub.
@@ -76,7 +84,7 @@ Agent runtimes that resolve context by environment tag (for example, `:productio
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-the-context-hub.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

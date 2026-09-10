@@ -1,6 +1,16 @@
+---
+title: "Change payment plan"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/plan"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/change-payment-plan"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, change-payment-plan]
+---
+
 # Change payment plan
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/plan**
 
 ````yaml
 openapi: 3.1.0

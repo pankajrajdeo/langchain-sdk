@@ -1,3 +1,11 @@
+---
+title: "LangSmith Engine webhook events"
+description: "Reference for the webhook events LangSmith Engine sends when it creates issues or links new traces to existing issues."
+source: "https://docs.langchain.com/langsmith/engine-webhooks"
+category: "docs"
+tags: [docs, langsmith, engine-webhooks]
+---
+
 # LangSmith Engine webhook events
 
 > Reference for the webhook events LangSmith Engine sends when it creates issues or links new traces to existing issues.
@@ -44,6 +52,8 @@ sha256=<hex-encoded HMAC-SHA256 digest>
 
 Verify the signature before parsing or acting on the payload. The HMAC input is the exact raw request body bytes, and the HMAC key is the subscription's signing secret. Do not parse and reserialize the JSON body before verification.
 
+**Python**
+
 ```python
 import hashlib
 import hmac
@@ -66,6 +76,8 @@ def verify_langsmith_signature(
 
     return hmac.compare_digest(expected, signature_header)
 ```
+
+**TypeScript**
 
 ```typescript
 import { createHmac, timingSafeEqual } from "node:crypto";
@@ -314,7 +326,7 @@ Use the example body from [`issue.created`](#issue-created) as `sample-issue-cre
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

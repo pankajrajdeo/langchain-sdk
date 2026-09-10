@@ -1,3 +1,11 @@
+---
+title: "Stores"
+description: "LangGraph stores provide cross-thread long-term memory, complementing per-thread checkpointer persistence."
+source: "https://docs.langchain.com/oss/python/langgraph/stores"
+category: "docs"
+tags: [docs, langgraph, stores]
+---
+
 # Stores
 
 > LangGraph stores provide cross-thread long-term memory, complementing per-thread checkpointer persistence.
@@ -403,7 +411,7 @@ async def test_search_prefix(store, reference):
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/stores.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

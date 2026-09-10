@@ -1,3 +1,11 @@
+---
+title: "How to upload experiments run outside of LangSmith with the REST API"
+description: "Some users prefer to manage their datasets and run their experiments outside of LangSmith, but want to use the LangSmith UI to view the results. This is supported via our endpoint."
+source: "https://docs.langchain.com/langsmith/upload-existing-experiments"
+category: "docs"
+tags: [docs, langsmith, upload-existing-experiments]
+---
+
 # How to upload experiments run outside of LangSmith with the REST API
 
 Some users prefer to manage their datasets and run their experiments outside of LangSmith, but want to use the LangSmith UI to view the results. This is supported via our endpoint.
@@ -257,7 +265,7 @@ As you upload more experiments to your dataset, you will be able to compare the 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/upload-existing-experiments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

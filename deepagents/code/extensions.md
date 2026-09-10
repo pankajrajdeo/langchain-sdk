@@ -1,3 +1,11 @@
+---
+title: "Python extensions"
+description: "Customize dcode with Python tools, middleware, and storage routes"
+source: "https://docs.langchain.com/oss/deepagents/code/extensions"
+category: "docs"
+tags: [docs, deepagents, code, extensions]
+---
+
 # Python extensions
 
 > Customize dcode with Python tools, middleware, and storage routes
@@ -15,6 +23,8 @@ Python extensions customize the dcode agent server without modifying dcode itsel
 An extension entry file must expose an asynchronous `extension` setup function. dcode passes an `ExtensionAPI` registrar with read-only session context and methods for adding capabilities.
 
 The following extension makes a LangGraph store available to the agent's file tools under `/memories/`:
+
+**extension.py**
 
 ```python
 from deepagents.backends import StoreBackend
@@ -187,7 +197,7 @@ Each extension setup is transactional. If import or initialization fails, Deep A
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/extensions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

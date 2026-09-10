@@ -1,3 +1,11 @@
+---
+title: "Long-term memory"
+description: "Add long-term memory to LangChain agents to store and recall data across conversations and sessions"
+source: "https://docs.langchain.com/oss/python/langchain/long-term-memory"
+category: "docs"
+tags: [docs, langchain, long-term-memory]
+---
+
 # Long-term memory
 
 > Add long-term memory to LangChain agents to store and recall data across conversations and sessions
@@ -28,9 +36,13 @@ agent: Runnable = create_agent(
 ```
 
 #### PostgreSQL
+**pip**
+
 ```bash
 pip install -U langgraph-checkpoint-postgres "psycopg[binary]"
 ```
+
+**uv**
 
 ```bash
 uv add langgraph-checkpoint-postgres "psycopg[binary]"
@@ -149,6 +161,8 @@ For more information about the memory store, see the [Persistence](../langgraph/
 ## Read long-term memory in tools
 
 #### InMemoryStore
+**Google**
+
 ```python
 from dataclasses import dataclass
 
@@ -200,6 +214,8 @@ agent.invoke(
     context=Context(user_id="user_123"),
 )
 ```
+
+**OpenAI**
 
 ```python
 from dataclasses import dataclass
@@ -253,6 +269,8 @@ agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from dataclasses import dataclass
 
@@ -304,6 +322,8 @@ agent.invoke(
     context=Context(user_id="user_123"),
 )
 ```
+
+**OpenRouter**
 
 ```python
 from dataclasses import dataclass
@@ -357,6 +377,8 @@ agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from dataclasses import dataclass
 
@@ -408,6 +430,8 @@ agent.invoke(
     context=Context(user_id="user_123"),
 )
 ```
+
+**Baseten**
 
 ```python
 from dataclasses import dataclass
@@ -461,6 +485,8 @@ agent.invoke(
 )
 ```
 
+**Ollama**
+
 ```python
 from dataclasses import dataclass
 
@@ -512,6 +538,9 @@ agent.invoke(
     context=Context(user_id="user_123"),
 )
 ```
+
+#### [View example trace](https://smith.langchain.com/public/bce035a2-e2ac-4bd3-9ab3-53d88b16cc43/r)
+Open a public LangSmith run for this example.
 
 #### PostgreSQL
 ```python
@@ -557,6 +586,8 @@ with PostgresStore.from_conn_string(DB_URI) as store:
 ## Write long-term memory from tools
 
 #### InMemoryStore
+**Google**
+
 ```python
 from dataclasses import dataclass
 
@@ -606,6 +637,8 @@ agent.invoke(
 # You can access the store directly to get the value
 item = store.get(("users",), "user_123")
 ```
+
+**OpenAI**
 
 ```python
 from dataclasses import dataclass
@@ -657,6 +690,8 @@ agent.invoke(
 item = store.get(("users",), "user_123")
 ```
 
+**Anthropic**
+
 ```python
 from dataclasses import dataclass
 
@@ -706,6 +741,8 @@ agent.invoke(
 # You can access the store directly to get the value
 item = store.get(("users",), "user_123")
 ```
+
+**OpenRouter**
 
 ```python
 from dataclasses import dataclass
@@ -757,6 +794,8 @@ agent.invoke(
 item = store.get(("users",), "user_123")
 ```
 
+**Fireworks**
+
 ```python
 from dataclasses import dataclass
 
@@ -806,6 +845,8 @@ agent.invoke(
 # You can access the store directly to get the value
 item = store.get(("users",), "user_123")
 ```
+
+**Baseten**
 
 ```python
 from dataclasses import dataclass
@@ -857,6 +898,8 @@ agent.invoke(
 item = store.get(("users",), "user_123")
 ```
 
+**Ollama**
+
 ```python
 from dataclasses import dataclass
 
@@ -907,6 +950,9 @@ agent.invoke(
 item = store.get(("users",), "user_123")
 ```
 
+#### [View example trace](https://smith.langchain.com/public/477f5212-de64-4076-87d7-c4653d5c3c15/r)
+Open a public LangSmith run for this example.
+
 #### PostgreSQL
 ```python
 from dataclasses import dataclass
@@ -951,7 +997,7 @@ with PostgresStore.from_conn_string(DB_URI) as store:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/long-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

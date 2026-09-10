@@ -1,3 +1,11 @@
+---
+title: "Elasticsearch integrations"
+description: "Integrate with Elasticsearch using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/elasticsearch"
+category: "docs"
+tags: [docs, integrations, providers, elasticsearch]
+---
+
 # Elasticsearch integrations
 
 > Integrate with Elasticsearch using LangChain Python.
@@ -44,10 +52,14 @@ curl -fsSL https://elastic.co/start-local | sh -s -- --esonly
 
 ### Install client
 
+**pip**
+
 ```bash
 pip install elasticsearch
 pip install langchain-elasticsearch
 ```
+
+**uv**
 
 ```bash
 uv add elasticsearch
@@ -108,7 +120,7 @@ from langchain_classic.chains.elasticsearch_database import ElasticsearchDatabas
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/elasticsearch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

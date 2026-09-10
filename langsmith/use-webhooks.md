@@ -1,3 +1,11 @@
+---
+title: "Use webhooks"
+description: "Webhooks enable event-driven communication from your LangSmith application to external services. For example, you may want to issue an update to a separate service once an API call to LangSmith has..."
+source: "https://docs.langchain.com/langsmith/use-webhooks"
+category: "docs"
+tags: [docs, langsmith, use-webhooks]
+---
+
 # Use webhooks
 
 Webhooks enable event-driven communication from your LangSmith application to external services. For example, you may want to issue an update to a separate service once an API call to LangSmith has finished running.
@@ -304,7 +312,7 @@ These tools help you verify that LangSmith is correctly triggering and sending w
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

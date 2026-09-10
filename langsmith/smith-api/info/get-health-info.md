@@ -1,8 +1,18 @@
+---
+title: "Get health info"
+description: "Get health information about the current deployment of LangSmith."
+source: "https://docs.langchain.com/langsmith/smith-api/info/get-health-info"
+category: "docs"
+tags: [docs, langsmith, smith-api, info, get-health-info]
+---
+
 # Get health info
 
 > Get health information about the current deployment of LangSmith.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/info/health**
 
 ````yaml
 openapi: 3.1.0

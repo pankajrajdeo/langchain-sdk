@@ -1,8 +1,18 @@
+---
+title: "Get repo"
+description: "Get a repo."
+source: "https://docs.langchain.com/langsmith/smith-api/repos/get-repo"
+category: "docs"
+tags: [docs, langsmith, smith-api, repos, get-repo]
+---
+
 # Get repo
 
 > Get a repo.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/repos/{owner}/{repo}**
 
 ````yaml
 openapi: 3.1.0

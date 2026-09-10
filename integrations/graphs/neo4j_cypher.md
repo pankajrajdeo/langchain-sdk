@@ -1,3 +1,11 @@
+---
+title: "Neo4j integration"
+description: "Integrate with the Neo4j graph using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/graphs/neo4j_cypher"
+category: "docs"
+tags: [docs, integrations, graphs, neo4j_cypher]
+---
+
 # Neo4j integration
 
 > Integrate with the Neo4j graph using LangChain Python.
@@ -476,7 +484,7 @@ Full Context:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/neo4j_cypher.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

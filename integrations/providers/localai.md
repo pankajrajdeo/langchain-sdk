@@ -1,3 +1,11 @@
+---
+title: "Localai integrations"
+description: "Integrate with Localai using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/localai"
+category: "docs"
+tags: [docs, integrations, providers, localai]
+---
+
 # Localai integrations
 
 > Integrate with Localai using LangChain Python.
@@ -14,9 +22,13 @@
 
 ## Installation and setup
 
+**pip**
+
 ```bash
 pip install langchain-localai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-localai
@@ -33,7 +45,7 @@ See a [usage example](../document_transformers/localai_rerank.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/localai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

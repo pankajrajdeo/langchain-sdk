@@ -1,3 +1,11 @@
+---
+title: "Tool integrations"
+description: "Give your agents access to a wide range of tools and services."
+source: "https://docs.langchain.com/langsmith/fleet/tools"
+category: "docs"
+tags: [docs, langsmith, fleet, tools]
+---
+
 # Tool integrations
 
 > Give your agents access to a wide range of tools and services.
@@ -100,7 +108,7 @@ Publish posts, monitor mentions, and engage with your audience on X.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

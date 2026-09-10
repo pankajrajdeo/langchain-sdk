@@ -1,8 +1,18 @@
+---
+title: "Read shared dataset"
+description: "Get dataset by ids or the shared dataset if not specifed."
+source: "https://docs.langchain.com/langsmith/smith-api/public/read-shared-dataset"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, read-shared-dataset]
+---
+
 # Read shared dataset
 
 > Get dataset by ids or the shared dataset if not specifed.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/datasets**
 
 ````yaml
 openapi: 3.1.0

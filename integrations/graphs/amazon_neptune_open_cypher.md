@@ -1,3 +1,11 @@
+---
+title: "Amazon neptune with cypher integration"
+description: "Integrate with the Amazon neptune with cypher graph using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/graphs/amazon_neptune_open_cypher"
+category: "docs"
+tags: [docs, integrations, graphs, amazon_neptune_open_cypher]
+---
+
 # Amazon neptune with cypher integration
 
 > Integrate with the Amazon neptune with cypher graph using LangChain Python.
@@ -149,7 +157,7 @@ The four European destinations you can fly to directly from Austin airport are:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/amazon_neptune_open_cypher.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

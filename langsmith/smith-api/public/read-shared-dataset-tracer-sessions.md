@@ -1,8 +1,18 @@
+---
+title: "Read shared dataset tracer sessions"
+description: "Get projects run on a dataset that has been shared."
+source: "https://docs.langchain.com/langsmith/smith-api/public/read-shared-dataset-tracer-sessions"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, read-shared-dataset-tracer-sessions]
+---
+
 # Read shared dataset tracer sessions
 
 > Get projects run on a dataset that has been shared.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/datasets/sessions**
 
 ````yaml
 openapi: 3.1.0

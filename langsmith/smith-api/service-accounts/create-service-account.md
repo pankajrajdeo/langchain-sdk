@@ -1,8 +1,18 @@
+---
+title: "Create service account"
+description: "Create a service account"
+source: "https://docs.langchain.com/langsmith/smith-api/service-accounts/create-service-account"
+category: "docs"
+tags: [docs, langsmith, smith-api, service-accounts, create-service-account]
+---
+
 # Create service account
 
 > Create a service account
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/service-accounts**
 
 ````yaml
 openapi: 3.1.0

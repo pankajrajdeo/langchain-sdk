@@ -1,8 +1,18 @@
+---
+title: "Test an alert action to determine if configuration is valid"
+description: "Tests an alert action which will fire a notification to all configured recipients if the configuration is valid."
+source: "https://docs.langchain.com/langsmith/smith-api/alert_rules/test-an-alert-action-to-determine-if-configuration-is-valid"
+category: "docs"
+tags: [docs, langsmith, smith-api, alert_rules, test-an-alert-action-to-determine-if-configuration-is-valid]
+---
+
 # Test an alert action to determine if configuration is valid
 
 > Tests an alert action which will fire a notification to all configured recipients if the configuration is valid.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/alerts/{session_id}/test**
 
 ````yaml
 openapi: 3.1.0

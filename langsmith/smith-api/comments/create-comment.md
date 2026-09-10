@@ -1,6 +1,16 @@
+---
+title: "Create comment"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/comments/{owner}/{repo}"
+source: "https://docs.langchain.com/langsmith/smith-api/comments/create-comment"
+category: "docs"
+tags: [docs, langsmith, smith-api, comments, create-comment]
+---
+
 # Create comment
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/comments/{owner}/{repo}**
 
 ````yaml
 openapi: 3.1.0

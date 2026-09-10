@@ -1,3 +1,11 @@
+---
+title: "Minimum versions for self-hosting dependencies"
+description: "Minimum supported versions for the databases, tools, and infrastructure required to self-host LangSmith."
+source: "https://docs.langchain.com/langsmith/self-host-dependency-versions"
+category: "docs"
+tags: [docs, langsmith, self-host-dependency-versions]
+---
+
 # Minimum versions for self-hosting dependencies
 
 > Minimum supported versions for the databases, tools, and infrastructure required to self-host LangSmith.
@@ -14,7 +22,7 @@ This page lists the minimum supported versions for the databases, tools, and inf
 | [PostgreSQL](self-host-external-postgres.md)   | 14                                                                                                        | Primary relational store for operational data. Required for both LangSmith and standalone Agent Server deployments. Used to install the `btree_gin`, `btree_gist`, `pgcrypto`, `citext`, `ltree`, and `pg_trgm` extensions.                   |
 | [Redis](self-host-external-redis.md)           | 6.2                                                                                                       | Used for queueing and caching. Standalone and Redis Cluster modes are both supported. As of Agent Server 0.8.0, the Redis-backed run queue requires Redis 6.2 or later: it enqueues runs with the `ZADD ... LT` flag, which was added in 6.2. |
 | [Valkey](self-host-external-redis.md)          | 8                                                                                                         | Officially supported as a drop-in replacement for Redis. Standalone and Cluster modes are both supported.                                                                                                                                     |
-| [ClickHouse](self-host-external-clickhouse.md) | Version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater | Stores traces and feedback. ClickHouse versions >= 24.2 require LangSmith v0.6 or later. Downgrades are not supported.                                                                                                                        |
+| [ClickHouse](self-host-external-clickhouse.md) | Version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater | Stores traces and feedback. ClickHouse 24.2 or later requires LangSmith v0.6 or later. Downgrades are not supported.                                                                                                                          |
 
 > [!WARNING]
 > **Redis \< 6.2 and PostgreSQL \< 14 are not supported.** A LangSmith installation pointed at an older Redis or PostgreSQL instance may fail to start or behave unpredictably. Upgrade your datastore before installing or upgrading LangSmith.
@@ -37,8 +45,8 @@ This page lists the minimum supported versions for the databases, tools, and inf
 
 ## Where these versions are enforced
 
-* PostgreSQL `>= 14`: refer to [Connect to an external PostgreSQL database](self-host-external-postgres.md#requirements).
-* Redis `>= 6.2` and Valkey `8`: refer to [Connect to an external Redis or Valkey database](self-host-external-redis.md#requirements).
+* PostgreSQL 14 or later: refer to [Connect to an external PostgreSQL database](self-host-external-postgres.md#requirements).
+* Redis 6.2 or later and Valkey 8: refer to [Connect to an external Redis or Valkey database](self-host-external-redis.md#requirements).
 * ClickHouse: use the version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater: refer to [Connect to an external ClickHouse database](self-host-external-clickhouse.md#requirements).
 * Kubernetes cluster prerequisites: refer to [Self-host LangSmith on Kubernetes](kubernetes.md#prerequisites).
 
@@ -47,7 +55,7 @@ If you are unsure which version is currently running, contact your database admi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-dependency-versions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Memory"
+description: "Add persistent memory to agents built with Deep Agents so they learn and improve across conversations"
+source: "https://docs.langchain.com/oss/python/deepagents/memory"
+category: "docs"
+tags: [docs, deepagents, memory]
+---
+
 # Memory
 
 > Add persistent memory to agents built with Deep Agents so they learn and improve across conversations
@@ -370,6 +378,8 @@ The recommended pattern is to deploy a **consolidation agent** alongside your ma
 
 The consolidation agent reads recent conversation history and merges key facts into the memory store. Register it alongside your main agent in `langgraph.json`:
 
+**consolidation_agent.py**
+
 ```python
 from datetime import datetime, timedelta, timezone
 
@@ -405,6 +415,8 @@ Merge new facts, remove outdated information, and keep it concise.""",
     tools=[search_recent_conversations],
 )
 ```
+
+**langgraph.json**
 
 ```json
 {
@@ -512,7 +524,7 @@ Use `assistant_id` alone if you only need per-agent isolation without per-user s
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

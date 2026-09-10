@@ -1,8 +1,18 @@
+---
+title: "Read shared examples"
+description: "Get example by ids or the shared example if not specifed."
+source: "https://docs.langchain.com/langsmith/smith-api/public/read-shared-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, read-shared-examples]
+---
+
 # Read shared examples
 
 > Get example by ids or the shared example if not specifed.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/examples**
 
 ````yaml
 openapi: 3.1.0

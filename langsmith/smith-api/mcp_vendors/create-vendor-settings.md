@@ -1,8 +1,18 @@
+---
+title: "Create vendor settings"
+description: "Initializes vendor settings."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp_vendors/create-vendor-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp_vendors, create-vendor-settings]
+---
+
 # Create vendor settings
 
 > Initializes vendor settings.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/mcp-vendors/{vendor_slug}/settings**
 
 ````yaml
 openapi: 3.1.0

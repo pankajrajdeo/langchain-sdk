@@ -1,6 +1,16 @@
+---
+title: "List feedback configs endpoint"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/feedback-configs"
+source: "https://docs.langchain.com/langsmith/smith-api/feedback-configs/list-feedback-configs-endpoint"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback-configs, list-feedback-configs-endpoint]
+---
+
 # List feedback configs endpoint
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/feedback-configs**
 
 ````yaml
 openapi: 3.1.0

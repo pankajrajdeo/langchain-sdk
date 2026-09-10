@@ -1,8 +1,18 @@
+---
+title: "Add runs to annotation queue by key"
+description: "Self-hosted deployments require LangSmith v0.16 or later."
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/add-runs-to-annotation-queue-by-key"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, add-runs-to-annotation-queue-by-key]
+---
+
 # Add runs to annotation queue by key
 
 > Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/annotation-queues/{queue_id}/runs/by-key**
 
 ````yaml
 openapi: 3.1.0

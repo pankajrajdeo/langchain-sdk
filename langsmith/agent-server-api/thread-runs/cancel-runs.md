@@ -1,8 +1,18 @@
+---
+title: "Cancel Runs"
+description: "Cancel one or more runs. Can cancel runs by thread ID and run IDs, or by status filter."
+source: "https://docs.langchain.com/langsmith/agent-server-api/thread-runs/cancel-runs"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, thread-runs, cancel-runs]
+---
+
 # Cancel Runs
 
 > Cancel one or more runs. Can cancel runs by thread ID and run IDs, or by status filter.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /runs/cancel**
 
 ````yaml
 openapi: 3.1.0

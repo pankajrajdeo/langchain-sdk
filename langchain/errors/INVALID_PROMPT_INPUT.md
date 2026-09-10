@@ -1,3 +1,11 @@
+---
+title: "INVALID_PROMPT_INPUT"
+description: "Occurs when a prompt template received missing or invalid input variables."
+source: "https://docs.langchain.com/oss/python/langchain/errors/INVALID_PROMPT_INPUT"
+category: "docs"
+tags: [docs, langchain, errors, invalid_prompt_input]
+---
+
 # INVALID_PROMPT_INPUT
 
 Occurs when a [prompt template](https://github.com/langchain-ai/langchain/blob/v0.3/docs/docs/concepts/prompt_templates.mdx) received missing or invalid input variables.
@@ -16,7 +24,7 @@ To resolve this error, you can:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/INVALID_PROMPT_INPUT.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

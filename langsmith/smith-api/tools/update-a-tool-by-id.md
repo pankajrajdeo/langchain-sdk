@@ -1,8 +1,18 @@
+---
+title: "Update a tool by ID"
+description: "Updates an existing tool identified by its UUID."
+source: "https://docs.langchain.com/langsmith/smith-api/tools/update-a-tool-by-id"
+category: "docs"
+tags: [docs, langsmith, smith-api, tools, update-a-tool-by-id]
+---
+
 # Update a tool by ID
 
 > Updates an existing tool identified by its UUID.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/platform/tools/id/{id}**
 
 ````yaml
 openapi: 3.1.0

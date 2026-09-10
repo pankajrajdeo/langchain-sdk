@@ -1,3 +1,11 @@
+---
+title: "Component architecture"
+description: "LangChain's power comes from how its components work together to create sophisticated AI applications. This page provides diagrams showcasing the relationships between different components."
+source: "https://docs.langchain.com/oss/python/langchain/component-architecture"
+category: "docs"
+tags: [docs, langchain, component-architecture]
+---
+
 # Component architecture
 
 LangChain's power comes from how its components work together to create sophisticated AI applications. This page provides diagrams showcasing the relationships between different components.
@@ -156,7 +164,7 @@ graph LR
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/component-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

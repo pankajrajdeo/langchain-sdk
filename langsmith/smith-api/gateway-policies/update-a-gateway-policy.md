@@ -1,3 +1,11 @@
+---
+title: "Update a gateway policy"
+description: "Partially updates a gateway policy. Only fields present in the request body are applied; absent fields are left unchanged. policy_type is immutable — to change a policy's type, delete it and create a..."
+source: "https://docs.langchain.com/langsmith/smith-api/gateway-policies/update-a-gateway-policy"
+category: "docs"
+tags: [docs, langsmith, smith-api, gateway-policies, update-a-gateway-policy]
+---
+
 # Update a gateway policy
 
 > Partially updates a gateway policy. Only fields present in
@@ -17,6 +25,8 @@ on every attached child policy so the template stays the source
 of truth across rollouts.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/platform/gateway-policies/{id}**
 
 ````yaml
 openapi: 3.1.0

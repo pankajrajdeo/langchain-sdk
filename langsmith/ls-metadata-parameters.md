@@ -1,3 +1,11 @@
+---
+title: "Metadata parameters reference"
+description: "When you trace LLM calls with LangSmith, you often want to track costs, compare model configurations, and analyze performance across different providers. LangSmith's native integrations (like..."
+source: "https://docs.langchain.com/langsmith/ls-metadata-parameters"
+category: "docs"
+tags: [docs, langsmith, ls-metadata-parameters]
+---
+
 # Metadata parameters reference
 
 When you trace LLM calls with LangSmith, you often want to [track costs](cost-tracking.md), compare model configurations, and analyze performance across different providers. LangSmith's native integrations (like [LangChain](trace-with-langchain.md) or the [OpenAI](trace-openai.md)/[Anthropic](trace-anthropic.md) wrappers) handle this automatically, but custom model wrappers and self-hosted models require a standardized way to provide this information. LangSmith uses `ls_` metadata parameters for this purpose.
@@ -17,6 +25,8 @@ Use `ls_` metadata parameters to:
 
 The most common use case is enabling cost tracking for custom model wrappers. To do this, you need to provide two key pieces of information: the provider name (`ls_provider`) and the model name (`ls_model_name`). These work together to match against LangSmith's pricing database.
 
+**Python**
+
 ```python
 from langsmith import traceable
 
@@ -30,6 +40,8 @@ from langsmith import traceable
 def my_custom_llm(prompt: str):
     return call_custom_api(prompt)
 ```
+
+**TypeScript**
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -47,6 +59,8 @@ const myCustomLlm = traceable(
   }
 );
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.tracing.RunType;
@@ -68,6 +82,8 @@ Function<String, String> myCustomLlm =
             .metadata(metadata)
             .build());
 ```
+
+**Kotlin**
 
 ```kotlin
 import com.langchain.smith.tracing.RunType
@@ -93,6 +109,8 @@ This minimal setup tells LangSmith what model you're using, enabling automatic c
 
 For more comprehensive tracking, you can include additional configuration parameters. This is especially useful when [running experiments](evaluation-quickstart.md) or comparing different model settings:
 
+**Python**
+
 ```python
 @traceable(
     run_type="llm",
@@ -111,6 +129,8 @@ For more comprehensive tracking, you can include additional configuration parame
 def my_configured_llm(messages: list):
     return call_llm(messages)
 ```
+
+**TypeScript**
 
 ```typescript
 const myConfiguredLlm = traceable(
@@ -133,6 +153,8 @@ const myConfiguredLlm = traceable(
   }
 );
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.tracing.RunType;
@@ -164,6 +186,8 @@ Function<List<Map<String, String>>, String> myConfiguredLlm =
             .metadata(metadata)
             .build());
 ```
+
+**Kotlin**
 
 ```kotlin
 val myConfiguredLlm =
@@ -679,6 +703,8 @@ Once you've added `ls_` metadata parameters to your traces, you can use them to 
 
 Use the [`Client`](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client) class with the [`list_runs()`](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.list_runs) method (Python) or [`listRuns()`](https://docs.smith.langchain.com/reference/js/classes/client.Client#listruns) method (TypeScript) to query traces based on metadata values. The [filter syntax](trace-query-syntax.md) supports equality checks, comparisons, and logical operators.
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -708,6 +734,8 @@ runs = client.list_runs(
     filter='metadata_key = "ls_temperature" AND metadata_value > 0.5'
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -779,7 +807,7 @@ metadata_key = 'ls_run_depth' AND metadata_value = 0
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/ls-metadata-parameters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Trace Mastra applications"
+description: "Mastra is a TypeScript framework for building AI-powered applications and agents. Using Mastra’s LangSmith exporter, you can send traces from your Mastra agents and workflows to LangSmith for..."
+source: "https://docs.langchain.com/langsmith/trace-with-mastra"
+category: "docs"
+tags: [docs, langsmith, trace-with-mastra]
+---
+
 # Trace Mastra applications
 
 [Mastra](https://mastra.ai/docs) is a TypeScript framework for building AI-powered applications and agents. Using Mastra’s [LangSmith exporter](https://mastra.ai/docs/observability/ai-tracing/exporters/langsmith), you can send traces from your Mastra agents and workflows to LangSmith for debugging, evaluation, and observability.
@@ -138,7 +146,7 @@ You’ll be able to inspect:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-mastra.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

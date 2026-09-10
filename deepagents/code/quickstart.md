@@ -1,3 +1,11 @@
+---
+title: "Quickstart"
+description: "Install Deep Agents Code, run your first task, and use interactive or non-interactive modes"
+source: "https://docs.langchain.com/oss/deepagents/code/quickstart"
+category: "docs"
+tags: [docs, deepagents, code, quickstart]
+---
+
 # Quickstart
 
 > Install Deep Agents Code, run your first task, and use interactive or non-interactive modes
@@ -143,7 +151,7 @@ Prompt history search lets you find and reuse previously submitted prompts witho
 > Terminal emulators intercept `Cmd`-modified keys before they reach the running application, so Deep Agents Code never receives them directly. Instead, the terminal translates them into the readline shortcuts above.
 >
 > * **Ghostty:** Works out of the box. `Cmd+Left`, `Cmd+Right`, and `Cmd+Delete` are translated to `Ctrl+A`, `Ctrl+E`, and `Ctrl+U` by default.
-> * **iTerm2:** Not bound by default. Add the following under **Settings → Profiles → Keys → Key Mappings** as `Send Text with vim special chars`:
+> * **iTerm2:** Not bound by default. Add the following under **Settings > Profiles > Keys > Key Mappings** as `Send Text with vim special chars`:
 >   * `Cmd+Left` → `\x01` (Ctrl+A)
 >   * `Cmd+Right` → `\x05` (Ctrl+E)
 >   * `Cmd+Delete` → `\x15` (Ctrl+U)
@@ -355,7 +363,7 @@ When configured, Deep Agents Code displays a status line with a link to the Lang
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

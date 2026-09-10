@@ -1,3 +1,11 @@
+---
+title: "Query traces using the SDK"
+description: "The recommended way to query runs (the span data in LangSmith traces) is to use the list_runs method in the SDK or /runs/query endpoint in the API. LangSmith stores traces in a simple format that is..."
+source: "https://docs.langchain.com/langsmith/export-traces"
+category: "docs"
+tags: [docs, langsmith, export-traces]
+---
+
 # Query traces using the SDK
 
 The recommended way to query [runs](observability-concepts.md#runs) (the span data in LangSmith traces) is to use the `list_runs` method in the [SDK](https://reference.langchain.com/python/langsmith/) or `/runs/query` endpoint in the [API](smith-api-ref.md). LangSmith stores traces in a simple format that is specified in the [Run (span) data format](run-data-format.md).
@@ -21,17 +29,23 @@ For simple queries, you don't have to rely on our query syntax. You can use the 
 >
 > Initialize the client before running the below code snippets.
 
+**Python**
+
 ```python
 from langsmith import Client
 
 client = Client()
 ```
 
+**TypeScript**
+
 ```typescript
 import { Client, Run } from "langsmith";
 
 const client = new Client();
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.client.LangsmithClient;
@@ -44,9 +58,13 @@ Below are some examples of ways to list runs using keyword arguments:
 
 ### List all runs in a project
 
+**Python**
+
 ```python
 project_runs = client.list_runs(project_name="<your_project>")
 ```
+
+**TypeScript**
 
 ```typescript
 // Download runs in a project
@@ -58,6 +76,8 @@ for await (const run of client.listRuns({
 };
 ```
 
+**Java**
+
 ```java
 import com.langchain.smith.models.runs.RunQueryParams;
 
@@ -68,6 +88,8 @@ RunQueryParams projectRuns = RunQueryParams.builder()
 
 ### List LLM and chat runs in the last 24 hours
 
+**Python**
+
 ```python
 todays_llm_runs = client.list_runs(
     project_name="<your_project>",
@@ -75,6 +97,8 @@ todays_llm_runs = client.list_runs(
     run_type="llm",
 )
 ```
+
+**TypeScript**
 
 ```typescript
 const todaysLlmRuns: Run[] = [];
@@ -86,6 +110,8 @@ for await (const run of client.listRuns({
   todaysLlmRuns.push(run);
 };
 ```
+
+**Java**
 
 ```java
 OffsetDateTime now = OffsetDateTime.now();
@@ -103,12 +129,16 @@ RunQueryParams todaysLlmRuns = RunQueryParams.builder()
 
 Root runs are runs that have no parents. These are assigned a value of `True` for `is_root`. You can use this to filter for root runs.
 
+**Python**
+
 ```python
 root_runs = client.list_runs(
     project_name="<your_project>",
     is_root=True
 )
 ```
+
+**TypeScript**
 
 ```typescript
 const rootRuns: Run[] = [];
@@ -119,6 +149,8 @@ for await (const run of client.listRuns({
   rootRuns.push(run);
 };
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.runs.RunQueryParams;
@@ -131,9 +163,13 @@ RunQueryParams rootRuns = RunQueryParams.builder()
 
 ### List runs without errors
 
+**Python**
+
 ```python
 correct_runs = client.list_runs(project_name="<your_project>", error=False)
 ```
+
+**TypeScript**
 
 ```typescript
 const correctRuns: Run[] = [];
@@ -144,6 +180,8 @@ for await (const run of client.listRuns({
   correctRuns.push(run);
 };
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.runs.RunQueryParams;
@@ -163,10 +201,14 @@ RunQueryParams noErrorRuns = RunQueryParams.builder()
 
 If you have a list of run IDs, you can list them directly:
 
+**Python**
+
 ```python
 run_ids = ['a36092d2-4ad5-4fb4-9c0d-0dba9a2ed836','9398e6be-964f-4aa4-8ae9-ad78cd4b7074']
 selected_runs = client.list_runs(id=run_ids)
 ```
+
+**TypeScript**
 
 ```typescript
 const runIds = [
@@ -181,6 +223,8 @@ for await (const run of client.listRuns({
 };
 ```
 
+**Java**
+
 ```java
 import com.langchain.smith.models.runs.RunQueryParams;
 
@@ -194,6 +238,8 @@ RunQueryParams runIdsRuns = RunQueryParams.builder()
 
 To fetch a single run (trace) by its ID, use the `read_run` method. This is useful when you have a specific trace ID (for example, from a LangSmith share link like `https://smith.langchain.com/public/<trace-id>/r`) and want to retrieve its full data.
 
+**Python**
+
 ```python
 run_id = "a36092d2-4ad5-4fb4-9c0d-0dba9a2ed836"
 run = client.read_run(run_id)
@@ -204,6 +250,8 @@ print(run.outputs)
 print(run.name)
 ```
 
+**TypeScript**
+
 ```typescript
 const runId = "a36092d2-4ad5-4fb4-9c0d-0dba9a2ed836";
 const run = await client.readRun(runId);
@@ -213,6 +261,8 @@ console.log(run.inputs);
 console.log(run.outputs);
 console.log(run.name);
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.runs.RunQueryParams;
@@ -237,6 +287,8 @@ For more complex queries, you can use the filter query language. The following e
 This is the way to fetch runs in a conversational thread. For more information on setting up threads, refer to our [how-to guide on setting up threads](threads.md).
 Threads are grouped by setting a shared thread ID. The LangSmith UI lets you use either of the following metadata keys: `session_id` or `thread_id`. The session ID is also known as the tracing project ID. The following query matches on either of them.
 
+**Python**
+
 ```python
 group_key = "<your_thread_id>"
 filter_string = f'and(in(metadata_key, ["session_id","thread_id"]), eq(metadata_value, "{group_key}"))'
@@ -246,6 +298,8 @@ thread_runs = client.list_runs(
     is_root=True
 )
 ```
+
+**TypeScript**
 
 ```typescript
 const groupKey = "<your_thread_id>";
@@ -259,6 +313,8 @@ for await (const run of client.listRuns({
   threadRuns.push(run);
 };
 ```
+
+**Java**
 
 ```java
 import com.langchain.smith.models.runs.RunQueryParams;
@@ -278,6 +334,8 @@ RunQueryParams threadRuns = RunQueryParams.builder()
 
 ### List all runs called "extractor" whose root of the trace was assigned feedback "user\_score" score of 1
 
+**Python**
+
 ```python
 client.list_runs(
     project_name="<your_project>",
@@ -286,6 +344,8 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({
   projectName: "<your_project>",
@@ -293,6 +353,8 @@ client.listRuns({
   traceFilter: 'and(eq(feedback_key, "user_score"), eq(feedback_score, 1))'
 })
 ```
+
+**Java**
 
 ```java
 RunQueryParams extractorRuns = RunQueryParams.builder()
@@ -304,6 +366,8 @@ RunQueryParams extractorRuns = RunQueryParams.builder()
 
 ### List runs with "star\_rating" key whose score is greater than 4
 
+**Python**
+
 ```python
 client.list_runs(
     project_name="<your_project>",
@@ -311,12 +375,16 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({
   projectName: "<your_project>",
   filter: 'and(eq(feedback_key, "star_rating"), gt(feedback_score, 4))'
 })
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -327,13 +395,19 @@ RunQueryParams runs = RunQueryParams.builder()
 
 ### List runs that took longer than 5 seconds to complete
 
+**Python**
+
 ```python
 client.list_runs(project_name="<your_project>", filter='gt(latency, "5s")')
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({projectName: "<your_project>", filter: 'gt(latency, "5s")'})
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -344,13 +418,19 @@ RunQueryParams runs = RunQueryParams.builder()
 
 ### List all runs where status is not "error"
 
+**Python**
+
 ```python
 client.list_runs(project_name="<your_project>", filter='neq(status, "error")')
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({projectName: "<your_project>", filter: 'neq(status, "error")'})
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -361,13 +441,19 @@ RunQueryParams runs = RunQueryParams.builder()
 
 ### List all runs where start\_time is greater than a specific timestamp
 
+**Python**
+
 ```python
 client.list_runs(project_name="<your_project>", filter='gt(start_time, "2023-07-15T12:34:56Z")')
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({projectName: "<your_project>", filter: 'gt(start_time, "2023-07-15T12:34:56Z")'})
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -378,13 +464,19 @@ RunQueryParams runs = RunQueryParams.builder()
 
 ### List all runs that contain the string "substring"
 
+**Python**
+
 ```python
 client.list_runs(project_name="<your_project>", filter='search("substring")')
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({projectName: "<your_project>", filter: 'search("substring")'})
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -395,13 +487,19 @@ RunQueryParams runs = RunQueryParams.builder()
 
 ### List all runs that are tagged with the git hash "2aa1cf4"
 
+**Python**
+
 ```python
 client.list_runs(project_name="<your_project>", filter='has(tags, "2aa1cf4")')
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({projectName: "<your_project>", filter: 'has(tags, "2aa1cf4")'})
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -412,6 +510,8 @@ RunQueryParams runs = RunQueryParams.builder()
 
 ### List all runs that started after a specific timestamp and either have a non-error status or a "Correctness" feedback score equal to 0
 
+**Python**
+
 ```python
 client.list_runs(
   project_name="<your_project>",
@@ -419,12 +519,16 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({
   projectName: "<your_project>",
   filter: 'and(gt(start_time, "2023-07-15T12:34:56Z"), or(neq(status, "error"), and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))'
 })
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -435,6 +539,8 @@ RunQueryParams runs = RunQueryParams.builder()
 
 ### Complex query: List all runs where tags include "experimental" or "beta" and latency is greater than 2 seconds
 
+**Python**
+
 ```python
 client.list_runs(
   project_name="<your_project>",
@@ -442,12 +548,16 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({
   projectName: "<your_project>",
   filter: 'and(or(has(tags, "experimental"), has(tags, "beta")), gt(latency, 2))'
 })
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -460,6 +570,8 @@ RunQueryParams runs = RunQueryParams.builder()
 
 You can use the `search()` function without any specific field to do a full text search across all string fields in a run. This allows you to quickly find traces that match a search term.
 
+**Python**
+
 ```python
 client.list_runs(
   project_name="<your_project>",
@@ -467,12 +579,16 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({
   projectName: "<your_project>",
   filter: 'search("image classification")'
 })
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -484,6 +600,8 @@ RunQueryParams runs = RunQueryParams.builder()
 ### Check for presence of metadata
 
 If you want to check for the presence of metadata, you can use the `eq` operator, optionally with an `and` statement to match by value. This is useful if you want to log more structured information about your runs.
+
+**Python**
 
 ```python
 to_search = {
@@ -502,6 +620,8 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 // Check for any run with the "user_id" metadata key
 client.listRuns({
@@ -514,6 +634,8 @@ client.listRuns({
   filter: `and(eq(metadata_key, 'user_id'), eq(metadata_value, '4070f233-f61e-44eb-bff1-da3c163895a3'))`
 });
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -531,6 +653,8 @@ RunQueryParams runs = RunQueryParams.builder()
 
 A common pattern is to add environment information to your traces via metadata. If you want to filter for runs containing environment metadata, you can use the same pattern as above:
 
+**Python**
+
 ```python
 client.list_runs(
   project_name="default",
@@ -538,12 +662,16 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({
   projectName: 'default',
   filter: `and(eq(metadata_key, 'environment'), eq(metadata_value, 'production'))`
 });
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -556,6 +684,8 @@ RunQueryParams runs = RunQueryParams.builder()
 
 A common way to associate traces in the same conversation is by using a shared thread ID. If you want to filter runs based on a thread ID in this way, you can search for that ID in the metadata.
 
+**Python**
+
 ```python
 client.list_runs(
   project_name="default",
@@ -563,12 +693,16 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({
   projectName: 'default',
   filter: `and(eq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))`
 });
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -580,6 +714,8 @@ RunQueryParams runs = RunQueryParams.builder()
 ### Negative filtering on key-value pairs
 
 You can use negative filtering on metadata, input, and output key-value pairs to exclude specific runs from your results. Here are some examples for metadata key-value pairs but the same logic applies to input and output key-value pairs.
+
+**Python**
 
 ```python
 # Find all runs where the metadata does not contain a "thread_id" key
@@ -607,6 +743,8 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 // Find all runs where the metadata does not contain a "thread_id" key
 client.listRuns({
@@ -632,6 +770,8 @@ client.listRuns({
   filter: `and(neq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))`
 });
 ```
+
+**Java**
 
 ```java
 // Find all runs where the metadata does not contain a "thread_id" key
@@ -663,6 +803,8 @@ RunQueryParams runs = RunQueryParams.builder()
 
 If you want to combine multiple conditions to refine your search, you can use the `and` operator along with other filtering functions. Here's how you can search for runs named "ChatOpenAI" that also have a specific `thread_id` in their metadata:
 
+**Python**
+
 ```python
 client.list_runs(
   project_name="default",
@@ -670,12 +812,16 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({
   projectName: 'default',
   filter: `and(eq(name, 'ChatOpenAI'), eq(metadata_key, 'thread_id'), eq(metadata_value, '69b12c91-b1e2-46ce-91de-794c077e8151'))`
 });
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -690,6 +836,8 @@ List all runs named "RetrieveDocs" whose root run has a "user\_score" feedback o
 
 This type of query is useful if you want to extract a specific run conditional on various states or steps being reached within the trace.
 
+**Python**
+
 ```python
 client.list_runs(
     project_name="<your_project>",
@@ -699,6 +847,8 @@ client.list_runs(
 )
 ```
 
+**TypeScript**
+
 ```typescript
 client.listRuns({
   projectName: "<your_project>",
@@ -707,6 +857,8 @@ client.listRuns({
   treeFilter: 'eq(name, "ExpandQuery")'
 })
 ```
+
+**Java**
 
 ```java
 RunQueryParams runs = RunQueryParams.builder()
@@ -726,6 +878,8 @@ Use `trace_filter` to match fields on the root run and `tree_filter` to match su
 3. Traverse the hydrated `child_runs` tree locally and apply your predicate to the fields that are not available as server-side filter fields.
 
 The following example (Python 0.8 and JS 0.7) returns root traces that contain a tool run whose output contains a specific value. The server-side `tree_filter` narrows candidates to traces that contain the relevant tool run, and the local predicate checks the hydrated `outputs` payload.
+
+**Python**
 
 ```python
 from datetime import datetime, timedelta
@@ -761,6 +915,8 @@ for candidate in candidate_roots:
     if has_matching_child:
         matching_roots.append(root)
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client, Run } from "langsmith";
@@ -813,6 +969,8 @@ To optimize the query, the example:
 
 1. Selects only the necessary fields when querying tool runs to reduce query time.
 2. Fetches root runs in batches while processing tool runs concurrently.
+
+**Python**
 
 ```python
 from collections import defaultdict
@@ -899,6 +1057,8 @@ df.head()
 
 This query is useful if you want to fine-tune embeddings or diagnose end-to-end system performance issues based on retriever behavior.
 The following Python example demonstrates how to export retriever inputs and outputs within traces that have a specific feedback score.
+
+**Python**
 
 ```python
 from collections import defaultdict
@@ -1029,7 +1189,7 @@ When you exceed these limits, the API returns a `429 Too Many Requests` response
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/export-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

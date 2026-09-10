@@ -1,3 +1,11 @@
+---
+title: "Tools"
+description: "Load MCP tools into LangChain agents, control their execution, and handle server results and requests."
+source: "https://docs.langchain.com/oss/python/langchain/mcp/tools"
+category: "docs"
+tags: [docs, langchain, mcp, tools]
+---
+
 # Tools
 
 > Load MCP tools into LangChain agents, control their execution, and handle server results and requests.
@@ -32,6 +40,9 @@ async def run_agent(server) -> dict:
             }
         )
 ```
+
+#### [View example trace](https://smith.langchain.com/public/025418ad-e7bc-43a3-b700-d1a78b3a4856/r)
+Open a public LangSmith run for this example.
 
 For general guidance on defining, binding, and using LangChain tools, see [Tools](../tools.md). For several MCP servers and their namespaced tool catalogs, see [Connections](connections.md#multiple-servers).
 
@@ -265,7 +276,7 @@ Only elicitation is answered this way. A server that instead asks for [sampling]
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

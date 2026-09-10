@@ -1,8 +1,18 @@
+---
+title: "Create bulk export"
+description: "Create a new bulk export"
+source: "https://docs.langchain.com/langsmith/smith-api/bulk-exports/create-bulk-export"
+category: "docs"
+tags: [docs, langsmith, smith-api, bulk-exports, create-bulk-export]
+---
+
 # Create bulk export
 
 > Create a new bulk export
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/bulk-exports**
 
 ````yaml
 openapi: 3.1.0

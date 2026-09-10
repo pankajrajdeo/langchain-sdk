@@ -1,3 +1,11 @@
+---
+title: "A2A endpoint in Agent Server"
+description: "Use the A2A protocol to enable agent-to-agent communication with distributed tracing in LangSmith."
+source: "https://docs.langchain.com/langsmith/server-a2a"
+category: "docs"
+tags: [docs, langsmith, server-a2a]
+---
+
 # A2A endpoint in Agent Server
 
 > Use the A2A protocol to enable agent-to-agent communication with distributed tracing in LangSmith.
@@ -673,7 +681,7 @@ To disable the A2A endpoint, set `disable_a2a` to `true` in your `langgraph.json
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/server-a2a.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Request OAuth2 device authorization"
+description: "Issues a device code and user code for the device authorization flow per RFC 8628."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/request-oauth2-device-authorization"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, request-oauth2-device-authorization]
+---
+
 # Request OAuth2 device authorization
 
 > Issues a device code and user code for the device authorization flow per RFC 8628.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /oauth/device/code**
 
 ````yaml
 openapi: 3.1.0

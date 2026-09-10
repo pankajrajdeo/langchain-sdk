@@ -1,3 +1,11 @@
+---
+title: "Async subagents"
+description: "Launch background subagents that run concurrently while the supervisor continues interacting with the user"
+source: "https://docs.langchain.com/oss/python/deepagents/async-subagents"
+category: "docs"
+tags: [docs, deepagents, async-subagents]
+---
+
 # Async subagents
 
 > Launch background subagents that run concurrently while the supervisor continues interacting with the user
@@ -5,9 +13,6 @@
 Async subagents let a supervisor agent launch background tasks that return immediately, so the supervisor can continue interacting with the user while subagents work concurrently. The supervisor can check progress, send follow-up instructions, or cancel tasks at any point.
 
 This builds on [subagents](subagents.md), which run synchronously and block the supervisor until completion. Use async subagents when tasks are long-running, parallelizable, or need mid-flight steering.
-
-> [!NOTE]
-> Async subagents are a preview feature available in `deepagents` 0.5.0. Preview features are under active development and APIs may change.
 
 ```mermaid
 graph TB
@@ -209,6 +214,8 @@ langgraph dev --n-jobs-per-worker 10
 
 The supervisor uses descriptions to decide which subagent to launch. Be specific and action-oriented:
 
+**Good**
+
 ```python
 from deepagents import AsyncSubAgent
 
@@ -218,6 +225,8 @@ AsyncSubAgent(
     graph_id="researcher",
 )
 ```
+
+**Bad**
 
 ```python
 from deepagents import AsyncSubAgent
@@ -279,7 +288,7 @@ The [async-deep-agents](https://github.com/langchain-ai/async-deep-agents) repos
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/async-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

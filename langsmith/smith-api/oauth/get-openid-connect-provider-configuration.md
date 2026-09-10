@@ -1,8 +1,18 @@
+---
+title: "Get openid connect provider configuration"
+description: "Returns the OpenID Connect discovery document (OpenID Connect Discovery 1.0), advertising the authorization, token, userinfo, and JWKS endpoints plus supported scopes, response types, and signing..."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/get-openid-connect-provider-configuration"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, get-openid-connect-provider-configuration]
+---
+
 # Get openid connect provider configuration
 
 > Returns the OpenID Connect discovery document (OpenID Connect Discovery 1.0), advertising the authorization, token, userinfo, and JWKS endpoints plus supported scopes, response types, and signing algorithms.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /.well-known/openid-configuration**
 
 ````yaml
 openapi: 3.1.0

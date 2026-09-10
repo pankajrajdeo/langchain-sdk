@@ -1,3 +1,11 @@
+---
+title: "Evaluation types"
+description: "This page covers two aspects of evaluation in LangSmith:"
+source: "https://docs.langchain.com/langsmith/evaluation-types"
+category: "docs"
+tags: [docs, langsmith, evaluation-types]
+---
+
 # Evaluation types
 
 This page covers two aspects of evaluation in LangSmith:
@@ -135,7 +143,7 @@ Run pairwise evaluations for:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-types.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

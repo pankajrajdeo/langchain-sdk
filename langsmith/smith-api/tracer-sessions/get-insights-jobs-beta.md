@@ -1,8 +1,18 @@
+---
+title: "Get insights jobs (Beta)"
+description: "Get all clusters for a session."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-insights-jobs-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, get-insights-jobs-beta]
+---
+
 # Get insights jobs (Beta)
 
 > Get all clusters for a session.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/sessions/{session_id}/insights**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Deep Agents overview"
+description: "Build agents that can plan, use subagents, and leverage file systems for complex tasks"
+source: "https://docs.langchain.com/oss/python/deepagents/harness"
+category: "docs"
+tags: [docs, deepagents, harness]
+---
+
 # Deep Agents overview
 
 > Build agents that can plan, use subagents, and leverage file systems for complex tasks
@@ -23,6 +31,8 @@ See [Core capabilities](#core-capabilities) for a full breakdown of each compone
 
 ## Quickstart
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -41,6 +51,8 @@ agent.invoke(
     {"messages": [{"role": "user", "content": "what is the weather in sf"}]}
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -61,6 +73,8 @@ agent.invoke(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -79,6 +93,8 @@ agent.invoke(
     {"messages": [{"role": "user", "content": "what is the weather in sf"}]}
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -99,6 +115,8 @@ agent.invoke(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -117,6 +135,8 @@ agent.invoke(
     {"messages": [{"role": "user", "content": "what is the weather in sf"}]}
 )
 ```
+
+**Baseten**
 
 ```python
 from deepagents import create_deep_agent
@@ -137,6 +157,8 @@ agent.invoke(
 )
 ```
 
+**Ollama**
+
 ```python
 from deepagents import create_deep_agent
 
@@ -156,6 +178,9 @@ agent.invoke(
 )
 ```
 
+#### [View example trace](https://smith.langchain.com/public/6303999e-5e08-4c66-b14c-ba5648f32f88/r)
+Open a public LangSmith run for this example.
+
 See the [Quickstart](quickstart.md) and [Customization guide](customization.md) to get started building your own agents and applications with Deep Agents.
 
 > [!TIP]
@@ -172,6 +197,8 @@ Tools, virtual filesystem, optional sandbox, and REPL (interpreter)
 
 #### [Context management](#context-management)
 Skills, memory, summarization, context offloading, and prompt caching
+
+<a id="conversation-history-summarization"></a>
 
 #### [Delegation](#delegation)
 Subagent spawning and optional task planning
@@ -297,6 +324,8 @@ You can also use the file system when building custom tools and middleware for D
 
 For more information, see [backends](backends.md). To generate a durable repository wiki that agents can read from the filesystem, see [OpenWiki](../openwiki/overview.md).
 
+<a id="large-tool-result-eviction"></a>
+
 ### Filesystem permissions
 
 The harness supports declarative permission rules that control which files and directories the agent can read or write. Permissions apply to the built-in filesystem tools listed above and are evaluated in declaration order with first-match-wins semantics.
@@ -327,6 +356,8 @@ Use sandbox backends when the agent needs to install dependencies, run tests, ca
 Use interpreters when the agent needs a lightweight programmable layer for loops, batching, deterministic data transformations, or programmatic tool calling. Interpreters do not provide shell access, package installs, or filesystem and network access.
 
 For sandbox setup, providers, and file transfer APIs, see [Sandboxes](sandboxes.md). For the QuickJS runtime and programmatic tool calling, see [Interpreters](interpreters.md).
+
+<a id="to-do-list-tracking"></a>
 
 ### Streaming
 
@@ -360,6 +391,8 @@ Memory uses [`AGENTS.md` files](https://agents.md/) that you pass through the `m
 The agent can also update memory based on interactions and feedback, so preferences and patterns can carry forward without needing to restate them in each thread.
 
 For configuration details and examples, see [Memory](customization.md#memory). To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](../openwiki/overview.md).
+
+<a id="summarization"></a>
 
 ### Summarization and context offloading
 
@@ -405,6 +438,8 @@ Planning is often useful for:
 
 Pass [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) to the middleware parameter to give the agent a `write_todos` tool for maintaining a structured task list during execution.
 
+**Google**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -414,6 +449,8 @@ agent = create_deep_agent(
     middleware=[TodoListMiddleware()],
 )
 ```
+
+**OpenAI**
 
 ```python
 from deepagents import create_deep_agent
@@ -425,6 +462,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -434,6 +473,8 @@ agent = create_deep_agent(
     middleware=[TodoListMiddleware()],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from deepagents import create_deep_agent
@@ -445,6 +486,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -455,6 +498,8 @@ agent = create_deep_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from deepagents import create_deep_agent
 from langchain.agents.middleware import TodoListMiddleware
@@ -464,6 +509,8 @@ agent = create_deep_agent(
     middleware=[TodoListMiddleware()],
 )
 ```
+
+**Ollama**
 
 ```python
 from deepagents import create_deep_agent
@@ -505,6 +552,8 @@ For more information, see [Subagents](subagents.md).
 
 The steering component gives humans control over agent behavior at runtime and sets filesystem permissions for agent work.
 
+<a id="dangling-tool-call-repair"></a>
+
 ### Human-in-the-loop
 
 Deep Agents integrate with LangGraph interrupts so you can pause for approval on sensitive tool calls. Enable this behavior with the `interrupt_on` parameter in `create_deep_agent`.
@@ -535,7 +584,7 @@ See the `deepagents` API reference
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

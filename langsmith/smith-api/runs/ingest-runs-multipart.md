@@ -1,3 +1,11 @@
+---
+title: "Ingest runs (multipart)"
+description: "Ingests multiple runs, feedback objects, and binary attachments in a single multipart/form-data request. Part‑name pattern: .[.] where event ∈ {post, patch, feedback, attachment}. post|patch. – JSON..."
+source: "https://docs.langchain.com/langsmith/smith-api/runs/ingest-runs-multipart"
+category: "docs"
+tags: [docs, langsmith, smith-api, runs, ingest-runs-multipart]
+---
+
 # Ingest runs (multipart)
 
 > Ingests multiple runs, feedback objects, and binary attachments in a single `multipart/form-data` request.
@@ -10,6 +18,8 @@
 **Best performance** for high‑volume ingestion.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/multipart**
 
 ````yaml
 openapi: 3.1.0

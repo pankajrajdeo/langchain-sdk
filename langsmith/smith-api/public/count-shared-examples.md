@@ -1,8 +1,18 @@
+---
+title: "Count shared examples"
+description: "Count all examples by query params"
+source: "https://docs.langchain.com/langsmith/smith-api/public/count-shared-examples"
+category: "docs"
+tags: [docs, langsmith, smith-api, public, count-shared-examples]
+---
+
 # Count shared examples
 
 > Count all examples by query params
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/public/{share_token}/examples/count**
 
 ````yaml
 openapi: 3.1.0

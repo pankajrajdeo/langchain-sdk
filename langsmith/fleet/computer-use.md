@@ -1,3 +1,11 @@
+---
+title: "Computer use"
+description: "Run code, manage files, and call authenticated APIs from a persistent virtual computer attached to your Fleet agent."
+source: "https://docs.langchain.com/langsmith/fleet/computer-use"
+category: "docs"
+tags: [docs, langsmith, fleet, computer-use]
+---
+
 # Computer use
 
 > Run code, manage files, and call authenticated APIs from a persistent virtual computer attached to your Fleet agent.
@@ -89,7 +97,7 @@ Click **Save changes**.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/computer-use.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

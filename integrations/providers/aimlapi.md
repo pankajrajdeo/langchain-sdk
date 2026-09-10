@@ -1,3 +1,11 @@
+---
+title: "AI/ML API integrations"
+description: "Integrate with AI/ML API using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/aimlapi"
+category: "docs"
+tags: [docs, integrations, providers, aimlapi]
+---
+
 # AI/ML API integrations
 
 > Integrate with AI/ML API using LangChain Python.
@@ -49,7 +57,7 @@ from langchain_aimlapi import AimlapiEmbeddings
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aimlapi.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

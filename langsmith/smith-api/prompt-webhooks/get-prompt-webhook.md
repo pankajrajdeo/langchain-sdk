@@ -1,8 +1,18 @@
+---
+title: "Get prompt webhook"
+description: "Get a specific prompt webhook."
+source: "https://docs.langchain.com/langsmith/smith-api/prompt-webhooks/get-prompt-webhook"
+category: "docs"
+tags: [docs, langsmith, smith-api, prompt-webhooks, get-prompt-webhook]
+---
+
 # Get prompt webhook
 
 > Get a specific prompt webhook.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/prompt-webhooks/{webhook_id}**
 
 ````yaml
 openapi: 3.1.0

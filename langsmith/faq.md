@@ -1,3 +1,11 @@
+---
+title: "Frequently asked questions"
+description: "You have likely deployed LangSmith without setting up SSO. LangSmith requires SSO to manage users and API keys. You can find more information on setting up SSO in the configuration section."
+source: "https://docs.langchain.com/langsmith/faq"
+category: "docs"
+tags: [docs, langsmith, faq]
+---
+
 # Frequently asked questions
 
 ## Observability
@@ -165,7 +173,7 @@ A Deployment Run is one end-to-end invocation of a LangGraph agent deployed via 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/faq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

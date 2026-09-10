@@ -1,8 +1,18 @@
+---
+title: "List tools"
+description: "Returns a paginated list of tools in the workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/tools/list-tools"
+category: "docs"
+tags: [docs, langsmith, smith-api, tools, list-tools]
+---
+
 # List tools
 
 > Returns a paginated list of tools in the workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/tools**
 
 ````yaml
 openapi: 3.1.0

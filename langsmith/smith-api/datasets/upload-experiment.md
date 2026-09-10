@@ -1,8 +1,18 @@
+---
+title: "Upload experiment"
+description: "Upload an experiment that has already been run."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/upload-experiment"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, upload-experiment]
+---
+
 # Upload experiment
 
 > Upload an experiment that has already been run.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/datasets/upload-experiment**
 
 ````yaml
 openapi: 3.1.0

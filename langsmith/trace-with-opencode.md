@@ -1,3 +1,11 @@
+---
+title: "Trace OpenCode sessions"
+description: "Capture OpenCode sessions, assistant turns, tool calls, and subagent activity in LangSmith."
+source: "https://docs.langchain.com/langsmith/trace-with-opencode"
+category: "docs"
+tags: [docs, langsmith, trace-with-opencode]
+---
+
 # Trace OpenCode sessions
 
 > Capture OpenCode sessions, assistant turns, tool calls, and subagent activity in LangSmith.
@@ -151,7 +159,7 @@ If traces do not appear in LangSmith:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-opencode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

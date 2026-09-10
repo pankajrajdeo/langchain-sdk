@@ -1,3 +1,11 @@
+---
+title: "ChatBedrock integration"
+description: "Integrate with the ChatBedrock chat model using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/chat/bedrock"
+category: "docs"
+tags: [docs, integrations, chat, bedrock]
+---
+
 # ChatBedrock integration
 
 > Integrate with the ChatBedrock chat model using LangChain Python.
@@ -300,6 +308,8 @@ specified in Bedrock's
 [native format](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_DocumentBlock.html)
 or LangChain's [standard types](../../langchain/messages.md#multimodal):
 
+**Bedrock format**
+
 ```python
 from langchain_aws import ChatBedrockConverse
 
@@ -332,6 +342,8 @@ response = llm.invoke(
 )
 response.content_blocks
 ```
+
+**LangChain standard format**
 
 ```python
 import base64
@@ -376,9 +388,13 @@ For AWS Bedrock users specifically interested in Anthropic models, `langchain-aw
 
 Install `langchain-aws` with the `anthropic` extra to get the required dependencies:
 
+**pip**
+
 ```bash
 pip install --upgrade "langchain-aws[anthropic]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain-aws[anthropic]"
@@ -424,7 +440,7 @@ For detailed documentation of all `ChatBedrock`, `ChatBedrockConverse`, and `Cha
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

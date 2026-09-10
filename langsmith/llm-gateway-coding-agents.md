@@ -1,3 +1,11 @@
+---
+title: "Set up coding agents"
+description: "Configure Claude Code, Codex, Gemini CLI, and Deep Agents Code to route LLM calls through the LLM Gateway."
+source: "https://docs.langchain.com/langsmith/llm-gateway-coding-agents"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-coding-agents]
+---
+
 # Set up coding agents
 
 > Configure Claude Code, Codex, Gemini CLI, and Deep Agents Code to route LLM calls through the LLM Gateway.
@@ -205,7 +213,7 @@ If the call fails with a `403`, check that your API key's role includes `gateway
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-coding-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

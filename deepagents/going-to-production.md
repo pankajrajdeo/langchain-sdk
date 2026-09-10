@@ -1,3 +1,11 @@
+---
+title: "Going to production"
+description: "Take your deep agent to production with persistent memory, sandboxes, resilience middleware, and deployment options"
+source: "https://docs.langchain.com/oss/python/deepagents/going-to-production"
+category: "docs"
+tags: [docs, deepagents, going-to-production]
+---
+
 # Going to production
 
 > Take your deep agent to production with persistent memory, sandboxes, resilience middleware, and deployment options
@@ -33,6 +41,8 @@ The recommended path for taking a Deep Agent to production is [Managed Deep Agen
 
 All code snippets on this page use the following `langgraph.json` unless otherwise specified:
 
+**langgraph.json**
+
 ```json
 {
   "dependencies": ["."],
@@ -63,6 +73,8 @@ In production, every invocation should carry two run-level parameters:
 * **`context`**: per-run data your tools and middleware read at invocation time, for example `user_id`, API keys, feature flags, or session metadata. Define the shape with `context_schema` and access it via `runtime.context`. See [Runtime context](context-engineering.md#runtime-context).
 
 The two are independent and almost always passed together:
+
+**Google**
 
 ```python
 from dataclasses import dataclass
@@ -95,6 +107,8 @@ agent.invoke(
 )
 ```
 
+**OpenAI**
+
 ```python
 from dataclasses import dataclass
 
@@ -125,6 +139,8 @@ agent.invoke(
     context=Context(user_id="user-123"),
 )
 ```
+
+**Anthropic**
 
 ```python
 from dataclasses import dataclass
@@ -157,6 +173,8 @@ agent.invoke(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from dataclasses import dataclass
 
@@ -187,6 +205,8 @@ agent.invoke(
     context=Context(user_id="user-123"),
 )
 ```
+
+**Fireworks**
 
 ```python
 from dataclasses import dataclass
@@ -219,6 +239,8 @@ agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from dataclasses import dataclass
 
@@ -250,6 +272,8 @@ agent.invoke(
 )
 ```
 
+**Ollama**
+
 ```python
 from dataclasses import dataclass
 
@@ -280,6 +304,9 @@ agent.invoke(
     context=Context(user_id="user-123"),
 )
 ```
+
+#### [View example trace](https://smith.langchain.com/public/25f2c799-ee4e-49a4-a482-89a17b9f66ba/r)
+Open a public LangSmith run for this example.
 
 When deploying with the LangGraph SDK, the SDK manages threads for you and you pass the returned `thread_id` to each run:
 
@@ -420,6 +447,8 @@ Otherwise, to share memory across threads, route a path like `/memories/` to a [
 #### User (recommended)
 Namespace by `user_id`. Each user gets their own private memory. This is the recommended default since most applications deploy a single assistant.
 
+**agent.py**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -448,6 +477,8 @@ agent = create_deep_agent(
 #### Assistant
 Namespace by `assistant_id`. Memory is shared across all users of the same assistant, so any user can read or update it. Use this for shared instructions or knowledge that applies to everyone using a given assistant (e.g., "always reply in formal tone").
 
+**agent.py**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -470,6 +501,8 @@ agent = create_deep_agent(
 #### User
 Namespace by `user_id` alone. Memory follows the user across all assistants. Use this for a global user profile (name, timezone, communication preferences) that should apply regardless of which assistant the user is talking to.
 
+**agent.py**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -489,6 +522,8 @@ agent = create_deep_agent(
 
 #### Organization
 Namespace by `org_id`. Memory is shared across all users and all assistants. Typically used for organization-wide policies (compliance rules, brand guidelines) that should be read-only for the agent. Write access should be restricted to application code to prevent prompt injection.
+
+**agent.py**
 
 ```python
 from deepagents import create_deep_agent
@@ -554,6 +589,8 @@ The key decision is how long a sandbox lives. Does each conversation get a fresh
 #### Thread-scoped (most common)
 Each conversation gets its own sandbox. The [graph factory](../langsmith/graph-rebuild.md) reads `thread_id` from the run config, so each [thread](../langsmith/use-threads.md) automatically gets its own isolated environment. Named sandbox lookup handles deduplication across runs. Cleaned up when the sandbox [TTL](../langsmith/configure-ttl.md) expires.
 
+**agent.py**
+
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -585,6 +622,8 @@ async def agent(config: RunnableConfig):
 
 #### Assistant-scoped
 All conversations share one sandbox. The [graph factory](../langsmith/graph-rebuild.md) reads the [assistant](../langsmith/assistants.md) ID from `config["configurable"]`, so every thread on the same assistant returns to the same environment. Files, installed packages, and cloned repositories persist across conversations.
+
+**agent.py**
 
 ```python
 from deepagents import create_deep_agent
@@ -621,6 +660,8 @@ Once deployed with `langgraph deploy`, invoke the agent from your application co
 
 #### Thread-scoped
 Each thread gets its own sandbox. Follow-up messages within the same thread reuse the same sandbox, but a new thread always starts fresh with no leftover files or installed packages from previous conversations.
+
+**client.py**
 
 ```python
 from langgraph_sdk import get_client
@@ -659,6 +700,8 @@ async for chunk in client.runs.stream(
 
 #### Assistant-scoped
 All threads share one sandbox. This is useful when the sandbox has state that's expensive to recreate, such as a cloned repo, installed dependencies, or build artifacts. Any conversation on the same assistant picks up where the last one left off without repeating setup.
+
+**client.py**
 
 ```python
 from langgraph_sdk import get_client
@@ -699,6 +742,8 @@ For provider-specific file transfer examples, see [working with files](sandboxes
 <summary>Example: syncing skills and memories with custom middleware</summary>
 
 [Skill](skills.md) scripts that the agent needs to execute must be uploaded into the sandbox before the agent runs. You may also want to sync [memories](memory.md) so the agent can read and update them inside the container. Use [custom middleware](../langchain/middleware/custom.md) with `before_agent` and `after_agent` hooks to move files across the sandbox boundary:
+
+**agent.py**
 
 ```python
 from deepagents import create_deep_agent
@@ -888,7 +933,7 @@ For UI patterns specific to deep agents, such as subagent cards, todo lists, and
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/going-to-production.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

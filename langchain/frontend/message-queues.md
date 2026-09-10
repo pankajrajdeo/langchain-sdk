@@ -1,3 +1,11 @@
+---
+title: "Message queues"
+description: "Queue multiple messages and manage them while the agent processes sequentially"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/message-queues"
+category: "docs"
+tags: [docs, langchain, frontend, message-queues]
+---
+
 # Message queues
 
 > Queue multiple messages and manage them while the agent processes sequentially
@@ -60,7 +68,9 @@ pending work, and use `queue.cancel()` or `queue.clear()` to remove items before
 they start processing.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream, useSubmissionQueue } from "@langchain/react";
@@ -90,6 +100,8 @@ function Chat() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -121,6 +133,8 @@ const entries = computed(() => queue.entries.value);
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream, useSubmissionQueue } from "@langchain/svelte";
@@ -146,6 +160,8 @@ const entries = computed(() => queue.entries.value);
   <ChatInput on:submit={(e) => handleSubmit(e.detail)} />
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component } from "@angular/core";
@@ -268,6 +284,8 @@ When a user wants to begin a fresh conversation, update the reactive `threadId`
 that you pass into the stream. Passing `null` clears the current thread binding;
 the next submission creates a new thread.
 
+**React**
+
 ```tsx
 function NewThreadButton() {
   const [threadId, setThreadId] = useState<string | null>(null);
@@ -280,6 +298,8 @@ function NewThreadButton() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -295,6 +315,8 @@ const stream = useStream<typeof myAgent>({
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   let threadId = $state<string | null>(null);
@@ -306,6 +328,8 @@ const stream = useStream<typeof myAgent>({
 
 <button onclick={() => (threadId = null)}>New conversation</button>
 ```
+
+**Angular**
 
 ```ts
 threadId = signal<string | null>(null);
@@ -333,7 +357,7 @@ stream = injectStream<typeof myAgent>({
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/message-queues.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

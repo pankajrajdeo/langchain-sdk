@@ -1,3 +1,11 @@
+---
+title: "MistralAI integrations"
+description: "Integrate with MistralAI using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/mistralai"
+category: "docs"
+tags: [docs, integrations, providers, mistralai]
+---
+
 # MistralAI integrations
 
 > Integrate with MistralAI using LangChain Python.
@@ -10,9 +18,13 @@ A valid [API key](https://console.mistral.ai/users/api-keys/) is needed to commu
 
 You will also need the `langchain-mistralai` package:
 
+**pip**
+
 ```bash
 pip install langchain-mistralai
 ```
+
+**uv**
 
 ```bash
 uv add langchain-mistralai
@@ -41,7 +53,7 @@ from langchain_mistralai import MistralAIEmbeddings
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mistralai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

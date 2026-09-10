@@ -1,6 +1,16 @@
+---
+title: "Delete tag key"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/tag-keys/{tag_key_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/delete-tag-key"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, delete-tag-key]
+---
+
 # Delete tag key
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/tag-keys/{tag_key_id}**
 
 ````yaml
 openapi: 3.1.0

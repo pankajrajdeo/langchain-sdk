@@ -1,3 +1,11 @@
+---
+title: "Event streaming"
+description: "Stream LangGraph runs with typed projections for messages, state, subgraphs, output, and extensions."
+source: "https://docs.langchain.com/oss/python/langgraph/event-streaming"
+category: "docs"
+tags: [docs, langgraph, event-streaming]
+---
+
 # Event streaming
 
 > Stream LangGraph runs with typed projections for messages, state, subgraphs, output, and extensions.
@@ -518,7 +526,7 @@ The wire-level event and command formats are defined in the [Agent Protocol](htt
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

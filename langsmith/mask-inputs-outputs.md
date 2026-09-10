@@ -1,3 +1,11 @@
+---
+title: "Prevent logging of sensitive data in traces"
+description: "When working with LangSmith traces, you may need to prevent sensitive information from being logged to maintain privacy and comply with security requirements. LangSmith provides multiple approaches..."
+source: "https://docs.langchain.com/langsmith/mask-inputs-outputs"
+category: "docs"
+tags: [docs, langsmith, mask-inputs-outputs]
+---
+
 # Prevent logging of sensitive data in traces
 
 When working with LangSmith traces, you may need to prevent sensitive information from being logged to maintain privacy and comply with security requirements. LangSmith provides multiple approaches to protect your data before it's sent to the backend:
@@ -29,6 +37,8 @@ You can also customize and override this behavior for a given [Client](https://r
 
 The following example returns an empty object for both `hide_inputs` and `hide_outputs`, but you can customize this to your needs:
 
+**Python**
+
 ```python
 import openai
 from langsmith import Client
@@ -58,6 +68,8 @@ openai_client.chat.completions.create(
     ],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import OpenAI from "openai";
@@ -186,6 +198,8 @@ The anonymizer will be skipped for inputs if `LANGSMITH_HIDE_INPUTS = true`. Sam
 
 However, if inputs or outputs are to be sent to [Client](https://reference.langchain.com/python/langsmith/client/Client), the `anonymizer` method will take precedence over functions found in `hide_inputs` and `hide_outputs`. By default, the `create_anonymizer` will only look at maximum of 10 nesting levels deep, which can be configured via the `max_depth` parameter.
 
+**Python**
+
 ```python
 from langsmith.anonymizer import create_anonymizer
 from langsmith import Client, traceable
@@ -210,6 +224,8 @@ client = Client(anonymizer=anonymizer)
 def main(inputs: dict) -> dict:
     ...
 ```
+
+**TypeScript**
 
 ```typescript
 import { createAnonymizer } from "langsmith/anonymizer"
@@ -240,6 +256,8 @@ Please note, that using the anonymizer might incur a performance hit with comple
 <img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/hide-inputs-outputs.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=ac9ba9a6729029a7fa38da03e1466a1a" alt="Hide inputs outputs" width="1708" height="717" data-path="langsmith/images/hide-inputs-outputs.png" />
 
 Older versions of LangSmith SDKs can use the `hide_inputs` and `hide_outputs` parameters to achieve the same effect. You can also use these parameters to process the inputs and outputs more efficiently.
+
+**Python**
 
 ```python
 import re
@@ -282,6 +300,8 @@ def parent(inputs: dict) -> dict:
 
 parent(inputs)
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -495,11 +515,15 @@ Microsoft Presidio is a data protection and de-identification SDK. The implement
 
 To use Presidio and its spaCy model, install the following:
 
+**pip**
+
 ```bash
 pip install presidio-analyzer
 pip install presidio-anonymizer
 python -m spacy download en_core_web_lg
 ```
+
+**uv**
 
 ```bash
 uv add presidio-analyzer
@@ -509,9 +533,13 @@ python -m spacy download en_core_web_lg
 
 Also, install OpenAI:
 
+**pip**
+
 ```bash
 pip install openai
 ```
+
+**uv**
 
 ```bash
 uv add openai
@@ -603,9 +631,13 @@ Comprehend is a natural language processing service that can detect personally i
 
 To use Comprehend, install [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html):
 
+**pip**
+
 ```bash
 pip install boto3
 ```
+
+**uv**
 
 ```bash
 uv add boto3
@@ -613,9 +645,13 @@ uv add boto3
 
 Also, install OpenAI:
 
+**pip**
+
 ```bash
 pip install openai
 ```
+
+**uv**
 
 ```bash
 uv add openai
@@ -855,7 +891,7 @@ finally:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/mask-inputs-outputs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

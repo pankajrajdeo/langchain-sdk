@@ -1,8 +1,18 @@
+---
+title: "Delete Run"
+description: "Delete a run by ID."
+source: "https://docs.langchain.com/langsmith/agent-server-api/thread-runs/delete-run"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, thread-runs, delete-run]
+---
+
 # Delete Run
 
 > Delete a run by ID.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json delete /threads/{thread_id}/runs/{run_id}**
 
 ````yaml
 openapi: 3.1.0

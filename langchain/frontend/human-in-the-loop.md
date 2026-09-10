@@ -1,3 +1,11 @@
+---
+title: "Human-in-the-Loop"
+description: "Add approval workflows with interrupt-based human review"
+source: "https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop"
+category: "docs"
+tags: [docs, langchain, frontend, human-in-the-loop]
+---
+
 # Human-in-the-Loop
 
 > Add approval workflows with interrupt-based human review
@@ -41,7 +49,9 @@ approval card while that value is set, then resume the run with
 approves, rejects, or edits the action.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
+
+**React**
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -73,6 +83,8 @@ export function Chat() {
   );
 }
 ```
+
+**Vue**
 
 ```vue
 <script setup lang="ts">
@@ -106,6 +118,8 @@ function handleRespond(response: HITLResponse) {
 </template>
 ```
 
+**Svelte**
+
 ```svelte
 <script lang="ts">
   import { useStream } from "@langchain/svelte";
@@ -132,6 +146,8 @@ function handleRespond(response: HITLResponse) {
   {/if}
 </div>
 ```
+
+**Angular**
 
 ```ts
 import { Component } from "@angular/core";
@@ -586,7 +602,7 @@ Keep these guidelines in mind when implementing HITL workflows:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

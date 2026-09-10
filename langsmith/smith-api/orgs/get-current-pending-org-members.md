@@ -1,6 +1,16 @@
+---
+title: "Get current pending org members"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/members/pending"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/get-current-pending-org-members"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, get-current-pending-org-members]
+---
+
 # Get current pending org members
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/members/pending**
 
 ````yaml
 openapi: 3.1.0

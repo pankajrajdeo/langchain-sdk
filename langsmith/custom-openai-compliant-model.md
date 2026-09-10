@@ -1,3 +1,11 @@
+---
+title: "Connect to an OpenAI compliant model provider/proxy"
+description: "The Playground allows you to use any model that is compliant with the OpenAI API. You can utilize your model by setting the Proxy Provider for in the Playground."
+source: "https://docs.langchain.com/langsmith/custom-openai-compliant-model"
+category: "docs"
+tags: [docs, langsmith, custom-openai-compliant-model]
+---
+
 # Connect to an OpenAI compliant model provider/proxy
 
 The Playground allows you to use any model that is compliant with the OpenAI API. You can utilize your model by setting the Proxy Provider for  in the Playground.
@@ -54,7 +62,7 @@ set the Base URL to `https://my-server.example.com/api/v2`.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-openai-compliant-model.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

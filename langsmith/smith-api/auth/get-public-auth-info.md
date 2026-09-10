@@ -1,8 +1,18 @@
+---
+title: "Get public auth info"
+description: "Returns public authentication information for the current workspace-level session."
+source: "https://docs.langchain.com/langsmith/smith-api/auth/get-public-auth-info"
+category: "docs"
+tags: [docs, langsmith, smith-api, auth, get-public-auth-info]
+---
+
 # Get public auth info
 
 > Returns public authentication information for the current workspace-level session.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /auth/public**
 
 ````yaml
 openapi: 3.1.0

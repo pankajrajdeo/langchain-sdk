@@ -1,3 +1,11 @@
+---
+title: "Timbr integrations"
+description: "Integrate with Timbr using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/timbr"
+category: "docs"
+tags: [docs, integrations, providers, timbr]
+---
+
 # Timbr integrations
 
 > Integrate with Timbr using LangChain Python.
@@ -36,7 +44,7 @@ See a [usage example](../graphs/timbr.md)
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/timbr.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

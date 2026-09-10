@@ -1,3 +1,11 @@
+---
+title: "Self-hosted LangSmith changelog"
+description: "Subscribe: Our changelog includes an RSS feed that can integrate with Slack, email, Discord bots like Readybot or RSS Feeds to Discord Bot, and other subscription tools."
+source: "https://docs.langchain.com/langsmith/self-hosted-changelog"
+category: "docs"
+tags: [docs, langsmith, self-hosted-changelog]
+---
+
 # Self-hosted LangSmith changelog
 
 > [!NOTE]
@@ -3398,7 +3406,7 @@ These changes improve user interaction, enhance system performance, and expand s
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

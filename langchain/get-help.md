@@ -1,3 +1,11 @@
+---
+title: "Get help"
+description: "Connect with the LangChain community, access learning resources, and get the support you need to build with confidence."
+source: "https://docs.langchain.com/oss/python/langchain/get-help"
+category: "docs"
+tags: [docs, langchain, get-help]
+---
+
 # Get help
 
 Connect with the LangChain community, access learning resources, and get the support you need to build with confidence.
@@ -39,7 +47,7 @@ Follow us for the latest updates, announcements, and community highlights.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/get-help.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,16 @@
+---
+title: "Query runs"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/runs/query"
+source: "https://docs.langchain.com/langsmith/smith-api/run/query-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, run, query-runs]
+---
+
 # Query runs
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/runs/query**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "List usage limits"
+description: "List out the configured usage limits for a given tenant."
+source: "https://docs.langchain.com/langsmith/smith-api/usage-limits/list-usage-limits"
+category: "docs"
+tags: [docs, langsmith, smith-api, usage-limits, list-usage-limits]
+---
+
 # List usage limits
 
 > List out the configured usage limits for a given tenant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/usage-limits**
 
 ````yaml
 openapi: 3.1.0

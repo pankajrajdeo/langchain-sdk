@@ -1,8 +1,18 @@
+---
+title: "Delete service account"
+description: "Delete a service account"
+source: "https://docs.langchain.com/langsmith/smith-api/service-accounts/delete-service-account"
+category: "docs"
+tags: [docs, langsmith, smith-api, service-accounts, delete-service-account]
+---
+
 # Delete service account
 
 > Delete a service account
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/service-accounts/{service_account_id}**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "List workspaces"
+description: "Get all workspaces visible to this auth in the current org. Does not create a new workspace/org."
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/list-workspaces"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, list-workspaces]
+---
+
 # List workspaces
 
 > Get all workspaces visible to this auth in the current org. Does not create a new workspace/org.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces**
 
 ````yaml
 openapi: 3.1.0

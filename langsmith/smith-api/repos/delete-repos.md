@@ -1,3 +1,11 @@
+---
+title: "Delete repos"
+description: "Delete multiple repos with partial success support."
+source: "https://docs.langchain.com/langsmith/smith-api/repos/delete-repos"
+category: "docs"
+tags: [docs, langsmith, smith-api, repos, delete-repos]
+---
+
 # Delete repos
 
 > Delete multiple repos with partial success support.
@@ -7,6 +15,8 @@ Returns:
     - 207: Some repos deleted successfully, some failed
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/repos**
 
 ````yaml
 openapi: 3.1.0

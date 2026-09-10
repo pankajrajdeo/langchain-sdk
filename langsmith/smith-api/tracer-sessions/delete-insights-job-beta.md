@@ -1,8 +1,18 @@
+---
+title: "Delete insights job (Beta)"
+description: "Delete a session cluster job."
+source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/delete-insights-job-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, tracer-sessions, delete-insights-job-beta]
+---
+
 # Delete insights job (Beta)
 
 > Delete a session cluster job.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/sessions/{session_id}/insights/{job_id}**
 
 ````yaml
 openapi: 3.1.0

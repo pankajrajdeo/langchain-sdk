@@ -1,3 +1,11 @@
+---
+title: "Hooks"
+description: "Observe and control Deep Agents Code lifecycle events with command hooks configured in hooks.json"
+source: "https://docs.langchain.com/oss/deepagents/code/hooks"
+category: "docs"
+tags: [docs, deepagents, code, hooks]
+---
+
 # Hooks
 
 > Observe and control Deep Agents Code lifecycle events with command hooks configured in hooks.json
@@ -504,7 +512,7 @@ Hooks follow the same trust model as Git hooks or shell aliases: any process tha
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/hooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

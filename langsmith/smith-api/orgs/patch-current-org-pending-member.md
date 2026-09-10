@@ -1,8 +1,18 @@
+---
+title: "Patch current org pending member"
+description: "Update the role on a pending org member invite."
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/patch-current-org-pending-member"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, patch-current-org-pending-member]
+---
+
 # Patch current org pending member
 
 > Update the role on a pending org member invite.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/orgs/current/members/{identity_id}/pending**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "MCP Get"
+description: "Implemented according to the Streamable HTTP Transport specification."
+source: "https://docs.langchain.com/langsmith/agent-server-api/mcp"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, mcp]
+---
+
 # MCP Get
 
 > Implemented according to the Streamable HTTP Transport specification.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json get /mcp/**
 
 ````yaml
 openapi: 3.1.0

@@ -1,8 +1,18 @@
+---
+title: "Get vendor settings"
+description: "Returns the current vendor-specific settings."
+source: "https://docs.langchain.com/langsmith/smith-api/mcp_vendors/get-vendor-settings"
+category: "docs"
+tags: [docs, langsmith, smith-api, mcp_vendors, get-vendor-settings]
+---
+
 # Get vendor settings
 
 > Returns the current vendor-specific settings.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/mcp-vendors/{vendor_slug}/settings**
 
 ````yaml
 openapi: 3.1.0

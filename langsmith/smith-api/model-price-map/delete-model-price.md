@@ -1,6 +1,16 @@
+---
+title: "Delete model price"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/model-price-map/{id}"
+source: "https://docs.langchain.com/langsmith/smith-api/model-price-map/delete-model-price"
+category: "docs"
+tags: [docs, langsmith, smith-api, model-price-map, delete-model-price]
+---
+
 # Delete model price
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/model-price-map/{id}**
 
 ````yaml
 openapi: 3.1.0

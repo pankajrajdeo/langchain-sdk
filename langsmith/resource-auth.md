@@ -1,3 +1,11 @@
+---
+title: "Make conversations private"
+description: "In this tutorial, you will extend the chatbot created in the last tutorial to give each user their own private conversations. You'll add resource-level access control so users can only see their own..."
+source: "https://docs.langchain.com/langsmith/resource-auth"
+category: "docs"
+tags: [docs, langsmith, resource-auth]
+---
+
 # Make conversations private
 
 In this tutorial, you will extend [the chatbot created in the last tutorial](set-up-custom-auth.md) to give each user their own private conversations. You'll add [resource-level access control](auth.md#single-owner-resources) so users can only see their own threads.
@@ -320,7 +328,7 @@ Now that you can control access to resources, you might want to:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/resource-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "CrateDB integrations"
+description: "Integrate with CrateDB using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/cratedb"
+category: "docs"
+tags: [docs, integrations, providers, cratedb]
+---
+
 # CrateDB integrations
 
 > Integrate with CrateDB using LangChain Python.
@@ -35,9 +43,13 @@ docker run --name=cratedb --rm \
 Install the most recent version of the [langchain-cratedb] package
 and a few others that are needed for this tutorial.
 
+**pip**
+
 ```bash
 pip install -U langchain-cratedb langchain-openai unstructured
 ```
+
+**uv**
 
 ```bash
 uv add langchain-cratedb langchain-openai unstructured
@@ -235,7 +247,7 @@ print(answer.content)
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cratedb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,16 @@
+---
+title: "List tag values"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/list-tag-values"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, list-tag-values]
+---
+
 # List tag values
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values**
 
 ````yaml
 openapi: 3.1.0

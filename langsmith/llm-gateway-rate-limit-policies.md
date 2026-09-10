@@ -1,3 +1,11 @@
+---
+title: "Rate limit policies"
+description: "Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window."
+source: "https://docs.langchain.com/langsmith/llm-gateway-rate-limit-policies"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-rate-limit-policies]
+---
+
 # Rate limit policies
 
 > Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window.
@@ -59,7 +67,7 @@ Rules:
 > [!WARNING]
 > Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
-1. Go to **Settings → Gateway → LLM Gateway**.
+1. Go to **LLM Gateway**.
 2. Click **Create policy**.
 3. Select **Rate limit** as the policy type.
 4. Select the subject scope (user, workspace, or API key).
@@ -74,12 +82,12 @@ A rate limit policy can also carry a condition on a custom request header, so tr
 
 * [Spend policies](llm-gateway-spend-policies.md): set cost caps alongside rate limits.
 * [Per-customer policies](llm-gateway-header-policies.md): split a limit by a custom request header so each end customer gets its own allowance.
-* [Data protection](llm-gateway-data-protection.md): add data protection policies.
+* [Data policy](llm-gateway-data-policy.md): add data policies.
 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-rate-limit-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

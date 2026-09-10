@@ -1,3 +1,11 @@
+---
+title: "Unstructured Transform integration"
+description: "Integrate with the Unstructured Transform tools using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/tools/unstructured_transform"
+category: "docs"
+tags: [docs, integrations, tools, unstructured_transform]
+---
+
 # Unstructured Transform integration
 
 > Integrate with the Unstructured Transform tools using LangChain Python.
@@ -35,6 +43,8 @@ you'll need to install the `langchain-unstructured-transform` package.
 Get an API key from the [Unstructured docs](https://docs.unstructured.io/transform/overview), then
 set it as an environment variable:
 
+**Set API key**
+
 ```python
 import getpass
 import os
@@ -45,6 +55,8 @@ if "UNSTRUCTURED_API_KEY" not in os.environ:
 
 It's also helpful (but not needed) to set up LangSmith for best-in-class observability/tracing of your tool calls. To enable automated tracing, set your [LangSmith](../../langsmith/observability.md) API key:
 
+**Enable tracing**
+
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -54,9 +66,13 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The Unstructured Transform tools live in the `langchain-unstructured-transform` package:
 
+**pip**
+
 ```python
 pip install -U langchain-unstructured-transform
 ```
+
+**uv**
 
 ```python
 uv add langchain-unstructured-transform
@@ -68,6 +84,8 @@ uv add langchain-unstructured-transform
 
 The Transform tools are loaded over MCP, which is an asynchronous operation. Use the toolkit's
 `aget_tools()` method (or the `aget_transform_tools()` helper) to load them:
+
+**Load the tools**
 
 ```python
 from langchain_unstructured_transform import UnstructuredTransformToolkit
@@ -86,6 +104,8 @@ and `get_transform_results`.
 ### Within an agent
 
 The tools are designed to be orchestrated by an agent, which chains them to run a full parsing job.
+
+**Agent with tools**
 
 ```python
 # pip install -qU "langchain[anthropic]" to call the model
@@ -141,7 +161,7 @@ its output, head to the [Unstructured Transform documentation](https://docs.unst
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/unstructured_transform.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Delete an alert rule"
+description: "Deletes an alert rule"
+source: "https://docs.langchain.com/langsmith/smith-api/alert_rules/delete-an-alert-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, alert_rules, delete-an-alert-rule]
+---
+
 # Delete an alert rule
 
 > Deletes an alert rule
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/alerts/{session_id}/{alert_rule_id}**
 
 ````yaml
 openapi: 3.1.0

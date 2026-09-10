@@ -1,3 +1,11 @@
+---
+title: "How to define a summary evaluator"
+description: "Some metrics can only be defined on the entire experiment level as opposed to the individual runs of the experiment. For example, you may want to compute the overall pass rate or f1 score of your..."
+source: "https://docs.langchain.com/langsmith/summary"
+category: "docs"
+tags: [docs, langsmith, summary]
+---
+
 # How to define a summary evaluator
 
 Some metrics can only be defined on the entire experiment level as opposed to the individual runs of the experiment. For example, you may want to compute the overall pass rate or f1 score of your evaluation target across all examples in the dataset. These are called summary evaluators.
@@ -7,6 +15,8 @@ Some metrics can only be defined on the entire experiment level as opposed to th
 Here, we'll compute the f1-score, which is a combination of precision and recall.
 
 This sort of metric can only be computed over all of the examples in our experiment, so our evaluator takes in a list of outputs, and a list of reference\_outputs.
+
+**Python**
 
 ```python
 def f1_score_summary_evaluator(outputs: list[dict], reference_outputs: list[dict]) -> dict:
@@ -34,6 +44,8 @@ def f1_score_summary_evaluator(outputs: list[dict], reference_outputs: list[dict
 
     return {"key": "f1_score", "score": f1_score}
 ```
+
+**TypeScript**
 
 ```typescript
 function f1ScoreSummaryEvaluator({ outputs, referenceOutputs }: {
@@ -71,6 +83,8 @@ function f1ScoreSummaryEvaluator({ outputs, referenceOutputs }: {
 
 You can then pass this evaluator to the `evaluate` method as follows:
 
+**Python**
+
 ```python
 from langsmith import Client
 
@@ -93,6 +107,8 @@ results = ls_client.evaluate(
     summary_evaluators=[pass_50],
 )
 ```
+
+**TypeScript**
 
 ```typescript
 import { Client } from "langsmith";
@@ -155,7 +171,7 @@ Currently Python only
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/summary.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

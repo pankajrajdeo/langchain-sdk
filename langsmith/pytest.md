@@ -1,3 +1,13 @@
+---
+title: "How to run evaluations with pytest"
+description: "The LangSmith pytest plugin lets Python developers define their datasets and evaluations as pytest test cases."
+source: "https://docs.langchain.com/langsmith/pytest"
+category: "docs"
+tags: [docs, langsmith, pytest]
+---
+
+<a id="how-to-run-evaluations-with-pytest-beta"></a>
+
 # How to run evaluations with pytest
 
 The LangSmith pytest plugin lets Python developers define their datasets and evaluations as pytest test cases.
@@ -18,9 +28,13 @@ This functionality requires Python SDK version `langsmith>=0.3.4`.
 
 For extra features like [rich terminal outputs](#rich-outputs) and [test caching](#caching) install:
 
+**pip**
+
 ```bash
 pip install -U "langsmith[pytest]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[pytest]"
@@ -31,6 +45,8 @@ uv add "langsmith[pytest]"
 The pytest integration lets you define datasets and evaluators as test cases.
 
 To track a test in LangSmith add the `@pytest.mark.langsmith` decorator. Every decorated test case will be synced to a dataset example. When you run the test suite, the dataset will be updated and a new experiment will be created with one result for each test case.
+
+**Python**
 
 ```python
 ###################### my_app/main.py ######################
@@ -254,10 +270,14 @@ If both the fixture and the env var are set, the fixture takes precedence. Syste
 
 LLMs on every commit in CI can get expensive. To save time and resources, LangSmith lets you cache HTTP requests to disk. To enable caching, install with `langsmith[pytest]` and set an env var: `LANGSMITH_TEST_CACHE=/my/cache/path`:
 
+**pip**
+
 ```bash
 pip install -U "langsmith[pytest]"
 LANGSMITH_TEST_CACHE=tests/cassettes pytest tests/my_llm_tests
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[pytest]"
@@ -302,10 +322,14 @@ def test_sql_generation_parametrized(user_query, expected_sql):
 
 You can use [pytest-xdist](https://pytest-xdist.readthedocs.io/en/stable/) as you normally would to parallelize test execution:
 
+**pip**
+
 ```bash
 pip install -U pytest-xdist
 pytest -n auto tests
 ```
+
+**uv**
 
 ```bash
 uv add pytest-xdist
@@ -320,10 +344,14 @@ pytest -n auto tests
 
 Use watch mode to quickly iterate on your tests. We *highly* recommend only using this with test caching (see below) enabled to avoid unnecessary LLM calls:
 
+**pip**
+
 ```bash
 pip install pytest-watch
 LANGSMITH_TEST_CACHE=tests/cassettes ptw tests/my_llm_tests
 ```
+
+**uv**
 
 ```bash
 uv add pytest-watch
@@ -429,7 +457,7 @@ def test_foo() -> None:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/pytest.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

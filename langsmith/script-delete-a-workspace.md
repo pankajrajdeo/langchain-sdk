@@ -1,3 +1,11 @@
+---
+title: "Delete workspaces"
+description: "Deleting a workspace is supported nativley in LangSmith Self-Hosted v0.10. View instructions for deleting a workspace."
+source: "https://docs.langchain.com/langsmith/script-delete-a-workspace"
+category: "docs"
+tags: [docs, langsmith, script-delete-a-workspace]
+---
+
 # Delete workspaces
 
 > [!NOTE]
@@ -77,7 +85,7 @@ If you visit the LangSmith UI, you should now see workspace is deleted.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-delete-a-workspace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

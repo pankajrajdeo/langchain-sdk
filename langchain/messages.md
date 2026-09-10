@@ -1,3 +1,11 @@
+---
+title: "Messages"
+description: "Messages are the fundamental unit of context for models in LangChain. They represent the input and output of models, carrying both the content and metadata needed to represent the state of a..."
+source: "https://docs.langchain.com/oss/python/langchain/messages"
+category: "docs"
+tags: [docs, langchain, messages]
+---
+
 # Messages
 
 Messages are the fundamental unit of context for models in LangChain. They represent the input and output of models, carrying both the content and metadata needed to represent the state of a conversation when interacting with an LLM.
@@ -92,6 +100,8 @@ response = model.invoke(messages)
 
 A [`SystemMessage`](https://reference.langchain.com/python/langchain-core/messages/system/SystemMessage) represent an initial set of instructions that primes the model's behavior. You can use a system message to set the tone, define the model's role, and establish guidelines for responses.
 
+**Basic instructions**
+
 ```python
 system_msg = SystemMessage("You are a helpful coding assistant.")
 
@@ -101,6 +111,8 @@ messages = [
 ]
 response = model.invoke(messages)
 ```
+
+**Detailed persona**
 
 ```python
 from langchain.messages import SystemMessage, HumanMessage
@@ -124,7 +136,11 @@ response = model.invoke(messages)
 
 A [`HumanMessage`](https://reference.langchain.com/python/langchain-core/messages/human/HumanMessage) represents user input and interactions. They can contain text, images, audio, files, and any other amount of multimodal [content](#message-content).
 
+<a id="content"></a>
+
 #### Text content
+
+**Message object**
 
 ```python
 response = model.invoke([
@@ -132,12 +148,16 @@ response = model.invoke([
 ])
 ```
 
+**String shortcut**
+
 ```python
 # Using a string is a shortcut for a single HumanMessage
 response = model.invoke("What is machine learning?")
 ```
 
 #### Message metadata
+
+**Add metadata**
 
 ```python
 human_msg = HumanMessage(
@@ -490,6 +510,8 @@ it as output. Below we show short examples of input messages featuring multimoda
 > for example, requires a filename for PDFs. See the [provider page](../integrations/providers/overview.md)
 > for your chosen model for specifics.
 
+**Image input**
+
 ```python
 # From URL
 message = {
@@ -522,6 +544,8 @@ message = {
     ]
 }
 ```
+
+**PDF document input**
 
 ```python
 # From URL
@@ -556,6 +580,8 @@ message = {
 }
 ```
 
+**Audio input**
+
 ```python
 # From base64 data
 message = {
@@ -579,6 +605,8 @@ message = {
     ]
 }
 ```
+
+**Video input**
 
 ```python
 # From base64 data
@@ -986,7 +1014,7 @@ Refer to the below guides to learn more:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/messages.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

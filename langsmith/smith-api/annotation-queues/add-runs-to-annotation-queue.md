@@ -1,6 +1,16 @@
+---
+title: "Add runs to annotation queue"
+description: "/langsmith/langsmith-platform-openapi.json post /api/v1/annotation-queues/{queue_id}/runs"
+source: "https://docs.langchain.com/langsmith/smith-api/annotation-queues/add-runs-to-annotation-queue"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation-queues, add-runs-to-annotation-queue]
+---
+
 # Add runs to annotation queue
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/annotation-queues/{queue_id}/runs**
 
 ````yaml
 openapi: 3.1.0

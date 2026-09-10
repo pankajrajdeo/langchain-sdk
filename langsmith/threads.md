@@ -1,3 +1,11 @@
+---
+title: "Configure threads"
+description: "Many LLM applications have a chatbot-like interface in which the user and the LLM application engage in a multi-turn conversation. In order to track these conversations, you can use threads in..."
+source: "https://docs.langchain.com/langsmith/threads"
+category: "docs"
+tags: [docs, langsmith, threads]
+---
+
 # Configure threads
 
 Many LLM applications have a chatbot-like interface in which the user and the LLM application engage in a multi-turn conversation. In order to track these conversations, you can use [*threads*](observability-concepts.md#threads) in LangSmith.
@@ -34,6 +42,8 @@ For instructions, refer to [Add metadata and tags to traces](add-metadata-tags.m
 This example demonstrates how to log and retrieve conversation history using a structured message format to maintain long-running chats.
 
 The example sets a `THREAD_ID` and passes it via `metadata` to the tracing wrapper, linking every run from that session into the same thread in LangSmith. Conversation history is persisted locally between turns—replace the file-based or in-memory store with a database or cache in production. The `get_chat_history` flag controls whether the pipeline continues an existing thread or starts a fresh one:
+
+**Python**
 
 ```python
 import os
@@ -104,6 +114,8 @@ messages = [
 # Call the chat pipeline
 result = chat_pipeline(messages, get_chat_history=False)
 ```
+
+**TypeScript**
 
 ```typescript
 import * as fs from "fs";
@@ -182,6 +194,8 @@ const messages: Message[] = [{ role: "user", content: "Hi! My name is Sally" }];
 await chatPipeline({ messages, get_chat_history: false });
 ```
 
+**Java**
+
 ```java
 import com.langchain.smith.client.LangsmithClient;
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient;
@@ -244,7 +258,7 @@ class ThreadsChatPipeline {
                       .completions()
                       .create(
                           ChatCompletionCreateParams.builder()
-                              .model(ChatModel.GPT_5_CHAT_LATEST)
+                              .model(ChatModel.GPT_5_5)
                               .messages(allMessages)
                               .build());
 
@@ -313,6 +327,8 @@ class ThreadsChatPipeline {
 }
 ```
 
+**Kotlin**
+
 ```kotlin
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
 import com.langchain.smith.tracing.TraceConfig
@@ -361,7 +377,7 @@ val chatPipeline by lazy {
             val chatCompletion =
                 openai.chat().completions().create(
                     ChatCompletionCreateParams.builder()
-                        .model(ChatModel.GPT_5_CHAT_LATEST)
+                        .model(ChatModel.GPT_5_5)
                         .messages(allMessages)
                         .build(),
                 )
@@ -410,6 +426,8 @@ The Java and Kotlin examples use a dedicated executor. Shutting down the executo
 
 Make the following calls to continue the conversation. By passing `get_chat_history=True` / `get_chat_history: true` / `getChatHistory = true`, you can continue the conversation from where it left off. This means that the LLM receives the entire message history and responds to it, instead of just responding to the latest message:
 
+**Python**
+
 ```python
 # Format message
 messages = [
@@ -423,12 +441,16 @@ messages = [
 result = chat_pipeline(messages, get_chat_history=True)
 ```
 
+**TypeScript**
+
 ```typescript
 // Continue the conversation.
 const messages: Message[] = [{ role: "user", content: "What is my name" }];
 
 await chatPipeline({ messages, get_chat_history: true });
 ```
+
+**Java**
 
 ```java
 List<ChatCompletionMessageParam> messages =
@@ -440,6 +462,8 @@ List<ChatCompletionMessageParam> messages =
 
 ThreadsChatPipeline.chatPipeline().apply(new ThreadsChatPipeline.ChatRequest(messages, true));
 ```
+
+**Kotlin**
 
 ```kotlin
 val messages =
@@ -456,6 +480,8 @@ chatPipeline(ChatRequest(messages, getChatHistory = true))
 
 Keep the conversation going. Since past messages are included, the LLM will remember the conversation:
 
+**Python**
+
 ```python
 # Continue the conversation.
 messages = [
@@ -468,12 +494,16 @@ messages = [
 chat_pipeline(messages, get_chat_history=True)
 ```
 
+**TypeScript**
+
 ```typescript
 // Continue the conversation.
 const messages: Message[] = [{ role: "user", content: "What was the first message I sent you?" }];
 
 await chatPipeline({ messages, get_chat_history: true });
 ```
+
+**Java**
 
 ```java
 List<ChatCompletionMessageParam> messages =
@@ -485,6 +515,8 @@ List<ChatCompletionMessageParam> messages =
 
 ThreadsChatPipeline.chatPipeline().apply(new ThreadsChatPipeline.ChatRequest(messages, true));
 ```
+
+**Kotlin**
 
 ```kotlin
 val messages =
@@ -541,7 +573,7 @@ On the **Threads** tab of a project, you can save commonly used filters: [Set a 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

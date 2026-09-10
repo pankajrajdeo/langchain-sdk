@@ -1,8 +1,18 @@
+---
+title: "Update feedback"
+description: "Replace an existing feedback entry with a new, modified entry."
+source: "https://docs.langchain.com/langsmith/smith-api/feedback/update-feedback"
+category: "docs"
+tags: [docs, langsmith, smith-api, feedback, update-feedback]
+---
+
 # Update feedback
 
 > Replace an existing feedback entry with a new, modified entry.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json patch /api/v1/feedback/{feedback_id}**
 
 ````yaml
 openapi: 3.1.0

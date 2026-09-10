@@ -1,3 +1,11 @@
+---
+title: "PGVectorStore integration"
+description: "Integrate with the PGVectorStore using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/vectorstores/pgvectorstore"
+category: "docs"
+tags: [docs, integrations, vectorstores, pgvectorstore]
+---
+
 # PGVectorStore integration
 
 > Integrate with the PGVectorStore using LangChain Python.
@@ -477,7 +485,7 @@ For detailed documentation of all `PGVectorStore` features and configurations he
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/pgvectorstore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

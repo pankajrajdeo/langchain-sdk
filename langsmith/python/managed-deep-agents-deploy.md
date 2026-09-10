@@ -1,3 +1,11 @@
+---
+title: "Deploy a Managed Deep Agent"
+description: "Test and deploy a Managed Deep Agent with the mda CLI."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-deploy]
+---
+
 # Deploy a Managed Deep Agent
 
 > Test and deploy a Managed Deep Agent with the mda CLI.
@@ -69,6 +77,8 @@ On success, the CLI prints the LangSmith deployment dashboard URL. For the full 
 
 `mda deploy` reads project `.env` values before shell environment variables. Use `.env` for the LangSmith API key that authenticates the deploy and for runtime secrets the hosted deployment needs:
 
+**.env**
+
 ```text
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
 OPENAI_API_KEY=<OPENAI_API_KEY>
@@ -107,7 +117,7 @@ Look up every `mda` command and flag.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

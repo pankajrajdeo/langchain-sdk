@@ -1,3 +1,11 @@
+---
+title: "Managed Deep Agents"
+description: "Build your agent as a directory of files while LangSmith runs the harness and runtime."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents]
+---
+
 # Managed Deep Agents
 
 > Build your agent as a directory of files while LangSmith runs the harness and runtime.
@@ -39,6 +47,8 @@ flowchart LR
 A managed deep agent consists of a project folder that contains the business logic for its behavior:
 
 #### Model & configuration
+**agent.py**
+
 ```python
 from managed_deepagents import define_deep_agent
 
@@ -54,6 +64,8 @@ agent = define_deep_agent(
 ```
 
 #### Instructions
+**instructions.md**
+
 ```markdown
 # Assistant
 
@@ -61,6 +73,8 @@ You are a helpful assistant.
 ```
 
 #### Skills
+**skills/research/SKILL.md**
+
 ```markdown
 ---
 name: research
@@ -77,6 +91,8 @@ Use this skill when a task needs more than a direct answer.
 ```
 
 #### Tools
+**tools/search.py**
+
 ```python
 from langchain.tools import tool
 
@@ -91,6 +107,8 @@ def internet_search(query: str) -> str:
 ```
 
 #### Middleware
+**middleware/audit.py**
+
 ```python
 from collections.abc import Awaitable, Callable
 
@@ -111,6 +129,8 @@ async def log_tool_calls(
 ```
 
 #### MCP Connectors
+**connectors/mcp.py**
+
 ```python
 from managed_deepagents import connectors
 
@@ -162,7 +182,7 @@ Add a custom search tool, durable memory, and a daily schedule.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

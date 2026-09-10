@@ -1,8 +1,18 @@
+---
+title: "List feature configurations"
+description: "Returns a consolidated view of default models and disabled models per feature for the workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/features/list-feature-configurations"
+category: "docs"
+tags: [docs, langsmith, smith-api, features, list-feature-configurations]
+---
+
 # List feature configurations
 
 > Returns a consolidated view of default models and disabled models per feature for the workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/features**
 
 ````yaml
 openapi: 3.1.0

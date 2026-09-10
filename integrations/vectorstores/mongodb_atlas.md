@@ -1,3 +1,11 @@
+---
+title: "MongoDB Atlas Integration"
+description: "Integrate with the MongoDB Atlas Vector Store using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas"
+category: "docs"
+tags: [docs, integrations, vectorstores, mongodb_atlas]
+---
+
 # MongoDB Atlas Integration
 
 > Integrate with the MongoDB Atlas Vector Store using LangChain Python.
@@ -240,7 +248,7 @@ For detailed documentation of all `MongoDBAtlasVectorSearch` features and config
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

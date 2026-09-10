@@ -1,8 +1,18 @@
+---
+title: "Delete a tool by ID"
+description: "Deletes a tool identified by its UUID."
+source: "https://docs.langchain.com/langsmith/smith-api/tools/delete-a-tool-by-id"
+category: "docs"
+tags: [docs, langsmith, smith-api, tools, delete-a-tool-by-id]
+---
+
 # Delete a tool by ID
 
 > Deletes a tool identified by its UUID.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/platform/tools/id/{id}**
 
 ````yaml
 openapi: 3.1.0

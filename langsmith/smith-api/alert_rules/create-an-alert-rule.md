@@ -1,8 +1,18 @@
+---
+title: "Create an alert rule"
+description: "Creates a new alert rule. The request body must be a JSON-encoded alert rule object that follows the CreateAlertRuleRequest schema."
+source: "https://docs.langchain.com/langsmith/smith-api/alert_rules/create-an-alert-rule"
+category: "docs"
+tags: [docs, langsmith, smith-api, alert_rules, create-an-alert-rule]
+---
+
 # Create an alert rule
 
 > Creates a new alert rule. The request body must be a JSON-encoded alert rule object that follows the CreateAlertRuleRequest schema.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/alerts/{session_id}**
 
 ````yaml
 openapi: 3.1.0

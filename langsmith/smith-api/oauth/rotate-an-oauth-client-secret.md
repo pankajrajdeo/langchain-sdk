@@ -1,8 +1,18 @@
+---
+title: "Rotate an oauth client secret"
+description: "Generates a new client secret for a confidential client, invalidating the previous one. The new secret is shown only once."
+source: "https://docs.langchain.com/langsmith/smith-api/oauth/rotate-an-oauth-client-secret"
+category: "docs"
+tags: [docs, langsmith, smith-api, oauth, rotate-an-oauth-client-secret]
+---
+
 # Rotate an oauth client secret
 
 > Generates a new client secret for a confidential client, invalidating the previous one. The new secret is shown only once.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/oauth/clients/{id}/rotate-secret**
 
 ````yaml
 openapi: 3.1.0

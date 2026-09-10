@@ -1,3 +1,11 @@
+---
+title: "Monorepo support"
+description: "LangSmith supports deploying agents from monorepo setups where your agent code may depend on shared packages located elsewhere in the repository. This guide shows how to structure your monorepo and..."
+source: "https://docs.langchain.com/langsmith/monorepo-support"
+category: "docs"
+tags: [docs, langsmith, monorepo-support]
+---
+
 # Monorepo support
 
 LangSmith supports deploying agents from monorepo setups where your agent code may depend on shared packages located elsewhere in the repository. This guide shows how to structure your monorepo and configure your `langgraph.json` file to work with shared dependencies.
@@ -8,6 +16,8 @@ For complete working examples, see:
 
 * [Python monorepo example](https://github.com/langchain-ai/python-langraph-monorepo-example)
 * [JS monorepo example](https://github.com/langchain-ai/js-langgraph-monorepo-example)
+
+**Python**
 
 ```plaintext
 my-monorepo/
@@ -26,6 +36,8 @@ my-monorepo/
 └── other-service/
     └── ...
 ```
+
+**JS**
 
 ```plaintext
 my-monorepo/
@@ -51,6 +63,8 @@ my-monorepo/
 
 Place the langgraph.json file in your agent’s directory (not in the monorepo root). Ensure the file follows the required structure:
 
+**Python**
+
 ```json
 {
   "dependencies": [
@@ -63,6 +77,8 @@ Place the langgraph.json file in your agent’s directory (not in the monorepo r
   "env": ".env"
 }
 ```
+
+**JS**
 
 ```json
 {
@@ -101,10 +117,14 @@ Example `package.json` in the agent directory:
 
 Run `langgraph build`:
 
+**Python**
+
 ```bash
 cd agents/customer-support
 langgraph build -t my-customer-support-agent
 ```
+
+**JS**
 
 ```bash
 # Run from the root of the monorepo
@@ -140,7 +160,7 @@ The JavaScript build process:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/monorepo-support.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

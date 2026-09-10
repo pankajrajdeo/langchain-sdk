@@ -1,8 +1,18 @@
+---
+title: "Get Thread History Post"
+description: "Get all past states for a thread."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-history-post"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, get-thread-history-post]
+---
+
 # Get Thread History Post
 
 > Get all past states for a thread.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/{thread_id}/history**
 
 ````yaml
 openapi: 3.1.0

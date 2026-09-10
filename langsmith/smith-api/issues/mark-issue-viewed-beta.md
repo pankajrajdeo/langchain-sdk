@@ -1,9 +1,19 @@
+---
+title: "Mark issue viewed (Beta)"
+description: "Beta: Records that the current user opened this issue. Idempotent. Drives the Engine tab unread-issues badge."
+source: "https://docs.langchain.com/langsmith/smith-api/issues/mark-issue-viewed-beta"
+category: "docs"
+tags: [docs, langsmith, smith-api, issues, mark-issue-viewed-beta]
+---
+
 # Mark issue viewed (Beta)
 
 > **Beta:** Records that the current user opened this issue.
 Idempotent. Drives the Engine tab unread-issues badge.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/platform/issues/{id}/views**
 
 ````yaml
 openapi: 3.1.0

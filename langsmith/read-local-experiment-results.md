@@ -1,3 +1,11 @@
+---
+title: "How to read experiment results locally"
+description: "When running evaluations, you may want to process results programmatically in your script rather than viewing them in the LangSmith UI. This is useful for scenarios like:"
+source: "https://docs.langchain.com/langsmith/read-local-experiment-results"
+category: "docs"
+tags: [docs, langsmith, read-local-experiment-results]
+---
+
 # How to read experiment results locally
 
 When running [evaluations](evaluation-concepts.md), you may want to process results programmatically in your script rather than viewing them in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-read-local-experiment-results). This is useful for scenarios like:
@@ -174,7 +182,7 @@ For more information on running evaluations without uploading results, refer to 
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/read-local-experiment-results.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

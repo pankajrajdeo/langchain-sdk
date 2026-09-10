@@ -1,3 +1,11 @@
+---
+title: "Search Threads"
+description: "Search for threads."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/search-threads"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, search-threads]
+---
+
 # Search Threads
 
 > Search for threads.
@@ -5,6 +13,8 @@
 This endpoint also functions as the endpoint to list all threads.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/search**
 
 ````yaml
 openapi: 3.1.0

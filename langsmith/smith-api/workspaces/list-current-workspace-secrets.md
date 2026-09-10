@@ -1,6 +1,16 @@
+---
+title: "List current workspace secrets"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/secrets"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/list-current-workspace-secrets"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, list-current-workspace-secrets]
+---
+
 # List current workspace secrets
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/secrets**
 
 ````yaml
 openapi: 3.1.0

@@ -1,3 +1,11 @@
+---
+title: "Organization and workspace operations reference"
+description: "This page provides a comprehensive reference table of workspace and organization operations and which roles can perform them."
+source: "https://docs.langchain.com/langsmith/organization-workspace-operations"
+category: "docs"
+tags: [docs, langsmith, organization-workspace-operations]
+---
+
 # Organization and workspace operations reference
 
 This page provides a comprehensive reference table of [workspace](administration-overview.md#workspaces) and [organization](administration-overview.md#organizations) operations and which roles can perform them.
@@ -129,16 +137,18 @@ Attribute-based access control (ABAC) policies for fine-grained permissions.
 
 ### API keys
 
-| Operation                                          | Org Admin | Org Operator | Org User | Org Viewer | Required Permission                                   |
-| -------------------------------------------------- | :-------: | :----------: | :------: | :--------: | ----------------------------------------------------- |
-| List org-scoped service keys                       |     ✓     |       ✓      |     ✓    |      ✓     | `organization:read`                                   |
-| Create org-scoped service key (workspace-scoped)\* |     ✓     |       ✓      |     ⚠    |      ✗     | `organization:pats:create` + `workspaces:manage-keys` |
-| Create org-scoped service key (org-wide)\*         |     ✓     |       ✗      |     ✗    |      ✗     | `organization:pats:create` + `organization:manage`    |
-| Delete org-scoped service key (workspace-scoped)\* |     ✓     |       ✓      |     ⚠    |      ✗     | `organization:read` + `workspaces:manage-keys`        |
-| Update service key role                            |     ✓     |       ✗      |     ✗    |      ✗     | `organization:manage`                                 |
-| List personal access tokens (PATs)                 |     ✓     |       ✓      |     ✓    |      ✗     | `organization:read`                                   |
-| Create personal access token (PAT)                 |     ✓     |       ✓      |     ✓    |      ✗     | `organization:pats:create`                            |
-| Delete personal access token (PAT)                 |     ✓     |       ✓      |     ✓    |      ✗     | `organization:read`                                   |
+| Operation                                                     | Org Admin | Org Operator | Org User | Org Viewer | Required Permission                                   |
+| ------------------------------------------------------------- | :-------: | :----------: | :------: | :--------: | ----------------------------------------------------- |
+| List org-scoped service keys                                  |     ✓     |       ✓      |     ✓    |      ✓     | `organization:read`                                   |
+| Create org-scoped service key (workspace-scoped)\*            |     ✓     |       ✓      |     ⚠    |      ✗     | `organization:pats:create` + `workspaces:manage-keys` |
+| Create org-scoped service key (org-wide)\*                    |     ✓     |       ✗      |     ✗    |      ✗     | `organization:pats:create` + `organization:manage`    |
+| Delete org-scoped service key (workspace-scoped)\*            |     ✓     |       ✓      |     ⚠    |      ✗     | `organization:read` + `workspaces:manage-keys`        |
+| Update service key role                                       |     ✓     |       ✓      |     ✗    |      ✗     | `organization:manage`                                 |
+| List own personal access tokens (PATs)                        |     ✓     |       ✓      |     ✓    |      ✗     | `organization:read`                                   |
+| List every member's personal access tokens (PATs)             |     ✓     |       ✓      |     ✗    |      ✗     | `organization:pats:read`                              |
+| Create personal access token (PAT)                            |     ✓     |       ✓      |     ✓    |      ✗     | `organization:pats:create`                            |
+| Revoke or delete own personal access token (PAT)              |     ✓     |       ✓      |     ✓    |      ✗     | `organization:read`                                   |
+| Revoke or delete another member's personal access token (PAT) |     ✓     |       ✓      |     ✗    |      ✗     | `organization:pats:manage`                            |
 
 > [!NOTE]
 > \* Organization Operators and Organization Users can create or delete workspace-scoped service keys only in workspaces where their role grants `workspaces:manage-keys`, such as the Workspace Admin role. Creating an org-wide service key requires the Organization Admin role.
@@ -619,7 +629,7 @@ For detailed role definitions, refer to [Organization roles](rbac.md#organizatio
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/organization-workspace-operations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Create Run, Wait for Output"
+description: "Create a run in existing thread. Wait for the final output and then return it."
+source: "https://docs.langchain.com/langsmith/agent-server-api/thread-runs/create-run-wait-for-output"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, thread-runs, create-run-wait-for-output]
+---
+
 # Create Run, Wait for Output
 
 > Create a run in existing thread. Wait for the final output and then return it.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/{thread_id}/runs/wait**
 
 ````yaml
 openapi: 3.1.0

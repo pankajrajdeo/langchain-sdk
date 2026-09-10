@@ -1,6 +1,16 @@
+---
+title: "Delete pending workspace invite"
+description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/pending/{id}"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/delete-pending-workspace-invite"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, delete-pending-workspace-invite]
+---
+
 # Delete pending workspace invite
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/pending/{id}**
 
 ````yaml
 openapi: 3.1.0

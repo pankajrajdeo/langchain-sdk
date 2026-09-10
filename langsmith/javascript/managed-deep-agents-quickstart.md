@@ -1,8 +1,16 @@
+---
+title: "Managed Deep Agents quickstart"
+description: "Create and deploy your first Managed Deep Agent with the mda CLI."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-quickstart"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-quickstart]
+---
+
 # Managed Deep Agents quickstart
 
 > Create and deploy your first Managed Deep Agent with the mda CLI.
 
-Create and deploy your first Managed Deep Agent: scaffold a project, configure the model and instructions, add search, test in [LangSmith Studio](../studio.md), and deploy with the [`mda` CLI](managed-deep-agents-cli.md). Managed Deep Agents supplies the [Deep Agents harness](https://docs.langchain.com/oss/javascript/deepagents/overview) and hosted runtime.
+Create and deploy your first Managed Deep Agent: scaffold a project, configure the model and instructions, add search, test in [LangSmith Studio](../studio.md), and deploy with the [`mda` CLI](managed-deep-agents-cli.md). Managed Deep Agents supplies the [Deep Agents harness](../../javascript/deepagents/overview.md) and hosted runtime.
 
 After this quickstart, the [tutorial](managed-deep-agents-tutorial.md) adds durable memory and a daily schedule on the same project.
 
@@ -63,15 +71,21 @@ Follow the quickstart steps in order: initialize the project with `mda`, configu
 ### Set up the project
 Create a project and open its directory:
 
+**npm**
+
 ```bash
 npx managed-deepagents init research-assistant
 cd research-assistant
 ```
 
+**pnpm**
+
 ```bash
 pnpm dlx managed-deepagents init research-assistant
 cd research-assistant
 ```
+
+**bun**
 
 ```bash
 bunx managed-deepagents init research-assistant
@@ -83,13 +97,15 @@ You now have all the scaffolding for your agent.
 ### Add your keys
 Add your model provider API key to `.env`:
 
+**.env**
+
 ```text
 OPENAI_API_KEY=<OPENAI_API_KEY>
 # ANTHROPIC_API_KEY=<ANTHROPIC_API_KEY>
 # GOOGLE_API_KEY=<GOOGLE_API_KEY>
 ```
 
-This quickstart uses OpenAI by default. If you choose Google or Anthropic in the next step, set that provider's API key instead. `mda deploy` adds the provider key to the deployment. You can also use any [other chat provider](https://docs.langchain.com/oss/javascript/integrations/chat/).
+This quickstart uses OpenAI by default. If you choose Google or Anthropic in the next step, set that provider's API key instead. `mda deploy` adds the provider key to the deployment. You can also use any [other chat provider](../../javascript/integrations/chat.md).
 
 > [!WARNING]
 > Do not commit the `.env` file into version control. It contains secrets.
@@ -103,12 +119,16 @@ To create a LangSmith API key, open [Settings](https://smith.langchain.com/setti
 
 Add your LangSmith API key to `.env`:
 
+**.env**
+
 ```text
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
 ```
 
 ### Edit the instructions
 Open `instructions.md` and describe how the agent should behave:
+
+**instructions.md**
 
 ```markdown
 # Research assistant
@@ -124,6 +144,8 @@ Now set the model and a built-in web search tool. Google, OpenAI, and Anthropic 
 
 Open `agent.ts`:
 
+**OpenAI**
+
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
 
@@ -134,6 +156,8 @@ export const agent = defineDeepAgent({
   tools: [{ type: "web_search_preview" }],
 });
 ```
+
+**Google**
 
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
@@ -146,6 +170,8 @@ export const agent = defineDeepAgent({
 });
 ```
 
+**Anthropic**
+
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
 
@@ -157,7 +183,7 @@ export const agent = defineDeepAgent({
 });
 ```
 
-The agent name is also the default deployment name. For model concepts and provider options, see [Models](https://docs.langchain.com/oss/javascript/langchain/models).
+The agent name is also the default deployment name. For model concepts and provider options, see [Models](../../javascript/langchain/models.md).
 
 <details>
 <summary>Using another provider?</summary>
@@ -165,25 +191,35 @@ The agent name is also the default deployment name. For model concepts and provi
 You can use a Tavily search tool instead.
 Add a [Tavily API key](https://app.tavily.com) to `.env`:
 
+**.env**
+
 ```text
 TAVILY_API_KEY=<TAVILY_API_KEY>
 ```
 
 Install the Tavily client:
 
+**npm**
+
 ```bash
 npm install @langchain/tavily
 ```
 
+**pnpm**
+
 ```bash
 pnpm add @langchain/tavily
 ```
+
+**bun**
 
 ```bash
 bun add @langchain/tavily
 ```
 
 Create a custom `internet_search` tool:
+
+**tools/search.ts**
 
 ```ts
 import { TavilySearch } from "@langchain/tavily";
@@ -213,6 +249,8 @@ export const internetSearch = tool(
 
 Import the tool and add it to the agent:
 
+**agent.ts**
+
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
 
@@ -232,15 +270,21 @@ For more authored tools, see [Custom tools](managed-deep-agents-tools.md).
 ### Run locally
 Install the project dependencies and start the agent:
 
+**npm**
+
 ```bash
 npm install
 npx mda dev
 ```
 
+**pnpm**
+
 ```bash
 pnpm install
 pnpm exec mda dev
 ```
+
+**bun**
 
 ```bash
 bun install
@@ -262,13 +306,19 @@ For more information, see [Develop locally with LangSmith Studio](managed-deep-a
 ### Deploy the agent
 Deploy the project by running:
 
+**npm**
+
 ```bash
 npx mda deploy
 ```
 
+**pnpm**
+
 ```bash
 pnpm exec mda deploy
 ```
+
+**bun**
 
 ```bash
 bunx mda deploy
@@ -292,7 +342,7 @@ Authenticate with external services, as the agent or as the caller.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

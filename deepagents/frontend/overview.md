@@ -1,3 +1,11 @@
+---
+title: "Overview"
+description: "Build UIs that display real-time subagent streams, task progress, and sandbox for Deep Agents"
+source: "https://docs.langchain.com/oss/python/deepagents/frontend/overview"
+category: "docs"
+tags: [docs, deepagents, frontend]
+---
+
 # Overview
 
 > Build UIs that display real-time subagent streams, task progress, and sandbox for Deep Agents
@@ -127,7 +135,7 @@ to map graph nodes and state keys directly to UI components.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

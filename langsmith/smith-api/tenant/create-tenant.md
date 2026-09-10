@@ -1,8 +1,18 @@
+---
+title: "Create tenant"
+description: "Create a new organization and corresponding workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/tenant/create-tenant"
+category: "docs"
+tags: [docs, langsmith, smith-api, tenant, create-tenant]
+---
+
 # Create tenant
 
 > Create a new organization and corresponding workspace.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/tenants**
 
 ````yaml
 openapi: 3.1.0

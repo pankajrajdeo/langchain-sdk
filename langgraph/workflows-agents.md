@@ -1,3 +1,11 @@
+---
+title: "Workflows and agents"
+description: "This guide reviews common workflow and agent patterns."
+source: "https://docs.langchain.com/oss/python/langgraph/workflows-agents"
+category: "docs"
+tags: [docs, langgraph, workflows-agents]
+---
+
 # Workflows and agents
 
 This guide reviews common workflow and agent patterns.
@@ -85,6 +93,8 @@ Prompt chaining is when each LLM call processes the output of the previous call.
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/prompt_chain.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=762dec147c31b8dc6ebb0857e236fc1f" alt="Prompt chaining" width="1412" height="444" data-path="oss/images/prompt_chain.png" />
 
+**Graph API**
+
 ```python
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, START, END
@@ -162,6 +172,8 @@ else:
     print(state["joke"])
 ```
 
+**Functional API**
+
 ```python
 from langgraph.func import entrypoint, task
 
@@ -221,6 +233,8 @@ Some examples include:
 * Running a task multiple times that scores a document for accuracy based on different criteria, like the number of citations, the number of sources used, and the quality of the sources
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/parallelization.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=8afe3c427d8cede6fed1e4b2a5107b71" alt="parallelization.png" width="1020" height="684" data-path="oss/images/parallelization.png" />
+
+**Graph API**
 
 ```python
 # Graph state
@@ -286,6 +300,8 @@ state = parallel_workflow.invoke({"topic": "cats"})
 print(state["combined_output"])
 ```
 
+**Functional API**
+
 ```python
 @task
 def call_llm_1(topic: str):
@@ -337,6 +353,8 @@ for snapshot in stream.values:
 Routing workflows process inputs and then directs them to context-specific tasks. This allows you to define specialized flows for complex tasks. For example, a workflow built to answer product related questions might process the type of question first, and then route the request to specific processes for pricing, refunds, returns, etc.
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/routing.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=272e0e9b681b89cd7d35d5c812c50ee6" alt="routing.png" width="1214" height="678" data-path="oss/images/routing.png" />
+
+**Graph API**
 
 ```python
 from typing_extensions import Literal
@@ -436,6 +454,8 @@ state = router_workflow.invoke({"input": "Write me a joke about cats"})
 print(state["output"])
 ```
 
+**Functional API**
+
 ```python
 from typing_extensions import Literal
 from pydantic import BaseModel
@@ -513,6 +533,8 @@ In an orchestrator-worker configuration, the orchestrator:
 
 Orchestrator-worker workflows provide more flexibility and are often used when subtasks cannot be predefined the way they can with [parallelization](#parallelization). This is common with workflows that write code or need to update content across multiple files. For example, a workflow that needs to update installation instructions for multiple Python libraries across an unknown number of documents might use this pattern.
 
+**Graph API**
+
 ```python
 from typing import Annotated, List
 import operator
@@ -534,6 +556,8 @@ class Sections(BaseModel):
 # Augment the LLM with schema for structured output
 planner = llm.with_structured_output(Sections)
 ```
+
+**Functional API**
 
 ```python
 from typing import List
@@ -714,6 +738,8 @@ Evaluator-optimizer workflows are commonly used when there's particular success 
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/evaluator_optimizer.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=9bd0474f42b6040b14ed6968a9ab4e3c" alt="evaluator_optimizer.png" width="1004" height="340" data-path="oss/images/evaluator_optimizer.png" />
 
+**Graph API**
+
 ```python
 # Graph state
 class State(TypedDict):
@@ -791,6 +817,8 @@ state = optimizer_workflow.invoke({"topic": "Cats"})
 print(state["joke"])
 ```
 
+**Functional API**
+
 ```python
 # Schema for structured output to use in evaluation
 class Feedback(BaseModel):
@@ -849,6 +877,8 @@ Agents are typically implemented as an LLM performing actions using [tools](../l
 > [!NOTE]
 > To get started with agents, see the [quickstart](../langchain/quickstart.md) or read more about [how they work](../langchain/agents.md) in LangChain.
 
+**Using tools**
+
 ```python
 from langchain.tools import tool
 
@@ -888,6 +918,8 @@ tools = [add, multiply, divide]
 tools_by_name = {tool.name: tool for tool in tools}
 llm_with_tools = llm.bind_tools(tools)
 ```
+
+**Graph API**
 
 ```python
 from langgraph.graph import MessagesState
@@ -962,6 +994,8 @@ messages = agent.invoke({"messages": messages})
 for m in messages["messages"]:
     m.pretty_print()
 ```
+
+**Functional API**
 
 ```python
 from langgraph.graph import add_messages
@@ -1115,10 +1149,13 @@ result = graph.invoke(
 )
 ```
 
+#### [View example trace](https://smith.langchain.com/public/afaeb6f7-9e5a-4417-9ea0-22352736f755/r)
+Open a public LangSmith run for this example.
+
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/workflows-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

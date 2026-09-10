@@ -1,3 +1,11 @@
+---
+title: "OpenRouter integrations"
+description: "Access models from multiple providers through OpenRouter's unified API using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/openrouter"
+category: "docs"
+tags: [docs, integrations, providers, openrouter]
+---
+
 # OpenRouter integrations
 
 > Access models from multiple providers through OpenRouter's unified API using LangChain Python.
@@ -12,7 +20,7 @@ Access chat models from multiple providers through the OpenRouter unified API.
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

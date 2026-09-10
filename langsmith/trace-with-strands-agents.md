@@ -1,3 +1,11 @@
+---
+title: "Trace Strands Agents applications"
+description: "Trace Strands Agents applications with LangSmith."
+source: "https://docs.langchain.com/langsmith/trace-with-strands-agents"
+category: "docs"
+tags: [docs, langsmith, trace-with-strands-agents]
+---
+
 # Trace Strands Agents applications
 
 > Trace Strands Agents applications with LangSmith.
@@ -8,9 +16,13 @@
 
 Install LangSmith with Strands Agents support:
 
+**pip**
+
 ```bash
 pip install "langsmith[strands-agents]"
 ```
+
+**uv**
 
 ```bash
 uv add "langsmith[strands-agents]"
@@ -108,7 +120,7 @@ Use this approach when you want to configure exporter options in code instead of
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-strands-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "Read examples with runs"
+description: "Fetch examples for a dataset, and fetch the runs for each example if they are associated with the given session_ids."
+source: "https://docs.langchain.com/langsmith/smith-api/datasets/read-examples-with-runs"
+category: "docs"
+tags: [docs, langsmith, smith-api, datasets, read-examples-with-runs]
+---
+
 # Read examples with runs
 
 > Fetch examples for a dataset, and fetch the runs for each example if they are associated with the given session_ids.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/datasets/{dataset_id}/runs**
 
 ````yaml
 openapi: 3.1.0

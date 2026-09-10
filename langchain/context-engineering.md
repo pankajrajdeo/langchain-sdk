@@ -1,3 +1,11 @@
+---
+title: "Context engineering in agents"
+description: "The hard part of building agents (or any LLM application) is making them reliable enough. While they may work for a prototype, they often fail in real-world use cases."
+source: "https://docs.langchain.com/oss/python/langchain/context-engineering"
+category: "docs"
+tags: [docs, langchain, context-engineering]
+---
+
 # Context engineering in agents
 
 ## Overview
@@ -1136,7 +1144,7 @@ The summarized conversation history is permanently updated - future turns will s
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/context-engineering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

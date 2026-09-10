@@ -1,6 +1,16 @@
+---
+title: "Get organization info"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/get-organization-info"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, get-organization-info]
+---
+
 # Get organization info
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current**
 
 ````yaml
 openapi: 3.1.0
@@ -394,6 +404,15 @@ components:
           type: boolean
           title: Byoc Enabled
           default: false
+        byoc_external_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Byoc External Id
+          description: >-
+            The organization's assigned AWS external ID for BYOC role trust
+            policies.
+          readOnly: true
         byoc_max_data_planes:
           type: integer
           title: Byoc Max Data Planes

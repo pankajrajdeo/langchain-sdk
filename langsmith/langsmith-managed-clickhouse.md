@@ -1,3 +1,11 @@
+---
+title: "LangSmith-managed ClickHouse"
+description: "Please read the LangSmith architectural overview and guide on connecting to external ClickHouse before proceeding with this guide."
+source: "https://docs.langchain.com/langsmith/langsmith-managed-clickhouse"
+category: "docs"
+tags: [docs, langsmith, langsmith-managed-clickhouse]
+---
+
 # LangSmith-managed ClickHouse
 
 > [!TIP]
@@ -120,7 +128,7 @@ This [reference doc](run-data-format.md) explains the format of stored runs (spa
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-managed-clickhouse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

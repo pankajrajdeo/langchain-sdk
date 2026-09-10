@@ -1,3 +1,11 @@
+---
+title: "User management"
+description: "This page covers user management features in LangSmith, including access control, authentication, and automated user provisioning:"
+source: "https://docs.langchain.com/langsmith/user-management"
+category: "docs"
+tags: [docs, langsmith, user-management]
+---
+
 # User management
 
 This page covers user management features in LangSmith, including access control, authentication, and automated user provisioning:
@@ -258,7 +266,7 @@ The attribute name is preserved end-to-end: the IdP attribute name, the SAML Att
 
 #### Configuration
 
-In **Settings** → **Members and roles** → **SSO Configuration**, scroll to the **SAML Attribute Mapping** section and add one row per non-standard attribute you want to forward:
+In **Settings** > **Members and roles** > **SSO Configuration**, scroll to the **SAML Attribute Mapping** section and add one row per non-standard attribute you want to forward:
 
 | Column             | Description                                                                                                                                                                               |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1358,7 +1366,7 @@ Choose **SSO Groups Sync** when IdP admin involvement is minimal and reactive (l
 #### Configuration
 
 1. In your IdP: add the user's group memberships to the SSO token claim (default claim name: `groups`). Group names must follow the [SCIM naming convention](#group-naming-convention).
-2. In LangSmith: go to **Settings** → **Members and roles** → **SSO Configuration** → **SSO Groups Sync** and configure the following:
+2. In LangSmith: go to **Settings** > **Members and roles** > **SSO Configuration** > **SSO Groups Sync** and configure the following:
 
    | Setting                                   | Description                                                                       |
    | ----------------------------------------- | --------------------------------------------------------------------------------- |
@@ -1406,9 +1414,9 @@ To make a user's group memberships visible to LangSmith at login, you need to do
 #### Okta
 In the LangSmith SAML application:
 
-1. **Directory** → **Profile Editor** → select the LangSmith application's user profile.
+1. Go to **Directory** > **Profile Editor**, then select the LangSmith application's user profile.
 2. Add a custom attribute named `groups` with **Type** `string array`.
-3. **Sign On** → edit the SAML settings and add an attribute statement:
+3. On **Sign On**, edit the SAML settings and add an attribute statement:
    * **Name**: `groups`
    * **Name format**: `Unspecified` (or `Basic`)
    * **Filter**: `Matches regex` with `.*` to send all groups, or use a more restrictive regex (e.g., `^LS:.*`) to limit to LangSmith-prefixed groups.
@@ -1416,7 +1424,7 @@ In the LangSmith SAML application:
 #### Entra ID (Azure)
 In the LangSmith Enterprise Application:
 
-1. **Single sign-on** → **Attributes & Claims** → **Add a group claim**.
+1. **Single sign-on** > **Attributes & Claims** > **Add a group claim**.
 2. Choose which groups to emit (typically **Groups assigned to the application**).
 3. Set **Source attribute** to `Cloud-only group display names` so the group name (which must match the [naming convention](#group-naming-convention)) is sent rather than the object ID.
 4. Set the claim **Name** to `groups` (or your configured **Groups claim field** value), with no namespace.
@@ -1456,7 +1464,7 @@ Group names follow the [SCIM naming convention](#group-naming-convention). The `
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/user-management.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

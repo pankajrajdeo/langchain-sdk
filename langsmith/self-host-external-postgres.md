@@ -1,3 +1,11 @@
+---
+title: "Connect to an external PostgreSQL database"
+description: "LangSmith uses a PostgreSQL database as the primary data store for transactional workloads and operational data (almost everything besides runs). By default, LangSmith Self-Hosted will use an..."
+source: "https://docs.langchain.com/langsmith/self-host-external-postgres"
+category: "docs"
+tags: [docs, langsmith, self-host-external-postgres]
+---
+
 # Connect to an external PostgreSQL database
 
 LangSmith uses a PostgreSQL database as the primary data store for transactional workloads and operational data (almost everything besides runs). By default, LangSmith Self-Hosted will use an internal PostgreSQL database. However, you can configure LangSmith to use an external PostgreSQL database. By configuring an external PostgreSQL database, you can more easily manage backups, scaling, and other operational tasks for your database.
@@ -19,7 +27,7 @@ LangSmith uses a PostgreSQL database as the primary data store for transactional
   * [Google Cloud SQL](https://cloud.google.com/curated-resources/cloud-sql#section-1)
   * [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql#features)
 
-* Note: We only officially support PostgreSQL versions >= 14.
+* Note: We only officially support PostgreSQL 14 or later.
 
 * We support password and [IAM/Workload Identity](#iam-authentication) authentication.
 
@@ -72,6 +80,8 @@ my-workload-identity@myhost:5432/mydatabase?sslmode=require
 
 With your connection string in hand, you can configure your LangSmith instance to use an external PostgreSQL database. You can do this by modifying the `values` file for your LangSmith Helm Chart installation.
 
+**Helm**
+
 ```yaml
 postgres:
   external:
@@ -95,6 +105,8 @@ To validate the PostgreSQL server certificate:
 > [!WARNING]
 > Mount a custom CA only when your PostgreSQL server uses an internal or private CA. Publicly trusted CAs do not require this configuration.
 
+**Helm (server TLS)**
+
 ```yaml
 config:
   customCa:
@@ -106,6 +118,8 @@ postgres:
     connectionUrl: "myuser:mypassword@myhost:5432/mydatabase?sslmode=verify-full&sslrootcert=system"
     customTls: true
 ```
+
+**Kubernetes Secret (CA bundle)**
 
 ```yaml
 apiVersion: v1
@@ -130,6 +144,8 @@ If your PostgreSQL server requires client certificate authentication:
 * Reference it via `postgres.external.clientCert.secretName` and specify the keys with `certSecretKey` and `keySecretKey`.
 * Use `sslmode=verify-full` and `sslrootcert=system` in your connection URL.
 
+**Helm (client Auth)**
+
 ```yaml
 postgres:
   external:
@@ -141,6 +157,8 @@ postgres:
       certSecretKey: "tls.crt"
       keySecretKey: "tls.key"
 ```
+
+**Kubernetes Secret (client cert/key)**
 
 ```yaml
 apiVersion: v1
@@ -455,7 +473,7 @@ See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/c
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-external-postgres.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

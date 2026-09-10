@@ -1,3 +1,11 @@
+---
+title: "Changelog"
+description: "Log of updates and improvements to our Python packages"
+source: "https://docs.langchain.com/oss/python/releases"
+category: "docs"
+tags: [docs, releases]
+---
+
 # Changelog
 
 > Log of updates and improvements to our Python packages
@@ -10,9 +18,13 @@
 
 MCP support now ships inside LangChain in the `langchain.mcp` namespace, built on [FastMCP](https://gofastmcp.com). It replaces the standalone `langchain-mcp-adapters` package. Install it with the `mcp` extra:
 
+**pip**
+
 ```bash
 pip install "langchain[mcp]"
 ```
+
+**uv**
 
 ```bash
 uv add "langchain[mcp]"
@@ -220,7 +232,7 @@ See the full [release notes and migration guide](https://github.com/langchain-ai
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

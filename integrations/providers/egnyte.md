@@ -1,3 +1,11 @@
+---
+title: "Egnyte"
+description: "Egnyte is a cloud-based content collaboration and file sharing platform that enables organizations to securely store, share, and govern their files. Egnyte combines the power of cloud content..."
+source: "https://docs.langchain.com/oss/python/integrations/providers/egnyte"
+category: "docs"
+tags: [docs, integrations, providers, egnyte]
+---
+
 # Egnyte
 
 [Egnyte](https://www.egnyte.com) is a cloud-based content collaboration and file sharing platform that enables organizations to securely store, share, and govern their files. Egnyte combines the power of cloud content management with advanced security, compliance, and AI-powered search capabilities.
@@ -6,9 +14,13 @@ This package provides a LangChain integration for Egnyte's hybrid search API, wh
 
 ## Installation and setup
 
+**pip**
+
 ```bash
 pip install -U egnyte-langchain-connector
 ```
+
+**uv**
 
 ```bash
 uv add egnyte-langchain-connector
@@ -102,7 +114,7 @@ If you have questions, you can check out the [Egnyte developer documentation](ht
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/egnyte.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

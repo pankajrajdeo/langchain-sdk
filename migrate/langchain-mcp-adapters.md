@@ -1,3 +1,11 @@
+---
+title: "Migrate from langchain-mcp-adapters"
+description: "Migrate from the standalone langchain-mcp-adapters package to the built-in langchain.mcp namespace."
+source: "https://docs.langchain.com/oss/python/migrate/langchain-mcp-adapters"
+category: "docs"
+tags: [docs, migrate, langchain-mcp-adapters]
+---
+
 # Migrate from langchain-mcp-adapters
 
 > Migrate from the standalone langchain-mcp-adapters package to the built-in langchain.mcp namespace.
@@ -43,10 +51,14 @@ If the codebase uses prompts, resources, sampling, roots, SSE/WebSocket transpor
 
 Replace the standalone package with the `mcp` extra, which pulls in FastMCP:
 
+**pip**
+
 ```bash
 pip uninstall langchain-mcp-adapters
 pip install "langchain[mcp]"
 ```
+
+**uv**
 
 ```bash
 uv remove langchain-mcp-adapters
@@ -255,7 +267,7 @@ Some `langchain-mcp-adapters` features have no replacement because the MCP proto
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langchain-mcp-adapters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,8 +1,18 @@
+---
+title: "List registries"
+description: "List sandbox registries for pulling private images."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-registries"
+category: "docs"
+tags: [docs, langsmith, smith-api, sandboxes, list-registries]
+---
+
 # List registries
 
 > List sandbox registries for pulling private images.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/registries**
 
 ````yaml
 openapi: 3.1.0

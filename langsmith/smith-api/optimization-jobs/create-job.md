@@ -1,8 +1,18 @@
+---
+title: "Create job"
+description: "Create a new prompt optimization job."
+source: "https://docs.langchain.com/langsmith/smith-api/optimization-jobs/create-job"
+category: "docs"
+tags: [docs, langsmith, smith-api, optimization-jobs, create-job]
+---
+
 # Create job
 
 > Create a new prompt optimization job.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/repos/{owner}/{repo}/optimization-jobs**
 
 ````yaml
 openapi: 3.1.0

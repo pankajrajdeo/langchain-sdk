@@ -1,6 +1,16 @@
+---
+title: "Get company info"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/business-info"
+source: "https://docs.langchain.com/langsmith/smith-api/orgs/get-company-info"
+category: "docs"
+tags: [docs, langsmith, smith-api, orgs, get-company-info]
+---
+
 # Get company info
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/business-info**
 
 ````yaml
 openapi: 3.1.0

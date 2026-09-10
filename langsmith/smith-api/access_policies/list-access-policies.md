@@ -1,8 +1,18 @@
+---
+title: "List access policies"
+description: "Lists all access policies for the organization."
+source: "https://docs.langchain.com/langsmith/smith-api/access_policies/list-access-policies"
+category: "docs"
+tags: [docs, langsmith, smith-api, access_policies, list-access-policies]
+---
+
 # List access policies
 
 > Lists all access policies for the organization.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/orgs/current/access-policies**
 
 ````yaml
 openapi: 3.1.0

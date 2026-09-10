@@ -1,3 +1,11 @@
+---
+title: "Use annotation queues"
+description: "Annotation queues give human reviewers a focused workflow for attaching feedback to specific runs or threads. While you can always annotate traces inline, annotation queues let you group runs and..."
+source: "https://docs.langchain.com/langsmith/annotation-queues"
+category: "docs"
+tags: [docs, langsmith, annotation-queues]
+---
+
 # Use annotation queues
 
 *Annotation queues* give human reviewers a focused workflow for attaching feedback to specific [runs](observability-concepts.md#runs) or [threads](observability-concepts.md#threads). While you can always annotate [traces](observability-concepts.md#traces) inline, annotation queues let you group runs and threads together, prescribe rubrics, and track reviewer progress. Reviewing an entire thread lets you evaluate a full multi-turn conversation, capturing quality signals that a single run cannot.
@@ -73,7 +81,7 @@ Set a number of reviewers or the maximum time you want to reserve the item to a 
 * **Use assigned reviewers**: Enable this toggle to use specific workspace members instead of a count-based threshold. When enabled:
 
   * A multi-select user picker appears so you can choose specific workspace members as assigned reviewers.
-  * An item is marked **Completed** only when every assigned reviewer has submitted their review. Queue items progress through three states: **Needs Review** → **Needs Others' Review** → **Completed**.
+  * An item is marked **Completed** only when every assigned reviewer has submitted their review. Queue items progress through three states: **Needs Review**, **Needs Others' Review**, and **Completed**.
   * Non-assigned workspace members can still annotate items, but their submissions do not count toward completion.
   * Any workspace member can edit the assigned reviewers list in the queue settings.
 
@@ -227,7 +235,7 @@ Reservations, reviewer thresholds, and comments behave identically to those in s
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotation-queues.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Add encryption at rest"
+description: "Agent Server supports encryption at rest for checkpoint data and metadata. You can choose between basic encryption with a single key or custom encryption for advanced use cases."
+source: "https://docs.langchain.com/langsmith/encryption"
+category: "docs"
+tags: [docs, langsmith, encryption]
+---
+
 # Add encryption at rest
 
 Agent Server supports encryption at rest for checkpoint data and metadata. You can choose between basic encryption with a single key or custom encryption for advanced use cases.
@@ -371,7 +379,7 @@ KMS handles master key rotation automatically. When you enable automatic rotatio
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/encryption.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "Create an account and API key"
+description: "To get started with LangSmith, you need to create an account. You can sign up for a free account in the LangSmith UI. LangSmith supports sign in with Google, GitHub, and email."
+source: "https://docs.langchain.com/langsmith/create-account-api-key"
+category: "docs"
+tags: [docs, langsmith, create-account-api-key]
+---
+
 # Create an account and API key
 
 To get started with LangSmith, you need to create an account. You can sign up for a free account in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-create-account-api-key). LangSmith supports sign in with Google, GitHub, and email.
@@ -26,7 +34,10 @@ Set the key's expiration. The key becomes unusable after the number of days chos
 Click **Create API Key.** LangSmith will display the API key only once, so make sure to copy it and store it in a safe place.
 
 > [!TIP]
-> To delete an API key, navigate to the [**Settings** page](https://smith.langchain.com/settings), find the key in the **API Keys** section, and select the trash icon  in the **Actions** column.
+> To revoke or delete a key, navigate to the [**Settings** page](https://smith.langchain.com/settings), find the key in the **API Keys** section, and select the trash icon  in the **Actions** column. For a personal access token, type the key's name, then select **Revoke** to stop the token from authenticating while keeping its record, or **Delete** to remove the record entirely. Neither action can be undone. Service keys can only be deleted.
+
+> [!TIP]
+> [Organization Admins](rbac.md#organization-admin) and [Organization Operators](rbac.md#organization-operator) can view, revoke, and delete every member's personal access tokens. In the **API Keys** section of the [**Settings** page](https://smith.langchain.com/settings), open the **Personal** tab and switch the scope from **My keys** to **All members**.
 
 > [!TIP]
 > [Enterprise](pricing-plans.md) Organization Admins can edit the [role](administration-overview.md#workspace-roles-rbac) on an existing service key without rotating the key. On the [**Settings** page](https://smith.langchain.com/settings) **API Keys** section, switch to the **Service** tab and click any service key row to open the edit dialog. Update the workspace role (and, for organization-scoped keys, the org role) and click **Save**. The key string itself is unchanged.
@@ -36,9 +47,13 @@ Click **Create API Key.** LangSmith will display the API key only once, so make 
 Install the SDK for your language:
 
 #### Python
+**pip**
+
 ```bash
 pip install langsmith
 ```
+
+**uv**
 
 ```bash
 uv add langsmith
@@ -129,7 +144,7 @@ See [instructions for managing your organization via API](manage-organization-by
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/create-account-api-key.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

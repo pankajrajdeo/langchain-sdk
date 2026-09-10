@@ -1,8 +1,18 @@
+---
+title: "Read charts"
+description: "Get all charts for the tenant."
+source: "https://docs.langchain.com/langsmith/smith-api/charts/read-charts"
+category: "docs"
+tags: [docs, langsmith, smith-api, charts, read-charts]
+---
+
 # Read charts
 
 > Get all charts for the tenant.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json post /api/v1/charts**
 
 ````yaml
 openapi: 3.1.0

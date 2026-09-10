@@ -1,3 +1,11 @@
+---
+title: "Redact sensitive data with the OpenTelemetry Gateway architecture"
+description: "Use an OpenTelemetry collector to redact sensitive data from traces before they land in LangSmith."
+source: "https://docs.langchain.com/langsmith/otel-gateway-trace-redaction"
+category: "docs"
+tags: [docs, langsmith, otel-gateway-trace-redaction]
+---
+
 # Redact sensitive data with the OpenTelemetry Gateway architecture
 
 > Use an OpenTelemetry collector to redact sensitive data from traces before they land in LangSmith.
@@ -148,7 +156,7 @@ provider.shutdown()
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/otel-gateway-trace-redaction.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

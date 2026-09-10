@@ -1,3 +1,11 @@
+---
+title: "Tools"
+description: "Tools extend what agents can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world."
+source: "https://docs.langchain.com/oss/python/langchain/tools"
+category: "docs"
+tags: [docs, langchain, tools]
+---
+
 # Tools
 
 Tools extend what [agents](agents.md) can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world.
@@ -67,6 +75,8 @@ def calc(expression: str) -> str:
 
 Define complex inputs with Pydantic models or JSON schemas:
 
+**Pydantic model**
+
 ```python
 from pydantic import BaseModel, Field
 from typing import Literal
@@ -92,6 +102,8 @@ def get_weather(location: str, units: str = "celsius", include_forecast: bool = 
         result += "\nNext 5 days: Sunny"
     return result
 ```
+
+**JSON Schema**
 
 ```python
 weather_schema = {
@@ -261,6 +273,9 @@ def set_user_name(new_name: str, runtime: ToolRuntime[None, CustomState]) -> Com
     )
 ```
 
+#### [View example trace](https://smith.langchain.com/public/c1516e64-17dc-42c3-a4ef-8aa02c439527/r)
+Open a public LangSmith run for this example.
+
 > [!TIP]
 > When tools update state variables, consider defining a [reducer](../langgraph/graph-api.md#reducers) for those fields. Since LLMs can call multiple tools in parallel, a reducer determines how to resolve conflicts when the same state field is updated by concurrent tool calls.
 
@@ -272,6 +287,8 @@ Context provides immutable configuration data that is passed at invocation time.
 > While `thread_id` (passed via `config={"configurable": {"thread_id": ...}}`) scopes the *conversation*: message history and checkpoints, `context` carries *per-run* data your tools and middleware read at invocation time. In production you typically pass both together: a stable `thread_id` per conversation, and a `context` object on every invoke.
 
 Access context through `runtime.context`. Pass it alongside a `thread_id` so the conversation is persisted across turns:
+
+**Google**
 
 ```python
 from dataclasses import dataclass
@@ -329,6 +346,8 @@ result = agent.invoke(
 )
 ```
 
+**OpenAI**
+
 ```python
 from dataclasses import dataclass
 
@@ -384,6 +403,8 @@ result = agent.invoke(
     context=UserContext(user_id="user123"),
 )
 ```
+
+**Anthropic**
 
 ```python
 from dataclasses import dataclass
@@ -441,6 +462,8 @@ result = agent.invoke(
 )
 ```
 
+**OpenRouter**
+
 ```python
 from dataclasses import dataclass
 
@@ -496,6 +519,8 @@ result = agent.invoke(
     context=UserContext(user_id="user123"),
 )
 ```
+
+**Fireworks**
 
 ```python
 from dataclasses import dataclass
@@ -553,6 +578,8 @@ result = agent.invoke(
 )
 ```
 
+**Baseten**
+
 ```python
 from dataclasses import dataclass
 
@@ -609,6 +636,8 @@ result = agent.invoke(
 )
 ```
 
+**Ollama**
+
 ```python
 from dataclasses import dataclass
 
@@ -664,6 +693,9 @@ result = agent.invoke(
     context=UserContext(user_id="user123"),
 )
 ```
+
+#### [View example trace](https://smith.langchain.com/public/9fcdc511-876a-4675-890e-7a607980df3b/r)
+Open a public LangSmith run for this example.
 
 ### Long-term memory (Store)
 
@@ -848,6 +880,9 @@ def get_weather(city: str) -> str:
     return f"It is currently sunny in {city}."
 ```
 
+#### [View example trace](https://smith.langchain.com/public/29f72020-12be-4cfc-8cc4-e9d8bdfae60b/r)
+Open a public LangSmith run for this example.
+
 Behavior:
 
 * The return value is converted to a `ToolMessage`.
@@ -948,6 +983,8 @@ Use this when the tool is not just returning data, but also mutating agent state
 
 Set return direct on a tool to short-circuit the agent loop: the agent returns the tool's output to the caller immediately, without sending it back through the model for further processing.
 
+**Google**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -970,6 +1007,8 @@ result = agent.invoke({
 # The agent returns the tool output directly without another LLM call:
 # "Order 12345 is shipped and will arrive in 2 days."
 ```
+
+**OpenAI**
 
 ```python
 from langchain.agents import create_agent
@@ -994,6 +1033,8 @@ result = agent.invoke({
 # "Order 12345 is shipped and will arrive in 2 days."
 ```
 
+**Anthropic**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -1016,6 +1057,8 @@ result = agent.invoke({
 # The agent returns the tool output directly without another LLM call:
 # "Order 12345 is shipped and will arrive in 2 days."
 ```
+
+**OpenRouter**
 
 ```python
 from langchain.agents import create_agent
@@ -1040,6 +1083,8 @@ result = agent.invoke({
 # "Order 12345 is shipped and will arrive in 2 days."
 ```
 
+**Fireworks**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -1062,6 +1107,8 @@ result = agent.invoke({
 # The agent returns the tool output directly without another LLM call:
 # "Order 12345 is shipped and will arrive in 2 days."
 ```
+
+**Baseten**
 
 ```python
 from langchain.agents import create_agent
@@ -1086,6 +1133,8 @@ result = agent.invoke({
 # "Order 12345 is shipped and will arrive in 2 days."
 ```
 
+**Ollama**
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -1108,6 +1157,9 @@ result = agent.invoke({
 # The agent returns the tool output directly without another LLM call:
 # "Order 12345 is shipped and will arrive in 2 days."
 ```
+
+#### [View example trace](https://smith.langchain.com/public/12de6f5b-a35b-46a9-a66e-36ed1e373d84/r)
+Open a public LangSmith run for this example.
 
 Behavior:
 
@@ -1160,6 +1212,8 @@ To write to a parent graph instead, set `graph=Command.PARENT`. In that case the
 
 Handle tool errors using LangChain agent [middleware](middleware.md) to retry failed tool calls or return custom error messages:
 
+**Google**
+
 ```python
 from collections.abc import Callable
 
@@ -1188,6 +1242,8 @@ agent = create_agent(
     middleware=[handle_tool_errors],
 )
 ```
+
+**OpenAI**
 
 ```python
 from collections.abc import Callable
@@ -1218,6 +1274,8 @@ agent = create_agent(
 )
 ```
 
+**Anthropic**
+
 ```python
 from collections.abc import Callable
 
@@ -1246,6 +1304,8 @@ agent = create_agent(
     middleware=[handle_tool_errors],
 )
 ```
+
+**OpenRouter**
 
 ```python
 from collections.abc import Callable
@@ -1276,6 +1336,8 @@ agent = create_agent(
 )
 ```
 
+**Fireworks**
+
 ```python
 from collections.abc import Callable
 
@@ -1305,6 +1367,8 @@ agent = create_agent(
 )
 ```
 
+**Baseten**
+
 ```python
 from collections.abc import Callable
 
@@ -1333,6 +1397,8 @@ agent = create_agent(
     middleware=[handle_tool_errors],
 )
 ```
+
+**Ollama**
 
 ```python
 from collections.abc import Callable
@@ -1649,7 +1715,7 @@ Refer to the individual [chat model integration pages](../integrations/providers
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

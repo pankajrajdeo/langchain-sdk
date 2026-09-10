@@ -1,3 +1,11 @@
+---
+title: "Customize user management"
+description: "This guide assumes you have read the admin guide and organization setup guide."
+source: "https://docs.langchain.com/langsmith/self-host-user-management"
+category: "docs"
+tags: [docs, langsmith, self-host-user-management]
+---
+
 # Customize user management
 
 > [!NOTE]
@@ -19,6 +27,8 @@ Once this feature is enabled via the configuration option below, workspace Admin
 Admins may invite users for both cases at the same time.
 
 #### Configuration
+
+**Helm**
 
 ```yaml
 config:
@@ -58,6 +68,8 @@ By default, any user can create an organization in LangSmith. For self-hosted cu
 > [!NOTE]
 > The `userOrgCreationDisabled` feature flag is set to `true` by default for organizations using [basic auth](self-host-basic-auth.md) or [SSO](self-host-sso.md).
 
+**Helm**
+
 ```yaml
 config:
   userOrgCreationDisabled: true
@@ -71,6 +83,8 @@ By default, any user who logs in to LangSmith will have a personal organization 
 
 > [!NOTE]
 > The `personalOrgsDisabled` feature flag is set to `true` by default for organizations using [basic auth](self-host-basic-auth.md) or [SSO](self-host-sso.md).
+
+**Helm**
 
 ```yaml
 config:
@@ -88,6 +102,8 @@ To disable PAT creation for a single organization instead, see the [per-organiza
 
 #### Configuration
 
+**Helm**
+
 ```yaml
 commonEnv:
   - name: PAT_CREATION_DISABLED
@@ -97,7 +113,7 @@ commonEnv:
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-user-management.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

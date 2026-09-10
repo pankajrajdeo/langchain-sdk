@@ -1,3 +1,11 @@
+---
+title: "Use Fleet agents in code"
+description: "Invoke Fleet agents via the LangGraph SDK or REST API, or download and run them locally with the fleet-deepagents-export package."
+source: "https://docs.langchain.com/langsmith/fleet/code"
+category: "docs"
+tags: [docs, langsmith, fleet, code]
+---
+
 # Use Fleet agents in code
 
 > Invoke Fleet agents via the LangGraph SDK or REST API, or download and run them locally with the fleet-deepagents-export package.
@@ -19,9 +27,13 @@ The REST API lets you call your agent from any language or platform that support
 * A [Personal Access Token (PAT)](../create-account-api-key.md) for authentication
 * (SDK only) The [LangGraph SDK](../reference.md) installed:
 
+**Python**
+
 ```bash
 pip install langgraph-sdk python-dotenv
 ```
+
+**TypeScript**
 
 ```bash
 yarn add @langchain/langgraph-sdk
@@ -46,6 +58,8 @@ To get your agent's `agent_id` and `api_url`:
 Copy the code below and replace `agent_id` and `api_url` with the values from your agent's code snippets.
 
 Create a `.env` file in your project root with your [Personal Access Token](../create-account-api-key.md):
+
+**.env**
 
 ```bash
 LANGGRAPH_API_KEY=your-personal-access-token
@@ -529,6 +543,8 @@ cp .env.example .env
 
 The three `LANGSMITH_*_ID` values are in `fleet/config.json` under `metadata`. Open that file and copy `tenant_id`, `organization_id`, and `ls_user_id` into your `.env`:
 
+**.env**
+
 ```bash
 # Model provider — set the key for whichever provider your agent uses
 ANTHROPIC_API_KEY=your-anthropic-api-key
@@ -648,7 +664,7 @@ At startup, each tool's `mcp_server_url` is resolved against LangSmith's MCP ser
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,3 +1,11 @@
+---
+title: "LangGraph CLI"
+description: "LangGraph CLI is a command-line tool for building and running the Agent Server locally. The resulting server exposes all API endpoints for runs, threads, assistants, etc., and includes supporting..."
+source: "https://docs.langchain.com/langsmith/cli"
+category: "docs"
+tags: [docs, langsmith, cli]
+---
+
 # LangGraph CLI
 
 **LangGraph CLI** is a command-line tool for building and running the [Agent Server](agent-server.md) locally. The resulting server exposes all API endpoints for runs, threads, assistants, etc., and includes supporting services such as a managed database for checkpointing and storage.
@@ -8,9 +16,13 @@
 
 2. Install the CLI:
 
+**[Python (pip)]**
+
 ```bash
    pip install langgraph-cli
 ```
+
+**JavaScript**
 
 ```bash
    # Use latest on demand
@@ -22,9 +34,13 @@
 
 3. Verify the install
 
+**[Python (pip)]**
+
 ```bash
    langgraph --help
 ```
+
+**JavaScript**
 
 ```bash
    npx @langchain/langgraph-cli --help
@@ -482,7 +498,7 @@ We recommend using `npx` to always use the latest version of the CLI.
 #### Python
 Run LangGraph API server in development mode with hot reloading and debugging capabilities. This lightweight server requires no Docker installation and is suitable for development and testing. State is persisted to a local directory.
 
-Currently, the CLI only supports Python >= 3.11.
+Currently, the CLI only supports Python 3.11 or later.
 
 > [!TIP]
 > If you need more information on when to use `langgraph dev` vs `langgraph up`, refer to the [Local development & testing guide](local-dev-testing.md) for a detailed comparison.
@@ -905,7 +921,7 @@ The `npx @langchain/langgraph-cli dockerfile` command translates all the configu
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

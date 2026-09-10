@@ -1,8 +1,18 @@
+---
+title: "Upsert usage limit"
+description: "Create a new usage limit."
+source: "https://docs.langchain.com/langsmith/smith-api/usage-limits/upsert-usage-limit"
+category: "docs"
+tags: [docs, langsmith, smith-api, usage-limits, upsert-usage-limit]
+---
+
 # Upsert usage limit
 
 > Create a new usage limit.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json put /api/v1/usage-limits**
 
 ````yaml
 openapi: 3.1.0

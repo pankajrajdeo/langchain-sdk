@@ -1,8 +1,18 @@
+---
+title: "Get the annotation queue item count"
+description: "Returns the number of annotation queue items for the requested reviewer-specific or archived bucket."
+source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/get-the-annotation-queue-item-count"
+category: "docs"
+tags: [docs, langsmith, smith-api, annotation_queues, get-the-annotation-queue-item-count]
+---
+
 # Get the annotation queue item count
 
 > Returns the number of annotation queue items for the requested reviewer-specific or archived bucket.
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/platform/annotation-queues/{queue_id}/items/count**
 
 ````yaml
 openapi: 3.1.0

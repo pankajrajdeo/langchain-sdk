@@ -1,3 +1,11 @@
+---
+title: "Evaluate Managed Deep Agents"
+description: "Develop Harbor evals for Managed Deep Agents with a coding agent and the eval-engineering skill."
+source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-evals"
+category: "docs"
+tags: [docs, langsmith, managed-deep-agents-evals]
+---
+
 # Evaluate Managed Deep Agents
 
 > Develop Harbor evals for Managed Deep Agents with a coding agent and the eval-engineering skill.
@@ -143,7 +151,7 @@ When `LANGSMITH_API_KEY` is available, the LangSmith plugin records the Harbor r
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-evals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

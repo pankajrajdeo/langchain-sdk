@@ -1,3 +1,11 @@
+---
+title: "Admin setup"
+description: "One-time organization setup to enable the LLM Gateway and grant user access."
+source: "https://docs.langchain.com/langsmith/llm-gateway-admin-setup"
+category: "docs"
+tags: [docs, langsmith, llm-gateway-admin-setup]
+---
+
 # Admin setup
 
 > One-time organization setup to enable the LLM Gateway and grant user access.
@@ -15,7 +23,7 @@ You need [`organization:manage` permission](organization-workspace-operations.md
 
 The gateway resolves provider API keys from your workspace's Provider Secrets—this is how it proxies calls to upstream providers without individual users needing local copies of provider keys.
 
-Go to **Settings → Integrations → Provider Secrets** and add the keys for the providers you want to proxy through the gateway:
+Go to **Settings > Integrations > Provider Secrets** and add the keys for the providers you want to proxy through the gateway:
 
 | Secret name                   | Provider                         |
 | ----------------------------- | -------------------------------- |
@@ -39,7 +47,7 @@ The built-in roles `WORKSPACE_USER` and `WORKSPACE_VIEWER` do not include the `g
 
 Requires an RBAC-enabled plan.
 
-1. Go to **Settings → Members/Roles**.
+1. Go to **Settings > Members/Roles**.
 2. Create a new workspace role.
 3. Grant it at minimum `gateway:invoke` and `workspaces:read`.
 4. Assign users who need gateway access to this role.
@@ -58,10 +66,10 @@ Use this if you don't need fine-grained access control, or if you don't have RBA
 
 Gateway policy management requires `organization:manage` permission.
 
-Go to **Settings → Gateway → LLM Gateway** to create governance policies. You can configure:
+Go to **LLM Gateway** to create governance policies. You can configure:
 
 * **Spend limits:** hard caps at the organization, workspace, API key, or user level. Refer to [Spend policies](llm-gateway-spend-policies.md).
-* **Data protection:** detect and redact PII and secrets before they reach the model. Refer to [Data protection](llm-gateway-data-protection.md).
+* **Data policy:** detect and redact PII and secrets before they reach the model, and control whether request and response bodies are traced. Refer to [Data policy](llm-gateway-data-policy.md).
 
 Policies are optional during initial setup. The gateway will freely allow invocations until you have configured policies.
 
@@ -86,7 +94,7 @@ Ask a user to run the [verification cURL from the quickstart](llm-gateway-quicks
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-admin-setup.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

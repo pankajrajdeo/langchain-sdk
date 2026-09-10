@@ -1,3 +1,11 @@
+---
+title: "Google drive integration"
+description: "Integrate with the Google drive retriever using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/retrievers/google_drive"
+category: "docs"
+tags: [docs, integrations, retrievers, google_drive]
+---
+
 # Google drive integration
 
 > Integrate with the Google drive retriever using LangChain Python.
@@ -138,7 +146,7 @@ retriever.invoke("machine learning")
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/google_drive.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,16 @@
+---
+title: "Get tag key"
+description: "/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tag-keys/{tag_key_id}"
+source: "https://docs.langchain.com/langsmith/smith-api/workspaces/get-tag-key"
+category: "docs"
+tags: [docs, langsmith, smith-api, workspaces, get-tag-key]
+---
+
 # Get tag key
 
 ## OpenAPI
+
+**/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tag-keys/{tag_key_id}**
 
 ````yaml
 openapi: 3.1.0

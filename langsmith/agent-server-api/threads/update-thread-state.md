@@ -1,8 +1,18 @@
+---
+title: "Update Thread State"
+description: "Add state to a thread."
+source: "https://docs.langchain.com/langsmith/agent-server-api/threads/update-thread-state"
+category: "docs"
+tags: [docs, langsmith, agent-server-api, threads, update-thread-state]
+---
+
 # Update Thread State
 
 > Add state to a thread.
 
 ## OpenAPI
+
+**/langsmith/agent-server-openapi.json post /threads/{thread_id}/state**
 
 ````yaml
 openapi: 3.1.0

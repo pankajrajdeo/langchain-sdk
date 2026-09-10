@@ -1,3 +1,11 @@
+---
+title: "Perplexity integrations"
+description: "Integrate with Perplexity using LangChain Python."
+source: "https://docs.langchain.com/oss/python/integrations/providers/perplexity"
+category: "docs"
+tags: [docs, integrations, providers, perplexity]
+---
+
 # Perplexity integrations
 
 > Integrate with Perplexity using LangChain Python.
@@ -12,9 +20,13 @@
 
 Install the Perplexity x LangChain integration package:
 
+**pip**
+
 ```bash
 pip install langchain-perplexity
 ```
+
+**uv**
 
 ```bash
 uv add langchain-perplexity
@@ -72,6 +84,8 @@ Use Perplexity as a first-class provider in [Deep Agents Code](../../deepagents/
 
 Install Deep Agents Code with the Perplexity extra:
 
+**uv**
+
 ```bash
 uv tool install 'deepagents-code[perplexity]'
 ```
@@ -90,7 +104,7 @@ Then set `PERPLEXITY_API_KEY` and reference Perplexity models with the `perplexi
 ***
 
 > [!NOTE]
-> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
