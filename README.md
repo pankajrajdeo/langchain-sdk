@@ -128,9 +128,9 @@ python3 -m unittest discover -s tests
 
 ## Automatic updates
 
-The `Update LangChain documentation` GitHub Actions workflow runs daily and can
-also be started manually from the Actions tab. When upstream documentation
-changes, the workflow commits the refreshed mirror to `main`.
+The `Update LangChain documentation` GitHub Actions workflow runs weekly, on
+Monday, and can also be started manually from the Actions tab. When upstream
+documentation changes, the workflow commits the refreshed mirror to `main`.
 
 This is an unofficial mirror. LangChain and its documentation belong to their
 respective owners.

@@ -2,8 +2,8 @@ name: Update LangChain documentation
 
 on:
   schedule:
-    # GitHub Actions cron schedules use UTC. Run once every day.
-    - cron: "23 04 * * *"
+    # GitHub Actions cron schedules use UTC. Run once a week, on Monday.
+    - cron: "23 04 * * 1"
   workflow_dispatch:
 
 permissions:
