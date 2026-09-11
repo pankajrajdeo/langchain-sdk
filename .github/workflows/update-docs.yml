@@ -16,7 +16,9 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # The full set is 8703 pages. A hosted runner reached 6405 of them in 60
+    # minutes, so the download alone needs about 95 before normalization starts.
+    timeout-minutes: 180
 
     steps:
       - name: Check out repository
@@ -47,5 +49,10 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "docs: automated update $(date -u +%F)"
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            trigger="scheduled"
+          else
+            trigger="$GITHUB_EVENT_NAME by $GITHUB_ACTOR"
+          fi
+          git commit -m "docs: automated update $(date -u +%F) ($trigger)"
           git push
