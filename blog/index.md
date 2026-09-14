@@ -30,7 +30,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa22070277878d400373d95_credit_genie_case%20study2.png)Case Studies
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa75f585bb405f1d1e0fc3b_arch-draft-dark-4880x2620.png)Tutorials & How-TosAgent Architecture
+
+## How we built LangChain's Paid Media Agent
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa748ac8b001558f0c48c12_amal.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa7487b1796b28dfb325e62_danny.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa75ebed90e0d765a0890be_Screenshot%202026-09-13%20at%207.40.03%E2%80%AFPM.png)Amal IrgashevDanny LambertJan GomezSeptember 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)19min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa22070277878d400373d95_credit_genie_case%20study2.png)Case Studies
 
 ## How Credit Genie uses OpenWiki to keep codebase knowledge fresh, searchable, and automated
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Why managed agents are the next big thing in agent building
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseAugust 12, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a7bb6fbc312f89c0dd40f46_byoc-announcement.png)No items found.
-
-## LangSmith BYOC is now generally available on AWS
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a7bb4ae10f2318504c4e3ce_romain-priour.png)Romain PriourAugust 12, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 33
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseAugust 12, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min1...1 / 33
 
 #### We couldn't find anything matching that.
 

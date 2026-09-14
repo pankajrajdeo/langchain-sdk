@@ -1,13 +1,13 @@
 ---
 title: "langsmith"
-description: "Index of 479 pages and 5 subdirectories under langsmith."
+description: "Index of 481 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-479 pages here, 1171 pages including subdirectories.
+481 pages here, 1173 pages including subdirectories.
 
 ## Directories
 
@@ -60,6 +60,7 @@ tags: [index, langsmith]
 - [Automatically run evaluators on experiments](bind-evaluator-to-dataset.md) - LangSmith supports two ways to grade experiments created via the SDK:
 - [BYOC architecture](byoc-architecture.md) - How a LangSmith BYOC deployment is structured across the LangChain control plane and the data plane in your AWS account.
 - [BYOC billing](byoc-billing.md) - How LangSmith BYOC is billed across your AWS account and your LangSmith contract, which AWS services carry cost, and the account quotas to check before you deploy.
+- [Bring your own VPC on AWS](byoc-byovpc.md) - Create a customer-managed VPC for LangSmith BYOC, configure a reduced-permission IAM role, and supply your VPC and subnet IDs.
 - [BYOC FAQ](byoc-faq.md) - Answers to common questions about LangSmith BYOC, covering data residency, access, setup, the data plane model, and ongoing operations.
 - [Migrate to BYOC](byoc-migration.md) - Copy users, datasets, prompts, experiments, Fleet resources, and other data from an existing LangSmith instance into a BYOC data plane.
 - [BYOC onboarding](byoc-onboarding.md) - Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately.
@@ -196,6 +197,7 @@ tags: [index, langsmith]
 - [How to fetch performance metrics for an experiment](fetch-perf-metrics-experiment.md) - Tracing projects and experiments use the same underlying data structure in our backend, which is called a "session."
 - [How to filter experiments in the UI](filter-experiments-ui.md) - LangSmith lets you filter your previous experiments by feedback scores and metadata to make it easy to find only the experiments you care about.
 - [Filter traces](filter-traces-in-application.md) - Tracing projects can accumulate large amounts of data across threads, traces, and runs. LangSmith's filtering tools let you navigate and analyze that data precisely.
+- [Filter traces](filter-traces.md) - Find specific threads, traces, and runs in a LangSmith tracing project by writing filter queries in the search bar.
 - [No-code agents with LangSmith Fleet](fleet.md) - Create helpful AI agents without code. Start from a template, connect your accounts, and let the agent handle routine work while you stay in control.
 - [Self-hosted LangSmith on GCP](gcp-self-hosted.md) - When running LangSmith on Google Cloud Platform (GCP), self-hosted mode deploys a complete LangSmith platform with observability functionality.
 - [How to implement generative user interfaces with LangGraph](generative-ui-react.md) - Prerequisites
@@ -266,10 +268,10 @@ tags: [index, langsmith]
 - [Manage a trace](manage-trace.md) - Share traces publicly, and view server logs from the Details view in LangSmith.
 - [Manage LangSmith with Terraform](manage-with-terraform.md) - Use the official LangSmith Terraform provider to manage workspaces, access controls, resource tags, evaluators, run rules, and alert rules as code.
 - [Connect Managed Deep Agents to channels](managed-deep-agents-channels.md) - Connect Managed Deep Agents to external messaging services that can start runs and receive responses.
-- [Add memory to Managed Deep Agents](managed-deep-agents-memory.md) - Opt in to deployment-shared durable memory for Managed Deep Agents.
-- [Add custom middleware to Managed Deep Agents](managed-deep-agents-middleware.md) - Add built-in or custom middleware to Managed Deep Agents projects.
+- [Add memory to Managed Deep Agents](managed-deep-agents-memory.md) - Opt in to deployment-shared durable memory for a managed deep agent.
+- [Add custom middleware to Managed Deep Agents](managed-deep-agents-middleware.md) - Add built-in or custom middleware to a managed deep agent.
 - [Managed Deep Agents quickstart](managed-deep-agents-quickstart.md) - Create and deploy your first Managed Deep Agent with the mda CLI.
-- [Add custom tools to Managed Deep Agents](managed-deep-agents-tools.md) - Define authored tools for Managed Deep Agents projects.
+- [Add custom tools to Managed Deep Agents](managed-deep-agents-tools.md) - Define authored tools for managed deep agents projects.
 - [Configure prompt settings](managing-model-configurations.md) - The Playground enables you to control various settings for your prompts. The Prompt Settings window contains:
 - [Prevent logging of sensitive data in traces](mask-inputs-outputs.md) - When working with LangSmith traces, you may need to prevent sensitive information from being logged to maintain privacy and comply with security requirements. LangSmith provides multiple approaches...
 - [Messages view integrations](messages-view-integrations.md) - Frameworks and SDKs that render in the LangSmith Messages view and the metadata each one sets.

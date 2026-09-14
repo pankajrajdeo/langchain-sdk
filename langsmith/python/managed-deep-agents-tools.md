@@ -1,6 +1,6 @@
 ---
 title: "Add custom tools to Managed Deep Agents"
-description: "Define authored tools for Managed Deep Agents projects."
+description: "Define authored tools for managed deep agents projects."
 source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-tools"
 category: "docs"
 tags: [docs, langsmith, managed-deep-agents-tools]
@@ -8,18 +8,16 @@ tags: [docs, langsmith, managed-deep-agents-tools]
 
 # Add custom tools to Managed Deep Agents
 
-> Define authored tools for Managed Deep Agents projects.
+> Define authored tools for managed deep agents projects.
 
-Tools extend what your agent can do by letting it interact with external systems, such as fetching real-time data, querying databases, executing code, and taking actions. A tool is a callable function with defined inputs and outputs. The model uses the tool's description and the conversation context to decide when to call it and which arguments to provide.
+Custom tools are application code the agent can call for fetching real-time data, querying databases, executing code, and taking actions. Unlike [instructions](managed-deep-agents-instructions.md) and [skills](managed-deep-agents-skills.md), MDA does not discover them automatically.
 
 To load tools from a remote MCP server, see [Connect to MCP servers](managed-deep-agents-mcp-connectors.md).
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
-## Project structure
-
-Keep the agent entry point at the project root and authored tools under `tools/`:
+Put authored tools under `tools/`, import them into the agent entry, and pass them to the agent definition:
 
 ```text
 my-agent/
@@ -28,8 +26,15 @@ my-agent/
     customer.py
 ```
 
-## Add a tool module
+For the full project layout, see [Project structure](managed-deep-agents-project-structure.md).
 
+To load tools from a remote MCP server without importing them into the agent entry, use an [MCP connector](managed-deep-agents-mcp-connectors.md) instead.
+
+## Add a tool
+
+Use authored tools for business logic, private APIs, database access, and other code that belongs in your agent project.
+
+### Define a tool module
 **tools/customer.py**
 
 ```python
@@ -45,9 +50,10 @@ def lookup_customer(customer_id: str) -> str:
     return f"Customer {customer_id} is on the enterprise plan."
 ```
 
-## Attach tools to the agent
+Use clear, unique tool names to avoid collisions. For more about LangChain tool definitions, see [Tools](../../langchain/tools.md).
 
-Import the tools into the project-root agent entry and pass them in the `tools` list.
+### Attach the tool to the agent
+Import the tool into the project-root agent entry and pass it in the `tools` list:
 
 **agent.py**
 
@@ -63,17 +69,14 @@ agent = define_deep_agent(
 )
 ```
 
-`mda dev` and `mda deploy` copy the project files into the compiled build.
-
 Your imports should work the same way they do in a normal local Python project.
 
-Use clear, unique tool names to avoid collisions.
+<a id="human-in-the-loop"></a>
 
-## Human-in-the-loop
-
+### Add human-in-the-loop (Optional)
 Pause the agent before sensitive tool calls so a person can approve, edit, or reject them.
 
-Set `interrupt_on` in the agent definition, and optionally set `permissions` to gate tool and filesystem access.
+Set `interrupt_on` in the agent definition, and optionally set `permissions` to gate tool and filesystem access:
 
 **agent.py**
 
@@ -94,7 +97,30 @@ The `interrupt_on` field applies the same interrupt behavior as LangChain's [hum
 
 For decision types (approve, edit, reject), conditional interrupts, and permission rules, see the Deep Agents [Human-in-the-loop](../../deepagents/human-in-the-loop.md) and [Permissions](../../deepagents/permissions.md) guides.
 
-### Respond to an interrupt
+To resume a paused run, see [Respond to an interrupt](#respond-to-an-interrupt).
+
+## Use secrets and context
+
+Tools can read deployment secrets from environment variables. Put local values in `.env` for `mda dev`; `mda deploy` forwards non-reserved `.env` values as hosted deployment secrets.
+
+For per-run values such as request metadata or feature flags, use the normal LangChain runtime context patterns for tools. See [how to access context from within your tools](../../langchain/tools.md#access-context).
+
+## Deployment
+
+`mda dev` and `mda deploy` copy project files into the compiled build, including modules under `tools/`. Tools are not synced to Context Hub; they ship with the agent code.
+
+## When to use tools
+
+| Concept                                                                    | Kind                  | How it reaches the agent                                     |
+| -------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------ |
+| **Tools**                                                                  | Application code      | Import and pass in the agent definition                      |
+| **[MCP connectors](managed-deep-agents-mcp-connectors.md)** | Managed configuration | Declared under `connectors/`; no import into the agent entry |
+| **[Skills](managed-deep-agents-skills.md)**                 | Managed context       | Procedures the agent loads when relevant                     |
+| **[Instructions](managed-deep-agents-instructions.md)**     | Managed context       | Always-on system prompt                                      |
+
+For more information, see [Project structure](managed-deep-agents-project-structure.md).
+
+## Respond to an interrupt
 
 When a run hits an interrupt, it pauses and waits for a human response before continuing.
 

@@ -24,7 +24,7 @@ For detailed information about data retention configuration and management, plea
 > [!NOTE]
 > This feature is available for [Enterprise](pricing-plans.md) plan customers. For [self-hosted](self-hosted.md) Enterprise customers, refer to the [workspace-level configuration section](#workspace-level-extended-retention-for-self-hosted).
 
-[Enterprise](pricing-plans.md) customers can customize the extended data retention period for traces at the [workspace](administration-overview.md#workspaces) level to meet specific compliance requirements. By default, extended retention is set to 180 days, but you can adjust this based on your organization's needs. Changes to the retention period apply to new traces only.
+[Enterprise](pricing-plans.md) customers can customize the extended data retention period for traces at the [workspace](administration-overview.md#workspaces) level to meet specific compliance requirements. Beginning September 14, 2026, the maximum long-lived trace retention period for SaaS customers is 180 days. You can adjust the retention period below this maximum based on your organization's needs. Changes to the retention period apply to new traces only.
 
 > [!NOTE]
 > Changes to the retention period apply to new traces only. Existing traces are not affected.
@@ -40,7 +40,7 @@ In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=ct
 2. Select **Usage configuration** from the left-hand menu.
 3. Find the workspace in the list that you would like to configure.
 4. Click on the value under the **Data retention policy** column for that workspace.
-5. On the **workspace usage configurations** modal, customize the extended policy using the dropdown for **Extended - All traces are retained for** option. Available durations are: 30d, 60d, 90d, 120d, 150d, 180d, 240d, 300d, 365d, and 400d.
+5. On the **workspace usage configurations** modal, customize the extended policy using the dropdown for **Extended - All traces are retained for** option. Available durations for SaaS customers are: 30d, 60d, 90d, 120d, 150d, and 180d (maximum as of September 14, 2026). Self-hosted deployments are not subject to this cap.
 6. Select **Save**.
 
 #### API

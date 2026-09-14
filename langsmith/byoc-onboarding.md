@@ -12,6 +12,8 @@ tags: [docs, langsmith, byoc-onboarding]
 
 Before you start, review the [prerequisites](byoc.md#prerequisites).
 
+By default, LangChain creates a VPC for your data plane. To create and manage the network yourself, follow [Bring your own VPC on AWS](byoc-byovpc.md) before creating the IAM role and data plane below.
+
 ### Enable BYOC on your organization
 Create an organization in LangSmith on AWS at [aws.smith.langchain.com](https://aws.smith.langchain.com), or reuse an existing one.
 
@@ -22,6 +24,8 @@ LangChain provides the external ID for the IAM role. Navigate to **Settings > Da
 
 Apply the [`langsmith-byoc-role` Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/langsmith-byoc-role) in your AWS account using the copied external ID. This creates the cross-account role LangChain assumes to provision and manage the data plane. The role's trust policy must use this value in its `ExternalId` condition.
 
+For BYOVPC, set `allow_vpc_creation_permissions = false` and supply your VPC ID in `vpc_ids`. See [Create the reduced-permission IAM role](byoc-byovpc.md#create-the-reduced-permission-iam-role).
+
 > [!NOTE]
 > LangChain recommends a fresh AWS account dedicated to LangSmith BYOC.
 
@@ -31,11 +35,13 @@ Navigate to **Settings > Data Planes** and create a data plane with the followin
 * **Name**: Lowercase letters, digits, and hyphens, up to 24 characters.
 * **AWS region**: One of the [supported regions](byoc.md#regions-and-cloud-providers).
 * **AWS IAM role ARN**: The ARN of the role you created in the previous step, which LangSmith assumes in your account.
-* **VPC CIDR range**: A private RFC 1918 range, from `/16` to `/18`.
+* **Network configuration**: For a LangChain-managed VPC, supply a private RFC 1918 CIDR range from `/16` to `/18`. For BYOVPC, supply the [VPC and subnet IDs](byoc-byovpc.md#supply-the-vpc-and-subnet-ids) instead of a CIDR range.
 * **Load balancer access**: Private by default, which keeps the ingress load balancer reachable only from your VPC. Set it to **Public** to make the load balancer internet-facing.
 
 ### Wait for provisioning
 LangChain provisions the infrastructure on your behalf. The data plane moves from `Requested` to `Provisioning` to `Active`.
+
+For BYOVPC, LangSmith validates your VPC and subnets before provisioning, then creates the workload infrastructure inside your VPC.
 
 > [!NOTE]
 > End-to-end provisioning of a data plane takes around 60 to 90 minutes.

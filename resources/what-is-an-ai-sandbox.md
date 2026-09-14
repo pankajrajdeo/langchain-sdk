@@ -42,6 +42,8 @@ Meta’s[Agents Rule of Two](https://ai.meta.com/blog/practical-ai-agent-securit
 
 Under Meta’s guidance, an agent that combines all three capabilities requires human approval or another reliable validation step before it sends information or makes a change. Sandboxes are one way to apply Meta’s Rule of Two in practice. By withholding private files and preloaded browser sessions, then restricting network access, a sandbox can reduce an agent’s access to sensitive data and its ability to communicate externally. Sandboxing does not change the permissions an application gives the agent through tools, so consequential actions still need least privilege and review.
 
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa742827b55c753b195cba2_threat-path%20(1).png)
+
 ## The controls an AI sandbox needs
 
 A sandbox only reduces risk when it can enforce its limits. Five core[sandbox properties](https://www.langchain.com/blog/how-to-choose-the-right-sandbox-for-your-agent) determine what an agent can access, where it can send data, how much compute it can use, what state it can retain, and whether its code can reach the host. Credential isolation adds another control for protected services.
@@ -69,6 +71,8 @@ Kernel isolation gives the sandbox its own kernel, the part of the operating sys
 ### Credential isolation
 
 When an agent needs to call a protected service without being allowed to read the credential that authorizes the call, credential isolation supports the filesystem and network controls above. The secret stays outside the sandbox, and a proxy attaches it only to approved outbound requests. This prevents agent-generated code from reading an API key from a file or environment variable. Destination, method, and credential permissions still need to remain narrow so the agent cannot misuse that access.
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa7429524ac5a67c5693ddd_sandbox-layers%20(1).png)
 
 ## What can agents do with a sandbox?
 

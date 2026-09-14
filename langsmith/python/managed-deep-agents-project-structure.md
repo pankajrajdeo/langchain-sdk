@@ -1,6 +1,6 @@
 ---
 title: "Managed Deep Agents project structure"
-description: "Understand the files and directories in a Managed Deep Agents project."
+description: "Understand the project layout for Managed Deep Agents."
 source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-project-structure"
 category: "docs"
 tags: [docs, langsmith, managed-deep-agents-project-structure]
@@ -8,11 +8,9 @@ tags: [docs, langsmith, managed-deep-agents-project-structure]
 
 # Managed Deep Agents project structure
 
-> Understand the files and directories in a Managed Deep Agents project.
+> Understand the project layout for Managed Deep Agents.
 
-A Managed Deep Agents project has a required agent entry and optional files that enable managed capabilities.
-
-It is a regular Python project.
+A Managed Deep Agents project is a normal Python package with one required root agent entry. Other paths are either ordinary modules you import, or files and directories that MDA discovers to enable managed capabilities.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
@@ -44,8 +42,8 @@ my-agent/
 ├── identity.py
 ├── memory.py
 
-├── pyproject.toml                  # Dependencies and secrets
-├── .env
+├── pyproject.toml                  # Dependencies
+├── .env                            # Local and deploy secrets
 
 └── evals/                          # Harbor workspace
     ├── harbor-job.json
@@ -56,19 +54,38 @@ my-agent/
         └── tests/
 ```
 
-The only required file is `agent.py` at the project root. It must export a named `agent` created with `define_deep_agent`.
+The only required file is `agent.py` at the project root containing the [agent definition](managed-deep-agents-agent-definition.md) as a named `agent`. It must export a named `agent` created with `define_deep_agent`. Use only one agent entry in a project.
 
-Use only one agent entry in a project. See [Agent definition](managed-deep-agents-agent-definition.md).
+## How MDA treats project files
 
-## How Managed Deep Agents treats project files
+* **Managed context**: [`instructions.md`](managed-deep-agents-instructions.md) defines the system prompt. Each directory under [`skills/`](managed-deep-agents-skills.md) contains task-specific instructions, such as a `SKILL.md` and any supporting files. MDA syncs both `instructions.md` and `skills/` to Context Hub.
 
-* **Managed context**: `instructions.md` defines the system prompt. Each directory under `skills/` contains task-specific instructions. Managed Deep Agents syncs both to Context Hub.
-* **Application code**: Files under `tools/` and `middleware/` are ordinary project modules. Import them from the agent entry. Other local modules work the same way.
-* **Managed configuration**: Root `identity.py` and `memory.py`, direct children of `channels/`, `connectors/`, and `schedules/`, and `sandbox/__init__.py` enable their corresponding capabilities. MCP connector modules export a module-level `connector`.
-* **Dependencies and secrets**: Declare dependencies in `pyproject.toml`. Managed Deep Agents loads `.env` locally and forwards eligible values as deployment secrets, but never includes `.env` files in the build archive.
-* **Evals**: Managed Deep Agents evals are Harbor evals. Run `mda evals init -i` and develop tasks with a coding agent and the `eval-engineering` skill. Generated runtime files stay under `.mda/evals/` and are not included in the deployed agent build.
+* **Application code**: Files under [`tools/`](managed-deep-agents-tools.md) and [`middleware/`](managed-deep-agents-middleware.md) are ordinary project modules. Import them from the agent entry. Other local modules work the same way.
 
-The layout above shows the common `.py` names.
+* **Managed configuration**: Certain paths enable capabilities when present. For `channels/`, `connectors/`, and `schedules/`, only direct children are managed declarations; nested modules are not.
+
+  | Path                   | Enables                                                                         |
+  | ---------------------- | ------------------------------------------------------------------------------- |
+  | `identity.py`          | [Caller authentication](managed-deep-agents-identity.md)         |
+  | `memory.py`            | [Durable memory](managed-deep-agents-memory.md)                  |
+  | `channels/<name>.py`   | [Messaging channels](managed-deep-agents-channels.md)            |
+  | `connectors/<name>.py` | [MCP connectors](managed-deep-agents-mcp-connectors.md)          |
+  | `schedules/<name>.py`  | [Cron schedules](managed-deep-agents-schedules.md)               |
+  | `sandbox/__init__.py`  | [Sandbox filesystem and shell](managed-deep-agents-sandboxes.md) |
+
+  MCP connector modules export a module-level `connector`.
+
+* **Dependencies and secrets**: Declare dependencies in `pyproject.toml`. MDA loads `.env` locally and forwards non-reserved values as deployment secrets. Reserved platform variables and `.env` files are not included in the build archive. For more information, see [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md).
+
+* **Evals**: Managed Deep Agents [evals](managed-deep-agents-evals.md) are Harbor evals. Run `mda evals init -i` and develop tasks with a coding agent and the `eval-engineering` skill. Generated runtime files stay under `.mda/evals/` and are not included in the deployed agent build.
+
+## Next steps
+
+#### [Quickstart](managed-deep-agents-quickstart.md)
+Create and deploy your first Managed Deep Agent with the `mda` CLI.
+
+#### [Tutorial](managed-deep-agents-tutorial.md)
+Add durable memory and a daily schedule to the quickstart research assistant.
 
 ***
 

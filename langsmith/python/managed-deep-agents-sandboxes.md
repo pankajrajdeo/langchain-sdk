@@ -1,6 +1,6 @@
 ---
 title: "Add a sandbox to Managed Deep Agents"
-description: "Configure an isolated filesystem and shell for Managed Deep Agents."
+description: "Configure an isolated filesystem and shell for a managed deep agent."
 source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-sandboxes"
 category: "docs"
 tags: [docs, langsmith, managed-deep-agents-sandboxes]
@@ -8,17 +8,14 @@ tags: [docs, langsmith, managed-deep-agents-sandboxes]
 
 # Add a sandbox to Managed Deep Agents
 
-> Configure an isolated filesystem and shell for Managed Deep Agents.
+> Configure an isolated filesystem and shell for a managed deep agent.
 
-Agents often want to write or execute code when doing their job.
 A sandbox gives a managed deep agent an isolated filesystem and shell for working with files, running code, and executing commands.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
-## Project structure
-
-Keep the agent entry point at the project root and the sandbox declaration under `sandbox/`. Add `sandbox/setup.sh` only if you want to provision a snapshot:
+Put the sandbox declaration under `sandbox/`. Add `sandbox/setup.sh` only if you want to provision a snapshot:
 
 ```text
 my-agent/
@@ -28,9 +25,13 @@ my-agent/
     setup.sh   # optional
 ```
 
+For the full project layout, see [Project structure](managed-deep-agents-project-structure.md).
+
 ## Configure a sandbox
 
-`mda init` scaffolds a sandbox declaration. Managed Deep Agents enables the sandbox only while the `sandbox/` directory is present. Delete the directory to opt out, such as for an agent that only needs its prompt, memory, and tools.
+Use a sandbox when the agent needs to write files, run code, or execute shell commands.
+
+`mda init` scaffolds a sandbox declaration. Managed Deep Agents enables the sandbox only while the `sandbox/` directory is present.
 
 `mda init` does not create `setup.sh`. Add that file yourself if the snapshot should install packages, clone a tree, or otherwise change the image.
 
@@ -118,13 +119,27 @@ Put `GHCR_TOKEN` in the project `.env` or the process environment. After bake, M
 
 ## How the agent uses the sandbox
 
-The agent uses filesystem tools such as `ls`, `read_file`, `write_file`, `edit_file`, `delete`, `glob`, and `grep`, and runs shell commands with `execute`. Use `instructions.md` to specify where the agent should work and what it must not modify.
+The agent uses built-in filesystem tools such as [`ls`](../../deepagents/tools.md#built-in-harness-tools), [`read_file`](../../deepagents/tools.md#built-in-harness-tools), [`write_file`](../../deepagents/tools.md#built-in-harness-tools), [`edit_file`](../../deepagents/tools.md#built-in-harness-tools), [`delete`](../../deepagents/tools.md#built-in-harness-tools), [`glob`](../../deepagents/tools.md#built-in-harness-tools), and [`grep`](../../deepagents/tools.md#built-in-harness-tools), and runs shell commands with [`execute`](../../deepagents/tools.md#built-in-harness-tools). Use [instructions](managed-deep-agents-instructions.md) to specify where the agent should work and what it must not modify.
 
-## Sandbox lifecycle
+## Disable the sandbox
 
-Managed Deep Agents owns sandbox naming, recipe bake, reuse, recovery, and cleanup. Each durable thread gets its own sandbox, cloned from the current recipe snapshot.
+Delete the `sandbox/` directory to opt out, such as for an agent that only needs its prompt, memory, and tools.
 
-`mda delete` removes the managed sandboxes for the deployment, the `{deployment}--setup-*` recipe snapshots, and the deployment-owned registry when one exists. For platform-level lifecycle details, see [Sandboxes](../sandboxes.md).
+For existing deployments, deleting the deployment with `mda delete` also deletes the managed sandboxes associated with it, the `{deployment}--setup-*` recipe snapshots, and the deployment-owned registry when one exists.
+
+## Deployment
+
+Managed Deep Agents owns sandbox naming, recipe bake, reuse, recovery, and cleanup. Each durable thread gets its own sandbox, cloned from the current recipe snapshot. For platform-level lifecycle details, see [Sandboxes](../sandboxes.md).
+
+## When to use a sandbox
+
+| Goal                                                          | Use                                                                |
+| ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Write files, run code, or execute shell commands in isolation | Sandbox                                                            |
+| Store durable knowledge across threads                        | [Memory](managed-deep-agents-memory.md)             |
+| Always-on behavior without a filesystem                       | [Instructions](managed-deep-agents-instructions.md) |
+
+For more information, see [Project structure](managed-deep-agents-project-structure.md).
 
 ***
 

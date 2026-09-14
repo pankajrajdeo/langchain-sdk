@@ -1637,6 +1637,99 @@ See [Restricting filesystem tools](overview.md#virtual-filesystem-access) for mo
 
 </details>
 
+<details>
+<summary>Customize how the skill catalog appears in the system prompt</summary>
+
+Override [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) with a custom `system_prompt=` template to control how
+the auto-generated skill catalog is framed — for example, to add surrounding context,
+reorder sections, or place routing hints (priorities, category bias) in the same
+block as the catalog. The template must include the `{skills_locations}`,
+`{skills_list}`, and `{skills_load_warnings}` slots, which the middleware substitutes
+on every turn — so the catalog stays in sync automatically as skills are added,
+renamed, or removed.
+
+The example below places routing hints alongside the catalog:
+
+```python
+from deepagents import create_deep_agent
+from deepagents.backends.filesystem import FilesystemBackend
+from deepagents.middleware.skills import SkillsMiddleware
+
+backend = FilesystemBackend(root_dir="/path/to/skills")
+
+custom_skills_prompt = """## Skills
+
+Routing hints:
+- For research topics → prefer arxiv-search first
+- For general questions → use web-research
+- For LangGraph documentation → langgraph-docs
+
+{skills_locations}
+
+{skills_list}
+
+{skills_load_warnings}
+"""
+
+agent = create_deep_agent(
+    model="anthropic:claude-sonnet-4-6",
+    middleware=[
+        SkillsMiddleware(
+            backend=backend,
+            sources=["/path/to/skills"],
+            system_prompt=custom_skills_prompt,
+        ),
+    ],
+)
+```
+
+Do not also pass `skills=` to `create_deep_agent` in this case: the override instance
+already owns `backend` and `sources`. Any missing slot (`{skills_locations}`,
+`{skills_list}`, `{skills_load_warnings}`) raises `ValueError` at construction time.
+
+</details>
+
+<details>
+<summary>Suppress the auto-generated skill catalog</summary>
+
+Override [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) with `system_prompt=None` to load skills without
+appending a skills section to the system prompt at all. Skills remain in
+`state["skills_metadata"]` and skill files stay reachable through the filesystem
+tools, so callers who prefer to write their own description block (for example, a
+compact hand-written routing summary) in `create_deep_agent(system_prompt=...)` can
+add exactly the guidance they need without the built-in one.
+
+```python
+from deepagents import create_deep_agent
+from deepagents.backends.filesystem import FilesystemBackend
+from deepagents.middleware.skills import SkillsMiddleware
+
+backend = FilesystemBackend(root_dir="/path/to/skills")
+
+agent = create_deep_agent(
+    model="anthropic:claude-sonnet-4-6",
+    system_prompt="""You are a research assistant.
+
+Skills (read the SKILL.md file when relevant):
+- /path/to/skills/arxiv-search/SKILL.md — papers
+- /path/to/skills/web-research/SKILL.md — general web lookups
+- /path/to/skills/langgraph-docs/SKILL.md — LangGraph documentation
+""",
+    middleware=[
+        SkillsMiddleware(
+            backend=backend,
+            sources=["/path/to/skills"],
+            system_prompt=None,
+        ),
+    ],
+)
+```
+
+Skill names, paths, and any hand-written hints in `create_deep_agent`'s `system_prompt`
+are the caller's responsibility to keep in sync when skills change.
+
+</details>
+
 ### Interpreters
 
 Use [interpreters](interpreters.md) to add an `eval` tool that runs JavaScript in a scoped QuickJS runtime. Interpreters are useful when the agent needs to compose tools programmatically, batch work, handle errors in code, or transform structured data without a full shell environment.

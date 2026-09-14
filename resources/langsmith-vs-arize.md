@@ -3,14 +3,14 @@ title: "LangSmith vs Arize: AI agent observability, evals, and deployment compar
 description: "Compare LangSmith and Arize for AI agent engineering. Feature-by-feature breakdown of observability, evaluation, deployment, pricing, and migration."
 source: "https://www.langchain.com/resources/langsmith-vs-arize"
 category: "resources"
-published: "2026-06-06"
+published: "2026-09-10"
 author: "LangChain"
 tags: [resources, langsmith-vs-arize]
 ---
 
 # LangSmith vs Arize: AI agent observability, evals, and deployment compared
 
-[LangSmith](https://www.langchain.com/langsmith-platform) is a fully framework-agnostic platform for agent engineering, combining observability, evaluation, and deployment so teams can iterate quickly. It is trusted by Harvey, Clay, Cloudflare, Cisco, and millions of developers worldwide. Both LangSmith and Arize both provide tracing and evals for LLM applications and AI agents in production. However, LangSmith supports the full Agent Development lifecycle, from traces to evals to deployment, in one platform, and isn't just for those in the LangChain/LangGraph ecosystem.
+[LangSmith](https://www.langchain.com/langsmith-platform) is a fully framework-agnostic platform for agent engineering, combining observability, evaluation, and deployment so teams can iterate quickly. It is trusted by Harvey, Clay, Cloudflare, Cisco, and millions of developers worldwide. Both LangSmith and Arize provide tracing and evals for LLM applications and AI agents in production. However, LangSmith supports the full Agent Development lifecycle, from traces to evals to deployment, in one platform, and isn't just for those in the LangChain/LangGraph ecosystem.
 
 - **Full-lifecycle agent engineering in one platform**
 - **Production traces that feed directly into evals and improvements**
@@ -23,6 +23,8 @@ tags: [resources, langsmith-vs-arize]
 ## What sets LangSmith apart from Arize?
 
 Arize earns G2 praise for intuitive navigation and responsive support. Its OpenTelemetry (aka OTel)-native instrumentation is strong, making it a capable monitoring platform for teams that span generative AI and classical ML.
+
+In August 2026, Dynatrace announced a definitive agreement to acquire Arize. Dynatrace says that after the acquisition closes, the two companies will continue to operate independently. The comparison below reflects Arize as it stands today.
 
 The differences show up when you need more than monitoring.
 
@@ -39,7 +41,7 @@ The differences show up when you need more than monitoring.
 | Human-in-the-loop annotation queues | ✓ | ✓ |
 | Agent deployment infrastructure | ✓ | ✗ |
 | No-code agent creation | ✓ | ✗ |
-| CI/CD quality gates for evals* | ✓ | Manual Integration |
+| CI/CD quality gates for evals | ✓ | Manual Integration |
 | Traditional ML/CV monitoring | ✗ | ✓ |
 | Source-available self-hosting | ✗ | ✓ (Phoenix) |
 | SDK language support | Python, TS, Go, Java | Python only |
@@ -54,6 +56,7 @@ Arize is a capable platform. These are scope boundaries that matter as your AI a
 - **Token counts not surfaced in REST API:** An open GitHub issue notes that Phoenix tracks token counts but doesn't expose them in project-level REST endpoints, it only exposes them via span attributes and GraphQL. (Source:[Phoenix #12349](https://github.com/Arize-ai/phoenix/issues/12349))
 - **Latency and custom instrumentation friction:** A G2 enterprise reviewer from June 2025 cited latency and custom instrumentation as the platform's main downside. (Source:[G2](https://www.g2.com/products/arize-ai/reviews/arize-ai-review-11330759))
 - **Agent workflow depth perception:** community commenters noted that Phoenix feels more oriented toward model monitoring than productized agent workflows. (Source:[r/LLMDevs discussion, 2025](https://www.reddit.com/r/LLMDevs/comments/1nofqco/what_are_the_best_platforms_for_ai_evaluations/))
+- **Platform direction now runs through an acquirer:** Dynatrace announced plans to acquire Arize in August 2026. Dynatrace says that after the acquisition closes, Arize and Dynatrace will continue to operate independently, with no immediate changes to existing products, relationships, or commitments. But the longer-term picture is still unclear. The announcements do not explain whether or how Arize AX’s packaging and pricing will change after closing, or how Phoenix governance and roadmap decisions will work longer term. For multi-year agent platform decisions, ask Arize directly. (Sources: [Dynatrace press release](https://www.dynatrace.com/news/press-release/dynatrace-to-acquire-arize/) and [blog](https://www.dynatrace.com/news/blog/dynatrace-intends-to-acquire-arize/), August 2026)
 
 ## Why choose LangSmith over Arize?
 
@@ -93,7 +96,7 @@ LangSmith evaluators also self-improve through human corrections. When domain ex
 
 ## Deploy stateful AI agents without a separate platform
 
-AI agents are long-running and stateful by nature. A deep research agent runs for hours, pauses for human feedback, then resumes with full context. [LangSmith Deployment](https://www.langchain.com/langsmith-platform) has purpose-built infrastructure for these workloads: persistence and durable checkpointing, with LangSmith Studio for visual debugging. Arize is not a deployment solution, so teams using Arize typically pair it with separate hosting infrastructure.
+AI agents are long-running and stateful by nature. A deep research agent runs for hours, pauses for human feedback, then resumes with full context. [LangSmith Deployment](https://www.langchain.com/langsmith-platform) has purpose-built infrastructure for these workloads: persistence and durable checkpointing, with LangSmith Studio for visual debugging. Arize does not position itself as a deployment solution, so teams using Arize typically pair it with separate hosting infrastructure.
 
 ![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a24f61770869dce2c9ccf9a_Group%202147239551.png)
 
@@ -121,6 +124,7 @@ Moving from Arize doesn't require a rebuild, and if your team can navigate Arize
 | Want production traces to feed directly into evals and improvements | Prefer OpenTelemetry-native instrumentation as your observability standard |
 | Need thread-level evaluation across full conversations | Need a free, self-hosted option. |
 | Require CI/CD quality gates on agent behavior | Want business-facing dashboards accessible to non-technical stakeholders |
+| Want a neutral platform for the full agent development lifecycle today | Already use Dynatrace and want AI evaluation alongside its application and infrastructure observability after the acquisition closes |
 
 ## Where LangSmith pulls ahead
 
@@ -160,7 +164,15 @@ The Plus plan is $39/seat/month with 10,000 base traces and one dev-sized deploy
 
 Yes: Arize supports traditional ML and computer vision monitoring alongside generative AI. If your team monitors classical models and LLM agents on one platform, that's a big benefit of Arize.
 
-Arize also offers Phoenix as a free, self-hosted source-available tool. It’s worth noting that Phoenix and Arize’s enterprise product (AX) have incompatible SDKs, so there is no seamless migration path from the free tool to the paid platform. Phoenix also lacks production-grade capabilities like online evals and monitoring. Teams who start on Phoenix expecting a smooth upgrade to AX will need to re-instrument.
+Arize also offers Phoenix as a free, self-hosted source-available tool. It’s worth noting that Phoenix and Arize’s enterprise product (AX) have incompatible SDKs, so there is no seamless migration path from the free tool to the paid platform. Phoenix also lacks production-grade capabilities like online evals and monitoring. Teams who start on Phoenix expecting a smooth upgrade to AX will need to re-instrument. And if you already run Dynatrace for application monitoring, the pending acquisition may eventually make Arize a natural fit inside your existing observability stack.
+
+### What does the Dynatrace acquisition mean if we're evaluating Arize?
+
+Dynatrace announced a definitive agreement to acquire Arize on August 13, 2026. At the time of publishing, the deal is pending regulatory approval and has not closed, and both companies have said they will continue to operate independently after the acquisition closes. Dynatrace has stated that nothing changes immediately for existing customers, products, and commitments, and that it intends to support Phoenix and contribute to the continued stewardship of OpenInference.
+
+What hasn't been published is how Arize AX will be packaged and priced within the Dynatrace platform after close, or how Phoenix governance and roadmap decisions will work longer term. If you're committing to a platform for the next several years, it's worth asking Arize for specifics on post-close packaging, pricing, and open-source governance.
+
+LangSmith is a standalone agent engineering platform, built and roadmapped by the same team behind LangGraph, the LangChain framework, and Deep Agents.
 
 ### Arize has an AI assistant, Alyx. How does LangSmith compare?
 

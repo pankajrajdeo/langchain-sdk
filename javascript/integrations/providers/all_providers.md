@@ -297,6 +297,9 @@ JMAP inboxes for AI agents with proof-of-work signup and tools for registration,
 #### [Azure Dynamic Sessions](../tools/azure_dynamic_sessions.md)
 Secure code execution in Azure Dynamic Sessions.
 
+#### [Corsair](https://docs.corsair.dev/mcp-adapters/langchain)
+Exposes 200+ service integrations (Slack, GitHub, Gmail, Linear, Stripe, and others) to LangChain agents as tools. OAuth runs server-side and credentials stay in the developer's own database.
+
 #### [DALL-E](../tools/dalle.md)
 Generate images using OpenAI's DALL-E models.
 

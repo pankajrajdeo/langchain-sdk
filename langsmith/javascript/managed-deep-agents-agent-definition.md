@@ -1,6 +1,6 @@
 ---
 title: "Define a Managed Deep Agent"
-description: "Configure the model and core capabilities of a Managed Deep Agent."
+description: "Configure the model and core capabilities of a managed deep agent."
 source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition"
 category: "docs"
 tags: [docs, langsmith, javascript, managed-deep-agents-agent-definition]
@@ -8,14 +8,12 @@ tags: [docs, langsmith, javascript, managed-deep-agents-agent-definition]
 
 # Define a Managed Deep Agent
 
-> Configure the model and core capabilities of a Managed Deep Agent.
+> Configure the model and core capabilities of a managed deep agent.
 
-The agent definition selects the model and core capabilities of a Managed Deep Agent.
+The agent definition selects the model and core capabilities of a managed deep agent.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
-
-## Project structure
 
 The agent entry lives at the project root:
 
@@ -24,65 +22,11 @@ my-agent/
   agent.ts
 ```
 
-Export the agent definition as a named `agent`. You can also use `agent.tsx`.
+You can also use `agent.tsx`.
 
-## Define an agent
+For the full project layout, see [Project structure](managed-deep-agents-project-structure.md).
 
-Use `defineDeepAgent`:
-
-**OpenAI**
-
-```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "openai:gpt-5.5",
-});
-```
-
-**Anthropic**
-
-```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "anthropic:claude-sonnet-4-6",
-});
-```
-
-**Google Gemini**
-
-```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "google-genai:gemini-3.6-flash",
-});
-```
-
-| Parameter                              | What it does                                                          |
-| -------------------------------------- | --------------------------------------------------------------------- |
-| [`name`](#name)                        | Sets the agent and default deployment name                            |
-| [`model`](#model)                      | Selects the chat model                                                |
-| [`tools`](#tools)                      | Adds tools the agent can call                                         |
-| [`middleware`](#middleware)            | Adds behavior around model calls, tool calls, and the agent lifecycle |
-| [`subagents`](#subagents)              | Defines specialized agents for delegated tasks                        |
-| [`permissions`](#permissions)          | Controls path-level access for filesystem tools                       |
-| [`interruptOn`](#human-in-the-loop)    | Pauses before selected tool calls for human approval                  |
-| [`responseFormat`](#structured-output) | Defines a structured output schema                                    |
-
-## Name
-
-`name` is required. Pass a static string that starts with a letter and contains only letters, numbers, underscores, or hyphens, such as `"research-assistant"`.
-
-Managed Deep Agents uses the name as the LangGraph assistant ID and the default LangSmith deployment name. You can override the deployment name with `mda deploy --name` without changing the agent definition.
-
-## Model
-
-Set `model` to the chat model the agent uses. The simplest option is a `provider:model` string. Add the provider's API key to `.env` so the model works locally and in the deployment.
+To define the agent, use `defineDeepAgent`:
 
 **OpenAI**
 
@@ -117,9 +61,22 @@ export const agent = defineDeepAgent({
 });
 ```
 
-Pass a LangChain chat model instance instead when you need to configure model parameters in code. For model options and supported providers, see [Models](../../javascript/deepagents/models.md).
+Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](managed-deep-agents-project-structure.md).
 
-### Use LLM Gateway
+## Parameters
+
+| Parameter        | What it does                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`           | Required. Set the agent and default deployment name. Pass a static string that starts with a letter and contains only letters, numbers, underscores, or hyphens, such as `"research-assistant"`.<br /><br /> Managed Deep Agents uses the name as the LangGraph assistant ID and the default LangSmith deployment name. You can override the deployment name with `mda deploy --name` without changing the agent definition.                                                    |
+| `model`          | Set the chat model the agent uses. The simplest option is a `provider:model` string. Add the provider's API key to `.env` so the model works locally and in the deployment.<br /><br /> Pass a LangChain chat model instance instead when you need to configure model parameters in code. For model options and supported providers, see [Models](../../javascript/deepagents/models.md).<br /><br /> To connect to LLM Gateway, see [Use LLM Gateway](#use-llm-gateway).           |
+| `tools`          | Add tools the agent can call. Pass tools in the `tools` array so the agent can call application logic or external services.<br /><br /> Define tools in local modules, import them into the agent entry, and add them to the definition. See [Custom tools](managed-deep-agents-tools.md). To add tools from remote MCP servers without importing them into the agent entry, use [MCP connectors](managed-deep-agents-mcp-connectors.md). |
+| `middleware`     | Add behavior around model calls, tool calls, and the agent lifecycle. Pass middleware in the `middleware` array. Middleware runs in array order. See [Custom middleware](managed-deep-agents-middleware.md).                                                                                                                                                                                                                                                 |
+| `subagents`      | Define specialized agents for delegated tasks. Pass subagent definitions when the agent should delegate specialized or context-heavy work. Each subagent can have its own prompt, model, and tools. See [Subagents](../../javascript/deepagents/subagents.md).                                                                                                                                                                                                                      |
+| `permissions`    | Control path-level access for filesystem tools. Pass filesystem permission rules to control which paths the agent's built-in filesystem tools can read or write. See [Permissions](../../javascript/deepagents/permissions.md).                                                                                                                                                                                                                                                     |
+| `interruptOn`    | Pause before selected tool calls for human approval. Set `interruptOn` to pause before selected tool calls, so a person can approve, edit, or reject the call before it runs. See [Human-in-the-loop](managed-deep-agents-tools.md#human-in-the-loop).                                                                                                                                                                                                       |
+| `responseFormat` | Set when the agent must return data that matches a schema instead of an unconstrained text response. See [Structured output](../../javascript/langchain/structured-output.md).                                                                                                                                                                                                                                                                                                      |
+
+## Use LLM Gateway
 
 You can use [LLM Gateway](../llm-gateway.md) to apply rate limits, fallbacks, and other policies to model calls.
 
@@ -141,39 +98,11 @@ The gateway routes each request by model ID. `moonshotai/kimi-k3` is a LangChain
 
 For more information, see [LLM Gateway](../llm-gateway.md).
 
-## Tools
+To scaffold a project that uses Gateway from the start, pass `--gateway` when initializing:
 
-Pass tools in the `tools` array to let the agent call application logic or external services.
-
-Define tools in local modules, import them into the agent entry, and add them to the definition. See [Custom tools](managed-deep-agents-tools.md). To add tools from remote MCP servers without importing them into the agent entry, use [MCP connectors](managed-deep-agents-mcp-connectors.md).
-
-## Middleware
-
-Pass middleware in the `middleware` array to add behavior around model calls, tool calls, and the agent lifecycle. Middleware runs in array order.
-
-See [Custom middleware](managed-deep-agents-middleware.md).
-
-## Subagents
-
-Pass subagent definitions in `subagents` when the agent should delegate specialized or context-heavy work. Each subagent can have its own prompt, model, and tools. See [Subagents](../../javascript/deepagents/subagents.md).
-
-## Permissions
-
-Pass filesystem permission rules in `permissions` to control which paths the agent's built-in filesystem tools can read or write. See [Permissions](../../javascript/deepagents/permissions.md).
-
-## Human-in-the-loop
-
-Set `interruptOn` to pause before selected tool calls.
-
-Use this for actions that require a person to approve, edit, or reject the call before it runs. See [Human-in-the-loop](managed-deep-agents-tools.md#human-in-the-loop).
-
-## Structured output
-
-Set `responseFormat` when the agent must return data that matches a schema instead of an unconstrained text response.
-
-See [Structured output](../../javascript/langchain/structured-output.md).
-
-Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](managed-deep-agents-project-structure.md).
+```bash
+mda init my-agent --gateway
+```
 
 ***
 

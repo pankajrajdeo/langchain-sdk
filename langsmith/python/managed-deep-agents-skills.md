@@ -1,6 +1,6 @@
 ---
 title: "Add skills to Managed Deep Agents"
-description: "Add reusable task-specific instructions to a Managed Deep Agent."
+description: "Add reusable task-specific instructions to a managed deep agent."
 source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-skills"
 category: "docs"
 tags: [docs, langsmith, managed-deep-agents-skills]
@@ -8,16 +8,14 @@ tags: [docs, langsmith, managed-deep-agents-skills]
 
 # Add skills to Managed Deep Agents
 
-> Add reusable task-specific instructions to a Managed Deep Agent.
+> Add reusable task-specific instructions to a managed deep agent.
 
-Skills package task-specific procedures and context into reusable directories. You can define them in markdown files, and they are picked up automatically by the agent.
+Skills package task-specific procedures and supporting files into reusable directories. MDA discovers them automatically. The agent loads a skill's full contents only when the task matches the description in the frontmatter.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
-## Project structure
-
-Keep the agent entry point at the project root and define each skill under `skills/`:
+Put each skill under `skills/` at the project root:
 
 ```text
 my-agent/
@@ -27,8 +25,13 @@ my-agent/
       SKILL.md
 ```
 
+For the full project layout, see [Project structure](managed-deep-agents-project-structure.md).
+
 ## Add a skill
 
+Use skills for procedures the agent should follow only when a task matches the description in the frontmatter:
+
+### Create a skill directory
 Each skill directory needs a `SKILL.md` file with `name` and `description` frontmatter:
 
 **skills/research/SKILL.md**
@@ -48,29 +51,46 @@ Use this skill when a task needs more than a direct answer.
 3. Summarize findings before responding to the user.
 ```
 
-A skill directory can also contain supporting scripts, reference files, and templates. Reference these files from `SKILL.md` so the agent knows when to use them.
+For skill authoring patterns and the complete format, see [Skills](../../deepagents/skills.md).
+
+To understand progressive disclosure, see [How the agent uses skills](#how-the-agent-uses-skills).
+
+### Add supporting files (Optional)
+A skill directory can also contain supporting scripts, reference files, and templates. Reference these files from `SKILL.md` so the agent knows when to use them:
+
+```text
+skills/
+  research/
+    SKILL.md
+    templates/
+      report.md
+    scripts/
+      fetch_sources.py
+```
 
 ## How the agent uses skills
 
 At startup, the agent sees each skill's `name` and `description`. When a task matches a skill's description, the agent reads the full `SKILL.md` and follows its instructions. Supporting files are loaded only when needed.
 
-This progressive disclosure gives the agent access to detailed procedures without adding every skill's full contents to its context.
+The agent cannot modify skills at runtime.
 
-## Syncing to Context Hub
+## Deployment
 
-When you run `mda deploy`, every UTF-8 file under `skills/` is automatically synced to the agent's [Context Hub](../use-the-context-hub.md) repo. You can then edit skills in the LangSmith UI and make the changes available to the agent.
+When you run `mda deploy`, MDA syncs every UTF-8 file under `skills/` to the agent's [Context Hub](../use-the-context-hub.md).
 
-A later deployment syncs the project copies again and removes deployed skill files that no longer exist locally.
+You can then edit skills in the LangSmith UI and apply those changes to the agent.
 
-## How skills compare to other concepts
+It is best to keep the skill files in the repo as the source of truth for lasting changes, as later deployments sync the project copies again and remove deployed skill files that do not exist locally.
 
-Skills is context that is loaded dynamically, when the agent chooses to. The agent cannot modify them.
+## When to use skills
 
-Use [instructions](managed-deep-agents-instructions.md) for behavior that should ALWAYS be loaded by the agent.
+| Concept                                                                | Role                           | Loaded when                    |
+| ---------------------------------------------------------------------- | ------------------------------ | ------------------------------ |
+| **[Instructions](managed-deep-agents-instructions.md)** | Always-on system prompt        | Every run                      |
+| **Skills**                                                             | Task-specific procedures       | When the agent selects them    |
+| **[Memory](managed-deep-agents-memory.md)**             | Knowledge the agent can update | When durable memory is enabled |
 
-Use [memory](managed-deep-agents-memory.md) for knowledge you want the agent to be able to update.
-
-For skill authoring patterns and the complete format, see [Skills](../../deepagents/skills.md).
+For more information, see [Project structure](managed-deep-agents-project-structure.md).
 
 ***
 

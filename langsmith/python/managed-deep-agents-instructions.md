@@ -1,6 +1,6 @@
 ---
 title: "Add instructions to Managed Deep Agents"
-description: "Define the system prompt for a Managed Deep Agent in instructions.md."
+description: "Define the system prompt for a managed deep agent in instructions.md."
 source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-instructions"
 category: "docs"
 tags: [docs, langsmith, managed-deep-agents-instructions]
@@ -8,26 +8,25 @@ tags: [docs, langsmith, managed-deep-agents-instructions]
 
 # Add instructions to Managed Deep Agents
 
-> Define the system prompt for a Managed Deep Agent in instructions.md.
+> Define the system prompt for a managed deep agent in instructions.md.
 
-Instructions define the agent's behavior. They make up the core of the agent's system prompt. You can define them in a simple markdown file and they are picked up automatically by the agent.
+Instructions define always-on agent behavior. They form the core of the agent's system prompt.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
-## Project structure
-
-The `instructions.md` file lives at the project root:
+Put the instructions for your agent into `instructions.md` at the project root:
 
 ```text
 my-agent/
-  agent.py
   instructions.md
 ```
 
+For the full project layout, see [Project structure](managed-deep-agents-project-structure.md).
+
 ## Add instructions
 
-Create or modify `instructions.md`:
+Create or modify `instructions.md` to define the agent's role, behavior, constraints, and guidance for using its tools:
 
 **instructions.md**
 
@@ -37,19 +36,26 @@ Create or modify `instructions.md`:
 You are a helpful assistant.
 ```
 
-Use this file to define the agent's role, behavior, constraints, and guidance for using its tools.
+MDA inserts instructions into the agent's system prompt on every run.
+The agent cannot modify these instructions at runtime.
 
-## How the agent uses instructions
+## Deployment
 
-Instructions are inserted into the agents system prompt on every run. They are always present and help guide the agents behavior.
+When you run `mda deploy`, MDA syncs `instructions.md` to the agent's [Context Hub](../use-the-context-hub.md).
 
-## Syncing to Context Hub
+You can then edit the instructions in the LangSmith UI and have those changes apply to the agent.
 
-When you run `mda deploy` to deploy the agent, instructions are automatically synced to the agent's [Context Hub](../use-the-context-hub.md) repo. You can then edit the instructions in the LangSmith UI and have your changes automatically propagated to the agent.
+It is best to keep the `instructions.md` file in the repo as the source of truth for lasting changes, as later deployments sync the project copy again.
 
-## How instructions compare to other concepts
+## When to use instructions
 
-Use [skills](managed-deep-agents-skills.md) for task-specific procedures that the agent loads only when relevant. Use [memory](managed-deep-agents-memory.md) for knowledge the agent learns and retains across threads.
+| Concept                                                    | Role                           | Loaded when                    |
+| ---------------------------------------------------------- | ------------------------------ | ------------------------------ |
+| **Instructions**                                           | Always-on system prompt        | Every run                      |
+| **[Skills](managed-deep-agents-skills.md)** | Task-specific procedures       | When the agent selects them    |
+| **[Memory](managed-deep-agents-memory.md)** | Knowledge the agent can update | When durable memory is enabled |
+
+For more information, see [Project structure](managed-deep-agents-project-structure.md).
 
 ***
 

@@ -1269,6 +1269,9 @@ Deterministic LLM context compression with a regex retention whitelist for struc
 #### [Vectara](https://docs.vectara.com/)
 Neural search platform with built-in understanding.
 
+#### [Vector Panda](https://www.vectorpanda.com/docs/tutorials/langchain)
+Managed vector database with storage-only pricing and automatic, optimizer-selected indexing.
+
 #### [Vectorize](https://docs.vectorize.io/rag-pipelines/retrieval-endpoint#access-tokens)
 Vector database and semantic search.
 

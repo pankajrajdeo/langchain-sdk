@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 514 pages and 0 subdirectories under blog."
+description: "Index of 515 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-514 pages here.
+515 pages here.
 
 ## Files
 
@@ -412,6 +412,7 @@ tags: [index, blog]
 - [Origin Web Browser](origin-web-browser.md) - Origin Web Browser uses LangChain to organize browser history into AI-powered workspaces with automatic summaries, semantic search, and context-aware chatbots.
 - [How We Made Our Docs Test Themselves](our-docs-test-themselves.md) - Stale code samples are a docs problem nobody prioritizes. Here&#39;s how we used the Deep Agents CLI to automate migrating inline code into testable, CI-ready examples
 - [What does it mean to &quot;own your intelligence&quot;?](own-your-intelligence.md) - Learn why companies must own their agent systems, governance, context, and feedback loops to turn generic AI into lasting business advantage.
+- [How we built LangChain&#39;s Paid Media Agent](paid-media-agent.md) - How LangChain built a paid media agent to analyze campaign performance, optimize ads, propose changes, and turn marketing data into action.
 - [Pairwise Evaluations with LangSmith](pairwise-evaluations-with-langsmith.md) - Learn what pairwise evaluation is, why you might need it for LLM app development, and see an example of how to use it in LangSmith by LangChain.
 - [Parallel Function Calling for Structured Data Extraction](parallel-function-calling-extraction.md) - Extract structured data from text using parallel function calling. Simplify entity extraction, reduce token usage, and improve accuracy with LangChain.
 - [Peering Into the Soul of AI Decision-Making with LangSmith](peering-into-the-soul-of-ai-decision-making-with-langsmith.md) - Debug, test, and monitor LLM applications with LangSmith. See how CommandBar improved AI chatbot accuracy through real-time tracing.

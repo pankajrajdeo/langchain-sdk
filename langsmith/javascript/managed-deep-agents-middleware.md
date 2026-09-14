@@ -1,6 +1,6 @@
 ---
 title: "Add custom middleware to Managed Deep Agents"
-description: "Add built-in or custom middleware to Managed Deep Agents projects."
+description: "Add built-in or custom middleware to a managed deep agent."
 source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-middleware"
 category: "docs"
 tags: [docs, langsmith, javascript, managed-deep-agents-middleware]
@@ -8,18 +8,14 @@ tags: [docs, langsmith, javascript, managed-deep-agents-middleware]
 
 # Add custom middleware to Managed Deep Agents
 
-> Add built-in or custom middleware to Managed Deep Agents projects.
+> Add built-in or custom middleware to a managed deep agent.
 
-Managed Deep Agents support the Deep Agents `middleware` configuration surface.
-
-Add LangChain middleware to `defineDeepAgent` to monitor tool calls, add guardrails, redact data, retry transient failures, or customize model calls.
+Middleware adds behavior around model calls, tool calls, and the agent lifecycle. Like [custom tools](managed-deep-agents-tools.md), MDA does not discover middleware automatically. Import it and pass it to the agent definition.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
-## Project structure
-
-Keep the agent entry point at the project root and custom middleware under `middleware/`:
+Put custom middleware under `middleware/`, import it into the agent entry, and pass it to the agent definition:
 
 ```text
 my-agent/
@@ -28,13 +24,16 @@ my-agent/
     audit.ts
 ```
 
+For the full project layout, see [Project structure](managed-deep-agents-project-structure.md).
+
 The managed runtime still owns `backend`, `store`, `checkpointer`, `memory`, `skills`, and the system prompt. Middleware should focus on agent behavior around model calls, tool calls, and lifecycle hooks.
 
-For deeper hook, state, and context details, see [custom middleware](../../javascript/langchain/middleware/custom.md).
+## Add middleware
 
-## Use prebuilt middleware
+Use middleware to redact PII, enforce call limits, retry failures, fall back between models, select models dynamically, or log and inspect tool calls.
 
-You can use LangChain [prebuilt middleware](../../javascript/langchain/middleware/built-in.md) directly in the agent definition.
+### Use prebuilt middleware
+You can use LangChain [prebuilt middleware](../../javascript/langchain/middleware/built-in.md) directly in the agent definition:
 
 **agent.ts**
 
@@ -52,11 +51,8 @@ export const agent = defineDeepAgent({
 });
 ```
 
-Middleware is the right place for cross-cutting behavior such as PII handling, rate limits, retry policies, model fallbacks, dynamic model selection, and tool-call monitoring.
-
-## Add a custom middleware module
-
-For a more advanced option, you can also define [custom middleware](../../javascript/langchain/middleware/custom.md).
+### Define custom middleware (Optional)
+For a more advanced option, define [custom middleware](../../javascript/langchain/middleware/custom.md) in a local module.
 
 **middleware/audit.ts**
 
@@ -74,7 +70,7 @@ export const logToolCalls = createMiddleware({
 });
 ```
 
-Import the middleware into the project-root agent entry and pass it in the `middleware` list.
+Import the middleware into the project-root agent entry and pass it in the `middleware` list:
 
 **agent.ts**
 
@@ -90,8 +86,6 @@ export const agent = defineDeepAgent({
 });
 ```
 
-`mda dev` and `mda deploy` copy the project files into the compiled build.
-
 Your middleware imports should work the same way they do in a normal local TypeScript project.
 
 ## Use runtime context
@@ -99,6 +93,20 @@ Your middleware imports should work the same way they do in a normal local TypeS
 Middleware can read per-run context through the normal LangChain runtime APIs. Use context for user IDs, organization IDs, feature flags, request metadata, or credentials that should not be part of the model prompt by default.
 
 For examples, see [Custom middleware](../../javascript/langchain/middleware/custom.md).
+
+## Deployment
+
+`mda dev` and `mda deploy` copy project files into the compiled build, including modules under `middleware/`. Middleware is not synced to Context Hub; it ships with the agent code.
+
+## When to use middleware
+
+| Concept                                                                    | Kind             | How it reaches the agent                |
+| -------------------------------------------------------------------------- | ---------------- | --------------------------------------- |
+| **Middleware**                                                             | Application code | Import and pass in the agent definition |
+| **[Custom tools](managed-deep-agents-tools.md)**        | Application code | Import and pass in the agent definition |
+| **[Instructions](managed-deep-agents-instructions.md)** | Managed context  | Always-on system prompt                 |
+
+For more information, see [Project structure](managed-deep-agents-project-structure.md).
 
 ***
 

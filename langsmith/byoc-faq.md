@@ -29,7 +29,23 @@ No. LangChain recommends a fresh account for clearer billing, and because some p
 <details>
 <summary>Can I install BYOC into an existing VPC?</summary>
 
-Not today. LangChain provisions a dedicated VPC for each data plane. Support for deploying into an existing VPC is planned.
+Yes. With [Bring your own VPC (BYOVPC)](byoc-byovpc.md), you supply a VPC and subnets. You can create the VPC with the [reference Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/byovpc) or use an existing VPC that meets the network requirements.
+
+To remove VPC creation permissions from the customer role, set `allow_vpc_creation_permissions = false` in the [`langsmith-byoc-role` Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/langsmith-byoc-role) and include your VPC ID in `vpc_ids`.
+
+</details>
+
+<details>
+<summary>Can I deploy multiple data planes in the same VPC?</summary>
+
+No. Deploying multiple data planes in the same VPC is not supported today. Use a separate VPC for each data plane.
+
+</details>
+
+<details>
+<summary>Can I move an existing data plane into my own VPC?</summary>
+
+No. Moving an existing data plane to a different VPC is not supported, nor is changing its VPC and subnet configuration after creation.
 
 </details>
 
@@ -85,9 +101,7 @@ Contact the LangChain team. Once the permissions are corrected, provisioning rec
 <details>
 <summary>What VPC CIDR range should I use?</summary>
 
-A private RFC 1918 range between `/18` and `/16`. LangChain provisions a dedicated VPC for the data plane in that range.
-
-If you plan to use VPC peering, select a range that does not overlap with the VPC you intend to peer with. The CIDR range cannot be changed after provisioning.
+A private RFC 1918 range between `/18` and `/16`. If you plan to use VPC peering, select a range that does not overlap with the VPC you intend to peer with. The CIDR range cannot be changed after provisioning.
 
 </details>
 
@@ -221,12 +235,16 @@ See [Connectivity](byoc-architecture.md#connectivity).
 <details>
 <summary>Can I restrict outbound network traffic from the data plane?</summary>
 
-Yes. BYOC supports a network firewall that controls egress from the data plane. Contact the LangChain team to enable it.
+Yes.
+
+For a LangChain-managed VPC, BYOC supports a network firewall that controls egress from the data plane. Contact the LangChain team to enable it.
 
 Once enabled, the firewall denies all outbound traffic by default. You then configure an allow list of the destinations the data plane is permitted to reach:
 
 * **Domains**: Fully qualified domain names, such as a model provider API endpoint or a public Docker registry.
 * **CIDR ranges**: IP ranges, such as an internal service or a private subnet.
+
+With BYOVPC, you manage your own firewall and egress controls. Your network must continue to meet the [BYOVPC network requirements](byoc-byovpc.md#meet-the-network-requirements).
 
 </details>
 

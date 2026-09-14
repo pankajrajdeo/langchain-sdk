@@ -16,7 +16,7 @@ Every outbound at LangChain used to start the same way: a rep toggling between t
 
 We built a GTM agent that runs the process end-to-end. It triggers on new Salesforce leads, checks whether we should reach out, gathers context (including meeting history), and sends a Slack draft (with reasoning + sources) for the rep to approve. We built it on [Deep Agents](../deepagents/overview.md) because this is a long-running, multi-step process that has to orchestrate multiple tools and large amounts of data reliably.
 
-## **Key results**
+## Key results
 
 - Lead-to-qualified-opportunity conversion rate up 250% from December 2025 to March 2026, driving 3x more pipeline dollars in the same period
 - Since December, reps have increased their follow up with lower intent leads by 97% and higher intent leads by 18%
@@ -27,34 +27,34 @@ We built a GTM agent that runs the process end-to-end. It triggers on new Salesf
 
 The GTM agent started as an SDR agent and then became used by the broader GTM team.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d079f4_data-src-image-bd0d930c-3f79-45ec-a18f-7f61dcee8f4f.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d079fa_data-src-image-8135b29f-2698-4512-b56f-7dc099c75bc9.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d07a03_data-src-image-4474bd1f-1954-4ea6-81e6-1ff770264f37.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d079fd_data-src-image-c5528a22-ecdd-4d21-a90d-1a4e869bd568.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d07a00_data-src-image-5729db30-b848-48a9-b3aa-fcc0745c3206.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d079f7_data-src-image-4472e2ac-9cd2-48ec-a53b-cb2d8e84e8fa.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d079f4_data-src-image-bd0d930c-3f79-45ec-a18f-7f61dcee8f4f.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d079fa_data-src-image-8135b29f-2698-4512-b56f-7dc099c75bc9.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d079f7_data-src-image-4472e2ac-9cd2-48ec-a53b-cb2d8e84e8fa.png)
 
-## **Constraints & success criteria**
+## Constraints & success criteria
 
 Before writing any code, we defined what the agent actually needed to do.
 
 We had two goals: reduce the time reps spend researching and drafting per lead, and improve conversion on marketing-generated inbound. Outbound research and drafting is systematic enough to automate, but only if the system is safe, auditable, and improves with use.
 
-#### **Non-negotiables**
+#### Non-negotiables
 
 - **Human-in-the-loop:** Nothing is sent without an explicit rep review and approval. A single poorly timed email can undo months of relationship-building.
 - **Contact history knowledge:** The agent needed to check whether a rep or teammate had already reached out before drafting anything.
 
-#### **Core capabilities**
+#### Core capabilities
 
 - **Relationship-aware personalization:** The draft should reflect the current state of the account (customer vs. warm prospect vs. cold), and not treat every lead the same way.
 - **Explainability:** Reps should be able to see key inputs and understand why the agent chose a particular angle so they could refine it and provide feedback.
 - **Learning loop:** The agent should learn from rep edits over time so drafts improve without anyone manually updating prompts.
 
-#### **Measurement**
+#### Measurement
 
 Every rep action (send, edit, cancel) is logged to [LangSmith](https://www.langchain.com/langsmith-platform?ref=blog.langchain.com) and attached to the underlying trace so we can evaluate quality, catch regressions, and quantify what’s working.
 
-#### **Scope expansion: account intelligence**
+#### Scope expansion: account intelligence
 
 Beyond one-off drafts, we also wanted the agent to proactively surface account-level signals like deal risks, expansion opportunities, and competitive moves, so reps know where to focus each week.
 
-## **What we built**
+## What we built
 
 The GTM agent does two things: (1) it researches leads and writes personalized email drafts, and (2) it aggregates account-level signals across web activity, developer ecosystems, product usage, and marketing touchpoints to show reps where to focus. By tying that intent data back to a rep’s accounts, it surfaces meaningful activity, flags deal risks and competitive moves, and clarifies who is ideal to reach out to next.
 
@@ -92,7 +92,7 @@ For deployed engineers, the focus shifts to account health. The agent pulls prod
 
 ![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d07a2c_account-intelligence-engine--1--1--1-.png)
 
-## **How we built it**
+## How we built it
 
 The agent needed to pull from multiple sources, reason across them, and produce a personalized output. This is more than a simple LLM call can handle reliably.
 
@@ -102,7 +102,7 @@ We chose Deep Agents for the multi-step orchestration because the inputs are inh
 
 We connected the agent to [LangSmith](https://www.langchain.com/langsmith/observability?ref=blog.langchain.com) so we could understand how sales reps were actually using it and measure whether the agent was improving over time. That meant setting up evaluations from the start rather than retrofitting them later, which turned out to be critical for catching regressions when we iterated on prompts or swapped model versions.
 
-## **Agent patterns**
+## Agent patterns
 
 Moving our GTM agent to production surfaced two problems we had to solve: how to make the agent learn from the people using it, and how to keep runs efficient at scale.
 
@@ -122,7 +122,7 @@ The parent agent spawns one subagent per account, keeping tools isolated and out
 
 ![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d07a1c_account-intelligence-diagram--1--1--1-.png)
 
-## **Evals and feedback**
+## Evals and feedback
 
 Before writing any production code for a new workflow, we define what success looks like in [LangSmith](https://smith.langchain.com/?ref=blog.langchain.com). We started with a small library of representative scenarios grounded in the situations our reps actually face, used those to build the initial agent or feature, and made sure the fundamentals work before expanding.
 
@@ -134,7 +134,7 @@ But evals only tell part of the story. What actually matters is how reps use the
 
 The LangSmith eval suite and the rep feedback loop reinforce each other. One catches regressions, the other drives improvement.
 
-## **Adoption beyond the sales team**
+## Adoption beyond the sales team
 
 The GTM agent started as an [ambient agent](https://blog.langchain.com/introducing-ambient-agents/), running as a background process. A lead appears in Salesforce, the agent runs, a draft lands in the rep's Slack. No trigger, no manual work.
 
@@ -144,7 +144,7 @@ We didn't build any of those workflows intentionally. The agent had the access, 
 
 We'll cover how other teams are using the GTM agent in a follow-up post.
 
-## **Learnings**
+## Learnings
 
 A few things we'd tell someone starting from scratch:
 
@@ -154,6 +154,6 @@ A few things we'd tell someone starting from scratch:
 4. **Long-running workflows need the right infrastructure.** This agent required much more than a simple LLM call with a tool or two. It needed to pull from multiple sources, reason across them, run subagents in parallel, and maintain state across turns. Picking an agent harness, Deep Agents, built for that kind of orchestration saved us from rebuilding infrastructure from scratch.
 5. **We're still early.** The GTM agent handles a real workflow today, but the feedback loops we've built – including memory, evals, and rep actions tied to traces – are what will make it meaningfully better over the next six months.
 
-## **And it’s an active member in Slack!**
+## And it’s an active member in Slack!
 
 ![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9bbe7ec0692a2d07a19_data-src-image-0c420a8f-051d-4256-98ad-7a751c9f063c.png)

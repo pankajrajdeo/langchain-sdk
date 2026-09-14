@@ -7,12 +7,12 @@ tags: [index]
 
 # LangChain mirror
 
-13 pages here, 8703 pages including subdirectories.
+13 pages here, 8706 pages including subdirectories.
 
 ## Directories
 
 - [api-reference/](api-reference/_index.md) - 65 pages
-- [blog/](blog/_index.md) - 514 pages
+- [blog/](blog/_index.md) - 515 pages
 - [breakoutagents/](breakoutagents/_index.md) - 5 pages
 - [concepts/](concepts/_index.md) - 4 pages
 - [contributing/](contributing/_index.md) - 8 pages
@@ -21,7 +21,7 @@ tags: [index]
 - [javascript/](javascript/_index.md) - 349 pages
 - [langchain/](langchain/_index.md) - 80 pages
 - [langgraph/](langgraph/_index.md) - 46 pages
-- [langsmith/](langsmith/_index.md) - 1171 pages
+- [langsmith/](langsmith/_index.md) - 1173 pages
 - [migrate/](migrate/_index.md) - 4 pages
 - [openwiki/](openwiki/_index.md) - 12 pages
 - [oss/](oss/_index.md) - 1 page

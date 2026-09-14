@@ -1,6 +1,6 @@
 ---
 title: "Connect to MCP servers"
-description: "Add tools from remote MCP servers to Managed Deep Agents."
+description: "Add tools from remote MCP servers to a managed deep agent."
 source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-mcp-connectors"
 category: "docs"
 tags: [docs, langsmith, javascript, managed-deep-agents-mcp-connectors]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, javascript, managed-deep-agents-mcp-connectors]
 
 # Connect to MCP servers
 
-> Add tools from remote MCP servers to Managed Deep Agents.
+> Add tools from remote MCP servers to a managed deep agent.
 
 Connect a managed deep agent to remote [Model Context Protocol (MCP)](../../javascript/deepagents/mcp.md) servers to add their tools to the agent. Managed Deep Agents creates the MCP client and loads the tools.
 
@@ -16,8 +16,6 @@ Most remote MCP servers require authentication. A [connection](managed-deep-agen
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
-
-## Project structure
 
 Declare MCP servers in a module directly under `tools/`:
 
@@ -28,9 +26,16 @@ my-agent/
     mcp.ts
 ```
 
-The module must export a named `mcp`.
+For the full project layout, see [Project structure](managed-deep-agents-project-structure.md).
 
-## Add MCP servers
+To implement application logic in the project instead, use an [authored tool](managed-deep-agents-tools.md).
+
+## Add an MCP servers
+
+Use an MCP server when tools already live on a remote MCP server and you want MDA to load them without importing them into the agent definition.
+
+### Declare the connector
+Use `connectors.mcp` to declare one or more remote servers:
 
 Use `defineMcp` to declare one or more remote servers:
 
@@ -49,10 +54,13 @@ export const mcp = defineMcp({
 });
 ```
 
-Managed Deep Agents supports Streamable HTTP (`"http"`) and legacy SSE (`"sse"`) transports. Stdio MCP servers are not supported. Expose a stdio server over HTTP or implement its operation as an [authored tool](managed-deep-agents-tools.md).
+The module must export a named `connector`.
 
-## Select tools
+Managed Deep Agents supports Streamable HTTP (`"http"`) and legacy SSE (`"sse"`) transports. Stdio MCP servers are not supported. Expose a stdio server over HTTP or implement its operation as an [authored tool](managed-deep-agents-tools.md) instead.
 
+For connection options, see [Manage connections](managed-deep-agents-connections.md).
+
+### Select tools (Optional)
 By default, Managed Deep Agents exposes every tool from each server. To expose only selected tools, set an allowlist inside that server's configuration:
 
 ```ts
@@ -68,6 +76,14 @@ To expose every tool except selected tools, replace `includeTools` with `exclude
 You can use both options together. The denylist applies after the allowlist, and the same tool cannot appear in both lists.
 
 Selection uses raw MCP tool names before Managed Deep Agents prefixes them. Tool names are prefixed with the server name by default to avoid collisions. For example, the `search_docs_by_lang_chain` tool from the `langchainDocs` server is exposed as `langchainDocs__search_docs_by_lang_chain`.
+
+### Pass credentials (Optional)
+If an MCP server requires credentials, declare a connection on the server config and create that connection in the workspace.
+
+* **MCP OAuth**: For servers that advertise OAuth and support automatic client registration, create with `mda connections create <slug>` (inferred from the MCP declaration) or `mda connections create <slug> --mcp <url>`. You do not supply a client ID or secret.
+* **Opaque secret or general OAuth**: For a static API key, or for a BYOT OAuth app you register yourself, create an opaque secret or general OAuth connection, then set the server's `connection` option to `connections.get(...)`.
+
+For create modes, owners, and runtime authorization, see [Manage connections](managed-deep-agents-connections.md).
 
 ## Configure MCP servers
 
@@ -91,20 +107,19 @@ The MCP definition also accepts these options:
 | `prefix_tool_name_with_server_name` / `prefixToolNameWithServerName` | `true`  | Prefix each tool with `{server}__`.                       |
 | `throw_on_load_error` / `throwOnLoadError`                           | `true`  | Fail loading instead of starting with a partial tool set. |
 
-## Compare MCP with other capabilities
+## Deployment
 
-* **MCP servers** provide remotely hosted tools.
-* **[Authored tools](managed-deep-agents-tools.md)** implement application logic in the project and are passed through the agent definition.
-* **[Channels](managed-deep-agents-channels.md)** receive external messages that start agent runs and deliver responses.
+`mda dev` and `mda deploy` discover connector modules under `connectors/` and include them in the managed configuration. Connectors are not synced to Context Hub.
 
-## Use MCP servers that require authentication
+## When to use MCP connectors
 
-If an MCP server requires credentials, declare a connection on the server config and create that connection in the workspace.
+| Concept                                                               | Kind                  | How it reaches the agent                                              |
+| --------------------------------------------------------------------- | --------------------- | --------------------------------------------------------------------- |
+| **MCP servers**                                                       | Managed configuration | Declared under `tools/`; no import into the agent entry               |
+| **[Authored tools](managed-deep-agents-tools.md)** | Application code      | Import and pass in the agent definition                               |
+| **[Channels](managed-deep-agents-channels.md)**    | Managed configuration | Receive external messages that start agent runs and deliver responses |
 
-* **MCP OAuth**: For servers that advertise OAuth and support automatic client registration, create with `mda connections create <slug>` (inferred from the MCP declaration) or `mda connections create <slug> --mcp <url>`. You do not supply a client ID or secret.
-* **Opaque secret or general OAuth**: For a static API key, or for a BYOT OAuth app you register yourself, create an opaque secret or general OAuth connection, then set the server's `connection` option to `connections.get(...)`.
-
-For create modes, owners, and runtime authorization, see [Manage connections](managed-deep-agents-connections.md).
+For more information, see [Project structure](managed-deep-agents-project-structure.md).
 
 ***
 
