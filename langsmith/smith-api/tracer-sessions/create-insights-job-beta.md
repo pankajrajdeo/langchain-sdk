@@ -1,6 +1,6 @@
 ---
 title: "Create insights job (Beta)"
-description: "Create an insights job."
+description: "Create an Insights job for a project."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/create-insights-job-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, create-insights-job-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, create-insights-job-beta]
 
 # Create insights job (Beta)
 
-> Create an insights job.
+> Create an Insights job for a project.
 
 ## OpenAPI
 
@@ -168,13 +168,15 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights:
     post:
       tags:
         - tracer-sessions
       summary: Create insights job (Beta)
-      description: Create an insights job.
+      description: Create an Insights job for a project.
       operationId: _Beta__Create_Insights_Job_api_v1_sessions__session_id__insights_post
       parameters:
         - name: session_id
@@ -310,7 +312,7 @@ components:
           default: true
       type: object
       title: CreateRunClusteringJobRequest
-      description: Request to create a run clustering job.
+      description: Configuration for an Insights job.
     CreateRunClusteringJobResponse:
       properties:
         id:
@@ -334,7 +336,7 @@ components:
         - name
         - status
       title: CreateRunClusteringJobResponse
-      description: Response to creating a run clustering job.
+      description: An Insights job queued for execution.
     HTTPValidationError:
       properties:
         detail:

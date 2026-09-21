@@ -170,6 +170,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v2/runs/{run_id}:
     get:
@@ -199,8 +201,8 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - description: >-
             `selects` lists which properties to include on the returned run
@@ -211,7 +213,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - ID
@@ -261,6 +262,7 @@ paths:
                 - FEEDBACK_STATS
                 - LS_USER_ID
               type: string
+            type: array
             title: Selects
         - description: >-
             `start_time` is the run's `start_time` (RFC3339 date-time).

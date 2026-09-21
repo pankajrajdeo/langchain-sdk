@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api/orgs"
-description: "Index of 56 pages and 0 subdirectories under langsmith/smith-api/orgs."
+description: "Index of 57 pages and 0 subdirectories under langsmith/smith-api/orgs."
 category: "index"
 tags: [index, langsmith, smith-api, orgs]
 ---
 
 # langsmith/smith-api/orgs
 
-56 pages here.
+57 pages here.
 
 ## Files
 
@@ -54,6 +54,7 @@ tags: [index, langsmith, smith-api, orgs]
 - [List TTL settings](list-ttl-settings.md) - List out the configured TTL settings for a given org (org-level and tenant-level).
 - [On payment method created](on-payment-method-created.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/payment-method
 - [Patch current org pending member](patch-current-org-pending-member.md) - Update the role on a pending org member invite.
+- [Reinstate org personal access token](reinstate-org-personal-access-token.md) - Lift a revocation, so the personal access token authenticates again.
 - [Remove member from current org](remove-member-from-current-org.md) - Remove a user from the current organization.
 - [Revoke org personal access token](revoke-org-personal-access-token.md) - Revoke a personal access token, so it stops working but its record remains.
 - [Set company info](set-company-info.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/business-info

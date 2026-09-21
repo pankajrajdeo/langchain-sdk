@@ -559,13 +559,13 @@ Within a thread, open the Messages view and click the **LLM call** link in a tur
 > [!NOTE]
 > Thread filters look through all runs and surface a thread if at least 1 run matches the filter.
 
-On the **Threads** tab of a project, you can save commonly used filters: [Set a filter](filter-traces-in-application.md#create-and-apply-filters) using the **Add filter** button, then click **Save view**.
+On the **Threads** tab of a project, you can [save commonly used filters](filter-traces.md#save-a-filter).
 
 ## Related
 
 * [Observability concepts](observability-concepts.md#threads): background on threads and how they relate to runs and traces.
 * [Add metadata and tags to traces](add-metadata-tags.md): how to pass `thread_id` and other metadata keys.
-* [Filter traces](filter-traces-in-application.md): filter by thread metadata in the tracing UI.
+* [Filter traces](filter-traces.md): filter by thread metadata in the tracing UI.
 * [Set up multi-turn online evaluators](online-evaluations-multi-turn.md): evaluate threads rather than individual runs.
 * [Log user feedback using the SDK](attach-user-feedback.md): attach feedback to runs within a thread.
 * [Create and manage datasets in the UI](manage-datasets-in-application.md#manually-from-a-tracing-project): add threads to a dataset.

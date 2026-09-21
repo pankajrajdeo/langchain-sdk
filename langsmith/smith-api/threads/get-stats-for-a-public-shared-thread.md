@@ -170,6 +170,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v2/public/threads/{share_token}/stats:
     get:
@@ -200,9 +202,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Selects
       responses:
         '200':

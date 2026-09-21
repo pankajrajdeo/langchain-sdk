@@ -1,21 +1,21 @@
 ---
 title: "langsmith"
-description: "Index of 481 pages and 5 subdirectories under langsmith."
+description: "Index of 483 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-481 pages here, 1173 pages including subdirectories.
+483 pages here, 1181 pages including subdirectories.
 
 ## Directories
 
 - [agent-server-api/](agent-server-api/_index.md) - 72 pages
 - [fleet/](fleet/_index.md) - 25 pages
-- [javascript/](javascript/_index.md) - 23 pages
-- [python/](python/_index.md) - 23 pages
-- [smith-api/](smith-api/_index.md) - 549 pages
+- [javascript/](javascript/_index.md) - 25 pages
+- [python/](python/_index.md) - 25 pages
+- [smith-api/](smith-api/_index.md) - 551 pages
 
 ## Files
 
@@ -196,7 +196,7 @@ tags: [index, langsmith]
 - [Feedback data format](feedback-data-format.md) - Before diving into this content, it might be helpful to read the following:
 - [How to fetch performance metrics for an experiment](fetch-perf-metrics-experiment.md) - Tracing projects and experiments use the same underlying data structure in our backend, which is called a "session."
 - [How to filter experiments in the UI](filter-experiments-ui.md) - LangSmith lets you filter your previous experiments by feedback scores and metadata to make it easy to find only the experiments you care about.
-- [Filter traces](filter-traces-in-application.md) - Tracing projects can accumulate large amounts of data across threads, traces, and runs. LangSmith's filtering tools let you navigate and analyze that data precisely.
+- [Filter traces (ClickHouse)](filter-traces-in-application.md) - Filter threads, traces, and runs in a LangSmith tracing project backed by ClickHouse, using the filter bar, filter shortcuts, and saved filters.
 - [Filter traces](filter-traces.md) - Find specific threads, traces, and runs in a LangSmith tracing project by writing filter queries in the search bar.
 - [No-code agents with LangSmith Fleet](fleet.md) - Create helpful AI agents without code. Start from a template, connect your accounts, and let the agent handle routine work while you stay in control.
 - [Self-hosted LangSmith on GCP](gcp-self-hosted.md) - When running LangSmith on Google Cloud Platform (GCP), self-hosted mode deploys a complete LangSmith platform with observability functionality.
@@ -236,16 +236,18 @@ tags: [index, langsmith]
 - [API formats](llm-gateway-api-formats.md) - Use OpenAI Chat Completions, Anthropic Messages, or OpenAI Responses requests to call models across providers through the LLM Gateway.
 - [Set up coding agents](llm-gateway-coding-agents.md) - Configure Claude Code, Codex, Gemini CLI, and Deep Agents Code to route LLM calls through the LLM Gateway.
 - [Gateway Credits](llm-gateway-credits.md) - Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
-- [Custom model providers](llm-gateway-custom-providers.md) - Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model.
+- [Manage model configurations](llm-gateway-custom-providers.md) - Manage model configurations and control their availability across LangSmith features.
 - [Data policy](llm-gateway-data-policy.md) - Create data policies that redact sensitive data and control trace content in the LLM Gateway.
 - [Data policy](llm-gateway-data-protection.md) - Create data policies that redact sensitive data and control trace content in the LLM Gateway.
+- [Decision models](llm-gateway-decision-models.md) - Use SemIf through the LangSmith LLM Gateway for structured classification and scoring with the System One API.
 - [Direct model access](llm-gateway-direct-model-access.md) - Access provider APIs directly through provider-specific LLM Gateway paths without using the gateway standardization layer.
 - [Model fallbacks](llm-gateway-fallbacks.md) - Automatically retry a request against backup models when the primary model rate-limits, errors, or returns another configured status code.
 - [Per-customer policies](llm-gateway-header-policies.md) - Split gateway spend caps and rate limits by a custom request header so each of your end customers gets its own limit under a single API key.
+- [How the gateway works](llm-gateway-how-it-works.md) - Understand what the LLM Gateway does to each request, how upstream credentials are resolved, and where the gateway is available.
 - [Gateway Credits](llm-gateway-langchain-provider.md) - Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
 - [Model access policies](llm-gateway-model-access-policies.md) - Control which model providers and models are accessible through the LLM Gateway for your organization, workspaces, users, or API keys.
 - [Monitor LLM Gateway spend](llm-gateway-monitoring.md) - View and analyze LLM Gateway costs by user, API key, and model.
-- [Quickstart](llm-gateway-quickstart.md) - Make your first LLM Gateway request with cURL, Python, or TypeScript.
+- [LLM Gateway quickstart](llm-gateway-quickstart.md) - Call models across providers with one LangSmith API key, then view the trace and set a spend limit.
 - [Rate limit policies](llm-gateway-rate-limit-policies.md) - Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window.
 - [Spend policies](llm-gateway-spend-policies.md) - Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
 - [LLM Gateway](llm-gateway.md) - Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data-protection policies.
@@ -389,7 +391,7 @@ tags: [index, langsmith]
 - [GCP Terraform troubleshooting](self-host-terraform-gcp-troubleshooting.md) - Common issues, fixes, and diagnostic commands for LangSmith self-hosted on GKE deployed with the LangChain Terraform modules.
 - [GCP Terraform variables reference](self-host-terraform-gcp-variables.md) - Complete reference of Terraform variables for LangSmith self-hosted on GCP GKE.
 - [Deploy LangSmith with Terraform](self-host-terraform.md) - Provision LangSmith self-hosted on AWS, Azure, or GCP using LangChain's production-ready Terraform modules.
-- [Enable TTL and data retention](self-host-ttl.md) - LangSmith Self-Hosted allows enablement of automatic TTL and Data Retention of traces. This can be useful if you're complying with data privacy regulations, or if you want to have more efficient...
+- [Enable TTL and data retention](self-host-ttl.md) - LangSmith Self-Hosted supports automatic TTL and data retention for traces. Use this to comply with data privacy regulations or to reduce storage by automatically cleaning up old traces. Run rules...
 - [Customize the error support message](self-host-ui-customization.md) - Customize support contact information in the LangSmith frontend for self-hosted deployments.
 - [Upgrade an installation](self-host-upgrades.md) - Downgrades are not officially supported. LangSmith upgrades may include database migrations and other changes that are not backward-compatible. If you need to roll back to a previous version, contact...
 - [Interact with your self-hosted instance of LangSmith](self-host-usage.md) - This guide will walk you through the process of using your self-hosted instance of LangSmith.
@@ -492,7 +494,7 @@ tags: [index, langsmith]
 - [Use the Context Hub](use-the-context-hub.md) - Learn how to create, view, and promote context in the LangSmith Context Hub.
 - [Use threads](use-threads.md) - This guide shows you how to create, view, and inspect threads. Threads work with assistants to enable stateful execution of your deployed graphs.
 - [Use tools in a prompt](use-tools.md) - Tools allow language models to interact with external systems and perform actions beyond just generating text. In the Playground, you can use two types of tools:
-- [Use webhooks](use-webhooks.md) - Webhooks enable event-driven communication from your LangSmith application to external services. For example, you may want to issue an update to a separate service once an API call to LangSmith has...
+- [Use webhooks](use-webhooks.md) - This page covers LangGraph API webhooks, a way to receive a POST callback when a specific run completes. If you are looking for LangSmith automation webhooks (triggered when automation rules match...
 - [User management](user-management.md) - This page covers user management features in LangSmith, including access control, authentication, and automated user provisioning:
 - [View traces](view-traces.md) - Inspect agent threads in LangSmith using the Messages view or Details view.
 - [View usage](view-usage.md) - What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted.

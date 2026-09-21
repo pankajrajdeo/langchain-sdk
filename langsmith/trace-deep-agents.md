@@ -168,7 +168,7 @@ Deep Agents automatically writes the subagent's `name` to the `lc_agent_name` me
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/t_yuR4Fo_XGdcWGH/langsmith/images/deepagents-lc-agent-name-filter.png?fit=max&auto=format&n=t_yuR4Fo_XGdcWGH&q=85&s=ffc65c0b9b5292fce5f0589b8f2478ce" alt="LangSmith Runs view with a metadata filter on lc_agent_name set to coordinator" width="1024" height="533" data-path="langsmith/images/deepagents-lc-agent-name-filter.png" />
 
-Save the filter as a named view for quick reuse. For a full reference on filter options, see [Filter traces](filter-traces-in-application.md).
+Save the filter as a named view for quick reuse. For a full reference on filter options, see [Filter traces](filter-traces.md).
 
 **Filter programmatically with the SDK:**
 

@@ -120,6 +120,9 @@ Convert websites into clean, structured data at scale with AI-powered search and
 #### [ANEForge](https://github.com/sbryngelson/langchain-aneforge)
 LangChain embeddings on the Apple Neural Engine via ANEForge.
 
+#### [AntiBrow](https://antibrow.com/docs/langchain)
+Browser tools backed by persistent local browser profiles, keeping cookies, storage, fingerprint and exit IP stable across agent runs.
+
 #### [Anthropic](anthropic.md)
 Claude models for advanced reasoning and conversation.
 
@@ -372,6 +375,9 @@ Reasoning observability and regression testing for agent runs.
 #### [Duel Agents](https://duelagents.com)
 Multi-model routing that bills the cheapest winning answer behind an OpenAI-compatible proxy.
 
+#### [DynamicToolSelectorMiddleware](https://github.com/RauhanAhmed/langchain-dynamic-tools-middleware)
+Drop-in agent middleware providing sub-100ms hybrid dense and sparse vector tool retrieval over zvec. Eliminates prompt token overhead by >80% and outperforms LLM-based tool selection on Berkeley Function Calling Leaderboard (BFCL) benchmarks.
+
 #### [E2B](https://e2b.dev/docs)
 Cloud sandboxes for running AI-generated code.
 
@@ -452,6 +458,9 @@ Graph-based retrieval augmented generation.
 
 #### [GraphSignal](graphsignal.md)
 AI observability and monitoring platform.
+
+#### [GreenCalculus](https://greencalculus.com/guides/emission-factors-langchain/)
+Greenhouse-gas emission factors from public publishers (DEFRA, US EPA, ADEME, IPCC and others), returned with the publisher's exact source cell, licence and data version.
 
 #### [GreenNode](https://greennode.ai/)
 Sustainable AI computing platform.
@@ -900,6 +909,9 @@ Verified news intelligence tools and retriever for LangChain agents.
 #### [PolarisAIDataInsight](https://datainsight.polarisoffice.com/playground)
 Document-loaders for various file formats.
 
+#### [Polign](https://github.com/Polign/polign/tree/main/python/langchain-polign)
+Vector store for Polign, object-store-native vector database, with metadata filtering, MMR, and BM25 hybrid search.
+
 #### [POP](https://github.com/joy7758/persona-object-protocol/tree/main/integrations/langchain-pop)
 Portable persona loading, legacy migration, and boundary-aware tool filtering for LangChain agents.
 
@@ -1227,6 +1239,9 @@ Governed OpenAI-compatible endpoint for model access, policy checks, and usage a
 #### [TypeDB](https://typedb.com/docs)
 Strongly-typed database for complex, relational data and knowledge graph applications.
 
+#### [TypeSafe](typesafe.md)
+Jev classifier for agent decisions: model routing and tool-risk gating.
+
 #### [TypesenseVectorStore](https://github.com/typesense/langchain-typesense#readme)
 Vector store integration for Typesense with vector and hybrid search, metadata filtering, scoring, MMR, and sync & async APIs.
 
@@ -1304,6 +1319,9 @@ URL metadata, Markdown, contact discovery, and SEO audit tools for LangChain age
 
 #### [Webz](https://docs.webz.io/docs/webz/news-search-api-mcp)
 Global news search with semantic ranking and rich filters for LangChain agents.
+
+#### [Whoosh](https://github.com/priya-sundaram-dev/whoosh/tree/main/integrations/langchain-whoosh#readme)
+Retriever backed by Whoosh, a pure-Python full-text search library with BM25F ranking and on-disk indexes.
 
 #### [Work Ledger](https://github.com/metawake/work-ledger/blob/main/docs/integrations.md)
 Record, diff, and regression-test LangChain runs with a callback handler.

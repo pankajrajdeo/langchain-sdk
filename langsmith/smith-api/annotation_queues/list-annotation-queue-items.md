@@ -1,6 +1,6 @@
 ---
 title: "List annotation queue items"
-description: "List RUN and THREAD items in a single annotation queue for one review status section, with opaque cursor pagination. Optional item_type=RUN|THREAD filters the page. direction=backward returns items..."
+description: "List RUN and THREAD items in a single annotation queue for one review status section, with opaque cursor pagination. Optional item_type=RUN|THREAD filters the page. Optional..."
 source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/list-annotation-queue-items"
 category: "docs"
 tags: [docs, langsmith, smith-api, annotation_queues, list-annotation-queue-items]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, annotation_queues, list-annotation-queue-item
 
 # List annotation queue items
 
-> List RUN and THREAD items in a single annotation queue for one review status section, with opaque cursor pagination. Optional item_type=RUN|THREAD filters the page. direction=backward returns items before the supplied cursor. The response contains item metadata only, not expanded run or thread payloads. status=archived returns items whose queue review requirements have been satisfied, not merely items the caller personally marked completed.
+> List RUN and THREAD items in a single annotation queue for one review status section, with opaque cursor pagination. Optional item_type=RUN|THREAD filters the page. Optional min_start_time/max_start_time bound the item's trace start time; items with no start time are excluded when either bound is set. direction=backward returns items before the supplied cursor. The response contains item metadata only, not expanded run or thread payloads. status=archived returns items whose queue review requirements have been satisfied, not merely items the caller personally marked completed.
 
 ## OpenAPI
 
@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/annotation-queues/{queue_id}/items:
     get:
@@ -177,11 +179,14 @@ paths:
       description: >-
         List RUN and THREAD items in a single annotation queue for one review
         status section, with opaque cursor pagination. Optional
-        item_type=RUN|THREAD filters the page. direction=backward returns items
-        before the supplied cursor. The response contains item metadata only,
-        not expanded run or thread payloads. status=archived returns items whose
-        queue review requirements have been satisfied, not merely items the
-        caller personally marked completed.
+        item_type=RUN|THREAD filters the page. Optional
+        min_start_time/max_start_time bound the item's trace start time; items
+        with no start time are excluded when either bound is set.
+        direction=backward returns items before the supplied cursor. The
+        response contains item metadata only, not expanded run or thread
+        payloads. status=archived returns items whose queue review requirements
+        have been satisfied, not merely items the caller personally marked
+        completed.
       parameters:
         - description: Annotation queue ID
           name: queue_id
@@ -194,11 +199,11 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             enum:
               - needs_my_review
               - needs_others_review
               - archived
+            type: string
             title: Status
         - description: Page size (max 100)
           name: page_size
@@ -217,20 +222,38 @@ paths:
           name: item_type
           in: query
           schema:
-            type: string
             enum:
               - RUN
               - THREAD
+            type: string
             title: Item Type
+        - description: >-
+            Only items whose trace start time is at or after this timestamp.
+            Omit or send the zero time for no bound
+          name: min_start_time
+          in: query
+          schema:
+            format: date-time
+            type: string
+            title: Min Start Time
+        - description: >-
+            Only items whose trace start time is at or before this timestamp.
+            Omit or send the zero time for no bound
+          name: max_start_time
+          in: query
+          schema:
+            format: date-time
+            type: string
+            title: Max Start Time
         - description: Pagination direction. backward requires cursor
           name: direction
           in: query
           schema:
-            type: string
-            default: forward
             enum:
               - forward
               - backward
+            type: string
+            default: forward
             title: Direction
       responses:
         '200':

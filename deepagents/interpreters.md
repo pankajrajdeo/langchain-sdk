@@ -99,7 +99,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
@@ -234,7 +234,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     middleware=[CodeInterpreterMiddleware(ptc=["web_search"])],
 )
 ```
@@ -392,7 +392,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     middleware=[
         CodeInterpreterMiddleware(
             mode="thread",  # Default
@@ -503,7 +503,7 @@ from langchain_quickjs import CodeInterpreterMiddleware
 from langgraph.checkpoint.memory import MemorySaver
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     checkpointer=MemorySaver(),
     middleware=[CodeInterpreterMiddleware(mode="thread")],
 )

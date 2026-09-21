@@ -491,7 +491,7 @@ Because you have been logging the `llm` metadata attribute, you can group monito
 
 ### Drilldown
 
-When a monitoring chart shows something unexpected, click a data point to freeze the tooltip, then click the metric name (for example, **Input**) to jump to the filtered runs table for that time window. For more on searching and filtering runs, refer to [Filter traces](filter-traces-in-application.md).
+When a monitoring chart shows something unexpected, click a data point to freeze the tooltip, then click the metric name (for example, **Input**) to jump to the filtered runs table for that time window. For more on searching and filtering runs, refer to [Filter traces](filter-traces.md).
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/drilldown-monitoring-light.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=d3e8433d168cfdd019822b93d05f4420" alt="LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted." width="2838" height="814" data-path="langsmith/images/drilldown-monitoring-light.png" />
 

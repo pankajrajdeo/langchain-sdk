@@ -170,6 +170,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/issues/{id}:
     get:
@@ -266,7 +268,7 @@ components:
         fix_prompt:
           type: string
         fix_verification:
-          type: object
+          $ref: '#/components/schemas/issues.IssueFixVerification'
         id:
           type: string
         last_seen_at:
@@ -315,6 +317,8 @@ components:
           type: object
         updated_at:
           type: string
+        validation_result:
+          $ref: '#/components/schemas/issues.IssueValidationResult'
         watching_since:
           type: string
     issues.ErrorResponse:
@@ -322,6 +326,36 @@ components:
       properties:
         error:
           type: string
+    issues.IssueFixVerification:
+      type: object
+      properties:
+        attempt:
+          type: integer
+        parent_deployment_id:
+          type: string
+          format: uuid
+        preview_deployment_id:
+          type: string
+          format: uuid
+        reason:
+          type: string
+        root_trace_ids:
+          items:
+            type: string
+          type: array
+        status:
+          type: string
+          enum:
+            - awaiting_preview
+            - verifying
+            - passed
+            - failed
+            - inconclusive
+            - timeout
+            - error
+        updated_at:
+          type: string
+          format: date-time
     issues.LinearContext:
       type: object
       properties:
@@ -384,6 +418,31 @@ components:
         - StatusWatching
         - StatusCompleted
         - StatusIgnored
+    issues.IssueValidationResult:
+      type: object
+      properties:
+        active_revision_id:
+          type: string
+          format: uuid
+        completed_at:
+          type: string
+          format: date-time
+        deployment_id:
+          type: string
+          format: uuid
+        outcome:
+          type: string
+          enum:
+            - reproduced
+            - not_reproduced
+            - inconclusive
+            - error
+        reason:
+          type: string
+        root_trace_ids:
+          items:
+            type: string
+          type: array
   securitySchemes:
     API Key:
       type: apiKey

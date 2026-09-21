@@ -35,8 +35,8 @@ Follow a step-by-step tutorial to instrument a retrieval-augmented generation ap
 
 ## Investigate and monitor
 
-#### [View traces](filter-traces-in-application.md)
-Filter, export, share, and compare traces via the UI or API.
+#### [View traces](view-traces.md)
+Inspect threads and runs in the Messages, Turns, and Details views.
 
 #### [Monitor performance](dashboards.md)
 Build dashboards and set alerts to track quality and catch issues early.

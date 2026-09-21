@@ -27,6 +27,7 @@ Middleware for providing filesystem tools to an agent.
 - `GREP_TRUNCATION_NOTE`
 - `GLOB_TRUNCATION_NOTE`
 - `GLOB_UNREADABLE_NOTE`
+- `GLOB_PATHLESS_DENIED_HINT`
 - `DEFAULT_READ_OFFSET`
 - `DEFAULT_READ_LIMIT`
 - `READ_FILE_TRUNCATION_MSG`
@@ -50,7 +51,6 @@ Middleware for providing filesystem tools to an agent.
 
 - [`execute_accepts_timeout()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/execute_accepts_timeout)
 - [`check_empty_content()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/check_empty_content)
-- [`format_content_with_line_numbers()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/format_content_with_line_numbers)
 - [`format_grep_matches()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/format_grep_matches)
 - [`regex_literal_hint()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/regex_literal_hint)
 - [`sanitize_tool_call_id()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/sanitize_tool_call_id)
@@ -63,4 +63,4 @@ Middleware for providing filesystem tools to an agent.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/1aae3746682a65c837c5dd0f165b685253fe9465/libs/deepagents/deepagents/middleware/filesystem.py)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/middleware/filesystem.py)

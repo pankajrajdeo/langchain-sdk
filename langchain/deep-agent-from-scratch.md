@@ -139,7 +139,7 @@ agent = create_agent(model="openai:gpt-5.5", tools=[])
 ```python
 from langchain.agents import create_agent
 
-agent = create_agent(model="anthropic:claude-sonnet-4-6", tools=[])
+agent = create_agent(model="anthropic:claude-sonnet-5", tools=[])
 ```
 
 **OpenRouter**
@@ -241,7 +241,7 @@ sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-
 backend = LangSmithSandbox(sandbox=sandbox)
 
 agent = create_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[],
     middleware=[FilesystemMiddleware(backend=backend)],
 )
@@ -420,7 +420,7 @@ agent = create_agent(
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-model = "anthropic:claude-sonnet-4-6"
+model = "anthropic:claude-sonnet-5"
 
 agent = create_agent(
     model=model,
@@ -593,7 +593,7 @@ agent = create_agent(
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
 
-model = "anthropic:claude-sonnet-4-6"
+model = "anthropic:claude-sonnet-5"
 
 agent = create_agent(
     model=model,
@@ -770,7 +770,7 @@ from deepagents.middleware import (
 )
 from langchain.agents.middleware import TodoListMiddleware
 
-model = "anthropic:claude-sonnet-4-6"
+model = "anthropic:claude-sonnet-5"
 
 visualizer: SubAgent = {
     "name": "visualizer",

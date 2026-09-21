@@ -1,14 +1,22 @@
 ---
-title: "Filter traces"
-description: "Tracing projects can accumulate large amounts of data across threads, traces, and runs. LangSmith's filtering tools let you navigate and analyze that data precisely."
+title: "Filter traces (ClickHouse)"
+description: "Filter threads, traces, and runs in a LangSmith tracing project backed by ClickHouse, using the filter bar, filter shortcuts, and saved filters."
 source: "https://docs.langchain.com/langsmith/filter-traces-in-application"
 category: "docs"
 tags: [docs, langsmith, filter-traces-in-application]
 ---
 
-# Filter traces
+# Filter traces (ClickHouse)
+
+> Filter threads, traces, and runs in a LangSmith tracing project backed by ClickHouse, using the filter bar, filter shortcuts, and saved filters.
 
 Tracing projects can accumulate large amounts of data across [threads](observability-concepts.md#threads), [traces](observability-concepts.md#traces), and [runs](observability-concepts.md#runs). LangSmith's filtering tools let you navigate and analyze that data precisely.
+
+> [!NOTE]
+> Tracing projects have two filtering experiences. Check the top of your project to see which one applies to you:
+>
+> * **A single search bar with a scope selector to its left**: Refer to [Filter traces](filter-traces.md).
+> * **An Add filter button that builds filter chips**: Refer to [Filter traces (ClickHouse)](filter-traces-in-application.md).
 
 This page covers:
 

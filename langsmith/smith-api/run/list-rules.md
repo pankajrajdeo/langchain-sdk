@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/runs/rules:
     get:
@@ -386,11 +388,6 @@ components:
               type: array
             - type: 'null'
           title: Code Evaluators
-        trajectory_evaluators:
-          items:
-            $ref: '#/components/schemas/EvaluatorTopLevel'
-          type: array
-          title: Trajectory Evaluators
         alerts:
           anyOf:
             - items:

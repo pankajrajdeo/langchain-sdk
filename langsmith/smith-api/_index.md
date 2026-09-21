@@ -7,7 +7,7 @@ tags: [index, langsmith, smith-api]
 
 # langsmith/smith-api
 
-0 pages here, 549 pages including subdirectories.
+0 pages here, 551 pages including subdirectories.
 
 ## Directories
 
@@ -49,7 +49,7 @@ tags: [index, langsmith, smith-api]
 - [oauth/](oauth/_index.md) - 19 pages
 - [optimization-jobs/](optimization-jobs/_index.md) - 9 pages
 - [organizations/](organizations/_index.md) - 1 page
-- [orgs/](orgs/_index.md) - 56 pages
+- [orgs/](orgs/_index.md) - 57 pages
 - [ownerships/](ownerships/_index.md) - 3 pages
 - [playground-settings/](playground-settings/_index.md) - 5 pages
 - [prompt-webhooks/](prompt-webhooks/_index.md) - 6 pages
@@ -58,7 +58,7 @@ tags: [index, langsmith, smith-api]
 - [repos/](repos/_index.md) - 9 pages
 - [run/](run/_index.md) - 23 pages
 - [runs/](runs/_index.md) - 13 pages
-- [sandboxes/](sandboxes/_index.md) - 33 pages
+- [sandboxes/](sandboxes/_index.md) - 34 pages
 - [scim-tokens/](scim-tokens/_index.md) - 5 pages
 - [service-accounts/](service-accounts/_index.md) - 3 pages
 - [sessions/](sessions/_index.md) - 1 page

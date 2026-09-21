@@ -291,6 +291,9 @@ Rerank and compress documents using MixedBread AI.
 
 ## Tools
 
+#### [aiworker](https://github.com/ai-worker227/aiworker-examples/tree/main/langchain)
+Paid data tools (DeFi yields, page-to-Markdown, Base token and wallet checks, Polymarket odds, history and backtests, fact checks, headline search) built from aiworker's live OpenAPI catalogue; each call pays itself in USDC over the x402 protocol from the agent's wallet, no API key.
+
 #### [Atomic Mail](https://atomic-mail.github.io/atomic-mail-agentic/langchain)
 JMAP inboxes for AI agents with proof-of-work signup and tools for registration, mail operations, and help.
 
@@ -336,6 +339,9 @@ Query databases using natural language.
 #### [Perplexity Search](../tools/perplexity_search.md)
 Web search results from the Perplexity Search API.
 
+#### [Pushary](https://github.com/Pushary/pushary-langgraph)
+Customer confirmation, choice and text input through an enrolled Pushary mobile app, exposed as a LangChain structured tool.
+
 #### [Serpex](https://serpex.dev/docs)
 Multi-engine web search API for AI applications and data aggregation.
 
@@ -376,6 +382,9 @@ Retrieve from Amazon Bedrock Knowledge Bases.
 
 #### [Exa](../retrievers/exa.md)
 AI-powered web search and retrieval.
+
+#### [FoxNose](https://github.com/FoxNoseTech/langchain-foxnose-js#readme)
+Retriever, document loader and agent tool for FoxNose collections, with text, vector, hybrid and vector-boosted search over the Flux delivery API.
 
 #### [HyDE](../retrievers/hyde.md)
 Hypothetical Document Embeddings for better retrieval.

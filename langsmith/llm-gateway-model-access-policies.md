@@ -11,7 +11,7 @@ tags: [docs, langsmith, llm-gateway-model-access-policies]
 > Control which model providers and models are accessible through the LLM Gateway for your organization, workspaces, users, or API keys.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](release-stages.md).
+> The LLM Gateway is in [beta](release-stages.md).
 
 A model access policy defines which providers and models are permitted through the [LLM Gateway](llm-gateway.md). The gateway blocks requests for providers or models the policy does not include, returning a `403` response. If no policy applies, all providers and models are available.
 
@@ -23,7 +23,7 @@ A model access policy lists one or more providers, each with an access mode:
 * **Selected models**: Only the models you specify are permitted. At least one model is required.
 
 > [!NOTE]
-> Model access policies do not yet support [custom model providers](llm-gateway-custom-providers.md). While a model access policy applies to a request, the gateway blocks the `/providers/{configName}` and `/models/{configName}` routes.
+> Model access policies do not yet support custom model providers. While a model access policy applies to a request, the gateway blocks the `/providers/{configName}` and `/models/{configName}` routes.
 
 ## Scopes and overrides
 

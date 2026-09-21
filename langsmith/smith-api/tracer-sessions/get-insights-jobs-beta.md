@@ -1,6 +1,6 @@
 ---
 title: "Get insights jobs (Beta)"
-description: "Get all clusters for a session."
+description: "List Insights jobs for a project."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-insights-jobs-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, get-insights-jobs-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, get-insights-jobs-beta]
 
 # Get insights jobs (Beta)
 
-> Get all clusters for a session.
+> List Insights jobs for a project.
 
 ## OpenAPI
 
@@ -168,13 +168,15 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights:
     get:
       tags:
         - tracer-sessions
       summary: Get insights jobs (Beta)
-      description: Get all clusters for a session.
+      description: List Insights jobs for a project.
       operationId: _Beta__Get_Insights_Jobs_api_v1_sessions__session_id__insights_get
       parameters:
         - name: session_id
@@ -248,7 +250,7 @@ components:
       required:
         - clustering_jobs
       title: GetRunClusteringJobsResponse
-      description: Response to get all cluster jobs for a session.
+      description: A collection of Insights jobs.
     HTTPValidationError:
       properties:
         detail:
@@ -317,7 +319,7 @@ components:
         - status
         - created_at
       title: RunClusteringJobPydantic
-      description: Session cluster job
+      description: An Insights job.
   securitySchemes:
     API Key:
       type: apiKey

@@ -11,9 +11,12 @@ tags: [docs, langsmith, llm-gateway-access]
 > Understand where gateway traces land and who can see and configure what.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](release-stages.md).
+> The LLM Gateway is in [beta](release-stages.md).
 
 Every call through the LLM Gateway is traced to LangSmith, and policy violations surface in [LangSmith Engine](engine.md) for triage.
+
+> [!NOTE]
+> Gateway traces record metadata (token counts, policy outcomes, caller identity) for every call. Input and output content is **not** logged by default, and traces without content are **not billed** against your LangSmith trace quota. Content logging, and the associated billing, only applies when you explicitly enable it with a [data policy](llm-gateway-data-policy.md).
 
 ## Where gateway traces appear
 
@@ -32,7 +35,7 @@ Gateway-proxied calls are distinguishable from direct LLM calls by the project t
 
 ### Trace content
 
-Trace content (request and response bodies) is off by default. Turn it on with a [data policy](llm-gateway-data-policy.md#data-retention), which applies to any traces emitted through the gateway that match the scope of the policy.
+Trace content (request and response bodies) is off by default. Traces without content are not billed against your LangSmith trace quota. Turn content logging on with a [data policy](llm-gateway-data-policy.md#data-retention), which applies to any traces emitted through the gateway that match the scope of the policy. Traces that match a content-logging data policy count toward your plan's trace volume.
 
 ## LangSmith Engine integration
 

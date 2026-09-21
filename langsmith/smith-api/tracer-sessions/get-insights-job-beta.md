@@ -1,6 +1,6 @@
 ---
 title: "Get insights job (Beta)"
-description: "Get a specific cluster job for a session."
+description: "Get an Insights job for a project."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-insights-job-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, get-insights-job-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, get-insights-job-beta]
 
 # Get insights job (Beta)
 
-> Get a specific cluster job for a session.
+> Get an Insights job for a project.
 
 ## OpenAPI
 
@@ -168,13 +168,15 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights/{job_id}:
     get:
       tags:
         - tracer-sessions
       summary: Get insights job (Beta)
-      description: Get a specific cluster job for a session.
+      description: Get an Insights job for a project.
       operationId: >-
         _Beta__Get_Insights_Job_api_v1_sessions__session_id__insights__job_id__get
       parameters:
@@ -280,7 +282,7 @@ components:
         - created_at
         - clusters
       title: GetRunClusteringJobResponse
-      description: Response to get a specific cluster job for a session.
+      description: An Insights job and the report it produced.
     HTTPValidationError:
       properties:
         detail:
@@ -361,8 +363,8 @@ components:
       type: object
       title: InsightsSummary
       description: >-
-        High level summary of an insights job that pulls out patterns and
-        specific traces.
+        High-level summary of an Insights report with patterns and specific
+        traces.
     HighlightedRun:
       properties:
         run_id:
@@ -397,9 +399,7 @@ components:
         - rank
         - highlight_reason
       title: HighlightedRun
-      description: >-
-        A trace highlighted in an insights report summary. Up to 10 per insights
-        job.
+      description: A trace highlighted in an Insights report summary. Up to 10 per report.
   securitySchemes:
     API Key:
       type: apiKey

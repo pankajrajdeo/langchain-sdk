@@ -86,7 +86,7 @@ Implement the selected quickstart path end to end: tools for add, multiply, and 
 For conceptual information, see [Graph API overview](graph-api.md) and [Functional API overview](functional-api.md).
 
 > [!NOTE]
-> For this example, you will need to set up a [Claude (Anthropic)](https://www.anthropic.com/) account and get an API key. Then, set the `ANTHROPIC_API_KEY` environment variable in your terminal. See [chat model integrations](../integrations/chat.md) for all available providers. If you use [LangSmith Gateway](../../langsmith/llm-gateway.md), you can [bring your own provider keys](../../langsmith/llm-gateway-quickstart.md) or use [Gateway Credits](../../langsmith/llm-gateway-credits.md) to access models without a provider key.
+> For this example, you will need to set up a [Claude (Anthropic)](https://www.anthropic.com/) account and get an API key. Then, set the `ANTHROPIC_API_KEY` environment variable in your terminal. See [chat model integrations](../integrations/chat.md) for all available providers. If you use [LangSmith Gateway](../../langsmith/llm-gateway.md), you can [bring your own provider keys](../../langsmith/llm-gateway-quickstart.md#send-a-request) or use [Gateway Credits](../../langsmith/llm-gateway-credits.md) to access models without a provider key.
 
 #### Use the Graph API
 ## 1. Define tools and model

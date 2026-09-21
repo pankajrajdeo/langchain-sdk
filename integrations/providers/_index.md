@@ -1,13 +1,13 @@
 ---
 title: "integrations/providers"
-description: "Index of 100 pages and 1 subdirectory under integrations/providers."
+description: "Index of 101 pages and 1 subdirectory under integrations/providers."
 category: "index"
 tags: [index, integrations, providers]
 ---
 
 # integrations/providers
 
-100 pages here, 101 pages including subdirectories.
+101 pages here, 102 pages including subdirectories.
 
 ## Directories
 
@@ -109,6 +109,7 @@ tags: [index, integrations, providers]
 - [Mcp toolbox integrations](toolbox.md) - Integrate with Mcp toolbox using LangChain Python.
 - [Truefoundry integrations](truefoundry.md) - Integrate with Truefoundry using LangChain Python.
 - [Trulens integrations](trulens.md) - Integrate with Trulens using LangChain Python.
+- [TypeSafe integrations](typesafe.md) - Integrate with TypeSafe using LangChain
 - [Unstructured integrations](unstructured.md) - Integrate with Unstructured using LangChain Python.
 - [Upstage integrations](upstage.md) - Integrate with Upstage using LangChain Python.
 - [VoyageAI integrations](voyageai.md) - Integrate with VoyageAI using LangChain Python.

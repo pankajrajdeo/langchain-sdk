@@ -10,6 +10,9 @@ tags: [docs, langsmith, webhooks]
 
 > Configure webhook notifications to receive POST requests when automation rules match new runs or threads in LangSmith.
 
+> [!NOTE]
+> This page covers **LangSmith automation webhooks**, POST notifications triggered when automation rules match runs or threads. If you are looking for **LangGraph API webhooks** (a callback parameter you pass when creating or streaming a run), see [Use webhooks](use-webhooks.md).
+
 When you add a webhook URL on an automation action, LangSmith makes a POST request to your webhook endpoint any time the rules you defined match any new runs or threads.
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/webhook.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=da310e976aa8824071d65b8fb44b9123" alt="Webhook" width="872" height="991" data-path="langsmith/images/webhook.png" />
@@ -213,7 +216,7 @@ Now the webhook rule will skip any run that does not yet have an `answer_usefuln
 > has(feedback_key, "answer_usefulness") and feedback_score < 0.5
 > ```
 >
-> For the full filter syntax, refer to [Filter traces](filter-traces-in-application.md).
+> For the full filter syntax, refer to [Filter traces (ClickHouse)](filter-traces-in-application.md).
 
 > [!NOTE]
 > Within a single automation rule, actions execute in a fixed order: annotation queue → dataset → webhook → evaluation. This means that if your webhook and evaluator are configured on the **same** rule, the webhook will always fire before the evaluation completes on that rule's run. To ensure the webhook receives evaluation scores, keep the webhook and evaluator as **separate rules** and use a feedback filter on the webhook rule as described in the example.

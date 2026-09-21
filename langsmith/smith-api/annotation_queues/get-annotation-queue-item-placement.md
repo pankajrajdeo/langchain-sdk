@@ -1,6 +1,6 @@
 ---
 title: "Get annotation queue item placement"
-description: "Resolve a RUN or THREAD item to its current review section and zero-based position for deep linking."
+description: "Resolve a RUN or THREAD item to its current review section and zero-based position for deep linking. The returned cursor counts RUN and THREAD items together, so it is only valid for a list request..."
 source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/get-annotation-queue-item-placement"
 category: "docs"
 tags: [docs, langsmith, smith-api, annotation_queues, get-annotation-queue-item-placement]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, annotation_queues, get-annotation-queue-item-
 
 # Get annotation queue item placement
 
-> Resolve a RUN or THREAD item to its current review section and zero-based position for deep linking.
+> Resolve a RUN or THREAD item to its current review section and zero-based position for deep linking. The returned cursor counts RUN and THREAD items together, so it is only valid for a list request with no item_type or start-time filter.
 
 ## OpenAPI
 
@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/annotation-queues/{queue_id}/items/{item_id}/placement:
     get:
@@ -176,7 +178,9 @@ paths:
       summary: Get annotation queue item placement
       description: >-
         Resolve a RUN or THREAD item to its current review section and
-        zero-based position for deep linking.
+        zero-based position for deep linking. The returned cursor counts RUN and
+        THREAD items together, so it is only valid for a list request with no
+        item_type or start-time filter.
       parameters:
         - description: Annotation queue ID
           name: queue_id

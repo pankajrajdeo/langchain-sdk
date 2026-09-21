@@ -657,7 +657,7 @@ const addContextMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   systemPrompt: "You are a helpful assistant.",
   middleware: [addContextMiddleware],
 });
@@ -679,7 +679,7 @@ const addContextMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   systemPrompt: "You are a helpful assistant.",
   middleware: [addContextMiddleware],
 });

@@ -10,6 +10,9 @@ tags: [docs, langsmith, llm-gateway-monitoring]
 
 > View and analyze LLM Gateway costs by user, API key, and model.
 
+> [!NOTE]
+> The LLM Gateway is in [beta](release-stages.md).
+
 The LLM Gateway **Spend Monitoring** dashboard shows how much LLM cost a [workspace](administration-overview.md#workspaces) has accrued through the gateway. Use it to compare spend over time and identify the users, [API keys](create-account-api-key.md), and models that account for that spend. The dashboard covers one workspace at a time; switch workspaces to compare them.
 
 Viewing the dashboard requires the [Organization Admin](rbac.md#organization-admin) role and a Plus or Enterprise [plan](pricing-plans.md). Without both, the **Usage** tab does not appear.

@@ -14,6 +14,8 @@ The Model Context Protocol (MCP) is an open protocol for describing tools and da
 
 The MCP endpoint is available at `/mcp` on [Agent Server](agent-server.md).
 
+Managed Deep Agents deployments run on Agent Server, so they expose the same `/mcp` endpoint. For Managed Deep Agents URL discovery and identity headers, see [Connect MCP clients to a managed deep agent](python/managed-deep-agents-mcp-endpoint.md).
+
 You can set up [custom authentication middleware](custom-auth.md) to authenticate a user with an MCP server to get access to user-scoped tools within your LangSmith deployment.
 
 An example architecture for this flow:

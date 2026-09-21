@@ -192,6 +192,33 @@ paths:
             description: Serving URL of the deployment to filter by.
             title: Url
           description: Serving URL of the deployment to filter by.
+        - name: agent_id
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - type: string
+                minLength: 1
+                maxLength: 255
+              - type: 'null'
+            description: Exact agent ID (slug) to filter by. Requires agent mode.
+            title: Agent Id
+          description: Exact agent ID (slug) to filter by. Requires agent mode.
+        - name: agent_environment
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - enum:
+                  - local
+                  - development
+                  - staging
+                  - production
+                type: string
+              - type: 'null'
+            description: Agent environment to filter by. Requires agent mode.
+            title: Agent Environment
+          description: Agent environment to filter by. Requires agent mode.
       responses:
         '200':
           description: Successful Response
@@ -241,12 +268,23 @@ components:
     Deployment:
       properties:
         name:
-          type: string
+          anyOf:
+            - type: string
+              minLength: 1
+            - type: 'null'
           title: Name
           description: >-
-            Name of the deployment.<br><br>A LangSmith tracing project with the
-            same name will also automatically be created. This cannot be changed
-            once the deployment is created.
+            Deployment name. Required when agent is omitted; retained as the
+            agent identity in the production environment when agent associations
+            are enabled. Omit when supplying agent to generate a deployment
+            name.
+        agent:
+          anyOf:
+            - $ref: '#/components/schemas/DeploymentAgent'
+            - type: 'null'
+          description: >-
+            Agent and environment to deploy. Both fields are required when
+            supplied.
         source:
           type: string
           enum:
@@ -427,7 +465,6 @@ components:
             independent compute/database scaling.
       type: object
       required:
-        - name
         - source
         - source_config
         - source_revision_config
@@ -467,6 +504,27 @@ components:
         - msg
         - type
       title: ValidationError
+    DeploymentAgent:
+      properties:
+        agent_id:
+          type: string
+          maxLength: 255
+          minLength: 1
+          title: Agent Id
+        environment:
+          type: string
+          enum:
+            - local
+            - development
+            - staging
+            - production
+          title: Environment
+      type: object
+      required:
+        - agent_id
+        - environment
+      title: DeploymentAgent
+      description: Agent identity and environment for a deployment.
     SourceConfig:
       properties:
         integration_id:

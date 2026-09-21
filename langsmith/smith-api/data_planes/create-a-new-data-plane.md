@@ -169,6 +169,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /orgs/current/data-planes:
     post:
@@ -244,6 +246,11 @@ components:
     data_planes.CreateDataPlaneRequestAws:
       type: object
       properties:
+        additional_tags:
+          type: array
+          maxItems: 40
+          items:
+            $ref: '#/components/schemas/aws.ResourceTag'
         byovpc_id:
           description: >-
             The ID of the customer-managed VPC to deploy into when deploying in
@@ -340,6 +347,18 @@ components:
           type: string
         type:
           type: string
+    aws.ResourceTag:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          maxLength: 128
+          minLength: 1
+        value:
+          type: string
+          maxLength: 256
     data_planes.DataPlaneFirewallSettings:
       type: object
       required:

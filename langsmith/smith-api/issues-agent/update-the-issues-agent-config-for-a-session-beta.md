@@ -172,6 +172,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/sessions/{session_id}/issues-agent:
     patch:
@@ -308,6 +310,13 @@ components:
             Freeform user preferences. Send "" to clear (the frontend must not
             send null).
           type: string
+        validation_deployment_id:
+          description: >-
+            ValidationDeploymentID is a deployment UUID or LangSmith deployment
+            URL,
+
+            or an empty string to disable validation.
+          type: string
     agent.IssuesAgent:
       type: object
       properties:
@@ -435,6 +444,13 @@ components:
             but
 
             never edits it. NULL when the user hasn't set any.
+          type: string
+        validation_deployment_id:
+          description: >-
+            ValidationDeploymentID selects the deployment used for baseline
+            replay
+
+            and as the parent of fix-verification previews.
           type: string
     agent.ErrorResponse:
       type: object

@@ -1,6 +1,6 @@
 ---
 title: "Auto-generate insights job config (Beta)"
-description: "Auto-generate an insights job config."
+description: "Generate an Insights job configuration for a project."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/auto-generate-insights-job-config-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, auto-generate-insights-job-config-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, auto-generate-insights-job-c
 
 # Auto-generate insights job config (Beta)
 
-> Auto-generate an insights job config.
+> Generate an Insights job configuration for a project.
 
 ## OpenAPI
 
@@ -168,13 +168,15 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights/configs/generate:
     post:
       tags:
         - tracer-sessions
       summary: Auto-generate insights job config (Beta)
-      description: Auto-generate an insights job config.
+      description: Generate an Insights job configuration for a project.
       operationId: >-
         _Beta__Auto_Generate_Insights_Job_Config_api_v1_sessions__session_id__insights_configs_generate_post
       parameters:
@@ -238,7 +240,7 @@ components:
       required:
         - user_context
       title: GenerateClusteringJobConfigRequest
-      description: Request to auto-generate a clustering job config.
+      description: Request to generate an Insights job configuration.
     GenerateClusteringJobConfigResponse:
       properties:
         summary_prompt:
@@ -261,9 +263,7 @@ components:
       required:
         - summary_prompt
       title: GenerateClusteringJobConfigResponse
-      description: >-
-        Auto-generated clustering job config (not persisted; frontend creates
-        the config).
+      description: Generated Insights job configuration. This configuration is not saved.
     HTTPValidationError:
       properties:
         detail:

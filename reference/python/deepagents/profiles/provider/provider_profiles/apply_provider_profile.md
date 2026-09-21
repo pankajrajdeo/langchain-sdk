@@ -36,7 +36,7 @@ user-provided values from config files or explicit overrides are never
 silently replaced.
 
 When no profile is registered for `spec`, returns a copy of `kwargs`
-unchanged. This keeps the helper safe to call unconditionally.
+unchanged and logs the miss at `DEBUG`.
 
 ## Signature
 
@@ -53,7 +53,7 @@ apply_provider_profile(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `spec` | `str` | Yes | Model spec in `provider:model` format, or a bare provider/model identifier.  Same shape accepted by `get_provider_profile`. |
+| `spec` | `str` | Yes | Model spec to look up. See `get_provider_profile` for accepted formats. |
 | `kwargs` | `Mapping[str, Any] \| None` | No | Caller-supplied kwargs that override profile defaults on shared keys.  Defaults to an empty mapping. (default: `None`) |
 | `run_pre_init` | `bool` | No | When `True` (default), invokes the profile's `pre_init` hook before composing kwargs.  Set `False` to inspect the merged kwargs without firing side effects (e.g. dry-run, validation). (default: `True`) |
 
@@ -65,4 +65,4 @@ A fresh `dict` ready to spread into `init_chat_model`.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/1aae3746682a65c837c5dd0f165b685253fe9465/libs/deepagents/deepagents/profiles/provider/provider_profiles.py#L318)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/profiles/provider/provider_profiles.py#L345)

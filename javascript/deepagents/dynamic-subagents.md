@@ -65,7 +65,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [{
     name: "reviewer",
     description: "Reviews code for security issues, citing lines and severity",
@@ -82,7 +82,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [{
     name: "reviewer",
     description: "Reviews code for security issues, citing lines and severity",
@@ -288,7 +288,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [
     {
       name: "bug-fixer",
@@ -317,7 +317,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [
     {
       name: "bug-fixer",
@@ -512,7 +512,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [{
     name: "reviewer",
     description: "Reviews code for security issues, citing lines and severity",
@@ -529,7 +529,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [{
     name: "reviewer",
     description: "Reviews code for security issues, citing lines and severity",
@@ -694,7 +694,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [
     {
       name: "reviewer",
@@ -718,7 +718,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [
     {
       name: "reviewer",
@@ -897,7 +897,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [{
     name: "architect",
     description: "Proposes a database schema design with tradeoff analysis",
@@ -914,7 +914,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [{
     name: "architect",
     description: "Proposes a database schema design with tradeoff analysis",
@@ -1073,7 +1073,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [
     {
       name: "writer",
@@ -1097,7 +1097,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [
     {
       name: "writer",
@@ -1273,7 +1273,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [{
     name: "analyzer",
     description: "Analyzes code for unused exports, functions, and dead code paths",
@@ -1290,7 +1290,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [{
     name: "analyzer",
     description: "Analyzes code for unused exports, functions, and dead code paths",
@@ -1413,7 +1413,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [{ name: "reviewer", description: "Reviews code", systemPrompt: "Review code." }],
   middleware: [createCodeInterpreterMiddleware({ subagents: false })],
 });
@@ -1426,7 +1426,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [{ name: "reviewer", description: "Reviews code", systemPrompt: "Review code." }],
   middleware: [createCodeInterpreterMiddleware({ subagents: false })],
 });

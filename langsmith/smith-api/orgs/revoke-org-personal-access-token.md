@@ -10,8 +10,9 @@ tags: [docs, langsmith, smith-api, orgs, revoke-org-personal-access-token]
 
 > Revoke a personal access token, so it stops working but its record remains.
 
-The token is marked revoked rather than deleted, and its expiry is moved to the
-revocation time so it stops authenticating. Callers may always revoke their own
+The token is marked revoked rather than deleted, and stops authenticating as
+soon as its cached auth entry refreshes. Its expiry is left untouched, so the
+revocation can be lifted by deleting it. Callers may always revoke their own
 tokens; organization admins may revoke any member's.
 
 ## OpenAPI
@@ -172,6 +173,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/orgs/current/personal-access-tokens/{pat_id}/revocation:
     post:
@@ -182,11 +185,14 @@ paths:
         Revoke a personal access token, so it stops working but its record
         remains.
 
-        The token is marked revoked rather than deleted, and its expiry is moved
-        to the
+        The token is marked revoked rather than deleted, and stops
+        authenticating as
 
-        revocation time so it stops authenticating. Callers may always revoke
-        their own
+        soon as its cached auth entry refreshes. Its expiry is left untouched,
+        so the
+
+        revocation can be lifted by deleting it. Callers may always revoke their
+        own
 
         tokens; organization admins may revoke any member's.
       operationId: >-

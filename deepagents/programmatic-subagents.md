@@ -65,7 +65,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[{
         "name": "reviewer",
         "description": "Reviews code for security issues, citing lines and severity",
@@ -291,7 +291,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[
         {
             "name": "bug-fixer",
@@ -515,7 +515,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[{
         "name": "reviewer",
         "description": "Reviews code for security issues, citing lines and severity",
@@ -697,7 +697,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[
         {
             "name": "reviewer",
@@ -900,7 +900,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[{
         "name": "architect",
         "description": "Proposes a database schema design with tradeoff analysis",
@@ -1076,7 +1076,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[
         {
             "name": "writer",
@@ -1276,7 +1276,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[{
         "name": "analyzer",
         "description": "Analyzes code for unused exports, functions, and dead code paths",
@@ -1416,7 +1416,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[{"name": "reviewer", "description": "Reviews code", "system_prompt": "Review code."}],
     middleware=[CodeInterpreterMiddleware(subagents=False)],
 )

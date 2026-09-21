@@ -135,7 +135,7 @@ def get_weather(city: str) -> str:
     return f"It's always sunny in {city}!"
 
 agent = create_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[get_weather],
     checkpointer=InMemorySaver()
 )

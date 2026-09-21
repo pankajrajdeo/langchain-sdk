@@ -1,6 +1,6 @@
 ---
 title: "Get run cluster from insights job (Beta)"
-description: "Get a specific cluster for a session."
+description: "Get a cluster from the report produced by an Insights job."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-run-cluster-from-insights-job-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, get-run-cluster-from-insights-job-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, get-run-cluster-from-insight
 
 # Get run cluster from insights job (Beta)
 
-> Get a specific cluster for a session.
+> Get a cluster from the report produced by an Insights job.
 
 ## OpenAPI
 
@@ -168,13 +168,15 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights/{job_id}/clusters/{cluster_id}:
     get:
       tags:
         - tracer-sessions
       summary: Get run cluster from insights job (Beta)
-      description: Get a specific cluster for a session.
+      description: Get a cluster from the report produced by an Insights job.
       operationId: >-
         _Beta__Get_Run_Cluster_from_Insights_Job_api_v1_sessions__session_id__insights__job_id__clusters__cluster_id__get
       parameters:
@@ -250,7 +252,7 @@ components:
         - name
         - description
       title: GetRunClusterResponse
-      description: Response to get a specific cluster from a specific cluster job.
+      description: A cluster in an Insights report.
     HTTPValidationError:
       properties:
         detail:

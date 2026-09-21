@@ -166,6 +166,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/orgs/current:
     get:
@@ -590,10 +592,6 @@ components:
           type: boolean
           title: Tuned Evals Enabled
           default: false
-        gateway_data_protection_enabled:
-          type: boolean
-          title: Gateway Data Protection Enabled
-          default: true
         gateway_pii_redaction_enabled:
           type: boolean
           title: Gateway Pii Redaction Enabled

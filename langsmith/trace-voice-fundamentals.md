@@ -114,7 +114,7 @@ def run_conversation(session_id: str, conversation_audio: bytes):
 
 ### Mark the trace as audio
 
-Set the `ls_modality` metadata field to `"audio"` on the root run. This flags the trace as a voice trace so LangSmith can render it appropriately and so you can [filter](filter-traces-in-application.md) for voice traces in your project.
+Set the `ls_modality` metadata field to `"audio"` on the root run. This flags the trace as a voice trace so LangSmith can render it appropriately and so you can [filter](filter-traces.md) for voice traces in your project.
 
 **Python**
 

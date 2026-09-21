@@ -170,6 +170,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v2/threads/{thread_id}/traces:
     get:
@@ -218,18 +220,18 @@ paths:
           name: page_size
           in: query
           schema:
-            maximum: 100
             type: integer
-            default: 20
+            maximum: 100
             minimum: 1
+            default: 20
             title: Page Size
         - description: '`project_id` is the tracing project UUID (required).'
           name: project_id
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - example:
             - NAME
@@ -244,7 +246,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - THREAD_ID
@@ -271,8 +272,26 @@ paths:
                 - COMPLETION_COST_DETAILS
                 - NAME
                 - ERROR_PREVIEW
+                - TURN_NUMBER
               type: string
+            type: array
             title: Selects
+        - description: >-
+            `trace_filter` narrows traces by applying a LangSmith filter
+            expression to each trace's root run.
+          name: trace_filter
+          in: query
+          schema:
+            type: string
+            title: Trace Filter
+        - description: >-
+            `tree_filter` narrows traces to those containing at least one run
+            that matches the LangSmith filter expression.
+          name: tree_filter
+          in: query
+          schema:
+            type: string
+            title: Tree Filter
       responses:
         '200':
           description: items and pagination
@@ -317,9 +336,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '501':
-          description: >-
-            V2 filter syntax is unavailable for this deployment; use legacy
-            function-style filters or set SMITHDB_QUERY_ENABLED=true
+          description: V2 filter syntax or TURN_NUMBER is unavailable for this deployment
           content:
             application/json:
               schema:
@@ -541,6 +558,15 @@ components:
           type: string
           format: uuid
           example: 018e4c7e-a9fb-7ef0-a5b6-6ea3a82e9327
+        turn_number:
+          description: >-
+            `turn_number` is the 1-based position in the whole thread, ordered
+            by start_time then trace_id ascending, before filtering or
+            pagination. Updates and deletions can change this position. Omitted
+            unless TURN_NUMBER is included in `selects`.
+          type: integer
+          minimum: 1
+          example: 1
     shared.ParseErrorDetails:
       description: Structured fields describing an adapter parse failure.
       type: object

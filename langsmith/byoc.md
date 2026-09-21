@@ -55,12 +55,12 @@ The following features are supported:
 * **[LangSmith MCP](langsmith-remote-mcp.md)**: Connect MCP-compatible clients to LangSmith to query data.
 * **[Fleet](fleet/index.md)**: Build and run no-code agents from templates, connectors, and channels.
 * **[SmithDB](smithdb-sdk-migration.md)**: The purpose-built observability backend for trace data, persisting to S3 in your account.
+* **[Engine](engine-overview.md)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces. Engine uses the LangSmith Intelligence service for model work. See the [self-hosted Engine architecture](engine-self-hosted.md#how-it-works) for details.
 
 The following features are planned but not yet supported:
 
 * **[Managed Deep Agents](python/managed-deep-agents-overview.md)**: LangChain-hosted deep agents with connectors, channels, and schedules.
 * **[LLM auth proxy](llm-auth-proxy-self-hosted.md)**: Enforce your own authentication flows for model invocations so provider credentials are never exposed to end users.
-* **[Engine](engine-overview.md)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces.
 
 ## Prerequisites
 

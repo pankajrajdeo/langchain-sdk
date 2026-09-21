@@ -15,12 +15,14 @@ tags: [reference, langchain, agents, middleware, human_in_the_loop, interruptonc
 Optional predicate controlling whether to interrupt for a given tool call.
 
 Receives a `ToolCallRequest` and returns `True` to interrupt or `False` to
-auto-approve. Works in both `"batch"` and `"per_call"` modes.
+auto-approve. The predicate is called during `after_model` before the tool
+call is added to the batched human-in-the-loop request.
 
-In `"batch"` mode the request is constructed with `tool=None` and
-`runtime` set to the node-level `Runtime` (not a `ToolRuntime`), so
-`request.runtime.tool_call_id` and `request.runtime.tools` are not available.
-In `"per_call"` mode the full `ToolCallRequest` from `wrap_tool_call` is passed.
+The request is constructed with `tool=None` and a new `ToolRuntime`. The
+`ToolRuntime` copies `context`, `store`, `stream_writer`, `execution_info`,
+and `server_info` from the node-level `Runtime`, while `tool_call_id` is
+populated from the current tool call. The `tools` argument is not supplied,
+so it uses its default empty list.
 
 ## Signature
 
@@ -42,4 +44,4 @@ config = InterruptOnConfig(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/79cab2dc7f58be720cac43db3677b4c1fd971f91/libs/langchain_v1/langchain/agents/middleware/human_in_the_loop.py#L195)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a18de590e7ccf5c647fbf3d689e5f1a15f78e9f5/libs/langchain_v1/langchain/agents/middleware/human_in_the_loop.py#L209)

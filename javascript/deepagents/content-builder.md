@@ -655,7 +655,7 @@ function createContentWriter() {
   };
 
   return createDeepAgent({
-    model: "anthropic:claude-sonnet-4-6",
+    model: "anthropic:claude-sonnet-5",
     memory: ["./AGENTS.md"],
     skills: ["./skills/"],
     tools: [generateCover, generateSocialImage],
@@ -681,7 +681,7 @@ function createContentWriter() {
   };
 
   return createDeepAgent({
-    model: "openrouter:openrouter:z-ai/glm-5.2",
+    model: "openrouter:z-ai/glm-5.2",
     memory: ["./AGENTS.md"],
     skills: ["./skills/"],
     tools: [generateCover, generateSocialImage],

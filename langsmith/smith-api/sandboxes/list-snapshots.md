@@ -170,6 +170,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v2/sandboxes/snapshots:
     get:
@@ -239,9 +241,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Label
         - description: Sort column (name, status, created_at)
           name: sort_by

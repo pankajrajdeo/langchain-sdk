@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/evaluators:
     get:
@@ -196,9 +198,9 @@ paths:
           style: form
           explode: false
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Tag Value Id
         - description: Filter by feedback key
           name: feedback_key
@@ -212,10 +214,18 @@ paths:
           style: form
           explode: false
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Resource Id
+        - description: >-
+            Filter to evaluators attached to the agent's environments or tagged
+            datasets
+          name: agent_id
+          in: query
+          schema:
+            type: string
+            title: Agent Id
         - description: Field to sort by
           name: sort_by
           in: query
@@ -335,6 +345,8 @@ components:
     evaluators.CodeEvaluator:
       type: object
       properties:
+        advanced_features_enabled:
+          type: boolean
         code:
           type: string
         dependencies:
@@ -348,10 +360,6 @@ components:
         language:
           description: 'Default: "python"'
           type: string
-        workspace_secrets_keys:
-          items:
-            type: string
-          type: array
     evaluators.LLMEvaluator:
       type: object
       properties:

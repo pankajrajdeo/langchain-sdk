@@ -129,7 +129,7 @@ const getUserInfo = tool(() => "No user profile on file.", {
 const checkpointer = new MemorySaver(); // [!code highlight]
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [getUserInfo],
   checkpointer,
 });
@@ -166,7 +166,7 @@ const getUserInfo = tool(() => "No user profile on file.", {
 const checkpointer = new MemorySaver(); // [!code highlight]
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [getUserInfo],
   checkpointer,
 });
@@ -778,11 +778,11 @@ for (const message of result.messages) {
     }
 }%%
 graph TD
-    S(["\_\_start\_\_"])
+    S(["`\_\_start\_\_`"])
     PRE(before_model)
     MODEL(model)
     TOOLS(tools)
-    END(["\_\_end\_\_"])
+    END(["`\_\_end\_\_`"])
     S --> PRE
     PRE --> MODEL
     MODEL -.-> TOOLS

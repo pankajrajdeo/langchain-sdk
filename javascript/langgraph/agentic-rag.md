@@ -212,7 +212,7 @@ import { MessagesAnnotation } from "@langchain/langgraph";
 
 const State = MessagesAnnotation;
 const model = new ChatOpenAI({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   temperature: 0,
 }).bindTools(tools);
 
@@ -232,7 +232,7 @@ import { MessagesAnnotation } from "@langchain/langgraph";
 
 const State = MessagesAnnotation;
 const model = new ChatOpenAI({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   temperature: 0,
 }).bindTools(tools);
 
@@ -503,7 +503,7 @@ const gradeDocumentsSchema = z.object({
 });
 
 const gradeModel = new ChatOpenAI({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   temperature: 0,
 }).withStructuredOutput(gradeDocumentsSchema);
 const gradeFallbackModel = new ChatOpenAI({
@@ -564,7 +564,7 @@ const gradeDocumentsSchema = z.object({
 });
 
 const gradeModel = new ChatOpenAI({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   temperature: 0,
 }).withStructuredOutput(gradeDocumentsSchema);
 const gradeFallbackModel = new ChatOpenAI({

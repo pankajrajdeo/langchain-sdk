@@ -12,7 +12,7 @@ LangSmith supports sending arbitrary metadata and tags along with traces.
 
 Tags are strings that can be used to categorize or label a trace. Metadata is a dictionary of key-value pairs that can be used to store additional information about a trace.
 
-Both are useful for associating additional information with a trace, such as the environment in which it was executed, the user who initiated it, or an internal correlation ID. For more information on tags and metadata, see the [Concepts](observability-concepts.md#tags) page. For information on how to query traces and runs by metadata and tags, see the [Filter traces in the application](filter-traces-in-application.md) page.
+Both are useful for associating additional information with a trace, such as the environment in which it was executed, the user who initiated it, or an internal correlation ID. For more information on tags and metadata, see the [Concepts](observability-concepts.md#tags) page. For information on how to query traces and runs by metadata and tags, see the [Filter traces](filter-traces.md) page.
 
 **Python**
 

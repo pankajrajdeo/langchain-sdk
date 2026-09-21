@@ -87,7 +87,7 @@ In the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_cam
 
 3. Select an **Item Type**, either **Runs** or **Threads**. The item type determines which filter fields and actions are available, so set it before configuring either. For more information, refer to [Set the item type to runs or threads](#set-the-item-type-to-runs-or-threads).
 
-4. Create a filter. Automation rule filters work the same way as filters applied to traces in the project. For more information on filters, you can refer to [Filter traces](filter-traces-in-application.md).
+4. Create a filter. Rules use the filter builder, with the same fields and operators described in [Filter traces (ClickHouse)](filter-traces-in-application.md).
 
 5. Configure a **Sampling Rate** to control what percentage of the filtered items trigger the automation action. The form accepts a percentage from 0 to 100. For example, a sampling rate of 50% sends half of the items that pass the filter to the action. The equivalent API field, `sampling_rate`, takes a decimal from 0 to 1.
 

@@ -76,8 +76,6 @@ pip install "langsmith[sandbox]"
 uv add "langsmith[sandbox]"
 ```
 
-**Google**
-
 ```python
 from deepagents import create_deep_agent
 from deepagents.backends import LangSmithSandbox
@@ -89,199 +87,7 @@ ls_sandbox = client.create_sandbox()
 backend = LangSmithSandbox(sandbox=ls_sandbox)
 
 agent = create_deep_agent(
-    model=ChatAnthropic(model="google_genai:gemini-3.6-flash"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    client.delete_sandbox(ls_sandbox.name)
-```
-
-**OpenAI**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LangSmithSandbox
-from langchain_anthropic import ChatAnthropic
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="openai:gpt-5.5"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    client.delete_sandbox(ls_sandbox.name)
-```
-
-**Anthropic**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LangSmithSandbox
-from langchain_anthropic import ChatAnthropic
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="anthropic:claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    client.delete_sandbox(ls_sandbox.name)
-```
-
-**OpenRouter**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LangSmithSandbox
-from langchain_anthropic import ChatAnthropic
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="openrouter:z-ai/glm-5.2"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    client.delete_sandbox(ls_sandbox.name)
-```
-
-**Fireworks**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LangSmithSandbox
-from langchain_anthropic import ChatAnthropic
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="fireworks:accounts/fireworks/models/glm-5p2"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    client.delete_sandbox(ls_sandbox.name)
-```
-
-**Baseten**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LangSmithSandbox
-from langchain_anthropic import ChatAnthropic
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="baseten:zai-org/GLM-5.2"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    client.delete_sandbox(ls_sandbox.name)
-```
-
-**Ollama**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LangSmithSandbox
-from langchain_anthropic import ChatAnthropic
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="ollama:north-mini-code-1.0"),
+    model=ChatAnthropic(model="claude-sonnet-4-6"),
     system_prompt="You are a Python coding assistant with sandbox access.",
     backend=backend,
 )
@@ -316,8 +122,6 @@ pip install langchain-daytona
 uv add langchain-daytona
 ```
 
-**Google**
-
 ```python
 from daytona import Daytona
 from deepagents import create_deep_agent
@@ -328,199 +132,7 @@ sandbox = Daytona().create()
 backend = DaytonaSandbox(sandbox=sandbox)
 
 agent = create_deep_agent(
-    model=ChatAnthropic(model="google_genai:gemini-3.6-flash"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
-```
-
-**OpenAI**
-
-```python
-from daytona import Daytona
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="openai:gpt-5.5"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
-```
-
-**Anthropic**
-
-```python
-from daytona import Daytona
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="anthropic:claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
-```
-
-**OpenRouter**
-
-```python
-from daytona import Daytona
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="openrouter:z-ai/glm-5.2"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
-```
-
-**Fireworks**
-
-```python
-from daytona import Daytona
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="fireworks:accounts/fireworks/models/glm-5p2"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
-```
-
-**Baseten**
-
-```python
-from daytona import Daytona
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="baseten:zai-org/GLM-5.2"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
-```
-
-**Ollama**
-
-```python
-from daytona import Daytona
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="ollama:north-mini-code-1.0"),
+    model=ChatAnthropic(model="claude-sonnet-4-6"),
     system_prompt="You are a Python coding assistant with sandbox access.",
     backend=backend,
 )
@@ -828,7 +440,7 @@ async def agent(config: RunnableConfig):
             idle_ttl_seconds=3600,  # TTL: clean up when idle
         )
     return create_deep_agent(
-        model="anthropic:claude-sonnet-4-6",
+        model="anthropic:claude-sonnet-5",
         backend=LangSmithSandbox(sandbox=ls_sandbox),
     )
 ```
@@ -1043,7 +655,7 @@ async def agent(config: RunnableConfig):
     else:
         ls_sandbox = client.create_sandbox(name=sandbox_name)
     return create_deep_agent(
-        model="anthropic:claude-sonnet-4-6",
+        model="anthropic:claude-sonnet-5",
         backend=LangSmithSandbox(sandbox=ls_sandbox),
     )
 ```
@@ -1286,7 +898,7 @@ ls_sandbox = client.create_sandbox()
 backend = LangSmithSandbox(sandbox=ls_sandbox)
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=backend,
     system_prompt="You are a coding assistant with sandbox access. You can create and run code in the sandbox.",
 )

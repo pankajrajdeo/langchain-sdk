@@ -1,6 +1,6 @@
 ---
 title: "Delete insights job config (Beta)"
-description: "Delete an insights job config."
+description: "Delete an Insights job configuration for a project."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/delete-insights-job-config-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, delete-insights-job-config-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, delete-insights-job-config-b
 
 # Delete insights job config (Beta)
 
-> Delete an insights job config.
+> Delete an Insights job configuration for a project.
 
 ## OpenAPI
 
@@ -168,13 +168,15 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights/configs/{config_id}:
     delete:
       tags:
         - tracer-sessions
       summary: Delete insights job config (Beta)
-      description: Delete an insights job config.
+      description: Delete an Insights job configuration for a project.
       operationId: >-
         _Beta__Delete_Insights_Job_Config_api_v1_sessions__session_id__insights_configs__config_id__delete
       parameters:
@@ -225,7 +227,7 @@ components:
         - id
         - message
       title: DeleteClusteringJobConfigResponse
-      description: Response to delete a clustering job config.
+      description: Confirmation that an Insights job configuration was deleted.
     HTTPValidationError:
       properties:
         detail:

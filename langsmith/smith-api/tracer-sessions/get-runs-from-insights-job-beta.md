@@ -1,6 +1,6 @@
 ---
 title: "Get runs from insights job (Beta)"
-description: "Get all runs for a cluster job, optionally filtered by cluster."
+description: "List runs analyzed by an Insights job, optionally filtered by report cluster."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-runs-from-insights-job-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, get-runs-from-insights-job-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, get-runs-from-insights-job-b
 
 # Get runs from insights job (Beta)
 
-> Get all runs for a cluster job, optionally filtered by cluster.
+> List runs analyzed by an Insights job, optionally filtered by report cluster.
 
 ## OpenAPI
 
@@ -168,13 +168,17 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights/{job_id}/runs:
     get:
       tags:
         - tracer-sessions
       summary: Get runs from insights job (Beta)
-      description: Get all runs for a cluster job, optionally filtered by cluster.
+      description: >-
+        List runs analyzed by an Insights job, optionally filtered by report
+        cluster.
       operationId: >-
         _Beta__Get_Runs_from_Insights_Job_api_v1_sessions__session_id__insights__job_id__runs_get
       parameters:

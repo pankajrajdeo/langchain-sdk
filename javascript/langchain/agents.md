@@ -42,7 +42,7 @@ var agent = createAgent({ model: "openai:gpt-5.5", tools });
 ```ts
 import { createAgent } from "langchain";
 
-var agent = createAgent({ model: "anthropic:claude-sonnet-4-6", tools });
+var agent = createAgent({ model: "anthropic:claude-sonnet-5", tools });
 ```
 
 **OpenRouter**
@@ -50,7 +50,7 @@ var agent = createAgent({ model: "anthropic:claude-sonnet-4-6", tools });
 ```ts
 import { createAgent } from "langchain";
 
-var agent = createAgent({ model: "openrouter:openrouter:z-ai/glm-5.2", tools });
+var agent = createAgent({ model: "openrouter:z-ai/glm-5.2", tools });
 ```
 
 **Fireworks**
@@ -111,7 +111,7 @@ var agent = createAgent({ model: "openai:gpt-5.5", tools });
 ```ts
 import { createAgent } from "langchain";
 
-var agent = createAgent({ model: "anthropic:claude-sonnet-4-6", tools });
+var agent = createAgent({ model: "anthropic:claude-sonnet-5", tools });
 ```
 
 **OpenRouter**
@@ -119,7 +119,7 @@ var agent = createAgent({ model: "anthropic:claude-sonnet-4-6", tools });
 ```ts
 import { createAgent } from "langchain";
 
-var agent = createAgent({ model: "openrouter:openrouter:z-ai/glm-5.2", tools });
+var agent = createAgent({ model: "openrouter:z-ai/glm-5.2", tools });
 ```
 
 **Fireworks**
@@ -192,7 +192,7 @@ var search = tool(({ query }) => `Results for: ${query}`, {
   schema: z.object({ query: z.string() }),
 });
 
-var agent = createAgent({ model: "anthropic:claude-sonnet-4-6", tools: [search] });
+var agent = createAgent({ model: "anthropic:claude-sonnet-5", tools: [search] });
 ```
 
 **OpenRouter**
@@ -207,7 +207,7 @@ var search = tool(({ query }) => `Results for: ${query}`, {
   schema: z.object({ query: z.string() }),
 });
 
-var agent = createAgent({ model: "openrouter:openrouter:z-ai/glm-5.2", tools: [search] });
+var agent = createAgent({ model: "openrouter:z-ai/glm-5.2", tools: [search] });
 ```
 
 **Fireworks**
@@ -283,7 +283,7 @@ var agent = createAgent({
 
 ```ts
 var agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools,
   systemPrompt: "You are a helpful assistant. Be concise and accurate.",
 });
@@ -293,7 +293,7 @@ var agent = createAgent({
 
 ```ts
 var agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools,
   systemPrompt: "You are a helpful assistant. Be concise and accurate.",
 });
@@ -371,7 +371,7 @@ result.structuredResponse; // { summary: ..., confidence: ... }
 const Answer = z.object({ summary: z.string(), confidence: z.number() });
 
 var agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools,
   responseFormat: Answer,
 });
@@ -387,7 +387,7 @@ result.structuredResponse; // { summary: ..., confidence: ... }
 const Answer = z.object({ summary: z.string(), confidence: z.number() });
 
 var agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools,
   responseFormat: Answer,
 });
@@ -525,7 +525,7 @@ const stateMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [],
   middleware: [stateMiddleware],
 });
@@ -549,7 +549,7 @@ const stateMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [],
   middleware: [stateMiddleware],
 });
@@ -706,7 +706,7 @@ import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [],
   checkpointer: new MemorySaver(),
 });
@@ -737,7 +737,7 @@ import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [],
   checkpointer: new MemorySaver(),
 });
@@ -938,7 +938,7 @@ const contextSchema = z.object({
 });
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [],
   contextSchema,
   checkpointer: new MemorySaver(),
@@ -970,7 +970,7 @@ const contextSchema = z.object({
 });
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [],
   contextSchema,
   checkpointer: new MemorySaver(),
@@ -1197,7 +1197,7 @@ import { createAgent } from "langchain";
 import { createFilesystemMiddleware, StateBackend } from "deepagents";
 
 var agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [search],
   middleware: [createFilesystemMiddleware({ backend: new StateBackend() })],
 });
@@ -1210,7 +1210,7 @@ import { createAgent } from "langchain";
 import { createFilesystemMiddleware, StateBackend } from "deepagents";
 
 var agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [search],
   middleware: [createFilesystemMiddleware({ backend: new StateBackend() })],
 });
@@ -1344,7 +1344,7 @@ import {
 } from "deepagents";
 
 var backend = new StateBackend();
-const model = "anthropic:claude-sonnet-4-6";
+const model = "anthropic:claude-sonnet-5";
 
 var agent = createAgent({
   model,
@@ -1369,7 +1369,7 @@ import {
 } from "deepagents";
 
 var backend = new StateBackend();
-const model = "openrouter:openrouter:z-ai/glm-5.2";
+const model = "openrouter:z-ai/glm-5.2";
 
 var agent = createAgent({
   model,
@@ -1592,7 +1592,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 var backend = new StateBackend();
 
 var agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [search],
   middleware: [
     createFilesystemMiddleware({ backend }),
@@ -1607,7 +1607,7 @@ var agent = createAgent({
           systemPrompt:
             "Use the search tool to research the question and summarize key points.",
           tools: [search],
-          model: "anthropic:claude-sonnet-4-6",
+          model: "anthropic:claude-sonnet-5",
           middleware: [],
         },
       ],
@@ -1636,7 +1636,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 var backend = new StateBackend();
 
 var agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [search],
   middleware: [
     createFilesystemMiddleware({ backend }),
@@ -1651,7 +1651,7 @@ var agent = createAgent({
           systemPrompt:
             "Use the search tool to research the question and summarize key points.",
           tools: [search],
-          model: "openrouter:openrouter:z-ai/glm-5.2",
+          model: "openrouter:z-ai/glm-5.2",
           middleware: [],
         },
       ],
@@ -1843,7 +1843,7 @@ var agent = createAgent({
 
 ```ts
 var agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools,
   name: "research_assistant",
 });
@@ -1853,7 +1853,7 @@ var agent = createAgent({
 
 ```ts
 var agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools,
   name: "research_assistant",
 });
@@ -1965,7 +1965,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [search],
   middleware: [
     modelRetryMiddleware({ maxRetries: 3 }),
@@ -1992,7 +1992,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [search],
   middleware: [
     modelRetryMiddleware({ maxRetries: 3 }),
@@ -2139,7 +2139,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [search],
   middleware: [piiMiddleware("email")],
 });
@@ -2158,7 +2158,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [search],
   middleware: [piiMiddleware("email")],
 });
@@ -2278,7 +2278,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [search],
   middleware: [humanInTheLoopMiddleware({ interruptOn: { writeFile: true } })],
 });
@@ -2297,7 +2297,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [search],
   middleware: [humanInTheLoopMiddleware({ interruptOn: { writeFile: true } })],
 });

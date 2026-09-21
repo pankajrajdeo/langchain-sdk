@@ -11,7 +11,7 @@ tags: [docs, langsmith, llm-gateway-direct-model-access]
 > Access provider APIs directly through provider-specific LLM Gateway paths without using the gateway standardization layer.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](release-stages.md).
+> The LLM Gateway is in [beta](release-stages.md).
 
 Direct model access exposes each provider API through a provider-specific gateway path. The gateway still handles authentication, provider secrets, policies, and tracing, but it does not translate the request and response into another provider's API format.
 
@@ -84,7 +84,7 @@ client = anthropic.Anthropic(
     api_key=os.environ["LANGSMITH_API_KEY"],
 )
 message = client.messages.create(
-    model="claude-sonnet-4-6",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "ping"}],
 )
@@ -95,38 +95,18 @@ Direct paths use the provider's native model name without a provider prefix.
 
 ## Configure LangChain and Deep Agents
 
-[LangChain](../langchain/overview.md) chat models and [Deep Agents](../deepagents/overview.md), including [Deep Agents Code](../deepagents/code/overview.md), support direct gateway paths through a convenience environment variable:
+[LangChain](../langchain/overview.md) chat models and [Deep Agents](../deepagents/overview.md), including [Deep Agents Code](../deepagents/code/overview.md), reach these provider paths through the `LANGSMITH_GATEWAY` environment variable:
 
 ```bash
+export LANGSMITH_API_KEY="lsv2_..."
 export LANGSMITH_GATEWAY="true"
 ```
 
-This routes supported chat models through their provider-specific paths at `https://gateway.smith.langchain.com`, using `LANGSMITH_API_KEY` for authentication. To use a regional gateway, set its URL instead of `true`:
-
-```bash
-export LANGSMITH_GATEWAY="https://eu.gateway.smith.langchain.com"
-```
-
-> [!NOTE]
-> If you need to use a different API key for gateway calls than your default `LANGSMITH_API_KEY`, set `LANGSMITH_GATEWAY_API_KEY` as an override. It must be a workspace-scoped key with the `gateway:invoke` permission.
-
-<details>
-<summary>Supported models and configuration precedence</summary>
-
-* Supported in Python only.
-* Supported chat models:
-  * [Anthropic](../integrations/chat/anthropic.md) (`langchain-anthropic >= 1.5.1`)
-  * [Baseten](../integrations/chat/baseten.md) (`langchain-baseten >= 0.2.3`)
-  * [Fireworks](../integrations/chat/fireworks.md) (`langchain-fireworks >= 1.5.1`)
-  * [Google Gemini](../integrations/chat/google_generative_ai.md) (`langchain-google-genai >= 4.3.2`)
-  * [OpenAI](../integrations/chat/openai.md) (`langchain-openai >= 1.4.1`)
-* Provider-specific base URLs take precedence over the gateway setting. For example, `OPENAI_API_BASE` sends OpenAI to that URL while every other supported provider continues to use the gateway.
-
-</details>
+Each supported integration appends its own provider path, so `ChatAnthropic` calls `https://gateway.smith.langchain.com/anthropic` and `ChatOpenAI` calls `https://gateway.smith.langchain.com/openai/v1`. To route requests through the standard endpoint instead, see the [LLM Gateway quickstart](llm-gateway-quickstart.md#send-a-request).
 
 ## Use a regional gateway
 
-If your LangSmith account is on a regional instance, use the corresponding [regional gateway](llm-gateway-api-formats.md#use-a-regional-gateway) and append the provider path. For example, use `https://eu.gateway.smith.langchain.com/anthropic` for direct Anthropic access in GCP EU.
+If your LangSmith account is on a regional instance, use the corresponding [regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway) and append the provider path. For example, use `https://eu.gateway.smith.langchain.com/anthropic` for direct Anthropic access in GCP EU.
 
 ## See also
 

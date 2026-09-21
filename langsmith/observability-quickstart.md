@@ -368,7 +368,7 @@ The outer span captures your `assistant` function's inputs and outputs. The nest
 
 * [Tracing integrations](integrations.md): LangChain, LangGraph, Anthropic, and other providers.
 * [Trace an LLM application](observability-llm-tutorial.md): a full lifecycle tutorial, from prototyping through production.
-* [Filter traces](filter-traces-in-application.md): search and navigate large tracing projects.
+* [Filter traces](filter-traces.md): search and navigate large tracing projects.
 * [Log to a specific project](log-traces-to-project.md): send traces to a named project instead of **default**.
 
 > [!NOTE]

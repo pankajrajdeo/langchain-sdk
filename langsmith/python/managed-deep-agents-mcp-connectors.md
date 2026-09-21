@@ -17,7 +17,7 @@ Most remote MCP servers require authentication. A [connection](managed-deep-agen
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
-Declare MCP servers in a module directly under `tools/`:
+Declare MCP servers in `tools/mcp.py`:
 
 ```text
 my-agent/
@@ -30,13 +30,11 @@ For the full project layout, see [Project structure](managed-deep-agents-project
 
 To implement application logic in the project instead, use an [authored tool](managed-deep-agents-tools.md).
 
-## Add an MCP servers
+## Add MCP servers
 
 Use an MCP server when tools already live on a remote MCP server and you want MDA to load them without importing them into the agent definition.
 
-### Declare the connector
-Use `connectors.mcp` to declare one or more remote servers:
-
+### Declare the servers
 Use `define_mcp` to declare one or more remote servers:
 
 **tools/mcp.py**
@@ -54,7 +52,7 @@ mcp = define_mcp(
 )
 ```
 
-The module must export a module-level `connector`.
+The module must export a module-level `mcp`. A project has one MCP declaration, so declare every server in it.
 
 Managed Deep Agents supports Streamable HTTP (`"http"`) and legacy SSE (`"sse"`) transports. Stdio MCP servers are not supported. Expose a stdio server over HTTP or implement its operation as an [authored tool](managed-deep-agents-tools.md) instead.
 
@@ -109,15 +107,16 @@ The MCP definition also accepts these options:
 
 ## Deployment
 
-`mda dev` and `mda deploy` discover connector modules under `connectors/` and include them in the managed configuration. Connectors are not synced to Context Hub.
+`mda dev` and `mda deploy` discover the MCP declaration under `tools/` and include it in the managed configuration. The declaration is not synced to Context Hub.
 
 ## When to use MCP connectors
 
-| Concept                                                           | Kind                  | How it reaches the agent                                              |
-| ----------------------------------------------------------------- | --------------------- | --------------------------------------------------------------------- |
-| **MCP servers**                                                   | Managed configuration | Declared under `tools/`; no import into the agent entry               |
-| **[Authored tools](managed-deep-agents-tools.md)** | Application code      | Import and pass in the agent definition                               |
-| **[Channels](managed-deep-agents-channels.md)**    | Managed configuration | Receive external messages that start agent runs and deliver responses |
+| Concept                                                                | Kind                  | How it reaches the agent                                                  |
+| ---------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------- |
+| **MCP servers**                                                        | Managed configuration | Declared in the MCP module under `tools/`; no import into the agent entry |
+| **[MCP endpoint](managed-deep-agents-mcp-endpoint.md)** | Deployment API        | Exposes the agent as a tool to MCP clients                                |
+| **[Authored tools](managed-deep-agents-tools.md)**      | Application code      | Import and pass in the agent definition                                   |
+| **[Channels](managed-deep-agents-channels.md)**         | Managed configuration | Receive external messages that start agent runs and deliver responses     |
 
 For more information, see [Project structure](managed-deep-agents-project-structure.md).
 

@@ -178,7 +178,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, FilesystemBackend } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
 });
 ```
@@ -189,7 +189,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, FilesystemBackend } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
 });
 ```
@@ -329,7 +329,7 @@ import { createDeepAgent, LocalShellBackend } from "deepagents";
 const backend = new LocalShellBackend({ workingDirectory: "." });
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend,
 });
 ```
@@ -342,7 +342,7 @@ import { createDeepAgent, LocalShellBackend } from "deepagents";
 const backend = new LocalShellBackend({ workingDirectory: "." });
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend,
 });
 ```
@@ -443,7 +443,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend: new StoreBackend({
     namespace: (rt) => [rt.serverInfo.user.identity],
   }),
@@ -460,7 +460,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend: new StoreBackend({
     namespace: (rt) => [rt.serverInfo.user.identity],
   }),
@@ -683,7 +683,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore();
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend: new CompositeBackend(new StateBackend(), {
     "/memories/": new StoreBackend({
       namespace: () => ["memories"],
@@ -707,7 +707,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore();
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend: new CompositeBackend(new StateBackend(), {
     "/memories/": new StoreBackend({
       namespace: () => ["memories"],

@@ -103,7 +103,7 @@ const EXAMPLE_QUERY =
   "How do I stream intermediate tool results from a subagent?";
 
 const baselineAgent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [],
   systemPrompt:
     "You are a helpful LangChain documentation assistant. Answer questions about LangChain APIs and patterns.",
@@ -128,7 +128,7 @@ const EXAMPLE_QUERY =
   "How do I stream intermediate tool results from a subagent?";
 
 const baselineAgent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [],
   systemPrompt:
     "You are a helpful LangChain documentation assistant. Answer questions about LangChain APIs and patterns.",
@@ -988,7 +988,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -1021,7 +1021,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -1249,7 +1249,7 @@ const textSplitter = new RecursiveCharacterTextSplitter({
 const allSplits = await textSplitter.splitDocuments(docs);
 console.log(`Split documentation into ${allSplits.length} chunks.`);
 
-const embeddings = new OpenAIEmbeddings({ model: "google-genai:gemini-3.6-flash" });
+const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
 const vectorStore = new MemoryVectorStore(embeddings);
 await vectorStore.addDocuments(allSplits);
 console.log(`Indexed ${allSplits.length} chunks.`);
@@ -1346,7 +1346,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "google-genai:gemini-3.6-flash",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -1435,7 +1435,7 @@ const textSplitter = new RecursiveCharacterTextSplitter({
 const allSplits = await textSplitter.splitDocuments(docs);
 console.log(`Split documentation into ${allSplits.length} chunks.`);
 
-const embeddings = new OpenAIEmbeddings({ model: "openai:gpt-5.5" });
+const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
 const vectorStore = new MemoryVectorStore(embeddings);
 await vectorStore.addDocuments(allSplits);
 console.log(`Indexed ${allSplits.length} chunks.`);
@@ -1532,7 +1532,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "openai:gpt-5.5",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -1621,7 +1621,7 @@ const textSplitter = new RecursiveCharacterTextSplitter({
 const allSplits = await textSplitter.splitDocuments(docs);
 console.log(`Split documentation into ${allSplits.length} chunks.`);
 
-const embeddings = new OpenAIEmbeddings({ model: "anthropic:claude-sonnet-4-6" });
+const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
 const vectorStore = new MemoryVectorStore(embeddings);
 await vectorStore.addDocuments(allSplits);
 console.log(`Indexed ${allSplits.length} chunks.`);
@@ -1718,7 +1718,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -1807,7 +1807,7 @@ const textSplitter = new RecursiveCharacterTextSplitter({
 const allSplits = await textSplitter.splitDocuments(docs);
 console.log(`Split documentation into ${allSplits.length} chunks.`);
 
-const embeddings = new OpenAIEmbeddings({ model: "openrouter:openrouter:z-ai/glm-5.2" });
+const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
 const vectorStore = new MemoryVectorStore(embeddings);
 await vectorStore.addDocuments(allSplits);
 console.log(`Indexed ${allSplits.length} chunks.`);
@@ -1904,7 +1904,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -1993,7 +1993,7 @@ const textSplitter = new RecursiveCharacterTextSplitter({
 const allSplits = await textSplitter.splitDocuments(docs);
 console.log(`Split documentation into ${allSplits.length} chunks.`);
 
-const embeddings = new OpenAIEmbeddings({ model: "fireworks:accounts/fireworks/models/glm-5p2" });
+const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
 const vectorStore = new MemoryVectorStore(embeddings);
 await vectorStore.addDocuments(allSplits);
 console.log(`Indexed ${allSplits.length} chunks.`);
@@ -2090,7 +2090,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "fireworks:accounts/fireworks/models/glm-5p2",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -2179,7 +2179,7 @@ const textSplitter = new RecursiveCharacterTextSplitter({
 const allSplits = await textSplitter.splitDocuments(docs);
 console.log(`Split documentation into ${allSplits.length} chunks.`);
 
-const embeddings = new OpenAIEmbeddings({ model: "baseten:zai-org/GLM-5.2" });
+const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
 const vectorStore = new MemoryVectorStore(embeddings);
 await vectorStore.addDocuments(allSplits);
 console.log(`Indexed ${allSplits.length} chunks.`);
@@ -2276,7 +2276,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "baseten:zai-org/GLM-5.2",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -2365,7 +2365,7 @@ const textSplitter = new RecursiveCharacterTextSplitter({
 const allSplits = await textSplitter.splitDocuments(docs);
 console.log(`Split documentation into ${allSplits.length} chunks.`);
 
-const embeddings = new OpenAIEmbeddings({ model: "ollama:north-mini-code-1.0" });
+const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
 const vectorStore = new MemoryVectorStore(embeddings);
 await vectorStore.addDocuments(allSplits);
 console.log(`Indexed ${allSplits.length} chunks.`);
@@ -2462,7 +2462,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "ollama:north-mini-code-1.0",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,

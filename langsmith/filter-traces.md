@@ -16,7 +16,7 @@ Filtering narrows the [runs](observability-concepts.md#runs) in a tracing projec
 > Tracing projects have two filtering experiences. Check the top of your project to see which one applies to you:
 >
 > * **A single search bar with a scope selector to its left**: Refer to [Filter traces](filter-traces.md).
-> * **An Add filter button that builds filter chips**: Refer to [Filter traces in application](filter-traces-in-application.md).
+> * **An Add filter button that builds filter chips**: Refer to [Filter traces (ClickHouse)](filter-traces-in-application.md).
 
 This page covers:
 
@@ -87,7 +87,7 @@ The scopes offered, and the one selected by default, depend on the table selecti
 | Table selection | Default scope | Available scopes              |
 | --------------- | ------------- | ----------------------------- |
 | **Threads**     | Any run       | Thread, Root run, Any run     |
-| **Traces**      | Any run       | Root run, Any run             |
+| **Traces**      | Root run      | Root run, Any run             |
 | **Runs**        | Single run    | Single run, Root run, Any run |
 
 ### Combine scopes
@@ -286,7 +286,7 @@ feedback:{correctness.score:>0.5}
 
 ## Examples
 
-Queries to copy and adapt. Each assumes the default scope for its table selection.
+Queries to copy and adapt. Each assumes the default scope for its table selection unless stated otherwise.
 
 **Errored LLM calls that were also slow.** Use the **Runs** selection:
 
@@ -314,13 +314,13 @@ input:~"refund" AND status:error
 
 <a id="example-filtering-for-tool-calls" />
 
-**Traces that called a specific tool.** Use the **Traces** selection:
+**Traces that called a specific tool.** Use the **Traces** selection with the **Any run** scope, so the clause is matched against every run in the trace rather than the entry run:
 
 ```text
 run_type:tool AND name:search_documents
 ```
 
-**Expensive traces.** Use the **Traces** selection with the **Root run** scope:
+**Expensive traces.** Use the **Traces** selection:
 
 ```text
 total_cost:>0.5

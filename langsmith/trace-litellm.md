@@ -246,7 +246,7 @@ The LiteLLM proxy runs as a standalone server and exposes an OpenAI-compatible A
 
 ## Next steps
 
-* [View traces in LangSmith](filter-traces-in-application.md)
+* [View traces in LangSmith](filter-traces.md)
 * [Add custom metadata](ls-metadata-parameters.md)
 * [Filter and sample traces](sample-traces.md)
 

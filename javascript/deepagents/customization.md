@@ -48,7 +48,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   systemPrompt: "You are a helpful assistant.",
   tools: [search, fetchUrl],
   memory: ["./AGENTS.md"],
@@ -62,7 +62,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   systemPrompt: "You are a helpful assistant.",
   tools: [search, fetchUrl],
   memory: ["./AGENTS.md"],
@@ -657,7 +657,7 @@ const internetSearch = tool(
 );
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [internetSearch],
 });
 ```
@@ -706,7 +706,7 @@ const internetSearch = tool(
 );
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [internetSearch],
 });
 ```
@@ -938,7 +938,7 @@ const client = new MultiServerMCPClient({
 const tools = await client.getTools();
 
 const agent = await createDeepAgent({
-    model: "anthropic:claude-sonnet-4-6",
+    model: "anthropic:claude-sonnet-5",
     tools,
 });
 
@@ -964,7 +964,7 @@ const client = new MultiServerMCPClient({
 const tools = await client.getTools();
 
 const agent = await createDeepAgent({
-    model: "openrouter:openrouter:z-ai/glm-5.2",
+    model: "openrouter:z-ai/glm-5.2",
     tools,
 });
 
@@ -1100,7 +1100,7 @@ const researchInstructions =
   `write a polished report.`;
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   systemPrompt: researchInstructions,
 });
 ```
@@ -1116,7 +1116,7 @@ const researchInstructions =
   `write a polished report.`;
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   systemPrompt: researchInstructions,
 });
 ```
@@ -1432,7 +1432,7 @@ const logToolCallsMiddleware = createMiddleware({
 });
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [getWeather] as any,
   middleware: [logToolCallsMiddleware] as any,
 });
@@ -1483,7 +1483,7 @@ const logToolCallsMiddleware = createMiddleware({
 });
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [getWeather] as any,
   middleware: [logToolCallsMiddleware] as any,
 });
@@ -1713,7 +1713,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   middleware: [createCodeInterpreterMiddleware()],
 });
 ```
@@ -1725,7 +1725,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   middleware: [createCodeInterpreterMiddleware()],
 });
 ```
@@ -1936,7 +1936,7 @@ const researchSubagent: SubAgent = {
   description: "Used to research more in depth questions",
   systemPrompt: "You are a great researcher",
   tools: [internetSearch],
-  model: "anthropic:claude-sonnet-4-6", // Optional override, defaults to main agent model
+  model: "anthropic:claude-sonnet-5", // Optional override, defaults to main agent model
 };
 const subagents = [researchSubagent];
 
@@ -1994,7 +1994,7 @@ const researchSubagent: SubAgent = {
   description: "Used to research more in depth questions",
   systemPrompt: "You are a great researcher",
   tools: [internetSearch],
-  model: "openrouter:openrouter:z-ai/glm-5.2", // Optional override, defaults to main agent model
+  model: "openrouter:z-ai/glm-5.2", // Optional override, defaults to main agent model
 };
 const subagents = [researchSubagent];
 
@@ -2239,7 +2239,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, FilesystemBackend } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
 });
 ```
@@ -2250,7 +2250,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, FilesystemBackend } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
 });
 ```
@@ -2333,7 +2333,7 @@ import { createDeepAgent, LocalShellBackend } from "deepagents";
 const backend = new LocalShellBackend({ workingDirectory: "." });
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend,
 });
 ```
@@ -2346,7 +2346,7 @@ import { createDeepAgent, LocalShellBackend } from "deepagents";
 const backend = new LocalShellBackend({ workingDirectory: "." });
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend,
 });
 ```
@@ -2436,7 +2436,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend: new StoreBackend({
     namespace: (rt) => [rt.serverInfo.user.identity],
   }),
@@ -2453,7 +2453,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend: new StoreBackend({
     namespace: (rt) => [rt.serverInfo.user.identity],
   }),
@@ -2588,7 +2588,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore();
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend: new CompositeBackend(new StateBackend(), {
     "/memories/": new StoreBackend({
       namespace: () => ["memories"],
@@ -2612,7 +2612,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore();
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend: new CompositeBackend(new StateBackend(), {
     "/memories/": new StoreBackend({
       namespace: () => ["memories"],
@@ -3089,7 +3089,7 @@ function createFileData(content: string): FileData {
 }
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   memory: ["/AGENTS.md"],
   checkpointer: checkpointer,
 });
@@ -3140,7 +3140,7 @@ function createFileData(content: string): FileData {
 }
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   memory: ["/AGENTS.md"],
   checkpointer: checkpointer,
 });
@@ -3469,7 +3469,7 @@ await store.put(["filesystem"], "/AGENTS.md", fileData);
 const checkpointer = new MemorySaver();
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend: new StoreBackend({
     namespace: () => ["filesystem"],
   }),
@@ -3527,7 +3527,7 @@ await store.put(["filesystem"], "/AGENTS.md", fileData);
 const checkpointer = new MemorySaver();
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend: new StoreBackend({
     namespace: () => ["filesystem"],
   }),
@@ -3781,7 +3781,7 @@ import { MemorySaver } from "@langchain/langgraph";
 const checkpointer = new MemorySaver();
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
   interruptOn: {
@@ -3803,7 +3803,7 @@ import { MemorySaver } from "@langchain/langgraph";
 const checkpointer = new MemorySaver();
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
   interruptOn: {

@@ -62,7 +62,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore();
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [],
   store,
 });
@@ -78,7 +78,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore();
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [],
   store,
 });
@@ -188,7 +188,7 @@ const store = PostgresStore.fromConnString(DB_URI);
 await store.setup();
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [],
   store,
 });
@@ -207,7 +207,7 @@ const store = PostgresStore.fromConnString(DB_URI);
 await store.setup();
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [],
   store,
 });
@@ -534,7 +534,7 @@ const getUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [getUserInfo],
   contextSchema,
   // Pass store to agent - enables agent to access store when running tools
@@ -600,7 +600,7 @@ const getUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [getUserInfo],
   contextSchema,
   // Pass store to agent - enables agent to access store when running tools
@@ -954,7 +954,7 @@ const getUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [getUserInfo],
   contextSchema,
   store,
@@ -1001,7 +1001,7 @@ const getUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [getUserInfo],
   contextSchema,
   store,
@@ -1321,7 +1321,7 @@ const saveUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [saveUserInfo],
   contextSchema,
   store,
@@ -1380,7 +1380,7 @@ const saveUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [saveUserInfo],
   contextSchema,
   store,
@@ -1702,7 +1702,7 @@ const saveUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [saveUserInfo],
   contextSchema,
   store,
@@ -1748,7 +1748,7 @@ const saveUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [saveUserInfo],
   contextSchema,
   store,

@@ -81,7 +81,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   systemPrompt: `You are a research assistant specializing in scientific literature.
   Always cite sources. Use subagents for parallel research on different topics.`,
 });
@@ -93,7 +93,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   systemPrompt: `You are a research assistant specializing in scientific literature.
   Always cite sources. Use subagents for parallel research on different topics.`,
 });
@@ -178,7 +178,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   memory: ["/project/AGENTS.md", "~/.deepagents/preferences.md"],
 });
 ```
@@ -189,7 +189,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   memory: ["/project/AGENTS.md", "~/.deepagents/preferences.md"],
 });
 ```
@@ -263,7 +263,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   skills: ["/skills/research/", "/skills/web-search/"],
 });
 ```
@@ -274,7 +274,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   skills: ["/skills/research/", "/skills/web-search/"],
 });
 ```
@@ -489,7 +489,7 @@ const fetchUserData = tool(
 );
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [fetchUserData],
   contextSchema,
 });
@@ -526,7 +526,7 @@ const fetchUserData = tool(
 );
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [fetchUserData],
   contextSchema,
 });
@@ -828,7 +828,7 @@ import {
 import { InMemoryStore } from "@langchain/langgraph";
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   store: new InMemoryStore(),
   backend: new CompositeBackend(new StateBackend(), {
     "/memories/": new StoreBackend({
@@ -851,7 +851,7 @@ import {
 import { InMemoryStore } from "@langchain/langgraph";
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   store: new InMemoryStore(),
   backend: new CompositeBackend(new StateBackend(), {
     "/memories/": new StoreBackend({

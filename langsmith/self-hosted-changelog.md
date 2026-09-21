@@ -13,7 +13,367 @@ tags: [docs, langsmith, self-hosted-changelog]
 
 [Self-hosted LangSmith](self-hosted.md) is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
 
+## 2026-09-18
+## langsmith-0.16.27
+
+**LangSmith version:** `0.16.59`
+
+* This release packages the same LangSmith application version as langsmith-0.16.26. Refer to the [langsmith-0.16.26](#langsmith-0-16-26) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.16.27.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.27/langsmith-0.16.27.tgz)
+
+## 2026-09-18
+## langsmith-0.17.0-rc.35
+
+**LangSmith version:** `0.17.25rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.33. Refer to the [langsmith-0.17.0-rc.33](#langsmith-0-17-0-rc-33) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.35.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.35/langsmith-0.17.0-rc.35.tgz)
+
+## 2026-09-18
+<a id="langsmith-0-16-26"></a>
+
+## langsmith-0.16.26
+
+**LangSmith version:** `0.16.59`
+
+* Internal improvements and maintenance updates
+
+**Download the Helm chart:** [`langsmith-0.16.26.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.26/langsmith-0.16.26.tgz)
+
+## 2026-09-17
+## langsmith-0.16.25
+
+**LangSmith version:** `0.16.58`
+
+* This release packages the same LangSmith application version as langsmith-0.16.24. Refer to the [langsmith-0.16.24](#langsmith-0-16-24) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.16.25.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.25/langsmith-0.16.25.tgz)
+
+## 2026-09-17
+## langsmith-0.17.0-rc.34
+
+**LangSmith version:** `0.17.25rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.33. Refer to the [langsmith-0.17.0-rc.33](#langsmith-0-17-0-rc-33) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.34.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.34/langsmith-0.17.0-rc.34.tgz)
+
+## 2026-09-17
+<a id="langsmith-0-16-24"></a>
+
+## langsmith-0.16.24
+
+**LangSmith version:** `0.16.58`
+
+* Self-hosted Playground and LLM evaluators could authenticate to Azure OpenAI with Azure Kubernetes Service workload identity when no API key was configured.
+* Self-hosted upgrades could rerun the usage metering migration without duplicate-trigger errors or replacing existing model pricing with default rates.
+
+**Download the Helm chart:** [`langsmith-0.16.24.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.24/langsmith-0.16.24.tgz)
+
+## 2026-09-17
+<a id="langsmith-0-17-0-rc-33"></a>
+
+## langsmith-0.17.0-rc.33
+
+**LangSmith version:** `0.17.25rc1`
+
+* Smoothed tab indicator transitions/animations.
+* Removed extra filter error tooltip border.
+* The Usage dashboard's "Group by" control now automatically detected the header configured on your default API key spend cap policy, allowing grouping by header directly instead of opening it from a Cost Controls policy row; if no header was configured, the option explained what to add and where.
+* Grouped saved view controls.
+* Recorded hourly storage attribution for sandbox cost breakdowns while preserving existing aggregate billing, with repeated samples atomically replacing entity details and the workspace aggregate.
+* Filtered the annotation queue "View all items" page by when each trace ran, using the same preset ranges as the Traces page.
+* The annotation queue "View all items" page now showed each item's run start time, allowing visibility of when a trace was triggered without opening it.
+* Grouped LLM Gateway usage by Model Provider within an API key or user to compare spend across providers and filter to specific ones.
+* Switching between thread items in an annotation queue now replaced the previous thread's messages instead of overlaying the new thread over them.
+* Context Hub's markdown preview pane now rendered files without editing them, preventing the rich-text editor from unintentionally rewriting stored bytes; editing occurred in the Edit tab, affecting exact bytes in the repo, and your Preview/Edit choice persisted as you moved between files.
+* Pinned every OpenAI client to the deployment's region.
+* Authenticated Gateway requests could optionally send an opaque raw provider token in X-LangSmith-Anthropic-Passthrough. LangSmith OAuth used standard Authorization bearer authentication; only built-in Anthropic requests forwarded the token as a bearer without accessing workspace provider secrets, leaving token validity to Anthropic. Other providers and custom Anthropic-compatible endpoints used typical fetched keys. Saved models/routes, catalogs, and mixed fallback chains retained existing permissions, policies, entitlements, and provider-specific accounting.
+* Restored EU Vertex inference on the combined deployment.
+* Corrected Jira destination branding.
+* Publicly shared thread pages no longer showed a share action that could not succeed.
+* Stopped gating flaky tests on user groups.
+* Aligned red teaming beta badge.
+* Aligned environment picker.
+* Fixed name on the tooltip for environment id.
+* Tracked proactive red-team coverage.
+* A safety refusal from the model now rendered an explanation instead of an empty reply, a failed tool call indicated failure instead of completion, and evaluator search clarified which runs each evaluator scored. Removed the non-functioning voice button from the chat panel.
+* Insights no longer warned about optimization only for OpenAI or Anthropic when both selected models used another provider.
+* When a tracing project lacked traces in the default time range, the range now widened to include the most recent trace, up to 30 days back. If an explicit range was set, an option to expand it appeared next to the empty table.
+* Enabled streamable HTTP MCP for ungated actions.
+* Persisted Trivy action permissions for langgraph-api.
+* Edit and deletion in the experiments table now checked project permission to match BE.
+* Renamed Messages to Trajectory when navigation flag was on.
+* The issue detail header now read its timestamp from the issue's last-modified time, preventing routine updates like Engine linking new evidence and refreshing the description from making a closed issue appear freshly marked done; it now read "Updated \<when>," with details on who closed the issue and when shown below in the history.
+* Avoided expensive error hydration.
+* The Columns menu on a tracing project's traces and runs table now allowed deselecting Status and Name and dragging them into any order with the other columns.
+* Disabled APAC shadow builds.
+* Automations grouped by thread could now send webhook payloads with matched conversations and their runs.
+* Labeled export buttons as trajectory when navigation view was on.
+* Introduced a new public endpoint breaking down recorded hourly usage costs by sandbox and snapshot, with resource filters and cursor pagination. Checkpoint storage remained with its sandbox, and the full storage breakdown reconciled with the recorded workspace total.
+* An Engine scan no longer failed outright when its project-stats request was not returned; it continued with the errored and baseline traces it could select, informed the agent about missing selections, and recorded the stats call failure reason.
+* Kept the trace pane open for hovercard interactions.
+* Prioritized realistic red-team probes.
+* Engine now scanned projects whose names included punctuation, Unicode, or special characters, preventing their boards from stalling while analysis started.
+* Returned an error when mitigating SSRF instead of a 500.
+* Updated code evaluator defaults for Python 3.14.
+* Fleet agents on Amazon Bedrock no longer failed on every turn after a truncated tool call or a response containing only thinking was saved to the conversation, resuming with the next message instead.
+* Insights now recommended a capable thinking model and a fast summarization model with a large context window without warning against mixing providers.
+* The LangSmith Go and Java SDKs could now save Insights report configurations, enabling clients to create UI-visible Insights reports programmatically.
+* Turning an automation off now ceased its backfill and live evaluation, not resuming them upon reactivation; a disabled automation continued advancing its position while off, meaning reactivation resumed roughly from its pause point, avoiding redundant evaluation of every trace submitted while it was off.
+* The header count and delete confirmation on the annotation queue "View all items" page now reflected the active time range instead of the whole queue, with the item count endpoint accepting min\_start\_time and max\_start\_time.
+* When an evaluator score from a rule, playground experiment, or UI code evaluator violated the workspace feedback key configuration (e.g., a 5 against a 0–1 range), LangSmith now recorded error feedback on the run with the rejection reason in the comment instead of silently dropping it.
+* Added empty state for prompts.
+* Installed pnpm and failed the build job on non-conflict failures.
+* Routed the sandbox service-URL handshake to smith-go.
+* Hid single-turn trajectory navigation.
+* Limited inherited thread filters to ten turns.
+* Changing a feedback score on a completed queue item previously raised a "Failed to update review time" error despite the score saving; the toast was removed, but the score still saved as before.
+* Detail panes now filled narrow screens without wasting space on the left edge, with resize handles supporting keyboard navigation using arrow keys, Home, and End, and showing a visible focus indicator.
+* A backfill that found every run on a page already processed now continued to the next page instead of ending the window early, allowing evaluation of runs behind that page.
+* Switched to page on ingestion queue wait instead of pending count.
+* Publicly exposed OIDC integrations.
+* Fixed stale run details contents when switching between items.
+* Revoking a personal access token preserved its original expiry, and reinstating the token restored access only while that expiry remained valid.
+* Offered reinstatement on a revoked personal access token (PAT).
+* Selecting a Slack channel for alert notifications now functioned in workspaces large enough for the channel list to have stopped loading.
+* Avoided Dorny API rate limit in Terraform changes job.
+* Unified trace filtering and displayed matched run summaries.
+* Enforced waterfall minimum width in shared trace panels.
+* Rolled up RUN\_RULES\_TWO\_POINTER\_BACKFILL\_TENANTS to status check deprecate\_dual\_reads.
+* Dashboard chart feedback key suggestions now included keys from both run-level and thread-level feedback.
+* Revoked and reinstated personal access tokens directly from the API Keys table in Settings, with reinstatement preserving the token's expiry date, and expired tokens displaying a disabled Reinstate key action with an explanation.
+* Fleet thread updates now preserved system-managed ownership metadata across typed, bulk, and LangGraph proxy requests.
+* The Studio memory editor kept its close button visible while scrolling through long memory items.
+* Alerts using input, output, or error text filters now matched runs regardless of the blob storage and ClickHouse search settings, with search tokens still written to ClickHouse only when both blob storage and ClickHouse search were enabled.
+* Section dividers in agent overview cards and Gateway connection panels now have stronger contrast in light and dark mode.
+* Selected TURN\_NUMBER when listing thread traces to return each trace's chronological position across pages. Turn numbers are also available for public shared threads.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.33.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.33/langsmith-0.17.0-rc.33.tgz)
+
+## 2026-09-17
+## langsmith-0.16.23
+
+**LangSmith version:** `0.16.57`
+
+* Fixed the issue where listing an organization's roles failed when a role had no permissions; such a role is now returned with an empty permission list instead of making the whole roles list unavailable.
+
+* Fixed security vulnerabilities. See CVE-2026-7210 for details.
+
+**Download the Helm chart:** [`langsmith-0.16.23.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.23/langsmith-0.16.23.tgz)
+
+## 2026-09-17
+## langsmith-0.17.0-rc.32
+
+**LangSmith version:** `0.17.24rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.26. Refer to the [langsmith-0.17.0-rc.26](#langsmith-0-17-0-rc-26) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.32.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.32/langsmith-0.17.0-rc.32.tgz)
+
+## 2026-09-17
+## langsmith-0.17.0-rc.31
+
+**LangSmith version:** `0.17.24rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.26. Refer to the [langsmith-0.17.0-rc.26](#langsmith-0-17-0-rc-26) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.31.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.31/langsmith-0.17.0-rc.31.tgz)
+
+## 2026-09-15
+## langsmith-0.17.0-rc.30
+
+**LangSmith version:** `0.17.24rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.26. Refer to the [langsmith-0.17.0-rc.26](#langsmith-0-17-0-rc-26) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.30.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.30/langsmith-0.17.0-rc.30.tgz)
+
+## 2026-09-14
+## langsmith-0.17.0-rc.29
+
+**LangSmith version:** `0.17.24rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.26. Refer to the [langsmith-0.17.0-rc.26](#langsmith-0-17-0-rc-26) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.29.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.29/langsmith-0.17.0-rc.29.tgz)
+
+## 2026-09-14
+## langsmith-0.17.0-rc.28
+
+**LangSmith version:** `0.17.24rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.26. Refer to the [langsmith-0.17.0-rc.26](#langsmith-0-17-0-rc-26) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.28.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.28/langsmith-0.17.0-rc.28.tgz)
+
+## 2026-09-14
+## langsmith-0.17.0-rc.27
+
+**LangSmith version:** `0.17.24rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.26. Refer to the [langsmith-0.17.0-rc.26](#langsmith-0-17-0-rc-26) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.27.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.27/langsmith-0.17.0-rc.27.tgz)
+
+## 2026-09-14
+## langsmith-0.16.22
+
+**LangSmith version:** `0.16.55`
+
+* LangSmith services authenticated startup requests to the deployment info endpoint when endpoint authentication was enabled.
+
+**Download the Helm chart:** [`langsmith-0.16.22.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.22/langsmith-0.16.22.tgz)
+
+## 2026-09-14
+<a id="langsmith-0-17-0-rc-26"></a>
+
+## langsmith-0.17.0-rc.26
+
+**LangSmith version:** `0.17.24rc1`
+
+* Internal improvements and maintenance updates
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.26.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.26/langsmith-0.17.0-rc.26.tgz)
+
+## 2026-09-14
+## langsmith-0.16.21
+
+**LangSmith version:** `0.16.54`
+
+* This release packages the same LangSmith application version as langsmith-0.16.20. Refer to the [langsmith-0.16.20](#langsmith-0-16-20) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.16.21.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.21/langsmith-0.16.21.tgz)
+
+## 2026-09-14
+<a id="langsmith-0-16-20"></a>
+
+## langsmith-0.16.20
+
+**LangSmith version:** `0.16.54`
+
+* Internal improvements and maintenance updates
+
+**Download the Helm chart:** [`langsmith-0.16.20.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.20/langsmith-0.16.20.tgz)
+
+## 2026-09-11
+## langsmith-0.16.19
+
+**LangSmith version:** `0.16.52`
+
+* This release packages the same LangSmith application version as langsmith-0.16.18. Refer to the [langsmith-0.16.18](#langsmith-0-16-18) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.16.19.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.19/langsmith-0.16.19.tgz)
+
+## 2026-09-10
+<a id="langsmith-0-16-18"></a>
+
+## langsmith-0.16.18
+
+**LangSmith version:** `0.16.52`
+
+* Avoided full mise installation in the v16 release.
+
+**Download the Helm chart:** [`langsmith-0.16.18.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.18/langsmith-0.16.18.tgz)
+
+## 2026-09-09
+## langsmith-0.17.0-rc.25
+
+**LangSmith version:** `0.17.20rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.23. Refer to the [langsmith-0.17.0-rc.23](#langsmith-0-17-0-rc-23) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.25.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.25/langsmith-0.17.0-rc.25.tgz)
+
+## 2026-09-09
+## langsmith-0.16.17
+
+**LangSmith version:** `0.16.50`
+
+* This release packages the same LangSmith application version as langsmith-0.16.16. Refer to the [langsmith-0.16.16](#langsmith-0-16-16) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.16.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.17/langsmith-0.16.17.tgz)
+
+## 2026-09-09
+## langsmith-0.17.0-rc.24
+
+**LangSmith version:** `0.17.20rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.23. Refer to the [langsmith-0.17.0-rc.23](#langsmith-0-17-0-rc-23) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.24.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.24/langsmith-0.17.0-rc.24.tgz)
+
+## 2026-09-09
+<a id="langsmith-0-17-0-rc-23"></a>
+
+## langsmith-0.17.0-rc.23
+
+**LangSmith version:** `0.17.20rc1`
+
+* Repaired frontend deploy and alert failures.
+* No user-facing release note required; dependency-only maintenance update.
+* Allowed deployments to leave managed mode.
+* Priced Vertex Engine input tokens at the cache-read rate.
+* Remediated open Dependabot alerts.
+* When a Slack channel event failed before reaching your Managed Deep Agent because of a dropped delivery, a missing bot token, an interrupt that could not be shown, or an ambiguous route, it surfaced in `mda logs` and the deployment logs UI instead of failing silently.
+* Routed Bedrock xAI inference profiles.
+* Routed billing alerts to the dedicated billing channel.
+* Configured agent auth OAuth callbacks.
+* Ignored agents without names.
+* Routed EU fix runs through regional OpenAI.
+* Polled credential sessions on the shipped Agent Auth route.
+* Led Slack issue alerts with the title.
+* Sharing a thread created a link that anyone could open without a LangSmith account, showing every turn in the thread along with its run traces and feedback scores. The link always reflected the thread's current contents, including turns added after you shared it, and unsharing revoked it immediately.
+* Set all three prompt-cache breakpoints on the Vertex path.
+* Increased recent filter debounce.
+* Kept Agent Overview edit below sticky header.
+* Monitored Asynq rate-limit retries without logs.
+* Reconciled sandbox provisioning.
+* Removed messages view extra padding.
+* Configuring an evaluator with a trace or tree filter no longer timed out while loading the sample run shown in the preview.
+* Aligned agent hooks with Agent API contract.
+* Isolated evaluator snapshots.
+* Accepted blank API keys when the proxy or OAuth supplied the credential.
+* Allowed exec to close a command's stdin.
+* Exited the fallback chain when the request context was done.
+* Moved BYOC Manager to infra.
+* Documented validation errors as strings.
+* Hid tracing filters without flicker.
+* When an agent paused because a connected integration still needed OAuth, Slack now showed a Connect button that opened the authorization link directly. Previously the run paused with a generic notice and no way to finish connecting from Slack.
+* LangSmith MCP connectors used Client ID Metadata Documents when supported, with dynamic client registration retained as a compatibility fallback.
+* Workspace editors could now assign resources to an Application tag value from Settings > Resource Tags. The page previously failed with a permission error, even though editors were allowed to apply Application tags.
+* Decoded the @openai/agents JS SDK's `function_call_result` items and camelCase `callId` fields on the trajectory endpoint, unblocking Messages view for JS agents that managed tool state client-side.
+* Alembic git-revisions (dropped ALEMBIC\_HEAD merge conflicts).
+* Reduced noisy BYOC Kubernetes alerts.
+* Cleaned up failed thread sandboxes.
+* Showed current SHA in commit lookup.
+* Resumed org invite after signup.
+* LLM Gateway fallback chains could now advance to the next model when a candidate did not return response headers within a configured timeout. Active response streams continued after headers arrived.
+* Started local stack with workspace concurrently.
+* Baked Alembic chain for the BYOC data-plane pin.
+* Ran backend start stacks with local concurrently.
+* Normalized APAC load balancer env.
+* OAuth authorization sessions now accepted canonical `owner_type` and `owner_id` fields, allowing a human to authorize a managed credential for either a user or an agent. The deprecated `principal_id` and `agent_id` fields remained supported on legacy request and response shapes.
+* Self-hosted deployments could now forward a REST caller's `X-Fleet-Forward-*` headers to the custom MCP servers an agent called, so a policy gateway in front of those servers could see per-invocation context such as an end-user identity. Off by default; enabled with `FLEET_MCP_FORWARD_CALLER_HEADERS=true`. Values were asserted by the caller and were not verified by LangSmith.
+* Defaulted trace filters to root runs.
+* GitHub Actions quota page.
+* Aligned Studio message actions to the right.
+* A deployment's custom install and build command now appeared in the Details panel, and the New Revision dialog prefilled them from the value currently in effect. Previously these commands persisted and were applied to every build but were not shown anywhere, so an inherited command was invisible to whoever had to debug the build.
+* Updated organization plan badge colors.
+* Commercial private ECR registries could now assume an AWS IAM role on demand, enabling repository and tag search while avoiding expiring saved authorization tokens.
+* OAuth authorization sessions now accepted workspace owners, allowing one managed OAuth credential to be shared across a workspace.
+* Thread query clients could request server-sent events to receive results progressively while preserving cursor pagination.
+* The workspace switcher now accepted workspace IDs in addition to workspace names, making it easier to locate a workspace when only its ID was known.
+* Used the new `/v2/threads/stats` endpoint to retrieve thread and trace counts, latency, token, cost, and feedback statistics for a tracing project.
+* Fleet agents now supported saved Databricks model configurations, using your configured workspace URL, serving endpoint, and workspace credentials. You could connect through Databricks Model Serving or AI Gateway routes.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.23.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.23/langsmith-0.17.0-rc.23.tgz)
+
 ## 2026-09-05
+<a id="langsmith-0-16-16"></a>
+
 ## langsmith-0.16.16
 
 **LangSmith version:** `0.16.50`

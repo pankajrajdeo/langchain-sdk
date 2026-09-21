@@ -36,7 +36,7 @@ For example, you may want to apply specific evaluators based on:
 * Runs that invoke a specific tool call. See [filtering for tool calls](filter-traces-in-application.md#example-filtering-for-tool-calls) for more information.
 * Runs that match a particular piece of metadata (e.g. if you log traces with a `plan_type` and only want to run evaluations on traces from your enterprise customers). See [adding metadata to your traces](add-metadata-tags.md) for more information.
 
-Filters on evaluators work the same way as when you're filtering traces in a project. For more information on filters, you can refer to [Filter traces](filter-traces-in-application.md).
+Evaluators use the filter builder, with the same fields and operators described in [Filter traces (ClickHouse)](filter-traces-in-application.md).
 
 To process feedback from an earlier evaluator, filter this evaluator for the feedback key, then [include extended stats](evaluators.md#include-extended-stats). For example, use `has(feedback_key, "answer_usefulness")` to run when the `answer_usefulness` feedback exists. The filter is based on the feedback key, not the evaluator that produced it, so feedback from any source with that key triggers the code evaluator.
 

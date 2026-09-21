@@ -218,7 +218,7 @@ export async function agent(config: LangGraphRunnableConfig) {
   const backend = await getOrCreateSandboxForThread(threadId);
 
   return createDeepAgent({
-    model: "anthropic:claude-sonnet-4-6",
+    model: "anthropic:claude-sonnet-5",
     backend,
     systemPrompt: "You are an expert developer working on a project in /app.",
   });
@@ -240,7 +240,7 @@ export async function agent(config: LangGraphRunnableConfig) {
   const backend = await getOrCreateSandboxForThread(threadId);
 
   return createDeepAgent({
-    model: "openrouter:openrouter:z-ai/glm-5.2",
+    model: "openrouter:z-ai/glm-5.2",
     backend,
     systemPrompt: "You are an expert developer working on a project in /app.",
   });

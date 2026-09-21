@@ -72,9 +72,7 @@ Structuring this way facilitates the improvement loop. Production traces can flo
 
 *One Jo*, Schneider’s internal AI assistant, serves 160,000 employees across 107 countries. Every conversation is traced, and production traces are systematically reused to build regression datasets and detect drift.
 
-*Production example: "One Jo" annotation queue*
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a471135401933e21d2d5340_f21bba38.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82af8f35d9ee2088acf2e_langsmith-review-light%201.png)Production example: "One Jo" annotation queue
 
 *Evaluation*
 
@@ -82,13 +80,11 @@ Schneider has invested in evaluation on three fronts. **First, it built offline 
 
 **Second, it created an LLMOps maturity framework** that scores each of its 60+ products on instrumentation, offline evals, online evals, and feedback loops, then uses those scores to gate progression from exploration to industrialization.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d55cc9dfc01ca46aa5fc_590bcc7d.png)*The LLM Ops Loop*
-
-‍
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82b2836c123ec4051e17b_loop%20(1)%201.png)Production example: "One Jo" annotation queue
 
 **Third, Schneider has brought subject-matter experts directly into the evaluation process.** About 20% of its AI products now have at least one active annotation queue where SMEs review real production examples. Its Customer Success Manager Copilot, used by more than 250 CSMs, was built with SMEs involved from the beginning, which the team credits with helping it reach high quality and adoption at launch.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a471135401933e21d2d533a_35f06603.png)*Production example: Customer Success Manager chatbot in LangSmith Experiments*
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82b79908b13196dfc6828_Frame%201.png)Production example: Customer Success Manager chatbot in LangSmith Experiments
 
 *Deployment*
 
@@ -98,11 +94,9 @@ In its Digital Energy division, a document-processing agent that analyzes quote 
 
 The tradeoff is more infrastructure to manage and more upgrades to coordinate, which Schneider has identified as an area for continued investment.
 
-*Key Lessons*
+#### *Key Lessons*
 
 Schneider's early investment in LLMOps paid off. Without trace-level observability and a solid offline evaluation process, none of the company's agentic products would have reached production readiness. Teams that skipped early instrumentation were the ones who later struggled to debug non-deterministic regressions without good data to work from.
-
-‍
 
 Schneider also learned to rely on out-of-the-box features before building custom ones. Building elaborate internal frameworks, especially for evaluation, was tempting. In hindsight, it worked better to extend existing tools instead of building new ones, like a thin CLI on top of the LangSmith SDK, a custom role mapped to an existing permission model, and scheduled reports built off the public API.
 
@@ -118,13 +112,13 @@ Vodafone serves more than 340 million customers across mobile, fixed, IoT, and e
 
 If the query is related to inventory data, then the agent will direct the request to a NL2SQL chain that will convert the NL query to a SQL query and send the response back to the agent. The agent will then forward the request to another query processing chain that will query the inventory DB, receive the result, and then pass the information to a LLM to create graphs and charts based on the query response.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d55cc9dfc01ca46aa5f9_eede59cc.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82bc8e6a4086c0b4682c2_Frame%202.png)
 
 **Information retrieval from MS-Sharepoint (Enigma): **This assistant enables efficient access to thousands of technical documents and resources. Engineers can ask questions to verify specific designs, retrieve inventory details, or identify contacts within the organization, reducing time spent sifting through documentation.
 
 If the query is related to document summarization, the agent will direct the request to the appropriate chain. In turn, this will fetch the relevant context from the multi-vector DB and present the grounded summary response to the user.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d55cc9dfc01ca46aa5f6_73698bc9.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82be002d4d9f44b5cc882_mmrag-reskin-dark%20(1)%202.png)
 
 Both systems use a LangGraph agent to classify user intent before routing the request to the appropriate chain.
 
@@ -157,7 +151,7 @@ monday.com rebuilt Sidekick around bounded responsibilities instead of a single 
 - **Sandboxes** handle work that does not reduce cleanly to a bounded API call. Reconciling several uploaded CSVs against board data, for example, may require inspecting files, writing and executing code, recovering from parsing errors, and generating a chart without forcing every intermediate dataframe through the model’s context window.
 - **Observability and evaluation** trace the entire path, including model calls, delegation, sandbox activity, latency, and token usage. A successful tool call, after all, does not necessarily mean the user’s goal was achieved.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d55cc9dfc01ca46aa5f3_aaffb7de.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82c03d882feef8674d29a_sidekick-v2-900x1360%201.png)
 
 *Sandboxes provide the agent with a place to work*
 
@@ -211,5 +205,7 @@ The agent programs furthest along in the region are building the platform, guard
 This pattern shows up in different ways across these three teams. Schneider invested early in LLMOps to create a shared discipline for dozens of agents. Vodafone added the observability needed to understand and improve complex production workflows. monday.com rethought Sidekick’s architecture around clearer boundaries between agents, tools, and sandboxes.
 
 Across all three examples, these production systems rely on the structure around the agent: the infrastructure, controls, and feedback loops that make behavior visible, measurable, governable, and continuously improvable. That is increasingly where the work of scaling agents in the region is focused.
+
+‍
 
 ‍

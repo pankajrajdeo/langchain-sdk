@@ -10,12 +10,12 @@ tags: [docs, langsmith, llm-gateway]
 
 > Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data-protection policies.
 
-Use one [LangSmith API key](create-account-api-key.md) to call models across configured providers. Switch providers by changing the model ID, while the LLM Gateway traces every call and applies centralized governance policies.
+Use one [LangSmith API key](create-account-api-key.md) to call models across configured providers. Switch providers by changing the model ID, while the LLM Gateway traces every model call and applies centralized governance policies.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).
 >
-> The gateway is also available on [BYOC](byoc.md), where it runs inside your data plane. Send requests to your [data plane endpoint](byoc-usage.md#find-your-data-plane-endpoint) behind the `/gateway` path prefix, and authenticate with an API key scoped to a workspace in that data plane. For more information, see [Use a BYOC data plane](llm-gateway-api-formats.md#use-a-byoc-data-plane).
+> The gateway is also available on [BYOC](byoc.md), where it runs inside your data plane. Send requests to your [data plane endpoint](byoc-usage.md#find-your-data-plane-endpoint) behind the `/gateway` path prefix, and authenticate with an API key scoped to a workspace in that data plane. For more information, see [Use a BYOC data plane](llm-gateway-how-it-works.md#use-a-byoc-data-plane).
 
 > [!NOTE]
 > **Self-hosted availability:** LLM Gateway is not included in the LangSmith v0.16.0 self-hosted stable release. It will be available in a future stable release. To express interest, submit the [LLM Gateway self-hosted access request](https://www.langchain.com/langsmith-llm-gateway-self-hosted-access-request). You can also try LLM Gateway on v17 RC versions or BYOC (bring your own cloud) ahead of the stable release.

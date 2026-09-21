@@ -10,7 +10,7 @@ tags: [docs, langsmith, ls-metadata-parameters]
 
 When you trace LLM calls with LangSmith, you often want to [track costs](cost-tracking.md), compare model configurations, and analyze performance across different providers. LangSmith's native integrations (like [LangChain](trace-with-langchain.md) or the [OpenAI](trace-openai.md)/[Anthropic](trace-anthropic.md) wrappers) handle this automatically, but custom model wrappers and self-hosted models require a standardized way to provide this information. LangSmith uses `ls_` metadata parameters for this purpose.
 
-These metadata parameters (all prefixed with `ls_`) let you pass model configuration and identification information through the standard `metadata` field. Once set, LangSmith can automatically calculate costs, display model information in the UI, and enable [filtering](filter-traces-in-application.md) and analytics across your traces.
+These metadata parameters (all prefixed with `ls_`) let you pass model configuration and identification information through the standard `metadata` field. Once set, LangSmith can automatically calculate costs, display model information in the UI, and enable [filtering](filter-traces.md) and analytics across your traces.
 
 Use `ls_` metadata parameters to:
 
@@ -802,7 +802,7 @@ metadata_key = 'ls_run_depth' AND metadata_value = 0
 * [Trace query syntax](trace-query-syntax.md): Complete reference for filtering and searching traces.
 * [Evaluation quickstart](evaluation-quickstart.md): Run experiments on datasets to compare model configurations.
 * [Add metadata and tags](add-metadata-tags.md): General guide to adding metadata to traces.
-* [Filter traces in application](filter-traces-in-application.md): Programmatically filter traces in your code.
+* [Filter traces (ClickHouse)](filter-traces-in-application.md): Programmatically filter traces in your code.
 
 ***
 

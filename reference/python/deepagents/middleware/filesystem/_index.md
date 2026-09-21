@@ -40,6 +40,7 @@ tags: [index, reference, python, deepagents, middleware, filesystem]
 - [FilesystemPermission](FilesystemPermission.md) - A single access rule for filesystem operations.
 - [FilesystemState](FilesystemState.md) - State for the filesystem middleware.
 - [FsToolName](FsToolName.md) - Names of the built-in filesystem tools that can be passed to FilesystemMiddleware(tools=...).
+- [GLOB_PATHLESS_DENIED_HINT](GLOB_PATHLESS_DENIED_HINT.md) - View source on GitHub
 - [GLOB_TIMEOUT](GLOB_TIMEOUT.md) - View source on GitHub
 - [GLOB_TOOL_DESCRIPTION](GLOB_TOOL_DESCRIPTION.md) - View source on GitHub
 - [GLOB_TRUNCATION_NOTE](GLOB_TRUNCATION_NOTE.md) - View source on GitHub
@@ -67,7 +68,6 @@ tags: [index, reference, python, deepagents, middleware, filesystem]
 - [check_empty_content](check_empty_content.md) - Check if content is empty and return warning message.
 - [execute_accepts_timeout](execute_accepts_timeout.md) - Check whether a backend class's execute accepts a timeout kwarg.
 - [extract_video_frames](extract_video_frames.md) - Decode sampled frames from a video byte payload.
-- [format_content_with_line_numbers](format_content_with_line_numbers.md) - Format file content with line numbers.
 - [format_grep_matches](format_grep_matches.md) - Format structured grep matches using existing formatting logic.
 - [regex_literal_hint](regex_literal_hint.md) - Return a hint when a pattern looks like an (unsupported) regex.
 - [sanitize_tool_call_id](sanitize_tool_call_id.md) - Sanitize tool_call_id to prevent path traversal and separator issues.

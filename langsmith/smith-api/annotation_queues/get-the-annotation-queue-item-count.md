@@ -1,6 +1,6 @@
 ---
 title: "Get the annotation queue item count"
-description: "Returns the number of annotation queue items for the requested reviewer-specific or archived bucket."
+description: "Returns the number of annotation queue items in one status bucket. The two time windows are independent: start_time/end_time bound when an item was archived, min_start_time/max_start_time bound when..."
 source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/get-the-annotation-queue-item-count"
 category: "docs"
 tags: [docs, langsmith, smith-api, annotation_queues, get-the-annotation-queue-item-count]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, annotation_queues, get-the-annotation-queue-i
 
 # Get the annotation queue item count
 
-> Returns the number of annotation queue items for the requested reviewer-specific or archived bucket.
+> Returns the number of annotation queue items in one status bucket. The two time windows are independent: start_time/end_time bound when an item was archived, min_start_time/max_start_time bound when its trace ran. Items with no trace start time are excluded when either of the latter is set.
 
 ## OpenAPI
 
@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/annotation-queues/{queue_id}/items/count:
     get:
@@ -175,8 +177,11 @@ paths:
         - annotation_queues
       summary: Get the annotation queue item count
       description: >-
-        Returns the number of annotation queue items for the requested
-        reviewer-specific or archived bucket.
+        Returns the number of annotation queue items in one status bucket. The
+        two time windows are independent: start_time/end_time bound when an item
+        was archived, min_start_time/max_start_time bound when its trace ran.
+        Items with no trace start time are excluded when either of the latter is
+        set.
       parameters:
         - description: Queue ID
           name: queue_id
@@ -193,18 +198,32 @@ paths:
           schema:
             type: string
             title: Status
-        - description: Exclusive lower bound for archived item timestamp
+        - description: Archived strictly after this time. Only used when status=archived
           name: start_time
           in: query
           schema:
             type: string
             title: Start Time
-        - description: Exclusive upper bound for archived item timestamp
+        - description: Archived strictly before this time. Only used when status=archived
           name: end_time
           in: query
           schema:
             type: string
             title: End Time
+        - description: Trace started at or after this time
+          name: min_start_time
+          in: query
+          schema:
+            format: date-time
+            type: string
+            title: Min Start Time
+        - description: Trace started at or before this time
+          name: max_start_time
+          in: query
+          schema:
+            format: date-time
+            type: string
+            title: Max Start Time
       responses:
         '200':
           description: OK

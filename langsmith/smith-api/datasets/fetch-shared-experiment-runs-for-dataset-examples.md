@@ -171,6 +171,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v2/datasets/public/{share_token}/experiment-runs:
     post:

@@ -47,7 +47,7 @@ Composite scores are attached to a run as **feedback**, similarly to feedback fr
 **On a tracing project**:
 
 * Composite scores appear as feedback on runs.
-* [Filter for runs](filter-traces-in-application.md) with a composite score, or where the composite score meets a certain threshold.
+* [Filter for runs](filter-traces.md) with a composite score, or where the composite score meets a certain threshold.
 * [Create a chart](dashboards.md#custom-dashboards) to visualize trends in the composite score over time.
 
  If any of the constituent evaluators are not configured on the run, the composite score will not be calculated for that run. 

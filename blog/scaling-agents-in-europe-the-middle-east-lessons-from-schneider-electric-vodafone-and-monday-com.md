@@ -24,7 +24,7 @@ Alongside these three, we’ll draw on patterns emerging across a broader set of
 
 ## The emerging patterns in agent programs
 
-**Central agent platforms are consolidating fragmented agents across the enterprise.** The most common pattern in the region right now is that teams are investing in a platform, rather than building single agents. **35% of organizations we speak to describe a company-wide agent platform or control plane as the primary use case, with business-unit agents eventually running on top of it.**
+**Central agent platforms are consolidating fragmented agents across the enterprise.** The most common pattern in the region right now is that teams are investing in a platform, rather than building single agents. 35% of organizations we speak to describe a company-wide agent platform or control plane as the primary use case, with business-unit agents eventually running on top of it.
 
 Companies with a dozen or more agent efforts underway tend to reach the same conclusion: individual teams are rebuilding the same foundations, and someone needs to own the shared layer. That can mean vetted, reusable templates or [frameworks](https://www.langchain.com/deep-agents) that keep teams from reinventing the basics, or consolidating decentralized development into a central AI hub that supports the full lifecycle. At this stage, it is not unusual for a company to have hundreds of proofs of concept but no clear path to production for most of them. A central agent platform can solve this problem.
 
@@ -40,7 +40,7 @@ The three teams below show what it takes to operate agents once a company has mo
 
 ## Three leading teams building agents in production
 
-### **Schneider Electric: LLMOps as a shared discipline across 60+ agents**
+### Schneider Electric: LLMOps as a shared discipline across 60+ agents
 
 Schneider Electric is a global energy technology leader, driving sustainability by electrifying, automating, and digitalizing industries, businesses, and homes. With 160,000 employees and roughly 40 billion euros in annual revenue, the company runs an ambitious AI program: an internal AI Hub of 350 experts who have deployed 60+ agents to optimize energy consumption, extend asset lifecycles, and accelerate developer productivity.
 
@@ -66,13 +66,13 @@ They’ve built LLMOps capabilities around [LangSmith](https://www.langchain.com
 
 Schneider self-hosts LangSmith on AWS EKS behind its own security perimeter. One of its most important structural decisions was to create one workspace per AI product spanning every environment, from development through production, rather than creating separate workspaces for each environment.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d55cc9dfc01ca46aa5ff_e5653fd0.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa8b0fcc907349810a40c6e_EMEA%204.png)
 
 Structuring this way facilitates the improvement loop. Production traces can flow back into development datasets for offline evaluation, while subject-matter experts can annotate a production trace and push it directly into a dataset.
 
 *One Jo*, Schneider’s internal AI assistant, serves 160,000 employees across 107 countries. Every conversation is traced, and production traces are systematically reused to build regression datasets and detect drift.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a471135401933e21d2d5340_f21bba38.png)*Production example: "One Jo" annotation queue*
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82af8f35d9ee2088acf2e_langsmith-review-light%201.png)Production example: "One Jo" annotation queue
 
 *Evaluation*
 
@@ -80,13 +80,11 @@ Schneider has invested in evaluation on three fronts. **First, it built offline 
 
 **Second, it created an LLMOps maturity framework** that scores each of its 60+ products on instrumentation, offline evals, online evals, and feedback loops, then uses those scores to gate progression from exploration to industrialization.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d55cc9dfc01ca46aa5fc_590bcc7d.png)*The LLM Ops Loop*
-
-‍
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82b2836c123ec4051e17b_loop%20(1)%201.png)
 
 **Third, Schneider has brought subject-matter experts directly into the evaluation process.** About 20% of its AI products now have at least one active annotation queue where SMEs review real production examples. Its Customer Success Manager Copilot, used by more than 250 CSMs, was built with SMEs involved from the beginning, which the team credits with helping it reach high quality and adoption at launch.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a471135401933e21d2d533a_35f06603.png)*Production example: Customer Success Manager chatbot in LangSmith Experiments*
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82b79908b13196dfc6828_Frame%201.png)Production example: Customer Success Manager chatbot in LangSmith Experiments
 
 *Deployment*
 
@@ -96,19 +94,17 @@ In its Digital Energy division, a document-processing agent that analyzes quote 
 
 The tradeoff is more infrastructure to manage and more upgrades to coordinate, which Schneider has identified as an area for continued investment.
 
-*Key Lessons*
+#### Key Lessons
 
 Schneider's early investment in LLMOps paid off. Without trace-level observability and a solid offline evaluation process, none of the company's agentic products would have reached production readiness. Teams that skipped early instrumentation were the ones who later struggled to debug non-deterministic regressions without good data to work from.
-
-‍
 
 Schneider also learned to rely on out-of-the-box features before building custom ones. Building elaborate internal frameworks, especially for evaluation, was tempting. In hindsight, it worked better to extend existing tools instead of building new ones, like a thin CLI on top of the LangSmith SDK, a custom role mapped to an existing permission model, and scheduled reports built off the public API.
 
 Finally, Schneider found that the LangChain ecosystem strikes a good balance between integration and flexibility. The tools work well together (open-source libraries, LangSmith for observability and evaluation, and LangSmith Deployment with LangSmith Studio), but they aren't locked to each other. The OSS libraries can be used on their own, and LangSmith works cleanly with third-party frameworks too. This has given Schneider room to mix and match tools without putting themselves into a corner.
 
-*Learn more: Schneider User Story (*[*Blog*](https://www.langchain.com/blog/how-schneider-electric-built-their-llmops-foundations-at-enterprise-scale-with-langsmith)*)*
+> *Learn more: Schneider User Story (*[*Blog*](https://www.langchain.com/blog/how-schneider-electric-built-their-llmops-foundations-at-enterprise-scale-with-langsmith)*)*
 
-**Vodafone: from working pipelines to monitored production systems**
+### Vodafone: from working pipelines to monitored production systems
 
 Vodafone serves more than 340 million customers across mobile, fixed, IoT, and enterprise services, and operates a network of data centers across Europe. Its data and AI teams built two internal assistants using LangChain and LangGraph to support engineers working across that infrastructure. These assistants help Vodafone’s engineering teams operate its infrastructure more efficiently.
 
@@ -116,13 +112,13 @@ Vodafone serves more than 340 million customers across mobile, fixed, IoT, and e
 
 If the query is related to inventory data, then the agent will direct the request to a NL2SQL chain that will convert the NL query to a SQL query and send the response back to the agent. The agent will then forward the request to another query processing chain that will query the inventory DB, receive the result, and then pass the information to a LLM to create graphs and charts based on the query response.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d55cc9dfc01ca46aa5f9_eede59cc.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82bc8e6a4086c0b4682c2_Frame%202.png)
 
 **Information retrieval from MS-Sharepoint (Enigma): **This assistant enables efficient access to thousands of technical documents and resources. Engineers can ask questions to verify specific designs, retrieve inventory details, or identify contacts within the organization, reducing time spent sifting through documentation.
 
 If the query is related to document summarization, the agent will direct the request to the appropriate chain. In turn, this will fetch the relevant context from the multi-vector DB and present the grounded summary response to the user.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d55cc9dfc01ca46aa5f6_73698bc9.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82be002d4d9f44b5cc882_mmrag-reskin-dark%20(1)%202.png)
 
 Both systems use a LangGraph agent to classify user intent before routing the request to the appropriate chain.
 
@@ -134,9 +130,9 @@ In these multi-step systems, a poor answer can originate several hops before the
 
 As Vodafone’s GenAI footprint grows, the same monitoring discipline can extend across more data sources, increasingly sophisticated multi-agent workflows, and a broader range of AI applications.
 
-*Learn more: Vodafone User Story (*[*Blog*](https://www.langchain.com/blog/customers-vodafone)*), Fastweb + Vodafone User Story (*[*Blog*](https://www.langchain.com/blog/customers-vodafone-italy)*)*
+> *Learn more: Vodafone User Story (*[*Blog*](https://www.langchain.com/blog/customers-vodafone)*), Fastweb + Vodafone User Story (*[*Blog*](https://www.langchain.com/blog/customers-vodafone-italy)*)*
 
-### **monday.com: why capable agents need more than just tools**
+### monday.com: why capable agents need more than just tools
 
 Sidekick is monday.com’s AI assistant. Its first version was a single general-purpose agent with a growing list of tools: summarize a project, draft an update, analyze a file, update a board. That was useful at the beginning because it allowed the team to move quickly and learn what users actually wanted.
 
@@ -155,7 +151,7 @@ monday.com rebuilt Sidekick around bounded responsibilities instead of a single 
 - **Sandboxes** handle work that does not reduce cleanly to a bounded API call. Reconciling several uploaded CSVs against board data, for example, may require inspecting files, writing and executing code, recovering from parsing errors, and generating a chart without forcing every intermediate dataframe through the model’s context window.
 - **Observability and evaluation** trace the entire path, including model calls, delegation, sandbox activity, latency, and token usage. A successful tool call, after all, does not necessarily mean the user’s goal was achieved.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d55cc9dfc01ca46aa5f3_aaffb7de.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa82c03d882feef8674d29a_sidekick-v2-900x1360%201.png)
 
 *Sandboxes provide the agent with a place to work*
 
@@ -165,7 +161,7 @@ If a user uploads several CSVs and asks Sidekick to reconcile them with project 
 
 For Sidekick, tools provide controlled access, subagents provide specialized reasoning, and sandboxes provide an execution environment.
 
-#### *How the LangChain ecosystem fits together*
+*How the LangChain ecosystem fits together*
 
 monday.com uses different parts of the LangChain ecosystem for different layers of Sidekick:
 
@@ -178,7 +174,7 @@ When the main agent delegates to a subagent or uses a sandbox, the activity stay
 
 For monday.com, LangChain’s frameworks provide reusable primitives, while leaving the team in control of its own models, retrieval layer, permission system, tools, and user experience. This lets engineers spend more time on what is specific to monday.com, rather than rebuilding generic agent infrastructure.
 
-#### *Key lessons*
+#### Key lessons
 
 monday.com learned that adding more tools does not necessarily make an agent more capable. As Sidekick’s toolset grew, similar tools began competing for the model’s attention, tool schemas consumed more context, and testing became harder. The team found that giving the agent clearer capability boundaries worked better than continuing to expand a single general-purpose system.
 
@@ -188,9 +184,9 @@ The team also learned to build observability and evaluation into the architectur
 
 Finally, monday.com found that a more sophisticated architecture does not have to create a more complicated user experience. Looking back, the team would have split into specialized subagents earlier, before the original general-purpose agent accumulated so many responsibilities. But Sidekick can still feel like a single assistant even when specialized agents, tools, and sandboxes are working behind the scenes.
 
-*Learn more: monday.com User Story by Omri Bruchim (*[*Blog*](https://www.langchain.com/blog/building-monday-com-sidekick-why-capable-agents-need-more-than-just-tools)*)*
+> *Learn more: monday.com User Story by Omri Bruchim (*[*Blog*](https://www.langchain.com/blog/building-monday-com-sidekick-why-capable-agents-need-more-than-just-tools)*)*
 
-**What’s top of mind for agent builders in the region**
+## What’s top of mind for agent builders in the region
 
 Looking beyond these three examples, similar themes are emerging across the region in where agent builders are focusing their efforts.
 
@@ -202,7 +198,7 @@ Looking beyond these three examples, similar themes are emerging across the regi
 
 **Regulated, high-volume back-office workflows often make the ROI case easiest to prove.** Claims, underwriting, invoices, and compliance testing already have measurable costs, structured processes, and established audit trails. That makes them natural places to demonstrate value. Much of the highest-conviction agent work in the region is starting in operational workflows, like Vodafone, rather than in customer-facing chat experiences.
 
-## **Closing**
+## Closing
 
 The agent programs furthest along in the region are building the platform, guardrails, and measurement layer alongside the agents themselves.
 

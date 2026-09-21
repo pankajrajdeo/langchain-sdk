@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, sandboxes, generate-a-service-access-token]
 
 # Generate a service access token
 
-> Create a short-lived JWT for accessing an HTTP service running on a specific port inside a sandbox. Returns a browser_url (sets auth cookie via redirect), a service_url (for use with the X-Langsmith-Sandbox-Service-Token header), the raw token, and its expiry.
+> Create a short-lived JWT for accessing an HTTP service running on a specific port inside a sandbox. Returns a browser_url (sets auth cookie via redirect), a service_url (for use with the X-Langsmith-Sandbox-Service-Token header), the raw token, and its expiry. Set access=restricted|workspace to instead enable durable LangSmith login (no token; users authenticate with their normal LangSmith session), or access=off to disable it. LangSmith login and token access are mutually exclusive per service URL.
 
 ## OpenAPI
 
@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v2/sandboxes/boxes/{name}/service-url:
     post:
@@ -179,7 +181,10 @@ paths:
         specific port inside a sandbox. Returns a browser_url (sets auth cookie
         via redirect), a service_url (for use with the
         X-Langsmith-Sandbox-Service-Token header), the raw token, and its
-        expiry.
+        expiry. Set access=restricted|workspace to instead enable durable
+        LangSmith login (no token; users authenticate with their normal
+        LangSmith session), or access=off to disable it. LangSmith login and
+        token access are mutually exclusive per service URL.
       parameters:
         - description: Sandbox display name
           name: name
@@ -212,6 +217,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
         '422':
           description: Unprocessable Entity
           content:
@@ -239,6 +250,23 @@ components:
     sandboxes.ServiceURLPayload:
       type: object
       properties:
+        access:
+          description: >-
+            Access selects the login mode, mutually exclusive with the minted
+            token.
+
+            Omit the field for token mode: mint a short-lived service token
+            (default).
+              "restricted" — LangSmith login: any user with SandboxesRead on the sandbox.
+              "workspace"  — LangSmith login: any member of the owning workspace.
+              "off"        — remove an existing LangSmith login grant and mint a token.
+            A LangSmith login grant is durable; token mode is refused (409)
+            while one exists.
+          type: string
+          enum:
+            - restricted
+            - workspace
+            - 'off'
         expires_in_seconds:
           type: integer
         port:
@@ -246,6 +274,14 @@ components:
     sandboxes.ServiceURLResponse:
       type: object
       properties:
+        access:
+          description: >-
+            Access echoes the enabled LangSmith login level
+            ("restricted"/"workspace"); omitted in token mode.
+          type: string
+          enum:
+            - restricted
+            - workspace
         browser_url:
           type: string
         expires_at:
@@ -253,6 +289,9 @@ components:
         service_url:
           type: string
         token:
+          description: >-
+            Token and ExpiresAt are empty in LangSmith login mode (no token is
+            minted).
           type: string
     sandboxes.ErrorResponse:
       type: object

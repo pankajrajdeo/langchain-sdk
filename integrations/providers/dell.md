@@ -26,13 +26,13 @@ that can be hosted on-prem or deployed in the cloud.
 **pip**
 
 ```bash
-pip install powerscale-rag-connector
+pip install powerscale-rag-connector[langchain]
 ```
 
 **uv**
 
 ```bash
-uv add powerscale-rag-connector
+uv add powerscale-rag-connector[langchain]
 ```
 
 ### Document loaders

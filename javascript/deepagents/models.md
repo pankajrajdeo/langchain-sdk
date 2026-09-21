@@ -101,6 +101,15 @@ See [Profiles](profiles.md) for the full field list, merge semantics, and plugin
 > [!TIP]
 > For shaping how the *agent* behaves once the model is built, use a [harness profile](profiles.md#harness-profiles).
 
+### OpenAI and the Responses API
+
+When you pass an `openai:...` string as the model, Deep Agents uses the built-in OpenAI [provider profile](profiles.md#provider-profiles) to enable the [Responses API](../integrations/chat/openai.md#responses-api) by default. That path supports OpenAI conversation state and related features; see the [OpenAI provider](../integrations/providers/openai.md) and [chat model](../integrations/chat/openai.md) docs for current API options.
+
+> [!NOTE]
+> The built-in OpenAI provider profile applies only to model strings. To set kwargs such as `use_responses_api`, `store`, or `include`, pass a configured model instance, or, in Python, layer them through a [provider profile](profiles.md#provider-profiles) `init_kwargs`. Build the instance with [`init_chat_model`](https://reference.langchain.com/javascript/langchain/chat_models/universal/initChatModel) (Python) or `initChatModel` / `ChatOpenAI` (TypeScript).
+
+Use the [OpenAI chat integration](../integrations/chat/openai.md#responses-api) to choose the Responses API versus Chat Completions (`useResponsesApi`, model kwargs, and any storage or output options your version exposes). Pass the resulting model instance to `createDeepAgent({ model })` so those settings are preserved.
+
 ## Select a model at runtime
 
 If your application lets users choose a model (for example using a dropdown in the UI), use [middleware](../langchain/middleware.md) to swap the model at runtime without rebuilding the agent.

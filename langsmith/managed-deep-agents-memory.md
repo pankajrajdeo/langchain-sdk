@@ -12,7 +12,7 @@ tags: [docs, langsmith, managed-deep-agents-memory]
 
 Normally, a managed deep agent's conversational memory is scoped to a thread or session. Durable memory is optional knowledge that an agent can retain across threads and sessions. Managed Deep Agents do not have durable memory by default.
 
-When enabled, durable memory is backed by the [Context Hub](use-the-context-hub.md). The deployment gets one read/write tree at `/memories/agent/`, shared by every caller.
+When enabled, durable memory is backed by the [Context Hub](python/managed-deep-agents-context-hub.md). The deployment gets one read/write tree at `/memories/agent/`, shared by every caller.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](release-stages.md)** and available on [LangSmith Cloud](cloud.md) in the US region only.
@@ -95,6 +95,8 @@ You can also use `scope="none"`.
 ## Deployment
 
 When you run `mda deploy`, MDA enables durable memory from the project declaration and backs it with Context Hub. Deploys do not overwrite durable content already stored under `memories/agent`.
+
+For how memory relates to deploy-owned instructions and skills in Context Hub, see [Context Hub](python/managed-deep-agents-context-hub.md).
 
 ## When to use memory
 

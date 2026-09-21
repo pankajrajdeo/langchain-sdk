@@ -309,7 +309,7 @@ def get_user_info(runtime: ToolRuntime[Context]) -> str:
     return str(user_info.value) if user_info else "Unknown user"
 
 agent: Runnable = create_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[get_user_info],
     # Pass store to agent - enables agent to access store when running tools
     store=store,
@@ -725,7 +725,7 @@ def save_user_info(user_info: UserInfo, runtime: ToolRuntime[Context]) -> str:
     return "Successfully saved user info."
 
 agent: Runnable = create_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[save_user_info],
     store=store,
     context_schema=Context,

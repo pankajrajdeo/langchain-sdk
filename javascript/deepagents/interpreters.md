@@ -105,7 +105,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   middleware: [createCodeInterpreterMiddleware()],
 });
 ```
@@ -117,7 +117,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   middleware: [createCodeInterpreterMiddleware()],
 });
 ```
@@ -238,7 +238,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   middleware: [createCodeInterpreterMiddleware({ ptc: ["web_search"] })],
 });
 ```
@@ -250,7 +250,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   middleware: [createCodeInterpreterMiddleware({ ptc: ["web_search"] })],
 });
 ```

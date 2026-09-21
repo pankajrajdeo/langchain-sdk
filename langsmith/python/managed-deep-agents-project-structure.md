@@ -29,12 +29,11 @@ my-agent/
 │       └── SKILL.md
 
 ├── tools/                          # Application code
+│   └── mcp.py                      # MCP server declaration
 ├── middleware/
 
 ├── channels/                       # Managed configuration
 │   └── <name>.py
-├── connectors/
-│   └── mcp.py
 ├── schedules/
 │   └── <name>.py
 ├── sandbox/
@@ -58,22 +57,22 @@ The only required file is `agent.py` at the project root containing the [agent d
 
 ## How MDA treats project files
 
-* **Managed context**: [`instructions.md`](managed-deep-agents-instructions.md) defines the system prompt. Each directory under [`skills/`](managed-deep-agents-skills.md) contains task-specific instructions, such as a `SKILL.md` and any supporting files. MDA syncs both `instructions.md` and `skills/` to Context Hub.
+* **Managed context**: [`instructions.md`](managed-deep-agents-instructions.md) defines the system prompt. Each directory under [`skills/`](managed-deep-agents-skills.md) contains task-specific instructions, such as a `SKILL.md` and any supporting files. MDA syncs both `instructions.md` and `skills/` to [Context Hub](managed-deep-agents-context-hub.md). Optional [durable memory](managed-deep-agents-memory.md) is also backed by Context Hub.
 
 * **Application code**: Files under [`tools/`](managed-deep-agents-tools.md) and [`middleware/`](managed-deep-agents-middleware.md) are ordinary project modules. Import them from the agent entry. Other local modules work the same way.
 
-* **Managed configuration**: Certain paths enable capabilities when present. For `channels/`, `connectors/`, and `schedules/`, only direct children are managed declarations; nested modules are not.
+* **Managed configuration**: Certain paths enable capabilities when present. For `channels/` and `schedules/`, only direct children are managed declarations; nested modules are not.
 
-  | Path                   | Enables                                                                         |
-  | ---------------------- | ------------------------------------------------------------------------------- |
-  | `identity.py`          | [Caller authentication](managed-deep-agents-identity.md)         |
-  | `memory.py`            | [Durable memory](managed-deep-agents-memory.md)                  |
-  | `channels/<name>.py`   | [Messaging channels](managed-deep-agents-channels.md)            |
-  | `connectors/<name>.py` | [MCP connectors](managed-deep-agents-mcp-connectors.md)          |
-  | `schedules/<name>.py`  | [Cron schedules](managed-deep-agents-schedules.md)               |
-  | `sandbox/__init__.py`  | [Sandbox filesystem and shell](managed-deep-agents-sandboxes.md) |
+  | Path                  | Enables                                                                         |
+  | --------------------- | ------------------------------------------------------------------------------- |
+  | `identity.py`         | [Caller authentication](managed-deep-agents-identity.md)         |
+  | `memory.py`           | [Durable memory](managed-deep-agents-memory.md)                  |
+  | `channels/<name>.py`  | [Messaging channels](managed-deep-agents-channels.md)            |
+  | `tools/mcp.py`        | [MCP connectors](managed-deep-agents-mcp-connectors.md)          |
+  | `schedules/<name>.py` | [Cron schedules](managed-deep-agents-schedules.md)               |
+  | `sandbox/__init__.py` | [Sandbox filesystem and shell](managed-deep-agents-sandboxes.md) |
 
-  MCP connector modules export a module-level `connector`.
+  `tools/` holds ordinary modules with one exception. `tools/mcp.py` is a managed declaration and exports a module-level `mcp`. Every other module under `tools/` is application code you import.
 
 * **Dependencies and secrets**: Declare dependencies in `pyproject.toml`. MDA loads `.env` locally and forwards non-reserved values as deployment secrets. Reserved platform variables and `.env` files are not included in the build archive. For more information, see [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md).
 

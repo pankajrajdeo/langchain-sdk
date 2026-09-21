@@ -301,7 +301,7 @@ import { createDeepAgent } from "deepagents";
 import { todoListMiddleware } from "langchain";
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   middleware: [todoListMiddleware()],
 });
 ```
@@ -313,7 +313,7 @@ import { createDeepAgent } from "deepagents";
 import { todoListMiddleware } from "langchain";
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   middleware: [todoListMiddleware()],
 });
 ```

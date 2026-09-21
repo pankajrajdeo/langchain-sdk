@@ -171,6 +171,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/issues:
     get:
@@ -201,24 +203,24 @@ paths:
           name: status
           in: query
           schema:
-            type: string
             enum:
               - open
               - fixing
               - watching
               - completed
               - ignored
+            type: string
             title: Status
         - description: Filter by severity
           name: severity
           in: query
           schema:
-            type: integer
             enum:
               - 0
               - 1
               - 2
               - 3
+            type: integer
             title: Severity
         - description: Filter by exact severity (repeatable; OR semantics)
           name: severity_exact
@@ -226,7 +228,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - 0
@@ -234,6 +235,7 @@ paths:
                 - 2
                 - 3
               type: integer
+            type: array
             title: Severity Exact
         - description: Filter by Engine activity (repeatable; OR semantics)
           name: activity
@@ -241,13 +243,13 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - fixing
                 - watching
                 - recurred
               type: string
+            type: array
             title: Activity
         - description: Filter by tag (exact match)
           name: tag
@@ -272,7 +274,6 @@ paths:
           name: sort_by
           in: query
           schema:
-            type: string
             enum:
               - default
               - created_at
@@ -281,6 +282,7 @@ paths:
               - last_updated
               - trace_count
               - severity
+            type: string
             title: Sort By
         - description: Group results by issue lifecycle status before applying sort_by
           name: status_first
@@ -371,7 +373,7 @@ components:
         fix_prompt:
           type: string
         fix_verification:
-          type: object
+          $ref: '#/components/schemas/issues.IssueFixVerification'
         id:
           type: string
         last_seen_at:
@@ -420,6 +422,8 @@ components:
           type: object
         updated_at:
           type: string
+        validation_result:
+          $ref: '#/components/schemas/issues.IssueValidationResult'
         watching_since:
           type: string
     issues.ErrorResponse:
@@ -427,6 +431,36 @@ components:
       properties:
         error:
           type: string
+    issues.IssueFixVerification:
+      type: object
+      properties:
+        attempt:
+          type: integer
+        parent_deployment_id:
+          type: string
+          format: uuid
+        preview_deployment_id:
+          type: string
+          format: uuid
+        reason:
+          type: string
+        root_trace_ids:
+          items:
+            type: string
+          type: array
+        status:
+          type: string
+          enum:
+            - awaiting_preview
+            - verifying
+            - passed
+            - failed
+            - inconclusive
+            - timeout
+            - error
+        updated_at:
+          type: string
+          format: date-time
     issues.LinearContext:
       type: object
       properties:
@@ -489,6 +523,31 @@ components:
         - StatusWatching
         - StatusCompleted
         - StatusIgnored
+    issues.IssueValidationResult:
+      type: object
+      properties:
+        active_revision_id:
+          type: string
+          format: uuid
+        completed_at:
+          type: string
+          format: date-time
+        deployment_id:
+          type: string
+          format: uuid
+        outcome:
+          type: string
+          enum:
+            - reproduced
+            - not_reproduced
+            - inconclusive
+            - error
+        reason:
+          type: string
+        root_trace_ids:
+          items:
+            type: string
+          type: array
   securitySchemes:
     API Key:
       type: apiKey

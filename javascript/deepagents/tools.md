@@ -41,7 +41,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [search, fetchUrl, runQuery],
 });
 ```
@@ -52,7 +52,7 @@ const agent = await createDeepAgent({
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [search, fetchUrl, runQuery],
 });
 ```
@@ -237,7 +237,7 @@ const internetSearch = tool(
 );
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [internetSearch],
 });
 ```
@@ -286,7 +286,7 @@ const internetSearch = tool(
 );
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [internetSearch],
 });
 ```
@@ -522,7 +522,7 @@ const client = new MultiServerMCPClient({
 const tools = await client.getTools();
 
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools,
 });
 
@@ -548,7 +548,7 @@ const client = new MultiServerMCPClient({
 const tools = await client.getTools();
 
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools,
 });
 

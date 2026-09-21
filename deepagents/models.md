@@ -119,6 +119,38 @@ See [Profiles](profiles.md) for the full field list, merge semantics, and plugin
 > [!TIP]
 > For shaping how the *agent* behaves once the model is built, use a [harness profile](profiles.md#harness-profiles).
 
+### OpenAI and the Responses API
+
+When you pass an `openai:...` string as the model, Deep Agents uses the built-in OpenAI [provider profile](profiles.md#provider-profiles) to enable the [Responses API](../integrations/chat/openai.md#responses-api) by default. That path supports OpenAI conversation state and related features; see the [OpenAI provider](../integrations/providers/openai.md) and [chat model](../integrations/chat/openai.md) docs for current API options.
+
+> [!NOTE]
+> The built-in OpenAI provider profile applies only to model strings. To set kwargs such as `use_responses_api`, `store`, or `include`, pass a configured model instance, or, in Python, layer them through a [provider profile](profiles.md#provider-profiles) `init_kwargs`. Build the instance with [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model) (Python) or `initChatModel` / `ChatOpenAI` (TypeScript).
+
+To use [Chat Completions](https://platform.openai.com/docs/guides/responses-vs-chat-completions) instead of the Responses API, pass a pre-initialized model with `use_responses_api=False`:
+
+```python
+from langchain.chat_models import init_chat_model
+from deepagents import create_deep_agent
+
+model = init_chat_model("openai:gpt-5.5", use_responses_api=False)
+agent = create_deep_agent(model=model)
+```
+
+To keep the Responses API but disable data retention (`store=False`) while still receiving encrypted reasoning output, set `include` so reasoning is returned as encrypted content:
+
+```python
+from langchain.chat_models import init_chat_model
+from deepagents import create_deep_agent
+
+model = init_chat_model(
+    "openai:gpt-5.5",
+    use_responses_api=True,
+    store=False,
+    include=["reasoning.encrypted_content"],
+)
+agent = create_deep_agent(model=model)
+```
+
 ## Select a model at runtime
 
 If your application lets users choose a model (for example using a dropdown in the UI), use [middleware](../langchain/middleware.md) to swap the model at runtime without rebuilding the agent.

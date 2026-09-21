@@ -11,9 +11,11 @@ tags: [docs, langsmith, llm-gateway-langchain-provider]
 > Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](release-stages.md). APIs and features may change as we iterate.
+> The LLM Gateway is in [beta](release-stages.md).
 
 **Gateway Credits** let you call LangChain-hosted models through the standard LLM Gateway API without setting up a provider account or key. Authenticate with only your [LangSmith API key](create-account-api-key.md). No [provider secret](llm-gateway-admin-setup.md#1-add-provider-secrets) is required.
+
+For SemIf availability and usage, see [Decision models](llm-gateway-decision-models.md#semif).
 
 The gateway routes each request based on its model ID. A hosted model slug such as `moonshotai/kimi-k3` uses Gateway Credits. A model ID that starts with a configured bring-your-own-key provider, such as `anthropic/claude-opus-5`, uses that provider's secret instead.
 
@@ -26,7 +28,7 @@ https://gateway.smith.langchain.com/v1
 
 Authenticate with your LangSmith API key as a bearer token.
 
-For regional base URLs, see [Regional gateways](llm-gateway-api-formats.md#use-a-regional-gateway).
+For regional base URLs, see [Regional gateways](llm-gateway-how-it-works.md#use-a-regional-gateway).
 
 ## Available models
 
@@ -102,7 +104,7 @@ print(model.invoke("ping").content)
 
 ## Supported endpoints
 
-Hosted models use the same standard API formats as bring-your-own-key models:
+Credit-funded chat models use the same standard API formats as bring-your-own-key models:
 
 | Method and path             | Behavior                                      |
 | --------------------------- | --------------------------------------------- |

@@ -495,7 +495,7 @@ let agent = createAgent({
 import { createAgent } from "langchain";
 
 let agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
 });
@@ -507,7 +507,7 @@ let agent = createAgent({
 import { createAgent } from "langchain";
 
 let agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
 });
@@ -965,7 +965,7 @@ Rules:
 `);
 
 export const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
 });
@@ -1083,7 +1083,7 @@ Rules:
 `);
 
 export const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
 });
@@ -1505,7 +1505,7 @@ import { humanInTheLoopMiddleware } from "langchain"; // [!code highlight]
 import { MemorySaver } from "@langchain/langgraph"; // [!code highlight]
 
 agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
   middleware: [
@@ -1529,7 +1529,7 @@ import { humanInTheLoopMiddleware } from "langchain"; // [!code highlight]
 import { MemorySaver } from "@langchain/langgraph"; // [!code highlight]
 
 agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
   middleware: [

@@ -46,7 +46,7 @@ agent = create_deep_agent(
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     system_prompt="You are a helpful assistant.",
     tools=[search, fetch_url],
     memory=["./AGENTS.md"],
@@ -666,7 +666,7 @@ def internet_search(
     )
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[internet_search],
 )
 ```
@@ -867,7 +867,7 @@ async def main():
     async with MCPAdapter(config) as adapter:
         tools = await adapter.list_tools()
         agent = create_deep_agent(
-            model="anthropic:claude-sonnet-4-6",
+            model="anthropic:claude-sonnet-5",
             tools=tools,
         )
         await agent.ainvoke(
@@ -1033,7 +1033,7 @@ thorough research, and then write a polished report. \
 """
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     system_prompt=research_instructions,
 )
 ```
@@ -1328,7 +1328,7 @@ def log_tool_calls(request, handler):
     return result
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[get_weather],
     middleware=[log_tool_calls],
 )
@@ -1765,7 +1765,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     middleware=[CodeInterpreterMiddleware()],
 )
 ```
@@ -1914,11 +1914,11 @@ from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
 
 # By default we provide a StateBackend
-agent = create_deep_agent(model="anthropic:claude-sonnet-4-6")
+agent = create_deep_agent(model="anthropic:claude-sonnet-5")
 
 # Under the hood, it looks like
 agent2 = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=StateBackend(),
 )
 ```
@@ -2026,7 +2026,7 @@ from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
 )
 ```
@@ -2121,7 +2121,7 @@ from deepagents import create_deep_agent
 from deepagents.backends import LocalShellBackend
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
 )
 ```
@@ -2217,7 +2217,7 @@ from deepagents.backends import StoreBackend
 from langgraph.store.memory import InMemoryStore
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=StoreBackend(
         namespace=lambda rt: (rt.server_info.user.identity,),
     ),
@@ -2329,7 +2329,7 @@ from deepagents import create_deep_agent
 from deepagents.backends import ContextHubBackend
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=ContextHubBackend("my-agent"),
 )
 ```
@@ -2433,7 +2433,7 @@ from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.store.memory import InMemoryStore
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=CompositeBackend(
         default=StateBackend(),
         routes={
@@ -2898,7 +2898,7 @@ def notify_email(to: str, subject: str, body: str) -> str:
 checkpointer = MemorySaver()
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[remove_file, fetch_file, notify_email],
     interrupt_on={
         "remove_file": True,  # Default: approve, edit, reject, respond
@@ -3167,7 +3167,7 @@ skills_files = {
 }
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=backend,
     skills=["/skills/"],
     checkpointer=checkpointer,
@@ -3504,7 +3504,7 @@ with urlopen(
 checkpointer = MemorySaver()
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     memory=[
         "/AGENTS.md"
     ],
@@ -3794,7 +3794,7 @@ store.put(
 )
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
     store=store,
     memory=["/AGENTS.md"],
@@ -4080,7 +4080,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     backend=FilesystemBackend(root_dir="/Users/user/{project}"),
     memory=[
         "./AGENTS.md"

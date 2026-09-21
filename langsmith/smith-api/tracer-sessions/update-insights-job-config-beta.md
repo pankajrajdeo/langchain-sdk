@@ -1,6 +1,6 @@
 ---
 title: "Update insights job config (Beta)"
-description: "Update an insights job config."
+description: "Update an Insights job configuration for a project."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/update-insights-job-config-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, update-insights-job-config-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, update-insights-job-config-b
 
 # Update insights job config (Beta)
 
-> Update an insights job config.
+> Update an Insights job configuration for a project.
 
 ## OpenAPI
 
@@ -168,13 +168,15 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights/configs/{config_id}:
     patch:
       tags:
         - tracer-sessions
       summary: Update insights job config (Beta)
-      description: Update an insights job config.
+      description: Update an Insights job configuration for a project.
       operationId: >-
         _Beta__Update_Insights_Job_Config_api_v1_sessions__session_id__insights_configs__config_id__patch
       parameters:
@@ -241,7 +243,7 @@ components:
           title: Schedule Cron
       type: object
       title: UpdateClusteringJobConfigRequest
-      description: Request to update a clustering job config.
+      description: Request to update an Insights job configuration.
     CreateClusteringJobConfigResponse:
       properties:
         id:
@@ -270,7 +272,7 @@ components:
         - description
         - config
       title: CreateClusteringJobConfigResponse
-      description: Response to create a clustering job config.
+      description: An Insights job configuration.
     HTTPValidationError:
       properties:
         detail:
@@ -381,7 +383,7 @@ components:
           default: true
       type: object
       title: CreateRunClusteringJobRequest
-      description: Request to create a run clustering job.
+      description: Configuration for an Insights job.
     SavedRunClusteringJobRequest:
       properties:
         name:
@@ -474,7 +476,7 @@ components:
         - attribute_schemas
         - model
       title: SavedRunClusteringJobRequest
-      description: Request to create a run clustering job.
+      description: Saved configuration for an Insights job.
   securitySchemes:
     API Key:
       type: apiKey

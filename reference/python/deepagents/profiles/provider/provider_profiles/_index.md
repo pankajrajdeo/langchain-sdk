@@ -20,4 +20,4 @@ tags: [index, reference, python, deepagents, profiles, provider, provider_profil
 - [get_provider_profile](get_provider_profile.md) - Look up the ProviderProfile for a model spec.
 - [logger](logger.md) - View source on GitHub
 - [register_provider_profile](register_provider_profile.md) - Register a ProviderProfile for a provider or specific model.
-- [validate_profile_key](validate_profile_key.md) - Validate a profile registry key.
+- [validate_profile_key](validate_profile_key.md) - Validate a provider or provider:model profile registry key.

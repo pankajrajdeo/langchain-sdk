@@ -20,4 +20,4 @@ Entrypoint to using [chat models](../../../langchain/models.md) in LangChain.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/79cab2dc7f58be720cac43db3677b4c1fd971f91/libs/langchain_v1/langchain/chat_models/__init__.py)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a18de590e7ccf5c647fbf3d689e5f1a15f78e9f5/libs/langchain_v1/langchain/chat_models/__init__.py)

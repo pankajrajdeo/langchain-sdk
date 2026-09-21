@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/evaluators/{evaluator_id}:
     patch:
@@ -263,16 +265,16 @@ components:
     evaluators.UpdateCodeEvaluatorRequest:
       type: object
       properties:
+        advanced_features_enabled:
+          type: boolean
         code:
           type: string
         dependencies:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
         language:
           type: string
-        workspace_secrets_keys:
-          items:
-            type: string
-          type: array
     evaluators.UpdateLLMEvaluatorRequest:
       type: object
       properties:
@@ -330,6 +332,8 @@ components:
     evaluators.CodeEvaluator:
       type: object
       properties:
+        advanced_features_enabled:
+          type: boolean
         code:
           type: string
         dependencies:
@@ -343,10 +347,6 @@ components:
         language:
           description: 'Default: "python"'
           type: string
-        workspace_secrets_keys:
-          items:
-            type: string
-          type: array
     evaluators.LLMEvaluator:
       type: object
       properties:

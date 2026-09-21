@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/orgs/current/info:
     get:
@@ -553,25 +555,12 @@ components:
             Metronome custom fields. nil or negative means unlimited; 0 blocks
             all runs.
           type: number
-        gateway_data_protection_enabled:
-          description: >-
-            GatewayDataProtectionEnabled indicates whether this org can use
-            gateway
-
-            data protection (the "guard" policy type, backed by Presidio).
-
-            Set by Metronome entitlement, not admin-patchable. Defaults on, so
-            orgs
-
-            without an explicit entitlement value can configure guard policies.
-          type: boolean
         gateway_pii_redaction_enabled:
           description: |-
             GatewayPIIRedactionEnabled indicates whether this org can use PII
             detection/redaction inside gateway data protection (guard) policies.
-            Sub-gate beneath GatewayDataProtectionEnabled: when this is off,
-            PII-configured guard policies are unavailable as a whole.
-            Set by Metronome entitlement, not admin-patchable.
+            When this is off, PII-configured guard policies are unavailable as a
+            whole. Set by Metronome entitlement, not admin-patchable.
           type: boolean
         ip_allowlist_enabled:
           description: >-

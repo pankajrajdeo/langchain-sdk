@@ -10,19 +10,21 @@ tags: [docs, javascript, deepagents, profiles]
 
 > Package per-provider and per-model defaults that Deep Agents applies when a model is selected
 
-**Harness profiles** let you package configuration that Deep Agents applies whenever a given provider or specific model is selected: system-prompt tweaks, tool description overrides, excluded tools or middleware, extra middleware, and general-purpose subagent edits. They are the main way to tune how the harness behaves for a particular model without changing your `createDeepAgent` call site. Use `HarnessProfileOptions` to build profiles; use `parseHarnessProfileConfig` when [loading or saving YAML/JSON files](#load-profiles-from-config-files). Deep Agents ships built-in harness profiles for OpenAI and Anthropic (Claude) models.
+**Harness profiles** let you customize the Deep Agents harness for a specific model or provider. You can adjust system prompts and tool descriptions, exclude tools or middleware, add middleware, and configure the general-purpose subagent. Deep Agents applies these settings whenever you select a matching model, without requiring changes to your agent creation code.
 
 > [!NOTE]
-> Provider profiles (for controlling model-construction kwargs) and the plugin registration system are Python-only features. The TypeScript SDK supports harness profiles only.
+> Provider profiles (for controlling settings used to create a model) and the plugin registration system are Python-only features. The TypeScript SDK supports harness profiles only.
 
 ## Harness profiles
 
-A harness profile describes prompt-assembly, tool-visibility, middleware, and default-subagent adjustments that `createDeepAgent` applies after the chat model has been constructed:
+Deep Agents includes **built-in harness profiles** with default settings for specific providers and models.
+
+Use `HarnessProfileOptions` to define settings that `createDeepAgent` applies after constructing the chat model:
 
 ```ts
 import { registerHarnessProfile } from "deepagents";
 
-registerHarnessProfile("openai:gpt-5.5", {
+registerHarnessProfile("openai:gpt-6-astra", {
   systemPromptSuffix: "Respond in under 100 words.",
   excludedTools: ["execute"],
   excludedMiddleware: ["SummarizationMiddleware"],
@@ -31,10 +33,10 @@ registerHarnessProfile("openai:gpt-5.5", {
 ```
 
 #### `baseSystemPrompt` — `string`
-Replace the base Deep Agents system prompt (the `base` key in [System prompt](customization.md#system-prompt)).
+Set the profile's base instructions. For the main agent, these follow the caller's system instructions; no base instructions are added by default. For declarative subagents, this replaces their authored system prompt.
 
 #### `systemPromptSuffix` — `string`
-Append text after the caller's `suffix`, placed last in the assembled system prompt. Applied to the main agent, declarative subagents, and the auto-added general-purpose subagent.
+Append text after the caller's instructions and the profile's base instructions. Applied to the main agent, declarative subagents, and the auto-added general-purpose subagent.
 
 ">
   Override individual tool descriptions, keyed by tool name.
@@ -52,32 +54,65 @@ Strip specific middleware from the assembled stack. Matched against each middlew
 Disable, rename, or re-prompt the general-purpose subagent (`enabled`, `description`, `systemPrompt`).
 
 > [!NOTE]
-> Caller-supplied `systemPrompt` always sits at the front of the assembled prompt, and `systemPromptSuffix` always sits at the end—regardless of which model is selected. The same overlay rules apply to subagents: each subagent re-runs profile resolution against its own model. See [System prompt](customization.md#system-prompt) for the full per-case breakdown (main agent, subagents, and the general-purpose subagent).
+> Caller-supplied `systemPrompt` always sits at the front of the assembled prompt, and `systemPromptSuffix` always sits at the end—regardless of which model is selected. The same overlay rules apply to subagents: each subagent re-runs profile resolution against its own model. See [System prompt](customization.md#system-prompt) for custom instructions and subagent prompt behavior.
 
 > [!WARNING]
 > Listing `FilesystemMiddleware` or `SubAgentMiddleware` in `excludedMiddleware` throws at construction time—they are required scaffolding. To hide their tools from the model without removing the middleware, use `excludedTools` instead.
 
+Register profiles before creating an agent. Pass a model string or a model object you construct yourself; see [Configure model parameters](models.md#configure-model-parameters) for examples. Harness profiles apply in both cases.
+
 <details>
 <summary>Lookup order for preconfigured model instances</summary>
 
-When you pass a preconfigured chat model instance instead of a `provider:model` string, the harness synthesizes the canonical `provider:identifier` key from the instance and looks it up in this order:
+When you pass a model object, the harness looks up its profile using the provider and identifier reported by that object.
 
-1. Exact `provider:identifier` match
-2. Identifier-only (only when the identifier already contains `:`)
-3. Provider-only fallback
+1. If the identifier has no colon, look up `provider:identifier`, falling back to that provider's defaults.
+2. If the identifier contains a colon, look it up directly, falling back to its prefix's defaults.
+3. If neither lookup matches, use the reported provider's defaults.
 
 </details>
 
 ## Registration keys
 
-Both profile types use the same key format:
+Profile registrations use these keys:
 
 * **Provider-level**—a bare provider name like `"openai"` applies to every model from that provider.
-* **Model-level**—a fully qualified `provider:model` key like `"openai:gpt-5.5"` applies only to that specific model.
+* **Model-level**—a fully qualified `provider:model` key like `"openai:gpt-6-astra"` applies only to that specific model.
 
 When both a provider-level and a model-level profile exist, they are merged at resolution time. Unset model-level fields inherit from the provider-level profile; explicit model-level values override them.
 
-Re-registering under an existing key merges the new profile on top of the prior one—it does not replace it. See [Merge semantics](#merge-semantics) for the per-field rules.
+Profile registration in TypeScript does not support model identifiers containing colons. Use a key such as `my_provider:my-model` with a single colon separating the provider and model identifier.
+
+For example, exclude a tool for a hypothetical provider's models, then customize the prompt suffix for one model:
+
+```ts
+import { registerHarnessProfile } from "deepagents";
+
+// Set defaults for a hypothetical provider.
+registerHarnessProfile("my_provider", {
+  excludedTools: ["execute"],
+  systemPromptSuffix: "Respond in under 500 words.",
+});
+
+// Override the prompt suffix for one model; inherit the excluded tool.
+registerHarnessProfile("my_provider:my-model", {
+  systemPromptSuffix: "Respond in under 100 words.",
+});
+```
+
+An agent using the model-specific registration excludes `execute` and receives the 100-word suffix. Other models from `my_provider` exclude `execute` and receive the 500-word suffix.
+
+Re-registering under an existing key merges the new profile on top of the prior one; it does not replace it. This also lets you customize a built-in profile by registering under its key. See [Merge semantics](#merge-semantics) for the per-field rules.
+
+Continuing the example, exclude one more tool for the same model:
+
+```ts
+registerHarnessProfile("my_provider:my-model", {
+  excludedTools: ["grep"],
+});
+```
+
+Agents created afterward with this model exclude both `execute` and `grep` and retain the 100-word suffix. Other models keep the provider defaults.
 
 > [!NOTE]
 > There is no wildcard key that matches every provider. To apply the same overrides everywhere—say, dropping `SummarizationMiddleware` regardless of which model is selected—register the profile under each provider key you use. Profiles are intended for adjustments that depend on the model being selected. Global adjustments that should apply regardless of model should be made on the `createDeepAgent` call site.
@@ -94,7 +129,7 @@ Re-registering under an existing key merges the new profile on top of the prior 
 
 ## Provider profiles
 
-Provider profiles (for controlling model-construction kwargs like `temperature`) are a Python-only feature and are not available in the TypeScript SDK.
+Provider profiles (for controlling settings used to create a model, such as `temperature`) are a Python-only feature and are not available in the TypeScript SDK.
 
 ## Load profiles from config files
 

@@ -37,7 +37,7 @@ You can apply a filter to the runs that trigger the evaluator. You may want to a
 * Runs that invoke a specific tool call. See [filtering for tool calls](filter-traces-in-application.md#example-filtering-for-tool-calls) for more information.
 * Runs that match a particular piece of metadata (e.g. if you log traces with a `plan_type` and only want to run evaluations on traces from your enterprise customers). See [adding metadata to your traces](add-metadata-tags.md) for more information.
 
-[Filters on evaluators](filter-traces-in-application.md) work the same way as when you're filtering traces in a project.
+Evaluators use the filter builder, with the same fields and operators described in [Filter traces (ClickHouse)](filter-traces-in-application.md).
 
 > [!TIP]
 > It's often helpful to inspect runs as you're creating a filter for your evaluator. With the evaluator configuration panel open, you can inspect runs and apply filters to them. Any filters you apply to the runs table will automatically be reflected in filters on your evaluator.

@@ -1,6 +1,6 @@
 ---
 title: "Get insights job configs (Beta)"
-description: "Get all insights job configs for a session."
+description: "List Insights job configurations for a project."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-insights-job-configs-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, get-insights-job-configs-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, get-insights-job-configs-bet
 
 # Get insights job configs (Beta)
 
-> Get all insights job configs for a session.
+> List Insights job configurations for a project.
 
 ## OpenAPI
 
@@ -168,13 +168,15 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights/configs:
     get:
       tags:
         - tracer-sessions
       summary: Get insights job configs (Beta)
-      description: Get all insights job configs for a session.
+      description: List Insights job configurations for a project.
       operationId: >-
         _Beta__Get_Insights_Job_Configs_api_v1_sessions__session_id__insights_configs_get
       parameters:
@@ -222,7 +224,7 @@ components:
       required:
         - configs
       title: GetClusteringJobConfigsResponse
-      description: Response to get clustering job configs.
+      description: A collection of Insights job configurations.
     HTTPValidationError:
       properties:
         detail:
@@ -265,7 +267,7 @@ components:
         - config
         - prebuilt
       title: ClusteringJobConfigResponse
-      description: Full clustering job config with all details.
+      description: An Insights job configuration.
     SavedRunClusteringJobRequest:
       properties:
         name:
@@ -358,7 +360,7 @@ components:
         - attribute_schemas
         - model
       title: SavedRunClusteringJobRequest
-      description: Request to create a run clustering job.
+      description: Saved configuration for an Insights job.
   securitySchemes:
     API Key:
       type: apiKey

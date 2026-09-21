@@ -1,13 +1,13 @@
 ---
 title: "resources"
-description: "Index of 35 pages and 0 subdirectories under resources."
+description: "Index of 36 pages and 0 subdirectories under resources."
 category: "index"
 tags: [index, resources]
 ---
 
 # resources
 
-35 pages here.
+36 pages here.
 
 ## Files
 
@@ -23,7 +23,7 @@ tags: [index, resources]
 - [Building Governed Agents: A Framework for Cost, Control, and Compliance.](building-governed-agents-a-framework-for-cost-control-and-compliance.md) - The gateway is the runtime control plane for enterprise AI, turning policy into enforceable decisions across every model call, tool call, and agent hop.
 - [Customer Experience (CX) Agents in Production](customer-experience-cx-agents-in-production.md) - Lessons from Lyft, Vodafone, and LATAM Airlines
 - [How to Evaluate LLMs and Agents: Benchmarks, Evals, and Guardrails](how-to-evaluate-llms.md) - When GSM8K launched in 2021, GPT-3 solved roughly 35% of its grade school math problems. Today, GPT-5.3 Codex scores 99%, and the benchmark no longer separates good models from great ones. A public...
-- [Guides](index.md) - Thank you! Your submission has been received!Oops! Something went wrong while submitting the form.## ![Scaling Agents in Europe & The Middle East: Lessons from Schneider Electric, Vodafone, and...
+- [Guides](index.md) - Thank you! Your submission has been received!Oops! Something went wrong while submitting the form.## ![Scaling Agents in Healthcare & Life Sciences Scaling Agents in Healthcare & Life...
 - [LangChain Alternatives: A Full Comparison for Agent Engineering](langchain-alternatives.md) - An overview of LangChain alternatives, what aspects of agent engineering they cover, and what other tools you may still need to run agents in production.
 - [LangChain vs. AutoGen](langchain-vs-autogen.md) - The honest 2026 answer to "LangChain vs. AutoGen" is that the question itself is out of date. AutoGen entered maintenance mode in October 2025, Microsoft Agent Framework reached 1.0 GA in April 2026...
 - [LangChain vs LlamaIndex: from retrieval to reliable AI agents](langchain-vs-llamaindex.md) - Compare LangChain and LlamaIndex for building production-grade AI agents.
@@ -42,6 +42,7 @@ tags: [index, resources]
 - [9 LLM Observability Tools for Production AI Agents](llm-observability-tools.md) - Compare the best LLM observability tools for production AI agents, with practical tradeoffs for traces, evals, debugging, cost, and review workflows.
 - [You don’t know what your agent will do until it’s in production](production-monitoring.md) - Create agentsShare
 - [Scaling Agents in Europe &amp; The Middle East: Lessons from Schneider Electric, Vodafone, and monday.com](scaling-agents-in-europe-the-middle-east-lessons-from-schneider-electric-vodafone-and-monday-com.md) - New Guide on Scaling Agents in Europe &amp; the Middle East to see how Schneider Electric, Vodafone, and monday.com are approaching production AI at scale, from establishing shared agent platforms...
+- [Scaling Agents in Healthcare &amp; Life Sciences](scaling-agents-in-healthcare-life-sciences.md) - Agent programs in healthcare and life sciences are being built under a different set of constraints than those in most industries. There’s plenty of upside if the constraints can be resolved. Success...
 - [The Definitive Guide to Testing LLM Applications](the-definitive-guide-to-testing-llm-applications.md) - January 26, 2025
 - [The agent improvement loop starts with a trace](traces-start-agent-improvement-loop.md) - March 31, 2026
 - [What is an AI sandbox?](what-is-an-ai-sandbox.md) - - An AI sandbox gives an agent an isolated workspace for running code and completing tasks while keeping host systems outside the execution boundary. - An agent needs a sandbox when it runs generated...

@@ -41,7 +41,7 @@ agent = create_deep_agent(
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[search, fetch_url, run_query],
 )
 ```
@@ -180,7 +180,7 @@ def internet_search(
     )
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[internet_search],
 )
 ```
@@ -393,7 +393,7 @@ async def main():
     async with MCPAdapter(config) as adapter:
         tools = await adapter.list_tools()
         agent = create_deep_agent(
-            model="anthropic:claude-sonnet-4-6",
+            model="anthropic:claude-sonnet-5",
             tools=tools,
         )
         await agent.ainvoke(

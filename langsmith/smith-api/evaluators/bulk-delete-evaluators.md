@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/evaluators:
     delete:
@@ -185,9 +187,9 @@ paths:
           style: form
           explode: false
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Evaluator Ids
         - description: >-
             When true, delete all run rules for this evaluator before deleting

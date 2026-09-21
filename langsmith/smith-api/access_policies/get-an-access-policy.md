@@ -168,6 +168,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/platform/orgs/current/access-policies/{access_policy_id}:
     get:
@@ -374,6 +376,7 @@ components:
         - rules:configure-retention
         - runs:create
         - runs:read
+        - runs:read-stats
         - runs:share
         - runs:delete
         - model-price-map:create
@@ -399,6 +402,11 @@ components:
         - alerts:update
         - alerts:delete
         - alerts:read
+        - agent-auth-connections:read
+        - agent-auth-connections:create
+        - agent-auth-connections:update
+        - agent-auth-connections:delete
+        - agent-auth-connections:revoke
         - bulk-exports:read
         - bulk-exports:manage
         - mcp-servers:create
@@ -473,6 +481,7 @@ components:
         - RulesConfigureRetention
         - RunsCreate
         - RunsRead
+        - RunsReadStats
         - RunsShare
         - RunsDelete
         - ModelPriceMapCreate
@@ -498,6 +507,11 @@ components:
         - AlertsUpdate
         - AlertsDelete
         - AlertsRead
+        - AgentAuthConnectionsRead
+        - AgentAuthConnectionsCreate
+        - AgentAuthConnectionsUpdate
+        - AgentAuthConnectionsDelete
+        - AgentAuthConnectionsRevoke
         - BulkExportsRead
         - BulkExportsManage
         - McpServersCreate

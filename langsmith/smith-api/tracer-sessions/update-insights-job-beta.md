@@ -1,6 +1,6 @@
 ---
 title: "Update insights job (Beta)"
-description: "Update a session cluster job."
+description: "Update an Insights job for a project."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/update-insights-job-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, update-insights-job-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, update-insights-job-beta]
 
 # Update insights job (Beta)
 
-> Update a session cluster job.
+> Update an Insights job for a project.
 
 ## OpenAPI
 
@@ -168,13 +168,15 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/sessions/{session_id}/insights/{job_id}:
     patch:
       tags:
         - tracer-sessions
       summary: Update insights job (Beta)
-      description: Update a session cluster job.
+      description: Update an Insights job for a project.
       operationId: >-
         _Beta__Update_Insights_Job_api_v1_sessions__session_id__insights__job_id__patch
       parameters:
@@ -226,7 +228,7 @@ components:
       required:
         - name
       title: UpdateRunClusteringJobRequest
-      description: Request to update a session cluster job.
+      description: Request to update an Insights job.
     UpdateRunClusteringJobResponse:
       properties:
         name:
@@ -240,7 +242,7 @@ components:
         - name
         - status
       title: UpdateRunClusteringJobResponse
-      description: Response to update a session cluster job.
+      description: Response to updating an Insights job.
     HTTPValidationError:
       properties:
         detail:

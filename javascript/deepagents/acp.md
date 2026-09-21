@@ -277,7 +277,7 @@ const server = new DeepAgentsServer({
     {
       name: "code-agent",
       description: "Full-featured coding assistant",
-      model: "anthropic:claude-sonnet-4-6",
+      model: "anthropic:claude-sonnet-5",
       skills: ["./skills/"],
       memory: ["./.deepagents/AGENTS.md"],
     },
@@ -306,7 +306,7 @@ const server = new DeepAgentsServer({
     {
       name: "code-agent",
       description: "Full-featured coding assistant",
-      model: "openrouter:openrouter:z-ai/glm-5.2",
+      model: "openrouter:z-ai/glm-5.2",
       skills: ["./skills/"],
       memory: ["./.deepagents/AGENTS.md"],
     },

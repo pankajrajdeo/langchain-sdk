@@ -175,6 +175,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/audit-logs:
     get:
@@ -330,6 +332,7 @@ components:
         - create_personal_access_token
         - delete_personal_access_token
         - revoke_personal_access_token
+        - reinstate_personal_access_token
         - create_service_key
         - delete_service_key
         - update_service_key
@@ -387,6 +390,7 @@ components:
         - delete_tagging
         - create_agent
         - update_agent
+        - delete_agent
         - create_agent_runtime_binding
         - update_tracer_session
         - delete_tracer_session
@@ -493,6 +497,7 @@ components:
         - update_annotation_queue_item
         - get_annotation_queue_items
         - submit_nps_response
+        - submit_product_feedback
         - create_mcp_server
         - update_mcp_server
         - delete_mcp_server
@@ -507,6 +512,9 @@ components:
         - create_agent_auth_connection
         - update_agent_auth_connection
         - delete_agent_auth_connection
+        - create_agent_auth_oidc_integration
+        - update_agent_auth_oidc_integration
+        - delete_agent_auth_oidc_integration
         - create_tool
         - update_tool
         - delete_tool
@@ -520,6 +528,7 @@ components:
         - update_evaluator
         - delete_evaluator
         - bulk_delete_evaluators
+        - test_evaluator
         - upsert_feature_default_model
         - delete_feature_default_model
         - upsert_feature_disabled_model
@@ -545,6 +554,7 @@ components:
         - create_sandbox_policy
         - update_sandbox_policy
         - delete_sandbox_policy
+        - create_computer_environment
         - list_sandbox_claims
         - get_sandbox_claim
         - get_sandbox_claim_status

@@ -31,6 +31,12 @@ From the [LangSmith homepage](https://smith.langchain.com?utm_source=docs\&utm_m
 
 For self-hosted LangSmith deployments, see [Enable Sandboxes on self-hosted deployments](deploy-self-hosted-full-platform.md#enable-sandboxes).
 
+## Network access
+
+Restricted egress applies to non-Enterprise organizations by default and to organizations that request it. Organizations with an approved exemption can use unrestricted egress. Restricted sandboxes use a managed allowlist for common package registries, source repositories, and model APIs. LangSmith blocks destinations outside the allowlist, even if you add them to a sandbox's proxy configuration.
+
+If you need unrestricted egress, [file a support ticket](https://support.langchain.com) with your organization or workspace ID, region, required destinations and ports, and use case. For more information, see [restricted egress and access requests](sandbox-auth-proxy.md#organization-level-restricted-egress).
+
 ## Get started
 
 ### 1. Install the SDK

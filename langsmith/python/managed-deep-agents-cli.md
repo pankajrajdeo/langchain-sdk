@@ -244,13 +244,14 @@ Use `mda deploy` to compile and deploy a project to LangSmith:
 uv run mda deploy
 ```
 
-| Argument or flag              | Use                                                                          |
-| ----------------------------- | ---------------------------------------------------------------------------- |
-| `path`                        | Project directory. Defaults to the current directory.                        |
-| `--name NAME`                 | Deployment name. Defaults to the agent `name` from `define_deep_agent`.      |
-| `--deployment-type dev\|prod` | Deployment type when creating a deployment. Defaults to `dev`.               |
-| `--workspace-id WORKSPACE_ID` | Workspace ID to deploy into. Overrides `LANGSMITH_WORKSPACE_ID`.             |
-| `--no-wait`                   | Trigger the remote build and exit without polling for deployment completion. |
+| Argument or flag                         | Use                                                                                                                                                                                                                             |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `path`                                   | Project directory. Defaults to the current directory.                                                                                                                                                                           |
+| `--name NAME`                            | Deployment name. Defaults to the agent `name` from `define_deep_agent`.                                                                                                                                                         |
+| `--deployment-type dev\|prod`            | Deployment type when creating a deployment. Defaults to `dev`.                                                                                                                                                                  |
+| `--workspace-id WORKSPACE_ID`            | Workspace ID to deploy into. Overrides `LANGSMITH_WORKSPACE_ID`.                                                                                                                                                                |
+| `--context-strategy overwrite\|keep-hub` | Resolve Context Hub conflicts when `instructions.md` or `skills/` changed in Hub since the last sync. Required in non-interactive shells. See [Context Hub](managed-deep-agents-context-hub.md#source-of-truth). |
+| `--no-wait`                              | Trigger the remote build and exit without polling for deployment completion.                                                                                                                                                    |
 
 Deploy runs these steps:
 
@@ -305,17 +306,17 @@ uv run mda delete
 
 ## Troubleshooting
 
-| Symptom                                              | Cause and fix                                                                                                                        |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `project root ... is not a directory`                | Pass a directory path to `mda dev` or `mda deploy`.                                                                                  |
-| `no agent entry file found`                          | Add `agent.py` at the project root.                                                                                                  |
-| `mda dev` cannot find `uv`                           | Install `uv` so `mda dev` can resolve the local LangGraph dev server.                                                                |
-| `No LangSmith API key found`                         | Set `LANGSMITH_API_KEY` or add it to the project `.env`.                                                                             |
-| Deploy fails with 401 or 403                         | Confirm the API key belongs to a workspace with deployments access. See [Pricing plans](../pricing-plans.md).                   |
-| Deploy reports a missing model provider API key      | Add the provider key, such as `OPENAI_API_KEY`, to `.env`, export it in your shell, or configure it as a LangSmith workspace secret. |
-| Deploy reports a Context Hub conflict                | The Context Hub repo changed during deploy. Re-run `mda deploy`.                                                                     |
-| The build exceeds 200 MB                             | Remove generated artifacts or large files from the project before deploying.                                                         |
-| Deployment reaches `BUILD_FAILED` or `DEPLOY_FAILED` | Open the printed deployment URL in LangSmith and inspect the revision logs.                                                          |
+| Symptom                                              | Cause and fix                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `project root ... is not a directory`                | Pass a directory path to `mda dev` or `mda deploy`.                                                                                                                                                                                                                                                                                                                 |
+| `no agent entry file found`                          | Add `agent.py` at the project root.                                                                                                                                                                                                                                                                                                                                 |
+| `mda dev` cannot find `uv`                           | Install `uv` so `mda dev` can resolve the local LangGraph dev server.                                                                                                                                                                                                                                                                                               |
+| `No LangSmith API key found`                         | Set `LANGSMITH_API_KEY` or add it to the project `.env`.                                                                                                                                                                                                                                                                                                            |
+| Deploy fails with 401 or 403                         | Confirm the API key belongs to a workspace with deployments access. See [Pricing plans](../pricing-plans.md).                                                                                                                                                                                                                                                  |
+| Deploy reports a missing model provider API key      | Add the provider key, such as `OPENAI_API_KEY`, to `.env`, export it in your shell, or configure it as a LangSmith workspace secret.                                                                                                                                                                                                                                |
+| Deploy reports a Context Hub conflict                | `instructions.md` or `skills/` changed in Context Hub since the last sync, or the repo changed during sync. In an interactive terminal, answer the overwrite prompt. In a non-interactive shell, re-run with `--context-strategy overwrite` or `--context-strategy keep-hub`. See [Context Hub](managed-deep-agents-context-hub.md#source-of-truth). |
+| The build exceeds 200 MB                             | Remove generated artifacts or large files from the project before deploying.                                                                                                                                                                                                                                                                                        |
+| Deployment reaches `BUILD_FAILED` or `DEPLOY_FAILED` | Open the printed deployment URL in LangSmith and inspect the revision logs.                                                                                                                                                                                                                                                                                         |
 
 ***
 

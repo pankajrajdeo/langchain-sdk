@@ -213,7 +213,7 @@ def get_thread_id_from_config() -> str:
 
 def agent():
     return create_deep_agent(
-        model="anthropic:claude-sonnet-4-6",
+        model="anthropic:claude-sonnet-5",
         backend=lambda _runtime: get_or_create_sandbox_for_thread(
             get_thread_id_from_config()
         ),

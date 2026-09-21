@@ -174,7 +174,7 @@ Deep Agents work with any [LangChain chat model](models.md#supported-models). Se
 > [!TIP]
 > **Using LangSmith Gateway**
 >
-> The [LangSmith Gateway](../../langsmith/llm-gateway.md) routes most major providers through LangSmith. You can [bring your own provider keys](../../langsmith/llm-gateway-quickstart.md#2-make-a-call), or use [Gateway Credits](../../langsmith/llm-gateway-credits.md) to access models without a provider key.
+> The [LangSmith Gateway](../../langsmith/llm-gateway.md) routes most major providers through LangSmith. You can [bring your own provider keys](../../langsmith/llm-gateway-quickstart.md#send-a-request), or use [Gateway Credits](../../langsmith/llm-gateway-credits.md) to access models without a provider key.
 
 ## Step 3: Create a search tool
 
@@ -323,7 +323,7 @@ Use this to run an internet search for a given query. You can specify the max nu
 `;
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [internetSearch],
   systemPrompt: researchInstructions,
 });
@@ -345,7 +345,7 @@ Use this to run an internet search for a given query. You can specify the max nu
 `;
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [internetSearch],
   systemPrompt: researchInstructions,
 });

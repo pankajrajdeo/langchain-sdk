@@ -1419,7 +1419,7 @@ from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     middleware=[
         RubricMiddleware(
             model="anthropic:claude-haiku-4-5",

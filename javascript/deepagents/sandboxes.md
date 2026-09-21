@@ -63,8 +63,6 @@ Sandboxes are especially useful for:
 
 These examples assume you have already created a sandbox/devbox using the provider's SDK and have credentials set up. For signup, authentication, and provider-specific lifecycle details, see [Available providers](#available-providers).
 
-**Google**
-
 ```ts
 import { createDeepAgent, LangSmithSandbox } from "deepagents";
 import { ChatAnthropic } from "@langchain/anthropic";
@@ -75,193 +73,7 @@ const lsSandbox = await client.createSandbox();
 
 try {
   const agent = createDeepAgent({
-    model: new ChatAnthropic({ model: "google-genai:gemini-3.6-flash" }),
-    systemPrompt: "You are a coding assistant with sandbox access.",
-    backend: new LangSmithSandbox({ sandbox: lsSandbox }),
-  });
-
-  const result = await agent.invoke({
-    messages: [
-      {
-        role: "user",
-        content: "Create a hello world Python script and run it",
-      },
-    ],
-  });
-  void result;
-} finally {
-  await client.deleteSandbox(lsSandbox.name);
-}
-```
-
-**OpenAI**
-
-```ts
-import { createDeepAgent, LangSmithSandbox } from "deepagents";
-import { ChatAnthropic } from "@langchain/anthropic";
-import { SandboxClient } from "langsmith/sandbox";
-
-const client = new SandboxClient();
-const lsSandbox = await client.createSandbox();
-
-try {
-  const agent = createDeepAgent({
-    model: new ChatAnthropic({ model: "openai:gpt-5.5" }),
-    systemPrompt: "You are a coding assistant with sandbox access.",
-    backend: new LangSmithSandbox({ sandbox: lsSandbox }),
-  });
-
-  const result = await agent.invoke({
-    messages: [
-      {
-        role: "user",
-        content: "Create a hello world Python script and run it",
-      },
-    ],
-  });
-  void result;
-} finally {
-  await client.deleteSandbox(lsSandbox.name);
-}
-```
-
-**Anthropic**
-
-```ts
-import { createDeepAgent, LangSmithSandbox } from "deepagents";
-import { ChatAnthropic } from "@langchain/anthropic";
-import { SandboxClient } from "langsmith/sandbox";
-
-const client = new SandboxClient();
-const lsSandbox = await client.createSandbox();
-
-try {
-  const agent = createDeepAgent({
-    model: new ChatAnthropic({ model: "anthropic:claude-sonnet-4-6" }),
-    systemPrompt: "You are a coding assistant with sandbox access.",
-    backend: new LangSmithSandbox({ sandbox: lsSandbox }),
-  });
-
-  const result = await agent.invoke({
-    messages: [
-      {
-        role: "user",
-        content: "Create a hello world Python script and run it",
-      },
-    ],
-  });
-  void result;
-} finally {
-  await client.deleteSandbox(lsSandbox.name);
-}
-```
-
-**OpenRouter**
-
-```ts
-import { createDeepAgent, LangSmithSandbox } from "deepagents";
-import { ChatAnthropic } from "@langchain/anthropic";
-import { SandboxClient } from "langsmith/sandbox";
-
-const client = new SandboxClient();
-const lsSandbox = await client.createSandbox();
-
-try {
-  const agent = createDeepAgent({
-    model: new ChatAnthropic({ model: "openrouter:openrouter:z-ai/glm-5.2" }),
-    systemPrompt: "You are a coding assistant with sandbox access.",
-    backend: new LangSmithSandbox({ sandbox: lsSandbox }),
-  });
-
-  const result = await agent.invoke({
-    messages: [
-      {
-        role: "user",
-        content: "Create a hello world Python script and run it",
-      },
-    ],
-  });
-  void result;
-} finally {
-  await client.deleteSandbox(lsSandbox.name);
-}
-```
-
-**Fireworks**
-
-```ts
-import { createDeepAgent, LangSmithSandbox } from "deepagents";
-import { ChatAnthropic } from "@langchain/anthropic";
-import { SandboxClient } from "langsmith/sandbox";
-
-const client = new SandboxClient();
-const lsSandbox = await client.createSandbox();
-
-try {
-  const agent = createDeepAgent({
-    model: new ChatAnthropic({ model: "fireworks:accounts/fireworks/models/glm-5p2" }),
-    systemPrompt: "You are a coding assistant with sandbox access.",
-    backend: new LangSmithSandbox({ sandbox: lsSandbox }),
-  });
-
-  const result = await agent.invoke({
-    messages: [
-      {
-        role: "user",
-        content: "Create a hello world Python script and run it",
-      },
-    ],
-  });
-  void result;
-} finally {
-  await client.deleteSandbox(lsSandbox.name);
-}
-```
-
-**Baseten**
-
-```ts
-import { createDeepAgent, LangSmithSandbox } from "deepagents";
-import { ChatAnthropic } from "@langchain/anthropic";
-import { SandboxClient } from "langsmith/sandbox";
-
-const client = new SandboxClient();
-const lsSandbox = await client.createSandbox();
-
-try {
-  const agent = createDeepAgent({
-    model: new ChatAnthropic({ model: "baseten:zai-org/GLM-5.2" }),
-    systemPrompt: "You are a coding assistant with sandbox access.",
-    backend: new LangSmithSandbox({ sandbox: lsSandbox }),
-  });
-
-  const result = await agent.invoke({
-    messages: [
-      {
-        role: "user",
-        content: "Create a hello world Python script and run it",
-      },
-    ],
-  });
-  void result;
-} finally {
-  await client.deleteSandbox(lsSandbox.name);
-}
-```
-
-**Ollama**
-
-```ts
-import { createDeepAgent, LangSmithSandbox } from "deepagents";
-import { ChatAnthropic } from "@langchain/anthropic";
-import { SandboxClient } from "langsmith/sandbox";
-
-const client = new SandboxClient();
-const lsSandbox = await client.createSandbox();
-
-try {
-  const agent = createDeepAgent({
-    model: new ChatAnthropic({ model: "ollama:north-mini-code-1.0" }),
+    model: new ChatAnthropic({ model: "claude-opus-4-8" }),
     systemPrompt: "You are a coding assistant with sandbox access.",
     backend: new LangSmithSandbox({ sandbox: lsSandbox }),
   });
@@ -385,7 +197,7 @@ export async function agent(config: LangGraphRunnableConfig) {
       idleTtlSeconds: 3600, // TTL: clean up when idle
     }));
   return createDeepAgent({
-    model: "anthropic:claude-sonnet-4-6",
+    model: "anthropic:claude-sonnet-5",
     backend: new LangSmithSandbox({ sandbox: lsSandbox }),
   });
 }
@@ -413,7 +225,7 @@ export async function agent(config: LangGraphRunnableConfig) {
       idleTtlSeconds: 3600, // TTL: clean up when idle
     }));
   return createDeepAgent({
-    model: "openrouter:openrouter:z-ai/glm-5.2",
+    model: "openrouter:z-ai/glm-5.2",
     backend: new LangSmithSandbox({ sandbox: lsSandbox }),
   });
 }
@@ -585,7 +397,7 @@ export async function agent(config: LangGraphRunnableConfig) {
       name: sandboxName,
     }));
   return createDeepAgent({
-    model: "anthropic:claude-sonnet-4-6",
+    model: "anthropic:claude-sonnet-5",
     backend: new LangSmithSandbox({ sandbox: lsSandbox }),
   });
 }
@@ -612,7 +424,7 @@ export async function agent(config: LangGraphRunnableConfig) {
       name: sandboxName,
     }));
   return createDeepAgent({
-    model: "openrouter:openrouter:z-ai/glm-5.2",
+    model: "openrouter:z-ai/glm-5.2",
     backend: new LangSmithSandbox({ sandbox: lsSandbox }),
   });
 }

@@ -146,7 +146,7 @@ def notify_email(to: str, subject: str, body: str) -> str:
 checkpointer = MemorySaver()
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[remove_file, fetch_file, notify_email],
     interrupt_on={
         "remove_file": True,  # Default: approve, edit, reject, respond
@@ -404,7 +404,7 @@ def writes_outside_workspace(request: ToolCallRequest) -> bool:
     return not path.startswith("/workspace/")
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     interrupt_on={
         "write_file": {
             "allowed_decisions": ["approve", "edit", "reject"],

@@ -170,6 +170,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v2/public/threads/{share_token}/traces:
     get:
@@ -197,9 +199,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Selects
         - description: opaque cursor from a previous page
           name: cursor
@@ -450,6 +452,15 @@ components:
           type: string
           format: uuid
           example: 018e4c7e-a9fb-7ef0-a5b6-6ea3a82e9327
+        turn_number:
+          description: >-
+            `turn_number` is the 1-based position in the whole thread, ordered
+            by start_time then trace_id ascending, before filtering or
+            pagination. Updates and deletions can change this position. Omitted
+            unless TURN_NUMBER is included in `selects`.
+          type: integer
+          minimum: 1
+          example: 1
     shared.ParseErrorDetails:
       description: Structured fields describing an adapter parse failure.
       type: object

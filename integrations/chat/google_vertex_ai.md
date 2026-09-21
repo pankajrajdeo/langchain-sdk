@@ -25,15 +25,15 @@ Gemini Enterprise Agent Platform exposes all foundational models available in Go
 > [!TIP]
 > **API Reference**
 >
-> For detailed documentation of all features and configuration options, head to the [`ChatVertexAI`](https://reference.langchain.com/python/langchain-community/chat_models/vertexai/ChatVertexAI) API reference.
+> For detailed documentation of all features and configuration options, head to the [`ChatVertexAI`](https://reference.langchain.com/python/langchain-google-vertexai/chat_models/ChatVertexAI) API reference.
 
 ## Overview
 
 ### Integration details
 
-| Class                                                                                                          | Package                                                                                          | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/google_vertex_ai) |                                                  Downloads                                                 |                                                 Version                                                 |
-| :------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- | :----------: | :----------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: |
-| [`ChatVertexAI`](https://reference.langchain.com/python/langchain-community/chat_models/vertexai/ChatVertexAI) | [`langchain-google-vertexai`](https://reference.langchain.com/python/langchain-google-vertexai/) |     beta     |                                        ✅                                       | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-google-vertexai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-google-vertexai?style=flat-square\&label=%20) |
+| Class                                                                                                       | Package                                                                                          | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/google_vertex_ai) |                                                  Downloads                                                 |                                                 Version                                                 |
+| :---------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- | :----------: | :----------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: |
+| [`ChatVertexAI`](https://reference.langchain.com/python/langchain-google-vertexai/chat_models/ChatVertexAI) | [`langchain-google-vertexai`](https://reference.langchain.com/python/langchain-google-vertexai/) |     beta     |                                        ✅                                       | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-google-vertexai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-google-vertexai?style=flat-square\&label=%20) |
 
 ### Model features
 
@@ -152,7 +152,7 @@ response = llm.invoke("What is 3^3?")
 
 ## API reference
 
-For detailed documentation of all features and configuration options, head to the [`ChatVertexAI`](https://reference.langchain.com/python/langchain-community/chat_models/vertexai/ChatVertexAI) API reference.
+For detailed documentation of all features and configuration options, head to the [`ChatVertexAI`](https://reference.langchain.com/python/langchain-google-vertexai/chat_models/ChatVertexAI) API reference.
 
 ***
 

@@ -11,7 +11,7 @@ tags: [docs, langsmith, llm-gateway-fallbacks]
 > Automatically retry a request against backup models when the primary model rate-limits, errors, or returns another configured status code.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](release-stages.md).
+> The LLM Gateway is in [beta](release-stages.md).
 
 Model fallbacks retry a request against one or more backup models when the primary model returns a configured error, such as a rate limit or provider outage. Define the fallback order once in LangSmith, then continue using the standard LLM Gateway endpoint and model ID in your application.
 
@@ -61,7 +61,7 @@ Call the standard LLM Gateway endpoint with the primary provider-prefixed model 
 curl https://gateway.smith.langchain.com/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
-    -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
+    -d '{"model":"anthropic/claude-opus-5","messages":[{"role":"user","content":"Hello!"}]}'
 ```
 
 **BYOC**
@@ -70,10 +70,10 @@ curl https://gateway.smith.langchain.com/v1/chat/completions \
 curl https://<data_plane_host>/gateway/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
-    -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
+    -d '{"model":"anthropic/claude-opus-5","messages":[{"role":"user","content":"Hello!"}]}'
 ```
 
-The gateway applies the fallback chain configured for `anthropic/claude-sonnet-4-6` in the API key's workspace. If no chain matches, the gateway returns the primary model's response without attempting a fallback.
+The gateway applies the fallback chain configured for `anthropic/claude-opus-5` in the API key's workspace. If no chain matches, the gateway returns the primary model's response without attempting a fallback.
 
 ## Choose fallback candidates
 
@@ -84,12 +84,11 @@ You can add two types of fallback candidates:
 
 Model configurations are workspace-scoped. A fallback chain can only use configurations from its selected workspace.
 
-For example, configure `anthropic/claude-sonnet-4-6` as the primary model, `openai/gpt-5.4-mini` as the first fallback, and a saved OpenAI-compatible model configuration as the second fallback. The application continues to request `anthropic/claude-sonnet-4-6`; the gateway selects and translates fallback calls when needed.
+For example, configure `anthropic/claude-opus-5` as the primary model, `openai/gpt-5.4-mini` as the first fallback, and a saved OpenAI-compatible model configuration as the second fallback. The application continues to request `anthropic/claude-opus-5`; the gateway selects and translates fallback calls when needed.
 
 ## See also
 
 * [API formats](llm-gateway-api-formats.md): review supported request formats and translation behavior.
-* [Custom model providers](llm-gateway-custom-providers.md): create model configurations for custom OpenAI- or Anthropic-compatible endpoints.
 * [Spend policies](llm-gateway-spend-policies.md): apply cost limits alongside fallback routing.
 
 ***

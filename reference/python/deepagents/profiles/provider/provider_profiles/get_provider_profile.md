@@ -35,11 +35,6 @@ When only the provider-level profile matches, a debug breadcrumb is
 emitted so registrations layered on an exact key can be traced when they
 don't apply (e.g. typo'd specs falling through to the provider default).
 
-Malformed specs (empty string, more than one `:`, or a `:` with an empty
-provider/model half) return `None` without consulting the registry. This
-prevents a spec like `"openai:"` from silently matching the provider-wide
-`"openai"` registration.
-
 !!! note "Prefer `apply_provider_profile` for model construction"
 
     This function is intended for *inspection* (tooling, conditional logic
@@ -59,7 +54,7 @@ get_provider_profile(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `spec` | `str` | Yes | Model spec in `provider:model` format, or a bare provider/model identifier. |
+| `spec` | `str` | Yes | Model spec in `provider:model` format, or a bare provider/model identifier. Only the first colon is a separator. |
 
 ## Returns
 
@@ -69,4 +64,4 @@ The matching `ProviderProfile`, or `None` when no registered profile matches.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/1aae3746682a65c837c5dd0f165b685253fe9465/libs/deepagents/deepagents/profiles/provider/provider_profiles.py#L250)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/profiles/provider/provider_profiles.py#L277)

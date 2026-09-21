@@ -29,12 +29,11 @@ my-agent/
 │       └── SKILL.md
 
 ├── tools/                          # Application code
+│   └── mcp.ts                      # MCP server declaration
 ├── middleware/
 
 ├── channels/                       # Managed configuration
 │   └── <name>.ts
-├── connectors/
-│   └── mcp.ts
 ├── schedules/
 │   └── <name>.ts
 ├── sandbox/
@@ -60,22 +59,22 @@ The layout above shows the common `.ts` names. TypeScript managed declarations a
 
 ## How MDA treats project files
 
-* **Managed context**: [`instructions.md`](managed-deep-agents-instructions.md) defines the system prompt. Each directory under [`skills/`](managed-deep-agents-skills.md) contains task-specific instructions, such as a `SKILL.md` and any supporting files. MDA syncs both `instructions.md` and `skills/` to Context Hub.
+* **Managed context**: [`instructions.md`](managed-deep-agents-instructions.md) defines the system prompt. Each directory under [`skills/`](managed-deep-agents-skills.md) contains task-specific instructions, such as a `SKILL.md` and any supporting files. MDA syncs both `instructions.md` and `skills/` to [Context Hub](managed-deep-agents-context-hub.md). Optional [durable memory](managed-deep-agents-memory.md) is also backed by Context Hub.
 
 * **Application code**: Files under [`tools/`](managed-deep-agents-tools.md) and [`middleware/`](managed-deep-agents-middleware.md) are ordinary project modules. Import them from the agent entry.
 
-* **Managed configuration**: Certain paths enable capabilities when present. For `channels/`, `connectors/`, and `schedules/`, only direct children are managed declarations; nested modules are not.
+* **Managed configuration**: Certain paths enable capabilities when present. For `channels/` and `schedules/`, only direct children are managed declarations; nested modules are not.
 
-  | Path                   | Enables                                                                             |
-  | ---------------------- | ----------------------------------------------------------------------------------- |
-  | `identity.ts`          | [Caller authentication](managed-deep-agents-identity.md)         |
-  | `memory.ts`            | [Durable memory](managed-deep-agents-memory.md)                  |
-  | `channels/<name>.ts`   | [Messaging channels](managed-deep-agents-channels.md)            |
-  | `connectors/<name>.ts` | [MCP connectors](managed-deep-agents-mcp-connectors.md)          |
-  | `schedules/<name>.ts`  | [Cron schedules](managed-deep-agents-schedules.md)               |
-  | `sandbox/index.ts`     | [Sandbox filesystem and shell](managed-deep-agents-sandboxes.md) |
+  | Path                  | Enables                                                                             |
+  | --------------------- | ----------------------------------------------------------------------------------- |
+  | `identity.ts`         | [Caller authentication](managed-deep-agents-identity.md)         |
+  | `memory.ts`           | [Durable memory](managed-deep-agents-memory.md)                  |
+  | `channels/<name>.ts`  | [Messaging channels](managed-deep-agents-channels.md)            |
+  | `tools/mcp.ts`        | [MCP connectors](managed-deep-agents-mcp-connectors.md)          |
+  | `schedules/<name>.ts` | [Cron schedules](managed-deep-agents-schedules.md)               |
+  | `sandbox/index.ts`    | [Sandbox filesystem and shell](managed-deep-agents-sandboxes.md) |
 
-  MCP connector modules export a named `connector`.
+  `tools/` holds ordinary modules with one exception. `tools/mcp.ts` is a managed declaration and exports a named `mcp`. Every other module under `tools/` is application code you import.
 
 * **Dependencies and secrets**: Declare dependencies in `package.json`. MDA loads `.env` locally and forwards non-reserved values as deployment secrets. Reserved platform variables and `.env` files are not included in the build archive. For more information, see [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md).
 

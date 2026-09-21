@@ -157,7 +157,7 @@ import { z } from "zod";
 const contextSchema = z.object({ userId: z.string() });
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   contextSchema,
 });
 
@@ -184,7 +184,7 @@ import { z } from "zod";
 const contextSchema = z.object({ userId: z.string() });
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   contextSchema,
 });
 

@@ -116,7 +116,7 @@ const asyncSubagents: AsyncSubAgent[] = [
 ];
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [...asyncSubagents],
 });
 ```
@@ -142,7 +142,7 @@ const asyncSubagents: AsyncSubAgent[] = [
 ];
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [...asyncSubagents],
 });
 ```

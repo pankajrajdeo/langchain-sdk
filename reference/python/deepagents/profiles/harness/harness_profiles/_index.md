@@ -22,4 +22,4 @@ tags: [index, reference, python, deepagents, profiles, harness, harness_profiles
 - [HarnessProfileConfig](HarnessProfileConfig.md) - Declarative harness-profile config for YAML/JSON-backed profiles.
 - [logger](logger.md) - View source on GitHub
 - [register_harness_profile](register_harness_profile.md) - Register a harness profile for a provider or specific model.
-- [validate_profile_key](validate_profile_key.md) - Validate a profile registry key.
+- [validate_profile_key](validate_profile_key.md) - Validate a provider or provider:model profile registry key.

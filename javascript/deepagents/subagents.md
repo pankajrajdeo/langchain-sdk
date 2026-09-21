@@ -275,7 +275,7 @@ const researchSubagent: SubAgent = {
   description: "Used to research more in depth questions",
   systemPrompt: "You are a great researcher",
   tools: [internetSearch],
-  model: "anthropic:claude-sonnet-4-6", // Optional override, defaults to main agent model
+  model: "anthropic:claude-sonnet-5", // Optional override, defaults to main agent model
 };
 const subagents = [researchSubagent];
 
@@ -333,7 +333,7 @@ const researchSubagent: SubAgent = {
   description: "Used to research more in depth questions",
   systemPrompt: "You are a great researcher",
   tools: [internetSearch],
-  model: "openrouter:openrouter:z-ai/glm-5.2", // Optional override, defaults to main agent model
+  model: "openrouter:z-ai/glm-5.2", // Optional override, defaults to main agent model
 };
 const subagents = [researchSubagent];
 
@@ -652,7 +652,7 @@ const customSubagent: CompiledSubAgent = {
 const subagents = [customSubagent];
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [internetSearch],
   systemPrompt: researchInstructions,
   subagents: subagents,
@@ -697,7 +697,7 @@ const customSubagent: CompiledSubAgent = {
 const subagents = [customSubagent];
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [internetSearch],
   systemPrompt: researchInstructions,
   subagents: subagents,
@@ -1031,7 +1031,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [{
     name: "reviewer",
     description: "Reviews code for security issues, citing lines and severity",
@@ -1048,7 +1048,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [{
     name: "reviewer",
     description: "Reviews code for security issues, citing lines and severity",
@@ -1295,7 +1295,7 @@ async function streamSubagentProgress() {
 import { createDeepAgent } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   name: "main-agent",
   systemPrompt:
     "You are a project coordinator with no research knowledge. " +
@@ -1358,7 +1358,7 @@ async function streamSubagentProgress() {
 import { createDeepAgent } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   name: "main-agent",
   systemPrompt:
     "You are a project coordinator with no research knowledge. " +
@@ -1626,7 +1626,7 @@ Because each subagent's `name` is written to the `lc_agent_name` metadata key on
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/t_yuR4Fo_XGdcWGH/langsmith/images/deepagents-lc-agent-name-filter.png?fit=max&auto=format&n=t_yuR4Fo_XGdcWGH&q=85&s=ffc65c0b9b5292fce5f0589b8f2478ce" alt="LangSmith Runs view with a metadata filter on lc_agent_name set to coordinator" width="1024" height="533" data-path="langsmith/images/deepagents-lc-agent-name-filter.png" />
 
-This shows only the runs produced by that subagent. You can save the filter as a named view for reuse. For a full reference on filtering options, see [Filter traces](../../langsmith/filter-traces-in-application.md).
+This shows only the runs produced by that subagent. You can save the filter as a named view for reuse. For a full reference on filtering options, see [Filter traces](../../langsmith/filter-traces.md).
 
 ### Filter programmatically with the SDK
 
@@ -1787,7 +1787,7 @@ const researchSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [researchSubagent],
 });
 
@@ -1832,7 +1832,7 @@ const researchSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [researchSubagent],
 });
 
@@ -2083,7 +2083,7 @@ const internetSearch = tool(
 
 // Main agent uses Gemini; general-purpose subagent uses GPT
 const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [internetSearch],
   subagents: [
     {
@@ -2115,7 +2115,7 @@ const internetSearch = tool(
 
 // Main agent uses Gemini; general-purpose subagent uses GPT
 const agent = await createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [internetSearch],
   subagents: [
     {
@@ -2375,7 +2375,7 @@ const subagents = [
     description: "Reviews legal documents and contracts",
     systemPrompt: "You are an expert legal reviewer...",
     tools: [readDocument, analyzeContract],
-    model: "anthropic:claude-sonnet-4-6", // Large context for long documents
+    model: "anthropic:claude-sonnet-5", // Large context for long documents
   },
   {
     name: "financial-analyst",
@@ -2396,7 +2396,7 @@ const subagents = [
     description: "Reviews legal documents and contracts",
     systemPrompt: "You are an expert legal reviewer...",
     tools: [readDocument, analyzeContract],
-    model: "openrouter:openrouter:z-ai/glm-5.2", // Large context for long documents
+    model: "openrouter:z-ai/glm-5.2", // Large context for long documents
   },
   {
     name: "financial-analyst",
@@ -2592,7 +2592,7 @@ const subagents = [
 ];
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   systemPrompt:
     "You coordinate data analysis and reporting. Use subagents for specialized tasks.",
   subagents: subagents,
@@ -2626,7 +2626,7 @@ const subagents = [
 ];
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   systemPrompt:
     "You coordinate data analysis and reporting. Use subagents for specialized tasks.",
   subagents: subagents,
@@ -2874,7 +2874,7 @@ const researchSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   subagents: [researchSubagent],
   contextSchema,
 });
@@ -2919,7 +2919,7 @@ const researchSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   subagents: [researchSubagent],
   contextSchema,
 });

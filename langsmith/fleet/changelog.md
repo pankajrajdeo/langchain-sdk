@@ -15,6 +15,18 @@ Weekly updates to [LangSmith Fleet](../fleet.md).
 > [!NOTE]
 > **Subscribe**: This changelog includes an [RSS feed](https://docs.langchain.com/langsmith/fleet-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
+## September 7-14, 2026
+## Fleet
+
+* New managed Fleet sandboxes inherit the platform retention policy when you omit delete\_after\_stop\_seconds. Explicit zero and positive values remain unchanged.
+* Threads that stop for an approval or a question now receive their title while they wait, so scheduled runs no longer sit in the inbox untitled until someone opens them. The inbox shows the title loading indicator only while a title is actually on its way.
+* Opening a workspace skill just added to an agent in Fleet no longer shows an empty modal before the agent is saved. The skill detail now opens with its full file tree, the Add to agent button waits for the skill's files to load, and a failed load can be retried.
+* Agent owners can trigger a workspace webhook against an agent again from the Configure panel's Advanced settings. The rows were missing since the Configure panel replaced the standalone agent editor, and each run packages the agent's saved files rather than unsaved edits.
+* Fleet provisions sandboxes correctly when you start a new conversation or retry interrupted sandbox creation.
+* Fleet background runs reconnect to the agent's existing sandbox using its saved name. Older UUID-named sandboxes continue to work, and files persist across chats and sandbox restarts.
+* Fleet now creates an empty /workspace when it provisions a sandbox, so the files API and file browsers list it right away instead of returning 404 until the agent's first run.
+* Fleet preserves Amazon Bedrock reasoning metadata when you abandon a pending interrupt, preventing unsupported content block errors on the next turn.
+
 ## August 31-September 7, 2026
 ## Fleet
 

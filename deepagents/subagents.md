@@ -263,7 +263,7 @@ custom_subagent = CompiledSubAgent(
 subagents = [custom_subagent]
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[internet_search],
     system_prompt=research_instructions,
     subagents=subagents,
@@ -605,7 +605,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[{
         "name": "reviewer",
         "description": "Reviews code for security issues, citing lines and severity",
@@ -859,7 +859,7 @@ from deepagents import (
 )
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     system_prompt=(
         "You are a project coordinator with no research knowledge. "
         "For every user request, you must call the task() tool with "
@@ -1161,7 +1161,7 @@ Because each subagent's `name` is written to the `lc_agent_name` metadata key on
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/t_yuR4Fo_XGdcWGH/langsmith/images/deepagents-lc-agent-name-filter.png?fit=max&auto=format&n=t_yuR4Fo_XGdcWGH&q=85&s=ffc65c0b9b5292fce5f0589b8f2478ce" alt="LangSmith Runs view with a metadata filter on lc_agent_name set to coordinator" width="1024" height="533" data-path="langsmith/images/deepagents-lc-agent-name-filter.png" />
 
-This shows only the runs produced by that subagent. You can save the filter as a named view for reuse. For a full reference on filtering options, see [Filter traces](../langsmith/filter-traces-in-application.md).
+This shows only the runs produced by that subagent. You can save the filter as a named view for reuse. For a full reference on filtering options, see [Filter traces](../langsmith/filter-traces.md).
 
 ### Filter programmatically with the SDK
 
@@ -1320,7 +1320,7 @@ research_subagent = {
 }
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[research_subagent],
 )
 
@@ -1594,7 +1594,7 @@ def internet_search(query: str) -> str:
 
 # Main agent uses Gemini; general-purpose subagent uses GPT
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[internet_search],
     subagents=[
         {
@@ -1732,12 +1732,6 @@ When configuring [skills](skills.md) with `create_deep_agent`:
 ```python
 from deepagents import create_deep_agent
 
-# Each path is a container with one subdirectory per skill:
-# /skills/main/
-# └── overview/SKILL.md
-# /skills/researcher/
-# ├── research/SKILL.md
-# └── web-search/SKILL.md
 research_subagent = {
     "name": "researcher",
     "description": "Research assistant with specialized skills",
@@ -1950,7 +1944,7 @@ subagents = [
 ]
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     system_prompt="You coordinate data analysis and reporting. Use subagents for specialized tasks.",
     subagents=subagents,
 )
@@ -2212,7 +2206,7 @@ research_subagent = {
 }
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[research_subagent],
     context_schema=Context,
 )
@@ -2504,7 +2498,7 @@ def verify_claim(claim: str, runtime: ToolRuntime[Context]) -> str:
     return basic_verification(claim)
 
 agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     subagents=[
         {
             "name": "fact-checker",
@@ -2831,7 +2825,7 @@ def flexible_search(query: str, runtime: ToolRuntime[Context]) -> str:
    from deepagents import create_deep_agent
 
    agent = create_deep_agent(
-       model="anthropic:claude-sonnet-4-6",
+       model="anthropic:claude-sonnet-5",
        system_prompt="""...your instructions...
 
        IMPORTANT: For complex tasks, delegate to your subagents using the task() tool.

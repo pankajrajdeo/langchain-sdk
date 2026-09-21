@@ -1,115 +1,224 @@
 ---
-title: "Custom model providers"
-description: "Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model."
+title: "Manage model configurations"
+description: "Manage model configurations and control their availability across LangSmith features."
 source: "https://docs.langchain.com/langsmith/llm-gateway-custom-providers"
 category: "docs"
 tags: [docs, langsmith, llm-gateway-custom-providers]
 ---
 
-# Custom model providers
+# Manage model configurations
 
-> Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model.
+> Manage model configurations and control their availability across LangSmith features.
 
-> [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](release-stages.md).
+Model configurations define the model and parameters that LangSmith features use when calling an AI provider. A single shared library of configurations spans your entire [workspace](administration-overview.md#workspaces), so any configuration you create is available across the following features without duplication:
 
-In addition to the [built-in providers](llm-gateway-direct-model-access.md#choose-a-provider-path), the LLM Gateway can proxy requests to **any OpenAI-compatible or Anthropic-compatible endpoint** you configure yourself, such as a self-hosted open-source model served through an inference server (vLLM, Ollama, and similar).
+* [**Playground**](prompt-engineering-concepts.md)
+* [**Evaluators**](evaluation.md)
+* [**Fleet**](fleet/index.md)
+* [**Chat**](chat.md)
+* [**Insights**](insights.md)
 
-## How it works
+[Workspace admins](rbac.md#workspace-admin) can create, edit, and delete configurations and control which providers and models are available per feature. Non-admin members can view configurations but cannot modify them.
 
-A custom provider is defined by a [model configuration](model-configurations.md) that you save under **Settings > Model configurations** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-custom-providers). The provider you select in that configuration sets the format the gateway speaks to your upstream:
+Configurations can also carry [OAuth client credentials](#oauth-client-credentials), so LangSmith mints short-lived bearer tokens against your IdP at request time instead of using a static API key.
 
-| Configuration provider         | Wire format        | Example endpoints                                     |
-| ------------------------------ | ------------------ | ----------------------------------------------------- |
-| **OpenAI Compatible Endpoint** | OpenAI             | `POST /v1/chat/completions`, `POST /v1/responses`     |
-| **Anthropic**                  | Anthropic Messages | `POST /v1/messages`, `POST /v1/messages/count_tokens` |
+## Feature Access
 
-The gateway uses the following options from the configuration:
+The **Feature Access** table controls provider and model availability independently for each LangSmith feature.
 
-* A **base URL**: the upstream endpoint the gateway forwards requests to.
-* A **model name**: the model identifier your upstream expects.
-* An **API key**: stored as a [workspace secret](llm-gateway-admin-setup.md#1-add-provider-secrets), never sent by the client.
+| **Feature**              | **Model selection experience**                                                                                                                                   |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Playground               | Full model controls—view and adjust all parameters. No built-in models; relies on workspace configurations.                                                      |
+| Evaluators               | Full model controls—view and adjust all parameters. No built-in models; relies on workspace configurations.                                                      |
+| Fleet                    | Choose from a curated list by default. You can also add custom workspace configurations.                                                                         |
+| Chat                     | Choose from a curated list by default. You can also add custom workspace configurations.                                                                         |
+| Insights (Thinking)      | Model used for deep analysis. Choose from a curated list with provider recommendations by default. You can also add custom workspace configurations.             |
+| Insights (Summarization) | Model used for lightweight summarization. Choose from a curated list with provider recommendations by default. You can also add custom workspace configurations. |
 
-You address the saved configuration by name through one of two routes, depending on whether you want callers to choose the model or want to enforce the configured one:
-
-| Route                                                        | Model name in the request body                                                |
-| ------------------------------------------------------------ | ----------------------------------------------------------------------------- |
-| `https://gateway.smith.langchain.com/providers/{configName}` | Forwarded to the upstream as-is—the client picks the model.                   |
-| `https://gateway.smith.langchain.com/models/{configName}`    | Overridden with the configuration's model name—the client's value is ignored. |
-
-Both routes look up the same configuration, resolve the same secret, and proxy to the same upstream URL; they only differ in whether the model name is enforced.
+All features support custom workspace configurations, so you can use any provider or model—even for features that show a curated list by default.
 
 > [!NOTE]
-> `{configName}` is the configuration name from your workspace [model configuration](model-configurations.md). If the name contains characters that aren't URL-safe (such as `/` or spaces), URL-encode them in the path. For example, a configuration named `meta-llama/Llama-3.1-8B-Instruct` becomes `https://gateway.smith.langchain.com/providers/meta-llama%2FLlama-3.1-8B-Instruct/v1/chat/completions`.
+> **Insights** uses two separate rows—one for analysis and one for summarization. The UI displays a warning if you select incompatible providers or non-recommended models for either row.
 
-## 1. Create a custom provider configuration
+### Configure feature access
 
-1. Add the upstream endpoint's API key as a workspace secret under **Settings > Integrations > Provider Secrets**. Give it a descriptive name (for example, `MY_PROVIDER_API_KEY`).
-2. Go to **Settings > Model configurations** and create a configuration with **OpenAI Compatible Endpoint** or **Anthropic** as the provider.
-3. Set the **Base URL** to your upstream endpoint (for example, `https://my-inference-server.example.com/v1`) and the **Model Name** to a model identifier the endpoint expects.
-4. Set the **API Key Name** to the secret you created.
-5. Save the configuration with a **name**. This name is what you'll use in the gateway route.
+To configure feature access in the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-model-configurations):
+
+1. Navigate to **Settings** > **Model configurations**.
+2. In the **Feature Access** table, find the feature you want to configure.
+3. Click **Enabled Providers** and toggle providers on or off for that feature.
+4. Click **Available Models** and select which models users can choose from.
+5. Use the **Default Model** dropdown to set the model preselected when users open the feature.
 
 > [!NOTE]
-> The **Model Name** you save only matters if you call the configuration through `/models/{configName}`. Through `/providers/{configName}`, the client's `model` field is sent through unchanged, so a single configuration can serve any model your upstream supports (for example, any model pulled into a shared Ollama instance).
+> Providers disabled for the whole organization in **Settings** > **Model providers** appear locked in this table and can't be re-enabled per workspace. See [Organization-wide provider control](#organization-wide-provider-control).
 
-## 2. Make a call
+## Organization-wide provider control
 
-Call the saved configuration by name (`my-custom-openai-endpoint` and `my-anthropic-endpoint` in the following examples).
+Provider availability is controlled at two levels:
 
-### Any model: `/providers/{configName}`
+* **Organization** (organization admins): turn a provider on or off for the **entire organization**—every [workspace](administration-overview.md#workspaces) and every feature. Managed in **Settings** > **Model providers**.
+* **Workspace** (workspace admins): the [Feature Access](#feature-access) table above, which controls provider and model availability **per feature** within a single workspace.
 
-Use this route when the upstream serves multiple models and you want callers to pick which one:
+The organization level takes precedence. A provider disabled for the organization is unavailable in every workspace and every feature, and shows as **locked** in each workspace's Feature Access table—workspace admins can see it but can't re-enable it. Workspaces choose only among the providers the organization allows.
 
-**OpenAI-compatible**
+Managing organization-wide providers requires the [Organization Admin](rbac.md#organization-admin) role (the `organization:manage` permission), and is available on LangSmith [Cloud](cloud.md) and [Self-hosted](self-hosted.md) for organizations (not personal accounts).
 
-```bash
-curl https://gateway.smith.langchain.com/providers/my-custom-openai-endpoint/v1/chat/completions \
-    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d '{"model":"llama3.1:8b","messages":[{"role":"user","content":"ping"}]}'
+### Disable a provider for the organization
+
+1. Navigate to the [Model providers](https://smith.langchain.com/settings/model-providers) page under **Settings**.
+2. Toggle a provider off to disable it across the organization, or on to re-enable it.
+
+## Configurations
+
+The **Configurations** table is a shared library of named model configurations for your workspace. Configurations you create in LangSmith (including from the [Playground](managing-model-configurations.md)) appear here and you can reuse them across all features.
+
+### Create a configuration
+
+1. Navigate to **Settings** > **Model configurations**.
+2. Under **Configurations**, click **+ Create**.
+3. Select a **Provider** and **Model**.
+4. Enter the **API Key Name**—the name of the secret in your workspace that stores the provider API key.
+5. Adjust parameters as needed. Parameters are grouped into sections for:
+
+   * **Standard sampling settings**: temperature, top P, top K, presence penalty, frequency penalty, max output tokens
+   * **Reasoning**: reasoning effort, service tier
+   * **Provider config**: provider API, base URL
+   * **Options**: stop sequences, seed, JSON mode, extra headers, requests per second, extra parameters
+
+   Available parameters vary by provider—refer to your provider's documentation for details.
+6. Click **Save**.
+
+### Edit a configuration
+
+1. In the **Configurations** table, click the overflow menu  next to the configuration.
+2. Select **Edit**.
+3. Update the configuration and click **Save**.
+
+### Delete a configuration
+
+1. In the **Configurations** table, click the overflow menu  next to the configuration.
+2. Select  **Delete** and confirm.
+
+## OAuth client credentials
+
+> [!NOTE]
+> OAuth client credentials are available on LangSmith [Cloud](cloud.md) and [Self-hosted](self-hosted.md) deployments running version `0.16.0-rc.6` or later.
+
+When a model configuration sits behind an OAuth2 gateway, you can store the OAuth `client_credentials` directly on the configuration instead of distributing a static API key. LangSmith exchanges those credentials for a short-lived bearer token at request time, attaches it as `Authorization: Bearer <token>` on the outbound LLM call, and refreshes the token before it expires. This is a per-configuration self-service alternative to routing the workspace through the [LLM auth proxy](llm-auth-proxy-self-hosted.md); the two are mutually exclusive per configuration.
+
+OAuth client credentials are available on every [plan](pricing-plans.md) that supports custom model configurations. The **Use Custom OAuth** toggle applies to bearer-token providers (OpenAI, Anthropic, OpenAI-compatible endpoints, and similar) and is not supported for Bedrock, Gemini Enterprise Agent Platform, or Google GenAI, which authenticate with native cloud identity. The toggle is also hidden for the **LangServe (Deprecated)** preset.
+
+### Configure OAuth on a model configuration
+
+Configuring OAuth requires the [Workspace Admin](rbac.md#workspace-admin) role, or a [custom role](rbac.md#custom-roles) with the `workspaces:manage-model-configs` permission. Members without it see the OAuth fields disabled, with a masked secret hint. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-model-configurations):
+
+1. Navigate to **Settings** > **Model configurations** and either click **+ Create** or open an existing row through the overflow menu  > **Edit**.
+2. Select a compatible provider and configure model parameters as usual.
+3. Toggle **Use Custom OAuth** on.
+4. Fill the OAuth fields:
+   * **Token URL**: the IdP token endpoint, for example `https://login.example.com/oauth/token`.
+   * **Client ID**: the OAuth client identifier.
+   * **Client Secret**: the OAuth client secret. Encrypted at rest.
+   * **Token Endpoint Auth Method**: `client_secret_basic` or `client_secret_post`.
+   * **Extra parameters**: key/value rows sent in the token request body. Use these rows for `scope`, `audience`, `resource`, or any other parameter the IdP expects. Add one row per value when sending multiple scopes; duplicate keys are sent as multi-value pairs.
+   * **Extra headers**: additional headers sent with the token request. Reserved headers such as `Authorization` are rejected at save time.
+5. Click **Save**.
+
+<img src="https://mintcdn.com/langchain-5e9cc07a/8fWMAwmd5vok0QuC/langsmith/images/model-config-oauth-create-light.png?fit=max&auto=format&n=8fWMAwmd5vok0QuC&q=85&s=28ae7c822f8a52653b8820ceffe59b72" alt="Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic." width="1600" height="1128" data-path="langsmith/images/model-config-oauth-create-light.png" />
+
+<img src="https://mintcdn.com/langchain-5e9cc07a/8fWMAwmd5vok0QuC/langsmith/images/model-config-oauth-create-dark.png?fit=max&auto=format&n=8fWMAwmd5vok0QuC&q=85&s=bb9659d943a891fc76b4c26b8887cdef" alt="Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic." width="1600" height="1128" data-path="langsmith/images/model-config-oauth-create-dark.png" />
+
+### Edit semantics
+
+OAuth fields follow edit behaviors that protect the stored secret:
+
+* **Secret round-trip**: the server returns the secret as `********`. The input renders empty with a *"Secret is set. Type to replace."* hint. Submitting without retyping leaves the stored secret unchanged.
+* **Toggle off preserves credentials**: switching **Use Custom OAuth** off deactivates the OAuth flow but keeps the stored fields. Toggling back on resumes using the same credentials.
+* **Clear a field**: edit the configuration and blank the field to clear it explicitly.
+* **Clone via Save as preset**: when you save a one-off configuration as a new preset, non-secret OAuth fields copy into the new row. The secret cannot transfer because it is never exposed for read, so OAuth is force-disabled on the clone until you re-enter the secret.
+
+### How a request flows
+
+When a request runs against an OAuth-enabled configuration, LangSmith mints a bearer through an internal broker, caches the result, and stamps the bearer on every outbound LLM call until the cached token expires.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Caller as LangSmith service<br/>(Playground, Evals, Insights, Chat, Fleet)
+    participant Broker as Token broker
+    participant Cache as Redis cache
+    participant IdP as Customer IdP
+    participant LLM as Upstream LLM provider
+
+    Caller->>Broker: Mint token for configuration X
+    Broker->>Cache: Lookup cached token for X
+    alt Cache hit
+        Cache-->>Broker: Cached token
+    else Cache miss or expired
+        Broker->>IdP: client_credentials grant
+        IdP-->>Broker: access_token + expires_in
+        Broker->>Cache: Store until expiry
+    end
+    Broker-->>Caller: access_token
+    Caller->>LLM: Request with Authorization: Bearer <token>
+    LLM-->>Caller: Response
 ```
 
-**Anthropic**
+Routing between OAuth and the [LLM auth proxy](llm-auth-proxy-self-hosted.md) is per-configuration, not per-organization. Each request resolves to OAuth or the LLM auth proxy based on the configuration's OAuth state. A single multi-model job (for example, [Insights](insights.md) with separate Thinking and Summarization models) can mix the two flows because each model is resolved independently.
 
-```bash
-curl https://gateway.smith.langchain.com/providers/my-anthropic-endpoint/v1/messages \
-    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d '{"model":"claude-sonnet-4-6","max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
-```
+### Fallback behavior
 
-The gateway forwards the request body's `model` field to the upstream as-is.
+If the broker cannot mint a token (IdP unreachable, credentials invalid, configuration deleted between request preparation and execution), the request falls back to the static workspace API key for the provider. If no workspace key is set, expect a provider 401 on the outbound call.
 
-### One model: `/models/{configName}`
+Token rotation propagates only after the cached bearer expires. Plan rotations around the access token TTL configured at the IdP.
 
-Use this route to pin every call through this configuration to a single model, regardless of what the client requests—useful for enforcing model behavior for a team or application:
+### Surface coverage
 
-**OpenAI-compatible**
+OAuth-enabled configurations are honored wherever model configurations are consumed:
 
-```bash
-curl https://gateway.smith.langchain.com/models/my-custom-openai-endpoint/v1/chat/completions \
-    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d '{"messages":[{"role":"user","content":"ping"}]}'
-```
+* [**Playground**](prompt-engineering-concepts.md): chat runs and experiment runs.
+* [**Evaluators**](evaluation.md): LLM-as-judge configuration, Reuse, Preview Test, and Evaluator Details Test all skip the workspace-secrets prompt when every prompt resolves to an OAuth-enabled configuration.
+* [**Insights**](insights.md): Thinking and Summarization configurations are resolved independently.
+* [**Chat**](chat.md)
+* [**Fleet**](fleet/index.md)
 
-**Anthropic**
+When OAuth is enabled on a configuration, LangSmith does not prompt for a workspace secret for that configuration, because the broker supplies the credential at request time.
 
-```bash
-curl https://gateway.smith.langchain.com/models/my-anthropic-endpoint/v1/messages \
-    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d '{"max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
-```
+### Security and audit
 
-The gateway overrides the request body's `model` field with the model name from the saved configuration, so any value the client passes (or omitting it, as per the example) is ignored. To serve multiple pinned models from the same upstream, create one configuration per model (each with its own name and `/models/{configName}` route).
+* **Encryption at rest**: client secrets are Fernet-encrypted with the same derivation used for [workspace secrets](administration-overview.md#workspaces).
+* **Bearer caching**: access tokens are cached until expiry and are never written to logs.
 
-## Next steps
+### FAQ
 
-* [Model fallbacks](llm-gateway-fallbacks.md): chain these configurations so a backup takes over when one rate-limits or errors.
-* [Spend policies](llm-gateway-spend-policies.md): apply cost limits to custom providers.
-* [Data policy](llm-gateway-data-policy.md): redact sensitive data before it reaches your endpoint.
+<details>
+<summary>Can a single set of OAuth credentials be shared across workspaces?</summary>
+
+No. OAuth credentials are stored on the model configuration, which is workspace-scoped. Each workspace enters its own credentials, even when the credentials point at the same IdP client.
+
+</details>
+
+<details>
+<summary>Why is my OAuth-enabled configuration suddenly using a static workspace key?</summary>
+
+If the broker cannot mint a bearer (IdP unreachable, credentials invalid, configuration deleted between request preparation and execution), the request falls back to the static workspace API key for the provider. Re-open the model configuration and verify the Token URL is reachable, the Client ID and secret are current, and the Token Endpoint Auth Method matches what your IdP expects.
+
+</details>
+
+<details>
+<summary>How do I rotate the client secret?</summary>
+
+Edit the model configuration and retype the secret in the **Client Secret** field. The previous secret is overwritten on save. The Redis-cached bearer continues to work until its TTL expires, after which the broker mints a new bearer using the rotated secret.
+
+</details>
+
+<details>
+<summary>Can OAuth and the LLM auth proxy be used together?</summary>
+
+Yes. Routing is per-configuration. Configurations with OAuth enabled use OAuth; configurations without it fall through to the LLM auth proxy when the proxy is enabled at the organization level. A single multi-model job can mix the two flows.
+
+</details>
 
 ***
 
@@ -117,4 +226,4 @@ The gateway overrides the request body's `model` field with the model name from 
 > [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
 
 > [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-custom-providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/model-configurations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

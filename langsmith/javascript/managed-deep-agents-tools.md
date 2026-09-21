@@ -30,6 +30,8 @@ For the full project layout, see [Project structure](managed-deep-agents-project
 
 To load tools from a remote MCP server without importing them into the agent entry, use an [MCP connector](managed-deep-agents-mcp-connectors.md) instead.
 
+MCP connectors are declared under `tools/` as well, so the `tools/mcp.ts` file name is reserved for that declaration.
+
 ## Add a tool
 
 Use authored tools for business logic, private APIs, database access, and other code that belongs in your agent project.
@@ -116,12 +118,12 @@ For per-run values such as request metadata or feature flags, use the normal Lan
 
 ## When to use tools
 
-| Concept                                                                        | Kind                  | How it reaches the agent                                     |
-| ------------------------------------------------------------------------------ | --------------------- | ------------------------------------------------------------ |
-| **Tools**                                                                      | Application code      | Import and pass in the agent definition                      |
-| **[MCP connectors](managed-deep-agents-mcp-connectors.md)** | Managed configuration | Declared under `connectors/`; no import into the agent entry |
-| **[Skills](managed-deep-agents-skills.md)**                 | Managed context       | Procedures the agent loads when relevant                     |
-| **[Instructions](managed-deep-agents-instructions.md)**     | Managed context       | Always-on system prompt                                      |
+| Concept                                                                        | Kind                  | How it reaches the agent                                                  |
+| ------------------------------------------------------------------------------ | --------------------- | ------------------------------------------------------------------------- |
+| **Tools**                                                                      | Application code      | Import and pass in the agent definition                                   |
+| **[MCP connectors](managed-deep-agents-mcp-connectors.md)** | Managed configuration | Declared in the MCP module under `tools/`; no import into the agent entry |
+| **[Skills](managed-deep-agents-skills.md)**                 | Managed context       | Procedures the agent loads when relevant                                  |
+| **[Instructions](managed-deep-agents-instructions.md)**     | Managed context       | Always-on system prompt                                                   |
 
 For more information, see [Project structure](managed-deep-agents-project-structure.md).
 

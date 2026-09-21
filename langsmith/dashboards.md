@@ -113,7 +113,7 @@ When you add a filter, it defaults to filtering at the [run](observability-conce
 
 The active scope appears as a suffix on the **Advanced** item (for example, **Advanced Tree Filter**). Click the **X** next to it to reset back to a plain run filter.
 
-Dataset sources do not expose run/trace/tree filters. Data is scoped by the selected dataset. For filter syntax, refer to [filtering traces in application](filter-traces-in-application.md).
+Dataset sources do not expose run/trace/tree filters. Data is scoped by the selected dataset. For filter syntax, refer to [filtering traces (ClickHouse)](filter-traces-in-application.md).
 
 **Grouping** creates multiple series on the same chart in one of two ways:
 
@@ -170,7 +170,7 @@ Create tailored collections of charts for tracking metrics that matter most for 
 #### Select tracing projects and filter runs
 
 * Select one or more tracing projects to track metrics for.
-* Use the **Chart filters** section to refine the matching runs. This filter applies to all data series in the chart. For more information, view the guide on [filtering traces in application](filter-traces-in-application.md).
+* Use the **Chart filters** section to refine the matching runs. This filter applies to all data series in the chart. For more information, view the guide on [filtering traces (ClickHouse)](filter-traces-in-application.md).
 
 #### Pick a metric
 

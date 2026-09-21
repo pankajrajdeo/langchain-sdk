@@ -103,7 +103,7 @@ If you need to collect feedback from a browser or other client-side environment 
 
 See [Collect feedback with presigned URLs](presigned-feedback-tokens.md) for the full guide.
 
-To learn more about how to filter traces based on various attributes, including user feedback, see [Filter traces](filter-traces-in-application.md).
+To learn more about how to filter traces based on various attributes, including user feedback, see [Filter traces](filter-traces.md).
 
 ***
 

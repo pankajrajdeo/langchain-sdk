@@ -121,7 +121,7 @@ You are a careful research assistant. Use internet search to find sources,
 keep notes, and return concise answers with citations.
 ```
 
-When you deploy, Managed Deep Agents syncs these instructions to [LangSmith Context Hub](use-the-context-hub.md), where you can update them without redeploying the agent.
+When you deploy, Managed Deep Agents syncs these instructions to [LangSmith Context Hub](python/managed-deep-agents-context-hub.md), where you can update them without redeploying the agent.
 
 ### Configure your model and search
 Now set the model and a built-in web search tool. Google, OpenAI, and Anthropic offer server-side search with no extra package or API key. Pass the provider tool dict that matches your model:

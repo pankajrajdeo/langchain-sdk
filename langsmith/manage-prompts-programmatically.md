@@ -430,7 +430,7 @@ Prompt publicPrompt = promptClient.pull("efriis/my-first-prompt");
 >
 > If you are in a non-Node environment, "includeModel" is not supported for non-OpenAI models and you should use the base `langchain/hub` entrypoint.
 
-## Use with the LangSmith gateway
+## Use with the LangSmith Gateway
 
 If your workspace uses the [LangSmith LLM Gateway](llm-gateway.md), you can route prompt model calls through it by setting an environment variable before pulling and invoking your prompt. No other code changes are required.
 
@@ -464,7 +464,7 @@ result = prompt_with_model.invoke({"topic": "cats"})
 ```
 
 > [!NOTE]
-> Gateway routing for LangChain chat models requires Python and a supported `langchain-*` integration package at the minimum version listed in the [gateway quickstart](llm-gateway-quickstart.md#using-langchain-and-deep-agents). If the integration package is below the minimum version, the call will bypass the gateway and go directly to the provider.
+> Gateway routing for LangChain chat models requires Python and a supported `langchain-*` integration package at the minimum version listed in the [gateway quickstart](llm-gateway-quickstart.md). If the integration package is below the minimum version, the call will bypass the gateway and go directly to the provider.
 
 For full configuration options, provider support, and regional endpoints, see the [LLM Gateway quickstart](llm-gateway-quickstart.md).
 

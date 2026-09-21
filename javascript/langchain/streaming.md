@@ -182,7 +182,7 @@ const getWeather = tool(
 );
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "anthropic:claude-sonnet-5",
   tools: [getWeather],
   checkpointer: new MemorySaver(),
 });
@@ -236,7 +236,7 @@ const getWeather = tool(
 );
 
 const agent = createAgent({
-  model: "openrouter:openrouter:z-ai/glm-5.2",
+  model: "openrouter:z-ai/glm-5.2",
   tools: [getWeather],
   checkpointer: new MemorySaver(),
 });

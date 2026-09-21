@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 515 pages and 0 subdirectories under blog."
+description: "Index of 520 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-515 pages here.
+520 pages here.
 
 ## Files
 
@@ -20,6 +20,7 @@ tags: [index, blog]
 - [Agent Engineering: A New Discipline](agent-engineering-a-new-discipline.md) - Learn how agent engineering combines product thinking, engineering, and data science to build reliable LLM systems. Ship faster with iterative testing.
 - [Agent Evaluation Readiness Checklist](agent-evaluation-readiness-checklist.md) - A practical checklist for agent evaluation: error analysis, dataset construction, grader design, offline &amp; online evals, and production readiness.
 - [Agent Frameworks, Runtimes, and Harnesses- oh my!](agent-frameworks-runtimes-and-harnesses-oh-my.md) - Explore agent frameworks, runtimes, and harnesses. When to use LangChain, LangGraph, and DeepAgents for building AI agents.
+- [Building an Agent Harness for Life Sciences: Introducing Deep Life Sci](agent-harness-life-sciences.md) - Deep Life Sci is LangChain&#39;s open source agentic assistant for clinical and lab scientists. It pulls from 600K+ ClinicalTrials.gov studies, 29M PubMed abstracts, and 12M PubMed Central full-text...
 - [Agent Middleware](agent-middleware.md) - LangChain 1.0 introduces Middleware—giving developers full control over context engineering, model calls, and tool execution for production-ready agents.
 - [Agent observability needs feedback to power learning](agent-observability-needs-feedback-to-power-learning.md) - Traces show what an agent did; feedback shows what it meant. How explicit, implicit, LLM-as-judge and rule-based feedback turn observability into learning.
 - [Agent observability powers agent evaluation](agent-observability-powers-agent-evaluation.md) - Learn how agent observability enables effective evaluation of AI agents. Understand tracing, debugging reasoning, and performance insights to iterate and improve agent behavior.
@@ -66,6 +67,7 @@ tags: [index, blog]
 - [Building an auditable VC research agent with the Perplexity Agent API and LangGraph](build-an-auditable-vc-research-agent-with-the-perplexity-agent-api-langgraph-and-langsmith.md) - Build a VC research agent that drafts a cited investment memo in about 90 seconds for $0.40, using the Perplexity Agent API, LangGraph, and LangSmith evals.
 - [Building a 100x Cheaper Trace Judge with Fireworks](building-a-100x-cheaper-trace-judge-with-fireworks.md) - LangChain and Fireworks fine-tuned an open model to mine perceived error signals from production traces, matching frontier model performance at a fraction of the cost.
 - [Building a company due diligence agent with Deep Agents, LangSmith and Parallel](building-a-company-due-diligence-agent-with-deep-agents-langsmith-and-parallel.md) - A cookbook for automating company due diligence: Deep Agents orchestrates five research subagents and Parallel&#39;s Task API returns cited, sourced findings.
+- [Building a Harness with Jev](building-a-harness-with-jev.md) - What is Jev? Learn how TypeSafe AI’s System One model makes fast, structured decisions, where it fits in the agent loop, and how to use Jev with LangChain
 - [How We Build Agent Environments &amp; Tasks](building-agent-environments-and-tasks.md) - How we create synthetic agent environments and tasks: a spec generation step, a spec-to-task step, and a world spec that holds shared knowledge.
 - [Building Box AI: How an Enterprise Content Platform Went AI-Native with Deep Agents](building-box-ai-how-an-enterprise-content-platform-went-ai-native-with-deep-agents.md) - See how Box built Box Agent on Deep Agents to search, analyze, and synthesize enterprise content while preserving security, permissions, and model flexibility.
 - [Building Chat LangChain](building-chat-langchain-2.md) - Learn to build an AI chatbot with RAG using LangChain. Covers ingestion, retrieval, evaluation, deployment, and monitoring with code examples.
@@ -215,6 +217,7 @@ tags: [index, blog]
 - [How Credit Genie uses OpenWiki to keep codebase knowledge fresh, searchable, and automated](how-credit-genie-uses-openwiki-to-keep-codebase-knowledge-fresh-searchable-and-automated.md) - See how Credit Genie uses OpenWiki to automate repo documentation, reduce tribal knowledge, and give engineers and coding agents searchable codebase context.
 - [AI Agent Latency 101: How do I speed up my AI agent?](how-do-i-speed-up-my-agent.md) - Learn proven strategies to speed up your AI agent: reduce latency, optimize LLM calls, enable parallelism, and improve UX. Expert tips from LangChain.
 - [How Harmonic Rebuilt Scout on Deep Agents and 4x&#39;d Retention with LangSmith](how-harmonic-rebuilt-scout-on-deep-agents-and-4xd-retention-with-langsmith.md) - Harmonic rebuilt Scout on Deep Agents and LangSmith: iteration went from months to days, week-four retention rose 4x, and session duration increased 10x.
+- [How Included Health Built Federated Agents for Healthcare Navigation with Deep Agents and LangGraph](how-included-health-built-federated-agents-for-healthcare-navigation-with-deep-agents-and-langgraph.md) - See how Included Health used Deep Agents, LangGraph, and LangSmith to build Dot, a federated healthcare navigation agent with human handoff and clinical oversight.
 - [How Mendable leverages LangSmith to debug Tools &amp; Actions](how-mendable-leverages-langsmith-to-debug-tools-actions.md) - Learn how Mendable uses LangSmith to debug AI agents and tools, reducing latency and improving reliability for enterprise chatbots with actionable insights.
 - [How Middleware Lets You Customize Your Agent Harness](how-middleware-lets-you-customize-your-agent-harness.md) - Customize LangChain agents with middleware hooks for PII detection, tool selection, and context management. Build production-ready agent harnesses.
 - [How Minimal built a multi-agent customer support system with LangGraph &amp; LangSmith](how-minimal-built-a-multi-agent-customer-support-system-with-langgraph-langsmith.md) - Learn how Minimal built a multi-agent AI system with LangGraph &amp; LangSmith to automate 90% of e-commerce support tickets, delivering 80%+ efficiency gains.
@@ -297,6 +300,7 @@ tags: [index, blog]
 - [Iterating Towards LLM Reliability with Evaluation Driven Development](iterating-towards-llm-reliability-with-evaluation-driven-development.md) - Dosu uses evaluation driven development and LangSmith to build reliable LLM products at scale, monitor production performance, and iterate with confidence.
 - [January 2026: LangChain Newsletter](january-2026-langchain-newsletter.md) - Read about the latest product updates, events, and content from the LangChain team
 - [Build reliable agents in JavaScript with LangGraph.js v0.2: Now supporting Cloud and Studio](javascript-langgraph-v02-cloud-studio.md) - For JavaScript developers - LangGraph v0.2, LangGraph Cloud, and LangGraph Studio are all available.
+- [Jev-as-a-Judge for Agent Evals](jev-agent-evals-langsmith.md) - We tested using Jev-as-a-Judge against LLM judges on accuracy, repeatability, latency, and cost to see whether System One models could offer a new approach to agent evaluation.
 - [Jockey: A Conversational Video Agent Powered by Twelve Labs APIs and LangGraph](jockey-twelvelabs-langgraph.md) - Guest blog post on how Jockey, a conversational video agent, uses LangGraph and Twelve Labs API for more intelligent video processing.
 - [Join LangChain at AWS re:Invent 2025](join-langchain-at-aws-re-invent-2025.md) - Join LangChain at AWS re:Invent 2025. Visit Booth #524 for demos, meet Harrison, explore LangSmith on AWS, and connect with our engineering team Dec 1-4.
 - [Join LangChain at Google Cloud Next 2026](join-langchain-at-google-cloud-next-2026.md) - Join LangChain at Google Cloud Next 2026 in Las Vegas. Visit booth #5006 for AI agent sessions and meet our team April 22-24.
@@ -447,6 +451,7 @@ tags: [index, blog]
 - [Running Untrusted Agent Code Without a Sandbox](running-untrusted-agent-code-without-a-sandbox.md) - A smaller, in-process alternative to full sandboxes: WASM + QuickJS for isolation, least-privilege capabilities, and snapshot-based durable pauses.
 - [The runtime behind production deep agents](runtime-behind-production-deep-agents.md) - Deploying long horizon agents in production requires purpose-built infrastructure. This guide covers durable execution, memory, HITL, observability, and how deepagents deploy ships it all to...
 - [Scaling Agents in Europe &amp; The Middle East: Lessons from Schneider Electric, Vodafone, and monday.com](scaling-agents-in-europe-the-middle-east-lessons-from-schneider-electric-vodafone-and-monday-com.md) - A guide on scaling agents in Europe &amp; the Middle East to see how Schneider Electric, Vodafone, and monday.com are approaching production AI at scale, from establishing shared agent platforms and...
+- [Scaling Agents in Healthcare & Life Sciences: Lessons from Madrigal Pharmaceuticals, Abridge, and Vizient](scaling-agents-in-healthcare-life-sciences-lessons-from-madrigal-pharmaceuticals-abridge-and-vizient.md) - Agent programs in healthcare and life sciences are being built under a different set of constraints than those in most industries. There’s plenty of upside if the constraints can be resolved. Success...
 - [SCIPE - Systematic Chain Improvement and Problem Evaluation](scipe-systematic-chain-improvement-and-problem-evaluation.md) - Debug LLM chains faster with SCIPE. Automatically identify underperforming nodes causing failures in your AI applications—no labeled data required.
 - [A Developer’s First 10 Minutes: Secure LangChain Agents with Cisco AI Defense](secure-agents-cisco-ai-defense.md) - Cisco AI Defense integrates with LangChain middleware to enforce runtime security for agents, blocking prompt injection, PII exposure, and risky tool calls from one place.
 - [Building Self-Correcting Memory in OpenWiki](self-correcting-memory-openwiki.md) - Learn how OpenWiki uses evidence-backed claims to detect stale knowledge, reduce hallucinations, and build self-correcting memory for evolving codebases.

@@ -110,7 +110,7 @@ Or, use negative indexing for the last message:
 
 ## Next steps
 
-* Learn more about [viewing and filtering traces](filter-traces-in-application.md).
+* Learn more about [viewing](view-traces.md) and [filtering](filter-traces.md) traces.
 * Explore [custom output rendering](custom-output-rendering.md) for advanced visualization.
 * Set up [metadata and tags](add-metadata-tags.md) to organize your traces.
 

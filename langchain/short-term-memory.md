@@ -114,7 +114,7 @@ def get_user_info() -> str:
     return "No user profile on file."
 
 agent = create_agent(
-    model="anthropic:claude-sonnet-4-6",
+    model="anthropic:claude-sonnet-5",
     tools=[get_user_info],
     checkpointer=InMemorySaver(),  # [!code highlight]
 )
@@ -743,11 +743,11 @@ Access short term memory (state) in [`@before_model`](https://reference.langchai
     }
 }%%
 graph TD
-    S(["\_\_start\_\_"])
+    S(["`\_\_start\_\_`"])
     PRE(before_model)
     MODEL(model)
     TOOLS(tools)
-    END(["\_\_end\_\_"])
+    END(["`\_\_end\_\_`"])
     S --> PRE
     PRE --> MODEL
     MODEL -.-> TOOLS

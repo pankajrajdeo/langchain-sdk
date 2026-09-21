@@ -1,12 +1,15 @@
 ---
 title: "Use webhooks"
-description: "Webhooks enable event-driven communication from your LangSmith application to external services. For example, you may want to issue an update to a separate service once an API call to LangSmith has..."
+description: "This page covers LangGraph API webhooks, a way to receive a POST callback when a specific run completes. If you are looking for LangSmith automation webhooks (triggered when automation rules match..."
 source: "https://docs.langchain.com/langsmith/use-webhooks"
 category: "docs"
 tags: [docs, langsmith, use-webhooks]
 ---
 
 # Use webhooks
+
+> [!NOTE]
+> This page covers **LangGraph API webhooks**, a way to receive a POST callback when a specific run completes. If you are looking for **LangSmith automation webhooks** (triggered when automation rules match runs or threads), see [Configure webhook notifications for rules](webhooks.md).
 
 Webhooks enable event-driven communication from your LangSmith application to external services. For example, you may want to issue an update to a separate service once an API call to LangSmith has finished running.
 

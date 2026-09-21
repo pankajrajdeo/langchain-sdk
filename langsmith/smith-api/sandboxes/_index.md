@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api/sandboxes"
-description: "Index of 33 pages and 0 subdirectories under langsmith/smith-api/sandboxes."
+description: "Index of 34 pages and 0 subdirectories under langsmith/smith-api/sandboxes."
 category: "index"
 tags: [index, langsmith, smith-api, sandboxes]
 ---
 
 # langsmith/smith-api/sandboxes
 
-33 pages here.
+34 pages here.
 
 ## Files
 
@@ -33,6 +33,7 @@ tags: [index, langsmith, smith-api, sandboxes]
 - [Get sandbox status](get-sandbox-status.md) - Retrieve the lightweight status of a sandbox for polling.
 - [Glob a sandbox filesystem](glob-a-sandbox-filesystem.md) - Find files under a root path matching a glob pattern (supports ). Entries are returned in lexical order by path.
 - [Grep a sandbox filesystem](grep-a-sandbox-filesystem.md) - Search files under a root path for a literal text pattern (not a regex).
+- [List hourly sandbox usage costs](list-hourly-sandbox-usage-costs.md) - Returns priced usage per sandbox or snapshot and UTC hour in the half-open requested interval. LCU uses the recorded compute amount for sandboxes; snapshots have zero LCU. LSU allocates the recorded...
 - [List registries](list-registries.md) - List sandbox registries for pulling private images.
 - [List sandboxes](list-sandboxes.md) - List sandboxes for the authenticated tenant, with optional filtering, sorting, and pagination. Page with page_size and cursor: replay the response's next_cursor until it comes back null, which is the...
 - [List snapshots](list-snapshots.md) - List sandbox snapshots for the authenticated tenant, with optional filtering, sorting, and pagination. Page with page_size and cursor: replay the response's next_cursor until it comes back null...

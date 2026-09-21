@@ -11,7 +11,7 @@ tags: [docs, langsmith, llm-gateway-spend-policies]
 > Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](release-stages.md).
+> The LLM Gateway is in [beta](release-stages.md).
 
 A spend policy defines a cost cap for a specific scope (organization, workspace, API key, or user) over a time window (monthly, weekly, daily, or hourly). The [LLM Gateway](llm-gateway.md) tracks spend in real time and blocks any request that would push spend past the cap, returning a `402` response:
 

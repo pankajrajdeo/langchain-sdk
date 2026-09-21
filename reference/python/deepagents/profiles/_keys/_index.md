@@ -11,4 +11,4 @@ tags: [index, reference, python, deepagents, profiles, keys]
 
 ## Files
 
-- [validate_profile_key](validate_profile_key.md) - Validate a profile registry key.
+- [validate_profile_key](validate_profile_key.md) - Validate a provider or provider:model profile registry key.

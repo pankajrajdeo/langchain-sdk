@@ -21,7 +21,8 @@ to identifier-only matching for backwards compatibility with custom models.
 Provider comparison is normalized, so case, hyphen/underscore spelling, and
 known aliases do not read as a mismatch (see `_normalize_provider`).
 
-Assumes the `provider:model` convention (single colon separator).
+Assumes the `provider:model` convention, where the first colon is the
+separator and the model identifier may contain additional colons.
 
 ## Signature
 
@@ -47,4 +48,4 @@ model_matches_spec(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/1aae3746682a65c837c5dd0f165b685253fe9465/libs/deepagents/deepagents/_models.py#L146)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/_models.py#L146)

@@ -177,6 +177,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /datasets/{dataset_id}/experiment-view-overrides:
     get:

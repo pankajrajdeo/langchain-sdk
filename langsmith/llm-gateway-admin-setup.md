@@ -11,7 +11,7 @@ tags: [docs, langsmith, llm-gateway-admin-setup]
 > One-time organization setup to enable the LLM Gateway and grant user access.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](release-stages.md).
+> The LLM Gateway is in [beta](release-stages.md).
 
 One-time setup to enable the LLM Gateway for your LangSmith [organization](administration-overview.md#organizations). [Organization admins](rbac.md#organization-admin) should complete this before individual users can route calls through the gateway.
 
@@ -20,6 +20,8 @@ One-time setup to enable the LLM Gateway for your LangSmith [organization](admin
 You need [`organization:manage` permission](organization-workspace-operations.md) in LangSmith. [Step 2 Option A](#option-a-create-a-custom-workspace-role-recommended) also requires a plan that includes [RBAC](rbac.md) (custom roles).
 
 ## 1. Add Provider Secrets
+
+Skip this step for LangChain-hosted models: they use your LangSmith API key, not provider secrets. See [Gateway Credits](llm-gateway-credits.md) for paid chat models or [Decision models](llm-gateway-decision-models.md#semif) for SemIf. Continue with step 2 to grant gateway access.
 
 The gateway resolves provider API keys from your workspace's Provider Secrets—this is how it proxies calls to upstream providers without individual users needing local copies of provider keys.
 
@@ -83,7 +85,9 @@ Share the key and the gateway endpoint with each user, or distribute them via MD
 
 ## Verification
 
-Ask a user to run the [verification cURL from the quickstart](llm-gateway-quickstart.md#2-make-a-call). A `200` response confirms the gateway, the API key, provider secrets, and role permissions are all configured correctly. The call will appear as a trace in the **gateway** tracing project in the workspace.
+For SemIf, ask a user to run the [SemIf request example](llm-gateway-decision-models.md#call-semif). A `200` response confirms model access, the API key, and role permissions.
+
+For bring-your-own-key providers, ask a user to run the [verification cURL from the quickstart](llm-gateway-quickstart.md#send-a-request). A `200` response confirms the gateway, the API key, provider secrets, and role permissions are all configured correctly. The call will appear as a trace in the **gateway** tracing project in the workspace.
 
 ## Next steps
 

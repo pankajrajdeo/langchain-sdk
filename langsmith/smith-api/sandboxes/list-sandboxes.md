@@ -170,6 +170,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v2/sandboxes/boxes:
     get:
@@ -239,9 +241,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Label
         - description: >-
             Sort column (name, status, created_at, stopped_at, idle_ttl_seconds,
@@ -589,14 +591,9 @@ components:
           type: string
     sandboxes.SandboxAWSMountAuthConfig:
       type: object
-      required:
-        - access_key_id
-        - secret_access_key
-      properties:
-        access_key_id:
-          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
-        secret_access_key:
-          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      oneOf:
+        - $ref: '#/components/schemas/sandboxes.SandboxAWSMountRoleAuthConfig'
+        - $ref: '#/components/schemas/sandboxes.SandboxAWSMountStaticAuthConfig'
     sandboxes.SandboxGCPMountAuthConfig:
       type: object
       required:
@@ -825,14 +822,9 @@ components:
           type: string
     sandboxes.ProxyAWSConfig:
       type: object
-      required:
-        - access_key_id
-        - secret_access_key
-      properties:
-        access_key_id:
-          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
-        secret_access_key:
-          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      oneOf:
+        - $ref: '#/components/schemas/sandboxes.ProxyAWSRoleConfig'
+        - $ref: '#/components/schemas/sandboxes.ProxyAWSStaticConfig'
     sandboxes.ProxyGCPConfig:
       type: object
       required:
@@ -846,6 +838,41 @@ components:
             type: string
         service_account_json:
           $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+    sandboxes.SandboxAWSMountRoleAuthConfig:
+      type: object
+      properties:
+        role_arn:
+          description: >-
+            IAM role to assume with permissions scoped to the configured S3
+            mounts.
+
+            Mutually exclusive with static credentials. Configure only at
+            creation.
+          type: string
+          minLength: 1
+      required:
+        - role_arn
+      additionalProperties: false
+    sandboxes.SandboxAWSMountStaticAuthConfig:
+      type: object
+      properties:
+        access_key_id:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+        role_arn:
+          description: >-
+            IAM role to assume with permissions scoped to the configured S3
+            mounts.
+
+            Mutually exclusive with static credentials. Configure only at
+            creation.
+          type: string
+          enum:
+            - ''
+        secret_access_key:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - access_key_id
+        - secret_access_key
     sandboxes.ProxySecretValue:
       type: object
       required:
@@ -885,6 +912,50 @@ components:
         - HeaderTypePlaintext
         - HeaderTypeOpaque
         - HeaderTypeWorkspaceSecret
+    sandboxes.ProxyAWSRoleConfig:
+      type: object
+      properties:
+        role_arn:
+          description: >-
+            RoleARN selects automatically renewed IAM-role credentials instead
+            of static keys.
+
+            Access follows the role's effective AWS permissions, not the
+            sandbox's mount scope.
+
+            Configure at creation; the role cannot be changed afterward.
+          type: string
+          minLength: 1
+      required:
+        - role_arn
+      not:
+        anyOf:
+          - required:
+              - access_key_id
+          - required:
+              - secret_access_key
+    sandboxes.ProxyAWSStaticConfig:
+      type: object
+      properties:
+        access_key_id:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+        role_arn:
+          description: >-
+            RoleARN selects automatically renewed IAM-role credentials instead
+            of static keys.
+
+            Access follows the role's effective AWS permissions, not the
+            sandbox's mount scope.
+
+            Configure at creation; the role cannot be changed afterward.
+          type: string
+          enum:
+            - ''
+        secret_access_key:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - access_key_id
+        - secret_access_key
   securitySchemes:
     API Key:
       type: apiKey

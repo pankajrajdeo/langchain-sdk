@@ -10,8 +10,9 @@ tags: [docs, langsmith, smith-api, orgs, update-org-service-key]
 
 > Update an API key's role(s) in place without rotating the key.
 
-Restricted to org admins (ORGANIZATION_MANAGE). Applies to both
-org-scoped and workspace-scoped keys listed in /orgs/current/service-keys.
+Organization Operators cannot assign the Organization Admin role or change
+a key that already holds it, and no key can change its own roles. Applies
+to both org-scoped and workspace-scoped keys.
 
 ## OpenAPI
 
@@ -171,6 +172,8 @@ tags:
   - name: fleet threads
     x-hidden: true
   - name: fleet users
+  - name: productfeedback
+    x-hidden: true
 paths:
   /api/v1/orgs/current/service-keys/{api_key_id}:
     patch:
@@ -180,10 +183,13 @@ paths:
       description: >-
         Update an API key's role(s) in place without rotating the key.
 
-        Restricted to org admins (ORGANIZATION_MANAGE). Applies to both
+        Organization Operators cannot assign the Organization Admin role or
+        change
 
-        org-scoped and workspace-scoped keys listed in
-        /orgs/current/service-keys.
+        a key that already holds it, and no key can change its own roles.
+        Applies
+
+        to both org-scoped and workspace-scoped keys.
       operationId: >-
         update_org_service_key_api_v1_orgs_current_service_keys__api_key_id__patch
       parameters:

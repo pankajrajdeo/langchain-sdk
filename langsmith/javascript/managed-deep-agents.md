@@ -15,7 +15,7 @@ Managed Deep Agents (MDA) is the simplest way to build and deploy production age
 You write the agent's intelligence: its instructions, the tools it can call, the skills it follows, and you select the model that drives it. MDA provides everything underneath:
 
 * **The Deep Agents harness**: The agent loop that plans, calls tools, manages a filesystem, and delegates to subagents. See [Deep Agents](../../javascript/deepagents/overview.md).
-* **A managed runtime**: [LangSmith Deployment's Agent Server](../agent-server-overview.md) hosts and operates the agent, and keeps sessions running across restarts.
+* **A managed runtime**: Every deployment runs on [LangSmith Agent Server](../agent-server-overview.md). You get the Agent Server API, threads, runs, streaming, and the [MCP endpoint](managed-deep-agents-mcp-endpoint.md) without operating the server yourself.
 
 ```mermaid
 %%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, system-ui, sans-serif","lineColor":"#40668D","primaryColor":"#E5F4FF","primaryTextColor":"#030710","primaryBorderColor":"#006DDD","clusterBkg":"transparent"}}}%%
@@ -61,7 +61,7 @@ Each part of the agent maps to a file or directory. Add the ones your agent need
 | [Instructions](managed-deep-agents-instructions.md)                | `instructions.md` | The system prompt that defines how the agent behaves.                                    |
 | [Skills](managed-deep-agents-skills.md)                            | `skills/`         | Task-specific playbooks the agent loads when they are relevant.                          |
 | [Tools](managed-deep-agents-tools.md)                              | `tools/`          | Functions the agent calls to run your application logic or reach external services.      |
-| [MCP connectors](managed-deep-agents-mcp-connectors.md)            | `connectors/`     | Remote MCP servers that provide tools to the agent.                                      |
+| [MCP connectors](managed-deep-agents-mcp-connectors.md)            | `tools/mcp.ts`    | Remote MCP servers that provide tools to the agent.                                      |
 | [Middleware](managed-deep-agents-middleware.md)                    | `middleware/`     | Custom logic that runs around model and tool calls.                                      |
 | [Sandbox](managed-deep-agents-sandboxes.md)                        | `sandbox/`        | An isolated filesystem and shell for running agent-written code.                         |
 | [Memory](managed-deep-agents-memory.md)                            | `memory.ts`       | Preferences and knowledge that persist across threads.                                   |
@@ -70,7 +70,7 @@ Each part of the agent maps to a file or directory. Add the ones your agent need
 | [Schedules](managed-deep-agents-schedules.md)                      | `schedules/`      | Managed cron schedules that run the agent on a recurring basis.                          |
 | [Evals](managed-deep-agents-evals.md)                              | `evals/`          | Harbor tasks that test the agent.                                                        |
 
-For the full layout, see [Project structure](managed-deep-agents-project-structure.md).
+For the full layout, see [Project structure](managed-deep-agents-project-structure.md). Instructions, skills, and optional durable memory are stored in [Context Hub](managed-deep-agents-context-hub.md).
 
 ## Next steps
 
@@ -79,6 +79,12 @@ Create and deploy your first Managed Deep Agent with the `mda` CLI.
 
 #### [Tutorial](managed-deep-agents-tutorial.md)
 Add a custom search tool, durable memory, and a daily schedule.
+
+#### [Agent Server](../agent-server-overview.md)
+Explore the runtime that hosts Managed Deep Agents deployments.
+
+#### [MCP endpoint](managed-deep-agents-mcp-endpoint.md)
+Call a deployed agent as a tool from Claude Code or another MCP client.
 
 ***
 
