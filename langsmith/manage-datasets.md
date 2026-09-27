@@ -259,7 +259,7 @@ From the **Dataset & Experiments** tab, select a dataset, click **⋮** (top rig
 
 ## Export a dataset
 
-You can export your LangSmith dataset to a CSV, JSONL, or [OpenAI's fine tuning format](https://platform.openai.com/docs/guides/fine-tuning#example-format) from the LangSmith UI.
+You can export your LangSmith dataset to a CSV, JSONL, or [OpenAI's fine tuning format](https://platform.openai.com/docs/guides/fine-tuning#example-format) from the LangSmith UI. To fine-tune a model on a trajectory dataset without exporting it, use [Smithtune](smithtune.md).
 
 From the **Dataset & Experiments** tab, select a dataset, click **⋮** (top right of the page), click **Download Dataset**.
 
@@ -288,7 +288,7 @@ After applying the filter on the project, we can multi-select runs to add to the
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

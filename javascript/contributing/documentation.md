@@ -354,7 +354,7 @@ Use [Mintlify components](https://mintlify.com/docs/text) to enhance readability
 
 ### Mermaid diagrams
 
-When adding mermaid diagrams, use the LangChain brand color palette for node styling. Copy `classDef` lines from any existing diagram, or use the reference table in [`CLAUDE.md`](https://github.com/langchain-ai/docs/blob/main/CLAUDE.md#mermaid-diagram-styling).
+When adding mermaid diagrams, use the LangChain brand color palette for node styling. Copy `classDef` lines from any existing diagram, or use the reference table in [`AGENTS.md`](https://github.com/langchain-ai/docs/blob/main/AGENTS.md#mermaid-diagram-styling).
 
 | Role     | Fill      | Stroke    | Text      |
 | -------- | --------- | --------- | --------- |
@@ -491,7 +491,7 @@ Our goal is to have the simplest developer setup possible. Should you experience
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/documentation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

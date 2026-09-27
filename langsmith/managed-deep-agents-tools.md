@@ -99,6 +99,8 @@ For decision types (approve, edit, reject), conditional interrupts, and permissi
 
 To resume a paused run, see [Respond to an interrupt](#respond-to-an-interrupt).
 
+To pause on a form your own tool posts in Slack instead, see [Agent-owned interrupts](python/managed-deep-agents-agent-owned-interrupts.md).
+
 ## Use secrets and context
 
 Tools can read deployment secrets from environment variables. Put local values in `.env` for `mda dev`; `mda deploy` forwards non-reserved `.env` values as hosted deployment secrets.
@@ -140,10 +142,12 @@ If a tool requires an API key or OAuth token, use a connection to resolve the cr
 
 For per-run values such as request metadata or feature flags, use the normal LangChain runtime context patterns for tools. See [how to access context from within your tools](../langchain/tools.md#access-context).
 
+To read or write files in the thread's sandbox from a tool, use `runtime.backend`. See [Read and write sandbox files from code](python/managed-deep-agents-sandboxes.md#read-and-write-sandbox-files-from-code).
+
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

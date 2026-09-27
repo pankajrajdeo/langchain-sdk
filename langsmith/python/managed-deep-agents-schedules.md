@@ -74,6 +74,18 @@ Schedules use ephemeral threads by default. Managed Deep Agents creates a fresh 
 
 Use a persistent thread only when scheduled runs should accumulate durable thread state across invocations.
 
+A persistent thread ID must be the UUID of a thread that already exists on the deployment. Managed Deep Agents passes the value straight to the Agent Server, which rejects any ID that is not a UUID.
+
+### Create the persistent thread
+
+Create the thread before you deploy the schedule. Open the deployment in [LangSmith Studio](../studio.md), create a new thread, and copy its thread ID. `mda deploy` prints the deployment URL, and LangSmith lists it on the deployment page.
+
+Neither Managed Deep Agents nor the `mda` CLI creates the thread, so this is a one-time manual step for each persistent schedule.
+
+### Declare the persistent schedule
+
+Use that thread ID in the schedule declaration.
+
 > [!NOTE]
 > The following example requires [durable memory](managed-deep-agents-memory.md).
 
@@ -85,7 +97,7 @@ from managed_deepagents import define_schedule
 schedule = define_schedule(
     cron="0 3 * * *",
     prompt="Review the current project memory and list follow-up tasks.",
-    thread={"mode": "persistent", "id": "nightly-memory"},
+    thread={"mode": "persistent", "id": "<thread-uuid>"},
 )
 ```
 
@@ -128,6 +140,15 @@ Schedule declarations are extracted at compile time. Keep schedule configuration
 
 * Put dynamic behavior in the agent, tools, middleware, or runtime context instead.
 
+## Test schedules locally
+
+`mda dev` compiles `schedules/` and lists each schedule in its startup banner, but it does not provision them. Schedules run only on a deployment.
+
+> [!WARNING]
+> Schedules never fire under `mda dev`. The local server reports no error, so a schedule that is listed at startup is still inactive.
+
+To test the agent behavior a schedule triggers, send the schedule's `prompt` or `input` to the agent directly in local Studio. To test the schedule itself, deploy the project to a development deployment.
+
 ## Deploy schedules
 
 Test the project locally with [`mda dev`](managed-deep-agents-cli.md#develop-locally), then deploy it with [`mda deploy`](managed-deep-agents-deploy.md). Open deployment traces in LangSmith to inspect model calls, tool calls, errors, and latency.
@@ -149,6 +170,10 @@ When the deployment reaches `DEPLOYED`, `mda deploy` searches for existing Manag
 
 * `failed to create cron for schedule`: Open the deployment URL in LangSmith and confirm the deployed Agent Server is healthy.
 
+* `Invalid thread ID: must be a UUID (HTTP 422)`: A persistent schedule declares a thread ID that is not a UUID. Replace it with the UUID of an existing thread. See [Choose thread behavior](#choose-thread-behavior).
+
+* **A schedule does not run during local development**: `mda dev` does not provision schedules. See [Test schedules locally](#test-schedules-locally).
+
 ## Next steps
 
 #### [Deploy an agent](managed-deep-agents-deploy.md)
@@ -160,7 +185,7 @@ Look up `mda deploy` flags and troubleshooting.
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-schedules.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

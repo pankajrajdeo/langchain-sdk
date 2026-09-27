@@ -376,6 +376,8 @@ components:
         - rules:configure-retention
         - runs:create
         - runs:read
+        - runs:read-inputs
+        - runs:read-outputs
         - runs:read-stats
         - runs:share
         - runs:delete
@@ -417,6 +419,15 @@ components:
         - gateway:invoke
         - fleet:read-admin-config
         - fleet:write-admin-config
+        - fleet-agents:create
+        - fleet-agents:read
+        - fleet-agents:invoke
+        - fleet-agents:update
+        - fleet-agents:delete
+        - fleet-skills:create
+        - fleet-skills:read
+        - fleet-skills:update
+        - fleet-skills:delete
         - organization:pats:create
         - organization:read
         - organization:read-metadata
@@ -481,6 +492,8 @@ components:
         - RulesConfigureRetention
         - RunsCreate
         - RunsRead
+        - RunsReadInputs
+        - RunsReadOutputs
         - RunsReadStats
         - RunsShare
         - RunsDelete
@@ -522,6 +535,15 @@ components:
         - GatewayInvoke
         - FleetReadAdminConfig
         - FleetWriteAdminConfig
+        - FleetAgentsCreate
+        - FleetAgentsRead
+        - FleetAgentsInvoke
+        - FleetAgentsUpdate
+        - FleetAgentsDelete
+        - FleetSkillsCreate
+        - FleetSkillsRead
+        - FleetSkillsUpdate
+        - FleetSkillsDelete
         - OrganizationPATsCreate
         - OrganizationRead
         - OrganizationReadMetadata

@@ -1,19 +1,20 @@
 ---
 title: "langsmith/smith-api/bulk-exports"
-description: "Index of 11 pages and 0 subdirectories under langsmith/smith-api/bulk-exports."
+description: "Index of 12 pages and 0 subdirectories under langsmith/smith-api/bulk-exports."
 category: "index"
 tags: [index, langsmith, smith-api, bulk-exports]
 ---
 
 # langsmith/smith-api/bulk-exports
 
-11 pages here.
+12 pages here.
 
 ## Files
 
 - [Cancel bulk export](cancel-bulk-export.md) - Cancel a bulk export by ID
 - [Create bulk export destination](create-bulk-export-destination.md) - Create a new bulk export destination
 - [Create bulk export](create-bulk-export.md) - Create a new bulk export
+- [Delete bulk export destination](delete-bulk-export-destination.md) - Delete a bulk export destination that is not used by any bulk export
 - [Get bulk export destination](get-bulk-export-destination.md) - Get a single bulk export destination by ID
 - [Get bulk export destinations](get-bulk-export-destinations.md) - Get the current workspace's bulk export destinations
 - [Get bulk export run](get-bulk-export-run.md) - Get a single bulk export's run by ID

@@ -17,7 +17,7 @@ tags: [docs, integrations, llms, cohere]
 
 > [Cohere](https://cohere.ai/about) is a Canadian startup that provides natural language processing models that help companies improve human-machine interactions.
 
-Head to the [API reference](https://reference.langchain.com/python/langchain-community/llms/cohere/Cohere) for detailed documentation of all attributes and methods.
+Head to the [API reference](https://reference.langchain.com/python/langchain-cohere/llms/Cohere) for detailed documentation of all attributes and methods.
 
 ## Setup
 
@@ -103,12 +103,12 @@ model.batch([message])
 
 ## API reference
 
-For detailed documentation of all `Cohere` llm features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-community/llms/cohere/Cohere)
+For detailed documentation of all `Cohere` llm features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-cohere/llms/Cohere)
 
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

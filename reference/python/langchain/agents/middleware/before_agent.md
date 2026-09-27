@@ -1,6 +1,6 @@
 ---
 title: "before_agent"
-description: "Start the shell session and run startup commands."
+description: "Logic to run before the agent execution starts."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/before_agent"
 category: "reference"
 tags: [reference, langchain, agents, middleware, before_agent]
@@ -10,16 +10,16 @@ tags: [reference, langchain, agents, middleware, before_agent]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/shell_tool/ShellToolMiddleware/before_agent)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware/before_agent)
 
-Start the shell session and run startup commands.
+Logic to run before the agent execution starts.
 
 ## Signature
 
 ```python
 before_agent(
     self,
-    state: ShellToolState[ResponseT],
+    state: StateT,
     runtime: Runtime[ContextT],
 ) -> dict[str, Any] | None
 ```
@@ -28,15 +28,15 @@ before_agent(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `state` | `ShellToolState[ResponseT]` | Yes | The current agent state. |
+| `state` | `StateT` | Yes | The current agent state. |
 | `runtime` | `Runtime[ContextT]` | Yes | The runtime context. |
 
 ## Returns
 
 `dict[str, Any] | None`
 
-Shell session resources to be stored in the agent state.
+Agent state updates to apply before agent execution.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a18de590e7ccf5c647fbf3d689e5f1a15f78e9f5/libs/langchain_v1/langchain/agents/middleware/shell_tool.py#L656)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a18de590e7ccf5c647fbf3d689e5f1a15f78e9f5/libs/langchain_v1/langchain/agents/middleware/types.py#L431)

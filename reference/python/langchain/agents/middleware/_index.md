@@ -36,9 +36,9 @@ tags: [index, reference, python, langchain, agents, middleware]
 
 ## Files
 
-- [after_agent](after_agent.md) - Run shutdown commands and release resources when an agent completes.
-- [after_model](after_model.md) - Logic to run after the model is called.
-- [before_agent](before_agent.md) - Start the shell session and run startup commands.
+- [after_agent](after_agent.md) - Logic to run after the agent execution completes.
+- [after_model](after_model.md) - Check for parallel write_todos tool calls and return errors if detected.
+- [before_agent](before_agent.md) - Logic to run before the agent execution starts.
 - [before_model](before_model.md) - Logic to run before the model is called.
 - [configure_trace_policy](configure_trace_policy.md) - Set the process-wide default TracePolicy for agent middleware hook spans.
 - [context_editing](context_editing.md) - Context editing middleware.
@@ -61,5 +61,5 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [tool_retry](tool_retry.md) - Tool retry middleware for agents.
 - [tool_selection](tool_selection.md) - LLM-based tool selector middleware.
 - [types](types.md) - Types for middleware and agents.
-- [wrap_model_call](wrap_model_call.md) - Intercept model execution and retry on failure.
-- [wrap_tool_call](wrap_tool_call.md) - Intercept tool execution for retries, monitoring, or modification.
+- [wrap_model_call](wrap_model_call.md) - Defer tools before invoking the model.
+- [wrap_tool_call](wrap_tool_call.md) - Emulate tool execution using LLM if tool should be emulated.

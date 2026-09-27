@@ -7,7 +7,7 @@ tags: [index, reference, python, langchain-core]
 
 # reference/python/langchain-core
 
-41 pages here, 2895 pages including subdirectories.
+41 pages here, 2896 pages including subdirectories.
 
 ## Directories
 
@@ -18,7 +18,7 @@ tags: [index, reference, python, langchain-core]
 - [agents/](agents/_index.md) - 22 pages
 - [caches/](caches/_index.md) - 15 pages
 - [callbacks/](callbacks/_index.md) - 229 pages
-- [chat_history/](chat_history/_index.md) - 19 pages
+- [chat_history/](chat_history/_index.md) - 20 pages
 - [chat_loaders/](chat_loaders/_index.md) - 3 pages
 - [chat_sessions/](chat_sessions/_index.md) - 3 pages
 - [cross_encoders/](cross_encoders/_index.md) - 2 pages

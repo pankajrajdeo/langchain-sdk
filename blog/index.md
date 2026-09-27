@@ -14,23 +14,59 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## What does it mean to "own your intelligence"?
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseJuly 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aae04c2c9a23c30549b7035_jev-judge-hero-dark-2400x1260.png)Observability & EvalsLangSmith
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseJuly 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab452a9ab70e37bfc53e20a_LangSmith%20Engine%20V2.png)LangSmith
 
-## Jev-as-a-Judge for Agent Evals
+## LangSmith Engine v2: Red teaming and automated testing
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aadff9dce74725982225a2b_1779587287107.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aadff85e476e3b7b1aa1050_1760463491000.jpeg)Daniel SheaSeán RocheSeptember 20, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aac8ce2e3f50ce7069ae68f_jev-harness-a-title-hero-1600x900.png)Open SourceAgent ArchitectureLangChain
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a048d6ca69a48036bbf20b5_BenTannyhill.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8dd57932ec9d5fe5ad91d3_1727879885099.jpeg)Ben TannyhillTrammell SaltzgaberSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab44d53d51ae0a006a097e1_Managed%20Deep%20Agents%20v0.8-%20new%20auth%2C%20memory%2C%20and%20channels%20.png)Deep Agents
 
-## Building a Harness with Jev
+## Managed Deep Agents v0.8: new auth, memory, and channels
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e12735c02bb07c894a067a_hunter-lovell.png)Sydney RunkleHunter LovellSeptember 17, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa75f585bb405f1d1e0fc3b_arch-draft-dark-4880x2620.png)Tutorials & How-TosAgent Architecture
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab43e723b026a19d87bf6d2_Karthic%20S.jpg)Nathan DreznerKarthic SubramanianSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab4526c5a37e3b0cd5e208a_Trajectories%20in%20LangSmith.png)LangSmithObservability & Evals
 
-## How we built LangChain's Paid Media Agent
+## Trajectories now in LangSmith: A readable view of every agent session
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa748ac8b001558f0c48c12_amal.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa7487b1796b28dfb325e62_danny.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa75ebed90e0d765a0890be_Screenshot%202026-09-13%20at%207.40.03%E2%80%AFPM.png)Amal IrgashevDanny LambertJan GomezSeptember 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)19min
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab0bd4025242f1e7ba1cfd0_Winston%20Huynh%20-%20GSB%20Headshot.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab3f899e44af010231031ce_Bonnie%20Pecevich.png)Winston HuynhBonnie PecevichSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aae04c2c9a23c30549b7035_jev-judge-hero-dark-2400x1260.png)Observability & EvalsLangSmith
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab6ba616821ea2bd3edd56a_webflow-cover-light-building-prod-jev-langgraph-1600x900.png)Open SourceAgent ArchitectureLangGraph
+
+## Building Prod with Jev and LangGraph
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e12735c02bb07c894a067a_hunter-lovell.png)Sydney RunkleHunter LovellSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab57bc134468b379293eaf4_everything%20we%20shipped%20at%20interrupt%20nyc.png)LangSmithCompany Announcements
+
+## New in LangSmith: Engine v2, Managed Deep Agents, Fine-Tuning, and More
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e0003a1af368dfae13c23c_jacob-talbot.png)Jacob TalbotSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab452a9ab70e37bfc53e20a_LangSmith%20Engine%20V2.png)LangSmith
+
+## LangSmith Engine v2: Red teaming and automated testing
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a048d6ca69a48036bbf20b5_BenTannyhill.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8dd57932ec9d5fe5ad91d3_1727879885099.jpeg)Ben TannyhillTrammell SaltzgaberSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab44d53d51ae0a006a097e1_Managed%20Deep%20Agents%20v0.8-%20new%20auth%2C%20memory%2C%20and%20channels%20.png)Deep Agents
+
+## Managed Deep Agents v0.8: new auth, memory, and channels
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab43e723b026a19d87bf6d2_Karthic%20S.jpg)Nathan DreznerKarthic SubramanianSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab4526c5a37e3b0cd5e208a_Trajectories%20in%20LangSmith.png)LangSmithObservability & Evals
+
+## Trajectories now in LangSmith: A readable view of every agent session
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab0bd4025242f1e7ba1cfd0_Winston%20Huynh%20-%20GSB%20Headshot.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab3f899e44af010231031ce_Bonnie%20Pecevich.png)Winston HuynhBonnie PecevichSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab45a5758db5bed65dc7113_LangSmith%20Fine%20Tuning.png)LangChain LabsLangSmith
+
+## Introducing LangSmith Fine-Tuning
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a057b407e8d40398635c89c_Ankush.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a186f27aa3f837f062768ab_JakeStudioHeadshot.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcefac505b6b48827abf84_vivek-trivedy.png)Ankush GolaJake BroekhuizenVivek TrivedySeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab53b4a21378846b57c99d1_custom-apps-langsmith.png)LangSmith
+
+## Introducing LangSmith Custom Apps: Build custom interfaces around your agent data
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69ebb0ba47307bda72996a96_sam-crowder.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab3f899e44af010231031ce_Bonnie%20Pecevich.png)Sam CrowderBonnie PecevichSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab1a034236823f9762668b2_The%20Reliability%20Layer%20for%20Healthcare%20AI-%20Common%20LangSmith%20Use%20Cases.png)LangSmith
+
+## The Reliability Layer for Healthcare AI: Common LangSmith Use Cases
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab1a07200482c5ca3951c8f_Morgan%20Lo.png)Morgan LoSeptember 22, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab0bd7112e026354354705b_header-green-dark.png)LangSmithObservability & Evals
+
+## Jev is now available in LangSmith Evals
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab0bd4025242f1e7ba1cfd0_Winston%20Huynh%20-%20GSB%20Headshot.jpg)Winston HuynhSeptember 21, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aae04c2c9a23c30549b7035_jev-judge-hero-dark-2400x1260.png)Observability & EvalsLangSmith
 
 ## Jev-as-a-Judge for Agent Evals
 
@@ -58,43 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## How Credit Genie uses OpenWiki to keep codebase knowledge fresh, searchable, and automated
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa1b473b3afd2e4dd5c2a15_Kara_Kadri.jpeg)Kara KadriSeptember 10, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa18f3fec1f43f5e7236a2a_green-74%20characters%20max.png)Deep Agents
-
-## Connections: Managed credentials and per-caller identity for Managed Deep Agents
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dceef7db73f884ac4cfb40_victor-moreira.png)Victor MoreiraSeptember 9, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a9fa6750b484534373d853a_dark-57%20characters%20max%202.png)Agent ArchitectureDeep AgentsOpen Source
-
-## Organizing Context in a Multi-Agent Harness
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a9f9d4551b6d04251e14de9_T04F8K3FZB5-U0B7C5VFFL0-081c39c8d8b6-512.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a9fa3957a9e2fadccdce2d8_T04F8K3FZB5-U06PZQXSTQS-5c018c8b0d35-512.jpeg)Thushanth BengreChester CurmeSeptember 8, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a99a7d831c3788cf2516870_110.png)Open SourceAgent ArchitectureLangChain
-
-## MCP in LangChain: Stateless Protocol, Elicitation, and More!
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleSeptember 3, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98c16062e0a153fc2d6a29_108.png)Partner
-
-## Agents That Pay | How Nevermined Empowers LangChain Agents to Buy and Sell Services
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a97798a51f90341d93d633c_team_josh.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a9779a9464881549da6f6a0_team_rod.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69fbd29baf4c28709e2566a7_headshot.jpg)Josh WadinskiRodolphe MarquesKaran SinghSeptember 3, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)12min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a98d448f3427823143dcbbc_Scaling%20Agents%20in%20Europe%20%26%20The%20Middle%20East.png)Conceptual Guide
-
-## Scaling Agents in Europe & The Middle East: Lessons from Schneider Electric, Vodafone, and monday.com
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a6840c696e8a4fd7807d900_jess.jpeg)Jess OuSeptember 3, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)17min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8f3b863992fb3ac65a95fc_August-26-newsletter-blog.jpg)Newsletter
-
-## August 2026: LangChain Newsletter
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69d50051c5c24f19b81fd73a_Group%202147239256-2.svg)The LangChain TeamAugust 26, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)4min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8dd5fafc2406d909c29c0c_Engine%20Blog%20%E2%80%94%20Hero.png)LangSmith
-
-## New in LangSmith Engine: &gt;2x better issue detection
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8dd57932ec9d5fe5ad91d3_1727879885099.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a048d6ca69a48036bbf20b5_BenTannyhill.jpeg)Trammell SaltzgaberBen TannyhillAugust 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8cb47d5bf296c359777ff5_build-env-tasks-short.png)Observability & Evals
-
-## How We Build Agent Environments & Tasks
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcefac505b6b48827abf84_vivek-trivedy.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a0f023b0b549b4726b62469_T04F8K3FZB5-U0AQPTH37EV-d045574c58b6-512.png)Vivek TrivedyNick HollonAugust 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)12min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8d24ddbd47d394d434e52e_openwiki-memory-blog.png)Open Source
-
-## Building Self-Correcting Memory in OpenWiki
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e12775881c2a7fc9aba41e_colin-francis.png)Colin FrancisAugust 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 33
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa1b473b3afd2e4dd5c2a15_Kara_Kadri.jpeg)Kara KadriSeptember 10, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min1...1 / 33
 
 #### We couldn't find anything matching that.
 

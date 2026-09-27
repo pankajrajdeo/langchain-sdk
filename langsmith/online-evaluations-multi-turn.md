@@ -1,6 +1,6 @@
 ---
 title: "Set up multi-turn online evaluators"
-description: "Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent—not just individual exchanges. They measure end-to-end interaction quality across all turns in a..."
+description: "Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent, not just individual exchanges. They measure end-to-end interaction quality across all turns in a..."
 source: "https://docs.langchain.com/langsmith/online-evaluations-multi-turn"
 category: "docs"
 tags: [docs, langsmith, online-evaluations-multi-turn]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, online-evaluations-multi-turn]
 
 # Set up multi-turn online evaluators
 
-Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent—not just individual exchanges. They measure end-to-end interaction quality across all turns in a thread.
+Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent, not just individual exchanges. They measure end-to-end interaction quality across all turns in a thread.
 
 To use a LangChain-managed, thread-level judge without configuring a model, API key, or prompt, see [LangChain Tuned Evaluators](tuned-evaluators.md).
 
@@ -89,6 +89,59 @@ This lifecycle means that multi-turn evaluators run once per completed thread, n
 
    After saving, your evaluator will appear in the **Evaluators** tab. You can test it once the idle time has passed for any new threads created after saving.
 
+## Evaluate trajectories
+
+`trajectory` is one of the variables a thread evaluator can use, alongside `all_messages`, `human_ai_pairs`, and `first_human_last_ai`. It resolves to the [trajectory](observability-concepts.md#trajectories) of the conversation: the flat, ordered list of messages from start to finish, including tool calls and their results. Use it to score the path an agent took, such as whether it picked the right tools, followed its plan, and got there without wasted steps.
+
+> [!NOTE]
+> The `trajectory` variable is available on [LangSmith Cloud](cloud.md) in the GCP US region ([smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-online-evaluations-multi-turn)) only. It is not available in the GCP EU, GCP APAC, or AWS US regions, or on [self-hosted](self-hosted.md) and [BYOC](byoc.md) deployments. Self-hosted support is not included in the LangSmith v0.16.0 stable release. Support for self-hosted and BYOC deployments becomes available in a future release.
+
+The variables differ in what the judge receives:
+
+* **`all_messages`, `human_ai_pairs`, and `first_human_last_ai`** resolve to the conversation assembled from the inputs and outputs of each root run in the thread. Work that happens in child runs, such as intermediate model calls, tool calls, and tool result, is not included unless a root run's own inputs or outputs contain it. human\_ai\_pairs and first\_human\_last\_ai narrow further to user and assistant messages only.
+* **`trajectory`** resolves to the trajectory built from the model and tool calls inside each trace. The tool calls and tool results the other views omit are preserved.
+
+For the message shape each variable resolves to, see [Thread message variables](prompt-template-format.md#thread-message-variables).
+
+> [!WARNING]
+> A trajectory is typically larger than any of the other views, because it encompasses both root and child runs. Choose a model with a high context window, as described in step 6 of [Configuration](#configuration), and expect higher token usage per evaluation.
+
+### Use the trajectory variable
+
+Follow the [configuration](#configuration) steps above. Two things change:
+
+1. Under **Source**, select **Threads**. The variable is available only on an evaluator that runs against a tracing project, not against a dataset.
+2. Reference `{{trajectory}}` in your prompt and map that variable to the `trajectory` source. The variable must be named `trajectory`: a differently named variable pointed at that source is rejected. The seeded default prompt and mapping already do this, so a new evaluator needs no changes here.
+
+Switching **Source** between **Runs** and **Threads** reseeds the default prompt only while you have not edited it. Once you edit the prompt, your version is kept, and you map the variables yourself.
+
+`{{trajectory}}` cannot appear alongside `{{all_messages}}`, `{{human_ai_pairs}}`, or `{{first_human_last_ai}}`. Once you map the trajectory source, the other sources are disabled in the variable source dropdown, and once you map one of the others, the trajectory source is disabled. Either way, the dropdown explains that trajectory variables and non-trajectory variables cannot be used together. Saving an evaluator that mixes them fails the same way.
+
+When the evaluator completes, LangSmith writes feedback to the most recent root run in the thread, under the feedback key you configured, and associates that feedback with the thread. To find it later, see [View feedback](threads.md#view-feedback).
+
+For a complete prompt you can adapt, see [Example with trajectory context](prompt-template-format.md#example-with-trajectory-context).
+
+> [!WARNING]
+> The choice is fixed when you create the evaluator. To move an existing evaluator between `trajectory` and the other thread variables, delete it and create a new one.
+
+### Settings and constraints
+
+An evaluator that uses `trajectory` supports the following settings:
+
+* **Filters**: Limit which threads the evaluator runs on.
+* **Sampling rate**: Evaluate a percentage of the threads that match your filters.
+* **Idle time**: The project-level thread idle time, which applies to every thread-level evaluator in the project.
+
+The following options are not available, and a configuration that includes one is rejected:
+
+* Datasets and experiments as a source.
+* Backfill over existing threads.
+* Trace filters and tree filters.
+* Few-shot examples, extended stats, and dataset corrections.
+* Code evaluators on the same automation rule, and non-evaluator actions such as adding threads to an annotation queue.
+
+A trajectory is not a run, so any option that reads run-level fields is unavailable.
+
 ## Limits
 
 These are the current limits for thread-level processing (subject to change). They apply to multi-turn online evaluators and to [automation rules](rules.md#set-the-item-type-to-runs-or-threads) whose item type is **Threads**. Reach out if you are running into any of these limits.
@@ -112,7 +165,7 @@ In this tab, you can see the inputs passed into the LLM-as-a-judge evaluator. If
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-multi-turn.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

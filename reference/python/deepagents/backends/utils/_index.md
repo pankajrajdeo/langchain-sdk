@@ -1,13 +1,13 @@
 ---
 title: "reference/python/deepagents/backends/utils"
-description: "Index of 28 pages and 0 subdirectories under reference/python/deepagents/backends/utils."
+description: "Index of 29 pages and 0 subdirectories under reference/python/deepagents/backends/utils."
 category: "index"
 tags: [index, reference, python, deepagents, backends, utils]
 ---
 
 # reference/python/deepagents/backends/utils
 
-28 pages here.
+29 pages here.
 
 ## Files
 
@@ -21,6 +21,7 @@ tags: [index, reference, python, deepagents, backends, utils]
 - [MAX_VIDEO_INPUT_BYTES](MAX_VIDEO_INPUT_BYTES.md) - Maximum raw video payload size accepted by read_file frame extraction.
 - [TOOL_RESULT_TOKEN_LIMIT](TOOL_RESULT_TOKEN_LIMIT.md) - View source on GitHub
 - [TRUNCATION_GUIDANCE](TRUNCATION_GUIDANCE.md) - View source on GitHub
+- [TRUNCATION_MARKER_TEMPLATE](TRUNCATION_MARKER_TEMPLATE.md) - Marker standing in for lines dropped from the middle of a head/tail preview.
 - [build_grep_results_dict](build_grep_results_dict.md) - Group structured matches into the legacy dict form used by formatters.
 - [check_empty_content](check_empty_content.md) - Check if content is empty and return warning message.
 - [compile_grep_include_glob](compile_grep_include_glob.md) - Compile a grep include-glob into a matcher with ripgrep-like semantics.
@@ -33,7 +34,7 @@ tags: [index, reference, python, deepagents, backends, utils]
 - [normalize_read_bounds](normalize_read_bounds.md) - Floor a requested read window at a zero offset and zero lines.
 - [perform_string_replacement](perform_string_replacement.md) - Perform string replacement with occurrence validation.
 - [regex_literal_hint](regex_literal_hint.md) - Return a hint when a pattern looks like an (unsupported) regex.
-- [sanitize_tool_call_id](sanitize_tool_call_id.md) - Sanitize tool_call_id to prevent path traversal and separator issues.
+- [sanitize_tool_call_id](sanitize_tool_call_id.md) - Return a bounded, path-safe component for a tool call ID.
 - [slice_read_response](slice_read_response.md) - Slice file data to the requested line range without formatting.
 - [to_posix_path](to_posix_path.md) - Normalize backslash separators to forward slashes for PurePosixPath use.
 - [truncate_if_too_long](truncate_if_too_long.md) - Truncate list or string result if it exceeds token limit (rough estimate: 4 chars/token).

@@ -20,4 +20,4 @@ get_asgi_transport() -> type[httpx.ASGITransport]
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/d5f4b2aa960940effc8430165ab3604038e817af/libs/sdk-py/langgraph_sdk/_shared/utilities.py#L243)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/sdk-py/langgraph_sdk/_shared/utilities.py#L243)

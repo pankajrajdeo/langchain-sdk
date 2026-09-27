@@ -666,6 +666,10 @@ components:
             - $ref: '#/components/schemas/CodeEvaluatorLanguage'
             - type: 'null'
           default: python
+        require_attachments:
+          type: boolean
+          title: Require Attachments
+          default: false
       type: object
       required:
         - code

@@ -43,6 +43,11 @@ Render adaptive, agent-generated interfaces from LangGraph and Deep Agents using
 #### [The Context Company](https://docs.thecontextcompany.com/frameworks/langchain-langgraph)
 Observability and customer analytics for production AI agents.
 
+## Classification models
+
+#### [TypeSafe](typesafe.md)
+Classify state into typed decisions and calibrated probabilities with Jev.
+
 ## Chat models
 
 #### [Anthropic](../chat/anthropic.md)
@@ -294,11 +299,14 @@ Rerank and compress documents using MixedBread AI.
 #### [aiworker](https://github.com/ai-worker227/aiworker-examples/tree/main/langchain)
 Paid data tools (DeFi yields, page-to-Markdown, Base token and wallet checks, Polymarket odds, history and backtests, fact checks, headline search) built from aiworker's live OpenAPI catalogue; each call pays itself in USDC over the x402 protocol from the agent's wallet, no API key.
 
-#### [Atomic Mail](https://atomic-mail.github.io/atomic-mail-agentic/langchain)
-JMAP inboxes for AI agents with proof-of-work signup and tools for registration, mail operations, and help.
+#### [Atomic Mail](https://docs.atomicmail.ai/langchain)
+Email toolkit that provisions an agent-owned inbox by proof of work and sends and receives over JMAP.
 
 #### [Azure Dynamic Sessions](../tools/azure_dynamic_sessions.md)
 Secure code execution in Azure Dynamic Sessions.
+
+#### [Continuity tools](https://github.com/zerohourzulu/continuity/blob/main/packages/remote-tools/README.md#langchain-tools)
+LangChain tools with application-defined permissions, stable operation identities and status-only recovery for cooperating services.
 
 #### [Corsair](https://docs.corsair.dev/mcp-adapters/langchain)
 Exposes 200+ service integrations (Slack, GitHub, Gmail, Linear, Stripe, and others) to LangChain agents as tools. OAuth runs server-side and credentials stay in the developer's own database.
@@ -347,6 +355,9 @@ Multi-engine web search API for AI applications and data aggregation.
 
 #### [SIGNA](https://github.com/codexvritra/signa/tree/main/sdk/langchain)
 Add wallet-signed messaging tools to LangChain agents.
+
+#### [Sato Hub](https://github.com/satohubai/sato-hub-integrations/tree/main/packages/satohub-langchain-tools#readme)
+Four keyless tools over Sato Hub's daily-rebuilt index of onchain-agent building blocks: search listings, run a Preflight lookup on a repo, package, MCP endpoint or token, get a swap-venue recommendation with the fee stated, and turn a goal into a build plan of listed projects.
 
 #### [TalorData](https://www.talordata.com/docs)
 Unified SERP API across 33 search engines with geo-targeting.
@@ -419,6 +430,9 @@ Multi-tier cache for AI agents backed by Valkey or Redis.
 
 ## Callbacks
 
+#### [OpenInference](https://arize.com/docs/ax/integrations/python-agent-frameworks/langchain/langchain-tracing)
+OpenTelemetry instrumentation that records LangChain and LangGraph operations using OpenInference semantic conventions.
+
 #### [Respan](https://www.respan.ai/docs)
 Trace LangChain.js, LangGraph.js, and Langflow-style callback runs in Respan.
 
@@ -428,7 +442,7 @@ Validate prompts for prompt injection before they reach your model.
 ***
 
 > [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/providers/all_providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

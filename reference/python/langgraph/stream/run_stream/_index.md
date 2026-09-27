@@ -7,13 +7,13 @@ tags: [index, reference, python, langgraph, stream, run_stream]
 
 # reference/python/langgraph/stream/run_stream
 
-5 pages here, 39 pages including subdirectories.
+5 pages here, 49 pages including subdirectories.
 
 ## Directories
 
-- [AsyncGraphRunStream/](AsyncGraphRunStream/_index.md) - 9 pages
+- [AsyncGraphRunStream/](AsyncGraphRunStream/_index.md) - 14 pages
 - [AsyncSubgraphRunStream/](AsyncSubgraphRunStream/_index.md) - 5 pages
-- [GraphRunStream/](GraphRunStream/_index.md) - 10 pages
+- [GraphRunStream/](GraphRunStream/_index.md) - 15 pages
 - [SubgraphRunStream/](SubgraphRunStream/_index.md) - 5 pages
 - [_SubgraphRunStreamMixin/](_SubgraphRunStreamMixin/_index.md) - 5 pages
 

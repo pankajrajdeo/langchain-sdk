@@ -239,6 +239,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runs.ErrorResponse'
+        '408':
+          description: Request body was not fully received within the server time limit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runs.ErrorResponse'
         '409':
           description: Conflict
           content:

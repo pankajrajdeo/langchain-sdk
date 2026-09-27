@@ -69,6 +69,40 @@ Managing organization-wide providers requires the [Organization Admin](rbac.md#o
 1. Navigate to the [Model providers](https://smith.langchain.com/settings/model-providers) page under **Settings**.
 2. Toggle a provider off to disable it across the organization, or on to re-enable it.
 
+## Organization-scoped model configurations
+
+> [!NOTE]
+> Organization-scoped model configurations are available on LangSmith [Self-hosted](self-hosted.md) and [Cloud Enterprise](pricing-plans.md) only.
+
+[Organization admins](rbac.md#organization-admin) can create model configurations at the organization level, so a single configuration is available across every [workspace](administration-overview.md#workspaces) in the organization without duplicating it per workspace.
+
+Organization-scoped configurations appear alongside workspace-scoped configurations in the **Configurations** table on each workspace's **Settings** > **Model configurations** page. To make an org-scoped configuration available in Fleet, Playground, Evaluators, or other features, a [workspace admin](rbac.md#workspace-admin) must enable it in the [Feature Access](#feature-access) table for that workspace.
+
+### Create an organization-scoped configuration
+
+Creating an organization-scoped configuration requires the [Organization Admin](rbac.md#organization-admin) role:
+
+1. Navigate to **Settings** > **Model configurations** at the organization level.
+2. Under **Configurations**, click **+ Create**.
+3. Select a **Provider** and **Model**, and complete the remaining fields.
+4. Click **Save**.
+
+### Enable an org-scoped configuration in a workspace
+
+After an org-scoped configuration is created, workspace admins must enable it before it appears in workspace features:
+
+1. In the workspace, navigate to **Settings** > **Model configurations**.
+2. Find the org-scoped configuration in the **Configurations** table.
+3. In the **Feature Access** table, enable the configuration for each feature where it should appear.
+
+### Limitations
+
+Keep the following constraints in mind when working with org-scoped configurations:
+
+* **Scope is immutable.** A configuration saved as org-scoped cannot be changed to workspace-scoped, and a workspace-scoped configuration cannot be promoted to org-scoped. Create a new configuration if you need to change the scope.
+* **Workspace takes precedence on name collision.** When a workspace configuration and an org-scoped configuration share the same name, the workspace version takes precedence.
+* **Secrets store location.** On LangChain Cloud (non-BYOC), secrets for org-scoped configurations are stored on the LangChain Cloud control plane. In a BYOC deployment, you can configure where model secrets are written using the data-plane switcher.
+
 ## Configurations
 
 The **Configurations** table is a shared library of named model configurations for your workspace. Configurations you create in LangSmith (including from the [Playground](managing-model-configurations.md)) appear here and you can reuse them across all features.
@@ -223,7 +257,7 @@ Yes. Routing is per-configuration. Configurations with OAuth enabled use OAuth; 
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/model-configurations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

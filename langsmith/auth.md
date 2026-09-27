@@ -30,6 +30,7 @@ LangSmith provides different security defaults:
 * Uses LangSmith API keys by default
 * Requires valid API key in `x-api-key` header
 * Can be customized with your auth handler
+* Can accept LangSmith API keys alongside custom auth when `auth.allow_langsmith_api_keys` is `true` in [`langgraph.json`](cli.md#configuration-file) (Agent Server v0.14.0rc2+)
 
 > [!NOTE]
 > **Custom auth**
@@ -503,7 +504,7 @@ For implementation details:
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

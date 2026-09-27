@@ -49,7 +49,7 @@ Catch exceptions raised during tool execution and convert them into error `ToolM
 * Preventing unexpected tool exceptions from crashing the agent.
 
 > [!NOTE]
-> Tool error middleware does not automatically retry failed calls. For retries, compose with [Tool retry](#tool-retry) middleware placed *inner* (earlier in the `middleware` list) and configured with `on_failure="error"` so that exceptions reach the tool error middleware. See the [full example](#tool-error-full-example) below.
+> Tool error middleware does not automatically retry failed calls. For retries, compose with [Tool retry](#tool-retry) middleware placed *inner* (later in the `middleware` list) and configured with `on_failure="error"` so that exceptions reach the tool error middleware. See the [full example](#tool-error-full-example) below.
 
 **API reference:** [`ToolErrorMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/tool_error/ToolErrorMiddleware)
 
@@ -113,8 +113,8 @@ agent = create_agent(
     tools=[search_tool, database_tool],
     middleware=[
         # Place retry inner so exceptions reach ToolErrorMiddleware after retries are exhausted
-        ToolRetryMiddleware(max_retries=3, on_failure="error"),
         ToolErrorMiddleware(on_error=on_error, tools=["search_tool"]),
+        ToolRetryMiddleware(max_retries=3, on_failure="error"),
     ],
 )
 
@@ -1782,7 +1782,7 @@ Content moderation middleware for OpenAI models.
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/middleware/built-in.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

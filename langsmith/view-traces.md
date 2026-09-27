@@ -1,6 +1,6 @@
 ---
 title: "View traces"
-description: "Inspect agent threads in LangSmith using the Messages view or Details view."
+description: "Inspect agent threads in LangSmith using the Trajectory view or Details view."
 source: "https://docs.langchain.com/langsmith/view-traces"
 category: "docs"
 tags: [docs, langsmith, view-traces]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, view-traces]
 
 # View traces
 
-> Inspect agent threads in LangSmith using the Messages view or Details view.
+> Inspect agent threads in LangSmith using the Trajectory view or Details view.
 
 From a tracing project, use the **Threads**, **Traces**, or **Runs** tabs to change what appears in the table. To narrow it to specific rows, [apply a filter](filter-traces.md). Click into any row to open the side panel.
 
@@ -19,17 +19,17 @@ The side panel is organized around [threads](observability-concepts.md#threads) 
 
 Three views are available at the top of the side panel:
 
-* [**Messages**](#messages-view) (**beta**): The conversation layer. Scan the [trajectory](observability-concepts.md#trajectories) as inputs, outputs, reasoning, tool calls, and subagent activity. Use this to find where to look. Press `M` to switch to this view.
-* [**Turns**](#turns-view): The per-turn summary. View each turn in the thread as a card showing its inputs and outputs, with expand/collapse. Use this when you want a structural overview without the full conversation rendering. Press `T` to switch to this view.
+* [**Trajectory**](#trajectory-view): The conversation layer. Scan the [trajectory](observability-concepts.md#trajectories) as inputs, outputs, reasoning, tool calls, and subagent activity. Use this to find where to look. Press `T` to switch to this view.
+* [**Turns**](#turns-view): The per-turn summary. View each turn in the thread as a card showing its inputs and outputs, with expand/collapse. Use this when you want a structural overview without the full conversation rendering.
 * [**Details**](#details-view): The debugging layer. Drill into a specific run to inspect inputs, outputs, timing, token counts, errors, and metadata. Use this to understand what happened at a specific point in execution. Press `D` to switch to this view.
 
 > [!NOTE]
-> The Messages tab is disabled for threads that don't have any renderable messages. The Messages view is in **[beta](release-stages.md)**—the side panel defaults to the Details view.
+> The Trajectory tab is disabled for threads that do not have any renderable messages. The side panel defaults to the Details view.
 
-Use the Messages view to orient yourself in the conversation and identify where to focus, then switch to the Details view to inspect a specific run:
+Use the Trajectory view to orient yourself in the conversation and identify where to focus, then switch to the Details view to inspect a specific run:
 
-### Start in the Messages view
-Open a thread and switch to the Messages view to see the trajectory.
+### Start in the Trajectory view
+Open a thread and switch to the Trajectory view to see the full conversation.
 
 ### Investigate
 Scan the trajectory to identify unexpected behavior, for example, a bad tool result, an unexpected subagent handoff, a latency spike.
@@ -38,15 +38,13 @@ Scan the trajectory to identify unexpected behavior, for example, a bad tool res
 Click the relevant message or tool call to open the Details view at the exact run that produced it. Review its inputs, outputs, timing, errors, and metadata.
 
 ### Return to the trajectory
-Toggle back to the Messages view to continue scanning the conversation.
+Toggle back to the Trajectory view to continue scanning the conversation.
 
-## Messages view
+## Trajectory view
 
-The Messages view is in **[beta](release-stages.md)**. The side panel defaults to the [Details view](#details-view).
+Use the Trajectory view to scan the full [trajectory](observability-concepts.md#trajectories) and identify unexpected behavior, such as a bad tool result, an unexpected subagent handoff, or a latency spike, before drilling into a specific run.
 
-Use the Messages view to scan the full [trajectory](observability-concepts.md#trajectories) and identify unexpected behavior, such as a bad tool result, an unexpected subagent handoff, or a latency spike, before drilling into a specific run.
-
-### What the Messages view shows
+### What the Trajectory view shows
 
 Each turn in the trajectory renders as a single block containing the model's response, the tool calls it triggered, and the results those tools returned. You can scan the full trajectory and read the agent's behavior without opening a child run.
 
@@ -63,17 +61,17 @@ The metadata row for each block shows:
 
 **Tool calls** appear with the assistant message that triggered them. Each tool call card includes a link to its run in the [Details view](#details-view). When an agent makes multiple tool calls together, either the same tool repeated or multiple different tools in parallel, those calls collapse into a single grouped row. Expand the group to see each individual call.
 
-To download the thread as a Markdown file, use the download button in the Messages view. The exported file includes the full conversation transcript with human and AI turns, tool calls, and tool results, formatted for reading in any Markdown viewer.
+To download the thread as a Markdown file, use the download button in the Trajectory view. The exported file includes the full conversation transcript with human and AI turns, tool calls, and tool results, formatted for reading in any Markdown viewer.
 
-### Customize the Messages view
+### Customize the Trajectory view
 
-You can control how runs appear in the Messages view using metadata keys on individual runs.
+You can control how runs appear in the Trajectory view using metadata keys on individual runs.
 
 * `ls_agent_type`: Controls where messages from an agent-like run appear. Accepted values:
 
-  | Value        | Messages view behavior                                                         |
+  | Value        | Trajectory view behavior                                                       |
   | ------------ | ------------------------------------------------------------------------------ |
-  | `"root"`     | Messages from this run appear in the main Messages view.                       |
+  | `"root"`     | Messages from this run appear in the main Trajectory view.                     |
   | `"subagent"` | Messages from this run appear as a subagent action in the conversation thread. |
 
 ```python
@@ -88,19 +86,19 @@ You can control how runs appear in the Messages view using metadata keys on indi
   * `"responses"`: parse as OpenAI Responses API format
   * `"anthropic"`: parse as Anthropic message format
 
-* `LS_MESSAGE_VIEW_EXCLUDE`: Exclude an individual run from the Messages view. Import the constant from `langsmith` (Python and JS), or use the literal string `"ls_message_view_exclude"`. For code examples, refer to [Exclude runs from the Messages view](messages-view-integrations.md#exclude-runs-from-the-messages-view).
+* `LS_MESSAGE_VIEW_EXCLUDE`: Exclude an individual run from the Trajectory view. Import the constant from `langsmith` (Python and JS), or use the literal string `"ls_message_view_exclude"`. For code examples, refer to [Exclude runs from the Trajectory view](trajectory-view-integrations.md#exclude-runs-from-the-trajectory-view).
   * For `@traceable` / `traceable()`: child runs that execute inside the tagged run's tracing context inherit the exclusion.
   * For `wrap_openai` / `wrapOpenAI`, `wrapAISDK`, `RunTree.createChild`, and LangChain `RunnableConfig`: set the key on each run you want to hide. Inheritance to child runs is not guaranteed on these surfaces.
 
-For the integrations that set this metadata automatically, refer to [Messages view integrations](messages-view-integrations.md).
+For the integrations that set this metadata automatically, refer to [Trajectory view integrations](trajectory-view-integrations.md).
 
 ## Turns view
 
-Use the Turns view to scan the structure of a thread one turn at a time, without the full conversation rendering of the Messages view. Each turn in the thread appears as a card showing the root run's inputs and outputs. Click a card's chevron to expand or collapse its contents.
+Use the Turns view to scan the structure of a thread one turn at a time, without the full conversation rendering of the Trajectory view. Each turn in the thread appears as a card showing the root run's inputs and outputs. Click a card's chevron to expand or collapse its contents.
 
 The Turns view is useful when:
 
-* The thread doesn't have renderable messages (for example, a trace from an integration that isn't supported by the Messages view).
+* The thread doesn't have renderable messages (for example, a trace from an integration that isn't supported by the Trajectory view).
 * You want a quick structural overview of the thread before deciding which turn to drill into.
 * You want to see raw inputs and outputs per turn without normalization into a chat-style conversation.
 
@@ -134,7 +132,7 @@ From the Details view, you can also:
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/view-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

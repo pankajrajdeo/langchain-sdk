@@ -185,7 +185,7 @@ paths:
 
         Self-hosted deployments require LangSmith `v0.16` or later.
       parameters:
-        - description: application/json
+        - description: application/json or text/event-stream
           name: Accept
           in: header
           schema:
@@ -245,9 +245,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '501':
-          description: >-
-            V2 filter syntax is unavailable for this deployment; use legacy
-            function-style filters or set SMITHDB_QUERY_ENABLED=true
+          description: The requested filter syntax is unavailable for this deployment
           content:
             application/json:
               schema:

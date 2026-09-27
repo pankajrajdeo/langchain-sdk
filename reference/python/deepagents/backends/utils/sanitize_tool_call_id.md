@@ -1,6 +1,6 @@
 ---
 title: "sanitize_tool_call_id"
-description: "Sanitize tool_call_id to prevent path traversal and separator issues."
+description: "Return a bounded, path-safe component for a tool call ID."
 source: "https://reference.langchain.com/python/deepagents/backends/utils/sanitize_tool_call_id"
 category: "reference"
 tags: [reference, deepagents, backends, utils, sanitize_tool_call_id]
@@ -12,9 +12,7 @@ tags: [reference, deepagents, backends, utils, sanitize_tool_call_id]
 
 📖 [View in docs](https://reference.langchain.com/python/deepagents/backends/utils/sanitize_tool_call_id)
 
-Sanitize tool_call_id to prevent path traversal and separator issues.
-
-Replaces dangerous characters (., /, \) with underscores.
+Return a bounded, path-safe component for a tool call ID.
 
 ## Signature
 
@@ -26,4 +24,4 @@ sanitize_tool_call_id(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/backends/utils.py#L201)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/backends/utils.py#L355)

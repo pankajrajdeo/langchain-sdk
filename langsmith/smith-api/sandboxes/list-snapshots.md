@@ -1,6 +1,6 @@
 ---
 title: "List snapshots"
-description: "List sandbox snapshots for the authenticated tenant, with optional filtering, sorting, and pagination. Page with page_size and cursor: replay the response's next_cursor until it comes back null..."
+description: "List workspace and published system snapshots, with optional filtering, sorting, and pagination. Page with page_size and cursor: replay the response's next_cursor until it comes back null, which is..."
 source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-snapshots"
 category: "docs"
 tags: [docs, langsmith, smith-api, sandboxes, list-snapshots]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, sandboxes, list-snapshots]
 
 # List snapshots
 
-> List sandbox snapshots for the authenticated tenant, with optional filtering, sorting, and pagination.
+> List workspace and published system snapshots, with optional filtering, sorting, and pagination.
 Page with page_size and cursor: replay the response's next_cursor until it comes back null, which is the only signal that no pages remain.
 Cursors are opaque and only valid on this endpoint; do not parse or construct one.
 
@@ -179,8 +179,8 @@ paths:
         - sandboxes
       summary: List snapshots
       description: >-
-        List sandbox snapshots for the authenticated tenant, with optional
-        filtering, sorting, and pagination.
+        List workspace and published system snapshots, with optional filtering,
+        sorting, and pagination.
 
         Page with page_size and cursor: replay the response's next_cursor until
         it comes back null, which is the only signal that no pages remain.
@@ -241,9 +241,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Label
         - description: Sort column (name, status, created_at)
           name: sort_by

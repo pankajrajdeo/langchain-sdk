@@ -7,7 +7,7 @@ tags: [index, reference, python, deepagents, backends, protocol]
 
 # reference/python/deepagents/backends/protocol
 
-29 pages here, 99 pages including subdirectories.
+29 pages here, 100 pages including subdirectories.
 
 ## Directories
 
@@ -16,7 +16,7 @@ tags: [index, reference, python, deepagents, backends, protocol]
 - [DeleteResult/](DeleteResult/_index.md) - 2 pages
 - [EditResult/](EditResult/_index.md) - 3 pages
 - [ExecuteArtifact/](ExecuteArtifact/_index.md) - 1 page
-- [ExecuteOffloadResult/](ExecuteOffloadResult/_index.md) - 2 pages
+- [ExecuteOffloadResult/](ExecuteOffloadResult/_index.md) - 3 pages
 - [ExecuteResponse/](ExecuteResponse/_index.md) - 3 pages
 - [FileData/](FileData/_index.md) - 4 pages
 - [FileDownloadResponse/](FileDownloadResponse/_index.md) - 3 pages

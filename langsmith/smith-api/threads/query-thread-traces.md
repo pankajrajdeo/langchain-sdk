@@ -221,17 +221,17 @@ paths:
           in: query
           schema:
             type: integer
-            maximum: 100
-            minimum: 1
             default: 20
+            minimum: 1
+            maximum: 100
             title: Page Size
         - description: '`project_id` is the tracing project UUID (required).'
           name: project_id
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
         - example:
             - NAME
@@ -246,6 +246,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - THREAD_ID
@@ -274,7 +275,6 @@ paths:
                 - ERROR_PREVIEW
                 - TURN_NUMBER
               type: string
-            type: array
             title: Selects
         - description: >-
             `trace_filter` narrows traces by applying a LangSmith filter

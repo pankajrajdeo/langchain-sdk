@@ -7,7 +7,7 @@ tags: [index, langsmith, agent-server-api]
 
 # langsmith/agent-server-api
 
-9 pages here, 72 pages including subdirectories.
+9 pages here, 73 pages including subdirectories.
 
 ## Directories
 
@@ -20,7 +20,7 @@ tags: [index, langsmith, agent-server-api]
 - [streaming/](streaming/_index.md) - 2 pages
 - [system/](system/_index.md) - 4 pages
 - [thread-runs/](thread-runs/_index.md) - 10 pages
-- [threads/](threads/_index.md) - 15 pages
+- [threads/](threads/_index.md) - 16 pages
 
 ## Files
 

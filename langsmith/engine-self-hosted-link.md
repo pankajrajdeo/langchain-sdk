@@ -151,6 +151,8 @@ The gateway host is [`beacon.langchain.com`](#allow-egress-to-langsmith-intellig
 
 ## Model selection and quality
 
+Engine uses the model provider for your cloud through LSI: Amazon Bedrock on AWS and Vertex AI on GCP.
+
 Engine uses different models, each tuned for its role, to cluster issues, diagnose root causes against your code, generate fixes, and write evaluators that verify them. LangChain tunes these models for quality and token efficiency, and updates them as better models become available.
 
 Engine uses managed inference, not a bring-your-own-key setup. This keeps Engine behavior consistent and improves it as LangChain updates the models. With a bring-your-own-key setup, model selection, tuning, and token efficiency can vary between requests.
@@ -331,7 +333,7 @@ If the analysis does not complete, check that Engine pods are running, the sandb
 Enabling Engine in Helm makes the feature available; it does not start any scans. After enabling the chart values, finish setup in LangSmith:
 
 1. An [Organization Admin](rbac.md#organization-admin) turns Engine on for the organization under **Settings > Engine enablement**. For more information, see [Find and fix issues](engine.md#enable-engine-for-your-organization).
-2. Any user sets Engine up for a tracing project from the project's **Engine** tab. For more information, see [Set up Engine for a tracing project](engine.md#set-up-engine-for-a-tracing-project).
+2. Any user turns on Engine for a tracing project from the project's **Engine** tab. For more information, see [Turn on Engine for a tracing project](engine.md#turn-on-engine-for-a-tracing-project).
 
 Connecting a GitHub repository is optional and improves Engine's diagnosis and fixes. Without one, Engine cannot read your source code or open pull requests. To create the GitHub App and configure `host-backend`, see [Connect Engine to GitHub](engine-github.md#self-hosted).
 
@@ -352,13 +354,13 @@ Engine stops dispatching runs. Insights shares the same deployment, so the `stan
 * [Configure Engine](engine.md)
 * [Connect Engine to GitHub](engine-github.md)
 * [Engine security](engine-security.md)
-* [Engine webhooks](engine-webhooks.md)
+* [Engine notifications](engine-notifications.md)
 * [Enable additional LangSmith features](deploy-self-hosted-full-platform.md)
 
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -23,6 +23,6 @@ tags: [index, reference, python, langchain-core, load]
 - [dumps](dumps.md) - Return a JSON string representation of an object.
 - [import_attr](import_attr.md) - Import an attribute from a module located in a package.
 - [load](load.md) - Load LangChain objects from JSON strings or objects.
-- [loads](loads.md) - View source on GitHub
+- [loads](loads.md) - Revive a LangChain class from a JSON string.
 - [mapping](mapping.md) - Serialization mapping.
 - [serializable](serializable.md) - Serializable base class.

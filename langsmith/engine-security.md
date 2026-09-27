@@ -50,7 +50,9 @@ You can revoke Engine's access to GitHub at any time by uninstalling the App fro
 
 ## Model subprocessors
 
-Engine's model subprocessors (currently OpenAI, Anthropic, Fireworks, and Baseten) are configured for zero data retention and are prohibited under their agreements with LangChain from using customer data to train or fine-tune their models. The [LangChain Trust Center](https://trust.langchain.com/) publishes the authoritative subprocessor list.
+In LangSmith Cloud, Engine's model subprocessors (currently OpenAI, Anthropic, Fireworks, and Baseten) are configured for zero data retention and are prohibited under their agreements with LangChain from using customer data to train or fine-tune their models. The [LangChain Trust Center](https://trust.langchain.com/) publishes the authoritative subprocessor list.
+
+In self-hosted deployments, Engine uses the model provider for your cloud through LangSmith Intelligence (LSI). It uses Amazon Bedrock on AWS and Vertex AI on GCP.
 
 Engine does not support bring-your-own-key (BYOK).
 
@@ -66,7 +68,7 @@ Engine adds the following controls on top of LangSmith's baseline:
 * **Auditability**: Engine surfaces its work as GitHub pull requests, with supporting context in the issue list on the [Engine tab](engine.md). Code changes flow through your branch-protection, review, and automated build controls, so your software development lifecycle remains the system of record for what ships.
 * **Client-side PII scrubbing**: LangSmith's [client libraries](mask-inputs-outputs.md) can remove sensitive content from traces before they are sent to LangSmith. Recommended for customers handling regulated data.
 * **Model selection managed by LangChain**: LangChain selects the specific model used for each Engine task across these subprocessors, and may change selections within that set without separate notification. Adding any new subprocessor follows the standard subprocessor-change notification process.
-* **Revocation and deletion**: You can revoke GitHub access at any time by uninstalling the App, and remove Engine's findings with **Delete all issues** in [Engine settings](engine.md#configure-engine). Trace data follows your LangSmith [retention and purging](data-purging-compliance.md) settings.
+* **Revocation and deletion**: You can revoke GitHub access at any time by uninstalling the App, and remove Engine's findings with **Delete all issues** in [Engine settings](engine.md#pause-engine-or-delete-its-issues). Trace data follows your LangSmith [retention and purging](data-purging-compliance.md) settings.
 
 ## Compliance posture
 
@@ -85,7 +87,7 @@ The following risks are inherent to AI-assisted code generation. LangChain mitig
 * [Engine](engine-overview.md)
 * [Configure Engine](engine.md)
 * [Engine on self-hosted](engine-self-hosted.md)
-* [Engine webhooks](engine-webhooks.md)
+* [Engine notifications](engine-notifications.md)
 * [Prevent logging of sensitive data in traces](mask-inputs-outputs.md)
 * [Data purging for compliance](data-purging-compliance.md)
 * [Audit logs](audit-logs.md)
@@ -99,7 +101,7 @@ For security questions, contact [trust@langchain.dev](mailto:trust@langchain.dev
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-security.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

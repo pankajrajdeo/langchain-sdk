@@ -188,6 +188,11 @@ components:
             - 'null'
         value:
           type: object
+        response_schema:
+          type: object
+          description: >-
+            JSON Schema for the value expected when resuming the interrupt, if
+            the graph provided one.
       title: Interrupt
       required:
         - value

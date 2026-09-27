@@ -330,6 +330,12 @@ Sandbox commands let you build snapshots, create sandboxes, execute commands, op
 
 See [Sandbox CLI](sandbox-cli.md) for the full sandbox command reference.
 
+### Manage custom apps
+
+`langsmith apps` commands scaffold, run locally, and publish [custom apps](custom-apps.md), UIs that run inside LangSmith and call the LangSmith API.
+
+See [CLI reference](custom-apps.md#cli-reference) for the full command list.
+
 ### Call the LangSmith API directly
 
 The `api` command is an authenticated, scriptable wrapper around the raw LangSmith REST API — useful for endpoints the typed commands above don't cover, or for piping JSON into and out of shell scripts. It's modeled after `gh api` and `curl`: pass the path as the only positional argument, and use `-X` to set the HTTP method (defaults to `GET`). Auth headers (`x-api-key`, `x-tenant-id`) are injected automatically.
@@ -413,7 +419,7 @@ Most `trace` and `run` commands share these filters:
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

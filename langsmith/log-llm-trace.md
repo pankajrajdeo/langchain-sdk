@@ -503,7 +503,7 @@ list(
 > [!TIP]
 > Setting `ls_model_name` in your `metadata` is required for LangSmith to identify the model and calculate costs for custom LLM traces. Without it, token counts may still be recorded but costs won't be estimated.
 
-To learn more about how to use the `metadata` fields, refer to the [Add metadata and tags](add-metadata-tags.md) guide. To customize how custom agent runs appear in the Messages view, see [Customize the Messages view](view-traces.md#customize-the-messages-view).
+To learn more about how to use the `metadata` fields, refer to the [Add metadata and tags](add-metadata-tags.md) guide. To customize how custom agent runs appear in the Trajectory view, see [Customize the Trajectory view](view-traces.md#customize-the-trajectory-view).
 
 ## Provide token and cost information
 
@@ -587,7 +587,7 @@ await runTree.patchRun();
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-llm-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

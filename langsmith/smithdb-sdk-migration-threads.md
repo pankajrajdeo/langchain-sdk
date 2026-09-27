@@ -1444,7 +1444,7 @@ curl -G "https://api.smith.langchain.com/api/v2/threads/$THREAD_ID/traces" \
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

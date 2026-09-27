@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 520 pages and 0 subdirectories under blog."
+description: "Index of 529 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-520 pages here.
+529 pages here.
 
 ## Files
 
@@ -76,6 +76,7 @@ tags: [index, blog]
 - [Building LLM-Powered Web Apps with Client-Side Technology](building-llm-powered-web-apps-with-client-side-technology.md) - Learn how to build LLM-powered web apps using client-side technology, local models, and RAG. Reduce costs, enhance privacy, and run AI entirely in the browser.
 - [Building monday.com Sidekick: why capable agents need more than just tools](building-monday-com-sidekick-why-capable-agents-need-more-than-just-tools.md) - This is a guest post from Omri Bruchim, AI Engineering Group Lead, monday.com
 - [Building Multi-Agent Applications with Deep Agents](building-multi-agent-applications-with-deep-agents.md) - Breaking down complex tasks across specialized agents is one of the most effective approaches to building capable AI systems. In this post, we&#39;ll show you how to build multi-agent systems with...
+- [Building Prod with Jev and LangGraph](building-prod-with-jev-and-langgraph.md) - See how LangGraph orchestrates Jev, TypeSafe AI&#39;s decision model, to build faster, cheaper production agents.
 - [Callbacks Improvements](callbacks.md) - LangChain&#39;s improved callbacks system enables concurrent runs, nested component tracing, and request-scoped handlers for logging, streaming, and integrations.
 - [How Captide agents running on LangGraph Platform compress investment research from days to seconds](captide.md) - See how Captide is using LangGraph Platform and LangSmith for their investment research and equity modeling agents.
 - [Chat Loaders: Fine-tune a ChatModel in your Voice](chat-loaders-finetune-a-chatmodel-in-your-voice.md) - Fine-tune ChatGPT in your unique voice with ChatLoaders. Convert Slack, WhatsApp, Facebook &amp; more into training data for personalized AI models.
@@ -301,6 +302,7 @@ tags: [index, blog]
 - [January 2026: LangChain Newsletter](january-2026-langchain-newsletter.md) - Read about the latest product updates, events, and content from the LangChain team
 - [Build reliable agents in JavaScript with LangGraph.js v0.2: Now supporting Cloud and Studio](javascript-langgraph-v02-cloud-studio.md) - For JavaScript developers - LangGraph v0.2, LangGraph Cloud, and LangGraph Studio are all available.
 - [Jev-as-a-Judge for Agent Evals](jev-agent-evals-langsmith.md) - We tested using Jev-as-a-Judge against LLM judges on accuracy, repeatability, latency, and cost to see whether System One models could offer a new approach to agent evaluation.
+- [Jev is now available in LangSmith Evals](jev-is-now-available-in-langsmith-evals.md) - Use Jev as a judge for LangSmith evals to evaluate agent traces with faster, cheaper structured feedback across production runs, datasets, and regression tests.
 - [Jockey: A Conversational Video Agent Powered by Twelve Labs APIs and LangGraph](jockey-twelvelabs-langgraph.md) - Guest blog post on how Jockey, a conversational video agent, uses LangGraph and Twelve Labs API for more intelligent video processing.
 - [Join LangChain at AWS re:Invent 2025](join-langchain-at-aws-re-invent-2025.md) - Join LangChain at AWS re:Invent 2025. Visit Booth #524 for demos, meet Harrison, explore LangSmith on AWS, and connect with our engineering team Dec 1-4.
 - [Join LangChain at Google Cloud Next 2026](join-langchain-at-google-cloud-next-2026.md) - Join LangChain at Google Cloud Next 2026 in Las Vegas. Visit booth #5006 for AI agent sessions and meet our team April 22-24.
@@ -361,15 +363,21 @@ tags: [index, blog]
 - [Catch production failures early with LangSmith Alerts](langsmith-alerts.md) - Set up real‑time notifications on error rates, run latency &amp; feedback scores to spot failures before your customers do.
 - [LangSmith BYOC is now generally available on AWS](langsmith-byoc-is-now-generally-available-on-aws.md) - LangSmith Bring Your Own Cloud is now generally available on AWS, giving Enterprise teams managed observability, evaluation, and deployment inside their own VPC.
 - [LangSmith CLI &amp; Skills](langsmith-cli-skills.md) - LangSmith CLI and skills give AI coding agents expertise in tracing, debugging, datasets, and evaluation. Boost Claude Code from 17% to 92%.
+- [Introducing LangSmith Custom Apps: Build custom interfaces around your agent data](langsmith-custom-apps.md) - LangSmith Custom Apps lets you build the interface you want with your LangSmith data, publish it into your workspace, and skip the hosting, auth, and permissions work. Learn more.
+- [New in LangSmith: Engine v2, Managed Deep Agents, Fine-Tuning, and More](langsmith-engine-agents-fine-tuning-trajectories.md) - LangChain announced new updates to LangSmith. Updates include Engine v2 with red teaming and automatic testing, a new version of Managed Deep Agents, trajectories and more.
+- [LangSmith Engine v2: Red teaming and automated testing](langsmith-engine-v2-redteam.md) - LangSmith Engine now includes Red Teaming to proactively detect agent issues and automated agent testing. Learn more about the Engine v2 release.
+- [Introducing LangSmith Fine-Tuning](langsmith-fine-tuning.md) - LangChain introduces LangSmith Fine-Tuning and SmithTune, a CLI built for post-training models. Train specialized models without building data pipelines by hand.
 - [Announcing the General Availability of LangSmith and Our Series A Led By Sequoia Capital](langsmith-ga.md) - LangSmith is now generally available. Build, test, and monitor LLM applications from prototyping to production with debugging and evaluations.
 - [LangSmith: Redesigned product homepage and Resource Tags for better organization](langsmith-homepage-redesign-and-resource-tags.md) - LangSmith&#39;s homepage is now organized into Observability, Evaluation, and Prompt Engineering. Learn why we organized the homepage like this. Plus, see our latest Resource Tags updates.
 - [LangSmith Incident on May 1, 2025](langsmith-incident-on-may-1-2025.md) - Full post-mortem of the May 1, 2025 LangSmith API outage: root cause analysis, incident timeline, and steps we&#39;re taking to improve reliability and monitoring.
 - [LangSmith is Now Available in Google Cloud Marketplace](langsmith-is-now-available-in-google-cloud-marketplace.md) - LangSmith is now available in Google Cloud Marketplace. Procure through your GCP account, draw down committed spend, and build production-ready AI agents.
 - [How LangSmith and LangChain OSS Help You Meet EU AI Act Requirements](langsmith-langchain-oss-eu-ai-act.md) - The EU AI Act compliance deadline is August 2, 2026. Learn what the EU AI Act requires, and how LangSmith and LangChain OSS products help you meet each requirement.
 - [LangSmith LLM Gateway: runtime controls for production agents](langsmith-llm-gateway-runtime-controls-for-production-agents.md) - LangSmith LLM Gateway is in public beta: spend caps, rate limits, model fallbacks and PII redaction for production agents, without provider lock-in.
+- [Managed Deep Agents v0.8: new auth, memory, and channels](langsmith-managed-deep-agents-whats-new.md) - Managed Deep Agents is the simplest way to build, deploy, and run agents in production. The 0.8 release adds support for user-owned credentials, user-level memory, HTTP channels, file transfer in...
 - [LangSmith Preview Builds: Test agent changes before production](langsmith-preview-builds-test-agent-changes-before-production.md) - Preview Builds let teams test pull request branches in temporary, production-like LangSmith deployments before merging agent changes.
 - [LangSmith: Production Monitoring &amp; Automations](langsmith-production-logging-automations.md) - Key Links:
 - [LangSmith Sandboxes are Generally Available](langsmith-sandboxes-generally-available.md) - Run AI agents safely with LangSmith Sandboxes (GA): kernel-isolated microVMs with snapshots, parallel forks, service URLs, and auth proxies. Built for coding agents, CI agents, and data pipelines
+- [Trajectories now in LangSmith: A readable view of every agent session](langsmith-trajectories-tracing.md) - Trajectories in LangSmith provide a conversational view of an agent session. Trajectories make trace data easy to navigate and speed up debugging for long-running agents.
 - [Launching LangGraph Templates](launching-langgraph-templates.md) - Build agentic AI apps with LangGraph Templates. Get production-ready templates for RAG chatbots, ReAct agents, and more with full code control.
 - [Launching Long-Term Memory Support in LangGraph](launching-long-term-memory-support-in-langgraph.md) - Build AI agents that remember. LangGraph&#39;s long-term memory stores and recalls information across conversations in Python and JavaScript.
 - [Lepton x LangChain: Earning Sage, How to Transform AI into a Savvy CFO](lepton-x-langchain-earning-sage.md) - Learn how LeptonAI fine-tuned an open-source LLM to create an AI CFO that answers earnings call questions. Explore their journey using LangChain and LangSmith.
@@ -443,6 +451,7 @@ tags: [index, blog]
 - [RecAlign - The smart content filter for social media feed](recalign-the-smart-content-filter-for-social-media-feed.md) - RecAlign: An open-source Chrome extension using LLMs to filter your social media feed. Take control with transparent, configurable AI-powered filtering.
 - [Reflection Agents](reflection-agents.md) - Reflection is a prompting strategy used to improve the quality and success rate of agents and similar AI systems. This post outlines how to build 3 reflection techniques using LangGraph, including...
 - [Regression Testing with LangSmith](regression-testing.md) - Evaluate and iterate on LLM applications with confidence using LangSmith&#39;s regression testing. Compare experiments, track performance, and identify changes.
+- [The Reliability Layer for Healthcare AI: Common LangSmith Use Cases](reliability-healthcare-ai-langsmith-use-cases.md) - See how LangSmith helps healthcare AI teams turn clinical review into reusable evaluators, datasets, and release gates for safer AI in production.
 - [Retrieval](retrieval.md) - Build better AI apps with flexible retrieval methods in LangChain. Use any retriever—from semantic to hybrid—to create personalized ChatGPT for your data.
 - [Reusable Evaluators and Evaluator Templates in LangSmith](reusable-langsmith-evaluator-templates.md) - LangSmith Evaluation now includes 30+ evaluator templates and a central hub to reuse evaluators across projects — so you can ship better evals faster without starting from scratch each time.
 - [Robocorp’s code generation assistant makes building Python automation easy for developers](robocorps-code-gen-assistant-makes-building-python-automation-easy-for-developers.md) - Robocorp&#39;s AI assistant ReMark helps developers build Python automations 4x faster using LangChain, reducing support hours and accelerating bot development.

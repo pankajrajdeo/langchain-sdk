@@ -265,22 +265,29 @@ components:
           description: >-
             AutoOpenFixPR opens a draft pull request for every fix the agent
 
-            produces, instead of waiting for one to be opened from the issue.
-            Has no
+            produces — one per repository it changed — instead of waiting for
+            one to
 
-            effect without github_repo_url, since a fix has nowhere to open.
-            Omit for
+            be opened from the issue. Has no effect until the board tracks a
 
-            false.
+            repository, since a fix has nowhere to open. Omit for false.
           type: boolean
         context_hub_repo_handle:
           type: string
         github_base_branch:
+          description: 'Legacy: applies to the repo github_repo_url names.'
           type: string
         github_repo_subdir:
+          description: 'Legacy: applies to the repo github_repo_url names.'
           type: string
         github_repo_url:
+          description: 'Legacy: treated as a one-entry github_repos list.'
           type: string
+        github_repos:
+          description: Created with the board. Wins over the deprecated fields below.
+          type: array
+          items:
+            $ref: '#/components/schemas/agent.GithubRepoInput'
         priorities:
           items:
             type: string
@@ -327,11 +334,18 @@ components:
         engine_version:
           type: string
         github_base_branch:
+          description: 'Legacy: aliases the oldest entry in GithubRepos.'
           type: string
         github_repo_subdir:
+          description: 'Legacy: aliases the oldest entry in GithubRepos.'
           type: string
         github_repo_url:
+          description: 'Legacy: aliases the oldest entry in GithubRepos.'
           type: string
+        github_repos:
+          type: array
+          items:
+            $ref: '#/components/schemas/agent.GithubRepo'
         id:
           type: string
         issue_count:
@@ -371,9 +385,16 @@ components:
             validateRunFilter.
           type: string
         selected_trace_count:
-          description: >-
-            SelectedTraceCount is the number of traces Engine inspected in the
-            last 14 days.
+          description: |-
+            Compatibility alias for selected_trace_count_last_14_days.
+            Deprecated: use selected_trace_count_last_14_days.
+          type: integer
+          deprecated: true
+        selected_trace_count_last_14_days:
+          description: The number of traces Engine inspected in the last 14 days.
+          type: integer
+        selected_trace_count_last_7_days:
+          description: The number of traces Engine inspected in the last 7 days.
           type: integer
         session_agent_overview_repo_id:
           type: string
@@ -397,6 +418,8 @@ components:
         session_name:
           description: JOINed from tracer_session
           type: string
+        target_auth:
+          $ref: '#/components/schemas/agent.TargetAuthStatus'
         tenant_id:
           type: string
         tenant_name:
@@ -428,6 +451,32 @@ components:
       properties:
         error:
           type: string
+    agent.GithubRepoInput:
+      type: object
+      properties:
+        base_branch:
+          type: string
+        repo_url:
+          type: string
+        subdir:
+          type: string
+    agent.GithubRepo:
+      type: object
+      properties:
+        base_branch:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        repo_url:
+          type: string
+        subdir:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
     agent.LinearIntegration:
       type: object
       properties:
@@ -460,6 +509,20 @@ components:
           type: integer
         synced:
           type: integer
+    agent.TargetAuthStatus:
+      type: object
+      properties:
+        has_unreadable_credentials:
+          description: >-
+            True when a credential is stored but cannot be read back, so the UI
+            can
+
+            offer to replace it instead of showing an unconfigured board.
+          type: boolean
+        header_names:
+          items:
+            type: string
+          type: array
   securitySchemes:
     API Key:
       type: apiKey

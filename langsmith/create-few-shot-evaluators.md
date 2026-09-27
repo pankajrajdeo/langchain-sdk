@@ -26,6 +26,8 @@ This guide covers how to set up few-shot examples as part of your LLM-as-a-judge
 > Few-shot examples are not currently supported in LLM-as-a-judge evaluators that use the prompt hub and are only compatible with prompts that use mustache formatting.
 >
 > Few-shot examples are only supported for run-level evaluators, not thread-level. Toggle on **Runs** in the [**Configure Evaluator** panel](evaluators.md#edit-an-evaluator).
+>
+> Few-shot examples are not available for [decision model evaluators](decision-model-evaluator.md).
 
 Before enabling few-shot examples, set up your LLM-as-a-judge evaluator. If you haven't done this yet, follow the steps in the [LLM-as-a-judge evaluator guide](llm-as-judge.md).
 
@@ -68,7 +70,7 @@ Head to your dataset of corrections linked in the **Improve evaluator accuracy u
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/create-few-shot-evaluators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

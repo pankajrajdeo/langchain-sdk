@@ -15,6 +15,9 @@ This guide shows you how to define an [LLM-as-a-judge evaluator](evaluation-conc
 > [!TIP]
 > For a quick start, use [openevals](openevals.md), which provides ready-to-use LLM-as-a-judge evaluators.
 
+> [!NOTE]
+> The SDK does not support [decision model evaluators](decision-model-evaluator.md). These evaluators use a decision model, such as SemIf or Jev, as the judge. To create one, use the UI.
+
 ## Create your own LLM-as-a-judge evaluator
 
 For complete control of evaluator logic, create your own LLM-as-a-judge evaluator and run it using the LangSmith SDK ([Python](https://docs.smith.langchain.com/reference/python/reference) / [TypeScript](https://docs.smith.langchain.com/reference/js)).
@@ -219,7 +222,7 @@ For more information on how to write a custom evaluator, refer to [How to define
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

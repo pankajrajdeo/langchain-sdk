@@ -189,6 +189,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIKeyCreateResponse'
+        '403':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: >-
+            Insufficient permission, PAT creation is disabled, or the
+            organization blocks API keys from creating other API keys.
         '422':
           description: Validation Error
           content:
@@ -347,6 +355,28 @@ components:
         - key
       title: APIKeyCreateResponse
       description: API key POST schema.
+    ProblemDetails:
+      properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     HTTPValidationError:
       properties:
         detail:

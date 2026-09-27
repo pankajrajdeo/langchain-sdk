@@ -257,6 +257,15 @@ components:
         language:
           description: 'Default: "python"'
           type: string
+        managed_code_evaluator_key:
+          $ref: '#/components/schemas/evaluators.ManagedCodeEvaluatorKey'
+        managed_code_evaluator_settings:
+          $ref: '#/components/schemas/evaluators.ManagedCodeEvaluatorSettings'
+        require_attachments:
+          description: |-
+            RequireAttachments opts the evaluator into selecting/presigning run
+            attachments (s3_urls) at evaluation time. Default false.
+          type: boolean
     evaluators.CreateLLMEvaluatorRequest:
       type: object
       properties:
@@ -315,6 +324,16 @@ components:
           $ref: '#/components/schemas/evaluators.EvaluatorType'
         updated_at:
           type: string
+    evaluators.ManagedCodeEvaluatorKey:
+      type: string
+      enum:
+        - voice_metrics
+      x-enum-varnames:
+        - ManagedCodeEvaluatorKeyVoiceMetrics
+    evaluators.ManagedCodeEvaluatorSettings:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/evaluators.ManagedCodeEvaluatorMetricSetting'
     evaluators.CodeEvaluator:
       type: object
       properties:
@@ -333,6 +352,15 @@ components:
         language:
           description: 'Default: "python"'
           type: string
+        managed_code_evaluator_key:
+          $ref: '#/components/schemas/evaluators.ManagedCodeEvaluatorKey'
+        managed_code_evaluator_settings:
+          $ref: '#/components/schemas/evaluators.ManagedCodeEvaluatorSettings'
+        require_attachments:
+          description: |-
+            RequireAttachments opts the evaluator into selecting/presigning run
+            attachments (s3_urls) at evaluation time. Default false.
+          type: boolean
     evaluators.LLMEvaluator:
       type: object
       properties:
@@ -397,6 +425,14 @@ components:
           type: integer
         use_corrections_dataset:
           type: boolean
+    evaluators.ManagedCodeEvaluatorMetricSetting:
+      type: object
+      properties:
+        is_enabled:
+          type: boolean
+          default: true
+        key_name:
+          type: string
     evaluators.EvaluatorBuildStatus:
       type: string
       enum:

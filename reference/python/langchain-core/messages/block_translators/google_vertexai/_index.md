@@ -11,5 +11,5 @@ tags: [index, reference, python, langchain-core, messages, block_translators, go
 
 ## Files
 
-- [translate_content](translate_content.md) - Derive standard content blocks from a message with Anthropic content.
-- [translate_content_chunk](translate_content_chunk.md) - Derive standard content blocks from a message chunk with Anthropic content.
+- [translate_content](translate_content.md) - Derive standard content blocks from a message with Google (GenAI) content.
+- [translate_content_chunk](translate_content_chunk.md) - Derive standard content blocks from a chunk with Google (GenAI) content.

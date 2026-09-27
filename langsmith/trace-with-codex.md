@@ -28,15 +28,14 @@ Add the marketplace using the Codex CLI:
 codex plugin marketplace add langchain-ai/langsmith-codex-plugins
 ```
 
-Enable plugin hooks and the tracing plugin globally in `~/.codex/config.toml`, or only for a specific project in `.codex/config.toml`:
+Enable the tracing plugin globally in `~/.codex/config.toml`, or only for a specific project in `.codex/config.toml`:
 
 ```toml
-[features]
-plugin_hooks = true
-
 [plugins."tracing@langsmith-codex-plugins"]
 enabled = true
 ```
+
+Then trust this plugin's hooks with `/hooks`, or in Codex's plugin UI when prompted. Enabling the plugin alone does not trust its hooks.
 
 ## Configure tracing
 
@@ -197,7 +196,7 @@ Open the configured LangSmith project and complete a Codex turn. By default trac
 
 If traces do not appear in LangSmith:
 
-* Confirm `plugin_hooks = true` and the tracing plugin is enabled in `config.toml`.
+* Confirm the tracing plugin is enabled in `config.toml` and its hooks are trusted (`/hooks`). `[features] hooks` is on by default, so set it only to undo a local override.
 * Confirm `TRACE_TO_LANGSMITH=true` is visible to the Codex process.
 * Confirm `LANGSMITH_CODEX_API_KEY` or `LANGSMITH_API_KEY` is set and valid.
 * If runs land in the wrong project, set `LANGSMITH_CODEX_PROJECT` or the `project` config key.
@@ -206,7 +205,7 @@ If traces do not appear in LangSmith:
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-codex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -67,6 +67,7 @@ Use these commands within a Deep Agents Code session:
 * `/tools`: List the built-in and MCP tools available to the current agent. See [List available tools](cli-reference.md#list-available-tools).
 * `/extensions`: List loaded [Python extensions](extensions.md), their registrations, and their source paths. Requires `DEEPAGENTS_CODE_EXPERIMENTAL=1`.
 * `/cost`: Show the thread's estimated cost. See [Track thread cost](cli-reference.md#track-thread-cost).
+* `/btw`: Ask a side question about the conversation without interrupting the main task. See [Ask a side question](cli-reference.md#ask-a-side-question).
 * `/tokens`: Display current context window token usage breakdown.
 * `/clear`: Start a fresh thread.
 * `/force-clear`: Recover a stuck session with a fresh thread.
@@ -119,6 +120,7 @@ ls -la
 | `Enter`                                               | Submit prompt                                               |
 | `Shift+Enter`, `Ctrl+J`, `Alt+Enter`, or `Ctrl+Enter` | Insert newline                                              |
 | `@filename`                                           | Auto-complete files and inject content                      |
+| `@@query`                                             | Search recent threads and insert a thread reference         |
 | `Shift+Tab`                                           | Cycle [approval modes](approval-modes.md) |
 | `Ctrl+G`                                              | Open prompt in external editor                              |
 | `Ctrl+T`                                              | Expand or collapse the subagent panel when one is present   |
@@ -144,6 +146,12 @@ The chat input uses standard readline-style bindings:
 **Search prompt history**
 
 Prompt history search lets you find and reuse previously submitted prompts without leaving the chat input. Press `Ctrl+R` to open an inline search of prompts stored on your machine.
+
+**Reference a previous thread**
+
+Type `@@` in the chat input to search recent threads by their initial prompt, thread ID, agent, branch, or working directory. Select a result to insert an `@@(thread:<thread-id>)` reference. Deep Agents Code can inspect the referenced conversation when its context is relevant to your request.
+
+Add text after `@@` to filter the results. While the suggestions are open, press `Ctrl+R` to browse all threads with the same search. In the full thread picker, press `Ctrl+C` to copy the selected thread ID.
 
 > [!NOTE]
 > **macOS `Cmd+Left` / `Cmd+Right` / `Cmd+Delete`**
@@ -363,7 +371,7 @@ When configured, Deep Agents Code displays a status line with a link to the Lang
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

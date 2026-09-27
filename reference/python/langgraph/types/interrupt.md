@@ -78,7 +78,7 @@ on persisting the graph state.
     for chunk in graph.stream({"foo": "abc"}, config):
         print(chunk)
 
-    # > {'__interrupt__': (Interrupt(value='what is your age?', id='45fda8478b2ef754419799e10992af06'),)}
+    # > {'__interrupt__': (Interrupt(value='what is your age?', id='45fda8478b2ef754419799e10992af06', response_schema=None),)}
 
     command = Command(resume="some input from a human!!!")
 
@@ -94,6 +94,8 @@ on persisting the graph state.
 ```python
 interrupt(
     value: Any,
+    *,
+    response_schema: dict[str, Any] | type | None = None,
 ) -> Any
 ```
 
@@ -102,13 +104,15 @@ interrupt(
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `value` | `Any` | Yes | The value to surface to the client when the graph is interrupted. |
+| `response_schema` | `dict[str, Any] \| type \| None` | No | Optional schema for the value expected on resume, surfaced to clients so they can render a typed input form. Accepts a JSON Schema `dict` (used as-is, resume values are not validated), or a Pydantic model class, `TypedDict`, or dataclass, which are converted to JSON Schema for clients and used to validate the resume value; the validated object is what `interrupt` returns. (default: `None`) |
 
 ## Returns
 
 `Any`
 
-On subsequent invocations within the same node (same task to be precise), returns the value provided during the first invocation
+On subsequent invocations within the same node (same task to be precise), returns the value provided during the first invocation,
+validated against `response_schema` when one that supports validation was given.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/644815f9e5bc52ad8f7a5227a456227e9c3e639b/libs/langgraph/langgraph/types.py#L851)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/types.py#L887)

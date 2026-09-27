@@ -18,7 +18,7 @@ tags: [docs, integrations, tools, bedrock_agentcore_browser]
 
 | Class                                                                                                    | Package                                                    | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/) |                                           Version                                           |
 | :------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :----------: | :-------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`BrowserToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) |       ✅      |                                ❌                                | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
+| [`BrowserToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) |       ❌      |                                ❌                                | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
 
 ### Tool features
 
@@ -399,7 +399,7 @@ For detailed documentation of all features and configurations, see:
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_browser.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

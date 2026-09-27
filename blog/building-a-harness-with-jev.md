@@ -19,7 +19,7 @@ Agents and LLMs were initially difficult to integrate into software applications
 
 But even with those in place, the agent loop is still **slow** and **costly**: every decision requires another model call.
 
-Enter, [Jev](https://x.com/CompleteSkeptic/status/2099925682726002904?ref_src=twsrc^tfw|twcamp^tweetembed|twterm^2099925682726002904|twgr^ef03395f97736070722023c2cec3dfcba2895239|twcon^s1_&ref_url=https%3A%2F%2Fapp.notion.com%2Fp%2FGetting-started-with-Jev-in-LangChain-3de808527b1780958184f923b1270a75%3FshowMoveTo%3DtruesaveParent%3Dtrue). Jev is a new model [released from TypeSafe AI](https://typesafe.ai/blog/introducing-system-one-models-and-jev). The company reports up to **200x faster inference and 400x lower cost** than comparable LLMs on classification tasks.
+Enter, [Jev](https://x.com/CompleteSkeptic/status/2099925682726002904). Jev is a new model [released from TypeSafe AI](https://typesafe.ai/blog/introducing-system-one-models-and-jev). The company reports up to **200x faster inference and 400x lower cost** than comparable LLMs on classification tasks.
 
 This post covers how Jev works, where it fits into the agent loop, and how to use it with LangChain.
 

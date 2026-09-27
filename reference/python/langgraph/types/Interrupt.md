@@ -35,9 +35,15 @@ Interrupt(
     self,
     value: Any,
     id: str = _DEFAULT_INTERRUPT_ID,
+    *,
+    response_schema: type[ResponseT] | dict[str, Any] | None = None,
     **deprecated_kwargs: Unpack[DeprecatedKwargs] = {},
 )
 ```
+
+## Extends
+
+- `Generic[ResponseT]`
 
 ## Constructors
 
@@ -46,6 +52,8 @@ __init__(
     self,
     value: Any,
     id: str = _DEFAULT_INTERRUPT_ID,
+    *,
+    response_schema: type[ResponseT] | dict[str, Any] | None = None,
     **deprecated_kwargs: Unpack[DeprecatedKwargs] = {},
 ) -> None
 ```
@@ -54,11 +62,13 @@ __init__(
 |------|------|
 | `value` | `Any` |
 | `id` | `str` |
+| `response_schema` | `type[ResponseT] \| dict[str, Any] \| None` |
 
 ## Properties
 
 - `value`
 - `id`
+- `response_schema`
 - `interrupt_id`
 
 ## Methods
@@ -67,4 +77,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/644815f9e5bc52ad8f7a5227a456227e9c3e639b/libs/langgraph/langgraph/types.py#L573)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/types.py#L582)

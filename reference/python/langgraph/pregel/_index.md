@@ -7,7 +7,7 @@ tags: [index, reference, python, langgraph, pregel]
 
 # reference/python/langgraph/pregel
 
-5 pages here, 523 pages including subdirectories.
+5 pages here, 513 pages including subdirectories.
 
 ## Directories
 
@@ -25,7 +25,7 @@ tags: [index, reference, python, langgraph, pregel]
 - [_retry/](_retry/_index.md) - 45 pages
 - [_runner/](_runner/_index.md) - 24 pages
 - [_tools/](_tools/_index.md) - 12 pages
-- [_utils/](_utils/_index.md) - 15 pages
+- [_utils/](_utils/_index.md) - 5 pages
 - [_validate/](_validate/_index.md) - 2 pages
 - [_write/](_write/_index.md) - 20 pages
 - [debug/](debug/_index.md) - 14 pages

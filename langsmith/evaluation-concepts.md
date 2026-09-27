@@ -195,6 +195,7 @@ LangSmith supports several evaluation approaches:
 * [Human](#human)
 * [Code](#code)
 * [LLM-as-judge](#llm-as-judge)
+* [Decision model](#decision-model)
 * [Pairwise](#pairwise)
 
 #### Human
@@ -226,6 +227,12 @@ Key features include configuring multiple reviewers per run, enabling reservatio
 LLM-as-judge evaluators require careful review of scores and prompt tuning. Few-shot evaluators, which include examples of inputs, outputs, and expected grades in the grader prompt, often improve performance.
 
 Learn about [how to define an LLM-as-a-judge evaluator](llm-as-judge.md).
+
+#### Decision model
+
+*Decision model evaluators* use a decision model, such as SemIf or Jev, as the judge. Instead of a prompt and an output schema, you define typed questions: a probability that a statement is true, a choice from a fixed list, or a score along ordered levels. Each question's answer becomes its own piece of feedback.
+
+Learn about [how to define a decision model evaluator](decision-model-evaluator.md).
 
 #### Pairwise
 
@@ -347,7 +354,7 @@ The following table summarizes the key differences between offline and online ev
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

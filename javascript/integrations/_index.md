@@ -7,7 +7,7 @@ tags: [index, javascript, integrations]
 
 # javascript/integrations
 
-16 pages here, 167 pages including subdirectories.
+16 pages here, 168 pages including subdirectories.
 
 ## Directories
 
@@ -24,7 +24,7 @@ tags: [index, javascript, integrations]
 - [long-term-memory/](long-term-memory/_index.md) - 1 page
 - [memory/](memory/_index.md) - 2 pages
 - [middleware/](middleware/_index.md) - 2 pages
-- [providers/](providers/_index.md) - 15 pages
+- [providers/](providers/_index.md) - 16 pages
 - [retrievers/](retrievers/_index.md) - 8 pages
 - [splitters/](splitters/_index.md) - 4 pages
 - [stores/](stores/_index.md) - 2 pages

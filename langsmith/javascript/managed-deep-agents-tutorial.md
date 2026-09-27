@@ -133,9 +133,9 @@ Durable memory is opt-in. Before asking the agent to remember anything, add a me
 **memory.ts**
 
 ```ts
-import { defineMemory } from "managed-deepagents";
+import { defineMemory, memoryLayer } from "managed-deepagents";
 
-export const memory = defineMemory({ scope: "agent" });
+export const memory = defineMemory({ agent: memoryLayer() });
 ```
 
 Memory is shared across the deployment and visible to all callers, so do not store personal data or secrets.
@@ -216,7 +216,7 @@ Develop Harbor evals with a coding agent and the eval-engineering skill.
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

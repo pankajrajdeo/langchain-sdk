@@ -241,6 +241,13 @@ components:
     sandboxes.CreateSandboxPayload:
       type: object
       properties:
+        access_delegation:
+          description: >-
+            AccessDelegation lets code inside the sandbox call the LangSmith API
+            as you, with at most the permissions granted here. Omit for no
+            access.
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.AccessDelegation'
         cpu_millicores:
           description: >-
             CPUMillicores optionally requests CPU at millicore granularity (e.g.
@@ -339,6 +346,13 @@ components:
     sandboxes.SandboxResponse:
       type: object
       properties:
+        access_delegation:
+          description: >-
+            AccessDelegation is the LangSmith access this sandbox was granted,
+            absent when it has none. It is reported exactly as it was requested
+            at create.
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.AccessDelegation'
         cpu_millicores:
           type: integer
         created_at:
@@ -401,6 +415,17 @@ components:
               type: string
             message:
               type: string
+    sandboxes.AccessDelegation:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          $ref: '#/components/schemas/auth.SandboxDelegationMode'
+        permissions:
+          items:
+            type: string
+          type: array
     sandboxes.Labels:
       type: object
       additionalProperties:
@@ -449,6 +474,14 @@ components:
           type: string
         work_dir:
           type: string
+    auth.SandboxDelegationMode:
+      type: string
+      enum:
+        - INHERIT
+        - EXPLICIT
+      x-enum-varnames:
+        - SandboxDelegationModeInherit
+        - SandboxDelegationModeExplicit
     sandboxes.SandboxMountAuthConfig:
       type: object
       properties:

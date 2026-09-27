@@ -1,6 +1,6 @@
 ---
 title: "translate_content"
-description: "Derive standard content blocks from a message with Anthropic content."
+description: "Derive standard content blocks from a message with Google (GenAI) content."
 source: "https://reference.langchain.com/python/langchain-core/messages/block_translators/google_vertexai/translate_content"
 category: "reference"
 tags: [reference, langchain-core, messages, block_translators, google_vertexai, translate_content]
@@ -10,9 +10,9 @@ tags: [reference, langchain-core, messages, block_translators, google_vertexai, 
 
 > **Function** in `langchain_core`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain-core/messages/block_translators/anthropic/translate_content)
+📖 [View in docs](https://reference.langchain.com/python/langchain-core/messages/block_translators/google_genai/translate_content)
 
-Derive standard content blocks from a message with Anthropic content.
+Derive standard content blocks from a message with Google (GenAI) content.
 
 ## Signature
 
@@ -36,4 +36,4 @@ The derived content blocks.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/348c9dc572599947d2d7d33d6a5b8b936e92a1d4/libs/core/langchain_core/messages/block_translators/anthropic.py#L498)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c5ab14d42a3e22865c9def909de0b11d70b0bbf0/libs/core/langchain_core/messages/block_translators/google_genai.py#L574)

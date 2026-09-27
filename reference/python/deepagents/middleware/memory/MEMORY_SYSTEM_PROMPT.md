@@ -20,4 +20,4 @@ MEMORY_SYSTEM_PROMPT = '<agent_memory>\n{agent_memory}\n\n</agent_memory>\n\n<me
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/middleware/memory.py#L105)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/memory.py#L105)

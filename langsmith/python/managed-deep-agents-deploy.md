@@ -73,6 +73,35 @@ When `--no-wait` is set, schedule reconciliation is skipped for that deploy invo
 
 On success, the CLI prints the LangSmith deployment dashboard URL. For the full deploy step list, see the [CLI reference](managed-deep-agents-cli.md#deploy-projects).
 
+## Set the Python version
+
+> [!NOTE]
+> Configuring the Python version requires `managed-deepagents>=0.8.0`.
+
+MDA builds the deployment image on Python 3.11, 3.12, 3.13, or 3.14, and by default selects the newest that `requires-python` allows. To pin a version, add the optional `[tool.mda]` table to `pyproject.toml`:
+
+**pyproject.toml**
+
+```toml
+[project]
+requires-python = ">=3.11"
+
+[tool.mda]
+python-version = "3.14"
+```
+
+When set, `python-version` takes a quoted `major.minor` string, with no patch version. MDA writes the resolved version to `python_version` in the generated `langgraph.json` and selects the matching [Agent Server](../agent-server-overview.md) image. `requires-python` remains the project's own compatibility requirement.
+
+Pin it to stay on the same minor version when MDA adds support for a newer Python. To override it for a single build, set `MDA_PYTHON_VERSION`:
+
+```bash
+MDA_PYTHON_VERSION=3.12 uv run mda deploy
+```
+
+A target that `requires-python` excludes fails the build. One that depends on the image's exact patch version warns instead, because image tags do not pin patch versions.
+
+`python-version` controls the deployment image only. Local builds, `mda dev`, Harbor task images, and [execution sandboxes](managed-deep-agents-sandboxes.md) select their interpreters separately.
+
 ## Secrets and environment files
 
 `mda deploy` reads project `.env` values before shell environment variables. Use `.env` for the LangSmith API key that authenticates the deploy and for runtime secrets the hosted deployment needs:
@@ -84,7 +113,10 @@ LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
 OPENAI_API_KEY=<OPENAI_API_KEY>
 GITHUB_MCP_TOKEN=<GITHUB_MCP_TOKEN>
 DATABASE_URL=<DATABASE_URL>
+MDA_INGRESS_SECRET=<MDA_INGRESS_SECRET>
 ```
+
+`MDA_INGRESS_SECRET` is required only when the project declares [backend identity](managed-deep-agents-identity.md#configure-identity-with-your-own-backend). Deploy fails preflight when that declaration is present and the value is missing.
 
 `LANGSMITH_API_KEY`, `LANGGRAPH_HOST_API_KEY`, `LANGCHAIN_API_KEY`, and other platform variables are reserved. They can authenticate the deploy, but they are not uploaded as user-managed deployment secrets.
 
@@ -123,7 +155,7 @@ Look up every `mda` command and flag.
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

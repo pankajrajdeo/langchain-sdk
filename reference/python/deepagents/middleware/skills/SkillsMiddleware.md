@@ -20,6 +20,16 @@ using progressive disclosure (metadata first, full content on demand).
 Skills are loaded in source order with later sources overriding
 earlier ones.
 
+Skills are loaded once per thread and cached in state. To pick up skills
+added, edited, or deleted since then, set `skills_metadata` to `None`:
+
+```python
+agent.invoke({"messages": messages, "skills_metadata": None}, config)
+
+# or without a run
+agent.update_state(config, {"skills_metadata": None})
+```
+
 ## Signature
 
 ```python
@@ -103,4 +113,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/middleware/skills.py#L766)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/skills.py#L770)

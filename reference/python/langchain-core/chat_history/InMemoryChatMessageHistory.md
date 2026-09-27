@@ -19,7 +19,11 @@ Stores messages in a memory list.
 ## Signature
 
 ```python
-InMemoryChatMessageHistory()
+InMemoryChatMessageHistory(
+    self,
+    *args: Any = (),
+    **kwargs: Any = {},
+)
 ```
 
 ## Extends
@@ -39,6 +43,10 @@ InMemoryChatMessageHistory()
 - [`clear()`](https://reference.langchain.com/python/langchain-core/chat_history/InMemoryChatMessageHistory/clear)
 - [`aclear()`](https://reference.langchain.com/python/langchain-core/chat_history/InMemoryChatMessageHistory/aclear)
 
+## ⚠️ Deprecated
+
+Deprecated since version 1.6.4. Will be removed in version 2.0.0. See the short-term memory documentation for recommended alternatives: https://docs.langchain.com/oss/python/langchain/short-term-memory
+
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/348c9dc572599947d2d7d33d6a5b8b936e92a1d4/libs/core/langchain_core/chat_history.py#L202)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c5ab14d42a3e22865c9def909de0b11d70b0bbf0/libs/core/langchain_core/chat_history.py#L215)

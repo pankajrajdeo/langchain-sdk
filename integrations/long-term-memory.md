@@ -22,11 +22,12 @@ To implement your own store for a custom storage backend, see [Build a custom st
 | [MongoDB](memory/mongodb-long-term-memory.md)                         | [`langgraph-store-mongodb`](https://pypi.org/project/langgraph-store-mongodb/)             | [langchain-ai/langchain-mongodb](https://github.com/langchain-ai/langchain-mongodb/tree/main/libs/langgraph-store-mongodb) |
 | Upstash Redis                                                                               | [`langgraph-store-upstash`](https://pypi.org/project/langgraph-store-upstash/)             | [Tghez/langgraph-store-upstash](https://github.com/Tghez/langgraph-store-upstash)                                          |
 | OMEM                                                                                        | [`omem-infrastructure`](https://pypi.org/project/omem-infrastructure/)                     | [OMEM docs](https://infrastructure.omem-cloud.com/docs)                                                                    |
+| [SingleStore](https://www.singlestore.com/docs/)                                            | [`langgraph-singlestore`](https://pypi.org/project/langgraph-singlestore/)                 | [singlestore-labs/langchain-singlestore](https://github.com/singlestore-labs/langchain-singlestore)                        |
 
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/long-term-memory/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -29,6 +29,11 @@ an `execute` tool is also added for running shell commands. Its results carry
 This middleware also automatically evicts large tool results to the file system when
 they exceed a token threshold, preventing context window saturation.
 
+When using `create_agent` directly, add
+[`UnsupportedContentMiddleware`][deepagents.middleware.unsupported_content.UnsupportedContentMiddleware]
+last in the `middleware` list, so `read_file` results the model can't accept are
+replaced with a text notice. `create_deep_agent` adds it automatically.
+
 ## Signature
 
 ```python
@@ -131,4 +136,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/middleware/filesystem.py#L1681)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/filesystem.py#L1649)

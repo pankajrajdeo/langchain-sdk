@@ -185,12 +185,13 @@ The below document loaders allow you to load data from common data formats.
 | [`Soniox`](https://soniox.com/docs/stt/concepts/supported-languages)                                         | <span data-sort-value="160"><a href="https://pypi.org/project/langchain-soniox/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-soniox/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                                     |
 | [`AgentMail`](https://github.com/agentmail-to/langchain-agentmail)                                           | <span data-sort-value="144"><a href="https://pypi.org/project/langchain-agentmail/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-agentmail/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                               |
 | [`OxidizePdfLoader`](https://github.com/bzsanti/oxidize-pdf-integrations/tree/main/langchain)                | <span data-sort-value="129"><a href="https://pypi.org/project/langchain-oxidize-pdf/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-oxidize-pdf/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                           |
+| [`EnconvertLoader`](https://github.com/enconvert/langchain-enconvert)                                        | <span data-sort-value="122"><a href="https://pypi.org/project/langchain-enconvert/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-enconvert/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                               |
 | [`LangSmithLoader`](document_loaders/langsmith.md)                                     | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                                            |
 
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

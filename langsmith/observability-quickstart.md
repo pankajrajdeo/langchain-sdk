@@ -353,7 +353,7 @@ npx tsx index.ts
 
 ## 4. View your trace
 
-In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-observability-quickstart), go to **Tracing** and select your **default** project. Click the `assistant` row to open the trace. The **Messages** tab shows the conversation as it was sent to the model. Select the **Details** tab to see the full run tree, including the `assistant` function with the `get_context` tool call and the OpenAI call nested inside it.
+In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-observability-quickstart), go to **Tracing** and select your **default** project. Click the `assistant` row to open the trace. The **Trajectory** tab shows the conversation as it was sent to the model. Select the **Details** tab to see the full run tree, including the `assistant` function with the `get_context` tool call and the OpenAI call nested inside it.
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-quickstart-app.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=35b19b5e1e978d13cdbb61058334eeb4" alt="LangSmith UI showing a trace with an outer application span and a nested LLM call span." width="2504" height="1266" data-path="langsmith/images/trace-quickstart-app.png" />
 
@@ -377,7 +377,7 @@ The outer span captures your `assistant` function's inputs and outputs. The nest
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

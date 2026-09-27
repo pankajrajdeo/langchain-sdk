@@ -106,7 +106,7 @@ There are several ways to populate a single-run queue with items:
 * **From the Details view**: In a [tracing project](observability-concepts.md#projects), click into any row to open the side panel in the [Details view](view-traces.md#details-view). The panel offers two actions, each with a fixed scope:
 
   * **Add to** : In the run header, open this menu and select **Add to Annotation Queue**. This adds the run you have selected as a run item.
-  * **Add thread to annotation queue** : Next to the **Messages**, **Turns**, and **Details** tabs, click the icon. This adds the whole thread as a thread item.
+  * **Add thread to annotation queue** : Next to the **Trajectory**, **Turns**, and **Details** tabs, click the icon. This adds the whole thread as a thread item.
 
   Both actions open a popover where you select an existing queue or create a new one.
 
@@ -235,7 +235,7 @@ Reservations, reviewer thresholds, and comments behave identically to those in s
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotation-queues.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

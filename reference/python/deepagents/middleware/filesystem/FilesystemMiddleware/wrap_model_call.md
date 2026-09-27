@@ -24,9 +24,6 @@ handles large HumanMessage eviction:
     eviction threshold, its content is written to the backend and the
     message is tagged in state via `ExtendedModelResponse`.
 
-It also scrubs unsupported multimodal blocks, replacing them with text
-placeholders to avoid non-retryable provider errors.
-
 ## Signature
 
 ```python
@@ -53,4 +50,4 @@ update tagging a newly evicted message.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/middleware/filesystem.py#L3200)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/filesystem.py#L3181)

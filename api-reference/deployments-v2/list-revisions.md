@@ -338,6 +338,16 @@ components:
             The commit SHA of the git repository used for the
             deployment.<br><br>This is a read-only field. Only applicable for
             `github` source.
+        repo_commit_title:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Repo commit title
+          description: >-
+            The first line of the commit message at
+            `repo_commit_sha`.<br><br>This is a read-only field. Only applicable
+            for `github` source. `null` for revisions created before this field
+            existed, or when GitHub could not return the commit.
       type: object
       title: SourceRevisionConfig
       description: >-

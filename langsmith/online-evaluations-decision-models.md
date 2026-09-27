@@ -1,0 +1,95 @@
+---
+title: "Set up decision model online evaluators"
+description: "Evaluate production traces in LangSmith with SemIf or Jev as the judge, and record each question's typed answer as its own feedback key."
+source: "https://docs.langchain.com/langsmith/online-evaluations-decision-models"
+category: "docs"
+tags: [docs, langsmith, online-evaluations-decision-models]
+---
+
+# Set up decision model online evaluators
+
+> Evaluate production traces in LangSmith with SemIf or Jev as the judge, and record each question's typed answer as its own feedback key.
+
+[Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production traces. An online evaluator can use a decision model, such as SemIf or Jev, as the judge in place of an LLM. To use an LLM as the judge, see [Set up LLM-as-a-judge online evaluators](online-evaluations-llm-as-judge.md).
+
+> [!NOTE]
+> When an online evaluator runs on any run within a trace, LangSmith upgrades the trace to [extended data retention](usage-and-billing.md#data-retention-auto-upgrades). This upgrade affects trace pricing.
+
+## Decision models
+
+Decision models answer structured questions about text and return typed answers, such as a probability, a selected option, or a score, rather than free-form text. For how they work, see [Decision models in the LLM Gateway](llm-gateway-decision-models.md). When you use a decision model as the judge, LangSmith records the answer to each question you define under its own feedback key. You do not need to write an output schema or parse free-text reasoning.
+
+### Supported models
+
+LangSmith supports two decision models for evaluators, on both tracing projects and datasets. Both are configured and behave the same way. They differ only in provider and setup. To call a decision model through another provider or on your own server, use a [TypeSafe-compatible endpoint](typesafe-compatible-model.md).
+
+| Model                                                      | Provider              | Setup                                                                                     |
+| ---------------------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------- |
+| [SemIf](llm-gateway-decision-models.md#semif)      | **LangSmith Gateway** | No provider key required. SemIf runs through the [LLM Gateway](llm-gateway.md).   |
+| [Jev](llm-gateway-decision-models.md#typesafe-jev) | **TypeSafe**          | Requires a TypeSafe API key stored as a workspace secret. Defaults to `TYPESAFE_API_KEY`. |
+
+> [!NOTE]
+> SemIf is enabled for US organizations on Free, Developer, and Plus plans.
+
+> [!WARNING]
+> TypeSafe does not offer zero data retention. The provider may retain prompts and outputs sent to Jev for evaluation.
+
+> [!NOTE]
+> You can create decision model evaluators only in the LangSmith UI. The LangSmith SDKs do not support creating them yet. To call a decision model directly from code, see [Decision models in the LLM Gateway](llm-gateway-decision-models.md).
+
+### Question types
+
+Each question you add to a decision model evaluator has one of three types. For full definitions, see the [TypeSafe primitives documentation](https://docs.typesafe.ai/primitives).
+
+* **Noul**: A continuous boolean. Returns the probability, from 0 to 1, that a statement is true. Values near 1 mean yes, values near 0 mean no, and values near 0.5 mean the model is uncertain. Use it for yes or no checks, such as whether the output contains personally identifiable information. Phrase the instructions as a yes or no question, and optionally describe what true and false mean.
+* **Choice**: Picks one option from a fixed, unordered list, such as classifying whether the user is asking a `question`, making a `request`, or neither (`other`). Give each option a name and, unless the name is self-explanatory, a description.
+* **Score**: Rates the state along ordered levels, such as how frustrated the user is, from calm to very angry. Define the levels in order, starting at level 0. The score can fall between two levels.
+
+Each model enforces its own limits on questions. A SemIf evaluator accepts up to 32 questions.
+
+| Limit                       | Jev      | SemIf   |
+| --------------------------- | -------- | ------- |
+| Options per choice question | 2 to 255 | 2 to 16 |
+| Levels per score question   | 2 to 10  | 2 to 10 |
+
+### Map answers to feedback keys
+
+Each question's name becomes a feedback key on the evaluated run or thread. LangSmith converts each typed answer to feedback as follows:
+
+| Question type | Feedback field | Value                                                                                                                    |
+| ------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Noul          | `score`        | A number from 0 to 1                                                                                                     |
+| Choice        | `value`        | The name of the selected option                                                                                          |
+| Score         | `score`        | A number from 0 to the index of the highest level. For example, a question with four levels returns a score from 0 to 3. |
+
+LangSmith also stores the model's full answer on each feedback entry, under `typesafe` in the feedback source metadata. For choice and score questions, the answer includes `probabilities` and `confidence`. Because each answer is standard feedback, you can filter, chart, and alert on it, and trigger [automations](rules.md) from it, as you would with any other evaluator's feedback.
+
+Question names follow the same limits as other feedback keys, and each name must be unique within the evaluator.
+
+## Add a decision model online evaluator
+
+To add a decision model online evaluator:
+
+1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-online-evaluations-decision-models), navigate to the **Tracing** page and select a tracing project.
+2. Click the **Evaluators** tab.
+3. Click **+ Evaluator** to open the **Configure Evaluator** panel.
+4. Under **Create from scratch**, select **LLM-as-a-Judge Evaluator**, then name your evaluator.
+5. Select a decision model, map run or thread variables into the **State**, and add questions. For each setting, see [How to define a decision model evaluator](decision-model-evaluator.md).
+6. (Optional) Apply a [filter](online-evaluations-llm-as-judge.md#apply-a-filter-to-runs-that-trigger-the-evaluator), set a [sampling rate](online-evaluations-llm-as-judge.md#configure-a-sampling-rate), or [apply the rule to past runs or threads](online-evaluations-llm-as-judge.md#apply-a-rule-to-past-runs-or-threads). These settings work the same way as for LLM-as-a-judge online evaluators.
+7. To save the evaluator, click **Create** or **Save**.
+
+The evaluator checks each new run or thread that matches its filter. Each question's answer appears under its own feedback key.
+
+## See also
+
+* [How to define a decision model evaluator](decision-model-evaluator.md): Configure the model, state, and questions.
+* [Connect to a TypeSafe-compatible model provider](typesafe-compatible-model.md): Base URL format and example endpoints.
+* [Decision models in the LLM Gateway](llm-gateway-decision-models.md): Call SemIf and Jev directly from code.
+
+***
+
+> [!NOTE]
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-decision-models.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

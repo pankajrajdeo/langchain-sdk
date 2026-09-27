@@ -74,7 +74,7 @@ The only required file is `agent.py` at the project root containing the [agent d
 
   `tools/` holds ordinary modules with one exception. `tools/mcp.py` is a managed declaration and exports a module-level `mcp`. Every other module under `tools/` is application code you import.
 
-* **Dependencies and secrets**: Declare dependencies in `pyproject.toml`. MDA loads `.env` locally and forwards non-reserved values as deployment secrets. Reserved platform variables and `.env` files are not included in the build archive. For more information, see [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md).
+* **Dependencies and secrets**: Declare dependencies in `pyproject.toml`, which also sets the [deployment Python version](managed-deep-agents-deploy.md#set-the-python-version). MDA loads `.env` locally and forwards non-reserved values as deployment secrets. Reserved platform variables and `.env` files are not included in the build archive. For more information, see [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md).
 
 * **Evals**: Managed Deep Agents [evals](managed-deep-agents-evals.md) are Harbor evals. Run `mda evals init -i` and develop tasks with a coding agent and the `eval-engineering` skill. Generated runtime files stay under `.mda/evals/` and are not included in the deployed agent build.
 
@@ -89,7 +89,7 @@ Add durable memory and a daily schedule to the quickstart research assistant.
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-project-structure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

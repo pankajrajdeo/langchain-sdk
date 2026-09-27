@@ -383,8 +383,8 @@ components:
           title: Compute Tier
           description: >-
             The selected fixed resource tier for this deployment's compute.
-            Falls back to `deployment_tier` for deployments predating
-            independent compute/database scaling.
+            Deployments without an explicit selection return the default tier
+            for their deployment type.
         database_tier:
           anyOf:
             - $ref: '#/components/schemas/DeploymentTier'
@@ -392,8 +392,8 @@ components:
           title: Database Tier
           description: >-
             The selected fixed resource tier for this deployment's database.
-            Falls back to `deployment_tier` for deployments predating
-            independent compute/database scaling.
+            Deployments without an explicit selection return the default tier
+            for their deployment type.
       type: object
       required:
         - source
@@ -474,9 +474,11 @@ components:
             - type: 'null'
           title: Custom URL
           description: >-
-            The custom URL of the deployment.<br><br>This field can only be set
-            for `external_docker` source deployments. However, it will be set
-            automatically for `github` source deployments (read only).
+            The custom URL of the deployment.<br><br>Updating this field creates
+            a new revision to refresh the deployment URL in its
+            environment.<br><br>This field can only be set for `external_docker`
+            source deployments. However, it will be set automatically for
+            `github` source deployments (read only).
         resource_spec:
           anyOf:
             - $ref: '#/components/schemas/ResourceSpec-Input'
@@ -530,8 +532,8 @@ components:
 
         All fields are nullable, but are validated based on the `source`.
 
-        Updating `resource_spec`, `install_command`, or `build_command` creates
-        a new revision.
+        Updating `custom_url`, `resource_spec`, `install_command`, or
+        `build_command` creates a new revision.
     SourceRevisionConfigRequest:
       properties:
         repo_ref:
@@ -731,9 +733,11 @@ components:
             - type: 'null'
           title: Custom URL
           description: >-
-            The custom URL of the deployment.<br><br>This field can only be set
-            for `external_docker` source deployments. However, it will be set
-            automatically for `github` source deployments (read only).
+            The custom URL of the deployment.<br><br>Updating this field creates
+            a new revision to refresh the deployment URL in its
+            environment.<br><br>This field can only be set for `external_docker`
+            source deployments. However, it will be set automatically for
+            `github` source deployments (read only).
         resource_spec:
           anyOf:
             - $ref: '#/components/schemas/ResourceSpec-Output'
@@ -847,6 +851,16 @@ components:
             The commit SHA of the git repository used for the
             deployment.<br><br>This is a read-only field. Only applicable for
             `github` source.
+        repo_commit_title:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Repo commit title
+          description: >-
+            The first line of the commit message at
+            `repo_commit_sha`.<br><br>This is a read-only field. Only applicable
+            for `github` source. `null` for revisions created before this field
+            existed, or when GitHub could not return the commit.
       type: object
       title: SourceRevisionConfig
       description: >-

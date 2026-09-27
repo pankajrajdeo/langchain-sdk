@@ -47,7 +47,7 @@ if not os.getenv("AIMLAPI_API_KEY"):
     os.environ["AIMLAPI_API_KEY"] = getpass.getpass("Enter your AI/ML API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
+Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -92,7 +92,7 @@ Bubble sort is a simple sorting algorithm that repeatedly steps through a list, 
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/aimlapi.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

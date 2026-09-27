@@ -348,13 +348,15 @@ The following flags control connection creation:
 | `--secret-from-env VAR`           | Read a fixed value or OAuth client secret from the shell or project `.env`.                                                       |
 | `--secret-from-file PATH`         | Read a fixed value or OAuth client secret from a file.                                                                            |
 | `--oauth SERVICE`                 | Use the preconfigured settings for a service in `mda connections catalog`.                                                        |
+| `--grant-type GRANT`              | Set the OAuth grant to `authorization_code` or `client_credentials`. Defaults to `authorization_code`.                            |
 | `--client-id CLIENT_ID`           | Set the OAuth client ID.                                                                                                          |
 | `--auth-method METHOD`            | Set the token endpoint method to `client_secret_basic`, `client_secret_post`, or `none`.                                          |
 | `--scope SCOPE`                   | Replace the provider's default scopes. Repeat for each scope.                                                                     |
 | `--allowed-scope SCOPE`           | Set the maximum scope that an authorization flow can request. Repeat for each scope.                                              |
 | `--authorization-param KEY=VALUE` | Add an OAuth authorization query parameter. Repeat for each parameter.                                                            |
+| `--token-param KEY=VALUE`         | Add a parameter to the OAuth token request. Repeat for each parameter.                                                            |
 | `--authorize-url URL`             | Set a custom OAuth authorization endpoint. Requires `--token-url`.                                                                |
-| `--token-url URL`                 | Set a custom OAuth token endpoint. Requires `--authorize-url`.                                                                    |
+| `--token-url URL`                 | Set a custom OAuth token endpoint. Requires `--authorize-url` for the `authorization_code` grant.                                 |
 | `--mcp URL`                       | Create an MCP OAuth connection by discovering OAuth from the MCP server URL.                                                      |
 | `--authorize`                     | Sign in to the account the deployed agent uses, storing an agent-owned OAuth grant. Requires OAuth flags and a project directory. |
 
@@ -490,7 +492,7 @@ bunx mda delete
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

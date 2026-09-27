@@ -186,6 +186,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uuid
       requestBody:
         required: true
         content:
@@ -228,6 +229,8 @@ components:
       properties:
         firewall:
           $ref: '#/components/schemas/data_planes.UpdateDataPlaneFirewallSettings'
+        fleet_oidc:
+          $ref: '#/components/schemas/data_planes.UpdateDataPlaneFleetOIDCSettings'
         maintenance_window:
           description: MaintenanceWindow is the two-hour weekly maintenance window in UTC.
           type: string
@@ -242,12 +245,16 @@ components:
           type: string
         firewall:
           $ref: '#/components/schemas/data_planes.DataPlaneFirewallSettings'
+        fleet_oidc:
+          $ref: '#/components/schemas/data_planes.DataPlaneFleetOIDCSettings'
         id:
           type: string
         maintenance_window:
           type: string
         name:
           type: string
+        provisioning_settings:
+          $ref: '#/components/schemas/data_planes.DataPlaneProvisioningSettings'
         region:
           type: string
         status:
@@ -306,6 +313,29 @@ components:
           items:
             type: string
           type: array
+    data_planes.UpdateDataPlaneFleetOIDCSettings:
+      type: object
+      properties:
+        audience:
+          type: string
+        email_claim:
+          type: string
+        groups_claim:
+          type: string
+        is_enabled:
+          type: boolean
+        issuer_url:
+          type: string
+        provider:
+          type: string
+        subject_claim:
+          type: string
+        tenant_claim:
+          type: string
+        tenant_mappings:
+          type: object
+          additionalProperties:
+            type: string
     data_planes.UpdateDataPlaneTTLSettings:
       type: object
       properties:
@@ -334,6 +364,63 @@ components:
           items:
             type: string
           type: array
+    data_planes.DataPlaneFleetOIDCSettings:
+      type: object
+      required:
+        - audience
+        - email_claim
+        - groups_claim
+        - is_enabled
+        - issuer_url
+        - provider
+        - subject_claim
+        - tenant_claim
+        - tenant_mappings
+      properties:
+        audience:
+          type: string
+        email_claim:
+          type: string
+        groups_claim:
+          type: string
+        is_enabled:
+          type: boolean
+        issuer_url:
+          type: string
+        provider:
+          type: string
+        subject_claim:
+          type: string
+        tenant_claim:
+          type: string
+        tenant_mappings:
+          type: object
+          additionalProperties:
+            type: string
+    data_planes.DataPlaneProvisioningSettings:
+      type: object
+      properties:
+        additional_tags:
+          type: object
+          additionalProperties:
+            type: string
+        byovpc:
+          $ref: '#/components/schemas/data_planes.DataPlaneBYOVPCSettings'
+        cloud:
+          $ref: '#/components/schemas/data_planes.DataPlaneCloud'
+        is_byoiam_enabled:
+          type: boolean
+        is_eks_api_privatelink_disabled:
+          type: boolean
+        is_public_load_balancer:
+          type: boolean
+        role_arn:
+          type: string
+        vpc_cidr:
+          description: >-
+            VPCCIDR is the effective VPC CIDR, including for customer-managed
+            VPCs.
+          type: string
     data_planes.Status:
       type: string
       enum:
@@ -389,6 +476,29 @@ components:
           type: string
         run_id:
           type: string
+    data_planes.DataPlaneBYOVPCSettings:
+      type: object
+      properties:
+        private_app_subnet_ids:
+          items:
+            type: string
+          type: array
+        private_db_subnet_ids:
+          items:
+            type: string
+          type: array
+        public_subnet_ids:
+          items:
+            type: string
+          type: array
+        vpc_id:
+          type: string
+    data_planes.DataPlaneCloud:
+      type: string
+      enum:
+        - AWS
+      x-enum-varnames:
+        - DataPlaneCloudAWS
   securitySchemes:
     API Key:
       type: apiKey

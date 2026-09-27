@@ -40,7 +40,7 @@ If you're routing requests through a proxy or service emulator, you can set the 
 2. `OPENAI_API_BASE` — read by LangChain at init.
 3. `OPENAI_BASE_URL` — read by the underlying `openai` SDK client.
 
-To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
+Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -234,7 +234,7 @@ For detailed documentation on `OpenAIEmbeddings` features and configuration opti
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

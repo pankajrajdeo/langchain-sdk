@@ -30,11 +30,12 @@ To implement your own checkpointer for a custom storage backend, see [Build a cu
 | [TypeDB](https://typedb.com/docs)                                                                | [`langgraph-checkpoint-typedb`](https://pypi.org/project/langgraph-checkpoint-typedb/)         | [typedb/langgraph-checkpoint-typedb](https://github.com/typedb/langgraph-checkpoint-typedb)                                     |
 | [Inspeximus](https://dancenitra.github.io/inspeximus/)                                           | [`langgraph-checkpoint-inspeximus`](https://pypi.org/project/langgraph-checkpoint-inspeximus/) | [DanceNitra/inspeximus](https://github.com/DanceNitra/inspeximus)                                                               |
 | Supabase                                                                                         | [`langgraph-checkpoint-supabase`](https://pypi.org/project/langgraph-checkpoint-supabase/)     | [Tghez/langgraph-checkpoint-supabase](https://github.com/Tghez/langgraph-checkpoint-supabase)                                   |
+| [SingleStore](https://www.singlestore.com/docs/)                                                 | [`langgraph-singlestore`](https://pypi.org/project/langgraph-singlestore/)                     | [singlestore-labs/langchain-singlestore](https://github.com/singlestore-labs/langchain-singlestore)                             |
 
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/checkpointers/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

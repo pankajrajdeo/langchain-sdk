@@ -30,12 +30,19 @@ From within Claude Code, run:
 /reload-plugins
 ```
 
-To update the plugin, run:
+To update the plugin, refresh the marketplace from within Claude Code:
 
 ```bash
 /plugin marketplace update langsmith-claude-code-plugins
-/reload-plugins
 ```
+
+Then move the install onto the new version from your shell and restart Claude Code:
+
+```bash
+claude plugin update langsmith-tracing@langsmith-claude-code-plugins
+```
+
+ The marketplace update on its own only refreshes the catalog clone. Your install stays pinned to the version directory it was installed from, so the hooks keep running the old bundle until `claude plugin update` moves it. To skip both steps next time, run `/plugin`, open **Marketplaces** → `langsmith-claude-code-plugins` and choose **Enable auto-update**: third-party marketplaces have it off by default, and enabling it updates the marketplace and its installed plugins together. 
 
  If you are migrating from the previously recommended version of tracing Claude Code with manually created stop hooks, refer to [Migrating from the manual stop hook](#migrating-from-the-manual-stop-hook). 
 
@@ -397,7 +404,7 @@ The plugin is open-source under the MIT license and is available in [this GitHub
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-claude-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -13,8 +13,10 @@ tags: [docs, langsmith, smith-api, gateway-policies, create-a-gateway-policy]
 **policy_type** is one of `spend_cap`, `default_spend_cap`,
 `guard`, `route_config`, `model_fallback`, `rate_limit`, or `default_rate_limit`.
 The shape of `config` depends on policy_type:
-- `spend_cap` / `default_spend_cap`:
+- `spend_cap` / `default_spend_cap`, one limit:
 `{"window": "hourly"|"daily"|"weekly"|"monthly", "limit_usd": <number>}`
+- `spend_cap` / `default_spend_cap`, a limit per window:
+`{"version": 2, "limits": [{"window": "hourly"|"daily"|"weekly"|"monthly", "limit_usd": <number>}]}`
 - `guard`:
 `{"version": 1, "detect": {"pii": <bool>, "secrets": <bool>}, "timeout_seconds": <number>, "timeout_action": "allow"|"block"}`
 `timeout_seconds` (optional, 0.1–30) caps guard pipeline execution time; defaults to 2s. `timeout_action` defaults to `allow`.
@@ -226,9 +228,14 @@ paths:
 
         The shape of `config` depends on policy_type:
 
-        - `spend_cap` / `default_spend_cap`:
+        - `spend_cap` / `default_spend_cap`, one limit:
 
         `{"window": "hourly"|"daily"|"weekly"|"monthly", "limit_usd": <number>}`
+
+        - `spend_cap` / `default_spend_cap`, a limit per window:
+
+        `{"version": 2, "limits": [{"window":
+        "hourly"|"daily"|"weekly"|"monthly", "limit_usd": <number>}]}`
 
         - `guard`:
 
@@ -372,6 +379,16 @@ paths:
               "subject_matchers": [{"key":"organization_id","value":"<org-uuid>"}],
               "config": {"window": "monthly", "limit_usd": 100}
             }
+        - label: spend_cap (per-window limits)
+          lang: json
+          source: |-
+            {
+              "name": "daily-and-monthly-cap",
+              "policy_type": "spend_cap",
+              "action": "block",
+              "subject_matchers": [{"key":"organization_id","value":"<org-uuid>"}],
+              "config": {"version": 2, "limits": [{"window": "daily", "limit_usd": 25}, {"window": "monthly", "limit_usd": 100}]}
+            }
         - label: guard
           lang: json
           source: |-
@@ -426,6 +443,13 @@ components:
           type: string
         created_by:
           type: string
+        current_spend:
+          description: |-
+            CurrentSpend is the list of spends recorded for each of the
+            tracked spend limit windows, used in v2 of spend_cap policy type.
+          type: array
+          items:
+            $ref: '#/components/schemas/gateway_policies.SpendUsage'
         current_spend_usd:
           description: |-
             CurrentSpendUSD is the spend in the policy's current window. Set for
@@ -493,6 +517,15 @@ components:
         key:
           type: string
         value:
+          type: string
+    gateway_policies.SpendUsage:
+      type: object
+      properties:
+        spend_usd:
+          description: SpendUSD is the spend recorded in this window.
+          type: number
+        window:
+          description: Window is the spend limit period.
           type: string
     gateway_policies.RateLimitUsage:
       type: object

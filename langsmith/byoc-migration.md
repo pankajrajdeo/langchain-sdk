@@ -66,7 +66,13 @@ export LANGSMITH_NEW_BASE_URL="https://<data_plane_host>"
 export LANGSMITH_VERIFY_SSL=true
 ```
 
-Find the data plane API URL under **Settings > Data Planes**.
+> [!NOTE]
+> `OLD` refers to your current LangSmith deployment, and `NEW` refers to the destination BYOC data plane:
+>
+> * **`LANGSMITH_OLD_API_KEY`**: An API key from your current deployment with permission to read all resources you want to migrate. For LangSmith Cloud at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-byoc-migration), create it under **Settings > API Keys**. For another Cloud region or a self-hosted instance, use that deployment's UI.
+> * **`LANGSMITH_NEW_API_KEY`**: An API key created under **Settings > API Keys** at [aws.smith.langchain.com](https://aws.smith.langchain.com). Scope it to a workspace in your destination BYOC data plane. See [Create an API key](create-account-api-key.md#api-keys).
+> * **`LANGSMITH_OLD_BASE_URL`**: Your current deployment's API URL. For LangSmith Cloud in GCP US, use `https://api.smith.langchain.com`. For another Cloud region, use its [regional API URL](create-account-api-key.md#configure-the-sdk). For self-hosted LangSmith, use your instance's API URL.
+> * **`LANGSMITH_NEW_BASE_URL`**: Your destination BYOC data plane's API URL, including `https://`. Find it under **Settings > Data Planes**. See [BYOC onboarding](byoc-onboarding.md).
 
 > [!WARNING]
 > The destination key must be scoped to a workspace in the target data plane. An organization-scoped key does not work.
@@ -136,7 +142,7 @@ For more information, see [LangSmith Deployment](deployment.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-migration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

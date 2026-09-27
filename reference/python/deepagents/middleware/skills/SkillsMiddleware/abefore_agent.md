@@ -14,9 +14,10 @@ tags: [reference, deepagents, middleware, skills, skillsmiddleware, abefore_agen
 
 Load skills metadata before agent execution (async).
 
-Loads skills once per session from all configured sources. If
-`skills_metadata` is already present in state (from a prior turn or
-checkpointed session), the load is skipped and `None` is returned.
+Loads skills from all configured sources when not yet loaded, meaning
+`skills_metadata` is missing or `None` in state. If it holds a list
+(from a prior turn or checkpointed session, even if empty), the load
+is skipped and `None` is returned.
 
 Skills are loaded in source order with later sources overriding
 earlier ones if they contain skills with the same name (last one wins).
@@ -44,8 +45,9 @@ abefore_agent(
 
 `SkillsStateUpdate | None`
 
-State update with `skills_metadata` populated, or `None` if already present.
+State update with `skills_metadata` and `skills_load_errors`, or
+`None` if skills are already loaded.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/middleware/skills.py#L978)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/skills.py#L994)

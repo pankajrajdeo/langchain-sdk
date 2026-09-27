@@ -11,7 +11,7 @@ tags: [docs, langsmith, evaluation-types]
 This page covers two aspects of evaluation in LangSmith:
 
 1. **[Evaluation types](#offline-evaluation-types)**: *When and why* to evaluate. Offline evaluation types (benchmarking, unit tests, regression tests) for pre-deployment testing, and online evaluation types (monitoring, anomaly detection) for production.
-2. **[Evaluator implementations](#implement-evaluators)**: *How* to evaluate. The available evaluator approaches (LLM-as-judge, code, composite, summary, pairwise) and where to configure them (UI or SDK, offline or online).
+2. **[Evaluator implementations](#implement-evaluators)**: *How* to evaluate. The available evaluator approaches (LLM-as-judge, decision model, code, composite, summary, pairwise) and where to configure them (UI or SDK, offline or online).
 
 Understanding both aspects helps you build a comprehensive evaluation strategy that validates functionality before deployment and monitors quality in production.
 
@@ -98,6 +98,17 @@ Configure LLM-as-a-judge evaluators for:
 * Offline evaluation on datasets: [In the UI](llm-as-judge.md)
 * Online evaluation on production traces: [In the UI](online-evaluations-llm-as-judge.md)
 
+### Decision model evaluators
+
+Use a decision model, such as SemIf or Jev, to answer typed questions about outputs. Each question returns a probability, a selected option, or a score, and becomes its own feedback key, so you do not write a prompt or an output schema.
+
+Configure decision model evaluators for:
+
+* Offline evaluation on datasets: [In the UI](decision-model-evaluator.md)
+* Online evaluation on production traces: [In the UI](online-evaluations-decision-models.md)
+
+The SDK does not support decision model evaluators yet.
+
 ### Code evaluators
 
 Write deterministic, rule-based functions that check specific conditions. These evaluators execute custom logic to validate structure, check for patterns, or apply business rules.
@@ -143,7 +154,7 @@ Run pairwise evaluations for:
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-types.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

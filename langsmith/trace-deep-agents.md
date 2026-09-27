@@ -151,9 +151,9 @@ Click on the trace, and toggle to the **Details** view on the top right. Your tr
 
 The resulting trace contains multiple nested spans, which allows you to follow the agent’s planning, calculation steps, and interpretation flow in the LangSmith UI.
 
-### Messages View
+### Trajectory view
 
-The **Messages** view in the LangSmith UI shows a simplified conversation history between the user and the agent. This view pulls messages from the top-level trace, (including the user’s initial request, tool calls and the agent’s final response) and represents them in a chat-like format.
+The **Trajectory** view in the LangSmith UI shows a simplified conversation history between the user and the agent. This view pulls messages from the top-level trace, (including the user’s initial request, tool calls and the agent’s final response) and represents them in a chat-like format.
 
 ### Filter by subagent
 
@@ -335,7 +335,7 @@ In this example, the agent is invoked twice, but only the invocation inside `tra
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-deep-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

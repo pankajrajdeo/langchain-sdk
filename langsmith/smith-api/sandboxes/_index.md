@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api/sandboxes"
-description: "Index of 34 pages and 0 subdirectories under langsmith/smith-api/sandboxes."
+description: "Index of 36 pages and 0 subdirectories under langsmith/smith-api/sandboxes."
 category: "index"
 tags: [index, langsmith, smith-api, sandboxes]
 ---
 
 # langsmith/smith-api/sandboxes
 
-34 pages here.
+36 pages here.
 
 ## Files
 
@@ -15,7 +15,7 @@ tags: [index, langsmith, smith-api, sandboxes]
 - [Capture a snapshot from a sandbox](capture-a-snapshot-from-a-sandbox.md) - Create a snapshot by capturing the current state of a sandbox or promoting an existing checkpoint.
 - [Create a registry](create-a-registry.md) - Create a sandbox registry for pulling private images.
 - [Create a sandbox](create-a-sandbox.md) - Create a new sandbox from a snapshot. Provide at most one of snapshot_id or snapshot_name; if neither is provided, the server uses the default snapshot. snapshot_name accepts a Docker-style name or...
-- [Create a snapshot](create-a-snapshot.md) - Create a snapshot from a Docker image (async build).
+- [Create a snapshot](create-a-snapshot.md) - Create a snapshot from a Docker image (async build). Names use lowercase registry-style components separated by slashes, up to 255 characters. The system/ namespace is read-only.
 - [Delete a registry](delete-a-registry.md) - Delete a sandbox registry by name.
 - [Delete a sandbox](delete-a-sandbox.md) - Delete a sandbox by name or UUID. Tears down the sandbox runtime and removes the DB record.
 - [Delete a snapshot](delete-a-snapshot.md) - Delete a snapshot by ID or by a Docker-style name[:tag] reference. The underlying storage is reclaimed asynchronously.
@@ -28,20 +28,22 @@ tags: [index, langsmith, smith-api, sandboxes]
 - [Get a registry](get-a-registry.md) - Get a sandbox registry by name.
 - [Get a sandbox](get-a-sandbox.md) - Retrieve a sandbox by name. Stale provisioning sandboxes are auto-failed.
 - [Get a snapshot name](get-a-snapshot-name.md) - Get a snapshot name and every tag under it, with the snapshot each tag resolves to. To fetch one snapshot, use /api/v2/sandboxes/snapshots/{snapshot_id}.
-- [Get a snapshot](get-a-snapshot.md) - Get a sandbox snapshot by ID or by a Docker-style reference. A bare name means name:latest, falling back to the newest ready untagged snapshot of that name. To list the tags under a name, use...
+- [Get a snapshot](get-a-snapshot.md) - Get a sandbox snapshot by ID or a registry-style reference, including system/default:latest. URL-encode references containing slashes. A bare name means name:latest, falling back to the newest ready...
 - [Get sandbox resource usage](get-sandbox-resource-usage.md) - Get current sandbox resource usage and quota limits for the workspace
 - [Get sandbox status](get-sandbox-status.md) - Retrieve the lightweight status of a sandbox for polling.
 - [Glob a sandbox filesystem](glob-a-sandbox-filesystem.md) - Find files under a root path matching a glob pattern (supports ). Entries are returned in lexical order by path.
 - [Grep a sandbox filesystem](grep-a-sandbox-filesystem.md) - Search files under a root path for a literal text pattern (not a regex).
+- [List a sandbox's shared service urls](list-a-sandboxs-shared-service-urls.md) - Returns one entry per port the sandbox is currently reachable on, so a caller can see what is shared before turning it off. Expired token grants are omitted. Cursors are opaque and only valid on this...
 - [List hourly sandbox usage costs](list-hourly-sandbox-usage-costs.md) - Returns priced usage per sandbox or snapshot and UTC hour in the half-open requested interval. LCU uses the recorded compute amount for sandboxes; snapshots have zero LCU. LSU allocates the recorded...
 - [List registries](list-registries.md) - List sandbox registries for pulling private images.
 - [List sandboxes](list-sandboxes.md) - List sandboxes for the authenticated tenant, with optional filtering, sorting, and pagination. Page with page_size and cursor: replay the response's next_cursor until it comes back null, which is the...
-- [List snapshots](list-snapshots.md) - List sandbox snapshots for the authenticated tenant, with optional filtering, sorting, and pagination. Page with page_size and cursor: replay the response's next_cursor until it comes back null...
+- [List snapshots](list-snapshots.md) - List workspace and published system snapshots, with optional filtering, sorting, and pagination. Page with page_size and cursor: replay the response's next_cursor until it comes back null, which is...
 - [Open a sandbox TCP tunnel](open-a-sandbox-tcp-tunnel.md) - Open a WebSocket tunnel to a specific port inside a sandbox.
 - [Resume a streamed sandbox command](resume-a-streamed-sandbox-command.md) - Continue streaming a command started by the stream start endpoint. The offsets are also the ack for everything below them, which frees the sandbox's output buffer and unpauses a command waiting for...
 - [Start a sandbox](start-a-sandbox.md) - Start a stopped or failed sandbox. This endpoint is not idempotent.
 - [Start a streamed sandbox command](start-a-streamed-sandbox-command.md) - Execute a command inside a sandbox and stream stdout/stderr as Server-Sent Events with base64 payloads. Requires a sandbox on the v2 runtime. Passing a command_id reuses a running command instead of...
 - [Stop a sandbox](stop-a-sandbox.md) - Stop a ready sandbox. This endpoint is not idempotent; the filesystem is preserved for later restart.
+- [Stop sharing a sandbox service URL](stop-sharing-a-sandbox-service-url.md) - Removes the sharing grant for one port, or for every port when port is omitted. A LangSmith login URL stops working immediately. A previously minted service token is not revoked and stays valid until...
 - [Update a registry](update-a-registry.md) - Update a sandbox registry's name and/or credentials.
 - [Update a sandbox](update-a-sandbox.md) - Update a sandbox's display name, retention, resources, tags, or proxy configuration. The name must be unique within the tenant. Proxy configuration sent to a sandbox that is not running is stored and...
 - [Upload a sandbox file](upload-a-sandbox-file.md) - Upload a file to a sandbox filesystem path.

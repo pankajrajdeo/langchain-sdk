@@ -17,9 +17,9 @@ LangSmith supports two ways to grade experiments created via the SDK:
 
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-bind-evaluator-to-dataset), select a dataset.
 2. Click the **Evaluators** tab.
-3. Click **+ Evaluator** to open the **Add Evaluator** panel.
+3. Click **+ Evaluator** to open the **Configure Evaluator** panel.
 4. Choose one of the following:
-   * **Create from scratch**: Build a new [LLM-as-a-Judge](llm-as-judge.md), [Code](online-evaluations-code.md), or [Composite](composite-evaluators-ui.md) evaluator, or select **From labeled data** to create an LLM-as-a-judge evaluator [aligned to human feedback](improve-judge-evaluator-feedback.md).
+   * **Create from scratch**: Build a new [LLM-as-a-Judge](llm-as-judge.md), [Code](online-evaluations-code.md), or [Composite](composite-evaluators-ui.md) evaluator, or select **From labeled data** to create an LLM-as-a-judge evaluator [aligned to human feedback](improve-judge-evaluator-feedback.md). To use a [decision model](decision-model-evaluator.md) as the judge, select **LLM-as-a-Judge Evaluator**, then select a decision model.
    * **Attach an existing evaluator**: Select an evaluator already in your workspace to reuse it.
    * **Create from a template**: Start from a ready-made evaluator.
 
@@ -29,6 +29,10 @@ LangSmith supports two ways to grade experiments created via the SDK:
 ## LLM-as-a-judge evaluators
 
 The process for binding evaluators to a dataset is very similar to the process for configuring an LLM-as-a-judge evaluator in the Playground. View instructions for [configuring an LLM-as-a-judge evaluator in the Playground.](llm-as-judge.md)
+
+## Decision model evaluators
+
+A decision model evaluator uses a decision model, such as SemIf or Jev, as the judge. On a dataset, you can map the reference output into the evaluator's state and ask questions that compare it to the run's output. For instructions, see [How to define a decision model evaluator](decision-model-evaluator.md).
 
 ## Custom code evaluators
 
@@ -82,7 +86,7 @@ function perform_eval(run, example) {
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/bind-evaluator-to-dataset.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

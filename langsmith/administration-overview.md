@@ -111,9 +111,11 @@ Personal Access Tokens (PATs) are used to authenticate requests to the LangSmith
 
 PATs are prefixed with `lsv2_pt_`
 
-Members can revoke or delete their own PATs. [Organization Admins](rbac.md#organization-admin) and [Organization Operators](rbac.md#organization-operator) can also list, revoke, and delete any member's PAT. For the steps, refer to [Create an account and API key](create-account-api-key.md).
+Members can deactivate, reactivate, or delete their own PATs. [Organization Admins](rbac.md#organization-admin) and [Organization Operators](rbac.md#organization-operator) can also list, deactivate, reactivate, and delete any member's PAT.
 
-Revoking a token stops it from authenticating but keeps its record, listed with a **Revoked** badge, so the token, its owner, and its last use stay visible. Deleting removes the record entirely. Because authentication results are cached, a revoked or deleted token stops working within a minute rather than instantly. Service keys can only be deleted, not revoked.
+Deactivating a token stops authentication but keeps its record, owner, and last use visible with a **Deactivated** badge. Deactivation is reversible; deletion permanently removes the record. Reactivation preserves the original expiration date and is unavailable once that date has passed. Because authentication results are cached, these changes take effect within a minute rather than instantly. Service keys can only be deleted, not deactivated.
+
+For the steps and authentication-cache timing, refer to [Deactivate or delete a personal access token](create-account-api-key.md#deactivate-or-delete-a-personal-access-token).
 
 #### Service keys
 
@@ -151,24 +153,24 @@ For more information on setting up organizations and workspaces, refer to the [o
 
 The following table provides an overview of organization level permissions:
 
-|                                             | Organization Viewer | Organization User | Organization Admin |
-| ------------------------------------------- | ------------------- | ----------------- | ------------------ |
-| View organization configuration             | ✅                   | ✅                 | ✅                  |
-| View organization roles                     | ✅                   | ✅                 | ✅                  |
-| View organization members                   | ✅                   | ✅                 | ✅                  |
-| View data retention settings                | ✅                   | ✅                 | ✅                  |
-| View usage limits                           | ✅                   | ✅                 | ✅                  |
-| Create personal access tokens (PATs)        | ❌                   | ✅                 | ✅                  |
-| View, revoke, and delete any member's PATs  | ❌                   | ❌                 | ✅                  |
-| Admin access to all workspaces              | ❌                   | ❌                 | ✅                  |
-| Manage billing settings                     | ❌                   | ❌                 | ✅                  |
-| Create workspaces                           | ❌                   | ❌                 | ✅                  |
-| Create, edit, and delete organization roles | ❌                   | ❌                 | ✅                  |
-| Invite new users to organization            | ❌                   | ❌                 | ✅                  |
-| Delete user invites                         | ❌                   | ❌                 | ✅                  |
-| Remove users from an organization           | ❌                   | ❌                 | ✅                  |
-| Update data retention settings              | ❌                   | ❌                 | ✅                  |
-| Update usage limits                         | ❌                   | ❌                 | ✅                  |
+|                                                            | Organization Viewer | Organization User | Organization Admin |
+| ---------------------------------------------------------- | ------------------- | ----------------- | ------------------ |
+| View organization configuration                            | ✅                   | ✅                 | ✅                  |
+| View organization roles                                    | ✅                   | ✅                 | ✅                  |
+| View organization members                                  | ✅                   | ✅                 | ✅                  |
+| View data retention settings                               | ✅                   | ✅                 | ✅                  |
+| View usage limits                                          | ✅                   | ✅                 | ✅                  |
+| Create personal access tokens (PATs)                       | ❌                   | ✅                 | ✅                  |
+| View, deactivate, reactivate, and delete any member's PATs | ❌                   | ❌                 | ✅                  |
+| Admin access to all workspaces                             | ❌                   | ❌                 | ✅                  |
+| Manage billing settings                                    | ❌                   | ❌                 | ✅                  |
+| Create workspaces                                          | ❌                   | ❌                 | ✅                  |
+| Create, edit, and delete organization roles                | ❌                   | ❌                 | ✅                  |
+| Invite new users to organization                           | ❌                   | ❌                 | ✅                  |
+| Delete user invites                                        | ❌                   | ❌                 | ✅                  |
+| Remove users from an organization                          | ❌                   | ❌                 | ✅                  |
+| Update data retention settings                             | ❌                   | ❌                 | ✅                  |
+| Update usage limits                                        | ❌                   | ❌                 | ✅                  |
 
 For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](organization-workspace-operations.md).
 
@@ -456,7 +458,7 @@ Like workspace limits, per-project and per-user limits are evaluated per calenda
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/administration-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

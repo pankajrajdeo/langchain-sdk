@@ -42,7 +42,11 @@ to avoid unnecessary round-trips to the underlying persistence layer.
 ## Signature
 
 ```python
-BaseChatMessageHistory()
+BaseChatMessageHistory(
+    self,
+    *args: Any = (),
+    **kwargs: Any = {},
+)
 ```
 
 ## Description
@@ -92,6 +96,16 @@ class FileChatMessageHistory(BaseChatMessageHistory):
 
 - `ABC`
 
+## Constructors
+
+```python
+__init__(
+    self,
+    *args: Any = (),
+    **kwargs: Any = {},
+) -> None
+```
+
 ## Properties
 
 - `messages`
@@ -107,6 +121,10 @@ class FileChatMessageHistory(BaseChatMessageHistory):
 - [`clear()`](https://reference.langchain.com/python/langchain-core/chat_history/BaseChatMessageHistory/clear)
 - [`aclear()`](https://reference.langchain.com/python/langchain-core/chat_history/BaseChatMessageHistory/aclear)
 
+## ⚠️ Deprecated
+
+Deprecated since version 1.6.4. Will be removed in version 2.0.0. See the short-term memory documentation for recommended alternatives: https://docs.langchain.com/oss/python/langchain/short-term-memory
+
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/348c9dc572599947d2d7d33d6a5b8b936e92a1d4/libs/core/langchain_core/chat_history.py#L22)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c5ab14d42a3e22865c9def909de0b11d70b0bbf0/libs/core/langchain_core/chat_history.py#L23)

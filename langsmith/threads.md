@@ -542,17 +542,17 @@ The right panel displays aggregate stats for the project, including thread and t
 
 You can then click into a particular thread. You can view the thread in three different ways:
 
-* **Messages** view (beta): the conversation layer. Scan each turn as a chat-style thread showing user and assistant messages, tool calls, and subagent activity.
+* **Trajectory** view: the conversation layer. Scan each turn as a chat-style thread showing user and assistant messages, tool calls, and subagent activity.
 * **Turns** view: the per-turn summary. View each turn as a card showing its inputs and outputs, with expand/collapse and customizable input/output fields.
 * **Details** view: the debugging layer. Drill into a specific run to inspect inputs, outputs, metadata, timing, errors, and child runs. The surrounding thread context stays visible so you can see where the run fits in the broader conversation.
 
-Switch between views using the buttons at the top of the page or keyboard shortcuts `M` (Messages), `T` (Turns), and `D` (Details). While the Messages view is in beta, the thread side panel defaults to the Details view. The right panel shows stats for the thread, including turn count, first and last start times, P50/P99 latency, and a cost breakdown by input and output tokens. For a full description of each view, see [View traces](view-traces.md).
+Switch between views using the buttons at the top of the page or keyboard shortcuts `T` (Trajectory) and `D` (Details). The thread side panel defaults to the Details view. The right panel shows stats for the thread, including turn count, first and last start times, P50/P99 latency, and a cost breakdown by input and output tokens. For a full description of each view, see [View traces](view-traces.md).
 
 ### View feedback
 
 Feedback scores are visible in the **Feedback** column of the threads table on the project's **Threads** tab.
 
-Within a thread, open the Messages view and click the **LLM call** link in a turn's metadata row to go to the Details view for that run, where you can review feedback for the run. You can also see [thread-level feedback](online-evaluations-multi-turn.md) there.
+Within a thread, open the Trajectory view and click the **LLM call** link in a turn's metadata row to go to the Details view for that run, where you can review feedback for the run. You can also see [thread-level feedback](online-evaluations-multi-turn.md) there.
 
 ### Save thread-level filter
 
@@ -573,7 +573,7 @@ On the **Threads** tab of a project, you can [save commonly used filters](filter
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -85,7 +85,7 @@ Share the key and the gateway endpoint with each user, or distribute them via MD
 
 ## Verification
 
-For SemIf, ask a user to run the [SemIf request example](llm-gateway-decision-models.md#call-semif). A `200` response confirms model access, the API key, and role permissions.
+For SemIf, ask a user to run the [SemIf request example](llm-gateway-decision-models.md#quickstart). A `200` response confirms model access, the API key, and role permissions.
 
 For bring-your-own-key providers, ask a user to run the [verification cURL from the quickstart](llm-gateway-quickstart.md#send-a-request). A `200` response confirms the gateway, the API key, provider secrets, and role permissions are all configured correctly. The call will appear as a trace in the **gateway** tracing project in the workspace.
 
@@ -98,7 +98,7 @@ For bring-your-own-key providers, ask a user to run the [verification cURL from 
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-admin-setup.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

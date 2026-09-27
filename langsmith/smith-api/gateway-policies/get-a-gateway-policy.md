@@ -251,6 +251,13 @@ components:
           type: string
         created_by:
           type: string
+        current_spend:
+          description: |-
+            CurrentSpend is the list of spends recorded for each of the
+            tracked spend limit windows, used in v2 of spend_cap policy type.
+          type: array
+          items:
+            $ref: '#/components/schemas/gateway_policies.SpendUsage'
         current_spend_usd:
           description: |-
             CurrentSpendUSD is the spend in the policy's current window. Set for
@@ -311,6 +318,15 @@ components:
       type: object
       properties:
         error:
+          type: string
+    gateway_policies.SpendUsage:
+      type: object
+      properties:
+        spend_usd:
+          description: SpendUSD is the spend recorded in this window.
+          type: number
+        window:
+          description: Window is the spend limit period.
           type: string
     gateway_policies.RateLimitUsage:
       type: object

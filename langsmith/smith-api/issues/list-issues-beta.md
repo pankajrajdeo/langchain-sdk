@@ -228,6 +228,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - 0
@@ -235,7 +236,6 @@ paths:
                 - 2
                 - 3
               type: integer
-            type: array
             title: Severity Exact
         - description: Filter by Engine activity (repeatable; OR semantics)
           name: activity
@@ -243,13 +243,13 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - fixing
                 - watching
                 - recurred
               type: string
-            type: array
             title: Activity
         - description: Filter by tag (exact match)
           name: tag
@@ -362,18 +362,37 @@ components:
           type: string
         description:
           type: string
+        evidence:
+          description: Nil for the trace-list issues that are the norm.
+          anyOf:
+            - allOf:
+                - $ref: '#/components/schemas/issues.Evidence'
+            - type: 'null'
         first_seen_at:
           type: string
         fix_branch:
+          description: >-
+            Legacy: branch of the oldest fix in the board's oldest connected
+            repository.
           type: string
         fix_dispatched_at:
           type: string
         fix_pr_number:
           type: integer
         fix_prompt:
+          description: >-
+            Issue-level: the problem every fix shares, and the last time a fix
+            run
+
+            was dispatched for this issue — one run works several fixes.
           type: string
         fix_verification:
           $ref: '#/components/schemas/issues.IssueFixVerification'
+        fixes:
+          description: Newest first.
+          type: array
+          items:
+            $ref: '#/components/schemas/issues.Fix'
         id:
           type: string
         last_seen_at:
@@ -431,15 +450,33 @@ components:
       properties:
         error:
           type: string
+    issues.Evidence:
+      type: object
+      required:
+        - type
+      properties:
+        series:
+          $ref: '#/components/schemas/issues.SeriesEvidence'
+        type:
+          $ref: '#/components/schemas/issues.EvidenceType'
     issues.IssueFixVerification:
       type: object
       properties:
         attempt:
           type: integer
+        baseline_experiment_id:
+          type: string
+          format: uuid
+        dataset_id:
+          type: string
+          format: uuid
         parent_deployment_id:
           type: string
           format: uuid
         preview_deployment_id:
+          type: string
+          format: uuid
+        preview_experiment_id:
           type: string
           format: uuid
         reason:
@@ -458,6 +495,34 @@ components:
             - inconclusive
             - timeout
             - error
+        updated_at:
+          type: string
+          format: date-time
+    issues.Fix:
+      type: object
+      required:
+        - branch
+        - created_at
+        - id
+        - pr_number
+        - repo_url
+        - updated_at
+      properties:
+        branch:
+          anyOf:
+            - type: string
+            - type: 'null'
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        pr_number:
+          anyOf:
+            - type: integer
+            - type: 'null'
+        repo_url:
+          type: string
         updated_at:
           type: string
           format: date-time
@@ -529,9 +594,15 @@ components:
         active_revision_id:
           type: string
           format: uuid
+        baseline_experiment_id:
+          type: string
+          format: uuid
         completed_at:
           type: string
           format: date-time
+        dataset_id:
+          type: string
+          format: uuid
         deployment_id:
           type: string
           format: uuid
@@ -548,6 +619,167 @@ components:
           items:
             type: string
           type: array
+    issues.SeriesEvidence:
+      type: object
+      required:
+        - metric_definition
+      properties:
+        metric_definition:
+          $ref: '#/components/schemas/runsanalytics.MetricDefinition'
+        run_filter:
+          description: Narrows what is measured; the renderer ANDs its root scope over it.
+          type: string
+        window_end:
+          type: string
+          format: date-time
+        window_start:
+          description: >-
+            The view the chart opens at, not a clamp. Start alone renders start
+            -> now.
+          type: string
+          format: date-time
+    issues.EvidenceType:
+      type: string
+      enum:
+        - series
+      x-enum-varnames:
+        - EvidenceTypeSeries
+    runsanalytics.MetricDefinition:
+      type: object
+      required:
+        - type
+      properties:
+        denominator:
+          $ref: '#/components/schemas/runsanalytics.ScalarMetricDefinition'
+        entity:
+          description: >-
+            Entity selects what a type=count metric counts. Only valid when
+            type=count;
+
+            defaults to MetricEntityRun. entity=feedback requires
+            params.feedback_key
+
+            and counts individual feedback records rather than runs.
+          allOf:
+            - $ref: '#/components/schemas/runsanalytics.MetricEntity'
+        field:
+          $ref: '#/components/schemas/runsanalytics.MetricField'
+        numerator:
+          description: Numerator and Denominator are required when type=ratio.
+          allOf:
+            - $ref: '#/components/schemas/runsanalytics.ScalarMetricDefinition'
+        params:
+          description: percentile p or histogram bucket_count
+          allOf:
+            - $ref: '#/components/schemas/runsanalytics.MetricParams'
+        type:
+          description: >-
+            histogram is reserved and rejected; the tag publishes what is
+            accepted.
+          enum:
+            - count
+            - sum
+            - avg
+            - min
+            - max
+            - percentile
+            - ratio
+          allOf:
+            - $ref: '#/components/schemas/runsanalytics.MetricType'
+    runsanalytics.ScalarMetricDefinition:
+      type: object
+      required:
+        - type
+      properties:
+        entity:
+          description: >-
+            Entity selects what a type=count metric counts. Only valid when
+            type=count;
+
+            defaults to MetricEntityRun. entity=feedback requires
+            params.feedback_key
+
+            and counts individual feedback records rather than runs.
+          allOf:
+            - $ref: '#/components/schemas/runsanalytics.MetricEntity'
+        field:
+          $ref: '#/components/schemas/runsanalytics.MetricField'
+        filter:
+          type: string
+        params:
+          description: required when type=percentile
+          allOf:
+            - $ref: '#/components/schemas/runsanalytics.MetricParams'
+        type:
+          description: An operand is non-composite, so ratio is rejected here too.
+          enum:
+            - count
+            - sum
+            - avg
+            - min
+            - max
+            - percentile
+          allOf:
+            - $ref: '#/components/schemas/runsanalytics.MetricType'
+    runsanalytics.MetricEntity:
+      type: string
+      enum:
+        - run
+        - feedback
+      x-enum-varnames:
+        - MetricEntityRun
+        - MetricEntityFeedback
+    runsanalytics.MetricField:
+      type: string
+      enum:
+        - latency_seconds
+        - first_token_seconds
+        - total_tokens
+        - prompt_tokens
+        - completion_tokens
+        - total_cost
+        - prompt_cost
+        - completion_cost
+        - feedback_score
+      x-enum-varnames:
+        - MetricFieldLatencySeconds
+        - MetricFieldFirstTokenSeconds
+        - MetricFieldTotalTokens
+        - MetricFieldPromptTokens
+        - MetricFieldCompletionTokens
+        - MetricFieldTotalCost
+        - MetricFieldPromptCost
+        - MetricFieldCompletionCost
+        - MetricFieldFeedbackScore
+    runsanalytics.MetricParams:
+      type: object
+      properties:
+        bucket_count:
+          type: integer
+        feedback_key:
+          type: string
+        p:
+          type: number
+    runsanalytics.MetricType:
+      type: string
+      enum:
+        - count
+        - sum
+        - avg
+        - min
+        - max
+        - percentile
+        - ratio
+        - histogram
+      x-enum-varnames:
+        - MetricTypeCount
+        - MetricTypeSum
+        - MetricTypeAvg
+        - MetricTypeMin
+        - MetricTypeMax
+        - MetricTypePercentile
+        - MetricTypeRatio
+        - MetricTypeHistogram
   securitySchemes:
     API Key:
       type: apiKey

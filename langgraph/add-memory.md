@@ -1327,6 +1327,7 @@ builder.add_edge(START, "call_model")
 
 checkpointer = InMemorySaver()
 app = builder.compile(checkpointer=checkpointer)
+config = {"configurable": {"thread_id": "1"}}
 
 stream = app.stream_events(
     {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
@@ -1744,7 +1745,7 @@ We recommend running migrations as a dedicated deployment step, or you can ensur
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/add-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,6 @@
 ---
 title: "Delete annotation queue items"
-description: "Remove RUN or THREAD items from a single annotation queue by item ID."
+description: "Remove RUN or THREAD items from a single annotation queue by item ID. Both active and completed items can be removed."
 source: "https://docs.langchain.com/langsmith/smith-api/annotation_queues/delete-annotation-queue-items"
 category: "docs"
 tags: [docs, langsmith, smith-api, annotation_queues, delete-annotation-queue-items]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, annotation_queues, delete-annotation-queue-it
 
 # Delete annotation queue items
 
-> Remove RUN or THREAD items from a single annotation queue by item ID.
+> Remove RUN or THREAD items from a single annotation queue by item ID. Both active and completed items can be removed.
 
 ## OpenAPI
 
@@ -176,7 +176,9 @@ paths:
       tags:
         - annotation_queues
       summary: Delete annotation queue items
-      description: Remove RUN or THREAD items from a single annotation queue by item ID.
+      description: >-
+        Remove RUN or THREAD items from a single annotation queue by item ID.
+        Both active and completed items can be removed.
       parameters:
         - description: Annotation queue ID
           name: queue_id

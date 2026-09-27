@@ -229,16 +229,20 @@ components:
         - developer
         - developer_01_2026
         - developer_07_2026
+        - developer_10_2026
         - plus
         - plus_01_2026
         - plus_07_2026
+        - plus_10_2026
         - startup
         - startup_v0
         - startup_07_2026
+        - startup_10_2026
         - partner
         - premier
         - free
         - free_07_2026
+        - free_10_2026
       title: ChangePaymentPlanReq
       description: >-
         Enum for payment plans that the user can change to. Developer plans are

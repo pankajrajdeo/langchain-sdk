@@ -1,18 +1,18 @@
 ---
 title: "reference/python/deepagents/middleware"
-description: "Index of 9 pages and 15 subdirectories under reference/python/deepagents/middleware."
+description: "Index of 10 pages and 16 subdirectories under reference/python/deepagents/middleware."
 category: "index"
 tags: [index, reference, python, deepagents, middleware]
 ---
 
 # reference/python/deepagents/middleware
 
-9 pages here, 319 pages including subdirectories.
+10 pages here, 328 pages including subdirectories.
 
 ## Directories
 
 - [_fs_interrupt/](_fs_interrupt/_index.md) - 1 page
-- [_message_eviction/](_message_eviction/_index.md) - 1 page
+- [_message_eviction/](_message_eviction/_index.md) - 5 pages
 - [_prompt_caching/](_prompt_caching/_index.md) - 2 pages
 - [_state/](_state/_index.md) - 2 pages
 - [_utils/](_utils/_index.md) - 1 page
@@ -26,6 +26,7 @@ tags: [index, reference, python, deepagents, middleware]
 - [skills/](skills/_index.md) - 36 pages
 - [subagents/](subagents/_index.md) - 37 pages
 - [summarization/](summarization/_index.md) - 41 pages
+- [unsupported_content/](unsupported_content/_index.md) - 4 pages
 
 ## Files
 
@@ -38,3 +39,4 @@ tags: [index, reference, python, deepagents, middleware]
 - [skills](skills.md) - Skills middleware for loading and exposing agent skills to the system prompt.
 - [subagents](subagents.md) - Middleware for providing subagents to an agent via a task tool.
 - [summarization](summarization.md) - Summarization middleware for automatic and tool-based conversation compaction.
+- [unsupported_content](unsupported_content.md) - Replace input content blocks the active model can't accept.

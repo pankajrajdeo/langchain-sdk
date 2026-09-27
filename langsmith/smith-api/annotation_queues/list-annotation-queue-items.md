@@ -233,8 +233,8 @@ paths:
           name: min_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Min Start Time
         - description: >-
             Only items whose trace start time is at or before this timestamp.
@@ -242,8 +242,8 @@ paths:
           name: max_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Max Start Time
         - description: Pagination direction. backward requires cursor
           name: direction

@@ -14,61 +14,46 @@ This page covers all LangChain integrations with the [Amazon Web Services (AWS)]
 
 ## Chat models
 
-### Bedrock chat
+### Bedrock Mantle
+
+The [AWS Bedrock Mantle API](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-responses-api.html#bedrock-mantle-responses) exposes models through the OpenAI and Anthropic Messages protocols. `ChatOpenAIMantle` and `ChatAnthropicMantle` are the recommended interfaces for accessing these models.
+
+Both classes accept a Bedrock API key via the `bedrock_api_key` parameter or the `AWS_BEARER_TOKEN_BEDROCK` environment variable. When neither is available, both derive short-lived API keys from standard AWS credentials and refresh them transparently.
+
+`ChatOpenAIMantle` inherits from `BaseChatOpenAI`. See the corresponding [Responses API docs](../chat/openai.md#responses-api) for usage examples and capabilities. Refer to the [AWS Mantle OpenAI-compatible API docs](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-responses-api.html#bedrock-mantle-responses) for supported models.
+
+`ChatAnthropicMantle` inherits from `ChatAnthropic` and targets the Anthropic Messages endpoint on Mantle. See the [`ChatAnthropic`](../chat/anthropic.md) docs for usage examples and capabilities. Refer to the [AWS Mantle Anthropic API docs](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-anthropic-claude-messages.html) for supported models.
+
+```python
+from langchain_aws import ChatOpenAIMantle, ChatAnthropicMantle
+
+openai_model = ChatOpenAIMantle(
+    model="openai.gpt-5.6-luna",
+    region_name="us-east-1",
+)
+
+anthropic_model = ChatAnthropicMantle(
+    model="anthropic.claude-opus-5-5",
+    region_name="us-east-1",
+)
+```
+
+### Bedrock Converse
 
 > [Amazon Bedrock](https://aws.amazon.com/bedrock/) is a fully managed service that offers a choice of
 > high-performing foundation models (FMs) from leading AI companies like `AI21 Labs`, `Anthropic`, `Cohere`,
-> `Meta`, `Stability AI`, and `Amazon` via a single API, along with a broad set of capabilities you need to
-> build generative AI applications with security, privacy, and responsible AI. Using `Amazon Bedrock`,
-> you can easily experiment with and evaluate top FMs for your use case, privately customize them with
-> your data using techniques such as fine-tuning and `Retrieval Augmented Generation` (`RAG`), and build
-> agents that execute tasks using your enterprise systems and data sources. Since `Amazon Bedrock` is
+> `Meta`, `OpenAI`, `Stability AI`, and `Amazon` via a single API. Since `Amazon Bedrock` is
 > serverless, you don't have to manage any infrastructure, and you can securely integrate and deploy
 > generative AI capabilities into your applications using the AWS services you are already familiar with.
 
-See a [usage example](../chat/bedrock.md).
-
-```python
-from langchain_aws import ChatBedrock
-```
-
-### Bedrock converse
-
 AWS Bedrock maintains a [Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html)
-that provides a unified conversational interface for Bedrock models. This API does not
-yet support custom models. You can see a list of all
+that provides a unified conversational interface for Bedrock models. You can see a list of all
 [models that are supported here](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html).
-
-> [!NOTE]
-> **We recommend the Converse API for users who do not need to use custom models. It can be accessed using [ChatBedrockConverse](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse).**
 
 See a [usage example](../chat/bedrock.md).
 
 ```python
 from langchain_aws import ChatBedrockConverse
-```
-
-## LLMs
-
-### Bedrock
-
-See a [usage example](../llms/bedrock.md).
-
-```python
-from langchain_aws import BedrockLLM
-```
-
-### SageMaker endpoint
-
-> [Amazon SageMaker](https://aws.amazon.com/sagemaker/) is a system that can build, train, and deploy
-> machine learning (ML) models with fully managed infrastructure, tools, and workflows.
-
-We use `SageMaker` to host our model and expose it as the `SageMaker Endpoint`.
-
-See a [usage example](../llms/sagemaker.md).
-
-```python
-from langchain_aws import SagemakerEndpoint
 ```
 
 ## Embedding models
@@ -216,6 +201,43 @@ result = await agent.ainvoke(
 
 # Cleanup when done
 await toolkit.cleanup()
+```
+
+### Amazon Bedrock AgentCore Web Search
+
+[Amazon Bedrock AgentCore Web Search](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/gateway-target-connector-web-search-tool.html) gives agents current information from the web with a source URL on every result, authenticated with your AWS credentials rather than a search API key.
+
+**pip**
+
+```bash
+pip install langchain-aws bedrock-agentcore
+```
+
+**uv**
+
+```bash
+uv add langchain-aws bedrock-agentcore
+```
+
+See a [usage example](../tools/bedrock_agentcore_web_search.md).
+
+```python
+from langchain.agents import create_agent
+from langchain_aws.tools import create_web_search_toolkit
+
+# Needs a gateway with a web search connector target. The factory is synchronous.
+toolkit, tools = create_web_search_toolkit(
+    region="us-east-1",
+    gateway_id="my-web-search-gateway-abc123",
+)
+
+try:
+    agent = create_agent(model=llm, tools=tools)
+    result = agent.invoke(
+        {"messages": [{"role": "user", "content": "What changed in the most recent boto3 release?"}]}
+    )
+finally:
+    toolkit.close()
 ```
 
 ## Sandboxes
@@ -409,7 +431,7 @@ agentcore launch -e your_agent.py
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -33,6 +33,9 @@ Discovery and trust registry tools for verifying counterpart AI agents before th
 #### [Alephant AI](https://alephant.io/)
 AI gateway for cost control, BYOK routing, and multi-provider model access.
 
+#### [Algenta](https://github.com/thyn-ai/algenta-integrations/tree/main/python/langchain-algenta#readme)
+Governed tool execution for LangChain agents: `create_algenta_tools` exposes a self-hosted Algenta decision engine's MCP tool surface as `BaseTool`s with profile-based filtering (`observe`/`govern`/`execute`/`full`), typed execution receipts, and synchronous policy-gate denials on real-world execution.
+
 #### [AlphaAI](https://alphai.io/developers)
 AI-scored financial news and SEC Form 4 insider events for agents and RAG.
 
@@ -165,8 +168,11 @@ Runtime detection of prompt injection, tool poisoning, and unsafe tool calls usi
 #### [Asqav](https://asqav.com/docs)
 AI agent governance with audit trails, policy enforcement, and compliance.
 
-#### [Atomic Mail](https://atomic-mail.github.io/atomic-mail-agentic/langchain)
-JMAP inboxes for AI agents with proof-of-work signup and tools for registration, mail operations, and help.
+#### [Asyntai](https://asyntai.com/documentation/integrations/langchain/)
+Asyntai is a hosted AI chat agent for websites; langchain-asyntai provides tools to query a site's indexed pages and product feed, to add pages and notes to its knowledge base, and to read its leads and chat transcripts.
+
+#### [Atomic Mail](https://docs.atomicmail.ai/langchain)
+Email toolkit that provisions an agent-owned inbox by proof of work and sends and receives over JMAP.
 
 #### [Attenu Guard](https://attenu.io/docs/example-langgraph/)
 Per-agent tool-call and subagent permission enforcement with a hash-chained audit log.
@@ -240,6 +246,9 @@ AI compute platform with specialized processors.
 #### [Ceki](https://ceki.me)
 Marketplace of real residential Chrome sessions for AI agents.
 
+#### [Cheaper Inference](https://cheaperinference.com/docs)
+OpenAI-compatible LLM gateway that serves models from many labs below list price.
+
 #### [Chroma](chroma.md)
 Open-source embedding database for AI apps.
 
@@ -251,6 +260,9 @@ The scraper for SEO and AI SEO.
 
 #### [CopilotKit](../../langchain/frontend/integrations/copilotkit.md)
 React framework with prebuilt UI components for AI copilots.
+
+#### [CTRLRun](https://docs.ctrlrun.dev/guides/langchain-middleware)
+Execution safety for AI agents. Middleware that checks every tool call against a policy before it runs, holds the consequential ones for a human, and leaves a receipt.
 
 #### [Cloudflare](https://developers.cloudflare.com/workers-ai/)
 Web infrastructure and security services.
@@ -390,6 +402,9 @@ Distributed search and analytics engine.
 #### [EmpirioLabs AI](https://docs.empiriolabs.ai)
 Frontier open models through one OpenAI-compatible API.
 
+#### [EnConvert](https://github.com/enconvert/langchain-enconvert)
+Document loader that turns URLs or whole sites into Documents with a render\_quality score on every read.
+
 #### [Engram](https://docs.engram.ai/integrations/langchain)
 Cognitive memory infrastructure for AI agents: confidence scoring, contradiction detection, and memory lifecycle.
 
@@ -464,6 +479,9 @@ Greenhouse-gas emission factors from public publishers (DEFRA, US EPA, ADEME, IP
 
 #### [GreenNode](https://greennode.ai/)
 Sustainable AI computing platform.
+
+#### [GridGain](https://pypi.org/project/langgraph-checkpoint-gridgain/)
+GridGain persistence for LangGraph: a checkpointer for short-term thread state, a store for long-term cross-thread memory, and a node cache for compiled graphs.
 
 #### [Fireworks](fireworks.md)
 Fast inference for open and proprietary language models.
@@ -705,6 +723,9 @@ Open-source document parsing for PDFs and office files into Markdown.
 #### [Mixpeek](https://docs.mixpeek.com/agent-integrations/langchain)
 Multimodal search, ingest, and vector store for video, image, audio, and documents.
 
+#### [mnki (Agent Trust)](https://mnki.com/docs/integrations#frameworks)
+mnki (Agent Trust) verifies each LangChain or LangGraph tool call against the agent's delegated authority before it runs and records a signed evidence list per decision.
+
 #### [MLflow Tracking](mlflow_tracking.md)
 Experiment tracking and model registry.
 
@@ -819,6 +840,9 @@ ECM toolkits, loaders, and retrievers for Alfresco, Documentum, FileNet, and OnB
 #### [OpenGradient](https://docs.opengradient.ai/)
 AI model training and fine-tuning platform.
 
+#### [OpenInference](../callbacks/openinference.md)
+OpenTelemetry instrumentation that records LangChain and LangGraph operations using OpenInference semantic conventions.
+
 #### [OpenRouter](openrouter.md)
 Unified API for models from multiple providers.
 
@@ -842,6 +866,9 @@ Pay-per-call OpenAI-compatible chat models via a local x402 proxy.
 
 #### [Oracle AI Database](oracleai.md)
 Oracle's AI and machine learning services.
+
+#### [OrcaCallbackHandler](https://github.com/Continuum-AI-Corp/OrcaReplay/blob/main/python-langgraph/README.md)
+Records which LangGraph node ran, in which superstep, and how it ended, into a trace that replays offline with the provider unreachable.
 
 #### [Opedd](https://opedd.com/for-ai-agents)
 Licensed, rights-cleared content for RAG and agents with verifiable license keys.
@@ -1040,6 +1067,9 @@ Unified search API across Google, Bing, Baidu, YouTube, and more.
 
 #### [seekrit](https://seekrit.dev/docs)
 Zero-knowledge secrets manager. Scopes which credentials a model call or a given tool call may use.
+
+#### [Semantica](https://docs.getsemantica.ai/integrations/langchain)
+Semantica is an open-source knowledge-graph framework. Its LangChain integration ships inside the `semantica` package as the `langchain` extra (`pip install "semantica[langchain]"`) and provides `SemanticaRetriever`, which retrieves relevant context from a Semantica knowledge graph. The same extra also exposes `SemanticaVectorStore`, `SemanticaKGTool` and `SemanticaDecisionTool`; I am filing this one for the retriever and can file the vectorstore/tools listings separately if you would prefer them listed as well.
 
 #### [SereneDB](https://serenedb.com/docs/clients/langchain-serenedb)
 PostgreSQL-compatible vector database with native ANN and hybrid search.
@@ -1374,7 +1404,7 @@ Reference management and research tool.
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/all_providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

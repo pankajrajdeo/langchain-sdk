@@ -24,6 +24,7 @@ ExecuteOffloadResult(
     self,
     offloaded: bool,
     response: ExecuteResponse,
+    preview_has_truncation_marker: bool = False,
 )
 ```
 
@@ -34,6 +35,7 @@ __init__(
     self,
     offloaded: bool,
     response: ExecuteResponse,
+    preview_has_truncation_marker: bool = False,
 ) -> None
 ```
 
@@ -41,12 +43,14 @@ __init__(
 |------|------|
 | `offloaded` | `bool` |
 | `response` | `ExecuteResponse` |
+| `preview_has_truncation_marker` | `bool` |
 
 ## Properties
 
 - `offloaded`
 - `response`
+- `preview_has_truncation_marker`
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/backends/protocol.py#L850)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/backends/protocol.py#L850)

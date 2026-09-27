@@ -1,13 +1,13 @@
 ---
 title: "integrations/tools"
-description: "Index of 37 pages and 0 subdirectories under integrations/tools."
+description: "Index of 38 pages and 0 subdirectories under integrations/tools."
 category: "index"
 tags: [index, integrations, tools]
 ---
 
 # integrations/tools
 
-37 pages here.
+38 pages here.
 
 ## Files
 
@@ -17,6 +17,7 @@ tags: [index, integrations, tools]
 - [Azure Logic Apps integration](azure_logic_apps.md) - Integrate with Azure Logic Apps using LangChain Python.
 - [Amazon Bedrock agentcore browser integration](bedrock_agentcore_browser.md) - Integrate with the Amazon Bedrock agentcore browser tool using LangChain Python.
 - [Amazon Bedrock agentcore code interpreter integration](bedrock_agentcore_code_interpreter.md) - Integrate with the Amazon Bedrock agentcore code interpreter tool using LangChain Python.
+- [Amazon Bedrock AgentCore Web Search integration](bedrock_agentcore_web_search.md) - Integrate with the Amazon Bedrock AgentCore Web Search tool using LangChain Python.
 - [Cdp agentkit toolkit integration](cdp_agentkit.md) - Integrate with the Cdp agentkit toolkit using LangChain Python.
 - [Composio integration](composio.md) - Give agents secure access to 1,000+ toolkits and 20,000+ tools through Composio's unified API platform, with OAuth handling, event-driven workflows, and multi-user support.
 - [Databricks unity catalog (Uc) integration](databricks.md) - Integrate with the Databricks unity catalog (Uc) tool using LangChain Python.

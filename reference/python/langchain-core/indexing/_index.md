@@ -22,4 +22,4 @@ tags: [index, reference, python, langchain-core, indexing]
 - [base](base.md) - Base classes for indexing.
 - [import_attr](import_attr.md) - Import an attribute from a module located in a package.
 - [in_memory](in_memory.md) - In memory document index.
-- [index](index.md) - Index data from the loader into the vector store.
+- [index](index.md) - Index of block in aggregate response. Used during streaming.

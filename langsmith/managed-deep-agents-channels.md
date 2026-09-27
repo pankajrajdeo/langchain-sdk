@@ -83,6 +83,9 @@ A channel receives messages that start agent runs and delivers responses. An [MC
 #### [Slack](python/managed-deep-agents-channels-slack.md)
 Start runs from Slack mentions, direct messages, and thread replies.
 
+#### [HTTP](python/managed-deep-agents-channels-http.md)
+Start runs from any service that can send a JSON webhook.
+
 ## See also
 
 * [Identity](python/managed-deep-agents-identity.md): authenticate callers and scope channel runs to the resolved user.
@@ -93,7 +96,7 @@ Start runs from Slack mentions, direct messages, and thread replies.
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

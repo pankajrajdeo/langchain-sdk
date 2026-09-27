@@ -12,7 +12,7 @@ tags: [index, integrations]
 ## Directories
 
 - [agents/](agents/_index.md) - 1 page
-- [callbacks/](callbacks/_index.md) - 2 pages
+- [callbacks/](callbacks/_index.md) - 3 pages
 - [chains/](chains/_index.md) - 1 page
 - [chat/](chat/_index.md) - 36 pages
 - [chat_message_histories/](chat_message_histories/_index.md) - 1 page
@@ -21,7 +21,7 @@ tags: [index, integrations]
 - [document_transformers/](document_transformers/_index.md) - 5 pages
 - [embeddings/](embeddings/_index.md) - 27 pages
 - [graphs/](graphs/_index.md) - 6 pages
-- [llms/](llms/_index.md) - 16 pages
+- [llms/](llms/_index.md) - 14 pages
 - [long-term-memory/](long-term-memory/_index.md) - 1 page
 - [memory/](memory/_index.md) - 2 pages
 - [middleware/](middleware/_index.md) - 5 pages
@@ -30,7 +30,7 @@ tags: [index, integrations]
 - [sandboxes/](sandboxes/_index.md) - 4 pages
 - [splitters/](splitters/_index.md) - 7 pages
 - [stores/](stores/_index.md) - 5 pages
-- [tools/](tools/_index.md) - 37 pages
+- [tools/](tools/_index.md) - 38 pages
 - [vectorstores/](vectorstores/_index.md) - 32 pages
 
 ## Files

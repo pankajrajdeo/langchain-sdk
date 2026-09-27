@@ -140,7 +140,10 @@ LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
 OPENAI_API_KEY=<OPENAI_API_KEY>
 GITHUB_MCP_TOKEN=<GITHUB_MCP_TOKEN>
 DATABASE_URL=<DATABASE_URL>
+MDA_INGRESS_SECRET=<MDA_INGRESS_SECRET>
 ```
+
+`MDA_INGRESS_SECRET` is required only when the project declares [backend identity](managed-deep-agents-identity.md#configure-identity-with-your-own-backend). Deploy fails preflight when that declaration is present and the value is missing.
 
 `LANGSMITH_API_KEY`, `LANGGRAPH_HOST_API_KEY`, `LANGCHAIN_API_KEY`, and other platform variables are reserved. They can authenticate the deploy, but they are not uploaded as user-managed deployment secrets.
 
@@ -179,7 +182,7 @@ Look up every `mda` command and flag.
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

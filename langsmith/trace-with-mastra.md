@@ -8,7 +8,7 @@ tags: [docs, langsmith, trace-with-mastra]
 
 # Trace Mastra applications
 
-[Mastra](https://mastra.ai/docs) is a TypeScript framework for building AI-powered applications and agents. Using Mastra’s [LangSmith exporter](https://mastra.ai/docs/observability/ai-tracing/exporters/langsmith), you can send traces from your Mastra agents and workflows to LangSmith for debugging, evaluation, and observability.
+[Mastra](https://mastra.ai/docs) is a TypeScript framework for building AI-powered applications and agents. Using Mastra’s [LangSmith exporter](https://mastra.ai/reference/observability/tracing/exporters/langsmith), you can send traces from your Mastra agents and workflows to LangSmith for debugging, evaluation, and observability.
 
 This guide shows you how to integrate Mastra with LangSmith using Mastra’s AI tracing system.
 
@@ -85,11 +85,11 @@ export const mastra = new Mastra({
 });
 ```
 
-* [Storage is required for tracing](https://mastra.ai/docs/observability/ai-tracing/overview#basic-config) (even when exporting traces externally).
+* [Storage is required for tracing](https://mastra.ai/docs/observability/integrations/exporters/mastra-storage) (even when exporting traces externally).
 * The LangSmith exporter reads credentials from environment variables.
 * The [deprecated telemetry system](https://mastra.ai/docs/observability/overview#otel-tracing-deprecated) is disabled to avoid warnings.
 * No separate instrumentation file is required when running Mastra outside of the Mastra server.
-  For more details, refer to the [Mastra docs](https://mastra.ai/docs/observability/ai-tracing/overview).
+  For more details, refer to the [Mastra docs](https://mastra.ai/docs/observability/overview).
 
 ### Define an agent
 
@@ -146,7 +146,7 @@ You’ll be able to inspect:
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-mastra.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

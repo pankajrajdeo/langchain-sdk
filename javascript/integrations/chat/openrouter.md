@@ -45,7 +45,7 @@ Head to the [OpenRouter keys page](https://openrouter.ai/settings/keys) to sign 
 export OPENROUTER_API_KEY="your-api-key"
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](../../../langsmith/observability.md) API key:
+Optionally, enable tracing of your model calls with [LangSmith](../../../langsmith/observability.md) by setting the following environment variables:
 
 ```bash
 # export LANGSMITH_TRACING="true"
@@ -480,7 +480,7 @@ For more information about OpenRouter's platform, models, and features, see the 
 ***
 
 > [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

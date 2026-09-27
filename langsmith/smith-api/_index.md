@@ -7,7 +7,7 @@ tags: [index, langsmith, smith-api]
 
 # langsmith/smith-api
 
-0 pages here, 551 pages including subdirectories.
+0 pages here, 555 pages including subdirectories.
 
 ## Directories
 
@@ -21,11 +21,11 @@ tags: [index, langsmith, smith-api]
 - [auth/](auth/_index.md) - 7 pages
 - [aws_marketplace/](aws_marketplace/_index.md) - 1 page
 - [backfills/](backfills/_index.md) - 1 page
-- [bulk-exports/](bulk-exports/_index.md) - 11 pages
+- [bulk-exports/](bulk-exports/_index.md) - 12 pages
 - [charts/](charts/_index.md) - 23 pages
 - [comments/](comments/_index.md) - 6 pages
 - [commits/](commits/_index.md) - 3 pages
-- [data_planes/](data_planes/_index.md) - 4 pages
+- [data_planes/](data_planes/_index.md) - 5 pages
 - [datasets/](datasets/_index.md) - 30 pages
 - [directories/](directories/_index.md) - 3 pages
 - [evaluators/](evaluators/_index.md) - 7 pages
@@ -58,7 +58,7 @@ tags: [index, langsmith, smith-api]
 - [repos/](repos/_index.md) - 9 pages
 - [run/](run/_index.md) - 23 pages
 - [runs/](runs/_index.md) - 13 pages
-- [sandboxes/](sandboxes/_index.md) - 34 pages
+- [sandboxes/](sandboxes/_index.md) - 36 pages
 - [scim-tokens/](scim-tokens/_index.md) - 5 pages
 - [service-accounts/](service-accounts/_index.md) - 3 pages
 - [sessions/](sessions/_index.md) - 1 page

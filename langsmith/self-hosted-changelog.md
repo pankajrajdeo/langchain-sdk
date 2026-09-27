@@ -13,6 +13,87 @@ tags: [docs, langsmith, self-hosted-changelog]
 
 [Self-hosted LangSmith](self-hosted.md) is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
 
+## 2026-09-23
+## langsmith-0.16.32
+
+**LangSmith version:** `0.16.65`
+
+* Evaluator column headers in the experiments table no longer truncated at a fixed width—widening a column revealed the complete evaluator name, and dragging a column now changes its width immediately, instead of appearing to do nothing.
+
+**Download the Helm chart:** [`langsmith-0.16.32.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.32/langsmith-0.16.32.tgz)
+
+## 2026-09-23
+## langsmith-0.17.0-rc.39
+
+**LangSmith version:** `0.17.25rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.33. Refer to the [langsmith-0.17.0-rc.33](#langsmith-0-17-0-rc-33) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.39.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.39/langsmith-0.17.0-rc.39.tgz)
+
+## 2026-09-22
+## langsmith-0.17.0-rc.38
+
+**LangSmith version:** `0.17.25rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.33. Refer to the [langsmith-0.17.0-rc.33](#langsmith-0-17-0-rc-33) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.38.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.38/langsmith-0.17.0-rc.38.tgz)
+
+## 2026-09-22
+## langsmith-0.16.31
+
+**LangSmith version:** `0.16.63`
+
+* Internal improvements and maintenance updates
+
+**Download the Helm chart:** [`langsmith-0.16.31.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.31/langsmith-0.16.31.tgz)
+
+## 2026-09-22
+## langsmith-0.16.30
+
+**LangSmith version:** `0.16.62`
+
+* Internal improvements and maintenance updates
+
+**Download the Helm chart:** [`langsmith-0.16.30.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.30/langsmith-0.16.30.tgz)
+
+## 2026-09-22
+## langsmith-0.17.0-rc.37
+
+**LangSmith version:** `0.17.25rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.33. Refer to the [langsmith-0.17.0-rc.33](#langsmith-0-17-0-rc-33) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.37.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.37/langsmith-0.17.0-rc.37.tgz)
+
+## 2026-09-21
+## langsmith-0.16.29
+
+**LangSmith version:** `0.16.61`
+
+* Internal improvements and maintenance updates
+
+**Download the Helm chart:** [`langsmith-0.16.29.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.29/langsmith-0.16.29.tgz)
+
+## 2026-09-19
+## langsmith-0.16.28
+
+**LangSmith version:** `0.16.60`
+
+* Internal improvements and maintenance updates
+
+**Download the Helm chart:** [`langsmith-0.16.28.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.28/langsmith-0.16.28.tgz)
+
+## 2026-09-19
+## langsmith-0.17.0-rc.36
+
+**LangSmith version:** `0.17.25rc1`
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.33. Refer to the [langsmith-0.17.0-rc.33](#langsmith-0-17-0-rc-33) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.36.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.36/langsmith-0.17.0-rc.36.tgz)
+
 ## 2026-09-18
 ## langsmith-0.16.27
 
@@ -3766,7 +3847,7 @@ These changes improve user interaction, enhance system performance, and expand s
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

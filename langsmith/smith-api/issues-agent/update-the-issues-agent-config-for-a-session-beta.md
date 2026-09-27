@@ -268,10 +268,15 @@ components:
         cron_enabled:
           type: boolean
         github_base_branch:
+          description: 'Legacy: ignored without github_repo_url.'
           type: string
         github_repo_subdir:
+          description: 'Legacy: ignored without github_repo_url.'
           type: string
         github_repo_url:
+          description: |-
+            Legacy: use the github-repos endpoints. Absent leaves repos alone,
+            "" unlinks all, otherwise replaces the list with the one repo named.
           type: string
         linear_integration:
           $ref: '#/components/schemas/agent.LinearIntegrationPatch'
@@ -305,6 +310,14 @@ components:
 
             string to preserve NUMERIC precision.
           type: string
+        target_auth:
+          description: >-
+            TargetAuth replaces validation-deployment authentication. Header
+            values
+
+            are write-only.
+          allOf:
+            - $ref: '#/components/schemas/agent.TargetAuthInput'
         user_instructions:
           description: >-
             Freeform user preferences. Send "" to clear (the frontend must not
@@ -356,11 +369,18 @@ components:
         engine_version:
           type: string
         github_base_branch:
+          description: 'Legacy: aliases the oldest entry in GithubRepos.'
           type: string
         github_repo_subdir:
+          description: 'Legacy: aliases the oldest entry in GithubRepos.'
           type: string
         github_repo_url:
+          description: 'Legacy: aliases the oldest entry in GithubRepos.'
           type: string
+        github_repos:
+          type: array
+          items:
+            $ref: '#/components/schemas/agent.GithubRepo'
         id:
           type: string
         issue_count:
@@ -400,9 +420,16 @@ components:
             validateRunFilter.
           type: string
         selected_trace_count:
-          description: >-
-            SelectedTraceCount is the number of traces Engine inspected in the
-            last 14 days.
+          description: |-
+            Compatibility alias for selected_trace_count_last_14_days.
+            Deprecated: use selected_trace_count_last_14_days.
+          type: integer
+          deprecated: true
+        selected_trace_count_last_14_days:
+          description: The number of traces Engine inspected in the last 14 days.
+          type: integer
+        selected_trace_count_last_7_days:
+          description: The number of traces Engine inspected in the last 7 days.
           type: integer
         session_agent_overview_repo_id:
           type: string
@@ -426,6 +453,8 @@ components:
         session_name:
           description: JOINed from tracer_session
           type: string
+        target_auth:
+          $ref: '#/components/schemas/agent.TargetAuthStatus'
         tenant_id:
           type: string
         tenant_name:
@@ -476,6 +505,30 @@ components:
           type: string
         workspace_name:
           type: string
+    agent.TargetAuthInput:
+      type: object
+      properties:
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+    agent.GithubRepo:
+      type: object
+      properties:
+        base_branch:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        repo_url:
+          type: string
+        subdir:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
     agent.LinearIntegration:
       type: object
       properties:
@@ -508,6 +561,20 @@ components:
           type: integer
         synced:
           type: integer
+    agent.TargetAuthStatus:
+      type: object
+      properties:
+        has_unreadable_credentials:
+          description: >-
+            True when a credential is stored but cannot be read back, so the UI
+            can
+
+            offer to replace it instead of showing an unconfigured board.
+          type: boolean
+        header_names:
+          items:
+            type: string
+          type: array
   securitySchemes:
     API Key:
       type: apiKey

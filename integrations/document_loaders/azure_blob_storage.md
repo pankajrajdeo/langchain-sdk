@@ -24,7 +24,7 @@ tags: [docs, integrations, document_loaders, azure_blob_storage]
 This notebook covers how to load document objects from a container on `Azure Blob Storage`. For more detailed documentation on the document loader, see the [Azure Blob Storage Loader API Reference](https://reference.langchain.com/python/integrations/langchain_azure/storage/).
 
 > [!NOTE]
-> It is recommended to use this new loader over the previous [`AzureBlobStorageFileLoader`](https://reference.langchain.com/python/langchain-community/document_loaders/azure_blob_storage_file/AzureBlobStorageFileLoader) and [`AzureBlobStorageContainerLoader`](https://reference.langchain.com/python/langchain-community/document_loaders/azure_blob_storage_container/AzureBlobStorageContainerLoader) from `langchain_community`. For detailed instructions on migrating to the new loader, refer to the [migration guide](https://github.com/langchain-ai/langchain-azure/blob/main/libs/azure-storage/README.md#migrating-from-langchain-community-azure-storage-document-loaders)
+> It is recommended to use this new loader over the previous [`AzureBlobStorageFileLoader`](https://reference.langchain.com/python/langchain-azure-storage/document_loaders/AzureBlobStorageLoader) and [`AzureBlobStorageContainerLoader`](https://reference.langchain.com/python/langchain-azure-storage/document_loaders/AzureBlobStorageLoader) from `langchain_community`. For detailed instructions on migrating to the new loader, refer to the [migration guide](https://github.com/langchain-ai/langchain-azure/blob/main/libs/azure-storage/README.md#migrating-from-langchain-community-azure-storage-document-loaders)
 
 ## Setup
 
@@ -109,7 +109,7 @@ Currently, the default when parsing each blob is to return the content as a sing
 
 This works by downloading the blob content to a temporary file. The `loader_factory` then gets called with the filepath to use the specified document loader to load/parse the file and return the [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) object(s).
 
-Below shows how to override the default loader used to parse blobs as PDFs using the [PyPDFLoader](https://reference.langchain.com/python/langchain-community/document_loaders/pdf/PyPDFLoader):
+Below shows how to override the default loader used to parse blobs as PDFs using the [PyPDFLoader](https://reference.langchain.com/python/langchain-classic/document_loaders):
 
 > [!WARNING]
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
@@ -155,7 +155,7 @@ for doc in loader.lazy_load():
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/azure_blob_storage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -43,7 +43,7 @@ You can create an evaluator in the [LangSmith UI](https://smith.langchain.com?ut
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluators), select **Evaluators** in the left sidebar.
 2. Click **+ Evaluator** to open the new evaluator panel.
 3. The panel lets you:
-   * **Create from scratch**: Build a new [LLM-as-a-Judge](llm-as-judge.md) or [Code](online-evaluations-code.md) evaluator.
+   * **Create from scratch**: Build a new [LLM-as-a-Judge](llm-as-judge.md) or [Code](online-evaluations-code.md) evaluator. To use a [decision model](decision-model-evaluator.md) as the judge, select **LLM-as-a-Judge Evaluator**, then select a decision model.
    * **Add a LangChain Tuned Evaluator**: Attach a [specialized judge managed by LangChain](tuned-evaluators.md) to a compatible tracing project without configuring a prompt, model, or API key.
    * **Create from a template**: Start from a ready-made evaluator (also known as a prebuilt evaluator) for common evaluation patterns. A **Recommended** section surfaces popular templates first, followed by templates organized by the following categories:
 
@@ -62,6 +62,8 @@ You can also add an evaluator directly from a [tracing project](observability-co
 ### Create an evaluator with the SDK
 
 Use the LangSmith SDK to create evaluators programmatically. The SDK is available for [Python](smith-python-sdk.md) and [TypeScript](smith-js-ts-sdk.md). Evaluators created through the SDK appear in the **Evaluators** table alongside those created in the UI.
+
+The SDK does not support [decision model evaluators](decision-model-evaluator.md) yet. To create one, use the UI.
 
 > [!NOTE]
 > Managing evaluators through the SDK requires `langsmith>=0.9.8` (Python, PyPI) or `langsmith>=0.7.16` (TypeScript, npm).
@@ -173,7 +175,7 @@ You cannot delete an evaluator while it is attached to a tracing project or data
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

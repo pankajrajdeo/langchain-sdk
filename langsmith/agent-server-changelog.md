@@ -23,12 +23,258 @@ tags: [docs, langsmith, agent-server-changelog]
 
 Deployments use the newest `stable` version by default and are automatically updated to the newest `stable` version on each new revision. To pin to a specific version, set [`api_version`](cli.md#pinning-api-version) to the desired version in langgraph.json.
 
-## v0.13
+## v0.15
 
-Latest version: `0.13.0rc5`
+Latest version: `0.15.0rc5`
 
 > [!NOTE]
-> This minor line is still a release candidate. The last stable release is `0.12.6`.
+> This minor line is still a release candidate. The last stable release is `0.14.4`.
+
+### Changes
+
+#### Fixes
+
+* Expand `sse-starlette` compatibility to include the 3.4.x release line.
+* Thread-stream runs can route traces to an additional LangSmith project.
+* Add A2A task-only history responses with historyScope.
+* Support A2UI v0.9 clients that negotiate with standard A2A extension headers and canonical MIME types.
+* Fixed historical subgraph replay when using the gRPC checkpointer.
+* Fix gRPC checkpointer failures when private runtime config contains non-JSON values.
+* Fixed `/runs/wait`, `/runs/{run_id}/join` and the A2A task endpoint returning an empty `{"__interrupt__": []}` instead of the run's final state when the graph state merely contained the text `__interrupt__` (for example when a retrieval agent quoted documentation about interrupts).
+
+#### Security
+
+* Fix grpc-go security vulnerabilities by upgrading to 1.83.2.
+* Fix vulnerabilities reported in the embedded Datadog init binary by updating it to 1.10.4.
+* Refresh system packages when rebuilding Wolfi-based Python and Node Agent Server images.
+* Update bundled npm tooling to address vulnerabilities in tar, ip-address, and undici.
+* Backport Python dependency security updates and prevent obsolete Python package files from surviving upgrades.
+* Backport Go and Hono security dependency updates.
+
+<details>
+<summary>v0.15 releases</summary>
+
+## 2026-09-22
+## v0.15.0rc5
+
+### Fixes
+
+* Fixed `/runs/wait`, `/runs/{run_id}/join` and the A2A task endpoint returning an empty `{"__interrupt__": []}` instead of the run's final state when the graph state merely contained the text `__interrupt__` (for example when a retrieval agent quoted documentation about interrupts).
+
+## 2026-09-22
+## v0.15.0rc4
+
+### Security
+
+* Backport Python dependency security updates and prevent obsolete Python package files from surviving upgrades.
+* Backport Go and Hono security dependency updates.
+
+## 2026-09-20
+## v0.15.0rc3
+
+### Fixes
+
+* Fix gRPC checkpointer failures when private runtime config contains non-JSON values.
+
+### Security
+
+* Update bundled npm tooling to address vulnerabilities in tar, ip-address, and undici.
+
+## 2026-09-17
+## v0.15.0rc2
+
+### Fixes
+
+* Fixed historical subgraph replay when using the gRPC checkpointer.
+
+### Security
+
+* Refresh system packages when rebuilding Wolfi-based Python and Node Agent Server images.
+
+## 2026-09-09
+## v0.15.0rc1
+
+### Fixes
+
+* Expand `sse-starlette` compatibility to include the 3.4.x release line.
+* Thread-stream runs can route traces to an additional LangSmith project.
+* Add A2A task-only history responses with historyScope.
+* Support A2UI v0.9 clients that negotiate with standard A2A extension headers and canonical MIME types.
+
+### Security
+
+* Fix grpc-go security vulnerabilities by upgrading to 1.83.2.
+* Fix vulnerabilities reported in the embedded Datadog init binary by updating it to 1.10.4.
+
+</details>
+
+## v0.14
+
+Latest version: `0.14.4`
+
+### Changes
+
+#### New Features
+
+* Custom encryption (`LANGGRAPH_ENCRYPTION`) now works with the gRPC Postgres checkpointer (`PREFER_GRPC_CHECKPOINTER=true`). Existing AES-encrypted checkpoints remain readable when migrating to custom encryption.
+* Custom auth can now accept LangSmith API keys alongside the existing handler. Set `auth.allow_langsmith_api_keys: true` in `langgraph.json` (requires `LANGGRAPH_AUTH_TYPE=langsmith`). Requests with an `Authorization` header still go to custom auth. All others go to LangSmith (`x-api-key`). LangSmith-authenticated callers are have two parameters: ctx.user.identity = LangSmith user\_id (or missing) and ctx.permissions = \["authenticated"]. `@auth.on` handlers still run. Off by default.
+
+#### Fixes
+
+* Fixed delta-channel reconstruction dropping the writes stored at the checkpoint a channel seeds from when that checkpoint predates the channel's migration to DeltaChannel.
+* Custom encryption JSON handlers now receive an `EncryptionContext` matching the encrypted value. Checkpoint JSON columns use `field="metadata"` or `field="channel_values"`; run config metadata decrypts as `model="run"`, `field="metadata"`. Blob handlers are unchanged. Handlers ignoring model and field need no change, and the at-rest format is unchanged.
+* Fix duplicate queue scheduler startup for deployments that use a custom FastAPI or Starlette app.
+* Fixes webhook field allowlists.
+* Fixed intermittent run creation failures caused by thread lock contention with custom encryption.
+* Fixes a bug where the sweeper could fail for large back logs of pending runs.
+* Fixes a problem where runs.join did not respect the cancel\_on\_disconnect parameter.
+* Fixes v2 thread streaming failures caused by Redis Cluster `MOVED` redirects.
+* Fixed cancellation of JavaScript agent runs so signal-aware graph nodes, tools, and model calls stop after an interrupt.
+* Fixes a bug with historical subgraph replay.
+* Refresh system packages when rebuilding Wolfi-based Python and Node Agent Server images.
+* Fix gRPC checkpointer failures when private runtime config contains non-JSON values.
+
+#### Security
+
+* Fixes a bug where create\_run auth could be bypassed by a run using if\_not\_exists.
+* Fixed the default wildcard CORS policy so browser credentials are disabled unless trusted origins are configured.
+* Bumping @langchain/langgraph to `1.4.12` and @langchain/langgraph-checkpoint to `1.1.5` to resolve [GHSA-j87f-x5h5-gr75](https://github.com/langchain-ai/langgraphjs/security/advisories/GHSA-j87f-x5h5-gr75).
+* Patch AnyIO vulnerabilities in server dependencies, preserve HTTPS webhook compatibility, and prevent obsolete Python package files from surviving image upgrades.
+* Update bundled npm tooling to address dependency vulnerabilities in server images.
+
+<details>
+<summary>v0.14 releases</summary>
+
+## 2026-09-22
+## v0.14.4
+
+### Security
+
+* Patch AnyIO vulnerabilities in server dependencies, preserve HTTPS webhook compatibility, and prevent obsolete Python package files from surviving image upgrades.
+* Update bundled npm tooling to address dependency vulnerabilities in server images.
+
+## 2026-09-18
+## v0.14.3
+
+### Fixes
+
+* Fix gRPC checkpointer failures when private runtime config contains non-JSON values.
+
+## 2026-09-17
+## v0.14.2
+
+### Fixes
+
+* Refresh system packages when rebuilding Wolfi-based Python and Node Agent Server images.
+
+## 2026-09-14
+## v0.14.1
+
+### Fixes
+
+* Fixes a bug with historical subgraph replay.
+
+## 2026-09-08
+## v0.14.0
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-09-08
+## v0.14.0rc10
+
+### Fixes
+
+* Fixed cancellation of JavaScript agent runs so signal-aware graph nodes, tools, and model calls stop after an interrupt.
+
+## 2026-09-04
+## v0.14.0rc9
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-09-03
+## v0.14.0rc8
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-09-01
+## v0.14.0rc7
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-08-27
+## v0.14.0rc6
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-08-26
+## v0.14.0rc5
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-08-25
+## v0.14.0rc4
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-08-25
+## v0.14.0rc3
+
+## New Features
+
+* Custom auth can now accept LangSmith API keys alongside the existing handler. Set `auth.allow_langsmith_api_keys: true` in `langgraph.json` (requires `LANGGRAPH_AUTH_TYPE=langsmith`). Requests with an `Authorization` header still go to custom auth. All others go to LangSmith (`x-api-key`). LangSmith-authenticated callers are have two parameters: ctx.user.identity = LangSmith user\_id (or missing) and ctx.permissions = \["authenticated"]. `@auth.on` handlers still run. Off by default.
+
+### Fixes
+
+* Fixes v2 thread streaming failures caused by Redis Cluster `MOVED` redirects.
+
+## 2026-08-24
+## v0.14.0rc2
+
+### Fixes
+
+* Fixes a problem where runs.join did not respect the cancel\_on\_disconnect parameter.
+
+## 2026-08-21
+## v0.14.0rc1
+
+### New Features
+
+* Custom encryption (`LANGGRAPH_ENCRYPTION`) now works with the gRPC Postgres checkpointer (`PREFER_GRPC_CHECKPOINTER=true`). Existing AES-encrypted checkpoints remain readable when migrating to custom encryption.
+
+### Fixes
+
+* Fixed delta-channel reconstruction dropping the writes stored at the checkpoint a channel seeds from when that checkpoint predates the channel's migration to DeltaChannel.
+* Custom encryption JSON handlers now receive an `EncryptionContext` matching the encrypted value. Checkpoint JSON columns use `field="metadata"` or `field="channel_values"`; run config metadata decrypts as `model="run"`, `field="metadata"`. Blob handlers are unchanged. Handlers ignoring model and field need no change, and the at-rest format is unchanged.
+* Fix duplicate queue scheduler startup for deployments that use a custom FastAPI or Starlette app.
+* Fixes webhook field allowlists.
+* Fixed intermittent run creation failures caused by thread lock contention with custom encryption.
+* Fixes a bug where the sweeper could fail for large back logs of pending runs.
+
+### Security
+
+* Fixes a bug where create\_run auth could be bypassed by a run using if\_not\_exists.
+* Fixed the default wildcard CORS policy so browser credentials are disabled unless trusted origins are configured.
+* Bumping @langchain/langgraph to `1.4.12` and @langchain/langgraph-checkpoint to `1.1.5` to resolve [GHSA-j87f-x5h5-gr75](https://github.com/langchain-ai/langgraphjs/security/advisories/GHSA-j87f-x5h5-gr75).
+
+</details>
+
+## v0.13
+
+Latest version: `0.13.6`
 
 ### Changes
 
@@ -58,13 +304,79 @@ Latest version: `0.13.0rc5`
 * Reject Send.timeout in gRPC serialization to prevent silent loss of per-task timeout semantics.
 * Fix silent pruning failure for DeltaChannel threads when custom at-rest encryption is configured.
 * Restore A2A tool-result DataParts in task history and streamed status updates.
+* Restore support for `langgraph-sdk` versions starting at 0.3.5.
 
 #### Security
 
 * Enforce thread authorization filters during conditional thread creation on the Postgres runtime ([GHSA-747p-c922-m55f](https://github.com/langchain-ai/helm/security/advisories/GHSA-747p-c922-m55f)). Affected versions did not consistently apply custom `@auth` filters on this path, so an authenticated user who knew another user's thread ID could create a run against that thread and observe or modify its conversation state. Deployments using only the in-memory runtime were not affected.
+* Bumping @langchain/langgraph to 1.4.12 and @langchain/langgraph-checkpoint to 1.1.5 to resolve [GHSA-j87f-x5h5-gr75](https://github.com/langchain-ai/langgraphjs/security/advisories/GHSA-j87f-x5h5-gr75).
+* Fix grpc-go security vulnerabilities by upgrading to 1.83.2.
+* Fix vulnerabilities reported in the embedded Datadog init binary by updating it to 1.10.4.
+* Pin the optional OpenTelemetry tracer's Requests dependency to a patched version.
+* Update the Go toolchain to 1.26.8 and upgrade `golang.org/x/mod` to address checksum database verification vulnerabilities.
+* Backport patched Python and JavaScript dependencies to address security advisories.
+* Refresh system packages when rebuilding Wolfi-based Python and Node Agent Server images.
 
 <details>
 <summary>v0.13 releases</summary>
+
+## 2026-09-17
+## v0.13.6
+
+### Security
+
+* Refresh system packages when rebuilding Wolfi-based Python and Node Agent Server images.
+
+## 2026-09-15
+## v0.13.5
+
+### Security
+
+* Pin the optional OpenTelemetry tracer's Requests dependency to a patched version.
+* Update the Go toolchain to 1.26.8 and upgrade `golang.org/x/mod` to address checksum database verification vulnerabilities.
+* Backport patched Python and JavaScript dependencies to address security advisories.
+
+## 2026-09-04
+## v0.13.4
+
+### Security
+
+* Fix vulnerabilities reported in the embedded Datadog init binary by updating it to 1.10.4.
+
+## 2026-09-01
+## v0.13.3
+
+### Security
+
+* Fix grpc-go security vulnerabilities by upgrading to 1.83.2.
+
+## 2026-08-28
+## v0.13.2
+
+### Fixes
+
+* Restore support for `langgraph-sdk` versions starting at 0.3.5.
+
+## 2026-08-27
+## v0.13.1
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-08-20
+## v0.13.0
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-08-20
+## v0.13.0rc6
+
+### Security
+
+* Bumping @langchain/langgraph to 1.4.12 and @langchain/langgraph-checkpoint to 1.1.5 to resolve [GHSA-j87f-x5h5-gr75](https://github.com/langchain-ai/langgraphjs/security/advisories/GHSA-j87f-x5h5-gr75).
 
 ## 2026-08-17
 ## v0.13.0rc5
@@ -95,7 +407,7 @@ Latest version: `0.13.0rc5`
 ## 2026-08-06
 ## v0.13.0rc2
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
@@ -129,7 +441,7 @@ Latest version: `0.13.0rc5`
 
 ## v0.12
 
-Latest version: `0.12.6`
+Latest version: `0.12.12`
 
 ### Changes
 
@@ -171,6 +483,7 @@ Latest version: `0.12.6`
 * Fix store search and list\_namespaces to match namespace segments exactly and treat `_` and `%` as literal characters.
 * Fix JS graph checkpointer failures when tool routing uses Send objects.
 * Fix A2A streaming to return final outputs as Artifacts before terminal status and restrict task history to public client and agent conversation turns.
+* Restore support for `langgraph-sdk` versions starting at 0.3.5.
 
 #### Security
 
@@ -178,6 +491,12 @@ Latest version: `0.12.6`
 * Enable FIPS 140-3 compliance by default in the Go core-server.
 * Enable FIPS mode for Node.js crypto in Wolfi/Chainguard FIPS Agent Server images by linking the base image's FIPS-validated OpenSSL provider.
 * Enforce thread authorization filters during conditional thread creation on the Postgres runtime ([GHSA-747p-c922-m55f](https://github.com/langchain-ai/helm/security/advisories/GHSA-747p-c922-m55f)). Affected versions did not consistently apply custom `@auth` filters on this path, so an authenticated user who knew another user's thread ID could create a run against that thread and observe or modify its conversation state. Deployments using only the in-memory runtime were not affected.
+* Bumping @langchain/langgraph to 1.4.12 and @langchain/langgraph-checkpoint to 1.1.5 to resolve [GHSA-j87f-x5h5-gr75](https://github.com/langchain-ai/langgraphjs/security/advisories/GHSA-j87f-x5h5-gr75).
+* Fix grpc-go security vulnerabilities by upgrading to 1.83.2.
+* Fix vulnerabilities reported in the embedded Datadog init binary by updating it to 1.10.4.
+* Refresh system packages when rebuilding Wolfi-based Python and Node Agent Server images.
+* Patch AnyIO vulnerabilities in server dependencies, preserve HTTPS webhook compatibility, and prevent obsolete Python package files from surviving image upgrades.
+* Update bundled npm tooling to address dependency vulnerabilities in server images.
 
 #### General Notes
 
@@ -186,10 +505,54 @@ Latest version: `0.12.6`
 <details>
 <summary>v0.12 releases</summary>
 
+## 2026-09-22
+## v0.12.12
+
+### Security
+
+* Patch AnyIO vulnerabilities in server dependencies, preserve HTTPS webhook compatibility, and prevent obsolete Python package files from surviving image upgrades.
+* Update bundled npm tooling to address dependency vulnerabilities in server images.
+
+## 2026-09-17
+## v0.12.11
+
+### Security
+
+* Refresh system packages when rebuilding Wolfi-based Python and Node Agent Server images.
+
+## 2026-09-15
+## v0.12.10
+
+### Security
+
+* Fix grpc-go security vulnerabilities by upgrading to 1.83.2.
+* Fix vulnerabilities reported in the embedded Datadog init binary by updating it to 1.10.4.
+
+## 2026-08-28
+## v0.12.9
+
+### Fixes
+
+* Restore support for `langgraph-sdk` versions starting at 0.3.5.
+
+## 2026-08-27
+## v0.12.8
+
+### Security
+
+* Includes dependency and security maintenance updates.
+
+## 2026-08-20
+## v0.12.7
+
+### Security
+
+* Bumping @langchain/langgraph to 1.4.12 and @langchain/langgraph-checkpoint to 1.1.5 to resolve [GHSA-j87f-x5h5-gr75](https://github.com/langchain-ai/langgraphjs/security/advisories/GHSA-j87f-x5h5-gr75).
+
 ## 2026-08-18
 ## v0.12.6
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
@@ -210,28 +573,28 @@ Latest version: `0.12.6`
 ## 2026-08-11
 ## v0.12.3
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
 ## 2026-08-09
 ## v0.12.2
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
 ## 2026-08-07
 ## v0.12.1
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
 ## 2026-08-04
 ## v0.12.0
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
@@ -245,7 +608,7 @@ Latest version: `0.12.6`
 ## 2026-08-04
 ## v0.12.0rc9
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
@@ -260,21 +623,21 @@ Latest version: `0.12.6`
 ## 2026-07-24
 ## v0.12.0rc7
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
 ## 2026-07-23
 ## v0.12.0rc6
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
 ## 2026-07-23
 ## v0.12.0rc5
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
@@ -348,7 +711,7 @@ Latest version: `0.12.6`
 
 ## v0.11
 
-Latest version: `0.11.3`
+Latest version: `0.11.4`
 
 ### Changes
 
@@ -369,6 +732,7 @@ Latest version: `0.11.3`
 
 #### Fixes
 
+* Bumping @langchain/langgraph to 1.4.12 and @langchain/langgraph-checkpoint to 1.1.5 to resolve [GHSA-j87f-x5h5-gr75](https://github.com/langchain-ai/langgraphjs/security/advisories/GHSA-j87f-x5h5-gr75).
 * Fixed protocol v2 runs on JS graphs failing silently. The sidecar rejected `streamEvents` with a 400 due to strict stream-mode validation, the error was swallowed, and runs falsely reported success with 0 nodes executed. Relaxed stream-mode validation at the HTTP boundary and now raise a clear error on non-2xx sidecar responses instead of masking the failure.
 * Fixed protocol v2 event streaming against JS sidecar (remote) graphs, which were incorrectly served through the legacy reconstruction path. Remote graphs now use LangGraphJS's native v3 stream for v2 event-streaming runs, resolving tool calls not rendering, headless interrupts never executing or resuming, and `400: tool_use ids must be unique` errors on the final message after a resume.
 * Delete run now skips checkpoint deletion for threads using DeltaChannel and removes only the run record. Checkpoints that store delta writes later checkpoints depend on are preserved. Use thread prune APIs to reclaim checkpoint storage on delta-channel threads.
@@ -400,6 +764,13 @@ Latest version: `0.11.3`
 <details>
 <summary>v0.11 releases</summary>
 
+## 2026-08-20
+## v0.11.4
+
+### Security
+
+* Bumping @langchain/langgraph to 1.4.12 and @langchain/langgraph-checkpoint to 1.1.5 to resolve [GHSA-j87f-x5h5-gr75](https://github.com/langchain-ai/langgraphjs/security/advisories/GHSA-j87f-x5h5-gr75).
+
 ## 2026-08-17
 ## v0.11.3
 
@@ -410,7 +781,7 @@ Latest version: `0.11.3`
 ## 2026-07-28
 ## v0.11.2
 
-### Fixes
+### Security
 
 * Includes dependency and security maintenance updates.
 
@@ -2411,7 +2782,7 @@ Added locking mechanism to prevent errors in pipelined executions.
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

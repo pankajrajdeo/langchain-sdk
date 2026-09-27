@@ -275,7 +275,7 @@ For deployments on earlier versions, run the [standalone LangSmith MCP Server](l
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-remote-mcp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

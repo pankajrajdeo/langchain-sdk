@@ -428,6 +428,7 @@ components:
         - read_bulk_export_destination
         - create_bulk_export_destination
         - update_bulk_export_destination
+        - delete_bulk_export_destination
         - update_ttl_settings
         - update_usage_limit
         - delete_usage_limit
@@ -502,6 +503,9 @@ components:
         - update_mcp_server
         - delete_mcp_server
         - register_mcp_server_oauth
+        - create_mcp_gateway
+        - update_mcp_gateway
+        - delete_mcp_gateway
         - create_credential
         - read_credential_secret
         - read_credential_oauth2
@@ -515,6 +519,7 @@ components:
         - create_agent_auth_oidc_integration
         - update_agent_auth_oidc_integration
         - delete_agent_auth_oidc_integration
+        - resolve_agent_auth_agent
         - create_tool
         - update_tool
         - delete_tool
@@ -555,6 +560,10 @@ components:
         - update_sandbox_policy
         - delete_sandbox_policy
         - create_computer_environment
+        - update_computer_environment
+        - archive_computer_environment
+        - update_fleet_feedback
+        - delete_fleet_feedback
         - list_sandbox_claims
         - get_sandbox_claim
         - get_sandbox_claim_status
@@ -768,6 +777,9 @@ components:
         - update_custom_app_share
         - update_custom_app_claim
         - download_custom_app_source
+        - create_custom_app_editing_credential
+        - create_custom_app_editing_sandbox
+        - delete_custom_app_editing_sandbox
         - test_op_generic
       title: AuditLogOperation
       description: Operations that are logged in audit_logs database table.
@@ -1205,6 +1217,15 @@ components:
           description: >-
             LangSmith user ID of the member the resource belonged to, set when
             that is not the actor.
+        delegated_from_sandbox_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Delegated From Sandbox Id
+          description: >-
+            Sandbox that made the call under an access-delegation grant, set
+            when the actor fields name its delegator rather than a user acting
+            directly.
       type: object
       title: AuditLogEnrichments
       description: Non-indexed request metadata stored in the enrichments JSONB column.

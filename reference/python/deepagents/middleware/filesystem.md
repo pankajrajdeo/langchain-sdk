@@ -19,7 +19,6 @@ Middleware for providing filesystem tools to an agent.
 - `GlobTruncationReason`
 - `MAX_VIDEO_INPUT_BYTES`
 - `FileType`
-- `TOO_LARGE_TOOL_MSG`
 - `FilesystemOperation`
 - `EMPTY_CONTENT_WARNING`
 - `NO_LINES_REQUESTED_WARNING`
@@ -45,10 +44,10 @@ Middleware for providing filesystem tools to an agent.
 - `EXECUTE_TOOL_DESCRIPTION`
 - `FsToolName`
 - `TOOLS_EXCLUDED_FROM_EVICTION`
-- `TOO_LARGE_HUMAN_MSG`
 
 ## Methods
 
+- [`warn_deprecated()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/warn_deprecated)
 - [`execute_accepts_timeout()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/execute_accepts_timeout)
 - [`check_empty_content()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/check_empty_content)
 - [`format_grep_matches()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/format_grep_matches)
@@ -63,4 +62,4 @@ Middleware for providing filesystem tools to an agent.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/middleware/filesystem.py)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/filesystem.py)

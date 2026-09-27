@@ -217,18 +217,18 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Resource Ids
         - description: Maximum rows to return
           name: page_size
           in: query
           schema:
             type: integer
-            maximum: 100
-            minimum: 1
             default: 20
+            minimum: 1
+            maximum: 100
             title: Page Size
         - description: >-
             HOUR returns hourly buckets. RESOURCE sums each resource over the

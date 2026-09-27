@@ -1,13 +1,13 @@
 ---
 title: "javascript/integrations/providers"
-description: "Index of 15 pages and 0 subdirectories under javascript/integrations/providers."
+description: "Index of 16 pages and 0 subdirectories under javascript/integrations/providers."
 category: "index"
 tags: [index, javascript, integrations, providers]
 ---
 
 # javascript/integrations/providers
 
-15 pages here.
+16 pages here.
 
 ## Files
 
@@ -26,3 +26,4 @@ tags: [index, javascript, integrations, providers]
 - [Sourcey integrations](sourcey.md) - Retrieve from published Sourcey docs sites using LangChain JavaScript.
 - [Supadata](supadata.md) - This page covers how to use the Supadata ecosystem within LangChain. It allows you to load data from YouTube, TikTok, and other platforms.
 - [Tavily integrations](tavily.md) - Integrate with Tavily using LangChain JavaScript.
+- [TypeSafe integrations](typesafe.md) - Integrate with TypeSafe using LangChain

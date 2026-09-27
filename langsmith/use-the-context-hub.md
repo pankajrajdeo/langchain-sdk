@@ -47,9 +47,7 @@ The middle panel shows the file tree for the current commit and the right panel 
 
 Markdown files open in **Preview**, which is a read-only rendering. To change a file, switch to the **Edit** tab in the top right of the right panel: it shows the exact text in the file. Save your changes to create a new commit.
 
-Each saved change creates a new **commit** in the **Commit History** panel on
-the left, so you can browse, compare, and revert prior versions without losing
-work.
+Each save creates a new **commit** in the history panel on the left. Select a commit to browse its files. At this time, Context Hub does not provide a file comparison view or an action to restore a prior version as the latest commit.
 
 ## 4. Tag and promote a commit
 
@@ -74,6 +72,8 @@ agents can pull it.
 
 Agent runtimes that resolve context by environment tag (for example, `:production`) now pull this promoted commit.
 
+To use a prior version in an environment, select that commit and promote it to `staging` or `production`. This moves the environment tag to the selected commit. It does not change the latest files or create a revert commit.
+
 ## Next steps
 
 * [Context engineering concepts](context-engineering-concepts.md): learn about skills, agents, versioning, and sharing.
@@ -84,7 +84,7 @@ Agent runtimes that resolve context by environment tag (for example, `:productio
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-the-context-hub.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

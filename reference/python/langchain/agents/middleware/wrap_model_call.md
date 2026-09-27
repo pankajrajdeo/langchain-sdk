@@ -1,6 +1,6 @@
 ---
 title: "wrap_model_call"
-description: "Intercept model execution and retry on failure."
+description: "Defer tools before invoking the model."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/wrap_model_call"
 category: "reference"
 tags: [reference, langchain, agents, middleware, wrap_model_call]
@@ -10,9 +10,9 @@ tags: [reference, langchain, agents, middleware, wrap_model_call]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/model_retry/ModelRetryMiddleware/wrap_model_call)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/provider_tool_search/ProviderToolSearchMiddleware/wrap_model_call)
 
-Intercept model execution and retry on failure.
+Defer tools before invoking the model.
 
 ## Signature
 
@@ -28,15 +28,15 @@ wrap_model_call(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `request` | `ModelRequest[ContextT]` | Yes | Model request with model, messages, state, and runtime. |
-| `handler` | `Callable[[ModelRequest[ContextT]], ModelResponse[ResponseT]]` | Yes | Callable to execute the model (can be called multiple times). |
+| `request` | `ModelRequest[ContextT]` | Yes | Model request to execute. |
+| `handler` | `Callable[[ModelRequest[ContextT]], ModelResponse[ResponseT]]` | Yes | Callback that executes the model request. |
 
 ## Returns
 
 `ModelResponse[ResponseT] | AIMessage`
 
-`ModelResponse` or `AIMessage` (the final result).
+The model call result.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a18de590e7ccf5c647fbf3d689e5f1a15f78e9f5/libs/langchain_v1/langchain/agents/middleware/model_retry.py#L221)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a18de590e7ccf5c647fbf3d689e5f1a15f78e9f5/libs/langchain_v1/langchain/agents/middleware/provider_tool_search.py#L156)

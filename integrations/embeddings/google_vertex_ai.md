@@ -69,7 +69,7 @@ import vertexai
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
+Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -174,7 +174,7 @@ For detailed documentation on `VertexAIEmbeddings` features and configuration op
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

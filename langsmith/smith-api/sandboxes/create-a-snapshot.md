@@ -1,6 +1,6 @@
 ---
 title: "Create a snapshot"
-description: "Create a snapshot from a Docker image (async build)."
+description: "Create a snapshot from a Docker image (async build). Names use lowercase registry-style components separated by slashes, up to 255 characters. The system/ namespace is read-only."
 source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/create-a-snapshot"
 category: "docs"
 tags: [docs, langsmith, smith-api, sandboxes, create-a-snapshot]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, sandboxes, create-a-snapshot]
 
 # Create a snapshot
 
-> Create a snapshot from a Docker image (async build).
+> Create a snapshot from a Docker image (async build). Names use lowercase registry-style components separated by slashes, up to 255 characters. The system/ namespace is read-only.
 
 ## OpenAPI
 
@@ -176,7 +176,10 @@ paths:
       tags:
         - sandboxes
       summary: Create a snapshot
-      description: Create a snapshot from a Docker image (async build).
+      description: >-
+        Create a snapshot from a Docker image (async build). Names use lowercase
+        registry-style components separated by slashes, up to 255 characters.
+        The system/ namespace is read-only.
       parameters: []
       requestBody:
         required: true

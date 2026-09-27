@@ -80,6 +80,10 @@ For details, refer to [Track and limit evaluator spend](evaluator-spend.md).
 
 View [LLM-as-a-judge evaluators](llm-as-judge.md#evaluator-templates) for more information.
 
+## Use a decision model as the judge
+
+You can use a decision model, such as SemIf or Jev, as the judge in place of an LLM. Each question you define returns a typed answer, such as a probability, a selected option, or a score, and LangSmith records each one under its own feedback key. See [Set up decision model online evaluators](online-evaluations-decision-models.md).
+
 ## Map multimodal content to evaluator
 
 If your traces contain multimodal content like images, audio, or documents, you can include this content in your evaluator prompts. There are two approaches:
@@ -105,7 +109,7 @@ The evaluator can then access these attachments when evaluating the trace. This 
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-llm-as-judge.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

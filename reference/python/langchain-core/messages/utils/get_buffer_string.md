@@ -37,6 +37,9 @@ get_buffer_string(
     If a message is an `AIMessage` and contains both tool calls under `tool_calls`
     and a function call under `additional_kwargs["function_call"]`, only the tool
     calls will be appended to the string representation.
+    In XML format, tool-call IDs longer than 64 characters are displayed
+    as the first 64 characters followed by `...`; the original messages
+    are not changed.
 
 !!! note "XML format"
 
@@ -139,4 +142,4 @@ A single string concatenation of all input messages.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/348c9dc572599947d2d7d33d6a5b8b936e92a1d4/libs/core/langchain_core/messages/utils.py#L287)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c5ab14d42a3e22865c9def909de0b11d70b0bbf0/libs/core/langchain_core/messages/utils.py#L297)

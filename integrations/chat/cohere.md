@@ -139,7 +139,7 @@ AIMessage(content='The value of magic_function(2) is 12.', additional_kwargs={'d
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

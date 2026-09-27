@@ -24,6 +24,7 @@ enable composition without fragile string parsing.
 - `EMPTY_CONTENT_WARNING`
 - `EMPTY_OLD_STRING_ERROR`
 - `MAX_VIDEO_INPUT_BYTES`
+- `TRUNCATION_MARKER_TEMPLATE`
 - `FileType`
 - `MAX_LINE_LENGTH`
 - `TOOL_RESULT_TOKEN_LIMIT`
@@ -53,4 +54,4 @@ enable composition without fragile string parsing.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/backends/utils.py)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/backends/utils.py)

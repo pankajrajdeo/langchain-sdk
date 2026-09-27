@@ -15,6 +15,16 @@ Weekly updates to [LangSmith Fleet](../fleet.md).
 > [!NOTE]
 > **Subscribe**: This changelog includes an [RSS feed](https://docs.langchain.com/langsmith/fleet-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
+## September 14-21, 2026
+## Fleet
+
+* Fleet now displays supported schedules in your browser's local time while storing and evaluating them in UTC. Custom cron expressions and unsupported monthly schedules are explicitly labeled as UTC.
+* Fleet agents on Amazon Bedrock no longer fail on every turn after a truncated tool call or a response containing only thinking is saved to the conversation. Affected conversations resume with the next message.
+* Fleet usage charts now show date labels based on the available chart width, keeping longer time ranges readable without overlapping labels.
+* Fleet thread updates now preserve system-managed ownership metadata across typed, bulk, and LangGraph proxy requests.
+* Fresh general-purpose chats and new agents prefer the available admin-configured default model over the last-used model. Users can still choose a different model for a chat, and the last-used model remains a fallback when no admin default is available.
+* Agent updates reject changes to the backend type or sandbox scope, matching the existing UI behavior. Create a new agent to use a different backend; other sandbox settings remain editable.
+
 ## September 7-14, 2026
 ## Fleet
 
@@ -407,7 +417,7 @@ Weekly updates to [LangSmith Fleet](../fleet.md).
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -49,6 +49,8 @@ Create a custom prompt inline for your evaluator.
 
 Select the desired model from the provided options.
 
+To use a decision model, such as SemIf or Jev, as the judge, see [How to define a decision model evaluator](decision-model-evaluator.md).
+
 ### Mapping variables
 
 Use variable mapping to indicate the variables that are passed into your evaluator prompt from your run or example. To aid with variable mapping, an example (or run) is provided for reference. Click on the variables in your prompt and use the dropdown to map them to the relevant parts of the input, output, or reference output.
@@ -90,7 +92,7 @@ Once you are finished configuring, save your changes.
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -281,6 +281,9 @@ components:
           type: boolean
           title: Pat Creation Disabled
           default: false
+        api_key_creation_from_api_keys_enabled:
+          type: boolean
+          title: Api Key Creation From Api Keys Enabled
         workspace_admin_can_invite_to_org:
           type: boolean
           title: Workspace Admin Can Invite To Org
@@ -394,18 +397,22 @@ components:
         - developer
         - developer_01_2026
         - developer_07_2026
+        - developer_10_2026
         - plus
         - plus_01_2026
         - plus_07_2026
+        - plus_10_2026
         - enterprise
         - developer_legacy
         - plus_legacy
         - free
         - free_07_2026
+        - free_10_2026
         - enterprise_legacy
         - startup
         - startup_v0
         - startup_07_2026
+        - startup_10_2026
         - partner
         - premier
       title: PaymentPlanTier

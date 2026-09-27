@@ -10,7 +10,7 @@ tags: [docs, langsmith, query-threads]
 
 > Programmatically fetch and inspect multi-turn conversation threads from your LangSmith projects.
 
-If you're building a conversational agent or any multi-turn application, LangSmith automatically groups your [runs](run-data-format.md) into [*threads*](observability-concepts.md#threads). Querying threads lets you replay full conversations, audit agent behavior across sessions, build analytics on conversation length and latency, and feed downstream workflows like fine-tuning and evaluation.
+If you're building a conversational agent or any multi-turn application, LangSmith automatically groups your [runs](run-data-format.md) into [*threads*](observability-concepts.md#threads). Querying threads lets you replay full conversations, audit agent behavior across sessions, build analytics on conversation length and latency, and feed downstream workflows like [fine-tuning](smithtune.md) and evaluation.
 
 The SDK exposes two methods for working with threads:
 
@@ -290,7 +290,7 @@ for (const run of runs) {
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/query-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

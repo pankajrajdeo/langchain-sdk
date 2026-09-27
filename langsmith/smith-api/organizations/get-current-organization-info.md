@@ -220,6 +220,8 @@ components:
     orgs.OrganizationInfo:
       type: object
       properties:
+        api_key_creation_from_api_keys_enabled:
+          type: boolean
         byoc_create_saas_workspace_enabled:
           type: boolean
         can_export_usage_backfill:
@@ -629,6 +631,28 @@ components:
             LLMGatewayEnabled indicates whether this org can use the LLM Gateway
             (admin UI and gateway policies).
           type: boolean
+        lmt_enabled:
+          description: >-
+            LMTEnabled indicates whether this org's plan entitles it to use
+            LangSmith
+
+            Managed Tools. Set by Metronome entitlement and required for all
+
+            Managed Tools APIs and MCP requests. Unset or false blocks access.
+          type: boolean
+        lmt_lsu_spend_limit_monthly:
+          description: >-
+            LMTLSUSpendLimitMonthly caps an org's monthly Managed Tools LSU
+            spend,
+
+            resolved from Metronome custom fields. Unset or zero blocks usage.
+
+            Negative means unlimited; positive values cap monthly LSU usage.
+
+            Per-org only, with no environment default.
+          anyOf:
+            - type: number
+            - type: 'null'
         max_agent_builder_assistants:
           description: >-
             MaxAgentBuilderAssistants is the maximum number of Agent Builder

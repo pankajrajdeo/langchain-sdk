@@ -75,6 +75,28 @@ curl https://<data_plane_host>/gateway/v1/chat/completions \
 
 The gateway applies the fallback chain configured for `anthropic/claude-opus-5` in the API key's workspace. If no chain matches, the gateway returns the primary model's response without attempting a fallback.
 
+## Set fallbacks for a prompt
+
+To give a prompt its own fallback chain, route it through a saved model configuration. The prompt references the configuration by name, while the gateway manages its fallback chain.
+
+Creating the configuration requires workspace admin permissions. Creating the fallback chain requires `organization:manage` permission.
+
+To configure fallbacks for a prompt:
+
+1. [Create a model configuration](model-configurations.md#create-a-configuration) pointing to the provider and model you want the prompt to use.
+
+2. [Create a fallback chain](#create-a-fallback-chain) in the same workspace. Select your saved configuration as the primary model, rather than selecting its underlying provider and model directly. Add the backup models, configure the triggers, and save the chain.
+
+3. [Create a prompt](create-a-prompt.md) in the Playground. Open **Model Configuration**, select **LangSmith Gateway** as the **Provider**, and enter `custom/<my_config_name>` in the **Model** field. Replace `<my_config_name>` with the saved configuration's name, without angle brackets. You can type the value even if it is not listed. Click **Apply**.
+
+   <img src="https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=6d628cfacd6bfbee2162ba9c69207940" alt="Model Configuration dialog with LangSmith Gateway selected as the provider and custom/<my_config_name> entered in the Model field." data-og-width="1666" width="1666" data-og-height="1342" height="1342" data-path="images/llm-gateway-prompt-model-configuration.png" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=280&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=79a50cf221f5eb09fe191d57b8e44b6e 280w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=560&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=b4facd8d11976a0e16491f504621a1e6 560w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=840&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=50976e2d807a4197cb20caef32b359ab 840w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=1100&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=d73ba952cfc1c72775a054cac1596370 1100w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=1650&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=15789b603483839b77f12171d3e2854b 1650w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=2500&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=7090e50a3520f0a0ad7c5fcbfbe22fcf 2500w" />
+
+4. **Save** the prompt, then [pull it with its model](manage-prompts-programmatically.md#pull-a-prompt). In Python, set `include_model=True` when calling `client.pull_prompt` so the saved Gateway model configuration is included.
+
+Invoke the pulled prompt with its saved model to send requests through the gateway and apply the configuration's fallback chain. Pulling only the prompt template does not include the model configuration.
+
+The fallback chain belongs to the model configuration, not the prompt itself. Prompts that reference the same configuration share its fallbacks. Use a separate configuration for each prompt that needs different fallback behavior.
+
 ## Choose fallback candidates
 
 You can add two types of fallback candidates:
@@ -94,7 +116,7 @@ For example, configure `anthropic/claude-opus-5` as the primary model, `openai/g
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-fallbacks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,6 @@
 ---
 title: "get_function_nonlocals"
-description: "Get the nonlocal variables accessed by a function."
+description: "Get the values a function reaches from outside its own scope."
 source: "https://reference.langchain.com/python/langgraph/pregel/_utils/get_function_nonlocals"
 category: "reference"
 tags: [reference, langgraph, pregel, utils, get_function_nonlocals]
@@ -12,7 +12,7 @@ tags: [reference, langgraph, pregel, utils, get_function_nonlocals]
 
 📖 [View in docs](https://reference.langchain.com/python/langgraph/pregel/_utils/get_function_nonlocals)
 
-Get the nonlocal variables accessed by a function.
+Get the values a function reaches from outside its own scope.
 
 ## Signature
 
@@ -32,8 +32,8 @@ get_function_nonlocals(
 
 `list[Any]`
 
-List[Any]: The nonlocal variables accessed by the function.
+Every captured cell value, the globals the function names, and each
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/644815f9e5bc52ad8f7a5227a456227e9c3e639b/libs/langgraph/langgraph/pregel/_utils.py#L140)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/_utils.py#L161)

@@ -24,4 +24,4 @@ OutputT = TypeVar('OutputT', bound=StateLike, default=StateT)
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/644815f9e5bc52ad8f7a5227a456227e9c3e639b/libs/langgraph/langgraph/typing.py#L39)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/typing.py#L39)

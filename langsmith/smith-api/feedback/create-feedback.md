@@ -334,6 +334,16 @@ components:
             - type: boolean
             - type: 'null'
           title: Error
+          description: >-
+            Deprecated. Use `extra.error` instead. If both values are provided,
+            `error` takes precedence.
+          deprecated: true
+        extra:
+          anyOf:
+            - additionalProperties: true
+              type: object
+            - type: 'null'
+          title: Extra
       type: object
       required:
         - key

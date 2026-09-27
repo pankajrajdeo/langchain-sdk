@@ -14,12 +14,15 @@ tags: [reference, deepagents, middleware, skills, skillsstate, skills_metadata]
 
 List of loaded skill metadata from configured sources. Not propagated to parent agents.
 
+Missing or `None` means not loaded; set to `None` to request a reload on the next run.
+An empty list means loaded with no skills found.
+
 ## Signature
 
 ```python
-skills_metadata: NotRequired[Annotated[list[SkillMetadata], PrivateStateAttr]]
+skills_metadata: NotRequired[Annotated[list[SkillMetadata] | None, OmitFromOutput]]
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/middleware/skills.py#L296)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/skills.py#L296)

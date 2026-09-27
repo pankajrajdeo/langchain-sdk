@@ -61,7 +61,6 @@ tags: [index, reference, python, deepagents, middleware, filesystem]
 - [ReadFileSchema](ReadFileSchema.md) - Input schema for the read_file tool.
 - [ReadVideoFileSchema](ReadVideoFileSchema.md) - Input schema for read_file when the optional video frame extraction is available.
 - [TOOLS_EXCLUDED_FROM_EVICTION](TOOLS_EXCLUDED_FROM_EVICTION.md) - View source on GitHub
-- [TOO_LARGE_HUMAN_MSG](TOO_LARGE_HUMAN_MSG.md) - View source on GitHub
 - [WRITE_FILE_TOOL_DESCRIPTION](WRITE_FILE_TOOL_DESCRIPTION.md) - View source on GitHub
 - [WriteFileSchema](WriteFileSchema.md) - Input schema for the write_file tool.
 - [append_to_system_message](append_to_system_message.md) - Append text to a system message.
@@ -70,8 +69,9 @@ tags: [index, reference, python, deepagents, middleware, filesystem]
 - [extract_video_frames](extract_video_frames.md) - Decode sampled frames from a video byte payload.
 - [format_grep_matches](format_grep_matches.md) - Format structured grep matches using existing formatting logic.
 - [regex_literal_hint](regex_literal_hint.md) - Return a hint when a pattern looks like an (unsupported) regex.
-- [sanitize_tool_call_id](sanitize_tool_call_id.md) - Sanitize tool_call_id to prevent path traversal and separator issues.
+- [sanitize_tool_call_id](sanitize_tool_call_id.md) - Return a bounded, path-safe component for a tool call ID.
 - [supports_execution](supports_execution.md) - Check if a backend supports command execution.
 - [truncate_if_too_long](truncate_if_too_long.md) - Truncate list or string result if it exceeds token limit (rough estimate: 4 chars/token).
 - [validate_path](validate_path.md) - Validate and normalize file path for security.
 - [video_dependencies_available](video_dependencies_available.md) - Return whether the optional video dependencies appear to be installed.
+- [warn_deprecated](warn_deprecated.md) - Emit a deprecation warning with caller-controlled stack attribution.

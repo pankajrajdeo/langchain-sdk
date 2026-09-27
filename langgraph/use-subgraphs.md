@@ -91,6 +91,7 @@ graph = builder.compile()
 ```python
 from typing_extensions import TypedDict
 from langgraph.graph.state import StateGraph, START
+from langgraph.stream import UpdatesTransformer
 
 # Define subgraph
 class SubgraphState(TypedDict):
@@ -131,7 +132,7 @@ builder.add_edge(START, "node_1")
 builder.add_edge("node_1", "node_2")
 graph = builder.compile()
 
-stream = graph.stream_events({"foo": "foo"}, version="v3")
+stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])
 for event in stream:
     if event["method"] == "updates":
         print(event["params"]["namespace"], event["params"]["data"])
@@ -155,6 +156,7 @@ This is an example with two levels of subgraphs: parent -> child -> grandchild.
 # Grandchild graph
 from typing_extensions import TypedDict
 from langgraph.graph.state import StateGraph, START, END
+from langgraph.stream import UpdatesTransformer
 
 class GrandChildState(TypedDict):
     my_grandchild_key: str
@@ -217,7 +219,7 @@ parent.add_edge("parent_2", END)
 
 parent_graph = parent.compile()
 
-stream = parent_graph.stream_events({"my_key": "Bob"}, version="v3")
+stream = parent_graph.stream_events({"my_key": "Bob"}, version="v3", transformers=[UpdatesTransformer])
 for event in stream:
     if event["method"] == "updates":
         print(event["params"]["namespace"], event["params"]["data"])
@@ -277,6 +279,7 @@ graph = builder.compile()
 ```python
 from typing_extensions import TypedDict
 from langgraph.graph.state import StateGraph, START
+from langgraph.stream import UpdatesTransformer
 
 # Define subgraph
 class SubgraphState(TypedDict):
@@ -312,7 +315,7 @@ builder.add_edge(START, "node_1")
 builder.add_edge("node_1", "node_2")
 graph = builder.compile()
 
-stream = graph.stream_events({"foo": "foo"}, version="v3")
+stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])
 for event in stream:
     if event["method"] == "updates" and not event["params"]["namespace"]:
         print(event["params"]["data"])
@@ -774,7 +777,9 @@ for subgraph in stream.subgraphs:
 If you need the raw protocol events, iterate the stream directly and filter on `event["method"]` and `event["params"]["namespace"]`:
 
 ```python
-stream = graph.stream_events({"foo": "foo"}, version="v3")
+from langgraph.stream import UpdatesTransformer
+
+stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])
 for event in stream:
     if event["method"] == "updates":
         print(event["params"]["namespace"], event["params"]["data"])
@@ -786,6 +791,7 @@ for event in stream:
 ```python
 from typing_extensions import TypedDict
 from langgraph.graph.state import StateGraph, START
+from langgraph.stream import UpdatesTransformer
 
 # Define subgraph
 class SubgraphState(TypedDict):
@@ -821,7 +827,7 @@ builder.add_edge(START, "node_1")
 builder.add_edge("node_1", "node_2")
 graph = builder.compile()
 
-stream = graph.stream_events({"foo": "foo"}, version="v3")  # [!code highlight]
+stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])  # [!code highlight]
 for event in stream:
     if event["method"] == "updates":
         print(event["params"]["namespace"], event["params"]["data"])
@@ -839,7 +845,7 @@ for event in stream:
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-subgraphs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

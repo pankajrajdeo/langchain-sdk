@@ -67,7 +67,7 @@ create_summarization_middleware(
 | `model` | `BaseChatModel` | Yes | Resolved `BaseChatModel` instance.  Use `resolve_model()` first if needed for model strings. |
 | `backend` | `BackendProtocol` | Yes | Backend instance for persisting conversation history. |
 | `summary_prompt` | `str` | No | Prompt template for generating summaries. (default: `DEEPAGENTS_DEFAULT_SUMMARY_PROMPT`) |
-| `trim_tokens_to_summarize` | `int \| None` | No | Max tokens to include when generating summary. (default: `None`) |
+| `trim_tokens_to_summarize` | `int \| None` | No | Token budget for the older history sent to the summarization model, measured by `token_counter`. Applied after setting aside the recent messages selected by the retention policy.  For example, `4000` summarizes up to 4,000 tokens from the end of that older history; earlier history excluded by trimming is not summarized. This does not set the summarization trigger or limit the generated summary's length.  `None` skips this trimming and summarizes all selected history. This factory defaults to `None`, unlike constructing `SummarizationMiddleware` directly, which defaults to 4000. (default: `None`) |
 | `token_counter` | `TokenCounter` | No | Function to count tokens in messages. (default: `count_tokens_approximately`) |
 
 ## Returns
@@ -78,4 +78,4 @@ Configured `SummarizationMiddleware` instance.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0f5a2b57fa5dbb3a7d8f16dc280cb5b1506ea8c0/libs/deepagents/deepagents/middleware/summarization.py#L1757)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/summarization.py#L1772)

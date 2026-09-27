@@ -45,10 +45,7 @@ A *trajectory* is a flat, ordered list of messages that shows the path an agent 
 
 In LangSmith, a trajectory is a projection over the traces in a thread. It contains the human, AI, and tool messages exchanged during the session, each appearing once, in the order it first appeared, with the nesting of runs removed.
 
-> [!NOTE]
-> The [Messages view](view-traces.md#messages-view), which renders trajectories in the LangSmith UI, is in **[beta](release-stages.md)**.
-
-[Learn how trajectories render in the Messages view](messages-view-integrations.md).
+[Learn how trajectories render in the Trajectory view](trajectory-view-integrations.md).
 
 ### Compare traces, threads, and trajectories
 
@@ -119,7 +116,7 @@ To delete traces before their expiration date, see [Manage a trace](manage-trace
 ***
 
 > [!NOTE]
-> [Connect these docs](../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

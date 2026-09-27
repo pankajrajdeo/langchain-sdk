@@ -275,6 +275,15 @@ components:
             - type: 'null'
         language:
           type: string
+        managed_code_evaluator_settings:
+          $ref: '#/components/schemas/evaluators.ManagedCodeEvaluatorSettings'
+        require_attachments:
+          description: >-
+            RequireAttachments is fetch-time config: updating it does not
+            rebuild
+
+            the sandbox snapshot.
+          type: boolean
     evaluators.UpdateLLMEvaluatorRequest:
       type: object
       properties:
@@ -329,6 +338,10 @@ components:
           $ref: '#/components/schemas/evaluators.EvaluatorType'
         updated_at:
           type: string
+    evaluators.ManagedCodeEvaluatorSettings:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/evaluators.ManagedCodeEvaluatorMetricSetting'
     evaluators.CodeEvaluator:
       type: object
       properties:
@@ -347,6 +360,15 @@ components:
         language:
           description: 'Default: "python"'
           type: string
+        managed_code_evaluator_key:
+          $ref: '#/components/schemas/evaluators.ManagedCodeEvaluatorKey'
+        managed_code_evaluator_settings:
+          $ref: '#/components/schemas/evaluators.ManagedCodeEvaluatorSettings'
+        require_attachments:
+          description: |-
+            RequireAttachments opts the evaluator into selecting/presigning run
+            attachments (s3_urls) at evaluation time. Default false.
+          type: boolean
     evaluators.LLMEvaluator:
       type: object
       properties:
@@ -419,6 +441,14 @@ components:
       x-enum-varnames:
         - EvaluatorTypeLLM
         - EvaluatorTypeCode
+    evaluators.ManagedCodeEvaluatorMetricSetting:
+      type: object
+      properties:
+        is_enabled:
+          type: boolean
+          default: true
+        key_name:
+          type: string
     evaluators.EvaluatorBuildStatus:
       type: string
       enum:
@@ -431,6 +461,12 @@ components:
         - EvaluatorBuildStatusBuilding
         - EvaluatorBuildStatusReady
         - EvaluatorBuildStatusFailed
+    evaluators.ManagedCodeEvaluatorKey:
+      type: string
+      enum:
+        - voice_metrics
+      x-enum-varnames:
+        - ManagedCodeEvaluatorKeyVoiceMetrics
     evaluators.SpendLimit:
       type: object
       properties:

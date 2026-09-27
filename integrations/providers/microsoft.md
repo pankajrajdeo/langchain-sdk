@@ -898,6 +898,9 @@ Choose a hosting protocol based on how clients interact with the agent:
 | Responses   | `--protocol responses`   | `ResponsesHostServer`   | `/responses`   | You need OpenAI-compatible chat, streaming, response history, or conversation threading. Start here for most conversational agents. |
 | Invocations | `--protocol invocations` | `InvocationsHostServer` | `/invocations` | You need a custom JSON shape, a webhook-style endpoint, or non-conversational processing.                                           |
 
+> [!NOTE]
+> For hosted graphs using `BaseChatOpenAI`-based models with the Responses API, use `output_version="responses/v1"`. You can omit this setting in `langchain-openai` 1.0.0 or later, unless overridden by `LC_OUTPUT_VERSION`. This guidance applies to both Responses and Invocations hosting protocols.
+
 See the complete run samples for the [Responses protocol](https://github.com/microsoft-foundry/foundry-samples/tree/main/samples/python/hosted-agents/langgraph/responses/10-run) and [Invocations protocol](https://github.com/microsoft-foundry/foundry-samples/tree/main/samples/python/hosted-agents/langgraph/invocations/03-run).
 
 #### Use the configuration-driven runner
@@ -964,7 +967,7 @@ The Microsoft Learn guide includes complete examples for both protocols, convers
 ***
 
 > [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to Claude, VSCode, and more via MCP for real-time answers.
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
 > [!NOTE]
 > [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/microsoft.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

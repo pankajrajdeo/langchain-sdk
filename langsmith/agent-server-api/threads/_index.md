@@ -1,13 +1,13 @@
 ---
 title: "langsmith/agent-server-api/threads"
-description: "Index of 15 pages and 0 subdirectories under langsmith/agent-server-api/threads."
+description: "Index of 16 pages and 0 subdirectories under langsmith/agent-server-api/threads."
 category: "index"
 tags: [index, langsmith, agent-server-api, threads]
 ---
 
 # langsmith/agent-server-api/threads
 
-15 pages here.
+16 pages here.
 
 ## Files
 
@@ -20,6 +20,7 @@ tags: [index, langsmith, agent-server-api, threads]
 - [Get Thread State At Checkpoint](get-thread-state-at-checkpoint-1.md) - Get state for a thread at a specific checkpoint.
 - [Get Thread State At Checkpoint](get-thread-state-at-checkpoint.md) - Get state for a thread at a specific checkpoint.
 - [Get Thread State](get-thread-state.md) - Get state for a thread.
+- [Get Thread Storage](get-thread-storage.md) - Bytes the thread's checkpoints occupy in the built-in checkpointer, as stored: checkpoints, channel values (per channel) and pending writes. Returns 501 when a custom checkpointer is configured.
 - [Get Thread](get-thread.md) - Get a thread by ID.
 - [Join Thread Stream](join-thread-stream.md) - This endpoint streams output in real-time from a thread. The stream will include the output of each run executed sequentially on the thread and will remain open indefinitely. It is the responsibility...
 - [Patch Thread](patch-thread.md) - Update a thread.
