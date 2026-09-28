@@ -38,7 +38,7 @@ text = "What is a helicone?"
 print(llm.invoke(text))
 ```
 
-[Helicone caching docs](https://docs.helicone.ai/advanced-usage/caching)
+[Helicone caching docs](https://docs.helicone.ai/features/advanced-usage/caching)
 
 ## How to use helicone custom properties
 
@@ -56,7 +56,7 @@ text = "What is a helicone?"
 print(llm.invoke(text))
 ```
 
-[Helicone property docs](https://docs.helicone.ai/advanced-usage/custom-properties)
+[Helicone property docs](https://docs.helicone.ai/features/advanced-usage/custom-properties)
 
 ***
 

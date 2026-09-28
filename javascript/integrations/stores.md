@@ -40,10 +40,11 @@ You can also implement your own custom store by extending the [`BaseStore`](http
 
 ## All key-value stores
 
-| Integration                                                         | Downloads                             |
-| :------------------------------------------------------------------ | :------------------------------------ |
-| [`InMemoryStore`](stores/in_memory.md)    | <span data-sort-value="-1">N/A</span> |
-| [`LocalFileStore`](stores/file_system.md) | <span data-sort-value="-1">N/A</span> |
+| Integration                                                                                                   | Downloads                                                                                                                                                                                                                                                             |
+| :------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`AlBuddyMemoryStore`](https://github.com/flytomoon/al-buddy-memory/blob/main/docs/integrations/langchain.md) | <span data-sort-value="2091"><a href="https://www.npmjs.com/package/al-buddy-memory" target="_blank">  <img src="https://img.shields.io/npm/dm/al-buddy-memory?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
+| [`InMemoryStore`](stores/in_memory.md)                                              | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                                 |
+| [`LocalFileStore`](stores/file_system.md)                                           | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                                 |
 
 ***
 

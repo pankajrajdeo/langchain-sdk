@@ -10,7 +10,7 @@ tags: [docs, integrations, providers, toolbox]
 
 > Integrate with Mcp toolbox using LangChain Python.
 
-The [MCP Toolbox](https://googleapis.github.io/genai-toolbox/getting-started/introduction/) in LangChain allows you to equip an agent with a set of tools. When the agent receives a query, it can intelligently select and use the most appropriate tool provided by MCP Toolbox to fulfill the request.
+The [MCP Toolbox](https://mcp-toolbox.dev/documentation/introduction/) in LangChain allows you to equip an agent with a set of tools. When the agent receives a query, it can intelligently select and use the most appropriate tool provided by MCP Toolbox to fulfill the request.
 
 ## What is it?
 

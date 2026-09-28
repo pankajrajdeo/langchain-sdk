@@ -50,7 +50,7 @@ import { createDeepAgent } from "deepagents";
 import { todoListMiddleware } from "langchain";
 
 const agent = await createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   middleware: [todoListMiddleware()],
 });
 ```

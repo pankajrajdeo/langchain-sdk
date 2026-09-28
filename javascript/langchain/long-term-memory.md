@@ -30,7 +30,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore();
 
 const agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [],
   store,
 });
@@ -150,7 +150,7 @@ const store = PostgresStore.fromConnString(DB_URI);
 await store.setup();
 
 const agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [],
   store,
 });
@@ -402,7 +402,7 @@ const getUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [getUserInfo],
   contextSchema,
   // Pass store to agent - enables agent to access store when running tools
@@ -860,7 +860,7 @@ const getUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [getUserInfo],
   contextSchema,
   store,
@@ -1203,7 +1203,7 @@ const saveUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [saveUserInfo],
   contextSchema,
   store,
@@ -1610,7 +1610,7 @@ const saveUserInfo = tool(
 );
 
 const agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [saveUserInfo],
   contextSchema,
   store,

@@ -593,7 +593,7 @@ const researchSubagent = {
 };
 
 const agent = await createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   skills: ["/skills/main/"], // Main agent and GP subagent get these
   subagents: [researchSubagent], // Researcher gets only its own skills
 });
@@ -623,7 +623,7 @@ import {
 const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend: new CompositeBackend(new StateBackend(), {
     "/skills/": new StoreBackend({
       namespace: (rt) => ["curated-skills", rt.context.orgId],
@@ -1068,7 +1068,7 @@ async function main() {
 
   try {
     const agent = await createDeepAgent({
-      model: "google-genai:gemini-3.6-flash",
+      model: "google:gemini-3.6-flash",
       backend,
       skills: ["/skills/"],
       store,

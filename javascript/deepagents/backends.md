@@ -156,7 +156,7 @@ even after that subagent's execution is complete. Those files will continue to b
 import { createDeepAgent, FilesystemBackend } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
 });
 ```
@@ -303,7 +303,7 @@ import { createDeepAgent, LocalShellBackend } from "deepagents";
 const backend = new LocalShellBackend({ workingDirectory: "." });
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend,
 });
 ```
@@ -409,7 +409,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend: new StoreBackend({
     namespace: (rt) => [rt.serverInfo.user.identity],
   }),
@@ -635,7 +635,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore();
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend: new CompositeBackend(new StateBackend(), {
     "/memories/": new StoreBackend({
       namespace: () => ["memories"],

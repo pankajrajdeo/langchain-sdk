@@ -225,9 +225,9 @@ paths:
           name: page_size
           in: query
           schema:
+            minimum: 1
             type: integer
             default: 20
-            minimum: 1
             maximum: 100
             title: Page Size
         - description: >-

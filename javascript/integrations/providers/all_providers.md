@@ -414,6 +414,9 @@ Time-aware document retrieval and ranking.
 
 ## Stores
 
+#### [AlBuddyMemoryStore](https://github.com/flytomoon/al-buddy-memory/blob/main/docs/integrations/langchain.md)
+A LangGraph `BaseStore` for long-term memory on a local SQLite file, no API key. Every put records which agent wrote it; putting a key again retires the old value instead of overwriting it, and a delete closes a fact rather than erasing it, so the history of what was believed is kept.
+
 #### [File System](../stores/file_system.md)
 Local file system storage for development.
 
@@ -427,6 +430,11 @@ Cache LLM responses in Azure Cosmos DB.
 
 #### [BetterDB Agent Cache](https://www.betterdb.com/ai)
 Multi-tier cache for AI agents backed by Valkey or Redis.
+
+## Middleware
+
+#### [BRYDGE](https://github.com/contactkontey-dotcom/langchain-brydge#readme)
+Supervises an agent's tool calls with BRYDGE and checks the destination system's own records to report whether each action happened as permitted.
 
 ## Callbacks
 

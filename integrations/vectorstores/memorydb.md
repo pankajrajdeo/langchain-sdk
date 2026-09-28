@@ -10,7 +10,7 @@ tags: [docs, integrations, vectorstores, memorydb]
 
 > Integrate with the Amazon memorydb vector store using LangChain Python.
 
-> [Vector Search](https://docs.aws.amazon.com/memorydb/latest/devguide/vector-search.html/) introduction and langchain integration guide.
+> [Vector Search](https://docs.aws.amazon.com/memorydb/latest/devguide/vector-search.html) introduction and langchain integration guide.
 
 ## What is Amazon MemoryDB?
 

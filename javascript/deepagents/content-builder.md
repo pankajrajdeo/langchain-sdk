@@ -603,7 +603,7 @@ function createContentWriter() {
   };
 
   return createDeepAgent({
-    model: "google-genai:gemini-3.6-flash",
+    model: "google:gemini-3.6-flash",
     memory: ["./AGENTS.md"],
     skills: ["./skills/"],
     tools: [generateCover, generateSocialImage],

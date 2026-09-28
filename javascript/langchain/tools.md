@@ -490,7 +490,7 @@ const handleToolErrors = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [],
   middleware: [handleToolErrors],
 });

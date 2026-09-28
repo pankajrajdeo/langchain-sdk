@@ -51,6 +51,9 @@ Open event-based protocol for connecting LangGraph agents to any frontend.
 #### [Agent Action Capsule](https://github.com/action-state-group/capsule-emit/blob/main/docs/adapters/langchain.md)
 Signed, independently verifiable action records for agent tool calls, chained planned to confirmed.
 
+#### [agentstate](https://skamalj.github.io/agentstate-reducer/)
+DynamoDB, Cosmos DB and Firestore checkpointers with bounded history and a long-term memory hook, plus semantic-search stores.
+
 #### [Agentic SpendGuard](https://agenticspendguard.dev)
 Runtime budget gate that blocks LLM calls that would exceed spend limits.
 
@@ -429,6 +432,9 @@ Graph database with ultra-low latency.
 #### [Featherless AI](https://github.com/featherlessai/langchain-featherless-ai)
 Fast and efficient AI model serving.
 
+#### [FeedMyAgent](https://github.com/makash/feedmyagent-skill/tree/main/integrations/langchain)
+Technology intelligence feed for AI agents: security advisories, tech-stack changes and compliance deadlines, classified hourly; anonymous reads, optional API key for posting.
+
 #### [FiGuard](https://docs.figuard.io)
 Pre-flight spend authorization for LangChain agents.
 
@@ -798,6 +804,9 @@ Local OS-enforced sandboxing with Landlock and Seatbelt.
 #### [Notte](https://docs.notte.cc/integrations/langchain)
 Managed remote browser sessions for AI agents.
 
+#### [Noveum](https://noveum.ai/en/docs/integration-examples/langchain/overview)
+Captures LangChain and LangGraph runs, model calls, and tool activity for tracing and evaluation in Noveum.
+
 #### [Nuggets](https://nuggets.life)
 Pre-execution authority enforcement for LangChain and LangGraph tool calls.
 
@@ -969,6 +978,9 @@ Residential proxy tool for web scraping with geo-targeted IPs.
 #### [ProxyHat](https://docs.proxyhat.com)
 Residential proxy tool and document loader for reliable web fetching.
 
+#### [Pushary](https://pushary.com/docs/agents/build/langgraph?utm_source=langchain&utm_medium=integration-directory&utm_campaign=pushary-langgraph-py)
+Phone approvals for LangGraph and LangChain agents. The ask\_human tool or pushary\_interrupt() asks your user on their phone, and the graph resumes with their Approve or Deny. If nobody answers, the action does not run.
+
 #### [PyMuPDF4LLM](https://github.com/lakinduboteju/langchain-pymupdf4llm)
 PDF processing optimized for LLM ingestion.
 
@@ -1029,6 +1041,9 @@ Pre-execution budget authority middleware for model calls, tool calls, and agent
 #### [Runpod](https://docs.runpod.io/overview)
 GPU cloud platform for AI workloads.
 
+#### [Runtime](https://withruntime.com/docs/langchain)
+Firecracker microVM sandboxes for Deep Agents from Runtime.
+
 #### [Sail](https://docs.lakesail.com/sail/main/guide/integrations/langchain/)
 Rust-based drop-in Spark replacement with Spark Connect and a Sail SQL toolkit for LangChain agents.
 
@@ -1062,6 +1077,9 @@ Web scraping API and proxy service.
 #### [ScrapingBee](https://www.scrapingbee.com/documentation/langchain/)
 Web scraping and search API with headless browsers, proxies, and AI extraction.
 
+#### [ScoutWyze Compute](https://github.com/scoutwyze-max/scoutwyze-compute/blob/main/examples/README.md)
+Ranks live GPU placement offers (8x H100 80GB, RunPod) by price and freshness; billed per successful match via a prepaid key or per-call via x402/USDC on Base.
+
 #### [SearchApi](https://www.searchapi.io/docs/google)
 Unified search API across Google, Bing, Baidu, YouTube, and more.
 
@@ -1069,7 +1087,7 @@ Unified search API across Google, Bing, Baidu, YouTube, and more.
 Zero-knowledge secrets manager. Scopes which credentials a model call or a given tool call may use.
 
 #### [Semantica](https://docs.getsemantica.ai/integrations/langchain)
-Semantica is an open-source knowledge-graph framework. Its LangChain integration ships inside the `semantica` package as the `langchain` extra (`pip install "semantica[langchain]"`) and provides `SemanticaRetriever`, which retrieves relevant context from a Semantica knowledge graph. The same extra also exposes `SemanticaVectorStore`, `SemanticaKGTool` and `SemanticaDecisionTool`; I am filing this one for the retriever and can file the vectorstore/tools listings separately if you would prefer them listed as well.
+Vector store adapter over Semantica's hybrid search, usable as a drop-in in retrieval chains.
 
 #### [SereneDB](https://serenedb.com/docs/clients/langchain-serenedb)
 PostgreSQL-compatible vector database with native ANN and hybrid search.
@@ -1200,6 +1218,9 @@ W-2 event staffing for the US and Canada: coverage, rates, lead times, and compl
 #### [Tendem](https://github.com/Toloka/tendem-mcp/tree/main/integrations/langchain-tendem#readme)
 Price-capped human-in-the-loop tools that delegate agent work to vetted experts.
 
+#### [Tenuo](https://tenuo.ai/langgraph#tenuomiddleware-langchain-1x-create_agent)
+Task-scoped authorization for LangChain agents: each tool call is checked against a signed warrant that limits which tools run, with which arguments, for how long, and it can only narrow when work is delegated.
+
 #### [TensorLake](tensorlake.md)
 Data infrastructure for ML applications.
 
@@ -1217,6 +1238,9 @@ OpenAI-compatible gateway for chat models with streaming, tools, and structured 
 
 #### [The Context Company](https://docs.thecontextcompany.com/frameworks/langchain-langgraph)
 Observability and customer analytics for production AI agents.
+
+#### [ThorData](https://github.com/Thordata/langchain-thordata)
+Search tool that queries Google, Bing, Yandex, and DuckDuckGo through the ThorData SERP API.
 
 #### [Tigris](https://www.tigrisdata.com/docs/)
 Globally-distributed S3-compatible object storage with a forkable LangGraph checkpointer.

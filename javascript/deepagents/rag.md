@@ -53,7 +53,7 @@ const EXAMPLE_QUERY =
   "How do I stream intermediate tool results from a subagent?";
 
 const baselineAgent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [],
   systemPrompt:
     "You are a helpful LangChain documentation assistant. Answer questions about LangChain APIs and patterns.",
@@ -257,7 +257,7 @@ npm pkg set type=module
 **npm**
 
 ```bash
-npm install deepagents langchain @langchain/core @langchain/openai @langchain/anthropic @langchain/google-genai @langchain/textsplitters @langchain/classic dotenv zod tsx
+npm install deepagents langchain @langchain/core @langchain/openai @langchain/anthropic @langchain/google @langchain/textsplitters @langchain/classic dotenv zod tsx
 ```
 
 Install the matching `@langchain/<provider>` package for the model you select in the code examples below (Google, OpenAI, and Anthropic are included above).
@@ -922,7 +922,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -1346,7 +1346,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,

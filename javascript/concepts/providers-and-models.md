@@ -52,7 +52,7 @@ import { initChatModel } from "langchain/chat_models/universal";
 
 const openaiModel = await initChatModel("openai:gpt-5.5");
 const anthropicModel = await initChatModel("anthropic:claude-opus-4-8");
-const googleModel = await initChatModel("google-genai:gemini-3.1-pro-preview");
+const googleModel = await initChatModel("google:gemini-3.1-pro-preview");
 
 for (const model of [openaiModel, anthropicModel, googleModel]) {
     const response = await model.invoke("Explain quantum computing in one sentence.");
@@ -73,7 +73,7 @@ In LangChain, each provider has a dedicated **integration package** (for example
 ```bash
 npm install @langchain/openai       # For OpenAI models
 npm install @langchain/anthropic    # For Anthropic models
-npm install @langchain/google-genai # For Google models
+npm install @langchain/google       # For Google models
 ```
 
 For a full list of provider packages, see the [integrations page](../integrations/providers/overview.md).
@@ -114,7 +114,7 @@ To find available model names for a provider, refer to the provider's own docume
 Because LangChain provider packages pass model names directly to the provider's API, you can use new models the moment a provider releases them (no LangChain update required). Simply pass the new model name:
 
 ```typescript
-const model = await initChatModel("google_genai:gemini-mythos");
+const model = await initChatModel("google:gemini-mythos");
 ```
 
 New model names work immediately as long as your provider package version supports the API version the model requires. In most cases, model releases are backward-compatible and require no package update.

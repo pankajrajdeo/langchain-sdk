@@ -19,7 +19,7 @@ Pass them to `create_deep_agent` via the `tools=` parameter alongside the [built
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [search, fetchUrl, runQuery],
 });
 ```
@@ -139,7 +139,7 @@ const internetSearch = tool(
 );
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [internetSearch],
 });
 ```
@@ -470,7 +470,7 @@ const client = new MultiServerMCPClient({
 const tools = await client.getTools();
 
 const agent = await createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools,
 });
 

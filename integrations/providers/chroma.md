@@ -10,7 +10,7 @@ tags: [docs, integrations, providers, chroma]
 
 > Integrate with Chroma using LangChain Python.
 
-> [Chroma](https://docs.trychroma.com/getting-started) is a database for building AI applications with embeddings.
+> [Chroma](https://docs.trychroma.com/docs/overview/getting-started) is a database for building AI applications with embeddings.
 
 ## Installation and setup
 

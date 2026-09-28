@@ -60,7 +60,7 @@ The code provided assumes that your PPLX\_API\_KEY is set in your environment va
 chat = ChatPerplexity(temperature=0, pplx_api_key="YOUR_API_KEY", model="sonar")
 ```
 
-You can check the [list of available Perplexity models](https://docs.perplexity.ai/docs/model-cards). For reproducibility, we can set the API key dynamically by taking it as an input in this notebook.
+You can check the [list of available Perplexity models](https://docs.perplexity.ai/getting-started/models). For reproducibility, we can set the API key dynamically by taking it as an input in this notebook.
 
 ```python
 chat = ChatPerplexity(temperature=0, model="sonar")

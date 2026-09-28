@@ -217,30 +217,30 @@ const model = new AzureChatOpenAI({
 ```
 
 #### Google Gemini
-👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
+👉 Read the [ChatGoogle chat model integration docs](../integrations/chat/google.md)
 
 **npm**
 
 ```bash
-npm install @langchain/google-genai
+npm install @langchain/google
 ```
 
 **pnpm**
 
 ```bash
-pnpm install @langchain/google-genai
+pnpm install @langchain/google
 ```
 
 **yarn**
 
 ```bash
-yarn add @langchain/google-genai
+yarn add @langchain/google
 ```
 
 **bun**
 
 ```bash
-bun add @langchain/google-genai
+bun add @langchain/google
 ```
 
 **initChatModel**
@@ -250,15 +250,15 @@ import { initChatModel } from "langchain";
 
 process.env.GOOGLE_API_KEY = "your-api-key";
 
-const model = await initChatModel("google-genai:gemini-3.7-flash");
+const model = await initChatModel("google:gemini-3.7-flash");
 ```
 
 **Model Class**
 
 ```typescript
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { ChatGoogle } from "@langchain/google/node";
 
-const model = new ChatGoogleGenerativeAI({
+const model = new ChatGoogle({
   model: "gemini-3.7-flash",
   apiKey: "your-api-key"
 });
@@ -471,7 +471,7 @@ Now, create an agent with the model, tools, and prompt:
 import { createAgent } from "langchain";
 
 let agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
 });
@@ -729,7 +729,7 @@ Rules:
 `);
 
 export const agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
 });
@@ -1457,7 +1457,7 @@ import { humanInTheLoopMiddleware } from "langchain"; // [!code highlight]
 import { MemorySaver } from "@langchain/langgraph"; // [!code highlight]
 
 agent = createAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
   middleware: [

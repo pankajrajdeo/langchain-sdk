@@ -20,7 +20,7 @@ Build the harness around your goal. `create_deep_agent` gives you a production-r
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   systemPrompt: "You are a helpful assistant.",
   tools: [search, fetchUrl],
   memory: ["./AGENTS.md"],
@@ -355,30 +355,30 @@ const agent = createDeepAgent({
 ```
 
 #### Google Gemini
-👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
+👉 Read the [ChatGoogle chat model integration docs](../integrations/chat/google.md)
 
 **npm**
 
 ```bash
-npm install @langchain/google-genai deepagents
+npm install @langchain/google deepagents
 ```
 
 **pnpm**
 
 ```bash
-pnpm install @langchain/google-genai deepagents
+pnpm install @langchain/google deepagents
 ```
 
 **yarn**
 
 ```bash
-yarn add @langchain/google-genai deepagents
+yarn add @langchain/google deepagents
 ```
 
 **bun**
 
 ```bash
-bun add @langchain/google-genai deepagents
+bun add @langchain/google deepagents
 ```
 
 **default parameters**
@@ -388,7 +388,7 @@ import { createDeepAgent } from "deepagents";
 
 process.env.GOOGLE_API_KEY = "your-api-key";
 
-const agent = createDeepAgent({ model: "google-genai:gemini-3.1-pro-preview" });
+const agent = createDeepAgent({ model: "google:gemini-3.1-pro-preview" });
 // this calls initChatModel for the specified model with default parameters
 // to use specific model parameters, use initChatModel directly
 ```
@@ -401,7 +401,7 @@ import { createDeepAgent } from "deepagents";
 
 process.env.GOOGLE_API_KEY = "your-api-key";
 
-const model = await initChatModel("google-genai:gemini-3.1-pro-preview");
+const model = await initChatModel("google:gemini-3.1-pro-preview");
 const agent = createDeepAgent({
   model,
   temperature: 0,
@@ -411,11 +411,11 @@ const agent = createDeepAgent({
 **Model Class**
 
 ```typescript
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { ChatGoogle } from "@langchain/google/node";
 import { createDeepAgent } from "deepagents";
 
 const agent = createDeepAgent({
-  model: new ChatGoogleGenerativeAI({
+  model: new ChatGoogle({
     model: "gemini-3.1-pro-preview",
     apiKey: "your-api-key",
     temperature: 0,
@@ -559,7 +559,7 @@ const internetSearch = tool(
 );
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [internetSearch],
 });
 ```
@@ -886,7 +886,7 @@ const client = new MultiServerMCPClient({
 const tools = await client.getTools();
 
 const agent = await createDeepAgent({
-    model: "google-genai:gemini-3.6-flash",
+    model: "google:gemini-3.6-flash",
     tools,
 });
 
@@ -1068,7 +1068,7 @@ const researchInstructions =
   `write a polished report.`;
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   systemPrompt: researchInstructions,
 });
 ```
@@ -1330,7 +1330,7 @@ const logToolCallsMiddleware = createMiddleware({
 });
 
 const agent = await createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [getWeather] as any,
   middleware: [logToolCallsMiddleware] as any,
 });
@@ -1689,7 +1689,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   middleware: [createCodeInterpreterMiddleware()],
 });
 ```
@@ -1820,12 +1820,12 @@ const researchSubagent: SubAgent = {
   description: "Used to research more in depth questions",
   systemPrompt: "You are a great researcher",
   tools: [internetSearch],
-  model: "google-genai:gemini-3.6-flash", // Optional override, defaults to main agent model
+  model: "google:gemini-3.6-flash", // Optional override, defaults to main agent model
 };
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -1883,7 +1883,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -1941,7 +1941,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -1999,7 +1999,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -2057,7 +2057,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -2115,7 +2115,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -2173,7 +2173,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -2217,7 +2217,7 @@ The local machine's filesystem.
 import { createDeepAgent, FilesystemBackend } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
 });
 ```
@@ -2307,7 +2307,7 @@ import { createDeepAgent, LocalShellBackend } from "deepagents";
 const backend = new LocalShellBackend({ workingDirectory: "." });
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend,
 });
 ```
@@ -2402,7 +2402,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend: new StoreBackend({
     namespace: (rt) => [rt.serverInfo.user.identity],
   }),
@@ -2540,7 +2540,7 @@ import { InMemoryStore } from "@langchain/langgraph";
 const store = new InMemoryStore();
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend: new CompositeBackend(new StateBackend(), {
     "/memories/": new StoreBackend({
       namespace: () => ["memories"],
@@ -2797,7 +2797,7 @@ const notifyEmail = tool(
 const checkpointer = new MemorySaver();
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [removeFile, fetchFile, notifyEmail],
   interruptOn: {
     remove_file: true, // Default: approve, edit, reject, respond
@@ -2987,7 +2987,7 @@ function createFileData(content: string): FileData {
 }
 
 const agent = await createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   memory: ["/AGENTS.md"],
   checkpointer: checkpointer,
 });
@@ -3353,7 +3353,7 @@ await store.put(["filesystem"], "/AGENTS.md", fileData);
 const checkpointer = new MemorySaver();
 
 const agent = await createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend: new StoreBackend({
     namespace: () => ["filesystem"],
   }),
@@ -3737,7 +3737,7 @@ import { MemorySaver } from "@langchain/langgraph";
 const checkpointer = new MemorySaver();
 
 const agent = await createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
   interruptOn: {

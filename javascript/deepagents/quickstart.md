@@ -187,7 +187,7 @@ Google, OpenAI, and Anthropic offer built-in web search tools that run server-si
 import { createDeepAgent } from "deepagents";
 
 // Google's built-in search — no extra install or API key needed
-const internetSearch = { google_search: {} };
+const internetSearch = { googleSearch: {} };
 ```
 
 **OpenAI**
@@ -279,7 +279,7 @@ Use this to run an internet search for a given query. You can specify the max nu
 `;
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [internetSearch],
   systemPrompt: researchInstructions,
 });

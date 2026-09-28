@@ -458,7 +458,7 @@ See [How to use chat models to call tools](../../langchain/tools.md) for additio
 A unique `prefix_id` is auto-generated for every request, enabling the router to track KV cache affinity.
 
 > [!NOTE]
-> This section assumes you have a running [NVIDIA Dynamo deployment](https://docs.nvidia.com/dynamo/latest/getting-started/quickstart).
+> This section assumes you have a running [NVIDIA Dynamo deployment](https://docs.nvidia.com/dynamo/latest/).
 
 ### Basic usage
 
@@ -583,7 +583,7 @@ For detailed documentation of all `ChatNVIDIA` features and configurations head 
 * [Sandboxed agents with NVIDIA OpenShell](../providers/nvidia.md#sandboxed-agents-with-openshell)
 * [Post-training agent workflows](../providers/nvidia.md#post-training-agent-workflows)
 * [NVIDIA Dynamo](https://developer.nvidia.com/dynamo) — open-source inference framework
-* [Dynamo Quickstart Guide](https://docs.nvidia.com/dynamo/latest/getting-started/quickstart) — get a local deployment running
+* [Dynamo Quickstart Guide](https://docs.nvidia.com/dynamo/latest/) — get a local deployment running
 * [KV Cache-Aware Routing](https://docs.nvidia.com/dynamo/latest/user-guides/kv-cache-aware-routing) — how the Smart Router works
 
 ***

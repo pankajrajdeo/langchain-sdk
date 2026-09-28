@@ -33,7 +33,7 @@ Add retry middleware to automatically retry network issues and rate limits. Mode
 import { createAgent, modelRetryMiddleware, toolRetryMiddleware } from "langchain";
 
 const agent = createAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [searchTool, fetchUrlTool],
   middleware: [
     modelRetryMiddleware({ maxRetries: 3, backoffFactor: 2.0, initialDelayMs: 1000 }),
@@ -53,7 +53,7 @@ Pause and collect information from the user when needed (like account IDs, order
 import { createDeepAgent } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [sendEmailTool, deleteRecordTool],
   interruptOn: {
     send_email: true,
@@ -71,7 +71,7 @@ If your primary model provider goes down entirely, use [ModelFallbackMiddleware]
 import { createAgent, modelFallbackMiddleware } from "langchain";
 
 const agent = createAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [searchTool],
   middleware: [
     modelFallbackMiddleware("gpt-5.5"),
@@ -86,7 +86,7 @@ Without limits, a confused agent can burn through your LLM API budget in minutes
 import { createAgent, modelCallLimitMiddleware, toolCallLimitMiddleware } from "langchain";
 
 const agent = createAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [searchTool],
   middleware: [
     modelCallLimitMiddleware({ runLimit: 50 }),
@@ -114,7 +114,7 @@ Without limits, a confused agent can burn through your LLM API budget in minutes
 import { createAgent, modelCallLimitMiddleware, toolCallLimitMiddleware } from "langchain";
 
 const agent = createAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   middleware: [
     modelCallLimitMiddleware({ runLimit: 50 }),
     toolCallLimitMiddleware({ runLimit: 200 }),
@@ -136,7 +136,7 @@ import {
 } from "langchain";
 
 const agent = createAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   middleware: [
     // Retry model calls on rate limits, timeouts, and 5xx errors
     modelRetryMiddleware({ maxRetries: 3, backoffFactor: 2.0, initialDelayMs: 1000 }),
@@ -163,7 +163,7 @@ import {
 } from "langchain";
 
 const agent = createAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   middleware: [
     // If the primary model is fully down, fall back to an alternative
     modelFallbackMiddleware("gpt-5.5"),

@@ -59,7 +59,7 @@ npm install deepagents @langchain/anthropic @langchain/core
 **npm**
 
 ```bash
-npm install deepagents @langchain/google-genai @langchain/core
+npm install deepagents @langchain/google @langchain/core
 ```
 
 ### Set API keys

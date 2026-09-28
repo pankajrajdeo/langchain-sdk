@@ -10,7 +10,7 @@ tags: [docs, javascript, integrations, tools, sql]
 
 > Integrate with the SQLToolkit tool using LangChain JavaScript.
 
-This will help you getting started with `SqlToolkit` [toolkits](../../langchain/tools.md#prebuilt-tools). For more information, you can also review the [Python SQL toolkit documentation](https://python.langchain.com/docs/integrations/toolkits/sql_database/).
+This will help you getting started with `SqlToolkit` [toolkits](../../langchain/tools.md#prebuilt-tools). For more information, you can also review the [Python SQL toolkit documentation](https://reference.langchain.com/python/langchain_community/agent_toolkits/langchain_community.agent_toolkits.sql.toolkit.SQLDatabaseToolkit).
 
 This toolkit contains a the following tools:
 

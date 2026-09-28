@@ -159,12 +159,12 @@ const researchSubagent: SubAgent = {
   description: "Used to research more in depth questions",
   systemPrompt: "You are a great researcher",
   tools: [internetSearch],
-  model: "google-genai:gemini-3.6-flash", // Optional override, defaults to main agent model
+  model: "google:gemini-3.6-flash", // Optional override, defaults to main agent model
 };
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -222,7 +222,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -280,7 +280,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -338,7 +338,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -396,7 +396,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -454,7 +454,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -512,7 +512,7 @@ const researchSubagent: SubAgent = {
 const subagents = [researchSubagent];
 
 const agent = createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents,
 });
 ```
@@ -542,7 +542,7 @@ const internetSearch = tool(
 );
 
 const researchInstructions = "You are a research coordinator.";
-const yourModel = "google_genai:gemini-3.6-flash";
+const yourModel = "google:gemini-3.6-flash";
 const specializedTools: never[] = [];
 
 // Create a custom agent graph
@@ -562,7 +562,7 @@ const customSubagent: CompiledSubAgent = {
 const subagents = [customSubagent];
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [internetSearch],
   systemPrompt: researchInstructions,
   subagents: subagents,
@@ -587,7 +587,7 @@ const internetSearch = tool(
 );
 
 const researchInstructions = "You are a research coordinator.";
-const yourModel = "google_genai:gemini-3.6-flash";
+const yourModel = "google:gemini-3.6-flash";
 const specializedTools: never[] = [];
 
 // Create a custom agent graph
@@ -632,7 +632,7 @@ const internetSearch = tool(
 );
 
 const researchInstructions = "You are a research coordinator.";
-const yourModel = "google_genai:gemini-3.6-flash";
+const yourModel = "google:gemini-3.6-flash";
 const specializedTools: never[] = [];
 
 // Create a custom agent graph
@@ -677,7 +677,7 @@ const internetSearch = tool(
 );
 
 const researchInstructions = "You are a research coordinator.";
-const yourModel = "google_genai:gemini-3.6-flash";
+const yourModel = "google:gemini-3.6-flash";
 const specializedTools: never[] = [];
 
 // Create a custom agent graph
@@ -722,7 +722,7 @@ const internetSearch = tool(
 );
 
 const researchInstructions = "You are a research coordinator.";
-const yourModel = "google_genai:gemini-3.6-flash";
+const yourModel = "google:gemini-3.6-flash";
 const specializedTools: never[] = [];
 
 // Create a custom agent graph
@@ -767,7 +767,7 @@ const internetSearch = tool(
 );
 
 const researchInstructions = "You are a research coordinator.";
-const yourModel = "google_genai:gemini-3.6-flash";
+const yourModel = "google:gemini-3.6-flash";
 const specializedTools: never[] = [];
 
 // Create a custom agent graph
@@ -812,7 +812,7 @@ const internetSearch = tool(
 );
 
 const researchInstructions = "You are a research coordinator.";
-const yourModel = "google_genai:gemini-3.6-flash";
+const yourModel = "google:gemini-3.6-flash";
 const specializedTools: never[] = [];
 
 // Create a custom agent graph
@@ -997,7 +997,7 @@ import { createDeepAgent } from "deepagents";
 import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents: [{
     name: "reviewer",
     description: "Reviews code for security issues, citing lines and severity",
@@ -1169,7 +1169,7 @@ The simplest pattern is to iterate `stream.subagents` to track each delegated ta
 import { createDeepAgent } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   name: "main-agent",
   systemPrompt:
     "You are a project coordinator with no research knowledge. " +
@@ -1697,7 +1697,7 @@ const researchSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents: [researchSubagent],
 });
 
@@ -2019,7 +2019,7 @@ const internetSearch = tool(
 
 // Main agent uses Gemini; general-purpose subagent uses GPT
 const agent = await createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   tools: [internetSearch],
   subagents: [
     {
@@ -2258,7 +2258,7 @@ const researchSubagent = {
 };
 
 const agent = await createDeepAgent({
-  model: "google_genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   skills: ["/skills/main/"], // Main agent and GP subagent get these
   subagents: [researchSubagent], // Researcher gets only its own skills
 });
@@ -2333,7 +2333,7 @@ const subagents = [
     description: "Reviews legal documents and contracts",
     systemPrompt: "You are an expert legal reviewer...",
     tools: [readDocument, analyzeContract],
-    model: "google-genai:gemini-3.6-flash", // Large context for long documents
+    model: "google:gemini-3.6-flash", // Large context for long documents
   },
   {
     name: "financial-analyst",
@@ -2524,7 +2524,7 @@ const subagents = [
 ];
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   systemPrompt:
     "You coordinate data analysis and reporting. Use subagents for specialized tasks.",
   subagents: subagents,
@@ -2784,7 +2784,7 @@ const researchSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   subagents: [researchSubagent],
   contextSchema,
 });

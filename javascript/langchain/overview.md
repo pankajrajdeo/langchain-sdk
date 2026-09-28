@@ -60,7 +60,7 @@ console.log(
 **Google Gemini**
 
 ```ts
-// First install: npm install langchain zod @langchain/google-genai
+// First install: npm install langchain zod @langchain/google
 import { createAgent, tool } from "langchain";
 import * as z from "zod";
 
@@ -76,7 +76,7 @@ const getWeather = tool(
 );
 
 const agent = createAgent({
-  model: "google-genai:gemini-2.5-flash-lite",
+  model: "google:gemini-2.5-flash-lite",
   tools: [getWeather],
 });
 

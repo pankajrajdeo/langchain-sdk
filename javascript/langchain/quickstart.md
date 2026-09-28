@@ -325,7 +325,7 @@ const getWeather = tool(
 );
 
 const agent = createAgent({
-  model: "google-genai:gemini-2.5-flash-lite",
+  model: "google:gemini-2.5-flash-lite",
   tools: [getWeather],
 });
 
@@ -686,7 +686,7 @@ const model = await initChatModel("gpt-5.5", {
 import { initChatModel } from "langchain";
 
 const model = await initChatModel("gemini-3.1-pro-preview", {
-  modelProvider: "google-genai",
+  modelProvider: "google",
   temperature: 0.5,
   timeout: 600_000,
   maxTokens: 25000,
@@ -932,7 +932,7 @@ const fetchTextFromUrl = tool(
 );
 
 const model = await initChatModel("gemini-3.1-pro-preview", {
-    modelProvider: "google-genai",
+    modelProvider: "google",
     temperature: 0.5,
     timeout: 600_000,
     maxTokens: 25000,

@@ -172,7 +172,7 @@ import { MessagesAnnotation } from "@langchain/langgraph";
 
 const State = MessagesAnnotation;
 const model = new ChatOpenAI({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   temperature: 0,
 }).bindTools(tools);
 
@@ -381,7 +381,7 @@ const gradeDocumentsSchema = z.object({
 });
 
 const gradeModel = new ChatOpenAI({
-  model: "google-genai:gemini-3.6-flash",
+  model: "google:gemini-3.6-flash",
   temperature: 0,
 }).withStructuredOutput(gradeDocumentsSchema);
 const gradeFallbackModel = new ChatOpenAI({

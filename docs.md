@@ -1,6 +1,6 @@
 ---
 title: "The open agent engineering ecosystem"
-description: "LangChain provides open source, model-agnostic harnesses for building agents. LangSmith is the framework-agnostic platform for testing, deploying, monitoring, and improving them across the agent..."
+description: "LangChain provides open source, model-agnostic harnesses for building agents. LangSmith is the framework-agnostic platform for testing, deploying, monitoring, and improving your agents across the..."
 source: "https://docs.langchain.com/docs"
 category: "docs"
 tags: [docs]
@@ -8,7 +8,7 @@ tags: [docs]
 
 # The open agent engineering ecosystem
 
-LangChain provides open source, model-agnostic harnesses for building agents. LangSmith is the framework-agnostic platform for testing, deploying, monitoring, and improving them across the agent development lifecycle. You control every layer of your agent system, and keep improving it with what you learn in production.
+LangChain provides open source, model-agnostic harnesses for building agents. LangSmith is the framework-agnostic platform for testing, deploying, monitoring, and improving your agents across the agent development lifecycle. You control every layer of your agent system, and keep improving it with what you learn in production.
 
 ## Agent development lifecycle
 
