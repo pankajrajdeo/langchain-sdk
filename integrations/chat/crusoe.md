@@ -18,15 +18,15 @@ This page will help you get started with Crusoe AI [chat models](../../langchain
 
 ### Integration details
 
-| Class                                                                 | Package                                                        | Serializable | JS support |                                                   Downloads                                                   |                                                    Version                                                   |
-| :-------------------------------------------------------------------- | :------------------------------------------------------------- | :----------: | :--------: | :-----------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: |
-| [ChatCrusoe](https://docs.crusoecloud.com/managed-inference/overview) | [langchain-crusoe](https://pypi.org/project/langchain-crusoe/) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-crusoe?style=flat-square\&label=%20\&color=blue) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-crusoe?style=flat-square\&label=%20\&color=orange) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [ChatCrusoe](https://docs.crusoecloud.com/managed-inference/overview) | [langchain-crusoe](https://pypi.org/project/langchain-crusoe/) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-crusoe?style=flat-square\&label=%20\&color=blue) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-crusoe?style=flat-square\&label=%20\&color=orange) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                                  ✅                                  |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 ## Setup
 
@@ -89,16 +89,16 @@ llm = ChatCrusoe(
 
 Crusoe serves leading open-source models via the Intelligence Foundry. See the [full model list](https://docs.crusoecloud.com/managed-inference/overview) for the latest availability.
 
-| Model                               | Provider    | Context Length |
-| :---------------------------------- | :---------- | :------------: |
-| `meta-llama/Llama-3.3-70B-Instruct` | Meta        |      128k      |
-| `openai/gpt-oss-120b`               | OpenAI      |      128k      |
-| `deepseek-ai/DeepSeek-V3-0324`      | DeepSeek    |      160k      |
-| `deepseek-ai/DeepSeek-R1-0528`      | DeepSeek    |      160k      |
-| `deepseek-ai/DeepSeek-V3.1`         | DeepSeek    |      160k      |
-| `Qwen/Qwen3-235B-A22B`              | Qwen        |      131k      |
-| `google/gemma-3-12b-it`             | Google      |      128k      |
-| `moonshotai/Kimi-K2-Thinking`       | Moonshot AI |      131k      |
+| Model | Provider | Context Length |
+| :- | :- | :-: |
+| `meta-llama/Llama-3.3-70B-Instruct` | Meta | 128k |
+| `openai/gpt-oss-120b` | OpenAI | 128k |
+| `deepseek-ai/DeepSeek-V3-0324` | DeepSeek | 160k |
+| `deepseek-ai/DeepSeek-R1-0528` | DeepSeek | 160k |
+| `deepseek-ai/DeepSeek-V3.1` | DeepSeek | 160k |
+| `Qwen/Qwen3-235B-A22B` | Qwen | 131k |
+| `google/gemma-3-12b-it` | Google | 128k |
+| `moonshotai/Kimi-K2-Thinking` | Moonshot AI | 131k |
 
 ## Invocation
 

@@ -16,33 +16,33 @@ tags: [docs, integrations, tools, bedrock_agentcore_browser]
 
 ### Integration details
 
-| Class                                                                                                    | Package                                                    | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/) |                                           Version                                           |
-| :------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :----------: | :-------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`BrowserToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) |       ❌      |                                ❌                                | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/) | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`BrowserToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) | ❌ | ❌ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
 
 ### Tool features
 
-| [Returns artifact](../../langchain/tools.md) | Native async | Supports browser interaction |      Pricing      |
-| :---------------------------------------------: | :----------: | :--------------------------: | :---------------: |
-|                        ✅                        |       ✅      |               ✅              | Pay-per-use (AWS) |
+| [Returns artifact](../../langchain/tools.md) | Native async | Supports browser interaction | Pricing |
+| :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | Pay-per-use (AWS) |
 
 ### Available tools
 
 The toolkit provides multiple tools for browser automation:
 
-| Tool                 | Description                            |
-| :------------------- | :------------------------------------- |
-| `navigate_browser`   | Navigate to a URL                      |
-| `click_element`      | Click on an element using CSS selector |
-| `type_text`          | Type text into an input field          |
-| `extract_text`       | Extract all text content from the page |
-| `extract_hyperlinks` | Extract all hyperlinks from the page   |
-| `get_elements`       | Get elements matching a CSS selector   |
-| `current_webpage`    | Get the current page URL and title     |
-| `navigate_back`      | Go back to the previous page           |
-| `take_screenshot`    | Take a screenshot of the page          |
-| `scroll_page`        | Scroll the page in a direction         |
-| `wait_for_element`   | Wait for an element to appear          |
+| Tool | Description |
+| :- | :- |
+| `navigate_browser` | Navigate to a URL |
+| `click_element` | Click on an element using CSS selector |
+| `type_text` | Type text into an input field |
+| `extract_text` | Extract all text content from the page |
+| `extract_hyperlinks` | Extract all hyperlinks from the page |
+| `get_elements` | Get elements matching a CSS selector |
+| `current_webpage` | Get the current page URL and title |
+| `navigate_back` | Go back to the previous page |
+| `take_screenshot` | Take a screenshot of the page |
+| `scroll_page` | Scroll the page in a direction |
+| `wait_for_element` | Wait for an element to appear |
 
 ## Setup
 

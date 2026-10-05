@@ -7,7 +7,7 @@ tags: [index, reference, python, deepagents]
 
 # reference/python/deepagents
 
-9 pages here, 787 pages including subdirectories.
+9 pages here, 788 pages including subdirectories.
 
 ## Directories
 
@@ -18,7 +18,7 @@ tags: [index, reference, python, deepagents]
 - [backends/](backends/_index.md) - 297 pages
 - [deepagents/](deepagents/_index.md) - 3 pages
 - [graph/](graph/_index.md) - 11 pages
-- [middleware/](middleware/_index.md) - 328 pages
+- [middleware/](middleware/_index.md) - 329 pages
 - [profiles/](profiles/_index.md) - 128 pages
 
 ## Files

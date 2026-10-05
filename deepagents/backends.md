@@ -37,15 +37,15 @@ This page explains how to:
 
 Here are a few prebuilt filesystem backends that you can quickly use with your deep agent:
 
-| Built-in backend                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Default](#statebackend)                                         | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash")` <br /> Thread-scoped. The default filesystem backend for an agent is stored in `langgraph` state. Files persist across turns within a thread (via your checkpointer) and are not shared across threads.                                                                                                                                                                                                                                          |
-| [Local filesystem persistence](#filesystembackend-local-disk)    | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=FilesystemBackend(root_dir="/Users/nh/Desktop/"))` <br />This gives the deep agent access to your local machine's filesystem. You can specify the root directory that the agent has access to. Note that any provided `root_dir` must be an absolute path. Typically, wrap in a [CompositeBackend](#compositebackend-router) to keep internal agent data (offloaded tool results, conversation history) separate from your project files. |
-| [Durable store (LangGraph store)](#storebackend-langgraph-store) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=StoreBackend())` <br />This gives the agent access to long-term storage that is *persisted across threads*. This is great for storing longer term memories or instructions that are applicable to the agent over multiple executions.                                                                                                                                                                                                     |
-| [Context Hub](#contexthubbackend)                                | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=ContextHubBackend("my-agent"))` <br />Stores files durably in a LangSmith Hub repo, without provisioning a separate LangGraph store.                                                                                                                                                                                                                                                                                                      |
-| [Sandbox](sandboxes.md)                      | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=sandbox)` <br />Execute code in isolated environments. Sandboxes provide filesystem tools plus the `execute` tool for running shell commands. Choose from LangSmith, AgentCore, Daytona, or other [sandbox integrations](../integrations/sandboxes.md).                                                                                                                                                                             |
-| [Local shell](#localshellbackend-local-shell)                    | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=LocalShellBackend(root_dir=".", env={"PATH": "/usr/bin:/bin"}))` <br />Filesystem and shell execution directly on the host. No isolation—use only in controlled development environments. See [security considerations](#localshellbackend-local-shell) below.                                                                                                                                                                            |
-| [Composite](#compositebackend-router)                            | Thread-scoped by default, `/memories/` persisted across threads. The Composite backend is maximally flexible. You can specify different routes in the filesystem to point towards different backends. See Composite routing below for a ready-to-paste example.                                                                                                                                                                                                                                                     |
+| Built-in backend | Description |
+| - | - |
+| [Default](#statebackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash")` <br /> Thread-scoped. The default filesystem backend for an agent is stored in `langgraph` state. Files persist across turns within a thread (via your checkpointer) and are not shared across threads. |
+| [Local filesystem persistence](#filesystembackend-local-disk) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=FilesystemBackend(root_dir="/Users/nh/Desktop/"))` <br />This gives the deep agent access to your local machine's filesystem. You can specify the root directory that the agent has access to. Note that any provided `root_dir` must be an absolute path. Typically, wrap in a [CompositeBackend](#compositebackend-router) to keep internal agent data (offloaded tool results, conversation history) separate from your project files. |
+| [Durable store (LangGraph store)](#storebackend-langgraph-store) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=StoreBackend())` <br />This gives the agent access to long-term storage that is *persisted across threads*. This is great for storing longer term memories or instructions that are applicable to the agent over multiple executions. |
+| [Context Hub](#contexthubbackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=ContextHubBackend("my-agent"))` <br />Stores files durably in a LangSmith Hub repo, without provisioning a separate LangGraph store. |
+| [Sandbox](sandboxes.md) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=sandbox)` <br />Execute code in isolated environments. Sandboxes provide filesystem tools plus the `execute` tool for running shell commands. Choose from LangSmith, AgentCore, Daytona, or other [sandbox integrations](../integrations/sandboxes.md). |
+| [Local shell](#localshellbackend-local-shell) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=LocalShellBackend(root_dir=".", env={"PATH": "/usr/bin:/bin"}))` <br />Filesystem and shell execution directly on the host. No isolation—use only in controlled development environments. See [security considerations](#localshellbackend-local-shell) below. |
+| [Composite](#compositebackend-router) | Thread-scoped by default, `/memories/` persisted across threads. The Composite backend is maximally flexible. You can specify different routes in the filesystem to point towards different backends. See Composite routing below for a ready-to-paste example. |
 
 ```mermaid
 graph TB
@@ -978,6 +978,24 @@ Notes:
 * For StoreBackend routing, ensure a store is provided via `create_deep_agent(model=..., store=...)` or provisioned by the platform.
 * Deep Agents write internal data (offloaded tool results, conversation history) to the default backend. Use `StateBackend` as the default to keep these artifacts ephemeral and avoid writing them to disk or a persistent store. See the [FilesystemBackend tip](#filesystembackend-local-disk) for a complete example.
 
+## Offload binary content
+
+Binary content offloading stores inline media in the backend instead of keeping base64 payloads in message history. This reduces checkpoint size for agents that read binary files or receive inline media in user messages. Offloading is opt-in and disabled by default.
+
+> [!NOTE]
+> Binary content offloading requires `deepagents>=0.7.21`.
+
+Set `offload_binary_content=True` on `FilesystemMiddleware` and pass it in the `middleware` list to `create_deep_agent`. Use the same backend for the agent and the middleware.
+
+Payloads are stored under `/blobs/<sha256>` by default. If you set `artifacts_root` on the middleware, blobs are stored under that root instead.
+
+Message history keeps content-addressed references. Before each model call, the middleware restores the original media from its cache or the backend. Re-reading unchanged content reuses the same blob; changed content creates a new blob.
+
+Use a backend that stores blobs outside graph state, such as a sandbox or `FilesystemBackend`. Offloading has no effect when the blob path routes to `StateBackend`, including through `CompositeBackend`. If you keep `StateBackend` as the default backend, route the blob directory to external storage.
+
+> [!NOTE]
+> Inline media in user messages is replaced at the next model call. The original input payload still appears in earlier checkpoints. Keep the blob storage available when resuming a thread so the middleware can restore its media.
+
 ## Custom backends
 
 Implement a custom backend to connect Deep Agents to storage systems such as databases, object stores, and remote filesystems. See [community-built backends](../integrations/backends.md) for examples.
@@ -986,15 +1004,15 @@ Implement a custom backend to connect Deep Agents to storage systems such as dat
 
 Subclass [`BackendProtocol`](https://reference.langchain.com/python/deepagents/backends/protocol/BackendProtocol) and implement the following methods:
 
-| Method   | Signature                                                                             | What it does                                                                                                                                                     |                                       |                                            |
-| -------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------ |
-| `ls`     | `(path: str) -> LsResult`                                                             | List files and directories at the given path.                                                                                                                    |                                       |                                            |
-| `read`   | `(file_path: str, offset: int, limit: int) -> ReadResult`                             | Return file contents, optionally paginated.                                                                                                                      |                                       |                                            |
-| `write`  | `(file_path: str, content: str) -> WriteResult`                                       | Create or overwrite a file.                                                                                                                                      |                                       |                                            |
-| `edit`   | `(file_path: str, old_string: str, new_string: str, replace_all: bool) -> EditResult` | Find-and-replace within an existing file.                                                                                                                        |                                       |                                            |
-| `glob`   | \`(pattern: str, path: str                                                            | None) -> GlobResult\`                                                                                                                                            | Return paths matching a glob pattern. |                                            |
-| `grep`   | \`(pattern: str, path: str                                                            | None, glob: str                                                                                                                                                  | None) -> GrepResult\`                 | Search file contents for a literal string. |
-| `delete` | `(file_path: str) -> DeleteResult`                                                    | Optional. Remove a file or, recursively, a directory. If the backend does not support deletion, the tool is automatically hidden from the model at request time. |                                       |                                            |
+| Method | Signature | What it does | | |
+| - | - | - | - | - |
+| `ls` | `(path: str) -> LsResult` | List files and directories at the given path. | | |
+| `read` | `(file_path: str, offset: int, limit: int) -> ReadResult` | Return file contents, optionally paginated. | | |
+| `write` | `(file_path: str, content: str) -> WriteResult` | Create or overwrite a file. | | |
+| `edit` | `(file_path: str, old_string: str, new_string: str, replace_all: bool) -> EditResult` | Find-and-replace within an existing file. | | |
+| `glob` | \`(pattern: str, path: str | None) -> GlobResult\` | Return paths matching a glob pattern. | |
+| `grep` | \`(pattern: str, path: str | None, glob: str | None) -> GrepResult\` | Search file contents for a literal string. |
+| `delete` | `(file_path: str) -> DeleteResult` | Optional. Remove a file or, recursively, a directory. If the backend does not support deletion, the tool is automatically hidden from the model at request time. | | |
 
 To also support the `execute` tool (running shell commands), implement [`SandboxBackendProtocol`](https://reference.langchain.com/python/deepagents/backends/protocol/SandboxBackendProtocol) instead, which extends `BackendProtocol` with an `execute` method.
 
@@ -1146,23 +1164,23 @@ Previously, backends like `StateBackend` and `StoreBackend` required a factory f
 
 ### What changed
 
-| Before (deprecated)                                                  | After                                                   |
-| -------------------------------------------------------------------- | ------------------------------------------------------- |
-| `backend=lambda rt: StateBackend(rt)`                                | `backend=StateBackend()`                                |
-| `backend=lambda rt: StoreBackend(rt)`                                | `backend=StoreBackend()`                                |
+| Before (deprecated) | After |
+| - | - |
+| `backend=lambda rt: StateBackend(rt)` | `backend=StateBackend()` |
+| `backend=lambda rt: StoreBackend(rt)` | `backend=StoreBackend()` |
 | `backend=lambda rt: CompositeBackend(default=StateBackend(rt), ...)` | `backend=CompositeBackend(default=StateBackend(), ...)` |
-| `backend: (config) => new StateBackend(config)`                      | `backend: new StateBackend()`                           |
-| `backend: (config) => new StoreBackend(config)`                      | `backend: new StoreBackend()`                           |
+| `backend: (config) => new StateBackend(config)` | `backend: new StateBackend()` |
+| `backend: (config) => new StoreBackend(config)` | `backend: new StoreBackend()` |
 
 ### Deprecated APIs
 
-| Deprecated                                                | Replacement                                                  |
-| --------------------------------------------------------- | ------------------------------------------------------------ |
-| Passing a callable to `backend=` in `create_deep_agent`   | Pass a backend instance directly                             |
-| `runtime` constructor argument on `StateBackend(runtime)` | `StateBackend()` (no arguments needed)                       |
+| Deprecated | Replacement |
+| - | - |
+| Passing a callable to `backend=` in `create_deep_agent` | Pass a backend instance directly |
+| `runtime` constructor argument on `StateBackend(runtime)` | `StateBackend()` (no arguments needed) |
 | `runtime` constructor argument on `StoreBackend(runtime)` | `StoreBackend()` or `StoreBackend(namespace=..., store=...)` |
-| `files_update` field on `WriteResult` and `EditResult`    | State writes are now handled internally by the backend       |
-| `Command` wrapping in middleware write/edit tools         | Tools return plain strings; no `Command(update=...)` needed  |
+| `files_update` field on `WriteResult` and `EditResult` | State writes are now handled internally by the backend |
+| `Command` wrapping in middleware write/edit tools | Tools return plain strings; no `Command(update=...)` needed |
 
 > [!NOTE]
 > The factory pattern still works at runtime and emits a deprecation warning. Update your code to use direct instances before the next major version.

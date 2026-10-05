@@ -238,26 +238,26 @@ For more details, see the [Soniox context documentation](https://soniox.com/docs
 
 #### SonioxLoaderParams (required)
 
-| Parameter           | Type                   | Required | Description                                            |
-| ------------------- | ---------------------- | -------- | ------------------------------------------------------ |
-| `audio`             | `Uint8Array \| string` | Yes      | Audio file as buffer or URL                            |
-| `audioFormat`       | `SonioxAudioFormat`    | No       | Audio file format                                      |
-| `apiKey`            | `string`               | No       | Soniox API key (defaults to `SONIOX_API_KEY` env var)  |
-| `apiBaseUrl`        | `string`               | No       | API base URL (defaults to `https://api.soniox.com/v1`) |
-| `pollingIntervalMs` | `number`               | No       | Polling interval in ms (min: 1000, default: 1000)      |
-| `pollingTimeoutMs`  | `number`               | No       | Polling timeout in ms (default: 180000)                |
+| Parameter | Type | Required | Description |
+| - | - | - | - |
+| `audio` | `Uint8Array \| string` | Yes | Audio file as buffer or URL |
+| `audioFormat` | `SonioxAudioFormat` | No | Audio file format |
+| `apiKey` | `string` | No | Soniox API key (defaults to `SONIOX_API_KEY` env var) |
+| `apiBaseUrl` | `string` | No | API base URL (defaults to `https://api.soniox.com/v1`) |
+| `pollingIntervalMs` | `number` | No | Polling interval in ms (min: 1000, default: 1000) |
+| `pollingTimeoutMs` | `number` | No | Polling timeout in ms (default: 180000) |
 
 #### SonioxLoaderOptions (optional)
 
-| Parameter                        | Type                         | Description                              |
-| -------------------------------- | ---------------------------- | ---------------------------------------- |
-| `model`                          | `SonioxTranscriptionModelId` | Model to use (default: `"stt-async-v4"`) |
-| `translation`                    | `object`                     | Translation configuration                |
-| `language_hints`                 | `string[]`                   | Language hints for transcription         |
-| `language_hints_strict`          | `boolean`                    | Enforce strict language hints            |
-| `enable_speaker_diarization`     | `boolean`                    | Enable speaker identification            |
-| `enable_language_identification` | `boolean`                    | Enable language detection                |
-| `context`                        | `object`                     | Context for improved accuracy            |
+| Parameter | Type | Description |
+| - | - | - |
+| `model` | `SonioxTranscriptionModelId` | Model to use (default: `"stt-async-v4"`) |
+| `translation` | `object` | Translation configuration |
+| `language_hints` | `string[]` | Language hints for transcription |
+| `language_hints_strict` | `boolean` | Enforce strict language hints |
+| `enable_speaker_diarization` | `boolean` | Enable speaker identification |
+| `enable_language_identification` | `boolean` | Enable language detection |
+| `context` | `object` | Context for improved accuracy |
 
 Browse the [documentation](https://soniox.com/docs/stt/api-reference/transcriptions/create_transcription) for a full list of supported options.
 

@@ -16,15 +16,15 @@ This will help you get started with QwQ [chat models](../../langchain/models.md)
 
 ### Integration details
 
-| Class                                                | Package                                                    | Serializable |                                            Downloads                                           |                                           Version                                           |
-| :--------------------------------------------------- | :--------------------------------------------------------- | :----------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`ChatQwQ`](https://pypi.org/project/langchain-qwq/) | [`langchain-qwq`](https://pypi.org/project/langchain-qwq/) |     beta     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-qwq?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-qwq?style=flat-square\&label=%20) |
+| Class | Package | Serializable | Downloads | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`ChatQwQ`](https://pypi.org/project/langchain-qwq/) | [`langchain-qwq`](https://pypi.org/project/langchain-qwq/) | beta | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-qwq?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-qwq?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ✅      |                                  ✅                                  |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
 
 ## Setup
 

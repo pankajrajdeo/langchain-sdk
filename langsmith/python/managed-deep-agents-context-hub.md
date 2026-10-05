@@ -17,10 +17,10 @@ Managed Deep Agents stores deploy-owned instructions and skills, and optional du
 
 ## What lives in Context Hub
 
-| Content        | Project source                                                                | Synced on `mda deploy`                               | Writable by the agent         |
-| -------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------- | ----------------------------- |
-| System prompt  | [`instructions.md`](managed-deep-agents-instructions.md)       | Yes                                                  | No                            |
-| Skills         | [`skills/`](managed-deep-agents-skills.md)                     | Yes                                                  | No                            |
+| Content | Project source | Synced on `mda deploy` | Writable by the agent |
+| - | - | - | - |
+| System prompt | [`instructions.md`](managed-deep-agents-instructions.md) | Yes | No |
+| Skills | [`skills/`](managed-deep-agents-skills.md) | Yes | No |
 | Durable memory | Optional [`memory`](managed-deep-agents-memory.md) declaration | Enables the tree; does not overwrite existing memory | Yes, under `/memories/agent/` |
 
 Tools, middleware, MCP connectors, channels, schedules, sandboxes, and the agent definition ship with the compiled deployment. They are not synced to Context Hub.
@@ -62,10 +62,10 @@ Non-interactive conflict (CI or redirected output):
 └  Context Hub instructions.md and skills/ changed since the last MDA sync. Re-run with --context-strategy overwrite or --context-strategy keep-hub.
 ```
 
-| Strategy    | Effect                                                                                                 |
-| ----------- | ------------------------------------------------------------------------------------------------------ |
+| Strategy | Effect |
+| - | - |
 | `overwrite` | Replace the Hub-edited `instructions.md` or `skills/` with the project copy, then continue the deploy. |
-| `keep-hub`  | Keep the Context Hub version, skip syncing that section, and continue the deploy.                      |
+| `keep-hub` | Keep the Context Hub version, skip syncing that section, and continue the deploy. |
 
 For the full deploy step list and flags, see the [CLI reference](managed-deep-agents-cli.md#deploy-projects). For secrets routing and deploy options, see [Deploy an agent](managed-deep-agents-deploy.md).
 
@@ -89,12 +89,12 @@ For more information, see [Develop locally with LangSmith Studio](managed-deep-a
 
 ## Choose where context belongs
 
-| Goal                                                  | Use                                                                                                                                                                                             |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Always-on system prompt                               | [Instructions](managed-deep-agents-instructions.md)                                                                                                                              |
-| Task-specific procedures                              | [Skills](managed-deep-agents-skills.md)                                                                                                                                          |
-| Knowledge the agent learns and retains across threads | [Memory](managed-deep-agents-memory.md)                                                                                                                                          |
-| Application logic and external calls                  | [Tools](managed-deep-agents-tools.md), [MCP connectors](managed-deep-agents-mcp-connectors.md), or [middleware](managed-deep-agents-middleware.md) |
+| Goal | Use |
+| - | - |
+| Always-on system prompt | [Instructions](managed-deep-agents-instructions.md) |
+| Task-specific procedures | [Skills](managed-deep-agents-skills.md) |
+| Knowledge the agent learns and retains across threads | [Memory](managed-deep-agents-memory.md) |
+| Application logic and external calls | [Tools](managed-deep-agents-tools.md), [MCP connectors](managed-deep-agents-mcp-connectors.md), or [middleware](managed-deep-agents-middleware.md) |
 
 ## See also
 

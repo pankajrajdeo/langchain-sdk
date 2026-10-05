@@ -81,15 +81,15 @@ Each component layer builds on the previous ones:
 
 LangChain organizes components into these main categories:
 
-| Category                                                                 | Purpose                     | Key Components                      | Use Cases                                          |
-| ------------------------------------------------------------------------ | --------------------------- | ----------------------------------- | -------------------------------------------------- |
-| **[Models](models.md)**                           | AI reasoning and generation | Chat models, LLMs, Embedding models | Text generation, reasoning, semantic understanding |
-| **[Tools](tools.md)**                             | External capabilities       | APIs, databases, etc.               | Web search, data access, computations              |
-| **[Agents](agents.md)**                           | Orchestration and reasoning | ReAct agents, tool calling agents   | Nondeterministic workflows, decision making        |
-| **[Memory](short-term-memory.md)**                | Context preservation        | Message history, custom state       | Conversations, stateful interactions               |
-| **[Retrievers](../integrations/retrievers.md)**                | Information access          | Vector retrievers, web retrievers   | RAG, knowledge base search                         |
-| **[Document processing](../integrations/document_loaders.md)** | Data ingestion              | Loaders, splitters, transformers    | PDF processing, web scraping                       |
-| **[Vector Stores](../integrations/vectorstores.md)**           | Semantic search             | Chroma, Pinecone, FAISS             | Similarity search, embeddings storage              |
+| Category | Purpose | Key Components | Use Cases |
+| - | - | - | - |
+| **[Models](models.md)** | AI reasoning and generation | Chat models, LLMs, Embedding models | Text generation, reasoning, semantic understanding |
+| **[Tools](tools.md)** | External capabilities | APIs, databases, etc. | Web search, data access, computations |
+| **[Agents](agents.md)** | Orchestration and reasoning | ReAct agents, tool calling agents | Nondeterministic workflows, decision making |
+| **[Memory](short-term-memory.md)** | Context preservation | Message history, custom state | Conversations, stateful interactions |
+| **[Retrievers](../integrations/retrievers.md)** | Information access | Vector retrievers, web retrievers | RAG, knowledge base search |
+| **[Document processing](../integrations/document_loaders.md)** | Data ingestion | Loaders, splitters, transformers | PDF processing, web scraping |
+| **[Vector Stores](../integrations/vectorstores.md)** | Semantic search | Chroma, Pinecone, FAISS | Similarity search, embeddings storage |
 
 ## Common patterns
 

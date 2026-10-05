@@ -146,13 +146,13 @@ documents = await loader.aload()
 
 For detailed documentation of all classes and configurations, see the [langchain-litellm](https://reference.langchain.com/python/langchain-litellm/) API reference.
 
-| Class                                                                                                                                 | Description                                                         |
-| :------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------ |
-| [ChatLiteLLM](https://reference.langchain.com/python/langchain-litellm/chat_models/litellm/ChatLiteLLM)                               | LangChain chat model wrapper for LiteLLM                            |
-| [ChatLiteLLMRouter](https://reference.langchain.com/python/langchain-litellm/chat_models/litellm_router/ChatLiteLLMRouter)            | Router-backed chat model for load balancing and fallbacks           |
-| [LiteLLMEmbeddings](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm/LiteLLMEmbeddings)                    | Embed text across 100+ providers with a single consistent interface |
-| [LiteLLMEmbeddingsRouter](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm_router/LiteLLMEmbeddingsRouter) | Router-backed embeddings for load balancing across deployments      |
-| [LiteLLMOCRLoader](https://reference.langchain.com/python/langchain-litellm/document_loaders/litellm_ocr/LiteLLMOCRLoader)            | Document loader via LiteLLM proxy's OCR endpoint                    |
+| Class | Description |
+| :- | :- |
+| [ChatLiteLLM](https://reference.langchain.com/python/langchain-litellm/chat_models/litellm/ChatLiteLLM) | LangChain chat model wrapper for LiteLLM |
+| [ChatLiteLLMRouter](https://reference.langchain.com/python/langchain-litellm/chat_models/litellm_router/ChatLiteLLMRouter) | Router-backed chat model for load balancing and fallbacks |
+| [LiteLLMEmbeddings](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm/LiteLLMEmbeddings) | Embed text across 100+ providers with a single consistent interface |
+| [LiteLLMEmbeddingsRouter](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm_router/LiteLLMEmbeddingsRouter) | Router-backed embeddings for load balancing across deployments |
+| [LiteLLMOCRLoader](https://reference.langchain.com/python/langchain-litellm/document_loaders/litellm_ocr/LiteLLMOCRLoader) | Document loader via LiteLLM proxy's OCR endpoint |
 
 ***
 

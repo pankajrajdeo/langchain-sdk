@@ -19,9 +19,9 @@ tags: [docs, integrations, retrievers, parallel]
 
 ### Integration details
 
-| Class                                                                                                                     | Package                                                                            | JS support |                                                                                                                   Package latest                                                                                                                   |
-| :------------------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------- | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| Class | Package | JS support | Package latest |
+| :- | :- | :-: | :-: |
+| [`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ## Setup
 

@@ -1,13 +1,13 @@
 ---
 title: "integrations/vectorstores"
-description: "Index of 32 pages and 0 subdirectories under integrations/vectorstores."
+description: "Index of 33 pages and 0 subdirectories under integrations/vectorstores."
 category: "index"
 tags: [index, integrations, vectorstores]
 ---
 
 # integrations/vectorstores
 
-32 pages here.
+33 pages here.
 
 ## Files
 
@@ -28,6 +28,7 @@ tags: [index, integrations, vectorstores]
 - [Feature Store on Gemini Enterprise Agent Platform integration](google_vertex_ai_feature_store.md) - Integrate with the Feature Store on Gemini Enterprise Agent Platform vector store using LangChain Python.
 - [Vector Search on Gemini Enterprise Agent Platform integration](google_vertex_ai_vector_search.md) - Integrate with the Vector Search on Gemini Enterprise Agent Platform vector store using LangChain Python.
 - [InMemoryVectorStore integration](in_memory.md) - Integrate with the InMemoryVectorStore vector store using LangChain Python.
+- [Vector store integrations](index.md) - Integrate with vector stores using LangChain Python.
 - [Amazon memorydb integration](memorydb.md) - Integrate with the Amazon memorydb vector store using LangChain Python.
 - [Milvus integration](milvus.md) - Integrate with the Milvus vector store using LangChain Python.
 - [MongoDB Atlas Integration](mongodb_atlas.md) - Integrate with the MongoDB Atlas Vector Store using LangChain Python.

@@ -79,14 +79,10 @@ paths:
           required: false
           schema:
             type: boolean
-            description: >-
-              Optionally delete tracing project for the deployment. Ignored in
-              agent mode, which preserves the tracing project.
+            description: Optionally delete the deployment's tracing project.
             default: false
             title: Delete Tracing Project
-          description: >-
-            Optionally delete tracing project for the deployment. Ignored in
-            agent mode, which preserves the tracing project.
+          description: Optionally delete the deployment's tracing project.
         - name: force
           in: query
           required: false

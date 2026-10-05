@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain/agents"
-description: "Index of 3 pages and 4 subdirectories under reference/python/langchain/agents."
+description: "Index of 4 pages and 4 subdirectories under reference/python/langchain/agents."
 category: "index"
 tags: [index, reference, python, langchain, agents]
 ---
 
 # reference/python/langchain/agents
 
-3 pages here, 522 pages including subdirectories.
+4 pages here, 523 pages including subdirectories.
 
 ## Directories
 
@@ -18,6 +18,7 @@ tags: [index, reference, python, langchain, agents]
 
 ## Files
 
+- [create_agent](create_agent.md) - Creates an agent graph that calls tools in a loop until a stopping condition is met.
 - [factory](factory.md) - Agent factory for creating agents with middleware support.
 - [middleware](middleware.md) - Entrypoint to using middleware plugins with Agents.
 - [structured_output](structured_output.md) - Types for setting agent response formats.

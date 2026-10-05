@@ -17,11 +17,11 @@ tags: [docs, langsmith, configure-checkpointer]
 
 ## Available backends
 
-| Backend   | Storage       | Configuration                                                 | Use case                                                                            |
-| --------- | ------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `default` | PostgreSQL    | None (built-in)                                               | Standard deployments                                                                |
-| `mongo`   | MongoDB       | `langgraph.json` or `LS_DEFAULT_CHECKPOINTER_BACKEND` env var | Teams with existing MongoDB infrastructure                                          |
-| `custom`  | User-provided | `langgraph.json`                                              | Custom storage backends (see [custom checkpointer](custom-checkpointer.md)) |
+| Backend | Storage | Configuration | Use case |
+| - | - | - | - |
+| `default` | PostgreSQL | None (built-in) | Standard deployments |
+| `mongo` | MongoDB | `langgraph.json` or `LS_DEFAULT_CHECKPOINTER_BACKEND` env var | Teams with existing MongoDB infrastructure |
+| `custom` | User-provided | `langgraph.json` | Custom storage backends (see [custom checkpointer](custom-checkpointer.md)) |
 
 ## Default (PostgreSQL)
 

@@ -20,4 +20,4 @@ NUM_CHARS_PER_TOKEN = 4
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/filesystem.py#L954)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/filesystem.py#L966)

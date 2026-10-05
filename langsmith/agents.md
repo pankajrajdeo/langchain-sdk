@@ -1,0 +1,76 @@
+---
+title: "Agents"
+description: "What an agent is in LangSmith, how a workspace organizes its agents, how environments divide an agent's traces, and how an identifier differs from a display name."
+source: "https://docs.langchain.com/langsmith/agents"
+category: "docs"
+tags: [docs, langsmith, agents]
+---
+
+# Agents
+
+> What an agent is in LangSmith, how a workspace organizes its agents, how environments divide an agent's traces, and how an identifier differs from a display name.
+
+An *agent* is an AI system that completes tasks end to end using tools, skills, and subagents. In LangSmith, an agent is also the unit a workspace is organized around. Name it once, and LangSmith records what that agent does under that name, divided across four [environments](agent-environments.md): Production, Staging, Development, and Local. A trace, an alert, an evaluator, and a prebuilt dashboard each belong to one environment of one agent. A [dataset](evaluation-concepts.md#datasets) and a custom dashboard are the exceptions. A dataset attaches to one or more agents and to no environment, and a custom dashboard attaches to an agent rather than to an environment.
+
+Every trace carries its agent and one of that agent's environments, so what produced a trace and where it ran are recorded as it arrives. LangSmith can then act on that context: an alert watches production and stays quiet about local runs, each environment gets its own prebuilt dashboard, and an [Insights](insights.md) report covers the traffic of the environment you run it on.
+
+> [!NOTE]
+> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+
+```mermaid
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, system-ui, sans-serif","lineColor":"#40668D","primaryColor":"#E5F4FF","primaryTextColor":"#030710","primaryBorderColor":"#006DDD","clusterBkg":"transparent"}}}%%
+flowchart LR
+    WS("<div style='padding:2px 6px'><b>Workspace</b><br/>Holds every agent</div>")
+    AG("<div style='padding:2px 6px'><b>Agent</b><br/>What you name</div>")
+    EN("<div style='text-align:left;padding:2px 6px'><b>Environment</b><br/>&nbsp;•&nbsp; Production<br/>&nbsp;•&nbsp; Staging<br/>&nbsp;•&nbsp; Development<br/>&nbsp;•&nbsp; Local</div>")
+    TR("<div style='padding:2px 6px'><b>Trace</b><br/>Belongs to one<br/>environment</div>")
+
+    WS ==> AG ==> EN ==> TR
+
+    classDef neutral fill:#F2FAFF,stroke:#40668D,stroke-width:2px,color:#2F4B68,rx:10,ry:10
+    classDef process fill:#E5F4FF,stroke:#006DDD,stroke-width:2px,color:#030710,rx:10,ry:10
+    classDef output fill:#EBD0F0,stroke:#885270,stroke-width:2px,color:#441E33,rx:10,ry:10
+
+    class WS,EN neutral
+    class AG process
+    class TR output
+```
+
+Every trace maps to the agent that produced it and the environment it ran in.
+
+## Environments
+
+An *environment* records where an agent was running when it produced a trace. The names are fixed: Production, Staging, Development, and Local.
+
+For more information, see [Agent environments](agent-environments.md).
+
+## Identifiers and display names
+
+Every agent has two names, and they do different work:
+
+* **Identifier**: Set when the agent is created, and not editable afterwards. Whether you supply it or LangSmith generates it depends on [how the agent was created](create-an-agent.md). LangSmith uses it to address traces, so it stays stable even when the display name changes.
+* **Display name**: Shown wherever the agent appears in the UI. For an agent [built in the UI](build-an-agent.md), rename it from the **Name** field in its Build configuration. Renaming does not move existing traces or change where new traces land.
+
+The identifier is also what the browser address bar carries, so you can read it from there or copy it from the **ID** field on the agent's Overview.
+
+## Next steps
+
+#### [Environments](agent-environments.md)
+The four environments an agent's traces divide into, and how to switch between them.
+
+#### [Navigate agents](navigate-agents.md)
+The agent switcher, the agent list, and the agent Overview.
+
+#### [Log traces to an agent](log-traces-to-agent.md)
+How agent addressing sends traces to an agent and an environment, and why it cannot be combined with project addressing.
+
+#### [Create an agent](create-an-agent.md)
+The four ways to create an agent, what each route decides about it, and the rules an identifier must follow.
+
+***
+
+> [!NOTE]
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

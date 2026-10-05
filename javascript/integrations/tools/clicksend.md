@@ -16,9 +16,9 @@ tags: [docs, javascript, integrations, tools, clicksend]
 
 ### Integration details
 
-| Class            | Package                                                                                                | Serializable | [Python support](clicksend.md) |                                                    Version                                                   |
-| :--------------- | :----------------------------------------------------------------------------------------------------- | :----------: | :------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: |
-| `ClickSendTools` | [@clicksend/langchain-clicksend-mcp](https://www.npmjs.com/package/@clicksend/langchain-clicksend-mcp) |       ❌      |                                ❌                               | ![npm version](https://img.shields.io/npm/v/@clicksend/langchain-clicksend-mcp?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [Python support](clicksend.md) | Version |
+| :- | :- | :-: | :-: | :-: |
+| `ClickSendTools` | [@clicksend/langchain-clicksend-mcp](https://www.npmjs.com/package/@clicksend/langchain-clicksend-mcp) | ❌ | ❌ | ![npm version](https://img.shields.io/npm/v/@clicksend/langchain-clicksend-mcp?style=flat-square\&label=%20) |
 
 ### Tool features
 

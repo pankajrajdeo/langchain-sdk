@@ -28,18 +28,18 @@ For detailed documentation of all Bedrock features and configurations head to th
 
 ### Integration details
 
-| Class                                                                                                                          | Package                                                                 | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/bedrock) |                                            Downloads                                           |                                           Version                                           |
-| :----------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------- | :----------: | :-------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`ChatBedrock`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock/ChatBedrock)                          | [`langchain-aws`](https://reference.langchain.com/python/langchain-aws) |     beta     |                                   ✅                                   | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aws?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
-| [`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse) | [`langchain-aws`](https://reference.langchain.com/python/langchain-aws) |     beta     |                                   ✅                                   | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aws?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/bedrock) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatBedrock`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock/ChatBedrock) | [`langchain-aws`](https://reference.langchain.com/python/langchain-aws) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aws?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
+| [`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse) | [`langchain-aws`](https://reference.langchain.com/python/langchain-aws) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aws?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
 
 ### Model features
 
 The below apply to both `ChatBedrock` and `ChatBedrockConverse`.
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ❌      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ✅ | ❌ |
 
 ## Setup
 
@@ -166,10 +166,10 @@ This guide focuses on implementing Extended Thinking using AWS Bedrock with Lang
 
 Extended Thinking is available for the following Claude models on AWS Bedrock:
 
-| Model                 | Model ID                                       |
-| --------------------- | ---------------------------------------------- |
-| **Claude Opus 4**     | `anthropic.claude-opus-4-20250514-v1:0`        |
-| **Claude Sonnet 4**   | `anthropic.claude-sonnet-4-20250514-v1:0`      |
+| Model | Model ID |
+| - | - |
+| **Claude Opus 4** | `anthropic.claude-opus-4-20250514-v1:0` |
+| **Claude Sonnet 4** | `anthropic.claude-sonnet-4-20250514-v1:0` |
 | **Claude 3.7 Sonnet** | `us.anthropic.claude-3-7-sonnet-20250219-v1:0` |
 
 ```python

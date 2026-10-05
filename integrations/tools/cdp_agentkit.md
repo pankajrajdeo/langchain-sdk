@@ -16,9 +16,9 @@ The Coinbase AgentKit LangChain extension gives an LLM agent tools to interact w
 
 ### Integration details
 
-| Class / helper        | Package                       | Serializable | JS support |                                                  Version                                                  |
-| :-------------------- | :---------------------------- | :----------: | :--------: | :-------------------------------------------------------------------------------------------------------: |
-| `get_langchain_tools` | `coinbase-agentkit-langchain` |       ❌      |      ❌     | ![PyPI - Version](https://img.shields.io/pypi/v/coinbase-agentkit-langchain?style=flat-square\&label=%20) |
+| Class / helper | Package | Serializable | JS support | Version |
+| :- | :- | :-: | :-: | :-: |
+| `get_langchain_tools` | `coinbase-agentkit-langchain` | ❌ | ❌ | ![PyPI - Version](https://img.shields.io/pypi/v/coinbase-agentkit-langchain?style=flat-square\&label=%20) |
 
 ## Setup
 

@@ -20,4 +20,4 @@ message: str = Field(description='Follow-up instructions or context to send to t
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/async_subagents.py#L155)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/async_subagents.py#L155)

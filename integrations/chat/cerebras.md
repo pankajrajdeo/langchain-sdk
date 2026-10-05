@@ -30,15 +30,15 @@ For more information about Cerebras Cloud, visit [cloud.cerebras.ai](https://clo
 
 ### Integration details
 
-| Class                                                                                                | Package                                                                           | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/cerebras) |                                              Downloads                                              |                                              Version                                             |
-| :--------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- | :----------: | :--------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
-| [`ChatCerebras`](https://reference.langchain.com/python/langchain-cerebras/chat_models/ChatCerebras) | [`langchain-cerebras`](https://reference.langchain.com/python/langchain-cerebras) |     beta     |                                    ❌                                   | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-cerebras?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-cerebras?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/cerebras) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatCerebras`](https://reference.langchain.com/python/langchain-cerebras/chat_models/ChatCerebras) | [`langchain-cerebras`](https://reference.langchain.com/python/langchain-cerebras) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-cerebras?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-cerebras?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                       ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 ## Setup
 

@@ -30,24 +30,24 @@ Multi-agent patterns are particularly valuable when a single agent has too many 
 
 Here are the main patterns for building multi-agent systems, each suited to different use cases:
 
-| Pattern                                                                      | How it works                                                                                                                                                                                        |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Subagents**](multi-agent/subagents.md)             | A main agent coordinates subagents as tools. All routing passes through the main agent, which decides when and how to invoke each subagent.                                                         |
-| [**Handoffs**](multi-agent/handoffs.md)               | Behavior changes dynamically based on state. Tool calls update a state variable that triggers routing or configuration changes, switching agents or adjusting the current agent's tools and prompt. |
-| [**Skills**](multi-agent/skills.md)                   | Specialized prompts and knowledge loaded on-demand. A single agent stays in control while loading context from skills as needed.                                                                    |
-| [**Router**](multi-agent/router.md)                   | A routing step classifies input and directs it to one or more specialized agents. Results are synthesized into a combined response.                                                                 |
-| [**Custom workflow**](multi-agent/custom-workflow.md) | Build bespoke execution flows with [LangGraph](../langgraph/overview.md), mixing deterministic logic and agentic behavior. Embed other patterns as nodes in your workflow.                |
+| Pattern | How it works |
+| - | - |
+| [**Subagents**](multi-agent/subagents.md) | A main agent coordinates subagents as tools. All routing passes through the main agent, which decides when and how to invoke each subagent. |
+| [**Handoffs**](multi-agent/handoffs.md) | Behavior changes dynamically based on state. Tool calls update a state variable that triggers routing or configuration changes, switching agents or adjusting the current agent's tools and prompt. |
+| [**Skills**](multi-agent/skills.md) | Specialized prompts and knowledge loaded on-demand. A single agent stays in control while loading context from skills as needed. |
+| [**Router**](multi-agent/router.md) | A routing step classifies input and directs it to one or more specialized agents. Results are synthesized into a combined response. |
+| [**Custom workflow**](multi-agent/custom-workflow.md) | Build bespoke execution flows with [LangGraph](../langgraph/overview.md), mixing deterministic logic and agentic behavior. Embed other patterns as nodes in your workflow. |
 
 ### Choosing a pattern
 
 Use this table to match your requirements to the right pattern:
 
-| Pattern                                                          | Distributed development | Parallelization | Multi-hop | Direct user interaction |
-| ---------------------------------------------------------------- | :---------------------: | :-------------: | :-------: | :---------------------: |
-| [**Subagents**](multi-agent/subagents.md) |          ⭐⭐⭐⭐⭐          |      ⭐⭐⭐⭐⭐      |   ⭐⭐⭐⭐⭐   |            ⭐            |
-| [**Handoffs**](multi-agent/handoffs.md)   |            -            |        -        |   ⭐⭐⭐⭐⭐   |          ⭐⭐⭐⭐⭐          |
-| [**Skills**](multi-agent/skills.md)       |          ⭐⭐⭐⭐⭐          |       ⭐⭐⭐       |   ⭐⭐⭐⭐⭐   |          ⭐⭐⭐⭐⭐          |
-| [**Router**](multi-agent/router.md)       |           ⭐⭐⭐           |      ⭐⭐⭐⭐⭐      |     -     |           ⭐⭐⭐           |
+| Pattern | Distributed development | Parallelization | Multi-hop | Direct user interaction |
+| - | :-: | :-: | :-: | :-: |
+| [**Subagents**](multi-agent/subagents.md) | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐ |
+| [**Handoffs**](multi-agent/handoffs.md) | - | - | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| [**Skills**](multi-agent/skills.md) | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| [**Router**](multi-agent/router.md) | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | - | ⭐⭐⭐ |
 
 * **Distributed development**: Can different teams maintain components independently?
 * **Parallelization**: Can multiple agents execute concurrently?
@@ -99,12 +99,12 @@ Different patterns have different performance characteristics. Understanding the
 
 A specialized coffee agent/skill can call a `buy_coffee` tool.
 
-| Pattern                                                          | Model calls | Best fit |
-| ---------------------------------------------------------------- | :---------: | :------: |
-| [**Subagents**](multi-agent/subagents.md) |      4      |          |
-| [**Handoffs**](multi-agent/handoffs.md)   |      3      |     ✅    |
-| [**Skills**](multi-agent/skills.md)       |      3      |     ✅    |
-| [**Router**](multi-agent/router.md)       |      3      |     ✅    |
+| Pattern | Model calls | Best fit |
+| - | :-: | :-: |
+| [**Subagents**](multi-agent/subagents.md) | 4 | |
+| [**Handoffs**](multi-agent/handoffs.md) | 3 | ✅ |
+| [**Skills**](multi-agent/skills.md) | 3 | ✅ |
+| [**Router**](multi-agent/router.md) | 3 | ✅ |
 
 #### Subagents
 **4 model calls:**
@@ -135,12 +135,12 @@ A specialized coffee agent/skill can call a `buy_coffee` tool.
 
 The user repeats the same request in the same conversation.
 
-| Pattern                                                          | Turn 2 calls | Total (both turns) | Best fit |
-| ---------------------------------------------------------------- | :----------: | :----------------: | :------: |
-| [**Subagents**](multi-agent/subagents.md) |       4      |          8         |          |
-| [**Handoffs**](multi-agent/handoffs.md)   |       2      |          5         |     ✅    |
-| [**Skills**](multi-agent/skills.md)       |       2      |          5         |     ✅    |
-| [**Router**](multi-agent/router.md)       |       3      |          6         |          |
+| Pattern | Turn 2 calls | Total (both turns) | Best fit |
+| - | :-: | :-: | :-: |
+| [**Subagents**](multi-agent/subagents.md) | 4 | 8 | |
+| [**Handoffs**](multi-agent/handoffs.md) | 2 | 5 | ✅ |
+| [**Skills**](multi-agent/skills.md) | 2 | 5 | ✅ |
+| [**Router**](multi-agent/router.md) | 3 | 6 | |
 
 #### Subagents
 **4 calls again → 8 total**
@@ -180,12 +180,12 @@ The user repeats the same request in the same conversation.
 
 Each language agent/skill contains \~2000 tokens of documentation. All patterns can make parallel tool calls.
 
-| Pattern                                                          | Model calls | Total tokens | Best fit |
-| ---------------------------------------------------------------- | :---------: | :----------: | :------: |
-| [**Subagents**](multi-agent/subagents.md) |      5      |     \~9K     |     ✅    |
-| [**Handoffs**](multi-agent/handoffs.md)   |      7+     |    \~14K+    |          |
-| [**Skills**](multi-agent/skills.md)       |      3      |     \~15K    |          |
-| [**Router**](multi-agent/router.md)       |      5      |     \~9K     |     ✅    |
+| Pattern | Model calls | Total tokens | Best fit |
+| - | :-: | :-: | :-: |
+| [**Subagents**](multi-agent/subagents.md) | 5 | \~9K | ✅ |
+| [**Handoffs**](multi-agent/handoffs.md) | 7+ | \~14K+ | |
+| [**Skills**](multi-agent/skills.md) | 3 | \~15K | |
+| [**Router**](multi-agent/router.md) | 5 | \~9K | ✅ |
 
 #### Subagents
 **5 calls, \~9K tokens**
@@ -221,22 +221,22 @@ Router uses an **LLM for routing**, then invokes agents in parallel. Similar to 
 
 Here's how patterns compare across all three scenarios:
 
-| Pattern                                                          | One-shot | Repeat request |      Multi-domain     |
-| ---------------------------------------------------------------- | :------: | :------------: | :-------------------: |
-| [**Subagents**](multi-agent/subagents.md) |  4 calls |  8 calls (4+4) |   5 calls, 9K tokens  |
-| [**Handoffs**](multi-agent/handoffs.md)   |  3 calls |  5 calls (3+2) | 7+ calls, 14K+ tokens |
-| [**Skills**](multi-agent/skills.md)       |  3 calls |  5 calls (3+2) |  3 calls, 15K tokens  |
-| [**Router**](multi-agent/router.md)       |  3 calls |  6 calls (3+3) |   5 calls, 9K tokens  |
+| Pattern | One-shot | Repeat request | Multi-domain |
+| - | :-: | :-: | :-: |
+| [**Subagents**](multi-agent/subagents.md) | 4 calls | 8 calls (4+4) | 5 calls, 9K tokens |
+| [**Handoffs**](multi-agent/handoffs.md) | 3 calls | 5 calls (3+2) | 7+ calls, 14K+ tokens |
+| [**Skills**](multi-agent/skills.md) | 3 calls | 5 calls (3+2) | 3 calls, 15K tokens |
+| [**Router**](multi-agent/router.md) | 3 calls | 6 calls (3+3) | 5 calls, 9K tokens |
 
 **Choosing a pattern:**
 
-| Optimize for          | [Subagents](multi-agent/subagents.md) | [Handoffs](multi-agent/handoffs.md) | [Skills](multi-agent/skills.md) | [Router](multi-agent/router.md) |
-| --------------------- | :----------------------------------------------------------: | :--------------------------------------------------------: | :----------------------------------------------------: | :----------------------------------------------------: |
-| Single requests       |                                                              |                              ✅                             |                            ✅                           |                            ✅                           |
-| Repeat requests       |                                                              |                              ✅                             |                            ✅                           |                                                        |
-| Parallel execution    |                               ✅                              |                                                            |                                                        |                            ✅                           |
-| Large-context domains |                               ✅                              |                                                            |                                                        |                            ✅                           |
-| Simple, focused tasks |                                                              |                                                            |                            ✅                           |                                                        |
+| Optimize for | [Subagents](multi-agent/subagents.md) | [Handoffs](multi-agent/handoffs.md) | [Skills](multi-agent/skills.md) | [Router](multi-agent/router.md) |
+| - | :-: | :-: | :-: | :-: |
+| Single requests | | ✅ | ✅ | ✅ |
+| Repeat requests | | ✅ | ✅ | |
+| Parallel execution | ✅ | | | ✅ |
+| Large-context domains | ✅ | | | ✅ |
+| Simple, focused tasks | | | ✅ | |
 
 ***
 

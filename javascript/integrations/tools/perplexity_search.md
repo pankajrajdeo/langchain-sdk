@@ -16,9 +16,9 @@ The [Perplexity Search API](https://docs.perplexity.ai/docs/search/quickstart) r
 
 ### Integration details
 
-| Class                                                                                                                | Package                                                                        | [PY support](https://python.langchain.com/docs/integrations/tools/perplexity_search/) |                                               Version                                              |
-| :------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :-----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| [`PerplexitySearchResults`](https://reference.langchain.com/javascript/langchain-perplexity/PerplexitySearchResults) | [`@langchain/perplexity`](https://www.npmjs.com/package/@langchain/perplexity) |                                           ✅                                           | ![NPM - Version](https://img.shields.io/npm/v/@langchain/perplexity?style=flat-square\&label=%20&) |
+| Class | Package | [PY support](https://python.langchain.com/docs/integrations/tools/perplexity_search/) | Version |
+| :- | :- | :-: | :-: |
+| [`PerplexitySearchResults`](https://reference.langchain.com/javascript/langchain-perplexity/PerplexitySearchResults) | [`@langchain/perplexity`](https://www.npmjs.com/package/@langchain/perplexity) | ✅ | ![NPM - Version](https://img.shields.io/npm/v/@langchain/perplexity?style=flat-square\&label=%20&) |
 
 ## Setup
 

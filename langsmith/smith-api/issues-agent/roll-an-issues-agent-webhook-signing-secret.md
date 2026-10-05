@@ -323,6 +323,14 @@ components:
             empty string to distinguish URL destinations from Slack
             destinations.
           type: string
+        slack_handoff:
+          description: >-
+            SlackHandoff is nil when no coding-agent hand-off is set on this
+            destination.
+          anyOf:
+            - allOf:
+                - $ref: '#/components/schemas/webhooks.SlackHandoffResponse'
+            - type: 'null'
         slack_team_id:
           type: string
         tenant_id:
@@ -353,6 +361,13 @@ components:
         - SeverityHigh
         - SeverityMed
         - SeverityLow
+    webhooks.SlackHandoffResponse:
+      type: object
+      required:
+        - bot_user_id
+      properties:
+        bot_user_id:
+          type: string
   securitySchemes:
     API Key:
       type: apiKey

@@ -24,15 +24,15 @@ This will help you get started with DeepSeek's hosted [chat models](../../langch
 
 ### Integration details
 
-| Class                                                                                                | Package                                                                            | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/deepseek) |                                              Downloads                                              |                                              Version                                             |
-| :--------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- | :----------: | :--------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
-| [`ChatDeepSeek`](https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek) | [`langchain-deepseek`](https://reference.langchain.com/python/langchain-deepseek/) |     beta     |                                    ✅                                   | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-deepseek?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-deepseek?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/deepseek) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatDeepSeek`](https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek) | [`langchain-deepseek`](https://reference.langchain.com/python/langchain-deepseek/) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-deepseek?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-deepseek?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 > [!NOTE]
 > **DeepSeek-R1, specified via `model="deepseek-reasoner"`, does not support tool calling or structured output. Those features [are supported](https://api-docs.deepseek.com/guides/function_calling) by DeepSeek-V3 (specified via `model="deepseek-chat"`).**

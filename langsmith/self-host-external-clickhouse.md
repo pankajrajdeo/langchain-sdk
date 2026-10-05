@@ -232,20 +232,12 @@ stringData:
     -----END PRIVATE KEY-----
 ```
 
-#### Non-TLS native port for migrations
+#### Migrations with TLS
+
+The migration job uses the same TLS and client certificate configuration as the application and connects over the native protocol on `clickhouse.external.nativePort`. When TLS is enabled, set `nativePort` to your ClickHouse native TLS port (`9440` by default). A separate non-TLS native port is not required.
 
 > [!WARNING]
-> When using mTLS with ClickHouse, you must **keep a non-TLS native (TCP) port** open for our migrations job, which runs on helm install and upgrade. The application itself will not communicate through this port, it is **only used by the migration job**.
-
-By default, the migration job connects to port `9000` for migrations. If your ClickHouse instance uses a different non-TLS native port, you can configure it using the `CLICKHOUSE_MIGRATE_NATIVE_PORT` environment variable:
-
-```yaml
-backend:
-  clickhouseMigrations:
-    extraEnv:
-      - name: CLICKHOUSE_MIGRATE_NATIVE_PORT
-        value: "9000"  # Change to your non-TLS native port
-```
+> Leaving `nativePort` at `9000` with `tls: true` causes the migration job to fail, because it attempts a TLS handshake against the plaintext port.
 
 #### Pod security context for certificate volumes
 

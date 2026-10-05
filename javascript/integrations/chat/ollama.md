@@ -24,17 +24,17 @@ Ollama allows you to use a wide range of models with different capabilities. Som
 
 For a complete list of supported models and model variants, see the [Ollama model library](https://ollama.com/search) and search by tag.
 
-| Class                                                                                  | Package                                                                | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/ollama) |                                             Downloads                                             |                                             Version                                            |
-| :------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :----------: | :----------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`ChatOllama`](https://reference.langchain.com/javascript/langchain-ollama/ChatOllama) | [`@langchain/ollama`](https://www.npmjs.com/package/@langchain/ollama) |     beta     |                                     ✅                                    | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ollama?style=flat-square\&label=%20&) |
+| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/ollama) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatOllama`](https://reference.langchain.com/javascript/langchain-ollama/ChatOllama) | [`@langchain/ollama`](https://www.npmjs.com/package/@langchain/ollama) | beta | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ollama?style=flat-square\&label=%20&) |
 
 ### Model features
 
 See the links in the table headers below for guides on how to use specific features.
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :---------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------: | :---------------------------------------------------------: | :------------------------------------------------------------: |
-|                        ✅                        |                                 ✅                                |                               ✅                              |      ❌      |      ❌      |                               ✅                               |                              ✅                              |                                ❌                               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ❌ |
 
 ## Setup
 

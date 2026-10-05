@@ -201,8 +201,17 @@ components:
             - type: string
             - type: 'null'
           title: Display Name
+        avatar_url:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Avatar Url
         config:
           $ref: '#/components/schemas/OrganizationConfig'
+        topic_search_enabled:
+          type: boolean
+          title: Topic Search Enabled
+          default: false
         engine_enabled:
           anyOf:
             - type: boolean
@@ -775,6 +784,7 @@ components:
         - ORGANIZATION_USER
         - ORGANIZATION_VIEWER
         - ORGANIZATION_RESTRICTED
+        - CUSTOM
       title: OrganizationRoles
   securitySchemes:
     API Key:

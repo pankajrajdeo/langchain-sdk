@@ -18,15 +18,15 @@ For detailed documentation, see the [OCI Generative AI documentation](https://do
 
 ### Integration details
 
-| Class                                                                           | Package                                                    | Serializable | JS support |                                            Downloads                                           |                                           Version                                           |
-| :------------------------------------------------------------------------------ | :--------------------------------------------------------- | :----------: | :--------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`ChatOCIGenAI`](https://github.com/oracle/langchain-oracle/tree/main/libs/oci) | [`langchain-oci`](https://pypi.org/project/langchain-oci/) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-oci?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-oci?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatOCIGenAI`](https://github.com/oracle/langchain-oracle/tree/main/libs/oci) | [`langchain-oci`](https://pypi.org/project/langchain-oci/) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-oci?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-oci?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                       ✅                      |                               ✅                              |                             ✅                            |  ✅ (Gemini) |  ✅ (Gemini) |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ (Gemini) | ✅ (Gemini) | ✅ | ✅ | ✅ | ❌ |
 
 ## Setup
 
@@ -361,12 +361,12 @@ llm = ChatOCIGenAI(
 
 ## Available Models
 
-| Provider   | Example Models                    | Key Features           |
-| ---------- | --------------------------------- | ---------------------- |
-| **Meta**   | Llama 3.2/3.3/4 (Scout, Maverick) | Vision, parallel tools |
-| **Google** | Gemini 2.0/2.5 Flash, Pro         | PDF, video, audio      |
-| **xAI**    | Grok 3, Grok 4                    | Vision, reasoning      |
-| **Cohere** | Command R+, Command A             | RAG, vision            |
+| Provider | Example Models | Key Features |
+| - | - | - |
+| **Meta** | Llama 3.2/3.3/4 (Scout, Maverick) | Vision, parallel tools |
+| **Google** | Gemini 2.0/2.5 Flash, Pro | PDF, video, audio |
+| **xAI** | Grok 3, Grok 4 | Vision, reasoning |
+| **Cohere** | Command R+, Command A | RAG, vision |
 
 See the [OCI model catalog](https://docs.oracle.com/en-us/iaas/Content/generative-ai/pretrained-models.htm) for the complete list and regional availability.
 

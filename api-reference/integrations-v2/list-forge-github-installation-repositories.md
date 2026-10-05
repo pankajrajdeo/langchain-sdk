@@ -111,6 +111,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+        '501':
+          description: >-
+            The Engine GitHub App isn't configured on this install. The problem
+            detail names the settings an operator must set.
       security:
         - API Key: []
         - Tenant ID: []

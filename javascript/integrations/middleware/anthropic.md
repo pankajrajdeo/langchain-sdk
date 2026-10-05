@@ -12,8 +12,8 @@ tags: [docs, javascript, integrations, middleware, anthropic]
 
 Middleware specifically designed for Anthropic's Claude models. Learn more about [middleware](../../langchain/middleware/overview.md).
 
-| Middleware                        | Description                                        |
-| --------------------------------- | -------------------------------------------------- |
+| Middleware | Description |
+| - | - |
 | [Prompt caching](#prompt-caching) | Reduce costs by caching repetitive prompt prefixes |
 
 ## Prompt caching

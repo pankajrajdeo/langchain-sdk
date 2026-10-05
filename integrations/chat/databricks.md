@@ -20,15 +20,15 @@ This guide provides a quick overview for getting started with Databricks [chat m
 
 ### Integration details
 
-| Class            | Package                | Serializable |                                               Downloads                                               |                                               Version                                              |
-| :--------------- | :--------------------- | :----------: | :---------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| `ChatDatabricks` | `databricks-langchain` |     beta     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-databricks?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-databricks?style=flat-square\&label=%20) |
+| Class | Package | Serializable | Downloads | Version |
+| :- | :- | :-: | :-: | :-: |
+| `ChatDatabricks` | `databricks-langchain` | beta | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-databricks?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-databricks?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                       ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 ### Supported methods
 

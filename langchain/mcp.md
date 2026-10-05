@@ -1,6 +1,6 @@
 ---
 title: "Model Context Protocol (MCP)"
-description: "Connect LangChain agents to MCP servers with the MCPAdapter, built on FastMCP."
+description: "Connect LangChain agents to MCP servers with MCPAdapter."
 source: "https://docs.langchain.com/oss/python/langchain/mcp"
 category: "docs"
 tags: [docs, langchain, mcp]
@@ -8,7 +8,7 @@ tags: [docs, langchain, mcp]
 
 # Model Context Protocol (MCP)
 
-> Connect LangChain agents to MCP servers with the MCPAdapter, built on FastMCP.
+> Connect LangChain agents to MCP servers with MCPAdapter.
 
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open protocol that standardizes how applications provide tools and context to language models. LangChain agents call tools defined on MCP servers through [`MCPAdapter`](https://reference.langchain.com/python/langchain/mcp/adapter/MCPAdapter), which discovers a server's tools and adapts them into LangChain tools you can pass straight to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent).
 
@@ -51,9 +51,11 @@ async def main():
 ```
 
 <details>
-<summary>Example: Query LangChain docs</summary>
+<summary>LangChain docs MCP server</summary>
 
-The [LangChain docs MCP server](../use-these-docs.md) is a public HTTP endpoint at `https://docs.langchain.com/mcp`. Connect an agent to it to search and read documentation without writing custom tools:
+The [LangChain docs MCP server](../use-these-docs.md) is a public HTTP endpoint at `https://docs.langchain.com/mcp`.
+
+Connect an agent to it to search and read documentation without writing custom tools:
 
 ```python
 from langchain.agents import create_agent
@@ -80,17 +82,17 @@ async def main():
 
 The server exposes these tools:
 
-| Tool                                       | Description                                                                                   |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------- |
-| `search_docs_by_lang_chain`                | Search docs for relevant guides, how-tos, and examples.                                       |
+| Tool | Description |
+| - | - |
+| `search_docs_by_lang_chain` | Search docs for relevant guides, how-tos, and examples. |
 | `query_docs_filesystem_docs_by_lang_chain` | Read or search docs through a virtual filesystem (`rg`, `head`, `cat`, and related commands). |
-| `submit_feedback`                          | Report a problem with a documentation page.                                                   |
+| `submit_feedback` | Report a problem with a documentation page. |
 
 </details>
 
 ## Transports
 
-[`MCPAdapter`](https://reference.langchain.com/python/langchain/mcp/adapter/MCPAdapter) infers the transport from the target you hand it, so the only thing that changes between an in-process server, a local script over stdio, and a remote URL is the target itself:
+[`MCPAdapter`](https://reference.langchain.com/python/langchain/mcp/adapter/MCPAdapter) infers the transport from the target you provide. The target is the only difference between an in-process server, a local script over stdio, and a remote URL:
 
 ```python
 from pathlib import Path
@@ -109,26 +111,26 @@ http = MCPAdapter("https://example.com/mcp")
 
 A target can be any of the following:
 
-* **An `http`/`https` URL** (`str`): reached over streamable HTTP.
+* **An `http`/`https` URL** (`str`): reached over Streamable HTTP.
 * **A script path** (`Path`): launched as a subprocess over stdio.
-* **A transport object** (`StreamableTransport`): a pre-configured transport object. See [Client Transports](https://gofastmcp.com/clients/transports).
-* **An in-process `FastMCP` server**: connected in-memory, with no subprocess or socket.
+* **A transport object** (`StreamableTransport`): a preconfigured transport object. See [Client Transports](https://gofastmcp.com/clients/transports).
+* **An in-process `FastMCP` server**: connected in memory, without a subprocess or socket.
 * **An `MCPConfig` dict** (`{"mcpServers": {...}}`): several servers behind one adapter. See [Connections](mcp/connections.md#multiple-servers).
 * **A prebuilt `fastmcp.Client`**: for full control over transport, [caching](https://gofastmcp.com/clients/client#response-caching), and [protocol negotiation](https://gofastmcp.com/clients/client#protocol-negotiation).
 
 > [!WARNING]
-> A `str` target must be an `http` or `https` URL. FastMCP resolves a string by testing it as a filesystem path before testing it as a URL, so a string naming an existing `.py` or `.js` file would launch that file as a subprocess. Because strings are the form a target most often arrives in from configuration or from a model, [`MCPAdapter`](https://reference.langchain.com/python/langchain/mcp/adapter/MCPAdapter) rejects strings that don't match the shape of a URL.
+> A `str` target must be an `http` or `https` URL. FastMCP resolves a string by testing it as a filesystem path before testing it as a URL, so a string naming an existing `.py` or `.js` file would launch that file as a subprocess. Because strings are the form a target most often arrives in from configuration or from a model, [`MCPAdapter`](https://reference.langchain.com/python/langchain/mcp/adapter/MCPAdapter) rejects strings that do not match the shape of a URL.
 
 ## Next steps
+
+#### [Tools](mcp/tools.md)
+Load MCP tools into agents, control their execution, and handle their outputs.
 
 #### [Connections](mcp/connections.md)
 Connection lifecycle, multiple servers, protocol eras, and caching.
 
 #### [Authentication](mcp/auth.md)
 Bearer tokens, OAuth 2.1, and per-user server auth.
-
-#### [Tools](mcp/tools.md)
-Load MCP tools into agents, control their execution, and handle their outputs.
 
 ***
 

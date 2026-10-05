@@ -362,14 +362,10 @@ components:
               discriminator:
                 propertyName: type
                 mapping:
-                  api:
-                    $ref: '#/components/schemas/APIFeedbackSource'
-                  app:
-                    $ref: '#/components/schemas/AppFeedbackSource'
-                  auto_eval:
-                    $ref: '#/components/schemas/AutoEvalFeedbackSource'
-                  model:
-                    $ref: '#/components/schemas/ModelFeedbackSource'
+                  api: '#/components/schemas/APIFeedbackSource'
+                  app: '#/components/schemas/AppFeedbackSource'
+                  auto_eval: '#/components/schemas/AutoEvalFeedbackSource'
+                  model: '#/components/schemas/ModelFeedbackSource'
             - type: 'null'
           title: Feedback Source
         feedback_config:

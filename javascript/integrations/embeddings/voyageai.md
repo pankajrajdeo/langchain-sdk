@@ -16,9 +16,9 @@ This will help you get started with VoyageEmbeddings [embedding models](../embed
 
 ### Integration details
 
-| Class                                                                                               | Package                                                                  | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/voyageai/) |                                              Downloads                                             |                                             Version                                             |
-| :-------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------- | :---: | :-------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
-| [`VoyageEmbeddings`](https://reference.langchain.com/javascript/langchain-mongodb/VoyageEmbeddings) | [`@langchain/mongodb`](https://www.npmjs.com/package/@langchain/mongodb) |   ❌   |                                         ✅                                         | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/mongodb?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/mongodb?style=flat-square\&label=%20&) |
+| Class | Package | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/voyageai/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`VoyageEmbeddings`](https://reference.langchain.com/javascript/langchain-mongodb/VoyageEmbeddings) | [`@langchain/mongodb`](https://www.npmjs.com/package/@langchain/mongodb) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/mongodb?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/mongodb?style=flat-square\&label=%20&) |
 
 ## Setup
 

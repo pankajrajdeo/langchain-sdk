@@ -1,13 +1,13 @@
 ---
 title: "javascript/integrations/tools"
-description: "Index of 28 pages and 0 subdirectories under javascript/integrations/tools."
+description: "Index of 29 pages and 0 subdirectories under javascript/integrations/tools."
 category: "index"
 tags: [index, javascript, integrations, tools]
 ---
 
 # javascript/integrations/tools
 
-28 pages here.
+29 pages here.
 
 ## Files
 
@@ -21,6 +21,7 @@ tags: [index, javascript, integrations, tools]
 - [Falkordb integration](falkordb.md) - Use FalkorDB's ultra-fast graph database with LangChain for natural language queries over knowledge graphs using Cypher
 - [Google integration](google.md) - Integrate with Google Gemini tools using LangChain JavaScript.
 - [WatsonxToolkit integration](ibm.md) - Integrate with the WatsonxToolkit tool using LangChain JavaScript.
+- [Tool integrations](index.md) - Integrate with tools using LangChain JavaScript.
 - [Jigsawstack integration](jigsawstack.md) - Integrate with the Jigsawstack tool using LangChain JavaScript.
 - [JSON agent toolkit integration](json.md) - Integrate with the JSON agent toolkit using LangChain JavaScript.
 - [Agent with AWS lambda integration](lambda_agent.md) - Integrate with the Agent with AWS lambda tool using LangChain JavaScript.

@@ -10,8 +10,6 @@ tags: [docs, langsmith, platform-setup]
 
 > Host and manage LangSmith infrastructure for observability, evaluation, and prompt engineering.
 
-# Overview
-
 Set up **LangSmith** for [observability](observability.md), [evaluation](evaluation.md), and [prompt engineering](prompt-context-hub.md#prompts). LangSmith offers Cloud, Bring Your Own Cloud (BYOC), and Self-hosted options. Choose the option that matches where your data has to live and who runs the infrastructure.
 
 > [!NOTE]
@@ -31,12 +29,12 @@ Full control with observability, evaluation, and prompt engineering in your infr
 
 ## Compare Cloud, BYOC, and Self-hosted
 
-| Feature                         | **Cloud**         | **BYOC**                                                   | **Self-hosted** |
-| ------------------------------- | ----------------- | ---------------------------------------------------------- | --------------- |
-| **Who runs the infrastructure** | LangChain         | LangChain runs the control plane, you run your data planes | You             |
-| **Where sensitive data lives**  | LangChain's cloud | Your VPC                                                   | Your VPC        |
-| **Upgrades and patches**        | Automatic         | Automatic                                                  | Manual          |
-| **Scaling**                     | Automatic         | Automatic, managed by LangChain                            | Manual          |
+| Feature | **Cloud** | **BYOC** | **Self-hosted** |
+| - | - | - | - |
+| **Who runs the infrastructure** | LangChain | LangChain runs the control plane, you run your data planes | You |
+| **Where sensitive data lives** | LangChain's cloud | Your VPC | Your VPC |
+| **Upgrades and patches** | Automatic | Automatic | Manual |
+| **Scaling** | Automatic | Automatic, managed by LangChain | Manual |
 
 Cloud, BYOC, and Self-hosted support [LangSmith Deployment](deployment.md) for agent workloads. Refer to the [LangSmith Deployment overview](deployment.md) to pick a topology (Cloud managed, BYOC, Hybrid, self-hosted with control plane, or standalone).
 

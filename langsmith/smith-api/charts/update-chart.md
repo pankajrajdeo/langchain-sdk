@@ -204,20 +204,13 @@ paths:
                 discriminator:
                   propertyName: chart_type
                   mapping:
-                    line:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    bar:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    table:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    kpi:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    top-k:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    pie:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    text:
-                      $ref: '#/components/schemas/CustomTextBlockResponse'
+                    line: '#/components/schemas/CustomChartResponse'
+                    bar: '#/components/schemas/CustomChartResponse'
+                    table: '#/components/schemas/CustomChartResponse'
+                    kpi: '#/components/schemas/CustomChartResponse'
+                    top-k: '#/components/schemas/CustomChartResponse'
+                    pie: '#/components/schemas/CustomChartResponse'
+                    text: '#/components/schemas/CustomTextBlockResponse'
                 title: Response Update Chart Api V1 Charts  Chart Id  Patch
         '422':
           description: Validation Error

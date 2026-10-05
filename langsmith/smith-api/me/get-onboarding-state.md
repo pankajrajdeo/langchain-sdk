@@ -229,6 +229,12 @@ components:
               format: date-time
             - type: 'null'
           title: Success Viewed At
+        agent_platform_welcome_viewed_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Agent Platform Welcome Viewed At
         created_at:
           type: string
           format: date-time

@@ -79,16 +79,16 @@ retriever.invoke("machine learning")
 
 You can customize the criteria to select the files. A set of predefined filter are proposed:
 
-| Template                                 | Description                                                          |
-| ---------------------------------------- | -------------------------------------------------------------------- |
-| `gdrive-all-in-folder`                   | Return all compatible files from a `folder_id`                       |
-| `gdrive-query`                           | Search `query` in all drives                                         |
-| `gdrive-by-name`                         | Search file with name `query`                                        |
-| `gdrive-query-in-folder`                 | Search `query` in `folder_id` (and sub-folders in `_recursive=true`) |
-| `gdrive-mime-type`                       | Search a specific `mime_type`                                        |
-| `gdrive-mime-type-in-folder`             | Search a specific `mime_type` in `folder_id`                         |
-| `gdrive-query-with-mime-type`            | Search `query` with a specific `mime_type`                           |
-| `gdrive-query-with-mime-type-and-folder` | Search `query` with a specific `mime_type` and in `folder_id`        |
+| Template | Description |
+| - | - |
+| `gdrive-all-in-folder` | Return all compatible files from a `folder_id` |
+| `gdrive-query` | Search `query` in all drives |
+| `gdrive-by-name` | Search file with name `query` |
+| `gdrive-query-in-folder` | Search `query` in `folder_id` (and sub-folders in `_recursive=true`) |
+| `gdrive-mime-type` | Search a specific `mime_type` |
+| `gdrive-mime-type-in-folder` | Search a specific `mime_type` in `folder_id` |
+| `gdrive-query-with-mime-type` | Search `query` with a specific `mime_type` |
+| `gdrive-query-with-mime-type-and-folder` | Search `query` with a specific `mime_type` and in `folder_id` |
 
 ```python
 retriever = GoogleDriveRetriever(

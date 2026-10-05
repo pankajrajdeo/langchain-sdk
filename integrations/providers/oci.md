@@ -260,13 +260,13 @@ result = agent.invoke({
 
 ### Provider Coverage
 
-| Provider   | Example Models                        | Key Features                  |
-| ---------- | ------------------------------------- | ----------------------------- |
-| **Meta**   | Llama 3.2, 3.3, 4 (Scout, Maverick)   | Vision, parallel tool calls   |
-| **Google** | Gemini 2.0/2.5 Flash, Flash Lite, Pro | PDF, video, audio processing  |
-| **xAI**    | Grok 3, 4 (Fast, Mini)                | Vision, reasoning modes       |
-| **Cohere** | Command R+, Command A                 | RAG optimization, V2 vision   |
-| **OpenAI** | GPT-5.5, GPT-5, o1, o3                | Reasoning (via ChatOCIOpenAI) |
+| Provider | Example Models | Key Features |
+| - | - | - |
+| **Meta** | Llama 3.2, 3.3, 4 (Scout, Maverick) | Vision, parallel tool calls |
+| **Google** | Gemini 2.0/2.5 Flash, Flash Lite, Pro | PDF, video, audio processing |
+| **xAI** | Grok 3, 4 (Fast, Mini) | Vision, reasoning modes |
+| **Cohere** | Command R+, Command A | RAG optimization, V2 vision |
+| **OpenAI** | GPT-5.5, GPT-5, o1, o3 | Reasoning (via ChatOCIOpenAI) |
 
 > **Note:** Model availability varies by region. See the [OCI Generative AI documentation](https://docs.oracle.com/en-us/iaas/Content/generative-ai/pretrained-models.htm) for the current model catalog.
 
@@ -323,17 +323,17 @@ llm = ChatOCIModelDeploymentTGI(
 
 For comprehensive guides covering all features, see the [langchain-oci samples](https://github.com/oracle/langchain-oracle/tree/main/samples):
 
-| Sample                                                                                                           | Level        | Topics                                                       |
-| ---------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------ |
-| [01: Getting Started](https://github.com/oracle/langchain-oracle/tree/main/samples/01-getting-started)           | Beginner     | Authentication, basic chat, providers                        |
-| [02: Vision & Multimodal](https://github.com/oracle/langchain-oracle/tree/main/samples/02-vision-and-multimodal) | Beginner     | Image analysis, PDF, video, audio                            |
-| [03: Building AI Agents](https://github.com/oracle/langchain-oracle/tree/main/samples/03-building-ai-agents)     | Intermediate | ReAct agents, tools, memory                                  |
-| [04: Tool Calling Mastery](https://github.com/oracle/langchain-oracle/tree/main/samples/04-tool-calling-mastery) | Intermediate | Parallel tools, workflows                                    |
-| [05: Structured Output](https://github.com/oracle/langchain-oracle/tree/main/samples/05-structured-output)       | Intermediate | Pydantic schemas, JSON modes                                 |
-| [07: Async for Production](https://github.com/oracle/langchain-oracle/tree/main/samples/07-async-for-production) | Advanced     | ainvoke, astream, FastAPI                                    |
-| [09: Provider Deep Dive](https://github.com/oracle/langchain-oracle/tree/main/samples/09-provider-deep-dive)     | Specialized  | Meta, Gemini, Cohere, xAI specifics                          |
-| [10: Embeddings](https://github.com/oracle/langchain-oracle/tree/main/samples/10-embeddings)                     | Specialized  | Text & image embeddings, RAG                                 |
-| [11: Deepagents](https://github.com/oracle/langchain-oracle/tree/main/samples/11-deepagents)                     | Specialized  | Deep agents with Autonomous Database & OpenSearch datastores |
+| Sample | Level | Topics |
+| - | - | - |
+| [01: Getting Started](https://github.com/oracle/langchain-oracle/tree/main/samples/01-getting-started) | Beginner | Authentication, basic chat, providers |
+| [02: Vision & Multimodal](https://github.com/oracle/langchain-oracle/tree/main/samples/02-vision-and-multimodal) | Beginner | Image analysis, PDF, video, audio |
+| [03: Building AI Agents](https://github.com/oracle/langchain-oracle/tree/main/samples/03-building-ai-agents) | Intermediate | ReAct agents, tools, memory |
+| [04: Tool Calling Mastery](https://github.com/oracle/langchain-oracle/tree/main/samples/04-tool-calling-mastery) | Intermediate | Parallel tools, workflows |
+| [05: Structured Output](https://github.com/oracle/langchain-oracle/tree/main/samples/05-structured-output) | Intermediate | Pydantic schemas, JSON modes |
+| [07: Async for Production](https://github.com/oracle/langchain-oracle/tree/main/samples/07-async-for-production) | Advanced | ainvoke, astream, FastAPI |
+| [09: Provider Deep Dive](https://github.com/oracle/langchain-oracle/tree/main/samples/09-provider-deep-dive) | Specialized | Meta, Gemini, Cohere, xAI specifics |
+| [10: Embeddings](https://github.com/oracle/langchain-oracle/tree/main/samples/10-embeddings) | Specialized | Text & image embeddings, RAG |
+| [11: Deepagents](https://github.com/oracle/langchain-oracle/tree/main/samples/11-deepagents) | Specialized | Deep agents with Autonomous Database & OpenSearch datastores |
 
 ***
 

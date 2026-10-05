@@ -16,15 +16,15 @@ This will help you get started with Mistral [chat models](../../langchain/models
 
 ### Integration details
 
-| Class                                                                                                   | Package                                                                             | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/mistral) |                                               Downloads                                              |                                              Version                                              |
-| :------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------- | :----------: | :-------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: |
-| [`ChatMistralAI`](https://reference.langchain.com/python/langchain-mistralai/chat_models/ChatMistralAI) | [`langchain-mistralai`](https://reference.langchain.com/python/langchain-mistralai) |     beta     |                                   ✅                                   | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_mistralai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_mistralai?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/mistral) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatMistralAI`](https://reference.langchain.com/python/langchain-mistralai/chat_models/ChatMistralAI) | [`langchain-mistralai`](https://reference.langchain.com/python/langchain-mistralai) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_mistralai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_mistralai?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 ## Setup
 

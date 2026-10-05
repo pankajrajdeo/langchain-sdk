@@ -102,12 +102,12 @@ When using [`init_chat_model`](https://reference.langchain.com/javascript/langch
 
 To find available model names for a provider, refer to the provider's own documentation. Here are some popular providers:
 
-| Provider                                                      | Where to find model names                                                                              |
-| :------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------- |
-| [OpenAI](../integrations/providers/openai.md)       | [OpenAI models page](https://platform.openai.com/docs/models)                                          |
-| [Anthropic](../integrations/providers/anthropic.md) | [Anthropic models page](https://docs.anthropic.com/en/docs/about-claude/models)                        |
-| [Google](../integrations/providers/google.md)       | [Google AI models page](https://ai.google.dev/gemini-api/docs/models)                                  |
-| [AWS Bedrock](../integrations/providers/aws.md)     | [Bedrock supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) |
+| Provider | Where to find model names |
+| :- | :- |
+| [OpenAI](../integrations/providers/openai.md) | [OpenAI models page](https://platform.openai.com/docs/models) |
+| [Anthropic](../integrations/providers/anthropic.md) | [Anthropic models page](https://docs.anthropic.com/en/docs/about-claude/models) |
+| [Google](../integrations/providers/google.md) | [Google AI models page](https://ai.google.dev/gemini-api/docs/models) |
+| [AWS Bedrock](../integrations/providers/aws.md) | [Bedrock supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) |
 
 ## Use new models immediately
 
@@ -128,10 +128,10 @@ For a list of the chat model integrations and their capabilities, see the [chat 
 
 **Routers** (also called proxies or gateways) give you access to models from multiple providers through a single API and credential. They can simplify billing, let you switch between models without changing integrations, and offer features like automatic fallbacks and load balancing.
 
-| Provider                             | Integration                                                      | Description                                                                 |
-| :----------------------------------- | :--------------------------------------------------------------- | :-------------------------------------------------------------------------- |
-| [OpenRouter](https://openrouter.ai/) | [`ChatOpenRouter`](../integrations/chat/openrouter.md) | Unified access to models from OpenAI, Anthropic, Google, Meta, and more     |
-| [FuturMix](https://futurmix.ai/)     | [`ChatOpenAI`](https://futurmix.ai/)                             | Unified AI gateway for 22+ models with OpenAI-compatible API and 99.99% SLA |
+| Provider | Integration | Description |
+| :- | :- | :- |
+| [OpenRouter](https://openrouter.ai/) | [`ChatOpenRouter`](../integrations/chat/openrouter.md) | Unified access to models from OpenAI, Anthropic, Google, Meta, and more |
+| [FuturMix](https://futurmix.ai/) | [`ChatOpenAI`](https://futurmix.ai/) | Unified AI gateway for 22+ models with OpenAI-compatible API and 99.99% SLA |
 
 Routers are useful when you want to:
 

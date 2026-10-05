@@ -112,20 +112,20 @@ const agent = await createDeepAgent({
 });
 ```
 
-| Parameter                                                                         | What it does                                                             |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `model`                                                                           | Which model to use                                                       |
-| `systemPrompt`                                                                    | Custom instructions for the agent                                        |
-| `tools`                                                                           | Domain tools the agent can call                                          |
-| `memory`                                                                          | AGENTS.md files loaded at startup                                        |
-| `skills`                                                                          | Skills directory for on-demand knowledge                                 |
-| `backend`                                                                         | Filesystem backend (StateBackend by default)                             |
-| `permissions`                                                                     | Path-level access control for the filesystem                             |
-| `subagents`                                                                       | Custom subagents for delegated tasks                                     |
-| `middleware`                                                                      | Extra middleware appended to the [Deep Agents stack](#deep-agents-stack) |
-| `interruptOn`                                                                     | Pause before tool calls for human approval                               |
-| `responseFormat`                                                                  | Structured output schema                                                 |
-| [`contextSchema`](context-engineering.md#runtime-context) | Per-run runtime context schema (user IDs, API keys, feature flags)       |
+| Parameter | What it does |
+| - | - |
+| `model` | Which model to use |
+| `systemPrompt` | Custom instructions for the agent |
+| `tools` | Domain tools the agent can call |
+| `memory` | AGENTS.md files loaded at startup |
+| `skills` | Skills directory for on-demand knowledge |
+| `backend` | Filesystem backend (StateBackend by default) |
+| `permissions` | Path-level access control for the filesystem |
+| `subagents` | Custom subagents for delegated tasks |
+| `middleware` | Extra middleware appended to the [Deep Agents stack](#deep-agents-stack) |
+| `interruptOn` | Pause before tool calls for human approval |
+| `responseFormat` | Structured output schema |
+| [`contextSchema`](context-engineering.md#runtime-context) | Per-run runtime context schema (user IDs, API keys, feature flags) |
 
 For the full parameter list, see the [`createDeepAgent`](https://reference.langchain.com/javascript/deepagents/types/CreateDeepAgentParams) API reference. To compose a fully custom harness from scratch, see [Configure the harness](../langchain/agents.md#configure-the-harness).
 
@@ -1203,9 +1203,9 @@ register_harness_profile(
 )
 ```
 
-| Stack       | Final system prompt                                     |
-| ----------- | ------------------------------------------------------- |
-| Main agent  | `"You are ACME's support orchestrator." + SUFFIX`       |
+| Stack | Final system prompt |
+| - | - |
+| Main agent | `"You are ACME's support orchestrator." + SUFFIX` |
 | GP subagent | `"You are a research subagent. Cite sources." + SUFFIX` |
 
 </details>

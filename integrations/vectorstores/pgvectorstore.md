@@ -324,22 +324,22 @@ A Vector Store can take advantage of relational data to filter similarity search
 
 `PGVectorStore` currently supports the following operators and all Postgres data types.
 
-| Operator  | Meaning/Category             |
-| --------- | ---------------------------- |
-| \$eq      | Equality (==)                |
-| \$ne      | Inequality (!=)              |
-| \$lt      | Less than (\<)               |
-| \$lte     | Less than or equal (\<=)     |
-| \$gt      | Greater than (>)             |
-| \$gte     | Greater than or equal (>=)   |
-| \$in      | Special Cased (in)           |
-| \$nin     | Special Cased (not in)       |
-| \$between | Special Cased (between)      |
-| \$exists  | Special Cased (is null)      |
-| \$like    | Text (like)                  |
-| \$ilike   | Text (case-insensitive like) |
-| \$and     | Logical (and)                |
-| \$or      | Logical (or)                 |
+| Operator | Meaning/Category |
+| - | - |
+| \$eq | Equality (==) |
+| \$ne | Inequality (!=) |
+| \$lt | Less than (\<) |
+| \$lte | Less than or equal (\<=) |
+| \$gt | Greater than (>) |
+| \$gte | Greater than or equal (>=) |
+| \$in | Special Cased (in) |
+| \$nin | Special Cased (not in) |
+| \$between | Special Cased (between) |
+| \$exists | Special Cased (is null) |
+| \$like | Text (like) |
+| \$ilike | Text (case-insensitive like) |
+| \$and | Logical (and) |
+| \$or | Logical (or) |
 
 ```python
 import uuid

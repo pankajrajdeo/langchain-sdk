@@ -28,9 +28,9 @@ This guide demonstrates how to use `OracleVS` (the LangChain vector store integr
 
 ### Integration details
 
-| Class      | Package                                                                                  | Hybrid search | PY support |
-| :--------- | :--------------------------------------------------------------------------------------- | :-----------: | :--------: |
-| `OracleVS` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) |       ✅       |      ✅     |
+| Class | Package | Hybrid search | PY support |
+| :- | :- | :-: | :-: |
+| `OracleVS` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) | ✅ | ✅ |
 
 ## Setup
 

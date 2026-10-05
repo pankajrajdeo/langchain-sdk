@@ -108,7 +108,7 @@ Example where the wrapped `Runnable` takes a dictionary input:
         ]
     )
 
-    chain = prompt | ChatAnthropic(model="claude-2")
+    chain = prompt | ChatAnthropic(model="claude-sonnet-5")
 
     chain_with_history = RunnableWithMessageHistory(
         chain,
@@ -159,7 +159,7 @@ Example where the session factory takes two keys (`user_id` and `conversation_id
         ]
     )
 
-    chain = prompt | ChatAnthropic(model="claude-2")
+    chain = prompt | ChatAnthropic(model="claude-sonnet-5")
 
     with_message_history = RunnableWithMessageHistory(
         chain,
@@ -266,4 +266,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c5ab14d42a3e22865c9def909de0b11d70b0bbf0/libs/core/langchain_core/runnables/history.py#L39)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/runnables/history.py#L39)

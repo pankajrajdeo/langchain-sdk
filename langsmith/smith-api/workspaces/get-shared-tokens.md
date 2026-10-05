@@ -226,12 +226,9 @@ components:
             discriminator:
               propertyName: type
               mapping:
-                dataset:
-                  $ref: '#/components/schemas/TenantShareDatasetToken'
-                run:
-                  $ref: '#/components/schemas/TenantShareRunToken'
-                thread:
-                  $ref: '#/components/schemas/TenantShareThreadToken'
+                dataset: '#/components/schemas/TenantShareDatasetToken'
+                run: '#/components/schemas/TenantShareRunToken'
+                thread: '#/components/schemas/TenantShareThreadToken'
           type: array
           title: Entities
       type: object

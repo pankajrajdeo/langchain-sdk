@@ -12,8 +12,8 @@ tags: [docs, integrations, middleware, openai]
 
 Middleware specifically designed for OpenAI models. Learn more about [middleware](../../langchain/middleware/overview.md).
 
-| Middleware                                | Description                                               |
-| ----------------------------------------- | --------------------------------------------------------- |
+| Middleware | Description |
+| - | - |
 | [Content moderation](#content-moderation) | Moderate agent traffic using OpenAI's moderation endpoint |
 
 ## Content moderation

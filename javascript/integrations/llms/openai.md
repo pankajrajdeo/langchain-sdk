@@ -23,9 +23,9 @@ This will help you get started with OpenAI completion models (LLMs) using LangCh
 
 ### Integration details
 
-| Class                                                                          | Package                                                                | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/openai) |                                             Downloads                                             |                                             Version                                            |
-| :----------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :---: | :----------: | :----------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`OpenAI`](https://reference.langchain.com/javascript/langchain-openai/OpenAI) | [`@langchain/openai`](https://www.npmjs.com/package/@langchain/openai) |   ❌   |       ✅      |                                     ✅                                    | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
+| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/openai) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| [`OpenAI`](https://reference.langchain.com/javascript/langchain-openai/OpenAI) | [`@langchain/openai`](https://www.npmjs.com/package/@langchain/openai) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
 
 ## Setup
 

@@ -1,6 +1,5 @@
 ---
 title: "Pricing plans"
-description: "Connect these docs to your agent of choice via MCP for real-time answers."
 source: "https://docs.langchain.com/langsmith/pricing-plans"
 category: "docs"
 tags: [docs, langsmith, pricing-plans]
@@ -8,7 +7,7 @@ tags: [docs, langsmith, pricing-plans]
 
 # Pricing plans
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/pricing-plans)
----
+***
 
 > [!NOTE]
 > [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.

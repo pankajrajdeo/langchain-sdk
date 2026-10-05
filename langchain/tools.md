@@ -1,12 +1,14 @@
 ---
 title: "Tools"
-description: "Tools extend what agents can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world."
+description: "Define tools that let LangChain agents fetch real-time data, execute code, query external databases, and take actions."
 source: "https://docs.langchain.com/oss/python/langchain/tools"
 category: "docs"
 tags: [docs, langchain, tools]
 ---
 
 # Tools
+
+> Define tools that let LangChain agents fetch real-time data, execute code, query external databases, and take actions.
 
 Tools extend what [agents](agents.md) can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world.
 
@@ -130,10 +132,10 @@ def get_weather(location: str, units: str = "celsius", include_forecast: bool = 
 
 The following parameter names are reserved and cannot be used as tool arguments. Using these names will cause runtime errors.
 
-| Parameter name | Purpose                                                                |
-| -------------- | ---------------------------------------------------------------------- |
-| `config`       | Reserved for passing `RunnableConfig` to tools internally              |
-| `runtime`      | Reserved for `ToolRuntime` parameter (accessing state, context, store) |
+| Parameter name | Purpose |
+| - | - |
+| `config` | Reserved for passing `RunnableConfig` to tools internally |
+| `runtime` | Reserved for `ToolRuntime` parameter (accessing state, context, store) |
 
 To access runtime information, use the [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime) parameter instead of naming your own arguments `config` or `runtime`.
 
@@ -145,16 +147,16 @@ Tools are most powerful when they can access runtime information like conversati
 
 Tools can access runtime information through the [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime) parameter, which provides:
 
-| Component          | Description                                                                                                                 | Use case                                                    |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| **State**          | Short-term memory - mutable data that exists for the current conversation (messages, counters, custom fields)               | Access conversation history, track tool call counts         |
-| **Context**        | Immutable configuration passed at invocation time (user IDs, session info)                                                  | Personalize responses based on user identity                |
-| **Store**          | Long-term memory - persistent data that survives across conversations                                                       | Save user preferences, maintain knowledge base              |
-| **Stream Writer**  | Emit real-time updates during tool execution                                                                                | Show progress for long-running operations                   |
-| **Execution Info** | Identity and retry information for the current execution (thread ID, run ID, attempt number)                                | Access thread/run IDs, adjust behavior based on retry state |
-| **Server Info**    | Server-specific metadata when running on LangGraph Server (assistant ID, graph ID, authenticated user)                      | Access assistant ID, graph ID, or authenticated user info   |
-| **Config**         | [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) for the execution | Access callbacks, tags, and metadata                        |
-| **Tool Call ID**   | Unique identifier for the current tool invocation                                                                           | Correlate tool calls for logs and model invocations         |
+| Component | Description | Use case |
+| - | - | - |
+| **State** | Short-term memory - mutable data that exists for the current conversation (messages, counters, custom fields) | Access conversation history, track tool call counts |
+| **Context** | Immutable configuration passed at invocation time (user IDs, session info) | Personalize responses based on user identity |
+| **Store** | Long-term memory - persistent data that survives across conversations | Save user preferences, maintain knowledge base |
+| **Stream Writer** | Emit real-time updates during tool execution | Show progress for long-running operations |
+| **Execution Info** | Identity and retry information for the current execution (thread ID, run ID, attempt number) | Access thread/run IDs, adjust behavior based on retry state |
+| **Server Info** | Server-specific metadata when running on LangGraph Server (assistant ID, graph ID, authenticated user) | Access assistant ID, graph ID, or authenticated user info |
+| **Config** | [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) for the execution | Access callbacks, tags, and metadata |
+| **Tool Call ID** | Unique identifier for the current tool invocation | Correlate tool calls for logs and model invocations |
 
 ```mermaid
 graph LR
@@ -284,9 +286,9 @@ Open a public LangSmith run for this example.
 Context provides immutable configuration data that is passed at invocation time. Use it for user IDs, session details, or application-specific settings that shouldn't change during a conversation.
 
 > [!NOTE]
-> While `thread_id` (passed via `config={"configurable": {"thread_id": ...}}`) scopes the *conversation*: message history and checkpoints, `context` carries *per-run* data your tools and middleware read at invocation time. In production you typically pass both together: a stable `thread_id` per conversation, and a `context` object on every invoke.
+> While `thread_id` (passed via `config={"configurable": {"thread_id": ...}}`) scopes the *conversation*: message history and checkpoints, `context` carries *per-run* data your tools and middleware read at invocation time. Persistence requires a [checkpointer](short-term-memory.md). In production you typically pass both a stable `thread_id` per conversation and a `context` object on every invoke.
 
-Access context through `runtime.context`. Pass it alongside a `thread_id` so the conversation is persisted across turns:
+Access context through `runtime.context`. Configure a [checkpointer](short-term-memory.md) and pass `context` with a stable `thread_id` so the conversation persists across invocations:
 
 ```python
 from dataclasses import dataclass
@@ -295,6 +297,7 @@ from langchain.agents import create_agent
 from langchain.tools import tool, ToolRuntime
 from langchain_core.utils.uuid import uuid7
 from langchain_openai import ChatOpenAI
+from langgraph.checkpoint.memory import InMemorySaver
 
 USER_DATABASE = {
     "user123": {
@@ -334,18 +337,28 @@ agent = create_agent(
     model,
     tools=[get_account_info],
     context_schema=UserContext,
+    checkpointer=InMemorySaver(),
     system_prompt="You are a financial assistant.",
 )
 
+thread_id = str(uuid7())
+config = {"configurable": {"thread_id": thread_id}}
+context = UserContext(user_id="user123")
+
 result = agent.invoke(
     {"messages": [{"role": "user", "content": "What's my current balance?"}]},
-    config={"configurable": {"thread_id": str(uuid7())}},
-    context=UserContext(user_id="user123"),
+    config=config,
+    context=context,
 )
-```
+print(result["messages"][-1].content_blocks)
 
-#### [View example trace](https://smith.langchain.com/public/9fcdc511-876a-4675-890e-7a607980df3b/r)
-Open a public LangSmith run for this example.
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "What was my balance again?"}]},
+    config=config,
+    context=context,
+)
+print(result["messages"][-1].content_blocks)
+```
 
 ### Long-term memory (Store)
 

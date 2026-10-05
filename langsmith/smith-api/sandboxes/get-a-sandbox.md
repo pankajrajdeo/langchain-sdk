@@ -392,14 +392,10 @@ components:
             - $ref: '#/components/schemas/sandboxapi.MountKind'
       discriminator:
         mapping:
-          s3:
-            $ref: '#/components/schemas/sandboxapi.S3BucketMountSpec'
-          gcs:
-            $ref: '#/components/schemas/sandboxapi.GCSBucketMountSpec'
-          git:
-            $ref: '#/components/schemas/sandboxapi.GitRepoMountSpec'
-          contexthub:
-            $ref: '#/components/schemas/sandboxapi.ContextHubRepoMountSpec'
+          s3: '#/components/schemas/sandboxapi.S3BucketMountSpec'
+          gcs: '#/components/schemas/sandboxapi.GCSBucketMountSpec'
+          git: '#/components/schemas/sandboxapi.GitRepoMountSpec'
+          contexthub: '#/components/schemas/sandboxapi.ContextHubRepoMountSpec'
         propertyName: type
       oneOf:
         - $ref: '#/components/schemas/sandboxapi.S3BucketMountSpec'
@@ -475,6 +471,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/sandboxes.ProxyHeader'
+        match_headers:
+          description: >-
+            MatchHeaders restricts a header injection rule to requests carrying
+            every listed header, each written "name: value" with a lowercase
+            name and an exact value. Pair with headers of the same name to swap
+            a placeholder the sandbox sends (e.g. "authorization: Bearer
+            account-b") for a real credential, so one host can serve several
+            accounts. Rules are evaluated in order and the first match wins.
+          type: array
+          items:
+            type: string
         match_hosts:
           description: >-
             MatchHosts is only accepted for header injection rules. Provider

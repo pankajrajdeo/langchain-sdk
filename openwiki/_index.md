@@ -12,7 +12,7 @@ tags: [index, openwiki]
 ## Files
 
 - [Automate updates](automate-updates.md) - Schedule OpenWiki documentation updates with GitHub Actions, GitLab CI, or Bitbucket Pipelines
-- [Changelog](changelog.md) - Connect these docs to your agent of choice via MCP for real-time answers.
+- [Changelog](changelog.md)
 - [Command reference](cli-reference.md) - OpenWiki command-line usage, flags, and connector subcommands
 - [Code mode](code-mode.md) - Generate and maintain repository documentation for coding agents with OpenWiki
 - [Customize OpenWiki](customize.md) - Ignore paths, wiki instructions, agent pointers, and telemetry for OpenWiki

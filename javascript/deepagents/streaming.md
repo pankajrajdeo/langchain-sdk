@@ -17,10 +17,10 @@ Deep Agents build on LangGraph's streaming infrastructure with first-class suppo
 
 What's possible with deep agent streaming:
 
-*  [**Stream subagent progress**](#subagent-progress)—track each subagent's execution as it runs in parallel.
-*  [**Stream LLM tokens**](#llm-tokens)—stream tokens from the main agent and each subagent.
-*  [**Stream tool calls**](#tool-calls)—see tool calls and results from within subagent execution.
-*  [**Stream custom updates**](#custom-updates)—emit user-defined signals from inside subagent nodes.
+* [**Stream subagent progress**](#subagent-progress)—track each subagent's execution as it runs in parallel.
+* [**Stream LLM tokens**](#llm-tokens)—stream tokens from the main agent and each subagent.
+* [**Stream tool calls**](#tool-calls)—see tool calls and results from within subagent execution.
+* [**Stream custom updates**](#custom-updates)—emit user-defined signals from inside subagent nodes.
 
 ## Enable subgraph streaming
 
@@ -306,11 +306,11 @@ Open a public LangSmith run for this example.
 
 When `subgraphs` is enabled, each streaming event includes a **namespace** that identifies which agent produced it. The namespace is a path of node names and task IDs that represents the agent hierarchy.
 
-| Namespace                                  | Source                                                           |
-| ------------------------------------------ | ---------------------------------------------------------------- |
-| `()` (empty)                               | Main agent                                                       |
-| `("tools:abc123",)`                        | A subagent spawned by the main agent's `task` tool call `abc123` |
-| `("tools:abc123", "model_request:def456")` | The model request node inside a subagent                         |
+| Namespace | Source |
+| - | - |
+| `()` (empty) | Main agent |
+| `("tools:abc123",)` | A subagent spawned by the main agent's `task` tool call `abc123` |
+| `("tools:abc123", "model_request:def456")` | The model request node inside a subagent |
 
 Use namespaces to route events to the correct UI component:
 
@@ -1598,8 +1598,64 @@ for (const [id, sub] of activeSubagents) {
 #### [View example trace](https://smith.langchain.com/public/7c7546e0-f99a-4655-bf0c-550f94ebdff3/r)
 Open a public LangSmith run for this example.
 
+### Handle human-in-the-loop interrupts
+
+When [`interrupt_on`](human-in-the-loop.md) is configured, the `updates` stream may contain `__interrupt__` entries that pause execution for human approval. Detect them by checking for the `__interrupt__` key in update chunks. Resume with the same flat `{"decisions": [...]}` payload you use with `.invoke()`:
+
+```typescript
+import { v7 as uuid7 } from "uuid";
+
+const config = { configurable: { thread_id: uuid7() } };
+
+for await (const [mode, data] of await agent.stream(
+  { messages: [{ role: "user", content: "Delete temp.txt" }] },
+  { streamMode: ["messages", "updates"], ...config }
+)) {
+  if (mode === "updates" && data?.__interrupt__) {  // [!code highlight]
+    for (const interruptObj of data.__interrupt__) {
+      console.log("Approval needed:", interruptObj.value);
+    }
+  }
+}
+```
+
+See [Human-in-the-loop: Handle interrupts with streaming](human-in-the-loop.md#handle-interrupts-with-streaming) for the complete stream-resume loop pattern.
+
+## Stream chunk shapes
+
+With `subgraphs=True`, chunk shape depends on whether you pass one stream mode or several:
+
+| `stream_mode` | Chunk shape |
+| - | - |
+| Single mode (for example `"updates"`) | `(namespace, data)` |
+| Multiple modes (for example `["messages", "updates"]`) | `(namespace, mode, data)` |
+
+Without `subgraphs`, a single mode yields `data` directly, and multiple modes yield `(mode, data)`.
+
+```python
+# Single mode + subgraphs
+for namespace, data in agent.stream(
+    {"messages": [{"role": "user", "content": "Research quantum computing"}]},
+    stream_mode="updates",
+    subgraphs=True,
+):
+    print(namespace)  # () for main agent, ("tools:<id>",) for subagent
+    print(data)
+
+# Multiple modes + subgraphs
+for namespace, mode, data in agent.stream(
+    {"messages": [{"role": "user", "content": "Research quantum computing"}]},
+    stream_mode=["updates", "messages", "custom"],
+    subgraphs=True,
+):
+    print(mode)       # "updates", "messages", or "custom"
+    print(namespace)  # () for main agent, ("tools:<id>",) for subagent
+    print(data)
+```
+
 ## Related
 
+* [Human-in-the-loop](human-in-the-loop.md)—Configure approval workflows for sensitive tool operations
 * [Subagents](subagents.md)—Configure and use subagents with Deep Agents
 * [Frontend streaming](frontend/overview.md)—Build React UIs with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) for Deep Agents
 * [LangChain Event Streaming](../langchain/event-streaming.md)—General streaming concepts with LangChain agents

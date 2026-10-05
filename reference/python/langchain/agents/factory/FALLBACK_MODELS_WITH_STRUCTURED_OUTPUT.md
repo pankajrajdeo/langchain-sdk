@@ -15,9 +15,9 @@ tags: [reference, langchain, agents, factory, fallback_models_with_structured_ou
 ## Signature
 
 ```python
-FALLBACK_MODELS_WITH_STRUCTURED_OUTPUT = ['(^|[/:.])gpt-4\\.1($|[-/:])', '(^|[/:.])gpt-4o($|[-/:])', '(^|[/:.])gpt-5($|[-/:])', '(^|[/:.])gpt-5\\.1($|[-/:])', '(^|[/:.])gpt-5\\.2(-\\d{4}-\\d{2}-\\d{2})?($|[/:])', '(^|[/:.])gpt-5\\.2-(chat|codex)($|[-/:])', '(^|[/:.])gpt-5\\.3($|[-/:])', '(^|[/:.])gpt-5\\.4(-\\d{4}-\\d{2}-\\d{2})?($|[/:])', '(^|[/:.])gpt-5\\.4-(mini|nano)($|[-/:])', '(^|[/:.])gpt-5\\.5($|[-/:])', '(^|[/:.])claude-(fable|mythos)-5(?:-\\d{8})?(?:-v\\d(?::\\d)?)?($|[/:])', '(^|[/:.])claude-haiku-4-5(?:-\\d{8})?(?:-v\\d(?::\\d)?)?($|[/:])', '(^|[/:.])claude-opus-4-(5|6|7|8)(?:-\\d{8})?(?:-v\\d(?::\\d)?)?($|[/:])', '(^|[/:.])claude-sonnet-4-(5|6)(?:-\\d{8})?(?:-v\\d(?::\\d)?)?($|[/:])', '(^|[/:.])grok-4($|[-.:/])', '(^|[/:.])grok-build($|[-/:])']
+FALLBACK_MODELS_WITH_STRUCTURED_OUTPUT = ['(^|[/:.])gpt-4\\.1($|[-/:])', '(^|[/:.])gpt-4o($|[-/:])', '(^|[/:.])gpt-5($|[-/:])', '(^|[/:.])gpt-5\\.1($|[-/:])', '(^|[/:.])gpt-5\\.2(-\\d{4}-\\d{2}-\\d{2})?($|[/:])', '(^|[/:.])gpt-5\\.2-(chat|codex)($|[-/:])', '(^|[/:.])gpt-5\\.3($|[-/:])', '(^|[/:.])gpt-5\\.4(-\\d{4}-\\d{2}-\\d{2})?($|[/:])', '(^|[/:.])gpt-5\\.4-(mini|nano)($|[-/:])', '(^|[/:.])gpt-5\\.5($|[-/:])', '(^|[/:.])gpt-6-(astra|luna|sol)($|[-/:])', '(^|[/:.])claude-(fable|mythos)-5(?:-\\d{8})?(?:-v\\d(?::\\d)?)?($|[/:])', '(^|[/:.])claude-haiku-4-5(?:-\\d{8})?(?:-v\\d(?::\\d)?)?($|[/:])', '(^|[/:.])claude-opus-4-(5|6|7|8)(?:-\\d{8})?(?:-v\\d(?::\\d)?)?($|[/:])', '(^|[/:.])claude-sonnet-4-(5|6)(?:-\\d{8})?(?:-v\\d(?::\\d)?)?($|[/:])', '(^|[/:.])grok-4($|[-.:/])', '(^|[/:.])grok-build($|[-/:])']
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a18de590e7ccf5c647fbf3d689e5f1a15f78e9f5/libs/langchain_v1/langchain/agents/factory.py#L174)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/be854a130153e51346d83d3b06f959b80f6cbca6/libs/langchain_v1/langchain/agents/factory.py#L182)

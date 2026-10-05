@@ -16,9 +16,9 @@ This will help you get started with CohereEmbeddings [embedding models](../embed
 
 ### Integration details
 
-| Class                                                                                              | Package                                                                | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/cohere/) |                                             Downloads                                             |                                             Version                                            |
-| :------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :---: | :-----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`CohereEmbeddings`](https://reference.langchain.com/javascript/langchain-cohere/CohereEmbeddings) | [`@langchain/cohere`](https://www.npmjs.com/package/@langchain/cohere) |   ❌   |                                        ✅                                        | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cohere?style=flat-square\&label=%20&) |
+| Class | Package | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/cohere/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`CohereEmbeddings`](https://reference.langchain.com/javascript/langchain-cohere/CohereEmbeddings) | [`@langchain/cohere`](https://www.npmjs.com/package/@langchain/cohere) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cohere?style=flat-square\&label=%20&) |
 
 ## Setup
 

@@ -193,7 +193,7 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
 ## Dec 15, 2025
 ## `langchain` v1.2.0
 
-* [`create_agent`](../langchain/agents.md): Simplified support for provider-specific tool parameters and definitions via a new [`extras`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.BaseTool.extras) attribute on [tools](../langchain/tools.md). Examples:
+* [`create_agent`](../langchain/agents.md): Simplified support for provider-specific tool parameters and definitions via a new [`extras`](https://reference.langchain.com/python/langchain/tools) attribute on [tools](../langchain/tools.md). Examples:
   * Provider-specific configuration such as Anthropic's [programmatic tool calling](../integrations/chat/anthropic.md#programmatic-tool-calling) and [tool search](../integrations/chat/anthropic.md#tool-search).
   * Built-in tools that are executed client-side, as supported by [Anthropic](../integrations/chat/anthropic.md#built-in-tools), [OpenAI](../integrations/chat/openai.md#responses-api), and other providers.
 * Support for strict schema-adherence in agent `response_format` (see [`ProviderStrategy`](../langchain/structured-output.md#provider-strategy) docs).

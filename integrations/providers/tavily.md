@@ -80,12 +80,12 @@ from langchain_tavily import TavilyMap
 
 ## Components reference
 
-| Class                                                                                                   | Abstraction | Import path                                  | Description                                                             |
-| ------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------- | ----------------------------------------------------------------------- |
-| [`TavilySearch`](https://reference.langchain.com/python/langchain-tavily/tavily_search/TavilySearch)    | Tool        | `from langchain_tavily import TavilySearch`  | Returns search results from the Tavily Search API.                      |
-| [`TavilyExtract`](https://reference.langchain.com/python/langchain-tavily/tavily_extract/TavilyExtract) | Tool        | `from langchain_tavily import TavilyExtract` | Extracts cleaned content from one or more URLs.                         |
-| [`TavilyCrawl`](https://reference.langchain.com/python/langchain-tavily/tavily_crawl/TavilyCrawl)       | Tool        | `from langchain_tavily import TavilyCrawl`   | Crawls a site starting from a base URL with depth and breadth controls. |
-| [`TavilyMap`](https://reference.langchain.com/python/langchain-tavily/tavily_map/TavilyMap)             | Tool        | `from langchain_tavily import TavilyMap`     | Discovers the URL structure of a site without extracting page content.  |
+| Class | Abstraction | Import path | Description |
+| - | - | - | - |
+| [`TavilySearch`](https://reference.langchain.com/python/langchain-tavily/tavily_search/TavilySearch) | Tool | `from langchain_tavily import TavilySearch` | Returns search results from the Tavily Search API. |
+| [`TavilyExtract`](https://reference.langchain.com/python/langchain-tavily/tavily_extract/TavilyExtract) | Tool | `from langchain_tavily import TavilyExtract` | Extracts cleaned content from one or more URLs. |
+| [`TavilyCrawl`](https://reference.langchain.com/python/langchain-tavily/tavily_crawl/TavilyCrawl) | Tool | `from langchain_tavily import TavilyCrawl` | Crawls a site starting from a base URL with depth and breadth controls. |
+| [`TavilyMap`](https://reference.langchain.com/python/langchain-tavily/tavily_map/TavilyMap) | Tool | `from langchain_tavily import TavilyMap` | Discovers the URL structure of a site without extracting page content. |
 
 ***
 

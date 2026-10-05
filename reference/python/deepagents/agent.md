@@ -468,6 +468,7 @@ The [`create_deep_agent`](#deepagents.create_deep_agent) function is the main en
 - [`state_schema`](https://reference.langchain.com/python/deepagents/middleware/rubric/RubricMiddleware/state_schema)
 - [`max_iterations`](https://reference.langchain.com/python/deepagents/middleware/rubric/RubricMiddleware/max_iterations)
 - [`trace_policy`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware/trace_policy)
+- [`logger`](https://reference.langchain.com/python/deepagents/middleware/_blob_offload/logger)
 - [`logger`](https://reference.langchain.com/python/deepagents/middleware/_video/logger)
 - [`MISSING_VIDEO_HINT`](https://reference.langchain.com/python/deepagents/middleware/_video/MISSING_VIDEO_HINT)
 - [`MAX_VIDEO_SAMPLED_FRAMES`](https://reference.langchain.com/python/deepagents/middleware/_video/MAX_VIDEO_SAMPLED_FRAMES)

@@ -19,13 +19,13 @@ These middleware classes live in the `langchain-azure-ai` package and are export
 
 ## Overview
 
-| Middleware                                | Description                                                                  |
-| ----------------------------------------- | ---------------------------------------------------------------------------- |
-| [Text moderation](#text-moderation)       | Screen input and output text for harmful content and blocklist matches       |
-| [Image moderation](#image-moderation)     | Screen image inputs and outputs using Azure AI Content Safety image analysis |
-| [Prompt shield](#prompt-shield)           | Detect direct and indirect prompt injection attempts                         |
-| [Protected material](#protected-material) | Detect copyrighted or otherwise protected text or code                       |
-| [Groundedness](#groundedness)             | Evaluate model outputs against grounding sources and flag hallucinations     |
+| Middleware | Description |
+| - | - |
+| [Text moderation](#text-moderation) | Screen input and output text for harmful content and blocklist matches |
+| [Image moderation](#image-moderation) | Screen image inputs and outputs using Azure AI Content Safety image analysis |
+| [Prompt shield](#prompt-shield) | Detect direct and indirect prompt injection attempts |
+| [Protected material](#protected-material) | Detect copyrighted or otherwise protected text or code |
+| [Groundedness](#groundedness) | Evaluate model outputs against grounding sources and flag hallucinations |
 
 ### Features
 

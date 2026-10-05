@@ -16,17 +16,17 @@ When an online evaluator runs on any run within a trace, the trace will be auto-
 
 ## View online evaluators
 
-Head to the **Tracing Projects** tab and select a tracing project. To view existing online evaluators for that project, click on the **Evaluators** tab.
+Head to the **Tracing** tab and select a tracing project, or an agent environment. To view existing online evaluators for that project, click on the **Evaluators** tab.
 
 ## Configure composite online evaluators
 
-You can create composite evaluators on a [tracing project](observability-concepts.md#projects) for [online evaluations](evaluation-concepts.md#online-evaluations). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
+You can create composite evaluators on a [tracing project](observability-concepts.md#tracing-projects) for [online evaluations](evaluation-concepts.md#online-evaluations). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
 
 ### 1. Navigate to the tracing project
 
-To start configuring a composite evaluator, navigate to the **Tracing** page and select a tracing project.
+To start configuring a composite evaluator, navigate to the **Tracing** page and select a tracing project, or an agent environment.
 
-From the tracing project view, navigate to the **Evaluators** tab. Click **+ Evaluator** to open the **Add Evaluator** panel. Click **Composite Score** under **Create from scratch**.
+From the tracing project or agent environment view, navigate to the **Evaluators** tab. Click **+ Evaluator** to open the **Add Evaluator** panel. Click **Composite Score** under **Create from scratch**.
 
 ### 2. Configure the composite evaluator
 
@@ -44,7 +44,7 @@ From the tracing project view, navigate to the **Evaluators** tab. Click **+ Eva
 
 Composite scores are attached to a run as **feedback**, similarly to feedback from a single evaluator.
 
-**On a tracing project**:
+**On a tracing project or agent environment**:
 
 * Composite scores appear as feedback on runs.
 * [Filter for runs](filter-traces.md) with a composite score, or where the composite score meets a certain threshold.

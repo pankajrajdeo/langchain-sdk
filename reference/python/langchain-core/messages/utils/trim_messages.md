@@ -91,7 +91,7 @@ trim_messages(
     messages,
     max_tokens=45,
     strategy="last",
-    token_counter=ChatOpenAI(model="openai:gpt-5.5"),
+    token_counter=ChatOpenAI(model="gpt-5.5"),
     # Most chat models expect that chat history starts with either:
     # (1) a HumanMessage or
     # (2) a SystemMessage followed by a HumanMessage
@@ -274,4 +274,4 @@ List of trimmed `BaseMessage`.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c5ab14d42a3e22865c9def909de0b11d70b0bbf0/libs/core/langchain_core/messages/utils.py#L1145)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/messages/utils.py#L1145)

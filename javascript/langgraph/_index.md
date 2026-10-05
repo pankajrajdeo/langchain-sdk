@@ -1,13 +1,13 @@
 ---
 title: "javascript/langgraph"
-description: "Index of 32 pages and 2 subdirectories under javascript/langgraph."
+description: "Index of 33 pages and 2 subdirectories under javascript/langgraph."
 category: "index"
 tags: [index, javascript, langgraph]
 ---
 
 # javascript/langgraph
 
-32 pages here, 41 pages including subdirectories.
+33 pages here, 42 pages including subdirectories.
 
 ## Directories
 
@@ -21,13 +21,14 @@ tags: [index, javascript, langgraph]
 - [Application structure](application-structure.md) - A LangGraph application consists of one or more graphs, a configuration file (langgraph.json), a file that specifies dependencies, and an optional .env file that specifies environment variables.
 - [Backward compatibility](backward-compatibility.md) - Update LangGraph graph code in production without breaking in-flight runs.
 - [Case studies](case-studies.md) - This list of companies using LangGraph and their success stories is compiled from public sources. If your company uses LangGraph, we'd love for you to share your story and add it to the list. You’re...
+- [Changelog](changelog-js.md) - Log of updates and improvements to our JavaScript/TypeScript packages
 - [Checkpointers](checkpointers.md) - LangGraph checkpointers save graph state as checkpoints at each step, enabling persistence, human-in-the-loop, and fault-tolerant execution.
 - [Choosing between Graph and Functional APIs](choosing-apis.md) - LangGraph provides two different APIs to build agent workflows: the Graph API and the Functional API. Both APIs share the same underlying runtime and can be used together in the same application, but...
 - [Deployment](deploy.md) - Deploy LangGraph agents to production with LangSmith Cloud or JavaScript frameworks and hosting platforms.
 - [Event streaming](event-streaming.md) - Stream LangGraph runs with typed projections for messages, state, subgraphs, output, and extensions.
 - [Fault tolerance](fault-tolerance.md) - Configure per-node timeouts, retries, and error handlers in LangGraph.
 - [Functional API overview](functional-api.md) - The Functional API allows you to add LangGraph's key features (persistence, memory, human-in-the-loop, and streaming) to your applications with minimal changes to your existing code.
-- [Graph API overview](graph-api.md) - At its core, LangGraph models agent workflows as graphs. You define the behavior of your agents using three key components:
+- [Graph API overview](graph-api.md) - LangGraph models agent workflows as graphs: define state, nodes, and edges with StateGraph to build looping, stateful workflows.
 - [Install LangGraph](install.md) - To install the base LangGraph package:
 - [Interrupts](interrupts.md) - Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. This enables human-in-the-loop patterns where you need external input to proceed. When...
 - [Run a local server](local-server.md) - This guide shows you how to run a LangGraph application locally.

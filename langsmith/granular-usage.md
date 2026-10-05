@@ -63,14 +63,14 @@ Time range and workspace filters are shared across both sub-tabs, switching tabs
 
 The granular usage endpoint accepts the following query parameters:
 
-| Parameter       | Type           | Required | Description                                                                                                                  |
-| --------------- | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `start_time`    | datetime       | Yes      | Start of the time range (ISO 8601 format).                                                                                   |
-| `end_time`      | datetime       | Yes      | End of the time range. Must be after `start_time`.                                                                           |
-| `workspace_ids` | array of UUIDs | Yes      | Filter results to specific workspaces.                                                                                       |
-| `kind`          | string         | No       | `traces` (default) or `langsmith_deployments`. Selects the billable domain.                                                  |
-| `group_by`      | string         | No       | Dimension to group by. One of: `workspace`, `project`, `user`, `api_key`. Default: `workspace`.                              |
-| `trace_tier`    | string         | No       | Trace-only retention filter: `longlived` or `shortlived`. Omit for all retention. Ignored when `kind=langsmith_deployments`. |
+| Parameter | Type | Required | Description |
+| - | - | - | - |
+| `start_time` | datetime | Yes | Start of the time range (ISO 8601 format). |
+| `end_time` | datetime | Yes | End of the time range. Must be after `start_time`. |
+| `workspace_ids` | array of UUIDs | Yes | Filter results to specific workspaces. |
+| `kind` | string | No | `traces` (default) or `langsmith_deployments`. Selects the billable domain. |
+| `group_by` | string | No | Dimension to group by. One of: `workspace`, `project`, `user`, `api_key`. Default: `workspace`. |
+| `trace_tier` | string | No | Trace-only retention filter: `longlived` or `shortlived`. Omit for all retention. Ignored when `kind=langsmith_deployments`. |
 
 ### Day-granular contract
 
@@ -86,12 +86,12 @@ A 24-hour window from `2026-01-01T12:00:00Z` to `2026-01-02T12:00:00Z` therefore
 
 The `stride` field in each response indicates the time bucket size used for aggregation, calculated from the requested time range. Daily is the minimum. Sub-day windows still bucket at one day.
 
-| Time range              | Aggregation | Stride      |
-| ----------------------- | ----------- | ----------- |
-| Up to 31 days           | Daily       | `days: 1`   |
-| 32–93 days (\~3 months) | Weekly      | `days: 7`   |
-| 94–366 days (\~1 year)  | Monthly     | `days: 30`  |
-| More than 366 days      | Yearly      | `days: 365` |
+| Time range | Aggregation | Stride |
+| - | - | - |
+| Up to 31 days | Daily | `days: 1` |
+| 32–93 days (\~3 months) | Weekly | `days: 7` |
+| 94–366 days (\~1 year) | Monthly | `days: 30` |
+| More than 366 days | Yearly | `days: 365` |
 
 ### Compatibility
 
@@ -256,10 +256,10 @@ Each record carries three metrics together so a single fetch powers the whole De
 }
 ```
 
-| Field                  | Description                                                                                                                                                                                                                             |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `nodes_executed`       | Total LangGraph nodes executed in the time bucket.                                                                                                                                                                                      |
-| `agent_runs`           | Total agent runs (graph invocations) in the time bucket.                                                                                                                                                                                |
+| Field | Description |
+| - | - |
+| `nodes_executed` | Total LangGraph nodes executed in the time bucket. |
+| `agent_runs` | Total agent runs (graph invocations) in the time bucket. |
 | `agent_uptime_seconds` | Total replica uptime, in seconds, summed across deployment replicas. The deduplicated standby minutes used for invoicing is computed separately by the billing pipeline; this field is the raw sum surfaced for breakdown and analysis. |
 
 #### Example: Get Deployment usage by workspace
@@ -338,16 +338,16 @@ Same query parameters as the data endpoint, including `kind`. Returns a CSV file
 
 For `kind=traces`, the value column is `Traces`. For `kind=langsmith_deployments`, the value columns are `Nodes Executed`, `Agent Runs`, and `Agent Uptime (seconds)`.
 
-| Column                                               | Present when                                 |
-| ---------------------------------------------------- | -------------------------------------------- |
-| Time Bucket Start                                    | Always                                       |
-| Time Bucket End                                      | Always                                       |
-| Workspace ID / Name                                  | Always (populated when `group_by=workspace`) |
-| Project ID / Name                                    | Always (populated when `group_by=project`)   |
-| User ID / Email                                      | Always (populated when `group_by=user`)      |
-| API Key Short Key                                    | Always (populated when `group_by=api_key`)   |
-| Traces                                               | `kind=traces`                                |
-| Nodes Executed / Agent Runs / Agent Uptime (seconds) | `kind=langsmith_deployments`                 |
+| Column | Present when |
+| - | - |
+| Time Bucket Start | Always |
+| Time Bucket End | Always |
+| Workspace ID / Name | Always (populated when `group_by=workspace`) |
+| Project ID / Name | Always (populated when `group_by=project`) |
+| User ID / Email | Always (populated when `group_by=user`) |
+| API Key Short Key | Always (populated when `group_by=api_key`) |
+| Traces | `kind=traces` |
+| Nodes Executed / Agent Runs / Agent Uptime (seconds) | `kind=langsmith_deployments` |
 
 Cells whose value would start with `=`, `+`, `-`, `@`, tab, or carriage-return are tab-prefixed to neutralize spreadsheet formula evaluation in Excel / Google Sheets / LibreOffice.
 
@@ -386,14 +386,16 @@ group_by=workspace" \
 
 The `group_by` parameter determines how usage data is aggregated:
 
-| Value       | Description        | Dimensions returned              | Available for |
-| ----------- | ------------------ | -------------------------------- | ------------- |
-| `workspace` | Group by workspace | `workspace_id`, `workspace_name` | Both kinds    |
-| `project`   | Group by project   | `project_id`, `project_name`     | Both kinds    |
-| `user`      | Group by user      | `user_id`, `user_email`          | Both kinds    |
-| `api_key`   | Group by API key   | `api_key_short_key`              | Both kinds    |
+| Value | Description | Dimensions returned | Available for |
+| - | - | - | - |
+| `workspace` | Group by workspace | `workspace_id`, `workspace_name` | Both kinds |
+| `project` | Group by project | `project_id`, `project_name` | Both kinds |
+| `user` | Group by user | `user_id`, `user_email` | Both kinds |
+| `api_key` | Group by API key | `api_key_short_key` | Both kinds |
 
 For trace usage, "project" refers to the [LangSmith tracer session](observability-concepts.md). For Deployment usage, "project" refers to the LangSmith Deployment project (a deployed agent).
+
+In an [agent-based workspace](agents.md), grouping by project is the closest the export gets to an agent, because there is no agent or environment dimension. Each trace usage row covers one [environment](agent-environments.md) of one agent, so totaling an agent's usage means summing its environment rows. LangSmith names the tracing project it creates for an environment `<agent>-<environment>`, for example `support-triage-production`, while a project that predates the agent keeps the name it already had.
 
 ## Related resources
 

@@ -20,15 +20,15 @@ Learn more about the package on [GitHub](https://github.com/ayanokojix21/langcha
 
 ## Overview
 
-| Class                   | Package                                                                              | Serializable |
-| :---------------------- | :----------------------------------------------------------------------------------- | :----------- |
-| `GoogleClassroomLoader` | [`langchain-google-classroom`](https://pypi.org/project/langchain-google-classroom/) | ✅            |
+| Class | Package | Serializable |
+| :- | :- | :- |
+| `GoogleClassroomLoader` | [`langchain-google-classroom`](https://pypi.org/project/langchain-google-classroom/) | ✅ |
 
 ### Integration details
 
-| Source                  | Document Lazy Loading | Async Support |
-| :---------------------- | :-------------------: | :-----------: |
-| `GoogleClassroomLoader` |           ✅           |       ✅       |
+| Source | Document Lazy Loading | Async Support |
+| :- | :-: | :-: |
+| `GoogleClassroomLoader` | ✅ | ✅ |
 
 ## Prerequisites
 
@@ -102,24 +102,24 @@ loader = GoogleClassroomLoader(
 
 ### Constructor parameters
 
-| Parameter              | Type                             | Default    | Description                                                                                                                                                             |
-| :--------------------- | :------------------------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `course_ids`           | `list[str]` or `None`            | `None`     | Course IDs to load. Loads all accessible courses when `None`.                                                                                                           |
-| `load_assignments`     | `bool`                           | `True`     | Load courseWork items.                                                                                                                                                  |
-| `load_announcements`   | `bool`                           | `True`     | Load announcements.                                                                                                                                                     |
-| `load_materials`       | `bool`                           | `True`     | Load courseWork materials.                                                                                                                                              |
-| `load_attachments`     | `bool`                           | `True`     | Download and yield Drive file attachments.                                                                                                                              |
-| `parse_attachments`    | `bool`                           | `True`     | Parse attachment content using built-in parsers (install `langchain-google-classroom[parsers]` for PDF/DOCX support, or set `parse_attachments=False` to skip parsing). |
-| `file_parser_cls`      | `type[BaseBlobParser]` or `None` | `None`     | Custom parser class to use for attachments (replaces built-in parsers).                                                                                                 |
-| `load_submissions`     | `bool`                           | `False`    | Load student submissions. Adds the required scope automatically.                                                                                                        |
-| `load_topics`          | `bool`                           | `False`    | Load course topics. Adds the required scope automatically.                                                                                                              |
-| `load_roster`          | `bool`                           | `False`    | Load student and teacher roster. Adds the required scope automatically.                                                                                                 |
-| `load_images`          | `bool`                           | `False`    | Process image attachments (requires a `vision_model`).                                                                                                                  |
-| `vision_model`         | `BaseChatModel` or `None`        | `None`     | Vision-capable LLM for image understanding in PDFs and images.                                                                                                          |
-| `max_file_size`        | `int`                            | `50000000` | Maximum attachment file size in bytes. Files larger than this are skipped.                                                                                              |
-| `service_account_file` | `str` or `None`                  | `None`     | Path to a service-account key JSON file.                                                                                                                                |
-| `token_file`           | `str` or `None`                  | `None`     | Path to a cached OAuth token JSON file.                                                                                                                                 |
-| `client_secrets_file`  | `str` or `None`                  | `None`     | Path to an OAuth client-secrets JSON file.                                                                                                                              |
+| Parameter | Type | Default | Description |
+| :- | :- | :- | :- |
+| `course_ids` | `list[str]` or `None` | `None` | Course IDs to load. Loads all accessible courses when `None`. |
+| `load_assignments` | `bool` | `True` | Load courseWork items. |
+| `load_announcements` | `bool` | `True` | Load announcements. |
+| `load_materials` | `bool` | `True` | Load courseWork materials. |
+| `load_attachments` | `bool` | `True` | Download and yield Drive file attachments. |
+| `parse_attachments` | `bool` | `True` | Parse attachment content using built-in parsers (install `langchain-google-classroom[parsers]` for PDF/DOCX support, or set `parse_attachments=False` to skip parsing). |
+| `file_parser_cls` | `type[BaseBlobParser]` or `None` | `None` | Custom parser class to use for attachments (replaces built-in parsers). |
+| `load_submissions` | `bool` | `False` | Load student submissions. Adds the required scope automatically. |
+| `load_topics` | `bool` | `False` | Load course topics. Adds the required scope automatically. |
+| `load_roster` | `bool` | `False` | Load student and teacher roster. Adds the required scope automatically. |
+| `load_images` | `bool` | `False` | Process image attachments (requires a `vision_model`). |
+| `vision_model` | `BaseChatModel` or `None` | `None` | Vision-capable LLM for image understanding in PDFs and images. |
+| `max_file_size` | `int` | `50000000` | Maximum attachment file size in bytes. Files larger than this are skipped. |
+| `service_account_file` | `str` or `None` | `None` | Path to a service-account key JSON file. |
+| `token_file` | `str` or `None` | `None` | Path to a cached OAuth token JSON file. |
+| `client_secrets_file` | `str` or `None` | `None` | Path to an OAuth client-secrets JSON file. |
 
 ## Load documents
 
@@ -233,14 +233,14 @@ When `load_attachments=True` (the default), the loader resolves Google Drive fil
 
 ### Supported formats
 
-| Format                    | Parser               | Notes                                                  |
-| :------------------------ | :------------------- | :----------------------------------------------------- |
-| PDF                       | `PDFParser`          | Extracts text; optional vision LLM for embedded images |
-| DOCX                      | `DocxParser`         | Extracts text and tables                               |
-| CSV                       | `CSVParser`          | One document per row with header-aware formatting      |
-| Plain text                | `TextParser`         | UTF-8 decoding                                         |
-| Images (PNG, JPEG, etc.)  | `ImageParser`        | Requires `vision_model` and `load_images=True`         |
-| Google Docs/Sheets/Slides | Exported then parsed | Auto-exported to PDF/CSV/plain text via Drive API      |
+| Format | Parser | Notes |
+| :- | :- | :- |
+| PDF | `PDFParser` | Extracts text; optional vision LLM for embedded images |
+| DOCX | `DocxParser` | Extracts text and tables |
+| CSV | `CSVParser` | One document per row with header-aware formatting |
+| Plain text | `TextParser` | UTF-8 decoding |
+| Images (PNG, JPEG, etc.) | `ImageParser` | Requires `vision_model` and `load_images=True` |
+| Google Docs/Sheets/Slides | Exported then parsed | Auto-exported to PDF/CSV/plain text via Drive API |
 
 ### Using a vision LLM for images
 

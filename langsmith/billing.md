@@ -146,6 +146,8 @@ If the default data retention is set to **Base** you can optionally use the slid
 
 Data retention settings are adjustable per tracing project. At the project level, you choose between two tiers: base (14 days) or extended (180 days). To customize the extended duration up to 180 days, use [workspace-level configuration](data-purging-compliance.md#customize-extended-retention-policy) (Enterprise only).
 
+In an [agent-based workspace](agents.md), each of an agent's [environments](agent-environments.md) is its own tracing project, so retention is set per environment rather than per agent, and you reach the setting through the agent rather than a **Projects** list.
+
 Navigate to **Projects** > ***Your project name*** > Select **Retention** and select the desired default retention. This will only affect retention (and pricing) for **traces going forward**.
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/p1projectretention.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=394b513df5ef31d0309f5f3c78bd315a" alt="P1projectretention" width="1358" height="452" data-path="langsmith/images/p1projectretention.png" />
@@ -160,7 +162,7 @@ You may not want all traces to expire after 14 days. You can automatically exten
 
 To configure this:
 
-1. Navigate to **Projects** > ***Your project name*** > Select **+ New** > Select **New Automation**.
+1. Navigate to **Projects** > ***Your project name*** > Select **+ New** > Select **New Automation**. In an agent-based workspace, start from the agent's environment.
 2. Name your rule and optionally apply filters or a sample rate. For more information on configuring filters, refer to [filtering techniques](filter-traces-in-application.md#filter-operators).
 
 > [!NOTE]
@@ -176,10 +178,10 @@ If you want to keep a subset of traces for **longer than 180 days** for data col
 
 In addition to traces, LangSmith charges for deployed agents via LangSmith Deployment. Deployments are billed on the resources they consume:
 
-* **Compute**: The vCPU and memory a deployment uses while resources are provisioned, measured in LangChain Compute Units (LCU). A [Serverless](cloud-platform-features.md#serverless) deployment can [scale to zero (beta)](cloud-platform-features.md#serverless) after a period of inactivity, so compute charges stop only once it has scaled down. A [Dedicated](cloud-platform-features.md#dedicated) deployment is always-on and consumes compute continuously.
-* **Storage**: The database storage a deployment uses to persist state, measured in LangChain Storage Units (LSU).
+* **Compute**: The vCPU and memory a deployment uses while resources are provisioned, measured in LangChain Standard Units (LSU). A [Serverless](cloud-platform-features.md#serverless) deployment can [scale to zero (beta)](cloud-platform-features.md#serverless) after a period of inactivity, so compute charges stop only once it has scaled down. A [Dedicated](cloud-platform-features.md#dedicated) deployment is always-on and consumes compute continuously.
+* **Storage**: The database storage a deployment uses to persist state, measured in LangChain Standard Units (LSU).
 
-For current LCU and LSU rates, and to estimate the cost of a deployment, see the [pricing page](https://www.langchain.com/pricing), which includes a deployment cost calculator.
+For current LSU rates, and to estimate the cost of a deployment, see the [pricing page](https://www.langchain.com/pricing), which includes a deployment cost calculator.
 
 > [!NOTE]
 > This usage-based model replaces the previous per-run and uptime pricing. Existing customers remain on their current pricing until October 1, 2026, then move to the new model. Scale to zero is available only for deployments on the new pricing. The inactivity window before a Serverless deployment scales to zero may change as the feature rolls out. For questions about the transition, contact support via [support.langchain.com](https://support.langchain.com).

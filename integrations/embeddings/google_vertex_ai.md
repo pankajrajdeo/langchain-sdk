@@ -21,8 +21,8 @@ This will help you get started with embedding models on Gemini Enterprise Agent 
 
 ### Integration details
 
-|                                  Provider                                  |                                                            Package                                                            |
-| :------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: |
+| Provider | Package |
+| :-: | :-: |
 | [Google](https://python.langchain.com/docs/integrations/providers/google/) | [`langchain-google-vertexai`](https://reference.langchain.com/python/langchain-google-vertexai/embeddings/VertexAIEmbeddings) |
 
 ## Setup

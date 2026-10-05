@@ -16,20 +16,20 @@ tags: [docs, integrations, tools, bedrock_agentcore_web_search]
 
 ### Integration details
 
-| Class                                                                                                      | Package                                                    | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/) |                                           Version                                           |
-| :--------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :----------: | :-------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`WebSearchToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) |       ❌      |                                ❌                                | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/) | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`WebSearchToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) | ❌ | ❌ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
 
 ### Tool features
 
-| [Returns artifact](../../langchain/tools.md) | Native async |             Return data             |      Pricing      |
-| :---------------------------------------------: | :----------: | :---------------------------------: | :---------------: |
-|                        ❌                        |       ✅      | Title, URL, Published date, Extract | Pay-per-use (AWS) |
+| [Returns artifact](../../langchain/tools.md) | Native async | Return data | Pricing |
+| :-: | :-: | :-: | :-: |
+| ❌ | ✅ | Title, URL, Published date, Extract | Pay-per-use (AWS) |
 
 ### Available tools
 
-| Tool         | Description                                         |
-| :----------- | :-------------------------------------------------- |
+| Tool | Description |
+| :- | :- |
 | `web_search` | Search the web and return source-attributed results |
 
 ## Setup

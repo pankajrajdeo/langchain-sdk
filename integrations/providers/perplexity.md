@@ -94,12 +94,12 @@ Then set `PERPLEXITY_API_KEY` and reference Perplexity models with the `perplexi
 
 ## Components reference
 
-| Class                       | Abstraction | Import path                                                  | Description                                                                 |
-| --------------------------- | ----------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| `ChatPerplexity`            | Chat model  | `from langchain_perplexity import ChatPerplexity`            | Chat model wrapping the Perplexity API for grounded chat completions.       |
-| `PerplexitySearchRetriever` | Retriever   | `from langchain_perplexity import PerplexitySearchRetriever` | Retriever that returns `Document` objects from the Perplexity Search API.   |
-| `PerplexitySearchResults`   | Tool        | `from langchain_perplexity import PerplexitySearchResults`   | Tool that returns Perplexity Search API results as a JSON array for agents. |
-| `PerplexityEmbeddings`      | Embeddings  | `from langchain_perplexity import PerplexityEmbeddings`      | Embedding model wrapping the Perplexity Embeddings API.                     |
+| Class | Abstraction | Import path | Description |
+| - | - | - | - |
+| `ChatPerplexity` | Chat model | `from langchain_perplexity import ChatPerplexity` | Chat model wrapping the Perplexity API for grounded chat completions. |
+| `PerplexitySearchRetriever` | Retriever | `from langchain_perplexity import PerplexitySearchRetriever` | Retriever that returns `Document` objects from the Perplexity Search API. |
+| `PerplexitySearchResults` | Tool | `from langchain_perplexity import PerplexitySearchResults` | Tool that returns Perplexity Search API results as a JSON array for agents. |
+| `PerplexityEmbeddings` | Embeddings | `from langchain_perplexity import PerplexityEmbeddings` | Embedding model wrapping the Perplexity Embeddings API. |
 
 ***
 

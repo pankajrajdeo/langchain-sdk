@@ -114,18 +114,18 @@ By default the SDK streams over Server-Sent Events. To use a full-duplex WebSock
 
 The stream returned by `client.threads.stream(...)` exposes typed projections over one underlying event flow:
 
-| Projection                                             | Use                                                                                                             |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `thread.events`                                        | Iterate every raw protocol event (Python). In JavaScript, open `thread.subscribe(...)`.                         |
-| `thread.messages`                                      | Stream chat model messages, token deltas, reasoning, and tool-call argument chunks.                             |
-| `thread.values`                                        | Iterate state snapshots and await the final value.                                                              |
-| `thread.output`                                        | Await the final output.                                                                                         |
-| `thread.tool_calls` (`thread.toolCalls` in JavaScript) | Observe tool invocations with assembled input, streamed output, and result.                                     |
-| `thread.subgraphs`                                     | Discover and observe nested graph executions.                                                                   |
-| `thread.subagents`                                     | Subagent-oriented view of `thread.subgraphs`. Use this name when working with Deep Agents subagent invocations. |
-| `thread.interrupts`                                    | Inspect human-in-the-loop interrupt payloads.                                                                   |
-| `thread.interrupted`                                   | Check whether the run paused for human input.                                                                   |
-| `thread.extensions`                                    | Consume custom stream transformer projections published on `custom:<name>` channels.                            |
+| Projection | Use |
+| - | - |
+| `thread.events` | Iterate every raw protocol event (Python). In JavaScript, open `thread.subscribe(...)`. |
+| `thread.messages` | Stream chat model messages, token deltas, reasoning, and tool-call argument chunks. |
+| `thread.values` | Iterate state snapshots and await the final value. |
+| `thread.output` | Await the final output. |
+| `thread.tool_calls` (`thread.toolCalls` in JavaScript) | Observe tool invocations with assembled input, streamed output, and result. |
+| `thread.subgraphs` | Discover and observe nested graph executions. |
+| `thread.subagents` | Subagent-oriented view of `thread.subgraphs`. Use this name when working with Deep Agents subagent invocations. |
+| `thread.interrupts` | Inspect human-in-the-loop interrupt payloads. |
+| `thread.interrupted` | Check whether the run paused for human input. |
+| `thread.extensions` | Consume custom stream transformer projections published on `custom:<name>` channels. |
 
 Multiple consumers can read these projections concurrently. Reading `thread.messages` does not consume events needed by `thread.values`, `thread.toolCalls`, `thread.subgraphs`, or `thread.output`.
 
@@ -621,18 +621,18 @@ The `namespace` is a path from the root graph to the scope that emitted the even
 
 Raw events flow on channels. The channel name appears as the event's `method`; each channel emits a specific event shape.
 
-| Channel         | Purpose                                                         |
-| --------------- | --------------------------------------------------------------- |
-| `values`        | Full graph state snapshots.                                     |
-| `updates`       | Per-node state deltas.                                          |
-| `messages`      | Content-block-centric chat model output.                        |
-| `tools`         | Tool call start, streamed output, finish, and error events.     |
-| `lifecycle`     | Run, subgraph, and subagent status changes.                     |
-| `checkpoints`   | Lightweight checkpoint envelopes for branching and time travel. |
-| `input`         | Human-in-the-loop input requests and responses.                 |
-| `tasks`         | Pregel task creation and result events.                         |
-| `custom`        | User-defined payloads from graph code.                          |
-| `custom:<name>` | Application-defined stream transformer output.                  |
+| Channel | Purpose |
+| - | - |
+| `values` | Full graph state snapshots. |
+| `updates` | Per-node state deltas. |
+| `messages` | Content-block-centric chat model output. |
+| `tools` | Tool call start, streamed output, finish, and error events. |
+| `lifecycle` | Run, subgraph, and subagent status changes. |
+| `checkpoints` | Lightweight checkpoint envelopes for branching and time travel. |
+| `input` | Human-in-the-loop input requests and responses. |
+| `tasks` | Pregel task creation and result events. |
+| `custom` | User-defined payloads from graph code. |
+| `custom:<name>` | Application-defined stream transformer output. |
 
 The typed projections (`thread.messages`, `thread.values`, `thread.toolCalls`, etc.) are built from these channels. The channel name appears as the `method` field on raw events when iterating the stream object directly.
 

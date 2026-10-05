@@ -51,10 +51,10 @@ For what syncs, what does not, and how to open the repo from a deployment, see [
 
 ## When to use instructions
 
-| Concept                                                    | Role                           | Loaded when                    |
-| ---------------------------------------------------------- | ------------------------------ | ------------------------------ |
-| **Instructions**                                           | Always-on system prompt        | Every run                      |
-| **[Skills](managed-deep-agents-skills.md)** | Task-specific procedures       | When the agent selects them    |
+| Concept | Role | Loaded when |
+| - | - | - |
+| **Instructions** | Always-on system prompt | Every run |
+| **[Skills](managed-deep-agents-skills.md)** | Task-specific procedures | When the agent selects them |
 | **[Memory](managed-deep-agents-memory.md)** | Knowledge the agent can update | When durable memory is enabled |
 
 For more information, see [Project structure](managed-deep-agents-project-structure.md).

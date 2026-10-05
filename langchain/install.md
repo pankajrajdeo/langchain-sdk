@@ -1,12 +1,14 @@
 ---
 title: "Install LangChain"
-description: "To install the LangChain package:"
+description: "Install the LangChain package and the independent provider packages for the models and integrations you use."
 source: "https://docs.langchain.com/oss/python/langchain/install"
 category: "docs"
 tags: [docs, langchain, install]
 ---
 
 # Install LangChain
+
+> Install the LangChain package and the independent provider packages for the models and integrations you use.
 
 To install the LangChain package:
 

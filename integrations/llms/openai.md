@@ -23,9 +23,9 @@ This example goes over how to use LangChain to interact with OpenAI [models](htt
 
 ### Integration details
 
-| Class                                                                                               | Package                                                                       | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/openai) |                                             Downloads                                             |                                             Version                                            |
-| :-------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- | :---: | :----------: | :------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) | [`langchain-openai`](https://reference.langchain.com/python/langchain-openai) |   ❌   |     beta     |                                   ✅                                  | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-openai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-openai?style=flat-square\&label=%20) |
+| Class | Package | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/openai) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) | [`langchain-openai`](https://reference.langchain.com/python/langchain-openai) | ❌ | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-openai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-openai?style=flat-square\&label=%20) |
 
 ## Setup
 

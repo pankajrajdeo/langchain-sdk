@@ -97,20 +97,20 @@ await sandbox.close();
 
 ## Configuration
 
-| Option         | Type                                   | Default         | Description                                      |
-| -------------- | -------------------------------------- | --------------- | ------------------------------------------------ |
-| `imageName`    | `string`                               | `"alpine:3.21"` | Docker image to use                              |
-| `timeoutMs`    | `number`                               | `300000`        | Max lifetime in milliseconds                     |
-| `workdir`      | `string`                               | -               | Working directory                                |
-| `gpu`          | `string`                               | -               | GPU type (`"T4"`, `"A100"`, `"H100"`, etc.)      |
-| `cpu`          | `number`                               | -               | CPU cores (fractional allowed)                   |
-| `memoryMiB`    | `number`                               | -               | Memory allocation in MiB                         |
-| `volumes`      | `Record<string, string>`               | -               | Volume name mappings (mount path to volume name) |
-| `secrets`      | `string[]`                             | -               | Modal Secret names to inject                     |
-| `initialFiles` | `Record<string, string \| Uint8Array>` | -               | Files to create on startup                       |
-| `env`          | `Record<string, string>`               | -               | Environment variables                            |
-| `blockNetwork` | `boolean`                              | -               | Block network access                             |
-| `name`         | `string`                               | -               | Sandbox name (unique within app)                 |
+| Option | Type | Default | Description |
+| - | - | - | - |
+| `imageName` | `string` | `"alpine:3.21"` | Docker image to use |
+| `timeoutMs` | `number` | `300000` | Max lifetime in milliseconds |
+| `workdir` | `string` | - | Working directory |
+| `gpu` | `string` | - | GPU type (`"T4"`, `"A100"`, `"H100"`, etc.) |
+| `cpu` | `number` | - | CPU cores (fractional allowed) |
+| `memoryMiB` | `number` | - | Memory allocation in MiB |
+| `volumes` | `Record<string, string>` | - | Volume name mappings (mount path to volume name) |
+| `secrets` | `string[]` | - | Modal Secret names to inject |
+| `initialFiles` | `Record<string, string \| Uint8Array>` | - | Files to create on startup |
+| `env` | `Record<string, string>` | - | Environment variables |
+| `blockNetwork` | `boolean` | - | Block network access |
+| `name` | `string` | - | Sandbox name (unique within app) |
 
 ## GPU support
 
@@ -227,24 +227,24 @@ try {
 
 ### Error codes
 
-| Code                      | Description                                   |
-| ------------------------- | --------------------------------------------- |
-| `NOT_INITIALIZED`         | Sandbox not initialized - call `initialize()` |
-| `ALREADY_INITIALIZED`     | Cannot initialize twice                       |
-| `AUTHENTICATION_FAILED`   | Invalid or missing Modal tokens               |
-| `SANDBOX_CREATION_FAILED` | Failed to create sandbox                      |
-| `SANDBOX_NOT_FOUND`       | Sandbox ID/name not found or expired          |
-| `COMMAND_TIMEOUT`         | Command execution timed out                   |
-| `COMMAND_FAILED`          | Command execution failed                      |
-| `FILE_OPERATION_FAILED`   | File read/write failed                        |
-| `RESOURCE_LIMIT_EXCEEDED` | CPU, memory, or storage limits exceeded       |
-| `VOLUME_ERROR`            | Volume operation failed                       |
+| Code | Description |
+| - | - |
+| `NOT_INITIALIZED` | Sandbox not initialized - call `initialize()` |
+| `ALREADY_INITIALIZED` | Cannot initialize twice |
+| `AUTHENTICATION_FAILED` | Invalid or missing Modal tokens |
+| `SANDBOX_CREATION_FAILED` | Failed to create sandbox |
+| `SANDBOX_NOT_FOUND` | Sandbox ID/name not found or expired |
+| `COMMAND_TIMEOUT` | Command execution timed out |
+| `COMMAND_FAILED` | Command execution failed |
+| `FILE_OPERATION_FAILED` | File read/write failed |
+| `RESOURCE_LIMIT_EXCEEDED` | CPU, memory, or storage limits exceeded |
+| `VOLUME_ERROR` | Volume operation failed |
 
 ## Environment variables
 
-| Variable             | Description            |
-| -------------------- | ---------------------- |
-| `MODAL_TOKEN_ID`     | Modal API token ID     |
+| Variable | Description |
+| - | - |
+| `MODAL_TOKEN_ID` | Modal API token ID |
 | `MODAL_TOKEN_SECRET` | Modal API token secret |
 
 ***

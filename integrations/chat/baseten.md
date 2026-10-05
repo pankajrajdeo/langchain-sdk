@@ -18,15 +18,15 @@ Baseten provides inference designed for production applications. Built on the Ba
 
 ### Details
 
-| Class         | Package             | Serializable | JS support |                                              Downloads                                             |                                             Version                                             |
-| :------------ | :------------------ | :----------: | :--------: | :------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
-| `ChatBaseten` | `langchain-baseten` |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-baseten?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-baseten?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| `ChatBaseten` | `langchain-baseten` | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-baseten?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-baseten?style=flat-square\&label=%20) |
 
 ### Features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 Model APIs only support text input, while some dedicated deployments support image and audio input depending on model. Check the Baseten model library for details: [https://www.baseten.co/library/](https://www.baseten.co/library/)
 

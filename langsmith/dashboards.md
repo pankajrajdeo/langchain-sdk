@@ -12,7 +12,7 @@ Dashboards give you high-level insights into your [trace](observability-concepts
 
 LangSmith offers two dashboard types:
 
-* **Prebuilt dashboards**: Automatically generated for every tracing project.
+* **Prebuilt dashboards**: Automatically generated for every tracing project or [agent environment](agent-environments.md).
 * **Custom dashboards**: Collections of charts you can configure to your needs. Two experiences are available depending on your [platform setup](platform-setup.md):
   * [**Custom dashboards**](#custom-dashboards): Available for LangSmith Cloud US.
   * [**Custom dashboards (legacy)**](#custom-dashboards-legacy): Available for LangSmith Self-hosted and LangSmith Cloud EU/APAC.
@@ -21,18 +21,20 @@ LangSmith offers two dashboard types:
 
 Prebuilt dashboards are created automatically for each project and cover essential metrics, such as trace count, error rates, token usage, and more. By default, you can access the prebuilt dashboard for your tracing project using the **Dashboard** button on the top right of the tracing project page.
 
+In an agent-based workspace, **Monitoring** requires an agent, and its dashboard selector splits the two types into tabs: **Environments** lists the prebuilt dashboard for each of the agent's environments, and **Custom** lists the custom dashboards tagged with that agent's [resource tag](set-up-resource-tags.md). A custom dashboard without that tag does not appear in the agent's selector.
+
 ### Dashboard sections
 
 Prebuilt dashboards are broken down into the following sections:
 
-| Section         | What it shows                                                                                                                                                                                                                                                                                                    |
-| :-------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Traces          | Trace count, latency and error rates. A [trace](observability-concepts.md#traces) is a collection of [runs](observability-concepts.md#runs) related to a single operation. For example, if a user request triggers an agent, all runs for that agent invocation would be part of the same trace. |
-| LLM Calls       | LLM call count and latency. Includes all runs where run type is "llm".                                                                                                                                                                                                                                           |
-| Cost & Tokens   | Total and per-trace token counts and costs, broken down by token type. Costs are measured using [LangSmith's cost tracking](log-llm-trace.md#provide-token-and-cost-information).                                                                                                                        |
-| Tools           | Run counts, error rates, and latency stats for tool runs broken down by tool name. Includes runs where run type is "tool". Limits to top 5 most frequently occurring tools.                                                                                                                                      |
-| Run Types       | Run counts, error rates, and latency stats for runs that are immediate children of the root run. This helps in understanding the high-level execution path of agents. Limits to top 5 most frequently occurring run names.                                                                                       |
-| Feedback Scores | Aggregate stats for the top 5 most frequently occurring types of feedback. Charts show average score for numerical feedback and category counts for categorical feedback.                                                                                                                                        |
+| Section | What it shows |
+| :- | :- |
+| Traces | Trace count, latency and error rates. A [trace](observability-concepts.md#traces) is a collection of [runs](observability-concepts.md#runs) related to a single operation. For example, if a user request triggers an agent, all runs for that agent invocation would be part of the same trace. |
+| LLM Calls | LLM call count and latency. Includes all runs where run type is "llm". |
+| Cost & Tokens | Total and per-trace token counts and costs, broken down by token type. Costs are measured using [LangSmith's cost tracking](log-llm-trace.md#provide-token-and-cost-information). |
+| Tools | Run counts, error rates, and latency stats for tool runs broken down by tool name. Includes runs where run type is "tool". Limits to top 5 most frequently occurring tools. |
+| Run Types | Run counts, error rates, and latency stats for runs that are immediate children of the root run. This helps in understanding the high-level execution path of agents. Limits to top 5 most frequently occurring run names. |
+| Feedback Scores | Aggregate stats for the top 5 most frequently occurring types of feedback. Charts show average score for numerical feedback and category counts for categorical feedback. |
 
 ### Group by
 
@@ -72,28 +74,28 @@ To start from a template, select one of the templates, which include some common
 
 Alternatively, use **Search templates** to find another template.
 
-#### Choose a tracing project or dataset
+#### Choose a data source
 
-Open **+ Select project or dataset** to find sources. Switch between the two source types with the tabs at the top of the popover.
+Open **+ Select project or dataset** to find sources. In an agent-based workspace, the button reads **+ Select environment or dataset**. Switch between the two source types with the tabs at the top of the popover: **Tracing** (**Environments** in an agent-based workspace) and **Datasets**.
 
-* **Tracing projects**: add one or multiple as needed per chart. Metrics are computed by pooling runs across every selected project into a single set, not shown per project. To break out results per project, use [Group by](#filter-and-group).
-* **Datasets**: pick a single dataset per chart.
+* **Tracing projects or environments**: Add one or more per chart. LangSmith pools runs across every selected project or environment into a single set, rather than showing each one separately. To break out results per project or environment, use [Group by](#filter-and-group).
+* **Datasets**: Pick a single dataset per chart.
   * Selecting a second dataset silently replaces the previous one.
-  * A chart is either tracing-project-backed or dataset-backed. Picking a dataset while projects are selected (or vice versa) clears the existing selection.
+  * A chart draws from either tracing projects or environments, or from a dataset, not both. Picking a dataset while projects or environments are selected, or the reverse, clears the existing selection.
 
 #### Pick a metric
 
 Choose a metric from the dropdown. Options are grouped by what you are measuring:
 
-| Metric              | Description                                                                                                       | Aggregations                     |
-| :------------------ | :---------------------------------------------------------------------------------------------------------------- | :------------------------------- |
-| Count               | Number of runs.                                                                                                   | —                                |
-| Latency             | Aggregates over `latency_seconds`.                                                                                | Average, Percentile (p50 or p99) |
-| Time to first token | Aggregates over `first_token_seconds`.                                                                            | Percentile (p50 or p99), Average |
-| Tokens              | Choose Total, Input, or Output tokens.                                                                            | Sum, Average, Percentile         |
-| Cost                | Choose Total, Input, or Output cost.                                                                              | Sum, Average, Percentile         |
-| Feedback score      | Select a feedback key.                                                                                            | Average, Minimum, Maximum        |
-| Ratio               | Define a numerator and denominator, each a metric with its own filter. Useful for error rate, LLM run share, etc. | —                                |
+| Metric | Description | Aggregations |
+| :- | :- | :- |
+| Count | Number of runs. | — |
+| Latency | Aggregates over `latency_seconds`. | Average, Percentile (p50 or p99) |
+| Time to first token | Aggregates over `first_token_seconds`. | Percentile (p50 or p99), Average |
+| Tokens | Choose Total, Input, or Output tokens. | Sum, Average, Percentile |
+| Cost | Choose Total, Input, or Output cost. | Sum, Average, Percentile |
+| Feedback score | Select a feedback key. | Average, Minimum, Maximum |
+| Ratio | Define a numerator and denominator, each a metric with its own filter. Useful for error rate, LLM run share, etc. | — |
 
 For filtering with multiple metrics, read the following [Filter and group](#filter-and-group) section.
 
@@ -194,11 +196,11 @@ There are two ways to create multiple series in a chart (i.e., create multiple l
 * Edit or delete a chart by clicking the triple dot button in the top right of the chart.
 * Clone a chart by clicking the triple line button in the top right of the chart and selecting **+ Clone**. This will open a new chart creation pane with the same configurations as the original.
 
-## Link to a dashboard from a tracing project
+## Link to a dashboard
 
-You can link to any dashboard directly from a tracing project. By default, the prebuilt dashboard for your tracing project is selected. If you have a custom dashboard that you would like to link instead:
+You can link to any dashboard directly from a tracing project or from an agent environment. By default, the prebuilt dashboard for that project or environment is selected. If you have a custom dashboard that you would like to link instead:
 
-1. In your tracing project, click the three dots next to the **Dashboard** button.
+1. In your tracing project or agent environment, click the three dots next to the **Dashboard** button.
 2. Choose a dashboard to set as the new default.
 
 ## Example: user-journey monitoring

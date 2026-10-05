@@ -191,12 +191,12 @@ async def my_workflow(some_input: dict) -> int:
 
 When declaring an `entrypoint`, you can request access to additional parameters that will be injected automatically at runtime. These parameters include:
 
-| Parameter    | Description                                                                                                                                                                 |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **previous** | Access the state associated with the previous `checkpoint` for the given thread. See [short-term-memory](#short-term-memory).                                               |
-| **store**    | An instance of \[BaseStore]\[langgraph.store.base.BaseStore]. Useful for [long-term memory](use-functional-api.md#long-term-memory).                     |
-| **writer**   | Use to access the StreamWriter when working with Async Python \< 3.11. See [streaming with functional API for details](use-functional-api.md#streaming). |
-| **config**   | For accessing run time configuration. See [RunnableConfig](https://python.langchain.com/docs/concepts/runnables/#runnableconfig) for information.                           |
+| Parameter | Description |
+| - | - |
+| **previous** | Access the state associated with the previous `checkpoint` for the given thread. See [short-term-memory](#short-term-memory). |
+| **store** | An instance of \[BaseStore]\[langgraph.store.base.BaseStore]. Useful for [long-term memory](use-functional-api.md#long-term-memory). |
+| **writer** | Use to access the StreamWriter when working with Async Python \< 3.11. See [streaming with functional API for details](use-functional-api.md#streaming). |
+| **config** | For accessing run time configuration. See [RunnableConfig](https://python.langchain.com/docs/concepts/runnables/#runnableconfig) for information. |
 
 > [!WARNING]
 > Declare the parameters with the appropriate name and type annotation.

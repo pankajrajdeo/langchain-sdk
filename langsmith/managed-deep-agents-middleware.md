@@ -110,11 +110,11 @@ To read or write files in the thread's sandbox from a middleware hook, use `runt
 
 ## When to use middleware
 
-| Concept                                                                | Kind             | How it reaches the agent                |
-| ---------------------------------------------------------------------- | ---------------- | --------------------------------------- |
-| **Middleware**                                                         | Application code | Import and pass in the agent definition |
-| **[Custom tools](python/managed-deep-agents-tools.md)**        | Application code | Import and pass in the agent definition |
-| **[Instructions](python/managed-deep-agents-instructions.md)** | Managed context  | Always-on system prompt                 |
+| Concept | Kind | How it reaches the agent |
+| - | - | - |
+| **Middleware** | Application code | Import and pass in the agent definition |
+| **[Custom tools](python/managed-deep-agents-tools.md)** | Application code | Import and pass in the agent definition |
+| **[Instructions](python/managed-deep-agents-instructions.md)** | Managed context | Always-on system prompt |
 
 For more information, see [Project structure](python/managed-deep-agents-project-structure.md).
 

@@ -65,14 +65,14 @@ The layout above shows the common `.ts` names. TypeScript managed declarations a
 
 * **Managed configuration**: Certain paths enable capabilities when present. For `channels/` and `schedules/`, only direct children are managed declarations; nested modules are not.
 
-  | Path                  | Enables                                                                             |
-  | --------------------- | ----------------------------------------------------------------------------------- |
-  | `identity.ts`         | [Caller authentication](managed-deep-agents-identity.md)         |
-  | `memory.ts`           | [Durable memory](managed-deep-agents-memory.md)                  |
-  | `channels/<name>.ts`  | [Messaging channels](managed-deep-agents-channels.md)            |
-  | `tools/mcp.ts`        | [MCP connectors](managed-deep-agents-mcp-connectors.md)          |
-  | `schedules/<name>.ts` | [Cron schedules](managed-deep-agents-schedules.md)               |
-  | `sandbox/index.ts`    | [Sandbox filesystem and shell](managed-deep-agents-sandboxes.md) |
+  | Path | Enables |
+  | - | - |
+  | `identity.ts` | [Caller authentication](managed-deep-agents-identity.md) |
+  | `memory.ts` | [Durable memory](managed-deep-agents-memory.md) |
+  | `channels/<name>.ts` | [Messaging channels](managed-deep-agents-channels.md) |
+  | `tools/mcp.ts` | [MCP connectors](managed-deep-agents-mcp-connectors.md) |
+  | `schedules/<name>.ts` | [Cron schedules](managed-deep-agents-schedules.md) |
+  | `sandbox/index.ts` | [Sandbox filesystem and shell](managed-deep-agents-sandboxes.md) |
 
   `tools/` holds ordinary modules with one exception. `tools/mcp.ts` is a managed declaration and exports a named `mcp`. Every other module under `tools/` is application code you import.
 

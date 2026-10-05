@@ -16,15 +16,15 @@ tags: [docs, integrations, tools, tavily_search]
 
 ### Integration details
 
-| Class                                                                                                | Package                                                                        | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/tavily_search) |                                             Version                                            |
-| :--------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :----------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`TavilySearch`](https://reference.langchain.com/python/langchain-tavily/tavily_search/TavilySearch) | [`langchain-tavily`](https://reference.langchain.com/python/langchain-tavily/) |       ✅      |                                       ✅                                      | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-tavily?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/tavily_search) | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`TavilySearch`](https://reference.langchain.com/python/langchain-tavily/tavily_search/TavilySearch) | [`langchain-tavily`](https://reference.langchain.com/python/langchain-tavily/) | ✅ | ✅ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-tavily?style=flat-square\&label=%20) |
 
 ### Tool features
 
-| [Returns artifact](../../langchain/tools.md) | Native async |                        Return data                        |           Pricing           |
-| :---------------------------------------------: | :----------: | :-------------------------------------------------------: | :-------------------------: |
-|                        ❌                        |       ✅      | title, URL, content snippet, raw\_content, answer, images | 1,000 free searches / month |
+| [Returns artifact](../../langchain/tools.md) | Native async | Return data | Pricing |
+| :-: | :-: | :-: | :-: |
+| ❌ | ✅ | title, URL, content snippet, raw\_content, answer, images | 1,000 free searches / month |
 
 ## Setup
 

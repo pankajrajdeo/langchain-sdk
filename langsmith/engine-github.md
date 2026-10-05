@@ -18,7 +18,7 @@ In LangSmith Cloud, Engine connects through a LangChain-managed GitHub App. You 
 
 To connect your repositories:
 
-1. In the [LangSmith console](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-engine-github), open a tracing project and go to the **Engine** tab.
+1. In the [LangSmith console](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-engine-github), open a tracing project, or an agent environment, and go to the **Engine** tab.
 2. Under **Connect your agent's code repository**, click **Connect GitHub** and authorize the LangChain-managed GitHub App.
 3. Install the app on the repositories Engine should access. Installing the app on a GitHub organization may require approval from a GitHub organization owner. If you are not an owner, GitHub sends the owner an installation request to approve before the app becomes available.
 4. Select the connected repository in the **GitHub Repository** field on the **Engine** tab.
@@ -71,13 +71,13 @@ Under **Subscribe to events**, select no events. Engine does not require any eve
 ### Create the app and gather its values
 Click **Create GitHub App**. GitHub supplies the following values on the app settings page:
 
-| Value             | Where to find it                                                                   | Environment variable           |
-| ----------------- | ---------------------------------------------------------------------------------- | ------------------------------ |
-| **App ID**        | Numeric, at the top of the page                                                    | `FORGE_GITHUB_APP_ID`          |
-| **Public link**   | For example, `https://github.com/apps/acme-langsmith-engine`                       | `FORGE_GITHUB_APP_PUBLIC_LINK` |
-| **Client ID**     | Under **About**                                                                    | `FORGE_GITHUB_CLIENT_ID`       |
-| **Client secret** | Under **Client secrets**, click **Generate a new client secret** (shown once)      | `FORGE_GITHUB_CLIENT_SECRET`   |
-| **Private key**   | Under **Private keys**, click **Generate a private key** (downloads a `.pem` file) | `FORGE_GITHUB_APP_PEM`         |
+| Value | Where to find it | Environment variable |
+| - | - | - |
+| **App ID** | Numeric, at the top of the page | `FORGE_GITHUB_APP_ID` |
+| **Public link** | For example, `https://github.com/apps/acme-langsmith-engine` | `FORGE_GITHUB_APP_PUBLIC_LINK` |
+| **Client ID** | Under **About** | `FORGE_GITHUB_CLIENT_ID` |
+| **Client secret** | Under **Client secrets**, click **Generate a new client secret** (shown once) | `FORGE_GITHUB_CLIENT_SECRET` |
+| **Private key** | Under **Private keys**, click **Generate a private key** (downloads a `.pem` file) | `FORGE_GITHUB_APP_PEM` |
 
 ### Generate a state JWT secret
 LangSmith uses an HMAC key to sign short-lived OAuth state tokens and protect callback state. Generate a random secret of at least 32 bytes with your secret manager or another cryptographically secure generator. GitHub does not provide this value.
@@ -90,12 +90,12 @@ This is `FORGE_GITHUB_STATE_JWT_SECRET`. Generate it separately, and do not reus
 
 Using your existing [secret-management workflow](self-host-using-an-existing-secret.md), create a Kubernetes Secret named `langsmith-forge-github` with these keys:
 
-| Key                             | Value                                      |
-| ------------------------------- | ------------------------------------------ |
-| `forge_github_client_secret`    | GitHub client secret                       |
-| `forge_github_state_jwt_secret` | Separately generated state JWT secret      |
-| `forge_github_app_pem`          | Contents of the GitHub App private-key PEM |
-| `forge_github_webhook_secret`   | Webhook secret also configured in GitHub   |
+| Key | Value |
+| - | - |
+| `forge_github_client_secret` | GitHub client secret |
+| `forge_github_state_jwt_secret` | Separately generated state JWT secret |
+| `forge_github_app_pem` | Contents of the GitHub App private-key PEM |
+| `forge_github_webhook_secret` | Webhook secret also configured in GitHub |
 
 For production deployments, use your existing secrets workflow, such as [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [External Secrets Operator](https://external-secrets.io/).
 
@@ -145,7 +145,7 @@ Once pods are healthy, install the GitHub App on the repositories Engine should 
 
 1. Open the app's public link (`FORGE_GITHUB_APP_PUBLIC_LINK`) and click **Install**, or open **Settings > Applications > GitHub Apps** in your GitHub organization.
 2. Select the repositories Engine should access. If the installation does not grant access to all repositories, explicitly select each private repository Engine needs.
-3. In LangSmith, open a tracing project, go to the **Engine** tab, and select the repository in the **GitHub Repository** field.
+3. In LangSmith, open a tracing project or agent environment, go to the **Engine** tab, and select the repository in the **GitHub Repository** field.
 
 The connected repository lets Engine use your source code for diagnosis and open pull requests with proposed fixes.
 

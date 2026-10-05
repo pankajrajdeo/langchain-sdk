@@ -16,15 +16,15 @@ This will help you get started with `langchain_huggingface` [chat models](../../
 
 ### Integration details
 
-| Class                                                                                                                     | Package                                                                                 | Serializable | JS support |                                                Downloads                                               |                                               Version                                               |
-| :------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------- | :----------: | :--------: | :----------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: |
-| [`ChatHuggingFace`](https://reference.langchain.com/python/langchain-huggingface/chat_models/huggingface/ChatHuggingFace) | [`langchain-huggingface`](https://reference.langchain.com/python/langchain-huggingface) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_huggingface?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_huggingface?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatHuggingFace`](https://reference.langchain.com/python/langchain-huggingface/chat_models/huggingface/ChatHuggingFace) | [`langchain-huggingface`](https://reference.langchain.com/python/langchain-huggingface) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_huggingface?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_huggingface?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ❌                             |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ |
 
 ## Setup
 
@@ -44,15 +44,15 @@ if not os.getenv("HUGGINGFACEHUB_API_TOKEN"):
 
 ### Installation
 
-| Class                                                                                                                     | Package                                                                                 | Serializable | JS support |                                                Downloads                                               |                                               Version                                               |
-| :------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------- | :----------: | :--------: | :----------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: |
-| [`ChatHuggingFace`](https://reference.langchain.com/python/langchain-huggingface/chat_models/huggingface/ChatHuggingFace) | [`langchain-huggingface`](https://reference.langchain.com/python/langchain-huggingface) |       ❌      |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_huggingface?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_huggingface?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatHuggingFace`](https://reference.langchain.com/python/langchain-huggingface/chat_models/huggingface/ChatHuggingFace) | [`langchain-huggingface`](https://reference.langchain.com/python/langchain-huggingface) | ❌ | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_huggingface?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_huggingface?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ❌                             |       ❌      |                            ❌                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ## Setup
 

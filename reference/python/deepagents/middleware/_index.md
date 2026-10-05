@@ -1,16 +1,17 @@
 ---
 title: "reference/python/deepagents/middleware"
-description: "Index of 10 pages and 16 subdirectories under reference/python/deepagents/middleware."
+description: "Index of 10 pages and 17 subdirectories under reference/python/deepagents/middleware."
 category: "index"
 tags: [index, reference, python, deepagents, middleware]
 ---
 
 # reference/python/deepagents/middleware
 
-10 pages here, 328 pages including subdirectories.
+10 pages here, 329 pages including subdirectories.
 
 ## Directories
 
+- [_blob_offload/](_blob_offload/_index.md) - 1 page
 - [_fs_interrupt/](_fs_interrupt/_index.md) - 1 page
 - [_message_eviction/](_message_eviction/_index.md) - 5 pages
 - [_prompt_caching/](_prompt_caching/_index.md) - 2 pages

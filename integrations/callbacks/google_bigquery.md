@@ -348,21 +348,21 @@ GROUP BY agent;
 The default view names (configurable via `view_prefix`) and the typed
 columns each one adds on top of the always-included columns:
 
-| View                                            | Extra typed columns                                                                                                                                                                                             |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `v_invocation_starting`                         | *(none — only the always-included columns)*                                                                                                                                                                     |
-| `v_invocation_completed` / `v_invocation_error` | `total_ms`                                                                                                                                                                                                      |
-| `v_agent_starting`                              | `node_name`, `step`                                                                                                                                                                                             |
-| `v_agent_completed`                             | `node_name`, `step`, `total_ms`                                                                                                                                                                                 |
-| `v_agent_error`                                 | `node_name`, `total_ms`                                                                                                                                                                                         |
-| `v_llm_request`                                 | `model`, `request_content`, `llm_config`, `tools`                                                                                                                                                               |
-| `v_llm_response`                                | `response`, `usage_prompt_tokens`, `usage_completion_tokens`, `usage_total_tokens`, `usage_cached_tokens`, `context_cache_hit_rate`, `total_ms`, `ttft_ms`, `model_version`, `usage_metadata`, `cache_metadata` |
-| `v_llm_error`                                   | `total_ms`                                                                                                                                                                                                      |
-| `v_tool_starting`                               | `tool_name`, `tool_args`                                                                                                                                                                                        |
-| `v_tool_completed`                              | `tool_name`, `tool_result`, `total_ms`                                                                                                                                                                          |
-| `v_tool_error`                                  | `tool_name`, `total_ms`                                                                                                                                                                                         |
-| `v_retriever_start`                             | `query`                                                                                                                                                                                                         |
-| `v_retriever_end` / `v_retriever_error`         | `total_ms`                                                                                                                                                                                                      |
+| View | Extra typed columns |
+| - | - |
+| `v_invocation_starting` | *(none — only the always-included columns)* |
+| `v_invocation_completed` / `v_invocation_error` | `total_ms` |
+| `v_agent_starting` | `node_name`, `step` |
+| `v_agent_completed` | `node_name`, `step`, `total_ms` |
+| `v_agent_error` | `node_name`, `total_ms` |
+| `v_llm_request` | `model`, `request_content`, `llm_config`, `tools` |
+| `v_llm_response` | `response`, `usage_prompt_tokens`, `usage_completion_tokens`, `usage_total_tokens`, `usage_cached_tokens`, `context_cache_hit_rate`, `total_ms`, `ttft_ms`, `model_version`, `usage_metadata`, `cache_metadata` |
+| `v_llm_error` | `total_ms` |
+| `v_tool_starting` | `tool_name`, `tool_args` |
+| `v_tool_completed` | `tool_name`, `tool_result`, `total_ms` |
+| `v_tool_error` | `tool_name`, `total_ms` |
+| `v_retriever_start` | `query` |
+| `v_retriever_end` / `v_retriever_error` | `total_ms` |
 
 Every view also exposes the always-included columns from the raw table
 (`timestamp`, `event_type`, `agent`, `session_id`, `invocation_id`,
@@ -417,11 +417,11 @@ The `content_parts` column provides a structured view of the content, especially
 
 These events track the raw requests sent to and responses received from the LLM.
 
-| Event Type     | Content (JSON) Structure                                                                             | Attributes (JSON)                                                                                                                                                                                              |
-| -------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LLM_REQUEST`  | **Chat Model:** `{"messages": [<dumped messages>]}`<br />**Legacy Model:** `{"prompt": [<prompts>]}` | `{"tags": ["..."], "model": "...", "llm_config": {"temperature": 0.2, ...}, "tools": ["get_weather", ...]}`                                                                                                    |
-| `LLM_RESPONSE` | `{"response": "<generation text>"}`                                                                  | `{"usage": {"prompt_tokens": 100, "completion_tokens": 25, "total_tokens": 125}, "model_version": "gemini-2.5-flash-001", "usage_metadata": {"cached_content_token_count": 30, ...}, "cache_metadata": {...}}` |
-| `LLM_ERROR`    | `{"data": null}` (the actual exception text lives in the `error_message` column)                     | `{}`                                                                                                                                                                                                           |
+| Event Type | Content (JSON) Structure | Attributes (JSON) |
+| - | - | - |
+| `LLM_REQUEST` | **Chat Model:** `{"messages": [<dumped messages>]}`<br />**Legacy Model:** `{"prompt": [<prompts>]}` | `{"tags": ["..."], "model": "...", "llm_config": {"temperature": 0.2, ...}, "tools": ["get_weather", ...]}` |
+| `LLM_RESPONSE` | `{"response": "<generation text>"}` | `{"usage": {"prompt_tokens": 100, "completion_tokens": 25, "total_tokens": 125}, "model_version": "gemini-2.5-flash-001", "usage_metadata": {"cached_content_token_count": 30, ...}, "cache_metadata": {...}}` |
+| `LLM_ERROR` | `{"data": null}` (the actual exception text lives in the `error_message` column) | `{}` |
 
 ### Sub-agent (LangGraph node) and invocation lifecycle
 
@@ -429,9 +429,9 @@ These events come from LangGraph's node and graph-context lifecycle.
 `agent` is auto-derived from `metadata['langgraph_node']` when no
 explicit `agent` is set, so events are tagged per sub-agent.
 
-| Event Type                                                          | Description                                                                              |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `AGENT_STARTING` / `AGENT_COMPLETED` / `AGENT_ERROR`                | A LangGraph node begins / ends / errors                                                  |
+| Event Type | Description |
+| - | - |
+| `AGENT_STARTING` / `AGENT_COMPLETED` / `AGENT_ERROR` | A LangGraph node begins / ends / errors |
 | `INVOCATION_STARTING` / `INVOCATION_COMPLETED` / `INVOCATION_ERROR` | Top-level graph invocation begins / ends / errors (emitted by `handler.graph_context()`) |
 
 ### Tool usage
@@ -440,11 +440,11 @@ These events track the execution of tools by the agent. The tool name is
 also surfaced in `attributes.tool_name` and (for the auto-views) as a
 typed `tool_name` column.
 
-| Event Type       | Content (JSON) Structure                                                                                    |
-| ---------------- | ----------------------------------------------------------------------------------------------------------- |
-| `TOOL_STARTING`  | `{"tool": "<name>", "input": "<input string>"}` — e.g. `{"tool": "get_weather", "input": "city='Paris'"}`   |
+| Event Type | Content (JSON) Structure |
+| - | - |
+| `TOOL_STARTING` | `{"tool": "<name>", "input": "<input string>"}` — e.g. `{"tool": "get_weather", "input": "city='Paris'"}` |
 | `TOOL_COMPLETED` | `{"tool": "<name>", "result": "<output string>"}` — e.g. `{"tool": "get_weather", "result": "25°C, Sunny"}` |
-| `TOOL_ERROR`     | `{"data": null}` (the actual exception text lives in the `error_message` column)                            |
+| `TOOL_ERROR` | `{"data": null}` (the actual exception text lives in the `error_message` column) |
 
 ### Chain execution
 
@@ -452,20 +452,20 @@ These events fire for non-graph LangChain `Runnable` lifecycles (graph
 invocations and LangGraph nodes use the `INVOCATION_*` / `AGENT_*` events
 listed above instead).
 
-| Event Type    | Content (JSON) Structure                      |
-| ------------- | --------------------------------------------- |
-| `CHAIN_START` | `{"data": ""}`       |
-| `CHAIN_END`   | `{"data": ""}`      |
+| Event Type | Content (JSON) Structure |
+| - | - |
+| `CHAIN_START` | `{"data": ""}` |
+| `CHAIN_END` | `{"data": ""}` |
 | `CHAIN_ERROR` | `{"data": null}` (see `error_message` column) |
 
 ### Retriever usage
 
 These events track the execution of retrievers.
 
-| Event Type        | Content (JSON) Structure                                                         |
-| ----------------- | -------------------------------------------------------------------------------- |
+| Event Type | Content (JSON) Structure |
+| - | - |
 | `RETRIEVER_START` | `{"data": "<query string>"}` — e.g. `{"data": "What is the capital of France?"}` |
-| `RETRIEVER_END`   | `{"data": ""}`                               |
+| `RETRIEVER_END` | `{"data": ""}` |
 | `RETRIEVER_ERROR` | `{"data": null}` (the actual exception text lives in the `error_message` column) |
 
 ### Agent Actions
@@ -474,16 +474,16 @@ These events come from legacy LangChain `AgentExecutor`-style agents
 (`on_agent_action` / `on_agent_finish`). The `data` field contains a
 JSON-serialized string of the action / finish payload.
 
-| Event Type     | Content (JSON) Structure                                       |
-| -------------- | -------------------------------------------------------------- |
+| Event Type | Content (JSON) Structure |
+| - | - |
 | `AGENT_ACTION` | `{"data": "{\"tool\": \"Calculator\", \"input\": \"2 + 2\"}"}` |
-| `AGENT_FINISH` | `{"data": "{\"output\": \"The answer is 4\"}"}`                |
+| `AGENT_FINISH` | `{"data": "{\"output\": \"The answer is 4\"}"}` |
 
 ### Other Events
 
-| Event Type | Content (JSON) Structure                                       |
-| ---------- | -------------------------------------------------------------- |
-| `TEXT`     | `{"data": "<text>"}` — e.g. `{"data": "Some logging text..."}` |
+| Event Type | Content (JSON) Structure |
+| - | - |
+| `TEXT` | `{"data": "<text>"}` — e.g. `{"data": "Some logging text..."}` |
 
 ## Advanced analysis queries
 
@@ -699,14 +699,14 @@ The `BigQueryCallbackHandler` provides enhanced support for LangGraph agents wit
 
 In addition to standard LangChain events, the callback handler automatically detects and logs LangGraph-specific events:
 
-| Event Type             | Description                                                 |
-| ---------------------- | ----------------------------------------------------------- |
-| `AGENT_STARTING`       | Emitted when a LangGraph node begins execution              |
-| `AGENT_COMPLETED`      | Emitted when a LangGraph node completes successfully        |
-| `AGENT_ERROR`          | Emitted when a LangGraph node fails                         |
-| `INVOCATION_STARTING`  | Emitted when a graph execution begins (via context manager) |
-| `INVOCATION_COMPLETED` | Emitted when a graph execution completes                    |
-| `INVOCATION_ERROR`     | Emitted when a graph execution fails                        |
+| Event Type | Description |
+| - | - |
+| `AGENT_STARTING` | Emitted when a LangGraph node begins execution |
+| `AGENT_COMPLETED` | Emitted when a LangGraph node completes successfully |
+| `AGENT_ERROR` | Emitted when a LangGraph node fails |
+| `INVOCATION_STARTING` | Emitted when a graph execution begins (via context manager) |
+| `INVOCATION_COMPLETED` | Emitted when a graph execution completes |
+| `INVOCATION_ERROR` | Emitted when a graph execution fails |
 
 ### Graph context manager
 
@@ -811,12 +811,12 @@ config = BigQueryLoggerConfig(
 
 The following examples demonstrate various features of the BigQuery callback handler:
 
-| Example                                                                                                                                               | Description                                      |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| [Basic example](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/examples/bigquery_callback/basic_example.py)                | Basic callback usage with LLM calls              |
-| [LangGraph agent](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/examples/bigquery_callback/langgraph_agent_example.py)    | Complete ReAct agent with 6 realistic tools      |
-| [Async example](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/examples/bigquery_callback/async_example.py)                | Async handler with concurrent queries            |
-| [Event filtering](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/examples/bigquery_callback/event_filtering_example.py)    | Allowlist/denylist configurations                |
+| Example | Description |
+| - | - |
+| [Basic example](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/examples/bigquery_callback/basic_example.py) | Basic callback usage with LLM calls |
+| [LangGraph agent](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/examples/bigquery_callback/langgraph_agent_example.py) | Complete ReAct agent with 6 realistic tools |
+| [Async example](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/examples/bigquery_callback/async_example.py) | Async handler with concurrent queries |
+| [Event filtering](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/examples/bigquery_callback/event_filtering_example.py) | Allowlist/denylist configurations |
 | [Sample data generator](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/examples/bigquery_callback/populate_sample_data.py) | Generate sample data across multiple agent types |
 
 ### Analytics notebook

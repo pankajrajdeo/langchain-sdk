@@ -20,9 +20,9 @@ This will help you get started with Astra DB [key-value stores](../stores.md). F
 
 ### Integration details
 
-| Class                                                                                                   | Package                                                                         | Local | JS support |                                              Downloads                                             |                                             Version                                             |
-| :------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------ | :---: | :--------: | :------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
-| [`AstraDBByteStore`](https://reference.langchain.com/python/langchain-astradb/storage/AstraDBByteStore) | [`langchain-astradb`](https://reference.langchain.com/python/langchain-astradb) |   ❌   |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_astradb?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_astradb?style=flat-square\&label=%20) |
+| Class | Package | Local | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`AstraDBByteStore`](https://reference.langchain.com/python/langchain-astradb/storage/AstraDBByteStore) | [`langchain-astradb`](https://reference.langchain.com/python/langchain-astradb) | ❌ | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_astradb?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_astradb?style=flat-square\&label=%20) |
 
 ## Setup
 

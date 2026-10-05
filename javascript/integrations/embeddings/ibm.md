@@ -16,9 +16,9 @@ This will help you get started with IBM watsonx.ai [embedding models](../embeddi
 
 ### Integration details
 
-| Class                                                                                             | Package                                                          | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/ibm_watsonx/) |                                            Downloads                                           |                                           Version                                           |
-| :------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------- | :---: | :----------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`WatsonxEmbeddings`](https://reference.langchain.com/javascript/langchain-ibm/WatsonxEmbeddings) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) |   ❌   |                                           ✅                                          | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
+| Class | Package | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/ibm_watsonx/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`WatsonxEmbeddings`](https://reference.langchain.com/javascript/langchain-ibm/WatsonxEmbeddings) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
 
 ## Setup
 

@@ -31,7 +31,7 @@ Contact your account team to change either entitlement.
 
 Every call through the LLM Gateway is traced to LangSmith. The **Trace content** toggle controls whether request and response bodies are stored in those traces. It is off for all organizations, and a data policy turns it on for the requests that policy matches. When trace content is disabled, the gateway still records metadata such as token usage, latency, status, model information, and policy evaluation results. When it is turned on, the same metadata is recorded plus the content of the call.
 
-Gateway traces are written to a shared project named `gateway` in the [workspace](administration-overview.md#workspaces) associated with the caller's API key, plus a per-caller project that isolates traffic in the UI. For the project naming schemes, the metadata traces carry, and how to restrict trace visibility, see [Traces and access control](llm-gateway-access.md).
+Gateway traces are written to a project named `gateway` in the [workspace](administration-overview.md#workspaces) associated with the caller's API key. For the metadata that traces carry and how to restrict trace visibility, see [Traces and access control](llm-gateway-access.md).
 
 ## Data protection
 
@@ -47,36 +47,36 @@ The **Personally Identifiable Information (PII)** toggle covers names, emails, U
 
 Rule-based categories are matched with regular expressions and are faster to detect:
 
-| Category                       | Patterns detected                                                                                            |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| **Emails**                     | Email address patterns                                                                                       |
-| **US phone numbers**           | Common US formats, for example `415-555-1234` and `+1 (415) 555-1234`. A bare 10-digit number is not matched |
-| **US Social Security numbers** | US SSN patterns, for example `123-45-6789`                                                                   |
+| Category | Patterns detected |
+| - | - |
+| **Emails** | Email address patterns |
+| **US phone numbers** | Common US formats, for example `415-555-1234` and `+1 (415) 555-1234`. A bare 10-digit number is not matched |
+| **US Social Security numbers** | US SSN patterns, for example `123-45-6789` |
 
 Model-based categories are matched by Presidio and are slower to detect:
 
-| Category                                         | Examples                                                  |
-| ------------------------------------------------ | --------------------------------------------------------- |
-| **Names**                                        | Person names in natural language                          |
-| **Locations**                                    | Addresses, cities, countries                              |
+| Category | Examples |
+| - | - |
+| **Names** | Person names in natural language |
+| **Locations** | Addresses, cities, countries |
 | **Nationality, religious, and political groups** | Nationality, religious affiliation, political affiliation |
 
 ### Secrets detection
 
 The **Secrets** toggle detects common API keys, tokens, and credentials and redacts them from the request:
 
-| Category                | Patterns detected                                                          |
-| ----------------------- | -------------------------------------------------------------------------- |
-| **LangSmith**           | Personal access tokens, service keys, legacy API keys                      |
-| **AWS**                 | Access tokens                                                              |
-| **GitHub**              | Personal access tokens, fine-grained PATs, OAuth tokens, app tokens        |
-| **GitLab**              | Personal access tokens                                                     |
-| **AI providers**        | OpenAI API keys, Anthropic API keys                                        |
-| **Cloud platforms**     | GCP API keys, Azure AD client secrets, Google OAuth access tokens          |
+| Category | Patterns detected |
+| - | - |
+| **LangSmith** | Personal access tokens, service keys, legacy API keys |
+| **AWS** | Access tokens |
+| **GitHub** | Personal access tokens, fine-grained PATs, OAuth tokens, app tokens |
+| **GitLab** | Personal access tokens |
+| **AI providers** | OpenAI API keys, Anthropic API keys |
+| **Cloud platforms** | GCP API keys, Azure AD client secrets, Google OAuth access tokens |
 | **Collaboration tools** | Slack bot, user, and app tokens, Slack webhook URLs, Datadog access tokens |
-| **Package registries**  | PyPI upload tokens, npm access tokens                                      |
-| **Cryptographic**       | Private keys, JWTs                                                         |
-| **Other**               | Stripe access tokens, SendGrid API tokens                                  |
+| **Package registries** | PyPI upload tokens, npm access tokens |
+| **Cryptographic** | Private keys, JWTs |
+| **Other** | Stripe access tokens, SendGrid API tokens |
 
 Detection is deliberately narrow: only rules anchored to a recognizable token shape are applied, so high-entropy prose in a prompt does not trigger a redaction.
 

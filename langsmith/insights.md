@@ -12,6 +12,8 @@ tags: [docs, langsmith, insights]
 
 Insights automatically analyzes your traces to detect usage patterns, common agent behaviors, and failure modes, so you do not need to review thousands of traces manually.
 
+In an agent-based workspace, running a report against a single [environment](agent-environments.md) is how to analyze production traffic without also analyzing local runs.
+
 Insights uses hierarchical categorization to make sense of your data and highlight actionable trends.
 
 > [!NOTE]
@@ -26,8 +28,8 @@ Insights uses hierarchical categorization to make sense of your data and highlig
 ## Generate your first Insights report
 
 #### UI
-1. Navigate to **Tracing Projects** in the left-hand menu and select a tracing project.
-2. Click **+New** in the top right corner then **New Insights Report** to generate new insights over the project.
+1. Navigate to **Tracing** in the left-hand menu and select a tracing project or an agent and environment. In an agent-based workspace, a report runs against one environment rather than the whole agent.
+2. Click **+New** in the top right corner then **New Insights Report** to generate new insights over it.
 3. Enter a name for your job.
 4. If you haven't already, [configure a model](model-configurations.md) for Insights in your workspace settings.
 5. Answer the guided questions to focus your Insights Report on what you want to learn about your agent, then click **Run job**.
@@ -182,14 +184,14 @@ You can edit the prompt used to generate these summaries. The two things to thin
 
 You must specify what parts of each trace to send to the summarizer using at least one of these template variables:
 
-| Variable              | Description                                                                                          | Example                        |
-| --------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `run.inputs`          | Inputs of the most recent root run                                                                   | `{{run.inputs}}`               |
-| `run.outputs`         | Outputs of the most recent root run                                                                  | `{{run.outputs}}`              |
-| `run.error`           | Error string, if the run failed                                                                      | `{{run.error}}`                |
-| `run.feedback`        | All feedback scores as a JSON blob                                                                   | `{{run.feedback}}`             |
-| `run.feedback.<key>`  | A specific feedback score by key                                                                     | `{{run.feedback.correctness}}` |
-| `all_thread_messages` | Full message history for the thread (only available for projects with [threads](threads.md)) | `{{all_thread_messages}}`      |
+| Variable | Description | Example |
+| - | - | - |
+| `run.inputs` | Inputs of the most recent root run | `{{run.inputs}}` |
+| `run.outputs` | Outputs of the most recent root run | `{{run.outputs}}` |
+| `run.error` | Error string, if the run failed | `{{run.error}}` |
+| `run.feedback` | All feedback scores as a JSON blob | `{{run.feedback}}` |
+| `run.feedback.<key>` | A specific feedback score by key | `{{run.feedback.correctness}}` |
+| `all_thread_messages` | Full message history for the thread (only available for projects with [threads](threads.md)) | `{{all_thread_messages}}` |
 
 You can access nested fields using dot notation. For example, `{{run.inputs.foo.bar}}` includes only the `bar` field within `foo` in the last run's inputs.
 

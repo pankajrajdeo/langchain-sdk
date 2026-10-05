@@ -7,7 +7,7 @@ tags: [index, langsmith, smith-api]
 
 # langsmith/smith-api
 
-0 pages here, 555 pages including subdirectories.
+0 pages here, 556 pages including subdirectories.
 
 ## Directories
 
@@ -29,7 +29,7 @@ tags: [index, langsmith, smith-api]
 - [datasets/](datasets/_index.md) - 30 pages
 - [directories/](directories/_index.md) - 3 pages
 - [evaluators/](evaluators/_index.md) - 7 pages
-- [examples/](examples/_index.md) - 15 pages
+- [examples/](examples/_index.md) - 16 pages
 - [experiment-view-overrides/](experiment-view-overrides/_index.md) - 5 pages
 - [experiments/](experiments/_index.md) - 1 page
 - [features/](features/_index.md) - 5 pages

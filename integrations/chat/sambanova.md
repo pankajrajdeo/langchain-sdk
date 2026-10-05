@@ -18,15 +18,15 @@ This will help you get started with SambaNova [chat models](../../langchain/mode
 
 ### Integration details
 
-| Class                                                                        | Package                                                                | Serializable | JS support |                                               Downloads                                              |                                              Version                                              |
-| :--------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :----------: | :--------: | :--------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: |
-| [`ChatSambaNova`](https://docs.sambanova.ai/cloud/docs/get-started/overview) | [`langchain-sambanova`](../providers/sambanova.md) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_sambanova?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_sambanova?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatSambaNova`](https://docs.sambanova.ai/cloud/docs/get-started/overview) | [`langchain-sambanova`](../providers/sambanova.md) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_sambanova?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_sambanova?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 ## Setup
 

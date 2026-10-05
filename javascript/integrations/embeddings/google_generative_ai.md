@@ -16,9 +16,9 @@ This will help you get started with Google Generative AI [embedding models](../e
 
 ### Integration details
 
-| Class                                                                                                                            | Package                                                                | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/google_generative_ai/) |                                                Downloads                                                |                                                Version                                               |
-| :------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :---: | :-------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: |
-| [`GoogleGenerativeAIEmbeddings`](https://reference.langchain.com/javascript/langchain-google-genai/GoogleGenerativeAIEmbeddings) | [`@langchain/google-genai`](https://npmjs.com/@langchain/google-genai) |   ❌   |                                               ✅                                               | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/google-genai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/google-genai?style=flat-square\&label=%20&) |
+| Class | Package | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/google_generative_ai/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`GoogleGenerativeAIEmbeddings`](https://reference.langchain.com/javascript/langchain-google-genai/GoogleGenerativeAIEmbeddings) | [`@langchain/google-genai`](https://npmjs.com/@langchain/google-genai) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/google-genai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/google-genai?style=flat-square\&label=%20&) |
 
 ## Setup
 

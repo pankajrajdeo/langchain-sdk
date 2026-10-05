@@ -1,0 +1,89 @@
+---
+title: "Navigate agents"
+description: "How the agent switcher moves between the agent list and a single agent, which sections need an agent, and what the agent Overview shows."
+source: "https://docs.langchain.com/langsmith/navigate-agents"
+category: "docs"
+tags: [docs, langsmith, navigate-agents]
+---
+
+# Navigate agents
+
+> How the agent switcher moves between the agent list and a single agent, which sections need an agent, and what the agent Overview shows.
+
+To move between the [agents](agents.md) in your workspace, use the agent switcher in the top bar. Select an agent to see counts, charts, and trace lists for that agent only.
+
+> [!NOTE]
+> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+
+<img src="https://mintcdn.com/langchain-5e9cc07a/J7ZKUnuaUY3KEDGH/langsmith/images/agent-switcher-closed-light.png?fit=max&auto=format&n=J7ZKUnuaUY3KEDGH&q=85&s=d706de1809cf475248ca264d2f68d943" alt="An agent's Overview, with the agent switcher in the top bar naming the agent, the ID field below it, and the metrics row for the last 7 days across all environments." width="1276" height="786" data-path="langsmith/images/agent-switcher-closed-light.png" />
+
+<img src="https://mintcdn.com/langchain-5e9cc07a/J7ZKUnuaUY3KEDGH/langsmith/images/agent-switcher-closed-dark.png?fit=max&auto=format&n=J7ZKUnuaUY3KEDGH&q=85&s=facee88374f13c947e37a8edfdf2ab8d" alt="An agent's Overview, with the agent switcher in the top bar naming the agent, the ID field below it, and the metrics row for the last 7 days across all environments." width="1255" height="788" data-path="langsmith/images/agent-switcher-closed-dark.png" />
+
+## Switch between agents
+
+The agent switcher sits at the left of the top bar, after the workspace switcher and the panel collapse toggle. It reads either **All agents** or the name of the agent you are in. In a section other than the Overview, a breadcrumb follows it and names that section.
+
+<img src="https://mintcdn.com/langchain-5e9cc07a/0GS5eCN4HA5fQwNT/langsmith/images/agent-switcher-open-light.png?fit=max&auto=format&n=0GS5eCN4HA5fQwNT&q=85&s=0b42353f60159bf455491f6d0a85845c" alt="The agent switcher open, with a search box above a list of agents and a check mark beside the selected one." width="559" height="225" data-path="langsmith/images/agent-switcher-open-light.png" />
+
+<img src="https://mintcdn.com/langchain-5e9cc07a/0GS5eCN4HA5fQwNT/langsmith/images/agent-switcher-open-dark.png?fit=max&auto=format&n=0GS5eCN4HA5fQwNT&q=85&s=cb64c2737b1e7f7e0b80abbd8f43e719" alt="The agent switcher open, with a search box above a list of agents and a check mark beside the selected one." width="555" height="222" data-path="langsmith/images/agent-switcher-open-dark.png" />
+
+The address behind it is `/o/<workspaceId>/a/<agentIdentifier>/...`. The workspace slot takes a UUID, and the agent slot takes the agent's [identifier](agents.md#identifiers-and-display-names). A hyphen in the agent slot means all agents, so `/a/-` is the **All agents** view and `/a/<agentIdentifier>` is a single agent. Either state can be set from the address bar, which is how to link directly to one of the two views.
+
+## All agents and single-agent views
+
+The switcher moves between two views:
+
+* **All agents**: The agent list, with one card for each agent in the workspace. In an empty workspace it shows a get-started screen instead, which describes the options in the [**New Agent** panel](create-an-agent.md#start-from-the-new-agent-panel) and opens that panel from a single **Get started** button.
+* **A single agent**: That agent's Overview.
+
+The left navigation lists the same items in both views, though its first row reads **All agents** on the agent list and **Overview** inside an agent. Two things differ:
+
+* **Badge counts**: Hidden on the agent list, except on Deployments. When you select an agent, the counts appear and cover only that agent.
+* **Section availability**: Some sections ask you to pick an agent first. See [Sections that require an agent](#sections-that-require-an-agent).
+
+## Sections that require an agent
+
+Most sections work with **All agents** selected, including the agent list, which lists every agent in the workspace, and Deployments, which lists every deployment in the workspace. Engine, Studio, Build, Tracing, and Monitoring need you to select an agent. If you open these sections with **All agents** selected, what you see depends on whether your workspace has any agents yet.
+
+If your workspace has agents, the section shows a searchable list of agents to pick from, headed **Pick an agent to view**. On Build, the list sits under "Configure an existing agent or build a new one." instead. The top bar stays in place, so you can also pick from the switcher. Below the list, Studio shows **Connect Agent Server** and Build shows **+ New agent**. Tracing also shows **+ New agent** to users who can create projects. Build lists only agents [built in the UI](build-an-agent.md). The other sections list every agent in the workspace.
+
+With no agents in the workspace, Engine, Studio, Tracing, and Monitoring show the list empty, reading **No agents available**. Build shows the same empty list whenever the workspace has no agents built in the UI, even if it has other agents, and its **+ New agent** button still starts a new agent. Deployments shows its own page, which offers ways to create a first deployment when the workspace has none.
+
+After you pick an agent, LangSmith keeps it selected as you move between these sections. To see the agent list for **All agents**, hover over the selected agent's name in the switcher and select the **X** that appears beside it.
+
+## Open Settings
+
+Settings opens in its own layout: the agent switcher is gone, the navigation splits into Organizations and Workspace sections, and a **Back to LangSmith** link returns to the agent views.
+
+## Read the agent Overview
+
+When you select an agent, LangSmith opens its Overview.
+
+The switcher shows the agent's display name. A field labeled **ID**, with a copy button beside it, holds the identifier, which is also the value the address bar carries. The **ID** field shortens a long identifier in the middle.
+
+Use the copy button beside **ID** when you need the value for tracing. [Agent addressing](log-traces-to-agent.md) takes the identifier, not the display name. For which value is which, see [Identifiers and display names](agents.md#identifiers-and-display-names).
+
+Below the **ID** field, the Overview shows the following, in order:
+
+* **Metrics**: Trace count, error rate, token count, and total cost, each covering a fixed period of the last 7 days across all environments. A sparkline of traces over time leads the row.
+* **Tracing**: One row per environment the agent has, including environments with no traces, with the most recent run, trace count, error rate, P50 latency, P99 latency, and description.
+* **Engine**: The number of active issues [Engine](engine-overview.md) has found across this agent's environments, and a **Go to Engine** link.
+* **Evaluate your agent**: Describes evaluation on datasets and on live production traces, with a **Go to evaluators** link to [evaluators](evaluators.md).
+* **Monitor your agent**: Describes how to monitor an agent with dashboards, alerts, and feedback, from individual traces to production-wide metrics, with a **Go to dashboards** link to [dashboards](dashboards.md).
+* **Deployments**: The [deployments](deployment.md) bound to this agent by the steps in [Deploy to an agent environment](deploy-to-agent-environment.md). Each row links to that deployment. With none, the section describes what a deployment is and shows no rows. For which agents show this section, see [Compare the four routes](create-an-agent.md#compare-the-four-routes).
+
+## See also
+
+* [Agents](agents.md)
+* [Create an agent](create-an-agent.md)
+* [Agent environments](agent-environments.md)
+* [Deploy to an agent environment](deploy-to-agent-environment.md)
+* [Tracing quickstart](observability-quickstart.md)
+
+***
+
+> [!NOTE]
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/navigate-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

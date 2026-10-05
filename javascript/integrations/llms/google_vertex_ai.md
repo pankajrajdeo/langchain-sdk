@@ -23,9 +23,9 @@ This will help you get started with Gemini Enterprise Agent Platform completion 
 
 ### Integration details
 
-| Class                                                                                             | Package                                                                                  | Local | Serializable | PY support |                                                  Downloads                                                 |                                                 Version                                                 |
-| :------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------- | :---: | :----------: | :--------: | :--------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: |
-| [`VertexAI`](https://reference.langchain.com/javascript/langchain-google-vertexai/index/VertexAI) | [`@langchain/google-vertexai`](https://www.npmjs.com/package/@langchain/google-vertexai) |   ❌   |       ✅      |      ✅     | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/google-vertexai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/google-vertexai?style=flat-square\&label=%20&) |
+| Class | Package | Local | Serializable | PY support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| [`VertexAI`](https://reference.langchain.com/javascript/langchain-google-vertexai/index/VertexAI) | [`@langchain/google-vertexai`](https://www.npmjs.com/package/@langchain/google-vertexai) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/google-vertexai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/google-vertexai?style=flat-square\&label=%20&) |
 
 ## Setup
 

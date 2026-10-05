@@ -21,15 +21,15 @@ This page helps you get started with AI/ML API text completion models.
 
 ### Integration details
 
-| Class        | Package             | Local | Serializable | JS support |                                              Downloads                                             |                                             Version                                             |
-| :----------- | :------------------ | :---: | :----------: | :--------: | :------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
-| `AimlapiLLM` | `langchain-aimlapi` |   ❌   |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aimlapi?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aimlapi?style=flat-square\&label=%20) |
+| Class | Package | Local | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| `AimlapiLLM` | `langchain-aimlapi` | ❌ | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aimlapi?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aimlapi?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ❌                      |                               ❌                              |                             ❌                            |      ❌      |      ❌      |                             ❌                             |       ✅      |                            ❌                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
 
 ## Setup
 

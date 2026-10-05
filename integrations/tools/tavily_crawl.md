@@ -16,15 +16,15 @@ tags: [docs, integrations, tools, tavily_crawl]
 
 ### Integration details
 
-| Class                                                                                             | Package                                                                        | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/tavily_crawl) |                                             Version                                            |
-| :------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------- | :----------: | :-------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`TavilyCrawl`](https://reference.langchain.com/python/langchain-tavily/tavily_crawl/TavilyCrawl) | [`langchain-tavily`](https://reference.langchain.com/python/langchain-tavily/) |       ✅      |                                      ✅                                      | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-tavily?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/tavily_crawl) | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`TavilyCrawl`](https://reference.langchain.com/python/langchain-tavily/tavily_crawl/TavilyCrawl) | [`langchain-tavily`](https://reference.langchain.com/python/langchain-tavily/) | ✅ | ✅ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-tavily?style=flat-square\&label=%20) |
 
 ### Tool features
 
-| [Returns artifact](../../langchain/tools.md) | Native async |                    Return data                   |           Pricing          |
-| :---------------------------------------------: | :----------: | :----------------------------------------------: | :------------------------: |
-|                        ❌                        |       ✅      | base URL, page URL, raw content, images, favicon | 1,000 free credits / month |
+| [Returns artifact](../../langchain/tools.md) | Native async | Return data | Pricing |
+| :-: | :-: | :-: | :-: |
+| ❌ | ✅ | base URL, page URL, raw content, images, favicon | 1,000 free credits / month |
 
 ## Setup
 

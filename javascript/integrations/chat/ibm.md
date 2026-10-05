@@ -16,15 +16,15 @@ This will help you getting started with IBM watsonx.ai [chat models](../../langc
 
 ### Integration details
 
-| Class                                                                                 | Package                                                          | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/ibm_watsonx/) |                                            Downloads                                           |                                           Version                                           |
-| :------------------------------------------------------------------------------------ | :--------------------------------------------------------------- | :----------: | :----------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`ChatWatsonx`](https://reference.langchain.com/javascript/langchain-ibm/ChatWatsonx) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) |       ✅      |                                        ✅                                       | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
+| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/ibm_watsonx/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatWatsonx`](https://reference.langchain.com/javascript/langchain-ibm/ChatWatsonx) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :---------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------: | :---------------------------------------------------------: | :------------------------------------------------------------: |
-|                        ✅                        |                                 ✅                                |                               ✅                              |      ❌      |      ❌      |                               ✅                               |                              ✅                              |                                ❌                               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ❌ |
 
 ## Setup
 

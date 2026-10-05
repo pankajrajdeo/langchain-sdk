@@ -73,7 +73,7 @@ Click any row in the experiment view to open the details panel, which shows the 
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/Tdk8epB4BZgbugRX/langsmith/images/view-trace.png?fit=max&auto=format&n=Tdk8epB4BZgbugRX&q=85&s=f39235b29c4fca4bcb3cf4d4788133ca" alt="View trace" width="1583" height="842" data-path="langsmith/images/view-trace.png" />
 
-To view the entire tracing project, click on the **View Project** icon at the top right of the experiment view.
+To view the traces behind an experiment, click the **View project** icon at the top right of the experiment view.
 
 #### View evaluator runs
 

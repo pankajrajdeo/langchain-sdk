@@ -1,21 +1,21 @@
 ---
 title: "langsmith"
-description: "Index of 488 pages and 5 subdirectories under langsmith."
+description: "Index of 503 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-488 pages here, 1197 pages including subdirectories.
+503 pages here, 1215 pages including subdirectories.
 
 ## Directories
 
 - [agent-server-api/](agent-server-api/_index.md) - 73 pages
 - [fleet/](fleet/_index.md) - 25 pages
-- [javascript/](javascript/_index.md) - 28 pages
-- [python/](python/_index.md) - 28 pages
-- [smith-api/](smith-api/_index.md) - 555 pages
+- [javascript/](javascript/_index.md) - 29 pages
+- [python/](python/_index.md) - 29 pages
+- [smith-api/](smith-api/_index.md) - 556 pages
 
 ## Files
 
@@ -25,10 +25,11 @@ tags: [index, langsmith]
 - [Human-in-the-loop using server API](add-human-in-the-loop.md) - To review, edit, and approve tool calls in an agent or workflow, use LangGraph's human-in-the-loop features.
 - [Add metadata and tags to traces](add-metadata-tags.md) - LangSmith supports sending arbitrary metadata and tags along with traces.
 - [Account](admin.md) - Set up your LangSmith account, including API keys, profile configuration, integrations, and pricing tiers.
-- [Overview](administration-overview.md) - This overview covers topics related to managing users, organizations, workspaces, and applications within LangSmith.
+- [Overview](administration-overview.md) - This overview covers topics related to managing users, organizations, workspaces, agents, and applications within LangSmith.
 - [Set up Agent Auth](agent-auth.md) - Enable secure access from agents to any system using OAuth 2.0 credentials with Agent Auth.
 - [Quickstart](agent-builder-quickstart.md) - Build an agent from a template
 - [Remote MCP servers](agent-builder-remote-mcp-servers.md) - Connect Fleet to popular remote MCP servers
+- [Agent environments](agent-environments.md) - How an agent's environments divide its traces, how to select one, and which parts of the set are fixed.
 - [Agent Server changelog](agent-server-changelog-link.md) - Subscribe: Our changelog includes an RSS feed that can integrate with Slack, email, Discord bots like Readybot or RSS Feeds to Discord Bot, and other subscription tools.
 - [Agent Server changelog](agent-server-changelog.md) - Subscribe: Our changelog includes an RSS feed that can integrate with Slack, email, Discord bots like Readybot or RSS Feeds to Discord Bot, and other subscription tools.
 - [Distributed tracing with Agent Server](agent-server-distributed-tracing.md) - Unify traces when calling your deployed Agent Server from another service using RemoteGraph or the SDK.
@@ -36,13 +37,14 @@ tags: [index, langsmith]
 - [Agent Server](agent-server-overview.md) - Configure and operate the LangSmith Agent Server runtime, including capabilities, application structure, auth, and customization.
 - [Configure Agent Server for scale](agent-server-scale.md) - Tune the Agent Server for self-hosted deployments—write load, read load, and example Helm configurations for different load patterns.
 - [Agent Server](agent-server.md) - LangSmith Deployment's Agent Server offers an API for creating and managing agent-based applications. It is built on the concept of assistants, which are agents configured for specific tasks, and...
+- [Agents](agents.md) - What an agent is in LangSmith, how a workspace organizes its agents, how environments divide an agent's traces, and how an identifier differs from a display name.
 - [Alerts in LangSmith](alerts.md) - Self-hosted version requirement: Access to alerts requires Helm chart version 0.10.3 or later.
 - [Analyze an experiment](analyze-an-experiment.md) - This page describes some of the essential tasks for working with experiments in LangSmith:
 - [Custom instrumentation](annotate-code.md) - Instrument your code directly to control which functions are traced and how they appear in LangSmith.
 - [Annotate traces and runs inline](annotate-traces-inline.md) - LangSmith allows you to manually annotate traces with feedback within the application. This can be useful for adding context to a trace, such as a user's comment or a note about a specific issue. You...
 - [Manage feedback & annotation queues programmatically](annotation-queues-sdk.md) - Use the LangSmith SDK to manage feedback configurations and annotation queue rubrics programmatically, and to add runs and threads to a queue for review. Define reusable feedback schemas at the...
 - [Use annotation queues](annotation-queues.md) - Annotation queues give human reviewers a focused workflow for attaching feedback to specific runs or threads. While you can always annotate traces inline, annotation queues let you group runs and...
-- [Control plane API reference for LangSmith Deployment](api-ref-control-plane.md) - The control plane API is part of LangSmith Deployment. With the control plane API, you can programmatically create, manage, and automate your Agent Server deployments—for example, as part of a custom...
+- [Control plane API reference for LangSmith Deployment](api-ref-control-plane.md) - Use the control plane API to programmatically create, manage, and automate Agent Server deployments in LangSmith Deployment.
 - [Application structure](application-structure.md) - To deploy on LangSmith, an application must consist of one or more graphs, a configuration file (langgraph.json), a file that specifies dependencies, and an optional .env file that specifies...
 - [Use assertions](assertions.md) - Capture free-form acceptance criteria as dataset examples by writing assertions while reviewing runs in an annotation queue.
 - [Assistants](assistants.md) - Assistants are an Agent Server concept that allow you to manage configurations (e.g., prompts, LLM selection, tools) separately from your graph's core logic. This enables you to create multiple...
@@ -58,6 +60,7 @@ tags: [index, langsmith]
 - [Manage billing in your account](billing.md) - This page describes how to manage billing for your LangSmith organization:
 - [Automatically run evaluators on experiments](bind-evaluator-to-dataset-link.md) - LangSmith supports two ways to grade experiments created via the SDK:
 - [Automatically run evaluators on experiments](bind-evaluator-to-dataset.md) - LangSmith supports two ways to grade experiments created via the SDK:
+- [Build an agent in the UI](build-an-agent.md) - How the Build tab configures an agent from a form, what each section of that form sets, and where the new agent's traces land.
 - [BYOC architecture](byoc-architecture.md) - How a LangSmith BYOC deployment is structured across the LangChain control plane and the data plane in your AWS account.
 - [BYOC billing](byoc-billing.md) - How LangSmith BYOC is billed across your AWS account and your LangSmith contract, which AWS services carry cost, and the account quotas to check before you deploy.
 - [Bring your own IAM roles (AWS)](byoc-byoiam.md) - Create customer-managed IAM roles for LangSmith BYOC, remove IAM management permissions from the provisioning role, and deploy with existing roles.
@@ -100,10 +103,10 @@ tags: [index, langsmith]
 - [Configure Context Hub commit webhooks](context-hub-webhooks.md) - Send Context Hub commit events to an external HTTPS endpoint and verify that LangSmith signed each request.
 - [Prompt & Context Hub](context-hub.md) - Store, version, and update the prompts and contexts your agents use in production.
 - [LangSmith control plane](control-plane.md) - The control plane is the part of LangSmith that manages deployments. It includes the control plane UI, where users create and update Agent Servers, and the control plane APIs, which support the UI...
-- [Agent Server](core-capabilities.md) - LangSmith Deployment's Agent Server offers an API for creating and managing agent-based applications. It is built on the concept of assistants, which are agents configured for specific tasks, and...
 - [Cost tracking](cost-tracking.md) - Building agents at scale introduces non-trivial, usage-based costs that can be difficult to track. LangSmith automatically records LLM token usage and costs for major providers, and also allows you...
 - [Create a prompt](create-a-prompt.md) - In the LangSmith UI, navigate to the Playground in the left-hand sidebar or from the application homepage.
 - [Create an account and API key](create-account-api-key.md) - To get started with LangSmith, you need to create an account. You can sign up for a free account in the LangSmith UI. LangSmith supports sign in with Google, GitHub, and email.
+- [Create an agent](create-an-agent.md) - The four ways an agent is created in LangSmith, what each route decides about the agent it makes, and the rules an identifier must follow.
 - [How to improve your evaluator with few-shot examples](create-few-shot-evaluators.md) - Using LLM-as-a-judge evaluators can be very helpful when you can't evaluate your system programmatically. However, their effectiveness depends on their quality and how well they align with human...
 - [Use cron jobs](cron-jobs.md) - There are many situations in which it is useful to run an assistant on a schedule.
 - [Custom Apps](custom-apps.md) - Build custom UIs that run inside LangSmith and call the LangSmith API, either by chatting with LangSmith Chat or locally with the LangSmith CLI.
@@ -116,7 +119,6 @@ tags: [index, langsmith]
 - [Connect to an OpenAI compliant model provider/proxy](custom-openai-compliant-model.md) - The Playground allows you to use any model that is compliant with the OpenAI API. You can utilize your model by setting the Proxy Provider for in the Playground.
 - [Custom output rendering](custom-output-rendering.md) - Custom output rendering allows you to visualize run outputs and dataset reference outputs using your own custom HTML pages. This is particularly useful for:
 - [How to add custom routes](custom-routes.md) - When deploying agents to LangSmith Deployment, your server automatically exposes routes for creating runs and threads, interacting with the long-term memory store, managing configurable assistants...
-- [Custom instrumentation](custom-run-id.md) - Instrument your code directly to control which functions are traced and how they appear in LangSmith.
 - [How to use a custom store](custom-store.md) - Replace the built-in Postgres store with a custom BaseStore implementation in your agent deployment.
 - [Monitor projects with dashboards](dashboards.md) - Dashboards give you high-level insights into your trace data, helping you spot trends and monitor the health of your applications. Dashboards are available in Monitoring in the LangSmith UI.
 - [Manage bulk export destinations](data-export-destinations.md) - Configure and manage S3-compatible export destinations for LangSmith bulk exports.
@@ -141,13 +143,13 @@ tags: [index, langsmith]
 - [Enable additional LangSmith features](deploy-self-hosted-full-platform.md) - Enable LangSmith Deployment, Fleet, Insights, Chat, Sandboxes, and Engine on a self-hosted LangSmith instance.
 - [Self-host standalone servers](deploy-standalone-server.md) - Deploy standalone Agent Servers using Docker, Docker Compose, or Kubernetes without the LangSmith control plane.
 - [Deploy with SvelteKit](deploy-sveltekit.md) - Deploy a LangChain deep agent in a SvelteKit project on Cloudflare Workers with streaming chat and thread history.
+- [Deploy to an agent environment](deploy-to-agent-environment.md) - How the LangGraph and Managed Deep Agents CLIs bind a deployment to an agent and an environment, which values each flag takes, and which CLI versions accept them.
 - [Deploy to Cloud](deploy-to-cloud-overview.md) - Deploy LangSmith agents to LangChain-managed Cloud infrastructure on AWS and GCP.
 - [Create a deployment](deploy-to-cloud.md) - Create a LangSmith Cloud deployment from the LangSmith UI or LangGraph CLI.
 - [Deploy to self-hosted](deploy-to-self-hosted-overview.md) - Run the LangSmith Deployment platform on your own infrastructure with full control over data, networking, and resources.
 - [Deploy with LangSmith and Vite](deploy-vite-langsmith.md) - Deploy a LangChain deep agent to LangSmith Deployment and stream from a Vite React chat UI on Vercel, Netlify, or Cloudflare Pages.
 - [Deploy with control plane](deploy-with-control-plane.md) - Build Docker images and deploy applications to a self-hosted LangSmith instance using the control plane UI.
-- [Managed Deep Agents quickstart](deployment-quickstart-da.md) - Create and deploy your first Managed Deep Agent with the mda CLI.
-- [Deploy your app to cloud](deployment-quickstart.md) - Deploy your first application to LangSmith Cloud (AWS and GCP) using the LangGraph CLI.
+- [Deploy your app to cloud](deployment-quickstart.md) - Deploy your first application to LangSmith Cloud in GCP using the LangGraph CLI.
 - [Revisions](deployment-revisions.md) - Create and manage revisions for a LangSmith Cloud deployment.
 - [LangSmith Deployment](deployment.md) - Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling.
 - [LangSmith Deployment](deployments.md) - Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling.
@@ -158,12 +160,12 @@ tags: [index, langsmith]
 - [Add encryption at rest](encryption.md) - Agent Server supports encryption at rest for checkpoint data and metadata. You can choose between basic encryption with a single key or custom encryption for advanced use cases.
 - [API and SDK deprecation policy](endpoint-deprecation.md) - How LangSmith deprecates and removes API endpoints and SDK methods in cloud and self-hosted deployments.
 - [Connect LangSmith Engine to GitHub](engine-github.md) - Connect LangSmith Engine to GitHub in LangSmith Cloud, or create and configure your own GitHub App for a self-hosted deployment.
-- [LangSmith Engine notifications](engine-notifications.md) - Send LangSmith Engine issue and run-failure notifications to Slack channels and webhook endpoints.
+- [LangSmith Engine notifications](engine-notifications.md) - Send LangSmith Engine notifications to Slack, Jira Automation, and webhook endpoints.
 - [LangSmith Engine](engine-overview.md) - LangSmith Engine is the agent for agent engineering, turning production traces into tracked issues, fixes, and datasets across the development lifecycle.
 - [LangSmith Engine security](engine-security.md) - How LangSmith Engine handles your data, the GitHub and model subprocessor controls that govern its access, and its compliance posture.
-- [LangSmith Engine on Self-hosted](engine-self-hosted-link.md) - Install LangSmith Engine on a self-hosted LangSmith instance, and understand what it depends on outside your environment and how it handles your data.
-- [LangSmith Engine on Self-hosted](engine-self-hosted.md) - Install LangSmith Engine on a self-hosted LangSmith instance, and understand what it depends on outside your environment and how it handles your data.
-- [LangSmith Engine notifications](engine-webhooks.md) - Send LangSmith Engine issue and run-failure notifications to Slack channels and webhook endpoints.
+- [LangSmith Engine on Self-hosted](engine-self-hosted-link.md) - Set up LangSmith Engine on a self-hosted LangSmith instance, including model provider options and external network requirements.
+- [LangSmith Engine on Self-hosted](engine-self-hosted.md) - Set up LangSmith Engine on a self-hosted LangSmith instance, including model provider options and external network requirements.
+- [LangSmith Engine notifications](engine-webhooks.md) - Send LangSmith Engine notifications to Slack, Jira Automation, and webhook endpoints.
 - [Find and fix your agent's issues with LangSmith Engine](engine.md) - Automatically detect and resolve recurring issues in your tracing project using LangSmith Engine.
 - [Enqueue concurrent](enqueue-concurrent.md) - This guide assumes knowledge of what double-texting is, which you can learn about in the double-texting conceptual guide.
 - [LangSmith for Enterprise](enterprise.md) - Hosting options, access control, data privacy, cost controls, and security compliance for Enterprise users.
@@ -205,7 +207,6 @@ tags: [index, langsmith]
 - [How to implement generative user interfaces with LangGraph](generative-ui-react.md) - Prerequisites
 - [Integrations](get-started-integrations.md) - LangSmith provides integrations for a growing set of popular LLM providers and agent frameworks as well as Deep Agents, LangChain, and LangGraph. For setup and usage, refer to the guides listed on...
 - [Govern](govern-overview.md) - Administer users, access control, organizational structure, and compliance policies for your LangSmith organization.
-- [Governance](govern.md) - Govern model access, spending, data handling, and compliance across your LangSmith organization.
 - [Granular billable usage](granular-usage.md) - Retrieve detailed trace and LangSmith Deployment usage data broken down by workspace, project, user, or API key.
 - [Rebuild graph at runtime](graph-rebuild.md) - Rebuild your graph with different configurations for each run using ServerRuntime.
 - [How to handle model rate limits](handle-model-rate-limiting.md) - A common issue when running large evaluation jobs is running into third-party API rate limits, usually from model providers. There are a few ways to deal with rate limits.
@@ -222,13 +223,14 @@ tags: [index, langsmith]
 - [Manage user access in SSO organizations](jit-invite-sso.md) - LangSmith provides flexible controls for managing how users join your organization when using Single Sign-On (SSO) authentication. You can independently enable or disable both Just-In-Time (JIT)...
 - [Self-host LangSmith on Kubernetes](kubernetes.md) - Self-hosting LangSmith is an add-on to the Enterprise Plan designed for our largest, most security-conscious customers. See our pricing page for more detail, and contact our sales team if you want to...
 - [How to evaluate a runnable](langchain-runnable.md) - langchain: Python and JS/TS Runnable: Python and JS/TS
-- [LangGraph JS/TS SDK](langgraph-js-ts-sdk.md) - Connect these docs to your agent of choice via MCP for real-time answers.
-- [LangGraph Python SDK](langgraph-python-sdk.md) - Connect these docs to your agent of choice via MCP for real-time answers.
+- [LangGraph JS/TS SDK](langgraph-js-ts-sdk.md)
+- [LangGraph Python SDK](langgraph-python-sdk.md)
 - [LangSmith CLI](langsmith-cli.md) - Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal
 - [Configure your collector for LangSmith telemetry](langsmith-collector.md) - The various services in a LangSmith deployment emit telemetry data in the form of logs, metrics, and traces. You may already have telemetry collectors set up in your Kubernetes cluster, or would like...
 - [LangSmith-managed ClickHouse](langsmith-managed-clickhouse.md) - Please read the LangSmith architectural overview and guide on connecting to external ClickHouse before proceeding with this guide.
 - [LangSmith MCP Server](langsmith-mcp-server.md) - Use the Model Context Protocol (MCP) server to let language models fetch conversation history, prompts, runs, datasets, experiments, and billing from LangSmith.
 - [LangSmith Remote MCP](langsmith-remote-mcp.md) - Connect MCP-compatible clients to LangSmith over OAuth, or authenticate programmatic clients with a LangSmith API key.
+- [LangSmith setup](langsmith-setup-overview.md) - How a LangSmith workspace is organized, where LangSmith runs, and who can do what across your organization.
 - [Trace with the Vercel AI SDK (Legacy)](legacy-trace-with-vercel-ai-sdk.md) - This page documents an older method of tracing AI SDK runs. For a simpler and more general method that does not require OTEL setup, see the new guide.
 - [How to define an LLM-as-a-judge evaluator](llm-as-judge-sdk.md) - LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
 - [How to define an LLM-as-a-judge evaluator](llm-as-judge.md) - LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
@@ -258,6 +260,7 @@ tags: [index, langsmith]
 - [Log LLM calls](log-llm-trace.md) - When you call an LLM directly, outside of LangChain or a LangSmith supported integration, you need to provide specific metadata so that LangSmith can display token counts, calculate costs, and let...
 - [Log multimodal traces](log-multimodal-traces.md) - LangSmith supports logging and rendering images as part of traces. This is currently supported for multimodal LLM runs.
 - [Log retriever traces](log-retriever-trace.md) - Log retrieval steps in LangSmith traces for document-level visibility into your RAG pipeline.
+- [Log traces to an agent](log-traces-to-agent.md) - How agent addressing sends traces to an agent and an environment, which variables carry it, and why it cannot be combined with project addressing.
 - [Log traces to a specific project](log-traces-to-project.md) - Route LangSmith traces to a named project instead of the default project using environment variables or the SDK.
 - [Metadata parameters reference](ls-metadata-parameters.md) - When you trace LLM calls with LangSmith, you often want to track costs, compare model configurations, and analyze performance across different providers. LangSmith's native integrations (like...
 - [Manage contexts with the SDK](manage-contexts-sdk.md) - Use the LangSmith SDK to push, pull, list, and delete agent and skill repos in the Context Hub programmatically.
@@ -279,6 +282,7 @@ tags: [index, langsmith]
 - [Configure prompt settings](managing-model-configurations.md) - The Playground enables you to control various settings for your prompts. The Prompt Settings window contains:
 - [Prevent logging of sensitive data in traces](mask-inputs-outputs.md) - When working with LangSmith traces, you may need to prevent sensitive information from being logged to maintain privacy and comply with security requirements. LangSmith provides multiple approaches...
 - [How to return categorical vs numerical metrics](metric-type.md) - LangSmith supports both categorical and numerical metrics, and you can return either when writing a custom evaluator.
+- [How agent-based workspaces differ](migrate-to-agent-based-workspaces.md) - What changes when a workspace moves from organizing traces by tracing project to organizing them by agent and environment.
 - [Manage model configurations](model-configurations.md) - Manage model configurations and control their availability across LangSmith features.
 - [Monitor a deployment](monitor-deployment.md) - View build logs, server logs, and metrics for a LangSmith Cloud deployment.
 - [Monorepo support](monorepo-support.md) - LangSmith supports deploying agents from monorepo setups where your agent code may depend on shared packages located elsewhere in the repository. This guide shows how to structure your monorepo and...
@@ -286,6 +290,7 @@ tags: [index, langsmith]
 - [Include multimodal content in a prompt](multimodal-content.md) - Some applications are based around multimodal content, like a chatbot that can answer questions about a PDF or image. In these cases, you'll want to include multimodal content in your prompt and test...
 - [Test multi-turn conversations](multiple-messages.md) - This how-to guide walks you through the various ways you can set up the Playground for multi-turn conversations, which will allow you to test different tool configurations and system prompts against...
 - [How to return multiple scores in one evaluator](multiple-scores.md) - Sometimes it is useful for a custom evaluator or summary evaluator to return multiple metrics. For example, if you have multiple metrics being generated by an LLM judge, you can save time and money...
+- [Navigate agents](navigate-agents.md) - How the agent switcher moves between the agent list and a single agent, which sections need an agent, and what the agent Overview shows.
 - [Troubleshoot trace nesting](nest-traces.md) - When tracing with the LangSmith SDK, LangGraph, and LangChain, tracing should automatically propagate the correct context so that code executed within a parent trace will be rendered in the expected...
 - [Observability concepts](observability-concepts.md) - How LangSmith structures observability data as runs, traces, threads, and trajectories, and how to send traces.
 - [Trace an LLM application tutorial](observability-llm-tutorial.md) - Add LangSmith observability to an LLM application across prototyping, beta testing, and production.
@@ -310,7 +315,7 @@ tags: [index, langsmith]
 - [LangSmith Chat](polly.md) - Use Chat in LangSmith to analyze traces, threads, prompts, and evaluations.
 - [Collect feedback with presigned URLs](presigned-feedback-tokens.md) - Use presigned feedback tokens to collect user feedback from client-side applications without exposing your LangSmith API key.
 - [Preview builds](preview-builds.md) - Create temporary preview deployments for pull requests to test Agent Server changes before merging.
-- [Pricing plans](pricing-plans.md) - Connect these docs to your agent of choice via MCP for real-time answers.
+- [Pricing plans](pricing-plans.md)
 - [Profile configuration](profile-configuration.md) - Configure LangSmith SDK credentials and endpoints with a local profile file.
 - [How to sync prompts with GitHub](prompt-commit.md) - LangSmith provides a collaborative interface to create, test, and iterate on prompts.
 - [Prompt & Context Hub](prompt-context-hub.md) - Store, version, and update the prompts and contexts your agents use in production.
@@ -329,7 +334,7 @@ tags: [index, langsmith]
 - [Reject Concurrent](reject-concurrent.md) - This guide assumes knowledge of what double-texting is, which you can learn about in the double-texting conceptual guide.
 - [Release stages](release-stages.md) - How LangSmith labels features as alpha, beta, or generally available, and what each stage means for stability, support, and availability
 - [Release policy](release-versions.md) - Release channels, cadence, and version support for self-hosted LangSmith.
-- [RemoteGraph](remote-graph.md) - Connect these docs to your agent of choice via MCP for real-time answers.
+- [RemoteGraph](remote-graph.md)
 - [How to evaluate with repetitions](repetition.md) - Running multiple repetitions can give a more accurate estimate of the performance of your system since LLM outputs are not deterministic. Outputs can differ from one repetition to the next...
 - [Make conversations private](resource-auth.md) - In this tutorial, you will extend the chatbot created in the last tutorial to give each user their own private conversations. You'll add resource-level access control so users can only see their own...
 - [Rollback Concurrent](rollback-concurrent.md) - This guide assumes knowledge of what double-texting is, which you can learn about in the double-texting conceptual guide.
@@ -376,6 +381,15 @@ tags: [index, langsmith]
 - [View trace counts across your organization](self-host-organization-charts.md) - This feature is available on Helm chart versions 0.9.5 and later.
 - [Use environment variables for model providers](self-host-playground-environment-settings.md) - This feature is only available on Helm chart versions 0.10.27 (application version 0.10.74) and later.
 - [Configure LangSmith for scale](self-host-scale.md) - The scaling guidance and example configurations on this page apply to LangSmith version v0.13.0 or higher.
+- [Connect self-hosted LangSmith to Slack](self-host-slack.md) - Configure your own Slack app for Engine and alert notifications on self-hosted LangSmith.
+- [Prepare SmithDB supporting infrastructure](self-host-smithdb-infrastructure.md) - Provide a dedicated PostgreSQL metastore, object storage, and cache storage before enabling SmithDB.
+- [Install LangSmith with SmithDB](self-host-smithdb-install.md) - Enable SmithDB on a self-hosted LangSmith Kubernetes installation through staged Helm updates.
+- [SmithDB metrics reference](self-host-smithdb-metrics.md) - Metrics to watch on each SmithDB component, what they measure, and how to read them.
+- [Migrate ClickHouse history to SmithDB](self-host-smithdb-migrate.md) - Run the historical ClickHouse-to-SmithDB migration for a self-hosted LangSmith installation.
+- [Configure SmithDB observability](self-host-smithdb-observability.md) - Scrape SmithDB application metrics and export logs and traces to your existing observability stack.
+- [Configure SmithDB for scale](self-host-smithdb-scale.md) - Choose tested SmithDB resource tiers and size Kubernetes workloads and the PostgreSQL metastore.
+- [Troubleshoot SmithDB](self-host-smithdb-troubleshooting.md) - Diagnose SmithDB failures, gather troubleshooting context, or disable and reset a SmithDB deployment on self-hosted LangSmith.
+- [Enable SmithDB on self-hosted LangSmith](self-host-smithdb.md) - Run SmithDB alongside ClickHouse on a self-hosted LangSmith Kubernetes installation.
 - [Set up SSO with OAuth2.0 and OIDC](self-host-sso.md) - LangSmith Self-Hosted provides SSO via OAuth2.0 and OIDC, which delegates authentication to your Identity Provider (IdP) to manage access to LangSmith.
 - [AWS Terraform architecture](self-host-terraform-aws-architecture.md) - Platform layers, services, IRSA roles, networking, and module dependencies for LangSmith self-hosted on AWS EKS.
 - [Deploy LangSmith on AWS with Terraform](self-host-terraform-aws-deploy.md) - End-to-end walkthrough for provisioning LangSmith self-hosted on AWS EKS using the LangChain Terraform modules.
@@ -406,7 +420,7 @@ tags: [index, langsmith]
 - [Self-hosted LangSmith](self-hosted.md) - Self-hosted LangSmith is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to Pricing. Contact our sales team if you want to get a...
 - [How to add semantic search to your agent deployment](semantic-search.md) - Semantic search lets your agent recall stored memories and documents by meaning rather than exact wording. For example, a query for "UI preferences" surfaces a memory written as "user prefers dark...
 - [A2A endpoint in Agent Server](server-a2a.md) - Use the A2A protocol to enable agent-to-agent communication with distributed tracing in LangSmith.
-- [Agent Server API reference for LangSmith Deployment](server-api-ref.md) - The Agent Server API reference is available within each deployment at the /docs endpoint (e.g. http://localhost:8124/docs).
+- [Agent Server API reference for LangSmith Deployment](server-api-ref.md) - Browse the Agent Server API reference for LangSmith Deployment, available within each deployment at the /docs endpoint.
 - [MCP endpoint in Agent Server](server-mcp.md) - The Model Context Protocol (MCP) is an open protocol for describing tools and data sources in a model-agnostic format, enabling LLMs to discover and use them via a structured API.
 - [Trace JS functions in serverless environments](serverless-environments.md) - This section is relevant for those using the LangSmith JS SDK version 0.2.0 and higher. If you are tracing using LangChain.js or LangGraph.js in serverless environments, see this guide.
 - [Set up custom authentication](set-up-custom-auth.md) - In this tutorial, we will build a chatbot that only lets specific users access it. We'll start with the LangGraph template and add token-based security step by step. By the end, you'll have a working...
@@ -418,12 +432,12 @@ tags: [index, langsmith]
 - [How to set up an application with pyproject.toml](setup-pyproject.md) - An application must be configured with a configuration file in order to be deployed to LangSmith (or to be self-hosted). This how-to guide discusses the basic steps to set up an application for...
 - [LangSmith shared responsibility model](shared-responsibility-model.md) - Overview of how LangChain and customers share security responsibilities for the LangSmith platform.
 - [LangSmith skills](skills.md) - Use Agent Skills to work with LangSmith traces, datasets, and evaluators from your coding agent.
-- [LangSmith API reference](smith-api-ref.md) - The LangSmith REST API provides programmatic access to LangSmith platform features including tracing, datasets, experiments, annotations, and more.
-- [LangSmith Deployment SDK](smith-deployments-sdk.md) - Connect these docs to your agent of choice via MCP for real-time answers.
-- [LangSmith Go SDK](smith-go-sdk.md) - Connect these docs to your agent of choice via MCP for real-time answers.
-- [LangSmith Java SDK](smith-java-sdk.md) - Connect these docs to your agent of choice via MCP for real-time answers.
-- [LangSmith JS/TS SDK](smith-js-ts-sdk.md) - Connect these docs to your agent of choice via MCP for real-time answers.
-- [LangSmith Python SDK](smith-python-sdk.md) - Connect these docs to your agent of choice via MCP for real-time answers.
+- [LangSmith API reference](smith-api-ref.md) - The LangSmith REST API provides programmatic access to tracing, datasets, experiments, annotations, and other LangSmith platform features.
+- [LangSmith Deployment SDK](smith-deployments-sdk.md)
+- [LangSmith Go SDK](smith-go-sdk.md)
+- [LangSmith Java SDK](smith-java-sdk.md)
+- [LangSmith JS/TS SDK](smith-js-ts-sdk.md)
+- [LangSmith Python SDK](smith-python-sdk.md)
 - [Migrate dataset experiment runs to SmithDB](smithdb-sdk-migration-experiments.md) - Migrate the LangSmith SDK dataset experiment run methods to their SmithDB-backed equivalents.
 - [Migrate feedback and sharing methods to SmithDB](smithdb-sdk-migration-feedback.md) - Migrate the LangSmith SDK feedback, annotation queue, and public run methods to their SmithDB-backed equivalents.
 - [Migrate run queries to SmithDB](smithdb-sdk-migration-query-runs.md) - Migrate the LangSmith SDK run query methods to their SmithDB-backed equivalents.
@@ -433,7 +447,7 @@ tags: [index, langsmith]
 - [Migrate to SmithDB-backed SDK methods](smithdb-sdk-migration.md) - Migrate your existing LangSmith SDK methods to their SmithDB-backed equivalents for faster agent observability.
 - [Fine-tune models with Smithtune](smithtune.md) - Use Smithtune to fine-tune models on LangSmith conversations and compare the results in LangSmith.
 - [Stateless runs](stateless-runs.md) - Most of the time, you provide a thread_id to your client when you run your graph in order to keep track of prior runs through the persistent state implemented in LangSmith Deployment. However, if you...
-- [LangSmith status](status.md) - Connect these docs to your agent of choice via MCP for real-time answers.
+- [LangSmith status](status.md)
 - [Isolate store data per user](store-auth.md) - Scope long-term store data to each authenticated user in LangSmith Deployment using auth handlers.
 - [Streaming API](streaming.md) - The LangGraph SDK lets you stream outputs from the LangSmith Deployment API in multiple modes, from full state snapshots after each step to token-by-token LLM output. Thread streaming also supports...
 - [LangSmith Studio](studio-deploy.md) - Prerequisites
@@ -454,6 +468,7 @@ tags: [index, langsmith]
 - [Trace OpenAI Realtime applications](trace-openai-realtime.md) - Trace OpenAI Realtime voice agents in LangSmith using the LangSmith SDK.
 - [Trace OpenAI applications](trace-openai.md) - The wrap_openai / wrapOpenAI methods in Python/TypeScript allow you to wrap your OpenAI client in order to automatically log traces -- no decorator or function wrapping required! Using the wrapper...
 - [Trace query syntax](trace-query-syntax.md) - The LangSmith SDK and REST API let you filter, query, and export runs programmatically using a set of filter arguments and a structured filter query language. This page documents the filter arguments...
+- [Write traces to multiple destinations with replicas](trace-replicas.md) - Send every trace to multiple projects or workspaces at the same time using replicas, configured by environment variable or at runtime.
 - [Voice tracing fundamentals](trace-voice-fundamentals.md) - Best practices for tracing voice and audio agents in LangSmith, including conversation audio, single-trace conversations, and the audio modality flag.
 - [Trace with API](trace-with-api.md) - Learn how to trace LLM applications using the LangSmith REST API directly.
 - [Trace AutoGen applications](trace-with-autogen.md) - LangSmith can capture traces generated by AutoGen using OpenTelemetry instrumentation. This guide shows you how to automatically capture traces from your AutoGen multi-agent conversations and send...
@@ -505,5 +520,5 @@ tags: [index, langsmith]
 - [View usage](view-usage.md) - What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted.
 - [How to run evaluations with Vitest/Jest](vitest-jest.md) - LangSmith provides integrations with Vitest and Jest that allow JavaScript and TypeScript developers to define their datasets and evaluate using familiar syntax.
 - [Configure webhook notifications for rules](webhooks.md) - Configure webhook notifications to receive POST requests when automation rules match new runs or threads in LangSmith.
-- [Workload isolation](workload-isolation.md) - LangSmith uses a hierarchical structure to organize your work: organizations, workspaces, applications, and resources. This structure lets you balance collaboration with access control, allowing you...
+- [Workload isolation](workload-isolation.md) - LangSmith uses a hierarchical structure to organize your work: organizations, workspaces, agents or applications, and resources. This structure lets you balance collaboration with access control...
 - [Write your prompt with AI](write-prompt-with-ai.md) - The prompt canvas makes it easy to edit a prompt with the help of an LLM. This allows you to iterate faster on long prompts and also makes it easier to make overarching stylisting or tonal changes to...

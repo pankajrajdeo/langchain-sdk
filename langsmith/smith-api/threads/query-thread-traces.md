@@ -221,17 +221,17 @@ paths:
           in: query
           schema:
             minimum: 1
+            maximum: 100
             type: integer
             default: 20
-            maximum: 100
             title: Page Size
         - description: '`project_id` is the tracing project UUID (required).'
           name: project_id
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - example:
             - NAME

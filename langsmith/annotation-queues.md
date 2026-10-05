@@ -29,14 +29,14 @@ Single-run queues present one item at a time and let reviewers submit any rubric
 
 Run items and thread items support different capabilities:
 
-| Capability       | Run items | Thread items |
-| ---------------- | --------- | ------------ |
-| Rubric feedback  | Yes       | Yes          |
-| Reviewer notes   | Yes       | No           |
-| Assertions       | Yes       | No           |
-| Add to Dataset   | Yes       | Yes          |
-| Default dataset  | Yes       | No           |
-| Automation rules | Yes       | Yes          |
+| Capability | Run items | Thread items |
+| - | - | - |
+| Rubric feedback | Yes | Yes |
+| Reviewer notes | Yes | No |
+| Assertions | Yes | No |
+| Add to Dataset | Yes | Yes |
+| Default dataset | Yes | No |
+| Automation rules | Yes | Yes |
 
 ### Create a single-run queue
 
@@ -103,7 +103,7 @@ Because of these settings, the number of items visible to each reviewer can diff
 
 There are several ways to populate a single-run queue with items:
 
-* **From the Details view**: In a [tracing project](observability-concepts.md#projects), click into any row to open the side panel in the [Details view](view-traces.md#details-view). The panel offers two actions, each with a fixed scope:
+* **From the Details view**: In a [tracing project](observability-concepts.md#tracing-projects) or agent environment, click into any row to open the side panel in the [Details view](view-traces.md#details-view). The panel offers two actions, each with a fixed scope:
 
   * **Add to** : In the run header, open this menu and select **Add to Annotation Queue**. This adds the run you have selected as a run item.
   * **Add thread to annotation queue** : Next to the **Trajectory**, **Turns**, and **Details** tabs, click the icon. This adds the whole thread as a thread item.
@@ -117,13 +117,13 @@ There are several ways to populate a single-run queue with items:
 > [!NOTE]
 >   The thread action appears only for runs instrumented with `thread_id` / `session_id` metadata. Without that metadata, the panel opens the run on its own and only the run action is available.
 
-* **From the Traces or Runs tab**: In a tracing project, select either the **Traces** or **Runs** tab. Use the row checkboxes to select one or more items. Click **Add to Annotation Queue** at the bottom of the page. Use **What to add** to enqueue each selection as a **Selected run** or as its **Entire thread**.
+* **From the Traces or Runs tab**: In a tracing project or agent environment, select either the **Traces** or **Runs** tab. Use the row checkboxes to select one or more items. Click **Add to Annotation Queue** at the bottom of the page. Use **What to add** to enqueue each selection as a **Selected run** or as its **Entire thread**.
 
   <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/multi-select-annotation-queue-light.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=7a158b4656431ec3484955a282f7ab36" alt="View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page." width="1545" height="766" data-path="langsmith/images/multi-select-annotation-queue-light.png" />
 
   <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/multi-select-annotation-queue-dark.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=975379c9e076dc08866e42c7c330190f" alt="View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page." width="1547" height="767" data-path="langsmith/images/multi-select-annotation-queue-dark.png" />
 
-* **From the Threads tab**: In a tracing project, select the **Threads** tab. Use the row checkboxes to select one or more items. Click **Add to Annotation Queue** at the bottom of the page. Selected threads are added as thread items.
+* **From the Threads tab**: In a tracing project or agent environment, select the **Threads** tab. Use the row checkboxes to select one or more items. Click **Add to Annotation Queue** at the bottom of the page. Selected threads are added as thread items.
 
   <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/threads-tab-add-to-annotation-queue-light.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=afc074fae70055e8c5d6c86380fec8e0" alt="Threads tab with selected threads and the Add to Annotation Queue bulk action." width="1545" height="765" data-path="langsmith/images/threads-tab-add-to-annotation-queue-light.png" />
 

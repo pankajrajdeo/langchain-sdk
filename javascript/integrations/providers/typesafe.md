@@ -120,11 +120,11 @@ TypeSafe receives the state you submit, including message content and tool-call 
 
 Each question uses one of three [primitives](https://docs.typesafe.ai/primitives). Define questions as objects with a `type` of `"noul"`, `"choice"`, or `"score"`. The package does not export `Noul`, `Choice`, or `Score` constructors:
 
-| Primitive                                              | Asks                    | Returns                                                   | Reach for it when                                   |
-| ------------------------------------------------------ | ----------------------- | --------------------------------------------------------- | --------------------------------------------------- |
-| [`noul`](https://docs.typesafe.ai/primitives/noul)     | Is this true?           | `noul`, the probability of yes                            | Your code branches on an `if`                       |
-| [`choice`](https://docs.typesafe.ai/primitives/choice) | Which of these options? | `choice`, plus `probabilities` and `confidence`           | Options map to distinct code paths                  |
-| [`score`](https://docs.typesafe.ai/primitives/score)   | Which level?            | `score`, plus `legend`, `probabilities`, and `confidence` | The answer is a spectrum you compare to a threshold |
+| Primitive | Asks | Returns | Reach for it when |
+| - | - | - | - |
+| [`noul`](https://docs.typesafe.ai/primitives/noul) | Is this true? | `noul`, the probability of yes | Your code branches on an `if` |
+| [`choice`](https://docs.typesafe.ai/primitives/choice) | Which of these options? | `choice`, plus `probabilities` and `confidence` | Options map to distinct code paths |
+| [`score`](https://docs.typesafe.ai/primitives/score) | Which level? | `score`, plus `legend`, `probabilities`, and `confidence` | The answer is a spectrum you compare to a threshold |
 
 A `noul` answer has no `confidence` or `probabilities`. Use `score` rather than `noul` for a spectrum: a `noul` of `0.5` means an even split between yes and no, not "medium."
 

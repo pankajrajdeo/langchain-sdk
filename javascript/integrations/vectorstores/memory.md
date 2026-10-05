@@ -20,9 +20,9 @@ This guide provides a quick overview for getting started with `MemoryVectorStore
 
 ### Integration details
 
-| Class               | Package                                                | PY support |                                         Version                                        |
-| :------------------ | :----------------------------------------------------- | :--------: | :------------------------------------------------------------------------------------: |
-| `MemoryVectorStore` | [`langchain`](https://www.npmjs.com/package/langchain) |      ❌     | ![NPM - Version](https://img.shields.io/npm/v/langchain?style=flat-square\&label=%20&) |
+| Class | Package | PY support | Version |
+| :- | :- | :-: | :-: |
+| `MemoryVectorStore` | [`langchain`](https://www.npmjs.com/package/langchain) | ❌ | ![NPM - Version](https://img.shields.io/npm/v/langchain?style=flat-square\&label=%20&) |
 
 ## Setup
 

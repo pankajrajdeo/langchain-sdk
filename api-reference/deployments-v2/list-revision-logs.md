@@ -133,6 +133,7 @@ paths:
           schema:
             anyOf:
               - type: string
+                maxLength: 1000
               - type: 'null'
             title: Query
         - name: level
@@ -197,8 +198,7 @@ components:
       properties:
         logs:
           items:
-            additionalProperties: true
-            type: object
+            $ref: '#/components/schemas/DeploymentLogEntry'
           type: array
           title: Logs
           default: []
@@ -219,6 +219,68 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    DeploymentLogEntry:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Identifier of the log line, unique within the deployment.
+        timestamp:
+          type: integer
+          title: Timestamp
+          description: When the line was written, in Unix milliseconds.
+        message:
+          type: string
+          title: Message
+          description: The log message, including any exception text.
+        level:
+          type: string
+          title: Level
+          description: Severity, such as INFO or ERROR.
+        source:
+          anyOf:
+            - type: string
+              enum:
+                - API
+                - QUEUE
+                - BUILD
+                - PLATFORM
+            - type: 'null'
+          title: Source
+          description: >-
+            What wrote the line: the API server, a queue worker, the image
+            build, or the platform itself.
+        replica:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Replica
+          description: Name of the replica (pod) that wrote the line.
+        attributes:
+          anyOf:
+            - additionalProperties: true
+              type: object
+            - type: 'null'
+          title: Attributes
+          description: >-
+            Selected fields of a structured (JSON) log line, such as run_id,
+            thread_id and HTTP status. Limited to 8 KB per line.
+        has_truncated_attributes:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: Has Truncated Attributes
+          description: >-
+            Present and true when some attributes were left out to fit the
+            limits.
+      type: object
+      required:
+        - id
+        - timestamp
+        - message
+        - level
+      title: DeploymentLogEntry
+      description: One line of deployment build or server logs.
     ValidationError:
       properties:
         loc:

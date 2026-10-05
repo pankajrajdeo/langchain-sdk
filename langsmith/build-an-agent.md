@@ -1,0 +1,81 @@
+---
+title: "Build an agent in the UI"
+description: "How the Build tab configures an agent from a form, what each section of that form sets, and where the new agent's traces land."
+source: "https://docs.langchain.com/langsmith/build-an-agent"
+category: "docs"
+tags: [docs, langsmith, build-an-agent]
+---
+
+# Build an agent in the UI
+
+> How the Build tab configures an agent from a form, what each section of that form sets, and where the new agent's traces land.
+
+The **Build** tab creates an agent inside LangSmith instead of in code. You fill in a configuration form, and LangSmith creates a [no-code agent](fleet.md) from it when you submit. Nothing is created until you do.
+
+Use it when you want a working agent without a local project or a deployment. Everything it produces is an [agent](agents.md) like any other, so its traces, dashboards, and evaluators behave the same as one you instrumented yourself.
+
+> [!NOTE]
+> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+
+> [!NOTE]
+> Creating an agent here requires [computer use](fleet/computer-use.md), which is on the Plus and Enterprise plans. Without it the form still opens, and a banner says agent creation is unavailable.
+
+The **Build** tab appears only in an agent-based workspace. To build an agent from files on your own machine instead, see [Managed Deep Agents](python/managed-deep-agents-overview.md).
+
+## Create the agent
+
+To create an agent:
+
+1. In the left navigation, click **Build**. With no agent selected, Build asks you to pick one and offers **+ New agent** below the list. That list holds only agents built here, so an agent you traced from code does not appear in it.
+2. Fill in the [configuration sections](#configure-the-agent). A line under the form's title reads **Nothing is created until you click Create Agent.**
+3. Click **Create Agent**.
+
+LangSmith creates the agent, then finishes the rest of the setup, such as connecting accounts and registering schedules. A dialog reports what landed and offers **Go to Studio** to test the agent.
+
+**Cancel** leaves without creating anything and returns to the list of agents.
+
+If part of the setup does not finish, the form reports which part and offers **Retry unfinished changes**, so a second attempt does not create a second agent.
+
+**+ Agent** above the agent list also reaches this form. It opens the **New Agent** panel, whose **Builder** option, "Build and configure inside LangSmith", opens this tab on a blank form. For the panel's other three options, see [Create an agent](create-an-agent.md).
+
+## Configure the agent
+
+The form is one page of collapsible sections. Every section starts open, and the browser remembers which sections you collapse.
+
+* **Basics**: The agent's **Name**, a **Description** of what the agent does, and the **Model** that powers its responses. The name is required, and it is the label you see in the agent switcher. The model is required when you create the agent.
+* **Instructions**: **Agent instructions**, covering the agent's role, its responsibilities, and how it should work. LangSmith saves this exactly as entered.
+* **Tools and accounts**: The connections the agent uses for its tools, added with **Add connection**. On a new agent, the accounts are granted when you create it, and adding a workspace connection starts its authorization flow right away. For whose credentials the agent uses, see [Agent identity](fleet/agent-identity.md).
+* **Skills and memory**: The [skills](fleet/skills.md) the agent pulls in for specific tasks, and the memory files it keeps between runs. **Update memory and instructions** lets the agent revise its own configuration, either applied automatically or held for your approval.
+* **Channels**: Whether the agent works in Slack. On a new agent, you authorize Slack after you create the agent. On an existing agent, connecting or removing Slack takes effect right away. Where Slack setup is unavailable in the workspace, the section says so.
+* **Schedules**: The [scheduled runs](fleet/schedules.md) the agent makes on its own.
+
+Once the agent exists, the state line under the title reads **Unsaved changes** or **All changes saved**.
+
+## Change the configuration later
+
+Select the agent in Build to reopen its configuration, now headed **Agent configuration**. Edit any section and click **Save changes**.
+
+Without edit access on the agent, the form opens **View only**. Renaming needs permission to update the agent's tracing projects, and the **Name** field says so when you lack it.
+
+## Find the traces
+
+An agent built here is created with a **Production** [environment](agent-environments.md) alone, and its runs land there. It gains other environments only when something reports into them.
+
+To see its environments, select the agent and open **Tracing**, or read the summary on the [agent Overview](navigate-agents.md#read-the-agent-overview).
+
+An agent built in the UI has no deployment, because it runs on a Studio runtime instead of one you deployed. It has no **Deployments** section on its Overview, and no deployment can be created for it, so the [agent environment deploy flags](deploy-to-agent-environment.md) do not apply to it. The workspace's other deployments are hidden while that agent is selected.
+
+## See also
+
+* [Agents](agents.md)
+* [Navigate agents](navigate-agents.md)
+* [No-code agents](fleet.md)
+* [Agent environments](agent-environments.md)
+
+***
+
+> [!NOTE]
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/build-an-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

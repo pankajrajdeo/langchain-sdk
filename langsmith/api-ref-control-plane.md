@@ -1,12 +1,14 @@
 ---
 title: "Control plane API reference for LangSmith Deployment"
-description: "The control plane API is part of LangSmith Deployment. With the control plane API, you can programmatically create, manage, and automate your Agent Server deployments—for example, as part of a custom..."
+description: "Use the control plane API to programmatically create, manage, and automate Agent Server deployments in LangSmith Deployment."
 source: "https://docs.langchain.com/langsmith/api-ref-control-plane"
 category: "docs"
 tags: [docs, langsmith, api-ref-control-plane]
 ---
 
 # Control plane API reference for LangSmith Deployment
+
+> Use the control plane API to programmatically create, manage, and automate Agent Server deployments in LangSmith Deployment.
 
 The control plane API is part of [LangSmith Deployment](deployment.md). With the control plane API, you can programmatically create, manage, and automate your [Agent Server](agent-server.md) deployments—for example, as part of a custom CI/CD workflow.
 

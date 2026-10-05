@@ -59,7 +59,7 @@ There are 2 namespaces in the `langchain-tests` package:
 
 Designed to test the component in isolation and without access to external services
 
-[View API reference](https://reference.langchain.com/python/langchain_tests/unit_tests)
+[View API reference](https://reference.langchain.com/python/langchain-tests/unit_tests)
 
 </details>
 
@@ -70,7 +70,7 @@ Designed to test the component in isolation and without access to external servi
 
 Designed to test the component with access to external services (in particular, the external service that the component is designed to interact with)
 
-[View API reference](https://reference.langchain.com/python/langchain_tests/integration_tests)
+[View API reference](https://reference.langchain.com/python/langchain-tests/integration_tests)
 
 </details>
 

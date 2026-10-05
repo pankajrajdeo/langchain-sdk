@@ -24,15 +24,15 @@ For a list of all Groq models, visit their [docs](https://console.groq.com/docs/
 
 ### Integration details
 
-| Class                                                                                    | Package                                                                    | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/groq) |                                            Downloads                                            |                                            Version                                           |
-| :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------- | :----------: | :----------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
-| [`ChatGroq`](https://reference.langchain.com/python/langchain-groq/chat_models/ChatGroq) | [`langchain-groq`](https://reference.langchain.com/python/langchain-groq/) |     beta     |                                  ✅                                 | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-groq?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-groq?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/groq) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatGroq`](https://reference.langchain.com/python/langchain-groq/chat_models/ChatGroq) | [`langchain-groq`](https://reference.langchain.com/python/langchain-groq/) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-groq?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-groq?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                                  ✅                                  |       ✅      |                            ✅                            |                              ✅                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
 
 ## Setup
 

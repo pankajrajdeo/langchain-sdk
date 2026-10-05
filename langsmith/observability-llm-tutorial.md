@@ -59,7 +59,7 @@ export LANGSMITH_API_KEY="<your-api-key>"
 export OPENAI_API_KEY="<your-openai-api-key>"
 ```
 
-To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](log-traces-to-project.md). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion.
+To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](log-traces-to-project.md). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion. In an [agent-based workspace](agents.md), the first trace to a new project name, including the default project, creates an agent named after the project, with the project as its **Production** [environment](agent-environments.md). The agent's identifier is derived from the project name, so it can differ from the project name, and creating the agent requires permission to create projects. To name the agent and the environment directly instead, see [Log traces to an agent](log-traces-to-agent.md).
 
 > [!NOTE]
 > You may see these variables referenced as `LANGCHAIN_*` in other places. Both work, but `LANGSMITH_TRACING` and `LANGSMITH_API_KEY` are the recommended names.
@@ -476,7 +476,7 @@ With strong observability in place, you can confidently ship to production. In p
 
 ### Monitoring
 
-In the UI sidebar, select **Monitoring**, then choose a tracing project from the dropdown at the top left. Charts display key metrics for the project over time, including trace count, latency, error rate, feedback scores, and costs. For more on available metrics and chart configuration, refer to [Dashboards](dashboards.md).
+In the UI sidebar, select **Monitoring**, then choose a tracing project from the dropdown at the top left. In an [agent-based workspace](agents.md), **Monitoring** requires an agent, and the dropdown lists one dashboard per [environment](agent-environments.md) under **Environments**. Charts display key metrics for the project over time, including trace count, latency, error rate, feedback scores, and costs. For more on available metrics and chart configuration, refer to [Dashboards](dashboards.md).
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/monitoring-page-light.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=43b082b4db51b58f74d98d4d99f747cc" alt="LangSmith UI showing the monitoring page with the trace count chart and available tabs." width="2856" height="1450" data-path="langsmith/images/monitoring-page-light.png" />
 

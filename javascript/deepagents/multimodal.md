@@ -41,12 +41,12 @@ The harness `read_file` tool returns [standard content blocks](../langchain/mess
 <details>
 <summary>Supported multimodal file extensions</summary>
 
-| Type                                                   | Extensions                                                                |
-| ------------------------------------------------------ | ------------------------------------------------------------------------- |
-| [Image](../langchain/messages.md#multimodal) | `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.heic`, `.heif`                |
+| Type | Extensions |
+| - | - |
+| [Image](../langchain/messages.md#multimodal) | `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.heic`, `.heif` |
 | [Video](../langchain/messages.md#multimodal) | `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`, `.3gpp` |
-| [Audio](../langchain/messages.md#multimodal) | `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac`                          |
-| [File](../langchain/messages.md#multimodal)  | `.pdf`, `.ppt`, `.pptx`                                                   |
+| [Audio](../langchain/messages.md#multimodal) | `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac` |
+| [File](../langchain/messages.md#multimodal) | `.pdf`, `.ppt`, `.pptx` |
 
 </details>
 

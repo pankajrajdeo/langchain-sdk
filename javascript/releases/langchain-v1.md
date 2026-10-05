@@ -123,14 +123,14 @@ You can also build custom middleware to fit your specific needs.
 
 Build custom middleware by implementing any of these hooks using the `createMiddleware` function:
 
-| Hook            | When it runs             | Use cases                               |
-| --------------- | ------------------------ | --------------------------------------- |
-| `beforeAgent`   | Before calling the agent | Load memory, validate input             |
-| `beforeModel`   | Before each LLM call     | Update prompts, trim messages           |
-| `wrapModelCall` | Around each LLM call     | Intercept and modify requests/responses |
-| `wrapToolCall`  | Around each tool call    | Intercept and modify tool execution     |
-| `afterModel`    | After each LLM response  | Validate output, apply guardrails       |
-| `afterAgent`    | After agent completes    | Save results, cleanup                   |
+| Hook | When it runs | Use cases |
+| - | - | - |
+| `beforeAgent` | Before calling the agent | Load memory, validate input |
+| `beforeModel` | Before each LLM call | Update prompts, trim messages |
+| `wrapModelCall` | Around each LLM call | Intercept and modify requests/responses |
+| `wrapToolCall` | Around each tool call | Intercept and modify tool execution |
+| `afterModel` | After each LLM response | Validate output, apply guardrails |
+| `afterAgent` | After agent completes | Save results, cleanup |
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max&auto=format&n=RAP6mjwE5G00xYsA&q=85&s=eb4404b137edec6f6f0c8ccb8323eaf1" alt="Middleware flow diagram" width="500" height="560" data-path="oss/images/middleware_final.png" />
 

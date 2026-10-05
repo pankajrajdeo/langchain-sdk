@@ -20,4 +20,4 @@ subagent_type: str = Field(description='The type of subagent to use. Must be one
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/subagents.py#L435)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/subagents.py#L435)

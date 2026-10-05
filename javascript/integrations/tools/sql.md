@@ -10,16 +10,16 @@ tags: [docs, javascript, integrations, tools, sql]
 
 > Integrate with the SQLToolkit tool using LangChain JavaScript.
 
-This will help you getting started with `SqlToolkit` [toolkits](../../langchain/tools.md#prebuilt-tools). For more information, you can also review the [Python SQL toolkit documentation](https://reference.langchain.com/python/langchain_community/agent_toolkits/langchain_community.agent_toolkits.sql.toolkit.SQLDatabaseToolkit).
+This will help you getting started with `SqlToolkit` [toolkits](../../langchain/tools.md#prebuilt-tools). For more information, you can also review the Python [`SQLDatabaseToolkit`](https://github.com/langchain-ai/langchain-community/blob/main/libs/community/langchain_community/agent_toolkits/sql/toolkit.py).
 
 This toolkit contains a the following tools:
 
-| Name              | Description                                                                                                                                                                                                                               |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `query-sql`       | Input to this tool is a detailed and correct SQL query, output is a result from the database. If the query is not correct, an error message will be returned. If an error is returned, rewrite the query, check the query, and try again. |
-| `info-sql`        | Input to this tool is a comma-separated list of tables, output is the schema and sample rows for those tables. Be sure that the tables actually exist by calling list-tables-sql first! Example Input: "table1, table2, table3".          |
-| `list-tables-sql` | Input is an empty string, output is a comma-separated list of tables in the database.                                                                                                                                                     |
-| `query-checker`   | Use this tool to double check if your query is correct before executing it. Always use this tool before executing a query with query-sql!                                                                                                 |
+| Name | Description |
+| - | - |
+| `query-sql` | Input to this tool is a detailed and correct SQL query, output is a result from the database. If the query is not correct, an error message will be returned. If an error is returned, rewrite the query, check the query, and try again. |
+| `info-sql` | Input to this tool is a comma-separated list of tables, output is the schema and sample rows for those tables. Be sure that the tables actually exist by calling list-tables-sql first! Example Input: "table1, table2, table3". |
+| `list-tables-sql` | Input is an empty string, output is a comma-separated list of tables in the database. |
+| `query-checker` | Use this tool to double check if your query is correct before executing it. Always use this tool before executing a query with query-sql! |
 
 This toolkit is useful for asking questions, performing queries, validating queries and more on a SQL database.
 

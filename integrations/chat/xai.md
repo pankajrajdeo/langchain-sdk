@@ -24,15 +24,15 @@ tags: [docs, integrations, chat, xai]
 
 ### Integration details
 
-| Class                                                                                 | Package                                                                  | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/xai) |                                            Downloads                                           |                                           Version                                           |
-| :------------------------------------------------------------------------------------ | :----------------------------------------------------------------------- | :----------: | :---------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`ChatXAI`](https://reference.langchain.com/python/langchain-xai/chat_models/ChatXAI) | [`langchain-xai`](https://reference.langchain.com/python/langchain-xai/) |     beta     |                                 ✅                                 | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-xai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-xai?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/xai) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatXAI`](https://reference.langchain.com/python/langchain-xai/chat_models/ChatXAI) | [`langchain-xai`](https://reference.langchain.com/python/langchain-xai/) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-xai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-xai?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                                  ✅                                  |       ❌      |                            ✅                            |                              ✅                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ |
 
 ## Setup
 
@@ -193,7 +193,7 @@ model.profile["reasoning_effort_levels"]  # e.g. ['low', 'medium', 'high']
 
 ## API reference
 
-For detailed documentation of all `ChatXAI` features and configurations, head to the [API reference](https://reference.langchain.com/python/integrations/langchain_xai/).
+For detailed documentation of all `ChatXAI` features and configurations, head to the [API reference](https://reference.langchain.com/python/langchain-xai).
 
 ***
 

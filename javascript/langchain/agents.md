@@ -1,12 +1,14 @@
 ---
 title: "Agents"
-description: "An agent is a model calling tools in a loop until a given task is complete."
+description: "Build a LangChain agent: a model calling tools in a loop until a task is complete, shaped by a harness of prompt, tools, and middleware."
 source: "https://docs.langchain.com/oss/javascript/langchain/agents"
 category: "docs"
 tags: [docs, javascript, langchain, agents]
 ---
 
 # Agents
+
+> Build a LangChain agent: a model calling tools in a loop until a task is complete, shaped by a harness of prompt, tools, and middleware.
 
 An agent is a model calling tools in a loop until a given task is complete.
 
@@ -451,8 +453,8 @@ Every agent manages its execution context through an `AgentState` object that ho
 
 The built-in field is:
 
-| Field      | Type            | Description                                                                                                |
-| ---------- | --------------- | ---------------------------------------------------------------------------------------------------------- |
+| Field | Type | Description |
+| - | - | - |
 | `messages` | `BaseMessage[]` | The full conversation history for the current thread. Append-only: new messages are added, never replaced. |
 
 `AgentState` is also the type passed to every node-style middleware hook (`beforeModel`, `afterModel`, and similar). Hooks receive the current state and can return an object of updates to merge back into it.

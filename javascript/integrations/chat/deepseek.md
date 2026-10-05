@@ -16,17 +16,17 @@ This will help you getting started with `ChatDeepSeek` [chat models](../../langc
 
 ### Integration details
 
-| Class                                                                                        | Package                                                        | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/deepseek) |                                                      Downloads                                                     |                                                     Version                                                     |
-| :------------------------------------------------------------------------------------------- | :------------------------------------------------------------- | :----------: | :------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: |
-| [`ChatDeepSeek`](https://reference.langchain.com/javascript/langchain-deepseek/ChatDeepSeek) | [`@langchain/deepseek`](https://npmjs.com/@langchain/deepseek) |     beta     |                                      ✅                                     | <img src="https://img.shields.io/npm/dm/@langchain/deepseek?style=flat-square&label=%20&" alt="NPM - Downloads" /> | <img src="https://img.shields.io/npm/v/@langchain/deepseek?style=flat-square&label=%20&" alt="NPM - Version" /> |
+| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/deepseek) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatDeepSeek`](https://reference.langchain.com/javascript/langchain-deepseek/ChatDeepSeek) | [`@langchain/deepseek`](https://npmjs.com/@langchain/deepseek) | beta | ✅ | <img src="https://img.shields.io/npm/dm/@langchain/deepseek?style=flat-square&label=%20&" alt="NPM - Downloads" /> | <img src="https://img.shields.io/npm/v/@langchain/deepseek?style=flat-square&label=%20&" alt="NPM - Version" /> |
 
 ### Model features
 
 See the links in the table headers below for guides on how to use specific features.
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :---------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------: | :---------------------------------------------------------: | :------------------------------------------------------------: |
-|                        ✅                        |                                 ✅                                |                               ❌                              |      ❌      |      ❌      |                               ✅                               |                              ✅                              |                                ✅                               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 Note that as of 1/27/25, tool calling and structured output are not currently supported for `deepseek-reasoner`.
 

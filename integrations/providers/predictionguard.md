@@ -36,11 +36,11 @@ uv add langchain-predictionguard
 
 ## Prediction guard LangChain integrations
 
-| API            | Description             | Endpoint Docs                                                                           | Import                                                            | Example Usage                                                                                         |
-| -------------- | ----------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Chat           | Build Chat Bots         | [Chat](https://docs.predictionguard.com/api-reference/api-reference/chat-completions)   | `from langchain_predictionguard import ChatPredictionGuard`       | [`langchain-predictionguard`](https://github.com/predictionguard/langchain-predictionguard)           |
-| Completions    | Generate Text           | [Completions](https://docs.predictionguard.com/api-reference/api-reference/completions) | `from langchain_predictionguard import PredictionGuard`           | [PredictionGuard.ipynb](../llms/predictionguard.md)                                |
-| Text Embedding | Embed String to Vectors | [Embeddings](https://docs.predictionguard.com/api-reference/api-reference/embeddings)   | `from langchain_predictionguard import PredictionGuardEmbeddings` | [PredictionGuard embeddings](https://docs.predictionguard.com/api-reference/api-reference/embeddings) |
+| API | Description | Endpoint Docs | Import | Example Usage |
+| - | - | - | - | - |
+| Chat | Build Chat Bots | [Chat](https://docs.predictionguard.com/api-reference/api-reference/chat-completions) | `from langchain_predictionguard import ChatPredictionGuard` | [`langchain-predictionguard`](https://github.com/predictionguard/langchain-predictionguard) |
+| Completions | Generate Text | [Completions](https://docs.predictionguard.com/api-reference/api-reference/completions) | `from langchain_predictionguard import PredictionGuard` | [PredictionGuard.ipynb](../llms/predictionguard.md) |
+| Text Embedding | Embed String to Vectors | [Embeddings](https://docs.predictionguard.com/api-reference/api-reference/embeddings) | `from langchain_predictionguard import PredictionGuardEmbeddings` | [PredictionGuard embeddings](https://docs.predictionguard.com/api-reference/api-reference/embeddings) |
 
 ## Getting started
 

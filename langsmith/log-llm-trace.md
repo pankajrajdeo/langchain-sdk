@@ -12,12 +12,12 @@ When you call an LLM directly, outside of [LangChain](../langchain/overview.md) 
 
 There are four requirements for a fully functional LLM trace:
 
-| Requirement                                                     | What to do                                         | Enables                                          |
-| --------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------ |
-| 1. Set [`run_type="llm"`](run-data-format.md#run-types) | Pass `run_type="llm"` to `@traceable`              | LLM-specific rendering, token/cost display       |
-| 2. Format inputs/outputs                                        | Use OpenAI, Anthropic, or LangChain message format | Structured message rendering, Playground support |
-| 3. Set `ls_provider` and `ls_model_name`                        | Pass both in `metadata`                            | Cost tracking, Playground model selection        |
-| 4. Provide token counts                                         | Set `usage_metadata` on the run                    | Token counts and cost calculation                |
+| Requirement | What to do | Enables |
+| - | - | - |
+| 1. Set [`run_type="llm"`](run-data-format.md#run-types) | Pass `run_type="llm"` to `@traceable` | LLM-specific rendering, token/cost display |
+| 2. Format inputs/outputs | Use OpenAI, Anthropic, or LangChain message format | Structured message rendering, Playground support |
+| 3. Set `ls_provider` and `ls_model_name` | Pass both in `metadata` | Cost tracking, Playground model selection |
+| 4. Provide token counts | Set `usage_metadata` on the run | Token counts and cost calculation |
 
 > [!NOTE]
 > If you are using LangChain OSS, the [OpenAI wrapper](trace-openai.md), or the [Anthropic wrapper](trace-anthropic.md), these details are handled automatically.
@@ -514,13 +514,13 @@ Token counts enable cost calculation, which LangSmith displays in the [Tracing P
 
 ### Supported `usage_metadata` fields
 
-| Field                  | Type     | Description                                                                                                                                           |
-| ---------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `input_tokens`         | `int`    | Total input/prompt tokens                                                                                                                             |
-| `output_tokens`        | `int`    | Total output/completion tokens                                                                                                                        |
-| `total_tokens`         | `int`    | Sum of input + output (optional, can be inferred)                                                                                                     |
-| `input_token_details`  | `object` | Breakdown: `cache_read`, `cache_creation`, `cache_read_over_200k`, `ephemeral_5m_input_tokens`, `ephemeral_1h_input_tokens`, `audio`, `text`, `image` |
-| `output_token_details` | `object` | Breakdown: `reasoning`, `audio`, `text`, `image`                                                                                                      |
+| Field | Type | Description |
+| - | - | - |
+| `input_tokens` | `int` | Total input/prompt tokens |
+| `output_tokens` | `int` | Total output/completion tokens |
+| `total_tokens` | `int` | Sum of input + output (optional, can be inferred) |
+| `input_token_details` | `object` | Breakdown: `cache_read`, `cache_creation`, `cache_read_over_200k`, `ephemeral_5m_input_tokens`, `ephemeral_1h_input_tokens`, `audio`, `text`, `image` |
+| `output_token_details` | `object` | Breakdown: `reasoning`, `audio`, `text`, `image` |
 
 To send costs directly (for non-linear pricing), you can also include `input_cost`, `output_cost`, and `total_cost` fields. For details on configuring model pricing and viewing costs in the UI, refer to the [Cost tracking](cost-tracking.md) page.
 

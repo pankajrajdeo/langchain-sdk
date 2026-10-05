@@ -26,10 +26,10 @@ This combines the convenience of a managed interface with the flexibility of run
 > [!NOTE]
 > Learn more about the [control plane](control-plane.md), [data plane](data-plane.md), and [Agent Server](agent-server.md) architecture concepts.
 
-| Component                                                                                                | Responsibilities                                                                                                                                    | Where it runs     | Who manages it |
-| -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | -------------- |
-| Control plane               | <ul><li>UI for creating deployments and revisions</li><li>APIs for managing deployments</li><li>Observability data storage</li></ul>                | LangChain's cloud | LangChain      |
-| Data plane | <ul><li>Operator/listener to reconcile deployments</li><li>Agent Servers (agents/graphs)</li><li>Backing services (Postgres, Redis, etc.)</li></ul> | Your cloud        | You            |
+| Component | Responsibilities | Where it runs | Who manages it |
+| - | - | - | - |
+| Control plane | <ul><li>UI for creating deployments and revisions</li><li>APIs for managing deployments</li><li>Observability data storage</li></ul> | LangChain's cloud | LangChain |
+| Data plane | <ul><li>Operator/listener to reconcile deployments</li><li>Agent Servers (agents/graphs)</li><li>Backing services (Postgres, Redis, etc.)</li></ul> | Your cloud | You |
 
 When running LangSmith in a hybrid model, you authenticate with a [LangSmith API key](create-account-api-key.md).
 

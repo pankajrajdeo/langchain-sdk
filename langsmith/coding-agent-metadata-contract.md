@@ -18,50 +18,50 @@ Coding agent integrations use this schema to ensure their traces are consistentl
 
 The following integrations implement this schema:
 
-| Integration                                            | `ls_integration` value |
-| ------------------------------------------------------ | ---------------------- |
-| [Claude Code](trace-claude-code.md)            | `claude-code`          |
-| [OpenAI Codex](trace-with-codex.md)            | `openai-codex`         |
-| [Deep Agents](trace-deep-agents.md)            | `deepagents-code`      |
-| [Cursor](trace-with-cursor.md)                 | `cursor`               |
-| [Pi](trace-with-pi.md)                         | `pi`                   |
-| [Opencode](trace-with-opencode.md)             | `opencode`             |
-| [GitHub Copilot](trace-with-vscode-copilot.md) | `copilot`              |
+| Integration | `ls_integration` value |
+| - | - |
+| [Claude Code](trace-claude-code.md) | `claude-code` |
+| [OpenAI Codex](trace-with-codex.md) | `openai-codex` |
+| [Deep Agents](trace-deep-agents.md) | `deepagents-code` |
+| [Cursor](trace-with-cursor.md) | `cursor` |
+| [Pi](trace-with-pi.md) | `pi` |
+| [Opencode](trace-with-opencode.md) | `opencode` |
+| [GitHub Copilot](trace-with-vscode-copilot.md) | `copilot` |
 
 ## Global identity block
 
 Every run type must include the following identity fields in its metadata:
 
-| Field                     | Description                                                                                                  |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `ls_agent_type`           | The run's type within the agent. Should be one of `"root"`, `"subagent"`, `"middleware"`, or `"compaction"`. |
-| `ls_agent_purpose`        | High-level purpose of the agent, for example `"coding"`.                                                     |
-| `ls_integration`          | Identifier of the integration emitting the run (see [Supported integrations](#supported-integrations)).      |
-| `ls_agent_runtime`        | Human-readable runtime name, for example `"Claude Code 1.0.28"`.                                             |
-| `thread_id`               | Stable identifier for the conversation thread. Used to group related runs in LangSmith's Threads view.       |
-| `ls_trace_schema_version` | Currently `"coding-agent-v1"`.                                                                               |
+| Field | Description |
+| - | - |
+| `ls_agent_type` | The run's type within the agent. Should be one of `"root"`, `"subagent"`, `"middleware"`, or `"compaction"`. |
+| `ls_agent_purpose` | High-level purpose of the agent, for example `"coding"`. |
+| `ls_integration` | Identifier of the integration emitting the run (see [Supported integrations](#supported-integrations)). |
+| `ls_agent_runtime` | Human-readable runtime name, for example `"Claude Code 1.0.28"`. |
+| `thread_id` | Stable identifier for the conversation thread. Used to group related runs in LangSmith's Threads view. |
+| `ls_trace_schema_version` | Currently `"coding-agent-v1"`. |
 
 ## Availability tiers
 
 Fields in this schema are marked with one of three availability tiers:
 
-| Tier             | Meaning                                                                                                                  |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **always**       | Must be present on every run.                                                                                            |
+| Tier | Meaning |
+| - | - |
+| **always** | Must be present on every run. |
 | **where\_known** | Required whenever the runtime can expose the value. Omit only when the runtime genuinely cannot provide the information. |
-| **contextual**   | Optional metadata. Omit when not applicable.                                                                             |
+| **contextual** | Optional metadata. Omit when not applicable. |
 
 ## Run types
 
 This schema distinguishes five run types. Some fields apply only to a subset of run types.
 
-| Run type      | Description                                                  |
-| ------------- | ------------------------------------------------------------ |
-| `root`        | The top-level run representing a full agent turn or session. |
-| `llm`         | A language model call within a turn.                         |
-| `tool`        | A tool invocation within a turn.                             |
-| `subagent`    | A nested or delegated agent run.                             |
-| `interrupted` | A run that was interrupted before completion.                |
+| Run type | Description |
+| - | - |
+| `root` | The top-level run representing a full agent turn or session. |
+| `llm` | A language model call within a turn. |
+| `tool` | A tool invocation within a turn. |
+| `subagent` | A nested or delegated agent run. |
+| `interrupted` | A run that was interrupted before completion. |
 
 ## Required fields by run type
 
@@ -71,32 +71,32 @@ The [global identity block](#global-identity-block) fields are **always** requir
 
 Additional fields required on all run types:
 
-| Field               | Tier          | Description                                                   |
-| ------------------- | ------------- | ------------------------------------------------------------- |
-| `ls_agent_version`  | `where_known` | Version string for the agent runtime, for example `"1.0.28"`. |
-| `git_branch`        | `where_known` | Active Git branch in the repository being edited.             |
-| `git_commit_sha`    | `where_known` | Full SHA of the current Git commit.                           |
-| `git_repo_url`      | `where_known` | Remote URL of the repository.                                 |
-| `working_directory` | `where_known` | Absolute path of the working directory.                       |
+| Field | Tier | Description |
+| - | - | - |
+| `ls_agent_version` | `where_known` | Version string for the agent runtime, for example `"1.0.28"`. |
+| `git_branch` | `where_known` | Active Git branch in the repository being edited. |
+| `git_commit_sha` | `where_known` | Full SHA of the current Git commit. |
+| `git_repo_url` | `where_known` | Remote URL of the repository. |
+| `working_directory` | `where_known` | Absolute path of the working directory. |
 
 ### `llm` runs
 
-| Field           | Tier          | Description                                        |
-| --------------- | ------------- | -------------------------------------------------- |
+| Field | Tier | Description |
+| - | - | - |
 | `ls_model_name` | `where_known` | Model identifier, for example `"claude-opus-4-5"`. |
-| `ls_provider`   | `where_known` | Model provider, for example `"anthropic"`.         |
+| `ls_provider` | `where_known` | Model provider, for example `"anthropic"`. |
 
 ### `tool` runs
 
-| Field          | Tier     | Description                                                     |
-| -------------- | -------- | --------------------------------------------------------------- |
+| Field | Tier | Description |
+| - | - | - |
 | `ls_tool_name` | `always` | Name of the tool invoked, for example `"bash"` or `"computer"`. |
 
 ### `subagent` runs
 
-| Field              | Tier     | Description                                               |
-| ------------------ | -------- | --------------------------------------------------------- |
-| `ls_subagent_id`   | `always` | Stable identifier for the subagent.                       |
+| Field | Tier | Description |
+| - | - | - |
+| `ls_subagent_id` | `always` | Stable identifier for the subagent. |
 | `ls_subagent_type` | `always` | Type or role of the subagent, for example `"researcher"`. |
 
 ### `interrupted` runs

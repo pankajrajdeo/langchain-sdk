@@ -93,17 +93,17 @@ await sandbox.close();
 
 ## Configuration
 
-| Option             | Type                     | Default        | Description                                                                   |
-| ------------------ | ------------------------ | -------------- | ----------------------------------------------------------------------------- |
-| `language`         | `string`                 | `"typescript"` | Primary language runtime. Options: `"typescript" \| "python" \| "javascript"` |
-| `timeout`          | `number`                 | `300`          | Command timeout in seconds                                                    |
-| `target`           | `string`                 | `"us"`         | Region. Options: `"us" \| "eu"`                                               |
-| `image`            | `string`                 | -              | Custom Docker image (e.g., `"node:20"`, `"python:3.12"`)                      |
-| `snapshot`         | `string`                 | -              | Snapshot name (cannot be used with `image`)                                   |
-| `resources`        | `object`                 | -              | CPU, memory, disk allocation (requires `image`)                               |
-| `autoStopInterval` | `number`                 | `15`           | Auto-stop after N minutes idle (0 to disable)                                 |
-| `labels`           | `Record<string, string>` | -              | Custom labels for organizing sandboxes                                        |
-| `initialFiles`     | `Record<string, string>` | -              | Files to create on startup                                                    |
+| Option | Type | Default | Description |
+| - | - | - | - |
+| `language` | `string` | `"typescript"` | Primary language runtime. Options: `"typescript" \| "python" \| "javascript"` |
+| `timeout` | `number` | `300` | Command timeout in seconds |
+| `target` | `string` | `"us"` | Region. Options: `"us" \| "eu"` |
+| `image` | `string` | - | Custom Docker image (e.g., `"node:20"`, `"python:3.12"`) |
+| `snapshot` | `string` | - | Snapshot name (cannot be used with `image`) |
+| `resources` | `object` | - | CPU, memory, disk allocation (requires `image`) |
+| `autoStopInterval` | `number` | `15` | Auto-stop after N minutes idle (0 to disable) |
+| `labels` | `Record<string, string>` | - | Custom labels for organizing sandboxes |
+| `initialFiles` | `Record<string, string>` | - | Files to create on startup |
 
 ## Custom resources
 
@@ -123,10 +123,10 @@ const sandbox = await DaytonaSandbox.create({
 
 ## Available regions
 
-| Region | Location      |
-| ------ | ------------- |
-| `us`   | United States |
-| `eu`   | Europe        |
+| Region | Location |
+| - | - |
+| `us` | United States |
+| `eu` | Europe |
 
 ## Accessing the Daytona SDK
 
@@ -210,26 +210,26 @@ try {
 
 ### Error codes
 
-| Code                      | Description                                   |
-| ------------------------- | --------------------------------------------- |
-| `NOT_INITIALIZED`         | Sandbox not initialized - call `initialize()` |
-| `ALREADY_INITIALIZED`     | Cannot initialize twice                       |
-| `AUTHENTICATION_FAILED`   | Invalid or missing Daytona API key            |
-| `SANDBOX_CREATION_FAILED` | Failed to create sandbox                      |
-| `SANDBOX_NOT_FOUND`       | Sandbox ID not found or deleted               |
-| `SANDBOX_NOT_STARTED`     | Sandbox is not in started state               |
-| `COMMAND_TIMEOUT`         | Command execution timed out                   |
-| `COMMAND_FAILED`          | Command execution failed                      |
-| `FILE_OPERATION_FAILED`   | File read/write failed                        |
-| `RESOURCE_LIMIT_EXCEEDED` | CPU, memory, or storage limits exceeded       |
+| Code | Description |
+| - | - |
+| `NOT_INITIALIZED` | Sandbox not initialized - call `initialize()` |
+| `ALREADY_INITIALIZED` | Cannot initialize twice |
+| `AUTHENTICATION_FAILED` | Invalid or missing Daytona API key |
+| `SANDBOX_CREATION_FAILED` | Failed to create sandbox |
+| `SANDBOX_NOT_FOUND` | Sandbox ID not found or deleted |
+| `SANDBOX_NOT_STARTED` | Sandbox is not in started state |
+| `COMMAND_TIMEOUT` | Command execution timed out |
+| `COMMAND_FAILED` | Command execution failed |
+| `FILE_OPERATION_FAILED` | File read/write failed |
+| `RESOURCE_LIMIT_EXCEEDED` | CPU, memory, or storage limits exceeded |
 
 ## Environment variables
 
-| Variable          | Description                   |
-| ----------------- | ----------------------------- |
-| `DAYTONA_API_KEY` | Daytona API key (required)    |
-| `DAYTONA_API_URL` | Custom Daytona API URL        |
-| `DAYTONA_TARGET`  | Default target region (us/eu) |
+| Variable | Description |
+| - | - |
+| `DAYTONA_API_KEY` | Daytona API key (required) |
+| `DAYTONA_API_URL` | Custom Daytona API URL |
+| `DAYTONA_TARGET` | Default target region (us/eu) |
 
 ***
 

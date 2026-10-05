@@ -23,15 +23,15 @@ For a full list of available models, visit the [OpenRouter models page](https://
 
 ### Integration details
 
-| Class                                                                                        | Package                                                                                            | Serializable | JS/TS Support |                                                                                                      Downloads                                                                                                     |                                                                                                                     Latest Version                                                                                                                     |
-| :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- | :----------: | :-----------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ChatOpenRouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) | [`langchain-openrouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) |     beta     |       ❌       | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-openrouter/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-openrouter?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| Class | Package | Serializable | JS/TS Support | Downloads | Latest Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatOpenRouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) | [`langchain-openrouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) | beta | ❌ | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-openrouter/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-openrouter?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ## Setup
 
@@ -308,10 +308,10 @@ OpenRouter supports [multimodal inputs](../../langchain/messages.md#multimodal) 
 
 ### Supported input methods
 
-| Method             | Image | Audio | Video | PDF |
-| ------------------ | :---: | :---: | :---: | :-: |
-| HTTP/HTTPS URLs    |   ✅   |   ❌   |   ✅   |  ✅  |
-| Base64 inline data |   ✅   |   ✅   |   ✅   |  ✅  |
+| Method | Image | Audio | Video | PDF |
+| - | :-: | :-: | :-: | :-: |
+| HTTP/HTTPS URLs | ✅ | ❌ | ✅ | ✅ |
+| Base64 inline data | ✅ | ✅ | ✅ | ✅ |
 
 > [!NOTE]
 > Not all models support all modalities. Check the [OpenRouter models page](https://openrouter.ai/models) for model-specific support.

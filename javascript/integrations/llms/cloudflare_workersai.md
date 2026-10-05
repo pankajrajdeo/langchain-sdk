@@ -16,9 +16,9 @@ This will help you get started with Cloudflare Workers AI text completion models
 
 ### Integration details
 
-| Class                                                                                                        | Package                                                            | Local | Serializable | PY support |                                               Downloads                                               |                                               Version                                              |
-| :----------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------- | :---: | :----------: | :--------: | :---------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| [`CloudflareWorkersAI`](https://reference.langchain.com/javascript/langchain-cloudflare/CloudflareWorkersAI) | [`@langchain/cloudflare`](https://npmjs.com/@langchain/cloudflare) |   ❌   |       ✅      |      ❌     | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cloudflare?style=flat-square\&label=%20&) |
+| Class | Package | Local | Serializable | PY support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| [`CloudflareWorkersAI`](https://reference.langchain.com/javascript/langchain-cloudflare/CloudflareWorkersAI) | [`@langchain/cloudflare`](https://npmjs.com/@langchain/cloudflare) | ❌ | ✅ | ❌ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cloudflare?style=flat-square\&label=%20&) |
 
 ## Setup
 

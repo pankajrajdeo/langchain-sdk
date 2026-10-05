@@ -1,35 +1,37 @@
 ---
 title: "javascript/integrations"
-description: "Index of 16 pages and 19 subdirectories under javascript/integrations."
+description: "Index of 16 pages and 21 subdirectories under javascript/integrations."
 category: "index"
 tags: [index, javascript, integrations]
 ---
 
 # javascript/integrations
 
-16 pages here, 168 pages including subdirectories.
+16 pages here, 182 pages including subdirectories.
 
 ## Directories
 
 - [agents/](agents/_index.md) - 1 page
+- [backends/](backends/_index.md) - 1 page
 - [chains/](chains/_index.md) - 1 page
-- [chat/](chat/_index.md) - 23 pages
+- [chat/](chat/_index.md) - 24 pages
 - [document_compressors/](document_compressors/_index.md) - 2 pages
-- [document_loaders/](document_loaders/_index.md) - 11 pages
-- [document_transformers/](document_transformers/_index.md) - 1 page
-- [embeddings/](embeddings/_index.md) - 19 pages
+- [document_loaders/](document_loaders/_index.md) - 12 pages
+- [document_transformers/](document_transformers/_index.md) - 2 pages
+- [embeddings/](embeddings/_index.md) - 20 pages
 - [graphs/](graphs/_index.md) - 1 page
-- [llm_caching/](llm_caching/_index.md) - 1 page
-- [llms/](llms/_index.md) - 12 pages
+- [llm_caching/](llm_caching/_index.md) - 2 pages
+- [llms/](llms/_index.md) - 13 pages
 - [long-term-memory/](long-term-memory/_index.md) - 1 page
 - [memory/](memory/_index.md) - 2 pages
-- [middleware/](middleware/_index.md) - 2 pages
+- [middleware/](middleware/_index.md) - 3 pages
 - [providers/](providers/_index.md) - 16 pages
-- [retrievers/](retrievers/_index.md) - 8 pages
-- [splitters/](splitters/_index.md) - 4 pages
-- [stores/](stores/_index.md) - 2 pages
-- [tools/](tools/_index.md) - 28 pages
-- [vectorstores/](vectorstores/_index.md) - 17 pages
+- [retrievers/](retrievers/_index.md) - 9 pages
+- [sandboxes/](sandboxes/_index.md) - 1 page
+- [splitters/](splitters/_index.md) - 5 pages
+- [stores/](stores/_index.md) - 3 pages
+- [tools/](tools/_index.md) - 29 pages
+- [vectorstores/](vectorstores/_index.md) - 18 pages
 
 ## Files
 

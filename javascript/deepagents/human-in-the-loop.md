@@ -21,7 +21,6 @@ graph LR
     Human --> |approve| Execute
     Human --> |edit| Execute
     Human --> |reject| ToolMessage[ToolMessage]
-    Human --> |respond| ToolMessage
 
     Execute --> Agent
     ToolMessage --> Agent
@@ -41,8 +40,12 @@ graph LR
 
 The `interrupt_on` parameter accepts a dictionary mapping tool names to interrupt configurations. Each tool can be configured with:
 
-* **`True`**: Enable interrupts with default behavior (approve, edit, reject, respond allowed)
+* **`True`**: Enable interrupts with default behavior
+
+  (approve, edit, and reject allowed)
+
 * **`False`**: Disable interrupts for this tool
+
 * **`InterruptOnConfig`**: Custom configuration. Set `allowed_decisions` to control review options.
 
 ```ts
@@ -119,14 +122,13 @@ const agent = createDeepAgent({
 
 The `allowed_decisions` list controls what actions a human can take when reviewing a tool call:
 
-| Decision Type | Description                                                                                                     | Example Use Case                                  |
-| ------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| ✅ `approve`   | Execute the tool with the original arguments as proposed by the agent.                                          | Send an email draft exactly as written            |
-| ✏️ `edit`     | Modify the tool arguments before execution.                                                                     | Change the recipient before sending an email      |
-| ❌ `reject`    | Skip executing this tool call entirely and return rejection feedback to the agent.                              | Deny file deletion and explain why                |
-| 💬 `respond`  | Return the human's message directly as a synthetic tool result, skipping execution, for "ask user" style tools. | Answer an `"ask_user"` prompt with a direct reply |
+| Decision Type | Description | Example Use Case |
+| - | - | - |
+| ✅ `approve` | Execute the tool with the original arguments as proposed by the agent. | Send an email draft exactly as written |
+| ✏️ `edit` | Modify the tool arguments before execution. | Change the recipient before sending an email |
+| ❌ `reject` | Skip executing this tool call entirely and return rejection feedback to the agent. | Deny file deletion and explain why |
 
-Use `reject` when the human denies a proposed action. Use `respond` only when the human is acting as the tool, such as answering an `ask_user` prompt. Do not use `respond` to deny side-effecting tools, because its message may be treated by the model as a successful tool result.
+Use `reject` when the human denies a proposed action.
 
 > [!TIP]
 > When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
@@ -200,6 +202,75 @@ if (result.__interrupt__) {
 // Process final result
 console.log(result.messages[result.messages.length - 1].content);
 ```
+
+## Handle interrupts with streaming
+
+For real-time UIs, use `.stream()` instead of `.invoke()` to display tokens and tool call progress while handling HITL interrupts. Interrupts appear as `__interrupt__` entries in the `updates` stream. After the stream completes, collect human decisions and resume by streaming again with `Command(resume=...)`.
+
+> [!NOTE]
+> For a typical `interrupt_on` HITL pause, resume with a flat `{"decisions": [...]}` payload, the same shape as with `.invoke()`. When multiple interrupts are pending at once (for example, parallel branches), map each interrupt ID to its resume value instead. See [Handling multiple interrupts](../langgraph/interrupts.md#handling-multiple-interrupts).
+
+```typescript
+import { v7 as uuid7 } from "uuid";
+import { Command } from "@langchain/langgraph";
+
+const config = { configurable: { thread_id: uuid7() } };
+let streamInput: Record<string, any> | Command = {
+  messages: [{ role: "user", content: "Delete the file temp.txt" }],
+};
+
+while (true) {
+  let pendingInterrupt: { value: any } | undefined;
+
+  for await (const chunk of await agent.stream(  // [!code highlight]
+    streamInput,
+    {
+      streamMode: ["messages", "updates"],  // [!code highlight]
+      ...config,
+    }
+  )) {
+    const [mode, data] = chunk;
+
+    if (mode === "messages") {
+      const [token] = data;
+      // Display tokens in real time
+      if (token.text) {
+        process.stdout.write(token.text);
+      }
+    }
+
+    if (mode === "updates" && data?.__interrupt__) {  // [!code highlight]
+      pendingInterrupt = data.__interrupt__[0];  // [!code highlight]
+    }
+  }
+
+  // If no interrupt occurred, the agent finished
+  if (!pendingInterrupt) break;
+
+  const interruptValue = pendingInterrupt.value;
+  const actionRequests = interruptValue.actionRequests;
+  const reviewConfigs = interruptValue.reviewConfigs;
+  const configMap = Object.fromEntries(
+    reviewConfigs.map((cfg: any) => [cfg.actionName, cfg])
+  );
+
+  for (const action of actionRequests) {
+    const review = configMap[action.name];
+    console.log(`\nTool: ${action.name}`);
+    console.log(`Arguments: ${JSON.stringify(action.args)}`);
+    console.log(`Allowed: ${review.allowedDecisions}`);
+  }
+
+  // Collect one decision per actionRequest, in order
+  const decisions = actionRequests.map(() => ({ type: "approve" }));
+  streamInput = new Command({ resume: { decisions } });  // [!code highlight]
+}
+
+process.stdout.write("\n");
+```
+
+> [!TIP]
+> Combine `"messages"` and `"updates"` stream modes to show real-time LLM tokens to the user while still catching HITL interrupts. The `"messages"` mode streams tokens; the `"updates"` mode delivers interrupt payloads.
 
 ## Multiple tool calls
 
@@ -311,7 +382,9 @@ const agent = createDeepAgent({
 });
 ```
 
-When a subagent triggers an interrupt, the handling is the same—check for `interrupts` on the result and resume with `Command`.
+When a subagent triggers an interrupt, the handling is the same—check for `__interrupt__` on the result and resume with `Command`.
+
+When streaming, subagent interrupts also surface as `__interrupt__` entries in the parent `updates` stream. You do not need `subgraphs=True` for interrupt delivery. Enable `subgraphs=True` if you also want to stream subagent tokens and progress events. See [Handle interrupts with streaming](#handle-interrupts-with-streaming) for the full pattern.
 
 ### Interrupts within tool calls
 

@@ -213,6 +213,9 @@ components:
           type: string
         customer_info:
           $ref: '#/components/schemas/info.CustomerInfo'
+        engine_github_web_base_url:
+          type: string
+          format: uri
         git_sha:
           type: string
         instance_flags:

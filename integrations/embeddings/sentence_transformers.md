@@ -1,12 +1,12 @@
 ---
-title: "Sentence Transformers on Hugging Face integration"
+title: "HuggingFaceEmbeddings (Sentence Transformers) integration"
 description: "Integrate with Sentence Transformers embedding models using LangChain"
 source: "https://docs.langchain.com/oss/python/integrations/embeddings/sentence_transformers"
 category: "docs"
 tags: [docs, integrations, embeddings, sentence_transformers]
 ---
 
-# Sentence Transformers on Hugging Face integration
+# HuggingFaceEmbeddings (Sentence Transformers) integration
 
 > Integrate with Sentence Transformers embedding models using LangChain
 
@@ -40,14 +40,14 @@ doc_embeddings = embeddings.embed_documents(
 
 Start from the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard). Strong starting points across different tradeoffs:
 
-| Model                                     | Size | Notes                                                                         |
-| ----------------------------------------- | ---- | ----------------------------------------------------------------------------- |
-| `sentence-transformers/all-mpnet-base-v2` | 110M | Classic, small, CPU-friendly, no prompt required                              |
-| `BAAI/bge-m3`                             | 570M | Multilingual; produces dense, sparse, and multi-vector embeddings in one pass |
-| `mixedbread-ai/mxbai-embed-large-v1`      | 335M | Strong English performance, supports Matryoshka truncation                    |
-| `nomic-ai/modernbert-embed-base`          | 149M | 8192-token context, modern architecture                                       |
-| `lightonai/DenseOn`                       | 149M | modern architecture, strong performance for its size                          |
-| `Qwen/Qwen3-Embedding-0.6B`               | 595M | Multilingual, instruction-aware, top MTEB performance                         |
+| Model | Size | Notes |
+| - | - | - |
+| `sentence-transformers/all-mpnet-base-v2` | 110M | Classic, small, CPU-friendly, no prompt required |
+| `BAAI/bge-m3` | 570M | Multilingual; produces dense, sparse, and multi-vector embeddings in one pass |
+| `mixedbread-ai/mxbai-embed-large-v1` | 335M | Strong English performance, supports Matryoshka truncation |
+| `nomic-ai/modernbert-embed-base` | 149M | 8192-token context, modern architecture |
+| `lightonai/DenseOn` | 149M | modern architecture, strong performance for its size |
+| `Qwen/Qwen3-Embedding-0.6B` | 595M | Multilingual, instruction-aware, top MTEB performance |
 
 See also [Factors to weigh](../embeddings.md#factors-to-weigh) for a deeper walkthrough of the tradeoffs.
 

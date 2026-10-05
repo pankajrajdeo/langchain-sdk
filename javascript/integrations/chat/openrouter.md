@@ -23,15 +23,15 @@ For a full list of available models, visit the [OpenRouter models page](https://
 
 ### Integration details
 
-| Class                                                                                              | Package                                                                        | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/openrouter) |                                               Downloads                                               |                                               Version                                              |
-| :------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :----------: | :--------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| [`ChatOpenRouter`](https://reference.langchain.com/javascript/langchain-openrouter/ChatOpenRouter) | [`@langchain/openrouter`](https://www.npmjs.com/package/@langchain/openrouter) |       ✅      |                                       ✅                                      | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openrouter?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openrouter?style=flat-square\&label=%20&) |
+| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/openrouter) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatOpenRouter`](https://reference.langchain.com/javascript/langchain-openrouter/ChatOpenRouter) | [`@langchain/openrouter`](https://www.npmjs.com/package/@langchain/openrouter) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openrouter?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openrouter?style=flat-square\&label=%20&) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :---------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------: | :---------------------------------------------------------: | :------------------------------------------------------------: |
-|                        ✅                        |                                 ✅                                |                               ✅                              |      ✅      |      ✅      |                               ✅                               |                              ✅                              |                                ✅                               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ## Setup
 

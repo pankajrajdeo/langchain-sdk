@@ -16,17 +16,17 @@ This guide will help you get started with Perplexity [chat models](../../langcha
 
 ### Integration details
 
-| Class                                                                                              | Package                                                                        | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/perplexity) |                                               Downloads                                               |                                               Version                                              |
-| :------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :----------: | :--------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| [`ChatPerplexity`](https://reference.langchain.com/javascript/langchain-perplexity/ChatPerplexity) | [`@langchain/perplexity`](https://www.npmjs.com/package/@langchain/perplexity) |     beta     |                                       ✅                                      | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/perplexity?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/perplexity?style=flat-square\&label=%20&) |
+| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/perplexity) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatPerplexity`](https://reference.langchain.com/javascript/langchain-perplexity/ChatPerplexity) | [`@langchain/perplexity`](https://www.npmjs.com/package/@langchain/perplexity) | beta | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/perplexity?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/perplexity?style=flat-square\&label=%20&) |
 
 ### Model features
 
 See the links in the table headers below for guides on how to use specific features.
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :---------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------: | :---------------------------------------------------------: | :------------------------------------------------------------: |
-|                        ❌                        |                                 ✅                                |                               ❌                              |      ❌      |      ❌      |                               ✅                               |                              ✅                              |                                ❌                               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ❌ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ |
 
 Note that at the time of writing, Perplexity only supports structured outputs on certain usage tiers.
 
@@ -141,11 +141,11 @@ J'adore la programmation.
 
 `ChatPerplexity` can also route requests through Perplexity's [Agent API](https://docs.perplexity.ai/docs/agent-api/quickstart) (the Perplexity-flavored Responses API) by setting `useResponsesApi`. This mirrors [`ChatOpenAI`'s Responses pattern](https://reference.langchain.com/javascript/langchain-openai/): one class, two endpoints, controlled by a single option.
 
-| Value                 | Endpoint         | Notes                                                                                                                                                                                                                                                                        |
-| :-------------------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `undefined` (default) | Auto-detected    | Routes to the Agent API when the request uses a built-in Perplexity tool (`web_search`, `fetch_url`, `finance_search`, `people_search`) or includes a Responses-only field (`previousResponseId`, `instructions`, `input`, `include`). Otherwise routes to Chat Completions. |
-| `true`                | Agent API        | Always uses `client.responses.create()`.                                                                                                                                                                                                                                     |
-| `false`               | Chat Completions | Always uses `client.chat.completions.create()`.                                                                                                                                                                                                                              |
+| Value | Endpoint | Notes |
+| :- | :- | :- |
+| `undefined` (default) | Auto-detected | Routes to the Agent API when the request uses a built-in Perplexity tool (`web_search`, `fetch_url`, `finance_search`, `people_search`) or includes a Responses-only field (`previousResponseId`, `instructions`, `input`, `include`). Otherwise routes to Chat Completions. |
+| `true` | Agent API | Always uses `client.responses.create()`. |
+| `false` | Chat Completions | Always uses `client.chat.completions.create()`. |
 
 The Agent API gives `ChatPerplexity` access to Perplexity's built-in tools (live web search, URL fetching, finance and people search) and stateful agent fields (`previousResponseId`, `instructions`, `include`) which are not available on Chat Completions. Existing `new ChatPerplexity({ model: "sonar" })` callers see no behavior change — the Chat Completions path stays the default for plain text requests.
 

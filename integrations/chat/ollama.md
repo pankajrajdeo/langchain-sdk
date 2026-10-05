@@ -25,15 +25,15 @@ For a complete list of supported models and model variants, see the [Ollama mode
 
 ### Integration details
 
-| Class                                                                                          | Package                                                                        | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/ollama) |                                             Downloads                                             |                                             Version                                            |
-| :--------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :----------: | :------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`ChatOllama`](https://reference.langchain.com/python/langchain-ollama/chat_models/ChatOllama) | [`langchain-ollama`](https://reference.langchain.com/python/langchain-ollama/) |       ❌      |                                   ✅                                  | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ollama?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ollama?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/ollama) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatOllama`](https://reference.langchain.com/python/langchain-ollama/chat_models/ChatOllama) | [`langchain-ollama`](https://reference.langchain.com/python/langchain-ollama/) | ❌ | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ollama?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ollama?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                       ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ❌                            |                              ✅                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ❌ | ✅ |
 
 ## Setup
 

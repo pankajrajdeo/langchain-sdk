@@ -14,10 +14,10 @@ Middleware integrations and model-specific harness profiles for NVIDIA services 
 
 ## Overview
 
-| Integration                                                                            | Description                                                                       |
-| -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [Deep Agents profile for Nemotron 3 Ultra](#optimize-deep-agents-for-nemotron-3-ultra) | Apply model-specific prompts and middleware for more reliable agentic behavior    |
-| [Model routing with NeMo Switchyard](#model-routing-with-nemo-switchyard)              | Route each model call to the target selected by a configured Switchyard algorithm |
+| Integration | Description |
+| - | - |
+| [Deep Agents profile for Nemotron 3 Ultra](#optimize-deep-agents-for-nemotron-3-ultra) | Apply model-specific prompts and middleware for more reliable agentic behavior |
+| [Model routing with NeMo Switchyard](#model-routing-with-nemo-switchyard) | Route each model call to the target selected by a configured Switchyard algorithm |
 
 ## Optimize Deep Agents for Nemotron 3 Ultra
 

@@ -23,7 +23,7 @@ Enter, [Jev](https://x.com/CompleteSkeptic/status/2099925682726002904). Jev is a
 
 This post covers how Jev works, where it fits into the agent loop, and how to use it with LangChain.
 
-### All about Jev
+## All about Jev
 
 Jev is actually not a traditional LLM, it doesn’t generate text. It’s what the TypeSafe AI team calls a System One model:
 
@@ -169,5 +169,3 @@ We're pretty thrilled about Jev and the possibilities that come with it. A few c
 New models drop every week at this point, but this one had a pretty outsized response. We’re excited to see what you build with LangChain and Jev.
 
 Let us know what you think on the [forum](https://forum.langchain.com/), tag us on [X](https://x.com/LangChain?lang=en) and share what you’re building, or engage with [LangChain issues](https://github.com/langchain-ai/langchain)!
-
-‍

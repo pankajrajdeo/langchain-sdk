@@ -16,9 +16,9 @@ This will help you get started with IBM text completion models (LLMs) using Lang
 
 ### Integration details
 
-| Class                                                                               | Package                                                          | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/ibm_watsonx/) |                                            Downloads                                           |                                           Version                                           |
-| :---------------------------------------------------------------------------------- | :--------------------------------------------------------------- | :---: | :----------: | :----------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`WatsonxLLM`](https://reference.langchain.com/javascript/langchain-ibm/WatsonxLLM) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) |   ❌   |       ✅      |                                        ✅                                       | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
+| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/ibm_watsonx/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| [`WatsonxLLM`](https://reference.langchain.com/javascript/langchain-ibm/WatsonxLLM) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
 
 ## Setup
 

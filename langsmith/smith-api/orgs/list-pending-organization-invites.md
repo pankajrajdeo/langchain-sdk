@@ -203,6 +203,11 @@ components:
         display_name:
           type: string
           title: Display Name
+        avatar_url:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Avatar Url
         tier:
           anyOf:
             - $ref: '#/components/schemas/PaymentPlanTier'
@@ -338,6 +343,10 @@ components:
               type: array
             - type: 'null'
           title: Llm Auth Proxy Allowed Urls
+        topic_search_enabled:
+          type: boolean
+          title: Topic Search Enabled
+          default: false
         engine_enabled:
           anyOf:
             - type: boolean

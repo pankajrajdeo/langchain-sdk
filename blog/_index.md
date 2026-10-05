@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 529 pages and 0 subdirectories under blog."
+description: "Index of 530 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-529 pages here.
+530 pages here.
 
 ## Files
 
@@ -230,6 +230,7 @@ tags: [index, blog]
 - [How Similarweb Evaluates Long-Form Agent Research Reports with LangSmith](how-similarweb-evaluates-long-form-agent-research-reports-with-langsmith.md) - Learn how Similarweb uses LangSmith to evaluate long-form agent research reports with rubrics, faithfulness checks, traces, and baseline comparisons.
 - [How Stripe Built Kai, its Company-Wide AI Agent, on Deep Agents](how-stripe-built-their-knowledge-ai-platform-on-deep-agents.md) - Learn how Stripe built Kai, a company-wide AI agent on LangChain, LangGraph, and Deep Agents, reaching 5,000 users in roughly 4 weeks.
 - [How to Build a Custom Agent Harness](how-to-build-a-custom-agent-harness.md) - Effective agents are built with harnesses that are tightly coupled with the task at hand. The easiest way to build a custom harness is with LangChain&#39;s create_agent plus middleware. This guide...
+- [How to Build a Model Router in the Harness](how-to-build-a-model-router-in-the-harness.md) - How we built a model router into Open SWE&#39;s harness that cut median cost per coding task by 64% with no measurable drop in quality, and how to build your own.
 - [How to Build an Agent](how-to-build-an-agent.md) - Learn how to build an agent -- from choosing realistic task examples, to building the MVP to testing quality and safety, to deploying in production.
 - [How to Build the Ultimate AI Automation with Multi-Agent Collaboration](how-to-build-the-ultimate-ai-automation-with-multi-agent-collaboration.md) - Assaf Elovic, Head of R&amp;D at Wix, walks through how to build an autonomous research assistant using LangGraph with a team of specialized agents.
 - [How to Choose the Right Sandbox for Your Agent](how-to-choose-the-right-sandbox-for-your-agent.md) - Learn how to choose a secure sandbox for AI agents, with guidance on filesystem isolation, network access, resource limits, and microVMs.

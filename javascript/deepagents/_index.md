@@ -1,13 +1,13 @@
 ---
 title: "javascript/deepagents"
-description: "Index of 34 pages and 1 subdirectory under javascript/deepagents."
+description: "Index of 36 pages and 1 subdirectory under javascript/deepagents."
 category: "index"
 tags: [index, javascript, deepagents]
 ---
 
 # javascript/deepagents
 
-34 pages here, 38 pages including subdirectories.
+36 pages here, 40 pages including subdirectories.
 
 ## Directories
 
@@ -20,6 +20,7 @@ tags: [index, javascript, deepagents]
 - [Agent User Interaction Protocol (AG-UI)](ag-ui.md) - Expose deep agents over the Agent User Interaction Protocol (AG-UI) to stream events to any AG-UI client or frontend.
 - [Async subagents](async-subagents.md) - Launch background subagents that run concurrently while the supervisor continues interacting with the user
 - [Backends](backends.md) - Choose and configure filesystem backends for Deep Agents. You can specify routes to different backends, implement virtual filesystems, and enforce policies.
+- [Changelog](changelog-js.md) - Log of updates and improvements to our JavaScript/TypeScript packages
 - [Comparison with Claude Agent SDK](comparison.md) - Compare LangChain Deep Agents with the Claude Agent SDK to choose the right tool for your use case.
 - [Build a content builder agent](content-builder.md) - Build a content writing agent with brand memory, skills, subagents, and image generation
 - [Context engineering in Deep Agents](context-engineering.md) - Control what context your deep agent has access to and how it is managed across long-running tasks
@@ -33,10 +34,11 @@ tags: [index, javascript, deepagents]
 - [Deep Agents overview](harness.md) - Build agents that can plan, use subagents, and leverage file systems for complex tasks
 - [Human-in-the-loop](human-in-the-loop.md) - Learn how to configure human approval for sensitive tool operations
 - [Interpreters](interpreters.md) - Run lightweight code inside Deep Agents to compose tools, orchestrate subagents, and transform structured data
-- [Model Context Protocol (MCP)](mcp.md) - Legacy MCP documentation for the langchain-mcp-adapters package.
+- [Model Context Protocol (MCP)](mcp.md) - Connect LangChain agents to MCP servers with MCPAdapter.
 - [Memory](memory.md) - Add persistent memory to agents built with Deep Agents so they learn and improve across conversations
 - [Models](models.md) - Configure model providers and parameters for Deep Agents
 - [Multimodal inputs and outputs](multimodal.md) - Use images, audio, video, and documents with Deep Agents when your model supports multimodal inputs and tool results
+- [OpenWiki](openwiki.md) - CLI that writes and maintains agent wikis so coding agents work faster
 - [Deep Agents overview](overview.md) - Build agents that can plan, use subagents, and leverage file systems for complex tasks
 - [Permissions](permissions.md) - Control filesystem access with declarative permission rules for Deep Agents
 - [Profiles](profiles.md) - Package per-provider and per-model defaults that Deep Agents applies when a model is selected

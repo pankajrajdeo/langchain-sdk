@@ -20,15 +20,15 @@ Every call through the LLM Gateway is traced to LangSmith, and policy violations
 
 ## Where gateway traces appear
 
-By default, tracing of content is turned off for all organizations. When tracing content is on, the gateway-proxied calls are traced to a project named `gateway` in the [workspace](administration-overview.md#workspaces) associated with the caller's API key, as well as a per-caller project that isolates traffic in the UI. Callers authenticating with a workspace API key get `gateway/short-api-key/<short_key>/api-key-id/<api_key_id>`; callers authenticating with a bearer token and no workspace API key get `gateway/user/<obfuscated_email>/ls_user_id/<ls_user_id>`.
+Every gateway-proxied call is traced to a project named `gateway` in the [workspace](administration-overview.md#workspaces) associated with the caller's API key. Trace content is off by default for all organizations, so these traces record only metadata unless a [data policy](llm-gateway-data-policy.md) turns content on.
 
-Control access to these tracing projects with [RBAC](rbac.md) and [ABAC](abac.md)
+Control access to the `gateway` project with [RBAC](rbac.md) and [ABAC](abac.md).
 
 ### Trace metadata
 
 Gateway-proxied calls are distinguishable from direct LLM calls by the project they land in and the metadata attached to their spans:
 
-* **Gateway project:** all gateway traffic is written to a project named `gateway` in each workspace, with a per-caller copy for UI isolation. Filter by project (or by the presence of `langsmith.metadata.gateway.*` span attributes) to find gateway-proxied calls.
+* **Gateway project:** all gateway traffic is written to a project named `gateway` in each workspace. Filter by project (or by the presence of `langsmith.metadata.gateway.*` span attributes) to find gateway-proxied calls.
 * **Policy evaluation results:** every gateway span records which policies were evaluated and their outcome via `langsmith.metadata.gateway.policy.matched_ids/_names`, `passed_ids/_names`, and `violated_ids/_names`, so both passes and blocks are captured.
 * **Guard rule matches:** when redaction policies apply, the guard pipeline emits a `rule_id → count` map stamped onto the span as `policy.matched_rules`, `passed_rules`, and `violated_rules`. These are rule IDs, not PII or secret category labels.
 * **Cost data:** token counts and cost are computed inline and feed the same spend accumulator that spend-cap policies enforce against.
@@ -52,10 +52,10 @@ From an Engine issue, you can:
 
 The gateway logs two categories of events:
 
-| Category                   | What's logged                                                                                       |
-| -------------------------- | --------------------------------------------------------------------------------------------------- |
+| Category | What's logged |
+| - | - |
 | **Administrative changes** | Policy creation, modification, and deletion. Role and permission changes related to gateway access. |
-| **Gateway invocations**    | Each proxied call, including the caller identity and matched policy IDs.                            |
+| **Gateway invocations** | Each proxied call, including the caller identity and matched policy IDs. |
 
 [Audit logs](audit-logs.md) are available to organization admins on the [Enterprise plan](pricing-plans.md).
 
@@ -63,12 +63,12 @@ The gateway logs two categories of events:
 
 ### Required permissions
 
-| Action                           | Permission needed                    | Who has it by default                                   |
-| -------------------------------- | ------------------------------------ | ------------------------------------------------------- |
-| Make calls through the gateway   | `gateway:invoke` + `workspaces:read` | `WORKSPACE_ADMIN` only                                  |
-| Create, edit, or delete policies | `organization:manage`                | Org admins                                              |
-| View gateway traces              | `projects:read` + `runs:read`        | `WORKSPACE_ADMIN`, `WORKSPACE_USER`, `WORKSPACE_VIEWER` |
-| View audit logs                  | `organization:manage`                | Org admins                                              |
+| Action | Permission needed | Who has it by default |
+| - | - | - |
+| Make calls through the gateway | `gateway:invoke` + `workspaces:read` | `WORKSPACE_ADMIN` only |
+| Create, edit, or delete policies | `organization:manage` | Org admins |
+| View gateway traces | `projects:read` + `runs:read` | `WORKSPACE_ADMIN`, `WORKSPACE_USER`, `WORKSPACE_VIEWER` |
+| View audit logs | `organization:manage` | Org admins |
 
 The built-in `WORKSPACE_USER` and `WORKSPACE_VIEWER` roles do **not** include `gateway:invoke` and cannot be edited. To grant gateway access without full workspace-admin privileges, create a custom workspace role with `gateway:invoke` and `workspaces:read` (requires an RBAC-enabled plan). For instructions, refer to [Admin setup](llm-gateway-admin-setup.md).
 

@@ -1,12 +1,15 @@
 ---
-title: "Overview"
+title: "Middleware overview"
 description: "Control and customize agent execution at every step"
 source: "https://docs.langchain.com/oss/python/langchain/middleware"
 category: "docs"
 tags: [docs, langchain, middleware]
 ---
 
-# Overview
+<a id="before-model"></a>
+<a id="dynamic-model"></a>
+
+# Middleware overview
 
 > Control and customize agent execution at every step
 
@@ -81,15 +84,12 @@ graph = (
 The HITL interrupt, summarization, PII redaction, retries, and any custom hooks all travel with the agent node. See [Use subgraphs](../langgraph/use-subgraphs.md) for the full set of composition patterns, including subgraph checkpointer scoping (per-invocation versus per-thread).
 
 <a id="after-model"></a>
-<a id="dynamic-model"></a>
 <a id="llm-tool-selector"></a>
 <a id="modify-model-request"></a>
 <a id="pii-detection"></a>
 <a id="summarization"></a>
 
 ## Additional resources
-
-<a id="before-model"></a>
 
 #### [Built-in middleware](middleware/built-in.md)
 Explore built-in middleware for common use cases.

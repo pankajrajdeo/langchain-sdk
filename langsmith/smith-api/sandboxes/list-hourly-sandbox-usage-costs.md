@@ -226,9 +226,9 @@ paths:
           in: query
           schema:
             minimum: 1
+            maximum: 100
             type: integer
             default: 20
-            maximum: 100
             title: Page Size
         - description: >-
             HOUR returns hourly buckets. RESOURCE sums each resource over the

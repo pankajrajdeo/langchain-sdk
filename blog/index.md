@@ -30,7 +30,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab6ba616821ea2bd3edd56a_webflow-cover-light-building-prod-jev-langgraph-1600x900.png)Open SourceAgent ArchitectureLangGraph
+![How to Build a Model Router in the Harness](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6abdc9fb7390b9da2726672e_model-router-webflow-dark-1200x675.png)Open SourceAgent ArchitectureLangChain
+
+## How to Build a Model Router in the Harness
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dd146b49c3ff6f8c05da14_Eugene-Yurtsev%201.png)Sydney RunkleEugene YurtsevOctober 1, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)12min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab6ba616821ea2bd3edd56a_webflow-cover-light-building-prod-jev-langgraph-1600x900.png)Open SourceAgent ArchitectureLangGraph
 
 ## Building Prod with Jev and LangGraph
 
@@ -38,7 +42,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## New in LangSmith: Engine v2, Managed Deep Agents, Fine-Tuning, and More
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e0003a1af368dfae13c23c_jacob-talbot.png)Jacob TalbotSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab452a9ab70e37bfc53e20a_LangSmith%20Engine%20V2.png)LangSmith
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e0003a1af368dfae13c23c_jacob-talbot.png)Jacob TalbotSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab452a9ab70e37bfc53e20a_LangSmith%20Engine%20V2.png)LangSmith
 
 ## LangSmith Engine v2: Red teaming and automated testing
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## How we built LangChain's Paid Media Agent
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa748ac8b001558f0c48c12_amal.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa7487b1796b28dfb325e62_danny.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa75ebed90e0d765a0890be_Screenshot%202026-09-13%20at%207.40.03%E2%80%AFPM.png)Amal IrgashevDanny LambertJan GomezSeptember 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)19min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa22070277878d400373d95_credit_genie_case%20study2.png)Case Studies
-
-## How Credit Genie uses OpenWiki to keep codebase knowledge fresh, searchable, and automated
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa1b473b3afd2e4dd5c2a15_Kara_Kadri.jpeg)Kara KadriSeptember 10, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min1...1 / 33
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa748ac8b001558f0c48c12_amal.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa7487b1796b28dfb325e62_danny.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa75ebed90e0d765a0890be_Screenshot%202026-09-13%20at%207.40.03%E2%80%AFPM.png)Amal IrgashevDanny LambertJan GomezSeptember 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)19min1...1 / 34
 
 #### We couldn't find anything matching that.
 

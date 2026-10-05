@@ -1,6 +1,6 @@
 ---
 title: "Deploy your app to cloud"
-description: "Deploy your first application to LangSmith Cloud (AWS and GCP) using the LangGraph CLI."
+description: "Deploy your first application to LangSmith Cloud in GCP using the LangGraph CLI."
 source: "https://docs.langchain.com/langsmith/deployment-quickstart"
 category: "docs"
 tags: [docs, langsmith, deployment-quickstart]
@@ -8,15 +8,15 @@ tags: [docs, langsmith, deployment-quickstart]
 
 # Deploy your app to cloud
 
-> Deploy your first application to LangSmith Cloud (AWS and GCP) using the LangGraph CLI.
+> Deploy your first application to LangSmith Cloud in GCP using the LangGraph CLI.
 
-This quickstart shows you how to deploy an application to LangSmith Cloud (AWS and GCP) using the [`langgraph deploy`](cli.md#deploy) command. Any app that exports a graph from a [`langgraph.json`](application-structure.md#configuration-file-concepts) config deploys the same way, regardless of which framework you used to author the agent.
+This quickstart shows you how to deploy an application to LangSmith Cloud in GCP using the [`langgraph deploy`](cli.md#deploy) command. Any app that exports a graph from a [`langgraph.json`](application-structure.md#configuration-file-concepts) config deploys the same way, regardless of which framework you used to author the agent.
 
 > [!TIP]
 > For a comprehensive Cloud deployment guide including GitHub-based deployments and all configuration options, refer to the [Cloud deployment setup guide](deploy-to-cloud.md).
 
 > [!NOTE]
-> The `langgraph deploy` command is in **[beta](release-stages.md)**.
+> The `langgraph deploy` command is in **[beta](release-stages.md)**. `langgraph deploy` is not yet supported on LangSmith Cloud (SaaS) in AWS.
 
 ## Prerequisites
 

@@ -11,8 +11,9 @@ tags: [docs, langsmith, smith-api, orgs, update-org-service-key]
 > Update an API key's role(s) in place without rotating the key.
 
 Organization Operators cannot assign the Organization Admin role or change
-a key that already holds it, and no key can change its own roles. Applies
-to both org-scoped and workspace-scoped keys.
+a key that already holds it, and no key can change its own roles.
+Workspace-scoped keys also require key-management permission in every
+workspace they cover. Applies to both org-scoped and workspace-scoped keys.
 
 ## OpenAPI
 
@@ -187,9 +188,11 @@ paths:
         change
 
         a key that already holds it, and no key can change its own roles.
-        Applies
 
-        to both org-scoped and workspace-scoped keys.
+        Workspace-scoped keys also require key-management permission in every
+
+        workspace they cover. Applies to both org-scoped and workspace-scoped
+        keys.
       operationId: >-
         update_org_service_key_api_v1_orgs_current_service_keys__api_key_id__patch
       parameters:

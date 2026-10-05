@@ -50,10 +50,10 @@ export const sandbox = defineSandbox({
 });
 ```
 
-| Option           | Default | Description                                                                                         |
-| ---------------- | ------- | --------------------------------------------------------------------------------------------------- |
-| `idleTtlSeconds` | `600`   | Seconds of inactivity before the sandbox and its contents are deleted. Deletion is not recoverable. |
-| `defaultTimeout` | `600`   | Seconds allowed for each command.                                                                   |
+| Option | Default | Description |
+| - | - | - |
+| `idleTtlSeconds` | `600` | Seconds of inactivity before the sandbox and its contents are deleted. Deletion is not recoverable. |
+| `defaultTimeout` | `600` | Seconds allowed for each command. |
 
 ## Configure the sandbox proxy
 
@@ -140,11 +140,11 @@ Editing `setup.sh` and redeploying does not wipe `/workspace` on live threads. T
 
 With no bake base, LangSmith's default sandbox template is the starting point. To start from something else, set exactly one of these:
 
-| Option         | Use                                        |
-| -------------- | ------------------------------------------ |
+| Option | Use |
+| - | - |
 | `snapshotName` | LangSmith snapshot name. Tags are allowed. |
-| `snapshotId`   | LangSmith snapshot id.                     |
-| `dockerImage`  | Published Docker image.                    |
+| `snapshotId` | LangSmith snapshot id. |
+| `dockerImage` | Published Docker image. |
 
 **sandbox/index.ts**
 
@@ -223,19 +223,19 @@ Each operation binds to the sandbox of the thread handling the current run, so t
 
 ### Available operations
 
-| Method                                             | Purpose                                                  |
-| -------------------------------------------------- | -------------------------------------------------------- |
-| `ls(path)`                                         | List a directory.                                        |
-| `read(filePath, offset, limit)`                    | Read text, 2000 lines by default.                        |
-| `readRaw(filePath)`                                | Read a file without line formatting.                     |
-| `write(filePath, content)`                         | Write text, replacing any existing file.                 |
-| `edit(filePath, oldString, newString, replaceAll)` | Replace a substring in place.                            |
-| `delete(filePath)`                                 | Remove a file.                                           |
-| `grep(pattern, path, glob, maxCount)`              | Search file contents.                                    |
-| `glob(pattern, path)`                              | Match paths.                                             |
-| `execute(command)`                                 | Run a shell command.                                     |
-| `uploadFiles(files)`                               | Write `Uint8Array` content from `[path, content]` pairs. |
-| `downloadFiles(paths)`                             | Read each path as a `Uint8Array`.                        |
+| Method | Purpose |
+| - | - |
+| `ls(path)` | List a directory. |
+| `read(filePath, offset, limit)` | Read text, 2000 lines by default. |
+| `readRaw(filePath)` | Read a file without line formatting. |
+| `write(filePath, content)` | Write text, replacing any existing file. |
+| `edit(filePath, oldString, newString, replaceAll)` | Replace a substring in place. |
+| `delete(filePath)` | Remove a file. |
+| `grep(pattern, path, glob, maxCount)` | Search file contents. |
+| `glob(pattern, path)` | Match paths. |
+| `execute(command)` | Run a shell command. |
+| `uploadFiles(files)` | Write `Uint8Array` content from `[path, content]` pairs. |
+| `downloadFiles(paths)` | Read each path as a `Uint8Array`. |
 
 Every method returns a promise.
 
@@ -308,11 +308,11 @@ Managed Deep Agents owns sandbox naming, recipe bake, reuse, recovery, and clean
 
 ## When to use a sandbox
 
-| Goal                                                          | Use                                                                    |
-| ------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Write files, run code, or execute shell commands in isolation | Sandbox                                                                |
-| Store durable knowledge across threads                        | [Memory](managed-deep-agents-memory.md)             |
-| Always-on behavior without a filesystem                       | [Instructions](managed-deep-agents-instructions.md) |
+| Goal | Use |
+| - | - |
+| Write files, run code, or execute shell commands in isolation | Sandbox |
+| Store durable knowledge across threads | [Memory](managed-deep-agents-memory.md) |
+| Always-on behavior without a filesystem | [Instructions](managed-deep-agents-instructions.md) |
 
 For more information, see [Project structure](managed-deep-agents-project-structure.md).
 

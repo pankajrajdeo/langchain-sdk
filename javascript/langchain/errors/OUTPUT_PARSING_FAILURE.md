@@ -8,7 +8,7 @@ tags: [docs, javascript, langchain, errors, output_parsing_failure]
 
 # OUTPUT_PARSING_FAILURE
 
-An [output parser](https://reference.langchain.com/python/langchain_core/output_parsers/) was unable to handle model output as expected.
+An [output parser](https://reference.langchain.com/python/langchain-core/output_parsers) was unable to handle model output as expected.
 
 > [!NOTE]
 > Some prebuilt constructs like legacy LangChain agents and chains may use output parsers internally, so you may see this error even if you're not visibly instantiating and using an output parser.

@@ -18,9 +18,9 @@ This will help you get started with vLLM [chat models](../../langchain/models.md
 
 ### Integration details
 
-| Class                                                                                               | Package                                                                       | Serializable | JS support |                                             Downloads                                             |                                             Version                                            |
-| :-------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- | :----------: | :--------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) | [`langchain_openai`](https://reference.langchain.com/python/langchain-openai) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_openai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_openai?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) | [`langchain_openai`](https://reference.langchain.com/python/langchain-openai) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_openai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_openai?style=flat-square\&label=%20) |
 
 ### Model features
 

@@ -258,21 +258,21 @@ The default index name will be: "\\_idx"
 
 In addition to the basic value-based filtering capabilities, it is possible to use more advanced filtering. The table below shows the available filter operators.
 
-| Operator    | Semantic                                                                   | Supported data types for Operands                                 |
-| ----------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `$eq`       | Equality (==)                                                              | number, string, boolean, DateValue, null                          |
-| `$ne`       | Inequality (!=)                                                            | number, string, boolean, DateValue, null                          |
-| `$lt`       | Less than (\<)                                                             | number, string, DateValue                                         |
-| `$lte`      | Less than or equal (\<=)                                                   | number, string, DateValue                                         |
-| `$gt`       | Greater than (>)                                                           | number, string, DateValue                                         |
-| `$gte`      | Greater than or equal (>=)                                                 | number, string, DateValue                                         |
-| `$in`       | Contained in a set of given values  (in)                                   | Array of same values of type (number, string, boolean, DateValue) |
-| `$nin`      | Not contained in a set of given values  (not in)                           | Array of same values of type (number, string, boolean, DateValue) |
-| `$between`  | Between the range of two boundary values                                   | Array of 2 values of (number, string, DateValue)                  |
-| `$like`     | Text equality based on the "LIKE" semantics in SQL (using "%" as wildcard) | string                                                            |
-| `$contains` | Filters documents containing a specific keyword                            | non-empty string                                                  |
-| `$and`      | Logical "and", supporting two or more operands                             | list(Filter)                                                      |
-| `$or`       | Logical "or", supporting two or more operands                              | list(Filter)                                                      |
+| Operator | Semantic | Supported data types for Operands |
+| - | - | - |
+| `$eq` | Equality (==) | number, string, boolean, DateValue, null |
+| `$ne` | Inequality (!=) | number, string, boolean, DateValue, null |
+| `$lt` | Less than (\<) | number, string, DateValue |
+| `$lte` | Less than or equal (\<=) | number, string, DateValue |
+| `$gt` | Greater than (>) | number, string, DateValue |
+| `$gte` | Greater than or equal (>=) | number, string, DateValue |
+| `$in` | Contained in a set of given values  (in) | Array of same values of type (number, string, boolean, DateValue) |
+| `$nin` | Not contained in a set of given values  (not in) | Array of same values of type (number, string, boolean, DateValue) |
+| `$between` | Between the range of two boundary values | Array of 2 values of (number, string, DateValue) |
+| `$like` | Text equality based on the "LIKE" semantics in SQL (using "%" as wildcard) | string |
+| `$contains` | Filters documents containing a specific keyword | non-empty string |
+| `$and` | Logical "and", supporting two or more operands | list(Filter) |
+| `$or` | Logical "or", supporting two or more operands | list(Filter) |
 
 ```typescript
 const docs: Document[] = [

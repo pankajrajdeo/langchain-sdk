@@ -18,9 +18,9 @@ tags: [docs, integrations, tools, parallel_findall]
 
 ### Integration details
 
-| Class                                                                                                          | Package                                                                            | Serializable | JS support |                                                                                                                   Package latest                                                                                                                   |
-| :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- | :----------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ParallelFindAllTool`](https://reference.langchain.com/python/langchain-parallel/findall/ParallelFindAllTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ❌      |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| Class | Package | Serializable | JS support | Package latest |
+| :- | :- | :-: | :-: | :-: |
+| [`ParallelFindAllTool`](https://reference.langchain.com/python/langchain-parallel/findall/ParallelFindAllTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | ❌ | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ## Setup
 

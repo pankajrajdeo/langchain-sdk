@@ -224,7 +224,7 @@ def handle_request(tenant_id: str, user_input: str) -> str:
         return my_agent(user_input)
 ```
 
-You can use any subset of run fields in `updates` (for example, `{"inputs": {"redacted": True}}` to keep a marker, or `{"outputs": {}}` to redact only outputs). The same pattern works for routing different redaction policies to different destinations—each replica can specify its own `project_name`, `api_key`, and `updates`. See [Write traces to multiple destinations with replicas](log-traces-to-project.md#write-traces-to-multiple-destinations-with-replicas) for the full replica reference.
+You can use any subset of run fields in `updates` (for example, `{"inputs": {"redacted": True}}` to keep a marker, or `{"outputs": {}}` to redact only outputs). The same pattern works for routing different redaction policies to different destinations: each replica can specify its own `project_name`, `api_key`, and `updates`. See [Write traces to multiple destinations with replicas](trace-replicas.md) for the full replica reference.
 
 > [!NOTE]
 > Always set `project_name` on the replica when using `updates` to redact inputs or outputs. If the replica's `project_name` matches the active session's project, the `updates` may be dropped and the unredacted inputs/outputs will be sent.
@@ -460,12 +460,12 @@ await processDataCustom("important");  // Traced to "special-project"
 
 Conditional tracing and [sampling](sample-traces.md) serve different purposes:
 
-| Feature            | Conditional tracing                               | Sampling                                     |
-| ------------------ | ------------------------------------------------- | -------------------------------------------- |
-| **Control**        | Deterministic (explicit enable/disable)           | Probabilistic (random sampling)              |
-| **Use case**       | Business logic, compliance, per-request decisions | Cost optimization, high-volume observability |
-| **Predictability** | Guaranteed behavior for specific requests         | Statistical representation of traffic        |
-| **Configuration**  | Runtime code logic                                | Environment variable or client config        |
+| Feature | Conditional tracing | Sampling |
+| - | - | - |
+| **Control** | Deterministic (explicit enable/disable) | Probabilistic (random sampling) |
+| **Use case** | Business logic, compliance, per-request decisions | Cost optimization, high-volume observability |
+| **Predictability** | Guaranteed behavior for specific requests | Statistical representation of traffic |
+| **Configuration** | Runtime code logic | Environment variable or client config |
 
 You can combine both approaches for fine-grained control.
 

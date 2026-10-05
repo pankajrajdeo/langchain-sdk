@@ -12,8 +12,8 @@ tags: [docs, javascript, integrations, middleware, aws]
 
 Middleware specifically designed for models hosted on AWS Bedrock. Learn more about [middleware](../../langchain/middleware/overview.md).
 
-| Middleware                        | Description                                        |
-| --------------------------------- | -------------------------------------------------- |
+| Middleware | Description |
+| - | - |
 | [Prompt caching](#prompt-caching) | Reduce costs by caching repetitive prompt prefixes |
 
 ## Prompt caching
@@ -149,12 +149,12 @@ console.log(response.messages.at(-1)?.content);
 
 The middleware handles differences between model families automatically:
 
-| Feature                 | ChatBedrockConverse (Anthropic) |     ChatBedrockConverse (Nova)    |
-| ----------------------- | :-----------------------------: | :-------------------------------: |
-| System prompt caching   |                ✅                |                 ✅                 |
-| Tool definition caching |                ✅                |                 ❌                 |
-| Message caching         |                ✅                | ✅ (excludes tool result messages) |
-| Extended TTL (`1h`)     |                ✅                |                 ❌                 |
+| Feature | ChatBedrockConverse (Anthropic) | ChatBedrockConverse (Nova) |
+| - | :-: | :-: |
+| System prompt caching | ✅ | ✅ |
+| Tool definition caching | ✅ | ❌ |
+| Message caching | ✅ | ✅ (excludes tool result messages) |
+| Extended TTL (`1h`) | ✅ | ❌ |
 
 ***
 

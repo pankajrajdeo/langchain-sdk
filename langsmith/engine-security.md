@@ -20,11 +20,11 @@ Engine is delivered as part of LangSmith and inherits LangSmith's security and c
 
 Engine operates on data you have already chosen to share with LangChain: the trace data you send to LangSmith and, separately, the GitHub repository content you grant through the LangChain-managed GitHub App (see [GitHub integration](#github-integration)). Enabling Engine introduces no other customer data sources. The following table summarizes what Engine reads, where it lives, and what it enables.
 
-| **Data source**             | **What Engine reads**                                                                                                 | **Storage and persistence**                                                                                                                                                                                  | **Enables**                                                |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
-| LangSmith workspace content | Trace data and other workspace content you have stored in LangSmith, such as prompts and evaluators.                  | Within your LangSmith tenant. [Trace retention](usage-and-billing.md#data-retention) is 14 days (base) or up to 180 days (extended) for SaaS customers as of September 14, 2026, chosen per project. | Issue detection, prioritization, and evaluation proposals. |
-| GitHub repository           | Source code and repository context from the repositories you connect (see [GitHub integration](#github-integration)). | Processed inside an isolated, LangChain-managed sandbox for the duration of each analysis run, then discarded.                                                                                               | Pull request authoring with proposed code fixes.           |
-| Model provider (inference)  | Only the content required for each analysis task.                                                                     | Configured for zero data retention with each Engine model provider (see [Model subprocessors](#model-subprocessors)).                                                                                        | Engine reasoning and generation.                           |
+| **Data source** | **What Engine reads** | **Storage and persistence** | **Enables** |
+| - | - | - | - |
+| LangSmith workspace content | Trace data and other workspace content you have stored in LangSmith, such as prompts and evaluators. | Within your LangSmith tenant. [Trace retention](usage-and-billing.md#data-retention) is 14 days (base) or up to 180 days (extended) for SaaS customers as of September 14, 2026, chosen per project. | Issue detection, prioritization, and evaluation proposals. |
+| GitHub repository | Source code and repository context from the repositories you connect (see [GitHub integration](#github-integration)). | Processed inside an isolated, LangChain-managed sandbox for the duration of each analysis run, then discarded. | Pull request authoring with proposed code fixes. |
+| Model provider (inference) | Only the content required for each analysis task. | Configured for zero data retention with each Engine model provider (see [Model subprocessors](#model-subprocessors)). | Engine reasoning and generation. |
 
 > [!NOTE]
 > Engine's read scope may expand over time. This page is updated to reflect material changes. Last reviewed September 16, 2026.
@@ -52,9 +52,12 @@ You can revoke Engine's access to GitHub at any time by uninstalling the App fro
 
 In LangSmith Cloud, Engine's model subprocessors (currently OpenAI, Anthropic, Fireworks, and Baseten) are configured for zero data retention and are prohibited under their agreements with LangChain from using customer data to train or fine-tune their models. The [LangChain Trust Center](https://trust.langchain.com/) publishes the authoritative subprocessor list.
 
-In self-hosted deployments, Engine uses the model provider for your cloud through LangSmith Intelligence (LSI). It uses Amazon Bedrock on AWS and Vertex AI on GCP.
+In self-hosted deployments, each organization chooses how Engine runs its models:
 
-Engine does not support bring-your-own-key (BYOK).
+* **LangSmith Intelligence (LSI):** Engine uses Amazon Bedrock through LSI, under the commitments on this page.
+* **Your own model providers:** Engine calls Anthropic, OpenAI, Amazon Bedrock, Google Vertex AI, or Azure AI Foundry with your credentials. Those providers process Engine's requests under your agreements with them, and LangChain receives only usage metadata.
+
+See [Choose how Engine runs its models](engine-self-hosted.md#choose-how-engine-runs-its-models).
 
 ## Key security controls
 

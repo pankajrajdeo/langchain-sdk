@@ -16,9 +16,9 @@ tags: [docs, integrations, retrievers, nvidia]
 
 ### Integration details
 
-| Class                                                                                                                      | Package                                                                                                 | Local | Serializable | JS support |                                                    Downloads                                                   |                                                   Version                                                   |
-| :------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ | :---: | :----------: | :--------: | :------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------: |
-| [`NVIDIARAGRetriever`](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints/retrievers/NVIDIARAGRetriever) | [`langchain-nvidia-ai-endpoints`](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints) |   ✅   |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_nvidia_ai_endpoints?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_nvidia_ai_endpoints?style=flat-square\&label=%20) |
+| Class | Package | Local | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| [`NVIDIARAGRetriever`](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints/retrievers/NVIDIARAGRetriever) | [`langchain-nvidia-ai-endpoints`](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints) | ✅ | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_nvidia_ai_endpoints?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_nvidia_ai_endpoints?style=flat-square\&label=%20) |
 
 ## Setup
 
@@ -46,16 +46,16 @@ retriever = NVIDIARAGRetriever(
 
 Key parameters:
 
-| Parameter                | Type        | Default               | Description                                             |
-| ------------------------ | ----------- | --------------------- | ------------------------------------------------------- |
-| `base_url`               | `str`       | —                     | Base URL of the RAG Blueprint server                    |
-| `k`                      | `int`       | `10`                  | Number of documents to return (0–25)                    |
-| `collection_names`       | `list[str]` | `["multimodal_data"]` | Vector database collections to search                   |
-| `vdb_top_k`              | `int`       | `100`                 | Results retrieved before reranking (0–400)              |
-| `enable_reranker`        | `bool`      | `True`                | Enable reranking of retrieved results                   |
-| `enable_query_rewriting` | `bool`      | `False`               | Enable query rewriting before search                    |
-| `confidence_threshold`   | `float`     | `0.0`                 | Minimum relevance score (0.0–1.0) to include a document |
-| `timeout`                | `float`     | `60`                  | HTTP request timeout in seconds                         |
+| Parameter | Type | Default | Description |
+| - | - | - | - |
+| `base_url` | `str` | — | Base URL of the RAG Blueprint server |
+| `k` | `int` | `10` | Number of documents to return (0–25) |
+| `collection_names` | `list[str]` | `["multimodal_data"]` | Vector database collections to search |
+| `vdb_top_k` | `int` | `100` | Results retrieved before reranking (0–400) |
+| `enable_reranker` | `bool` | `True` | Enable reranking of retrieved results |
+| `enable_query_rewriting` | `bool` | `False` | Enable query rewriting before search |
+| `confidence_threshold` | `float` | `0.0` | Minimum relevance score (0.0–1.0) to include a document |
+| `timeout` | `float` | `60` | HTTP request timeout in seconds |
 
 ## Usage
 

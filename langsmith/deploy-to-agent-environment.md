@@ -1,0 +1,129 @@
+---
+title: "Deploy to an agent environment"
+description: "How the LangGraph and Managed Deep Agents CLIs bind a deployment to an agent and an environment, which values each flag takes, and which CLI versions accept them."
+source: "https://docs.langchain.com/langsmith/deploy-to-agent-environment"
+category: "docs"
+tags: [docs, langsmith, deploy-to-agent-environment]
+---
+
+# Deploy to an agent environment
+
+> How the LangGraph and Managed Deep Agents CLIs bind a deployment to an agent and an environment, which values each flag takes, and which CLI versions accept them.
+
+Deploying to an agent environment binds a [deployment](deployment.md) to one [agent](agents.md) and one of that agent's [environments](agent-environments.md). Two flags carry the binding, and the LangGraph CLI and the `mda` CLI both accept them.
+
+Use it to keep a staging build and a production build of the same agent apart, so each one reports into its own environment.
+
+> [!NOTE]
+> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+
+## Prerequisites
+
+Both CLIs need the following:
+
+* A [LangSmith API key](create-account-api-key.md) in `.env` or your shell environment.
+* A project folder holding `langgraph.json`. Run the CLI from that folder.
+* An agent-based workspace, because the flags require agent mode on the workspace.
+
+An org-scoped API key also needs the workspace, and each CLI reads it from a different variable: `LANGSMITH_TENANT_ID` for the LangGraph CLI, and `LANGSMITH_WORKSPACE_ID` for the `mda` CLI. A workspace-scoped key needs neither. The LangGraph CLI prompts for the value when the key is org-scoped. In a script or CI job, set `LANGSMITH_TENANT_ID` ahead of time, and pass `--no-input` so the LangGraph CLI fails instead of waiting for input. Both the Python and the TypeScript LangGraph CLI accept `--no-input`.
+
+## Addressing flags
+
+Both CLIs take the same two flags:
+
+* **`--agent-id`**: The agent to deploy to. The value is the agent's identifier, not its display name. For which value is which, see [Identifiers and display names](agents.md#identifiers-and-display-names).
+* **`--agent-environment`**: The environment the deployment reports into, and one of `development`, `staging`, or `production`. A deployment cannot take `local`. That environment [does not display on deployments](agent-environments.md#select-an-environment) at all, which is the one way this set differs from the four values [agent addressing](log-traces-to-agent.md#addressing-variables) accepts.
+
+The flags name the same pair that agent addressing names on the tracing side. The LangGraph CLI also reads the flags from the same two variables, `LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT`. The `mda` CLI does not read those variables, so pass the flags to it directly.
+
+## Deploy with the LangGraph CLI
+
+These flags require `langgraph-cli` v0.4.32 or later in Python, and `@langchain/langgraph-cli` 1.5.2-dev.0 in TypeScript. The TypeScript version is a prerelease build. Install it exactly, because the current stable release, 1.5.1, does not accept the flags. To deploy:
+
+1. Install the CLI:
+
+**Python**
+
+```bash
+   uv tool install --force "langgraph-cli>=0.4.32"
+```
+
+**TypeScript**
+
+```bash
+   npm install -g "@langchain/langgraph-cli@1.5.2-dev.0"
+```
+
+2. Deploy, naming the agent and the environment:
+
+**Python**
+
+```bash
+   langgraph deploy --agent-id my-agent --agent-environment staging --remote
+```
+
+**TypeScript**
+
+```bash
+   langgraphjs deploy --agent-id my-agent --agent-environment staging --remote
+```
+
+Pass both flags or neither, because the CLI rejects either one on its own. Do not combine them with `--name` or `--deployment-id`, which name a deployment directly and which the CLI rejects alongside an agent.
+
+`--remote` forces a remote build. Without it, the CLI builds locally whenever Docker is available. For the rest of the flags, see [`langgraph deploy`](cli.md#deploy).
+
+## Deploy with the mda CLI
+
+These flags require `managed-deepagents` 0.7.5.dev4 in Python, or 0.7.5-dev.4 in TypeScript. Both are prerelease builds. Install that version exactly, because 0.8.0 and later do not accept the flags and a version range resolves to a build that rejects them. To deploy:
+
+1. Install the CLI:
+
+**Python**
+
+```bash
+   uv tool install --force --prerelease allow "managed-deepagents==0.7.5.dev4"
+   uv add --prerelease allow "managed-deepagents==0.7.5.dev4"
+```
+
+**TypeScript**
+
+```bash
+   npm install "managed-deepagents@0.7.5-dev.4"
+```
+
+2. Deploy the project in the current folder:
+
+**Python**
+
+```bash
+   mda deploy . --agent-id my-agent --agent-environment staging
+```
+
+**TypeScript**
+
+```bash
+   npx mda deploy . --agent-id my-agent --agent-environment staging
+```
+
+In Python, installing the CLI as a tool and pinning the same version as a project dependency keeps the global `mda` binary and the project's own dependency on one version. For the rest of the flags, see [Deploy projects](python/managed-deep-agents-cli.md#deploy-projects), and for deploying without the agent flags, see [Deploy a Managed Deep Agent](python/managed-deep-agents-deploy.md).
+
+## Confirm the binding
+
+Open the agent and read the **Deployments** section of its [Overview](navigate-agents.md#read-the-agent-overview). The new deployment appears as a row there as soon as the deploy succeeds, and the row links to the deployment.
+
+If the new deployment has no row, or the Overview has no **Deployments** section, the deployment is not bound to the agent. This usually happens when you set the `LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT` variables and deploy with the `mda` CLI, which ignores them. Add `--agent-id` and `--agent-environment` to the deploy command instead.
+
+## See also
+
+* [Agents](agents.md)
+* [Agent environments](agent-environments.md)
+* [Log traces to an agent](log-traces-to-agent.md)
+* [Deployment](deployment.md)
+
+***
+
+> [!NOTE]
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-to-agent-environment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

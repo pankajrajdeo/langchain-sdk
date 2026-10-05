@@ -12,6 +12,8 @@ tags: [docs, langsmith, filter-traces]
 
 Filtering narrows the [runs](observability-concepts.md#runs) in a tracing project to the ones that need attention, such as the conversations that errored, slow tool calls, or runs with low feedback scores. Write a query in the search bar, then choose which runs in the [trace](observability-concepts.md#traces) or [thread](observability-concepts.md#threads) hierarchy the query is matched against.
 
+In an [agent-based workspace](agents.md), a tracing project is one [environment](agent-environments.md) of one agent, so a filter applies to the environment you have open rather than to the agent as a whole. To filter across an agent's environments, filter each one in turn.
+
 > [!NOTE]
 > Tracing projects have two filtering experiences. Check the top of your project to see which one applies to you:
 >
@@ -84,11 +86,11 @@ The scope dropdown previews each option against a sample trace, so you can see w
 
 The scopes offered, and the one selected by default, depend on the table selection:
 
-| Table selection | Default scope | Available scopes              |
-| --------------- | ------------- | ----------------------------- |
-| **Threads**     | Any run       | Thread, Root run, Any run     |
-| **Traces**      | Root run      | Root run, Any run             |
-| **Runs**        | Single run    | Single run, Root run, Any run |
+| Table selection | Default scope | Available scopes |
+| - | - | - |
+| **Threads** | Any run | Thread, Root run, Any run |
+| **Traces** | Root run | Root run, Any run |
+| **Runs** | Single run | Single run, Root run, Any run |
 
 ### Combine scopes
 
@@ -98,9 +100,9 @@ Each scope holds at most one row, so the **Threads** and **Runs** selections acc
 
 For example, in the **Threads** view, find threads longer than 20 turns that contain a failed tool call:
 
-| Scope   | Query                            |
-| ------- | -------------------------------- |
-| Thread  | `turn_count:>20`                 |
+| Scope | Query |
+| - | - |
+| Thread | `turn_count:>20` |
 | Any run | `run_type:tool AND status:error` |
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-multiple-scopes-light.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=4861c686c90341e16ecac32e67abff68" alt="Two filter rows in the search bar. The first is scoped to 'in thread' with a turn_count greater than 20 clause, and the second is scoped to 'in any run' with run_type tool AND status error" width="826" height="132" data-path="langsmith/images/filter-multiple-scopes-light.png" />
@@ -117,19 +119,19 @@ Changing the table selection can leave a row on a scope the new selection does n
 
 The operators a field accepts depend on its type.
 
-| Operator        | Syntax             | Matches                                                                                            |
-| --------------- | ------------------ | -------------------------------------------------------------------------------------------------- |
-| is              | `field:value`      | An exact match on the value.                                                                       |
-| is not          | `-field:value`     | Everything except an exact match.                                                                  |
-| matches         | `field:~value`     | A full-text search of the field. Quote the value to search for a phrase.                           |
-| does not match  | `-field:~value`    | Everything the full-text search does not match.                                                    |
-| wildcard        | `field:value*`     | A pattern, where `*` stands for any sequence of characters.                                        |
-| exists          | `field:*`          | Records where the field is set.                                                                    |
-| does not exist  | `-field:*`         | Records where the field is not set.                                                                |
-| comparison      | `field:>value`     | Values above the given value. Also accepts `>=`, `<`, and `<=`.                                    |
-| inclusive range | `field:[10 TO 20]` | Values from 10 to 20, including both bounds.                                                       |
-| exclusive range | `field:{10 TO 20}` | Values between 10 and 20, excluding both bounds.                                                   |
-| mixed range     | `field:[10 TO 20}` | Values from 10 up to but not including 20. Swap the delimiters to invert which bound is inclusive. |
+| Operator | Syntax | Matches |
+| - | - | - |
+| is | `field:value` | An exact match on the value. |
+| is not | `-field:value` | Everything except an exact match. |
+| matches | `field:~value` | A full-text search of the field. Quote the value to search for a phrase. |
+| does not match | `-field:~value` | Everything the full-text search does not match. |
+| wildcard | `field:value*` | A pattern, where `*` stands for any sequence of characters. |
+| exists | `field:*` | Records where the field is set. |
+| does not exist | `-field:*` | Records where the field is not set. |
+| comparison | `field:>value` | Values above the given value. Also accepts `>=`, `<`, and `<=`. |
+| inclusive range | `field:[10 TO 20]` | Values from 10 to 20, including both bounds. |
+| exclusive range | `field:{10 TO 20}` | Values between 10 and 20, excluding both bounds. |
+| mixed range | `field:[10 TO 20}` | Values from 10 up to but not including 20. Swap the delimiters to invert which bound is inclusive. |
 
 Some fields accept only a subset of these operators:
 
@@ -184,45 +186,45 @@ These fields are available in the **Single run**, **Root run**, and **Any run** 
 
 **Run attributes**
 
-| Field      | Description                                                                                                  |
-| ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `name`     | Run name. Supports wildcards.                                                                                |
-| `status`   | Run status: `pending`, `success`, `error`, or `interrupted`.                                                 |
+| Field | Description |
+| - | - |
+| `name` | Run name. Supports wildcards. |
+| `status` | Run status: `pending`, `success`, `error`, or `interrupted`. |
 | `run_type` | The [type of run](run-data-format.md#run-types), for example `llm`, `chain`, `tool`, or `retriever`. |
-| `tags`     | Run tags. A clause matches if any tag on the run matches.                                                    |
+| `tags` | Run tags. A clause matches if any tag on the run matches. |
 
 **Content**
 
-| Field         | Description                                                                               |
-| ------------- | ----------------------------------------------------------------------------------------- |
-| `input`       | Run inputs. Use `~` to search the text, or `input.<key>` to match a JSON key.             |
-| `output`      | Run outputs. Use `~` to search the text, or `output.<key>` to match a JSON key.           |
-| `metadata`    | Run metadata. Use `metadata.<key>` to match a JSON key, or `~` to search metadata values. |
-| `error`       | Error text. Use `~` to search the text.                                                   |
-| `attachments` | Attachment names.                                                                         |
+| Field | Description |
+| - | - |
+| `input` | Run inputs. Use `~` to search the text, or `input.<key>` to match a JSON key. |
+| `output` | Run outputs. Use `~` to search the text, or `output.<key>` to match a JSON key. |
+| `metadata` | Run metadata. Use `metadata.<key>` to match a JSON key, or `~` to search metadata values. |
+| `error` | Error text. Use `~` to search the text. |
+| `attachments` | Attachment names. |
 
 **Identity**
 
-| Field                                          | Description                                                   |
-| ---------------------------------------------- | ------------------------------------------------------------- |
+| Field | Description |
+| - | - |
 | `id`, `trace_id`, `thread_id`, `parent_run_id` | Match a specific run, trace, thread, or parent run by its ID. |
-| `ls_user_id`                                   | The LangSmith user the run is attributed to.                  |
+| `ls_user_id` | The LangSmith user the run is attributed to. |
 
 **Performance**
 
-| Field                                                | Description                                                                                                                                     |
-| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `latency`                                            | Run duration in seconds.                                                                                                                        |
-| `first_token_time`                                   | When the first token was produced.                                                                                                              |
-| `prompt_tokens`, `completion_tokens`, `total_tokens` | Token counts for the run.                                                                                                                       |
-| `prompt_cost`, `completion_cost`, `total_cost`       | Costs for the run.                                                                                                                              |
-| `prompt_token_details`, `completion_token_details`   | Token breakdowns. Address a component with dot notation, for example `prompt_token_details.cache_read` or `completion_token_details.reasoning`. |
-| `prompt_cost_details`, `completion_cost_details`     | Cost breakdowns, with the same components as the token breakdowns.                                                                              |
+| Field | Description |
+| - | - |
+| `latency` | Run duration in seconds. |
+| `first_token_time` | When the first token was produced. |
+| `prompt_tokens`, `completion_tokens`, `total_tokens` | Token counts for the run. |
+| `prompt_cost`, `completion_cost`, `total_cost` | Costs for the run. |
+| `prompt_token_details`, `completion_token_details` | Token breakdowns. Address a component with dot notation, for example `prompt_token_details.cache_read` or `completion_token_details.reasoning`. |
+| `prompt_cost_details`, `completion_cost_details` | Cost breakdowns, with the same components as the token breakdowns. |
 
 **Feedback**
 
-| Field      | Description                                                              |
-| ---------- | ------------------------------------------------------------------------ |
+| Field | Description |
+| - | - |
 | `feedback` | Feedback on the run. Refer to [Filter on feedback](#filter-on-feedback). |
 
 Metadata and tags are usually the most productive fields to filter on, because you control what goes in them. See [Add metadata and tags to traces](add-metadata-tags.md).
@@ -231,16 +233,16 @@ Metadata and tags are usually the most productive fields to filter on, because y
 
 The **Thread** scope filters on attributes of the thread as a whole, so it supports a different set of fields. The suggestion list labels the group **Thread attributes**.
 
-| Field                                                                                                | Description                                  |
-| ---------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| `thread_id`                                                                                          | Thread ID.                                   |
-| `turn_count`                                                                                         | Turns in the thread.                         |
-| `num_errored_turns`                                                                                  | Turns that ended in an error.                |
-| `thread_duration`                                                                                    | First turn start to last turn end.           |
-| `trace_latency_p50`                                                                                  | Median turn latency.                         |
-| `trace_latency_p99`                                                                                  | P99 turn latency.                            |
-| `total_tokens`                                                                                       | Tokens across the thread.                    |
-| `total_cost`                                                                                         | Cost across the thread.                      |
+| Field | Description |
+| - | - |
+| `thread_id` | Thread ID. |
+| `turn_count` | Turns in the thread. |
+| `num_errored_turns` | Turns that ended in an error. |
+| `thread_duration` | First turn start to last turn end. |
+| `trace_latency_p50` | Median turn latency. |
+| `trace_latency_p99` | P99 turn latency. |
+| `total_tokens` | Tokens across the thread. |
+| `total_cost` | Cost across the thread. |
 | `prompt_token_details`, `completion_token_details`, `prompt_cost_details`, `completion_cost_details` | Token and cost breakdowns across the thread. |
 
 > [!NOTE]
@@ -340,7 +342,7 @@ To give the table more room, click **Hide shortcuts**, then **Show shortcuts** t
 
 ## Save a filter
 
-Saved views store a filter for reuse. A view belongs to the tracing project rather than to the person who created it, so anyone with access to the project can select it.
+Saved views store a filter for reuse. A view belongs to the tracing project rather than to the person who created it, so anyone with access to the project can select it. In an agent-based workspace that means the view belongs to one [environment](agent-environments.md): a view saved in **Production** is not offered in **Staging**, and a filter you want in every environment has to be saved in each.
 
 To save the current filter:
 

@@ -110,22 +110,22 @@ agent = create_deep_agent(
 )
 ```
 
-| Parameter                                                                         | What it does                                                                                                                                                                                                                                                   |
-| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`model=`](#model)                                                                | Which model to use                                                                                                                                                                                                                                             |
-| [`system_prompt=`](#system-prompt)                                                | Custom instructions for the agent                                                                                                                                                                                                                              |
-| [`tools=`](#tools)                                                                | Domain tools the agent can call                                                                                                                                                                                                                                |
-| [`memory=`](#memory)                                                              | AGENTS.md files loaded at startup                                                                                                                                                                                                                              |
-| [`skills=`](#skills)                                                              | Skills directory for on-demand knowledge                                                                                                                                                                                                                       |
-| [`backend=`](#backends)                                                           | Filesystem backend (StateBackend by default)                                                                                                                                                                                                                   |
-| [`permissions=`](permissions.md)                              | Path-level access control for the filesystem                                                                                                                                                                                                                   |
-| [`subagents=`](#subagents)                                                        | Custom subagents for delegated tasks                                                                                                                                                                                                                           |
-| [`middleware=`](#middleware)                                                      | Extra middleware merged into the [Deep Agents stack](#deep-agents-stack); an instance whose `.name` matches a built-in entry replaces it in place, anything else lands after the last core middleware entry and before the profile, prompt-caching, and memory |
-| [`interrupt_on=`](#human-in-the-loop)                                             | Pause before tool calls for human approval                                                                                                                                                                                                                     |
-| [`response_format=`](#structured-output)                                          | Structured output schema                                                                                                                                                                                                                                       |
-| [`state_schema=`](context-engineering.md#custom-state-schema) | Custom graph state schema                                                                                                                                                                                                                                      |
-| [`context_schema=`](context-engineering.md#runtime-context)   | Per-run runtime context schema (user IDs, API keys, feature flags)                                                                                                                                                                                             |
-| [profiles](#profiles)                                                             | Per-model defaults as a reusable bundle                                                                                                                                                                                                                        |
+| Parameter | What it does |
+| - | - |
+| [`model=`](#model) | Which model to use |
+| [`system_prompt=`](#system-prompt) | Custom instructions for the agent |
+| [`tools=`](#tools) | Domain tools the agent can call |
+| [`memory=`](#memory) | AGENTS.md files loaded at startup |
+| [`skills=`](#skills) | Skills directory for on-demand knowledge |
+| [`backend=`](#backends) | Filesystem backend (StateBackend by default) |
+| [`permissions=`](permissions.md) | Path-level access control for the filesystem |
+| [`subagents=`](#subagents) | Custom subagents for delegated tasks |
+| [`middleware=`](#middleware) | Extra middleware merged into the [Deep Agents stack](#deep-agents-stack); an instance whose `.name` matches a built-in entry replaces it in place, anything else lands after the last core middleware entry and before the profile, prompt-caching, and memory |
+| [`interrupt_on=`](#human-in-the-loop) | Pause before tool calls for human approval |
+| [`response_format=`](#structured-output) | Structured output schema |
+| [`state_schema=`](context-engineering.md#custom-state-schema) | Custom graph state schema |
+| [`context_schema=`](context-engineering.md#runtime-context) | Per-run runtime context schema (user IDs, API keys, feature flags) |
+| [profiles](#profiles) | Per-model defaults as a reusable bundle |
 
 <details>
 <summary>Full function signature</summary>
@@ -1136,9 +1136,9 @@ register_harness_profile(
 )
 ```
 
-| Stack       | Final system prompt                                     |
-| ----------- | ------------------------------------------------------- |
-| Main agent  | `"You are ACME's support orchestrator." + SUFFIX`       |
+| Stack | Final system prompt |
+| - | - |
+| Main agent | `"You are ACME's support orchestrator." + SUFFIX` |
 | GP subagent | `"You are a research subagent. Cite sources." + SUFFIX` |
 
 </details>

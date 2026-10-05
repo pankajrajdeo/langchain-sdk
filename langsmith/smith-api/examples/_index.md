@@ -1,19 +1,20 @@
 ---
 title: "langsmith/smith-api/examples"
-description: "Index of 15 pages and 0 subdirectories under langsmith/smith-api/examples."
+description: "Index of 16 pages and 0 subdirectories under langsmith/smith-api/examples."
 category: "index"
 tags: [index, langsmith, smith-api, examples]
 ---
 
 # langsmith/smith-api/examples
 
-15 pages here.
+16 pages here.
 
 ## Files
 
 - [Count examples](count-examples.md) - Count all examples by query params
 - [Create example](create-example.md) - Create a new example.
 - [Create examples](create-examples.md) - Create bulk examples.
+- [Delete an example](delete-an-example.md) - Soft-delete an example, preserving prior versions and their attachments. If the latest version is already deleted, the request succeeds without creating another version. Deletion is recorded at the...
 - [Delete example](delete-example.md) - Soft delete an example. Only deletes the example in the 'latest' version of the dataset.
 - [Delete examples](delete-examples.md) - Soft delete examples. Only deletes the examples in the 'latest' version of the dataset.
 - [Hard delete examples](hard-delete-examples.md) - This endpoint hard deletes all versions of a dataset example(s). Deletion is performed by setting inputs, outputs, and metadata to null and deleting attachment files while keeping the example ID...

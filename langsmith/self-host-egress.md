@@ -21,7 +21,7 @@ Self-hosted LangSmith stores platform data in your environment. Unless you are r
 > **Egress to `https://beacon.langchain.com` is required.** Refer to the [allowlisting IP section](cloud.md#allowlisting-ip-addresses) for static IP addresses, if needed.
 
 > [!NOTE]
-> If you enable [Engine](engine-self-hosted.md), it requires a second egress destination, and Engine content leaves your environment through it. See [LangSmith Intelligence for Engine](#langsmith-intelligence-for-engine).
+> If you enable [Engine](engine-self-hosted.md), content goes to LangSmith Intelligence or your own model providers. With your own providers, LangChain receives only usage metadata through the configured reporting endpoint. See [LangSmith Intelligence for Engine](#langsmith-intelligence-for-engine) for the required destinations.
 
 ## Billing telemetry
 
@@ -463,23 +463,24 @@ Add this to the `commonEnv` section of your Helm configuration to permanently di
 
 ## LangSmith Intelligence for Engine
 
-This section applies only if you enable [Engine](engine-self-hosted.md). LangSmith Intelligence is the LangChain-managed service that powers Engine. No other LangSmith feature depends on it, and none requires egress beyond what this page already describes.
+This section applies only if you enable [Engine](engine-self-hosted.md). LangSmith Intelligence is the LangChain-managed service that Engine reports its usage to and can optionally run its models on. Engine can run on your own model providers instead, and [air-gapped installations](engine-self-hosted.md#air-gapped-installations) don't connect to it. No other LangSmith feature depends on it, and none requires egress beyond what this page already describes.
 
-Engine cannot run entirely inside your cluster. It sends requests to LangSmith Intelligence, a LangChain-managed zero data retention (ZDR) service that routes them to a model provider inside LangChain's environment. Allow outbound HTTPS to the gateway for your cloud: `beacon.aws.langchain.com` on AWS, or `beacon.langchain.com` on GCP. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](engine-self-hosted.md#connect-with-aws-privatelink). On GCP, the gateway is the same host this page already requires, so Engine adds a path rather than a new destination.
+Engine runs its models either on LangSmith Intelligence or on your own model providers. See [Choose how Engine runs its models](engine-self-hosted.md#choose-how-engine-runs-its-models). Allow outbound HTTPS to the endpoint in `engine.intelligenceBaseUrl`:
 
-> [!NOTE]
-> Engine is available for LangSmith Self-hosted in **AWS US** and **GCP US**. See [Availability by cloud and region](engine-self-hosted.md#availability-by-cloud-and-region).
+* **LangSmith Intelligence:** `beacon.aws.langchain.com`. To keep this traffic on private networking, [connect with AWS PrivateLink](engine-self-hosted.md#connect-with-aws-privatelink).
+* **Your own model providers:** `beacon.langchain.com`, the same host this page already requires, for usage reporting. Also allow outbound HTTPS to each provider's API endpoint.
 
 > [!WARNING]
-> Add the gateway as a specific allowlist entry rather than opening general outbound access. Requests authenticate with a short-lived license JWT obtained during LangSmith license verification. No additional model-provider credentials are needed.
+> Add each destination as a specific allowlist entry rather than opening general outbound access. Requests to LangSmith Intelligence authenticate with a short-lived license JWT obtained during LangSmith license verification.
 
 ### What it does
 
-* **Powers Engine**: Engine depends on LangSmith Intelligence and cannot run without it.
+* **Runs Engine's models**, when an organization chooses LangSmith Intelligence.
+* **Records Engine's usage** for billing, whichever way Engine runs its models.
 
 ### What we collect
 
-Each request may carry the trace content, source code, and intermediate output Engine needs to do its work. LangSmith Intelligence and the model provider process that content to serve the request. LangSmith Intelligence does not persist prompt or completion bodies.
+When Engine runs on LangSmith Intelligence, each request may carry the trace content, source code, and intermediate output Engine needs to do its work. LangSmith Intelligence does not persist prompt or completion bodies. When Engine runs on your own model providers, LangSmith Intelligence receives only usage metadata.
 
 LangSmith Intelligence retains the following metadata for usage attribution and billing:
 
@@ -489,7 +490,7 @@ LangSmith Intelligence retains the following metadata for usage attribution and 
 For the complete data flow and model-provider commitments, see [Engine on Self-hosted](engine-self-hosted.md).
 
 > [!NOTE]
-> Offline (air-gapped) Self-hosted cannot run Engine, because it cannot reach LangSmith Intelligence. Every other LangSmith feature continues to work offline.
+> Offline (air-gapped) Self-hosted can run Engine on your own model providers. See [Air-gapped installations](engine-self-hosted.md#air-gapped-installations).
 
 ## Our commitment
 

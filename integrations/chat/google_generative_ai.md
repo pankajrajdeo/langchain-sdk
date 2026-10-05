@@ -32,15 +32,15 @@ For information on the latest models, model IDs, their features, context windows
 
 ### Integration details
 
-| Class                                                                                                                        | Package                                                                                    | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/google_generative_ai) |                                                Downloads                                                |                                                Version                                               |
-| :--------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- | :----------: | :--------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: |
-| [`ChatGoogleGenerativeAI`](https://reference.langchain.com/python/langchain-google-genai/chat_models/ChatGoogleGenerativeAI) | [`langchain-google-genai`](https://reference.langchain.com/python/langchain-google-genai/) |     beta     |                                          ✅                                         | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-google-genai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-google-genai?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/google_generative_ai) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatGoogleGenerativeAI`](https://reference.langchain.com/python/langchain-google-genai/chat_models/ChatGoogleGenerativeAI) | [`langchain-google-genai`](https://reference.langchain.com/python/langchain-google-genai/) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-google-genai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-google-genai?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                             ⚠️                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ |
 
 ## Setup
 
@@ -145,13 +145,13 @@ llm = ChatGoogleGenerativeAI(
 
 #### Environment variables
 
-| Variable                    | Purpose                                                         | Backend                                |
-| --------------------------- | --------------------------------------------------------------- | -------------------------------------- |
-| `GOOGLE_API_KEY`            | API key (primary)                                               | Both (see `GOOGLE_GENAI_USE_VERTEXAI`) |
-| `GEMINI_API_KEY`            | API key (fallback)                                              | Both (see `GOOGLE_GENAI_USE_VERTEXAI`) |
-| `GOOGLE_GENAI_USE_VERTEXAI` | Force Gemini Enterprise Agent Platform backend (`true`/`false`) | Gemini Enterprise Agent Platform       |
-| `GOOGLE_CLOUD_PROJECT`      | GCP project ID                                                  | Gemini Enterprise Agent Platform       |
-| `GOOGLE_CLOUD_LOCATION`     | GCP region (default: `us-central1`)                             | Gemini Enterprise Agent Platform       |
+| Variable | Purpose | Backend |
+| - | - | - |
+| `GOOGLE_API_KEY` | API key (primary) | Both (see `GOOGLE_GENAI_USE_VERTEXAI`) |
+| `GEMINI_API_KEY` | API key (fallback) | Both (see `GOOGLE_GENAI_USE_VERTEXAI`) |
+| `GOOGLE_GENAI_USE_VERTEXAI` | Force Gemini Enterprise Agent Platform backend (`true`/`false`) | Gemini Enterprise Agent Platform |
+| `GOOGLE_CLOUD_PROJECT` | GCP project ID | Gemini Enterprise Agent Platform |
+| `GOOGLE_CLOUD_LOCATION` | GCP region (default: `us-central1`) | Gemini Enterprise Agent Platform |
 
 Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
 
@@ -315,12 +315,12 @@ Gemini models accept multimodal inputs (text, images, audio, video, PDFs) and so
 
 ### Supported input methods
 
-| Method                                  | [Image](#image-input) | [Video](#video-input) | [Audio](#audio-input) | [PDF](#pdf-input) |
-| --------------------------------------- | :-------------------: | :-------------------: | :-------------------: | :---------------: |
-| [File upload](#file-upload) (Files API) |           ✅           |           ✅           |           ✅           |         ✅         |
-| Base64 inline data                      |           ✅           |           ✅           |           ✅           |         ✅         |
-| HTTP/HTTPS URLs\*                       |           ✅           |           ✅           |           ✅           |         ✅         |
-| GCS URIs (`gs://...`)                   |           ✅           |           ✅           |           ✅           |         ✅         |
+| Method | [Image](#image-input) | [Video](#video-input) | [Audio](#audio-input) | [PDF](#pdf-input) |
+| - | :-: | :-: | :-: | :-: |
+| [File upload](#file-upload) (Files API) | ✅ | ✅ | ✅ | ✅ |
+| Base64 inline data | ✅ | ✅ | ✅ | ✅ |
+| HTTP/HTTPS URLs\* | ✅ | ✅ | ✅ | ✅ |
+| GCS URIs (`gs://...`) | ✅ | ✅ | ✅ | ✅ |
 
 \*YouTube URLs are supported for video input in preview.
 
@@ -1006,10 +1006,10 @@ For more information, see the Gemini Developer API guides for [Flex](https://ai.
 
 Certain Gemini models support configurable thinking depth. The parameter depends on the model version:
 
-| Model family | Parameter         | Values                                                         |
-| ------------ | ----------------- | -------------------------------------------------------------- |
-| Gemini 3+    | `thinking_level`  | `"minimal"`, `"low"`, `"medium"`, `"high"` (default for Pro)   |
-| Gemini 2.5   | `thinking_budget` | `0` (off), `-1` (dynamic), or a positive integer (token limit) |
+| Model family | Parameter | Values |
+| - | - | - |
+| Gemini 3+ | `thinking_level` | `"minimal"`, `"low"`, `"medium"`, `"high"` (default for Pro) |
+| Gemini 2.5 | `thinking_budget` | `0` (off), `-1` (dynamic), or a positive integer (token limit) |
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI

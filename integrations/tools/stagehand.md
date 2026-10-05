@@ -17,11 +17,11 @@ Stagehand is an open-source SDK for browser agents, backed by [Browserbase](http
 
 ## Tools
 
-| Tool         | Description                                                                |
-| ------------ | -------------------------------------------------------------------------- |
-| `run`        | Execute JavaScript or snapshot actions against the active browser page     |
-| `snapshot`   | Inspect the active page and hydrate bracketed element IDs for use in `run` |
-| `screenshot` | Capture a screenshot of the rendered page                                  |
+| Tool | Description |
+| - | - |
+| `run` | Execute JavaScript or snapshot actions against the active browser page |
+| `snapshot` | Inspect the active page and hydrate bracketed element IDs for use in `run` |
+| `screenshot` | Capture a screenshot of the rendered page |
 
 ## Setup
 
@@ -110,15 +110,15 @@ asyncio.run(main())
 
 ## Server configuration
 
-| Variable                   | Default | Purpose                                                                                                  |
-| -------------------------- | ------- | -------------------------------------------------------------------------------------------------------- |
-| `STAGEHAND_BROWSER`        | `local` | Select `local` or `browserbase`                                                                          |
-| `STAGEHAND_HEADLESS`       | `false` | Run local Chrome headlessly                                                                              |
-| `STAGEHAND_START_URL`      | Unset   | URL to open when the server starts                                                                       |
-| `STAGEHAND_MODEL`          | Unset   | Optional — model for Stagehand AI methods called inside `run`; inference is provided by default if unset |
-| `STAGEHAND_MODEL_API_KEY`  | Unset   | Optional — API key for `STAGEHAND_MODEL`; not required when using default inference                      |
-| `STAGEHAND_RUN_TIMEOUT_MS` | `60000` | Timeout for JavaScript and snapshot-action batches                                                       |
-| `BROWSERBASE_API_KEY`      | Unset   | Required for Browserbase                                                                                 |
+| Variable | Default | Purpose |
+| - | - | - |
+| `STAGEHAND_BROWSER` | `local` | Select `local` or `browserbase` |
+| `STAGEHAND_HEADLESS` | `false` | Run local Chrome headlessly |
+| `STAGEHAND_START_URL` | Unset | URL to open when the server starts |
+| `STAGEHAND_MODEL` | Unset | Optional — model for Stagehand AI methods called inside `run`; inference is provided by default if unset |
+| `STAGEHAND_MODEL_API_KEY` | Unset | Optional — API key for `STAGEHAND_MODEL`; not required when using default inference |
+| `STAGEHAND_RUN_TIMEOUT_MS` | `60000` | Timeout for JavaScript and snapshot-action batches |
+| `BROWSERBASE_API_KEY` | Unset | Required for Browserbase |
 
 > [!NOTE]
 > The MCP server and the agent run in separate Python environments. Stagehand requires `websockets>=16.1.1` while the current LangGraph SDK requires `websockets<16` — the stdio transport isolates these dependency sets.

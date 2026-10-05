@@ -23,8 +23,8 @@ This will help you getting started with `AWSKendraRetriever` [retrieval](../../d
 
 ### Integration details
 
-| Retriever                                                                                            | Source                |                              Package                             |
-| :--------------------------------------------------------------------------------------------------- | :-------------------- | :--------------------------------------------------------------: |
+| Retriever | Source | Package |
+| :- | :- | :-: |
 | [AWSKendraRetriever](https://reference.langchain.com/javascript/langchain-aws/AmazonKendraRetriever) | Various AWS resources | [`@langchain/aws`](https://www.npmjs.com/package/@langchain/aws) |
 
 ## Setup

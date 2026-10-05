@@ -55,22 +55,35 @@ To get started, see the [Managed Deep Agents quickstart](managed-deep-agents-qui
 
 Each part of the agent maps to a file or directory. Add the ones your agent needs:
 
-| Capability                                                                            | Path              | Description                                                                              |
-| ------------------------------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------- |
-| [Model and configuration](managed-deep-agents-agent-definition.md) | `agent.ts`        | The model and core options. Required.                                                    |
-| [Instructions](managed-deep-agents-instructions.md)                | `instructions.md` | The system prompt that defines how the agent behaves.                                    |
-| [Skills](managed-deep-agents-skills.md)                            | `skills/`         | Task-specific playbooks the agent loads when they are relevant.                          |
-| [Tools](managed-deep-agents-tools.md)                              | `tools/`          | Functions the agent calls to run your application logic or reach external services.      |
-| [MCP connectors](managed-deep-agents-mcp-connectors.md)            | `tools/mcp.ts`    | Remote MCP servers that provide tools to the agent.                                      |
-| [Middleware](managed-deep-agents-middleware.md)                    | `middleware/`     | Custom logic that runs around model and tool calls.                                      |
-| [Sandbox](managed-deep-agents-sandboxes.md)                        | `sandbox/`        | An isolated filesystem and shell for running agent-written code.                         |
-| [Memory](managed-deep-agents-memory.md)                            | `memory.ts`       | Preferences and knowledge that persist across threads.                                   |
-| [Identity](managed-deep-agents-identity.md)                        | `identity.ts`     | Per-caller private threads, memory, and credentials for multi-user deployments.          |
-| [Channels](managed-deep-agents-channels.md)                        | `channels/`       | Connections to messaging services, such as Slack, that start runs and receive responses. |
-| [Schedules](managed-deep-agents-schedules.md)                      | `schedules/`      | Managed cron schedules that run the agent on a recurring basis.                          |
-| [Evals](managed-deep-agents-evals.md)                              | `evals/`          | Harbor tasks that test the agent.                                                        |
+| Capability | Path | Description |
+| - | - | - |
+| [Model and configuration](managed-deep-agents-agent-definition.md) | `agent.ts` | The model and core options. Required. |
+| [Instructions](managed-deep-agents-instructions.md) | `instructions.md` | The system prompt that defines how the agent behaves. |
+| [Skills](managed-deep-agents-skills.md) | `skills/` | Task-specific playbooks the agent loads when they are relevant. |
+| [Tools](managed-deep-agents-tools.md) | `tools/` | Functions the agent calls to run your application logic or reach external services. |
+| [MCP connectors](managed-deep-agents-mcp-connectors.md) | `tools/mcp.ts` | Remote MCP servers that provide tools to the agent. |
+| [Middleware](managed-deep-agents-middleware.md) | `middleware/` | Custom logic that runs around model and tool calls. |
+| [Sandbox](managed-deep-agents-sandboxes.md) | `sandbox/` | An isolated filesystem and shell for running agent-written code. |
+| [Memory](managed-deep-agents-memory.md) | `memory.ts` | Preferences and knowledge that persist across threads. |
+| [Identity](managed-deep-agents-identity.md) | `identity.ts` | Per-caller private threads, memory, and credentials for multi-user deployments. |
+| [Channels](managed-deep-agents-channels.md) | `channels/` | Connections to messaging services, such as Slack, that start runs and receive responses. |
+| [Schedules](managed-deep-agents-schedules.md) | `schedules/` | Managed cron schedules that run the agent on a recurring basis. |
+| [Evals](managed-deep-agents-evals.md) | `evals/` | Harbor tasks that test the agent. |
 
 For the full layout, see [Project structure](managed-deep-agents-project-structure.md). Instructions, skills, and optional durable memory are stored in [Context Hub](managed-deep-agents-context-hub.md).
+
+## Relationship to Deep Agents
+
+Managed Deep Agents runs the open source [Deep Agents](../../javascript/deepagents/overview.md) harness rather than a second framework. The agent loop, filesystem tools, subagents, and skills are the same, so there is no second API to learn and an agent you already built keeps working.
+
+Managed Deep Agents adds the layer around the agent. The sandbox, durable memory, channels, and schedules above are declarations in a project file rather than services you build and operate. [Connections](managed-deep-agents-connections.md) run OAuth, so end users authorize their own accounts instead of you provisioning credentials for each one. LangSmith hosts the result on [Agent Server](../agent-server-overview.md). In the code, the difference is narrower: who compiles the agent.
+
+* [createDeepAgent](https://reference.langchain.com/javascript/deepagents/agent/createDeepAgent) returns a compiled agent. You run it, and you own the backend, store, checkpointer, and server around it.
+* `defineDeepAgent` returns a definition. The `mda` CLI hands it to the managed runtime, which supplies those pieces along with memory, skills, and the system prompt, then compiles the agent with [createDeepAgent](https://reference.langchain.com/javascript/deepagents/agent/createDeepAgent).
+
+So `defineDeepAgent` takes the same options minus the managed ones, plus a required static `name`. Every `define*` function works this way: declare what the agent needs, and leave the lifecycle to the runtime.
+
+Stay on Deep Agents when you run the agent yourself or need a [backend](../../javascript/deepagents/backends.md), store, or checkpointer of your own. For a side-by-side comparison of the two, and the steps to convert an agent you already built, see [Move from Deep Agents](managed-deep-agents-migrate.md).
 
 ## Next steps
 

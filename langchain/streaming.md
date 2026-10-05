@@ -35,11 +35,11 @@ See the [common patterns](#common-patterns) section below for additional end-to-
 
 Pass one or more of the following stream modes as a list to the [`stream`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.stream) or [`astream`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.astream) methods:
 
-| Mode       | Description                                                                                                                                                       |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `updates`  | Streams state updates after each agent step. If multiple updates are made in the same step (e.g., multiple nodes are run), those updates are streamed separately. |
-| `messages` | Streams tuples of `(token, metadata)` from any graph nodes where an LLM is invoked.                                                                               |
-| `custom`   | Streams custom data from inside your graph nodes using the stream writer.                                                                                         |
+| Mode | Description |
+| - | - |
+| `updates` | Streams state updates after each agent step. If multiple updates are made in the same step (e.g., multiple nodes are run), those updates are streamed separately. |
+| `messages` | Streams tuples of `(token, metadata)` from any graph nodes where an LLM is invoked. |
+| `custom` | Streams custom data from inside your graph nodes using the stream writer. |
 
 ## Agent progress
 
@@ -972,7 +972,7 @@ Tool response: [{'type': 'text', 'text': "It's always sunny in San Francisco!"}]
 
 When there are multiple LLMs at any point in an agent, it's often necessary to disambiguate the source of messages as they are generated.
 
-To do this, pass a [`name`](https://reference.langchain.com/python/langchain/agents/#langchain.agents.create_agent\(name\)) to each agent when creating it. This name is then available in metadata via the `lc_agent_name` key when streaming in `"messages"` mode.
+To do this, pass a [`name`](https://reference.langchain.com/python/langchain/agents/create_agent) to each agent when creating it. This name is then available in metadata via the `lc_agent_name` key when streaming in `"messages"` mode.
 
 Below, we update the [streaming tool calls](#streaming-tool-calls) example:
 

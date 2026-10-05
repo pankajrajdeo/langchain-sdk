@@ -322,32 +322,32 @@ Key Points about Filtering in Oracle 23ai:
 
 **Available Filter Operators:**
 
-| Operator         | Description                                                                                                 |
-| ---------------- | ----------------------------------------------------------------------------------------------------------- |
-| `\$exists`       | Field exists.                                                                                               |
-| `\$eq`           | Field value equals the operand value (`=`).                                                                 |
-| `\$ne`           | Field exists and value does not equal the operand value (`!=`).                                             |
-| `\$gt`           | Field value is greater than the operand value (`>`).                                                        |
-| `\$lt`           | Field value is less than the operand value (`<`).                                                           |
-| `\$gte`          | Field value is greater than or equal to the operand value (`>=`).                                           |
-| `\$lte`          | Field value is less than or equal to the operand value (`<=`).                                              |
-| `\$between`      | Field value is between (or equal to) two values in the operand array.                                       |
-| `\$startsWith`   | Field value starts with the operand value.                                                                  |
-| `\$hasSubstring` | Field value contains the operand as a substring.                                                            |
-| `\$instr`        | Field value contains the operand as a substring.                                                            |
-| `\$regex`        | Field value matches the given regular expression pattern.                                                   |
-| `\$like`         | Field value matches the operand pattern (using SQL-like syntax).                                            |
-| `\$in`           | Field value equals at least one value in the operand array.                                                 |
-| `\$nin`          | Field exists, but its value is not equal to any in the operand array, or the field does not exist.          |
-| `\$all`          | Field value is an array containing all items from the operand array, or a scalar matching a single operand. |
+| Operator | Description |
+| - | - |
+| `\$exists` | Field exists. |
+| `\$eq` | Field value equals the operand value (`=`). |
+| `\$ne` | Field exists and value does not equal the operand value (`!=`). |
+| `\$gt` | Field value is greater than the operand value (`>`). |
+| `\$lt` | Field value is less than the operand value (`<`). |
+| `\$gte` | Field value is greater than or equal to the operand value (`>=`). |
+| `\$lte` | Field value is less than or equal to the operand value (`<=`). |
+| `\$between` | Field value is between (or equal to) two values in the operand array. |
+| `\$startsWith` | Field value starts with the operand value. |
+| `\$hasSubstring` | Field value contains the operand as a substring. |
+| `\$instr` | Field value contains the operand as a substring. |
+| `\$regex` | Field value matches the given regular expression pattern. |
+| `\$like` | Field value matches the operand pattern (using SQL-like syntax). |
+| `\$in` | Field value equals at least one value in the operand array. |
+| `\$nin` | Field exists, but its value is not equal to any in the operand array, or the field does not exist. |
+| `\$all` | Field value is an array containing all items from the operand array, or a scalar matching a single operand. |
 
 * You can combine these filters using logical operators:
 
 | Logical Operator | Description |
-| ---------------- | ----------- |
-| `\$and`          | Logical AND |
-| `\$or`           | Logical OR  |
-| `\$nor`          | Logical NOR |
+| - | - |
+| `\$and` | Logical AND |
+| `\$or` | Logical OR |
+| `\$nor` | Logical NOR |
 
 **Example Filter:**
 

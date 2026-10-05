@@ -1,6 +1,6 @@
 ---
 title: "LangSmith Engine notifications"
-description: "Send LangSmith Engine issue and run-failure notifications to Slack channels and webhook endpoints."
+description: "Send LangSmith Engine notifications to Slack, Jira Automation, and webhook endpoints."
 source: "https://docs.langchain.com/langsmith/engine-notifications"
 category: "docs"
 tags: [docs, langsmith, engine-notifications]
@@ -8,79 +8,134 @@ tags: [docs, langsmith, engine-notifications]
 
 # LangSmith Engine notifications
 
-> Send LangSmith Engine issue and run-failure notifications to Slack channels and webhook endpoints.
+> Send LangSmith Engine notifications to Slack, Jira Automation, and webhook endpoints.
 
-[LangSmith Engine](engine.md) can notify you when it opens a new issue, links a new trace to an existing issue, or fails to complete a run. Deliver these notifications to a **Slack channel**, an **HTTP webhook endpoint**, or both. Each destination has its own event types and minimum priority, so you can route urgent issues to a paging webhook while sending every issue to a Slack channel.
+[LangSmith Engine](engine.md) can notify you when it opens a new issue, links a new trace to an existing issue, or fails to complete a run. Deliver these notifications to a **Slack channel**, a **Jira Automation incoming webhook**, or an **HTTP webhook endpoint**. Each destination has its own event types and minimum priority, so you can route urgent issues to a paging webhook while sending every issue to a Slack channel.
 
 ## Add a destination
 
-Notification destinations are configured per tracing project. On the **Engine** page, click **Configure Engine**, then under **Notifications** click **+ Add destination**. For each destination, choose:
+Notification destinations are configured per tracing project or agent environment. On the **Engine** page, click **Configure Engine**, then under **Notifications** click **Add**. If no destination exists, the editor opens automatically. For each destination, choose:
 
-* **Deliver to**: **Slack** or **Webhook**. See [Notify a Slack channel](#notify-a-slack-channel) and [Send to a webhook](#send-to-a-webhook).
+* **Destination type**: Select the **Slack**, **Jira**, or **Webhook** tab. See [Notify a Slack channel](#notify-a-slack-channel), [Create Jira work items](#create-jira-work-items), and [Send to a webhook](#send-to-a-webhook).
 * **Notify when**: The [event types](#event-types) that trigger a notification.
-* **Minimum priority**: The lowest issue [severity](#severity-filtering) that triggers a notification.
+* **Minimum issue severity**: The issue [severity filter](#severity-filtering) that determines which notifications are sent.
 
 To be alerted when a [watched issue](engine.md#watch-an-issue) recurs, click **Alert me via Slack** on the issue, which opens the same **Notifications** section.
 
 ## Event types
 
-| Event                                               | Sent when                                      |
-| --------------------------------------------------- | ---------------------------------------------- |
-| [`issue.created`](#issue-created)                   | Engine opens a new issue.                      |
-| [`issue.trace.added`](#issue-trace-added)           | Engine links a new trace to an existing issue. |
-| [`issue.agent_run.failed`](#issue-agent_run-failed) | An Engine run fails to complete.               |
+| Event | Sent when |
+| - | - |
+| [`issue.created`](#issue-created) | Engine opens a new issue. |
+| [`issue.trace.added`](#issue-trace-added) | Engine links a new trace to an existing issue. |
+| [`issue.agent_run.failed`](#issue-agent_run-failed) | An Engine run fails to complete. |
 
-This is the complete set of event types Engine sends today. New types may be added in the future. A destination created without an explicit list of event types receives only `issue.created`.
+For new destinations, the **Notify when** picker offers `issue.created` and `issue.trace.added`. Existing subscriptions can also receive `issue.agent_run.failed`. A destination created without an explicit list of event types receives only `issue.created`.
 
 ## Severity filtering
 
-The **Minimum priority** setting is stored as a `severity_threshold` from `0` to `3`. For issue events, a notification is delivered only when the issue's `severity` is less than or equal to the threshold. Lower numbers are more urgent.
+The **Minimum issue severity** setting is stored as a `severity_threshold` from `0` to `3`. For issue events, a notification is delivered only when the issue's `severity` is less than or equal to the threshold. Lower numbers are more urgent.
 
 | Severity | Meaning |
-| -------- | ------- |
-| `0`      | Urgent  |
-| `1`      | High    |
-| `2`      | Medium  |
-| `3`      | Low     |
+| - | - |
+| `0` | Urgent |
+| `1` | High |
+| `2` | Medium |
+| `3` | Low |
 
-For example, a destination with `severity_threshold: 1` receives events for `URGENT` (0) and `HIGH` (1) issues only.
+The picker offers **High severity only** (`1`), **Medium and high severity** (`2`), and **All severities** (`3`). For example, a destination with `severity_threshold: 1` receives events for `URGENT` (0) and `HIGH` (1) issues only.
 
 Severity thresholds do not apply to [`issue.agent_run.failed`](#issue-agent_run-failed), because run-failure events are scoped to an Engine session rather than to a specific issue.
 
 ## Notify a Slack channel
 
+If Slack is not configured on your self-hosted instance, the **Slack** tab shows **Contact your operator to enable Slack notifications**. The operator [creates a Slack app and configures its credentials](self-host-slack.md). You then connect a workspace through Slack authorization.
+
+To add a Slack destination:
+
 ### Connect a Slack workspace
-Connecting a Slack workspace is an organization-level action you perform once, not per project. Connecting or disconnecting a workspace requires the `organization:manage` permission. In the [LangSmith console](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-engine-notifications), open **Settings**, go to your organization's **General** settings, and under **Slack** click **Connect Slack**. Authorize the LangSmith app in Slack. You can connect more than one Slack workspace to an organization.
+Connecting a Slack workspace is an organization-level action you perform once, not per project. Connecting or disconnecting a workspace requires the `organization:manage` permission. In your LangSmith instance, open **Settings**, go to your organization's **General** settings, and under **Slack** click **Connect Slack**. Authorize the configured app in Slack. You can connect more than one Slack workspace to an organization.
 
 ### Add a Slack destination
-On the **Engine** page, click **Configure Engine**, then click **Add destination**. Set the **Deliver to** field to **Slack**, then choose the workspace and channel under **Channel**.
+On the **Engine** page, click **Configure Engine**. Under **Notifications**, click **Add** if the editor is not already open. Select the **Slack** tab, then use the channel selector to choose a workspace and channel. If no workspace is connected, click **Connect Slack** in the channel selector and complete authorization.
 
-### Choose events and priority
-Under **Notify when**, select which [event types](#event-types) post a message to the channel. Under **Minimum priority**, choose the lowest [severity](#severity-filtering) that triggers a notification. Click **Add destination** to save.
+### Choose events and severity
+Under **Notify when**, select which [event types](#event-types) post a message to the channel. Under **Minimum issue severity**, choose which issue severities trigger a notification. Click **Add** to save.
 
-LangSmith automatically joins the public channel you select. To post to a private channel, invite the LangSmith app to that channel in Slack first.
+LangSmith joins the selected public channel when it first delivers a message, if needed. To post to a private channel, invite the configured Slack app to that channel in Slack first, then refresh the channel picker.
 
 Each Slack message includes the issue title, description, and severity, a **View issue** link back to LangSmith, and (for issue events) a chart of the issue's recurrence over time. If a workspace's connection becomes invalid, for example, the app is removed from Slack, its destinations stop delivering until you reconnect it from your organization's **General** settings.
 
-Slack destinations post through LangSmith's managed Slack app instead of sending the [webhook payload](#webhook-payload-reference), so signing secrets and custom headers do not apply.
+Slack destinations use the configured Slack app to post messages. They do not send the [webhook payload](#webhook-payload-reference), so webhook signing secrets and custom headers do not apply.
+
+## Create Jira work items
+
+The **Jira** destination sends Engine events to a Jira Automation incoming webhook. Configure a Jira rule to turn new Engine issues into Jira work items. LangSmith sends the [webhook payload](#webhook-payload-reference) with the `X-Automation-Webhook-Token` header. Jira destinations use this token for authentication and do not have an HMAC signing secret.
+
+Use the final incoming-webhook URL. Jira deliveries do not follow redirects, including redirects on the same host. A `3xx` response is a permanent delivery error and is not retried. This keeps the token and payload on the configured endpoint.
+
+You need permission to manage Jira automation rules and a project where the rule can create work items. Jira Cloud hosts the incoming webhook on Atlassian's infrastructure. For Jira Data Center, verify that your installed version's endpoint accepts the required token header. LangSmith's deployment type does not determine whether you use Jira Cloud or Data Center.
+
+To create a work item for each new Engine issue:
+
+### Configure the incoming webhook in Jira
+Create a Jira Automation rule with an **Incoming webhook** trigger. If Jira requires a saved rule to generate the URL, save it without enabling it first.
+
+Select **No work items from the webhook**, called **No issues from the webhook** in older interfaces. Engine sends its own event payload, rather than Jira issue keys.
+
+Generate the trigger's secret/token. Copy the webhook URL and token before saving. Keep the token out of the URL; LangSmith sends it in the authentication header.
+
+### Add the Jira creation action
+Restrict the rule to the intended project. Add a **Create work item** action, called **Create issue** in older interfaces. Select an existing project and issue type, and configure any fields Jira requires.
+
+For Jira Cloud, set **Summary** to `{{webhookData.object.name}}`. Set **Description** to:
+
+```text
+{{webhookData.object.description}}
+
+Severity: {{webhookData.object.severity}}
+LangSmith issue: {{webhookData.object.url}}
+```
+
+Jira Cloud exposes the envelope's `data` member as `webhookData`. Use `webhookData.object.*` for issue fields. The extra `.data` in `webhookData.data.object.name` resolves to an empty summary. Verify payload handling in your installed Jira Data Center version before using these mappings there.
+
+### Add the Jira destination in LangSmith
+On the **Engine** page, click **Configure Engine**. Under **Notifications**, click **Add** and select **Jira**. Enter the **Jira Webhook URL** and **Jira webhook token** from the trigger.
+
+Under **Notify when**, select only `issue.created` for this creation rule. Choose the **Minimum issue severity**, then click **Add**. Enable the rule in Jira.
+
+### Verify Jira created the work item
+After Engine creates an issue that matches your severity filter, check Jira's automation audit log. Confirm that the rule succeeds and creates a work item with the expected summary, description, severity, and LangSmith issue link.
+
+An HTTP success means Jira accepted the webhook, not that it created a work item. Rule conditions, required fields, actor permissions, and automation usage limits can prevent creation.
+
+LangSmith stores the Jira token without displaying it again. To replace it, enter a new token. Changing the webhook URL also requires entering a token for the replacement URL. If you lose the token, rotate it in Jira and update the LangSmith destination.
+
+### Reach a private Jira endpoint
+
+Private Jira endpoints require network access from your LangSmith deployment. In self-hosted and hybrid deployments, webhook delivery runs in the customer data plane. Configure the following before adding the destination:
+
+* **Network access**: Allow DNS resolution and outbound connectivity to Jira from both the LangSmith API and webhook delivery processes. Allow their source addresses through Jira's firewall.
+* **Private addresses**: If the endpoint resolves to a private IP, set `SSRF_ALLOW_PRIVATE_IPS_WEBHOOKS=true` for both processes. Kubernetes-internal hostnames also require `SSRF_ALLOW_K8S_INTERNAL=true`. Other webhook URL protections remain active. For configuration, see [Set self-hosted environment variables](self-host-environment-variables.md).
+* **TLS trust**: If Jira uses a private certificate authority, add its CA to the webhook delivery processes' trusted roots. Use system roots or `SSL_CERT_FILE`, retain other required roots, and keep TLS verification enabled.
 
 ## Send to a webhook
 
-Forward Engine events to your own incident-management, paging, or chat tooling. Add a destination and set the **Deliver to** field to **Webhook**. Enter a URL and, optionally, [custom headers](#custom-headers). Each delivery is [signed](#signing-secret) so you can verify its authenticity.
+Forward Engine events to your own incident-management, paging, or chat tooling. Add a destination and select the **Webhook** tab. Enter a URL and, optionally, [custom headers](#custom-headers). Each delivery is [signed](#signing-secret) so you can verify its authenticity.
 
 ### Delivery
 
 LangSmith sends a `POST` request with a JSON body to your webhook URL. The request uses `Content-Type: application/json` and includes any custom headers you attached to the destination.
 
-| Property  | Value                                                                                                                                                                                                      |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Method    | `POST`                                                                                                                                                                                                     |
-| Body      | JSON, [common envelope](#event-envelope) below                                                                                                                                                             |
-| Scheme    | `http://` and `https://` are accepted. `https://` is strongly recommended                                                                                                                                  |
-| Signature | `X-LangSmith-Signature` header, signed with the destination's signing secret                                                                                                                               |
-| Timeout   | 20 seconds per attempt                                                                                                                                                                                     |
-| Attempts  | Up to 4 attempts (1 initial plus 3 retries with exponential backoff) on transport errors, HTTP `408`, `425`, `429`, and any HTTP `5xx`. Other `4xx` responses are treated as permanent and are not retried |
-| Response  | Success is determined from the status code alone. Response bodies are ignored.                                                                                                                             |
+| Property | Value |
+| - | - |
+| Method | `POST` |
+| Body | JSON, [common envelope](#event-envelope) below |
+| Scheme | `http://` and `https://` are accepted. `https://` is strongly recommended |
+| Signature | `X-LangSmith-Signature` header, signed with the destination's signing secret |
+| Timeout | 20 seconds per attempt |
+| Attempts | Up to 4 attempts (1 initial plus 3 retries with exponential backoff) on transport errors, HTTP `408`, `425`, `429`, and any HTTP `5xx`. Other `4xx` responses are treated as permanent and are not retried |
+| Response | Success is determined from the status code alone. Response bodies are ignored. |
 
 > [!NOTE]
 > Retries deliver a byte-identical payload, including the same `id`. Dedupe on `id` so a retried delivery does not produce a duplicate downstream effect.
@@ -91,7 +146,7 @@ You can attach arbitrary headers to each destination (for example, `Authorizatio
 
 ### Signing secret
 
-Each destination has a signing secret. LangSmith uses this secret to sign the raw webhook request body and sends the result in the `X-LangSmith-Signature` header.
+Each **Webhook** destination has a signing secret. LangSmith uses this secret to sign the raw webhook request body and sends the result in the `X-LangSmith-Signature` header. Jira destinations use their token header instead.
 
 The header value has this format:
 
@@ -162,7 +217,7 @@ export function verifyLangSmithSignature({
 
 Roll a signing secret when it may have been exposed, or when your organization's credential rotation policy requires a new secret.
 
-To roll a secret, open the destination row in **Engine Settings**, click **Roll signing secret**, and confirm. LangSmith generates a new signing secret and uses it for future webhook deliveries immediately. The previous secret stops signing deliveries as soon as the roll completes.
+To roll a secret, open the destination row in the **Engine settings** panel, click **Roll signing secret**, and confirm. LangSmith generates a new signing secret and uses it for future webhook deliveries immediately. The previous secret stops signing deliveries as soon as the roll completes.
 
 After rolling the secret, update every consumer that verifies `X-LangSmith-Signature` with the new value.
 
@@ -198,52 +253,52 @@ Use the example body from [`issue.created`](#issue-created) as `sample-issue-cre
 
 ## Webhook payload reference
 
-Webhook destinations receive the JSON payloads below. Slack destinations do not.
+Webhook and Jira destinations receive the JSON payloads below. Slack destinations do not.
 
 ### Event envelope
 
 Every event delivered to your endpoint uses the same outer JSON shape.
 
-| Field        | Type    | Description                                                                                                                                              |
-| ------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`         | UUID    | Unique identifier for this delivery. Stable across retries. Use it to dedupe.                                                                            |
-| `type`       | string  | Event type. One of [`issue.created`](#issue-created), [`issue.trace.added`](#issue-trace-added), or [`issue.agent_run.failed`](#issue-agent_run-failed). |
-| `created`    | integer | Unix seconds (UTC) when the event was enqueued.                                                                                                          |
-| `request_id` | UUID    | Shared by every event fired from the same upstream action. See [Batch coalescing](#batch-coalescing).                                                    |
-| `data`       | object  | Event payload. Always contains `data.object`. Contains [`data.trace`](#data-trace) only on [`issue.trace.added`](#issue-trace-added) events.             |
+| Field | Type | Description |
+| - | - | - |
+| `id` | UUID | Unique identifier for this delivery. Stable across retries. Use it to dedupe. |
+| `type` | string | Event type. One of [`issue.created`](#issue-created), [`issue.trace.added`](#issue-trace-added), or [`issue.agent_run.failed`](#issue-agent_run-failed). |
+| `created` | integer | Unix seconds (UTC) when the event was enqueued. |
+| `request_id` | UUID | Shared by every event fired from the same upstream action. See [Batch coalescing](#batch-coalescing). |
+| `data` | object | Event payload. Always contains `data.object`. Contains [`data.trace`](#data-trace) only on [`issue.trace.added`](#issue-trace-added) events. |
 
 ### Issue `data.object`
 
 For [`issue.created`](#issue-created) and [`issue.trace.added`](#issue-trace-added), `data.object` is a snapshot of the issue. Treat it as the authoritative state of the issue at the time the event was generated.
 
-| Field          | Type    | Description                                                                    |
-| -------------- | ------- | ------------------------------------------------------------------------------ |
-| `id`           | UUID    | Issue ID.                                                                      |
-| `name`         | string  | Short title of the issue.                                                      |
-| `description`  | string  | Human-readable description.                                                    |
-| `severity`     | integer | `0` (urgent) through `3` (low). See [Severity filtering](#severity-filtering). |
-| `tenant_id`    | UUID    | Workspace the issue belongs to.                                                |
-| `tenant_name`  | string  | Workspace display name.                                                        |
-| `session_id`   | UUID    | Tracing project the issue belongs to.                                          |
-| `session_name` | string  | Tracing project name.                                                          |
-| `url`          | string  | Deep link to the issue in the LangSmith UI.                                    |
+| Field | Type | Description |
+| - | - | - |
+| `id` | UUID | Issue ID. |
+| `name` | string | Short title of the issue. |
+| `description` | string | Human-readable description. |
+| `severity` | integer | `0` (urgent) through `3` (low). See [Severity filtering](#severity-filtering). |
+| `tenant_id` | UUID | Workspace the issue belongs to. |
+| `tenant_name` | string | Workspace display name. |
+| `session_id` | UUID | Tracing project the issue belongs to. |
+| `session_name` | string | Tracing project name. |
+| `url` | string | Deep link to the issue in the LangSmith UI. |
 
 ### Run failure `data.object`
 
 For [`issue.agent_run.failed`](#issue-agent_run-failed), `data.object` describes the Engine run that failed.
 
-| Field           | Type   | Description                                               |
-| --------------- | ------ | --------------------------------------------------------- |
-| `tenant_id`     | UUID   | Workspace the run belongs to.                             |
-| `tenant_name`   | string | Workspace display name.                                   |
-| `session_id`    | UUID   | Tracing project the run belongs to.                       |
-| `session_name`  | string | Tracing project name.                                     |
-| `url`           | string | Deep link to the LangSmith project in the UI.             |
-| `thread_id`     | string | Engine thread ID.                                         |
-| `run_id`        | string | Engine run ID. Omitted when unavailable.                  |
-| `status`        | string | Final run status.                                         |
+| Field | Type | Description |
+| - | - | - |
+| `tenant_id` | UUID | Workspace the run belongs to. |
+| `tenant_name` | string | Workspace display name. |
+| `session_id` | UUID | Tracing project the run belongs to. |
+| `session_name` | string | Tracing project name. |
+| `url` | string | Deep link to the LangSmith project in the UI. |
+| `thread_id` | string | Engine thread ID. |
+| `run_id` | string | Engine run ID. Omitted when unavailable. |
+| `status` | string | Final run status. |
 | `error_message` | string | Error text from the failed run. Omitted when unavailable. |
-| `occurred_at`   | string | RFC 3339 timestamp of when the failure occurred.          |
+| `occurred_at` | string | RFC 3339 timestamp of when the failure occurred. |
 
 <a id="data-trace"></a>
 
@@ -251,12 +306,12 @@ For [`issue.agent_run.failed`](#issue-agent_run-failed), `data.object` describes
 
 `data.trace` is included only on [`issue.trace.added`](#issue-trace-added) events.
 
-| Field        | Type           | Description                                                           |
-| ------------ | -------------- | --------------------------------------------------------------------- |
-| `run_id`     | UUID           | ID of the run that was linked to the issue.                           |
-| `trace_id`   | UUID           | ID of the trace that contains the run.                                |
-| `start_time` | string         | RFC 3339 timestamp of when the run started.                           |
-| `comment`    | string \| null | Optional note recorded when the trace was linked. Omitted when empty. |
+| Field | Type | Description |
+| - | - | - |
+| `run_id` | UUID | ID of the run that was linked to the issue. |
+| `trace_id` | UUID | ID of the trace that contains the run. |
+| `start_time` | string | RFC 3339 timestamp of when the run started. |
+| `comment` | string \| null | Optional note recorded when the trace was linked. Omitted when empty. |
 
 ### Batch coalescing
 

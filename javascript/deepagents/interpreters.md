@@ -44,13 +44,13 @@ Use interpreters for code inside the agent loop: composing tools, preserving sta
 
 Use [sandboxes](sandboxes.md) for code against an environment: shell commands, package installs, tests, filesystem edits, and OS-level execution.
 
-| Need                                                                                             | Use                                                                                |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| One or two simple external calls                                                                 | Normal tool calling                                                                |
-| Pure in-memory JavaScript: loops, branches, retries, or data transforms (no external tools)      | Interpreter                                                                        |
+| Need | Use |
+| - | - |
+| One or two simple external calls | Normal tool calling |
+| Pure in-memory JavaScript: loops, branches, retries, or data transforms (no external tools) | Interpreter |
 | Many external tool calls orchestrated from code (requires [PTC](#programmatic-tool-calling-ptc)) | Interpreter with [programmatic tool calling (PTC)](#programmatic-tool-calling-ptc) |
-| Many independent units of work, multiple perspectives, or recursive analysis over large inputs   | Interpreter with [dynamic subagents](dynamic-subagents.md) |
-| Shell commands, package installs, tests, or full OS filesystem access                            | [Sandboxes](sandboxes.md)                                  |
+| Many independent units of work, multiple perspectives, or recursive analysis over large inputs | Interpreter with [dynamic subagents](dynamic-subagents.md) |
+| Shell commands, package installs, tests, or full OS filesystem access | [Sandboxes](sandboxes.md) |
 
 ## Quickstart
 
@@ -341,16 +341,16 @@ Interpreters use QuickJS to run untrusted JavaScript with strict default isolati
 
 Every tool you expose through PTC is an outside capability that interpreter code can use. Treat the PTC allowlist as a permission boundary: expose only the tools the agent needs, and avoid bridging broad tools that can access sensitive systems, spend money, mutate data, or call unrestricted networks unless that behavior is intentional.
 
-| Capability                                                  | Available by default | How to expose it                                                                                                         |
-| ----------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| JavaScript execution                                        | Yes                  | Add interpreter middleware                                                                                               |
-| Top-level `await`                                           | Yes                  | Use promises in interpreter code                                                                                         |
-| `console.log`, `warn`, `error` capture                      | Yes                  | Disable with `captureConsole: false`                                                                                     |
-| Agent tools                                                 | No                   | Add a PTC allowlist                                                                                                      |
-| Filesystem access                                           | No                   | Add the [built-in filesystem tools](overview.md#virtual-filesystem-access) via the PTC allowlist |
-| Network access                                              | No                   | Expose a specific network tool through PTC                                                                               |
-| Wall-clock or datetime access                               | No                   | Expose an explicit time tool if needed                                                                                   |
-| Shell commands, package installs, tests, OS-level execution | No                   | Use a [sandbox backend](sandboxes.md)                                                            |
+| Capability | Available by default | How to expose it |
+| - | - | - |
+| JavaScript execution | Yes | Add interpreter middleware |
+| Top-level `await` | Yes | Use promises in interpreter code |
+| `console.log`, `warn`, `error` capture | Yes | Disable with `captureConsole: false` |
+| Agent tools | No | Add a PTC allowlist |
+| Filesystem access | No | Add the [built-in filesystem tools](overview.md#virtual-filesystem-access) via the PTC allowlist |
+| Network access | No | Expose a specific network tool through PTC |
+| Wall-clock or datetime access | No | Expose an explicit time tool if needed |
+| Shell commands, package installs, tests, OS-level execution | No | Use a [sandbox backend](sandboxes.md) |
 
 > [!NOTE]
 > **How code execution works**
@@ -361,18 +361,18 @@ Every tool you expose through PTC is an outside capability that interpreter code
 
 `createCodeInterpreterMiddleware` accepts the following options:
 
-| Option               | Default                          | Purpose                                                                                                                                                                                  |
-| -------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `memoryLimitBytes`   | `64 * 1024 * 1024` <br />(64 MB) | Cap QuickJS heap memory per session.                                                                                                                                                     |
-| `maxStackSizeBytes`  | `320 * 1024`                     | Cap QuickJS stack size per session.                                                                                                                                                      |
-| `executionTimeoutMs` | `5000`                           | Timeout limit in milliseconds for each `eval` call. Negative values disable the timeout.                                                                                                 |
-| `toolName`           | `"eval"`                         | Name of the interpreter tool exposed to the model.                                                                                                                                       |
-| `captureConsole`     | `true`                           | Capture `console.log`, `console.warn`, and `console.error` in the tool response. Set to `false` to discard console output.                                                               |
-| `maxResultChars`     | `4000`                           | Truncate result, error, and console output returned to the model to a maximum character count.                                                                                           |
-| `systemPrompt`       | `null`                           | Custom system prompt for the interpreter tool. Defaults to the built-in prompt when `null`.                                                                                              |
-| `ptc`                | omitted                          | Allowlist of tool names or `StructuredToolInterface` instances exposed as `tools.*` inside the interpreter. Omit to disable. See [Enable PTC](#enable-ptc).                              |
-| `maxPtcCalls`        | `256`                            | Maximum `tools.*` calls allowed per `eval`. Set to `null` only in trusted environments. See [Programmatic tool calling (PTC)](#programmatic-tool-calling-ptc) and [Security](#security). |
-| `subagents`          | `true`                           | Expose the built-in `task()` global when the agent has subagents. Set to `false` to require dispatch through the normal `task` tool. See [Dynamic subagents](#dynamic-subagents).        |
+| Option | Default | Purpose |
+| - | - | - |
+| `memoryLimitBytes` | `64 * 1024 * 1024` <br />(64 MB) | Cap QuickJS heap memory per session. |
+| `maxStackSizeBytes` | `320 * 1024` | Cap QuickJS stack size per session. |
+| `executionTimeoutMs` | `5000` | Timeout limit in milliseconds for each `eval` call. Negative values disable the timeout. |
+| `toolName` | `"eval"` | Name of the interpreter tool exposed to the model. |
+| `captureConsole` | `true` | Capture `console.log`, `console.warn`, and `console.error` in the tool response. Set to `false` to discard console output. |
+| `maxResultChars` | `4000` | Truncate result, error, and console output returned to the model to a maximum character count. |
+| `systemPrompt` | `null` | Custom system prompt for the interpreter tool. Defaults to the built-in prompt when `null`. |
+| `ptc` | omitted | Allowlist of tool names or `StructuredToolInterface` instances exposed as `tools.*` inside the interpreter. Omit to disable. See [Enable PTC](#enable-ptc). |
+| `maxPtcCalls` | `256` | Maximum `tools.*` calls allowed per `eval`. Set to `null` only in trusted environments. See [Programmatic tool calling (PTC)](#programmatic-tool-calling-ptc) and [Security](#security). |
+| `subagents` | `true` | Expose the built-in `task()` global when the agent has subagents. Set to `false` to require dispatch through the normal `task` tool. See [Dynamic subagents](#dynamic-subagents). |
 
 ***
 

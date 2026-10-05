@@ -20,8 +20,8 @@ reads `search-index.json`, uses `llms-full.txt` when present, and returns
 
 ### Integration details
 
-| Retriever          | Source                        |                                 Package                                |
-| :----------------- | :---------------------------- | :--------------------------------------------------------------------: |
+| Retriever | Source | Package |
+| :- | :- | :-: |
 | `SourceyRetriever` | Published Sourcey docs sites. | [`langchain-sourcey`](https://www.npmjs.com/package/langchain-sourcey) |
 
 ## Setup

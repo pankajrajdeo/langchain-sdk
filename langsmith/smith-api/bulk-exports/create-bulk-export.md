@@ -243,6 +243,10 @@ components:
         compression:
           $ref: '#/components/schemas/BulkExportCompression'
           default: zstandard
+        is_rollup_disabled:
+          type: boolean
+          title: Is Rollup Disabled
+          default: false
         interval_hours:
           anyOf:
             - type: integer
@@ -300,6 +304,10 @@ components:
         compression:
           $ref: '#/components/schemas/BulkExportCompression'
           default: zstandard
+        is_rollup_disabled:
+          type: boolean
+          title: Is Rollup Disabled
+          default: false
         interval_hours:
           anyOf:
             - type: integer

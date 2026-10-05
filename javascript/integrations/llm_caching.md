@@ -14,11 +14,11 @@ tags: [docs, javascript, integrations, llm_caching]
 
 Below are some integrations that allow you to cache results of individual LLM calls using different caches with different strategies.
 
-| Integration                                                                                       | Downloads                                                                                                                                                                                                                                                                                 |
-| :------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Integration | Downloads |
+| :- | :- |
 | [`Azure Cosmos DB NoSQL semantic`](llm_caching/azure_cosmosdb_nosql.md) | <span data-sort-value="3760"><a href="https://www.npmjs.com/package/@langchain/azure-cosmosdb" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`BetterDB Agent Cache`](https://www.betterdb.com/ai)                                             | <span data-sort-value="1193"><a href="https://www.npmjs.com/package/@betterdb/agent-cache" target="_blank">  <img src="https://img.shields.io/npm/dm/@betterdb/agent-cache?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span>         |
-| [`BetterDB Semantic Cache`](https://www.betterdb.com/ai)                                          | <span data-sort-value="156"><a href="https://www.npmjs.com/package/@betterdb/semantic-cache" target="_blank">  <img src="https://img.shields.io/npm/dm/@betterdb/semantic-cache?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span>    |
+| [`BetterDB Agent Cache`](https://www.betterdb.com/ai) | <span data-sort-value="1193"><a href="https://www.npmjs.com/package/@betterdb/agent-cache" target="_blank">  <img src="https://img.shields.io/npm/dm/@betterdb/agent-cache?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
+| [`BetterDB Semantic Cache`](https://www.betterdb.com/ai) | <span data-sort-value="156"><a href="https://www.npmjs.com/package/@betterdb/semantic-cache" target="_blank">  <img src="https://img.shields.io/npm/dm/@betterdb/semantic-cache?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
 
 ***
 

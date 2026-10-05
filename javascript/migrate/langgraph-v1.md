@@ -52,12 +52,12 @@ bun add @langchain/langgraph@latest @langchain/core@latest
 
 ## Summary of changes
 
-| Area                             | What changed                                               |
-| -------------------------------- | ---------------------------------------------------------- |
-| React prebuilt                   | `createReactAgent` deprecated; use LangChain `createAgent` |
-| Interrupts                       | Typed interrupts supported via `interrupts` config         |
-| `toLangGraphEventStream` removed | Use `graph.stream` with the desired `encoding` format      |
-| `useStream`                      | Supports custom transports                                 |
+| Area | What changed |
+| - | - |
+| React prebuilt | `createReactAgent` deprecated; use LangChain `createAgent` |
+| Interrupts | Typed interrupts supported via `interrupts` config |
+| `toLangGraphEventStream` removed | Use `graph.stream` with the desired `encoding` format |
+| `useStream` | Supports custom transports |
 
 ***
 

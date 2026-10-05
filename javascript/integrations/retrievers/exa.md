@@ -18,8 +18,8 @@ This guide will help you getting started with `ExaRetriever` [retrieval](../../d
 
 ### Integration details
 
-| Retriever                                                                             | Source                  |                              Package                             |
-| :------------------------------------------------------------------------------------ | :---------------------- | :--------------------------------------------------------------: |
+| Retriever | Source | Package |
+| :- | :- | :-: |
 | [ExaRetriever](https://reference.langchain.com/javascript/langchain-exa/ExaRetriever) | Information on the web. | [`@langchain/exa`](https://www.npmjs.com/package/@langchain/exa) |
 
 ## Setup

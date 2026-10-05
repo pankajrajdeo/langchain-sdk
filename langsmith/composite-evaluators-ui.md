@@ -17,7 +17,7 @@ This guide shows you how to define a [composite evaluator](evaluation-concepts.m
 
 ## Create a composite evaluator
 
-You can create composite evaluators on a [tracing project](observability-concepts.md#projects) (for [online evaluations](evaluation-concepts.md#online-evaluations)) or a [dataset](evaluation-concepts.md#datasets) (for [offline evaluations](evaluation-concepts.md#offline-evaluations)). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
+You can create composite evaluators on a [tracing project](observability-concepts.md#tracing-projects) (for [online evaluations](evaluation-concepts.md#online-evaluations)) or a [dataset](evaluation-concepts.md#datasets) (for [offline evaluations](evaluation-concepts.md#offline-evaluations)). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/cRRwi1N4-QohYC73/langsmith/images/create_composite_evaluator-light.png?fit=max&auto=format&n=cRRwi1N4-QohYC73&q=85&s=b3859ada8b576ebeaf5399ff15359b10" alt="LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output." width="756" height="594" data-path="langsmith/images/create_composite_evaluator-light.png" />
 
@@ -25,9 +25,9 @@ You can create composite evaluators on a [tracing project](observability-concept
 
 ### 1. Navigate to the tracing project or dataset
 
-To start configuring a composite evaluator, navigate to the **Tracing Projects** or **Dataset & Experiments** tab and select a project or dataset.
+To start configuring a composite evaluator, navigate to the **Tracing** or **Dataset & Experiments** tab and select a tracing project, an agent environment, or a dataset.
 
-* From within a tracing project: **+ New** > **Evaluator** > **Composite score**
+* From within a tracing project or agent environment: **+ New** > **Evaluator** > **Composite score**
 * From within a dataset: **+ Evaluator** > **Composite score**
 
 ### 2. Configure the composite evaluator
@@ -46,7 +46,7 @@ To start configuring a composite evaluator, navigate to the **Tracing Projects**
 
 Composite scores are attached to a run as **feedback**, similarly to feedback from a single evaluator. How you can view them depends on where the evaluation was run:
 
-**On a tracing project**:
+**On a tracing project or agent environment**:
 
 * Composite scores appear as feedback on runs.
 * [Filter for runs](filter-traces.md) with a composite score, or where the composite score meets a certain threshold.

@@ -25,9 +25,9 @@ Files without a text representation will be skipped.
 
 1: Bring-your-own data (i.e., index and search a custom corpus of documents):
 
-| Retriever      | Self-host | Cloud offering |     Package     |
-| :------------- | :-------- | :------------: | :-------------: |
-| `BoxRetriever` | ❌         |        ✅       | `langchain-box` |
+| Retriever | Self-host | Cloud offering | Package |
+| :- | :- | :-: | :-: |
+| `BoxRetriever` | ❌ | ✅ | `langchain-box` |
 
 ## Setup
 

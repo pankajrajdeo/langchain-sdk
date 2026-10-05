@@ -1,12 +1,14 @@
 ---
 title: "Graph API overview"
-description: "At its core, LangGraph models agent workflows as graphs. You define the behavior of your agents using three key components:"
+description: "LangGraph models agent workflows as graphs: define state, nodes, and edges with StateGraph to build looping, stateful workflows."
 source: "https://docs.langchain.com/oss/javascript/langgraph/graph-api"
 category: "docs"
 tags: [docs, javascript, langgraph, graph-api]
 ---
 
 # Graph API overview
+
+> LangGraph models agent workflows as graphs: define state, nodes, and edges with StateGraph to build looping, stateful workflows.
 
 ## Graphs
 
@@ -400,6 +402,29 @@ const State = new StateSchema({
 
 #### [View example trace](https://smith.langchain.com/public/f08045e6-6826-46ab-8437-73b120f5f615/r)
 Open a public LangSmith run for this example.
+
+Alternatively, wrap the update with `Overwrite` to bypass the reducer for a single update, while keeping the field's normal merging behavior for every other update:
+
+```ts
+import { Overwrite, ReducedValue, StateSchema } from "@langchain/langgraph";
+import { z } from "zod/v4";
+
+const State = new StateSchema({
+  errors: new ReducedValue(
+    z.array(z.string()).default(() => []),
+    { reducer: (state: string[], update: string[]) => state.concat(update) },
+  ),
+});
+
+const clearErrors = (_state: typeof State.State) => {
+  return { errors: new Overwrite([]) };
+};
+
+// node can clear the field with { errors: new Overwrite([]) }
+// while a normal node can still append with { errors: ["new error"] }
+```
+
+For more information, see [Bypass reducers with Overwrite](use-graph-api.md#bypass-reducers-with-overwrite).
 
 ### Untracked values
 
@@ -1236,8 +1261,8 @@ try {
 
 The reactive approach catches `GraphRecursionError` after the limit is exceeded. Design your graph with explicit termination conditions to avoid hitting the limit in the first place.
 
-| Approach                                  | Detection            | Handling                   | Control Flow               |
-| ----------------------------------------- | -------------------- | -------------------------- | -------------------------- |
+| Approach | Detection | Handling | Control Flow |
+| - | - | - | - |
 | Reactive (catching `GraphRecursionError`) | After limit exceeded | Outside graph in try/catch | Graph execution terminated |
 
 **Reactive advantages:**

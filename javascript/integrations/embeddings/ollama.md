@@ -16,9 +16,9 @@ This will help you get started with Ollama [embedding models](../embeddings.md) 
 
 ### Integration details
 
-| Class                                                                                              | Package                                                    | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/ollama/) |                                             Downloads                                             |                                             Version                                            |
-| :------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :---: | :-----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`OllamaEmbeddings`](https://reference.langchain.com/javascript/langchain-ollama/OllamaEmbeddings) | [`@langchain/ollama`](https://npmjs.com/@langchain/ollama) |   ✅   |                                        ✅                                        | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ollama?style=flat-square\&label=%20&) |
+| Class | Package | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/ollama/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`OllamaEmbeddings`](https://reference.langchain.com/javascript/langchain-ollama/OllamaEmbeddings) | [`@langchain/ollama`](https://npmjs.com/@langchain/ollama) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ollama?style=flat-square\&label=%20&) |
 
 ## Setup
 

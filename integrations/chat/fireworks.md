@@ -21,15 +21,15 @@ This doc helps you get started with Fireworks AI [chat models](../../langchain/m
 
 ### Integration details
 
-| Class                                                                                                   | Package                                                                              | Serializable |                             JS/TS Support                            |                                               Downloads                                              |                                              Version                                              |
-| :------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------- | :----------: | :------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: |
-| [`ChatFireworks`](https://reference.langchain.com/python/langchain-fireworks/chat_models/ChatFireworks) | [`langchain-fireworks`](https://reference.langchain.com/python/langchain-fireworks/) |     beta     | ✅ [(npm)](https://js.langchain.com/docs/integrations/chat/fireworks) | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-fireworks?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-fireworks?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS/TS Support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatFireworks`](https://reference.langchain.com/python/langchain-fireworks/chat_models/ChatFireworks) | [`langchain-fireworks`](https://reference.langchain.com/python/langchain-fireworks/) | beta | ✅ [(npm)](https://js.langchain.com/docs/integrations/chat/fireworks) | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-fireworks?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-fireworks?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
 
 > [!NOTE]
 > Image input requires a vision-capable model (e.g. Kimi K3). Not all models served by Fireworks support multimodal inputs.

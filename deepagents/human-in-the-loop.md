@@ -41,8 +41,11 @@ graph LR
 
 The `interrupt_on` parameter accepts a dictionary mapping tool names to interrupt configurations. Each tool can be configured with:
 
-* **`True`**: Enable interrupts with default behavior (approve, edit, reject, respond allowed)
+* **`True`**: Enable interrupts with default behavior
+  (approve, edit, reject, and respond allowed)
+
 * **`False`**: Disable interrupts for this tool
+
 * **`InterruptOnConfig`**: Custom configuration. Set `allowed_decisions` to control review options.
   In Python, add an optional `when` predicate to interrupt only specific calls (see [Conditional interrupts](#conditional-interrupts)).
 
@@ -309,12 +312,12 @@ agent = create_deep_agent(
 
 The `allowed_decisions` list controls what actions a human can take when reviewing a tool call:
 
-| Decision Type | Description                                                                                                     | Example Use Case                                  |
-| ------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| ✅ `approve`   | Execute the tool with the original arguments as proposed by the agent.                                          | Send an email draft exactly as written            |
-| ✏️ `edit`     | Modify the tool arguments before execution.                                                                     | Change the recipient before sending an email      |
-| ❌ `reject`    | Skip executing this tool call entirely and return rejection feedback to the agent.                              | Deny file deletion and explain why                |
-| 💬 `respond`  | Return the human's message directly as a synthetic tool result, skipping execution, for "ask user" style tools. | Answer an `"ask_user"` prompt with a direct reply |
+| Decision Type | Description | Example Use Case |
+| - | - | - |
+| ✅ `approve` | Execute the tool with the original arguments as proposed by the agent. | Send an email draft exactly as written |
+| ✏️ `edit` | Modify the tool arguments before execution. | Change the recipient before sending an email |
+| ❌ `reject` | Skip executing this tool call entirely and return rejection feedback to the agent. | Deny file deletion and explain why |
+| 💬 `respond` | Return the human's message directly as a synthetic tool result, skipping execution, for "ask user" style tools. | Answer an `"ask_user"` prompt with a direct reply |
 
 Use `reject` when the human denies a proposed action. Use `respond` only when the human is acting as the tool, such as answering an `ask_user` prompt. Do not use `respond` to deny side-effecting tools, because its message may be treated by the model as a successful tool result.
 
@@ -529,14 +532,13 @@ config = {"configurable": {"thread_id": str(uuid7())}}
 # Invoke the agent
 result = agent.invoke(
     {"messages": [{"role": "user", "content": "Delete the file temp.txt"}]},
-    config=config,
-    version="v2",  # [!code highlight]
+    config=config
 )
 
 # Check if execution was interrupted
-if result.interrupts:  # [!code highlight]
+if result.get("__interrupt__"):  # [!code highlight]
     # Extract interrupt information
-    interrupt_value = result.interrupts[0].value  # [!code highlight]
+    interrupt_value = result["__interrupt__"][0].value  # [!code highlight]
     action_requests = interrupt_value["action_requests"]
     review_configs = interrupt_value["review_configs"]
 
@@ -561,13 +563,69 @@ if result.interrupts:  # [!code highlight]
     # Resume execution with decisions
     result = agent.invoke(
         Command(resume={"decisions": decisions}),
-        config=config,  # Must use the same config!
-        version="v2",
+        config=config  # Must use the same config!
     )
 
 # Process final result
-print(result.value["messages"][-1].content)  # [!code highlight]
+print(result["messages"][-1].content)  # [!code highlight]
 ```
+
+## Handle interrupts with streaming
+
+For real-time UIs, use `.stream()` instead of `.invoke()` to display tokens and tool call progress while handling HITL interrupts. Interrupts appear as `__interrupt__` entries in the `updates` stream. After the stream completes, collect human decisions and resume by streaming again with `Command(resume=...)`.
+
+> [!NOTE]
+> For a typical `interrupt_on` HITL pause, resume with a flat `{"decisions": [...]}` payload, the same shape as with `.invoke()`. When multiple interrupts are pending at once (for example, parallel branches), map each interrupt ID to its resume value instead. See [Handling multiple interrupts](../langgraph/interrupts.md#handling-multiple-interrupts).
+
+```python
+from langchain_core.utils.uuid import uuid7
+from langgraph.types import Command
+
+config = {"configurable": {"thread_id": str(uuid7())}}
+stream_input = {"messages": [{"role": "user", "content": "Delete the file temp.txt"}]}
+
+while True:
+    pending_interrupt = None
+
+    for mode, data in agent.stream(  # [!code highlight]
+        stream_input,
+        stream_mode=["messages", "updates"],  # [!code highlight]
+        config=config,
+    ):
+        if mode == "messages":
+            token, metadata = data
+            # Display tokens in real time
+            if token.content:
+                print(token.content, end="", flush=True)
+
+        elif mode == "updates" and isinstance(data, dict):
+            if "__interrupt__" in data:  # [!code highlight]
+                pending_interrupt = data["__interrupt__"][0]  # [!code highlight]
+
+    # If no interrupt occurred, the agent finished
+    if pending_interrupt is None:
+        break
+
+    interrupt_value = pending_interrupt.value
+    action_requests = interrupt_value["action_requests"]
+    review_configs = interrupt_value["review_configs"]
+    config_map = {cfg["action_name"]: cfg for cfg in review_configs}
+
+    for action in action_requests:
+        review = config_map[action["name"]]
+        print(f"\nTool: {action['name']}")
+        print(f"Arguments: {action['args']}")
+        print(f"Allowed: {review['allowed_decisions']}")
+
+    # Collect one decision per action_request, in order
+    decisions = [{"type": "approve"} for _ in action_requests]
+    stream_input = Command(resume={"decisions": decisions})  # [!code highlight]
+
+print()
+```
+
+> [!TIP]
+> Combine `"messages"` and `"updates"` stream modes to show real-time LLM tokens to the user while still catching HITL interrupts. The `"messages"` mode streams tokens; the `"updates"` mode delivers interrupt payloads.
 
 ## Multiple tool calls
 
@@ -581,12 +639,11 @@ result = agent.invoke(
         "role": "user",
         "content": "Delete temp.txt and send an email to admin@example.com"
     }]},
-    config=config,
-    version="v2",  # [!code highlight]
+    config=config
 )
 
-if result.interrupts:  # [!code highlight]
-    interrupt_value = result.interrupts[0].value  # [!code highlight]
+if result.get("__interrupt__"):  # [!code highlight]
+    interrupt_value = result["__interrupt__"][0].value  # [!code highlight]
     action_requests = interrupt_value["action_requests"]
 
     # Two tools need approval
@@ -603,8 +660,7 @@ if result.interrupts:  # [!code highlight]
 
     result = agent.invoke(
         Command(resume={"decisions": decisions}),
-        config=config,
-        version="v2",
+        config=config
     )
 ```
 
@@ -628,8 +684,8 @@ decisions = [
 When `"edit"` is in the allowed decisions, you can modify the tool arguments before execution:
 
 ```python
-if result.interrupts:  # [!code highlight]
-    interrupt_value = result.interrupts[0].value  # [!code highlight]
+if result.get("__interrupt__"):  # [!code highlight]
+    interrupt_value = result["__interrupt__"][0].value  # [!code highlight]
     action_request = interrupt_value["action_requests"][0]
 
     # Original args from the agent
@@ -646,8 +702,7 @@ if result.interrupts:  # [!code highlight]
 
     result = agent.invoke(
         Command(resume={"decisions": decisions}),
-        config=config,
-        version="v2",
+        config=config
     )
 ```
 
@@ -682,7 +737,9 @@ agent = create_deep_agent(
 )
 ```
 
-When a subagent triggers an interrupt, the handling is the same—check for `interrupts` on the result and resume with `Command`.
+When a subagent triggers an interrupt, the handling is the same—check for `__interrupt__` on the result and resume with `Command`.
+
+When streaming, subagent interrupts also surface as `__interrupt__` entries in the parent `updates` stream. You do not need `subgraphs=True` for interrupt delivery. Enable `subgraphs=True` if you also want to stream subagent tokens and progress events. See [Handle interrupts with streaming](#handle-interrupts-with-streaming) for the full pattern.
 
 ### Interrupts within tool calls
 
@@ -753,13 +810,12 @@ def main():
                 )
             ]
         },
-        config=config,
-        version="v2",  # [!code highlight]
+        config=config
     )
 
     # Check for interrupt
-    if result.interrupts:  # [!code highlight]
-        interrupt_value = result.interrupts[0].value  # [!code highlight]
+    if result.get("__interrupt__"):  # [!code highlight]
+        interrupt_value = result["__interrupt__"][0].value  # [!code highlight]
         print(f"\nInterrupt received!")
         print(f"  Type: {interrupt_value.get('type')}")
         print(f"  Action: {interrupt_value.get('action')}")
@@ -768,14 +824,13 @@ def main():
         print("\nResuming with Command(resume={'approved': True})...")
         result2 = parent_agent.invoke(
             Command(resume={"approved": True}),
-            config=config,
-            version="v2",  # [!code highlight]
+            config=config
         )
 
-        if not result2.interrupts:  # [!code highlight]
+        if "__interrupt__" not in result2:  # [!code highlight]
             print("\nExecution completed!")
             # Find the tool response
-            tool_msgs = [m for m in result2.value.get("messages", []) if m.type == "tool"]  # [!code highlight]
+            tool_msgs = [m for m in result2.get("messages", []) if m.type == "tool"]  # [!code highlight]
             if tool_msgs:
                 print(f"  Tool result: {tool_msgs[-1].content}")
         else:
@@ -837,18 +892,16 @@ config = {"configurable": {"thread_id": "fs-thread-1"}}
 result = agent.invoke(
     {"messages": [{"role": "user", "content": "Save the API key to /secrets/key.txt"}]},
     config=config,
-    version="v2",
 )
 
-if result.interrupts:
-    action = result.interrupts[0].value["action_requests"][0]
+if result.get("__interrupt__"):
+    action = result["__interrupt__"][0].value["action_requests"][0]
     print(f"Approve {action['name']} on {action['args']}?")
 
     # Resume with the human decision (approve, edit, or reject).
     result = agent.invoke(
         Command(resume={"decisions": [{"type": "approve"}]}),
         config=config,  # Same thread ID
-        version="v2",
     )
 ```
 
@@ -879,10 +932,10 @@ When resuming, you must use the same config with the same `thread_id`:
 ```python
 # First call
 config = {"configurable": {"thread_id": "my-thread"}}
-result = agent.invoke(input, config=config, version="v2")
+result = agent.invoke(input, config=config)
 
 # Resume (use same config)
-result = agent.invoke(Command(resume={...}), config=config, version="v2")
+result = agent.invoke(Command(resume={...}), config=config)
 ```
 
 ### Match decision order to actions
@@ -890,8 +943,8 @@ result = agent.invoke(Command(resume={...}), config=config, version="v2")
 The decisions list must match the order of `action_requests`:
 
 ```python
-if result.interrupts:  # [!code highlight]
-    interrupt_value = result.interrupts[0].value  # [!code highlight]
+if result.get("__interrupt__"):  # [!code highlight]
+    interrupt_value = result["__interrupt__"][0].value  # [!code highlight]
     action_requests = interrupt_value["action_requests"]
 
     # Create one decision per action, in order
@@ -902,8 +955,7 @@ if result.interrupts:  # [!code highlight]
 
     result = agent.invoke(
         Command(resume={"decisions": decisions}),
-        config=config,
-        version="v2",
+        config=config
     )
 ```
 

@@ -12,6 +12,8 @@ tags: [docs, langsmith, filter-traces-in-application]
 
 Tracing projects can accumulate large amounts of data across [threads](observability-concepts.md#threads), [traces](observability-concepts.md#traces), and [runs](observability-concepts.md#runs). LangSmith's filtering tools let you navigate and analyze that data precisely.
 
+In an [agent-based workspace](agents.md), a tracing project is one [environment](agent-environments.md) of one agent, so a filter applies to the environment you have open rather than to the agent as a whole. To filter across an agent's environments, filter each one in turn.
+
 > [!NOTE]
 > Tracing projects have two filtering experiences. Check the top of your project to see which one applies to you:
 >
@@ -183,19 +185,19 @@ With the example, the KV search will map each nested JSON path as a key-value pa
 
 LangSmith will break it into the following set of searchable key-value pairs:
 
-| Key                                                | Value                                                                        |
-| -------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `generations.type`                                 | `ChatGeneration`                                                             |
-| `generations.message.type`                         | `constructor`                                                                |
-| `generations.message.kwargs.type`                  | `ai`                                                                         |
-| `generations.message.kwargs.id`                    | `run-ca7f7531-f4de-4790-9c3e-960be7f8b109`                                   |
-| `generations.message.kwargs.tool_calls.name`       | `Plan`                                                                       |
-| `generations.message.kwargs.tool_calls.args.steps` | `Research LangGraph's node configuration capabilities`                       |
-| `generations.message.kwargs.tool_calls.args.steps` | `Investigate how to add a Python code execution node`                        |
+| Key | Value |
+| - | - |
+| `generations.type` | `ChatGeneration` |
+| `generations.message.type` | `constructor` |
+| `generations.message.kwargs.type` | `ai` |
+| `generations.message.kwargs.id` | `run-ca7f7531-f4de-4790-9c3e-960be7f8b109` |
+| `generations.message.kwargs.tool_calls.name` | `Plan` |
+| `generations.message.kwargs.tool_calls.args.steps` | `Research LangGraph's node configuration capabilities` |
+| `generations.message.kwargs.tool_calls.args.steps` | `Investigate how to add a Python code execution node` |
 | `generations.message.kwargs.tool_calls.args.steps` | `Find an example or create a sample implementation of a code execution node` |
-| `generations.message.kwargs.tool_calls.id`         | `toolu_01XexPzAVknT3gRmUB5PK5BP`                                             |
-| `generations.message.kwargs.tool_calls.type`       | `tool_call`                                                                  |
-| `type`                                             | `LLMResult`                                                                  |
+| `generations.message.kwargs.tool_calls.id` | `toolu_01XexPzAVknT3gRmUB5PK5BP` |
+| `generations.message.kwargs.tool_calls.type` | `tool_call` |
+| `type` | `LLMResult` |
 
 To search for a specific tool call, you can use the following **Output Key** search while removing the root runs filter:
 
@@ -225,7 +227,7 @@ Finally, you can also filter for runs that do not have a specific key but have a
 
 ## Save a filter
 
-Saving filters allows you to store and reuse frequently used filter configurations. Saved filters are specific to a tracing project.
+Saving filters allows you to store and reuse frequently used filter configurations. Saved filters are specific to a tracing project, which in an agent-based workspace means one [environment](agent-environments.md) of one agent. A filter saved in **Production** is not offered in **Staging**.
 
 After you have constructed your filter, click the **Save as** button to save it. This will bring up a dialog to specify the name and a description of the filter.
 

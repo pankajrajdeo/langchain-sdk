@@ -1,12 +1,14 @@
 ---
 title: "Tools"
-description: "Tools extend what agents can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world."
+description: "Define tools that let LangChain agents fetch real-time data, execute code, query external databases, and take actions."
 source: "https://docs.langchain.com/oss/javascript/langchain/tools"
 category: "docs"
 tags: [docs, javascript, langchain, tools]
 ---
 
 # Tools
+
+> Define tools that let LangChain agents fetch real-time data, execute code, query external databases, and take actions.
 
 Tools extend what [agents](agents.md) can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world.
 
@@ -55,13 +57,14 @@ Tools are most powerful when they can access runtime information like conversati
 Context provides immutable configuration data that is passed at invocation time. Use it for user IDs, session details, or application-specific settings that shouldn't change during a conversation.
 
 > [!NOTE]
-> While `thread_id` (passed via `config={"configurable": {"thread_id": ...}}`) scopes the *conversation*: message history and checkpoints, `context` carries *per-run* data your tools and middleware read at invocation time. In production you typically pass both together: a stable `thread_id` per conversation, and a `context` object on every invoke.
+> While `thread_id` (passed via `config={"configurable": {"thread_id": ...}}`) scopes the *conversation*: message history and checkpoints, `context` carries *per-run* data your tools and middleware read at invocation time. Persistence requires a [checkpointer](short-term-memory.md). In production you typically pass both a stable `thread_id` per conversation and a `context` object on every invoke.
 
-Tools can access an agent's runtime context through the `config` parameter. Pass `context` alongside a `thread_id` so the conversation is persisted across turns:
+Tools can access an agent's runtime context through the `config` parameter. Configure a [checkpointer](short-term-memory.md) and pass `context` with a stable `thread_id` so the conversation persists across invocations:
 
 ```ts
 import * as z from "zod";
 import { ChatOpenAI } from "@langchain/openai";
+import { MemorySaver } from "@langchain/langgraph";
 import { createAgent, tool } from "langchain";
 
 const getUserName = tool(
@@ -82,22 +85,32 @@ const contextSchema = z.object({
 const agent = createAgent({
   model: new ChatOpenAI({ model: "gpt-5.5" }),
   tools: [getUserName],
+  checkpointer: new MemorySaver(),
   contextSchema,
 });
 
-const result = await agent.invoke(
+const threadId = crypto.randomUUID();
+const threadConfig = {
+  configurable: { thread_id: threadId },
+  context: { user_name: "John Smith" },
+};
+
+let result = await agent.invoke(
   {
     messages: [{ role: "user", content: "What is my name?" }],
   },
-  {
-    configurable: { thread_id: crypto.randomUUID() },
-    context: { user_name: "John Smith" },
-  },
+  threadConfig,
 );
-```
+console.log(result.messages.at(-1)?.content);
 
-#### [View example trace](https://smith.langchain.com/public/59163065-33b5-4b9e-a8d0-dc882e31f97c/r)
-Open a public LangSmith run for this example.
+result = await agent.invoke(
+  {
+    messages: [{ role: "user", content: "What was my name again?" }],
+  },
+  threadConfig,
+);
+console.log(result.messages.at(-1)?.content);
+```
 
 ### Long-term memory (Store)
 

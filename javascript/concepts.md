@@ -127,14 +127,14 @@ Use the [Deep Agents SDK](deepagents/overview.md) when:
 
 While you can accomplish similar tasks with LangChain, LangGraph, and Deep Agents, the level at which you integrate them differ:
 
-| Feature           | LangGraph                                                                       | LangChain                                                                   | Deep Agents                                                                      |
-| ----------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Short-term memory | [Short-term memory](langgraph/add-memory.md#add-short-term-memory) | [Short-term memory](langchain/short-term-memory.md)            | [`StateBackend`](deepagents/backends.md#statebackend)               |
-| Long-term memory  | [Long-term memory](langgraph/add-memory.md#add-long-term-memory)   | [Long-term memory](langchain/long-term-memory.md)              | [Long-term memory](deepagents/memory.md)                            |
-| Skills            | -                                                                               | [Multi-agent skills](langchain/multi-agent/skills.md)          | [Skills](deepagents/skills.md)                                      |
-| Subagents         | [Subgraphs](langgraph/use-subgraphs.md)                            | [Multi-agent subagents](langchain/multi-agent/subagents.md)    | [Subagents](deepagents/subagents.md)                                |
-| Human-in-the-loop | [Interrupts](langgraph/interrupts.md)                              | [Human-in-the-loop middleware](langchain/human-in-the-loop.md) | [`interrupt_on` parameter](deepagents/harness.md#human-in-the-loop) |
-| Streaming         | [Streaming](langgraph/streaming.md)                                | [Agent Streaming](langchain/event-streaming.md)                | [Streaming](deepagents/event-streaming.md)                          |
+| Feature | LangGraph | LangChain | Deep Agents |
+| - | - | - | - |
+| Short-term memory | [Short-term memory](langgraph/add-memory.md#add-short-term-memory) | [Short-term memory](langchain/short-term-memory.md) | [`StateBackend`](deepagents/backends.md#statebackend) |
+| Long-term memory | [Long-term memory](langgraph/add-memory.md#add-long-term-memory) | [Long-term memory](langchain/long-term-memory.md) | [Long-term memory](deepagents/memory.md) |
+| Skills | - | [Multi-agent skills](langchain/multi-agent/skills.md) | [Skills](deepagents/skills.md) |
+| Subagents | [Subgraphs](langgraph/use-subgraphs.md) | [Multi-agent subagents](langchain/multi-agent/subagents.md) | [Subagents](deepagents/subagents.md) |
+| Human-in-the-loop | [Interrupts](langgraph/interrupts.md) | [Human-in-the-loop middleware](langchain/human-in-the-loop.md) | [`interrupt_on` parameter](deepagents/harness.md#human-in-the-loop) |
+| Streaming | [Streaming](langgraph/streaming.md) | [Agent Streaming](langchain/event-streaming.md) | [Streaming](deepagents/event-streaming.md) |
 
 ## Learn more
 

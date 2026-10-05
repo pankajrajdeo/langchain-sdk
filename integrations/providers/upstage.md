@@ -18,12 +18,12 @@ tags: [docs, integrations, providers, upstage]
 
 ### Upstage LangChain integrations
 
-| API                | Description                                 | Import                                                     | Example usage                                                   |
-| ------------------ | ------------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------- |
-| Chat               | Build assistants using Solar Chat           | `from langchain_upstage import ChatUpstage`                | [Go](../chat/upstage.md)                     |
-| Text Embedding     | Embed strings to vectors                    | `from langchain_upstage import UpstageEmbeddings`          | [Go](../embeddings/upstage.md)               |
-| Groundedness Check | Verify groundedness of assistant's response | `from langchain_upstage import UpstageGroundednessCheck`   | [Go](../tools/upstage_groundedness_check.md) |
-| Document Parse     | Serialize documents with tables and figures | `from langchain_upstage import UpstageDocumentParseLoader` | [Go](../document_loaders/upstage.md)         |
+| API | Description | Import | Example usage |
+| - | - | - | - |
+| Chat | Build assistants using Solar Chat | `from langchain_upstage import ChatUpstage` | [Go](../chat/upstage.md) |
+| Text Embedding | Embed strings to vectors | `from langchain_upstage import UpstageEmbeddings` | [Go](../embeddings/upstage.md) |
+| Groundedness Check | Verify groundedness of assistant's response | `from langchain_upstage import UpstageGroundednessCheck` | [Go](../tools/upstage_groundedness_check.md) |
+| Document Parse | Serialize documents with tables and figures | `from langchain_upstage import UpstageDocumentParseLoader` | [Go](../document_loaders/upstage.md) |
 
 See [documentations](https://console.upstage.ai/docs/getting-started/overview) for more details about the models and features.
 

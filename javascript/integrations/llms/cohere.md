@@ -21,9 +21,9 @@ This will help you get started with Cohere completion models (LLMs) using LangCh
 
 ### Integration details
 
-| Class                                                                          | Package                                                                | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/cohere) |                                             Downloads                                             |                                             Version                                            |
-| :----------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :---: | :----------: | :----------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`Cohere`](https://reference.langchain.com/javascript/langchain-cohere/Cohere) | [`@langchain/cohere`](https://www.npmjs.com/package/@langchain/cohere) |   ❌   |       ✅      |                                     ✅                                    | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cohere?style=flat-square\&label=%20&) |
+| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/cohere) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| [`Cohere`](https://reference.langchain.com/javascript/langchain-cohere/Cohere) | [`@langchain/cohere`](https://www.npmjs.com/package/@langchain/cohere) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cohere?style=flat-square\&label=%20&) |
 
 ## Setup
 

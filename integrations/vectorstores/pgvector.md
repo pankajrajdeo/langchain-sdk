@@ -150,21 +150,21 @@ Once your vector store has been created and the relevant documents have been add
 
 The vectorstore supports a set of filters that can be applied against the metadata fields of the documents.
 
-| Operator  | Meaning/Category             |
-| --------- | ---------------------------- |
-| \$eq      | Equality (==)                |
-| \$ne      | Inequality (!=)              |
-| \$lt      | Less than (\<)               |
-| \$lte     | Less than or equal (\<=)     |
-| \$gt      | Greater than (>)             |
-| \$gte     | Greater than or equal (>=)   |
-| \$in      | Special Cased (in)           |
-| \$nin     | Special Cased (not in)       |
-| \$between | Special Cased (between)      |
-| \$like    | Text (like)                  |
-| \$ilike   | Text (case-insensitive like) |
-| \$and     | Logical (and)                |
-| \$or      | Logical (or)                 |
+| Operator | Meaning/Category |
+| - | - |
+| \$eq | Equality (==) |
+| \$ne | Inequality (!=) |
+| \$lt | Less than (\<) |
+| \$lte | Less than or equal (\<=) |
+| \$gt | Greater than (>) |
+| \$gte | Greater than or equal (>=) |
+| \$in | Special Cased (in) |
+| \$nin | Special Cased (not in) |
+| \$between | Special Cased (between) |
+| \$like | Text (like) |
+| \$ilike | Text (case-insensitive like) |
+| \$and | Logical (and) |
+| \$or | Logical (or) |
 
 ### Query directly
 

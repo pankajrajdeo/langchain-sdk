@@ -20,9 +20,9 @@ package loads those tools as native LangChain tools.
 
 ### Details
 
-| Class                          | Package                                                                                        | Serializable | JS support |                                                     Downloads                                                     |                                                     Version                                                    |
-| :----------------------------- | :--------------------------------------------------------------------------------------------- | :----------: | :--------: | :---------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------: |
-| `UnstructuredTransformToolkit` | [langchain-unstructured-transform](https://pypi.org/project/langchain-unstructured-transform/) |       ❌      |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-unstructured-transform?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-unstructured-transform?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| `UnstructuredTransformToolkit` | [langchain-unstructured-transform](https://pypi.org/project/langchain-unstructured-transform/) | ❌ | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-unstructured-transform?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-unstructured-transform?style=flat-square\&label=%20) |
 
 ### Features
 

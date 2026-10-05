@@ -30,17 +30,17 @@ For detailed documentation of all `ChatGoogle` features and configurations head 
 
 ### Integration details
 
-| Class                                                                                        | Package                                                                | Serializable | PY support |                                             Downloads                                             |                                             Version                                            |
-| :------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :----------: | :--------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`ChatGoogle`](https://reference.langchain.com/javascript/langchain-google/index/ChatGoogle) | [`@langchain/google`](https://www.npmjs.com/package/@langchain/google) |       ✅      |      ✅     | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/google?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/google?style=flat-square\&label=%20&) |
+| Class | Package | Serializable | PY support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatGoogle`](https://reference.langchain.com/javascript/langchain-google/index/ChatGoogle) | [`@langchain/google`](https://www.npmjs.com/package/@langchain/google) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/google?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/google?style=flat-square\&label=%20&) |
 
 ### Model features
 
 See the links in the table headers below for guides on how to use specific features.
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :---------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------: | :---------------------------------------------------------: | :------------------------------------------------------------: |
-|                        ✅                        |                                 ✅                                |                               ✅                              |      ✅      |      ✅      |                               ✅                               |                              ✅                              |                                ✅                               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 Note that while logprobs are supported, Gemini has fairly restricted usage of them.
 

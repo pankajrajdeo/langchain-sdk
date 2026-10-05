@@ -40,7 +40,7 @@ To create a deployment:
    * **Dedicated**: Provides always-on infrastructure, high availability, and automatic database backups for production workloads.
 10. Choose whether to make the deployment shareable through [Studio](studio.md).
 11. Add environment variables and secrets. For more information, see [Environment variables](env-var-cloud.md).
-12. Select **Submit**. LangSmith queues the deployment for provisioning and creates a tracing project with the same name.
+12. Select **Submit**. LangSmith queues the deployment for provisioning. In a project-based workspace, LangSmith also creates a tracing project with the same name as the deployment. In an agent-based workspace, LangSmith instead binds the deployment to an [agent](agents.md), and the deployment reports into one of the agent's [environments](agent-environments.md).
 
 > [!NOTE]
 > The GitHub user who authorizes the `hosted-langserve` app must own the GitHub organization or account. Other users with deployment permissions do not need GitHub administrator access after the initial authorization.

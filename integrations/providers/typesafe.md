@@ -91,11 +91,11 @@ The request `state` can be a string, a JSON object or array, or LangChain messag
 
 Each question is one of three [primitives](https://docs.typesafe.ai/primitives):
 
-| Primitive                                              | Asks                    | Returns                                                   | Reach for it when                                   |
-| ------------------------------------------------------ | ----------------------- | --------------------------------------------------------- | --------------------------------------------------- |
-| [`Noul`](https://docs.typesafe.ai/primitives/noul)     | Is this true?           | `noul`, the probability of yes                            | Your code branches on an `if`                       |
-| [`Choice`](https://docs.typesafe.ai/primitives/choice) | Which of these options? | `choice`, plus `probabilities` and `confidence`           | Options map to distinct code paths                  |
-| [`Score`](https://docs.typesafe.ai/primitives/score)   | Which level?            | `score`, plus `legend`, `probabilities`, and `confidence` | The answer is a spectrum you compare to a threshold |
+| Primitive | Asks | Returns | Reach for it when |
+| - | - | - | - |
+| [`Noul`](https://docs.typesafe.ai/primitives/noul) | Is this true? | `noul`, the probability of yes | Your code branches on an `if` |
+| [`Choice`](https://docs.typesafe.ai/primitives/choice) | Which of these options? | `choice`, plus `probabilities` and `confidence` | Options map to distinct code paths |
+| [`Score`](https://docs.typesafe.ai/primitives/score) | Which level? | `score`, plus `legend`, `probabilities`, and `confidence` | The answer is a spectrum you compare to a threshold |
 
 `Noul` is the only one without a `confidence`, since the probability is the answer. Use `Score` rather than a `Noul` for a spectrum: a `Noul` of `0.5` means an even split between yes and no, not "medium".
 
@@ -120,10 +120,10 @@ uv add "langchain-typesafe[experimental]" langchain-openai
 pip install "langchain-typesafe[experimental]" langchain-openai
 ```
 
-| Middleware                                | Hook                              | Decision                                |
-| ----------------------------------------- | --------------------------------- | --------------------------------------- |
-| [`ModelRouterMiddleware`](#model-routing) | `before_agent`, `wrap_model_call` | Which model handles the run             |
-| [`AutoModeMiddleware`](#tool-risk-gating) | `wrap_tool_call`                  | Whether a tool call is too risky to run |
+| Middleware | Hook | Decision |
+| - | - | - |
+| [`ModelRouterMiddleware`](#model-routing) | `before_agent`, `wrap_model_call` | Which model handles the run |
+| [`AutoModeMiddleware`](#tool-risk-gating) | `wrap_tool_call` | Whether a tool call is too risky to run |
 
 ### Model routing
 

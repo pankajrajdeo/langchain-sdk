@@ -37,7 +37,7 @@ Before tracing, set the following environment variables:
 
 * `LANGSMITH_API_KEY`: your [LangSmith API key](create-account-api-key.md).
 
-* By default, LangSmith logs traces to a project named `default`. To log to a different project, set `LANGSMITH_PROJECT`. For more details, refer to [Log traces to a specific project](log-traces-to-project.md).
+* By default, LangSmith logs traces to a project named `default`. To log to a different project, set `LANGSMITH_PROJECT`. For more details, refer to [Log traces to a specific project](log-traces-to-project.md). In an [agent-based workspace](agents.md), the first trace to a new project name creates an agent named after the project, with the project as its Production [environment](agent-environments.md). The agent's identifier is derived from the project name, so it can differ from the project name, and creating the agent requires permission to create projects. To send traces to a specific agent and environment instead, use [agent addressing](log-traces-to-agent.md).
 
 <a id="use-@traceable-/-traceable"></a>
 

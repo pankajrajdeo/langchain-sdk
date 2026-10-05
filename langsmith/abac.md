@@ -102,18 +102,18 @@ Each condition group specifies:
 
 #### Resource types and permissions
 
-| Resource type       | Supported permissions                                                                                                                                                             |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `project`           | `projects:read`, `projects:update`, `projects:delete`, `runs:read`, `runs:share`, `runs:delete`, `projects:increase-trace-tier`, `projects:decrease-trace-tier`                   |
-| `prompt`            | `prompts:read`, `prompts:update`, `prompts:delete`, `prompts:share`, `prompts:tag`                                                                                                |
-| `dataset`           | `datasets:read`, `datasets:update`, `datasets:delete`, `datasets:share`, `datasets:download`, `datasets:clone`                                                                    |
-| `deployment`        | `deployments:read`, `deployments:update`, `deployments:delete`                                                                                                                    |
-| `queues`            | `annotation-queues:create`, `annotation-queues:delete`, `annotation-queues:read`, `annotation-queues:update`                                                                      |
-| `mcp_server`        | `mcp-servers:read`, `mcp-servers:invoke`, `mcp-servers:update`, `mcp-servers:delete`. See [Fleet tool access control](fleet/access-and-oversight.md#tool-access-control). |
-| `fleet_integration` | `mcp-servers:read`, `mcp-servers:invoke`. See [Fleet tool access control](fleet/access-and-oversight.md#tool-access-control).                                             |
+| Resource type | Supported permissions |
+| - | - |
+| `project` | `projects:read`, `projects:update`, `projects:delete`, `runs:read`, `runs:read-inputs`, `runs:read-outputs`, `runs:share`, `runs:delete`, `projects:increase-trace-tier`, `projects:decrease-trace-tier` |
+| `prompt` | `prompts:read`, `prompts:update`, `prompts:delete`, `prompts:share`, `prompts:tag` |
+| `dataset` | `datasets:read`, `datasets:update`, `datasets:delete`, `datasets:share`, `datasets:download`, `datasets:clone` |
+| `deployment` | `deployments:read`, `deployments:update`, `deployments:delete` |
+| `queues` | `annotation-queues:create`, `annotation-queues:delete`, `annotation-queues:read`, `annotation-queues:update` |
+| `mcp_server` | `mcp-servers:read`, `mcp-servers:invoke`, `mcp-servers:update`, `mcp-servers:delete`. See [Fleet tool access control](fleet/access-and-oversight.md#tool-access-control). |
+| `fleet_integration` | `mcp-servers:read`, `mcp-servers:invoke`. See [Fleet tool access control](fleet/access-and-oversight.md#tool-access-control). |
 
 > [!NOTE]
-> Runs don't have their own tags. Run permissions (`runs:read`, `runs:create`, `runs:share`, `runs:delete`) are evaluated against the parent project's tags.
+> Runs don't have their own tags. Run permissions (`runs:read`, `runs:read-inputs`, `runs:read-outputs`, `runs:create`, `runs:share`, `runs:delete`) are evaluated against the parent project's tags. For how the input and output permissions affect responses, refer to [Control access to run inputs and outputs](#control-access-to-run-inputs-and-outputs).
 
 > [!NOTE]
 > Cloning copies examples from a source dataset to a target dataset. The `datasets:clone` permission is checked for both datasets: once using the source dataset’s tags, and once using the target dataset’s tags. To clone successfully, a policy must grant `datasets:clone` access to both datasets.
@@ -129,27 +129,27 @@ Each condition in the `conditions` array specifies:
 
 #### Operators
 
-| Operator                 | Description                                      |
-| ------------------------ | ------------------------------------------------ |
-| `equals`                 | Exact match (case sensitive)                     |
-| `not_equals`             | Values differ (case sensitive)                   |
-| `equals_ignore_case`     | Exact match (case insensitive)                   |
-| `not_equals_ignore_case` | Values differ (case insensitive)                 |
-| `matches`                | Glob pattern matching with `*` and `?` wildcards |
-| `not_matches`            | Match when value doesn't match glob pattern      |
+| Operator | Description |
+| - | - |
+| `equals` | Exact match (case sensitive) |
+| `not_equals` | Values differ (case sensitive) |
+| `equals_ignore_case` | Exact match (case insensitive) |
+| `not_equals_ignore_case` | Values differ (case insensitive) |
+| `matches` | Glob pattern matching with `*` and `?` wildcards |
+| `not_matches` | Match when value doesn't match glob pattern |
 
 #### `_if_exists` variants
 
 Each operator has an `_if_exists` variant that matches by default when the tag key is absent, or evaluates the condition normally when the tag exists:
 
-| Operator                           | Description                                                       |
-| ---------------------------------- | ----------------------------------------------------------------- |
-| `equals_if_exists`                 | Exact match (case sensitive), or if tag key absent                |
-| `not_equals_if_exists`             | Values differ (case sensitive), or if tag key absent              |
-| `equals_ignore_case_if_exists`     | Exact match (case insensitive), or if tag key absent              |
-| `not_equals_ignore_case_if_exists` | Values differ (case insensitive), or if tag key absent            |
-| `matches_if_exists`                | Glob pattern match, or if tag key absent                          |
-| `not_matches_if_exists`            | Match when value doesn't match glob pattern, or if tag key absent |
+| Operator | Description |
+| - | - |
+| `equals_if_exists` | Exact match (case sensitive), or if tag key absent |
+| `not_equals_if_exists` | Values differ (case sensitive), or if tag key absent |
+| `equals_ignore_case_if_exists` | Exact match (case insensitive), or if tag key absent |
+| `not_equals_ignore_case_if_exists` | Values differ (case insensitive), or if tag key absent |
+| `matches_if_exists` | Glob pattern match, or if tag key absent |
+| `not_matches_if_exists` | Match when value doesn't match glob pattern, or if tag key absent |
 
 > [!TIP]
 > In an **allow** policy, `_if_exists` variants grant access to resources that either match the condition or don't have the specified tag key. In a **deny** policy, they block resources that either match the condition or don't have the tag key.
@@ -176,23 +176,27 @@ Access policies are managed via the LangSmith API by [Organization Admins](rbac.
 
 **Feature combinations:**
 
-| RBAC enabled | ABAC enabled | Behavior                                            |
-| ------------ | ------------ | --------------------------------------------------- |
-| ✗            | ✗            | All workspace members have Admin-level access       |
-| ✓            | ✗            | Standard RBAC - access based on role permissions    |
-| ✓            | ✓            | RBAC + ABAC - fine-grained tag-based access control |
+| RBAC enabled | ABAC enabled | Behavior |
+| - | - | - |
+| ✗ | ✗ | All workspace members have Admin-level access |
+| ✓ | ✗ | Standard RBAC - access based on role permissions |
+| ✓ | ✓ | RBAC + ABAC - fine-grained tag-based access control |
 
 **When both RBAC and ABAC are enabled:**
 
-| RBAC permits | Allow policy matches | Deny policy matches | Result                           |
-| ------------ | -------------------- | ------------------- | -------------------------------- |
-| ✓            | ✓                    | ✗                   | **Allowed**                      |
-| ✓            | ✗                    | ✗                   | **Allowed** (RBAC fallback)      |
-| ✓            | ✓                    | ✓                   | **Denied** (deny wins)           |
-| ✓            | ✗                    | ✓                   | **Denied** (deny wins)           |
-| ✗            | ✓                    | ✗                   | **Allowed** (ABAC grants access) |
-| ✗            | ✗                    | ✗                   | **Denied**                       |
-| ✗            | ✓                    | ✓                   | **Denied** (deny wins)           |
+| RBAC permits | Allow policy matches | Deny policy matches | Result |
+| - | - | - | - |
+| ✓ | ✓ | ✗ | **Allowed** |
+| ✓ | ✗ | ✗ | **Allowed** (RBAC fallback) |
+| ✓ | ✓ | ✓ | **Denied** (deny wins) |
+| ✓ | ✗ | ✓ | **Denied** (deny wins) |
+| ✗ | ✓ | ✗ | **Allowed** (ABAC grants access) |
+| ✗ | ✗ | ✗ | **Denied** |
+| ✗ | ✓ | ✓ | **Denied** (deny wins) |
+
+## Control access to run inputs and outputs
+
+`runs:read` controls whether a user can see a run. `runs:read-inputs` and `runs:read-outputs` control whether they can see its inputs and outputs. Access policies for these permissions use `resource_type: "project"` and are evaluated against each run's parent project, so you can hide inputs, outputs, or both in some projects while leaving other projects in the workspace unchanged. RBAC and ABAC combine for these permissions the same way they do for any other permission. For more details, refer to [How ABAC works with RBAC](#how-abac-works-with-rbac).
 
 ## Example scenarios
 
@@ -309,6 +313,39 @@ Consultants don't have RBAC `datasets:read` permission, but this policy grants t
 }
 ```
 
+### 6. Hide run inputs and outputs in sensitive projects
+
+Let users keep browsing runs in projects that contain PII, but hide the runs' inputs and outputs. Each permission gets its own condition group, and the groups are evaluated with OR logic. Users still need `runs:read` to see the runs:
+
+```json
+{
+  "name": "Hide PII Run Payloads",
+  "effect": "deny",
+  "condition_groups": [
+    {
+      "permission": "runs:read-inputs",
+      "resource_type": "project",
+      "conditions": [{
+        "attribute_name": "resource_tag_key",
+        "attribute_key": "Contains-PII",
+        "operator": "equals",
+        "attribute_value": "true"
+      }]
+    },
+    {
+      "permission": "runs:read-outputs",
+      "resource_type": "project",
+      "conditions": [{
+        "attribute_name": "resource_tag_key",
+        "attribute_key": "Contains-PII",
+        "operator": "equals",
+        "attribute_value": "true"
+      }]
+    }
+  ]
+}
+```
+
 ## Tag resources at creation time
 
 When ABAC policies are active, resources are access-controlled based on their tags. To make sure a resource is protected as soon as it is created, you can supply tags directly in the creation request using the `tag_value_ids` parameter.
@@ -336,6 +373,12 @@ For full details and examples, see [Tag a resource at creation time](set-up-reso
 * Review RBAC permissions (users may have access via their role)
 * Check if an allow policy is too broad (e.g., using wildcards)
 * `_if_exists` operators match resources missing that tag key
+
+**Run inputs or outputs missing?**
+
+* Check that the user's role grants `runs:read-inputs` and `runs:read-outputs`, or that an allow policy grants them for the run's project
+* Check for a deny policy on `runs:read-inputs` or `runs:read-outputs` that matches the project's tags
+* Message and trajectory views return `403 Forbidden` unless both permissions are granted
 
 **Policy not taking effect?**
 

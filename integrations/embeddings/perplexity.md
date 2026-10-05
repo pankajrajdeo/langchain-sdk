@@ -16,9 +16,9 @@ This will help you get started with Perplexity embedding models using LangChain.
 
 ### Integration details
 
-| Class                                                                                                                 | Package                                                                                                  | Local | Py support |                                           Package downloads                                           |                                           Package latest                                           |
-| :-------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- | :---: | :--------: | :---------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| [`PerplexityEmbeddings`](https://reference.langchain.com/python/langchain-perplexity/embeddings/PerplexityEmbeddings) | [`langchain-perplexity`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/perplexity) |   ❌   |      ✅     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-perplexity?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-perplexity?style=flat-square\&label=%20) |
+| Class | Package | Local | Py support | Package downloads | Package latest |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`PerplexityEmbeddings`](https://reference.langchain.com/python/langchain-perplexity/embeddings/PerplexityEmbeddings) | [`langchain-perplexity`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/perplexity) | ❌ | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-perplexity?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-perplexity?style=flat-square\&label=%20) |
 
 ## Setup
 

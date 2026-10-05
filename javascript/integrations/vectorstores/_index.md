@@ -1,13 +1,13 @@
 ---
 title: "javascript/integrations/vectorstores"
-description: "Index of 17 pages and 0 subdirectories under javascript/integrations/vectorstores."
+description: "Index of 18 pages and 0 subdirectories under javascript/integrations/vectorstores."
 category: "index"
 tags: [index, javascript, integrations, vectorstores]
 ---
 
 # javascript/integrations/vectorstores
 
-17 pages here.
+18 pages here.
 
 ## Files
 
@@ -16,6 +16,7 @@ tags: [index, javascript, integrations, vectorstores]
 - [Azure DocumentDB](azure_documentdb.md) - Vector store integration for Azure DocumentDB
 - [Cloudflare vectorize integration](cloudflare_vectorize.md) - Integrate with the Cloudflare vectorize vector store using LangChain JavaScript.
 - [Google cloud SQL for postgresql integration](google_cloudsql_pg.md) - Integrate with the Google cloud SQL for postgresql vector store using LangChain JavaScript.
+- [Vector store integrations](index.md) - Integrate with vector stores using LangChain JavaScript.
 - [MemoryVectorStore integration](memory.md) - Integrate with the MemoryVectorStore using LangChain JavaScript.
 - [MongoDB Atlas integration](mongodb_atlas.md) - Integrate with the MongoDB Atlas vector store using LangChain JavaScript.
 - [Neo4j vector index integration](neo4jvector.md) - Integrate with the Neo4j vector index vector store using LangChain JavaScript.

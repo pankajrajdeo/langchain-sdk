@@ -1,6 +1,5 @@
 ---
 title: "Changelog"
-description: "Connect these docs to your agent of choice via MCP for real-time answers."
 source: "https://docs.langchain.com/oss/openwiki/changelog"
 category: "docs"
 tags: [docs, openwiki, changelog]
@@ -8,7 +7,7 @@ tags: [docs, openwiki, changelog]
 
 # Changelog
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/changelog)
----
+***
 
 > [!NOTE]
 > [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.

@@ -18,9 +18,9 @@ The `ElasticsearchEmbeddingsCache` is a `ByteStore` implementation that uses you
 
 ### Integration details
 
-| Class                                                                                                                               | Package                                                                                     | Local | JS support |                                                 Downloads                                                |                                                Version                                                |
-| :---------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ | :---: | :--------: | :------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
-| [`ElasticsearchEmbeddingsCache`](https://reference.langchain.com/python/langchain-elasticsearch/cache/ElasticsearchEmbeddingsCache) | [`langchain-elasticsearch`](https://reference.langchain.com/python/langchain-elasticsearch) |   ✅   |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_elasticsearch?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_elasticsearch?style=flat-square\&label=%20) |
+| Class | Package | Local | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ElasticsearchEmbeddingsCache`](https://reference.langchain.com/python/langchain-elasticsearch/cache/ElasticsearchEmbeddingsCache) | [`langchain-elasticsearch`](https://reference.langchain.com/python/langchain-elasticsearch) | ✅ | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_elasticsearch?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_elasticsearch?style=flat-square\&label=%20) |
 
 ## Setup
 

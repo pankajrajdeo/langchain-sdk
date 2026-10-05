@@ -931,15 +931,15 @@ See [Fault tolerance](fault-tolerance.md#graph-defaults) for the full precedence
 
 You can access execution identity and retry information via `runtime.execution_info`. This surfaces thread, run, and checkpoint identifiers as well as retry state, without needing to read from `config` directly.
 
-| Attribute                 | Type            | Description                                                                                      |
-| ------------------------- | --------------- | ------------------------------------------------------------------------------------------------ |
-| `thread_id`               | `str \| None`   | Thread ID for the current execution. `None` without a checkpointer.                              |
-| `run_id`                  | `str \| None`   | Run ID for the current execution. `None` when not provided in config.                            |
-| `checkpoint_id`           | `str`           | Checkpoint ID for the current execution.                                                         |
-| `checkpoint_ns`           | `str`           | Checkpoint namespace for the current execution.                                                  |
-| `task_id`                 | `str`           | Task ID for the current execution.                                                               |
-| `node_attempt`            | `int`           | Current execution attempt number (1-indexed). `1` on the first try, `2` on the first retry, etc. |
-| `node_first_attempt_time` | `float \| None` | Unix timestamp (seconds) of when the first attempt started. Stays the same across retries.       |
+| Attribute | Type | Description |
+| - | - | - |
+| `thread_id` | `str \| None` | Thread ID for the current execution. `None` without a checkpointer. |
+| `run_id` | `str \| None` | Run ID for the current execution. `None` when not provided in config. |
+| `checkpoint_id` | `str` | Checkpoint ID for the current execution. |
+| `checkpoint_ns` | `str` | Checkpoint namespace for the current execution. |
+| `task_id` | `str` | Task ID for the current execution. |
+| `node_attempt` | `int` | Current execution attempt number (1-indexed). `1` on the first try, `2` on the first retry, etc. |
+| `node_first_attempt_time` | `float \| None` | Unix timestamp (seconds) of when the first attempt started. Stays the same across retries. |
 
 #### Access thread and run IDs
 
@@ -998,11 +998,11 @@ graph = builder.compile()
 
 When your graph runs on LangGraph Server, you can access server-specific metadata via `runtime.server_info`. This surfaces the assistant ID, graph ID, and authenticated user without needing to read from config metadata or configurable keys directly.
 
-| Attribute      | Type               | Description                                                                     |
-| -------------- | ------------------ | ------------------------------------------------------------------------------- |
-| `assistant_id` | `str`              | The assistant ID for the current deployment.                                    |
-| `graph_id`     | `str`              | The graph ID for the current deployment.                                        |
-| `user`         | `BaseUser \| None` | The authenticated user, if [custom auth](../langsmith/custom-auth.md) is configured. |
+| Attribute | Type | Description |
+| - | - | - |
+| `assistant_id` | `str` | The assistant ID for the current deployment. |
+| `graph_id` | `str` | The graph ID for the current deployment. |
+| `user` | `BaseUser \| None` | The authenticated user, if [custom auth](../langsmith/custom-auth.md) is configured. |
 
 ```python
 from langgraph.graph import StateGraph, START, END
@@ -1045,10 +1045,10 @@ def my_node(state: State, runtime: Runtime) -> State:
     return {"status": do_work()}
 ```
 
-| Property          | Type          | Description                                                                          |
-| ----------------- | ------------- | ------------------------------------------------------------------------------------ |
-| `drain_requested` | `bool`        | `True` if `RunControl.request_drain()` has been called for this run.                 |
-| `drain_reason`    | `str \| None` | The reason string passed to `request_drain()`, or `None` if drain was not requested. |
+| Property | Type | Description |
+| - | - | - |
+| `drain_requested` | `bool` | `True` if `RunControl.request_drain()` has been called for this run. |
+| `drain_reason` | `str \| None` | The reason string passed to `request_drain()`, or `None` if drain was not requested. |
 
 > [!NOTE]
 > Requires `langgraph>=1.2`. See [Graceful shutdown](fault-tolerance.md#graceful-shutdown) for the full `RunControl` API.
@@ -1328,7 +1328,7 @@ Importantly, when using a [checkpointer](persistence.md), results from successfu
 If you have error-prone (perhaps want to handle flakey API calls), LangGraph provides two ways to address this:
 
 1. You can write regular python code within your node to catch and handle exceptions.
-2. You can set a **[`RetryPolicy`](https://reference.langchain.com/python/langgraph/types/#langgraph.types.RetryPolicy)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
+2. You can set a **[`RetryPolicy`](https://reference.langchain.com/python/langgraph/types)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
 
 Together, these let you perform parallel execution and fully control exception handling.
 
@@ -1336,10 +1336,10 @@ Together, these let you perform parallel execution and fully control exception h
 
 > [!TIP]
 > **Set max concurrency**
-> You can control the maximum number of concurrent tasks by setting `max_concurrency` in the [configuration](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) when invoking the graph.
+> You can control the maximum number of concurrent tasks by setting `max_concurrency` in the [configuration](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) when invoking the graph. `max_concurrency` is a standalone config key, so set it at the top level of the config rather than inside `configurable`.
 >
 > ```python
-> graph.invoke({"value_1": "c"}, {"configurable": {"max_concurrency": 10}})
+> graph.invoke({"value_1": "c"}, {"max_concurrency": 10})
 > ```
 
 ### Defer node execution

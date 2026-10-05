@@ -18,15 +18,15 @@ For detailed documentation, see the [OCI Generative AI documentation](https://do
 
 ### Integration details
 
-| Class                                                                                 | Package                                                    | Serializable | Caches at params | Async |                                            Downloads                                           |                                           Version                                           |
-| :------------------------------------------------------------------------------------ | :--------------------------------------------------------- | :----------: | :--------------: | :---: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`OCIGenAIEmbeddings`](https://github.com/oracle/langchain-oracle/tree/main/libs/oci) | [`langchain-oci`](https://pypi.org/project/langchain-oci/) |     beta     |         ✅        |   ✅   | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-oci?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-oci?style=flat-square\&label=%20) |
+| Class | Package | Serializable | Caches at params | Async | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| [`OCIGenAIEmbeddings`](https://github.com/oracle/langchain-oracle/tree/main/libs/oci) | [`langchain-oci`](https://pypi.org/project/langchain-oci/) | beta | ✅ | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-oci?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-oci?style=flat-square\&label=%20) |
 
 ### Model features
 
 | Text embeddings | Image embeddings | Multimodal | Batch operations | Async |
-| :-------------: | :--------------: | :--------: | :--------------: | :---: |
-|        ✅        |         ✅        |      ✅     |         ✅        |   ✅   |
+| :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ## Setup
 
@@ -121,11 +121,11 @@ print(diagrams[np.argmax(similarities)])  # "database_schema.png"
 
 ## Available Models
 
-| Model                            | Dimensions | Type         |
-| -------------------------------- | ---------- | ------------ |
-| `cohere.embed-english-v3.0`      | 1024       | Text only    |
-| `cohere.embed-multilingual-v3.0` | 1024       | Text only    |
-| `cohere.embed-v4.0`              | 256-1536   | Text + Image |
+| Model | Dimensions | Type |
+| - | - | - |
+| `cohere.embed-english-v3.0` | 1024 | Text only |
+| `cohere.embed-multilingual-v3.0` | 1024 | Text only |
+| `cohere.embed-v4.0` | 256-1536 | Text + Image |
 
 See the [OCI model catalog](https://docs.oracle.com/en-us/iaas/Content/generative-ai/pretrained-models.htm) for all models.
 

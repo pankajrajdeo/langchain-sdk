@@ -28,17 +28,17 @@ This guide will help you getting started with OpenAI [chat models](../../langcha
 
 ### Integration details
 
-| Class                                                                                  | Package                                                                | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/openai) |                                             Downloads                                             |                                             Version                                            |
-| :------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :----------: | :----------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`ChatOpenAI`](https://reference.langchain.com/javascript/langchain-openai/ChatOpenAI) | [`@langchain/openai`](https://www.npmjs.com/package/@langchain/openai) |       ✅      |                                     ✅                                    | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
+| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/openai) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatOpenAI`](https://reference.langchain.com/javascript/langchain-openai/ChatOpenAI) | [`@langchain/openai`](https://www.npmjs.com/package/@langchain/openai) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
 
 ### Model features
 
 See the links in the table headers below for guides on how to use specific features.
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :---------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------: | :---------------------------------------------------------: | :------------------------------------------------------------: |
-|                        ✅                        |                                 ✅                                |                               ✅                              |      ❌      |      ❌      |                               ✅                               |                              ✅                              |                                ✅                               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ## Setup
 
@@ -829,6 +829,42 @@ await reasoningModelNullableSchema.invoke([{
 ```javascript
 { color: null }
 ```
+
+### Add tools mid-conversation
+
+> [!NOTE]
+> `additional_tools` requires `@langchain/openai>=1.6.2`.
+
+Use an [`additional_tools`](https://developers.openai.com/api/docs/guides/tools-tool-search#add-tools-at-a-specific-point-in-the-input) content block to make tools available from a point in the conversation onward. This is useful when your application loads tools outside OpenAI's [tool search](https://developers.openai.com/api/docs/guides/tools-tool-search) flow. Put the block in a [`SystemMessage`](https://reference.langchain.com/javascript/langchain-core/messages/SystemMessage):
+
+```typescript
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
+import { ChatOpenAI } from "@langchain/openai";
+
+const llm = new ChatOpenAI({ model: "gpt-6-astra", useResponsesApi: true });
+
+const response = await llm.invoke([
+  new HumanMessage("What time is it?"),
+  new SystemMessage({
+    content: [
+      {
+        type: "additional_tools", // [!code highlight]
+        role: "developer", // [!code highlight]
+        tools: [
+          {
+            type: "function",
+            name: "get_time",
+            description: "Get the current time.",
+            parameters: { type: "object", properties: {} },
+          },
+        ],
+      },
+    ],
+  }),
+]);
+```
+
+The block requires the Responses API, so set `useResponsesApi: true`. On Chat Completions, or on a message other than a `SystemMessage`, `ChatOpenAI` throws an error. You can also write the block wrapped in a `non_standard` block, in `content` or `contentBlocks`.
 
 ## Prompt caching
 

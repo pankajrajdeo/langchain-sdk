@@ -16,15 +16,15 @@ tags: [docs, javascript, integrations, tools, tavily_crawl]
 
 ### Integration details
 
-| Class                                                                                    | Package                                                                | [PY support](https://python.langchain.com/docs/integrations/tools/tavily_crawl) |                                             Downloads                                             |                                             Version                                            |
-| :--------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :-----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`TavilyCrawl`](https://reference.langchain.com/javascript/langchain-tavily/TavilyCrawl) | [`@langchain/tavily`](https://www.npmjs.com/package/@langchain/tavily) |                                        ✅                                        | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/tavily?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/tavily?style=flat-square\&label=%20&) |
+| Class | Package | [PY support](https://python.langchain.com/docs/integrations/tools/tavily_crawl) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`TavilyCrawl`](https://reference.langchain.com/javascript/langchain-tavily/TavilyCrawl) | [`@langchain/tavily`](https://www.npmjs.com/package/@langchain/tavily) | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/tavily?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/tavily?style=flat-square\&label=%20&) |
 
 ### Tool features
 
-| [Returns artifact](../../langchain/tools.md) | Native async |                    Return data                   |           Pricing          |
-| :-------------------------------------------------: | :----------: | :----------------------------------------------: | :------------------------: |
-|                          ❌                          |       ✅      | base URL, page URL, raw content, images, favicon | 1,000 free credits / month |
+| [Returns artifact](../../langchain/tools.md) | Native async | Return data | Pricing |
+| :-: | :-: | :-: | :-: |
+| ❌ | ✅ | base URL, page URL, raw content, images, favicon | 1,000 free credits / month |
 
 ## Setup
 

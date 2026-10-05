@@ -18,15 +18,15 @@ Please see [Unstructured](../providers/unstructured.md) for more instructions on
 
 ### Integration details
 
-| Class                                                                                                                     | Package                                                                                   | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/document_loaders/file_loaders/unstructured/) |
-| :------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------- | :---: | :----------: | :--------------------------------------------------------------------------------------------------: |
-| [`UnstructuredLoader`](https://reference.langchain.com/python/langchain-unstructured/document_loaders/UnstructuredLoader) | [`langchain-unstructured`](https://reference.langchain.com/python/langchain-unstructured) |   ✅   |       ❌      |                                                   ✅                                                  |
+| Class | Package | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/document_loaders/file_loaders/unstructured/) |
+| :- | :- | :-: | :-: | :-: |
+| [`UnstructuredLoader`](https://reference.langchain.com/python/langchain-unstructured/document_loaders/UnstructuredLoader) | [`langchain-unstructured`](https://reference.langchain.com/python/langchain-unstructured) | ✅ | ❌ | ✅ |
 
 ### Loader features
 
-|        Source        | Document Lazy Loading | Native Async Support |
-| :------------------: | :-------------------: | :------------------: |
-| `UnstructuredLoader` |           ✅           |           ❌          |
+| Source | Document Lazy Loading | Native Async Support |
+| :-: | :-: | :-: |
+| `UnstructuredLoader` | ✅ | ❌ |
 
 ## Setup
 

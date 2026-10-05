@@ -41,7 +41,7 @@ To create a tag:
 Within the same side panel for creating a new tag, you can also assign resources to tags. Search for corresponding resources in the **Assign resources** section and select the resources you want to tag.
 
 > [!NOTE]
-> You can only tag workspace-scoped resources with resource tags. This includes Tracing Projects, Annotation Queues, Deployments, Experiments, Datasets, and Prompts.
+> You can only tag workspace-scoped resources with resource tags. This includes Tracing Projects, Annotation Queues, Deployments, Experiments, Datasets, and Prompts. In an [agent-based workspace](agents.md), a tracing project is one [environment](agent-environments.md) of an agent, so tagging one tags a single environment rather than the agent.
 
 To un-assign a tag from a resource, click the  trash icon next to the tag, both in the tag panel and the resource tag panel.
 
@@ -166,13 +166,13 @@ project = response.json()
 
 The same `tag_value_ids` field is accepted by:
 
-| Endpoint                                   | Description                                                                   |
-| ------------------------------------------ | ----------------------------------------------------------------------------- |
-| `POST /api/v1/sessions`                    | Create a tracing project                                                      |
-| `POST /api/v1/datasets`                    | Create a dataset (also accepted on CSV upload and experiment upload variants) |
-| `POST /api/v1/datasets/{dataset_id}/clone` | Clone a dataset                                                               |
-| `POST /api/v1/repos`                       | Create a prompt                                                               |
-| `POST /api/v1/repos/{repo_id}/fork`        | Fork a prompt                                                                 |
+| Endpoint | Description |
+| - | - |
+| `POST /api/v1/sessions` | Create a tracing project |
+| `POST /api/v1/datasets` | Create a dataset (also accepted on CSV upload and experiment upload variants) |
+| `POST /api/v1/datasets/{dataset_id}/clone` | Clone a dataset |
+| `POST /api/v1/repos` | Create a prompt |
+| `POST /api/v1/repos/{repo_id}/fork` | Fork a prompt |
 
 > [!NOTE]
 > **Permissions**: Applying the **Application** tag at creation time requires only update access to the resource type. Applying any other tag key requires the [`workspaces:manage`](organization-workspace-operations.md) permission.

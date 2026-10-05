@@ -1,0 +1,91 @@
+---
+title: "Configure SmithDB observability"
+description: "Scrape SmithDB application metrics and export logs and traces to your existing observability stack."
+source: "https://docs.langchain.com/langsmith/self-host-smithdb-observability"
+category: "docs"
+tags: [docs, langsmith, self-host-smithdb-observability]
+---
+
+# Configure SmithDB observability
+
+> Scrape SmithDB application metrics and export logs and traces to your existing observability stack.
+
+SmithDB components expose application metrics and can export logs and traces to your existing observability stack. Set this up after you deploy SmithDB services and before you tune capacity or migrate historical data. It provides the signals to validate those changes and investigate failures.
+
+## Metrics
+
+Each SmithDB component exposes application metrics at the fixed `/metrics` path on its HTTP port. Configure your monitoring stack to discover the pods by adding scrape annotations to each component:
+
+<details>
+<summary>Sample Prometheus configuration</summary>
+
+```yaml
+smithdb:
+  query:
+    deployment:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8060"
+  ingestion:
+    deployment:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8050"
+  compaction:
+    deployment:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8070"
+  compactionWorker:
+    deployment:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "9000"
+  clusterManager:
+    deployment:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8090"
+  migration:
+    job:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "9040"
+```
+
+On LangSmith 0.16, set the migration annotations under `smithdb.migration.deployment.annotations`.
+
+</details>
+
+These are Prometheus-style annotations. Providers with their own discovery format, such as Datadog, need that format applied to the same ports and path. Monitor the PostgreSQL metastore, Kubernetes nodes, and cloud services with your existing infrastructure monitoring.
+
+For which metrics to watch and how to read them, see [SmithDB metrics reference](self-host-smithdb-metrics.md).
+
+## Logs and traces
+
+SmithDB uses the chart-level OpenTelemetry tracing configuration described in [Export LangSmith telemetry to your observability backend](export-backend.md), with one difference: SmithDB exports over OTLP gRPC only. Set `config.observability.tracing.exporter` to `grpc`. With `http`, SmithDB export stays disabled and SmithDB logs remain console-only. The chart adds SmithDB pod and container names as OpenTelemetry resource attributes automatically.
+
+To customize SmithDB log filtering, set `RUST_LOG` for all SmithDB workloads through `smithdb.commonEnv`:
+
+```yaml
+smithdb:
+  commonEnv:
+    - name: RUST_LOG
+      value: "warn,smithdb_query=debug,vortex=warn"
+```
+
+Confirm the collector is reachable from the LangSmith namespace, apply the chart, then confirm telemetry arrives. To set up or tune a collector, see [Configure your collector for LangSmith telemetry](langsmith-collector.md).
+
+***
+
+> [!NOTE]
+> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-smithdb-observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

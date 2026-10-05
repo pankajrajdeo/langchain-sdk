@@ -18,9 +18,9 @@ This will help you get started with `PerplexitySearchRetriever` [retrieval](../.
 
 ### Integration details
 
-| Retriever                                                                                                                | Source                                  |                                     Package                                    | [PY support](https://python.langchain.com/docs/integrations/retrievers/perplexity_search/) |
-| :----------------------------------------------------------------------------------------------------------------------- | :-------------------------------------- | :----------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
-| [`PerplexitySearchRetriever`](https://reference.langchain.com/javascript/langchain-perplexity/PerplexitySearchRetriever) | The web, via the Perplexity Search API. | [`@langchain/perplexity`](https://www.npmjs.com/package/@langchain/perplexity) |                                              ✅                                             |
+| Retriever | Source | Package | [PY support](https://python.langchain.com/docs/integrations/retrievers/perplexity_search/) |
+| :- | :- | :-: | :-: |
+| [`PerplexitySearchRetriever`](https://reference.langchain.com/javascript/langchain-perplexity/PerplexitySearchRetriever) | The web, via the Perplexity Search API. | [`@langchain/perplexity`](https://www.npmjs.com/package/@langchain/perplexity) | ✅ |
 
 ## Setup
 

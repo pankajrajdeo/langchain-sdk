@@ -1,13 +1,13 @@
 ---
 title: "integrations/tools"
-description: "Index of 38 pages and 0 subdirectories under integrations/tools."
+description: "Index of 39 pages and 0 subdirectories under integrations/tools."
 category: "index"
 tags: [index, integrations, tools]
 ---
 
 # integrations/tools
 
-38 pages here.
+39 pages here.
 
 ## Files
 
@@ -31,6 +31,7 @@ tags: [index, integrations, tools]
 - [Google search integration](google_search.md) - Integrate with the Google search tool using LangChain Python.
 - [IBM watsonx.ai integration](ibm_watsonx.md) - Integrate with the IBM watsonx.ai tool using LangChain Python.
 - [IBM watsonx.ai SQL integration](ibm_watsonx_sql.md) - Integrate with the IBM watsonx.ai SQL tool using LangChain Python.
+- [Tool integrations](index.md) - Integrate with tools using LangChain Python.
 - [Mcp toolbox for databases integration](mcp_toolbox.md) - Integrate with the Mcp toolbox for databases tool using LangChain Python.
 - [Oracle AI vector search generate summary integration](oracleai.md) - Integrate with the Oracle AI vector search generate summary tool using LangChain Python.
 - [Parallel extract integration](parallel_extract.md) - Integrate with the ParallelExtractTool tool using LangChain Python.

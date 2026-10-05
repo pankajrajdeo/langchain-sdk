@@ -18,9 +18,9 @@ This example shows how to communicate with `watsonx.ai` models using `LangChain`
 
 ### Integration details
 
-| Class                                                                                         | Package                                                                               | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/llms/ibm/) |                                            Downloads                                           |                                           Version                                           |
-| :-------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :---: | :----------: | :----------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`WatsonxLLM`](https://reference.langchain.com/python/integrations/langchain_ibm/WatsonxLLM/) | [`langchain-ibm`](https://reference.langchain.com/python/integrations/langchain_ibm/) |   ❌   |       ❌      |                                  ✅                                 | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ibm?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ibm?style=flat-square\&label=%20) |
+| Class | Package | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/llms/ibm/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: | :-: |
+| [`WatsonxLLM`](https://reference.langchain.com/python/langchain-ibm/WatsonxLLM) | [`langchain-ibm`](https://reference.langchain.com/python/langchain-ibm) | ❌ | ❌ | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ibm?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ibm?style=flat-square\&label=%20) |
 
 ## Setup
 
@@ -223,7 +223,7 @@ llm_chain.invoke(topic)
 
 ## API reference
 
-For detailed documentation of all `WatsonxLLM` features and configurations head to the [API reference](https://reference.langchain.com/python/integrations/langchain_ibm/WatsonxLLM/).
+For detailed documentation of all `WatsonxLLM` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-ibm/WatsonxLLM).
 
 ***
 

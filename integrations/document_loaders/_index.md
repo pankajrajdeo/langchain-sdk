@@ -1,13 +1,13 @@
 ---
 title: "integrations/document_loaders"
-description: "Index of 24 pages and 0 subdirectories under integrations/document_loaders."
+description: "Index of 25 pages and 0 subdirectories under integrations/document_loaders."
 category: "index"
 tags: [index, integrations, document_loaders]
 ---
 
 # integrations/document_loaders
 
-24 pages here.
+25 pages here.
 
 ## Files
 
@@ -29,6 +29,7 @@ tags: [index, integrations, document_loaders]
 - [Google memorystore for Redis integration](google_memorystore_redis.md) - Integrate with the Google memorystore for Redis document loader using LangChain Python.
 - [Google spanner integration](google_spanner.md) - Integrate with the Google spanner document loader using LangChain Python.
 - [Google speech-to-text audio transcripts integration](google_speech_to_text.md) - Integrate with the Google speech-to-text audio transcripts document loader using LangChain Python.
+- [Document loader integrations](index.md) - Integrate with document loaders using LangChain Python.
 - [LangSmithLoader integration](langsmith.md) - Integrate with the LangSmithLoader document loader using LangChain Python.
 - [Oracle autonomous database integration](oracleadb_loader.md) - Integrate with the Oracle autonomous database document loader using LangChain Python.
 - [Oracle AI vector search document processing integration](oracleai.md) - Integrate with the Oracle AI vector search document processing document loader using LangChain Python.

@@ -16,16 +16,16 @@ Use these tools when you want agents to call capabilities in tools provided by M
 
 ## Overview
 
-| Tool                                                              | Description                                                                                   |
-| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [`AzureOpenAIModelImageGenTool`](#azureopenaimodelimagegentool)   | Generate images through an OpenAI-compatible `/images/generations` endpoint.                  |
+| Tool | Description |
+| - | - |
+| [`AzureOpenAIModelImageGenTool`](#azureopenaimodelimagegentool) | Generate images through an OpenAI-compatible `/images/generations` endpoint. |
 | [`AzureOpenAITranscriptionsTool`](#azureopenaitranscriptionstool) | Transcribe audio files to text through an OpenAI-compatible `/audio/transcriptions` endpoint. |
-| [`CodeInterpreterTool`](#codeinterpretertool)                     | Run Python code server-side in a sandboxed container.                                         |
-| [`WebSearchTool`](#websearchtool)                                 | Search the internet for current information and sources.                                      |
-| [`FileSearchTool`](#filesearchtool)                               | Search vector stores for relevant document content.                                           |
-| [`ImageGenerationTool`](#imagegenerationtool)                     | Generate or edit images using GPT image models.                                               |
-| [`McpTool`](#mcptool)                                             | Access external Model Context Protocol (MCP) servers.                                         |
-| [`AzureAIProjectToolbox`](#azureaiprojecttoolbox)                 | Load tools from an Azure AI Foundry Toolbox and use them via Model Context Protocol (MCP).    |
+| [`CodeInterpreterTool`](#codeinterpretertool) | Run Python code server-side in a sandboxed container. |
+| [`WebSearchTool`](#websearchtool) | Search the internet for current information and sources. |
+| [`FileSearchTool`](#filesearchtool) | Search vector stores for relevant document content. |
+| [`ImageGenerationTool`](#imagegenerationtool) | Generate or edit images using GPT image models. |
+| [`McpTool`](#mcptool) | Access external Model Context Protocol (MCP) servers. |
+| [`AzureAIProjectToolbox`](#azureaiprojecttoolbox) | Load tools from an Azure AI Foundry Toolbox and use them via Model Context Protocol (MCP). |
 
 ## Setup
 

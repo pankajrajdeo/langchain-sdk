@@ -222,6 +222,10 @@ components:
       properties:
         api_key_creation_from_api_keys_enabled:
           type: boolean
+        avatar_url:
+          anyOf:
+            - type: string
+            - type: 'null'
         byoc_create_saas_workspace_enabled:
           type: boolean
         can_export_usage_backfill:
@@ -332,6 +336,9 @@ components:
           type: boolean
         tier:
           type: string
+        topic_search_enabled:
+          type: boolean
+          default: false
         workspace_admin_can_invite_to_org:
           type: boolean
     authn.OrganizationConfig:
@@ -356,10 +363,10 @@ components:
           description: Indicates whether this org can provision BYOC data planes.
           type: boolean
         byoc_external_id:
-          readOnly: true
           description: >-
             ByocExternalID is the organization's assigned AWS external ID,
             stored only in org config.
+          readOnly: true
           anyOf:
             - type: string
             - type: 'null'
@@ -794,12 +801,14 @@ components:
         - ORGANIZATION_USER
         - ORGANIZATION_VIEWER
         - ORGANIZATION_RESTRICTED
+        - CUSTOM
       x-enum-varnames:
         - OrganizationRoleAdmin
         - OrganizationRoleOperator
         - OrganizationRoleUser
         - OrganizationRoleViewer
         - OrganizationRoleRestricted
+        - OrganizationRoleCustom
   securitySchemes:
     API Key:
       type: apiKey

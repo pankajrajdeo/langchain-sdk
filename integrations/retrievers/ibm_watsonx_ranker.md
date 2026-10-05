@@ -18,9 +18,9 @@ This notebook shows how to use [watsonx's rerank endpoint](https://cloud.ibm.com
 
 ### Integration details
 
-| Class                                                                                               | Package                                                                               | [JS support](https://js.langchain.com/docs/integrations/document_compressors/ibm/) |                                            Downloads                                           |                                           Version                                           |
-| :-------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`WatsonxRerank`](https://reference.langchain.com/python/integrations/langchain_ibm/WatsonxRerank/) | [`langchain-ibm`](https://reference.langchain.com/python/integrations/langchain_ibm/) |                                          ✅                                         | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ibm?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ibm?style=flat-square\&label=%20) |
+| Class | Package | [JS support](https://js.langchain.com/docs/integrations/document_compressors/ibm/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`WatsonxRerank`](https://reference.langchain.com/python/langchain-ibm/WatsonxRerank) | [`langchain-ibm`](https://reference.langchain.com/python/langchain-ibm) | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ibm?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ibm?style=flat-square\&label=%20) |
 
 ## Setup
 
@@ -283,7 +283,7 @@ chain.invoke(query)
 
 ## API reference
 
-For detailed documentation of all `WatsonxRerank` features and configurations head to the [API reference](https://reference.langchain.com/python/integrations/langchain_ibm/WatsonxRerank/).
+For detailed documentation of all `WatsonxRerank` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-ibm/WatsonxRerank).
 
 ***
 

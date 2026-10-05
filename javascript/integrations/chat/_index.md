@@ -1,13 +1,13 @@
 ---
 title: "javascript/integrations/chat"
-description: "Index of 23 pages and 0 subdirectories under javascript/integrations/chat."
+description: "Index of 24 pages and 0 subdirectories under javascript/integrations/chat."
 category: "index"
 tags: [index, javascript, integrations, chat]
 ---
 
 # javascript/integrations/chat
 
-23 pages here.
+24 pages here.
 
 ## Files
 
@@ -26,6 +26,7 @@ tags: [index, javascript, integrations, chat]
 - [ChatVertexAI integration](google_vertex_ai.md) - Integrate with the ChatVertexAI chat model using LangChain JavaScript.
 - [ChatGroq integration](groq.md) - Integrate with the ChatGroq chat model using LangChain JavaScript.
 - [IBM watsonx.ai integration](ibm.md) - Integrate with the IBM watsonx.ai chat model using LangChain JavaScript.
+- [Chat model integrations](index.md) - Integrate with chat models using LangChain JavaScript.
 - [ChatMistralAI integration](mistral.md) - Integrate with the ChatMistralAI chat model using LangChain JavaScript.
 - [ChatOllama integration](ollama.md) - Integrate with the ChatOllama chat model using LangChain JavaScript.
 - [ChatOpenAI integration](openai.md) - Integrate with the ChatOpenAI chat model using LangChain JavaScript.

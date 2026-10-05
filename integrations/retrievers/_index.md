@@ -1,13 +1,13 @@
 ---
 title: "integrations/retrievers"
-description: "Index of 16 pages and 0 subdirectories under integrations/retrievers."
+description: "Index of 17 pages and 0 subdirectories under integrations/retrievers."
 category: "index"
 tags: [index, integrations, retrievers]
 ---
 
 # integrations/retrievers
 
-16 pages here.
+17 pages here.
 
 ## Files
 
@@ -21,6 +21,7 @@ tags: [index, integrations, retrievers]
 - [Gemini Enterprise Agent Platform search integration](google_vertex_ai_search.md) - Integrate with the Gemini Enterprise Agent Platform search retriever using LangChain Python.
 - [Graph RAG integration](graph_rag.md) - Integrate with the Graph RAG retriever using LangChain Python.
 - [IBM watsonx.ai integration](ibm_watsonx_ranker.md) - Integrate with the IBM watsonx.ai retriever using LangChain Python.
+- [Retriever integrations](index.md) - Integrate with retrievers using LangChain Python.
 - [MongoDB Atlas](mongodb_atlas.md) - Integrate with the MongoDBAtlasHybridSearchRetriever using LangChain Python.
 - [NVIDIARAGRetriever integration](nvidia.md) - Integrate with the NVIDIARAGRetriever using LangChain Python.
 - [ParallelSearchRetriever integration](parallel.md) - Integrate with the ParallelSearchRetriever retriever using LangChain Python.

@@ -78,11 +78,11 @@ import { PerplexitySearchResults } from "@langchain/perplexity";
 
 ## Components reference
 
-| Class                       | Abstraction | Import path                                                         | Description                                                                 |
-| --------------------------- | ----------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `ChatPerplexity`            | Chat model  | `import { ChatPerplexity } from "@langchain/perplexity"`            | Chat model wrapping the Perplexity API for grounded chat completions.       |
-| `PerplexitySearchRetriever` | Retriever   | `import { PerplexitySearchRetriever } from "@langchain/perplexity"` | Retriever that returns `Document` objects from the Perplexity Search API.   |
-| `PerplexitySearchResults`   | Tool        | `import { PerplexitySearchResults } from "@langchain/perplexity"`   | Tool that returns Perplexity Search API results as a JSON array for agents. |
+| Class | Abstraction | Import path | Description |
+| - | - | - | - |
+| `ChatPerplexity` | Chat model | `import { ChatPerplexity } from "@langchain/perplexity"` | Chat model wrapping the Perplexity API for grounded chat completions. |
+| `PerplexitySearchRetriever` | Retriever | `import { PerplexitySearchRetriever } from "@langchain/perplexity"` | Retriever that returns `Document` objects from the Perplexity Search API. |
+| `PerplexitySearchResults` | Tool | `import { PerplexitySearchResults } from "@langchain/perplexity"` | Tool that returns Perplexity Search API results as a JSON array for agents. |
 
 ***
 

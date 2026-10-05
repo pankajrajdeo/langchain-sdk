@@ -16,9 +16,9 @@ tags: [docs, javascript, integrations, tools, composio]
 
 ### Integration details
 
-| Class    | Package                                                                  | Serializable | [Python support](composio.md) |                                            Version                                            |
-| :------- | :----------------------------------------------------------------------- | :----------: | :-----------------------------------------------------------: | :-------------------------------------------------------------------------------------------: |
-| Composio | [@composio/langchain](https://www.npmjs.com/package/@composio/langchain) |       ❌      |                               ✅                               | ![npm version](https://img.shields.io/npm/v/@composio/langchain?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [Python support](composio.md) | Version |
+| :- | :- | :-: | :-: | :-: |
+| Composio | [@composio/langchain](https://www.npmjs.com/package/@composio/langchain) | ❌ | ✅ | ![npm version](https://img.shields.io/npm/v/@composio/langchain?style=flat-square\&label=%20) |
 
 ### Tool features
 

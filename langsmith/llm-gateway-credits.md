@@ -34,10 +34,10 @@ For regional base URLs, see [Regional gateways](llm-gateway-how-it-works.md#use-
 
 Select a hosted model by ID in the request body. Model IDs are case-insensitive.
 
-| Model ID               | Description                                                                               |
-| ---------------------- | ----------------------------------------------------------------------------------------- |
+| Model ID | Description |
+| - | - |
 | `moonshotai/kimi-k2.6` | Kimi K2.6 by Moonshot AI. A strong general-purpose model. Powered by Fireworks Inference. |
-| `moonshotai/kimi-k3`   | Kimi K3 by Moonshot AI. Powered by Fireworks Inference.                                   |
+| `moonshotai/kimi-k3` | Kimi K3 by Moonshot AI. Powered by Fireworks Inference. |
 
 List every model available to your workspace, including configured bring-your-own-key providers and hosted models, with the standard model-list endpoint:
 
@@ -106,18 +106,18 @@ print(model.invoke("ping").content)
 
 Credit-funded chat models use the same standard API formats as bring-your-own-key models:
 
-| Method and path             | Behavior                                      |
-| --------------------------- | --------------------------------------------- |
+| Method and path | Behavior |
+| - | - |
 | `POST /v1/chat/completions` | OpenAI Chat Completions, including streaming. |
-| `POST /v1/messages`         | Anthropic Messages, including streaming.      |
-| `POST /v1/responses`        | OpenAI Responses.                             |
-| `GET /v1/models`            | Lists models available to the workspace.      |
+| `POST /v1/messages` | Anthropic Messages, including streaming. |
+| `POST /v1/responses` | OpenAI Responses. |
+| `GET /v1/models` | Lists models available to the workspace. |
 
 For request examples and translation behavior, see [API formats](llm-gateway-api-formats.md).
 
 ## Pricing
 
-Gateway Credits are available on all paid plans besides Enterprise. See [the pricing page](https://www.langchain.com/pricing) for plan details and current rates. Gateway Credits are denominated in **LangChain Credit Units (LCUs)**; each call consumes LCUs based on token usage.
+Gateway Credits are available on all paid plans besides Enterprise. See [the pricing page](https://www.langchain.com/pricing) for plan details and current rates. Gateway Credits are denominated in **LangChain Standard Units (LSUs)** at **\$1 per LSU**; each call consumes LSUs based on token usage.
 
 Standard gateway [spend policies](llm-gateway-spend-policies.md) apply to hosted-model traffic, so any organization, workspace, API key, or user cap you have configured also governs Gateway Credit usage. You can control Gateway Credit consumption with the same tools you use for bring-your-own-key providers. For example, cap a specific API key at \$200/month across every provider, or set a workspace-wide daily limit that includes hosted-model calls.
 

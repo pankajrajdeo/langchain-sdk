@@ -127,45 +127,48 @@ connectClient(serverUrl)
 ```
 
 #### Python
-Install the adapter with:
+Install LangChain with the MCP extra:
+
+**pip**
 
 ```bash
-pip install langchain-mcp-adapters
+pip install "langchain[mcp]"
 ```
 
-Here is an example of how to connect to a remote MCP endpoint and use an agent as a tool:
+**uv**
+
+```bash
+uv add "langchain[mcp]"
+```
+
+Connect to a remote MCP endpoint and use an agent as a tool:
 
 ```python
-# Create server parameters for stdio connection
-from mcp import ClientSession
-from mcp.client.streamable_http import streamablehttp_client
 import asyncio
+import os
 
-from langchain_mcp_adapters.tools import load_mcp_tools
+from fastmcp.client import Client
+from fastmcp.client.transports import StreamableHttpTransport
 from langchain.agents import create_agent
-
-server_params = {
-    "url": "https://mcp-finance-agent.xxx.us.langgraph.app/mcp",
-    "headers": {
-        "X-Api-Key":"lsv2_pt_your_api_key"
-    }
-}
+from langchain.mcp import MCPAdapter
 
 async def main():
-    async with streamablehttp_client(**server_params) as (read, write, _):
-        async with ClientSession(read, write) as session:
-            # Initialize the connection
-            await session.initialize()
+    async with MCPAdapter(
+        Client(
+            StreamableHttpTransport(
+                "https://mcp-finance-agent.xxx.us.langgraph.app/mcp",
+                headers={"X-Api-Key": os.environ["LANGSMITH_API_KEY"]},
+            )
+        )
+    ) as adapter:
+        # Load the remote graph as if it was a tool
+        tools = await adapter.list_tools()
 
-            # Load the remote graph as if it was a tool
-            tools = await load_mcp_tools(session)
-
-            # Create and run a react agent with the tools
-            agent = create_agent("gpt-5.5", tools)
-
-            # Invoke the agent with a message
-            agent_response = await agent.ainvoke({"messages": "What can the finance agent do for me?"})
-            print(agent_response)
+        agent = create_agent("gpt-5.5", tools)
+        agent_response = await agent.ainvoke(
+            {"messages": "What can the finance agent do for me?"}
+        )
+        print(agent_response)
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -251,22 +254,20 @@ For more details, see the [low-level concepts guide](../langgraph/graph-api.md#s
 To make user-scoped tools available to your LangSmith deployment, start with implementing a snippet like the following:
 
 ```python
-from langchain_mcp_adapters.client import MultiServerMCPClient
+from fastmcp.client import Client
+from langchain.mcp import MCPAdapter
 
-def mcp_tools_node(state, config):
+async def mcp_tools_node(state, config):
     user = config["configurable"].get("langgraph_auth_user")
-         , user["github_token"], user["email"], etc.
+    # user includes github_token, email, etc.
 
-    client = MultiServerMCPClient({
-        "github": {
-            "transport": "streamable_http", # (1)
-            "url": "https://my-github-mcp-server/mcp", # (2)
-            "headers": {
-                "Authorization": f"Bearer {user['github_token']}"
-            }
-        }
-    })
-    tools = await client.get_tools() # (3)
+    async with MCPAdapter(
+        Client(
+            "https://my-github-mcp-server/mcp",  # (1)
+            auth=user["github_token"],  # (2)
+        )
+    ) as adapter:
+        tools = await adapter.list_tools()  # (3)
 
     # Your tool-calling logic here
 
@@ -274,9 +275,9 @@ def mcp_tools_node(state, config):
     return {"messages": tool_messages}
 ```
 
-1. MCP only supports adding headers to requests made to `streamable_http` and `sse` `transport` servers.
-2. Your MCP server URL.
-3. Get available tools from your MCP server.
+1. Your MCP server URL. A URL target uses Streamable HTTP.
+2. Pass a bearer token with `auth=` on `Client`. For non-bearer headers (such as `x-api-key`), use `StreamableHttpTransport(url, headers=...)` instead. See [Authentication](../langchain/mcp/auth.md).
+3. Discover tools from the MCP server.
 
 *This can also be done by [rebuilding your graph at runtime](graph-rebuild.md) to have a different configuration for a new run*
 

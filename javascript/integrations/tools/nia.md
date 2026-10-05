@@ -16,9 +16,9 @@ tags: [docs, javascript, integrations, tools, nia]
 
 ### Integration details
 
-| Class                                                         | Package                                                                              | [PY support](nia.md) |                                                Version                                                |
-| :------------------------------------------------------------ | :----------------------------------------------------------------------------------- | :--------------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
-| [`NiaToolkit`](https://github.com/nozomio-labs/nia-langchain) | [`@nozomioai/langchain-nia`](https://www.npmjs.com/package/@nozomioai/langchain-nia) |                           ✅                          | ![NPM - Version](https://img.shields.io/npm/v/@nozomioai/langchain-nia?style=flat-square\&label=%20&) |
+| Class | Package | [PY support](nia.md) | Version |
+| :- | :- | :-: | :-: |
+| [`NiaToolkit`](https://github.com/nozomio-labs/nia-langchain) | [`@nozomioai/langchain-nia`](https://www.npmjs.com/package/@nozomioai/langchain-nia) | ✅ | ![NPM - Version](https://img.shields.io/npm/v/@nozomioai/langchain-nia?style=flat-square\&label=%20&) |
 
 ## Setup
 
@@ -120,28 +120,28 @@ const result = await llmWithTools.invoke("Search for React hooks best practices"
 
 ## Available tools
 
-| Tool                     | Description                                                  |
-| ------------------------ | ------------------------------------------------------------ |
-| `NiaSearch`              | Semantic search across indexed repos, docs, and data sources |
-| `NiaWebSearch`           | Web search with category filtering and date range            |
-| `NiaDeepResearch`        | Multi-step comprehensive research                            |
-| `NiaUniversalSearch`     | Search all sources simultaneously                            |
-| `NiaAdvisor`             | Analyze code against indexed documentation                   |
-| `NiaIndex`               | Index new sources (repos, docs, papers, datasets)            |
-| `NiaSourceList`          | List indexed sources with filtering                          |
-| `NiaSourceSubscribe`     | Subscribe to pre-indexed public sources                      |
-| `NiaSourceSync`          | Re-sync sources to pull latest changes                       |
-| `NiaRead`                | Read files/pages from indexed sources                        |
-| `NiaGrep`                | Regex search within indexed sources                          |
-| `NiaExplore`             | Browse file tree of indexed sources                          |
-| `NiaGitHubSearch`        | Search code in GitHub repositories                           |
-| `NiaGitHubRead`          | Read files from GitHub repos                                 |
-| `NiaGitHubGlob`          | Find files matching glob patterns                            |
-| `NiaGitHubTree`          | Browse repo file tree                                        |
-| `NiaContextSave`         | Save context for cross-agent sharing                         |
-| `NiaContextSearch`       | Semantic search over saved contexts                          |
-| `NiaDependencySubscribe` | Auto-subscribe to docs for project dependencies              |
-| `NiaDependencyAnalyze`   | Preview indexable dependencies from a manifest               |
+| Tool | Description |
+| - | - |
+| `NiaSearch` | Semantic search across indexed repos, docs, and data sources |
+| `NiaWebSearch` | Web search with category filtering and date range |
+| `NiaDeepResearch` | Multi-step comprehensive research |
+| `NiaUniversalSearch` | Search all sources simultaneously |
+| `NiaAdvisor` | Analyze code against indexed documentation |
+| `NiaIndex` | Index new sources (repos, docs, papers, datasets) |
+| `NiaSourceList` | List indexed sources with filtering |
+| `NiaSourceSubscribe` | Subscribe to pre-indexed public sources |
+| `NiaSourceSync` | Re-sync sources to pull latest changes |
+| `NiaRead` | Read files/pages from indexed sources |
+| `NiaGrep` | Regex search within indexed sources |
+| `NiaExplore` | Browse file tree of indexed sources |
+| `NiaGitHubSearch` | Search code in GitHub repositories |
+| `NiaGitHubRead` | Read files from GitHub repos |
+| `NiaGitHubGlob` | Find files matching glob patterns |
+| `NiaGitHubTree` | Browse repo file tree |
+| `NiaContextSave` | Save context for cross-agent sharing |
+| `NiaContextSearch` | Semantic search over saved contexts |
+| `NiaDependencySubscribe` | Auto-subscribe to docs for project dependencies |
+| `NiaDependencyAnalyze` | Preview indexable dependencies from a manifest |
 
 ## API reference
 

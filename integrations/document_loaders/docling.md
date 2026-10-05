@@ -18,15 +18,15 @@ This integration provides Docling's capabilities via the `DoclingLoader` documen
 
 ### Integration details
 
-| Class                     | Package           | Local | Serializable | JS support |
-| :------------------------ | :---------------- | :---: | :----------: | :--------: |
-| langchain\_docling.loader | langchain-docling |   ✅   |       ❌      |      ❌     |
+| Class | Package | Local | Serializable | JS support |
+| :- | :- | :-: | :-: | :-: |
+| langchain\_docling.loader | langchain-docling | ✅ | ❌ | ❌ |
 
 ### Loader features
 
-|      Source     | Document Lazy Loading | Native Async Support |
-| :-------------: | :-------------------: | :------------------: |
-| `DoclingLoader` |           ✅           |           ❌          |
+| Source | Document Lazy Loading | Native Async Support |
+| :-: | :-: | :-: |
+| `DoclingLoader` | ✅ | ❌ |
 
 The presented `DoclingLoader` component enables you to:
 

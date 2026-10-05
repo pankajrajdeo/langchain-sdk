@@ -1,6 +1,6 @@
 ---
 title: "Overview"
-description: "This overview covers topics related to managing users, organizations, workspaces, and applications within LangSmith."
+description: "This overview covers topics related to managing users, organizations, workspaces, agents, and applications within LangSmith."
 source: "https://docs.langchain.com/langsmith/administration-overview"
 category: "docs"
 tags: [docs, langsmith, administration-overview]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, administration-overview]
 
 # Overview
 
-This overview covers topics related to managing users, organizations, workspaces, and applications within LangSmith.
+This overview covers topics related to managing users, organizations, workspaces, agents, and applications within LangSmith.
 
 ## Resource hierarchy
 
@@ -18,11 +18,11 @@ An organization is a logical grouping of users within LangSmith that defines sha
 
 When you log in for the first time, a personal organization will be created for you automatically. If you'd like to collaborate with others, you can create a separate organization and invite your team members to join. There are a few important differences between your personal organization and shared organizations:
 
-| Feature             | Personal            | Shared                                                                                            |
-| ------------------- | ------------------- | ------------------------------------------------------------------------------------------------- |
-| Maximum workspaces  | 1                   | Variable, depending on plan (see the [pricing page](https://www.langchain.com/pricing-langsmith)) |
-| Collaboration       | Cannot invite users | Can invite users                                                                                  |
-| Billing: paid plans | Developer plan only | All other plans available                                                                         |
+| Feature | Personal | Shared |
+| - | - | - |
+| Maximum workspaces | 1 | Variable, depending on plan (see the [pricing page](https://www.langchain.com/pricing-langsmith)) |
+| Collaboration | Cannot invite users | Can invite users |
+| Billing: paid plans | Developer plan only | All other plans available |
 
 ### Workspaces
 
@@ -31,17 +31,20 @@ When you log in for the first time, a personal organization will be created for 
 
 A workspace is a logical grouping of users and resources within an organization. Workspaces are commonly used to isolate teams or business units, providing separation between projects and their associated resources. A workspace separates trust boundaries for resources and access control. Users are granted permissions at the workspace level, which determine their access to resources in that workspace, including tracing projects, datasets, annotation queues, and prompts. For details on setup, see the [setup guide](set-up-hierarchy.md#set-up-a-workspace) and for details on permissions see [Workspaces (RBAC)](#workspace-roles-rbac).
 
-We recommend creating a separate workspace for each team within your organization. To organize resources even further, you can use [Applications](#applications) to group resources within a workspace. For guidance on different workspace organization models based on your team's isolation requirements, refer to [Workload isolation](workload-isolation.md).
+We recommend creating a separate workspace for each team within your organization. To organize resources even further, you can group them within a workspace by [agent or application](#agents-and-applications), depending on which information architecture your workspace uses. For guidance on different workspace organization models based on your team's isolation requirements, refer to [Workload isolation](workload-isolation.md).
 
-### Applications
+### Agents and applications
 
-An application is a logical grouping of resources within a workspace. Applications are often agents, but you can use them for any project within a team. Applications keep the UI organized by only surfacing the resources associated with the application currently in context.
+Agents and applications are logical groupings of resources within a workspace, one level below the workspace itself. The grouping keeps the UI organized by surfacing only the resources associated with the agent or application currently in context.
 
-Applications are built on top of [resource tags](#resource-tags) and can be used to control resource access using [ABAC](organization-workspace-operations.md#access-policies).
+What that grouping is called, and which control selects it, depends on which information architecture your workspace uses. The control at the top left tells you which one you are on:
 
-Switch applications from the main navigation sidebar in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-administration-overview). Use the **Application** dropdown at the top of the sidebar to select an application.
+* **Agent-based workspaces**, which are in [beta](release-stages.md), call it an [agent](agents.md), and an agent's traces divide further into [environments](agent-environments.md) drawn from a fixed set of four. Select one from the agent picker in the top bar, or select **All agents** to see every resource in the workspace. For more information, see [Navigate agents](navigate-agents.md).
+* **Project-based workspaces** call it an application, which can group any project within a team rather than an agent alone. Select one from the **Application** dropdown at the top of the sidebar in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-administration-overview), or select **All applications** to see every resource in the workspace.
 
-Any resource can be created without being tagged to an application. These resources will be visible when the **All applications** option is selected.
+Both are built on top of [resource tags](#resource-tags) and can be used to control resource access using [ABAC](organization-workspace-operations.md#access-policies).
+
+Any resource can be created without being tagged to either one. Those resources are visible when all agents or applications are in view.
 
 ### Resources
 
@@ -51,26 +54,26 @@ Resources are the concrete entities used to build, run, and observe applications
 
 The following diagram explains the relationship between organizations, workspaces, applications, and resources: <img src="https://mintcdn.com/langchain-5e9cc07a/CxwZomSRGiBmNIp6/langsmith/images/resource-hierarchy.png?fit=max&auto=format&n=CxwZomSRGiBmNIp6&q=85&s=d117245dabd42d5dd4ef0733f8abcb21" alt="Resource Hierarchy" width="878" height="420" data-path="langsmith/images/resource-hierarchy.png" />
 
-See the table below for details on which features are available in which scope(s):
+See the table below for details on which features are available in which scope(s). In an agent-based workspace, read Application in this table as [agent](agents.md):
 
-| Resource/Setting                                                            | Scope                    |
-| --------------------------------------------------------------------------- | ------------------------ |
-| Trace Projects                                                              | Workspace or Application |
-| Annotation Queues                                                           | Workspace or Application |
-| Deployments                                                                 | Workspace or Application |
-| Datasets & Experiments                                                      | Workspace or Application |
-| Prompts                                                                     | Workspace or Application |
-| Resource Tags                                                               | Workspace                |
-| API Keys                                                                    | Workspace                |
-| Settings including Secrets, Feedback config, Models, Rules, and Shared URLs | Workspace                |
-| User management: Invite User to Workspace                                   | Workspace                |
-| RBAC: Assigning Workspace Roles                                             | Workspace                |
-| Data Retention, Usage Limits                                                | Workspace\*              |
-| Plans and Billing, Credits, Invoices                                        | Organization             |
-| User management: Invite User to Organization                                | Organization\*\*         |
-| Adding Workspaces                                                           | Organization             |
-| Assigning Organization Roles                                                | Organization             |
-| RBAC: Creating/Editing/Deleting Custom Roles                                | Organization             |
+| Resource/Setting | Scope |
+| - | - |
+| Trace Projects | Workspace or Application |
+| Annotation Queues | Workspace or Application |
+| Deployments | Workspace or Application |
+| Datasets & Experiments | Workspace or Application |
+| Prompts | Workspace or Application |
+| Resource Tags | Workspace |
+| API Keys | Workspace |
+| Settings including Secrets, Feedback config, Models, Rules, and Shared URLs | Workspace |
+| User management: Invite User to Workspace | Workspace |
+| RBAC: Assigning Workspace Roles | Workspace |
+| Data Retention, Usage Limits | Workspace\* |
+| Plans and Billing, Credits, Invoices | Organization |
+| User management: Invite User to Organization | Organization\*\* |
+| Adding Workspaces | Organization |
+| Assigning Organization Roles | Organization |
+| RBAC: Creating/Editing/Deleting Custom Roles | Organization |
 
 \* Data retention settings and usage limits will be available soon for the organization level as well
 
@@ -153,24 +156,24 @@ For more information on setting up organizations and workspaces, refer to the [o
 
 The following table provides an overview of organization level permissions:
 
-|                                                            | Organization Viewer | Organization User | Organization Admin |
-| ---------------------------------------------------------- | ------------------- | ----------------- | ------------------ |
-| View organization configuration                            | ✅                   | ✅                 | ✅                  |
-| View organization roles                                    | ✅                   | ✅                 | ✅                  |
-| View organization members                                  | ✅                   | ✅                 | ✅                  |
-| View data retention settings                               | ✅                   | ✅                 | ✅                  |
-| View usage limits                                          | ✅                   | ✅                 | ✅                  |
-| Create personal access tokens (PATs)                       | ❌                   | ✅                 | ✅                  |
-| View, deactivate, reactivate, and delete any member's PATs | ❌                   | ❌                 | ✅                  |
-| Admin access to all workspaces                             | ❌                   | ❌                 | ✅                  |
-| Manage billing settings                                    | ❌                   | ❌                 | ✅                  |
-| Create workspaces                                          | ❌                   | ❌                 | ✅                  |
-| Create, edit, and delete organization roles                | ❌                   | ❌                 | ✅                  |
-| Invite new users to organization                           | ❌                   | ❌                 | ✅                  |
-| Delete user invites                                        | ❌                   | ❌                 | ✅                  |
-| Remove users from an organization                          | ❌                   | ❌                 | ✅                  |
-| Update data retention settings                             | ❌                   | ❌                 | ✅                  |
-| Update usage limits                                        | ❌                   | ❌                 | ✅                  |
+| | Organization Viewer | Organization User | Organization Admin |
+| - | - | - | - |
+| View organization configuration | ✅ | ✅ | ✅ |
+| View organization roles | ✅ | ✅ | ✅ |
+| View organization members | ✅ | ✅ | ✅ |
+| View data retention settings | ✅ | ✅ | ✅ |
+| View usage limits | ✅ | ✅ | ✅ |
+| Create personal access tokens (PATs) | ❌ | ✅ | ✅ |
+| View, deactivate, reactivate, and delete any member's PATs | ❌ | ❌ | ✅ |
+| Admin access to all workspaces | ❌ | ❌ | ✅ |
+| Manage billing settings | ❌ | ❌ | ✅ |
+| Create workspaces | ❌ | ❌ | ✅ |
+| Create, edit, and delete organization roles | ❌ | ❌ | ✅ |
+| Invite new users to organization | ❌ | ❌ | ✅ |
+| Delete user invites | ❌ | ❌ | ✅ |
+| Remove users from an organization | ❌ | ❌ | ✅ |
+| Update data retention settings | ❌ | ❌ | ✅ |
+| Update usage limits | ❌ | ❌ | ✅ |
 
 For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](organization-workspace-operations.md).
 
@@ -197,7 +200,12 @@ You can manage roles under **Organization Settings** > **Members and roles** and
 
 ### Environment separation
 
-Use [resource tags](#resource-tags) to organize resources by environment using the default tag key `Environment` and different values for the environment (e.g., `dev`, `staging`, `prod`). We do not recommend using separate workspaces for environment separation because resources cannot be shared across workspaces, which would prevent you from promoting resources (like prompts) between environments.
+How to separate environments depends on which information architecture your workspace uses:
+
+* **Agent-based workspaces** have environments built in, drawn from a fixed set of four. An [agent](agents.md) divides its traces across them, and every trace lands in one environment of one agent, so no tagging convention is required. For more information, see [Agent environments](agent-environments.md).
+* **Project-based workspaces** use [resource tags](#resource-tags) to organize resources by environment, with the default tag key `Environment` and a different value per environment (for example, `dev`, `staging`, `prod`).
+
+In either case, avoid using separate workspaces for environment separation, because resources cannot be shared across workspaces, which prevents you from promoting resources such as prompts between environments.
 
 > [!NOTE]
 > **Resource tags vs. commit tags for prompt management**
@@ -227,10 +235,10 @@ This section covers how data retention works and how it's priced in LangSmith.
 
 LangSmith has two tiers of traces based on Data Retention with the following characteristics:
 
-|                      | Base                                                            | Extended                                                        |
-| -------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| **Price**            | [See pricing page](https://www.langchain.com/pricing-langsmith) | [See pricing page](https://www.langchain.com/pricing-langsmith) |
-| **Retention Period** | 14 days                                                         | 180 days                                                        |
+| | Base | Extended |
+| - | - | - |
+| **Price** | [See pricing page](https://www.langchain.com/pricing-langsmith) | [See pricing page](https://www.langchain.com/pricing-langsmith) |
+| **Retention Period** | 14 days | 180 days |
 
 > [!WARNING]
 > Starting September 14, 2026, the maximum long-lived trace retention period for SaaS customers is changing to 180 days. Enterprise customers can still customize the extended retention period per workspace up to this new maximum. Changes apply to new traces only—existing traces are unaffected. See [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy).
@@ -318,13 +326,13 @@ After the max events are received we will respond with a 429 until 60 seconds fr
 
 This 429 is thrown by our application load balancer and is a mechanism in place for all LangSmith users independent of plan tier to ensure continuity of service for all users.
 
-| Method            | Endpoints     | Limit | Window   |
-| ----------------- | ------------- | ----- | -------- |
-| `DELETE`          | `/sessions*`  | 30    | 1 minute |
-| `POST` OR `PATCH` | `/runs*`      | 5000  | 1 minute |
-| `GET`             | `/runs/:id`   | 30    | 1 minute |
-| `POST`            | `/feedbacks*` | 5000  | 1 minute |
-| `*`               | `*`           | 2000  | 1 minute |
+| Method | Endpoints | Limit | Window |
+| - | - | - | - |
+| `DELETE` | `/sessions*` | 30 | 1 minute |
+| `POST` OR `PATCH` | `/runs*` | 5000 | 1 minute |
+| `GET` | `/runs/:id` | 30 | 1 minute |
+| `POST` | `/feedbacks*` | 5000 | 1 minute |
+| `*` | `*` | 2000 | 1 minute |
 
 > [!NOTE]
 > The LangSmith SDK takes steps to minimize the likelihood of reaching these limits on run-related endpoints by batching up to 100 runs from a single session ID into a single API call.
@@ -337,12 +345,12 @@ An event in this context is the creation or update of a run. If a run is created
 
 This is thrown by our application and varies by plan tier, with organizations on our Startup/Plus and Enterprise plan tiers having higher hourly limits than our Free and Developer Plan Tiers which are designed for personal use.
 
-| Plan                             | Limit          | Window |
-| -------------------------------- | -------------- | ------ |
-| Developer (no payment on file)   | 50,000 events  | 1 hour |
+| Plan | Limit | Window |
+| - | - | - |
+| Developer (no payment on file) | 50,000 events | 1 hour |
 | Developer (with payment on file) | 250,000 events | 1 hour |
-| Startup/Plus                     | 500,000 events | 1 hour |
-| Enterprise                       | Custom         | Custom |
+| Startup/Plus | 500,000 events | 1 hour |
+| Enterprise | Custom | Custom |
 
 #### Plan-level hourly trace data ingest limit
 
@@ -352,12 +360,12 @@ Typically, inputs, outputs, and metadata are sent on both run creation and updat
 
 This is thrown by our application and varies by plan tier, with organizations on our Startup/Plus and Enterprise plan tiers having higher hourly limits than our Free and Developer Plan Tiers which are designed for personal use.
 
-| Plan                             | Limit  | Window |
-| -------------------------------- | ------ | ------ |
-| Developer (no payment on file)   | 500MB  | 1 hour |
-| Developer (with payment on file) | 2.5GB  | 1 hour |
-| Startup/Plus                     | 5.0GB  | 1 hour |
-| Enterprise                       | Custom | Custom |
+| Plan | Limit | Window |
+| - | - | - |
+| Developer (no payment on file) | 500MB | 1 hour |
+| Developer (with payment on file) | 2.5GB | 1 hour |
+| Startup/Plus | 5.0GB | 1 hour |
+| Enterprise | Custom | Custom |
 
 #### Plan-level monthly unique traces limit
 
@@ -365,8 +373,8 @@ This 429 is the result of reaching your maximum monthly traces ingested and is e
 
 This is thrown by our application and applies only to the Developer Plan Tier when there is no payment method on file.
 
-| Plan                           | Limit        | Window  |
-| ------------------------------ | ------------ | ------- |
+| Plan | Limit | Window |
+| - | - | - |
 | Developer (no payment on file) | 5,000 traces | 1 month |
 
 #### Self-configured monthly usage limits
@@ -435,6 +443,8 @@ To configure these limits, open **Settings**, go to **Usage configuration**, and
 * **Workspace**: the workspace that contains the project or member.
 * **Project** or **User**: the target to cap.
 * **Monthly trace limit**: the maximum number of traces allowed per calendar month.
+
+In an [agent-based workspace](agents.md), a project-scoped limit caps one [environment](agent-environments.md) of one agent rather than the agent as a whole. There is no agent scope, so capping an agent's total traces means adding one limit per environment.
 
 Updating these limits requires the same permission as workspace usage limits (`Update usage limits`).
 

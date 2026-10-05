@@ -79,7 +79,7 @@ The attributes it has are:
 
 ## Listing items in a namespace
 
-Calling [`store.search`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.base.BaseStore.search) (or the async [`store.asearch`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.base.BaseStore.asearch)) with no `query` and no `filter` returns the items stored under `namespace_prefix`, up to `limit`. Use this to enumerate everything in a namespace when you don't need semantic ranking.
+Calling [`store.search`](https://reference.langchain.com/python/langgraph/store) (or the async [`store.asearch`](https://reference.langchain.com/python/langgraph/store)) with no `query` and no `filter` returns the items stored under `namespace_prefix`, up to `limit`. Use this to enumerate everything in a namespace when you don't need semantic ranking.
 
 ```python
 # Return up to 100 items stored under ("alice", "memories").
@@ -106,7 +106,7 @@ while True:
     offset += page_size
 ```
 
-To discover which namespaces exist (for example, to iterate over every user before listing their memories), use [`store.list_namespaces`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.base.BaseStore.list_namespaces) or [`store.alist_namespaces`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.base.BaseStore.alist_namespaces):
+To discover which namespaces exist (for example, to iterate over every user before listing their memories), use [`store.list_namespaces`](https://reference.langchain.com/python/langgraph/store) or [`store.alist_namespaces`](https://reference.langchain.com/python/langgraph/store):
 
 ```python
 # All namespaces that start with ("alice",), truncated to two levels deep.
@@ -311,13 +311,13 @@ To use a storage backend other than the built-in implementations, subclass [Base
 
 All five async methods are required. Sync counterparts (`put`, `get`, `delete`, `search`, `list_namespaces`) are optional but recommended for compatibility with sync graph execution.
 
-| Method                                                                               | Description                                                         |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
-| `aput(namespace, key, value, index=None)`                                            | Store or overwrite a single item                                    |
-| `aget(namespace, key)`                                                               | Retrieve a single item by key; return `None` if missing             |
-| `adelete(namespace, key)`                                                            | Delete a single item                                                |
-| `asearch(namespace_prefix, *, query=None, filter=None, limit=10, offset=0)`          | Search items under a namespace prefix; optionally by semantic query |
-| `alist_namespaces(*, prefix=None, suffix=None, max_depth=None, limit=100, offset=0)` | List namespaces matching a prefix/suffix pattern                    |
+| Method | Description |
+| - | - |
+| `aput(namespace, key, value, index=None)` | Store or overwrite a single item |
+| `aget(namespace, key)` | Retrieve a single item by key; return `None` if missing |
+| `adelete(namespace, key)` | Delete a single item |
+| `asearch(namespace_prefix, *, query=None, filter=None, limit=10, offset=0)` | Search items under a namespace prefix; optionally by semantic query |
+| `alist_namespaces(*, prefix=None, suffix=None, max_depth=None, limit=100, offset=0)` | List namespaces matching a prefix/suffix pattern |
 
 Look up exact signatures before implementing:
 

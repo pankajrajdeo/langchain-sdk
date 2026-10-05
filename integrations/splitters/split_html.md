@@ -76,15 +76,15 @@ pip install -qU langchain-text-splitters
 * **Use `HTMLSectionSplitter` when**: You need to split the document into larger, more general sections, possibly based on custom tags or font sizes.
 * **Use `HTMLSemanticPreservingSplitter` when**: You need to split the document into chunks while preserving semantic elements like tables and lists, ensuring that they are not split and that their context is maintained.
 
-| Feature                                     | `HTMLHeaderTextSplitter` | `HTMLSectionSplitter` | `HTMLSemanticPreservingSplitter` |
-| ------------------------------------------- | ------------------------ | --------------------- | -------------------------------- |
-| Splits based on headers                     | Yes                      | Yes                   | Yes                              |
-| Preserves semantic elements (tables, lists) | No                       | No                    | Yes                              |
-| Adds metadata for headers                   | Yes                      | Yes                   | Yes                              |
-| Custom handlers for HTML tags               | No                       | No                    | Yes                              |
-| Preserves media (images, videos)            | No                       | No                    | Yes                              |
-| Considers font sizes                        | No                       | Yes                   | No                               |
-| Uses XSLT transformations                   | No                       | Yes                   | No                               |
+| Feature | `HTMLHeaderTextSplitter` | `HTMLSectionSplitter` | `HTMLSemanticPreservingSplitter` |
+| - | - | - | - |
+| Splits based on headers | Yes | Yes | Yes |
+| Preserves semantic elements (tables, lists) | No | No | Yes |
+| Adds metadata for headers | Yes | Yes | Yes |
+| Custom handlers for HTML tags | No | No | Yes |
+| Preserves media (images, videos) | No | No | Yes |
+| Considers font sizes | No | Yes | No |
+| Uses XSLT transformations | No | Yes | No |
 
 ## Example HTML document
 

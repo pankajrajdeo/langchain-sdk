@@ -13,24 +13,23 @@ When a model proposes an action that might require review—for example, writing
 
 It does this by checking each tool call against a configurable policy. If intervention is needed, the middleware issues an [interrupt](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt) that halts execution. The graph state is saved using LangGraph's [persistence layer](../langgraph/persistence.md), so execution can pause safely and resume later.
 
-A human decision then determines what happens next: the action can be approved as-is (`approve`), modified before running (`edit`), rejected with feedback (`reject`), or responded to directly (`respond`) for "ask user" style tools.
+A human decision then determines what happens next: the action can be approved as-is (`approve`), modified before running (`edit`), or rejected with feedback (`reject`).
 
 ## Interrupt decision types
 
-The [middleware](middleware/built-in.md#human-in-the-loop) defines four built-in ways a human can respond to an interrupt:
+The [middleware](middleware/built-in.md#human-in-the-loop) defines three built-in ways a human can respond to an interrupt:
 
-| Decision Type | Description                                                                                                     | Example Use Case                                  |
-| ------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| ✅ `approve`   | Execute the tool with the original arguments as proposed by the agent.                                          | Send an email draft exactly as written            |
-| ✏️ `edit`     | Modify the tool arguments before execution.                                                                     | Change the recipient before sending an email      |
-| ❌ `reject`    | Skip executing this tool call entirely and return rejection feedback to the agent.                              | Deny file deletion and explain why                |
-| 💬 `respond`  | Return the human's message directly as a synthetic tool result, skipping execution, for "ask user" style tools. | Answer an `"ask_user"` prompt with a direct reply |
+| Decision Type | Description | Example Use Case |
+| - | - | - |
+| ✅ `approve` | Execute the tool with the original arguments as proposed by the agent. | Send an email draft exactly as written |
+| ✏️ `edit` | Modify the tool arguments before execution. | Change the recipient before sending an email |
+| ❌ `reject` | Skip executing this tool call entirely and return rejection feedback to the agent. | Deny file deletion and explain why |
 
 The available decision types for each tool depend on the policy you configure in `interrupt_on`.
 When multiple tool calls are paused at the same time, each action requires a separate decision.
 Decisions must be provided in the same order as the actions appear in the interrupt request.
 
-Use `reject` when the human is denying the requested action. Use `respond` only when the human is acting as the tool, such as answering an `ask_user` prompt. Do not use `respond` to deny side-effecting tools, because its message is treated as a successful tool result.
+Use `reject` when the human is denying the requested action.
 
 > [!TIP]
 > When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
@@ -51,7 +50,7 @@ const agent = createAgent({
     middleware: [
         humanInTheLoopMiddleware({
             interruptOn: {
-                write_file: true, // All decisions (approve, edit, reject, respond) allowed
+                write_file: true, // All decisions (approve, edit, reject) allowed
                 execute_sql: {
                     allowedDecisions: ["approve", "reject"],
                     // No editing allowed
@@ -84,18 +83,21 @@ const agent = createAgent({
 <summary>Configuration options</summary>
 
 #### `Field` — `object`
-Mapping of tool names to approval configs
+Mapping of tool names to approval configs. Values can be `true` (interrupt with default config), `false` (auto-approve), or an `InterruptOnConfig` object.
 
-**Tool approval config options:**
+#### `Field` — `string`
+Prefix for action request descriptions
 
-#### `Field` — `boolean`
-Whether approval is allowed
+**`InterruptOnConfig` options:**
 
-#### `Field` — `boolean`
-Whether editing is allowed
+#### `Field` — `string[]`
+List of allowed decisions: `'approve'`, `'edit'`, or `'reject'`
 
-#### `Field` — `boolean`
-Whether responding/rejection is allowed
+#### `Field` — `string | callable`
+Static string or callable function for custom description
+
+#### `Field` — `callable`
+Optional predicate that receives a [ToolCallRequest](https://reference.langchain.com/javascript/langchain/index/ToolCallRequest) and returns `true` to interrupt or `false` to auto-approve. Use it to gate interrupts on a call's arguments. Requires `langchain>=1.4.6`.
 
 </details>
 
@@ -103,7 +105,47 @@ Whether responding/rejection is allowed
 
 By default, every tool call listed in `interrupt_on` pauses for review. To pause only some calls, add a `when` predicate to a tool's `InterruptOnConfig`. The predicate receives a `ToolCallRequest` and returns `True` to interrupt or `False` to auto-approve, so you can gate on the tool's arguments.
 
-Conditional interrupts are currently available in Python only.
+> [!NOTE]
+> Conditional interrupts require `langchain>=1.4.6`.
+
+```typescript
+import { createAgent, humanInTheLoopMiddleware } from "langchain";
+import type { ToolCallRequest } from "langchain";
+import { MemorySaver } from "@langchain/langgraph";
+
+// Pause writes to paths outside the workspace directory.
+const writesOutsideWorkspace = (request: ToolCallRequest) =>
+  !String(request.toolCall.args.path ?? "").startsWith("/workspace/");
+
+// Pause SQL that isn't a read-only SELECT.
+const isWriteQuery = (request: ToolCallRequest) =>
+  !String(request.toolCall.args.query ?? "")
+    .trimStart()
+    .toUpperCase()
+    .startsWith("SELECT");
+
+const agent = createAgent({
+  model: "gpt-5.5",
+  tools: [writeFile, executeSql, readData],
+  middleware: [
+    humanInTheLoopMiddleware({
+      interruptOn: {
+        write_file: {
+          allowedDecisions: ["approve", "edit", "reject"],
+          when: writesOutsideWorkspace,
+        },
+        execute_sql: {
+          allowedDecisions: ["approve", "reject"],
+          when: isWriteQuery,
+        },
+      },
+    }),
+  ],
+  checkpointer: new MemorySaver(),
+});
+```
+
+When the `when` predicate returns `false`, the call runs without interrupting. When it returns `true`, or when you omit `when`, the call pauses as usual. Calls that evaluate to `false` are never added to the interrupt batch, so a reviewer only sees the actions that need a decision.
 
 ## Responding to interrupts
 
@@ -238,31 +280,6 @@ await agent.invoke(
 
 The `message` is added to the conversation as feedback to help the agent understand why the action was rejected and what it should do instead. When you omit `message`, the middleware uses a default rejection message that tells the model the tool was not executed and not to retry the same tool call unless the user asks. For side-effecting tools, provide a domain-specific message that is explicit about whether the agent should abandon the action, ask a follow-up question, or try a safer alternative.
 
-#### 💬 respond
-Use `respond` for "ask user" style tools where the tool's real implementation is the human's reply. The `message` content is returned directly as the tool result; the tool itself is not executed.
-
-```typescript
-await agent.invoke(
-    new Command({
-        // Decisions are provided as a list, one per action under review.
-        // The order of decisions must match the order of actions
-        // in the interrupt request.
-        resume: {
-            decisions: [
-                {
-                    type: "respond",
-                    // The human's reply, returned directly as the tool result
-                    message: "Blue.",
-                }
-            ]
-        }
-    }),
-    config  // Same thread ID to resume the paused conversation
-);
-```
-
-The `message` is returned to the agent as a successful `ToolMessage`. Use `respond` when the tool is intentionally a placeholder for human input, for example, an `ask_user` tool that prompts for clarification. Do not use `respond` to deny a proposed action, because it tells the model that the tool completed successfully.
-
 ***
 
 ### Multiple decisions
@@ -332,10 +349,14 @@ See the [Streaming](streaming.md) guide for more details on stream modes.
 The middleware defines an `after_model` hook that runs after the model generates a response but before any tool calls are executed:
 
 1. The agent invokes the model to generate a response.
+
 2. The middleware inspects the response for tool calls.
+
 3. If any calls require human input, the middleware builds a [HITLRequest](https://reference.langchain.com/javascript/langchain/index/HITLRequest) with `action_requests` and `review_configs` and calls [interrupt](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt).
+
 4. The agent waits for human decisions.
-5. Based on the `HITLResponse` decisions, the middleware executes approved or edited calls, synthesizes [ToolMessage](https://reference.langchain.com/javascript/langchain-core/messages/ToolMessage)'s for rejected calls, returns human replies directly as [ToolMessage](https://reference.langchain.com/javascript/langchain-core/messages/ToolMessage)'s for `respond` decisions, and resumes execution.
+
+5. Based on the `HITLResponse` decisions, the middleware executes approved or edited calls, synthesizes [ToolMessage](https://reference.langchain.com/javascript/langchain-core/messages/ToolMessage)'s for rejected calls, and resumes execution.
 
 ## Custom HITL logic
 

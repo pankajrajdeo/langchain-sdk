@@ -102,14 +102,14 @@ import { TavilyGetResearch } from "@langchain/tavily";
 
 ## Components reference
 
-| Class               | Abstraction | Import path                                             | Description                                                             |
-| ------------------- | ----------- | ------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `TavilySearch`      | Tool        | `import { TavilySearch } from "@langchain/tavily"`      | Returns search results from the Tavily Search API.                      |
-| `TavilyExtract`     | Tool        | `import { TavilyExtract } from "@langchain/tavily"`     | Extracts cleaned content from one or more URLs.                         |
-| `TavilyCrawl`       | Tool        | `import { TavilyCrawl } from "@langchain/tavily"`       | Crawls a site starting from a base URL with depth and breadth controls. |
-| `TavilyMap`         | Tool        | `import { TavilyMap } from "@langchain/tavily"`         | Discovers the URL structure of a site without extracting page content.  |
-| `TavilyResearch`    | Tool        | `import { TavilyResearch } from "@langchain/tavily"`    | Runs structured research tasks against the Tavily Research API.         |
-| `TavilyGetResearch` | Tool        | `import { TavilyGetResearch } from "@langchain/tavily"` | Fetches research results by `request_id`.                               |
+| Class | Abstraction | Import path | Description |
+| - | - | - | - |
+| `TavilySearch` | Tool | `import { TavilySearch } from "@langchain/tavily"` | Returns search results from the Tavily Search API. |
+| `TavilyExtract` | Tool | `import { TavilyExtract } from "@langchain/tavily"` | Extracts cleaned content from one or more URLs. |
+| `TavilyCrawl` | Tool | `import { TavilyCrawl } from "@langchain/tavily"` | Crawls a site starting from a base URL with depth and breadth controls. |
+| `TavilyMap` | Tool | `import { TavilyMap } from "@langchain/tavily"` | Discovers the URL structure of a site without extracting page content. |
+| `TavilyResearch` | Tool | `import { TavilyResearch } from "@langchain/tavily"` | Runs structured research tasks against the Tavily Research API. |
+| `TavilyGetResearch` | Tool | `import { TavilyGetResearch } from "@langchain/tavily"` | Fetches research results by `request_id`. |
 
 ***
 

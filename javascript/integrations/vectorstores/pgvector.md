@@ -21,14 +21,14 @@ This guide provides a quick overview for getting started with PGVector [vector s
 
 LangChain has two Postgres vector store integrations. Here's how to choose the right one:
 
-| Feature       | PGVector (Legacy)        | PGVectorStore (Modern)                                     |
-| ------------- | ------------------------ | ---------------------------------------------------------- |
-| Package       | `langchain-community`    | `langchain-postgres` (Python) / `@langchain/pgvector` (JS) |
-| Maintenance   | Community-maintained     | Official Partner Package                                   |
-| Connection    | Simple connection string | `PGEngine` (better connection pooling)                     |
-| Search Types  | Standard Vector Search   | Hybrid Search (Vector + BM25)                              |
-| Async Support | Limited                  | Full Native Async                                          |
-| Schema        | Fixed table structure    | Customizable columns and schemas                           |
+| Feature | PGVector (Legacy) | PGVectorStore (Modern) |
+| - | - | - |
+| Package | `langchain-community` | `langchain-postgres` (Python) / `@langchain/pgvector` (JS) |
+| Maintenance | Community-maintained | Official Partner Package |
+| Connection | Simple connection string | `PGEngine` (better connection pooling) |
+| Search Types | Standard Vector Search | Hybrid Search (Vector + BM25) |
+| Async Support | Limited | Full Native Async |
+| Schema | Fixed table structure | Customizable columns and schemas |
 
 **Use `PGVectorStore` (Modern—recommended) when:**
 
@@ -51,9 +51,9 @@ LangChain has two Postgres vector store integrations. Here's how to choose the r
 
 ### Integration details
 
-| Class                                                                                          | Package                                                                    | [PY support](https://python.langchain.com/docs/integrations/vectorstores/pgvector/) |                                              Downloads                                              |                                              Version                                             |
-| :--------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------- | :---------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
-| [`PGVectorStore`](https://reference.langchain.com/javascript/langchain-pgvector/PGVectorStore) | [`@langchain/pgvector`](https://www.npmjs.com/package/@langchain/pgvector) |                                          ✅                                          | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/pgvector?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/pgvector?style=flat-square\&label=%20&) |
+| Class | Package | [PY support](https://python.langchain.com/docs/integrations/vectorstores/pgvector/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`PGVectorStore`](https://reference.langchain.com/javascript/langchain-pgvector/PGVectorStore) | [`@langchain/pgvector`](https://www.npmjs.com/package/@langchain/pgvector) | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/pgvector?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/pgvector?style=flat-square\&label=%20&) |
 
 ## Setup
 

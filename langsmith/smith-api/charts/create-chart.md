@@ -189,20 +189,13 @@ paths:
               discriminator:
                 propertyName: chart_type
                 mapping:
-                  line:
-                    $ref: '#/components/schemas/CustomChartCreate'
-                  bar:
-                    $ref: '#/components/schemas/CustomChartCreate'
-                  table:
-                    $ref: '#/components/schemas/CustomChartCreate'
-                  kpi:
-                    $ref: '#/components/schemas/CustomChartCreate'
-                  top-k:
-                    $ref: '#/components/schemas/CustomChartCreate'
-                  pie:
-                    $ref: '#/components/schemas/CustomChartCreate'
-                  text:
-                    $ref: '#/components/schemas/CustomTextBlockCreate'
+                  line: '#/components/schemas/CustomChartCreate'
+                  bar: '#/components/schemas/CustomChartCreate'
+                  table: '#/components/schemas/CustomChartCreate'
+                  kpi: '#/components/schemas/CustomChartCreate'
+                  top-k: '#/components/schemas/CustomChartCreate'
+                  pie: '#/components/schemas/CustomChartCreate'
+                  text: '#/components/schemas/CustomTextBlockCreate'
         required: true
       responses:
         '200':
@@ -217,20 +210,13 @@ paths:
                 discriminator:
                   propertyName: chart_type
                   mapping:
-                    line:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    bar:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    table:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    kpi:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    top-k:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    pie:
-                      $ref: '#/components/schemas/CustomChartResponse'
-                    text:
-                      $ref: '#/components/schemas/CustomTextBlockResponse'
+                    line: '#/components/schemas/CustomChartResponse'
+                    bar: '#/components/schemas/CustomChartResponse'
+                    table: '#/components/schemas/CustomChartResponse'
+                    kpi: '#/components/schemas/CustomChartResponse'
+                    top-k: '#/components/schemas/CustomChartResponse'
+                    pie: '#/components/schemas/CustomChartResponse'
+                    text: '#/components/schemas/CustomTextBlockResponse'
         '422':
           description: Validation Error
           content:

@@ -23,8 +23,8 @@ retrieval over an **existing** vector store.
 
 ### Integration details
 
-| Retriever        | Source                                                                                                              |                                    PyPI Package                                    |                                                         Latest                                                        |                    Project Page                    |
-| :--------------- | :------------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
+| Retriever | Source | PyPI Package | Latest | Project Page |
+| :- | :- | :-: | :-: | :-: |
 | `GraphRetriever` | [github.com/datastax/graph-rag](https://github.com/datastax/graph-rag/tree/main/packages/langchain-graph-retriever) | [`langchain-graph-retriever`](https://pypi.org/project/langchain-graph-retriever/) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-graph-retriever?style=flat-square\&label=%20\&color=orange) | [Graph RAG](https://datastax.github.io/graph-rag/) |
 
 ## Benefits

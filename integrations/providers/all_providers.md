@@ -33,6 +33,9 @@ Discovery and trust registry tools for verifying counterpart AI agents before th
 #### [Alephant AI](https://alephant.io/)
 AI gateway for cost control, BYOK routing, and multi-provider model access.
 
+#### [AlexEvidenceVerifier](https://pypi.org/project/langchain-alex/)
+Verify signed ALEX Evidence Packages inside LangChain and LangGraph workflows against an external trust anchor. The integration exposes a structured LangChain tool and a LangGraph node that fail closed on unsupported schemas, signature failures, incomplete evidence, or inconsistent outcomes.
+
 #### [Algenta](https://github.com/thyn-ai/algenta-integrations/tree/main/python/langchain-algenta#readme)
 Governed tool execution for LangChain agents: `create_algenta_tools` exposes a self-hosted Algenta decision engine's MCP tool surface as `BaseTool`s with profile-based filtering (`observe`/`govern`/`execute`/`full`), typed execution receipts, and synchronous policy-gate denials on real-world execution.
 
@@ -114,6 +117,9 @@ Context cloud retriever for LangChain.js agents.
 #### [Alibaba Cloud](alibaba_cloud.md)
 Alibaba's cloud computing and AI services.
 
+#### [AMUVectorStore](https://github.com/sangaraju1988/amu-pgvector#readme)
+Vector store backed by PostgreSQL + pgvector where Postgres row-level security gates retrieval on a cached result's derivation lineage, not just its content or access tags.
+
 #### [Ampersend](https://docs.ampersend.ai)
 Payment infrastructure for AI agent services via x402 protocol.
 
@@ -140,6 +146,9 @@ Search a catalog of data and scraping APIs, read an API schema and its USD price
 
 #### [Apertis](https://docs.apertis.ai)
 OpenAI-compatible API providing access to multiple LLMs.
+
+#### [API-Route](https://www.api-route.com/docs/overview)
+OpenAI-compatible API gateway for models from multiple providers.
 
 #### [Apify](https://docs.apify.com/integrations/langchain)
 Web scraping and automation platform.
@@ -258,6 +267,9 @@ Open-source embedding database for AI apps.
 #### [ChronoVec](https://mchl-labs.github.io/chronovec/integrations/langchain)
 Versioned vector store with snapshot queries and branch/merge speculative memory for LangChain agents.
 
+#### [Clearsigned](https://clearsigned.com/integrations#langchain)
+Tool that verifies a factual claim against live web evidence and returns SUPPORTED, REFUTED or UNVERIFIABLE with a calibrated confidence, per-source stances, and an Ed25519-signed receipt verified offline; paid per call over x402.
+
 #### [cloro](https://cloro.dev/docs)
 The scraper for SEO and AI SEO.
 
@@ -290,6 +302,9 @@ Runtime compliance enforcement for AI agents under African data protection and f
 
 #### [Cohere](cohere.md)
 Language AI platform for enterprise applications.
+
+#### [Confident AI](https://www.confident-ai.com/docs/integrations/third-party/langchain)
+Confident AI is an LLM observability platform. `confident-trace` traces LangChain runs through the callback system and exports them over OpenTelemetry.
 
 #### [Context](context.md)
 Context management for AI applications.
@@ -441,6 +456,9 @@ Pre-flight spend authorization for LangChain agents.
 #### [FMP Data](https://github.com/MehdiZare/langchain-fmp-data)
 Financial market data and analytics API.
 
+#### [Foliant](https://github.com/gazoy/langchain-foliant#readme)
+Payment tool and budget middleware for agents that pay x402 endpoints through Foliant payment channels and pools, with one on-chain settlement per session and a delegated spending budget per agent and per crew.
+
 #### [Football Charts](https://www.football-charts.com/developers)
 Football statistics, model probabilities, and Monte Carlo season projections for 90+ leagues.
 
@@ -467,6 +485,9 @@ Free email API with transactional templates and consent-gated custom email.
 
 #### [Google](google.md)
 Google's AI services and cloud platform.
+
+#### [GPTZZZ](https://gptzzz.ai/docs/)
+OpenAI-compatible API gateway for models from multiple providers, with Chinese-language docs.
 
 #### [DigitalOcean Gradient AI Platform](https://docs.digitalocean.com/products/gradientai-platform/)
 Single endpoint to multiple LLMs via serverless inference.
@@ -570,6 +591,9 @@ Cloud video rendering platform: render MP4 videos from VideoJSON specs.
 #### [iGPT](https://docs.igpt.ai)
 Personal data retrieval tools and retriever for emails, messages, and files.
 
+#### [Inferrail](https://github.com/domondi1/inferrail/blob/main/docs/recipes/agent-run-budget.md?ref=langchain-docs#langchain)
+Self-hosted OpenAI-compatible gateway that enforces a dollar budget per agent run via request headers on `ChatOpenAI`, refusing over-budget calls with HTTP 402 before the provider.
+
 #### [Infino](https://infino.ai/docs)
 Vector, BM25, and hybrid retrieval over one engine on object storage.
 
@@ -602,6 +626,9 @@ Enterprise NLP and healthcare AI platform.
 
 #### [Kalibr](https://kalibr.systems/docs)
 Outcome-aware execution routing for AI agents across models, tools, and parameters.
+
+#### [Kavel](https://github.com/hanshs474/langchain-kavel#readme)
+AI image generation and editing. The `KavelImageGenerator` tool returns a URL to the finished image and runs on Kavel's free tier with no API key, or on a kavel.ai account with one.
 
 #### [Keenable](https://docs.keenable.ai)
 Web search and page-fetch API built for AI agents, with a keyless free tier.
@@ -702,8 +729,14 @@ Open-source relational database management.
 #### [MaskFlow](https://github.com/maskflow/maskflow/tree/main/packages/maskflow-langchain)
 Reversible PII anonymizer / deanonymizer for LangChain, a drop-in for the Presidio anonymizer. Indian identifiers included.
 
+#### [MartToolkit](https://github.com/Mart-API/langchain-mart#readme)
+Mart provides public LinkedIn profile and company enrichment, contact refresh snapshots, posts and optional work-email lookup through a JSON API.
+
 #### [Memgraph](memgraph.md)
 Real-time graph database platform.
+
+#### [MemoryRouter](https://docs.memoryrouter.ai/langchain)
+Persistent, user-scoped memory for LangChain and LangGraph agents: retain and recall tools, recall/retain graph nodes, and a BaseStore backed by MemoryRouter vaults.
 
 #### [Memstate AI](https://memstate.ai/docs/integrations/langchain)
 Structured, versioned long-term memory for AI agents.
@@ -969,6 +1002,9 @@ Wallets and payments for AI agents.
 #### [Prolog](https://langchain-prolog.readthedocs.io)
 Logic programming language integration.
 
+#### [PromptfirewallGuard](https://github.com/TimurRakhmatullin86/langchain-promptfirewall#readme)
+Sub-millisecond PII detection and prompt injection firewall for LangChain. Zero network, zero GPU, pure Rust core via PyO3.
+
 #### [prompt-shield](https://github.com/mthamil107/prompt-shield)
 Runtime prompt-injection firewall for inputs, tool results, and model outputs.
 
@@ -1068,6 +1104,9 @@ Sovereign AI platform for Indian languages with chat, speech, and translation.
 #### [Scavio](https://scavio.dev/docs/langchain)
 Real-time search API for AI agents across the web, commerce, video, social, jobs, real estate, travel, app stores, ad libraries, and public filings, plus clean text extraction from any URL.
 
+#### [SchemagateRetriever](https://ashishsinha1602.github.io/schemagate/langchain/)
+Retriever that selects schema objects for a SQL agent and returns only the tables the calling principal is permitted to read, for Postgres, Oracle, MySQL and SQL Server
+
 #### [ScrapeGraph](https://github.com/ScrapeGraphAI/langchain-scrapegraph)
 AI-powered web scraping framework.
 
@@ -1087,7 +1126,7 @@ Unified search API across Google, Bing, Baidu, YouTube, and more.
 Zero-knowledge secrets manager. Scopes which credentials a model call or a given tool call may use.
 
 #### [Semantica](https://docs.getsemantica.ai/integrations/langchain)
-Vector store adapter over Semantica's hybrid search, usable as a drop-in in retrieval chains.
+Three drop-in adapters that bring Semantica’s context graph and hybrid search into LangChain chains and LangGraph agents.
 
 #### [SereneDB](https://serenedb.com/docs/clients/langchain-serenedb)
 PostgreSQL-compatible vector database with native ANN and hybrid search.
@@ -1311,11 +1350,17 @@ Live Uniswap V2 swap quotes and unsigned transactions for swaps, approvals, and 
 #### [Unstructured](unstructured.md)
 Document processing and data extraction.
 
+#### [UploadPostToolkit](https://docs.upload-post.com/guides/langchain)
+Tools to publish, schedule and track social media posts on TikTok, Instagram, YouTube, LinkedIn, X, Facebook and other platforms through the Upload-Post API.
+
 #### [Upstage](upstage.md)
 Document AI and OCR platform.
 
 #### [Upstash Box](https://upstash.com/docs/box)
 Secure cloud sandboxes with a full Linux shell for agent code execution.
+
+#### [URLpipe](https://urlpipe.dev/integrations/langchain)
+Tools that read web pages after their JavaScript runs, as Markdown, plus page metadata, console errors and Lighthouse audits; and a document loader.
 
 #### [Valthera](https://github.com/valthera/langchain-valthera)
 AI platform for healthcare applications.

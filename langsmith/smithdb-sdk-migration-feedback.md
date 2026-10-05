@@ -34,22 +34,22 @@ No change—`client.addRunsToAnnotationQueue()`. The SmithDB path is selected by
 See the [reference](https://reference.langchain.com/javascript/langsmith/client/Client/addRunsToAnnotationQueue) for the full parameter list.
 
 #### Java
-| Before                                      | After                                            |
-| ------------------------------------------- | ------------------------------------------------ |
+| Before | After |
+| - | - |
 | `client.annotationQueues().runs().create()` | `client.annotationQueues().runs().createByKey()` |
 
 See the [reference](https://javadoc.io/doc/com.langchain.smith/langsmith-java/latest/com/langchain/smith/services/blocking/annotationqueues/RunService.html) for the full parameter list.
 
 #### Go
-| Before                               | After                                     |
-| ------------------------------------ | ----------------------------------------- |
+| Before | After |
+| - | - |
 | `client.AnnotationQueues.Runs.New()` | `client.AnnotationQueues.Runs.NewByKey()` |
 
 See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#AnnotationQueueRunService.NewByKey) for the full parameter list.
 
 #### cURL
-| Before                                           | After                                                   |
-| ------------------------------------------------ | ------------------------------------------------------- |
+| Before | After |
+| - | - |
 | `POST /api/v1/annotation-queues/{queue_id}/runs` | `POST /api/v1/annotation-queues/{queue_id}/runs/by-key` |
 
 See the [API doc](smith-api/annotation-queues/add-runs-to-annotation-queue-by-key.md) for the full parameter list.
@@ -60,10 +60,10 @@ See the [API doc](smith-api/annotation-queues/add-runs-to-annotation-queue-by-ke
 > [!WARNING]
 > The SmithDB path needs each run's `session_id` (project UUID) and `start_time` in addition to its `run_id`. These are already present on the run objects you fetch (for example from `client.list_runs()`).
 
-| Before (`run_ids`)           | After (`runs`)           | Notes                                                                                                          |
-| ---------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `run_ids: list[UUID \| str]` | *(deprecated)*           | Legacy path. Still works and hits `/runs`, resolving each run server-side. Will be removed in a future release |
-| *(not available)*            | `runs: Sequence[RunKey]` | **New preferred.** Each `RunKey` is a `TypedDict` with `run_id`, `session_id`, and `start_time`                |
+| Before (`run_ids`) | After (`runs`) | Notes |
+| - | - | - |
+| `run_ids: list[UUID \| str]` | *(deprecated)* | Legacy path. Still works and hits `/runs`, resolving each run server-side. Will be removed in a future release |
+| *(not available)* | `runs: Sequence[RunKey]` | **New preferred.** Each `RunKey` is a `TypedDict` with `run_id`, `session_id`, and `start_time` |
 
 Provide exactly one of `runs` or `run_ids`; passing both raises a `LangSmithUserError`.
 
@@ -71,36 +71,36 @@ Provide exactly one of `runs` or `run_ids`; passing both raises a `LangSmithUser
 > [!WARNING]
 > The SmithDB path needs each run's `sessionId` (project UUID) and `startTime` in addition to its `runId`. These are already present on the run objects you fetch (for example from `client.listRuns()`).
 
-| Before (`string[]`) | After (`RunKey[]`) | Notes                                                                                                                        |
-| ------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| `runs: string[]`    | *(deprecated)*     | Legacy path (array of run-ID strings). Still works and hits `/runs`. Will be removed in a future release                     |
-| *(not available)*   | `runs: RunKey[]`   | **New preferred.** Each `RunKey` is `{ runId, sessionId, startTime }`; `startTime` accepts a `Date`, epoch ms, or ISO string |
+| Before (`string[]`) | After (`RunKey[]`) | Notes |
+| - | - | - |
+| `runs: string[]` | *(deprecated)* | Legacy path (array of run-ID strings). Still works and hits `/runs`. Will be removed in a future release |
+| *(not available)* | `runs: RunKey[]` | **New preferred.** Each `RunKey` is `{ runId, sessionId, startTime }`; `startTime` accepts a `Date`, epoch ms, or ISO string |
 
 Both shapes are the same positional second argument; the SDK selects the SmithDB path when you pass `RunKey[]`.
 
 #### Java
-| Before (`RunCreateParams`)           | After (`RunCreateByKeyParams`)        | Notes                                                 |
-| ------------------------------------ | ------------------------------------- | ----------------------------------------------------- |
-| `.bodyOfRunsUuidArray(List)` | *(removed)*                           | Legacy body; run IDs only                             |
-| *(not available)*                    | `.addBody(RunCreateByKeyParams.Body)` | Each `Body` has `runId`, `sessionId`, and `startTime` |
-| `.queueId(String)`                   | `.queueId(String)`                    | Unchanged                                             |
-| `.extendTraceRetention(Boolean)`     | `.extendTraceRetention(Boolean)`      | Unchanged optional query param                        |
+| Before (`RunCreateParams`) | After (`RunCreateByKeyParams`) | Notes |
+| - | - | - |
+| `.bodyOfRunsUuidArray(List)` | *(removed)* | Legacy body; run IDs only |
+| *(not available)* | `.addBody(RunCreateByKeyParams.Body)` | Each `Body` has `runId`, `sessionId`, and `startTime` |
+| `.queueId(String)` | `.queueId(String)` | Unchanged |
+| `.extendTraceRetention(Boolean)` | `.extendTraceRetention(Boolean)` | Unchanged optional query param |
 
 #### Go
-| Before (`AnnotationQueueRunNewParams`)                            | After (`AnnotationQueueRunNewByKeyParams`)     | Notes                                          |
-| ----------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `Body: AnnotationQueueRunNewParamsBodyRunsUuidArray` (`[]string`) | *(removed)*                                    | Legacy body; run IDs only                      |
-| *(not available)*                                                 | `Body: []AnnotationQueueRunNewByKeyParamsBody` | Each has `RunID`, `SessionID`, and `StartTime` |
-| *(not available)*                                                 | `ExtendTraceRetention`                         | Optional query param                           |
+| Before (`AnnotationQueueRunNewParams`) | After (`AnnotationQueueRunNewByKeyParams`) | Notes |
+| - | - | - |
+| `Body: AnnotationQueueRunNewParamsBodyRunsUuidArray` (`[]string`) | *(removed)* | Legacy body; run IDs only |
+| *(not available)* | `Body: []AnnotationQueueRunNewByKeyParamsBody` | Each has `RunID`, `SessionID`, and `StartTime` |
+| *(not available)* | `ExtendTraceRetention` | Optional query param |
 
 #### cURL
 > [!WARNING]
 > The `/runs/by-key` request body is an array of objects, not an array of ID strings. Each object needs `run_id`, `session_id` (project UUID), and `start_time` (RFC3339).
 
-| Before (`POST /runs` body)        | After (`POST /runs/by-key` body)           | Notes                                                     |
-| --------------------------------- | ------------------------------------------ | --------------------------------------------------------- |
-| `["<run-id>", ...]`               | `[{"run_id", "session_id", "start_time"}]` | `session_id` is the project UUID; `start_time` is RFC3339 |
-| `?extend_trace_retention` (query) | `?extend_trace_retention` (query)          | Unchanged optional query param                            |
+| Before (`POST /runs` body) | After (`POST /runs/by-key` body) | Notes |
+| - | - | - |
+| `["<run-id>", ...]` | `[{"run_id", "session_id", "start_time"}]` | `session_id` is the project UUID; `start_time` is RFC3339 |
+| `?extend_trace_retention` (query) | `?extend_trace_retention` (query) | Unchanged optional query param |
 
 #### Response
 
@@ -372,25 +372,25 @@ Public read methods do not require a LangSmith API key. Treat the share token as
 #### Method names
 
 #### Python
-| Before                          | After                                         |
-| ------------------------------- | --------------------------------------------- |
-| `client.share_run()`            | `client.runs.share.create()`                  |
-| `client.unshare_run()`          | `client.runs.share.delete()`                  |
-| `client.list_shared_runs()`     | `client.public.runs.query()`                  |
-| `client.read_shared_run()`      | `client.public.runs.retrieve()`               |
+| Before | After |
+| - | - |
+| `client.share_run()` | `client.runs.share.create()` |
+| `client.unshare_run()` | `client.runs.share.delete()` |
+| `client.list_shared_runs()` | `client.public.runs.query()` |
+| `client.read_shared_run()` | `client.public.runs.retrieve()` |
 | `client.read_run_shared_link()` | `client.runs.retrieve(selects=["SHARE_URL"])` |
 
 > [!NOTE]
 > The v2 resource methods are async. Call them with `await`.
 
 #### TypeScript
-| Before                                     | After                                              |
-| ------------------------------------------ | -------------------------------------------------- |
-| `client.shareRun()`                        | `client.runs.share.create()`                       |
-| `client.unshareRun()`                      | `client.runs.share.delete()`                       |
-| `client.listSharedRuns()`                  | `client.public.runs.query()`                       |
-| `client.listSharedRuns({ runIds: [...] })` | `client.public.runs.retrieve()`                    |
-| `client.readRunSharedLink()`               | `client.runs.retrieve({ selects: ["SHARE_URL"] })` |
+| Before | After |
+| - | - |
+| `client.shareRun()` | `client.runs.share.create()` |
+| `client.unshareRun()` | `client.runs.share.delete()` |
+| `client.listSharedRuns()` | `client.public.runs.query()` |
+| `client.listSharedRuns({ runIds: [...] })` | `client.public.runs.retrieve()` |
+| `client.readRunSharedLink()` | `client.runs.retrieve({ selects: ["SHARE_URL"] })` |
 
 TypeScript did not have a direct equivalent of Python's `read_shared_run`. Filtered `listSharedRuns` calls migrate to the point-read method.
 
@@ -401,13 +401,13 @@ The Java SDK has no legacy convenience methods to migrate. Use [`ShareService`](
 The Go SDK has no legacy convenience methods to migrate. Use [`RunShareService`](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#RunShareService) and [`PublicRunService`](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#PublicRunService) for v2 access.
 
 #### cURL
-| Operation             | Before                                          | After                                           |
-| --------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| Share                 | `PUT /api/v1/runs/{run_id}/share`               | `POST /api/v2/runs/{run_id}/share`              |
-| Unshare               | `DELETE /api/v1/runs/{run_id}/share`            | `DELETE /api/v2/runs/{trace_id}/share`          |
-| Query public runs     | `POST /api/v1/public/{share_token}/runs/query`  | `POST /api/v2/public/{share_token}/runs/query`  |
+| Operation | Before | After |
+| - | - | - |
+| Share | `PUT /api/v1/runs/{run_id}/share` | `POST /api/v2/runs/{run_id}/share` |
+| Unshare | `DELETE /api/v1/runs/{run_id}/share` | `DELETE /api/v2/runs/{trace_id}/share` |
+| Query public runs | `POST /api/v1/public/{share_token}/runs/query` | `POST /api/v2/public/{share_token}/runs/query` |
 | Retrieve a public run | `GET /api/v1/public/{share_token}/run/{run_id}` | `GET /api/v2/public/{share_token}/run/{run_id}` |
-| Read share state      | `GET /api/v1/runs/{run_id}/share`               | `GET /api/v2/runs/{run_id}?selects=SHARE_URL`   |
+| Read share state | `GET /api/v1/runs/{run_id}/share` | `GET /api/v2/runs/{run_id}?selects=SHARE_URL` |
 
 The legacy `GET /api/v1/public/{share_token}/run` endpoint without a run ID has no direct v2 equivalent.
 
@@ -441,13 +441,13 @@ Do not construct the public URL from the API origin. Retrieving `share_url` uses
 
 #### Responses
 
-| Operation             | Before                                   | After                                   |
-| --------------------- | ---------------------------------------- | --------------------------------------- |
-| Share                 | Run ID, shared trace ID, and share token | `share_token`                           |
-| Unshare               | `{"message": "Run unshared"}`            | `204 No Content`                        |
-| Query public runs     | `runs` and `cursors`                     | `items`                                 |
-| Retrieve a public run | Full legacy run                          | Select-driven run object                |
-| Read share state      | Share-state object or `null`             | Run object with `share_url` when shared |
+| Operation | Before | After |
+| - | - | - |
+| Share | Run ID, shared trace ID, and share token | `share_token` |
+| Unshare | `{"message": "Run unshared"}` | `204 No Content` |
+| Query public runs | `runs` and `cursors` | `items` |
+| Retrieve a public run | Full legacy run | Select-driven run object |
+| Read share state | Share-state object or `null` | Run object with `share_url` when shared |
 
 ### Examples
 
@@ -653,40 +653,40 @@ The method name and endpoint are unchanged. Only the session (project) ID requir
 > [!WARNING]
 > `create_feedback` now requires `session_id`, the UUID of the project (session) that owns the run. It was previously optional.
 
-| Before                  | After                       | Notes                                                                                                        |
-| ----------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Before | After | Notes |
+| - | - | - |
 | `session_id` (optional) | `session_id` (**required**) | UUID of the project that owns the run; resolve it with `client.read_project()` if you do not already have it |
 
 #### TypeScript
 > [!WARNING]
 > `client.createFeedback` now requires `sessionId`, the UUID of the project (session) that owns the run. It was previously optional.
 
-| Before                 | After                      | Notes                                                                                                       |
-| ---------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Before | After | Notes |
+| - | - | - |
 | `sessionId` (optional) | `sessionId` (**required**) | UUID of the project that owns the run; resolve it with `client.readProject()` if you do not already have it |
 
 #### Java
 > [!WARNING]
 > `FeedbackCreateSchema.sessionId()` is now required. It was previously optional.
 
-| Before                   | After                        | Notes                                                                                                           |
-| ------------------------ | ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Before | After | Notes |
+| - | - | - |
 | `sessionId()` (optional) | `sessionId()` (**required**) | UUID of the project that owns the run; resolve it with `client.sessions().list()` if you do not already have it |
 
 #### Go
 > [!WARNING]
 > `FeedbackCreateSchemaParam.SessionID` is now required. It was previously optional.
 
-| Before                 | After                      | Notes                                                                                                         |
-| ---------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Before | After | Notes |
+| - | - | - |
 | `SessionID` (optional) | `SessionID` (**required**) | UUID of the project that owns the run; resolve it with `client.Sessions.List()` if you do not already have it |
 
 #### cURL
 > [!WARNING]
 > `POST /api/v1/feedback` now requires a `session_id` field in the request body. It was previously optional.
 
-| Before                  | After                       | Notes                                                                                                       |
-| ----------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Before | After | Notes |
+| - | - | - |
 | `session_id` (optional) | `session_id` (**required**) | UUID of the project that owns the run; resolve it with `GET /api/v1/sessions` if you do not already have it |
 
 ### Examples

@@ -28,31 +28,31 @@ LangSmith on GCP deploys in up to five stages. Each stage adds a capability laye
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/D6uoP5M0BV8YGC-1/images/self-hosted-terraform/gcp-architecture.png?fit=max&auto=format&n=D6uoP5M0BV8YGC-1&q=85&s=195d16f6a26452c58eb3d749e36774da" alt="LangSmith on GCP deployment stages and service layout" width="2900" height="1640" data-path="images/self-hosted-terraform/gcp-architecture.png" />
 
-| Stage | Layer                | What it adds                                                                                                       |
-| ----- | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| 1     | GCP infrastructure   | VPC, GKE, Cloud SQL, Memorystore, GCS, K8s bootstrap, cert-manager, KEDA, Envoy Gateway                            |
-| 2     | LangSmith base       | frontend, backend, platform-backend, queue, ace-backend, clickhouse, playground                                    |
-| 3     | LangSmith Deployment | host-backend, listener, operator + per-deployment pods                                                             |
-| 4     | Fleet                | standalone-fleet-api-server, standalone-fleet-tool-server, standalone-fleet-trigger-server, standalone-fleet-queue |
-| 5     | Insights + Polly     | Clio analytics (ClickHouse-backed), Polly eval agent                                                               |
+| Stage | Layer | What it adds |
+| - | - | - |
+| 1 | GCP infrastructure | VPC, GKE, Cloud SQL, Memorystore, GCS, K8s bootstrap, cert-manager, KEDA, Envoy Gateway |
+| 2 | LangSmith base | frontend, backend, platform-backend, queue, ace-backend, clickhouse, playground |
+| 3 | LangSmith Deployment | host-backend, listener, operator + per-deployment pods |
+| 4 | Fleet | standalone-fleet-api-server, standalone-fleet-tool-server, standalone-fleet-trigger-server, standalone-fleet-queue |
+| 5 | Insights + Polly | Clio analytics (ClickHouse-backed), Polly eval agent |
 
 > [!NOTE]
 > Fleet (chart v0.15+) is the current form of the feature formerly called Agent Builder. Enable it with `enable_fleet`. Unlike the deprecated `enable_agent_builder` path, it does not require the LangSmith Deployment layer. The two flags are mutually exclusive and share the same encryption key. See [Enable add-ons](self-host-terraform-gcp-deploy.md#enable-add-ons) in the deployment guide.
 
 ## Module descriptions
 
-| Module          | Path                           | Purpose                                                                                                              |
-| --------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| `networking`    | `infra/modules/networking/`    | VPC, subnet with secondary ranges, Cloud Router, Cloud NAT, private service connection for Cloud SQL and Memorystore |
-| `k8s-cluster`   | `infra/modules/k8s-cluster/`   | GKE Standard or Autopilot cluster, private nodes, node pool with autoscaling, Workload Identity enabled              |
-| `postgres`      | `infra/modules/postgres/`      | Cloud SQL PostgreSQL instance, regional HA standby, private IP, deletion protection                                  |
-| `redis`         | `infra/modules/redis/`         | Memorystore Redis STANDARD\_HA tier, private IP within VPC                                                           |
-| `storage`       | `infra/modules/storage/`       | GCS bucket with versioning and lifecycle rules for `ttl_s/` (14 days) and `ttl_l/` (400 days) prefixes               |
-| `k8s-bootstrap` | `infra/modules/k8s-bootstrap/` | `langsmith` namespace, Kubernetes Secrets for Postgres and Redis URLs, cert-manager and KEDA Helm releases           |
-| `ingress`       | `infra/modules/ingress/`       | Envoy Gateway Helm release, GatewayClass, HTTPRoute, optional HTTPS Gateway listener                                 |
-| `iam`           | `infra/modules/iam/`           | GCP service account and Workload Identity bindings for GCS access (wired by default)                                 |
-| `dns`           | `infra/modules/dns/`           | Cloud DNS managed zone and managed cert (optional, enable with `enable_dns_module`)                                  |
-| `secrets`       | `infra/modules/secrets/`       | Secret Manager secret bundle (optional, enable with `enable_secret_manager_module`)                                  |
+| Module | Path | Purpose |
+| - | - | - |
+| `networking` | `infra/modules/networking/` | VPC, subnet with secondary ranges, Cloud Router, Cloud NAT, private service connection for Cloud SQL and Memorystore |
+| `k8s-cluster` | `infra/modules/k8s-cluster/` | GKE Standard or Autopilot cluster, private nodes, node pool with autoscaling, Workload Identity enabled |
+| `postgres` | `infra/modules/postgres/` | Cloud SQL PostgreSQL instance, regional HA standby, private IP, deletion protection |
+| `redis` | `infra/modules/redis/` | Memorystore Redis STANDARD\_HA tier, private IP within VPC |
+| `storage` | `infra/modules/storage/` | GCS bucket with versioning and lifecycle rules for `ttl_s/` (14 days) and `ttl_l/` (400 days) prefixes |
+| `k8s-bootstrap` | `infra/modules/k8s-bootstrap/` | `langsmith` namespace, Kubernetes Secrets for Postgres and Redis URLs, cert-manager and KEDA Helm releases |
+| `ingress` | `infra/modules/ingress/` | Envoy Gateway Helm release, GatewayClass, HTTPRoute, optional HTTPS Gateway listener |
+| `iam` | `infra/modules/iam/` | GCP service account and Workload Identity bindings for GCS access (wired by default) |
+| `dns` | `infra/modules/dns/` | Cloud DNS managed zone and managed cert (optional, enable with `enable_dns_module`) |
+| `secrets` | `infra/modules/secrets/` | Secret Manager secret bundle (optional, enable with `enable_secret_manager_module`) |
 
 ## Deployment tiers
 
@@ -107,16 +107,16 @@ GCS Bucket (Workload Identity, no static keys)
 
 ## Application core services
 
-| Service                      | Purpose                                                    | Port | HPA                         | Workload Identity | Depends on                       |
-| ---------------------------- | ---------------------------------------------------------- | ---- | --------------------------- | ----------------- | -------------------------------- |
-| `langsmith-frontend`         | React UI                                                   | 3000 | 1 to 10                     | No                | `backend`, `platform-backend`    |
-| `langsmith-backend`          | Main API (traces, runs, projects, API keys, feedback)      | 1984 | 3 to 10                     | Yes (GCS)         | Postgres, Redis, ClickHouse, GCS |
-| `langsmith-platform-backend` | Org and user management, auth, billing, settings           | 1986 | 1 to 10                     | Yes (GCS)         | Postgres, Redis, GCS             |
-| `langsmith-playground`       | LLM prompt playground UI                                   | 3001 | 1 to 10                     | No                | `backend`                        |
-| `langsmith-queue`            | Trace ingestion worker (Redis to ClickHouse + GCS)         | —    | 3 to 10 + KEDA              | Yes               | Redis, ClickHouse, GCS           |
-| `langsmith-ingest-queue`     | Dedicated high-throughput ingestion worker                 | —    | 3 to 10 + KEDA              | Yes               | Redis, GCS                       |
-| `langsmith-ace-backend`      | Async compute (dataset runs, evaluations, background jobs) | —    | 1 to 5                      | No                | Postgres, Redis                  |
-| `langsmith-clickhouse`       | Columnar store (trace spans, run metadata, eval results)   | —    | StatefulSet, single replica | No                | 500Gi `premium-rwo` PVC          |
+| Service | Purpose | Port | HPA | Workload Identity | Depends on |
+| - | - | - | - | - | - |
+| `langsmith-frontend` | React UI | 3000 | 1 to 10 | No | `backend`, `platform-backend` |
+| `langsmith-backend` | Main API (traces, runs, projects, API keys, feedback) | 1984 | 3 to 10 | Yes (GCS) | Postgres, Redis, ClickHouse, GCS |
+| `langsmith-platform-backend` | Org and user management, auth, billing, settings | 1986 | 1 to 10 | Yes (GCS) | Postgres, Redis, GCS |
+| `langsmith-playground` | LLM prompt playground UI | 3001 | 1 to 10 | No | `backend` |
+| `langsmith-queue` | Trace ingestion worker (Redis to ClickHouse + GCS) | — | 3 to 10 + KEDA | Yes | Redis, ClickHouse, GCS |
+| `langsmith-ingest-queue` | Dedicated high-throughput ingestion worker | — | 3 to 10 + KEDA | Yes | Redis, GCS |
+| `langsmith-ace-backend` | Async compute (dataset runs, evaluations, background jobs) | — | 1 to 5 | No | Postgres, Redis |
+| `langsmith-clickhouse` | Columnar store (trace spans, run metadata, eval results) | — | StatefulSet, single replica | No | 500Gi `premium-rwo` PVC |
 
 > [!WARNING]
 > In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production, use [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md) or a self-managed external cluster.
@@ -126,19 +126,19 @@ GCS Bucket (Workload Identity, no static keys)
 
 ### One-time jobs
 
-| Job                                | Purpose                                   |
-| ---------------------------------- | ----------------------------------------- |
-| `langsmith-backend-migrations`     | PostgreSQL schema migrations              |
-| `langsmith-backend-ch-migrations`  | ClickHouse schema migrations              |
+| Job | Purpose |
+| - | - |
+| `langsmith-backend-migrations` | PostgreSQL schema migrations |
+| `langsmith-backend-ch-migrations` | ClickHouse schema migrations |
 | `langsmith-backend-auth-bootstrap` | Creates the initial org and admin account |
 
 ## LangSmith Deployment add-on
 
-| Service                  | Purpose                                                                                                 | Workload Identity                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| `langsmith-host-backend` | LangGraph control plane API. Manages deployment lifecycle, serves deployment metadata.                  | Yes (GCS)                         |
-| `langsmith-listener`     | Watches host-backend for state changes, creates and updates `LangGraphPlatform` CRDs.                   | Yes (GCS)                         |
-| `langsmith-operator`     | Kubernetes operator. Reconciles `LangGraphPlatform` CRDs, creates and deletes Deployments and Services. | RBAC for Deployments and Services |
+| Service | Purpose | Workload Identity |
+| - | - | - |
+| `langsmith-host-backend` | LangGraph control plane API. Manages deployment lifecycle, serves deployment metadata. | Yes (GCS) |
+| `langsmith-listener` | Watches host-backend for state changes, creates and updates `LangGraphPlatform` CRDs. | Yes (GCS) |
+| `langsmith-operator` | Kubernetes operator. Reconciles `LangGraphPlatform` CRDs, creates and deletes Deployments and Services. | RBAC for Deployments and Services |
 
 Each LangGraph deployment created in the UI produces a Kubernetes Deployment in the `langsmith` namespace, with pods running as the `langsmith-ksa` ServiceAccount. That ServiceAccount must carry the `iam.gke.io/gcp-service-account` annotation, which `deploy.sh` applies idempotently.
 
@@ -175,11 +175,11 @@ When `postgres_source = "external"` and `redis_source = "external"` (the recomme
 
 ## Cluster infrastructure
 
-| Service       | Namespace              | Installed by                                                                                          | Required for                          |
-| ------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| Envoy Gateway | `envoy-gateway-system` | `ingress` module (`install_ingress = true`, default)                                                  | All ingress                           |
-| KEDA          | `keda`                 | `k8s-bootstrap` module when `enable_langsmith_deployment = true`                                      | LangSmith Deployment add-on and later |
-| cert-manager  | `cert-manager`         | `k8s-bootstrap` module when `tls_certificate_source = "letsencrypt"` or `install_cert_manager = true` | Let's Encrypt TLS                     |
+| Service | Namespace | Installed by | Required for |
+| - | - | - | - |
+| Envoy Gateway | `envoy-gateway-system` | `ingress` module (`install_ingress = true`, default) | All ingress |
+| KEDA | `keda` | `k8s-bootstrap` module when `enable_langsmith_deployment = true` | LangSmith Deployment add-on and later |
+| cert-manager | `cert-manager` | `k8s-bootstrap` module when `tls_certificate_source = "letsencrypt"` or `install_cert_manager = true` | Let's Encrypt TLS |
 
 > [!NOTE]
 > The `Gateway` resource is managed by Terraform; the `HTTPRoute` is managed by Helm. Do not delete the Gateway resource manually. GCP releases the external IP when the Gateway is deleted, then issues a new IP on recreate.
@@ -196,15 +196,15 @@ GKE pod
                     └── roles/storage.objectAdmin on the GCS bucket
 ```
 
-| Component                       | Annotation                              | Permissions                                       |
-| ------------------------------- | --------------------------------------- | ------------------------------------------------- |
-| `langsmith-backend`             | `iam.gke.io/gcp-service-account: <gsa>` | GCS `storage.objectAdmin` on the LangSmith bucket |
-| `langsmith-platform-backend`    | Same                                    | GCS `storage.objectAdmin`                         |
-| `langsmith-queue`               | Same                                    | GCS `storage.objectAdmin`                         |
-| `langsmith-ingest-queue`        | Same                                    | GCS `storage.objectAdmin`                         |
-| `langsmith-host-backend`        | Same                                    | GCS `storage.objectAdmin`                         |
-| `langsmith-listener`            | Same                                    | GCS `storage.objectAdmin`                         |
-| `langsmith-ksa` (operator pods) | Same                                    | GCS `storage.objectAdmin`                         |
+| Component | Annotation | Permissions |
+| - | - | - |
+| `langsmith-backend` | `iam.gke.io/gcp-service-account: <gsa>` | GCS `storage.objectAdmin` on the LangSmith bucket |
+| `langsmith-platform-backend` | Same | GCS `storage.objectAdmin` |
+| `langsmith-queue` | Same | GCS `storage.objectAdmin` |
+| `langsmith-ingest-queue` | Same | GCS `storage.objectAdmin` |
+| `langsmith-host-backend` | Same | GCS `storage.objectAdmin` |
+| `langsmith-listener` | Same | GCS `storage.objectAdmin` |
+| `langsmith-ksa` (operator pods) | Same | GCS `storage.objectAdmin` |
 
 The GSA is defined by the `iam` module and output as `workload_identity_annotation`. `init-values.sh` writes these annotations into `values-overrides.yaml` automatically.
 
@@ -212,12 +212,12 @@ In native GCS mode (the shipped default), the GSA bindings above are sufficient.
 
 ## Network topology
 
-| Range                      | CIDR                      | Used by                                  |
-| -------------------------- | ------------------------- | ---------------------------------------- |
-| Subnet                     | `10.0.0.0/20`             | GKE nodes                                |
-| Pods                       | `10.4.0.0/14`             | GKE pod IPs (secondary range)            |
-| Services                   | `10.8.0.0/20`             | GKE ClusterIP services (secondary range) |
-| Private service connection | `/16` allocated by Google | Cloud SQL, Memorystore private IPs       |
+| Range | CIDR | Used by |
+| - | - | - |
+| Subnet | `10.0.0.0/20` | GKE nodes |
+| Pods | `10.4.0.0/14` | GKE pod IPs (secondary range) |
+| Services | `10.8.0.0/20` | GKE ClusterIP services (secondary range) |
+| Private service connection | `/16` allocated by Google | Cloud SQL, Memorystore private IPs |
 
 Cloud SQL and Memorystore are accessed exclusively via private IP. The networking module establishes a private service connection (VPC peering to Google's managed network) whenever `postgres_source = "external"` or `redis_source = "external"`.
 
@@ -244,13 +244,13 @@ Internal traffic (private IPs, never leaving VPC):
 
 ## Component to storage mapping
 
-| Component          | PostgreSQL                 | Redis           | ClickHouse         | GCS                |
-| ------------------ | -------------------------- | --------------- | ------------------ | ------------------ |
-| `backend`          | Org config, run metadata   | Ingestion queue | —                  | Trace objects      |
-| `platform-backend` | —                          | —               | —                  | Blob routing       |
-| `queue`            | —                          | Pops jobs       | —                  | Writes trace blobs |
-| `clickhouse`       | —                          | —               | Trace search index | —                  |
-| `host-backend`     | Deployment lifecycle state | —               | —                  | —                  |
+| Component | PostgreSQL | Redis | ClickHouse | GCS |
+| - | - | - | - | - |
+| `backend` | Org config, run metadata | Ingestion queue | — | Trace objects |
+| `platform-backend` | — | — | — | Blob routing |
+| `queue` | — | Pops jobs | — | Writes trace blobs |
+| `clickhouse` | — | — | Trace search index | — |
+| `host-backend` | Deployment lifecycle state | — | — | — |
 
 ## Secret Manager integration
 

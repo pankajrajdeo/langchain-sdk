@@ -313,12 +313,9 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          file:
-            $ref: '#/components/schemas/directory.FileEntry'
-          agent:
-            $ref: '#/components/schemas/directory.AgentEntryInput'
-          skill:
-            $ref: '#/components/schemas/directory.SkillEntryInput'
+          file: '#/components/schemas/directory.FileEntry'
+          agent: '#/components/schemas/directory.AgentEntryInput'
+          skill: '#/components/schemas/directory.SkillEntryInput'
       oneOf:
         - $ref: '#/components/schemas/directory.FileEntry'
         - $ref: '#/components/schemas/directory.AgentEntryInput'
@@ -407,10 +404,8 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          LATEST:
-            $ref: '#/components/schemas/directory.LatestSelector'
-          COMMIT:
-            $ref: '#/components/schemas/directory.CommitSelector'
+          LATEST: '#/components/schemas/directory.LatestSelector'
+          COMMIT: '#/components/schemas/directory.CommitSelector'
       oneOf:
         - $ref: '#/components/schemas/directory.LatestSelector'
         - $ref: '#/components/schemas/directory.CommitSelector'

@@ -24,10 +24,10 @@ If you are just starting with Oracle Database, consider exploring the [free Orac
 
 ### Integration details
 
-| Class                | Package                                                                                  | Compatibility | Local | [PY support](https://python.langchain.com/docs/integrations/document_loaders/oracleai) |
-| :------------------- | :--------------------------------------------------------------------------------------- | :-----------: | :---: | :------------------------------------------------------------------------------------: |
-| `OracleDocLoader`    | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) |   Node-only   |   ✅   |                                            ✅                                           |
-| `OracleTextSplitter` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) |   Node-only   |   ✅   |                                            ✅                                           |
+| Class | Package | Compatibility | Local | [PY support](https://python.langchain.com/docs/integrations/document_loaders/oracleai) |
+| :- | :- | :-: | :-: | :-: |
+| `OracleDocLoader` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) | Node-only | ✅ | ✅ |
+| `OracleTextSplitter` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) | Node-only | ✅ | ✅ |
 
 ### Load documents
 

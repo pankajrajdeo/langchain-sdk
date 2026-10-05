@@ -23,11 +23,11 @@ This will help you getting started with `OpenApiToolkit` [OpenAPI toolkit](opena
 
 The `OpenAPIToolkit` has access to the following tools:
 
-| Name            | Description                                                                                                                                                                                                                                                                                                                                                                                       |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `requests_get`  | A portal to the internet. Use this when you need to get specific content from a website. Input should be a URL string (i.e. "[www.google.com](https://www.google.com)"). The output will be the text response of the GET request.                                                                                                                                                                 |
+| Name | Description |
+| - | - |
+| `requests_get` | A portal to the internet. Use this when you need to get specific content from a website. Input should be a URL string (i.e. "[www.google.com](https://www.google.com)"). The output will be the text response of the GET request. |
 | `requests_post` | Use this when you want to POST to a website. Input should be a json string with two keys: "url" and "data". The value of "url" should be a string, and the value of "data" should be a dictionary of key-value pairs you want to POST to the URL as a JSON body. Be careful to always use double quotes for strings in the json string. The output will be the text response of the POST request. |
-| `json_explorer` | Can be used to answer questions about the openapi spec for the API. Always use this tool before trying to make a request. Example inputs to this tool: 'What are the required query parameters for a GET request to the /bar endpoint?' 'What are the required parameters in the request body for a POST request to the /foo endpoint?' Always give this tool a specific question.                |
+| `json_explorer` | Can be used to answer questions about the openapi spec for the API. Always use this tool before trying to make a request. Example inputs to this tool: 'What are the required query parameters for a GET request to the /bar endpoint?' 'What are the required parameters in the request body for a POST request to the /foo endpoint?' Always give this tool a specific question. |
 
 ## Setup
 

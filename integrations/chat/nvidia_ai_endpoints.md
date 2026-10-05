@@ -26,15 +26,15 @@ For more information on accessing embedding models through this API, refer to th
 
 ### Integration details
 
-| Class                                                                                                       | Package                                                                                                 | Serializable | JS support |                                                    Downloads                                                   |                                                   Version                                                   |
-| :---------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ | :----------: | :--------: | :------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------: |
-| [`ChatNVIDIA`](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints/chat_models/ChatNVIDIA) | [`langchain-nvidia-ai-endpoints`](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_nvidia_ai_endpoints?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_nvidia_ai_endpoints?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatNVIDIA`](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints/chat_models/ChatNVIDIA) | [`langchain-nvidia-ai-endpoints`](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_nvidia_ai_endpoints?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_nvidia_ai_endpoints?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 ## Install the package
 
@@ -482,12 +482,12 @@ print(result.content)
 
 `ChatNVIDIADynamo` accepts four additional parameters beyond those supported by `ChatNVIDIA`:
 
-| Parameter             | Type    | Default | Description                                              |
-| --------------------- | ------- | ------- | -------------------------------------------------------- |
-| `osl`                 | `int`   | `512`   | Expected output sequence length (tokens)                 |
-| `iat`                 | `int`   | `250`   | Expected inter-arrival time (ms)                         |
-| `latency_sensitivity` | `float` | `1.0`   | Higher latency sensitivities get priority routing        |
-| `priority`            | `int`   | `1`     | Lower priority settings receive more scheduling priority |
+| Parameter | Type | Default | Description |
+| - | - | - | - |
+| `osl` | `int` | `512` | Expected output sequence length (tokens) |
+| `iat` | `int` | `250` | Expected inter-arrival time (ms) |
+| `latency_sensitivity` | `float` | `1.0` | Higher latency sensitivities get priority routing |
+| `priority` | `int` | `1` | Lower priority settings receive more scheduling priority |
 
 ### Set defaults at construction time
 

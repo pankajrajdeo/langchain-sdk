@@ -13,4 +13,4 @@ tags: [index, langchain, middleware]
 
 - [Prebuilt middleware](built-in.md) - Prebuilt middleware for common agent use cases
 - [Custom middleware](custom.md) - Build custom middleware by implementing hooks that run at specific points in the agent execution flow.
-- [Overview](overview.md) - Control and customize agent execution at every step
+- [Middleware overview](overview.md) - Control and customize agent execution at every step

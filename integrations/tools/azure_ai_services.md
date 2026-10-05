@@ -16,14 +16,14 @@ Use these tools when you want LangChain agents to analyze documents, images, or 
 
 ## Overview
 
-| Tool                                                                  | Description                                                               |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [`AzureAIContentUnderstandingTool`](#azureaicontentunderstandingtool) | Extract structured content from documents, images, audio, and video.      |
-| [`AzureAIDocumentIntelligenceTool`](#azureaidocumentintelligencetool) | Parse documents into OCR text, tables, and key-value pairs.               |
-| [`AzureAIImageAnalysisTool`](#azureaiimageanalysistool)               | Run OCR, captions, tagging, object detection, and related image analysis. |
-| [`AzureAISpeechToTextTool`](#azureaispeechtotexttool)                 | Transcribe audio files to text with language support.                     |
-| [`AzureAITextToSpeechTool`](#azureaitexttospeechtool)                 | Convert text to synthesized speech audio with multi-language support.     |
-| [`AzureAITextAnalyticsHealthTool`](#azureaitextanalyticshealthtool)   | Extract medical entities from healthcare text.                            |
+| Tool | Description |
+| - | - |
+| [`AzureAIContentUnderstandingTool`](#azureaicontentunderstandingtool) | Extract structured content from documents, images, audio, and video. |
+| [`AzureAIDocumentIntelligenceTool`](#azureaidocumentintelligencetool) | Parse documents into OCR text, tables, and key-value pairs. |
+| [`AzureAIImageAnalysisTool`](#azureaiimageanalysistool) | Run OCR, captions, tagging, object detection, and related image analysis. |
+| [`AzureAISpeechToTextTool`](#azureaispeechtotexttool) | Transcribe audio files to text with language support. |
+| [`AzureAITextToSpeechTool`](#azureaitexttospeechtool) | Convert text to synthesized speech audio with multi-language support. |
+| [`AzureAITextAnalyticsHealthTool`](#azureaitextanalyticshealthtool) | Extract medical entities from healthcare text. |
 
 ### Features
 

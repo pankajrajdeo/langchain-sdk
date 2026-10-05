@@ -23,19 +23,19 @@ Pick one row from each table. Server shape and connection lifetime are independe
 
 **Server shape**
 
-| If you need…                                                | Use                                                            | Go to                                                    |
-| ----------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------- |
-| One server                                                  | A URL, `Path`, or in-process target                            | [Transports](../mcp.md#transports)       |
-| Several servers behind one connection                       | An `MCPConfig` dict                                            | [MCPConfig](#one-aggregate-connection-with-mcpconfig)    |
+| If you need… | Use | Go to |
+| - | - | - |
+| One server | A URL, `Path`, or in-process target | [Transports](../mcp.md#transports) |
+| Several servers behind one connection | An `MCPConfig` dict | [MCPConfig](#one-aggregate-connection-with-mcpconfig) |
 | Several servers with separate auth, protocol eras, or pools | A [`ClientGroup`](https://gofastmcp.com/clients/client-groups) | [ClientGroup](#independent-connections-with-clientgroup) |
 
 **Connection lifetime**
 
-| Situation                                           | Pattern                                                                                | Go to                                                     |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| Script, notebook, or most agents                    | Discover inside `async with`, then exit                                                | [Connection lifecycle](#connection-lifecycle)             |
-| Hold one session across several tool calls in a run | Keep the adapter open around the agent call                                            | [One session per invocation](#one-session-per-invocation) |
-| Many concurrent runs in a deployment                | Discover per run; reuse a [shared pool](#shared-connection-pool) and [cache](#caching) | [Scale a deployment](#scale-a-deployment)                 |
+| Situation | Pattern | Go to |
+| - | - | - |
+| Script, notebook, or most agents | Discover inside `async with`, then exit | [Connection lifecycle](#connection-lifecycle) |
+| Hold one session across several tool calls in a run | Keep the adapter open around the agent call | [One session per invocation](#one-session-per-invocation) |
+| Many concurrent runs in a deployment | Discover per run; reuse a [shared pool](#shared-connection-pool) and [cache](#caching) | [Scale a deployment](#scale-a-deployment) |
 
 ## Connection lifecycle
 
@@ -185,7 +185,7 @@ async def load_over_shared_pool(servers: dict[str, str]) -> list:
 
 Because every client borrows from `_POOL`, the deployment opens one set of HTTP connections for the whole fleet rather than one per server.
 
-### Caching
+## Caching
 
 FastMCP can cache the result of `list_tools` so repeated discovery avoids a network round trip. Caching is opt-in and honors the server's own cache hints, so it only takes effect against modern-era servers that advertise them.
 
@@ -231,9 +231,12 @@ For the full negotiation rules, see [Protocol negotiation](https://gofastmcp.com
 
 ## See also
 
-* [Authentication](auth.md) — bearer, OAuth, and per-user credentials
-* [Deploy a LangGraph server](../../langgraph/local-server.md) — graph factories for long-lived deployments
+* [Authentication](auth.md): Bearer, OAuth, and per-user credentials.
+
+* [Deploy a LangGraph server](../../langgraph/local-server.md): Graph factories for long-lived deployments.
+
 * [FastMCP connection lifecycle](https://gofastmcp.com/clients/client#connection-lifecycle)
+
 * [MCP configuration format](https://gofastmcp.com/integrations/mcp-json-configuration)
 
 ***

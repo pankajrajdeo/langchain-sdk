@@ -1,12 +1,14 @@
 ---
 title: "Graph API overview"
-description: "At its core, LangGraph models agent workflows as graphs. You define the behavior of your agents using three key components:"
+description: "LangGraph models agent workflows as graphs: define state, nodes, and edges with StateGraph to build looping, stateful workflows."
 source: "https://docs.langchain.com/oss/python/langgraph/graph-api"
 category: "docs"
 tags: [docs, langgraph, graph-api]
 ---
 
 # Graph API overview
+
+> LangGraph models agent workflows as graphs: define state, nodes, and edges with StateGraph to build looping, stateful workflows.
 
 ## Graphs
 
@@ -1110,10 +1112,10 @@ except GraphRecursionError as e:
 
 The key differences between these approaches are:
 
-| Approach                                  | Detection            | Handling                             | Control Flow                       |
-| ----------------------------------------- | -------------------- | ------------------------------------ | ---------------------------------- |
-| Proactive (using `RemainingSteps`)        | Before limit reached | Inside graph via conditional routing | Graph continues to completion node |
-| Reactive (catching `GraphRecursionError`) | After limit exceeded | Outside graph in try/catch           | Graph execution terminated         |
+| Approach | Detection | Handling | Control Flow |
+| - | - | - | - |
+| Proactive (using `RemainingSteps`) | Before limit reached | Inside graph via conditional routing | Graph continues to completion node |
+| Reactive (catching `GraphRecursionError`) | After limit exceeded | Outside graph in try/catch | Graph execution terminated |
 
 **Proactive advantages:**
 

@@ -70,13 +70,13 @@ for i, doc in enumerate(compressed_docs, 1):
 
 ## Picking a cross-encoder
 
-| Model                                        | Size | Notes                                           |
-| -------------------------------------------- | ---- | ----------------------------------------------- |
-| `cross-encoder/ms-marco-MiniLM-L6-v2`        | 22M  | Fastest; English only, 2022-era baseline        |
-| `BAAI/bge-reranker-v2-m3`                    | 568M | Multilingual, strong default for most workloads |
-| `mixedbread-ai/mxbai-rerank-large-v2`        | 1.5B | Top-tier English quality, GPU recommended       |
-| `Alibaba-NLP/gte-multilingual-reranker-base` | 306M | Multilingual, 8192-token context                |
-| `Qwen/Qwen3-Reranker-0.6B`                   | 595M | Instruction-aware, multilingual                 |
+| Model | Size | Notes |
+| - | - | - |
+| `cross-encoder/ms-marco-MiniLM-L6-v2` | 22M | Fastest; English only, 2022-era baseline |
+| `BAAI/bge-reranker-v2-m3` | 568M | Multilingual, strong default for most workloads |
+| `mixedbread-ai/mxbai-rerank-large-v2` | 1.5B | Top-tier English quality, GPU recommended |
+| `Alibaba-NLP/gte-multilingual-reranker-base` | 306M | Multilingual, 8192-token context |
+| `Qwen/Qwen3-Reranker-0.6B` | 595M | Instruction-aware, multilingual |
 
 `HuggingFaceCrossEncoder` auto-selects the best available device (CUDA > MPS > CPU). To pin to a specific device, pass `model_kwargs={"device": "cpu"}` or similar.
 

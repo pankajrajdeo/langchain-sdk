@@ -375,25 +375,31 @@ components:
             The selected fixed resource tier for this deployment. Existing
             deployments without an explicit selection return the default tier
             for their deployment type. When compute and database tiers differ,
-            this reflects the compute tier.
+            this reflects the compute tier. Null when compute has a custom size.
         compute_tier:
           anyOf:
             - $ref: '#/components/schemas/DeploymentTier'
+            - type: string
+              const: LEGACY_CUSTOM
             - type: 'null'
           title: Compute Tier
           description: >-
             The selected fixed resource tier for this deployment's compute.
             Deployments without an explicit selection return the default tier
-            for their deployment type.
+            for their deployment type. `LEGACY_CUSTOM` means the compute has a
+            custom size that matches no tier.
         database_tier:
           anyOf:
             - $ref: '#/components/schemas/DeploymentTier'
+            - type: string
+              const: LEGACY_CUSTOM
             - type: 'null'
           title: Database Tier
           description: >-
             The selected fixed resource tier for this deployment's database.
             Deployments without an explicit selection return the default tier
-            for their deployment type.
+            for their deployment type. `LEGACY_CUSTOM` means the database has a
+            custom size that matches no tier.
       type: object
       required:
         - source

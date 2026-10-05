@@ -397,12 +397,12 @@ The `search` method allows you to filter on metadata. This is useful for finding
 
 Common metadata fields you can filter on include:
 
-| Metadata key             | Description                                                                                                      |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| `graph_id`               | The graph (deployment) the thread belongs to.                                                                    |
-| `assistant_id`           | The [assistant](assistants.md) used to create runs on the thread.                                        |
+| Metadata key | Description |
+| - | - |
+| `graph_id` | The graph (deployment) the thread belongs to. |
+| `assistant_id` | The [assistant](assistants.md) used to create runs on the thread. |
 | `langgraph_auth_user_id` | The authenticated user who owns the thread (set automatically when using [custom auth](custom-auth.md)). |
-| `cron_id`                | The [cron job](cron-jobs.md) that created runs on the thread.                                            |
+| `cron_id` | The [cron job](cron-jobs.md) that created runs on the thread. |
 
 You can also filter on any custom metadata you attach when creating or updating threads.
 

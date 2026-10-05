@@ -1,12 +1,14 @@
 ---
 title: "Models"
-description: "LLMs are powerful AI tools that can interpret and generate text like humans. They're versatile enough to write content, translate languages, summarize, and answer questions without needing..."
+description: "Initialize and configure chat models, the reasoning engine of LangChain agents, with support for tool calling, structured output, and multimodal inputs."
 source: "https://docs.langchain.com/oss/python/langchain/models"
 category: "docs"
 tags: [docs, langchain, models]
 ---
 
 # Models
+
+> Initialize and configure chat models, the reasoning engine of LangChain agents, with support for tool calling, structured output, and multimodal inputs.
 
 [LLMs](https://en.wikipedia.org/wiki/Large_language_model) are powerful AI tools that can interpret and generate text like humans. They're versatile enough to write content, translate languages, summarize, and answer questions without needing specialized training for each task.
 
@@ -717,7 +719,9 @@ Here's a simple example of how to do this:
 
 ```python
 # Bind (potentially multiple) tools to the model
-model_with_tools = model.bind_tools([get_weather])
+tools = [get_weather]
+tools_by_name = {tool.name: tool for tool in tools}
+model_with_tools = model.bind_tools(tools)
 
 # Step 1: Model generates tool calls
 messages = [{"role": "user", "content": "What's the weather in Boston?"}]
@@ -727,7 +731,8 @@ messages.append(ai_msg)
 # Step 2: Execute tools and collect results
 for tool_call in ai_msg.tool_calls:
     # Execute the tool with the generated arguments
-    tool_result = get_weather.invoke(tool_call)
+    tool = tools_by_name[tool_call["name"]]
+    tool_result = tool.invoke(tool_call)
     messages.append(tool_result)
 
 # Step 3: Pass results back to model for final response
@@ -767,7 +772,9 @@ Many models support calling multiple tools in parallel when appropriate. This al
 **Parallel tool calls**
 
 ```python
-model_with_tools = model.bind_tools([get_weather])
+tools = [get_weather]
+tools_by_name = {tool.name: tool for tool in tools}
+model_with_tools = model.bind_tools(tools)
 
 response = model_with_tools.invoke(
     "What's the weather in Boston and Tokyo?"
@@ -783,9 +790,8 @@ print(response.tool_calls)
 # Execute all tools (can be done in parallel with async)
 results = []
 for tool_call in response.tool_calls:
-    if tool_call['name'] == 'get_weather':
-        result = get_weather.invoke(tool_call)
-    ...
+    tool = tools_by_name[tool_call["name"]]
+    result = tool.invoke(tool_call)
     results.append(result)
 ```
 
@@ -1214,7 +1220,7 @@ Many providers offer prompt caching features to reduce latency and cost on repea
 * **Provider-level explicit controls:** providers let you manually indicate cache points for greater control or to guarantee cost savings. These mirror the underlying provider/API behavior. Examples:
   * [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) (via `prompt_cache_key`)
   * Anthropic content-block [`cache_control`](../integrations/chat/anthropic.md#prompt-caching)
-  * [Gemini](https://reference.langchain.com/python/integrations/langchain_google_genai/).
+  * [Gemini](https://reference.langchain.com/python/langchain-google-genai).
   * AWS Bedrock [`cachePoint`](../integrations/chat/bedrock.md#prompt-caching) blocks
 * **LangChain middleware:** for agents, middleware lets LangChain optimize caching of stable system prompt and tool content. Examples:
   * Anthropic's [`AnthropicPromptCachingMiddleware`](../integrations/middleware/anthropic.md#prompt-caching)

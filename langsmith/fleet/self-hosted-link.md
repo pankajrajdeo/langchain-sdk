@@ -240,14 +240,14 @@ To enable OAuth-based tools such as Gmail, Slack, or Linear in Fleet, configure 
 
 #### Available providers
 
-| Provider                                                                 | Tools enabled                                                      | Trigger enabled |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------ | --------------- |
-| `googleOAuthProvider`<br />[setup guide](#google-oauth-provider)         | Gmail, Google Calendar,<br />Google Sheets, BigQuery               | Gmail           |
-| `linearOAuthProvider`<br />[setup guide](#linear-oauth-provider)         | Linear                                                             | -               |
-| `linkedinOAuthProvider`<br />[setup guide](#linkedin-oauth-provider)     | LinkedIn                                                           | -               |
-| `microsoftOAuthProvider`<br />[setup guide](#microsoft-oauth-provider)   | Outlook, Calendar, Teams, SharePoint,<br />Word, Excel, PowerPoint | Outlook         |
-| `salesforceOAuthProvider`<br />[setup guide](#salesforce-oauth-provider) | Salesforce                                                         | -               |
-| `slackOAuthProvider`<br />[setup guide](#slack-oauth-provider)           | Slack                                                              | Slack           |
+| Provider | Tools enabled | Trigger enabled |
+| - | - | - |
+| `googleOAuthProvider`<br />[setup guide](#google-oauth-provider) | Gmail, Google Calendar,<br />Google Sheets, BigQuery | Gmail |
+| `linearOAuthProvider`<br />[setup guide](#linear-oauth-provider) | Linear | - |
+| `linkedinOAuthProvider`<br />[setup guide](#linkedin-oauth-provider) | LinkedIn | - |
+| `microsoftOAuthProvider`<br />[setup guide](#microsoft-oauth-provider) | Outlook, Calendar, Teams, SharePoint,<br />Word, Excel, PowerPoint | Outlook |
+| `salesforceOAuthProvider`<br />[setup guide](#salesforce-oauth-provider) | Salesforce | - |
+| `slackOAuthProvider`<br />[setup guide](#slack-oauth-provider) | Slack | Slack |
 
 #### General configuration
 
@@ -655,12 +655,12 @@ Under **Where can this GitHub App be installed?**, select the option that matche
 ### Create the app
 Click **Create GitHub App**. On the app settings page, note the following values:
 
-| Value           | Where to find it                                            | Environment variable           |
-| --------------- | ----------------------------------------------------------- | ------------------------------ |
-| **App ID**      | Numeric, at the top of the page                             | `FLEET_GITHUB_APP_ID`          |
+| Value | Where to find it | Environment variable |
+| - | - | - |
+| **App ID** | Numeric, at the top of the page | `FLEET_GITHUB_APP_ID` |
 | **Public link** | For example, `https://github.com/apps/acme-langsmith-fleet` | `FLEET_GITHUB_APP_PUBLIC_LINK` |
-| App slug        | Last path segment of the public link                        | `FLEET_GITHUB_APP_SLUG`        |
-| **Client ID**   | Under **About**                                             | `FLEET_GITHUB_APP_CLIENT_ID`   |
+| App slug | Last path segment of the public link | `FLEET_GITHUB_APP_SLUG` |
+| **Client ID** | Under **About** | `FLEET_GITHUB_APP_CLIENT_ID` |
 
 ### Generate a client secret
 Under **Client secrets**, click **Generate a new client secret** and copy the value. This is `FLEET_GITHUB_APP_CLIENT_SECRET`. GitHub only shows it once.
@@ -829,11 +829,11 @@ Sandboxes require JuiceFS-backed shared storage. You must provide:
 
 Use these object storage backends for `sandboxes.juicefs.storage` and `sandboxes.juicefs.bucket`:
 
-| **Platform** | **Storage value** | **Bucket format**                                                                           |
-| ------------ | ----------------- | ------------------------------------------------------------------------------------------- |
-| AWS          | `s3`              | Region-explicit HTTPS S3 endpoint, such as `https://bucket-name.s3.us-west-2.amazonaws.com` |
-| GCP          | `gs`              | GCS URL, such as `gs://bucket-name`                                                         |
-| Azure        | `wasb`            | Azure Blob Storage URL, such as `https://container-name.core.windows.net`                   |
+| **Platform** | **Storage value** | **Bucket format** |
+| - | - | - |
+| AWS | `s3` | Region-explicit HTTPS S3 endpoint, such as `https://bucket-name.s3.us-west-2.amazonaws.com` |
+| GCP | `gs` | GCS URL, such as `gs://bucket-name` |
+| Azure | `wasb` | Azure Blob Storage URL, such as `https://container-name.core.windows.net` |
 
 Do not use object-store subpaths in `sandboxes.juicefs.name`. Use a flat name, such as `sandbox-juicefs`. JuiceFS stores objects under that name inside the configured bucket.
 
@@ -869,10 +869,10 @@ The sandbox egress authentication proxy uses this CA for TLS interception and cr
 
 The chart supports two proxy CA modes:
 
-| Mode              | Use when                                                                                                                                   |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `generatedSecret` | You want Helm to create a self-signed CA Secret. This is the default.                                                                      |
-| `existingSecret`  | You manage the CA Secret outside the LangSmith chart. The Secret can be created manually, by cert-manager, or by another external process. |
+| Mode | Use when |
+| - | - |
+| `generatedSecret` | You want Helm to create a self-signed CA Secret. This is the default. |
+| `existingSecret` | You manage the CA Secret outside the LangSmith chart. The Secret can be created manually, by cert-manager, or by another external process. |
 
 In GitOps workflows that render manifests without live cluster access, prefer `existingSecret`. The `generatedSecret` mode uses Helm's live `lookup` behavior to reuse the generated Secret on upgrades; pure render workflows cannot read the live Secret and may produce new cert material on each render.
 
@@ -1105,7 +1105,7 @@ Sandboxes are not proactively restarted. They start again when a user or API act
 ## Enable Engine
 
 > [!NOTE]
-> Self-hosted deployments require LangSmith Helm chart `0.16.0` or later and a license that includes the Engine entitlement. Engine is licensed separately and meters its own usage in LCUs. [Contact our sales team](https://www.langchain.com/contact-sales) to have it added to your order.
+> Self-hosted deployments require LangSmith Helm chart `0.16.0` or later and a license that includes the Engine entitlement. Engine is licensed separately and meters its own usage in LSUs. [Contact our sales team](https://www.langchain.com/contact-sales) to have it added to your order.
 
 [Engine](../engine-overview.md) watches production traces, clusters recurring failures into issues, diagnoses each issue, and proposes fixes. Engine is disabled by default.
 

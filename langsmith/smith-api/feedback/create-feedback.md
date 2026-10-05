@@ -10,8 +10,10 @@ tags: [docs, langsmith, smith-api, feedback, create-feedback]
 
 > Create a new feedback.
 
-`session_id` is required: it identifies the tracing project the feedback
-belongs to.
+`session_id` identifies the tracing project the feedback belongs to. It is
+required unless the feedback is addressed by `address`, or by `agent_id` and
+`agent_environment`, which name that project through an Agent environment
+that already exists.
 
 ## OpenAPI
 
@@ -179,11 +181,19 @@ paths:
       tags:
         - feedback
       summary: Create feedback
-      description: |-
+      description: >-
         Create a new feedback.
 
-        `session_id` is required: it identifies the tracing project the feedback
-        belongs to.
+        `session_id` identifies the tracing project the feedback belongs to. It
+        is
+
+        required unless the feedback is addressed by `address`, or by `agent_id`
+        and
+
+        `agent_environment`, which name that project through an Agent
+        environment
+
+        that already exists.
       operationId: create_feedback_api_v1_feedback_post
       requestBody:
         required: true
@@ -198,6 +208,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FeedbackSchema'
+        '400':
+          description: >-
+            agent_id or agent_environment is invalid, or no Agent environment
+            matches them. Feedback does not create one.
+        '403':
+          description: >-
+            The feedback key is reserved, or Agent addressing is not enabled for
+            this workspace.
+        '409':
+          description: >-
+            The addressed Agent is archived, or its environment is bound to a
+            tracing project that is not Agent-owned.
         '422':
           description: Validation Error
           content:
@@ -278,8 +300,48 @@ components:
             - type: 'null'
           title: Session Id
           description: >-
-            Required. The ID of the tracing project (session) the feedback
-            belongs to.
+            Required unless the feedback is addressed by agent_id and
+            agent_environment. The ID of the tracing project (session) the
+            feedback belongs to.
+        agent_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Agent Id
+          description: >-
+            Beta. Only supported in workspaces where Agent addressing is
+            enabled; other workspaces get a 403. The Agent's id, not a UUID: 1
+            to 63 lowercase ASCII letters, digits, or hyphens, starting with a
+            letter and ending with a letter or digit (e.g. support-agent).
+            Addresses the tracing project through an Agent instead of
+            session_id. Sent together with agent_environment, and never
+            alongside session_id. The Agent and the environment must already
+            exist; sending feedback does not create them.
+        agent_environment:
+          anyOf:
+            - type: string
+              enum:
+                - LOCAL
+                - DEVELOPMENT
+                - STAGING
+                - PRODUCTION
+            - type: 'null'
+          title: Agent Environment
+          description: >-
+            Beta. Only supported in workspaces where Agent addressing is
+            enabled; other workspaces get a 403. The Agent environment whose
+            tracing project the feedback belongs to. Matched case-insensitively.
+            Sent together with agent_id.
+        address:
+          allOf:
+            - $ref: '#/components/schemas/address.AgentAddress'
+          description: >-
+            Beta. Only supported in workspaces where Agent addressing is
+            enabled; other workspaces get a 403. Addresses the tracing project
+            through an Agent environment instead of session_id. Never combined
+            with agent_id, agent_environment, or session_id. The Agent and the
+            environment must already exist; sending feedback does not create
+            them.
         trace_id:
           anyOf:
             - type: string
@@ -315,14 +377,10 @@ components:
               discriminator:
                 propertyName: type
                 mapping:
-                  api:
-                    $ref: '#/components/schemas/APIFeedbackSource'
-                  app:
-                    $ref: '#/components/schemas/AppFeedbackSource'
-                  auto_eval:
-                    $ref: '#/components/schemas/AutoEvalFeedbackSource'
-                  model:
-                    $ref: '#/components/schemas/ModelFeedbackSource'
+                  api: '#/components/schemas/APIFeedbackSource'
+                  app: '#/components/schemas/AppFeedbackSource'
+                  auto_eval: '#/components/schemas/AutoEvalFeedbackSource'
+                  model: '#/components/schemas/ModelFeedbackSource'
             - type: 'null'
           title: Feedback Source
         feedback_config:
@@ -465,6 +523,35 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    address.AgentAddress:
+      type: object
+      required:
+        - environment
+        - id
+        - kind
+      properties:
+        environment:
+          description: '`environment` is the Agent environment.'
+          type: string
+          enum:
+            - LOCAL
+            - DEVELOPMENT
+            - STAGING
+            - PRODUCTION
+          example: PRODUCTION
+        id:
+          description: '`id` is the Agent''s user-assigned id.'
+          type: string
+          maxLength: 63
+          minLength: 1
+          example: support-agent
+          pattern: ^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$
+        kind:
+          enum:
+            - AGENT
+          type: string
+          x-stainless-const: true
+      additionalProperties: false
     AppFeedbackSource:
       properties:
         type:

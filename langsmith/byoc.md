@@ -27,17 +27,17 @@ BYOC is generally available (GA) on AWS. Support for additional cloud providers 
 
 You can deploy LangSmith BYOC in any of the following AWS regions:
 
-| Area       | AWS regions                                                                                            |
-| ---------- | ------------------------------------------------------------------------------------------------------ |
-| **US**     | `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`                                                     |
-| **Canada** | `ca-central-1`                                                                                         |
-| **EU**     | `eu-central-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`, `eu-north-1`                                    |
-| **APAC**   | `ap-south-1`, `ap-northeast-1`, `ap-northeast-2`, `ap-northeast-3`, `ap-southeast-1`, `ap-southeast-2` |
+| Area | AWS regions |
+| - | - |
+| **US** | `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2` |
+| **Canada** | `ca-central-1` |
+| **EU** | `eu-central-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`, `eu-north-1` |
+| **APAC** | `ap-south-1`, `ap-northeast-1`, `ap-northeast-2`, `ap-northeast-3`, `ap-southeast-1`, `ap-southeast-2` |
 
 The control plane runs in `us-east-2` regardless of where you place your data planes. If you provision a data plane outside the US, your sensitive application data stays in that region while control plane metadata remains in the US:
 
-| Control plane (US)                                                             | Data plane (your region)                                                                                                     |
-| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| Control plane (US) | Data plane (your region) |
+| - | - |
 | Users, roles, billing, organization configuration, SSO configuration, API keys | Traces, experiments, datasets, insights runs, annotation queues, workspace secrets, and all other sensitive application data |
 
 ## Available features
@@ -55,7 +55,7 @@ The following features are supported:
 * **[LangSmith MCP](langsmith-remote-mcp.md)**: Connect MCP-compatible clients to LangSmith to query data.
 * **[Fleet](fleet/index.md)**: Build and run no-code agents from templates, connectors, and channels.
 * **[SmithDB](smithdb-sdk-migration.md)**: The purpose-built observability backend for trace data, persisting to S3 in your account.
-* **[Engine](engine-overview.md)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces. Engine uses the LangSmith Intelligence service for model work. See the [self-hosted Engine architecture](engine-self-hosted.md#how-it-works) for details.
+* **[Engine](engine-overview.md)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces. Engine runs its models on the LangSmith Intelligence service or on your own model providers. See [Choose how Engine runs its models](engine-self-hosted.md#choose-how-engine-runs-its-models) for details.
 
 The following features are planned but not yet supported:
 

@@ -289,20 +289,13 @@ components:
             discriminator:
               propertyName: chart_type
               mapping:
-                bar:
-                  $ref: '#/components/schemas/SingleCustomChartResponse'
-                kpi:
-                  $ref: '#/components/schemas/SingleCustomChartResponse'
-                line:
-                  $ref: '#/components/schemas/SingleCustomChartResponse'
-                pie:
-                  $ref: '#/components/schemas/SingleCustomChartResponse'
-                table:
-                  $ref: '#/components/schemas/SingleCustomChartResponse'
-                text:
-                  $ref: '#/components/schemas/CustomTextBlock'
-                top-k:
-                  $ref: '#/components/schemas/SingleCustomChartResponse'
+                bar: '#/components/schemas/SingleCustomChartResponse'
+                kpi: '#/components/schemas/SingleCustomChartResponse'
+                line: '#/components/schemas/SingleCustomChartResponse'
+                pie: '#/components/schemas/SingleCustomChartResponse'
+                table: '#/components/schemas/SingleCustomChartResponse'
+                text: '#/components/schemas/CustomTextBlock'
+                top-k: '#/components/schemas/SingleCustomChartResponse'
           type: array
           title: Charts
         sub_sections:

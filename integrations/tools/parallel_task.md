@@ -27,12 +27,12 @@ All four default to a `-fast` processor variant (2-5x faster than the correspond
 
 ### Integration details
 
-| Class                                                                                                          | Shape       | Default processor | Package                                                                            |
-| :------------------------------------------------------------------------------------------------------------- | :---------- | :---------------- | :--------------------------------------------------------------------------------- |
-| [`ParallelTaskRunTool`](https://reference.langchain.com/python/langchain-parallel/tasks/ParallelTaskRunTool)   | `BaseTool`  | `lite-fast`       | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |
-| [`ParallelDeepResearch`](https://reference.langchain.com/python/langchain-parallel/tasks/ParallelDeepResearch) | `Runnable`  | `pro-fast`        | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |
-| [`ParallelTaskGroup`](https://reference.langchain.com/python/langchain-parallel/tasks/ParallelTaskGroup)       | Plain class | `lite-fast`       | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |
-| [`ParallelEnrichment`](https://reference.langchain.com/python/langchain-parallel/tasks/ParallelEnrichment)     | `Runnable`  | `core-fast`       | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |
+| Class | Shape | Default processor | Package |
+| :- | :- | :- | :- |
+| [`ParallelTaskRunTool`](https://reference.langchain.com/python/langchain-parallel/tasks/ParallelTaskRunTool) | `BaseTool` | `lite-fast` | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |
+| [`ParallelDeepResearch`](https://reference.langchain.com/python/langchain-parallel/tasks/ParallelDeepResearch) | `Runnable` | `pro-fast` | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |
+| [`ParallelTaskGroup`](https://reference.langchain.com/python/langchain-parallel/tasks/ParallelTaskGroup) | Plain class | `lite-fast` | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |
+| [`ParallelEnrichment`](https://reference.langchain.com/python/langchain-parallel/tasks/ParallelEnrichment) | `Runnable` | `core-fast` | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |
 
 ## Setup
 

@@ -26,15 +26,15 @@ You can find information about OpenAI's latest models, their costs, context wind
 
 ### Integration details
 
-| Class                                                                                               | Package                                                                        | Serializable |                           JS/TS Support                           |                                                                                                  Downloads                                                                                                 |                                                                                                                 Latest Version                                                                                                                 |
-| :-------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :----------: | :---------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) | [`langchain-openai`](https://reference.langchain.com/python/langchain-openai/) |     beta     | ✅ [(npm)](https://js.langchain.com/docs/integrations/chat/openai) | <a href="https://pypi.org/project/langchain-openai/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-openai/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-openai/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-openai?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| Class | Package | Serializable | JS/TS Support | Downloads | Latest Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) | [`langchain-openai`](https://reference.langchain.com/python/langchain-openai/) | beta | ✅ [(npm)](https://js.langchain.com/docs/integrations/chat/openai) | <a href="https://pypi.org/project/langchain-openai/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-openai/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-openai/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-openai?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | Image input | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |      ✅      |      ✅      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
 
 ## Setup
 
@@ -1042,6 +1042,8 @@ The weather in San Francisco is sunny and 72°F
 
 </details>
 
+To add tools at a specific point in the conversation without tool search, see [Add tools mid-conversation](#add-tools-mid-conversation).
+
 ### Computer use
 
 [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) supports the `"computer-use-preview"` model, which is a specialized model for the built-in computer use tool. To enable, pass a [computer use tool](https://platform.openai.com/docs/guides/tools-computer-use) as you would pass another tool.
@@ -1592,6 +1594,44 @@ response = llm.invoke(
 > If you're getting empty responses from reasoning models like `gpt-5-nano`, this is likely due to restrictive token limits. The model uses tokens for internal reasoning and may not have any left for the final output.
 >
 > Ensure `max_tokens` is set to `None` or increase the token limit to allow sufficient tokens for both reasoning and output generation.
+
+### Add tools mid-conversation
+
+> [!NOTE]
+> `additional_tools` requires `langchain-openai>=1.6.5`.
+
+Use an [`additional_tools`](https://developers.openai.com/api/docs/guides/tools-tool-search#add-tools-at-a-specific-point-in-the-input) content block to make tools available from a point in the conversation onward. This is useful when your application loads tools outside the [tool search](#tool-search) flow. Put the block in a [`SystemMessage`](https://reference.langchain.com/python/langchain-core/messages/system/SystemMessage):
+
+```python
+from langchain.messages import HumanMessage, SystemMessage
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(model="gpt-6-astra", use_responses_api=True)
+
+response = llm.invoke(
+    [
+        HumanMessage("What time is it?"),
+        SystemMessage(
+            [
+                {
+                    "type": "additional_tools",  # [!code highlight]
+                    "role": "developer",  # [!code highlight]
+                    "tools": [
+                        {
+                            "type": "function",
+                            "name": "get_time",
+                            "description": "Get the current time.",
+                            "parameters": {"type": "object", "properties": {}},
+                        }
+                    ],
+                },
+            ]
+        ),
+    ]
+)
+```
+
+The block requires the Responses API, so set `use_responses_api=True`. On Chat Completions, or on a message other than a `SystemMessage`, `ChatOpenAI` raises a `ValueError`. You can also write the block wrapped in a `non_standard` block, which is how `content_blocks` returns it.
 
 ***
 

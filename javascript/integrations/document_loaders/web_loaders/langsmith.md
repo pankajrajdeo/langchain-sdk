@@ -16,15 +16,15 @@ This notebook provides a quick overview for getting started with `LangSmithLoade
 
 ### Integration details
 
-| Class                                                                                                                     | Package                                                            | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/document_loaders/langsmith) |
-| :------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------- | :---: | :----------: | :-------------------------------------------------------------------------------------: |
-| [`LangSmithLoader`](https://reference.langchain.com/javascript/langchain-core/document_loaders/langsmith/LangSmithLoader) | [`@langchain/core`](https://www.npmjs.com/package/@langchain/core) |   ✅   |     beta     |                                            ✅                                            |
+| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/document_loaders/langsmith) |
+| :- | :- | :-: | :-: | :-: |
+| [`LangSmithLoader`](https://reference.langchain.com/javascript/langchain-core/document_loaders/langsmith/LangSmithLoader) | [`@langchain/core`](https://www.npmjs.com/package/@langchain/core) | ✅ | beta | ✅ |
 
 ### Loader features
 
-|       Source      | Web Loader | Node Envs Only |
-| :---------------: | :--------: | :------------: |
-| `LangSmithLoader` |      ✅     |        ❌       |
+| Source | Web Loader | Node Envs Only |
+| :-: | :-: | :-: |
+| `LangSmithLoader` | ✅ | ❌ |
 
 ## Setup
 

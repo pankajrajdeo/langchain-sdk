@@ -29,12 +29,12 @@ Scan your tracing projects on a schedule to surface, prioritize, and diagnose re
 
 ## How Engine runs
 
-Engine scans each connected tracing project on a dynamic schedule tuned to balance cost and performance, clustering and prioritizing issues by severity. It uses LangChain-managed inference and charges in LangChain Compute Units (LCUs). For setup, costs, and the full issue workflow, see [Find and fix your agent's issues](engine.md). For how Engine handles your data, its GitHub and model subprocessor controls, and its compliance posture, see [Engine security](engine-security.md). For how Engine runs in a self-hosted deployment, see [Engine on self-hosted](engine-self-hosted.md). To test a deployment with synthetic requests before failures reach production, see [Proactively detect issues with Red Teaming](engine.md#beta-proactively-detect-issues-with-red-teaming).
+Engine scans each connected tracing project on a dynamic schedule tuned to balance cost and performance, clustering and prioritizing issues by severity. It uses LangChain-managed inference and charges in LangChain Standard Units (LSUs). For setup, costs, and the full issue workflow, see [Find and fix your agent's issues](engine.md). For how Engine handles your data, its GitHub and model subprocessor controls, and its compliance posture, see [Engine security](engine-security.md). For how Engine runs in a self-hosted deployment, see [Engine on self-hosted](engine-self-hosted.md). To test a deployment with synthetic requests before failures reach production, see [Proactively detect issues with Red Teaming](engine.md#beta-proactively-detect-issues-with-red-teaming).
 
 ## Get started
 
 #### [Set up Engine](engine.md#set-up-engine)
-Enable Engine for your organization and configure it for a tracing project.
+Enable Engine for your organization and configure it for a tracing project or agent environment.
 
 #### [Engine notifications](engine-notifications.md)
 Send detected issues to Slack or to your incident-management, paging, or chat tools through webhooks.

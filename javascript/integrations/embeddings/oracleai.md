@@ -24,9 +24,9 @@ This guide demonstrates how to generate embeddings for your content using `Oracl
 
 ### Integration details
 
-| Class              | Package                                                                                  | Local | [PY support](https://python.langchain.com/docs/integrations/embeddings/oracleai/) |
-| :----------------- | :--------------------------------------------------------------------------------------- | :---: | :-------------------------------------------------------------------------------: |
-| `OracleEmbeddings` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) |   ✅   |                                         ✅                                         |
+| Class | Package | Local | [PY support](https://python.langchain.com/docs/integrations/embeddings/oracleai/) |
+| :- | :- | :-: | :-: |
+| `OracleEmbeddings` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) | ✅ | ✅ |
 
 ## Setup
 

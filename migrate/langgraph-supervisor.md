@@ -50,12 +50,12 @@ If the codebase needs static subgraph discovery, checkpoint namespaces per tier,
 
 ## Summary of changes
 
-| langgraph-supervisor                                    | Recommended replacement                                                                                                                                                                                                |
-| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `create_supervisor` with worker agents as graph nodes   | [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) with subagents wrapped as [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) functions |
-| `output_mode` for message history                       | Format subagent output in the tool wrapper (see [subagent outputs](../langchain/multi-agent/subagents.md#subagent-outputs))                                                                                      |
-| `create_handoff_tool` for custom routing                | Custom [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) that calls `subagent.invoke(...)`                                                                                           |
-| Nested supervisors (`create_supervisor` of supervisors) | A subagent wrapped as a [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) that calls other subagents                                                                                 |
+| langgraph-supervisor | Recommended replacement |
+| - | - |
+| `create_supervisor` with worker agents as graph nodes | [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) with subagents wrapped as [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) functions |
+| `output_mode` for message history | Format subagent output in the tool wrapper (see [subagent outputs](../langchain/multi-agent/subagents.md#subagent-outputs)) |
+| `create_handoff_tool` for custom routing | Custom [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) that calls `subagent.invoke(...)` |
+| Nested supervisors (`create_supervisor` of supervisors) | A subagent wrapped as a [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) that calls other subagents |
 
 ## Basic migration
 

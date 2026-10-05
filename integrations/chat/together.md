@@ -18,15 +18,15 @@ This page will help you get started with Together AI [chat models](../../langcha
 
 ### Integration details
 
-| Class                                                                                                | Package                                                                           | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/togetherai) |                                              Downloads                                              |                                              Version                                             |
-| :--------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- | :----------: | :----------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
-| [`ChatTogether`](https://reference.langchain.com/python/langchain-together/chat_models/ChatTogether) | [`langchain-together`](https://reference.langchain.com/python/langchain-together) |     beta     |                                     ✅                                    | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-together?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-together?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/togetherai) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatTogether`](https://reference.langchain.com/python/langchain-together/chat_models/ChatTogether) | [`langchain-together`](https://reference.langchain.com/python/langchain-together) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-together?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-together?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                                  ✅                                  |       ❌      |                            ✅                            |                              ✅                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
 
 ## Setup
 

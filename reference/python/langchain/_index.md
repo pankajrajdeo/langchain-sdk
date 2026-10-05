@@ -7,11 +7,11 @@ tags: [index, reference, python, langchain]
 
 # reference/python/langchain
 
-11 pages here, 586 pages including subdirectories.
+11 pages here, 587 pages including subdirectories.
 
 ## Directories
 
-- [agents/](agents/_index.md) - 522 pages
+- [agents/](agents/_index.md) - 523 pages
 - [chat_models/](chat_models/_index.md) - 4 pages
 - [embeddings/](embeddings/_index.md) - 2 pages
 - [mcp/](mcp/_index.md) - 46 pages

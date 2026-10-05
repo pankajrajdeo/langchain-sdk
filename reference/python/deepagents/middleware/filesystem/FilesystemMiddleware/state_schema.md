@@ -15,9 +15,9 @@ tags: [reference, deepagents, middleware, filesystem, filesystemmiddleware, stat
 ## Signature
 
 ```python
-state_schema: type[FilesystemState] = cast('type[FilesystemState]', FilesystemState if _uses_state_backend(self.backend) else AgentState)
+state_schema: type[FilesystemState] = cast('type[FilesystemState]', _FilesystemBlobPayloadState if _uses_state_backend(self.backend) else _BlobPayloadState)
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/filesystem.py#L1790)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/filesystem.py#L1845)

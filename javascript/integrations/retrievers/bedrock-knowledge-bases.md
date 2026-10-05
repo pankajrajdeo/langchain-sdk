@@ -20,9 +20,9 @@ Knowledge Bases for Amazon Bedrock supports popular databases for vector storage
 
 ### Integration details
 
-| Retriever                                                                                                             | Self-host              | Cloud offering |     Package    | [Py support](https://python.langchain.com/docs/integrations/retrievers/bedrock/) |
-| :-------------------------------------------------------------------------------------------------------------------- | :--------------------- | :------------: | :------------: | :------------------------------------------------------------------------------: |
-| [AmazonKnowledgeBaseRetriever](https://reference.langchain.com/javascript/langchain-aws/AmazonKnowledgeBaseRetriever) | 🟠 (see details below) |        ✅       | @langchain/aws |                                         ✅                                        |
+| Retriever | Self-host | Cloud offering | Package | [Py support](https://python.langchain.com/docs/integrations/retrievers/bedrock/) |
+| :- | :- | :-: | :-: | :-: |
+| [AmazonKnowledgeBaseRetriever](https://reference.langchain.com/javascript/langchain-aws/AmazonKnowledgeBaseRetriever) | 🟠 (see details below) | ✅ | @langchain/aws | ✅ |
 
 > AWS Knowledge Base Retriever can be 'self hosted' in the sense you can run it on your own AWS infrastructure. However it is not possible to run on another cloud provider or on-premises.
 

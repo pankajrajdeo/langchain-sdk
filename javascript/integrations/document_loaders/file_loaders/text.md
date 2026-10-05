@@ -19,9 +19,9 @@ This notebook provides a quick overview for getting started with `TextLoader` [d
 
 ### Integration details
 
-| Class                                                                                                              | Package                                              | Compatibility | Local | PY support |
-| :----------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :-----------: | :---: | :--------: |
-| [`TextLoader`](https://reference.langchain.com/javascript/langchain-core/document_loaders/base/BaseDocumentLoader) | [langchain](https://www.npmjs.com/package/langchain) |   Node-only   |   ✅   |      ❌     |
+| Class | Package | Compatibility | Local | PY support |
+| :- | :- | :-: | :-: | :-: |
+| [`TextLoader`](https://reference.langchain.com/javascript/langchain-core/document_loaders/base/BaseDocumentLoader) | [langchain](https://www.npmjs.com/package/langchain) | Node-only | ✅ | ❌ |
 
 ## Setup
 

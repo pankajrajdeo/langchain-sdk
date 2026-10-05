@@ -49,16 +49,32 @@ In LangSmith, a trajectory is a projection over the traces in a thread. It conta
 
 ### Compare traces, threads, and trajectories
 
-|                   | Trace                                                  | Thread                                                                                | Trajectory                                                                      |
-| ----------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Shape             | Tree of runs                                           | Sequence of traces                                                                    | Flat, ordered list of messages                                                  |
-| Contains          | Every run, with full inputs and outputs                | Every run in every linked trace                                                       | Every message in every linked trace, deduplicated                               |
+| | Trace | Thread | Trajectory |
+| - | - | - | - |
+| Shape | Tree of runs | Sequence of traces | Flat, ordered list of messages |
+| Contains | Every run, with full inputs and outputs | Every run in every linked trace | Every message in every linked trace, deduplicated |
 | Reach for it when | You are debugging why one operation failed or ran slow | You are inspecting how the agent behaved across turns, with timing and nesting intact | You are reading what was exchanged in the session, without the execution detail |
 
 > [!NOTE]
 > Use **[Chat](chat.md)** to analyze traces, runs, and threads. Chat helps you understand agent performance, debug issues, and gain insights from conversation threads without manually digging through data.
 
-### Projects
+### Trace containers
+
+How LangSmith groups traces depends on which information architecture your workspace uses.
+
+#### Agents and environments
+
+> [!NOTE]
+> **Agent-based workspaces ([beta](release-stages.md)).** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](#tracing-projects).
+
+An *agent* collects the traces of a single application, and it is the unit LangSmith organizes everything else around. An agent's traces divide across *environments* drawn from a fixed set of four: Production, Staging, Development, and Local. Traces land in one environment of one agent, so a query about production behavior never has to exclude test traffic by hand.
+
+[Log traces to an agent](log-traces-to-agent.md).
+
+#### Tracing projects
+
+> [!NOTE]
+> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based, which is in [beta](release-stages.md). Skip this section and read [Agents](agents.md).
 
 A *project* is a container for all the traces related to a single application or service.
 

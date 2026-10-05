@@ -42,12 +42,12 @@ pip install deepagents browserbase stagehand langchain-openai python-dotenv
 
 The recommended pattern uses four tools:
 
-| Tool                           | Description                                       | When to use                             |
-| ------------------------------ | ------------------------------------------------- | --------------------------------------- |
-| `browserbase_search`           | Web search via Browserbase Search API             | Discovery — always try this first       |
-| `browserbase_fetch`            | Headless page retrieval via Browserbase Fetch API | Static pages, quick reads, no JS needed |
-| `browserbase_rendered_extract` | Full browser session via Stagehand                | JS-heavy or rendered pages (read-only)  |
-| `browserbase_interactive_task` | Stagehand agent for multi-step browser tasks      | Clicks, form fills, login flows         |
+| Tool | Description | When to use |
+| - | - | - |
+| `browserbase_search` | Web search via Browserbase Search API | Discovery — always try this first |
+| `browserbase_fetch` | Headless page retrieval via Browserbase Fetch API | Static pages, quick reads, no JS needed |
+| `browserbase_rendered_extract` | Full browser session via Stagehand | JS-heavy or rendered pages (read-only) |
+| `browserbase_interactive_task` | Stagehand agent for multi-step browser tasks | Clicks, form fills, login flows |
 
 The cheap tools (`search`, `fetch`) live on the main planner. The expensive browser tools live on the `browser-specialist` subagent, isolating noisy session output from the main thread.
 

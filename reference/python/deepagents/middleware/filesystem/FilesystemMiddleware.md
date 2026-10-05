@@ -48,6 +48,7 @@ FilesystemMiddleware(
     max_execute_timeout: int = 3600,
     grep_max_count: int | None = 1000,
     tools: list[FsToolName] | Literal['all'] | None = None,
+    offload_binary_content: bool = False,
     _permissions: list[FilesystemPermission] | None = None,
 )
 ```
@@ -104,6 +105,7 @@ __init__(
     max_execute_timeout: int = 3600,
     grep_max_count: int | None = 1000,
     tools: list[FsToolName] | Literal['all'] | None = None,
+    offload_binary_content: bool = False,
     _permissions: list[FilesystemPermission] | None = None,
 ) -> None
 ```
@@ -118,6 +120,7 @@ __init__(
 | `max_execute_timeout` | `int` |
 | `grep_max_count` | `int \| None` |
 | `tools` | `list[FsToolName] \| Literal['all'] \| None` |
+| `offload_binary_content` | `bool` |
 | `_permissions` | `list[FilesystemPermission] \| None` |
 
 ## Properties
@@ -136,4 +139,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/bb49cf50d3450a3bbebe8d25240cb7ef6379bd0d/libs/deepagents/deepagents/middleware/filesystem.py#L1649)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/filesystem.py#L1693)

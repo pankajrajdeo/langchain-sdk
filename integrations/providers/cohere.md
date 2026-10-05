@@ -33,13 +33,13 @@ Get a [Cohere api key](https://dashboard.cohere.ai/) and set it as an environmen
 
 ## Cohere langchain integrations
 
-| API              | description                      | Endpoint docs                                          | Import                                                                       | Example usage                                                       |
-| ---------------- | -------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Chat             | Build chat bots                  | [chat](https://docs.cohere.com/reference/chat)         | `from langchain_cohere import ChatCohere`                                    | [cohere.ipynb](../chat/cohere.md)                |
-| LLM              | Generate text                    | [generate](https://docs.cohere.com/reference/generate) | `from langchain_cohere.llms import Cohere`                                   | [cohere.ipynb](../llms/cohere.md)                |
-| RAG Retriever    | Connect to external data sources | [chat + rag](https://docs.cohere.com/reference/chat)   | `from langchain_classic.retrievers import CohereRagRetriever`                | [cohere.ipynb](../retrievers/cohere.md)          |
-| Text Embedding   | Embed strings to vectors         | [embed](https://docs.cohere.com/reference/embed)       | `from langchain_cohere import CohereEmbeddings`                              | [cohere.ipynb](../embeddings/cohere.md)          |
-| Rerank Retriever | Rank strings based on relevance  | [rerank](https://docs.cohere.com/reference/rerank)     | `from langchain_classic.retrievers.document_compressors import CohereRerank` | [cohere.ipynb](../retrievers/cohere-reranker.md) |
+| API | description | Endpoint docs | Import | Example usage |
+| - | - | - | - | - |
+| Chat | Build chat bots | [chat](https://docs.cohere.com/reference/chat) | `from langchain_cohere import ChatCohere` | [cohere.ipynb](../chat/cohere.md) |
+| LLM | Generate text | [generate](https://docs.cohere.com/reference/generate) | `from langchain_cohere.llms import Cohere` | [cohere.ipynb](../llms/cohere.md) |
+| RAG Retriever | Connect to external data sources | [chat + rag](https://docs.cohere.com/reference/chat) | `from langchain_classic.retrievers import CohereRagRetriever` | [cohere.ipynb](../retrievers/cohere.md) |
+| Text Embedding | Embed strings to vectors | [embed](https://docs.cohere.com/reference/embed) | `from langchain_cohere import CohereEmbeddings` | [cohere.ipynb](../embeddings/cohere.md) |
+| Rerank Retriever | Rank strings based on relevance | [rerank](https://docs.cohere.com/reference/rerank) | `from langchain_classic.retrievers.document_compressors import CohereRerank` | [cohere.ipynb](../retrievers/cohere-reranker.md) |
 
 ## Quick copy examples
 

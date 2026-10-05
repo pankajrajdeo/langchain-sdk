@@ -214,15 +214,15 @@ paths:
           name: min_start_time
           in: query
           schema:
-            type: string
             format: date-time
+            type: string
             title: Min Start Time
         - description: Trace started at or before this time
           name: max_start_time
           in: query
           schema:
-            type: string
             format: date-time
+            type: string
             title: Max Start Time
       responses:
         '200':

@@ -158,14 +158,14 @@ Learn more about [runs and traces in the Observability concepts](observability-c
 
 Run evaluators using any of the following:
 
-* The [Evaluators](evaluators.md) page, to attach them to tracing projects or datasets
+* The [Evaluators](evaluators.md) page, to attach them to tracing projects, agent environments, or datasets
 * The [Playground](prompt-engineering-concepts.md#playground)
 * The LangSmith SDK ([Python](https://docs.smith.langchain.com/reference/python/reference) and [TypeScript](https://docs.smith.langchain.com/reference/js))
-* [Rules](rules.md), to run them automatically on tracing projects or datasets
+* [Rules](rules.md), to run them automatically on tracing projects, agent environments, or datasets
 
 ### Attaching an evaluator to a tracing project or dataset
 
-A single evaluator can be attached to many tracing projects and datasets. Configuration like sampling rate, filters, and [spend limits](evaluator-spend.md) is set per attached project or dataset, not per evaluator. View an evaluator's attached projects and datasets under its **Projects & Datasets** tab.
+A single evaluator can be attached to many tracing projects, agent environments, and datasets. Configuration like sampling rate, filters, and [spend limits](evaluator-spend.md) is set per attached project or dataset, not per evaluator. View an evaluator's attachments under its **Projects & Datasets** tab, called **Environments & Datasets** in an agent-based workspace.
 
 ### Evaluator inputs
 
@@ -341,15 +341,15 @@ Evaluations can be written using standard testing tools like [pytest](pytest.md)
 
 The following table summarizes the key differences between offline and online evaluations:
 
-|                       | **Offline Evaluation**                                      | **Online Evaluation**                                                             |
-| --------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **Runs on**           | Dataset (Examples)                                          | Tracing Project (Runs/Threads)                                                    |
-| **Data access**       | Inputs, Outputs, Reference Outputs                          | Inputs, Outputs only                                                              |
-| **When to use**       | Pre-deployment, during development                          | Production, post-deployment                                                       |
-| **Primary use cases** | Benchmarking, unit testing, regression testing, backtesting | Real-time monitoring, production feedback, anomaly detection                      |
-| **Evaluation timing** | Batch processing on curated test sets                       | Real-time or near real-time on live traffic                                       |
-| **Setup location**    | Evaluation tab (SDK, UI, Playground)                        | [Observability tab](online-evaluations-llm-as-judge.md) (automated rules) |
-| **Data requirements** | Requires dataset curation                                   | No dataset needed, evaluates live traces                                          |
+| | **Offline Evaluation** | **Online Evaluation** |
+| - | - | - |
+| **Runs on** | Dataset (Examples) | Tracing Project (Runs/Threads) |
+| **Data access** | Inputs, Outputs, Reference Outputs | Inputs, Outputs only |
+| **When to use** | Pre-deployment, during development | Production, post-deployment |
+| **Primary use cases** | Benchmarking, unit testing, regression testing, backtesting | Real-time monitoring, production feedback, anomaly detection |
+| **Evaluation timing** | Batch processing on curated test sets | Real-time or near real-time on live traffic |
+| **Setup location** | Evaluation tab (SDK, UI, Playground) | [Observability tab](online-evaluations-llm-as-judge.md) (automated rules) |
+| **Data requirements** | Requires dataset curation | No dataset needed, evaluates live traces |
 
 ***
 

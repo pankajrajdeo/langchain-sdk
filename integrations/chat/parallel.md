@@ -21,24 +21,24 @@ tags: [docs, integrations, chat, parallel]
 
 ### Integration details
 
-| Class                                                                                                | Package                                                                            | Serializable | JS/TS Support |                                                                                                    Downloads                                                                                                   |                                                                                                                   Latest Version                                                                                                                   |
-| :--------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- | :----------: | :-----------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ChatParallel`](https://reference.langchain.com/python/langchain-parallel/chat_models/ChatParallel) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ✅      |       ❌       | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-parallel/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| Class | Package | Serializable | JS/TS Support | Downloads | Latest Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatParallel`](https://reference.langchain.com/python/langchain-parallel/chat_models/ChatParallel) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ✅ | ❌ | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-parallel/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | Image input | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ❌                      |                      ✅ (research models)                     |      ❌      |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ❌                            |                              ❌                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ❌ | ✅ (research models) | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ |
 
 ### Choosing a model
 
-| Model   | Latency     | Web browsing | Citations | Structured output | Use when                                                      |
-| :------ | :---------- | :----------: | :-------: | :---------------: | :------------------------------------------------------------ |
-| `speed` | low         |       ❌      |     ❌     |         ❌         | Conversational answers from the model's parametric knowledge. |
-| `lite`  | medium      |       ✅      |     ✅     |         ✅         | Fact lookups with citations.                                  |
-| `base`  | medium-high |       ✅      |     ✅     |         ✅         | Mid-depth research with citations.                            |
-| `core`  | higher      |       ✅      |     ✅     |         ✅         | Multi-source research with citations.                         |
+| Model | Latency | Web browsing | Citations | Structured output | Use when |
+| :- | :- | :-: | :-: | :-: | :- |
+| `speed` | low | ❌ | ❌ | ❌ | Conversational answers from the model's parametric knowledge. |
+| `lite` | medium | ✅ | ✅ | ✅ | Fact lookups with citations. |
+| `base` | medium-high | ✅ | ✅ | ✅ | Mid-depth research with citations. |
+| `core` | higher | ✅ | ✅ | ✅ | Multi-source research with citations. |
 
 `speed` does not honor `response_format`, so `with_structured_output()` raises a clear error there. Use a research model when you need parsed pydantic output or per-field citations.
 

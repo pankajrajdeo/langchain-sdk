@@ -136,14 +136,7 @@ components:
             `DEDICATED_L`). Leave `null` to keep the current database tier.
       type: object
       title: DeploymentResourceTiersUpdateRequest
-      description: >-
-        Request body for updating a deployment's compute and database tiers
-        independently.
-
-        At least one of `compute_tier` or `database_tier` must be provided. A
-        field
-
-        left `null` keeps the deployment's current tier for that resource.
+      description: Request body for updating a deployment's scaling configuration.
     Deployment:
       properties:
         name:
@@ -323,25 +316,31 @@ components:
             The selected fixed resource tier for this deployment. Existing
             deployments without an explicit selection return the default tier
             for their deployment type. When compute and database tiers differ,
-            this reflects the compute tier.
+            this reflects the compute tier. Null when compute has a custom size.
         compute_tier:
           anyOf:
             - $ref: '#/components/schemas/DeploymentTier'
+            - type: string
+              const: LEGACY_CUSTOM
             - type: 'null'
           title: Compute Tier
           description: >-
             The selected fixed resource tier for this deployment's compute.
             Deployments without an explicit selection return the default tier
-            for their deployment type.
+            for their deployment type. `LEGACY_CUSTOM` means the compute has a
+            custom size that matches no tier.
         database_tier:
           anyOf:
             - $ref: '#/components/schemas/DeploymentTier'
+            - type: string
+              const: LEGACY_CUSTOM
             - type: 'null'
           title: Database Tier
           description: >-
             The selected fixed resource tier for this deployment's database.
             Deployments without an explicit selection return the default tier
-            for their deployment type.
+            for their deployment type. `LEGACY_CUSTOM` means the database has a
+            custom size that matches no tier.
       type: object
       required:
         - source

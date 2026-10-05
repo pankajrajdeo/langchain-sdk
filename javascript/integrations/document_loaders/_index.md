@@ -1,13 +1,13 @@
 ---
 title: "javascript/integrations/document_loaders"
-description: "Index of 2 pages and 2 subdirectories under javascript/integrations/document_loaders."
+description: "Index of 3 pages and 2 subdirectories under javascript/integrations/document_loaders."
 category: "index"
 tags: [index, javascript, integrations, document_loaders]
 ---
 
 # javascript/integrations/document_loaders
 
-2 pages here, 11 pages including subdirectories.
+3 pages here, 12 pages including subdirectories.
 
 ## Directories
 
@@ -17,4 +17,5 @@ tags: [index, javascript, integrations, document_loaders]
 ## Files
 
 - [File loader integrations](file_loaders.md) - Integrate with file loaders using LangChain JavaScript.
+- [Document loader integrations](index.md) - Integrate with document loaders using LangChain JavaScript.
 - [Web loader integrations](web_loaders.md) - Integrate with web loaders using LangChain JavaScript.

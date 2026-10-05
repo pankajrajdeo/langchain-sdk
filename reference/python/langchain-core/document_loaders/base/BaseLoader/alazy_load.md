@@ -24,4 +24,4 @@ alazy_load(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c5ab14d42a3e22865c9def909de0b11d70b0bbf0/libs/core/langchain_core/document_loaders/base.py#L102)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/document_loaders/base.py#L102)

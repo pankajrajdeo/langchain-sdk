@@ -20,15 +20,15 @@ This will help you get started with OCIModelDeployment [chat models](../../langc
 
 ### Integration details
 
-| Class                                                                                     | Package                                                    | Serializable | JS support |                                            Downloads                                           |                                           Version                                           |
-| :---------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :----------: | :--------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`ChatOCIModelDeployment`](https://github.com/oracle/langchain-oracle/tree/main/libs/oci) | [`langchain-oci`](https://pypi.org/project/langchain-oci/) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-oci?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-oci?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatOCIModelDeployment`](https://github.com/oracle/langchain-oracle/tree/main/libs/oci) | [`langchain-oci`](https://pypi.org/project/langchain-oci/) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-oci?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-oci?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                   depends                   |                            depends                           |                          depends                         |   depends   |   depends   |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| depends | depends | depends | depends | depends | ✅ | ✅ | ✅ | ✅ |
 
 Some model features, including tool calling, structured output, and multi-modal inputs, are depending on deployed model.
 

@@ -20,17 +20,17 @@ This page helps you get started with Groq [chat models](../../langchain/models.m
 
 ### Integration details
 
-| Class                                                                            | Package                                                            | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/groq) |                                            Downloads                                            |                                            Version                                           |
-| :------------------------------------------------------------------------------- | :----------------------------------------------------------------- | :----------: | :--------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
-| [`ChatGroq`](https://reference.langchain.com/javascript/langchain-groq/ChatGroq) | [`@langchain/groq`](https://www.npmjs.com/package/@langchain/groq) |       ❌      |                                    ✅                                   | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/groq?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/groq?style=flat-square\&label=%20&) |
+| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/groq) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatGroq`](https://reference.langchain.com/javascript/langchain-groq/ChatGroq) | [`@langchain/groq`](https://www.npmjs.com/package/@langchain/groq) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/groq?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/groq?style=flat-square\&label=%20&) |
 
 ### Model features
 
 See the links in the table headers below for guides on how to use specific features.
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :---------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------: | :---------------------------------------------------------: | :------------------------------------------------------------: |
-|                        ✅                        |                                 ✅                                |                               ❌                              |      ❌      |      ❌      |                               ✅                               |                              ✅                              |                                ✅                               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ## Setup
 

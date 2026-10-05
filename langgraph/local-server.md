@@ -210,7 +210,7 @@ Now that you have a LangGraph app running locally, take your journey further by 
 
 * [LangSmith](../langsmith/observability.md): Learn about foundational LangSmith concepts.
 
-* [SDK Reference](https://reference.langchain.com/python/langsmith/deployment/sdk/): Explore the SDK API Reference.
+* [SDK Reference](https://reference.langchain.com/python/langsmith/deployment-sdk): Explore the SDK API Reference.
 
 ***
 

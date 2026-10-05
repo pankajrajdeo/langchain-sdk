@@ -18,9 +18,9 @@ The `composio-langchain` package wraps Composio tools as LangChain tools and wor
 
 ### Integration details
 
-| Class      | Package                                                              | Serializable | JS support |                                              Version                                             |
-| :--------- | :------------------------------------------------------------------- | :----------: | :--------: | :----------------------------------------------------------------------------------------------: |
-| `Composio` | [`composio-langchain`](https://pypi.org/project/composio-langchain/) |      No      |     Yes    | ![PyPI - Version](https://img.shields.io/pypi/v/composio-langchain?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS support | Version |
+| :- | :- | :-: | :-: | :-: |
+| `Composio` | [`composio-langchain`](https://pypi.org/project/composio-langchain/) | No | Yes | ![PyPI - Version](https://img.shields.io/pypi/v/composio-langchain?style=flat-square\&label=%20) |
 
 See the [Composio JS integration docs](https://js.langchain.com/docs/integrations/tools/composio) for JavaScript and TypeScript usage.
 
@@ -87,12 +87,12 @@ tools = session.tools()
 
 Composio provides toolkits for many services:
 
-| Category           | Example toolkits                                           |
-| :----------------- | :--------------------------------------------------------- |
-| Productivity       | GitHub, Slack, Gmail, Jira, Notion, Asana, Trello, ClickUp |
-| Communication      | Discord, Telegram, WhatsApp, Microsoft Teams               |
-| Development        | GitLab, Bitbucket, Linear, Sentry                          |
-| Data and analytics | Google Sheets, Airtable, HubSpot, Salesforce               |
+| Category | Example toolkits |
+| :- | :- |
+| Productivity | GitHub, Slack, Gmail, Jira, Notion, Asana, Trello, ClickUp |
+| Communication | Discord, Telegram, WhatsApp, Microsoft Teams |
+| Development | GitLab, Bitbucket, Linear, Sentry |
+| Data and analytics | Google Sheets, Airtable, HubSpot, Salesforce |
 
 See the [Composio toolkits catalog](https://docs.composio.dev/toolkits/introduction) for the complete list.
 

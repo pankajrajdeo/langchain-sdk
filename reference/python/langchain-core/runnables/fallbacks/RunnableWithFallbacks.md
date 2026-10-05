@@ -42,10 +42,10 @@ RunnableWithFallbacks(
 **Example:**
 
 ```python
-from langchain_core.chat_models.openai import ChatOpenAI
-from langchain_core.chat_models.anthropic import ChatAnthropic
+from langchain_anthropic import ChatAnthropic
+from langchain_openai import ChatOpenAI
 
-model = ChatAnthropic(model="claude-sonnet-4-6").with_fallbacks(
+model = ChatAnthropic(model="claude-sonnet-5").with_fallbacks(
     [ChatOpenAI(model="gpt-5.4-mini")]
 )
 # Will usually use ChatAnthropic, but fallback to ChatOpenAI
@@ -104,4 +104,4 @@ chain_with_fallback = (
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c5ab14d42a3e22865c9def909de0b11d70b0bbf0/libs/core/langchain_core/runnables/fallbacks.py#L37)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/runnables/fallbacks.py#L37)

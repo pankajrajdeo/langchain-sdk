@@ -26,17 +26,17 @@ This will help you getting started with `ChatCerebras` [chat models](../../langc
 
 ### Integration details
 
-| Class                                                                                        | Package                                                                    | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/cerebras) |                                              Downloads                                              |                                              Version                                             |
-| :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------- | :----------: | :------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
-| [`ChatCerebras`](https://reference.langchain.com/javascript/langchain-cerebras/ChatCerebras) | [`@langchain/cerebras`](https://www.npmjs.com/package/@langchain/cerebras) |       ❌      |                                      ✅                                     | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cerebras?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cerebras?style=flat-square\&label=%20&) |
+| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/cerebras) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatCerebras`](https://reference.langchain.com/javascript/langchain-cerebras/ChatCerebras) | [`@langchain/cerebras`](https://www.npmjs.com/package/@langchain/cerebras) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cerebras?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cerebras?style=flat-square\&label=%20&) |
 
 ### Model features
 
 See the links in the table headers below for guides on how to use specific features.
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :---------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------: | :---------------------------------------------------------: | :------------------------------------------------------------: |
-|                        ✅                        |                                 ✅                                |                               ❌                              |      ❌      |      ❌      |                               ✅                               |                              ✅                              |                                ❌                               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ |
 
 ## Setup
 

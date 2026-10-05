@@ -43,15 +43,15 @@ This page explains how to:
 
 Here are a few prebuilt filesystem backends that you can quickly use with your deep agent:
 
-| Built-in backend                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Default](#statebackend)                                         | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash")` <br /> Thread-scoped. The default filesystem backend for an agent is stored in `langgraph` state. Files persist across turns within a thread (via your checkpointer) and are not shared across threads.                                                                                                                                                                                                                                          |
-| [Local filesystem persistence](#filesystembackend-local-disk)    | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=FilesystemBackend(root_dir="/Users/nh/Desktop/"))` <br />This gives the deep agent access to your local machine's filesystem. You can specify the root directory that the agent has access to. Note that any provided `root_dir` must be an absolute path. Typically, wrap in a [CompositeBackend](#compositebackend-router) to keep internal agent data (offloaded tool results, conversation history) separate from your project files. |
-| [Durable store (LangGraph store)](#storebackend-langgraph-store) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=StoreBackend())` <br />This gives the agent access to long-term storage that is *persisted across threads*. This is great for storing longer term memories or instructions that are applicable to the agent over multiple executions.                                                                                                                                                                                                     |
-| [Context Hub](#contexthubbackend)                                | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=ContextHubBackend("my-agent"))` <br />Stores files durably in a LangSmith Hub repo, without provisioning a separate LangGraph store.                                                                                                                                                                                                                                                                                                      |
-| [Sandbox](sandboxes.md)                  | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=sandbox)` <br />Execute code in isolated environments. Sandboxes provide filesystem tools plus the `execute` tool for running shell commands. Choose from LangSmith, AgentCore, Daytona, or other [sandbox integrations](../integrations/sandboxes.md).                                                                                                                                                                         |
-| [Local shell](#localshellbackend-local-shell)                    | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=LocalShellBackend(root_dir=".", env={"PATH": "/usr/bin:/bin"}))` <br />Filesystem and shell execution directly on the host. No isolation—use only in controlled development environments. See [security considerations](#localshellbackend-local-shell) below.                                                                                                                                                                            |
-| [Composite](#compositebackend-router)                            | Thread-scoped by default, `/memories/` persisted across threads. The Composite backend is maximally flexible. You can specify different routes in the filesystem to point towards different backends. See Composite routing below for a ready-to-paste example.                                                                                                                                                                                                                                                     |
+| Built-in backend | Description |
+| - | - |
+| [Default](#statebackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash")` <br /> Thread-scoped. The default filesystem backend for an agent is stored in `langgraph` state. Files persist across turns within a thread (via your checkpointer) and are not shared across threads. |
+| [Local filesystem persistence](#filesystembackend-local-disk) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=FilesystemBackend(root_dir="/Users/nh/Desktop/"))` <br />This gives the deep agent access to your local machine's filesystem. You can specify the root directory that the agent has access to. Note that any provided `root_dir` must be an absolute path. Typically, wrap in a [CompositeBackend](#compositebackend-router) to keep internal agent data (offloaded tool results, conversation history) separate from your project files. |
+| [Durable store (LangGraph store)](#storebackend-langgraph-store) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=StoreBackend())` <br />This gives the agent access to long-term storage that is *persisted across threads*. This is great for storing longer term memories or instructions that are applicable to the agent over multiple executions. |
+| [Context Hub](#contexthubbackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=ContextHubBackend("my-agent"))` <br />Stores files durably in a LangSmith Hub repo, without provisioning a separate LangGraph store. |
+| [Sandbox](sandboxes.md) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=sandbox)` <br />Execute code in isolated environments. Sandboxes provide filesystem tools plus the `execute` tool for running shell commands. Choose from LangSmith, AgentCore, Daytona, or other [sandbox integrations](../integrations/sandboxes.md). |
+| [Local shell](#localshellbackend-local-shell) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=LocalShellBackend(root_dir=".", env={"PATH": "/usr/bin:/bin"}))` <br />Filesystem and shell execution directly on the host. No isolation—use only in controlled development environments. See [security considerations](#localshellbackend-local-shell) below. |
+| [Composite](#compositebackend-router) | Thread-scoped by default, `/memories/` persisted across threads. The Composite backend is maximally flexible. You can specify different routes in the filesystem to point towards different backends. See Composite routing below for a ready-to-paste example. |
 
 ```mermaid
 graph TB
@@ -838,6 +838,21 @@ Notes:
 * For StoreBackend routing, ensure a store is provided via `create_deep_agent(model=..., store=...)` or provisioned by the platform.
 * Deep Agents write internal data (offloaded tool results, conversation history) to the default backend. Use `StateBackend` as the default to keep these artifacts ephemeral and avoid writing them to disk or a persistent store. See the [FilesystemBackend tip](#filesystembackend-local-disk) for a complete example.
 
+## Offload binary content
+
+Binary content offloading stores inline media in the backend instead of keeping base64 payloads in message history. This reduces checkpoint size for agents that read binary files or receive inline media in user messages. Offloading is opt-in and disabled by default.
+
+Set `offloadBinaryContent: true` in `createFilesystemMiddleware` and pass the middleware in the `middleware` array to `createDeepAgent`. Use the same backend for the agent and the middleware.
+
+Payloads are stored under `/blobs/<sha256>`.
+
+Message history keeps content-addressed references. Before each model call, the middleware restores the original media from its cache or the backend. Re-reading unchanged content reuses the same blob; changed content creates a new blob.
+
+Use a backend that stores blobs outside graph state, such as a sandbox or `FilesystemBackend`. Offloading has no effect when the blob path routes to `StateBackend`, including through `CompositeBackend`. If you keep `StateBackend` as the default backend, route the blob directory to external storage.
+
+> [!NOTE]
+> Inline media in user messages is replaced at the next model call. The original input payload still appears in earlier checkpoints. Keep the blob storage available when resuming a thread so the middleware can restore its media.
+
 ## Custom backends
 
 Implement a custom backend to connect Deep Agents to storage systems such as databases, object stores, and remote filesystems. See [community-built backends](../integrations/backends.md) for examples.
@@ -846,15 +861,15 @@ Implement a custom backend to connect Deep Agents to storage systems such as dat
 
 Implement [`BackendProtocol`](https://reference.langchain.com/javascript/deepagents/backends/BackendProtocol) (`BackendProtocolV2`) and provide the following methods:
 
-| Method    | Signature                                                                                               | What it does                                                                                            |
-| --------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `ls`      | `(path: string) => Promise`                                                                   | List files and directories at the given path.                                                           |
-| `read`    | `(filePath: string, offset?, limit?) => Promise`                                            | Return file contents, optionally paginated. Binary files return `Uint8Array` content with a `mimeType`. |
-| `readRaw` | `(filePath: string) => Promise`                                                          | Return raw `FileData` (used internally by the framework).                                               |
-| `write`   | `(filePath: string, content: string) => Promise`                                           | Create or overwrite a file.                                                                             |
-| `edit`    | `(filePath: string, oldString: string, newString: string, replaceAll?: boolean) => Promise` | Find-and-replace within an existing file.                                                               |
-| `glob`    | `(pattern: string, path?: string) => Promise`                                               | Return paths matching a glob pattern.                                                                   |
-| `grep`    | `(pattern: string, path?, glob?) => Promise`                                                | Search file contents for a literal string.                                                              |
+| Method | Signature | What it does |
+| - | - | - |
+| `ls` | `(path: string) => Promise` | List files and directories at the given path. |
+| `read` | `(filePath: string, offset?, limit?) => Promise` | Return file contents, optionally paginated. Binary files return `Uint8Array` content with a `mimeType`. |
+| `readRaw` | `(filePath: string) => Promise` | Return raw `FileData` (used internally by the framework). |
+| `write` | `(filePath: string, content: string) => Promise` | Create or overwrite a file. |
+| `edit` | `(filePath: string, oldString: string, newString: string, replaceAll?: boolean) => Promise` | Find-and-replace within an existing file. |
+| `glob` | `(pattern: string, path?: string) => Promise` | Return paths matching a glob pattern. |
+| `grep` | `(pattern: string, path?, glob?) => Promise` | Search file contents for a literal string. |
 
 To also support the `execute` tool (running shell commands), implement [`SandboxBackendProtocol`](https://reference.langchain.com/javascript/deepagents/backends/SandboxBackendProtocol) instead, which extends `BackendProtocolV2` with an `execute` method.
 
@@ -1009,13 +1024,13 @@ V2 backends support binary files natively. When `read()` encounters a binary fil
 
 ### Supported MIME types
 
-| Category  | Extensions                                                               | MIME types                                                                                                                      |
-| --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| Images    | `.png`, `.jpg`/`.jpeg`, `.gif`, `.webp`, `.svg`, `.heic`, `.heif`        | `image/png`, `image/jpeg`, `image/gif`, `image/webp`, `image/svg+xml`, `image/heic`, `image/heif`                               |
-| Audio     | `.mp3`, `.wav`, `.aiff`, `.aac`, `.ogg`, `.flac`                         | `audio/mpeg`, `audio/wav`, `audio/aiff`, `audio/aac`, `audio/ogg`, `audio/flac`                                                 |
-| Video     | `.mp4`, `.webm`, `.mpeg`/`.mpg`, `.mov`, `.avi`, `.flv`, `.wmv`, `.3gpp` | `video/mp4`, `video/webm`, `video/mpeg`, `video/quicktime`, `video/x-msvideo`, `video/x-flv`, `video/x-ms-wmv`, `video/3gpp`    |
-| Documents | `.pdf`, `.ppt`, `.pptx`                                                  | `application/pdf`, `application/vnd.ms-powerpoint`, `application/vnd.openxmlformats-officedocument.presentationml.presentation` |
-| Text      | `.txt`, `.html`, `.json`, `.js`, `.ts`, `.py`, etc.                      | `text/plain`, `text/html`, `application/json`, etc.                                                                             |
+| Category | Extensions | MIME types |
+| - | - | - |
+| Images | `.png`, `.jpg`/`.jpeg`, `.gif`, `.webp`, `.svg`, `.heic`, `.heif` | `image/png`, `image/jpeg`, `image/gif`, `image/webp`, `image/svg+xml`, `image/heic`, `image/heif` |
+| Audio | `.mp3`, `.wav`, `.aiff`, `.aac`, `.ogg`, `.flac` | `audio/mpeg`, `audio/wav`, `audio/aiff`, `audio/aac`, `audio/ogg`, `audio/flac` |
+| Video | `.mp4`, `.webm`, `.mpeg`/`.mpg`, `.mov`, `.avi`, `.flv`, `.wmv`, `.3gpp` | `video/mp4`, `video/webm`, `video/mpeg`, `video/quicktime`, `video/x-msvideo`, `video/x-flv`, `video/x-ms-wmv`, `video/3gpp` |
+| Documents | `.pdf`, `.ppt`, `.pptx` | `application/pdf`, `application/vnd.ms-powerpoint`, `application/vnd.openxmlformats-officedocument.presentationml.presentation` |
+| Text | `.txt`, `.html`, `.json`, `.js`, `.ts`, `.py`, etc. | `text/plain`, `text/html`, `application/json`, etc. |
 
 ### Read binary files
 
@@ -1065,23 +1080,23 @@ Previously, backends like `StateBackend` and `StoreBackend` required a factory f
 
 ### What changed
 
-| Before (deprecated)                                                  | After                                                   |
-| -------------------------------------------------------------------- | ------------------------------------------------------- |
-| `backend=lambda rt: StateBackend(rt)`                                | `backend=StateBackend()`                                |
-| `backend=lambda rt: StoreBackend(rt)`                                | `backend=StoreBackend()`                                |
+| Before (deprecated) | After |
+| - | - |
+| `backend=lambda rt: StateBackend(rt)` | `backend=StateBackend()` |
+| `backend=lambda rt: StoreBackend(rt)` | `backend=StoreBackend()` |
 | `backend=lambda rt: CompositeBackend(default=StateBackend(rt), ...)` | `backend=CompositeBackend(default=StateBackend(), ...)` |
-| `backend: (config) => new StateBackend(config)`                      | `backend: new StateBackend()`                           |
-| `backend: (config) => new StoreBackend(config)`                      | `backend: new StoreBackend()`                           |
+| `backend: (config) => new StateBackend(config)` | `backend: new StateBackend()` |
+| `backend: (config) => new StoreBackend(config)` | `backend: new StoreBackend()` |
 
 ### Deprecated APIs
 
-| Deprecated                                                   | Replacement                                            |
-| ------------------------------------------------------------ | ------------------------------------------------------ |
-| `BackendFactory` type                                        | Pass a backend instance directly                       |
-| `BackendRuntime` interface                                   | Backends resolve context internally                    |
-| `StateBackend(runtime, options?)` constructor overload       | `new StateBackend(options?)`                           |
-| `StoreBackend(stateAndStore, options?)` constructor overload | `new StoreBackend(options?)`                           |
-| `filesUpdate` field on `WriteResult` and `EditResult`        | State writes are now handled internally by the backend |
+| Deprecated | Replacement |
+| - | - |
+| `BackendFactory` type | Pass a backend instance directly |
+| `BackendRuntime` interface | Backends resolve context internally |
+| `StateBackend(runtime, options?)` constructor overload | `new StateBackend(options?)` |
+| `StoreBackend(stateAndStore, options?)` constructor overload | `new StoreBackend(options?)` |
+| `filesUpdate` field on `WriteResult` and `EditResult` | State writes are now handled internally by the backend |
 
 > [!NOTE]
 > The factory pattern still works at runtime and emits a deprecation warning. Update your code to use direct instances before the next major version.
@@ -1198,15 +1213,15 @@ Backends implement `BackendProtocolV2`. All query methods return structured Resu
 
 ### Result types
 
-| Type            | Success fields                                        | Error field |
-| --------------- | ----------------------------------------------------- | ----------- |
-| `ReadResult`    | `content?: string \| Uint8Array`, `mimeType?: string` | `error`     |
-| `ReadRawResult` | `data?: FileData`                                     | `error`     |
-| `LsResult`      | `files?: FileInfo[]`                                  | `error`     |
-| `GlobResult`    | `files?: FileInfo[]`                                  | `error`     |
-| `GrepResult`    | `matches?: GrepMatch[]`                               | `error`     |
-| `WriteResult`   | `path?: string`                                       | `error`     |
-| `EditResult`    | `path?: string`, `occurrences?: number`               | `error`     |
+| Type | Success fields | Error field |
+| - | - | - |
+| `ReadResult` | `content?: string \| Uint8Array`, `mimeType?: string` | `error` |
+| `ReadRawResult` | `data?: FileData` | `error` |
+| `LsResult` | `files?: FileInfo[]` | `error` |
+| `GlobResult` | `files?: FileInfo[]` | `error` |
+| `GrepResult` | `matches?: GrepMatch[]` | `error` |
+| `WriteResult` | `path?: string` | `error` |
+| `EditResult` | `path?: string`, `occurrences?: number` | `error` |
 
 ### Supporting types
 
@@ -1228,21 +1243,21 @@ Backends implement `BackendProtocolV2`. All query methods return structured Resu
 
 ### Method renames
 
-| V1 method                       | V2 method                       | Return type change                     |
-| ------------------------------- | ------------------------------- | -------------------------------------- |
-| `lsInfo(path)`                  | `ls(path)`                      | `FileInfo[]` → `LsResult`              |
-| `read(filePath, offset, limit)` | `read(filePath, offset, limit)` | `string` → `ReadResult`                |
-| `readRaw(filePath)`             | `readRaw(filePath)`             | `FileData` → `ReadRawResult`           |
-| `grepRaw(pattern, path, glob)`  | `grep(pattern, path, glob)`     | `GrepMatch[] \| string` → `GrepResult` |
-| `globInfo(pattern, path)`       | `glob(pattern, path)`           | `FileInfo[]` → `GlobResult`            |
-| `write(...)`                    | `write(...)`                    | Unchanged (`WriteResult`)              |
-| `edit(...)`                     | `edit(...)`                     | Unchanged (`EditResult`)               |
+| V1 method | V2 method | Return type change |
+| - | - | - |
+| `lsInfo(path)` | `ls(path)` | `FileInfo[]` → `LsResult` |
+| `read(filePath, offset, limit)` | `read(filePath, offset, limit)` | `string` → `ReadResult` |
+| `readRaw(filePath)` | `readRaw(filePath)` | `FileData` → `ReadRawResult` |
+| `grepRaw(pattern, path, glob)` | `grep(pattern, path, glob)` | `GrepMatch[] \| string` → `GrepResult` |
+| `globInfo(pattern, path)` | `glob(pattern, path)` | `FileInfo[]` → `GlobResult` |
+| `write(...)` | `write(...)` | Unchanged (`WriteResult`) |
+| `edit(...)` | `edit(...)` | Unchanged (`EditResult`) |
 
 ### Type renames
 
-| V1 type                  | V2 type                    |
-| ------------------------ | -------------------------- |
-| `BackendProtocol`        | `BackendProtocolV2`        |
+| V1 type | V2 type |
+| - | - |
+| `BackendProtocol` | `BackendProtocolV2` |
 | `SandboxBackendProtocol` | `SandboxBackendProtocolV2` |
 
 ### Adaptation utilities

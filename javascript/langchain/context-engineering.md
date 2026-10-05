@@ -41,11 +41,11 @@ This loop continues until the LLM decides to finish.
 
 To build reliable agents, you need to control what happens at each step of the agent loop, as well as what happens between steps.
 
-| Context Type                                  | What You Control                                                                     | Transient or Persistent |
-| --------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------- |
-| **[Model Context](#model-context)**           | What goes into model calls (instructions, message history, tools, response format)   | Transient               |
-| **[Tool Context](#tool-context)**             | What tools can access and produce (reads/writes to state, store, runtime context)    | Persistent              |
-| **[Life-cycle Context](#life-cycle-context)** | What happens between model and tool calls (summarization, guardrails, logging, etc.) | Persistent              |
+| Context Type | What You Control | Transient or Persistent |
+| - | - | - |
+| **[Model Context](#model-context)** | What goes into model calls (instructions, message history, tools, response format) | Transient |
+| **[Tool Context](#tool-context)** | What tools can access and produce (reads/writes to state, store, runtime context) | Persistent |
+| **[Life-cycle Context](#life-cycle-context)** | What happens between model and tool calls (summarization, guardrails, logging, etc.) | Persistent |
 
 #### Transient context
 What the LLM sees for a single call. You can modify messages, tools, or prompts without changing what's saved in state.
@@ -57,11 +57,11 @@ What gets saved in state across turns. Life-cycle hooks and tool writes modify t
 
 Throughout this process, your agent accesses (reads / writes) different sources of data:
 
-| Data Source         | Also Known As        | Scope               | Examples                                                                   |
-| ------------------- | -------------------- | ------------------- | -------------------------------------------------------------------------- |
+| Data Source | Also Known As | Scope | Examples |
+| - | - | - | - |
 | **Runtime Context** | Static configuration | Conversation-scoped | User ID, API keys, database connections, permissions, environment settings |
-| **State**           | Short-term memory    | Conversation-scoped | Current messages, uploaded files, authentication status, tool results      |
-| **Store**           | Long-term memory     | Cross-conversation  | User preferences, extracted insights, memories, historical data            |
+| **State** | Short-term memory | Conversation-scoped | Current messages, uploaded files, authentication status, tool results |
+| **Store** | Long-term memory | Cross-conversation | User preferences, extracted insights, memories, historical data |
 
 ### How it works
 
@@ -214,7 +214,7 @@ It's critical to manage the content of messages to ensure that the LLM has the r
 Inject uploaded file context from State when relevant to current query:
 
 ```typescript
-import { createMiddleware } from "langchain";
+import { createMiddleware, HumanMessage } from "langchain";
 
 const injectFileContext = createMiddleware({
   name: "InjectFileContext",
@@ -236,9 +236,9 @@ Reference these files when answering questions.`;
       // Inject file context before recent messages
       const messages = [  // [!code highlight]
         ...request.messages,  // Rest of conversation
-        { role: "user", content: fileContext }
+        new HumanMessage(fileContext)
       ];
-      request = request.override({ messages });  // [!code highlight]
+      request = { ...request, messages };  // [!code highlight]
     }
 
     return handler(request);
@@ -257,7 +257,7 @@ Inject user's email writing style from Store to guide drafting:
 
 ```typescript
 import * as z from "zod";
-import { createMiddleware } from "langchain";
+import { createMiddleware, HumanMessage } from "langchain";
 
 const contextSchema = z.object({
   userId: z.string(),
@@ -286,9 +286,9 @@ ${style.exampleEmail || ''}`;
       // Append at end - models pay more attention to final messages
       const messages = [
         ...request.messages,
-        { role: "user", content: styleContext }
+        new HumanMessage(styleContext)
       ];
-      request = request.override({ messages });  // [!code highlight]
+      request = { ...request, messages };  // [!code highlight]
     }
 
     return handler(request);
@@ -301,7 +301,7 @@ Inject compliance rules from Runtime Context based on user's jurisdiction:
 
 ```typescript
 import * as z from "zod";
-import { createMiddleware } from "langchain";
+import { createMiddleware, HumanMessage } from "langchain";
 
 const contextSchema = z.object({
   userJurisdiction: z.string(),
@@ -339,9 +339,9 @@ ${rules.join("\n")}`;
       // Append at end - models pay more attention to final messages
       const messages = [
         ...request.messages,
-        { role: "user", content: complianceContext }
+        new HumanMessage(complianceContext)
       ];
-      request = request.override({ messages });  // [!code highlight]
+      request = { ...request, messages };  // [!code highlight]
     }
 
     return handler(request);

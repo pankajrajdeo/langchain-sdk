@@ -316,24 +316,24 @@ After you create your vector store and add the relevant documents, you can query
 
 The vector store supports a set of filters that can be applied against the metadata fields of the documents via the `FilterCondition`, `OrFilter`, and `AndFilter` in the [LangChain Azure PostgreSQL](https://pypi.org/project/langchain-azure-postgresql/) package:
 
-| Operator      | Meaning/Category             |
-| ------------- | ---------------------------- |
-| `=`           | Equality                     |
-| `!=`          | Inequality                   |
-| `<`           | Less than                    |
-| `<=`          | Less than or equal           |
-| `>`           | Greater than                 |
-| `>=`          | Greater than or equal        |
-| `in`          | Special cased (in)           |
-| `not in`      | Special cased (not in)       |
-| `is null`     | Special cased (is null)      |
-| `is not null` | Special cased (is not null)  |
-| `between`     | Special cased (between)      |
-| `not between` | Special cased (not between)  |
-| `like`        | Text (like)                  |
-| `ilike`       | Text (case-insensitive like) |
-| `AND`         | Logical (and)                |
-| `OR`          | Logical (or)                 |
+| Operator | Meaning/Category |
+| - | - |
+| `=` | Equality |
+| `!=` | Inequality |
+| `<` | Less than |
+| `<=` | Less than or equal |
+| `>` | Greater than |
+| `>=` | Greater than or equal |
+| `in` | Special cased (in) |
+| `not in` | Special cased (not in) |
+| `is null` | Special cased (is null) |
+| `is not null` | Special cased (is not null) |
+| `between` | Special cased (between) |
+| `not between` | Special cased (not between) |
+| `like` | Text (like) |
+| `ilike` | Text (case-insensitive like) |
+| `AND` | Logical (and) |
+| `OR` | Logical (or) |
 
 ### Query directly
 

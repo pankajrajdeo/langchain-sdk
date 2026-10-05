@@ -14,12 +14,12 @@ Stores enable [long-term memory](../langgraph/stores.md) in LangGraph, allowing 
 
 To implement your own store for a custom storage backend, extend the [BaseStore](https://reference.langchain.com/javascript/langchain-langgraph-checkpoint/BaseStore) interface. To deploy a custom store on Agent Server, see [Add a custom store](../../langsmith/custom-store.md).
 
-| Backend                                                                                                              | Package                                                                                                              | Source                                                                                                     |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| [In-memory](https://reference.langchain.com/javascript/langchain-langgraph-checkpoint/InMemoryStore)                 | [`@langchain/langgraph-checkpoint`](https://www.npmjs.com/package/@langchain/langgraph-checkpoint)                   | [langchain-ai/langgraphjs](https://github.com/langchain-ai/langgraphjs/tree/main/libs/checkpoint)          |
+| Backend | Package | Source |
+| - | - | - |
+| [In-memory](https://reference.langchain.com/javascript/langchain-langgraph-checkpoint/InMemoryStore) | [`@langchain/langgraph-checkpoint`](https://www.npmjs.com/package/@langchain/langgraph-checkpoint) | [langchain-ai/langgraphjs](https://github.com/langchain-ai/langgraphjs/tree/main/libs/checkpoint) |
 | [PostgreSQL](https://reference.langchain.com/javascript/langchain-langgraph-checkpoint-postgres/store/PostgresStore) | [`@langchain/langgraph-checkpoint-postgres`](https://www.npmjs.com/package/@langchain/langgraph-checkpoint-postgres) | [langchain-ai/langgraphjs](https://github.com/langchain-ai/langgraphjs/tree/main/libs/checkpoint-postgres) |
-| [Redis](https://reference.langchain.com/javascript/langchain-langgraph-checkpoint-redis/store/RedisStore)            | [`@langchain/langgraph-checkpoint-redis`](https://www.npmjs.com/package/@langchain/langgraph-checkpoint-redis)       | [langchain-ai/langgraphjs](https://github.com/langchain-ai/langgraphjs/tree/main/libs/checkpoint-redis)    |
-| [MongoDB](memory/mongodb-long-term-memory.md)                                              | [`@langchain/langgraph-checkpoint-mongodb`](https://www.npmjs.com/package/@langchain/langgraph-checkpoint-mongodb)   | [langchain-ai/langgraphjs](https://github.com/langchain-ai/langgraphjs/tree/main/libs/checkpoint-mongodb)  |
+| [Redis](https://reference.langchain.com/javascript/langchain-langgraph-checkpoint-redis/store/RedisStore) | [`@langchain/langgraph-checkpoint-redis`](https://www.npmjs.com/package/@langchain/langgraph-checkpoint-redis) | [langchain-ai/langgraphjs](https://github.com/langchain-ai/langgraphjs/tree/main/libs/checkpoint-redis) |
+| [MongoDB](memory/mongodb-long-term-memory.md) | [`@langchain/langgraph-checkpoint-mongodb`](https://www.npmjs.com/package/@langchain/langgraph-checkpoint-mongodb) | [langchain-ai/langgraphjs](https://github.com/langchain-ai/langgraphjs/tree/main/libs/checkpoint-mongodb) |
 
 ***
 

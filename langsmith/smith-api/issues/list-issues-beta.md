@@ -377,6 +377,15 @@ components:
           type: string
         fix_dispatched_at:
           type: string
+        fix_handoff_bot_user_id:
+          description: >-
+            Non-nil once the issue is handed off to a coding agent; Engine skips
+            its
+
+            own fix run while it is set.
+          anyOf:
+            - type: string
+            - type: 'null'
         fix_pr_number:
           type: integer
         fix_prompt:

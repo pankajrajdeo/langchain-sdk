@@ -10,9 +10,11 @@ tags: [docs, javascript, langchain, frontend, integrations, copilotkit]
 
 > Use CopilotKit with LangGraph, Deep Agents, and React with custom endpoints, the Python AG-UI bridge, structured generative UI, and messaging-platform channels
 
-[CopilotKit](https://www.copilotkit.ai/) provides a full React chat runtime and pairs especially well with LangGraph when you want the agent to return **structured UI payloads** instead of only plain text. In this pattern, your LangGraph deployment serves both the graph API and a custom CopilotKit endpoint, while the frontend parses assistant messages into dynamic React components.
+[CopilotKit](https://www.copilotkit.ai/) provides a full React chat runtime and pairs especially well with LangGraph when you want the agent to return **structured UI payloads** instead of only plain text. The frontend talks to a CopilotKit runtime URL and parses assistant messages into dynamic React components.
 
-On the server, the [copilotkit](https://pypi.org/project/copilotkit/) package provides [`CopilotKitMiddleware`](https://docs.copilotkit.ai) so a LangGraph graph, a LangChain agent, or a [Deep Agent](../../../deepagents/overview.md) can speak the [Agent UI (AG-UI)](https://docs.ag-ui.com/) wire protocol, stream tool and message events to a chat UI, and read or write the shared **CopilotKit** slice of state, with helpers to mount a CopilotKit-compatible HTTP endpoint in front of your graph.
+In this pattern, your LangGraph deployment serves both the graph API and a custom CopilotKit endpoint on the same process.
+
+On the server, the [copilotkit](https://pypi.org/project/copilotkit/) package provides [`CopilotKitMiddleware`](https://docs.copilotkit.ai) so a LangGraph graph, a LangChain agent, or a [Deep Agent](../../../deepagents/overview.md) can speak the [Agent UI (AG-UI)](https://docs.ag-ui.com/) wire protocol, stream tool and message events to a chat UI, and read or write the shared **CopilotKit** slice of state. TypeScript setups usually mount the CopilotKit runtime next to the graph API. Python setups mount an AG-UI FastAPI bridge on the deployment and run the CopilotKit runtime in Node in front of it.
 
 This approach is useful when you want:
 
@@ -31,7 +33,9 @@ This approach is useful when you want:
 
 ## How it works
 
-At a high level, CopilotKit sits between your React app and the LangGraph deployment. The frontend sends conversation state to a custom `/api/copilotkit` route mounted alongside the graph API, that route forwards the request to LangGraph, and the response comes back with both assistant messages and any structured UI payloads your component registry can render.
+At a high level, CopilotKit sits between your React app and the LangGraph deployment.
+
+The frontend sends conversation state to a custom `/api/copilotkit` route mounted alongside the graph API. That route forwards the request to LangGraph, and the response comes back with both assistant messages and any structured UI payloads your component registry can render.
 
 1. **Deploy the graph as usual** using LangSmith or using a LangGraph development server.
 2. **Extend the deployment with an HTTP app** that mounts a CopilotKit route next to the graph API.
@@ -55,10 +59,10 @@ graph LR
   RENDER["Hashbrown UI kit"]
 
   USER --> UI
-  UI --> ENDPOINT
-  ENDPOINT --> GRAPH
-  GRAPH --> ENDPOINT
-  ENDPOINT --> UI
+  UI --> RUNTIME
+  RUNTIME --> GRAPH
+  GRAPH --> RUNTIME
+  RUNTIME --> UI
   UI --> RENDER
 ```
 
@@ -290,9 +294,6 @@ The result is a clean separation of concerns:
 * LangGraph still owns graph execution and persistence
 * CopilotKit owns the chat-facing runtime contract
 * your custom endpoint glues them together inside one deployment
-
-Follow the CopilotKit documentation for [LangGraphHttpAgent](https://docs.copilotkit.ai/langgraph) or `LangGraphAgent` in the Node **CopilotRuntime**; the **Python** graph and middleware still define tool behavior and agent logic.
-:::
 
 ## Structure the frontend app
 

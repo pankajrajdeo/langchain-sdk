@@ -10,6 +10,13 @@ tags: [docs, langsmith, smith-api, tracer-sessions, delete-tracer-session]
 
 > Delete a specific project.
 
+Returns 202 when deletion is accepted. Cleanup runs asynchronously.
+Location identifies the affected project, not a cleanup-status endpoint.
+For a caller with read access, GET at that URL returns 200 with the project
+while it is still available, or 404 after the project is removed. A 404 does
+not confirm that background trace cleanup has finished. Polling for cleanup
+completion is not supported.
+
 ## OpenAPI
 
 **/langsmith/langsmith-platform-openapi.json delete /api/v1/sessions/{session_id}**
@@ -176,7 +183,23 @@ paths:
       tags:
         - tracer-sessions
       summary: Delete tracer session
-      description: Delete a specific project.
+      description: >-
+        Delete a specific project.
+
+        Returns 202 when deletion is accepted. Cleanup runs asynchronously.
+
+        Location identifies the affected project, not a cleanup-status endpoint.
+
+        For a caller with read access, GET at that URL returns 200 with the
+        project
+
+        while it is still available, or 404 after the project is removed. A 404
+        does
+
+        not confirm that background trace cleanup has finished. Polling for
+        cleanup
+
+        completion is not supported.
       operationId: delete_tracer_session_api_v1_sessions__session_id__delete
       parameters:
         - name: session_id
@@ -187,11 +210,13 @@ paths:
             format: uuid
             title: Session Id
       responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema: {}
+        '202':
+          description: Deletion accepted; background cleanup may still be running.
+          headers:
+            Location:
+              description: The affected project URL, not a cleanup-status endpoint.
+              schema:
+                type: string
         '422':
           description: Validation Error
           content:

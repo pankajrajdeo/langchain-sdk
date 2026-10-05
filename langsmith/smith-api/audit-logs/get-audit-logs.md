@@ -353,6 +353,9 @@ components:
         - delete_sso_settings
         - update_default_sso_provision_organization
         - update_login_methods
+        - create_oidc_integration
+        - update_oidc_integration
+        - delete_oidc_integration
         - update_organization_info
         - update_business_info
         - update_payment_plan
@@ -389,6 +392,7 @@ components:
         - create_tagging
         - delete_tagging
         - create_agent
+        - create_agent_environment
         - update_agent
         - delete_agent
         - create_agent_runtime_binding
@@ -463,6 +467,8 @@ components:
         - attach_access_policies
         - detach_access_policies
         - read_role_access_policies
+        - create_team
+        - add_team_members
         - create_scim_token
         - update_scim_token
         - delete_scim_token
@@ -499,6 +505,7 @@ components:
         - get_annotation_queue_items
         - submit_nps_response
         - submit_product_feedback
+        - update_trace_flight_score
         - create_mcp_server
         - update_mcp_server
         - delete_mcp_server
@@ -746,6 +753,8 @@ components:
         - query_thread_stats
         - query_thread_traces
         - query_threads
+        - list_github_thread_outcomes
+        - query_github_thread_outcomes
         - list_pairwise_queues
         - get_pairwise_queue
         - list_pairwise_entries

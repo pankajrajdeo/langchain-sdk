@@ -12,13 +12,13 @@ tags: [docs, integrations, middleware, anthropic]
 
 Middleware specifically designed for Anthropic's Claude models. Learn more about [middleware](../../langchain/middleware/overview.md).
 
-| Middleware                        | Description                                                    |
-| --------------------------------- | -------------------------------------------------------------- |
-| [Prompt caching](#prompt-caching) | Reduce costs by caching repetitive prompt prefixes             |
-| [Bash tool](#bash-tool)           | Execute Claude's native bash tool with local command execution |
-| [Text editor](#text-editor)       | Provide Claude's text editor tool for file editing             |
-| [Memory](#memory)                 | Provide Claude's memory tool for persistent agent memory       |
-| [File search](#file-search)       | Search tools for state-based file systems                      |
+| Middleware | Description |
+| - | - |
+| [Prompt caching](#prompt-caching) | Reduce costs by caching repetitive prompt prefixes |
+| [Bash tool](#bash-tool) | Execute Claude's native bash tool with local command execution |
+| [Text editor](#text-editor) | Provide Claude's text editor tool for file editing |
+| [Memory](#memory) | Provide Claude's memory tool for persistent agent memory |
+| [File search](#file-search) | Search tools for state-based file systems |
 
 ## Middleware vs tools
 
@@ -29,23 +29,23 @@ Middleware specifically designed for Anthropic's Claude models. Learn more about
 
 ### When to use which
 
-| Use case                                                                                                                           | Recommended | Why                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------ |
-| Production agents with bash                                                                                                        | Middleware  | Persistent sessions, Docker isolation, output redaction                                                            |
-| State-based file editing                                                                                                           | Middleware  | Built-in LangGraph state persistence                                                                               |
-| Filesystem file editing                                                                                                            | Middleware  | Writes to disk with path validation                                                                                |
-| Custom execution logic                                                                                                             | Tools       | Full control over execution                                                                                        |
-| Quick prototype                                                                                                                    | Tools       | Simpler, bring your own callback                                                                                   |
-| Non-agent use with [`bind_tools`](https://reference.langchain.com/python/langchain-anthropic/chat_models/ChatAnthropic/bind_tools) | Tools       | Middleware requires [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) |
+| Use case | Recommended | Why |
+| - | - | - |
+| Production agents with bash | Middleware | Persistent sessions, Docker isolation, output redaction |
+| State-based file editing | Middleware | Built-in LangGraph state persistence |
+| Filesystem file editing | Middleware | Writes to disk with path validation |
+| Custom execution logic | Tools | Full control over execution |
+| Quick prototype | Tools | Simpler, bring your own callback |
+| Non-agent use with [`bind_tools`](https://reference.langchain.com/python/langchain-anthropic/chat_models/ChatAnthropic/bind_tools) | Tools | Middleware requires [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) |
 
 ### Feature comparison
 
-| Feature                                                                                                                    | Middleware | Tools |
-| -------------------------------------------------------------------------------------------------------------------------- | :--------: | :---: |
-| Works with [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent)                  |      ✅     |   ✅   |
-| Works with [`bind_tools`](https://reference.langchain.com/python/langchain-anthropic/chat_models/ChatAnthropic/bind_tools) |      ❌     |   ✅   |
-| Built-in state management                                                                                                  |      ✅     |   ❌   |
-| Custom execute callback                                                                                                    |      ❌     |   ✅   |
+| Feature | Middleware | Tools |
+| - | :-: | :-: |
+| Works with [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) | ✅ | ✅ |
+| Works with [`bind_tools`](https://reference.langchain.com/python/langchain-anthropic/chat_models/ChatAnthropic/bind_tools) | ❌ | ✅ |
+| Built-in state management | ✅ | ❌ |
+| Custom execute callback | ❌ | ✅ |
 
 <details>
 <summary>Example: Middleware vs tools comparison</summary>

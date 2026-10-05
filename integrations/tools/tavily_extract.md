@@ -16,15 +16,15 @@ tags: [docs, integrations, tools, tavily_extract]
 
 ### Integration details
 
-| Class                                                                                                   | Package                                                                        | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/tavily_extract) |                                             Version                                            |
-| :------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------- | :----------: | :---------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`TavilyExtract`](https://reference.langchain.com/python/langchain-tavily/tavily_extract/TavilyExtract) | [`langchain-tavily`](https://reference.langchain.com/python/langchain-tavily/) |       ✅      |                                       ✅                                       | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-tavily?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/tavily_extract) | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`TavilyExtract`](https://reference.langchain.com/python/langchain-tavily/tavily_extract/TavilyExtract) | [`langchain-tavily`](https://reference.langchain.com/python/langchain-tavily/) | ✅ | ✅ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-tavily?style=flat-square\&label=%20) |
 
 ### Tool features
 
-| [Returns artifact](../../langchain/tools.md) | Native async |       Return data      |           Pricing          |
-| :---------------------------------------------: | :----------: | :--------------------: | :------------------------: |
-|                        ❌                        |       ✅      | raw content and images | 1,000 free credits / month |
+| [Returns artifact](../../langchain/tools.md) | Native async | Return data | Pricing |
+| :-: | :-: | :-: | :-: |
+| ❌ | ✅ | raw content and images | 1,000 free credits / month |
 
 ## Setup
 

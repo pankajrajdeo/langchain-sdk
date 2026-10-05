@@ -1,13 +1,13 @@
 ---
 title: "javascript/integrations/embeddings"
-description: "Index of 19 pages and 0 subdirectories under javascript/integrations/embeddings."
+description: "Index of 20 pages and 0 subdirectories under javascript/integrations/embeddings."
 category: "index"
 tags: [index, javascript, integrations, embeddings]
 ---
 
 # javascript/integrations/embeddings
 
-19 pages here.
+20 pages here.
 
 ## Files
 
@@ -20,6 +20,7 @@ tags: [index, javascript, integrations, embeddings]
 - [GoogleGenerativeAIEmbeddings integration](google_generative_ai.md) - Integrate with the GoogleGenerativeAIEmbeddings embedding model using LangChain JavaScript.
 - [VertexAIEmbeddings integration](google_vertex_ai.md) - Integrate with the VertexAIEmbeddings embedding model using LangChain JavaScript.
 - [IBM watsonx.ai integration](ibm.md) - Integrate with the IBM watsonx.ai embedding model using LangChain JavaScript.
+- [Embedding model integrations](index.md) - Integrate with embedding models using LangChain JavaScript.
 - [Minimax integration](minimax.md) - Integrate with the Minimax embedding model using LangChain JavaScript.
 - [MistralAIEmbeddings integration](mistralai.md) - Integrate with the MistralAIEmbeddings embedding model using LangChain JavaScript.
 - [Mixedbread AI integration](mixedbread_ai.md) - Integrate with the Mixedbread AI embedding model using LangChain JavaScript.

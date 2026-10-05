@@ -1,6 +1,5 @@
 ---
 title: "LangSmith Python SDK"
-description: "Connect these docs to your agent of choice via MCP for real-time answers."
 source: "https://docs.langchain.com/langsmith/smith-python-sdk"
 category: "docs"
 tags: [docs, langsmith, smith-python-sdk]
@@ -8,7 +7,7 @@ tags: [docs, langsmith, smith-python-sdk]
 
 # LangSmith Python SDK
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/smith-python-sdk)
----
+***
 
 > [!NOTE]
 > [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.

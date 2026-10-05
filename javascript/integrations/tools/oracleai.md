@@ -26,9 +26,9 @@ If you are just starting with Oracle Database, consider exploring the [free Orac
 
 ### Integration details
 
-| Class           | Package                                                                                  | Local | [PY support](https://python.langchain.com/docs/integrations/tools/oracleai) |
-| :-------------- | :--------------------------------------------------------------------------------------- | :---: | :-------------------------------------------------------------------------: |
-| `OracleSummary` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) |   ✅   |                                      ✅                                      |
+| Class | Package | Local | [PY support](https://python.langchain.com/docs/integrations/tools/oracleai) |
+| :- | :- | :-: | :-: |
+| `OracleSummary` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) | ✅ | ✅ |
 
 ## Setup
 

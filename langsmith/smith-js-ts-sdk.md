@@ -1,6 +1,5 @@
 ---
 title: "LangSmith JS/TS SDK"
-description: "Connect these docs to your agent of choice via MCP for real-time answers."
 source: "https://docs.langchain.com/langsmith/smith-js-ts-sdk"
 category: "docs"
 tags: [docs, langsmith, smith-js-ts-sdk]
@@ -8,7 +7,7 @@ tags: [docs, langsmith, smith-js-ts-sdk]
 
 # LangSmith JS/TS SDK
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/smith-js-ts-sdk)
----
+***
 
 > [!NOTE]
 > [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.

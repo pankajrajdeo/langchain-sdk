@@ -31,9 +31,9 @@ src/document_loaders/example_data/example/
 
 ### Integration details
 
-| Class                                                                                                                   | Package                                              | Compatibility | Local | PY support |
-| :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :-----------: | :---: | :--------: |
-| [`DirectoryLoader`](https://reference.langchain.com/javascript/langchain-core/document_loaders/base/BaseDocumentLoader) | [langchain](https://www.npmjs.com/package/langchain) |   Node-only   |   ✅   |      ✅     |
+| Class | Package | Compatibility | Local | PY support |
+| :- | :- | :-: | :-: | :-: |
+| [`DirectoryLoader`](https://reference.langchain.com/javascript/langchain-core/document_loaders/base/BaseDocumentLoader) | [langchain](https://www.npmjs.com/package/langchain) | Node-only | ✅ | ✅ |
 
 ## Setup
 

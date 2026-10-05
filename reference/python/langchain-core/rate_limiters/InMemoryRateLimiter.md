@@ -67,9 +67,7 @@ rate_limiter = InMemoryRateLimiter(
 
 from langchain_anthropic import ChatAnthropic
 
-model = ChatAnthropic(
-    model_name="claude-sonnet-4-5-20250929", rate_limiter=rate_limiter
-)
+model = ChatAnthropic(model_name="claude-sonnet-5", rate_limiter=rate_limiter)
 
 for _ in range(5):
     tic = time.time()
@@ -123,4 +121,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c5ab14d42a3e22865c9def909de0b11d70b0bbf0/libs/core/langchain_core/rate_limiters.py#L67)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/rate_limiters.py#L67)

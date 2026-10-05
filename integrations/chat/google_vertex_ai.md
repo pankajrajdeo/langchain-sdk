@@ -31,15 +31,15 @@ Gemini Enterprise Agent Platform exposes all foundational models available in Go
 
 ### Integration details
 
-| Class                                                                                                       | Package                                                                                          | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/google_vertex_ai) |                                                  Downloads                                                 |                                                 Version                                                 |
-| :---------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- | :----------: | :----------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: |
-| [`ChatVertexAI`](https://reference.langchain.com/python/langchain-google-vertexai/chat_models/ChatVertexAI) | [`langchain-google-vertexai`](https://reference.langchain.com/python/langchain-google-vertexai/) |     beta     |                                        ✅                                       | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-google-vertexai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-google-vertexai?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/google_vertex_ai) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatVertexAI`](https://reference.langchain.com/python/langchain-google-vertexai/chat_models/ChatVertexAI) | [`langchain-google-vertexai`](https://reference.langchain.com/python/langchain-google-vertexai/) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-google-vertexai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-google-vertexai?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ## Setup
 

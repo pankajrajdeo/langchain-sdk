@@ -14,6 +14,8 @@ LangSmith gives you end-to-end visibility into your LLM application by capturing
 
 In this quickstart, you will add tracing to an AI assistant and view the results in LangSmith.
 
+Every trace lands in a container, and which one depends on how your workspace is organized. An agent-based workspace groups traces by [agent and environment](agents.md). A project-based workspace groups them by [tracing project](observability-concepts.md#tracing-projects). The control at the top left tells you which one you are on: in an agent-based workspace it names your workspace, and in a project-based workspace it shows the LangSmith logo. This quickstart configures a tracing project, and the steps below note where the two differ.
+
 > [!TIP]
 > If you're building with [LangChain](../langchain/overview.md) or [LangGraph](../langgraph/overview.md), you can enable LangSmith tracing with a single environment variable. Refer to [trace with LangChain](trace-with-langchain.md) or [trace with LangGraph](trace-with-langgraph.md).
 
@@ -62,7 +64,7 @@ This example uses OpenAI as the LLM provider. You can adapt it for your own prov
    export OPENAI_API_KEY="<your-openai-api-key>"
 ```
 
-   To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](log-traces-to-project.md). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion.
+   To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](log-traces-to-project.md). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion. In an [agent-based workspace](agents.md), the first trace to a new project name, including the default project, creates an agent named after the project, with the project as its **Production** [environment](agent-environments.md). The agent's identifier is derived from the project name, so it can differ from the project name, and creating the agent requires permission to create projects. To name the agent and the environment directly instead, see [Log traces to an agent](log-traces-to-agent.md).
 
 > [!NOTE]
 >    If your account is in a region other than US (the default), also set `LANGSMITH_ENDPOINT` to the API URL for your region. Without this, your API key won't be recognized and requests will fail to authenticate.
@@ -353,7 +355,9 @@ npx tsx index.ts
 
 ## 4. View your trace
 
-In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-observability-quickstart), go to **Tracing** and select your **default** project. Click the `assistant` row to open the trace. The **Trajectory** tab shows the conversation as it was sent to the model. Select the **Details** tab to see the full run tree, including the `assistant` function with the `get_context` tool call and the OpenAI call nested inside it.
+In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-observability-quickstart), go to **Tracing** and select your **default** project. In an agent-based workspace, select your agent in the top bar first, then go to **Tracing**. For more information, see [Navigate agents](navigate-agents.md).
+
+Click the `assistant` row to open the trace. The **Trajectory** tab shows the conversation as it was sent to the model. Select the **Details** tab to see the full run tree, including the `assistant` function with the `get_context` tool call and the OpenAI call nested inside it.
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-quickstart-app.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=35b19b5e1e978d13cdbb61058334eeb4" alt="LangSmith UI showing a trace with an outer application span and a nested LLM call span." width="2504" height="1266" data-path="langsmith/images/trace-quickstart-app.png" />
 
@@ -370,6 +374,7 @@ The outer span captures your `assistant` function's inputs and outputs. The nest
 * [Trace an LLM application](observability-llm-tutorial.md): a full lifecycle tutorial, from prototyping through production.
 * [Filter traces](filter-traces.md): search and navigate large tracing projects.
 * [Log to a specific project](log-traces-to-project.md): send traces to a named project instead of **default**.
+* [Agents](agents.md): how an agent groups the traces, datasets, and monitors of one application, and how its environments divide them.
 
 > [!NOTE]
 > After logging traces, use **[Chat](chat.md)** to analyze them and get AI-powered insights into your application's performance.

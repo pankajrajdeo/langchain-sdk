@@ -113,12 +113,12 @@ For per-run values such as request metadata or feature flags, use the normal Lan
 
 ## When to use tools
 
-| Concept                                                                    | Kind                  | How it reaches the agent                                                  |
-| -------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------- |
-| **Tools**                                                                  | Application code      | Import and pass in the agent definition                                   |
+| Concept | Kind | How it reaches the agent |
+| - | - | - |
+| **Tools** | Application code | Import and pass in the agent definition |
 | **[MCP connectors](python/managed-deep-agents-mcp-connectors.md)** | Managed configuration | Declared in the MCP module under `tools/`; no import into the agent entry |
-| **[Skills](python/managed-deep-agents-skills.md)**                 | Managed context       | Procedures the agent loads when relevant                                  |
-| **[Instructions](python/managed-deep-agents-instructions.md)**     | Managed context       | Always-on system prompt                                                   |
+| **[Skills](python/managed-deep-agents-skills.md)** | Managed context | Procedures the agent loads when relevant |
+| **[Instructions](python/managed-deep-agents-instructions.md)** | Managed context | Always-on system prompt |
 
 For more information, see [Project structure](python/managed-deep-agents-project-structure.md).
 
@@ -128,9 +128,6 @@ When a run hits an interrupt, it pauses and waits for a human response before co
 
 * **During local development**, `mda dev` runs the agent in LangSmith Studio, which surfaces the interrupt so you can inspect the pending tool call and resume the run.
 * **On a deployed agent**, resume the paused run through the LangGraph server API with a `Command(resume=...)` payload. See [Human-in-the-loop using server API](add-human-in-the-loop.md).
-
-> [!NOTE]
-> During public beta, Managed Deep Agents is CLI-first and programmatic invocation is not yet documented. To resume runs programmatically from your own application, contact your LangChain team.
 
 Human-in-the-loop needs durable thread state to pause and resume. The managed runtime owns the checkpointer, so no extra setup is required.
 

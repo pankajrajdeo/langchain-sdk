@@ -230,6 +230,68 @@ const State = new StateSchema({
 });
 ```
 
+### Bypass reducers with `Overwrite`
+
+In some cases, you may want to bypass a reducer and directly overwrite a state value. LangGraph provides the `Overwrite` type for this purpose. When a node returns a value wrapped with `Overwrite`, the reducer is bypassed and the channel is set directly to that value.
+
+This is useful when you want to reset or replace accumulated state rather than merge it with existing values.
+
+```typescript
+import {
+  END,
+  Overwrite,
+  ReducedValue,
+  START,
+  StateGraph,
+  StateSchema,
+} from "@langchain/langgraph";
+import { z } from "zod/v4";
+
+const State = new StateSchema({
+  messages: new ReducedValue(
+    z.array(z.string()).default(() => []),
+    {
+      reducer: (current: string[], update: string[]) => current.concat(update),
+    },
+  ),
+});
+
+const addMessage = () => {
+  return { messages: ["first message"] };
+};
+
+const replaceMessages = () => {
+  // Bypass the reducer and replace the entire messages list
+  return { messages: new Overwrite(["replacement message"]) };
+};
+
+const graph = new StateGraph(State)
+  .addNode("add_message", addMessage)
+  .addNode("replace_messages", replaceMessages)
+  .addEdge(START, "add_message")
+  .addEdge("add_message", "replace_messages")
+  .addEdge("replace_messages", END)
+  .compile();
+
+const result = await graph.invoke({ messages: ["initial"] });
+console.log(result.messages);
+```
+
+```
+["replacement message"]
+```
+
+You can also use JSON format with the special key `"__overwrite__"`:
+
+```typescript
+const replaceMessages = () => {
+  return { messages: { __overwrite__: ["replacement message"] } };
+};
+```
+
+> [!WARNING]
+> When nodes execute in parallel, only one node can use `Overwrite` on the same state key in a given super-step. If multiple nodes attempt to overwrite the same key in the same super-step, an `InvalidUpdateError` is raised.
+
 ### Define input and output schemas
 
 By default, `StateGraph` operates with a single schema, and all nodes are expected to communicate using that schema. However, it's also possible to define distinct input and output schemas for a graph.
@@ -371,12 +433,12 @@ While `StateSchema` is the recommended approach for defining state, LangGraph su
 
 The channels API provides low-level control over state management. LangGraph provides several built-in channel types:
 
-| Channel Type              | Behavior                                 | Use Case                              |
-| ------------------------- | ---------------------------------------- | ------------------------------------- |
-| `LastValue`               | Stores the most recent value             | Simple fields that get overwritten    |
+| Channel Type | Behavior | Use Case |
+| - | - | - |
+| `LastValue` | Stores the most recent value | Simple fields that get overwritten |
 | `BinaryOperatorAggregate` | Combines values using a reducer function | Accumulating values (counters, lists) |
-| `Topic`                   | Collects all values into a sequence      | Event streams, audit logs             |
-| `EphemeralValue`          | Value that resets between supersteps     | Temporary computation state           |
+| `Topic` | Collects all values into a sequence | Event streams, audit logs |
+| `EphemeralValue` | Value that resets between supersteps | Temporary computation state |
 
 **Using the object shorthand:**
 
@@ -515,13 +577,13 @@ const graph = new StateGraph(State);
 
 #### Comparison table
 
-| Approach              | Reducers       | Type Safety | Zod Version | Recommended        |
-| --------------------- | -------------- | ----------- | ----------- | ------------------ |
-| `StateSchema`         | ✅ Built-in     | ✅ Full      | v3 or v4    | ✅ Yes              |
-| Channels API          | ✅ Manual       | ⚠️ Partial  | N/A         | For advanced cases |
-| `Annotation.Root`     | ✅ Built-in     | ✅ Full      | N/A         | Legacy             |
-| Zod v3 + `.langgraph` | ✅ Via plugin   | ✅ Full      | v3 only     | Legacy             |
-| Zod v4 + registry     | ✅ Via registry | ✅ Full      | v4 only     | Legacy             |
+| Approach | Reducers | Type Safety | Zod Version | Recommended |
+| - | - | - | - | - |
+| `StateSchema` | ✅ Built-in | ✅ Full | v3 or v4 | ✅ Yes |
+| Channels API | ✅ Manual | ⚠️ Partial | N/A | For advanced cases |
+| `Annotation.Root` | ✅ Built-in | ✅ Full | N/A | Legacy |
+| Zod v3 + `.langgraph` | ✅ Via plugin | ✅ Full | v3 only | Legacy |
+| Zod v4 + registry | ✅ Via registry | ✅ Full | v4 only | Legacy |
 
 ## Add runtime configuration
 
@@ -708,7 +770,7 @@ ai: Ciao! Come posso aiutarti oggi?
 
 There are many use cases where you may wish for your node to have a custom retry policy, for example if you are calling an API, querying a database, or calling an LLM, etc. LangGraph lets you add retry policies to nodes.
 
-To configure a retry policy, pass the `retryPolicy` parameter to the [`addNode`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.Graph.html#addnode). The `retryPolicy` parameter takes in a `RetryPolicy` object. Below we instantiate a `RetryPolicy` object with the default parameters and associate it with a node:
+To configure a retry policy, pass the `retryPolicy` parameter to the [`addNode`](https://reference.langchain.com/javascript/langchain-langgraph/index/Graph). The `retryPolicy` parameter takes in a `RetryPolicy` object. Below we instantiate a `RetryPolicy` object with the default parameters and associate it with a node:
 
 ```typescript
 import { RetryPolicy } from "@langchain/langgraph";
@@ -784,14 +846,14 @@ const graph = workflow.compile();
 
 You can access execution identity and retry information via `runtime.executionInfo`. This surfaces thread, run, and checkpoint identifiers as well as retry state, without needing to read from `config` directly.
 
-| Attribute              | Type                  | Description                                                                                |
-| ---------------------- | --------------------- | ------------------------------------------------------------------------------------------ |
-| `threadId`             | `string \| undefined` | Thread ID for the current execution.                                                       |
-| `runId`                | `string \| undefined` | Run ID for the current execution.                                                          |
-| `checkpointId`         | `string`              | Checkpoint ID for the current execution.                                                   |
-| `checkpointNs`         | `string`              | Checkpoint namespace for the current execution.                                            |
-| `taskId`               | `string`              | Task ID for the current execution.                                                         |
-| `nodeAttempt`          | `number`              | Current execution attempt number (1-indexed).                                              |
+| Attribute | Type | Description |
+| - | - | - |
+| `threadId` | `string \| undefined` | Thread ID for the current execution. |
+| `runId` | `string \| undefined` | Run ID for the current execution. |
+| `checkpointId` | `string` | Checkpoint ID for the current execution. |
+| `checkpointNs` | `string` | Checkpoint namespace for the current execution. |
+| `taskId` | `string` | Task ID for the current execution. |
+| `nodeAttempt` | `number` | Current execution attempt number (1-indexed). |
 | `nodeFirstAttemptTime` | `number \| undefined` | Unix timestamp (seconds) of when the first attempt started. Stays the same across retries. |
 
 #### Access thread and run IDs
@@ -853,11 +915,11 @@ const graph = new StateGraph(State)
 
 When your graph runs on LangGraph Server, you can access server-specific metadata via `runtime.serverInfo`.
 
-| Attribute     | Type               | Description                                                                     |
-| ------------- | ------------------ | ------------------------------------------------------------------------------- |
-| `assistantId` | `string`           | The assistant ID for the current deployment.                                    |
-| `graphId`     | `string`           | The graph ID for the current deployment.                                        |
-| `user`        | `BaseUser \| null` | The authenticated user, if [custom auth](../../langsmith/custom-auth.md) is configured. |
+| Attribute | Type | Description |
+| - | - | - |
+| `assistantId` | `string` | The assistant ID for the current deployment. |
+| `graphId` | `string` | The graph ID for the current deployment. |
+| `user` | `BaseUser \| null` | The authenticated user, if [custom auth](../../langsmith/custom-auth.md) is configured. |
 
 ```ts
 const myNode: GraphNode<typeof State> = async (state, runtime) => {
@@ -1119,7 +1181,7 @@ Importantly, when using a [checkpointer](persistence.md), results from successfu
 If you have error-prone (perhaps want to handle flakey API calls), LangGraph provides two ways to address this:
 
 1. You can write regular python code within your node to catch and handle exceptions.
-2. You can set a **[`RetryPolicy`](https://reference.langchain.com/python/langgraph/types/#langgraph.types.RetryPolicy)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
+2. You can set a **[`RetryPolicy`](https://reference.langchain.com/python/langgraph/types)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
 
 Together, these let you perform parallel execution and fully control exception handling.
 
@@ -1127,15 +1189,15 @@ Together, these let you perform parallel execution and fully control exception h
 
 > [!TIP]
 > **Set max concurrency**
-> You can control the maximum number of concurrent tasks by setting `max_concurrency` in the [configuration](https://reference.langchain.com/javascript/interfaces/_langchain_langgraph.index.LangGraphRunnableConfig.html) when invoking the graph.
+> You can control the maximum number of concurrent tasks by setting `maxConcurrency` in the [configuration](https://reference.langchain.com/javascript/langchain-langgraph/index/LangGraphRunnableConfig) when invoking the graph. `maxConcurrency` is a standalone config key, so set it at the top level of the config rather than inside `configurable`.
 >
 > ```typescript
-> const result = await graph.invoke({ value1: "c" }, {configurable: {max_concurrency: 10}});
+> const result = await graph.invoke({ value1: "c" }, { maxConcurrency: 10 });
 > ```
 
 ### Conditional branching
 
-If your fan-out should vary at runtime based on the state, you can use [`addConditionalEdges`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addconditionaledges) to select one or more paths using the graph state. See example below, where node `a` generates a state update that determines the following node.
+If your fan-out should vary at runtime based on the state, you can use [`addConditionalEdges`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph) to select one or more paths using the graph state. See example below, where node `a` generates a state update that determines the following node.
 
 ```typescript
 import { StateGraph, StateSchema, ReducedValue, GraphNode, ConditionalEdgeRouter, START, END } from "@langchain/langgraph";

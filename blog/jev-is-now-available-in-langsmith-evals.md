@@ -78,9 +78,9 @@ TypeSafe is now a model provider in LangSmith, with Jev available as a model. Se
 
 ![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab0beff8accdba581b5f132_Jev%20Tutorial%20-%20(1)%20Add%20an%20evaluator.png)
 
-1. ‍**Choose TypeSafe as the provider.** Name your Jev-as-a-judge evaluator. Under Prompt & Model, open the Model Configuration and select TypeSafe as the Provider and jev-latest as the Model. Note that TypeSafe does not currently offer zero data retention, so prompts and outputs sent for evaluation may be retained by the provider.
+1. **Choose TypeSafe as the provider.** Name your Jev-as-a-judge evaluator. Under Prompt & Model, open the Model Configuration and select TypeSafe as the Provider and jev-latest as the Model.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab0bf2505919fc7196fd5c8_image%20(65).png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6abc4457b1de1ac91e791ddd_Jev%20Model%20configuration.png)
 
 1. ‍**Define the state.** Once the model is configured, define the state, or the context, that Jev will evaluate by mapping in run or thread variables. Unlike an LLM judge, the state should not include grading instructions. Those go in the questions in the next step.
 
@@ -98,7 +98,7 @@ TypeSafe is now a model provider in LangSmith, with Jev available as a model. Se
 
 Jev-as-a-judge is available in LangSmith today.
 
-[Sign in or sign up](https://smith.langchain.com/) for LangSmith, then open the Evaluators tab in any tracing project, add an LLM-as-a-Judge evaluator, and select TypeSafe as the provider to try it out. For more details on online evals, including filters and advanced options, see the [online evaluators guide](../langsmith/online-evaluations-llm-as-judge.md).
+[Sign in or sign up](https://smith.langchain.com/) for LangSmith, then open the Evaluators tab in any tracing project, add an LLM-as-a-Judge evaluator, and select TypeSafe as the provider to try it out. For more details, see the [decision model evaluator guide](../langsmith/decision-model-evaluator.md).
 
 If you try Jev as a judge on your agents, we want to hear how it holds up, especially against the LLM judges you use today. Share what you find on the [**forum**](https://forum.langchain.com/) or tag us on [**X**](https://x.com/LangChain).
 

@@ -18,15 +18,15 @@ Use this tool after [TavilyResearch](tavily_research.md) to poll for status and 
 
 ### Integration details
 
-| Class                                                                                                | Package                                                                | [PY support](tavily_search.md) |                                             Downloads                                             |                                             Version                                            |
-| :--------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [`TavilyGetResearch`](https://reference.langchain.com/javascript/langchain-tavily/TavilyGetResearch) | [`@langchain/tavily`](https://www.npmjs.com/package/@langchain/tavily) |                                ✅                               | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/tavily?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/tavily?style=flat-square\&label=%20&) |
+| Class | Package | [PY support](tavily_search.md) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`TavilyGetResearch`](https://reference.langchain.com/javascript/langchain-tavily/TavilyGetResearch) | [`@langchain/tavily`](https://www.npmjs.com/package/@langchain/tavily) | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/tavily?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/tavily?style=flat-square\&label=%20&) |
 
 ### Tool features
 
-| [Returns artifact](../../langchain/tools.md) | Native async |                Return data               |           Pricing          |
-| :-------------------------------------------------: | :----------: | :--------------------------------------: | :------------------------: |
-|                          ❌                          |       ✅      | Research status, report content, sources | 1,000 free credits / month |
+| [Returns artifact](../../langchain/tools.md) | Native async | Return data | Pricing |
+| :-: | :-: | :-: | :-: |
+| ❌ | ✅ | Research status, report content, sources | 1,000 free credits / month |
 
 ## Setup
 

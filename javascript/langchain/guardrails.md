@@ -44,35 +44,32 @@ PII detection middleware is helpful for cases such as health care and financial 
 
 The PII middleware supports multiple strategies for handling detected PII:
 
-| Strategy | Description                             | Example               |
-| -------- | --------------------------------------- | --------------------- |
-| `redact` | Replace with `[REDACTED_{PII_TYPE}]`    | `[REDACTED_EMAIL]`    |
-| `mask`   | Partially obscure (e.g., last 4 digits) | `****-****-****-1234` |
-| `hash`   | Replace with deterministic hash         | `a8f5f167...`         |
-| `block`  | Raise exception when detected           | Error thrown          |
+| Strategy | Description | Example |
+| - | - | - |
+| `redact` | Replace with `[REDACTED_{PII_TYPE}]` | `[REDACTED_EMAIL]` |
+| `mask` | Partially obscure (e.g., last 4 digits) | `****-****-****-1234` |
+| `hash` | Replace with deterministic hash | `a8f5f167...` |
+| `block` | Raise exception when detected | Error thrown |
 
 ```typescript
-import { createAgent, piiRedactionMiddleware } from "langchain";
+import { createAgent, piiMiddleware } from "langchain";
 
 const agent = createAgent({
   model: "gpt-5.5",
   tools: [customerServiceTool, emailTool],
   middleware: [
     // Redact emails in user input before sending to model
-    piiRedactionMiddleware({
-      piiType: "email",
+    piiMiddleware("email", {
       strategy: "redact",
       applyToInput: true,
     }),
     // Mask credit cards in user input
-    piiRedactionMiddleware({
-      piiType: "credit_card",
+    piiMiddleware("credit_card", {
       strategy: "mask",
       applyToInput: true,
     }),
     // Block API keys - raise error if detected
-    piiRedactionMiddleware({
-      piiType: "api_key",
+    piiMiddleware("api_key", {
       detector: /sk-[a-zA-Z0-9]{32}/,
       strategy: "block",
       applyToInput: true,
@@ -102,14 +99,14 @@ const result = await agent.invoke({
 
 **Configuration options:**
 
-| Parameter            | Description                                                            | Default                     |
-| -------------------- | ---------------------------------------------------------------------- | --------------------------- |
-| `piiType`            | Type of PII to detect (built-in or custom)                             | Required                    |
-| `strategy`           | How to handle detected PII (`"block"`, `"redact"`, `"mask"`, `"hash"`) | `"redact"`                  |
-| `detector`           | Custom detector regex pattern                                          | `undefined` (uses built-in) |
-| `applyToInput`       | Check user messages before model call                                  | `true`                      |
-| `applyToOutput`      | Check AI messages after model call                                     | `false`                     |
-| `applyToToolResults` | Check tool result messages after execution                             | `false`                     |
+| Parameter | Description | Default |
+| - | - | - |
+| `piiType` | Type of PII to detect (built-in or custom) | Required |
+| `strategy` | How to handle detected PII (`"block"`, `"redact"`, `"mask"`, `"hash"`) | `"redact"` |
+| `detector` | Custom detector regex pattern | `undefined` (uses built-in) |
+| `applyToInput` | Check user messages before model call | `true` |
+| `applyToOutput` | Check AI messages after model call | `false` |
+| `applyToToolResults` | Check tool result messages after execution | `false` |
 
 </details>
 
@@ -300,7 +297,7 @@ const result = await agent.invoke({
 You can stack multiple guardrails by adding them to the middleware array. They execute in order, allowing you to build layered protection:
 
 ```typescript
-import { createAgent, piiRedactionMiddleware, humanInTheLoopMiddleware } from "langchain";
+import { createAgent, piiMiddleware, humanInTheLoopMiddleware } from "langchain";
 
 const agent = createAgent({
   model: "gpt-5.5",
@@ -310,13 +307,11 @@ const agent = createAgent({
     contentFilterMiddleware(["hack", "exploit"]),
 
     // Layer 2: PII protection (before and after model)
-    piiRedactionMiddleware({
-      piiType: "email",
+    piiMiddleware("email", {
       strategy: "redact",
       applyToInput: true,
     }),
-    piiRedactionMiddleware({
-      piiType: "email",
+    piiMiddleware("email", {
       strategy: "redact",
       applyToOutput: true,
     }),

@@ -18,7 +18,17 @@ Effective observability in LLM applications requires proactive detection of fail
 * Application changes that affect feedback scores reflecting end-user experience.
 * Unexpected cost spikes from LLM usage.
 
-Alerts in LangSmith are project-scoped, requiring separate configuration for each monitored project.
+Alerts in LangSmith are scoped to one [trace container](observability-concepts.md#trace-containers), requiring separate configuration for each one you monitor. Which container that is depends on how your workspace is organized.
+
+> [!NOTE]
+> **Agent-based workspaces ([beta](release-stages.md)).** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](observability-concepts.md#tracing-projects).
+
+An alert is scoped to one [environment](agent-environments.md#select-an-environment) of one [agent](agents.md). Alerting on production behavior therefore does not require a filter that excludes test traffic, because the environment already excludes it.
+
+> [!NOTE]
+> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](observability-concepts.md#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based, which is in [beta](release-stages.md). Skip this section and read [Agents](agents.md).
+
+An alert is scoped to one tracing project.
 
 > [!TIP]
 > Alerts can [route](#step-4-configure-notification-channel) to Slack, PagerDuty, Dynatrace, or any HTTP endpoint via webhook. The **Webhook** tab includes [example recipes](#example-recipes) for Microsoft Teams, email, Slack on self-hosted deployments, and Google Chat (which requires middleware).
@@ -27,19 +37,19 @@ Follow these steps to configure an alert.
 
 ## Step 1: Navigate to create alert
 
-In the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-alerts), navigate to the Tracing project that you would like to configure alerts for. Click the **Alerts** icon on the top right-hand corner of the page to view existing alerts for that project and set up a new alert.
+In the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-alerts), navigate to the tracing project you would like to configure alerts for, or to the agent environment in an agent-based workspace. Click the **Alerts** icon on the top right-hand corner of the page to view existing alerts for it and set up a new alert.
 
 ## Step 2: Select metric type
 
 LangSmith provides threshold-based alerting on the following metrics:
 
-| Metric Type        | Description                                                                                                           | Use Case                                                                                                                                                             |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Run Count**      | Tracks the total number of [runs](observability-concepts.md#runs) over a time window.                         | Monitor whether a pipeline is producing runs at the expected volume and alert when it drops unexpectedly.                                                            |
-| **Cost**           | Tracks the total cost of runs over a time window.                                                                     | Monitor LLM spending to alert when costs exceed expected thresholds. Requires [cost tracking](cost-tracking.md) to be configured.                            |
-| **Errors**         | Tracks runs with an error status. Alert on total error count or error percent (rate of errored runs out of all runs). | Monitor for failures in an application, or alert when the error rate exceeds an acceptable threshold.                                                                |
-| **Feedback Score** | Measures the average feedback score.                                                                                  | Track [feedback from end users](attach-user-feedback.md) or [online evaluation results](online-evaluations-llm-as-judge.md) to alert on regressions. |
-| **Latency**        | Measures average run execution time.                                                                                  | Tracks the latency of your application to alert on spikes and performance bottlenecks.                                                                               |
+| Metric Type | Description | Use Case |
+| - | - | - |
+| **Run Count** | Tracks the total number of [runs](observability-concepts.md#runs) over a time window. | Monitor whether a pipeline is producing runs at the expected volume and alert when it drops unexpectedly. |
+| **Cost** | Tracks the total cost of runs over a time window. | Monitor LLM spending to alert when costs exceed expected thresholds. Requires [cost tracking](cost-tracking.md) to be configured. |
+| **Errors** | Tracks runs with an error status. Alert on total error count or error percent (rate of errored runs out of all runs). | Monitor for failures in an application, or alert when the error rate exceeds an acceptable threshold. |
+| **Feedback Score** | Measures the average feedback score. | Track [feedback from end users](attach-user-feedback.md) or [online evaluation results](online-evaluations-llm-as-judge.md) to alert on regressions. |
+| **Latency** | Measures average run execution time. | Tracks the latency of your application to alert on spikes and performance bottlenecks. |
 
 Additionally, for **Errors** and **Latency**, you can use the filter builder to stack conditions on fields such as **Status**, **Run Type**, **Tag**, and **Error**. For example, you can scope an error alert to runs where **Status** is `error`, **Run Type** is `llm`, **Tag** is `support_agent`, and **Error** matches `RateLimitExceeded`.
 
@@ -64,10 +74,10 @@ You can preview alert behavior over a historical time window to understand how m
 ## Step 4: Configure notification channel
 
 #### Slack
-Send alert notifications directly to a Slack channel using LangSmith's native Slack integration. No custom webhook or Slack app configuration required.
+Send alert notifications directly to a Slack channel using LangSmith's native Slack integration.
 
 > [!NOTE]
-> The native Slack notification type is available on LangSmith Cloud only. For self-hosted deployments, use the [webhook Slack recipe](#example-recipes) in the **Webhook** tab instead.
+> The native Slack notification type is available on LangSmith Cloud and on self-hosted deployments with a [configured Slack app](self-host-slack.md). If your self-hosted deployment does not support that connection, use the [webhook Slack recipe](#example-recipes) in the **Webhook** tab.
 
 **Prerequisites**
 
@@ -78,11 +88,11 @@ Send alert notifications directly to a Slack channel using LangSmith's native Sl
 ### 1. Configure the Slack notification
 
 1. In the **Notification Settings** section of your alert setup, select **Slack**.
-2. Click the channel selector. If no Slack workspace is linked yet, click **Connect Slack** and complete the OAuth flow to authorize LangSmith.
+2. Click the channel selector. If no Slack workspace is linked yet, click **Connect Slack** and complete the OAuth flow to authorize the configured Slack app.
 3. Select the workspace and channel from the dropdown. Click the refresh icon if the channel does not appear immediately.
 4. Click **Save** to save the notification configuration.
 
-LangSmith automatically joins the public channel you select. To post to a private channel, invite the `@LangSmith` app to that channel in Slack first.
+LangSmith joins the selected public channel when it first delivers a message, if needed. To post to a private channel, invite the configured Slack app to that channel in Slack first.
 
 ### 2. Test the integration
 
@@ -304,7 +314,7 @@ Here is an example for configuring LangSmith alerts to send notifications to Sla
 **Prerequisites**
 
 * Access to a Slack workspace.
-* A LangSmith project to set up alerts.
+* A LangSmith tracing project, or an agent environment, to set up alerts.
 * Permissions to create Slack applications.
 
 **Step 1: Create a Slack app**
@@ -340,7 +350,7 @@ You also need the channel ID to configure the webhook alert in LangSmith. You ca
 
 **Step 5: Configure the webhook alert in LangSmith**
 
-1. In LangSmith, navigate to your project.
+1. In LangSmith, navigate to your tracing project, or to your agent environment.
 2. Select **Alerts > Create Alert**.
 3. Define your alert metrics and conditions.
 4. In the notification section, select **Webhook**.
@@ -430,7 +440,7 @@ Here is an example for configuring LangSmith alerts to send notifications to a M
 **Prerequisites**
 
 * Access to a Microsoft Teams workspace with permissions to add Workflows.
-* A LangSmith project to set up alerts.
+* A LangSmith tracing project, or an agent environment, to set up alerts.
 
 **Step 1: Create a Workflow in Teams**
 
@@ -453,7 +463,7 @@ The default workflow posts the raw JSON body as a card. To format alert details,
 
 **Step 3: Configure the webhook alert in LangSmith**
 
-1. In LangSmith, navigate to your project.
+1. In LangSmith, navigate to your tracing project, or to your agent environment.
 2. Select **Alerts > Create Alert**.
 3. Define your alert metrics and conditions.
 4. In the notification section, select **Webhook**.
@@ -506,7 +516,7 @@ Here is an example for configuring LangSmith alerts to send email notifications 
 
 * A SendGrid account with a verified sender identity.
 * A SendGrid API key with **Mail Send** permissions.
-* A LangSmith project to set up alerts.
+* A LangSmith tracing project, or an agent environment, to set up alerts.
 
 **Step 1: Create a SendGrid API key**
 
@@ -523,7 +533,7 @@ Here is an example for configuring LangSmith alerts to send email notifications 
 
 **Step 3: Configure the webhook alert in LangSmith**
 
-1. In LangSmith, navigate to your project.
+1. In LangSmith, navigate to your tracing project, or to your agent environment.
 2. Select **Alerts > Create Alert**.
 3. Define your alert metrics and conditions.
 4. In the notification section, select **Webhook**.
@@ -588,10 +598,10 @@ Replace `SG.your-api-key-here` with your SendGrid API key.
 
 The same pattern works with other transactional email APIs that accept static authentication headers. Change the **Webhook URL** and **Headers** to match your provider:
 
-| Provider | Webhook URL                                         | Auth header format                         |
-| -------- | --------------------------------------------------- | ------------------------------------------ |
-| Mailgun  | `https://api.mailgun.net/v3/{your-domain}/messages` | `Authorization: Basic <base64(api:<key>)>` |
-| Postmark | `https://api.postmarkapp.com/email`                 | `X-Postmark-Server-Token: <token>`         |
+| Provider | Webhook URL | Auth header format |
+| - | - | - |
+| Mailgun | `https://api.mailgun.net/v3/{your-domain}/messages` | `Authorization: Basic <base64(api:<key>)>` |
+| Postmark | `https://api.postmarkapp.com/email` | `X-Postmark-Server-Token: <token>` |
 
 Adjust the **Request Body Template** to match each provider's expected payload format. Amazon SES is not directly compatible because the SES API requires per-request AWS SigV4 signing, which cannot be expressed as a static header. To use SES, route through a middleware (for example, a Lambda function with an HTTP trigger).
 

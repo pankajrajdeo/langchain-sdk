@@ -1,0 +1,272 @@
+---
+title: "Move from Deep Agents to Managed Deep Agents"
+description: "Convert an agent built with create_deep_agent into a Managed Deep Agents project."
+source: "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-migrate"
+category: "docs"
+tags: [docs, langsmith, javascript, managed-deep-agents-migrate]
+---
+
+# Move from Deep Agents to Managed Deep Agents
+
+> Convert an agent built with create_deep_agent into a Managed Deep Agents project.
+
+Managed Deep Agents runs the same [Deep Agents](../../javascript/deepagents/overview.md) harness you already build against, so moving an existing agent is a repackaging job rather than a rewrite. Your tools, middleware, and subagents carry over as they are. The agent entry changes, and the system prompt, skills, and memory move into project files.
+
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+
+## Decide whether to move
+
+Managed Deep Agents runs the same harness, so the agent itself behaves the same. Tools, middleware, and subagents work as they do today. Moving adds the layer around the agent: Slack and other chat surfaces, OAuth for end users, scheduled runs, a managed sandbox, and durable memory become declarations in a project file rather than services you build and operate.
+
+Move an agent when you want that layer without running it. Stay on Deep Agents when you need to own it.
+
+| | Deep Agents | Managed Deep Agents |
+| - | - | - |
+| **Hosting** | You run the agent in your own process or container, or deploy it as a [LangSmith deployment](../deployment.md). | LangSmith hosts the agent on [Agent Server](../agent-server-overview.md). `mda deploy` is the whole deployment step. |
+| **Filesystem and shell** | Any [backend](../../javascript/deepagents/backends.md): agent state, local disk, a store, or a [sandbox](../../javascript/deepagents/sandboxes.md) you provision with a provider. | One managed [sandbox](managed-deep-agents-sandboxes.md), declared in a file. LangSmith creates it, snapshots it, and stops it when idle. |
+| **Memory across conversations** | You run the storage and wire it up yourself. | One shared [memory](managed-deep-agents-memory.md) tree, enabled by adding a file. |
+| **Third-party access for end users** | You provision and store credentials for each user. | [Connections](managed-deep-agents-connections.md) hold workspace secrets and run OAuth, so end users authorize services themselves. |
+| **Chat surfaces** | You write the integration. | [Channels](managed-deep-agents-channels.md) connect Slack and other messaging services. |
+| **Scheduled runs** | You run the scheduler. | [Schedules](managed-deep-agents-schedules.md) run managed cron jobs. |
+| **Code around the agent** | Yours to write, including custom routes and application code. | The agent only. For custom routes or application code, use a [LangSmith deployment](../deployment.md). |
+
+The harness is the same either way, so building on Deep Agents first and moving when the agent is ready for production is a normal path. See [Going to production](../../javascript/deepagents/going-to-production.md).
+
+## Understand what changes
+
+[createDeepAgent](https://reference.langchain.com/javascript/deepagents/agent/createDeepAgent) compiles an agent in your process, so it takes the backend, store, and checkpointer as options. `defineDeepAgent` returns a definition instead, and the managed runtime compiles it. The definition is configuration rather than a runnable agent: the `mda` CLI consumes it on `mda dev` and `mda deploy`, and the runtime supplies the managed pieces at that point. For the full picture, see [Relationship to Deep Agents](managed-deep-agents-overview.md#relationship-to-deep-agents).
+
+## Check what does not carry over
+
+Most agents move without changes beyond the entry file. Four cases need a decision first:
+
+* **Custom backends**: A hand-written `BackendProtocol` implementation has no equivalent. The runtime owns the backend, and the [managed sandbox](managed-deep-agents-sandboxes.md) is the only choice for giving the agent a filesystem and shell.
+* **Your own store or checkpointer**: Threads, runs, and persistence come from [Agent Server](../agent-server-overview.md). An agent that depends on a specific store implementation needs that logic moved into a tool or middleware.
+* **Custom application code and routes**: Managed Deep Agents hosts the agent, not an arbitrary web application. For custom routes, advanced authentication, or application code around the agent, use a [LangSmith deployment](../deployment.md) instead.
+* **Custom state schemas in Python**: `define_deep_agent` does not accept `state_schema`, so an agent that extends `DeepAgentState` cannot move as is. The TypeScript `defineDeepAgent` does accept `stateSchema`.
+
+If none of these apply, the agent logic transfers as written.
+
+> **Prompt:** Convert a Deep Agents project into a Managed Deep Agents project.
+Convert this codebase from a self-hosted Deep Agents agent into a Managed Deep Agents (MDA) project.
+
+## Step 1: Read the guide
+
+Fetch and follow [https://docs.langchain.com/langsmith/javascript/managed-deep-agents-migrate.md](managed-deep-agents-migrate.md) as the source of truth for the parameter mapping and project layout.
+
+## Step 2: Add the SDK
+
+Convert the project in place; do not run `mda init`, which only creates a new directory. Add `managed-deepagents` to the existing project manifest, pinned to the version `mda --version` reports, and leave every existing dependency alone.
+
+In Python, if the manifest sets `build-backend = "hatchling.build"`, also add `[tool.hatch.metadata] allow-direct-references = true`. `mda build` rewrites the requirement into a path reference that Hatchling otherwise rejects at install time.
+
+## Step 3: Move the configuration
+
+Find the `create_deep_agent` (or `createDeepAgent`) call site, then:
+
+* Replace it with `define_deep_agent` (or `defineDeepAgent`) in `agent.py` (or `agent.ts`) at the project root, exporting a variable named `agent`. The definition call must live in that file, not be re-exported into it.
+* Add a static `name`, which is required. Use a string matching `[a-zA-Z][a-zA-Z0-9_-]*`.
+* Move the `system_prompt` text into `instructions.md` next to the agent entry, and remove the parameter.
+* Move the files referenced by `skills` into `skills/<name>/SKILL.md`, and remove the parameter.
+* Replace `memory` with a root `memory.py` (or `memory.ts`) exporting a variable named `memory` set to `define_memory(scope="agent")`, and remove the parameter. Leave the file out if the agent needs no durable memory. Warn the user that this mounts an empty tree and any existing memory content must be moved into `instructions.md` or a skill.
+* Delete `backend`, `store`, and `checkpointer`. The runtime owns all three. If the agent used a sandbox backend, add a `sandbox/` declaration exporting `define_sandbox(...)` instead. The managed sandbox is the only backend Managed Deep Agents offers.
+* Keep `model`, `tools`, `middleware`, `subagents`, `permissions`, `cache`, and `debug` as they are, along with the interrupt, response-format, and context-schema parameters under their existing names. Warn the user that a project declaring `sandbox/` runs with `permissions` cleared, because a filesystem permission rule disables the sandbox `execute` tool.
+* Leave tool and middleware modules where they already live and keep importing them from the agent entry. Do not restructure the project.
+
+## Step 4: Handle gaps explicitly
+
+If the codebase passes `state_schema` in Python, builds a custom `BackendProtocol`, or wraps the agent in its own server routes or application code, stop and ask the user how to proceed. Managed Deep Agents does not accept these. Do not invent replacements.
+
+## Step 5: Verify
+
+Run `mda build`, then `mda dev`, and confirm the agent starts and answers a test message. `mda build` does not validate the definition call, so a leftover managed parameter only appears at graph load. Report anything that could not be migrated.
+
+## Map the parameters
+
+Most of the surface transfers to `defineDeepAgent` unchanged, under the same names: `model`, `tools`, `middleware`, `subagents`, `interruptOn`, `responseFormat`, `contextSchema`, `stateSchema`, `cache`, and `debug`. Leave the tool and middleware modules where they already live and keep importing them from the agent entry.
+
+`defineDeepAgent` adds one required option. Pass `name` a static string that starts with a letter and contains only letters, numbers, underscores, or hyphens. Managed Deep Agents uses it as the agent's graph ID and the default deployment name.
+
+The rest move to a project file or become the runtime's job:
+
+| `createDeepAgent` | Where it goes | Notes |
+| - | - | - |
+| `systemPrompt` | `instructions.md` | Move the text into the file, then remove the option. See [Instructions](managed-deep-agents-instructions.md). |
+| `skills` | `skills/` | One directory per skill, each with a `SKILL.md`. See [Skills](managed-deep-agents-skills.md). |
+| `memory` | `memory.ts` | Export `defineMemory({ scope: "agent" })`. Omit the file for no durable memory. See [Memory](managed-deep-agents-memory.md). |
+| `backend` | `sandbox/` | Declare a managed sandbox instead of constructing a backend. See [Sandboxes](managed-deep-agents-sandboxes.md). |
+| `permissions` | Stays an option | Accepted, and cleared when the project declares a sandbox. See [Permissions](../../javascript/deepagents/permissions.md). |
+| `store`, `checkpointer` | Managed runtime | Remove both. |
+
+Deep Agents backends are pluggable, and the managed runtime supplies its own. A project that declares `sandbox/` gets a managed sandbox for the agent filesystem and shell. A project without one gets thread-scoped agent state, alongside read-only [Context Hub](managed-deep-agents-context-hub.md) mounts for instructions, skills, and memory. There is no other choice of backend, so an agent that depends on a specific one stays on Deep Agents.
+
+## Move an agent
+
+Convert the project in place. The existing layout, module structure, and dependencies stay as they are: `mda build` merges the dependencies it needs into the project manifest rather than replacing it.
+
+To install the `mda` CLI first, see the [quickstart](managed-deep-agents-quickstart.md).
+
+### Add the SDK to the project
+```bash
+npm install managed-deepagents
+```
+
+Pin the version to match the CLI, which `mda --version` reports.
+
+Leave every dependency the project already declares in place. Tools and middleware keep importing what they always did.
+
+### Rewrite the agent entry
+Convert the call site using the table above, in a file named `agent.ts` at the project root:
+
+**agent.ts (before)**
+
+```ts
+import { createDeepAgent } from "deepagents";
+
+import { internetSearch } from "./tools/search.js";
+
+export const agent = createDeepAgent({
+  model: "openai:gpt-5.5",
+  tools: [internetSearch],
+  systemPrompt: SYSTEM_PROMPT,
+  skills: ["/skills/research/"],
+  checkpointer,  // yours to construct and wire
+});
+```
+
+**agent.ts (after)**
+
+```ts
+import { defineDeepAgent } from "managed-deepagents";
+
+import { internetSearch } from "./tools/search.js";
+
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "openai:gpt-5.5",
+  tools: [internetSearch],
+});
+```
+
+The entry must export a variable named `agent`, and the definition call itself has to live in this file. A root entry that re-exports the definition from another module fails, and the error names `name` rather than the real problem.
+
+A `src/` layout is otherwise fine. Keep the packages where they are and import them from the root entry.
+
+### Move the prompt, skills, and memory into files
+Put the system prompt in `instructions.md` at the project root. Give each skill its own directory under `skills/` with a `SKILL.md`.
+
+If the agent needs memory that persists across threads, declare it in a root file exporting a variable named `memory`:
+
+**memory.ts**
+
+```ts
+import { defineMemory } from "managed-deepagents";
+
+export const memory = defineMemory({ scope: "agent" });
+```
+
+Durable memory is opt-in, and a project without the file mounts none. The scope is the only knob: `"agent"` mounts one tree that every caller of the deployment shares. To control what the agent keeps there, write a memory policy into `instructions.md`. See [Guide what to remember](managed-deep-agents-memory.md#guide-what-to-remember).
+
+> [!WARNING]
+> `define_memory` mounts an empty memory tree. Content from the files the old `memory` parameter pointed at does not transfer, so move anything the agent still needs into `instructions.md` or a skill before deleting those files.
+
+### Declare a sandbox
+An agent that passed a sandbox `backend` needs a managed sandbox declaration instead. Create the directory and declare it:
+
+**sandbox/index.ts**
+
+```ts
+import { defineSandbox } from "managed-deepagents";
+
+export const sandbox = defineSandbox({
+  idleTtlSeconds: 600,
+  defaultTimeout: 600,
+});
+```
+
+> [!WARNING]
+> Declaring a sandbox clears `permissions`. A filesystem permission rule disables the sandbox `execute` tool, so the runtime drops the rules rather than the shell. Restrict a sandboxed agent through the tools you give it instead.
+
+To provision a snapshot, add `sandbox/setup.sh`. Skip this step for an agent that had no sandbox backend. See [Sandboxes](managed-deep-agents-sandboxes.md).
+
+### Declare identity
+(Optional) To give each caller private threads and downstream credentials, add a root identity declaration:
+
+**identity.ts**
+
+```ts
+import { auth, defineIdentity } from "managed-deepagents";
+
+export const identity = defineIdentity({
+  auth: auth.langsmithApiKey(),
+});
+```
+
+Without the file the deployment runs with no managed auth, which `mda dev` reports as `Identity none`. See [Identity](managed-deep-agents-identity.md).
+
+### Set credentials and ignore the build output
+Put the model and tool API keys in a `.env` file at the project root. A value exported in your shell is not read. For shared workspace secrets and OAuth, use [connections](managed-deep-agents-connections.md) instead.
+
+Add the build directory to `.gitignore`:
+
+**.gitignore**
+
+```text
+.env
+.env.*
+.mda/
+```
+
+`mda build` copies the whole project root into `.mda/build`, and `mda deploy` uploads it. Anything sitting next to the agent entry ships with the agent, so move what the deployment does not need out of the project root.
+
+### Compile, then run
+Compile without deploying:
+
+```bash
+mda build
+```
+
+Then start it locally:
+
+```bash
+mda dev
+```
+
+> [!NOTE]
+> `mda build` does not inspect the definition call, so it exits 0 even when a managed parameter is still there. A leftover parameter surfaces when the graph loads under `mda dev`.
+
+See [Local development](managed-deep-agents-local-development.md).
+
+### Deploy
+Upload the project and let LangSmith build and host it:
+
+```bash
+mda deploy
+```
+
+See [Deploy](managed-deep-agents-deploy.md).
+
+> [!TIP]
+> Starting a new agent rather than moving one? Scaffold the whole project, including the identity, sandbox, `.env`, and `.gitignore` files above:
+>
+> ```bash
+> npx managed-deepagents init research-assistant
+> ```
+>
+> The install channel selects the authoring language: the npm package scaffolds TypeScript, and the PyPI package scaffolds Python. The command creates a new directory and does not run in place, so it suits a greenfield project rather than a migration. See the [quickstart](managed-deep-agents-quickstart.md).
+
+## See also
+
+* [Relationship to Deep Agents](managed-deep-agents-overview.md#relationship-to-deep-agents): why the two entry points differ.
+* [Agent definition](managed-deep-agents-agent-definition.md): the full parameter reference.
+* [Project structure](managed-deep-agents-project-structure.md): where each file goes.
+* [Going to production](../../javascript/deepagents/going-to-production.md): deployment options for Deep Agents.
+
+***
+
+> [!NOTE]
+> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-migrate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

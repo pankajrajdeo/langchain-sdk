@@ -16,9 +16,9 @@ This will help you get started with PineconeEmbeddings [embedding models](../emb
 
 ### Integration details
 
-| Class                                                                                                    | Package                                                                    | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/pinecone/) |                                              Downloads                                              |                                              Version                                             |
-| :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------- | :---: | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
-| [`PineconeEmbeddings`](https://reference.langchain.com/javascript/langchain-pinecone/PineconeEmbeddings) | [`@langchain/pinecone`](https://www.npmjs.com/package/@langchain/pinecone) |   ❌   |                                         ✅                                         | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/pinecone?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/pinecone?style=flat-square\&label=%20&) |
+| Class | Package | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/pinecone/) | Downloads | Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`PineconeEmbeddings`](https://reference.langchain.com/javascript/langchain-pinecone/PineconeEmbeddings) | [`@langchain/pinecone`](https://www.npmjs.com/package/@langchain/pinecone) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/pinecone?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/pinecone?style=flat-square\&label=%20&) |
 
 ## Setup
 

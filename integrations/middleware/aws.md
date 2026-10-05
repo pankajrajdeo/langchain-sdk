@@ -12,9 +12,9 @@ tags: [docs, integrations, middleware, aws]
 
 Middleware integrations for AWS services. Prompt caching is designed for models hosted on Amazon Bedrock, while AgentCore Payments works with LangGraph agents regardless of model provider. Learn more about [middleware](../../langchain/middleware/overview.md).
 
-| Middleware                                | Description                                                 |
-| ----------------------------------------- | ----------------------------------------------------------- |
-| [Prompt caching](#prompt-caching)         | Reduce costs by caching repetitive prompt prefixes          |
+| Middleware | Description |
+| - | - |
+| [Prompt caching](#prompt-caching) | Reduce costs by caching repetitive prompt prefixes |
 | [AgentCore Payments](#agentcore-payments) | Autonomous x402 and MPP micropayment handling for paid APIs |
 
 ## Prompt caching
@@ -159,12 +159,12 @@ print(response["messages"][-1].content)
 
 The middleware handles differences between APIs and model families automatically:
 
-| Feature                 | ChatBedrockConverse (Anthropic) |     ChatBedrockConverse (Nova)    | ChatBedrock (Anthropic) |
-| ----------------------- | :-----------------------------: | :-------------------------------: | :---------------------: |
-| System prompt caching   |                ✅                |                 ✅                 |            ✅            |
-| Tool definition caching |                ✅                |                 ❌                 |            ✅            |
-| Message caching         |                ✅                | ✅ (excludes tool result messages) |            ✅            |
-| Extended TTL (`1h`)     |                ✅                |                 ❌                 |            ✅            |
+| Feature | ChatBedrockConverse (Anthropic) | ChatBedrockConverse (Nova) | ChatBedrock (Anthropic) |
+| - | :-: | :-: | :-: |
+| System prompt caching | ✅ | ✅ | ✅ |
+| Tool definition caching | ✅ | ❌ | ✅ |
+| Message caching | ✅ | ✅ (excludes tool result messages) | ✅ |
+| Extended TTL (`1h`) | ✅ | ❌ | ✅ |
 
 ## AgentCore Payments
 
@@ -278,21 +278,21 @@ When a tool returns an HTTP 402 response with an x402 or MPP payload, the middle
 
 The protocol is detected automatically from where the 402 advertises its payment requirement:
 
-| 402 response advertises the requirement in    | Protocol | Returned header                  |
-| --------------------------------------------- | -------- | -------------------------------- |
-| The response body (`x402Version` + `accepts`) | x402 v1  | `X-PAYMENT`                      |
-| The `Payment-Required` response header        | x402 v2  | `PAYMENT-SIGNATURE`              |
-| `WWW-Authenticate: Payment` response headers  | MPP      | `Authorization: Payment <token>` |
+| 402 response advertises the requirement in | Protocol | Returned header |
+| - | - | - |
+| The response body (`x402Version` + `accepts`) | x402 v1 | `X-PAYMENT` |
+| The `Payment-Required` response header | x402 v2 | `PAYMENT-SIGNATURE` |
+| `WWW-Authenticate: Payment` response headers | MPP | `Authorization: Payment <token>` |
 
 **Supported methods**
 
 An MPP server may advertise several payment options, but each payment fulfills exactly one challenge. The middleware keeps only `charge`-intent, unexpired challenges whose method your instrument's blockchain can satisfy, orders them by `network_preferences_config`, and pays the best match:
 
-| Payment method | Satisfied by instrument network    |
-| -------------- | ---------------------------------- |
-| `evm`          | `ETHEREUM`                         |
-| `tempo`        | `ETHEREUM` (Tempo is an EVM chain) |
-| `solana`       | `SOLANA`                           |
+| Payment method | Satisfied by instrument network |
+| - | - |
+| `evm` | `ETHEREUM` |
+| `tempo` | `ETHEREUM` (Tempo is an EVM chain) |
+| `solana` | `SOLANA` |
 
 Challenges advertising `session` or `subscription` intents are filtered out; only `charge` is supported. If no advertised challenge is satisfiable, the payment fails before any service call — an unsatisfiable 402 never consumes session budget.
 
@@ -320,13 +320,13 @@ The parameter is tri-state and MPP-only: `None` (default) leaves the field unsen
 
 The middleware automatically registers these tools (available to the agent):
 
-| Tool                             | Description                                                   |
-| -------------------------------- | ------------------------------------------------------------- |
-| `http_request`                   | Call any HTTP endpoint. 402 responses are paid automatically. |
-| `get_payment_instrument`         | Query details about a payment instrument                      |
-| `list_payment_instruments`       | List all instruments for a user                               |
-| `get_payment_instrument_balance` | Check wallet balance on a chain                               |
-| `get_payment_session`            | Query session budget, status, expiry                          |
+| Tool | Description |
+| - | - |
+| `http_request` | Call any HTTP endpoint. 402 responses are paid automatically. |
+| `get_payment_instrument` | Query details about a payment instrument |
+| `list_payment_instruments` | List all instruments for a user |
+| `get_payment_instrument_balance` | Check wallet balance on a chain |
+| `get_payment_session` | Query session budget, status, expiry |
 
 Set `provide_http_request=False` if you bring your own HTTP tool.
 
@@ -403,7 +403,7 @@ When a tool returns, the middleware checks for 402 in this order:
 
 ### MCP tool compatibility
 
-MCP tools connected via `langchain-mcp-adapters` can work with the middleware when the following conditions are met:
+MCP tools connected via [`MCPAdapter`](https://reference.langchain.com/python/langchain/mcp/adapter/MCPAdapter) (from `langchain.mcp`) can work with the middleware when the following conditions are met:
 
 1. The tool returns payment-related JSON (including `statusCode: 402`) as **text content** in `ToolMessage.content` (not in `ToolMessage.artifact` or `structuredContent`)
 2. The tool accepts a `headers` argument and forwards it in its outbound HTTP requests
@@ -469,11 +469,11 @@ config = AgentCorePaymentsConfig(
 
 The callback can return:
 
-| Return                      | Behavior                                                             |
-| --------------------------- | -------------------------------------------------------------------- |
-| `ErrorResolution.RETRY`     | Retry payment with updated config                                    |
-| `ErrorResolution.PROPAGATE` | Use default deterministic error message                              |
-| `str`                       | Custom message sent to the agent as `"PAYMENT ERROR: {your string}"` |
+| Return | Behavior |
+| - | - |
+| `ErrorResolution.RETRY` | Retry payment with updated config |
+| `ErrorResolution.PROPAGATE` | Use default deterministic error message |
+| `str` | Custom message sent to the agent as `"PAYMENT ERROR: {your string}"` |
 
 **Callback flow:**
 
@@ -494,41 +494,41 @@ Payment exception occurs
 
 **PaymentErrorContext fields:**
 
-| Field                      | Type                      | Description                                       |
-| -------------------------- | ------------------------- | ------------------------------------------------- |
-| `exception`                | `Exception`               | The exception instance                            |
-| `exception_type`           | `str`                     | Class name (e.g., `"PaymentSessionExpired"`)      |
-| `exception_message`        | `str`                     | `str(exception)`                                  |
-| `tool_name`                | `str`                     | Tool that triggered the 402                       |
-| `tool_args`                | `dict`                    | The tool call arguments                           |
-| `payment_required_request` | `dict \| None`            | The 402 payload (None if error before extraction) |
-| `config`                   | `AgentCorePaymentsConfig` | Mutable reference; modify to fix the issue        |
-| `retry_count`              | `int`                     | Number of retry attempts, starting at 0           |
+| Field | Type | Description |
+| - | - | - |
+| `exception` | `Exception` | The exception instance |
+| `exception_type` | `str` | Class name (e.g., `"PaymentSessionExpired"`) |
+| `exception_message` | `str` | `str(exception)` |
+| `tool_name` | `str` | Tool that triggered the 402 |
+| `tool_args` | `dict` | The tool call arguments |
+| `payment_required_request` | `dict \| None` | The 402 payload (None if error before extraction) |
+| `config` | `AgentCorePaymentsConfig` | Mutable reference; modify to fix the issue |
+| `retry_count` | `int` | Number of retry attempts, starting at 0 |
 
 **Recommended resolution patterns:**
 
-| Exception                                          | Resolution                                                            |
-| -------------------------------------------------- | --------------------------------------------------------------------- |
+| Exception | Resolution |
+| - | - |
 | `PaymentSessionNotFound` / `PaymentSessionExpired` | Create new session, set `ctx.config.payment_session_id`, return RETRY |
-| `InsufficientBudget`                               | Create session with higher limits, or PROPAGATE                       |
-| `PaymentInstrumentConfigurationRequired`           | Set `ctx.config.payment_instrument_id`, return RETRY                  |
-| `PaymentInstrumentNotFound`                        | Likely config error; return PROPAGATE                                 |
-| `PaymentSessionConfigurationRequired`              | Create session, or enable `auto_session=True`                         |
-| Generic `PaymentError`                             | Log and return PROPAGATE; usually transient                           |
+| `InsufficientBudget` | Create session with higher limits, or PROPAGATE |
+| `PaymentInstrumentConfigurationRequired` | Set `ctx.config.payment_instrument_id`, return RETRY |
+| `PaymentInstrumentNotFound` | Likely config error; return PROPAGATE |
+| `PaymentSessionConfigurationRequired` | Create session, or enable `auto_session=True` |
+| Generic `PaymentError` | Log and return PROPAGATE; usually transient |
 
 #### Deterministic error messages (default)
 
 When no callback is configured (or it returns `PROPAGATE`), the agent receives a tailored error message with instructions not to retry:
 
-| Failure                  | Message to agent                                                  |
-| ------------------------ | ----------------------------------------------------------------- |
-| No instrument configured | `PAYMENT ERROR: No payment instrument configured...`              |
-| No session configured    | `PAYMENT ERROR: No payment session configured...`                 |
-| Instrument not found     | `PAYMENT ERROR: Payment instrument not found...`                  |
-| Session expired          | `PAYMENT ERROR: Payment session has expired...`                   |
-| Insufficient budget      | `PAYMENT ERROR: Insufficient budget...`                           |
-| Payment rejected         | `PAYMENT ERROR: Payment was signed but rejected by the server...` |
-| Generic failure          | `PAYMENT ERROR: Payment processing failed...`                     |
+| Failure | Message to agent |
+| - | - |
+| No instrument configured | `PAYMENT ERROR: No payment instrument configured...` |
+| No session configured | `PAYMENT ERROR: No payment session configured...` |
+| Instrument not found | `PAYMENT ERROR: Payment instrument not found...` |
+| Session expired | `PAYMENT ERROR: Payment session has expired...` |
+| Insufficient budget | `PAYMENT ERROR: Insufficient budget...` |
+| Payment rejected | `PAYMENT ERROR: Payment was signed but rejected by the server...` |
+| Generic failure | `PAYMENT ERROR: Payment processing failed...` |
 
 All messages include `"Do not retry this call"` and actionable guidance for the user.
 
@@ -653,9 +653,9 @@ Custom handlers receive the **raw `ToolMessage.content`**; parse it yourself. Do
 
 The middleware provides both sync and async paths. LangGraph calls the right one automatically:
 
-| Invocation           | Path                                        | Use case                      |
-| -------------------- | ------------------------------------------- | ----------------------------- |
-| `agent.invoke(...)`  | Sync: `time.sleep`, direct calls            | Scripts, CLI tools            |
+| Invocation | Path | Use case |
+| - | - | - |
+| `agent.invoke(...)` | Sync: `time.sleep`, direct calls | Scripts, CLI tools |
 | `agent.ainvoke(...)` | Async: `asyncio.sleep`, `asyncio.to_thread` | FastAPI, web servers, Jupyter |
 
 Install FastAPI to run the asynchronous web server example:
@@ -763,29 +763,29 @@ Compatible tools that meet the [custom tool integration contract](#custom-tool-i
 
 ### Configuration reference
 
-| Parameter                          | Type                         | Default    | Description                                                                                                                                                                |
-| ---------------------------------- | ---------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `payment_manager_arn`              | `str`                        | *required* | ARN of the payment manager resource                                                                                                                                        |
-| `user_id`                          | `str \| None`                | `None`     | User ID. Required for SigV4 auth; optional with bearer token                                                                                                               |
-| `payment_instrument_id`            | `str \| None`                | `None`     | Instrument ID for payment signing                                                                                                                                          |
-| `payment_session_id`               | `str \| None`                | `None`     | Session ID for budget enforcement                                                                                                                                          |
-| `payment_connector_id`             | `str \| None`                | `None`     | Connector ID (optional)                                                                                                                                                    |
-| `region`                           | `str \| None`                | `None`     | AWS region                                                                                                                                                                 |
-| `network_preferences_config`       | `list[str] \| None`          | `None`     | Ordered CAIP-2 network identifiers                                                                                                                                         |
-| `buyer_pays_gas_fees`              | `bool \| None`               | `None`     | MPP only. Authorizes network (gas) fees charged to the buyer's wallet, on top of the payment amount. `None` leaves the protocol default (buyer declines); ignored for x402 |
-| `auto_payment`                     | `bool`                       | `True`     | Enable/disable automatic 402 processing                                                                                                                                    |
-| `auto_session`                     | `bool`                       | `False`    | Auto-create session on first 402                                                                                                                                           |
-| `auto_session_budget`              | `str`                        | `"1.00"`   | Budget (USD) for auto-created sessions                                                                                                                                     |
-| `auto_session_expiry_minutes`      | `int`                        | `60`       | Expiry for auto-created sessions                                                                                                                                           |
-| `agent_name`                       | `str \| None`                | `None`     | Agent name for data-plane headers                                                                                                                                          |
-| `bearer_token`                     | `str \| None`                | `None`     | Static JWT. Mutually exclusive with `token_provider`                                                                                                                       |
-| `token_provider`                   | `Callable \| None`           | `None`     | Callable returning fresh JWT. Mutually exclusive with `bearer_token`                                                                                                       |
-| `payment_tool_allowlist`           | `list[str] \| None`          | `None`     | Tools eligible for payment. `None` = all                                                                                                                                   |
-| `provide_http_request`             | `bool`                       | `True`     | Register built-in `http_request` tool                                                                                                                                      |
-| `post_payment_retry_delay_seconds` | `float`                      | `3.0`      | Delay after signing before retry                                                                                                                                           |
-| `custom_handlers`                  | `dict[str, Handler] \| None` | `None`     | Custom handlers keyed by tool name                                                                                                                                         |
-| `on_payment_error`                 | `Callable \| None`           | `None`     | Error callback for programmatic recovery                                                                                                                                   |
-| `max_error_retries`                | `int`                        | `3`        | Max retries via callback per tool call                                                                                                                                     |
+| Parameter | Type | Default | Description |
+| - | - | - | - |
+| `payment_manager_arn` | `str` | *required* | ARN of the payment manager resource |
+| `user_id` | `str \| None` | `None` | User ID. Required for SigV4 auth; optional with bearer token |
+| `payment_instrument_id` | `str \| None` | `None` | Instrument ID for payment signing |
+| `payment_session_id` | `str \| None` | `None` | Session ID for budget enforcement |
+| `payment_connector_id` | `str \| None` | `None` | Connector ID (optional) |
+| `region` | `str \| None` | `None` | AWS region |
+| `network_preferences_config` | `list[str] \| None` | `None` | Ordered CAIP-2 network identifiers |
+| `buyer_pays_gas_fees` | `bool \| None` | `None` | MPP only. Authorizes network (gas) fees charged to the buyer's wallet, on top of the payment amount. `None` leaves the protocol default (buyer declines); ignored for x402 |
+| `auto_payment` | `bool` | `True` | Enable/disable automatic 402 processing |
+| `auto_session` | `bool` | `False` | Auto-create session on first 402 |
+| `auto_session_budget` | `str` | `"1.00"` | Budget (USD) for auto-created sessions |
+| `auto_session_expiry_minutes` | `int` | `60` | Expiry for auto-created sessions |
+| `agent_name` | `str \| None` | `None` | Agent name for data-plane headers |
+| `bearer_token` | `str \| None` | `None` | Static JWT. Mutually exclusive with `token_provider` |
+| `token_provider` | `Callable \| None` | `None` | Callable returning fresh JWT. Mutually exclusive with `bearer_token` |
+| `payment_tool_allowlist` | `list[str] \| None` | `None` | Tools eligible for payment. `None` = all |
+| `provide_http_request` | `bool` | `True` | Register built-in `http_request` tool |
+| `post_payment_retry_delay_seconds` | `float` | `3.0` | Delay after signing before retry |
+| `custom_handlers` | `dict[str, Handler] \| None` | `None` | Custom handlers keyed by tool name |
+| `on_payment_error` | `Callable \| None` | `None` | Error callback for programmatic recovery |
+| `max_error_retries` | `int` | `3` | Max retries via callback per tool call |
 
 ### Learn more
 

@@ -243,21 +243,21 @@ The default index name will be: "\\_idx"
 In addition to the basic value-based filtering capabilities, it is possible to use more advanced filtering.
 The table below shows the available filter operators.
 
-| Operator    | Semantic                                                                   | Supported data types for Operands                                |
-| ----------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `$eq`       | Equality (==)                                                              | int, float, str, bool, date object, None                         |
-| `$ne`       | Inequality (!=)                                                            | int, float, str, bool, date object, None                         |
-| `$lt`       | Less than (\<)                                                             | int, float, str, date object                                     |
-| `$lte`      | Less than or equal (\<=)                                                   | int, float, str, date object                                     |
-| `$gt`       | Greater than (>)                                                           | int, float, str, date object                                     |
-| `$gte`      | Greater than or equal (>=)                                                 | int, float, str, date object                                     |
-| `$in`       | Contained in a set of given values  (in)                                   | list of same values of type (int, float, str, bool, date object) |
-| `$nin`      | Not contained in a set of given values  (not in)                           | list of same values of type (int, float, str, bool, date object) |
-| `$between`  | Between the range of two boundary values                                   | list of 2 values of (int, float, str, date object)               |
-| `$like`     | Text equality based on the "LIKE" semantics in SQL (using "%" as wildcard) | str                                                              |
-| `$contains` | Filters documents containing a specific keyword                            | non-empty str                                                    |
-| `$and`      | Logical "and", supporting two or more operands                             | list(filters)                                                    |
-| `$or`       | Logical "or", supporting two or more operands                              | list(filters)                                                    |
+| Operator | Semantic | Supported data types for Operands |
+| - | - | - |
+| `$eq` | Equality (==) | int, float, str, bool, date object, None |
+| `$ne` | Inequality (!=) | int, float, str, bool, date object, None |
+| `$lt` | Less than (\<) | int, float, str, date object |
+| `$lte` | Less than or equal (\<=) | int, float, str, date object |
+| `$gt` | Greater than (>) | int, float, str, date object |
+| `$gte` | Greater than or equal (>=) | int, float, str, date object |
+| `$in` | Contained in a set of given values  (in) | list of same values of type (int, float, str, bool, date object) |
+| `$nin` | Not contained in a set of given values  (not in) | list of same values of type (int, float, str, bool, date object) |
+| `$between` | Between the range of two boundary values | list of 2 values of (int, float, str, date object) |
+| `$like` | Text equality based on the "LIKE" semantics in SQL (using "%" as wildcard) | str |
+| `$contains` | Filters documents containing a specific keyword | non-empty str |
+| `$and` | Logical "and", supporting two or more operands | list(filters) |
+| `$or` | Logical "or", supporting two or more operands | list(filters) |
 
 ```python
 # Prepare some test documents

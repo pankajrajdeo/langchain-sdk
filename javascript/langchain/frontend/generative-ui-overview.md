@@ -100,11 +100,11 @@ For details, see [Open-ended generative UI](open-ended-generative-ui.md).
 
 Start from how much you need to constrain the interface:
 
-| If you need to...                                                           | Choose                                                                      |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Guarantee branding, layout, and accessibility for a known set of outputs    | [Controlled](controlled-generative-ui.md)   |
-| Let the agent compose novel layouts using only approved components          | [Declarative](declarative-generative-ui.md) |
-| Surface interfaces authored by third parties without building them yourself | [Open-ended](open-ended-generative-ui.md)   |
+| If you need to... | Choose |
+| - | - |
+| Guarantee branding, layout, and accessibility for a known set of outputs | [Controlled](controlled-generative-ui.md) |
+| Let the agent compose novel layouts using only approved components | [Declarative](declarative-generative-ui.md) |
+| Surface interfaces authored by third parties without building them yourself | [Open-ended](open-ended-generative-ui.md) |
 
 Choosing a single approach for an entire product is the most common mistake. Real
 applications mix approaches and match each surface to its purpose: controlled

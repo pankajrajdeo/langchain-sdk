@@ -10,7 +10,19 @@ tags: [docs, langsmith, evaluators]
 
 > View and manage evaluators at the workspace level in LangSmith.
 
-[Evaluators](evaluation-concepts.md#evaluators) in LangSmith are [workspace-level](administration-overview.md#workspaces) resources. You can attach a single evaluator to multiple [tracing projects](observability-concepts.md#projects) and [datasets](evaluation-concepts.md#datasets), so you can apply consistent evaluation logic across your work without recreating it each time.
+[Evaluators](evaluation-concepts.md#evaluators) in LangSmith are [workspace-level](administration-overview.md#workspaces) resources. You can attach a single evaluator to multiple [trace containers](observability-concepts.md#trace-containers) and [datasets](evaluation-concepts.md#datasets), so you can apply consistent evaluation logic across your work without recreating it each time.
+
+What an evaluator attaches to depends on how your workspace is organized.
+
+> [!NOTE]
+> **Agent-based workspaces ([beta](release-stages.md)).** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](observability-concepts.md#tracing-projects).
+
+An evaluator attaches to an [environment](agent-environments.md#environment-names) of an [agent](agents.md). Attach it to **Production** alone to score production traffic without also scoring local runs.
+
+> [!NOTE]
+> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](observability-concepts.md#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based, which is in [beta](release-stages.md). Skip this section and read [Agents](agents.md).
+
+An evaluator attaches to a [tracing project](observability-concepts.md#tracing-projects).
 
 > [!TIP]
 > Evaluator scores are a high-priority signal for the [LangSmith Engine](engine.md): it pulls low-scoring traces when choosing what to analyze, so attaching an evaluator to a project sharpens the issues Engine finds there.
@@ -21,18 +33,18 @@ In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=ct
 
 The evaluators table shows the following columns:
 
-| Column                            | Description                                                                                                                                                                     |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name                              | The evaluator name                                                                                                                                                              |
-| Type                              | **LLM as a judge** or **Code**. Composite score evaluators are scoped to individual tracing projects and datasets and do not appear here.                                       |
-| Feedback Key                      | The feedback key the evaluator produces                                                                                                                                         |
-| Projects & Datasets               | Tracing projects and datasets this evaluator is attached to                                                                                                                     |
-| Evaluator Trace Count (this week) | Number of traces this evaluator ran on in the past week. Only shown when spend tracking is enabled; **–** for Code evaluators or evaluators with no attached rules.             |
-| Spend (this week)                 | Estimated USD spend for this evaluator in the past week. Only shown when spend tracking is enabled; **–** for Code evaluators or evaluators with no attached rules.             |
-| Spend Status                      | Whether the evaluator is **Under limits**, **Unlimited**, or has hit one or more configured spend limits. Only shown when spend tracking is enabled; **–** for Code evaluators. |
-| Created By                        | The workspace member who created the evaluator                                                                                                                                  |
-| Updated At                        | When the evaluator was last modified                                                                                                                                            |
-| Created At                        | When the evaluator was created                                                                                                                                                  |
+| Column | Description |
+| - | - |
+| Name | The evaluator name |
+| Type | **LLM as a judge** or **Code**. Composite score evaluators are scoped to individual tracing projects and datasets and do not appear here. |
+| Feedback Key | The feedback key the evaluator produces |
+| Projects & Datasets | Tracing projects and datasets this evaluator is attached to. In an agent-based workspace, this column is **Environments & Datasets** and lists agent environments and datasets. |
+| Evaluator Trace Count (this week) | Number of traces this evaluator ran on in the past week. Only shown when spend tracking is enabled; **–** for Code evaluators or evaluators with no attached rules. |
+| Spend (this week) | Estimated USD spend for this evaluator in the past week. Only shown when spend tracking is enabled; **–** for Code evaluators or evaluators with no attached rules. |
+| Spend Status | Whether the evaluator is **Under limits**, **Unlimited**, or has hit one or more configured spend limits. Only shown when spend tracking is enabled; **–** for Code evaluators. |
+| Created By | The workspace member who created the evaluator |
+| Updated At | When the evaluator was last modified |
+| Created At | When the evaluator was created |
 
 ## Create an evaluator
 
@@ -47,17 +59,17 @@ You can create an evaluator in the [LangSmith UI](https://smith.langchain.com?ut
    * **Add a LangChain Tuned Evaluator**: Attach a [specialized judge managed by LangChain](tuned-evaluators.md) to a compatible tracing project without configuring a prompt, model, or API key.
    * **Create from a template**: Start from a ready-made evaluator (also known as a prebuilt evaluator) for common evaluation patterns. A **Recommended** section surfaces popular templates first, followed by templates organized by the following categories:
 
-     | Category          | Description                                          |
-     | ----------------- | ---------------------------------------------------- |
-     | Security          | Detect leaks, injections, and adversarial inputs.    |
-     | Safety            | Evaluate content safety and moderation.              |
-     | Quality           | Measure output quality and accuracy.                 |
-     | Conversation      | Evaluate conversational quality and user experience. |
-     | Trajectory        | Evaluate agent tool use and decision paths.          |
-     | Image Evaluations | Evaluate image content quality and safety.           |
-     | Voice Evaluation  | Evaluate voice and audio interaction quality.        |
+     | Category | Description |
+     | - | - |
+     | Security | Detect leaks, injections, and adversarial inputs. |
+     | Safety | Evaluate content safety and moderation. |
+     | Quality | Measure output quality and accuracy. |
+     | Conversation | Evaluate conversational quality and user experience. |
+     | Trajectory | Evaluate agent tool use and decision paths. |
+     | Image Evaluations | Evaluate image content quality and safety. |
+     | Voice Evaluation | Evaluate voice and audio interaction quality. |
 
-You can also add an evaluator directly from a [tracing project](observability-concepts.md#projects) or [dataset](evaluation-concepts.md#datasets). In that flow, you can additionally **attach an existing evaluator** from your workspace, or create a [Composite](composite-evaluators-ui.md) evaluator. Refer to [Set up LLM-as-a-judge online evaluators](online-evaluations-llm-as-judge.md) and [Automatically run evaluators on experiments](bind-evaluator-to-dataset.md).
+You can also add an evaluator directly from a [tracing project](observability-concepts.md#tracing-projects), an agent environment, or a [dataset](evaluation-concepts.md#datasets). In that flow, you can additionally **attach an existing evaluator** from your workspace, or create a [Composite](composite-evaluators-ui.md) evaluator. Refer to [Set up LLM-as-a-judge online evaluators](online-evaluations-llm-as-judge.md) and [Automatically run evaluators on experiments](bind-evaluator-to-dataset.md).
 
 ### Create an evaluator with the SDK
 
@@ -118,23 +130,23 @@ Click any evaluator in the table to open its detail view. The detail view has fo
 * **Overview**: The evaluator's feedback configuration and prompt or code definition.
 * **Traces**: Traces processed by this evaluator across all attached resources.
 * **Logs**: Execution logs for this evaluator across all attached resources.
-* **Projects & Datasets**: The tracing projects and datasets this evaluator is attached to, with each attachment's [weekly spend and limit](evaluator-spend.md).
+* **Projects & Datasets** (**Environments & Datasets** in an agent-based workspace): The tracing projects, agent environments, and datasets this evaluator is attached to, with each attachment's [weekly spend and limit](evaluator-spend.md).
 
 ## Edit an evaluator
 
 Open an evaluator. In the **Overview** tab, click the **Edit evaluator**  icon to open the **Configure Evaluator** panel. Update the evaluator's configuration. Click **Save**.
 
-Because the evaluator is shared, changes apply across all tracing projects and datasets it is attached to.
+Because the evaluator is shared, changes apply across every trace container and dataset it is attached to.
 
 ## Manage evaluator trace retention
 
-When an online evaluator scores a trace, it attaches feedback to the trace. This can auto-upgrade the trace to [extended retention](usage-and-billing.md#data-retention-auto-upgrades), depending on the evaluator's retention setting. Extended retention keeps the trace longer but costs more. When you set up an online evaluator on a [tracing project](observability-concepts.md#projects), you can opt out of this upgrade so that scored traces stay at the project's base retention.
+When an online evaluator scores a trace, it attaches feedback to the trace. This can auto-upgrade the trace to [extended retention](usage-and-billing.md#data-retention-auto-upgrades), depending on the evaluator's retention setting. Extended retention keeps the trace longer but costs more. When you set up an online evaluator on a [tracing project](observability-concepts.md#tracing-projects), or on an agent environment, you can opt out of this upgrade so that scored traces stay at the base retention.
 
 This control is available only when the project's [default retention](billing.md#change-project-level-default-retention) is the [base tier](usage-and-billing.md#how-it-works). If the project defaults to extended retention ([set at the project or workspace level](data-purging-compliance.md#data-retention)), traces scored by the evaluator follow that default and the option is locked.
 
 To opt out of extending retention for scored traces:
 
-1. When you [create](#create-an-evaluator) or [edit](#edit-an-evaluator) an online evaluator, set the source to a [tracing project](observability-concepts.md#projects), rather than a [dataset](evaluation-concepts.md#datasets).
+1. When you [create](#create-an-evaluator) or [edit](#edit-an-evaluator) an online evaluator, set the source to a [tracing project](observability-concepts.md#tracing-projects) or an agent environment, rather than a [dataset](evaluation-concepts.md#datasets).
 2. Expand the **Advanced** section in the evaluator configuration panel.
 3. Clear **Extend trace retention**.
 
@@ -165,11 +177,11 @@ The filter matches on the feedback key rather than the evaluator that produced i
 
 ## Delete an evaluator
 
-You cannot delete an evaluator while it is attached to a tracing project or dataset. To delete an evaluator:
+You cannot delete an evaluator while it is attached to a trace container or dataset. To delete an evaluator:
 
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluators), select **Evaluators** in the left sidebar.
 2. Select the evaluator you want to delete.
-3. Open the **Projects & Datasets** tab. For each attached tracing project and dataset, select **Detach** in the **Actions** menu at the right of the row.
+3. Open the **Projects & Datasets** tab (**Environments & Datasets** in an agent-based workspace). For each attachment listed there, select **Detach** in the **Actions** menu at the right of the row.
 4. Return to the **Evaluators** page and click **Delete** at the top of the page.
 
 ***

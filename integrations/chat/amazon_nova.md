@@ -27,15 +27,15 @@ You can find information about Amazon Nova's models, their features, and API det
 
 ### Integration details
 
-| Class                                                                                                       | Package                                                                                  | Serializable | JS/TS Support |                                                Downloads                                               |                                            Latest Version                                           |
-| :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- | :----------: | :-----------: | :----------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: |
-| [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) | [`langchain-amazon-nova`](https://reference.langchain.com/python/langchain-amazon-nova/) |     beta     |       ❌       | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-amazon-nova?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-amazon-nova?style=flat-square\&label=%20) |
+| Class | Package | Serializable | JS/TS Support | Downloads | Latest Version |
+| :- | :- | :-: | :-: | :-: | :-: |
+| [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) | [`langchain-amazon-nova`](https://reference.langchain.com/python/langchain-amazon-nova/) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-amazon-nova?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-amazon-nova?style=flat-square\&label=%20) |
 
 ### Model features
 
-| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input |        Video input       | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
-| :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :----------------------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                      Model-dependent                     |      ❌      | Model-dependent (Nova 2) |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ✅ | ✅ | Model-dependent | ❌ | Model-dependent (Nova 2) | ✅ | ✅ | ✅ | ❌ |
 
 ## Setup
 

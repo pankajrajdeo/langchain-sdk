@@ -35,12 +35,12 @@ Provision GKE, Cloud SQL, Memorystore, GCS, and Workload Identity.
 
 Install the following tools before running the modules:
 
-| Tool        | Version | Purpose                                          |
-| ----------- | ------- | ------------------------------------------------ |
-| `terraform` | 1.5     | Run the modules                                  |
-| `kubectl`   | 1.33    | Inspect the cluster after provisioning           |
-| `helm`      | 3.12    | Manage the LangSmith chart release               |
-| Cloud CLI   | latest  | `aws`, `az`, or `gcloud` for the target provider |
+| Tool | Version | Purpose |
+| - | - | - |
+| `terraform` | 1.5 | Run the modules |
+| `kubectl` | 1.33 | Inspect the cluster after provisioning |
+| `helm` | 3.12 | Manage the LangSmith chart release |
+| Cloud CLI | latest | `aws`, `az`, or `gcloud` for the target provider |
 
 You also need:
 
@@ -52,11 +52,11 @@ You also need:
 
 Pick a tier with a single Terraform variable. The modules size every dependent resource accordingly.
 
-| Tier               | PostgreSQL                                     | Redis                                                 | ClickHouse                                                              | Use case                             |
-| ------------------ | ---------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------ |
-| `dev`              | In-cluster                                     | In-cluster                                            | In-cluster                                                              | Demos, evaluations, short-lived POCs |
-| `production`       | Cloud-managed (RDS, Cloud SQL, Azure Database) | Cloud-managed (ElastiCache, Memorystore, Azure Cache) | [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md) | Persistent, scalable production      |
-| `production-large` | Cloud-managed, larger instance class           | Cloud-managed, larger instance class                  | LangChain Managed ClickHouse                                            | High-throughput production           |
+| Tier | PostgreSQL | Redis | ClickHouse | Use case |
+| - | - | - | - | - |
+| `dev` | In-cluster | In-cluster | In-cluster | Demos, evaluations, short-lived POCs |
+| `production` | Cloud-managed (RDS, Cloud SQL, Azure Database) | Cloud-managed (ElastiCache, Memorystore, Azure Cache) | [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md) | Persistent, scalable production |
+| `production-large` | Cloud-managed, larger instance class | Cloud-managed, larger instance class | LangChain Managed ClickHouse | High-throughput production |
 
 > [!WARNING]
 > Use in-cluster ClickHouse for development and POC, not production. Production deployments must use [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md) or a self-managed external ClickHouse cluster. Blob storage is always required because trace payloads must not live in ClickHouse.

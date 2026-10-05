@@ -16,33 +16,33 @@ tags: [docs, integrations, tools, bedrock_agentcore_code_interpreter]
 
 ### Integration details
 
-| Class                                                                                                            | Package                                                    | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/) |                                           Version                                           |
-| :--------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :----------: | :-------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`CodeInterpreterToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) |       ❌      |                                ❌                                | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
+| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/) | Version |
+| :- | :- | :-: | :-: | :-: |
+| [`CodeInterpreterToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) | ❌ | ❌ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
 
 ### Tool features
 
-| [Returns artifact](../../langchain/tools.md) | Native async |     Return data     |      Pricing      |
-| :---------------------------------------------: | :----------: | :-----------------: | :---------------: |
-|                        ✅                        |       ✅      | Text, Files, Images | Pay-per-use (AWS) |
+| [Returns artifact](../../langchain/tools.md) | Native async | Return data | Pricing |
+| :-: | :-: | :-: | :-: |
+| ✅ | ✅ | Text, Files, Images | Pay-per-use (AWS) |
 
 ### Available tools
 
 The toolkit provides multiple tools for code execution and file management:
 
-| Tool                      | Description                                                 |
-| :------------------------ | :---------------------------------------------------------- |
-| `execute_code`            | Run Python/JavaScript/TypeScript code with persistent state |
-| `execute_command`         | Run shell commands in the environment                       |
-| `read_files`              | Read content of files in the environment                    |
-| `write_files`             | Create or update files                                      |
-| `list_files`              | List files in directories                                   |
-| `delete_files`            | Remove files from the environment                           |
-| `upload_file`             | Upload files with semantic descriptions                     |
-| `install_packages`        | Install Python packages                                     |
-| `start_command_execution` | Start a long-running command asynchronously                 |
-| `get_task`                | Check status of an async task by task\_id                   |
-| `stop_task`               | Stop a running async task by task\_id                       |
+| Tool | Description |
+| :- | :- |
+| `execute_code` | Run Python/JavaScript/TypeScript code with persistent state |
+| `execute_command` | Run shell commands in the environment |
+| `read_files` | Read content of files in the environment |
+| `write_files` | Create or update files |
+| `list_files` | List files in directories |
+| `delete_files` | Remove files from the environment |
+| `upload_file` | Upload files with semantic descriptions |
+| `install_packages` | Install Python packages |
+| `start_command_execution` | Start a long-running command asynchronously |
+| `get_task` | Check status of an async task by task\_id |
+| `stop_task` | Stop a running async task by task\_id |
 
 ## Setup
 

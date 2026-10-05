@@ -1,12 +1,14 @@
 ---
 title: "Models"
-description: "LLMs are powerful AI tools that can interpret and generate text like humans. They're versatile enough to write content, translate languages, summarize, and answer questions without needing..."
+description: "Initialize and configure chat models, the reasoning engine of LangChain agents, with support for tool calling, structured output, and multimodal inputs."
 source: "https://docs.langchain.com/oss/javascript/langchain/models"
 category: "docs"
 tags: [docs, javascript, langchain, models]
 ---
 
 # Models
+
+> Initialize and configure chat models, the reasoning engine of LangChain agents, with support for tool calling, structured output, and multimodal inputs.
 
 [LLMs](https://en.wikipedia.org/wiki/Large_language_model) are powerful AI tools that can interpret and generate text like humans. They're versatile enough to write content, translate languages, summarize, and answer questions without needing specialized training for each task.
 
@@ -678,7 +680,9 @@ Here's a simple example of how to do this:
 
 ```typescript
 // Bind (potentially multiple) tools to the model
-const modelWithTools = model.bindTools([get_weather])
+const tools = [getWeather]
+const toolsByName = Object.fromEntries(tools.map((tool) => [tool.name, tool]))
+const modelWithTools = model.bindTools(tools)
 
 // Step 1: Model generates tool calls
 const messages = [{"role": "user", "content": "What's the weather in Boston?"}]
@@ -688,7 +692,8 @@ messages.push(ai_msg)
 // Step 2: Execute tools and collect results
 for (const tool_call of ai_msg.tool_calls) {
     // Execute the tool with the generated arguments
-    const tool_result = await get_weather.invoke(tool_call)
+    const tool = toolsByName[tool_call.name]
+    const tool_result = await tool.invoke(tool_call)
     messages.push(tool_result)
 }
 
@@ -729,7 +734,9 @@ Many models support calling multiple tools in parallel when appropriate. This al
 **Parallel tool calls**
 
 ```typescript
-const modelWithTools = model.bind_tools([get_weather])
+const tools = [getWeather]
+const toolsByName = Object.fromEntries(tools.map((tool) => [tool.name, tool]))
+const modelWithTools = model.bindTools(tools)
 
 const response = await modelWithTools.invoke(
     "What's the weather in Boston and Tokyo?"
@@ -745,10 +752,9 @@ console.log(response.tool_calls)
 // Execute all tools (can be done in parallel with async)
 const results = []
 for (const tool_call of response.tool_calls || []) {
-    if (tool_call.name === 'get_weather') {
-        const result = await get_weather.invoke(tool_call)
-        results.push(result)
-    }
+    const tool = toolsByName[tool_call.name]
+    const result = await tool.invoke(tool_call)
+    results.push(result)
 }
 ```
 
@@ -1115,7 +1121,7 @@ Many providers offer prompt caching features to reduce latency and cost on repea
 * **Provider-level explicit controls:** providers let you manually indicate cache points for greater control or to guarantee cost savings. These mirror the underlying provider/API behavior. Examples:
   * [`ChatOpenAI`](https://reference.langchain.com/javascript/langchain-openai/ChatOpenAI) (via `prompt_cache_key`)
   * Anthropic content-block [`cache_control`](../integrations/chat/anthropic.md#prompt-caching)
-  * [Gemini](https://reference.langchain.com/python/integrations/langchain_google_genai/).
+  * [Gemini](https://reference.langchain.com/python/langchain-google-genai).
 
 > [!WARNING]
 > Prompt caching is often only engaged above a minimum input token threshold. See [provider pages](../integrations/chat.md) for details.

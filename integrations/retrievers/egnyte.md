@@ -18,9 +18,9 @@ The `EgnyteRetriever` class helps you search and retrieve documents from Egnyte 
 
 Bring-your-own data (i.e., index and search a custom corpus of documents):
 
-| Retriever                                                               | Self-host | Cloud offering |           Package          |
-| :---------------------------------------------------------------------- | :-------- | :------------: | :------------------------: |
-| [EgnyteRetriever](https://github.com/egnyte/egnyte-langchain-connector) | ❌         |        ✅       | egnyte-langchain-connector |
+| Retriever | Self-host | Cloud offering | Package |
+| :- | :- | :-: | :-: |
+| [EgnyteRetriever](https://github.com/egnyte/egnyte-langchain-connector) | ❌ | ✅ | egnyte-langchain-connector |
 
 ## Setup
 
@@ -46,7 +46,7 @@ egnyte_user_token = getpass.getpass("Enter your Egnyte User Token: ")
 domain = input("Enter your Egnyte domain (e.g., company.egnyte.com): ")
 ```
 
-If you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.smith.langchain.com/) API key by uncommenting below:
+If you want to get automated tracing from individual queries, you can also set your [LangSmith](../../langsmith/observability.md) API key by uncommenting below:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

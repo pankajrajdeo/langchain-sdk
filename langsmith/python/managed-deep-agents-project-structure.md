@@ -63,13 +63,13 @@ The only required file is `agent.py` at the project root containing the [agent d
 
 * **Managed configuration**: Certain paths enable capabilities when present. For `channels/` and `schedules/`, only direct children are managed declarations; nested modules are not.
 
-  | Path                  | Enables                                                                         |
-  | --------------------- | ------------------------------------------------------------------------------- |
-  | `identity.py`         | [Caller authentication](managed-deep-agents-identity.md)         |
-  | `memory.py`           | [Durable memory](managed-deep-agents-memory.md)                  |
-  | `channels/<name>.py`  | [Messaging channels](managed-deep-agents-channels.md)            |
-  | `tools/mcp.py`        | [MCP connectors](managed-deep-agents-mcp-connectors.md)          |
-  | `schedules/<name>.py` | [Cron schedules](managed-deep-agents-schedules.md)               |
+  | Path | Enables |
+  | - | - |
+  | `identity.py` | [Caller authentication](managed-deep-agents-identity.md) |
+  | `memory.py` | [Durable memory](managed-deep-agents-memory.md) |
+  | `channels/<name>.py` | [Messaging channels](managed-deep-agents-channels.md) |
+  | `tools/mcp.py` | [MCP connectors](managed-deep-agents-mcp-connectors.md) |
+  | `schedules/<name>.py` | [Cron schedules](managed-deep-agents-schedules.md) |
   | `sandbox/__init__.py` | [Sandbox filesystem and shell](managed-deep-agents-sandboxes.md) |
 
   `tools/` holds ordinary modules with one exception. `tools/mcp.py` is a managed declaration and exports a module-level `mcp`. Every other module under `tools/` is application code you import.

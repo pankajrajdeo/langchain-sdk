@@ -52,7 +52,7 @@ Any source that writes feedback to a run contributes to this prioritization auto
 
 ## Set up Engine
 
-Setting up Engine is a two-step process: an [Organization Admin](rbac.md#organization-admin) first enables Engine for the [workspace](administration-overview.md#workspaces), then any user can turn on Engine for each tracing project.
+Setting up Engine is a two-step process: an [Organization Admin](rbac.md#organization-admin) first enables Engine for the [workspace](administration-overview.md#workspaces), then any user whose [role](rbac.md) can update tracing projects can turn on Engine for each tracing project or agent environment.
 
 > [!NOTE]
 > On Self-hosted LangSmith, an operator must enable Engine in the LangSmith Helm chart before either step is available. Refer to [Engine on Self-hosted](engine-self-hosted.md).
@@ -61,15 +61,15 @@ Setting up Engine is a two-step process: an [Organization Admin](rbac.md#organiz
 
 You must be an [**Organization Admin**](rbac.md#organization-admin) to enable Engine. To find your admins, open **Settings**, select **Members** under **Access and Security**, and look for members with the **Organization Admin** role.
 
-### Open Engine enablement
-In the [LangSmith console](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-engine), click **Settings** in the bottom-left corner, then select **Engine enablement** under **Engine**.
+### Open Engine settings
+In the [LangSmith console](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-engine), click **Settings** in the bottom-left corner, then select **Engine** under **Engine**.
 
 ### Toggle Enable Engine
 Toggle **Enable Engine** on and acknowledge the AI features terms of use. The dialog displays the following in-product notice verbatim:
 
 > LangSmith AI features, powered by LangChain-managed inference, bring intelligence to your observability workflow. With LangSmith AI enabled, your team can surface issues faster, run smarter evaluations, and build more reliable LLM applications. By enabling this feature, your organization's trace data will be processed using LangChain-managed LLM keys. Subject to our Terms of Service.
 
-Once Engine is enabled, any team member in your organization can set it up for their tracing projects.
+Once Engine is enabled, any user whose role can update tracing projects can set it up for a tracing project or agent environment. Roles with read-only access to projects cannot.
 
 > [!TIP]
 > If you want to turn off Engine, toggle the same setting to off. This will stop all automatic runs of Engine and discontinue future billing in your account.
@@ -105,7 +105,7 @@ You can change any of these choices later in [Configure Engine](#configure-engin
 
 ### Pause Engine or delete its issues
 
-Engine scans your traces on a dynamic schedule tuned to balance cost and performance. To stop scanning a project without deleting its existing issues, click **Pause** in the [**Engine Settings**](#configure-engine) panel. Click **Resume** to start scanning again.
+Engine scans your traces on a dynamic schedule tuned to balance cost and performance. To stop scanning a project without deleting its existing issues, click **Pause** in the [**Engine settings**](#configure-engine) panel. Click **Resume** to start scanning again.
 
 Click **Delete all issues** in the same panel to permanently remove the project's issues and Engine settings. This cannot be undone.
 
@@ -119,7 +119,7 @@ On the **Engine** page, click the **Configure Engine**  (gear) icon at the top o
 * **Notifications**: See [Engine notifications](engine-notifications.md).
 * **Preview deployments**: Set the baseline deployment Engine replays issue traces against, and turn on fix verification with preview deployments. See [Validate fixes by running your agent](#beta-validate-fixes-by-running-your-agent).
 * **Analysis level**: See [Set the analysis level](#set-the-analysis-level).
-* **Engine spend**: See [Set spend limits and monitor usage](#set-spend-limits-and-monitor-usage).
+* **Spend limit**: See [Set spend limits and monitor usage](#set-spend-limits-and-monitor-usage).
 * **Pause** and **Delete all issues**: See [Pause Engine or delete its issues](#pause-engine-or-delete-its-issues).
 
 ### Give context on your agent
@@ -132,12 +132,12 @@ Under **Preferences**, list the areas Engine should focus on, prioritize, or ign
 
 ### Tell Engine which traces to focus on
 
-Focus Engine on the traces that matter to keep analysis precise and reduce wasted LCU spend. Use trace scope (the **Focus on specific traces** control) when a project mixes several agents or workloads and you want Engine to analyze only some of them. For example, if a project runs both a production chatbot and a nightly batch job, scope to `Run Name is chatbot` so Engine ignores the batch runs. By default, Engine analyzes all of a project's traces.
+Focus Engine on the traces that matter to keep analysis precise and reduce wasted LSU spend. Use trace scope (the **Focus on specific traces** control) when a project mixes several agents or workloads and you want Engine to analyze only some of them. For example, if a project runs both a production chatbot and a nightly batch job, scope to `Run Name is chatbot` so Engine ignores the batch runs. By default, Engine analyzes all of a project's traces.
 
 Set the scope in either of two places, using the same control:
 
 * **Engine setup**: In the **Find and fix your agent's issues** panel, under **Focus on specific traces**.
-* **Engine Settings**: In the **Focus on specific traces** section of the [**Engine Settings**](#configure-engine) panel. Edits here save automatically.
+* **Engine settings**: In the **Trace filters** section of the [**Engine settings**](#configure-engine) panel. Edits here save automatically.
 
 Add scope conditions with the filter editor. You can add one condition of each kind, **up to two**:
 
@@ -149,7 +149,7 @@ To add a condition, choose its kind from the field selector, fill in the values,
 > [!NOTE]
 > **Scope limitation:** The scope filter only accepts run name and metadata conditions. You cannot scope Engine's scan by feedback key, evaluator name, or score threshold. To focus Engine on traces with a specific evaluator's low scores, describe that in your [preferences](#tell-engine-what-kinds-of-issues-to-focus-on) or [agent overview](#give-context-on-your-agent). Engine already factors in all feedback signals automatically. See [How Engine selects traces](#how-engine-selects-traces).
 
-Scope determines which traces Engine analyzes to detect issues and build the agent overview document. Scope set during initial setup applies to Engine's first scan. Scope changed later in the [**Engine Settings**](#configure-engine) panel does not re-run Engine immediately; it applies on the next scan.
+Scope determines which traces Engine analyzes to detect issues and build the agent overview document. Scope set during initial setup applies to Engine's first scan. Scope changed later in the [**Engine settings**](#configure-engine) panel does not re-run Engine immediately. It applies on the next scan.
 
 ### Connect to Linear
 
@@ -157,25 +157,25 @@ Under **Linear**, click **Connect**, select a team, optionally select a project 
 
 ## Manage Engine costs
 
-### Understand LCU costs
+### Understand LSU costs
 
 > [!NOTE]
-> Engine uses **LangChain-managed inference** exclusively. Bring Your Own Key (BYOK) is not supported; you cannot supply your own provider API keys for Engine.
+> On LangSmith Cloud, Engine uses **LangChain-managed inference** exclusively. Self-hosted installations can use their [own model providers](engine-self-hosted.md#your-own-model-providers), with API keys or cloud identity.
 
-Engine charges in **LangChain Compute Units (LCUs)**, a normalized unit of work combining compute, storage, memory, and LLM spend. LCU consumption scales with the number of traces analyzed, the number and complexity of the LLM calls Engine makes to diagnose and fix issues, and the size of any connected repository. LCUs cost **\$1.50 USD each**. For an estimate of your expected LCU usage, see the [LangSmith Usage Calculator](https://www.langchain.com/pricing#pricing-calc).
+Engine charges in **LangChain Standard Units (LSUs)**, a normalized unit of work combining compute, storage, memory, and LLM spend. LSU consumption scales with the number of traces analyzed, the number and complexity of the LLM calls Engine makes to diagnose and fix issues, and the size of any connected repository. LSUs cost **\$1 USD each**. For an estimate of your expected LSU usage, see the [LangSmith Usage Calculator](https://www.langchain.com/pricing#pricing-calc).
 
 Engine runs in two phases:
 
-| Phase               | Trigger                                   | Typical LCU usage |
-| ------------------- | ----------------------------------------- | ----------------- |
-| **Initialization**  | First time you enable Engine on a project | 30-40 LCUs        |
-| **Recurring scans** | Automatically, on a dynamic schedule      | 10-15 LCUs        |
+| Phase | Trigger | Typical LSU usage |
+| - | - | - |
+| **Initialization** | First time you enable Engine on a project | 45-60 LSUs |
+| **Recurring scans** | Automatically, on a dynamic schedule | 15-22.5 LSUs |
 
 On initialization, Engine audits past traces, clusters and prioritizes issues by severity, and proposes fixes to your prompts or code (if a repository is connected). Recurring scans run on a dynamic schedule tuned to balance cost and performance, whether or not new issues are found, and surface new issues not previously detected.
 
 ### Set the analysis level
 
-The analysis level controls how many of your project's traces Engine analyzes, and so how many LCUs it uses. Choose it when you [turn on Engine for a project](#turn-on-engine-for-a-tracing-project), and change it later under **Analysis level** in the [**Engine Settings**](#configure-engine) panel:
+The analysis level controls how many of your project's traces Engine analyzes, and so how many LSUs it uses. Choose it when you [turn on Engine for a project](#turn-on-engine-for-a-tracing-project), and change it later under **Analysis level** in the [**Engine settings**](#configure-engine) panel:
 
 * **Reduced**: Monitors fewer traces at a lower cost.
 * **Standard** (default): Analyzes more of your eligible traces for fuller coverage.
@@ -187,19 +187,19 @@ The setup dialog shows an estimated monthly cost range that updates with the lev
 
 Organization Admins can set spend limits at two levels:
 
-* **Org-wide limit**: Open **Settings**, select **Engine enablement** under **Engine**, then enter a value under **Monthly LCU spend limit**.
-* **Per-project limit**: Open the **Engine** tab in a tracing project, click the **Engine Settings**  icon, and set a limit under **Monthly LCU spend limit**.
+* **Org-wide limit**: Open **Settings** and select **Engine** under **Engine**. On the month-to-date spend card, click the limit chip and set a limit in the popover.
+* **Project or environment limit**: Open the **Engine** tab in a tracing project or agent environment and click the **Configure Engine**  icon. Under **Spend limit**, click the limit chip (the chip reads **None** when no limit is set) and set a limit in the popover.
 
-You can enter limits in LCU or USD (1 LCU = \$1.50). When a limit is reached, LangSmith pauses new Engine runs until the limit is raised or the next monthly billing period begins.
+You can enter limits in LSU or USD (1 LSU = \$1). When a limit is reached, LangSmith pauses new Engine runs until the limit is raised or the next monthly billing period begins.
 
 The two levels default differently:
 
-* **Org-wide limit**: Choose **Default**, **No limit**, or a custom cap. Until an admin chooses, the default applies (500 LCU per month, about \$750), so Engine spend is capped even though no one has set a limit. The **Engine enablement** page names the enforced limit and its source.
-* **Per-project limit**: Leave the field blank for no limit. Use **Remove limit** to clear a cap you set earlier.
+* **Org-wide limit**: Choose **Default**, **No limit**, or a custom cap. Until an admin chooses, the default applies (750 LSU per month, \$750), so Engine spend is capped even though no one has set a limit. The **Engine** settings page names the enforced limit and its source.
+* **Project or environment limit**: Leave the popover's field blank for no limit. Use **Remove limit** to clear a cap you set earlier.
 
-To stop Engine entirely, use the **Enable Engine** toggle in **Settings > Engine enablement**.
+To stop Engine entirely, use the **Enable Engine** toggle in **Settings > Engine**.
 
-To monitor usage, you can view your organization's monthly LCU spend on the **Engine enablement** page in **Settings**, or view per-project spend in the [**Engine Settings**](#configure-engine) panel for each tracing project.
+To monitor usage, you can view your organization's monthly LSU spend on the **Engine** page in **Settings**, or view the spend for a tracing project or agent environment in its [**Engine settings**](#configure-engine) panel.
 
 <a id="notify-a-slack-channel"></a>
 
@@ -261,7 +261,7 @@ For more information, refer to [Manage datasets](manage-datasets.md), [Use annot
 
 Watching keeps an issue open for monitoring without resolving it or marking it as incorrectly flagged. Click **Watch** when you are not ready to fix an issue but still want to know if it keeps happening.
 
-To be alerted when a watched issue recurs, click **Alert me via Slack**, which opens the **Notifications** section of the [Engine Settings](#configure-engine) panel. See [Engine notifications](engine-notifications.md).
+To be alerted when a watched issue recurs, click **Alert me via Slack**, which opens the **Notifications** section of the [Engine settings](#configure-engine) panel. See [Engine notifications](engine-notifications.md).
 
 When new traces link to a watched issue, Engine moves it to the top of your list and shows how many new traces arrived, so you can pick up the fix or keep watching.
 
@@ -498,7 +498,7 @@ Engine can only replay against a ready, non-preview deployment, and it records t
 
 When a baseline deployment is set, Engine validates each new issue automatically when it creates the issue. To validate an issue again, open it and click **Test issue**.
 
-**Test issue** is unavailable when no baseline deployment is set, when the issue has no linked traces, or when the monthly LCU spend limit is reached.
+**Test issue** is unavailable when no baseline deployment is set, when the issue has no linked traces, or when the monthly LSU spend limit is reached.
 
 For each validation, Engine:
 
@@ -523,24 +523,24 @@ Each issue reports a baseline result and, once a fix exists, a verification resu
 
 The baseline result answers whether the issue still happens on your deployment:
 
-| Status             | Meaning                                                                              |
-| ------------------ | ------------------------------------------------------------------------------------ |
-| **Awaiting test**  | Engine has not recorded a baseline result yet.                                       |
-| **Reproduced**     | At least one replay showed the reported behavior again.                              |
+| Status | Meaning |
+| - | - |
+| **Awaiting test** | Engine has not recorded a baseline result yet. |
+| **Reproduced** | At least one replay showed the reported behavior again. |
 | **Not reproduced** | Every replay finished without the reported behavior, so Engine closes an open issue. |
-| **Inconclusive**   | Engine could not judge the replays confidently.                                      |
-| **Error**          | Validation could not complete.                                                       |
+| **Inconclusive** | Engine could not judge the replays confidently. |
+| **Error** | Validation could not complete. |
 
 The verification result answers whether Engine's fix resolved it:
 
-| Status                                        | Meaning                                                              |
-| --------------------------------------------- | -------------------------------------------------------------------- |
-| **Not run**                                   | The issue did not reproduce, so there is nothing to verify.          |
-| **Generating fix** or **Awaiting fix**        | Engine is still producing a fix to verify.                           |
-| **Awaiting preview** or **Running**           | A preview deployment is building, or replays are in progress.        |
-| **Verified**                                  | The issue no longer occurred on the fix's preview deployment.        |
-| **Not fixed**                                 | The issue still occurred, so Engine revises the fix and tries again. |
-| **Inconclusive**, **Timed out**, or **Error** | Engine could not establish a verdict for this attempt.               |
+| Status | Meaning |
+| - | - |
+| **Not run** | The issue did not reproduce, so there is nothing to verify. |
+| **Generating fix** or **Awaiting fix** | Engine is still producing a fix to verify. |
+| **Awaiting preview** or **Running** | A preview deployment is building, or replays are in progress. |
+| **Verified** | The issue no longer occurred on the fix's preview deployment. |
+| **Not fixed** | The issue still occurred, so Engine revises the fix and tries again. |
+| **Inconclusive**, **Timed out**, or **Error** | Engine could not establish a verdict for this attempt. |
 
 > [!WARNING]
 > **Inconclusive** means Engine could not gather trustworthy evidence, not that the issue is absent or fixed. Treat it as a signal to re-test rather than as a passing result.
@@ -662,12 +662,12 @@ Click the filter icon to show a single status, or the sort icon to sort by **Def
 
 Each hypothesis has one of these statuses:
 
-| Status             | Meaning                                                                                      |
-| ------------------ | -------------------------------------------------------------------------------------------- |
-| **Confirmed**      | A probe reproduced the failure, and Engine judged it a real finding.                         |
-| **Needs Review**   | The evidence was ambiguous or incomplete. Review the probes before acting on the hypothesis. |
-| **No Issue Found** | Probes ran, and the agent behaved correctly.                                                 |
-| **Not Tested**     | No probe exercised the hypothesis. This is missing coverage, not evidence of safe behavior.  |
+| Status | Meaning |
+| - | - |
+| **Confirmed** | A probe reproduced the failure, and Engine judged it a real finding. |
+| **Needs Review** | The evidence was ambiguous or incomplete. Review the probes before acting on the hypothesis. |
+| **No Issue Found** | Probes ran, and the agent behaved correctly. |
+| **Not Tested** | No probe exercised the hypothesis. This is missing coverage, not evidence of safe behavior. |
 
 A confirmed finding also has a severity: **Critical**, **High**, **Medium**, **Low**, or **Info**.
 
@@ -688,18 +688,18 @@ Below the probes, **Why the Judge Decided This** explains how Engine reached the
 
 Every hypothesis belongs to one issue class, chosen by the failure's root cause and the fix it needs. Each report accounts for all 10 classes, and marks each one as tested, untested, or not applicable to the agent.
 
-| Issue class               | What Red Teaming tests                                                                                           |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Content Policy**        | Violations of explicit product, legal, safety, or business policies, such as a prohibited competitor comparison. |
-| **Instruction Hierarchy** | Direct overrides of the agent's instructions, and conflicting or confusing prompt instructions.                  |
-| **Indirect Injection**    | Retrieved content, tool output, or other untrusted data that tries to control the agent.                         |
-| **Data Exposure**         | Hidden context, such as synthetic canary values planted by a probe, escaping into a response.                    |
-| **Auth Isolation**        | Access or actions beyond the caller's identity or permission boundary.                                           |
-| **Tool Safety**           | Unsafe tool selection, arguments, or approvals, and unsafe consequential workflows.                              |
-| **Workflow Integrity**    | Required steps, such as retrieval, clarification, or truthful completion, that the agent skips or fabricates.    |
-| **Session Integrity**     | Multi-turn state problems, such as memory poisoning, delayed activation, or role confusion.                      |
-| **Input Robustness**      | Confusion caused by structured output, parsing, delimiters, encodings, or message boundaries.                    |
-| **Reliability Safety**    | Behavior around failures, retries, resource limits, loops, duplicate work, and irreversible side effects.        |
+| Issue class | What Red Teaming tests |
+| - | - |
+| **Content Policy** | Violations of explicit product, legal, safety, or business policies, such as a prohibited competitor comparison. |
+| **Instruction Hierarchy** | Direct overrides of the agent's instructions, and conflicting or confusing prompt instructions. |
+| **Indirect Injection** | Retrieved content, tool output, or other untrusted data that tries to control the agent. |
+| **Data Exposure** | Hidden context, such as synthetic canary values planted by a probe, escaping into a response. |
+| **Auth Isolation** | Access or actions beyond the caller's identity or permission boundary. |
+| **Tool Safety** | Unsafe tool selection, arguments, or approvals, and unsafe consequential workflows. |
+| **Workflow Integrity** | Required steps, such as retrieval, clarification, or truthful completion, that the agent skips or fabricates. |
+| **Session Integrity** | Multi-turn state problems, such as memory poisoning, delayed activation, or role confusion. |
+| **Input Robustness** | Confusion caused by structured output, parsing, delimiters, encodings, or message boundaries. |
+| **Reliability Safety** | Behavior around failures, retries, resource limits, loops, duplicate work, and irreversible side effects. |
 
 Two classes have extra requirements:
 
@@ -716,13 +716,13 @@ After you deploy a new revision to the baseline deployment, the next run starts 
 
 Each red-team run is bounded:
 
-| Limit                               | Value per run                                      |
-| ----------------------------------- | -------------------------------------------------- |
-| Traces reviewed                     | 25, selected from up to 100 recent trace summaries |
-| Hypotheses                          | 50                                                 |
-| Probes per hypothesis               | 2                                                  |
-| Requests to the baseline deployment | 100                                                |
-| Recommendations                     | 20                                                 |
+| Limit | Value per run |
+| - | - |
+| Traces reviewed | 25, selected from up to 100 recent trace summaries |
+| Hypotheses | 50 |
+| Probes per hypothesis | 2 |
+| Requests to the baseline deployment | 100 |
+| Recommendations | 20 |
 
 ### How Red Teaming handles your data
 

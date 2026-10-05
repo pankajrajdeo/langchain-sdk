@@ -18,8 +18,8 @@ This guide provides a quick overview for getting started with `DatabricksEmbeddi
 
 ### Integration details
 
-| Class                                                                                                                                                            | Package                                                                                      |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| Class | Package |
+| :- | :- |
 | [`DatabricksEmbeddings`](https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_langchain.html#databricks_langchain.DatabricksEmbeddings) | [databricks-langchain](https://python.langchain.com/docs/integrations/providers/databricks/) |
 
 ### Supported methods

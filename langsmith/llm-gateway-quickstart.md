@@ -105,7 +105,7 @@ console.log(result.messages[result.messages.length - 1].content);
 To route specific calls rather than all calls, use the standard endpoint in the Chat completions tab and set `model` to a provider-prefixed ID.
 
 ### View the trace
-Open [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-quickstart) and go to the tracing project named `gateway` or `gateway-<short_api_key>-<api_key_id>` in your workspace. Your request appears there with its token counts, cost, and latency.
+Open [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-quickstart) and go to the tracing project named `gateway` in your workspace. Your request appears there with its token counts, cost, and latency.
 
 ### Set a spend limit
 Go to **LLM Gateway** in LangSmith and create a spend policy, such as a daily \$10 cap on your API key. Once the cap is reached, the gateway returns a `402` with a message naming the policy that blocked the request:

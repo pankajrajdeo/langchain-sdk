@@ -34,7 +34,7 @@ This lifecycle means that multi-turn evaluators run once per completed thread, n
 
 ## Prerequisites
 
-* Your tracing project must be using [threads](threads.md).
+* Your tracing project, or agent environment, must be using [threads](threads.md).
 * The top-level inputs and outputs of each trace in a thread must have a `messages` key that contains a list of messages. We support messages in [LangChain](log-llm-trace.md#messages-format), [OpenAI Chat Completions](https://platform.openai.com/docs/api-reference/chat/create), and [Anthropic Messages](https://platform.claude.com/docs/en/api/messages) formats.
   * If the top-level inputs and outputs of each trace only contain the latest message in the conversation, LangSmith will automatically combine messages across turns into a thread.
   * If the top-level inputs and outputs of each trace contain the full conversation history, LangSmith will use that directly.
@@ -46,7 +46,7 @@ This lifecycle means that multi-turn evaluators run once per completed thread, n
 
 ## Configuration
 
-1. Navigate to the **Tracing** page and select a tracing project.
+1. Navigate to the **Tracing** page and select a tracing project, or an agent environment.
 
 2. Click the **Evaluators** tab, then click **+ Evaluator**. Select **LLM-as-a-Judge Evaluator** under **Create from scratch**. Under **Source**, select **Threads**.
 
@@ -154,11 +154,11 @@ These are the current limits for thread-level processing (subject to change). Th
 
 **Checking the status of your evaluator**
 
-You can check when your evaluator was last run by heading to the **Evaluators** tab within a tracing project and clicking the **Logs** button for the evaluator you created to view its run history.
+You can check when your evaluator was last run by heading to the **Evaluators** tab within a tracing project or agent environment and clicking the **Logs** button for the evaluator you created to view its run history.
 
 **Inspect the data sent to the evaluator**
 
-Inspect the data sent to the evaluator by heading to the **Evaluators** tab within a tracing project, clicking on the evaluator you created and clicking the **Evaluator traces** tab.
+Inspect the data sent to the evaluator by heading to the **Evaluators** tab within a tracing project or agent environment, clicking on the evaluator you created and clicking the **Evaluator traces** tab.
 
 In this tab, you can see the inputs passed into the LLM-as-a-judge evaluator. If your messages are not being passed in correctly, you will see blank values in the inputs. This can happen if your messages are not formatted in one of [the expected formats](#prerequisites).
 

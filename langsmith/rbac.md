@@ -34,12 +34,12 @@ To learn how to set up RBAC and assign roles to users, refer to the [User Manage
 
 Organization roles are **distinct from the workspace RBAC feature** and are used to manage organization-wide capabilities. The roles are system-defined and cannot be modified or extended. The [Organization User](#organization-user) and [Organization Viewer](#organization-viewer) roles are only available in organizations on [Plus and Enterprise plans](https://langchain.com/pricing). In Developer organizations (single workspace), all users are assigned the [Organization Admin](#organization-admin) role by default.
 
-| Role                                            | Description                                                                                           |
-| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| [Organization Admin](#organization-admin)       | Full permissions to manage organization configuration, users, billing, and workspaces                 |
+| Role | Description |
+| - | - |
+| [Organization Admin](#organization-admin) | Full permissions to manage organization configuration, users, billing, and workspaces |
 | [Organization Operator](#organization-operator) | Management access to workspaces and users for day-to-day operations, excluding admin-level privileges |
-| [Organization User](#organization-user)         | Read access to organization information and ability to create personal access tokens                  |
-| [Organization Viewer](#organization-viewer)     | Read-only access to organization information                                                          |
+| [Organization User](#organization-user) | Read access to organization information and ability to create personal access tokens |
+| [Organization Viewer](#organization-viewer) | Read-only access to organization information |
 
 #### Organization admin
 
@@ -159,11 +159,11 @@ For a comprehensive list of required permissions along with the operations and r
 
 Workspace roles are part of the **Enterprise RBAC feature** and control what users can do with resources inside a workspace:
 
-| Role                                  | Description                                                                                       |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| [Workspace Admin](#workspace-admin)   | Full permissions for all resources, including workspace settings and member management            |
+| Role | Description |
+| - | - |
+| [Workspace Admin](#workspace-admin) | Full permissions for all resources, including workspace settings and member management |
 | [Workspace Editor](#workspace-editor) | Full permissions for most resources, cannot manage workspace settings or delete certain resources |
-| [Workspace Viewer](#workspace-viewer) | Read-only access to all workspace resources                                                       |
+| [Workspace Viewer](#workspace-viewer) | Read-only access to all workspace resources |
 
 > [!NOTE]
 > RBAC (Role-Based Access Control) is a feature that is only available to [Enterprise](https://langchain.com/pricing) customers. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales). Other plans default to using the Admin role for all users.
@@ -259,6 +259,7 @@ Some permissions offer granular control when used in custom roles:
 * `workspaces:manage-keys` controls the ability to create and delete workspace API keys (service keys scoped to a workspace). It is separate from `workspaces:manage`—grant it explicitly on custom roles that should be able to manage API keys without full workspace management. To prevent privilege escalation, a key created by a user who does not have `workspaces:manage` cannot be granted more permissions than that user holds, and cannot be assigned a role the organization has marked restricted. The built-in Workspace Admin role includes it automatically.
 * `bulk-exports:read` and `bulk-exports:manage` cover the bulk export endpoints (listing, creating, cancelling exports, and managing destinations). Use them in a custom role to grant least-privilege bulk export access without `workspaces:manage`. The built-in Workspace Admin role includes `bulk-exports:manage` and all read-capable roles include `bulk-exports:read` automatically.
 * `projects:increase-trace-tier` and `projects:decrease-trace-tier` are independent and can be granted separately. For example, you can allow a role to decrease retention without allowing it to increase retention. If a user lacks both permissions, the retention settings UI is hidden entirely. If they have only one, the UI is partially enabled (the disallowed direction is disabled).
+* `runs:read-inputs` and `runs:read-outputs` control whether a role can see run inputs and outputs, and are separate from `runs:read`. A role with `runs:read` but without one of these permissions can still list and open runs, but responses leave out the denied field and its preview. Message and trajectory views require both permissions. To hide inputs or outputs only in specific projects, use an [access policy](abac.md#control-access-to-run-inputs-and-outputs).
 * `projects:update` covers only metadata updates (name, description, tags) and does **not** grant the ability to change trace retention. To allow a custom role to modify trace tier, you must explicitly grant `projects:increase-trace-tier`, `projects:decrease-trace-tier`, or both.
 
 ***

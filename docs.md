@@ -40,8 +40,8 @@ Code with an AI agent in your terminal using the open source `dcode` CLI.
 
 ## Setup and governance
 
-#### [LangSmith setup](langsmith/platform-setup.md)
-Set up LangSmith on Cloud, BYOC, or Self-hosted.
+#### [LangSmith setup](langsmith/langsmith-setup-overview.md)
+Hosting on Cloud, BYOC, or Self-hosted, account setup, and governance.
 
 #### [Govern](langsmith/govern-overview.md)
 Manage users, access control, policies, and compliance across your organization.

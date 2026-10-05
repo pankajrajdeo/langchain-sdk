@@ -14,8 +14,8 @@ Document transformers take a sequence of documents and transform them—for exam
 
 ## All document transformers
 
-| Integration                                                                                                       | Downloads                                                                                                                                                                                                                                                                     |
-| :---------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Integration | Downloads |
+| :- | :- |
 | [`OpenAI functions metadata tagger -`](document_transformers/openai_metadata_tagger.md) | <span data-sort-value="14480022"><a href="https://www.npmjs.com/package/@langchain/openai" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/openai?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
 
 ***

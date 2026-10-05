@@ -204,20 +204,13 @@ paths:
                 discriminator:
                   propertyName: chart_type
                   mapping:
-                    line:
-                      $ref: '#/components/schemas/SingleCustomChartResponse'
-                    bar:
-                      $ref: '#/components/schemas/SingleCustomChartResponse'
-                    table:
-                      $ref: '#/components/schemas/SingleCustomChartResponse'
-                    kpi:
-                      $ref: '#/components/schemas/SingleCustomChartResponse'
-                    top-k:
-                      $ref: '#/components/schemas/SingleCustomChartResponse'
-                    pie:
-                      $ref: '#/components/schemas/SingleCustomChartResponse'
-                    text:
-                      $ref: '#/components/schemas/CustomTextBlockResponse'
+                    line: '#/components/schemas/SingleCustomChartResponse'
+                    bar: '#/components/schemas/SingleCustomChartResponse'
+                    table: '#/components/schemas/SingleCustomChartResponse'
+                    kpi: '#/components/schemas/SingleCustomChartResponse'
+                    top-k: '#/components/schemas/SingleCustomChartResponse'
+                    pie: '#/components/schemas/SingleCustomChartResponse'
+                    text: '#/components/schemas/CustomTextBlockResponse'
                 title: Response Read Single Chart Api V1 Charts  Chart Id  Post
         '422':
           description: Validation Error

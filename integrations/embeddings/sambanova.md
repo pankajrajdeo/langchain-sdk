@@ -18,8 +18,8 @@ This will help you get started with SambaNova embedding models using LangChain. 
 
 ### Integration details
 
-|                          Provider                          |                                 Package                                |
-| :--------------------------------------------------------: | :--------------------------------------------------------------------: |
+| Provider | Package |
+| :-: | :-: |
 | [SambaNova](../providers/sambanova.md) | [`langchain-sambanova`](../providers/sambanova.md) |
 
 ## Setup

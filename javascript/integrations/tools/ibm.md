@@ -14,19 +14,19 @@ This will help you getting started with `WatsonxToolkit` [toolkits](../../concep
 
 The toolkit contains following tools:
 
-| Name           | Description                                                                                |
-| -------------- | ------------------------------------------------------------------------------------------ |
+| Name | Description |
+| - | - |
 | `GoogleSearch` | Search for online trends, news, current events, real-time information, or research topics. |
-| `WebCrawler`   | Useful for when you need to summarize a webpage. Do not use for Web search.                |
-| `SDXLTurbo`    | Generate an image from text using Stability.ai                                             |
-| `Weather`      | Find the weather for a city.                                                               |
-| `RAGQuery`     | Search the documents in a vector index.                                                    |
+| `WebCrawler` | Useful for when you need to summarize a webpage. Do not use for Web search. |
+| `SDXLTurbo` | Generate an image from text using Stability.ai |
+| `Weather` | Find the weather for a city. |
+| `RAGQuery` | Search the documents in a vector index. |
 
 ### Integration details
 
-| Class                                                                                       | Package                                                          | [PY support](https://python.langchain.com/docs/integrations/tools/ibm_watsonx/) |                                           Version                                           |
-| :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------- | :-----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [`WatsonxToolkit`](https://reference.langchain.com/javascript/langchain-ibm/WatsonxToolkit) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) |                                        ✅                                        | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
+| Class | Package | [PY support](https://python.langchain.com/docs/integrations/tools/ibm_watsonx/) | Version |
+| :- | :- | :-: | :-: |
+| [`WatsonxToolkit`](https://reference.langchain.com/javascript/langchain-ibm/WatsonxToolkit) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) | ✅ | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
 
 ## Setup
 

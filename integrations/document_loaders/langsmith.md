@@ -16,15 +16,15 @@ This guide provides a quick overview for getting started with the `LangSmithLoad
 
 ### Integration details
 
-| Class             | Package                                                                   | Local | Serializable | JS support |
-| :---------------- | :------------------------------------------------------------------------ | :---: | :----------: | :--------: |
-| `LangSmithLoader` | [`langchain-core`](https://reference.langchain.com/python/langchain-core) |   ❌   |       ❌      |      ❌     |
+| Class | Package | Local | Serializable | JS support |
+| :- | :- | :-: | :-: | :-: |
+| `LangSmithLoader` | [`langchain-core`](https://reference.langchain.com/python/langchain-core) | ❌ | ❌ | ❌ |
 
 ### Loader features
 
-|       Source      | Lazy loading | Native async |
-| :---------------: | :----------: | :----------: |
-| `LangSmithLoader` |       ✅      |       ❌      |
+| Source | Lazy loading | Native async |
+| :-: | :-: | :-: |
+| `LangSmithLoader` | ✅ | ❌ |
 
 ## Setup
 

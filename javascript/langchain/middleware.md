@@ -1,12 +1,15 @@
 ---
-title: "Overview"
+title: "Middleware overview"
 description: "Control and customize agent execution at every step"
 source: "https://docs.langchain.com/oss/javascript/langchain/middleware"
 category: "docs"
 tags: [docs, javascript, langchain, middleware]
 ---
 
-# Overview
+<a id="dynamic-model"></a>
+<a id="middleware"></a>
+
+# Middleware overview
 
 > Control and customize agent execution at every step
 
@@ -75,7 +78,6 @@ const graph = new StateGraph(AgentState)
 
 The HITL interrupt, summarization, PII redaction, retries, and any custom hooks all travel with the agent node. See [Use subgraphs](../langgraph/use-subgraphs.md) for the full set of composition patterns, including subgraph checkpointer scoping (per-invocation versus per-thread).
 
-<a id="dynamic-model"></a>
 <a id="llm-tool-selector"></a>
 <a id="pii-detection"></a>
 <a id="summarization"></a>
@@ -84,8 +86,6 @@ The HITL interrupt, summarization, PII redaction, retries, and any custom hooks 
 
 #### [Built-in middleware](middleware/built-in.md)
 Explore built-in middleware for common use cases.
-
-<a id="middleware"></a>
 
 #### [Custom middleware](middleware/custom.md)
 Build your own middleware with hooks and decorators.

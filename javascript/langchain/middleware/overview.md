@@ -1,12 +1,12 @@
 ---
-title: "Overview"
+title: "Middleware overview"
 description: "Control and customize agent execution at every step"
 source: "https://docs.langchain.com/oss/javascript/langchain/middleware/overview"
 category: "docs"
 tags: [docs, javascript, langchain, middleware]
 ---
 
-# Overview
+# Middleware overview
 
 > Control and customize agent execution at every step
 

@@ -11,4 +11,4 @@ tags: [index, oss, langchain]
 
 ## Files
 
-- [Agents](agents.md) - An agent is a model calling tools in a loop until a given task is complete.
+- [Agents](agents.md) - Build a LangChain agent: a model calling tools in a loop until a task is complete, shaped by a harness of prompt, tools, and middleware.

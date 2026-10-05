@@ -1,13 +1,13 @@
 ---
 title: "integrations/chat"
-description: "Index of 36 pages and 0 subdirectories under integrations/chat."
+description: "Index of 37 pages and 0 subdirectories under integrations/chat."
 category: "index"
 tags: [index, integrations, chat]
 ---
 
 # integrations/chat
 
-36 pages here.
+37 pages here.
 
 ## Files
 
@@ -30,6 +30,7 @@ tags: [index, integrations, chat]
 - [ChatGroq integration](groq.md) - Integrate with the ChatGroq chat model using LangChain Python.
 - [ChatHuggingFace integration](huggingface.md) - Integrate with the ChatHuggingFace chat model using LangChain Python.
 - [ChatWatsonx integration](ibm_watsonx.md) - Integrate with the ChatWatsonx chat model using LangChain Python.
+- [Chat model integrations](index.md) - Integrate with chat models using LangChain Python.
 - [ChatLiteLLM and ChatLiteLLMRouter integration](litellm.md) - Integrate with the ChatLiteLLM and ChatLiteLLMRouter chat model using LangChain Python.
 - [ChatMistralAI integration](mistralai.md) - Integrate with the ChatMistralAI chat model using LangChain Python.
 - [ChatNVIDIA integration](nvidia_ai_endpoints.md) - Integrate with ChatNVIDIA and ChatNVIDIADynamo chat models using LangChain Python.

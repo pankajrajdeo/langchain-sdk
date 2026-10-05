@@ -93,18 +93,18 @@ await sandbox.close();
 
 ## Configuration
 
-| Option     | Type                  | Default     | Description                             |
-| ---------- | --------------------- | ----------- | --------------------------------------- |
-| `memoryMb` | `number`              | `768`       | Memory in MB (768-4096)                 |
+| Option | Type | Default | Description |
+| - | - | - | - |
+| `memoryMb` | `number` | `768` | Memory in MB (768-4096) |
 | `lifetime` | `"session" \| string` | `"session"` | Lifetime (`"session"`, `"5m"`, `"30s"`) |
-| `region`   | `string`              | -           | Region. Options: `"ams" \| "ord"`       |
+| `region` | `string` | - | Region. Options: `"ams" \| "ord"` |
 
 ### Available regions
 
-| Region Code | Location  |
-| ----------- | --------- |
-| `ams`       | Amsterdam |
-| `ord`       | Chicago   |
+| Region Code | Location |
+| - | - |
+| `ams` | Amsterdam |
+| `ord` | Chicago |
 
 ### Lifetime options
 
@@ -195,33 +195,33 @@ try {
 
 ### Error codes
 
-| Code                      | Description                                   |
-| ------------------------- | --------------------------------------------- |
-| `NOT_INITIALIZED`         | Sandbox not initialized - call `initialize()` |
-| `ALREADY_INITIALIZED`     | Cannot initialize twice                       |
-| `AUTHENTICATION_FAILED`   | Invalid or missing Deno Deploy token          |
-| `SANDBOX_CREATION_FAILED` | Failed to create sandbox                      |
-| `SANDBOX_NOT_FOUND`       | Sandbox ID not found or expired               |
-| `COMMAND_TIMEOUT`         | Command execution timed out                   |
-| `COMMAND_FAILED`          | Command execution failed                      |
-| `FILE_OPERATION_FAILED`   | File read/write failed                        |
-| `RESOURCE_LIMIT_EXCEEDED` | CPU, memory, or storage limits exceeded       |
+| Code | Description |
+| - | - |
+| `NOT_INITIALIZED` | Sandbox not initialized - call `initialize()` |
+| `ALREADY_INITIALIZED` | Cannot initialize twice |
+| `AUTHENTICATION_FAILED` | Invalid or missing Deno Deploy token |
+| `SANDBOX_CREATION_FAILED` | Failed to create sandbox |
+| `SANDBOX_NOT_FOUND` | Sandbox ID not found or expired |
+| `COMMAND_TIMEOUT` | Command execution timed out |
+| `COMMAND_FAILED` | Command execution failed |
+| `FILE_OPERATION_FAILED` | File read/write failed |
+| `RESOURCE_LIMIT_EXCEEDED` | CPU, memory, or storage limits exceeded |
 
 ## Limits and constraints
 
-| Constraint        | Value             |
-| ----------------- | ----------------- |
-| Minimum memory    | 768 MB            |
-| Maximum memory    | 4096 MB (4 GB)    |
-| Disk space        | 10 GB             |
-| vCPUs             | 2                 |
-| Working directory | `/home/app`       |
-| Network access    | Full (by default) |
+| Constraint | Value |
+| - | - |
+| Minimum memory | 768 MB |
+| Maximum memory | 4096 MB (4 GB) |
+| Disk space | 10 GB |
+| vCPUs | 2 |
+| Working directory | `/home/app` |
+| Network access | Full (by default) |
 
 ## Environment variables
 
-| Variable            | Description                           |
-| ------------------- | ------------------------------------- |
+| Variable | Description |
+| - | - |
 | `DENO_DEPLOY_TOKEN` | Deno Deploy organization access token |
 
 ***

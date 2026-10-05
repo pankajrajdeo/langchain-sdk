@@ -52,11 +52,11 @@ Different BGE variants use different prompts; check each model card on Hugging F
 
 ## Picking a BGE model
 
-| Model                    | Size | Notes                                                      |
-| ------------------------ | ---- | ---------------------------------------------------------- |
-| `BAAI/bge-small-en-v1.5` | 33M  | Smallest English model, CPU-friendly                       |
-| `BAAI/bge-large-en-v1.5` | 335M | Stronger English, widely used baseline                     |
-| `BAAI/bge-m3`            | 570M | Multilingual; dense, sparse, and multi-vector in one model |
+| Model | Size | Notes |
+| - | - | - |
+| `BAAI/bge-small-en-v1.5` | 33M | Smallest English model, CPU-friendly |
+| `BAAI/bge-large-en-v1.5` | 335M | Stronger English, widely used baseline |
+| `BAAI/bge-m3` | 570M | Multilingual; dense, sparse, and multi-vector in one model |
 
 For reranking (not embedding), see [`BAAI/bge-reranker-v2-m3`](https://huggingface.co/BAAI/bge-reranker-v2-m3) via the [Cross Encoder Reranker guide](../document_transformers/cross_encoder_reranker.md).
 

@@ -16,6 +16,7 @@ Valid fields:
 - playground_completed_at
 - evaluation_completed_at
 - success_viewed_at
+- agent_platform_welcome_viewed_at
 
 ## OpenAPI
 
@@ -192,6 +193,7 @@ paths:
         - playground_completed_at
         - evaluation_completed_at
         - success_viewed_at
+        - agent_platform_welcome_viewed_at
       operationId: update_onboarding_state_field_api_v1_me_onboarding_state__field__put
       parameters:
         - name: field
@@ -257,6 +259,12 @@ components:
               format: date-time
             - type: 'null'
           title: Success Viewed At
+        agent_platform_welcome_viewed_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Agent Platform Welcome Viewed At
         created_at:
           type: string
           format: date-time

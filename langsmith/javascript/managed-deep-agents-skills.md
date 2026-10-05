@@ -86,11 +86,11 @@ For what syncs, what does not, and how to open the repo from a deployment, see [
 
 ## When to use skills
 
-| Concept                                                                    | Role                           | Loaded when                    |
-| -------------------------------------------------------------------------- | ------------------------------ | ------------------------------ |
-| **[Instructions](managed-deep-agents-instructions.md)** | Always-on system prompt        | Every run                      |
-| **Skills**                                                                 | Task-specific procedures       | When the agent selects them    |
-| **[Memory](managed-deep-agents-memory.md)**             | Knowledge the agent can update | When durable memory is enabled |
+| Concept | Role | Loaded when |
+| - | - | - |
+| **[Instructions](managed-deep-agents-instructions.md)** | Always-on system prompt | Every run |
+| **Skills** | Task-specific procedures | When the agent selects them |
+| **[Memory](managed-deep-agents-memory.md)** | Knowledge the agent can update | When durable memory is enabled |
 
 For more information, see [Project structure](managed-deep-agents-project-structure.md).
 
