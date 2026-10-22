@@ -1997,6 +1997,7 @@ def mirror(*, workers: int, timeout: float, clean: bool) -> int:
     skipped: dict[str, str] = {}
     missing: dict[str, str] = {}
     changed = 0
+    recovery_round = 0
 
     with tqdm(desc="Downloading Markdown", unit="page", total=len(queued), dynamic_ncols=True) as progress:
         while True:
@@ -2009,8 +2010,27 @@ def mirror(*, workers: int, timeout: float, clean: bool) -> int:
                 - missing.keys()
             )
             if not batch:
-                break
-            with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
+                retry_pages = set(failures) | set(broken_links)
+                if not retry_pages or recovery_round >= 2:
+                    break
+                recovery_round += 1
+                delay = 10 * recovery_round
+                print(
+                    f"Retrying {len(retry_pages)} failed pages after {delay}s "
+                    f"(recovery round {recovery_round}/2).",
+                    file=sys.stderr,
+                )
+                time.sleep(delay)
+                # Retry only failed downloads after the crawl has drained.
+                # Successful retries can discover more links, which must also
+                # be crawled before normalization and stale-file cleanup.
+                batch = sorted(retry_pages)
+                failures.clear()
+                broken_links.clear()
+                progress.total += len(batch)
+                progress.refresh()
+            batch_workers = min(workers, 3) if recovery_round else workers
+            with concurrent.futures.ThreadPoolExecutor(max_workers=batch_workers) as executor:
                 futures = {
                     executor.submit(download_one, page, timeout, full_pages): page
                     for page in batch

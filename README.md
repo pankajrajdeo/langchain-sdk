@@ -132,5 +132,11 @@ The `Update LangChain documentation` GitHub Actions workflow runs weekly, on
 Monday, and can also be started manually from the Actions tab. When upstream
 documentation changes, the workflow commits the refreshed mirror to `main`.
 
+Downloads use three request attempts. Pages that still fail are retried after
+the crawl drains, with two recovery rounds, 10/20-second delays, and at most
+three concurrent downloads. Recovered pages are also checked for new links.
+Persistent failures still fail the job and prevent stale-file cleanup; a partial
+mirror is never committed by the workflow.
+
 This is an unofficial mirror. LangChain and its documentation belong to their
 respective owners.
