@@ -26,6 +26,7 @@ import hashlib
 import html
 import json
 import os
+import random
 import re
 import shutil
 import sys
@@ -33,6 +34,7 @@ import time
 import unicodedata
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
+from email.utils import parsedate_to_datetime
 from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
 from typing import Iterable
@@ -237,6 +239,22 @@ class DocsRedirectHandler(HTTPRedirectHandler):
 OPENER = build_opener(DocsRedirectHandler())
 
 
+def retry_delay(error: Exception, attempt: int) -> float:
+    """Back off with jitter, honoring bounded server-requested cooldowns."""
+    delay = min(30.0, 2**attempt) + random.uniform(0, 1)
+    if isinstance(error, HTTPError) and error.headers:
+        value = error.headers.get("Retry-After", "")
+        try:
+            seconds = float(value)
+        except ValueError:
+            try:
+                seconds = parsedate_to_datetime(value).timestamp() - time.time()
+            except (ValueError, TypeError, OverflowError):
+                seconds = 0
+        delay = max(delay, min(120.0, seconds))
+    return delay
+
+
 def request_bytes(url: str, timeout: float, retries: int = 3) -> tuple[bytes, str, str]:
     """Return response body, final URL, and content type with bounded retries."""
     last_error: Exception | None = None
@@ -247,12 +265,14 @@ def request_bytes(url: str, timeout: float, retries: int = 3) -> tuple[bytes, st
                 return response.read(), response.geturl(), response.headers.get_content_type()
         except (HTTPError, URLError, TimeoutError, OSError, HTTPException) as exc:
             last_error = exc
+            if isinstance(exc, HTTPError):
+                exc.close()
             if isinstance(exc, HTTPError) and exc.code in {404, 410}:
                 raise MissingPage(f"HTTP {exc.code}") from exc
             if isinstance(exc, HTTPError) and exc.code in {400, 401, 403}:
                 break
             if attempt + 1 < retries:
-                time.sleep(0.5 * (2**attempt))
+                time.sleep(retry_delay(exc, attempt))
     raise RuntimeError(str(last_error) if last_error else f"Unable to fetch {url}")
 
 
@@ -2141,7 +2161,7 @@ def mirror(*, workers: int, timeout: float, clean: bool) -> int:
 
     removed = (
         clean_stale_files(previous, set(files) | set(index_files))
-        if clean and not failures
+        if clean and not failures and not discovery_errors and not normalization_warnings
         else []
     )
     manifest = {

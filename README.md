@@ -135,8 +135,16 @@ documentation changes, the workflow commits the refreshed mirror to `main`.
 Downloads use three request attempts. Pages that still fail are retried after
 the crawl drains, with two recovery rounds, 10/20-second delays, and at most
 three concurrent downloads. Recovered pages are also checked for new links.
+Request retries include random jitter and honor `Retry-After` cooldowns up to
+120 seconds. Stale cleanup is also skipped if discovery or normalization reports
+problems.
 Persistent failures still fail the job and prevent stale-file cleanup; a partial
 mirror is never committed by the workflow.
+
+Updater and workflow changes run the regression suite on pushes and pull
+requests. Failed crawl logs and the manifest are retained as an Actions artifact
+for 14 days. If code changes while a crawl is running, the workflow rebases its
+documentation commit before pushing; conflicts remain visible failures.
 
 This is an unofficial mirror. LangChain and its documentation belong to their
 respective owners.

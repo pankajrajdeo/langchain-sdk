@@ -37,7 +37,22 @@ jobs:
         run: python -m unittest discover -s tests
 
       - name: Update documentation mirror
-        run: python update_docs.py
+        id: mirror
+        shell: bash
+        run: |
+          set -o pipefail
+          python -u update_docs.py 2>&1 | tee "$RUNNER_TEMP/mirror-update.log"
+
+      - name: Preserve failed update diagnostics
+        if: failure() && steps.mirror.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: mirror-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/mirror-update.log
+            .mirror-manifest.json
+          include-hidden-files: true
+          retention-days: 14
 
       - name: Commit and push changes
         shell: bash
@@ -55,4 +70,14 @@ jobs:
             trigger="$GITHUB_EVENT_NAME by $GITHUB_ACTOR"
           fi
           git commit -m "docs: automated update $(date -u +%F) ($trigger)"
-          git push
+          # A human may push code while this multi-hour crawl is running.
+          # Rebase the generated commit onto that work; never force-push.
+          for attempt in 1 2 3; do
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "Could not push documentation after three attempts." >&2
+          exit 1
