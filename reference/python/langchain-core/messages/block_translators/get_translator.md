@@ -36,4 +36,4 @@ Dictionary with `'translate_content'` and `'translate_content_chunk'`
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/messages/block_translators/__init__.py#L57)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/messages/block_translators/__init__.py#L57)

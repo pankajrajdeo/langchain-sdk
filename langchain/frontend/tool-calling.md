@@ -7,8 +7,8 @@ tags: [docs, langchain, frontend, tool-calling]
 ---
 
 # Tool calling
-
-> Display agent tool calls with rich, type-safe UI cards
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/tool-calling)
+Display agent tool calls with rich, type-safe UI cards
 
 Agents can invoke external tools like weather APIs, calculators, web search,
 database queries, and more. The results are in raw JSON. This pattern shows you

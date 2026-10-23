@@ -20,9 +20,10 @@ cache), produce the same `message-start` / per-block /
 downstream see a uniform event shape regardless of source.
 
 Text and reasoning blocks emit a single `content-block-delta` with
-the full accumulated content.  Already-finalized blocks (tool_call,
-server_tool_call, image, etc.) skip the delta and rely on the
-`content-block-finish` event alone.
+the full accumulated content, and tool-call chunk blocks a single
+`tool-call-delta` with their full args.  Already-finalized blocks
+(tool_call, server_tool_call, image, etc.) skip the delta and rely
+on the `content-block-finish` event alone.
 
 ## Signature
 
@@ -43,4 +44,4 @@ message_to_events(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/language_models/_compat_bridge.py#L782)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/language_models/_compat_bridge.py#L761)

@@ -590,10 +590,12 @@ components:
             - type: 'null'
           title: Image URI
           description: >-
-            The URI of the Docker image used for the deployment.<br><br>When
-            updating a deployment (`PATCH`), setting this field to a non-null
-            value will trigger creation of a new revision. Applicable for
-            `external_docker` source.
+            The URI of the Docker image used for the deployment.<br><br>Required
+            on create for `external_docker`. For `internal_docker` deployments,
+            omit this field on create.<br><br>When updating a deployment
+            (`PATCH`), setting this field to a non-null value will trigger
+            creation of a new revision. Applicable for `external_docker` and
+            `internal_docker` sources.
         source_tarball_path:
           anyOf:
             - type: string
@@ -857,10 +859,12 @@ components:
             - type: 'null'
           title: Image URI
           description: >-
-            The URI of the Docker image used for the deployment.<br><br>When
-            updating a deployment (`PATCH`), setting this field to a non-null
-            value will trigger creation of a new revision. Applicable for
-            `external_docker` source.
+            The URI of the Docker image used for the deployment.<br><br>Required
+            on create for `external_docker`. For `internal_docker` deployments,
+            omit this field on create.<br><br>When updating a deployment
+            (`PATCH`), setting this field to a non-null value will trigger
+            creation of a new revision. Applicable for `external_docker` and
+            `internal_docker` sources.
         source_tarball_path:
           anyOf:
             - type: string
