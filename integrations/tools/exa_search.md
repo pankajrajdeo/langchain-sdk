@@ -153,6 +153,7 @@ for snapshot in stream.values:
 ExaSearchRetriever is a retriever that uses Exa Search to retrieve relevant documents.
 
 > [!NOTE]
+>
 > **The `max_characters` parameter for **TextContentsOptions** used to be called `max_length` which is now deprecated. Make sure to use `max_characters` instead.**
 
 ### Basic usage
@@ -208,8 +209,6 @@ For detailed documentation of all Exa API features and configurations, visit the
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/exa_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/exa_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

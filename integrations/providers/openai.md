@@ -14,33 +14,42 @@ This page covers all LangChain integrations with [OpenAI](https://en.wikipedia.o
 
 ## Model interfaces
 
-#### [ChatOpenAI](../chat/openai.md)
-OpenAI chat models.
+> **[ChatOpenAI](../chat/openai.md)**
+>
+> OpenAI chat models.
 
-#### [AzureChatOpenAI](../chat/azure_chat_openai.md)
-Azure OpenAI chat models with enterprise features.
+> **[Decisions API](../decision_models/openai.md)**
+>
+> Typed answers and calibrated probabilities for routing, classification, and agent middleware.
 
-#### [OpenAIEmbeddings](../embeddings/openai.md)
-OpenAI embedding models.
+> **[AzureChatOpenAI](../chat/azure_chat_openai.md)**
+>
+> Azure OpenAI chat models with enterprise features.
 
-#### [AzureOpenAIEmbeddings](../embeddings/azure_openai.md)
-Azure OpenAI embedding models with enterprise features.
+> **[OpenAIEmbeddings](../embeddings/openai.md)**
+>
+> OpenAI embedding models.
+
+> **[AzureOpenAIEmbeddings](../embeddings/azure_openai.md)**
+>
+> Azure OpenAI embedding models with enterprise features.
 
 ## Other
 
-#### [OpenAI](../llms/openai.md)
-(Legacy) OpenAI text completion models.
+> **[OpenAI](../llms/openai.md)**
+>
+> (Legacy) OpenAI text completion models.
 
-#### [AzureOpenAI](../llms/azure_openai.md)
-Wrapper for (legacy) OpenAI text completion models hosted on Azure.
+> **[AzureOpenAI](../llms/azure_openai.md)**
+>
+> Wrapper for (legacy) OpenAI text completion models hosted on Azure.
 
-#### [OpenAIModerationChain](https://python.langchain.com/v0.1/docs/guides/productionization/safety/moderation)
-Detect text that could be hateful, violent, etc.
+> **[OpenAIModerationMiddleware](../middleware/openai.md#content-moderation)**
+>
+> Detect text that could be hateful, violent, etc.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

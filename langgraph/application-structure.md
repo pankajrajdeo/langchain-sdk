@@ -13,6 +13,7 @@ A LangGraph application consists of one or more graphs, a configuration file (`l
 This guide shows a typical structure of an application and shows you how to provide the required configuration to deploy an application with [LangSmith Deployment](../langsmith/deployment.md).
 
 > [!NOTE]
+>
 > LangSmith Deployment is a managed hosting platform for deploying and scaling LangGraph agents. It handles the infrastructure, scaling, and operational concerns so you can deploy your stateful, long-running agents directly from your repository. Learn more in the [Deployment documentation](../langsmith/deployment.md).
 
 ## Key concepts
@@ -28,7 +29,8 @@ To deploy using LangSmith, the following information should be provided:
 
 Below are examples of directory structures for applications:
 
-#### Python (requirements.txt)
+**Python (requirements.txt)**
+
 ```plaintext
 my-app/
 ├── my_agent # all project code lies within here
@@ -44,7 +46,8 @@ my-app/
 └── langgraph.json # configuration file for LangGraph
 ```
 
-#### Python (pyproject.toml)
+**Python (pyproject.toml)**
+
 ```plaintext
 my-app/
 ├── my_agent # all project code lies within here
@@ -61,9 +64,10 @@ my-app/
 ```
 
 > [!NOTE]
+>
 > The directory structure of a LangGraph application can vary depending on the programming language and the package manager used.
 
-<a id="configuration-file-concepts" />
+<a id="configuration-file-concepts"></a>
 
 ## Configuration file
 
@@ -72,6 +76,7 @@ The `langgraph.json` file is a JSON file that specifies the dependencies, graphs
 See the [LangGraph configuration file reference](../langsmith/cli.md#configuration-file) for details on all supported keys in the JSON file.
 
 > [!TIP]
+>
 > The [LangGraph CLI](../langsmith/cli.md) defaults to using the configuration file `langgraph.json` in the current directory.
 
 ### Examples
@@ -116,8 +121,6 @@ For a production deployment, you will typically want to configure the environmen
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/application-structure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/application-structure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

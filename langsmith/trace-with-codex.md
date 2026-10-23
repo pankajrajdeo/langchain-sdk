@@ -104,7 +104,8 @@ Tracing to multiple [replicas](log-traces-to-project.md) is useful for:
 * Tracing to multiple workspaces with different API keys.
 * Adding extra metadata to specific replica destinations.
 
-#### Config file (recommended)
+**Config file (recommended)**
+
 In `<project>/.codex/langsmith.json` or `~/.codex/langsmith.json`:
 
 ```json
@@ -126,7 +127,8 @@ In `<project>/.codex/langsmith.json` or `~/.codex/langsmith.json`:
 }
 ```
 
-#### Shell environment variable
+**Shell environment variable**
+
 ```bash
 export LANGSMITH_CODEX_RUNS_ENDPOINTS='[{"apiUrl":"https://api.smith.langchain.com","apiKey":"lsv2_pt_workspace_a","projectName":"project-prod"},{"apiUrl":"https://api.smith.langchain.com","apiKey":"lsv2_pt_workspace_b","projectName":"project-staging","updates":{"metadata":{"environment":"staging"}}}]'
 ```
@@ -190,6 +192,7 @@ Interrupted turns where the user cancels mid-response are still uploaded once th
 Open the configured LangSmith project and complete a Codex turn. By default traces appear in the `codex` project. The plugin uploads completed Codex transcript data, including messages, tool call inputs and outputs, model metadata, token usage, and subagent thread structure.
 
 > [!WARNING]
+>
 > The plugin uploads full Codex transcript data to LangSmith. Do not enable tracing for sessions that contain data you do not want stored in LangSmith.
 
 ## Troubleshooting
@@ -204,8 +207,6 @@ If traces do not appear in LangSmith:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-codex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-codex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -24,11 +24,12 @@ Both work by resuming from a prior checkpoint. Nodes before the checkpoint are n
 Invoke the graph with a prior checkpoint's config to replay from that point.
 
 > [!WARNING]
+>
 > Replay re-executes nodes—it doesn't just read from cache. LLM calls, API requests, and [interrupts](interrupts.md) fire again and may return different results. Replaying from the final checkpoint (no `next` nodes) is a no-op.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/re_play.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=d7b34b85c106e55d181ae1f4afb50251" alt="Replay" width="2276" height="986" data-path="oss/images/re_play.png" />
+![Replay](https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/re_play.png?fit=max\&auto=format\&n=dL5Sn6Cmy9pwtY0V\&q=85\&s=d7b34b85c106e55d181ae1f4afb50251)
 
-Use [`getStateHistory`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.pregel.Pregel.html#getStateHistory) to find the checkpoint you want to replay from, then call [`invoke`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.CompiledStateGraph.html#invoke) with that checkpoint's config:
+Use [`getStateHistory`](https://reference.langchain.com/javascript/langchain-langgraph/pregel/Pregel/getStateHistory) to find the checkpoint you want to replay from, then call [`invoke`](https://reference.langchain.com/javascript/langchain-langgraph/index/CompiledStateGraph/invoke) with that checkpoint's config:
 
 ```typescript
 import { v7 as uuid7 } from "uuid";
@@ -73,11 +74,12 @@ const replayResult = await graph.invoke(null, beforeJoke.config);
 
 ## Fork
 
-Fork creates a new branch from a past checkpoint with modified state. Call [`update_state`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.pregel.Pregel.html#updateState) on a prior checkpoint to create the fork, then [`invoke`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.CompiledStateGraph.html#invoke) with `None` to continue execution.
+Fork creates a new branch from a past checkpoint with modified state. Call [`update_state`](https://reference.langchain.com/javascript/langchain-langgraph/pregel/Pregel/updateState) on a prior checkpoint to create the fork, then [`invoke`](https://reference.langchain.com/javascript/langchain-langgraph/index/CompiledStateGraph/invoke) with `None` to continue execution.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/checkpoints_full_story.jpg?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=a52016b2c44b57bd395d6e1eac47aa36" alt="Fork" width="3705" height="2598" data-path="oss/images/checkpoints_full_story.jpg" />
+![Fork](https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/checkpoints_full_story.jpg?fit=max\&auto=format\&n=-_xGPoyjhyiDWTPJ\&q=85\&s=a52016b2c44b57bd395d6e1eac47aa36)
 
 > [!WARNING]
+>
 > `update_state` does **not** roll back a thread. It creates a new checkpoint that branches from the specified point. The original execution history remains intact.
 
 ```typescript
@@ -101,7 +103,7 @@ console.log(forkResult.joke); // A joke about chickens, not socks
 
 ### From a specific node
 
-When you call [`update_state`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.pregel.Pregel.html#updateState), values are applied using the specified node's writers (including [reducers](graph-api.md#reducers)). The checkpoint records that node as having produced the update, and execution resumes from that node's successors.
+When you call [`update_state`](https://reference.langchain.com/javascript/langchain-langgraph/pregel/Pregel/updateState), values are applied using the specified node's writers (including [reducers](graph-api.md#reducers)). The checkpoint records that node as having produced the update, and execution resumes from that node's successors.
 
 By default, LangGraph infers `as_node` from the checkpoint's version history. When forking from a specific checkpoint, this inference is almost always correct.
 
@@ -188,7 +190,8 @@ const result = await graph.invoke(null, forkConfig);
 
 Time travel with [subgraphs](use-subgraphs.md) depends on whether the subgraph has its own checkpointer. This determines the granularity of checkpoints you can time travel from.
 
-#### Inherited checkpointer (default)
+**Inherited checkpointer (default)**
+
 By default, a subgraph inherits the parent's checkpointer. The parent treats the entire subgraph as a **single super-step** — there is only one parent-level checkpoint for the whole subgraph execution. Time traveling from before the subgraph re-executes it from scratch.
 
 You cannot time travel to a point *between* nodes in a default subgraph — you can only time travel from the parent level.
@@ -225,10 +228,11 @@ const result = await graph.invoke(null, forkConfig);
 // You cannot time travel to a point between stepA and stepB
 ```
 
-#### Subgraph checkpointer
+**Subgraph checkpointer**
+
 Set `checkpointer=True` on the subgraph to give it its own checkpoint history. This creates checkpoints at each step **within** the subgraph, allowing you to time travel from a specific point inside it — for example, between two interrupts.
 
-Use [`get_state`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.pregel.Pregel.html#getState) with `subgraphs=True` to access the subgraph's own checkpoint config, then fork from it:
+Use [`get_state`](https://reference.langchain.com/javascript/langchain-langgraph/pregel/Pregel/getState) with `subgraphs=True` to access the subgraph's own checkpoint config, then fork from it:
 
 ```typescript
 // Subgraph with its own checkpointer
@@ -262,8 +266,6 @@ See [subgraph persistence](use-subgraphs.md#subgraph-persistence) for more on co
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-time-travel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-time-travel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

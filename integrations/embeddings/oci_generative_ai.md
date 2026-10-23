@@ -132,6 +132,7 @@ See the [OCI model catalog](https://docs.oracle.com/en-us/iaas/Content/generativ
 ## RAG Example
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -166,8 +167,6 @@ For detailed documentation of all `OCIGenAIEmbeddings` features and configuratio
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/oci_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/oci_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

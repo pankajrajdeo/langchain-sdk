@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/orgs/current/access-policies/{access_policy_id}:
     patch:
@@ -371,6 +374,7 @@ components:
         - deployments:delete
         - deployments:read
         - deployments:update
+        - deployments:cancel-runs
         - feedback:create
         - feedback:delete
         - feedback:read
@@ -378,6 +382,7 @@ components:
         - feedback-configs:create
         - feedback-configs:update
         - feedback-configs:delete
+        - feedback-configs:manage-enforced
         - experiments:run
         - issues:create
         - issues:delete
@@ -426,6 +431,7 @@ components:
         - workspaces:manage
         - workspaces:manage-model-configs
         - workspaces:manage-keys
+        - workspaces:tracing-keys:create
         - workspaces:read
         - alerts:create
         - alerts:update
@@ -436,9 +442,11 @@ components:
         - agent-auth-connections:update
         - agent-auth-connections:delete
         - agent-auth-connections:revoke
+        - agent-auth-credentials:use
         - bulk-exports:read
         - bulk-exports:manage
         - mcp-servers:create
+        - mcp-servers:create-personal
         - mcp-servers:delete
         - mcp-servers:invoke
         - mcp-servers:read
@@ -455,6 +463,28 @@ components:
         - fleet-skills:read
         - fleet-skills:update
         - fleet-skills:delete
+        - organization:access-control:manage
+        - organization:audit-logs:read
+        - organization:authentication:manage
+        - organization:billing:manage
+        - organization:billing:read
+        - organization:engine:manage
+        - organization:engine:read
+        - organization:gateway:manage
+        - organization:infrastructure:manage
+        - organization:infrastructure:read
+        - organization:installation-operations:manage
+        - organization:installation-operations:read
+        - organization:installation-usage:manage
+        - organization:integrations:manage
+        - organization:integrations:read
+        - organization:members:manage
+        - organization:retention:manage
+        - organization:security-policy:manage
+        - organization:service-key:manage
+        - organization:settings:manage
+        - organization:usage-controls:manage
+        - organization:workspaces:manage
         - organization:pats:create
         - organization:read
         - organization:read-metadata
@@ -487,6 +517,7 @@ components:
         - DeploymentsDelete
         - DeploymentsRead
         - DeploymentsUpdate
+        - DeploymentsCancelRuns
         - FeedbackCreate
         - FeedbackDelete
         - FeedbackRead
@@ -494,6 +525,7 @@ components:
         - FeedbackConfigsCreate
         - FeedbackConfigsUpdate
         - FeedbackConfigsDelete
+        - FeedbackConfigsManageEnforced
         - ExperimentsRun
         - IssuesCreate
         - IssuesDelete
@@ -542,6 +574,7 @@ components:
         - WorkspacesManage
         - WorkspacesManageModelConfigs
         - WorkspacesManageKeys
+        - WorkspacesTracingKeysCreate
         - WorkspacesRead
         - AlertsCreate
         - AlertsUpdate
@@ -552,9 +585,11 @@ components:
         - AgentAuthConnectionsUpdate
         - AgentAuthConnectionsDelete
         - AgentAuthConnectionsRevoke
+        - AgentAuthCredentialsUse
         - BulkExportsRead
         - BulkExportsManage
         - McpServersCreate
+        - McpServersCreatePersonal
         - McpServersDelete
         - McpServersInvoke
         - McpServersRead
@@ -571,6 +606,28 @@ components:
         - FleetSkillsRead
         - FleetSkillsUpdate
         - FleetSkillsDelete
+        - OrganizationAccessControlManage
+        - OrganizationAuditLogsRead
+        - OrganizationAuthenticationManage
+        - OrganizationBillingManage
+        - OrganizationBillingRead
+        - OrganizationEngineManage
+        - OrganizationEngineRead
+        - OrganizationGatewayManage
+        - OrganizationInfrastructureManage
+        - OrganizationInfrastructureRead
+        - OrganizationInstallationOperationsManage
+        - OrganizationInstallationOperationsRead
+        - OrganizationInstallationUsageManage
+        - OrganizationIntegrationsManage
+        - OrganizationIntegrationsRead
+        - OrganizationMembersManage
+        - OrganizationRetentionManage
+        - OrganizationSecurityPolicyManage
+        - OrganizationServiceKeyManage
+        - OrganizationSettingsManage
+        - OrganizationUsageControlsManage
+        - OrganizationWorkspacesManage
         - OrganizationPATsCreate
         - OrganizationRead
         - OrganizationReadMetadata
@@ -581,8 +638,10 @@ components:
       type: string
       enum:
         - resource_tag_key
+        - root_run_metadata
       x-enum-varnames:
         - AbacAttributeNameResourceTagKey
+        - AbacAttributeNameRootRunMetadata
     authz_internal.AbacOperator:
       type: string
       enum:

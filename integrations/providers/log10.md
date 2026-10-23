@@ -11,6 +11,7 @@ tags: [docs, integrations, providers, log10]
 > Integrate with Log10 using LangChain Python.
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 This page covers how to use the [Log10](https://log10.io) within LangChain.
@@ -53,6 +54,7 @@ llm = ChatOpenAI(model="gpt-3.5-turbo", callbacks=[log10_callback])
 ## How to use tags with Log10
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -121,8 +123,6 @@ with log10_session(tags=["foo", "bar"]):
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/log10.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/log10.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

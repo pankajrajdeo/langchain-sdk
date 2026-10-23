@@ -20,6 +20,7 @@ In this tutorial, you'll build a personal assistant system that demonstrates the
 We will also incorporate [human-in-the-loop review](../human-in-the-loop.md) to allow users to approve, edit, and reject actions (such as outbound emails) as desired.
 
 > [!NOTE]
+>
 > If you are migrating from the [`langgraph-supervisor`](https://github.com/langchain-ai/langgraph-supervisor-py) package, see [Migrate from langgraph-supervisor](../../migrate/langgraph-supervisor.md) for before-and-after patterns, including interrupt and resume flows.
 
 ### Why use a supervisor?
@@ -78,7 +79,8 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 
 We will need to select a chat model from LangChain's suite of integrations:
 
-#### OpenAI
+**OpenAI**
+
 👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
 **pip**
@@ -115,7 +117,8 @@ os.environ["OPENAI_API_KEY"] = "sk-..."
 model = ChatOpenAI(model="gpt-5.5")
 ```
 
-#### Anthropic
+**Anthropic**
+
 👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
 **pip**
@@ -152,7 +155,8 @@ os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
-#### Azure
+**Azure**
+
 👉 Read the [Azure chat model integration docs](../../integrations/chat/azure_chat_openai.md)
 
 **pip**
@@ -199,7 +203,8 @@ model = AzureChatOpenAI(
 )
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 👉 Read the [Google GenAI chat model integration docs](../../integrations/chat/google_generative_ai.md)
 
 **pip**
@@ -236,7 +241,8 @@ os.environ["GOOGLE_API_KEY"] = "..."
 model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
 ```
 
-#### AWS Bedrock
+**AWS Bedrock**
+
 👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock.md)
 
 **pip**
@@ -273,7 +279,8 @@ from langchain_aws import ChatBedrock
 model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
-#### HuggingFace
+**HuggingFace**
+
 👉 Read the [HuggingFace chat model integration docs](../../integrations/chat/huggingface.md)
 
 **pip**
@@ -320,7 +327,8 @@ llm = HuggingFaceEndpoint(
 model = ChatHuggingFace(llm=llm)
 ```
 
-#### OpenRouter
+**OpenRouter**
+
 👉 Read the [OpenRouter chat model integration docs](../../integrations/chat/openrouter.md)
 
 **pip**
@@ -648,6 +656,7 @@ The team standup with Alice and Bob is scheduled for tomorrow at 9:00 AM. If you
 The supervisor identifies this as a calendar task, calls `schedule_event`, and the calendar agent handles date parsing and event creation.
 
 > [!TIP]
+>
 > For full transparency into the information flow, including prompts and responses for each chat model call, check out the [LangSmith trace](https://smith.langchain.com/public/91a9a95f-fba9-4e84-aff0-371861ad2f4a/r) for the above run.
 
 ### Example 2: Complex multi-domain request
@@ -702,9 +711,11 @@ Let me know if you'd like to add more details to the meeting or include addition
 The supervisor recognizes this requires both calendar and email actions, calls `schedule_event` for the meeting, then calls `manage_email` for the reminder. Each sub-agent completes its task, and the supervisor synthesizes both results into a coherent response.
 
 > [!NOTE]
+>
 > The supervisor dispatches tasks to subagents sequentially by default. Each tool call completes before the next one starts. However, many LLMs will issue multiple tool calls in a single response (as shown in the trace above, where both `schedule_event` and `manage_email` are called together), which the runtime executes in parallel. You can also configure explicit parallel dispatch. See the [`create_supervisor` reference docs](https://reference.langchain.com/python/langgraph-supervisor/supervisor/create_supervisor) for details.
 
 > [!TIP]
+>
 > Refer to the [LangSmith trace](https://smith.langchain.com/public/95cd00a3-d1f9-4dba-9731-7bf733fb6a3c/r) to see the detailed information flow for the above run, including individual chat model prompts and responses.
 
 ### Complete working example
@@ -712,6 +723,7 @@ The supervisor recognizes this requires both calendar and email actions, calls `
 Here's everything together in a runnable script:
 
 **View complete code**
+
 ```python
 """
 Personal Assistant Supervisor Example
@@ -1086,6 +1098,7 @@ def schedule_event(
 This allows sub-agents to see the full conversation context, which can be useful for resolving ambiguities like "schedule it for the same time tomorrow" (referencing a previous conversation).
 
 > [!TIP]
+>
 > You can see the full context received by the sub agent in the [chat model call](https://smith.langchain.com/public/c7d54882-afb8-4039-9c5a-4112d0f458b0/r/6803571e-af78-4c68-904a-ecf55771084d) of the LangSmith trace.
 
 ### Control what supervisor receives
@@ -1120,6 +1133,7 @@ def schedule_event(request: str) -> str:
 The supervisor pattern creates layers of abstraction where each layer has a clear responsibility. When designing a supervisor system, start with clear domain boundaries and give each sub-agent focused tools and prompts. Write clear tool descriptions for the supervisor, test each layer independently before integration, and control information flow based on your specific needs.
 
 > [!TIP]
+>
 > **When to use the supervisor pattern**
 >
 > Use the supervisor pattern when you have multiple distinct domains (calendar, email, CRM, database), each domain has multiple tools or complex logic, you want centralized workflow control, and sub-agents don't need to converse directly with users.
@@ -1132,8 +1146,6 @@ Learn about [handoffs](handoffs.md) for agent-to-agent conversations, explore [c
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/subagents-personal-assistant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/subagents-personal-assistant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

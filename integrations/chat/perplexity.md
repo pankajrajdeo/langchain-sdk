@@ -16,7 +16,7 @@ This page will help you get started with Perplexity [chat models](../../langchai
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/xai) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/chat/xai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatPerplexity`](https://reference.langchain.com/python/langchain-perplexity/chat_models/ChatPerplexity) | [`langchain-perplexity`](https://reference.langchain.com/python/langchain-perplexity) | beta | [✅](perplexity.md) | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-perplexity?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-perplexity?style=flat-square\&label=%20) |
 
@@ -42,7 +42,7 @@ if "PPLX_API_KEY" not in os.environ:
     os.environ["PPLX_API_KEY"] = getpass.getpass("Enter your Perplexity API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -139,6 +139,7 @@ When routed through the Agent API, response objects carry richer metadata:
 * Tool calls returned by the model appear in `response.tool_calls` exactly as they do for `ChatOpenAI`.
 
 > [!WARNING]
+>
 > The Agent API does not accept Chat-Completions-only sampling and control knobs. When `ChatPerplexity` routes through the Agent API (whether explicitly or by auto-detection), the following fields are dropped from the outgoing payload with a `WARNING` log: `temperature`, `top_p`, `top_k`, `stop`, and `metadata`. The class-default `temperature` is suppressed silently because `_default_params` injects it on every call, but a user-supplied `temperature` still warns.
 >
 > `tool_choice` is not silently dropped — it raises `ValueError` when routed through the Agent API, since downstream agent loops cannot recover from a missing forced-tool selection.
@@ -252,8 +253,6 @@ AnswerFormat(first_name='Michael', last_name='Jordan', year_of_birth=1963, num_s
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

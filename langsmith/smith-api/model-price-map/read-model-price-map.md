@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/model-price-map:
     get:
@@ -202,6 +205,43 @@ paths:
                 maxLength: 200
               - type: 'null'
             title: Q
+        - name: provider
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - type: array
+                items:
+                  type: string
+                  minLength: 1
+                maxItems: 20
+              - type: 'null'
+            description: Only return price maps for these providers (case-insensitive).
+            title: Provider
+          description: Only return price maps for these providers (case-insensitive).
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - const: start_time
+                type: string
+              - type: 'null'
+            description: Field to sort on. Defaults to match priority order.
+            title: Sort By
+          description: Field to sort on. Defaults to match priority order.
+        - name: sort_order
+          in: query
+          required: false
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+            description: Sort direction for sort_by. Unset start dates sort last.
+            default: desc
+            title: Sort Order
+          description: Sort direction for sort_by. Unset start dates sort last.
       responses:
         '200':
           description: Successful Response

@@ -12,6 +12,6 @@ tags: [index, reference, python, langchain, agents, middleware, human_in_the_loo
 ## Files
 
 - [allowed_decisions](allowed_decisions.md) - The decisions that are allowed for this action.
-- [args_schema](args_schema.md) - JSON schema for the args associated with the action, if edits are allowed.
+- [args_schema](args_schema.md) - Unused: the middleware doesn't send it to the reviewer in either mode.
 - [description](description.md) - The description attached to the request for human input.
 - [when](when.md) - Optional predicate controlling whether to interrupt for a given tool call.

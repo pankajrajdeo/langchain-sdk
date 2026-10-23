@@ -396,18 +396,26 @@ components:
           title: Integration ID
           description: >-
             The ID of the integration used for the deployment.<br><br>Retrieve
-            this value from the `GET /v1/integrations/github/install` endpoint.
-            This cannot be changed (`PATCH`) once the deployment is created.
-            Only applicable for `github` source.
+            this value from the `GET /v1/integrations/github/install`
+            endpoint.<br><br>When updating a deployment (`PATCH`), this may be
+            omitted while changing `repo_url`: the workspace integration with
+            access to the new repository is used. Updating this field does not
+            create a new revision. Only applicable for `github` source.
         repo_url:
           anyOf:
             - type: string
             - type: 'null'
           title: Repository URL
           description: >-
-            The URL of the git repository used for the deployment.<br><br>This
-            cannot be changed (`PATCH`) once the deployment is created. Only
-            applicable for `github` source.
+            The URL of the git repository used for the deployment.<br><br>When
+            updating a deployment (`PATCH`), set this field to point the
+            deployment at a renamed, transferred, or different repository. The
+            repository must be accessible through one of the workspace's GitHub
+            integrations and contain the deployment's LangGraph configuration
+            file at the tracked git ref. Updating this field does not create a
+            new revision; set `source_revision_config.repo_ref` in the same
+            request to deploy from the new repository. Only applicable for
+            `github` source.
         deployment_type:
           anyOf:
             - type: string
@@ -685,7 +693,7 @@ components:
             CPU request in cores for a single replica of the deployment.
             Supports fractional values (e.g. 0.5 for 500m). Values are rounded
             to 1 decimal place. If cpu_limit is not set, limit defaults to 2x
-            this value.
+            this value unless cpu_limit_enabled is false.
           examples:
             - 0.1
             - 0.5
@@ -702,7 +710,8 @@ components:
           description: >-
             CPU limit in cores for a single replica of the deployment. Supports
             fractional values (e.g. 0.5 for 500m). Values are rounded to 1
-            decimal place. If not set, defaults to 2x cpu.
+            decimal place. If not set, defaults to 2x cpu; set cpu_limit_enabled
+            to false to run without a CPU limit.
           examples:
             - 0.2
             - 1
@@ -754,7 +763,7 @@ components:
             Supports fractional values (e.g. 0.5 for 500m). Values are rounded
             to 1 decimal place. If not provided, defaults to the same value as
             `cpu`. If queue_cpu_limit is not set, limit defaults to 2x this
-            value.
+            value unless queue_cpu_limit_enabled is false.
           examples:
             - 0.1
             - 0.5
@@ -770,7 +779,8 @@ components:
           description: >-
             CPU limit in cores for a single replica of the queue deployment.
             Supports fractional values (e.g. 0.5 for 500m). Values are rounded
-            to 1 decimal place. If not set, defaults to 2x queue_cpu.
+            to 1 decimal place. If not set, defaults to 2x queue_cpu; set
+            queue_cpu_limit_enabled to false to run without a CPU limit.
           examples:
             - 0.2
             - 1
@@ -1004,6 +1014,113 @@ components:
             - type: 'null'
           title: Database Max Connections
           description: Maximum number of connections allowed to the Postgres database.
+        cpu_target_percent:
+          anyOf:
+            - type: integer
+              maximum: 100
+              minimum: 1
+            - type: 'null'
+          title: CPU Scaling Target (%)
+          description: >-
+            Average CPU usage, as a percentage of `cpu_limit` (or of `cpu` when
+            `cpu_limit_enabled` is false), at which the autoscaler adds
+            api-server replicas. Required when `cpu_scaling_enabled` is true;
+            must be null when it is false. The scaling override fields
+            (`cpu_target_percent`, `cpu_scaling_enabled`, `cpu_limit_enabled`,
+            `autoscaling_behavior`, and their `queue_` counterparts) must be set
+            all together or not at all. Requires the
+            `ENABLE_LGP_SCALING_OVERRIDES` setting.
+        cpu_scaling_enabled:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: Scale on CPU
+          description: >-
+            Whether the api-server autoscaler scales on CPU. When false, the CPU
+            trigger is removed and, with no other trigger, the api-server keeps
+            its current replica count within `min_scale` and `max_scale`. The
+            scaling override fields (`cpu_target_percent`,
+            `cpu_scaling_enabled`, `cpu_limit_enabled`, `autoscaling_behavior`,
+            and their `queue_` counterparts) must be set all together or not at
+            all. Requires the `ENABLE_LGP_SCALING_OVERRIDES` setting.
+        cpu_limit_enabled:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: CPU Limit Enabled
+          description: >-
+            Whether the api-server container has a CPU limit. When false,
+            `cpu_limit` must be null. The scaling override fields
+            (`cpu_target_percent`, `cpu_scaling_enabled`, `cpu_limit_enabled`,
+            `autoscaling_behavior`, and their `queue_` counterparts) must be set
+            all together or not at all. Requires the
+            `ENABLE_LGP_SCALING_OVERRIDES` setting.
+        autoscaling_behavior:
+          anyOf:
+            - $ref: '#/components/schemas/HPAScalingBehavior-Output'
+            - type: 'null'
+          title: Autoscaling Behavior
+          description: >-
+            HorizontalPodAutoscaler scale-up and scale-down behavior for the
+            api-server autoscaler. Both directions are required, each with
+            `stabilization_window_seconds`, `select_policy`, and at least one
+            policy. The scaling override fields (`cpu_target_percent`,
+            `cpu_scaling_enabled`, `cpu_limit_enabled`, `autoscaling_behavior`,
+            and their `queue_` counterparts) must be set all together or not at
+            all. Requires the `ENABLE_LGP_SCALING_OVERRIDES` setting.
+        queue_cpu_target_percent:
+          anyOf:
+            - type: integer
+              maximum: 100
+              minimum: 1
+            - type: 'null'
+          title: Queue CPU Scaling Target (%)
+          description: >-
+            Average CPU usage, as a percentage of `queue_cpu_limit` (or of
+            `queue_cpu` when `queue_cpu_limit_enabled` is false), at which the
+            autoscaler adds queue replicas. Required when
+            `queue_cpu_scaling_enabled` is true; must be null when it is false.
+            The scaling override fields (`cpu_target_percent`,
+            `cpu_scaling_enabled`, `cpu_limit_enabled`, `autoscaling_behavior`,
+            and their `queue_` counterparts) must be set all together or not at
+            all. Requires the `ENABLE_LGP_SCALING_OVERRIDES` setting.
+        queue_cpu_scaling_enabled:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: Queue Scale on CPU
+          description: >-
+            Whether the queue autoscaler scales on CPU. When false, the CPU
+            trigger is removed; under KEDA the queue-depth trigger remains. The
+            scaling override fields (`cpu_target_percent`,
+            `cpu_scaling_enabled`, `cpu_limit_enabled`, `autoscaling_behavior`,
+            and their `queue_` counterparts) must be set all together or not at
+            all. Requires the `ENABLE_LGP_SCALING_OVERRIDES` setting.
+        queue_cpu_limit_enabled:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: Queue CPU Limit Enabled
+          description: >-
+            Whether the queue container has a CPU limit. When false,
+            `queue_cpu_limit` must be null. The scaling override fields
+            (`cpu_target_percent`, `cpu_scaling_enabled`, `cpu_limit_enabled`,
+            `autoscaling_behavior`, and their `queue_` counterparts) must be set
+            all together or not at all. Requires the
+            `ENABLE_LGP_SCALING_OVERRIDES` setting.
+        queue_autoscaling_behavior:
+          anyOf:
+            - $ref: '#/components/schemas/HPAScalingBehavior-Output'
+            - type: 'null'
+          title: Queue Autoscaling Behavior
+          description: >-
+            HorizontalPodAutoscaler scale-up and scale-down behavior for the
+            queue autoscaler. Both directions are required, each with
+            `stabilization_window_seconds`, `select_policy`, and at least one
+            policy. The scaling override fields (`cpu_target_percent`,
+            `cpu_scaling_enabled`, `cpu_limit_enabled`, `autoscaling_behavior`,
+            and their `queue_` counterparts) must be set all together or not at
+            all. Requires the `ENABLE_LGP_SCALING_OVERRIDES` setting.
       type: object
       title: ResourceSpec
       description: >-
@@ -1256,6 +1373,24 @@ components:
         - image
       title: Container
       description: Container specification for init and sidecar containers.
+    HPAScalingBehavior-Output:
+      properties:
+        scale_up:
+          anyOf:
+            - $ref: '#/components/schemas/HPAScalingRules'
+            - type: 'null'
+          description: Rules for scaling up. Required in a scaling override.
+        scale_down:
+          anyOf:
+            - $ref: '#/components/schemas/HPAScalingRules'
+            - type: 'null'
+          description: Rules for scaling down. Required in a scaling override.
+      additionalProperties: false
+      type: object
+      title: HPAScalingBehavior
+      description: >-
+        HorizontalPodAutoscaler behavior, mirroring
+        `HorizontalPodAutoscalerBehavior`.
     EnvVar:
       properties:
         name:
@@ -1303,5 +1438,83 @@ components:
       type: object
       title: ResourceRequirements
       description: Compute resource requirements.
+    HPAScalingRules:
+      properties:
+        stabilization_window_seconds:
+          anyOf:
+            - type: integer
+              maximum: 3600
+              minimum: 0
+            - type: 'null'
+          title: Stabilization Window Seconds
+          description: >-
+            Seconds of past recommendations considered before scaling. Between 0
+            and 3600 (one hour). Required in a scaling override.
+        select_policy:
+          anyOf:
+            - type: string
+              enum:
+                - Max
+                - Min
+                - Disabled
+            - type: 'null'
+          title: Select Policy
+          description: >-
+            Which policy to apply when several allow a change: Max, Min, or
+            Disabled to turn this direction off. Required in a scaling override.
+        policies:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/HPAScalingPolicy'
+              type: array
+              minItems: 1
+            - type: 'null'
+          title: Policies
+          description: >-
+            Scaling policies that may be used while scaling in this direction.
+            At least one policy is required in a scaling override.
+      additionalProperties: false
+      type: object
+      title: HPAScalingRules
+      description: >-
+        HorizontalPodAutoscaler scaling rules for one direction (scale up or
+        scale down).
+    HPAScalingPolicy:
+      properties:
+        type:
+          type: string
+          enum:
+            - Pods
+            - Percent
+          title: Type
+          description: >-
+            Whether `value` is an absolute pod count (Pods) or a percentage of
+            the current replicas (Percent).
+        value:
+          type: integer
+          maximum: 1000
+          minimum: 1
+          title: Value
+          description: >-
+            Amount of change the policy permits within `period_seconds`. Between
+            1 and 1000.
+        period_seconds:
+          type: integer
+          maximum: 1800
+          minimum: 1
+          title: Period Seconds
+          description: >-
+            Window of time for which the policy holds. Between 1 and 1800
+            seconds (30 minutes).
+      additionalProperties: false
+      type: object
+      required:
+        - type
+        - value
+        - period_seconds
+      title: HPAScalingPolicy
+      description: >-
+        One HorizontalPodAutoscaler scaling policy: the change allowed per
+        period.
 
 ````

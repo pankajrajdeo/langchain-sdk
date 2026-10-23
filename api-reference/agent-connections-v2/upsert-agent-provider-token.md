@@ -202,6 +202,15 @@ components:
               format: date-time
             - type: 'null'
           title: Expires At
+        status:
+          type: string
+          title: Status
+          default: active
+        status_reason:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Status Reason
         created_by:
           type: string
           title: Created By

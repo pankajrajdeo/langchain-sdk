@@ -11,6 +11,7 @@ tags: [docs, langsmith, trace-with-google-adk]
 This guide shows you how to trace [Google Agent Development Kit (ADK)](https://github.com/google/adk-python) agents in LangSmith. You'll configure automatic tracing for your ADK applications to capture agent invocations, tool calls, and LLM interactions.
 
 > [!NOTE]
+>
 > This guide covers ADK's standard execution paths (text agents, tools, and multi-agent workflows). To trace a **Gemini Live** voice agent, which uses ADK's `Runner.run_live` streaming loop, see [Trace Gemini Live applications](trace-gemini-live.md).
 
 ## Installation
@@ -104,7 +105,7 @@ async def main():
     # Create the agent
     agent = Agent(
         name="weather_agent",
-        model="gemini-2.5-flash",
+        model="gemini-3.8-flash",
         description="Provides weather information.",
         instruction="Use the get_weather tool to answer weather questions.",
         tools=[get_weather],
@@ -191,13 +192,13 @@ async def main():
     # Create sub-agents
     translator = Agent(
         name="translator",
-        model="gemini-2.5-flash",
+        model="gemini-3.8-flash",
         description="Translates text to English.",
     )
 
     summarizer = Agent(
         name="summarizer",
-        model="gemini-2.5-flash",
+        model="gemini-3.8-flash",
         description="Summarizes text concisely.",
     )
 
@@ -241,8 +242,6 @@ if __name__ == "__main__":
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-google-adk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-google-adk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

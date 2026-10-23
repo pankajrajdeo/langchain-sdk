@@ -12,9 +12,12 @@ tags: [docs, langsmith, composite-evaluators-sdk]
 
 This guide describes setting up an evaluation that uses multiple evaluators and combines their scores with a custom aggregation function using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
 
- Requires langsmith>=0.4.29 
+> [!NOTE]
+>
+> Requires langsmith>=0.4.29
 
 > [!TIP]
+>
 > To create composite evaluators in the LangSmith UI, refer to [How to create a composite evaluator (UI)](composite-evaluators-ui.md).
 
 ## 1. Configure evaluators on a dataset
@@ -69,7 +72,7 @@ def generate_tweet(inputs: dict) -> dict:
         {"role": "user", "content": inputs["blog_intro"]},
     ]
     result = oai_client.responses.create(
-        input=messages, model="gpt-5-nano"
+        input=messages, model="gpt-5.4-mini"
     )
     return {"tweet": result.output_text}
 
@@ -83,7 +86,7 @@ def summary(inputs: dict, outputs: dict) -> bool:
 
     msg = f"Question: {inputs['blog_intro']}\nAnswer: {outputs['tweet']}"
     response = oai_client.responses.parse(
-        model="gpt-5-nano",
+        model="gpt-5.4-mini",
         input=[{"role": "system", "content": instructions,}, {"role": "user", "content": msg}],
         text_format=Response
     )
@@ -100,7 +103,7 @@ def formatting(inputs: dict, outputs: dict) -> bool:
 
     msg = f"{outputs['tweet']}"
     response = oai_client.responses.parse(
-        model="gpt-5-nano",
+        model="gpt-5.4-mini",
         input=[{"role": "system", "content": instructions,}, {"role": "user", "content": msg}],
         text_format=Response
     )
@@ -117,7 +120,7 @@ def tone(inputs: dict, outputs: dict) -> bool:
 
     msg = f"{outputs['tweet']}"
     response = oai_client.responses.parse(
-        model="gpt-5-nano",
+        model="gpt-5.4-mini",
         input=[{"role": "system", "content": instructions,}, {"role": "user", "content": msg}],
         text_format=Response
     )
@@ -129,7 +132,7 @@ results = client.evaluate(
     generate_tweet,
     data=dataset.name,
     evaluators=[summary, tone, formatting],
-    experiment_prefix="gpt-5-nano",
+    experiment_prefix="gpt-5.4-mini",
 )
 
 # Get the experiment name to be used in client.get_experiment_results() in the next section
@@ -205,8 +208,6 @@ for example_with_runs in results["examples_with_runs"]:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/composite-evaluators-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/composite-evaluators-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -21,13 +21,16 @@ create_checkpoint_plan_for_update_state_api(
     channels: Mapping[str, BaseChannel],
     updated_channels: set[str],
     *,
+    source: Literal['update', 'input'],
     step: int,
     parents: dict[str, Any],
     saved_metadata: Mapping[str, Any] | None,
     is_fresh_thread: bool,
+    fork_channels: set[str],
+    channel_versions: ChannelVersions,
 ) -> tuple[set[str], dict[str, Any]]
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/_checkpoint.py#L117)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/_checkpoint.py#L228)

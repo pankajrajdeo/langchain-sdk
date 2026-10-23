@@ -16,8 +16,6 @@ how to render
 structured, type-safe UI cards for every tool call your agent makes, complete
 with loading states and error handling.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/tool-calling).
-
 ## How tool calling works
 
 When a LangGraph agent decides it needs external data, it emits one or more
@@ -38,6 +36,7 @@ reactive state including a `toolCalls` array that updates in real time as the
 agent streams.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
 
 **React**
@@ -298,6 +297,7 @@ type WeatherToolCall = ToolCallFromTool<typeof getWeather>;
 ```
 
 > [!TIP]
+>
 > Using `ToolCallFromTool` gives you compile-time safety. If the tool schema
 > changes, your UI components will flag type errors immediately.
 
@@ -314,6 +314,7 @@ This means users see:
 3. The card updates to show the result once the tool completes
 
 > [!NOTE]
+>
 > Tool calls update in place. The same `callId` transitions from `"running"` to
 > `"finished"` (or `"error"`), so your UI re-renders the same component
 > with new state.
@@ -359,8 +360,6 @@ Follow these guidelines when building tool call UIs:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/tool-calling.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/tool-calling.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -28,6 +28,7 @@ my-app/
 ```
 
 > [!TIP]
+>
 > LangSmith Deployment supports deploying a [LangGraph](../langgraph/overview.md) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](deployment.md), scaling, and [observability](observability.md). For more details, refer to [Use any framework with LangSmith Deployment](application-structure.md#use-any-framework-with-langsmith-deployment).
 
 After each step, an example file directory is provided to demonstrate how code can be organized.
@@ -138,7 +139,7 @@ function routeModelOutput(state: typeof MessagesAnnotation.State) {
 }
 
 // Define a new graph.
-// See https://langchain-ai.github.io/langgraphjs/how-tos/define-state/#getting-started for
+// See https://docs.langchain.com/oss/javascript/langgraph/graph-api#state for
 // more on defining custom graph states.
 const workflow = new StateGraph(MessagesAnnotation)
   // Define the two nodes we will cycle between
@@ -202,6 +203,7 @@ Example `langgraph.json` file:
 Note that the variable name of the `CompiledGraph` appears at the end of the value of each subkey in the top-level `graphs` key (i.e. `:<variable_name>`).
 
 > [!NOTE]
+>
 > **Configuration Location**
 > The configuration file must be placed in a directory that is at the same level or higher than the TypeScript files that contain compiled graphs and associated dependencies.
 
@@ -211,8 +213,6 @@ After you setup your project and place it in a GitHub repository, it's time to [
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/setup-javascript.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/setup-javascript.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/annotation-queues/{queue_id}:
     patch:
@@ -231,16 +234,23 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Num Reviewers Per Item
-          default: 1
+          default:
+            __missing__: __missing__
         enable_reservations:
-          type: boolean
+          anyOf:
+            - type: boolean
+            - $ref: '#/components/schemas/Missing'
           title: Enable Reservations
-          default: true
+          default:
+            __missing__: __missing__
         reservation_minutes:
           anyOf:
             - type: integer
+            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Reservation Minutes
+          default:
+            __missing__: __missing__
         rubric_items:
           anyOf:
             - items:
@@ -336,10 +346,114 @@ components:
           title: Regex Validator
           default:
             __missing__: __missing__
+        feedback_config_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Feedback Config Id
+        feedback_config:
+          anyOf:
+            - $ref: '#/components/schemas/FeedbackConfigSchema'
+            - type: 'null'
+          title: Feedback Config
       type: object
       required:
         - feedback_key
       title: AnnotationQueueRubricItemSchema
+    FeedbackConfigSchema:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        feedback_key:
+          type: string
+          title: Feedback Key
+        feedback_config:
+          $ref: '#/components/schemas/FeedbackConfig'
+        tenant_id:
+          type: string
+          format: uuid
+          title: Tenant Id
+        modified_at:
+          type: string
+          format: date-time
+          title: Modified At
+        is_lower_score_better:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: Is Lower Score Better
+        is_enforced:
+          type: boolean
+          title: Is Enforced
+          default: false
+        is_first:
+          type: boolean
+          title: Is First
+          default: false
+        is_deleted:
+          type: boolean
+          title: Is Deleted
+          default: false
+      type: object
+      required:
+        - id
+        - feedback_key
+        - feedback_config
+        - tenant_id
+        - modified_at
+      title: FeedbackConfigSchema
+    FeedbackConfig:
+      properties:
+        type:
+          $ref: '#/components/schemas/FeedbackType'
+        min:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: Min
+        max:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: Max
+        categories:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/FeedbackCategory'
+              type: array
+            - type: 'null'
+          title: Categories
+      type: object
+      required:
+        - type
+      title: FeedbackConfig
+    FeedbackType:
+      type: string
+      enum:
+        - continuous
+        - categorical
+        - freeform
+      title: FeedbackType
+      description: Enum for feedback types.
+    FeedbackCategory:
+      properties:
+        value:
+          type: number
+          title: Value
+        label:
+          anyOf:
+            - type: string
+              minLength: 1
+            - type: 'null'
+          title: Label
+      type: object
+      required:
+        - value
+      title: FeedbackCategory
+      description: Specific value and label pair for feedback
   securitySchemes:
     API Key:
       type: apiKey

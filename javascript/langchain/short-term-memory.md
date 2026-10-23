@@ -15,6 +15,7 @@ Memory is a system that remembers information about previous interactions. For A
 Short term memory lets your application remember previous interactions within a single thread or conversation.
 
 > [!NOTE]
+>
 > A thread organizes multiple interactions in a session, similar to the way email groups messages in a single conversation.
 
 Conversation history is the most common form of short-term memory. Long conversations pose a challenge to today's LLMs; a full history may not fit inside an LLM's context window, resulting in a context loss or errors.
@@ -24,6 +25,7 @@ Even if your model supports the full context length, most LLMs still perform poo
 Chat models accept context using [messages](messages.md), which include instructions (a system message) and inputs (human messages). In chat applications, messages alternate between human inputs and model responses, resulting in a list of messages that grows longer over time. Because context windows are limited, many applications can benefit from using techniques to remove or "forget" stale information.
 
 > [!TIP]
+>
 > Need to remember information **across** conversations? Use [long-term memory](long-term-memory.md) to store and recall user-specific or application-level data across different threads and sessions.
 
 ## Usage
@@ -31,6 +33,7 @@ Chat models accept context using [messages](messages.md), which include instruct
 To add short-term memory (thread-level persistence) to an agent, you need to specify a `checkpointer` when creating an agent.
 
 > [!NOTE]
+>
 > LangChain's agent manages short-term memory as a part of your agent's state.
 >
 > By storing these in the graph's state, the agent can access the full context for a given conversation while maintaining separation between different threads.
@@ -298,8 +301,9 @@ response = result.messages.at(-1)?.content;
 console.log(response); // "You are Bob!"
 ```
 
-#### [View example trace](https://smith.langchain.com/public/eaa48cfd-c3f0-4951-a496-f448a8dd7a04/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/b512e509-c58f-4a96-8ee3-9fe060257d62/r)**
+>
+> Open a public LangSmith run for this example.
 
 ### In production
 
@@ -313,6 +317,7 @@ const checkpointer = PostgresSaver.fromConnString(DB_URI);
 ```
 
 > [!NOTE]
+>
 > For more checkpointer options including SQLite, Postgres, and Azure Cosmos DB, see the [list of checkpointer libraries](../langgraph/checkpointers.md#checkpointer-libraries) in the Persistence documentation.
 
 ## Customizing agent memory
@@ -354,17 +359,21 @@ const result = await agent.invoke({
 
 With [short-term memory](#usage) enabled, long conversations can exceed the LLM's context window. Common solutions are:
 
-#### [Trim messages](#trim-messages)
-Remove first or last N messages (before calling LLM)
+> **[Trim messages](#trim-messages)**
+>
+> Remove first or last N messages (before calling LLM)
 
-#### [Delete messages](#delete-messages)
-Delete messages from LangGraph state permanently
+> **[Delete messages](#delete-messages)**
+>
+> Delete messages from LangGraph state permanently
 
-#### [Summarize messages](#summarize-messages)
-Summarize earlier messages in the history and replace them with a summary
+> **[Summarize messages](#summarize-messages)**
+>
+> Summarize earlier messages in the history and replace them with a summary
 
-#### Custom strategies
-Custom strategies (e.g., message filtering, etc.)
+> **Custom strategies**
+>
+> Custom strategies (e.g., message filtering, etc.)
 
 This allows the agent to keep track of the conversation without exceeding the LLM's context window.
 
@@ -440,6 +449,7 @@ const deleteMessages = (state) => {
 ```
 
 > [!WARNING]
+>
 > When deleting messages, **make sure** that the resulting message history is valid. Check the limitations of the LLM provider you're using. For example:
 >
 > * Some providers expect message history to start with a `user` message
@@ -529,7 +539,7 @@ for await (const snapshot of streamC.values) {
 The problem with trimming or removing messages, as shown above, is that you may lose information from culling of the message queue.
 Because of this, some applications benefit from a more sophisticated approach of summarizing the message history using a chat model.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/summary.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=c8ed3facdccd4ef5c7e52902c72ba938" alt="Summary" width="609" height="242" data-path="oss/images/summary.png" />
+![Summary](https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/summary.png?fit=max\&auto=format\&n=ybiAaBfoBvFquMDz\&q=85\&s=c8ed3facdccd4ef5c7e52902c72ba938)
 
 To summarize message history in an agent, use the built-in [`summarizationMiddleware`](middleware.md#summarization):
 
@@ -889,8 +899,6 @@ const agent = createAgent({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/short-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/short-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

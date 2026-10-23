@@ -23,6 +23,7 @@ These compose in a fixed order: when a node attempt raises any exception (includ
 For stopping a run cleanly at a superstep boundary and resuming later, see [Graceful shutdown](#graceful-shutdown).
 
 > [!NOTE]
+>
 > Per-node timeouts and node-level error handlers require `@langchain/langgraph>=1.4.0`.
 
 ```mermaid
@@ -52,7 +53,7 @@ flowchart LR
 
 A retry policy automatically re-runs a failed node attempt based on exception type and backoff settings.
 
-Pass `retryPolicy` to [`addNode`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addNode):
+Pass `retryPolicy` to [`addNode`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph/addNode):
 
 ```typescript
 import { StateGraph } from "@langchain/langgraph";
@@ -156,9 +157,10 @@ const graph = new StateGraph(State)
 ## Timeouts
 
 > [!NOTE]
+>
 > Requires `@langchain/langgraph>=1.4.0`.
 
-The `timeout` parameter on [`addNode`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addNode) caps how long a single node attempt may run. Pass a number (milliseconds) or a [`TimeoutPolicy`](https://reference.langchain.com/javascript/langchain-langgraph/index/TimeoutPolicy) for separate run and idle limits:
+The `timeout` parameter on [`addNode`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph/addNode) caps how long a single node attempt may run. Pass a number (milliseconds) or a [`TimeoutPolicy`](https://reference.langchain.com/javascript/langchain-langgraph/index/TimeoutPolicy) for separate run and idle limits:
 
 ```typescript
 import { StateGraph, type TimeoutPolicy } from "@langchain/langgraph";
@@ -301,16 +303,17 @@ const fanOut = (state: typeof State.State) =>
   );
 ```
 
-If the timeout is omitted on the `Send`, the target node's timeout (set at [`addNode`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addNode) time) applies. This lets you set a default timeout on the node and tighten it for individual calls.
+If the timeout is omitted on the `Send`, the target node's timeout (set at [`addNode`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph/addNode) time) applies. This lets you set a default timeout on the node and tighten it for individual calls.
 
 ## Error handling
 
 > [!NOTE]
+>
 > Requires `@langchain/langgraph>=1.4.0`.
 
 An error handler runs after a node fails and all retries are exhausted. It receives the current state and can update it or route to a different node using [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command). This is useful for compensation flows (Saga patterns) where you want to recover gracefully rather than abort the entire graph.
 
-Pass `errorHandler` to [`addNode`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addNode) on [`StateGraph`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph) only (not the base `Graph` class):
+Pass `errorHandler` to [`addNode`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph/addNode) on [`StateGraph`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph) only (not the base `Graph` class):
 
 ```typescript
 import {
@@ -442,11 +445,13 @@ const graph = new StateGraph(State)
 ### Resume-safe failures
 
 > [!NOTE]
+>
 > Failure provenance is checkpointed. If the graph is interrupted or the process crashes after a node fails but before the handler completes, the handler sees the same `NodeError` context when the graph resumes from its checkpoint.
 
 ### Behavior with `interrupt()`
 
 > [!WARNING]
+>
 > `interrupt()` raised inside a node is **not** routed to the error handler. Interrupts use the `GraphBubbleUp` mechanism to pause graph execution for human-in-the-loop workflows, bypassing both retry policies and error handlers. The graph pauses as usual.
 
 ### Subgraph failures
@@ -456,6 +461,7 @@ If a node wraps a subgraph and the subgraph raises an unhandled exception, that 
 ## Graph defaults
 
 > [!NOTE]
+>
 > Requires `@langchain/langgraph>=1.4.0`.
 
 Instead of repeating the same `retryPolicy`, `errorHandler`, `timeout`, or `cachePolicy` on every `addNode` call, use [`setNodeDefaults`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph#member-setNodeDefaults) to configure graph-wide defaults in one place:
@@ -585,6 +591,7 @@ The behavior matches `addNode`: `NodeTimeoutError` is raised on timeout, buffere
 Cooperative shutdown lets you stop an in-flight graph run after the current superstep completes and save a resumable checkpoint. This is useful for handling SIGTERM signals or any external supervisor that needs to reclaim resources without losing work.
 
 > [!NOTE]
+>
 > Requires `@langchain/langgraph>=1.4.0`.
 
 Create a [`RunControl`](https://reference.langchain.com/javascript/langchain-langgraph/index/RunControl) and pass it as `control` to `invoke` or `stream`. Call `requestDrain()` from any context to signal that the run should stop:
@@ -670,6 +677,7 @@ try {
 ```
 
 > [!NOTE]
+>
 > `requestDrain()` does not cancel in-flight async work. For a hard upper bound, pair drain with a graceful timeout and an `AbortSignal`.
 
 ## Limitations
@@ -681,8 +689,6 @@ try {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

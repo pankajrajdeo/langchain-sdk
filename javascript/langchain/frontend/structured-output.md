@@ -12,8 +12,6 @@ tags: [docs, javascript, langchain, frontend, structured-output]
 
 Structured output lets the agent return typed, machine-readable data instead of plain text. Instead of rendering a single string, you get a structured object you can map to any UI: cards, tables, charts, step-by-step breakdowns, or domain-specific renderers.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/frontend/structured-output).
-
 ## What is structured output?
 
 Instead of returning a free-form text response, the agent uses a tool call to return a structured object conforming to a predefined schema. This gives you:
@@ -70,6 +68,7 @@ function extractStructuredOutput<T>(messages: any[]): T | null {
 ```
 
 > [!NOTE]
+>
 > The structured output tool call may not have `args` populated until the agent finishes streaming. During streaming, `args` may be partially populated or undefined. Always check for completeness before rendering.
 
 ## Set up `useStream`
@@ -81,6 +80,7 @@ while `stream.isLoading` is true (tool arguments may stream in gradually), and
 use `stream.submit()` to send the next prompt.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../../langchain/frontend/overview.md#type-inference) or [JavaScript](overview.md#type-inference) backends.
 
 **React**
@@ -311,6 +311,7 @@ function ProgressiveSolutionCard({ messages }: { messages: any[] }) {
 ```
 
 > [!TIP]
+>
 > Progressive rendering works well when the schema has a natural top-to-bottom
 > order: problem, then derivation steps, then final answer. The agent typically
 > generates fields in schema order, so the UI fills in naturally.
@@ -326,8 +327,6 @@ function ProgressiveSolutionCard({ messages }: { messages: any[] }) {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

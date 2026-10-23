@@ -127,38 +127,36 @@ agent = create_deep_agent(
 | [`context_schema=`](context-engineering.md#runtime-context) | Per-run runtime context schema (user IDs, API keys, feature flags) |
 | [profiles](#profiles) | Per-model defaults as a reusable bundle |
 
-<details>
-<summary>Full function signature</summary>
-
+> **Full function signature**
+>
 ```python
-create_deep_agent(
-    model: str | BaseChatModel | None = None,
-    tools: Sequence[BaseTool | Callable | dict[str, Any]] | None = None,
-    *,
-    system_prompt: str | SystemMessage | None = None,
-    middleware: Sequence[AgentMiddleware[StateT_co, ContextT]] = (),
-    subagents: Sequence[SubAgent | CompiledSubAgent | AsyncSubAgent] | None = None,
-    skills: list[str] | None = None,
-    memory: list[str] | None = None,
-    permissions: list[FilesystemPermission] | None = None,
-    backend: BackendProtocol | None = None,
-    interrupt_on: dict[str, bool | InterruptOnConfig] | None = None,
-    response_format: ResponseFormat[ResponseT] | type[ResponseT] | dict[str, Any] | None = None,
-    state_schema: type[DeepAgentState] | None = None,
-    context_schema: type[ContextT] | None = None,
-    checkpointer: Checkpointer | None = None,
-    store: BaseStore | None = None,
-    debug: bool = False,
-    name: str | None = None,
-    cache: BaseCache | None = None
-) -> CompiledStateGraph[AgentState[ResponseT], ContextT, InputAgentState, OutputAgentState[ResponseT]]
+> create_deep_agent(
+>     model: str | BaseChatModel | None = None,
+>     tools: Sequence[BaseTool | Callable | dict[str, Any]] | None = None,
+>     *,
+>     system_prompt: str | SystemMessage | None = None,
+>     middleware: Sequence[AgentMiddleware[StateT_co, ContextT]] = (),
+>     subagents: Sequence[SubAgent | CompiledSubAgent | AsyncSubAgent] | None = None,
+>     skills: list[str] | None = None,
+>     memory: list[str] | None = None,
+>     permissions: list[FilesystemPermission] | None = None,
+>     backend: BackendProtocol | None = None,
+>     interrupt_on: dict[str, bool | InterruptOnConfig] | None = None,
+>     response_format: ResponseFormat[ResponseT] | type[ResponseT] | dict[str, Any] | None = None,
+>     state_schema: type[DeepAgentState] | None = None,
+>     context_schema: type[ContextT] | None = None,
+>     checkpointer: Checkpointer | None = None,
+>     store: BaseStore | None = None,
+>     debug: bool = False,
+>     name: str | None = None,
+>     cache: BaseCache | None = None
+> ) -> CompiledStateGraph[AgentState[ResponseT], ContextT, InputAgentState, OutputAgentState[ResponseT]]
 ```
-
-</details>
 
 For the full parameter list, see the [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent) API reference. To compose a fully custom harness from scratch, see [Configure the harness](../langchain/agents.md#configure-the-harness) or follow the step-by-step [Build a deep agent from scratch](../langchain/deep-agent-from-scratch.md) guide.
 
 > [!TIP]
+>
 > As you add tools, subagents, and backends, use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-customization) to trace how each piece behaves together. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up, and see [Going to production](going-to-production.md) for deployment on LangSmith.
 >
 > We recommend you also set up [LangSmith Engine](../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
@@ -168,9 +166,11 @@ For the full parameter list, see the [`create_deep_agent`](https://reference.lan
 Pass a `model` string in `provider:model` format, or an initialized model instance. See [supported models](models.md#supported-models) for all providers and [suggested models](models.md#suggested-models) for tested recommendations.
 
 > [!TIP]
+>
 > Use the `provider:model` format (for example `openai:gpt-5.5`) to quickly switch between models.
 
-#### OpenAI
+**OpenAI**
+
 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
 
 **pip**
@@ -224,7 +224,8 @@ model = ChatOpenAI(model="gpt-5.5")
 agent = create_deep_agent(model=model)
 ```
 
-#### Anthropic
+**Anthropic**
+
 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
 
 **pip**
@@ -278,7 +279,8 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 agent = create_deep_agent(model=model)
 ```
 
-#### Azure
+**Azure**
+
 👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
 
 **pip**
@@ -344,7 +346,8 @@ model = AzureChatOpenAI(
 agent = create_deep_agent(model=model)
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
 
 **pip**
@@ -398,7 +401,8 @@ model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 agent = create_deep_agent(model=model)
 ```
 
-#### AWS Bedrock
+**AWS Bedrock**
+
 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
 
 **pip**
@@ -458,7 +462,8 @@ model = ChatBedrock(model="anthropic.claude-sonnet-4-6")
 agent = create_deep_agent(model=model)
 ```
 
-#### HuggingFace
+**HuggingFace**
+
 👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
 
 **pip**
@@ -527,7 +532,8 @@ model = ChatHuggingFace(llm=llm)
 agent = create_deep_agent(model=model)
 ```
 
-#### Other
+**Other**
+
 Pass any [supported model string](models.md#supported-models), or an initialized model instance. For example:
 
 **pip**
@@ -575,6 +581,7 @@ agent = create_deep_agent(model=model)
 ```
 
 > [!TIP]
+>
 > Chat models automatically retry transient API failures (with exponential backoff). For defaults, limits, and code samples for tuning `max_retries` / `timeout` live on the LangChain [Models](../langchain/models.md#connection-resilience) page.
 
 ## Tools
@@ -794,6 +801,7 @@ agent = create_deep_agent(
 ### MCP tools
 
 > [!TIP]
+>
 > Deep Agents fully support [Model Context Protocol (MCP)](../langchain/mcp.md) tools. You can load tools from any MCP server—databases, APIs, file systems, and more—and pass them directly to `create_deep_agent`.
 
 Install LangChain with the `mcp` extra to connect to MCP servers:
@@ -1103,45 +1111,40 @@ agent = create_deep_agent(
 ```
 
 > [!NOTE]
+>
 > Besides a string, the main agent also accepts a [`SystemMessage`](https://reference.langchain.com/python/langchain-core/messages/system/SystemMessage) with structured [content blocks](../langchain/messages.md#standard-content-blocks); Deep Agents preserve those blocks ([subagent](subagents.md) dictionary specs remain strings).
 
-<details>
-<summary>Subagent prompts</summary>
+> **Subagent prompts**
+>
+> Declarative [subagents](subagents.md) resolve profile overlays against their own model, then apply the resolved profile's `base_system_prompt` / `system_prompt_suffix` to the subagent's authored `system_prompt`. A profile that ships only a `system_prompt_suffix` (the common case for built-in Anthropic / OpenAI profiles) appends to the authored prompt. A profile that sets `base_system_prompt` replaces it outright.
 
-Declarative [subagents](subagents.md) resolve profile overlays against their own model, then apply the resolved profile's `base_system_prompt` / `system_prompt_suffix` to the subagent's authored `system_prompt`. A profile that ships only a `system_prompt_suffix` (the common case for built-in Anthropic / OpenAI profiles) appends to the authored prompt. A profile that sets `base_system_prompt` replaces it outright.
-
-</details>
-
-<details>
-<summary>General-purpose subagent prompt</summary>
-
-The auto-added [general-purpose subagent](subagents.md#the-general-purpose-subagent) resolves its base prompt as **`general_purpose_subagent.system_prompt` (if set) -> `HarnessProfile.base_system_prompt` (if set) -> SDK general-purpose default**, with the profile suffix layered on top. When both override fields are set, the general-purpose-specific one wins so a caller tuning both fields never sees their GP override silently dropped:
-
+> **General-purpose subagent prompt**
+>
+> The auto-added [general-purpose subagent](subagents.md#the-general-purpose-subagent) resolves its base prompt as **`general_purpose_subagent.system_prompt` (if set) -> `HarnessProfile.base_system_prompt` (if set) -> SDK general-purpose default**, with the profile suffix layered on top. When both override fields are set, the general-purpose-specific one wins so a caller tuning both fields never sees their GP override silently dropped:
+>
 ```python
-from deepagents import (
-    GeneralPurposeSubagentProfile,
-    HarnessProfile,
-    register_harness_profile,
-)
-
-register_harness_profile(
-    "anthropic",
-    HarnessProfile(
-        base_system_prompt="You are ACME's support orchestrator.",  # main agent
-        general_purpose_subagent=GeneralPurposeSubagentProfile(
-            system_prompt="You are a research subagent. Cite sources.",  # GP subagent
-        ),
-        system_prompt_suffix="Always think step by step.",
-    ),
-)
+> from deepagents import (
+>     GeneralPurposeSubagentProfile,
+>     HarnessProfile,
+>     register_harness_profile,
+> )
+>
+> register_harness_profile(
+>     "anthropic",
+>     HarnessProfile(
+>         base_system_prompt="You are ACME's support orchestrator.",  # main agent
+>         general_purpose_subagent=GeneralPurposeSubagentProfile(
+>             system_prompt="You are a research subagent. Cite sources.",  # GP subagent
+>         ),
+>         system_prompt_suffix="Always think step by step.",
+>     ),
+> )
 ```
-
-| Stack | Final system prompt |
-| - | - |
-| Main agent | `"You are ACME's support orchestrator." + SUFFIX` |
-| GP subagent | `"You are a research subagent. Cite sources." + SUFFIX` |
-
-</details>
+>
+> | Stack | Final system prompt |
+> | - | - |
+> | Main agent | `"You are ACME's support orchestrator." + SUFFIX` |
+> | GP subagent | `"You are a research subagent. Cite sources." + SUFFIX` |
 
 ## Middleware
 
@@ -1168,41 +1171,39 @@ With only a `model` (no other optional arguments), the main agent typically incl
 
 From first to last:
 
-1. [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware): Only when you pass `skills`. Injected **before** filesystem middleware so skill metadata is available before file tools run.
+1. [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware): Handles file system operations such as reading, writing, and navigating directories. When you pass `permissions`, filesystem permissions enforcement is included here so it can evaluate every tool the agent might call.
 
-2. [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware): Handles file system operations such as reading, writing, and navigating directories. When you pass `permissions`, filesystem permissions enforcement is included here so it can evaluate every tool the agent might call.
+2. [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware): Only when at least one synchronous subagent is available. Spawns and coordinates subagents for delegating tasks. Included in the [bare stack](#bare-stack) because the general-purpose subagent is auto-added by default; omit it by disabling that subagent and passing no synchronous `subagents`. See [Running without subagents](subagents.md#running-without-subagents).
 
-3. [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware): Only when at least one synchronous subagent is available. Spawns and coordinates subagents for delegating tasks. Included in the [bare stack](#bare-stack) because the general-purpose subagent is auto-added by default; omit it by disabling that subagent and passing no synchronous `subagents`. See [Running without subagents](subagents.md#running-without-subagents).
+3. [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware): Condenses message history to stay within context limits when conversations grow long (via [create\_summarization\_middleware](https://reference.langchain.com/python/deepagents/middleware/summarization/create_summarization_middleware)).
 
-4. [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware): Condenses message history to stay within context limits when conversations grow long (via [create\_summarization\_middleware](https://reference.langchain.com/python/deepagents/middleware/summarization/create_summarization_middleware)).
+4. [`PatchToolCallsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware): Repairs dangling tool calls in message history when a run resumes after an interruption or receives malformed tool-call arguments. Runs **before** Anthropic prompt caching and the tail stack below.
 
-5. [`PatchToolCallsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware): Repairs dangling tool calls in message history when a run resumes after an interruption or receives malformed tool-call arguments. Runs **before** Anthropic prompt caching and the tail stack below.
+5. [`AsyncSubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncSubAgentMiddleware): Only when you configure async subagents.
 
-6. [`AsyncSubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncSubAgentMiddleware): Only when you configure async subagents.
+6. **Your middleware argument**: Optional middleware you pass as the `middleware` argument is merged after Patch but before the rest of the stack. An instance whose `.name` matches one of the built-in entries above replaces that instance in place instead of duplicating it; anything else lands here. See [Override a default middleware instance](#override-a-default-middleware-instance).
 
-7. **Your middleware argument**: Optional middleware you pass as the `middleware` argument is merged after Patch but before the rest of the stack. An instance whose `.name` matches one of the built-in entries above replaces that instance in place instead of duplicating it; anything else lands here. See [Override a default middleware instance](#override-a-default-middleware-instance).
+7. **Harness profile extras**: Provider-specific middleware from the resolved model profile, if any.
 
-8. **Harness profile extras**: Provider-specific middleware from the resolved model profile, if any.
+8. [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware): Only when you pass `skills`. Runs after your middleware and directly before prompt caching, so it sees the summarized conversation and the model that is actually called. Passing a middleware named `SkillsMiddleware` replaces it in place.
 
-9. **Excluded-tool filtering**: When the harness profile lists excluded tools, middleware removes those tools from the agent.
+9. **Prompt caching** ([`AnthropicPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/prompt_caching/AnthropicPromptCachingMiddleware) and [`BedrockPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-aws/middleware/prompt_caching/BedrockPromptCachingMiddleware)): Both are always registered and run **after** Patch and after your middleware so the cached prefix matches what is actually sent to the model. Each no-ops on models it does not support (`unsupported_model_behavior="ignore"`), so the Anthropic middleware applies on Anthropic models and the Bedrock middleware on AWS Bedrock models with cache support.
 
-10. **Prompt caching** ([`AnthropicPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/prompt_caching/AnthropicPromptCachingMiddleware) and [`BedrockPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-aws/middleware/prompt_caching/BedrockPromptCachingMiddleware)): Both are always registered and run **after** Patch and after your middleware so the cached prefix matches what is actually sent to the model. Each no-ops on models it does not support (`unsupported_model_behavior="ignore"`), so the Anthropic middleware applies on Anthropic models and the Bedrock middleware on AWS Bedrock models with cache support.
+10. [`MemoryMiddleware`](https://reference.langchain.com/python/deepagents/middleware/memory/MemoryMiddleware): Only when you pass `memory`.
 
-11. [`MemoryMiddleware`](https://reference.langchain.com/python/deepagents/middleware/memory/MemoryMiddleware): Only when you pass `memory`.
+    > [!NOTE]
+    >
+    > `MemoryMiddleware` is placed **after** profile extras and the prompt caching middleware so updates to injected memory are less likely to invalidate the cache prefix. The same ordering concern is called out in the `create_deep_agent` implementation comments.
 
-> [!NOTE]
->     `MemoryMiddleware` is placed **after** profile extras and the prompt caching middleware so updates to injected memory are less likely to invalidate the cache prefix. The same ordering concern is called out in the `create_deep_agent` implementation comments.
+11. `HumanInTheLoopMiddleware`: Only when you pass `interrupt_on`. Pauses for human approval or input at configured tool calls.
 
-12. `HumanInTheLoopMiddleware`: Only when you pass `interrupt_on`. Pauses for human approval or input at configured tool calls.
+12. **Excluded-tool filtering**: When the harness profile lists excluded tools, middleware removes those tools from the agent.
 
 <a id="general-purpose-subagent-prompt"></a>
 
 ### Synchronous subagent stack
 
-The built-in **general-purpose** subagent and each declarative synchronous `SubAgent` graph use a stack that `create_deep_agent` builds in code. It matches the main agent in broad shape (filesystem, summarization, Patch, profile extras, Anthropic and Bedrock caching, optional permissions) but differs in two ways:
-
-* **Skills run after** [`PatchToolCallsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware) on these inner agents (on the main agent, skills run **before** filesystem middleware when `skills` is set).
-* There is **no** [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware) inside a subagent graph (only the parent agent exposes the `task` tool).
+The built-in **general-purpose** subagent and each declarative synchronous `SubAgent` graph use a stack that `create_deep_agent` builds in code. It matches the main agent in broad shape (filesystem, summarization, Patch, profile extras, skills, Anthropic and Bedrock caching, optional permissions), except that there is **no** [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware) inside a subagent graph (only the parent agent exposes the `task` tool).
 
 When a declarative subagent sets `interrupt_on`, that value is forwarded to `create_agent` for the subagent, which wires up human-in-the-loop handling for the configured tool calls.
 
@@ -1487,6 +1488,7 @@ agent = create_deep_agent(
 ```
 
 > [!WARNING]
+>
 > **Do not mutate attributes after initialization**
 >
 > If you need to track values across hook invocations (for example, counters or accumulated data), use graph state.
@@ -1494,7 +1496,7 @@ agent = create_deep_agent(
 >
 > **Do this:**
 >
-> ```python
+```python
 > from langchain.agents.middleware import AgentMiddleware
 >
 >
@@ -1504,18 +1506,18 @@ agent = create_deep_agent(
 >
 >     def before_agent(self, state, runtime):
 >         return {"x": state.get("x", 0) + 1}  # Update graph state instead
-> ```
+```
 >
 > Do **not** do this:
 >
-> ```python
+```python
 > class CustomMiddlewareBad(AgentMiddleware):
 >     def __init__(self):
 >         self.x = 1
 >
 >     def before_agent(self, state, runtime):
 >         self.x += 1  # Mutation causes race conditions
-> ```
+```
 >
 > Mutation in place, such as modifying `self.x` in `before_agent` or changing other shared values in hooks, can lead to subtle bugs and race conditions because many operations run concurrently (subagents, parallel tools, and parallel invocations on different threads).
 >
@@ -1526,6 +1528,7 @@ agent = create_deep_agent(
 ### Override a default middleware instance
 
 > [!NOTE]
+>
 > Overriding a default middleware by matching `.name` requires `deepagents>=0.7`.
 
 Pass a middleware instance whose `.name` matches an entry in the [Deep Agents stack](#deep-agents-stack), such as [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware), to replace that built-in instance in place instead of appending a duplicate. Any middleware you pass whose `.name` does **not** match a built-in entry is not replaced, it lands after the last core middleware entry and before the profile, prompt-caching, and memory. See [Full stack](#full-stack) for the complete ordering.
@@ -1551,6 +1554,7 @@ agent = create_deep_agent(
 ```
 
 > [!NOTE]
+>
 > An override **replaces** the default middleware instance, it is not merged with it. That means your replacement must be fully configured with any settings it needs. This is especially important for `FilesystemMiddleware`: if you override it, you must pass the `backend` (and `permissions`, if applicable) directly to your custom instance, since it won't inherit the `backend=` and `permissions=` passed to `create_deep_agent()`. To restrict the available filesystem tools, pass a `tools` allowlist to your custom [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) instance; see [Virtual filesystem access](overview.md#virtual-filesystem-access) for the "Restricting filesystem tools" example.
 
 The general-purpose subagent, which Deep Agents adds automatically, inherits overrides for its default middleware from the main agent, without carrying over middleware that's specific to the main agent.
@@ -1559,176 +1563,162 @@ Declarative subagents defined via `subagents=` do not inherit the main agent's m
 
 #### Examples
 
-<details>
-<summary>Adjust when summarization triggers</summary>
-
-Override [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware) with custom `trigger` and `keep` thresholds to compact conversation history earlier or later than the default, and control how many recent messages survive each compaction.
-
+> **Adjust when summarization triggers**
+>
+> Override [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware) with custom `trigger` and `keep` thresholds to compact conversation history earlier or later than the default, and control how many recent messages survive each compaction.
+>
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-from deepagents.middleware import SummarizationMiddleware
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+> from deepagents.middleware import SummarizationMiddleware
+>
+> backend = StateBackend()
+> model = "anthropic:claude-sonnet-4-6"
+>
+> agent = create_deep_agent(
+>     model=model,
+>     middleware=[
+>         SummarizationMiddleware(
+>             model=model,
+>             backend=backend,
+>             trigger=("tokens", 100000),  # summarize once the conversation exceeds 100k tokens
+>             keep=("messages", 20),  # keep the most recent 20 messages verbatim
+>         ),
+>     ],
+> )
+```
+>
+> `trigger` also accepts `("fraction", ...)` for a percentage of the model's context window, and a list of thresholds combines them with OR semantics. See the [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware) reference for the full set of options.
 
-backend = StateBackend()
-model = "anthropic:claude-sonnet-4-6"
-
-agent = create_deep_agent(
-    model=model,
-    middleware=[
-        SummarizationMiddleware(
-            model=model,
-            backend=backend,
-            trigger=("tokens", 100000),  # summarize once the conversation exceeds 100k tokens
-            keep=("messages", 20),  # keep the most recent 20 messages verbatim
-        ),
-    ],
-)
+> **Update the prompt cache TTL**
+>
+> Override [`AnthropicPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/prompt_caching/AnthropicPromptCachingMiddleware) to extend the cache lifetime beyond the default `5m` TTL, useful for agents with long gaps between turns. See [Prompt caching](overview.md#prompt-caching) for how caching is applied by default.
+>
+```python
+> from deepagents import create_deep_agent
+> from langchain_anthropic.middleware import AnthropicPromptCachingMiddleware
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-4-6",
+>     middleware=[
+>         AnthropicPromptCachingMiddleware(ttl="1h"),  # replaces the default 5m TTL
+>     ],
+> )
 ```
 
-`trigger` also accepts `("fraction", ...)` for a percentage of the model's context window, and a list of thresholds combines them with OR semantics. See the [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware) reference for the full set of options.
-
-</details>
-
-<details>
-<summary>Update the prompt cache TTL</summary>
-
-Override [`AnthropicPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/prompt_caching/AnthropicPromptCachingMiddleware) to extend the cache lifetime beyond the default `5m` TTL, useful for agents with long gaps between turns. See [Prompt caching](overview.md#prompt-caching) for how caching is applied by default.
-
+> **Restrict the enabled filesystem tools**
+>
+> > [!NOTE]
+> >
+> > The `tools` allowlist on `FilesystemMiddleware` requires `deepagents>=0.7`.
+>
+> Override [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) with a `tools` allowlist to expose only a subset of the filesystem tools to the model, instead of the full default set.
+>
 ```python
-from deepagents import create_deep_agent
-from langchain_anthropic.middleware import AnthropicPromptCachingMiddleware
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
-    middleware=[
-        AnthropicPromptCachingMiddleware(ttl="1h"),  # replaces the default 5m TTL
-    ],
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+> from deepagents.middleware import FilesystemMiddleware
+>
+> backend = StateBackend()
+>
+> # Read-only agent: write_file, edit_file, delete, and execute are never shown
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-4-6",
+>     backend=backend,
+>     middleware=[
+>         FilesystemMiddleware(backend=backend, tools=["read_file", "ls", "glob", "grep"]),
+>     ],
+> )
 ```
+>
+> See [Restricting filesystem tools](overview.md#virtual-filesystem-access) for more details.
 
-</details>
-
-<details>
-<summary>Restrict the enabled filesystem tools</summary>
-
-> [!NOTE]
-> The `tools` allowlist on `FilesystemMiddleware` requires `deepagents>=0.7`.
-
-Override [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) with a `tools` allowlist to expose only a subset of the filesystem tools to the model, instead of the full default set.
-
+> **Customize how the skill catalog appears in the system prompt**
+>
+> Override [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) with a custom `system_prompt=` template to control how
+> the auto-generated skill catalog is framed — for example, to add surrounding context,
+> reorder sections, or place routing hints (priorities, category bias) in the same
+> block as the catalog. The template must include the `{skills_locations}`,
+> `{skills_list}`, and `{skills_load_warnings}` slots, which the middleware substitutes
+> on every turn — so the catalog stays in sync automatically as skills are added,
+> renamed, or removed.
+>
+> The example below places routing hints alongside the catalog:
+>
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-from deepagents.middleware import FilesystemMiddleware
-
-backend = StateBackend()
-
-# Read-only agent: write_file, edit_file, delete, and execute are never shown
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
-    backend=backend,
-    middleware=[
-        FilesystemMiddleware(backend=backend, tools=["read_file", "ls", "glob", "grep"]),
-    ],
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends.filesystem import FilesystemBackend
+> from deepagents.middleware.skills import SkillsMiddleware
+>
+> backend = FilesystemBackend(root_dir="/path/to/skills")
+>
+> custom_skills_prompt = """## Skills
+>
+> Routing hints:
+> - For research topics → prefer arxiv-search first
+> - For general questions → use web-research
+> - For LangGraph documentation → langgraph-docs
+>
+> {skills_locations}
+>
+> {skills_list}
+>
+> {skills_load_warnings}
+> """
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-4-6",
+>     middleware=[
+>         SkillsMiddleware(
+>             backend=backend,
+>             sources=["/path/to/skills"],
+>             system_prompt=custom_skills_prompt,
+>         ),
+>     ],
+> )
 ```
+>
+> Do not also pass `skills=` to `create_deep_agent` in this case: the override instance
+> already owns `backend` and `sources`. Any missing slot (`{skills_locations}`,
+> `{skills_list}`, `{skills_load_warnings}`) raises `ValueError` at construction time.
 
-See [Restricting filesystem tools](overview.md#virtual-filesystem-access) for more details.
-
-</details>
-
-<details>
-<summary>Customize how the skill catalog appears in the system prompt</summary>
-
-Override [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) with a custom `system_prompt=` template to control how
-the auto-generated skill catalog is framed — for example, to add surrounding context,
-reorder sections, or place routing hints (priorities, category bias) in the same
-block as the catalog. The template must include the `{skills_locations}`,
-`{skills_list}`, and `{skills_load_warnings}` slots, which the middleware substitutes
-on every turn — so the catalog stays in sync automatically as skills are added,
-renamed, or removed.
-
-The example below places routing hints alongside the catalog:
-
+> **Suppress the auto-generated skill catalog**
+>
+> Override [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) with `system_prompt=None` to load skills without
+> appending a skills section to the system prompt at all. Skills remain in
+> `state["skills_metadata"]` and skill files stay reachable through the filesystem
+> tools, so callers who prefer to write their own description block (for example, a
+> compact hand-written routing summary) in `create_deep_agent(system_prompt=...)` can
+> add exactly the guidance they need without the built-in one.
+>
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends.filesystem import FilesystemBackend
-from deepagents.middleware.skills import SkillsMiddleware
-
-backend = FilesystemBackend(root_dir="/path/to/skills")
-
-custom_skills_prompt = """## Skills
-
-Routing hints:
-- For research topics → prefer arxiv-search first
-- For general questions → use web-research
-- For LangGraph documentation → langgraph-docs
-
-{skills_locations}
-
-{skills_list}
-
-{skills_load_warnings}
-"""
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
-    middleware=[
-        SkillsMiddleware(
-            backend=backend,
-            sources=["/path/to/skills"],
-            system_prompt=custom_skills_prompt,
-        ),
-    ],
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends.filesystem import FilesystemBackend
+> from deepagents.middleware.skills import SkillsMiddleware
+>
+> backend = FilesystemBackend(root_dir="/path/to/skills")
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-4-6",
+>     system_prompt="""You are a research assistant.
+>
+> Skills (read the SKILL.md file when relevant):
+> - /path/to/skills/arxiv-search/SKILL.md — papers
+> - /path/to/skills/web-research/SKILL.md — general web lookups
+> - /path/to/skills/langgraph-docs/SKILL.md — LangGraph documentation
+> """,
+>     middleware=[
+>         SkillsMiddleware(
+>             backend=backend,
+>             sources=["/path/to/skills"],
+>             system_prompt=None,
+>         ),
+>     ],
+> )
 ```
-
-Do not also pass `skills=` to `create_deep_agent` in this case: the override instance
-already owns `backend` and `sources`. Any missing slot (`{skills_locations}`,
-`{skills_list}`, `{skills_load_warnings}`) raises `ValueError` at construction time.
-
-</details>
-
-<details>
-<summary>Suppress the auto-generated skill catalog</summary>
-
-Override [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) with `system_prompt=None` to load skills without
-appending a skills section to the system prompt at all. Skills remain in
-`state["skills_metadata"]` and skill files stay reachable through the filesystem
-tools, so callers who prefer to write their own description block (for example, a
-compact hand-written routing summary) in `create_deep_agent(system_prompt=...)` can
-add exactly the guidance they need without the built-in one.
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends.filesystem import FilesystemBackend
-from deepagents.middleware.skills import SkillsMiddleware
-
-backend = FilesystemBackend(root_dir="/path/to/skills")
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-4-6",
-    system_prompt="""You are a research assistant.
-
-Skills (read the SKILL.md file when relevant):
-- /path/to/skills/arxiv-search/SKILL.md — papers
-- /path/to/skills/web-research/SKILL.md — general web lookups
-- /path/to/skills/langgraph-docs/SKILL.md — LangGraph documentation
-""",
-    middleware=[
-        SkillsMiddleware(
-            backend=backend,
-            sources=["/path/to/skills"],
-            system_prompt=None,
-        ),
-    ],
-)
-```
-
-Skill names, paths, and any hand-written hints in `create_deep_agent`'s `system_prompt`
-are the caller's responsibility to keep in sync when skills change.
-
-</details>
+>
+> Skill names, paths, and any hand-written hints in `create_deep_agent`'s `system_prompt`
+> are the caller's responsibility to keep in sync when skills change.
 
 ### Interpreters
 
@@ -1870,7 +1860,8 @@ Tools for a deep agent can make use of virtual file systems to store, access, an
 
 If you are using [skills](#skills) or [memory](#memory), you must add the expected skill or memory files to the backend before creating the agent.
 
-#### StateBackend
+**StateBackend**
+
 A thread-scoped filesystem backend stored in `langgraph` state.
 
 Files persist across turns within a thread (via your checkpointer) and are not shared across threads.
@@ -1987,10 +1978,12 @@ agent2 = create_deep_agent(
 )
 ```
 
-#### FilesystemBackend
+**FilesystemBackend**
+
 The local machine's filesystem.
 
 > [!WARNING]
+>
 > This backend grants agents direct filesystem read/write access.
 > Use with caution and only in appropriate environments.
 > For more information, see [`FilesystemBackend`](backends.md#filesystembackend-local-disk).
@@ -2080,12 +2073,15 @@ agent = create_deep_agent(
 ```
 
 > [!TIP]
+>
 > Wrap `FilesystemBackend` in a `CompositeBackend` to prevent internal agent data (offloaded tool results, conversation history) from being written to disk alongside your project files. See the [recommended pattern](backends.md#filesystembackend-local-disk).
 
-#### LocalShellBackend
+**LocalShellBackend**
+
 A filesystem with shell execution directly on the host. Provides filesystem tools plus the `execute` tool for running commands.
 
 > [!WARNING]
+>
 > This backend grants agents direct filesystem read/write access **and** unrestricted shell execution on your host.
 > Use with extreme caution and only in appropriate environments.
 > For more information, see [`LocalShellBackend`](backends.md#localshellbackend-local-shell).
@@ -2174,7 +2170,8 @@ agent = create_deep_agent(
 )
 ```
 
-#### StoreBackend
+**StoreBackend**
+
 A filesystem that provides long-term storage that is *persisted across threads*.
 
 **Google**
@@ -2290,12 +2287,15 @@ agent = create_deep_agent(
 ```
 
 > [!NOTE]
+>
 > When deploying to [LangSmith Deployment](../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
 
 > [!TIP]
+>
 > The `namespace` parameter controls data isolation. For multi-user deployments, always set a [namespace factory](backends.md#namespace-factories) to isolate data per user or tenant.
 
-#### ContextHubBackend
+**ContextHubBackend**
+
 Durable filesystem storage in a LangSmith Hub repo.
 
 **Google**
@@ -2384,7 +2384,8 @@ agent = create_deep_agent(
 
 For more details, see [`ContextHubBackend`](backends.md#contexthubbackend).
 
-#### CompositeBackend
+**CompositeBackend**
+
 A flexible backend where you can specify different routes in the filesystem to point towards different backends.
 
 **Google**
@@ -2529,17 +2530,18 @@ Use a sandbox backend when you want your deep agent to write files, install depe
 
 You configure sandboxes by passing a sandbox backend to `backend` when creating your deep agent:
 
-#### LangSmith
+**LangSmith**
+
 **pip**
 
 ```bash
-pip install "langsmith[sandbox]"
+pip install langsmith
 ```
 
 **uv**
 
 ```bash
-uv add "langsmith[sandbox]"
+uv add langsmith
 ```
 
 ```python
@@ -2572,7 +2574,8 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
-#### Daytona
+**Daytona**
+
 **pip**
 
 ```bash
@@ -2615,7 +2618,8 @@ finally:
     sandbox.stop()
 ```
 
-#### E2B
+**E2B**
+
 **pip**
 
 ```bash
@@ -2658,7 +2662,8 @@ finally:
     e2b_sandbox.kill()
 ```
 
-#### Modal
+**Modal**
+
 **pip**
 
 ```bash
@@ -2701,7 +2706,8 @@ finally:
     modal_sandbox.terminate()
 ```
 
-#### Runloop
+**Runloop**
+
 **pip**
 
 ```bash
@@ -2748,7 +2754,8 @@ finally:
     devbox.shutdown()
 ```
 
-#### Vercel
+**Vercel**
+
 **pip**
 
 ```bash
@@ -3071,7 +3078,8 @@ For example skills, see [Deep Agents example skills](https://github.com/langchai
 
 To add skills to your deep agent, pass them as an argument to `create_deep_agent`:
 
-#### StateBackend
+**StateBackend**
+
 **Google**
 
 ```python
@@ -3331,7 +3339,8 @@ result = agent.invoke(
 )
 ```
 
-#### StoreBackend
+**StoreBackend**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -3365,7 +3374,8 @@ result = agent.invoke(
 )
 ```
 
-#### FilesystemBackend
+**FilesystemBackend**
+
 ```python
 from urllib.request import urlopen
 from deepagents import create_deep_agent
@@ -3407,11 +3417,13 @@ result = agent.invoke(
 Use [`AGENTS.md` files](https://agents.md/) to provide extra context to your deep agent.
 
 > [!TIP]
+>
 > To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](../openwiki/overview.md).
 
 You can pass one or more file paths to the `memory` parameter when creating your deep agent:
 
-#### StateBackend
+**StateBackend**
+
 **Google**
 
 ```python
@@ -3678,7 +3690,8 @@ result = agent.invoke(
 )
 ```
 
-#### StoreBackend
+**StoreBackend**
+
 **Google**
 
 ```python
@@ -3994,7 +4007,8 @@ result = agent.invoke(
 )
 ```
 
-#### FilesystemBackend
+**FilesystemBackend**
+
 **Google**
 
 ```python
@@ -4335,8 +4349,9 @@ print(result["structured_response"])
 # location='San Francisco, California' temperature=18.3 condition='Sunny' humidity=48 wind_speed=7.6 forecast='Pleasant sunny conditions expected to continue with temperatures around 64°F (18°C) during the day, dropping to around 52°F (11°C) at night. Clear skies with minimal precipitation expected.'
 ```
 
-#### [View example trace](https://smith.langchain.com/public/b8e8bfe6-1853-4907-a3d4-a178338f8924/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/1f7faa8f-571a-45d4-a549-5510c0feae4e/r)**
+>
+> Open a public LangSmith run for this example.
 
 For more information and examples, see [response format](../langchain/structured-output.md#response-format).
 
@@ -4346,8 +4361,6 @@ For more information and examples, see [response format](../langchain/structured
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/customization.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/customization.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -57,6 +57,7 @@ We will cover the following concepts:
 * [Send API](../../langgraph/graph-api.md#send) for parallel execution
 
 > [!TIP]
+>
 > **Router vs. Subagents**: The [subagents pattern](subagents.md) can also route to multiple agents. Use the router pattern when you need specialized preprocessing, custom routing logic, or want explicit control over parallel execution. Use the subagents pattern when you want the LLM to decide which agents to call dynamically.
 
 ## Setup
@@ -110,7 +111,8 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 
 Select a chat model from LangChain's suite of integrations:
 
-#### OpenAI
+**OpenAI**
+
 👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
 **pip**
@@ -147,7 +149,8 @@ os.environ["OPENAI_API_KEY"] = "sk-..."
 model = ChatOpenAI(model="gpt-5.5")
 ```
 
-#### Anthropic
+**Anthropic**
+
 👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
 **pip**
@@ -184,7 +187,8 @@ os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
-#### Azure
+**Azure**
+
 👉 Read the [Azure chat model integration docs](../../integrations/chat/azure_chat_openai.md)
 
 **pip**
@@ -231,7 +235,8 @@ model = AzureChatOpenAI(
 )
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 👉 Read the [Google GenAI chat model integration docs](../../integrations/chat/google_generative_ai.md)
 
 **pip**
@@ -268,7 +273,8 @@ os.environ["GOOGLE_API_KEY"] = "..."
 model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
 ```
 
-#### AWS Bedrock
+**AWS Bedrock**
+
 👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock.md)
 
 **pip**
@@ -305,7 +311,8 @@ from langchain_aws import ChatBedrock
 model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
-#### HuggingFace
+**HuggingFace**
+
 👉 Read the [HuggingFace chat model integration docs](../../integrations/chat/huggingface.md)
 
 **pip**
@@ -352,7 +359,8 @@ llm = HuggingFaceEndpoint(
 model = ChatHuggingFace(llm=llm)
 ```
 
-#### OpenRouter
+**OpenRouter**
+
 👉 Read the [OpenRouter chat model integration docs](../../integrations/chat/openrouter.md)
 
 **pip**
@@ -734,6 +742,7 @@ After all agents complete, the `synthesize_results` function iterates over the c
 * Combines information from all sources without redundancy
 
 > [!NOTE]
+>
 > **Partial results**: In this tutorial, all selected agents must complete before synthesis.
 
 ## 8. Complete working example
@@ -741,6 +750,7 @@ After all agents complete, the `synthesize_results` function iterates over the c
 Here's everything together in a runnable script:
 
 **View complete code**
+
 ```python
 """
 Multi-Source Knowledge Router Example
@@ -1016,6 +1026,7 @@ print(result["messages"][-1].content)
 ```
 
 > [!TIP]
+>
 > The tool wrapper approach is recommended for most use cases. It provides clean separation: the router handles multi-source querying, while the conversational agent handles context and memory.
 
 ### Full persistence approach
@@ -1023,6 +1034,7 @@ print(result["messages"][-1].content)
 If you need the router itself to maintain state—for example, to use previous search results in routing decisions—use [persistence](../short-term-memory.md) to store message history at the router level.
 
 > [!WARNING]
+>
 > **Stateful routers add complexity.** When routing to different agents across turns, conversations may feel inconsistent if agents have different tones or prompts. Consider the [handoffs pattern](handoffs.md) or [subagents pattern](subagents.md) instead—both provide clearer semantics for multi-turn conversations with different agents.
 
 ## 10. Key takeaways
@@ -1036,6 +1048,7 @@ The router pattern excels when you have:
 The pattern has three phases: **decompose** (analyze the query and generate targeted sub-questions), **route** (execute queries in parallel), and **synthesize** (combine results).
 
 > [!TIP]
+>
 > **When to use the router pattern**
 >
 > Use the router pattern when you have multiple independent knowledge sources, need low-latency parallel queries, and want explicit control over routing logic.
@@ -1051,8 +1064,6 @@ The pattern has three phases: **decompose** (analyze the query and generate targ
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/router-knowledge-base.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/router-knowledge-base.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

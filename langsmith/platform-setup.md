@@ -13,19 +13,22 @@ tags: [docs, langsmith, platform-setup]
 Set up **LangSmith** for [observability](observability.md), [evaluation](evaluation.md), and [prompt engineering](prompt-context-hub.md#prompts). LangSmith offers Cloud, Bring Your Own Cloud (BYOC), and Self-hosted options. Choose the option that matches where your data has to live and who runs the infrastructure.
 
 > [!NOTE]
+>
 > If you also want to deploy agents in production, you can use [**LangSmith Deployment**](deployment.md) with Cloud, BYOC, or Self-hosted.
 
-#### [Cloud](cloud.md)
-Fully managed observability, evaluation, and prompt engineering.
+> **[Cloud](cloud.md)**
+>
+> Fully managed observability, evaluation, and prompt engineering.
 
-#### [BYOC](byoc.md)
-Full control over your data, while LangChain manages the infrastructure.
+> **[BYOC](byoc.md)**
+>
+> Full control over your data, while LangChain manages the infrastructure.
 
-#### [Self-hosted](self-hosted.md)
-Full control with observability, evaluation, and prompt engineering in your infrastructure.
+> **[Self-hosted](self-hosted.md)**
+>
+> Full control with observability, evaluation, and prompt engineering in your infrastructure.
 
-> [!NOTE]
-> Self-hosted and BYOC are available on the [Enterprise plan](pricing-plans.md). [Get a demo](https://www.langchain.com/contact-sales) to learn more.
+Self-hosted and BYOC are available on the [Enterprise plan](https://docs.langchain.com/langsmith/pricing-plans.md). [Get a demo](https://www.langchain.com/contact-sales) to learn more.
 
 ## Compare Cloud, BYOC, and Self-hosted
 
@@ -48,19 +51,20 @@ Cloud, BYOC, and Self-hosted support [LangSmith Deployment](deployment.md) for a
 
 ## Related
 
-#### [Account setup](admin.md)
-Create an account, manage API keys, and choose a pricing tier.
+> **[Account setup](admin.md)**
+>
+> Create an account, manage API keys, and choose a pricing tier.
 
-#### [Plans and pricing](https://www.langchain.com/pricing)
-Compare LangSmith plans and tiers.
+> **[Plans and pricing](https://www.langchain.com/pricing)**
+>
+> Compare LangSmith plans and tiers.
 
-#### [Observability](observability.md)
-Trace and monitor your LLM applications.
+> **[Observability](observability.md)**
+>
+> Trace and monitor your LLM applications.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/platform-setup.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/platform-setup.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

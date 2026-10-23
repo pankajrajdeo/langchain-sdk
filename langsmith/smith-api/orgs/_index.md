@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api/orgs"
-description: "Index of 57 pages and 0 subdirectories under langsmith/smith-api/orgs."
+description: "Index of 59 pages and 0 subdirectories under langsmith/smith-api/orgs."
 category: "index"
 tags: [index, langsmith, smith-api, orgs]
 ---
 
 # langsmith/smith-api/orgs
 
-57 pages here.
+59 pages here.
 
 ## Files
 
@@ -19,14 +19,15 @@ tags: [index, langsmith, smith-api, orgs]
 - [Create customers and get stripe setup intent](create-customers-and-get-stripe-setup-intent.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/setup
 - [Create org personal access token](create-org-personal-access-token.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/personal-access-tokens
 - [Create org service key](create-org-service-key.md) - Create org-scoped service key. If workspaces is None, key is org-wide.
+- [Create org tracing key](create-org-tracing-key.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/tracing-keys
 - [Create organization roles](create-organization-roles.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/roles
 - [Create organization](create-organization.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/orgs
 - [Create SSO settings](create-sso-settings.md) - Create SSO provider settings for the current organization.
-- [Create stripe account links endpoint](create-stripe-account-links-endpoint.md) - Kick off a Stripe account link flow.
 - [Create stripe checkout sessions endpoint](create-stripe-checkout-sessions-endpoint.md) - Kick off a Stripe checkout session flow.
 - [Delete current org pending member](delete-current-org-pending-member.md) - When an admin deletes a pending member invite.
 - [Delete org personal access token](delete-org-personal-access-token.md) - Delete a personal access token, removing the record entirely.
 - [Delete org service key](delete-org-service-key.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/current/service-keys/{api_key_id}
+- [Delete org tracing key](delete-org-tracing-key.md) - Revoke your tracing key, or one you have permission to manage.
 - [Delete organization roles](delete-organization-roles.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/current/roles/{role_id}
 - [Delete pending organization invite](delete-pending-organization-invite.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/orgs/pending/{organization_id}
 - [Delete SSO settings](delete-sso-settings.md) - Delete SSO provider settings for the current organization.
@@ -47,6 +48,7 @@ tags: [index, langsmith, smith-api, orgs]
 - [List org members with workspace roles](list-org-members-with-workspace-roles.md) - Returns a paginated list of org members (active and pending) enriched with workspace memberships.
 - [List org personal access tokens](list-org-personal-access-tokens.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/personal-access-tokens
 - [List org service keys](list-org-service-keys.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/service-keys
+- [List org tracing keys](list-org-tracing-keys.md) - List your tracing keys and keys visible through organization/workspace access.
 - [List organization roles](list-organization-roles.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/roles
 - [List organizations](list-organizations.md) - Get all orgs visible to this auth
 - [List pending organization invites](list-pending-organization-invites.md) - Get all pending orgs visible to this auth

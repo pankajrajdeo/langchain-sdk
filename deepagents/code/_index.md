@@ -1,18 +1,17 @@
 ---
 title: "deepagents/code"
-description: "Index of 18 pages and 0 subdirectories under deepagents/code."
+description: "Index of 17 pages and 0 subdirectories under deepagents/code."
 category: "index"
 tags: [index, deepagents, code]
 ---
 
 # deepagents/code
 
-18 pages here.
+17 pages here.
 
 ## Files
 
 - [Approval modes](approval-modes.md) - Choose how Deep Agents Code reviews gated tool calls with Manual, Auto, and YOLO modes
-- [Changelog](changelog.md)
 - [Command reference](cli-reference.md) - Deep Agents Code command-line flags and management subcommands
 - [Config file](config-file.md) - Configure model providers, defaults, retries, and gateways in config.toml
 - [Configuration](configuration.md) - Configure Deep Agents Code with config files, administrator settings, environment variables, hooks, and CLI flags

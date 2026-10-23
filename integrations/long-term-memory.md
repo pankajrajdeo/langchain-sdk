@@ -14,6 +14,15 @@ Stores enable [long-term memory](../langgraph/stores.md) in LangGraph, allowing 
 
 To implement your own store for a custom storage backend, see [Build a custom store](../langgraph/stores.md#build-a-custom-store).
 
+Integration components
+Arrows show a typical retrieval flow. The highlighted component is the one this page covers.
+
+### Typical retrieval flow
+
+### Agent capabilities
+
+### Execution and state
+
 | Backend | Package | Source |
 | - | - | - |
 | [In-memory](https://reference.langchain.com/python/langgraph.store/memory/InMemoryStore) | [`langgraph-checkpoint`](https://pypi.org/project/langgraph-checkpoint/) | [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph/tree/main/libs/checkpoint) |
@@ -30,8 +39,6 @@ To implement your own store for a custom storage backend, see [Build a custom st
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/long-term-memory/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/long-term-memory/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

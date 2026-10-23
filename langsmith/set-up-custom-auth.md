@@ -22,6 +22,7 @@ This guide assumes basic familiarity with the following concepts:
 * [**LangSmith**](observability.md)
 
 > [!NOTE]
+>
 > Custom auth is only available for LangSmith SaaS deployments or Enterprise Self-Hosted deployments.
 
 ## 1. Create your app
@@ -79,13 +80,14 @@ The server will start and open [Studio](studio.md) in your browser:
 
 If you were to self-host this on the public internet, anyone could access it.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/N1xJUsnxxRqnrjxV/langsmith/images/no-auth.png?fit=max&auto=format&n=N1xJUsnxxRqnrjxV&q=85&s=3ca2c9a8d65891ef71abfb7ad0aae7d3" alt="No authentication: the dev server is publicly reachable, anyone can access the bot if exposed to the internet." width="1974" height="1412" data-path="langsmith/images/no-auth.png" />
+![No authentication: the dev server is publicly reachable, anyone can access the bot if exposed to the internet.](https://mintcdn.com/langchain-5e9cc07a/N1xJUsnxxRqnrjxV/langsmith/images/no-auth.png?fit=max\&auto=format\&n=N1xJUsnxxRqnrjxV\&q=85\&s=3ca2c9a8d65891ef71abfb7ad0aae7d3)
 
 ## 2. Add authentication
 
 Now that you have a base LangGraph app, add authentication to it.
 
 > [!NOTE]
+>
 > In this tutorial, you will start with a hard-coded token for example purposes. You will get to a "production-ready" authentication scheme in the third tutorial.
 
 The [Auth](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) object lets you register an authentication function that the LangSmith deployment will run on every request. This function receives each request and decides whether to accept or reject.
@@ -165,13 +167,14 @@ If you didn't add the `--no-browser`, the Studio UI will open in the browser. By
 To accept LangSmith API keys (`x-api-key`) alongside your custom handler outside of Studio, set `allow_langsmith_api_keys: true`. Requests with an `Authorization` header still use custom auth. All other requests use LangSmith auth. Set the `x-auth-scheme: langsmith` header to force LangSmith auth even when `Authorization` is present. LangSmith-authenticated callers expose `ctx.user.identity` as the LangSmith user ID (or missing) and `ctx.permissions` as `["authenticated"]`. Custom `@auth.on` handlers still run, so design them to accept that shape if both paths should share resource rules. This option requires `disable_studio_auth` unset or `false`.
 
 > [!NOTE]
+>
 > `allow_langsmith_api_keys` requires Agent Server `0.14.0rc2` or later.
 
 ## 4. Chat with your bot
 
 You should now only be able to access the bot if you provide a valid token in the request header. Users will still, however, be able to access each other's resources until you add [resource authorization handlers](auth.md#resource-specific-handlers) in the next section of the tutorial.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/IMK8wJkjSpMCGODD/langsmith/images/authentication.png?fit=max&auto=format&n=IMK8wJkjSpMCGODD&q=85&s=3ccfa86789baea630b8f418e9eb5b648" alt="Auth gate passes requests with a valid token, but no per-resource filters are applied yet—so users share visibility until authorization handlers are added in the next step." width="2617" height="1673" data-path="langsmith/images/authentication.png" />
+![Auth gate passes requests with a valid token, but no per-resource filters are applied yet—so users share visibility until authorization handlers are added in the next step.](https://mintcdn.com/langchain-5e9cc07a/IMK8wJkjSpMCGODD/langsmith/images/authentication.png?fit=max\&auto=format\&n=IMK8wJkjSpMCGODD\&q=85\&s=3ccfa86789baea630b8f418e9eb5b648)
 
 Run the following code in a file or notebook:
 
@@ -227,8 +230,6 @@ Now that you can control who accesses your bot, you might want to:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/set-up-custom-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/set-up-custom-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

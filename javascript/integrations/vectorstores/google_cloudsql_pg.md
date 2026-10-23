@@ -18,7 +18,7 @@ This guide provides a quick overview of how to use Cloud SQL for PostgreSQL to s
 
 ### Integration details
 
-| Class | Package | [PY support](https://python.langchain.com/docs/integrations/vectorstores/google_cloud_sql_pg/) | Version |
+| Class | Package | [PY support](../../../integrations/vectorstores/google_cloud_sql_pg.md) | Version |
 | :- | :- | :-: | :-: |
 | `PostgresVectorStore` | [`@langchain/google-cloud-sql-pg`](https://www.npmjs.com/package/@langchain/google-cloud-sql-pg) | ✅ | ![NPM - Version](https://img.shields.io/npm/v/@langchain/google-cloud-sql-pg?style=flat-square\&label=%20&) |
 
@@ -247,8 +247,6 @@ for (const doc of results) {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/google_cloudsql_pg.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/google_cloudsql_pg.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

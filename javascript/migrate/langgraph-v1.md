@@ -1,6 +1,6 @@
 ---
 title: "LangGraph v1 migration guide"
-description: "Prompt: Migrate a codebase to LangGraph v1. Migrate this codebase to LangGraph v1 (requires @langchain/langgraph and @langchain/core at v1, plus langchain at v1 when migrating from createReactAgent..."
+description: "Migrate a codebase to LangGraph v1."
 source: "https://docs.langchain.com/oss/javascript/migrate/langgraph-v1"
 category: "docs"
 tags: [docs, javascript, migrate, langgraph-v1]
@@ -8,7 +8,8 @@ tags: [docs, javascript, migrate, langgraph-v1]
 
 # LangGraph v1 migration guide
 
-> **Prompt:** Migrate a codebase to LangGraph v1.
+Migrate a codebase to LangGraph v1.
+
 Migrate this codebase to LangGraph v1 (requires `@langchain/langgraph` and `@langchain/core` at v1, plus `langchain` at v1 when migrating from `createReactAgent`, and Node.js 22+).
 
 Key changes:
@@ -181,8 +182,6 @@ Builds for all langgraph packages now use a bundler based approach instead of us
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/migrate/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/migrate/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

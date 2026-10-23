@@ -13,6 +13,7 @@ tags: [docs, integrations, chat, fireworks]
 This doc helps you get started with Fireworks AI [chat models](../../langchain/models.md). For a list of all models served by Fireworks see the [Fireworks docs](https://fireworks.ai/models).
 
 > [!TIP]
+>
 > **API Reference**
 >
 > For detailed documentation of all features and configuration options, head to the [`ChatFireworks`](https://reference.langchain.com/python/langchain-fireworks/chat_models/ChatFireworks) API reference.
@@ -23,7 +24,7 @@ This doc helps you get started with Fireworks AI [chat models](../../langchain/m
 
 | Class | Package | Serializable | JS/TS Support | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
-| [`ChatFireworks`](https://reference.langchain.com/python/langchain-fireworks/chat_models/ChatFireworks) | [`langchain-fireworks`](https://reference.langchain.com/python/langchain-fireworks/) | beta | ✅ [(npm)](https://js.langchain.com/docs/integrations/chat/fireworks) | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-fireworks?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-fireworks?style=flat-square\&label=%20) |
+| [`ChatFireworks`](https://reference.langchain.com/python/langchain-fireworks/chat_models/ChatFireworks) | [`langchain-fireworks`](https://reference.langchain.com/python/langchain-fireworks/) | beta | ✅ [(npm)](../../javascript/integrations/chat/fireworks.md) | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-fireworks?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-fireworks?style=flat-square\&label=%20) |
 
 ### Model features
 
@@ -32,6 +33,7 @@ This doc helps you get started with Fireworks AI [chat models](../../langchain/m
 | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
 
 > [!NOTE]
+>
 > Image input requires a vision-capable model (e.g. Kimi K3). Not all models served by Fireworks support multimodal inputs.
 
 ## Setup
@@ -50,7 +52,7 @@ if "FIREWORKS_API_KEY" not in os.environ:
     os.environ["FIREWORKS_API_KEY"] = getpass.getpass("Enter your Fireworks API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -123,6 +125,7 @@ response = model.invoke(
 ```
 
 > [!NOTE]
+>
 > `reasoning_effort` as a standard parameter requires `langchain-fireworks>=1.5.2`.
 
 Check a model's [profile](../../langchain/models.md#model-profiles) for the effort levels it supports:
@@ -137,8 +140,6 @@ For detailed documentation of all features and configuration options, head to th
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

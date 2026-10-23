@@ -304,7 +304,7 @@ components:
           description: >-
             Durability level for the run. Must be one of `sync`, `async`, or
             `exit`. See [durability
-            modes](https://docs.langchain.com/oss/python/langgraph/durable-execution#durability-modes)
+            modes](https://docs.langchain.com/oss/python/langgraph/checkpointers#durability-modes)
             for more details.
           default: async
       type: object
@@ -374,6 +374,14 @@ components:
           description: >-
             LangSmith tracing session (project) name for this run, when tracing
             is enabled at creation time.
+          nullable: true
+        cancel_reason:
+          type: string
+          title: Cancel Reason
+          description: >-
+            Why the run was cancelled, if it was: for example an explicit cancel
+            request, a client disconnecting, or a newer run superseding it.
+            Server-generated.
           nullable: true
       type: object
       required:

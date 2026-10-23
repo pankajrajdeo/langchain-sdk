@@ -12,7 +12,10 @@ tags: [docs, langsmith, agent-server-scale]
 
 The default configuration for the LangSmith Agent Server is designed to handle substantial read and write load across a variety of different workloads. By following the best practices outlined below, you can tune your Agent Server to perform optimally for your specific workload. This page describes scaling considerations for the Agent Server on self-hosted deployments and provides example configurations.
 
+This page covers the Agent Server, which runs your deployed agents. To scale the self-hosted LangSmith instance that ingests traces and runs evaluations, see [Configure LangSmith for scale](self-host-scale.md).
+
 > [!TIP]
+>
 > If you're not yet familiar with how API servers and queue workers operate at the container level, read the [runtime architecture](agent-server.md#runtime-architecture) overview first.
 
 For [Cloud](cloud-platform-features.md#scaling), the platform autoscales automatically and the Helm configurations below do not apply.
@@ -176,19 +179,22 @@ Autoscaling is disabled by default, but should be configured for bursty workload
 ## Example configurations
 
 > [!NOTE]
+>
 > The exact optimal configuration depends on your application complexity, request patterns, and data requirements. Use the following examples in combination with the information in the previous sections and your specific usage to update your deployment configuration as needed. If you have any questions, contact support via [support.langchain.com](https://support.langchain.com).
 
 The following table provides an overview comparing different Agent Server configurations for various load patterns (read requests per second / write requests per second) and standard assistant characteristics (average run execution time of 1 second, moderate CPU and memory usage). The request rates drive the required steady-state run throughput, which is sized through queue workers and `N_JOBS_PER_WORKER`, while API server replicas are sized to serve the request volume itself:
 
 | | **[Low / low](#low-reads-low-writes)** | **[Low / high](#low-reads-high-writes)** | **[High / low](#high-reads-low-writes)** | [Medium / medium](#medium-reads-medium-writes) | [High / high](#high-reads-high-writes) |
 | :- | :- | :- | :- | :- | :- |
-| Write requests per second | 5 | 5 | 500 | 50 | 500 |
-| Read requests per second | 5 | 500 | 5 | 50 | 500 |
-| **API servers**<br />(1 CPU, 2Gi per server) | 1 (default) | 6 | 10 | 3 | 15 |
-| **Queue workers**<br />(1 CPU, 2Gi per worker) | 1 (default) | 10 | 1 (default) | 5 | 10 |
+| Write requests per second (Number of write requests being processed by the deployment per second) | 5 | 5 | 500 | 50 | 500 |
+| Read requests per second (Number of read requests being processed by the deployment per second) | 5 | 500 | 5 | 50 | 500 |
+| **API servers** (1 CPU, 2Gi per server) | 1 (default) | 6 | 10 | 3 | 15 |
+| **Queue workers** (1 CPU, 2Gi per worker) | 1 (default) | 10 | 1 (default) | 5 | 10 |
 | **`N_JOBS_PER_WORKER`** | 10 (default) | 50 | 10 | 10 | 50 |
-| **Redis resources** | 2 Gi (default) | 2 Gi (default) | 2 Gi (default) | 2 Gi (default) | 2 Gi (default) |
-| **Postgres resources** | 2 CPU<br />8 Gi (default) | 4 CPU<br />16 Gi memory | 4 CPU<br />16 Gi | 4 CPU<br />16 Gi memory | 8 CPU<br />32 Gi memory |
+| **Redis resources** | 1 CPU 2 Gi (default) | 1 CPU 2 Gi (default) | 1 CPU 2 Gi (default) | 1 CPU 2 Gi (default) | 1 CPU 2 Gi (default) |
+| **Postgres resources** | 2 CPU 8 Gi (default) | 4 CPU 16 Gi memory | 4 CPU 16 Gi | 4 CPU 16 Gi memory | 8 CPU 32 Gi memory |
+
+To size Redis for each deployment, set the `redis_cpu`, `redis_cpu_limit`, `redis_memory_mb`, and `redis_memory_limit_mb` fields of the [`resource_spec`](api-ref-control-plane.md#resource-spec). Redis memory accepts 512 to 16384 MB, so the minimum is 512 Mi. Redis CPU requires listener 0.13.22 or later, and Redis memory below 2048 requires listener 0.13.27 or later. See [Listener version requirements](self-hosted-platform-features.md#listener-version-requirements).
 
 Load levels in the examples are defined as:
 
@@ -409,12 +415,11 @@ queue:
 ```
 
 > [!NOTE]
+>
 > Ensure that your deployment environment has sufficient resources to scale to the recommended size. Monitor your applications and infrastructure to ensure optimal performance. Consider implementing monitoring and alerting to track resource usage and application performance.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-scale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-scale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

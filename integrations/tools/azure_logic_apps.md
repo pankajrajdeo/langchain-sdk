@@ -150,31 +150,35 @@ agent = create_agent(
 
 ### Parameters
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `str`
-Your Azure subscription ID where the Logic Apps are hosted.
-
-#### `Field` — `str`
-The Azure Resource Group name where the Logic App is deployed.
-
-#### `Field` — `str`
-The name of the Logic App workflow to invoke.
-
-#### `Field` — `str`
-The name of the trigger in the Logic App to invoke. Typically this is `manual_trigger` or `http_request` for HTTP request-based triggers.
-
-#### `Field` — `TokenCredential | None`
-Optional Azure credential for authentication. If `None`, `DefaultAzureCredential()` is used. Can be any Azure SDK credential such as `ManagedIdentityCredential`, `ClientSecretCredential`, etc.
-
-#### `Field` — `str`
-The name of the tool. Customize this for different Logic Apps or use cases.
-
-#### `Field` — `str`
-A description of the tool's purpose. Customize this to help the agent understand when to use this specific Logic App.
-
-</details>
+> **Configuration options**
+>
+> **subscription\_id** `str` *required*
+>
+> Your Azure subscription ID where the Logic Apps are hosted.
+>
+> **resource\_group** `str` *required*
+>
+> The Azure Resource Group name where the Logic App is deployed.
+>
+> **logic\_app\_name** `str` *required*
+>
+> The name of the Logic App workflow to invoke.
+>
+> **trigger\_name** `str` *required*
+>
+> The name of the trigger in the Logic App to invoke. Typically this is `manual_trigger` or `http_request` for HTTP request-based triggers.
+>
+> **credential** `TokenCredential | None` (default: None)
+>
+> Optional Azure credential for authentication. If `None`, `DefaultAzureCredential()` is used. Can be any Azure SDK credential such as `ManagedIdentityCredential`, `ClientSecretCredential`, etc.
+>
+> **name** `str` (default: azure\_logic\_app\_tool)
+>
+> The name of the tool. Customize this for different Logic Apps or use cases.
+>
+> **description** `str`
+>
+> A description of the tool's purpose. Customize this to help the agent understand when to use this specific Logic App.
 
 ## Input format
 
@@ -226,8 +230,6 @@ from langchain_azure_ai.tools import AzureLogicAppTool
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_logic_apps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_logic_apps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

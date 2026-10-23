@@ -16,7 +16,7 @@ This guide will help you get started with Perplexity [chat models](../../langcha
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/perplexity) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/perplexity.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatPerplexity`](https://reference.langchain.com/javascript/langchain-perplexity/ChatPerplexity) | [`@langchain/perplexity`](https://www.npmjs.com/package/@langchain/perplexity) | beta | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/perplexity?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/perplexity?style=flat-square\&label=%20&) |
 
@@ -183,6 +183,7 @@ When routed through the Agent API, response objects carry richer metadata:
 * Tool calls returned by the model surface on `response.tool_calls` exactly as they do for `ChatOpenAI`.
 
 > [!NOTE]
+>
 > The `_toResponsesPayload` translation passes `temperature`, `topP`, and `toolChoice` straight through to the Agent API. Chat-Completions-only knobs that are not native Responses fields (for example `topK`, `stop`, `metadata`) are forwarded under `extra_body`.
 
 See the [Perplexity Agent API model list](https://docs.perplexity.ai/docs/agent-api/models) for the full set of models available through this endpoint (e.g. `openai/gpt-5.5`, `anthropic/claude-sonnet-4-6`, `google/gemini-3-1-pro`).
@@ -204,8 +205,6 @@ For detailed documentation of all `ChatPerplexity` features and configurations h
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

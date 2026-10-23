@@ -11,6 +11,7 @@ tags: [docs, langsmith, trace-with-google-gemini]
 This guide shows you how to trace and log [Google's Gemini](https://ai.google.dev/gemini-api/docs) models in LangSmith. You'll instrument Gemini calls using the latest [`google-genai` SDK](https://googleapis.github.io/python-genai/) (Python) or [`@google/genai` SDK](https://googleapis.github.io/js-genai/release_docs/index.html) (JavaScript), wrap the Gemini client for tracing, and try examples including basic prompts, metadata tagging, and multi-turn conversations.
 
 > [!NOTE]
+>
 > The LangSmith Gemini wrappers are in **[beta](release-stages.md)**. The API may change in future releases.
 
 ## Installation
@@ -44,7 +45,7 @@ To create a Google API key, refer to [Google AI Studio](https://aistudio.google.
 
 ## Configure tracing
 
-To trace Gemini API calls, use LangSmith's [`wrap_gemini`](https://reference.langchain.com/python/langsmith/wrappers/_gemini/wrap_gemini) (Python) or [`wrapGemini`](https://reference.langchain.com/javascript/functions/langsmith.wrappers_gemini.wrapGemini.html) (JavaScript) wrapper function. This wrapper intercepts calls to the Gemini client and automatically logs them as traces in LangSmith. The wrapper preserves all of the original client's functionality while adding observability:
+To trace Gemini API calls, use LangSmith's [`wrap_gemini`](https://reference.langchain.com/python/langsmith/wrappers/_gemini/wrap_gemini) (Python) or [`wrapGemini`](https://reference.langchain.com/javascript/langsmith/wrappers/gemini/wrapGemini) (JavaScript) wrapper function. This wrapper intercepts calls to the Gemini client and automatically logs them as traces in LangSmith. The wrapper preserves all of the original client's functionality while adding observability:
 
 **Python**
 
@@ -69,7 +70,7 @@ def main():
 
     # Make a traced Gemini call
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.8-flash",
         contents="Explain quantum computing in simple terms.",
     )
 
@@ -101,14 +102,15 @@ const client = wrapGemini(geminiClient, {
 
 // Make a traced call - tracing happens automatically
 const response = await client.models.generateContent({
-  model: "gemini-2.5-flash",
+  model: "gemini-3.8-flash",
   contents: "Explain quantum computing in simple terms.",
 });
 
 console.log(response.text);
 ```
 
-#### Python
+**Python**
+
 You can customize tracing by passing [`tracing_extra`](https://reference.langchain.com/python/langsmith/wrappers/_gemini/wrap_gemini) when calling `wrap_gemini()`. This parameter applies to all subsequent requests you make with that wrapped client, which allows you to attach tags and metadata for filtering and organizing traces in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-with-google-gemini). The `tracing_extra` parameter accepts:
 
 * `tags`: A list of strings to categorize traces (for example, `["production", "gemini"]`).
@@ -117,8 +119,9 @@ You can customize tracing by passing [`tracing_extra`](https://reference.langcha
 
 These settings apply consistently across all traces from the wrapped client, so that you can include environment-level tags or team metadata that should remain constant throughout your application.
 
-#### JavaScript
-You can customize tracing by passing configuration options to [`wrapGemini`](https://reference.langchain.com/javascript/functions/langsmith.wrappers_gemini.wrapGemini.html). These options apply to all subsequent requests you make with that wrapped client, which allows you to attach tags and metadata for filtering and organizing traces in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-with-google-gemini). The configuration accepts:
+**JavaScript**
+
+You can customize tracing by passing configuration options to [`wrapGemini`](https://reference.langchain.com/javascript/langsmith/wrappers/gemini/wrapGemini). These options apply to all subsequent requests you make with that wrapped client, which allows you to attach tags and metadata for filtering and organizing traces in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-with-google-gemini). The configuration accepts:
 
 * `tags`: An array of strings to categorize traces (for example, `["production", "gemini"]`).
 * `metadata`: An object with key-value pairs for additional context (for example, `{ team: "ml-research", integration: "google-genai" }`).
@@ -138,8 +141,6 @@ After running your application, you can view traces in the [LangSmith UI](https:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-google-gemini.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-google-gemini.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

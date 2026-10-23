@@ -11,6 +11,7 @@ tags: [docs, integrations, chat, anthropic_functions]
 > Integrate with (Deprecated) experimental Anthropic tools wrapper chat model using LangChain Python.
 
 > [!WARNING]
+>
 > **The Anthropic API officially supports tool-calling so this workaround is no longer needed. Please use [ChatAnthropic](anthropic.md) with `langchain-anthropic>=0.1.15`.**
 
 This notebook shows how to use an experimental wrapper around Anthropic that gives it tool calling and structured output capabilities. It follows [Anthropic's tool use guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
@@ -60,8 +61,6 @@ Person(name='Erick', age=27)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/anthropic_functions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/anthropic_functions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

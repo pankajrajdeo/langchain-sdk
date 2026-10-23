@@ -165,8 +165,8 @@ Like other retrievers, EgnyteRetriever can be added to a LangGraph agent as a to
 
 ```python
 from langchain_classic import hub
-from langchain.agents import AgentExecutor, create_openai_tools_agent
-from langchain.tools.retriever import create_retriever_tool
+from langchain_classic.agents import AgentExecutor, create_openai_tools_agent
+from langchain_classic.tools.retriever import create_retriever_tool
 from langchain_openai import ChatOpenAI
 
 retriever = EgnyteRetriever(domain=domain, k=50)
@@ -204,8 +204,6 @@ If you have questions, check out the [Egnyte developer documentation](https://de
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/egnyte.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/egnyte.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -21,14 +21,14 @@ The **Cloud** hosting option is a fully managed model where LangChain hosts and 
 | **Your Agent Servers** | LangChain | LangChain's cloud (AWS and GCP) |
 | **CI/CD for your apps** | LangChain | LangChain's cloud (AWS and GCP) |
 
-> [!NOTE]
-> If you're ready to deploy your app to LangSmith Cloud (AWS or GCP), follow the [Cloud deployment quickstart](deployment-quickstart.md) or the [full setup guide](deploy-to-cloud.md). This page explains the Cloud managed architecture for reference.
+If you're ready to deploy your app to LangSmith Cloud (AWS or GCP), follow the [Cloud deployment quickstart](deployment-quickstart.md) or the [full setup guide](deploy-to-cloud.md). This page explains the Cloud managed architecture for reference.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/langgraph-cloud-architecture.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=3f0316122425895270d0ecd47b12e139" alt="Cloud deployment: LangChain hosts and manages all components including the UI, APIs, and your Agent Servers." width="1425" height="1063" data-path="langsmith/images/langgraph-cloud-architecture.png" />
+![Cloud deployment: LangChain hosts and manages all components including the UI, APIs, and your Agent Servers.](https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/langgraph-cloud-architecture.png?fit=max\&auto=format\&n=JOyLr_spVEW0t2KF\&q=85\&s=3f0316122425895270d0ecd47b12e139)
 
 ## Cloud architecture and scalability
 
 > [!NOTE]
+>
 > This section is only relevant for cloud-managed LangSmith at [https://smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-cloud), [https://eu.smith.langchain.com](https://eu.smith.langchain.com), [https://apac.smith.langchain.com](https://apac.smith.langchain.com), and [https://aws.smith.langchain.com](https://aws.smith.langchain.com).
 >
 > For information on the Self-hosted LangSmith solution, refer to the [Self-hosted documentation](self-hosted.md).
@@ -38,12 +38,15 @@ LangSmith is hosted on Google Cloud Platform (GCP) for the US, EU, and APAC SaaS
 The US-based LangSmith service (default GCP region) is hosted in the `us-central1` (Iowa) region of GCP.
 
 > [!NOTE]
+>
 > The [EU-based LangSmith service](https://eu.smith.langchain.com) is available and hosted in the `europe-west4` (Netherlands) region of GCP. If you are interested in an Enterprise plan in this region, [contact our sales team](https://www.langchain.com/contact-sales).
 
 > [!NOTE]
+>
 > As of April 2026, LangSmith SaaS is available on AWS in `us-east-2` (Ohio).
 
 > [!NOTE]
+>
 > As of May 2026, LangSmith SaaS is available in APAC on GCP in `australia-southeast1` (Sydney).
 
 ### Regional storage
@@ -117,17 +120,16 @@ Some additional AWS services we use include:
 * Amazon CloudFront for caching static assets (including the web UI hostname `aws.smith.langchain.com`).
 * AWS WAF on CloudFront for managed rule groups at the edge (for example, AWS Managed Rules common protections and Bot Control).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/rqYqeBEA_2oeiw17/langsmith/images/cloud-arch-light.png?fit=max&auto=format&n=rqYqeBEA_2oeiw17&q=85&s=0790cbdf4fe131c74d1e60bb120834e3" alt="Light mode overview" width="2210" height="1463" data-path="langsmith/images/cloud-arch-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/rqYqeBEA_2oeiw17/langsmith/images/cloud-arch-dark.png?fit=max&auto=format&n=rqYqeBEA_2oeiw17&q=85&s=767f3bc3dc73ffe1a806f54e0aaa428b" alt="Dark mode overview" width="2210" height="1463" data-path="langsmith/images/cloud-arch-dark.png" />
+![Light mode overview](https://mintcdn.com/langchain-5e9cc07a/rqYqeBEA_2oeiw17/langsmith/images/cloud-arch-light.png?fit=max\&auto=format\&n=rqYqeBEA_2oeiw17\&q=85\&s=0790cbdf4fe131c74d1e60bb120834e3)
 
 ## Allowlisting IP addresses
 
 ### Egress from LangChain SaaS
 
-All traffic leaving LangSmith services will be routed through a NAT gateway. All traffic will appear to originate from the following IP addresses:
+Internet-bound traffic leaving LangSmith services is routed through a NAT gateway and originates from the following IP addresses. Vertex AI requests can use a different path, as described in [Allow Vertex AI access](#allow-vertex-ai-access).
 
 > [!NOTE]
+>
 > Agents on [LangSmith Deployment](deployment.md) egress from a [separate IP list](cloud-platform-features.md#allowlist-ip-addresses).
 
 | GCP US | GCP EU | GCP APAC | AWS US |
@@ -142,6 +144,22 @@ All traffic leaving LangSmith services will be routed through a NAT gateway. All
 | 104.198.162.55 | 35.204.48.32 | 34.40.198.11 | |
 
 It may be helpful to allowlist these IP addresses if connecting to your own AzureOpenAI service or other endpoints that may be required by the Playground or Online Evaluation.
+
+#### Allow Vertex AI access
+
+For Vertex AI connections from LangSmith SaaS on GCP, public egress IP allowlisting alone might not satisfy VPC Service Controls. Private Google Access keeps Google API traffic within Google's network instead of using the NAT gateway's public IP addresses. See Google's [source IP access guidance](https://docs.cloud.google.com/vpc-service-controls/docs/access-level-design#granting_access_based_on_source_ip).
+
+Configure a VPC Service Controls ingress rule for the source project corresponding to your LangSmith SaaS region:
+
+| LangSmith SaaS region | Source GCP project ID | Source project number for ingress rules |
+| - | - | - |
+| US (`smith.langchain.com`) | `langchain-prod` | `projects/83409505503` |
+| EU (`eu.smith.langchain.com`) | `langchain-prod` | `projects/83409505503` |
+| APAC (`apac.smith.langchain.com`) | `langchain-apac-prod` | `projects/774533884377` |
+
+These source projects are specifically for Vertex AI connections from the US, EU, and APAC GCP SaaS regions. Use the numeric `projects/PROJECT_NUMBER` value in the ingress rule, not the project ID. Restrict the rule to the calling identity, your destination projects, and the required Vertex AI operations. The connection still requires the appropriate IAM permissions. See Google's [ingress rule configuration](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules).
+
+Select the source project by your LangSmith SaaS region, not the Vertex AI model's region. Pod or node scaling does not change the source project number. Moving the source workload or VPC network to another project can change the required allowlist.
 
 ### Ingress into LangChain SaaS
 
@@ -160,8 +178,7 @@ You may need to allowlist these to enable traffic from your private network to L
 
 ## Private connectivity (Enterprise)
 
-> [!NOTE]
-> [**Enterprise only.**](pricing-plans.md) Private connectivity is available exclusively for Enterprise customers. Contact your account representative or [sales@langchain.dev](mailto:sales@langchain.dev) to enable this feature.
+[**Enterprise only.**](https://docs.langchain.com/langsmith/pricing-plans.md) Private connectivity is available exclusively for Enterprise customers. Contact your account representative or [sales@langchain.dev](mailto:sales@langchain.dev) to enable this feature.
 
 Enterprise customers can connect to LangSmith without exposing traffic to the public internet using **AWS PrivateLink** or **GCP Private Service Connect (PSC)**.
 
@@ -457,8 +474,6 @@ For more information on rate limits and other service limits, refer to the [Admi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

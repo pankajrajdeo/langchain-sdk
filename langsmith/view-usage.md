@@ -10,15 +10,15 @@ tags: [docs, langsmith, view-usage]
 
 > What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted.
 
-LangSmith provides several views into your [organization's](administration-overview.md) usage, depending on your [plan](pricing-plans.md) and [hosting type](platform-setup.md). This page explains what data is available, what each metric means, and what limitations apply to [Self-hosted](self-hosted.md).
+LangSmith provides several views into your [organization's](administration-overview.md) usage, depending on your [plan](https://docs.langchain.com/langsmith/pricing-plans.md) and [hosting type](platform-setup.md). This page explains what data is available, what each metric means, and what limitations apply to [Self-hosted](self-hosted.md).
 
 ## Usage views
 
 | View | Where to find it | Who can see it | Plan availability |
 | - | - | - | - |
-| [Usage graph](#usage-graph) | **Enterprise**: Settings > Usage > Usage graph<br />**Self-serve**: Settings > Billing > Usage graph | All org members | All plans |
-| [Granular usage](#granular-usage) | **Enterprise**: Settings > Usage > Granular usage<br />**Self-serve**: Settings > Billing > Granular usage | All org members | All plans |
-| [Contract usage](#contract-usage) | **Enterprise**: Settings > Usage > Contract usage<br />**Self-serve**: Settings > Billing > Contract usage | Org admins only (`organization:manage`) | Enterprise only |
+| [Usage graph](#usage-graph) | **Enterprise**: Settings > Usage > Usage graph **Self-serve**: Settings > Billing > Usage graph | All org members | All plans |
+| [Granular usage](#granular-usage) | **Enterprise**: Settings > Usage > Granular usage **Self-serve**: Settings > Billing > Granular usage | All org members | All plans |
+| [Contract usage](#contract-usage) | **Enterprise**: Settings > Usage > Contract usage **Self-serve**: Settings > Billing > Contract usage | Org admins only (`organization:manage`) | Enterprise only |
 | [Invoices](#invoices) | Settings > Billing > Invoices | All org members | Self-serve Cloud only |
 | [Evaluator spend](evaluator-spend.md) | Evaluators page, evaluator detail | All workspace members | Tracked weekly, resetting at Monday 12AM UTC, separate from the monthly billing period below |
 
@@ -41,6 +41,7 @@ Navigate to **Settings** > **Billing and Usage** > **Usage Graph**.
 For more details on trace retention tiers, refer to [Data retention](usage-and-billing.md#data-retention).
 
 > [!NOTE]
+>
 > The usage graph uses the term `tenant_id` interchangeably with workspace ID.
 
 ## Contract usage
@@ -57,9 +58,11 @@ This view shows:
 * **Product rates**: Table of your entitled products and their pricing.
 
 > [!NOTE]
+>
 > Contract usage requires the [`organization:manage` permission](organization-workspace-operations.md) and is only available to Enterprise customers with prepaid commitments.
 
 > [!NOTE]
+>
 > If your contract spans multiple organizations under the same billing entity, the contract usage view shows the **combined** usage accrued across all of those organizations, not just the one you're currently viewing. [Granular usage](#granular-usage) is always scoped to a single organization, so to view granular usage for a specific org, switch to that org and view its granular usage separately.
 
 ## Invoices
@@ -108,6 +111,7 @@ Granular usage is available on [Self-hosted](self-hosted.md) but requires explic
 ```
 
 > [!WARNING]
+>
 > Data collection begins from the moment the feature is enabled. There is no backfill of historical usage data prior to enabling it. Plan accordingly when choosing when to enable this feature.
 
 ### Aggregate usage on Self-hosted
@@ -131,8 +135,6 @@ For programmatic access to trace counts, see [View trace counts across your orga
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/view-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/view-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

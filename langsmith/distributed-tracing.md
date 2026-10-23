@@ -18,6 +18,7 @@ Example client-server setup:
 * Continues on server
 
 > [!WARNING]
+>
 > **Only accept distributed-tracing headers from trusted services.** The `langsmith-trace` and `baggage` headers are consumed as trusted tracing context. Do not add `TracingMiddleware` (or pass inbound request headers as the tracing `parent`) on a service that receives requests directly from untrusted third parties or the public internet. Keep distributed tracing to internal, service-to-service calls, and strip these headers from untrusted inbound requests at your gateway or proxy. Trusting `baggage` from an external caller lets them influence how your runs are recorded.
 
 ## Distributed tracing in Python
@@ -40,6 +41,7 @@ async def my_client_function():
 Then the server (or other service) can continue the trace by handling the headers appropriately. If you are using an asgi app Starlette or FastAPI, you can connect the distributed trace using LangSmith's `TracingMiddleware`.
 
 > [!NOTE]
+>
 > The `TracingMiddleware` class was added in `langsmith==0.1.133`.
 
 Example using FastAPI:
@@ -110,6 +112,7 @@ async def fake_route(request: Request):
 ## Distributed tracing in TypeScript
 
 > [!NOTE]
+>
 > Distributed tracing in TypeScript requires `langsmith>=0.1.31`
 
 First, we obtain the current run tree from the client and convert it to `langsmith-trace` and `baggage` header values, which we can pass to the server:
@@ -185,8 +188,6 @@ app.post("/", async (c) => {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/distributed-tracing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/distributed-tracing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

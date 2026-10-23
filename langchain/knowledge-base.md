@@ -113,7 +113,8 @@ Vector search stores numeric vectors associated with text. Embed a query as a ve
 
 LangChain supports embeddings from [many providers](../integrations/embeddings.md). Select a model to specify how text should be converted into a numeric vector:
 
-#### OpenAI
+**OpenAI**
+
 ```shell
 pip install -U "langchain-openai"
 ```
@@ -130,7 +131,8 @@ from langchain_openai import OpenAIEmbeddings
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 ```
 
-#### Azure
+**Azure**
+
 ```shell
 pip install -U "langchain-openai"
 ```
@@ -151,7 +153,8 @@ embeddings = AzureOpenAIEmbeddings(
 )
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 ```shell
 pip install -qU langchain-google-genai
 ```
@@ -168,7 +171,8 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 ```
 
-#### Gemini Enterprise Agent Platform
+**Gemini Enterprise Agent Platform**
+
 ```shell
 pip install -qU langchain-google-vertexai
 ```
@@ -179,7 +183,8 @@ from langchain_google_vertexai import VertexAIEmbeddings
 embeddings = VertexAIEmbeddings(model="text-embedding-005")
 ```
 
-#### AWS
+**AWS**
+
 ```shell
 pip install -qU langchain-aws
 ```
@@ -190,7 +195,8 @@ from langchain_aws import BedrockEmbeddings
 embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
 ```
 
-#### HuggingFace
+**HuggingFace**
+
 ```shell
 pip install -qU langchain-huggingface
 ```
@@ -204,7 +210,8 @@ embeddings = HuggingFaceEmbeddings(
 )
 ```
 
-#### Ollama
+**Ollama**
+
 ```shell
 pip install -qU langchain-ollama
 ```
@@ -215,7 +222,8 @@ from langchain_ollama import OllamaEmbeddings
 embeddings = OllamaEmbeddings(model="llama3")
 ```
 
-#### Cohere
+**Cohere**
+
 ```shell
 pip install -qU langchain-cohere
 ```
@@ -232,7 +240,8 @@ from langchain_cohere import CohereEmbeddings
 embeddings = CohereEmbeddings(model="embed-english-v3.0")
 ```
 
-#### MistralAI
+**MistralAI**
+
 ```shell
 pip install -qU langchain-mistralai
 ```
@@ -249,7 +258,8 @@ from langchain_mistralai import MistralAIEmbeddings
 embeddings = MistralAIEmbeddings(model="mistral-embed")
 ```
 
-#### Nomic
+**Nomic**
+
 ```shell
 pip install -qU langchain-nomic
 ```
@@ -266,7 +276,8 @@ from langchain_nomic import NomicEmbeddings
 embeddings = NomicEmbeddings(model="nomic-embed-text-v1.5")
 ```
 
-#### NVIDIA
+**NVIDIA**
+
 ```shell
 pip install -qU langchain-nvidia-ai-endpoints
 ```
@@ -283,7 +294,8 @@ from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
 embeddings = NVIDIAEmbeddings(model="NV-Embed-QA")
 ```
 
-#### Voyage AI
+**Voyage AI**
+
 ```shell
 pip install -qU langchain-voyageai
 ```
@@ -295,12 +307,13 @@ import os
 if not os.environ.get("VOYAGE_API_KEY"):
     os.environ["VOYAGE_API_KEY"] = getpass.getpass("Enter API key for Voyage AI: ")
 
-from langchain-voyageai import VoyageAIEmbeddings
+from langchain_voyageai import VoyageAIEmbeddings
 
 embeddings = VoyageAIEmbeddings(model="voyage-3")
 ```
 
-#### IBM watsonx
+**IBM watsonx**
+
 ```shell
 pip install -qU langchain-ibm
 ```
@@ -321,7 +334,8 @@ embeddings = WatsonxEmbeddings(
 )
 ```
 
-#### Fake
+**Fake**
+
 ```shell
 pip install -qU langchain-core
 ```
@@ -332,7 +346,8 @@ from langchain_core.embeddings import DeterministicFakeEmbedding
 embeddings = DeterministicFakeEmbedding(size=4096)
 ```
 
-#### Isaacus
+**Isaacus**
+
 ```shell
 pip install -qU langchain-isaacus
 ```
@@ -342,7 +357,7 @@ import getpass
 import os
 
 if not os.environ.get("ISAACUS_API_KEY"):
-os.environ["ISAACUS_API_KEY"] = getpass.getpass("Enter API key for Isaacus: ")
+    os.environ["ISAACUS_API_KEY"] = getpass.getpass("Enter API key for Isaacus: ")
 
 from langchain_isaacus import IsaacusEmbeddings
 
@@ -372,7 +387,8 @@ LangChain [`VectorStore`](https://reference.langchain.com/python/langchain-core/
 
 LangChain includes [integrations](../integrations/vectorstores.md) with many vector store technologies. Some are hosted and need credentials, some run in separate infrastructure (local or third-party), and others run in-memory for lightweight workloads. Select a vector store:
 
-#### In-memory
+**In-memory**
+
 ```shell
 pip install -U "langchain-core"
 ```
@@ -383,7 +399,8 @@ from langchain_core.vectorstores import InMemoryVectorStore
 vector_store = InMemoryVectorStore(embeddings)
 ```
 
-#### Amazon OpenSearch
+**Amazon OpenSearch**
+
 ```shell
 pip install -qU  boto3
 ```
@@ -411,7 +428,8 @@ vector_store = OpenSearchVectorSearch.from_documents(
 )
 ```
 
-#### AstraDB
+**AstraDB**
+
 ```shell
 pip install -U "langchain-astradb"
 ```
@@ -428,7 +446,8 @@ vector_store = AstraDBVectorStore(
 )
 ```
 
-#### Chroma
+**Chroma**
+
 ```shell
 pip install -qU langchain-chroma
 ```
@@ -443,7 +462,8 @@ vector_store = Chroma(
 )
 ```
 
-#### Milvus
+**Milvus**
+
 ```shell
 pip install -qU langchain-milvus
 ```
@@ -460,7 +480,8 @@ vector_store = Milvus(
 )
 ```
 
-#### MongoDB
+**MongoDB**
+
 ```shell
 pip install -qU langchain-mongodb
 ```
@@ -476,7 +497,8 @@ vector_store = MongoDBAtlasVectorSearch(
 )
 ```
 
-#### PGVector
+**PGVector**
+
 ```shell
 pip install -qU langchain-postgres
 ```
@@ -491,7 +513,8 @@ vector_store = PGVector(
 )
 ```
 
-#### PGVectorStore
+**PGVectorStore**
+
 ```shell
 pip install -qU langchain-postgres
 ```
@@ -510,7 +533,8 @@ vector_store = PGVectorStore.create_sync(
 )
 ```
 
-#### Pinecone
+**Pinecone**
+
 ```shell
 pip install -qU langchain-pinecone
 ```
@@ -525,7 +549,8 @@ index = pc.Index(index_name)
 vector_store = PineconeVectorStore(embedding=embeddings, index=index)
 ```
 
-#### Qdrant
+**Qdrant**
+
 ```shell
 pip install -qU langchain-qdrant
 ```
@@ -799,8 +824,6 @@ For more on RAG:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/knowledge-base.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/knowledge-base.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

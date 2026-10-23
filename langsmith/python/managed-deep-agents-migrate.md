@@ -13,7 +13,8 @@ tags: [docs, langsmith, managed-deep-agents-migrate]
 Managed Deep Agents runs the same [Deep Agents](../../deepagents/overview.md) harness you already build against, so moving an existing agent is a repackaging job rather than a rewrite. Your tools, middleware, and subagents carry over as they are. The agent entry changes, and the system prompt, skills, and memory move into project files.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## Decide whether to move
 
@@ -48,7 +49,8 @@ Most agents move without changes beyond the entry file. Four cases need a decisi
 
 If none of these apply, the agent logic transfers as written.
 
-> **Prompt:** Convert a Deep Agents project into a Managed Deep Agents project.
+Convert a Deep Agents project into a Managed Deep Agents project.
+
 Convert this codebase from a self-hosted Deep Agents agent into a Managed Deep Agents (MDA) project.
 
 ## Step 1: Read the guide
@@ -108,7 +110,8 @@ Convert the project in place. The existing layout, module structure, and depende
 
 To install the `mda` CLI first, see the [quickstart](managed-deep-agents-quickstart.md).
 
-### Add the SDK to the project
+**1. Add the SDK to the project**
+
 ```bash
 uv add managed-deepagents
 ```
@@ -128,7 +131,8 @@ allow-direct-references = true
 
 Leave every dependency the project already declares in place. Tools and middleware keep importing what they always did.
 
-### Rewrite the agent entry
+**2. Rewrite the agent entry**
+
 Convert the call site using the table above, in a file named `agent.py` at the project root:
 
 **agent.py (before)**
@@ -165,7 +169,8 @@ The entry must export a variable named `agent`, and the definition call itself h
 
 A `src/` layout is otherwise fine. Keep the packages where they are and import them from the root entry.
 
-### Move the prompt, skills, and memory into files
+**3. Move the prompt, skills, and memory into files**
+
 Put the system prompt in `instructions.md` at the project root. Give each skill its own directory under `skills/` with a `SKILL.md`.
 
 If the agent needs memory that persists across threads, declare it in a root file exporting a variable named `memory`:
@@ -181,9 +186,11 @@ memory = define_memory(scope="agent")
 Durable memory is opt-in, and a project without the file mounts none. The scope is the only knob: `"agent"` mounts one tree that every caller of the deployment shares. To control what the agent keeps there, write a memory policy into `instructions.md`. See [Guide what to remember](managed-deep-agents-memory.md#guide-what-to-remember).
 
 > [!WARNING]
+>
 > `define_memory` mounts an empty memory tree. Content from the files the old `memory` parameter pointed at does not transfer, so move anything the agent still needs into `instructions.md` or a skill before deleting those files.
 
-### Declare a sandbox
+**4. Declare a sandbox**
+
 An agent that passed a sandbox `backend` needs a managed sandbox declaration instead. Create the directory and declare it:
 
 **sandbox/__init__.py**
@@ -198,11 +205,13 @@ sandbox = define_sandbox(
 ```
 
 > [!WARNING]
+>
 > Declaring a sandbox clears `permissions`. A filesystem permission rule disables the sandbox `execute` tool, so the runtime drops the rules rather than the shell. Restrict a sandboxed agent through the tools you give it instead.
 
 To provision a snapshot, add `sandbox/setup.sh`. Skip this step for an agent that had no sandbox backend. See [Sandboxes](managed-deep-agents-sandboxes.md).
 
-### Declare identity
+**5. Declare identity**
+
 (Optional) To give each caller private threads and downstream credentials, add a root identity declaration:
 
 **identity.py**
@@ -215,7 +224,8 @@ identity = define_identity(auth=auth.langsmith_api_key())
 
 Without the file the deployment runs with no managed auth, which `mda dev` reports as `Identity none`. See [Identity](managed-deep-agents-identity.md).
 
-### Set credentials and ignore the build output
+**6. Set credentials and ignore the build output**
+
 Put the model and tool API keys in a `.env` file at the project root. A value exported in your shell is not read. For shared workspace secrets and OAuth, use [connections](managed-deep-agents-connections.md) instead.
 
 Add the build directory to `.gitignore`:
@@ -230,7 +240,8 @@ Add the build directory to `.gitignore`:
 
 `mda build` copies the whole project root into `.mda/build`, and `mda deploy` uploads it. Anything sitting next to the agent entry ships with the agent, so move what the deployment does not need out of the project root.
 
-### Compile, then run
+**7. Compile, then run**
+
 Compile without deploying:
 
 ```bash
@@ -244,11 +255,13 @@ mda dev
 ```
 
 > [!NOTE]
+>
 > `mda build` does not inspect the definition call, so it exits 0 even when a managed parameter is still there. A leftover parameter surfaces when the graph loads under `mda dev`.
 
 See [Local development](managed-deep-agents-local-development.md).
 
-### Deploy
+**8. Deploy**
+
 Upload the project and let LangSmith build and host it:
 
 ```bash
@@ -258,11 +271,12 @@ mda deploy
 See [Deploy](managed-deep-agents-deploy.md).
 
 > [!TIP]
+>
 > Starting a new agent rather than moving one? Scaffold the whole project, including the identity, sandbox, `.env`, and `.gitignore` files above:
 >
-> ```bash
+```bash
 > mda init research-assistant
-> ```
+```
 >
 > The install channel selects the authoring language: the npm package scaffolds TypeScript, and the PyPI package scaffolds Python. The command creates a new directory and does not run in place, so it suits a greenfield project rather than a migration. See the [quickstart](managed-deep-agents-quickstart.md).
 
@@ -275,8 +289,6 @@ See [Deploy](managed-deep-agents-deploy.md).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-migrate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-migrate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

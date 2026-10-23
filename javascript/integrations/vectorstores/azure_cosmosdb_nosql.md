@@ -19,6 +19,7 @@ Learn how to leverage the vector search capabilities of Azure Cosmos DB for NoSQ
 You'll first need to install the [`@langchain/azure-cosmosdb`](https://www.npmjs.com/package/@langchain/azure-cosmosdb) package:
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -61,11 +62,13 @@ const store = new AzureCosmosDBNoSQLVectorStore(new OpenAIEmbeddings(), {
 ```
 
 > [!NOTE]
+>
 > **When using Azure Managed Identity and role-based access control, you must ensure that the database and container have been created beforehand. RBAC does not provide permissions to create databases and containers. You can get more information about the permission model in the [Azure Cosmos DB documentation](https://learn.microsoft.com/azure/cosmos-db/how-to-setup-rbac#permission-model).**
 
 ### Security considerations when using filters
 
 > [!WARNING]
+>
 > **Using filters with user-provided input can be a security risk if the data is not sanitized properly. Follow the recommendation below to prevent potential security issues.**
 
 Allowing raw user input to be concatenated into SQL-like clauses - such as `WHERE ${userFilter}` - introduces a critical risk of SQL injection attacks, potentially exposing unintended data or compromising your system's integrity. To mitigate this, always use Azure Cosmos DB's parameterized query mechanism, passing in `@param` placeholders, which cleanly separates the query logic from user-provided input.
@@ -272,6 +275,7 @@ const results = await store.maxMarginalRelevanceSearch("machine learning", {
 ## Full-text and hybrid search (preview)
 
 > [!WARNING]
+>
 > Full-text and hybrid search are preview features in Azure Cosmos DB. You need to configure your container with a full-text policy and appropriate indexing to use these features. See the [Azure Cosmos DB documentation](https://learn.microsoft.com/azure/cosmos-db/gen-ai/full-text-search) for setup instructions.
 
 To use full-text or hybrid search, enable it when creating the store:
@@ -392,8 +396,6 @@ const { resources } = await container.items
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/azure_cosmosdb_nosql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/azure_cosmosdb_nosql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

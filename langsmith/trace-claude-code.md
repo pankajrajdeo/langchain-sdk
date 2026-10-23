@@ -42,9 +42,13 @@ Then move the install onto the new version from your shell and restart Claude Co
 claude plugin update langsmith-tracing@langsmith-claude-code-plugins
 ```
 
- The marketplace update on its own only refreshes the catalog clone. Your install stays pinned to the version directory it was installed from, so the hooks keep running the old bundle until `claude plugin update` moves it. To skip both steps next time, run `/plugin`, open **Marketplaces** → `langsmith-claude-code-plugins` and choose **Enable auto-update**: third-party marketplaces have it off by default, and enabling it updates the marketplace and its installed plugins together. 
+> [!NOTE]
+>
+> The marketplace update on its own only refreshes the catalog clone. Your install stays pinned to the version directory it was installed from, so the hooks keep running the old bundle until `claude plugin update` moves it. To skip both steps next time, run `/plugin`, open **Marketplaces** → `langsmith-claude-code-plugins` and choose **Enable auto-update**: third-party marketplaces have it off by default, and enabling it updates the marketplace and its installed plugins together.
 
- If you are migrating from the previously recommended version of tracing Claude Code with manually created stop hooks, refer to [Migrating from the manual stop hook](#migrating-from-the-manual-stop-hook). 
+> [!NOTE]
+>
+> If you are migrating from the previously recommended version of tracing Claude Code with manually created stop hooks, refer to [Migrating from the manual stop hook](#migrating-from-the-manual-stop-hook).
 
 ### Setting environment variables
 
@@ -70,7 +74,9 @@ To get set up, create or edit [Claude Code's project settings file](https://code
 }
 ```
 
- Alternatively, to enable tracing to LangSmith for all Claude Code sessions, you can add the previous JSON to your [global Claude Code settings.json](https://code.claude.com/docs/en/settings#:~:text=User%20settings%20are%20defined%20in%20~/.claude/settings.json%20and%20apply%20to%20all%20projects.) file. 
+> [!NOTE]
+>
+> Alternatively, to enable tracing to LangSmith for all Claude Code sessions, you can add the previous JSON to your [global Claude Code settings.json](https://code.claude.com/docs/en/settings#:~:text=User%20settings%20are%20defined%20in%20~/.claude/settings.json%20and%20apply%20to%20all%20projects.) file.
 
 **Option 2: Shell environment variables**
 
@@ -95,7 +101,8 @@ In LangSmith, you'll find:
 
 Set the `CC_LANGSMITH_METADATA` environment variable to a JSON object to attach custom metadata to all traced runs. This is useful for tagging traces with contextual information such as PR URLs, authors, or environment names.
 
-#### Settings file (recommended)
+**Settings file (recommended)**
+
 ```json
 {
   "env": {
@@ -107,7 +114,8 @@ Set the `CC_LANGSMITH_METADATA` environment variable to a JSON object to attach 
 }
 ```
 
-#### Shell environment variable
+**Shell environment variable**
+
 ```bash
 export CC_LANGSMITH_METADATA='{"author":"jane","environment":"development"}'
 ```
@@ -131,7 +139,8 @@ Muted runs keep their normal nesting, names, timing, status, model and tool iden
 
 To start threads in metadata-only mode without running a command in each one, set `CC_LANGSMITH_DEFAULT_MUTED` to `"true"`:
 
-#### Settings file (recommended)
+**Settings file (recommended)**
+
 ```json
 {
   "env": {
@@ -143,7 +152,8 @@ To start threads in metadata-only mode without running a command in each one, se
 }
 ```
 
-#### Shell environment variable
+**Shell environment variable**
+
 ```bash
 export CC_LANGSMITH_DEFAULT_MUTED="true"
 ```
@@ -324,7 +334,8 @@ Each replica object supports the following fields:
 
 There are two ways to set the `CC_LANGSMITH_RUNS_ENDPOINTS` environment variable:
 
-#### Settings file (recommended)
+**Settings file (recommended)**
+
 In your local `.claude/settings.local.json` or global `~/.claude/settings.json`:
 
 ```json
@@ -337,13 +348,15 @@ In your local `.claude/settings.local.json` or global `~/.claude/settings.json`:
 ```
 
 > [!TIP]
+>
 > To generate the escaped JSON string, use:
 >
-> ```bash
+```bash
 > echo '[{"apiUrl":"...","apiKey":"...","projectName":"..."}]' | jq -cR .
-> ```
+```
 
-#### Shell environment variable
+**Shell environment variable**
+
 **Option 2: Shell environment variable**
 
 Add to your `~/.zshrc`, `~/.bashrc`, or `~/.bash_profile`:
@@ -403,8 +416,6 @@ The plugin is open-source under the MIT license and is available in [this GitHub
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-claude-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-claude-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

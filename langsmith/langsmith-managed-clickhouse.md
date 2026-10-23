@@ -9,6 +9,7 @@ tags: [docs, langsmith, langsmith-managed-clickhouse]
 # LangSmith-managed ClickHouse
 
 > [!TIP]
+>
 > Please read the [LangSmith architectural overview](self-hosted.md) and [guide on connecting to external ClickHouse](self-host-external-clickhouse.md) before proceeding with this guide.
 
 LangSmith uses ClickHouse as the primary storage engine for **traces** and **feedback**. For easier management and scaling, it is recommended to connect a self-hosted LangSmith instance to an external ClickHouse instance. LangSmith-managed ClickHouse is an option that allows you to use a fully managed ClickHouse instance that is monitored and maintained by the LangSmith team.
@@ -23,9 +24,7 @@ The architecture of using LangSmith-managed ClickHouse with your self-hosted Lan
 
 The overall architecture looks like this:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/managed-clickhouse-light.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=26fae5c3f413c15302ea0c00bebf8e93" alt="LangSmith managed ClickHouse architecture." width="2196" height="1755" data-path="langsmith/images/managed-clickhouse-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/managed-clickhouse-dark.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=a3062f45f9c01f05e6917bca3f34735e" alt="LangSmith managed ClickHouse architecture." width="2196" height="1755" data-path="langsmith/images/managed-clickhouse-dark.png" />
+![LangSmith managed ClickHouse architecture.](https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/managed-clickhouse-light.png?fit=max\&auto=format\&n=JOyLr_spVEW0t2KF\&q=85\&s=26fae5c3f413c15302ea0c00bebf8e93)
 
 ## Requirements
 
@@ -33,6 +32,14 @@ The overall architecture looks like this:
 * To use private endpoints, ensure that your VPC is in a ClickHouse Cloud supported [region](https://clickhouse.com/docs/en/cloud/reference/supported-regions). Otherwise, you will need to use a public endpoint we will secure with firewall rules. Your VPC will need to have a NAT gateway to allow us to allowlist your traffic.
 * You must have a VPC that can connect to the LangSmith-managed ClickHouse service. You will need to work with our team to set up the necessary networking.
 * You must have a LangSmith self-hosted instance running. You can use our managed ClickHouse service with [Kubernetes](kubernetes.md) installations.
+
+## TLS certificates
+
+LangSmith-managed ClickHouse serves a certificate issued by Let's Encrypt. The chain is the server certificate, a Let's Encrypt intermediate, and the ISRG Root X1 root.
+
+If your LangSmith pods trust the system CA store, nothing to do. ISRG Root X1 is already in it.
+
+If you mount your own CA bundle with `config.customCa`, add ISRG Root X1 to that bundle. Trust the root, not the server certificate: the server certificate is reissued about every 90 days and the intermediate changes from time to time, while the root is valid until 2035. A bundle with only the server certificate or the intermediate stops working at the next rotation, and the first thing to fail is the ClickHouse migrations job during an upgrade. See [Configure custom TLS certificates](self-host-custom-tls-certificates.md#mount-internal-cas-for-tls).
 
 ## Data storage
 
@@ -48,6 +55,7 @@ LangChain defines sensitive application data as `inputs`, `outputs`, `errors`, `
 ### Stored feedback data fields
 
 > [!NOTE]
+>
 > Because all feedback data is stored in ClickHouse, do not send sensitive information in feedback (scores and annotations/comments) or in any other run fields that are mentioned in [Stored run data fields](#stored-run-data-fields).
 
 Using a LangSmith-managed ClickHouse setup, **all feedback data fields are stored in ClickHouse**:
@@ -77,6 +85,7 @@ This [reference doc](feedback-data-format.md) explains the stored feedback forma
 Run data fields are split between the managed ClickHouse database and your cloud object storage (e.g., S3 or GCS).
 
 > [!NOTE]
+>
 > For run fields stored in object storage, only a reference or pointer is kept in ClickHouse. For example, `inputs` and `outputs` content are offloaded to S3/GCS, with the ClickHouse record storing corresponding S3 URLs in the `inputs_s3_urls` and `outputs_s3_urls` fields.
 
 The table details each run field and where it is stored:
@@ -127,8 +136,6 @@ This [reference doc](run-data-format.md) explains the format of stored runs (spa
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-managed-clickhouse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-managed-clickhouse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -7,13 +7,13 @@ tags: [index, reference, python, langchain, agents]
 
 # reference/python/langchain/agents
 
-4 pages here, 523 pages including subdirectories.
+4 pages here, 534 pages including subdirectories.
 
 ## Directories
 
 - [_subagent_transformer/](_subagent_transformer/_index.md) - 12 pages
 - [factory/](factory/_index.md) - 7 pages
-- [middleware/](middleware/_index.md) - 460 pages
+- [middleware/](middleware/_index.md) - 471 pages
 - [structured_output/](structured_output/_index.md) - 40 pages
 
 ## Files

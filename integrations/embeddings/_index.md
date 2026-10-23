@@ -38,4 +38,4 @@ tags: [index, integrations, embeddings]
 - [Text embeddings inference integration](text_embeddings_inference.md) - Integrate with the Text embeddings inference embedding model using LangChain Python.
 - [TogetherEmbeddings integration](together.md) - Integrate with the TogetherEmbeddings embedding model using LangChain
 - [UpstageEmbeddings integration](upstage.md) - Integrate with the UpstageEmbeddings embedding model using LangChain Python.
-- [Voyage AI integration](voyageai.md) - Integrate with the Voyage AI embedding model using LangChain Python.
+- [VoyageAI by MongoDB integration](voyageai.md) - Integrate with the VoyageAI by MongoDB embedding model using LangChain Python.

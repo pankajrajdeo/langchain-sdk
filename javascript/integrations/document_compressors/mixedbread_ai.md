@@ -19,6 +19,7 @@ This guide will help you integrate and use the [Mixedbread AI](https://mixedbrea
 To get started, install the `@langchain/mixedbread-ai` package:
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 ```bash
@@ -64,8 +65,6 @@ For more information, refer to the [Reranking API documentation](https://www.mix
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_compressors/mixedbread_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_compressors/mixedbread_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

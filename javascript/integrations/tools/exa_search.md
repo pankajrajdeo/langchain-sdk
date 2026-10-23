@@ -20,7 +20,7 @@ This page goes over how to use `ExaSearchResults` with LangChain.
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/tools/exa_search/) | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/tools/exa_search.md) | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`ExaSearchResults`](https://reference.langchain.com/javascript/langchain-exa/ExaSearchResults) | [`@langchain/exa`](https://npmjs.com/package/@langchain/exa) | ❌ | ✅ | ![NPM - Version](https://img.shields.io/npm/v/@langchain/exa?style=flat-square\&label=%20&) |
 
@@ -320,8 +320,6 @@ For detailed documentation of all `ExaSearchResults` features and configurations
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/exa_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/exa_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

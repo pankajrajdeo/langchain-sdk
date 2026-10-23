@@ -31,8 +31,6 @@ that defines component catalogs, generates specs with AI, and renders them safel
 across React, Vue, Svelte, and Angular. For Google's A2UI specification (integrated
 via CopilotKit), see [A2UI](#a2ui-an-alternative-declarative-spec) below.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/frontend/declarative-generative-ui).
-
 ## When to use this approach
 
 Use declarative generative UI for the long tail of your product, where the
@@ -102,6 +100,7 @@ const catalog = defineCatalog(schema, {
 ```
 
 > [!TIP]
+>
 > Keep catalogs focused. Include only components the AI needs for the use case.
 > A smaller catalog produces better results than a kitchen-sink approach.
 
@@ -295,6 +294,7 @@ return (
 ```
 
 > [!NOTE]
+>
 > The `JSONUIProvider` is required to set up json-render's internal context
 > providers (state, visibility, validation, actions). The `Renderer` component
 > must be rendered inside it.
@@ -380,8 +380,6 @@ wire CopilotKit to a LangGraph deployment, see [CopilotKit](integrations/copilot
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/declarative-generative-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/declarative-generative-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

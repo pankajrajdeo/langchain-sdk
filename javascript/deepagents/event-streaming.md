@@ -90,8 +90,9 @@ await Promise.all(watchers);
 console.log({ running, completed, failed });
 ```
 
-#### [View example trace](https://smith.langchain.com/public/1d3f1455-4a9c-4607-aa1d-115948f2e1fa/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/af4407a9-dadd-4090-8e7b-f77e85f0d65a/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Stream messages
 
@@ -144,8 +145,9 @@ for await (const subagent of stream.subagents) {
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/3fdda16a-c42c-4931-81f5-36e4a4ecfc5c/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/036480ea-6f7d-4459-ad25-e04f3f13308b/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Stream nested work
 
@@ -177,8 +179,9 @@ for await (const subagent of stream.subagents) {
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/0b947581-de0c-491e-96c1-ba37cc862b0e/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/a698b0c5-8151-43b6-aee4-aeac1a6926e7/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Consume concurrently
 
@@ -207,8 +210,9 @@ await Promise.all([
 ]);
 ```
 
-#### [View example trace](https://smith.langchain.com/public/467e4c96-80a0-42ba-9f5f-d869b74e5899/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/a3643504-3b56-47f4-ac30-2e6597dc7e04/r)**
+>
+> Open a public LangSmith run for this example.
 
 When you need exact arrival order across the coordinator and all subagents, iterate raw protocol events and use `namespace` to identify the source:
 
@@ -234,8 +238,9 @@ for await (const event of stream) {
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/4113a4d2-b6d8-4f2a-ad1d-2ab9e29859e6/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/851be40f-46b1-424d-a13f-705a955db1a8/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Subagents versus subgraphs
 
@@ -249,8 +254,6 @@ Open a public LangSmith run for this example.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

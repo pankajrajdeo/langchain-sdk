@@ -127,10 +127,12 @@ The `allowed_decisions` list controls what actions a human can take when reviewi
 | ✅ `approve` | Execute the tool with the original arguments as proposed by the agent. | Send an email draft exactly as written |
 | ✏️ `edit` | Modify the tool arguments before execution. | Change the recipient before sending an email |
 | ❌ `reject` | Skip executing this tool call entirely and return rejection feedback to the agent. | Deny file deletion and explain why |
+| 💬 `respond` | Return the human's message directly as a synthetic tool result, skipping execution, for "ask user" style tools. | Answer an `"ask_user"` prompt with a direct reply |
 
 Use `reject` when the human denies a proposed action.
 
 > [!TIP]
+>
 > When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
 
 You can customize which decisions are available for each tool:
@@ -208,6 +210,7 @@ console.log(result.messages[result.messages.length - 1].content);
 For real-time UIs, use `.stream()` instead of `.invoke()` to display tokens and tool call progress while handling HITL interrupts. Interrupts appear as `__interrupt__` entries in the `updates` stream. After the stream completes, collect human decisions and resume by streaming again with `Command(resume=...)`.
 
 > [!NOTE]
+>
 > For a typical `interrupt_on` HITL pause, resume with a flat `{"decisions": [...]}` payload, the same shape as with `.invoke()`. When multiple interrupts are pending at once (for example, parallel branches), map each interrupt ID to its resume value instead. See [Handling multiple interrupts](../langgraph/interrupts.md#handling-multiple-interrupts).
 
 ```typescript
@@ -270,6 +273,7 @@ process.stdout.write("\n");
 ```
 
 > [!TIP]
+>
 > Combine `"messages"` and `"updates"` stream modes to show real-time LLM tokens to the user while still catching HITL interrupts. The `"messages"` mode streams tokens; the `"updates"` mode delivers interrupt payloads.
 
 ## Multiple tool calls
@@ -523,8 +527,6 @@ Execution completed!
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -14,7 +14,8 @@ Most of the time, you provide a `thread_id` to your client when you run your gra
 
 First, let's setup our client:
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -23,7 +24,8 @@ client = get_client(url=<DEPLOYMENT_URL>)
 assistant_id = "agent"
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -32,7 +34,8 @@ const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
 const assistantId = "agent";
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/assistants/search \
@@ -51,7 +54,8 @@ curl --request POST \
 
 We can stream the results of a stateless run in an almost identical fashion to how we stream from a run with the state attribute, but instead of passing a value to the `thread_id` parameter, we pass `None`:
 
-#### Python
+**Python**
+
 ```python
 input = {
     "messages": [
@@ -70,7 +74,8 @@ async for chunk in client.runs.stream(
         print(chunk.data)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 let input = {
   messages: [
@@ -94,7 +99,8 @@ for await (const chunk of streamResponse) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/runs/stream \
@@ -118,7 +124,8 @@ Output:
 
 In addition to streaming, you can also wait for a stateless result by using the `.wait` function like follows:
 
-#### Python
+**Python**
+
 ```python
 stateless_run_result = await client.runs.wait(
     None,
@@ -128,7 +135,8 @@ stateless_run_result = await client.runs.wait(
 print(stateless_run_result)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 let statelessRunResult = await client.runs.wait(
   null,
@@ -138,7 +146,8 @@ let statelessRunResult = await client.runs.wait(
 console.log(statelessRunResult);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/runs/wait \
@@ -180,8 +189,6 @@ Output:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/stateless-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/stateless-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

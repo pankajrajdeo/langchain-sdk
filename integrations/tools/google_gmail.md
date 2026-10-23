@@ -92,8 +92,6 @@ Below we show how to incorporate the toolkit into an [agent](../../langchain/age
 
 We will need an LLM or chat model:
 
-> **Interactive content:** [View this section in the original documentation](google_gmail.md).
-
 ```python
 # | output: false
 # | echo: false
@@ -154,8 +152,6 @@ For detailed documentation of all `GmailToolkit` features and configurations hea
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_gmail.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_gmail.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

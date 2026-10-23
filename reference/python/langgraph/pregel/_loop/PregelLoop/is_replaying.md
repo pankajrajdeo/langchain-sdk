@@ -15,9 +15,9 @@ tags: [reference, langgraph, pregel, loop, pregelloop, is_replaying]
 ## Signature
 
 ```python
-is_replaying: bool = CONFIG_KEY_CHECKPOINT_ID in config[CONF]
+is_replaying: bool
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/_loop.py#L315)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/_loop.py#L185)

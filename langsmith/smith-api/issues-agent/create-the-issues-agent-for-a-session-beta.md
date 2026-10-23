@@ -165,6 +165,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -173,6 +175,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/sessions/{session_id}/issues-agent:
     post:
@@ -263,7 +266,7 @@ components:
             - expanded
         auto_open_fix_pr:
           description: >-
-            AutoOpenFixPR opens a draft pull request for every fix the agent
+            AutoOpenFixPR opens a pull request for every fix the agent
 
             produces — one per repository it changed — instead of waiting for
             one to
@@ -369,6 +372,13 @@ components:
             deployments
 
             when issue validation is enabled for its tracing project.
+          type: boolean
+        preview_verify_no_trigger:
+          description: >-
+            PreviewVerifyNoTrigger tells fix verification not to request a
+            preview.
+
+            The deployment builds one itself for the fix commit.
           type: boolean
         priorities:
           items:

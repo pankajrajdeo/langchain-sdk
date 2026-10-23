@@ -14,9 +14,10 @@ SmithDB components expose Prometheus metrics at `/metrics` on each pod's HTTP po
 
 Names are as they appear on `/metrics`. If your collector adds a namespace or prefix, adjust accordingly.
 
-For Datadog and Grafana dashboards built on these metrics, with the scrape annotations each one expects, see the [SmithDB observability examples](https://github.com/langchain-ai/helm/tree/main/charts/langsmith/examples/smithdb-observability) in the LangSmith Helm chart repository.
+For the tabbed Datadog and Grafana dashboards and their collection requirements, see [Monitor self-hosted LangSmith with Datadog or Grafana](self-host-observability-dashboards.md). For Grafana installations without native tabs, the [standalone SmithDB dashboard](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/examples/langsmith-observability/components/smithdb/grafana.json) uses Classic format.
 
 > [!NOTE]
+>
 > This page covers metrics SmithDB emits. Kubernetes signals such as OOM kills, container restarts, CPU and memory against limits, and cache disk usage are worth alerting on but come from your infrastructure monitoring, not from SmithDB.
 
 ## Baseline metrics
@@ -107,8 +108,6 @@ Emitted by LangSmith rather than by SmithDB, and labeled `store="clickhouse|smit
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-smithdb-metrics.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-smithdb-metrics.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -14,8 +14,10 @@ tags: [reference, langgraph, pregel, main, stream_events]
 
 Stream events from this graph.
 
-For `version="v1"` / `"v2"`, yields `StreamEvent` dicts (see
-`Runnable.stream_events`). For `version="v3"`, returns a
+For `version="v1"` / `"v2"`, delegates to
+`Runnable.(a)stream_events`; synchronous v1/v2 event streaming is
+not implemented in langchain-core, so use `astream_events` for
+those versions. For `version="v3"`, returns a
 `GraphRunStream` whose typed projections the caller drives by
 iterating — no background thread.
 
@@ -38,11 +40,8 @@ stream_events(
     config: RunnableConfig | None = None,
     *,
     version: Literal['v1', 'v2', 'v3'] = 'v2',
-    interrupt_before: All | Sequence[str] | None = None,
-    interrupt_after: All | Sequence[str] | None = None,
-    control: RunControl | None = None,
     transformers: Sequence[Callable[[tuple[str, ...]], Any]] | None = None,
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> Any
 ```
 
@@ -67,11 +66,11 @@ explicitly, to get token-level streaming.
 | `input` | `InputT \| Command \| None` | Yes | Graph input. |
 | `config` | `RunnableConfig \| None` | No | Optional runnable config. (default: `None`) |
 | `version` | `Literal['v1', 'v2', 'v3']` | No | Streaming-event schema version. `"v3"` selects the content-block-centric streaming protocol. (default: `'v2'`) |
-| `interrupt_before` | `All \| Sequence[str] \| None` | No | Nodes to interrupt before, if any. Only used for `version="v3"`. (default: `None`) |
-| `interrupt_after` | `All \| Sequence[str] \| None` | No | Nodes to interrupt after, if any. Only used for `version="v3"`. (default: `None`) |
-| `control` | `RunControl \| None` | No | Optional run control used to request cooperative drain. Only used for `version="v3"`. (default: `None`) |
+| `interrupt_before` | `unknown` | Yes | Nodes to interrupt before, if any. Honored on every version that can run; type-checked only on the `version="v3"` overloads. |
+| `interrupt_after` | `unknown` | Yes | Nodes to interrupt after, if any. Honored on every version that can run; type-checked only on the `version="v3"` overloads. |
+| `control` | `unknown` | Yes | Optional run control used to request cooperative drain. Honored on every version that can run; type-checked only on the `version="v3"` overloads. |
 | `transformers` | `Sequence[Callable[[tuple[str, ...]], Any]] \| None` | No | Extra transformer classes or configured factories appended after compile-time `stream_transformers`. Factories are called as `factory(scope)` so they can propagate to subgraph scopes. Only used for `version="v3"`. (default: `None`) |
-| `**kwargs` | `Any` | No | For `version="v1"`/`"v2"`, forwarded to `Runnable.stream_events`. For `version="v3"`, forwarded to the underlying `stream(...)` call (e.g. `context`, `durability`, `output_keys`, `print_mode`, `debug`). `stream_mode` and `subgraphs` are not accepted under `version="v3"` and raise `TypeError` if supplied; v3 owns them. (default: `{}`) |
+| `**kwargs` | `Any` | No | For `version="v1"`/`"v2"` on `astream_events`, forwarded to `Runnable.astream_events`, which passes them through to `astream` — so execution kwargs such as `context`, `durability`, `interrupt_before`, `interrupt_after` and `control` are honored on every version that can run. For `version="v3"`, forwarded to the underlying `stream(...)` call (e.g. `context`, `durability`, `output_keys`, `print_mode`, `debug`). `stream_mode` and `subgraphs` are not accepted under `version="v3"` and raise `TypeError` if supplied; v3 owns them. (default: `{}`) |
 
 ## Returns
 
@@ -81,4 +80,4 @@ For `version="v3"`, a `GraphRunStream` the caller iterates
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/main.py#L3638)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/main.py#L3727)

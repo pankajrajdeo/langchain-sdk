@@ -21,6 +21,7 @@ This page covers:
 * [Troubleshooting failed exports](#troubleshooting-failed-exports).
 
 > [!NOTE]
+>
 > **For self-hosted, GCP EU, GCP APAC, and AWS US SaaS**
 >
 > Update the LangSmith URL in the requests below for self-hosted installs, GCP EU (`eu.api.smith.langchain.com`), GCP APAC (`apac.api.smith.langchain.com`), or AWS US (`aws.api.smith.langchain.com`).
@@ -119,6 +120,7 @@ Export jobs automatically retry transient failures with the following behavior:
 | **Terminal processing errors** | Data serialization issues, resource exhaustion | Yes, retried up to 20 times (subject to change). | Check run error details; may require investigation. |
 
 > [!NOTE]
+>
 > Any single run failure (after all retries are exhausted) causes the entire export to fail.
 
 ### Export status lifecycle
@@ -194,8 +196,6 @@ For storage-related errors, you can test your destination configuration using th
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-monitor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-monitor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

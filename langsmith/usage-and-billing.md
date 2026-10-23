@@ -20,6 +20,7 @@ This section covers how data retention works and how it's priced in LangSmith.
 * **Cost**: LangSmith charges less for traces that have low data retention. For more information, learn how to [enforce spend limits](billing.md#enforce-spend-limits).
 
 > [!TIP]
+>
 > Plan your retention tiers before you start sending traces. Changes apply to new traces only—existing traces keep their original tier. See [Change project-level default retention](billing.md#change-project-level-default-retention).
 
 ### How it works
@@ -32,6 +33,7 @@ LangSmith has two tiers of traces based on Data Retention with the following cha
 | **Retention Period** | 14 days | 180 days |
 
 > [!WARNING]
+>
 > Starting September 14, 2026, the maximum long-lived trace retention period for SaaS customers is changing to 180 days. Enterprise customers can still customize the extended retention period per workspace up to this new maximum. Changes apply to new traces only—existing traces are unaffected. See [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy).
 
 **Data deletion after retention ends**
@@ -45,6 +47,7 @@ A default retention tier belongs to a tracing project. In an [agent-based worksp
 ### Data retention auto-upgrades
 
 > [!WARNING]
+>
 > Auto upgrades can have an impact on your bill. Please read this section carefully to fully understand your estimated LangSmith tracing costs.
 
 Most traces use base retention. Some actions, such as online evaluators and automation rules, can extend a trace to a longer retention period at a higher cost. You control which actions extend retention.
@@ -61,9 +64,11 @@ Retention behavior by action:
 This change applies to new actions only. Traces that were already upgraded by a previous action keep their extended retention.
 
 > [!NOTE]
+>
 > When you create or edit an online evaluator on a tracing project, you can opt out of upgrading the traces that evaluator scores, keeping them at base retention. This option is available only when the project's default retention is the base tier. For step-by-step instructions, see [Manage evaluator trace retention](evaluators.md#manage-evaluator-trace-retention).
 
 > [!NOTE]
+>
 > Retention extension is enabled by default for new online evaluators and automation rules. You can opt out when configuring each evaluator or rule.
 
 **Why auto-upgrade traces?**
@@ -130,6 +135,7 @@ This 429 is thrown by our application load balancer and is a mechanism in place 
 | `*` | `*` | 2000 | 1 minute |
 
 > [!NOTE]
+>
 > The LangSmith SDK takes steps to minimize the likelihood of reaching these limits on run-related endpoints by batching up to 100 runs from a single session ID into a single API call.
 
 ### Plan-level hourly trace event limit
@@ -184,11 +190,61 @@ Each trace is limited to a maximum of 25,000 runs. Once the trace reaches this l
 
 ### Run query endpoint
 
-The [`POST /runs/query`](smith-api/run/query-runs.md) endpoint has additional per-tenant rate limits based on query parameters. See [Query traces using the SDK](export-traces.md#rate-limits) for details.
+LangSmith exposes two versions of the run query endpoint with different rate limit profiles.
+
+**v2 (recommended):** `POST /v2/runs/query` ([`list_runs`](https://reference.langchain.com/python/langsmith/client/Client/list_runs) in Python, [`listRuns`](https://reference.langchain.com/javascript/langsmith/client/Client/listRuns) in JavaScript) is backed by SmithDB and has a flat per-API-key limit with no time-window tiers:
+
+| **Limit** | **Window** |
+| - | - |
+| 300 requests | 10 seconds |
+
+API key requests that set `sem_filter` (semantic search) are also limited to 10 requests per minute per workspace.
+
+**v1:** `POST /runs/query` has per-tenant rate limits that vary based on query parameters:
+
+| **Query type** | **Limit** | **Window** |
+| - | - | - |
+| Short time window (≤ 7 days) | 10 requests | 10 seconds |
+| Large time window (> 7 days) | 3 requests | 10 seconds |
+| Full-text search, short time window (≤ 7 days) | 3 requests | 10 seconds |
+| Full-text search, large time window (> 7 days) | 1 request | 10 seconds |
+| Select `child_run_ids`, short time window (≤ 7 days) | 3 requests | 10 seconds |
+| Select `child_run_ids`, large time window (> 7 days) | 1 request | 10 seconds |
+
+The time window is determined by `end_time - start_time`. If `end_time` is not provided, LangSmith will use the current time. Queries without a `start_time` are treated as large time window queries.
+
+To avoid hitting v1 rate limits and reduce query time:
+
+* **Set `start_time`**: omitting it triggers the large time window tier (3 requests per 10 seconds instead of 10). Use a window of 7 days or less when possible.
+* **Use `select`**: by default all fields are returned. Specifying only the fields you need (e.g., `select=["inputs", "outputs"]`) substantially reduces response size and query time.
+* **Set `limit`**: cap the number of results if you don't need to paginate through everything.
+* **Avoid full-text search**: `filter='search("...")'` has the strictest rate limits; use structured filters (e.g., `eq()`, `has()`) when possible.
+* **Avoid selecting `child_run_ids`**: this also triggers a stricter rate limit tier.
+
+### Run stats endpoint
+
+The [`POST /runs/stats`](smith-api/run/stats-runs.md) endpoint has per-tenant rate limits that vary based on the query time window:
+
+| **Query type** | **Limit** | **Window** |
+| - | - | - |
+| Short time window (≤ 14 days) | 10 requests | 10 seconds |
+| Large time window (> 14 days and \< 90 days) | 3 requests | 10 seconds |
+| Extra-large time window (≥ 90 days) or no `start_time` | 1 request | 10 seconds |
+
+The time window is determined by `end_time - start_time`. If `end_time` is not provided, LangSmith uses the current time. Queries without a `start_time` are subject to the strictest limit.
+
+In the GCP-hosted US region, API key requests to this endpoint are also limited to 1 request per 10 seconds per API key.
+
+To avoid hitting rate limits:
+
+* **Set `start_time`**: use a window of 14 days or less when possible.
+* **Avoid open-ended queries**: always provide a `start_time` to stay in the less-restrictive tier.
 
 ### Workspace invite batch endpoint
 
 Workspace invite batch requests are rate limited per workspace to reduce bulk invitation abuse.
+
+The `POST /workspaces/current/members/batch` endpoint allows 2 requests per second per workspace. This limit applies to LangSmith Cloud only.
 
 ### Handling 429s responses in your application
 
@@ -197,6 +253,7 @@ Since some 429 responses are temporary and may succeed on a successive call, if 
 For convenience, LangChain applications built with the LangSmith SDK has this capability built-in.
 
 > [!NOTE]
+>
 > It is important to note that if you are saturating the endpoints for extended periods of time, retries may not be effective as your application will eventually run large enough backlogs to exhaust all retries.
 >
 > If that is the case, we would like to discuss your needs more specifically. Please contact support via [LangSmith Support](https://support.langchain.com) with details about your applications throughput needs and sample code and we can work with you to better understand whether the best approach is fixing a bug, changes to your application code, or a different LangSmith plan.
@@ -235,8 +292,6 @@ Usage limits can be updated from the `Settings` page under `Usage and Billing`. 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/usage-and-billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/usage-and-billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

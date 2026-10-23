@@ -14,11 +14,13 @@ Build custom middleware by implementing hooks that run at specific points in the
 
 Middleware provides two styles of hooks to intercept agent execution:
 
-#### [Node-style hooks](#node-style-hooks)
-Run sequentially at specific execution points.
+> **[Node-style hooks](#node-style-hooks)**
+>
+> Run sequentially at specific execution points.
 
-#### [Wrap-style hooks](#wrap-style-hooks)
-Run around each model or tool call.
+> **[Wrap-style hooks](#wrap-style-hooks)**
+>
+> Run around each model or tool call.
 
 ### Node-style hooks
 
@@ -388,7 +390,9 @@ console.log(result._internalFlag); // undefined
 
 ## Custom stream transformers
 
-Middleware-registered transformers require `langchain@1.4.3` or later.
+> [!NOTE]
+>
+> Middleware-registered transformers require `langchain@1.4.3` or later.
 
 Middleware can register stream transformer factories that project events from the live agent stream onto typed extension channels. This is useful for surfacing counters, side-channel artifacts, partial outputs, or wire-level redaction without coupling to the framework's built-in projections.
 
@@ -493,38 +497,35 @@ const agent = createAgent({
 });
 ```
 
-<details>
-<summary>Execution flow</summary>
-
-**Before hooks run in order:**
-
-1. `middleware1.before_agent()`
-2. `middleware2.before_agent()`
-3. `middleware3.before_agent()`
-
-**Agent loop starts**
-
-4. `middleware1.before_model()`
-5. `middleware2.before_model()`
-6. `middleware3.before_model()`
-
-**Wrap hooks nest like function calls:**
-
-7. `middleware1.wrap_model_call()` → `middleware2.wrap_model_call()` → `middleware3.wrap_model_call()` → model
-
-**After hooks run in reverse order:**
-
-8. `middleware3.after_model()`
-9. `middleware2.after_model()`
-10. `middleware1.after_model()`
-
-**Agent loop ends**
-
-11. `middleware3.after_agent()`
-12. `middleware2.after_agent()`
-13. `middleware1.after_agent()`
-
-</details>
+> **Execution flow**
+>
+> **Before hooks run in order:**
+>
+> 1. `middleware1.before_agent()`
+> 2. `middleware2.before_agent()`
+> 3. `middleware3.before_agent()`
+>
+> **Agent loop starts**
+>
+> 4. `middleware1.before_model()`
+> 5. `middleware2.before_model()`
+> 6. `middleware3.before_model()`
+>
+> **Wrap hooks nest like function calls:**
+>
+> 7. `middleware1.wrap_model_call()` → `middleware2.wrap_model_call()` → `middleware3.wrap_model_call()` → model
+>
+> **After hooks run in reverse order:**
+>
+> 8. `middleware3.after_model()`
+> 9. `middleware2.after_model()`
+> 10. `middleware1.after_model()`
+>
+> **Agent loop ends**
+>
+> 11. `middleware3.after_agent()`
+> 12. `middleware2.after_agent()`
+> 13. `middleware1.after_agent()`
 
 **Key rules:**
 
@@ -595,7 +596,7 @@ console.log(result.messages.at(-1)?.content);
 
 Dynamically modify the system prompt at runtime to inject context, user-specific instructions, or other information before each model call. This is one of the most common middleware use cases.
 
-Use the `systemMessage` field in `ModelRequest` to read and modify the system prompt. It contains a [`SystemMessage`](https://reference.langchain.com/javascript/langchain-core/messages/SystemMessage) object (even if the agent was created with a string [`systemPrompt`](https://reference.langchain.com/javascript/types/langchain.index.CreateAgentParams.html#systemprompt)).
+Use the `systemMessage` field in `ModelRequest` to read and modify the system prompt. It contains a [`SystemMessage`](https://reference.langchain.com/javascript/langchain-core/messages/SystemMessage) object (even if the agent was created with a string [`systemPrompt`](https://reference.langchain.com/javascript/langchain/index/CreateAgentParams/systemPrompt)).
 
 **Google**
 
@@ -751,9 +752,6 @@ const agent = createAgent({
 });
 ```
 
-#### [View example trace](https://smith.langchain.com/public/4eaefcd5-90ad-4349-bb51-2cfc660e8af3/r)
-Open a public LangSmith run for this example.
-
 Use [`SystemMessage.concat`](https://reference.langchain.com/javascript/langchain-core/utils/stream/concat) to preserve cache control metadata or structured content blocks created by other middleware.
 
 ### Dynamic model selection
@@ -779,9 +777,6 @@ const dynamicModelMiddleware = createMiddleware({
   },
 });
 ```
-
-#### [View example trace](https://smith.langchain.com/public/dc39d44b-bef7-49cf-bef8-45e5f4881bf8/r)
-Open a public LangSmith run for this example.
 
 ### Dynamically selecting tools
 
@@ -839,7 +834,8 @@ const toolMonitoringMiddleware = createMiddleware({
 
 When working with Anthropic models, use structured content blocks with cache control directives to cache large system prompts:
 
-#### Decorator
+**Decorator**
+
 ```python
 from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
 from langchain.messages import SystemMessage
@@ -864,7 +860,8 @@ def add_cached_context(
     return handler(request.override(system_message=new_system_message))
 ```
 
-#### Class
+**Class**
+
 ```python
 from langchain.agents.middleware import AgentMiddleware, ModelRequest, ModelResponse
 from langchain.messages import SystemMessage
@@ -898,7 +895,7 @@ class CachedContextMiddleware(AgentMiddleware):
 
 :::
 
-Modify system messages in middleware using the `systemMessage` field in `ModelRequest`. It contains a [`SystemMessage`](https://reference.langchain.com/javascript/langchain-core/messages/SystemMessage) object (even if the agent was created with a string [`systemPrompt`](https://reference.langchain.com/javascript/types/langchain.index.CreateAgentParams.html#systemprompt)).
+Modify system messages in middleware using the `systemMessage` field in `ModelRequest`. It contains a [`SystemMessage`](https://reference.langchain.com/javascript/langchain-core/messages/SystemMessage) object (even if the agent was created with a string [`systemPrompt`](https://reference.langchain.com/javascript/langchain/index/CreateAgentParams/systemPrompt)).
 
 **Example: Chaining middleware** - Different middleware can use different approaches:
 
@@ -970,8 +967,6 @@ Use [`SystemMessage.concat`](https://reference.langchain.com/javascript/langchai
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/middleware/custom.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/middleware/custom.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

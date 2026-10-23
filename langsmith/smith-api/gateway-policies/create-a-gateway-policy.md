@@ -18,8 +18,9 @@ The shape of `config` depends on policy_type:
 - `spend_cap` / `default_spend_cap`, a limit per window:
 `{"version": 2, "limits": [{"window": "hourly"|"daily"|"weekly"|"monthly", "limit_usd": <number>}]}`
 - `guard`:
-`{"version": 1, "detect": {"pii": <bool>, "secrets": <bool>}, "timeout_seconds": <number>, "timeout_action": "allow"|"block"}`
+`{"version": 1, "detect": {"pii": <bool>, "secrets": <bool>, "custom": [{"pattern": "<regex>"}]}, "timeout_seconds": <number>, "timeout_action": "allow"|"block"}`
 `timeout_seconds` (optional, 0.1–30) caps guard pipeline execution time; defaults to 2s. `timeout_action` defaults to `allow`.
+`detect.custom` (optional) holds at most one Go regexp (RE2 syntax) of up to 512 bytes; matching text is redacted. Avoid capture groups: if present, only the first group is redacted, wherever that text appears.
 - `route_config`:
 `{"strategy": "priority_fallback", "triggers": {"status_codes": [<int>]}, "fallbacks": [{"model_configs": [{"model_config_id": "<playground-settings-uuid>"}]}]}`
 `triggers` is required, with no default: `status_codes` must be a non-empty list (include 502 and 504 for upstream transport failures). `fallbacks` contains an entry whose `model_configs` are tried in priority order (1–5). `subject_matchers` must be a single `workspace_id` entry.
@@ -204,6 +205,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -212,6 +215,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/gateway-policies:
     post:
@@ -239,11 +243,16 @@ paths:
 
         - `guard`:
 
-        `{"version": 1, "detect": {"pii": <bool>, "secrets": <bool>},
-        "timeout_seconds": <number>, "timeout_action": "allow"|"block"}`
+        `{"version": 1, "detect": {"pii": <bool>, "secrets": <bool>, "custom":
+        [{"pattern": "<regex>"}]}, "timeout_seconds": <number>,
+        "timeout_action": "allow"|"block"}`
 
         `timeout_seconds` (optional, 0.1–30) caps guard pipeline execution time;
         defaults to 2s. `timeout_action` defaults to `allow`.
+
+        `detect.custom` (optional) holds at most one Go regexp (RE2 syntax) of
+        up to 512 bytes; matching text is redacted. Avoid capture groups: if
+        present, only the first group is redacted, wherever that text appears.
 
         - `route_config`:
 
@@ -348,7 +357,7 @@ paths:
         '403':
           description: >-
             LLM Gateway not enabled for the organization, or caller lacks
-            OrganizationManage
+            organization:gateway:manage
           content:
             application/json:
               schema:
@@ -397,7 +406,7 @@ paths:
               "policy_type": "guard",
               "action": "block",
               "subject_matchers": [{"key":"organization_id","value":"<org-uuid>"}],
-              "config": {"version": 1, "detect": {"pii": true, "secrets": true}, "timeout_seconds": 3}
+              "config": {"version": 1, "detect": {"pii": true, "secrets": true, "custom": [{"pattern": "BLD-[A-Z]{3}-[0-9]{4}"}]}, "timeout_seconds": 3}
             }
         - label: route_config
           lang: json

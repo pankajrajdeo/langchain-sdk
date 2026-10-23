@@ -30,14 +30,17 @@ Set the following environment variables for all implementations:
 | `LANGSMITH_PROJECT` | No | Project name (defaults to `"default"`). |
 
 > [!NOTE]
+>
 > For regional SaaS or self-hosted LangSmith installations, also set `LANGCHAIN_BASE_URL` to your LangSmith instance URL.
 
 ## Set up tracing
 
-#### Go
+**Go**
+
 Go uses the `langsmith-go` SDK with Temporal's OpenTelemetry interceptors to automatically trace workflows and activities.
 
-### Install
+**1. Install**
+
 Install the LangSmith Go SDK, Temporal SDK, and OpenTelemetry interceptor:
 
 ```bash
@@ -46,7 +49,8 @@ go get go.temporal.io/sdk
 go get go.temporal.io/sdk/contrib/opentelemetry
 ```
 
-### Initialize tracer
+**2. Initialize tracer**
+
 Initialize the LangSmith tracer, create Temporal's OpenTelemetry interceptor, and register it with the Temporal client and worker:
 
 ```go
@@ -105,7 +109,8 @@ func main() {
 }
 ```
 
-### Define workflow and activity
+**3. Define workflow and activity**
+
 Define a workflow that executes an activity. The activity demonstrates how to add custom span attributes for LangSmith visibility:
 
 ```go
@@ -159,7 +164,8 @@ func MyActivity(ctx context.Context, input string) (string, error) {
 }
 ```
 
-### Execute workflow
+**4. Execute workflow**
+
 In a separate client application, initialize the tracer and execute the workflow:
 
 **client.go**
@@ -215,10 +221,12 @@ func executeWorkflow() {
 }
 ```
 
-#### Python
+**Python**
+
 Python uses the `temporalio` SDK with OpenTelemetry interceptors, exporting traces to LangSmith via OTLP.
 
-### Install
+**1. Install**
+
 Install the Temporal SDK, LangSmith SDK, and OpenTelemetry packages:
 
 ```bash
@@ -228,7 +236,8 @@ pip install opentelemetry-sdk
 pip install opentelemetry-exporter-otlp-proto-http
 ```
 
-### Initialize tracer
+**2. Initialize tracer**
+
 Create an OpenTelemetry `TracerProvider` with an OTLP exporter configured to send traces to LangSmith:
 
 ```python
@@ -273,7 +282,8 @@ def init_tracer_provider() -> TracerProvider:
     return provider
 ```
 
-### Define workflow and activity
+**3. Define workflow and activity**
+
 Define a workflow class and activity function. The activity demonstrates how to add custom span attributes for LangSmith visibility:
 
 ```python
@@ -304,7 +314,8 @@ class MyWorkflow:
         )
 ```
 
-### Run worker
+**4. Run worker**
+
 Create a Temporal client with the `TracingInterceptor` and start the worker:
 
 ```python
@@ -338,7 +349,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### Execute workflow
+**5. Execute workflow**
+
 In a separate script, connect to Temporal with the tracing interceptor and execute the workflow:
 
 **client.py**
@@ -376,10 +388,12 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#### TypeScript / JavaScript
+**TypeScript / JavaScript**
+
 TypeScript uses the `@temporalio/sdk` with OpenTelemetry interceptors to send traces to LangSmith.
 
-### Install
+**1. Install**
+
 Install the Temporal SDK, OpenTelemetry interceptors, and tracing packages:
 
 ```bash
@@ -390,7 +404,8 @@ npm install @opentelemetry/exporter-trace-otlp-http
 npm install @opentelemetry/resources @opentelemetry/semantic-conventions
 ```
 
-### Initialize tracer
+**2. Initialize tracer**
+
 Create a `NodeTracerProvider` with an OTLP exporter configured to send traces to LangSmith:
 
 **tracer.ts**
@@ -426,7 +441,8 @@ export function initTracerProvider(): NodeTracerProvider {
 }
 ```
 
-### Define workflow
+**3. Define workflow**
+
 Define a workflow that proxies activities with a timeout configuration:
 
 **workflows.ts**
@@ -444,7 +460,8 @@ export async function myWorkflow(input: string): Promise<string> {
 }
 ```
 
-### Define activity
+**4. Define activity**
+
 Define an activity that demonstrates how to add custom span attributes for LangSmith visibility:
 
 **activities.ts**
@@ -469,7 +486,8 @@ export async function processActivity(input: string): Promise<string> {
 }
 ```
 
-### Run worker
+**5. Run worker**
+
 Create a worker with OpenTelemetry interceptors for activities and a workflow exporter for workflow spans:
 
 **worker.ts**
@@ -525,7 +543,8 @@ run().catch((err) => {
 });
 ```
 
-### Execute workflow
+**6. Execute workflow**
+
 In a separate client file, connect to Temporal and execute the workflow:
 
 **client.ts**
@@ -735,8 +754,6 @@ finally {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-temporal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-temporal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

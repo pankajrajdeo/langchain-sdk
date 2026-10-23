@@ -21,7 +21,8 @@ This guide covers how to create examples with attachments, build multimodal prom
 
 **Choose your preferred method:**
 
-#### UI
+**UI**
+
 ## 1. Create examples with attachments
 
 You can add examples with attachments to a dataset in a few different ways.
@@ -30,15 +31,15 @@ You can add examples with attachments to a dataset in a few different ways.
 
 When adding runs to a LangSmith dataset, attachments can be selectively propagated from the source run to the destination example. To learn more, please see [Manage datasets in application](manage-datasets-in-application.md#manually-from-a-tracing-project).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/add-trace-with-attachments-to-dataset.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=b8fa62cb39c4f1fc67d9b24fa78d1653" alt="Add trace with attachments to dataset" width="1662" height="679" data-path="langsmith/images/add-trace-with-attachments-to-dataset.png" />
+![Add trace with attachments to dataset](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/add-trace-with-attachments-to-dataset.png?fit=max\&auto=format\&n=E8FdemkcQxROovD9\&q=85\&s=b8fa62cb39c4f1fc67d9b24fa78d1653)
 
 #### From scratch
 
 You can create examples with attachments directly from the LangSmith UI. Click the `+ Example` button in the `Examples` tab of the dataset UI. Then upload attachments using the "Upload Files" button:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/create-example-with-attachments.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=183f929c807f59157e93d40354057933" alt="Create example with attachments" width="3456" height="1856" data-path="langsmith/images/create-example-with-attachments.png" />
+![Create example with attachments](https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/create-example-with-attachments.png?fit=max\&auto=format\&n=aKRoUGXX6ygp4DlC\&q=85\&s=183f929c807f59157e93d40354057933)
 
-Once uploaded, you can view examples with attachments in the LangSmith UI. Each attachment will be rendered with a preview for easy inspection. <img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/attachments-with-examples.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=8f813bdf7d3bfd5a840e5f8c47693ed3" alt="Attachments with examples" width="1331" height="593" data-path="langsmith/images/attachments-with-examples.png" />
+Once uploaded, you can view examples with attachments in the LangSmith UI. Each attachment will be rendered with a preview for easy inspection. ![Attachments with examples](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/attachments-with-examples.png?fit=max\&auto=format\&n=E8FdemkcQxROovD9\&q=85\&s=8f813bdf7d3bfd5a840e5f8c47693ed3)
 
 ## 2. Create a multimodal prompt
 
@@ -49,13 +50,14 @@ First, click the file icon in the message where you want to add multimodal conte
 * If you want to include a specific attachment, you can use the suggested variable name, such as `{{attachment.file_name}}`, this will map the file with `file_name` in the attachment list to pass it to the evaluator
 * If you want to include all attachments, use the `{{attachments}}` variable.
 
-      <img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/adding-multimodal-variable.gif?s=07a15c9fc5e6fc743f92b6b41ab8c9e0" alt="Adding multimodal variable" width="1700" height="1080" data-path="langsmith/images/adding-multimodal-variable.gif" />
+  ![Adding multimodal variable](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/adding-multimodal-variable.gif?s=07a15c9fc5e6fc743f92b6b41ab8c9e0)
 
 ## 3. Define custom evaluators
 
 You can create evaluators that use multimodal content from your dataset examples.
 
 > [!NOTE]
+>
 > Evaluators must use a model that supports both the input modality and structured output. For audio attachments, this is currently only Gemini. Image and PDF attachments work with any vision-capable model that returns structured output.
 
 Since your dataset already has examples with attachments (added in step 1), you can reference them directly in your evaluator. To do so:
@@ -66,9 +68,7 @@ Since your dataset already has examples with attachments (added in step 1), you 
    * If you want to include a specific attachment, you can use the suggested variable name, such as `{{attachment.file_name}}`, this will map the file with `file_name` in the attachment list to pass it to the evaluator.
    * If you want to include all attachments, use the `{{attachments}}` variable.
 
-       <img src="https://mintcdn.com/langchain-5e9cc07a/33Yp30f4EIrgRH-K/langsmith/images/evaluator-attach-file-light.png?fit=max&auto=format&n=33Yp30f4EIrgRH-K&q=85&s=52a67ecb05d402fd8c93f030b8d5f0f1" alt="Create evaluator modal with an audio attachment selected for output variable." width="1996" height="1712" data-path="langsmith/images/evaluator-attach-file-light.png" />
-
-       <img src="https://mintcdn.com/langchain-5e9cc07a/33Yp30f4EIrgRH-K/langsmith/images/evaluator-attach-file-dark.png?fit=max&auto=format&n=33Yp30f4EIrgRH-K&q=85&s=32abe202fe2fd3ab51acf728031e2bdf" alt="Create evaluator modal with an audio attachment selected for output variable." width="1998" height="1714" data-path="langsmith/images/evaluator-attach-file-dark.png" />
+   ![Create evaluator modal with an audio attachment selected for output variable.](https://mintcdn.com/langchain-5e9cc07a/33Yp30f4EIrgRH-K/langsmith/images/evaluator-attach-file-light.png?fit=max\&auto=format\&n=33Yp30f4EIrgRH-K\&q=85\&s=52a67ecb05d402fd8c93f030b8d5f0f1)
 
 The evaluator can then use these attachments along with the model's outputs to judge quality. For example, you could create an evaluator that:
 
@@ -82,6 +82,7 @@ You can also create text-only evaluators that don't use attachments but evaluate
 * Speech-to-text → transcription quality: Use a voice model to transcribe audio to text, then evaluate the transcription against your reference.
 
 > [!TIP]
+>
 > If your traces contain base64-encoded multimodal content in their inputs or outputs (for example, if you followed the [log multimodal traces](log-multimodal-traces.md) guide), you don't need attachments to evaluate them. Use standard variable mapping—such as `{{input}}` or `{{output}}`—in your evaluator prompt, and the base64 content will be passed correctly to the LLM evaluator for visualization and evaluation.
 
 For more information on defining custom evaluators, see the [LLM as Judge](llm-as-judge.md) guide.
@@ -89,6 +90,7 @@ For more information on defining custom evaluators, see the [LLM as Judge](llm-a
 ## 4. Update examples with attachments
 
 > [!NOTE]
+>
 > Attachments are limited to 20MB in size in the UI.
 
 When editing an example in the UI, you can:
@@ -99,12 +101,13 @@ When editing an example in the UI, you can:
 
 Changes are not saved until you click submit.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/attachment-editing.gif?s=4f165ed98fe81722961778ebbe1691ed" alt="Attachment editing" width="1204" height="720" data-path="langsmith/images/attachment-editing.gif" />
+![Attachment editing](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/attachment-editing.gif?s=4f165ed98fe81722961778ebbe1691ed)
 
-#### SDK
+**SDK**
+
 ## 1. Create examples with attachments
 
-To upload examples with attachments using the SDK, use the [create\_examples](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.create_examples) / [update\_examples](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.update_examples) Python methods or the [uploadExamplesMultipart](https://docs.smith.langchain.com/reference/js/classes/client.Client#uploadexamplesmultipart) / [updateExamplesMultipart](https://docs.smith.langchain.com/reference/js/classes/client.Client#updateexamplesmultipart) TypeScript methods.
+To upload examples with attachments using the SDK, use the [create\_examples](https://reference.langchain.com/python/langsmith/client/Client/create_examples) / [update\_examples](https://reference.langchain.com/python/langsmith/client/Client/update_examples) Python methods or the [uploadExamplesMultipart](https://reference.langchain.com/javascript/langsmith/client/Client/uploadExamplesMultipart) / [updateExamplesMultipart](https://reference.langchain.com/javascript/langsmith/client/Client/updateExamplesMultipart) TypeScript methods.
 
 #### Python
 
@@ -112,7 +115,7 @@ Requires `langsmith>=0.3.13`
 
 ```python
 import requests
-import uuid
+from langsmith import uuid7
 from pathlib import Path
 from langsmith import Client
 
@@ -145,7 +148,7 @@ outputs = {
 }
 
 # Define an example with attachments
-example_id = uuid.uuid4()
+example_id = uuid7()
 example = {
   "id": example_id,
   "inputs": inputs,
@@ -168,6 +171,8 @@ ls_client.create_examples(
 )
 ```
 
+<a id="sdk"></a>
+
 #### TypeScript
 
 Requires version 0.2.13 or later
@@ -183,7 +188,7 @@ Note that you cannot directly pass in a file path in the TypeScript SDK, as acce
 
 ```typescript
 import { Client } from "langsmith";
-import { v4 as uuid4 } from "uuid";
+import { uuid7 } from "langsmith";
 
 // Publicly available test files
 const pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
@@ -208,7 +213,7 @@ const pngArrayBuffer = await fetchArrayBuffer(pngUrl);
 const langsmithClient = new Client();
 
 // Create a unique dataset name
-const datasetName = "attachment-test-dataset:" + uuid4().substring(0, 8);
+const datasetName = "attachment-test-dataset:" + uuid7().substring(0, 8);
 
 // Create the dataset
 const dataset = await langsmithClient.createDataset(datasetName, {
@@ -216,7 +221,7 @@ const dataset = await langsmithClient.createDataset(datasetName, {
 });
 
 // Define the example with attachments
-const exampleId = uuid4();
+const exampleId = uuid7();
 const example = {
   id: exampleId,
   inputs: {
@@ -248,11 +253,14 @@ await langsmithClient.uploadExamplesMultipart(dataset.id, [example]);
 ```
 
 > [!NOTE]
+>
 > Along with being passed in as bytes, attachments can be specified as paths to local files. To do so pass in a path for the attachment `data` value and specify arg `dangerously_allow_filesystem=True`:
 >
-> ```python
+```python
 > client.create_examples(..., dangerously_allow_filesystem=True)
-> ```
+```
+
+<a id="ui"></a>
 
 ## 2. Run evaluations
 
@@ -418,7 +426,9 @@ async function fileQA(inputs: Record<string, any>, config?: Record<string, any>)
 
 ### Define custom evaluators
 
-You can also define a multimodal evaluator in the UI that references these attachment inputs and outputs. UI-based evaluators run automatically on every experiment—including those invoked from the SDK. For instructions, refer to the [**UI**](#ui) tab.
+> [!NOTE]
+>
+> You can also define a multimodal evaluator in the UI that references these attachment inputs and outputs. UI-based evaluators run automatically on every experiment—including those invoked from the SDK. For instructions, refer to the [**UI**](#ui) tab.
 
 The exact same rules apply as above to determine whether the evaluator should receive attachments.
 
@@ -595,8 +605,6 @@ await langsmithClient.updateExamplesMultipart(dataset.id, [exampleUpdate]);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-with-attachments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-with-attachments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

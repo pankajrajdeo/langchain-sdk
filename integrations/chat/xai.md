@@ -11,11 +11,13 @@ tags: [docs, integrations, chat, xai]
 > Integrate with the ChatXAI chat model using LangChain Python.
 
 > [!WARNING]
+>
 > This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](../providers/groq.md).
 
 [xAI](https://console.x.ai/) offers an API to interact with Grok models.
 
 > [!TIP]
+>
 > **API Reference**
 >
 > For detailed documentation of all features and configuration options, head to the [`ChatXAI`](https://reference.langchain.com/python/langchain-xai/chat_models/ChatXAI) API reference.
@@ -24,7 +26,7 @@ tags: [docs, integrations, chat, xai]
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/xai) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/chat/xai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatXAI`](https://reference.langchain.com/python/langchain-xai/chat_models/ChatXAI) | [`langchain-xai`](https://reference.langchain.com/python/langchain-xai/) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-xai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-xai?style=flat-square\&label=%20) |
 
@@ -50,7 +52,7 @@ if "XAI_API_KEY" not in os.environ:
     os.environ["XAI_API_KEY"] = getpass.getpass("Enter your xAI API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -181,6 +183,7 @@ response = model.invoke(
 ```
 
 > [!NOTE]
+>
 > `reasoning_effort` as a standard parameter requires `langchain-xai>=1.3.0`. `ChatXAI` sends it nested under `extra_body.reasoning_effort`.
 
 Check a model's [profile](../../langchain/models.md#model-profiles) for the effort levels it supports:
@@ -197,8 +200,6 @@ For detailed documentation of all `ChatXAI` features and configurations, head to
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

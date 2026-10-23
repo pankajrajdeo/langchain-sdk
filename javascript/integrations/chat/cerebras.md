@@ -26,7 +26,7 @@ This will help you getting started with `ChatCerebras` [chat models](../../langc
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/cerebras) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/cerebras.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatCerebras`](https://reference.langchain.com/javascript/langchain-cerebras/ChatCerebras) | [`@langchain/cerebras`](https://www.npmjs.com/package/@langchain/cerebras) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cerebras?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cerebras?style=flat-square\&label=%20&) |
 
@@ -178,8 +178,6 @@ For detailed documentation of all `ChatCerebras` features and configurations hea
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/cerebras.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/cerebras.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

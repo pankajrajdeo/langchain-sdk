@@ -78,13 +78,14 @@ export OPENAI_API_KEY=sk-XJZ...
 ```
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
 from langchain_community.document_loaders import UnstructuredURLLoader
 from langchain_cratedb import CrateDBVectorStore
 from langchain_openai import OpenAIEmbeddings
-from langchain.text_splitter import CharacterTextSplitter
+from langchain_text_splitters import CharacterTextSplitter
 
 loader = UnstructuredURLLoader(urls=["https://github.com/langchain-ai/langchain/raw/refs/tags/langchain-core==0.3.28/docs/docs/how_to/state_of_the_union.txt"])
 documents = loader.load()
@@ -115,6 +116,7 @@ Load documents from a CrateDB database table, using the document loader
 To use the document loader in your applications:
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -246,8 +248,6 @@ print(answer.content)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cratedb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cratedb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

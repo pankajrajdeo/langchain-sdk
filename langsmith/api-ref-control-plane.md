@@ -29,7 +29,7 @@ The control plane hosts for Cloud data regions:
       <th>Region</th>
 
       <th>
-        {protocol_0 === false ? "Host" : "URL"}
+        URL
       </th>
     </tr>
   </thead>
@@ -39,9 +39,7 @@ The control plane hosts for Cloud data regions:
       <td>GCP US</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://api.host.langchain.com`
       </td>
     </tr>
 
@@ -49,9 +47,7 @@ The control plane hosts for Cloud data regions:
       <td>GCP EU</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://eu.api.host.langchain.com`
       </td>
     </tr>
 
@@ -59,9 +55,7 @@ The control plane hosts for Cloud data regions:
       <td>GCP APAC</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://apac.api.host.langchain.com`
       </td>
     </tr>
 
@@ -69,9 +63,7 @@ The control plane hosts for Cloud data regions:
       <td>AWS US</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://aws.api.host.langchain.com`
       </td>
     </tr>
   </tbody>
@@ -102,6 +94,17 @@ Each endpoint path is prefixed with a version (e.g. `v1`, `v2`).
 2. Call `GET /v2/deployments/{deployment_id}` to retrieve the Deployment. Set `deployment_id` in the URL to the value of Deployment ID (`id`).
 3. Poll for revision `status` until `status` is `DEPLOYED` by calling `GET /v2/deployments/{deployment_id}/revisions/{latest_revision_id}`.
 4. Call `PATCH /v2/deployments/{deployment_id}` to update the deployment.
+
+## Resource spec
+
+The `resource_spec` object sets CPU, memory, and replica counts for a deployment's API servers, queue workers, Redis, and PostgreSQL. The field descriptions in the [Deployments (v2)](../api-reference/deployments-v2.md) reference list each field. The following behaviors apply across fields:
+
+* **`PATCH` replaces the whole object**: A `PATCH` that includes `resource_spec` replaces the stored `resource_spec` and does not merge with it. Fields you leave out fall back to the defaults for the deployment type, not to their previous values. Send the full `resource_spec` on every `PATCH`.
+* **Limits default to 2x the request**: If you set a CPU or memory request and omit its limit, the limit defaults to 2x the request. The Redis memory limit is the exception: `redis_memory_limit_mb` defaults to `redis_memory_mb`. On self-hosted data planes, the CPU limit also sets the [autoscaling target](data-plane.md#autoscaling).
+* **CPU values are rounded to 1 decimal place**: Rounding uses floating-point arithmetic, so some values round down. For example, `0.25` is stored as `0.2`.
+* **Redis memory has its own range**: `redis_memory_mb` and `redis_memory_limit_mb` accept 512 to 16384, in multiples of 128. The API enforces this range in a validator, so it does not appear in the OpenAPI schema.
+
+For self-hosted deployments, the listener in the data plane validates the `resource_spec` again with the rules of its own version. A `PATCH` that returns `200` can still fail at deploy time on an older listener. See [Listener version requirements](self-hosted-platform-features.md#listener-version-requirements).
 
 ## Example Code
 
@@ -310,8 +313,6 @@ if __name__ == "__main__":
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/api-ref-control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/api-ref-control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

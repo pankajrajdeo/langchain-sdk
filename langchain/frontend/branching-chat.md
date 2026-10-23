@@ -16,9 +16,8 @@ conversational path without losing the checkpoint history. Branching chat uses
 LangGraph checkpoints as fork points: every edit or regeneration submits a new
 run from the selected message's parent checkpoint.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/branching-chat).
-
 > [!NOTE]
+>
 > This feature requires the [LangGraph Agent Server](../../langgraph/local-server.md). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](../../langsmith/deployment.md) to use this pattern.
 
 ## What is branching chat?
@@ -41,6 +40,7 @@ the component that renders each message. The metadata includes the parent
 checkpoint ID to fork from.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
 
 **React**
@@ -262,6 +262,7 @@ function handleRegenerate(
 Each regeneration creates a new path for the AI message at that position.
 
 > [!TIP]
+>
 > Regeneration is useful for non-deterministic agents. Since LLM outputs vary
 > with temperature, regenerating the same prompt often produces meaningfully
 > different responses.
@@ -306,8 +307,6 @@ timeline view across checkpoints.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/branching-chat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/branching-chat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

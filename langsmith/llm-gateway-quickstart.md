@@ -6,22 +6,35 @@ category: "docs"
 tags: [docs, langsmith, llm-gateway-quickstart]
 ---
 
+<a id="send-a-request"></a>
+
 # LLM Gateway quickstart
 
 > Call models across providers with one LangSmith API key, then view the trace and set a spend limit.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 The LLM Gateway calls models across configured providers through one endpoint with one [LangSmith API key](create-account-api-key.md). Send a request, view its trace, then set a spend limit.
 
 > [!NOTE]
+>
+> This quickstart uses LangSmith Cloud in the US region: the gateway at `gateway.smith.langchain.com` and the LangSmith UI at `smith.langchain.com`. Setting `LANGSMITH_GATEWAY="true"` in the Deep Agents examples also resolves to the US gateway.
+>
+> * **Other Cloud regions and BYOC**: Replace the gateway hostname in each example with your [regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway) or [BYOC data plane](llm-gateway-how-it-works.md#use-a-byoc-data-plane) base URL. For Deep Agents, set `LANGSMITH_GATEWAY` to that gateway's root URL instead of `true`.
+> * **Self-hosted**: Follow [Enable the LLM Gateway on self-hosted](llm-gateway-self-hosted.md), which includes its own first call.
+
+> [!NOTE]
+>
 > An administrator must [enable the gateway, add a provider secret, and grant access](llm-gateway-admin-setup.md) once for your workspace. After that, you need only a workspace-scoped LangSmith API key attached to a role with the `gateway:invoke` and `workspaces:read` [permissions](organization-workspace-operations.md).
 
-### Send a request
+**1. Send a request**
+
 A gateway call is an ordinary model request pointed at the gateway base URL and authenticated with your LangSmith API key. Use Chat completions to call the gateway from an application you already have, or Deep Agents to build an agent that routes through it.
 
-#### Chat completions
+**Chat completions**
+
 Point any OpenAI-compatible client at `https://gateway.smith.langchain.com/v1` and set `model` to a provider-prefixed ID.
 
 **cURL**
@@ -71,7 +84,8 @@ console.log(response.choices[0].message.content);
 
 The same endpoint also accepts Anthropic Messages and OpenAI Responses requests. See [API formats](llm-gateway-api-formats.md).
 
-#### Deep Agents
+**Deep Agents**
+
 Set `LANGSMITH_GATEWAY` to route every supported chat model in the process through the gateway.
 
 **Python**
@@ -104,19 +118,19 @@ console.log(result.messages[result.messages.length - 1].content);
 
 To route specific calls rather than all calls, use the standard endpoint in the Chat completions tab and set `model` to a provider-prefixed ID.
 
-### View the trace
+**2. View the trace**
+
 Open [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-quickstart) and go to the tracing project named `gateway` in your workspace. Your request appears there with its token counts, cost, and latency.
 
-### Set a spend limit
+**3. Set a spend limit**
+
 Go to **LLM Gateway** in LangSmith and create a spend policy, such as a daily \$10 cap on your API key. Once the cap is reached, the gateway returns a `402` with a message naming the policy that blocked the request:
 
 ```json
-{"error": "Request blocked by gateway policies: R&D Spend Cap"}
+{"type": "error", "error": {"message": "request blocked by gateway policies: R&D Spend Cap"}}
 ```
 
 For the full guide, see [Spend policies](llm-gateway-spend-policies.md).
-
-These examples use the US gateway. For the EU, APAC, and AWS hostnames, see [Use a regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway). For BYOC, see [Use a BYOC data plane](llm-gateway-how-it-works.md#use-a-byoc-data-plane).
 
 ## Next steps
 
@@ -130,8 +144,6 @@ These examples use the US gateway. For the EU, APAC, and AWS hostnames, see [Use
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

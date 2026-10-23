@@ -14,6 +14,10 @@ tags: [reference, deepagents, middleware, filesystem, filesystempermission]
 
 A single access rule for filesystem operations.
 
+With `FilesystemBackend` (directly or behind a `CompositeBackend` route),
+rules are matched against both the requested path and its symlink-resolved
+target; a deny on either blocks the call.
+
 ## Signature
 
 ```python
@@ -50,4 +54,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/filesystem.py#L365)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/filesystem.py#L366)

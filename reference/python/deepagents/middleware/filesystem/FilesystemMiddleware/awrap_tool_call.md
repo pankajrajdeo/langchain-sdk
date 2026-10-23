@@ -1,6 +1,6 @@
 ---
 title: "awrap_tool_call"
-description: "(async) Check the size of the tool call result and evict to filesystem if too large."
+description: "(async) Provide on-demand media access and evict oversized tool results."
 source: "https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware/awrap_tool_call"
 category: "reference"
 tags: [reference, deepagents, middleware, filesystem, filesystemmiddleware, awrap_tool_call]
@@ -12,7 +12,7 @@ tags: [reference, deepagents, middleware, filesystem, filesystemmiddleware, awra
 
 📖 [View in docs](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware/awrap_tool_call)
 
-(async) Check the size of the tool call result and evict to filesystem if too large.
+(async) Provide on-demand media access and evict oversized tool results.
 
 ## Signature
 
@@ -46,4 +46,4 @@ The raw `ToolMessage`, or a pseudo tool message with the `ToolResult` in state.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/filesystem.py#L3712)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/filesystem.py#L3852)

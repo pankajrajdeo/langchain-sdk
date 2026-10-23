@@ -20,7 +20,7 @@ But how should you change the harness to improve your agent?
 
 At LangChain, we use [Traces](../langsmith/observability-quickstart.md) to understand agent failure modes at scale. Models today are largely black-boxes, their inner mechanisms are hard to interpret. But we can see their inputs and outputs in text space which we then use in our improvement loops.
 
-We used a simple recipe to iteratively improve [deepagents-cli](https://github.com/langchain-ai/deepagents/tree/main/libs/cli?ref=blog.langchain.com) (our coding agent) `13.7 points` from `52.8` to `66.5` on Terminal Bench 2.0. We only tweaked the harness and kept the model fixed, `gpt-5.2-codex`.
+We used a simple recipe to iteratively improve [deepagents-cli](https://github.com/langchain-ai/deepagents/tree/main/libs/code) (our coding agent) `13.7 points` from `52.8` to `66.5` on Terminal Bench 2.0. We only tweaked the harness and kept the model fixed, `gpt-5.2-codex`.
 
 ![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9e8e691fa7cd1fac872_Screenshot-2026-02-12-at-12.25.20---PM.png)
 

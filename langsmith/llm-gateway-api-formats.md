@@ -11,9 +11,10 @@ tags: [docs, langsmith, llm-gateway-api-formats]
 > Use OpenAI Chat Completions, Anthropic Messages, or OpenAI Responses requests to call models across providers through the LLM Gateway.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
-The standard LLM Gateway API supports three request and response formats. Choose the format your application already uses, then call bring-your-own-key or Gateway Credits models through the same endpoint.
+The standard LLM Gateway API supports three request and response formats. Choose the format your application already uses, then call bring-your-own-key (BYOK) or Gateway Credits models through the same endpoint.
 
 ## Compare API formats
 
@@ -25,9 +26,9 @@ The standard LLM Gateway API supports three request and response formats. Choose
 
 All formats authenticate with a workspace-scoped LangSmith API key. Pass it as the provider API key or as an `Authorization: Bearer` token.
 
-These base URLs are for the US gateway on LangSmith Cloud. For other regions and for BYOC data planes, see [Check availability](llm-gateway-how-it-works.md#check-availability).
+These base URLs are for the US gateway on LangSmith Cloud. For other regions, BYOC data planes, and self-hosted installations, see [Check availability](llm-gateway-how-it-works.md#check-availability).
 
-For bring-your-own-key models, set `model` to `<provider>/<model>`, such as `openai/gpt-5.4-mini`, `anthropic/claude-opus-5`, or `azure/<deployment-name>`. For Gateway Credits models, pass a supported model name, such as `moonshotai/kimi-k3`.
+For BYOK models, set `model` to `<provider>/<model>`, such as `openai/gpt-5.4-mini`, `anthropic/claude-opus-5`, or `azure/<deployment-name>`. For Gateway Credits models, pass a supported model name, such as `moonshotai/kimi-k3`. For a saved [model configuration](llm-gateway-model-configurations.md), use `custom/<name>`.
 
 ## Use Chat Completions
 
@@ -173,6 +174,7 @@ OpenAI models (Chat Completions and Responses) support implicit prompt caching a
 Anthropic models and some older OpenAI models require explicit opt-in to prompt caching. Pass provider-specific fields in your request body when calling these models through any standard gateway endpoint.
 
 > [!NOTE]
+>
 > Explicit caching support is a temporary measure while a gateway-level caching policy is being developed. The following fields are passed through to the upstream provider.
 
 ### Anthropic models
@@ -305,7 +307,9 @@ curl https://gateway.smith.langchain.com/v1/models \
 }
 ```
 
-Bring-your-own-key model IDs use the form `<provider>/<model>`. Hosted models use the slug shown in the response. Pass either ID exactly as shown when making a call. A bring-your-own-key provider without a configured secret is omitted; hosted models do not require a provider secret.
+BYOK model IDs use the form `<provider>/<model>`. Hosted models use the slug shown in the response. Pass either ID exactly as shown when making a call. A BYOK provider without a configured secret is omitted; hosted models do not require a provider secret.
+
+Saved model configurations do not appear in this list.
 
 ## Handle errors
 
@@ -328,8 +332,6 @@ For setup-specific resolutions, see the [Quickstart](llm-gateway-quickstart.md).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-api-formats.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-api-formats.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

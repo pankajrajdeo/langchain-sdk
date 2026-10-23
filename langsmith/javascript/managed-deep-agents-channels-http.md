@@ -15,16 +15,16 @@ An HTTP channel turns a managed deep agent into an HTTP endpoint that any extern
 You supply two callbacks: one that authenticates the request, and one that converts it into a message, naming the caller and the conversation it belongs to. Managed Deep Agents owns the trusted handoff, the agent run, and the reply. For the provider-managed alternative, see [Slack](managed-deep-agents-channels-slack.md).
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 > [!NOTE]
+>
 > HTTP channels require `managed-deepagents>=0.8.0`.
 
 `verify`, `parse`, and the optional `post` sit between the external service and the agent run:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/wGNSNd-dDeMyJxte/langsmith/images/http-channel-flow-light.png?fit=max&auto=format&n=wGNSNd-dDeMyJxte&q=85&s=fe9d50b87d5630b839dd1513ab508017" alt="Three-row flow diagram. In the external service row, an inbound event arrives as a provider webhook, and a reply is delivered to the user by the provider. In your code row, verify checks the signature, parse extracts content and a thread ID and returns a message, and post sends the reply to the target. In the Managed Deep Agents row, the agent run executes on the thread and hands its response to post." width="1920" height="1080" data-path="langsmith/images/http-channel-flow-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/wGNSNd-dDeMyJxte/langsmith/images/http-channel-flow-dark.png?fit=max&auto=format&n=wGNSNd-dDeMyJxte&q=85&s=a48031921bdc9c703d9f5e809b64387d" alt="Three-row flow diagram. In the external service row, an inbound event arrives as a provider webhook, and a reply is delivered to the user by the provider. In your code row, verify checks the signature, parse extracts content and a thread ID and returns a message, and post sends the reply to the target. In the Managed Deep Agents row, the agent run executes on the thread and hands its response to post." width="1920" height="1080" data-path="langsmith/images/http-channel-flow-dark.png" />
+![Three-row flow diagram. In the external service row, an inbound event arrives as a provider webhook, and a reply is delivered to the user by the provider. In your code row, verify checks the signature, parse extracts content and a thread ID and returns a message, and post sends the reply to the target. In the Managed Deep Agents row, the agent run executes on the thread and hands its response to post.](https://mintcdn.com/langchain-5e9cc07a/wGNSNd-dDeMyJxte/langsmith/images/http-channel-flow-light.png?fit=max\&auto=format\&n=wGNSNd-dDeMyJxte\&q=85\&s=fe9d50b87d5630b839dd1513ab508017)
 
 ## Project structure
 
@@ -41,7 +41,8 @@ The file name becomes the channel name and the endpoint path. A project can decl
 
 ## Add an HTTP channel
 
-### Declare the channel
+**1. Declare the channel**
+
 **channels/orders.ts**
 
 ```ts
@@ -62,7 +63,8 @@ Share one provider across channels that serve the same service. Two Shopify chan
 
 Declaring the channel registers the provider, so any non-empty name works.
 
-### Verify the request
+**2. Verify the request**
+
 Managed Deep Agents calls `verify` first. Return `true` to continue to `parse`, or `false` to reject the request with `401`. `verify` may return a promise.
 
 `verify` receives an `HttpChannelRequest` with a `request` and the original `rawBody` bytes. Check a signature against the bytes, not against a re-serialized body:
@@ -87,13 +89,15 @@ export function verify({ request, rawBody }: HttpChannelRequest): boolean {
 ```
 
 > [!WARNING]
+>
 > The endpoint has no platform authentication. Channel event routes authenticate inside the adapter, not through Managed Deep Agents ingress. That makes `verify` the only thing standing between the public internet and an agent run. Always check a signature or a shared secret, and never accept a request unconditionally.
 
 Use a [deployment secret](managed-deep-agents-deploy.md) for the signing key. A `verify` callback that raises rejects the request with `500`.
 
 Resolve channel credentials from the environment, not with `connections.get`, which requires a run. For credentials the agent's tools use during a run, see [Manage connections](managed-deep-agents-connections.md).
 
-### Parse the request into a message
+**3. Parse the request into a message**
+
 `parse` converts a verified request into a message that starts a run, or ignores the event. It receives the same `HttpChannelRequest` as `verify`, so request headers are available here too, and it may be asynchronous. Return one of two shapes:
 
 * `{ type: "message", message: {...} }` starts a run.
@@ -109,6 +113,7 @@ The message carries four required fields:
 * **`content`**: The message text, or an array of LangChain content blocks.
 
 > [!WARNING]
+>
 > `threadId` must be a UUID. Managed Deep Agents rejects any other value with `400`, so map an external conversation ID to a UUID before returning it.
 
 Add `parse` to the `lib/orders` file that contains `verify`. Combine the imports from both examples at the top of the file, keeping only one import of `HttpChannelRequest`:
@@ -173,7 +178,8 @@ return {
 };
 ```
 
-### Send replies with post
+**4. Send replies with post**
+
 Add an async `post` callback to deliver the agent's final response to the external service. Omit it for a channel that only starts runs.
 
 `post` receives one input with the verified `target` and a message. Automatic replies use `type: "content"` with a `content` field. Explicit native messages use `type: "native"` with a `native` field. Return the posted message `id` and an optional `url`.
@@ -244,19 +250,11 @@ A `202` means the run was accepted, not that it finished. The agent's answer arr
 
 ## Read the event in the agent
 
-Each run carries channel data in [run context](managed-deep-agents-middleware.md#use-runtime-context). The parser examples explicitly include the provider event. These fields appear inside the channel context:
+Tools and middleware read the delivery from [`runtime.channel`](managed-deep-agents-runtime.md#channel). For the parser examples, `runtime.channel.provider` is `"orders"`.
 
-```json
-{
-  "channel": {
-    "provider": "orders",
-    "target": "A-1024",
-    "rawEvent": { "type": "order.comment", "order": { "id": "A-1024" } }
-  }
-}
-```
+Return `rawEvent` from `parse` to expose JSON provider data at `runtime.channel.rawEvent`. If omitted, `runtime.channel.rawEvent` is `undefined`.
 
-Return `rawEvent` from `parse` to expose JSON provider data at `runtime.channel.rawEvent` and `runtime.context.channel.rawEvent`. If omitted, this field stays absent.
+The reply `target` stays private. Code cannot read it from `runtime.channel`.
 
 Managed Deep Agents builds `runtime.channel.event` from the parsed message. It does not decode the body again or preserve the provider event automatically.
 
@@ -284,6 +282,63 @@ bunx mda deploy
 
 Put the signing key and any reply credentials in the project `.env` so `mda deploy` forwards them as deployment secrets. Then register `https://<deployment-url>/channels/<name>/events` with the external service as its webhook target.
 
+## Share a channel adapter as a package
+
+A reusable channel adapter is a package that creates an HTTP channel. Publish the provider-specific code separately so other projects can install it without copying callbacks or changing the Managed Deep Agents SDK.
+
+The package owns request verification, event parsing, and optional reply delivery. Managed Deep Agents still owns the agent run and trusted handoff.
+
+### Package the adapter
+
+To package the orders adapter from this guide, move `verify`, `parse`, `post`, and their helpers into the package. Keep secrets in environment variables, not in the published source. Export a factory that returns the HTTP channel declaration:
+
+Declare `managed-deepagents` as a `peerDependencies` entry in `package.json` so the application supplies the SDK. Import only from the public `managed-deepagents` entry point. The factory returns `HttpChannel`. Use `HttpChannelAdapter` and the request, parse-result, and post-input types when typing `verify`, `parse`, and `post`.
+
+Put the callbacks in `src/orders.ts` and export the factory from your package entry point:
+
+**src/index.ts**
+
+```ts
+import { channels, type HttpChannel } from "managed-deepagents";
+
+import { parse, post, verify } from "./orders.js";
+
+export function ordersChannel(): HttpChannel {
+  return channels.http({
+    provider: "orders",
+    verify,
+    parse,
+    post,
+  });
+}
+```
+
+Publish compiled JavaScript and TypeScript declarations, and point the package entry points at those files. Do not bundle a separate copy of `managed-deepagents` into the adapter.
+
+Declare the supported `managed-deepagents` versions in your package metadata. Test against those versions before publishing.
+
+### Use the package in a project
+
+`mda-orders` is an example package name, not a published integration. To install it as an application dependency and declare a channel under `channels/`:
+
+**channels/orders.ts**
+
+```ts
+import { ordersChannel } from "mda-orders";
+
+export const channel = ordersChannel();
+```
+
+The channel file name, `channels/orders.ts`, determines the endpoint: `/channels/orders/events`.
+
+Keep the `provider` value, `"orders"`, stable across releases because it namespaces caller identities.
+
+### Before you publish
+
+Test valid and invalid signatures, ignored events, conversation-to-thread mapping, and reply delivery. Document required environment variables, supported event types, and any provider limitations. Publishing an adapter does not add managed provider provisioning. Document how to create the provider app, configure credentials, and register the webhook.
+
+For deployment secrets and webhook registration, see [Deploy the agent](#deploy-the-agent).
+
 ## See also
 
 * [Channels overview](managed-deep-agents-channels.md): understand how channels connect messaging services to an agent.
@@ -293,8 +348,6 @@ Put the signing key and any reply credentials in the project `.env` so `mda depl
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels-http.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels-http.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

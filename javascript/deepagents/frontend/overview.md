@@ -20,6 +20,7 @@ coordinator, subagent discovery, custom state, and sandbox-backed artifacts so
 users can inspect how a long-running task is being decomposed and completed.
 
 > [!NOTE]
+>
 > These patterns use the v1 frontend SDK packages. If you are using earlier versions, see the migration guides for [React](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-react/docs/v1-migration.md), [Vue](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-vue/docs/v1-migration.md), [Svelte](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-svelte/docs/v1-migration.md), and [Angular](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-angular/docs/v1-migration.md).
 
 ## Architecture
@@ -111,14 +112,17 @@ workflow monitor than a plain chat transcript.
 
 ## Patterns
 
-#### [Subagent streaming](subagent-streaming.md)
-Display specialist subagents with streaming content, progress tracking, and collapsible cards.
+> **[Subagent streaming](subagent-streaming.md)**
+>
+> Display specialist subagents with streaming content, progress tracking, and collapsible cards.
 
-#### [Todo list](todo-list.md)
-Track progress with a real-time todo list when the agent opts into task planning.
+> **[Todo list](todo-list.md)**
+>
+> Track progress with a real-time todo list when the agent opts into task planning.
 
-#### [Sandbox](sandbox.md)
-Build an IDE-like UI with a file browser, code viewer, and diff panel backed by a sandbox.
+> **[Sandbox](sandbox.md)**
+>
+> Build an IDE-like UI with a file browser, code viewer, and diff panel backed by a sandbox.
 
 ## Related patterns
 
@@ -133,8 +137,6 @@ to map graph nodes and state keys directly to UI components.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

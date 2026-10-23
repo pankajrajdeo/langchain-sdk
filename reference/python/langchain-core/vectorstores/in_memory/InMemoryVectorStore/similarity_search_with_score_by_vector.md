@@ -22,7 +22,7 @@ similarity_search_with_score_by_vector(
     embedding: list[float],
     k: int = 4,
     filter: Callable[[Document], bool] | None = None,
-    **_kwargs: Any = {},
+    _kwargs: Any = {},
 ) -> list[tuple[Document, float]]
 ```
 
@@ -42,4 +42,4 @@ A list of tuples of `Document` objects and their similarity scores.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/vectorstores/in_memory.py#L334)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/vectorstores/in_memory.py#L334)

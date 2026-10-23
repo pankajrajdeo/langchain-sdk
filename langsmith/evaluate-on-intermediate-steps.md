@@ -195,7 +195,7 @@ const ragPipeline = traceable(
 );
 ```
 
-This pipeline will produce a trace that looks something like: <img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/evaluation-intermediate-trace.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=3b691ca56f9d60035dcba2c248692fa1" alt="evaluation_intermediate_trace.png" width="2586" height="1676" data-path="langsmith/images/evaluation-intermediate-trace.png" />
+This pipeline will produce a trace that looks something like: ![evaluation\_intermediate\_trace.png](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/evaluation-intermediate-trace.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=3b691ca56f9d60035dcba2c248692fa1)
 
 ## 2. Create a dataset and examples to evaluate the pipeline
 
@@ -426,7 +426,7 @@ await evaluate((inputs) => ragPipeline({ question: inputs.input }), {
 });
 ```
 
-The experiment will contain the results of the evaluation, including the scores and comments from the evaluators: <img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/evaluation-intermediate-experiment.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=e926744573c6b9757ba22ff245a3da2c" alt="evaluation_intermediate_experiment.png" width="2446" height="1244" data-path="langsmith/images/evaluation-intermediate-experiment.png" />
+The experiment will contain the results of the evaluation, including the scores and comments from the evaluators: ![evaluation\_intermediate\_experiment.png](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/evaluation-intermediate-experiment.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=e926744573c6b9757ba22ff245a3da2c)
 
 ## Related
 
@@ -434,8 +434,6 @@ The experiment will contain the results of the evaluation, including the scores 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-on-intermediate-steps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-on-intermediate-steps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

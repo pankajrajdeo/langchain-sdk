@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, llms, fireworks]
 > Integrate with the Fireworks LLM using LangChain JavaScript.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of Fireworks models as text completion models. Many popular models available on Fireworks are [chat completion models](../../langchain/models.md).**
 >
 > You may be looking for [this page instead](../chat/fireworks.md).
@@ -23,7 +24,7 @@ This will help you get started with Fireworks completion models (LLMs) using Lan
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/fireworks) | Downloads | Version |
+| Class | Package | Local | Serializable | PY support | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`Fireworks`](https://reference.langchain.com/javascript/langchain-fireworks/Fireworks) | [`@langchain/fireworks`](https://www.npmjs.com/package/@langchain/fireworks) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/fireworks?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/fireworks?style=flat-square\&label=%20&) |
 
@@ -122,8 +123,6 @@ For detailed documentation of all Fireworks features and configurations head to 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langgraph/errors"
-description: "Index of 14 pages and 6 subdirectories under reference/python/langgraph/errors."
+description: "Index of 15 pages and 6 subdirectories under reference/python/langgraph/errors."
 category: "index"
 tags: [index, reference, python, langgraph, errors]
 ---
 
 # reference/python/langgraph/errors
 
-14 pages here, 30 pages including subdirectories.
+15 pages here, 31 pages including subdirectories.
 
 ## Directories
 
@@ -34,3 +34,4 @@ tags: [index, reference, python, langgraph, errors]
 - [ParentCommand](ParentCommand.md) - - GraphBubbleUp
 - [TaskNotFound](TaskNotFound.md) - Raised when the executor is unable to find a task (for distributed mode).
 - [create_error_message](create_error_message.md) - View source on GitHub
+- [is_invalid_resume](is_invalid_resume.md) - Whether error was raised because a resume value didn't match response_schema.

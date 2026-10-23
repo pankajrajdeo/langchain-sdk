@@ -70,7 +70,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OAuthProviderCreateRequest'
+              oneOf:
+                - $ref: '#/components/schemas/AuthorizationCodeProviderCreateRequest'
+                - $ref: '#/components/schemas/ClientCredentialsProviderCreateRequest'
+              title: Request Data
         required: true
       responses:
         '200':
@@ -91,7 +94,7 @@ paths:
         - Bearer Auth: []
 components:
   schemas:
-    OAuthProviderCreateRequest:
+    AuthorizationCodeProviderCreateRequest:
       properties:
         provider_id:
           type: string
@@ -102,6 +105,14 @@ components:
         client_id:
           type: string
           title: Client Id
+        token_url:
+          type: string
+          title: Token Url
+        grant_type:
+          type: string
+          const: authorization_code
+          title: Grant Type
+          default: authorization_code
         client_secret:
           anyOf:
             - type: string
@@ -109,10 +120,8 @@ components:
           title: Client Secret
         auth_url:
           type: string
+          minLength: 1
           title: Auth Url
-        token_url:
-          type: string
-          title: Token Url
         uses_pkce:
           type: boolean
           title: Uses Pkce
@@ -159,10 +168,65 @@ components:
         - provider_id
         - name
         - client_id
-        - auth_url
         - token_url
-      title: OAuthProviderCreateRequest
-      description: Request model for creating OAuth provider manually.
+        - auth_url
+      title: AuthorizationCodeProviderCreateRequest
+      description: >-
+        Create an authorization_code provider (the default when grant_type is
+        omitted).
+    ClientCredentialsProviderCreateRequest:
+      properties:
+        provider_id:
+          type: string
+          title: Provider Id
+        name:
+          type: string
+          title: Name
+        client_id:
+          type: string
+          title: Client Id
+        token_url:
+          type: string
+          title: Token Url
+        grant_type:
+          type: string
+          const: client_credentials
+          title: Grant Type
+        client_secret:
+          type: string
+          minLength: 1
+          title: Client Secret
+        token_endpoint_auth_method:
+          type: string
+          enum:
+            - client_secret_basic
+            - client_secret_post
+          title: Token Endpoint Auth Method
+          default: client_secret_post
+        scopes:
+          items:
+            type: string
+          type: array
+          title: Scopes
+        token_params:
+          $ref: '#/components/schemas/ClientCredentialsTokenParams-Input'
+      additionalProperties: false
+      type: object
+      required:
+        - provider_id
+        - name
+        - client_id
+        - token_url
+        - grant_type
+        - client_secret
+      title: ClientCredentialsProviderCreateRequest
+      description: >-
+        Create a client_credentials provider.
+
+        Unknown fields are rejected so authorization-code settings (auth_url,
+        PKCE,
+
+        redirect URIs) fail loudly instead of being silently dropped.
     OAuthProviderResponse:
       properties:
         id:
@@ -181,11 +245,23 @@ components:
           type: string
           title: Client Id
         auth_url:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           title: Auth Url
         token_url:
           type: string
           title: Token Url
+        grant_type:
+          $ref: '#/components/schemas/OAuthGrantType'
+          default: authorization_code
+        scopes:
+          items:
+            type: string
+          type: array
+          title: Scopes
+        token_params:
+          $ref: '#/components/schemas/ClientCredentialsTokenParams-Output'
         uses_pkce:
           type: boolean
           title: Uses Pkce
@@ -242,7 +318,6 @@ components:
         - provider_id
         - name
         - client_id
-        - auth_url
         - token_url
         - uses_pkce
         - code_challenge_method
@@ -259,6 +334,53 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ClientCredentialsTokenParams-Input:
+      properties:
+        audience:
+          anyOf:
+            - type: string
+              maxLength: 1000
+              minLength: 1
+            - type: 'null'
+          title: Audience
+        resource:
+          anyOf:
+            - type: string
+            - items:
+                type: string
+              type: array
+              maxItems: 10
+          title: Resource
+      additionalProperties: false
+      type: object
+      title: ClientCredentialsTokenParams
+      description: Optional extra fields for a client_credentials token request.
+    OAuthGrantType:
+      type: string
+      enum:
+        - authorization_code
+        - client_credentials
+      title: OAuthGrantType
+      description: OAuth 2 grant a provider uses to obtain access tokens.
+    ClientCredentialsTokenParams-Output:
+      properties:
+        audience:
+          anyOf:
+            - type: string
+              maxLength: 1000
+              minLength: 1
+            - type: 'null'
+          title: Audience
+        resource:
+          items:
+            type: string
+          type: array
+          maxItems: 10
+          title: Resource
+      additionalProperties: false
+      type: object
+      title: ClientCredentialsTokenParams
+      description: Optional extra fields for a client_credentials token request.
     ValidationError:
       properties:
         loc:

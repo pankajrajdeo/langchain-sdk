@@ -26,13 +26,14 @@ All [`BaseStores`](https://reference.langchain.com/javascript/langchain-core/sto
 The generic nature of the interface allows you to use different types for keys and values. For example, `BaseStore<string, BaseMessage>` would store messages with string keys, while `BaseStore<string, number[]>` would store arrays of numbers.
 
 > [!NOTE]
+>
 > Base stores are designed to work with **multiple** key-value pairs at once for efficiency. This saves on network round-trips and may allow for more efficient batch operations in the underlying store.
 
 ## Built-in stores for local development
 
-#### [InMemoryStore](in_memory.md)
+> **[InMemoryStore](in_memory.md)**
 
-#### [LocalFileStore](file_system.md)
+> **[LocalFileStore](file_system.md)**
 
 ## Custom stores
 
@@ -42,14 +43,12 @@ You can also implement your own custom store by extending the [`BaseStore`](http
 
 | Integration | Downloads |
 | :- | :- |
-| [`AlBuddyMemoryStore`](https://github.com/flytomoon/al-buddy-memory/blob/main/docs/integrations/langchain.md) | <span data-sort-value="2091"><a href="https://www.npmjs.com/package/al-buddy-memory" target="_blank">  <img src="https://img.shields.io/npm/dm/al-buddy-memory?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`InMemoryStore`](in_memory.md) | <span data-sort-value="-1">N/A</span> |
-| [`LocalFileStore`](file_system.md) | <span data-sort-value="-1">N/A</span> |
+| [`AlBuddyMemoryStore`](https://github.com/flytomoon/al-buddy-memory/blob/main/docs/integrations/langchain.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/al-buddy-memory?style=flat-square\&label=%20&)](https://www.npmjs.com/package/al-buddy-memory) |
+| [`InMemoryStore`](in_memory.md) | N/A |
+| [`LocalFileStore`](file_system.md) | N/A |
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/stores/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/stores/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

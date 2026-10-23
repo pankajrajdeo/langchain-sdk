@@ -43,7 +43,7 @@ and is also an extensible framework for LLM evaluation.
 Create the feedback functions:
 
 ```python
-from trulens_eval.feedback import Feedback, Huggingface,
+from trulens_eval.feedback import Feedback, Huggingface, OpenAI
 
 # Initialize HuggingFace-based feedback function collection class:
 hugs = Huggingface()
@@ -100,8 +100,6 @@ For more information on TruLens, visit [trulens.org](https://www.trulens.org/)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/trulens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/trulens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

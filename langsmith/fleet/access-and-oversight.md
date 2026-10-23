@@ -14,6 +14,38 @@ Fleet gives you the control layer for scaling agents across your organization: t
 
 ## Permissions and sharing
 
+Fleet combines workspace role permissions with agent sharing. Your role determines which actions you can perform. Agent ownership and sharing determine which agents you can access.
+
+> [!NOTE]
+>
+> Custom roles are an Enterprise feature. The permissions below apply when Fleet RBAC is enabled for your workspace. For self-hosted v0.17, Fleet RBAC requires LangSmith 0.17.44 or a later v0.17 patch and the [deployment flag](#enable-fleet-rbac-on-self-hosted).
+
+### Configure a Fleet role
+
+To let users use and manage Fleet, create a [custom workspace role](../rbac.md#custom-roles) with these permissions:
+
+| Area | Permissions | Needed for |
+| - | - | - |
+| Workspace | `workspaces:read` | Access the workspace. |
+| Agents | `fleet-agents:read` `fleet-agents:invoke` `fleet-agents:create` `fleet-agents:update` `fleet-agents:delete` | View, run, create, edit, clone, and delete agents. Manage agent connections. |
+| Skills | `fleet-skills:read` `fleet-skills:create` `fleet-skills:update` `fleet-skills:delete` | Browse, create, edit, and delete workspace skills. |
+| MCP servers | `mcp-servers:read` `mcp-servers:invoke` `mcp-servers:create` `mcp-servers:update` `mcp-servers:delete` | Use tools and install, update, or remove workspace integrations. |
+| Deployments | `deployments:read` `deployments:create` `deployments:update` `deployments:delete` | Configure OAuth providers and manage connected accounts through the current Fleet UI. |
+
+Grant each permission explicitly. Create, update, delete, and invoke permissions do not include read permission. Existing agent and skill ownership and sharing checks still apply.
+
+The `deployments:*` permissions also grant access to deployment resources outside Fleet.
+
+### Optional administration permissions
+
+* **View Fleet usage and limits**: Add `fleet:read-admin-config` to view usage reports and usage limits.
+* **Manage Fleet limits**: Add `fleet:write-admin-config` to create, update, and delete usage limits. Grant both Fleet admin permissions to view and manage limits.
+* **Manage workspace settings**: Add `workspaces:manage` for workspace settings, integration access controls, and OAuth provider management in **Settings**.
+
+For more information, see [Workspace administration](workspace-admin.md).
+
+### Share agents
+
 Fleet provides granular control over every agent in two dimensions: **who gets access** and **what they can do**.
 
 * **Who**: Share with individual users or your entire workspace.
@@ -25,6 +57,32 @@ Fleet provides granular control over every agent in two dimensions: **who gets a
 You can layer these permissions. Give a core team edit access, share run-only with the broader organization, and revoke at any time.
 
 For setup instructions, see [Change access to the agent](manage-agent-settings.md#change-access-to-the-agent).
+
+### Enable Fleet RBAC on self-hosted
+
+Fully self-hosted LangSmith installations enable Fleet role-based access control (RBAC) with a deployment flag. Cloud and hybrid (BYOC) deployments do not need this step.
+
+> [!NOTE]
+>
+> Fleet RBAC on self-hosted requires LangSmith 0.17.44 or a later v0.17 patch.
+
+To enable Fleet RBAC:
+
+1. Upgrade all services to the required LangSmith version.
+2. Create or update [custom roles](#configure-a-fleet-role) with Fleet permissions, and assign them to users. The upgrade does not add Fleet permissions to existing roles.
+3. Add the flag to your Helm values, preserving existing `extraEnv` entries:
+
+```yaml
+   platformBackend:
+     deployment:
+       extraEnv:
+         - name: FLEET_RBAC_PERMISSIONS_ENABLED
+           value: "true"
+```
+
+   The flag defaults to `false`. Setting it to `true` enables Fleet RBAC across all workspaces in the deployment.
+4. Apply the values through your normal Helm upgrade process.
+5. Call `GET /v1/fleet/config` with your API key and workspace ID. Confirm that the response contains `"rbac_permissions_enabled": true`.
 
 ## Agent identity and credentials
 
@@ -46,6 +104,7 @@ Fleet provides layered access control for tools, covering both **custom MCP serv
 * **[Workspace integration policy](#workspace-integration-policy)**: Provides an admin-controlled enable/disable gate for built-in integrations.
 
 > [!NOTE]
+>
 > Tool access control is an Enterprise feature. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales).
 
 ### Role-based permissions
@@ -57,25 +116,29 @@ The following permissions are available for MCP servers and integrations:
 | Permission | Description |
 | - | - |
 | `mcp-servers:read` | Discover and list MCP servers and integrations |
-| `mcp-servers:invoke` | Execute tools from MCP servers and integrations, including OAuth connect/disconnect |
+| `mcp-servers:invoke` | Execute tools from MCP servers and integrations |
 | `mcp-servers:create` | Create new MCP server configurations |
 | `mcp-servers:update` | Modify MCP server configurations |
 | `mcp-servers:delete` | Remove MCP server configurations |
 
 > [!NOTE]
+>
 > A role with `mcp-servers:read` and `mcp-servers:invoke` can see and use all MCP servers and integrations in the workspace.
 
 For more on RBAC, see [Role-based access control](../rbac.md).
 
 #### Create a role with tool permissions
 
-### Open role settings
+**1. Open role settings**
+
 Navigate to **Settings > Roles** and click **Create role**.
 
-### Configure MCP Servers permissions
+**2. Configure MCP Servers permissions**
+
 Expand the **MCP Servers** section and select the permissions to include. For example, grant `Read` and `Invoke` for users who need to use tools but not manage server configurations.
 
-### Assign the role
+**3. Assign the role**
+
 Assign the role to users in the workspace in **Settings > Members**.
 
 ### Attribute-based access control
@@ -90,6 +153,7 @@ ABAC operates on two resource types for tools:
 | `fleet_integration` | Built-in integrations (Gmail, Slack, GitHub, etc.) |
 
 > [!NOTE]
+>
 > A role with no `mcp-servers:*` RBAC permissions can still be granted access to specific tagged resources (e.g. only Notion and Gmail) via an ABAC allow policy. Conversely, a role with broad RBAC access can be restricted from specific resources via an ABAC deny policy.
 
 For details on policy structure, operators, and managing policies via the API, see [Attribute-based access control](../abac.md).
@@ -101,6 +165,7 @@ Built-in integrations have an additional control layer: a workspace-level enable
 If an integration is disabled at the workspace level, no user can access it regardless of their role or ABAC policies.
 
 > [!NOTE]
+>
 > The Access control page is only visible to admin users (requires `workspaces:manage` permission).
 
 ### Policy evaluation order
@@ -140,8 +205,6 @@ For setup instructions, see [Human-in-the-loop](essentials.md#human-in-the-loop)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/access-and-oversight.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/access-and-oversight.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

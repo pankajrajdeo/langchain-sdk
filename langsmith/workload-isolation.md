@@ -10,7 +10,7 @@ tags: [docs, langsmith, workload-isolation]
 
 LangSmith uses a hierarchical structure to organize your work: [*organizations*](administration-overview.md#organizations), [*workspaces*](administration-overview.md#workspaces), [*agents or applications*](administration-overview.md#agents-and-applications), and [*resources*](administration-overview.md#resources). This structure lets you balance collaboration with access control, allowing you to choose the right level of isolation for your team's needs.
 
-What the grouping level is called depends on which information architecture your workspace uses, and the control at the top left tells you which one you are on. An agent-based workspace groups resources by [agent](agents.md), and each agent's traces divide across [environments](agent-environments.md) drawn from a fixed set of four. A project-based workspace groups them by application instead, with no environment tier, so environments are approximated with separate tracing projects. Agent-based organization is in [beta](release-stages.md). The models below apply to both, and the differences are called out where they matter.
+What the grouping level is called depends on which information architecture your workspace uses, and the control at the top left tells you which one you are on. An agent-based workspace groups resources by [agent](agents.md), and each agent's traces divide across [environments](agent-environments.md) drawn from a fixed set of four. A project-based workspace groups them by application instead, with no environment tier, so environments are approximated with separate tracing projects. The models below apply to both, and the differences are called out where they matter.
 
 The LangSmith permission system builds on this hierarchy. With [role-based access control (RBAC)](rbac.md), user [permissions](organization-workspace-operations.md) are scoped to one or more workspaces, enforcing isolation between workspaces. With more fine-grained [attribute-based access control](organization-workspace-operations.md#access-policies) (ABAC), access can be further restricted or granted based on attributes such as tags, agents, or applications within a workspace, allowing users to access only development resources or only resources associated with a specific agent or application.
 
@@ -20,11 +20,13 @@ This page explains two common approaches to organizing workspaces based on your 
 * [Collaborative workspaces](#collaborative-workspaces): Multiple teams per workspace
 
 > [!TIP]
+>
 > For details on setting up organizations and workspaces, refer to [Set up hierarchy](set-up-hierarchy.md).
 
 ## Team-centric workspaces
 
 > [!WARNING]
+>
 > This is the default model and recommended choice for most customers.
 
 This model (single workspace per team) uses a single organization as the top-level boundary. Within the organization, multiple workspaces are used to isolate different teams or business units. Each workspace represents a logical boundary for a specific team and governs which data and resources that team can access. Within a workspace, teams group the resources that support the same application by agent or by application, depending on the workspace.
@@ -129,8 +131,6 @@ graph LR
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/workload-isolation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/workload-isolation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

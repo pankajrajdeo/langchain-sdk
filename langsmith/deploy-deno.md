@@ -18,16 +18,19 @@ Source: [`js-deno`](https://github.com/langchain-ai/deployment-cookbook/tree/mai
 
 ## Deploy to Deno Deploy
 
-### Create a Deno Deploy project
+**1. Create a Deno Deploy project**
+
 Fork or clone [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook). In the [Deno Deploy dashboard](https://dash.deno.com/), create a new project linked to this repo.
 
-### Configure build settings
+**2. Configure build settings**
+
 * Set **Root Directory** to `js-deno`.
 * Set the **build command** to `deno task build:client` (builds the Vite SPA into `dist/`).
 * Set the **entrypoint** to `main.ts`.
 * Add `OPENAI_API_KEY` in project environment variables.
 
-### Deploy
+**3. Deploy**
+
 Deploy from the dashboard. Deno's build environment runs the build command, so `dist/` is generated in the cloud and never needs to be committed.
 
 Alternatively, use the built-in `deno deploy` CLI (Deno 2.x). The `deploy` block in [`deno.json`](https://github.com/langchain-ai/deployment-cookbook/blob/main/js-deno/deno.json) sets `org`/`app`. Change those to your own (or pass `--org`/`--app` flags, which override them).
@@ -48,6 +51,7 @@ deno task deploy
 `deno task deploy` runs `deno task build:client && deno deploy --prod`, then `rm -rf dist`. Building locally is required because `deno deploy --source local` uploads your working tree (minus `.gitignore`) and does **not** run build commands. Those only run for GitHub-connected apps.
 
 > [!WARNING]
+>
 > Two gotchas specific to the CLI `--source local` flow:
 >
 > * **`dist/` must not be gitignored.** The uploader respects `.gitignore`, so the freshly built `dist/` must be visible during the upload window or every non-`/api` route returns **404**. The repo-root `.gitignore` ignores all `dist`, so `js-deno/.gitignore` re-includes it with `!dist/` and `!dist/**`. The `deno task deploy` flow deletes `dist/` after uploading, so it does not linger in `git status` despite not being ignored.
@@ -178,8 +182,6 @@ Open [http://localhost:8000](http://localhost:8000).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-deno.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-deno.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

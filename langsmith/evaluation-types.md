@@ -19,9 +19,9 @@ Understanding both aspects helps you build a comprehensive evaluation strategy t
 
 Offline evaluation tests applications on curated datasets before deployment. By running evaluations on examples with reference outputs, teams can compare versions, validate functionality, and build confidence before exposing changes to users.
 
-Run offline evaluations client-side using the LangSmith SDK ([Python](https://reference.langchain.com/python/langsmith/observability/sdk/) or [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html)) or server-side via the [Playground](prompt-engineering-concepts.md#playground) or by [binding evaluators to a dataset](bind-evaluator-to-dataset.md).
+Run offline evaluations client-side using the LangSmith SDK ([Python](https://reference.langchain.com/python/langsmith/observability/sdk/) or [TypeScript](https://reference.langchain.com/javascript/langsmith)) or server-side via the [Playground](prompt-engineering-concepts.md#playground) or by [binding evaluators to a dataset](bind-evaluator-to-dataset.md).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/offline.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=879e4ee3616cecd7cff39879cfc6ec7b" alt="Offline" width="1581" height="477" data-path="langsmith/images/offline.png" />
+![Offline](https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/offline.png?fit=max\&auto=format\&n=4kN8yiLrZX_amfFn\&q=85\&s=879e4ee3616cecd7cff39879cfc6ec7b)
 
 ### Benchmarking
 
@@ -46,7 +46,7 @@ For more details, refer to the [Pytest](pytest.md) and [Vitest/Jest](vitest-jest
 
 LangSmith's comparison view highlights regressions (red) and improvements (green) relative to the baseline, enabling quick identification of changes.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/Tdk8epB4BZgbugRX/langsmith/images/comparison-diff-view-light.png?fit=max&auto=format&n=Tdk8epB4BZgbugRX&q=85&s=2ddb234fd3779b443b9e41f7addeef21" alt="Comparison view" width="1038" height="758" data-path="langsmith/images/comparison-diff-view-light.png" />
+![Comparison view](https://mintcdn.com/langchain-5e9cc07a/Tdk8epB4BZgbugRX/langsmith/images/comparison-diff-view-light.png?fit=max\&auto=format\&n=Tdk8epB4BZgbugRX\&q=85\&s=2ddb234fd3779b443b9e41f7addeef21)
 
 ### Backtesting
 
@@ -68,7 +68,7 @@ Online evaluation assesses production application outputs in near real-time. Wit
 
 Online evaluators typically run server-side. LangSmith supports custom [LLM-as-judge evaluators](llm-as-judge.md) and code evaluators. [LangChain Tuned Evaluators](tuned-evaluators.md) provide specialized judges managed by LangChain.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/online.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=8d6c1b932e5487c4c01d84ae4f984240" alt="Online" width="1474" height="521" data-path="langsmith/images/online.png" />
+![Online](https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/online.png?fit=max\&auto=format\&n=4kN8yiLrZX_amfFn\&q=85\&s=8d6c1b932e5487c4c01d84ae4f984240)
 
 ### Real-time monitoring
 
@@ -100,7 +100,7 @@ Configure LLM-as-a-judge evaluators for:
 
 ### Decision model evaluators
 
-Use a decision model, such as SemIf or Jev, to answer typed questions about outputs. Each question returns a probability, a selected option, or a score, and becomes its own feedback key, so you do not write a prompt or an output schema.
+Use a decision model to answer typed questions about outputs. Each question returns a probability, a selected option, or a score, and becomes its own feedback key, so you do not write a prompt or an output schema.
 
 Configure decision model evaluators for:
 
@@ -153,8 +153,6 @@ Run pairwise evaluations for:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-types.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-types.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

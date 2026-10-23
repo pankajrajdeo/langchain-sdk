@@ -19,8 +19,8 @@ String prompt that exposes the format method, returning a prompt.
 ```python
 StringPromptTemplate(
     self,
-    *args: Any = (),
-    **kwargs: Any = {},
+    args: Any = (),
+    kwargs: Any = {},
 )
 ```
 
@@ -40,4 +40,4 @@ StringPromptTemplate(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/prompts/string.py#L328)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/prompts/string.py#L328)

@@ -18,10 +18,16 @@ This middleware monitors message token counts and automatically summarizes older
 messages when a threshold is reached, preserving recent messages and maintaining
 context continuity by ensuring AI/Tool message pairs remain together.
 
-Transient summary-generation errors (rate limits, timeouts) are retried
-in-process, up to 3 attempts total, via `Runnable.with_retry`. If a summary call
-still fails after those attempts, the underlying error propagates rather than
-fabricating a summary.
+Summary-generation errors are retried in-process, up to 3 attempts total, via
+`Runnable.with_retry`, unless the error is a `ModelError` marked non-retryable
+(e.g. authentication or invalid request errors). If the summary prompt exceeds
+the model's context window (`ContextOverflowError`), the call is retried once with
+the middle of the history cut out. If a summary call still fails, the
+underlying error propagates rather than fabricating a summary.
+
+To generate summaries with something other than a chat model, pass a
+`summarizer`. The middleware still decides when to summarize and which
+messages to summarize; only the summary text comes from the summarizer.
 
 ## Signature
 
@@ -35,7 +41,8 @@ SummarizationMiddleware(
     token_counter: TokenCounter = count_tokens_approximately,
     summary_prompt: str = DEFAULT_SUMMARY_PROMPT,
     trim_tokens_to_summarize: int | None = _DEFAULT_TRIM_TOKEN_LIMIT,
-    **deprecated_kwargs: Any = {},
+    summarizer: Summarizer | None = None,
+    deprecated_kwargs: Any = {},
 )
 ```
 
@@ -49,6 +56,7 @@ SummarizationMiddleware(
 | `token_counter` | `TokenCounter` | No | Function to count tokens in messages. (default: `count_tokens_approximately`) |
 | `summary_prompt` | `str` | No | Prompt template for generating summaries. (default: `DEFAULT_SUMMARY_PROMPT`) |
 | `trim_tokens_to_summarize` | `int \| None` | No | Maximum tokens to keep when preparing messages for the summarization call.  Pass `None` to skip trimming entirely. (default: `_DEFAULT_TRIM_TOKEN_LIMIT`) |
+| `summarizer` | `Summarizer \| None` | No | Optional replacement for the summarization model call.  `model` is still used for its profile (fractional limits) and token counting, but is not called to write summaries.  - A chat model, or a model string resolved with     `init_chat_model`, writes summaries in place of `model`. It is     prompted with `summary_prompt` and retried like `model` would     be. Use this to summarize with a different model than the one     whose context window you're managing. To summarize with a chat     model, pass its name or a `BaseChatModel` instance; wrapped     models such as `model.with_config(...)` are treated as a     `Runnable` (below). - A `Runnable` or function receives the messages to summarize     (after trimming) and returns the summary text. `summary_prompt`     is not used. Functions may be sync or async; an async function     requires async invocation (e.g. `ainvoke`), and a sync function     runs in a thread pool when invoked asynchronously.  !!! example      ```python     # Manage gpt-6-sol's context window, summarize with gpt-6-luna     SummarizationMiddleware(         model="openai:gpt-6-sol",         trigger=("fraction", 0.8),         summarizer="openai:gpt-6-luna",     )       # Summarize with a non-LLM service     async def summarize(messages: Sequence[BaseMessage]) -> str:         return await my_summarization_service(get_buffer_string(messages))       SummarizationMiddleware(         model="openai:gpt-6-luna",         trigger=("fraction", 0.8),         summarizer=summarize,     )     ``` (default: `None`) |
 
 ## Extends
 
@@ -66,7 +74,8 @@ __init__(
     token_counter: TokenCounter = count_tokens_approximately,
     summary_prompt: str = DEFAULT_SUMMARY_PROMPT,
     trim_tokens_to_summarize: int | None = _DEFAULT_TRIM_TOKEN_LIMIT,
-    **deprecated_kwargs: Any = {},
+    summarizer: Summarizer | None = None,
+    deprecated_kwargs: Any = {},
 ) -> None
 ```
 
@@ -78,6 +87,8 @@ __init__(
 | `token_counter` | `TokenCounter` |
 | `summary_prompt` | `str` |
 | `trim_tokens_to_summarize` | `int \| None` |
+| `summarizer` | `Summarizer \| None` |
+| `deprecated_kwargs` | `Any` |
 
 ## Properties
 
@@ -88,6 +99,7 @@ __init__(
 - `token_counter`
 - `summary_prompt`
 - `trim_tokens_to_summarize`
+- `summarizer`
 
 ## Methods
 
@@ -96,4 +108,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/be854a130153e51346d83d3b06f959b80f6cbca6/libs/langchain_v1/langchain/agents/middleware/summarization.py#L232)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/summarization.py#L262)

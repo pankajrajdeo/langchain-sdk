@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/feedback-configs:
     patch:
@@ -202,6 +205,12 @@ components:
   schemas:
     UpdateFeedbackConfigSchema:
       properties:
+        id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Id
         feedback_key:
           type: string
           title: Feedback Key
@@ -220,6 +229,10 @@ components:
       title: UpdateFeedbackConfigSchema
     FeedbackConfigSchema:
       properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
         feedback_key:
           type: string
           title: Feedback Key
@@ -238,8 +251,21 @@ components:
             - type: boolean
             - type: 'null'
           title: Is Lower Score Better
+        is_enforced:
+          type: boolean
+          title: Is Enforced
+          default: false
+        is_first:
+          type: boolean
+          title: Is First
+          default: false
+        is_deleted:
+          type: boolean
+          title: Is Deleted
+          default: false
       type: object
       required:
+        - id
         - feedback_key
         - feedback_config
         - tenant_id

@@ -13,6 +13,7 @@ tags: [docs, integrations, chat, openrouter]
 This will help you get started with OpenRouter [chat models](../../langchain/models.md). OpenRouter is a unified API that provides access to models from multiple providers (OpenAI, Anthropic, Google, Meta, and more) through a single endpoint.
 
 > [!TIP]
+>
 > **API Reference**
 >
 > For detailed documentation of all features and configuration options, head to the [`ChatOpenRouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) API reference.
@@ -25,7 +26,7 @@ For a full list of available models, visit the [OpenRouter models page](https://
 
 | Class | Package | Serializable | JS/TS Support | Downloads | Latest Version |
 | :- | :- | :-: | :-: | :-: | :-: |
-| [`ChatOpenRouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) | [`langchain-openrouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) | beta | ❌ | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-openrouter/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-openrouter?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| [`ChatOpenRouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) | [`langchain-openrouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) | beta | ❌ | [![Downloads per month](https://static.pepy.tech/badge/langchain-openrouter/month)](https://pypi.org/project/langchain-openrouter/) | [![PyPI - Latest version](https://img.shields.io/pypi/v/langchain-openrouter?style=flat-square\&label=%20\&color=orange)](https://pypi.org/project/langchain-openrouter/) |
 
 ### Model features
 
@@ -65,7 +66,7 @@ if not os.getenv("OPENROUTER_API_KEY"):
     os.environ["OPENROUTER_API_KEY"] = getpass.getpass("Enter your OpenRouter API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -189,71 +190,65 @@ For more on binding tools and tool call outputs, head to the [tool calling](../.
 
 `ChatOpenRouter` supports structured output via the [`with_structured_output`](../../langchain/models.md#structured-output) method. Two methods are available: `function_calling` (default) and `json_schema`.
 
-<details>
-<summary>Individual model calls</summary>
-
-Use `with_structured_output` to generate a structured model response. Specify `method="json_schema"` to use JSON Schema-based structured output; otherwise the method defaults to function calling.
-
+> **Individual model calls**
+>
+> Use `with_structured_output` to generate a structured model response. Specify `method="json_schema"` to use JSON Schema-based structured output; otherwise the method defaults to function calling.
+>
 ```python
-from langchain_openrouter import ChatOpenRouter
-from pydantic import BaseModel, Field
-
-model = ChatOpenRouter(model="openai/gpt-5.5")
-
-class Movie(BaseModel):
-    """A movie with details."""
-    title: str = Field(description="The title of the movie")
-    year: int = Field(description="The year the movie was released")
-    director: str = Field(description="The director of the movie")
-    rating: float = Field(description="The movie's rating out of 10")
-
-structured_model = model.with_structured_output(Movie, method="json_schema")  # [!code highlight]
-response = structured_model.invoke("Provide details about the movie Inception")
-response
+> from langchain_openrouter import ChatOpenRouter
+> from pydantic import BaseModel, Field
+>
+> model = ChatOpenRouter(model="openai/gpt-5.5")
+>
+> class Movie(BaseModel):
+>     """A movie with details."""
+>     title: str = Field(description="The title of the movie")
+>     year: int = Field(description="The year the movie was released")
+>     director: str = Field(description="The director of the movie")
+>     rating: float = Field(description="The movie's rating out of 10")
+>
+> structured_model = model.with_structured_output(Movie, method="json_schema")  # [!code highlight]
+> response = structured_model.invoke("Provide details about the movie Inception")
+> response
+```
+>
+```python
+> Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
 ```
 
+> **Agent response format**
+>
+> Specify `response_format` with [`ProviderStrategy`](../../langchain/structured-output.md) to engage structured output when generating the agent's final response.
+>
 ```python
-Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
+> from langchain.agents import create_agent
+> from langchain.agents.structured_output import ProviderStrategy
+> from pydantic import BaseModel
+>
+> class Weather(BaseModel):
+>     temperature: float
+>     condition: str
+>
+> def weather_tool(location: str) -> str:
+>     """Get the weather at a location."""
+>     return "Sunny and 75 degrees F."
+>
+> agent = create_agent(
+>     model="openrouter:openai/gpt-5.5",
+>     tools=[weather_tool],
+>     response_format=ProviderStrategy(Weather),  # [!code highlight]
+> )
+>
+> result = agent.invoke({
+>     "messages": [{"role": "user", "content": "What's the weather in SF?"}]
+> })
+>
+> result["structured_response"]
 ```
-
-</details>
-
-<details>
-<summary>Agent response format</summary>
-
-Specify `response_format` with [`ProviderStrategy`](../../langchain/structured-output.md) to engage structured output when generating the agent's final response.
-
+>
 ```python
-from langchain.agents import create_agent
-from langchain.agents.structured_output import ProviderStrategy
-from pydantic import BaseModel
-
-class Weather(BaseModel):
-    temperature: float
-    condition: str
-
-def weather_tool(location: str) -> str:
-    """Get the weather at a location."""
-    return "Sunny and 75 degrees F."
-
-agent = create_agent(
-    model="openrouter:openai/gpt-5.5",
-    tools=[weather_tool],
-    response_format=ProviderStrategy(Weather),  # [!code highlight]
-)
-
-result = agent.invoke({
-    "messages": [{"role": "user", "content": "What's the weather in SF?"}]
-})
-
-result["structured_response"]
+> Weather(temperature=75.0, condition='Sunny')
 ```
-
-```python
-Weather(temperature=75.0, condition='Sunny')
-```
-
-</details>
 
 You can pass `strict=True` with the `function_calling` and `json_schema` methods to enforce exact schema adherence. The `strict` parameter is not supported with `json_mode`.
 
@@ -298,6 +293,7 @@ print(ai_msg.usage_metadata)
 ```
 
 > [!NOTE]
+>
 > The effort-to-budget mapping is model-dependent. For example, Google Gemini models map effort to an internal `thinkingLevel` rather than an exact token budget. See the [OpenRouter reasoning docs](https://openrouter.ai/docs/guides/best-practices/reasoning-tokens) for details.
 
 ***
@@ -314,6 +310,7 @@ OpenRouter supports [multimodal inputs](../../langchain/messages.md#multimodal) 
 | Base64 inline data | ✅ | ✅ | ✅ | ✅ |
 
 > [!NOTE]
+>
 > Not all models support all modalities. Check the [OpenRouter models page](https://openrouter.ai/models) for model-specific support.
 
 ### Image input
@@ -577,6 +574,7 @@ ai_msg.usage_metadata
 ```
 
 > [!NOTE]
+>
 > Without `cache_control` on message content blocks, the provider will not cache the prompt and these fields will not appear.
 
 When streaming, access token usage from the full output:
@@ -789,8 +787,6 @@ For more information about OpenRouter's platform, models, and features, see the 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

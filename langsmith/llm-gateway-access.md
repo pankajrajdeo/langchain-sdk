@@ -11,11 +11,13 @@ tags: [docs, langsmith, llm-gateway-access]
 > Understand where gateway traces land and who can see and configure what.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 Every call through the LLM Gateway is traced to LangSmith, and policy violations surface in [LangSmith Engine](engine.md) for triage.
 
 > [!NOTE]
+>
 > Gateway traces record metadata (token counts, policy outcomes, caller identity) for every call. Input and output content is **not** logged by default, and traces without content are **not billed** against your LangSmith trace quota. Content logging, and the associated billing, only applies when you explicitly enable it with a [data policy](llm-gateway-data-policy.md).
 
 ## Where gateway traces appear
@@ -57,7 +59,7 @@ The gateway logs two categories of events:
 | **Administrative changes** | Policy creation, modification, and deletion. Role and permission changes related to gateway access. |
 | **Gateway invocations** | Each proxied call, including the caller identity and matched policy IDs. |
 
-[Audit logs](audit-logs.md) are available to organization admins on the [Enterprise plan](pricing-plans.md).
+[Audit logs](audit-logs.md) are available to organization admins on the [Enterprise plan](https://docs.langchain.com/langsmith/pricing-plans.md).
 
 ## Permissions
 
@@ -93,8 +95,8 @@ Gateway traces are written as runs into a workspace project and follow LangSmith
 
 If you need to limit who can see gateway traces, you have two options:
 
-* **Separate workspaces** (works on any [plan](pricing-plans.md)): create one workspace with restricted membership and another for developer coding agents with broader membership. Each workspace has its own provider secrets and trace projects.
-* **Project-level access policies** (requires an [Enterprise plan](pricing-plans.md)): write an ABAC policy restricting `projects:read` and `runs:read` on the gateway project to specific users or roles.
+* **Separate workspaces** (works on any [plan](https://docs.langchain.com/langsmith/pricing-plans.md)): create one workspace with restricted membership and another for developer coding agents with broader membership. Each workspace has its own provider secrets and trace projects.
+* **Project-level access policies** (requires an [Enterprise plan](https://docs.langchain.com/langsmith/pricing-plans.md)): write an ABAC policy restricting `projects:read` and `runs:read` on the gateway project to specific users or roles.
 
 ## Next steps
 
@@ -104,8 +106,6 @@ If you need to limit who can see gateway traces, you have two options:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-access.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-access.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

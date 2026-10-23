@@ -1,6 +1,6 @@
 ---
 title: "Delete a data plane"
-description: "Verifies that the stored customer AWS role has delete permissions, removes linked workspaces, and starts asynchronous deprovisioning for an active or provisioning_failed data plane owned by the..."
+description: "Verifies that the stored customer AWS role has delete permissions, that the stored Azure subscription is reachable, or that the stored GCP provisioner service account can be impersonated. Then..."
 source: "https://docs.langchain.com/langsmith/smith-api/data_planes/delete-a-data-plane"
 category: "docs"
 tags: [docs, langsmith, smith-api, data_planes, delete-a-data-plane]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, data_planes, delete-a-data-plane]
 
 # Delete a data plane
 
-> Verifies that the stored customer AWS role has delete permissions, removes linked workspaces, and starts asynchronous deprovisioning for an active or provisioning_failed data plane owned by the caller's organization. Requires BYOC to be enabled for the org and org admin permissions.
+> Verifies that the stored customer AWS role has delete permissions, that the stored Azure subscription is reachable, or that the stored GCP provisioner service account can be impersonated. Then removes linked workspaces and starts asynchronous deprovisioning for an active or provisioning_failed data plane owned by the caller's organization. Azure and GCP data planes can also be deleted while provisioning. Requires BYOC to be enabled for the org and organization:infrastructure:manage.
 
 ## OpenAPI
 
@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /orgs/current/data-planes/{id}:
     delete:
@@ -177,11 +180,13 @@ paths:
         - data_planes
       summary: Delete a data plane
       description: >-
-        Verifies that the stored customer AWS role has delete permissions,
-        removes linked workspaces, and starts asynchronous deprovisioning for an
-        active or provisioning_failed data plane owned by the caller's
-        organization. Requires BYOC to be enabled for the org and org admin
-        permissions.
+        Verifies that the stored customer AWS role has delete permissions, that
+        the stored Azure subscription is reachable, or that the stored GCP
+        provisioner service account can be impersonated. Then removes linked
+        workspaces and starts asynchronous deprovisioning for an active or
+        provisioning_failed data plane owned by the caller's organization. Azure
+        and GCP data planes can also be deleted while provisioning. Requires
+        BYOC to be enabled for the org and organization:infrastructure:manage.
       parameters:
         - description: Data plane ID
           name: id
@@ -350,22 +355,53 @@ components:
           type: object
           additionalProperties:
             type: string
+        azure_entra_tenant_id:
+          description: EntraTenantID is the Microsoft Entra tenant of the resource group.
+          type: string
+        byoiam:
+          $ref: '#/components/schemas/data_planes.DataPlaneBYOIAMSettings'
         byovpc:
           $ref: '#/components/schemas/data_planes.DataPlaneBYOVPCSettings'
         cloud:
           $ref: '#/components/schemas/data_planes.DataPlaneCloud'
-        is_byoiam_enabled:
-          type: boolean
+        gcp_project_id:
+          description: ProjectID is the customer project that hosts the data plane.
+          type: string
         is_eks_api_privatelink_disabled:
+          type: boolean
+        is_gcp_byoiam_enabled:
+          description: >-
+            IsGCPBYOIAMEnabled is true when the customer created the data plane
+
+            service accounts. It has its own name because AWS has the byoiam
+            object.
           type: boolean
         is_public_load_balancer:
           type: boolean
+        provisioner_service_account:
+          description: |-
+            ProvisionerServiceAccount is the customer service account that the
+            control plane impersonates.
+          type: string
+        resource_group_id:
+          type: string
         role_arn:
           type: string
+        trace_storage:
+          description: >-
+            TraceStorage is the run and trace store. It is SMITHDB when SmithDB
+            is
+
+            enabled and serves queries, and CLICKHOUSE otherwise, including for
+            data
+
+            planes created before this setting existed.
+          allOf:
+            - $ref: '#/components/schemas/data_planes.DataPlaneTraceStorage'
         vpc_cidr:
           description: >-
-            VPCCIDR is the effective VPC CIDR, including for customer-managed
-            VPCs.
+            VPCCIDR is the effective AWS VPC, Azure VNet, or GCP VPC network
+            CIDR, including for customer-managed VPCs.
           type: string
     data_planes.Status:
       type: string
@@ -418,6 +454,12 @@ components:
           type: string
         resource_arn:
           type: string
+    data_planes.DataPlaneBYOIAMSettings:
+      type: object
+      properties:
+        is_enabled:
+          description: True when the customer created the data plane IAM resources.
+          type: boolean
     data_planes.DataPlaneBYOVPCSettings:
       type: object
       properties:
@@ -439,8 +481,20 @@ components:
       type: string
       enum:
         - AWS
+        - AZURE
+        - GCP
       x-enum-varnames:
         - DataPlaneCloudAWS
+        - DataPlaneCloudAzure
+        - DataPlaneCloudGCP
+    data_planes.DataPlaneTraceStorage:
+      type: string
+      enum:
+        - CLICKHOUSE
+        - SMITHDB
+      x-enum-varnames:
+        - DataPlaneTraceStorageClickHouse
+        - DataPlaneTraceStorageSmithDB
   securitySchemes:
     API Key:
       type: apiKey

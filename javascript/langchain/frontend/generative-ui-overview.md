@@ -50,9 +50,9 @@ graph LR
   class O deep;
 ```
 
-<span>More control</span>
+More control
 
-<span>More autonomy</span>
+More autonomy
 
 Moving left to right, predictability and per-capability engineering cost both fall,
 while the agent's expressive range grows. Accessibility and visual consistency are
@@ -118,19 +118,20 @@ transcript.
 
 ## Explore the spectrum
 
-#### [Controlled](controlled-generative-ui.md)
-Author the components; the agent picks which to render and what data to pass.
+> **[Controlled](controlled-generative-ui.md)**
+>
+> Author the components; the agent picks which to render and what data to pass.
 
-#### [Declarative](declarative-generative-ui.md)
-The agent emits a spec; the frontend composes from a registered catalog.
+> **[Declarative](declarative-generative-ui.md)**
+>
+> The agent emits a spec; the frontend composes from a registered catalog.
 
-#### [Open-ended](open-ended-generative-ui.md)
-Render UI created elsewhere, such as sandboxed MCP Apps.
+> **[Open-ended](open-ended-generative-ui.md)**
+>
+> Render UI created elsewhere, such as sandboxed MCP Apps.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/generative-ui-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/generative-ui-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -14,24 +14,36 @@ Code contributions are welcome! Whether you're fixing bugs, adding features, or 
 
 If you are looking for something to work on, check out the issue labeled "help wanted" in our repos:
 
-Labels
-Labels
-Labels
+> **[LangChain](https://github.com/langchain-ai/langchain/labels?q=help+wanted)**
+>
+> Labels
+
+> **[LangGraph](https://github.com/langchain-ai/langgraph/labels?q=help+wanted)**
+>
+> Labels
+
+> **[Deep Agents](https://github.com/langchain-ai/deepagents/labels?q=help+wanted)**
+>
+> Labels
 
 > [!NOTE]
+>
 > Before submitting large **new features or refactors**, please first open an issue or post to [the forum](https://forum.langchain.com/) for discussion. This ensures alignment with project goals and prevents duplicate work.
 
 ### Quick fix: submit a bugfix
 
 For simple bugfixes, you can get started immediately:
 
-### Reproduce the issue
+**1. Reproduce the issue**
+
 Before even cloning the repository, ensure you can reliably reproduce the bug. This helps confirm the issue and provides a starting point for your fix. Maintainers and other contributors should be able to reproduce the issue based on your description without additional setup or modifications.
 
-### Fork the repository
-Fork either the [LangChain](https://github.com/langchain-ai/langchain), [LangGraph](https://github.com/langchain-ai/langgraph), or [Deep Agents](https://github.com/langchain-ai/deepagents) repo to your personal GitHub account
+**2. Fork the repository**
 
-### Clone and setup
+Fork either the [LangChain](https://github.com/langchain-ai/langchain), [LangGraph](https://github.com/langchain-ai/langgraph), or [Deep Agents](https://github.com/langchain-ai/deepagents) repo to your personal GitHub account (If you fork to an organization account, maintainers will be unable to make edits, which may significantly delay acceptance.)
+
+**3. Clone and setup**
+
 ```bash
 git clone https://github.com/your-username/name-of-forked-repo.git
 
@@ -40,6 +52,7 @@ git clone https://github.com/parrot123/langchain.git
 ```
 
 > [!WARNING]
+>
 > The LangChain Python repo is a **monorepo** — there is no `pyproject.toml` at the repo root. Each package has its own under `libs/` (e.g. `libs/core/`, `libs/langchain/`, `libs/partners/openai/`). You must `cd` into the relevant package directory before running `uv` commands.
 
 ```bash
@@ -53,24 +66,28 @@ uv sync --group test
 
 You will need to install [`uv`](https://docs.astral.sh/uv/) if you haven't previously. See the [repository structure](#repository-structure) section for a full list of packages and their locations.
 
-### Create a branch
+**4. Create a branch**
+
 Create a new branch for your fix. This helps keep your changes organized and makes it easier to submit a pull request later.
 
 ```bash
 git checkout -b your-username/short-bugfix-name
 ```
 
-### Write failing tests
+**5. Write failing tests**
+
 Add [unit tests](#test-writing-guidelines) that will fail without your fix. This allows us to verify the bug is resolved and prevents regressions
 
-### Make your changes
+**6. Make your changes**
+
 Fix the bug while following our [code quality standards](#code-quality-standards). Make the **minimal change necessary** to resolve the issue. We strongly encourage contributors to comment on the issue before they start coding. For example:
 
 > *"I'd like to work on this. My intended approach would be to \[...brief description...]. Does this align with maintainer expectations?"*
 
 A 30-second comment often prevents wasted effort if your initial approach is wrong.
 
-### Verify the fix
+**7. Verify the fix**
+
 Ensure that tests pass and no regressions are introduced. Ensure all tests pass locally before submitting your PR
 
 ```bash
@@ -83,10 +100,12 @@ make integration_tests
 # (You may need to set up API testing credentials)
 ```
 
-### Document the change
+**8. Document the change**
+
 Update docstrings and/or inline comments if behavior changes
 
-### Submit a pull request
+**9. Submit a pull request**
+
 Follow the PR template provided. If applicable, reference the issue you're fixing using a [closing keyword](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) (e.g. `Fixes #ISSUE_NUMBER`) so that the issue is automatically closed when your PR is merged.
 
 ### Full development setup
@@ -109,51 +128,43 @@ Contributing to open source projects takes time and effort, but it can also help
 ### Backwards compatibility
 
 > [!WARNING]
+>
 > Breaking changes to public APIs are not allowed except for critical security fixes.
 >
 > See our [versioning policy](../versioning.md) for details on major version releases.
 
 Maintain compatibility via:
 
-<details>
-<summary>Stable interfaces</summary>
+> **Stable interfaces**
+>
+> **Always preserve**:
+>
+> * Function signatures and parameter names
+> * Class interfaces and method names
+> * Return value structure and types
+> * Import paths for public APIs
 
-**Always preserve**:
+> **Safe changes**
+>
+> **Acceptable modifications**:
+>
+> * Adding new optional parameters
+>
+> * Adding new methods to classes
+>
+> * Improving performance without changing behavior
+>
+> * Adding new modules or functions
 
-* Function signatures and parameter names
-* Class interfaces and method names
-* Return value structure and types
-* Import paths for public APIs
-
-</details>
-
-<details>
-<summary>Safe changes</summary>
-
-**Acceptable modifications**:
-
-* Adding new optional parameters
-
-* Adding new methods to classes
-
-* Improving performance without changing behavior
-
-* Adding new modules or functions
-
-</details>
-
-<details>
-<summary>Before making changes</summary>
-
-* **Would this break existing user code?**
-
-* Check if your target is public
-
-* If needed, is it exported in `__init__.py`?
-
-* Are there existing usage patterns in tests?
-
-</details>
+> **Before making changes**
+>
+> * **Would this break existing user code?**
+>
+> * Check if your target is public
+>
+> * If needed, is it exported in `__init__.py`?
+>
+> * Are there existing usage patterns in tests?
 
 ### New features
 
@@ -161,19 +172,22 @@ We aim to keep the bar high for new features. We generally don't accept new core
 
 In general, feature contribution requirements include:
 
-### Design discussion
+**1. Design discussion**
+
 Open an issue describing:
 
 * The problem you're solving
 * Proposed API design
 * Expected usage patterns
 
-### Implementation
+**2. Implementation**
+
 * Follow existing code patterns
 * Include comprehensive tests and documentation
 * Consider security implications
 
-### Integration considerations
+**3. Integration considerations**
+
 * How does this interact with existing features?
 * Are there performance implications?
 * Does this introduce new dependencies?
@@ -183,90 +197,86 @@ We will reject features that are likely to lead to security vulnerabilities or r
 ### Security guidelines
 
 > [!WARNING]
+>
 > Security is paramount. Never introduce vulnerabilities or unsafe patterns.
 
 Security checklist:
 
-<details>
-<summary>Input validation</summary>
+> **Input validation**
+>
+> * Validate and sanitize all user inputs
+> * Properly escape data in templates and queries
+> * Never use `eval()`, `exec()`, or `pickle` on user data, as this can lead to arbitrary code execution vulnerabilities
 
-* Validate and sanitize all user inputs
-* Properly escape data in templates and queries
-* Never use `eval()`, `exec()`, or `pickle` on user data, as this can lead to arbitrary code execution vulnerabilities
+> **Error handling**
+>
+> * Use specific exception types
+> * Don't expose sensitive information in error messages
+> * Implement proper resource cleanup
 
-</details>
-
-<details>
-<summary>Error handling</summary>
-
-* Use specific exception types
-* Don't expose sensitive information in error messages
-* Implement proper resource cleanup
-
-</details>
-
-<details>
-<summary>Dependencies</summary>
-
-* Avoid adding hard dependencies
-* Keep optional dependencies minimal
-* Review third-party packages for security issues
-
-</details>
+> **Dependencies**
+>
+> * Avoid adding hard dependencies
+> * Keep optional dependencies minimal
+> * Review third-party packages for security issues
 
 ***
 
 ## Development environment
 
 > [!TIP]
+>
 > **Using an AI coding agent?**
 >
 > * Install the [LangChain Docs MCP servers](../use-these-docs.md) to give your agent access to up-to-date LangChain documentation and examples.
 >
-> > **Prompt:** Connect LangChain docs MCP servers
->     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
+>   Connect LangChain docs MCP servers
 >
->     Servers to add:
+>   Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
 >
->     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
->     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
+>   Servers to add:
 >
->     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
+>   * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
+>   * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
 >
->     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
->     * Codex CLI: `codex mcp add` with each server URL.
->     * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
->     * Claude Desktop: add both URLs under Settings > Connectors.
+>   Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
 >
->     Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
+>   * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
+>   * Codex CLI: `codex mcp add` with each server URL.
+>   * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
+>   * Claude Desktop: add both URLs under Settings > Connectors.
+>
+>   Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
 > * Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks, then click the **Copy page** button on the top right of this page and paste the raw content into your agent to have it set up your environment automatically.
 >
-> > **Prompt:** Install LangChain Skills
->     Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
+>   Install LangChain Skills
 >
->     Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
+>   Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
 >
-> ```bash
->     npx skills add langchain-ai/langchain-skills --skill '*' --yes
-> ```
+>   Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
 >
->     If I ask for a global install instead, use:
+>   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   npx skills add langchain-ai/langchain-skills --skill '*' --yes
+>   ```
 >
-> ```bash
->     npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
-> ```
+>   If I ask for a global install instead, use:
 >
->     Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
+>   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
+>   ```
+>
+>   Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
 
 Our Python projects use [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for dependency management. Make sure you have the latest version installed.
 
 > [!NOTE]
+>
 > We strive to keep setup consistent across all Python packages. From the package directory, run:
 >
-> ```bash
+```bash
 > uv sync --all-groups
 > make test  # Verify unit tests pass before starting development
-> ```
+```
 
 Once you've reviewed the [contribution guidelines](#contribution-guidelines), find the package directory for the component you're working on in the [repository structure](#repository-structure) section below.
 
@@ -274,85 +284,64 @@ Once you've reviewed the [contribution guidelines](#contribution-guidelines), fi
 
 ## Repository structure
 
-#### LangChain
+**LangChain**
+
 LangChain is organized as a monorepo with multiple packages:
 
-<details>
-<summary>Core packages</summary>
+> **Core packages**
+>
+> * **[`langchain`](https://github.com/langchain-ai/langchain/tree/master/libs/langchain#readme)** (located in `libs/langchain/`): Main package with chains, agents, and retrieval logic
+> * **[`langchain-core`](https://github.com/langchain-ai/langchain/tree/master/libs/core#readme)** (located in `libs/core/`): Base interfaces and core abstractions
 
-* **[`langchain`](https://github.com/langchain-ai/langchain/tree/master/libs/langchain#readme)** (located in `libs/langchain/`): Main package with chains, agents, and retrieval logic
-* **[`langchain-core`](https://github.com/langchain-ai/langchain/tree/master/libs/core#readme)** (located in `libs/core/`): Base interfaces and core abstractions
+> **Partner packages**
+>
+> Located in `libs/partners/`, these are independently versioned packages for specific integrations. For example:
+>
+> * **[`langchain-openai`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/openai#readme)**: [OpenAI](../integrations/providers/openai.md) integrations
+> * **[`langchain-anthropic`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/anthropic#readme)**: [Anthropic](../integrations/providers/anthropic.md) integrations
+> * **[`langchain-google-genai`](https://github.com/langchain-ai/langchain-google/)**: [Google Generative AI](../integrations/chat/google_generative_ai.md) integrations
+>
+> Many partner packages are in external repositories. Please check the [list of integrations](../integrations/providers/overview.md) for details.
 
-</details>
+> **Supporting packages**
+>
+> * **[`langchain-text-splitters`](https://github.com/langchain-ai/langchain/tree/master/libs/text-splitters#readme)**: Text splitting utilities
+> * **[`langchain-standard-tests`](https://github.com/langchain-ai/langchain/tree/master/libs/standard-tests#readme)**: Standard test suites for integrations
 
-<details>
-<summary>Partner packages</summary>
+**LangGraph**
 
-Located in `libs/partners/`, these are independently versioned packages for specific integrations. For example:
-
-* **[`langchain-openai`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/openai#readme)**: [OpenAI](../integrations/providers/openai.md) integrations
-* **[`langchain-anthropic`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/anthropic#readme)**: [Anthropic](../integrations/providers/anthropic.md) integrations
-* **[`langchain-google-genai`](https://github.com/langchain-ai/langchain-google/)**: [Google Generative AI](../integrations/chat/google_generative_ai.md) integrations
-
-Many partner packages are in external repositories. Please check the [list of integrations](../integrations/providers/overview.md) for details.
-
-</details>
-
-<details>
-<summary>Supporting packages</summary>
-
-* **[`langchain-text-splitters`](https://github.com/langchain-ai/langchain/tree/master/libs/text-splitters#readme)**: Text splitting utilities
-* **[`langchain-standard-tests`](https://github.com/langchain-ai/langchain/tree/master/libs/standard-tests#readme)**: Standard test suites for integrations
-
-</details>
-
-#### LangGraph
 LangGraph is organized as a monorepo with multiple Python packages:
 
-<details>
-<summary>Core packages</summary>
+> **Core packages**
+>
+> * **[`langgraph`](https://github.com/langchain-ai/langgraph/tree/main/libs/langgraph#readme)** (located in `libs/langgraph/`): Core framework for building stateful, multi-actor agents
+> * **[`langgraph-prebuilt`](https://github.com/langchain-ai/langgraph/tree/main/libs/prebuilt#readme)** (located in `libs/prebuilt/`): High-level APIs for creating and running agents and tools
 
-* **[`langgraph`](https://github.com/langchain-ai/langgraph/tree/main/libs/langgraph#readme)** (located in `libs/langgraph/`): Core framework for building stateful, multi-actor agents
-* **[`langgraph-prebuilt`](https://github.com/langchain-ai/langgraph/tree/main/libs/prebuilt#readme)** (located in `libs/prebuilt/`): High-level APIs for creating and running agents and tools
+> **Checkpoint packages**
+>
+> * **[`langgraph-checkpoint`](https://github.com/langchain-ai/langgraph/tree/main/libs/checkpoint#readme)** (located in `libs/checkpoint/`): Base interfaces for checkpoint savers
+> * **[`langgraph-checkpoint-postgres`](https://github.com/langchain-ai/langgraph/tree/main/libs/checkpoint-postgres#readme)** (located in `libs/checkpoint-postgres/`): Postgres implementation
+> * **[`langgraph-checkpoint-sqlite`](https://github.com/langchain-ai/langgraph/tree/main/libs/checkpoint-sqlite#readme)** (located in `libs/checkpoint-sqlite/`): SQLite implementation
 
-</details>
+> **SDK and CLI**
+>
+> * **[`langgraph-sdk`](https://github.com/langchain-ai/langgraph/tree/main/libs/sdk-py#readme)** (located in `libs/sdk-py/`): Python SDK for the Agent Server API
+> * **[`langgraph-cli`](https://github.com/langchain-ai/langgraph/tree/main/libs/cli#readme)** (located in `libs/cli/`): Official command-line interface
 
-<details>
-<summary>Checkpoint packages</summary>
+**Deep Agents**
 
-* **[`langgraph-checkpoint`](https://github.com/langchain-ai/langgraph/tree/main/libs/checkpoint#readme)** (located in `libs/checkpoint/`): Base interfaces for checkpoint savers
-* **[`langgraph-checkpoint-postgres`](https://github.com/langchain-ai/langgraph/tree/main/libs/checkpoint-postgres#readme)** (located in `libs/checkpoint-postgres/`): Postgres implementation
-* **[`langgraph-checkpoint-sqlite`](https://github.com/langchain-ai/langgraph/tree/main/libs/checkpoint-sqlite#readme)** (located in `libs/checkpoint-sqlite/`): SQLite implementation
-
-</details>
-
-<details>
-<summary>SDK and CLI</summary>
-
-* **[`langgraph-sdk`](https://github.com/langchain-ai/langgraph/tree/main/libs/sdk-py#readme)** (located in `libs/sdk-py/`): Python SDK for the Agent Server API
-* **[`langgraph-cli`](https://github.com/langchain-ai/langgraph/tree/main/libs/cli#readme)** (located in `libs/cli/`): Official command-line interface
-
-</details>
-
-#### Deep Agents
 Deep Agents is organized as a monorepo with multiple Python packages:
 
-<details>
-<summary>Core packages</summary>
+> **Core packages**
+>
+> * **[`deepagents`](https://github.com/langchain-ai/deepagents/tree/main/libs/deepagents#readme)** (located in `libs/deepagents/`): Core framework for building deep agents with planning, filesystem, and subagent capabilities
+> * **[`deepagents-code`](https://github.com/langchain-ai/deepagents/tree/main/libs/code#readme)** (located in `libs/code/`): Deep Agents Code — interactive terminal interface with conversation resume, web search, and sandboxes
+> * **[`deepagents-cli`](https://github.com/langchain-ai/deepagents/tree/main/libs/cli#readme)** (located in `libs/cli/`): Deploy tooling (`deepagents deploy`, `deepagents init`, `deepagents dev`) for shipping agents to LangSmith Deployments
 
-* **[`deepagents`](https://github.com/langchain-ai/deepagents/tree/main/libs/deepagents#readme)** (located in `libs/deepagents/`): Core framework for building deep agents with planning, filesystem, and subagent capabilities
-* **[`deepagents-code`](https://github.com/langchain-ai/deepagents/tree/main/libs/code#readme)** (located in `libs/code/`): Deep Agents Code — interactive terminal interface with conversation resume, web search, and sandboxes
-* **[`deepagents-cli`](https://github.com/langchain-ai/deepagents/tree/main/libs/cli#readme)** (located in `libs/cli/`): Deploy tooling (`deepagents deploy`, `deepagents init`, `deepagents dev`) for shipping agents to LangSmith Deployments
-
-</details>
-
-<details>
-<summary>Integration packages</summary>
-
-* **[`deepagents-evals`](https://github.com/langchain-ai/deepagents/tree/main/libs/evals#readme)** (located in `libs/evals/`): Evaluation suite and Harbor integration with LangSmith tracing
-* **[`deepagents-acp`](https://github.com/langchain-ai/deepagents/tree/main/libs/acp#readme)** (located in `libs/acp/`): Agent Client Protocol integration
-
-</details>
+> **Integration packages**
+>
+> * **[`deepagents-evals`](https://github.com/langchain-ai/deepagents/tree/main/libs/evals#readme)** (located in `libs/evals/`): Evaluation suite and Harbor integration with LangSmith tracing
+> * **[`deepagents-acp`](https://github.com/langchain-ai/deepagents/tree/main/libs/acp#readme)** (located in `libs/acp/`): Agent Client Protocol integration
 
 ***
 
@@ -378,6 +367,7 @@ The hooks enforce:
 ### Running tests
 
 > [!NOTE]
+>
 > Directories are relative to the package you're working in.
 
 We favor unit tests over integration tests when possible. Unit tests run on every pull request, so they should be fast and reliable. Integration tests run on a schedule and require more setup, so they should be reserved for confirming interface points with external services.
@@ -438,7 +428,8 @@ TEST_FILE=tests/integration_tests/test_openai.py make integration_tests
 
 Contributions must adhere to the following quality requirements:
 
-#### Type hints
+**Type hints**
+
 **Required**: Complete type annotations for all functions
 
 ```python
@@ -460,7 +451,8 @@ def process_documents(
     """
 ```
 
-#### Documentation
+**Documentation**
+
 **Required**: [Google-style docstrings](https://google.github.io/styleguide/pyguide.html) for all public functions.
 
 **Guiding principle**: Docstrings describe "what"; docs on this site explain the "how" and "why."
@@ -484,87 +476,82 @@ def process_documents(
 5. Exceptions that may be raised
 6. Single minimal example showing basic instantiation/usage as necessary
 
-<details>
-<summary>Good docstring example</summary>
-
+> **Good docstring example**
+>
 ````python
-class ChatAnthropic(BaseChatModel):
-    """Interface to Claude chat models.
-
-    See the [usage guide](https://docs.langchain.com/oss/python/integrations/chat/anthropic)
-    for tutorials, feature walkthroughs, and examples.
-
-    Args:
-        model: Model identifier (e.g., `'claude-sonnet-4-6'`).
-        temperature: Sampling temperature between `0` and `1`.
-        max_tokens: Maximum number of tokens to generate.
-        api_key: Anthropic API key.
-
-            If not provided, reads from the `ANTHROPIC_API_KEY`
-            environment variable.
-        timeout: Request timeout in seconds.
-        max_retries: Maximum number of retries for failed requests.
-
-    Returns:
-        A chat model instance that can be invoked with messages.
-
-    Raises:
-        ValueError: If the model identifier is not recognized.
-        AuthenticationError: If the API key is invalid.
-
-    Example:
-```
-        from langchain_anthropic import ChatAnthropic
-
-        model = ChatAnthropic(model="claude-sonnet-4-6")
-        response = model.invoke("Hello!")
-```
-    """
+> class ChatAnthropic(BaseChatModel):
+>     """Interface to Claude chat models.
+>
+>     See the [usage guide](https://docs.langchain.com/oss/python/integrations/chat/anthropic)
+>     for tutorials, feature walkthroughs, and examples.
+>
+>     Args:
+>         model: Model identifier (e.g., `'claude-sonnet-4-6'`).
+>         temperature: Sampling temperature between `0` and `1`.
+>         max_tokens: Maximum number of tokens to generate.
+>         api_key: Anthropic API key.
+>
+>             If not provided, reads from the `ANTHROPIC_API_KEY`
+>             environment variable.
+>         timeout: Request timeout in seconds.
+>         max_retries: Maximum number of retries for failed requests.
+>
+>     Returns:
+>         A chat model instance that can be invoked with messages.
+>
+>     Raises:
+>         ValueError: If the model identifier is not recognized.
+>         AuthenticationError: If the API key is invalid.
+>
+>     Example:
+>         ```python
+>         from langchain_anthropic import ChatAnthropic
+>
+>         model = ChatAnthropic(model="claude-sonnet-4-6")
+>         response = model.invoke("Hello!")
+>         ```
+>     """
 ````
 
-</details>
+> **What does NOT belong in docstrings**
+>
+> Avoid duplicating content that belongs in docstrings:
+>
+> * **Parameter types**: These are in the function signature and auto-generated into the API reference.
+>
+> * **Feature tutorials**: Don't include extended walkthroughs. Instead, link to this site:
+>
+>   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   """
+>   ...
+>
+>   See the [extended thinking guide](https://docs.langchain.com/oss/integrations/chat/anthropic#extended-thinking)
+>   for configuration options.
+>   """
+>   ```
+>
+> * **Multiple example variations**: Include one minimal example, then link to comprehensive guides:
+>
+>   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   """
+>   Example:
+>       \`\`\`python
+>       message = HumanMessage(content=[
+>           {"type": "image", "url": "https://example.com/image.jpg"}
+>       ])
+>       \`\`\`
+>
+>   See the [multimodal guide](https://docs.langchain.com/oss/integrations/chat/anthropic#multimodal)
+>   for all supported input formats.
+>   """
+>   ```
+>
+> * **Conceptual explanations**: Keep to factual parameter descriptions. Link to docs for deeper context.
+>
+> * **MkDocs-specific syntax**: Avoid `???+`, accordions, or tabs in docstrings. They don't render in IDEs.
 
-<details>
-<summary>What does NOT belong in docstrings</summary>
+**Code style**
 
-Avoid duplicating content that belongs in docstrings:
-
-* **Parameter types**: These are in the function signature and auto-generated into the API reference.
-
-* **Feature tutorials**: Don't include extended walkthroughs. Instead, link to this site:
-
-```python
-  """
-  ...
-
-  See the [extended thinking guide](https://docs.langchain.com/oss/integrations/chat/anthropic#extended-thinking)
-  for configuration options.
-  """
-```
-
-* **Multiple example variations**: Include one minimal example, then link to comprehensive guides:
-
-```python
-  """
-  Example:
-      \`\`\`python
-      message = HumanMessage(content=[
-          {"type": "image", "url": "https://example.com/image.jpg"}
-      ])
-      \`\`\`
-
-  See the [multimodal guide](https://docs.langchain.com/oss/integrations/chat/anthropic#multimodal)
-  for all supported input formats.
-  """
-```
-
-* **Conceptual explanations**: Keep to factual parameter descriptions. Link to docs for deeper context.
-
-* **MkDocs-specific syntax**: Avoid `???+`, accordions, or tabs in docstrings. They don't render in IDEs.
-
-</details>
-
-#### Code style
 **Automated**: Formatting and linting via [`ruff`](https://docs.astral.sh/ruff/)
 
 ```bash
@@ -582,7 +569,8 @@ make lint    # Check style and types
 
 LangChain packages distinguish between **hard dependencies** and **optional dependencies** to keep packages lightweight and minimize installation overhead for users.
 
-#### Optional dependencies
+**Optional dependencies**
+
 Almost all new dependencies should be optional. Use optional dependencies when:
 
 * The dependency is only needed for specific integrations or features
@@ -600,7 +588,8 @@ Almost all new dependencies should be optional. Use optional dependencies when:
 2. Add a unit test that at minimum attempts to import the new code. Ideally, the unit test uses lightweight fixtures to test the logic of the code.
 3. Use the `@pytest.mark.requires("package_name")` decorator for any unit tests that require the dependency.
 
-#### Hard dependencies
+**Hard dependencies**
+
 Hard dependencies are installed automatically when users install the package. Use hard dependencies only when:
 
 * The package fundamentally cannot function without the dependency
@@ -608,6 +597,7 @@ Hard dependencies are installed automatically when users install the package. Us
 * There is no reasonable way to make the functionality optional
 
 > [!WARNING]
+>
 > Adding hard dependencies increases install time and potential version conflicts for all users.
 >
 > Maintainers will scrutinize hard dependency additions carefully!
@@ -629,7 +619,8 @@ In order to write effective tests, there's a few good practices to follow:
 * Use descriptive variable names
 * Be exhaustive with assertions
 
-#### Unit tests
+**Unit tests**
+
 ```python
 def test_document_processor_handles_empty_input():
     """Test processor gracefully handles empty document list."""
@@ -642,7 +633,8 @@ def test_document_processor_handles_empty_input():
     assert len(result.errors) == 0
 ```
 
-#### Integration tests
+**Integration tests**
+
 ```python
 @pytest.mark.requires("openai")
 def test_openai_chat_integration():
@@ -655,7 +647,8 @@ def test_openai_chat_integration():
     assert len(response.content) > 0
 ```
 
-#### Mock usage
+**Mock usage**
+
 ```python
 def test_retry_mechanism(mocker):
     """Test retry mechanism handles transient failures."""
@@ -682,9 +675,11 @@ Once your tests pass and code meets quality standards:
 4. Wait for CI checks to complete
 
 > [!NOTE]
+>
 > If your PR includes AI-generated content, you must follow our [acceptable uses of LLMs](overview.md#acceptable-uses-of-llms) policy. PRs that appear to be low-effort, AI-generated spam will be closed without comment.
 
 > [!WARNING]
+>
 > Address CI failures promptly. Maintainers may close PRs that do not pass CI within a reasonable timeframe.
 
 ## Getting help
@@ -692,12 +687,11 @@ Once your tests pass and code meets quality standards:
 Our goal is to have the most accessible developer setup possible. Should you experience any difficulty getting setup, please ask in the [community slack](https://www.langchain.com/join-community) or open a [forum post](https://forum.langchain.com/).
 
 > [!TIP]
+>
 > You're now ready to contribute high-quality code to LangChain!
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

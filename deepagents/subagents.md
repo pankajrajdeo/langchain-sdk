@@ -72,6 +72,7 @@ Deep Agents only attaches [`SubAgentMiddleware`](https://reference.langchain.com
 Async subagents are unaffected—they flow through their own middleware and tools, described in [Async subagents](async-subagents.md).
 
 > [!TIP]
+>
 > Don't reach for `excluded_middleware` here—`SubAgentMiddleware` is required scaffolding and listing it raises `ValueError`. The `general_purpose_subagent.enabled = False` knob is the supported path.
 
 ## Custom subagents
@@ -88,15 +89,15 @@ Define subagents as dictionaries matching the [`SubAgent`](https://reference.lan
 | - | - | - |
 | `name` | `str` | Required. Unique identifier for the subagent. The main agent uses this name when calling the `task()` tool. The subagent name becomes metadata for `AIMessage`s and for streaming, which helps to differentiate between agents. |
 | `description` | `str` | Required. Description of what this subagent does. Be specific and action-oriented. The main agent uses this to decide when to delegate. |
-| `system_prompt` | `str` | Required for `mode: "isolated"` (the default). Instructions for the subagent. Custom isolated subagents must define their own. Include tool usage guidance and output format requirements.<br />Does not inherit from main agent. For `mode: "fork"`, omit this field unless you need a fork-only addendum. See [Forked subagents](#forked-subagents). |
+| `system_prompt` | `str` | Required for `mode: "isolated"` (the default). Instructions for the subagent. Custom isolated subagents must define their own. Include tool usage guidance and output format requirements. Does not inherit from main agent. For `mode: "fork"`, omit this field unless you need a fork-only addendum. See [Forked subagents](#forked-subagents). |
 | `mode` | `"isolated"` \| `"fork"` | Optional. Context mode. Defaults to `"isolated"`, where the subagent only sees the delegated task. Set to `"fork"` to inherit the parent's conversation and system prompt instead. See [Forked subagents](#forked-subagents). |
-| `tools` | `list[Callable]` | Optional. Tools the subagent can use. Keep this minimal and include only what's needed.<br />Inherits from main agent by default. When specified, overrides the inherited tools entirely. |
-| `model` | `str` \| `BaseChatModel` | Optional. Overrides the main agent's model. Omit to use the main agent's model.<br />Inherits from main agent by default. You can pass either a model identifier string like `'openai:gpt-5.5'` (using the `'provider:model'` format) or a LangChain chat model object (`init_chat_model("gpt-5.5")` or `ChatOpenAI(model="gpt-5.5")`). |
-| `middleware` | `list[Middleware]` | Optional. Additional middleware for custom behavior, logging, or rate limiting.<br />Does not inherit from the main agent. Merged into the [synchronous subagent stack](customization.md#synchronous-subagent-stack): an instance whose `.name` matches a default replaces it in place, anything else lands after the last core middleware entry and before profile, prompt-caching, and memory. See [Override a default middleware instance](customization.md#override-a-default-middleware-instance). For example, include a [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) instance with a `tools` allowlist here to restrict the subagent's filesystem tools independently of the main agent. For more information, see the "Restricting filesystem tools" section under [Virtual filesystem access](overview.md#virtual-filesystem-access). |
-| `interrupt_on` | `dict[str, bool \| InterruptOnConfig]` | Optional. Configure [human-in-the-loop](human-in-the-loop.md) for specific tools. Options:`True`, `False`, or an `InterruptOnConfig` with `allowed_decisions`. Requires checkpointer.<br />Inherits from main agent by default. Subagent value overrides the default. |
-| `skills` | `list[str]` | Optional. [Skills](skills.md) source paths. When specified, the subagent loads skills from these directories (for example, `["/skills/researcher/"]`, a container whose subdirectories are skills). This allows subagents to have different skill sets than the main agent.<br />Does not inherit from main agent. Only the general-purpose subagent inherits the main agent's skills. When a subagent has skills, it runs its own independent [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) instance. Skill state is fully isolated—a subagent's loaded skills are not visible to the parent, and vice versa. |
+| `tools` | `list[Callable]` | Optional. Tools the subagent can use. Keep this minimal and include only what's needed. Inherits from main agent by default. When specified, overrides the inherited tools entirely. |
+| `model` | `str` \| `BaseChatModel` | Optional. Overrides the main agent's model. Omit to use the main agent's model. Inherits from main agent by default. You can pass either a model identifier string like `'openai:gpt-5.5'` (using the `'provider:model'` format) or a LangChain chat model object (`init_chat_model("gpt-5.5")` or `ChatOpenAI(model="gpt-5.5")`). |
+| `middleware` | `list[Middleware]` | Optional. Additional middleware for custom behavior, logging, or rate limiting. Isolated subagents do not inherit the main agent's custom middleware. For inheritance and overrides in fork mode, see [Configure a forked subagent](#configure-a-forked-subagent). Merged into the [synchronous subagent stack](customization.md#synchronous-subagent-stack): an instance whose `.name` matches a default replaces it in place, anything else lands after the last core middleware entry and before profile, prompt-caching, and memory. See [Override a default middleware instance](customization.md#override-a-default-middleware-instance). For example, include a [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) instance with a `tools` allowlist here to restrict the subagent's filesystem tools independently of the main agent. For more information, see the "Restricting filesystem tools" section under [Virtual filesystem access](overview.md#virtual-filesystem-access). |
+| `interrupt_on` | `dict[str, bool \| InterruptOnConfig]` | Optional. Configure [human-in-the-loop](human-in-the-loop.md) for specific tools. Options:`True`, `False`, or an `InterruptOnConfig` with `allowed_decisions`. Requires checkpointer. Inherits from main agent by default. Subagent value overrides the default. |
+| `skills` | `list[str]` | Optional. [Skills](skills.md) source paths. When specified, the subagent loads skills from these directories (for example, `["/skills/researcher/"]`, a container whose subdirectories are skills). This allows subagents to have different skill sets than the main agent. Does not inherit from main agent. Only the general-purpose subagent inherits the main agent's skills. When a subagent has skills, it runs its own independent [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) instance. Skill state is fully isolated—a subagent's loaded skills are not visible to the parent, and vice versa. |
 | `response_format` | `ResponseFormat` | Optional. [Structured output](../langchain/structured-output.md) schema for the subagent. When set, the parent receives the subagent's result as JSON instead of free-form text. Accepts Pydantic models, `ToolStrategy(...)`, `ProviderStrategy(...)`, or a raw schema type. See [Structured output](#structured-output). |
-| `permissions` | `list[FilesystemPermission]` | Optional. [Filesystem permission rules](permissions.md) for the subagent. When set, **replaces** the parent agent's permissions entirely.<br />Inherits from main agent by default. |
+| `permissions` | `list[FilesystemPermission]` | Optional. [Filesystem permission rules](permissions.md) for the subagent. When set, **replaces** the parent agent's permissions entirely. Inherits from main agent by default. |
 
 ### CompiledSubAgent
 
@@ -424,7 +425,7 @@ agent = create_deep_agent(
 
 ## Forked subagents
 
-By default, a subagent runs with `mode: "isolated"`: it sees only the task description you give it and has no memory of the conversation that led up to the delegation. A **forked subagent** (`mode: "fork"`) inherits the parent's full conversation history and exact system prompt instead.
+By default, a subagent runs with `mode: "isolated"`: it sees only the task description you give it and has no memory of the conversation that led up to the delegation. A **forked subagent** (`mode: "fork"`) inherits the parent's conversation history and state instead.
 
 Use forked subagents when the subagent's task is to continue the work the parent already started, like a worker agent that picks up a fix the parent has already diagnosed, or a subagent that drafts the postmortem for an incident investigation. Since forking is a mode you set on the subagent itself, that's a decision you make when you define it.
 
@@ -454,14 +455,35 @@ graph TD
 ```
 
 > [!NOTE]
+>
 > Subagent forking requires `deepagents>=0.7.13`. It is in [**beta**](../versioning.md); APIs and behavior may change between releases.
 
 ### Configure a forked subagent
 
-Set `mode: "fork"` on a [`SubAgent`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgent) (the default is `mode: "isolated"`). All [`SubAgent`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgent) fields are available:
+Set `mode: "fork"` on a [`SubAgent`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgent) (the default is `mode: "isolated"`). You can configure these [`SubAgent`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgent) fields:
 `name`, `description`, `tools`, `model`, `middleware`, `interrupt_on`, `permissions`, and `response_format`.
 
-`skills` is rejected if provided. `system_prompt` is allowed and is appended to the parent's inherited prompt as an addendum, but doing so typically breaks the prompt cache, so leave it unset unless you have a specific need for fork-only instructions.
+Forks inherit the custom middleware passed to the parent's `create_deep_agent`. Middleware in the subagent's `middleware` list replaces an inherited instance with the same `.name`. Other instances are added to the subagent's default middleware stack.
+
+By default, the fork inherits all tools passed to the parent. Set `tools` to replace those tools, not add to them. For example, a list containing one tool replaces the inherited list with that one tool. Filesystem and other middleware-provided tools are added separately.
+
+`skills` is rejected if provided. `system_prompt` is appended to the parent's inherited prompt as an addendum. Leave it unset unless you need fork-only instructions.
+
+A `wrap_model_call` hook receives the fork's inherited prompt through `request.system_message`. It can rewrite the fork's outgoing request with `request.override(system_message=...)` without changing the parent's prompt. This differs from `system_prompt`, which appends instructions.
+
+Avoid rewriting the shared inherited prefix or changing tool definitions unless you accept reduced cache reuse and potentially higher model costs. For example, this hook fragment prepends text before the inherited prefix, preventing reuse of that prefix:
+
+```python
+from langchain.messages import SystemMessage
+
+rewritten = SystemMessage(content=[
+    {"type": "text", "text": "You are a security auditor.\n"},
+    *request.system_message.content_blocks,
+])
+return handler(request.override(system_message=rewritten))
+```
+
+Additional middleware or appended instructions do not necessarily prevent reuse of an unchanged prefix.
 
 ```python
 from deepagents import create_deep_agent
@@ -495,8 +517,9 @@ result = agent.invoke(
 )
 ```
 
-#### [View example trace](https://smith.langchain.com/public/715bb23d-3529-4c28-b994-c174a89513ef/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/6824e214-8e46-4cc4-8332-884c37bae27a/r)**
+>
+> Open a public LangSmith run for this example.
 
 ### How it works
 
@@ -524,7 +547,7 @@ A fork does not get a fresh task description. It gets the parent's own conversat
 ]
 ```
 
-Reusing the parent's exact prefix also means the fork can reuse the parent's prompt cache instead of starting cold, though tool use that diverges from the parent's will still miss.
+A fork can reuse the parent's prompt cache for the matching prefix of their requests. Changing the system prompt, tools, or earlier messages shortens that shared prefix across providers. Leave the fork's configuration unchanged to maximize reuse, though cache hits are not guaranteed.
 
 A [`CompiledSubAgent`](https://reference.langchain.com/python/deepagents/middleware/subagents/CompiledSubAgent) supports `mode: "fork"` too, though it keeps its own system prompt since the graph is already built.
 
@@ -534,8 +557,8 @@ Compare isolated and forked modes along these dimensions:
 
 | Dimension | Isolated (default) | Forked |
 | - | - | - |
-| **Context** | Only the task description you pass in | The parent's full conversation history and system prompt |
-| **System prompt and skills** | You set them on the subagent | Skills not settable; system prompt appends to the parent's (breaks caching, so usually left unset) |
+| **Context** | Only the task description you pass in | The parent's conversation history and state |
+| **System prompt and skills** | You set them on the subagent | Skills not settable; system prompt is appended to the parent's base prompt (breaks caching, so usually left unset) |
 | **Calling other subagents** | Can use the `task` tool | Cannot use `task`; must finish the work itself |
 | **Best for** | Focused work that needs little prior context | Continuing an investigation the parent has already started |
 
@@ -546,6 +569,7 @@ By default, the main agent delegates to subagents through `task` tool calls (it 
 Reach for dynamic subagents when work spans many independent units (reviewing every file in a directory, triaging a batch of tickets), needs multiple perspectives, or benefits from recursive analysis.
 
 > [!WARNING]
+>
 > Dynamic subagents use the interpreter runtime, which is in [**beta**](../versioning.md). APIs and lifecycle behavior may change between releases.
 
 ### Enable dynamic subagents
@@ -684,6 +708,7 @@ agent = create_deep_agent(
 ```
 
 > [!NOTE]
+>
 > Dynamic subagent dispatch is on by default whenever the agent has subagents and the interpreter middleware. Pass `CodeInterpreterMiddleware(subagents=False)` to require dispatch through the normal `task` tool path. Interpreters require `langchain-quickjs>=0.2.0` and Python 3.11 or later.
 
 ### Trigger dynamic orchestration
@@ -691,6 +716,7 @@ agent = create_deep_agent(
 Dynamic dispatch is implicit: the agent decides to fan work out from code based on the shape of the task, not a per-call flag.
 
 > [!TIP]
+>
 > **The word "workflow" is a useful trigger.** The built-in interpreter system prompt treats a "workflow" as a signal to organize work through the interpreter—dispatching subagents with `task()` from code. Phrasing a request as a "workflow" is a deliberate lever you can pull to opt into dynamic orchestration: include it when you want the agent to fan work out from code. For a single, direct delegation, phrase the request plainly instead.
 
 For example, phrasing the request as a "workflow" opts into fan-out from code:
@@ -723,7 +749,7 @@ To trigger dynamic subagents, ask for a "workflow". Instead of grinding through 
 
 As subagents spawn, `dcode` shows them live in the dynamic subagents panel, grouped into phases by dispatch.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/mcM5dSw40KzBUENf/oss/images/deepagents/dcode-dynamic-subagents-panel.png?fit=max&auto=format&n=mcM5dSw40KzBUENf&q=85&s=bc20632b54e21fecfc5ff4f8d169a2c7" alt="The dcode dynamic subagents panel showing spawned subagents grouped into phases by dispatch" width="3134" height="1832" data-path="oss/images/deepagents/dcode-dynamic-subagents-panel.png" />
+![The dcode dynamic subagents panel showing spawned subagents grouped into phases by dispatch](https://mintcdn.com/langchain-5e9cc07a/mcM5dSw40KzBUENf/oss/images/deepagents/dcode-dynamic-subagents-panel.png?fit=max\&auto=format\&n=mcM5dSw40KzBUENf\&q=85\&s=bc20632b54e21fecfc5ff4f8d169a2c7)
 
 `dcode` is the fastest way to try this, but you can also use dynamic subagents in the coding agent of your choice over [ACP](acp.md) (for example, Zed).
 
@@ -1136,16 +1162,18 @@ if __name__ == "__main__":
             print(f"[{item.name}] status: {item.status}")
 ```
 
-#### [View example trace](https://smith.langchain.com/public/a833f9e2-dc76-440a-81ff-3d24cd9cb6d3/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/f25e02c6-7a78-4d2c-b2d7-3d33c3599818/r)**
+>
+> Open a public LangSmith run for this example.
 
 ### LangSmith tracing
 
 As your deep agent runs, all runs executed by a subagent or the coordinator will have the agent name in their metadata under the `lc_agent_name` key—for example, `{'lc_agent_name': 'research-agent'}`. This lets you identify and filter runs by subagent in LangSmith.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/IlqYrcANJ39avG84/oss/images/deepagents/deepagents-langsmith.png?fit=max&auto=format&n=IlqYrcANJ39avG84&q=85&s=4c3a1512fb27abc30da37751aee19afd" alt="LangSmith Example trace showing the metadata" width="907" height="866" data-path="oss/images/deepagents/deepagents-langsmith.png" />
+![LangSmith Example trace showing the metadata](https://mintcdn.com/langchain-5e9cc07a/IlqYrcANJ39avG84/oss/images/deepagents/deepagents-langsmith.png?fit=max\&auto=format\&n=IlqYrcANJ39avG84\&q=85\&s=4c3a1512fb27abc30da37751aee19afd)
 
 > [!TIP]
+>
 > Open the run in [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-subagents) to compare the coordinator trace with each subagent run. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up. We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Filter by subagent in LangSmith
@@ -1159,7 +1187,7 @@ Because each subagent's `name` is written to the `lc_agent_name` metadata key on
 3. Click **Add filter** and select **Metadata**.
 4. Set the **Key** to `lc_agent_name` and the **Value** to the subagent name, for example `coordinator`.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/t_yuR4Fo_XGdcWGH/langsmith/images/deepagents-lc-agent-name-filter.png?fit=max&auto=format&n=t_yuR4Fo_XGdcWGH&q=85&s=ffc65c0b9b5292fce5f0589b8f2478ce" alt="LangSmith Runs view with a metadata filter on lc_agent_name set to coordinator" width="1024" height="533" data-path="langsmith/images/deepagents-lc-agent-name-filter.png" />
+![LangSmith Runs view with a metadata filter on lc\_agent\_name set to coordinator](https://mintcdn.com/langchain-5e9cc07a/t_yuR4Fo_XGdcWGH/langsmith/images/deepagents-lc-agent-name-filter.png?fit=max\&auto=format\&n=t_yuR4Fo_XGdcWGH\&q=85\&s=ffc65c0b9b5292fce5f0589b8f2478ce)
 
 This shows only the runs produced by that subagent. You can save the filter as a named view for reuse. For a full reference on filtering options, see [Filter traces](../langsmith/filter-traces.md).
 
@@ -1197,6 +1225,7 @@ For the full filter query language reference, see [Trace query syntax](../langsm
 Subagents support [structured output](../langchain/structured-output.md), so the parent agent receives predictable, parseable JSON instead of free-form text.
 
 > [!NOTE]
+>
 > Structured output for subagents requires `deepagents>=0.5.3`.
 
 Pass `response_format` on the subagent config. When the subagent finishes, its structured response is JSON-serialized and returned as the `ToolMessage` content to the parent agent. The schema accepts anything supported by [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent): Pydantic models, `ToolStrategy(...)`, `ProviderStrategy(...)`, or a raw schema type.
@@ -1716,8 +1745,9 @@ To remove the built-in general-purpose subagent entirely instead of replacing it
 
 The general-purpose subagent is ideal for context isolation without specialized behavior. The main agent can delegate a complex multi-step task to this subagent and get a concise result back without bloat from intermediate tool calls.
 
-#### Example
-Instead of the main agent making 10 web searches and filling its context with results, it delegates to the general-purpose subagent: `task(name="general-purpose", task="Research quantum computing trends")`. The subagent performs all the searches internally and returns only a summary.
+> **Example**
+>
+> Instead of the main agent making 10 web searches and filling its context with results, it delegates to the general-purpose subagent: `task(name="general-purpose", task="Research quantum computing trends")`. The subagent performs all the searches internally and returns only a summary.
 
 ### Skills inheritance
 
@@ -1727,6 +1757,7 @@ When configuring [skills](skills.md) with `create_deep_agent`:
 * **Custom subagents**: Do NOT inherit skills by default—use the `skills` parameter to give them their own skills
 
 > [!NOTE]
+>
 > Only subagents configured with skills get a `SkillsMiddleware` instance—custom subagents without a `skills` parameter do not. When present, skill state is fully isolated in both directions: the parent's skills are not visible to the child, and the child's skills are not propagated back to the parent.
 
 ```python
@@ -2974,8 +3005,6 @@ subagents = [
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

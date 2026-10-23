@@ -21,21 +21,23 @@ There are a few approaches to testing your agents:
 Agentic applications tend to lean more on integration because they chain multiple components together and must deal with flakiness due to the nondeterministic nature of LLMs.
 
 > [!TIP]
+>
 > Run evaluations at scale, track results over time, and compare experiments with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-test-index). See [Evaluate an LLM application](../../langsmith/evaluate-llm-application.md) to get started.
 
-#### [Unit testing](test/unit-testing.md)
-Mock chat models and use in-memory persistence to test agent logic without API calls.
+> **[Unit testing](test/unit-testing.md)**
+>
+> Mock chat models and use in-memory persistence to test agent logic without API calls.
 
-#### [Integration testing](test/integration-testing.md)
-Test your agent with real LLM APIs. Organize tests, manage keys, handle flakiness, and control costs.
+> **[Integration testing](test/integration-testing.md)**
+>
+> Test your agent with real LLM APIs. Organize tests, manage keys, handle flakiness, and control costs.
 
-#### [Evals](test/evals.md)
-Evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators.
+> **[Evals](test/evals.md)**
+>
+> Evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

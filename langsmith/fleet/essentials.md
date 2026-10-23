@@ -30,6 +30,7 @@ Configure your agent from the sidebar built into the agent chat page. The sideba
 * **Advanced settings**: Configure the model, API keys, sub-agents, diagnostics, and developer options for your agent.
 
 > [!TIP]
+>
 > You can also configure your agent by chatting with it. In the agent chat, tell the agent how to improve itself, for example: "Add the Slack tools so you can respond to messages."
 
 ## Channels
@@ -55,13 +56,16 @@ To require approval for a tool, set it to **Ask**. When the agent reaches that t
 
 When your agent stops to ask for approval, you have two options:
 
-#### Accept
-Give the green light and let your agent proceed with its plan.
+> **Accept**
+>
+> Give the green light and let your agent proceed with its plan.
 
-#### Reject
-Decline the action and tell the agent what to change.
+> **Reject**
+>
+> Decline the action and tell the agent what to change.
 
 > [!NOTE]
+>
 > When an agent is triggered from Slack, it raises the approval request directly in the Slack thread with **Approve** and **Deny** buttons, so you can respond without leaving Slack. See [Approve or deny actions in Slack](slack-app.md#approve-or-deny-actions-in-slack).
 
 ## Instructions
@@ -75,6 +79,7 @@ To edit instructions:
 3. In the **Instructions** section, edit the agent instructions.
 
 > [!TIP]
+>
 > You can also update instructions by prompting the agent directly in the chat. For example: "Update your instructions to always respond in bullet points."
 
 ## LangChain Standard Units (LSUs)
@@ -82,6 +87,7 @@ To edit instructions:
 Fleet usage is measured in LangChain Standard Units (LSUs). LSU usage is based on the [model](#models) work your agent performs, including the selected tier and the amount of content it processes and generates.
 
 > [!NOTE]
+>
 > The new [model tiers](#models) and LSU pricing apply to Fleet usage starting **October 1, 2026**. If you use a custom model, [contact our sales team](https://www.langchain.com/contact-sales) about your transition.
 
 Allowances are shared across your organization and reset monthly:
@@ -103,6 +109,7 @@ Agents remember important information from previous conversations and can update
 Agents persist relevant details from past interactions by writing files to a **memories folder** (using `write_file` and `edit_file` tool calls). This helps them make better decisions in future conversations.
 
 > [!NOTE]
+>
 > By default, agents require approval before saving to the memories folder. You can change this in the **Knowledge** drawer under **Memory**.
 >
 > For agents that run on automated [schedules](schedules.md#add-a-schedule), we recommend [disabling the approval requirement](manage-agent-settings.md#disable-required-approval-for-memory-updates) so the agent can persist information without manual intervention.
@@ -114,11 +121,12 @@ For more information, see [How we built the memory system for Fleet (formerly kn
 Fleet manages models for you. It selects and maintains a strong model for each task, so you get good results without having to choose a provider, configure a model, or supply an API key. Usage is billed in [LangChain Standard Units (LSUs)](#langchain-standard-units-lsus).
 
 > [!NOTE]
+>
 > The new model tiers and [LSU](#langchain-standard-units-lsus) pricing apply to Fleet usage starting **October 1, 2026**. If you use a custom model, [contact our sales team](https://www.langchain.com/contact-sales) about your transition.
 
 Fleet provides three managed tiers. The model behind each tier may change over time as new models become available, so you can choose based on the work you need done instead of a specific provider or model.
 
-| Tier | Best for | Relative cost |
+| Tier | Best for | Relative cost (Higher tiers typically cost more and take longer.) |
 | - | - | - |
 | **Fast** | Everyday tasks such as research, summaries, and drafting | Low |
 | **Pro** | More complex tasks that benefit from stronger reasoning | Medium |
@@ -200,6 +208,7 @@ To view a trace for a specific thread:
 For more information, see [LangSmith Observability](../observability.md).
 
 > [!NOTE]
+>
 > Fleet traces all agent runs and stores them in LangSmith. LLM providers do not retain your data. On LangSmith Cloud, trace data is stored with a 14-day retention period by default.
 
 ## Next steps
@@ -212,8 +221,6 @@ For more information, see [LangSmith Observability](../observability.md).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/essentials.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/essentials.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

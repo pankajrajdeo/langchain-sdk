@@ -11,6 +11,7 @@ tags: [docs, langsmith, llm-gateway-fallbacks]
 > Automatically retry a request against backup models when the primary model rate-limits, errors, or returns another configured status code.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 Model fallbacks retry a request against one or more backup models when the primary model returns a configured error, such as a rate limit or provider outage. Define the fallback order once in LangSmith, then continue using the standard LLM Gateway endpoint and model ID in your application.
@@ -37,6 +38,7 @@ Each attempt is traced and counted against [spend policies](llm-gateway-spend-po
 ## Create a fallback chain
 
 > [!WARNING]
+>
 > Creating and managing fallback chains requires `organization:manage` permission. For the full permissions breakdown, see [Access control](llm-gateway-access.md).
 
 To create a fallback chain:
@@ -89,7 +91,7 @@ To configure fallbacks for a prompt:
 
 3. [Create a prompt](create-a-prompt.md) in the Playground. Open **Model Configuration**, select **LangSmith Gateway** as the **Provider**, and enter `custom/<my_config_name>` in the **Model** field. Replace `<my_config_name>` with the saved configuration's name, without angle brackets. You can type the value even if it is not listed. Click **Apply**.
 
-   <img src="https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=6d628cfacd6bfbee2162ba9c69207940" alt="Model Configuration dialog with LangSmith Gateway selected as the provider and custom/<my_config_name> entered in the Model field." data-og-width="1666" width="1666" data-og-height="1342" height="1342" data-path="images/llm-gateway-prompt-model-configuration.png" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=280&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=79a50cf221f5eb09fe191d57b8e44b6e 280w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=560&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=b4facd8d11976a0e16491f504621a1e6 560w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=840&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=50976e2d807a4197cb20caef32b359ab 840w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=1100&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=d73ba952cfc1c72775a054cac1596370 1100w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=1650&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=15789b603483839b77f12171d3e2854b 1650w, https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?w=2500&fit=max&auto=format&n=fF0qKKSfCv3bTXzB&q=85&s=7090e50a3520f0a0ad7c5fcbfbe22fcf 2500w" />
+   ![Model Configuration dialog with LangSmith Gateway selected as the provider and custom/\<my\_config\_name> entered in the Model field.](https://mintcdn.com/langchain-5e9cc07a/fF0qKKSfCv3bTXzB/images/llm-gateway-prompt-model-configuration.png?fit=max\&auto=format\&n=fF0qKKSfCv3bTXzB\&q=85\&s=6d628cfacd6bfbee2162ba9c69207940)
 
 4. **Save** the prompt, then [pull it with its model](manage-prompts-programmatically.md#pull-a-prompt). In Python, set `include_model=True` when calling `client.pull_prompt` so the saved Gateway model configuration is included.
 
@@ -102,7 +104,7 @@ The fallback chain belongs to the model configuration, not the prompt itself. Pr
 You can add two types of fallback candidates:
 
 * **Direct provider model**: select a supported gateway provider and model. This option uses the workspace's secret for that provider, or Gateway Credits for eligible hosted models.
-* **Model configuration**: select a saved [model configuration](model-configurations.md). Use this option for a custom OpenAI-compatible or Anthropic endpoint, a custom model name, or configuration-specific parameters.
+* **Model configuration**: select a saved [model configuration](llm-gateway-model-configurations.md). Use this option for a custom OpenAI-compatible or Anthropic endpoint, a custom model name, or configuration-specific parameters.
 
 A fallback chain can use model configurations from its selected workspace or organization. If both scopes contain a configuration with the same name, LLM Gateway uses the workspace-scoped configuration, including for the primary model.
 
@@ -112,11 +114,10 @@ For example, configure `anthropic/claude-opus-5` as the primary model, `openai/g
 
 * [API formats](llm-gateway-api-formats.md): review supported request formats and translation behavior.
 * [Spend policies](llm-gateway-spend-policies.md): apply cost limits alongside fallback routing.
+* [Custom model configurations](llm-gateway-model-configurations.md): call a saved configuration through the gateway with `custom/<name>`.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-fallbacks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-fallbacks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

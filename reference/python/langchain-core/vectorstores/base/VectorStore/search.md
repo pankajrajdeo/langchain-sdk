@@ -21,7 +21,7 @@ search(
     self,
     query: str,
     search_type: str,
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> list[Document]
 ```
 
@@ -41,4 +41,4 @@ List of `Document` objects most similar to the query.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/vectorstores/base.py#L293)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/vectorstores/base.py#L293)

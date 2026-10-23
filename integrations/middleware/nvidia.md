@@ -12,6 +12,8 @@ tags: [docs, integrations, middleware, nvidia]
 
 Middleware integrations and model-specific harness profiles for NVIDIA services and models. Use them to route calls across LangChain chat models or optimize Deep Agents behavior for NVIDIA Nemotron 3 Ultra. Learn more about [middleware](../../langchain/middleware/overview.md).
 
+To use Nemotron 3.5 Super VL with the default Deep Agents harness, see the [ChatNVIDIA examples](../chat/nvidia_ai_endpoints.md#use-nemotron-3-5-super-vl).
+
 ## Overview
 
 | Integration | Description |
@@ -24,6 +26,7 @@ Middleware integrations and model-specific harness profiles for NVIDIA services 
 Deep Agents includes a built-in harness profile for [NVIDIA Nemotron 3 Ultra](https://build.nvidia.com/nvidia/nemotron-3-ultra-550b-a55b). The profile adds model-specific prompt guidance, tool descriptions, and middleware for tool calling, filesystem operations, retries, context management, and final answers. It was developed through [evaluation-driven harness tuning](https://developer.nvidia.com/blog/create-a-langchain-deep-agents-harness-profile-for-nvidia-nemotron-3-ultra-to-improve-performance/).
 
 > [!NOTE]
+>
 > The built-in Nemotron 3 Ultra harness profile requires `deepagents>=0.7.0`.
 
 ### What the profile changes
@@ -80,6 +83,7 @@ The profile is registered for Nemotron 3 Ultra model identifiers served through 
 The experimental `SwitchyardRoutingMiddleware` routes each deep agent model call through a configured [NeMo Switchyard](https://github.com/NVIDIA-NeMo/Switchyard) `libsy` algorithm. Use it to combine LangChain chat models with different cost and performance profiles while Deep Agents continues to manage the agent loop, tools, state, and middleware composition.
 
 > [!WARNING]
+>
 > This integration is experimental. Its APIs and behavior are subject to breaking changes without notice. Review the [current limitations](https://github.com/langchain-ai/langchain-nvidia/tree/main/libs/switchyard#limitations) before using it in an application.
 
 ### Features
@@ -109,6 +113,7 @@ python -m pip install -e "./langchain-nvidia/libs/switchyard[openrouter]"
 The OpenRouter example requires `OPENROUTER_API_KEY`. Confirm that your account can access both configured models before running it.
 
 > [!NOTE]
+>
 > `SwitchyardRoutingMiddleware` requires `deepagents>=0.7.4`.
 
 ### Instantiation
@@ -210,8 +215,6 @@ Some algorithms make more than one decision. Use `decisions` for the full trace;
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -45,6 +45,7 @@ graph = graph_builder.compile(...)
 ```
 
 > [!WARNING]
+>
 > You **MUST** compile your graph before you can use it.
 
 ## State
@@ -58,6 +59,7 @@ The main documented way to specify the schema of a graph is by using a [`TypedDi
 By default, the graph will have the same input and output schemas. If you want to change this, you can also specify explicit input and output schemas directly. This is useful when you have a lot of keys, and some are explicitly for input and others for output. See the [guide](use-graph-api.md#define-input-and-output-schemas) for more information.
 
 > [!NOTE]
+>
 > The higher-level [`create_agent`](../langchain/agents.md) factory in `langchain` does not support Pydantic state schemas.
 
 #### Multiple schemas
@@ -118,8 +120,9 @@ graph.invoke({"user_input": "My"})
 # {'graph_output': 'My name is Lance'}
 ```
 
-#### [View example trace](https://smith.langchain.com/public/db7e0ca9-0d20-4958-9b72-48bcc6564c0e/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/62539b5c-8df4-4dff-8de2-f365fc05983d/r)**
+>
+> Open a public LangSmith run for this example.
 
 There are two subtle and important points to note here:
 
@@ -140,13 +143,14 @@ There are two subtle and important points to note here:
    We can do this because `_nodes` can also declare additional state `channels_` as long as the state schema definition exists. In this case, the `PrivateState` schema is defined, so we can add `bar` as a new state channel in the graph and write to it.
 
 > [!WARNING]
+>
 > **Private channels are not redacted when streaming.**
 >
 > Input, output, and private schemas constrain what each node *reads* (its input schema) and what `invoke` *returns* (the output schema). They do **not** hide channels from `stream`.
 >
 > When you stream with `stream_mode="values"`, the graph emits **all** of its state channels by default, including private ones, because values streaming defaults to the full set of state channels rather than the output schema. This is why a private channel like `bar` is hidden by `invoke` but visible while streaming:
 >
-> ```python
+```python
 > stream = graph.stream_events({"user_input": "My"}, version="v3")
 > for snapshot in stream.values:
 >     print(snapshot)
@@ -154,14 +158,15 @@ There are two subtle and important points to note here:
 > # {'foo': 'My name', 'user_input': 'My'}
 > # {'foo': 'My name', 'user_input': 'My', 'bar': 'My name is'}        # <-- private channel
 > # {'foo': 'My name', 'user_input': 'My', 'graph_output': 'My name is Lance', 'bar': 'My name is'}
-> ```
+```
 >
-> #### [View example trace](https://smith.langchain.com/public/41466c41-ad4c-4ca8-965a-bfae7b03ab67/r)
-> Open a public LangSmith run for this example.
+> > **[View example trace](https://smith.langchain.com/public/086201cf-5ed2-4a4b-aade-02848b380fad/r)**
+> >
+> > Open a public LangSmith run for this example.
 >
 > To restrict the streamed values to a specific set of channels (e.g. only the output schema), pass `output_keys`:
 >
-> ```python
+```python
 > stream = graph.stream_events(
 >     {"user_input": "My"},
 >     version="v3",
@@ -170,7 +175,7 @@ There are two subtle and important points to note here:
 > for snapshot in stream.values:
 >     print(snapshot)
 > # {'graph_output': 'My name is Lance'}
-> ```
+```
 >
 > If you only need the channels a node actually produced each step (rather than the full accumulated state), use `stream_mode="updates"` instead.
 
@@ -252,6 +257,7 @@ In this example, we've used the `Annotated` type to specify a reducer function (
 #### Overwrite
 
 > [!TIP]
+>
 > In some cases, you may want to bypass a reducer and directly overwrite a state value. LangGraph provides the [`Overwrite`](https://reference.langchain.com/python/langgraph/types/) type for this purpose. [Learn how to use `Overwrite` here](use-graph-api.md#bypass-reducers-with-overwrite).
 
 #### Resetting a reducer field
@@ -334,6 +340,7 @@ const State = new StateSchema({
 * With `guard: false`: Multiple writes allowed, last value wins
 
 > [!WARNING]
+>
 > Don't use `UntrackedValue` for data you need to persist across interrupts or time travel. Use regular state fields or `ReducedValue` for persistent data.
 
 ### Type utilities
@@ -558,7 +565,8 @@ When you compile with a [checkpointer](persistence.md), LangGraph saves checkpoi
 
 If a [node](#nodes) contains multiple operations, you may find it easier to implement each operation as a [**task**](functional-api.md#task) instead of splitting the logic across multiple nodes. Task results are checkpointed when the graph uses a checkpointer, so resuming a thread can skip completed **task** work inside the node.
 
-#### Original
+**Original**
+
 ```python
 from typing import NotRequired
 
@@ -591,10 +599,12 @@ config = {"configurable": {"thread_id": thread_id}}
 graph.invoke({"url": "https://www.example.com"}, config)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/ecb04879-c086-47c3-9244-405be60f0c26/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/3bce38d1-45db-477d-87a2-f58b0d2473d9/r)**
+>
+> Open a public LangSmith run for this example.
 
-#### With task
+**With task**
+
 ```python
 from typing import NotRequired
 
@@ -634,8 +644,9 @@ config = {"configurable": {"thread_id": thread_id}}
 graph.invoke({"urls": ["https://www.example.com"]}, config)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/cc6bd7b8-a3c0-45bb-80e1-a8428c1fcd4d/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/906c25d1-3431-4e07-a0a5-c8f6b51bfa66/r)**
+>
+> Open a public LangSmith run for this example.
 
 ### `START` node
 
@@ -699,6 +710,7 @@ print(graph.invoke({"x": 5}, stream_mode='updates'))    # [!code highlight]
 ```
 
 > [!NOTE]
+>
 > `set_entry_point(node)` defines the first node the graph will execute.
 > It is equivalent to `builder.add_edge(START, node)`.
 >
@@ -723,6 +735,7 @@ Edges define how the logic is routed and how the graph decides to stop. This is 
 A node can have multiple outgoing edges. If a node has multiple outgoing edges, **all** of those destination nodes will be executed in parallel as a part of the next superstep.
 
 > [!WARNING]
+>
 > For each node, choose one routing mechanism: use normal edges for static routing, or use conditional edges / [`Command`](https://reference.langchain.com/python/langgraph/types/Command) for dynamic routing. Do not mix normal edges and dynamic routing from the same node, because both paths can execute and make graph behavior harder to reason about.
 
 ### Normal edges
@@ -752,6 +765,7 @@ graph.add_conditional_edges("node_a", routing_function, {True: "node_b", False: 
 ```
 
 > [!TIP]
+>
 > Use [`Command`](#command) instead of conditional edges if you want to combine state updates and routing in a single function.
 
 ### Entry point
@@ -837,9 +851,11 @@ def my_node(state: State) -> Command[Literal["my_other_node"]]:
 Use [`Command`](https://reference.langchain.com/python/langgraph/types/Command) when you need to **both** update state **and** route to a different node. If you only need to route without updating state, use [conditional edges](#conditional-edges) instead.
 
 > [!NOTE]
+>
 > When returning [`Command`](https://reference.langchain.com/python/langgraph/types/Command) in your node functions, you must add return type annotations with the list of node names the node is routing to, e.g. `Command[Literal["my_other_node"]]`. This is necessary for the graph rendering and tells LangGraph that `my_node` can navigate to `my_other_node`.
 
 > [!WARNING]
+>
 > [`Command`](https://reference.langchain.com/python/langgraph/types/Command) only adds dynamic edges—static edges defined with `add_edge` / `addEdge` still execute. For example, if `node_a` returns `Command(goto="my_other_node")` and you also have `graph.add_edge("node_a", "node_b")`, both `node_b` and `my_other_node` will run. For each node, use either [`Command`](https://reference.langchain.com/python/langgraph/types/Command) or static edges to route to the next nodes, not both.
 
 Check out this [how-to guide](use-graph-api.md#combine-control-flow-and-state-updates-with-command) for an end-to-end example of how to use [`Command`](https://reference.langchain.com/python/langgraph/types/Command).
@@ -858,6 +874,7 @@ def my_node(state: State) -> Command[Literal["other_subgraph"]]:
 ```
 
 > [!NOTE]
+>
 > Setting `graph` to `Command.PARENT` will navigate to the closest parent graph.
 >
 > When you send updates from a subgraph node to a parent graph node for a key that's shared by both parent and subgraph [state schemas](#schema), you **must** define a [reducer](#reducers) for the key you're updating in the parent graph state. See this [example](use-graph-api.md#navigate-to-a-node-in-a-parent-graph).
@@ -867,9 +884,10 @@ This is particularly useful when implementing [multi-agent handoffs](../langchai
 ### Input to `invoke` or `stream`
 
 > [!WARNING]
+>
 > `Command(resume=...)` is the **only** `Command` pattern intended as input to `invoke()`/`stream()` (optionally combined with `update=...` to also apply a state change while resuming). Do not use `Command(update=...)` alone as input to continue multi-turn conversations—because passing any `Command` as input resumes from the latest checkpoint (i.e. the last step that ran, not `__start__`), the graph will appear stuck if it already finished. To continue a conversation on an existing thread, pass a plain input dict:
 >
-> ```python
+```python
 > # WRONG - graph resumes from the latest checkpoint
 > # (last step that ran), appears stuck
 > graph.invoke(Command(update={  # [!code --]
@@ -880,7 +898,7 @@ This is particularly useful when implementing [multi-agent handoffs](../langchai
 > graph.invoke( {  # [!code ++]
 >     "messages": [{"role": "user", "content": "follow up"}]  # [!code ++]
 > }, config)  # [!code ++]
-> ```
+```
 
 #### `resume`
 
@@ -921,8 +939,9 @@ resumed = graph.stream_events(Command(resume="yes"), config, version="v3")
 final = resumed.output
 ```
 
-#### [View example trace](https://smith.langchain.com/public/55c552d5-6214-4be2-8271-571acd47e3e3/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/b9e32d60-4cf6-44e6-b85c-60f763578a10/r)**
+>
+> Open a public LangSmith run for this example.
 
 Check out the [interrupts conceptual guide](interrupts.md) for full details on interrupt patterns, including multiple interrupts and validation loops.
 
@@ -931,6 +950,7 @@ Check out the [interrupts conceptual guide](interrupts.md) for full details on i
 You can return [`Command`](https://reference.langchain.com/python/langgraph/types/Command) from tools to update graph state and control flow. Use `update` to modify state (e.g., saving customer information looked up during a conversation) and `goto` to route to a specific node after the tool completes.
 
 > [!WARNING]
+>
 > When used inside tools, `goto` adds a dynamic edge—any static edges already defined on the node that called the tool will still execute. For each node, use either tool-driven dynamic routing or static edges to route to the next nodes, not both.
 
 Refer to [Use inside tools](use-graph-api.md#use-inside-tools) for detail.
@@ -946,6 +966,7 @@ LangGraph can easily handle migrations of graph definitions (nodes, edges, and s
 * State keys whose types change in incompatible ways could currently cause issues in threads with state from before the change -- if this is a blocker please reach out and we can prioritize a solution.
 
 > [!TIP]
+>
 > For changes that are technically compatible but alter business logic, such as rewriting the tool set or restructuring conversation flow, see [Business compatibility](backward-compatibility.md#business-compatibility). That page covers pinning a behavioral version in state so existing threads keep the old path while new threads pick up the latest version.
 
 ## Runtime context
@@ -1163,8 +1184,6 @@ To trace, debug and evaluate your agents, use [LangSmith](../langsmith/observabi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

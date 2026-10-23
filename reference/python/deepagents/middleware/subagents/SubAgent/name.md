@@ -1,6 +1,6 @@
 ---
 title: "name"
-description: "Unique identifier for the subagent."
+description: "Unique identifier used by the main agent when calling the task() tool."
 source: "https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgent/name"
 category: "reference"
 tags: [reference, deepagents, middleware, subagents, subagent, name]
@@ -12,7 +12,7 @@ tags: [reference, deepagents, middleware, subagents, subagent, name]
 
 📖 [View in docs](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgent/name)
 
-Unique identifier for the subagent.
+Unique identifier used by the main agent when calling the `task()` tool.
 
 ## Signature
 
@@ -22,4 +22,4 @@ name: str
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/subagents.py#L126)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/subagents.py#L103)

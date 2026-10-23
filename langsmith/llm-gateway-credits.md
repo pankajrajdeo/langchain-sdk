@@ -11,24 +11,24 @@ tags: [docs, langsmith, llm-gateway-credits]
 > Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 **Gateway Credits** let you call LangChain-hosted models through the standard LLM Gateway API without setting up a provider account or key. Authenticate with only your [LangSmith API key](create-account-api-key.md). No [provider secret](llm-gateway-admin-setup.md#1-add-provider-secrets) is required.
 
-For SemIf availability and usage, see [Decision models](llm-gateway-decision-models.md#semif).
-
 The gateway routes each request based on its model ID. A hosted model slug such as `moonshotai/kimi-k3` uses Gateway Credits. A model ID that starts with a configured bring-your-own-key provider, such as `anthropic/claude-opus-5`, uses that provider's secret instead.
 
-#### Base URL
-Point any supported client at the standard gateway API:
-
+> **Base URL**
+>
+> Point any supported client at the standard gateway API:
+>
 ```text
-https://gateway.smith.langchain.com/v1
+> https://gateway.smith.langchain.com/v1
 ```
-
-Authenticate with your LangSmith API key as a bearer token.
-
-For regional base URLs, see [Regional gateways](llm-gateway-how-it-works.md#use-a-regional-gateway).
+>
+> Authenticate with your LangSmith API key as a bearer token.
+>
+> For regional base URLs, see [Regional gateways](llm-gateway-how-it-works.md#use-a-regional-gateway).
 
 ## Available models
 
@@ -52,7 +52,7 @@ Use a returned model ID exactly as shown in the `model` field of a prompt reques
 
 Before using Gateway Credits:
 
-* Your organization is on a paid plan ([Developer, Plus, Startup, or Premier](pricing-plans.md)).
+* Your organization is on a paid plan ([Developer, Plus, Startup, or Premier](https://docs.langchain.com/langsmith/pricing-plans.md)).
 * You have a workspace-scoped [LangSmith API key](create-account-api-key.md) attached to a role with `gateway:invoke` and `workspaces:read` [permissions](organization-workspace-operations.md). See [Admin setup](llm-gateway-admin-setup.md) if you are unsure.
 
 ## Make a call
@@ -134,8 +134,6 @@ Like all gateway traffic, hosted-model calls are traced to LangSmith. For where 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-credits.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-credits.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

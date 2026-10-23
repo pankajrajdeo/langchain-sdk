@@ -101,7 +101,7 @@ def correct(outputs: dict, reference_outputs: dict) -> bool:
     return outputs["class"] == reference_outputs["label"]
 
 results = ls_client.evaluate(
-    bad_classified,
+    bad_classifier,
     data=dataset,
     evaluators=[correct],
     summary_evaluators=[pass_50],
@@ -144,7 +144,7 @@ await evaluate(badClassifier, {
 
 In the LangSmith UI, you'll the summary evaluator's score displayed with the corresponding key.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/summary-eval.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=d0f259baa7d7467bf172ef8197c3bb17" alt="summary_eval.png" width="1535" height="122" data-path="langsmith/images/summary-eval.png" />
+![summary\_eval.png](https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/summary-eval.png?fit=max\&auto=format\&n=ImHGLQW1HnQYwnJV\&q=85\&s=d0f259baa7d7467bf172ef8197c3bb17)
 
 ## Summary evaluator args
 
@@ -170,8 +170,6 @@ Currently Python only
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/summary.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/summary.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

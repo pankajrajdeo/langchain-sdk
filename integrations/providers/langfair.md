@@ -42,7 +42,7 @@ Below are code samples illustrating how to use LangFair to assess bias and fairn
 
 ##### Generate LLM responses
 
-To generate responses, we can use LangFair's `ResponseGenerator` class. First, we must create a `langchain` LLM object. Below we use `ChatVertexAI`, but **any of [LangChain’s LLM classes](https://js.langchain.com/docs/integrations/chat/) may be used instead**. Note that `InMemoryRateLimiter` is to used to avoid rate limit errors.
+To generate responses, we can use LangFair's `ResponseGenerator` class. First, we must create a `langchain` LLM object. Below we use `ChatVertexAI`, but **any of [LangChain’s LLM classes](../../javascript/integrations/chat.md) may be used instead**. Note that `InMemoryRateLimiter` is to used to avoid rate limit errors.
 
 ```python
 from langchain_google_vertexai import ChatVertexAI
@@ -165,8 +165,6 @@ results['metrics']
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langfair.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langfair.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

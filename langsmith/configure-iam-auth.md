@@ -13,6 +13,7 @@ tags: [docs, langsmith, configure-iam-auth]
 Agent Server can use a cloud workload identity to generate short-lived PostgreSQL and Redis credentials at runtime. This removes static database and cache passwords from your deployment configuration. Connection and pooling behavior stay the same.
 
 > [!NOTE]
+>
 > Data store IAM authentication requires `langgraph-api>=0.12.0`.
 
 ## Supported services
@@ -24,6 +25,7 @@ Agent Server can use a cloud workload identity to generate short-lived PostgreSQ
 | `gcp` | Cloud SQL for PostgreSQL | Memorystore for Redis Cluster | Google Application Default Credentials (ADC) |
 
 > [!WARNING]
+>
 > The GCP PostgreSQL provider supports Cloud SQL. It does not support AlloyDB, which requires a different token scope.
 
 The provider setting controls authentication only. Configure network access, TLS, database users, cache users, and provider permissions before starting Agent Server.
@@ -169,8 +171,6 @@ Configure `apiServer.serviceAccount` and `queue.serviceAccount` with the cloud p
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-iam-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-iam-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

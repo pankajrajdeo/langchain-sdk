@@ -39,14 +39,13 @@ This auth method requires very little configuration as it does not require an ex
 ### None
 
 > [!WARNING]
+>
 > This authentication mode will be removed after the launch of Basic Auth.
 
 If zero authentication methods are enabled, a self-hosted installation does not require any login/sign-up. This configuration should only be used for verifying installation at the infrastructure level, as the feature set supported in this mode is restricted with only a single organization and workspace.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/authentication-methods.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/authentication-methods.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

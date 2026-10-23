@@ -11,6 +11,7 @@ tags: [docs, langchain, structured-output]
 Structured output allows agents to return data in a specific, predictable format. Instead of parsing natural language responses, you get structured data in the form of JSON objects, [Pydantic models](https://docs.pydantic.dev/latest/concepts/models/#basic-model-usage), or dataclasses that your application can use directly.
 
 > [!TIP]
+>
 > This page covers structured output with agents using `create_agent`. To use structured output directly on a model (outside of agents), see [Models - Structured output](models.md#structured-output).
 
 LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) handles structured output automatically. The user sets their desired structured output schema, and when the model generates the structured data, it's captured, validated, and returned in the `'structured_response'` key of the agent's state.
@@ -42,18 +43,20 @@ When a schema type is provided directly, LangChain automatically chooses:
 * `ToolStrategy` for all other models.
 
 > [!WARNING]
+>
 > JSON Schema dictionaries must be wrapped in an explicit strategy (`ProviderStrategy` or `ToolStrategy`). They are not automatically detected when passed directly to `response_format`.
 
 > [!NOTE]
+>
 > Support for native structured output features is read dynamically from the model's [profile data](models.md#model-profiles) if using `langchain>=1.1`. If data are not available, use another condition or specify manually:
 >
-> ```python
+```python
 > custom_profile = {
 >     "structured_output": True,
 >     # ...
 > }
 > model = init_chat_model("...", profile=custom_profile)
-> ```
+```
 >
 > If tools are specified, the model must support simultaneous use of tools and structured output.
 
@@ -72,9 +75,11 @@ class ProviderStrategy(Generic[SchemaT]):
 ```
 
 > [!NOTE]
+>
 > The `strict` param requires `langchain>=1.2`.
 
-#### `schema`
+**schema** *required*
+
 The schema defining the structured output format. Supports:
 
 * **Pydantic models**: `BaseModel` subclasses with field validation. Returns validated Pydantic instance.
@@ -82,7 +87,8 @@ The schema defining the structured output format. Supports:
 * **TypedDict**: Typed dictionary classes. Returns dict.
 * **JSON Schema**: Dictionary with JSON schema specification. Must include top-level `title` and `description` keys. Returns dict.
 
-#### `strict`
+**strict**
+
 Optional boolean parameter to enable strict schema adherence. Supported by some providers (e.g., [OpenAI](../integrations/chat/openai.md) and [xAI](../integrations/chat/xai.md)). Defaults to `None` (disabled).
 
 LangChain automatically uses `ProviderStrategy` when you pass a schema type directly to [`create_agent.response_format`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and the model supports native structured output:
@@ -200,6 +206,7 @@ result["structured_response"]
 Provider-native structured output provides high reliability and strict validation because the model provider enforces the schema. Use it when available.
 
 > [!NOTE]
+>
 > If the provider natively supports structured output for your model choice, it is functionally equivalent to write `response_format=ProductReview` instead of `response_format=ProviderStrategy(ProductReview)`.
 >
 > In either case, if structured output is not supported, the agent will fall back to a tool calling strategy.
@@ -223,7 +230,8 @@ class ToolStrategy(Generic[SchemaT]):
     ]
 ```
 
-#### `schema`
+**schema** *required*
+
 The schema defining the structured output format. Supports:
 
 * **Pydantic models**: `BaseModel` subclasses with field validation. Returns validated Pydantic instance.
@@ -232,11 +240,13 @@ The schema defining the structured output format. Supports:
 * **JSON Schema**: Dictionary with JSON schema specification. Must include top-level `title` and `description` keys. Returns dict.
 * **Union types**: Multiple schema options. The model will choose the most appropriate schema based on the context.
 
-#### `tool_message_content`
+**tool\_message\_content**
+
 Custom content for the tool message returned when structured output is generated.
 If not provided, defaults to a message showing the structured response data.
 
-#### `handle_errors`
+**handle\_errors**
+
 Error handling strategy for structured output validation failures. Defaults to `True`.
 
 * **`True`**: Catch all errors with default error template
@@ -710,8 +720,6 @@ response_format = ToolStrategy(
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

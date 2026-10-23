@@ -54,46 +54,37 @@ Certain APIs are explicitly marked as "internal" in a couple of ways:
 
 ## Release cycles
 
-<details>
-<summary>Major releases</summary>
+> **Major releases**
+>
+> Major releases (e.g., `1.0.0` → `2.0.0`) may include:
+>
+> * Breaking API changes
+> * Removal of deprecated features
+> * Significant architectural improvements
+>
+> We provide:
+>
+> * Detailed migration guides
+> * Automated migration tools when possible
+> * Extended support period for the previous major version
 
-Major releases (e.g., `1.0.0` → `2.0.0`) may include:
+> **Minor releases**
+>
+> Minor releases (e.g., `1.0.0` → `1.1.0`) include:
+>
+> * New features and capabilities
+> * Performance improvements
+> * New optional parameters
+> * Backward-compatible enhancements
 
-* Breaking API changes
-* Removal of deprecated features
-* Significant architectural improvements
-
-We provide:
-
-* Detailed migration guides
-* Automated migration tools when possible
-* Extended support period for the previous major version
-
-</details>
-
-<details>
-<summary>Minor releases</summary>
-
-Minor releases (e.g., `1.0.0` → `1.1.0`) include:
-
-* New features and capabilities
-* Performance improvements
-* New optional parameters
-* Backward-compatible enhancements
-
-</details>
-
-<details>
-<summary>Patch releases</summary>
-
-Patch releases (e.g., `1.0.0` → `1.0.1`) include:
-
-* Bug fixes
-* Security updates
-* Documentation improvements
-* Performance optimizations without API changes
-
-</details>
+> **Patch releases**
+>
+> Patch releases (e.g., `1.0.0` → `1.0.1`) include:
+>
+> * Bug fixes
+> * Security updates
+> * Documentation improvements
+> * Performance optimizations without API changes
 
 ## Version support policy
 
@@ -168,8 +159,6 @@ We occasionally release alpha and beta versions for early testing:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/versioning.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/versioning.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

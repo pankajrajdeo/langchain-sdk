@@ -41,7 +41,7 @@ Once you have deployed a model server, you can use it in the Playground. Enter t
 
 Enter the `URL`. The Playground will automatically detect the available endpoints and configurable fields. You can then invoke the model with the desired parameters.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/playground-custom-model.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=7a2889af5f55cc73661033837a50fad6" alt="ChatCustomModel in Playground" width="2816" height="1676" data-path="langsmith/images/playground-custom-model.png" />
+![ChatCustomModel in Playground](https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/playground-custom-model.png?fit=max\&auto=format\&n=H9jA2WRyA-MV4-H0\&q=85\&s=7a2889af5f55cc73661033837a50fad6)
 
 If everything is set up correctly, you should see the model's response in the Playground as well as the configurable fields specified in the `with_configurable_fields`.
 
@@ -49,8 +49,6 @@ For more information, see [how to store your model configuration for later use](
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-endpoint.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-endpoint.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/sandboxes/usage/costs:
     get:
@@ -225,11 +228,11 @@ paths:
           name: page_size
           in: query
           schema:
-            minimum: 1
-            maximum: 100
             type: integer
-            default: 20
+            maximum: 100
+            minimum: 1
             title: Page Size
+            default: 20
         - description: >-
             HOUR returns hourly buckets. RESOURCE sums each resource over the
             requested interval and sets period_start to start_time.
@@ -248,6 +251,16 @@ paths:
           schema:
             type: string
             title: Cursor
+        - description: >-
+            Include usage totals across the filtered interval (RESOURCE only).
+            Omitted when unrestricted resource access cannot be verified or the
+            service does not support totals.
+          name: include_totals
+          in: query
+          schema:
+            type: boolean
+            default: false
+            title: Include Totals
       responses:
         '200':
           description: OK
@@ -300,6 +313,15 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+        totals:
+          description: >-
+            Totals cover the entire filtered interval, independently of the
+            cursor.
+
+            Omitted unless requested and unrestricted resource access is
+            verified.
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.SandboxUsageCostTotals'
     shared.ProblemDetails:
       description: RFC 7807 problem details returned on V2 API errors.
       type: object
@@ -340,6 +362,17 @@ components:
         - resource_id
         - resource_type
       properties:
+        compute_standard_units:
+          description: >-
+            Recorded compute usage in Standard Units, as a decimal string,
+            separate from LCU.
+
+            Null means complete Standard compute usage is unavailable; "0" means
+            known zero usage.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
         lcu:
           description: >-
             Recorded compute usage in LangSmith Compute Units (LCU), as a
@@ -367,6 +400,55 @@ components:
           format: uuid
         resource_type:
           $ref: '#/components/schemas/sandboxes.UsageCostResourceType'
+        storage_standard_units:
+          description: >-
+            Allocated storage usage in Standard Units, as a decimal string,
+            separate from LSU.
+
+            Null means complete Standard storage usage is unavailable; "0" means
+            known zero usage.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
+    sandboxes.SandboxUsageCostTotals:
+      type: object
+      required:
+        - lcu
+        - lsu
+      properties:
+        compute_standard_units:
+          description: >-
+            Total compute usage in Standard Units across the entire filtered
+            interval,
+
+            independent of pagination, as a decimal string, separate from LCU.
+
+            Null means complete Standard compute usage is unavailable; "0" means
+            known zero usage.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
+        lcu:
+          type: string
+          format: decimal
+        lsu:
+          type: string
+          format: decimal
+        storage_standard_units:
+          description: >-
+            Total storage usage in Standard Units across the entire filtered
+            interval,
+
+            independent of pagination, as a decimal string, separate from LSU.
+
+            Null means complete Standard storage usage is unavailable; "0" means
+            known zero usage.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
     shared.ParseErrorDetails:
       description: Structured fields describing an adapter parse failure.
       type: object

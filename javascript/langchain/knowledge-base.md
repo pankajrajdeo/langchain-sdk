@@ -104,7 +104,8 @@ Vector search stores numeric vectors associated with text. Embed a query as a ve
 
 LangChain supports embeddings from [many providers](../integrations/embeddings.md). Select a model to specify how text should be converted into a numeric vector:
 
-#### OpenAI
+**OpenAI**
+
 **npm**
 
 ```bash
@@ -131,7 +132,8 @@ const embeddings = new OpenAIEmbeddings({
 });
 ```
 
-#### Azure
+**Azure**
+
 **npm**
 
 ```bash
@@ -164,7 +166,8 @@ const embeddings = new AzureOpenAIEmbeddings({
 });
 ```
 
-#### AWS
+**AWS**
+
 **npm**
 
 ```bash
@@ -195,7 +198,8 @@ const embeddings = new BedrockEmbeddings({
 });
 ```
 
-#### Gemini Enterprise Agent Platform
+**Gemini Enterprise Agent Platform**
+
 **npm**
 
 ```bash
@@ -226,7 +230,8 @@ const embeddings = new VertexAIEmbeddings({
 });
 ```
 
-#### MistralAI
+**MistralAI**
+
 **npm**
 
 ```bash
@@ -257,7 +262,8 @@ const embeddings = new MistralAIEmbeddings({
 });
 ```
 
-#### Cohere
+**Cohere**
+
 **npm**
 
 ```bash
@@ -311,7 +317,8 @@ LangChain [`VectorStore`](https://reference.langchain.com/javascript/langchain-c
 
 LangChain includes [integrations](../integrations/vectorstores.md) with many vector store technologies. Some are hosted and need credentials, some run in separate infrastructure (local or third-party), and others run in-memory for lightweight workloads. Select a vector store:
 
-#### Memory
+**Memory**
+
 **npm**
 
 ```bash
@@ -336,7 +343,8 @@ import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
 const vectorStore = new MemoryVectorStore(embeddings);
 ```
 
-#### MongoDB
+**MongoDB**
+
 **npm**
 
 ```bash
@@ -372,7 +380,8 @@ const vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
 });
 ```
 
-#### Pinecone
+**Pinecone**
+
 **npm**
 
 ```bash
@@ -406,7 +415,8 @@ const vectorStore = new PineconeStore(embeddings, {
 });
 ```
 
-#### Qdrant
+**Qdrant**
+
 **npm**
 
 ```bash
@@ -434,7 +444,8 @@ const vectorStore = await QdrantVectorStore.fromExistingCollection(embeddings, {
 });
 ```
 
-#### Redis
+**Redis**
+
 **npm**
 
 ```bash
@@ -535,7 +546,7 @@ After you have added the documents to the [`VectorStore`](https://reference.lang
 * Synchronously and asynchronously
 * By string query and by vector
 * With and without similarity scores
-* By similarity and [maximum marginal relevance](https://reference.langchain.com/javascript/classes/_langchain_core.vectorstores.VectorStore.html#maxMarginalRelevanceSearch) (to balance similarity with diversity)
+* By similarity and [maximum marginal relevance](https://reference.langchain.com/javascript/langchain-core/vectorstores/VectorStore/maxMarginalRelevanceSearch) (to balance similarity with diversity)
 
 These methods generally return a list of [`Document`](https://reference.langchain.com/javascript/langchain-core/documents/Document) objects.
 
@@ -614,7 +625,7 @@ Learn more:
 
 ## Use retrievers
 
-LangChain [`VectorStore`](https://reference.langchain.com/javascript/langchain-core/vectorstores/VectorStore) objects do not subclass [`Runnable`](https://reference.langchain.com/javascript/langchain-core/runnables/Runnable). [Retrievers](https://reference.langchain.com/javascript/interfaces/_langchain_core.retrievers.BaseRetriever.html) are Runnables, so they support standard methods such as sync and async `invoke` and `batch`.
+LangChain [`VectorStore`](https://reference.langchain.com/javascript/langchain-core/vectorstores/VectorStore) objects do not subclass [`Runnable`](https://reference.langchain.com/javascript/langchain-core/runnables/Runnable). [Retrievers](https://reference.langchain.com/javascript/langchain-core/retrievers/BaseRetriever) are Runnables, so they support standard methods such as sync and async `invoke` and `batch`.
 
 You can also build retrievers from vector stores, and retrievers can also wrap non-vector sources (such as external APIs).
 
@@ -666,8 +677,6 @@ For more on RAG:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/knowledge-base.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/knowledge-base.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

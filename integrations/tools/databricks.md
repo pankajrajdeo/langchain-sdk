@@ -95,7 +95,7 @@ agent.invoke({"messages": [{"role": "user", "content": "36939 * 8922.4"}]})
 ## LangChain agent example
 
 ```python
-from langchain.agents import AgentExecutor, create_tool_calling_agent
+from langchain_classic.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.prompts import ChatPromptTemplate
 
 prompt = ChatPromptTemplate.from_messages(
@@ -137,8 +137,6 @@ Invoking: `main__tools__python_exec` with `{'code': 'print(36939 * 8922.4)'}`
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/databricks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/databricks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

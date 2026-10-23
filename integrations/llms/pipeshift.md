@@ -16,7 +16,7 @@ This will help you get started with Pipeshift completion models (LLMs) using Lan
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/llms/pipeshift) | Downloads | Version |
+| Class | Package | Local | Serializable | JS support | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`Pipeshift`](https://dashboard.pipeshift.com/docs) | [`langchain-pipeshift`](https://pypi.org/project/langchain-pipeshift/) | ❌ | - | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-pipeshift?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-pipeshift?style=flat-square\&label=%20) |
 
@@ -86,8 +86,6 @@ For detailed documentation of all `Pipeshift` features and configurations head t
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/pipeshift.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/pipeshift.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

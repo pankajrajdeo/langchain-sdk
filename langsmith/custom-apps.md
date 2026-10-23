@@ -11,6 +11,7 @@ tags: [docs, langsmith, custom-apps]
 > Build custom UIs that run inside LangSmith and call the LangSmith API, either by chatting with LangSmith Chat or locally with the LangSmith CLI.
 
 > [!NOTE]
+>
 > Custom apps are available on [**Plus** and **Enterprise** plans](https://www.langchain.com/pricing).
 
 A custom app is a UI you build that runs inside LangSmith and calls the [LangSmith API](smith-api-ref.md). Use one for a workflow the built-in UI does not cover, such as a purpose-built annotation surface, an experiment comparison view, or a dashboard scoped to your own traces.
@@ -18,6 +19,16 @@ A custom app is a UI you build that runs inside LangSmith and calls the [LangSmi
 Deployed apps appear under **Custom Apps** in the sidebar for everyone in the workspace with the `custom-apps:read` permission. You do not host a separate service or manage a separate login.
 
 An app runs in a sandbox with no network access of its own. The host forwards its LangSmith API requests with the viewer's credentials, so each person sees only the data their [permissions](organization-workspace-operations.md) allow. The host forwards nothing else, and it blocks the endpoints for API keys, members, users, identities, roles, permissions, SCIM, and service accounts.
+
+## Configure self-hosted chat
+
+> [!WARNING]
+>
+> On self-hosted deployments, building and editing apps with chat requires [sandbox service URLs](enable-self-hosted-sandboxes.md#optional-enable-service-urls). Enabling Sandboxes alone is not sufficient.
+
+> [!NOTE]
+>
+> Building and editing apps with chat is enabled starting with Helm chart version 0.17.3 for v0.17 and 0.18.0-rc.13 for the v0.18 preview.
 
 ## Build an app
 
@@ -27,23 +38,27 @@ Build an app by [chatting with LangSmith Chat](#build-with-chat) in the browser,
 
 Building in the browser has two requirements:
 
-* **Sandboxes**: Each session runs in a [sandbox](sandboxes.md). On self-hosted deployments, [enable sandboxes](deploy-self-hosted-full-platform.md#enable-sandboxes) first.
+* **Sandboxes**: Each session runs in a [sandbox](sandboxes.md). On self-hosted deployments, complete the [self-hosted chat setup](#configure-self-hosted-chat) first.
 * **Permissions**: The `custom-apps:create`, `custom-apps:update`, `custom-apps:delete`, and `custom-apps:download` permissions, plus the [sandbox permissions](#permissions).
 
 Without both, the **App** action opens the CLI instructions instead. Chat also needs a [model API key set for the workspace](chat.md#get-started) before it can send a message.
 
 To build an app with chat:
 
-### Start a new app
+**1. Start a new app**
+
 Go to **Custom Apps** and select **App** to open chat. In a workspace with no apps yet, the page opens chat directly.
 
-### Describe what you want to build
+**2. Describe what you want to build**
+
 Type what the app should do into the composer, and select the model to build with from the model menu in the composer. The composer accepts a prompt while the sandbox behind it is still starting. When Chat starts writing files, LangSmith saves a draft and opens the **Preview** and **Code** tabs beside the chat.
 
-### Review what Chat built
+**3. Review what Chat built**
+
 The **Preview** tab renders a live build of your changes. The **Code** tab holds the file tree, the source, and the changes from the session. A badge in the header counts the changed files.
 
-### Deploy the app
+**4. Deploy the app**
+
 Select **Deploy**. The first deploy asks for a name, builds the app, and publishes it to the workspace.
 
 If you leave the page before the first deploy, LangSmith discards the app. Once Chat has started editing, LangSmith asks before discarding it.
@@ -52,28 +67,32 @@ If you leave the page before the first deploy, LangSmith discards the app. Once 
 
 Building locally uses the [LangSmith CLI](langsmith-cli.md), which scaffolds a starter, runs it in a real sandbox on your machine, and uploads it when you are ready. To build an app locally:
 
-### Install the CLI
+**1. Install the CLI**
+
 ```bash
 curl -fsSL https://cli.langsmith.com/install.sh | sh
 ```
 
 For Windows, Homebrew, and other options, see [Install](langsmith-cli.md#install).
 
-### Authenticate
+**2. Authenticate**
+
 ```bash
 langsmith auth login
 ```
 
 To use an API key instead, set `LANGSMITH_API_KEY`, plus `LANGSMITH_ENDPOINT` for a self-hosted instance. For profiles and other options, see [Authenticate](langsmith-cli.md#authenticate).
 
-### Scaffold an app
+**3. Scaffold an app**
+
 ```bash
 langsmith apps init --name my-annotation-view --template annotation-queue
 ```
 
 `init` creates a directory named after the app and, if `npm` is on your `PATH`, installs its dependencies. It also writes an `AGENTS.md` that gives a coding agent the conventions and API surface it needs to produce a working app on the first pass. Omit `--template` for a blank single-file starter.
 
-### Iterate locally
+**4. Iterate locally**
+
 ```bash
 cd my-annotation-view
 langsmith apps dev
@@ -81,7 +100,8 @@ langsmith apps dev
 
 The app runs in the same kind of sandbox it gets inside LangSmith, with API calls proxied through your own credentials. Failed calls and uncaught errors stream to the terminal, so most debugging needs no browser devtools. Add `--verbose` for every successful call and all console output, or `--quiet` to silence the app.
 
-### Push it live
+**5. Push it live**
+
 ```bash
 langsmith apps push
 ```
@@ -160,8 +180,6 @@ Editing in the browser also requires the `sandboxes:create`, `sandboxes:read`, `
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-apps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-apps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

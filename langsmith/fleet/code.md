@@ -45,7 +45,7 @@ To authenticate with your agent's Fleet deployment, provide a LangSmith [Persona
 
 If the PAT you pass is not tied to the owner of the agent, your request will be rejected with a `404 Not Found` error.
 
-If the agent you're trying to invoke is a workspace agent and you're not the owner, you can perform all the same operations as you would in the UI (read-only).
+If the agent you're trying to invoke is a workspace agent (Agents shared with all members of a LangSmith workspace. Private agents are only visible to the creator.) and you're not the owner, you can perform all the same operations as you would in the UI (read-only).
 
 ### 1. Get the agent ID and URL
 
@@ -69,7 +69,8 @@ LANGGRAPH_API_KEY=your-personal-access-token
 
 Verify your connection by fetching your agent's configuration:
 
-#### Python
+**Python**
+
 ```python
 import os
 from dotenv import load_dotenv
@@ -99,7 +100,8 @@ if __name__ == "__main__":
     asyncio.run(get_assistant(agent_id))
 ```
 
-#### TypeScript
+**TypeScript**
+
 ```ts
 import "dotenv/config";
 import { Client } from "@langchain/langgraph-sdk";
@@ -125,7 +127,8 @@ async function main(agentId: string) {
 main(agentId).catch(console.error);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request GET \
     --url "<AGENT-BUILDER-URL>.us.langgraph.app/assistants/your-agent-id" \
@@ -134,8 +137,7 @@ curl --request GET \
     --header 'X-Auth-Scheme: langsmith-api-key'
 ```
 
-> [!NOTE]
-> Use a [Personal Access Token (PAT)](../create-account-api-key.md) tied to your LangSmith account. Set the `X-Auth-Scheme` header to `langsmith-api-key` for authentication.
+Use a [Personal Access Token (PAT)](../create-account-api-key.md) tied to your LangSmith account. Set the `X-Auth-Scheme` header to `langsmith-api-key` for authentication.
 
 ### 3. Invoke agent
 
@@ -145,7 +147,8 @@ The examples below show how to send a message to your agent and receive a respon
 
 A stateless run sends a single request and returns the full response. No conversation history is persisted. This is the simplest way to call your agent:
 
-#### Python
+**Python**
+
 ```python
 import os
 from dotenv import load_dotenv
@@ -178,7 +181,8 @@ result = await client.runs.wait(
 print(result)
 ```
 
-#### TypeScript
+**TypeScript**
+
 ```ts
 import "dotenv/config";
 import { Client } from "@langchain/langgraph-sdk";
@@ -210,7 +214,8 @@ const result = await client.runs.wait(
 console.log(result);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url "<AGENT-BUILDER-URL>.us.langgraph.app/runs/wait" \
@@ -234,7 +239,8 @@ curl --request POST \
 
 To stream the response as it is generated rather than waiting for the full result, use the streaming endpoint:
 
-#### Python
+**Python**
+
 ```python
 async for chunk in client.runs.stream(
     None,
@@ -250,7 +256,8 @@ async for chunk in client.runs.stream(
         print(chunk.data)
 ```
 
-#### TypeScript
+**TypeScript**
+
 ```ts
 const streamResponse = client.runs.stream(
   null,
@@ -271,7 +278,8 @@ for await (const chunk of streamResponse) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url "<AGENT-BUILDER-URL>.us.langgraph.app/runs/stream" \
@@ -298,7 +306,8 @@ curl --request POST \
 
 To maintain conversation history across multiple interactions, first create a thread and then run your agent on it. Each subsequent run on the same thread has access to the full message history:
 
-#### Python
+**Python**
+
 ```python
 import os
 from dotenv import load_dotenv
@@ -348,7 +357,8 @@ async for chunk in client.runs.stream(
         print(chunk.data)
 ```
 
-#### TypeScript
+**TypeScript**
+
 ```ts
 import "dotenv/config";
 import { Client } from "@langchain/langgraph-sdk";
@@ -405,7 +415,8 @@ for await (const chunk of streamResponse) {
 }
 ```
 
-#### cURL
+**cURL**
+
 First, create a thread:
 
 ```bash
@@ -486,6 +497,60 @@ All endpoints require the following headers:
 
 For the full API specification, see the [Agent Server API reference](../server-api-ref.md).
 
+### Forward caller headers to MCP servers
+
+Header forwarding passes headers from a run request to your agent's custom MCP servers on each tool call. Use it to give an MCP server per-run context, such as the end user's ID or a downstream token.
+
+> [!NOTE]
+>
+> Header forwarding is available on self-hosted LangSmith only. An administrator must [enable it](../enable-self-hosted-fleet.md#optional-forward-caller-headers-to-mcp-servers) first.
+
+Header forwarding works only through the Fleet API, not the deployment URL used in the earlier examples. The LangGraph SDK calls the deployment URL, so call the Fleet API directly instead. The Fleet API base URL is `https://<your-langsmith-host>/api/v1/fleet`. If you set `config.basePath`, use `https://<your-langsmith-host>/<basePath>/api/v1/fleet`.
+
+To forward headers, prefix each one with `X-Fleet-Forward-` and send it on a request that starts a run:
+
+```bash
+curl --request POST \
+    --url "https://<your-langsmith-host>/api/v1/fleet/threads/runs" \
+    --header "Content-Type: application/json" \
+    --header "X-Api-Key: $LANGSMITH_API_KEY" \
+    --header "X-Tenant-Id: $LANGSMITH_WORKSPACE_ID" \
+    --header "X-Fleet-Forward-User-Id: user@example.com" \
+    --header "X-Fleet-Forward-Authorization: Bearer $DOWNSTREAM_TOKEN" \
+    --data '{
+        "agent_id": "your-agent-id",
+        "input": {
+            "messages": [
+                { "role": "user", "content": "What can you help me with?" }
+            ]
+        }
+    }'
+```
+
+Set `X-Tenant-Id` to the ID of the workspace that contains the agent.
+
+Your MCP server receives each header with the prefix in place. Read `X-Fleet-Forward-User-Id`, not `X-User-Id`.
+
+> [!WARNING]
+>
+> LangSmith does not verify forwarded header values. The caller sets them, so do not treat them as proof of identity in your MCP server.
+
+The following Fleet API endpoints forward headers. Replace `<FLEET_API_URL>` with your Fleet API base URL.
+
+| Operation | Method | Endpoint |
+| - | - | - |
+| Create a thread and run it | `POST` | `<FLEET_API_URL>/threads/runs` |
+| Run on an existing thread | `POST` | `<FLEET_API_URL>/threads/<THREAD_ID>/runs` |
+| Run on a thread (wait for result) | `POST` | `<FLEET_API_URL>/threads/<THREAD_ID>/runs/wait` |
+| Run on a thread (streaming) | `POST` | `<FLEET_API_URL>/threads/<THREAD_ID>/runs/stream` |
+
+Forwarded headers follow these rules:
+
+* **Destination**: Fleet forwards headers to custom MCP servers only, never to the built-in tool server.
+* **Header names**: Matching is case-insensitive. Fleet normalizes names, so `x-fleet-forward-user-id` arrives as `X-Fleet-Forward-User-Id`.
+* **Conflicts**: When a custom MCP server already configures a header with the same name, the configured value wins.
+* **Limits**: A request with more than 10 forwarded headers returns `400`. So does a name suffix after `X-Fleet-Forward-` that is not 1 to 40 characters of `A-Z`, `a-z`, `0-9`, or `-`. So does a header sent more than once, or a value that is not printable ASCII or exceeds 1,024 bytes.
+
 ## Export to code
 
 The **Export to code** feature lets you download your Fleet agent as a self-contained Python project and run it locally. This is useful when you want to:
@@ -517,7 +582,7 @@ cd my-agent
 
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-code), open your agent and export it as a `.zip` file.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/luI6OY90jvPyduNd/langsmith/images/fleet-export-code.gif?s=f05e7949959291040ddb5472cb83b41f" alt="fleet-export-code" width="1092" height="720" data-path="langsmith/images/fleet-export-code.gif" />
+![fleet-export-code](https://mintcdn.com/langchain-5e9cc07a/luI6OY90jvPyduNd/langsmith/images/fleet-export-code.gif?s=f05e7949959291040ddb5472cb83b41f)
 
 Then drop the contents into the `fleet/` directory of your starter project:
 
@@ -663,8 +728,6 @@ At startup, each tool's `mcp_server_url` is resolved against LangSmith's MCP ser
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

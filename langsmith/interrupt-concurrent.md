@@ -16,7 +16,8 @@ The guide covers the `interrupt` option for double texting, which interrupts the
 
 First, we will define a quick helper function for printing out JS and cURL model outputs (you can skip this if using Python):
 
-#### Javascript
+**Javascript**
+
 ```js
 function prettyPrint(m) {
   const padded = " " + m['type'] + " ";
@@ -30,7 +31,8 @@ function prettyPrint(m) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # PLACE THIS IN A FILE CALLED pretty_print.sh
 pretty_print() {
@@ -53,7 +55,8 @@ pretty_print() {
 
 Now, let's import our required packages and instantiate our client, assistant, and thread.
 
-#### Python
+**Python**
+
 ```python
 import asyncio
 
@@ -66,7 +69,8 @@ assistant_id = "agent"
 thread = await client.threads.create()
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -76,7 +80,8 @@ const assistantId = "agent";
 const thread = await client.threads.create();
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
   --url <DEPLOYMENT_URL>/threads \
@@ -88,7 +93,8 @@ curl --request POST \
 
 Now we can start our two runs and join the second one until it has completed:
 
-#### Python
+**Python**
+
 ```python
 # the first run will be interrupted
 interrupted_run = await client.runs.create(
@@ -108,7 +114,8 @@ run = await client.runs.create(
 await client.runs.join(thread["thread_id"], run["run_id"])
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 // the first run will be interrupted
 let interruptedRun = await client.runs.create(
@@ -132,7 +139,8 @@ let run = await client.runs.create(
 await client.runs.join(thread["thread_id"], run["run_id"]);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
 --url <DEPLOY<ENT_URL>>/threads/<THREAD_ID>/runs \
@@ -155,7 +163,8 @@ curl --request POST \
 
 We can see that the thread has partial data from the first run + data from the second run
 
-#### Python
+**Python**
+
 ```python
 state = await client.threads.get_state(thread["thread_id"])
 
@@ -163,7 +172,8 @@ for m in convert_to_messages(state["values"]["messages"]):
     m.pretty_print()
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 const state = await client.threads.getState(thread["thread_id"]);
 
@@ -172,7 +182,8 @@ for (const m of state['values']['messages']) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 source pretty_print.sh && curl --request GET \
 --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/state | \
@@ -230,12 +241,14 @@ In summary, the search provides a convenient overview of the expected weather co
 
 Verify that the original, interrupted run was interrupted
 
-#### Python
+**Python**
+
 ```python
 print((await client.runs.get(thread["thread_id"], interrupted_run["run_id"]))["status"])
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 console.log((await client.runs.get(thread['thread_id'], interruptedRun["run_id"]))["status"])
 ```
@@ -248,8 +261,6 @@ Output:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/interrupt-concurrent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/interrupt-concurrent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

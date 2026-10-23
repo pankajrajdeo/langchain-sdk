@@ -170,22 +170,23 @@ result = tool.invoke(
 print(result)
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `str`
-The input to analyze. Pass a public URL, local file path, or base64-encoded payload.
-
-#### `Field` — `Literal[`
-Controls how the tool interprets `source`.
-
-#### `Field` — `str`
-The Content Understanding analyzer to run.
-
-#### `Field` — `dict[str, str] | None`
-Optional mapping from model names to deployment names when a custom analyzer needs them.
-
-</details>
+> **Configuration options**
+>
+> **source** `str`
+>
+> The input to analyze. Pass a public URL, local file path, or base64-encoded payload.
+>
+> **source\_type** `Literal['url', 'path', 'base64']` (default: url)
+>
+> Controls how the tool interprets `source`.
+>
+> **analyzer\_id** `str` (default: prebuilt-documentSearch)
+>
+> The Content Understanding analyzer to run.
+>
+> **model\_deployments** `dict[str, str] | None`
+>
+> Optional mapping from model names to deployment names when a custom analyzer needs them.
 
 ### AzureAIDocumentIntelligenceTool
 
@@ -208,19 +209,19 @@ result = tool.invoke(
 print(result)
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `str`
-The document input. Pass a public URL, local file path, or base64-encoded payload.
-
-#### `Field` — `Literal[`
-Controls how the tool interprets `source`.
-
-#### `Field` — `str`
-The Document Intelligence model to run.
-
-</details>
+> **Configuration options**
+>
+> **source** `str`
+>
+> The document input. Pass a public URL, local file path, or base64-encoded payload.
+>
+> **source\_type** `Literal['url', 'path', 'base64']` (default: url)
+>
+> Controls how the tool interprets `source`.
+>
+> **model\_id** `str` (default: prebuilt-layout)
+>
+> The Document Intelligence model to run.
 
 ### AzureAIImageAnalysisTool
 
@@ -248,19 +249,19 @@ result = tool.invoke(
 print(result)
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `str`
-The image input. Pass a public URL, local file path, or base64-encoded payload.
-
-#### `Field` — `Literal[`
-Controls how the tool interprets `source`.
-
-#### `Field` — `list[VisualFeatures] | None`
-Optional list of image-analysis features to request. If omitted, the tool uses its default feature set.
-
-</details>
+> **Configuration options**
+>
+> **source** `str`
+>
+> The image input. Pass a public URL, local file path, or base64-encoded payload.
+>
+> **source\_type** `Literal['url', 'path', 'base64']`
+>
+> Controls how the tool interprets `source`.
+>
+> **visual\_features** `list[VisualFeatures] | None`
+>
+> Optional list of image-analysis features to request. If omitted, the tool uses its default feature set.
 
 ### AzureAITextAnalyticsHealthTool
 
@@ -284,19 +285,19 @@ result = tool.invoke(
 print(result)
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `str`
-The healthcare text to analyze.
-
-#### `Field` — `str | None`
-Optional default language for the input text.
-
-#### `Field` — `str | None`
-Optional country hint used by the underlying Text Analytics client.
-
-</details>
+> **Configuration options**
+>
+> **query** `str`
+>
+> The healthcare text to analyze.
+>
+> **language** `str | None`
+>
+> Optional default language for the input text.
+>
+> **country\_hint** `str | None`
+>
+> Optional country hint used by the underlying Text Analytics client.
 
 ### AzureAISpeechToTextTool
 
@@ -318,22 +319,23 @@ result = tool.invoke("path/to/audio.wav")
 print(result)
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `str`
-Path to a local audio file or a URL pointing to an audio file. Supports WAV, MP3, OGG, FLAC, and other common audio formats.
-
-#### `Field` — `str`
-The language of the speech in BCP-47 format (e.g., `"en-US"`, `"es-ES"`, `"fr-FR"`). Defaults to `"en-US"`.
-
-#### `Field` — `str`
-The Azure AI Speech service endpoint. For example, `https://eastus.api.cognitive.microsoft.com/`. Can be set via `AZURE_AI_INFERENCE_ENDPOINT` environment variable or resolved from `AZURE_AI_PROJECT_ENDPOINT`.
-
-#### `Field` — `str | TokenCredential`
-The credentials to use. Either a subscription key string or any `TokenCredential` such as `DefaultAzureCredential`.
-
-</details>
+> **Configuration options**
+>
+> **query** `str`
+>
+> Path to a local audio file or a URL pointing to an audio file. Supports WAV, MP3, OGG, FLAC, and other common audio formats.
+>
+> **speech\_language** `str` (default: en-US)
+>
+> The language of the speech in BCP-47 format (e.g., `"en-US"`, `"es-ES"`, `"fr-FR"`). Defaults to `"en-US"`.
+>
+> **endpoint** `str`
+>
+> The Azure AI Speech service endpoint. For example, `https://eastus.api.cognitive.microsoft.com/`. Can be set via `AZURE_AI_INFERENCE_ENDPOINT` environment variable or resolved from `AZURE_AI_PROJECT_ENDPOINT`.
+>
+> **credential** `str | TokenCredential`
+>
+> The credentials to use. Either a subscription key string or any `TokenCredential` such as `DefaultAzureCredential`.
 
 ### AzureAITextToSpeechTool
 
@@ -355,22 +357,23 @@ result = tool.invoke("Hello, this is a test of text to speech synthesis.")
 print(result)  # Returns path to generated WAV file
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `str`
-The text to convert to speech.
-
-#### `Field` — `str`
-The language of the synthesized speech in BCP-47 format (e.g., `"en-US"`, `"es-ES"`, `"fr-FR"`). Defaults to `"en-US"`.
-
-#### `Field` — `str`
-The Azure AI Speech service endpoint. For example, `https://eastus.api.cognitive.microsoft.com/`. Can be set via `AZURE_AI_INFERENCE_ENDPOINT` environment variable or resolved from `AZURE_AI_PROJECT_ENDPOINT`.
-
-#### `Field` — `str | TokenCredential`
-The credentials to use. Either a subscription key string or any `TokenCredential` such as `DefaultAzureCredential`.
-
-</details>
+> **Configuration options**
+>
+> **query** `str`
+>
+> The text to convert to speech.
+>
+> **speech\_language** `str` (default: en-US)
+>
+> The language of the synthesized speech in BCP-47 format (e.g., `"en-US"`, `"es-ES"`, `"fr-FR"`). Defaults to `"en-US"`.
+>
+> **endpoint** `str`
+>
+> The Azure AI Speech service endpoint. For example, `https://eastus.api.cognitive.microsoft.com/`. Can be set via `AZURE_AI_INFERENCE_ENDPOINT` environment variable or resolved from `AZURE_AI_PROJECT_ENDPOINT`.
+>
+> **credential** `str | TokenCredential`
+>
+> The credentials to use. Either a subscription key string or any `TokenCredential` such as `DefaultAzureCredential`.
 
 ## API reference
 
@@ -388,8 +391,6 @@ from langchain_azure_ai.tools import (
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_ai_services.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_ai_services.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

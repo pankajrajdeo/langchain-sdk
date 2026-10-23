@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/evaluators:
     get:
@@ -220,7 +223,7 @@ paths:
             title: Resource Id
         - description: >-
             Filter to evaluators attached to the agent's environments or tagged
-            datasets
+            datasets; run_rules then lists only those attachments
           name: agent_id
           in: query
           schema:
@@ -349,6 +352,14 @@ components:
           type: boolean
         code:
           type: string
+        code_evaluator_input:
+          description: |-
+            CodeEvaluatorInput is which thread data the evaluator receives.
+            Null for run evaluators.
+          anyOf:
+            - allOf:
+                - $ref: '#/components/schemas/evaluators.CodeEvaluatorInput'
+            - type: 'null'
         dependencies:
           type: string
         evaluator_build_error:
@@ -369,6 +380,22 @@ components:
             RequireAttachments opts the evaluator into selecting/presigning run
             attachments (s3_urls) at evaluation time. Default false.
           type: boolean
+        workspace_secrets_keys:
+          description: >-
+            WorkspaceSecretsKeys names the workspace secrets this evaluator may
+            use.
+
+            Each is sent as a header on requests to the hosts allowed for that
+
+            secret; evaluator code never sees the value. Requires
+
+            advanced_features_enabled, and each secret needs an allowed host
+            with a
+
+            header.
+          type: array
+          items:
+            type: string
     evaluators.LLMEvaluator:
       type: object
       properties:
@@ -438,9 +465,25 @@ components:
       enum:
         - llm
         - code
+        - decision_model
       x-enum-varnames:
         - EvaluatorTypeLLM
         - EvaluatorTypeCode
+        - EvaluatorTypeDecisionModel
+    evaluators.CodeEvaluatorInput:
+      type: string
+      enum:
+        - thread
+        - all_messages
+        - human_ai_pairs
+        - first_human_last_ai
+        - trajectory
+      x-enum-varnames:
+        - CodeEvaluatorInputThread
+        - CodeEvaluatorInputAllMessages
+        - CodeEvaluatorInputHumanAIPairs
+        - CodeEvaluatorInputFirstHumanLastAI
+        - CodeEvaluatorInputTrajectory
     evaluators.EvaluatorBuildStatus:
       type: string
       enum:

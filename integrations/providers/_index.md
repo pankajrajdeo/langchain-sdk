@@ -112,7 +112,7 @@ tags: [index, integrations, providers]
 - [TypeSafe integrations](typesafe.md) - Integrate with TypeSafe using LangChain
 - [Unstructured integrations](unstructured.md) - Integrate with Unstructured using LangChain Python.
 - [Upstage integrations](upstage.md) - Integrate with Upstage using LangChain Python.
-- [VoyageAI integrations](voyageai.md) - Integrate with VoyageAI using LangChain Python.
+- [VoyageAI by MongoDB integrations](voyageai.md) - Integrate with VoyageAI by MongoDB using LangChain Python.
 - [Weaviate integrations](weaviate.md) - Integrate with Weaviate using LangChain Python.
 - [xAI integrations](xai.md) - Integrate with xAI using LangChain Python.
 - [Yeager.ai integrations](yeagerai.md) - Integrate with Yeager.ai using LangChain Python.

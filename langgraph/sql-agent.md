@@ -13,6 +13,7 @@ In this tutorial we will build a custom agent that can answer questions about a 
 LangChain offers built-in [agent](../langchain/agents.md) implementations, implemented using [LangGraph](overview.md) primitives. If deeper customization is required, agents can be implemented directly in LangGraph. This guide demonstrates an example implementation of a SQL agent. For a practical introduction, see [building a SQL agent using higher-level LangChain abstractions](../langchain/sql-agent.md).
 
 > [!WARNING]
+>
 > Building Q\&A systems of SQL databases requires executing model-generated SQL queries. There are inherent risks in doing this. Make sure that your database connection permissions are always scoped as narrowly as possible for your agent's needs. This will mitigate, though not eliminate, the risks of building a model-driven system.
 
 The [prebuilt agent](../langchain/sql-agent.md) lets us get started quickly, but we relied on the system prompt to constrain its behavior—for example, we instructed the agent to always start with the "list tables" tool, and to always run a query-checker tool before executing the query.
@@ -50,7 +51,8 @@ export LANGSMITH_API_KEY="..."
 
 Select a model that supports [tool-calling](../integrations/providers/overview.md):
 
-#### OpenAI
+**OpenAI**
+
 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
 
 **pip**
@@ -87,7 +89,8 @@ os.environ["OPENAI_API_KEY"] = "sk-..."
 model = ChatOpenAI(model="gpt-5.5")
 ```
 
-#### Anthropic
+**Anthropic**
+
 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
 
 **pip**
@@ -124,7 +127,8 @@ os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
-#### Azure
+**Azure**
+
 👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
 
 **pip**
@@ -171,7 +175,8 @@ model = AzureChatOpenAI(
 )
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
 
 **pip**
@@ -208,7 +213,8 @@ os.environ["GOOGLE_API_KEY"] = "..."
 model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
 ```
 
-#### AWS Bedrock
+**AWS Bedrock**
+
 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
 
 **pip**
@@ -245,7 +251,8 @@ from langchain_aws import ChatBedrock
 model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
-#### HuggingFace
+**HuggingFace**
+
 👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
 
 **pip**
@@ -292,7 +299,8 @@ llm = HuggingFaceEndpoint(
 model = ChatHuggingFace(llm=llm)
 ```
 
-#### OpenRouter
+**OpenRouter**
+
 👉 Read the [OpenRouter chat model integration docs](../integrations/chat/openrouter.md)
 
 **pip**
@@ -386,6 +394,7 @@ Sample output: [(1, 'AC/DC'), (2, 'Accept'), (3, 'Aerosmith'), (4, 'Alanis Moris
 ## 3. Add tools for database interactions
 
 > [!WARNING]
+>
 > The following database tools are minimal wrappers for demonstration purposes only. They are not intended to be secure or used in production. Use narrowly scoped database permissions and add application-specific validation before executing model-generated SQL.
 
 We can implement database [tools](../langchain/tools.md) as thin wrappers using the `@tool` decorator from `langchain.tools`:
@@ -654,7 +663,7 @@ import pathlib
 pathlib.Path("graph.png").write_bytes(agent.get_graph().draw_mermaid_png())
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/aAi4RLdXQAh8fThS/oss/images/sql-agent-langgraph.png?fit=max&auto=format&n=aAi4RLdXQAh8fThS&q=85&s=1ddd4aae369fb8c143edaccb0a09c81f" alt="SQL agent graph" width="308" height="645" data-path="oss/images/sql-agent-langgraph.png" />
+![SQL agent graph](https://mintcdn.com/langchain-5e9cc07a/aAi4RLdXQAh8fThS/oss/images/sql-agent-langgraph.png?fit=max\&auto=format\&n=aAi4RLdXQAh8fThS\&q=85\&s=1ddd4aae369fb8c143edaccb0a09c81f)
 
 We can now invoke the graph:
 
@@ -747,6 +756,7 @@ The genre with the longest tracks on average is "Sci Fi & Fantasy," with an aver
 ```
 
 > [!TIP]
+>
 > See [LangSmith trace](https://smith.langchain.com/public/94b8c9ac-12f7-4692-8706-836a1f30f1ea/r) for the above run.
 
 ## 6. Implement human-in-the-loop review
@@ -795,6 +805,7 @@ run_query_node = ToolNode([run_query_tool_with_interrupt], name="run_query")  # 
 ```
 
 > [!NOTE]
+>
 > The above implementation follows the [tool interrupt example](interrupts.md#interrupts-in-tools) in the broader [human-in-the-loop](interrupts.md) guide. Refer to that guide for details and alternatives.
 
 Let's now re-assemble our graph. We will replace the programmatic check with human review. Note that we now include a [checkpointer](persistence.md); this is required to pause and resume the run.
@@ -909,8 +920,6 @@ Check out the [Evaluate a graph](../langsmith/evaluate-graph.md) guide for evalu
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/sql-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/sql-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -16,7 +16,7 @@ This notebook provides a quick overview for getting started with `LangSmithLoade
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/document_loaders/langsmith) |
+| Class | Package | Local | Serializable | [PY support](../../../../integrations/document_loaders/langsmith.md) |
 | :- | :- | :-: | :-: | :-: |
 | [`LangSmithLoader`](https://reference.langchain.com/javascript/langchain-core/document_loaders/langsmith/LangSmithLoader) | [`@langchain/core`](https://www.npmjs.com/package/@langchain/core) | ✅ | beta | ✅ |
 
@@ -208,8 +208,6 @@ For detailed documentation of all `LangSmithLoader` features and configurations 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/web_loaders/langsmith.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/web_loaders/langsmith.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

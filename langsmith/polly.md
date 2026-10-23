@@ -14,9 +14,11 @@ tags: [docs, langsmith, polly]
 
 Chat helps you gain insight from your traces, conversation threads, and prompts without having to dig through data manually. By asking natural language questions, you can quickly understand agent performance, debug issues, and analyze user sentiment.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/NVEcSyCXgAhfub1c/images/brand/polly-icon.png?fit=max&auto=format&n=NVEcSyCXgAhfub1c&q=85&s=d58c4caab502fcaa02864b5a8f833604" alt="LangSmith Chat icon" width="650" height="650" data-path="images/brand/polly-icon.png" /> Chat appears in the right-hand bottom corner of the following locations within [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-chat):
+![LangSmith Chat icon](https://mintcdn.com/langchain-5e9cc07a/NVEcSyCXgAhfub1c/images/brand/polly-icon.png?fit=max\&auto=format\&n=NVEcSyCXgAhfub1c\&q=85\&s=d58c4caab502fcaa02864b5a8f833604) Chat appears in the right-hand bottom corner of the following locations within [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-chat):
 
-<br /><br />**Observability & Debugging:**
+\
+\
+**Observability & Debugging:**
 
 * [Projects](#projects): Browse and filter runs across a project.
 * [Trace pages](#trace-pages): Analyze individual runs and execution traces.
@@ -35,9 +37,7 @@ Chat helps you gain insight from your traces, conversation threads, and prompts 
 * [Annotation Queues](#annotation-queues): Review runs and make informed annotation decisions.
 * [Evaluators](#evaluators): Build and refine evaluators with AI assistance.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/Cd9j6FYj16b1asiM/langsmith/images/polly-datasets-light.png?fit=max&auto=format&n=Cd9j6FYj16b1asiM&q=85&s=771a678928374d181e5d9d5e33d16cb0" alt="Chat in the sidebar on a dataset view." width="1437" height="747" data-path="langsmith/images/polly-datasets-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/Cd9j6FYj16b1asiM/langsmith/images/polly-datasets-dark.png?fit=max&auto=format&n=Cd9j6FYj16b1asiM&q=85&s=e58462239dc037d880ec2c309e86f463" alt="Chat in the sidebar on a dataset view." width="1436" height="751" data-path="langsmith/images/polly-datasets-dark.png" />
+![Chat in the sidebar on a dataset view.](https://mintcdn.com/langchain-5e9cc07a/Cd9j6FYj16b1asiM/langsmith/images/polly-datasets-light.png?fit=max\&auto=format\&n=Cd9j6FYj16b1asiM\&q=85\&s=771a678928374d181e5d9d5e33d16cb0)
 
 ## Get started
 
@@ -45,15 +45,23 @@ Before you start using Chat, you need to add an API key for the model you're usi
 
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-set-workspace-secrets), ensure that your API key is set as a [workspace secret](set-up-hierarchy.md#configure-workspace-settings).
 
-1. Navigate to  **Settings** and then move to the **Secrets** tab.
-2. Select **Add secret** and enter the key environment variable (e.g.,`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) and your API key as the **Value**.
-3. Select **Save secret**.
+Adding workspace secrets requires permission to manage secrets in the workspace. If you do not have it, ask a workspace admin to add the secret for you or to grant you access.
 
- When adding workspace secrets in the LangSmith UI, make sure the secret keys match the environment variable names expected by your model provider.
+To add a workspace secret:
 
-If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](model-configurations.md#oauth-client-credentials).
+1. Navigate to  **Settings** > **Integrations** > **Provider secrets**.
+2. Select **+ Secret**.
+3. Under **Provider**, select your model provider. LangSmith names the secret with the environment variable the provider expects, such as `OPENAI_API_KEY`. Enter your secret in that field.
+
+   If your provider is not listed, leave **Custom** as the provider. Enter the environment variable name your provider expects as the **Key** and your API key as the **Value**.
+4. Select **Save**.
 
 > [!NOTE]
+>
+> If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](model-configurations.md#oauth-client-credentials).
+
+> [!NOTE]
+>
 > Chat calls model providers from LangSmith's egress IP addresses. If your model provider (or a proxy in front of it) restricts traffic by IP, allowlist the LangSmith egress IPs listed in [Allowlist IP addresses](cloud-platform-features.md#allowlist-ip-addresses).
 
 ### Supported models
@@ -116,7 +124,7 @@ Under the **Threads** tab, Chat analyzes conversation [threads](observability-co
 
 ### Engine
 
-On the [Engine](engine.md) page, open Chat to investigate detected issues and their linked traces. Chat can help you understand the selected issue, or answer questions across multiple Engine issues. For example:
+On the [Engine](engine-issues.md) page, open Chat to investigate detected issues and their linked traces. Chat can help you understand the selected issue, or answer questions across multiple Engine issues. For example:
 
 **Example questions:**
 
@@ -200,22 +208,24 @@ In the **Evaluators** builder, Chat helps you write and refine evaluator logic. 
 
 Learn more about the features that Chat helps you explore:
 
-#### [Observability](observability.md)
-Learn more about tracing and monitoring your LLM applications
+> **[Observability](observability.md)**
+>
+> Learn more about tracing and monitoring your LLM applications
 
-#### [Threads](threads.md)
-Understand how threads work in LangSmith
+> **[Threads](threads.md)**
+>
+> Understand how threads work in LangSmith
 
-#### [Prompt Engineering](prompt-context-hub.md#prompts)
-Create and iterate on prompts in the Playground
+> **[Prompt Engineering](prompt-context-hub.md#prompts)**
+>
+> Create and iterate on prompts in the Playground
 
-#### [Evaluation](evaluation.md)
-Evaluate and test your applications systematically
+> **[Evaluation](evaluation.md)**
+>
+> Evaluate and test your applications systematically
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/chat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/chat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

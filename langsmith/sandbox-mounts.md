@@ -15,9 +15,11 @@ Sandbox mounts attach external data sources to a sandbox filesystem when the san
 Mounts are configured through `mount_config` in Python or `mountConfig` in TypeScript. The SDK sends the mount specs to LangSmith and composes the required [auth proxy](sandbox-auth-proxy.md) rules for provider credentials.
 
 > [!NOTE]
-> Sandbox mounts require `langsmith[sandbox]>=0.8.16` for Python or `langsmith>=0.7.10` for TypeScript. Context Hub mounts require `langsmith[sandbox]>=0.11.0` for Python or `langsmith>=0.8.11` for TypeScript.
+>
+> Sandbox mounts require `langsmith>=0.8.16` for Python or `langsmith>=0.7.10` for TypeScript. Context Hub mounts require `langsmith>=0.11.0` for Python or `langsmith>=0.8.11` for TypeScript.
 
 > [!WARNING]
+>
 > When using static AWS keys or a GCP service account, store cloud credentials as LangSmith workspace secrets before creating the sandbox. S3 mounts authenticated with an IAM role do not require stored AWS access keys. Do not pass real cloud credentials as sandbox environment variables, command arguments, or files.
 
 ## Configure mount paths
@@ -132,6 +134,7 @@ try {
 IAM role authentication lets the [AWS auth proxy](sandbox-auth-proxy.md#authenticate-with-an-iam-role) assume a role in your AWS account. S3 mounts use the same authentication as other supported AWS requests from the sandbox. LangSmith obtains and renews temporary AWS credentials, so you do not need to store or rotate access keys in workspace secrets.
 
 > [!NOTE]
+>
 > This option requires your LangSmith deployment to enable AWS proxy role authentication. Enabling IAM roles for ECR registries does not enable them for the auth proxy. If **AWS IAM role** is absent from the AWS authentication options, use static access keys or contact your LangSmith administrator. The role-based SDK examples require a release with `aws_auth(role_arn=...)` and `mount_config(proxy_config=...)` in Python, or `awsAuth({ roleArn })` and `mountConfig({ proxyConfig })` in TypeScript. The mount versions listed at the top of this page do not establish support for these newer options.
 
 You need permission to configure the customer IAM role's trust and access policies. One AWS auth rule applies to the sandbox's AWS requests, including all S3 mounts. Choose either static access keys or an IAM role; do not configure both. Role authentication is configured at creation. Create a new sandbox to add, remove, disable, or change its role.
@@ -185,9 +188,10 @@ The optional S3 permissions example grants access based on the mount settings:
 The role's effective AWS permissions control all supported AWS proxy requests. LangSmith does not restrict a general AWS role session to the configured mounts. Limit the role's IAM policy to the required buckets, prefixes, operations, and other AWS resources.
 
 > [!WARNING]
+>
 > A read-only mount rejects filesystem writes, but does not block direct S3 API writes that the role permits. Use the role's IAM policy to enforce read-only AWS access.
 
-Use a commercial AWS role and supported AWS HTTPS endpoints. The S3 permissions example does not include KMS permissions; review the permissions required by your bucket's encryption settings.
+Use a commercial AWS role and supported AWS HTTPS endpoints. The S3 permissions example does not include KMS permissions. For buckets encrypted with a KMS key, see [Encrypt uploads with a KMS key](#encrypt-uploads-with-a-kms-key).
 
 #### Use a shared role in the SDK
 
@@ -338,6 +342,50 @@ The mount-specific `mount_config.auth.aws` API accepts either `role_arn` or the 
 LangSmith renews temporary credentials as AWS requests need them, including after a sandbox stops and resumes. You do not supply a saved STS token or renew it manually. Keep the role's trust and access permissions in place for continued access.
 
 If renewal is temporarily unavailable, the mount can use cached credentials only until they expire. An authorization denial or expired credentials causes authenticated S3 requests to fail; the mount does not fall back to static keys.
+
+### Encrypt uploads with a KMS key
+
+Set `encryption` on an S3 mount to encrypt every object the sandbox uploads through the mount with a customer-managed AWS KMS key (SSE-KMS). Use it when a bucket policy requires uploads to name a specific key, or to choose the key instead of relying on the bucket's default encryption.
+
+> [!NOTE]
+>
+> Mount encryption requires `langsmith>=0.14.8` for Python or `langsmith>=0.10.12` for TypeScript. Self-hosted deployments require LangSmith v0.17.35 or later.
+
+**Python**
+
+```python
+s3_mount(
+    id="customer_data",
+    mount_path="/mnt/mounts/customer-data",
+    bucket="example-bucket",
+    region="us-east-1",
+    encryption={
+        "kms_key": "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+    },
+)
+```
+
+**TypeScript**
+
+```ts
+s3Mount({
+  id: "customer_data",
+  mountPath: "/mnt/mounts/customer-data",
+  bucket: "example-bucket",
+  region: "us-east-1",
+  encryption: {
+    kms_key:
+      "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+  },
+});
+```
+
+* **Key format**: `kms_key` must be a KMS key ARN in the mount's region and AWS partition. LangSmith rejects key aliases and bare key IDs.
+* **Mount types**: Only S3 mounts accept `encryption`. LangSmith rejects it on GCS, Git, and Context Hub mounts.
+* **Static keys and shared roles**: Grant the IAM identity `kms:GenerateDataKey` on the key for uploads and `kms:Decrypt` for reads and multipart uploads. The key policy must also allow that identity.
+* **Mount-scoped roles**: The session policy lets S3, and only S3, use the configured key: `kms:Decrypt` for every mount, and `kms:GenerateDataKey` only when a writable mount uses the key. All role-backed mounts in a sandbox must name the same key. The customer role and the key policy must still grant both permissions.
+
+A bucket whose default encryption is SSE-KMS works without `encryption` when the mount's AWS identity can use the bucket's default key. Uploads then use that default key. Mount-scoped role authentication denies KMS access for mounts without `encryption`, so those mounts cannot read or write objects encrypted with a KMS key.
 
 ## Mount a GCS bucket
 
@@ -762,6 +810,8 @@ gcsMount({
 ## Limits
 
 * Mounts are attached when the sandbox is created. Create a new sandbox to change mounts.
+* S3 mounts in China (`cn-*`) and AWS GovCloud (`us-gov-*`) regions must set `endpoint_url` / `endpointUrl` to the region's S3 endpoint. The default endpoint, `https://s3.amazonaws.com`, serves only commercial regions.
+* Mount-scoped role authentication must fit AWS's 2,048-character session policy limit. Many mounts, long bucket names or prefixes, or a KMS key can exceed it, and LangSmith then rejects the sandbox.
 * Configure each cloud provider's credentials in one auth surface per sandbox. If mount auth supplies AWS or GCP credentials, do not also add an auth proxy rule for the same provider.
 * Git refs can be omitted or set to a branch or tag. Commit refs are not supported.
 * Git mounts do not support `read_only` / `readOnly` or cache settings.
@@ -772,8 +822,6 @@ gcsMount({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-mounts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-mounts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

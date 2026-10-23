@@ -1,13 +1,13 @@
 ---
 title: "integrations/middleware"
-description: "Index of 6 pages and 0 subdirectories under integrations/middleware."
+description: "Index of 7 pages and 0 subdirectories under integrations/middleware."
 category: "index"
 tags: [index, integrations, middleware]
 ---
 
 # integrations/middleware
 
-6 pages here.
+7 pages here.
 
 ## Files
 
@@ -17,3 +17,4 @@ tags: [index, integrations, middleware]
 - [Middleware integrations](index.md) - Integrate with middleware using LangChain Python.
 - [NVIDIA middleware integration](nvidia.md) - Integrate with the NVIDIA middleware using LangChain Python.
 - [OpenAI middleware integration](openai.md) - Integrate with the OpenAI middleware using LangChain Python.
+- [ScaleDown middleware integration](scaledown.md) - Integrate with ScaleDown middleware using LangChain Python.

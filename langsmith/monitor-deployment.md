@@ -16,7 +16,8 @@ Monitor a Cloud deployment with build logs, Agent Server logs, and runtime metri
 
 Each revision includes build logs and server logs.
 
-#### LangSmith UI
+**LangSmith UI**
+
 From the **Deployments** view:
 
 1. Select a deployment.
@@ -25,7 +26,8 @@ From the **Deployments** view:
 4. Select the **Server** tab to view server logs. Server logs become available after LangSmith deploys the revision.
 5. Adjust the date and time range as needed. The default range is **Last 7 days**.
 
-#### LangGraph CLI
+**LangGraph CLI**
+
 To view server logs, run:
 
 ```shell
@@ -84,8 +86,6 @@ To view deployment metrics:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/monitor-deployment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/monitor-deployment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

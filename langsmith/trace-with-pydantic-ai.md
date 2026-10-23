@@ -27,6 +27,7 @@ uv add langsmith pydantic-ai opentelemetry-exporter-otlp
 ```
 
 > [!NOTE]
+>
 > Requires LangSmith Python SDK version `langsmith>=0.4.26` for optimal OpenTelemetry support.
 
 ## Setup
@@ -57,6 +58,7 @@ Agent.instrument_all()
 ```
 
 > [!NOTE]
+>
 > You do not need to set any OpenTelemetry environment variables or configure exporters manually—`configure()` handles everything automatically.
 
 ### 3. Create and run your PydanticAI agent
@@ -74,7 +76,7 @@ configure(project_name="pydantic-ai-demo")
 Agent.instrument_all()
 
 # Create and run an agent
-agent = Agent('openai:gpt-5.5')
+agent = Agent('openai:gpt-6-luna')
 result = agent.run_sync('What is the capital of France?')
 print(result.output)
 #> Paris
@@ -96,7 +98,7 @@ Agent.instrument_all()
 
 tracer = trace.get_tracer(__name__)
 
-agent = Agent('openai:gpt-5.5')
+agent = Agent('openai:gpt-6-luna')
 
 with tracer.start_as_current_span("pydantic_ai_workflow") as span:
     span.set_attribute("langsmith.metadata.user_id", "user_123")
@@ -109,8 +111,6 @@ with tracer.start_as_current_span("pydantic_ai_workflow") as span:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-pydantic-ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-pydantic-ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -7,20 +7,20 @@ tags: [index, reference, python, langgraph]
 
 # reference/python/langgraph
 
-23 pages here, 1376 pages including subdirectories.
+23 pages here, 1403 pages including subdirectories.
 
 ## Directories
 
-- [_internal/](_internal/_index.md) - 137 pages
+- [_internal/](_internal/_index.md) - 138 pages
 - [callbacks/](callbacks/_index.md) - 22 pages
 - [channels/](channels/_index.md) - 144 pages
 - [config/](config/_index.md) - 3 pages
 - [constants/](constants/_index.md) - 4 pages
-- [errors/](errors/_index.md) - 30 pages
+- [errors/](errors/_index.md) - 31 pages
 - [func/](func/_index.md) - 18 pages
 - [graph/](graph/_index.md) - 90 pages
 - [managed/](managed/_index.md) - 15 pages
-- [pregel/](pregel/_index.md) - 513 pages
+- [pregel/](pregel/_index.md) - 538 pages
 - [runtime/](runtime/_index.md) - 41 pages
 - [stream/](stream/_index.md) - 152 pages
 - [types/](types/_index.md) - 162 pages

@@ -9,9 +9,11 @@ tags: [docs, langsmith, observability-stack]
 # Deploy an observability stack for your LangSmith deployment
 
 > [!CAUTION]
+>
 > **Deprecated**: The LangSmith Observability Helm chart is deprecated. We no longer maintain or provide support for it. The documentation below is preserved for reference only.
 
 > [!WARNING]
+>
 > **This section is only applicable for Kubernetes deployments.**
 
 LangSmith applications expose telemetry data that can be sent to the backend of your choice. If you don’t already have an observability stack, or prefer to keep LangSmith telemetry separate from your main application, you can use the LangSmith Observability Helm chart to deploy a basic observability stack.
@@ -49,6 +51,7 @@ langsmith-observability-kube-state-metrics-b58bb8db4-bm4g5        1/1     Runnin
 # Section 2: Full observability stack
 
 > [!WARNING]
+>
 > **This is not a production observability stack. Use this to gain quick insight into logs, metrics and traces for your deployment. This is only made to handle a few dozen GB of data per day.**
 
 This section will show you how to deploy the end-to-end observability stack for LangSmith, using the [Helm Chart](https://github.com/langchain-ai/helm/tree/main/charts/langsmith-observability).
@@ -102,6 +105,7 @@ The following instructions will bring up OTel collectors, the LGTM stack, Grafan
 4. Grab the latest version number, and run `helm install langsmith-observability langchain/langsmith-observability --values langsmith_obs_config.yaml --version <version> -n <namespace> --wait --debug`
 
 > [!NOTE]
+>
 > **You can selectively collect logs, metrics or traces by modifying the boolean values under `otelCollector` in your config file. You can also selectively bring up each respective piece of the backend (Loki, Mimir, Tempo).**
 
 You should see the following if the install went through:
@@ -135,10 +139,11 @@ observability:
 ```
 
 > [!NOTE]
+>
 > 1. To get `${LANGSMITH_OTEL_CRD_NAME}`, you can run `kubectl get opentelemetrycollectors -n ${LANGSMITH_OBS_NAMESPACE}` and select the name of the one with MODE = `sidecar`
 > 2. To get `${GATEWAY_COLLECTOR_SERVICE_NAME}` name, run `kubectl get services -n ${LANGSMITH_OBS_NAMESPACE}` and select the one with Ports 4317/4318 AND a ClusterIP set. It should be something like `langsmith-observability-collector-gateway-collector`
 
-Now run `helm upgrade langsmith langchain/langsmith --values langsmith_config.yaml -n <langsmith-namespace> --wait --debug`
+Now run `helm upgrade langsmith langchain/langsmith --values langsmith_config.yaml --version <version> -n <langsmith-namespace> --wait --debug`, replacing `<version>` with the chart version you already run. Without `--version`, Helm upgrades to the latest chart, which can move the installation to a new major version.
 
 Once upgraded, if you run `kubectl get pods -n <langsmith-namespace>` you should see the following (note the 2/2 for sidecar collectors):
 
@@ -158,12 +163,10 @@ Then port-forward into the `langsmith-observability-grafana` container at port 3
 
 Once in Grafana, you can use the UI to monitor logs, metrics and traces. Grafana also comes pre-packaged with sets of dashboards for monitoring the main components of your deployment.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/langsmith-grafana-dashboards.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=ee47243826737bab23944e01536dec71" alt="LangSmith Grafana Dashboards" width="1715" height="1073" data-path="langsmith/images/langsmith-grafana-dashboards.png" />
+![LangSmith Grafana Dashboards](https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/langsmith-grafana-dashboards.png?fit=max\&auto=format\&n=4kN8yiLrZX_amfFn\&q=85\&s=ee47243826737bab23944e01536dec71)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-stack.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-stack.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

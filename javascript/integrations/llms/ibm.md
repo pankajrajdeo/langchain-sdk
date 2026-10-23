@@ -16,7 +16,7 @@ This will help you get started with IBM text completion models (LLMs) using Lang
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/ibm_watsonx/) | Downloads | Version |
+| Class | Package | Local | Serializable | [PY support](../../../integrations/llms/ibm_watsonx.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`WatsonxLLM`](https://reference.langchain.com/javascript/langchain-ibm/WatsonxLLM) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
 
@@ -275,8 +275,6 @@ For detailed documentation of all `IBM watsonx.ai` features and configurations h
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/ibm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/ibm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

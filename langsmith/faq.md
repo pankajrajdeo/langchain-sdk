@@ -138,7 +138,7 @@ LangGraph is a stateful, orchestration framework that brings added control to ag
 | Streaming | Basic | Dedicated mode for token-by-token messages |
 | Checkpointer | Community contributed | Supported out-of-the-box |
 | Persistence Layer | Self-managed | Managed Postgres with efficient storage |
-| Deployment | Self-managed | • Cloud <br /> • Free self-hosted <br /> • Enterprise (paid self-hosted) |
+| Deployment | Self-managed | • Cloud  • Free self-hosted  • Enterprise (paid self-hosted) |
 | Scalability | Self-managed | Auto-scaling of task queues and servers |
 | Fault-tolerance | Self-managed | Automated retries |
 | Concurrency Control | Simple threading | Supports double-texting |
@@ -172,8 +172,6 @@ A Deployment Run is one end-to-end invocation of a LangGraph agent deployed via 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/faq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/faq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

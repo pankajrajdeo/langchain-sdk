@@ -104,7 +104,8 @@ process.env.LANGSMITH_API_KEY = "...";
 
 Select a chat model from LangChain's suite of integrations:
 
-#### OpenAI
+**OpenAI**
+
 👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
 **npm**
@@ -152,7 +153,8 @@ const model = new ChatOpenAI({
 });
 ```
 
-#### Anthropic
+**Anthropic**
+
 👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
 **npm**
@@ -200,7 +202,8 @@ const model = new ChatAnthropic({
 });
 ```
 
-#### Azure
+**Azure**
+
 👉 Read the [Azure chat model integration docs](../../integrations/chat/azure.md)
 
 **npm**
@@ -252,7 +255,8 @@ const model = new AzureChatOpenAI({
 });
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 👉 Read the [ChatGoogle chat model integration docs](../../integrations/chat/google.md)
 
 **npm**
@@ -300,7 +304,8 @@ const model = new ChatGoogle({
 });
 ```
 
-#### Bedrock Converse
+**Bedrock Converse**
+
 👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock_converse.md)
 
 **npm**
@@ -470,49 +475,46 @@ Notice how `record_warranty_status` and `record_issue_type` return `Command` obj
 
 Define prompts and tools for each step. First, define the prompts for each step:
 
-<details>
-<summary>View complete prompt definitions</summary>
-
+> **View complete prompt definitions**
+>
 ```typescript
-// Define prompts as constants for easy reference
-const WARRANTY_COLLECTOR_PROMPT = `You are a customer support agent helping with device issues.
-
-CURRENT STAGE: Warranty verification
-
-At this step, you need to:
-1. Greet the customer warmly
-2. Ask if their device is under warranty
-3. Use record_warranty_status to record their response and move to the next step
-
-Be conversational and friendly. Don't ask multiple questions at once.`;
-
-const ISSUE_CLASSIFIER_PROMPT = `You are a customer support agent helping with device issues.
-
-CURRENT STAGE: Issue classification
-CUSTOMER INFO: Warranty status is {warranty_status}
-
-At this step, you need to:
-1. Ask the customer to describe their issue
-2. Determine if it's a hardware issue (physical damage, broken parts) or software issue (app crashes, performance)
-3. Use record_issue_type to record the classification and move to the next step
-
-If unclear, ask clarifying questions before classifying.`;
-
-const RESOLUTION_SPECIALIST_PROMPT = `You are a customer support agent helping with device issues.
-
-CURRENT STAGE: Resolution
-CUSTOMER INFO: Warranty status is {warranty_status}, issue type is {issue_type}
-
-At this step, you need to:
-1. For SOFTWARE issues: provide troubleshooting steps using provide_solution
-2. For HARDWARE issues:
-   - If IN WARRANTY: explain warranty repair process using provide_solution
-   - If OUT OF WARRANTY: escalate_to_human for paid repair options
-
-Be specific and helpful in your solutions.`;
+> // Define prompts as constants for easy reference
+> const WARRANTY_COLLECTOR_PROMPT = `You are a customer support agent helping with device issues.
+>
+> CURRENT STAGE: Warranty verification
+>
+> At this step, you need to:
+> 1. Greet the customer warmly
+> 2. Ask if their device is under warranty
+> 3. Use record_warranty_status to record their response and move to the next step
+>
+> Be conversational and friendly. Don't ask multiple questions at once.`;
+>
+> const ISSUE_CLASSIFIER_PROMPT = `You are a customer support agent helping with device issues.
+>
+> CURRENT STAGE: Issue classification
+> CUSTOMER INFO: Warranty status is {warranty_status}
+>
+> At this step, you need to:
+> 1. Ask the customer to describe their issue
+> 2. Determine if it's a hardware issue (physical damage, broken parts) or software issue (app crashes, performance)
+> 3. Use record_issue_type to record the classification and move to the next step
+>
+> If unclear, ask clarifying questions before classifying.`;
+>
+> const RESOLUTION_SPECIALIST_PROMPT = `You are a customer support agent helping with device issues.
+>
+> CURRENT STAGE: Resolution
+> CUSTOMER INFO: Warranty status is {warranty_status}, issue type is {issue_type}
+>
+> At this step, you need to:
+> 1. For SOFTWARE issues: provide troubleshooting steps using provide_solution
+> 2. For HARDWARE issues:
+>    - If IN WARRANTY: explain warranty repair process using provide_solution
+>    - If OUT OF WARRANTY: escalate_to_human for paid repair options
+>
+> Be specific and helpful in your solutions.`;
 ```
-
-</details>
 
 Then map step names to their configurations using a dictionary:
 
@@ -628,6 +630,7 @@ const agent = createAgent({
 ```
 
 > [!NOTE]
+>
 > **Why a checkpointer?** The checkpointer maintains state across conversation turns. Without it, the `current_step` state would be lost between user messages, breaking the workflow.
 
 ## 6. Test the workflow
@@ -778,6 +781,7 @@ See the [short-term memory guide](../short-term-memory.md) for other memory mana
 Some workflows need to allow users to return to previous steps to correct information (e.g., changing warranty status or issue classification). However, not all transitions make sense—for example, you typically can't go back once a refund has been processed. For this support workflow, we'll add tools to return to the warranty verification and issue classification steps.
 
 > [!TIP]
+>
 > If your workflow requires arbitrary transitions between most steps, consider whether you need a structured workflow at all. This pattern works best when steps follow a clear sequential progression with occasional backwards transitions for corrections.
 
 Add "go back" tools to the resolution step:
@@ -852,6 +856,7 @@ const result = await agent.invoke(
 Here's everything together in a runnable script:
 
 **Complete code**
+
 ```typescript
 import { createMiddleware, createAgent } from "langchain";
 
@@ -859,6 +864,7 @@ import { z } from "zod";
 import { tool, ToolMessage, type ToolRuntime, HumanMessage } from "langchain";
 import { Command, MemorySaver, StateSchema } from "@langchain/langgraph";
 import { ChatOpenAI } from "@langchain/openai";
+import { uuid7 } from "langsmith";
 
 // Define the possible workflow steps
 const SupportStepSchema = z.enum([
@@ -1066,7 +1072,7 @@ const agent = createAgent({
 });
 
 // Configuration for this conversation thread
-const threadId = crypto.randomUUID();
+const threadId = uuid7();
 const config = { configurable: { thread_id: threadId } };
 
 // Turn 1: Initial message - starts with warranty_collector step
@@ -1125,8 +1131,6 @@ for (const msg of result.messages) {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/handoffs-customer-support.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/handoffs-customer-support.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

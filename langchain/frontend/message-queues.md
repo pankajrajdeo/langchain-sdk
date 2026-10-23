@@ -12,9 +12,8 @@ tags: [docs, langchain, frontend, message-queues]
 
 Message queuing lets users send multiple messages in rapid succession without waiting for the agent to finish processing the current one. Each message is accepted immediately, queued for the active thread, and processed sequentially, giving you full visibility and control over the pending work.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/message-queues).
-
 > [!NOTE]
+>
 > This feature requires the [LangGraph Agent Server](../../langgraph/local-server.md). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](../../langsmith/deployment.md) to use this pattern.
 
 ## Why message queues?
@@ -68,6 +67,7 @@ pending work, and use `queue.cancel()` or `queue.clear()` to remove items before
 they start processing.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
 
 **React**
@@ -229,6 +229,7 @@ function QueueList({ entries, queue }) {
 ```
 
 > [!TIP]
+>
 > Display the first few characters of each queued message as a preview so users can quickly identify which items to cancel without reading full messages.
 
 ## Cancelling queued messages
@@ -252,6 +253,7 @@ await queue.clear();
 ```
 
 > [!NOTE]
+>
 > Cancelling a queue entry only affects messages that have **not yet started
 > processing**. If the agent is already working on a message, cancelling it from
 > the queue has no effect. Use `stream.stop()` to interrupt the current run.
@@ -356,8 +358,6 @@ stream = injectStream<typeof myAgent>({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/message-queues.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/message-queues.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

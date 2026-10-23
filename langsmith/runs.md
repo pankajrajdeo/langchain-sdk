@@ -76,22 +76,24 @@ The Agent Server API provides several endpoints for creating and managing runs. 
 
 ## In this section
 
-#### [Kick off background runs](background-run.md)
-Run your agent asynchronously and poll for results.
+> **[Kick off background runs](background-run.md)**
+>
+> Run your agent asynchronously and poll for results.
 
-#### [Run multiple agents on the same thread](same-thread.md)
-Use multiple assistants on a shared thread to combine agent capabilities.
+> **[Run multiple agents on the same thread](same-thread.md)**
+>
+> Use multiple assistants on a shared thread to combine agent capabilities.
 
-#### [Stateless runs](stateless-runs.md)
-Execute runs without persisting state when conversation history isn't needed.
+> **[Stateless runs](stateless-runs.md)**
+>
+> Execute runs without persisting state when conversation history isn't needed.
 
-#### [Cancel a run](cancel-run.md)
-Cancel a single run or multiple runs via the API.
+> **[Cancel a run](cancel-run.md)**
+>
+> Cancel a single run or multiple runs via the API.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

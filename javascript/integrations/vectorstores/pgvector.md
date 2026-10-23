@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, vectorstores, pgvector]
 > Integrate with the PGVectorStore using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 
 To enable vector search in generic PostgreSQL databases, LangChain.js supports using the [`pgvector`](https://github.com/pgvector/pgvector) Postgres extension.
@@ -43,6 +44,7 @@ LangChain has two Postgres vector store integrations. Here's how to choose the r
 * Following an older tutorial that has not been updated yet
 
 > [!NOTE]
+>
 > For all new projects, we recommend using `PGVectorStore` from `langchain-postgres` (Python) or `@langchain/community` (JavaScript).
 
 ***
@@ -51,7 +53,7 @@ LangChain has two Postgres vector store integrations. Here's how to choose the r
 
 ### Integration details
 
-| Class | Package | [PY support](https://python.langchain.com/docs/integrations/vectorstores/pgvector/) | Downloads | Version |
+| Class | Package | [PY support](../../../integrations/vectorstores/pgvector.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`PGVectorStore`](https://reference.langchain.com/javascript/langchain-pgvector/PGVectorStore) | [`@langchain/pgvector`](https://www.npmjs.com/package/@langchain/pgvector) | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/pgvector?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/pgvector?style=flat-square\&label=%20&) |
 
@@ -127,6 +129,7 @@ If you want to get automated tracing of your model calls you can also set your [
 To instantiate the vector store, call the `.initialize()` static method. This will automatically check for the presence of a table, given by `tableName` in the passed `config`. If it is not there, it will create it with the required columns.
 
 > [!WARNING]
+>
 > **Security**: User-generated data such as usernames should not be used as input for table and column names.
 > **This may lead to SQL Injection!**
 
@@ -473,8 +476,6 @@ For detailed documentation of all `PGVectorStore` features and configurations he
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/pgvector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/pgvector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

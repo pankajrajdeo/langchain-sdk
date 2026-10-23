@@ -12,6 +12,7 @@ In the **skills** architecture, specialized capabilities are packaged as invocab
 For built-in skill support, see [Deep Agents](../../deepagents/skills.md).
 
 > [!TIP]
+>
 > This pattern is conceptually identical to [Agent Skills](https://agentskills.io/) and [llms.txt](https://llmstxt.org/) (introduced by Jeremy Howard), which uses tool calling for progressive disclosure of documentation. The skills pattern applies progressive disclosure to specialized prompts and domain knowledge rather than just documentation pages.
 >
 > For ready-to-use skills that improve your agent's performance on LangChain ecosystem tasks, see the [LangChain Skills](https://github.com/langchain-ai/langchain-skills) repository.
@@ -85,8 +86,9 @@ const agent = createAgent({
 
 For a complete implementation, see the tutorial below.
 
-#### [Tutorial: Build a SQL assistant with on-demand skills](skills-sql-assistant.md)
-Learn how to implement skills with progressive disclosure, where the agent loads specialized prompts and schemas on-demand rather than upfront.
+> **[Tutorial: Build a SQL assistant with on-demand skills](skills-sql-assistant.md)**
+>
+> Learn how to implement skills with progressive disclosure, where the agent loads specialized prompts and schemas on-demand rather than upfront.
 
 ## Extending the pattern
 
@@ -102,8 +104,6 @@ When writing custom implementations, you can extend the basic skills pattern in 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

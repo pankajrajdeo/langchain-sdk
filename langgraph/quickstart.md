@@ -10,8 +10,12 @@ tags: [docs, langgraph, quickstart]
 
 This quickstart demonstrates how to build a calculator agent using the LangGraph Graph API or the Functional API.
 
-> **Prompt:** Build the LangGraph calculator quickstart
+Build the LangGraph calculator quickstart
+
 Build a LangGraph calculator agent in this working directory by following the LangGraph quickstart.
+
+<a id="use-the-functional-api"></a>
+<a id="use-the-graph-api"></a>
 
 ## Step 1: Read the guide
 
@@ -41,44 +45,47 @@ Implement the selected quickstart path end to end: tools for add, multiply, and 
 * Ask rather than guess when a secret, API choice, or project convention is unclear.
 
 > [!TIP]
+>
 > **Using an AI coding assistant?**
 >
 > * Install the [LangChain Docs MCP servers](../use-these-docs.md) to give your agent access to up-to-date LangChain documentation and examples.
 >
-> > **Prompt:** Connect LangChain docs MCP servers
->     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
+>   Connect LangChain docs MCP servers
 >
->     Servers to add:
+>   Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
 >
->     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
->     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
+>   Servers to add:
 >
->     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
+>   * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
+>   * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
 >
->     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
->     * Codex CLI: `codex mcp add` with each server URL.
->     * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
->     * Claude Desktop: add both URLs under Settings > Connectors.
+>   Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
 >
->     Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
+>   * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
+>   * Codex CLI: `codex mcp add` with each server URL.
+>   * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
+>   * Claude Desktop: add both URLs under Settings > Connectors.
+>
+>   Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
 > * Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks.
 >
-> > **Prompt:** Install LangChain Skills
->     Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
+>   Install LangChain Skills
 >
->     Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
+>   Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
 >
-> ```bash
->     npx skills add langchain-ai/langchain-skills --skill '*' --yes
-> ```
+>   Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
 >
->     If I ask for a global install instead, use:
+>   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   npx skills add langchain-ai/langchain-skills --skill '*' --yes
+>   ```
 >
-> ```bash
->     npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
-> ```
+>   If I ask for a global install instead, use:
 >
->     Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
+>   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
+>   ```
+>
+>   Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
 
 * [Use the Graph API](#use-the-graph-api) if you prefer to define your agent as a graph of nodes and edges.
 * [Use the Functional API](#use-the-functional-api) if you prefer to define your agent as a single function.
@@ -86,9 +93,11 @@ Implement the selected quickstart path end to end: tools for add, multiply, and 
 For conceptual information, see [Graph API overview](graph-api.md) and [Functional API overview](functional-api.md).
 
 > [!NOTE]
+>
 > For this example, you will need to set up a [Claude (Anthropic)](https://www.anthropic.com/) account and get an API key. Then, set the `ANTHROPIC_API_KEY` environment variable in your terminal. See [chat model integrations](../integrations/chat.md) for all available providers. If you use [LangSmith Gateway](../langsmith/llm-gateway.md), you can [bring your own provider keys](../langsmith/llm-gateway-quickstart.md#send-a-request) or use [Gateway Credits](../langsmith/llm-gateway-credits.md) to access models without a provider key.
 
-#### Use the Graph API
+**Use the Graph API**
+
 ## 1. Define tools and model
 
 In this example, we'll use the Claude Sonnet 4.5 model and define tools for addition, multiplication, and division.
@@ -144,6 +153,7 @@ model_with_tools = model.bind_tools(tools)
 The graph's state is used to store the messages and the number of LLM calls.
 
 > [!TIP]
+>
 > State in LangGraph persists throughout the agent's execution.
 >
 > The `Annotated` type with `operator.add` ensures that new messages are appended to the existing list rather than replacing it.
@@ -260,162 +270,172 @@ for m in messages["messages"]:
 ```
 
 > [!TIP]
+>
 > Trace and debug your agent with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-quickstart). Follow the [tracing quickstart](../langsmith/trace-with-langgraph.md) to get set up. When ready for production, see [Deploy](../langsmith/deployment.md) for hosting options.
 >
 > We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 Congratulations! You've built your first agent using the LangGraph Graph API.
 
-<details>
-<summary>Full code example</summary>
-
+> **Full code example**
+>
 ```python
-# Step 1: Define tools and model
-
-from langchain.tools import tool
-from langchain.chat_models import init_chat_model
-
-model = init_chat_model(
-    "claude-sonnet-4-6",
-    temperature=0
-)
-
-# Define tools
-@tool
-def multiply(a: int, b: int) -> int:
-    """Multiply `a` and `b`.
-
-    Args:
-        a: First int
-        b: Second int
-    """
-    return a * b
-
-@tool
-def add(a: int, b: int) -> int:
-    """Adds `a` and `b`.
-
-    Args:
-        a: First int
-        b: Second int
-    """
-    return a + b
-
-@tool
-def divide(a: int, b: int) -> float:
-    """Divide `a` and `b`.
-
-    Args:
-        a: First int
-        b: Second int
-    """
-    return a / b
-
-# Augment the LLM with tools
-tools = [add, multiply, divide]
-tools_by_name = {tool.name: tool for tool in tools}
-model_with_tools = model.bind_tools(tools)
-
-# Step 2: Define state
-
-from langchain.messages import AnyMessage
-from typing_extensions import TypedDict, Annotated
-import operator
-
-class MessagesState(TypedDict):
-    messages: Annotated[list[AnyMessage], operator.add]
-    llm_calls: int
-
-# Step 3: Define model node
-from langchain.messages import SystemMessage
-
-def llm_call(state: MessagesState):
-    """LLM decides whether to call a tool or not"""
-
-    return {
-        "messages": [
-            model_with_tools.invoke(
-                [
-                    SystemMessage(
-                        content="You are a helpful assistant tasked with performing arithmetic on a set of inputs."
-                    )
-                ]
-                + state["messages"]
-            )
-        ],
-        "llm_calls": state.get('llm_calls', 0) + 1
-    }
-
-# Step 4: Define tool node
-
-from langchain.messages import ToolMessage
-
-def tool_node(state: MessagesState):
-    """Performs the tool call"""
-
-    result = []
-    for tool_call in state["messages"][-1].tool_calls:
-        tool = tools_by_name[tool_call["name"]]
-        observation = tool.invoke(tool_call["args"])
-        result.append(ToolMessage(content=observation, tool_call_id=tool_call["id"]))
-    return {"messages": result}
-
-# Step 5: Define logic to determine whether to end
-
-from typing import Literal
-from langgraph.graph import StateGraph, START, END
-
-# Conditional edge function to route to the tool node or end based upon whether the LLM made a tool call
-def should_continue(state: MessagesState) -> Literal["tool_node", END]:
-    """Decide if we should continue the loop or stop based upon whether the LLM made a tool call"""
-
-    messages = state["messages"]
-    last_message = messages[-1]
-
-    # If the LLM makes a tool call, then perform an action
-    if last_message.tool_calls:
-        return "tool_node"
-
-    # Otherwise, we stop (reply to the user)
-    return END
-
-# Step 6: Build agent
-
-# Build workflow
-agent_builder = StateGraph(MessagesState)
-
-# Add nodes
-agent_builder.add_node("llm_call", llm_call)
-agent_builder.add_node("tool_node", tool_node)
-
-# Add edges to connect nodes
-agent_builder.add_edge(START, "llm_call")
-agent_builder.add_conditional_edges(
-    "llm_call",
-    should_continue,
-    ["tool_node", END]
-)
-agent_builder.add_edge("tool_node", "llm_call")
-
-# Compile the agent
-agent = agent_builder.compile()
-
-from IPython.display import Image, display
-# Show the agent
-display(Image(agent.get_graph(xray=True).draw_mermaid_png()))
-
-# Invoke
-from langchain.messages import HumanMessage
-messages = [HumanMessage(content="Add 3 and 4.")]
-messages = agent.invoke({"messages": messages})
-for m in messages["messages"]:
-    m.pretty_print()
-
+> # Step 1: Define tools and model
+>
+> from langchain.tools import tool
+> from langchain.chat_models import init_chat_model
+>
+>
+> model = init_chat_model(
+>     "claude-sonnet-4-6",
+>     temperature=0
+> )
+>
+>
+> # Define tools
+> @tool
+> def multiply(a: int, b: int) -> int:
+>     """Multiply `a` and `b`.
+>
+>     Args:
+>         a: First int
+>         b: Second int
+>     """
+>     return a * b
+>
+>
+> @tool
+> def add(a: int, b: int) -> int:
+>     """Adds `a` and `b`.
+>
+>     Args:
+>         a: First int
+>         b: Second int
+>     """
+>     return a + b
+>
+>
+> @tool
+> def divide(a: int, b: int) -> float:
+>     """Divide `a` and `b`.
+>
+>     Args:
+>         a: First int
+>         b: Second int
+>     """
+>     return a / b
+>
+>
+> # Augment the LLM with tools
+> tools = [add, multiply, divide]
+> tools_by_name = {tool.name: tool for tool in tools}
+> model_with_tools = model.bind_tools(tools)
+>
+> # Step 2: Define state
+>
+> from langchain.messages import AnyMessage
+> from typing_extensions import TypedDict, Annotated
+> import operator
+>
+>
+> class MessagesState(TypedDict):
+>     messages: Annotated[list[AnyMessage], operator.add]
+>     llm_calls: int
+>
+> # Step 3: Define model node
+> from langchain.messages import SystemMessage
+>
+>
+> def llm_call(state: MessagesState):
+>     """LLM decides whether to call a tool or not"""
+>
+>     return {
+>         "messages": [
+>             model_with_tools.invoke(
+>                 [
+>                     SystemMessage(
+>                         content="You are a helpful assistant tasked with performing arithmetic on a set of inputs."
+>                     )
+>                 ]
+>                 + state["messages"]
+>             )
+>         ],
+>         "llm_calls": state.get('llm_calls', 0) + 1
+>     }
+>
+>
+> # Step 4: Define tool node
+>
+> from langchain.messages import ToolMessage
+>
+>
+> def tool_node(state: MessagesState):
+>     """Performs the tool call"""
+>
+>     result = []
+>     for tool_call in state["messages"][-1].tool_calls:
+>         tool = tools_by_name[tool_call["name"]]
+>         observation = tool.invoke(tool_call["args"])
+>         result.append(ToolMessage(content=observation, tool_call_id=tool_call["id"]))
+>     return {"messages": result}
+>
+> # Step 5: Define logic to determine whether to end
+>
+> from typing import Literal
+> from langgraph.graph import StateGraph, START, END
+>
+>
+> # Conditional edge function to route to the tool node or end based upon whether the LLM made a tool call
+> def should_continue(state: MessagesState) -> Literal["tool_node", END]:
+>     """Decide if we should continue the loop or stop based upon whether the LLM made a tool call"""
+>
+>     messages = state["messages"]
+>     last_message = messages[-1]
+>
+>     # If the LLM makes a tool call, then perform an action
+>     if last_message.tool_calls:
+>         return "tool_node"
+>
+>     # Otherwise, we stop (reply to the user)
+>     return END
+>
+> # Step 6: Build agent
+>
+> # Build workflow
+> agent_builder = StateGraph(MessagesState)
+>
+> # Add nodes
+> agent_builder.add_node("llm_call", llm_call)
+> agent_builder.add_node("tool_node", tool_node)
+>
+> # Add edges to connect nodes
+> agent_builder.add_edge(START, "llm_call")
+> agent_builder.add_conditional_edges(
+>     "llm_call",
+>     should_continue,
+>     ["tool_node", END]
+> )
+> agent_builder.add_edge("tool_node", "llm_call")
+>
+> # Compile the agent
+> agent = agent_builder.compile()
+>
+>
+> from IPython.display import Image, display
+> # Show the agent
+> display(Image(agent.get_graph(xray=True).draw_mermaid_png()))
+>
+> # Invoke
+> from langchain.messages import HumanMessage
+> messages = [HumanMessage(content="Add 3 and 4.")]
+> messages = agent.invoke({"messages": messages})
+> for m in messages["messages"]:
+>     m.pretty_print()
+>
 ```
 
-</details>
+**Use the Functional API**
 
-#### Use the Functional API
 ## 1. Define tools and model
 
 In this example, we'll use the Claude Sonnet 4.5 model and define tools for addition, multiplication, and division.
@@ -480,6 +500,7 @@ from langgraph.func import entrypoint, task
 The model node is used to call the LLM and decide whether to call a tool or not.
 
 > [!TIP]
+>
 > The [`@task`](https://reference.langchain.com/python/langgraph/func/task) decorator marks a function as a task that can be executed as part of the agent. Tasks can be called synchronously or asynchronously within your entrypoint function.
 
 ```python
@@ -514,6 +535,7 @@ def call_tool(tool_call: ToolCall):
 The agent is built using the [`@entrypoint`](https://reference.langchain.com/python/langgraph/func/entrypoint) function.
 
 > [!NOTE]
+>
 > In the Functional API, instead of defining nodes and edges explicitly, you write standard control flow logic (loops, conditionals) within a single function.
 
 ```python
@@ -545,128 +567,132 @@ for snapshot in stream.values:
 ```
 
 > [!TIP]
+>
 > Trace and debug your agent with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-quickstart). Follow the [tracing quickstart](../langsmith/trace-with-langgraph.md) to get set up. When ready for production, see [Deploy](../langsmith/deployment.md) for hosting options.
 >
 > We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 Congratulations! You've built your first agent using the LangGraph Functional API.
 
-<details>
-<summary>Full code example</summary>
-
+> **Full code example**
+>
 ```python
-# Step 1: Define tools and model
-
-from langchain.tools import tool
-from langchain.chat_models import init_chat_model
-
-model = init_chat_model(
-    "claude-sonnet-4-6",
-    temperature=0
-)
-
-# Define tools
-@tool
-def multiply(a: int, b: int) -> int:
-    """Multiply `a` and `b`.
-
-    Args:
-        a: First int
-        b: Second int
-    """
-    return a * b
-
-@tool
-def add(a: int, b: int) -> int:
-    """Adds `a` and `b`.
-
-    Args:
-        a: First int
-        b: Second int
-    """
-    return a + b
-
-@tool
-def divide(a: int, b: int) -> float:
-    """Divide `a` and `b`.
-
-    Args:
-        a: First int
-        b: Second int
-    """
-    return a / b
-
-# Augment the LLM with tools
-tools = [add, multiply, divide]
-tools_by_name = {tool.name: tool for tool in tools}
-model_with_tools = model.bind_tools(tools)
-
-from langgraph.graph import add_messages
-from langchain.messages import (
-    SystemMessage,
-    HumanMessage,
-    ToolCall,
-)
-from langchain_core.messages import BaseMessage
-from langgraph.func import entrypoint, task
-
-# Step 2: Define model node
-
-@task
-def call_llm(messages: list[BaseMessage]):
-    """LLM decides whether to call a tool or not"""
-    return model_with_tools.invoke(
-        [
-            SystemMessage(
-                content="You are a helpful assistant tasked with performing arithmetic on a set of inputs."
-            )
-        ]
-        + messages
-    )
-
-# Step 3: Define tool node
-
-@task
-def call_tool(tool_call: ToolCall):
-    """Performs the tool call"""
-    tool = tools_by_name[tool_call["name"]]
-    return tool.invoke(tool_call)
-
-# Step 4: Define agent
-
-@entrypoint()
-def agent(messages: list[BaseMessage]):
-    model_response = call_llm(messages).result()
-
-    while True:
-        if not model_response.tool_calls:
-            break
-
-        # Execute tools
-        tool_result_futures = [
-            call_tool(tool_call) for tool_call in model_response.tool_calls
-        ]
-        tool_results = [fut.result() for fut in tool_result_futures]
-        messages = add_messages(messages, [model_response, *tool_results])
-        model_response = call_llm(messages).result()
-
-    messages = add_messages(messages, model_response)
-    return messages
-
-# Invoke
-messages = [HumanMessage(content="Add 3 and 4.")]
-stream = agent.stream_events(messages, version="v3")
-for snapshot in stream.values:
-    print(snapshot)
-    print("\n")
+> # Step 1: Define tools and model
+>
+> from langchain.tools import tool
+> from langchain.chat_models import init_chat_model
+>
+>
+> model = init_chat_model(
+>     "claude-sonnet-4-6",
+>     temperature=0
+> )
+>
+>
+> # Define tools
+> @tool
+> def multiply(a: int, b: int) -> int:
+>     """Multiply `a` and `b`.
+>
+>     Args:
+>         a: First int
+>         b: Second int
+>     """
+>     return a * b
+>
+>
+> @tool
+> def add(a: int, b: int) -> int:
+>     """Adds `a` and `b`.
+>
+>     Args:
+>         a: First int
+>         b: Second int
+>     """
+>     return a + b
+>
+>
+> @tool
+> def divide(a: int, b: int) -> float:
+>     """Divide `a` and `b`.
+>
+>     Args:
+>         a: First int
+>         b: Second int
+>     """
+>     return a / b
+>
+>
+> # Augment the LLM with tools
+> tools = [add, multiply, divide]
+> tools_by_name = {tool.name: tool for tool in tools}
+> model_with_tools = model.bind_tools(tools)
+>
+> from langgraph.graph import add_messages
+> from langchain.messages import (
+>     SystemMessage,
+>     HumanMessage,
+>     ToolCall,
+> )
+> from langchain_core.messages import BaseMessage
+> from langgraph.func import entrypoint, task
+>
+>
+> # Step 2: Define model node
+>
+> @task
+> def call_llm(messages: list[BaseMessage]):
+>     """LLM decides whether to call a tool or not"""
+>     return model_with_tools.invoke(
+>         [
+>             SystemMessage(
+>                 content="You are a helpful assistant tasked with performing arithmetic on a set of inputs."
+>             )
+>         ]
+>         + messages
+>     )
+>
+>
+> # Step 3: Define tool node
+>
+> @task
+> def call_tool(tool_call: ToolCall):
+>     """Performs the tool call"""
+>     tool = tools_by_name[tool_call["name"]]
+>     return tool.invoke(tool_call)
+>
+>
+> # Step 4: Define agent
+>
+> @entrypoint()
+> def agent(messages: list[BaseMessage]):
+>     model_response = call_llm(messages).result()
+>
+>     while True:
+>         if not model_response.tool_calls:
+>             break
+>
+>         # Execute tools
+>         tool_result_futures = [
+>             call_tool(tool_call) for tool_call in model_response.tool_calls
+>         ]
+>         tool_results = [fut.result() for fut in tool_result_futures]
+>         messages = add_messages(messages, [model_response, *tool_results])
+>         model_response = call_llm(messages).result()
+>
+>     messages = add_messages(messages, model_response)
+>     return messages
+>
+> # Invoke
+> messages = [HumanMessage(content="Add 3 and 4.")]
+> stream = agent.stream_events(messages, version="v3")
+> for snapshot in stream.values:
+>     print(snapshot)
+>     print("\n")
 ```
-
-</details>
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -17,6 +17,7 @@ In this quickstart, you will add tracing to an AI assistant and view the results
 Every trace lands in a container, and which one depends on how your workspace is organized. An agent-based workspace groups traces by [agent and environment](agents.md). A project-based workspace groups them by [tracing project](observability-concepts.md#tracing-projects). The control at the top left tells you which one you are on: in an agent-based workspace it names your workspace, and in a project-based workspace it shows the LangSmith logo. This quickstart configures a tracing project, and the steps below note where the two differ.
 
 > [!TIP]
+>
 > If you're building with [LangChain](../langchain/overview.md) or [LangGraph](../langgraph/overview.md), you can enable LangSmith tracing with a single environment variable. Refer to [trace with LangChain](trace-with-langchain.md) or [trace with LangGraph](trace-with-langgraph.md).
 
 ## Prerequisites
@@ -66,64 +67,57 @@ This example uses OpenAI as the LLM provider. You can adapt it for your own prov
 
    To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](log-traces-to-project.md). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion. In an [agent-based workspace](agents.md), the first trace to a new project name, including the default project, creates an agent named after the project, with the project as its **Production** [environment](agent-environments.md). The agent's identifier is derived from the project name, so it can differ from the project name, and creating the agent requires permission to create projects. To name the agent and the environment directly instead, see [Log traces to an agent](log-traces-to-agent.md).
 
-> [!NOTE]
->    If your account is in a region other than US (the default), also set `LANGSMITH_ENDPOINT` to the API URL for your region. Without this, your API key won't be recognized and requests will fail to authenticate.
->
->    <table>
->      <thead>
->        <tr>
->          <th>Region</th>
->
->          <th>
->            {protocol_0 === false ? "Host" : "URL"}
->          </th>
->        </tr>
->      </thead>
->
->      <tbody>
->        <tr>
->          <td>GCP US</td>
->
->          <td>
->            <code>
->              {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->            </code>
->          </td>
->        </tr>
->
->        <tr>
->          <td>GCP EU</td>
->
->          <td>
->            <code>
->              {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->            </code>
->          </td>
->        </tr>
->
->        <tr>
->          <td>GCP APAC</td>
->
->          <td>
->            <code>
->              {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->            </code>
->          </td>
->        </tr>
->
->        <tr>
->          <td>AWS US</td>
->
->          <td>
->            <code>
->              {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->            </code>
->          </td>
->        </tr>
->      </tbody>
->    </table>
->
->    For example, EU accounts: `export LANGSMITH_ENDPOINT="https://eu.api.smith.langchain.com"`. Do not add a trailing slash to the URL, as this can cause authentication errors.
+   > [!NOTE]
+   >
+   > If your account is in a region other than US (the default), also set `LANGSMITH_ENDPOINT` to the API URL for your region. Without this, your API key won't be recognized and requests will fail to authenticate.
+   >
+   > <table>
+   >   <thead>
+   >     <tr>
+   >       <th>Region</th>
+   >
+   >       <th>
+   >         URL
+   >       </th>
+   >     </tr>
+   >   </thead>
+   >
+   >   <tbody>
+   >     <tr>
+   >       <td>GCP US</td>
+   >
+   >       <td>
+   >         `https://api.smith.langchain.com`
+   >       </td>
+   >     </tr>
+   >
+   >     <tr>
+   >       <td>GCP EU</td>
+   >
+   >       <td>
+   >         `https://eu.api.smith.langchain.com`
+   >       </td>
+   >     </tr>
+   >
+   >     <tr>
+   >       <td>GCP APAC</td>
+   >
+   >       <td>
+   >         `https://apac.api.smith.langchain.com`
+   >       </td>
+   >     </tr>
+   >
+   >     <tr>
+   >       <td>AWS US</td>
+   >
+   >       <td>
+   >         `https://aws.api.smith.langchain.com`
+   >       </td>
+   >     </tr>
+   >   </tbody>
+   > </table>
+   >
+   > For example, EU accounts: `export LANGSMITH_ENDPOINT="https://eu.api.smith.langchain.com"`.
 
    If you are using Anthropic, use the [Anthropic wrapper](trace-anthropic.md). If you are using Google Gemini, use the [Gemini wrapper](trace-with-google-gemini.md). For other providers, use the [`@traceable` decorator](annotate-code.md#use-%40traceable-%2F-traceable) to trace calls manually.
 
@@ -156,7 +150,7 @@ def get_context(question: str) -> str:
 def assistant(question: str) -> str:
     context = get_context(question)
     response = client.chat.completions.create(
-        model="gpt-5.4-mini",
+        model="gpt-6-luna",
         messages=[
             {
                 "role": "system",
@@ -191,7 +185,7 @@ const getContext = traceable(
 const assistant = traceable(async function assistant(question: string) { // capture the full pipeline as a single trace
     const context = await getContext(question);
     const response = await client.chat.completions.create({
-        model: "gpt-5.4-mini",
+        model: "gpt-6-luna",
         messages: [
             {
                 role: "system",
@@ -272,9 +266,6 @@ class ObservabilityQuickstartApp {
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/e2529a15-5c87-4c29-9c34-9aa9a899bcf1/r)
-Open a public LangSmith run for this example.
-
 **Kotlin**
 
 ```kotlin
@@ -330,9 +321,6 @@ val assistant =
 println(assistant("How long are LangSmith traces stored?"))
 ```
 
-#### [View example trace](https://smith.langchain.com/public/95567c68-5e7b-44f2-9355-7705ac00de5a/r)
-Open a public LangSmith run for this example.
-
 ## 3. Run the app
 
 **Python**
@@ -359,13 +347,12 @@ In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=ct
 
 Click the `assistant` row to open the trace. The **Trajectory** tab shows the conversation as it was sent to the model. Select the **Details** tab to see the full run tree, including the `assistant` function with the `get_context` tool call and the OpenAI call nested inside it.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-quickstart-app.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=35b19b5e1e978d13cdbb61058334eeb4" alt="LangSmith UI showing a trace with an outer application span and a nested LLM call span." width="2504" height="1266" data-path="langsmith/images/trace-quickstart-app.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-quickstart-app-dark.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=51b7b64a9ecd3eb701122b9b203b713c" alt="LangSmith UI showing a trace with an outer application span and a nested LLM call span." width="2514" height="1260" data-path="langsmith/images/trace-quickstart-app-dark.png" />
+![LangSmith UI showing a trace with an outer application span and a nested LLM call span.](https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-quickstart-app.png?fit=max\&auto=format\&n=EKYgNtnIIDPnseTv\&q=85\&s=35b19b5e1e978d13cdbb61058334eeb4)
 
 The outer span captures your `assistant` function's inputs and outputs. The nested **get\_context** span records the tool call, and the **ChatOpenAI** span records the exact prompt sent to the model and the response returned.
 
 > [!TIP]
+>
 > You can also inspect traces from the terminal using the [LangSmith CLI](langsmith-cli.md).
 
 ## Next steps
@@ -376,13 +363,10 @@ The outer span captures your `assistant` function's inputs and outputs. The nest
 * [Log to a specific project](log-traces-to-project.md): send traces to a named project instead of **default**.
 * [Agents](agents.md): how an agent groups the traces, datasets, and monitors of one application, and how its environments divide them.
 
-> [!NOTE]
-> After logging traces, use **[Chat](chat.md)** to analyze them and get AI-powered insights into your application's performance.
+After logging traces, use **[Chat](chat.md)** to analyze them and get AI-powered insights into your application's performance.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

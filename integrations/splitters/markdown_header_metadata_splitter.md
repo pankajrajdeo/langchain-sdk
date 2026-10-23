@@ -94,6 +94,7 @@ md_header_splits
 ```
 
 > [!NOTE]
+>
 > **The default `MarkdownHeaderTextSplitter` strips white spaces and new lines. To preserve the original formatting of your Markdown documents, check out [`ExperimentalMarkdownSyntaxTextSplitter`](https://reference.langchain.com/python/langchain-text-splitters/markdown/ExperimentalMarkdownSyntaxTextSplitter).**
 
 ### How to return markdown lines as separate documents
@@ -168,8 +169,6 @@ splits
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/splitters/markdown_header_metadata_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/splitters/markdown_header_metadata_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -20,7 +20,7 @@ CompiledStateGraph(
     *,
     builder: StateGraph[StateT, ContextT, InputT, OutputT],
     schema_to_mapper: dict[type[Any], Callable[[Any], Any] | None],
-    **kwargs: Any = {},
+    kwargs: Any = {},
 )
 ```
 
@@ -37,7 +37,7 @@ __init__(
     *,
     builder: StateGraph[StateT, ContextT, InputT, OutputT],
     schema_to_mapper: dict[type[Any], Callable[[Any], Any] | None],
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> None
 ```
 
@@ -45,6 +45,7 @@ __init__(
 |------|------|
 | `builder` | `StateGraph[StateT, ContextT, InputT, OutputT]` |
 | `schema_to_mapper` | `dict[type[Any], Callable[[Any], Any] \| None]` |
+| `kwargs` | `Any` |
 
 ## Properties
 
@@ -61,4 +62,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/graph/state.py#L1404)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/graph/state.py#L1404)

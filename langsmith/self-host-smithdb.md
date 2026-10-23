@@ -11,30 +11,44 @@ tags: [docs, langsmith, self-host-smithdb]
 > Run SmithDB alongside ClickHouse on a self-hosted LangSmith Kubernetes installation.
 
 > [!NOTE]
+>
 > SmithDB is an opt-in datastore for self-hosted LangSmith. ClickHouse is required on LangSmith 0.16 and remains the default on 0.17. Do not disable ClickHouse on any version below 0.17. The minimum LangSmith version depends on your cloud. See [Cloud support](#cloud-support).
 
 SmithDB is a columnar datastore built for agent trace data: deeply nested spans, multi-modal content, and spans that stay open for hours. It keeps durable data in object storage with a per-pod disk cache, and serves LangSmith trace ingestion and queries alongside the existing ClickHouse datastore.
 
-#### [Install SmithDB](self-host-smithdb-install.md)
-Stage infrastructure, deploy SmithDB services, enable dual ingestion, and switch queries after validation.
+Some LangSmith features, such as the Trajectory view, trajectory evaluators, and the filter query syntax, require SmithDB. See [SmithDB feature availability](self-host-smithdb-features.md).
 
-#### [Prepare supporting infrastructure](self-host-smithdb-infrastructure.md)
-Provide a dedicated PostgreSQL metastore, object storage, and cache storage.
+> **[Feature availability](self-host-smithdb-features.md)**
+>
+> See which features need SmithDB and what keeps working on ClickHouse.
 
-#### [Configure for scale](self-host-smithdb-scale.md)
-Choose a tested resource tier and size SmithDB workloads.
+> **[Install SmithDB](self-host-smithdb-install.md)**
+>
+> Stage infrastructure, deploy SmithDB services, enable dual ingestion, and switch queries after validation.
 
-#### [Configure observability](self-host-smithdb-observability.md)
-Scrape SmithDB metrics and export logs and traces to your stack.
+> **[Prepare supporting infrastructure](self-host-smithdb-infrastructure.md)**
+>
+> Provide a dedicated PostgreSQL metastore, object storage, and cache storage.
 
-#### [Migrate historical data](self-host-smithdb-migrate.md)
-Backfill ClickHouse history into SmithDB before query cutover.
+> **[Configure for scale](self-host-smithdb-scale.md)**
+>
+> Choose a tested resource tier and size SmithDB workloads.
 
-#### [Metrics reference](self-host-smithdb-metrics.md)
-Metrics to watch on each SmithDB component and how to read them.
+> **[Configure observability](self-host-smithdb-observability.md)**
+>
+> Scrape SmithDB metrics and export logs and traces to your stack.
 
-#### [Troubleshoot SmithDB](self-host-smithdb-troubleshooting.md)
-Gather context, disable SmithDB, or reset a deployment safely.
+> **[Migrate historical data](self-host-smithdb-migrate.md)**
+>
+> Backfill ClickHouse history into SmithDB before query cutover.
+
+> **[Metrics reference](self-host-smithdb-metrics.md)**
+>
+> Metrics to watch on each SmithDB component and how to read them.
+
+> **[Troubleshoot SmithDB](self-host-smithdb-troubleshooting.md)**
+>
+> Gather context, disable SmithDB, or reset a deployment safely.
 
 ## Cloud support
 
@@ -50,7 +64,7 @@ Examples in these guides cover managed Kubernetes on AWS, GCP, and Azure. They d
 
 ## Components
 
-Enabling SmithDB adds the following workloads to your cluster. Three services cache trace data on disk, on a network-attached volume or local SSD; the other two services are small and run on general compute. The two Jobs run to completion rather than as services. See [Cache storage](self-host-smithdb-infrastructure.md#cache-storage).
+Enabling SmithDB in the default cluster mode adds the following workloads to your cluster. Three services cache trace data on disk, on a network-attached volume or local SSD; the other two services are small and run on general compute. See [Cache storage](self-host-smithdb-infrastructure.md#cache-storage). To run SmithDB as one pod instead, see [Choose a deployment mode](self-host-smithdb-scale.md#choose-a-deployment-mode).
 
 | Component | Type | What it does | Disk cache | Scaling |
 | - | - | - | - | - |
@@ -72,8 +86,6 @@ For SDK method changes that work with both ClickHouse and SmithDB, see [Migrate 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-smithdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-smithdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

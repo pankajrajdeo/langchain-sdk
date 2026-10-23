@@ -10,7 +10,7 @@ tags: [docs, javascript, deepagents, tools]
 
 > Connect Deep Agents to custom functions, APIs, databases, and any MCP server
 
-Deep Agents can call any tool you define, any [LangChain tool](https://python.langchain.com/docs/concepts/tools/), and tools from any [MCP server](#mcp-tools).
+Deep Agents can call any tool you define, any [LangChain tool](../langchain/tools.md), and tools from any [MCP server](#mcp-tools).
 Pass them to `create_deep_agent` via the `tools=` parameter alongside the [built-in harness tools](overview.md#execution-environment) for file management and subagent spawning.
 
 **Google**
@@ -443,6 +443,7 @@ For full details on defining and using LangChain tools (tool dicts, `StructuredT
 ## MCP tools
 
 > [!NOTE]
+>
 > Deep Agents fully support [Model Context Protocol (MCP)](../langchain/mcp.md), the open standard for connecting agents to external services. Load tools from any MCP server and pass them directly to `create_deep_agent`.
 
 MCP is an open protocol that lets agents connect to a growing ecosystem of servers—databases, APIs, file systems, browsers, and more—through a standard interface. Instead of writing custom integration code for each service, you point Deep Agents at an MCP server and it gets all the tools that server exposes.
@@ -664,8 +665,6 @@ Return a string for text-only results, or an ordered list of content blocks for 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

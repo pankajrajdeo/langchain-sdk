@@ -13,4 +13,4 @@ tags: [index, reference, python, langchain, agents, middleware, human_in_the_loo
 
 - [action_name](action_name.md) - Name of the action associated with this review configuration.
 - [allowed_decisions](allowed_decisions.md) - The decisions that are allowed for this request.
-- [args_schema](args_schema.md) - JSON schema for the args associated with the action, if edits are allowed.
+- [args_schema](args_schema.md) - Unused: the middleware doesn't set it.

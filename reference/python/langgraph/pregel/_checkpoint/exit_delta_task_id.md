@@ -16,7 +16,8 @@ Synthetic task id for exit-mode DeltaChannel writes.
 
 Embeds the superstep in the first UUID group so `ORDER BY task_id, idx`
 preserves chronological order while remaining a valid RFC UUID (required by
-Postgres `checkpoint_writes.task_id uuid` columns).
+Postgres `checkpoint_writes.task_id uuid` columns). Never `NULL_TASK_ID`:
+readers apply writes under it as the anchor checkpoint's own pending writes.
 
 ## Signature
 
@@ -29,4 +30,4 @@ exit_delta_task_id(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/_checkpoint.py#L39)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/_checkpoint.py#L65)

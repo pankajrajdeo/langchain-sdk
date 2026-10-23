@@ -22,7 +22,7 @@ Sync mirror of `SSRFSafeTransport`. See that class for full documentation.
 SSRFSafeSyncTransport(
     self,
     policy: SSRFPolicy = DEFAULT_SSRF_POLICY,
-    **transport_kwargs: object = {},
+    transport_kwargs: object = {},
 )
 ```
 
@@ -36,13 +36,14 @@ SSRFSafeSyncTransport(
 __init__(
     self,
     policy: SSRFPolicy = DEFAULT_SSRF_POLICY,
-    **transport_kwargs: object = {},
+    transport_kwargs: object = {},
 ) -> None
 ```
 
 | Name | Type |
 |------|------|
 | `policy` | `SSRFPolicy` |
+| `transport_kwargs` | `object` |
 
 ## Methods
 
@@ -51,4 +52,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/_security/_transport.py#L130)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/_security/_transport.py#L130)

@@ -17,6 +17,7 @@ For production deployments requiring higher throughput and enterprise features, 
 You can find information about Amazon Nova's models, their features, and API details in the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
 
 > [!TIP]
+>
 > **API Reference**
 >
 > For detailed documentation of all [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) features and configuration options, head to the [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) API reference.
@@ -70,7 +71,7 @@ if "NOVA_BASE_URL" not in os.environ:
     os.environ["NOVA_BASE_URL"] = getpass.getpass("Enter your Nova base URL: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -95,6 +96,7 @@ model = ChatAmazonNova(
 ```
 
 > [!NOTE]
+>
 > For a complete list of supported parameters and their descriptions, see the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
 
 ## Invocation
@@ -167,6 +169,7 @@ asyncio.run(main())
 Amazon Nova supports tool calling (function calling) on compatible models. You can check if a model supports tool calling using LangChain model profiles.
 
 > [!NOTE]
+>
 > For details on Nova's tool calling implementation and available parameters, see the [tool calling documentation](https://nova.amazon.com/dev/documentation).
 
 ### Basic tool usage
@@ -235,6 +238,7 @@ model_none = model.bind_tools([get_weather], tool_choice="none")
 ```
 
 > [!WARNING]
+>
 > **Nova's tool\_choice values**
 >
 > Amazon Nova supports `tool_choice` values of `"auto"`, `"required"`, and `"none"`. Unlike some other providers, Nova does not support `tool_choice="any"` or specifying a specific tool name as the choice value.
@@ -321,6 +325,7 @@ response = model.invoke(
 This approach is useful when you want to use different system tools for different queries with the same model instance.
 
 > [!NOTE]
+>
 > **Tool outputs and citations**
 >
 > When using system tools, the model's response will include:
@@ -454,6 +459,7 @@ print(result)
 ```
 
 > [!NOTE]
+>
 > **Implementation details**
 >
 > Structured output uses Nova's tool calling capabilities under the hood with `tool_choice='required'` to ensure consistent structured responses. The schema is converted to a tool definition, and the tool call response is parsed back into the requested format.
@@ -463,6 +469,7 @@ print(result)
 Amazon Nova provides different models with varying capabilities. It includes support for LangChain [model profiles](../../langchain/models.md#model-profiles).
 
 > [!NOTE]
+>
 > **Model capabilities vary by model**
 >
 > Some Amazon Nova models support vision inputs while others do not. Always check model capabilities before using multimodal features.
@@ -556,6 +563,7 @@ For authentication and connection issues, refer to the [Amazon Nova documentatio
 ### Compression errors
 
 > [!NOTE]
+>
 > The [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) client automatically disables compression to avoid potential decompression issues.
 
 If you need to customize HTTP client behavior, you can access the underlying OpenAI client:
@@ -580,8 +588,6 @@ For Amazon Nova-specific features, model details, and API specifications, see th
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/amazon_nova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/amazon_nova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

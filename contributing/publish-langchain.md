@@ -11,6 +11,7 @@ tags: [docs, contributing, publish-langchain]
 **Make your integration available to the community.**
 
 > [!WARNING]
+>
 > **Do not submit integration PRs to the LangChain or Deep Agents repositories.**
 >
 > New integrations should be published as **standalone PyPI packages** under your own GitHub organization or account (e.g., `langchain-yourservice`), not as PRs to the [`langchain-ai/langchain`](https://github.com/langchain-ai/langchain) repository.
@@ -22,6 +23,7 @@ Now that your package is implemented and tested, you can publish it and list it 
 ## Publishing your package
 
 > [!NOTE]
+>
 > This guide assumes you have already implemented your package and written tests for it. If you haven't, please refer to the [implementation guide](implement-langchain.md) and [testing guide](standard-tests-langchain.md).
 
 For the purposes of this guide, we'll be using PyPI as the package registry. You may choose to publish to other registries if you prefer; instructions will vary.
@@ -30,27 +32,29 @@ For the purposes of this guide, we'll be using PyPI as the package registry. You
 
 First, make sure you have a PyPI account:
 
-<details>
-<summary>How to create a PyPI Token</summary>
-
-### Create account
-Go to the [PyPI website](https://pypi.org/) and create an account
-
-### Verify email
-Verify your email address by clicking the link that PyPI emails to you
-
-### Enable 2FA
-Go to your account settings and click "Generate Recovery Codes" to enable 2FA. To generate an API token, you **must** have 2FA enabled
-
-### Generate token
-Go to your account settings and [generate a new API token](https://pypi.org/manage/account/token/)
-
-</details>
+> **How to create a PyPI Token**
+>
+> **1. Create account**
+>
+> Go to the [PyPI website](https://pypi.org/) and create an account
+>
+> **2. Verify email**
+>
+> Verify your email address by clicking the link that PyPI emails to you
+>
+> **3. Enable 2FA**
+>
+> Go to your account settings and click "Generate Recovery Codes" to enable 2FA. To generate an API token, you **must** have 2FA enabled
+>
+> **4. Generate token**
+>
+> Go to your account settings and [generate a new API token](https://pypi.org/manage/account/token/)
 
 ### Build and publish
 
-#### [How to publish a package](https://docs.astral.sh/uv/guides/package/)
-Helpful guide from `uv` on how to build and publish a package to PyPI.
+> **[How to publish a package](https://docs.astral.sh/uv/guides/package/)**
+>
+> Helpful guide from `uv` on how to build and publish a package to PyPI.
 
 ## Make your integration discoverable
 
@@ -71,8 +75,9 @@ If you do not meet either criterion, the automation adds an **external listing**
 
 ### List in the download table (default)
 
-#### [File an Integration listing issue](https://github.com/langchain-ai/docs/issues/new?template=06-integration-submission.yml)
-Use the fixed form fields for display name, language, component, package name, docs URL, and a short provider description.
+> **[File an Integration listing issue](https://github.com/langchain-ai/docs/issues/new?template=06-integration-submission.yml)**
+>
+> Use the fixed form fields for display name, language, component, package name, docs URL, and a short provider description (max 160 characters).
 
 The automation fills [`scripts/data/integration_external_docs.yaml`](https://github.com/langchain-ai/docs/blob/main/scripts/data/integration_external_docs.yaml) and related listing surfaces from your issue.
 
@@ -87,6 +92,7 @@ Optionally include component-specific capability flags in the issue form (for ex
 After merge, the refresh job regenerates the component table snippets so your row appears alongside hosted integrations.
 
 > [!NOTE]
+>
 > This flow is for **listing metadata only**. Host your usage docs on your site or GitHub README. Your integration package itself should live in its own repository under your GitHub organization or account, published as a standalone package.
 
 ### Hosted guide (50K+ or featured)
@@ -95,15 +101,16 @@ If your package meets the [eligibility criteria](#eligibility-for-hosted-guides)
 
 Depending on the type of integration you have built, you will need to create different types of documentation pages. LangChain provides templates for different types of integrations to help you get started.
 
-#### [Chat models](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/chat/TEMPLATE.mdx)
+> **[Chat models](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/chat/TEMPLATE.mdx)**
 
-#### [Tools/toolkits](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/tools/TEMPLATE.mdx)
+> **[Tools/toolkits](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/tools/TEMPLATE.mdx)**
 
-#### [Middleware](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/middleware/TEMPLATE.mdx)
+> **[Middleware](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/middleware/TEMPLATE.mdx)**
 
-#### [Vector stores](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/vectorstores/TEMPLATE.mdx)
+> **[Vector stores](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/vectorstores/TEMPLATE.mdx)**
 
 > [!TIP]
+>
 > To reference existing documentation, you can look at the [list of integrations](../integrations/providers/overview.md) and find similar ones to yours.
 >
 > To view a given documentation page in raw markdown, use the dropdown button next to "Copy page" on the top right of the page and select "View as Markdown".
@@ -115,9 +122,11 @@ If your package was previously listed in [`integration_external_docs.yaml`](http
 Do not set `featured: true` in frontmatter unless a maintainer asks you to. Featured status is a maintainer decision.
 
 > [!NOTE]
+>
 > Hosted-guide PRs are for **documentation only**. Your integration package itself should live in its own repository under your GitHub organization or account, published as a standalone package.
 
 > [!WARNING]
+>
 > We may reject listing issues or PRs, or ask for modification, if:
 >
 > * The package does not meet the [hosted-guide eligibility criteria](#eligibility-for-hosted-guides) when a hosted page is requested
@@ -132,19 +141,19 @@ Do not set `featured: true` in frontmatter unless a maintainer asks you to. Feat
 Please be patient as we handle a large volume of submissions. Review the automated PR when it opens. **Do not repeatedly tag maintainers about your issue or PR.**
 
 > [!NOTE]
+>
 > If a PR includes AI-generated content, you must follow our [acceptable uses of LLMs](overview.md#acceptable-uses-of-llms) policy.
 
 ## Next steps
 
 **Congratulations!** Your integration is published and listed for the LangChain community.
 
-#### [Co-marketing](comarketing.md)
-Get in touch with the LangChain marketing team to explore co-marketing opportunities.
+> **[Co-marketing](comarketing.md)**
+>
+> Get in touch with the LangChain marketing team to explore co-marketing opportunities.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/publish-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/publish-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

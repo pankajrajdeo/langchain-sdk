@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/orgs/current/info:
     patch:
@@ -261,6 +264,11 @@ components:
             - type: integer
             - type: 'null'
           title: Max Service Key Expiry Days
+        max_tracing_key_expiry_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Max Tracing Key Expiry Days
         scim_group_name_separator:
           type: string
           maxLength: 1
@@ -460,6 +468,11 @@ components:
             - type: integer
             - type: 'null'
           title: Max Service Key Expiry Days
+        max_tracing_key_expiry_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Max Tracing Key Expiry Days
         scim_group_name_separator:
           type: string
           title: Scim Group Name Separator
@@ -473,6 +486,11 @@ components:
             - type: boolean
             - type: 'null'
           title: Llm Auth Proxy Enabled
+        oidc_login_enabled:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: Oidc Login Enabled
         llm_auth_proxy_jwt_audience:
           anyOf:
             - type: string
@@ -576,6 +594,10 @@ components:
         can_use_audit_logs:
           type: boolean
           title: Can Use Audit Logs
+          default: false
+        can_use_teams:
+          type: boolean
+          title: Can Use Teams
           default: false
         can_add_seats:
           type: boolean

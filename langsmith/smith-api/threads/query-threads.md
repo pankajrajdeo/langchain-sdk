@@ -11,6 +11,8 @@ tags: [docs, langsmith, smith-api, threads, query-threads]
 > Query threads within a project (session), with cursor-based pagination.
 Returns threads matching the given time range and optional filters.
 
+When `ai_search` is set, `Accept: text/event-stream` is required; requests without it return 406. AI search is unavailable on deployments that route queries to the v1 backend and returns 501 there.
+
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
@@ -165,6 +167,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -173,19 +177,27 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/threads/query:
     post:
       tags:
         - threads
       summary: Query threads
-      description: |-
+      description: >-
         Query threads within a project (session), with cursor-based pagination.
+
         Returns threads matching the given time range and optional filters.
+
+        When `ai_search` is set, `Accept: text/event-stream` is required;
+        requests without it return 406. AI search is unavailable on deployments
+        that route queries to the v1 backend and returns 501 there.
 
         Self-hosted deployments require LangSmith `v0.16` or later.
       parameters:
-        - description: application/json or text/event-stream
+        - description: >-
+            application/json, or text/event-stream (required when ai_search is
+            set)
           name: Accept
           in: header
           schema:
@@ -203,61 +215,70 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/threads.QueryThreadsResponseBody'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/shared.SSEEvent'
         '400':
           description: bad request (malformed JSON or invalid parameters)
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '401':
           description: missing or invalid authentication
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '403':
           description: forbidden (insufficient permission)
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '404':
           description: session not found
           content:
-            application/json:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
+        '406':
+          description: 'not acceptable (ai_search requires Accept: text/event-stream)'
+          content:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '422':
           description: unprocessable entity (e.g. invalid project UUID)
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '500':
           description: internal server error
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '501':
           description: >-
-            V2 filter syntax or thread_filters are unavailable for this
-            deployment; use legacy function-style filters without thread_filters
-            or set SMITHDB_QUERY_ENABLED=true
+            V2 filter syntax, thread_filters, or ai_search are unavailable for
+            this deployment; use legacy function-style filters without
+            thread_filters or set SMITHDB_QUERY_ENABLED=true
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '503':
           description: service unavailable
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '504':
           description: gateway timeout or deadline exceeded
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
       security:
@@ -270,6 +291,19 @@ components:
     threads.QueryThreadsRequestBody:
       type: object
       properties:
+        ai_search:
+          description: >-
+            `ai_search` is a plain-language criterion evaluated against the
+            messages from the agent trajectory scoped to the thread.
+
+            AND-ed with the ordinary filters. Requires semantic filtering
+            enabled for the deployment.
+
+            Must contain nonempty text of at most 2000 UTF-8 bytes.
+          type: string
+          maxLength: 2000
+          minLength: 1
+          example: A conversation about a refund request
         cursor:
           description: >-
             `cursor` is the opaque string from a previous response's
@@ -374,6 +408,26 @@ components:
             request. Null on the final page.
           type: string
           example: eyJydW5zX2N1cnNvciI6Imx0KGN1cnNvciwiLi4uIikifQ==
+    shared.SSEEvent:
+      type: object
+      description: One parsed event from a v2 query Server-Sent Events response.
+      required:
+        - event
+        - data
+      properties:
+        event:
+          type: string
+          description: The event name.
+          enum:
+            - data
+            - end
+            - error
+        data:
+          type: string
+          description: >-
+            For data events, a JSON-encoded array of RFC 6902 patch operations;
+            for end events, an empty string; for error events, a JSON-encoded
+            ProblemDetails object.
     shared.ProblemDetails:
       description: RFC 7807 problem details returned on V2 API errors.
       type: object
@@ -482,6 +536,14 @@ components:
             (within the query window) whose status was an error.
           type: integer
           example: 1
+        query_metadata:
+          description: >-
+            `query_metadata` describes why this thread matched the query,
+            including `sem_filter_score` when a semantic filter is used.
+            Returned automatically, or null when unavailable.
+          anyOf:
+            - type: object
+            - type: 'null'
         start_time:
           description: >-
             `start_time` is a reference start time for this row (RFC3339

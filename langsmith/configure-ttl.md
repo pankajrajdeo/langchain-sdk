@@ -9,6 +9,7 @@ tags: [docs, langsmith, configure-ttl]
 # How to add TTLs to your application
 
 > [!TIP]
+>
 > **Prerequisites**
 > This guide assumes familiarity with [LangSmith](observability.md), [Persistence](../langgraph/persistence.md), and [Cross-thread persistence](../langgraph/stores.md) concepts.
 
@@ -44,6 +45,7 @@ Add a `checkpointer.ttl` configuration to your `langgraph.json` file:
 * `sweep_limit`: (*Agent server v0.8+*) Sets how many threads the sweeper processes in a single iteration. Defaults to `10000` (Agent server v0.12+) or `1000` (Agent server v0.8-0.11).
 
 > [!NOTE]
+>
 > Global TTL configuration applies to new threads. The `delete` strategy does not apply retroactively to existing threads. The `keep_latest` strategy applies to an existing thread after a run finishes or its state is updated; inactive existing threads remain unchanged.
 
 ## Configuring store item TTL
@@ -113,6 +115,7 @@ thread = await client.threads.create(
 ```
 
 > [!NOTE]
+>
 > A thread-level TTL overrides the default TTL for that thread and uses the strategy behavior described above.
 
 ## Runtime overrides
@@ -127,8 +130,6 @@ For details on other configurable options, refer to the [LangGraph CLI reference
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-ttl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-ttl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

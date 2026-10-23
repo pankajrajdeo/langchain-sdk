@@ -13,6 +13,7 @@ tags: [docs, langchain]
 **Agent = Model + Harness.** LangChain provides `create_agent`: a minimal, highly configurable harness. The harness is everything around the model loop: the prompt, the tools, and any middleware that shapes behavior. Start with the primitives and compose exactly what your use case needs. Supports [OpenAI, Anthropic, Google, and more](../integrations/providers/overview.md).
 
 > [!TIP]
+>
 > **LangChain vs. LangGraph vs. Deep Agents**
 >
 > Start with [Deep Agents](../deepagents/overview.md) for a "batteries-included" agent with features like automatic context compression, a virtual filesystem, and subagent-spawning. Deep Agents are built on LangChain [agents](agents.md) which you can also use directly.
@@ -23,7 +24,7 @@ tags: [docs, langchain]
 >
 > Use [LangSmith](../langsmith/observability.md) to trace, debug, and evaluate agents built with any of these frameworks. Follow the [tracing quickstart](../langsmith/trace-with-langchain.md) to get set up. We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
-##  Create an agent
+## &#x20;Create an agent
 
 This example demonstrates how to create a simple LangChain agent with a custom tool:
 
@@ -257,26 +258,29 @@ print(result["messages"][-1].content_blocks)
 See the [Installation instructions](install.md) and [Quickstart guide](quickstart.md) to get started building your own agents and applications with LangChain.
 
 > [!TIP]
+>
 > Use [LangSmith](../langsmith/observability.md) to trace requests, debug agent behavior, and evaluate outputs. Set `LANGSMITH_TRACING=true` and your API key to get started.
 
-##  Core benefits
+## &#x20;Core benefits
 
-#### [Standard model interface](models.md)
-Use one interface for chat models, embeddings, and more across providers. Switch models with minimal code changes and keep your application portable as requirements evolve.
+> **[Standard model interface](models.md)**
+>
+> Use one interface for chat models, embeddings, and more across providers. Switch models with minimal code changes and keep your application portable as requirements evolve.
 
-#### [Highly configurable harness](agents.md)
-Start with `create_agent` as a minimal harness and add capabilities incrementally through middleware. Compose only what your use case needs, from guardrails and retries to routing and custom tool policies.
+> **[Highly configurable harness](agents.md)**
+>
+> Start with `create_agent` as a minimal harness and add capabilities incrementally through middleware. Compose only what your use case needs, from guardrails and retries to routing and custom tool policies.
 
-#### [Built on top of LangGraph](../langgraph/overview.md)
-LangChain's agents are built on top of LangGraph. This allows us to take advantage of LangGraph's durable execution, human-in-the-loop support, persistence, and more.
+> **[Built on top of LangGraph](../langgraph/overview.md)**
+>
+> LangChain's agents are built on top of LangGraph. This allows us to take advantage of LangGraph's durable execution, human-in-the-loop support, persistence, and more.
 
-#### [Debug with LangSmith](../langsmith/observability.md)
-Inspect traces, tool calls, state transitions, and latency in one place. Find failure modes, evaluate quality, and improve agent behavior with execution data.
+> **[Debug with LangSmith](../langsmith/observability.md)**
+>
+> Inspect traces, tool calls, state transitions, and latency in one place. Find failure modes, evaluate quality, and improve agent behavior with execution data.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

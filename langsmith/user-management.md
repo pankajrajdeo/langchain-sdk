@@ -17,9 +17,11 @@ This page covers user management features in LangSmith, including access control
 ## Set up access control
 
 > [!NOTE]
+>
 > RBAC (Role-Based Access Control) is a feature that is only available to Enterprise customers. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales). Other plans default to using the [`Admin` role](administration-overview.md) for all users.
 
 > [!TIP]
+>
 > You may find it helpful to read the [Administration overview](administration-overview.md) page before setting up access control.
 
 LangSmith relies on RBAC to manage user permissions within a [workspace](administration-overview.md#workspaces). This allows you to control who can access your LangSmith workspace and what they can do within it. Users with the `workspaces:manage` permission can manage workspace settings, and users with the `workspaces:manage-members` permission can add, remove, and update workspace members. The built-in Workspace Admin role includes both permissions.
@@ -38,11 +40,11 @@ By default, LangSmith comes with a set of system roles:
 
 If these do not fit your access model, `Organization Admins` can create custom roles to suit your needs.
 
-To create a role, navigate to the **Roles** tab in the **Members and roles** section of the [Organization settings page](https://smith.langchain.com/settings). Note that new roles that you create will be usable across all workspaces within your organization.
+To create a role, go to **Settings** > **Roles**. Note that new roles that you create will be usable across all workspaces within your organization.
 
 Click on the **Create Role** button to create a new role. A **Create role** form will open.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/create-role.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=6a413dbec076a37d680fa2ed8a91c495" alt="Create Role" width="3078" height="1932" data-path="langsmith/images/create-role.png" />
+![Create Role](https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/create-role.png?fit=max\&auto=format\&n=aKRoUGXX6ygp4DlC\&q=85\&s=6a413dbec076a37d680fa2ed8a91c495)
 
 Assign permissions for the different LangSmith resources that you want to control access to.
 
@@ -52,11 +54,11 @@ Once you have your roles set up, you can assign them to users. To assign a role 
 
 Each user will have a **Role** dropdown that you can use to assign a role to them.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/assign-role.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=ec5748a2c884693a24f984cc517a3860" alt="Assign Role" width="1888" height="574" data-path="langsmith/images/assign-role.png" />
+![Assign Role](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/assign-role.png?fit=max\&auto=format\&n=E8FdemkcQxROovD9\&q=85\&s=ec5748a2c884693a24f984cc517a3860)
 
 You can also invite new users with a given role.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/invite-user.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=3787cb55cbefcd5c95d6c01b6e9f6e75" alt="Invite User" width="1204" height="886" data-path="langsmith/images/invite-user.png" />
+![Invite User](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/invite-user.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=3787cb55cbefcd5c95d6c01b6e9f6e75)
 
 ## Set up SAML SSO for your organization
 
@@ -75,6 +77,7 @@ SSO services permit a user to use one set of credentials (for example, a name or
 LangSmith supports Just-in-time provisioning when using SAML SSO. This allows someone signing in via SAML SSO to join the organization and selected workspaces automatically as a member. For detailed information on managing JIT provisioning and user invites, refer to [Manage user access in SSO organizations](jit-invite-sso.md).
 
 > [!NOTE]
+>
 > JIT provisioning only runs for new users, that is, users who do not already have access to the organization with the same email address via a [different login method](authentication-methods.md#cloud).
 
 ### Login methods and access
@@ -88,12 +91,14 @@ Once you have completed your configuration of SAML SSO for your organization, us
 ### Enforce SAML SSO only
 
 > [!NOTE]
+>
 > User invites are not supported in organizations enforcing SAML SSO only. Initial workspace membership and role is determined by [JIT provisioning](jit-invite-sso.md#jit-provisioning), and changes afterwards can be managed in the UI.
 > For additional flexibility in automated user management, LangSmith supports SCIM.
 
 To ensure users can only access the organization when logged in using SAML SSO and no other method, check the **Allow Invites** checkbox. Once this happens, users accessing the organization that are logged-in via a non-SSO login method are required to log back in using SAML SSO. This setting can be switched back to allow all login methods by unselecting the checkbox.
 
 > [!NOTE]
+>
 > You must be logged in via SAML SSO in order to update this setting to `Only SAML SSO`. This is to ensure the SAML settings are valid and avoid locking users out of your organization.
 
 For troubleshooting, refer to the [SAML SSO FAQs](faq.md#saml-sso-faqs). If you have issues setting up SAML SSO, contact the LangChain support team via [support.langchain.com](https://support.langchain.com).
@@ -101,6 +106,7 @@ For troubleshooting, refer to the [SAML SSO FAQs](faq.md#saml-sso-faqs). If you 
 ### Prerequisites
 
 > [!NOTE]
+>
 > SAML SSO is available for organizations on the [Enterprise plan](https://www.langchain.com/pricing-langsmith). [Contact our sales team](https://www.langchain.com/contact-sales) to learn more.
 
 * Your organization must be on an Enterprise plan.
@@ -112,6 +118,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
 ### Initial configuration
 
 > [!NOTE]
+>
 > For IdP-specific configuration steps, refer to one of the following:
 >
 > * [Entra ID](#entra-id-azure)
@@ -120,8 +127,9 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
 
 1. In your IdP: Configure a SAML application with the following details, then copy the metadata URL or XML for step 3.
 
-> [!NOTE]
->    The following URLs depend on whether your organization is on the GCP US, GCP EU, GCP APAC, or AWS US cloud region. Ensure you select the correct link.
+   > [!NOTE]
+   >
+   > The following URLs depend on whether your organization is on the GCP US, GCP EU, GCP APAC, or AWS US cloud region. Ensure you select the correct link.
 
    1. Single sign-on URL (or ACS URL):
 
@@ -131,7 +139,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <th>Region</th>
 
             <th>
-              {protocol_0 === false ? "Host" : "URL"}
+              URL
             </th>
           </tr>
         </thead>
@@ -141,9 +149,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <td>GCP US</td>
 
             <td>
-              <code>
-                {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-              </code>
+              `https://auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -151,9 +157,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <td>GCP EU</td>
 
             <td>
-              <code>
-                {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-              </code>
+              `https://eu.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -161,9 +165,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <td>GCP APAC</td>
 
             <td>
-              <code>
-                {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-              </code>
+              `https://apac.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -171,9 +173,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <td>AWS US</td>
 
             <td>
-              <code>
-                {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-              </code>
+              `https://aws.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
         </tbody>
@@ -187,7 +187,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <th>Region</th>
 
             <th>
-              {protocol_1 === false ? "Host" : "URL"}
+              URL
             </th>
           </tr>
         </thead>
@@ -197,9 +197,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <td>GCP US</td>
 
             <td>
-              <code>
-                {`${protocol_1 === false ? "" : "https://"}${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-              </code>
+              `https://auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -207,9 +205,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <td>GCP EU</td>
 
             <td>
-              <code>
-                {`${protocol_1 === false ? "" : "https://"}eu.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-              </code>
+              `https://eu.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -217,9 +213,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <td>GCP APAC</td>
 
             <td>
-              <code>
-                {`${protocol_1 === false ? "" : "https://"}apac.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-              </code>
+              `https://apac.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -227,9 +221,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
             <td>AWS US</td>
 
             <td>
-              <code>
-                {`${protocol_1 === false ? "" : "https://"}aws.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-              </code>
+              `https://aws.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
         </tbody>
@@ -241,7 +233,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
 
    5. Required claims: `sub` and `email`.
 
-2. In LangSmith: Go to **Settings** -> **Members and roles** -> **SSO Configuration**. Fill in the required information and submit to activate SSO login:
+2. In LangSmith: Go to **Settings** > **SSO Configuration**. Fill in the required information and submit to activate SSO login:
 
    1. Fill in either the `SAML metadata URL` or `SAML metadata XML`.
    2. Select the `Default workspace role` and `Default workspaces`. New users logging in via SSO will be added to the specified workspaces with the selected role.
@@ -252,6 +244,7 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
 ### SAML Attribute Mapping
 
 > [!NOTE]
+>
 > SAML Attribute Mapping is a [cloud-only](cloud.md) feature. [Self-hosted](self-hosted.md) deployments configure SAML/OIDC attributes directly with the IdP—see [Set up SSO with OAuth2.0 and OIDC](self-host-sso.md).
 
 LangSmith cloud passes a small set of standard SAML attributes (such as `email` and `sub`) onto the user's JWT automatically. Any additional, non-standard SAML attribute your IdP emits (for example, `groups` for [SSO Groups Sync](#sso-groups-sync-alternative)) must be explicitly listed in the SAML Attribute Mapping table before LangSmith can read it.
@@ -266,7 +259,7 @@ The attribute name is preserved end-to-end: the IdP attribute name, the SAML Att
 
 #### Configuration
 
-In **Settings** > **Members and roles** > **SSO Configuration**, scroll to the **SAML Attribute Mapping** section and add one row per non-standard attribute you want to forward:
+In **Settings** > **SSO Configuration**, scroll to the **SAML Attribute Mapping** section and add one row per non-standard attribute you want to forward:
 
 | Column | Description |
 | - | - |
@@ -312,7 +305,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <th>Region</th>
 
             <th>
-              {protocol_2 === false ? "Host" : "URL"}
+              URL
             </th>
           </tr>
         </thead>
@@ -322,9 +315,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <td>GCP US</td>
 
             <td>
-              <code>
-                {`${protocol_2 === false ? "" : "https://"}${prefix_2 || "api.smith"}.langchain.com${suffix_2 || ""}`}
-              </code>
+              `https://auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -332,9 +323,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <td>GCP EU</td>
 
             <td>
-              <code>
-                {`${protocol_2 === false ? "" : "https://"}eu.${prefix_2 || "api.smith"}.langchain.com${suffix_2 || ""}`}
-              </code>
+              `https://eu.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -342,9 +331,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <td>GCP APAC</td>
 
             <td>
-              <code>
-                {`${protocol_2 === false ? "" : "https://"}apac.${prefix_2 || "api.smith"}.langchain.com${suffix_2 || ""}`}
-              </code>
+              `https://apac.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -352,9 +339,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <td>AWS US</td>
 
             <td>
-              <code>
-                {`${protocol_2 === false ? "" : "https://"}aws.${prefix_2 || "api.smith"}.langchain.com${suffix_2 || ""}`}
-              </code>
+              `https://aws.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
         </tbody>
@@ -368,7 +353,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <th>Region</th>
 
             <th>
-              {protocol_3 === false ? "Host" : "URL"}
+              URL
             </th>
           </tr>
         </thead>
@@ -378,9 +363,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <td>GCP US</td>
 
             <td>
-              <code>
-                {`${protocol_3 === false ? "" : "https://"}${prefix_3 || "api.smith"}.langchain.com${suffix_3 || ""}`}
-              </code>
+              `https://auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -388,9 +371,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <td>GCP EU</td>
 
             <td>
-              <code>
-                {`${protocol_3 === false ? "" : "https://"}eu.${prefix_3 || "api.smith"}.langchain.com${suffix_3 || ""}`}
-              </code>
+              `https://eu.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -398,9 +379,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <td>GCP APAC</td>
 
             <td>
-              <code>
-                {`${protocol_3 === false ? "" : "https://"}apac.${prefix_3 || "api.smith"}.langchain.com${suffix_3 || ""}`}
-              </code>
+              `https://apac.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -408,9 +387,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
             <td>AWS US</td>
 
             <td>
-              <code>
-                {`${protocol_3 === false ? "" : "https://"}aws.${prefix_3 || "api.smith"}.langchain.com${suffix_3 || ""}`}
-              </code>
+              `https://aws.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
         </tbody>
@@ -428,7 +405,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
 
 6. On the SAML-based Sign-on page, under **SAML Certificates**, copy the **App Federation Metadata URL**.
 
-**Step 3: Set up LangSmith SSO Configuration**
+**Step 3: Set up LangSmith SSO configuration**
 
 Follow the instructions under [initial configuration](#initial-configuration) in the `Fill in required information` step, using the metadata URL from the previous step.
 
@@ -446,7 +423,7 @@ Follow the instructions under [initial configuration](#initial-configuration) in
       2. Search for the user you want to assign to the enterprise application, and then click **Select**.
       3. Verify that the user is selected, and click **Assign**.
 
-2. Have the user sign in via the unique login URL from the **SSO Configuration** page, or go to **Manage** > **Single sign-on** and select **Test single sign-on with (application name)**.
+2. Have the user sign in via the unique login URL from the **SSO configuration** page, or go to **Manage** > **Single sign-on** and select **Test single sign-on with (application name)**.
 
 ### Google
 
@@ -474,7 +451,7 @@ For additional information, see Google's [documentation](https://support.google.
             <th>Region</th>
 
             <th>
-              {protocol_4 === false ? "Host" : "URL"}
+              URL
             </th>
           </tr>
         </thead>
@@ -484,9 +461,7 @@ For additional information, see Google's [documentation](https://support.google.
             <td>GCP US</td>
 
             <td>
-              <code>
-                {`${protocol_4 === false ? "" : "https://"}${prefix_4 || "api.smith"}.langchain.com${suffix_4 || ""}`}
-              </code>
+              `https://auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -494,9 +469,7 @@ For additional information, see Google's [documentation](https://support.google.
             <td>GCP EU</td>
 
             <td>
-              <code>
-                {`${protocol_4 === false ? "" : "https://"}eu.${prefix_4 || "api.smith"}.langchain.com${suffix_4 || ""}`}
-              </code>
+              `https://eu.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -504,9 +477,7 @@ For additional information, see Google's [documentation](https://support.google.
             <td>GCP APAC</td>
 
             <td>
-              <code>
-                {`${protocol_4 === false ? "" : "https://"}apac.${prefix_4 || "api.smith"}.langchain.com${suffix_4 || ""}`}
-              </code>
+              `https://apac.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -514,9 +485,7 @@ For additional information, see Google's [documentation](https://support.google.
             <td>AWS US</td>
 
             <td>
-              <code>
-                {`${protocol_4 === false ? "" : "https://"}aws.${prefix_4 || "api.smith"}.langchain.com${suffix_4 || ""}`}
-              </code>
+              `https://aws.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
         </tbody>
@@ -530,7 +499,7 @@ For additional information, see Google's [documentation](https://support.google.
             <th>Region</th>
 
             <th>
-              {protocol_5 === false ? "Host" : "URL"}
+              URL
             </th>
           </tr>
         </thead>
@@ -540,9 +509,7 @@ For additional information, see Google's [documentation](https://support.google.
             <td>GCP US</td>
 
             <td>
-              <code>
-                {`${protocol_5 === false ? "" : "https://"}${prefix_5 || "api.smith"}.langchain.com${suffix_5 || ""}`}
-              </code>
+              `https://auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -550,9 +517,7 @@ For additional information, see Google's [documentation](https://support.google.
             <td>GCP EU</td>
 
             <td>
-              <code>
-                {`${protocol_5 === false ? "" : "https://"}eu.${prefix_5 || "api.smith"}.langchain.com${suffix_5 || ""}`}
-              </code>
+              `https://eu.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -560,9 +525,7 @@ For additional information, see Google's [documentation](https://support.google.
             <td>GCP APAC</td>
 
             <td>
-              <code>
-                {`${protocol_5 === false ? "" : "https://"}apac.${prefix_5 || "api.smith"}.langchain.com${suffix_5 || ""}`}
-              </code>
+              `https://apac.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -570,9 +533,7 @@ For additional information, see Google's [documentation](https://support.google.
             <td>AWS US</td>
 
             <td>
-              <code>
-                {`${protocol_5 === false ? "" : "https://"}aws.${prefix_5 || "api.smith"}.langchain.com${suffix_5 || ""}`}
-              </code>
+              `https://aws.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
         </tbody>
@@ -587,7 +548,7 @@ For additional information, see Google's [documentation](https://support.google.
 7. Use `Add mapping` to ensure required claims are present:
    1. `Basic Information > Primary email` -> `email`
 
-**Step 2: Set up LangSmith SSO Configuration**
+**Step 2: Set up LangSmith SSO configuration**
 
 Follow the instructions under [initial configuration](#initial-configuration) in the `Fill in required information` step, using the `IDP metadata` from the previous step as the metadata XML.
 
@@ -613,7 +574,7 @@ Follow the instructions under [initial configuration](#initial-configuration) in
 
 **Step 4: Verify the SSO setup**
 
-Have a user with access sign in via the unique login URL from the **SSO Configuration** page, or go to the SAML application page in Google and click **TEST SAML LOGIN**.
+Have a user with access sign in via the unique login URL from the **SSO configuration** page, or go to the SAML application page in Google and click **TEST SAML LOGIN**.
 
 ### Okta
 
@@ -630,7 +591,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
 
 **Step 1: Create and configure the Okta SAML application**
 
-<b>Via Okta Integration Network (recommended)</b>
+**Via Okta Integration Network (recommended)**
 
 1. Sign in to [Okta](https://login.okta.com/).
 
@@ -652,7 +613,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <th>Region</th>
 
          <th>
-           {protocol_6 === false ? "Host" : "URL"}
+           Host
          </th>
        </tr>
      </thead>
@@ -662,9 +623,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <td>GCP US</td>
 
          <td>
-           <code>
-             {`${protocol_6 === false ? "" : "https://"}${prefix_6 || "api.smith"}.langchain.com${suffix_6 || ""}`}
-           </code>
+           `auth.langchain.com`
          </td>
        </tr>
 
@@ -672,9 +631,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <td>GCP EU</td>
 
          <td>
-           <code>
-             {`${protocol_6 === false ? "" : "https://"}eu.${prefix_6 || "api.smith"}.langchain.com${suffix_6 || ""}`}
-           </code>
+           `eu.auth.langchain.com`
          </td>
        </tr>
 
@@ -682,9 +639,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <td>GCP APAC</td>
 
          <td>
-           <code>
-             {`${protocol_6 === false ? "" : "https://"}apac.${prefix_6 || "api.smith"}.langchain.com${suffix_6 || ""}`}
-           </code>
+           `apac.auth.langchain.com`
          </td>
        </tr>
 
@@ -692,9 +647,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <td>AWS US</td>
 
          <td>
-           <code>
-             {`${protocol_6 === false ? "" : "https://"}aws.${prefix_6 || "api.smith"}.langchain.com${suffix_6 || ""}`}
-           </code>
+           `aws.auth.langchain.com`
          </td>
        </tr>
      </tbody>
@@ -708,7 +661,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <th>Region</th>
 
          <th>
-           {protocol_7 === false ? "Host" : "URL"}
+           Host
          </th>
        </tr>
      </thead>
@@ -718,9 +671,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <td>GCP US</td>
 
          <td>
-           <code>
-             {`${protocol_7 === false ? "" : "https://"}${prefix_7 || "api.smith"}.langchain.com${suffix_7 || ""}`}
-           </code>
+           `api.smith.langchain.com`
          </td>
        </tr>
 
@@ -728,9 +679,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <td>GCP EU</td>
 
          <td>
-           <code>
-             {`${protocol_7 === false ? "" : "https://"}eu.${prefix_7 || "api.smith"}.langchain.com${suffix_7 || ""}`}
-           </code>
+           `eu.api.smith.langchain.com`
          </td>
        </tr>
 
@@ -738,9 +687,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <td>GCP APAC</td>
 
          <td>
-           <code>
-             {`${protocol_7 === false ? "" : "https://"}apac.${prefix_7 || "api.smith"}.langchain.com${suffix_7 || ""}`}
-           </code>
+           `apac.api.smith.langchain.com`
          </td>
        </tr>
 
@@ -748,9 +695,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
          <td>AWS US</td>
 
          <td>
-           <code>
-             {`${protocol_7 === false ? "" : "https://"}aws.${prefix_7 || "api.smith"}.langchain.com${suffix_7 || ""}`}
-           </code>
+           `aws.api.smith.langchain.com`
          </td>
        </tr>
      </tbody>
@@ -771,6 +716,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
 **Via Custom App Integration**
 
 > [!NOTE]
+>
 > SCIM works with a custom app integration, though the [Okta Integration Network app](#via-okta-integration-network) is recommended. For the SCIM setup, see [Configure SCIM with a custom SAML app](#scim-custom-saml-app).
 
 1. Log in to Okta as an administrator, and go to the **Okta Admin console**.
@@ -791,7 +737,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <th>Region</th>
 
             <th>
-              {protocol_8 === false ? "Host" : "URL"}
+              URL
             </th>
           </tr>
         </thead>
@@ -801,9 +747,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <td>GCP US</td>
 
             <td>
-              <code>
-                {`${protocol_8 === false ? "" : "https://"}${prefix_8 || "api.smith"}.langchain.com${suffix_8 || ""}`}
-              </code>
+              `https://auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -811,9 +755,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <td>GCP EU</td>
 
             <td>
-              <code>
-                {`${protocol_8 === false ? "" : "https://"}eu.${prefix_8 || "api.smith"}.langchain.com${suffix_8 || ""}`}
-              </code>
+              `https://eu.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -821,9 +763,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <td>GCP APAC</td>
 
             <td>
-              <code>
-                {`${protocol_8 === false ? "" : "https://"}apac.${prefix_8 || "api.smith"}.langchain.com${suffix_8 || ""}`}
-              </code>
+              `https://apac.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
 
@@ -831,9 +771,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <td>AWS US</td>
 
             <td>
-              <code>
-                {`${protocol_8 === false ? "" : "https://"}aws.${prefix_8 || "api.smith"}.langchain.com${suffix_8 || ""}`}
-              </code>
+              `https://aws.auth.langchain.com/auth/v1/sso/saml/acs`
             </td>
           </tr>
         </tbody>
@@ -847,7 +785,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <th>Region</th>
 
             <th>
-              {protocol_9 === false ? "Host" : "URL"}
+              URL
             </th>
           </tr>
         </thead>
@@ -857,9 +795,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <td>GCP US</td>
 
             <td>
-              <code>
-                {`${protocol_9 === false ? "" : "https://"}${prefix_9 || "api.smith"}.langchain.com${suffix_9 || ""}`}
-              </code>
+              `https://auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -867,9 +803,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <td>GCP EU</td>
 
             <td>
-              <code>
-                {`${protocol_9 === false ? "" : "https://"}eu.${prefix_9 || "api.smith"}.langchain.com${suffix_9 || ""}`}
-              </code>
+              `https://eu.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -877,9 +811,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <td>GCP APAC</td>
 
             <td>
-              <code>
-                {`${protocol_9 === false ? "" : "https://"}apac.${prefix_9 || "api.smith"}.langchain.com${suffix_9 || ""}`}
-              </code>
+              `https://apac.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
 
@@ -887,9 +819,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
             <td>AWS US</td>
 
             <td>
-              <code>
-                {`${protocol_9 === false ? "" : "https://"}aws.${prefix_9 || "api.smith"}.langchain.com${suffix_9 || ""}`}
-              </code>
+              `https://aws.auth.langchain.com/auth/v1/sso/saml/metadata`
             </td>
           </tr>
         </tbody>
@@ -907,7 +837,7 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
 
 7. Copy the **Metadata URL** from the **Sign On** page to use in the next step.
 
-**Step 2: Set up LangSmith SSO Configuration**
+**Step 2: Set up LangSmith SSO configuration**
 
 Follow the instructions under [initial configuration](#initial-configuration) in the **Fill in required information** step, using the metadata URL from the previous step.
 
@@ -919,11 +849,11 @@ Follow the instructions under [initial configuration](#initial-configuration) in
 
 **Step 4: Verify the SSO setup**
 
-Have a user with access sign in via the unique login URL from the `SSO Configuration` page, or have a user select the application from their Okta dashboard.
+Have a user with access sign in via the unique login URL from the `SSO configuration` page, or have a user select the application from their Okta dashboard.
 
 #### SP-initiated SSO
 
-Once service-provider–initiated SSO is configured, users can sign in using a unique login URL. You can find this in the LangSmith UI under **Organization members and roles** then **SSO configuration**.
+Once service-provider-initiated SSO is configured, users can sign in using a unique login URL. You can find this in the LangSmith UI in **Settings** > **SSO configuration**.
 
 To send a user to a specific page after sign-in, add a URL-encoded `redirect_to` path to the login URL:
 
@@ -936,16 +866,19 @@ The value must decode to a path on the same host, starting with `/`. In the exam
 Encode the path. An unencoded path that contains its own query string or fragment is truncated at the first `&` or `#`, which sends the user to an incomplete destination.
 
 > [!NOTE]
+>
 > Most links do not need this parameter. Opening a LangSmith URL directly, then signing in through **SSO** with a work email, already returns the user to that page. Use `redirect_to` when the link must start SAML sign-in itself, such as a link generated by a script or posted for a team that signs in through a single identity provider.
 
 ## Set up SCIM for your organization
 
 > [!NOTE]
+>
 > Looking for a lighter-weight alternative to SCIM that doesn't require IdP admin involvement to push groups? See [SSO Groups Sync](#sso-groups-sync-alternative) below—it reads group memberships directly from the SSO token at login time and reuses the same naming convention.
 
 System for Cross-domain Identity Management (SCIM) is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and de-provision users in your LangSmith [organization and workspaces](administration-overview.md), keeping user access synchronized with your organization's identity provider.
 
 > [!NOTE]
+>
 > SCIM is available for organizations on the [Enterprise plan](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) to learn more.
 >
 > SCIM is available on Helm chart versions 0.10.41 (application version 0.10.108) and later.
@@ -977,6 +910,7 @@ SCIM eliminates the need for manual user management and ensures that user access
     or an agent-based solution ([details](https://help.okta.com/en-us/content/topics/provisioning/opp/opp-main.htm)) to provide connectivity.
 
 > [!NOTE]
+>
 > SCIM connections typically require HTTP/1.1 or later. If your client uses HTTP/1.0, you may encounter a `426 Upgrade Required` error.
 
 #### Role precedence
@@ -987,6 +921,7 @@ When a user belongs to multiple groups for the same workspace, the following pre
 2. **Most recently created workspace-specific group** takes precedence over other workspace groups.
 
 > [!NOTE]
+>
 > When a group is deleted or a user is removed from a group, their access is updated according to their remaining group membership, following the precedence rules.
 >
 > SCIM group membership overrides manually assigned roles or roles assigned via Just-in-time (JIT) provisioning. We recommend disabling JIT provisioning to avoid conflicts. For more details, refer to [Manage user access in SSO organizations](jit-invite-sso.md#scim-integration).
@@ -1004,11 +939,13 @@ The link expires in 24 hours, and can be resent if needed by removing and re-add
 #### Group naming convention
 
 > [!WARNING]
+>
 > Renaming groups is **not** supported via SCIM. Group names are persistent because they must match role names and/or workspace names in LangSmith.
 
 Group membership maps to LangSmith workspace membership and workspace roles with a specific naming convention. By default, the separator between components is a colon (`:`), but you can [configure a custom separator](#configure-custom-separator) for your organization.
 
 > [!NOTE]
+>
 > You can omit spaces in the **organization role name** portion of a group name. This helps with identity providers that disallow spaces in group names. For example, LangSmith accepts `OrganizationAdmins` and `OrganizationUser` as equivalents of `Organization Admins` and `Organization User`. This flexibility applies only to the organization role name token. Workspace names and workspace role names treat spaces as literal characters, so space-omitted variants do not match their spaced counterparts.
 
 **Organization Admin Groups**
@@ -1042,6 +979,7 @@ Examples with hyphen separator:
 * `Organization User-Engineering-Developers`
 
 > [!NOTE]
+>
 > If your workspace names contain the separator character (e.g., workspace `my-team` with separator `-`), LangSmith will automatically try all possible splits to find a valid workspace and role combination.
 
 <a id="scim-custom-saml-app"></a>
@@ -1060,6 +998,7 @@ curl -X PATCH $LANGCHAIN_ENDPOINT/api/v1/orgs/current/info \
 The separator must be a single character and one of: `:` (colon), `-` (hyphen), `_` (underscore), ` ` (space), or `&` (ampersand). The default is `:` (colon).
 
 > [!NOTE]
+>
 > Changing the separator does not rename existing SCIM groups. If you change the separator, you must also update your group names in your identity provider to use the new separator.
 
 ### Mapping
@@ -1146,6 +1085,7 @@ commonEnv:
 ### Step 3 - generate SCIM bearer token
 
 > [!NOTE]
+>
 > In self-hosted environments, the full URL below may look like `https://langsmith.yourdomain.com/api/v1/platform/orgs/current/scim/tokens` (without a subdomain, note the `/api/v1` path prefix) or `https://langsmith.yourdomain.com/subdomain/api/v1/platform/orgs/current/scim/tokens` (with a subdomain) - see the [ingress docs](self-host-ingress.md) for more details.
 
 Generate a SCIM Bearer Token for your organization. This token will be used by your IdP to authenticate SCIM API requests. Ensure env vars are set appropriately, for example:
@@ -1167,6 +1107,7 @@ Note that the SCIM Bearer Token value is not available outside of the response t
 ### Step 4 - configure your identity provider
 
 > [!NOTE]
+>
 > If you use Azure Entra ID (formerly Azure AD) or Okta, there are specific instructions for identity provider setup (refer to [Azure Entra ID](#azure-entra-id-configuration-steps), [Okta](#okta)). The requirements and steps above are applicable for all identity providers.
 
 #### Azure entra ID configuration steps
@@ -1174,6 +1115,7 @@ Note that the SCIM Bearer Token value is not available outside of the response t
 For additional information, see Microsoft's [documentation](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/user-provisioning).
 
 > [!NOTE]
+>
 > In self-hosted installations, the `oid` JWT claim is used as the `sub`.
 > See [this Microsoft Learn link](https://learn.microsoft.com/en-us/answers/questions/5546297/how-to-link-oidc-users-with-scim)
 > and [the related configuration instructions](self-host-sso.md#override-sub-claim) for additional details.
@@ -1197,7 +1139,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
            <th>Region</th>
 
            <th>
-             {protocol_10 === false ? "Host" : "URL"}
+             URL
            </th>
          </tr>
        </thead>
@@ -1207,9 +1149,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
            <td>GCP US</td>
 
            <td>
-             <code>
-               {`${protocol_10 === false ? "" : "https://"}${prefix_10 || "api.smith"}.langchain.com${suffix_10 || ""}`}
-             </code>
+             `https://api.smith.langchain.com/scim/v2`
            </td>
          </tr>
 
@@ -1217,9 +1157,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
            <td>GCP EU</td>
 
            <td>
-             <code>
-               {`${protocol_10 === false ? "" : "https://"}eu.${prefix_10 || "api.smith"}.langchain.com${suffix_10 || ""}`}
-             </code>
+             `https://eu.api.smith.langchain.com/scim/v2`
            </td>
          </tr>
 
@@ -1227,9 +1165,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
            <td>GCP APAC</td>
 
            <td>
-             <code>
-               {`${protocol_10 === false ? "" : "https://"}apac.${prefix_10 || "api.smith"}.langchain.com${suffix_10 || ""}`}
-             </code>
+             `https://apac.api.smith.langchain.com/scim/v2`
            </td>
          </tr>
 
@@ -1237,9 +1173,7 @@ For additional information, see Microsoft's [documentation](https://learn.micros
            <td>AWS US</td>
 
            <td>
-             <code>
-               {`${protocol_10 === false ? "" : "https://"}aws.${prefix_10 || "api.smith"}.langchain.com${suffix_10 || ""}`}
-             </code>
+             `https://aws.api.smith.langchain.com/scim/v2`
            </td>
          </tr>
        </tbody>
@@ -1306,9 +1240,10 @@ For troubleshooting, refer to the [SAML SSO FAQs](faq.md#saml-sso-faqs). If you 
 #### Okta configuration steps
 
 > [!NOTE]
+>
 > You must use the [Okta Lifecycle Management](https://www.okta.com/products/lifecycle-management/) product. This product tier is required to use SCIM on Okta.
 
-<b>Supported features</b>
+**Supported features**
 
 * Create users
 * Update user attributes
@@ -1317,9 +1252,10 @@ For troubleshooting, refer to the [SAML SSO FAQs](faq.md#saml-sso-faqs). If you 
 * Import users
 * Import groups
 
-<b>Step 1: Add application from Okta Integration Network</b>
+**Step 1: Add application from Okta Integration Network**
 
 > [!NOTE]
+>
 > If you have already configured SSO login via SAML (cloud) or OAuth2.0 with OIDC (self-hosted), skip this step.
 
 See [SAML SSO setup](#okta) for cloud or [OAuth2.0 setup](self-host-sso.md#okta-idp-setup) for self-hosted.
@@ -1344,16 +1280,17 @@ See [SAML SSO setup](#okta) for cloud or [OAuth2.0 setup](self-host-sso.md#okta-
 1. Configure provisioning: under `Provisioning > To App > Provisioning to App`, click `Edit`, then check `Create Users`, `Update User Attributes`, and `Deactivate Users`.
 2. Under `<application_name> Attribute Mappings`, set the user attribute mappings as shown below, and delete the rest:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/Fd2sBZqE3DLR7pWt/langsmith/images/scim_okta_user_attributes.png?fit=max&auto=format&n=Fd2sBZqE3DLR7pWt&q=85&s=4951533e29e0f0f75e7aac74dcfab3bb" alt="SCIM Okta User Attributes Mapping" width="748" height="467" data-path="langsmith/images/scim_okta_user_attributes.png" />
+![SCIM Okta User Attributes Mapping](https://mintcdn.com/langchain-5e9cc07a/Fd2sBZqE3DLR7pWt/langsmith/images/scim_okta_user_attributes.png?fit=max\&auto=format\&n=Fd2sBZqE3DLR7pWt\&q=85\&s=4951533e29e0f0f75e7aac74dcfab3bb)
 
 **Step 4: Push Groups**
 
 > [!NOTE]
+>
 > Okta does not support group attributes besides the group name itself, so group name *must* follow the naming convention described in the [Group Naming Convention](#group-naming-convention) section.
 
 Follow Okta's [Enable Group Push](https://help.okta.com/en-us/content/topics/users-groups-profiles/usgp-enable-group-push.htm) instructions to configure groups to push by name or by rule.
 
-<b>Configure SCIM with a custom SAML app</b>
+**Configure SCIM with a custom SAML app**
 
 If you already sign in through a custom SAML app, you have two options.
 
@@ -1369,7 +1306,7 @@ If you already sign in through a custom SAML app, you have two options.
         <th>Region</th>
 
         <th>
-          {protocol_11 === false ? "Host" : "URL"}
+          URL
         </th>
       </tr>
     </thead>
@@ -1379,9 +1316,7 @@ If you already sign in through a custom SAML app, you have two options.
         <td>GCP US</td>
 
         <td>
-          <code>
-            {`${protocol_11 === false ? "" : "https://"}${prefix_11 || "api.smith"}.langchain.com${suffix_11 || ""}`}
-          </code>
+          `https://api.smith.langchain.com/scim/v2`
         </td>
       </tr>
 
@@ -1389,9 +1324,7 @@ If you already sign in through a custom SAML app, you have two options.
         <td>GCP EU</td>
 
         <td>
-          <code>
-            {`${protocol_11 === false ? "" : "https://"}eu.${prefix_11 || "api.smith"}.langchain.com${suffix_11 || ""}`}
-          </code>
+          `https://eu.api.smith.langchain.com/scim/v2`
         </td>
       </tr>
 
@@ -1399,9 +1332,7 @@ If you already sign in through a custom SAML app, you have two options.
         <td>GCP APAC</td>
 
         <td>
-          <code>
-            {`${protocol_11 === false ? "" : "https://"}apac.${prefix_11 || "api.smith"}.langchain.com${suffix_11 || ""}`}
-          </code>
+          `https://apac.api.smith.langchain.com/scim/v2`
         </td>
       </tr>
 
@@ -1409,9 +1340,7 @@ If you already sign in through a custom SAML app, you have two options.
         <td>AWS US</td>
 
         <td>
-          <code>
-            {`${protocol_11 === false ? "" : "https://"}aws.${prefix_11 || "api.smith"}.langchain.com${suffix_11 || ""}`}
-          </code>
+          `https://aws.api.smith.langchain.com/scim/v2`
         </td>
       </tr>
     </tbody>
@@ -1423,6 +1352,7 @@ If you already sign in through a custom SAML app, you have two options.
 These settings replace Step 2's API integration. Continue from the **To App** settings in that step: enable Create Users, Update Users, and Deactivate Users, then assign your users and groups. Steps 3 and 4 cover the attribute mappings and group push.
 
 > [!NOTE]
+>
 > If **Provisioning** does not appear in your app's settings, check that your organization has Okta Lifecycle Management, which Okta requires for SCIM provisioning. If you have it and the option is still missing, contact Okta to enable it.
 
 #### Other identity providers
@@ -1432,7 +1362,8 @@ Other identity providers have not been tested but may function depending on thei
 ### SSO Groups Sync (alternative)
 
 > [!NOTE]
-> SSO Groups Sync is available for organizations on the [Enterprise plan](pricing-plans.md) with SAML SSO (cloud) or OIDC (self-hosted) configured. [Contact our sales team](https://www.langchain.com/contact-sales) to learn more.
+>
+> SSO Groups Sync is available for organizations on the [Enterprise plan](https://docs.langchain.com/langsmith/pricing-plans.md) with SAML SSO (cloud) or OIDC (self-hosted) configured. [Contact our sales team](https://www.langchain.com/contact-sales) to learn more.
 
 SSO Groups Sync is a simpler alternative to [SCIM](#set-up-scim-for-your-organization) for organizations that can't or prefer not to configure SCIM group push. Instead of pushing groups from your IdP to LangSmith on a separate sync interval, LangSmith reads group memberships directly from a configurable claim in the SSO token at login time and applies org-level and workspace-level role assignments using the same [naming convention](#group-naming-convention) as SCIM.
 
@@ -1453,7 +1384,7 @@ Choose **SSO Groups Sync** when IdP admin involvement is minimal and reactive (l
 #### Configuration
 
 1. In your IdP: add the user's group memberships to the SSO token claim (default claim name: `groups`). Group names must follow the [SCIM naming convention](#group-naming-convention).
-2. In LangSmith: go to **Settings** > **Members and roles** > **SSO Configuration** > **SSO Groups Sync** and configure the following:
+2. In LangSmith: go to **Settings** > **SSO Configuration** > **SSO Groups Sync** and configure the following:
 
    | Setting | Description |
    | - | - |
@@ -1477,11 +1408,13 @@ curl -X PATCH $LANGCHAIN_ENDPOINT/api/v1/orgs/current/sso-settings/$SSO_PROVIDER
 ```
 
 > [!WARNING]
+>
 > Disabling SSO Groups Sync does not remove existing access. Users provisioned by SSO groups will retain their current access until their next login.
 
 #### Configure your IdP to emit a groups SAML attribute (cloud)
 
 > [!NOTE]
+>
 > This section applies to **enterprise cloud** only. Self-hosted customers configure groups directly in their OIDC IdP, see [SSO Groups Sync on self-hosted](self-host-sso.md#sso-groups-sync).
 
 To make a user's group memberships visible to LangSmith at login, you need to do two things:
@@ -1498,7 +1431,8 @@ To make a user's group memberships visible to LangSmith at login, you need to do
 
 **Per-IdP setup:**
 
-#### Okta
+**Okta**
+
 In the LangSmith SAML application:
 
 1. Go to **Directory** > **Profile Editor**, then select the LangSmith application's user profile.
@@ -1508,7 +1442,8 @@ In the LangSmith SAML application:
    * **Name format**: `Unspecified` (or `Basic`)
    * **Filter**: `Matches regex` with `.*` to send all groups, or use a more restrictive regex (e.g., `^LS:.*`) to limit to LangSmith-prefixed groups.
 
-#### Entra ID (Azure)
+**Entra ID (Azure)**
+
 In the LangSmith Enterprise Application:
 
 1. **Single sign-on** > **Attributes & Claims** > **Add a group claim**.
@@ -1516,7 +1451,8 @@ In the LangSmith Enterprise Application:
 3. Set **Source attribute** to `Cloud-only group display names` so the group name (which must match the [naming convention](#group-naming-convention)) is sent rather than the object ID.
 4. Set the claim **Name** to `groups` (or your configured **Groups claim field** value), with no namespace.
 
-#### Google Workspace
+**Google Workspace**
+
 Google's SAML SSO does not natively emit Google Group memberships as a SAML attribute. To use SSO Groups Sync with Google Workspace, you must either:
 
 * Manage group membership through a directory sync tool that exposes groups as a SAML attribute, or
@@ -1550,8 +1486,6 @@ Group names follow the [SCIM naming convention](#group-naming-convention). The `
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/user-management.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/user-management.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

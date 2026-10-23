@@ -13,19 +13,16 @@ tags: [docs, langsmith, navigate-agents]
 To move between the [agents](agents.md) in your workspace, use the agent switcher in the top bar. Select an agent to see counts, charts, and trace lists for that agent only.
 
 > [!NOTE]
-> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+>
+> Agent-based workspaces are available on [LangSmith Cloud](cloud.md). They are not available on [self-hosted](self-hosted.md) LangSmith. To check whether your workspace is agent-based, look at the control at the top left. In an agent-based workspace, it is a workspace switcher that names your workspace. In a [project-based](observability-concepts.md#tracing-projects) workspace, it shows the LangSmith logo.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/J7ZKUnuaUY3KEDGH/langsmith/images/agent-switcher-closed-light.png?fit=max&auto=format&n=J7ZKUnuaUY3KEDGH&q=85&s=d706de1809cf475248ca264d2f68d943" alt="An agent's Overview, with the agent switcher in the top bar naming the agent, the ID field below it, and the metrics row for the last 7 days across all environments." width="1276" height="786" data-path="langsmith/images/agent-switcher-closed-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/J7ZKUnuaUY3KEDGH/langsmith/images/agent-switcher-closed-dark.png?fit=max&auto=format&n=J7ZKUnuaUY3KEDGH&q=85&s=facee88374f13c947e37a8edfdf2ab8d" alt="An agent's Overview, with the agent switcher in the top bar naming the agent, the ID field below it, and the metrics row for the last 7 days across all environments." width="1255" height="788" data-path="langsmith/images/agent-switcher-closed-dark.png" />
+![An agent's Overview, with the agent switcher in the top bar naming the agent, the ID field below it, and the metrics row for the last 7 days across all environments.](https://mintcdn.com/langchain-5e9cc07a/J7ZKUnuaUY3KEDGH/langsmith/images/agent-switcher-closed-light.png?fit=max\&auto=format\&n=J7ZKUnuaUY3KEDGH\&q=85\&s=d706de1809cf475248ca264d2f68d943)
 
 ## Switch between agents
 
 The agent switcher sits at the left of the top bar, after the workspace switcher and the panel collapse toggle. It reads either **All agents** or the name of the agent you are in. In a section other than the Overview, a breadcrumb follows it and names that section.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0GS5eCN4HA5fQwNT/langsmith/images/agent-switcher-open-light.png?fit=max&auto=format&n=0GS5eCN4HA5fQwNT&q=85&s=0b42353f60159bf455491f6d0a85845c" alt="The agent switcher open, with a search box above a list of agents and a check mark beside the selected one." width="559" height="225" data-path="langsmith/images/agent-switcher-open-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/0GS5eCN4HA5fQwNT/langsmith/images/agent-switcher-open-dark.png?fit=max&auto=format&n=0GS5eCN4HA5fQwNT&q=85&s=cb64c2737b1e7f7e0b80abbd8f43e719" alt="The agent switcher open, with a search box above a list of agents and a check mark beside the selected one." width="555" height="222" data-path="langsmith/images/agent-switcher-open-dark.png" />
+![The agent switcher open, with a search box above a list of agents and a check mark beside the selected one.](https://mintcdn.com/langchain-5e9cc07a/0GS5eCN4HA5fQwNT/langsmith/images/agent-switcher-open-light.png?fit=max\&auto=format\&n=0GS5eCN4HA5fQwNT\&q=85\&s=0b42353f60159bf455491f6d0a85845c)
 
 The address behind it is `/o/<workspaceId>/a/<agentIdentifier>/...`. The workspace slot takes a UUID, and the agent slot takes the agent's [identifier](agents.md#identifiers-and-display-names). A hyphen in the agent slot means all agents, so `/a/-` is the **All agents** view and `/a/<agentIdentifier>` is a single agent. Either state can be set from the address bar, which is how to link directly to one of the two views.
 
@@ -67,7 +64,7 @@ Below the **ID** field, the Overview shows the following, in order:
 
 * **Metrics**: Trace count, error rate, token count, and total cost, each covering a fixed period of the last 7 days across all environments. A sparkline of traces over time leads the row.
 * **Tracing**: One row per environment the agent has, including environments with no traces, with the most recent run, trace count, error rate, P50 latency, P99 latency, and description.
-* **Engine**: The number of active issues [Engine](engine-overview.md) has found across this agent's environments, and a **Go to Engine** link.
+* **Engine**: The number of active issues [Engine](engine.md) has found across this agent's environments, and a **Go to Engine** link.
 * **Evaluate your agent**: Describes evaluation on datasets and on live production traces, with a **Go to evaluators** link to [evaluators](evaluators.md).
 * **Monitor your agent**: Describes how to monitor an agent with dashboards, alerts, and feedback, from individual traces to production-wide metrics, with a **Go to dashboards** link to [dashboards](dashboards.md).
 * **Deployments**: The [deployments](deployment.md) bound to this agent by the steps in [Deploy to an agent environment](deploy-to-agent-environment.md). Each row links to that deployment. With none, the section describes what a deployment is and shows no rows. For which agents show this section, see [Compare the four routes](create-an-agent.md#compare-the-four-routes).
@@ -82,8 +79,6 @@ Below the **ID** field, the Overview shows the following, in order:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/navigate-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/navigate-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

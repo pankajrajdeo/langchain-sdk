@@ -15,7 +15,8 @@ A Slack channel lets people invoke a managed deep agent through app mentions, di
 Managed Deep Agents creates and configures the resources that connect Slack to the deployed agent. Add a channel declaration to the agent project, then deploy.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## Project structure
 
@@ -56,16 +57,20 @@ channel = channels.slack()
 
 Edit the channel declaration to control how the agent appears in Slack.
 
-#### `name` — `string`
+**name** `string`
+
 The agent name in Slack. The name must contain 1–35 characters and can contain letters, numbers, spaces, underscores, dashes, and periods. It cannot start or end with a space or dash.
 
-#### `description` — `string`
+**description** `string`
+
 A description of what the agent does. The description can contain up to 139 characters.
 
-#### `icon` — `string`
+**icon** `string`
+
 A path to the agent icon shown in Slack, relative to the `channels/` directory. The icon must be a 512 by 512 pixel PNG file no larger than 1 MB. If you omit this parameter, Managed Deep Agents will generate an icon for you.
 
-#### `background_color` — `string`
+**background\_color** `string`
+
 The background color behind the agent icon as a six-digit hexadecimal color, such as `#1d4ed8`.
 
 For example, put an icon next to the channel declaration:
@@ -93,17 +98,108 @@ channel = channels.slack(
 
 ### Configure which messages start runs
 
-#### `trigger_on_all_messages` — `bool`
+**trigger\_on\_all\_messages** `bool` (default: False)
+
 Whether every new channel message can start an agent run. When `False`, channel messages start runs only when they mention the agent; direct messages still start runs.
 
-#### `allow_bot_triggers` — `bool`
+**allow\_bot\_triggers** `bool` (default: False)
+
 Whether messages from other Slack bots can start agent runs.
+
+## React to the message that starts a run
+
+When a run picks up an inbound message, the agent reacts to it with an emoji, so
+the sender knows it was seen before the agent has anything to say. The reaction
+never blocks or delays the reply.
+
+Every message gets the same emoji by default. Pass a function to choose one per
+message:
+
+**reactions** `bool | str | Callable` (default: "eyes")
+
+Pass `False` to turn reactions off, a Slack emoji short name to use that emoji
+instead, or a callable taking `{"text": ...}` and returning a short name. The
+callable may be sync or async.
+
+```python
+from managed_deepagents import channels
+
+async def choose_emoji(context: dict) -> str:
+    return "bug" if "broken" in context["text"].lower() else "eyes"
+
+channel = channels.slack(name="Support Bot", reactions=choose_emoji)
+```
+
+Return a Slack short name without the surrounding colons. A name Slack does not
+recognize is chosen but never appears, so the reaction is simply missing. A
+chooser that throws, that takes longer than five seconds, or that returns
+anything else falls back to the default emoji, and the run continues either way.
+
+### Choose the emoji with a decision model
+
+A [decision model](../llm-gateway-decision-models.md) scores a fixed set of
+options and answers with one of their keys, so the reaction reflects what the
+message says and there is no reply to parse. The answer is always one of the
+options you supplied. `TypeSafeClassifier`
+([Python](../../integrations/providers/typesafe.md),
+[JavaScript](../../javascript/integrations/providers/typesafe.md)) exposes this as a
+`Runnable`, and records traces and token usage in LangSmith.
+
+```bash
+uv add langchain-typesafe
+```
+
+```python
+from functools import lru_cache
+
+from langchain_typesafe import Choice, TypeSafeClassifier
+from managed_deepagents import channels
+
+# The description is what the model matches on, so describe the situation
+# rather than the picture. Keep an option for anything unremarkable.
+QUESTION = Choice(
+    instructions="Which emoji best acknowledges this message?",
+    criteria={
+        "bug": "A defect or incorrect behaviour.",
+        "rotating_light": "A declared incident or outage.",
+        "mag": "A code review, pull request, or diff to look at.",
+        "hourglass": "Waiting on someone or something else; blocked.",
+        "speech_balloon": "A question, or a request to explain something.",
+        "wave": "A greeting or hello.",
+        "eyes": "Anything that does not clearly fit another option.",
+    },
+)
+
+@lru_cache(maxsize=1)
+def classifier() -> TypeSafeClassifier:
+    return TypeSafeClassifier(model="typesafe/jev-latest")
+
+async def choose_emoji(context: dict) -> str:
+    answer = await classifier().ainvoke(
+        {"state": context["text"][:2000], "questions": {"emoji": QUESTION}}
+    )
+    emoji = answer.choices["emoji"]
+    # Below this the model has no real view, so prefer a generic reaction.
+    return emoji.choice if emoji.confidence >= 0.25 else "eyes"
+
+channel = channels.slack(name="Support Bot", reactions=choose_emoji)
+```
+
+Both build the classifier on first use rather than at import, because
+deployment imports this module to read the channel declaration and the
+classifier needs a key to construct.
+
+Set `TYPESAFE_API_KEY` on the deployment. To route through the LangSmith gateway
+instead, set `TYPESAFE_BASE_URL=https://gateway.smith.langchain.com` and use a
+workspace-scoped LangSmith API key, with `TYPESAFE_API_KEY` in your workspace
+[provider secrets](../llm-gateway-admin-setup.md#1-add-provider-secrets).
 
 ## Deploy the agent
 
 During deployment, Managed Deep Agents provisions your agent in Slack from the channel declaration.
 
-### Deploy your agent
+**1. Deploy your agent**
+
 Run the deployment command from the project root:
 
 ```bash
@@ -112,15 +208,18 @@ uv run mda deploy
 
 Managed Deep Agents deploys the agent and sets up the resources it needs to appear in Slack.
 
-### Authorize Slack if prompted
+**2. Authorize Slack if prompted**
+
 If you haven't authorized LangSmith before, the CLI displays an HTTPS authorization link. Open the link, select the Slack workspace, and approve the requested access.
 
 Return to the terminal and press Enter. The CLI checks the authorization again and continues provisioning. If the Slack workspace requires admin approval, complete that approval before continuing.
 
-### Use the agent in Slack
+**3. Use the agent in Slack**
+
 After the first deployment, your agent sends you a direct message in Slack. Reply to the message to start an agent run. The final response appears in the Slack conversation.
 
 > [!NOTE]
+>
 > Human-in-the-loop requests in Slack support only the `approve` and `reject` [decision types](managed-deep-agents-tools.md#human-in-the-loop).
 
 If Slack is already authorized, deployment completes without an authorization prompt.
@@ -132,6 +231,7 @@ After you change the agent's name, description, icon, or background color in the
 A Slack channel moves files in both directions. Uploads land in the agent's sandbox under `/workspace/attachments/`, and the agent sends a file back by calling `attach_file` with a path under `/workspace`. Declaring a Slack channel and a [sandbox](managed-deep-agents-sandboxes.md) is the whole setup.
 
 > [!NOTE]
+>
 > Slack file transfer requires `managed-deepagents>=0.8.0` and a sandbox. Without a sandbox, incoming files are not saved and `attach_file` is not offered to the model.
 
 Managed Deep Agents stages the files on the incoming message before the run, along with files shared earlier in the same Slack thread. The agent reads an attachment status message for the paths, then opens the files with its sandbox tools. That status and the file contents are labeled as data, not instructions.
@@ -158,6 +258,8 @@ Files stay scoped to the Slack thread they arrived in, because every thread gets
 ## See also
 
 * [Channels overview](managed-deep-agents-channels.md): understand how channels connect messaging services to an agent.
+* [Decision models](../llm-gateway-decision-models.md): configure the model that scores reaction emoji.
+* [LLM Gateway setup](../llm-gateway-admin-setup.md): enable the gateway and add the provider secret reactions need.
 * [Agent-owned interrupts](managed-deep-agents-agent-owned-interrupts.md): post a Slack form from a tool and resume the run on submit.
 * [Sandboxes](managed-deep-agents-sandboxes.md): give the agent the filesystem that file transfers read and write.
 * [Deploy an agent](managed-deep-agents-deploy.md): configure and deploy a managed deep agent.
@@ -165,8 +267,6 @@ Files stay scoped to the Slack thread they arrived in, because every thread gets
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels-slack.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels-slack.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

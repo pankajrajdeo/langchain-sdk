@@ -79,6 +79,8 @@ print(result.content)
 
 See the [`ChatNVIDIA` integration page](../chat/nvidia_ai_endpoints.md) for full documentation including tool calling, multimodal inputs, and Nemotron-specific examples.
 
+For Nemotron 3.5 Super VL, see the [`ChatNVIDIA` Super VL examples](../chat/nvidia_ai_endpoints.md#use-nemotron-3-5-super-vl).
+
 ### Chat: ChatNVIDIADynamo
 
 `ChatNVIDIADynamo` is a drop-in replacement for `ChatNVIDIA` for use with [NVIDIA Dynamo](https://developer.nvidia.com/dynamo) deployments. It automatically injects KV cache routing hints into every request, allowing the Dynamo scheduler to optimize memory allocation, load routing, and request priority.
@@ -351,8 +353,6 @@ NVIDIA and LangChain have collaborated on [full stack examples](https://github.c
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

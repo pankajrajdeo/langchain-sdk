@@ -11,6 +11,7 @@ tags: [docs, integrations, llms, cohere]
 > Integrate with the Cohere LLM using LangChain Python.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of Cohere models as text completion models. Many popular Cohere models are [chat completion models](../../langchain/models.md).**
 >
 > You may be looking for [this page instead](../chat/cohere.md).
@@ -24,6 +25,7 @@ Head to the [API reference](https://reference.langchain.com/python/langchain-coh
 The integration lives in the `langchain-community` package. We also need to install the `cohere` package itself. We can install these with:
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ### Credentials
@@ -107,8 +109,6 @@ For detailed documentation of all `Cohere` llm features and configurations head 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

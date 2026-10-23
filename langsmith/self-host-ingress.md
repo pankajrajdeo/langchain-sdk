@@ -91,6 +91,7 @@ langsmith-ingress            nginx   <host>   35.227.243.203   80, 443   95d
 ```
 
 > [!WARNING]
+>
 > If you do not have automated DNS setup, you will need to add the IP address to your DNS provider manually.
 
 <a id="option-2:-gateway-api"></a>
@@ -98,6 +99,7 @@ langsmith-ingress            nginx   <host>   35.227.243.203   80, 443   95d
 ### Option 2: Gateway API
 
 > [!NOTE]
+>
 > Gateway API support is available as of LangSmith v0.12.0
 
 If your cluster uses the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/), you can configure LangSmith to provision HTTPRoute resources. This will create an HTTPRoute for LangSmith and an HTTPRoute for each [agent deployment](deployment.md).
@@ -141,6 +143,7 @@ kubectl get httproute
 ### Option 3: Istio Gateway
 
 > [!NOTE]
+>
 > Istio Gateway support is available as of LangSmith v0.12.0
 
 If your cluster uses [Istio](https://istio.io/), you can configure LangSmith to provision VirtualService resources. This will create a VirtualService for LangSmith and a VirtualService for each [agent deployment](deployment.md).
@@ -179,8 +182,6 @@ kubectl get virtualservice
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ingress.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ingress.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

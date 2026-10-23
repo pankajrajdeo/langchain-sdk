@@ -11,11 +11,13 @@ tags: [docs, javascript, integrations, llms, mistral]
 > Integrate with the MistralAI LLM using LangChain JavaScript.
 
 > [!WARNING]
+>
 > You are currently on a page documenting the use of Mistral models as text completion models. Many popular models available on Mistral are [chat completion models](../../langchain/models.md).
 >
 > You may be looking for [this page instead](../chat/mistral.md).
 
 > [!TIP]
+>
 > **Want to run Mistral's models locally? Check out our [Ollama integration](../chat/ollama.md).**
 
 [Mistral AI](https://mistral.ai/) is a platform that offers hosting for their powerful [open source models](https://docs.mistral.ai/getting-started/models/).
@@ -179,8 +181,6 @@ For detailed documentation of all `MistralAI` features and configurations head t
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/mistral.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/mistral.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

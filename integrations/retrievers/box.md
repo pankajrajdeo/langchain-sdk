@@ -17,6 +17,7 @@ This will help you get started with the Box [retriever](../../deepagents/retriev
 The `BoxRetriever` class helps you get your unstructured content from Box in LangChain's [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) format. You can do this by searching for files based on a full-text search or using Box AI to retrieve a [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) containing the result of an AI query against files. This requires including a `List[str]` containing Box file ids, i.e. `["12345","67890"]`
 
 > [!NOTE]
+>
 > Box AI requires an Enterprise Plus license
 
 Files without a text representation will be skipped.
@@ -76,8 +77,6 @@ retriever = BoxRetriever(box_developer_token=box_developer_token)
 ```
 
 For more granular search, we offer a series of options to help you filter down the results. This uses the `langchain_box.utilities.SearchOptions` in conjunction with the `langchain_box.utilities.SearchTypeFilter` and `langchain_box.utilities.DocumentFiles` enums to filter on things like created date, which part of the file to search, and even to limit the search scope to a specific folder.
-
-For more information, check out the [API reference](https://python.langchain.com/v0.2/api_reference/box/utilities/langchain_box.utilities.box.SearchOptions.html).
 
 ```python
 from langchain_box.utilities import BoxSearchOptions, DocumentFiles, SearchTypeFilter
@@ -174,8 +173,8 @@ pip install -U langsmith
 
 ```python
 from langchain_classic import hub
-from langchain.agents import AgentExecutor, create_openai_tools_agent
-from langchain.tools.retriever import create_retriever_tool
+from langchain_classic.agents import AgentExecutor, create_openai_tools_agent
+from langchain_classic.tools.retriever import create_retriever_tool
 from langchain_openai import ChatOpenAI
 ```
 
@@ -251,8 +250,6 @@ If you have questions, you can check out our [developer documentation](https://d
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/box.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/box.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

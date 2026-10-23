@@ -20,29 +20,36 @@ Use these guides when you need to ship an agent-backed product: copy the stack t
 
 The agent runs as a LangSmith Deployment, and a separate web app streams from the Agent Server API.
 
-#### [LangSmith + Vite](deploy-vite-langsmith.md)
-Agent graph on LangSmith Deployment; Vite + React UI streams from the Agent Server API.
+> **[LangSmith + Vite](deploy-vite-langsmith.md)**
+>
+> Agent graph on LangSmith Deployment; Vite + React UI streams from the Agent Server API.
 
 ### Embed in your web framework
 
 The agent runs inside the framework's route handlers and ships as one deployable app to the host platform.
 
-#### [Next.js](deploy-nextjs.md)
-App Router route handlers implement the protocol under `/api/threads/...`. Deploy to Vercel with one click.
+> **[Next.js](deploy-nextjs.md)**
+>
+> App Router route handlers implement the protocol under `/api/threads/...`. Deploy to Vercel with one click.
 
-#### [SvelteKit](deploy-sveltekit.md)
-SvelteKit server routes on Cloudflare Workers with `@langchain/svelte` and per-thread Durable Objects for SSE replay.
+> **[SvelteKit](deploy-sveltekit.md)**
+>
+> SvelteKit server routes on Cloudflare Workers with `@langchain/svelte` and per-thread Durable Objects for SSE replay.
 
-#### [Nuxt](deploy-nuxt.md)
-Nitro route handlers and `@langchain/vue` composables in a single deployable Nuxt 4 app.
+> **[Nuxt](deploy-nuxt.md)**
+>
+> Nitro route handlers and `@langchain/vue` composables in a single deployable Nuxt 4 app.
 
-#### [Cloudflare Workers](deploy-cloudflare-workers.md)
-Vite + React SPA and Hono API on one Worker with Workers Assets and Durable Objects.
+> **[Cloudflare Workers](deploy-cloudflare-workers.md)**
+>
+> Vite + React SPA and Hono API on one Worker with Workers Assets and Durable Objects.
 
-#### [Deno Deploy](deploy-deno.md)
-Deno.serve + Hono serves the protocol API and a Vite-built React SPA from one entrypoint.
+> **[Deno Deploy](deploy-deno.md)**
+>
+> Deno.serve + Hono serves the protocol API and a Vite-built React SPA from one entrypoint.
 
 > [!TIP]
+>
 > Each cookbook example shares the same demo agent: a coordinator that delegates to `researcher` and `math-whiz` subagents with mock tools, so you can compare hosting choices without changing application behavior.
 
 ## What goes into an agent deployment
@@ -96,8 +103,6 @@ These bindings ship no components of their own. Hooks like `useStream` return pl
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-frameworks-and-platforms.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-frameworks-and-platforms.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

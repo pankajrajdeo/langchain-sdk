@@ -54,6 +54,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 ```
 
 > [!NOTE]
+>
 > If your account is in a region other than US (the default), also set `LANGSMITH_ENDPOINT` to the API URL for your region. Without this, your API key won't be recognized and requests will fail to authenticate.
 >
 > <table>
@@ -62,7 +63,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <th>Region</th>
 >
 >       <th>
->         {protocol_0 === false ? "Host" : "URL"}
+>         URL
 >       </th>
 >     </tr>
 >   </thead>
@@ -72,9 +73,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <td>GCP US</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://api.smith.langchain.com`
 >       </td>
 >     </tr>
 >
@@ -82,9 +81,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <td>GCP EU</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://eu.api.smith.langchain.com`
 >       </td>
 >     </tr>
 >
@@ -92,9 +89,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <td>GCP APAC</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://apac.api.smith.langchain.com`
 >       </td>
 >     </tr>
 >
@@ -102,17 +97,16 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <td>AWS US</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://aws.api.smith.langchain.com`
 >       </td>
 >     </tr>
 >   </tbody>
 > </table>
 >
-> For example, EU accounts: `export LANGSMITH_ENDPOINT="https://eu.api.smith.langchain.com"`. Do not add a trailing slash to the URL, as this can cause authentication errors.
+> For example, EU accounts: `export LANGSMITH_ENDPOINT="https://eu.api.smith.langchain.com"`.
 
 > [!NOTE]
+>
 > If you are using LangChain.js with LangSmith and are not in a serverless environment, we also recommend setting the following explicitly to reduce latency:
 >
 > `export LANGCHAIN_CALLBACKS_BACKGROUND=true`
@@ -137,7 +131,7 @@ prompt = ChatPromptTemplate.from_messages([
     ("user", "Question: {question}\nContext: {context}")
 ])
 
-model = ChatOpenAI(model="gpt-5.4-mini")
+model = ChatOpenAI(model="gpt-6-luna")
 output_parser = StrOutputParser()
 chain = prompt | model | output_parser
 
@@ -159,7 +153,7 @@ const prompt = ChatPromptTemplate.fromMessages([
   ["user", "Question: {question}\nContext: {context}"],
 ]);
 
-const model = new ChatOpenAI({ modelName: "gpt-5.4-mini" });
+const model = new ChatOpenAI({ modelName: "gpt-6-luna" });
 const outputParser = new StringOutputParser();
 const chain = prompt.pipe(model).pipe(outputParser);
 
@@ -225,6 +219,7 @@ export LANGSMITH_PROJECT=my-project
 ```
 
 > [!WARNING]
+>
 > The `LANGSMITH_PROJECT` flag is only supported in JS SDK 0.2.16 or later, use `LANGCHAIN_PROJECT` instead if you are using an older version.
 
 ### Dynamically
@@ -262,6 +257,7 @@ await chain.invoke(
 You can annotate your traces with arbitrary metadata and tags by providing them in the [`RunnableConfig`](https://reference.langchain.com/python/langchain_core/runnables/?h=runnablecon#langchain_core.runnables.RunnableConfig). This is useful for associating additional information with a trace, such as the environment in which it was executed, or the user who initiated it. For information on how to query traces and runs by metadata and tags, see [Query traces (SDK)](export-traces.md)
 
 > [!NOTE]
+>
 > When you attach metadata or tags to a runnable (either through the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) or at runtime with invocation params), they are inherited by all child runnables of that runnable.
 
 **Python**
@@ -337,7 +333,8 @@ await chain.invoke({ input: "What is the meaning of life?" }, {runName: "MyCusto
 ```
 
 > [!NOTE]
-> The `run_name` parameter only changes the name of the runnable you invoke (e.g., a chain, function). It does not rename the nested run automatically created when you invoke an LLM object like [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) (`gpt-5.4-mini`). In the example, the enclosing run will appear in LangSmith as `MyCustomChain`, while the nested LLM run still shows the model’s default name.
+>
+> The `run_name` parameter only changes the name of the runnable you invoke (e.g., a chain, function). It does not rename the nested run automatically created when you invoke an LLM object like [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) (`gpt-6-luna`). In the example, the enclosing run will appear in LangSmith as `MyCustomChain`, while the nested LLM run still shows the model’s default name.
 >
 > To give the LLM run a more meaningful name, you can either:
 >
@@ -416,6 +413,7 @@ const result = await llm.invoke("What is the meaning of life?");
 When you pass `ls_model_name` in the model's metadata, this name will appear in the LangSmith UI for all traces involving that model instance. This works for any LangChain chat model or LLM and is inherited by all runs that use the model, including when it's part of a chain.
 
 > [!NOTE]
+>
 > The `ls_model_name` metadata parameter is also used for [cost tracking](cost-tracking.md). When combined with the `ls_provider` parameter, LangSmith can automatically calculate costs for custom or self-hosted models. For more information about all available metadata parameters, see the [metadata parameters reference](ls-metadata-parameters.md).
 
 ## Customize run ID
@@ -423,14 +421,15 @@ When you pass `ls_model_name` in the model's metadata, this name will appear in 
 You can customize the ID of a given run when invoking or streaming your LangChain code by providing it in the [Config](https://reference.langchain.com/python/langchain_core/runnables/?h=runnablecon#langchain_core.runnables.RunnableConfig). This ID is used to uniquely identify the run in LangSmith and can be used to query specific runs. The ID can be useful for linking runs across different systems or for implementing custom tracking logic. This can be done by setting a `run_id` in the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) object at construction or by passing a `run_id` in the invocation parameters.
 
 > [!NOTE]
+>
 > This feature is not currently supported directly for LLM objects.
 
 **Python**
 
 ```python
-import uuid
+from langchain_core.utils.uuid import uuid7
 
-my_uuid = uuid.uuid4()
+my_uuid = uuid7()
 
 # You can configure the run ID at invocation time:
 chain.invoke({"input": "What is the meaning of life?"}, {"run_id": my_uuid})
@@ -439,7 +438,9 @@ chain.invoke({"input": "What is the meaning of life?"}, {"run_id": my_uuid})
 **TypeScript**
 
 ```typescript
-const myUuid = crypto.randomUUID();
+import { uuid7 } from "langsmith";
+
+const myUuid = uuid7();
 
 // You can configure the run ID at invocation time, like below
 await chain.invoke({ input: "What is the meaning of life?" }, { runId: myUuid });
@@ -456,24 +457,23 @@ In JS/TS, you can use a `RunCollectorCallbackHandler` instance to access the run
 **Python**
 
 ```python
-import uuid
-
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.utils.uuid import uuid7
 
 prompt = ChatPromptTemplate.from_messages([
     ("system", "You are a helpful assistant. Please respond to the user's request only based on the given context."),
     ("user", "Question: {question}\n\nContext: {context}")
 ])
-model = ChatOpenAI(model="gpt-5.4-mini")
+model = ChatOpenAI(model="gpt-6-luna")
 output_parser = StrOutputParser()
 
 chain = prompt | model | output_parser
 
 question = "Can you summarize this morning's meetings?"
 context = "During this morning's meeting, we solved all world conflict."
-my_uuid = uuid.uuid4()
+my_uuid = uuid7()
 result = chain.invoke({"question": question, "context": context}, {"run_id": my_uuid})
 print(my_uuid)
 ```
@@ -490,7 +490,7 @@ const prompt = ChatPromptTemplate.fromMessages([
   ["system", "You are a helpful assistant. Please respond to the user's request only based on the given context."],
   ["user", "Question: {question}\n\nContext: {context}"],
 ]);
-const model = new ChatOpenAI({ modelName: "gpt-5.4-mini" });
+const model = new ChatOpenAI({ modelName: "gpt-6-luna" });
 const outputParser = new StringOutputParser();
 
 const chain = prompt.pipe(model).pipe(outputParser);
@@ -643,7 +643,7 @@ prompt = ChatPromptTemplate.from_messages([
     ("user", "Question: {question}\nContext: {context}")
 ])
 
-model = ChatOpenAI(model="gpt-5.4-mini")
+model = ChatOpenAI(model="gpt-6-luna")
 output_parser = StrOutputParser()
 chain = prompt | model | output_parser
 
@@ -659,7 +659,7 @@ def invoke_runnnable(question, context):
 invoke_runnnable("Can you summarize this morning's meetings?", "During this morning's meeting, we solved all world conflict.")
 ```
 
-This will produce the following trace tree: <img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/trace-tree-python-interop.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=52c64fd784522c4b2d75886ae76f8c18" alt="Trace tree python interop" width="1334" height="734" data-path="langsmith/images/trace-tree-python-interop.png" />
+This will produce the following trace tree: ![Trace tree python interop](https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/trace-tree-python-interop.png?fit=max\&auto=format\&n=ImHGLQW1HnQYwnJV\&q=85\&s=52c64fd784522c4b2d75886ae76f8c18)
 
 ## Interoperability between LangChain.JS and LangSmith SDK
 
@@ -683,7 +683,7 @@ const prompt = ChatPromptTemplate.fromMessages([
   ["user", "Question: {question}\nContext: {context}"],
 ]);
 
-const model = new ChatOpenAI({ modelName: "gpt-5.4-mini" });
+const model = new ChatOpenAI({ modelName: "gpt-6-luna" });
 const outputParser = new StringOutputParser();
 const chain = prompt.pipe(model).pipe(outputParser);
 
@@ -700,6 +700,7 @@ const main = traceable(
 ### Tracing LangChain child runs via `traceable` / RunTree API (JS only)
 
 > [!NOTE]
+>
 > We're working on improving the interoperability between `traceable` and LangChain. The following limitations are present when using combining LangChain with `traceable`:
 >
 > 1. Mutating RunTree obtained from `getCurrentRunTree()` of the RunnableLambda context will result in a no-op.
@@ -724,7 +725,7 @@ const parrot = new RunnableLambda({
 });
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/trace-tree-manual-tracing.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=7b117d3aa9b419fe2a314ec6d9cc7c16" alt="Trace Tree" width="2564" height="1530" data-path="langsmith/images/trace-tree-manual-tracing.png" />
+![Trace Tree](https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/trace-tree-manual-tracing.png?fit=max\&auto=format\&n=ImHGLQW1HnQYwnJV\&q=85\&s=7b117d3aa9b419fe2a314ec6d9cc7c16)
 
 Alternatively, you can convert LangChain's [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) to a equivalent RunTree object by using `RunTree.fromRunnableConfig` or pass the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) as the first argument of `traceable`-wrapped function.
 
@@ -777,8 +778,6 @@ If you prefer a video tutorial, check out the [Alternative Ways to Trace video](
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

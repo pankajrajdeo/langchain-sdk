@@ -28,17 +28,20 @@ The tool migrates the following resources between a source instance and a destin
 | Prompts | Prompts with the full commit history. |
 | Charts | Monitoring charts and dashboards. |
 | Custom model pricing | Workspace-custom model price entries. |
+| Engine issues | Per-project Engine configuration and detected issues. Issues migrate as metadata, including the proposed fix, without their linked traces or pull requests. |
 | Fleet | Agents, shared skills, MCP servers, integrations, auth providers, schedules, triggers, webhooks, usage limits, sandbox policies, and workspace secrets. |
 | Context Hub | Context Hub agents and skills, including files, repository metadata, commit history, and commit tags. |
 
 Each resource type has its own command, flags, and caveats. For the command reference, see the [tool README](https://github.com/langchain-ai/langsmith-data-migration-tool/blob/main/README.md).
 
 > [!NOTE]
-> Resources belonging to a feature that BYOC does not support yet, such as [Engine](engine-overview.md), cannot be migrated. See [Available features](byoc.md#available-features).
+>
+> Resources belonging to a feature that BYOC does not support yet, such as [Managed Deep Agents](python/managed-deep-agents-overview.md), cannot be migrated. See [Available features](byoc.md#available-features).
 
 ## Migrate with the tool
 
-### Install the tool
+**1. Install the tool**
+
 Install the latest release with `uv`, `uvx`, or `pip`. For the current install commands, see [Installation](https://github.com/langchain-ai/langsmith-data-migration-tool#installation).
 
 Verify the install:
@@ -47,15 +50,18 @@ Verify the install:
 langsmith-migrator --help
 ```
 
-### Create the destination workspaces
+**2. Create the destination workspaces**
+
 Workspace IDs differ between instances, so create the target workspaces in the data plane first. See the `Create workspaces` section of the [BYOC onboarding docs](byoc-onboarding.md).
 
 Migration commands run per workspace pair. Repeat them for each pair.
 
-### Create the destination tracing projects
+**3. Create the destination tracing projects**
+
 The tool does not create tracing projects. Create the projects you need in the destination workspace before you migrate automation rules or charts, or those mappings have no target.
 
-### Configure the connection details
+**4. Configure the connection details**
+
 Set the source and destination credentials and endpoints:
 
 ```bash
@@ -67,6 +73,7 @@ export LANGSMITH_VERIFY_SSL=true
 ```
 
 > [!NOTE]
+>
 > `OLD` refers to your current LangSmith deployment, and `NEW` refers to the destination BYOC data plane:
 >
 > * **`LANGSMITH_OLD_API_KEY`**: An API key from your current deployment with permission to read all resources you want to migrate. For LangSmith Cloud at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-byoc-migration), create it under **Settings > API Keys**. For another Cloud region or a self-hosted instance, use that deployment's UI.
@@ -75,16 +82,19 @@ export LANGSMITH_VERIFY_SSL=true
 > * **`LANGSMITH_NEW_BASE_URL`**: Your destination BYOC data plane's API URL, including `https://`. Find it under **Settings > Data Planes**. See [BYOC onboarding](byoc-onboarding.md).
 
 > [!WARNING]
+>
 > The destination key must be scoped to a workspace in the target data plane. An organization-scoped key does not work.
 >
 > To migrate Fleet agents with an owner, use a personal access token (`lsv2_pt_*`) as the destination key. Workspace API keys carry no user identity, so agents created with them have no owner.
 
-### Test both connections
+**5. Test both connections**
+
 ```bash
 langsmith-migrator test
 ```
 
-### Run the migration
+**6. Run the migration**
+
 Use the interactive wizard to walk through every resource type:
 
 ```bash
@@ -106,6 +116,19 @@ For per-command flags, workspace mapping, and project mapping, see the [tool REA
 * **Configure infrastructure-level settings**: OAuth providers, the GitHub App, and the Slack app can be recreated in the `Settings > Oauth Providers` and `Fleet > Integrations` UI.
 
 Fleet migrators never overwrite resources that already exist on the destination, so re-running `fleet` is safe.
+
+## Complete the Engine manual steps
+
+[Engine](engine.md) issues migrate with the `issues` command. The command creates any tracing project that has Engine data and is missing on the destination. Issues migrate as metadata only, and the command skips issues and project configurations that already exist on the destination.
+
+To run Engine in the data plane, complete these steps in order:
+
+1. **Enable Engine for the data plane**: A LangChain operator enables Engine for your data plane. Contact your LangChain account team to request it.
+2. **Turn on Engine**: An Organization Admin goes to **Settings** > **Engine**, selects the data plane, and turns on Engine.
+3. **Add model provider credentials**: An Organization Admin adds credentials for your own model providers. Credentials are not migrated. See [Engine on BYOC](engine-self-hosted.md#engine-on-byoc).
+4. **Reconnect GitHub**: Configure your GitHub App in the destination, then reconnect repositories in each Engine project. Repository settings migrate, but they work only after the destination has a GitHub connection. See [Configure GitHub for Engine on BYOC](engine-self-hosted-github.md#configure-the-app-on-byoc).
+5. **Recreate notification destinations**: Connect your Slack app and add Slack, Jira, or webhook destinations again. See [Engine notifications](engine-notifications.md).
+6. **Let Engine re-detect traces**: Migrated issues have no linked traces, pull requests, or suggested actions. Engine links new traces to the issues as it analyzes traces in the data plane.
 
 ## Move data the tool does not migrate
 
@@ -141,8 +164,6 @@ For more information, see [LangSmith Deployment](deployment.md).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-migration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-migration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

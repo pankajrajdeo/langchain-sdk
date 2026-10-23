@@ -14,7 +14,7 @@ A **snapshot** is a reusable sandbox filesystem. Build a custom snapshot from a 
 
 You can also capture a snapshot from a running sandbox—install packages, write data files, or configure state, then snapshot the result and reuse it as a new starting point.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/5nd3ca6haxRbnJZj/images/langsmith/sandboxes/sb-snapshots.png?fit=max&auto=format&n=5nd3ca6haxRbnJZj&q=85&s=6f56db23342150d156d0c6d783a1ead7" alt="Sandboxes snapshots page" width="2848" height="974" data-path="images/langsmith/sandboxes/sb-snapshots.png" />
+![Sandboxes snapshots page](https://mintcdn.com/langchain-5e9cc07a/5nd3ca6haxRbnJZj/images/langsmith/sandboxes/sb-snapshots.png?fit=max\&auto=format\&n=5nd3ca6haxRbnJZj\&q=85\&s=6f56db23342150d156d0c6d783a1ead7)
 
 ## Understand the default snapshot
 
@@ -33,6 +33,7 @@ The compressed ext4 file, rather than a separately pulled container image, is th
 Scanning the `sandbox-host` container image alone does not inspect the files inside this compressed artifact. To verify the default snapshot, extract and scan the embedded filesystem separately.
 
 > [!NOTE]
+>
 > This procedure verifies the default snapshot filesystem. LangSmith supplies other required runtime components separately when the sandbox starts; they are not part of the snapshot.
 
 To independently inspect the default snapshot, use the exact `sandbox-host` container image configured by your Helm release. If you mirror images, use the reference in `images.sandboxHostImage` from your private registry.
@@ -202,7 +203,12 @@ List, inspect, update, and delete registries with `client.registries.list()`, `c
 AWS IAM role authentication avoids storing an expiring ECR authorization token in LangSmith. It supports private ECR registries in the commercial AWS partition. Public ECR, AWS GovCloud, AWS China, and custom ECR-compatible domains continue to use username and password authentication.
 
 > [!NOTE]
+>
 > The **AWS IAM role** authentication method appears only when your LangSmith deployment supports it. If the option is unavailable, use username and password authentication.
+
+> [!NOTE]
+>
+> **BYOC deployments:** AWS IAM role authentication works on [BYOC](byoc.md) AWS data planes with no extra setup. Follow the steps below. If your data plane uses [bring your own IAM](byoc-byoiam.md), apply the latest version of the [`byoiam` Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/byoiam) first. It grants the workload role permission to assume your ECR role.
 
 To register an ECR role:
 
@@ -228,6 +234,20 @@ To register an ECR role:
     }
   ]
 }
+```
+
+> [!NOTE]
+>
+> **BYOC deployments:** BYOC data planes pass session tags when they assume the role, so the trust policy must also allow `sts:TagSession`. Add it as a separate statement without the `sts:ExternalId` condition. Otherwise AWS denies the role assumption:
+>
+```json
+> {
+>   "Effect": "Allow",
+>   "Principal": {
+>     "AWS": "<principal-arn-shown-in-langsmith>"
+>   },
+>   "Action": "sts:TagSession"
+> }
 ```
 
 4. Give the role permission to discover and pull the required ECR images. The following policy grants access to every repository in one AWS account and region. Replace the placeholders, or narrow the repository resource to the repositories LangSmith can use:
@@ -258,7 +278,7 @@ To register an ECR role:
 }
 ```
 
-5. For hosted LangSmith, add the `LangSmithSandboxECR=true` tag to the IAM role.
+5. For hosted LangSmith and BYOC, add the `LangSmithSandboxECR=true` tag to the IAM role.
 6. Return to LangSmith, enter the role ARN in **AWS role ARN**, then register the private registry.
 
 LangSmith assumes the role separately for repository discovery, tag discovery, and each snapshot build attempt. It obtains a fresh ECR authorization token for delayed jobs and retries, and does not persist temporary AWS credentials or generated ECR tokens.
@@ -306,6 +326,7 @@ console.log(snapshot.id);
 ```
 
 > [!NOTE]
+>
 > `dockerfile` is resolved relative to `context` unless you pass an absolute path, and it must live inside the context directory. The `.git` directory is excluded from the uploaded context automatically.
 
 ### Build args and target stage
@@ -397,6 +418,7 @@ const snapshot = await client.createSnapshotFromDockerfile(
 ```
 
 > [!TIP]
+>
 > Both the sync `SandboxClient` and the `AsyncSandboxClient` expose this method with the same arguments—`await client.create_snapshot_from_dockerfile(...)` on the async client.
 
 ## Capture a snapshot from a running sandbox
@@ -445,22 +467,24 @@ try {
 ```
 
 > [!NOTE]
+>
 > By default, capture preserves the **filesystem only**. Installed packages (under `/usr/local`, `/root`, `/opt`, the home directory, etc.) and files you wrote to those locations are kept, as is `/tmp`. Only `/dev/shm` is a tmpfs, so everything else lives on the sandbox's disk. Running processes, open sockets, and in-memory state are **not** carried over: boot the new sandbox and start the processes you need again, or [capture memory too](#resume-from-memory).
 
 > [!TIP]
+>
 > You can boot a sandbox from a snapshot by **name** instead of ID — handy when you know the human-readable label you captured with:
 >
-> **Python**
->
-> ```python
+**Python**
+
+```python
 > sb = client.create_sandbox(snapshot_name="ml-ready")
-> ```
+```
 >
-> **TypeScript**
->
-> ```ts
+**TypeScript**
+
+```ts
 > const sb = await client.createSandbox({ snapshotName: "ml-ready" });
-> ```
+```
 >
 > Pass at most one of `snapshot_id` / `snapshot_name` (or `snapshotId` / `snapshotName` in TypeScript). Omit both to use the default runtime.
 
@@ -485,6 +509,7 @@ const snapshot = await sb.captureSnapshot("ml-ready-v2", { timeout: 600 });
 A snapshot can carry the sandbox's RAM alongside its filesystem. Boot from one and the sandbox resumes where it left off, with its processes still running, instead of cold-booting. Use this for environments that are slow to warm up, such as a loaded model or a started database.
 
 > [!NOTE]
+>
 > Memory snapshots are available over the REST API only. The `langsmith.sandbox` Python and TypeScript clients do not expose these fields yet.
 
 Capture memory by setting `include_memory` on a capture:
@@ -553,19 +578,20 @@ await client.deleteSnapshot(snapshot.id);
 ```
 
 > [!NOTE]
+>
 > `list_snapshots` / `listSnapshots` paginates server-side (default page size 50, max 500) and accepts optional filters: `name_contains` / `nameContains` (case-insensitive substring on name), `limit` (1–500), and `offset` (≥ 0). Page through results by advancing `offset`.
 >
-> **Python**
->
-> ```python
+**Python**
+
+```python
 > page = client.list_snapshots(name_contains="ml", limit=100)
-> ```
+```
 >
-> **TypeScript**
->
-> ```ts
+**TypeScript**
+
+```ts
 > const page = await client.listSnapshots({ nameContains: "ml", limit: 100 });
-> ```
+```
 
 ## Stopped sandboxes
 
@@ -607,8 +633,6 @@ The first request after a stop pays the boot cost, so it is slower than the ones
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-snapshots.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-snapshots.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

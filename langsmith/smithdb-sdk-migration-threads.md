@@ -20,25 +20,31 @@ Query threads within a project, with cursor-based pagination. Returns threads ma
 
 #### Method name
 
-#### Python
+**Python**
+
 | Before | After |
 | - | - |
 | `client.list_threads()` | `client.threads.query()` |
 
 > [!NOTE]
+>
 > `client.threads.query()` is now async. Call it with `await`.
 
 See the [reference](https://reference.langchain.com/python/langsmith/_openapi_client/resources/threads/ThreadsResource/query) for the full parameter and field list.
 
-#### TypeScript
+**TypeScript**
+
 | Before | After |
 | - | - |
 | `client.listThreads()` | `client.threads.query()` |
 
 See the [reference](https://reference.langchain.com/javascript/langsmith/_openapi_client/Langsmith/Threads/query) for the full parameter and field list.
 
-#### Java
-Java never had a dedicated thread-listing method. The closest legacy equivalent is the generic run query, manually grouped by the `thread_id` metadata convention.
+**Java**
+
+> [!NOTE]
+>
+> Java never had a dedicated thread-listing method. The closest legacy equivalent is the generic run query, manually grouped by the `thread_id` metadata convention.
 
 | Before | After |
 | - | - |
@@ -46,8 +52,11 @@ Java never had a dedicated thread-listing method. The closest legacy equivalent 
 
 See the [reference](https://javadoc.io/doc/com.langchain.smith/langsmith-java/latest/com/langchain/smith/services/blocking/ThreadService.html) for the full parameter list.
 
-#### Go
-Go never had a dedicated thread-listing method. The closest legacy equivalent is the generic run query, manually grouped by the `thread_id` metadata convention.
+**Go**
+
+> [!NOTE]
+>
+> Go never had a dedicated thread-listing method. The closest legacy equivalent is the generic run query, manually grouped by the `thread_id` metadata convention.
 
 | Before | After |
 | - | - |
@@ -55,7 +64,8 @@ Go never had a dedicated thread-listing method. The closest legacy equivalent is
 
 See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#ThreadService.QueryAutoPaging) for the full parameter list.
 
-#### cURL
+**cURL**
+
 | Before | After |
 | - | - |
 | `POST /api/v1/runs/query` (`is_root=true`, grouped client-side) | `POST /api/v2/threads/query` |
@@ -64,7 +74,8 @@ See the [API doc](smith-api/threads/query-threads.md) for the full parameter and
 
 #### Query parameters
 
-#### Python
+**Python**
+
 | Before (`list_threads`) | After (`threads.query`) | Notes |
 | - | - | - |
 | `project_id` XOR `project_name` | `project_id` | the new method takes only the UUID; resolve a name via `aread_project()` first, same pattern as `Runs: query` |
@@ -72,7 +83,8 @@ See the [API doc](smith-api/threads/query-threads.md) for the full parameter and
 | `offset` + `limit` | `cursor` + `page_size` | Offset pagination replaced by cursor pagination |
 | `filter` (evaluated against runs) | `filter` | Same syntax; now evaluated against each thread's root run |
 
-#### TypeScript
+**TypeScript**
+
 | Before (`listThreads`) | After (`threads.query`) | Notes |
 | - | - | - |
 | `projectId` XOR `projectName` | `project_id` | the new method takes only the UUID; resolve a name via `readProject()` first |
@@ -80,18 +92,22 @@ See the [API doc](smith-api/threads/query-threads.md) for the full parameter and
 | `offset` + `limit` | `cursor` + `page_size` | Offset pagination replaced by cursor pagination |
 | `filter` | `filter` | Same syntax; now evaluated against each thread's root run |
 
-#### Java
+**Java**
+
 No query parameters to map. There was no dedicated method. The old approach used the generic run query (`is_root=true`, manual grouping by `thread_id` metadata). `threads().query()` takes `projectId`, `minStartTime`, `maxStartTime` (both optional, defaulting to a 1-day window ending now), `filter`, `pageSize`, `cursor`.
 
-#### Go
+**Go**
+
 No query parameters to map. There was no dedicated method. The old approach used the generic run query (`IsRoot: true`, manual grouping by `thread_id` metadata). `Threads.Query()` takes `ProjectID`, `MinStartTime`, `MaxStartTime` (both optional, defaulting to a 1-day window ending now), `Filter`, `PageSize`, `Cursor`.
 
-#### cURL
+**cURL**
+
 `POST /api/v2/threads/query` body fields: `project_id`, `min_start_time` (optional), `max_start_time` (optional), `filter`, `page_size`, `cursor` (all `snake_case`). `min_start_time`/`max_start_time` default to a 1-day window ending now when omitted.
 
 #### Response fields
 
-#### Python
+**Python**
+
 Python's legacy `ListThreadsItem` only has `thread_id`, `runs` (full embedded `Run[]`), `count`, `min_start_time`, `max_start_time`. It has no token/cost/latency/feedback fields at all.
 
 The new `Thread` never embeds the full run list (that is what `threads.list_traces` is for) but adds real `feedback_stats`, `latency_p50`/`latency_p99`, cost/token sums with per-category `_details`, `first_trace_id`/`last_trace_id`, `first_inputs`/`last_outputs` previews, `last_error`, `num_errored_turns`.
@@ -114,7 +130,8 @@ The new `Thread` never embeds the full run list (that is what `threads.list_trac
 | *(not available)* | `total_token_details`, `total_cost_details` | New: per-category dicts, unlike `threads.list_traces` these are not wrapped in `.raw` |
 | *(not available)* | `feedback_stats` | New |
 
-#### TypeScript
+**TypeScript**
+
 | Before (legacy `ListThreadsItem`) | After (new `Thread`) | Notes |
 | - | - | - |
 | `thread_id` | `thread_id` | Unchanged |
@@ -134,7 +151,8 @@ The new `Thread` never embeds the full run list (that is what `threads.list_trac
 | *(not available)* | `num_errored_turns` | New |
 | *(not available)* | `total_token_details`, `total_cost_details` | New: per-category dicts, unlike `threads.listTraces` these are not wrapped in `.raw` |
 
-#### Java
+**Java**
+
 `Thread` has 19 fields: `threadId`, `count`, `feedbackStats`, `firstInputs`, `firstTraceId`, `lastError`, `lastOutputs`, `lastTraceId`, `latencyP50`, `latencyP99`, `maxStartTime`, `minStartTime`, `numErroredTurns`, `startTime`, `totalCost`, `totalCostDetails`, `totalTokenDetails`, `totalTokens`, `traceId` (all `Optional`).
 
 The legacy SDK never had a typed response for this. Java's closest equivalent grouped raw `runs().query()` results by the `thread_id` metadata client-side. Every field below is new.
@@ -153,7 +171,8 @@ The legacy SDK never had a typed response for this. Java's closest equivalent gr
 | `totalTokenDetails()`, `totalCostDetails()` | Per-category maps |
 | `feedbackStats()` | |
 
-#### Go
+**Go**
+
 `Thread` has 19 fields, in `PascalCase` Go struct form (e.g. `ThreadID`, `Count`, `LatencyP50`).
 
 The legacy SDK never had a typed response for this. Go's closest equivalent grouped raw `Runs.Query()` results by the `thread_id` metadata client-side. Every field below is new.
@@ -172,7 +191,8 @@ The legacy SDK never had a typed response for this. Go's closest equivalent grou
 | `TotalTokenDetails`, `TotalCostDetails` | Per-category maps |
 | `FeedbackStats` | |
 
-#### cURL
+**cURL**
+
 JSON response fields use `snake_case`: `thread_id`, `count`, `feedback_stats`, `first_inputs`, `first_trace_id`, `last_error`, `last_outputs`, `last_trace_id`, `latency_p50`, `latency_p99`, `max_start_time`, `min_start_time`, `num_errored_turns`, `start_time`, `total_cost`, `total_cost_details`, `total_token_details`, `total_tokens`, `trace_id`.
 
 The legacy API never had a dedicated threads endpoint. The closest equivalent was `POST /api/v1/runs/query`, grouped client-side by the `thread_id` metadata. Every field below is new.
@@ -197,8 +217,10 @@ The legacy API never had a dedicated threads endpoint. The closest equivalent wa
 
 Fetch every thread with activity in a project during a time range.
 
-#### Python
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -210,7 +232,8 @@ for thread in threads:
     print(thread["thread_id"], thread["count"])
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -232,8 +255,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-#### Before
+**TypeScript**
+
+**Before**
+
 **Before**
 
 ```ts
@@ -246,7 +271,8 @@ for (const thread of threads) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -263,8 +289,10 @@ for await (const thread of client.threads.query({
 }
 ```
 
-#### Java
-#### Before
+**Java**
+
+**Before**
+
 **Before**
 
 ```kotlin
@@ -292,7 +320,8 @@ for (run in rootRuns) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -321,8 +350,10 @@ for (thread in threads) {
 }
 ```
 
-#### Go
-#### Before
+**Go**
+
+**Before**
+
 **Before**
 
 ```go
@@ -373,7 +404,8 @@ func main() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -418,8 +450,10 @@ func main() {
 }
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -434,7 +468,8 @@ curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
     })'
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -455,8 +490,10 @@ curl -X POST "https://api.smith.langchain.com/api/v2/threads/query" \
 
 Find threads that had a turn end in an error.
 
-#### Python
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -468,7 +505,8 @@ for thread in threads:
     print(thread["thread_id"])
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -491,8 +529,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-#### Before
+**TypeScript**
+
+**Before**
+
 **Before**
 
 ```ts
@@ -508,7 +548,8 @@ for (const thread of threads) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -526,8 +567,10 @@ for await (const thread of client.threads.query({
 }
 ```
 
-#### Java
-#### Before
+**Java**
+
+**Before**
+
 **Before**
 
 ```kotlin
@@ -555,7 +598,8 @@ for (run in rootRuns) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -586,8 +630,10 @@ for (thread in threads) {
 }
 ```
 
-#### Go
-#### Before
+**Go**
+
+**Before**
+
 **Before**
 
 ```go
@@ -638,7 +684,8 @@ func main() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -684,8 +731,10 @@ func main() {
 }
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -697,7 +746,8 @@ curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   | jq -r '[(.runs // [])[].extra.metadata.thread_id] | unique | .[]'
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -723,25 +773,31 @@ Retrieve all traces belonging to a specific thread within a project.
 
 #### Method name
 
-#### Python
+**Python**
+
 | Before | After |
 | - | - |
 | `client.read_thread()` | `client.threads.list_traces()` |
 
 > [!NOTE]
+>
 > `client.threads.list_traces()` is now async. Call it with `await`.
 
 See the [reference](https://reference.langchain.com/python/langsmith/_openapi_client/resources/threads/ThreadsResource/list_traces) for the full parameter and field list.
 
-#### TypeScript
+**TypeScript**
+
 | Before | After |
 | - | - |
 | `client.readThread()` | `client.threads.listTraces()` |
 
 See the [reference](https://reference.langchain.com/javascript/langsmith/_openapi_client/Langsmith/Threads/listTraces) for the full parameter and field list.
 
-#### Java
-Java never had a dedicated per-thread method. The closest legacy equivalent is the generic run query filtered by the `thread_id` metadata convention.
+**Java**
+
+> [!NOTE]
+>
+> Java never had a dedicated per-thread method. The closest legacy equivalent is the generic run query filtered by the `thread_id` metadata convention.
 
 | Before | After |
 | - | - |
@@ -749,8 +805,11 @@ Java never had a dedicated per-thread method. The closest legacy equivalent is t
 
 See the [reference](https://javadoc.io/doc/com.langchain.smith/langsmith-java/latest/com/langchain/smith/services/blocking/ThreadService.html) for the full parameter list.
 
-#### Go
-Go never had a dedicated per-thread method. The closest legacy equivalent is the generic run query filtered by the `thread_id` metadata convention.
+**Go**
+
+> [!NOTE]
+>
+> Go never had a dedicated per-thread method. The closest legacy equivalent is the generic run query filtered by the `thread_id` metadata convention.
 
 | Before | After |
 | - | - |
@@ -758,7 +817,8 @@ Go never had a dedicated per-thread method. The closest legacy equivalent is the
 
 See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#ThreadService.ListTracesAutoPaging) for the full parameter list.
 
-#### cURL
+**cURL**
+
 | Before | After |
 | - | - |
 | `POST /api/v1/runs/query` (`filter=eq(thread_id, ...)`) | `GET /api/v2/threads/{thread_id}/traces` |
@@ -767,7 +827,8 @@ See the [API doc](smith-api/threads/query-thread-traces.md) for the full paramet
 
 #### Query parameters
 
-#### Python
+**Python**
+
 `read_thread`'s `is_root` has no new equivalent. `list_traces` always returns traces (root runs) only, matching its name. `read_thread`'s `order` (asc/desc) also has no new equivalent: results are always sorted by `start_time` ascending, a fixed server-side order.
 
 | Before (`read_thread`) | After (`list_traces`) | Notes |
@@ -780,7 +841,8 @@ See the [API doc](smith-api/threads/query-thread-traces.md) for the full paramet
 | `select` (arbitrary run field list) | `selects` | The new method uses `ThreadTraceSelectField`, a 24-value uppercase enum |
 | *(not available)* | `page_size` + `cursor` | The new method adds cursor pagination |
 
-#### TypeScript
+**TypeScript**
+
 `readThread`'s `isRoot` has no new equivalent. `listTraces` always returns traces (root runs) only, matching its name. `readThread`'s `order` (asc/desc) also has no new equivalent: results are always sorted by `start_time` ascending, a fixed server-side order.
 
 | Before (`readThread`) | After (`listTraces`) | Notes |
@@ -793,18 +855,22 @@ See the [API doc](smith-api/threads/query-thread-traces.md) for the full paramet
 | `select` (arbitrary run field list) | `selects` | The new method uses a 24-value uppercase enum |
 | *(not available)* | `page_size` + `cursor` | The new method adds cursor pagination |
 
-#### Java
+**Java**
+
 No query parameters to map. There was no dedicated method. `listTraces(threadId, params)` takes `projectId`, `filter`, `pageSize`, `cursor`, `selects` (24-value enum). Results are always sorted by `startTime` ascending, a fixed server-side order.
 
-#### Go
+**Go**
+
 No query parameters to map. There was no dedicated method. `ListTraces(ctx, threadID, params)` takes `ProjectID`, `Filter`, `PageSize`, `Cursor`, `Selects` (24-value enum). Results are always sorted by `StartTime` ascending, a fixed server-side order.
 
-#### cURL
+**cURL**
+
 `GET /api/v2/threads/{thread_id}/traces` query params: `project_id`, `filter`, `page_size`, `cursor`, `selects` (repeatable), all `snake_case`. Results are always sorted by `start_time` ascending, a fixed server-side order.
 
 #### Response fields
 
-#### Python
+**Python**
+
 The legacy `read_thread` returns full `Run` objects (a generator). The new `ThreadTrace` is lightweight: preview fields (`inputs_preview`/`outputs_preview`) instead of full `inputs`/`outputs`, no embedded child runs. `selects` controls what's populated, the same as `traces.query`.
 
 | Before (legacy `Run` field, via `read_thread`) | After (new `ThreadTrace` field) | Notes |
@@ -827,7 +893,8 @@ The legacy `read_thread` returns full `Run` objects (a generator). The new `Thre
 | *(not available)* | `thread_id` | New: the thread UUID this trace belongs to |
 | `child_runs`, `child_run_ids` | *(not available)* | No embedded child runs; use `traces.list_runs` for descendant runs |
 
-#### TypeScript
+**TypeScript**
+
 The legacy `readThread` returns full `Run` objects (an async generator). The new `ThreadTrace` is lightweight: preview fields (`inputs_preview`/`outputs_preview`) instead of full `inputs`/`outputs`, no embedded child runs. `selects` controls what is populated, the same as `traces.query`.
 
 | Before (legacy `Run` field, via `readThread`) | After (new `ThreadTrace` field) | Notes |
@@ -850,7 +917,8 @@ The legacy `readThread` returns full `Run` objects (an async generator). The new
 | *(not available)* | `thread_id` | New: the thread UUID this trace belongs to |
 | `child_runs`, `child_run_ids` | *(not available)* | No embedded child runs; use `traces.listRuns` for descendant runs |
 
-#### Java
+**Java**
+
 `ThreadTrace` has 24 `Optional` fields: `traceId`, `threadId`, `name`, `startTime`, `endTime`, `latency`, `op`, token/cost fields with per-category `_details`, `inputsPreview`/`outputsPreview`/`inputs`/`outputs`, `errorPreview`/`error`, `firstTokenTime`.
 
 | Before (legacy `RunSchema` method) | After (new `ThreadTrace` method) | Notes |
@@ -873,7 +941,8 @@ The legacy `readThread` returns full `Run` objects (an async generator). The new
 | *(not available)* | `threadId()` | New: the thread UUID this trace belongs to |
 | `childRuns()`, `childRunIds()` | *(not available)* | No embedded child runs; use `traces().listRuns()` for descendant runs |
 
-#### Go
+**Go**
+
 `ThreadTrace` has 24 fields, in `PascalCase` Go struct form.
 
 | Before (legacy root `Run` field) | After (new `ThreadTrace` field) | Notes |
@@ -896,7 +965,8 @@ The legacy `readThread` returns full `Run` objects (an async generator). The new
 | *(not available)* | `ThreadID` | New: the thread UUID this trace belongs to |
 | `ChildRuns`, `ChildRunIDs` | *(not available)* | No embedded child runs; use `Traces.ListRuns` for descendant runs |
 
-#### cURL
+**cURL**
+
 JSON response fields use `snake_case`, matching the table below.
 
 | Before (legacy root run field) | After (new `ThreadTrace` field) | Notes |
@@ -925,8 +995,10 @@ JSON response fields use `snake_case`, matching the table below.
 
 Fetch all the traces (conversation turns) that belong to one thread.
 
-#### Python
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -938,7 +1010,8 @@ for run in client.read_thread(thread_id=thread_id, project_name="default"):
     print(run.id, run.start_time)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -958,8 +1031,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-#### Before
+**TypeScript**
+
+**Before**
+
 **Before**
 
 ```ts
@@ -972,7 +1047,8 @@ for await (const run of client.readThread({ threadId, projectName: "default" }))
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -989,8 +1065,10 @@ for await (const trace of client.threads.listTraces(threadId, {
 }
 ```
 
-#### Java
-#### Before
+**Java**
+
+**Before**
+
 **Before**
 
 ```kotlin
@@ -1020,7 +1098,8 @@ for (run in runs) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1051,8 +1130,10 @@ for (trace in traces) {
 }
 ```
 
-#### Go
-#### Before
+**Go**
+
+**Before**
+
 **Before**
 
 ```go
@@ -1094,7 +1175,8 @@ func main() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1136,8 +1218,10 @@ func main() {
 }
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1150,7 +1234,8 @@ curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   | jq '.runs // []'
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1167,8 +1252,10 @@ curl -G "https://api.smith.langchain.com/api/v2/threads/$THREAD_ID/traces" \
 
 Request just the fields you need instead of every field, to reduce response size.
 
-#### Python
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -1184,7 +1271,8 @@ for run in client.read_thread(
     print(run.id, run.total_tokens, run.total_cost)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1206,8 +1294,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-#### Before
+**TypeScript**
+
+**Before**
+
 **Before**
 
 ```ts
@@ -1224,7 +1314,8 @@ for await (const run of client.readThread({
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1241,10 +1332,14 @@ for await (const trace of client.threads.listTraces(threadId, {
 }
 ```
 
-#### Java
-The Before example omits `total_cost` here. Selecting it on the legacy `RunSchema` type triggers a known deserialization bug in the current Java binding (it expects a string, the API returns a number).
+**Java**
 
-#### Before
+> [!NOTE]
+>
+> The Before example omits `total_cost` here. Selecting it on the legacy `RunSchema` type triggers a known deserialization bug in the current Java binding (it expects a string, the API returns a number).
+
+**Before**
+
 **Before**
 
 ```kotlin
@@ -1280,7 +1375,8 @@ for (run in runs) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1313,8 +1409,10 @@ for (trace in traces) {
 }
 ```
 
-#### Go
-#### Before
+**Go**
+
+**Before**
+
 **Before**
 
 ```go
@@ -1361,7 +1459,8 @@ func main() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1407,8 +1506,10 @@ func main() {
 }
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1421,7 +1522,8 @@ curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   | jq '.runs // []'
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1443,8 +1545,6 @@ curl -G "https://api.smith.langchain.com/api/v2/threads/$THREAD_ID/traces" \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

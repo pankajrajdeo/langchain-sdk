@@ -23,10 +23,10 @@ max_marginal_relevance_search_by_vector(
     lambda_mult: float = 0.5,
     *,
     filter: Callable[[Document], bool] | None = None,
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> list[Document]
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/vectorstores/in_memory.py#L418)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/vectorstores/in_memory.py#L418)

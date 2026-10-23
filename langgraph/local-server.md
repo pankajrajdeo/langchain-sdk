@@ -41,6 +41,7 @@ langgraph new path/to/your/app --template new-langgraph-project-python
 ```
 
 > [!TIP]
+>
 > **Additional templates**
 > If you use `langgraph new` without specifying a template, you will be presented with an interactive menu that will allow you to choose from a list of available templates.
 
@@ -113,20 +114,18 @@ For an Agent Server running on a custom host/port, update the `baseUrl` query pa
 https://smith.langchain.com/studio/?baseUrl=http://myhost:3000
 ```
 
-<details>
-<summary>Safari compatibility</summary>
-
-Use the `--tunnel` flag with your command to create a secure tunnel, as Safari has limitations when connecting to localhost servers:
-
+> **Safari compatibility**
+>
+> Use the `--tunnel` flag with your command to create a secure tunnel, as Safari has limitations when connecting to localhost servers:
+>
 ```shell
-langgraph dev --tunnel
+> langgraph dev --tunnel
 ```
-
-</details>
 
 ## 7. Test the API
 
-#### Python SDK (async)
+**Python SDK (async)**
+
 1. Install the LangGraph Python SDK:
 ```shell
    pip install langgraph-sdk
@@ -156,7 +155,8 @@ langgraph dev --tunnel
    asyncio.run(main())
 ```
 
-#### Python SDK (sync)
+**Python SDK (sync)**
+
 1. Install the LangGraph Python SDK:
 ```shell
    pip install langgraph-sdk
@@ -183,7 +183,8 @@ langgraph dev --tunnel
        print("\n\n")
 ```
 
-#### Rest API
+**Rest API**
+
 ```bash
 curl -s --request POST \
     --url "http://localhost:2024/runs/stream" \
@@ -214,8 +215,6 @@ Now that you have a LangGraph app running locally, take your journey further by 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/local-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/local-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

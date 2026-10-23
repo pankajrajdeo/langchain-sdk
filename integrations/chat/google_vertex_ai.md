@@ -11,6 +11,7 @@ tags: [docs, integrations, chat, google_vertex_ai]
 > Integrate with the ChatVertexAI chat model using LangChain Python.
 
 > [!CAUTION]
+>
 > **Deprecated**
 >
 > This integration is deprecated and will be removed in a future release. Please use [`ChatGoogleGenerativeAI`](google_generative_ai.md) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
@@ -18,11 +19,13 @@ tags: [docs, integrations, chat, google_vertex_ai]
 Gemini Enterprise Agent Platform exposes all foundational models available in Google Cloud, like `gemini-3.1-pro-preview`, `gemini-3.7-flash`, etc. For a full and updated list of available models visit [Gemini Enterprise Agent Platform documentation](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models).
 
 > [!NOTE]
+>
 > **Gemini Enterprise Agent Platform vs. Gemini API**
 >
 > The Gemini Enterprise Agent Platform integration is separate from the [Google Gemini API](google_generative_ai.md). This page showcases an enterprise version of Gemini through Google Cloud Platform (GCP).
 
 > [!TIP]
+>
 > **API Reference**
 >
 > For detailed documentation of all features and configuration options, head to the [`ChatVertexAI`](https://reference.langchain.com/python/langchain-google-vertexai/chat_models/ChatVertexAI) API reference.
@@ -31,7 +34,7 @@ Gemini Enterprise Agent Platform exposes all foundational models available in Go
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/google_vertex_ai) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/chat/google_vertex_ai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatVertexAI`](https://reference.langchain.com/python/langchain-google-vertexai/chat_models/ChatVertexAI) | [`langchain-google-vertexai`](https://reference.langchain.com/python/langchain-google-vertexai/) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-google-vertexai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-google-vertexai?style=flat-square\&label=%20) |
 
@@ -56,7 +59,7 @@ This codebase uses the `google.auth` library which first looks for the applicati
 
 For more information, see the `google.auth` [API reference](https://googleapis.dev/python/google-auth/latest/reference/google.auth.html#module-google.auth).
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -121,6 +124,7 @@ Gemini supports a range of tools that are executed server-side.
 ### Google search
 
 > [!NOTE]
+>
 > **Requires `langchain-google-vertexai>=2.0.11`**
 
 Gemini can execute a Google search and use the results to [ground its responses](https://ai.google.dev/gemini-api/docs/grounding):
@@ -136,6 +140,7 @@ response = llm.invoke("What is today's news?")
 ### Code execution
 
 > [!NOTE]
+>
 > **Requires `langchain-google-vertexai>=2.0.25`**
 
 Gemini can [generate and execute Python code](https://ai.google.dev/gemini-api/docs/code-execution):
@@ -156,8 +161,6 @@ For detailed documentation of all features and configuration options, head to th
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

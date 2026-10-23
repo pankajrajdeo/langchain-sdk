@@ -18,13 +18,19 @@ This page covers:
 * [Rate limits](#rate-limits): per-tenant limits and best practices for staying within them.
 
 > [!NOTE]
+>
 > If you are looking to export a large volume of traces, we recommend that you use the [Bulk Data Export](data-export.md) functionality, as it will better handle large data volumes and will support automatic retries and parallelization across partitions.
+
+> [!NOTE]
+>
+> To query the traces of an agent, an experiment, or the evaluators, [find its project ID](resolve-an-agent.md) and pass it as the project ID.
 
 ## Use filter arguments
 
 For simple queries, you don't have to rely on our query syntax. You can use the filter arguments specified in the [filter arguments reference](trace-query-syntax.md#filter-arguments).
 
 > [!WARNING]
+>
 > **Prerequisites**
 >
 > Initialize the client before running the below code snippets.
@@ -195,6 +201,7 @@ RunQueryParams noErrorRuns = RunQueryParams.builder()
 ### List runs by run ID
 
 > [!WARNING]
+>
 > **Ignores Other Arguments**
 >
 > If you provide a list of run IDs in the way described above, it will ignore all other filtering arguments like `project_name`, `run_type`, etc. and directly return the runs matching the given IDs.
@@ -274,6 +281,7 @@ RunQueryParams runIdRun = RunQueryParams.builder()
 ```
 
 > [!TIP]
+>
 > **Replay traces locally with LangGraph**
 >
 > If you're using LangGraph with checkpointing, you can fetch a trace from LangSmith and replay it locally for debugging. See [LangGraph's time travel and replay documentation](../langgraph/use-time-travel.md) for details on resuming execution from checkpoints.
@@ -1161,35 +1169,10 @@ df.head()
 
 ## Rate limits
 
-The [`POST /runs/query`](smith-api/run/query-runs.md) endpoint ([`list_runs`](https://reference.langchain.com/python/langsmith/client/Client/list_runs) in Python, [`listRuns`](https://reference.langchain.com/javascript/langsmith/client/Client/listRuns) in JavaScript) has per-tenant rate limits that vary based on query parameters:
-
-| **Query type** | **Limit** | **Window** |
-| - | - | - |
-| Short time window (≤ 7 days) | 10 requests | 10 seconds |
-| Large time window (> 7 days) | 3 requests | 10 seconds |
-| Full-text search, short time window (≤ 7 days) | 3 requests | 10 seconds |
-| Full-text search, large time window (> 7 days) | 1 request | 10 seconds |
-| Select `child_run_ids`, short time window (≤ 7 days) | 3 requests | 10 seconds |
-| Select `child_run_ids`, large time window (> 7 days) | 1 request | 10 seconds |
-
-The time window is determined by `end_time - start_time`. If `end_time` is not provided, LangSmith will use the current time. Queries without a `start_time` are treated as large time window queries.
-
-### Best practices
-
-To avoid hitting rate limits and reduce query time, especially for runs with large inputs/outputs:
-
-* **Set `start_time`**: omitting it triggers the large time window rate limit tier (3 requests per 10 seconds instead of 10). Use a window of 7 days or less when possible.
-* **Use `select`**: by default all fields are returned. Specifying only the fields you need (e.g., `select=["inputs", "outputs"]`) substantially reduces response size and query time, especially for runs with large inputs/outputs.
-* **Set `limit`**: cap the number of results if you don't need to paginate through everything.
-* **Avoid full-text search**: `filter='search("...")'` has the strictest rate limits; use structured filters (e.g., `eq()`, `has()`) when possible.
-* **Avoid selecting `child_run_ids`**: this also triggers a stricter rate limit tier.
-
-When you exceed these limits, the API returns a `429 Too Many Requests` response. For general rate limit information, refer to [Administration overview](usage-and-billing.md#rate-limits).
+The [`POST /runs/query`](smith-api/run/query-runs.md) endpoint has per-tenant rate limits based on query parameters. See [Run query endpoint rate limits](usage-and-billing.md#run-query-endpoint) for the full table and best practices.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/export-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/export-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

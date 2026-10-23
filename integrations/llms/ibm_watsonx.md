@@ -18,7 +18,7 @@ This example shows how to communicate with `watsonx.ai` models using `LangChain`
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/llms/ibm/) | Downloads | Version |
+| Class | Package | Local | Serializable | [JS support](../../javascript/integrations/llms/ibm.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`WatsonxLLM`](https://reference.langchain.com/python/langchain-ibm/WatsonxLLM) | [`langchain-ibm`](https://reference.langchain.com/python/langchain-ibm) | ❌ | ❌ | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ibm?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ibm?style=flat-square\&label=%20) |
 
@@ -227,8 +227,6 @@ For detailed documentation of all `WatsonxLLM` features and configurations head 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -14,7 +14,7 @@ Sandboxes are isolated environments that allow agents to safely execute potentia
 
 From the [LangSmith homepage](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-sandboxes), select **Sandboxes** to manage all your sandbox resources.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/5nd3ca6haxRbnJZj/images/langsmith/sandboxes/sb-overview.png?fit=max&auto=format&n=5nd3ca6haxRbnJZj&q=85&s=6c2848ea69c0a99cbdd0930ceb91daa5" alt="Sandboxes overview page" width="2846" height="1936" data-path="images/langsmith/sandboxes/sb-overview.png" />
+![Sandboxes overview page](https://mintcdn.com/langchain-5e9cc07a/5nd3ca6haxRbnJZj/images/langsmith/sandboxes/sb-overview.png?fit=max\&auto=format\&n=5nd3ca6haxRbnJZj\&q=85\&s=6c2848ea69c0a99cbdd0930ceb91daa5)
 
 ## Environment availability
 
@@ -27,9 +27,10 @@ From the [LangSmith homepage](https://smith.langchain.com?utm_source=docs\&utm_m
 | [BYOC](byoc.md) (your data plane URL) | Generally available |
 
 > [!WARNING]
+>
 > On BYOC, use an API key that belongs to a BYOC workspace.
 
-For self-hosted LangSmith deployments, see [Enable Sandboxes on self-hosted deployments](deploy-self-hosted-full-platform.md#enable-sandboxes).
+For self-hosted LangSmith deployments, see [Enable Sandboxes on self-hosted deployments](enable-self-hosted-sandboxes.md). For the infrastructure model, scaling, and upgrades, see [Self-hosted Sandbox architecture](self-host-sandbox-architecture.md).
 
 ## Network access
 
@@ -45,10 +46,10 @@ If you need unrestricted egress, [file a support ticket](https://support.langcha
 
 ```bash
 # uv
-uv add "langsmith[sandbox]"
+uv add langsmith
 
 # pip
-pip install "langsmith[sandbox]"
+pip install langsmith
 ```
 
 **TypeScript**
@@ -90,6 +91,7 @@ await sandbox.delete();
 ```
 
 > [!TIP]
+>
 > Prefer the command line? The [Sandbox CLI](sandbox-cli.md) lets you create sandboxes, run commands, and open interactive shells without writing any code.
 
 ### 4. Use sandboxes with your agents
@@ -102,37 +104,44 @@ To wire sandboxes into agent code, see the Open Source docs:
 
 ## Resources
 
-#### [Snapshots](sandbox-snapshots.md)
-Build filesystem images from Docker images or capture a running sandbox, then boot sandboxes from them.
+> **[Snapshots](sandbox-snapshots.md)**
+>
+> Build filesystem images from Docker images or capture a running sandbox, then boot sandboxes from them.
 
-#### [Service URLs](sandbox-service-urls.md)
-Access HTTP services running inside sandboxes via authenticated URLs.
+> **[Service URLs](sandbox-service-urls.md)**
+>
+> Access HTTP services running inside sandboxes via authenticated URLs.
 
-#### [Auth proxy](sandbox-auth-proxy.md)
-Inject credentials into outbound API requests without hardcoding secrets.
+> **[Auth proxy](sandbox-auth-proxy.md)**
+>
+> Inject credentials into outbound API requests without hardcoding secrets.
 
-#### [Mounts](sandbox-mounts.md)
-Attach S3 buckets, GCS buckets, and public Git repositories to a sandbox filesystem.
+> **[Mounts](sandbox-mounts.md)**
+>
+> Attach S3 buckets, GCS buckets, and public Git repositories to a sandbox filesystem.
 
-#### [Permissions](sandbox-permissions.md)
-Control which workspace members can interact with a sandbox after it is created.
+> **[Permissions](sandbox-permissions.md)**
+>
+> Control which workspace members can interact with a sandbox after it is created.
 
-#### [CLI](sandbox-cli.md)
-Build snapshots, manage sandboxes, open consoles, and tunnel TCP ports from the command line.
+> **[CLI](sandbox-cli.md)**
+>
+> Build snapshots, manage sandboxes, open consoles, and tunnel TCP ports from the command line.
 
-#### [SDK usage](sandbox-sdk.md)
-Create and manage sandboxes programmatically with the Python or TypeScript SDK.
+> **[SDK usage](sandbox-sdk.md)**
+>
+> Create and manage sandboxes programmatically with the Python or TypeScript SDK.
 
-#### [Self-hosted setup](deploy-self-hosted-full-platform.md#enable-sandboxes)
-Enable Sandboxes on self-hosted LangSmith deployments with Helm or Terraform.
+> **[Self-hosted setup](enable-self-hosted-sandboxes.md)**
+>
+> Enable Sandboxes on self-hosted LangSmith deployments with Helm or Terraform.
 
-#### [Harbor](harbor-integrations.md#sandboxes)
-Run Harbor evaluations and rollouts on LangSmith sandboxes.
+> **[Harbor](harbor-integrations.md#sandboxes)**
+>
+> Run Harbor evaluations and rollouts on LangSmith sandboxes.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

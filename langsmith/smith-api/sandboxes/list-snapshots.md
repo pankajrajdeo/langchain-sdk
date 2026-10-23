@@ -164,6 +164,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -172,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/sandboxes/snapshots:
     get:
@@ -366,6 +369,21 @@ components:
           type: string
         image_digest:
           type: string
+        included:
+          description: >-
+            The settings this snapshot carries, in include terms: sandboxes
+            created from it start with each one their create request leaves
+            unset. Env var values are never returned.
+          type: array
+          items:
+            type: string
+            enum:
+              - mounts
+              - proxy_config
+              - env_vars
+              - resources
+              - lifecycle
+              - labels
         labels:
           $ref: '#/components/schemas/sandboxes.Labels'
         memory_snapshot_size_bytes:
@@ -377,8 +395,24 @@ components:
 
             snapshot can warm-restore from memory; nil means rootfs only.
           type: integer
+        mount_config:
+          description: >-
+            The mount_config sandboxes created from this snapshot start with
+            when their create request has none, with secret values redacted.
+            Present only on snapshots captured with include "mounts" or "all"
+            from a sandbox that had mounts.
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.SandboxMountConfig'
         name:
           type: string
+        proxy_config:
+          description: >-
+            The proxy_config sandboxes created from this snapshot start with
+            when their create request has none, with secret values redacted.
+            Present only on snapshots captured with include "proxy_config" or
+            "all".
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.ProxyConfig'
         registry_id:
           type: string
         run_config:
@@ -410,6 +444,39 @@ components:
       type: object
       additionalProperties:
         type: string
+    sandboxes.SandboxMountConfig:
+      type: object
+      properties:
+        auth:
+          $ref: '#/components/schemas/sandboxes.SandboxMountAuthConfig'
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxapi.MountSpec'
+    sandboxes.ProxyConfig:
+      type: object
+      properties:
+        access_control:
+          $ref: '#/components/schemas/sandboxes.AccessControl'
+        callbacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.Callback'
+        description:
+          description: >-
+            Description says what this configuration as a whole lets the sandbox
+            reach, complementing the per-rule descriptions. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
+        no_proxy:
+          items:
+            type: string
+          type: array
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.ProxyRule'
     sandboxapi.RunConfig:
       type: object
       properties:
@@ -420,6 +487,1015 @@ components:
         user:
           type: string
         work_dir:
+          type: string
+    sandboxes.SandboxMountAuthConfig:
+      type: object
+      properties:
+        aws:
+          $ref: '#/components/schemas/sandboxes.SandboxAWSMountAuthConfig'
+        azure:
+          $ref: '#/components/schemas/sandboxes.SandboxAzureMountAuthConfig'
+        gcp:
+          $ref: '#/components/schemas/sandboxes.SandboxGCPMountAuthConfig'
+    sandboxapi.MountSpec:
+      type: object
+      required:
+        - id
+        - mount_path
+        - type
+      properties:
+        azure_blob:
+          $ref: '#/components/schemas/sandboxapi.AzureBlobMountSpec'
+        cache:
+          $ref: '#/components/schemas/sandboxapi.MountCacheSpec'
+        contexthub:
+          $ref: '#/components/schemas/sandboxapi.ContextHubMountSpec'
+        encryption:
+          $ref: '#/components/schemas/sandboxapi.MountEncryptionSpec'
+        gcs:
+          $ref: '#/components/schemas/sandboxapi.GCSMountSpec'
+        git:
+          $ref: '#/components/schemas/sandboxapi.GitMountSpec'
+        id:
+          type: string
+          maxLength: 64
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        s3:
+          $ref: '#/components/schemas/sandboxapi.S3MountSpec'
+        type:
+          enum:
+            - s3
+            - gcs
+            - azure_blob
+            - git
+            - contexthub
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.MountKind'
+      discriminator:
+        mapping:
+          s3: '#/components/schemas/sandboxapi.S3BucketMountSpec'
+          gcs: '#/components/schemas/sandboxapi.GCSBucketMountSpec'
+          git: '#/components/schemas/sandboxapi.GitRepoMountSpec'
+          contexthub: '#/components/schemas/sandboxapi.ContextHubRepoMountSpec'
+          azure_blob: '#/components/schemas/sandboxapi.AzureBlobContainerMountSpec'
+        propertyName: type
+      oneOf:
+        - $ref: '#/components/schemas/sandboxapi.S3BucketMountSpec'
+        - $ref: '#/components/schemas/sandboxapi.GCSBucketMountSpec'
+        - $ref: '#/components/schemas/sandboxapi.GitRepoMountSpec'
+        - $ref: '#/components/schemas/sandboxapi.ContextHubRepoMountSpec'
+        - $ref: '#/components/schemas/sandboxapi.AzureBlobContainerMountSpec'
+    sandboxes.AccessControl:
+      type: object
+      properties:
+        allow_list:
+          items:
+            type: string
+          type: array
+        deny_list:
+          items:
+            type: string
+          type: array
+    sandboxes.Callback:
+      type: object
+      required:
+        - match_hosts
+        - ttl_seconds
+        - url
+      properties:
+        full_request:
+          type: boolean
+        match_hosts:
+          type: array
+          minItems: 1
+          items:
+            type: string
+        request_headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.ProxyHeader'
+        ttl_seconds:
+          type: integer
+          maximum: 3600
+          minimum: 60
+        url:
+          type: string
+    sandboxes.ProxyRule:
+      type: object
+      required:
+        - name
+      properties:
+        aws:
+          $ref: '#/components/schemas/sandboxes.ProxyAWSConfig'
+        azure:
+          $ref: '#/components/schemas/sandboxes.ProxyAzureConfig'
+        description:
+          description: >-
+            Description says what this rule lets the sandbox reach, so an agent
+            driving the sandbox can be told its capabilities. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
+        enabled:
+          type: boolean
+        env_vars:
+          description: >-
+            EnvVars are plaintext env vars set for every command in the sandbox
+            while this rule is enabled. Use them for tools that refuse to run
+            unless a credential env var is present (e.g. gh needs GH_TOKEN) even
+            though this rule injects the real credential on the wire — set a
+            dummy value here so the command starts. Explicit per-sandbox
+            env_vars win over these, and provider-managed (AWS/GCP) vars win
+            over both.
+          type: object
+          additionalProperties:
+            type: string
+        gcp:
+          $ref: '#/components/schemas/sandboxes.ProxyGCPConfig'
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.ProxyHeader'
+        match_headers:
+          description: >-
+            MatchHeaders restricts a header injection rule to requests carrying
+            every listed header, each written "name: value" with a lowercase
+            name and an exact value. Pair with headers of the same name to swap
+            a placeholder the sandbox sends (e.g. "authorization: Bearer
+            account-b") for a real credential, so one host can serve several
+            accounts. Rules are evaluated in order and the first match wins.
+          type: array
+          items:
+            type: string
+        match_hosts:
+          description: >-
+            MatchHosts is only accepted for header injection rules. Provider
+            auth
+
+            rules use built-in host matching.
+          type: array
+          items:
+            type: string
+        match_paths:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        type:
+          type: string
+    sandboxes.SandboxAWSMountAuthConfig:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/sandboxes.SandboxAWSMountRoleAuthConfig'
+        - $ref: '#/components/schemas/sandboxes.SandboxAWSMountStaticAuthConfig'
+    sandboxes.SandboxAzureMountAuthConfig:
+      type: object
+      oneOf:
+        - $ref: >-
+            #/components/schemas/sandboxes.SandboxAzureMountWorkloadIdentityAuthConfig
+        - $ref: '#/components/schemas/sandboxes.SandboxAzureMountAccountKeyAuthConfig'
+        - $ref: '#/components/schemas/sandboxes.SandboxAzureMountSASAuthConfig'
+    sandboxes.SandboxGCPMountAuthConfig:
+      type: object
+      oneOf:
+        - $ref: >-
+            #/components/schemas/sandboxes.SandboxGCPMountWorkloadIdentityAuthConfig
+        - $ref: >-
+            #/components/schemas/sandboxes.SandboxGCPMountServiceAccountAuthConfig
+    sandboxapi.AzureBlobMountSpec:
+      type: object
+      required:
+        - container
+        - storage_account
+      properties:
+        container:
+          type: string
+        prefix:
+          type: string
+        storage_account:
+          description: >-
+            StorageAccount is the storage account name: 3 to 24 lowercase
+            letters and digits.
+          type: string
+          maxLength: 24
+          minLength: 3
+          pattern: ^[a-z0-9]+$
+    sandboxapi.MountCacheSpec:
+      type: object
+      properties:
+        max_size_bytes:
+          type: integer
+          minimum: 0
+        writeback_seconds:
+          type: integer
+          minimum: 0
+    sandboxapi.ContextHubMountSpec:
+      type: object
+      required:
+        - repo
+      properties:
+        initial_pull_only:
+          description: >-
+            InitialPullOnly syncs the repo once at startup instead of polling
+            for
+
+            updates for the sandbox's lifetime.
+          type: boolean
+        repo:
+          description: |-
+            Repo is the Context Hub repository to sync, as "owner/repo"
+            (e.g. "-/my-agent", where "-" is the current workspace). The repo's
+            latest commit tree is mirrored into the mount path.
+          type: string
+    sandboxapi.MountEncryptionSpec:
+      type: object
+      required:
+        - kms_key
+      properties:
+        kms_key:
+          description: >-
+            KMSKey is the key to encrypt uploads with. S3 mounts take a KMS key
+            ARN in the mount's region.
+          type: string
+    sandboxapi.GCSMountSpec:
+      type: object
+      required:
+        - bucket
+      properties:
+        bucket:
+          type: string
+        prefix:
+          type: string
+    sandboxapi.GitMountSpec:
+      type: object
+      required:
+        - remote_url
+      properties:
+        ref:
+          $ref: '#/components/schemas/sandboxapi.GitMountRefSpec'
+        refresh_interval_seconds:
+          type: integer
+          minimum: 1
+        remote_url:
+          type: string
+    sandboxapi.S3MountSpec:
+      type: object
+      required:
+        - bucket
+        - region
+      properties:
+        bucket:
+          type: string
+        endpoint_url:
+          type: string
+        path_style:
+          type: boolean
+        prefix:
+          type: string
+        region:
+          type: string
+    sandboxapi.MountKind:
+      type: string
+      enum:
+        - s3
+        - gcs
+        - azure_blob
+        - git
+        - contexthub
+      x-enum-varnames:
+        - MountKindS3
+        - MountKindGCS
+        - MountKindAzureBlob
+        - MountKindGit
+        - MountKindContextHub
+    sandboxapi.S3BucketMountSpec:
+      type: object
+      required:
+        - id
+        - mount_path
+        - type
+        - s3
+      properties:
+        cache:
+          $ref: '#/components/schemas/sandboxapi.MountCacheSpec'
+        encryption:
+          $ref: '#/components/schemas/sandboxapi.MountEncryptionSpec'
+        id:
+          type: string
+          maxLength: 64
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        s3:
+          $ref: '#/components/schemas/sandboxapi.S3MountSpec'
+        type:
+          enum:
+            - s3
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.MountKind'
+      not:
+        anyOf:
+          - required:
+              - gcs
+          - required:
+              - git
+          - required:
+              - contexthub
+          - required:
+              - azure_blob
+    sandboxapi.GCSBucketMountSpec:
+      type: object
+      required:
+        - id
+        - mount_path
+        - type
+        - gcs
+      properties:
+        cache:
+          $ref: '#/components/schemas/sandboxapi.MountCacheSpec'
+        gcs:
+          $ref: '#/components/schemas/sandboxapi.GCSMountSpec'
+        id:
+          type: string
+          maxLength: 64
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        type:
+          enum:
+            - gcs
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.MountKind'
+      not:
+        anyOf:
+          - required:
+              - s3
+          - required:
+              - git
+          - required:
+              - contexthub
+          - required:
+              - azure_blob
+          - required:
+              - encryption
+    sandboxapi.GitRepoMountSpec:
+      type: object
+      required:
+        - id
+        - mount_path
+        - type
+        - git
+      properties:
+        git:
+          $ref: '#/components/schemas/sandboxapi.GitMountSpec'
+        id:
+          type: string
+          maxLength: 64
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        type:
+          enum:
+            - git
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.MountKind'
+      not:
+        anyOf:
+          - required:
+              - s3
+          - required:
+              - gcs
+          - required:
+              - contexthub
+          - required:
+              - azure_blob
+          - required:
+              - cache
+          - required:
+              - encryption
+    sandboxapi.ContextHubRepoMountSpec:
+      type: object
+      required:
+        - id
+        - mount_path
+        - type
+        - contexthub
+      properties:
+        contexthub:
+          $ref: '#/components/schemas/sandboxapi.ContextHubMountSpec'
+        id:
+          type: string
+          maxLength: 64
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        type:
+          enum:
+            - contexthub
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.MountKind'
+      not:
+        anyOf:
+          - required:
+              - s3
+          - required:
+              - gcs
+          - required:
+              - git
+          - required:
+              - azure_blob
+          - required:
+              - cache
+          - required:
+              - encryption
+    sandboxapi.AzureBlobContainerMountSpec:
+      type: object
+      required:
+        - id
+        - mount_path
+        - type
+        - azure_blob
+      properties:
+        azure_blob:
+          $ref: '#/components/schemas/sandboxapi.AzureBlobMountSpec'
+        cache:
+          $ref: '#/components/schemas/sandboxapi.MountCacheSpec'
+        id:
+          type: string
+          maxLength: 64
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        type:
+          enum:
+            - azure_blob
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.MountKind'
+      not:
+        anyOf:
+          - required:
+              - s3
+          - required:
+              - gcs
+          - required:
+              - git
+          - required:
+              - contexthub
+          - required:
+              - encryption
+    sandboxes.ProxyHeader:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        is_set:
+          type: boolean
+        name:
+          type: string
+        type:
+          enum:
+            - plaintext
+            - opaque
+            - workspace_secret
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.HeaderType'
+        value:
+          type: string
+    sandboxes.ProxyAWSConfig:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/sandboxes.ProxyAWSRoleConfig'
+        - $ref: '#/components/schemas/sandboxes.ProxyAWSStaticConfig'
+    sandboxes.ProxyAzureConfig:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/sandboxes.ProxyAzureWorkloadIdentityConfig'
+        - $ref: '#/components/schemas/sandboxes.ProxyAzureAccountKeyConfig'
+        - $ref: '#/components/schemas/sandboxes.ProxyAzureSASConfig'
+    sandboxes.ProxyGCPConfig:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/sandboxes.ProxyGCPWorkloadIdentityConfig'
+        - $ref: '#/components/schemas/sandboxes.ProxyGCPServiceAccountConfig'
+    sandboxes.SandboxAWSMountRoleAuthConfig:
+      type: object
+      properties:
+        role_arn:
+          description: >-
+            IAM role to assume with AssumeRoleWithWebIdentity, using a
+            short-lived OIDC token LangSmith signs for this workspace; the
+            role's trust policy must trust LangSmith's issuer for the token
+            subject. LangSmith scopes the credentials to the configured S3
+            mounts. Mutually exclusive with static credentials, and cannot be
+            changed after creation.
+          type: string
+          minLength: 1
+        subject_scope:
+          description: >-
+            SubjectScope picks the token subject the role trusts: "workspace"
+            (the default) or "tag:<tag value id>", which must be one of the
+            sandbox's tag_value_ids. Only valid with role_arn.
+          type: string
+          pattern: >-
+            ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+      required:
+        - role_arn
+      additionalProperties: false
+    sandboxes.SandboxAWSMountStaticAuthConfig:
+      type: object
+      properties:
+        access_key_id:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+        role_arn:
+          description: >-
+            IAM role to assume with AssumeRoleWithWebIdentity, using a
+            short-lived OIDC token LangSmith signs for this workspace; the
+            role's trust policy must trust LangSmith's issuer for the token
+            subject. LangSmith scopes the credentials to the configured S3
+            mounts. Mutually exclusive with static credentials, and cannot be
+            changed after creation.
+          type: string
+          enum:
+            - ''
+        secret_access_key:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - access_key_id
+        - secret_access_key
+      not:
+        anyOf:
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+    sandboxes.SandboxAzureMountWorkloadIdentityAuthConfig:
+      type: object
+      properties:
+        tenant_id:
+          description: >-
+            TenantID is the Entra tenant (directory) ID, a GUID. Setting it
+            selects workload identity: LangSmith signs an OIDC token for this
+            workspace and exchanges it at Entra ID for storage access tokens of
+            client_id. Cannot be changed after creation.
+          type: string
+          minLength: 1
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        client_id:
+          description: >-
+            ClientID is the application (client) ID, a GUID, of the app
+            registration or user-assigned managed identity whose federated
+            identity credential trusts LangSmith's issuer. Required with
+            tenant_id.
+          type: string
+          minLength: 1
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        subject_scope:
+          description: >-
+            SubjectScope picks the token subject the federated credential
+            trusts: "workspace" (the default) or "tag:<tag value id>", which
+            must be one of the sandbox's tag_value_ids. Only valid with
+            tenant_id.
+          type: string
+          pattern: >-
+            ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+      required:
+        - tenant_id
+        - client_id
+      not:
+        anyOf:
+          - required:
+              - account_key
+          - required:
+              - sas_token
+    sandboxes.SandboxAzureMountAccountKeyAuthConfig:
+      type: object
+      properties:
+        account_key:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - account_key
+      not:
+        anyOf:
+          - required:
+              - sas_token
+          - required:
+              - tenant_id
+            properties:
+              tenant_id:
+                minLength: 1
+          - required:
+              - client_id
+            properties:
+              client_id:
+                minLength: 1
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+    sandboxes.SandboxAzureMountSASAuthConfig:
+      type: object
+      properties:
+        sas_token:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - sas_token
+      not:
+        anyOf:
+          - required:
+              - account_key
+          - required:
+              - tenant_id
+            properties:
+              tenant_id:
+                minLength: 1
+          - required:
+              - client_id
+            properties:
+              client_id:
+                minLength: 1
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+    sandboxes.SandboxGCPMountWorkloadIdentityAuthConfig:
+      type: object
+      properties:
+        workload_identity_provider:
+          description: >-
+            WorkloadIdentityProvider federates an OIDC token LangSmith signs for
+            this workspace through Workload Identity Federation instead of a
+            service account key:
+            //iam.googleapis.com/projects/<number>/locations/global/workloadIdentityPools/<pool>/providers/<provider>.
+            Mutually exclusive with service_account_json. Cannot be changed
+            after creation.
+          type: string
+          minLength: 1
+        service_account_email:
+          description: >-
+            ServiceAccountEmail is the service account to impersonate with the
+            federated token. Omit it to use the federated principal directly.
+            Only valid with workload_identity_provider.
+          type: string
+        subject_scope:
+          description: >-
+            SubjectScope picks the token subject the provider trusts:
+            "workspace" (the default) or "tag:<tag value id>", which must be one
+            of the sandbox's tag_value_ids. Only valid with
+            workload_identity_provider.
+          type: string
+          pattern: >-
+            ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+      required:
+        - workload_identity_provider
+      not:
+        required:
+          - service_account_json
+    sandboxes.SandboxGCPMountServiceAccountAuthConfig:
+      type: object
+      properties:
+        service_account_json:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - service_account_json
+      not:
+        anyOf:
+          - required:
+              - workload_identity_provider
+            properties:
+              workload_identity_provider:
+                minLength: 1
+          - required:
+              - service_account_email
+            properties:
+              service_account_email:
+                minLength: 1
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+    sandboxapi.GitMountRefSpec:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - branch
+            - tag
+    sandboxes.HeaderType:
+      type: string
+      enum:
+        - plaintext
+        - opaque
+        - workspace_secret
+      x-enum-varnames:
+        - HeaderTypePlaintext
+        - HeaderTypeOpaque
+        - HeaderTypeWorkspaceSecret
+    sandboxes.ProxyAWSRoleConfig:
+      type: object
+      properties:
+        role_arn:
+          description: >-
+            IAM role to assume with AssumeRoleWithWebIdentity, using a
+            short-lived OIDC token LangSmith signs for this workspace. The
+            role's trust policy must trust LangSmith's issuer for the token
+            subject. Credentials renew automatically, and access follows the
+            role's effective AWS permissions. Mutually exclusive with static
+            keys, and cannot be changed after creation.
+          type: string
+          minLength: 1
+        subject_scope:
+          description: >-
+            SubjectScope picks the token subject the role trusts: "workspace"
+            (the default) or "tag:<tag value id>", which must be one of the
+            sandbox's tag_value_ids. Only valid with role_arn.
+          type: string
+          pattern: >-
+            ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+      required:
+        - role_arn
+      not:
+        anyOf:
+          - required:
+              - access_key_id
+          - required:
+              - secret_access_key
+    sandboxes.ProxyAWSStaticConfig:
+      type: object
+      properties:
+        access_key_id:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+        role_arn:
+          description: >-
+            IAM role to assume with AssumeRoleWithWebIdentity, using a
+            short-lived OIDC token LangSmith signs for this workspace. The
+            role's trust policy must trust LangSmith's issuer for the token
+            subject. Credentials renew automatically, and access follows the
+            role's effective AWS permissions. Mutually exclusive with static
+            keys, and cannot be changed after creation.
+          type: string
+          enum:
+            - ''
+        secret_access_key:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - access_key_id
+        - secret_access_key
+      not:
+        anyOf:
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+    sandboxes.ProxyAzureWorkloadIdentityConfig:
+      type: object
+      properties:
+        tenant_id:
+          description: >-
+            TenantID is the Entra tenant (directory) ID, a GUID. Setting it
+            selects workload identity: LangSmith signs an OIDC token for this
+            workspace and exchanges it at Entra ID for access tokens of
+            client_id, so no secret is stored. Cannot be changed after creation.
+          type: string
+          minLength: 1
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        client_id:
+          description: >-
+            ClientID is the application (client) ID, a GUID, of the app
+            registration or user-assigned managed identity whose federated
+            identity credential trusts LangSmith's issuer. Required with
+            tenant_id.
+          type: string
+          minLength: 1
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        subject_scope:
+          description: >-
+            SubjectScope picks the token subject the federated credential
+            trusts: "workspace" (the default) or "tag:<tag value id>", which
+            must be one of the sandbox's tag_value_ids. Only valid with
+            tenant_id.
+          type: string
+          pattern: >-
+            ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+        resources:
+          description: >-
+            Resources narrows the Entra resources access tokens are obtained
+            for, from https://storage.azure.com, https://vault.azure.net,
+            https://management.azure.com and
+            https://cognitiveservices.azure.com. Defaults to all of them. Only
+            valid with tenant_id.
+          type: array
+          items:
+            type: string
+            enum:
+              - https://storage.azure.com
+              - https://vault.azure.net
+              - https://management.azure.com
+              - https://cognitiveservices.azure.com
+          uniqueItems: true
+      required:
+        - tenant_id
+        - client_id
+      not:
+        anyOf:
+          - required:
+              - account_key
+          - required:
+              - sas_token
+          - required:
+              - storage_account
+    sandboxes.ProxyAzureAccountKeyConfig:
+      type: object
+      properties:
+        storage_account:
+          minLength: 3
+          description: >-
+            StorageAccount is the storage account static credentials
+            authenticate to: requests to its blob, dfs, queue, table and file
+            endpoints. Requires exactly one of account_key (requests are signed
+            with SharedKey) or sas_token (appended to each request).
+          type: string
+          maxLength: 24
+          pattern: ^[a-z0-9]+$
+        account_key:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - storage_account
+        - account_key
+      not:
+        anyOf:
+          - required:
+              - sas_token
+          - required:
+              - tenant_id
+            properties:
+              tenant_id:
+                minLength: 1
+          - required:
+              - client_id
+            properties:
+              client_id:
+                minLength: 1
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+          - required:
+              - resources
+            properties:
+              resources:
+                minItems: 1
+    sandboxes.ProxyAzureSASConfig:
+      type: object
+      properties:
+        storage_account:
+          minLength: 3
+          description: >-
+            StorageAccount is the storage account static credentials
+            authenticate to: requests to its blob, dfs, queue, table and file
+            endpoints. Requires exactly one of account_key (requests are signed
+            with SharedKey) or sas_token (appended to each request).
+          type: string
+          maxLength: 24
+          pattern: ^[a-z0-9]+$
+        sas_token:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - storage_account
+        - sas_token
+      not:
+        anyOf:
+          - required:
+              - account_key
+          - required:
+              - tenant_id
+            properties:
+              tenant_id:
+                minLength: 1
+          - required:
+              - client_id
+            properties:
+              client_id:
+                minLength: 1
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+          - required:
+              - resources
+            properties:
+              resources:
+                minItems: 1
+    sandboxes.ProxyGCPWorkloadIdentityConfig:
+      type: object
+      properties:
+        workload_identity_provider:
+          description: >-
+            WorkloadIdentityProvider federates an OIDC token LangSmith signs for
+            this workspace through Workload Identity Federation instead of a
+            service account key. Use the full resource name:
+            //iam.googleapis.com/projects/<number>/locations/global/workloadIdentityPools/<pool>/providers/<provider>.
+            Cannot be changed after creation.
+          type: string
+          minLength: 1
+        service_account_email:
+          description: >-
+            ServiceAccountEmail is the service account to impersonate with the
+            federated token. Omit it to use the federated principal directly.
+          type: string
+        subject_scope:
+          description: >-
+            SubjectScope picks the token subject the provider trusts:
+            "workspace" (the default) or "tag:<tag value id>", which must be one
+            of the sandbox's tag_value_ids. Only valid with
+            workload_identity_provider.
+          type: string
+          pattern: >-
+            ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+        scopes:
+          description: >-
+            Scopes are the OAuth scopes requested for the access token. Omit
+            them to use https://www.googleapis.com/auth/cloud-platform.
+          type: array
+          items:
+            type: string
+      required:
+        - workload_identity_provider
+      not:
+        required:
+          - service_account_json
+    sandboxes.ProxyGCPServiceAccountConfig:
+      type: object
+      properties:
+        service_account_json:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+        scopes:
+          description: >-
+            Scopes are the OAuth scopes requested for the access token. Omit
+            them to use https://www.googleapis.com/auth/cloud-platform.
+          type: array
+          items:
+            type: string
+      required:
+        - service_account_json
+      not:
+        anyOf:
+          - required:
+              - workload_identity_provider
+            properties:
+              workload_identity_provider:
+                minLength: 1
+          - required:
+              - service_account_email
+            properties:
+              service_account_email:
+                minLength: 1
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+    sandboxes.ProxySecretValue:
+      type: object
+      required:
+        - type
+      properties:
+        is_set:
+          type: boolean
+        type:
+          enum:
+            - plaintext
+            - opaque
+            - workspace_secret
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.HeaderType'
+        value:
           type: string
   securitySchemes:
     API Key:

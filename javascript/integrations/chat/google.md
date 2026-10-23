@@ -21,6 +21,7 @@ For detailed documentation of all `ChatGoogle` features and configurations head 
 [API reference](https://reference.langchain.com/javascript/langchain-google/index/ChatGoogle).
 
 > [!TIP]
+>
 > `@langchain/google` is the recommended package for all new Google Gemini integrations.
 > It replaces the older [`@langchain/google-genai`](google_generative_ai.md)
 > and [`@langchain/google-vertexai`](google_vertex_ai.md) packages.
@@ -383,6 +384,7 @@ console.log(res.tool_calls);
 Gemini offers several built-in tools for code execution and grounding.
 
 > [!WARNING]
+>
 > You cannot mix these "Specialty Tools" (Code Execution, Google Search, etc.)
 > with standard LangChain tools (like the weather tool above) in the same request.
 
@@ -411,6 +413,7 @@ You can use the `googleSearch` tool to ground responses with Google Search.
 This is useful for questions about current events or specific facts.
 
 > [!NOTE]
+>
 > The `googleSearchRetrieval` tool is maintained for backwards compatibility, but `googleSearch` is preferred.
 
 ```typescript
@@ -441,7 +444,7 @@ const llm = new ChatGoogle("gemini-3.7-flash")
     },
   ]);
 
-const prompt = "Summarize this page: https://js.langchain.com/";
+const prompt = "Summarize this page: https://docs.langchain.com/";
 const res = await llm.invoke(prompt);
 console.log(res.text);
 ```
@@ -622,6 +625,7 @@ console.log("Answer:", res.text);
 ```
 
 > [!NOTE]
+>
 > Thought blocks also include a `reasoningContentBlock` field. This contains the `ContentBlock` based on
 > the underlying part sent by Gemini. While this is typically a text block, for multimodal models like
 > Nano Banana Pro, it could be an image or other media block.
@@ -762,8 +766,6 @@ For detailed documentation of all `ChatGoogle` features and configurations head 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/google.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/google.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

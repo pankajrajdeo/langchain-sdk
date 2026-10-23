@@ -1,6 +1,6 @@
 ---
 title: "interrupts"
-description: "Interrupts that occurred in this step that are pending resolution."
+description: "Interrupts that occurred in this step."
 source: "https://reference.langchain.com/python/langgraph/types/StateSnapshot/interrupts"
 category: "reference"
 tags: [reference, langgraph, types, statesnapshot, interrupts]
@@ -12,7 +12,12 @@ tags: [reference, langgraph, types, statesnapshot, interrupts]
 
 📖 [View in docs](https://reference.langchain.com/python/langgraph/types/StateSnapshot/interrupts)
 
-Interrupts that occurred in this step that are pending resolution.
+Interrupts that occurred in this step.
+
+When reading the latest state (`get_state` without a `checkpoint_id`), this
+contains only interrupts still waiting for an answer. When reading a specific
+checkpoint or state history, it contains the most recent interrupt each task
+raised in that step, including ones answered later in the same step.
 
 ## Signature
 
@@ -22,4 +27,4 @@ interrupts: tuple[Interrupt, ...]
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/types.py#L728)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/types.py#L728)

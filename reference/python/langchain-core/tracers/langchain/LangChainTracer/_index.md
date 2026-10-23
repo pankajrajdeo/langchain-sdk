@@ -1,16 +1,17 @@
 ---
 title: "reference/python/langchain-core/tracers/langchain/LangChainTracer"
-description: "Index of 12 pages and 0 subdirectories under reference/python/langchain-core/tracers/langchain/LangChainTracer."
+description: "Index of 13 pages and 0 subdirectories under reference/python/langchain-core/tracers/langchain/LangChainTracer."
 category: "index"
 tags: [index, reference, python, langchain-core, tracers, langchain, langchaintracer]
 ---
 
 # reference/python/langchain-core/tracers/langchain/LangChainTracer
 
-12 pages here.
+13 pages here.
 
 ## Files
 
+- [address](address.md) - View source on GitHub
 - [client](client.md) - View source on GitHub
 - [copy_with_metadata_defaults](copy_with_metadata_defaults.md) - Return a new tracer with merged tracer-only defaults.
 - [example_id](example_id.md) - View source on GitHub

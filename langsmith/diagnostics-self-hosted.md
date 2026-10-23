@@ -12,8 +12,7 @@ tags: [docs, langsmith, diagnostics-self-hosted]
 
 This page provides diagnostic steps to help you troubleshoot issues with self-hosted [LangSmith Deployment](deployment.md) before reaching out to support. Follow these steps systematically to identify and resolve common deployment issues.
 
-> [!NOTE]
-> If you complete these diagnostic steps and still need assistance, refer to [Support](#support) at the end of this guide for information on what to gather before reaching out.
+If you complete these diagnostic steps and still need assistance, refer to [Support](#support) at the end of this guide for information on what to gather before reaching out.
 
 ## Prerequisites
 
@@ -30,6 +29,7 @@ Verify what was deployed and understand the baseline state of your system. This 
 Run the following commands to view all deployed Kubernetes resources.
 
 > [!NOTE]
+>
 > Ensure that you're in the correct namespace when you run the commands in this section. Or, specify the namespace explicitly with the `-n` flag. For example: `kubectl get deployments -n langsmith`.
 
 List all deployments:
@@ -67,6 +67,7 @@ Your deployment includes the following core components:
 * **`langsmith-operator`**: The `lgps` Kubernetes operator that reconciles underlying Kubernetes resources for `lgps` resources. Part of the data plane infrastructure.
 
 > [!NOTE]
+>
 > Additional components may be present in your deployment depending on your configuration. For an overview, refer to [LangSmith Deployment components](components.md).
 
 ## Step 2. Enable debug logging
@@ -92,6 +93,7 @@ If the issue is with an individual Agent Server deployment:
 3. Add a new environment variable `LOG_LEVEL` and set it to `DEBUG`.
 
 > [!NOTE]
+>
 > You can also find debug logs in the UI on a deployment's view, click on **Server Logs** and select **Debug** for the **Log level: Info** dropdown.
 
 ### For widespread issues
@@ -180,8 +182,6 @@ Having this information in the ticket will help the [support](https://support.la
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/diagnostics-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/diagnostics-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

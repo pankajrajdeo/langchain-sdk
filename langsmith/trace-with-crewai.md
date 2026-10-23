@@ -93,7 +93,7 @@ CrewAIInstrumentor().instrument(tracer_provider=tracer_provider)
 OpenAIInstrumentor().instrument(tracer_provider=tracer_provider)
 
 # Define your agent
-llm = LLM(model="gpt-4o-mini")
+llm = LLM(model="gpt-6-luna")
 
 coder = Agent(
     role="Software developer",
@@ -167,8 +167,6 @@ OpenAIInstrumentor().instrument(tracer_provider=tracer_provider)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-crewai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-crewai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -10,16 +10,18 @@ tags: [docs, langsmith, event-streaming]
 
 > Stream LangSmith deployments with typed projections for messages, state, tool calls, subgraphs, and custom transformers.
 
-Event streaming is the typed-projection streaming model for LangSmith deployments. The LangGraph SDK ([Python](langgraph-python-sdk.md), [JavaScript](langgraph-js-ts-sdk.md)) opens a single subscription against the [LangSmith Deployment API](server-api-ref.md) and exposes typed projections—messages, state, tool calls, subgraphs, output, and custom transformer extensions—that can be consumed concurrently from one run.
+Event streaming is the typed-projection streaming model for LangSmith deployments. The LangGraph SDK ([Python](https://docs.langchain.com/langsmith/langgraph-python-sdk.md), [JavaScript](https://docs.langchain.com/langsmith/langgraph-js-ts-sdk.md)) opens a single subscription against the [LangSmith Deployment API](server-api-ref.md) and exposes typed projections—messages, state, tool calls, subgraphs, output, and custom transformer extensions—that can be consumed concurrently from one run.
 
 Event streaming sits one level above the [streaming API](streaming.md), which exposes raw stream modes.
 
 > [!NOTE]
+>
 > Event streaming requires `langgraph-api>=0.10.0` on the [LangGraph Agent Server](agent-server.md). Managed LangSmith deployments are updated automatically; self-hosted servers must be on a compatible version. The client SDK must be `langgraph-sdk>=0.4.0` with `langchain-core>=1.4.0` (Python) or `@langchain/langgraph-sdk>=1.9.15` (JavaScript). Servers on earlier versions continue to serve the [streaming API](streaming.md).
 
 ## Quickstart
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -37,7 +39,8 @@ async with client.threads.stream(assistant_id="agent") as thread:
     final_state = await thread.output
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -64,7 +67,8 @@ await thread.close();
 
 The JavaScript stream has no `async with` equivalent, so call `await thread.close()` to release the underlying subscription when finished.
 
-#### cURL
+**cURL**
+
 Event streaming uses two endpoints. Open the SSE subscription first, then send a `run.start` command on the same thread — the SDK does both for you, but at the wire level they are separate requests.
 
 Create a thread:
@@ -133,7 +137,8 @@ Multiple consumers can read these projections concurrently. Reading `thread.mess
 
 Use `thread.messages` for chat model output:
 
-#### Python
+**Python**
+
 ```python
 async with client.threads.stream(assistant_id="agent") as thread:
     await thread.run.start(input=input)
@@ -146,7 +151,8 @@ async with client.threads.stream(assistant_id="agent") as thread:
         print(usage)
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 const thread = client.threads.stream({ assistantId: "agent" });
 
@@ -161,7 +167,8 @@ for await (const message of thread.messages) {
 }
 ```
 
-#### cURL
+**cURL**
+
 Open the subscription scoped to the `messages` channel:
 
 ```bash
@@ -180,7 +187,8 @@ Send `run.start` on `/commands` as shown in the [Quickstart](#quickstart). Dispa
 
 Use `thread.values` to stream full state snapshots after each step:
 
-#### Python
+**Python**
+
 ```python
 async with client.threads.stream(assistant_id="agent") as thread:
     await thread.run.start(input=input)
@@ -191,7 +199,8 @@ async with client.threads.stream(assistant_id="agent") as thread:
     final_state = await thread.output
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 const thread = client.threads.stream({ assistantId: "agent" });
 
@@ -204,7 +213,8 @@ for await (const snapshot of thread.values) {
 const finalState = await thread.output;
 ```
 
-#### cURL
+**cURL**
+
 Open the subscription scoped to the `values` channel:
 
 ```bash
@@ -223,7 +233,8 @@ Send `run.start` on `/commands` as shown in the [Quickstart](#quickstart). Each 
 
 `thread.tool_calls` (`thread.toolCalls` in JavaScript) exposes assembled tool invocations. Each handle carries the tool name (`call.name`) and the assembled input (`call.input`, a plain value—not awaited). Await `call.output` for the tool result once the call finishes:
 
-#### Python
+**Python**
+
 ```python
 async for call in thread.tool_calls:
     print(call.name, call.input)
@@ -233,7 +244,8 @@ async for call in thread.tool_calls:
         print(call.error)
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 for await (const call of thread.toolCalls) {
   console.log(call.name, call.input);
@@ -241,7 +253,8 @@ for await (const call of thread.toolCalls) {
 }
 ```
 
-#### cURL
+**cURL**
+
 Open the subscription scoped to the `tools` channel:
 
 ```bash
@@ -260,7 +273,8 @@ In Python, `call.deltas` is an async iterator over the tool's output as it strea
 
 Use `thread.subgraphs` to observe nested graph work without parsing namespace strings:
 
-#### Python
+**Python**
+
 ```python
 async for subgraph in thread.subgraphs:
     print(subgraph.graph_name, subgraph.path)
@@ -269,7 +283,8 @@ async for subgraph in thread.subgraphs:
         print(await message.text)
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 for await (const subgraph of thread.subgraphs) {
   console.log(subgraph.name, subgraph.namespace);
@@ -280,7 +295,8 @@ for await (const subgraph of thread.subgraphs) {
 }
 ```
 
-#### cURL
+**cURL**
+
 Subgraph activity is conveyed by the `params.namespace` path on every event. Open the subscription scoped to the `lifecycle` channel (and any channels you want to observe inside subgraphs):
 
 ```bash
@@ -301,21 +317,24 @@ For [Deep Agents](../deepagents/event-streaming.md) deployments, prefer `thread.
 
 Await `thread.output` for the final state once the run completes:
 
-#### Python
+**Python**
+
 ```python
 await thread.run.start(input=input)
 
 final_state = await thread.output
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 await thread.run.start({ input });
 
 const finalState = await thread.output;
 ```
 
-#### cURL
+**cURL**
+
 Open the subscription scoped to `values` and `lifecycle`:
 
 ```bash
@@ -334,7 +353,8 @@ Send `run.start` on `/commands` as shown in the [Quickstart](#quickstart). Read 
 
 Run concurrent consumers when application code needs more than one projection at a time:
 
-#### Python
+**Python**
+
 ```python
 import asyncio
 
@@ -353,7 +373,8 @@ async def consume_subgraphs():
 await asyncio.gather(consume_messages(), consume_tool_calls(), consume_subgraphs())
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 await Promise.all([
   (async () => {
@@ -374,7 +395,8 @@ await Promise.all([
 ]);
 ```
 
-#### cURL
+**cURL**
+
 Open one subscription that covers every channel you want to consume:
 
 ```bash
@@ -393,7 +415,8 @@ Each projection opens a filtered subscription against the same thread, so concur
 
 When a graph pauses for human input, inspect `thread.interrupted` and `thread.interrupts`, then resume by responding to the interrupt:
 
-#### Python
+**Python**
+
 ```python
 async with client.threads.stream(assistant_id="agent") as thread:
     await thread.run.start(input=input)
@@ -411,7 +434,8 @@ async with client.threads.stream(assistant_id="agent") as thread:
     final_state = await thread.output
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 const thread = client.threads.stream({ assistantId: "agent" });
 
@@ -434,7 +458,8 @@ if (thread.interrupted) {
 const finalState = await thread.output;
 ```
 
-#### cURL
+**cURL**
+
 Send the interrupt response as an `input.respond` command:
 
 ```bash
@@ -459,7 +484,8 @@ curl --request POST \
 
 To attach to a run already in flight on a thread—after a page reload, in a separate worker, or from another client—open the thread stream with the existing `thread_id` and skip `thread.run.start()`. The deployment replays buffered events when the connection opens, so consumers reconstruct the run state from the beginning without missing any output.
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -475,7 +501,8 @@ async with client.threads.stream(
     final_state = await thread.output
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -490,7 +517,8 @@ for await (const message of thread.messages) {
 const finalState = await thread.output;
 ```
 
-#### cURL
+**cURL**
+
 Open the event stream without sending a `run.start` command to attach as a passive observer:
 
 ```bash
@@ -507,7 +535,8 @@ The server replays buffered events from the start of the run when the subscripti
 
 Read the raw protocol event flow when application code needs every event. In Python, iterate `thread.events`; in JavaScript, open a `subscribe` (the JavaScript stream object is not itself iterable):
 
-#### Python
+**Python**
+
 ```python
 async with client.threads.stream(assistant_id="agent") as thread:
     await thread.run.start(input=input)
@@ -523,7 +552,8 @@ async for event in thread.subscribe(["messages", "tools"]):
     ...
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 const thread = client.threads.stream({ assistantId: "agent" });
 
@@ -547,7 +577,8 @@ for await (const event of sub) {
 }
 ```
 
-#### cURL
+**cURL**
+
 Open a subscription that covers every channel, then send `run.start` on `/commands` as shown in the [Quickstart](#quickstart):
 
 ```bash
@@ -572,7 +603,8 @@ data: {"type":"event","seq":2,"method":"messages","params":{"namespace":[],"time
 
 Each event is a `ProtocolEvent` envelope wrapping a channel-specific payload:
 
-#### Python
+**Python**
+
 ```python
 from typing import Any, NotRequired, TypedDict
 
@@ -589,7 +621,8 @@ class ProtocolEvent(TypedDict):
     event_id: NotRequired[str]   # durable cross-session dedup ID, carried in the JSON body
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```typescript
 interface ProtocolEvent {
   readonly type: "event";
@@ -604,7 +637,8 @@ interface ProtocolEvent {
 }
 ```
 
-#### cURL
+**cURL**
+
 Raw SSE frame:
 
 ```text
@@ -652,9 +686,12 @@ The `lifecycle` channel tracks root run, subgraph, and subagent status. The `dat
 
 Event streams are resumable. The Agent Server buffers events per run in a bounded buffer, assigns each a `seq` (per-session ordering) and a durable `event_id` (stable across replays and replicas), and replays from a cursor on reconnect. The SDK handles transient drops automatically: each open subscription tracks its highest observed `seq`, and on reconnect the SDK replays from that cursor and dedupes resent events by `event_id`.
 
+If the Agent Server can't keep reading a thread's events, for example because of a backend error, it ends the stream with a final `error` frame (`{"type": "error", "id": null, "error": "unknown_error", ...}`) instead of closing it as if the stream had finished. The JavaScript SDK (`@langchain/langgraph-sdk` 1.11.0 and later) reports this as a stream error and reconnects.
+
 To resume across a process boundary—a page reload, a worker handoff, or a separate client—reopen the thread with the same `thread_id`. The server replays buffered events when a new subscription opens, and the SDK demultiplexes them into the same typed projections. Because the per-run buffer is bounded, the earliest events of a very long run may have been evicted.
 
-#### Python
+**Python**
+
 ```python
 async with client.threads.stream(
     thread_id=thread_id,
@@ -664,7 +701,8 @@ async with client.threads.stream(
         print(event["method"], event.get("event_id"))
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 const thread = client.threads.stream(threadId, { assistantId: "agent" });
 
@@ -677,7 +715,8 @@ for await (const event of events) {
 }
 ```
 
-#### cURL
+**cURL**
+
 Reopen the subscription to receive the replayed events:
 
 ```bash
@@ -702,8 +741,6 @@ The wire-level event and command formats are defined in the [Agent Protocol](htt
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -98,6 +98,7 @@ model.respondWithTools([  // [!code highlight]
 The `id` field is optional. If omitted, a unique ID is auto-generated.
 
 > [!TIP]
+>
 > `.respond()` and `.respondWithTools()` can be mixed freely in any order. This is particularly useful for testing agentic loops where the model alternates between tool calls and text responses.
 
 ### Simulate errors
@@ -175,6 +176,7 @@ await model.invoke([new HumanMessage("forbidden topic")]); // throws "Content po
 ```
 
 > [!NOTE]
+>
 > Each function is a single queue entry, consumed once. To reuse the same dynamic logic for multiple turns, queue multiple `respond` function calls.
 
 ### Structured output
@@ -274,82 +276,79 @@ console.log(r2.content); // "The weather is sunny."
 console.log(model.callCount); // 2
 ```
 
-<details>
-<summary>Full example: test a tool-calling agent with vitest</summary>
-
+> **Full example: test a tool-calling agent with vitest**
+>
 ```typescript
-import { describe, test, expect } from "vitest";
-import { fakeModel } from "langchain";
-import { AIMessage, HumanMessage, ToolMessage } from "@langchain/core/messages";
-import { tool } from "@langchain/core/tools";
-import { z } from "zod";
-
-const getWeather = tool(
-  async ({ city }) => `72°F and sunny in ${city}`,
-  {
-    name: "get_weather",
-    description: "Get weather for a city",
-    schema: z.object({ city: z.string() }),
-  }
-);
-
-async function runAgent(
-  model: ReturnType<typeof fakeModel>,
-  input: string
-) {
-  const messages: any[] = [new HumanMessage(input)];
-  const bound = model.bindTools([getWeather]);
-
-  while (true) {
-    const response = await bound.invoke(messages);
-    messages.push(response);
-
-    if (!response.tool_calls?.length) {
-      return { messages, finalResponse: response };
-    }
-
-    for (const tc of response.tool_calls) {
-      const result = await getWeather.invoke(tc.args);
-      messages.push(new ToolMessage({
-        content: result as string,
-        tool_call_id: tc.id!,
-      }));
-    }
-  }
-}
-
-describe("weather agent", () => {
-  test("calls get_weather and returns a final answer", async () => {
-    const model = fakeModel()
-      .respondWithTools([
-        { name: "get_weather", args: { city: "SF" }, id: "call_1" },
-      ])
-      .respond(new AIMessage("It's 72°F and sunny in SF!"));
-
-    const { finalResponse } = await runAgent(model, "Weather in SF?");
-
-    expect(finalResponse.content).toBe("It's 72°F and sunny in SF!");
-    expect(model.callCount).toBe(2);
-
-    const secondCall = model.calls[1].messages;
-    const toolMsg = secondCall.find((m: any) => m._getType() === "tool");
-    expect(toolMsg?.content).toContain("72°F and sunny in SF");
-  });
-
-  test("handles model errors gracefully", async () => {
-    const model = fakeModel()
-      .respond(new Error("rate limit"));
-
-    await expect(
-      runAgent(model, "Weather?")
-    ).rejects.toThrow("rate limit");
-
-    expect(model.callCount).toBe(1);
-  });
-});
+> import { describe, test, expect } from "vitest";
+> import { fakeModel } from "langchain";
+> import { AIMessage, HumanMessage, ToolMessage } from "@langchain/core/messages";
+> import { tool } from "@langchain/core/tools";
+> import { z } from "zod";
+>
+> const getWeather = tool(
+>   async ({ city }) => `72°F and sunny in ${city}`,
+>   {
+>     name: "get_weather",
+>     description: "Get weather for a city",
+>     schema: z.object({ city: z.string() }),
+>   }
+> );
+>
+> async function runAgent(
+>   model: ReturnType<typeof fakeModel>,
+>   input: string
+> ) {
+>   const messages: any[] = [new HumanMessage(input)];
+>   const bound = model.bindTools([getWeather]);
+>
+>   while (true) {
+>     const response = await bound.invoke(messages);
+>     messages.push(response);
+>
+>     if (!response.tool_calls?.length) {
+>       return { messages, finalResponse: response };
+>     }
+>
+>     for (const tc of response.tool_calls) {
+>       const result = await getWeather.invoke(tc.args);
+>       messages.push(new ToolMessage({
+>         content: result as string,
+>         tool_call_id: tc.id!,
+>       }));
+>     }
+>   }
+> }
+>
+> describe("weather agent", () => {
+>   test("calls get_weather and returns a final answer", async () => {
+>     const model = fakeModel()
+>       .respondWithTools([
+>         { name: "get_weather", args: { city: "SF" }, id: "call_1" },
+>       ])
+>       .respond(new AIMessage("It's 72°F and sunny in SF!"));
+>
+>     const { finalResponse } = await runAgent(model, "Weather in SF?");
+>
+>     expect(finalResponse.content).toBe("It's 72°F and sunny in SF!");
+>     expect(model.callCount).toBe(2);
+>
+>     const secondCall = model.calls[1].messages;
+>     const toolMsg = secondCall.find((m: any) => m._getType() === "tool");
+>     expect(toolMsg?.content).toContain("72°F and sunny in SF");
+>   });
+>
+>   test("handles model errors gracefully", async () => {
+>     const model = fakeModel()
+>       .respond(new Error("rate limit"));
+>
+>     await expect(
+>       runAgent(model, "Weather?")
+>     ).rejects.toThrow("rate limit");
+>
+>     expect(model.callCount).toBe(1);
+>   });
+> });
 ```
-
-</details>
 
 ## Next steps
 
@@ -357,8 +356,6 @@ Learn how to test your agent with real model provider APIs in [Integration testi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/unit-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/unit-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

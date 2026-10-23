@@ -92,6 +92,16 @@ These metrics have `lsd_web_metric=true`. They appear on the Prometheus `/metric
 
 These metrics have `lsd_web_metric=false`. By default they are exported to Datadog when `LSD_DD_API_KEY` is set. Set `EXPOSE_INTERNAL_METRICS_PROMETHEUS=true` to include them on the Prometheus `/metrics` scrape. Internal metrics at or below `METRIC_MAX_EMITTING_TIER` are recorded; higher-tier metrics are omitted.
 
+### Re-encryption
+
+| Name | Type | Tier | Description |
+| - | - | - | - |
+| `lg_api_reencrypt_writeback_succeeded_counter` | Counter | INFO | Lazy re-encryption replacement writebacks that succeeded. |
+| `lg_api_reencrypt_writeback_cas_skipped_counter` | Counter | INFO | Replacement writebacks skipped because a concurrent update changed the stored value. |
+| `lg_api_reencrypt_writeback_failed_counter` | Counter | INFO | Replacement writebacks that failed. Reads still return decrypted data. |
+
+All three metrics include `reencryption_table` and `reencryption_column` attributes. See [Monitor lazy re-encryption](custom-encryption.md#monitor-lazy-re-encryption) for operational guidance.
+
 ### Run lifecycle
 
 | Name | Type | Tier | Description |
@@ -141,8 +151,6 @@ These metrics have `lsd_web_metric=false`. By default they are exported to Datad
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-agent-server-metrics.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-agent-server-metrics.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

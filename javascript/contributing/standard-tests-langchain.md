@@ -16,11 +16,13 @@ When creating either a custom class for yourself or to publish in a LangChain in
 
 First, install the required dependencies:
 
-#### [langchain-core](https://github.com/langchain-ai/langchainjs/tree/main/libs/langchain-core#readme)
-Defines the interfaces we want to import to define our custom components
+> **[langchain-core](https://github.com/langchain-ai/langchainjs/tree/main/libs/langchain-core#readme)**
+>
+> Defines the interfaces we want to import to define our custom components
 
-#### [langchain-tests](https://github.com/langchain-ai/langchainjs/tree/main/internal/standard-tests#readme)
-Provides the standard tests and plugins necessary to run them
+> **[langchain-tests](https://github.com/langchain-ai/langchainjs/tree/main/internal/standard-tests#readme)**
+>
+> Provides the standard tests and plugins necessary to run them
 
 **npm**
 
@@ -52,27 +54,21 @@ bun add @langchain/standard-tests
 
 There are 2 namespaces in the `langchain-tests` package:
 
-<details>
-<summary>Unit tests</summary>
+> **Unit tests**
+>
+> **Location**: `src.unit_tests`
+>
+> Designed to test the component in isolation and without access to external services
+>
+> [View API reference](https://reference.langchain.com/python/langchain-tests/unit_tests)
 
-**Location**: `src.unit_tests`
-
-Designed to test the component in isolation and without access to external services
-
-[View API reference](https://reference.langchain.com/python/langchain-tests/unit_tests)
-
-</details>
-
-<details>
-<summary>Integration tests</summary>
-
-**Location**: `src.integration_tests`
-
-Designed to test the component with access to external services (in particular, the external service that the component is designed to interact with)
-
-[View API reference](https://reference.langchain.com/python/langchain-tests/integration_tests)
-
-</details>
+> **Integration tests**
+>
+> **Location**: `src.integration_tests`
+>
+> Designed to test the component with access to external services (in particular, the external service that the component is designed to interact with)
+>
+> [View API reference](https://reference.langchain.com/python/langchain-tests/integration_tests)
 
 ## Implementing standard tests
 
@@ -103,6 +99,7 @@ class ChatParrotLinkStandardIntegrationTests extends ChatModelIntegrationTests<
 ```
 
 > [!NOTE]
+>
 > You should organize tests in these subdirectories relative to the root of your package:
 >
 > * `tests/unit_tests` for unit tests
@@ -125,8 +122,6 @@ For a full list of the standard test suites that are available, as well as infor
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/standard-tests-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/standard-tests-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

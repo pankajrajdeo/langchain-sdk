@@ -14,10 +14,12 @@ The OpenAI Agents SDK lets you build agentic applications powered by OpenAI mode
 
 Use LangSmith to trace OpenAI Agents SDK runs, including agent steps, model calls, tool calls, and handoffs.
 
-#### Python
+**Python**
+
 ## Installation
 
 > [!NOTE]
+>
 > Requires Python SDK version `langsmith>=0.3.15`.
 
 Install LangSmith with OpenAI Agents support:
@@ -78,10 +80,12 @@ if __name__ == "__main__":
 
 The agent's execution flow, including spans and their details, is logged to LangSmith.
 
-#### JavaScript
+**JavaScript**
+
 ## Installation
 
 > [!NOTE]
+>
 > Requires JS SDK version `langsmith>=0.5.25`.
 
 Install LangSmith and the OpenAI Agents SDK:
@@ -120,6 +124,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 ```
 
 > [!NOTE]
+>
 > Installing `OpenAIAgentsTracingProcessor` is an explicit opt-in to tracing. The processor posts traces even when `LANGSMITH_TRACING` is not set, and nested `traceable` calls inside agent tools inherit the active trace context.
 
 ## Quick start
@@ -148,7 +153,7 @@ const getWeather = tool({
 const agent = new Agent({
   name: "WeatherAgent",
   instructions: "You are a helpful assistant. Use the get_weather tool when asked about weather.",
-  model: "gpt-5-nano",
+  model: "gpt-6-luna",
   tools: [getWeather],
 });
 
@@ -184,7 +189,7 @@ setTraceProcessors([processor]);
 const agent = new Agent({
   name: "SupportAgent",
   instructions: "You are a concise support agent.",
-  model: "gpt-5-nano",
+  model: "gpt-6-luna",
 });
 
 const result = await run(agent, "Help me reset my password.");
@@ -225,7 +230,7 @@ const orderStatus = tool({
 const agent = new Agent({
   name: "OrdersAgent",
   instructions: "Use the order_status tool to answer order questions.",
-  model: "gpt-5-nano",
+  model: "gpt-6-luna",
   tools: [orderStatus],
 });
 
@@ -250,7 +255,7 @@ try {
   const agent = new Agent({
     name: "SupportAgent",
     instructions: "You are a concise support agent.",
-    model: "gpt-5-nano",
+    model: "gpt-6-luna",
   });
 
   const result = await run(agent, "Help me reset my password.");
@@ -262,8 +267,6 @@ try {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-openai-agents-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-openai-agents-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

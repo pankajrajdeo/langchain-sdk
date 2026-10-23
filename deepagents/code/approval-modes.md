@@ -28,13 +28,15 @@ Read-only tools such as `ls`, `read_file`, `glob`, and `grep` always run without
 | **YOLO** | Runs gated actions with no review at all |
 
 > [!WARNING]
+>
 > Auto is an authorization heuristic for a local coding agent. It is **not** sandbox containment, an operating-system boundary, or a guarantee that model-generated actions are safe.
 
 ## Enable Auto
 
 Auto is eligible only in interactive, unsandboxed sessions.
 
-### Launch with Auto
+**1. Launch with Auto**
+
 ```bash
 dcode -y
 ```
@@ -52,7 +54,8 @@ You can also cycle to Auto mid-session with `Shift+Tab`.
 
 YOLO runs gated actions without any review. Use it only when you accept that the agent can take any action without asking.
 
-### Launch with YOLO
+**1. Launch with YOLO**
+
 ```bash
 dcode --yolo
 ```
@@ -77,51 +80,48 @@ Auto keeps the same gated-action rules as Manual but changes how those actions a
 
 After repeated denials or classifier failures, Auto stops and shows you the normal approval prompt for the next batch, then continues in Auto mode.
 
-<details>
-<summary>Auto decision flow</summary>
-
+> **Auto decision flow**
+>
 ```mermaid
-flowchart TD
-    A[Model proposes tool calls] --> B{Covered by the approval policy?}
-    B -->|No| X[Existing tool behavior is unchanged]
-    B -->|Yes| S{Still in Auto, with readable history?}
-    S -->|No| J[Open the approval UI]
-    S -->|Yes| C{Narrow deterministic allow?}
-    C -->|Yes| R[Execute without a classifier call]
-    C -->|No| D[Build one structured decision batch]
-    D --> H{Already reviewed, or earlier denials or failures require human review?}
-    H -->|Yes| J
-    H -->|No| E[Active model reviews effects against the user request]
-    E -->|Allow| R
-    E -->|Deny| Q{Total-denial threshold reached?}
-    Q -->|No| F[Return a sanitized error result]
-    Q -->|Yes| J
-    E -->|Unavailable or invalid| G[Return a compact unavailable result]
-    F --> I[Agent can revise its plan]
-    G --> I
-    J -->|Approve| R
-    J -->|Reject| K[Return a rejection result]
-    J -->|Switch to Manual| L[Persist Manual, then review the full gated batch]
-    R --> M[Reconcile the result and continue]
-    K --> M
-    I --> M
-    L --> M
-
-    classDef trigger fill:#F6FFDB,stroke:#6E8900,stroke-width:2px,color:#2E3900
-    classDef process fill:#E5F4FF,stroke:#006DDD,stroke-width:2px,color:#030710
-    classDef decision fill:#FDF3FF,stroke:#7E65AE,stroke-width:2px,color:#504B5F
-    classDef output fill:#EBD0F0,stroke:#885270,stroke-width:2px,color:#441E33
-    classDef alert fill:#F8E8E6,stroke:#B27D75,stroke-width:2px,color:#634643
-
-    class A trigger
-    class B,S,C,H,Q decision
-    class J output
-    class X,R,M process
-    class D,E,I,L process
-    class F,G,K alert
+> flowchart TD
+>     A[Model proposes tool calls] --> B{Covered by the approval policy?}
+>     B -->|No| X[Existing tool behavior is unchanged]
+>     B -->|Yes| S{Still in Auto, with readable history?}
+>     S -->|No| J[Open the approval UI]
+>     S -->|Yes| C{Narrow deterministic allow?}
+>     C -->|Yes| R[Execute without a classifier call]
+>     C -->|No| D[Build one structured decision batch]
+>     D --> H{Already reviewed, or earlier denials or failures require human review?}
+>     H -->|Yes| J
+>     H -->|No| E[Active model reviews effects against the user request]
+>     E -->|Allow| R
+>     E -->|Deny| Q{Total-denial threshold reached?}
+>     Q -->|No| F[Return a sanitized error result]
+>     Q -->|Yes| J
+>     E -->|Unavailable or invalid| G[Return a compact unavailable result]
+>     F --> I[Agent can revise its plan]
+>     G --> I
+>     J -->|Approve| R
+>     J -->|Reject| K[Return a rejection result]
+>     J -->|Switch to Manual| L[Persist Manual, then review the full gated batch]
+>     R --> M[Reconcile the result and continue]
+>     K --> M
+>     I --> M
+>     L --> M
+>
+>     classDef trigger fill:#F6FFDB,stroke:#6E8900,stroke-width:2px,color:#2E3900
+>     classDef process fill:#E5F4FF,stroke:#006DDD,stroke-width:2px,color:#030710
+>     classDef decision fill:#FDF3FF,stroke:#7E65AE,stroke-width:2px,color:#504B5F
+>     classDef output fill:#EBD0F0,stroke:#885270,stroke-width:2px,color:#441E33
+>     classDef alert fill:#F8E8E6,stroke:#B27D75,stroke-width:2px,color:#634643
+>
+>     class A trigger
+>     class B,S,C,H,Q decision
+>     class J output
+>     class X,R,M process
+>     class D,E,I,L process
+>     class F,G,K alert
 ```
-
-</details>
 
 ### Select a classifier model
 
@@ -129,7 +129,7 @@ When you do not configure an Auto classifier, Deep Agents Code selects a lower-l
 
 | Main model provider | Default classifier |
 | - | - |
-| Anthropic | `anthropic:claude-sonnet-5` |
+| Anthropic | `anthropic:claude-sonnet-5-5` |
 | Google AI | `google_genai:gemini-3.8-flash` |
 | Google Vertex AI | `google_vertexai:gemini-3.8-flash` |
 | OpenAI | `openai:gpt-5.6-luna` |
@@ -139,7 +139,8 @@ For other providers, the classifier uses the main agent model. You can select a 
 
 Set the classifier model through any of these sources:
 
-#### TUI command
+**TUI command**
+
 Run `/auto model` to open the interactive model picker and select a classifier model for the current session. To specify a model directly, pass it as an argument:
 
 ```txt
@@ -149,42 +150,41 @@ Run `/auto model` to open the interactive model picker and select a classifier m
 
 Use `/auto model clear` to go back to inheriting the main model.
 
-#### CLI flag
+**CLI flag**
+
 ```bash
 dcode -y --auto-classifier-model openai:gpt-5.6-luna
 ```
 
 `--auto-classifier-model` is only accepted in interactive TUI sessions.
 
-#### Environment variable
+**Environment variable**
+
 ```bash
 export DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL="openai:gpt-5.6-luna"
 ```
 
 > [!WARNING]
+>
 > A **project `.env`** cannot set `DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL`. Only shell exports, `~/.deepagents/.env`, the CLI flag, and `/auto model` work.
 
-#### config.toml
+**config.toml**
+
 ```toml
 [models]
 auto_classifier = "openai:gpt-5.6-luna"
 ```
 
-<br />
-
-<details>
-<summary>Precedence order</summary>
-
-1. **`/auto model` TUI command**: takes effect immediately for the current session.
-2. **`--auto-classifier-model` flag**: sets the classifier on launch (interactive TUI sessions only).
-3. **`DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL` environment variable**: applies at startup.
-4. **`[models].auto_classifier` in `config.toml`**: your persistent default.
-5. **Provider default**: uses the lower-latency model listed above when the main model uses a supported provider.
-6. **Inherit**: uses the main agent model for providers without a built-in default.
-
-An unset value falls through to the next source. Explicitly clearing the classifier with `/auto model clear` or an empty CLI flag selects the main agent model instead of the provider default.
-
-</details>
+> **Precedence order**
+>
+> 1. **`/auto model` TUI command**: takes effect immediately for the current session.
+> 2. **`--auto-classifier-model` flag**: sets the classifier on launch (interactive TUI sessions only).
+> 3. **`DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL` environment variable**: applies at startup.
+> 4. **`[models].auto_classifier` in `config.toml`**: your persistent default.
+> 5. **Provider default**: uses the lower-latency model listed above when the main model uses a supported provider.
+> 6. **Inherit**: uses the main agent model for providers without a built-in default.
+>
+> An unset value falls through to the next source. Explicitly clearing the classifier with `/auto model clear` or an empty CLI flag selects the main agent model instead of the provider default.
 
 The TUI displays which model is reviewing when Auto turns on and inside `/auto model` output.
 
@@ -218,8 +218,6 @@ For flag and configuration precedence, see [Startup approval mode](config-file.m
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/approval-modes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/approval-modes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

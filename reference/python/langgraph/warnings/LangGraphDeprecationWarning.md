@@ -20,7 +20,8 @@ A LangGraph specific deprecation warning.
 LangGraphDeprecationWarning(
     self,
     message: str,
-    *args: object = (),
+    args: object = (),
+    *,
     since: tuple[int, int],
     expected_removal: tuple[int, int] | None = None,
 )
@@ -41,7 +42,8 @@ for deprecation warnings with clear versioning information.
 __init__(
     self,
     message: str,
-    *args: object = (),
+    args: object = (),
+    *,
     since: tuple[int, int],
     expected_removal: tuple[int, int] | None = None,
 ) -> None
@@ -50,6 +52,7 @@ __init__(
 | Name | Type |
 |------|------|
 | `message` | `str` |
+| `args` | `object` |
 | `since` | `tuple[int, int]` |
 | `expected_removal` | `tuple[int, int] \| None` |
 
@@ -61,4 +64,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/warnings.py#L13)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/warnings.py#L13)

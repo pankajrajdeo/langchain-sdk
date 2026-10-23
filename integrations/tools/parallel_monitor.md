@@ -20,7 +20,7 @@ tags: [docs, integrations, tools, parallel_monitor]
 
 | Class | Package | Serializable | JS support | Package latest |
 | :- | :- | :-: | :-: | :-: |
-| [`ParallelMonitor`](https://reference.langchain.com/python/langchain-parallel/monitors/ParallelMonitor) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | ❌ | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| [`ParallelMonitor`](https://reference.langchain.com/python/langchain-parallel/monitors/ParallelMonitor) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | ❌ | [![PyPI - Latest version](https://img.shields.io/pypi/v/langchain-parallel?style=flat-square\&label=%20\&color=orange)](https://pypi.org/project/langchain-parallel/) |
 
 ## Setup
 
@@ -112,6 +112,7 @@ group = client.get_event_group(monitor["monitor_id"], event_group_id="...")
 Useful when wiring up a webhook handler. `simulate_event()` posts a synthetic event of the requested type (default: `monitor.event.detected`) to the monitor's webhook.
 
 > [!NOTE]
+>
 > `simulate_event()` requires a webhook configured on the monitor. Pass `webhook=MonitorWebhook(...)` when calling `create()` first; otherwise the API returns `400 — Webhook not configured for this monitor`.
 
 ```python
@@ -182,8 +183,6 @@ For detailed documentation, head to the [`ParallelMonitor`](https://reference.la
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_monitor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_monitor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

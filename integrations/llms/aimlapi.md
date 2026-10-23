@@ -11,6 +11,7 @@ tags: [docs, integrations, llms, aimlapi]
 > Integrate with the AIMLAPI LLM using LangChain Python.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of AI/ML API models as text completion models. Many of the latest and most popular AI/ML API models are [chat completion models](../../langchain/models.md).**
 >
 > You may be looking for the [AI/ML API chat docs](https://docs.aimlapi.com/).
@@ -47,7 +48,7 @@ if not os.getenv("AIMLAPI_API_KEY"):
     os.environ["AIMLAPI_API_KEY"] = getpass.getpass("Enter your AI/ML API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -91,8 +92,6 @@ Bubble sort is a simple sorting algorithm that repeatedly steps through a list, 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/aimlapi.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/aimlapi.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

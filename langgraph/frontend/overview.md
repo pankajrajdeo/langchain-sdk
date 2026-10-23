@@ -21,6 +21,7 @@ explain what the system is doing instead of hiding execution behind one
 assistant message.
 
 > [!NOTE]
+>
 > These patterns use the v1 frontend SDK packages. If you are using an earlier version, see the migration guides for [React](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-react/docs/v1-migration.md), [Vue](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-vue/docs/v1-migration.md), [Svelte](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-svelte/docs/v1-migration.md), and [Angular](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-angular/docs/v1-migration.md).
 
 ## Architecture
@@ -122,11 +123,13 @@ chat panel to a full workflow debugger without changing the backend protocol.
 
 ## Patterns
 
-#### [Graph execution](graph-execution.md)
-Visualize multi-step graph pipelines with per-node status and streaming content.
+> **[Graph execution](graph-execution.md)**
+>
+> Visualize multi-step graph pipelines with per-node status and streaming content.
 
-#### [Custom stream channels](custom-stream-channels.md)
-Stream custom server-side data to the frontend and read it with `useExtension` and `useChannel`.
+> **[Custom stream channels](custom-stream-channels.md)**
+>
+> Stream custom server-side data to the frontend and read it with `useExtension` and `useChannel`.
 
 ## Related patterns
 
@@ -134,8 +137,6 @@ The [LangChain frontend patterns](../../langchain/frontend/overview.md)—markdo
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/overview.md) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/overview.md) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

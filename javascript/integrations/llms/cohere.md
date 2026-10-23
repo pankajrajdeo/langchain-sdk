@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, llms, cohere]
 > Integrate with the Cohere LLM using LangChain JavaScript.
 
 > [!WARNING]
+>
 > **Legacy**
 >
 > Cohere has marked their `generate` endpoint for LLMs as deprecated. Follow their [migration guide](https://docs.cohere.com/docs/migrating-from-cogenerate-to-cochat) to start using their Chat API via the [`ChatCohere`](../chat/cohere.md) integration.
@@ -21,7 +22,7 @@ This will help you get started with Cohere completion models (LLMs) using LangCh
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/cohere) | Downloads | Version |
+| Class | Package | Local | Serializable | [PY support](../../../integrations/llms/cohere.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`Cohere`](https://reference.langchain.com/javascript/langchain-cohere/Cohere) | [`@langchain/cohere`](https://www.npmjs.com/package/@langchain/cohere) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cohere?style=flat-square\&label=%20&) |
 
@@ -125,8 +126,6 @@ For detailed documentation of all Cohere features and configurations head to the
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

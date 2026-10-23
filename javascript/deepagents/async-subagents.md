@@ -26,6 +26,7 @@ graph TB
 ```
 
 > [!NOTE]
+>
 > Async subagents communicate with any server that implements the [Agent Protocol](https://github.com/langchain-ai/agent-protocol). You can use [LangSmith Deployments](../../langsmith/deployment.md), or self-host any Agent Protocol-compatible server. Each subagent runs independently of the supervisor, which controls them through the SDK to launch, check, update, and cancel.
 
 ## When to use async subagents
@@ -322,6 +323,27 @@ For LangGraph deployments, authentication is handled by the LangGraph SDK using 
 
 Use HTTP transport when subagents need independent scaling, different resource profiles, or are maintained by a different team.
 
+## Choose a launch mode
+
+The `mode` field on each [`AsyncSubAgent`](https://reference.langchain.com/javascript/deepagents/agent/createDeepAgent) spec controls what conversation context the subagent receives when a task starts.
+
+| Mode | Behavior |
+| - | - |
+| `"isolated"` (default) | Sends only the delegated task description. The subagent starts fresh with no knowledge of the parent's conversation history. |
+| `"fork"` | Sends a snapshot of the parent's conversation at launch, followed by the task description. The subagent can use that context while working in the background. |
+
+`"isolated"` is the right choice for most tasks. Use `"fork"` when the subagent needs established context — for example, a background drafting agent that should write in the style and voice already set up in the conversation.
+
+### Fork mode
+
+> [!WARNING]
+>
+> `mode="fork"` is available in Python only. It is experimental and may change in a future release.
+
+At launch, `start_async_task` sends the parent's full conversation history — replayed up to that point — followed by the task description. Later messages from the parent are not forwarded to the child.
+
+**Prompt-cache reuse.** To get cache hits on the forked conversation prefix, configure the remote agent with the same model, system prompt, tools, and prompt-processing middleware as the parent. Fork mode copies conversation history; it does not synchronize those settings. Matching configuration is necessary but not sufficient: the rendered prefix must match, and cache hits depend on the provider.
+
 ## Choose a deployment topology
 
 ### Single deployment
@@ -441,8 +463,6 @@ The [async-deep-agents](https://github.com/langchain-ai/async-deep-agents) repos
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/async-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/async-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

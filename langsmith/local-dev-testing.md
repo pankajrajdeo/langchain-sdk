@@ -28,6 +28,7 @@ This guide covers how to develop and test [Agent Server](agent-server.md) applic
 | **Custom auth** | Yes | Yes (with license key) |
 
 > [!TIP]
+>
 > For full reference details, refer to the [LangGraph CLI reference](cli.md) page.
 
 ## Development
@@ -68,188 +69,202 @@ The [`langgraph dev`](cli.md#dev) command runs a lightweight server directly in 
 * **Local storage**: State persisted to local directory.
 
 > [!NOTE]
+>
 > The `dev` server is tested with the same integration test suite as production to ensure its behavior is the same during development while using minimal resources.
 
-<details>
-<summary>Get started with langgraph dev</summary>
-
-Before you begin, ensure you have:
-
-* An API key for [LangSmith](https://smith.langchain.com/settings) (free to sign up).
-* [uv](https://docs.astral.sh/uv/getting-started/installation/) for Python or [npx](https://docs.npmjs.com/cli/commands/npx) for TypeScript.
-
-### Create a LangGraph app
-Create a new app from the [`new-langgraph-project-python` template](https://github.com/langchain-ai/new-langgraph-project) or [`new-langgraph-project-js` template](https://github.com/langchain-ai/new-langgraphjs-project). This template demonstrates a single-node application you can extend with your own logic.
-
-#### Python server
-```shell
-uvx --from langgraph-cli@latest langgraph new path/to/your/app --template new-langgraph-project-python
-```
-
-#### Node server
-```shell
-npx @langchain/langgraph-cli new path/to/your/app --template new-langgraph-project-js
-```
-
-> [!TIP]
-> **Additional templates**<br />
-> If you use [`langgraph new`](cli.md) without specifying a template, you will be presented with an interactive menu that will allow you to choose from a list of available templates.
-
-### Install dependencies
-#### Python server
-```shell
-cd path/to/your/app
-uv sync --dev -U
-```
-
-#### Node server
-```shell
-cd path/to/your/app
-yarn install
-```
-
-### Launch Agent Server
-#### Python server
-```shell
-uv run langgraph dev
-```
-
-#### Node server
-```shell
-npx @langchain/langgraph-cli dev
-```
-
-Sample output:
-
-```
->    Ready!
+> **Get started with langgraph dev**
 >
->    - API: [http://localhost:2024](http://localhost:2024/)
+> Before you begin, ensure you have:
 >
->    - Docs: http://localhost:2024/docs
+> * An API key for [LangSmith](https://smith.langchain.com/settings) (free to sign up).
+> * [uv](https://docs.astral.sh/uv/getting-started/installation/) for Python or [npx](https://docs.npmjs.com/cli/commands/npx) for TypeScript.
 >
->    - Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
-```
-
-### Test the API
-#### Python SDK (async)
-1. Install the LangGraph Python SDK:
-
+> **1. Create a LangGraph app**
+>
+> Create a new app from the [`new-langgraph-project-python` template](https://github.com/langchain-ai/new-langgraph-project) or [`new-langgraph-project-js` template](https://github.com/langchain-ai/new-langgraphjs-project). This template demonstrates a single-node application you can extend with your own logic.
+>
+> **Python server**
+>
 ```shell
-pip install langgraph-sdk
+> uvx --from langgraph-cli@latest langgraph new path/to/your/app --template new-langgraph-project-python
 ```
-
-2. Send a message to the assistant (threadless run):
-
+>
+> **Node server**
+>
+```shell
+> npx @langchain/langgraph-cli new path/to/your/app --template new-langgraph-project-js
+```
+>
+> > [!TIP]
+> >
+> > **Additional templates**\\
+> >
+> > If you use [`langgraph new`](cli.md) without specifying a template, you will be presented with an interactive menu that will allow you to choose from a list of available templates.
+>
+> **2. Install dependencies**
+>
+> **Python server**
+>
+```shell
+> cd path/to/your/app
+> uv sync --dev -U
+```
+>
+> **Node server**
+>
+```shell
+> cd path/to/your/app
+> yarn install
+```
+>
+> **3. Launch Agent Server**
+>
+> **Python server**
+>
+```shell
+> uv run langgraph dev
+```
+>
+> **Node server**
+>
+```shell
+> npx @langchain/langgraph-cli dev
+```
+>
+> Sample output:
+>
+```
+> >    Ready!
+> >
+> >    - API: [http://localhost:2024](http://localhost:2024/)
+> >
+> >    - Docs: http://localhost:2024/docs
+> >
+> >    - Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
+```
+>
+> **4. Test the API**
+>
+> **Python SDK (async)**
+>
+> 1. Install the LangGraph Python SDK:
+>
+```shell
+> pip install langgraph-sdk
+```
+>
+> 2. Send a message to the assistant (threadless run):
+>
 ```python
-from langgraph_sdk import get_client
-import asyncio
-
-client = get_client(url="http://localhost:2024")
-
-async def main():
-    async for chunk in client.runs.stream(
-        None,  # Threadless run
-        "agent", # Name of assistant. Defined in langgraph.json.
-        input={
-        "messages": [{
-            "role": "human",
-            "content": "What is LangGraph?",
-            }],
-        },
-    ):
-        print(f"Receiving new event of type: {chunk.event}...")
-        print(chunk.data)
-        print("\n\n")
-
-asyncio.run(main())
+> from langgraph_sdk import get_client
+> import asyncio
+>
+> client = get_client(url="http://localhost:2024")
+>
+> async def main():
+>     async for chunk in client.runs.stream(
+>         None,  # Threadless run
+>         "agent", # Name of assistant. Defined in langgraph.json.
+>         input={
+>         "messages": [{
+>             "role": "human",
+>             "content": "What is LangGraph?",
+>             }],
+>         },
+>     ):
+>         print(f"Receiving new event of type: {chunk.event}...")
+>         print(chunk.data)
+>         print("\n\n")
+>
+> asyncio.run(main())
 ```
-
-#### Python SDK (sync)
-1. Install the LangGraph Python SDK:
-
+>
+> **Python SDK (sync)**
+>
+> 1. Install the LangGraph Python SDK:
+>
 ```shell
-pip install langgraph-sdk
+> pip install langgraph-sdk
 ```
-
-2. Send a message to the assistant (threadless run):
-
+>
+> 2. Send a message to the assistant (threadless run):
+>
 ```python
-from langgraph_sdk import get_sync_client
-
-client = get_sync_client(url="http://localhost:2024")
-
-for chunk in client.runs.stream(
-    None,  # Threadless run
-    "agent", # Name of assistant. Defined in langgraph.json.
-    input={
-        "messages": [{
-            "role": "human",
-            "content": "What is LangGraph?",
-        }],
-    },
-    stream_mode="messages-tuple",
-):
-    print(f"Receiving new event of type: {chunk.event}...")
-    print(chunk.data)
-    print("\n\n")
+> from langgraph_sdk import get_sync_client
+>
+> client = get_sync_client(url="http://localhost:2024")
+>
+> for chunk in client.runs.stream(
+>     None,  # Threadless run
+>     "agent", # Name of assistant. Defined in langgraph.json.
+>     input={
+>         "messages": [{
+>             "role": "human",
+>             "content": "What is LangGraph?",
+>         }],
+>     },
+>     stream_mode="messages-tuple",
+> ):
+>     print(f"Receiving new event of type: {chunk.event}...")
+>     print(chunk.data)
+>     print("\n\n")
 ```
-
-#### Javascript SDK
-1. Install the LangGraph JS SDK:
-
+>
+> **Javascript SDK**
+>
+> 1. Install the LangGraph JS SDK:
+>
 ```shell
-npm install @langchain/langgraph-sdk
+> npm install @langchain/langgraph-sdk
 ```
-
-2. Send a message to the assistant (threadless run):
-
+>
+> 2. Send a message to the assistant (threadless run):
+>
 ```js
-const { Client } = await import("@langchain/langgraph-sdk");
-
-// only set the apiUrl if you changed the default port when calling langgraph dev
-const client = new Client({ apiUrl: "http://localhost:2024"});
-
-const streamResponse = client.runs.stream(
-    null, // Threadless run
-    "agent", // Assistant ID
-    {
-        input: {
-            "messages": [
-                { "role": "user", "content": "What is LangGraph?"}
-            ]
-        },
-        streamMode: "messages-tuple",
-    }
-);
-
-for await (const chunk of streamResponse) {
-    console.log(`Receiving new event of type: ${chunk.event}...`);
-    console.log(JSON.stringify(chunk.data));
-    console.log("\n\n");
-}
+> const { Client } = await import("@langchain/langgraph-sdk");
+>
+> // only set the apiUrl if you changed the default port when calling langgraph dev
+> const client = new Client({ apiUrl: "http://localhost:2024"});
+>
+> const streamResponse = client.runs.stream(
+>     null, // Threadless run
+>     "agent", // Assistant ID
+>     {
+>         input: {
+>             "messages": [
+>                 { "role": "user", "content": "What is LangGraph?"}
+>             ]
+>         },
+>         streamMode: "messages-tuple",
+>     }
+> );
+>
+> for await (const chunk of streamResponse) {
+>     console.log(`Receiving new event of type: ${chunk.event}...`);
+>     console.log(JSON.stringify(chunk.data));
+>     console.log("\n\n");
+> }
 ```
-
-#### Rest API
+>
+> **Rest API**
+>
 ```bash
-curl -s --request POST \
-    --url "http://localhost:2024/runs/stream" \
-    --header 'Content-Type: application/json' \
-    --data "{
-        \"assistant_id\": \"agent\",
-        \"input\": {
-            \"messages\": [
-                {
-                    \"role\": \"human\",
-                    \"content\": \"What is LangGraph?\"
-                }
-            ]
-        },
-        \"stream_mode\": \"messages-tuple\"
-    }"
+> curl -s --request POST \
+>     --url "http://localhost:2024/runs/stream" \
+>     --header 'Content-Type: application/json' \
+>     --data "{
+>         \"assistant_id\": \"agent\",
+>         \"input\": {
+>             \"messages\": [
+>                 {
+>                     \"role\": \"human\",
+>                     \"content\": \"What is LangGraph?\"
+>                 }
+>             ]
+>         },
+>         \"stream_mode\": \"messages-tuple\"
+>     }"
 ```
-
-</details>
 
 ### Use cases
 
@@ -274,20 +289,17 @@ The [`langgraph up`](cli.md#up) command orchestrates a full Docker-based stack t
 * **Isolated networking**: Realistic container networking.
 * **Production validation**: Verifies deployment readiness.
 
-<details>
-<summary>Get started with langgraph up</summary>
-
+> **Get started with langgraph up**
+>
 ```bash
-# Ensure Docker is running
-docker ps
-
-# Start production-like stack
-langgraph up
+> # Ensure Docker is running
+> docker ps
+>
+> # Start production-like stack
+> langgraph up
 ```
-
-Your server starts at `http://localhost:8123` with full persistent storage.
-
-</details>
+>
+> Your server starts at `http://localhost:8123` with full persistent storage.
 
 ### Use cases
 
@@ -332,7 +344,8 @@ The `dependencies` field tells the [CLI](cli.md) **where** to find your applicat
 * **A specific subdirectory**: `"dependencies": ["./my_agent"]`
 * **A specific package**: `"dependencies": ["my-package==1.0.0"]` (Python) or `"dependencies": ["my-package@1.0.0"]` (JavaScript)
 
-#### Python
+**Python**
+
 ```json
 {
   "dependencies": ["."],
@@ -343,7 +356,8 @@ The `dependencies` field tells the [CLI](cli.md) **where** to find your applicat
 }
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```json
 {
   "dependencies": ["."],
@@ -358,7 +372,8 @@ The `dependencies` field tells the [CLI](cli.md) **where** to find your applicat
 
 These files define **what** packages your application needs:
 
-#### Python
+**Python**
+
 **pyproject.toml example:**
 
 ```toml
@@ -380,7 +395,8 @@ langchain-anthropic
 langgraph
 ```
 
-#### JavaScript
+**JavaScript**
+
 **package.json example:**
 
 ```json
@@ -492,7 +508,7 @@ For more details, refer to the [Platform setup comparison](platform-setup.md).
 **Explore features:**
 
 * **[Studio](studio.md)**: Visualize, interact with, and debug your application with the Studio UI. Try the [Studio quickstart](quick-start-studio.md).
-* **API References**: [LangSmith Deployment API](https://langchain-ai.github.io/langgraph/cloud/reference/api/api_ref/), [Python SDK](langgraph-python-sdk.md), [JS/TS SDK](langgraph-js-ts-sdk.md)
+* **API References**: [LangSmith Deployment API](server-api-ref.md), [Python SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk.md), [JS/TS SDK](https://docs.langchain.com/langsmith/langgraph-js-ts-sdk.md)
 
 ## Related resources
 
@@ -504,8 +520,6 @@ For more details, refer to the [Platform setup comparison](platform-setup.md).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/local-dev-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/local-dev-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

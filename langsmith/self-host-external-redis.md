@@ -13,9 +13,11 @@ LangSmith uses Redis to back our queuing/caching operations. By default, LangSmi
 [Valkey](https://valkey.io/) is also officially supported as a drop-in replacement for Redis. Anywhere this page refers to Redis, you can use a compatible Valkey instance. See [Requirements](#requirements) for supported versions.
 
 > [!WARNING]
+>
 > Each LangSmith installation must use its own dedicated Redis instance. Redis cannot be shared across separate LangSmith installations (for example, between an existing and new cluster during a migration). Sharing it across installations causes deployment tasks to be routed to the wrong cluster.
 
 > [!TIP]
+>
 > **If you're using a managed Redis service**, we recommend:
 >
 > * [Amazon ElastiCache](https://aws.amazon.com/elasticache/redis/) (AWS)
@@ -41,10 +43,12 @@ LangSmith uses Redis to back our queuing/caching operations. By default, LangSmi
 * By default, we recommend an instance with at least 2 vCPUs and 8GB of memory. However, the actual requirements will depend on your tracing workload. We recommend monitoring your Redis instance and scaling up as needed.
 
 > [!NOTE]
+>
 > Redis 6.2 is the floor because of the Redis-backed run queue introduced in Agent Server (`langgraph-api`) 0.8.0. The queue enqueues runs with the `ZADD ... LT` flag, which was added in Redis 6.2. On Redis 5.0 through 6.1, run enqueue fails with a generic `ERR syntax error` that does not indicate a version mismatch. Valkey 8 includes the flag.
 
 > [!TIP]
-> If you enable [LangSmith Sandboxes](deploy-self-hosted-full-platform.md#enable-sandboxes), we recommend setting the Redis `maxmemory-policy` to `noeviction` for the Redis metadata store used by sandbox storage. This avoids evicting filesystem metadata under memory pressure.
+>
+> If you enable [LangSmith Sandboxes](enable-self-hosted-sandboxes.md), we recommend setting the Redis `maxmemory-policy` to `noeviction` for the Redis metadata store used by sandbox storage. This avoids evicting filesystem metadata under memory pressure.
 > With `noeviction`, Redis writes can fail when the instance reaches max memory, so keep enough memory headroom for sandbox metadata growth.
 
 ## Standalone Redis
@@ -213,9 +217,13 @@ stringData:
   redis_cluster_password: "your_redis_password"
 ```
 
+<a id="azure-cache-for-redis"></a>
+
 ## Azure managed Redis
 
 [Azure Managed Redis](https://azure.microsoft.com/en-us/products/managed-redis) supports two clustering policies that affect how LangSmith connects to it. Choose the configuration below based on the clustering policy of your instance.
+
+<a id="google-cloud-memorystore"></a>
 
 ### OSS Cluster
 
@@ -262,6 +270,7 @@ To validate the Redis server certificate:
 * For Redis Cluster, `redis.external.cluster.tlsEnabled` defaults to `true`. Ensure it is not set to `false`.
 
 > [!WARNING]
+>
 > Mount a custom CA only when your Redis server uses an internal or private CA. Publicly trusted CAs do not require this configuration.
 
 **Helm (Standalone - server TLS)**
@@ -385,15 +394,17 @@ commonPodSecurityContext:
 
 If you need more granular control, add the `fsGroup` to each pod's security context individually. See the [mtls configuration example](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/examples/mtls_config.yaml) for a complete reference.
 
+<a id="amazon-elasticache"></a>
+
 ## IAM authentication
 
 As of LangSmith helm chart version **0.12.34**, LangSmith supports IAM authentication for standalone Redis. As of LangSmith version **v0.16.0** (v16), Redis Cluster also supports IAM authentication. This allows you to use cloud provider workload identity instead of static passwords.
 
 > [!NOTE]
+>
 > Redis Cluster with IAM authentication requires LangSmith v0.16.0 or later. Earlier LangSmith versions support IAM authentication only for standalone Redis. Also, not all cloud providers support IAM authentication for all Redis offerings. Check your cloud provider's documentation to verify IAM support for your specific Redis setup (e.g., GCP only supports IAM for Memorystore Cluster, not standalone Memorystore).
 
-#### AWS
-<a id="amazon-elasticache" />
+**AWS**
 
 ### ElastiCache for Redis IAM authentication
 
@@ -478,14 +489,14 @@ ingestQueue:
 
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
-#### GCP
-<a id="google-cloud-memorystore" />
+**GCP**
 
 ### Memorystore for Redis IAM authentication
 
 Memorystore for Redis supports [IAM authentication](https://docs.cloud.google.com/memorystore/docs/cluster/about-iam-auth) for **Cluster instances only** (not standalone Memorystore). This allows you to authenticate using GCP service accounts.
 
 > [!NOTE]
+>
 > IAM authentication is only available for Memorystore Cluster, not standalone Memorystore instances.
 
 #### Prerequisites
@@ -556,8 +567,7 @@ ingestQueue:
 
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
-#### Azure
-<a id="azure-cache-for-redis" />
+**Azure**
 
 ### Azure Cache for Redis with Microsoft Entra authentication
 
@@ -661,8 +671,6 @@ See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/c
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-external-redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-external-redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

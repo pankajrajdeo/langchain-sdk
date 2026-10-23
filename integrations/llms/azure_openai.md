@@ -11,6 +11,7 @@ tags: [docs, integrations, llms, azure_openai]
 > Integrate with the Azure OpenAI LLM using LangChain Python.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of Azure OpenAI text completion models. The latest and most popular Azure OpenAI models are [chat completion models](../../langchain/models.md).**
 >
 > Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](../chat/azure_chat_openai.md).
@@ -151,8 +152,6 @@ Params: {'deployment_name': 'gpt-35-turbo-instruct-0914', 'model_name': 'gpt-3.5
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/azure_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/azure_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -20,38 +20,44 @@ Fetch a single run by ID. Returns only the run ID by default—specify a field s
 
 #### Method name
 
-#### Python
+**Python**
+
 | Before | After |
 | - | - |
 | `client.read_run()` | `client.runs.retrieve()` |
 
 > [!NOTE]
+>
 > `client.runs.retrieve()` is now async. Call it with `await`.
 
 See the [reference](https://reference.langchain.com/python/langsmith/_openapi_client/resources/runs/RunsResource/retrieve_v2) for the full parameter and field list.
 
-#### TypeScript
+**TypeScript**
+
 | Before | After |
 | - | - |
 | `client.readRun()` | `client.runs.retrieve()` |
 
 See the [reference](https://reference.langchain.com/javascript/langsmith/_openapi_client/Langsmith/Runs/retrieveV2) for the full parameter and field list.
 
-#### Java
+**Java**
+
 | Before | After |
 | - | - |
 | `client.runs().retrieve()` | `client.runs().retrieveV2()` |
 
 See the [reference](https://javadoc.io/doc/com.langchain.smith/langsmith-java/latest/com/langchain/smith/services/blocking/RunService.html) for the full parameter list.
 
-#### Go
+**Go**
+
 | Before | After |
 | - | - |
 | `client.Runs.Get()` | `client.Runs.GetV2()` |
 
 See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#RunService.GetV2) for the full parameter list.
 
-#### cURL
+**cURL**
+
 | Before | After |
 | - | - |
 | `GET /api/v1/runs/{run_id}` | `GET /api/v2/runs/{run_id}` |
@@ -60,8 +66,10 @@ See the [API doc](smith-api/runs/get-a-single-run.md) for the full parameter and
 
 #### Query parameters
 
-#### Python
+**Python**
+
 > [!WARNING]
+>
 > `runs.retrieve` requires a new `project_id` field that `read_run` did not need. It also accepts an optional `start_time`—providing it speeds up retrieval but is not required.
 
 | Before (`read_run`) | After (`runs.retrieve`) | Notes |
@@ -72,8 +80,10 @@ See the [API doc](smith-api/runs/get-a-single-run.md) for the full parameter and
 | *(not available)* | `start_time` | Optional—run's start time (RFC3339); providing it speeds up retrieval |
 | *(all fields returned by default)* | `selects` | Field projection; defaults to `["ID"]` only; field names are uppercase |
 
-#### TypeScript
+**TypeScript**
+
 > [!WARNING]
+>
 > `client.runs.retrieve` requires a new `project_id` field that `readRun` did not need. It also accepts an optional `start_time`—providing it speeds up retrieval but is not required.
 
 | Before (`readRun`) | After (`client.runs.retrieve`) | Notes |
@@ -84,8 +94,10 @@ See the [API doc](smith-api/runs/get-a-single-run.md) for the full parameter and
 | *(not available)* | `start_time` | Optional—`snake_case`; run's start time (RFC3339); providing it speeds up retrieval |
 | *(all fields returned by default)* | `selects` | Field projection; defaults to `["ID"]` only; field names are uppercase |
 
-#### Java
+**Java**
+
 > [!WARNING]
+>
 > `retrieveV2()` requires `projectId()`, which replaces the removed `sessionId()`. `startTime()` remains optional—providing it speeds up retrieval but is not required.
 
 | Before (`RunRetrieveParams`) | After (`RunRetrieveV2Params`) | Notes |
@@ -99,8 +111,10 @@ See the [API doc](smith-api/runs/get-a-single-run.md) for the full parameter and
 | *(not available)* | `projectId()` | **Required**—UUID of the project that owns the run |
 | *(all fields returned by default)* | `selects()` | Field projection; defaults to `["ID"]` only; field names are uppercase |
 
-#### Go
+**Go**
+
 > [!WARNING]
+>
 > `GetV2()` requires `ProjectID`, which replaces the removed `SessionID`. `StartTime` remains optional—providing it speeds up retrieval but is not required.
 
 | Before (`RunGetParams`) | After (`RunGetV2Params`) | Notes |
@@ -114,10 +128,12 @@ See the [API doc](smith-api/runs/get-a-single-run.md) for the full parameter and
 | *(not available)* | `ProjectID` | **Required**—UUID of the project that owns the run |
 | *(all fields returned by default)* | `Selects` | Field projection; defaults to `["ID"]` only; field name constants are uppercase (e.g., `RunGetV2ParamsSelectName`) |
 
-#### cURL
+**cURL**
+
 `run_id` remains in the URL path. All other parameters are query string values with `snake_case` names.
 
 > [!WARNING]
+>
 > `GET /api/v2/runs/{run_id}` requires a new `project_id` query param. `start_time` remains optional—providing it speeds up retrieval but is not required.
 
 | Before (`GET /api/v1/runs/{run_id}` param) | After (`GET /api/v2/runs/{run_id}` param) | Notes |
@@ -129,7 +145,8 @@ See the [API doc](smith-api/runs/get-a-single-run.md) for the full parameter and
 
 #### Response fields
 
-#### Python
+**Python**
+
 Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS"`) to control which fields are populated on the returned `Run`; only selected fields are non-`None`. Default `selects` contains only `"ID"`.
 
 | Before (v1 `Run` attribute) | After (v2 `Run` attribute) | Notes |
@@ -182,7 +199,8 @@ Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS
 | `run.prompt_cost_details` | `run.prompt_cost_details.raw` | Field now wraps the dict; access `.raw` to get `dict[str, float]` (was `dict[str, Decimal]`) |
 | `run.completion_cost_details` | `run.completion_cost_details.raw` | Field now wraps the dict; access `.raw` to get `dict[str, float]` (was `dict[str, Decimal]`) |
 
-#### TypeScript
+**TypeScript**
+
 Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS"`) to control which fields are populated on the returned `Run`. Default `selects` contains only `"ID"`.
 
 | Before (v1 `Run` property) | After (v2 `Run` property) | Notes |
@@ -236,7 +254,8 @@ Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS
 | *(not available)* | `run.prompt_cost_details` | New: per-category prompt cost breakdown |
 | *(not available)* | `run.completion_cost_details` | New: per-category completion cost breakdown |
 
-#### Java
+**Java**
+
 Add `RunRetrieveV2Params.Select` values (eg. `Select.NAME`, `Select.STATUS`) via `.addSelect(...)` to control which fields are populated; unselected fields return empty `Optional` values. `selects()` defaults to `ID` only.
 
 | Before (`RunSchema` method) | After (`Run` method) | Notes |
@@ -301,7 +320,8 @@ Add `RunRetrieveV2Params.Select` values (eg. `Select.NAME`, `Select.STATUS`) via
 | *(not available)* | `run.shareUrl()` | New: public share URL (only set when the run has been shared) |
 | *(not available)* | `run.threadEvaluationTime()` | New |
 
-#### Go
+**Go**
+
 Pass `RunGetV2ParamsSelect` constants (eg. `RunGetV2ParamsSelectName`, `RunGetV2ParamsSelectStatus`) to `Selects` to control which fields are populated; unselected fields are zero-valued on the returned struct. `Selects` defaults to `ID` only.
 
 | Before (`RunSchema` field) | After (`Run` field) | Notes |
@@ -370,7 +390,8 @@ Pass `RunGetV2ParamsSelect` constants (eg. `RunGetV2ParamsSelectName`, `RunGetV2
 | *(not available)* | `run.ShareURL` | New: public share URL (only set when the run has been shared) |
 | *(not available)* | `run.ThreadEvaluationTime` | New |
 
-#### cURL
+**cURL**
+
 Pass SCREAMING\_SNAKE\_CASE strings as repeated `selects` query parameters (eg. `selects=NAME&selects=STATUS`) to control which fields are populated. Default `selects` contains only `"ID"`.
 
 | Before (v1 response field) | After (v2 response field) | Notes |
@@ -443,27 +464,32 @@ Pass SCREAMING\_SNAKE\_CASE strings as repeated `selects` query parameters (eg. 
 
 The SmithDB-backed method has a dedicated, higher rate limit than the method it replaces. Limits apply in Cloud, per API key.
 
-#### Python
+**Python**
+
 | | Before (`client.read_run()`) | After (`client.runs.retrieve()`) |
 | - | - | - |
 | Limit | 30 requests per 60 seconds | 300 requests per 10 seconds |
 
-#### TypeScript
+**TypeScript**
+
 | | Before (`client.readRun()`) | After (`client.runs.retrieve()`) |
 | - | - | - |
 | Limit | 30 requests per 60 seconds | 300 requests per 10 seconds |
 
-#### Java
+**Java**
+
 | | Before (`client.runs().retrieve()`) | After (`client.runs().retrieveV2()`) |
 | - | - | - |
 | Limit | 30 requests per 60 seconds | 300 requests per 10 seconds |
 
-#### Go
+**Go**
+
 | | Before (`client.Runs.Get()`) | After (`client.Runs.GetV2()`) |
 | - | - | - |
 | Limit | 30 requests per 60 seconds | 300 requests per 10 seconds |
 
-#### cURL
+**cURL**
+
 | | Before (`GET /api/v1/runs/{run_id}`) | After (`GET /api/v2/runs/{run_id}`) |
 | - | - | - |
 | Limit | 30 requests per 60 seconds | 300 requests per 10 seconds |
@@ -474,10 +500,12 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 
 #### Fetch a single run by ID
 
-#### Python
+**Python**
+
 `runs.retrieve` requires an additional `project_id` (UUID) parameter that `read_run` did not need. It also accepts an optional `start_time`—providing it speeds up retrieval but is not required. Resolve the project UUID via `client.aread_project()` first.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -488,7 +516,8 @@ run_id = "<run-id>"
 run = client.read_run(run_id)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -510,10 +539,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `client.runs.retrieve` requires an additional `project_id` (UUID) parameter that `readRun` did not need. It also accepts an optional `start_time`—providing it speeds up retrieval but is not required. Resolve the project UUID via `client.readProject()` first.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -524,7 +555,8 @@ let runId = "<run-id>";
 await client.readRun(runId);
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -540,10 +572,12 @@ await client.runs.retrieve(runId, {
 });
 ```
 
-#### Java
+**Java**
+
 `retrieveV2()` requires an additional `projectId()` (UUID) parameter that `client.runs().retrieve()` did not need. It also accepts an optional `startTime()`—providing it speeds up retrieval but is not required. Resolve the project UUID via `client.sessions().list()` first.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -556,7 +590,8 @@ var runId = "<run-id>"
 client.runs().retrieve(runId)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -584,10 +619,12 @@ client.runs().retrieveV2(
 )
 ```
 
-#### Go
+**Go**
+
 `GetV2()` requires an additional `ProjectID` (UUID) parameter that `client.Runs.Get()` did not need. It also accepts an optional `StartTime`—providing it speeds up retrieval but is not required. Resolve the project UUID via `client.Sessions.List()` first.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -606,7 +643,8 @@ runID := "<run-id>"
 run, err := client.Runs.Get(ctx, runID, langsmith.RunGetParams{})
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -631,10 +669,12 @@ run, err := client.Runs.GetV2(ctx, runID, langsmith.RunGetV2Params{
 })
 ```
 
-#### cURL
+**cURL**
+
 `GET /api/v2/runs/{run_id}` requires an additional `project_id` (UUID) query parameter that `GET /api/v1/runs/{run_id}` did not need. It also accepts an optional `start_time`—providing it speeds up retrieval but is not required. Resolve the project UUID via a `GET /api/v1/sessions` request first.
 
-#### Before
+**Before**
+
 ```bash
 RUN_ID="<run-id>"
 
@@ -642,7 +682,8 @@ curl "https://api.smith.langchain.com/api/v1/runs/$RUN_ID" \
   -H "x-api-key: $LANGSMITH_API_KEY"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -656,10 +697,12 @@ curl "https://api.smith.langchain.com/api/v2/runs/$RUN_ID?project_id=$PROJECT_ID
 
 #### Selecting fields
 
-#### Python
+**Python**
+
 `read_run` returns a full run object with no selection needed. `runs.retrieve` returns only `id` by default—pass `selects=[...]` to request more.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -671,7 +714,8 @@ run = client.read_run(run_id=run_id)
 print(run.name, run.status, run.total_tokens)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -695,10 +739,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `readRun` returns a full run object with no selection needed. `client.runs.retrieve` returns only `id` by default—pass `selects: [...]` to request more.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -710,7 +756,8 @@ const retrievedRun = await client.readRun(runId);
 console.log(retrievedRun.name, retrievedRun.status, retrievedRun.total_tokens);
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -728,10 +775,12 @@ const retrievedRun = await client.runs.retrieve(runId, {
 console.log(retrievedRun.name, retrievedRun.status, retrievedRun.total_tokens);
 ```
 
-#### Java
+**Java**
+
 `.retrieve()` returns a full run object with no selection needed. `.retrieveV2()` returns only `id` by default—call `.addSelect(...)` for each field you need.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -745,7 +794,8 @@ val run = client.runs().retrieve(runId)
 println("${run.name()} ${run.status()} ${run.totalTokens()}")
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -777,10 +827,12 @@ val run = client.runs().retrieveV2(
 println("${run.name()} ${run.status()} ${run.totalTokens()}")
 ```
 
-#### Go
+**Go**
+
 `Get` returns a full run struct with no selection needed. `GetV2` returns only `ID` by default—pass `Selects` with the fields you need.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -801,7 +853,8 @@ run, err := client.Runs.Get(ctx, runID, langsmith.RunGetParams{})
 fmt.Println(run.Name, run.Status, run.TotalTokens)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -833,10 +886,12 @@ run, err := client.Runs.GetV2(ctx, runID, langsmith.RunGetV2Params{
 fmt.Println(run.Name, run.Status, run.TotalTokens)
 ```
 
-#### cURL
+**cURL**
+
 `GET /api/v1/runs/{run_id}` returns a full run object with no selection needed. `GET /api/v2/runs/{run_id}` returns only `id` by default—pass `selects` query parameters for the fields you need.
 
-#### Before
+**Before**
+
 ```bash
 RUN_ID="<run-id>"
 
@@ -844,7 +899,8 @@ curl "https://api.smith.langchain.com/api/v1/runs/$RUN_ID" \
   -H "x-api-key: $LANGSMITH_API_KEY"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -858,10 +914,12 @@ curl "https://api.smith.langchain.com/api/v2/runs/$RUN_ID?project_id=$PROJECT_ID
 
 #### Handle a not-found run
 
-#### Python
+**Python**
+
 `read_run` raised `LangSmithNotFoundError` from `langsmith.utils` for a missing run. `runs.retrieve` raises `NotFoundError` from `langsmith` instead.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -877,7 +935,8 @@ except LangSmithNotFoundError:
     print(f"Run {run_id} not found")
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -904,13 +963,16 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `client.runs.retrieve` raises `NotFoundError` for a missing run.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
+import { uuid7 } from "langsmith";
 import { Client } from "langsmith";
 
 const client = new Client();
@@ -925,10 +987,12 @@ try {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
+import { uuid7 } from "langsmith";
 import { Client, NotFoundError } from "langsmith";
 
 const client = new Client();
@@ -948,10 +1012,12 @@ try {
 }
 ```
 
-#### Java
+**Java**
+
 `.retrieve()` and `.retrieveV2()` both raise `com.langchain.smith.errors.NotFoundException`—unchanged, since the Java SDK was already Stainless-generated before SmithDB.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -969,7 +1035,8 @@ try {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1002,10 +1069,12 @@ try {
 }
 ```
 
-#### Go
+**Go**
+
 `Get` and `GetV2` both return a `*langsmith.Error` you can inspect with `errors.As`—unchanged, since the Go SDK was already Stainless-generated before SmithDB. Check `StatusCode` for `404`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -1034,7 +1103,8 @@ if err != nil {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1070,10 +1140,12 @@ if err != nil {
 }
 ```
 
-#### cURL
+**cURL**
+
 Both `GET /api/v1/runs/{run_id}` and `GET /api/v2/runs/{run_id}` return HTTP 404 for a missing run. Check the response status code.
 
-#### Before
+**Before**
+
 ```bash
 RUN_ID="<run-id>"
 
@@ -1086,7 +1158,8 @@ if [ "$HTTP_STATUS" = "404" ]; then
 fi
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1107,10 +1180,12 @@ fi
 
 The `load_child_runs` flag and the nested `child_runs` field are removed. Fetch every run in the trace with `traces.list_runs`, then filter on `parent_run_ids`, which holds each run's full ancestor chain, root first and closest parent last.
 
-#### Python
+**Python**
+
 Replace `read_run(run_id, load_child_runs=True)` with `client.traces.list_runs`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -1128,7 +1203,8 @@ for child in run.child_runs or []:
 print(len(run.child_run_ids or []), "descendants")
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1179,10 +1255,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 Replace the `loadChildRuns` option with `client.traces.listRuns`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -1201,7 +1279,8 @@ for (const child of run.child_runs ?? []) {
 console.log((run.child_run_ids ?? []).length, "descendants");
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1243,13 +1322,16 @@ for (const child of children) {
 }
 ```
 
-#### Java
+**Java**
+
 Nothing to migrate: the Java SDK never loaded child runs in one call, so use `client.traces().listRuns()` to walk a trace's runs.
 
-#### Go
+**Go**
+
 Nothing to migrate: the Go SDK never loaded child runs in one call, so use `client.Traces.ListRuns()` to walk a trace's runs.
 
-#### cURL
+**cURL**
+
 Nothing to migrate: `GET /api/v1/runs/{run_id}` never returned child runs, so use `GET /api/v2/traces/{trace_id}/runs` to walk a trace's runs.
 
 ## Runs: get URL
@@ -1260,25 +1342,31 @@ Get the LangSmith UI URL for a run.
 
 #### Method name
 
-#### Python
+**Python**
+
 | Before | After |
 | - | - |
 | `client.get_run_url()` | `client.runs.get_url()` |
 
 > [!NOTE]
+>
 > `client.runs.get_url()` is now async. Call it with `await`.
 
 See the [reference](https://reference.langchain.com/python/langsmith/_openapi_client/resources/runs/RunsResource/get_url) for the full parameter list.
 
-#### TypeScript
+**TypeScript**
+
 | Before | After |
 | - | - |
 | `client.getRunUrl()` | `client.runs.getURL()` |
 
 See the [reference](https://reference.langchain.com/javascript/langsmith/_openapi_client/Langsmith/Runs/getURL) for the full parameter list.
 
-#### Java
-The Java SDK has no legacy equivalent for retrieving a run's UI URL.
+**Java**
+
+> [!NOTE]
+>
+> The Java SDK has no legacy equivalent for retrieving a run's UI URL.
 
 | Before | After |
 | - | - |
@@ -1286,8 +1374,11 @@ The Java SDK has no legacy equivalent for retrieving a run's UI URL.
 
 See the [reference](https://javadoc.io/doc/com.langchain.smith/langsmith-java/latest/com/langchain/smith/services/blocking/RunService.html) for the full parameter list.
 
-#### Go
-The Go SDK has no legacy equivalent for retrieving a run's UI URL.
+**Go**
+
+> [!NOTE]
+>
+> The Go SDK has no legacy equivalent for retrieving a run's UI URL.
 
 | Before | After |
 | - | - |
@@ -1295,8 +1386,11 @@ The Go SDK has no legacy equivalent for retrieving a run's UI URL.
 
 See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#RunService.GetURL) for the full parameter list.
 
-#### cURL
-The REST API has no legacy equivalent for retrieving a run's UI URL.
+**cURL**
+
+> [!NOTE]
+>
+> The REST API has no legacy equivalent for retrieving a run's UI URL.
 
 | Before | After |
 | - | - |
@@ -1304,8 +1398,10 @@ The REST API has no legacy equivalent for retrieving a run's UI URL.
 
 #### Parameters
 
-#### Python
+**Python**
+
 > [!WARNING]
+>
 > `runs.get_url` needs the run's `project_id` and `trace_id` passed directly, instead of resolving them from a `run` object or a `project_name`/`project_id` fallback.
 
 | Before (`get_run_url`) | After (`runs.get_url`) | Notes |
@@ -1317,8 +1413,10 @@ The REST API has no legacy equivalent for retrieving a run's UI URL.
 | *(not available)* | `trace_id` | **Required**; the run's trace UUID, previously read from `run` internally |
 | *(not available)* | `start_time` | Optional; run's start time (RFC3339); omit if unknown |
 
-#### TypeScript
+**TypeScript**
+
 > [!WARNING]
+>
 > `client.runs.getURL` needs the run's `project_id` and `trace_id` passed directly, instead of resolving them from a `run` object or a `runId` fallback.
 
 | Before (`getRunUrl`) | After (`getURL`) | Notes |
@@ -1330,7 +1428,8 @@ The REST API has no legacy equivalent for retrieving a run's UI URL.
 | *(not available)* | `trace_id` | **Required**; `snake_case`; the run's trace UUID |
 | *(not available)* | `start_time` | Optional; `snake_case`; run's start time (RFC3339); omit if unknown |
 
-#### Java
+**Java**
+
 | Before | After (`RunGetUrlParams`) | Notes |
 | - | - | - |
 | *(no legacy method)* | `runId` | **Required** (positional); the run's ID |
@@ -1338,7 +1437,8 @@ The REST API has no legacy equivalent for retrieving a run's UI URL.
 | *(no legacy method)* | `traceId()` | **Required**; the run's trace UUID |
 | *(no legacy method)* | `startTime()` | Optional; run's start time (RFC3339); omit if unknown |
 
-#### Go
+**Go**
+
 | Before | After (`RunGetURLParams`) | Notes |
 | - | - | - |
 | *(no legacy method)* | `runID` (positional) | **Required**; the run's ID |
@@ -1346,7 +1446,8 @@ The REST API has no legacy equivalent for retrieving a run's UI URL.
 | *(no legacy method)* | `TraceID` | **Required**; the run's trace UUID |
 | *(no legacy method)* | `StartTime` | Optional; run's start time (RFC3339); omit if unknown |
 
-#### cURL
+**cURL**
+
 | Before | After (`GET /api/v2/runs/{run_id}/url`) | Notes |
 | - | - | - |
 | *(no legacy endpoint)* | `run_id` (path) | **Required** |
@@ -1356,27 +1457,32 @@ The REST API has no legacy equivalent for retrieving a run's UI URL.
 
 #### Response
 
-#### Python
+**Python**
+
 | Before | After | Notes |
 | - | - | - |
 | `str` (the URL) | `RunGetURLResponse.url` | Response is now wrapped in an object; read the `.url` attribute |
 
-#### TypeScript
+**TypeScript**
+
 | Before | After | Notes |
 | - | - | - |
 | `string` (the URL) | `RunGetURLResponse.url` | Response is now wrapped in an object; read the `.url` property |
 
-#### Java
+**Java**
+
 | Before | After | Notes |
 | - | - | - |
 | *(no legacy method)* | `RunGetUrlResponse.url`() | Returns `Optional` |
 
-#### Go
+**Go**
+
 | Before | After | Notes |
 | - | - | - |
 | *(no legacy method)* | `RunGetURLResponse.URL` | Returns a `string` |
 
-#### cURL
+**cURL**
+
 | Before | After | Notes |
 | - | - | - |
 | *(no legacy endpoint)* | `{"url": "..."}` | JSON object with a single `url` field |
@@ -1385,10 +1491,12 @@ The REST API has no legacy equivalent for retrieving a run's UI URL.
 
 #### Get a run's URL
 
-#### Python
+**Python**
+
 `get_run_url` accepts a full run object. `runs.get_url` is async and needs the run's `project_id` (its `session_id` under the old v1 schema) and `trace_id` passed individually, with `start_time` optional.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -1401,7 +1509,8 @@ url = client.get_run_url(run=run)
 print(url)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1424,10 +1533,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `getRunUrl` accepts a full run object. `runs.getURL` needs the run's `project_id` (its `session_id` under the old v1 schema) and `trace_id` passed individually, with `start_time` optional.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -1439,7 +1550,8 @@ const url = await client.getRunUrl({ runId });
 console.log(url);
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1456,7 +1568,8 @@ const response = await client.runs.getURL(run.id, {
 console.log(response.url);
 ```
 
-#### Java
+**Java**
+
 The Java SDK has no legacy equivalent. `runs().getUrl` needs the run's `projectId()` and `traceId()`, with `startTime()` optional.
 
 **After**
@@ -1484,7 +1597,8 @@ fun main() {
 }
 ```
 
-#### Go
+**Go**
+
 The Go SDK has no legacy equivalent. `Runs.GetURL` needs the run's `ProjectID` and `TraceID`, with `StartTime` optional.
 
 **After**
@@ -1522,7 +1636,8 @@ func main() {
 }
 ```
 
-#### cURL
+**cURL**
+
 The REST API has no legacy equivalent. `GET /api/v2/runs/{run_id}/url` needs the run's `project_id` and `trace_id` query parameters, with `start_time` optional.
 
 ```bash
@@ -1546,8 +1661,6 @@ curl "https://api.smith.langchain.com/api/v2/runs/$RUN_ID/url?project_id=$PROJEC
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

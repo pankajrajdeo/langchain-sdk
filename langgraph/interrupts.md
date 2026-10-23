@@ -82,10 +82,12 @@ resumed = graph.stream_events(Command(resume=True), config=config, version="v3")
 final = resumed.output
 ```
 
-#### [View example trace](https://smith.langchain.com/public/924527bc-da7c-4e0a-8986-4194e622140a/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/cf85f039-145d-4226-9c16-3e915c35a35c/r)**
+>
+> Open a public LangSmith run for this example.
 
 > [!NOTE]
+>
 > The default `graph.invoke(...)` API still works and surfaces interrupts under `result["__interrupt__"]`. Use it when you don't need streamed projections; otherwise prefer `graph.stream_events(..., version="v3")`.
 
 **Key points about resuming:**
@@ -96,6 +98,7 @@ Open a public LangSmith run for this example.
 * You can pass any JSON-serializable value as the resume value, subject to validation when you specify a typed `response_schema`
 
 > [!WARNING]
+>
 > `Command(resume=...)` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`/`stream_events()`. The other `Command` parameters (`update`, `goto`, `graph`) are designed for [returning from node functions](graph-api.md#command). Do not pass `Command(update=...)` as input to continue multi-turn conversations—pass a plain input dict instead.
 
 ## Define an interrupt response schema
@@ -103,6 +106,7 @@ Open a public LangSmith run for this example.
 The `response_schema` argument to [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) describes the input expected when you resume the graph. Clients can use the schema to render typed input forms.
 
 > [!NOTE]
+>
 > Interrupt response schemas require `langgraph>=1.2.12`.
 
 Pass a Pydantic model class, a `TypedDict` from `typing_extensions`, or a dataclass to validate resume values. LangGraph converts the type to JSON Schema and includes it in `Interrupt.response_schema`, separately from the interrupt's `value` payload. The schema is available on interrupts returned to the caller and in checkpoint task interrupts.
@@ -152,17 +156,17 @@ You can also pass a JSON Schema dictionary as `response_schema`. LangGraph expos
 
 Studio renders interrupt response schemas as typed input fields instead of a JSON editor. This preview of the Studio component uses example data with approval, note, and numeric amount fields.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/u62GP5wl5NeQqwjE/images/langgraph-interrupt-response-schema.png?fit=max&auto=format&n=u62GP5wl5NeQqwjE&q=85&s=b10304786d356849862616a60b74aa3d" alt="Studio interrupt form with an approval toggle, a note field, and a numeric amount set to 125.50" width="900" height="800" data-path="images/langgraph-interrupt-response-schema.png" />
+![Studio interrupt form with an approval toggle, a note field, and a numeric amount set to 125.50](https://mintcdn.com/langchain-5e9cc07a/u62GP5wl5NeQqwjE/images/langgraph-interrupt-response-schema.png?fit=max\&auto=format\&n=u62GP5wl5NeQqwjE\&q=85\&s=b10304786d356849862616a60b74aa3d)
 
 ## Common patterns
 
 The key thing that interrupts unlock is the ability to pause execution and wait for external input. This is useful for a variety of use cases, including:
 
-*  [Approval workflows](#approve-or-reject): Pause before executing critical actions (API calls, database changes, financial transactions)
-*  [Handling multiple interrupts](#handling-multiple-interrupts): Pair interrupt IDs with resume values when resuming multiple interrupts in a single invocation
-*  [Review and edit](#review-and-edit-state): Let humans review and modify LLM outputs or tool calls before continuing
-*  [Interrupting tool calls](#interrupts-in-tools): Pause before executing tool calls to review and edit the tool call before execution
-*  [Validating human input](#validating-human-input): Pause before proceeding to the next step to validate human input
+* &#x20;[Approval workflows](#approve-or-reject): Pause before executing critical actions (API calls, database changes, financial transactions)
+* &#x20;[Handling multiple interrupts](#handling-multiple-interrupts): Pair interrupt IDs with resume values when resuming multiple interrupts in a single invocation
+* &#x20;[Review and edit](#review-and-edit-state): Let humans review and modify LLM outputs or tool calls before continuing
+* &#x20;[Interrupting tool calls](#interrupts-in-tools): Pause before executing tool calls to review and edit the tool call before execution
+* &#x20;[Validating human input](#validating-human-input): Pause before proceeding to the next step to validate human input
 
 ### Stream with human-in-the-loop (HITL) interrupts
 
@@ -198,8 +202,9 @@ while True:
     stream_input = Command(resume=user_response)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/a1d09dc8-80ac-4bad-a70c-59e4b7cdbff8/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/3fcd0b07-12d7-455e-9d24-8b25548a46be/r)**
+>
+> Open a public LangSmith run for this example.
 
 * **`stream.messages`**: Chat-model output as content blocks; iterate each `message.text` for token deltas. For nested subgraphs, read message chunks from `stream.subgraphs[*].messages`.
 * **`stream.values`**: Full state snapshots after each step
@@ -261,8 +266,9 @@ print("Final state:", resumed.output)
 # Final state: {'vals': ['a:answer for question_a', 'b:answer for question_b']}
 ```
 
-#### [View example trace](https://smith.langchain.com/public/0db5e7bd-c53b-490a-9ed2-650ac477cd2d/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/7cbaa580-169c-4f6d-a883-5d980309e9cf/r)**
+>
+> Open a public LangSmith run for this example.
 
 ### Approve or reject
 
@@ -296,68 +302,71 @@ graph.stream_events(Command(resume=True), config=config, version="v3").output
 graph.stream_events(Command(resume=False), config=config, version="v3").output
 ```
 
-<details>
-<summary>Full example</summary>
-
+> **Full example**
+>
 ```python
-from typing import Literal, Optional, TypedDict
-
-from langgraph.checkpoint.memory import InMemorySaver
-from langgraph.graph import END, START, StateGraph
-from langgraph.types import Command, interrupt
-
-class ApprovalState(TypedDict):
-    action_details: str
-    status: Optional[Literal["pending", "approved", "rejected"]]
-
-def approval_node(state: ApprovalState) -> Command[Literal["proceed", "cancel"]]:
-    # Expose details so the caller can render them in a UI
-    decision = interrupt(
-        {
-            "question": "Approve this action?",
-            "details": state["action_details"],
-        }
-    )
-
-    # Route to the appropriate node after resume
-    return Command(goto="proceed" if decision else "cancel")
-
-def proceed_node(state: ApprovalState):
-    return {"status": "approved"}
-
-def cancel_node(state: ApprovalState):
-    return {"status": "rejected"}
-
-builder = StateGraph(ApprovalState)
-builder.add_node("approval", approval_node)
-builder.add_node("proceed", proceed_node)
-builder.add_node("cancel", cancel_node)
-builder.add_edge(START, "approval")
-builder.add_edge("proceed", END)
-builder.add_edge("cancel", END)
-
-# Use a more durable checkpointer in production
-checkpointer = InMemorySaver()
-graph = builder.compile(checkpointer=checkpointer)
-
-config = {"configurable": {"thread_id": "approval-123"}}
-initial = graph.stream_events(
-    {"action_details": "Transfer $500", "status": "pending"},
-    config=config,
-    version="v3",
-)
-_ = initial.output  # drive the stream to completion
-print(initial.interrupts)  # -> (Interrupt(value={'question': ..., 'details': ...}),)
-
-# Resume with the decision; True routes to proceed, False to cancel
-resumed = graph.stream_events(Command(resume=True), config=config, version="v3")
-print(resumed.output["status"])
+> from typing import Literal, Optional, TypedDict
+>
+> from langgraph.checkpoint.memory import InMemorySaver
+> from langgraph.graph import END, START, StateGraph
+> from langgraph.types import Command, interrupt
+>
+>
+> class ApprovalState(TypedDict):
+>     action_details: str
+>     status: Optional[Literal["pending", "approved", "rejected"]]
+>
+>
+> def approval_node(state: ApprovalState) -> Command[Literal["proceed", "cancel"]]:
+>     # Expose details so the caller can render them in a UI
+>     decision = interrupt(
+>         {
+>             "question": "Approve this action?",
+>             "details": state["action_details"],
+>         }
+>     )
+>
+>     # Route to the appropriate node after resume
+>     return Command(goto="proceed" if decision else "cancel")
+>
+>
+> def proceed_node(state: ApprovalState):
+>     return {"status": "approved"}
+>
+>
+> def cancel_node(state: ApprovalState):
+>     return {"status": "rejected"}
+>
+>
+> builder = StateGraph(ApprovalState)
+> builder.add_node("approval", approval_node)
+> builder.add_node("proceed", proceed_node)
+> builder.add_node("cancel", cancel_node)
+> builder.add_edge(START, "approval")
+> builder.add_edge("proceed", END)
+> builder.add_edge("cancel", END)
+>
+> # Use a more durable checkpointer in production
+> checkpointer = InMemorySaver()
+> graph = builder.compile(checkpointer=checkpointer)
+>
+> config = {"configurable": {"thread_id": "approval-123"}}
+> initial = graph.stream_events(
+>     {"action_details": "Transfer $500", "status": "pending"},
+>     config=config,
+>     version="v3",
+> )
+> _ = initial.output  # drive the stream to completion
+> print(initial.interrupts)  # -> (Interrupt(value={'question': ..., 'details': ...}),)
+>
+> # Resume with the decision; True routes to proceed, False to cancel
+> resumed = graph.stream_events(Command(resume=True), config=config, version="v3")
+> print(resumed.output["status"])
 ```
-
-#### [View example trace](https://smith.langchain.com/public/dc8614c9-bbb7-4231-b852-7a5899964e10/r)
-Open a public LangSmith run for this example.
-
-</details>
+>
+> > **[View example trace](https://smith.langchain.com/public/81e6322b-083e-4290-bcb2-18cf98d38038/r)**
+> >
+> > Open a public LangSmith run for this example.
 
 ### Review and edit state
 
@@ -387,57 +396,58 @@ graph.stream_events(
 ).output
 ```
 
-<details>
-<summary>Full example</summary>
-
+> **Full example**
+>
 ```python
-from typing import TypedDict
-
-from langgraph.checkpoint.memory import MemorySaver
-from langgraph.graph import END, START, StateGraph
-from langgraph.types import Command, interrupt
-
-class ReviewState(TypedDict):
-    generated_text: str
-
-def review_node(state: ReviewState):
-    # Ask a reviewer to edit the generated content
-    updated = interrupt(
-        {
-            "instruction": "Review and edit this content",
-            "content": state["generated_text"],
-        }
-    )
-    return {"generated_text": updated}
-
-builder = StateGraph(ReviewState)
-builder.add_node("review", review_node)
-builder.add_edge(START, "review")
-builder.add_edge("review", END)
-
-checkpointer = MemorySaver()
-graph = builder.compile(checkpointer=checkpointer)
-
-config = {"configurable": {"thread_id": "review-42"}}
-initial = graph.stream_events(
-    {"generated_text": "Initial draft"}, config=config, version="v3"
-)
-_ = initial.output  # drive the stream to completion
-print(initial.interrupts)  # -> (Interrupt(value={'instruction': ..., 'content': ...}),)
-
-# Resume with the edited text from the reviewer
-final_state = graph.stream_events(
-    Command(resume="Improved draft after review"),
-    config=config,
-    version="v3",
-)
-print(final_state.output["generated_text"])  # -> "Improved draft after review"
+> from typing import TypedDict
+>
+> from langgraph.checkpoint.memory import MemorySaver
+> from langgraph.graph import END, START, StateGraph
+> from langgraph.types import Command, interrupt
+>
+>
+> class ReviewState(TypedDict):
+>     generated_text: str
+>
+>
+> def review_node(state: ReviewState):
+>     # Ask a reviewer to edit the generated content
+>     updated = interrupt(
+>         {
+>             "instruction": "Review and edit this content",
+>             "content": state["generated_text"],
+>         }
+>     )
+>     return {"generated_text": updated}
+>
+>
+> builder = StateGraph(ReviewState)
+> builder.add_node("review", review_node)
+> builder.add_edge(START, "review")
+> builder.add_edge("review", END)
+>
+> checkpointer = MemorySaver()
+> graph = builder.compile(checkpointer=checkpointer)
+>
+> config = {"configurable": {"thread_id": "review-42"}}
+> initial = graph.stream_events(
+>     {"generated_text": "Initial draft"}, config=config, version="v3"
+> )
+> _ = initial.output  # drive the stream to completion
+> print(initial.interrupts)  # -> (Interrupt(value={'instruction': ..., 'content': ...}),)
+>
+> # Resume with the edited text from the reviewer
+> final_state = graph.stream_events(
+>     Command(resume="Improved draft after review"),
+>     config=config,
+>     version="v3",
+> )
+> print(final_state.output["generated_text"])  # -> "Improved draft after review"
 ```
-
-#### [View example trace](https://smith.langchain.com/public/cf03e7a5-8261-499d-9612-57b0d775c4ab/r)
-Open a public LangSmith run for this example.
-
-</details>
+>
+> > **[View example trace](https://smith.langchain.com/public/5efd556a-ed06-45b2-9520-a7a4819a92a6/r)**
+> >
+> > Open a public LangSmith run for this example.
 
 ### Interrupts in tools
 
@@ -473,115 +483,117 @@ def send_email(to: str, subject: str, body: str):
 
 This approach is useful when you want the approval logic to live with the tool itself, making it reusable across different parts of your graph. The LLM can call the tool naturally, and the interrupt will pause execution whenever the tool is invoked, allowing you to approve, edit, or cancel the action.
 
-<details>
-<summary>Full example</summary>
-
+> **Full example**
+>
 ```python
-import sqlite3
-import operator
-from typing import TypedDict, Annotated, Literal
-from langchain.tools import tool
-from langchain_anthropic import ChatAnthropic
-from langgraph.checkpoint.sqlite import SqliteSaver
-from langgraph.graph import StateGraph, START, END
-from langgraph.types import Command, interrupt
-from langchain.messages import AnyMessage, SystemMessage, ToolMessage
-
-class AgentState(TypedDict):
-    messages: Annotated[list[AnyMessage], operator.add]
-
-@tool
-def send_email(to: str, subject: str, body: str):
-    """Send an email to a recipient."""
-
-    # Pause before sending; payload surfaces on stream.interrupts when using event streaming
-    response = interrupt({
-        "action": "send_email",
-        "to": to,
-        "subject": subject,
-        "body": body,
-        "message": "Approve sending this email?",
-    })
-
-    if response.get("action") == "approve":
-        final_to = response.get("to", to)
-        final_subject = response.get("subject", subject)
-        final_body = response.get("body", body)
-
-        # Actually send the email (your implementation here)
-        print(f"[send_email] to={final_to} subject={final_subject} body={final_body}")
-        return f"Email sent to {final_to}"
-
-    return "Email cancelled by user"
-
-model = ChatAnthropic(model="claude-sonnet-4-6").bind_tools([send_email])
-tools_by_name = {"send_email": send_email}
-
-def agent_node(state: AgentState):
-    # LLM may decide to call the tool; interrupt pauses before sending
-    result = model.invoke(state["messages"])
-    return {"messages": [result]}
-
-def tool_node(state: AgentState):
-    """Performs the tool call"""
-    result = []
-    for tool_call in state["messages"][-1].tool_calls:
-        tool = tools_by_name[tool_call["name"]]
-        observation = tool.invoke(tool_call["args"])
-        result.append(ToolMessage(content=observation, tool_call_id=tool_call["id"]))
-    return {"messages": result}
-
-def should_continue(state: AgentState) -> Literal["tool_node", END]:
-    """Decide if we should continue the loop or stop based upon whether the LLM made a tool call"""
-    messages = state["messages"]
-    last_message = messages[-1]
-
-    if last_message.tool_calls:
-        return "tool_node"
-    return END
-
-builder = StateGraph(AgentState)
-builder.add_node("agent", agent_node)
-builder.add_node("tool_node", tool_node)
-
-builder.add_edge(START, "agent")
-builder.add_conditional_edges("agent", should_continue, ["tool_node", END])  # Routes to "tools" or END
-builder.add_edge("tool_node", "agent")  # Loop back after tools
-
-checkpointer = SqliteSaver(
-    sqlite3.connect("tool-approval.db", check_same_thread=False)
-)
-graph = builder.compile(checkpointer=checkpointer)
-
-config = {"configurable": {"thread_id": "email-workflow"}}
-initial = graph.stream_events(
-    {
-        "messages": [
-            {"role": "user", "content": "Send an email to alice@example.com about the meeting"}
-        ]
-    },
-    config=config,
-    version="v3",
-)
-initial.output  # drive the stream to completion
-print(initial.interrupts)  # -> (Interrupt(value={'action': 'send_email', ...}),)
-
-# Resume with approval and optionally edited arguments
-resumed = graph.stream_events(
-    Command(resume={"action": "approve", "subject": "Updated subject"}),
-    config=config,
-    version="v3",
-)
-print(resumed.output["messages"][-1])  # -> Tool result returned by send_email
+> import sqlite3
+> import operator
+> from typing import TypedDict, Annotated, Literal
+> from langchain.tools import tool
+> from langchain_anthropic import ChatAnthropic
+> from langgraph.checkpoint.sqlite import SqliteSaver
+> from langgraph.graph import StateGraph, START, END
+> from langgraph.types import Command, interrupt
+> from langchain.messages import AnyMessage, SystemMessage, ToolMessage
+>
+>
+> class AgentState(TypedDict):
+>     messages: Annotated[list[AnyMessage], operator.add]
+>
+>
+> @tool
+> def send_email(to: str, subject: str, body: str):
+>     """Send an email to a recipient."""
+>
+>     # Pause before sending; payload surfaces on stream.interrupts when using event streaming
+>     response = interrupt({
+>         "action": "send_email",
+>         "to": to,
+>         "subject": subject,
+>         "body": body,
+>         "message": "Approve sending this email?",
+>     })
+>
+>     if response.get("action") == "approve":
+>         final_to = response.get("to", to)
+>         final_subject = response.get("subject", subject)
+>         final_body = response.get("body", body)
+>
+>         # Actually send the email (your implementation here)
+>         print(f"[send_email] to={final_to} subject={final_subject} body={final_body}")
+>         return f"Email sent to {final_to}"
+>
+>     return "Email cancelled by user"
+>
+>
+> model = ChatAnthropic(model="claude-sonnet-4-6").bind_tools([send_email])
+> tools_by_name = {"send_email": send_email}
+>
+>
+> def agent_node(state: AgentState):
+>     # LLM may decide to call the tool; interrupt pauses before sending
+>     result = model.invoke(state["messages"])
+>     return {"messages": [result]}
+>
+> def tool_node(state: AgentState):
+>     """Performs the tool call"""
+>     result = []
+>     for tool_call in state["messages"][-1].tool_calls:
+>         tool = tools_by_name[tool_call["name"]]
+>         observation = tool.invoke(tool_call["args"])
+>         result.append(ToolMessage(content=observation, tool_call_id=tool_call["id"]))
+>     return {"messages": result}
+>
+> def should_continue(state: AgentState) -> Literal["tool_node", END]:
+>     """Decide if we should continue the loop or stop based upon whether the LLM made a tool call"""
+>     messages = state["messages"]
+>     last_message = messages[-1]
+>
+>     if last_message.tool_calls:
+>         return "tool_node"
+>     return END
+>
+> builder = StateGraph(AgentState)
+> builder.add_node("agent", agent_node)
+> builder.add_node("tool_node", tool_node)
+>
+> builder.add_edge(START, "agent")
+> builder.add_conditional_edges("agent", should_continue, ["tool_node", END])  # Routes to "tools" or END
+> builder.add_edge("tool_node", "agent")  # Loop back after tools
+>
+> checkpointer = SqliteSaver(
+>     sqlite3.connect("tool-approval.db", check_same_thread=False)
+> )
+> graph = builder.compile(checkpointer=checkpointer)
+>
+> config = {"configurable": {"thread_id": "email-workflow"}}
+> initial = graph.stream_events(
+>     {
+>         "messages": [
+>             {"role": "user", "content": "Send an email to alice@example.com about the meeting"}
+>         ]
+>     },
+>     config=config,
+>     version="v3",
+> )
+> initial.output  # drive the stream to completion
+> print(initial.interrupts)  # -> (Interrupt(value={'action': 'send_email', ...}),)
+>
+> # Resume with approval and optionally edited arguments
+> resumed = graph.stream_events(
+>     Command(resume={"action": "approve", "subject": "Updated subject"}),
+>     config=config,
+>     version="v3",
+> )
+> print(resumed.output["messages"][-1])  # -> Tool result returned by send_email
 ```
-
-</details>
 
 ### Validating human input
 
 Sometimes you need to validate input from humans and re-prompt if the value is invalid. The recommended approach is to call `interrupt()` **once per node invocation**, return from the node with the error message stored in state, and use a **conditional edge** to loop back to the node until a valid value is provided.
 
 > [!WARNING]
+>
 > **Avoid `while True` + `interrupt()` loops inside a single node.** Because the node re-runs from the beginning on every resume (see [Rules of interrupts](#rules-of-interrupts)), a loop that calls `interrupt()` multiple times causes each resume to replay all previous iterations: the first resume replays 1 iteration, the second replays 2, and so on. The result is exponential re-execution of any code inside the loop body.
 
 The correct pattern:
@@ -619,56 +631,57 @@ builder.add_conditional_edges("collect_age", route)
 
 Each resume invokes `get_age_node` exactly once, runs the `interrupt()` call once, and exits. When the answer is invalid, the conditional edge loops back and the next interrupt re-prompts with the updated question. No code runs more than once per resume.
 
-<details>
-<summary>Full example</summary>
-
+> **Full example**
+>
 ```python
-from typing import TypedDict
-
-from langgraph.checkpoint.memory import InMemorySaver
-from langgraph.graph import END, START, StateGraph
-from langgraph.types import Command, interrupt
-
-class FormState(TypedDict):
-    age: int | None
-    pending_question: str | None
-
-def get_age_node(state: FormState):
-    question = state.get("pending_question") or "What is your age?"
-    answer = interrupt(question)  # called exactly once per node invocation
-    print(f"I got {answer}")  # runs exactly once per resume
-    if isinstance(answer, int) and answer > 0:
-        return {"age": answer, "pending_question": None}
-    return {"pending_question": f"'{answer}' is not a valid age. Please enter a positive number."}
-
-def route(state: FormState):
-    # Loop back to collect_age until we have a valid age
-    return END if state.get("age") is not None else "collect_age"
-
-builder = StateGraph(FormState)
-builder.add_node("collect_age", get_age_node)
-builder.add_edge(START, "collect_age")
-builder.add_conditional_edges("collect_age", route)
-
-checkpointer = InMemorySaver()
-graph = builder.compile(checkpointer=checkpointer)
-
-config = {"configurable": {"thread_id": "form-1"}}
-first = graph.stream_events({"age": None, "pending_question": None}, config=config, version="v3")
-_ = first.output  # drive the stream to completion
-print(first.interrupts)  # -> (Interrupt(value='What is your age?', ...),)
-
-# Provide invalid data; the node re-prompts via the conditional edge
-retry = graph.stream_events(Command(resume="thirty"), config=config, version="v3")
-_ = retry.output
-print(retry.interrupts)  # -> (Interrupt(value="'thirty' is not a valid age...", ...),)
-
-# Provide valid data; route() returns END and the graph finishes
-final = graph.stream_events(Command(resume=30), config=config, version="v3")
-print(final.output["age"])  # -> 30
+> from typing import TypedDict
+>
+> from langgraph.checkpoint.memory import InMemorySaver
+> from langgraph.graph import END, START, StateGraph
+> from langgraph.types import Command, interrupt
+>
+>
+> class FormState(TypedDict):
+>     age: int | None
+>     pending_question: str | None
+>
+>
+> def get_age_node(state: FormState):
+>     question = state.get("pending_question") or "What is your age?"
+>     answer = interrupt(question)  # called exactly once per node invocation
+>     print(f"I got {answer}")  # runs exactly once per resume
+>     if isinstance(answer, int) and answer > 0:
+>         return {"age": answer, "pending_question": None}
+>     return {"pending_question": f"'{answer}' is not a valid age. Please enter a positive number."}
+>
+>
+> def route(state: FormState):
+>     # Loop back to collect_age until we have a valid age
+>     return END if state.get("age") is not None else "collect_age"
+>
+>
+> builder = StateGraph(FormState)
+> builder.add_node("collect_age", get_age_node)
+> builder.add_edge(START, "collect_age")
+> builder.add_conditional_edges("collect_age", route)
+>
+> checkpointer = InMemorySaver()
+> graph = builder.compile(checkpointer=checkpointer)
+>
+> config = {"configurable": {"thread_id": "form-1"}}
+> first = graph.stream_events({"age": None, "pending_question": None}, config=config, version="v3")
+> _ = first.output  # drive the stream to completion
+> print(first.interrupts)  # -> (Interrupt(value='What is your age?', ...),)
+>
+> # Provide invalid data; the node re-prompts via the conditional edge
+> retry = graph.stream_events(Command(resume="thirty"), config=config, version="v3")
+> _ = retry.output
+> print(retry.interrupts)  # -> (Interrupt(value="'thirty' is not a valid age...", ...),)
+>
+> # Provide valid data; route() returns END and the graph finishes
+> final = graph.stream_events(Command(resume=30), config=config, version="v3")
+> print(final.output["age"])  # -> 30
 ```
-
-</details>
 
 ## Rules of interrupts
 
@@ -970,9 +983,11 @@ def node_in_subgraph(state: State):
 To debug and test a graph, you can use static interrupts as breakpoints to step through the graph execution one node at a time. Static interrupts are triggered at defined points either before or after a node executes. You can set these by specifying `interrupt_before` and `interrupt_after` when compiling the graph.
 
 > [!NOTE]
+>
 > Static interrupts are **not** recommended for human-in-the-loop workflows. Use the [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) function instead.
 
-#### At compile time
+**At compile time**
+
 ```python
 graph = builder.compile(
     interrupt_before=["node_a"],  # [!code highlight]
@@ -1001,7 +1016,8 @@ graph.invoke(None, config=config)  # [!code highlight]
 5. The graph is run until the first breakpoint is hit.
 6. The graph is resumed by passing in `None` for the input. This will run the graph until the next breakpoint is hit.
 
-#### At run time
+**At run time**
+
 ```python
 config = {
     "configurable": {
@@ -1028,18 +1044,17 @@ graph.invoke(None, config=config)  # [!code highlight]
 5. The graph is resumed by passing in `None` for the input. This will run the graph until the next breakpoint is hit.
 
 > [!TIP]
+>
 > To debug your interrupts, use [LangSmith](../langsmith/observability.md).
 
 ### Using LangSmith Studio
 
 You can use [LangSmith Studio](../langsmith/studio.md) to set static interrupts in your graph in the UI before running the graph. You can also use the UI to inspect the graph state at any point in the execution.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/static-interrupt.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=5aa4e7cea2ab147cef5b4e210dd6c4a1" alt="image" width="1252" height="1040" data-path="oss/images/static-interrupt.png" />
+![image](https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/static-interrupt.png?fit=max\&auto=format\&n=dL5Sn6Cmy9pwtY0V\&q=85\&s=5aa4e7cea2ab147cef5b4e210dd6c4a1)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/interrupts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/interrupts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

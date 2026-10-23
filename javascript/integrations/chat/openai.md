@@ -15,11 +15,13 @@ tags: [docs, javascript, integrations, chat, openai]
 This guide will help you getting started with OpenAI [chat models](../../langchain/models.md). For detailed documentation of all `ChatOpenAI` features and configurations head to the [API reference](https://reference.langchain.com/javascript/langchain-openai/ChatOpenAI).
 
 > [!NOTE]
+>
 > **Chat Completions API compatibility**
 >
 > `ChatOpenAI` is fully compatible with OpenAI's (legacy) [Chat Completions API](https://platform.openai.com/docs/guides/completions). If you are looking to connect to other model providers that support the Chat Completions API, you can do so – see [instructions](../chat.md#chat-completions-api).
 
 > [!NOTE]
+>
 > **OpenAI models hosted on Azure**
 >
 > Note that certain OpenAI models can also be accessed via the [Microsoft Azure platform](https://azure.microsoft.com/en-us/products/ai-foundry/models/openai/).
@@ -28,7 +30,7 @@ This guide will help you getting started with OpenAI [chat models](../../langcha
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/openai) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/openai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatOpenAI`](https://reference.langchain.com/javascript/langchain-openai/ChatOpenAI) | [`@langchain/openai`](https://www.npmjs.com/package/@langchain/openai) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
 
@@ -226,6 +228,7 @@ await fineTunedLlm.invoke("Hi there!");
 If you need additional information like logprobs or token usage, these will be returned directly in the `invoke` response within the `response_metadata` field on the message.
 
 > [!NOTE]
+>
 > **Requires `@langchain/core>=0.1.48`.**
 
 ```typescript
@@ -396,9 +399,11 @@ console.log(result);
 As of Aug 6, 2024, OpenAI supports a `strict` argument when calling tools that will enforce that the tool argument schema is respected by the model. [See more](https://platform.openai.com/docs/guides/function-calling).
 
 > [!NOTE]
+>
 > Requires `@langchain/openai >= 0.2.6`
 
 > [!WARNING]
+>
 > If `strict: true` the tool definition will also be validated, and a subset of JSON schema are accepted. Crucially, schema cannot have optional args (those with default values). Read [the full docs](https://platform.openai.com/docs/guides/structured-outputs) on what types of schema are supported.
 
 Here's an example with tool calling. Passing an extra `strict: true` argument to `.bindTools` will pass the param through to all tool definitions:
@@ -487,7 +492,7 @@ weatherToolResult.tool_calls;
 
 ## Structured output
 
-We can also pass `strict: true` to the [`.withStructuredOutput()`](https://js.langchain.com/docs/how_to/structured_output/#the-.withstructuredoutput-method). Here's an example:
+We can also pass `strict: true` to the [`.withStructuredOutput()`](../../langchain/structured-output.md). Here's an example:
 
 ```typescript
 import { ChatOpenAI } from "@langchain/openai";
@@ -516,6 +521,7 @@ await structuredLlm.invoke([{
 ## Responses API
 
 > [!WARNING]
+>
 > **Compatibility**
 >
 > The below points apply to `@langchain/openai>=0.4.5-rc.0`.
@@ -533,11 +539,12 @@ Equipping [`ChatOpenAI`](https://reference.langchain.com/javascript/langchain-op
 To trigger a web search, pass `{"type": "web_search_preview"}` to the model as you would another tool.
 
 > [!TIP]
+>
 > **You can also pass built-in tools as invocation params:**
 >
-> ```ts
+```ts
 > llm.invoke("...", { tools: [{ type: "web_search_preview" }] });
-> ```
+```
 
 ```typescript
 import { ChatOpenAI } from "@langchain/openai";
@@ -696,13 +703,14 @@ const response = await llmWithMcp.invoke(
 ```
 
 > [!NOTE]
+>
 > **MCP Approvals**
 >
 > When instructed, OpenAI will request approval before making calls to a remote MCP server.
 >
 > In the above command, we instructed the model to never require approval. We can also configure the model to always request approval, or to always request approval for specific tools:
 >
-> ```typescript
+```typescript
 > ...
 > const llmWithMcp = llm.bindTools([
 >   {
@@ -719,11 +727,11 @@ const response = await llmWithMcp.invoke(
 > const response = await llmWithMcp.invoke(
 >     "What transport protocols does the 2025-03-26 version of the MCP spec (modelcontextprotocol/modelcontextprotocol) support?"
 > );
-> ```
+```
 >
 > With this configuration, responses can contain tool outputs typed as `mcp_approval_request`. To submit approvals for an approval request, you can structure it into a content block in a followup message:
 >
-> ```typescript
+```typescript
 > const approvals = [];
 > if (Array.isArray(response.additional_kwargs.tool_outputs)) {
 >   for (const content of response.additional_kwargs.tool_outputs) {
@@ -743,7 +751,7 @@ const response = await llmWithMcp.invoke(
 >     new HumanMessage({ content: approvals }),
 >   ],
 > );
-> ```
+```
 
 #### Image generation
 
@@ -772,6 +780,7 @@ const response = await llmWithImageGeneration.invoke(
 ### Reasoning models
 
 > [!WARNING]
+>
 > **Compatibility**: The below points apply to `@langchain/openai>=0.4.0`.
 
 When using reasoning models like `o1`, the default method for `withStructuredOutput` is OpenAI's built-in method for structured output (equivalent to passing `method: "jsonSchema"` as an option into `withStructuredOutput`). JSON schema mostly works the same as other models, but with one important caveat: when defining schema, `z.optional()` is not respected, and you should instead use `z.nullable()`.
@@ -833,6 +842,7 @@ await reasoningModelNullableSchema.invoke([{
 ### Add tools mid-conversation
 
 > [!NOTE]
+>
 > `additional_tools` requires `@langchain/openai>=1.6.2`.
 
 Use an [`additional_tools`](https://developers.openai.com/api/docs/guides/tools-tool-search#add-tools-at-a-specific-point-in-the-input) content block to make tools available from a point in the conversation onward. This is useful when your application loads tools outside OpenAI's [tool search](https://developers.openai.com/api/docs/guides/tools-tool-search) flow. Put the block in a [`SystemMessage`](https://reference.langchain.com/javascript/langchain-core/messages/SystemMessage):
@@ -1417,8 +1427,6 @@ For detailed documentation of all `ChatOpenAI` features and configurations head 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

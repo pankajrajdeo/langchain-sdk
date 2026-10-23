@@ -16,6 +16,7 @@ It also provides some non-Google models such as [Anthropic's Claude](https://doc
 This will help you getting started with `ChatVertexAI` [chat models](../../langchain/models.md). For detailed documentation of all `ChatVertexAI` features and configurations head to the [API reference](https://reference.langchain.com/javascript/langchain-google-vertexai/index/ChatVertexAI).
 
 > [!NOTE]
+>
 > **This library will be deprecated**
 >
 > This library will be replaced by the [ChatGoogle](google.md) library.
@@ -312,8 +313,6 @@ For detailed documentation of all `ChatVertexAI` features and configurations hea
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

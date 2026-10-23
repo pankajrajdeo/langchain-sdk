@@ -15,8 +15,8 @@ tags: [index, langsmith, agent-server-api, threads]
 - [Count Threads](count-threads.md) - Get the count of threads matching the specified criteria.
 - [Create Thread](create-thread.md) - Create a thread.
 - [Delete Thread](delete-thread.md) - Delete a thread by ID.
-- [Get Thread History Post](get-thread-history-post.md) - Get all past states for a thread.
-- [Get Thread History](get-thread-history.md) - Get all past states for a thread.
+- [Get Thread History Post](get-thread-history-post.md) - Get all past states for a thread. Can return fewer than limit states; page with before to read further.
+- [Get Thread History](get-thread-history.md) - Get all past states for a thread. Can return fewer than limit states; page with before to read further.
 - [Get Thread State At Checkpoint](get-thread-state-at-checkpoint-1.md) - Get state for a thread at a specific checkpoint.
 - [Get Thread State At Checkpoint](get-thread-state-at-checkpoint.md) - Get state for a thread at a specific checkpoint.
 - [Get Thread State](get-thread-state.md) - Get state for a thread.

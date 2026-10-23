@@ -12,16 +12,19 @@ tags: [docs, javascript, langgraph, stores]
 
 Stores let agents persist information across threads, including user preferences, accumulated knowledge, and facts that should survive beyond a single conversation. Unlike [checkpointers](checkpointers.md), which save the full graph state scoped to one thread, stores hold arbitrary key-value data accessible from any thread.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/shared_state.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=354526fb48c5eb11b4b2684a2df40d6c" alt="Model of shared state" width="1482" height="777" data-path="oss/images/shared_state.png" />
+![Model of shared state](https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/shared_state.png?fit=max\&auto=format\&n=dL5Sn6Cmy9pwtY0V\&q=85\&s=354526fb48c5eb11b4b2684a2df40d6c)
 
 > [!NOTE]
+>
 > **Agent Server handles stores automatically**
 > When using the [Agent Server](../../langsmith/agent-server.md), you do not need to implement or configure stores manually. The API handles all storage infrastructure for you behind the scenes.
 
 > [!NOTE]
+>
 > [InMemoryStore](https://reference.langchain.com/javascript/langchain-core/stores/InMemoryStore) is suitable for development and testing. For production, use a persistent store like `PostgresStore`, `MongoDBStore`, `RedisStore`, or `UpstashStore`. All implementations extend [BaseStore](https://reference.langchain.com/javascript/langchain-core/stores/BaseStore), which is the type annotation to use in node function signatures.
 
 > [!NOTE]
+>
 > See [store integrations](../integrations/long-term-memory/index.md) for the full list of available providers.
 
 ## Basic usage
@@ -29,9 +32,9 @@ Stores let agents persist information across threads, including user preferences
 The following code snippet shows the [InMemoryStore](https://reference.langchain.com/javascript/langchain-core/stores/InMemoryStore) in isolation without using LangGraph:
 
 ```typescript
-import { MemoryStore } from "@langchain/langgraph";
+import { InMemoryStore } from "@langchain/langgraph";
 
-const memoryStore = new MemoryStore();
+const memoryStore = new InMemoryStore();
 ```
 
 Memories are namespaced by a `tuple`, which is `(<user_id>, "memories")` in the following example. The namespace can be any length and represent anything, does not have to be user specific.
@@ -44,7 +47,8 @@ const namespaceForMemory = [userId, "memories"];
 Use the `store.put` method to save memories to the namespace in the store. Specify the namespace, as defined above, and a key-value pair for the memory: the key is simply a unique identifier for the memory (`memory_id`) and the value (a dictionary) is the memory itself.
 
 ```typescript
-const memoryId = crypto.randomUUID();
+import { v7 as uuid7 } from "uuid";
+const memoryId = uuid7();
 const memory = { food_preference: "I like pizza" };
 await memoryStore.put(namespaceForMemory, memoryId, memory);
 ```
@@ -72,8 +76,9 @@ The attributes it has are:
 
 * `namespace`: A tuple of strings, the namespace of this memory type
 
-> [!NOTE]
->   While the type is `tuple`, it may be serialized as a list when converted to JSON (for example, `['1', 'memories']`).
+  > [!NOTE]
+  >
+  > While the type is `tuple`, it may be serialized as a list when converted to JSON (for example, `['1', 'memories']`).
 
 * `createdAt`: Timestamp for when this memory was created
 
@@ -149,7 +154,7 @@ You can control which parts of your memories get embedded by configuring the `fi
 // Store with specific fields to embed
 await store.put(
   namespaceForMemory,
-  crypto.randomUUID(),
+  uuid7(),
   {
     food_preference: "I love Italian cuisine",
     context: "Discussing dinner plans",
@@ -157,10 +162,11 @@ await store.put(
   { index: ["food_preference"] } // Only embed "food_preferences" field
 );
 
+import { v7 as uuid7 } from "uuid";
 // Store without embedding (still retrievable, but not searchable)
 await store.put(
   namespaceForMemory,
-  crypto.randomUUID(),
+  uuid7(),
   { system_info: "Last updated: 2024-01-01" },
   { index: false }
 );
@@ -202,6 +208,7 @@ You can access the store and the `userId` from *any node* with the `runtime` arg
 
 ```typescript
 import { StateSchema, MessagesValue, Runtime } from "@langchain/langgraph";
+import { v7 as uuid7 } from "uuid";
 
 const MessagesState = new StateSchema({
   messages: MessagesValue,
@@ -219,7 +226,7 @@ const updateMemory: GraphNode<typeof MessagesState> = async (state, runtime) => 
   const memory = "Some memory content";
 
   // Create a new memory ID
-  const memoryId = crypto.randomUUID();
+  const memoryId = uuid7();
 
   // We create a new memory
   await runtime.store?.put(namespace, memoryId, { memory });
@@ -299,8 +306,6 @@ See the [deployment guide](../../langsmith/semantic-search.md) for more details 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/stores.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/stores.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

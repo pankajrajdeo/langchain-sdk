@@ -14,13 +14,15 @@ Safari blocks plain-HTTP traffic on localhost. When running Studio with `langgra
 
 ### Solution 1: Use Cloudflare Tunnel
 
-#### Python
+**Python**
+
 ```shell
 pip install -U langgraph-cli>=0.2.6
 langgraph dev --tunnel
 ```
 
-#### JS
+**JS**
+
 ```shell
 # Requires @langchain/langgraph-cli>=0.0.26
 npx @langchain/langgraph-cli dev --tunnel
@@ -37,6 +39,7 @@ The command outputs a tunnel URL. To connect Studio:
 This manual step is required for security - Studio requires explicit user confirmation before connecting to external URLs.
 
 > [!NOTE]
+>
 > Cloudflare tunnels can be unreliable and may intermittently disconnect.
 
 ### Solution 2: Use Chromium browser
@@ -100,13 +103,15 @@ Disable Brave Shields for LangSmith using the Brave icon in the URL bar.
 
 ### Solution 2: Use Cloudflare Tunnel
 
-#### Python
+**Python**
+
 ```shell
 pip install -U langgraph-cli>=0.2.6
 langgraph dev --tunnel
 ```
 
-#### JS
+**JS**
+
 ```shell
 # Requires @langchain/langgraph-cli>=0.0.26
 npx @langchain/langgraph-cli dev --tunnel
@@ -131,17 +136,17 @@ because without proper definition, Studio assumes the conditional edge could acc
 
 Define a mapping between router outputs and target nodes:
 
-#### Python
+**Python**
+
 ```python
 graph.add_conditional_edges("node_a", routing_function, {True: "node_b", False: "node_c"})
 ```
 
-#### Javascript
+**Javascript**
+
 ```ts
 graph.addConditionalEdges("node_a", routingFunction, { true: "node_b", false: "node_c" });
 ```
-
-<a id="python" />
 
 ### Solution 2: Router type definition
 
@@ -170,8 +175,6 @@ When you run an experiment, any attached evaluators are scheduled for execution 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/troubleshooting-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/troubleshooting-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

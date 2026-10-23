@@ -10,7 +10,7 @@ tags: [docs, langsmith, engine-security]
 
 > How LangSmith Engine handles your data, the GitHub and model subprocessor controls that govern its access, and its compliance posture.
 
-LangSmith Engine is an AI agent built into LangSmith that improves the agents you build. Engine reviews the trace data already in LangSmith, surfaces and prioritizes issues, and opens pull requests with suggested fixes, proposed prompt changes, and evaluations. For a product overview, see [Engine](engine-overview.md).
+[LangSmith Engine](engine.md) reviews the trace data already in LangSmith, surfaces and prioritizes issues, and opens pull requests with suggested fixes, proposed prompt changes, and evaluations.
 
 Engine is opt-in, advisory, and never trains on your data, and it runs under LangSmith's SOC 2 Type II and ISO 27001 controls. This page describes how Engine handles your data, the controls that govern its GitHub and model access, and its compliance posture for Engine in LangSmith Cloud. For how Engine runs in a self-hosted deployment, see [Engine on self-hosted](engine-self-hosted.md).
 
@@ -18,7 +18,7 @@ Engine is delivered as part of LangSmith and inherits LangSmith's security and c
 
 ## What data Engine uses
 
-Engine operates on data you have already chosen to share with LangChain: the trace data you send to LangSmith and, separately, the GitHub repository content you grant through the LangChain-managed GitHub App (see [GitHub integration](#github-integration)). Enabling Engine introduces no other customer data sources. The following table summarizes what Engine reads, where it lives, and what it enables.
+In LangSmith Cloud, Engine operates on data you have already chosen to share with LangChain: the trace data you send to LangSmith and, separately, the GitHub repository content you grant through the LangChain-managed GitHub App (see [GitHub integration](#github-integration)). Enabling Engine introduces no other customer data sources. The following table summarizes what Engine reads, where it lives, and what it enables.
 
 | **Data source** | **What Engine reads** | **Storage and persistence** | **Enables** |
 | - | - | - | - |
@@ -27,6 +27,7 @@ Engine operates on data you have already chosen to share with LangChain: the tra
 | Model provider (inference) | Only the content required for each analysis task. | Configured for zero data retention with each Engine model provider (see [Model subprocessors](#model-subprocessors)). | Engine reasoning and generation. |
 
 > [!NOTE]
+>
 > Engine's read scope may expand over time. This page is updated to reflect material changes. Last reviewed September 16, 2026.
 
 Trace content sent to Engine can include user messages, tool outputs, and PII, and this content is sent to model subprocessors under zero data retention for each analysis task. To remove sensitive fields before traces reach LangSmith, use [client-side masking](mask-inputs-outputs.md).
@@ -35,7 +36,7 @@ Engine outputs are advisory. It surfaces and tracks issues, proposes pull reques
 
 ## GitHub integration
 
-Engine connects to your source code through a LangChain-managed GitHub App. Only GitHub.com is supported. GitLab, Bitbucket, and other version control providers are not yet supported.
+In LangSmith Cloud, Engine connects to GitHub.com through a LangChain-managed GitHub App. Self-hosted deployments use an [operator-managed App for their GitHub environment](engine-self-hosted-github.md). [BYOC](byoc.md) deployments use an App you register and [configure in the LangSmith UI](engine-self-hosted-github.md#configure-the-app-on-byoc). GitLab, Bitbucket, and other version control providers are not yet supported.
 
 The App is scoped to:
 
@@ -57,21 +58,23 @@ In self-hosted deployments, each organization chooses how Engine runs its models
 * **LangSmith Intelligence (LSI):** Engine uses Amazon Bedrock through LSI, under the commitments on this page.
 * **Your own model providers:** Engine calls Anthropic, OpenAI, Amazon Bedrock, Google Vertex AI, or Azure AI Foundry with your credentials. Those providers process Engine's requests under your agreements with them, and LangChain receives only usage metadata.
 
+In [BYOC](byoc.md) deployments, Engine runs only on your own model providers.
+
 See [Choose how Engine runs its models](engine-self-hosted.md#choose-how-engine-runs-its-models).
 
 ## Key security controls
 
-Engine adds the following controls on top of LangSmith's baseline:
+In LangSmith Cloud, Engine adds the following controls on top of LangSmith's baseline:
 
 * **Explicit opt-in**: Engine is never on by default and can only be enabled by an Organization Admin.
 * **Advisory outputs, human at the helm**: Engine does not auto-merge, auto-deploy, or take destructive actions on your systems. Every proposed change is a pull request that follows your branch-protection, review, and merge policies. Proposed prompt changes are written to a separate proposal record in LangSmith and do not modify any prompt until an authorized user explicitly applies them. In both paths, a human decides what ships.
 * **Zero data retention configured with each Engine model provider**: Prompts and completions are not persisted by the inference vendor beyond the request.
 * **No use of customer data to train or fine-tune any model**: Each provider is bound by agreement not to use customer content for training.
 * **Logical tenant isolation**: Engine's access to your data is scoped to your LangSmith tenant. Cross-tenant access is prevented by application-level controls, consistent with LangSmith Cloud's tenancy model. Each analysis run executes inside its own isolated sandbox.
-* **Auditability**: Engine surfaces its work as GitHub pull requests, with supporting context in the issue list on the [Engine tab](engine.md). Code changes flow through your branch-protection, review, and automated build controls, so your software development lifecycle remains the system of record for what ships.
+* **Auditability**: Engine surfaces its work as GitHub pull requests, with supporting context in the issue list on the [Engine tab](engine-issues.md). Code changes flow through your branch-protection, review, and automated build controls, so your software development lifecycle remains the system of record for what ships.
 * **Client-side PII scrubbing**: LangSmith's [client libraries](mask-inputs-outputs.md) can remove sensitive content from traces before they are sent to LangSmith. Recommended for customers handling regulated data.
 * **Model selection managed by LangChain**: LangChain selects the specific model used for each Engine task across these subprocessors, and may change selections within that set without separate notification. Adding any new subprocessor follows the standard subprocessor-change notification process.
-* **Revocation and deletion**: You can revoke GitHub access at any time by uninstalling the App, and remove Engine's findings with **Delete all issues** in [Engine settings](engine.md#pause-engine-or-delete-its-issues). Trace data follows your LangSmith [retention and purging](data-purging-compliance.md) settings.
+* **Revocation and deletion**: You can revoke GitHub access at any time by uninstalling the App, and remove Engine's findings with **Delete all issues** in [Engine settings](engine-setup.md#pause-engine-or-delete-its-issues). Trace data follows your LangSmith [retention and purging](data-purging-compliance.md) settings.
 
 ## Compliance posture
 
@@ -87,9 +90,9 @@ The following risks are inherent to AI-assisted code generation. LangChain mitig
 
 ## See also
 
-* [Engine](engine-overview.md)
-* [Configure Engine](engine.md)
-* [Engine on self-hosted](engine-self-hosted.md)
+* [LangSmith Engine](engine.md)
+* [Set up Engine](engine-setup.md)
+* [Engine on self-hosted and BYOC](engine-self-hosted.md)
 * [Engine notifications](engine-notifications.md)
 * [Prevent logging of sensitive data in traces](mask-inputs-outputs.md)
 * [Data purging for compliance](data-purging-compliance.md)
@@ -103,8 +106,6 @@ For security questions, contact [trust@langchain.dev](mailto:trust@langchain.dev
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-security.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-security.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

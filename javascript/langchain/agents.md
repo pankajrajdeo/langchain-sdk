@@ -12,11 +12,12 @@ tags: [docs, javascript, langchain, agents]
 
 An agent is a model calling tools in a loop until a given task is complete.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/core_agent_loop.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=4b4cbb497b6273758a565de1bc90ece0" alt="Core agent loop diagram" width="1060" height="760" data-path="oss/images/core_agent_loop.svg" />
+![Core agent loop diagram](https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/core_agent_loop.svg?fit=max\&auto=format\&n=jtty0O--UJOKG0nK\&q=85\&s=4b4cbb497b6273758a565de1bc90ece0)
 
 A harness is everything around that loop: the prompt, the tools, and any middleware that shapes the model's behavior.
 
 > [!NOTE]
+>
 > **Agent = Model + Harness**
 >
 > The job of a harness: get the model the right context at the right time for the given task.
@@ -82,11 +83,12 @@ var agent = createAgent({ model: "ollama:north-mini-code-1.0", tools });
 Building on that, you can configure the basics directly with the `model=`, `tools=`, and `system_prompt=` parameters. For more advanced capabilities, extend the harness with [middleware](#configure-the-harness).
 
 > [!TIP]
+>
 > [Deep Agents](../deepagents/overview.md) builds on `create_agent` and comes with commonly useful capabilities already assembled, such as planning, file system tools, subagents, and memory. Use `create_agent` when you need to configure the harness yourself.
 
 ## Core components
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_model_harness.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=5ac6a7e0343af7cb5ba3ca632e2224af" alt="Agent model and harness components diagram" width="1200" height="760" data-path="oss/images/agent_model_harness.svg" />
+![Agent model and harness components diagram](https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_model_harness.svg?fit=max\&auto=format\&n=jtty0O--UJOKG0nK\&q=85\&s=5ac6a7e0343af7cb5ba3ca632e2224af)
 
 ### Model
 
@@ -634,6 +636,7 @@ For full details, examples, and middleware-level state schemas, see [Short-term 
 ## Invocation
 
 > [!TIP]
+>
 > Trace each step of this loop, debug tool calls, and evaluate agent outputs with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-agents). Follow the [tracing quickstart](../../langsmith/trace-with-langchain.md) to get set up. We recommend you also set up [LangSmith Engine](../../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 You can invoke an agent with a message. Behind the scenes that passes an update to the agent's [`State`](../langgraph/graph-api.md#state). All agents include a [sequence of messages](../langgraph/use-graph-api.md#messagesvalue) in their state; to invoke the agent, pass a new message along with a `thread_id` so the agent can persist and resume conversation history:
@@ -642,6 +645,7 @@ You can invoke an agent with a message. Behind the scenes that passes an update 
 
 ```ts
 import { AIMessage } from "@langchain/core/messages";
+import { uuid7 } from "langsmith";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
@@ -651,7 +655,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 let result = await agent.invoke(
   {
@@ -673,6 +677,7 @@ result = await agent.invoke(
 
 ```ts
 import { AIMessage } from "@langchain/core/messages";
+import { uuid7 } from "langsmith";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
@@ -682,7 +687,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 let result = await agent.invoke(
   {
@@ -704,6 +709,7 @@ result = await agent.invoke(
 
 ```ts
 import { AIMessage } from "@langchain/core/messages";
+import { uuid7 } from "langsmith";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
@@ -713,7 +719,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 let result = await agent.invoke(
   {
@@ -735,6 +741,7 @@ result = await agent.invoke(
 
 ```ts
 import { AIMessage } from "@langchain/core/messages";
+import { uuid7 } from "langsmith";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
@@ -744,7 +751,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 let result = await agent.invoke(
   {
@@ -766,6 +773,7 @@ result = await agent.invoke(
 
 ```ts
 import { AIMessage } from "@langchain/core/messages";
+import { uuid7 } from "langsmith";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
@@ -775,7 +783,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 let result = await agent.invoke(
   {
@@ -797,6 +805,7 @@ result = await agent.invoke(
 
 ```ts
 import { AIMessage } from "@langchain/core/messages";
+import { uuid7 } from "langsmith";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
@@ -806,7 +815,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 let result = await agent.invoke(
   {
@@ -828,6 +837,7 @@ result = await agent.invoke(
 
 ```ts
 import { AIMessage } from "@langchain/core/messages";
+import { uuid7 } from "langsmith";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
@@ -837,7 +847,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 let result = await agent.invoke(
   {
@@ -855,10 +865,12 @@ result = await agent.invoke(
 );
 ```
 
-#### [View example trace](https://smith.langchain.com/public/5e5926b4-3156-477c-83e5-969404aeb92e/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/dc6c669f-1699-4c3c-8490-c02b7d2cf978/r)**
+>
+> Open a public LangSmith run for this example.
 
 > [!NOTE]
+>
 > Persisting conversation history with `thread_id` requires the agent to be configured with a [checkpointer](long-term-memory.md). When deployed on [LangSmith](../../langsmith/deployment.md), a checkpointer is provisioned automatically. Locally, pass one explicitly, for example `create_agent(..., checkpointer=InMemorySaver())`.
 
 If you also need to pass per-run configuration (such as a user ID, API keys, or feature flags) to tools and middleware, pass it as `context` alongside the config. Define the shape of that data with `contextSchema` and access it through `runtime.context`:
@@ -867,6 +879,7 @@ If you also need to pass per-run configuration (such as a user ID, API keys, or 
 
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 import { AIMessage } from "@langchain/core/messages";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
@@ -889,7 +902,7 @@ const result = await agent.invoke(
     ],
   },
   {
-    configurable: { thread_id: crypto.randomUUID() },
+    configurable: { thread_id: uuid7() },
     context: { user_id: "user-123" },
   },
 );
@@ -899,6 +912,7 @@ const result = await agent.invoke(
 
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 import { AIMessage } from "@langchain/core/messages";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
@@ -921,7 +935,7 @@ const result = await agent.invoke(
     ],
   },
   {
-    configurable: { thread_id: crypto.randomUUID() },
+    configurable: { thread_id: uuid7() },
     context: { user_id: "user-123" },
   },
 );
@@ -931,6 +945,7 @@ const result = await agent.invoke(
 
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 import { AIMessage } from "@langchain/core/messages";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
@@ -953,7 +968,7 @@ const result = await agent.invoke(
     ],
   },
   {
-    configurable: { thread_id: crypto.randomUUID() },
+    configurable: { thread_id: uuid7() },
     context: { user_id: "user-123" },
   },
 );
@@ -963,6 +978,7 @@ const result = await agent.invoke(
 
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 import { AIMessage } from "@langchain/core/messages";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
@@ -985,7 +1001,7 @@ const result = await agent.invoke(
     ],
   },
   {
-    configurable: { thread_id: crypto.randomUUID() },
+    configurable: { thread_id: uuid7() },
     context: { user_id: "user-123" },
   },
 );
@@ -995,6 +1011,7 @@ const result = await agent.invoke(
 
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 import { AIMessage } from "@langchain/core/messages";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
@@ -1017,7 +1034,7 @@ const result = await agent.invoke(
     ],
   },
   {
-    configurable: { thread_id: crypto.randomUUID() },
+    configurable: { thread_id: uuid7() },
     context: { user_id: "user-123" },
   },
 );
@@ -1027,6 +1044,7 @@ const result = await agent.invoke(
 
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 import { AIMessage } from "@langchain/core/messages";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
@@ -1049,7 +1067,7 @@ const result = await agent.invoke(
     ],
   },
   {
-    configurable: { thread_id: crypto.randomUUID() },
+    configurable: { thread_id: uuid7() },
     context: { user_id: "user-123" },
   },
 );
@@ -1059,6 +1077,7 @@ const result = await agent.invoke(
 
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 import { AIMessage } from "@langchain/core/messages";
 import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
@@ -1081,14 +1100,15 @@ const result = await agent.invoke(
     ],
   },
   {
-    configurable: { thread_id: crypto.randomUUID() },
+    configurable: { thread_id: uuid7() },
     context: { user_id: "user-123" },
   },
 );
 ```
 
-#### [View example trace](https://smith.langchain.com/public/8b453131-3d7f-4218-a407-f724b96fb4e7/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/3bc1fb83-7ada-4e78-b9ac-31b749201c7d/r)**
+>
+> Open a public LangSmith run for this example.
 
 `thread_id` scopes the *conversation* (message history, checkpoints), while `context` carries *per-run* data your tools and middleware read at invocation time. Both are commonly passed together. See [tool context](tools.md#context) and [Runtime](runtime.md) for more.
 
@@ -1125,10 +1145,12 @@ for await (const snapshot of stream.values) {
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/311f121f-4400-4709-a202-2f11e972669d/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/53397253-6f2d-47c6-aa4e-a701377341e7/r)**
+>
+> Open a public LangSmith run for this example.
 
 > [!TIP]
+>
 > For streaming modes, event types, and UI patterns, see [Streaming](streaming.md).
 
 ## Configure the harness
@@ -1137,29 +1159,36 @@ Open a public LangSmith run for this example.
 
 Common patterns are prebuilt as first-class middleware. You can build anything else as [custom middleware](middleware/custom.md).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_harness_capabilities.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=0ff671d72badd0844826660dfcb04391" alt="Agent harness capabilities by category" width="1500" height="360" data-path="oss/images/agent_harness_capabilities.svg" />
+![Agent harness capabilities by category](https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_harness_capabilities.svg?fit=max\&auto=format\&n=jtty0O--UJOKG0nK\&q=85\&s=0ff671d72badd0844826660dfcb04391)
 
 As agents take on complex work, they need support across a few key areas. The middleware ecosystem provides:
 
-#### [Execution environment](#execution-environment)
-Tools, filesystem, sandboxes, and code execution
+> **[Execution environment](#execution-environment)**
+>
+> Tools, filesystem, sandboxes, and code execution
 
-#### [Context management](#context-management)
-Summarization, memory, skills, and prompt caching
+> **[Context management](#context-management)**
+>
+> Summarization, memory, skills, and prompt caching
 
-#### [Planning and delegation](#planning-and-delegation)
-Todo lists and subagents for parallel, isolated work
+> **[Planning and delegation](#planning-and-delegation)**
+>
+> Todo lists and subagents for parallel, isolated work
 
-#### [Fault tolerance](#fault-tolerance)
-Retries, fallbacks, and call limits
+> **[Fault tolerance](#fault-tolerance)**
+>
+> Retries, fallbacks, and call limits
 
-#### [Guardrails](#guardrails)
-PII detection and content controls
+> **[Guardrails](#guardrails)**
+>
+> PII detection and content controls
 
-#### [Steering](#steering)
-Human-in-the-loop approval before high-impact actions
+> **[Steering](#steering)**
+>
+> Human-in-the-loop approval before high-impact actions
 
 > [!TIP]
+>
 > `create_deep_agent` pre-assembles this stack for long-running coding and research tasks (filesystem, summarization, subagents, and prompt caching included by default). See [Deep Agents](../deepagents/harness.md) for the full prebuilt harness.
 
 ### Execution environment
@@ -1260,25 +1289,26 @@ var agent = createAgent({
 See [`FilesystemMiddleware`](https://reference.langchain.com/javascript/deepagents/middleware/createFilesystemMiddleware), [Sandboxes](../deepagents/sandboxes.md), [Interpreters](../deepagents/interpreters.md).
 
 > [!NOTE]
+>
 > This example imports from the `deepagents` package. Install it with:
 >
-> **npm**
->
-> ```bash
+**npm**
+
+```bash
 > npm install deepagents
-> ```
+```
 >
-> **yarn**
->
-> ```bash
+**yarn**
+
+```bash
 > yarn add deepagents
-> ```
+```
 >
-> **pnpm**
->
-> ```bash
+**pnpm**
+
+```bash
 > pnpm add deepagents
-> ```
+```
 
 ### Context management
 
@@ -1462,25 +1492,26 @@ var agent = createAgent({
 See [`SummarizationMiddleware`](https://reference.langchain.com/javascript/langchain/index/summarizationMiddleware), [`MemoryMiddleware`](https://reference.langchain.com/javascript/deepagents/middleware/createMemoryMiddleware), [Skills](multi-agent/skills.md), [Context engineering](../deepagents/context-engineering.md).
 
 > [!NOTE]
+>
 > This example imports from the `deepagents` package. Install it with:
 >
-> **npm**
->
-> ```bash
+**npm**
+
+```bash
 > npm install deepagents
-> ```
+```
 >
-> **yarn**
->
-> ```bash
+**yarn**
+
+```bash
 > yarn add deepagents
-> ```
+```
 >
-> **pnpm**
->
-> ```bash
+**pnpm**
+
+```bash
 > pnpm add deepagents
-> ```
+```
 
 ### Planning and delegation
 
@@ -1797,25 +1828,26 @@ var agent = createAgent({
 See [Subagents](multi-agent/subagents.md).
 
 > [!NOTE]
+>
 > This example imports from the `deepagents` package. Install it with:
 >
-> **npm**
->
-> ```bash
+**npm**
+
+```bash
 > npm install deepagents
-> ```
+```
 >
-> **yarn**
->
-> ```bash
+**yarn**
+
+```bash
 > yarn add deepagents
-> ```
+```
 >
-> **pnpm**
->
-> ```bash
+**pnpm**
+
+```bash
 > pnpm add deepagents
-> ```
+```
 
 ### Name your agent
 
@@ -2366,19 +2398,20 @@ See [`humanInTheLoopMiddleware`](https://reference.langchain.com/javascript/lang
 
 ### Middleware resources
 
-#### [Middleware overview](middleware/overview.md)
-How the middleware stack works and when hooks fire
+> **[Middleware overview](middleware/overview.md)**
+>
+> How the middleware stack works and when hooks fire
 
-#### [Prebuilt middleware](middleware/built-in.md)
-Full reference with configuration examples
+> **[Prebuilt middleware](middleware/built-in.md)**
+>
+> Full reference with configuration examples
 
-#### [Custom middleware](middleware/custom.md)
-Write your own hooks for business logic, PII scrubbing, and more
+> **[Custom middleware](middleware/custom.md)**
+>
+> Write your own hooks for business logic, PII scrubbing, and more
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

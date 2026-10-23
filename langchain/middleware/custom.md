@@ -14,11 +14,13 @@ Build custom middleware by implementing hooks that run at specific points in the
 
 Middleware provides two styles of hooks to intercept agent execution:
 
-#### [Node-style hooks](#node-style-hooks)
-Run sequentially at specific execution points.
+> **[Node-style hooks](#node-style-hooks)**
+>
+> Run sequentially at specific execution points.
 
-#### [Wrap-style hooks](#wrap-style-hooks)
-Run around each model or tool call.
+> **[Wrap-style hooks](#wrap-style-hooks)**
+>
+> Run around each model or tool call.
 
 ### Node-style hooks
 
@@ -44,7 +46,8 @@ Choose the hooks your middleware needs. You can choose between node-style hooks 
 
 **Example:**
 
-#### Decorator
+**Decorator**
+
 ```python
 from langchain.agents.middleware import before_model, after_model, AgentState
 from langchain.messages import AIMessage
@@ -66,7 +69,8 @@ def log_response(state: AgentState, runtime: Runtime) -> dict[str, Any] | None:
     return None
 ```
 
-#### Class
+**Class**
+
 ```python
 from langchain.agents.middleware import AgentMiddleware, AgentState, hook_config
 from langchain.messages import AIMessage
@@ -105,7 +109,8 @@ You decide if the handler is called zero times (short-circuit), once (normal flo
 
 **Example:**
 
-#### Decorator
+**Decorator**
+
 ```python
 from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
 from typing import Callable
@@ -124,7 +129,8 @@ def retry_model(
             print(f"Retry {attempt + 1}/3 after error: {e}")
 ```
 
-#### Class
+**Class**
+
 ```python
 from langchain.agents.middleware import AgentMiddleware, ModelRequest, ModelResponse
 from typing import Callable
@@ -277,11 +283,13 @@ class InnerMiddleware(AgentMiddleware):
 
 You can create middleware in two ways:
 
-#### [Decorator-based middleware](#decorator-based-middleware)
-Quick and simple for single-hook middleware. Use decorators to wrap individual functions.
+> **[Decorator-based middleware](#decorator-based-middleware)**
+>
+> Quick and simple for single-hook middleware. Use decorators to wrap individual functions.
 
-#### [Class-based middleware](#class-based-middleware)
-More powerful for complex middleware with multiple hooks or configuration.
+> **[Class-based middleware](#class-based-middleware)**
+>
+> More powerful for complex middleware with multiple hooks or configuration.
 
 ### Decorator-based middleware
 
@@ -424,7 +432,8 @@ If your middleware needs to track state across hooks, middleware can extend the 
 
 * **Make conditional decisions**: Use accumulated state to determine whether to continue execution, jump to different nodes, or modify behavior dynamically
 
-#### Decorator
+**Decorator**
+
 ```python
 from langchain.agents import create_agent
 from langchain.messages import HumanMessage
@@ -462,7 +471,8 @@ result = agent.invoke({
 })
 ```
 
-#### Class
+**Class**
+
 ```python
 from langchain.agents import create_agent
 from langchain.messages import HumanMessage
@@ -502,7 +512,9 @@ result = agent.invoke({
 
 ## Custom stream transformers
 
-Middleware-registered transformers require `langchain>=1.3.2`.
+> [!NOTE]
+>
+> Middleware-registered transformers require `langchain>=1.3.2`.
 
 Middleware can register stream transformer factories that project events from the live agent stream onto typed extension channels. This is useful for surfacing counters, side-channel artifacts, partial outputs, or wire-level redaction without coupling to the framework's built-in projections.
 
@@ -538,38 +550,35 @@ agent = create_agent(
 )
 ```
 
-<details>
-<summary>Execution flow</summary>
-
-**Before hooks run in order:**
-
-1. `middleware1.before_agent()`
-2. `middleware2.before_agent()`
-3. `middleware3.before_agent()`
-
-**Agent loop starts**
-
-4. `middleware1.before_model()`
-5. `middleware2.before_model()`
-6. `middleware3.before_model()`
-
-**Wrap hooks nest like function calls:**
-
-7. `middleware1.wrap_model_call()` → `middleware2.wrap_model_call()` → `middleware3.wrap_model_call()` → model
-
-**After hooks run in reverse order:**
-
-8. `middleware3.after_model()`
-9. `middleware2.after_model()`
-10. `middleware1.after_model()`
-
-**Agent loop ends**
-
-11. `middleware3.after_agent()`
-12. `middleware2.after_agent()`
-13. `middleware1.after_agent()`
-
-</details>
+> **Execution flow**
+>
+> **Before hooks run in order:**
+>
+> 1. `middleware1.before_agent()`
+> 2. `middleware2.before_agent()`
+> 3. `middleware3.before_agent()`
+>
+> **Agent loop starts**
+>
+> 4. `middleware1.before_model()`
+> 5. `middleware2.before_model()`
+> 6. `middleware3.before_model()`
+>
+> **Wrap hooks nest like function calls:**
+>
+> 7. `middleware1.wrap_model_call()` → `middleware2.wrap_model_call()` → `middleware3.wrap_model_call()` → model
+>
+> **After hooks run in reverse order:**
+>
+> 8. `middleware3.after_model()`
+> 9. `middleware2.after_model()`
+> 10. `middleware1.after_model()`
+>
+> **Agent loop ends**
+>
+> 11. `middleware3.after_agent()`
+> 12. `middleware2.after_agent()`
+> 13. `middleware1.after_agent()`
 
 **Key rules:**
 
@@ -587,7 +596,8 @@ To exit early from middleware, return a dictionary with `jump_to`:
 * `'tools'`: Jump to the tools node
 * `'model'`: Jump to the model node (or the first `before_model` hook)
 
-#### Decorator
+**Decorator**
+
 ```python
 from langchain.agents.middleware import after_model, hook_config, AgentState
 from langchain.messages import AIMessage
@@ -606,7 +616,8 @@ def check_for_blocked(state: AgentState, runtime: Runtime) -> dict[str, Any] | N
     return None
 ```
 
-#### Class
+**Class**
+
 ```python
 from langchain.agents.middleware import AgentMiddleware, hook_config, AgentState
 from langchain.messages import AIMessage
@@ -627,7 +638,9 @@ class BlockedContentMiddleware(AgentMiddleware):
 
 ## Configure tracing
 
-Requires `langchain>=1.3.15`.
+> [!NOTE]
+>
+> Requires `langchain>=1.3.15`.
 
 Middleware hook spans trace their inputs and outputs by default. Set a `trace_policy` to shape what they record. `TracePolicy` accepts callables such as `process_inputs` and `process_outputs` that transform the traced value; `omit_payload` drops it entirely. This can be useful as an optimization when the full message history is uninformative to the function of the middleware.
 
@@ -670,7 +683,8 @@ Dynamically modify the system prompt at runtime to inject context, user-specific
 
 Use the `system_message` field on `ModelRequest` to read and modify the system prompt. It contains a [`SystemMessage`](https://reference.langchain.com/python/langchain-core/messages/system/SystemMessage) object (even if the agent was created with a string `system_prompt`).
 
-#### Decorator
+**Decorator**
+
 ```python
 from collections.abc import Callable
 
@@ -689,7 +703,8 @@ def add_context(
     return handler(request.override(system_message=new_system_message))
 ```
 
-#### Class
+**Class**
+
 ```python
 from collections.abc import Callable
 
@@ -709,6 +724,7 @@ class ContextMiddleware(AgentMiddleware):
 ```
 
 > [!NOTE]
+>
 > * `ModelRequest.system_message` is always a [`SystemMessage`](https://reference.langchain.com/python/langchain-core/messages/system/SystemMessage) object, even if the agent was created with `system_prompt="string"`
 > * Use `SystemMessage.content_blocks` to access content as a list of blocks, regardless of whether the original content was a string or list
 > * When modifying system messages, use `content_blocks` and append new blocks to preserve existing structure
@@ -716,7 +732,8 @@ class ContextMiddleware(AgentMiddleware):
 
 ### Dynamic model selection
 
-#### Decorator
+**Decorator**
+
 ```python
 from collections.abc import Callable
 
@@ -738,7 +755,8 @@ def dynamic_model(
     return handler(request.override(model=model))
 ```
 
-#### Class
+**Class**
+
 ```python
 from collections.abc import Callable
 
@@ -771,7 +789,8 @@ Select relevant tools at runtime to improve performance and accuracy. This secti
 * **Better accuracy** - Models choose correctly from fewer options
 * **Permission control** - Dynamically filter tools based on user access
 
-#### Decorator
+**Decorator**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
@@ -794,7 +813,8 @@ agent = create_agent(
 )
 ```
 
-#### Class
+**Class**
+
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import AgentMiddleware, ModelRequest, ModelResponse
@@ -820,7 +840,8 @@ agent = create_agent(
 
 ### Tool call monitoring
 
-#### Decorator
+**Decorator**
+
 ```python
 from collections.abc import Callable
 
@@ -845,7 +866,8 @@ def monitor_tool(
         raise
 ```
 
-#### Class
+**Class**
+
 ```python
 from collections.abc import Callable
 
@@ -875,7 +897,8 @@ class ToolMonitoringMiddleware(AgentMiddleware):
 
 When working with Anthropic models, use structured content blocks with cache control directives to cache large system prompts:
 
-#### Decorator
+**Decorator**
+
 ```python
 from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
 from langchain.messages import SystemMessage
@@ -900,7 +923,8 @@ def add_cached_context(
     return handler(request.override(system_message=new_system_message))
 ```
 
-#### Class
+**Class**
+
 ```python
 from langchain.agents.middleware import AgentMiddleware, ModelRequest, ModelResponse
 from langchain.messages import SystemMessage
@@ -942,8 +966,6 @@ class CachedContextMiddleware(AgentMiddleware):
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/middleware/custom.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/middleware/custom.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

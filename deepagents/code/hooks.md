@@ -93,19 +93,24 @@ An invalid plugin hook document is skipped on its own and reported as a configur
 
 Each entry in a matcher group's `hooks` array is a command handler:
 
-#### `type` — `string`
+**type** `string` *required*
+
 Handler type. Only `command` is supported. A command handler runs a subprocess that receives the event JSON on stdin.
 
-#### `command` — `string`
+**command** `string` *required*
+
 Shell command to run. Always required. Pipes, redirects, globs, and environment-variable expansion are supported. The event payload is written to stdin as JSON, never interpolated into arguments. When `argv` is also set, this string is not executed through the shell.
 
-#### `argv` — `list[string]`
+**argv** `list[string]`
+
 Execute an argument list directly instead of interpreting `command` through a shell. Use this for explicit executable paths and arguments.
 
-#### `timeout` — `number`
+**timeout** `number`
+
 Per-handler timeout in seconds. The default is 600 seconds, except for `UserPromptSubmit`, which defaults to 30 seconds. A timeout is a non-blocking failure.
 
-#### `statusMessage` — `string`
+**statusMessage** `string`
+
 Transient message shown in the UI while the handler runs.
 
 Configuring an unsupported handler type or `"async": true` produces a visible configuration error.
@@ -165,6 +170,12 @@ flowchart LR
 ```
 
 The diagram covers the tool-call path only. `PermissionRequest` is a separate client-owned event when Deep Agents Code is about to show a permission prompt.
+
+### Notify before the prompt cache expires
+
+The `cache_expiring` notification warns before a tracked prompt-cache retention window ends. Use it to trigger your own reminder before the next turn risks a cache miss.
+
+In `hooks.json`, add a handler group under `Notification` with `matcher` set to `cache_expiring`. Deep Agents Code emits it once per thread and cache window during the final 60 seconds. The payload includes `notification_type`, `message`, and `title`.
 
 ## Input payload
 
@@ -347,133 +358,123 @@ The following compatibility fields are recognized but not applied. Deep Agents C
 
 ## Examples
 
-<details>
-<summary>Block destructive Bash commands (PreToolUse)</summary>
-
+> **Block destructive Bash commands (PreToolUse)**
+>
 ```bash
-#!/usr/bin/env bash
-command=$(jq -r '.tool_input.command // ""')
-
-if printf '%s' "$command" | grep -Eq 'rm[[:space:]]+.*-[a-zA-Z]*[rf]'; then
-  cat <<'JSON'
-{
-  "hookSpecificOutput": {
-    "hookEventName": "PreToolUse",
-    "permissionDecision": "deny",
-    "permissionDecisionReason": "Recursive or forced rm is blocked by policy"
-  }
-}
-JSON
-fi
+> #!/usr/bin/env bash
+> command=$(jq -r '.tool_input.command // ""')
+>
+> if printf '%s' "$command" | grep -Eq 'rm[[:space:]]+.*-[a-zA-Z]*[rf]'; then
+>   cat <<'JSON'
+> {
+>   "hookSpecificOutput": {
+>     "hookEventName": "PreToolUse",
+>     "permissionDecision": "deny",
+>     "permissionDecisionReason": "Recursive or forced rm is blocked by policy"
+>   }
+> }
+> JSON
+> fi
 ```
-
+>
 ```json
-{
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          { "type": "command", "command": "~/.deepagents/hooks/block-rm.sh" }
-        ]
-      }
-    ]
-  }
-}
+> {
+>   "hooks": {
+>     "PreToolUse": [
+>       {
+>         "matcher": "Bash",
+>         "hooks": [
+>           { "type": "command", "command": "~/.deepagents/hooks/block-rm.sh" }
+>         ]
+>       }
+>     ]
+>   }
+> }
 ```
 
-</details>
-
-<details>
-<summary>Load project context on session start (SessionStart)</summary>
-
+> **Load project context on session start (SessionStart)**
+>
 ```bash
-#!/usr/bin/env bash
-context=$(git -C "$(jq -r '.cwd')" log --oneline -5 2>/dev/null)
-
-jq -n --arg ctx "$context" '{
-  hookSpecificOutput: {
-    hookEventName: "SessionStart",
-    additionalContext: ("Recent commits:\n" + $ctx)
-  }
-}'
+> #!/usr/bin/env bash
+> context=$(git -C "$(jq -r '.cwd')" log --oneline -5 2>/dev/null)
+>
+> jq -n --arg ctx "$context" '{
+>   hookSpecificOutput: {
+>     hookEventName: "SessionStart",
+>     additionalContext: ("Recent commits:\n" + $ctx)
+>   }
+> }'
 ```
-
+>
 ```json
-{
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "startup|resume",
-        "hooks": [
-          { "type": "command", "command": "~/.deepagents/hooks/load-context.sh" }
-        ]
-      }
-    ]
-  }
-}
+> {
+>   "hooks": {
+>     "SessionStart": [
+>       {
+>         "matcher": "startup|resume",
+>         "hooks": [
+>           { "type": "command", "command": "~/.deepagents/hooks/load-context.sh" }
+>         ]
+>       }
+>     ]
+>   }
+> }
 ```
 
-</details>
-
-<details>
-<summary>Desktop notification when the turn ends on macOS (Stop)</summary>
-
+> **Desktop notification when the turn ends on macOS (Stop)**
+>
 ```json
-{
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "osascript -e 'display notification \"Agent finished\" with title \"Deep Agents Code\"'"
-          }
-        ]
-      }
-    ]
-  }
-}
+> {
+>   "hooks": {
+>     "Stop": [
+>       {
+>         "hooks": [
+>           {
+>             "type": "command",
+>             "command": "osascript -e 'display notification \"Agent finished\" with title \"Deep Agents Code\"'"
+>           }
+>         ]
+>       }
+>     ]
+>   }
+> }
 ```
 
-</details>
-
-<details>
-<summary>Python handler that reads the payload</summary>
-
+> **Python handler that reads the payload**
+>
 ```python
-import json
-import sys
-
-def handle(payload: dict[str, object]) -> None:
-    event = payload["hook_event_name"]
-    if event == "PreToolUse":
-        tool_name = payload["tool_name"]
-        print(f"About to run {tool_name}", file=sys.stderr)
-
-if __name__ == "__main__":
-    handle(json.load(sys.stdin))
+> import json
+> import sys
+>
+>
+> def handle(payload: dict[str, object]) -> None:
+>     event = payload["hook_event_name"]
+>     if event == "PreToolUse":
+>         tool_name = payload["tool_name"]
+>         print(f"About to run {tool_name}", file=sys.stderr)
+>
+>
+> if __name__ == "__main__":
+>     handle(json.load(sys.stdin))
 ```
-
+>
 ```json
-{
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 ~/.deepagents/hooks/handler.py"
-          }
-        ]
-      }
-    ]
-  }
-}
+> {
+>   "hooks": {
+>     "PreToolUse": [
+>       {
+>         "matcher": "*",
+>         "hooks": [
+>           {
+>             "type": "command",
+>             "command": "python3 ~/.deepagents/hooks/handler.py"
+>           }
+>         ]
+>       }
+>     ]
+>   }
+> }
 ```
-
-</details>
 
 ## Troubleshoot hooks
 
@@ -500,6 +501,7 @@ Hooks follow the same trust model as Git hooks or shell aliases: any process tha
 * Only install hooks from sources you trust.
 
 > [!WARNING]
+>
 > A hook runs with your user permissions. Treat hook configuration as executable code.
 
 ## See also
@@ -511,8 +513,6 @@ Hooks follow the same trust model as Git hooks or shell aliases: any process tha
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/hooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/hooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

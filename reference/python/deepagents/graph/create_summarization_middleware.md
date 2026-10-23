@@ -57,6 +57,7 @@ create_summarization_middleware(
     summary_prompt: str = DEEPAGENTS_DEFAULT_SUMMARY_PROMPT,
     trim_tokens_to_summarize: int | None = None,
     token_counter: TokenCounter = count_tokens_approximately,
+    summarizer: Summarizer | None = None,
 ) -> _DeepAgentsSummarizationMiddleware
 ```
 
@@ -69,6 +70,7 @@ create_summarization_middleware(
 | `summary_prompt` | `str` | No | Prompt template for generating summaries. (default: `DEEPAGENTS_DEFAULT_SUMMARY_PROMPT`) |
 | `trim_tokens_to_summarize` | `int \| None` | No | Token budget for the older history sent to the summarization model, measured by `token_counter`. Applied after setting aside the recent messages selected by the retention policy.  For example, `4000` summarizes up to 4,000 tokens from the end of that older history; earlier history excluded by trimming is not summarized. This does not set the summarization trigger or limit the generated summary's length.  `None` skips this trimming and summarizes all selected history. This factory defaults to `None`, unlike constructing `SummarizationMiddleware` directly, which defaults to 4000. (default: `None`) |
 | `token_counter` | `TokenCounter` | No | Function to count tokens in messages. (default: `count_tokens_approximately`) |
+| `summarizer` | `Summarizer \| None` | No | Optional replacement for the summarization model call. See `SummarizationMiddleware`. (default: `None`) |
 
 ## Returns
 
@@ -78,4 +80,4 @@ Configured `SummarizationMiddleware` instance.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/summarization.py#L1772)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/summarization.py#L1873)

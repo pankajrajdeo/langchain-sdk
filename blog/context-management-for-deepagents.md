@@ -68,7 +68,7 @@ The Deep Agents SDK maintains a set of targeted evaluations designed to isolate 
 The goal of these [evals](https://www.langchain.com/resources/llm-evals) is not to measure broad task-solving ability, but to ensure that the agent’s harness does not get in the way of certain tasks. For example:
 
 - Did summarization preserve the agent’s objective? Some evals deliberately trigger summarization mid-task and then check whether the agent continues. This ensures that summarization preserves not only agent state but also its trajectory.
-- Can the agent recover information that was summarized away? Here we embed a “[needle-in-the-haystack](https://github.com/langchain-ai/deepagents/blob/master/libs/deepagents/tests/integration_tests/test_summarization.py?ref=blog.langchain.com#L166-L183)” fact early in the conversation, force a summarization event, and then require the agent to recall that fact later to complete the task. The fact is not present in the active context after summarization and must be recovered via filesystem search.
+- Can the agent recover information that was summarized away? Here we embed a “[needle-in-the-haystack](https://github.com/langchain-ai/deepagents/blob/main/libs/evals/tests/evals/test_summarization.py#L182-L203)” fact early in the conversation, force a summarization event, and then require the agent to recall that fact later to complete the task. The fact is not present in the active context after summarization and must be recovered via filesystem search.
 
 These targeted evals act as integration tests for context management: they don’t replace full benchmark runs, but they significantly reduce iteration time and make failures attributable to specific compression mechanisms rather than overall agent behavior.
 

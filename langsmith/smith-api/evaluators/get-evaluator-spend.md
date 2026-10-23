@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, evaluators, get-evaluator-spend]
 
 # Get evaluator spend
 
-> Returns per-day LLM evaluator spend for the requested 7-day period, grouped by evaluator, resource, or run rule. Exactly one of group_by, evaluator_id, session_id, or dataset_id is required. resource_id, type, feedback_key, and tag_value_id may be supplied with group_by to narrow listing aggregations.
+> Returns per-day LLM evaluator spend for the requested 7-day period, grouped by evaluator, resource, or run rule. Exactly one of group_by, evaluator_id, session_id, or dataset_id is required. resource_id, type, feedback_key, tag_value_id, and agent_id may be supplied with group_by to narrow listing aggregations.
 
 ## OpenAPI
 
@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/evaluators/spend:
     get:
@@ -180,8 +183,8 @@ paths:
         Returns per-day LLM evaluator spend for the requested 7-day period,
         grouped by evaluator, resource, or run rule. Exactly one of group_by,
         evaluator_id, session_id, or dataset_id is required. resource_id, type,
-        feedback_key, and tag_value_id may be supplied with group_by to narrow
-        listing aggregations.
+        feedback_key, tag_value_id, and agent_id may be supplied with group_by
+        to narrow listing aggregations.
       parameters:
         - description: >-
             Aggregation mode: 'evaluator', 'resource', or 'run_rule'. Mutually
@@ -228,8 +231,8 @@ paths:
               type: string
             title: Resource Id
         - description: >-
-            Filter grouped results by evaluator type: 'llm' or 'code'. Only
-            valid with group_by.
+            Filter grouped results by evaluator type: 'llm', 'code' or
+            'decision_model'. Only valid with group_by.
           name: type
           in: query
           schema:
@@ -255,6 +258,14 @@ paths:
             items:
               type: string
             title: Tag Value Id
+        - description: >-
+            Filter grouped results to spend from evaluator attachments on the
+            agent's environments or tagged datasets. Only valid with group_by.
+          name: agent_id
+          in: query
+          schema:
+            type: string
+            title: Agent Id
         - description: Start of the 7-day window (YYYY-MM-DD).
           name: period_start
           in: query

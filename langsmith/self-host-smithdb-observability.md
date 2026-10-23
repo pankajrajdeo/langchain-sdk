@@ -16,52 +16,61 @@ SmithDB components expose application metrics and can export logs and traces to 
 
 Each SmithDB component exposes application metrics at the fixed `/metrics` path on its HTTP port. Configure your monitoring stack to discover the pods by adding scrape annotations to each component:
 
-<details>
-<summary>Sample Prometheus configuration</summary>
-
+> **Sample Prometheus configuration**
+>
 ```yaml
-smithdb:
-  query:
-    deployment:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/metrics"
-        prometheus.io/port: "8060"
-  ingestion:
-    deployment:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/metrics"
-        prometheus.io/port: "8050"
-  compaction:
-    deployment:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/metrics"
-        prometheus.io/port: "8070"
-  compactionWorker:
-    deployment:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/metrics"
-        prometheus.io/port: "9000"
-  clusterManager:
-    deployment:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/metrics"
-        prometheus.io/port: "8090"
-  migration:
-    job:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/metrics"
-        prometheus.io/port: "9040"
+> smithdb:
+>   query:
+>     deployment:
+>       annotations:
+>         prometheus.io/scrape: "true"
+>         prometheus.io/path: "/metrics"
+>         prometheus.io/port: "8060"
+>   ingestion:
+>     deployment:
+>       annotations:
+>         prometheus.io/scrape: "true"
+>         prometheus.io/path: "/metrics"
+>         prometheus.io/port: "8050"
+>   compaction:
+>     deployment:
+>       annotations:
+>         prometheus.io/scrape: "true"
+>         prometheus.io/path: "/metrics"
+>         prometheus.io/port: "8070"
+>   compactionWorker:
+>     deployment:
+>       annotations:
+>         prometheus.io/scrape: "true"
+>         prometheus.io/path: "/metrics"
+>         prometheus.io/port: "9000"
+>   clusterManager:
+>     deployment:
+>       annotations:
+>         prometheus.io/scrape: "true"
+>         prometheus.io/path: "/metrics"
+>         prometheus.io/port: "8090"
+>   migration:
+>     job:
+>       annotations:
+>         prometheus.io/scrape: "true"
+>         prometheus.io/path: "/metrics"
+>         prometheus.io/port: "9040"
 ```
-
-On LangSmith 0.16, set the migration annotations under `smithdb.migration.deployment.annotations`.
-
-</details>
+>
+> On LangSmith 0.16, set the migration annotations under `smithdb.migration.deployment.annotations`.
+>
+> With `smithdb.topology: unified`, annotate the unified pod and scrape port `8060` only:
+>
+```yaml
+> smithdb:
+>   unified:
+>     deployment:
+>       annotations:
+>         prometheus.io/scrape: "true"
+>         prometheus.io/path: "/metrics"
+>         prometheus.io/port: "8060"
+```
 
 These are Prometheus-style annotations. Providers with their own discovery format, such as Datadog, need that format applied to the same ports and path. Monitor the PostgreSQL metastore, Kubernetes nodes, and cloud services with your existing infrastructure monitoring.
 
@@ -84,8 +93,6 @@ Confirm the collector is reachable from the LangSmith namespace, apply the chart
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-smithdb-observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-smithdb-observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

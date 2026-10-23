@@ -1,13 +1,13 @@
 ---
 title: "javascript/langgraph"
-description: "Index of 33 pages and 2 subdirectories under javascript/langgraph."
+description: "Index of 32 pages and 2 subdirectories under javascript/langgraph."
 category: "index"
 tags: [index, javascript, langgraph]
 ---
 
 # javascript/langgraph
 
-33 pages here, 42 pages including subdirectories.
+32 pages here, 41 pages including subdirectories.
 
 ## Directories
 
@@ -21,7 +21,6 @@ tags: [index, javascript, langgraph]
 - [Application structure](application-structure.md) - A LangGraph application consists of one or more graphs, a configuration file (langgraph.json), a file that specifies dependencies, and an optional .env file that specifies environment variables.
 - [Backward compatibility](backward-compatibility.md) - Update LangGraph graph code in production without breaking in-flight runs.
 - [Case studies](case-studies.md) - This list of companies using LangGraph and their success stories is compiled from public sources. If your company uses LangGraph, we'd love for you to share your story and add it to the list. You’re...
-- [Changelog](changelog-js.md) - Log of updates and improvements to our JavaScript/TypeScript packages
 - [Checkpointers](checkpointers.md) - LangGraph checkpointers save graph state as checkpoints at each step, enabling persistence, human-in-the-loop, and fault-tolerant execution.
 - [Choosing between Graph and Functional APIs](choosing-apis.md) - LangGraph provides two different APIs to build agent workflows: the Graph API and the Functional API. Both APIs share the same underlying runtime and can be used together in the same application, but...
 - [Deployment](deploy.md) - Deploy LangGraph agents to production with LangSmith Cloud or JavaScript frameworks and hosting platforms.

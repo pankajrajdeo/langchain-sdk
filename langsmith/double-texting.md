@@ -9,6 +9,7 @@ tags: [docs, langsmith, double-texting]
 # Double texting
 
 > [!NOTE]
+>
 > **Prerequisites**
 >
 > * [Agent Server](agent-server.md)
@@ -21,9 +22,10 @@ We call this "double texting".
 [Enqueue](#enqueue-default) is the default double texting (multi-tasking) strategy when creating runs in the [Agent Server](agent-server.md).
 
 > [!NOTE]
+>
 > Double texting is a feature of LangSmith Deployment. It is not available in the [LangGraph open source framework](../langgraph/overview.md).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/Hucw5hmCzWXDanL-/langsmith/images/double-texting.png?fit=max&auto=format&n=Hucw5hmCzWXDanL-&q=85&s=1cae1e8cd4920872e7992460b081f76d" alt="Double-text strategies across first vs. second run: Reject keeps only the first; Enqueue runs the second afterward; Interrupt halts the first to run the second; Rollback reverts the first and reruns with the second." width="1886" height="648" data-path="langsmith/images/double-texting.png" />
+![Double-text strategies across first vs. second run: Reject keeps only the first; Enqueue runs the second afterward; Interrupt halts the first to run the second; Rollback reverts the first and reruns with the second.](https://mintcdn.com/langchain-5e9cc07a/Hucw5hmCzWXDanL-/langsmith/images/double-texting.png?fit=max\&auto=format\&n=Hucw5hmCzWXDanL-\&q=85\&s=1cae1e8cd4920872e7992460b081f76d)
 
 ## Enqueue (default)
 
@@ -53,8 +55,6 @@ For configuring the rollback double text option, refer to the [how-to guide](rol
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/double-texting.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/double-texting.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

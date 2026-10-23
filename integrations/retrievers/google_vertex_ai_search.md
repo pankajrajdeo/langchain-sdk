@@ -22,8 +22,6 @@ For detailed documentation of all `VertexAISearchRetriever` features and configu
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](google_vertex_ai_search.md).
-
 ## Setup
 
 ### Installation
@@ -262,8 +260,6 @@ For detailed documentation of all `VertexAISearchRetriever` features and configu
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/google_vertex_ai_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/google_vertex_ai_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

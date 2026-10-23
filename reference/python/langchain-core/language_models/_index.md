@@ -7,7 +7,7 @@ tags: [index, reference, python, langchain-core, language_models]
 
 # reference/python/langchain-core/language_models
 
-10 pages here, 230 pages including subdirectories.
+10 pages here, 232 pages including subdirectories.
 
 ## Directories
 
@@ -19,7 +19,7 @@ tags: [index, reference, python, langchain-core, language_models]
 - [fake/](fake/_index.md) - 9 pages
 - [fake_chat_models/](fake_chat_models/_index.md) - 16 pages
 - [llms/](llms/_index.md) - 31 pages
-- [model_profile/](model_profile/_index.md) - 31 pages
+- [model_profile/](model_profile/_index.md) - 33 pages
 
 ## Files
 

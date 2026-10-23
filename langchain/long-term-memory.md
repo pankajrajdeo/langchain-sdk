@@ -19,7 +19,8 @@ Long-term memory is built on [LangGraph stores](../langgraph/stores.md), which s
 
 To add long-term memory to an agent, create a store and pass it to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent):
 
-#### InMemoryStore
+**InMemoryStore**
+
 ```python
 from langchain.agents import create_agent
 from langchain_core.runnables import Runnable
@@ -35,7 +36,8 @@ agent: Runnable = create_agent(
 )
 ```
 
-#### PostgreSQL
+**PostgreSQL**
+
 **pip**
 
 ```bash
@@ -49,6 +51,7 @@ uv add langgraph-checkpoint-postgres "psycopg[binary]"
 ```
 
 > [!NOTE]
+>
 > By default, `langgraph-checkpoint-postgres` installs `psycopg` (Psycopg 3) without extras. The install above adds `psycopg[binary]`, which is recommended for most users. For other options, see the [Psycopg installation docs](https://www.psycopg.org/psycopg3/docs/basic/install.html).
 
 ```python
@@ -68,11 +71,13 @@ with PostgresStore.from_conn_string(DB_URI) as store:
 ```
 
 > [!NOTE]
+>
 > For other store backends, including Redis and MongoDB, see the [store integrations](../integrations/long-term-memory.md) list. For a MongoDB walkthrough, see [long-term memory with MongoDB](../integrations/memory/mongodb-long-term-memory.md).
 
 Tools can then read from and write to the store using the `runtime.store` parameter. See [Read long-term memory in tools](#read-long-term-memory-in-tools) and [Write long-term memory from tools](#write-long-term-memory-from-tools) for examples.
 
 > [!TIP]
+>
 > For a deeper dive into memory types (semantic, episodic, procedural) and strategies for writing memories, see the [Memory conceptual guide](../concepts/memory.md#long-term-memory).
 
 ## Memory storage
@@ -83,7 +88,8 @@ Each memory is organized under a custom `namespace` (similar to a folder) and a 
 
 This structure enables hierarchical organization of memories. Cross-namespace searching is then supported through content filters.
 
-#### InMemoryStore
+**InMemoryStore**
+
 ```python
 from collections.abc import Sequence
 
@@ -118,7 +124,8 @@ items = store.search(
 )
 ```
 
-#### PostgreSQL
+**PostgreSQL**
+
 ```python
 from collections.abc import Sequence
 
@@ -160,7 +167,8 @@ For more information about the memory store, see the [Persistence](../langgraph/
 
 ## Read long-term memory in tools
 
-#### InMemoryStore
+**InMemoryStore**
+
 **Google**
 
 ```python
@@ -539,10 +547,12 @@ agent.invoke(
 )
 ```
 
-#### [View example trace](https://smith.langchain.com/public/bce035a2-e2ac-4bd3-9ab3-53d88b16cc43/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/50107c17-6209-4486-be7e-65fc84f20e75/r)**
+>
+> Open a public LangSmith run for this example.
 
-#### PostgreSQL
+**PostgreSQL**
+
 ```python
 from dataclasses import dataclass
 
@@ -581,11 +591,14 @@ with PostgresStore.from_conn_string(DB_URI) as store:
     )
 ```
 
-<a id="write-long-term" />
+> **[View example trace](https://smith.langchain.com/public/98f96556-7dae-426d-bf15-03d9827c1aa2/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Write long-term memory from tools
 
-#### InMemoryStore
+**InMemoryStore**
+
 **Google**
 
 ```python
@@ -950,10 +963,12 @@ agent.invoke(
 item = store.get(("users",), "user_123")
 ```
 
-#### [View example trace](https://smith.langchain.com/public/477f5212-de64-4076-87d7-c4653d5c3c15/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/8161bb6c-4876-44f7-9570-b187ae14da8a/r)**
+>
+> Open a public LangSmith run for this example.
 
-#### PostgreSQL
+**PostgreSQL**
+
 ```python
 from dataclasses import dataclass
 
@@ -994,10 +1009,12 @@ with PostgresStore.from_conn_string(DB_URI) as store:
     )
 ```
 
+> **[View example trace](https://smith.langchain.com/public/e500c680-f6c1-439e-a85c-9d39ff04d841/r)**
+>
+> Open a public LangSmith run for this example.
+
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/long-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/long-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

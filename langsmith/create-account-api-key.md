@@ -12,29 +12,37 @@ To get started with LangSmith, you need to create an account. You can sign up fo
 
 ## API keys
 
-LangSmith supports two types of API keys. You can use both types of token to authenticate requests to the LangSmith API, but they have different use cases:
+LangSmith supports three types of API keys with different permissions and lifecycles:
 
 * [**Personal Access Tokens (PATs)**](administration-overview.md#personal-access-tokens-pats) inherit the permissions of the user who created them. Use PATs for personal scripts or tools.
+* [**Tracing keys**](#tracing-keys) submit traces in selected workspaces without access to stored traces or administrative operations.
 * [**Service keys**](administration-overview.md#service-keys) scope to specific [workspaces](administration-overview.md#workspaces) or the entire [organization](administration-overview.md#organizations). Use service keys for applications and production services.
 
-To log [traces](observability-concepts.md#traces) and run [evaluations](evaluation.md) with LangSmith, create an API key to authenticate your requests.
+Use a tracing key to log [traces](observability-concepts.md#traces). Use a PAT or service key with the required permissions for [evaluations](evaluation.md) and other API operations.
 
-### Open API Keys settings
+To create a PAT or service key in the UI:
+
+**1. Open API Keys settings**
+
 Navigate to the [**Settings** page](https://smith.langchain.com/settings) and select the **API Keys** section.
 
-### Configure the key type
+**2. Configure the key type**
+
 For service keys, choose between an organization-scoped and workspace-scoped key. If the key is workspace-scoped, you must specify the workspaces.
 
-[Enterprise](pricing-plans.md) users can also [assign specific workspace roles](administration-overview.md#workspace-roles-rbac) to service keys, which adjusts their permissions independently of any user.
+[Enterprise](https://docs.langchain.com/langsmith/pricing-plans.md) users can also [assign specific workspace roles](administration-overview.md#workspace-roles-rbac) to service keys, which adjusts their permissions independently of any user.
 
-### Set expiration
+**3. Set expiration**
+
 Set the key's expiration. The key becomes unusable after the number of days chosen, or never, if that is selected.
 
-### Create the key
+**4. Create the key**
+
 Click **Create API Key.** LangSmith will display the API key only once, so make sure to copy it and store it in a safe place.
 
 > [!TIP]
-> [Enterprise](pricing-plans.md) Organization Admins can edit the [role](administration-overview.md#workspace-roles-rbac) on an existing service key without rotating the key. On the [**Settings** page](https://smith.langchain.com/settings) **API Keys** section, switch to the **Service** tab and click any service key row to open the edit dialog. Update the workspace role (and, for organization-scoped keys, the org role) and click **Save**. The key string itself is unchanged.
+>
+> [Enterprise](https://docs.langchain.com/langsmith/pricing-plans.md) Organization Admins can edit the [role](administration-overview.md#workspace-roles-rbac) on an existing service key without rotating the key. On the [**Settings** page](https://smith.langchain.com/settings) **API Keys** section, switch to the **Service** tab and click any service key row to open the edit dialog. Update the workspace role (and, for organization-scoped keys, the org role) and click **Save**. The key string itself is unchanged.
 
 ## Deactivate or delete a personal access token
 
@@ -66,11 +74,65 @@ Authentication results are cached, so a deactivated or deleted token stops worki
 
 Service keys can only be deleted, not deactivated. Open the **Service** tab and select **Delete key** in the **Actions** column, then confirm with the typed description that deleting a PAT requires.
 
+## Tracing keys
+
+Tracing keys are organization-owned credentials for submitting traces in selected workspaces. They limit an application's access to `runs:create` and `projects:create`.
+
+A tracing key can create projects and submit run updates through the tracing ingestion APIs. It cannot read stored traces, update project configuration, create saved views, run experiments, or manage keys. Project upsert requests are also denied. Use a separate credential for operations that require those permissions.
+
+### Create a tracing key
+
+Tracing-key creation requires active organization membership and active membership in every selected workspace. You need `workspaces:tracing-keys:create` in each workspace, including permissions granted through teams. Built-in Workspace Admin and Workspace Editor roles receive this permission; Workspace Viewers do not. Administrators must grant it explicitly to custom roles. You do not need `runs:create` yourself.
+
+To create a key in LangSmith:
+
+1. Go to **Settings** > **API Keys** and select **API Key**.
+2. Select **Tracing Only** and enter a description.
+3. Select the workspaces and an expiration date, then select **Create API Key**.
+4. Copy the key before closing the dialog.
+
+The tracing option requires a supported deployment. For BYOC workspaces, the data plane must also support tracing keys. Only workspaces where you have the creation permission and the deployment supports tracing keys are available for selection.
+
+You can also create the key with `POST /api/v1/orgs/current/tracing-keys`. Authenticate as a user, including through a PAT if organization policy permits API keys to create keys. Service-account keys cannot create tracing keys.
+
+The request accepts:
+
+* **`workspaces`**: A required list of one or more workspace IDs. The key has no organization-wide scope.
+* **`description`**: An optional label for the key.
+* **`expires_at`**: An optional expiration timestamp, subject to service-key expiry limits.
+
+The response returns `201 Created`, a `Location` header, and the secret in `key`. Copy the secret when you create it; list responses do not return it. Tracing keys have the `lsv2_tr_` prefix.
+
+Use the key as `LANGSMITH_API_KEY` with the [SDK configuration](#configure-the-sdk) below. For a key scoped to multiple workspaces, set `LANGSMITH_WORKSPACE_ID` to a selected workspace. Direct API requests use `X-Tenant-Id`.
+
+### Scope and lifecycle
+
+A tracing key has fixed permissions across its selected workspaces. It does not inherit the creator's roles or project-tag access policies. Its workspace scope and permissions cannot be edited. Create a replacement key to change the scope.
+
+Removing or disabling the creator does not disable tracing with the key. Deleting a selected workspace removes access to that workspace; it does not add access to other workspaces. Expiration and key deletion stop authentication, subject to authentication caching.
+
+### List and delete tracing keys
+
+In **Settings** > **API Keys**, select **Tracing** to view keys. To delete a key, select its delete action and enter its description to confirm. The delete action appears only when you have permission to delete that key.
+
+`GET /api/v1/orgs/current/tracing-keys` lists keys visible to the authenticated user. It returns `items` and `next_cursor`. Use `page_size` to request 1–100 keys per page; the default is 50. Pass `next_cursor` as `cursor` to request the next page. The optional `workspace_ids` filter limits results to matching visible workspaces.
+
+Listing a key does not necessarily grant permission to delete it. Hidden workspace IDs and names are omitted for callers without access to the full scope. Check `can_delete` for deletion authority.
+
+`DELETE /api/v1/orgs/current/tracing-keys/{api_key_id}` deletes a tracing key. Repeated deletion returns `204 No Content`. Deletion is allowed for:
+
+* **Creators**: The creator must remain an active organization member.
+* **Organization key managers**: Callers with `organization:service-key:manage`, including service-account automation.
+* **Workspace key managers**: Active members with `workspaces:manage-keys` in every remaining selected workspace.
+
+The create, list, and delete endpoints are available over HTTP. Generated SDK key-management methods do not expose them. An issued tracing key works with the SDK's tracing APIs.
+
 ## Configure the SDK
 
 Install the SDK for your language:
 
-#### Python
+**Python**
+
 **pip**
 
 ```bash
@@ -83,12 +145,13 @@ pip install langsmith
 uv add langsmith
 ```
 
-#### TypeScript
+**TypeScript**
+
 ```bash
 npm install langsmith
 ```
 
-For full details, refer to the [Python SDK](smith-python-sdk.md) or [JS/TS SDK](smith-js-ts-sdk.md) reference.
+For full details, refer to the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk.md) or [JS/TS SDK](https://docs.langchain.com/langsmith/smith-js-ts-sdk.md) reference.
 
 Then, set your API key and enable tracing:
 
@@ -107,7 +170,7 @@ You may also need the following additional environment variables:
         <th>Region</th>
 
         <th>
-          {protocol_0 === false ? "Host" : "URL"}
+          URL
         </th>
       </tr>
     </thead>
@@ -117,9 +180,7 @@ You may also need the following additional environment variables:
         <td>GCP US</td>
 
         <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
+          `https://api.smith.langchain.com`
         </td>
       </tr>
 
@@ -127,9 +188,7 @@ You may also need the following additional environment variables:
         <td>GCP EU</td>
 
         <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
+          `https://eu.api.smith.langchain.com`
         </td>
       </tr>
 
@@ -137,9 +196,7 @@ You may also need the following additional environment variables:
         <td>GCP APAC</td>
 
         <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
+          `https://apac.api.smith.langchain.com`
         </td>
       </tr>
 
@@ -147,9 +204,7 @@ You may also need the following additional environment variables:
         <td>AWS US</td>
 
         <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
+          `https://aws.api.smith.langchain.com`
         </td>
       </tr>
     </tbody>
@@ -167,8 +222,6 @@ See [instructions for managing your organization via API](manage-organization-by
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/create-account-api-key.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/create-account-api-key.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

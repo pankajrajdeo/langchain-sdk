@@ -11,6 +11,7 @@ tags: [docs, javascript, deepagents, rubric]
 > LLM-as-a-judge grading for agents that iterate against a rubric until done
 
 > [!NOTE]
+>
 > `RubricMiddleware` requires `deepagents>=0.6.5`. It is in [**beta**](../versioning.md); the API may change in the future.
 
 Some agent tasks have a clear definition of "done" that the working model alone cannot reliably hit on the first try: a haiku in the right syllable pattern, a refactor with all tests passing, or a report that hits every required section. `RubricMiddleware` lets you declare *what done looks like* as a rubric and have the agent **self-evaluate and iterate** until the rubric is satisfied, or until a configured maximum iteration cap is hit.
@@ -187,7 +188,8 @@ agent = create_deep_agent(
 
 Pass a `rubric` string on invocation state to start the self-evaluation loop. Use `invoke()` for a single blocking call, or [`stream_events(..., version="v3")`](../langchain/event-streaming.md) with [`CustomTransformer`](../langchain/event-streaming.md#custom-updates) to receive grading events on `stream.custom` as they occur:
 
-#### invoke()
+**invoke()**
+
 ```python
 from langchain.messages import HumanMessage
 
@@ -205,7 +207,8 @@ result = agent.invoke(
 )
 ```
 
-#### stream_events()
+**stream\_events()**
+
 ```python
 from langchain.messages import HumanMessage
 from langgraph.stream import CustomTransformer
@@ -518,7 +521,7 @@ The middleware calls your function with a `RubricEvaluation` dictionary after ea
 
 | Event | Description |
 | - | - |
-| **Successful grading** | Fires once per pass, including intermediate `needs_revision` verdicts and the final `satisfied` or `failed` verdict. <br /><br /> When the grader returns `needs_revision` but `max_iterations` has been reached, the callback still receives `result: "needs_revision"` (the grader's verdict). The run's terminal status is `max_iterations_reached` on private state `_rubric_status`, not on the evaluation record. Inspect `_rubric_status` after `invoke` completes, or read the last entry in `_rubric_evaluations` together with `_rubric_iterations`, to branch on cap exhaustion. |
+| **Successful grading** | Fires once per pass, including intermediate `needs_revision` verdicts and the final `satisfied` or `failed` verdict.   When the grader returns `needs_revision` but `max_iterations` has been reached, the callback still receives `result: "needs_revision"` (the grader's verdict). The run's terminal status is `max_iterations_reached` on private state `_rubric_status`, not on the evaluation record. Inspect `_rubric_status` after `invoke` completes, or read the last entry in `_rubric_evaluations` together with `_rubric_iterations`, to branch on cap exhaustion. |
 | **Grader exceptions** | Fires with `result: "grader_error"`, an explanation derived from the exception, and an empty `criteria` list. |
 | **Errors in your callback** | Exceptions are logged and suppressed. The grading loop continues. Do not use `on_evaluation` to enforce control flow (for example, raising to stop the agent). |
 
@@ -536,7 +539,8 @@ The following example builds a deep agent that writes a `find_duplicates` functi
 
 Rather than asking the grader to reason abstractly about correctness, the example gives it a `run_test_suite` tool to verify behavior directly. The grader calls this tool for additional information before producing a verdict, and falls back to reasoning from the transcript when no tools are provided.
 
-### Define RubricMiddleware
+**1. Define RubricMiddleware**
+
 This middleware adds an LLM-as-a-judge grader loop on top of the base agent. Configure the grader model, optional custom prompt, tools for evidence gathering, and a maximum iteration cap.
 
 **Google**
@@ -847,7 +851,8 @@ rubric_middleware = RubricMiddleware(
 )
 ```
 
-### Pass it to a deep agent
+**2. Pass it to a deep agent**
+
 The agent's `system_prompt` tells it how to do the work, while the rubric tells the grader how to judge the work.
 
 **Google**
@@ -969,7 +974,8 @@ agent = create_deep_agent(
 )
 ```
 
-### Invoke with a human message and rubric
+**3. Invoke with a human message and rubric**
+
 At invocation time, provide the user request in `messages` and a newline-delimited checklist in `rubric` that the grader must mark satisfied. When no `rubric` is supplied on input state, the middleware does not run.
 
 ```python
@@ -1000,8 +1006,6 @@ After the agent produces output, the grader takes over and checks the output for
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/rubric.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/rubric.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

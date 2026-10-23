@@ -13,6 +13,7 @@ tags: [docs, langgraph, deploy]
 When you are ready to deploy your LangGraph agent to production, choose a hosting model that fits your stack. **[LangSmith Cloud](../langsmith/deploy-to-cloud.md)** provides fully managed infrastructure for stateful, long-running agents with persistent state and background execution.
 
 > [!TIP]
+>
 > LangSmith offers multiple deployment options beyond Cloud, including [hybrid](../langsmith/hybrid.md), [standalone servers](../langsmith/deploy-standalone-server.md), and [self-hosted with control plane](../langsmith/deploy-with-control-plane.md). For more information, see the [LangSmith Deployment overview](../langsmith/deployment.md).
 
 ## LangSmith Cloud
@@ -34,16 +35,20 @@ Your application's code must reside in a GitHub repository to be deployed on Lan
 
 #### 2. Deploy to LangSmith
 
-### Navigate to LangSmith Deployment
+**1. Navigate to LangSmith Deployment**
+
 Log in to [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-deploy). In the left sidebar, select **Deployments**.
 
-### Create new deployment
+**2. Create new deployment**
+
 Click the **+ New Deployment** button. A pane will open where you can fill in the required fields.
 
-### Link repository
+**3. Link repository**
+
 If you are a first time user or adding a private repository that has not been previously connected, click the **Add new account** button and follow the instructions to connect your GitHub account.
 
-### Deploy repository
+**4. Deploy repository**
+
 Select your application's repository. Click **Submit** to deploy. This may take about 15 minutes to complete. You can check the status in the **Deployment details** view.
 
 #### 3. Test your application in Studio
@@ -62,7 +67,8 @@ Once your application is deployed:
 
 You can now test the API:
 
-#### Python
+**Python**
+
 1. Install LangGraph SDK:
 
 ```shell
@@ -92,7 +98,8 @@ for chunk in client.runs.stream(
     print("\n\n")
 ```
 
-#### Rest API
+**Rest API**
+
 ```bash
 curl -s --request POST \
     --url <DEPLOYMENT_URL>/runs/stream \
@@ -114,8 +121,6 @@ curl -s --request POST \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -81,6 +81,7 @@ Here is an example of how to find objects by similarity to a query, from data im
 First, we will create data to add to `Weaviate` by loading and chunking the contents of a long text file.
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -264,6 +265,7 @@ db_with_mt.similarity_search(query, tenant="Foo")
 `langchain-weaviate` supports Weaviate's native asynchronous client. Provide a connected [`WeaviateAsyncClient`](https://weaviate.io/developers/weaviate/client-libraries/python/async) as the `client_async` argument (alongside the synchronous `client`), and the async methods — `afrom_texts`, `aadd_texts`, `asimilarity_search`, `asimilarity_search_with_score`, `amax_marginal_relevance_search`, and their variants — will use it directly instead of running the synchronous client in a thread pool.
 
 > [!NOTE]
+>
 > Native async support requires `langchain-weaviate` `0.0.8` or higher. If you call an async method without passing `client_async`, the store falls back to running the synchronous client in an executor and logs a warning, so your code still works but does not get true async I/O.
 
 Unlike the synchronous `connect_to_local()` helper, the `use_async_with_*` helpers return a client that is **not** yet connected — you must `await client.connect()` before using it. The synchronous `client` is still required, since it is used for collection/schema management.
@@ -506,8 +508,6 @@ This integration allows Weaviate to be used with LangChain to enhance the capabi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/weaviate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/weaviate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

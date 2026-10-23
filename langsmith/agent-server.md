@@ -12,16 +12,18 @@ LangSmith Deployment's **Agent Server** offers an API for creating and managing 
 
 Use Agent Server to create and manage:
 
-#### [Assistants](assistants.md)
+> **[Assistants](assistants.md)**
 
-#### [Threads](use-threads.md)
+> **[Threads](use-threads.md)**
 
-#### [Runs](runs.md)
+> **[Runs](runs.md)**
 
-#### [Cron jobs](cron-jobs.md)
+> **[Cron jobs](cron-jobs.md)**
 
 > [!TIP]
-> **API reference**<br />
+>
+> **API reference**\\
+>
 > For detailed information on the API endpoints and data models, refer to the [Agent Server API reference](server-api-ref.md).
 
 ## Application structure
@@ -31,6 +33,7 @@ To deploy an Agent Server application, you need to specify the graph(s) you want
 Read the [application structure](application-structure.md) guide to learn how to structure your LangGraph application for deployment.
 
 > [!NOTE]
+>
 > [LangSmith cloud](cloud.md) manages the database for you. If you're deploying on your [own infrastructure](self-hosted.md), you'll need to set it up yourself.
 
 ## Parts of a deployment
@@ -53,6 +56,7 @@ How and when your graph is compiled depends on how you register it in your [appl
 2. **Factory function**: Export an agent factory function that the server invokes each time it needs the graph. Use this only when you need per-run graph customization (for example, choosing different models or tools based on the assistant config). Keep factory functions lightweight, since they run on every invocation.
 
 > [!TIP]
+>
 > Use a compiled graph unless you specifically need per-run customization. Factory functions add overhead on every invocation; compiled graphs do not.
 
 In both cases, the server automatically injects the checkpointer and memory store configured for that deployment at runtime. **Do not configure these in your graph code** because the server needs to manage them for other operations.
@@ -157,8 +161,6 @@ Each worker executes up to [`N_JOBS_PER_WORKER`](env-var-self-hosted.md) runs co
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -16,7 +16,8 @@ Source: [`js-cloudflare`](https://github.com/langchain-ai/deployment-cookbook/tr
 
 ## Deploy to Cloudflare
 
-### Install and build
+**1. Install and build**
+
 ```bash
 cd js-cloudflare
 cp .env.example .dev.vars   # set OPENAI_API_KEY for local dev
@@ -24,13 +25,15 @@ pnpm install
 pnpm build
 ```
 
-### Configure secrets
+**2. Configure secrets**
+
 ```bash
 npx wrangler login
 npx wrangler secret put OPENAI_API_KEY
 ```
 
-### Deploy
+**3. Deploy**
+
 ```bash
 pnpm run deploy
 ```
@@ -171,8 +174,6 @@ pnpm typecheck
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-cloudflare-workers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-cloudflare-workers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

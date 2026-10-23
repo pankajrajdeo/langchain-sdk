@@ -18,7 +18,7 @@ This guide will help you getting started with `ChatTogetherAI` [chat models](../
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/togetherai) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/together.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatTogetherAI`](https://reference.langchain.com/javascript/langchain-together-ai/ChatTogetherAI) | [`@langchain/together-ai`](https://www.npmjs.com/package/@langchain/together-ai) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/together-ai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/together-ai?style=flat-square\&label=%20&) |
 
@@ -137,8 +137,6 @@ For detailed documentation of all `ChatTogetherAI` features and configurations h
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/togetherai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/togetherai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

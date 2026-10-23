@@ -13,6 +13,7 @@ tags: [docs, javascript, integrations, tools, json]
 This example shows how to load and use an agent with a JSON toolkit.
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -65,8 +66,6 @@ export const run = async () => {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/json.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/json.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

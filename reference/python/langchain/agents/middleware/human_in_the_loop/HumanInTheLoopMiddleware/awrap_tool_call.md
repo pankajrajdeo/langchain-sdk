@@ -14,6 +14,8 @@ tags: [reference, langchain, agents, middleware, human_in_the_loop, humaninthelo
 
 Async variant of `wrap_tool_call`.
 
+In `per_call` mode this is also where the interrupt is raised.
+
 ## Signature
 
 ```python
@@ -39,4 +41,4 @@ The tool result, with a note prepended when a reviewer edited the call.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/be854a130153e51346d83d3b06f959b80f6cbca6/libs/langchain_v1/langchain/agents/middleware/human_in_the_loop.py#L663)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/human_in_the_loop.py#L1012)

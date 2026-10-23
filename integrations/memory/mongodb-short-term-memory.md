@@ -15,6 +15,7 @@ tags: [docs, integrations, memory, mongodb-short-term-memory]
 MongoDB stores conversation state as documents in a collection, so threads can resume across process restarts and deployments.
 
 > [!TIP]
+>
 > Need to remember information **across** conversations? Use [long-term memory with MongoDB Atlas](mongodb-long-term-memory.md) to store and recall data across different threads and sessions.
 
 ## Setup
@@ -102,8 +103,6 @@ with MongoDBSaver.from_conn_string(MONGODB_ATLAS_URI) as checkpointer:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/memory/mongodb-short-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/memory/mongodb-short-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

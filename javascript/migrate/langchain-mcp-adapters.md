@@ -10,7 +10,8 @@ tags: [docs, javascript, migrate, langchain-mcp-adapters]
 
 > Upgrade from @langchain/mcp-adapters 1.x to 2.0, covering renamed APIs, stricter configuration, authentication, elicitation, and tool result changes.
 
-> **Prompt:** Migrate from @langchain/mcp-adapters 1.x to 2.0.
+Migrate from @langchain/mcp-adapters 1.x to 2.0.
+
 Migrate this codebase from `@langchain/mcp-adapters` 1.x to 2.0 and update its peer dependencies.
 
 Fetch and read the full migration guide at [https://docs.langchain.com/oss/javascript/migrate/langchain-mcp-adapters.md](langchain-mcp-adapters.md) as the source of truth. Search this codebase and apply all relevant migration changes, including dependency and test updates. Run the relevant checks, then summarize the changes and flag anything that requires a manual decision or could not be verified. If you cannot access the guide, ask for its contents before proceeding.
@@ -19,7 +20,7 @@ Fetch and read the full migration guide at [https://docs.langchain.com/oss/javas
 
 ## Breaking changes
 
-* **Tool names are prefixed with the server name by default.** `MCPAdapter`, including the deprecated `MultiServerMCPClient`, names tools `{server}__{tool}` (for example `weather__get_forecast`), even with a single server, unless you set `prefixToolNameWithServerName`; 1.x defaulted it to `false`. Set `prefixToolNameWithServerName: false` to keep 1.x names. `loadMcpTools` still defaults to `false`. Update code, prompts, and saved examples that refer to tool names. Update `interruptOn` approval rules to the prefixed names; a rule for `delete_repo` no longer matches `github__delete_repo`. The adapter does not validate server names, and longer names can exceed a model provider's tool-name limit; see [Multiple servers](../langchain/mcp/connections.md#multiple-servers).
+* **Tool names are prefixed with the server name by default.** `MCPAdapter`, including the deprecated `MultiServerMCPClient`, names tools `{server}_{tool}` (for example `weather_get_forecast`), even with a single server, unless you set `prefixToolNameWithServerName`; 1.x defaulted it to `false`. Set `prefixToolNameWithServerName: false` to keep 1.x names. `loadMcpTools` still defaults to `false`. Update code, prompts, and saved examples that refer to tool names. Update `interruptOn` approval rules to the prefixed names; a rule for `delete_repo` no longer matches `github_delete_repo`. The adapter does not validate server names, and longer names can exceed a model provider's tool-name limit; see [Multiple servers](../langchain/mcp/connections.md#multiple-servers).
 * **Duplicate tool names throw.** With `prefixToolNameWithServerName: false`, `listTools()` and `getTools()` throw `MCPClientError` when two servers expose the same tool name, or when one server lists a name twice. 1.x returned every tool. Keep the prefix, or pick tools per server from `listToolsets()`.
 * **Elicitation pauses runs by default.** When a modern server asks for input during a tool call, the adapter raises a LangGraph [`interrupt`](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt) and the run stops until you resume it with `createMCPElicitationResume`. A checkpointer is needed only when a tool elicits. Set `elicitation: false` on a server to keep the 1.x behavior. See [Elicitation](#elicitation).
 * **Tool content is always standard content blocks.** 1.x defaulted `useStandardContentBlocks` to `false`. 2.0 removes the option, rejects it, and always returns standard blocks, so images carry `data` and `mimeType` instead of `image_url` data URLs, and audio uses `mimeType` instead of `mime_type`. See [Tool results](#tool-results).
@@ -253,8 +254,6 @@ Only elicitation is answered through these interrupts. Requests for [sampling](h
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/migrate/langchain-mcp-adapters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/migrate/langchain-mcp-adapters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

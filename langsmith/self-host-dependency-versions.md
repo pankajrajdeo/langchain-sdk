@@ -13,6 +13,7 @@ tags: [docs, langsmith, self-host-dependency-versions]
 This page lists the minimum supported versions for the databases, tools, and infrastructure used by self-hosted LangSmith. Install a version that meets or exceeds the minimum before deploying or upgrading. Using a version below the minimum is not supported and may cause installation or runtime failures.
 
 > [!TIP]
+>
 > If you are using a managed service (such as Amazon RDS, Google Cloud SQL, or Azure Database), pick a version at or above the minimum listed here. Refer to the linked "External services" pages for connection and authentication details.
 
 ## Datastores
@@ -25,6 +26,7 @@ This page lists the minimum supported versions for the databases, tools, and inf
 | [ClickHouse](self-host-external-clickhouse.md) | Version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater | Stores traces and feedback. ClickHouse 24.2 or later requires LangSmith v0.6 or later. Downgrades are not supported. |
 
 > [!WARNING]
+>
 > **Redis \< 6.2 and PostgreSQL \< 14 are not supported.** A LangSmith installation pointed at an older Redis or PostgreSQL instance may fail to start or behave unpredictably. Upgrade your datastore before installing or upgrading LangSmith.
 
 ## Compute and orchestration
@@ -54,8 +56,6 @@ If you are unsure which version is currently running, contact your database admi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-dependency-versions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-dependency-versions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

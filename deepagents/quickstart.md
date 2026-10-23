@@ -12,7 +12,8 @@ tags: [docs, deepagents, quickstart]
 
 This guide walks you through creating your first deep agent with file system tools and subagent capabilities. You will build a research agent that can conduct research and write reports.
 
-> **Prompt:** Build the Deep Agents research quickstart
+Build the Deep Agents research quickstart
+
 Build a Deep Agents research agent in this working directory by following the Deep Agents quickstart.
 
 ## Step 1: Read the guide
@@ -46,50 +47,54 @@ Follow the quickstart steps in order:
 * Ask rather than guess when a secret, provider choice, or project convention is unclear.
 
 > [!TIP]
+>
 > **Using an AI coding assistant?**
 >
 > * Install the [LangChain Docs MCP servers](../use-these-docs.md) to give your agent access to up-to-date LangChain documentation and examples.
 >
-> > **Prompt:** Connect LangChain docs MCP servers
->     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
+>   Connect LangChain docs MCP servers
 >
->     Servers to add:
+>   Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
 >
->     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
->     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
+>   Servers to add:
 >
->     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
+>   * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
+>   * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
 >
->     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
->     * Codex CLI: `codex mcp add` with each server URL.
->     * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
->     * Claude Desktop: add both URLs under Settings > Connectors.
+>   Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../use-these-docs.md):
 >
->     Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
+>   * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
+>   * Codex CLI: `codex mcp add` with each server URL.
+>   * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
+>   * Claude Desktop: add both URLs under Settings > Connectors.
+>
+>   Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
 > * Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks.
 >
-> > **Prompt:** Install LangChain Skills
->     Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
+>   Install LangChain Skills
 >
->     Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
+>   Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
 >
-> ```bash
->     npx skills add langchain-ai/langchain-skills --skill '*' --yes
-> ```
+>   Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
 >
->     If I ask for a global install instead, use:
+>   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   npx skills add langchain-ai/langchain-skills --skill '*' --yes
+>   ```
 >
-> ```bash
->     npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
-> ```
+>   If I ask for a global install instead, use:
 >
->     Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
+>   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
+>   ```
+>
+>   Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
 
 ## Prerequisites
 
 Before you begin, make sure you have an API key from a model provider (e.g., Gemini, Anthropic, OpenAI).
 
 > [!NOTE]
+>
 > Deep Agents require a model that supports [tool calling](../langchain/models.md#tool-calling). See [customization](customization.md#model) for how to configure your model.
 
 ## Step 1: Install dependencies
@@ -109,48 +114,56 @@ uv sync
 ```
 
 > [!NOTE]
+>
 > Google, OpenAI, and Anthropic all provide built-in web search tools: no extra package or API key required. If you use a different provider or prefer [Tavily](https://tavily.com/) for search, install the Tavily package as well:
 >
-> ```bash
+```bash
 > pip install tavily-python
-> ```
+```
 
 ## Step 2: Set up your API keys
 
-#### Google
+**Google**
+
 ```bash
 export GOOGLE_API_KEY="your-api-key"
 ```
 
-#### OpenAI
+**OpenAI**
+
 ```bash
 export OPENAI_API_KEY="your-api-key"
 ```
 
-#### Anthropic
+**Anthropic**
+
 ```bash
 export ANTHROPIC_API_KEY="your-api-key"
 ```
 
-#### OpenRouter
+**OpenRouter**
+
 ```bash
 export OPENROUTER_API_KEY="your-api-key"
 export TAVILY_API_KEY="your-tavily-api-key"
 ```
 
-#### Fireworks
+**Fireworks**
+
 ```bash
 export FIREWORKS_API_KEY="your-api-key"
 export TAVILY_API_KEY="your-tavily-api-key"
 ```
 
-#### Baseten
+**Baseten**
+
 ```bash
 export BASETEN_API_KEY="your-api-key"
 export TAVILY_API_KEY="your-tavily-api-key"
 ```
 
-#### Ollama
+**Ollama**
+
 ```bash
 # Local: Ollama must be running on your machine
 # Cloud: Set your Ollama API key for hosted inference
@@ -158,7 +171,8 @@ export OLLAMA_API_KEY="your-api-key"
 export TAVILY_API_KEY="your-tavily-api-key"
 ```
 
-#### Other
+**Other**
+
 ```bash
 # Set the API key for your provider
 export <PROVIDER>_API_KEY="your-api-key"
@@ -168,6 +182,7 @@ export TAVILY_API_KEY="your-tavily-api-key"
 Deep Agents work with any [LangChain chat model](models.md#supported-models). Set the API key for your provider.
 
 > [!TIP]
+>
 > **Using LangSmith Gateway**
 >
 > The [LangSmith Gateway](../langsmith/llm-gateway.md) routes most major providers through LangSmith. You can [bring your own provider keys](../langsmith/llm-gateway-quickstart.md#send-a-request), or use [Gateway Credits](../langsmith/llm-gateway-credits.md) to access models without a provider key.
@@ -176,7 +191,8 @@ Deep Agents work with any [LangChain chat model](models.md#supported-models). Se
 
 Google, OpenAI, and Anthropic offer built-in web search tools that run server-side: no extra package or API key needed. Pass a provider tool dict directly to `create_deep_agent`.
 
-#### Provider search (recommended)
+**Provider search (recommended)**
+
 **Google**
 
 ```python
@@ -204,7 +220,8 @@ from deepagents import create_deep_agent
 internet_search = {"type": "web_search_20260209", "name": "web_search"}
 ```
 
-#### Tavily (any provider)
+**Tavily (any provider)**
+
 ```python
 import os
 from typing import Literal
@@ -424,8 +441,6 @@ Now that you've built your first deep agent:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

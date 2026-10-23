@@ -10,6 +10,9 @@ tags: [docs, langsmith, smith-api, prompt-webhooks, update-prompt-webhook]
 
 > Update a specific prompt webhook.
 
+Omitted fields keep their current values; list fields and headers that are
+set replace the stored values.
+
 ## OpenAPI
 
 **/langsmith/langsmith-platform-openapi.json patch /api/v1/prompt-webhooks/{webhook_id}**
@@ -162,6 +165,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,13 +175,20 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/prompt-webhooks/{webhook_id}:
     patch:
       tags:
         - prompt-webhooks
       summary: Update prompt webhook
-      description: Update a specific prompt webhook.
+      description: >-
+        Update a specific prompt webhook.
+
+        Omitted fields keep their current values; list fields and headers that
+        are
+
+        set replace the stored values.
       operationId: update_prompt_webhook_api_v1_prompt_webhooks__webhook_id__patch
       parameters:
         - name: webhook_id
@@ -221,6 +233,9 @@ components:
               type: array
             - type: 'null'
           title: Include Prompts
+          description: >-
+            IDs of the prompts whose events fire the webhook, replacing the
+            current list. Omit to keep it.
         exclude_prompts:
           anyOf:
             - items:
@@ -229,6 +244,9 @@ components:
               type: array
             - type: 'null'
           title: Exclude Prompts
+          description: >-
+            IDs of prompts whose events never fire the webhook, replacing the
+            current list. Omit to keep it.
         url:
           anyOf:
             - type: string
@@ -236,12 +254,17 @@ components:
               format: uri
             - type: 'null'
           title: Url
+          description: URL that receives the POST requests. Omit to keep the current URL.
         headers:
           anyOf:
             - additionalProperties: true
               type: object
             - type: 'null'
           title: Headers
+          description: >-
+            HTTP headers sent with each request, replacing all current headers.
+            Omit to keep them. Masked values (********) from a read are
+            rejected.
         triggers:
           anyOf:
             - items:
@@ -249,9 +272,18 @@ components:
               type: array
             - type: 'null'
           title: Triggers
+          description: >-
+            Events that fire the webhook (commit, tag:create, tag:update),
+            replacing the current list. Omit to keep it.
       type: object
       title: PromptWebhookUpdate
-      description: Schema for updating a prompt webhook.
+      description: >-
+        Schema for updating a prompt webhook.
+
+        Omitted fields keep their current values. A list or headers value that
+        is
+
+        set replaces the stored value.
     PromptWebhook:
       properties:
         url:
@@ -259,12 +291,17 @@ components:
           minLength: 1
           format: uri
           title: Url
+          description: URL that receives a POST request with the prompt event payload.
         headers:
           anyOf:
             - additionalProperties: true
               type: object
             - type: 'null'
           title: Headers
+          description: >-
+            HTTP headers sent with each request, for example an Authorization
+            header. Values are stored encrypted and are masked in responses to
+            callers who cannot update prompts.
         include_prompts:
           anyOf:
             - items:
@@ -273,6 +310,9 @@ components:
               type: array
             - type: 'null'
           title: Include Prompts
+          description: >-
+            IDs of the prompts whose events fire the webhook. When empty, events
+            from every prompt in the workspace fire it.
         exclude_prompts:
           anyOf:
             - items:
@@ -281,11 +321,15 @@ components:
               type: array
             - type: 'null'
           title: Exclude Prompts
+          description: IDs of prompts whose events never fire the webhook.
         triggers:
           items:
             $ref: '#/components/schemas/EPromptWebhookTrigger'
           type: array
           title: Triggers
+          description: >-
+            Events that fire the webhook: commit (a new prompt commit),
+            tag:create, and tag:update. A webhook with no triggers never fires.
         id:
           type: string
           format: uuid

@@ -22,18 +22,21 @@ For detailed information about data retention configuration and management, plea
 ## Customize extended retention policy
 
 > [!NOTE]
-> This feature is available for [Enterprise](pricing-plans.md) plan customers. For [self-hosted](self-hosted.md) Enterprise customers, refer to the [workspace-level configuration section](#workspace-level-extended-retention-for-self-hosted).
+>
+> This feature is available for [Enterprise](https://docs.langchain.com/langsmith/pricing-plans.md) plan customers. For [self-hosted](self-hosted.md) Enterprise customers, refer to the [workspace-level configuration section](#workspace-level-extended-retention-for-self-hosted).
 
-[Enterprise](pricing-plans.md) customers can customize the extended data retention period for traces at the [workspace](administration-overview.md#workspaces) level to meet specific compliance requirements. Beginning September 14, 2026, the maximum long-lived trace retention period for SaaS customers is 180 days. You can adjust the retention period below this maximum based on your organization's needs. Changes to the retention period apply to new traces only.
+[Enterprise](https://docs.langchain.com/langsmith/pricing-plans.md) customers can customize the extended data retention period for traces at the [workspace](administration-overview.md#workspaces) level to meet specific compliance requirements. Beginning September 14, 2026, the maximum long-lived trace retention period for SaaS customers is 180 days. You can adjust the retention period below this maximum based on your organization's needs. Changes to the retention period apply to new traces only.
 
 > [!NOTE]
+>
 > Changes to the retention period apply to new traces only. Existing traces are not affected.
 
 ### Configure extended retention
 
 Organization Admins and Operators (`organization:manage`) can configure retention for any workspace. Workspace Admins can configure their own workspace (`workspaces:manage`). For a full permissions reference, see [Organization and workspace operations](organization-workspace-operations.md).
 
-#### UI
+**UI**
+
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-data-purging-compliance):
 
 1. Navigate to **Settings** at the bottom of the page.
@@ -43,7 +46,8 @@ In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=ct
 5. On the **workspace usage configurations** modal, customize the extended policy using the dropdown for **Extended - All traces are retained for** option. Available durations for SaaS customers are: 30d, 60d, 90d, 120d, 150d, and 180d (maximum as of September 14, 2026). Self-hosted deployments are not subject to this cap.
 6. Select **Save**.
 
-#### API
+**API**
+
 To read current settings:
 
 **Organization level** (`organization:manage`)
@@ -82,9 +86,10 @@ curl -X PUT "https://api.smith.langchain.com/api/v1/ttl-settings" \
 
 ### Workspace-level extended retention for self-hosted
 
-Self-hosted [Enterprise](pricing-plans.md) customers can also use workspace-level extended retention configuration instead of system-wide TTL settings. This provides more granular control over data retention for different workspaces without requiring environment variable changes.
+Self-hosted [Enterprise](https://docs.langchain.com/langsmith/pricing-plans.md) customers can also use workspace-level extended retention configuration instead of system-wide TTL settings. This provides more granular control over data retention for different workspaces without requiring environment variable changes.
 
 > [!WARNING]
+>
 > If you use blob storage, you **must** add a lifecycle rule for each custom retention period you configure. For example, setting a workspace to 90-day retention means blob data is written to the `ttl_90d/` prefix, which requires a matching lifecycle rule to be cleaned up automatically. See [blob storage TTL configuration](self-host-blob-storage.md#custom-workspace-level-retention-prefixes) for details and examples.
 
 To configure this for self-hosted deployments, refer to the [self-hosted TTL documentation](self-host-ttl.md) for the legacy system-wide approach or contact [support](https://support.langchain.com).
@@ -99,6 +104,7 @@ You can use the API to complete trace deletes. The API supports two methods for 
 For more details, refer to the [API spec](smith-api/run/delete-runs.md).
 
 > [!WARNING]
+>
 > All trace deletions will delete related entities like feedbacks, aggregations, and stats across all data storages.
 
 ### Deletion timeline
@@ -110,6 +116,7 @@ Trace deletions are processed during non-peak usage times and are not instant. L
 To delete specific traces by their trace IDs from a single session:
 
 > [!NOTE]
+>
 > The `session_id` is the project ID for the trace you are trying to delete. You can find it on the tracing project page in the LangSmith UI.
 
 ```bash
@@ -127,6 +134,7 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/delete" \
 You can delete dataset examples self-serve via our API, which supports both soft and hard deletion methods depending on your data retention needs.
 
 > [!WARNING]
+>
 > Hard deletes will permanently remove inputs, outputs, and metadata from ALL versions of the specified examples across the entire dataset history.
 
 ### Deleting examples is a two-step process
@@ -189,8 +197,6 @@ curl -X POST "https://api.smith.langchain.com/v1/platform/datasets/examples/dele
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-purging-compliance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-purging-compliance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

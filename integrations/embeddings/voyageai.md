@@ -1,24 +1,24 @@
 ---
-title: "Voyage AI integration"
-description: "Integrate with the Voyage AI embedding model using LangChain Python."
+title: "VoyageAI by MongoDB integration"
+description: "Integrate with the VoyageAI by MongoDB embedding model using LangChain Python."
 source: "https://docs.langchain.com/oss/python/integrations/embeddings/voyageai"
 category: "docs"
 tags: [docs, integrations, embeddings, voyageai]
 ---
 
-# Voyage AI integration
+# VoyageAI by MongoDB integration
 
-> Integrate with the Voyage AI embedding model using LangChain Python.
+> Integrate with the VoyageAI by MongoDB embedding model using LangChain Python.
 
-> [Voyage AI](https://www.voyageai.com/) provides cutting-edge embedding/vectorizations models.
+> [VoyageAI by MongoDB](https://www.voyageai.com/) provides cutting-edge embedding/vectorizations models.
 
-Let's load the Voyage AI Embedding class. (Install the LangChain partner package with `pip install langchain-voyageai`)
+Let's load the VoyageAI by MongoDB Embedding class. (Install the LangChain partner package with `pip install langchain-voyageai`)
 
 ```python
 from langchain_voyageai import VoyageAIEmbeddings
 ```
 
-Voyage AI utilizes API keys to monitor usage and manage permissions. To obtain your key, create an account on our [homepage](https://www.voyageai.com). Then, create a VoyageEmbeddings model with your API key. You can use any of the following models: ([source](https://docs.voyageai.com/docs/embeddings)):
+VoyageAI by MongoDB utilizes API keys to monitor usage and manage permissions. To obtain your key, create an account on our [homepage](https://www.voyageai.com). Then, create a VoyageEmbeddings model with your API key. You can use any of the following models: ([source](https://docs.voyageai.com/docs/embeddings)):
 
 * `voyage-4-large`
 * `voyage-4`
@@ -100,6 +100,7 @@ The main feature of the embeddings is that the cosine similarity between two emb
 We can find a few closest embeddings in the documents embeddings based on the cosine similarity, and retrieve the corresponding document using the `KNNRetriever` class from LangChain.
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -118,10 +119,19 @@ print(top1_retrieved_doc)
 An LLMChain is a chain that composes basic LLM functionality. It consists of a PromptTemplate and a language model (either an LLM or chat model). It formats the prompt template using the input key values provided (and also memory key values, if available), passes the formatted string to LLM and returns the LLM output.
 ```
 
+## Contextualized chunk embeddings
+
+The contextual models (`voyage-context-4` and `voyage-context-3`) embed each chunk with the context of the surrounding chunks from the same document ([source](https://docs.voyageai.com/docs/contextualized-chunk-embeddings)). `VoyageAIEmbeddings` supports them directly: for documents it calls the `contextualized_embed` endpoint with `enable_auto_chunking=True`, so you can pass whole documents as plain strings.
+
+```python
+embeddings = VoyageAIEmbeddings(model="voyage-context-4")
+
+documents_embds = embeddings.embed_documents(documents)
+query_embd = embeddings.embed_query(query)
+```
+
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/voyageai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/voyageai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

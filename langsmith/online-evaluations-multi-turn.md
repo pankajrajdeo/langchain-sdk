@@ -10,7 +10,9 @@ tags: [docs, langsmith, online-evaluations-multi-turn]
 
 Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent, not just individual exchanges. They measure end-to-end interaction quality across all turns in a thread.
 
-To use a LangChain-managed, thread-level judge without configuring a model, API key, or prompt, see [LangChain Tuned Evaluators](tuned-evaluators.md).
+> [!TIP]
+>
+> To use a LangChain-managed, thread-level judge without configuring a model, API key, or prompt, see [LangChain Tuned Evaluators](tuned-evaluators.md).
 
 You can use multi-turn evaluations to measure:
 
@@ -18,7 +20,9 @@ You can use multi-turn evaluations to measure:
 2. Semantic Outcome: What actually happened, did the task succeed.
 3. Trajectory: How the conversation unfolded, including trajectory of tool calls.
 
-Multi-turn online evaluators can extend trace retention by default. You can opt out when configuring the evaluator so that traces keep the project's configured retention tier. Traces are still upgraded if another action explicitly extends retention or the project already uses extended retention. For step-by-step opt-out instructions, see [Manage evaluator trace retention](evaluators.md#manage-evaluator-trace-retention). For details, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
+> [!NOTE]
+>
+> Multi-turn online evaluators can extend trace retention by default. You can opt out when configuring the evaluator so that traces keep the project's configured retention tier. Traces are still upgraded if another action explicitly extends retention or the project already uses extended retention. For step-by-step opt-out instructions, see [Manage evaluator trace retention](evaluators.md#manage-evaluator-trace-retention). For details, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
 
 ## How it works
 
@@ -40,6 +44,7 @@ This lifecycle means that multi-turn evaluators run once per completed thread, n
   * If the top-level inputs and outputs of each trace contain the full conversation history, LangSmith will use that directly.
 
 > [!NOTE]
+>
 > If your traces don't follow the format above, thread level evaluators won't work. You'll need to update how you trace to LangSmith to ensure each trace's top-level inputs and outputs contain a list of `messages`.
 >
 > Please refer to the [troubleshooting](#troubleshooting) section for more information.
@@ -60,11 +65,13 @@ This lifecycle means that multi-turn evaluators run once per completed thread, n
 
    The first time you configure a thread-level evaluator, you can define the idle time, the amount of time after the last trace in a thread before it is considered complete and ready for evaluation. This value should reflect the expected length of user interactions in your app. The idle time defaults to 10 minutes and cannot be set below 2 minutes.
 
-> [!NOTE]
->    The idle time is a project-level setting. It applies to every thread-level evaluator in the project and to every [automation rule](rules.md#set-the-thread-idle-time) whose item type is **Threads**.
+   > [!NOTE]
+   >
+   > The idle time is a project-level setting. It applies to every thread-level evaluator in the project and to every [automation rule](rules.md#set-the-thread-idle-time) whose item type is **Threads**.
 
-> [!TIP]
->    When first testing your evaluator, use a short idle time so you can see results quickly, subject to the 2-minute minimum. Once validated, increase it to match the expected length of user interactions.
+   > [!TIP]
+   >
+   > When first testing your evaluator, use a short idle time so you can see results quickly, subject to the 2-minute minimum. Once validated, increase it to match the expected length of user interactions.
 
 6. **Configure your model.**
 
@@ -82,8 +89,9 @@ This lifecycle means that multi-turn evaluators run once per completed thread, n
 
    Configure a name for the feedback key, the format for the feedback you want to collect and optionally enable reasoning on the feedback.
 
-> [!WARNING]
->    Using the same feedback key for a thread-level evaluator and a run-level evaluator is **not recommended** as it can be hard to distinguish between the two.
+   > [!WARNING]
+   >
+   > Using the same feedback key for a thread-level evaluator and a run-level evaluator is **not recommended** as it can be hard to distinguish between the two.
 
 9. **Save your evaluator.**
 
@@ -94,7 +102,10 @@ This lifecycle means that multi-turn evaluators run once per completed thread, n
 `trajectory` is one of the variables a thread evaluator can use, alongside `all_messages`, `human_ai_pairs`, and `first_human_last_ai`. It resolves to the [trajectory](observability-concepts.md#trajectories) of the conversation: the flat, ordered list of messages from start to finish, including tool calls and their results. Use it to score the path an agent took, such as whether it picked the right tools, followed its plan, and got there without wasted steps.
 
 > [!NOTE]
-> The `trajectory` variable is available on [LangSmith Cloud](cloud.md) in the GCP US region ([smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-online-evaluations-multi-turn)) only. It is not available in the GCP EU, GCP APAC, or AWS US regions, or on [self-hosted](self-hosted.md) and [BYOC](byoc.md) deployments. Self-hosted support is not included in the LangSmith v0.16.0 stable release. Support for self-hosted and BYOC deployments becomes available in a future release.
+>
+> On [LangSmith Cloud](cloud.md), the `trajectory` variable is available in the GCP US region ([smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-online-evaluations-multi-turn)) only. It is not available in the GCP EU, GCP APAC, or AWS US regions, or on [BYOC](byoc.md) deployments.
+>
+> [Self-hosted](self-hosted.md) installations support the `trajectory` variable on LangSmith v0.17 or later, after you [switch queries to SmithDB](self-host-smithdb-install.md#step-6-switch-queries-to-smithdb). See [SmithDB feature availability](self-host-smithdb-features.md).
 
 The variables differ in what the judge receives:
 
@@ -104,6 +115,7 @@ The variables differ in what the judge receives:
 For the message shape each variable resolves to, see [Thread message variables](prompt-template-format.md#thread-message-variables).
 
 > [!WARNING]
+>
 > A trajectory is typically larger than any of the other views, because it encompasses both root and child runs. Choose a model with a high context window, as described in step 6 of [Configuration](#configuration), and expect higher token usage per evaluation.
 
 ### Use the trajectory variable
@@ -122,6 +134,7 @@ When the evaluator completes, LangSmith writes feedback to the most recent root 
 For a complete prompt you can adapt, see [Example with trajectory context](prompt-template-format.md#example-with-trajectory-context).
 
 > [!WARNING]
+>
 > The choice is fixed when you create the evaluator. To move an existing evaluator between `trajectory` and the other thread variables, delete it and create a new one.
 
 ### Settings and constraints
@@ -164,8 +177,6 @@ In this tab, you can see the inputs passed into the LLM-as-a-judge evaluator. If
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-multi-turn.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-multi-turn.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

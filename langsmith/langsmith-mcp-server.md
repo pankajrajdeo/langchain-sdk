@@ -11,6 +11,7 @@ tags: [docs, langsmith, langsmith-mcp-server]
 > Use the Model Context Protocol (MCP) server to let language models fetch conversation history, prompts, runs, datasets, experiments, and billing from LangSmith.
 
 > [!WARNING]
+>
 > **Deprecated—use the [LangSmith Remote MCP](langsmith-remote-mcp.md) instead.**
 >
 > LangSmith now hosts an OAuth-authenticated remote MCP server on LangSmith Cloud and on [self-hosted LangSmith](self-hosted.md) v0.15 or later. Cloud endpoints:
@@ -21,7 +22,7 @@ tags: [docs, langsmith, langsmith-mcp-server]
 >       <th>Region</th>
 >
 >       <th>
->         {protocol_0 === false ? "Host" : "URL"}
+>         URL
 >       </th>
 >     </tr>
 >   </thead>
@@ -31,9 +32,7 @@ tags: [docs, langsmith, langsmith-mcp-server]
 >       <td>GCP US</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://api.smith.langchain.com/mcp`
 >       </td>
 >     </tr>
 >
@@ -41,9 +40,7 @@ tags: [docs, langsmith, langsmith-mcp-server]
 >       <td>GCP EU</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://eu.api.smith.langchain.com/mcp`
 >       </td>
 >     </tr>
 >
@@ -51,9 +48,7 @@ tags: [docs, langsmith, langsmith-mcp-server]
 >       <td>GCP APAC</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://apac.api.smith.langchain.com/mcp`
 >       </td>
 >     </tr>
 >
@@ -61,9 +56,7 @@ tags: [docs, langsmith, langsmith-mcp-server]
 >       <td>AWS US</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://aws.api.smith.langchain.com/mcp`
 >       </td>
 >     </tr>
 >   </tbody>
@@ -89,6 +82,7 @@ The LangSmith MCP Server is a [Model Context Protocol](https://modelcontextproto
 * **Billing**: "Get billing usage for September 2025"
 
 > [!TIP]
+>
 > **Use the server in code or Fleet**
 >
 > * To connect and use remote MCP servers (including this one) in your Python application, see [MCP (Model Context Protocol)](../langchain/mcp.md).
@@ -305,8 +299,6 @@ Source and package: [GitHub](https://github.com/amitrechavia/langsmith-mcp-serve
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-mcp-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-mcp-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

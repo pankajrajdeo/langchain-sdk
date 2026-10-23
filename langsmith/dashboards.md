@@ -14,8 +14,8 @@ LangSmith offers two dashboard types:
 
 * **Prebuilt dashboards**: Automatically generated for every tracing project or [agent environment](agent-environments.md).
 * **Custom dashboards**: Collections of charts you can configure to your needs. Two experiences are available depending on your [platform setup](platform-setup.md):
-  * [**Custom dashboards**](#custom-dashboards): Available for LangSmith Cloud US.
-  * [**Custom dashboards (legacy)**](#custom-dashboards-legacy): Available for LangSmith Self-hosted and LangSmith Cloud EU/APAC.
+  * [**Custom dashboards**](#custom-dashboards): Available for LangSmith Cloud US, and for LangSmith Self-hosted installations that [query SmithDB](self-host-smithdb-features.md).
+  * [**Custom dashboards (legacy)**](#custom-dashboards-legacy): Available for LangSmith Cloud EU/APAC, and for LangSmith Self-hosted installations that query ClickHouse.
 
 ## Prebuilt dashboards
 
@@ -40,11 +40,15 @@ Prebuilt dashboards are broken down into the following sections:
 
 You can use group by [run tag or metadata](add-metadata-tags.md) to split data over attributes that are important to your application. The global group by setting appears on the top right-hand side of the dashboard. Note that the **Tool** and **Run Type** charts already have a group by applied, so the global group by won't take effect. The global group by will apply to all other charts.
 
-When adding metadata to runs, we recommend having the same metadata on the trace, as well as the specific run (e.g., LLM call). Metadata and tags are not propagated from parent to child runs, or vice versa. If you want to see both trace charts and LLM call charts grouped by a metadata key, both traces (root runs) and LLM runs need that [metadata attached](add-metadata-tags.md).
+> [!NOTE]
+>
+> When adding metadata to runs, we recommend having the same metadata on the trace, as well as the specific run (e.g., LLM call). Metadata and tags are not propagated from parent to child runs, or vice versa. If you want to see both trace charts and LLM call charts grouped by a metadata key, both traces (root runs) and LLM runs need that [metadata attached](add-metadata-tags.md).
 
 ## Custom dashboards
 
-Available for LangSmith [Cloud](cloud.md) US.
+> [!NOTE]
+>
+> Available for LangSmith [Cloud](cloud.md) US, and for LangSmith [Self-hosted](self-hosted.md) installations that [query SmithDB](self-host-smithdb-install.md#step-6-switch-queries-to-smithdb).
 
 Create tailored collections of charts for tracking metrics that matter most for your application.
 
@@ -123,6 +127,7 @@ Dataset sources do not expose run/trace/tree filters. Data is scoped by the sele
 2. **Data series**: Manually add metrics with the **Add another metric** button. Each series can carry its own filter, so you can compare, for example, "count where status is error" against "count where status is success" on the same chart.
 
 > [!NOTE]
+>
 > Group by and multi-metric are mutually exclusive on a single chart. Only one group-by attribute is allowed. Donut, ranked bar, and table charts do not support multiple data series (extras are dropped or blocked).
 
 #### Choose visualization
@@ -150,7 +155,9 @@ Choose a visualization type:
 
 ## Custom dashboards (legacy)
 
-Available for LangSmith [Self-hosted](self-hosted.md) and LangSmith [Cloud](cloud.md) EU/APAC customers.
+> [!NOTE]
+>
+> Available for LangSmith [Cloud](cloud.md) EU/APAC customers, and for LangSmith [Self-hosted](self-hosted.md) installations that query ClickHouse.
 
 Create tailored collections of charts for tracking metrics that matter most for your application.
 
@@ -220,14 +227,13 @@ You can create a chart to track and visualize the breakdown of these decisions.
 1. **Metric Selection**: Select the metric `Run count`.
 2. **Chart Filters**: Add a tree filter to include all of the traces with name `triage_input`. This means you only include traces that hit the `triage_input` node. Also add a chart filter for `Is Root` is `true`, so the count is not inflated by the number of nodes in the trace.
 3. **Data Series**: Create a data series for each decision made at the `triage_input` node. The output of the decision is stored in the `triage.response` field of the output object, and the value of the decision is either `no`, `email`, or `notify`. Each of these decisions generates a separate data series in the chart.
-   <img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/decision-at-node.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=eb98a2c2c7988b5b6c5c3db9740ed172" alt="Decision at node" width="2578" height="1692" data-path="langsmith/images/decision-at-node.png" />
+
+   ![Decision at node](https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/decision-at-node.png?fit=max\&auto=format\&n=aKRoUGXX6ygp4DlC\&q=85\&s=eb98a2c2c7988b5b6c5c3db9740ed172)
 
 Now you can visualize the decisions made at the `triage_input` node over time.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/dashboards.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/dashboards.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

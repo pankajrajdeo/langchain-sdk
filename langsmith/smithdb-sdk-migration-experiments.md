@@ -20,38 +20,44 @@ Query dataset examples together with the experiment runs recorded against each e
 
 #### Method name
 
-#### Python
+**Python**
+
 | Before | After |
 | - | - |
 | `client.get_experiment_results()` | `client.datasets.experiment_runs.query()` |
 
 > [!NOTE]
+>
 > `client.datasets.experiment_runs.query()` is now async. Call it with `await`.
 
 See the [reference](https://reference.langchain.com/python/langsmith/_openapi_client/resources/datasets/experiment_runs/ExperimentRunsResource/query) for the full parameter and field list.
 
-#### TypeScript
+**TypeScript**
+
 | Before | After |
 | - | - |
 | *(no legacy public `Client` method)* | `client.datasets.experimentRuns.query()` |
 
 See the [reference](https://reference.langchain.com/javascript/langsmith/_openapi_client/resources/Datasets/ExperimentRuns/query) for the full parameter and field list.
 
-#### Java
+**Java**
+
 | Before | After |
 | - | - |
 | `client.datasets().runs().query()` | `client.datasets().experimentRuns().query()` |
 
 See the [reference](https://javadoc.io/doc/com.langchain.smith/langsmith-java/latest/com/langchain/smith/services/blocking/datasets/ExperimentRunService.html) for the full parameter list.
 
-#### Go
+**Go**
+
 | Before | After |
 | - | - |
 | `client.Datasets.Runs.Query()` | `client.Datasets.ExperimentRuns.Query()` |
 
 See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#DatasetExperimentRunService.Query) for the full parameter list.
 
-#### cURL
+**cURL**
+
 | Before | After |
 | - | - |
 | `POST /api/v1/datasets/{dataset_id}/runs` | `POST /api/v2/datasets/{dataset_id}/experiment-runs` |
@@ -60,8 +66,10 @@ See the [API doc](smith-api/datasets/fetch-experiment-runs-for-dataset-examples.
 
 #### Query parameters
 
-#### Python
+**Python**
+
 > [!WARNING]
+>
 > `experiment_ids` is required and replaces `session_ids`. Values are still experiment tracing-project UUIDs—if you only know the experiment's name, resolve it first: `client.read_project(project_name="my-experiment").id`, or `await client.aread_project(project_name="my-experiment")` in async code.
 
 | Before (`get_experiment_results`) | After (`datasets.experiment_runs.query`) | Notes |
@@ -76,8 +84,10 @@ See the [API doc](smith-api/datasets/fetch-experiment-runs-for-dataset-examples.
 | `comparative_experiment_id` | `comparative_experiment_id` | Unchanged |
 | *(not exposed)* | `example_ids` | Optional example UUID filter, max 1000 |
 
-#### TypeScript
+**TypeScript**
+
 > [!WARNING]
+>
 > `experiment_ids` is required and replaces `session_ids`. Values are still experiment tracing-project UUIDs—if you only know the experiment's name, resolve it first: `(await client.readProject({ projectName: "my-experiment" })).id`.
 
 | Before | After (`datasets.experimentRuns.query`) | Notes |
@@ -91,8 +101,10 @@ See the [API doc](smith-api/datasets/fetch-experiment-runs-for-dataset-examples.
 | *(no legacy public `Client` method)* | `comparative_experiment_id` | Scopes pairwise-annotation feedback |
 | *(no legacy public `Client` method)* | `example_ids` | Optional example UUID filter, max 1000 |
 
-#### Java
+**Java**
+
 > [!WARNING]
+>
 > `experimentIds()` is required and replaces `sessionIds()`. Values are still experiment tracing-project UUIDs—if you only know the experiment's name, resolve it first: `client.sessions().list(SessionListParams.builder().name("my-experiment").build()).items().first().id()`.
 
 | Before (`RunQueryParams`) | After (`ExperimentRunQueryParams`) | Notes |
@@ -109,8 +121,10 @@ See the [API doc](smith-api/datasets/fetch-experiment-runs-for-dataset-examples.
 | `format()` | *(removed)* | The new endpoint returns JSON only |
 | `includeAnnotatorDetail()` | *(removed)* | No new JSON equivalent |
 
-#### Go
+**Go**
+
 > [!WARNING]
+>
 > `ExperimentIDs` is required and replaces `SessionIDs`. Values are still experiment tracing-project UUIDs—if you only know the experiment's name, resolve it first: list sessions filtered by `Name` and take the first result's `ID`.
 
 | Before (`DatasetRunQueryParams`) | After (`DatasetExperimentRunQueryParams`) | Notes |
@@ -127,8 +141,10 @@ See the [API doc](smith-api/datasets/fetch-experiment-runs-for-dataset-examples.
 | `Format` | *(removed)* | The new endpoint returns JSON only |
 | `IncludeAnnotatorDetail` | *(removed)* | No new JSON equivalent |
 
-#### cURL
+**cURL**
+
 > [!WARNING]
+>
 > `experiment_ids` is required and replaces `session_ids`. Values are still experiment tracing-project UUIDs—if you only know the experiment's name, resolve it first: `GET /api/v1/sessions?name=my-experiment` and take `.[0].id`.
 
 | Before (`POST /api/v1/datasets/{dataset_id}/runs` body) | After (`POST /api/v2/datasets/{dataset_id}/experiment-runs` body) | Notes |
@@ -149,7 +165,8 @@ See the [API doc](smith-api/datasets/fetch-experiment-runs-for-dataset-examples.
 
 Each page item is a dataset example paired with the runs produced for it—not a bare `Run`. Its `runs` field holds the same `Run` objects returned by [Querying runs](#response-fields); see that section for the per-run fields. The tables below describe the rest of the item: the example fields alongside `runs`.
 
-#### Python
+**Python**
+
 `get_experiment_results` returned experiment results with an `examples_with_runs` iterator. `datasets.experiment_runs.query` returns a paginated page object (`page.items`, `page.next_cursor`); each item has:
 
 | Field | Notes |
@@ -164,7 +181,8 @@ Each page item is a dataset example paired with the runs produced for it—not a
 | `attachment_urls` | Pre-signed download URL per attachment name |
 | `runs` | This example's runs—see [Querying runs](#response-fields) |
 
-#### TypeScript
+**TypeScript**
+
 The legacy dataset runs endpoint was not exposed on the public TypeScript `Client`. `datasets.experimentRuns.query` returns a paginated page (`page.getPaginatedItems()`, `page.next_cursor`); each item has:
 
 | Field | Notes |
@@ -179,7 +197,8 @@ The legacy dataset runs endpoint was not exposed on the public TypeScript `Clien
 | `attachment_urls` | Pre-signed download URL per attachment name |
 | `runs` | This example's runs—see [Querying runs](#response-fields) |
 
-#### Java
+**Java**
+
 `runs().query` returned an optional list. `experimentRuns().query` returns a page object (`items()`, `nextCursor()`); each item has:
 
 | Field | Notes |
@@ -194,7 +213,8 @@ The legacy dataset runs endpoint was not exposed on the public TypeScript `Clien
 | `attachmentUrls()` | Pre-signed download URL per attachment name |
 | `runs()` | This example's runs—see [Querying runs](#response-fields) |
 
-#### Go
+**Go**
+
 `Datasets.Runs.Query` returned a slice pointer. `Datasets.ExperimentRuns.Query` returns an `ItemsCursorPostPagination` (`Items`, `NextCursor`); each item has:
 
 | Field | Notes |
@@ -209,7 +229,8 @@ The legacy dataset runs endpoint was not exposed on the public TypeScript `Clien
 | `AttachmentURLs` | Pre-signed download URL per attachment name |
 | `Runs` | This example's runs—see [Querying runs](#response-fields) |
 
-#### cURL
+**cURL**
+
 `POST /api/v1/datasets/{dataset_id}/runs` returned a JSON array. `POST /api/v2/datasets/{dataset_id}/experiment-runs` returns `{ "items": [...], "next_cursor": "..." }`; each item has:
 
 | Field | Notes |
@@ -228,10 +249,12 @@ The legacy dataset runs endpoint was not exposed on the public TypeScript `Clien
 
 #### Query experiment runs and request preview fields
 
-#### Python
+**Python**
+
 `preview=True` returned truncated inputs/outputs automatically. In the new API, request that explicitly: pass `INPUTS_PREVIEW` and `OUTPUTS_PREVIEW` in `selects` for the same truncated shape, or `INPUTS`/`OUTPUTS` for the untruncated values. Omitting `selects` returns only `id`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -247,7 +270,8 @@ results = client.get_experiment_results(
 examples_with_runs = list(results["examples_with_runs"])
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -268,10 +292,12 @@ async def main():
 examples_with_runs = asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 The new TypeScript SDK method exposes the experiment-runs query endpoint. The legacy direct endpoint request shape is shown in the cURL tab. Pass `INPUTS_PREVIEW` and `OUTPUTS_PREVIEW` in `selects` for truncated inputs/outputs, or `INPUTS`/`OUTPUTS` for the untruncated values. Omitting `selects` returns only `id`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -279,10 +305,12 @@ The new TypeScript SDK method exposes the experiment-runs query endpoint. The le
 // Use the cURL example for the old request body shape.
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
+import { uuid7 } from "langsmith";
 import { Client } from "langsmith";
 
 const client = new Client();
@@ -295,10 +323,12 @@ const page = await client.datasets.experimentRuns.query(datasetId, {
 const examplesWithRuns = page.getPaginatedItems();
 ```
 
-#### Java
+**Java**
+
 `preview(true)` returned truncated inputs/outputs automatically. In the new API, request that explicitly: add `Select.INPUTS_PREVIEW` and `Select.OUTPUTS_PREVIEW` for the same truncated shape, or `Select.INPUTS`/`Select.OUTPUTS` for the untruncated values. Omitting selects returns only `id`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -317,7 +347,8 @@ val examplesWithRuns = client.datasets().runs().query(
 )
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -342,10 +373,12 @@ val page = client.datasets().experimentRuns().query(
 val examplesWithRuns = page.items()
 ```
 
-#### Go
+**Go**
+
 `Preview: true` returned truncated inputs/outputs automatically. In the new API, request that explicitly: add the `InputsPreview` and `OutputsPreview` select constants for the same truncated shape, or `Inputs`/`Outputs` for the untruncated values. Omitting selects returns only `ID`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -366,7 +399,8 @@ examplesWithRuns, err := client.Datasets.Runs.Query(ctx, datasetID, langsmith.Da
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -393,10 +427,12 @@ page, err := client.Datasets.ExperimentRuns.Query(ctx, datasetID, langsmith.Data
 })
 ```
 
-#### cURL
+**cURL**
+
 `preview: true` returned truncated inputs/outputs automatically. In the new API, request that explicitly: pass `INPUTS_PREVIEW` and `OUTPUTS_PREVIEW` in `selects` for the same truncated shape, or `INPUTS`/`OUTPUTS` for the untruncated values. Omitting `selects` returns only `id`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```bash
@@ -410,7 +446,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/datasets/$DATASET_ID/runs" 
   }')"
 ```
 
-#### After
+**After**
+
 **After**
 
 ```bash
@@ -428,10 +465,12 @@ curl -X POST "https://api.smith.langchain.com/api/v2/datasets/$DATASET_ID/experi
 
 Both examples below fetch up to 100 results across as many pages as that takes, then stop—so the two are comparable operations, not "one page" vs. "everything." Adjust the `100`/`page_size` values for your own use case.
 
-#### Python
+**Python**
+
 `get_experiment_results` paginates internally and stops once `limit` total results are returned. `datasets.experiment_runs.query` has no total-count `limit`; iterate the returned page with `async for` and `break` once you have enough.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -448,7 +487,8 @@ results = client.get_experiment_results(
 examples_with_runs = list(results["examples_with_runs"])
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -473,10 +513,12 @@ async def main():
 examples_with_runs = asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 The legacy dataset runs endpoint wasn't exposed on the public TypeScript `Client`. `client.datasets.experimentRuns.query(...)` returns an async iterable—use `for await...of` (no extra `await` needed) and `break` once you have enough.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -484,10 +526,12 @@ The legacy dataset runs endpoint wasn't exposed on the public TypeScript `Client
 // Use the cURL example for the old request body shape.
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
+import { uuid7 } from "langsmith";
 import { Client } from "langsmith";
 
 const client = new Client();
@@ -502,10 +546,12 @@ for await (const run of client.datasets.experimentRuns.query(datasetId, {
 }
 ```
 
-#### Java
+**Java**
+
 The legacy endpoint returns one page per call with no auto-pager—loop manually, incrementing `offset`, and stop once you have enough. `.experimentRuns().query(...).autoPager()` walks pages for you—break out of the loop once you have enough runs.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -533,7 +579,8 @@ while (true) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -556,10 +603,12 @@ for (run in page.autoPager()) {
 }
 ```
 
-#### Go
+**Go**
+
 The legacy endpoint returns one page per call with no auto-pager—loop manually, incrementing `Offset`, and stop once you have enough. On the new endpoint, paginate manually by setting `Cursor` on the request from the previous response's `NextCursor` and stopping once you have enough; avoid `QueryAutoPaging` here—it sends the cursor as a query parameter, which this POST endpoint doesn't read, so it silently refetches the first page forever.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -590,7 +639,8 @@ for {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -619,10 +669,12 @@ for {
 }
 ```
 
-#### cURL
+**cURL**
+
 Raw HTTP has no auto-pagination helper: pass the previous response's `next_cursor` back in as `cursor` to fetch the next page.
 
-#### Before
+**Before**
+
 **Before**
 
 ```bash
@@ -636,7 +688,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/datasets/$DATASET_ID/runs" 
   }')"
 ```
 
-#### After
+**After**
+
 **After**
 
 ```bash
@@ -654,15 +707,18 @@ curl -X POST "https://api.smith.langchain.com/api/v2/datasets/$DATASET_ID/experi
 
 Sort dataset examples by a feedback score, supported only when you query a single experiment. In Go and Java, this replaces the legacy `sort_params.sort_by`/`sort_params.sort_order` (now `sort.by`/`sort.order`); Python and TypeScript gain sorting for the first time in the new API.
 
-#### Python
+**Python**
+
 `get_experiment_results` did not support sorting by feedback score.
 
-#### Before
+**Before**
+
 ```python
 # get_experiment_results did not support sorting results by feedback score.
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -682,10 +738,12 @@ async def main():
 examples_with_runs = asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 The legacy dataset runs endpoint was not exposed on the public TypeScript `Client`, so there was no way to sort by feedback score before the new API.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -693,10 +751,12 @@ The legacy dataset runs endpoint was not exposed on the public TypeScript `Clien
 // Use the cURL example for the old request body shape.
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
+import { uuid7 } from "langsmith";
 import { Client } from "langsmith";
 
 const client = new Client();
@@ -707,10 +767,12 @@ const page = await client.datasets.experimentRuns.query(datasetId, {
 });
 ```
 
-#### Java
+**Java**
+
 `sortParams()` is replaced by `sort()`, with `sortBy()`/`sortOrder()` renamed to `by()`/`order()`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -734,7 +796,8 @@ val examplesWithRuns = client.datasets().runs().query(
 )
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -757,10 +820,12 @@ val page = client.datasets().experimentRuns().query(
 )
 ```
 
-#### Go
+**Go**
+
 `SortParams` is replaced by `Sort`, with `SortBy`/`SortOrder` renamed to `By`/`Order`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -783,7 +848,8 @@ examplesWithRuns, err := client.Datasets.Runs.Query(ctx, datasetID, langsmith.Da
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -806,8 +872,10 @@ page, err := client.Datasets.ExperimentRuns.Query(ctx, datasetID, langsmith.Data
 })
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 **Before**
 
 ```bash
@@ -823,7 +891,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/datasets/$DATASET_ID/runs" 
   }')"
 ```
 
-#### After
+**After**
+
 **After**
 
 ```bash
@@ -847,8 +916,6 @@ curl -X POST "https://api.smith.langchain.com/api/v2/datasets/$DATASET_ID/experi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-experiments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-experiments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

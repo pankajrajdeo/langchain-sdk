@@ -256,7 +256,7 @@ components:
           description: >-
             Durability level for the run. Must be one of `sync`, `async`, or
             `exit`. See [durability
-            modes](https://docs.langchain.com/oss/python/langgraph/durable-execution#durability-modes)
+            modes](https://docs.langchain.com/oss/python/langgraph/checkpointers#durability-modes)
             for more details.
           default: async
       type: object

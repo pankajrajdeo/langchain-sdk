@@ -12,11 +12,12 @@ tags: [docs, langchain, agents]
 
 An agent is a model calling tools in a loop until a given task is complete.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/core_agent_loop.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=4b4cbb497b6273758a565de1bc90ece0" alt="Core agent loop diagram" width="1060" height="760" data-path="oss/images/core_agent_loop.svg" />
+![Core agent loop diagram](https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/core_agent_loop.svg?fit=max\&auto=format\&n=jtty0O--UJOKG0nK\&q=85\&s=4b4cbb497b6273758a565de1bc90ece0)
 
 A harness is everything around that loop: the prompt, the tools, and any middleware that shapes the model's behavior.
 
 > [!NOTE]
+>
 > **Agent = Model + Harness**
 >
 > The job of a harness: get the model the right context at the right time for the given task.
@@ -82,11 +83,12 @@ agent = create_agent(model="ollama:north-mini-code-1.0", tools=tools)
 Building on that, you can configure the basics directly with the `model=`, `tools=`, and `system_prompt=` parameters. For more advanced capabilities, extend the harness with [middleware](#configure-the-harness).
 
 > [!TIP]
+>
 > [Deep Agents](../../deepagents/overview.md) builds on `create_agent` and comes with commonly useful capabilities already assembled, such as planning, file system tools, subagents, and memory. Use `create_agent` when you need to configure the harness yourself.
 
 ## Core components
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_model_harness.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=5ac6a7e0343af7cb5ba3ca632e2224af" alt="Agent model and harness components diagram" width="1200" height="760" data-path="oss/images/agent_model_harness.svg" />
+![Agent model and harness components diagram](https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_model_harness.svg?fit=max\&auto=format\&n=jtty0O--UJOKG0nK\&q=85\&s=5ac6a7e0343af7cb5ba3ca632e2224af)
 
 ### Model
 
@@ -564,6 +566,7 @@ For full details, examples, and middleware-level state schemas, see [Short-term 
 ## Invocation
 
 > [!TIP]
+>
 > Trace each step of this loop, debug tool calls, and evaluate agent outputs with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-agents). Follow the [tracing quickstart](../../langsmith/trace-with-langchain.md) to get set up. We recommend you also set up [LangSmith Engine](../../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 You can invoke an agent with a message. Behind the scenes that passes an update to the agent's [`State`](../../langgraph/graph-api.md#state). All agents include a [sequence of messages](../../langgraph/use-graph-api.md#messagesstate) in their state; to invoke the agent, pass a new message along with a `thread_id` so the agent can persist and resume conversation history:
@@ -757,10 +760,12 @@ result = agent.invoke(
 )
 ```
 
-#### [View example trace](https://smith.langchain.com/public/b220516f-9133-4c86-bc5a-073ef63e3f7f/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/455ace73-fce4-413b-b47e-613b605ae01d/r)**
+>
+> Open a public LangSmith run for this example.
 
 > [!NOTE]
+>
 > Persisting conversation history with `thread_id` requires the agent to be configured with a [checkpointer](../../langchain/long-term-memory.md). When deployed on [LangSmith](../../langsmith/deployment.md), a checkpointer is provisioned automatically. Locally, pass one explicitly, for example `create_agent(..., checkpointer=InMemorySaver())`.
 
 If you also need to pass per-run configuration (such as a user ID, API keys, or feature flags) to tools and middleware, pass it as `context` alongside `config`. Define the shape of that data with `context_schema` and access it through `runtime.context`:
@@ -954,8 +959,9 @@ result = agent.invoke(
 )
 ```
 
-#### [View example trace](https://smith.langchain.com/public/fb33392a-cf5d-4673-a9b2-c58a5abeffd0/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/2ccaff61-e004-4356-81f3-4c061ef7a93a/r)**
+>
+> Open a public LangSmith run for this example.
 
 `thread_id` scopes the *conversation* (message history, checkpoints), while `context` carries *per-run* data your tools and middleware read at invocation time. Both are commonly passed together. See [tool context](../../langchain/tools.md#context) and [Runtime](../../langchain/runtime.md) for more.
 
@@ -982,10 +988,12 @@ for snapshot in stream.values:
         print(f"Calling tools: {[tc['name'] for tc in latest_message.tool_calls]}")
 ```
 
-#### [View example trace](https://smith.langchain.com/public/502a2e8a-a9aa-412a-b2e0-ef2ab0290175/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/eb78aa8e-9575-4c73-8e79-bad82b30ef1d/r)**
+>
+> Open a public LangSmith run for this example.
 
 > [!TIP]
+>
 > For streaming modes, event types, and UI patterns, see [Streaming](../../langchain/streaming.md).
 
 ## Configure the harness
@@ -994,29 +1002,36 @@ Open a public LangSmith run for this example.
 
 Common patterns are prebuilt as first-class middleware. You can build anything else as [custom middleware](../../langchain/middleware/custom.md).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_harness_capabilities.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=0ff671d72badd0844826660dfcb04391" alt="Agent harness capabilities by category" width="1500" height="360" data-path="oss/images/agent_harness_capabilities.svg" />
+![Agent harness capabilities by category](https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_harness_capabilities.svg?fit=max\&auto=format\&n=jtty0O--UJOKG0nK\&q=85\&s=0ff671d72badd0844826660dfcb04391)
 
 As agents take on complex work, they need support across a few key areas. The middleware ecosystem provides:
 
-#### [Execution environment](#execution-environment)
-Tools, filesystem, sandboxes, and code execution
+> **[Execution environment](#execution-environment)**
+>
+> Tools, filesystem, sandboxes, and code execution
 
-#### [Context management](#context-management)
-Summarization, memory, skills, and prompt caching
+> **[Context management](#context-management)**
+>
+> Summarization, memory, skills, and prompt caching
 
-#### [Planning and delegation](#planning-and-delegation)
-Todo lists and subagents for parallel, isolated work
+> **[Planning and delegation](#planning-and-delegation)**
+>
+> Todo lists and subagents for parallel, isolated work
 
-#### [Fault tolerance](#fault-tolerance)
-Retries, fallbacks, and call limits
+> **[Fault tolerance](#fault-tolerance)**
+>
+> Retries, fallbacks, and call limits
 
-#### [Guardrails](#guardrails)
-PII detection and content controls
+> **[Guardrails](#guardrails)**
+>
+> PII detection and content controls
 
-#### [Steering](#steering)
-Human-in-the-loop approval before high-impact actions
+> **[Steering](#steering)**
+>
+> Human-in-the-loop approval before high-impact actions
 
 > [!TIP]
+>
 > `create_deep_agent` pre-assembles this stack for long-running coding and research tasks (filesystem, summarization, subagents, and prompt caching included by default). See [Deep Agents](../../deepagents/harness.md) for the full prebuilt harness.
 
 ### Execution environment
@@ -1124,19 +1139,20 @@ agent = create_agent(
 See [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware), [Sandboxes](../../deepagents/sandboxes.md), [Interpreters](../../deepagents/interpreters.md).
 
 > [!NOTE]
+>
 > This example imports from the `deepagents` package. Install it with:
 >
-> **pip**
->
-> ```bash
+**pip**
+
+```bash
 > pip install deepagents
-> ```
+```
 >
-> **uv**
->
-> ```bash
+**uv**
+
+```bash
 > uv add deepagents
-> ```
+```
 
 ### Context management
 
@@ -1292,19 +1308,20 @@ agent = create_agent(
 See [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware), [`MemoryMiddleware`](https://reference.langchain.com/python/deepagents/middleware/memory/MemoryMiddleware), [Skills](../../langchain/multi-agent/skills.md), [Context engineering](../../deepagents/context-engineering.md).
 
 > [!NOTE]
+>
 > This example imports from the `deepagents` package. Install it with:
 >
-> **pip**
->
-> ```bash
+**pip**
+
+```bash
 > pip install deepagents
-> ```
+```
 >
-> **uv**
->
-> ```bash
+**uv**
+
+```bash
 > uv add deepagents
-> ```
+```
 
 ### Planning and delegation
 
@@ -1593,19 +1610,20 @@ agent = create_agent(
 See [Subagents](../../langchain/multi-agent/subagents.md).
 
 > [!NOTE]
+>
 > This example imports from the `deepagents` package. Install it with:
 >
-> **pip**
->
-> ```bash
+**pip**
+
+```bash
 > pip install deepagents
-> ```
+```
 >
-> **uv**
->
-> ```bash
+**uv**
+
+```bash
 > uv add deepagents
-> ```
+```
 
 ### Name your agent
 
@@ -2093,19 +2111,20 @@ See [`HumanInTheLoopMiddleware`](https://reference.langchain.com/python/langchai
 
 ### Middleware resources
 
-#### [Middleware overview](../../langchain/middleware/overview.md)
-How the middleware stack works and when hooks fire
+> **[Middleware overview](../../langchain/middleware/overview.md)**
+>
+> How the middleware stack works and when hooks fire
 
-#### [Prebuilt middleware](../../langchain/middleware/built-in.md)
-Full reference with configuration examples
+> **[Prebuilt middleware](../../langchain/middleware/built-in.md)**
+>
+> Full reference with configuration examples
 
-#### [Custom middleware](../../langchain/middleware/custom.md)
-Write your own hooks for business logic, PII scrubbing, and more
+> **[Custom middleware](../../langchain/middleware/custom.md)**
+>
+> Write your own hooks for business logic, PII scrubbing, and more
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

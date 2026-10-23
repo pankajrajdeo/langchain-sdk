@@ -1,6 +1,6 @@
 ---
 title: "LangSmith data plane"
-description: "The data plane consists of your Agent Servers (deployments), their supporting infrastructure, and the \"listener\" application that continuously polls for updates from the LangSmith control plane."
+description: "The data plane consists of your Agent Servers (deployments), their supporting infrastructure, and the listener application that continuously polls for updates from the LangSmith control plane."
 source: "https://docs.langchain.com/langsmith/data-plane"
 category: "docs"
 tags: [docs, langsmith, data-plane]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, data-plane]
 
 # LangSmith data plane
 
-The *data plane* consists of your [Agent Servers](agent-server.md) (deployments), their supporting infrastructure, and the "listener" application that continuously polls for updates from the [LangSmith control plane](control-plane.md).
+The *data plane* consists of your [Agent Servers](agent-server.md) (deployments), their supporting infrastructure, and the listener application that continuously polls for updates from the [LangSmith control plane](control-plane.md).
 
 ## Server infrastructure
 
@@ -19,15 +19,15 @@ In addition to the [Agent Server](agent-server.md) itself, the following infrast
 * **Secrets store**: secure management of environment secrets.
 * **Autoscalers**: scale server containers based on load.
 
-## "Listener" application
+## Listener application
 
-The data plane "listener" application periodically calls [control plane APIs](control-plane.md#control-plane-api) to:
+The data plane listener application periodically calls [control plane APIs](control-plane.md#control-plane-api) to:
 
 * Determine if new deployments should be created.
 * Determine if existing deployments should be updated (i.e. new revisions).
 * Determine if existing deployments should be deleted.
 
-In other words, the data plane "listener" reads the latest state of the control plane (desired state) and takes action to reconcile outstanding deployments (current state) to match the latest state.
+In other words, the data plane listener reads the latest state of the control plane (desired state) and takes action to reconcile outstanding deployments (current state) to match the latest state.
 
 ## PostgreSQL
 
@@ -55,25 +55,20 @@ This section describes various features of the data plane. For platform-specific
 
 ### Autoscaling
 
-[Dedicated type](cloud-platform-features.md#deployment-types) deployments automatically scale across containers. Scaling is based on 3 metrics:
+On LangSmith Cloud, [Dedicated deployments](cloud-platform-features.md#scaling) autoscale separate API server and queue worker pools. Serverless deployments scale between zero and one replica.
 
-1. CPU utilization
-2. Memory utilization
-3. Number of pending (in progress) [runs](runs.md)
+On self-hosted data planes, autoscaling depends on the installed operator version and configuration. The current operator uses CPU for HPA scaling. With KEDA enabled, separate queue workers also scale on pending and running [runs](runs.md), using whichever metric requires more replicas. Neither path uses memory as a scaling trigger.
 
-For CPU utilization, the autoscaler targets 75% utilization. This means the autoscaler will scale the number of containers up or down to ensure that CPU utilization is at or near 75%. For memory utilization, the autoscaler targets 75% utilization as well.
+The CPU target is 50% of the CPU limit: `queue_cpu_limit` for queue workers and `cpu_limit` for API servers. The CPU request does not affect the target. For example, `queue_cpu: 0.3` with `queue_cpu_limit: 1.8` gives queue workers a target of 900m per pod. The KEDA backlog target is 75% of the configured jobs per worker, rounded down to at least 1.
 
-For number of pending runs, the autoscaler targets 10 pending runs. For example, if the current number of containers is 1, but the number of pending runs is 20, the autoscaler will scale up the deployment to 2 containers (20 pending runs / 2 containers = 10 pending runs per container).
+To lower a CPU request without changing when the deployment scales, send both the request and the limit in the `resource_spec`. If you omit the limit, it defaults to 2x the request, so lowering the request also lowers the scaling target. See [Resource spec](api-ref-control-plane.md#resource-spec).
 
-Each metric is computed independently and the autoscaler will determine the scaling action based on the metric that results in the largest number of containers.
-
-These metrics don't all apply to every container type. [Queue workers](agent-server.md#runtime-architecture) scale on pending run count—when the backlog grows, more workers spin up to drain it. [API servers](agent-server.md#runtime-architecture) scale on CPU and memory, responding to client request volume. This means a spike in run submissions won't slow down read operations like fetching thread state. For self-hosted configuration details, see [Configure Agent Server for scale](agent-server-scale.md).
-
-Scale down actions are delayed for 30 minutes before any action is taken. In other words, if the autoscaler decides to scale down a deployment, it will first wait for 30 minutes before scaling down. After 30 minutes, the metrics are recomputed and the deployment will scale down if the recomputed metrics result in a lower number of containers than the current number. Otherwise, the deployment remains scaled up. This "cool down" period ensures that deployments do not scale up and down too frequently.
+Scale-down behavior depends on the autoscaler and operator version. For self-hosted configuration details, see [Configure Agent Server for scale](agent-server-scale.md).
 
 ### MongoDB checkpointing
 
 > [!NOTE]
+>
 > Available for [Cloud](cloud.md) (with an externally managed MongoDB instance) and [Standalone](deploy-standalone-server.md) deployments.
 
 You can use MongoDB as an alternative backend for checkpoint storage. When configured, MongoDB handles only checkpoint data—PostgreSQL remains required for all other server resources.
@@ -86,7 +81,7 @@ Agent Server is automatically configured to send traces to LangSmith. See the ta
 
 | Cloud | Hybrid | Self-Hosted |
 | - | - | - |
-| Required<br />Trace to LangSmith SaaS. | Optional<br />Disable tracing or trace to LangSmith SaaS. | Optional<br />Disable tracing, trace to LangSmith SaaS, or trace to Self-Hosted LangSmith. |
+| Required Trace to LangSmith SaaS. | Optional Disable tracing or trace to LangSmith SaaS. | Optional Disable tracing, trace to LangSmith SaaS, or trace to Self-Hosted LangSmith. |
 
 ### Telemetry
 
@@ -94,7 +89,7 @@ Agent Server is automatically configured to report telemetry metadata for billin
 
 | Cloud | Hybrid | Self-Hosted |
 | - | - | - |
-| Telemetry sent to LangSmith SaaS. | Telemetry sent to LangSmith SaaS. | Self-reported usage (audit) for air-gapped license key.<br />Telemetry sent to LangSmith SaaS for LangSmith License Key. |
+| Telemetry sent to LangSmith SaaS. | Telemetry sent to LangSmith SaaS. | Self-reported usage (audit) for air-gapped license key. Telemetry sent to LangSmith SaaS for LangSmith License Key. |
 
 ### Licensing
 
@@ -106,8 +101,6 @@ Agent Server is automatically configured to perform license key validation. See 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

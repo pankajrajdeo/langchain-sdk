@@ -16,8 +16,10 @@ You can use LangSmith to trace runs from the Vercel AI SDK. This guide shows you
 
 Install the Vercel AI SDK, a model provider package, and LangSmith. This guide uses Vercel's OpenAI integration for the following code snippets, but you can use any other Vercel AI SDK provider.
 
-#### AI SDK v7
+**AI SDK v7**
+
 > [!NOTE]
+>
 > `LangSmithTelemetry` requires AI SDK v7 and is available in `langsmith>=0.7.2`.
 
 **npm**
@@ -38,8 +40,10 @@ yarn add ai @ai-sdk/openai zod langsmith
 pnpm add ai @ai-sdk/openai zod langsmith
 ```
 
-#### AI SDK v5 and v6
+**AI SDK v5 and v6**
+
 > [!NOTE]
+>
 > `wrapAISDK` supports AI SDK v6 and requires `langsmith>=0.3.63`. If you are using an older version of the AI SDK or `langsmith`, refer to the [OpenTelemetry (OTEL) based approach](legacy-trace-with-vercel-ai-sdk.md).
 
 **npm**
@@ -77,7 +81,8 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 
 ## Basic setup
 
-#### AI SDK v7
+**AI SDK v7**
+
 Register `LangSmithTelemetry` once, then use AI SDK methods as you normally would.
 
 ```typescript
@@ -88,7 +93,7 @@ import { LangSmithTelemetry } from "langsmith/experimental/vercel";
 registerTelemetry(LangSmithTelemetry());
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
@@ -106,7 +111,7 @@ import { z } from "zod";
 registerTelemetry(LangSmithTelemetry());
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     messages: [
         {
             role: "user",
@@ -131,7 +136,8 @@ await generateText({
 
 Which results in a trace like [this one](https://smith.langchain.com/public/6075fa2c-d255-4885-a66a-4fc798afaa9f/r).
 
-#### AI SDK v5 and v6
+**AI SDK v5 and v6**
+
 Wrap the AI SDK methods once with `wrapAISDK`, then call the wrapped methods as you normally would.
 
 ```typescript
@@ -142,7 +148,7 @@ import { wrapAISDK } from "langsmith/experimental/vercel";
 const { generateText } = wrapAISDK(ai);
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
@@ -158,7 +164,7 @@ import { z } from "zod";
 const { generateText, tool } = wrapAISDK(ai);
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     messages: [
         {
             role: "user",
@@ -187,7 +193,8 @@ You can use other AI SDK methods exactly as you usually would.
 
 You can wrap `traceable` calls around AI SDK calls or within AI SDK tool calls. This is useful if you want to group runs together in LangSmith.
 
-#### AI SDK v7
+**AI SDK v7**
+
 ```typescript
 import { openai } from "@ai-sdk/openai";
 import { generateText, registerTelemetry, stepCountIs, tool } from "ai";
@@ -200,7 +207,7 @@ registerTelemetry(LangSmithTelemetry());
 const wrapper = traceable(
     async (input: string) => {
         const { text } = await generateText({
-            model: openai("gpt-5.5"),
+            model: openai("gpt-6-luna"),
             messages: [
                 {
                     role: "user",
@@ -231,7 +238,8 @@ await wrapper("What are my orders and where are they? My user ID is 123.");
 
 The resulting trace will look [like this](https://smith.langchain.com/public/ff25bc26-9389-4798-8b91-2bdcc95d4a8e/r).
 
-#### AI SDK v5 and v6
+**AI SDK v5 and v6**
+
 ```typescript
 import { openai } from "@ai-sdk/openai";
 import * as ai from "ai";
@@ -244,7 +252,7 @@ const { generateText, tool } = wrapAISDK(ai);
 const wrapper = traceable(
     async (input: string) => {
         const { text } = await generateText({
-            model: openai("gpt-5.5"),
+            model: openai("gpt-6-luna"),
             messages: [
                 {
                     role: "user",
@@ -277,8 +285,9 @@ await wrapper("What are my orders and where are they? My user ID is 123.");
 
 When tracing in serverless environments, wait for all runs to flush before your environment shuts down.
 
-#### AI SDK v7
-Pass a LangSmith [`Client`](https://docs.smith.langchain.com/reference/js/classes/client.Client) instance to `LangSmithTelemetry`, then call `await client.awaitPendingTraceBatches()`. Make sure to also pass it into any `traceable` wrappers you create:
+**AI SDK v7**
+
+Pass a LangSmith [`Client`](https://reference.langchain.com/javascript/langsmith/client/Client) instance to `LangSmithTelemetry`, then call `await client.awaitPendingTraceBatches()`. Make sure to also pass it into any `traceable` wrappers you create:
 
 ```typescript
 import { openai } from "@ai-sdk/openai";
@@ -294,7 +303,7 @@ const telemetry = LangSmithTelemetry({ client });
 const wrapper = traceable(
     async (input: string) => {
         const { text } = await generateText({
-            model: openai("gpt-5.5"),
+            model: openai("gpt-6-luna"),
             messages: [
                 {
                     role: "user",
@@ -331,8 +340,9 @@ try {
 }
 ```
 
-#### AI SDK v5 and v6
-Pass a LangSmith [`Client`](https://docs.smith.langchain.com/reference/js/classes/client.Client) instance to `wrapAISDK` and any `traceable` wrappers you create, then call `await client.awaitPendingTraceBatches()`:
+**AI SDK v5 and v6**
+
+Pass a LangSmith [`Client`](https://reference.langchain.com/javascript/langsmith/client/Client) instance to `wrapAISDK` and any `traceable` wrappers you create, then call `await client.awaitPendingTraceBatches()`:
 
 ```typescript
 import { openai } from "@ai-sdk/openai";
@@ -348,7 +358,7 @@ const { generateText, tool } = wrapAISDK(ai, { client });
 const wrapper = traceable(
     async (input: string) => {
         const { text } = await generateText({
-            model: openai("gpt-5.5"),
+            model: openai("gpt-6-luna"),
             messages: [
                 {
                     role: "user",
@@ -408,7 +418,8 @@ See [Trace JS functions in serverless environments](serverless-environments.md) 
 
 You can pass LangSmith-specific config such as metadata, run names, tags, and custom client instances.
 
-#### AI SDK v7
+**AI SDK v7**
+
 If you register the integration globally, the config applies to future AI SDK calls:
 
 ```typescript
@@ -424,7 +435,7 @@ registerTelemetry(
 );
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
@@ -437,7 +448,7 @@ import { generateText } from "ai";
 import { LangSmithTelemetry } from "langsmith/experimental/vercel";
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     prompt: "Write a vegetarian lasagna recipe for 4 people.",
     telemetry: {
         integrations: [
@@ -450,7 +461,8 @@ await generateText({
 });
 ```
 
-#### AI SDK v5 and v6
+**AI SDK v5 and v6**
+
 If you pass config into `wrapAISDK`, the config applies to the wrapped methods:
 
 ```typescript
@@ -464,7 +476,7 @@ const { generateText } = wrapAISDK(ai, {
 });
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
@@ -482,7 +494,7 @@ import {
 const { generateText } = wrapAISDK(ai);
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     prompt: "Write a vegetarian lasagna recipe for 4 people.",
     providerOptions: {
         langsmith: createLangSmithProviderOptions<typeof ai.generateText>({
@@ -501,7 +513,8 @@ Because output formats vary depending on which AI SDK method you are using, we s
 
 Here's an example for `generateText`:
 
-#### AI SDK v7
+**AI SDK v7**
+
 ```typescript
 import { openai } from "@ai-sdk/openai";
 import { generateText } from "ai";
@@ -545,7 +558,7 @@ const telemetry = LangSmithTelemetry({
 });
 
 const { text } = await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     prompt: "What is the capital of France?",
     telemetry: { integrations: [telemetry] },
 });
@@ -553,7 +566,8 @@ const { text } = await generateText({
 console.log(text);
 ```
 
-#### AI SDK v5 and v6
+**AI SDK v5 and v6**
+
 ```typescript
 import { openai } from "@ai-sdk/openai";
 import * as ai from "ai";
@@ -598,7 +612,7 @@ const langsmith = createLangSmithProviderOptions<typeof ai.generateText>({
 });
 
 const { text } = await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     prompt: "What is the capital of France?",
     providerOptions: { langsmith },
 });
@@ -610,7 +624,8 @@ The actual return value will contain the original, non-redacted result, but the 
 
 For redacting tool input/output, wrap your `execute` method in a `traceable` like this:
 
-#### AI SDK v7
+**AI SDK v7**
+
 ```typescript
 import { openai } from "@ai-sdk/openai";
 import { generateText, stepCountIs, tool } from "ai";
@@ -623,7 +638,7 @@ const client = new Client();
 const telemetry = LangSmithTelemetry({ client });
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     messages: [
         {
             role: "user",
@@ -654,7 +669,8 @@ await generateText({
 await client.awaitPendingTraceBatches();
 ```
 
-#### AI SDK v5 and v6
+**AI SDK v5 and v6**
+
 ```typescript
 import { openai } from "@ai-sdk/openai";
 import * as ai from "ai";
@@ -667,7 +683,7 @@ const client = new Client();
 const { generateText, tool } = wrapAISDK(ai, { client });
 
 await generateText({
-    model: openai("gpt-5.5"),
+    model: openai("gpt-6-luna"),
     messages: [
         {
             role: "user",
@@ -701,8 +717,6 @@ The `traceable` return type is complex, which makes the cast necessary. You may 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-vercel-ai-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-vercel-ai-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

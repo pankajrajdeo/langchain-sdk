@@ -11,11 +11,13 @@ tags: [docs, javascript, integrations, llms, azure]
 > Integrate with the Azure OpenAI LLM using LangChain JavaScript.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of Azure OpenAI text completion models. The latest and most popular Azure OpenAI models are [chat completion models](../../langchain/models.md).**
 >
 > Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](../chat/azure.md).
 
 > [!NOTE]
+>
 > **Previously, LangChain.js supported integration with Azure OpenAI using the dedicated [Azure OpenAI SDK](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/openai/openai). This SDK is now deprecated in favor of the new Azure integration in the OpenAI SDK, which allows to access the latest OpenAI models and features the same day they are released, and allows seamless transition between the OpenAI API and Azure OpenAI.**
 >
 > If you are using Azure OpenAI with the deprecated SDK, see the [migration guide](#migration-from-azure-openai-sdk) to update to the new API.
@@ -28,7 +30,7 @@ This will help you get started with AzureOpenAI completion models (LLMs) using L
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/azure_openai) | Downloads | Version |
+| Class | Package | Local | Serializable | [PY support](../../../integrations/llms/azure_openai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`AzureOpenAI`](https://reference.langchain.com/javascript/langchain-openai/AzureOpenAI) | [`@langchain/openai`](https://www.npmjs.com/package/@langchain/openai) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
 
@@ -204,8 +206,6 @@ For detailed documentation of all `AzureOpenAI` features and configurations head
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/azure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/azure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,6 @@
 ---
 title: "ensure_message_ids"
-description: "Coerce message-like write values to typed BaseMessages with stable IDs."
+description: "Give the messages written to DeltaChannels stable ids."
 source: "https://reference.langchain.com/python/langgraph/pregel/_messages/ensure_message_ids"
 category: "reference"
 tags: [reference, langgraph, pregel, messages, ensure_message_ids]
@@ -12,33 +12,34 @@ tags: [reference, langgraph, pregel, messages, ensure_message_ids]
 
 📖 [View in docs](https://reference.langchain.com/python/langgraph/pregel/_messages/ensure_message_ids)
 
-Coerce message-like write values to typed BaseMessages with stable IDs.
+Give the messages written to DeltaChannels stable ids.
 
-Called in put_writes() before DeltaChannel writes are submitted to the
-checkpointer. Without this the checkpoint may store raw dicts or id=None
-BaseMessages; every get_state() replay then produces a different UUID and
-the same message appears with a different ID in each LangSmith trace.
+A `DeltaChannel` replays its saved writes on every read, and its reducer
+may not assign missing ids (`_messages_delta_reducer` doesn't), so a
+message saved without an id comes back without one, or with a new one on
+every read, and nothing can target it by id, for example `RemoveMessage`.
 
-Handles three input shapes:
-- BaseMessage objects: assign a UUID if id is None.
-- Dicts with a known "role" (OpenAI-style) or "type" (LangChain format) at
-  the root level: stamp "id" into the dict in-place. The reducer's
-  convert_to_messages call will forward the id to the resulting BaseMessage.
-- Lists of the above: apply the same logic to each element, replacing dict
-  items with coerced BaseMessages so the shared list reference seen by
-  checkpoint_pending_writes and the background thread both get typed messages.
+In a channel whose reducer is `_messages_delta_reducer`, every message-like
+it accepts (a message, a dict, a string, a `(role, content)` tuple; alone,
+in a list or in an `Overwrite`) becomes a message with an id. Other
+DeltaChannels may hold other data, so there only message objects get ids,
+plus message dicts outside an `Overwrite`: one in a list becomes a message.
+Anything that can't become a message is left as it is, so it fails where
+it always has: a message dict in a list raises here, anything else when
+the reducer reads it. An empty id counts as missing.
 
-Mutating synchronously here (before the background thread is submitted) is
-safe: the serialised bytes always reflect the post-coercion state.
+A write that changes is replaced in `writes`: lists and dicts the caller
+passed in are never changed, only the ids of message objects.
 
 ## Signature
 
 ```python
 ensure_message_ids(
-    value: Any,
+    channels: Mapping[str, Any],
+    writes: Sequence[tuple[str, Any]],
 ) -> None
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/_messages.py#L426)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/_messages.py#L503)

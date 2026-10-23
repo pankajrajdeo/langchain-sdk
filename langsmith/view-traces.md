@@ -17,6 +17,7 @@ In an [agent-based workspace](agents.md), a tracing project is one [environment]
 The side panel is organized around [threads](observability-concepts.md#threads) as the primary unit of navigation. Instead of treating each [run](observability-concepts.md#runs) as an isolated object, the UI keeps the surrounding conversation visible so you can understand where a run fits in the agent's broader execution.
 
 > [!NOTE]
+>
 > The Threads tab and the Turns view are only available for runs instrumented with a `thread_id` metadata field. Without thread instrumentation, you'll see traces as individual runs and won't have access to the Turns view.
 
 Three views are available at the top of the side panel:
@@ -26,20 +27,25 @@ Three views are available at the top of the side panel:
 * [**Details**](#details-view): The debugging layer. Drill into a specific run to inspect inputs, outputs, timing, token counts, errors, and metadata. Use this to understand what happened at a specific point in execution. Press `D` to switch to this view.
 
 > [!NOTE]
+>
 > The Trajectory tab is disabled for threads that do not have any renderable messages. The side panel defaults to the Details view.
 
 Use the Trajectory view to orient yourself in the conversation and identify where to focus, then switch to the Details view to inspect a specific run:
 
-### Start in the Trajectory view
+**1. Start in the Trajectory view**
+
 Open a thread and switch to the Trajectory view to see the full conversation.
 
-### Investigate
+**2. Investigate**
+
 Scan the trajectory to identify unexpected behavior, for example, a bad tool result, an unexpected subagent handoff, a latency spike.
 
-### Inspect the run
+**3. Inspect the run**
+
 Click the relevant message or tool call to open the Details view at the exact run that produced it. Review its inputs, outputs, timing, errors, and metadata.
 
-### Return to the trajectory
+**4. Return to the trajectory**
+
 Toggle back to the Trajectory view to continue scanning the conversation.
 
 ## Trajectory view
@@ -133,8 +139,6 @@ From the Details view, you can also:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/view-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/view-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

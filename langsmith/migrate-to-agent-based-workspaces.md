@@ -12,7 +12,7 @@ tags: [docs, langsmith, migrate-to-agent-based-workspaces]
 
 LangSmith organizes a workspace in one of two ways. A *project-based workspace* groups traces by [tracing project](observability-concepts.md#tracing-projects). An *agent-based workspace* groups them by [agent](agents.md), and divides each agent's traces across [environments](agent-environments.md) drawn from a fixed set of four.
 
-Agent-based organization is in [beta](release-stages.md). This page covers what is different in an agent-based workspace, and what changes if yours becomes one.
+Agent-based organization is available on [LangSmith Cloud](cloud.md). It is not available on [self-hosted](self-hosted.md) LangSmith. This page covers what is different in an agent-based workspace, and what changes if yours becomes one.
 
 ## Check which one you have
 
@@ -26,7 +26,7 @@ Agents and environments record what a tracing project cannot: which application 
 
 The organizing container changes, and everything scoped to it follows:
 
-* **Traces** group under an agent and one of its environments instead of under a tracing project you named. Nothing is re-ingested or moved. When an existing workspace converts, each tracing project becomes an agent with a production environment, and that environment keeps the project's ID and name. A tracing project for a new environment takes the agent identifier, a hyphen, and the environment as its name: an agent whose identifier is `checkout` has its staging traces in `checkout-staging`.
+* **Traces** group under an agent and one of its environments instead of under a tracing project you named. Nothing is re-ingested or moved. When an existing workspace is migrated, each tracing project becomes an agent with a production environment, and that environment keeps the project's ID and name. A tracing project for a new environment takes the agent identifier, a hyphen, and the environment as its name: an agent whose identifier is `checkout` has its staging traces in `checkout-staging`.
 * **Prebuilt dashboards** cover an environment rather than a named project. See [Monitor projects with dashboards](dashboards.md).
 * **Alerts** are scoped to an environment of an agent. See [Alerts](alerts.md).
 * **Evaluators** attach to an environment. See [Manage evaluators](evaluators.md).
@@ -38,13 +38,10 @@ What does not change: your traces, datasets, prompts, and experiments are the sa
 
 ## How a workspace moves
 
-During the beta, LangChain enables agent-based organization for an organization, and the change applies to workspaces created in that organization after that. No action is required from you.
-
-An existing project-based workspace does not convert automatically. LangChain can convert it, and the conversion keeps your existing tracing projects as described in [What changes](#what-changes).
-
-After a workspace converts, a workspace admin can switch it between the new experience and the classic, project-based experience. Go to **Settings** > **Workspace** > **Configuration** > **Workspace**. The switch applies to everyone in the workspace, and appears only in workspaces that LangChain has converted.
+A new organization on LangSmith Cloud gets agent-based workspaces. In an existing organization, LangChain migrates the workspaces, and the migration keeps your existing tracing projects as described in [What changes](#what-changes). No action is required from you.
 
 > [!NOTE]
+>
 > This page describes the change, not its schedule. Timing is not published.
 
 ## See also
@@ -56,8 +53,6 @@ After a workspace converts, a workspace admin can switch it between the new expe
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/migrate-to-agent-based-workspaces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/migrate-to-agent-based-workspaces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

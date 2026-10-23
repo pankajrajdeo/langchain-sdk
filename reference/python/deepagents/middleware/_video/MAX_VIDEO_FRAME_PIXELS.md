@@ -22,4 +22,4 @@ MAX_VIDEO_FRAME_PIXELS: Final = 1920 * 1080
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/_video.py#L64)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/_video.py#L64)

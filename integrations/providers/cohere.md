@@ -122,13 +122,14 @@ The agent is based on the paper
 [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629).
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_cohere import ChatCohere, create_cohere_react_agent
 from langchain_core.prompts import ChatPromptTemplate
-from langchain.agents import AgentExecutor
+from langchain_classic.agents import AgentExecutor
 
 llm = ChatCohere()
 
@@ -183,8 +184,6 @@ Usage of the Cohere [Reranker](../retrievers/cohere-reranker.md)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -11,14 +11,15 @@ tags: [docs, langsmith, granular-usage]
 > Retrieve detailed trace and LangSmith Deployment usage data broken down by workspace, project, user, or API key.
 
 > [!NOTE]
+>
 > **Trace usage:** For LangSmith [Cloud](cloud.md), granular billable trace data collection started on January 5, 2026. Data is not available for traces ingested before this date.
 >
 > For [Self-hosted](self-hosted.md) instances, trace data collection begins when the feature is enabled via the following environment variables, or after [upgrading to a version with it enabled by default](self-hosted-changelog.md#langsmith-0-13-12).
 >
-> ```env
+```env
 > DEFAULT_ORG_FEATURE_ENABLE_GRANULAR_USAGE_REPORTING=true
 > GRANULAR_USAGE_TABLE_ENABLED=true
-> ```
+```
 >
 > Starting with self-hosted version 0.16.0, long-lived trace usage is no longer tracked for [Self-hosted](self-hosted.md) deployments. The **Long-lived only** retention filter always shows zero results for these deployments.
 >
@@ -223,13 +224,14 @@ for record in data["usage"]:
 Each record carries three metrics together so a single fetch powers the whole Deployment view.
 
 > [!NOTE]
+>
 > **LangSmith Deployment usage** is sourced separately from trace usage and is available for the full retention window of your deployment usage.
 >
 > For self-hosted instances, the Deployment usage endpoint is opt-in. Enable it via:
 >
-> ```env
+```env
 > REMOTE_METRICS_ROLLUP_ENABLED=true
-> ```
+```
 >
 > Or upgrade to a LangSmith version that enables it by default (see [self-hosted changelog](self-hosted-changelog.md)).
 
@@ -404,8 +406,6 @@ In an [agent-based workspace](agents.md), grouping by project is the closest the
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/granular-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/granular-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

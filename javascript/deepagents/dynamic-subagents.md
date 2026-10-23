@@ -15,9 +15,11 @@ Dynamic subagents let an agent dispatch [subagents](subagents.md) from interpret
 Use this pattern when work spans many independent units, needs multiple perspectives, or benefits from recursive analysis. For general interpreter setup, see [Interpreters](interpreters.md).
 
 > [!WARNING]
+>
 > Dynamic subagents use the interpreter runtime, which is in [**beta**](../versioning.md). APIs and lifecycle behavior may change between releases.
 
 > [!NOTE]
+>
 > Interpreters require `@langchain/quickjs`.
 
 ## Quickstart
@@ -156,9 +158,11 @@ const result = await agent.invoke({
 ```
 
 > [!TIP]
+>
 > **The word "workflow" is a useful trigger.** The interpreter system prompt treats "workflow" as a signal to organize work through the interpreter, dispatching subagents with `task()` from code rather than grinding through items one model-chosen tool call at a time. Phrasing a request as a "workflow" is a deliberate lever you can pull to opt into dynamic orchestration. For a single, direct delegation, phrase the request plainly instead.
 
 > [!NOTE]
+>
 > Using dynamic subagents with `dcode`, the LangChain terminal coding agent? `dcode` ships with the code interpreter enabled, so dynamic subagents work out of the box. See the [dcode subagents page](../../deepagents/code/subagents.md) for setup and usage details.
 
 ## How it works
@@ -218,234 +222,231 @@ graph LR
 
 **Use cases:** Triaging support tickets, error logs, user feedback, or any batch of items that need different handling depending on their type.
 
-<details>
-<summary>Example: classify and act</summary>
-
-**What you configure**
-
+> **Example: classify and act**
+>
+> **What you configure**
+>
 **Google**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  subagents: [
-    {
-      name: "bug-fixer",
-      description: "Investigates bug reports and provides reproduction steps",
-      systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
-    },
-    {
-      name: "feature-analyst",
-      description: "Evaluates feature requests for feasibility and effort",
-      systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
-    },
-    {
-      name: "support-agent",
-      description: "Answers user questions based on documentation",
-      systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   subagents: [
+>     {
+>       name: "bug-fixer",
+>       description: "Investigates bug reports and provides reproduction steps",
+>       systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
+>     },
+>     {
+>       name: "feature-analyst",
+>       description: "Evaluates feature requests for feasibility and effort",
+>       systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
+>     },
+>     {
+>       name: "support-agent",
+>       description: "Answers user questions based on documentation",
+>       systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  subagents: [
-    {
-      name: "bug-fixer",
-      description: "Investigates bug reports and provides reproduction steps",
-      systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
-    },
-    {
-      name: "feature-analyst",
-      description: "Evaluates feature requests for feasibility and effort",
-      systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
-    },
-    {
-      name: "support-agent",
-      description: "Answers user questions based on documentation",
-      systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   subagents: [
+>     {
+>       name: "bug-fixer",
+>       description: "Investigates bug reports and provides reproduction steps",
+>       systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
+>     },
+>     {
+>       name: "feature-analyst",
+>       description: "Evaluates feature requests for feasibility and effort",
+>       systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
+>     },
+>     {
+>       name: "support-agent",
+>       description: "Answers user questions based on documentation",
+>       systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  subagents: [
-    {
-      name: "bug-fixer",
-      description: "Investigates bug reports and provides reproduction steps",
-      systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
-    },
-    {
-      name: "feature-analyst",
-      description: "Evaluates feature requests for feasibility and effort",
-      systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
-    },
-    {
-      name: "support-agent",
-      description: "Answers user questions based on documentation",
-      systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   subagents: [
+>     {
+>       name: "bug-fixer",
+>       description: "Investigates bug reports and provides reproduction steps",
+>       systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
+>     },
+>     {
+>       name: "feature-analyst",
+>       description: "Evaluates feature requests for feasibility and effort",
+>       systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
+>     },
+>     {
+>       name: "support-agent",
+>       description: "Answers user questions based on documentation",
+>       systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  subagents: [
-    {
-      name: "bug-fixer",
-      description: "Investigates bug reports and provides reproduction steps",
-      systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
-    },
-    {
-      name: "feature-analyst",
-      description: "Evaluates feature requests for feasibility and effort",
-      systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
-    },
-    {
-      name: "support-agent",
-      description: "Answers user questions based on documentation",
-      systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   subagents: [
+>     {
+>       name: "bug-fixer",
+>       description: "Investigates bug reports and provides reproduction steps",
+>       systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
+>     },
+>     {
+>       name: "feature-analyst",
+>       description: "Evaluates feature requests for feasibility and effort",
+>       systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
+>     },
+>     {
+>       name: "support-agent",
+>       description: "Answers user questions based on documentation",
+>       systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  subagents: [
-    {
-      name: "bug-fixer",
-      description: "Investigates bug reports and provides reproduction steps",
-      systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
-    },
-    {
-      name: "feature-analyst",
-      description: "Evaluates feature requests for feasibility and effort",
-      systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
-    },
-    {
-      name: "support-agent",
-      description: "Answers user questions based on documentation",
-      systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   subagents: [
+>     {
+>       name: "bug-fixer",
+>       description: "Investigates bug reports and provides reproduction steps",
+>       systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
+>     },
+>     {
+>       name: "feature-analyst",
+>       description: "Evaluates feature requests for feasibility and effort",
+>       systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
+>     },
+>     {
+>       name: "support-agent",
+>       description: "Answers user questions based on documentation",
+>       systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  subagents: [
-    {
-      name: "bug-fixer",
-      description: "Investigates bug reports and provides reproduction steps",
-      systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
-    },
-    {
-      name: "feature-analyst",
-      description: "Evaluates feature requests for feasibility and effort",
-      systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
-    },
-    {
-      name: "support-agent",
-      description: "Answers user questions based on documentation",
-      systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   subagents: [
+>     {
+>       name: "bug-fixer",
+>       description: "Investigates bug reports and provides reproduction steps",
+>       systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
+>     },
+>     {
+>       name: "feature-analyst",
+>       description: "Evaluates feature requests for feasibility and effort",
+>       systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
+>     },
+>     {
+>       name: "support-agent",
+>       description: "Answers user questions based on documentation",
+>       systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  subagents: [
-    {
-      name: "bug-fixer",
-      description: "Investigates bug reports and provides reproduction steps",
-      systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
-    },
-    {
-      name: "feature-analyst",
-      description: "Evaluates feature requests for feasibility and effort",
-      systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
-    },
-    {
-      name: "support-agent",
-      description: "Answers user questions based on documentation",
-      systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   subagents: [
+>     {
+>       name: "bug-fixer",
+>       description: "Investigates bug reports and provides reproduction steps",
+>       systemPrompt: "You are a bug triage specialist. Investigate each bug report and provide clear reproduction steps.",
+>     },
+>     {
+>       name: "feature-analyst",
+>       description: "Evaluates feature requests for feasibility and effort",
+>       systemPrompt: "You are a product analyst. Evaluate each feature request for technical feasibility, estimated effort, and potential impact.",
+>     },
+>     {
+>       name: "support-agent",
+>       description: "Answers user questions based on documentation",
+>       systemPrompt: "You are a support specialist. Answer user questions clearly based on the available documentation.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
-**What the agent writes**
-
+>
+> **What the agent writes**
+>
 ```ts
-// The agent has already classified each ticket; this routes every item to
-// the right specialist and collects the handled results.
-const SPECIALIST = { bug: "bug-fixer", feature: "feature-analyst", question: "support-agent" };
-
-const handled = await Promise.all(
-  tickets.map((ticket) =>
-    task({
-      description: `Handle this ${ticket.category}:\n${ticket.text}`,
-      subagentType: SPECIALIST[ticket.category],
-    }),
-  ),
-);
-// ... group handled results by category into a single triage report
-handled;
+> // The agent has already classified each ticket; this routes every item to
+> // the right specialist and collects the handled results.
+> const SPECIALIST = { bug: "bug-fixer", feature: "feature-analyst", question: "support-agent" };
+>
+> const handled = await Promise.all(
+>   tickets.map((ticket) =>
+>     task({
+>       description: `Handle this ${ticket.category}:\n${ticket.text}`,
+>       subagentType: SPECIALIST[ticket.category],
+>     }),
+>   ),
+> );
+> // ... group handled results by category into a single triage report
+> handled;
 ```
-
-</details>
 
 ### Fan-out and synthesize
 
@@ -466,154 +467,151 @@ graph LR
 
 Discovering files from interpreter code requires [programmatic tool calling (PTC)](interpreters.md#programmatic-tool-calling-ptc). Enable `glob` in the PTC allowlist on interpreter middleware.
 
-<details>
-<summary>Example: fan-out and synthesize</summary>
-
-**What you configure**
-
+> **Example: fan-out and synthesize**
+>
+> **What you configure**
+>
 **Google**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  subagents: [{
-    name: "reviewer",
-    description: "Reviews code for security issues, citing lines and severity",
-    systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
-  }],
-  middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   subagents: [{
+>     name: "reviewer",
+>     description: "Reviews code for security issues, citing lines and severity",
+>     systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  subagents: [{
-    name: "reviewer",
-    description: "Reviews code for security issues, citing lines and severity",
-    systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
-  }],
-  middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   subagents: [{
+>     name: "reviewer",
+>     description: "Reviews code for security issues, citing lines and severity",
+>     systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  subagents: [{
-    name: "reviewer",
-    description: "Reviews code for security issues, citing lines and severity",
-    systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
-  }],
-  middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   subagents: [{
+>     name: "reviewer",
+>     description: "Reviews code for security issues, citing lines and severity",
+>     systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  subagents: [{
-    name: "reviewer",
-    description: "Reviews code for security issues, citing lines and severity",
-    systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
-  }],
-  middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   subagents: [{
+>     name: "reviewer",
+>     description: "Reviews code for security issues, citing lines and severity",
+>     systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  subagents: [{
-    name: "reviewer",
-    description: "Reviews code for security issues, citing lines and severity",
-    systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
-  }],
-  middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   subagents: [{
+>     name: "reviewer",
+>     description: "Reviews code for security issues, citing lines and severity",
+>     systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  subagents: [{
-    name: "reviewer",
-    description: "Reviews code for security issues, citing lines and severity",
-    systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
-  }],
-  middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   subagents: [{
+>     name: "reviewer",
+>     description: "Reviews code for security issues, citing lines and severity",
+>     systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  subagents: [{
-    name: "reviewer",
-    description: "Reviews code for security issues, citing lines and severity",
-    systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
-  }],
-  middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   subagents: [{
+>     name: "reviewer",
+>     description: "Reviews code for security issues, citing lines and severity",
+>     systemPrompt: "You are a security-focused code reviewer. Read the file carefully and report any authentication or authorization issues with line numbers and severity.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware({ ptc: ["glob"] })],
+> });
 ```
-
-**What the agent writes**
-
+>
+> **What the agent writes**
+>
 ```ts
-// One reviewer per file, dispatched in parallel, then findings merged.
-const files = (await tools.glob({ pattern: "src/routes/**/*.ts" }))
-  .split("\n")
-  .filter(Boolean);
-
-const reviews = await Promise.all(
-  files.map((file) =>
-    task({
-      description: `Review ${file} for authentication issues. Cite line numbers.`,
-      subagentType: "reviewer",
-      responseSchema: issuesSchema, // -> { issues: [{ file, line, severity }] }
-    }),
-  ),
-);
-
-const issues = reviews.flatMap((r) => r.issues);
-// ... sort by severity, drop duplicates, summarize the top risks
-issues;
+> // One reviewer per file, dispatched in parallel, then findings merged.
+> const files = (await tools.glob({ pattern: "src/routes/**/*.ts" }))
+>   .split("\n")
+>   .filter(Boolean);
+>
+> const reviews = await Promise.all(
+>   files.map((file) =>
+>     task({
+>       description: `Review ${file} for authentication issues. Cite line numbers.`,
+>       subagentType: "reviewer",
+>       responseSchema: issuesSchema, // -> { issues: [{ file, line, severity }] }
+>     }),
+>   ),
+> );
+>
+> const issues = reviews.flatMap((r) => r.issues);
+> // ... sort by severity, drop duplicates, summarize the top risks
+> issues;
 ```
-
-</details>
 
 ### Adversarial verification
 
@@ -634,205 +632,202 @@ graph LR
 
 **Use cases:** Security audits where false positives are costly, compliance checks, any review where you need high confidence in findings.
 
-<details>
-<summary>Example: adversarial verification</summary>
-
-**What you configure**
-
+> **Example: adversarial verification**
+>
+> **What you configure**
+>
 **Google**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  subagents: [
-    {
-      name: "reviewer",
-      description: "Finds potential security vulnerabilities in code",
-      systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
-    },
-    {
-      name: "verifier",
-      description: "Independently verifies whether a reported vulnerability is real",
-      systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   subagents: [
+>     {
+>       name: "reviewer",
+>       description: "Finds potential security vulnerabilities in code",
+>       systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
+>     },
+>     {
+>       name: "verifier",
+>       description: "Independently verifies whether a reported vulnerability is real",
+>       systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  subagents: [
-    {
-      name: "reviewer",
-      description: "Finds potential security vulnerabilities in code",
-      systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
-    },
-    {
-      name: "verifier",
-      description: "Independently verifies whether a reported vulnerability is real",
-      systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   subagents: [
+>     {
+>       name: "reviewer",
+>       description: "Finds potential security vulnerabilities in code",
+>       systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
+>     },
+>     {
+>       name: "verifier",
+>       description: "Independently verifies whether a reported vulnerability is real",
+>       systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  subagents: [
-    {
-      name: "reviewer",
-      description: "Finds potential security vulnerabilities in code",
-      systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
-    },
-    {
-      name: "verifier",
-      description: "Independently verifies whether a reported vulnerability is real",
-      systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   subagents: [
+>     {
+>       name: "reviewer",
+>       description: "Finds potential security vulnerabilities in code",
+>       systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
+>     },
+>     {
+>       name: "verifier",
+>       description: "Independently verifies whether a reported vulnerability is real",
+>       systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  subagents: [
-    {
-      name: "reviewer",
-      description: "Finds potential security vulnerabilities in code",
-      systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
-    },
-    {
-      name: "verifier",
-      description: "Independently verifies whether a reported vulnerability is real",
-      systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   subagents: [
+>     {
+>       name: "reviewer",
+>       description: "Finds potential security vulnerabilities in code",
+>       systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
+>     },
+>     {
+>       name: "verifier",
+>       description: "Independently verifies whether a reported vulnerability is real",
+>       systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  subagents: [
-    {
-      name: "reviewer",
-      description: "Finds potential security vulnerabilities in code",
-      systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
-    },
-    {
-      name: "verifier",
-      description: "Independently verifies whether a reported vulnerability is real",
-      systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   subagents: [
+>     {
+>       name: "reviewer",
+>       description: "Finds potential security vulnerabilities in code",
+>       systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
+>     },
+>     {
+>       name: "verifier",
+>       description: "Independently verifies whether a reported vulnerability is real",
+>       systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  subagents: [
-    {
-      name: "reviewer",
-      description: "Finds potential security vulnerabilities in code",
-      systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
-    },
-    {
-      name: "verifier",
-      description: "Independently verifies whether a reported vulnerability is real",
-      systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   subagents: [
+>     {
+>       name: "reviewer",
+>       description: "Finds potential security vulnerabilities in code",
+>       systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
+>     },
+>     {
+>       name: "verifier",
+>       description: "Independently verifies whether a reported vulnerability is real",
+>       systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  subagents: [
-    {
-      name: "reviewer",
-      description: "Finds potential security vulnerabilities in code",
-      systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
-    },
-    {
-      name: "verifier",
-      description: "Independently verifies whether a reported vulnerability is real",
-      systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   subagents: [
+>     {
+>       name: "reviewer",
+>       description: "Finds potential security vulnerabilities in code",
+>       systemPrompt: "You are a security auditor. Find potential vulnerabilities and report each with file, line, and description.",
+>     },
+>     {
+>       name: "verifier",
+>       description: "Independently verifies whether a reported vulnerability is real",
+>       systemPrompt: "You are a security verification specialist. Given a reported vulnerability, independently verify whether it is exploitable. Be skeptical. Only confirm real issues.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
-**What the agent writes**
-
+>
+> **What the agent writes**
+>
 ```ts
-// Pass 1: audit. Pass 2: verify each finding independently; keep only confirmed.
-const { findings } = await task({
-  description: "Audit the payments module for vulnerabilities.",
-  subagentType: "reviewer",
-  responseSchema: findingsSchema, // -> { findings: [{ id, file, line, description }] }
-});
-
-const verdicts = await Promise.all(
-  findings.map((f) =>
-    task({
-      description: `Verify ${f.file}:${f.line} (${f.description}). Confirm or refute.`,
-      subagentType: "verifier",
-      responseSchema: verdictSchema, // -> { confirmed: boolean }
-    }),
-  ),
-);
-
-const confirmed = findings.filter((_, i) => verdicts[i]?.confirmed);
-// ... report only the confirmed vulnerabilities
-confirmed;
+> // Pass 1: audit. Pass 2: verify each finding independently; keep only confirmed.
+> const { findings } = await task({
+>   description: "Audit the payments module for vulnerabilities.",
+>   subagentType: "reviewer",
+>   responseSchema: findingsSchema, // -> { findings: [{ id, file, line, description }] }
+> });
+>
+> const verdicts = await Promise.all(
+>   findings.map((f) =>
+>     task({
+>       description: `Verify ${f.file}:${f.line} (${f.description}). Confirm or refute.`,
+>       subagentType: "verifier",
+>       responseSchema: verdictSchema, // -> { confirmed: boolean }
+>     }),
+>   ),
+> );
+>
+> const confirmed = findings.filter((_, i) => verdicts[i]?.confirmed);
+> // ... report only the confirmed vulnerabilities
+> confirmed;
 ```
-
-</details>
 
 ### Generate and filter
 
@@ -851,150 +846,147 @@ graph LR
 
 **Use cases:** Architecture proposals, refactoring strategies, content variations, any task where exploring multiple options before committing produces a better outcome.
 
-<details>
-<summary>Example: generate and filter</summary>
-
-**What you configure**
-
+> **Example: generate and filter**
+>
+> **What you configure**
+>
 **Google**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  subagents: [{
-    name: "architect",
-    description: "Proposes a database schema design with tradeoff analysis",
-    systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   subagents: [{
+>     name: "architect",
+>     description: "Proposes a database schema design with tradeoff analysis",
+>     systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  subagents: [{
-    name: "architect",
-    description: "Proposes a database schema design with tradeoff analysis",
-    systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   subagents: [{
+>     name: "architect",
+>     description: "Proposes a database schema design with tradeoff analysis",
+>     systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  subagents: [{
-    name: "architect",
-    description: "Proposes a database schema design with tradeoff analysis",
-    systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   subagents: [{
+>     name: "architect",
+>     description: "Proposes a database schema design with tradeoff analysis",
+>     systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  subagents: [{
-    name: "architect",
-    description: "Proposes a database schema design with tradeoff analysis",
-    systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   subagents: [{
+>     name: "architect",
+>     description: "Proposes a database schema design with tradeoff analysis",
+>     systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  subagents: [{
-    name: "architect",
-    description: "Proposes a database schema design with tradeoff analysis",
-    systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   subagents: [{
+>     name: "architect",
+>     description: "Proposes a database schema design with tradeoff analysis",
+>     systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  subagents: [{
-    name: "architect",
-    description: "Proposes a database schema design with tradeoff analysis",
-    systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   subagents: [{
+>     name: "architect",
+>     description: "Proposes a database schema design with tradeoff analysis",
+>     systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  subagents: [{
-    name: "architect",
-    description: "Proposes a database schema design with tradeoff analysis",
-    systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   subagents: [{
+>     name: "architect",
+>     description: "Proposes a database schema design with tradeoff analysis",
+>     systemPrompt: "You are a database architect. Propose a schema design for the given requirements. Include tradeoffs, migration considerations, and a clear rationale.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
-**What the agent writes**
-
+>
+> **What the agent writes**
+>
 ```ts
-// Generate independent proposals in parallel, then score and keep the best.
-const proposals = await Promise.all(
-  [1, 2, 3].map((n) =>
-    task({
-      description: `Approach ${n}: redesign the orders schema, with tradeoffs.`,
-      subagentType: "architect",
-      responseSchema: designSchema, // -> { design, tradeoffs }
-    }),
-  ),
-);
-
-// ... score each proposal against the requirements
-const best = proposals.sort((a, b) => score(b) - score(a))[0];
-best;
+> // Generate independent proposals in parallel, then score and keep the best.
+> const proposals = await Promise.all(
+>   [1, 2, 3].map((n) =>
+>     task({
+>       description: `Approach ${n}: redesign the orders schema, with tradeoffs.`,
+>       subagentType: "architect",
+>       responseSchema: designSchema, // -> { design, tradeoffs }
+>     }),
+>   ),
+> );
+>
+> // ... score each proposal against the requirements
+> const best = proposals.sort((a, b) => score(b) - score(a))[0];
+> best;
 ```
-
-</details>
 
 ### Tournament
 
@@ -1013,206 +1005,203 @@ graph LR
 
 **Use cases:** Optimization under subjective criteria, style selection, choosing between competing implementations.
 
-<details>
-<summary>Example: tournament</summary>
-
-**What you configure**
-
+> **Example: tournament**
+>
+> **What you configure**
+>
 **Google**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  subagents: [
-    {
-      name: "writer",
-      description: "Rewrites a function with a focus on readability and clarity",
-      systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
-    },
-    {
-      name: "judge",
-      description: "Compares two code implementations and picks the more readable one",
-      systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   subagents: [
+>     {
+>       name: "writer",
+>       description: "Rewrites a function with a focus on readability and clarity",
+>       systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
+>     },
+>     {
+>       name: "judge",
+>       description: "Compares two code implementations and picks the more readable one",
+>       systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  subagents: [
-    {
-      name: "writer",
-      description: "Rewrites a function with a focus on readability and clarity",
-      systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
-    },
-    {
-      name: "judge",
-      description: "Compares two code implementations and picks the more readable one",
-      systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   subagents: [
+>     {
+>       name: "writer",
+>       description: "Rewrites a function with a focus on readability and clarity",
+>       systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
+>     },
+>     {
+>       name: "judge",
+>       description: "Compares two code implementations and picks the more readable one",
+>       systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  subagents: [
-    {
-      name: "writer",
-      description: "Rewrites a function with a focus on readability and clarity",
-      systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
-    },
-    {
-      name: "judge",
-      description: "Compares two code implementations and picks the more readable one",
-      systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   subagents: [
+>     {
+>       name: "writer",
+>       description: "Rewrites a function with a focus on readability and clarity",
+>       systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
+>     },
+>     {
+>       name: "judge",
+>       description: "Compares two code implementations and picks the more readable one",
+>       systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  subagents: [
-    {
-      name: "writer",
-      description: "Rewrites a function with a focus on readability and clarity",
-      systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
-    },
-    {
-      name: "judge",
-      description: "Compares two code implementations and picks the more readable one",
-      systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   subagents: [
+>     {
+>       name: "writer",
+>       description: "Rewrites a function with a focus on readability and clarity",
+>       systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
+>     },
+>     {
+>       name: "judge",
+>       description: "Compares two code implementations and picks the more readable one",
+>       systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  subagents: [
-    {
-      name: "writer",
-      description: "Rewrites a function with a focus on readability and clarity",
-      systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
-    },
-    {
-      name: "judge",
-      description: "Compares two code implementations and picks the more readable one",
-      systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   subagents: [
+>     {
+>       name: "writer",
+>       description: "Rewrites a function with a focus on readability and clarity",
+>       systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
+>     },
+>     {
+>       name: "judge",
+>       description: "Compares two code implementations and picks the more readable one",
+>       systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  subagents: [
-    {
-      name: "writer",
-      description: "Rewrites a function with a focus on readability and clarity",
-      systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
-    },
-    {
-      name: "judge",
-      description: "Compares two code implementations and picks the more readable one",
-      systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   subagents: [
+>     {
+>       name: "writer",
+>       description: "Rewrites a function with a focus on readability and clarity",
+>       systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
+>     },
+>     {
+>       name: "judge",
+>       description: "Compares two code implementations and picks the more readable one",
+>       systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  subagents: [
-    {
-      name: "writer",
-      description: "Rewrites a function with a focus on readability and clarity",
-      systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
-    },
-    {
-      name: "judge",
-      description: "Compares two code implementations and picks the more readable one",
-      systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
-    },
-  ],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   subagents: [
+>     {
+>       name: "writer",
+>       description: "Rewrites a function with a focus on readability and clarity",
+>       systemPrompt: "You are an expert programmer focused on clean code. Rewrite the given function to maximize readability. Explain your choices.",
+>     },
+>     {
+>       name: "judge",
+>       description: "Compares two code implementations and picks the more readable one",
+>       systemPrompt: "You are a code quality judge. Compare two implementations and pick the more readable one. Justify your choice with specific criteria.",
+>     },
+>   ],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
-**What the agent writes**
-
+>
+> **What the agent writes**
+>
 ```ts
-// Generate variants, then judge pairwise until a single winner remains.
-let bracket = await Promise.all(
-  [1, 2, 3, 4, 5].map((n) =>
-    task({ description: `Rewrite processOrder for readability (variant ${n}).`, subagentType: "writer" }),
-  ),
-);
-
-while (bracket.length > 1) {
-  const winners = [];
-  for (let i = 0; i < bracket.length; i += 2) {
-    if (bracket[i + 1] === undefined) { winners.push(bracket[i]); break; }
-    const { winner } = await task({
-      description: `Pick the more readable:\n\nA:\n${bracket[i]}\n\nB:\n${bracket[i + 1]}`,
-      subagentType: "judge",
-      responseSchema: pickSchema, // -> { winner: "A" | "B" }
-    });
-    winners.push(winner === "A" ? bracket[i] : bracket[i + 1]);
-  }
-  bracket = winners;
-}
-bracket[0]; // the winning rewrite
+> // Generate variants, then judge pairwise until a single winner remains.
+> let bracket = await Promise.all(
+>   [1, 2, 3, 4, 5].map((n) =>
+>     task({ description: `Rewrite processOrder for readability (variant ${n}).`, subagentType: "writer" }),
+>   ),
+> );
+>
+> while (bracket.length > 1) {
+>   const winners = [];
+>   for (let i = 0; i < bracket.length; i += 2) {
+>     if (bracket[i + 1] === undefined) { winners.push(bracket[i]); break; }
+>     const { winner } = await task({
+>       description: `Pick the more readable:\n\nA:\n${bracket[i]}\n\nB:\n${bracket[i + 1]}`,
+>       subagentType: "judge",
+>       responseSchema: pickSchema, // -> { winner: "A" | "B" }
+>     });
+>     winners.push(winner === "A" ? bracket[i] : bracket[i + 1]);
+>   }
+>   bracket = winners;
+> }
+> bracket[0]; // the winning rewrite
 ```
-
-</details>
 
 ### Loop until done
 
@@ -1227,153 +1216,151 @@ graph LR
 
 **Use cases:** Exhaustive search, dead code detection, dependency audits, any sweep where you want completeness rather than a fixed number of results.
 
-<details>
-<summary>Example: loop until done</summary>
-
-**What you configure**
-
+> **Example: loop until done**
+>
+> **What you configure**
+>
 **Google**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  subagents: [{
-    name: "analyzer",
-    description: "Analyzes code for unused exports, functions, and dead code paths",
-    systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   subagents: [{
+>     name: "analyzer",
+>     description: "Analyzes code for unused exports, functions, and dead code paths",
+>     systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  subagents: [{
-    name: "analyzer",
-    description: "Analyzes code for unused exports, functions, and dead code paths",
-    systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   subagents: [{
+>     name: "analyzer",
+>     description: "Analyzes code for unused exports, functions, and dead code paths",
+>     systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  subagents: [{
-    name: "analyzer",
-    description: "Analyzes code for unused exports, functions, and dead code paths",
-    systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   subagents: [{
+>     name: "analyzer",
+>     description: "Analyzes code for unused exports, functions, and dead code paths",
+>     systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  subagents: [{
-    name: "analyzer",
-    description: "Analyzes code for unused exports, functions, and dead code paths",
-    systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   subagents: [{
+>     name: "analyzer",
+>     description: "Analyzes code for unused exports, functions, and dead code paths",
+>     systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  subagents: [{
-    name: "analyzer",
-    description: "Analyzes code for unused exports, functions, and dead code paths",
-    systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   subagents: [{
+>     name: "analyzer",
+>     description: "Analyzes code for unused exports, functions, and dead code paths",
+>     systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  subagents: [{
-    name: "analyzer",
-    description: "Analyzes code for unused exports, functions, and dead code paths",
-    systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   subagents: [{
+>     name: "analyzer",
+>     description: "Analyzes code for unused exports, functions, and dead code paths",
+>     systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent } from "deepagents";
-import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  subagents: [{
-    name: "analyzer",
-    description: "Analyzes code for unused exports, functions, and dead code paths",
-    systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
-  }],
-  middleware: [createCodeInterpreterMiddleware()],
-});
+> import { createDeepAgent } from "deepagents";
+> import { createCodeInterpreterMiddleware } from "@langchain/quickjs";
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   subagents: [{
+>     name: "analyzer",
+>     description: "Analyzes code for unused exports, functions, and dead code paths",
+>     systemPrompt: "You are a code analyst specializing in dead code detection. Find unused exports, unreachable functions, and orphaned modules. Report each with file path and evidence.",
+>   }],
+>   middleware: [createCodeInterpreterMiddleware()],
+> });
 ```
-
-**What the agent writes**
-
+>
+> **What the agent writes**
+>
 ```ts
-// Keep dispatching rounds, deduping against what's found, until a round adds nothing.
-const seen = new Set();
-const found = [];
-
-while (true) {
-  const { items } = await task({
-    description: `Find dead code. Already found: ${[...seen].join(", ") || "(none)"}.`,
-    subagentType: "analyzer",
-    responseSchema: itemsSchema, // -> { items: [{ id, file }] }
-  });
-  const fresh = items.filter((i) => !seen.has(i.id));
-  if (fresh.length === 0) break; // converged: nothing new
-  for (const i of fresh) { seen.add(i.id); found.push(i); }
-}
-found;
+> // Keep dispatching rounds, deduping against what's found, until a round adds nothing.
+> const seen = new Set();
+> const found = [];
+>
+> while (true) {
+>   const { items } = await task({
+>     description: `Find dead code. Already found: ${[...seen].join(", ") || "(none)"}.`,
+>     subagentType: "analyzer",
+>     responseSchema: itemsSchema, // -> { items: [{ id, file }] }
+>   });
+>   const fresh = items.filter((i) => !seen.has(i.id));
+>   if (fresh.length === 0) break; // converged: nothing new
+>   for (const i of fresh) { seen.add(i.id); found.push(i); }
+> }
+> found;
 ```
-
-</details>
 
 > [!WARNING]
+>
 > `task()` dispatches from inside an already-running `eval` call. It does not go through the normal tool calling path, so `interruptOn` approval workflows on the parent agent are not enforced per dispatch. Gate the `eval` tool itself if you need approval before subagent orchestration runs.
 
 ## Disable dynamic subagents
@@ -1479,8 +1466,6 @@ const agent = createDeepAgent({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/dynamic-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/dynamic-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

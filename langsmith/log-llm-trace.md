@@ -20,6 +20,7 @@ There are four requirements for a fully functional LLM trace:
 | 4. Provide token counts | Set `usage_metadata` on the run | Token counts and cost calculation |
 
 > [!NOTE]
+>
 > If you are using LangChain OSS, the [OpenAI wrapper](trace-openai.md), or the [Anthropic wrapper](trace-anthropic.md), these details are handled automatically.
 >
 > The examples on this page use the `traceable` decorator/wrapper (the recommended approach for Python and JS/TS). The same requirements apply if you use the [RunTree](annotate-code.md#use-the-runtree-api) or [API](smith-api-ref.md) directly.
@@ -29,142 +30,189 @@ There are four requirements for a fully functional LLM trace:
 When tracing a custom model or a custom input/output format, it must either follow the LangChain format, OpenAI completions format or Anthropic messages format. For more details,  refer to the [OpenAI Chat Completions](https://platform.openai.com/docs/api-reference/chat/create) or [Anthropic Messages](https://platform.claude.com/docs/en/api/messages) documentation. The LangChain format is:
 
 **LangChain format**
-#### `messages` — `array`
+
+**messages** `array` *required*
+
 A list of messages containing the content of the conversation.
 
-#### `role` — `string`
-Identifies the message type. One of: <code>system</code> | <code>reasoning</code> | <code>user</code> | <code>assistant</code> | <code>tool</code>
+**role** `string` *required*
 
-#### `content` — `array`
+Identifies the message type. One of: `system` | `reasoning` | `user` | `assistant` | `tool`
+
+**content** `array` *required*
+
 Content of the message. List of typed dictionaries.
 
 **Content options**
-#### `type` — `string`
-One of: <code>text</code> | <code>image</code> | <code>file</code> | <code>audio</code> | <code>video</code> | <code>tool\_call</code> | <code>server\_tool\_call</code> | <code>server\_tool\_result</code>.
+
+**type** `string` *required*
+
+One of: `text` | `image` | `file` | `audio` | `video` | `tool_call` | `server_tool_call` | `server_tool_result`.
 
 **text**
-#### `type` — `literal(`
 
-#### `text` — `string`
+**type** `literal('text')` *required*
+
+**text** `string` *required*
+
 Text content.
 
-#### `annotations` — `object[]`
+**annotations** `object[]`
+
 List of annotations for the text
 
-#### `extras` — `object`
+**extras** `object`
+
 Additional provider-specific data.
 
 **reasoning**
-#### `type` — `literal(`
 
-#### `text` — `string`
+**type** `literal('reasoning')` *required*
+
+**text** `string` *required*
+
 Text content.
 
-#### `extras` — `object`
+**extras** `object`
+
 Additional provider-specific data.
 
 **image**
-#### `type` — `literal(`
 
-#### `url` — `string`
+**type** `literal('image')` *required*
+
+**url** `string`
+
 URL pointing to the image location.
 
-#### `base64` — `string`
+**base64** `string` *required*
+
 Base64-encoded image data.
 
-#### `id` — `string`
+**id** `string`
+
 Reference ID to an externally stored image (e.g., in a provider’s file system or in a bucket).
 
-#### `mime_type` — `string`
+**mime\_type** `string`
+
 Image [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `image/jpeg`, `image/png`).
 
 **file (e.g., PDFs)**
-#### `type` — `literal(`
 
-#### `url` — `string`
+**type** `literal('file')` *required*
+
+**url** `string`
+
 URL pointing to the file.
 
-#### `base64` — `string`
+**base64** `string` *required*
+
 Base64-encoded file data.
 
-#### `id` — `string`
+**id** `string`
+
 Reference ID to an externally stored file (e.g., in a provider’s file system or in a bucket).
 
-#### `mime_type` — `string`
+**mime\_type** `string`
+
 File [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `application/pdf`).
 
 **audio**
-#### `type` — `literal(`
 
-#### `url` — `string`
+**type** `literal('audio')` *required*
+
+**url** `string`
+
 URL pointing to the audio file.
 
-#### `base64` — `string`
+**base64** `string` *required*
+
 Base64-encoded audio data.
 
-#### `id` — `string`
+**id** `string`
+
 Reference ID to an externally stored audio file (e.g., in a provider’s file system or in a bucket).
 
-#### `mime_type` — `string`
+**mime\_type** `string`
+
 Audio [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `audio/mpeg`, `audio/wav`).
 
 **video**
-#### `type` — `literal(`
 
-#### `url` — `string`
+**type** `literal('video')` *required*
+
+**url** `string`
+
 URL pointing to the video file.
 
-#### `base64` — `string`
+**base64** `string` *required*
+
 Base64-encoded video data.
 
-#### `id` — `string`
+**id** `string`
+
 Reference ID to an externally stored video file (e.g., in a provider’s file system or in a bucket).
 
-#### `mime_type` — `string`
+**mime\_type** `string`
+
 Video [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `video/mp4`, `video/webm`).
 
-**tool_call**
-#### `type` — `literal(`
+**tool\_call**
 
-#### `name` — `string`
+**type** `literal('tool_call')` *required*
 
-#### `args` — `object`
+**name** `string`
+
+**args** `object` *required*
+
 Arguments to pass to the tool.
 
-#### `id` — `string`
+**id** `string`
+
 Unique identifier for this tool call.
 
-**server_tool_call**
-#### `type` — `literal(`
+**server\_tool\_call**
 
-#### `id` — `string`
+**type** `literal('server_tool_call')` *required*
+
+**id** `string` *required*
+
 Unique identifier for this tool call.
 
-#### `name` — `string`
+**name** `string` *required*
+
 The name of the tool to be called.
 
-#### `args` — `object`
+**args** `object` *required*
+
 Arguments to pass to the tool.
 
-**server_tool_result**
-#### `type` — `literal(`
+**server\_tool\_result**
 
-#### `tool_call_id` — `string`
+**type** `literal('server_tool_result')` *required*
+
+**tool\_call\_id** `string` *required*
+
 Identifier of the corresponding server tool call.
 
-#### `id` — `string`
+**id** `string`
+
 Unique identifier for this tool call.
 
-#### `status` — `string`
-Execution status of the server-side tool. One of: <code>success</code> | <code>error</code>.
+**status** `string` *required*
 
-#### `output`
+Execution status of the server-side tool. One of: `success` | `error`.
+
+**output**
+
 Output of the executed tool.
 
-#### `tool_call_id` — `string`
-Must match the <code>id</code> of a prior <code>assistant</code> message’s <code>tool\_calls\[i]</code> entry. Only valid when <code>role</code> is <code>tool</code>.
+**tool\_call\_id** `string`
 
-#### `usage_metadata` — `object`
+Must match the `id` of a prior `assistant` message’s `tool_calls[i]` entry. Only valid when `role` is `tool`.
+
+**usage\_metadata** `object`
+
 Use this field to send token counts and/or costs with your model's output. See [Provide token and cost information](#provide-token-and-cost-information) for more details.
 
 **Text and reasoning**
@@ -337,7 +385,7 @@ output = {
 
 ## Convert custom I/O formats into LangSmith compatible formats
 
-If you're using a custom input or output format, you can convert it to a LangSmith compatible format using `process_inputs`/`processInputs` and `process_outputs`/`processOutputs` functions on the [`@traceable` decorator](https://docs.smith.langchain.com/reference/python/run_helpers/langsmith.run_helpers.traceable) (Python) or [`traceable` function](https://docs.smith.langchain.com/reference/js/functions/traceable.traceable) (TS).
+If you're using a custom input or output format, you can convert it to a LangSmith compatible format using `process_inputs`/`processInputs` and `process_outputs`/`processOutputs` functions on the [`@traceable` decorator](https://reference.langchain.com/python/langsmith/run_helpers/traceable) (Python) or [`traceable` function](https://reference.langchain.com/javascript/langsmith/traceable/traceable) (TS).
 
 `process_inputs`/`processInputs` and `process_outputs`/`processOutputs` accept functions that allow you to transform the inputs and outputs of a specific trace before they are logged to LangSmith. They have access to the trace's inputs and outputs, and can return a new dictionary with the processed data.
 
@@ -501,6 +549,7 @@ list(
 ```
 
 > [!TIP]
+>
 > Setting `ls_model_name` in your `metadata` is required for LangSmith to identify the model and calculate costs for custom LLM traces. Without it, token counts may still be recorded but costs won't be estimated.
 
 To learn more about how to use the `metadata` fields, refer to the [Add metadata and tags](add-metadata-tags.md) guide. To customize how custom agent runs appear in the Trajectory view, see [Customize the Trajectory view](view-traces.md#customize-the-trajectory-view).
@@ -586,8 +635,6 @@ await runTree.patchRun();
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-llm-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-llm-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

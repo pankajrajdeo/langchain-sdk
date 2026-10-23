@@ -10,11 +10,10 @@ tags: [docs, langsmith, filter-traces]
 
 > Find specific threads, traces, and runs in a LangSmith tracing project by writing filter queries in the search bar.
 
-Filtering narrows the [runs](observability-concepts.md#runs) in a tracing project to the ones that need attention, such as the conversations that errored, slow tool calls, or runs with low feedback scores. Write a query in the search bar, then choose which runs in the [trace](observability-concepts.md#traces) or [thread](observability-concepts.md#threads) hierarchy the query is matched against.
-
-In an [agent-based workspace](agents.md), a tracing project is one [environment](agent-environments.md) of one agent, so a filter applies to the environment you have open rather than to the agent as a whole. To filter across an agent's environments, filter each one in turn.
+Filtering narrows the [runs](observability-concepts.md#runs) in a [trace container](observability-concepts.md#trace-containers) to the ones that need attention, such as the conversations that errored, slow tool calls, or runs with low feedback scores. Write a query in the search bar, then choose which runs in the [trace](observability-concepts.md#traces) or [thread](observability-concepts.md#threads) hierarchy the query is matched against.
 
 > [!NOTE]
+>
 > Tracing projects have two filtering experiences. Check the top of your project to see which one applies to you:
 >
 > * **A single search bar with a scope selector to its left**: Refer to [Filter traces](filter-traces.md).
@@ -29,10 +28,11 @@ This page covers:
 * [Filtering in one click](#filter-with-shortcuts) from the **Shortcuts** panel
 * [Saving a filter](#save-a-filter) as a view
 * [Filtering the runs inside a trace](#filter-the-runs-in-a-trace)
+* [Searching with AI](#search-with-ai) in natural language instead of field values (beta)
 * [What full-text search indexes](#full-text-search-indexing)
 * [Troubleshooting a query](#troubleshoot-a-query)
 
-To query runs programmatically instead, refer to [Query traces using the SDK](export-traces.md). The SDK and REST API use a separate structured query language, documented in [Trace query syntax](trace-query-syntax.md).
+To query runs programmatically instead, refer to [Query traces using the SDK](export-traces.md). The SDK and REST API use a separate structured query language, documented in [Trace query syntax](trace-query-syntax.md). To translate a search bar query into that language, refer to the [UI-to-API operator map](trace-query-syntax.md#ui-to-api-operator-map).
 
 ## Build a query
 
@@ -42,19 +42,22 @@ A query is made of clauses, and each clause pairs a field with an operator and a
 status:error
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-search-bar-light.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=38ce1bbb2d51385bfc0ebdd72d42c764" alt="The filter toolbar of a tracing project, with a scope selector reading 'in any run' beside an empty search field, a Filter button on the right, and a second row holding the time range control, the Threads, Traces, and Runs selection, Reset, Save View, and Views" width="826" height="97" data-path="langsmith/images/filter-search-bar-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-search-bar-dark.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=ea76f20d014c9adc2214fbd8bf1ced80" alt="The filter toolbar of a tracing project, with a scope selector reading 'in any run' beside an empty search field, a Filter button on the right, and a second row holding the time range control, the Threads, Traces, and Runs selection, Reset, Save View, and Views" width="824" height="100" data-path="langsmith/images/filter-search-bar-dark.png" />
+![The search bar of a tracing project, with the scope selector reading 'in root run' and a status:error clause. The suggestion list below it is open, with AI search, marked Beta and described as Search in plain language, highlighted at the top, followed by fields grouped under Run attributes, Content, and Identity. Navigate, Select, and Docs hints run along the bottom of the list](https://mintcdn.com/langchain-5e9cc07a/MoWOdSpeRhP-SZId/langsmith/images/filter-search-bar-light.png?fit=max\&auto=format\&n=MoWOdSpeRhP-SZId\&q=85\&s=bf265b28335ab17802f0a5d1a25d8e0a)
 
 To build a query, click the search bar and start typing:
 
-### Choose a field
+**1. Choose a field**
+
 Type a field name or select one from the suggestion list. Suggestions are grouped by category, and **Recents** lists queries run previously. Use the arrow keys to move through the list and press `Enter` to select.
 
-### Choose an operator
+If AI search is available to your organization, **AI search** appears at the top of the suggestion list. Refer to [Search with AI](#search-with-ai).
+
+**2. Choose an operator**
+
 Type `:` to see the operators the field supports, each with an example.
 
-### Enter a value
+**3. Enter a value**
+
 For fields whose values LangSmith indexes, such as run names and tags, the suggestion list offers the most common values in the project.
 
 Each completed clause becomes a chip in the bar. Click a chip to edit it, or click its remove icon to delete it. Keep typing after a chip to add another clause.
@@ -65,6 +68,7 @@ Two controls outside the search bar also affect the results:
 * **The Threads, Traces, and Runs selection** sets what each row in the table represents, and it also determines which [scopes](#choose-what-a-filter-matches) a query can use.
 
 > [!NOTE]
+>
 > The search bar uses the syntax described on this page, which is not the structured query language that the SDK and REST API accept. Refer to [Trace query syntax](trace-query-syntax.md) for that language.
 
 ## Choose what a filter matches
@@ -80,9 +84,7 @@ Four scopes are available:
 
 The scope dropdown previews each option against a sample trace, so you can see which runs it covers before choosing:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-scope-selector-light.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=727cfc8a3084feb6bdaa6be4559d0661" alt="The scope dropdown open on the Threads selection, offering Any run, Root run, and Thread with a one-line description of each, beside a preview of a sample thread showing three agent turns with the LLM and tool runs nested inside the second turn" width="584" height="327" data-path="langsmith/images/filter-scope-selector-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-scope-selector-dark.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=9d2516ce487541cf9475d1a92e596bd3" alt="The scope dropdown open on the Threads selection, offering Any run, Root run, and Thread with a one-line description of each, beside a preview of a sample thread showing three agent turns with the LLM and tool runs nested inside the second turn" width="579" height="323" data-path="langsmith/images/filter-scope-selector-dark.png" />
+![The scope dropdown open on the Threads selection, offering Any run, Root run, and Thread with a one-line description of each, then AI search, marked Beta and described as Search in plain language. Beside the options is a preview of a sample thread showing three agent turns with the LLM and tool runs nested inside the second turn](https://mintcdn.com/langchain-5e9cc07a/MoWOdSpeRhP-SZId/langsmith/images/filter-scope-selector-light.png?fit=max\&auto=format\&n=MoWOdSpeRhP-SZId\&q=85\&s=90263b9d15737238bb49ef8cf986547f)
 
 The scopes offered, and the one selected by default, depend on the table selection:
 
@@ -92,11 +94,13 @@ The scopes offered, and the one selected by default, depend on the table selecti
 | **Traces** | Root run | Root run, Any run |
 | **Runs** | Single run | Single run, Root run, Any run |
 
+If AI search is available to your organization, the scope selector also offers **AI search**, which matches results by a plain-language description rather than by query syntax. Refer to [Search with AI](#search-with-ai).
+
 ### Combine scopes
 
-To filter on more than one scope at a time, click **Filter**. This adds a row with its own scope selector and search bar. Rows combine with `AND`, so a thread, trace, or run must satisfy every row to appear in the table.
+To filter on more than one scope at a time, click the  **Add filter scope** icon at the end of the last row. This adds a row with its own scope selector and search bar, labeled **AND**. Rows combine with `AND`, so a thread, trace, or run must satisfy every row to appear in the table.
 
-Each scope holds at most one row, so the **Threads** and **Runs** selections accept three rows and **Traces** accepts two. **Filter** is disabled once every available scope is in use. To remove a row, click **Remove filter** next to it.
+Each scope holds at most one row, so the **Threads** and **Runs** selections accept three filter rows and **Traces** accepts two. If AI search is available to your organization, you can also add one AI search row, which combines with the filter rows the same way. Refer to [Combine AI search with filters](#combine-ai-search-with-filters). **Add filter scope** is disabled once every available scope, including AI search, is in use. To remove a row, click **Remove filter** next to it.
 
 For example, in the **Threads** view, find threads longer than 20 turns that contain a failed tool call:
 
@@ -105,9 +109,7 @@ For example, in the **Threads** view, find threads longer than 20 turns that con
 | Thread | `turn_count:>20` |
 | Any run | `run_type:tool AND status:error` |
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-multiple-scopes-light.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=4861c686c90341e16ecac32e67abff68" alt="Two filter rows in the search bar. The first is scoped to 'in thread' with a turn_count greater than 20 clause, and the second is scoped to 'in any run' with run_type tool AND status error" width="826" height="132" data-path="langsmith/images/filter-multiple-scopes-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-multiple-scopes-dark.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=f3676e88ab1407bf8cdf59664b963c83" alt="Two filter rows in the search bar. The first is scoped to 'in thread' with a turn_count greater than 20 clause, and the second is scoped to 'in any run' with run_type tool AND status error" width="826" height="132" data-path="langsmith/images/filter-multiple-scopes-dark.png" />
+![Two filter rows in the search bar. The first is scoped to 'in thread' with a turn\_count greater than 20 clause. The second, labeled AND, is scoped to 'in any run' with run\_type tool AND status error, and ends with the Add AI search and Add filter scope icons. Below the bar, the Threads selection is active](https://mintcdn.com/langchain-5e9cc07a/MoWOdSpeRhP-SZId/langsmith/images/filter-multiple-scopes-light.png?fit=max\&auto=format\&n=MoWOdSpeRhP-SZId\&q=85\&s=9ba96eba5232495b7233fed5fbca4b55)
 
 ### Scopes a table selection cannot use
 
@@ -246,6 +248,7 @@ The **Thread** scope filters on attributes of the thread as a whole, so it suppo
 | `prompt_token_details`, `completion_token_details`, `prompt_cost_details`, `completion_cost_details` | Token and cost breakdowns across the thread. |
 
 > [!NOTE]
+>
 > Run fields such as `name`, `status`, and `input` are not available in the **Thread** scope. To filter threads by an attribute of the runs they contain, add a second filter row in the **Any run** scope. Refer to [Combine scopes](#combine-scopes).
 
 ### Match a JSON key
@@ -314,8 +317,6 @@ metadata.env:production AND -status:success
 input:~"refund" AND status:error
 ```
 
-<a id="example-filtering-for-tool-calls" />
-
 **Traces that called a specific tool.** Use the **Traces** selection with the **Any run** scope, so the clause is matched against every run in the trace rather than the entry run:
 
 ```text
@@ -334,9 +335,7 @@ The **Shortcuts** panel to the left of the table lists the most common values in
 
 Each group header shows how many of its values are active. Use the search box in the **Feedback** group to find a feedback key.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-shortcuts-panel-light.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=30bd1a16e36e4b87c5c1cebdf41e9944" alt="The Shortcuts panel to the left of the runs table, with Status, Run Name, Run Type, and Tag groups. The error value is checked, the Status group header reads '1 active', and the search bar above holds the matching status:error clause" width="499" height="732" data-path="langsmith/images/filter-shortcuts-panel-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-shortcuts-panel-dark.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=b29ac0a84e843dadd9931b414146356e" alt="The Shortcuts panel to the left of the runs table, with Status, Run Name, Run Type, and Tag groups. The error value is checked, the Status group header reads '1 active', and the search bar above holds the matching status:error clause" width="504" height="755" data-path="langsmith/images/filter-shortcuts-panel-dark.png" />
+![The Shortcuts panel to the left of the runs table, with Status, Run Name, Run Type, and Tag groups. The error value is checked, the Status group header reads '1 active', and the search bar above holds the matching status:error clause](https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-shortcuts-panel-light.png?fit=max\&auto=format\&n=ehnk1iZnpoz5HhfY\&q=85\&s=30bd1a16e36e4b87c5c1cebdf41e9944)
 
 To give the table more room, click **Hide shortcuts**, then **Show shortcuts** to bring the panel back. The **Stats** panel on the right collapses the same way, with **Hide stats** and **Show stats**.
 
@@ -366,13 +365,94 @@ Filtering inside an open trace highlights the runs that match, which is how you 
 
 Matching runs are highlighted in place, and the rest of the trace stays visible around them, so a match keeps the context that explains it. A filter applied in the **Any run** scope carries over automatically, so opening a thread or trace from the table highlights the runs that matched it.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-trace-highlighting-light.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=1638cfd18a0072c77491bb83a9afef53" alt="The Details view of a thread. The Turns pane on the left holds a filter reading input contains list, and the runs matching it are highlighted within the surrounding trace tree, which stays fully visible. The selected run is shown on the right" width="1033" height="811" data-path="langsmith/images/filter-trace-highlighting-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-trace-highlighting-dark.png?fit=max&auto=format&n=ehnk1iZnpoz5HhfY&q=85&s=e949b239bd4836d2ddb69b673bf07ec8" alt="The Details view of a thread. The Turns pane on the left holds a filter reading input contains list, and the runs matching it are highlighted within the surrounding trace tree, which stays fully visible. The selected run is shown on the right" width="1038" height="811" data-path="langsmith/images/filter-trace-highlighting-dark.png" />
+![The Details view of a thread. The Turns pane on the left holds a filter reading input contains list, and the runs matching it are highlighted within the surrounding trace tree, which stays fully visible. The selected run is shown on the right](https://mintcdn.com/langchain-5e9cc07a/ehnk1iZnpoz5HhfY/langsmith/images/filter-trace-highlighting-light.png?fit=max\&auto=format\&n=ehnk1iZnpoz5HhfY\&q=85\&s=1638cfd18a0072c77491bb83a9afef53)
 
 This search bar accepts the same fields and syntax as the **Single run** scope on the project page. It has no scope selector, because it always matches individual runs within the open trace. To remove the filter, click the clear icon in the filter box.
 
 The **Visibility** options behind the  icon above the run list, **Most relevant** and **Show All**, are disabled while a filter is applied.
+
+## Search with AI
+
+AI search finds threads, traces, and runs by what happens in their conversations, described in natural language. It answers questions that the [query syntax](#query-syntax) cannot express, because they depend on the meaning of the messages rather than on a field value. For example:
+
+* Traces where the agent did not complete the task.
+* Traces where the user seemed frustrated.
+* Traces where the agent referenced internal details about its implementation.
+* Traces about a particular topic.
+
+> [!NOTE]
+>
+> AI search is in [beta](release-stages.md) and available on all [LangSmith Cloud](cloud.md) SaaS instances. It works in the **Threads**, **Traces**, and **Runs** selections once an organization admin enables it. Refer to [Enable AI search](#enable-ai-search).
+
+To search with AI:
+
+1. Add an AI search row in one of these ways:
+
+   * Click the  **Add AI search** icon in a filter row.
+   * Select **AI search** at the top of the search bar's suggestion list.
+   * Open the [scope selector](#choose-what-a-filter-matches) and choose **AI search**.
+
+   If the filter row is empty, the AI search row replaces it. Otherwise, LangSmith adds the AI search row below it.
+2. Describe the results you want in plain language. While the field is empty, a tip below it offers examples such as `customer is frustrated`. Selecting an example fills the field without searching, so you can edit it first.
+3. Press `Enter`, or click the  **Search** button.
+
+Typing a new description does not clear the table, so the current results stay visible until you search again.
+
+AI search results include a **Confidence** column, which shows how strongly each thread, trace, or run matched the description as a percentage. A result without a score shows a dash.
+
+### Review why a result matched
+
+When you open a thread, trace, or run from AI search results, LangSmith opens it in the [Trajectory view](view-traces.md#trajectory-view) at the messages that matched the description, so you can see why it matched. A thread opens at the first trace that matched. Reviewing matches requires permission to view run inputs and outputs.
+
+A toolbar at the top of the view shows the description, the result's match confidence, and **Evidence N of M**. LangSmith highlights each matched message and labels it **Evidence N of M**. The count includes only the matches LangSmith can locate in the conversation. Matches it cannot locate, for example a message the Trajectory view does not display or text that repeats in the conversation, are not shown.
+
+Use the up and down arrows in the toolbar to move between matches, and the  icon to leave evidence mode.
+
+### Combine AI search with filters
+
+The AI search row combines with the other filter rows using `AND`, so a result must match the description and every [filter row](#combine-scopes). A search bar holds one AI search row at a time. The description can be up to 2,000 bytes.
+
+While an AI search row is in the search bar, changes to the other filter rows, the time range, and the table selection apply together when you search, not as you edit them. To return to filters that apply automatically, click **Remove AI search** on the row. Changing the AI search row to another scope clears its description, because a description is not filter syntax.
+
+### AI search limitations
+
+* **Saved views**: A filter that includes AI search cannot be saved as a [view](#save-a-filter). Remove the AI search row to save the remaining filters. Selecting a saved view removes the AI search row.
+* **Links**: The AI search description is not stored in the page URL, so a copied link does not include it.
+* **Recents**: Filters that include AI search do not appear under **Recents** in the search bar's suggestion list.
+* **Stats**: The **Stats** panel shows **Stats unavailable for AI search**, and the **Shortcuts** panel hides value counts. To remove the AI search row and restore stats, click **Clear AI filters** in the **Stats** panel.
+* **Rate limits**: AI search requests are rate limited per workspace.
+
+### What AI search matches
+
+AI search operates on the [trajectory](observability-concepts.md#trajectories): the ordered list of human, AI, and tool messages that LangSmith builds from a trace. It matches your description against each trajectory, then returns the threads, traces, or runs whose associated trajectory matched.
+
+Because AI search reads only the trajectory, it cannot match anything the trajectory does not contain, such as run status, run names, metadata, tags, or the structure of the trace. To filter on those, [write a query in the search bar](#build-a-query), for example `status:error` or `name:docs_agent`, rather than describing them in plain language.
+
+AI search reads the main agent's conversation. It does not read the content of subagent, middleware, or compaction messages, so it cannot match a description against what happened inside them.
+
+If AI search does not return a thread, trace, or run you expect, check the time range and the other filter rows, which apply alongside the description. If neither excludes it, LangSmith may not have parsed its trace into a trajectory correctly.
+
+### Enable AI search
+
+AI search is off until an organization admin enables it. It runs on LangChain-managed inference, so no model provider API key is required. Enabling it applies to every member of the organization.
+
+Enabling AI search confirms that you are authorized to allow your organization's trace data to be transferred to and processed in the United States, including by [LangChain's subprocessors](https://trust.langchain.com/subprocessors), and that you understand the hosting and data residency implications.
+
+> [!WARNING]
+>
+> Do not use AI search for Protected Health Information (PHI). AI search is not currently covered by any Business Associate Agreement (BAA) your organization has signed with LangChain.
+
+Enabling AI search from organization settings requires organization admin permissions. To enable it:
+
+1. Go to **Settings** > **AI search** in your organization settings.
+2. Turn on **Enable AI search**.
+
+To opt out, turn the toggle off.
+
+You can also enable AI search from the tracing page. Until it is enabled, the AI search row shows **Admin must opt in to enable AI search** in place of a search field. Click the notice to open the enable dialog:
+
+* **Organization admins**: Click **Enable AI search**. The AI search row then accepts a description.
+* **Other members**: Click **Ask an admin to enable AI search**. LangSmith emails the organization admins, and the dialog confirms that the request was submitted.
 
 ## Full-text search indexing
 
@@ -410,8 +490,6 @@ Metadata and key paths are indexed separately. Key-path filtering is not subject
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/filter-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/filter-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

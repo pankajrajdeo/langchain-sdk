@@ -28,7 +28,7 @@ LangSmith supports two types of evaluations that serve different purposes in you
 
 ### Offline evaluations
 
- Use offline evaluations for **pre-deployment testing**:
+&#x20;Use offline evaluations for **pre-deployment testing**:
 
 * **Benchmarking**: Compare multiple versions to find the best performer.
 * **Regression testing**: Ensure new versions don't degrade quality.
@@ -39,7 +39,7 @@ Offline evaluations target [*examples*](#examples) from [*datasets*](#datasets):
 
 ### Online evaluations
 
- Use online evaluations for **production monitoring**:
+&#x20;Use online evaluations for **production monitoring**:
 
 * **Real-time monitoring**: Track quality continuously on live traffic.
 * **Anomaly detection**: Flag unusual patterns or edge cases.
@@ -103,9 +103,7 @@ Offline evaluations run on datasets and examples. The presence of reference outp
 
 A dataset is a *collection of examples* used for evaluating an application. An example is a test input, reference output pair.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/VoZdM8AAAwg3DXcJ/langsmith/images/datasets-light.png?fit=max&auto=format&n=VoZdM8AAAwg3DXcJ&q=85&s=63d27de8050bedc78eb18ccc0d1cad35" alt="List of datasets on the Examples tab in the LangSmith UI." width="2858" height="1016" data-path="langsmith/images/datasets-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/VoZdM8AAAwg3DXcJ/langsmith/images/datasets-dark.png?fit=max&auto=format&n=VoZdM8AAAwg3DXcJ&q=85&s=e8d5d874df75cdf0471bcbfb1d29e12c" alt="List of datasets on the Examples tab in the LangSmith UI." width="2838" height="1228" data-path="langsmith/images/datasets-dark.png" />
+![List of datasets on the Examples tab in the LangSmith UI.](https://mintcdn.com/langchain-5e9cc07a/VoZdM8AAAwg3DXcJ/langsmith/images/datasets-light.png?fit=max\&auto=format\&n=VoZdM8AAAwg3DXcJ\&q=85\&s=63d27de8050bedc78eb18ccc0d1cad35)
 
 #### Examples
 
@@ -115,9 +113,7 @@ Each example consists of:
 * **Reference outputs** (optional): a dictionary of reference outputs. These do not get passed to your application, they are only used in evaluators.
 * **Metadata** (optional): a dictionary of additional information that can be used to create filtered views of a dataset.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/FQbj5E6QVw8CM9M2/langsmith/images/example-light.png?fit=max&auto=format&n=FQbj5E6QVw8CM9M2&q=85&s=f6d052b31a7f05ad79ed6e7911dfce32" alt="Example in the LangSmith UI." width="2860" height="1456" data-path="langsmith/images/example-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/FQbj5E6QVw8CM9M2/langsmith/images/example-dark.png?fit=max&auto=format&n=FQbj5E6QVw8CM9M2&q=85&s=aed71efcd061f31f2ee308ef56a44606" alt="Example in the LangSmith UI." width="2868" height="1280" data-path="langsmith/images/example-dark.png" />
+![Example in the LangSmith UI.](https://mintcdn.com/langchain-5e9cc07a/FQbj5E6QVw8CM9M2/langsmith/images/example-light.png?fit=max\&auto=format\&n=FQbj5E6QVw8CM9M2\&q=85\&s=f6d052b31a7f05ad79ed6e7911dfce32)
 
 Learn more about [managing datasets](manage-datasets.md).
 
@@ -125,7 +121,7 @@ Learn more about [managing datasets](manage-datasets.md).
 
 An *experiment* represents the results of evaluating a specific application version on a dataset. Each experiment captures outputs, evaluator scores, and execution traces for every example in the dataset.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/experiment-view.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=89c78822157136d0e28e9a110dbdbfd5" alt="Experiment view" width="1633" height="942" data-path="langsmith/images/experiment-view.png" />
+![Experiment view](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/experiment-view.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=89c78822157136d0e28e9a110dbdbfd5)
 
 Multiple experiments typically run on a given dataset to test different application configurations (e.g., different prompts or LLMs). LangSmith displays all experiments associated with a dataset and supports [comparing multiple experiments](compare-experiment-results.md) side-by-side.
 
@@ -160,7 +156,7 @@ Run evaluators using any of the following:
 
 * The [Evaluators](evaluators.md) page, to attach them to tracing projects, agent environments, or datasets
 * The [Playground](prompt-engineering-concepts.md#playground)
-* The LangSmith SDK ([Python](https://docs.smith.langchain.com/reference/python/reference) and [TypeScript](https://docs.smith.langchain.com/reference/js))
+* The LangSmith SDK ([Python](https://reference.langchain.com/python/langsmith) and [TypeScript](https://reference.langchain.com/javascript/langsmith))
 * [Rules](rules.md), to run them automatically on tracing projects, agent environments, or datasets
 
 ### Attaching an evaluator to a tracing project or dataset
@@ -230,7 +226,7 @@ Learn about [how to define an LLM-as-a-judge evaluator](llm-as-judge.md).
 
 #### Decision model
 
-*Decision model evaluators* use a decision model, such as SemIf or Jev, as the judge. Instead of a prompt and an output schema, you define typed questions: a probability that a statement is true, a choice from a fixed list, or a score along ordered levels. Each question's answer becomes its own piece of feedback.
+*Decision model evaluators* use a decision model, such as Jev, as the judge. Instead of a prompt and an output schema, you define typed questions: a probability that a statement is true, a choice from a fixed list, or a score along ordered levels. Each question's answer becomes its own piece of feedback.
 
 Learn about [how to define a decision model evaluator](decision-model-evaluator.md).
 
@@ -353,8 +349,6 @@ The following table summarizes the key differences between offline and online ev
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

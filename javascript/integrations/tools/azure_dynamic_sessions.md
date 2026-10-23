@@ -19,6 +19,7 @@ You can learn more about Azure Container Apps dynamic sessions and its code inte
 You'll first need to install the [`@langchain/azure-dynamic-sessions`](https://www.npmjs.com/package/@langchain/azure-dynamic-sessions) package:
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -115,8 +116,6 @@ console.log(result);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/azure_dynamic_sessions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/azure_dynamic_sessions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

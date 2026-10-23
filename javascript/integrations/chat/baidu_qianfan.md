@@ -15,6 +15,7 @@ tags: [docs, javascript, integrations, chat, baidu_qianfan]
 You'll first need to install the [`@langchain/baidu-qianfan`](https://www.npmjs.com/package/@langchain/baidu-qianfan) package:
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -132,8 +133,6 @@ console.log({ res });
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/baidu_qianfan.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/baidu_qianfan.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -46,7 +46,8 @@ flowchart LR
 
 A managed deep agent consists of a project folder that contains the business logic for its behavior:
 
-#### Model & configuration
+**Model & configuration**
+
 **agent.py**
 
 ```python
@@ -63,7 +64,8 @@ agent = define_deep_agent(
 )
 ```
 
-#### Instructions
+**Instructions**
+
 **instructions.md**
 
 ```markdown
@@ -72,7 +74,8 @@ agent = define_deep_agent(
 You are a helpful assistant.
 ```
 
-#### Skills
+**Skills**
+
 **skills/research/SKILL.md**
 
 ```markdown
@@ -90,7 +93,8 @@ Use this skill when a task needs more than a direct answer.
 3. Summarize findings before responding to the user.
 ```
 
-#### Tools
+**Tools**
+
 **tools/search.py**
 
 ```python
@@ -106,7 +110,8 @@ def internet_search(query: str) -> str:
     return f"Results for: {query}"
 ```
 
-#### Middleware
+**Middleware**
+
 **middleware/audit.py**
 
 ```python
@@ -128,7 +133,8 @@ async def log_tool_calls(
     return result
 ```
 
-#### MCP Connectors
+**MCP Connectors**
+
 **tools/mcp.py**
 
 ```python
@@ -186,22 +192,24 @@ Stay on Deep Agents when you run the agent yourself or need a [backend](../../de
 
 ## Next steps
 
-#### [Quickstart](managed-deep-agents-quickstart.md)
-Create and deploy your first Managed Deep Agent with the `mda` CLI.
+> **[Quickstart](managed-deep-agents-quickstart.md)**
+>
+> Create and deploy your first Managed Deep Agent with the `mda` CLI.
 
-#### [Tutorial](managed-deep-agents-tutorial.md)
-Add a custom search tool, durable memory, and a daily schedule.
+> **[Tutorial](managed-deep-agents-tutorial.md)**
+>
+> Add a custom search tool, durable memory, and a daily schedule.
 
-#### [Agent Server](../agent-server-overview.md)
-Explore the runtime that hosts Managed Deep Agents deployments.
+> **[Agent Server](../agent-server-overview.md)**
+>
+> Explore the runtime that hosts Managed Deep Agents deployments.
 
-#### [MCP endpoint](managed-deep-agents-mcp-endpoint.md)
-Call a deployed agent as a tool from Claude Code or another MCP client.
+> **[MCP endpoint](managed-deep-agents-mcp-endpoint.md)**
+>
+> Call a deployed agent as a tool from Claude Code or another MCP client.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

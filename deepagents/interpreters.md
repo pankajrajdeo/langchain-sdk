@@ -15,10 +15,12 @@ Interpreters give agents a programmable, **in-memory** workspace inside the agen
 Where [sandboxes](sandboxes.md) are a code-first way for acting on an environment (such as running commands, installing dependencies, and editing files), interpreters are a code-first way for composing tools, preserving state, and deciding what information should return to the model.
 
 > [!WARNING]
+>
 > Interpreters are in [**beta**](../versioning.md). APIs and lifecycle behavior may change between releases.
 
 > [!NOTE]
-> Interpreters require `langchain-quickjs>=0.2.0` and Python 3.11 or later.
+>
+> Interpreters require `langchain-quickjs>=0.3.0` and Python 3.11 or later.
 
 ## Why use interpreters?
 
@@ -26,17 +28,21 @@ Most agent work alternates between model reasoning and tool calls. A model can f
 
 Interpreters move that orchestration into code so the model reasons about *what* to do, not every intermediate step.
 
-#### [Programmatic tool calling (PTC)](#programmatic-tool-calling-ptc)
-Call selected tools from interpreter code, including loops, retries, branching, and parallel batches.
+> **[Programmatic tool calling (PTC)](#programmatic-tool-calling-ptc)**
+>
+> Call selected tools from interpreter code, including loops, retries, branching, and parallel batches.
 
-#### [Dynamic subagents](#dynamic-subagents)
-Dispatch subagents from code for fan-out, verification, and recursive workflows over large inputs.
+> **[Dynamic subagents](#dynamic-subagents)**
+>
+> Dispatch subagents from code for fan-out, verification, and recursive workflows over large inputs.
 
-#### [Stateful work](#how-interpreters-work)
-Keep intermediate values in runtime state without overloading the model context.
+> **[Stateful work](#how-interpreters-work)**
+>
+> Keep intermediate values in runtime state without overloading the model context.
 
-#### [Deterministic transforms](#how-interpreters-work)
-Sort, group, parse, validate, score, and aggregate structured data without another model turn.
+> **[Deterministic transforms](#how-interpreters-work)**
+>
+> Sort, group, parse, validate, score, and aggregate structured data without another model turn.
 
 ## Choose a pattern
 
@@ -302,6 +308,7 @@ results.join("\n\n");
 ```
 
 > [!WARNING]
+>
 > PTC calls currently execute through the interpreter bridge and do not go through the normal tool calling path. As a result, `interrupt_on` approval workflows are not enforced per PTC-invoked tool call.
 
 ## Dynamic subagents
@@ -347,6 +354,7 @@ With `mode="thread"`, a snapshot is a serialized copy of the interpreter's in-me
 4. The next turn resumes from that snapshot instead of an empty runtime.
 
 > [!NOTE]
+>
 > Snapshots retain serializable data only. Functions, classes, and other unserializable runtime objects become inaccessible artifacts after restore. Accessing one throws an error like `Value for 'fn' was not restored because it is not serializable (type: function).`
 
 Snapshots preserve interpreter memory, not outside-world effects. If interpreter code calls a tool through PTC, restoring a prior interpreter snapshot does not undo side effects from that tool call. It only restores the interpreter variables that recorded or processed the result.
@@ -585,11 +593,14 @@ Every tool you expose through PTC is an outside capability that interpreter code
 | Shell commands, package installs, tests, OS-level execution | No | Use a [sandbox backend](sandboxes.md) |
 
 > [!NOTE]
+>
 > **How code execution works**
 >
-> Interpreter code runs in an embedded QuickJS context, not a separate VM or process. In Python, this runtime is provided by [`quickjs-rs`](https://github.com/langchain-ai/quickjs-rs), which documents the same-process execution boundary in its [Security guide](https://github.com/langchain-ai/quickjs-rs#security).
+> Interpreter code runs in QuickJS compiled to WebAssembly, provided by [`quickjs-rs`](https://github.com/langchain-ai/quickjs-rs). The WebAssembly sandbox is the isolation boundary: JavaScript executes in the guest's linear memory and cannot read or write the host process's memory. Each LangGraph thread gets its own WebAssembly instance, so interpreter state on one thread cannot reach another.
 >
-> Treat interpreters as a capability-scoped execution layer, not a host-memory isolation boundary. For untrusted or semi-trusted code, run agents in isolated worker processes or containers and keep the PTC allowlist narrow.
+> The sandbox runs inside the host process on [wasmtime](https://wasmtime.dev/), so a wasmtime vulnerability is the remaining path out of the sandbox. Keep `wasmtime` updated. For hostile multi-tenant workloads, also run agents in isolated worker processes or containers. For details, see the `quickjs-rs` [Security guide](https://github.com/langchain-ai/quickjs-rs#security).
+>
+> The sandbox contains the engine, not the capabilities you give it. Interpreter code can call every tool bridged into it, so keep the PTC allowlist narrow.
 
 ## Configuration
 
@@ -597,7 +608,7 @@ Every tool you expose through PTC is an outside capability that interpreter code
 
 | Kwarg | Default | Purpose |
 | - | - | - |
-| `memory_limit` | `64 * 1024 * 1024` <br />(64 MB) | Cap QuickJS heap memory per thread. |
+| `memory_limit` | `64 * 1024 * 1024` (64 MB) | Cap QuickJS heap memory per thread. |
 | `timeout` | `5.0` | Timeout limit in seconds for each `eval` call. |
 | `tool_name` | `"eval"` | Name of the interpreter tool exposed to the model. |
 | `capture_console` | `True` | Capture `console.log`, `console.warn`, and `console.error` in the tool response. Set to `False` to discard console output. |
@@ -610,8 +621,6 @@ Every tool you expose through PTC is an outside capability that interpreter code
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/interpreters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/interpreters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

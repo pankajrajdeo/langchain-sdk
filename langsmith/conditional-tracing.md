@@ -19,14 +19,17 @@ Use conditional tracing when you need to:
 * **Support feature flags**: Enable tracing only when specific features or experimental code paths are active.
 
 > [!TIP]
+>
 > To reduce trace volume by logging only a percentage of all runs, refer to [Set a sampling rate for traces](sample-traces.md).
 
-The [`tracing_context`](https://reference.langchain.com/python/langsmith/run_helpers/tracing_context) context manager (Python) and [`tracingEnabled`](https://reference.langchain.com/javascript/classes/langsmith.run_trees.RunTree.html#tracingenabled) option (TypeScript) allow you to override global tracing settings at runtime, without restructuring your code or changing environment variables.
+The [`tracing_context`](https://reference.langchain.com/python/langsmith/run_helpers/tracing_context) context manager (Python) and [`tracingEnabled`](https://reference.langchain.com/javascript/langsmith/index/RunTree/tracingEnabled) option (TypeScript) allow you to override global tracing settings at runtime, without restructuring your code or changing environment variables.
 
 > [!NOTE]
+>
 > The following sections provide language-specific examples that you can adapt to your application logic and business requirements.
 
-#### Python
+**Python**
+
 ## How tracing context works
 
 When you use the [`tracing_context`](https://reference.langchain.com/python/langsmith/run_helpers/tracing_context) context manager, it overrides the global tracing configuration for code executed within its scope. This means you can keep automatic tracing enabled globally while selectively controlling tracing behavior for specific function calls.
@@ -227,6 +230,7 @@ def handle_request(tenant_id: str, user_input: str) -> str:
 You can use any subset of run fields in `updates` (for example, `{"inputs": {"redacted": True}}` to keep a marker, or `{"outputs": {}}` to redact only outputs). The same pattern works for routing different redaction policies to different destinations: each replica can specify its own `project_name`, `api_key`, and `updates`. See [Write traces to multiple destinations with replicas](trace-replicas.md) for the full replica reference.
 
 > [!NOTE]
+>
 > Always set `project_name` on the replica when using `updates` to redact inputs or outputs. If the replica's `project_name` matches the active session's project, the `updates` may be dropped and the unredacted inputs/outputs will be sent.
 
 ## Customize tracing in deployed agents
@@ -322,10 +326,11 @@ def process_request(client_id: str, data: str):
 process_request("client-a", "some data")
 ```
 
-#### TypeScript
+**TypeScript**
+
 ## How tracing enabled works
 
-In TypeScript, you control tracing per-function using the [`tracingEnabled`](https://reference.langchain.com/javascript/classes/langsmith.run_trees.RunTree.html#tracingenabled) parameter when calling [`traceable()`](https://reference.langchain.com/python/langsmith/run_helpers/traceable). This allows you to selectively enable or disable tracing at the function level.
+In TypeScript, you control tracing per-function using the [`tracingEnabled`](https://reference.langchain.com/javascript/langsmith/index/RunTree/tracingEnabled) parameter when calling [`traceable()`](https://reference.langchain.com/python/langsmith/run_helpers/traceable). This allows you to selectively enable or disable tracing at the function level.
 
 A two-level system where tracing is controlled per-function:
 
@@ -413,7 +418,7 @@ await handleRequest("client-a", "some input");  // Traced or not based on client
 
 ## Work with automatic tracing
 
-The [`tracingEnabled`](https://reference.langchain.com/javascript/classes/langsmith.run_trees.RunTree.html#tracingenabled) option works seamlessly with automatic tracing. You can keep `LANGSMITH_TRACING=true` set globally and use `tracingEnabled` to override settings for specific functions.
+The [`tracingEnabled`](https://reference.langchain.com/javascript/langsmith/index/RunTree/tracingEnabled) option works seamlessly with automatic tracing. You can keep `LANGSMITH_TRACING=true` set globally and use `tracingEnabled` to override settings for specific functions.
 
 ```typescript
 import { traceable } from "langsmith/traceable";
@@ -478,8 +483,6 @@ You can combine both approaches for fine-grained control.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/conditional-tracing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/conditional-tracing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

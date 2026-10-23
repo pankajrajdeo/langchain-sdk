@@ -13,7 +13,8 @@ tags: [docs, langsmith, managed-deep-agents-middleware]
 Middleware adds behavior around model calls, tool calls, and the agent lifecycle. Like [custom tools](python/managed-deep-agents-tools.md), MDA does not discover middleware automatically. Import it and pass it to the agent definition.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](release-stages.md)** and available on [LangSmith Cloud](cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](release-stages.md)** on [LangSmith Cloud](cloud.md).
 
 Put custom middleware under `middleware/`, import it into the agent entry, and pass it to the agent definition:
 
@@ -32,7 +33,8 @@ The managed runtime still owns `backend`, `store`, `checkpointer`, `memory`, `sk
 
 Use middleware to redact PII, enforce call limits, retry failures, fall back between models, select models dynamically, or log and inspect tool calls.
 
-### Use prebuilt middleware
+**1. Use prebuilt middleware**
+
 You can use LangChain [prebuilt middleware](../langchain/middleware/built-in.md) directly in the agent definition:
 
 **agent.py**
@@ -51,10 +53,12 @@ agent = define_deep_agent(
 )
 ```
 
-### Define custom middleware (Optional)
+**2. Define custom middleware (Optional)**
+
 For a more advanced option, define [custom middleware](../langchain/middleware/custom.md) in a local module.
 
 > [!NOTE]
+>
 > Middleware is a shared LangChain primitive. Managed Deep Agents always invoke the agent with `ainvoke` and `astream`, so custom middleware must use async hooks. Synchronous hooks remain available when you call [Deep Agents](../deepagents/overview.md) with `invoke` or `stream`.
 
 **middleware/audit.py**
@@ -102,6 +106,8 @@ Middleware can read per-run context through the normal LangChain runtime APIs. U
 
 For examples, see [Custom middleware](../langchain/middleware/custom.md).
 
+For the caller, channel, and sandbox fields that Managed Deep Agents adds, see [Runtime](python/managed-deep-agents-runtime.md).
+
 To read or write files in the thread's sandbox from a middleware hook, use `runtime.backend`. See [Read and write sandbox files from code](python/managed-deep-agents-sandboxes.md#read-and-write-sandbox-files-from-code).
 
 ## Deployment
@@ -120,8 +126,6 @@ For more information, see [Project structure](python/managed-deep-agents-project
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-middleware.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-middleware.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

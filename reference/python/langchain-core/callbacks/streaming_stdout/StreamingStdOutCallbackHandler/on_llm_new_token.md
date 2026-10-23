@@ -20,7 +20,7 @@ Run on new LLM token. Only available when streaming is enabled.
 on_llm_new_token(
     self,
     token: str | list[str | dict[str, Any]],
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> None
 ```
 
@@ -33,4 +33,4 @@ on_llm_new_token(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/callbacks/streaming_stdout.py#L49)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/callbacks/streaming_stdout.py#L49)

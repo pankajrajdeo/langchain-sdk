@@ -38,17 +38,14 @@ For block types, provider-specific requirements, and additional examples (PDF, a
 
 The harness `read_file` tool returns [standard content blocks](../langchain/messages.md#standard-content-blocks) for supported multimodal files instead of plain text. The agent can inspect images, documents, and media stored in its [filesystem](overview.md#virtual-filesystem-access) when the selected model supports the corresponding modality. Check the provider's documentation for your model's supported MIME types.
 
-<details>
-<summary>Supported multimodal file extensions</summary>
-
-| Type | Extensions |
-| - | - |
-| [Image](../langchain/messages.md#multimodal) | `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.heic`, `.heif` |
-| [Video](../langchain/messages.md#multimodal) | `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`, `.3gpp` |
-| [Audio](../langchain/messages.md#multimodal) | `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac` |
-| [File](../langchain/messages.md#multimodal) | `.pdf`, `.ppt`, `.pptx` |
-
-</details>
+> **Supported multimodal file extensions**
+>
+> | Type | Extensions |
+> | - | - |
+> | [Image](../langchain/messages.md#multimodal) | `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.heic`, `.heif` |
+> | [Video](../langchain/messages.md#multimodal) | `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`, `.3gpp` |
+> | [Audio](../langchain/messages.md#multimodal) | `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac` |
+> | [File](../langchain/messages.md#multimodal) | `.pdf`, `.ppt`, `.pptx` |
 
 ## Custom tool outputs
 
@@ -74,6 +71,7 @@ const captureScreenshot = tool(
 The return value is converted to a `ToolMessage` the model reads on the next turn. Access the normalized representation with `content_blocks` on the resulting message.
 
 > [!TIP]
+>
 > When a tool produces images or other large binary data, save the artifact to a [backend](backends.md) and return a concise text description plus a path or URL. This keeps message history smaller and works better with [context compression](context-engineering.md#context-compression).
 
 ## Context compression and multimodal content
@@ -123,8 +121,6 @@ See [Context compression](context-engineering.md#context-compression) for offloa
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/multimodal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/multimodal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

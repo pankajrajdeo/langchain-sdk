@@ -18,7 +18,8 @@ Enqueue is the default double texting (multi-tasking) strategy when creating run
 
 First, we will define a quick helper function for printing out JS and cURL model outputs (you can skip this if using Python):
 
-#### Javascript
+**Javascript**
+
 ```js
 function prettyPrint(m) {
   const padded = " " + m['type'] + " ";
@@ -32,7 +33,8 @@ function prettyPrint(m) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # PLACE THIS IN A FILE CALLED pretty_print.sh
 pretty_print() {
@@ -55,7 +57,8 @@ pretty_print() {
 
 Then, let's import our required packages and instantiate our client, assistant, and thread.
 
-#### Python
+**Python**
+
 ```python
 import asyncio
 
@@ -69,7 +72,8 @@ assistant_id = "agent"
 thread = await client.threads.create()
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -79,7 +83,8 @@ const assistantId = "agent";
 const thread = await client.threads.create();
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
   --url <DEPLOYMENT_URL>/threads \
@@ -91,7 +96,8 @@ curl --request POST \
 
 Now let's start two runs, with the second interrupting the first one with a multitask strategy of "enqueue":
 
-#### Python
+**Python**
+
 ```python
 first_run = await client.runs.create(
     thread["thread_id"],
@@ -106,7 +112,8 @@ second_run = await client.runs.create(
 )
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 const firstRun = await client.runs.create(
   thread["thread_id"],
@@ -122,7 +129,8 @@ const secondRun = await client.runs.create(
 )
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
 --url <DEPLOY<ENT_URL>>/threads/<THREAD_ID>/runs \
@@ -144,7 +152,8 @@ curl --request POST \
 
 Verify that the thread has data from both runs:
 
-#### Python
+**Python**
+
 ```python
 # wait until the second run completes
 await client.runs.join(thread["thread_id"], second_run["run_id"])
@@ -155,7 +164,8 @@ for m in convert_to_messages(state["values"]["messages"]):
     m.pretty_print()
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 await client.runs.join(thread["thread_id"], secondRun["run_id"]);
 
@@ -166,7 +176,8 @@ for (const m of state["values"]["messages"]) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 source pretty_print.sh && curl --request GET \
 --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/join && \
@@ -256,8 +267,6 @@ New York City is experiencing beautiful sunny weather with seasonably warm tempe
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/enqueue-concurrent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/enqueue-concurrent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

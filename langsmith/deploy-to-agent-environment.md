@@ -15,7 +15,8 @@ Deploying to an agent environment binds a [deployment](deployment.md) to one [ag
 Use it to keep a staging build and a production build of the same agent apart, so each one reports into its own environment.
 
 > [!NOTE]
-> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+>
+> Agent-based workspaces are available on [LangSmith Cloud](cloud.md). They are not available on [self-hosted](self-hosted.md) LangSmith. To check whether your workspace is agent-based, look at the control at the top left. In an agent-based workspace, it is a workspace switcher that names your workspace. In a [project-based](observability-concepts.md#tracing-projects) workspace, it shows the LangSmith logo.
 
 ## Prerequisites
 
@@ -32,7 +33,7 @@ An org-scoped API key also needs the workspace, and each CLI reads it from a dif
 Both CLIs take the same two flags:
 
 * **`--agent-id`**: The agent to deploy to. The value is the agent's identifier, not its display name. For which value is which, see [Identifiers and display names](agents.md#identifiers-and-display-names).
-* **`--agent-environment`**: The environment the deployment reports into, and one of `development`, `staging`, or `production`. A deployment cannot take `local`. That environment [does not display on deployments](agent-environments.md#select-an-environment) at all, which is the one way this set differs from the four values [agent addressing](log-traces-to-agent.md#addressing-variables) accepts.
+* **`--agent-environment`**: The environment the deployment reports into, and one of `development`, `staging`, or `production`. A deployment cannot take `local`. That environment [does not display on deployments](agent-environments.md#select-an-environment) at all, which is the one way this set differs from the four values the [agent variables](log-traces-to-agent.md#using-environment-variables) accept.
 
 The flags name the same pair that agent addressing names on the tracing side. The LangGraph CLI also reads the flags from the same two variables, `LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT`. The `mda` CLI does not read those variables, so pass the flags to it directly.
 
@@ -122,8 +123,6 @@ If the new deployment has no row, or the Overview has no **Deployments** section
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-to-agent-environment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-to-agent-environment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

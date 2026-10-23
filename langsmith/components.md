@@ -32,12 +32,10 @@ flowchart
 * [Python/JS SDK](reference.md): The Python/JS SDK provides a programmatic way to interact with deployed graphs and agents from your applications.
 * [RemoteGraph](use-remote-graph.md): Allows you to interact with a deployed graph as though it were running locally.
 * [Control Plane](control-plane.md): The UI and APIs for creating, updating, and managing Agent Server deployments.
-* [Data plane](data-plane.md): The runtime layer that executes your graphs, including Agent Servers, their backing services (PostgreSQL, Redis, etc.), and the listener that reconciles state from the control plane.
+* [Data Plane](data-plane.md): The runtime layer that executes your graphs, including Agent Servers, their backing services (PostgreSQL, Redis, etc.), and the listener that reconciles state from the control plane.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/components.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/components.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

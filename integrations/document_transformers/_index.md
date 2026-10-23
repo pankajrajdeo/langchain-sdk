@@ -15,4 +15,4 @@ tags: [index, integrations, document_transformers]
 - [Google cloud document AI integration](google_docai.md) - Integrate with the Google cloud document AI document transformer using LangChain Python.
 - [Google translate integration](google_translate.md) - Integrate with the Google translate document transformer using LangChain Python.
 - [Localai reranker integration](localai_rerank.md) - Integrate with the Localai reranker document transformer using LangChain Python.
-- [VoyageAI reranker integration](voyageai-reranker.md) - Integrate with the VoyageAI reranker document transformer using LangChain Python.
+- [VoyageAI by MongoDB reranker integration](voyageai-reranker.md) - Integrate with the VoyageAI by MongoDB reranker document transformer using LangChain Python.

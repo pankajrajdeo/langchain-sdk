@@ -16,8 +16,6 @@ structure the model is providing. This pattern shows you how to parse and render
 markdown in real time as it streams from the agent, across all major frontend
 frameworks.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/frontend/markdown-messages).
-
 ## How markdown rendering works
 
 The rendering pipeline has three steps:
@@ -36,6 +34,7 @@ The markdown pattern uses a simple chat agent with no special configuration.
 Wire up [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) with your agent URL and assistant ID.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../../langchain/frontend/overview.md#type-inference) or [JavaScript](overview.md#type-inference) backends.
 
 **React**
@@ -154,6 +153,7 @@ Each framework has a natural choice for markdown rendering:
 | Angular | `marked` + `dompurify` | Sanitized HTML via `[innerHTML]` | Same as Vue/Svelte |
 
 > [!TIP]
+>
 > React's `react-markdown` converts markdown directly to React elements, so it
 > doesn't need HTML sanitization. There's no `dangerouslySetInnerHTML` involved.
 > For Vue, Svelte, and Angular, always sanitize the parsed HTML with `dompurify`
@@ -277,6 +277,7 @@ and other XSS vectors while preserving safe markdown output like headings,
 lists, code blocks, tables, and links.
 
 > [!NOTE]
+>
 > React's `react-markdown` does not need `dompurify` because it produces React
 > elements directly, no raw HTML injection is involved.
 
@@ -298,6 +299,7 @@ For very long responses (> 50 KB), consider these optimizations:
   buffer (advanced, typically not needed for chat UIs)
 
 > [!NOTE]
+>
 > For most chat applications, the simple approach of re-parsing the full message
 > on each token is sufficient. Only optimize if you observe janky scrolling or
 > dropped frames with very long messages.
@@ -322,8 +324,6 @@ For very long responses (> 50 KB), consider these optimizations:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/markdown-messages.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/markdown-messages.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

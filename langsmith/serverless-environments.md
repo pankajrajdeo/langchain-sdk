@@ -9,14 +9,15 @@ tags: [docs, langsmith, serverless-environments]
 # Trace JS functions in serverless environments
 
 > [!NOTE]
-> This section is relevant for those using the LangSmith JS SDK version 0.2.0 and higher. If you are tracing using LangChain.js or LangGraph.js in serverless environments, see [this guide](https://js.langchain.com/docs/how_to/callbacks_serverless).
+>
+> This section is relevant for those using the LangSmith JS SDK version 0.2.0 and higher. If you are tracing using LangChain.js or LangGraph.js in serverless environments, see [this guide](trace-with-langchain.md#ensure-all-traces-are-submitted-before-exiting).
 
 When tracing JavaScript functions, LangSmith will trace runs in the background by default to avoid adding latency. In serverless environments where the execution context may be terminated abruptly, it's important to ensure that all tracing data is properly flushed before the function completes.
 
 To make sure this occurs, you can either:
 
 * Set an environment variable named `LANGSMITH_TRACING_BACKGROUND` to `"false"`. This will cause your traced functions to wait for tracing to complete before returning.
-  * Note that this is named differently from the [environment variable](https://js.langchain.com/docs/how_to/callbacks_serverless) in LangChain.js because LangSmith can be used without LangChain.
+  * Note that this is named differently from the [environment variable](trace-with-langchain.md#ensure-all-traces-are-submitted-before-exiting) in LangChain.js because LangSmith can be used without LangChain.
 * Pass a custom client into your traced runs and `await` the `client.awaitPendingTraceBatches();` method.
 
 Here's an example of using `awaitPendingTraceBatches` alongside the [`traceable`](annotate-code.md) method:
@@ -70,8 +71,6 @@ Note that this will prevent runs from appearing in the LangSmith UI until you ca
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/serverless-environments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/serverless-environments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

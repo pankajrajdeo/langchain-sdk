@@ -11,6 +11,7 @@ tags: [docs, langsmith, tuned-evaluators]
 > Use specialized LangChain-managed judges to attach quality feedback to traces.
 
 > [!NOTE]
+>
 > LangChain Tuned Evaluators are in **[beta](release-stages.md)**. Their interface and behavior may change before general availability.
 
 LangChain Tuned Evaluators attach feedback to your traces. Each evaluator uses a specialized judge trained for a specific evaluation task. LangChain writes, tests, versions, and maintains the prompt and judge model so that you can focus on using the feedback to find and fix problems in your agent.
@@ -27,16 +28,20 @@ Use Perceived Error feedback to:
 
 ## Understand how LangChain Tuned Evaluators work
 
-### Add an evaluator
+**1. Add an evaluator**
+
 Add a LangChain Tuned Evaluator to a compatible tracing project.
 
-### Identify an eligible thread
+**2. Identify an eligible thread**
+
 LangSmith identifies a thread that meets the evaluator's requirements and the project's filters and sampling configuration.
 
-### Evaluate the thread
+**3. Evaluate the thread**
+
 The specialized LangChain-managed judge evaluates the eligible thread.
 
-### Attach feedback
+**4. Attach feedback**
+
 LangSmith attaches the result and its explanation to the thread as feedback.
 
 ## Before you begin
@@ -87,7 +92,7 @@ Disabling the feature pauses attached LangChain Tuned Evaluators. LangSmith pres
 
 Availability and pricing vary by LangChain Tuned Evaluator. LangSmith charges LSUs only for an evaluation run that attaches feedback. Skipped and failed evaluation attempts that do not attach feedback are not billed.
 
-Like other online evaluators, LangChain Tuned Evaluators upgrade evaluated traces to extended retention. This can increase trace storage charges. For current rates, see [LangSmith pricing](pricing-plans.md). For details about retention upgrades and trace charges, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
+Like other online evaluators, LangChain Tuned Evaluators upgrade evaluated traces to extended retention. This can increase trace storage charges. For current rates, see [LangSmith pricing](https://docs.langchain.com/langsmith/pricing-plans.md). For details about retention upgrades and trace charges, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
 
 ## Troubleshoot LangChain Tuned Evaluators
 
@@ -123,8 +128,6 @@ Organization settings can take a few seconds to propagate. If LangSmith reports 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/tuned-evaluators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/tuned-evaluators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

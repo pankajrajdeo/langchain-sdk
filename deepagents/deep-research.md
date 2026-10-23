@@ -41,14 +41,17 @@ API keys for:
 
 ## Setup
 
-### Create project directory
+**1. Create project directory**
+
 ```bash
 mkdir deep-research-agent
 cd deep-research-agent
 ```
 
-### Install dependencies
-#### Claude
+**2. Install dependencies**
+
+**Claude**
+
 **pip**
 
 ```bash
@@ -63,7 +66,8 @@ uv add deepagents tavily-python httpx markdownify langchain-anthropic langchain-
 uv sync
 ```
 
-#### Gemini
+**Gemini**
+
 **pip**
 
 ```bash
@@ -78,15 +82,18 @@ uv add deepagents tavily-python httpx markdownify langchain-google-genai langcha
 uv sync
 ```
 
-### Set API keys
-#### Claude
+**3. Set API keys**
+
+**Claude**
+
 ```bash
 export ANTHROPIC_API_KEY="your_anthropic_api_key"
 export TAVILY_API_KEY="your_tavily_api_key"
 export LANGSMITH_API_KEY="your_langsmith_api_key"   # Optional
 ```
 
-#### Gemini
+**Gemini**
+
 ```bash
 export GOOGLE_API_KEY="your_google_api_key"
 export TAVILY_API_KEY="your_tavily_api_key"
@@ -97,7 +104,8 @@ export LANGSMITH_API_KEY="your_langsmith_api_key"   # Optional
 
 Create `agent.py` in your project directory:
 
-### Add tools
+**1. Add tools**
+
 Add the custom search tool. The `tavily_search` tool uses Tavily for URL discovery, then fetches full webpage content so the agent can analyze complete sources instead of summaries.
 
 ```python
@@ -160,7 +168,8 @@ def tavily_search(
     )
 ```
 
-### Add prompts
+**2. Add prompts**
+
 Add the orchestrator workflow and sub-agent prompt templates to `agent.py`:
 
 ```python
@@ -315,7 +324,8 @@ Your role is to coordinate research by delegating tasks from your TODO list to s
 - Bias towards focused research over exhaustive exploration"""
 ```
 
-### Enable task planning
+**3. Enable task planning**
+
 [Task planning](overview.md#task-planning) is opt-in. The research workflow uses `write_todos` to break questions into focused tasks, so pass [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) when you create the agent.
 
 ```python
@@ -324,10 +334,12 @@ from langchain.agents.middleware import TodoListMiddleware
 
 You include this middleware in the next step when you create the agent.
 
-### Create the agent
+**4. Create the agent**
+
 Add the model initialization and agent creation to `agent.py`. Choose your provider. Include [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) so the planning tool is available:
 
-#### Claude
+**Claude**
+
 ```python
 from datetime import datetime
 
@@ -369,7 +381,8 @@ agent = create_deep_agent(
 )
 ```
 
-#### Gemini
+**Gemini**
+
 ```python
 from datetime import datetime
 
@@ -417,7 +430,8 @@ You can run the agent synchronously, meaning it will wait for the full result an
 
 Add the code from the respective tab at the bottom of `agent.py`:
 
-#### Run synchronously
+**Run synchronously**
+
 ```python
 from langchain.messages import HumanMessage
 
@@ -437,7 +451,8 @@ if __name__ == "__main__":
             print(msg.content)
 ```
 
-#### Stream updates
+**Stream updates**
+
 ```python
 from langchain.messages import HumanMessage
 
@@ -481,8 +496,6 @@ For more information on the concepts in this tutorial, check out the following r
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/deep-research.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/deep-research.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

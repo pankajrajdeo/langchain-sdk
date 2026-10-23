@@ -169,6 +169,14 @@ components:
             LangSmith tracing session (project) name for this run, when tracing
             is enabled at creation time.
           nullable: true
+        cancel_reason:
+          type: string
+          title: Cancel Reason
+          description: >-
+            Why the run was cancelled, if it was: for example an explicit cancel
+            request, a client disconnecting, or a newer run superseding it.
+            Server-generated.
+          nullable: true
       type: object
       required:
         - run_id

@@ -18,7 +18,7 @@ This guide will help you getting started with `ChatFireworks` [chat models](../.
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/fireworks) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/fireworks.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatFireworks`](https://reference.langchain.com/javascript/langchain-fireworks/ChatFireworks) | [`@langchain/fireworks`](https://www.npmjs.com/package/@langchain/fireworks) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/fireworks?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/fireworks?style=flat-square\&label=%20&) |
 
@@ -140,8 +140,6 @@ For detailed documentation of all `ChatFireworks` features and configurations he
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -48,8 +48,6 @@ To initialize a `HanaDB` vector store, you need a database connection and an emb
 
 * ### Using external embeddings
 
-> **Interactive content:** [View this section in the original documentation](sap_hanavector.md).
-
 ```python
 # | output: false
 # | echo: false
@@ -932,6 +930,7 @@ Some other text
 Load the sample document "state\_of\_the\_union.txt" and create chunks from it.
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -1097,8 +1096,6 @@ Let each of us here tonight in this Chamber send an unmistakable signal to Ukrai
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/sap_hanavector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/sap_hanavector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

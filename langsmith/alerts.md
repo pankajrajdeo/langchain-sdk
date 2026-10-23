@@ -9,6 +9,7 @@ tags: [docs, langsmith, alerts]
 # Alerts in LangSmith
 
 > [!NOTE]
+>
 > **Self-hosted version requirement**: Access to alerts requires Helm chart version **0.10.3** or later.
 
 Effective observability in LLM applications requires proactive detection of failures, performance degradations, and regressions. LangSmith's alerts feature helps identify critical issues such as:
@@ -21,16 +22,19 @@ Effective observability in LLM applications requires proactive detection of fail
 Alerts in LangSmith are scoped to one [trace container](observability-concepts.md#trace-containers), requiring separate configuration for each one you monitor. Which container that is depends on how your workspace is organized.
 
 > [!NOTE]
-> **Agent-based workspaces ([beta](release-stages.md)).** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](observability-concepts.md#tracing-projects).
+>
+> **Agent-based workspaces.** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](observability-concepts.md#tracing-projects).
 
 An alert is scoped to one [environment](agent-environments.md#select-an-environment) of one [agent](agents.md). Alerting on production behavior therefore does not require a filter that excludes test traffic, because the environment already excludes it.
 
 > [!NOTE]
-> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](observability-concepts.md#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based, which is in [beta](release-stages.md). Skip this section and read [Agents](agents.md).
+>
+> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](observability-concepts.md#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based. Skip this section and read [Agents](agents.md).
 
 An alert is scoped to one tracing project.
 
 > [!TIP]
+>
 > Alerts can [route](#step-4-configure-notification-channel) to Slack, PagerDuty, Dynatrace, or any HTTP endpoint via webhook. The **Webhook** tab includes [example recipes](#example-recipes) for Microsoft Teams, email, Slack on self-hosted deployments, and Google Chat (which requires middleware).
 
 Follow these steps to configure an alert.
@@ -53,6 +57,8 @@ LangSmith provides threshold-based alerting on the following metrics:
 
 Additionally, for **Errors** and **Latency**, you can use the filter builder to stack conditions on fields such as **Status**, **Run Type**, **Tag**, and **Error**. For example, you can scope an error alert to runs where **Status** is `error`, **Run Type** is `llm`, **Tag** is `support_agent`, and **Error** matches `RateLimitExceeded`.
 
+Alert filters combine conditions with AND only. For the filter syntax that alert rules accept through the API, refer to [Alert filters](trace-query-syntax.md#alert-filters).
+
 ## Step 3: Define alert conditions
 
 Alert conditions consist of several components:
@@ -63,20 +69,22 @@ Alert conditions consist of several components:
 * **Aggregation Window**: Time period for metric calculation (choose between 5 or 15 minutes).
 * **Feedback Key** (Feedback Score alerts only): Specific feedback metric to monitor.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/define-conditions.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=d92406d84dec4f1b827b82a989df30b9" alt="Alert Condition Configuration" width="597" height="112" data-path="langsmith/images/define-conditions.png" />
+![Alert Condition Configuration](https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/define-conditions.png?fit=max\&auto=format\&n=aKRoUGXX6ygp4DlC\&q=85\&s=d92406d84dec4f1b827b82a989df30b9)
 
 **Example:** The configuration in the screenshot would generate an alert when more than 5% of runs within the past 5 minutes result in errors.
 
 You can preview alert behavior over a historical time window to understand how many datapoints, and which ones, would have triggered an alert at a chosen threshold (indicated in red). For example, setting an average latency threshold of 60 seconds for a project lets you visualize potential alerts, as shown in the following screenshot.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/alert-preview.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=d7f26bce1113c50bec8f5853c6448415" alt="Alert Metrics" width="863" height="545" data-path="langsmith/images/alert-preview.png" />
+![Alert Metrics](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/alert-preview.png?fit=max\&auto=format\&n=E8FdemkcQxROovD9\&q=85\&s=d7f26bce1113c50bec8f5853c6448415)
 
 ## Step 4: Configure notification channel
 
-#### Slack
+**Slack**
+
 Send alert notifications directly to a Slack channel using LangSmith's native Slack integration.
 
 > [!NOTE]
+>
 > The native Slack notification type is available on LangSmith Cloud and on self-hosted deployments with a [configured Slack app](self-host-slack.md). If your self-hosted deployment does not support that connection, use the [webhook Slack recipe](#example-recipes) in the **Webhook** tab.
 
 **Prerequisites**
@@ -106,7 +114,8 @@ When an alert triggers, LangSmith posts a structured Slack message that includes
 * **Detail line**: The metric attribute, triggered value, comparison operator, configured threshold, aggregation method, and time window — for example: `Total Cost: $12.50 ≥ $5.00 · avg · 30 min`.
 * **Action buttons**: **View Alert** (links to the alert preview in LangSmith) and **View Runs** (links to the filtered runs that triggered the alert).
 
-#### PagerDuty
+**PagerDuty**
+
 Configure PagerDuty as a notification channel using PagerDuty's [Events API v2](https://developer.pagerduty.com/docs/events-api-v2-overview). This integration allows critical LLM application issues to trigger PagerDuty incidents, enabling rapid response through your established incident management workflow.
 
 **Prerequisites**
@@ -137,14 +146,15 @@ After creating the service, retrieve the Integration Key:
 3. Find the "Events API V2" integration
 4. Copy the **Integration Key** (a 32-character alphanumeric string)
 
-       <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pager-duty.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=c46b2b6d7d262bacd653c9c144bec21a" alt="PagerDuty Integration Key Location" width="1396" height="729" data-path="langsmith/images/pager-duty.png" />
+   ![PagerDuty Integration Key Location](https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pager-duty.png?fit=max\&auto=format\&n=H9jA2WRyA-MV4-H0\&q=85\&s=c46b2b6d7d262bacd653c9c144bec21a)
 
 ### 3. Configure LangSmith alert with PagerDuty
 
 > [!NOTE]
+>
 > To receive the same alert again within an hour of it being triggered, you must resolve the active incident created by the alert in PagerDuty.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pagerduty-setup.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=f277b7801c893695d72cebce7356c37c" alt="PagerDuty Setup" width="590" height="413" data-path="langsmith/images/pagerduty-setup.png" />
+![PagerDuty Setup](https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pagerduty-setup.png?fit=max\&auto=format\&n=H9jA2WRyA-MV4-H0\&q=85\&s=f277b7801c893695d72cebce7356c37c)
 
 1. In the notification section of your alert set-up in LangSmith, select **PagerDuty**
 2. Click the key icon to save the Integration Key as a Workspace secret or select an existing Workspace secret. As a best practice, we recommend saving the Integration Key as a Workspace Secret rather than adding it directly. This will allow you to reuse the same key across alerts for a workspace.
@@ -168,7 +178,8 @@ If incidents aren't being created in PagerDuty:
 * [PagerDuty Events API v2 Documentation](https://developer.pagerduty.com/docs/events-api-v2/overview/)
 * [PagerDuty Integration Guide](https://support.pagerduty.com/docs/services-and-integrations)
 
-#### Dynatrace
+**Dynatrace**
+
 Configure Dynatrace as a notification channel using Dynatrace's [Events API v2](https://docs.dynatrace.com/docs/dynatrace-api/environment-api/events-v2/post-event). This integration sends LangSmith alert events to your Dynatrace environment, enabling correlation with your broader infrastructure monitoring.
 
 **Prerequisites**
@@ -223,7 +234,8 @@ If events aren't appearing in Dynatrace:
 * [Dynatrace Events API v2 Documentation](https://docs.dynatrace.com/docs/dynatrace-api/environment-api/events-v2/post-event)
 * [Dynatrace Access Tokens](https://docs.dynatrace.com/docs/manage/access-control/access-tokens)
 
-#### Webhook
+**Webhook**
+
 Webhooks enable integration with custom services and third-party platforms by sending HTTP POST requests when alert conditions are triggered. Use webhooks to forward alert data to ticketing systems, chat applications, or custom monitoring solutions.
 
 **Prerequisites**
@@ -278,6 +290,7 @@ In the **Notification Settings** section, complete the webhook configuration wit
     * `timestamp`: The timestamp that triggered the alert.
 
 > [!NOTE]
+>
 > LangSmith does not perform template substitution on the request body. The auto-populated fields above are merged into the outgoing JSON as top-level keys, alongside the body you configure. Placeholder syntax like `{alert_rule_name}` is sent verbatim to the receiving service. It only resolves to a real value if the receiver itself can extract fields from the incoming JSON (for example, a Power Automate Workflow, an AWS Lambda, or a custom HTTP handler).
 
 ### 3. Test the webhook
@@ -295,6 +308,7 @@ If webhook notifications aren't being delivered:
 * Verify your custom payload template is valid JSON format
 
 > [!WARNING]
+>
 > **Send Test Alert does not validate the downstream response.** The UI reports **your configuration is working correctly and the test notification was delivered** even if the receiving endpoint returned an error (for example, a 400 or 422 rejection). Always verify receipt on the receiver side, check your endpoint's logs or the target platform's message history, rather than relying solely on the LangSmith success message.
 
 ### Security considerations
@@ -306,442 +320,439 @@ If webhook notifications aren't being delivered:
 
 ### Example recipes
 
-<details>
-<summary>Configure Slack notifications via webhook</summary>
-
-Here is an example for configuring LangSmith alerts to send notifications to Slack channels using the [`chat.postMessage`](https://api.slack.com/methods/chat.postMessage) API.
-
-**Prerequisites**
-
-* Access to a Slack workspace.
-* A LangSmith tracing project, or an agent environment, to set up alerts.
-* Permissions to create Slack applications.
-
-**Step 1: Create a Slack app**
-
-1. Visit the [Slack API Applications page](https://api.slack.com/apps).
-2. Click **Create New App**.
-3. Select **From scratch**.
-4. Provide an **App Name** (e.g., "LangSmith Alerts").
-5. Select the workspace where you want to install the app.
-6. Click **Create App**.
-
-**Step 2: Configure bot permissions**
-
-1. In the left sidebar of your Slack app configuration, click **OAuth & Permissions**.
-2. Scroll down to **Bot Token Scopes** under **Scopes** and click **Add an OAuth Scope**.
-3. Add the following scopes:
-   * `chat:write` (Send messages as the app).
-   * `chat:write.public` (Send messages to channels the app isn't in).
-   * `channels:read` (View basic channel information).
-
-**Step 3: Install the app to your workspace**
-
-1. Scroll up to the top of the **OAuth & Permissions** page.
-2. Click **Install to Workspace**.
-3. Review the permissions and click **Allow**.
-4. Copy the **Bot User OAuth Token** that appears (begins with `xoxb-`).
-
-**Step 4: Add the bot to a Slack channel**
-
-Add the bot to the specific channel you want to receive alerts in. You can add a bot to a Slack channel by mentioning it in the message field (e.g., `@botname`).
-
-You also need the channel ID to configure the webhook alert in LangSmith. You can find the channel ID by opening channel details > About.
-
-**Step 5: Configure the webhook alert in LangSmith**
-
-1. In LangSmith, navigate to your tracing project, or to your agent environment.
-2. Select **Alerts > Create Alert**.
-3. Define your alert metrics and conditions.
-4. In the notification section, select **Webhook**.
-5. Configure the webhook with the following settings:
-
-**Webhook URL**
-
+> **Configure Slack notifications via webhook**
+>
+> Here is an example for configuring LangSmith alerts to send notifications to Slack channels using the [`chat.postMessage`](https://api.slack.com/methods/chat.postMessage) API.
+>
+> **Prerequisites**
+>
+> * Access to a Slack workspace.
+> * A LangSmith tracing project, or an agent environment, to set up alerts.
+> * Permissions to create Slack applications.
+>
+> **Step 1: Create a Slack app**
+>
+> 1. Visit the [Slack API Applications page](https://api.slack.com/apps).
+> 2. Click **Create New App**.
+> 3. Select **From scratch**.
+> 4. Provide an **App Name** (e.g., "LangSmith Alerts").
+> 5. Select the workspace where you want to install the app.
+> 6. Click **Create App**.
+>
+> **Step 2: Configure bot permissions**
+>
+> 1. In the left sidebar of your Slack app configuration, click **OAuth & Permissions**.
+> 2. Scroll down to **Bot Token Scopes** under **Scopes** and click **Add an OAuth Scope**.
+> 3. Add the following scopes:
+>    * `chat:write` (Send messages as the app).
+>    * `chat:write.public` (Send messages to channels the app isn't in).
+>    * `channels:read` (View basic channel information).
+>
+> **Step 3: Install the app to your workspace**
+>
+> 1. Scroll up to the top of the **OAuth & Permissions** page.
+> 2. Click **Install to Workspace**.
+> 3. Review the permissions and click **Allow**.
+> 4. Copy the **Bot User OAuth Token** that appears (begins with `xoxb-`).
+>
+> **Step 4: Add the bot to a Slack channel**
+>
+> Add the bot to the specific channel you want to receive alerts in. You can add a bot to a Slack channel by mentioning it in the message field (e.g., `@botname`).
+>
+> You also need the channel ID to configure the webhook alert in LangSmith. You can find the channel ID by opening channel details > About.
+>
+> **Step 5: Configure the webhook alert in LangSmith**
+>
+> 1. In LangSmith, navigate to your tracing project, or to your agent environment.
+> 2. Select **Alerts > Create Alert**.
+> 3. Define your alert metrics and conditions.
+> 4. In the notification section, select **Webhook**.
+> 5. Configure the webhook with the following settings:
+>
+> **Webhook URL**
+>
 ```json
-https://slack.com/api/chat.postMessage
+> https://slack.com/api/chat.postMessage
 ```
-
-**Headers**
-Replace `xoxb-your-token-here` with your Bot's User OAuth Token
-
+>
+> **Headers**
+> \[!NOTE] Replace `xoxb-your-token-here` with your Bot's User OAuth Token
+>
 ```json
-{
-  "Content-Type": "application/json",
-  "Authorization": "Bearer xoxb-your-token-here"
-}
+> {
+>   "Content-Type": "application/json",
+>   "Authorization": "Bearer xoxb-your-token-here"
+> }
 ```
-
-**Request Body Template**
-It is required to fill in the `{channel_id}` from the value found in Step 4. <br /><br />The remaining fields: `alert_name`, `project_name` and `project_url` optionally add additional context to the alert message. You can find your `project_url` in the browser's URL bar. Copy the portion up to but not including any query parameters.
-
+>
+> **Request Body Template**
+> \[!NOTE] It is required to fill in the `{channel_id}` from the value found in Step 4. \
+> \
+> The remaining fields: `alert_name`, `project_name` and `project_url` optionally add additional context to the alert message. You can find your `project_url` in the browser's URL bar. Copy the portion up to but not including any query parameters.
+>
 ```json
-{
-  "channel": "{channel_id}",
-  "text": "{alert_name} triggered for {project_name}",
-  "blocks": [
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "🚨{alert_name} has been triggered"
-      }
-    },
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "Please check the following link for more information:"
-      }
-    },
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "<{project-url}|View in LangSmith>"
-      }
-    }
-  ]
-}
+> {
+>   "channel": "{channel_id}",
+>   "text": "{alert_name} triggered for {project_name}",
+>   "blocks": [
+>     {
+>       "type": "section",
+>       "text": {
+>         "type": "mrkdwn",
+>         "text": "🚨{alert_name} has been triggered"
+>       }
+>     },
+>     {
+>       "type": "section",
+>       "text": {
+>         "type": "mrkdwn",
+>         "text": "Please check the following link for more information:"
+>       }
+>     },
+>     {
+>       "type": "section",
+>       "text": {
+>         "type": "mrkdwn",
+>         "text": "<{project-url}|View in LangSmith>"
+>       }
+>     }
+>   ]
+> }
 ```
+>
+> 6. Click **Save** to activate the webhook configuration.
+>
+> **Step 6: Test the integration**
+>
+> 1. In the LangSmith alert configuration, click **Test Alert**.
+> 2. Check your specified Slack channel for the test notification.
+> 3. Verify that the message contains the expected alert information.
+>
+> **(Optional) Step 7: Link to the alert preview in the request body**
+>
+> After creating an alert, you can optionally link to its preview in the webhook's request body.
+>
+> ![Alert Preview Pane](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/alert-preview-pane.png?fit=max\&auto=format\&n=E8FdemkcQxROovD9\&q=85\&s=286ebb8f90bafbdcacf9a0602aaf749c)
+>
+> To configure this:
+>
+> 1. Save your alert.
+> 2. Find your saved alert in the alerts table and click it.
+> 3. Copy the displayed URL.
+> 4. Click "Edit Alert".
+> 5. Replace the existing project URL with the copied alert preview URL.
 
-6. Click **Save** to activate the webhook configuration.
-
-**Step 6: Test the integration**
-
-1. In the LangSmith alert configuration, click **Test Alert**.
-2. Check your specified Slack channel for the test notification.
-3. Verify that the message contains the expected alert information.
-
-**(Optional) Step 7: Link to the alert preview in the request body**
-
-After creating an alert, you can optionally link to its preview in the webhook's request body.
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/alert-preview-pane.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=286ebb8f90bafbdcacf9a0602aaf749c" alt="Alert Preview Pane" width="832" height="773" data-path="langsmith/images/alert-preview-pane.png" />
-
-To configure this:
-
-1. Save your alert.
-2. Find your saved alert in the alerts table and click it.
-3. Copy the displayed URL.
-4. Click "Edit Alert".
-5. Replace the existing project URL with the copied alert preview URL.
-
-</details>
-
-<details>
-<summary>Configure Microsoft Teams notifications via webhook</summary>
-
-Here is an example for configuring LangSmith alerts to send notifications to a Microsoft Teams channel using the [Workflows app](https://support.microsoft.com/en-us/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498) (Power Automate). This approach is recommended because it extracts fields from the incoming JSON within the flow, so the auto-populated LangSmith alert fields render correctly in the Teams message.
-
-> [!NOTE]
-> Microsoft's legacy Office 365 Incoming Webhook connectors are being retired. Use the Workflows app for new integrations.
-
-**Prerequisites**
-
-* Access to a Microsoft Teams workspace with permissions to add Workflows.
-* A LangSmith tracing project, or an agent environment, to set up alerts.
-
-**Step 1: Create a Workflow in Teams**
-
-1. In Microsoft Teams, navigate to the channel where you want to receive alerts.
-2. Click the **...** (More options) menu next to the channel name.
-3. Select **Workflows**.
-4. Search for and select the **Post to a channel when a webhook request is received** template.
-5. Sign in to confirm the connections, then click **Next**.
-6. Confirm the team and channel where alerts should be posted, then click **Add workflow**.
-7. Copy the generated **HTTP POST URL**—use this in LangSmith.
-
-**Step 2: Customize the message in Power Automate (optional)**
-
-The default workflow posts the raw JSON body as a card. To format alert details, edit the flow in Power Automate:
-
-1. Open the [Power Automate portal](https://make.powerautomate.com) and edit the workflow you created.
-2. Click the **Post card in a chat or channel** action.
-3. In the **Adaptive Card** field, reference incoming fields using `triggerOutputs()?['body/alert_rule_name']`, `triggerOutputs()?['body/project_name']`, `triggerOutputs()?['body/triggered_metric_value']`, `triggerOutputs()?['body/triggered_threshold']`, `triggerOutputs()?['body/timestamp']`, and `triggerOutputs()?['body/alert_rule_url']`.
-4. Save the flow.
-
-**Step 3: Configure the webhook alert in LangSmith**
-
-1. In LangSmith, navigate to your tracing project, or to your agent environment.
-2. Select **Alerts > Create Alert**.
-3. Define your alert metrics and conditions.
-4. In the notification section, select **Webhook**.
-5. Configure the webhook with the following settings:
-
-**Webhook URL**
-
-Paste the HTTP POST URL from your Teams Workflow:
-
+> **Configure Microsoft Teams notifications via webhook**
+>
+> Here is an example for configuring LangSmith alerts to send notifications to a Microsoft Teams channel using the [Workflows app](https://support.microsoft.com/en-us/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498) (Power Automate). This approach is recommended because it extracts fields from the incoming JSON within the flow, so the auto-populated LangSmith alert fields render correctly in the Teams message.
+>
+> > [!NOTE]
+> >
+> > Microsoft's legacy Office 365 Incoming Webhook connectors are being retired. Use the Workflows app for new integrations.
+>
+> **Prerequisites**
+>
+> * Access to a Microsoft Teams workspace with permissions to add Workflows.
+> * A LangSmith tracing project, or an agent environment, to set up alerts.
+>
+> **Step 1: Create a Workflow in Teams**
+>
+> 1. In Microsoft Teams, navigate to the channel where you want to receive alerts.
+> 2. Click the **...** (More options) menu next to the channel name.
+> 3. Select **Workflows**.
+> 4. Search for and select the **Post to a channel when a webhook request is received** template.
+> 5. Sign in to confirm the connections, then click **Next**.
+> 6. Confirm the team and channel where alerts should be posted, then click **Add workflow**.
+> 7. Copy the generated **HTTP POST URL**—use this in LangSmith.
+>
+> **Step 2: Customize the message in Power Automate (optional)**
+>
+> The default workflow posts the raw JSON body as a card. To format alert details, edit the flow in Power Automate:
+>
+> 1. Open the [Power Automate portal](https://make.powerautomate.com) and edit the workflow you created.
+> 2. Click the **Post card in a chat or channel** action.
+> 3. In the **Adaptive Card** field, reference incoming fields using `triggerOutputs()?['body/alert_rule_name']`, `triggerOutputs()?['body/project_name']`, `triggerOutputs()?['body/triggered_metric_value']`, `triggerOutputs()?['body/triggered_threshold']`, `triggerOutputs()?['body/timestamp']`, and `triggerOutputs()?['body/alert_rule_url']`.
+> 4. Save the flow.
+>
+> **Step 3: Configure the webhook alert in LangSmith**
+>
+> 1. In LangSmith, navigate to your tracing project, or to your agent environment.
+> 2. Select **Alerts > Create Alert**.
+> 3. Define your alert metrics and conditions.
+> 4. In the notification section, select **Webhook**.
+> 5. Configure the webhook with the following settings:
+>
+> **Webhook URL**
+>
+> Paste the HTTP POST URL from your Teams Workflow:
+>
 ```
-https://prod-XX.westus.logic.azure.com:443/workflows/.../triggers/manual/paths/invoke?...
+> https://prod-XX.westus.logic.azure.com:443/workflows/.../triggers/manual/paths/invoke?...
 ```
-
-**Headers**
-
+>
+> **Headers**
+>
 ```json
-{
-  "Content-Type": "application/json"
-}
+> {
+>   "Content-Type": "application/json"
+> }
 ```
-
-**Request Body Template**
-
-LangSmith automatically merges the auto-populated alert fields (`alert_rule_name`, `project_name`, `triggered_metric_value`, `triggered_threshold`, `timestamp`, `alert_rule_url`, and others) into the request body as top-level JSON keys. Power Automate reads these fields directly from the incoming payload, so an empty body is sufficient:
-
+>
+> **Request Body Template**
+>
+> LangSmith automatically merges the auto-populated alert fields (`alert_rule_name`, `project_name`, `triggered_metric_value`, `triggered_threshold`, `timestamp`, `alert_rule_url`, and others) into the request body as top-level JSON keys. Power Automate reads these fields directly from the incoming payload, so an empty body is sufficient:
+>
 ```json
-{}
+> {}
 ```
+>
+> 6. Click **Save** to activate the webhook configuration.
+>
+> **Step 4: Test the integration**
+>
+> 1. In the LangSmith alert configuration, click **Send Test Alert**.
+> 2. Check your specified Teams channel for the test notification.
+> 3. Verify that the card contains the expected alert information.
+>
+> **Reference implementation**
+>
+> For a working example that translates LangSmith webhook payloads (threshold alerts, run rules, and generic events) into formatted Teams Adaptive Cards, see the [langsmith-teams-webhook](https://github.com/langchain-samples/langsmith-teams-webhook) sample repo. The sample runs as a small Python service in front of a Teams Workflow URL, which avoids customizing the Power Automate flow itself.
 
-6. Click **Save** to activate the webhook configuration.
-
-**Step 4: Test the integration**
-
-1. In the LangSmith alert configuration, click **Send Test Alert**.
-2. Check your specified Teams channel for the test notification.
-3. Verify that the card contains the expected alert information.
-
-**Reference implementation**
-
-For a working example that translates LangSmith webhook payloads (threshold alerts, run rules, and generic events) into formatted Teams Adaptive Cards, see the [langsmith-teams-webhook](https://github.com/langchain-samples/langsmith-teams-webhook) sample repo. The sample runs as a small Python service in front of a Teams Workflow URL, which avoids customizing the Power Automate flow itself.
-
-</details>
-
-<details>
-<summary>Configure email notifications via webhook</summary>
-
-Here is an example for configuring LangSmith alerts to send email notifications using [SendGrid's Mail Send API](https://docs.sendgrid.com/api-reference/mail-send/mail-send). You can use any transactional email provider that exposes an HTTP API (e.g., Mailgun, Amazon SES, Postmark).
-
-**Prerequisites**
-
-* A SendGrid account with a verified sender identity.
-* A SendGrid API key with **Mail Send** permissions.
-* A LangSmith tracing project, or an agent environment, to set up alerts.
-
-**Step 1: Create a SendGrid API key**
-
-1. Log in to your [SendGrid dashboard](https://app.sendgrid.com).
-2. Navigate to **Settings > API Keys**.
-3. Click **Create API Key**.
-4. Choose **Restricted Access** and enable **Mail Send > Full Access**.
-5. Click **Create & View**, copy the key, and store it securely.
-
-**Step 2: Verify your sender email**
-
-1. In SendGrid, navigate to **Settings > Sender Authentication**.
-2. Complete either **Domain Authentication** (recommended) or **Single Sender Verification** for the address you want to send from.
-
-**Step 3: Configure the webhook alert in LangSmith**
-
-1. In LangSmith, navigate to your tracing project, or to your agent environment.
-2. Select **Alerts > Create Alert**.
-3. Define your alert metrics and conditions.
-4. In the notification section, select **Webhook**.
-5. Configure the webhook with the following settings:
-
-**Webhook URL**
-
+> **Configure email notifications via webhook**
+>
+> Here is an example for configuring LangSmith alerts to send email notifications using [SendGrid's Mail Send API](https://docs.sendgrid.com/api-reference/mail-send/mail-send). You can use any transactional email provider that exposes an HTTP API (e.g., Mailgun, Amazon SES, Postmark).
+>
+> **Prerequisites**
+>
+> * A SendGrid account with a verified sender identity.
+> * A SendGrid API key with **Mail Send** permissions.
+> * A LangSmith tracing project, or an agent environment, to set up alerts.
+>
+> **Step 1: Create a SendGrid API key**
+>
+> 1. Log in to your [SendGrid dashboard](https://app.sendgrid.com).
+> 2. Navigate to **Settings > API Keys**.
+> 3. Click **Create API Key**.
+> 4. Choose **Restricted Access** and enable **Mail Send > Full Access**.
+> 5. Click **Create & View**, copy the key, and store it securely.
+>
+> **Step 2: Verify your sender email**
+>
+> 1. In SendGrid, navigate to **Settings > Sender Authentication**.
+> 2. Complete either **Domain Authentication** (recommended) or **Single Sender Verification** for the address you want to send from.
+>
+> **Step 3: Configure the webhook alert in LangSmith**
+>
+> 1. In LangSmith, navigate to your tracing project, or to your agent environment.
+> 2. Select **Alerts > Create Alert**.
+> 3. Define your alert metrics and conditions.
+> 4. In the notification section, select **Webhook**.
+> 5. Configure the webhook with the following settings:
+>
+> **Webhook URL**
+>
 ```
-https://api.sendgrid.com/v3/mail/send
+> https://api.sendgrid.com/v3/mail/send
 ```
-
-**Headers**
-
-Replace `SG.your-api-key-here` with your SendGrid API key.
-
+>
+> **Headers**
+>
+> > [!NOTE]
+> >
+> > Replace `SG.your-api-key-here` with your SendGrid API key.
+>
 ```json
-{
-  "Content-Type": "application/json",
-  "Authorization": "Bearer SG.your-api-key-here"
-}
+> {
+>   "Content-Type": "application/json",
+>   "Authorization": "Bearer SG.your-api-key-here"
+> }
 ```
-
-**Request Body Template**
-
-> [!NOTE]
-> Replace `alerts@your-company.com` with your verified sender address and `oncall@your-company.com` with the recipient address. SendGrid does not extract fields from arbitrary top-level JSON keys, so this example uses a fixed subject and body. To include alert-specific values in the email, route the LangSmith webhook through a middleware (such as a Power Automate flow, AWS Lambda, or Zapier webhook) that reads the incoming payload and renders the SendGrid request.
-
+>
+> **Request Body Template**
+>
+> > [!NOTE]
+> >
+> > Replace `alerts@your-company.com` with your verified sender address and `oncall@your-company.com` with the recipient address. SendGrid does not extract fields from arbitrary top-level JSON keys, so this example uses a fixed subject and body. To include alert-specific values in the email, route the LangSmith webhook through a middleware (such as a Power Automate flow, AWS Lambda, or Zapier webhook) that reads the incoming payload and renders the SendGrid request.
+>
 ```json
-{
-  "personalizations": [
-    {
-      "to": [
-        {
-          "email": "oncall@your-company.com"
-        }
-      ],
-      "subject": "LangSmith alert triggered"
-    }
-  ],
-  "from": {
-    "email": "alerts@your-company.com",
-    "name": "LangSmith Alerts"
-  },
-  "content": [
-    {
-      "type": "text/plain",
-      "value": "A LangSmith alert was triggered. Open your LangSmith workspace to view the alert details, including the project, metric value, threshold, and timestamp."
-    }
-  ]
-}
+> {
+>   "personalizations": [
+>     {
+>       "to": [
+>         {
+>           "email": "oncall@your-company.com"
+>         }
+>       ],
+>       "subject": "LangSmith alert triggered"
+>     }
+>   ],
+>   "from": {
+>     "email": "alerts@your-company.com",
+>     "name": "LangSmith Alerts"
+>   },
+>   "content": [
+>     {
+>       "type": "text/plain",
+>       "value": "A LangSmith alert was triggered. Open your LangSmith workspace to view the alert details, including the project, metric value, threshold, and timestamp."
+>     }
+>   ]
+> }
 ```
+>
+> 6. Click **Save** to activate the webhook configuration.
+>
+> **Step 4: Test the integration**
+>
+> 1. In the LangSmith alert configuration, click **Send Test Alert**.
+> 2. Check the recipient inbox for the test notification.
+> 3. Verify the email contains the expected alert information.
+>
+> **Using other email providers**
+>
+> The same pattern works with other transactional email APIs that accept static authentication headers. Change the **Webhook URL** and **Headers** to match your provider:
+>
+> | Provider | Webhook URL | Auth header format |
+> | - | - | - |
+> | Mailgun | `https://api.mailgun.net/v3/{your-domain}/messages` | `Authorization: Basic <base64(api:<key>)>` |
+> | Postmark | `https://api.postmarkapp.com/email` | `X-Postmark-Server-Token: <token>` |
+>
+> Adjust the **Request Body Template** to match each provider's expected payload format. Amazon SES is not directly compatible because the SES API requires per-request AWS SigV4 signing, which cannot be expressed as a static header. To use SES, route through a middleware (for example, a Lambda function with an HTTP trigger).
 
-6. Click **Save** to activate the webhook configuration.
-
-**Step 4: Test the integration**
-
-1. In the LangSmith alert configuration, click **Send Test Alert**.
-2. Check the recipient inbox for the test notification.
-3. Verify the email contains the expected alert information.
-
-**Using other email providers**
-
-The same pattern works with other transactional email APIs that accept static authentication headers. Change the **Webhook URL** and **Headers** to match your provider:
-
-| Provider | Webhook URL | Auth header format |
-| - | - | - |
-| Mailgun | `https://api.mailgun.net/v3/{your-domain}/messages` | `Authorization: Basic <base64(api:<key>)>` |
-| Postmark | `https://api.postmarkapp.com/email` | `X-Postmark-Server-Token: <token>` |
-
-Adjust the **Request Body Template** to match each provider's expected payload format. Amazon SES is not directly compatible because the SES API requires per-request AWS SigV4 signing, which cannot be expressed as a static header. To use SES, route through a middleware (for example, a Lambda function with an HTTP trigger).
-
-</details>
-
-<details>
-<summary>Configure Google Chat notifications via webhook (requires middleware)</summary>
-
-Google Chat's incoming webhook API (`spaces.messages.create`) only accepts the `text` field at the top level. Because LangSmith merges all 12 alert metadata keys into the request body as top-level fields, Google Chat rejects every request with a 400 error:
-
+> **Configure Google Chat notifications via webhook (requires middleware)**
+>
+> Google Chat's incoming webhook API (`spaces.messages.create`) only accepts the `text` field at the top level. Because LangSmith merges all 12 alert metadata keys into the request body as top-level fields, Google Chat rejects every request with a 400 error:
+>
 ```
-Invalid JSON payload received. Unknown name "project_name" at 'message': Cannot find field.
+> Invalid JSON payload received. Unknown name "project_name" at 'message': Cannot find field.
 ```
-
-There is no Request Body Template that avoids this, even a minimal body such as `{"text": "hello", "project_name": "x"}` will fail. **A translation layer (middleware) is required**, similar to the Amazon SES note in the [email recipe](#configure-email-notifications-via-webhook).
-
-**Option A: Cloud Run or Cloud Functions middleware (recommended)**
-
-This approach uses a small HTTP handler that receives the LangSmith webhook, extracts the relevant fields, and forwards a clean `{"text": "..."}` payload to a Google Chat space webhook URL.
-
-**Prerequisites**
-
-* A Google Chat space with an incoming webhook configured. In Google Chat, open the space, then go to **Apps & integrations** > **Add webhooks**, create a webhook, and copy the URL.
-* A Google Cloud project with Cloud Run or Cloud Functions enabled, or equivalent hosting.
-
-**Step 1: Deploy the handler**
-
-Deploy the following Python function as a Cloud Run service or Cloud Function:
-
+>
+> There is no Request Body Template that avoids this, even a minimal body such as `{"text": "hello", "project_name": "x"}` will fail. **A translation layer (middleware) is required**, similar to the Amazon SES note in the [email recipe](#configure-email-notifications-via-webhook).
+>
+> **Option A: Cloud Run or Cloud Functions middleware (recommended)**
+>
+> This approach uses a small HTTP handler that receives the LangSmith webhook, extracts the relevant fields, and forwards a clean `{"text": "..."}` payload to a Google Chat space webhook URL.
+>
+> **Prerequisites**
+>
+> * A Google Chat space with an incoming webhook configured. In Google Chat, open the space, then go to **Apps & integrations** > **Add webhooks**, create a webhook, and copy the URL.
+> * A Google Cloud project with Cloud Run or Cloud Functions enabled, or equivalent hosting.
+>
+> **Step 1: Deploy the handler**
+>
+> Deploy the following Python function as a Cloud Run service or Cloud Function:
+>
 ```python
-import json
-import os
-import re
-import urllib.request
-from urllib.parse import urlparse
-
-ALLOWED_LINK_HOSTS = {"smith.langchain.com"}
-
-def build_text(payload):
-    def safe(v):
-        # Strip angle brackets to prevent <url|label> link injection
-        return re.sub(r"[<>]", "", str(v if v is not None else ""))
-
-    parsed = urlparse(str(payload.get("runs_url") or ""))
-    trusted = parsed.scheme == "https" and parsed.hostname in ALLOWED_LINK_HOSTS
-    return (
-        f"*{safe(payload.get('alert_rule_name'))}* triggered for "
-        f"`{safe(payload.get('project_name'))}`\n"
-        f"{safe(payload.get('alert_rule_attribute'))}: "
-        f"{safe(payload.get('triggered_metric_value'))} "
-        f"(threshold {safe(payload.get('triggered_threshold'))})"
-        + (f"\n<{parsed.geturl()}|View runs>" if trusted else "")
-    )
-
-def handler(request):
-    if request.headers.get("X-Webhook-Secret") != os.environ["LANGSMITH_SHARED_SECRET"]:
-        return ("forbidden", 403)
-    payload = request.get_json(silent=True) or {}
-    urllib.request.urlopen(
-        urllib.request.Request(
-            os.environ["GCHAT_WEBHOOK_URL"],
-            data=json.dumps({"text": build_text(payload)}).encode(),
-            headers={"Content-Type": "application/json"},
-            method="POST",
-        ),
-        timeout=10,
-    )
-    return ("ok", 200)
+> import json
+> import os
+> import re
+> import urllib.request
+> from urllib.parse import urlparse
+>
+> ALLOWED_LINK_HOSTS = {"smith.langchain.com"}
+>
+> def build_text(payload):
+>     def safe(v):
+>         # Strip angle brackets to prevent <url|label> link injection
+>         return re.sub(r"[<>]", "", str(v if v is not None else ""))
+>
+>     parsed = urlparse(str(payload.get("runs_url") or ""))
+>     trusted = parsed.scheme == "https" and parsed.hostname in ALLOWED_LINK_HOSTS
+>     return (
+>         f"*{safe(payload.get('alert_rule_name'))}* triggered for "
+>         f"`{safe(payload.get('project_name'))}`\n"
+>         f"{safe(payload.get('alert_rule_attribute'))}: "
+>         f"{safe(payload.get('triggered_metric_value'))} "
+>         f"(threshold {safe(payload.get('triggered_threshold'))})"
+>         + (f"\n<{parsed.geturl()}|View runs>" if trusted else "")
+>     )
+>
+> def handler(request):
+>     if request.headers.get("X-Webhook-Secret") != os.environ["LANGSMITH_SHARED_SECRET"]:
+>         return ("forbidden", 403)
+>     payload = request.get_json(silent=True) or {}
+>     urllib.request.urlopen(
+>         urllib.request.Request(
+>             os.environ["GCHAT_WEBHOOK_URL"],
+>             data=json.dumps({"text": build_text(payload)}).encode(),
+>             headers={"Content-Type": "application/json"},
+>             method="POST",
+>         ),
+>         timeout=10,
+>     )
+>     return ("ok", 200)
 ```
-
-Set the following environment variables for the deployed function:
-
-* `GCHAT_WEBHOOK_URL`: The Google Chat space webhook URL.
-* `LANGSMITH_SHARED_SECRET`: A secret string you choose (used to authenticate incoming requests from LangSmith).
-
-**Step 2: Configure the webhook alert in LangSmith**
-
-Point the LangSmith webhook at your deployed handler's URL.
-
-**Webhook URL**
-
+>
+> Set the following environment variables for the deployed function:
+>
+> * `GCHAT_WEBHOOK_URL`: The Google Chat space webhook URL.
+> * `LANGSMITH_SHARED_SECRET`: A secret string you choose (used to authenticate incoming requests from LangSmith).
+>
+> **Step 2: Configure the webhook alert in LangSmith**
+>
+> Point the LangSmith webhook at your deployed handler's URL.
+>
+> **Webhook URL**
+>
 ```
-https://<your-cloud-run-service-url>/
+> https://<your-cloud-run-service-url>/
 ```
-
-**Headers**
-
+>
+> **Headers**
+>
 ```json
-{
-  "Content-Type": "application/json",
-  "X-Webhook-Secret": "<your-shared-secret>"
-}
+> {
+>   "Content-Type": "application/json",
+>   "X-Webhook-Secret": "<your-shared-secret>"
+> }
 ```
-
-**Request Body Template**
-
+>
+> **Request Body Template**
+>
 ```json
-{}
+> {}
 ```
-
-The metadata fields (`alert_rule_name`, `project_name`, `runs_url`, etc.) are merged into the body by LangSmith regardless of what you put here, so an empty body is sufficient.
-
-> [!NOTE]
-> Do not strip `*` or `_` from alert field values in your handler. These characters are also used in Google Chat's basic text formatting, but they appear in LangSmith identifiers (such as `run_count`). Stripping them will corrupt field names in the message.
-
-> [!NOTE]
-> Google Chat enforces a write rate limit of **1 message per second per space**, shared across all webhooks writing to that space. If you have multiple LangSmith alerts routing to the same space and they fire simultaneously, some messages may be dropped.
-
-**Option B: Google Apps Script (no infrastructure required)**
-
-Google Apps Script can serve as lightweight middleware without deploying any cloud infrastructure.
-
-Create a new Apps Script project at [script.google.com](https://script.google.com), paste the following, and deploy it as a web app (execute as yourself, access to anyone):
-
+>
+> The metadata fields (`alert_rule_name`, `project_name`, `runs_url`, etc.) are merged into the body by LangSmith regardless of what you put here, so an empty body is sufficient.
+>
+> > [!NOTE]
+> >
+> > Do not strip `*` or `_` from alert field values in your handler. These characters are also used in Google Chat's basic text formatting, but they appear in LangSmith identifiers (such as `run_count`). Stripping them will corrupt field names in the message.
+>
+> > [!NOTE]
+> >
+> > Google Chat enforces a write rate limit of **1 message per second per space**, shared across all webhooks writing to that space. If you have multiple LangSmith alerts routing to the same space and they fire simultaneously, some messages may be dropped.
+>
+> **Option B: Google Apps Script (no infrastructure required)**
+>
+> Google Apps Script can serve as lightweight middleware without deploying any cloud infrastructure.
+>
+> Create a new Apps Script project at [script.google.com](https://script.google.com), paste the following, and deploy it as a web app (execute as yourself, access to anyone):
+>
 ```javascript
-function doPost(e) {
-  var payload = JSON.parse(e.postData.contents);
-  var secret = e.parameter.secret; // shared secret passed as query param
-  if (secret !== PropertiesService.getScriptProperties().getProperty("LANGSMITH_SHARED_SECRET")) {
-    return ContentService.createTextOutput("forbidden").setMimeType(ContentService.MimeType.TEXT);
-  }
-  var text =
-    "*" + (payload.alert_rule_name || "") + "* triggered for `" + (payload.project_name || "") + "`\n" +
-    (payload.alert_rule_attribute || "") + ": " + (payload.triggered_metric_value || "") +
-    " (threshold " + (payload.triggered_threshold || "") + ")";
-  UrlFetchApp.fetch(PropertiesService.getScriptProperties().getProperty("GCHAT_WEBHOOK_URL"), {
-    method: "post",
-    contentType: "application/json",
-    payload: JSON.stringify({ text: text }),
-  });
-  return ContentService.createTextOutput("ok").setMimeType(ContentService.MimeType.TEXT);
-}
+> function doPost(e) {
+>   var payload = JSON.parse(e.postData.contents);
+>   var secret = e.parameter.secret; // shared secret passed as query param
+>   if (secret !== PropertiesService.getScriptProperties().getProperty("LANGSMITH_SHARED_SECRET")) {
+>     return ContentService.createTextOutput("forbidden").setMimeType(ContentService.MimeType.TEXT);
+>   }
+>   var text =
+>     "*" + (payload.alert_rule_name || "") + "* triggered for `" + (payload.project_name || "") + "`\n" +
+>     (payload.alert_rule_attribute || "") + ": " + (payload.triggered_metric_value || "") +
+>     " (threshold " + (payload.triggered_threshold || "") + ")";
+>   UrlFetchApp.fetch(PropertiesService.getScriptProperties().getProperty("GCHAT_WEBHOOK_URL"), {
+>     method: "post",
+>     contentType: "application/json",
+>     payload: JSON.stringify({ text: text }),
+>   });
+>   return ContentService.createTextOutput("ok").setMimeType(ContentService.MimeType.TEXT);
+> }
 ```
-
-Set `GCHAT_WEBHOOK_URL` and `LANGSMITH_SHARED_SECRET` in **Project Settings > Script Properties**.
-
-> [!WARNING]
-> Apps Script web apps cannot read custom HTTP request headers, so the shared secret must be passed as a **query string parameter** (`?secret=...`) rather than a header. Include it in the LangSmith webhook URL rather than the Headers field.
-
-</details>
+>
+> Set `GCHAT_WEBHOOK_URL` and `LANGSMITH_SHARED_SECRET` in **Project Settings > Script Properties**.
+>
+> > [!WARNING]
+> >
+> > Apps Script web apps cannot read custom HTTP request headers, so the shared secret must be passed as a **query string parameter** (`?secret=...`) rather than a header. Include it in the LangSmith webhook URL rather than the Headers field.
 
 ### Additional resources
 
@@ -761,8 +772,6 @@ Set `GCHAT_WEBHOOK_URL` and `LANGSMITH_SHARED_SECRET` in **Project Settings > Sc
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/alerts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/alerts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

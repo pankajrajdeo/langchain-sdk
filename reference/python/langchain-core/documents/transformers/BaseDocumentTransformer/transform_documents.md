@@ -20,7 +20,7 @@ Transform a list of documents.
 transform_documents(
     self,
     documents: Sequence[Document],
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> Sequence[Document]
 ```
 
@@ -38,4 +38,4 @@ A sequence of transformed `Document` objects.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/documents/transformers.py#L53)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/documents/transformers.py#L53)

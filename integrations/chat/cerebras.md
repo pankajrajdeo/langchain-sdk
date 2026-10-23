@@ -30,7 +30,7 @@ For more information about Cerebras Cloud, visit [cloud.cerebras.ai](https://clo
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/cerebras) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/chat/cerebras.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatCerebras`](https://reference.langchain.com/python/langchain-cerebras/chat_models/ChatCerebras) | [`langchain-cerebras`](https://reference.langchain.com/python/langchain-cerebras) | beta | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-cerebras?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-cerebras?style=flat-square\&label=%20) |
 
@@ -66,7 +66,7 @@ if "CEREBRAS_API_KEY" not in os.environ:
 Enter your Cerebras API key:  ········
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -219,8 +219,6 @@ For detailed documentation of all `ChatCerebras` features and configurations hea
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/cerebras.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/cerebras.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

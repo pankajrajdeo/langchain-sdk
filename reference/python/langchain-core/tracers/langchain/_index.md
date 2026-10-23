@@ -7,11 +7,11 @@ tags: [index, reference, python, langchain-core, tracers, langchain]
 
 # reference/python/langchain-core/tracers/langchain
 
-11 pages here, 23 pages including subdirectories.
+11 pages here, 24 pages including subdirectories.
 
 ## Directories
 
-- [LangChainTracer/](LangChainTracer/_index.md) - 12 pages
+- [LangChainTracer/](LangChainTracer/_index.md) - 13 pages
 
 ## Files
 

@@ -13,13 +13,14 @@ tags: [docs, integrations, tools, ibm_watsonx_sql]
 This example shows how to use `langchain-ibm` `watsonx.ai` SQL Database Toolkit that uses Flight service.
 
 > [!WARNING]
+>
 > Building Q\&A systems of SQL databases requires executing model-generated SQL queries, which carries inherent security risks. Make sure that your database connection permissions are always scoped as narrowly as possible for your agent's needs. This will mitigate, though not eliminate, the risks of building a model-driven system.
 
 ## Overview
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/toolkits/ibm/) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/tools/ibm.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`WatsonxSQLDatabaseToolkit`](https://reference.langchain.com/python/langchain-ibm/WatsonxToolkit) | [`langchain-ibm`](https://reference.langchain.com/python/langchain-ibm) | ❌ | ❌ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ibm?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ibm?style=flat-square\&label=%20) |
 
@@ -240,8 +241,6 @@ For detailed documentation of all `WatsonxSQLDatabaseToolkit` features and confi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/ibm_watsonx_sql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/ibm_watsonx_sql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

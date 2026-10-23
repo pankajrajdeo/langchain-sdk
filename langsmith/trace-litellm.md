@@ -42,6 +42,7 @@ LiteLLM supports two ways to send traces to LangSmith, which operate at differen
 * LiteLLM’s built-in [`langsmith` callback](#log-litellm-call-with-the-langsmith-callback) logs model calls directly from LiteLLM. This is recommended when you want to trace LiteLLM requests specifically, or run async applications.
 
 > [!NOTE]
+>
 > Avoid enabling LiteLLM's `langsmith` callback and LangSmith tracing for the same LiteLLM calls, as this can result in duplicate traces.
 
 <a id="use-langsmith_tracing-and-traceable"></a>
@@ -75,7 +76,7 @@ You can use `LANGSMITH_TRACING=true` together with `@traceable` for predictable 
    @traceable(name="LiteLLM Chat Completion")
    def run(messages):
        response = completion(
-           model="gpt-4o",
+           model="gpt-5.5",
            messages=messages,
        )
        # Return the assistant message so the LangSmith UI shows role + content
@@ -99,8 +100,9 @@ You can use `LANGSMITH_TRACING=true` together with `@traceable` for predictable 
 
    In this example, the `messages` argument becomes the trace input, and the returned assistant message object becomes the trace output. The LiteLLM call itself runs normally—`@traceable` wraps it with observability rather than modifying its behavior. This approach traces your application logic, not just the model call.
 
-> [!TIP]
->    For more general examples using `@traceable`, refer to the [Custom instrumentation](annotate-code.md#use-@traceable-/-traceable) page.
+   > [!TIP]
+   >
+   > For more general examples using `@traceable`, refer to the [Custom instrumentation](annotate-code.md#use-@traceable-/-traceable) page.
 
 ### Log LiteLLM call with the `langsmith` callback
 
@@ -109,6 +111,7 @@ LiteLLM can send traces directly to LangSmith using its built-in [callback syste
 LiteLLM callbacks run in an asynchronous environment. When making asynchronous calls with `litellm.acompletion()`, you can enable the `langsmith` callback to log successful model calls.
 
 > [!TIP]
+>
 > This approach is best suited for async applications. For simple synchronous scripts, use the `@traceable` method shown in the [previous section](#use-langsmith_tracing-and-traceable).
 
 1. Set the following environment variables:
@@ -145,7 +148,7 @@ LiteLLM callbacks run in an asynchronous environment. When making asynchronous c
 
    async def main():
        response = await acompletion(
-           model="gpt-4o",
+           model="gpt-5.5",
            messages=[
                {"role": "user", "content": "Explain observability in LLM systems."}
            ],
@@ -187,8 +190,9 @@ The LiteLLM proxy runs as a standalone server and exposes an OpenAI-compatible A
    export OPENAI_API_KEY="your_openai_key"
 ```
 
-> [!NOTE]
->    The LiteLLM proxy runs as a separate service. If you enable LangSmith tracing at the proxy level, you must configure `LANGSMITH_API_KEY` and related environment variables in the proxy’s runtime environment. These settings are not shared with your application process.
+   > [!NOTE]
+   >
+   > The LiteLLM proxy runs as a separate service. If you enable LangSmith tracing at the proxy level, you must configure `LANGSMITH_API_KEY` and related environment variables in the proxy’s runtime environment. These settings are not shared with your application process.
 
 3. Start the proxy:
 
@@ -213,7 +217,7 @@ The LiteLLM proxy runs as a standalone server and exposes an OpenAI-compatible A
    )
 
    response = client.chat.completions.create(
-       model="gpt-4o",
+       model="gpt-5.5",
        messages=[
            {"role": "user", "content": "What is LiteLLM?"}
        ],
@@ -233,7 +237,7 @@ The LiteLLM proxy runs as a standalone server and exposes an OpenAI-compatible A
    });
 
    const response = await client.chat.completions.create({
-   model: "gpt-4o",
+   model: "gpt-5.5",
    messages: [
        { role: "user", content: "Explain LiteLLM tracing." }
    ],
@@ -252,8 +256,6 @@ The LiteLLM proxy runs as a standalone server and exposes an OpenAI-compatible A
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-litellm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-litellm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

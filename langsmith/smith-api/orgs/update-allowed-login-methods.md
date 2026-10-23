@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/orgs/current/login-methods:
     patch:
@@ -214,6 +217,11 @@ components:
             - type: boolean
             - type: 'null'
           title: Sso Only
+        oidc_login_enabled:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: Oidc Login Enabled
       type: object
       title: AllowedLoginMethodsUpdate
     HTTPValidationError:

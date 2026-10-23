@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/evaluators/{evaluator_id}:
     patch:
@@ -269,6 +272,19 @@ components:
           type: boolean
         code:
           type: string
+        code_evaluator_input:
+          description: >-
+            CodeEvaluatorInput is config (not a snapshot rebuild). Null clears
+            it.
+          anyOf:
+            - type: string
+              enum:
+                - thread
+                - all_messages
+                - human_ai_pairs
+                - first_human_last_ai
+                - trajectory
+            - type: 'null'
         dependencies:
           anyOf:
             - type: string
@@ -284,6 +300,25 @@ components:
 
             the sandbox snapshot.
           type: boolean
+        workspace_secrets_keys:
+          description: >-
+            WorkspaceSecretsKeys names the workspace secrets this evaluator may
+            use.
+
+            Each is sent as a header on requests to the hosts allowed for that
+
+            secret; evaluator code never sees the value. Requires
+
+            advanced_features_enabled, and each secret needs an allowed host
+            with a
+
+            header. Omit to keep the current list; [] clears it. Changing it
+            does
+
+            not rebuild the evaluator.
+          type: array
+          items:
+            type: string
     evaluators.UpdateLLMEvaluatorRequest:
       type: object
       properties:
@@ -349,6 +384,14 @@ components:
           type: boolean
         code:
           type: string
+        code_evaluator_input:
+          description: |-
+            CodeEvaluatorInput is which thread data the evaluator receives.
+            Null for run evaluators.
+          anyOf:
+            - allOf:
+                - $ref: '#/components/schemas/evaluators.CodeEvaluatorInput'
+            - type: 'null'
         dependencies:
           type: string
         evaluator_build_error:
@@ -369,6 +412,22 @@ components:
             RequireAttachments opts the evaluator into selecting/presigning run
             attachments (s3_urls) at evaluation time. Default false.
           type: boolean
+        workspace_secrets_keys:
+          description: >-
+            WorkspaceSecretsKeys names the workspace secrets this evaluator may
+            use.
+
+            Each is sent as a header on requests to the hosts allowed for that
+
+            secret; evaluator code never sees the value. Requires
+
+            advanced_features_enabled, and each secret needs an allowed host
+            with a
+
+            header.
+          type: array
+          items:
+            type: string
     evaluators.LLMEvaluator:
       type: object
       properties:
@@ -438,9 +497,11 @@ components:
       enum:
         - llm
         - code
+        - decision_model
       x-enum-varnames:
         - EvaluatorTypeLLM
         - EvaluatorTypeCode
+        - EvaluatorTypeDecisionModel
     evaluators.ManagedCodeEvaluatorMetricSetting:
       type: object
       properties:
@@ -449,6 +510,20 @@ components:
           default: true
         key_name:
           type: string
+    evaluators.CodeEvaluatorInput:
+      type: string
+      enum:
+        - thread
+        - all_messages
+        - human_ai_pairs
+        - first_human_last_ai
+        - trajectory
+      x-enum-varnames:
+        - CodeEvaluatorInputThread
+        - CodeEvaluatorInputAllMessages
+        - CodeEvaluatorInputHumanAIPairs
+        - CodeEvaluatorInputFirstHumanLastAI
+        - CodeEvaluatorInputTrajectory
     evaluators.EvaluatorBuildStatus:
       type: string
       enum:

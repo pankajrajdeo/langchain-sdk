@@ -16,8 +16,9 @@ Return the set of DeltaChannel names that should snapshot now.
 
 A channel snapshots when EITHER its accumulated update count reaches
 `snapshot_frequency` OR the total supersteps since its last snapshot
-reaches `DELTA_MAX_SUPERSTEPS_SINCE_SNAPSHOT`. This is a pure
-predicate — no mutation.
+reaches `DELTA_MAX_SUPERSTEPS_SINCE_SNAPSHOT`. A channel without a version
+was never written on this branch, so it has nothing to snapshot. This is a
+pure predicate — no mutation.
 
 ## Signature
 
@@ -25,9 +26,10 @@ predicate — no mutation.
 delta_channels_to_snapshot(
     channels: Mapping[str, BaseChannel],
     counters_since_delta_snapshot: Mapping[str, tuple[int, int]],
+    channel_versions: ChannelVersions,
 ) -> set[str]
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/_checkpoint.py#L50)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/_checkpoint.py#L90)

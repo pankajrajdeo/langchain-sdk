@@ -15,11 +15,13 @@ This page details how to log feedback using the [SDK](reference.md). For the str
 ## Use `create_feedback()` / `createFeedback`
 
 > [!NOTE]
+>
 > **Child runs**
 > You can attach user feedback to **any** child run of a trace, not just the trace (root run) itself.
 > This is useful for critiquing specific steps of the LLM application, such as the retrieval step or generation step of a RAG pipeline.
 
 > [!TIP]
+>
 > **Non-blocking creation (Python only)**
 > The Python client will automatically background feedback creation if you pass `trace_id=` to [`create_feedback()`](https://reference.langchain.com/python/langsmith/client/Client/create_feedback).
 > This is essential for low-latency environments, where you want to make sure your application isn't blocked on feedback creation.
@@ -107,8 +109,6 @@ To learn more about how to filter traces based on various attributes, including 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/attach-user-feedback.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/attach-user-feedback.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

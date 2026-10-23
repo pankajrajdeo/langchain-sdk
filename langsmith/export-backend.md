@@ -9,6 +9,7 @@ tags: [docs, langsmith, export-backend]
 # Export LangSmith telemetry to your observability backend
 
 > [!WARNING]
+>
 > **This section is only applicable for Kubernetes deployments.**
 
 Self-Hosted LangSmith instances produce telemetry data in the form of logs, metrics and traces. This section will show you how to access and export that data to an observability collector or backend.
@@ -45,11 +46,16 @@ The following LangSmith services expose metrics at an endpoint, in the Prometheu
 
 You can use a [Prometheus](https://prometheus.io/docs/prometheus/latest/getting_started/#configure-prometheus-to-monitor-the-sample-targets) or [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver) collector to scrape the endpoints, and export metrics to the backend of your choice.
 
+### Sandbox hosts
+
+For tabbed SmithDB and Sandbox dashboards, see [Monitor self-hosted LangSmith with Datadog or Grafana](self-host-observability-dashboards.md). The guide covers component collection settings, deployment filters, platform coverage, and compatibility.
+
 ### Frontend Nginx
 
 The frontend service exposes its Nginx metrics at the following endpoint: `langsmith-frontend.langsmith.svc.cluster.local:80/nginx_status`. You can either scrape them yourself, or bring up a [Prometheus Nginx exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-nginx-exporter).
 
 > [!WARNING]
+>
 > **The following sections apply for in-cluster databases only. If you are using external databases, you will need to configure exposing and fetching metrics.**
 
 ### Postgres + Redis
@@ -78,8 +84,6 @@ config:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/export-backend.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/export-backend.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

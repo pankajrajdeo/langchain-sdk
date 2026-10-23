@@ -16,7 +16,8 @@ Source: [`js-sveltekit`](https://github.com/langchain-ai/deployment-cookbook/tre
 
 ## Deploy to Cloudflare
 
-### Install and build
+**1. Install and build**
+
 ```bash
 cd js-sveltekit
 cp .env.example .env   # set OPENAI_API_KEY for local dev
@@ -24,13 +25,15 @@ pnpm install
 pnpm build
 ```
 
-### Configure secrets
+**2. Configure secrets**
+
 ```bash
 npx wrangler login
 npx wrangler secret put OPENAI_API_KEY
 ```
 
-### Deploy
+**3. Deploy**
+
 ```bash
 pnpm run deploy
 ```
@@ -108,20 +111,17 @@ npx wrangler dev .svelte-kit/cloudflare/_worker.js
 
 ## Project layout
 
-<details>
-<summary>Project structure</summary>
-
-* `src/lib/server/agent/` — deep agent (`createDeepAgent`) with `researcher` and `math-whiz` subagents and mock tools.
-* `src/lib/server/durable-objects/thread-session.ts` — per-thread Durable Object event log for SSE replay.
-* `src/lib/server/protocol/` — Agent Streaming Protocol helpers: checkpointer-backed state/history, run publishing, serialization, and registry.
-* `src/routes/api/threads/` — SvelteKit route handlers for the protocol endpoints.
-* `src/lib/chat/threads-client.ts` — browser thread bootstrap and sidebar helpers.
-* `src/lib/components/` — Svelte chat UI using `@langchain/svelte`.
-* `svelte.config.js` — SvelteKit configured with `@sveltejs/adapter-cloudflare`.
-* `scripts/export-durable-objects.mjs` — postbuild patch that re-exports the Durable Object class from the generated Worker entry.
-* `wrangler.jsonc` — Cloudflare Workers Static Assets and Durable Object config.
-
-</details>
+> **Project structure**
+>
+> * `src/lib/server/agent/` — deep agent (`createDeepAgent`) with `researcher` and `math-whiz` subagents and mock tools.
+> * `src/lib/server/durable-objects/thread-session.ts` — per-thread Durable Object event log for SSE replay.
+> * `src/lib/server/protocol/` — Agent Streaming Protocol helpers: checkpointer-backed state/history, run publishing, serialization, and registry.
+> * `src/routes/api/threads/` — SvelteKit route handlers for the protocol endpoints.
+> * `src/lib/chat/threads-client.ts` — browser thread bootstrap and sidebar helpers.
+> * `src/lib/components/` — Svelte chat UI using `@langchain/svelte`.
+> * `svelte.config.js` — SvelteKit configured with `@sveltejs/adapter-cloudflare`.
+> * `scripts/export-durable-objects.mjs` — postbuild patch that re-exports the Durable Object class from the generated Worker entry.
+> * `wrangler.jsonc` — Cloudflare Workers Static Assets and Durable Object config.
 
 ## See also
 
@@ -132,8 +132,6 @@ npx wrangler dev .svelte-kit/cloudflare/_worker.js
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-sveltekit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-sveltekit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

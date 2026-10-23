@@ -27,6 +27,7 @@ When you log in for the first time, a personal organization will be created for 
 ### Workspaces
 
 > [!NOTE]
+>
 > Workspaces were formerly called Tenants. Some code and APIs may still reference the old name for a period of time during the transition.
 
 A workspace is a logical grouping of users and resources within an organization. Workspaces are commonly used to isolate teams or business units, providing separation between projects and their associated resources. A workspace separates trust boundaries for resources and access control. Users are granted permissions at the workspace level, which determine their access to resources in that workspace, including tracing projects, datasets, annotation queues, and prompts. For details on setup, see the [setup guide](set-up-hierarchy.md#set-up-a-workspace) and for details on permissions see [Workspaces (RBAC)](#workspace-roles-rbac).
@@ -39,7 +40,7 @@ Agents and applications are logical groupings of resources within a workspace, o
 
 What that grouping is called, and which control selects it, depends on which information architecture your workspace uses. The control at the top left tells you which one you are on:
 
-* **Agent-based workspaces**, which are in [beta](release-stages.md), call it an [agent](agents.md), and an agent's traces divide further into [environments](agent-environments.md) drawn from a fixed set of four. Select one from the agent picker in the top bar, or select **All agents** to see every resource in the workspace. For more information, see [Navigate agents](navigate-agents.md).
+* **Agent-based workspaces** call it an [agent](agents.md), and an agent's traces divide further into [environments](agent-environments.md) drawn from a fixed set of four. Select one from the agent picker in the top bar, or select **All agents** to see every resource in the workspace. For more information, see [Navigate agents](navigate-agents.md).
 * **Project-based workspaces** call it an application, which can group any project within a team rather than an agent alone. Select one from the **Application** dropdown at the top of the sidebar in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-administration-overview), or select **All applications** to see every resource in the workspace.
 
 Both are built on top of [resource tags](#resource-tags) and can be used to control resource access using [ABAC](organization-workspace-operations.md#access-policies).
@@ -52,7 +53,7 @@ Resources are the concrete entities used to build, run, and observe applications
 
 ### Additional info
 
-The following diagram explains the relationship between organizations, workspaces, applications, and resources: <img src="https://mintcdn.com/langchain-5e9cc07a/CxwZomSRGiBmNIp6/langsmith/images/resource-hierarchy.png?fit=max&auto=format&n=CxwZomSRGiBmNIp6&q=85&s=d117245dabd42d5dd4ef0733f8abcb21" alt="Resource Hierarchy" width="878" height="420" data-path="langsmith/images/resource-hierarchy.png" />
+The following diagram explains the relationship between organizations, workspaces, applications, and resources: ![Resource Hierarchy](https://mintcdn.com/langchain-5e9cc07a/CxwZomSRGiBmNIp6/langsmith/images/resource-hierarchy.png?fit=max\&auto=format\&n=CxwZomSRGiBmNIp6\&q=85\&s=d117245dabd42d5dd4ef0733f8abcb21)
 
 See the table below for details on which features are available in which scope(s). In an agent-based workspace, read Application in this table as [agent](agents.md):
 
@@ -93,13 +94,14 @@ Navigate to **Settings** in the [LangSmith UI](https://smith.langchain.com?utm_s
 
 A user is a person who has access to LangSmith. Users can be members of one or more organizations and workspaces within those organizations.
 
-Organization members are managed on the **Settings** page under **Members and roles**.
+Organization members are managed on the **Settings** page: select **Members** in the organization settings.
 
 And workspace members are managed on the **Workspaces** page under **Settings**.
 
 ### API keys
 
 > [!WARNING]
+>
 > We ended support for legacy API keys prefixed with `ls__` on October 22, 2024 in favor of personal access tokens (PATs) and service keys. We require using PATs and service keys for all new integrations. API keys prefixed with `ls__` will no longer work as of October 22, 2024.
 
 #### Expiration dates
@@ -127,13 +129,21 @@ Service keys are similar to PATs, but are used to authenticate requests to the L
 Service keys are prefixed with `lsv2_sk_`
 
 > [!WARNING]
+>
 > Use the `X-Tenant-Id` header to specify the target workspace.
 >
 > * **When using PATs**: If this header is omitted, requests will run against the default workspace associated with the key.
 > * **When using organization-scoped service keys**: You must include the `X-Tenant-Id` header when accessing workspace-scoped resources. Without it, the request will fail with a `403 Forbidden` error.
 
 > [!NOTE]
+>
 > To see how to create a service key or Personal Access Token, see the [setup guide](create-account-api-key.md)
+
+#### Tracing keys
+
+Tracing keys are organization-owned credentials with fixed permissions to submit traces and create projects in selected workspaces. They do not grant access to stored traces, experiments, saved views, or administration.
+
+Tracing keys use the `lsv2_tr_` prefix. Their scope is fixed at creation, and they remain valid when the creator leaves the organization. They follow service-key expiry limits. For creation permissions, scope limits, and deletion rules, refer to [Tracing keys](create-account-api-key.md#tracing-keys).
 
 ### Organization roles
 
@@ -148,6 +158,7 @@ The organization role selected also impacts workspace membership as described he
 * [Organization Viewer](rbac.md#organization-viewer) is equivalent to Organization User, but **cannot** create Personal Access Tokens. (for self-hosted, available in Helm chart version 0.11.25+).
 
 > [!NOTE]
+>
 > The Organization User and Organization Viewer roles are only available in organizations on [Plus and Enterprise plans](https://langchain.com/pricing). In Developer organizations (single workspace), all users are assigned the Organization Admin role by default.
 >
 > See [security settings](manage-organization-by-api.md#security-settings) for instructions on how to disable PAT creation for the entire organization.
@@ -180,6 +191,7 @@ For a comprehensive list of required permissions along with the operations and r
 ### Workspace roles (RBAC)
 
 > [!NOTE]
+>
 > RBAC (Role-Based Access Control) is a feature that is only available to Enterprise customers. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales). Other plans default to using the Admin role for all users.
 
 Roles are used to define the set of permissions that a user has within a workspace. There are three built-in system roles that cannot be edited:
@@ -190,7 +202,7 @@ Roles are used to define the set of permissions that a user has within a workspa
 
 [Organization admins](rbac.md#organization-admin) can also create/edit custom roles with specific permissions for different resources.
 
-You can manage roles under **Organization Settings** > **Members and roles** and select the **Roles** tab.
+You can manage roles in **Settings** > **Roles**.
 
 * For comprehensive documentation on roles and permissions, refer to the [Role-based access control](rbac.md) guide.
 * For more details on assigning and creating roles, refer to the [User Management](user-management.md) guide.
@@ -208,6 +220,7 @@ How to separate environments depends on which information architecture your work
 In either case, avoid using separate workspaces for environment separation, because resources cannot be shared across workspaces, which prevents you from promoting resources such as prompts between environments.
 
 > [!NOTE]
+>
 > **Resource tags vs. commit tags for prompt management**
 >
 > While both types of tags can use environment terminology like `dev`, `staging`, and `prod`, they serve different purposes:
@@ -229,6 +242,7 @@ This section covers how data retention works and how it's priced in LangSmith.
 * **Cost**: LangSmith charges less for traces that have low data retention. For more information, learn how to [enforce spend limits](billing.md#enforce-spend-limits).
 
 > [!TIP]
+>
 > Plan your retention tiers before you start sending traces. Changes apply to new traces only—existing traces keep their original tier. See [Change project-level default retention](billing.md#change-project-level-default-retention).
 
 #### How it works
@@ -241,6 +255,7 @@ LangSmith has two tiers of traces based on Data Retention with the following cha
 | **Retention Period** | 14 days | 180 days |
 
 > [!WARNING]
+>
 > Starting September 14, 2026, the maximum long-lived trace retention period for SaaS customers is changing to 180 days. Enterprise customers can still customize the extended retention period per workspace up to this new maximum. Changes apply to new traces only—existing traces are unaffected. See [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy).
 
 **Data deletion after retention ends**
@@ -250,6 +265,7 @@ After the specified retention period, traces are no longer accessible in the tra
 #### Data retention auto-upgrades
 
 > [!WARNING]
+>
 > Auto upgrades can have an impact on your bill. Please read this section carefully to fully understand your estimated LangSmith tracing costs.
 
 Most traces use base retention. Some actions, such as online evaluators and automation rules, can extend a trace to a longer retention period at a higher cost. You control which actions extend retention.
@@ -266,9 +282,11 @@ Retention behavior by action:
 This change applies to new actions only. Traces that were already upgraded by a previous action keep their extended retention.
 
 > [!NOTE]
+>
 > When you create or edit an online evaluator on a tracing project, you can opt out of upgrading the traces that evaluator scores, keeping them at base retention. This option is available only when the project's default retention is the base tier. For step-by-step instructions, see [Manage evaluator trace retention](evaluators.md#manage-evaluator-trace-retention).
 
 > [!NOTE]
+>
 > Retention extension is enabled by default for new online evaluators and automation rules. You can opt out when configuring each evaluator or rule.
 
 **Why auto-upgrade traces?**
@@ -335,6 +353,7 @@ This 429 is thrown by our application load balancer and is a mechanism in place 
 | `*` | `*` | 2000 | 1 minute |
 
 > [!NOTE]
+>
 > The LangSmith SDK takes steps to minimize the likelihood of reaching these limits on run-related endpoints by batching up to 100 runs from a single session ID into a single API call.
 
 #### Plan-level hourly trace event limit
@@ -385,8 +404,6 @@ This is thrown by our application and varies by organization based on their conf
 
 #### Maximum runs per trace
 
-> **Interactive content:** [View this section in the original documentation](administration-overview.md).
-
 #### Run query endpoint
 
 The [`POST /runs/query`](smith-api/run/query-runs.md) endpoint has additional per-tenant rate limits based on query parameters. See [Query traces using the SDK](export-traces.md#rate-limits) for details.
@@ -398,6 +415,7 @@ Since some 429 responses are temporary and may succeed on a successive call, if 
 For convenience, LangChain applications built with the LangSmith SDK has this capability built-in.
 
 > [!NOTE]
+>
 > It is important to note that if you are saturating the endpoints for extended periods of time, retries may not be effective as your application will eventually run large enough backlogs to exhaust all retries.
 >
 > If that is the case, we would like to discuss your needs more specifically. Please contact support via [LangSmith Support](https://support.langchain.com) with details about your applications throughput needs and sample code and we can work with you to better understand whether the best approach is fixing a bug, changes to your application code, or a different LangSmith plan.
@@ -413,7 +431,9 @@ LangSmith lets you set two different monthly limits, mirroring our Billable Metr
 
 These let you limit the number of total traces, and extended data retention traces respectively.
 
-For *spend* limits on evaluator runs specifically, refer to [Track and limit evaluator spend](evaluator-spend.md).
+> [!NOTE]
+>
+> For *spend* limits on evaluator runs specifically, refer to [Track and limit evaluator spend](evaluator-spend.md).
 
 #### Properties of usage limiting
 
@@ -451,6 +471,7 @@ Updating these limits requires the same permission as workspace usage limits (`U
 Like workspace limits, per-project and per-user limits are evaluated per calendar month in UTC and reset at the start of each new month. Once a project or user reaches its limit, its new traces are dropped and are not ingested again until the limit resets. Enforcement is approximate, so a small number of traces may be processed above the threshold before the limit takes effect. These limits apply to both [Cloud](cloud.md) and [Self-hosted](self-hosted.md).
 
 > [!NOTE]
+>
 > Per-project and per-user limits are **additional** to your workspace-wide and plan limits. A trace must be within every applicable limit to be ingested.
 >
 > Per-user limits count only traces attributed to a specific workspace member. Traces sent with an API key or service key that isn't tied to a member are not counted toward a per-user limit.
@@ -467,8 +488,6 @@ Like workspace limits, per-project and per-user limits are evaluated per calenda
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/administration-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/administration-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

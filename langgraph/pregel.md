@@ -72,11 +72,13 @@ total = BinaryOperatorAggregate(int, operator.add)
 ### DeltaChannel
 
 > [!WARNING]
+>
 > `DeltaChannel` requires `langgraph>=1.2` and is currently in **beta**. The API may change in future releases.
 
 [`DeltaChannel`](https://reference.langchain.com/python/langgraph/channels/delta/DeltaChannel) stores only the incremental delta at each step rather than the full accumulated value. This is most useful for channels that are written frequently and accumulate large values over time—for example, a conversation message list in a long-running thread. Without delta storage, the full list is re-serialized into every checkpoint; with `DeltaChannel`, only the new messages written at each step are stored.
 
 > [!TIP]
+>
 > Consider `DeltaChannel` when a channel is both written to frequently and grows large over time. A good signal: if you notice checkpoint sizes growing linearly with thread length for a particular channel, `DeltaChannel` is likely a good fit.
 
 Use `DeltaChannel` in an `Annotated` type annotation the same way you would use a plain reducer:
@@ -101,15 +103,17 @@ class State(TypedDict):
 The `reducer` passed to `DeltaChannel` is a **bulk reducer**: it receives the current state and a *sequence* of all writes from the current step in a single call—not pairwise like a standard reducer. This differs from the per-key reducers used with `Annotated` in a `StateGraph`, where the reducer is called once per update.
 
 > [!WARNING]
+>
 > The bulk reducer **must be associative** (batching-invariant):
 >
-> ```
+```
 > reducer(reducer(state, [xs]), [ys]) == reducer(state, [xs, ys])
-> ```
+```
 >
 > If your reducer is not associative, the reconstructed state may differ depending on how LangGraph batches writes across steps, producing inconsistent behavior.
 
 > [!WARNING]
+>
 > **The reducer runs on reconstruction, not on write.** Unlike a [`BinaryOperatorAggregate`](https://reference.langchain.com/python/langgraph/channels/binop/BinaryOperatorAggregate), whose reducer is invoked at write time so the combined value is what gets serialized into the checkpoint, a `DeltaChannel` reducer is invoked when the channel value is *rebuilt* from its persisted writes. The raw per-step writes are what get serialized; the reducer is only called when the value is materialized—on the next read, on the next step's actors, or when replaying history.
 >
 > Practical consequences when designing a reducer:
@@ -159,6 +163,7 @@ Higher values of `snapshot_frequency` reduce storage overhead but increase read 
 #### Version compatibility and rollbacks
 
 > [!WARNING]
+>
 > Changing a persisted channel from `DeltaChannel` to a non-delta channel is not recommended. Checkpoints encode these channel types differently, so changing the type for an existing thread can cause incomplete or incorrect state reconstruction. Keep channel definitions stable for the lifetime of a thread. Before changing a channel type, migrate affected threads to the new representation, or discard them and start new threads.
 >
 > **Rolling back to a version without `DeltaChannel` support is not supported.** `langgraph>=1.2` writes delta channel checkpoints in a new format that earlier versions cannot read. Once a thread has used `DeltaChannel`, downgrading LangGraph leaves those checkpoints unreadable as older runtimes do not understand the delta format and cannot reconstruct channel state. If you need to roll back, use the [delta-channel-dump recovery script](https://github.com/langchain-ai/langgraph/tree/main/examples/delta-channel-dump) to migrate affected threads, or discard them, before downgrading.
@@ -169,7 +174,8 @@ While most users will interact with Pregel through the [StateGraph](https://refe
 
 Below are a few different examples to give you a sense of the Pregel API.
 
-#### Single node
+**Single node**
+
 ```python
 from langgraph.channels import EphemeralValue
 from langgraph.pregel import Pregel, NodeBuilder
@@ -197,7 +203,8 @@ app.invoke({"a": "foo"})
 {'b': 'foofoo'}
 ```
 
-#### Multiple nodes
+**Multiple nodes**
+
 ```python
 from langgraph.channels import LastValue, EphemeralValue
 from langgraph.pregel import Pregel, NodeBuilder
@@ -232,7 +239,8 @@ app.invoke({"a": "foo"})
 {'b': 'foofoo', 'c': 'foofoofoofoo'}
 ```
 
-#### Topic
+**Topic**
+
 ```python
 from langgraph.channels import EphemeralValue, Topic
 from langgraph.pregel import Pregel, NodeBuilder
@@ -267,7 +275,8 @@ app.invoke({"a": "foo"})
 {'c': ['foofoo', 'foofoofoofoo']}
 ```
 
-#### BinaryOperatorAggregate
+**BinaryOperatorAggregate**
+
 This example demonstrates how to use the [`BinaryOperatorAggregate`](https://reference.langchain.com/python/langgraph/channels/binop/BinaryOperatorAggregate) channel to implement a reducer.
 
 ```python
@@ -310,7 +319,8 @@ app.invoke({"a": "foo"})
 { 'c': 'foofoo | foofoofoofoo' }
 ```
 
-#### Cycle
+**Cycle**
+
 This example demonstrates how to introduce a cycle in the graph, by having
 a chain write to a channel it subscribes to. Execution will continue
 until a `None` value is written to the channel.
@@ -345,7 +355,8 @@ app.invoke({"value": "a"})
 
 LangGraph provides two high-level APIs for creating a Pregel application: the [StateGraph (Graph API)](graph-api.md) and the [Functional API](functional-api.md).
 
-#### StateGraph (Graph API)
+**StateGraph (Graph API)**
+
 The [StateGraph (Graph API)](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) is a higher-level abstraction that simplifies the creation of Pregel applications. It allows you to define a graph of nodes and edges. When you compile the graph, the StateGraph API automatically creates the Pregel application for you.
 
 ```python
@@ -416,7 +427,8 @@ You should see something like this
  'start:write_essay': <langgraph.channels.ephemeral_value.EphemeralValue at 0x7d05e2d8b280>}
 ```
 
-#### Functional API
+**Functional API**
+
 In the [Functional API](functional-api.md), you can use an [`@entrypoint`](https://reference.langchain.com/python/langgraph/func/entrypoint) to create a Pregel application. The `entrypoint` decorator allows you to define a function that takes input and returns output.
 
 ```python
@@ -453,8 +465,6 @@ Channels:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/pregel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/pregel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

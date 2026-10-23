@@ -20,7 +20,7 @@ This loader requires PowerScale's MetadataIQ feature enabled. Additional informa
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/document_loaders/web_loaders/__module_name___loader) |
+| Class | Package | Local | Serializable | JS support |
 | :- | :- | :-: | :-: | :-: |
 | [`PowerScaleDocumentLoader`](https://github.com/dell/powerscale-rag-connector/blob/main/src/powerscale_rag_connector/PowerScaleDocumentLoader.py) | [`powerscale-rag-connector`](https://github.com/dell/powerscale-rag-connector) | ✅ | ❌ | ❌ |
 | [`PowerScaleUnstructuredLoader`](https://github.com/dell/powerscale-rag-connector/blob/main/src/powerscale_rag_connector/PowerScaleUnstructuredLoader.py) | [`powerscale-rag-connector`](https://github.com/dell/powerscale-rag-connector) | ✅ | ❌ | ❌ |
@@ -154,8 +154,6 @@ For detailed documentation of all PowerScale Document Loader features and config
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/powerscale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/powerscale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

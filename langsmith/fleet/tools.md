@@ -16,14 +16,16 @@ You can access a variety of tools in LangSmith Fleet. Use tool integrations and 
 
 You can add a tool from the [Fleet > Integrations tab](https://smith.langchain.com/agents/tools) to make it available to all agents in the workspace or from the agent sidebar to add it to a specific agent.
 
- Integrations">
-  To add a tool to all agents in the workspace:
+**From Fleet > Integrations**
 
-  1. On the [Fleet > Integrations tab](https://smith.langchain.com/agents/tools), find the tool you want to add.
-  2. Click the **Connect**.
-  3. Follow the prompts to connect the tool to your agent.
+To add a tool to all agents in the workspace:
 
-#### From the agent sidebar
+1. On the [Fleet > Integrations tab](https://smith.langchain.com/agents/tools), find the tool you want to add.
+2. Click the **Connect**.
+3. Follow the prompts to connect the tool to your agent.
+
+**From the agent sidebar**
+
 To add a tool to a specific agent:
 
 1. In [Fleet](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-tools), select the agent to which you want to add the tool.
@@ -34,10 +36,12 @@ To add a tool to a specific agent:
 
 To remove a tool from your agent:
 
-### Select the agent
+**1. Select the agent**
+
 In [Fleet](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-tools), select the agent from which you want to remove the tool.
 
-### Remove the tool
+**2. Remove the tool**
+
 1. In the sidebar, expand the **Connections** drawer and find the tool you want to remove.
 2. Click the  **Remove** icon for the tool.
 
@@ -45,70 +49,88 @@ In [Fleet](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_camp
 
 The following tools are a subset of the tools available in LangSmith Fleet. For the full up-to-date list, visit the [Fleet > Integrations tab](https://smith.langchain.com/agents/tools).
 
-#### Gmail
-Read, compose, and organize emails in your Gmail inbox.
+> **Gmail**
+>
+> Read, compose, and organize emails in your Gmail inbox.
 
-#### Google BigQuery
-Run queries and analyze large datasets stored in Google BigQuery.
+> **Google BigQuery**
+>
+> Run queries and analyze large datasets stored in Google BigQuery.
 
-#### Google Calendar
-View, create, and manage calendar events and meeting schedules.
+> **Google Calendar**
+>
+> View, create, and manage calendar events and meeting schedules.
 
-#### Google Docs
-Create, read, and edit documents in Google Docs.
+> **Google Docs**
+>
+> Create, read, and edit documents in Google Docs.
 
-#### Google Sheets
-Read, update, and analyze data in Google Sheets spreadsheets.
+> **Google Sheets**
+>
+> Read, update, and analyze data in Google Sheets spreadsheets.
 
-#### Excel
-Read, write, and analyze data in Microsoft Excel workbooks.
+> **Excel**
+>
+> Read, write, and analyze data in Microsoft Excel workbooks.
 
-#### Outlook
-Read, draft, and organize Outlook emails, meetings, and calendar events.
+> **Outlook**
+>
+> Read, draft, and organize Outlook emails, meetings, and calendar events.
 
-#### PowerPoint
-Search, read, and create Microsoft PowerPoint presentations.
+> **PowerPoint**
+>
+> Search, read, and create Microsoft PowerPoint presentations.
 
-#### SharePoint
-Browse, read, and manage documents and sites in Microsoft SharePoint.
+> **SharePoint**
+>
+> Browse, read, and manage documents and sites in Microsoft SharePoint.
 
-#### Teams
-Send and read messages, channels, and collaboration updates in Microsoft Teams.
+> **Teams**
+>
+> Send and read messages, channels, and collaboration updates in Microsoft Teams.
 
-#### Word
-Search, read, and manage Microsoft Word documents.
+> **Word**
+>
+> Search, read, and manage Microsoft Word documents.
 
-#### Exa
-Search the web using AI-powered semantic search for highly relevant results.
+> **Exa**
+>
+> Search the web using AI-powered semantic search for highly relevant results.
 
-#### GitHub
-Browse repositories, manage issues and pull requests, and review code on GitHub.
+> **GitHub**
+>
+> Browse repositories, manage issues and pull requests, and review code on GitHub.
 
-#### Linear
-Track issues, plan sprints, and coordinate team projects in Linear.
+> **Linear**
+>
+> Track issues, plan sprints, and coordinate team projects in Linear.
 
-#### LinkedIn
-Create posts, manage your company page, and engage with your professional network.
+> **LinkedIn**
+>
+> Create posts, manage your company page, and engage with your professional network.
 
-#### Pylon
-View and respond to customer support conversations across channels.
+> **Pylon**
+>
+> View and respond to customer support conversations across channels.
 
-#### Slack
-Send messages, manage channels, and automate notifications in Slack.
+> **Slack**
+>
+> Send messages, manage channels, and automate notifications in Slack.
 
-#### Tavily
-Search the web and extract structured content from web pages.
+> **Tavily**
+>
+> Search the web and extract structured content from web pages.
 
-#### X
-Publish posts, monitor mentions, and engage with your audience on X.
+> **X**
+>
+> Publish posts, monitor mentions, and engage with your audience on X.
 
 > [!TIP]
+>
 > You can also connect to remote MCP servers to give your agents access to additional tools. See [Remote MCP servers](remote-mcp-servers.md) for more information.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

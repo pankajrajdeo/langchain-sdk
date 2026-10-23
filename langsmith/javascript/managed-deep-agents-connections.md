@@ -32,7 +32,8 @@ const apiKey = await connections.get("organization-tavily", { type: "agent" });
 The rest of this page covers the two choices around those steps: who owns the credential, and how the service authenticates.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## Choose a credential owner
 
@@ -71,6 +72,7 @@ The default identity declaration verifies a LangSmith API key. That key authenti
 Code never passes a user ID to `connections.get(...)`. The runtime resolves the caller and returns that person's credential.
 
 > [!NOTE]
+>
 > Slack and Studio complete the authorization round-trip for the caller. First-class support for custom channels is in development. To build a custom frontend against caller identity today, see [Handle the authorization interrupt](#handle-the-authorization-interrupt) and contact the [LangChain team](https://forum.langchain.com/c/help/langsmith/).
 
 ## Choose a create mode
@@ -271,12 +273,9 @@ The command prints each service's default scopes and the page where you register
 
 A service with no default scopes requires `--scope`.
 
-<details>
-<summary>Some services run separate OAuth apps for their API and their MCP server</summary>
-
-Notion is one of them. `--oauth notion-api` registers an app against Notion's REST API, and that app does not authorize Notion's MCP server. To use the MCP server, create an [MCP OAuth connection](#create-an-mcp-oauth-connection) instead. Check the provider's documentation when a service offers both.
-
-</details>
+> **Some services run separate OAuth apps for their API and their MCP server**
+>
+> Notion is one of them. `--oauth notion-api` registers an app against Notion's REST API, and that app does not authorize Notion's MCP server. To use the MCP server, create an [MCP OAuth connection](#create-an-mcp-oauth-connection) instead. Check the provider's documentation when a service offers both.
 
 GitHub requires an OAuth client ID and client secret. Set `GITHUB_CLIENT_SECRET`, then create the connection. Replace `********` with the client ID:
 
@@ -468,6 +467,7 @@ const accessToken = await connections.get("support-linear", { type: "agent" });
 Use an agent-owned OAuth account when every caller should act as one shared account rather than as themselves. A company Notion account that grants read access to a question-answering agent is one example.
 
 > [!TIP]
+>
 > Authorize a dedicated account that your team owns, not your own. The account you sign in with becomes the identity behind every action the agent takes, for every caller. Using a personal account costs you three things:
 >
 > * The agent gets your full access at that provider.
@@ -844,6 +844,8 @@ When the agent runs through the Slack channel, Slack renders OAuth entries that 
 
 **Screenshot placeholder:** Add the Slack OAuth authorization prompt screenshot here.
 
+Slack OAuth authorization prompt
+
 ## Inspect and delete connections
 
 Use `list` or `get` to inspect connection metadata. `list` shows every connection in the workspace, not only the ones this project uses:
@@ -889,31 +891,28 @@ Connections are part of the Managed Deep Agents public beta. The following gaps 
 * **Workspace UI**: LangSmith does not list connections in the UI. Use `mda connections list` and `mda connections get` for connection metadata.
 * **Grant visibility**: `mda connections list` is workspace-scoped and does not report which deployments hold a credential under a slug. A run that fails with `no agent connection is set for slug '<slug>'` means this deployment owns no credential for it, even when `list` shows the slug. Run `mda connections create <slug>` from the project root to mint one.
 
-<details>
-<summary>Store a user-owned API key through Agent Auth</summary>
-
-An interrupt entry with `"kind": "secret"` has no `connect_url`. To collect one in a custom frontend, prompt for the value with a hidden input, then create the credential against the existing connection slug:
-
+> **Store a user-owned API key through Agent Auth**
+>
+> An interrupt entry with `"kind": "secret"` has no `connect_url`. To collect one in a custom frontend, prompt for the value with a hidden input, then create the credential against the existing connection slug:
+>
 ```http
-POST /v1/agent-auth/connections
+> POST /v1/agent-auth/connections
 ```
-
+>
 ```json
-{
-  "slug": "organization-tavily",
-  "display_name": "organization-tavily",
-  "credential": {
-    "kind": "secret",
-    "owner_type": "user",
-    "owner_id": "<caller-identity-id>",
-    "value": "<api-key>"
-  }
-}
+> {
+>   "slug": "organization-tavily",
+>   "display_name": "organization-tavily",
+>   "credential": {
+>     "kind": "secret",
+>     "owner_type": "user",
+>     "owner_id": "<caller-identity-id>",
+>     "value": "<api-key>"
+>   }
+> }
 ```
-
-Agent Auth reuses the existing connection for that slug and attaches the caller's secret. Secret material is write-only. After a successful create, mark that slug connected and resume the run. For more information, see [Set up Agent Auth](../agent-auth.md).
-
-</details>
+>
+> Agent Auth reuses the existing connection for that slug and attaches the caller's secret. Secret material is write-only. After a successful create, mark that slug connected and resume the run. For more information, see [Set up Agent Auth](../agent-auth.md).
 
 ## See also
 
@@ -927,8 +926,6 @@ Agent Auth reuses the existing connection for that slug and attaches the caller'
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-connections.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-connections.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

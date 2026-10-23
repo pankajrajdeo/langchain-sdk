@@ -16,9 +16,8 @@ checkpoint, view the exact state the agent held, and **resume execution from
 that point** to explore alternative paths. It's a debugger, an undo button, and
 an audit log all in one.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/time-travel).
-
 > [!NOTE]
+>
 > This feature requires the [LangGraph Agent Server](../../langgraph/local-server.md). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](../../langsmith/deployment.md) to use this pattern.
 
 ## How checkpoints work
@@ -42,6 +41,7 @@ the LangGraph client for the active thread. Resuming from a checkpoint uses
 `forkFrom: { checkpointId }`.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
 
 **React**
@@ -317,6 +317,7 @@ function CheckpointInspector({ checkpoint }: { checkpoint: ThreadState }) {
 ```
 
 > [!TIP]
+>
 > For production UIs, consider using a proper JSON viewer component with
 > collapsible nodes instead of raw `JSON.stringify`. Libraries like
 > `react-json-view` or `react-json-tree` give users a much better exploration
@@ -345,6 +346,7 @@ execution path. This effectively creates a **branch** in the conversation
 timeline.
 
 > [!NOTE]
+>
 > Resuming from a checkpoint does not delete the original timeline. The previous
 > checkpoints remain available in the history. This means users can always go back
 > and try a different path without losing any prior work.
@@ -447,6 +449,7 @@ Time travel is invaluable across many scenarios:
   multi-step reasoning works
 
 > [!NOTE]
+>
 > Time travel is especially powerful when combined with
 > [human-in-the-loop](human-in-the-loop.md) patterns. If a human reviewer
 > rejects an agent's action at an interrupt, they can resume from the checkpoint
@@ -514,8 +517,6 @@ function TimelineEntry({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/time-travel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/time-travel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -29,6 +29,8 @@ Install the LangChain integration:
 pip install langchain-cockroachdb
 ```
 
+Requires CockroachDB v25.4 or later.
+
 ### Get your CockroachDB connection string
 
 You'll need a CockroachDB cluster. Choose one option:
@@ -135,12 +137,14 @@ See [CockroachDB chat history documentation](../chat_message_histories/cockroach
 **Quick example:**
 
 ```python
-from langchain_cockroachdb import CockroachDBChatMessageHistory
+from langchain_cockroachdb import CockroachDBChatMessageHistory, CockroachDBEngine
 import uuid
+
+engine = CockroachDBEngine.from_connection_string(CONNECTION_STRING)
 
 chat_history = CockroachDBChatMessageHistory(
     session_id=str(uuid.uuid4()),
-    connection_string=CONNECTION_STRING,
+    engine=engine,
     table_name="chat_history",
 )
 
@@ -152,6 +156,8 @@ await chat_history.aadd_message(AIMessage(content="Hi there!"))
 messages = await chat_history.aget_messages()
 ```
 
+Sharing an engine reuses its connection pool and retry policy.
+
 ### LangGraph Checkpointer
 
 Persist LangGraph workflow state in CockroachDB for short-term memory, human-in-the-loop interactions, and fault tolerance.
@@ -159,9 +165,11 @@ Persist LangGraph workflow state in CockroachDB for short-term memory, human-in-
 Both sync (`CockroachDBSaver`) and async (`AsyncCockroachDBSaver`) implementations are available.
 
 > [!TIP]
+>
 > Call `checkpointer.setup()` (or `await checkpointer.setup()`) the first time you use the CockroachDB checkpointer to create the required tables.
 
-#### Sync
+**Sync**
+
 ```python
 import os
 from langchain.chat_models import init_chat_model
@@ -204,7 +212,8 @@ with CockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
         snapshot["messages"][-1].pretty_print()
 ```
 
-#### Async
+**Async**
+
 ```python
 import os
 from langchain.chat_models import init_chat_model
@@ -248,9 +257,11 @@ async with AsyncCockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
 ```
 
 > [!NOTE]
+>
 > See [Get your CockroachDB connection string](#get-your-cockroachdb-connection-string) above for connection options including CockroachDB Cloud (recommended for production), Docker, and local binary installs. For local development, `sslmode=disable` is acceptable; always use `sslmode=verify-full` in production.
 
 > [!TIP]
+>
 > The checkpointer uses raw `psycopg3` connections (not SQLAlchemy) for compatibility with LangGraph's checkpoint interface. The `from_conn_string` factory accepts `cockroachdb://` URLs and converts them automatically.
 
 #### Row-Level TTL (v0.2.1+)
@@ -274,6 +285,7 @@ with CockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
 Async variant: `await checkpointer.aenable_ttl(ttl_interval="7 days", cron="@hourly")`
 
 > [!NOTE]
+>
 > TTL deletion is **eventual** -- expired rows remain queryable until CockroachDB's background job runs on the specified cron schedule.
 
 #### Performance optimizations (v0.2.1+)
@@ -282,7 +294,10 @@ The checkpointer includes several optimizations for low-latency reads:
 
 * **Batch fetching**: `list()` fetches all blobs and writes in 2 batch queries instead of 2 per checkpoint
 * **Raw BYTEA**: Uses psycopg3 binary protocol instead of hex-encoding blobs in SQL
-* **Prepared statements**: `from_conn_string()` enables server-side query plan caching (`prepare_threshold=5`)
+* **Prepared statements**: `prepare_threshold` defaults to 5 and can be changed in `from_conn_string`
+* **Concurrent setup**: `setup()` is safe to run from several processes at once
+* **Connection pools (v0.4.1+)**: For long-running services, pass a `psycopg_pool` connection pool rather than a single connection. A saver on a pool runs operations concurrently, each on its own pooled connection, so one saver can serve many agents; set the pool's `max_size` for the number of agents running at once. A saver on a single connection runs one operation at a time, and it cannot recover once that connection drops, which includes `from_conn_string(..., pipeline=True)`
+* **Atomic writes (v0.4.1+)**: A checkpoint write with several statements goes to the database as one batch, so a write that is cancelled partway saves nothing. It still takes one round trip
 
 ### Multi-tenancy
 
@@ -315,6 +330,28 @@ vectorstore = AsyncCockroachDBVectorStore(
 ids = await vectorstore.aadd_texts(["Tenant A document"])
 results = await vectorstore.asimilarity_search("query", k=5)
 ```
+
+Document ids must be unique across namespaces. Ids the library generates always are, and adding a document whose id already belongs to another namespace raises `ValueError` without writing anything.
+
+### Retries and resilience (v0.4.0+)
+
+Every operation retries transient CockroachDB errors: serialization failures (`40001`), ambiguous results (`40003`), connection errors (`08xxx`), node drains (`57P01`) and the CockroachDB range and node failures `58C00` and `58C01`. All writes are idempotent, so a retry after an ambiguous result never duplicates data. Configure it once on the engine:
+
+```python
+from langchain_cockroachdb import RETRYABLE_SQLSTATES, CockroachDBEngine, RetryPolicy
+
+engine = CockroachDBEngine.from_connection_string(
+    CONNECTION_STRING,
+    retry_policy=RetryPolicy(
+        max_attempts=8,
+        # Optional for multi-region apps that set statement_timeout:
+        retryable_sqlstates=RETRYABLE_SQLSTATES | {"57014"},
+        attempt_timeout=10,
+    ),
+)
+```
+
+The vector store and chat history inherit the engine's policy. The checkpointers accept `retry_policy` too; give them a `psycopg_pool` connection pool so dropped connections are replaced. Since v0.4.1, a pooled checkpointer also retries whenever `psycopg` reports its connection broken, which covers TLS connections that drop on CockroachDB Cloud.
 
 ## Why CockroachDB for AI applications?
 
@@ -358,8 +395,6 @@ results = await vectorstore.asimilarity_search("query", k=5)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cockroachdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cockroachdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -70,7 +70,7 @@ function multipleScores(rootRun: Run, example: Example) {
 
 Rows from the resulting experiment will display each of the scores.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multiple-scores.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=7f0a67189b7202a46d5e093cce9ea283" alt="multiple_scores.png" width="1622" height="1020" data-path="langsmith/images/multiple-scores.png" />
+![multiple\_scores.png](https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multiple-scores.png?fit=max\&auto=format\&n=4kN8yiLrZX_amfFn\&q=85\&s=7f0a67189b7202a46d5e093cce9ea283)
 
 ## Related
 
@@ -78,8 +78,6 @@ Rows from the resulting experiment will display each of the scores.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/multiple-scores.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/multiple-scores.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

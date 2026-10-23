@@ -52,6 +52,10 @@ async function runAgent(serverUrl: string) {
 }
 ```
 
+> **[View example trace](https://smith.langchain.com/public/6d4a6e1b-2d3f-429a-a9f7-d212429ac6b4/r)**
+>
+> Open a public LangSmith run for this example.
+
 `close()` aborts in-flight adapter work, closes its connections, and clears its caches. You can call `listTools()` again to open fresh connections, but use the newly returned tools. Previously returned tools retain their closed clients.
 
 ## Multiple servers
@@ -83,9 +87,13 @@ async function listServerTools(calendarUrl: string, filesServerPath: string) {
 }
 ```
 
+> **[View example trace](https://smith.langchain.com/public/493622a5-b24a-4d48-93df-f5b6263beb9f/r)**
+>
+> Open a public LangSmith run for this example.
+
 `listToolsets()` groups tools by server name. `listTools()` returns one array; pass a server name or an array of names to select which tools it returns. Selection filters the result, but discovery still contacts every configured server. A failure on an unselected server can fail the call.
 
-The adapter prefixes tool names with their server name by default, such as `calendar__search` and `files__search`. Set `prefixToolNameWithServerName: false` to keep raw names. `listTools()` throws if its selected tools contain duplicate names.
+The adapter prefixes tool names with their server name by default, such as `calendar_search` and `files_search`. Set `prefixToolNameWithServerName: false` to keep raw names. `listTools()` throws if its selected tools contain duplicate names.
 
 OpenAI and Anthropic accept only letters, digits, `_`, and `-` in tool names (`^[a-zA-Z0-9_-]+$`), up to 64 characters for OpenAI and 128 for Anthropic. The adapter does not rename a prefixed name that breaks these limits, so keep server names short and free of dots and spaces.
 
@@ -112,6 +120,10 @@ export async function makeGraph() {
   });
 }
 ```
+
+> **[View example trace](https://smith.langchain.com/public/d70d86cb-8960-4b0a-a087-18a23d649f71/r)**
+>
+> Open a public LangSmith run for this example.
 
 Keep the adapter open across runs. Close it during application shutdown, after active runs finish. For runs with different user credentials, see [Per-user authentication](auth.md#per-user-authentication).
 
@@ -165,6 +177,10 @@ async function listToolsAcrossEras(modernUrl: string, legacyUrl: string) {
 }
 ```
 
+> **[View example trace](https://smith.langchain.com/public/0263dee8-0ce0-48a5-ba30-62bea305de1b/r)**
+>
+> Open a public LangSmith run for this example.
+
 Each server's `mode` controls its negotiation independently:
 
 * **`"auto"`** (the default): Try the current protocol and fall back for a legacy-only server.
@@ -185,8 +201,6 @@ In `"auto"` mode, a URL server that answers the Streamable HTTP request with 404
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/connections.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/connections.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -31,6 +31,7 @@ tags: [reference, langgraph, pregel, debug]
 - [`filter_to_user_tags()`](https://reference.langchain.com/python/langgraph/pregel/debug/filter_to_user_tags)
 - [`patch_checkpoint_map()`](https://reference.langchain.com/python/langgraph/pregel/debug/patch_checkpoint_map)
 - [`read_channels()`](https://reference.langchain.com/python/langgraph/pregel/debug/read_channels)
+- [`read_task_statuses()`](https://reference.langchain.com/python/langgraph/pregel/debug/read_task_statuses)
 - [`map_debug_tasks()`](https://reference.langchain.com/python/langgraph/pregel/debug/map_debug_tasks)
 - [`is_multiple_channel_write()`](https://reference.langchain.com/python/langgraph/pregel/debug/is_multiple_channel_write)
 - [`map_task_result_writes()`](https://reference.langchain.com/python/langgraph/pregel/debug/map_task_result_writes)
@@ -43,4 +44,4 @@ tags: [reference, langgraph, pregel, debug]
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/debug.py)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/debug.py)

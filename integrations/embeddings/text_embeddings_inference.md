@@ -17,6 +17,7 @@ tags: [docs, integrations, embeddings, text_embeddings_inference]
 TEI serves an OpenAI-compatible `/v1/embeddings` endpoint, so you can consume a TEI deployment from LangChain with `OpenAIEmbeddings` from the `langchain-openai` package.
 
 > [!NOTE]
+>
 > Earlier versions of this guide used `HuggingFaceEndpointEmbeddings(model="http://localhost:8080")`. `langchain-huggingface` no longer accepts a URL for `model` and raises `` `model` must be a HuggingFace repo ID, not a URL. ``. Point `OpenAIEmbeddings` at the TEI server instead, as shown below.
 
 ## Setup
@@ -56,6 +57,7 @@ embeddings = OpenAIEmbeddings(
 ```
 
 > [!NOTE]
+>
 > Set `check_embedding_ctx_length=False`. Without it, `OpenAIEmbeddings` tokenizes input with `tiktoken` and sends token IDs, which TEI does not accept. The flag sends raw text instead. If you start TEI with an API key, pass the same value as `api_key`.
 
 Then embed your texts:
@@ -82,8 +84,6 @@ doc_result[0][:3]
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/text_embeddings_inference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/text_embeddings_inference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

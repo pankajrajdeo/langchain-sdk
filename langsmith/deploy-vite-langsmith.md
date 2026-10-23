@@ -54,13 +54,15 @@ During local development, `pnpm run dev` starts both the LangGraph dev server an
 
 ## Run locally
 
-### Install dependencies
+**1. Install dependencies**
+
 ```bash
 cd js-langsmith
 pnpm install
 ```
 
-### Create your environment file
+**2. Create your environment file**
+
 ```bash
 cp .env.example .env
 ```
@@ -73,7 +75,8 @@ OPENAI_API_KEY=<your OpenAI API key>
 
 Leave `LANGSMITH_API_KEY` and `VITE_AGENT_API_URL` empty for local development. You only need `LANGSMITH_API_KEY` when deploying or testing the UI against a remote LangSmith deployment.
 
-### Start the agent and UI
+**3. Start the agent and UI**
+
 ```bash
 pnpm run dev
 ```
@@ -83,7 +86,8 @@ This starts both processes:
 * LangGraph dev server at [http://localhost:2024](http://localhost:2024).
 * Vite dev server at [http://localhost:5173](http://localhost:5173).
 
-### Open the chat
+**4. Open the chat**
+
 Open [http://localhost:5173](http://localhost:5173). Try a prompt that uses both subagents:
 
 ```text
@@ -94,7 +98,8 @@ When `VITE_AGENT_API_URL` is empty, the Vite app uses its local proxy at `/api/l
 
 ## Deploy the agent to LangSmith
 
-### Confirm your environment
+**1. Confirm your environment**
+
 Your `.env` must include:
 
 ```bash
@@ -110,14 +115,16 @@ LANGSMITH_DEPLOYMENT_NAME=deployment-cookbook-agent
 
 If `LANGSMITH_DEPLOYMENT_NAME` is unset, the deployment name defaults to the directory name.
 
-### Deploy the agent to LangSmith
+**2. Deploy the agent to LangSmith**
+
 ```bash
 pnpm run deploy
 ```
 
 This runs `langgraphjs deploy`. The CLI uses `langgraph.json` to deploy the `agent` graph from `agent/index.ts`.
 
-### Copy the deployment API URL
+**3. Copy the deployment API URL**
+
 After deploy, open the deployment in LangSmith and copy its **API URL**. It should look like:
 
 ```text
@@ -126,7 +133,8 @@ https://your-app.us.langgraph.app/
 
 Use the root URL only. Do not add any API path suffix.
 
-### Test the UI against the remote deployment
+**4. Test the UI against the remote deployment**
+
 Set `VITE_AGENT_API_URL` in `.env`:
 
 ```bash
@@ -142,54 +150,62 @@ pnpm run dev
 The browser client reuses `LANGSMITH_API_KEY` when talking to the remote deployment.
 
 > [!WARNING]
+>
 > The demo exposes `LANGSMITH_API_KEY` to the browser bundle so the UI can call the LangSmith deployment directly. That is convenient for local testing, but not production-safe. For a real app, proxy requests through your own backend and keep the key server-side.
 
 ## Deploy the frontend
 
 The agent and the UI deploy separately. After `pnpm run deploy` succeeds, host the Vite build (`dist/`) on any static platform and point it at your LangSmith deployment URL.
 
-#### Vercel
-### Import the repository
+**Vercel**
+
+**1. Import the repository**
+
 Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-langsmith&env=VITE_AGENT_API_URL,LANGSMITH_API_KEY&envDescription=LangSmith%20deployment%20URL%20and%20API%20key" target="_blank" rel="noopener noreferrer">
-  <img src="https://vercel.com/button" alt="Deploy with Vercel" />
-</a>
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook\&root-directory=js-langsmith\&env=VITE_AGENT_API_URL,LANGSMITH_API_KEY\&envDescription=LangSmith%20deployment%20URL%20and%20API%20key)
 
-### Configure the project
+**2. Configure the project**
+
 1. Set **Root Directory** to `js-langsmith`.
 2. Use the default Vite build. The build output is `dist/`.
 3. Set these environment variables:
    * `VITE_AGENT_API_URL`: the LangSmith deployment root URL.
    * `LANGSMITH_API_KEY`: the LangSmith API key used by the demo client.
 
-#### Netlify
-### Import the repository
+**Netlify**
+
+**1. Import the repository**
+
 Click **Deploy to Netlify** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook&base=js-langsmith" target="_blank" rel="noopener noreferrer">
-  <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />
-</a>
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook\&base=js-langsmith)
 
-### Configure the project
+**2. Configure the project**
+
 Set **Base directory** to `js-langsmith`. Use the default build command (`pnpm build` or `npm run build`) and publish directory `dist/`.
 
-### Set environment variables
+**3. Set environment variables**
+
 Add these variables in Netlify before deploying:
 
 * `VITE_AGENT_API_URL`: the LangSmith deployment root URL.
 * `LANGSMITH_API_KEY`: the LangSmith API key used by the demo client.
 
-#### Cloudflare Pages
-### Connect the repository
+**Cloudflare Pages**
+
+**1. Connect the repository**
+
 In the [Cloudflare dashboard](https://dash.cloudflare.com/), create a **Workers & Pages** project from [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook).
 
-### Configure the build
+**2. Configure the build**
+
 * **Root directory**: `js-langsmith`
 * **Build command**: `pnpm install && pnpm build`
 * **Build output directory**: `dist`
 
-### Set environment variables
+**3. Set environment variables**
+
 Add these variables in the Pages project settings:
 
 * `VITE_AGENT_API_URL`: the LangSmith deployment root URL.
@@ -206,93 +222,78 @@ Add these variables in the Pages project settings:
 
 ## Learn about the project
 
-<details>
-<summary>Agent files</summary>
-
-The LangSmith backend lives in `agent/`:
-
+> **Agent files**
+>
+> The LangSmith backend lives in `agent/`:
+>
 ```text
-agent/
-├── index.ts       # createDeepAgent graph
-├── middleware.ts  # response middleware
-└── tools.ts       # custom code tools
+> agent/
+> ├── index.ts       # createDeepAgent graph
+> ├── middleware.ts  # response middleware
+> └── tools.ts       # custom code tools
 ```
+>
+> `agent/index.ts` exports the graph that LangGraph serves locally and LangSmith deploys. The local `MemorySaver` checkpointer is only used by `langgraph dev`. LangSmith Deployment replaces it with durable Postgres-backed storage in production without code changes.
 
-`agent/index.ts` exports the graph that LangGraph serves locally and LangSmith deploys. The local `MemorySaver` checkpointer is only used by `langgraph dev`. LangSmith Deployment replaces it with durable Postgres-backed storage in production without code changes.
-
-</details>
-
-<details>
-<summary>LangGraph config</summary>
-
-`langgraph.json` points the CLI at the graph:
-
+> **LangGraph config**
+>
+> `langgraph.json` points the CLI at the graph:
+>
 ```json
-{
-  "graphs": {
-    "agent": "./agent/index.ts:agent"
-  },
-  "env": ".env"
-}
+> {
+>   "graphs": {
+>     "agent": "./agent/index.ts:agent"
+>   },
+>   "env": ".env"
+> }
 ```
+>
+> The graph id is `agent`. The frontend uses that id as the assistant id when streaming.
 
-The graph id is `agent`. The frontend uses that id as the assistant id when streaming.
+> **Chat UI**
+>
+> The React app in `src/` provides streaming chat, thread history, subagent rendering, and tool-call rendering.
+>
+> The frontend uses:
+>
+> * `client.threads.search()` for the thread sidebar.
+> * `client.threads.create()` and `client.threads.delete()` for conversation management.
+> * `StreamProvider` with `assistantId: "agent"` for streaming chat.
+>
+> See the [Agent Server API reference](server-api-ref.md) for the underlying thread and streaming APIs.
 
-</details>
-
-<details>
-<summary>Chat UI</summary>
-
-The React app in `src/` provides streaming chat, thread history, subagent rendering, and tool-call rendering.
-
-The frontend uses:
-
-* `client.threads.search()` for the thread sidebar.
-* `client.threads.create()` and `client.threads.delete()` for conversation management.
-* `StreamProvider` with `assistantId: "agent"` for streaming chat.
-
-See the [Agent Server API reference](server-api-ref.md) for the underlying thread and streaming APIs.
-
-</details>
-
-<details>
-<summary>Local commands</summary>
-
-Run both local processes:
-
+> **Local commands**
+>
+> Run both local processes:
+>
 ```bash
-pnpm run dev
+> pnpm run dev
 ```
-
-Run them separately:
-
+>
+> Run them separately:
+>
 ```bash
-pnpm run dev:agent
-pnpm run dev:web
+> pnpm run dev:agent
+> pnpm run dev:web
 ```
-
-Build and preview the frontend:
-
+>
+> Build and preview the frontend:
+>
 ```bash
-pnpm build
-pnpm preview
+> pnpm build
+> pnpm preview
 ```
 
-</details>
-
-<details>
-<summary>CI/CD</summary>
-
-The agent deploys via GitHub Actions when files under `js-langsmith/agent/` or shared config files change:
-
-* Workflow: [`.github/workflows/deploy-langsmith-agent.yml`](https://github.com/langchain-ai/deployment-cookbook/blob/main/.github/workflows/deploy-langsmith-agent.yml)
-* Action: `langgraphjs deploy` to LangSmith.
-* Required secret: `LANGSMITH_API_KEY`.
-* Optional variable: `LANGSMITH_DEPLOYMENT_NAME`.
-
-The frontend deploys through your static host's Git integration (for example Vercel, Netlify, or Cloudflare Pages).
-
-</details>
+> **CI/CD**
+>
+> The agent deploys via GitHub Actions when files under `js-langsmith/agent/` or shared config files change:
+>
+> * Workflow: [`.github/workflows/deploy-langsmith-agent.yml`](https://github.com/langchain-ai/deployment-cookbook/blob/main/.github/workflows/deploy-langsmith-agent.yml)
+> * Action: `langgraphjs deploy` to LangSmith.
+> * Required secret: `LANGSMITH_API_KEY`.
+> * Optional variable: `LANGSMITH_DEPLOYMENT_NAME`.
+>
+> The frontend deploys through your static host's Git integration (for example Vercel, Netlify, or Cloudflare Pages).
 
 ## See also
 
@@ -303,8 +304,6 @@ The frontend deploys through your static host's Git integration (for example Ver
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-vite-langsmith.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-vite-langsmith.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

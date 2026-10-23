@@ -13,12 +13,14 @@ tags: [docs, javascript, deepagents, memory]
 Memory lets your agent learn and improve across conversations. Deep Agents makes memory first class with filesystem-backed memory: the agent reads and writes memory as files, and you control where those files are stored using [backends](backends.md).
 
 > [!TIP]
+>
 > To generate a repository wiki that coding agents discover through [`AGENTS.md`](https://agents.md/), see [OpenWiki](../../openwiki/overview.md).
 
 > [!NOTE]
+>
 > This page covers **long-term memory**: memory that persists across conversations. For short-term memory (conversation history and scratch files within a single session), see the [context engineering](context-engineering.md) guide. Short-term memory is managed automatically as part of the agent's [state](../langgraph/graph-api.md#state).
 >
-> <img src="https://mintcdn.com/langchain-5e9cc07a/9oyV6nbtSbBRfaE1/oss/images/deepagents/production/memory.png?fit=max&auto=format&n=9oyV6nbtSbBRfaE1&q=85&s=3ec585271dcd8d62e0207d79d68c296b" alt="Short-term memory is scoped to a single thread via checkpoints; long-term memory persists across threads via the store" width="1920" height="1160" data-path="oss/images/deepagents/production/memory.png" />
+> ![Short-term memory is scoped to a single thread via checkpoints; long-term memory persists across threads via the store](https://mintcdn.com/langchain-5e9cc07a/9oyV6nbtSbBRfaE1/oss/images/deepagents/production/memory.png?fit=max\&auto=format\&n=9oyV6nbtSbBRfaE1\&q=85\&s=3ec585271dcd8d62e0207d79d68c296b)
 
 ## How memory works
 
@@ -41,6 +43,7 @@ Give the agent its own persistent identity that evolves over time. Agent-scoped 
 The key is the backend namespace: setting it to `(assistant_id,)` means every conversation for this agent reads and writes to the same memory file.
 
 > [!NOTE]
+>
 > Accessing `rt.serverInfo` requires `deepagents>=1.9.0`. On older versions, read the assistant ID from `getConfig().metadata.assistantId` instead.
 
 ```typescript
@@ -63,73 +66,71 @@ const agent = createDeepAgent({
 });
 ```
 
-<details>
-<summary>Full example: seed memory and invoke</summary>
-
-Populate the store with initial memories, then invoke the agent across two threads to see it remember and update what it learns.
-
+> **Full example: seed memory and invoke**
+>
+> Populate the store with initial memories, then invoke the agent across two threads to see it remember and update what it learns.
+>
 ```typescript
-import { createDeepAgent, CompositeBackend, StateBackend, StoreBackend, createFileData } from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore();  // Use platform store when deploying to LangSmith
-
-// Seed the memory file
-await store.put(
-  ["my-agent"],
-  "/memories/AGENTS.md",
-  createFileData(`## Response style
-- Keep responses concise
-- Use code examples where possible
-`),
-);
-
-// Seed a skill
-await store.put(
-  ["my-agent"],
-  "/skills/langgraph-docs/SKILL.md",
-  createFileData(`---
-name: langgraph-docs
-description: Fetch relevant LangGraph documentation to provide accurate guidance.
----
-
-# langgraph-docs
-
-Use the fetch_url tool to read https://docs.langchain.com/llms.txt, then fetch relevant pages.
-`),
-);
-
-const agent = createDeepAgent({
-  memory: ["/memories/AGENTS.md"],
-  skills: ["/skills/"],
-  backend: (rt) => new CompositeBackend(
-    new StateBackend(rt),
-    {
-      "/memories/": new StoreBackend(rt, {
-        namespace: (rt) => ["my-agent"],
-      }),
-      "/skills/": new StoreBackend(rt, {
-        namespace: (rt) => ["my-agent"],
-      }),
-    },
-  ),
-  store,
-});
-
-// Thread 1: the agent learns a new preference and saves it to memory
-const config1 = { configurable: { thread_id: crypto.randomUUID() } };
-await agent.invoke({
-  messages: [{ role: "user", content: "I prefer detailed explanations. Remember that." }],
-}, config1);
-
-// Thread 2: the agent reads memory and applies the preference
-const config2 = { configurable: { thread_id: crypto.randomUUID() } };
-await agent.invoke({
-  messages: [{ role: "user", content: "Explain how transformers work." }],
-}, config2);
+> import { createDeepAgent, CompositeBackend, StateBackend, StoreBackend, createFileData } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+> import { uuid7 } from "langsmith";
+>
+> const store = new InMemoryStore();  // Use platform store when deploying to LangSmith
+>
+> // Seed the memory file
+> await store.put(
+>   ["my-agent"],
+>   "/memories/AGENTS.md",
+>   createFileData(`## Response style
+> - Keep responses concise
+> - Use code examples where possible
+> `),
+> );
+>
+> // Seed a skill
+> await store.put(
+>   ["my-agent"],
+>   "/skills/langgraph-docs/SKILL.md",
+>   createFileData(`---
+> name: langgraph-docs
+> description: Fetch relevant LangGraph documentation to provide accurate guidance.
+> ---
+>
+> # langgraph-docs
+>
+> Use the fetch_url tool to read https://docs.langchain.com/llms.txt, then fetch relevant pages.
+> `),
+> );
+>
+> const agent = createDeepAgent({
+>   memory: ["/memories/AGENTS.md"],
+>   skills: ["/skills/"],
+>   backend: (rt) => new CompositeBackend(
+>     new StateBackend(rt),
+>     {
+>       "/memories/": new StoreBackend(rt, {
+>         namespace: (rt) => ["my-agent"],
+>       }),
+>       "/skills/": new StoreBackend(rt, {
+>         namespace: (rt) => ["my-agent"],
+>       }),
+>     },
+>   ),
+>   store,
+> });
+>
+> // Thread 1: the agent learns a new preference and saves it to memory
+> const config1 = { configurable: { thread_id: uuid7() } };
+> await agent.invoke({
+>   messages: [{ role: "user", content: "I prefer detailed explanations. Remember that." }],
+> }, config1);
+>
+> // Thread 2: the agent reads memory and applies the preference
+> const config2 = { configurable: { thread_id: uuid7() } };
+> await agent.invoke({
+>   messages: [{ role: "user", content: "Explain how transformers work." }],
+> }, config2);
 ```
-
-</details>
 
 ### User-scoped memory
 
@@ -157,77 +158,75 @@ const agent = createDeepAgent({
 });
 ```
 
-<details>
-<summary>Full example: isolated memory across users</summary>
-
-Seed per-user memories and invoke the agent as two different users. Each user sees only their own preferences.
-
+> **Full example: isolated memory across users**
+>
+> Seed per-user memories and invoke the agent as two different users. Each user sees only their own preferences.
+>
 ```typescript
-import { createDeepAgent, CompositeBackend, StateBackend, StoreBackend, createFileData } from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore();  // Use platform store when deploying to LangSmith
-
-// Seed preferences for two users
-await store.put(
-  ["user-alice"],
-  "/memories/preferences.md",
-  createFileData(`## Preferences
-- Likes concise bullet points
-- Prefers Python examples
-`),
-);
-await store.put(
-  ["user-bob"],
-  "/memories/preferences.md",
-  createFileData(`## Preferences
-- Likes detailed explanations
-- Prefers TypeScript examples
-`),
-);
-
-// Seed a skill for Alice
-await store.put(
-  ["user-alice"],
-  "/skills/langgraph-docs/SKILL.md",
-  createFileData(`---
-name: langgraph-docs
-description: Fetch relevant LangGraph documentation to provide accurate guidance.
----
-
-# langgraph-docs
-
-Use the fetch_url tool to read https://docs.langchain.com/llms.txt, then fetch relevant pages.
-`),
-);
-
-const agent = createDeepAgent({
-  memory: ["/memories/preferences.md"],
-  skills: ["/skills/"],
-  backend: (rt) => new CompositeBackend(
-    new StateBackend(rt),
-    {
-      "/memories/": new StoreBackend(rt, {
-        namespace: (rt) => [rt.serverInfo.user.identity],
-      }),
-      "/skills/": new StoreBackend(rt, {
-        namespace: (rt) => [rt.serverInfo.user.identity],
-      }),
-    },
-  ),
-  store,
-});
-
-// When deployed, each authenticated request resolves
-// `rt.serverInfo.user.identity` to the calling user, so Alice and Bob
-// automatically see only their own preferences.
-await agent.invoke(
-  { messages: [{ role: "user", content: "How do I read a CSV file?" }] },
-  { configurable: { thread_id: crypto.randomUUID() } },
-);
+> import { createDeepAgent, CompositeBackend, StateBackend, StoreBackend, createFileData } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+> import { uuid7 } from "langsmith";
+>
+> const store = new InMemoryStore();  // Use platform store when deploying to LangSmith
+>
+> // Seed preferences for two users
+> await store.put(
+>   ["user-alice"],
+>   "/memories/preferences.md",
+>   createFileData(`## Preferences
+> - Likes concise bullet points
+> - Prefers Python examples
+> `),
+> );
+> await store.put(
+>   ["user-bob"],
+>   "/memories/preferences.md",
+>   createFileData(`## Preferences
+> - Likes detailed explanations
+> - Prefers TypeScript examples
+> `),
+> );
+>
+> // Seed a skill for Alice
+> await store.put(
+>   ["user-alice"],
+>   "/skills/langgraph-docs/SKILL.md",
+>   createFileData(`---
+> name: langgraph-docs
+> description: Fetch relevant LangGraph documentation to provide accurate guidance.
+> ---
+>
+> # langgraph-docs
+>
+> Use the fetch_url tool to read https://docs.langchain.com/llms.txt, then fetch relevant pages.
+> `),
+> );
+>
+> const agent = createDeepAgent({
+>   memory: ["/memories/preferences.md"],
+>   skills: ["/skills/"],
+>   backend: (rt) => new CompositeBackend(
+>     new StateBackend(rt),
+>     {
+>       "/memories/": new StoreBackend(rt, {
+>         namespace: (rt) => [rt.serverInfo.user.identity],
+>       }),
+>       "/skills/": new StoreBackend(rt, {
+>         namespace: (rt) => [rt.serverInfo.user.identity],
+>       }),
+>     },
+>   ),
+>   store,
+> });
+>
+> // When deployed, each authenticated request resolves
+> // `rt.serverInfo.user.identity` to the calling user, so Alice and Bob
+> // automatically see only their own preferences.
+> await agent.invoke(
+>   { messages: [{ role: "user", content: "How do I read a CSV file?" }] },
+>   { configurable: { thread_id: uuid7() } },
+> );
 ```
-
-</details>
 
 ## Advanced usage
 
@@ -454,9 +453,11 @@ const cronJob = await client.crons.create(
 ```
 
 > [!NOTE]
+>
 > All cron schedules are interpreted in **UTC**. See [cron jobs](../../langsmith/cron-jobs.md) for details on managing and deleting cron jobs.
 
 > [!WARNING]
+>
 > The cron interval must match the lookback window inside the consolidation agent. The example above runs every 6 hours (`0 */6 * * *`) and the agent's `search_recent_conversations` tool looks back `timedelta(hours=6)` — keep these in sync. If the cron runs more often than the lookback, you'll reprocess the same conversations; if it runs less often, you'll drop memories that fall outside the window.
 
 For more on deploying agents with background processes, see [going to production](going-to-production.md).
@@ -500,6 +501,7 @@ new StoreBackend({
 Use `assistant_id` alone if you only need per-agent isolation without per-user scoping.
 
 > [!TIP]
+>
 > Use [LangSmith tracing](../../langsmith/trace-with-langgraph.md) to audit what your agent writes to memory. Every file write appears as a tool call in the trace.
 
 ## See also
@@ -511,8 +513,6 @@ Use `assistant_id` alone if you only need per-agent isolation without per-user s
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

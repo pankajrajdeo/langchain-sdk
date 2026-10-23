@@ -13,6 +13,7 @@ tags: [docs, integrations, providers, microsoft]
 This page covers all LangChain integrations with [Microsoft Azure](https://portal.azure.com) and other [Microsoft](https://www.microsoft.com) products.
 
 > [!TIP]
+>
 > **Recommended: Microsoft Foundry**
 >
 > For new LangChain or LangGraph applications centered on [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/), start with [`langchain-azure-ai`](azure_ai.md). It adds Foundry project endpoints, Azure credential integration, Agent Service, hosting, tools, Content Safety, retrieval, and Azure observability.
@@ -31,6 +32,7 @@ This page covers all LangChain integrations with [Microsoft Azure](https://porta
 > * [Azure-Samples/langchain-agent-python](https://github.com/Azure-Samples/langchain-agent-python): Build and deploy LangChain agents on Azure.
 
 > [!NOTE]
+>
 > **Claude on Azure**
 >
 > Microsoft Foundry also offers access to all [Anthropic Claude models](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-claude), including Opus, Sonnet, and Haiku. Claude models are served through a dedicated Anthropic-native endpoint rather than the Azure OpenAI v1 API. Use [`langchain-anthropic`](../chat/anthropic.md) pointed at your Foundry Anthropic endpoint.
@@ -123,7 +125,8 @@ uv add langchain-openai
 
 On the v1 API, use `ChatOpenAI` directly against your Azure endpoint—no `api_version` required:
 
-#### Entra ID (recommended)
+**Entra ID (recommended)**
+
 ```bash
 pip install azure-identity
 ```
@@ -144,7 +147,8 @@ llm = ChatOpenAI(
 )
 ```
 
-#### API key
+**API key**
+
 ```python
 from langchain_openai import ChatOpenAI
 
@@ -167,7 +171,8 @@ See the [Azure ChatOpenAI integration page](../chat/azure_chat_openai.md) for en
 
 Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses), which provides stateful conversations, built-in tools (web search, file search, code interpreter), and structured reasoning summaries. `ChatOpenAI` automatically routes to the Responses API when you set the `reasoning` parameter, or you can opt in explicitly with `use_responses_api=True`:
 
-#### Entra ID (recommended)
+**Entra ID (recommended)**
+
 ```python
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from langchain_openai import ChatOpenAI
@@ -188,7 +193,8 @@ response = llm.invoke("Summarize the bitter lesson.")
 print(response.text)
 ```
 
-#### API key
+**API key**
+
 ```python
 from langchain_openai import ChatOpenAI
 
@@ -228,7 +234,8 @@ pip install -U langchain-openai
 uv add langchain-openai
 ```
 
-#### Entra ID (recommended)
+**Entra ID (recommended)**
+
 ```python
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from langchain_openai import AzureOpenAI
@@ -247,7 +254,8 @@ llm = AzureOpenAI(
 print(llm.invoke("Write a haiku about the ocean."))
 ```
 
-#### API key
+**API key**
+
 ```python
 from langchain_openai import AzureOpenAI
 
@@ -303,6 +311,7 @@ embeddings = AzureAIOpenAIApiEmbeddingsModel(
 ```
 
 > [!NOTE]
+>
 > Foundry project configuration currently derives a direct `/openai/v1` endpoint because embeddings are not yet served through the project endpoint itself.
 
 For more information, see the [Microsoft Foundry embeddings integration](azure_ai.md#azure-ai-model-inference-for-embeddings).
@@ -323,7 +332,8 @@ pip install -U langchain-openai
 uv add langchain-openai
 ```
 
-#### Entra ID (recommended)
+**Entra ID (recommended)**
+
 ```python
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from langchain_openai import AzureOpenAIEmbeddings
@@ -342,7 +352,8 @@ embeddings = AzureOpenAIEmbeddings(
 vector = embeddings.embed_query("LangChain makes agents easy.")
 ```
 
-#### API key
+**API key**
+
 ```python
 from langchain_openai import AzureOpenAIEmbeddings
 
@@ -422,6 +433,7 @@ from langchain_azure_storage.document_loaders import AzureBlobStorageLoader
 > [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) is Microsoft's object storage solution for the cloud. `AzureBlobBackend` implements the Deep Agents `BackendProtocol`, so a deep agent can persist its entire workspace (files, memories, and artifacts) in a blob container.
 
 > [!NOTE]
+>
 > The `AzureBlobBackend` is part of the `langchain-azure-storage` package, which is currently in **Public Preview**.
 
 Install with the `deepagents` extra (requires Python 3.11+):
@@ -549,7 +561,7 @@ For async usage, import `AsyncAzureCosmosDBNoSqlSemanticCache`.
 
 ### Azure cosmos DB
 
-AI agents can rely on Azure Cosmos DB as a unified [memory system](https://learn.microsoft.com/en-us/azure/cosmos-db/ai-agents#memory-can-make-or-break-agents) solution, enjoying speed, scale, and simplicity. This service successfully [enabled OpenAI's ChatGPT service](https://www.youtube.com/watch?v=6IIUtEFKJec\&t) to scale dynamically with high reliability and low maintenance. Powered by an atom-record-sequence engine, it is the world's first globally distributed [NoSQL](https://learn.microsoft.com/en-us/azure/cosmos-db/distributed-nosql), [relational](https://learn.microsoft.com/en-us/azure/cosmos-db/distributed-relational), and [vector database](https://learn.microsoft.com/en-us/azure/cosmos-db/vector-database) service that offers a serverless mode.
+AI agents can rely on Azure Cosmos DB as a unified [memory system](https://learn.microsoft.com/en-us/azure/cosmos-db/ai-agents#ai-agent-memory-system) solution, enjoying speed, scale, and simplicity. This service successfully [enabled OpenAI's ChatGPT service](https://www.youtube.com/watch?v=6IIUtEFKJec\&t) to scale dynamically with high reliability and low maintenance. Powered by an atom-record-sequence engine, it is the world's first globally distributed [NoSQL](https://learn.microsoft.com/en-us/azure/cosmos-db/distributed-nosql), [relational](https://learn.microsoft.com/en-us/azure/cosmos-db/distributed-relational), and [vector database](https://learn.microsoft.com/en-us/azure/cosmos-db/vector-database) service that offers a serverless mode.
 
 Below are two available Azure Cosmos DB APIs that can provide vector store functionalities.
 
@@ -887,6 +899,7 @@ The `AzureAIServicesToolkit` toolkit includes the following tools:
 [Microsoft Foundry hosted agents](https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/langchain-hosted-agents) run custom LangGraph code in a managed runtime. Use the `langchain_azure_ai.agents.hosting` package to expose a compiled LangGraph graph while Foundry manages the runtime, sessions, scaling, identity, and protocol endpoints.
 
 > [!NOTE]
+>
 > LangGraph hosting support requires `langchain-azure-ai[hosting]>=1.2.8`.
 
 Before you begin, you need an Azure subscription, a Foundry project, a deployed chat model, Python 3.10 or later, and Azure CLI authentication. Deploying the agent also requires the Foundry Project Manager role on the project.
@@ -899,6 +912,7 @@ Choose a hosting protocol based on how clients interact with the agent:
 | Invocations | `--protocol invocations` | `InvocationsHostServer` | `/invocations` | You need a custom JSON shape, a webhook-style endpoint, or non-conversational processing. |
 
 > [!NOTE]
+>
 > For hosted graphs using `BaseChatOpenAI`-based models with the Responses API, use `output_version="responses/v1"`. You can omit this setting in `langchain-openai` 1.0.0 or later, unless overridden by `LC_OUTPUT_VERSION`. This guidance applies to both Responses and Invocations hosting protocols.
 
 See the complete run samples for the [Responses protocol](https://github.com/microsoft-foundry/foundry-samples/tree/main/samples/python/hosted-agents/langgraph/responses/10-run) and [Invocations protocol](https://github.com/microsoft-foundry/foundry-samples/tree/main/samples/python/hosted-agents/langgraph/invocations/03-run).
@@ -909,14 +923,16 @@ If your agent already runs with the LangGraph CLI, use `langchain_azure_ai.agent
 
 Set the Foundry project endpoint and model deployment name, then select the protocol when you start the host:
 
-#### Responses
+**Responses**
+
 ```bash
 export FOUNDRY_PROJECT_ENDPOINT="https://<account>.services.ai.azure.com/api/projects/<project>"
 export AZURE_AI_MODEL_DEPLOYMENT_NAME="<model-deployment-name>"
 python -m langchain_azure_ai.agents.hosting.run --protocol responses
 ```
 
-#### Invocations
+**Invocations**
+
 ```bash
 export FOUNDRY_PROJECT_ENDPOINT="https://<account>.services.ai.azure.com/api/projects/<project>"
 export AZURE_AI_MODEL_DEPLOYMENT_NAME="<model-deployment-name>"
@@ -925,7 +941,8 @@ python -m langchain_azure_ai.agents.hosting.run --protocol invocations
 
 For deployment, set `codeConfiguration.entryPoint` on the agent service in `azure.yaml` to the same runner and protocol. Keep the existing project path, runtime, and dependency resolution settings:
 
-#### Responses
+**Responses**
+
 ```yaml
 services:
     my-agent:
@@ -933,7 +950,8 @@ services:
             entryPoint: '-m langchain_azure_ai.agents.hosting.run --protocol responses'
 ```
 
-#### Invocations
+**Invocations**
+
 ```yaml
 services:
     my-agent:
@@ -946,14 +964,16 @@ services:
 
 Use the SDK host classes when you need to customize server construction, control the server lifecycle directly, or implement advanced hosting behavior such as custom routes or handlers:
 
-#### Responses
+**Responses**
+
 ```python
 from langchain_azure_ai.agents.hosting import ResponsesHostServer
 
 ResponsesHostServer(graph).run()
 ```
 
-#### Invocations
+**Invocations**
+
 ```python
 from langchain_azure_ai.agents.hosting import InvocationsHostServer
 
@@ -966,8 +986,6 @@ The Microsoft Learn guide includes complete examples for both protocols, convers
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/microsoft.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/microsoft.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

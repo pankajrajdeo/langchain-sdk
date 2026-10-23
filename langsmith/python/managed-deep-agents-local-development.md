@@ -13,7 +13,8 @@ tags: [docs, langsmith, managed-deep-agents-local-development]
 `mda dev` compiles a Managed Deep Agents project and runs it on a local Agent Server. It opens [LangSmith Studio](../studio.md) so you can interact with the agent and inspect its behavior before deploying.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## Start local Studio
 
@@ -66,8 +67,6 @@ These defaults differ from a deployed agent. Test identity and sandbox behavior 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-local-development.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-local-development.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

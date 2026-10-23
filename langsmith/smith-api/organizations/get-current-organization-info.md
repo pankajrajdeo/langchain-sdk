@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/orgs/current/info:
     get:
@@ -304,6 +307,10 @@ components:
           type: integer
         max_service_key_expiry_days:
           type: integer
+        max_tracing_key_expiry_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
         member_disabled:
           type: boolean
         org_role_id:
@@ -689,9 +696,7 @@ components:
             Platform deployments allowed for this org.
           type: integer
         max_prompt_webhooks:
-          description: >-
-            MaxPromptWebhooks independently limits each org's Prompt Hub and
-            Context Hub webhook collections.
+          description: MaxPromptWebhooks limits each org's Prompt Hub webhooks.
           type: integer
         max_sandbox_cpu:
           description: >-

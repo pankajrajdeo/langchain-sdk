@@ -65,6 +65,7 @@ export OPENAI_API_KEY="your-api-key-here"
 ```
 
 > [!TIP]
+>
 > The [`langchain-redis`](https://github.com/langchain-ai/langchain-redis/blob/main/libs/redis/README.md) package also provides `RedisChatMessageHistory` for conversation memory and `RedisSemanticCache` for LLM response caching — all backed by the same Redis instance as your vector store.
 
 ## Initialization
@@ -93,6 +94,7 @@ vector_store = RedisVectorStore(embeddings=embeddings, config=config)
 ```
 
 > [!NOTE]
+>
 > The `metadata_schema` parameter tells Redis which metadata fields to index. Fields not listed here cannot be used in filters. Use `"tag"` for categorical string values and `"numeric"` for numbers.
 
 ## Manage vector store
@@ -182,6 +184,7 @@ for doc in docs:
 There are more search methods not listed in this notebook, to find all of them be sure to read the [`API reference`](https://reference.langchain.com/python/langchain-redis/vectorstores/RedisVectorStore).
 
 > [!TIP]
+>
 > Redis supports hybrid search combining vector similarity with full-text search. See the [`API reference`](https://reference.langchain.com/python/langchain-redis/vectorstores/RedisVectorStore) for `similarity_search` parameters including `return_all` and `distance_threshold`.
 
 ### Query by turning into retriever
@@ -214,8 +217,6 @@ For detailed documentation of `RedisVectorStore` features and configurations hea
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

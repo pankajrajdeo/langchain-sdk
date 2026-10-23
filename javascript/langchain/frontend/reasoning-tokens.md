@@ -12,8 +12,6 @@ tags: [docs, javascript, langchain, frontend, reasoning-tokens]
 
 Reasoning tokens expose the internal thought process of advanced models like OpenAI's GPT-5 and Anthropic's Claude with extended thinking. These models produce structured content blocks that separate reasoning from the final answer, letting you build UIs that show *how* the model arrived at its response.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/frontend/reasoning-tokens).
-
 ## What are reasoning tokens?
 
 When models with reasoning capabilities process a prompt, they generate two distinct types of content:
@@ -32,6 +30,7 @@ These are delivered as typed content blocks within an `AIMessage`, accessible vi
 ```
 
 > [!NOTE]
+>
 > Not all models produce reasoning tokens. This pattern applies specifically to models that support extended thinking or chain-of-thought output. Standard chat models return only text blocks.
 
 ## Use cases
@@ -77,6 +76,7 @@ the last message while `stream.isLoading` is true so thinking blocks update as
 tokens arrive.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../../langchain/frontend/overview.md#type-inference) or [JavaScript](overview.md#type-inference) backends.
 
 **React**
@@ -345,8 +345,6 @@ message.contentBlocks.forEach((block) => {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/reasoning-tokens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/reasoning-tokens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

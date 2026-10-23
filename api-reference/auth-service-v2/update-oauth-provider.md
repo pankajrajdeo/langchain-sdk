@@ -142,6 +142,17 @@ components:
               type: object
             - type: 'null'
           title: Authorization Params
+        scopes:
+          anyOf:
+            - items:
+                type: string
+              type: array
+            - type: 'null'
+          title: Scopes
+        token_params:
+          anyOf:
+            - $ref: '#/components/schemas/ClientCredentialsTokenParams-Input'
+            - type: 'null'
         allowed_redirect_uris:
           anyOf:
             - items:
@@ -175,11 +186,23 @@ components:
           type: string
           title: Client Id
         auth_url:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           title: Auth Url
         token_url:
           type: string
           title: Token Url
+        grant_type:
+          $ref: '#/components/schemas/OAuthGrantType'
+          default: authorization_code
+        scopes:
+          items:
+            type: string
+          type: array
+          title: Scopes
+        token_params:
+          $ref: '#/components/schemas/ClientCredentialsTokenParams-Output'
         uses_pkce:
           type: boolean
           title: Uses Pkce
@@ -236,7 +259,6 @@ components:
         - provider_id
         - name
         - client_id
-        - auth_url
         - token_url
         - uses_pkce
         - code_challenge_method
@@ -253,6 +275,53 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ClientCredentialsTokenParams-Input:
+      properties:
+        audience:
+          anyOf:
+            - type: string
+              maxLength: 1000
+              minLength: 1
+            - type: 'null'
+          title: Audience
+        resource:
+          anyOf:
+            - type: string
+            - items:
+                type: string
+              type: array
+              maxItems: 10
+          title: Resource
+      additionalProperties: false
+      type: object
+      title: ClientCredentialsTokenParams
+      description: Optional extra fields for a client_credentials token request.
+    OAuthGrantType:
+      type: string
+      enum:
+        - authorization_code
+        - client_credentials
+      title: OAuthGrantType
+      description: OAuth 2 grant a provider uses to obtain access tokens.
+    ClientCredentialsTokenParams-Output:
+      properties:
+        audience:
+          anyOf:
+            - type: string
+              maxLength: 1000
+              minLength: 1
+            - type: 'null'
+          title: Audience
+        resource:
+          items:
+            type: string
+          type: array
+          maxItems: 10
+          title: Resource
+      additionalProperties: false
+      type: object
+      title: ClientCredentialsTokenParams
+      description: Optional extra fields for a client_credentials token request.
     ValidationError:
       properties:
         loc:

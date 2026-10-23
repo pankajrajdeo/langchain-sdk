@@ -169,6 +169,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -177,6 +179,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/audit-logs:
     get:
@@ -356,6 +359,9 @@ components:
         - create_oidc_integration
         - update_oidc_integration
         - delete_oidc_integration
+        - create_oidc_sso_settings
+        - update_oidc_sso_settings
+        - delete_oidc_sso_settings
         - update_organization_info
         - update_business_info
         - update_payment_plan
@@ -376,9 +382,12 @@ components:
         - read_workspace_encrypted_secrets
         - update_workspace_secrets
         - delete_workspace_secret
+        - upsert_workspace_secret
         - read_org_encrypted_secrets
         - update_org_secrets
         - unshare_entities
+        - upsert_slack_app_configuration
+        - delete_slack_app_configuration
         - upsert_github_app_configuration
         - update_github_app_configuration
         - delete_github_app_configuration
@@ -459,6 +468,7 @@ components:
         - create_deployment
         - update_deployment
         - delete_deployment
+        - cancel_deployment_runs
         - create_access_policy
         - delete_access_policy
         - list_access_policies
@@ -467,8 +477,17 @@ components:
         - attach_access_policies
         - detach_access_policies
         - read_role_access_policies
+        - read_team_access_policies
         - create_team
+        - update_team
+        - delete_team
         - add_team_members
+        - attach_team_access_policy
+        - detach_team_access_policy
+        - remove_team_member
+        - create_team_workspace_grant
+        - update_team_workspace_grant
+        - delete_team_workspace_grant
         - create_scim_token
         - update_scim_token
         - delete_scim_token
@@ -499,6 +518,9 @@ components:
         - trigger_forge_configuration
         - add_annotation_queue_reviewer
         - remove_annotation_queue_reviewer
+        - create_custom_view
+        - update_custom_view
+        - delete_custom_view
         - add_items_to_annotation_queue
         - delete_annotation_queue_item
         - update_annotation_queue_item
@@ -510,9 +532,18 @@ components:
         - update_mcp_server
         - delete_mcp_server
         - register_mcp_server_oauth
+        - create_mcp_credential_session
+        - invoke_mcp_server
+        - invoke_mcp_gateway
         - create_mcp_gateway
         - update_mcp_gateway
         - delete_mcp_gateway
+        - refresh_mcp_gateway_tools
+        - update_mcp_oidc_connection
+        - delete_mcp_oidc_connection
+        - create_mcp_profile
+        - update_mcp_profile
+        - delete_mcp_profile
         - create_credential
         - read_credential_secret
         - read_credential_oauth2
@@ -520,13 +551,17 @@ components:
         - update_oauth_provider
         - delete_oauth_provider
         - start_oauth_connection
+        - start_agent_auth_secret_input
         - create_agent_auth_connection
         - update_agent_auth_connection
         - delete_agent_auth_connection
+        - update_agent_auth_app
+        - delete_agent_auth_app
         - create_agent_auth_oidc_integration
         - update_agent_auth_oidc_integration
         - delete_agent_auth_oidc_integration
         - resolve_agent_auth_agent
+        - create_agent_auth_app
         - create_tool
         - update_tool
         - delete_tool
@@ -549,6 +584,10 @@ components:
         - update_fleet_webhook
         - delete_fleet_webhook
         - test_fleet_webhook
+        - create_webhook_destination
+        - update_webhook_destination
+        - delete_webhook_destination
+        - test_webhook_destination
         - create_commit
         - create_hub_environment
         - update_hub_environment
@@ -1235,9 +1274,103 @@ components:
             Sandbox that made the call under an access-delegation grant, set
             when the actor fields name its delegator rather than a user acting
             directly.
+        duration_milliseconds:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Duration Milliseconds
+          description: Time the server took to handle the request, in milliseconds.
+        user_agent:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: User Agent
+          description: User-Agent header of the request, truncated to 256 bytes.
+        tool_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Tool Name
+          description: Tool the request invoked, as named by the caller.
+        caller:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Caller
+          description: LangSmith product that made the request, as reported by the caller.
+        is_tool_error:
+          type: boolean
+          title: Is Tool Error
+          description: >-
+            True when the invoked tool reported a failure inside a successful
+            response.
+        gateway:
+          anyOf:
+            - $ref: '#/components/schemas/AuditLogGateway'
+            - type: 'null'
+          description: Managed Tools gateway the request went through.
+        upstream:
+          anyOf:
+            - $ref: '#/components/schemas/AuditLogUpstream'
+            - type: 'null'
+          description: Server and tool a Managed Tools gateway routed the call to.
+        server:
+          anyOf:
+            - $ref: '#/components/schemas/AuditLogServer'
+            - type: 'null'
+          description: Managed Tools MCP server the request reached.
       type: object
       title: AuditLogEnrichments
       description: Non-indexed request metadata stored in the enrichments JSONB column.
+    AuditLogGateway:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+        - id
+        - name
+      title: AuditLogGateway
+      description: Managed Tools gateway a request went through.
+    AuditLogUpstream:
+      properties:
+        server_id:
+          type: string
+          title: Server Id
+        builtin_server_key:
+          type: string
+          title: Builtin Server Key
+        tool_name:
+          type: string
+          title: Tool Name
+      type: object
+      required:
+        - tool_name
+      title: AuditLogUpstream
+      description: Server and tool a Managed Tools gateway routed a call to.
+    AuditLogServer:
+      properties:
+        id:
+          type: string
+          title: Id
+        key:
+          type: string
+          title: Key
+        name:
+          type: string
+          title: Name
+        host:
+          type: string
+          title: Host
+      type: object
+      required:
+        - name
+      title: AuditLogServer
+      description: Managed Tools MCP server a request reached.
   securitySchemes:
     API Key:
       type: apiKey

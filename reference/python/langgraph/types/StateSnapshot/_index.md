@@ -13,7 +13,7 @@ tags: [index, reference, python, langgraph, types, statesnapshot]
 
 - [config](config.md) - Config used to fetch this snapshot.
 - [created_at](created_at.md) - Timestamp of snapshot creation.
-- [interrupts](interrupts.md) - Interrupts that occurred in this step that are pending resolution.
+- [interrupts](interrupts.md) - Interrupts that occurred in this step.
 - [metadata](metadata.md) - Metadata associated with this snapshot.
 - [next](next.md) - The name of the node to execute in each task for this step.
 - [parent_config](parent_config.md) - Config used to fetch the parent snapshot, if any.

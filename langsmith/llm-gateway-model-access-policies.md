@@ -11,6 +11,7 @@ tags: [docs, langsmith, llm-gateway-model-access-policies]
 > Control which model providers and models are accessible through the LLM Gateway for your organization, workspaces, users, or API keys.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 A model access policy defines which providers and models are permitted through the [LLM Gateway](llm-gateway.md). The gateway blocks requests for providers or models the policy does not include, returning a `403` response. If no policy applies, all providers and models are available.
@@ -22,8 +23,9 @@ A model access policy lists one or more providers, each with an access mode:
 * **All models**: Every model the provider offers is permitted.
 * **Selected models**: Only the models you specify are permitted. At least one model is required.
 
-> [!NOTE]
-> Model access policies do not yet support custom model providers. While a model access policy applies to a request, the gateway blocks the `/providers/{configName}` and `/models/{configName}` routes.
+### Allow saved model configurations
+
+Requests that call a saved [model configuration](llm-gateway-model-configurations.md) through a `custom/<name>` model ID or a fallback chain are blocked unless the policy lists the **Model configurations** provider. This provider uses the same two access modes, but **Selected** takes configuration names, matched exactly, instead of model IDs. Names resolve in the workspace of the calling API key, so one entry on an organization-level policy applies to each workspace's own configurations.
 
 ## Scopes and overrides
 
@@ -45,6 +47,7 @@ When a request matches policies at multiple tiers, only the most specific tier a
 ## Create a model access policy
 
 > [!WARNING]
+>
 > Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
 1. Go to **LLM Gateway** and select **Model Access**.
@@ -65,8 +68,6 @@ Policies take effect immediately.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-model-access-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-model-access-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

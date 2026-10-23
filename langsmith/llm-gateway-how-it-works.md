@@ -1,16 +1,17 @@
 ---
-title: "How the gateway works"
+title: "How the LLM Gateway works"
 description: "Understand what the LLM Gateway does to each request, how upstream credentials are resolved, and where the gateway is available."
 source: "https://docs.langchain.com/langsmith/llm-gateway-how-it-works"
 category: "docs"
 tags: [docs, langsmith, llm-gateway-how-it-works]
 ---
 
-# How the gateway works
+# How the LLM Gateway works
 
 > Understand what the LLM Gateway does to each request, how upstream credentials are resolved, and where the gateway is available.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 The LLM Gateway sits between your application and the model providers your workspace has configured. It authenticates the caller, selects an upstream route, applies governance policies, translates between API formats, and traces the result.
@@ -48,7 +49,13 @@ The gateway resolves an upstream credential for every call. A workspace can use 
 
 ## Check availability
 
-The gateway runs on LangSmith Cloud in every LangSmith region, and on [BYOC](byoc.md), where it runs inside your data plane so that model requests and their traces stay in your VPC. Both use the same API formats, model IDs, policies, and tracing; only the hostname and path prefix differ.
+The gateway runs on:
+
+* LangSmith Cloud in every LangSmith region
+* [BYOC](byoc.md), where it runs inside your data plane so that model requests and their traces stay in your VPC
+* [Self-hosted](self-hosted.md) LangSmith
+
+All three use the same API formats, model IDs, policies, and tracing; only the hostname and path prefix differ.
 
 ### Use a regional gateway
 
@@ -74,10 +81,20 @@ On BYOC, replace the gateway hostname with your [data plane endpoint](byoc-usage
 Authenticate with an API key scoped to a workspace in that data plane, passed either as an `Authorization: Bearer` token or as the provider API key. Provider secrets, model IDs, policies, and tracing behave the same as on Cloud.
 
 > [!WARNING]
+>
 > Data planes are provisioned with a private endpoint by default, so you need private connectivity to reach the base URL, such as Tailscale, AWS PrivateLink, or VPC peering.
 
-> [!NOTE]
-> **Self-hosted availability:** LLM Gateway is not included in the LangSmith v0.16.0 self-hosted stable release. It becomes available in a future stable release. To express interest, submit the [LLM Gateway self-hosted access request](https://www.langchain.com/langsmith-llm-gateway-self-hosted-access-request). You can also try the LLM Gateway on v17 RC versions or BYOC ahead of the stable release.
+### Use a self-hosted installation
+
+On self-hosted LangSmith, an administrator first [enables the gateway in the Helm chart](llm-gateway-self-hosted.md). Then replace the gateway hostname with your LangSmith hostname and prefix the path with `/gateway`:
+
+| API format | Base URL | Prompt endpoint |
+| - | - | - |
+| OpenAI Chat Completions | `https://<your-hostname>/gateway/v1` | `POST /chat/completions` |
+| Anthropic Messages | `https://<your-hostname>/gateway` | `POST /v1/messages` |
+| OpenAI Responses | `https://<your-hostname>/gateway/v1` | `POST /responses` |
+
+Authenticate with an API key scoped to a workspace in your installation, passed as an `Authorization: Bearer` token or an `X-Api-Key` header.
 
 ## See also
 
@@ -88,8 +105,6 @@ Authenticate with an API key scoped to a workspace in that data plane, passed ei
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-how-it-works.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-how-it-works.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

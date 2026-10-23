@@ -14,25 +14,48 @@ When you are ready to deploy your LangGraph agent to production, choose a hostin
 
 You can also deploy on **JavaScript frameworks and platforms** such as Next.js, SvelteKit, Nuxt, Cloudflare Workers, and Deno Deploy using the same [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming).
 
-<p>Frameworks and platforms</p>
+Frameworks and platforms
 
-<a href="../../langsmith/deploy-frameworks-and-platforms.md">
-  View all guides
-</a>
+[View all guides](../../langsmith/deploy-frameworks-and-platforms.md)
 
-- [LangSmith](../../langsmith/deploy-vite-langsmith.md)
+![](https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/langchain.svg?fit=max\&auto=format\&n=ZPKed1feKJ8F6LVo\&q=85\&s=b910ed9cd0b6b8adb4b6da400882e92c)
 
-- [Next.js](../../langsmith/deploy-nextjs.md)
+LangSmith
 
-- [SvelteKit](../../langsmith/deploy-sveltekit.md)
+[Open](../../langsmith/deploy-vite-langsmith.md)
 
-- [Nuxt](../../langsmith/deploy-nuxt.md)
+![](https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/nextjs.svg?fit=max\&auto=format\&n=h9vvRKKSgCSjvd_Y\&q=85\&s=4f3336e9534db50f25f87173a41322d5)
 
-- [Cloudflare](../../langsmith/deploy-cloudflare-workers.md)
+Next.js
 
-- [Deno](../../langsmith/deploy-deno.md)
+[Open](../../langsmith/deploy-nextjs.md)
+
+![](https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/svelte.svg?fit=max\&auto=format\&n=h9vvRKKSgCSjvd_Y\&q=85\&s=07e7e35c40e4522f739feea9ef3e33b7)
+
+SvelteKit
+
+[Open](../../langsmith/deploy-sveltekit.md)
+
+![](https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/nuxt.svg?fit=max\&auto=format\&n=h9vvRKKSgCSjvd_Y\&q=85\&s=5d965ed1f93f51ac604e66b935a65368)
+
+Nuxt
+
+[Open](../../langsmith/deploy-nuxt.md)
+
+![](https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/cloudflare.svg?fit=max\&auto=format\&n=h9vvRKKSgCSjvd_Y\&q=85\&s=ae129fcbfc78ccaece42b1c4d3699311)
+
+Cloudflare
+
+[Open](../../langsmith/deploy-cloudflare-workers.md)
+
+![](https://mintcdn.com/langchain-5e9cc07a/Tz8fh3A43FeUPf69/images/providers/light/deno.svg?fit=max\&auto=format\&n=Tz8fh3A43FeUPf69\&q=85\&s=8d213b0000104542fcaa7ab160595224)
+
+Deno
+
+[Open](../../langsmith/deploy-deno.md)
 
 > [!TIP]
+>
 > LangSmith offers multiple deployment options beyond Cloud, including [hybrid](../../langsmith/hybrid.md), [standalone servers](../../langsmith/deploy-standalone-server.md), and [self-hosted with control plane](../../langsmith/deploy-with-control-plane.md). For more information, see the [LangSmith Deployment overview](../../langsmith/deployment.md).
 
 ## LangSmith Cloud
@@ -54,16 +77,20 @@ Your application's code must reside in a GitHub repository to be deployed on Lan
 
 #### 2. Deploy to LangSmith
 
-### Navigate to LangSmith Deployment
+**1. Navigate to LangSmith Deployment**
+
 Log in to [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-deploy). In the left sidebar, select **Deployments**.
 
-### Create new deployment
+**2. Create new deployment**
+
 Click the **+ New Deployment** button. A pane will open where you can fill in the required fields.
 
-### Link repository
+**3. Link repository**
+
 If you are a first time user or adding a private repository that has not been previously connected, click the **Add new account** button and follow the instructions to connect your GitHub account.
 
-### Deploy repository
+**4. Deploy repository**
+
 Select your application's repository. Click **Submit** to deploy. This may take about 15 minutes to complete. You can check the status in the **Deployment details** view.
 
 #### 3. Test your application in Studio
@@ -82,7 +109,8 @@ Once your application is deployed:
 
 You can now test the API:
 
-#### TypeScript
+**TypeScript**
+
 1. Install LangGraph SDK:
 
 ```shell
@@ -116,7 +144,8 @@ for await (const chunk of streamResponse) {
 }
 ```
 
-#### Rest API
+**Rest API**
+
 ```bash
 curl -s --request POST \
     --url <DEPLOYMENT_URL>/runs/stream \
@@ -138,8 +167,6 @@ curl -s --request POST \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

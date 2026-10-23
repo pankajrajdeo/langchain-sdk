@@ -15,6 +15,7 @@ LangSmith SDK profiles let you keep [API keys](create-account-api-key.md), endpo
 Use profiles when you switch between [LangSmith Cloud regions](cloud.md#regional-storage), self-hosted instances, or [workspaces](administration-overview.md#workspaces) often, or when you want a remote runtime to load the same SDK configuration from a mounted file.
 
 > [!WARNING]
+>
 > Profile files can contain API keys and OAuth refresh tokens. Do not commit them to source control, bake them into container images, or print them in logs. Store and mount them with the same care as other credentials.
 
 ## Minimum versions
@@ -149,6 +150,7 @@ langsmith --format json profile list
 Run `langsmith auth login` to authenticate with OAuth instead of manually creating an API-key profile. The command starts a browser-based device authorization flow, stores OAuth tokens in the selected profile, and sets that profile as current.
 
 > [!NOTE]
+>
 > `langsmith auth login` also works against self-hosted instances from LangSmith CLI `v0.2.46` and later, provided the deployment is on LangSmith `0.16` or later with the OAuth authorization server enabled. The OAuth authorization server is enabled automatically when `config.hostname` is set in your Helm chart **and** a signing JWKS is configured (`config.signingJwks` or key `langsmith_signing_jwks` in `config.existingSecretName`). On earlier deployments, or if no signing JWKS is configured, create an API-key profile instead.
 
 ```shell
@@ -167,7 +169,7 @@ For a self-hosted instance, pass its base URL. The CLI reads the deployment's au
 langsmith auth login --api-url https://langsmith.example.com --profile self-hosted
 ```
 
-Self-hosted OAuth login requires Helm chart `0.16.0` or later with a signing JWKS. For configuration, see [Enabling Remote MCP](langsmith-remote-mcp.md#enabling-remote-mcp). Otherwise create an API-key profile.
+Self-hosted OAuth login requires Helm chart `0.16.0` or later with a signing JWKS. For setup steps, see [Configure a signing JWKS](kubernetes.md#configure-a-signing-jwks). Otherwise create an API-key profile.
 
 For a headless environment, suppress automatic browser opening and pass a workspace ID:
 
@@ -209,6 +211,7 @@ The older `LANGCHAIN_API_KEY`, `LANGCHAIN_ENDPOINT`, and `LANGCHAIN_WORKSPACE_ID
 If a profile contains both `oauth.access_token` and `api_key`, SDKs use the OAuth access token first. If an OAuth refresh token is present and the access token is expired or close to expiring, SDKs can refresh the token and write the updated token fields back to the profile file.
 
 > [!NOTE]
+>
 > If you mount a profile file as read-only, OAuth token refresh cannot persist updated tokens. Read-only mounts are appropriate for API-key profiles. Use a writable mount only when you intentionally rely on OAuth token refresh.
 
 ## Use profiles in code
@@ -330,8 +333,6 @@ For hosted [LangSmith Cloud](cloud.md), configure these values as environment va
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/profile-configuration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/profile-configuration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

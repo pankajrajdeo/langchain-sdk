@@ -24,7 +24,7 @@ The toolkit contains following tools:
 
 ### Integration details
 
-| Class | Package | [PY support](https://python.langchain.com/docs/integrations/tools/ibm_watsonx/) | Version |
+| Class | Package | [PY support](../../../integrations/tools/ibm_watsonx.md) | Version |
 | :- | :- | :-: | :-: |
 | [`WatsonxToolkit`](https://reference.langchain.com/javascript/langchain-ibm/WatsonxToolkit) | [`@langchain/ibm`](https://www.npmjs.com/package/@langchain/ibm) | ✅ | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ibm?style=flat-square\&label=%20&) |
 
@@ -42,6 +42,7 @@ export LANGSMITH_API_KEY="your-api-key"
 This toolkit lives in the `@langchain/ibm` package:
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -198,8 +199,6 @@ For detailed documentation of all `WatsonxToolkit` features and configurations h
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/ibm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/ibm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

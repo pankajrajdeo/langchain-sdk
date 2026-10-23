@@ -12,445 +12,648 @@ Browse the complete collection of integrations available for JavaScript/TypeScri
 
 ## Top providers
 
-#### [Anthropic](anthropic.md)
-Integrate with Anthropic's Claude models for advanced reasoning and conversation.
+> **[Anthropic](anthropic.md)**
+>
+> Integrate with Anthropic's Claude models for advanced reasoning and conversation.
 
-#### [AWS](aws.md)
-Access AWS services and foundation models through comprehensive integrations.
+> **[AWS](aws.md)**
+>
+> Access AWS services and foundation models through comprehensive integrations.
 
-#### [Google](google.md)
-Integrate with Google's AI services including Gemini and Gemini Enterprise Agent Platform.
+> **[Google](google.md)**
+>
+> Integrate with Google's AI services including Gemini and Gemini Enterprise Agent Platform.
 
-#### [Microsoft](microsoft.md)
-Connect to Microsoft Azure services and AI platforms.
+> **[Microsoft](microsoft.md)**
+>
+> Connect to Microsoft Azure services and AI platforms.
 
-#### [OpenAI](openai.md)
-Build with GPT models and OpenAI's comprehensive AI platform.
+> **[OpenAI](openai.md)**
+>
+> Build with GPT models and OpenAI's comprehensive AI platform.
 
 ## LangGraph integrations
 
 Connect LangGraph agents to front ends and observability platforms.
 
-#### [AG-UI Protocol](https://docs.ag-ui.com/)
-Open event-based protocol for connecting LangGraph agents to any frontend.
+> **[AG-UI Protocol](https://docs.ag-ui.com/)**
+>
+> Open event-based protocol for connecting LangGraph agents to any frontend.
 
-#### [CopilotKit](../../langchain/frontend/integrations/copilotkit.md)
-React stack and Python middleware for Deep Agents, LangGraph agents, FastAPI, and generative UI.
+> **[CopilotKit](../../langchain/frontend/integrations/copilotkit.md)**
+>
+> React stack and Python middleware for Deep Agents, LangGraph agents, FastAPI, and generative UI.
 
-#### [OpenUI](../../langchain/frontend/integrations/openui.md)
-Render adaptive, agent-generated interfaces from LangGraph and Deep Agents using OpenUI.
+> **[OpenUI](../../langchain/frontend/integrations/openui.md)**
+>
+> Render adaptive, agent-generated interfaces from LangGraph and Deep Agents using OpenUI.
 
-#### [The Context Company](https://docs.thecontextcompany.com/frameworks/langchain-langgraph)
-Observability and customer analytics for production AI agents.
+> **[The Context Company](https://docs.thecontextcompany.com/frameworks/langchain-langgraph)**
+>
+> Observability and customer analytics for production AI agents.
 
 ## Classification models
 
-#### [TypeSafe](typesafe.md)
-Classify state into typed decisions and calibrated probabilities with Jev.
+> **[TypeSafe](typesafe.md)**
+>
+> Classify state into typed decisions and calibrated probabilities with Jev.
 
 ## Chat models
 
-#### [Anthropic](../chat/anthropic.md)
-Claude models for advanced conversational AI and reasoning.
+> **[Anthropic](../chat/anthropic.md)**
+>
+> Claude models for advanced conversational AI and reasoning.
 
-#### [Azure OpenAI](../chat/azure.md)
-OpenAI models through Microsoft Azure's enterprise platform.
+> **[Azure OpenAI](../chat/azure.md)**
+>
+> OpenAI models through Microsoft Azure's enterprise platform.
 
-#### [Baidu Qianfan](../chat/baidu_qianfan.md)
-Baidu's Qianfan platform for Chinese language AI models.
+> **[Baidu Qianfan](../chat/baidu_qianfan.md)**
+>
+> Baidu's Qianfan platform for Chinese language AI models.
 
-#### [Bedrock Converse](../chat/bedrock_converse.md)
-Unified Bedrock Converse API for multiple foundation models.
+> **[Bedrock Converse](../chat/bedrock_converse.md)**
+>
+> Unified Bedrock Converse API for multiple foundation models.
 
-#### [Cerebras](../chat/cerebras.md)
-Ultra-fast inference with Cerebras Systems' AI processors.
+> **[Cerebras](../chat/cerebras.md)**
+>
+> Ultra-fast inference with Cerebras Systems' AI processors.
 
-#### [Ceki](https://ceki.me)
-Marketplace of real residential Chrome sessions for AI agents.
+> **[Ceki](https://ceki.me)**
+>
+> Marketplace of real residential Chrome sessions for AI agents.
 
-#### [Cloudflare Workers AI](../chat/cloudflare_workersai.md)
-Run AI models on Cloudflare's edge computing platform.
+> **[ChatWebLLM](https://github.com/ykoh42/web-llm-adapters/blob/main/packages/langchain-web-llm/README.md)**
+>
+> Run WebLLM models locally with WebGPU through LangChain, LangGraph, and Deep Agents.
 
-#### [Cohere](../chat/cohere.md)
-Cohere's language models for text generation and understanding.
+> **[Cloudflare Workers AI](../chat/cloudflare_workersai.md)**
+>
+> Run AI models on Cloudflare's edge computing platform.
 
-#### [DeepSeek](../chat/deepseek.md)
-DeepSeek's advanced reasoning and coding models.
+> **[Cohere](../chat/cohere.md)**
+>
+> Cohere's language models for text generation and understanding.
 
-#### [Fake LLM](../chat/fake.md)
-Mock chat model for testing and development purposes.
+> **[DeepSeek](../chat/deepseek.md)**
+>
+> DeepSeek's advanced reasoning and coding models.
 
-#### [FuturMix](https://futurmix.ai/)
-Unified AI gateway for 22+ models with OpenAI-compatible API.
+> **[Fake LLM](../chat/fake.md)**
+>
+> Mock chat model for testing and development purposes.
 
-#### [Google Gemini](../chat/google.md)
-Google's Gemini models via AI Studio and Gemini Enterprise Agent Platform.
+> **[FuturMix](https://futurmix.ai/)**
+>
+> Unified AI gateway for 22+ models with OpenAI-compatible API.
 
-#### [Groq](../chat/groq.md)
-Ultra-fast inference with Groq's specialized hardware.
+> **[Google Gemini](../chat/google.md)**
+>
+> Google's Gemini models via AI Studio and Gemini Enterprise Agent Platform.
 
-#### [Interfaze](https://interfaze.ai/docs)
-Multimodal chat model with structured output over an OpenAI-compatible API.
+> **[Groq](../chat/groq.md)**
+>
+> Ultra-fast inference with Groq's specialized hardware.
 
-#### [Mistral](../chat/mistral.md)
-Mistral's efficient and powerful language models.
+> **[Interfaze](https://interfaze.ai/docs)**
+>
+> Multimodal chat model with structured output over an OpenAI-compatible API.
 
-#### [Ollama](../chat/ollama.md)
-Run local models with Ollama's lightweight inference engine.
+> **[Mistral](../chat/mistral.md)**
+>
+> Mistral's efficient and powerful language models.
 
-#### [OpenRouter](../chat/openrouter.md)
-Access models from multiple providers through OpenRouter's unified API.
+> **[Ollama](../chat/ollama.md)**
+>
+> Run local models with Ollama's lightweight inference engine.
 
-#### [OpenAI](../chat/openai.md)
-GPT models and OpenAI's comprehensive chat capabilities.
+> **[OpenRouter](../chat/openrouter.md)**
+>
+> Access models from multiple providers through OpenRouter's unified API.
 
-#### [SCX](https://scx.ai/)
-Open-weight chat and multimodal models with image and video input over SCX's OpenAI-compatible API.
+> **[OpenAI](../chat/openai.md)**
+>
+> GPT models and OpenAI's comprehensive chat capabilities.
 
-#### [Tuning Engines](https://www.tuningengines.com/)
-Governed OpenAI-compatible endpoint for model access, policy checks, and usage accounting.
+> **[RecallToolkit](https://recallmem.dev/guides/langchain)**
+>
+> Tools for agents to search Recall memory, ask it a question about the user, and save a fact.
 
-#### [xAI](../chat/xai.md)
-xAI's Grok models for conversational AI.
+> **[SCX](https://scx.ai/)**
+>
+> Open-weight chat and multimodal models with image and video input over SCX's OpenAI-compatible API.
 
-#### [Yandex](../chat/yandex.md)
-Yandex's AI models and language processing services.
+> **[Tuning Engines](https://www.tuningengines.com/)**
+>
+> Governed OpenAI-compatible endpoint for model access, policy checks, and usage accounting.
+
+> **[xAI](../chat/xai.md)**
+>
+> xAI's Grok models for conversational AI.
+
+> **[Yandex](../chat/yandex.md)**
+>
+> Yandex's AI models and language processing services.
 
 ## LLMs
 
-#### [Azure OpenAI](../llms/azure.md)
-OpenAI models through Microsoft Azure's enterprise platform.
+> **[Azure OpenAI](../llms/azure.md)**
+>
+> OpenAI models through Microsoft Azure's enterprise platform.
 
-#### [Cloudflare Workers AI](../llms/cloudflare_workersai.md)
-AI models on Cloudflare's edge computing platform.
+> **[Cloudflare Workers AI](../llms/cloudflare_workersai.md)**
+>
+> AI models on Cloudflare's edge computing platform.
 
-#### [Cohere](../llms/cohere.md)
-Cohere's language models for various NLP tasks.
+> **[Cohere](../llms/cohere.md)**
+>
+> Cohere's language models for various NLP tasks.
 
-#### [Gemini Enterprise Agent Platform](../llms/google_vertex_ai.md)
-Google Cloud's enterprise AI and ML platform.
+> **[Gemini Enterprise Agent Platform](../llms/google_vertex_ai.md)**
+>
+> Google Cloud's enterprise AI and ML platform.
 
-#### [JigsawStack](../llms/jigsawstack.md)
-JigsawStack's AI infrastructure and model services.
+> **[JigsawStack](../llms/jigsawstack.md)**
+>
+> JigsawStack's AI infrastructure and model services.
 
-#### [Mistral](../llms/mistral.md)
-Mistral's open-source and commercial language models.
+> **[Mistral](../llms/mistral.md)**
+>
+> Mistral's open-source and commercial language models.
 
-#### [Ollama](../llms/ollama.md)
-Local model serving with Ollama's simple interface.
+> **[Ollama](../llms/ollama.md)**
+>
+> Local model serving with Ollama's simple interface.
 
-#### [OpenAI](../llms/openai.md)
-GPT models and OpenAI's language model APIs.
+> **[OpenAI](../llms/openai.md)**
+>
+> GPT models and OpenAI's language model APIs.
 
-#### [Yandex](../llms/yandex.md)
-Yandex's language models and AI services.
+> **[Yandex](../llms/yandex.md)**
+>
+> Yandex's language models and AI services.
 
 ## Text embedding models
 
-#### [Azure OpenAI](../embeddings/azure_openai.md)
-OpenAI embeddings through Microsoft Azure platform.
+> **[Azure OpenAI](../embeddings/azure_openai.md)**
+>
+> OpenAI embeddings through Microsoft Azure platform.
 
-#### [Baidu Qianfan](../embeddings/baidu_qianfan.md)
-Baidu's text embedding models for Chinese content.
+> **[Baidu Qianfan](../embeddings/baidu_qianfan.md)**
+>
+> Baidu's text embedding models for Chinese content.
 
-#### [Amazon Bedrock](../embeddings/bedrock.md)
-Foundation model embeddings through Amazon Bedrock.
+> **[Amazon Bedrock](../embeddings/bedrock.md)**
+>
+> Foundation model embeddings through Amazon Bedrock.
 
-#### [Cloudflare AI](../embeddings/cloudflare_ai.md)
-Text embeddings on Cloudflare's edge AI platform.
+> **[Cloudflare AI](../embeddings/cloudflare_ai.md)**
+>
+> Text embeddings on Cloudflare's edge AI platform.
 
-#### [Cohere](../embeddings/cohere.md)
-Cohere's multilingual embedding models.
+> **[Cohere](../embeddings/cohere.md)**
+>
+> Cohere's multilingual embedding models.
 
-#### [Google Generative AI](../embeddings/google_generative_ai.md)
-Google's embedding models for text representation.
+> **[Google Generative AI](../embeddings/google_generative_ai.md)**
+>
+> Google's embedding models for text representation.
 
-#### [Gemini Enterprise Agent Platform](../embeddings/google_vertex_ai.md)
-Enterprise embedding models through Gemini Enterprise Agent Platform.
+> **[Gemini Enterprise Agent Platform](../embeddings/google_vertex_ai.md)**
+>
+> Enterprise embedding models through Gemini Enterprise Agent Platform.
 
-#### [Minimax](../embeddings/minimax.md)
-Minimax's text embedding and representation models.
+> **[Minimax](../embeddings/minimax.md)**
+>
+> Minimax's text embedding and representation models.
 
-#### [Mistral](../embeddings/mistralai.md)
-Mistral's efficient embedding models.
+> **[Mistral](../embeddings/mistralai.md)**
+>
+> Mistral's efficient embedding models.
 
-#### [MixedBread AI](../embeddings/mixedbread_ai.md)
-High-quality multilingual embedding models.
+> **[MixedBread AI](../embeddings/mixedbread_ai.md)**
+>
+> High-quality multilingual embedding models.
 
-#### [Nomic](../embeddings/nomic.md)
-Nomic's open-source embedding models.
+> **[Nomic](../embeddings/nomic.md)**
+>
+> Nomic's open-source embedding models.
 
-#### [Ollama](../embeddings/ollama.md)
-Local embedding models through Ollama.
+> **[Ollama](../embeddings/ollama.md)**
+>
+> Local embedding models through Ollama.
 
-#### [OpenAI](../embeddings/openai.md)
-OpenAI's text-embedding models for semantic search.
+> **[OpenAI](../embeddings/openai.md)**
+>
+> OpenAI's text-embedding models for semantic search.
 
-#### [Oracle AI Database](../embeddings/oracleai.md)
-Oracle's embedding models for AI applications.
+> **[Oracle AI Database](../embeddings/oracleai.md)**
+>
+> Oracle's embedding models for AI applications.
 
-#### [Pinecone](../embeddings/pinecone.md)
-Pinecone's embedding models and vector database.
+> **[Pinecone](../embeddings/pinecone.md)**
+>
+> Pinecone's embedding models and vector database.
 
-#### [SAP HANA Internal Embeddings](../vectorstores/sap_hanavector.md)
-SAP HANA Cloud's built-in embedding models for in-database vector generation.
+> **[SAP HANA Internal Embeddings](../vectorstores/sap_hanavector.md)**
+>
+> SAP HANA Cloud's built-in embedding models for in-database vector generation.
 
-#### [SCX](https://scx.ai/)
-4096-dimension E5-Mistral embeddings over SCX's OpenAI-compatible API.
+> **[SCX](https://scx.ai/)**
+>
+> 4096-dimension E5-Mistral embeddings over SCX's OpenAI-compatible API.
 
 ## Vector stores
 
-#### [Azure DocumentDB](../vectorstores/azure_documentdb.md)
-Vector search in Azure DocumentDB (formerly Azure Cosmos DB for MongoDB vCore).
+> **[Azure DocumentDB](../vectorstores/azure_documentdb.md)**
+>
+> Vector search in Azure DocumentDB (formerly Azure Cosmos DB for MongoDB vCore).
 
-#### [Azure Cosmos DB NoSQL](../vectorstores/azure_cosmosdb_nosql.md)
-Vector storage in Azure Cosmos DB NoSQL API.
+> **[Azure Cosmos DB NoSQL](../vectorstores/azure_cosmosdb_nosql.md)**
+>
+> Vector storage in Azure Cosmos DB NoSQL API.
 
-#### [Cloudflare Vectorize](../vectorstores/cloudflare_vectorize.md)
-Serverless vector database on Cloudflare's edge.
+> **[Cloudflare Vectorize](../vectorstores/cloudflare_vectorize.md)**
+>
+> Serverless vector database on Cloudflare's edge.
 
-#### [Google Cloud SQL PostgreSQL](../vectorstores/google_cloudsql_pg.md)
-PostgreSQL with vector extensions on Google Cloud.
+> **[Google Cloud SQL PostgreSQL](../vectorstores/google_cloudsql_pg.md)**
+>
+> PostgreSQL with vector extensions on Google Cloud.
 
-#### [Infino](https://infino.ai/docs)
-Vector, BM25, and hybrid retrieval over one engine on object storage.
+> **[Infino](https://infino.ai/docs)**
+>
+> Vector, BM25, and hybrid retrieval over one engine on object storage.
 
-#### [LambdaDB](https://docs.lambdadb.ai/guides/get-started/quickstart)
-Serverless database for RAG and agents.
+> **[LambdaDB](https://docs.lambdadb.ai/guides/get-started/quickstart)**
+>
+> Serverless database for RAG and agents.
 
-#### [Memory Vector Store](../vectorstores/memory.md)
-In-memory vector storage for development and testing.
+> **[Memory Vector Store](../vectorstores/memory.md)**
+>
+> In-memory vector storage for development and testing.
 
-#### [MongoDB Atlas](../vectorstores/mongodb_atlas.md)
-Vector search in MongoDB Atlas cloud database.
+> **[MongoDB Atlas](../vectorstores/mongodb_atlas.md)**
+>
+> Vector search in MongoDB Atlas cloud database.
 
-#### [Oracle AI Database](../vectorstores/oracleai.md)
-Oracle Vector Search for hybrid retrieval and storage.
+> **[Oracle AI Database](../vectorstores/oracleai.md)**
+>
+> Oracle Vector Search for hybrid retrieval and storage.
 
-#### [Pinecone](../vectorstores/pinecone.md)
-Managed vector database for machine learning applications.
+> **[Pinecone](../vectorstores/pinecone.md)**
+>
+> Managed vector database for machine learning applications.
 
-#### [Qdrant](../vectorstores/qdrant.md)
-Open-source vector similarity search engine.
+> **[Qdrant](../vectorstores/qdrant.md)**
+>
+> Open-source vector similarity search engine.
 
-#### [Redis](../vectorstores/redis.md)
-In-memory database with vector search capabilities.
+> **[Redis](../vectorstores/redis.md)**
+>
+> In-memory database with vector search capabilities.
 
-#### [SAP HANA Cloud Vector Engine](../vectorstores/sap_hanavector.md)
-Vector store fully integrated into the SAP HANA Cloud database.
+> **[SAP HANA Cloud Vector Engine](../vectorstores/sap_hanavector.md)**
+>
+> Vector store fully integrated into the SAP HANA Cloud database.
 
-#### [Weaviate](../vectorstores/weaviate.md)
-Open-source vector database with GraphQL API.
+> **[Weaviate](../vectorstores/weaviate.md)**
+>
+> Open-source vector database with GraphQL API.
 
 ## Document loaders
 
 ### File loaders
 
-#### [JSON](../document_loaders/file_loaders/json.md)
-Load and parse JSON files with flexible structure handling.
+> **[JSON](../document_loaders/file_loaders/json.md)**
+>
+> Load and parse JSON files with flexible structure handling.
 
-#### [JSON Lines](../document_loaders/file_loaders/jsonlines.md)
-Load newline-delimited JSON files.
+> **[JSON Lines](../document_loaders/file_loaders/jsonlines.md)**
+>
+> Load newline-delimited JSON files.
 
-#### [Multi-File](../document_loaders/file_loaders/multi_file.md)
-Load multiple files of different types simultaneously.
+> **[Multi-File](../document_loaders/file_loaders/multi_file.md)**
+>
+> Load multiple files of different types simultaneously.
 
-#### [Oracle AI Database](../document_loaders/file_loaders/oracleai.md)
-Load Oracle AI Vector Search tables and compatible files.
+> **[Oracle AI Database](../document_loaders/file_loaders/oracleai.md)**
+>
+> Load Oracle AI Vector Search tables and compatible files.
 
-#### [Text](../document_loaders/file_loaders/text.md)
-Load plain text files with encoding detection.
+> **[Text](../document_loaders/file_loaders/text.md)**
+>
+> Load plain text files with encoding detection.
 
 ### Web loaders
 
-#### [Google Cloud SQL PostgreSQL](../document_loaders/web_loaders/google_cloudsql_pg.md)
-Load data from Google Cloud SQL PostgreSQL databases.
+> **[Google Cloud SQL PostgreSQL](../document_loaders/web_loaders/google_cloudsql_pg.md)**
+>
+> Load data from Google Cloud SQL PostgreSQL databases.
 
-#### [LangSmith](../document_loaders/web_loaders/langsmith.md)
-Load runs and datasets from LangSmith.
+> **[LangSmith](../document_loaders/web_loaders/langsmith.md)**
+>
+> Load runs and datasets from LangSmith.
 
-#### [Leap0](https://leap0.dev/docs)
-Cloud sandboxes for AI agents with fast cold starts.
+> **[Leap0](https://leap0.dev/docs)**
+>
+> Cloud sandboxes for AI agents with fast cold starts.
 
-#### [Soniox](../document_loaders/web_loaders/soniox.md)
-High-accuracy multilingual speech-to-text API.
+> **[Soniox](../document_loaders/web_loaders/soniox.md)**
+>
+> High-accuracy multilingual speech-to-text API.
 
-#### [Sourcey](sourcey.md)
-Retrieve from published Sourcey docs sites using build artefacts Sourcey already emits.
+> **[Sourcey](sourcey.md)**
+>
+> Retrieve from published Sourcey docs sites using build artefacts Sourcey already emits.
 
-#### [Supadata](supadata.md)
-Load transcripts and metadata from YouTube, TikTok, and more.
+> **[Supadata](supadata.md)**
+>
+> Load transcripts and metadata from YouTube, TikTok, and more.
 
 ## Document transformers
 
-#### [OpenAI Metadata Tagger](../document_transformers/openai_metadata_tagger.md)
-Generate metadata tags for documents using OpenAI.
+> **[OpenAI Metadata Tagger](../document_transformers/openai_metadata_tagger.md)**
+>
+> Generate metadata tags for documents using OpenAI.
 
 ## Document compressors
 
-#### [Cohere Rerank](../document_compressors/cohere_rerank.md)
-Rerank documents using Cohere's reranking models.
+> **[Cohere Rerank](../document_compressors/cohere_rerank.md)**
+>
+> Rerank documents using Cohere's reranking models.
 
-#### [MixedBread AI](../document_compressors/mixedbread_ai.md)
-Rerank and compress documents using MixedBread AI.
+> **[MixedBread AI](../document_compressors/mixedbread_ai.md)**
+>
+> Rerank and compress documents using MixedBread AI.
 
 ## Tools
 
-#### [aiworker](https://github.com/ai-worker227/aiworker-examples/tree/main/langchain)
-Paid data tools (DeFi yields, page-to-Markdown, Base token and wallet checks, Polymarket odds, history and backtests, fact checks, headline search) built from aiworker's live OpenAPI catalogue; each call pays itself in USDC over the x402 protocol from the agent's wallet, no API key.
+> **[AgentSearch](https://agentsearchhq.com/#integrations?utm_source=langchain-docs-js\&utm_medium=integration-listing\&utm_campaign=promo-oct26)**
+>
+> Web search tool for LangChain.js agents, free by default with no key. Pay-per-call Extract and Render (\$0.005, x402) for full pages and JS-rendered sites.
 
-#### [Atomic Mail](https://docs.atomicmail.ai/langchain)
-Email toolkit that provisions an agent-owned inbox by proof of work and sends and receives over JMAP.
+> **[agentsvc](https://agentsvc.io/docs/langchain)**
+>
+> Pay-per-call web, data, crypto, memory, and inbox tools for agents, paid with a credit token or USDC via x402.
 
-#### [Azure Dynamic Sessions](../tools/azure_dynamic_sessions.md)
-Secure code execution in Azure Dynamic Sessions.
+> **[aiworker](https://github.com/ai-worker227/aiworker-examples/tree/main/langchain)**
+>
+> Paid data tools from aiworker's OpenAPI catalogue; each call settles itself in USDC over x402 from the agent's wallet, with no API key.
 
-#### [Continuity tools](https://github.com/zerohourzulu/continuity/blob/main/packages/remote-tools/README.md#langchain-tools)
-LangChain tools with application-defined permissions, stable operation identities and status-only recovery for cooperating services.
+> **[Atomic Mail](https://docs.atomicmail.ai/langchain)**
+>
+> Email toolkit that provisions an agent-owned inbox by proof of work and sends and receives over JMAP.
 
-#### [Corsair](https://docs.corsair.dev/mcp-adapters/langchain)
-Exposes 200+ service integrations (Slack, GitHub, Gmail, Linear, Stripe, and others) to LangChain agents as tools. OAuth runs server-side and credentials stay in the developer's own database.
+> **[Azure Dynamic Sessions](../tools/azure_dynamic_sessions.md)**
+>
+> Secure code execution in Azure Dynamic Sessions.
 
-#### [DALL-E](../tools/dalle.md)
-Generate images using OpenAI's DALL-E models.
+> **[Continuity tools](https://github.com/zerohourzulu/continuity/blob/main/packages/remote-tools/README.md#langchain-tools)**
+>
+> LangChain tools with application-defined permissions, stable operation identities and status-only recovery for cooperating services.
 
-#### [Decodo](../tools/decodo.md)
-Code execution and analysis with Decodo.
+> **[Corsair](https://docs.corsair.dev/mcp-adapters/langchain)**
+>
+> Exposes 200+ service integrations (Slack, GitHub, Gmail, Linear, Stripe, and more) to LangChain agents as tools with OAuth.
 
-#### [Exa Search](../tools/exa_search.md)
-AI-powered search engine for better results.
+> **[DALL-E](../tools/dalle.md)**
+>
+> Generate images using OpenAI's DALL-E models.
 
-#### [JigsawStack](../tools/jigsawstack.md)
-AI infrastructure tools from JigsawStack.
+> **[DataBazaar](https://databazaar.io/integrations?utm_source=langchain\&utm_campaign=integration-listing#langchain)**
+>
+> Dataset marketplace tools for public search, sample previews, and bounty discovery, with account-authenticated data retrieval.
 
-#### [JSON Tool](../tools/json.md)
-Parse and manipulate JSON data structures.
+> **[Decodo](../tools/decodo.md)**
+>
+> Code execution and analysis with Decodo.
 
-#### [Lambda Agent](../tools/lambda_agent.md)
-Execute code in AWS Lambda functions.
+> **[Exa Search](../tools/exa_search.md)**
+>
+> AI-powered search engine for better results.
 
-#### [Magic Hour](https://docs.magichour.ai)
-AI text-to-video, image-to-video, and image generation tools behind one API key.
+> **[Fizzl](https://fizzl.eu/agents/langchain-js/)**
+>
+> Fizzl checks transactions, signatures, tokens, wallet approvals, and x402 paid endpoints before AI agents sign or pay.
 
-#### [MCP Toolbox](../tools/mcp_toolbox.md)
-Model Context Protocol tools and utilities.
+> **[GetYouTubeTranscript](https://github.com/tubeagentkit/langchain-getyoutubetranscript#readme)**
+>
+> GetYouTubeTranscript is an API for YouTube video transcripts (optionally with per-line timestamps) and YouTube search
 
-#### [OpenAPI](../tools/openapi.md)
-Generate tools from OpenAPI specifications.
+> **[Instant Expert](https://github.com/Instant-Expert/integrations/tree/main/js/langchain-instant-expert#readme)**
+>
+> Toolkit for Instant Expert's MCP server that sends paid invitations to specific experts for a short call or written answer, with a free test mode.
 
-#### [Oracle AI Database](../tools/oracleai.md)
-Summarize, chunk, and serve data with Oracle AI Vector Search tools.
+> **[JigsawStack](../tools/jigsawstack.md)**
+>
+> AI infrastructure tools from JigsawStack.
 
-#### [SQL](../tools/sql.md)
-Query databases using natural language.
+> **[JSON Tool](../tools/json.md)**
+>
+> Parse and manipulate JSON data structures.
 
-#### [Perplexity Search](../tools/perplexity_search.md)
-Web search results from the Perplexity Search API.
+> **[Lambda Agent](../tools/lambda_agent.md)**
+>
+> Execute code in AWS Lambda functions.
 
-#### [Pushary](https://github.com/Pushary/pushary-langgraph)
-Customer confirmation, choice and text input through an enrolled Pushary mobile app, exposed as a LangChain structured tool.
+> **[Magic Hour](https://docs.magichour.ai)**
+>
+> AI text-to-video, image-to-video, and image generation tools behind one API key.
 
-#### [Serpex](https://serpex.dev/docs)
-Multi-engine web search API for AI applications and data aggregation.
+> **[M91](https://github.com/MSG91/m91-sdk#langchain)**
+>
+> Tools that pause an agent until a human approves on their phone; alerts ring through silent mode and escalate to a voice call.
 
-#### [SIGNA](https://github.com/codexvritra/signa/tree/main/sdk/langchain)
-Add wallet-signed messaging tools to LangChain agents.
+> **[MCP Toolbox](../tools/mcp_toolbox.md)**
+>
+> Model Context Protocol tools and utilities.
 
-#### [Sato Hub](https://github.com/satohubai/sato-hub-integrations/tree/main/packages/satohub-langchain-tools#readme)
-Four keyless tools over Sato Hub's daily-rebuilt index of onchain-agent building blocks: search listings, run a Preflight lookup on a repo, package, MCP endpoint or token, get a swap-venue recommendation with the fee stated, and turn a goal into a build plan of listed projects.
+> **[Mercedes-Benz Service Reminder](https://github.com/gentlegiant96202/mercedes-benz-service-reminder-mcp#readme)**
+>
+> MCP tools from SilberArrows for Mercedes-Benz Service A/B reminders, service explanations, and warning-light guidance.
 
-#### [TalorData](https://www.talordata.com/docs)
-Unified SERP API across 33 search engines with geo-targeting.
+> **[OpenAPI](../tools/openapi.md)**
+>
+> Generate tools from OpenAPI specifications.
 
-#### [Tavily Crawl](../tools/tavily_crawl.md)
-Web crawling capabilities with Tavily.
+> **[Oracle AI Database](../tools/oracleai.md)**
+>
+> Summarize, chunk, and serve data with Oracle AI Vector Search tools.
 
-#### [Tavily Extract](../tools/tavily_extract.md)
-Extract structured data from web pages.
+> **[SQL](../tools/sql.md)**
+>
+> Query databases using natural language.
 
-#### [Tavily Map](../tools/tavily_map.md)
-Map and visualize web crawling results.
+> **[Perplexity Search](../tools/perplexity_search.md)**
+>
+> Web search results from the Perplexity Search API.
 
-#### [Tavily Search](../tools/tavily_search.md)
-AI-optimized search for retrieval applications.
+> **[Pexafy](https://docs.pexafy.com/langchain)**
+>
+> Semantic search over free stock photos from Unsplash, Pexels, Pixabay, and more, returning each photo with license and credit.
 
-#### [Tavily Research](../tools/tavily_research.md)
-Comprehensive research on a given topic with Tavily.
+> **[pipe0](https://www.pipe0.com/docs/sdks/integrations/langchain)**
+>
+> People search and contact enrichment (work emails, phone numbers, profiles, and firmographics) across multiple data providers
 
-#### [Tavily GET Research](../tools/tavily_get_research.md)
-Retrieve status and results of a research task using its request ID.
+> **[Precleared](https://precleared.dev/docs/langchain)**
+>
+> Checks whether a cold or marketing email to an address is legal in eight countries, and returns the deciding rule, footer requirements and a signed receipt.
 
-#### [You.com](https://you.com/docs/integrations/langchain)
-Real-time web search and content extraction for LLMs.
+> **[Pushary](https://pushary.com/docs/agents/build/langgraph?utm_source=langchain\&utm_medium=integration-directory\&utm_campaign=pushary-langgraph-js)**
+>
+> Phone approvals for LangGraph.js agents: ask on the user's phone and route only on Approve; no answer means no action.
 
-#### [Vector Store](../tools/vectorstore.md)
-Query vector databases as tools.
+> **[Serpex](https://serpex.dev/docs)**
+>
+> Multi-engine web search API for AI applications and data aggregation.
+
+> **[SIGNA](https://github.com/codexvritra/signa/tree/main/sdk/langchain)**
+>
+> Add wallet-signed messaging tools to LangChain agents.
+
+> **[Sato Hub](https://github.com/satohubai/sato-hub-integrations/tree/main/packages/satohub-langchain-tools#readme)**
+>
+> Keyless tools over Sato Hub's index of onchain-agent building blocks: search listings, Preflight lookups, swap venues, and build plans.
+
+> **[Steward](https://github.com/brianbooms/plugin-steward)**
+>
+> Tools for x402 payments that verify merchant, price, and terms before payment via LangChain MCP adapters.
+
+> **[TalorData](https://www.talordata.com/docs)**
+>
+> Unified SERP API across 33 search engines with geo-targeting.
+
+> **[Tavily Crawl](../tools/tavily_crawl.md)**
+>
+> Web crawling capabilities with Tavily.
+
+> **[Tavily Extract](../tools/tavily_extract.md)**
+>
+> Extract structured data from web pages.
+
+> **[Tavily Map](../tools/tavily_map.md)**
+>
+> Map and visualize web crawling results.
+
+> **[Tavily Search](../tools/tavily_search.md)**
+>
+> AI-optimized search for retrieval applications.
+
+> **[Tavily Research](../tools/tavily_research.md)**
+>
+> Comprehensive research on a given topic with Tavily.
+
+> **[Tavily GET Research](../tools/tavily_get_research.md)**
+>
+> Retrieve status and results of a research task using its request ID.
+
+> **[WebExtract](https://webextract.dev/docs/langchain)**
+>
+> Web page extraction API returning clean Markdown plus fixed-schema JSON for article metadata, product prices and tables.
+
+> **[You.com](https://you.com/docs/integrations/langchain)**
+>
+> Real-time web search and content extraction for LLMs.
+
+> **[Vector Store](../tools/vectorstore.md)**
+>
+> Query vector databases as tools.
 
 ## Retrievers
 
-#### [Bedrock Knowledge Bases](../retrievers/bedrock-knowledge-bases.md)
-Retrieve from Amazon Bedrock Knowledge Bases.
+> **[Bedrock Knowledge Bases](../retrievers/bedrock-knowledge-bases.md)**
+>
+> Retrieve from Amazon Bedrock Knowledge Bases.
 
-#### [Exa](../retrievers/exa.md)
-AI-powered web search and retrieval.
+> **[Exa](../retrievers/exa.md)**
+>
+> AI-powered web search and retrieval.
 
-#### [FoxNose](https://github.com/FoxNoseTech/langchain-foxnose-js#readme)
-Retriever, document loader and agent tool for FoxNose collections, with text, vector, hybrid and vector-boosted search over the Flux delivery API.
+> **[FoxNose](https://github.com/FoxNoseTech/langchain-foxnose-js#readme)**
+>
+> Retriever, document loader and agent tool for FoxNose collections, with text, vector, hybrid and vector-boosted search over the Flux delivery API.
 
-#### [HyDE](../retrievers/hyde.md)
-Hypothetical Document Embeddings for better retrieval.
+> **[HyDE](../retrievers/hyde.md)**
+>
+> Hypothetical Document Embeddings for better retrieval.
 
-#### [Kendra](../retrievers/kendra-retriever.md)
-Enterprise search with Amazon Kendra.
+> **[Kendra](../retrievers/kendra-retriever.md)**
+>
+> Enterprise search with Amazon Kendra.
 
-#### [Perplexity Search](../retrievers/perplexity_search.md)
-Retriever returning Documents from the Perplexity Search API.
+> **[Perplexity Search](../retrievers/perplexity_search.md)**
+>
+> Retriever returning Documents from the Perplexity Search API.
 
-#### [SAP HANA Self Query](../retrievers/self_query/hanavector_self_query.md)
-Self-querying retriever over SAP HANA Cloud Vector Engine.
+> **[RecallRetriever](https://recallmem.dev/guides/langchain)**
+>
+> Retrieves the facts Recall learned about a user, and the user's matching messages, as documents.
 
-#### [Time-Weighted](../retrievers/time-weighted-retriever.md)
-Time-aware document retrieval and ranking.
+> **[SAP HANA Self Query](../retrievers/self_query/hanavector_self_query.md)**
+>
+> Self-querying retriever over SAP HANA Cloud Vector Engine.
+
+> **[Time-Weighted](../retrievers/time-weighted-retriever.md)**
+>
+> Time-aware document retrieval and ranking.
 
 ## Stores
 
-#### [AlBuddyMemoryStore](https://github.com/flytomoon/al-buddy-memory/blob/main/docs/integrations/langchain.md)
-A LangGraph `BaseStore` for long-term memory on a local SQLite file, no API key. Every put records which agent wrote it; putting a key again retires the old value instead of overwriting it, and a delete closes a fact rather than erasing it, so the history of what was believed is kept.
+> **[AlBuddyMemoryStore](https://github.com/flytomoon/al-buddy-memory/blob/main/docs/integrations/langchain.md)**
+>
+> LangGraph BaseStore on local SQLite: puts record the writer, version instead of overwrite, and keep belief history.
 
-#### [File System](../stores/file_system.md)
-Local file system storage for development.
+> **[File System](../stores/file_system.md)**
+>
+> Local file system storage for development.
 
-#### [In-Memory](../stores/in_memory.md)
-Fast in-memory storage for temporary data.
+> **[In-Memory](../stores/in_memory.md)**
+>
+> Fast in-memory storage for temporary data.
 
 ## LLM caching
 
-#### [Azure Cosmos DB NoSQL](../llm_caching/azure_cosmosdb_nosql.md)
-Cache LLM responses in Azure Cosmos DB.
+> **[Azure Cosmos DB NoSQL](../llm_caching/azure_cosmosdb_nosql.md)**
+>
+> Cache LLM responses in Azure Cosmos DB.
 
-#### [BetterDB Agent Cache](https://www.betterdb.com/ai)
-Multi-tier cache for AI agents backed by Valkey or Redis.
+> **[BetterDB Agent Cache](https://www.betterdb.com/ai)**
+>
+> Multi-tier cache for AI agents backed by Valkey or Redis.
 
 ## Middleware
 
-#### [BRYDGE](https://github.com/contactkontey-dotcom/langchain-brydge#readme)
-Supervises an agent's tool calls with BRYDGE and checks the destination system's own records to report whether each action happened as permitted.
+> **[BRYDGE](https://github.com/contactkontey-dotcom/langchain-brydge#readme)**
+>
+> Supervises an agent's tool calls with BRYDGE and checks the destination system's own records to report whether each action happened as permitted.
+
+> **[RecallChatMessageHistory](https://recallmem.dev/guides/langchain)**
+>
+> Chat message history stored in a Recall session, so Recall also learns about the user from it.
+
+> **[RecallMiddleware](https://recallmem.dev/guides/langchain)**
+>
+> Long-term memory for create\_agent agents: adds what Recall learned about the user to the system prompt and records each exchange.
 
 ## Callbacks
 
-#### [OpenInference](https://arize.com/docs/ax/integrations/python-agent-frameworks/langchain/langchain-tracing)
-OpenTelemetry instrumentation that records LangChain and LangGraph operations using OpenInference semantic conventions.
+> **[OpenInference](https://arize.com/docs/ax/integrations/python-agent-frameworks/langchain/langchain-tracing)**
+>
+> OpenTelemetry instrumentation that records LangChain and LangGraph operations using OpenInference semantic conventions.
 
-#### [Respan](https://www.respan.ai/docs)
-Trace LangChain.js, LangGraph.js, and Langflow-style callback runs in Respan.
+> **[Respan](https://www.respan.ai/docs)**
+>
+> Trace LangChain.js, LangGraph.js, and Langflow-style callback runs in Respan.
 
-#### [SafePrompt](https://docs.safeprompt.dev/langchain)
-Validate prompts for prompt injection before they reach your model.
+> **[SafePrompt](https://docs.safeprompt.dev/langchain)**
+>
+> Validate prompts for prompt injection before they reach your model.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/providers/all_providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/providers/all_providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

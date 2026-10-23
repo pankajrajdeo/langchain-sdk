@@ -36,8 +36,9 @@ for subagent in stream.subagents:
     subagent_names.append(subagent.name)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/3a85e9e6-9081-44ff-8291-2f7a7a478d6d/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/1884fc76-062c-464d-85a9-9cf20d5286ab/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Subagent stream fields
 
@@ -81,8 +82,9 @@ for subagent in stream.subagents:
         print(f"{subagent.name}: failed")
 ```
 
-#### [View example trace](https://smith.langchain.com/public/f44ddc62-d081-4373-bfec-361fc211fced/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/7c517c49-b795-4a33-b782-6695349c9deb/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Stream messages
 
@@ -101,8 +103,9 @@ for subagent in stream.subagents:
         print(f"[{subagent.name}]", message.text)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/91503d73-11d1-4016-90f1-c1ac52e32f3b/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/8cdd93c9-0dff-4f08-8057-053753c68c6e/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Stream tool calls
 
@@ -129,8 +132,9 @@ for subagent in stream.subagents:
             print(call.error)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/c3a01f68-bece-422d-add0-703090a068a5/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/55cbc704-a514-46e1-8559-b2cfee01298d/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Stream nested work
 
@@ -154,8 +158,9 @@ for subagent in stream.subagents:
     subagent_names.append(subagent.name)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/85a499ed-bde5-4fa7-8154-25522617d724/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/51f7e14f-0d79-4f59-a817-e05db11cec22/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Consume concurrently
 
@@ -193,8 +198,9 @@ for name, item in stream.interleave("messages", "subagents"):
             print(f"[{item.name}]", message.text)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/22b2e253-4b17-4633-9eb0-c036cb548ce1/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/74ef37d9-f1b4-408f-babd-af300a033e9b/r)**
+>
+> Open a public LangSmith run for this example.
 
 When you need exact arrival order across the coordinator and all subagents, iterate raw protocol events and use `namespace` to identify the source:
 
@@ -219,8 +225,9 @@ for event in stream:
         text_deltas.append(block["text"])
 ```
 
-#### [View example trace](https://smith.langchain.com/public/ffce9a73-0179-440a-9b4a-96b448b39c3c/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/71b391fa-fa9d-40c0-838a-6a21874785c9/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Subagents versus subgraphs
 
@@ -234,8 +241,6 @@ Open a public LangSmith run for this example.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

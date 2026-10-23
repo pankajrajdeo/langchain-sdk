@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, vectorstores, redis]
 > Integrate with FluentRedisVectorStore and RedisVectorStore using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 
 [Redis](https://redis.io/) is a fast open source, in-memory data store. Since [Redis 8.0](https://redis.io/docs/latest/develop/whats-new/8-0/), [RediSearch](https://redis.io/docs/latest/develop/interact/search-and-query/) - the module that enables vector similarity semantic search - is built-in and no longer requires installing a separate module.
@@ -22,7 +23,7 @@ This guide provides a quick overview for getting started with Redis [vector stor
 
 ### Integration details
 
-| Class | Package | [PY support](https://python.langchain.com/docs/integrations/vectorstores/redis/) | Downloads | Version |
+| Class | Package | [PY support](../../../integrations/vectorstores/redis.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`FluentRedisVectorStore`](https://reference.langchain.com/javascript/langchain-redis/FluentRedisVectorStore) | [`@langchain/redis`](https://www.npmjs.com/package/@langchain/redis) | ❌ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/redis?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/redis?style=flat-square\&label=%20&) |
 | [`RedisVectorStore`](https://reference.langchain.com/javascript/langchain-redis/RedisVectorStore) | [`@langchain/redis`](https://www.npmjs.com/package/@langchain/redis) | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/redis?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/redis?style=flat-square\&label=%20&) |
@@ -243,6 +244,7 @@ The `@langchain/redis` package provides two vector store implementations:
 * **`RedisVectorStore`** (legacy): Original implementation with object-based schema and basic filtering capabilities
 
 > [!NOTE]
+>
 > **Which one should I use?**
 >
 > Use `FluentRedisVectorStore` for new projects or when you need:
@@ -302,6 +304,7 @@ const vectorStore = await FluentRedisVectorStore.fromDocuments(
 ```
 
 > [!NOTE]
+>
 > **`customSchema` is required; inference is for validation only:**
 >
 > `FluentRedisVectorStore` requires a `customSchema`. When you create an index with documents, it also infers a schema from document metadata and logs a warning if that inferred schema differs from your `customSchema`.
@@ -425,6 +428,7 @@ Only validates when customSchema is defined; if no schema exists, validation is 
 * Throws errors if a field type does not match the schema type, e.g., NUMERIC schema fields expect number metadata fields
 
 > [!TIP]
+>
 > **Best practices for schema validation:**
 >
 > 1. **Use correct data types**: Ensure your document metadata matches your schema field types
@@ -436,6 +440,7 @@ Only validates when customSchema is defined; if no schema exists, validation is 
 #### Advanced filtering with the fluent API
 
 > [!NOTE]
+>
 > **Important:** The fluent filtering API (`Tag`, `Num`, `Text`, `Geo`, `Timestamp`, `Custom`) is **only available with `FluentRedisVectorStore`**. The legacy `RedisVectorStore` uses a different filtering approach.
 
 The `FluentRedisVectorStore` provides a powerful fluent API for building complex metadata filters. This API offers type-safe filter construction with support for various field types and logical operations.
@@ -808,8 +813,6 @@ For detailed documentation of all features and configurations:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

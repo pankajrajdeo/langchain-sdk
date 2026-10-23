@@ -11,6 +11,7 @@ tags: [docs, langsmith, big-query-bulk-export]
 > Load LangSmith trace data into BigQuery using bulk export to GCS.
 
 > [!NOTE]
+>
 > **Plan restrictions apply**
 >
 > For customers who signed up after August 3, 2026, bulk export is only available on the [LangSmith Enterprise plan](https://www.langchain.com/pricing-langsmith). Customers who signed up on or before August 3, 2026, can use bulk export on Plus or Enterprise plans until February 1, 2027.
@@ -165,6 +166,7 @@ curl --request POST \
 Bulk exports default to `zstandard` compression. This example sets `snappy` because Snappy is fast and widely supported by BigQuery. For all available options, refer to [Bulk export trace data](data-export.md#2-create-an-export-job), including field filtering and filter expressions.
 
 > [!NOTE]
+>
 > On [Self-hosted LangSmith](self-hosted.md), the default is `gzip`. Set the `FF_BULK_EXPORT_DEFAULT_COMPRESSION` environment variable to change the default.
 
 ### Output file structure
@@ -186,7 +188,8 @@ BigQuery offers two ways to access your exported data. Both require granting the
 
 ### Create the table
 
-#### External table
+**External table**
+
 An external table queries data directly from GCS without copying it into BigQuery.
 
 1. In the BigQuery console, expand your project and dataset in the **Explorer** pane.
@@ -207,7 +210,8 @@ An external table queries data directly from GCS without copying it into BigQuer
 
 The partition path columns (`export_id`, `tenant_id`, `session_id`, `resource`, `year`, `month`, `day`) are available as queryable columns. Filter on `year`, `month`, or `day` in your queries to enable partition pruning.
 
-#### Native table
+**Native table**
+
 A native table transfers the Parquet data into BigQuery storage for full query performance.
 
 1. Go to the [Data Transfer page](https://console.cloud.google.com/bigquery/transfers) in the Google Cloud console and select **+ Create transfer**.
@@ -287,8 +291,6 @@ For additional error codes and export status details, see [Monitor and troublesh
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/big-query-bulk-export.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/big-query-bulk-export.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

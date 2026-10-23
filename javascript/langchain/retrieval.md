@@ -22,6 +22,7 @@ A **knowledge base** is a repository of documents or structured data used during
 If you need a custom knowledge base, you can use LangChain’s document loaders and vector stores to build one from your own data.
 
 > [!NOTE]
+>
 > If you already have a knowledge base (for example a SQL database, a document database, a CRM, or an internal documentation system), you do **not** need to rebuild it. You can:
 >
 > * Connect it as a **tool** for an agent in Agentic RAG.
@@ -29,9 +30,10 @@ If you need a custom knowledge base, you can use LangChain’s document loaders 
 
 For more information, see the following tutorial to build a searchable knowledge base and minimal RAG workflow:
 
-#### [Tutorial: Semantic search](knowledge-base.md)
-Learn how to create a searchable knowledge base from your own data using LangChain’s document loaders, embeddings, and vector stores.
-In this tutorial, you’ll build a search engine over a PDF, enabling retrieval of passages relevant to a query. You’ll also implement a minimal RAG workflow on top of this engine to see how external knowledge can be integrated into LLM reasoning.
+> **[Tutorial: Semantic search](knowledge-base.md)**
+>
+> Learn how to create a searchable knowledge base from your own data using LangChain’s document loaders, embeddings, and vector stores.
+> In this tutorial, you’ll build a search engine over a PDF, enabling retrieval of passages relevant to a query. You’ll also implement a minimal RAG workflow on top of this engine to see how external knowledge can be integrated into LLM reasoning.
 
 ### From retrieval to RAG
 
@@ -75,17 +77,21 @@ Each component is modular: you can swap loaders, splitters, embeddings, or vecto
 
 ### Building blocks
 
-#### [Document loaders](../integrations/document_loaders.md)
-Ingest data from external sources (Google Drive, Slack, Notion, etc.), returning standardized [`Document`](https://reference.langchain.com/javascript/langchain-core/documents/Document) objects.
+> **[Document loaders](../integrations/document_loaders.md)**
+>
+> Ingest data from external sources (Google Drive, Slack, Notion, etc.), returning standardized [`Document`](https://reference.langchain.com/javascript/langchain-core/documents/Document) objects.
 
-#### [Embedding models](../integrations/embeddings.md)
-An embedding model turns text into a vector of numbers so that texts with similar meaning land close together in that vector space.
+> **[Embedding models](../integrations/embeddings.md)**
+>
+> An embedding model turns text into a vector of numbers so that texts with similar meaning land close together in that vector space.
 
-#### [Vector stores](../integrations/vectorstores.md)
-Specialized databases for storing and searching embeddings.
+> **[Vector stores](../integrations/vectorstores.md)**
+>
+> Specialized databases for storing and searching embeddings.
 
-#### [Retrievers](../integrations/retrievers.md)
-A retriever is an interface that returns documents given an unstructured query.
+> **[Retrievers](../integrations/retrievers.md)**
+>
+> A retriever is an interface that returns documents given an unstructured query.
 
 ## RAG architectures
 
@@ -98,6 +104,7 @@ RAG can be implemented in multiple ways, depending on your system's needs. We ou
 | **Hybrid** | Combines characteristics of both approaches with validation steps | ⚖️ Medium | ⚖️ Medium | ⏳ Variable | Domain-specific Q\&A with quality validation |
 
 > [!NOTE]
+>
 > **Latency**: Latency is generally more **predictable** in **2-Step RAG**, as the maximum number of LLM calls is known and capped. This predictability assumes that LLM inference time is the dominant factor. However, real-world latency may also be affected by the performance of retrieval steps, such as API response times, network delays, or database queries, which can vary based on the tools and infrastructure in use.
 
 ### 2-step RAG
@@ -119,19 +126,20 @@ graph TB
     class B,C process
 ```
 
-<br />
+> **[Tutorial: Semantic search](knowledge-base.md)**
+>
+> Build a searchable knowledge base with document loaders, embeddings, and vector stores, then run a minimal retrieve-then-generate RAG workflow on top of it.
 
-#### [Tutorial: Semantic search](knowledge-base.md)
-Build a searchable knowledge base with document loaders, embeddings, and vector stores, then run a minimal retrieve-then-generate RAG workflow on top of it.
-
-#### [Tutorial: Evaluate a RAG application](../../langsmith/evaluate-rag-tutorial.md)
-Build a simple retrieve-then-generate RAG app and measure answer correctness, relevance, groundedness, and retrieval quality with LangSmith.
+> **[Tutorial: Evaluate a RAG application](../../langsmith/evaluate-rag-tutorial.md)**
+>
+> Build a simple retrieve-then-generate RAG app and measure answer correctness, relevance, groundedness, and retrieval quality with LangSmith.
 
 ### Agentic RAG
 
 **Agentic Retrieval-Augmented Generation (RAG)** combines the strengths of Retrieval-Augmented Generation with agent-based reasoning. Instead of retrieving documents before answering, an agent (powered by an LLM) reasons step-by-step and decides **when** and **how** to retrieve information during the interaction.
 
 > [!TIP]
+>
 > The only thing an agent needs to enable RAG behavior is access to one or more **tools** that can fetch external knowledge, such as documentation loaders, web APIs, or database queries.
 
 ```mermaid
@@ -173,15 +181,16 @@ const agent = createAgent({
 });
 ```
 
-**Extended example: Agentic RAG for LangGraph**
+**Extended example: Agentic RAG for LangGraph's llms.txt**
+
 This example implements an **Agentic RAG system** to assist users in querying LangGraph documentation. The agent begins by loading [llms.txt](https://llmstxt.org/), which lists available documentation URLs, and can then dynamically use a `fetch_documentation` tool to retrieve and process the relevant content based on the user’s question.
 
 ```typescript
 import { tool, createAgent, HumanMessage } from "langchain";
 import * as z from "zod";
 
-const ALLOWED_DOMAINS = ["https://langchain-ai.github.io/"];
-const LLMS_TXT = "https://langchain-ai.github.io/langgraph/llms.txt";
+const ALLOWED_DOMAINS = ["https://docs.langchain.com/"];
+const LLMS_TXT = "https://docs.langchain.com/llms.txt";
 
 const fetchDocumentation = tool(
   async (input) => {  // [!code highlight]
@@ -250,8 +259,9 @@ const response = await agent.invoke({
 console.log(response.messages.at(-1)?.content);
 ```
 
-#### [Tutorial: RAG with Deep Agents](../deepagents/rag.md)
-Build a documentation Q\&A agent that retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents.
+> **[Tutorial: RAG with Deep Agents](../deepagents/rag.md)**
+>
+> Build a documentation Q\&A agent that retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents.
 
 ### Hybrid RAG
 
@@ -296,13 +306,12 @@ This architecture is suitable for:
 * Systems that require validation or quality control steps
 * Workflows involving multiple sources or iterative refinement
 
-#### [Tutorial: Agentic RAG with Self-Correction](../langgraph/agentic-rag.md)
-An example of **Hybrid RAG** that combines agentic reasoning with retrieval and self-correction.
+> **[Tutorial: Agentic RAG with Self-Correction](../langgraph/agentic-rag.md)**
+>
+> An example of **Hybrid RAG** that combines agentic reasoning with retrieval and self-correction.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/retrieval.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/retrieval.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

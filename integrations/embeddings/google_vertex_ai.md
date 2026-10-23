@@ -11,6 +11,7 @@ tags: [docs, integrations, embeddings, google_vertex_ai]
 > Integrate with the Gemini Enterprise Agent Platform embedding model using LangChain Python.
 
 > [!CAUTION]
+>
 > **Deprecated**
 >
 > This integration is deprecated and will be removed in a future release. Please use [`GoogleGenerativeAIEmbeddings`](google_generative_ai.md) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
@@ -23,7 +24,7 @@ This will help you get started with embedding models on Gemini Enterprise Agent 
 
 | Provider | Package |
 | :-: | :-: |
-| [Google](https://python.langchain.com/docs/integrations/providers/google/) | [`langchain-google-vertexai`](https://reference.langchain.com/python/langchain-google-vertexai/embeddings/VertexAIEmbeddings) |
+| [Google](../providers/google.md) | [`langchain-google-vertexai`](https://reference.langchain.com/python/langchain-google-vertexai/embeddings/VertexAIEmbeddings) |
 
 ## Setup
 
@@ -69,7 +70,7 @@ import vertexai
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -173,8 +174,6 @@ For detailed documentation on `VertexAIEmbeddings` features and configuration op
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

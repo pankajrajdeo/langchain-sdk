@@ -7,7 +7,7 @@ tags: [index, javascript, integrations]
 
 # javascript/integrations
 
-16 pages here, 182 pages including subdirectories.
+16 pages here, 183 pages including subdirectories.
 
 ## Directories
 
@@ -15,7 +15,7 @@ tags: [index, javascript, integrations]
 - [backends/](backends/_index.md) - 1 page
 - [chains/](chains/_index.md) - 1 page
 - [chat/](chat/_index.md) - 24 pages
-- [document_compressors/](document_compressors/_index.md) - 2 pages
+- [document_compressors/](document_compressors/_index.md) - 3 pages
 - [document_loaders/](document_loaders/_index.md) - 12 pages
 - [document_transformers/](document_transformers/_index.md) - 2 pages
 - [embeddings/](embeddings/_index.md) - 20 pages

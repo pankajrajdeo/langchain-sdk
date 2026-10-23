@@ -11,6 +11,7 @@ tags: [docs, langsmith, llm-gateway-coding-agents]
 > Configure Claude Code, Codex, Gemini CLI, and Deep Agents Code to route LLM calls through the LLM Gateway.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 Configure coding agents to use the standard LLM Gateway endpoint for centralized cost controls, observability, and audit trails. The gateway authenticates each caller, routes by model ID, enforces policies, and traces each call.
@@ -40,13 +41,14 @@ Claude Code supports two separate authentication methods. Choose one before conf
 
 Set `ANTHROPIC_API_KEY` to your LangSmith API key. Claude Code reads these variables from your shell environment or from the `env` block in a settings file passed with `--settings`.
 
-If your LangSmith deployment is on a regional or self-hosted instance, replace the gateway hostname in the examples below with your [regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway) hostname.
+If your LangSmith deployment is on a regional instance, replace the gateway hostname in the examples below with your [regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway) hostname. On a [self-hosted installation](llm-gateway-how-it-works.md#use-a-self-hosted-installation), replace `https://gateway.smith.langchain.com` with `https://<your-hostname>/gateway`.
 
 #### Use Anthropic models only
 
 Set `ANTHROPIC_BASE_URL` to the Anthropic-format gateway endpoint. The gateway infers the `anthropic/` provider prefix from the endpoint.
 
-#### Settings file (recommended)
+**Settings file (recommended)**
+
 Variables declared in a `--settings` file take precedence over anything already exported in your shell, so the gateway URL and API key are guaranteed to override any ambient `ANTHROPIC_*` values that may already be set in your environment (for example, from a global shell profile or another tool).
 
 ```bash
@@ -57,7 +59,8 @@ claude --settings ~/.claude/langsmith_gateway.settings.json
 
 Replace `YOUR_LANGSMITH_KEY_HERE` with your LangSmith API key.
 
-#### Environment variables
+**Environment variables**
+
 ```bash
 export ANTHROPIC_BASE_URL="https://gateway.smith.langchain.com/anthropic/"
 export ANTHROPIC_API_KEY="$LANGSMITH_API_KEY"
@@ -69,7 +72,8 @@ claude
 
 Set `ANTHROPIC_BASE_URL` to the gateway root, then map each Claude model tier to a provider-prefixed gateway model ID.
 
-#### Settings file (recommended)
+**Settings file (recommended)**
+
 Variables declared in a `--settings` file take precedence over anything already exported in your shell, so gateway URLs, the API key, and model mappings are guaranteed to override any ambient `ANTHROPIC_*` values.
 
 ```bash
@@ -80,7 +84,8 @@ claude --settings ~/.claude/langsmith_gateway.settings.json
 
 Replace `YOUR_LANGSMITH_KEY_HERE` with your LangSmith API key.
 
-#### Environment variables
+**Environment variables**
+
 ```bash
 export ANTHROPIC_BASE_URL="https://gateway.smith.langchain.com"
 export ANTHROPIC_API_KEY="$LANGSMITH_API_KEY"
@@ -93,18 +98,18 @@ claude
 
 The model IDs are examples. Map each tier to any model configured in your workspace secrets or available through [Gateway Credits](llm-gateway-credits.md); the gateway handles request translation across providers. For details, see [API formats](llm-gateway-api-formats.md#understand-translation-behavior).
 
-<a id="use-claude-subscription-oauth" />
-
 ### Use Claude subscription OAuth
 
 > [!NOTE]
+>
 > Claude subscription OAuth requires an active Claude Code Plus or Max subscription. If you are using a workspace Anthropic API key, use the [workspace provider secret](#use-a-workspace-provider-secret) method instead.
 
 Claude Code Plus and Max users can send their saved Anthropic OAuth credential through the gateway. This mode does not require an `ANTHROPIC_API_KEY` in workspace provider secrets.
 
 Log in to Claude Code with your subscription, then configure the gateway.
 
-#### Settings file (recommended)
+**Settings file (recommended)**
+
 Variables declared in a `--settings` file take precedence over anything already exported in your shell, so the gateway URL and custom headers are guaranteed to override any ambient `ANTHROPIC_*` values. The settings file also keeps your LangSmith API key out of your shell history and dotfiles.
 
 ```bash
@@ -115,7 +120,8 @@ claude --settings ~/.claude/langsmith_gateway.settings.json
 
 Replace `YOUR_LANGSMITH_KEY_HERE` with your LangSmith API key.
 
-#### Environment variables
+**Environment variables**
+
 ```bash
 export ANTHROPIC_BASE_URL="https://gateway.smith.langchain.com/anthropic"
 export ANTHROPIC_CUSTOM_HEADERS="X-Api-Key: $LANGSMITH_API_KEY"
@@ -130,9 +136,11 @@ Claude Code uses and refreshes the OAuth credential from its saved login, includ
 The LangSmith API key authenticates the gateway request and remains subject to gateway permissions and policies. The gateway forwards the OAuth bearer to Anthropic, so Anthropic bills the call to the user's Claude subscription instead of the workspace provider secret. To confirm calls route through the gateway, check that traces appear in the `gateway` tracing project as described in [Verify the setup](#verify-the-setup).
 
 > [!WARNING]
+>
 > Leave `ANTHROPIC_AUTH_TOKEN` and `ANTHROPIC_API_KEY` unset for this mode. Either variable takes precedence over the saved subscription login.
 
 > [!WARNING]
+>
 > Claude Desktop plugins break when the gateway is configured.
 
 ## Codex CLI
@@ -160,6 +168,7 @@ codex
 To use a bring-your-own-key model instead, replace `model` with its provider-prefixed ID, such as `openai/gpt-5.4-mini`.
 
 > [!WARNING]
+>
 > Codex Desktop plugins break when the gateway is configured. The TOML configuration forces authentication through the gateway, so OpenAI no longer handles plugin authentication directly.
 
 ## Gemini CLI
@@ -194,6 +203,27 @@ For organizations rolling the gateway out to all developers, distribute the conf
 
 Provider API keys stay centralized in LangSmith workspace secrets. Gateway Credits models do not require provider API keys.
 
+## Group calls into conversation threads
+
+The gateway maps recognized coding-agent session headers to LangSmith `thread_id` metadata. Calls with the same ID belong to the same conversation thread within a tracing project.
+
+Header detection works across all providers, request paths, and API formats. The gateway checks these headers in order:
+
+1. `X-Claude-Code-Session-Id`
+2. `X-Deepseek-Harness-Session-Id`
+3. `thread-id`
+4. `thread_id`
+5. `session-id`
+6. `session_id`
+
+The gateway trims whitespace, skips blank values, and uses the first nonblank header value.
+
+If no header supplies an ID, the gateway can read the ID from the body of a Chat Completions or Responses request. It uses the `conversation` field, either a string or an object's `id`, and falls back to `prompt_cache_key`. The gateway reads these fields only when it already loads the request body for another reason, such as a guard policy. Send a header for consistent threading.
+
+To set a thread ID explicitly, send `X-Gateway-Thread-Id` or set `thread_id` in the JSON object in `X-Gateway-Metadata`. A nonblank explicit value overrides automatic detection. If both metadata headers specify a thread ID, `X-Gateway-Metadata` takes precedence.
+
+If the gateway finds no explicit ID, recognized session header, or body field, it does not add `thread_id` metadata.
+
 ## Verify the setup
 
 After configuring a coding agent, make a test call and confirm that:
@@ -212,8 +242,6 @@ If the call fails with a `403`, check that your API key's role includes `gateway
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-coding-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-coding-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

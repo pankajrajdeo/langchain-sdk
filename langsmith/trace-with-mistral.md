@@ -127,7 +127,7 @@ export LANGSMITH_PROJECT="<your_project_name>"  # optional
 
    The [`@traceable`](https://reference.langchain.com/python/langsmith/run_helpers/traceable) decorator (from the [LangSmith Python SDK](https://reference.langchain.com/python/langsmith/observability/sdk/)) wraps the `query_mistral` function so that each invocation is logged as a trace run of type `"llm"`. The `metadata={"ls_provider": "mistral", "ls_model_name": "mistral-medium-latest"}` tags the trace with the provider (Mistral) and model name.
 
-   You can also refer to the [LangSmith JavaScript SDK](https://reference.langchain.com/javascript/modules/langsmith.html).
+   You can also refer to the [LangSmith JavaScript SDK](https://reference.langchain.com/javascript/langsmith).
 
 2. Execute your script to generate a trace. For example:
 
@@ -168,8 +168,6 @@ Once enabled, costs appear directly in the LangSmith UI alongside each traced Mi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-mistral.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-mistral.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

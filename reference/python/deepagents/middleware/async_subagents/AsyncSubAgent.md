@@ -33,6 +33,22 @@ pass custom auth via `headers`.
     such as `ainvoke`. The synchronous `invoke` path requires a URL for a
     reachable Agent Protocol server.
 
+!!! warning "Beta"
+
+    When tracing is on, launches and updates of subagents on this deployment
+    (no `url`) send the parent's LangSmith trace headers, so a receiver can
+    nest the subagent's run under the parent's trace. This may change.
+
+    Each task's thread is created with
+    `metadata={"subagent_name": ..., "parent_thread_id": ...}`, so apps can
+    find a parent's subagent threads with `threads.search`, and a subagent's
+    graph factory can read them from its run's `config["metadata"]`.
+    `subagent_name` is this spec's `name`. This may change.
+
+    Launches and updates on this deployment run with the parent's current run
+    context, not the child's prior context. Queued updates capture that context
+    when sent, not when they start. A remote subagent (`url`) receives no context.
+
 ## Signature
 
 ```python
@@ -52,6 +68,10 @@ __init__(
     graph_id: str,
     url: NotRequired[str],
     headers: NotRequired[dict[str, str]],
+    webhook: NotRequired[str],
+    update_strategy: NotRequired[Literal['interrupt', 'enqueue']],
+    notify_parent: NotRequired[bool],
+    mode: NotRequired[Literal['isolated', 'fork']],
 )
 ```
 
@@ -62,6 +82,10 @@ __init__(
 | `graph_id` | `str` |
 | `url` | `NotRequired[str]` |
 | `headers` | `NotRequired[dict[str, str]]` |
+| `webhook` | `NotRequired[str]` |
+| `update_strategy` | `NotRequired[Literal['interrupt', 'enqueue']]` |
+| `notify_parent` | `NotRequired[bool]` |
+| `mode` | `NotRequired[Literal['isolated', 'fork']]` |
 
 ## Properties
 
@@ -70,7 +94,11 @@ __init__(
 - `graph_id`
 - `url`
 - `headers`
+- `webhook`
+- `update_strategy`
+- `notify_parent`
+- `mode`
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/async_subagents.py#L34)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/async_subagents.py#L56)

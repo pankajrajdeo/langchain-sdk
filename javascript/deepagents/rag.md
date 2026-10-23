@@ -16,7 +16,7 @@ These applications use a technique known as Retrieval Augmented Generation, or [
 
 [Deep Agents](overview.md) gives you primitives for RAG: custom retrieval tools, a [filesystem backend](backends.md), [subagents](subagents.md), [skills](skills.md), and [grading rubrics](rubric.md). You can combine them in different ways depending on your corpus size, latency requirements, and how strictly answers must be grounded in source data.
 
-This guide introduces several RAG patterns and walks through one end-to-end example: a documentation Q\&A agent that indexes a subset of [docs.langchain.com](../../home.md), retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents so the orchestrator context stays clean.
+This guide introduces several RAG patterns and walks through one end-to-end example: a documentation Q\&A agent that indexes a subset of [docs.langchain.com](../../index.md), retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents so the orchestrator context stays clean.
 
 ## RAG patterns
 
@@ -216,8 +216,9 @@ const result = await baselineAgent.invoke({
 console.log(result.messages.at(-1)?.text);
 ```
 
-#### [View example trace](https://smith.langchain.com/public/55e6f247-1ae3-4542-bd54-75734ebeb6a0/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/df7664f6-253f-4eba-b8aa-f55b59889b5a/r)**
+>
+> Open a public LangSmith run for this example.
 
 Without retrieval, the agent cannot look up current LangChain documentation. Responses tend to be generic, may omit guidance such as [subagent streaming](frontend/subagent-streaming.md), or include outdated information.
 
@@ -239,13 +240,15 @@ API keys for:
 
 ## Setup
 
-### Create project directory
+**1. Create project directory**
+
 ```bash
 mkdir docs-rag-agent
 cd docs-rag-agent
 ```
 
-### Initialize the project
+**2. Initialize the project**
+
 **npm**
 
 ```bash
@@ -253,7 +256,8 @@ npm init -y
 npm pkg set type=module
 ```
 
-### Install dependencies
+**3. Install dependencies**
+
 **npm**
 
 ```bash
@@ -262,7 +266,8 @@ npm install deepagents langchain @langchain/core @langchain/openai @langchain/an
 
 Install the matching `@langchain/<provider>` package for the model you select in the code examples below (Google, OpenAI, and Anthropic are included above).
 
-### Set API keys
+**4. Set API keys**
+
 Export keys in your shell, or create a `.env` file in the project directory. The code loads `.env` automatically with `import "dotenv/config"` (added in the indexing step below).
 
 ```bash
@@ -281,7 +286,8 @@ GOOGLE_API_KEY=your_google_api_key
 
 Use the environment variable that matches the model provider in your code (`ANTHROPIC_API_KEY` for Claude, `GOOGLE_API_KEY` for Gemini, `OPENAI_API_KEY` for OpenAI).
 
-### Set up LangSmith
+**5. Set up LangSmith**
+
 RAG applications run retrieval and generation in sequence. When you run the examples in this tutorial, [LangSmith](../../langsmith/observability.md) logs a trace for each query so you can inspect retrieval, tool calls, and model responses.
 After you [sign up for LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-rag), set your environment variables to start logging traces:
 
@@ -291,6 +297,7 @@ export LANGSMITH_API_KEY="..."
 ```
 
 > [!TIP]
+>
 > If you are building a production agent, we also recommend you set up [LangSmith Engine](../../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Index LangChain documentation
@@ -304,7 +311,7 @@ Indexing commonly works in four steps:
 3. **[Embed](#select-an-embeddings-model)**: [Embeddings](../integrations/embeddings.md) models convert each chunk into a numeric vector that captures its meaning, enabling similarity search over your content.
 4. **[Store](#store-chunks-and-embeddings-in-vectorstore)**: Use a [VectorStore](../integrations/vectorstores.md) to index chunks and their embeddings for retrieval.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/rag_indexing.png?fit=max&auto=format&n=I6RpA28iE233vhYX&q=85&s=21403ce0d0c772da84dcc5b75cff4451" alt="index_diagram" width="2583" height="1299" data-path="images/rag_indexing.png" />
+![index\_diagram](https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/rag_indexing.png?fit=max\&auto=format\&n=I6RpA28iE233vhYX\&q=85\&s=21403ce0d0c772da84dcc5b75cff4451)
 
 In the indexing step, fetch documentation pages, split them into chunks, embed the chunks, and store them in a `VectorStore`. The agent searches this index at runtime; it does not re-fetch the full site on every question.
 
@@ -341,6 +348,7 @@ const DOC_PATHS = [
 ```
 
 > [!NOTE]
+>
 > For a more detailed tutorial on indexing, vector stores, and retrieval, see [Semantic search](../langchain/knowledge-base.md).
 
 ### Load documents
@@ -432,7 +440,8 @@ An [embedding](../integrations/embeddings.md) is a numeric vector that captures 
 
 You can choose from many different [embedding integrations](../integrations/embeddings.md) which all use the same [Interface](https://reference.langchain.com/javascript/langchain-core/embeddings/Embeddings):
 
-#### OpenAI
+**OpenAI**
+
 **npm**
 
 ```bash
@@ -459,7 +468,8 @@ const embeddings = new OpenAIEmbeddings({
 });
 ```
 
-#### Azure
+**Azure**
+
 **npm**
 
 ```bash
@@ -492,7 +502,8 @@ const embeddings = new AzureOpenAIEmbeddings({
 });
 ```
 
-#### AWS
+**AWS**
+
 **npm**
 
 ```bash
@@ -523,7 +534,8 @@ const embeddings = new BedrockEmbeddings({
 });
 ```
 
-#### Gemini Enterprise Agent Platform
+**Gemini Enterprise Agent Platform**
+
 **npm**
 
 ```bash
@@ -554,7 +566,8 @@ const embeddings = new VertexAIEmbeddings({
 });
 ```
 
-#### MistralAI
+**MistralAI**
+
 **npm**
 
 ```bash
@@ -585,7 +598,8 @@ const embeddings = new MistralAIEmbeddings({
 });
 ```
 
-#### Cohere
+**Cohere**
+
 **npm**
 
 ```bash
@@ -622,7 +636,8 @@ A [`VectorStore`](../integrations/vectorstores.md) persists document chunks and 
 You can choose from many different [vector store integrations](../integrations/vectorstores.md) which all use the same [Interface](https://reference.langchain.com/javascript/langchain-core/vectorstores/VectorStore).
 Use the embeddings model that you selected in the previous step to configure your `VectorStore`:
 
-#### Memory
+**Memory**
+
 **npm**
 
 ```bash
@@ -647,7 +662,8 @@ import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
 const vectorStore = new MemoryVectorStore(embeddings);
 ```
 
-#### MongoDB
+**MongoDB**
+
 **npm**
 
 ```bash
@@ -683,7 +699,8 @@ const vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
 });
 ```
 
-#### Pinecone
+**Pinecone**
+
 **npm**
 
 ```bash
@@ -717,7 +734,8 @@ const vectorStore = new PineconeStore(embeddings, {
 });
 ```
 
-#### Qdrant
+**Qdrant**
+
 **npm**
 
 ```bash
@@ -745,7 +763,8 @@ const vectorStore = await QdrantVectorStore.fromExistingCollection(embeddings, {
 });
 ```
 
-#### Redis
+**Redis**
+
 **npm**
 
 ```bash
@@ -787,6 +806,7 @@ Indexed 722 chunks.
 ```
 
 > [!TIP]
+>
 > Indexing runs once at startup in this tutorial. In production, persist the vector store to disk or a hosted vector database and refresh it on a schedule when documentation changes.
 
 This completes the **Indexing** portion of the tutorial. You now have a queryable vector store containing chunked LangChain documentation.
@@ -796,13 +816,14 @@ The next step is to build a Deep Agent that searches this index at run time, off
 1. **Retrieve**: Given a user input, relevant splits are retrieved from storage using a [Retriever](../integrations/retrievers.md).
 2. **Generate**: A [model](../langchain/models.md) produces an answer using a prompt that includes both the question and the retrieved data.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/rag_retrieval_generation.png?fit=max&auto=format&n=I6RpA28iE233vhYX&q=85&s=994c3585cece93c80873d369960afd44" alt="retrieval_diagram" width="2532" height="1299" data-path="images/rag_retrieval_generation.png" />
+![retrieval\_diagram](https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/rag_retrieval_generation.png?fit=max\&auto=format\&n=I6RpA28iE233vhYX\&q=85\&s=994c3585cece93c80873d369960afd44)
 
 ## Build the agent
 
 Add this code to `agent.ts`:
 
-### Add the search tool
+**1. Add the search tool**
+
 The `search_documentation` tool runs similarity search against the indexed corpus, then writes each retrieved chunk to the agent filesystem under `/retrieved/{batch_id}/`. It returns file paths so the orchestrator can delegate analysis without loading full chunk text into its context.
 
 The tool writes retrieved chunks to the agent backend with `backend.uploadFiles()`. Pass the same backend instance to `createDeepAgent` so built-in filesystem tools such as `read_file` and `grep` can read the saved paths.
@@ -817,7 +838,7 @@ const backend = new StateBackend();
 const searchDocumentation = tool(
   async ({ query }) => {
     const retrievedDocs = await vectorStore.similaritySearch(query, 4);
-    const batchId = crypto.randomUUID().slice(0, 8);
+    const batchId = uuid7().slice(0, 8);
     const uploads: Array<[string, Uint8Array]> = [];
     const savedPaths: string[] = [];
     const encoder = new TextEncoder();
@@ -843,7 +864,8 @@ const searchDocumentation = tool(
 );
 ```
 
-### Add prompts
+**2. Add prompts**
+
 Add the orchestrator workflow and subagent prompt templates to `agent.ts`:
 
 ```ts
@@ -894,7 +916,8 @@ Your role is to coordinate chunk analysis by delegating to the chunk-analyst sub
 - Prefer concrete steps and code-oriented guidance from the documentation.`;
 ```
 
-### Create the agent
+**3. Create the agent**
+
 Add model initialization and agent creation to `agent.ts`:
 
 **Google**
@@ -1169,6 +1192,7 @@ If you enabled LangSmith in [Setup](#setup), open [LangSmith](https://smith.lang
 ## Security considerations
 
 > [!WARNING]
+>
 > RAG applications are susceptible to **indirect prompt injection**. Retrieved documentation may contain text that resembles instructions. Because retrieved chunks share the context window with your system prompt, models may follow instructions embedded in documentation rather than your intended prompt.
 
 No prompt or delimiter strategy fully prevents indirect prompt injection. The orchestrator and subagent prompts in this tutorial ask the model to treat retrieved content as data only, and the search tool prefixes chunks with a `# Source:` header so analysts can distinguish metadata from body content. These patterns can help in some cases, but they do not provide reliable protection.
@@ -1187,6 +1211,7 @@ Save as `agent.ts` and run with `npx tsx agent.ts`:
 
 ```ts
 import "dotenv/config";
+import { uuid7 } from "langsmith";
 
 import { Document } from "@langchain/core/documents";
 import { HumanMessage } from "@langchain/core/messages";
@@ -1259,7 +1284,7 @@ const backend = new StateBackend();
 const searchDocumentation = tool(
   async ({ query }) => {
     const retrievedDocs = await vectorStore.similaritySearch(query, 4);
-    const batchId = crypto.randomUUID().slice(0, 8);
+    const batchId = uuid7().slice(0, 8);
     const uploads: Array<[string, Uint8Array]> = [];
     const savedPaths: string[] = [];
     const encoder = new TextEncoder();
@@ -1373,6 +1398,7 @@ if (import.meta.main) {
 
 ```ts
 import "dotenv/config";
+import { uuid7 } from "langsmith";
 
 import { Document } from "@langchain/core/documents";
 import { HumanMessage } from "@langchain/core/messages";
@@ -1445,7 +1471,7 @@ const backend = new StateBackend();
 const searchDocumentation = tool(
   async ({ query }) => {
     const retrievedDocs = await vectorStore.similaritySearch(query, 4);
-    const batchId = crypto.randomUUID().slice(0, 8);
+    const batchId = uuid7().slice(0, 8);
     const uploads: Array<[string, Uint8Array]> = [];
     const savedPaths: string[] = [];
     const encoder = new TextEncoder();
@@ -1559,6 +1585,7 @@ if (import.meta.main) {
 
 ```ts
 import "dotenv/config";
+import { uuid7 } from "langsmith";
 
 import { Document } from "@langchain/core/documents";
 import { HumanMessage } from "@langchain/core/messages";
@@ -1631,7 +1658,7 @@ const backend = new StateBackend();
 const searchDocumentation = tool(
   async ({ query }) => {
     const retrievedDocs = await vectorStore.similaritySearch(query, 4);
-    const batchId = crypto.randomUUID().slice(0, 8);
+    const batchId = uuid7().slice(0, 8);
     const uploads: Array<[string, Uint8Array]> = [];
     const savedPaths: string[] = [];
     const encoder = new TextEncoder();
@@ -1745,6 +1772,7 @@ if (import.meta.main) {
 
 ```ts
 import "dotenv/config";
+import { uuid7 } from "langsmith";
 
 import { Document } from "@langchain/core/documents";
 import { HumanMessage } from "@langchain/core/messages";
@@ -1817,7 +1845,7 @@ const backend = new StateBackend();
 const searchDocumentation = tool(
   async ({ query }) => {
     const retrievedDocs = await vectorStore.similaritySearch(query, 4);
-    const batchId = crypto.randomUUID().slice(0, 8);
+    const batchId = uuid7().slice(0, 8);
     const uploads: Array<[string, Uint8Array]> = [];
     const savedPaths: string[] = [];
     const encoder = new TextEncoder();
@@ -1931,6 +1959,7 @@ if (import.meta.main) {
 
 ```ts
 import "dotenv/config";
+import { uuid7 } from "langsmith";
 
 import { Document } from "@langchain/core/documents";
 import { HumanMessage } from "@langchain/core/messages";
@@ -2003,7 +2032,7 @@ const backend = new StateBackend();
 const searchDocumentation = tool(
   async ({ query }) => {
     const retrievedDocs = await vectorStore.similaritySearch(query, 4);
-    const batchId = crypto.randomUUID().slice(0, 8);
+    const batchId = uuid7().slice(0, 8);
     const uploads: Array<[string, Uint8Array]> = [];
     const savedPaths: string[] = [];
     const encoder = new TextEncoder();
@@ -2117,6 +2146,7 @@ if (import.meta.main) {
 
 ```ts
 import "dotenv/config";
+import { uuid7 } from "langsmith";
 
 import { Document } from "@langchain/core/documents";
 import { HumanMessage } from "@langchain/core/messages";
@@ -2189,7 +2219,7 @@ const backend = new StateBackend();
 const searchDocumentation = tool(
   async ({ query }) => {
     const retrievedDocs = await vectorStore.similaritySearch(query, 4);
-    const batchId = crypto.randomUUID().slice(0, 8);
+    const batchId = uuid7().slice(0, 8);
     const uploads: Array<[string, Uint8Array]> = [];
     const savedPaths: string[] = [];
     const encoder = new TextEncoder();
@@ -2303,6 +2333,7 @@ if (import.meta.main) {
 
 ```ts
 import "dotenv/config";
+import { uuid7 } from "langsmith";
 
 import { Document } from "@langchain/core/documents";
 import { HumanMessage } from "@langchain/core/messages";
@@ -2375,7 +2406,7 @@ const backend = new StateBackend();
 const searchDocumentation = tool(
   async ({ query }) => {
     const retrievedDocs = await vectorStore.similaritySearch(query, 4);
-    const batchId = crypto.randomUUID().slice(0, 8);
+    const batchId = uuid7().slice(0, 8);
     const uploads: Array<[string, Uint8Array]> = [];
     const savedPaths: string[] = [];
     const encoder = new TextEncoder();
@@ -2497,8 +2528,6 @@ You implemented one RAG pattern with [`createDeepAgent`](https://reference.langc
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

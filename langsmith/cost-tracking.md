@@ -12,7 +12,9 @@ Building agents at scale introduces non-trivial, usage-based costs that can be d
 
 This gives you a single, unified view of costs across your entire application, which makes it easy to monitor, understand, and debug your spend.
 
-To cap LLM cost on evaluator runs, refer to [Track and limit evaluator spend](evaluator-spend.md). Evaluator spend tracking and limits use the per-model pricing configured under [Model pricing](#create-a-new-or-modify-an-existing-model-price-entry).
+> [!NOTE]
+>
+> To cap LLM cost on evaluator runs, refer to [Track and limit evaluator spend](evaluator-spend.md). Evaluator spend tracking and limits use the per-model pricing configured under [Model pricing](#create-a-new-or-modify-an-existing-model-price-entry).
 
 ## View costs in the LangSmith UI
 
@@ -28,9 +30,7 @@ The UI separates token usage and costs into three categories:
 
 You can view detailed breakdowns by hovering over cost sections in the UI. When available, each section is further categorized by subtype.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/S029Harmw-iSrSVw/langsmith/images/cost-tooltip-light.png?fit=max&auto=format&n=S029Harmw-iSrSVw&q=85&s=49971715854df465e81e53ad6b7b297c" alt="Cost tooltip" width="894" height="400" data-path="langsmith/images/cost-tooltip-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/S029Harmw-iSrSVw/langsmith/images/cost-tooltip-dark.png?fit=max&auto=format&n=S029Harmw-iSrSVw&q=85&s=a51c9bc7bbd1836231b80d7d5a8db735" alt="Cost tooltip" width="900" height="394" data-path="langsmith/images/cost-tooltip-dark.png" />
+![Cost tooltip](https://mintcdn.com/langchain-5e9cc07a/S029Harmw-iSrSVw/langsmith/images/cost-tooltip-light.png?fit=max\&auto=format\&n=S029Harmw-iSrSVw\&q=85\&s=49971715854df465e81e53ad6b7b297c)
 
 You can inspect these breakdowns throughout the LangSmith UI:
 
@@ -41,6 +41,7 @@ The trace tree shows the most detailed view of token usage and cost (for a singl
 Open any run inside a tracing project to view its trace tree.
 
 > [!NOTE]
+>
 > When tracking costs across threads, ensure that all child runs include the thread metadata (`session_id` or `thread_id`). Without thread metadata on child runs, token counts and costs from those runs won't be included in thread-level aggregations. Refer to [configuring threads](threads.md) for details on setting thread metadata.
 
 #### In project stats
@@ -72,6 +73,7 @@ You can track costs in two ways:
 To compute cost automatically from token usage, you need to provide **token counts**, the **model and provider**, and the **model price**.
 
 > [!NOTE]
+>
 > Skip this section if you are calling LLMs with [LangChain](../langchain/overview.md), using `@traceable` with OpenAI or Anthropic (or an OpenAI-compatible model), or using a LangSmith wrapper for [OpenAI](trace-openai.md) or [Anthropic](trace-anthropic.md).
 
 1. Send token counts. Many models include token counts as part of the response. You must extract this information and include it in your run using one of the following methods:
@@ -561,69 +563,76 @@ To compute cost automatically from token usage, you need to provide **token coun
 
    In either case, the usage metadata should contain a subset of the following LangSmith-recognized fields:
 
-<details>
-<summary>Usage Metadata Schema and Cost Calculation</summary>
-
-   The following fields in the `usage_metadata` dict are recognized by LangSmith. You can view the full [Python types](https://github.com/langchain-ai/langsmith-sdk/blob/e705fbd362be69dd70229f94bc09651ef8056a61/python/langsmith/schemas.py#L1196-L1227) or [TypeScript interfaces](https://github.com/langchain-ai/langsmith-sdk/blob/e705fbd362be69dd70229f94bc09651ef8056a61/js/src/schemas.ts#L637-L689) directly.
-
-#### `input_tokens` — `number`
-   Number of tokens used in the model input. Sum of all input token types.
-
-#### `output_tokens` — `number`
-   Number of tokens used in the model response. Sum of all output token types.
-
-#### `total_tokens` — `number`
-   Number of tokens used in the input and output. Optional, can be inferred. Sum of input\_tokens + output\_tokens.
-
-#### `input_token_details` — `object`
-   Breakdown of input token types. Keys are token-type strings, values are counts. Example `{"cache_read": 5}`.
-
-   Known fields include: `audio`, `text`, `image`, `cache_read`, `cache_creation`, `cache_read_over_200k` (Gemini), `ephemeral_5m_input_tokens`, `ephemeral_1h_input_tokens` (Anthropic ephemeral caching tiers). Additional fields are possible depending on the model or provider.
-
-#### `output_token_details` — `object`
-   Breakdown of output token types. Keys are token-type strings, values are counts. Example `{"reasoning": 5}`.
-
-   Known fields include: `audio`, `text`, `image`, `reasoning`. Additional fields are possible depending on the model or provider.
-
-#### `input_cost` — `number`
-   Cost of the input tokens.
-
-#### `output_cost` — `number`
-   Cost of the output tokens.
-
-#### `total_cost` — `number`
-   Cost of the tokens. Optional, can be inferred.  Sum of input\_cost + output\_cost.
-
-#### `input_cost_details` — `object`
-   Details of the input cost. Keys are token-type strings, values are cost amounts.
-
-#### `output_cost_details` — `object`
-   Details of the output cost. Keys are token-type strings, values are cost amounts.
-
-   **Cost Calculations**
-
-   The cost for a run is computed greedily from most-to-least specific token type. Suppose you set a price of \$2 per 1M input tokens with a detailed price of \$1 per 1M `cache_read` input tokens, and \$3 per 1M output tokens. If you uploaded the following usage metadata:
-
+   > **Usage Metadata Schema and Cost Calculation**
+   >
+   > The following fields in the `usage_metadata` dict are recognized by LangSmith. You can view the full [Python types](https://github.com/langchain-ai/langsmith-sdk/blob/e705fbd362be69dd70229f94bc09651ef8056a61/python/langsmith/schemas.py#L1196-L1227) or [TypeScript interfaces](https://github.com/langchain-ai/langsmith-sdk/blob/e705fbd362be69dd70229f94bc09651ef8056a61/js/src/schemas.ts#L637-L689) directly.
+   >
+   > **input\_tokens** `number`
+   >
+   > Number of tokens used in the model input. Sum of all input token types.
+   >
+   > **output\_tokens** `number`
+   >
+   > Number of tokens used in the model response. Sum of all output token types.
+   >
+   > **total\_tokens** `number`
+   >
+   > Number of tokens used in the input and output. Optional, can be inferred. Sum of input\_tokens + output\_tokens.
+   >
+   > **input\_token\_details** `object`
+   >
+   > Breakdown of input token types. Keys are token-type strings, values are counts. Example `{"cache_read": 5}`.
+   >
+   > Known fields include: `audio`, `text`, `image`, `cache_read`, `cache_creation`, `cache_read_over_200k` (Gemini), `ephemeral_5m_input_tokens`, `ephemeral_1h_input_tokens` (Anthropic ephemeral caching tiers). Additional fields are possible depending on the model or provider.
+   >
+   > **output\_token\_details** `object`
+   >
+   > Breakdown of output token types. Keys are token-type strings, values are counts. Example `{"reasoning": 5}`.
+   >
+   > Known fields include: `audio`, `text`, `image`, `reasoning`. Additional fields are possible depending on the model or provider.
+   >
+   > **input\_cost** `number`
+   >
+   > Cost of the input tokens.
+   >
+   > **output\_cost** `number`
+   >
+   > Cost of the output tokens.
+   >
+   > **total\_cost** `number`
+   >
+   > Cost of the tokens. Optional, can be inferred.  Sum of input\_cost + output\_cost.
+   >
+   > **input\_cost\_details** `object`
+   >
+   > Details of the input cost. Keys are token-type strings, values are cost amounts.
+   >
+   > **output\_cost\_details** `object`
+   >
+   > Details of the output cost. Keys are token-type strings, values are cost amounts.
+   >
+   > **Cost Calculations**
+   >
+   > The cost for a run is computed greedily from most-to-least specific token type. Suppose you set a price of \$2 per 1M input tokens with a detailed price of \$1 per 1M `cache_read` input tokens, and \$3 per 1M output tokens. If you uploaded the following usage metadata:
+   >
 ```python
-   {
-   "input_tokens": 20,
-   "input_token_details": {"cache_read": 5},
-   "output_tokens": 10,
-   "total_tokens": 30,
-   }
+   > {
+   > "input_tokens": 20,
+   > "input_token_details": {"cache_read": 5},
+   > "output_tokens": 10,
+   > "total_tokens": 30,
+   > }
 ```
-
-   Then, the token costs would be computed as follows:
-
+   >
+   > Then, the token costs would be computed as follows:
+   >
 ```python
-   # Notice that LangSmith computes the cache_read cost and then for any
-   # remaining input_tokens, the default input price is applied.
-   input_cost = 5 * 1e-6 + (20 - 5) * 2e-6  # 3.5e-5
-   output_cost = 10 * 3e-6  # 3e-5
-   total_cost = input_cost + output_cost  # 6.5e-5
+   > # Notice that LangSmith computes the cache_read cost and then for any
+   > # remaining input_tokens, the default input price is applied.
+   > input_cost = 5 * 1e-6 + (20 - 5) * 2e-6  # 3.5e-5
+   > output_cost = 10 * 3e-6  # 3e-5
+   > total_cost = input_cost + output_cost  # 6.5e-5
 ```
-
-</details>
 
 2. Specify model name. When using a custom model, the following fields need to be specified in a [run's metadata](add-metadata-tags.md) in order to associate token counts with costs. It's also helpful to provide these metadata fields to identify the model when viewing traces and when filtering.
 
@@ -632,13 +641,15 @@ To compute cost automatically from token usage, you need to provide **token coun
 
 3. Set model prices. LangSmith maps model names to per-token prices using its [model pricing table](https://smith.langchain.com/settings/workspaces/models) to compute costs from token counts.
 
-> [!NOTE]
->    The table comes with pricing information for most OpenAI, Anthropic, and Gemini models. You can create a new model price entry or overwrite pricing for default models if you have custom pricing.
+   > [!NOTE]
+   >
+   > The table comes with pricing information for most OpenAI, Anthropic, and Gemini models. You can create a new model price entry or overwrite pricing for default models if you have custom pricing.
 
    For models that have different pricing for different token types (e.g., multimodal or cached tokens), you can specify a breakdown of prices for each token type. Hovering over the **...** next to the **Input price** and **Output price** entries shows you the price breakdown by token type.
 
-> [!NOTE]
->    LangSmith does not reflect updates to the model pricing map in the costs for traces **already** logged. Backfilling model pricing changes is not supported.
+   > [!NOTE]
+   >
+   > LangSmith does not reflect updates to the model pricing map in the costs for traces **already** logged. Backfilling model pricing changes is not supported.
 
 #### Create a new or modify an existing model price entry
 
@@ -888,9 +899,6 @@ try {
     }
 }
 ```
-
-#### [View example trace](https://smith.langchain.com/public/fcb46808-1b10-4847-a3c9-164c47413524/r)
-Open a public LangSmith run for this example.
 
 ### Other runs: Send costs
 
@@ -1225,8 +1233,6 @@ try {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cost-tracking.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cost-tracking.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

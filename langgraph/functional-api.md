@@ -20,6 +20,7 @@ The Functional API uses two key building blocks:
 This provides a minimal abstraction for building workflows with state management and streaming.
 
 > [!TIP]
+>
 > For information on how to use the functional API, see [Use Functional API](use-functional-api.md).
 
 ## Functional API vs. Graph API
@@ -68,82 +69,82 @@ def workflow(topic: str) -> dict:
     }
 ```
 
-<details>
-<summary>Detailed Explanation</summary>
-
-This workflow will write an essay about the topic "cat" and then pause to get a review from a human. The workflow can be interrupted for an indefinite amount of time until a review is provided.
-
-When the workflow is resumed, it executes from the very start, but because the result of the `writeEssay` task was already saved, the task result will be loaded from the checkpoint instead of being recomputed.
-
+> **Detailed Explanation**
+>
+> This workflow will write an essay about the topic "cat" and then pause to get a review from a human. The workflow can be interrupted for an indefinite amount of time until a review is provided.
+>
+> When the workflow is resumed, it executes from the very start, but because the result of the `writeEssay` task was already saved, the task result will be loaded from the checkpoint instead of being recomputed.
+>
 ```python
-import time
-
-from langchain_core.utils.uuid import uuid7
-from langgraph.checkpoint.memory import InMemorySaver
-from langgraph.func import entrypoint, task
-from langgraph.types import Command, interrupt
-
-@task
-def write_essay(topic: str) -> str:
-    """Write an essay about the given topic."""
-    time.sleep(1)  # This is a placeholder for a long-running task.
-    return f"An essay about topic: {topic}"
-
-@entrypoint(checkpointer=InMemorySaver())
-def workflow(topic: str) -> dict:
-    """A simple workflow that writes an essay and asks for a review."""
-    essay = write_essay("cat").result()
-    is_approved = interrupt(
-        {
-            # Any json-serializable payload provided to interrupt as argument.
-            # It will be surfaced on the client side as an Interrupt when streaming data
-            # from the workflow.
-            "essay": essay,  # The essay we want reviewed.
-            # We can add any additional information that we need.
-            # For example, introduce a key called "action" with some instructions.
-            "action": "Please approve/reject the essay",
-        }
-    )
-    return {
-        "essay": essay,  # The essay that was generated
-        "is_approved": is_approved,  # Response from HIL
-    }
-
-thread_id = str(uuid7())
-config = {"configurable": {"thread_id": thread_id}}
-stream = workflow.stream_events("cat", config, version="v3")
-_ = stream.output
-print({"write_essay": stream.interrupts[0].value["essay"]})
-print({"__interrupt__": stream.interrupts})
-# {'write_essay': 'An essay about topic: cat'}
-# {
-#   '__interrupt__': [
-#     Interrupt(
-#       value={
-#           'essay': 'An essay about topic: cat',
-#           'action': 'Please approve/reject the essay'
-#       },
-#       id='369d44b3d93d4a631ae583367ac6b5cc'
-#     )
-#   ]
-# }
+> import time
+>
+> from langchain_core.utils.uuid import uuid7
+> from langgraph.checkpoint.memory import InMemorySaver
+> from langgraph.func import entrypoint, task
+> from langgraph.types import Command, interrupt
+>
+>
+> @task
+> def write_essay(topic: str) -> str:
+>     """Write an essay about the given topic."""
+>     time.sleep(1)  # This is a placeholder for a long-running task.
+>     return f"An essay about topic: {topic}"
+>
+>
+> @entrypoint(checkpointer=InMemorySaver())
+> def workflow(topic: str) -> dict:
+>     """A simple workflow that writes an essay and asks for a review."""
+>     essay = write_essay("cat").result()
+>     is_approved = interrupt(
+>         {
+>             # Any json-serializable payload provided to interrupt as argument.
+>             # It will be surfaced on the client side as an Interrupt when streaming data
+>             # from the workflow.
+>             "essay": essay,  # The essay we want reviewed.
+>             # We can add any additional information that we need.
+>             # For example, introduce a key called "action" with some instructions.
+>             "action": "Please approve/reject the essay",
+>         }
+>     )
+>     return {
+>         "essay": essay,  # The essay that was generated
+>         "is_approved": is_approved,  # Response from HIL
+>     }
+>
+>
+> thread_id = str(uuid7())
+> config = {"configurable": {"thread_id": thread_id}}
+> stream = workflow.stream_events("cat", config, version="v3")
+> _ = stream.output
+> print({"write_essay": stream.interrupts[0].value["essay"]})
+> print({"__interrupt__": stream.interrupts})
+> # {'write_essay': 'An essay about topic: cat'}
+> # {
+> #   '__interrupt__': [
+> #     Interrupt(
+> #       value={
+> #           'essay': 'An essay about topic: cat',
+> #           'action': 'Please approve/reject the essay'
+> #       },
+> #       id='369d44b3d93d4a631ae583367ac6b5cc'
+> #     )
+> #   ]
+> # }
 ```
-
-An essay has been written and is ready for review. Once the review is provided, we can resume the workflow:
-
+>
+> An essay has been written and is ready for review. Once the review is provided, we can resume the workflow:
+>
 ```python
-# Get review from a user (e.g., via a UI)
-# In this case, we're using a bool, but this can be any json-serializable value.
-human_review = True
-
-resumed_stream = workflow.stream_events(Command(resume=human_review), config, version="v3")
-print(resumed_stream.output)
-# {'essay': 'An essay about topic: cat', 'is_approved': True}
+> # Get review from a user (e.g., via a UI)
+> # In this case, we're using a bool, but this can be any json-serializable value.
+> human_review = True
+>
+> resumed_stream = workflow.stream_events(Command(resume=human_review), config, version="v3")
+> print(resumed_stream.output)
+> # {'essay': 'An essay about topic: cat', 'is_approved': True}
 ```
-
-The workflow has been completed and the review has been added to the essay.
-
-</details>
+>
+> The workflow has been completed and the review has been added to the essay.
 
 ## Entrypoint
 
@@ -159,7 +160,8 @@ Decorating a function with an `entrypoint` produces a [`Pregel`](https://referen
 
 You will usually want to pass a **checkpointer** to the `@entrypoint` decorator to enable persistence and use features like **human-in-the-loop**.
 
-#### Sync
+**Sync**
+
 ```python
 from langgraph.func import entrypoint
 
@@ -171,7 +173,8 @@ def my_workflow(some_input: dict) -> int:
     return result
 ```
 
-#### Async
+**Async**
+
 ```python
 from langgraph.func import entrypoint
 
@@ -184,6 +187,7 @@ async def my_workflow(some_input: dict) -> int:
 ```
 
 > [!WARNING]
+>
 > **Serialization**
 > The **inputs** and **outputs** of entrypoints must be JSON-serializable to support checkpointing. Please see the [serialization](#serialization) section for more details.
 
@@ -196,46 +200,45 @@ When declaring an `entrypoint`, you can request access to additional parameters 
 | **previous** | Access the state associated with the previous `checkpoint` for the given thread. See [short-term-memory](#short-term-memory). |
 | **store** | An instance of \[BaseStore]\[langgraph.store.base.BaseStore]. Useful for [long-term memory](use-functional-api.md#long-term-memory). |
 | **writer** | Use to access the StreamWriter when working with Async Python \< 3.11. See [streaming with functional API for details](use-functional-api.md#streaming). |
-| **config** | For accessing run time configuration. See [RunnableConfig](https://python.langchain.com/docs/concepts/runnables/#runnableconfig) for information. |
+| **config** | For accessing run time configuration. See [RunnableConfig](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) for information. |
 
 > [!WARNING]
+>
 > Declare the parameters with the appropriate name and type annotation.
 
-<details>
-<summary>Requesting Injectable Parameters</summary>
-
+> **Requesting Injectable Parameters**
+>
 ```python
-from langchain_core.runnables import RunnableConfig
-from langgraph.func import entrypoint
-from langgraph.store.base import BaseStore
-from langgraph.store.memory import InMemoryStore
-from langgraph.checkpoint.memory import InMemorySaver
-from langgraph.types import StreamWriter
-
-in_memory_checkpointer = InMemorySaver(...)
-in_memory_store = InMemoryStore(...)  # An instance of InMemoryStore for long-term memory
-
-@entrypoint(
-    checkpointer=in_memory_checkpointer,  # Specify the checkpointer
-    store=in_memory_store  # Specify the store
-)
-def my_workflow(
-    some_input: dict,  # The input (e.g., passed via `invoke`)
-    *,
-    previous: Any = None, # For short-term memory
-    store: BaseStore,  # For long-term memory
-    writer: StreamWriter,  # For streaming custom data
-    config: RunnableConfig  # For accessing the configuration passed to the entrypoint
-) -> ...:
+> from langchain_core.runnables import RunnableConfig
+> from langgraph.func import entrypoint
+> from langgraph.store.base import BaseStore
+> from langgraph.store.memory import InMemoryStore
+> from langgraph.checkpoint.memory import InMemorySaver
+> from langgraph.types import StreamWriter
+>
+> in_memory_checkpointer = InMemorySaver(...)
+> in_memory_store = InMemoryStore(...)  # An instance of InMemoryStore for long-term memory
+>
+> @entrypoint(
+>     checkpointer=in_memory_checkpointer,  # Specify the checkpointer
+>     store=in_memory_store  # Specify the store
+> )
+> def my_workflow(
+>     some_input: dict,  # The input (e.g., passed via `invoke`)
+>     *,
+>     previous: Any = None, # For short-term memory
+>     store: BaseStore,  # For long-term memory
+>     writer: StreamWriter,  # For streaming custom data
+>     config: RunnableConfig  # For accessing the configuration passed to the entrypoint
+> ) -> ...:
 ```
-
-</details>
 
 ### Executing
 
 Using the [`@entrypoint`](#entrypoint) yields a [`Pregel`](https://reference.langchain.com/python/langgraph/pregel/#langgraph.pregel.Pregel.stream) object that can be executed using the `invoke`, `ainvoke`, `stream`, and `astream` methods.
 
-#### Invoke
+**Invoke**
+
 ```python
 config = {
     "configurable": {
@@ -245,7 +248,8 @@ config = {
 my_workflow.invoke(some_input, config)  # Wait for the result synchronously
 ```
 
-#### Async Invoke
+**Async Invoke**
+
 ```python
 config = {
     "configurable": {
@@ -255,7 +259,8 @@ config = {
 await my_workflow.ainvoke(some_input, config)  # Await result asynchronously
 ```
 
-#### Stream
+**Stream**
+
 ```python
 config = {
     "configurable": {
@@ -269,7 +274,8 @@ for message in stream.messages:
         print(token, end="", flush=True)
 ```
 
-#### Async Stream
+**Async Stream**
+
 ```python
 config = {
     "configurable": {
@@ -287,7 +293,8 @@ async for message in stream.messages:
 
 Resuming an execution after an [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) can be done by passing a **resume** value to the [`Command`](https://reference.langchain.com/python/langgraph/types/Command) primitive.
 
-#### Invoke
+**Invoke**
+
 ```python
 from langgraph.types import Command
 
@@ -300,7 +307,8 @@ config = {
 my_workflow.invoke(Command(resume=some_resume_value), config)
 ```
 
-#### Async Invoke
+**Async Invoke**
+
 ```python
 from langgraph.types import Command
 
@@ -313,7 +321,8 @@ config = {
 await my_workflow.ainvoke(Command(resume=some_resume_value), config)
 ```
 
-#### Stream
+**Stream**
+
 ```python
 from langgraph.types import Command
 
@@ -329,7 +338,8 @@ for message in stream.messages:
         print(token, end="", flush=True)
 ```
 
-#### Async Stream
+**Async Stream**
+
 ```python
 from langgraph.types import Command
 
@@ -351,7 +361,8 @@ To resume after an error, run the `entrypoint` with a `None` and the same **thre
 
 This assumes that the underlying **error** has been resolved and execution can proceed successfully.
 
-#### Invoke
+**Invoke**
+
 ```python
 
 config = {
@@ -363,7 +374,8 @@ config = {
 my_workflow.invoke(None, config)
 ```
 
-#### Async Invoke
+**Async Invoke**
+
 ```python
 
 config = {
@@ -375,7 +387,8 @@ config = {
 await my_workflow.ainvoke(None, config)
 ```
 
-#### Stream
+**Stream**
+
 ```python
 
 config = {
@@ -390,7 +403,8 @@ for message in stream.messages:
         print(token, end="", flush=True)
 ```
 
-#### Async Stream
+**Async Stream**
+
 ```python
 
 config = {
@@ -476,6 +490,7 @@ def slow_computation(input_value):
 ```
 
 > [!WARNING]
+>
 > **Serialization**
 > The **outputs** of tasks must be JSON-serializable to support checkpointing.
 
@@ -489,7 +504,8 @@ When you call a **task**, it returns *immediately* with a future object. A futur
 
 To obtain the result of a **task**, you can either wait for it synchronously (using `result()`) or await it asynchronously (using `await`).
 
-#### Synchronous Invocation
+**Synchronous Invocation**
+
 ```python
 @entrypoint(checkpointer=checkpointer)
 def my_workflow(some_input: int) -> int:
@@ -497,7 +513,8 @@ def my_workflow(some_input: int) -> int:
     return future.result()  # Wait for the result synchronously
 ```
 
-#### Asynchronous Invocation
+**Asynchronous Invocation**
+
 ```python
 @entrypoint(checkpointer=checkpointer)
 async def my_workflow(some_input: int) -> int:
@@ -555,7 +572,8 @@ When a workflow resumes, LangGraph replays completed **task** results from the c
 
 Encapsulate side effects (e.g., writing to a file, sending an email) in tasks to ensure they are not executed multiple times when resuming a workflow.
 
-#### Incorrect
+**Incorrect**
+
 In this example, a side effect (writing to a file) is directly included in the workflow, so it will be executed a second time when resuming the workflow.
 
 ```python
@@ -569,7 +587,8 @@ def my_workflow(inputs: dict) -> int:
     return value
 ```
 
-#### Correct
+**Correct**
+
 In this example, the side effect is encapsulated in a task, ensuring consistent execution upon resumption.
 
 ```python
@@ -601,7 +620,8 @@ If order of execution is not maintained when resuming, one [`interrupt`](https:/
 
 Please read the section on [determinism](#determinism) for more details.
 
-#### Incorrect
+**Incorrect**
+
 In this example, the workflow uses the current time to determine which task to execute. This is non-deterministic because the result of the workflow depends on the time at which it is executed.
 
 ```python
@@ -627,7 +647,8 @@ def my_workflow(inputs: dict) -> int:
     }
 ```
 
-#### Correct
+**Correct**
+
 In this example, the workflow uses the input `t0` to determine which task to execute. This is deterministic because the result of the workflow depends only on the input.
 
 ```python
@@ -667,8 +688,6 @@ def my_workflow(inputs: dict) -> int:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/functional-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/functional-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -51,6 +51,7 @@ configure_otel_providers(enable_sensitive_data=True)
 ```
 
 > [!NOTE]
+>
 > Setting `enable_sensitive_data=True` allows capturing input and output content in traces. Set to `False` if you want to exclude sensitive data from traces.
 
 ### 3. Create and run your agent
@@ -66,7 +67,7 @@ from agent_framework.openai import OpenAIChatClient
 configure_otel_providers(enable_sensitive_data=True)
 
 agent = ChatAgent(
-    chat_client=OpenAIChatClient(model_id="gpt-4o"),
+    chat_client=OpenAIChatClient(model_id="gpt-6-luna"),
 )
 
 result = await agent.run("What's the capital of Bavaria?")
@@ -75,8 +76,6 @@ print(result.text)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-microsoft-agent-framework.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-microsoft-agent-framework.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

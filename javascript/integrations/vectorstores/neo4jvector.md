@@ -18,7 +18,7 @@ This guide helps you get started with the Neo4j [vector store](../vectorstores.m
 
 ### Integration details
 
-| Class | Package | [PY support](https://python.langchain.com/docs/integrations/vectorstores/neo4jvector/) | Downloads | Version |
+| Class | Package | [PY support](../../../integrations/vectorstores/neo4jvector.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`Neo4jVectorStore`](https://reference.langchain.com/javascript/langchain-neo4j/Neo4jVectorStore) | [`@langchain/neo4j`](https://www.npmjs.com/package/@langchain/neo4j) | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/neo4j?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/neo4j?style=flat-square\&label=%20&) |
 
@@ -27,6 +27,7 @@ This guide helps you get started with the Neo4j [vector store](../vectorstores.m
 Install `@langchain/neo4j`, the MongoDB-compatible `neo4j-driver`, `@langchain/core`, and an embeddings provider (this guide uses [OpenAI embeddings](../embeddings/openai.md)):
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -309,8 +310,6 @@ For detailed documentation of all `Neo4jVectorStore` features and configurations
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/neo4jvector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/neo4jvector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -7,7 +7,7 @@ tags: [index, reference, python, langchain-core, tracers]
 
 # reference/python/langchain-core/tracers
 
-13 pages here, 196 pages including subdirectories.
+13 pages here, 197 pages including subdirectories.
 
 ## Directories
 
@@ -18,7 +18,7 @@ tags: [index, reference, python, langchain-core, tracers]
 - [core/](core/_index.md) - 6 pages
 - [evaluation/](evaluation/_index.md) - 16 pages
 - [event_stream/](event_stream/_index.md) - 18 pages
-- [langchain/](langchain/_index.md) - 23 pages
+- [langchain/](langchain/_index.md) - 24 pages
 - [log_stream/](log_stream/_index.md) - 43 pages
 - [memory_stream/](memory_stream/_index.md) - 1 page
 - [root_listeners/](root_listeners/_index.md) - 12 pages

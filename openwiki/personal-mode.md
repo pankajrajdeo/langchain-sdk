@@ -19,7 +19,7 @@ openwiki personal --update
 openwiki personal --update "Refresh the wiki from configured connectors"
 ```
 
-To store personal wiki state somewhere other than `~/.openwiki`, set `OPENWIKI_CONFIG_DIR`. See [Customize OpenWiki](customize.md#override-the-state-directory).
+Personal mode does not enable host shell execution for the agent. To store personal wiki state somewhere other than `~/.openwiki`, set `OPENWIKI_CONFIG_DIR`. See [Customize OpenWiki](customize.md#override-the-state-directory).
 
 ## First-run onboarding
 
@@ -42,8 +42,7 @@ During an ingestion run, connector tools write raw data and manifests under `~/.
 
 Connector secrets are referenced by env var name and stored in `~/.openwiki/.env`.
 
-> [!IMPORTANT]
-> Connector config files should never contain raw secret values.
+Connector config files should never contain raw secret values.
 
 ### Built-in sources
 
@@ -64,7 +63,8 @@ You can configure the same source more than once. For example, add one web searc
 
 For sources that need credentials, authenticate first, then ingest. Sources such as Hacker News and Custom MCP need no auth by default; web search needs `TAVILY_API_KEY` in `~/.openwiki/.env`.
 
-### Authenticate the provider
+**1. Authenticate the provider**
+
 Run a local browser OAuth flow for providers that require it. OpenWiki saves returned tokens to `~/.openwiki/.env`, creates connector config when possible, and discovers MCP tools for MCP-backed providers:
 
 ```bash
@@ -86,7 +86,8 @@ openwiki auth configure <provider>
 openwiki auth tools <provider>
 ```
 
-### Ingest the source
+**2. Ingest the source**
+
 Pull raw data into `~/.openwiki/connectors/` and synthesize updates into the personal wiki:
 
 ```bash
@@ -144,8 +145,6 @@ openwiki cron delete <source|all>
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/personal-mode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/personal-mode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

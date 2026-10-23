@@ -16,6 +16,7 @@ It's a powerful and convenient option that's built directly into Cloudflare.
 ## Setup
 
 > [!TIP]
+>
 > **Compatibility**
 >
 > Cloudflare Vectorize is currently in open beta, and requires a Cloudflare account on a paid plan to use.
@@ -40,6 +41,7 @@ index_name = "<index_name>"
 Finally, you'll need to install the LangChain Cloudflare integration package:
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -65,6 +67,7 @@ pnpm add @langchain/cloudflare @langchain/core
 Below is an example worker that adds documents to a vectorstore, queries it, or clears it depending on the path used. It also uses [Cloudflare Workers AI Embeddings](../embeddings/cloudflare_ai.md).
 
 > [!NOTE]
+>
 > If running locally, be sure to run wrangler as `npx wrangler dev --remote`!
 
 ```toml
@@ -154,8 +157,6 @@ for information on the required format.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/cloudflare_vectorize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/cloudflare_vectorize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

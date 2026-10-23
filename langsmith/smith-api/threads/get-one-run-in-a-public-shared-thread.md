@@ -164,6 +164,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -172,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/public/threads/{share_token}/runs/{run_id}:
     get:
@@ -440,6 +443,14 @@ components:
           description: '`prompt_tokens` is the prompt-side token count.'
           type: integer
           example: 200
+        query_metadata:
+          description: >-
+            `query_metadata` describes this query result, including
+            `sem_filter_score` when a semantic filter is used. Returned
+            automatically by run queries, or null when unavailable.
+          anyOf:
+            - type: object
+            - type: 'null'
         reference_dataset_id:
           description: >-
             `reference_dataset_id` is the dataset UUID for the reference

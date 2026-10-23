@@ -18,7 +18,7 @@ This will help you get started with Amazon Bedrock [embedding models](../embeddi
 
 ### Integration details
 
-| Class | Package | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/bedrock/) | Downloads | Version |
+| Class | Package | Local | [Py support](../../../integrations/embeddings/bedrock.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`Bedrock`](https://reference.langchain.com/javascript/langchain-aws/BedrockEmbeddings) | [`@langchain/aws`](https://www.npmjs.com/package/@langchain/aws) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/aws?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/aws?style=flat-square\&label=%20&) |
 
@@ -241,8 +241,6 @@ For detailed documentation of all Bedrock features and configurations head to th
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

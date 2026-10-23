@@ -11,6 +11,7 @@ tags: [docs, langsmith, code-evaluator-ui]
 Code evaluators in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-code-evaluator-ui) allow you to write custom evaluation logic using Python or TypeScript code directly in the interface. Unlike [LLM-as-a-judge](llm-as-judge.md) evaluators that use a model to evaluate outputs, code evaluators use deterministic logic you define.
 
 > [!NOTE]
+>
 > To create a code evaluator that appears in the LangSmith UI programmatically, refer to [Manage evaluators with the SDK](manage-evaluators-sdk.md). To define a code evaluator function that you pass to `evaluate()`, refer to [How to define a code evaluator (SDK)](code-evaluator-sdk.md). To grade outputs against assertions saved on dataset examples, refer to [Use assertions](assertions.md).
 
 ## Step 1. Create the evaluator
@@ -24,17 +25,18 @@ Code evaluators in the [LangSmith UI](https://smith.langchain.com?utm_source=doc
 ## Step 2. Write your evaluator code
 
 > [!NOTE]
+>
 > **Custom code evaluators restrictions.**
 >
 > **Allowed Libraries**: You can import all standard library functions, as well as the following public packages:
 >
-> ```
+```
 > numpy (v2.2.2): "numpy"
 > pandas (v1.5.2): "pandas"
 > jsonschema (v4.21.1): "jsonschema"
 > scipy (v1.14.1): "scipy"
 > sklearn (v1.26.4): "scikit-learn"
-> ```
+```
 >
 > **Network Access**: You cannot access the internet from a custom code evaluator.
 
@@ -105,8 +107,6 @@ Once created, you can use your code evaluator:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/code-evaluator-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/code-evaluator-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

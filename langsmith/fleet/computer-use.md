@@ -13,6 +13,7 @@ tags: [docs, langsmith, fleet, computer-use]
 Computer use gives your Fleet agent access to an isolated virtual computer. The agent can write and execute code, manage files, install packages, and call authenticated external APIs without exposing credentials to the language model.
 
 > [!NOTE]
+>
 > Computer use is available on the [Plus and Enterprise plans](https://langchain.com/pricing).
 
 ## Computer modes
@@ -27,18 +28,23 @@ Choose how the virtual computer is shared across an agent's conversation threads
 ## Configure computer use
 
 > [!WARNING]
+>
 > The computer mode is set when the agent is created and cannot be changed afterward. To switch modes, create a new agent.
 
-### Open the Create agent dialog
+**1. Open the Create agent dialog**
+
 In the [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-computer-use) left navigation, under **My Agents**, click  and select either **Create with AI** or **Blank agent**. Enter a name for your agent.
 
-### Enable computer use
+**2. Enable computer use**
+
 Under **Should your agent use a computer?**, select **Yes**, then choose **Shared computer** or **Computer per thread**. If you select **No** (the default), the agent is created with no computer access.
 
-### Set the base snapshot (optional)
+**3. Set the base snapshot (optional)**
+
 Expand **Advanced** to choose a **Snapshot** for new computers.
 
-### Create the agent
+**4. Create the agent**
+
 Click **Create Agent**.
 
 ## Access profiles
@@ -55,13 +61,16 @@ A profile also has a **Network scope** that controls outbound traffic for the ag
 
 ### Add an access profile
 
-### Create the access profile
+**1. Create the access profile**
+
 Go to the [Fleet Integrations tab](https://smith.langchain.com/agents/tools) and navigate to the **Computer** section. Click **+ Create profile** and follow the prompts to configure the host patterns and credentials.
 
-### Attach the profile to an agent
+**2. Attach the profile to an agent**
+
 In the agent editor, click the **Computer** node. Click **+ Add** next to **Access profiles** and select the profile you created.
 
-### Save changes
+**3. Save changes**
+
 Click **Save changes**.
 
 ## Computer lifecycle
@@ -72,6 +81,7 @@ Each agent has two lifecycle settings that control how long a computer stays act
 * **Stopped computer cleanup**: After a computer has been stopped for this duration, it is permanently deleted along with all disk data. Default: **14 days**.
 
 > [!NOTE]
+>
 > **Stopped computer cleanup** applies only to **Computer per thread** mode. Shared computers are not deleted automatically.
 
 ## Base snapshot
@@ -79,25 +89,27 @@ Each agent has two lifecycle settings that control how long a computer stays act
 A snapshot is the disk image used to boot the computer. By default, all Fleet agents use the workspace default snapshot. To build, capture, or configure custom snapshots, see [Sandbox snapshots](../sandbox-snapshots.md). [Change the snapshot for an agent](#configure-lifecycle-and-snapshot) in the settings popover.
 
 > [!NOTE]
+>
 > Snapshot changes apply only to new computers for the agent. The single shared computer in **Shared computer** mode keeps its original snapshot for its lifetime.
 
 ## Configure lifecycle and snapshot
 
 The snapshot, idle timeout, and stopped computer cleanup for an agent are all set in the **Computer lifecycle** section of the settings popover.
 
-### Open the settings popover
+**1. Open the settings popover**
+
 In [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-computer-use), open the agent and click the  settings icon in the agent editor.
 
-### Set the lifecycle fields
+**2. Set the lifecycle fields**
+
 Scroll to the **Computer lifecycle** section. Set the **Snapshot**, **Idle timeout**, and, for **Computer per thread** mode, **Stopped computer cleanup**.
 
-### Save changes
+**3. Save changes**
+
 Click **Save changes**.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/computer-use.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/computer-use.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -19,7 +19,7 @@ from openai import OpenAI
 from langsmith.wrappers import wrap_openai
 client = wrap_openai(OpenAI())
 response = client.chat.completions.create(
-    model="gpt-4-turbo",
+    model="gpt-5.5",
     messages=[
       {
         "role": "user",
@@ -46,7 +46,7 @@ import { wrapOpenAI } from "langsmith/wrappers";
 // Wrap the OpenAI client to automatically log traces
 const wrappedClient = wrapOpenAI(new OpenAI());
 const response = await wrappedClient.chat.completions.create({
-  model: "gpt-4-turbo",
+  model: "gpt-5.5",
   messages: [
     {
       role: "user",
@@ -69,8 +69,6 @@ The image will be rendered as part of the trace in the[ LangSmith UI](https://sm
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-multimodal-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-multimodal-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

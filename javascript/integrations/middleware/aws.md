@@ -33,6 +33,7 @@ Supported models:
 * **Amazon Nova**
 
 > [!NOTE]
+>
 > Learn more about [AWS Bedrock prompt caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) strategies and limitations. Cached content must exceed 1,024 tokens for a cache checkpoint to take effect, sometimes more depending on model. See [supported models, regions, and limits](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models).
 
 **API reference:** [`BedrockPromptCachingMiddleware`](https://reference.langchain.com/javascript/langchain/index/bedrockPromptCachingMiddleware)
@@ -62,88 +63,89 @@ const agent = createAgent({
 });
 ```
 
-<details>
-<summary>Configuration options</summary>
+> **Configuration options**
+>
+> **enableCaching** `boolean` (default: true)
+>
+> Whether to apply prompt caching.
+>
+> **ttl** `string` (default: 5m)
+>
+> Time to live for cached content. Valid values: `'5m'` or `'1h'`. Note that Amazon Nova models only support `'5m'`.
+>
+> **minMessagesToCache** `number` (default: 1)
+>
+> Minimum number of messages before caching starts. The system prompt counts as one message.
+>
+> **unsupportedModelBehavior** `string` (default: warn)
+>
+> Behavior when using unsupported models. Options: `'ignore'`, `'warn'`, or `'raise'`.
 
-#### `Field` — `boolean`
-Whether to apply prompt caching.
-
-#### `Field` — `string`
-Time to live for cached content. Valid values: `'5m'` or `'1h'`. Note that Amazon Nova models only support `'5m'`.
-
-#### `Field` — `number`
-Minimum number of messages before caching starts. The system prompt counts as one message.
-
-#### `Field` — `string`
-Behavior when using unsupported models. Options: `'ignore'`, `'warn'`, or `'raise'`.
-
-</details>
-
-<details>
-<summary>Full example</summary>
-
-The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, reducing costs and latency.
-
-**How it works:**
-
-1. First request: System prompt, tools, and the user message are sent to the API and cached
-2. Second request: The cached content is retrieved from cache. Only the new message needs to be processed
-3. This pattern continues for each turn, with each request reusing the cached conversation history
-
-> [!NOTE]
-> Prompt caching reduces API costs by caching tokens, but does **not** provide conversation memory. To persist conversation history across invocations, use a [checkpointer](../../langgraph/persistence.md#checkpointer-libraries) like `MemorySaver`.
-
+> **Full example**
+>
+> The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, reducing costs and latency.
+>
+> **How it works:**
+>
+> 1. First request: System prompt, tools, and the user message are sent to the API and cached
+>
+> 2. Second request: The cached content is retrieved from cache. Only the new message needs to be processed
+>
+> 3. This pattern continues for each turn, with each request reusing the cached conversation history
+>
+> > [!NOTE]
+> >
+> > Prompt caching reduces API costs by caching tokens, but does **not** provide conversation memory. To persist conversation history across invocations, use a [checkpointer](../../langgraph/persistence.md#checkpointer-libraries) like `MemorySaver`.
+>
 ```typescript
-import { createAgent, bedrockPromptCachingMiddleware, AIMessage, HumanMessage, tool } from "langchain";
-import { ChatBedrockConverse } from "@langchain/aws";
-import { z } from "zod";
-
-const getWeather = tool(
-  async ({ city }) => `The weather in ${city} is sunny and 72F.`,
-  {
-    name: "get_weather",
-    description: "Get the current weather for a city.",
-    schema: z.object({ city: z.string() }),
-  }
-);
-
-// System prompt must exceed 1,024 tokens for caching to take effect
-const LONG_PROMPT =
-  "You are a helpful weather assistant with deep expertise in meteorology, " +
-  "climate science, and atmospheric phenomena. When answering questions about " +
-  "weather, provide accurate and up-to-date information. " +
-  "You should always strive to give the most helpful response possible. ".repeat(85);
-
-const agent = createAgent({
-  model: new ChatBedrockConverse({ model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0" }),
-  systemPrompt: LONG_PROMPT,
-  tools: [getWeather],
-  middleware: [bedrockPromptCachingMiddleware({ ttl: "5m" })], // [!code highlight]
-});
-
-// First invocation: writes the cache (system prompt, tool definitions, and message)
-let response = await agent.invoke({
-  messages: [new HumanMessage("What is the weather in Miami?")],
-});
-const last = response.messages.at(-1);
-console.log(last?.content);
-
-// Check cache token usage
-if (AIMessage.isInstance(last)) {
-  const details = last.usage_metadata?.input_token_details;
-  if (details) {
-    console.log(`Cache read: ${details.cache_read ?? 0}, Cache write: ${details.cache_creation ?? 0}`);
-  }
-}
-
-// Second invocation within the TTL: reuses the cached system prompt and tool definitions
-response = await agent.invoke({
-  messages: [new HumanMessage("How about Seattle?")],
-});
-console.log(response.messages.at(-1)?.content);
+> import { createAgent, bedrockPromptCachingMiddleware, AIMessage, HumanMessage, tool } from "langchain";
+> import { ChatBedrockConverse } from "@langchain/aws";
+> import { z } from "zod";
+>
+> const getWeather = tool(
+>   async ({ city }) => `The weather in ${city} is sunny and 72F.`,
+>   {
+>     name: "get_weather",
+>     description: "Get the current weather for a city.",
+>     schema: z.object({ city: z.string() }),
+>   }
+> );
+>
+> // System prompt must exceed 1,024 tokens for caching to take effect
+> const LONG_PROMPT =
+>   "You are a helpful weather assistant with deep expertise in meteorology, " +
+>   "climate science, and atmospheric phenomena. When answering questions about " +
+>   "weather, provide accurate and up-to-date information. " +
+>   "You should always strive to give the most helpful response possible. ".repeat(85);
+>
+> const agent = createAgent({
+>   model: new ChatBedrockConverse({ model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0" }),
+>   systemPrompt: LONG_PROMPT,
+>   tools: [getWeather],
+>   middleware: [bedrockPromptCachingMiddleware({ ttl: "5m" })], // [!code highlight]
+> });
+>
+> // First invocation: writes the cache (system prompt, tool definitions, and message)
+> let response = await agent.invoke({
+>   messages: [new HumanMessage("What is the weather in Miami?")],
+> });
+> const last = response.messages.at(-1);
+> console.log(last?.content);
+>
+> // Check cache token usage
+> if (AIMessage.isInstance(last)) {
+>   const details = last.usage_metadata?.input_token_details;
+>   if (details) {
+>     console.log(`Cache read: ${details.cache_read ?? 0}, Cache write: ${details.cache_creation ?? 0}`);
+>   }
+> }
+>
+> // Second invocation within the TTL: reuses the cached system prompt and tool definitions
+> response = await agent.invoke({
+>   messages: [new HumanMessage("How about Seattle?")],
+> });
+> console.log(response.messages.at(-1)?.content);
 ```
-
-</details>
 
 ### Model-specific behavior
 
@@ -158,8 +160,6 @@ The middleware handles differences between model families automatically:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/middleware/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/middleware/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

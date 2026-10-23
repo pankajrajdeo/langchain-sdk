@@ -16,8 +16,6 @@ This will help you get started with Ollama embedding models using LangChain. For
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](ollama.md).
-
 ## Setup
 
 First, follow [these instructions](https://github.com/ollama/ollama?tab=readme-ov-file#ollama) to set up and run a local Ollama instance:
@@ -38,7 +36,7 @@ First, follow [these instructions](https://github.com/ollama/ollama?tab=readme-o
 * To chat directly with a model from the command line, use `ollama run <name-of-model>`
 * View the [Ollama documentation](https://github.com/ollama/ollama/tree/main/docs) for more commands. You can run `ollama help` in the terminal to see available commands.
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -152,8 +150,6 @@ For detailed documentation on `OllamaEmbeddings` features and configuration opti
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

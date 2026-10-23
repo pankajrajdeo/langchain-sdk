@@ -15,39 +15,49 @@ Skills package domain expertise, such as workflows, best practices, scripts, ref
 Skills help you avoid context bloat by loading only summaries at startup and reading full instructions when a task requires them. You can share skills across agents and projects, and compose multiple skills in a single agent so each one covers a distinct capability.
 
 > [!NOTE]
+>
 > Skills require `deepagents>=1.7.0`.
 
 > [!TIP]
+>
 > For ready-to-use skills that improve your agent's performance on LangChain ecosystem tasks, see the [LangChain Skills](https://github.com/langchain-ai/langchain-skills) repository.
 
 ## Usage
 
-### Create a top-level skills directory
+**1. Create a top-level skills directory**
+
 Create a directory to hold all skills for your project, such as `skills/` under your backend root.
 
-### Create a subdirectory inside your skills directory for your skill
+**2. Create a subdirectory inside your skills directory for your skill**
+
 Each skill is a directory containing a `SKILL.md` file: a markdown file with YAML [frontmatter](#frontmatter-fields) (`name` and `description`) followed by instructions the agent follows when the skill is activated. A skill directory can also optionally include supporting files such as scripts, reference docs, and templates.
 
-- 📁 `skills/`
-  - 📁 `langgraph-docs/`
-    - 📄 `SKILL.md`
+**skills**
 
-    - 📁 `scripts/`
-      - 📄 `fetch_docs.py`
+**langgraph-docs**
 
-    - 📁 `references/`
-      - 📄 `api-patterns.md`
+**SKILL.md**
 
-      - 📄 `style-guide.md`
+**scripts**
 
-    - 📁 `assets/`
-      - 📄 `report-template.md`
+**fetch\_docs.py**
 
-      - 📄 `schema.json`
+**references**
+
+**api-patterns.md**
+
+**style-guide.md**
+
+**assets**
+
+**report-template.md**
+
+**schema.json**
 
 Deep agent skills follow the [Agent Skills specification](https://agentskills.io/specification).
 
-### Add a `SKILL.md` file with YAML frontmatter and instructions.
+**3. Add a `SKILL.md` file with YAML frontmatter and instructions.**
+
 The `SKILL.md` starts with YAML [frontmatter](#frontmatter-fields) followed by markdown instructions:
 
 ```md
@@ -86,9 +96,11 @@ Use the fetch_url tool to read the selected documentation URLs, then answer the 
 ```
 
 > [!NOTE]
+>
 > Reference any [supporting resources](#add-supporting-resources) in your `SKILL.md` with a description of what each file contains and when to use it. The agent discovers these files through the references in the skill instructions.
 
-### Pass the skills path when creating your agent
+**4. Pass the skills path when creating your agent**
+
 Pass the path to your top-level skills directory in the `skills` argument when creating your agent:
 
 ```ts
@@ -107,7 +119,8 @@ This example uses `FilesystemBackend` to load skills from disk. For other storag
 
 Each source path can point at a directory that contains skill directories, or directly at a skill directory with `SKILL.md`.
 
-#### `Field` — `list[str]`
+**skills** `list[str]`
+
 List of skill source paths.
 
 Paths must be specified using forward slashes and are relative to the backend's root.
@@ -121,9 +134,11 @@ Paths must be specified using forward slashes and are relative to the backend's 
 Later sources override earlier ones for skills with the same name (last one wins).
 
 > [!NOTE]
+>
 > When multiple skill sources contain a skill with the same name, the skill from the source listed later in the `skills` array takes precedence (last one wins). This lets you layer skills from different origins, such as base skills overridden by project-specific versions.
 
-### Invoke the agent
+**5. Invoke the agent**
+
 Send a task to the agent with `invoke()`. At startup, the agent loads each skill's [`name`](#frontmatter-fields) and [`description`](#frontmatter-fields) from [frontmatter](#frontmatter-fields) into the system prompt. When your task matches a skill's description, the agent reads that skill's `SKILL.md` and follows its instructions.
 
 ```ts
@@ -133,14 +148,16 @@ const result = await agent.invoke(
 );
 ```
 
-#### [View example trace](https://smith.langchain.com/public/637067d5-ee65-481b-a13e-3b3944551e9a/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/39b1ef25-cf7f-4a4f-96b9-79e4902604d8/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## How skills work
 
 As agents take on more complex tasks, the context they need grows with them. Loading all instructions into the system prompt wastes tokens on information irrelevant to the current task, and providing the same guidance manually across sessions does not scale.
 
 > [!NOTE]
+>
 > Skills use **progressive disclosure**: the agent loads skill information in layers instead of all at once. At startup, it sees only each skill's name and description. When a skill is invoked, it reads the full `SKILL.md` instructions. Supporting files load afterward, only when the instructions call for them.
 
 Skills load in three levels. Each level adds more detail only when the task needs it:
@@ -153,11 +170,11 @@ Skills load in three levels. Each level adds more detail only when the task need
 
 The following diagram shows what appears in agent context at a given moment. At startup, level 1 metadata for every skill is in the system prompt. When a skill is invoked, level 2 instructions join the context. Level 3 files stay on the backend until the agent reads them after invocation.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-Q4wgirblfw7Ioet/oss/images/deepagents/skills-composition.svg?fit=max&auto=format&n=-Q4wgirblfw7Ioet&q=85&s=9450c441ece57465053644ede8991271" alt="How skill components map into agent context at startup and activation" width="920" height="500" data-path="oss/images/deepagents/skills-composition.svg" />
+![How skill components map into agent context at startup and activation](https://mintcdn.com/langchain-5e9cc07a/-Q4wgirblfw7Ioet/oss/images/deepagents/skills-composition.svg?fit=max\&auto=format\&n=-Q4wgirblfw7Ioet\&q=85\&s=9450c441ece57465053644ede8991271)
 
 As the agent works through a task, it loads skill information in layers:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-Q4wgirblfw7Ioet/oss/images/deepagents/skills-progressive-disclosure.svg?fit=max&auto=format&n=-Q4wgirblfw7Ioet&q=85&s=ba55587d858f5588bea425dc503e3246" alt="How skills load in layers from metadata to instructions to resources" width="720" height="460" data-path="oss/images/deepagents/skills-progressive-disclosure.svg" />
+![How skills load in layers from metadata to instructions to resources](https://mintcdn.com/langchain-5e9cc07a/-Q4wgirblfw7Ioet/oss/images/deepagents/skills-progressive-disclosure.svg?fit=max\&auto=format\&n=-Q4wgirblfw7Ioet\&q=85\&s=ba55587d858f5588bea425dc503e3246)
 
 In Deep Agents, [`SkillsMiddleware`](https://reference.langchain.com/javascript/deepagents/middleware/createSkillsMiddleware) (part of the [Deep Agents stack](customization.md#deep-agents-stack) when you pass `skills`) handles the first two levels, with the third level being handled by the LLM:
 
@@ -165,11 +182,14 @@ In Deep Agents, [`SkillsMiddleware`](https://reference.langchain.com/javascript/
 2. **Read** (level 2): When the agent invokes a skill, it reads the full `SKILL.md` content via `read_file`.
 3. **Execute** (level 3): After invocation, the agent follows the skill's instructions and reads supporting files (scripts, references, assets) only as the instructions require.
 
+To give the agent a skill's instructions without waiting for it to choose the skill, [pin the skill](#pin-skills).
+
 ## When to use skills
 
 If you find yourself giving similar instructions to an agent, especially if they are detailed and contain multiple steps, consider codifying the instructions for the agent. That way, in future when you want to accomplish a similar task, the agent will already know what to do.
 
 > [!TIP]
+>
 > You can also ask your agent to write a skill for a task you worked on with the agent.
 
 Skills are especially helpful for codifying:
@@ -202,14 +222,17 @@ When you have multiple skills in related domains, differentiate their descriptio
 
 **Keep instructions focused.** The Agent Skills specification recommends keeping your `SKILL.md` under 500 lines. When instructions grow longer, move detailed reference material into [supporting resource files](#add-supporting-resources) and reference them from the main `SKILL.md`:
 
-- 📁 `skills/`
-  - 📁 `data-pipeline/`
-    - 📄 `SKILL.md`
+**skills**
 
-    - 📁 `references/`
-      - 📄 `schema-reference.md`
+**data-pipeline**
 
-      - 📄 `error-codes.md`
+**SKILL.md**
+
+**references**
+
+**schema-reference.md**
+
+**error-codes.md**
 
 The agent loads reference files only when the instructions call for them, keeping each layer of progressive disclosure appropriately sized. Keep file references one level deep from `SKILL.md` and avoid deeply nested reference chains, which force the agent through multiple reads to reach the information it needs.
 
@@ -226,6 +249,7 @@ The agent loads reference files only when the instructions call for them, keepin
 * Using reference files to keep the main `SKILL.md` concise while covering multiple sub-tasks
 
 > [!TIP]
+>
 > Use the [`skills-ref` validation tool](https://github.com/agentskills/agentskills/tree/main/skills-ref) to check that your `SKILL.md` [frontmatter](#frontmatter-fields) follows the Agent Skills specification naming and format conventions.
 
 ## Add supporting resources
@@ -277,6 +301,235 @@ scripts/extract.py
 
 For each file you reference, state what it contains and when the agent should use it. Keep references one level deep from `SKILL.md`. Avoid deeply nested reference chains that force the agent through multiple reads to reach the information it needs.
 
+## Add tools to skills
+
+A skill can bring its own tools. The agent sees them only after it reads the skill, so their schemas stay out of the prompt until a task needs them.
+
+Skill tools are a Deep Agents feature, not part of the [Agent Skills specification](https://agentskills.io/specification). Deep Agents reads the tool names from the spec's free-form `metadata` field. They are unrelated to the spec's `allowed-tools` field, which pre-approves tools rather than adding them.
+
+> [!NOTE]
+>
+> Skill tools require `deepagents>=1.15.0`.
+
+List the tools under `metadata.include_tools` in the skill's frontmatter, separated by spaces. A YAML list does not match any tool.
+
+```yaml
+name: linear
+description: Triage and file Linear issues. Use when the user reports a bug or asks about the Linear backlog.
+metadata:
+  include_tools: list_issues create_issue
+```
+
+Passing `skills` to `createDeepAgent` creates the skills middleware for you. To add tools, create it yourself with `createSkillsMiddleware` and pass it in `middleware` instead. Give it your skill paths as `sources`, and your tools as `tools` on the middleware rather than on the agent:
+
+```ts
+import { tool } from "langchain";
+import {
+  createDeepAgent,
+  createSkillsMiddleware,
+  FilesystemBackend,
+} from "deepagents";
+import { z } from "zod";
+
+const listIssues = tool(
+  async ({ team }) => `${team}-101: Login page times out`,
+  {
+    name: "list_issues",
+    description: "List open issues for a Linear team.",
+    schema: z.object({ team: z.string() }),
+  },
+);
+
+const createIssue = tool(async ({ team, title }) => `${team}-102: ${title}`, {
+  name: "create_issue",
+  description: "Create a Linear issue and return its ID.",
+  schema: z.object({ team: z.string(), title: z.string() }),
+});
+
+const backend = new FilesystemBackend({
+  rootDir: "./my-project",
+  virtualMode: true,
+});
+
+const agent = createDeepAgent({
+  model: "anthropic:claude-sonnet-4-6",
+  backend,
+  middleware: [
+    createSkillsMiddleware({
+      backend,
+      sources: ["/skills/"],
+      tools: [listIssues, createIssue],
+    }),
+  ],
+});
+```
+
+Skill tools follow these rules:
+
+* Skill tools are gated. Until the agent reads the skill's `SKILL.md`, a call to one fails as an unknown tool, even if the model guesses its name and arguments.
+* When [summarization](context-engineering.md#summarization) drops that read from the conversation, the tool is unavailable until the agent reads the skill again.
+* [Pinning a skill](#pin-skills) makes its tools available the same way reading its `SKILL.md` does. They stay available until summarization drops the pinned skill's message.
+
+> [!NOTE]
+>
+> On models that accept new tools mid-conversation, Deep Agents adds a skill tool after the read, which keeps the prompt cache valid. On other models, it adds the tool to the request's `tools`, which invalidates the cache. See the [Anthropic](../integrations/chat/anthropic.md#change-tools-mid-conversation) and [OpenAI](../integrations/chat/openai.md#add-tools-mid-conversation) integration pages.
+
+### Resolve tools at runtime
+
+The names in `include_tools` do not have to match a tool's own name. A generated tool name such as `mcp_linear_list_issues_ab12` is hard to write by hand, and may not stay the same.
+
+To map the names a skill lists to tools, pass a resolver function as the middleware's `tools`. The resolver receives each `include_tools` name and the graph's `Runtime`, and returns the tools for that name.
+
+The skill lists readable names:
+
+```yaml
+metadata:
+  include_tools: list_issues create_issue
+```
+
+The resolver maps each one to its real tool:
+
+```ts
+import type { StructuredTool } from "langchain";
+import {
+  createDeepAgent,
+  createSkillsMiddleware,
+  type SkillToolResolver,
+} from "deepagents";
+
+// Real names like "mcp_linear_list_issues_ab12"
+const toolsByName = new Map<string, StructuredTool>([
+  ["list_issues", listIssues],
+  ["create_issue", createIssue],
+]);
+
+const resolveSkillTools: SkillToolResolver = (name) => {
+  const tool = toolsByName.get(name);
+  return tool ? [tool] : [];
+};
+
+const agent = createDeepAgent({
+  model: "anthropic:claude-sonnet-4-6",
+  backend,
+  middleware: [
+    createSkillsMiddleware({
+      backend,
+      sources: ["/skills/"],
+      tools: resolveSkillTools,
+    }),
+  ],
+});
+```
+
+One name can also stand for many tools, such as every tool from the Linear MCP server. List one name in the skill:
+
+```yaml
+metadata:
+  include_tools: linear
+```
+
+Then return all of the server's tools from the resolver:
+
+```ts
+// Every tool from the Linear MCP server
+const toolsByIntegration = new Map([["linear", linearTools]]);
+
+const resolveSkillTools: SkillToolResolver = (name) =>
+  toolsByIntegration.get(name) ?? [];
+```
+
+The resolver also receives the graph's `Runtime`, so it can return different tools for each run based on [runtime context](context-engineering.md#runtime-context). For example, look up tools by user:
+
+```ts
+import {
+  createDeepAgent,
+  createSkillsMiddleware,
+  type SkillToolResolver,
+} from "deepagents";
+import { z } from "zod";
+
+const contextSchema = z.object({ userId: z.string() });
+
+const resolveSkillTools: SkillToolResolver<z.infer<typeof contextSchema>> = (
+  name,
+  runtime,
+) => {
+  if (name !== "linear") return [];
+  return linearToolsForUser(runtime.context.userId);
+};
+
+const agent = createDeepAgent({
+  model: "anthropic:claude-sonnet-4-6",
+  backend,
+  contextSchema,
+  middleware: [
+    createSkillsMiddleware({
+      backend,
+      sources: ["/skills/"],
+      tools: resolveSkillTools,
+    }),
+  ],
+});
+
+const result = await agent.invoke(
+  {
+    messages: [
+      { role: "user", content: "File a bug: checkout button does nothing." },
+    ],
+  },
+  { context: { userId: "user-123" } },
+);
+```
+
+> **[View example trace](https://smith.langchain.com/public/2c02ac34-3a67-455e-9f14-12f5e0426a53/r)**
+>
+> Open a public LangSmith run for this example.
+
+When you write a resolver:
+
+* Keep it fast. It runs on every model call after the agent reads the skill, and again before each skill tool call.
+
+* The resolver can be async. It can return a promise of the tools.
+
+### Keep a tool searchable
+
+Skill tools, the ones you pass to `createSkillsMiddleware`, are reachable only through their skill. With [`providerToolSearchMiddleware`](https://reference.langchain.com/javascript/langchain/index/providerToolSearchMiddleware), the model finds [deferred tools](../langchain/middleware/built-in.md#provider-tool-search), marked with `extras: { defer_loading: true }`, by searching for them. To make a tool reachable either way, through search or by reading a skill, pass it to the agent's `tools` and defer it. Reading the skill then reveals it without a search:
+
+```ts
+import { providerToolSearchMiddleware, tool } from "langchain";
+import { createDeepAgent, createSkillsMiddleware } from "deepagents";
+import { z } from "zod";
+
+const createIssue = tool(async ({ team, title }) => `${team}-102: ${title}`, {
+  name: "create_issue",
+  description: "Create a Linear issue and return its ID.",
+  schema: z.object({ team: z.string(), title: z.string() }),
+  extras: { defer_loading: true },
+});
+
+const agent = createDeepAgent({
+  model: "anthropic:claude-sonnet-4-6",
+  backend,
+  tools: [createIssue],
+  middleware: [
+    providerToolSearchMiddleware(),
+    createSkillsMiddleware({ backend, sources: ["/skills/"] }),
+  ],
+});
+```
+
+Unlike a skill tool, a deferred tool is not gated. The model can find and call it through search before the agent reads the skill.
+
+How the agent reaches a tool depends on where you pass it:
+
+| Pass the tool to | Before the agent reads the skill | After the agent reads the skill |
+| - | - | - |
+| `createSkillsMiddleware({ tools })` | Hidden, and calls fail | Visible |
+| The agent's `tools`, deferred | Available through provider tool search | Visible without a search |
+| The agent's `tools` | Visible, so `include_tools` has no effect | Visible |
+
+When a skill lists a tool the agent already has, including built-in tools such as `edit_file`, Deep Agents uses the agent's tool, not one with the same name passed to `createSkillsMiddleware`.
+
 ## Backends and remote skill loading
 
 Deep Agents supports different backends depending on how you want to store and manage skill files:
@@ -285,7 +538,8 @@ Deep Agents supports different backends depending on how you want to store and m
 * `StoreBackend`: Stores files in a LangGraph store for durable, cross-thread storage.
 * `FilesystemBackend`: Reads and writes skill files from disk under a configurable `root_dir`.
 
-#### StateBackend
+**StateBackend**
+
 ```ts
 import { createDeepAgent, StateBackend, type FileData } from "deepagents";
 import { MemorySaver } from "@langchain/langgraph";
@@ -328,7 +582,12 @@ const result = await agent.invoke(
 );
 ```
 
-#### StoreBackend
+> **[View example trace](https://smith.langchain.com/public/e5b8f897-96f4-42d7-9d88-f2fd8e246bd2/r)**
+>
+> Open a public LangSmith run for this example.
+
+**StoreBackend**
+
 ```ts
 import { createDeepAgent, StoreBackend } from "deepagents";
 import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
@@ -369,7 +628,12 @@ const result = await agent.invoke(
 );
 ```
 
-#### FilesystemBackend
+> **[View example trace](https://smith.langchain.com/public/8c49b6ee-d5e4-4c9d-b136-a561527e37c2/r)**
+>
+> Open a public LangSmith run for this example.
+
+**FilesystemBackend**
+
 ```ts
 import { createDeepAgent, FilesystemBackend } from "deepagents";
 import { MemorySaver } from "@langchain/langgraph";
@@ -409,6 +673,10 @@ const result = await agent.invoke(
 );
 ```
 
+> **[View example trace](https://smith.langchain.com/public/6bad9cac-ea04-4364-b28f-d1bdaf39b8d8/r)**
+>
+> Open a public LangSmith run for this example.
+
 ## Skill availability
 
 Not every run needs every skill. Control which skills the agent can see by choosing the paths passed to `skills`, by resolving those paths against context-specific storage, or by combining multiple skill sources. The context can come from a request handler, auth claims, a graph factory, deployment configuration, or any other application logic.
@@ -445,27 +713,25 @@ function createAgentForUser(userRole: string) {
 This pattern keeps one maintained copy of each skill and varies only the paths passed to each agent. In deployments, a graph factory is a natural place to parse user information and construct the agent with the right skill paths.
 
 > [!NOTE]
+>
 > The SDK only loads the sources you pass in `skills`. It does not automatically scan directories such as `~/.deepagents/...` or `~/.agents/...`.
 >
 > For Deep Agents Code storage conventions, see [App data](../../deepagents/code/configuration.md#data-locations).
 >
-> <details>
-> <summary>Emulate Deep Agents Code source order in the SDK</summary>
->
-> To match Deep Agents Code layering in SDK code, pass all desired sources explicitly in lowest-to-highest precedence order:
->
-> ```text
-> [
-> "<user-home>/.deepagents/{agent}/skills/",
-> "<user-home>/.agents/skills/",
-> "<project-root>/.deepagents/skills/",
-> "<project-root>/.agents/skills/",
-> ]
-> ```
->
-> Then pass that ordered list as `skills` when creating your agent.
->
-> </details>
+> > **Emulate Deep Agents Code source order in the SDK**
+> >
+> > To match Deep Agents Code layering in SDK code, pass all desired sources explicitly in lowest-to-highest precedence order:
+> >
+> > ```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > [
+> > "<user-home>/.deepagents/{agent}/skills/",
+> > "<user-home>/.agents/skills/",
+> > "<project-root>/.deepagents/skills/",
+> > "<project-root>/.agents/skills/",
+> > ]
+> > ```
+> >
+> > Then pass that ordered list as `skills` when creating your agent.
 
 ### Isolate skill libraries
 
@@ -528,9 +794,12 @@ Skills load once per thread and stay in agent state, so every later model call o
 Reset the stored metadata to load every source again on the next model call.
 
 > [!NOTE]
+>
 > Local runs often have no checkpointer, so skill edits take effect immediately and skills appear to reload on their own. [LangSmith Deployments](../../langsmith/deployment.md) configure a persistent checkpointer automatically, so the same agent holds its skills for the life of a thread once deployed. See [Going to production](going-to-production.md).
 
-Reloading skills requires `deepagents>=1.14.0`.
+> [!NOTE]
+>
+> Reloading skills requires `deepagents>=1.14.0`.
 
 Pass the reset as run input to reload and run in a single call:
 
@@ -553,6 +822,7 @@ await agent.updateState(config, { skillsMetadata: null });
 Use `null`, not an empty list. An empty list means the sources loaded and held no skills, so the agent sees no skills for the rest of the thread.
 
 > [!NOTE]
+>
 > A reload that finds a different set of skills changes the system prompt and invalidates the prompt cache for that thread. A reload that finds the same skills produces the same prompt and costs nothing.
 
 Middleware can reset the value as well, which lets your application decide when a thread is stale.
@@ -571,6 +841,66 @@ const reloadEditedSkills = createMiddleware({
     agentEditedSkills(state) ? { skillsMetadata: null } : undefined,
 });
 ```
+
+## Pin skills
+
+The agent reads a skill only when it decides the skill matches the task. When a user names a skill in your app, for example by typing `/langgraph-docs` or choosing it from a menu, pin the skill. Deep Agents then adds the skill's instructions to the conversation, so the agent does not have to choose it.
+
+> [!NOTE]
+>
+> Pinning skills requires `deepagents>=1.15.0`.
+
+Pass skill names in `pinnedSkills` with the run input:
+
+```ts
+const result = await agent.invoke(
+  {
+    messages: [{ role: "user", content: "What is LangGraph?" }],
+    pinnedSkills: ["langgraph-docs"],
+  },
+  { configurable: { thread_id: "1" } },
+);
+```
+
+Before the next model call, `SkillsMiddleware` reads each named skill's `SKILL.md` and appends it to the conversation as a `HumanMessage`. It adds one message per skill, in the order you name them. Each message holds the file without its frontmatter:
+
+```text
+<skill name="langgraph-docs" path="/skills/langgraph-docs/SKILL.md">
+# langgraph-docs
+
+## Overview
+...
+</skill>
+```
+
+Each message also sets `additional_kwargs.lc_source` to `"pinned_skill"`, and puts the skill's `name`, `path`, and `description` in `additional_kwargs.skill`. A chat UI can use these fields to show a pinned skill as a label instead of its full text.
+
+Pinned skills follow these rules:
+
+* The message stays in the conversation as written. Editing `SKILL.md` later does not change it, and pinning the skill again appends the current text. Earlier messages never change, so the prompt cache stays valid.
+* The middleware skips a name that matches no loaded skill, and a skill whose `SKILL.md` it cannot read.
+* When you pin a skill, its [skill tools](#add-tools-to-skills) become available to the agent, the same as when the agent reads its `SKILL.md`.
+
+### Pin skills named in a message
+
+Deep Agents does not look for skill names in messages. Your app chooses the syntax, finds the names, and passes them in `pinnedSkills`. The following example pins each skill named as `/skill-name` anywhere in the message, and sends the text unchanged:
+
+```ts
+const SKILL_REFERENCE = /(?<!\S)\/([a-z0-9-]+)/g;
+
+const message = "/langgraph-docs How do I add a checkpointer to my graph?";
+const pinnedSkills = [...message.matchAll(SKILL_REFERENCE)].map((m) => m[1]); // ["langgraph-docs"]
+
+const result = await agent.invoke(
+  {
+    messages: [{ role: "user", content: message }],
+    pinnedSkills,
+  },
+  { configurable: { thread_id: "1" } },
+);
+```
+
+The pattern matches a `/` followed by a skill name, at the start of the message or after a space. It does not check names against your skills, because the middleware skips unknown names. To support another syntax, such as `$skill-name`, change the pattern.
 
 ## Skills for subagents
 
@@ -915,12 +1245,15 @@ Skills execute code through [sandbox scripts](#sandbox-scripts): the agent runs 
 
 Skills can include scripts alongside the `SKILL.md` file. Reference scripts in your `SKILL.md` so the agent knows they exist and when to run them:
 
-- 📁 `skills/`
-  - 📁 `arxiv-search/`
-    - 📄 `SKILL.md`
+**skills**
 
-    - 📁 `scripts/`
-      - 📄 `search.ts`
+**arxiv-search**
+
+**SKILL.md**
+
+**scripts**
+
+**search.ts**
 
 ```md
 ---
@@ -1926,8 +2259,9 @@ main().catch((err) => {
 });
 ```
 
-#### [View example trace](https://smith.langchain.com/public/a81cf81d-7f30-4bb8-99a0-1e90554fc8c4/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/cca657b7-b162-47f9-9fca-a20bed29cb66/r)**
+>
+> Open a public LangSmith run for this example.
 
 For a complete example that seeds both skills and memories before execution and syncs both back afterward, see [syncing skills and memories with custom middleware](going-to-production.md#example-syncing-skills-and-memories-with-custom-middleware).
 
@@ -1956,6 +2290,8 @@ Use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm
 2. **Reduce overlap between skills.** If multiple skills have similar descriptions, the agent may skip the right one or pick the wrong one. Differentiate descriptions or [consolidate related skills](#write-effective-skills).
 
 3. **Confirm the skill is in the `skills` array.** Skills load only from paths you pass at agent creation or from subagent-specific `skills` parameters.
+
+4. **Pin the skill.** When the user or your app already knows which skill applies, [pin it](#pin-skills). The agent then gets the skill's instructions without having to choose the skill.
 
 ### Skills missing at startup
 
@@ -1988,6 +2324,18 @@ Use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm
 2. **Keep paths within the skill directory.** File paths resolve against the backend. Confirm supporting files exist at the paths your instructions reference.
 
 3. **Sync skills into sandboxes.** If you use [sandbox backends](sandboxes.md), skill files outside the container are not available until you copy them in. See [Sandbox scripts](#sandbox-scripts) and [syncing skills and memories with custom middleware](going-to-production.md#example-syncing-skills-and-memories-with-custom-middleware).
+
+### Skill tool not available
+
+**Problem**: The agent cannot call a tool that a skill lists in `include_tools`.
+
+**Solutions**:
+
+1. **Check that the agent read the skill.** Skill tools appear only after the agent reads `SKILL.md`, and disappear when summarization drops that read. See [Add tools to skills](#add-tools-to-skills).
+
+2. **Write `include_tools` as a string.** Separate names with spaces. A YAML list never matches a tool.
+
+3. **Check the names.** Each name must match a tool passed to the agent or to `createSkillsMiddleware`, or a name your resolver handles.
 
 ### Scripts fail to run
 
@@ -2048,14 +2396,13 @@ Instructions for the agent go here. See [Usage](#usage) for a complete example o
 ```
 
 > [!WARNING]
+>
 > Refer to the full [Agent Skills specification](https://agentskills.io/specification) for detailed constraints and validation rules. In Deep Agents, `SKILL.md` files must be under 10 MB. Files exceeding this limit are skipped during skill loading.
 
 For more example skills, see [Deep Agents example skills](https://github.com/langchain-ai/deepagentsjs/tree/main/examples/skills).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

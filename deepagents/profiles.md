@@ -38,31 +38,40 @@ register_harness_profile(
 )
 ```
 
-#### `base_system_prompt` — `string`
+**base\_system\_prompt** `string`
+
 Set the profile's base instructions. For the main agent, these follow the caller's system instructions; no base instructions are added by default. For declarative subagents, this replaces their authored system prompt.
 
-#### `system_prompt_suffix` — `string`
+**system\_prompt\_suffix** `string`
+
 Append text after the caller's instructions and the profile's base instructions. Applied to the main agent, declarative subagents, and the auto-added general-purpose subagent.
 
-#### `tool_description_overrides` — `Mapping[str, str]`
+**tool\_description\_overrides** `Mapping[str, str]`
+
 Override individual tool descriptions, keyed by tool name.
 
-#### `excluded_tools` — `frozenset[str]`
+**excluded\_tools** `frozenset[str]`
+
 Remove specific harness-level tools from the tool set. Matched by tool name (string), applied as a post-injection filter so it can drop both user-supplied tools and tools added by harness middleware. See [Running without the default filesystem tools](overview.md#virtual-filesystem-access) for a worked example.
 
-#### `excluded_middleware` — `frozenset[type[AgentMiddleware] | str]`
+**excluded\_middleware** `frozenset[type[AgentMiddleware] | str]`
+
 Strip specific middleware classes from the [Deep Agents stack](customization.md#deep-agents-stack). Accepts middleware classes or string names.
 
-#### `extra_middleware` — `Sequence[AgentMiddleware] | Callable[[], Sequence[AgentMiddleware]]`
+**extra\_middleware** `Sequence[AgentMiddleware] | Callable[[], Sequence[AgentMiddleware]]`
+
 Append middleware to every stack this profile applies to. See the [Deep Agents stack](customization.md#full-stack) for the built-in ordering.
 
-#### `general_purpose_subagent` — `GeneralPurposeSubagentProfile`
+**general\_purpose\_subagent** `GeneralPurposeSubagentProfile`
+
 Disable, rename, or re-prompt the general-purpose subagent. When this field's `system_prompt` is set alongside `base_system_prompt`, the general-purpose-specific subagent prompt wins—see [General-purpose subagent prompt](customization.md#general-purpose-subagent-prompt).
 
 > [!NOTE]
+>
 > Caller-supplied `system_prompt=` always sits at the front of the assembled prompt, and `system_prompt_suffix` always sits at the end—regardless of which model is selected. The same overlay rules apply to subagents: each subagent re-runs profile resolution against its own model. See [System prompt](customization.md#system-prompt) for custom instructions and subagent prompt behavior.
 
 > [!WARNING]
+>
 > To run an agent without the `task` tool, see [Running without subagents](subagents.md#running-without-subagents)—set `general_purpose_subagent=GeneralPurposeSubagentProfile(enabled=False)` and pass no synchronous subagents via `subagents=`. `SubAgentMiddleware` (and the `task` tool) is only attached when at least one synchronous subagent exists, so this configuration leaves it out cleanly. Async subagents are unaffected.
 >
 > Listing `FilesystemMiddleware`, `SubAgentMiddleware`, or the internal permission middleware in `excluded_middleware` raises a `ValueError`—they're required scaffolding in the [Deep Agents stack](customization.md#deep-agents-stack). To hide their tools from the model without removing the middleware, use `excluded_tools` instead—see [Running without the default filesystem tools](overview.md#virtual-filesystem-access).
@@ -76,18 +85,15 @@ Register profiles before creating an agent. Pass a model string or a model objec
 
 Provider profiles supply construction settings only when you pass a string.
 
-<details>
-<summary>Lookup order for preconfigured model instances</summary>
-
-When you pass a model object, the harness looks up its profile using the provider and identifier reported by that object.
-
-1. Exact `provider:identifier` match
-2. Identifier-only (only when the identifier already contains `:`)
-3. Reported provider's defaults, or the identifier prefix's defaults if the provider is unknown
-
-Both exact candidates take precedence over provider defaults.
-
-</details>
+> **Lookup order for preconfigured model instances**
+>
+> When you pass a model object, the harness looks up its profile using the provider and identifier reported by that object.
+>
+> 1. Exact `provider:identifier` match
+> 2. Identifier-only (only when the identifier already contains `:`)
+> 3. Reported provider's defaults, or the identifier prefix's defaults if the provider is unknown
+>
+> Both exact candidates take precedence over provider defaults.
 
 ## Registration keys
 
@@ -137,6 +143,7 @@ register_harness_profile(
 Agents created afterward with this model exclude both `execute` and `grep` and retain the 100-word suffix. Other models keep the provider defaults.
 
 > [!NOTE]
+>
 > There is no wildcard key that matches every provider. To apply the same overrides everywhere—say, dropping `SummarizationMiddleware` regardless of which model is selected—register the profile under each provider key you use. Profiles are intended for adjustments that depend on the model being selected. Global adjustments that should apply regardless of model should be made on the `create_deep_agent` call site.
 
 ## Merge semantics
@@ -182,13 +189,16 @@ register_provider_profile(
 
 Future construction of this model uses `temperature=0` and `timeout=60`. These registrations leave existing model objects unchanged.
 
-#### `init_kwargs` — `Mapping[str, Any]`
+**init\_kwargs** `Mapping[str, Any]`
+
 Static initialization arguments forwarded to `init_chat_model`.
 
-#### `pre_init` — `Callable[[str], None]`
+**pre\_init** `Callable[[str], None]`
+
 Side effects to run before construction (for example, credential validation).
 
-#### `init_kwargs_factory` — `Callable[[], dict[str, Any]]`
+**init\_kwargs\_factory** `Callable[[], dict[str, Any]]`
+
 Kwargs derived from runtime state (for example, headers pulled from environment variables).
 
 ## Load profiles from config files
@@ -272,8 +282,6 @@ def register_provider() -> None:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/profiles.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/profiles.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

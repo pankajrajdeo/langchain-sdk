@@ -20,8 +20,6 @@ This guide helps you get started with the MongoDB Atlas [retriever](../../deepag
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](mongodb_atlas.md).
-
 ## Setup
 
 You need a running MongoDB Atlas cluster with Atlas Search enabled. Create a cluster in the [Atlas UI](https://www.mongodb.com/cloud/atlas/register) if you do not already have one.
@@ -181,8 +179,6 @@ For full-text search, see [`MongoDBAtlasFullTextSearchRetriever`](https://refere
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -57,12 +57,13 @@ async def setup():
         connection_string=CONNECTION_STRING,
         table_name="chat_history",
     )
-    await chat_history._acreate_table_if_not_exists()
+    await chat_history.acreate_table_if_not_exists()
 
 asyncio.run(setup())
 ```
 
 > [!TIP]
+>
 > **Optional**: Specify a schema name by using `schema` parameter (default: "public")
 
 ### Initialize for a session
@@ -71,12 +72,14 @@ Create a chat history instance for a specific conversation:
 
 ```python
 import uuid
+from langchain_cockroachdb import CockroachDBEngine, CockroachDBChatMessageHistory
 
+engine = CockroachDBEngine.from_connection_string(CONNECTION_STRING)
 session_id = str(uuid.uuid4())  # Unique ID for this conversation
 
 chat_history = CockroachDBChatMessageHistory(
     session_id=session_id,
-    connection_string=CONNECTION_STRING,
+    engine=engine,
     table_name="chat_history",
 )
 ```
@@ -105,6 +108,8 @@ messages = [
 
 await chat_history.aadd_messages(messages)
 ```
+
+`aadd_messages` writes all messages in one transaction, in order.
 
 ### Retrieve messages
 
@@ -146,6 +151,8 @@ messages = chat_history_sync.messages
 chat_history_sync.clear()
 ```
 
+Sync methods are safe to call from multiple threads.
+
 ## API reference
 
 For detailed documentation:
@@ -160,8 +167,6 @@ For detailed documentation:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat_message_histories/cockroachdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat_message_histories/cockroachdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

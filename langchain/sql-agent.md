@@ -24,6 +24,7 @@ At a high level, the agent will:
 8. Formulate a response based on the results
 
 > [!WARNING]
+>
 > Building Q\&A systems of SQL databases requires executing model-generated SQL queries. There are inherent risks in doing this. Make sure that your database connection permissions are always scoped as narrowly as possible for your agent's needs. This will mitigate, though not eliminate, the risks of building a model-driven system.
 
 ### Concepts
@@ -36,14 +37,16 @@ The following tutorial covers the following concepts:
 
 ## Setup
 
-### Install dependencies
+**1. Install dependencies**
+
 **pip**
 
 ```bash
 pip install langchain langgraph
 ```
 
-### Set up LangSmith
+**2. Set up LangSmith**
+
 Set up [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-sql-agent) to inspect what is happening inside your chain or agent. Then set the following environment variables:
 
 ```shell
@@ -53,10 +56,12 @@ export LANGSMITH_API_KEY="..."
 
 ## Build your SQL agent
 
-### Select an LLM
+**1. Select an LLM**
+
 Select a model that supports [tool-calling](../integrations/providers/overview.md):
 
-#### OpenAI
+**OpenAI**
+
 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
 
 **pip**
@@ -93,7 +98,8 @@ os.environ["OPENAI_API_KEY"] = "sk-..."
 model = ChatOpenAI(model="gpt-5.5")
 ```
 
-#### Anthropic
+**Anthropic**
+
 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
 
 **pip**
@@ -130,7 +136,8 @@ os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
-#### Azure
+**Azure**
+
 👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
 
 **pip**
@@ -177,7 +184,8 @@ model = AzureChatOpenAI(
 )
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
 
 **pip**
@@ -214,7 +222,8 @@ os.environ["GOOGLE_API_KEY"] = "..."
 model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
 ```
 
-#### AWS Bedrock
+**AWS Bedrock**
+
 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
 
 **pip**
@@ -251,7 +260,8 @@ from langchain_aws import ChatBedrock
 model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
-#### HuggingFace
+**HuggingFace**
+
 👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
 
 **pip**
@@ -298,7 +308,8 @@ llm = HuggingFaceEndpoint(
 model = ChatHuggingFace(llm=llm)
 ```
 
-#### OpenRouter
+**OpenRouter**
+
 👉 Read the [OpenRouter chat model integration docs](../integrations/chat/openrouter.md)
 
 **pip**
@@ -340,7 +351,8 @@ model = ChatOpenRouter(model="auto")
 
 The output shown in the examples below used OpenAI.
 
-### Configure the database
+**2. Configure the database**
+
 You will be creating a [SQLite database](https://www.sqlitetutorial.net/sqlite-sample-database/) for this tutorial. SQLite is a lightweight database that is easy to set up and use. We will be loading the `chinook` database, which is a sample database that represents a digital media store.
 
 For convenience, we have hosted the database (`Chinook.db`) on a public GCS bucket.
@@ -388,8 +400,10 @@ Available tables: ['Album', 'Artist', 'Customer', 'Employee', 'Genre', 'Invoice'
 Sample output: [(1, 'AC/DC'), (2, 'Accept'), (3, 'Aerosmith'), (4, 'Alanis Morissette'), (5, 'Alice In Chains')]
 ```
 
-### Add tools for database interactions
+**3. Add tools for database interactions**
+
 > [!WARNING]
+>
 > The following database tools are minimal wrappers for demonstration purposes only. They are not intended to be secure or used in production. Use narrowly scoped database permissions and add application-specific validation before executing model-generated SQL.
 
 We can implement database [tools](tools.md) as thin wrappers using the `@tool` decorator from `langchain.tools`:
@@ -516,7 +530,8 @@ sql_db_query_checker: Use this tool to double check if your query is correct bef
     Always use this tool before executing a query with sql_db_query!
 ```
 
-### Create the agent
+**4. Create the agent**
+
 Use [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) to build a [ReAct agent](https://arxiv.org/pdf/2210.03629) with minimal code. The agent will interpret the request and generate a SQL command, which the tools will execute. If the command has an error, the error message is returned to the model. The model can then examine the original request and the new error message and generate a new command. This can continue until the LLM generates the command successfully or reaches an end count. This pattern of providing a model with feedback - error messages in this case - is very powerful.
 
 Initialize the agent with a descriptive system prompt to customize its behavior:
@@ -561,7 +576,8 @@ agent = create_agent(
 )
 ```
 
-### Run the agent
+**5. Run the agent**
+
 Run the agent on a sample query and observe its behavior:
 
 ```python
@@ -671,199 +687,199 @@ On average, the genre with the longest tracks is "Sci Fi & Fantasy" with an aver
 The agent correctly wrote a query, checked the query, and ran it to inform its final response.
 
 > [!NOTE]
+>
 > You can inspect all aspects of the above run, including steps taken, tools invoked, what prompts were seen by the LLM, and more in the [LangSmith trace](https://smith.langchain.com/public/cd2ce887-388a-4bb1-a29d-48208ce50d15/r).
 
-### (Optional) Use Studio
+**6. (Optional) Use Studio**
+
 [Studio](../langsmith/studio.md) provides a "client side" loop as well as memory so you can run this as a chat interface and query the database. You can ask questions like "Tell me the scheme of the database" or "Show me the invoices for the 5 top customers". You will see the SQL command that is generated and the resulting output. The details of how to get that started are below.
 
-<details>
-<summary>Run your agent in Studio</summary>
-
-In addition to the previously mentioned packages, you will need to:
-
+> **Run your agent in Studio**
+>
+> In addition to the previously mentioned packages, you will need to:
+>
 ```shell
-pip install -U langgraph-cli[inmem]>=0.4.0
+> pip install -U langgraph-cli[inmem]>=0.4.0
 ```
-
-In directory you will run in, you will need a `langgraph.json` file with the following contents:
-
+>
+> In directory you will run in, you will need a `langgraph.json` file with the following contents:
+>
 ```json
-{
-  "dependencies": ["."],
-  "graphs": {
-      "agent": "./sql_agent.py:agent",
-      "graph": "./sql_agent_langgraph.py:graph"
-  },
-  "env": ".env"
-}
+> {
+>   "dependencies": ["."],
+>   "graphs": {
+>       "agent": "./sql_agent.py:agent",
+>       "graph": "./sql_agent_langgraph.py:graph"
+>   },
+>   "env": ".env"
+> }
 ```
-
-Create a file `sql_agent.py` and insert this:
-
+>
+> Create a file `sql_agent.py` and insert this:
+>
 ```python
-# sql_agent.py for studio
-import pathlib
-import sqlite3
-
-import requests
-from langchain.agents import create_agent
-from langchain.chat_models import init_chat_model
-from langchain.tools import tool
-
-# Initialize an LLM
-model = init_chat_model("gpt-5.5")
-
-# Get the database, store it locally
-url = "https://storage.googleapis.com/benchmarks-artifacts/chinook/Chinook.db"
-local_path = pathlib.Path("Chinook.db")
-
-if local_path.exists():
-    print(f"{local_path} already exists, skipping download.")
-else:
-    response = requests.get(url, timeout=60)
-    if response.status_code == 200:
-        local_path.write_bytes(response.content)
-        print(f"File downloaded and saved as {local_path}")
-    else:
-        print(f"Failed to download the file. Status code: {response.status_code}")
-
-# Below are minimal tools for demonstration purposes.
-
-@tool
-def sql_db_list_tables() -> str:
-    """Input is an empty string, output is a comma-separated list of tables in the database."""
-    con = sqlite3.connect("Chinook.db")
-    try:
-        cursor = con.cursor()
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        tables = [row[0] for row in cursor.fetchall() if not row[0].startswith("sqlite_")]
-        return ", ".join(tables)
-    finally:
-        con.close()
-
-@tool
-def sql_db_schema(table_names: str) -> str:
-    """Input to this tool is a comma-separated list of tables, output is the schema and sample rows for those tables.
-    Be sure that the tables actually exist by calling sql_db_list_tables first!
-    Example Input: table1, table2, table3"""
-    con = sqlite3.connect("Chinook.db")
-    try:
-        cursor = con.cursor()
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        valid_tables = {row[0] for row in cursor.fetchall() if not row[0].startswith("sqlite_")}
-        results = []
-        for table in table_names.split(","):
-            table = table.strip()
-            if table not in valid_tables:
-                results.append(f"Error: table_names {{{table!r}}} not found in database")
-                continue
-            cursor.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name=?;", (table,))
-            schema_row = cursor.fetchone()
-            if schema_row:
-                results.append(schema_row[0])
-                try:
-                    quoted_table = '"' + table.replace('"', '""') + '"'
-                    cursor.execute(f"SELECT * FROM {quoted_table} LIMIT 3;")
-                    rows = cursor.fetchall()
-                    if rows:
-                        col_names = [description[0] for description in cursor.description]
-                        results.append(
-                            f"/*\n3 rows from {table} table:\n"
-                            + "\t".join(col_names)
-                            + "\n"
-                            + "\n".join("\t".join(str(x) for x in row) for row in rows)
-                            + "\n*/"
-                        )
-                except Exception as e:
-                    results.append(f"Error fetching sample rows: {e}")
-        return "\n\n".join(results)
-    finally:
-        con.close()
-
-@tool
-def sql_db_query(query: str) -> str:
-    """Input to this tool is a detailed and correct SQL query, output is a result from the database.
-    If the query is not correct, an error message will be returned.
-    If an error is returned, rewrite the query, check the query, and try again.
-    If you encounter an issue with Unknown column 'xxxx' in 'field list', use sql_db_schema to query the correct table fields."""
-    con = sqlite3.connect("Chinook.db")
-    try:
-        cursor = con.cursor()
-        cursor.execute(query)
-        res = cursor.fetchall()
-        return str(res)
-    except Exception as e:
-        return f"Error: {e}"
-    finally:
-        con.close()
-
-@tool
-def sql_db_query_checker(query: str) -> str:
-    """Use this tool to double check if your query is correct before executing it.
-    Always use this tool before executing a query with sql_db_query!"""
-    trigger_prompt = """{query}
-Double check the sqlite query above for common mistakes, including:
-- Using NOT IN with NULL values
-- Using UNION when UNION ALL should have been used
-- Using BETWEEN for exclusive ranges
-- Data type mismatch in predicates
-- Properly quoting identifiers
-- Using the correct number of arguments for functions
-- Casting to the correct data type
-- Using the proper columns for joins
-
-If there are any of the above mistakes, rewrite the query. If there are no mistakes, just reproduce the original query.
-
-Output the final SQL query only.
-
-SQL Query: """.format(query=query)
-
-    response = model.invoke(trigger_prompt)
-    return response.text.strip()
-
-tools = [sql_db_list_tables, sql_db_schema, sql_db_query, sql_db_query_checker]
-
-# Use a distinct loop variable so it does not shadow the `tool` decorator.
-for t in tools:
-    print(f"{t.name}: {t.description}\n")
-
-# Use create_agent
-system_prompt = """
-You are an agent designed to interact with a SQL database.
-Given an input question, create a syntactically correct {dialect} query to run,
-then look at the results of the query and return the answer. Unless the user
-specifies a specific number of examples they wish to obtain, always limit your
-query to at most {top_k} results.
-
-You can order the results by a relevant column to return the most interesting
-examples in the database. Never query for all the columns from a specific table,
-only ask for the relevant columns given the question.
-
-You MUST double check your query before executing it. If you get an error while
-executing a query, rewrite the query and try again.
-
-DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the
-database.
-
-To start you should ALWAYS look at the tables in the database to see what you
-can query. Do NOT skip this step.
-
-Then you should query the schema of the most relevant tables.
-""".format(
-    dialect="sqlite",
-    top_k=5,
-)
-
-agent = create_agent(
-    model,
-    tools,
-    system_prompt=system_prompt,
-)
+> # sql_agent.py for studio
+> import pathlib
+> import sqlite3
+>
+> import requests
+> from langchain.agents import create_agent
+> from langchain.chat_models import init_chat_model
+> from langchain.tools import tool
+>
+> # Initialize an LLM
+> model = init_chat_model("gpt-5.5")
+>
+> # Get the database, store it locally
+> url = "https://storage.googleapis.com/benchmarks-artifacts/chinook/Chinook.db"
+> local_path = pathlib.Path("Chinook.db")
+>
+> if local_path.exists():
+>     print(f"{local_path} already exists, skipping download.")
+> else:
+>     response = requests.get(url, timeout=60)
+>     if response.status_code == 200:
+>         local_path.write_bytes(response.content)
+>         print(f"File downloaded and saved as {local_path}")
+>     else:
+>         print(f"Failed to download the file. Status code: {response.status_code}")
+>
+> # Below are minimal tools for demonstration purposes.
+>
+> @tool
+> def sql_db_list_tables() -> str:
+>     """Input is an empty string, output is a comma-separated list of tables in the database."""
+>     con = sqlite3.connect("Chinook.db")
+>     try:
+>         cursor = con.cursor()
+>         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+>         tables = [row[0] for row in cursor.fetchall() if not row[0].startswith("sqlite_")]
+>         return ", ".join(tables)
+>     finally:
+>         con.close()
+>
+> @tool
+> def sql_db_schema(table_names: str) -> str:
+>     """Input to this tool is a comma-separated list of tables, output is the schema and sample rows for those tables.
+>     Be sure that the tables actually exist by calling sql_db_list_tables first!
+>     Example Input: table1, table2, table3"""
+>     con = sqlite3.connect("Chinook.db")
+>     try:
+>         cursor = con.cursor()
+>         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+>         valid_tables = {row[0] for row in cursor.fetchall() if not row[0].startswith("sqlite_")}
+>         results = []
+>         for table in table_names.split(","):
+>             table = table.strip()
+>             if table not in valid_tables:
+>                 results.append(f"Error: table_names {{{table!r}}} not found in database")
+>                 continue
+>             cursor.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name=?;", (table,))
+>             schema_row = cursor.fetchone()
+>             if schema_row:
+>                 results.append(schema_row[0])
+>                 try:
+>                     quoted_table = '"' + table.replace('"', '""') + '"'
+>                     cursor.execute(f"SELECT * FROM {quoted_table} LIMIT 3;")
+>                     rows = cursor.fetchall()
+>                     if rows:
+>                         col_names = [description[0] for description in cursor.description]
+>                         results.append(
+>                             f"/*\n3 rows from {table} table:\n"
+>                             + "\t".join(col_names)
+>                             + "\n"
+>                             + "\n".join("\t".join(str(x) for x in row) for row in rows)
+>                             + "\n*/"
+>                         )
+>                 except Exception as e:
+>                     results.append(f"Error fetching sample rows: {e}")
+>         return "\n\n".join(results)
+>     finally:
+>         con.close()
+>
+> @tool
+> def sql_db_query(query: str) -> str:
+>     """Input to this tool is a detailed and correct SQL query, output is a result from the database.
+>     If the query is not correct, an error message will be returned.
+>     If an error is returned, rewrite the query, check the query, and try again.
+>     If you encounter an issue with Unknown column 'xxxx' in 'field list', use sql_db_schema to query the correct table fields."""
+>     con = sqlite3.connect("Chinook.db")
+>     try:
+>         cursor = con.cursor()
+>         cursor.execute(query)
+>         res = cursor.fetchall()
+>         return str(res)
+>     except Exception as e:
+>         return f"Error: {e}"
+>     finally:
+>         con.close()
+>
+> @tool
+> def sql_db_query_checker(query: str) -> str:
+>     """Use this tool to double check if your query is correct before executing it.
+>     Always use this tool before executing a query with sql_db_query!"""
+>     trigger_prompt = """{query}
+> Double check the sqlite query above for common mistakes, including:
+> - Using NOT IN with NULL values
+> - Using UNION when UNION ALL should have been used
+> - Using BETWEEN for exclusive ranges
+> - Data type mismatch in predicates
+> - Properly quoting identifiers
+> - Using the correct number of arguments for functions
+> - Casting to the correct data type
+> - Using the proper columns for joins
+>
+> If there are any of the above mistakes, rewrite the query. If there are no mistakes, just reproduce the original query.
+>
+> Output the final SQL query only.
+>
+> SQL Query: """.format(query=query)
+>
+>     response = model.invoke(trigger_prompt)
+>     return response.text.strip()
+>
+> tools = [sql_db_list_tables, sql_db_schema, sql_db_query, sql_db_query_checker]
+>
+> # Use a distinct loop variable so it does not shadow the `tool` decorator.
+> for t in tools:
+>     print(f"{t.name}: {t.description}\n")
+>
+> # Use create_agent
+> system_prompt = """
+> You are an agent designed to interact with a SQL database.
+> Given an input question, create a syntactically correct {dialect} query to run,
+> then look at the results of the query and return the answer. Unless the user
+> specifies a specific number of examples they wish to obtain, always limit your
+> query to at most {top_k} results.
+>
+> You can order the results by a relevant column to return the most interesting
+> examples in the database. Never query for all the columns from a specific table,
+> only ask for the relevant columns given the question.
+>
+> You MUST double check your query before executing it. If you get an error while
+> executing a query, rewrite the query and try again.
+>
+> DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the
+> database.
+>
+> To start you should ALWAYS look at the tables in the database to see what you
+> can query. Do NOT skip this step.
+>
+> Then you should query the schema of the most relevant tables.
+> """.format(
+>     dialect="sqlite",
+>     top_k=5,
+> )
+>
+> agent = create_agent(
+>     model,
+>     tools,
+>     system_prompt=system_prompt,
+> )
 ```
 
-</details>
+**7. Implement human-in-the-loop review**
 
-### Implement human-in-the-loop review
 It can be prudent to check the agent's SQL queries before they are executed for any unintended actions or inefficiencies.
 
 LangChain agents feature support for built-in [human-in-the-loop middleware](human-in-the-loop.md) to add oversight to agent tool calls. Let's configure the agent to pause for human review on calling the `sql_db_query` tool:
@@ -888,6 +904,7 @@ agent = create_agent(
 ```
 
 > [!NOTE]
+>
 > We've added a [checkpointer](short-term-memory.md) to our agent to allow execution to be paused and resumed. See the [human-in-the-loop guide](human-in-the-loop.md) for detalis on this as well as available middleware configurations.
 
 On running the agent, it will now pause for review before executing the `sql_db_query` tool:
@@ -971,8 +988,6 @@ For deeper customization, check out [this tutorial](../langgraph/sql-agent.md) f
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/sql-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/sql-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

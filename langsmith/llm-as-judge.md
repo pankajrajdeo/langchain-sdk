@@ -13,11 +13,13 @@ LLM applications can be challenging to evaluate since they often generate conver
 This guide shows you how to define an [LLM-as-a-judge evaluator](evaluation-concepts.md#llm-as-judge) for [offline evaluation](evaluation-concepts.md#offline-evaluations) using the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-as-judge).
 
 > [!NOTE]
+>
 > This guide uses the LangSmith UI. You can also create an LLM-as-a-judge evaluator programmatically with the SDK, and it appears in the LangSmith UI the same as one created here. Refer to [Manage evaluators with the SDK](manage-evaluators-sdk.md).
 >
 > To run evaluations in real-time on your production traces, refer to [setting up online evaluations](online-evaluations-llm-as-judge.md).
 
 > [!TIP]
+>
 > If your dataset examples were built with [assertions written in an annotation queue](assertions.md), an LLM-as-a-judge evaluator can read `example.outputs["assertions"]` and grade each one against your application's output.
 
 ## Step 1. Create the evaluator
@@ -49,7 +51,7 @@ Create a custom prompt inline for your evaluator.
 
 Select the desired model from the provided options.
 
-To use a decision model, such as SemIf or Jev, as the judge, see [How to define a decision model evaluator](decision-model-evaluator.md).
+To use a decision model as the judge, see [How to define a decision model evaluator](decision-model-evaluator.md).
 
 ### Mapping variables
 
@@ -91,8 +93,6 @@ Once you are finished configuring, save your changes.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

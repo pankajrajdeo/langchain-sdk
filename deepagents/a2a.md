@@ -30,6 +30,7 @@ existing v0.3 clients keep working. The agent card declares one interface:
 ```
 
 > [!WARNING]
+>
 > The method name you send also selects the enum case in the response. A v1.0 name returns
 > SCREAMING\_SNAKE\_CASE (`TASK_STATE_WORKING`, `ROLE_AGENT`); a v0.3 name returns lowercase
 > (`working`, `agent`). Pick one family per client and stay on it.
@@ -41,7 +42,7 @@ existing v0.3 clients keep working. The agent card declares one interface:
 
 | v1.0 name | v0.3 name | Supported |
 | - | - | - |
-| `SendMessage` | `message/send` | Yes |
+| `SendMessage` | `message/send` | Yes, blocking by default. See [Return before the run finishes](#return-before-the-run-finishes) |
 | `SendStreamingMessage` | `message/stream` | Yes — Server-Sent Events |
 | `GetTask` | `tasks/get` | Yes |
 | `CancelTask` | `tasks/cancel` | Yes |
@@ -55,6 +56,38 @@ Exactly four v0.3 names are accepted: `message/send`, `message/stream`, `tasks/g
 `tasks/resubscribe` — returns `-32601 Method not found`.
 
 Only the JSON-RPC binding is available. gRPC and HTTP+JSON are not implemented.
+
+### Return before the run finishes
+
+By default, `SendMessage` holds the request open until the run finishes. To get the task back as
+soon as the run is created, set `returnImmediately` to `true` in `configuration`:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "1",
+  "method": "SendMessage",
+  "params": {
+    "message": {
+      "role": "ROLE_USER",
+      "parts": [{"text": "hello"}],
+      "messageId": "message-1"
+    },
+    "configuration": {"returnImmediately": true}
+  }
+}
+```
+
+The response is a task in `TASK_STATE_SUBMITTED` or `TASK_STATE_WORKING`, with no artifacts. Poll
+`GetTask` with the returned `id` until the state is terminal or `TASK_STATE_INPUT_REQUIRED`. A
+completed task carries the agent's reply in `artifacts`, the same parts a blocking `SendMessage`
+returns.
+
+* **`returnImmediately`**: The v1.0 flag. Takes precedence when both flags are sent.
+* **`blocking`**: The v0.3 flag. `"blocking": false` behaves like `"returnImmediately": true`.
+
+Each flag must be a boolean or `null`, and `null` counts as unset. Any other value returns `-32602`
+before a run is created.
 
 ### Task history in responses
 
@@ -127,9 +160,42 @@ key such as `historyscope` is not an error — it is ignored, and you silently g
 history, so check the spelling if filtering appears not to work.
 
 > [!WARNING]
+>
 > Do not resend a `taskId` from a completed task. Each new turn starts a new task inside the same
 > context — send the `contextId` alone. A message naming a terminal task is rejected with `-32004`,
 > and a `taskId` minted by another agent is rejected with `-32001`.
+
+### Interrupts
+
+When the graph calls `interrupt()`, the task moves to `TASK_STATE_INPUT_REQUIRED` and carries an
+artifact named `Interrupt`. The artifact holds one `DataPart` per pending interrupt:
+
+```json
+{
+  "name": "Interrupt",
+  "description": "Agent requires input to continue",
+  "parts": [
+    {
+      "kind": "data",
+      "data": {
+        "id": "<interruptId>",
+        "value": "<value passed to interrupt()>",
+        "response_schema": "<JSON Schema for the resume value>"
+      }
+    }
+  ]
+}
+```
+
+`response_schema` appears only when the graph passes one to `interrupt()`.
+
+To resume, send a message with the interrupted task's `taskId` and `contextId`. Put the resume
+value in a `DataPart` under a `resume` key, such as `{"data": {"resume": true}}`, or send a text
+part, which is used as the resume value as is. Send at most one `resume` `DataPart`. More than one
+returns `-32602`.
+
+If the task is not waiting on input, a `resume` `DataPart` returns `-32602`, but a text part is
+treated as an ordinary message rather than a resume value.
 
 ## Agent card discovery
 
@@ -140,6 +206,8 @@ GET /.well-known/agent-card.json?assistant_id={assistant_id}
 ```
 
 The agent card includes the assistant's name, description, available skills, supported input/output modes, and the A2A endpoint URL for communication.
+
+To serve a card when the request omits `assistant_id`, set the [`DEFAULT_A2A_ASSISTANT_ID`](../langsmith/env-var-self-hosted.md) environment variable. If the agent card URLs show an internal host, set `LANGGRAPH_API_URL` to your deployment's public URL.
 
 ## Optional capabilities
 
@@ -172,13 +240,24 @@ re-encoded as standard base64.
 
 ### A2UI v0.9
 
-Opt in per assistant:
+A2UI is off by default. Turn it on for every assistant in a deployment with an environment
+variable:
+
+```bash
+A2A_A2UI_ENABLED=true
+```
+
+Or opt in per assistant:
 
 ```json
 { "metadata": { "a2a": { "a2ui": true } } }
 ```
 
-The card then advertises the extension and appends the canonical MIME type to both mode lists:
+The per-assistant `a2ui` value wins over `A2A_A2UI_ENABLED`, so you can also turn A2UI off for one
+assistant in an enabled deployment. Each run records the setting it started with, so `GetTask` and
+`ListTasks` render an existing task the same way after you change it.
+
+When A2UI is enabled, the card advertises the extension and appends the canonical MIME type to both mode lists:
 
 ```json
 "capabilities": {
@@ -198,11 +277,46 @@ The card then advertises the extension and appends the canonical MIME type to bo
 }
 ```
 
-A client activates it by listing the URI in `message.extensions`. Payloads are validated in both
-directions against the v0.9 schemas, and A2UI parts are preserved in `message/send`, `tasks/get`
-and the final `message/stream` artifact. Responses carry
-`metadata.mimeType: "application/a2ui+json"`. `application/json+a2ui` is accepted as an alias on
-input.
+A client activates the extension per request by sending its URI in the `A2A-Extensions` header.
+The legacy `X-A2A-Extensions` header also works:
+
+```txt
+A2A-Extensions: https://a2ui.org/a2a-extension/a2ui/v0.9
+```
+
+The server reads A2UI client capabilities and the client data model from `params.message.metadata`
+(`a2uiClientCapabilities` and `a2uiClientDataModel`), the location the A2UI v0.9 schema defines.
+Capabilities use the tagged shape, such as `{"v0.9": {"supportedCatalogIds": [...]}}`. A flat
+capabilities object is rejected.
+
+An A2UI `DataPart` holds either one A2UI message object or an array of messages, with
+`metadata.mimeType` set to an A2UI MIME type:
+
+* **`application/json+a2ui`**: The canonical type. The card advertises it, and responses use it by
+  default.
+* **`application/a2ui+json`**: Accepted on input. When a request uses it, responses for that task
+  echo it back, including later `GetTask` reads.
+
+Payloads are validated in both directions against the v0.9 schemas. An invalid payload from the
+client returns `-32602`. An invalid payload in the agent's reply fails the request with `-32603`.
+A2UI parts are preserved in `SendMessage`, `GetTask`, and the final `SendStreamingMessage` artifact.
+
+The server publishes A2UI output only when the assistant has A2UI enabled and the client sent the
+extension header. Otherwise, it drops A2UI blocks from the agent's output and returns the rest of
+the reply, rather than failing the request.
+
+Client input is stricter. An A2UI `DataPart` sent to an assistant without A2UI enabled, or sent
+without the extension header, returns `-32602`.
+
+To publish a tool's result as A2UI, list the tool names on the deployment. The tool's result must
+be A2UI JSON:
+
+```bash
+A2A_A2UI_TOOL_CALL_RESULTS=generative_ui_tool,another_tool
+```
+
+Listed tool results are sent as A2UI `DataPart`s only when A2UI is active for the request. Error
+results and results that fail validation are dropped.
 
 ### Filter tool results
 
@@ -224,16 +338,14 @@ Unset means all tool results are published. The filter applies to both task hist
 | Tool-result `DataPart`s | `0.12.2` |
 | `A2A_ALLOWED_TOOL_CALL_RESULTS` | `0.12.4` |
 | Outbound `FilePart`, configurable card modes | `0.13.0` |
-| A2UI v0.9 | `0.15.0` |
+| A2UI v0.9, `A2A_A2UI_ENABLED`, `A2A_A2UI_TOOL_CALL_RESULTS` | `0.15.0` |
 | `historyScope` | `0.15.0` |
+| `response_schema` in interrupt artifacts | `0.16.0` |
+| `returnImmediately` and `blocking` on `SendMessage` | `0.18.0` |
 
 ```bash
-pip install "langgraph-api>=0.13.0"
+pip install "langgraph-api>=0.16.0"
 ```
-
-A2UI v0.9 and `historyScope` landed after the `0.14.0` release candidates were cut, so they arrive
-in `0.15.0`. That version is not published as a stable release yet — check
-`capabilities.extensions` on the agent card before relying on `historyScope`.
 
 Your graph's state must include a `messages` key to accept A2A text and file parts. An assistant
 whose input schema has no `messages` field is rejected with an explanatory error.
@@ -307,7 +419,7 @@ async def call_model(state: State, runtime: Runtime[Context]) -> Dict[str, Any]:
     try:
         # Make OpenAI API call
         response = await client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-5.4-mini",
             messages=openai_messages,
             max_tokens=100,
             temperature=0.7
@@ -350,8 +462,7 @@ This example demonstrates how two agents can communicate by sending JSON-RPC mes
 import asyncio
 import aiohttp
 import os
-import uuid
-
+from langsmith import uuid7
 def extract_text(result: dict) -> str:
     """Best-effort extraction of response text from an A2A result."""
     if "error" in result:
@@ -376,7 +487,7 @@ async def send_message(session, port, assistant_id, text, context_id=None):
     message = {
         "role": "user",
         "parts": [{"kind": "text", "text": text}],
-        "messageId": str(uuid.uuid4()),
+        "messageId": str(uuid7()),
     }
 
     # A2A multi-turn continuity: reuse contextId across turns and agents.
@@ -386,7 +497,7 @@ async def send_message(session, port, assistant_id, text, context_id=None):
 
     payload = {
         "jsonrpc": "2.0",
-        "id": str(uuid.uuid4()),
+        "id": str(uuid7()),
         "method": "message/send",
         "params": {"message": message},
     }
@@ -451,6 +562,7 @@ The flow works as follows:
 3. Agent Server maps the `contextId` to `thread_id` in LangSmith [metadata](../langsmith/add-metadata-tags.md), so all turns appear in the same thread.
 
 > [!WARNING]
+>
 > The `contextId` is used directly as the LangGraph `thread_id`, so it must be a UUID. Echo back the
 > one the server returned rather than minting your own identifier. A `contextId` such as
 > `session-42` is rejected with `-32602` and the message `Failed to create run: Invalid thread ID`.
@@ -460,6 +572,7 @@ The flow works as follows:
 When agents from different frameworks communicate over A2A, `contextId` is what unifies their traces. Reuse the `contextId` returned by the first agent on every later request, to that agent and to the others.
 
 > [!WARNING]
+>
 > Agent Server does not read a top-level `metadata` field on the JSON-RPC payload. There is no way for a client to set the LangGraph `thread_id` directly — it is always the `contextId`. Sending `metadata.thread_id` to an Agent Server deployment has no effect.
 
 The following code snippet demonstrates the key concepts. For a complete runnable implementation with two agents, refer to the [Google ADK + LangChain example](https://github.com/langchain-samples/A2A-google-adk/blob/main/test_agent_conversation.py).
@@ -467,8 +580,7 @@ The following code snippet demonstrates the key concepts. For a complete runnabl
 ```python
 import asyncio
 import aiohttp
-import uuid
-
+from langsmith import uuid7
 async def send_message(session, url, text, context_id=None):
     """Send an A2A message and return (response_text, context_id)."""
 
@@ -479,7 +591,7 @@ async def send_message(session, url, text, context_id=None):
     message = {
         "role": "user",
         "parts": [{"kind": "text", "text": text}],
-        "messageId": str(uuid.uuid4()),
+        "messageId": str(uuid7()),
     }
     if context_id:
         message["contextId"] = context_id
@@ -489,7 +601,7 @@ async def send_message(session, url, text, context_id=None):
     # LangGraph thread_id, so no separate tracing field is needed.
     payload = {
         "jsonrpc": "2.0",
-        "id": str(uuid.uuid4()),
+        "id": str(uuid7()),
         "method": "message/send",
         "params": {"message": message},
     }
@@ -589,6 +701,7 @@ async def set_thread_id_middleware(request: Request, call_next):
 Register your agent routes on `app` after this middleware.
 
 > [!NOTE]
+>
 > Set `LANGSMITH_API_KEY` and optionally `LANGSMITH_PROJECT` in your environment to enable tracing. All agents in the conversation should use the same project so their traces are visible together.
 
 ### View traces in LangSmith
@@ -640,6 +753,7 @@ RFC 2119 level and works against any A2A endpoint, including yours.
 ```
 
 > [!NOTE]
+>
 > The TCK drives some scenarios through `messageId` prefixes such as `tck-input-required`, described
 > in its `docs/SUT_REQUIREMENTS.md`. A graph that does not implement those prefixes will report those
 > requirements as skipped rather than failed.
@@ -680,8 +794,6 @@ To disable the A2A endpoint, set `disable_a2a` to `true` in your `langgraph.json
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/server-a2a.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/server-a2a.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

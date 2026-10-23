@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/workspaces/current/members/active:
     get:
@@ -368,6 +371,12 @@ components:
           type: boolean
           title: Is Disabled
           default: false
+        org_identity_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Org Identity Id
         org_role_id:
           anyOf:
             - type: string
@@ -492,6 +501,7 @@ components:
         - supabase:sso
         - oidc
         - custom-oidc
+        - oidc-sso
       title: AuthProvider
     ProvisioningMethod:
       type: string

@@ -18,6 +18,7 @@ tags: [docs, concepts, context]
    * **Cross-conversation context**: Data that persists across multiple conversations or sessions
 
 > [!TIP]
+>
 > Runtime context refers to local context: data and dependencies your code needs to run. It does **not** refer to:
 >
 > * The LLM context, which is the data passed into the LLM's prompt.
@@ -48,7 +49,8 @@ graph.invoke(
 )
 ```
 
-#### Agent prompt
+**Agent prompt**
+
 ```python
 from dataclasses import dataclass
 from langchain.agents import create_agent
@@ -78,7 +80,8 @@ agent.invoke(
 
 See [Agents](../langchain/agents.md) for details.
 
-#### Workflow node
+**Workflow node**
+
 ```python
 from langgraph.runtime import Runtime
 
@@ -89,7 +92,8 @@ def node(state: State, runtime: Runtime[ContextSchema]):  # [!code highlight]
 
 * See [the Graph API](../langgraph/use-graph-api.md#add-runtime-configuration) for details.
 
-#### In a tool
+**In a tool**
+
 ```python
 from langchain.tools import tool, ToolRuntime
 
@@ -104,6 +108,7 @@ def get_user_email(runtime: ToolRuntime[ContextSchema]) -> str:
 See the [tool calling guide](../langchain/tools.md#context) for details.
 
 > [!TIP]
+>
 > The `Runtime` object can be used to access static context and other utilities like the active store and stream writer.
 > See the [`Runtime`](https://reference.langchain.com/python/langgraph/runtime/Runtime) documentation for details.
 
@@ -111,7 +116,8 @@ See the [tool calling guide](../langchain/tools.md#context) for details.
 
 **Dynamic runtime context** represents mutable data that can evolve during a single run and is managed through the LangGraph state object. This includes conversation history, intermediate results, and values derived from tools or LLM outputs. In LangGraph, the state object acts as [short-term memory](memory.md) during a run.
 
-#### In an agent
+**In an agent**
+
 Example shows how to incorporate state into an agent **prompt**.
 
 State can also be accessed by the agent's **tools**, which can read or update the state as needed. See [tool calling guide](../langchain/tools.md#short-term-memory-state) for details.
@@ -142,7 +148,8 @@ agent.invoke({
 })
 ```
 
-#### In a workflow
+**In a workflow**
+
 ```python
 from typing_extensions import TypedDict
 from langchain.messages import AnyMessage
@@ -166,6 +173,7 @@ graph = builder.compile()
 ```
 
 > [!TIP]
+>
 > **Turning on memory**
 > Please see the [memory guide](../langgraph/add-memory.md) for more details on how to enable memory. This is a powerful feature that allows you to persist the agent's state across multiple invocations. Otherwise, the state is scoped only to a single run.
 
@@ -181,8 +189,6 @@ graph = builder.compile()
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/concepts/context.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/concepts/context.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -21,8 +21,8 @@ This is a message sent from the AI.
 ```python
 AIMessagePromptTemplate(
     self,
-    *args: Any = (),
-    **kwargs: Any = {},
+    args: Any = (),
+    kwargs: Any = {},
 )
 ```
 
@@ -32,4 +32,4 @@ AIMessagePromptTemplate(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/prompts/chat.py#L677)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/prompts/chat.py#L677)

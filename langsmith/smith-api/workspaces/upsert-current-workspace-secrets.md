@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/workspaces/current/secrets:
     post:
@@ -176,14 +179,14 @@ paths:
       summary: Upsert current workspace secrets
       operationId: upsert_current_workspace_secrets_api_v1_workspaces_current_secrets_post
       requestBody:
+        required: true
         content:
           application/json:
             schema:
+              type: array
               items:
                 $ref: '#/components/schemas/SecretUpsert'
-              type: array
               title: Secrets
-        required: true
       responses:
         '200':
           description: Successful Response

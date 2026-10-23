@@ -11,6 +11,7 @@ tags: [docs, javascript, langchain, mcp-v1]
 > Documentation for @langchain/mcp-adapters 1.x.
 
 > [!WARNING]
+>
 > This page documents `@langchain/mcp-adapters` 1.x. For 2.x, see the [MCP documentation](mcp.md) and [migration guide](../migrate/langchain-mcp-adapters.md).
 
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is an open protocol that standardizes how applications provide tools and context to LLMs. LangChain agents can use tools defined on MCP servers using the [`@langchain/mcp-adapters`](https://github.com/langchain-ai/langchainjs/tree/main/libs/langchain-mcp-adapters) library.
@@ -46,6 +47,7 @@ bun add @langchain/mcp-adapters@^1
 `@langchain/mcp-adapters` enables agents to use tools defined across one or more MCP servers.
 
 > [!NOTE]
+>
 > `MultiServerMCPClient` is **stateless by default**. Each tool invocation creates a fresh MCP `ClientSession`, executes the tool, and then cleans up.
 
 **Accessing multiple MCP servers**
@@ -85,52 +87,51 @@ const weatherResponse = await agent.invoke({
 ```
 
 > [!TIP]
+>
 > Trace MCP tool calls alongside your agent's reasoning steps with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-javascript-langchain-mcp-v1). Follow the [tracing quickstart](../../langsmith/trace-with-langchain.md) to get set up.
 
-<details>
-<summary>Example: Query LangChain docs</summary>
-
-The [LangChain docs MCP server](../../use-these-docs.md) is a public HTTP endpoint at `https://docs.langchain.com/mcp`. Connect an agent to it to search and read documentation without writing custom tools.
-
-> [!NOTE]
-> The docs MCP server is public and does not require an API key. For IDE and coding-agent setup (Claude Code, Cursor, and others), see [Use docs programmatically](../../use-these-docs.md).
-
+> **Example: Query LangChain docs**
+>
+> The [LangChain docs MCP server](../../use-these-docs.md) is a public HTTP endpoint at `https://docs.langchain.com/mcp`. Connect an agent to it to search and read documentation without writing custom tools.
+>
+> > [!NOTE]
+> >
+> > The docs MCP server is public and does not require an API key. For IDE and coding-agent setup (Claude Code, Cursor, and others), see [Use docs programmatically](../../use-these-docs.md).
+>
 ```typescript
-import { MultiServerMCPClient } from "@langchain/mcp-adapters";  // [!code highlight]
-import { createAgent } from "langchain";
-
-const client = new MultiServerMCPClient({
-    docs: {
-        transport: "http",
-        url: "https://docs.langchain.com/mcp",  // [!code highlight]
-    },
-});
-
-const tools = await client.getTools();
-const agent = createAgent({
-    model: "claude-sonnet-5",
-    tools,
-});
-
-const response = await agent.invoke({
-    messages: [
-        {
-            role: "user",
-            content: "How do I add short-term memory to a LangChain agent?",
-        },
-    ],
-});
+> import { MultiServerMCPClient } from "@langchain/mcp-adapters";  // [!code highlight]
+> import { createAgent } from "langchain";
+>
+> const client = new MultiServerMCPClient({
+>     docs: {
+>         transport: "http",
+>         url: "https://docs.langchain.com/mcp",  // [!code highlight]
+>     },
+> });
+>
+> const tools = await client.getTools();
+> const agent = createAgent({
+>     model: "claude-sonnet-5",
+>     tools,
+> });
+>
+> const response = await agent.invoke({
+>     messages: [
+>         {
+>             role: "user",
+>             content: "How do I add short-term memory to a LangChain agent?",
+>         },
+>     ],
+> });
 ```
-
-The server exposes these tools:
-
-| Tool | Description |
-| - | - |
-| `search_docs_by_lang_chain` | Search docs for relevant guides, how-tos, and examples. |
-| `query_docs_filesystem_docs_by_lang_chain` | Read or search docs through a virtual filesystem (`rg`, `head`, `cat`, and related commands). |
-| `submit_feedback` | Report a problem with a documentation page. |
-
-</details>
+>
+> The server exposes these tools:
+>
+> | Tool | Description |
+> | - | - |
+> | `search_docs_by_lang_chain` | Search docs for relevant guides, how-tos, and examples. |
+> | `query_docs_filesystem_docs_by_lang_chain` | Read or search docs through a virtual filesystem (`rg`, `head`, `cat`, and related commands). |
+> | `submit_feedback` | Report a problem with a documentation page. |
 
 ## Custom servers
 
@@ -909,8 +910,6 @@ You can also set the server logging level with `client.setLoggingLevel("debug")`
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/langchain/mcp-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/langchain/mcp-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

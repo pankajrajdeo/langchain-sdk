@@ -19,6 +19,7 @@ Here are the basic steps for backtesting:
 This process will provide you with a new dataset of representative inputs, which you can version and use for backtesting your models.
 
 > [!NOTE]
+>
 > Often, you won't have definitive "ground truth" answers available. In such cases, you can manually label the outputs or use evaluators that don't rely on reference data. If your application allows for capturing ground-truth labels, for example by allowing users to leave feedback, we strongly recommend doing so.
 
 ## Setup
@@ -28,6 +29,7 @@ This process will provide you with a new dataset of representative inputs, which
 Install and set environment variables. This guide requires `langsmith>=0.2.4`.
 
 > [!NOTE]
+>
 > For convenience we'll use the LangChain OSS framework in this tutorial, but the LangSmith functionality shown is framework-agnostic.
 
 **pip**
@@ -133,7 +135,7 @@ You can select the runs to backtest on using the `filter` argument of `list_runs
 
 ```python
 from datetime import datetime, timedelta, timezone
-from uuid import uuid4
+from langsmith import uuid7
 from langsmith import Client
 from langsmith.beta import convert_runs_to_test
 
@@ -164,7 +166,7 @@ prod_runs = list(
 # Name of the dataset we want to create
 dataset_name = f'{project_name}-backtesting {start_time.strftime("%Y-%m-%d")}-{end_time.strftime("%Y-%m-%d")}'
 # Name of the experiment we want to create from the historical runs
-baseline_experiment_name = f"prod-baseline-gpt-3.5-turbo-{str(uuid4())[:4]}"
+baseline_experiment_name = f"prod-baseline-gpt-3.5-turbo-{str(uuid7())[:4]}"
 
 # This converts the runs to a dataset + experiment
 convert_runs_to_test(
@@ -183,7 +185,7 @@ convert_runs_to_test(
 
 Once this step is complete, you should see a new dataset in your LangSmith project called "Tweet Writing Task-backtesting TODAYS DATE", with a single experiment like so:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/baseline-experiment.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=73b60a75d6b33f2830f5ed68464c586b" alt="Baseline experiment" width="3456" height="1852" data-path="langsmith/images/baseline-experiment.png" />
+![Baseline experiment](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/baseline-experiment.png?fit=max\&auto=format\&n=E8FdemkcQxROovD9\&q=85\&s=73b60a75d6b33f2830f5ed68464c586b)
 
 ## Benchmark against new system
 
@@ -269,7 +271,7 @@ candidate_results = await client.aevaluate(
 
 After running both experiments, you can view them in your dataset:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/dataset-page.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=1c5d4f1cf212e2c38917319c7bbf7f99" alt="Dataset page" width="3022" height="1536" data-path="langsmith/images/dataset-page.png" />
+![Dataset page](https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/dataset-page.png?fit=max\&auto=format\&n=aKRoUGXX6ygp4DlC\&q=85\&s=1c5d4f1cf212e2c38917319c7bbf7f99)
 
 The results reveal an interesting tradeoff between the two models:
 
@@ -285,12 +287,10 @@ This backtesting exercise revealed that while GPT-4o is generally considered a m
 
 This insight demonstrates the value of backtesting - it helped us identify potential issues before deployment.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/tutorial-comparison-view.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=a8ab311399f3d0e69554a62f939fd475" alt="Tutorial comparison view" width="3018" height="1532" data-path="langsmith/images/tutorial-comparison-view.png" />
+![Tutorial comparison view](https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/tutorial-comparison-view.png?fit=max\&auto=format\&n=1RIJxfRpkszanJLL\&q=85\&s=a8ab311399f3d0e69554a62f939fd475)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-backtests-new-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-backtests-new-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

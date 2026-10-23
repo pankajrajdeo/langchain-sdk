@@ -10,10 +10,10 @@ tags: [docs, langsmith, annotation-queues-sdk]
 
 Use the LangSmith SDK to manage feedback configurations and [annotation queue](evaluation-concepts.md#human) rubrics programmatically, and to add runs and threads to a queue for review. Define reusable feedback schemas at the organization level (like accuracy scores or pass/fail judgments), then assign them to specific queues with custom instructions. This enables version control, automation across projects, and consistency—particularly useful for CI/CD pipelines or replicating evaluation setups across environments.
 
-> [!NOTE]
-> This guide uses the Python and TypeScript SDKs. For installation and setup, refer to the [Python SDK documentation](https://reference.langchain.com/python/langsmith) and [TypeScript SDK documentation](https://reference.langchain.com/javascript/modules/langsmith.html).
+This guide uses the Python and TypeScript SDKs. For installation and setup, refer to the [Python SDK documentation](https://reference.langchain.com/python/langsmith) and [TypeScript SDK documentation](https://reference.langchain.com/javascript/modules/langsmith.html).
 
 > [!NOTE]
+>
 > To write free-form acceptance criteria on individual runs while reviewing in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-annotation-queues-sdk), refer to [Use assertions](assertions.md).
 
 ## Feedback layers
@@ -31,6 +31,7 @@ LangSmith uses a three-layer architecture for structured human feedback:
 Feedback configs define the schema for a feedback key—whether it's a continuous score, a categorical choice, or freeform text. A unique key identifies each config within your organization and specifies how annotators can submit feedback for that metric.
 
 > [!NOTE]
+>
 > Calling [`create_feedback_config`](https://reference.langchain.com/python/langsmith/client/Client/create_feedback_config) with an identical config that already exists returns the existing config. If a different config already exists for the same key, the system raises a 400 error.
 
 **Python**
@@ -264,6 +265,7 @@ Modify the rubric items assigned to an annotation queue with [`update_annotation
 You'll need the queue ID, which you get when you create the queue or by listing queues:
 
 > [!NOTE]
+>
 > Updating rubric items replaces the full list. Include all items you want to keep.
 
 **Python**
@@ -300,6 +302,7 @@ await client.updateAnnotationQueue(queue.id, {
 Add [runs](observability-concepts.md#runs) and [threads](observability-concepts.md#threads) to a single-run annotation queue with the annotation queue `items` resource. A single request accepts a mixed batch of run items and thread items, so this method covers everything the UI [add flow](annotation-queues.md#assign-runs-and-threads-to-a-single-run-queue) supports.
 
 > [!NOTE]
+>
 > The `items` resource requires `langsmith>=0.10.13` (Python) or `langsmith>=0.8.8` (TypeScript), served by a LangSmith backend on version `0.16.14` or later.
 
 Each item sets an `item_type` of `RUN` or `THREAD`:
@@ -322,6 +325,7 @@ You can also find these IDs in the [LangSmith UI](https://smith.langchain.com?ut
 To extend trace retention for the added run items, pass `extend_trace_retention=True`. The response is an envelope with an `items` array, one entry per added item.
 
 > [!NOTE]
+>
 > In Python, `annotation_queues.items.create` is async, so `await` it inside an event loop.
 
 **Python**
@@ -421,6 +425,7 @@ for (const item of response.items ?? []) {
 ```
 
 > [!NOTE]
+>
 > For runs-only additions, [`add_runs_to_annotation_queue`](https://reference.langchain.com/python/langsmith/client/Client/add_runs_to_annotation_queue) still works and remains the simplest option when you are not adding threads. New code that adds threads, or mixed run and thread batches, should use the `items` resource.
 
 ## Feedback config types (detailed)
@@ -601,8 +606,6 @@ await client.createFeedbackConfig({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotation-queues-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotation-queues-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

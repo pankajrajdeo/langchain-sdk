@@ -18,7 +18,7 @@ Some advantages of doing this are:
 
 The downside is that because you are broadening your evaluation surface area to contain multiple turns, there is less consistency than evaluating a single output from your app given a static input from a dataset.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multi-turn-trace.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=c903f388600ab575e70edb92209c6b2e" alt="Multi turn trace" width="2952" height="1790" data-path="langsmith/images/multi-turn-trace.png" />
+![Multi turn trace](https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multi-turn-trace.png?fit=max\&auto=format\&n=4kN8yiLrZX_amfFn\&q=85\&s=c903f388600ab575e70edb92209c6b2e)
 
 This guide will show you how to simulate multi-turn interactions and evaluate them using the open-source [`openevals`](https://github.com/langchain-ai/openevals) package, which contains prebuilt evaluators and other convenient resources for evaluating your AI apps. It will also use OpenAI models, though you can use other providers as well.
 
@@ -39,6 +39,7 @@ npm install langsmith openevals
 ```
 
 > [!NOTE]
+>
 > If you are using `yarn` as your package manager, you will also need to manually install `@langchain/core` as a peer dependency of `openevals`. This is not required for LangSmith evals in general.
 
 And set up your environment variables:
@@ -187,11 +188,12 @@ The response looks like this:
 The simulation first generates an initial query from the simulated `user`, then passes response chat messages back and forth until it reaches `max_turns` (you can alternatively pass a `stopping_condition` that takes the current trajectory and returns `True` or `False` - [see the OpenEvals README for more information](https://github.com/langchain-ai/openevals?tab=readme-ov-file#multiturn-simulation)). The return value is the final list of chat messages that make up the converation's **trajectory**.
 
 > [!NOTE]
+>
 > There are several ways to configure the simulated user, such as having it return fixed responses for the first turns of your simulation, as well as the simulation as a whole. For full details, check out [the OpenEvals README](https://github.com/langchain-ai/openevals?tab=readme-ov-file#multiturn-simulation).
 
 The final trace will look something [like this](https://smith.langchain.com/public/648ca37d-1c4d-4f7b-9b6a-89e35dc5d4f0/r) with responses from your `app` and `user` interleaved:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multi-turn-trace.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=c903f388600ab575e70edb92209c6b2e" alt="Multi turn trace" width="2952" height="1790" data-path="langsmith/images/multi-turn-trace.png" />
+![Multi turn trace](https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multi-turn-trace.png?fit=max\&auto=format\&n=4kN8yiLrZX_amfFn\&q=85\&s=c903f388600ab575e70edb92209c6b2e)
 
 Congrats! You just ran your first multi-turn simulation. Next, we'll cover how to run it in a LangSmith experiment.
 
@@ -202,14 +204,15 @@ You can use the results of multi-turn simulations as part of a LangSmith experim
 ### Using `pytest` or `Vitest/Jest`
 
 > [!TIP]
+>
 > See the following guides to learn how to set up evals using LangSmith's integrations with test frameworks:
 >
-> * [`pytest`](https://docs.smith.langchain.com/langsmith/pytest)
-> * [`Vitest` or `Jest`](https://docs.smith.langchain.com/langsmith/vitest-jest)
+> * [`pytest`](pytest.md)
+> * [`Vitest` or `Jest`](vitest-jest.md)
 
 If you are using one of the [LangSmith test framework integrations](pytest.md), you can pass in an array of OpenEvals evaluators as a `trajectory_evaluators` param when running the simulation. These evaluators will run at the end of the simulation, taking the final list of chat messages as an `outputs` kwarg. Your passed `trajectory_evaluator` must therefore accept this kwarg.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multi-turn-vitest.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=04c56e67e7bb9f01cb905d8a184d62d5" alt="Multi turn vitest" width="3448" height="1128" data-path="langsmith/images/multi-turn-vitest.png" />
+![Multi turn vitest](https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multi-turn-vitest.png?fit=max\&auto=format\&n=4kN8yiLrZX_amfFn\&q=85\&s=04c56e67e7bb9f01cb905d8a184d62d5)
 
 Here's an example:
 
@@ -237,7 +240,7 @@ def test_multiturn_message_with_openai():
             history[thread_id] = []
         history[thread_id] = history[thread_id] + [inputs]
         res = client.chat.completions.create(
-            model="gpt-5.4-nano",
+            model="gpt-5.4-mini",
             messages=[
                 {
                     "role": "system",
@@ -252,7 +255,7 @@ def test_multiturn_message_with_openai():
 
     user = create_llm_simulated_user(
         system="You are a nice customer who wants a refund for their car.",
-        model="openai:gpt-5.4-nano",
+        model="openai:gpt-5.4-mini",
         fixed_responses=[
             inputs,
         ],
@@ -311,7 +314,7 @@ ls.describe("Multiturn demo", () => {
         }
         history[threadId].push(inputs);
         const res = await client.chat.completions.create({
-          model: "gpt-5.4-nano",
+          model: "gpt-5.4-mini",
           messages: [
             {
               role: "system",
@@ -329,7 +332,7 @@ ls.describe("Multiturn demo", () => {
       const user = createLLMSimulatedUser({
         system:
           "You are a nice customer who wants a refund for their car.",
-        model: "openai:gpt-5.4-nano",
+        model: "openai:gpt-5.4-mini",
         fixedResponses: inputs.messages,
       });
 
@@ -410,7 +413,7 @@ def target(inputs: dict):
             history[thread_id] = []
         history[thread_id] = history[thread_id] + [next_message]
         res = client.chat.completions.create(
-            model="gpt-5.4-nano",
+            model="gpt-5.4-mini",
             messages=[
                 {
                     "role": "system",
@@ -425,7 +428,7 @@ def target(inputs: dict):
 
     user = create_llm_simulated_user(
         system="You are a nice customer who wants a refund for their car.",
-        model="openai:gpt-5.4-nano",
+        model="openai:gpt-5.4-mini",
         fixed_responses=inputs["messages"],
     )
     res = run_multiturn_simulation(
@@ -489,7 +492,7 @@ const target = async (inputs: { messages: ChatCompletionMessage[]}) => {
     }
     history[threadId].push(nextMessage);
     const res = await client.chat.completions.create({
-      model: "gpt-5.4-nano",
+      model: "gpt-5.4-mini",
       messages: [
         {
           role: "system",
@@ -507,7 +510,7 @@ const target = async (inputs: { messages: ChatCompletionMessage[]}) => {
   const user = createLLMSimulatedUser({
     system:
       "You are a nice customer who wants a refund for their car.",
-    model: "openai:gpt-5.4-nano",
+    model: "openai:gpt-5.4-mini",
     fixedResponses: inputs.messages,
   });
 
@@ -575,7 +578,7 @@ def target(inputs: dict):
             history[thread_id] = []
         history[thread_id] = history[thread_id] + [next_message]
         res = client.chat.completions.create(
-            model="gpt-5.4-nano",
+            model="gpt-5.4-mini",
             messages=[
                 {
                     "role": "system",
@@ -590,7 +593,7 @@ def target(inputs: dict):
 
     user = create_llm_simulated_user(
         system=inputs["simulated_user_prompt"],
-        model="openai:gpt-5.4-nano",
+        model="openai:gpt-5.4-mini",
         fixed_responses=inputs["messages"],
     )
     res = run_multiturn_simulation(
@@ -672,7 +675,7 @@ const target = async (inputs: {
     }
     history[threadId].push(nextMessage);
     const res = await client.chat.completions.create({
-      model: "gpt-5.4-nano",
+      model: "gpt-5.4-mini",
       messages: [
         {
           role: "system",
@@ -689,7 +692,7 @@ const target = async (inputs: {
 
   const user = createLLMSimulatedUser({
     system: inputs.simulated_user_prompt,
-    model: "openai:gpt-5.4-nano",
+    model: "openai:gpt-5.4-mini",
     fixedResponses: inputs.messages,
   });
 
@@ -721,8 +724,6 @@ You can also explore the [OpenEvals readme](https://github.com/langchain-ai/open
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/multi-turn-simulation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/multi-turn-simulation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

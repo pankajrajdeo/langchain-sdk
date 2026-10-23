@@ -59,7 +59,7 @@ class UserDetail(BaseModel):
     age: int
 
 user = client.chat.completions.create(
-    model="gpt-5.4-mini",
+    model="gpt-6-luna",
     response_model=UserDetail,
     messages=[
         {"role": "user", "content": "Extract Jason is 25 years old"},
@@ -76,7 +76,7 @@ Please see [Custom instrumentation](annotate-code.md) for more information on ho
 @traceable(name="Extract User Details")
 def my_function(text: str) -> UserDetail:
     return client.chat.completions.create(
-        model="gpt-5.4-mini",
+        model="gpt-6-luna",
         response_model=UserDetail,
         messages=[
             {"role": "user", "content": f"Extract {text}"},
@@ -88,8 +88,6 @@ my_function("Jason is 25 years old")
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-instructor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-instructor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

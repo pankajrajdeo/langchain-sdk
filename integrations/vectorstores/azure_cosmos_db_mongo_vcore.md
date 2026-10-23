@@ -48,6 +48,7 @@ Now, we need to load the documents into the collection, create the index and the
 Please refer to the [documentation](https://learn.microsoft.com/en-us/azure/documentdb/vector-search) if you have questions about certain parameters
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -229,7 +230,7 @@ And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketan
 
 ## Filtered vector search (Preview)
 
-Azure Cosmos DB for MongoDB supports pre-filtering with `$lt`, `$lte`, `$eq`, `$neq`, `$gte`, `$gt`, `$in`, `$nin`, and `$regex`. To use this feature, enable `"filtering vector search"` in the "Preview Features" tab of your Azure Subscription. Learn more about [filtered vector search preview features](https://learn.microsoft.com/en-us/azure/documentdb/vector-search#filtered-vector-search-preview).
+Azure Cosmos DB for MongoDB supports pre-filtering with `$lt`, `$lte`, `$eq`, `$neq`, `$gte`, `$gt`, `$in`, `$nin`, and `$regex`. To use this feature, enable `"filtering vector search"` in the "Preview Features" tab of your Azure Subscription. Learn more about [filtered vector search preview features](https://learn.microsoft.com/en-us/azure/documentdb/vector-search#filtered-vector-search).
 
 ```python
 # Create a filter index
@@ -278,8 +279,6 @@ len(docs)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

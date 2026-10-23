@@ -39,14 +39,16 @@ Each step adds one capability to the same data analysis agent:
 
 ## Setup
 
-### Install packages
+**1. Install packages**
+
 Install the packages for this tutorial:
 
 ```bash
 pip install deepagents langsmith
 ```
 
-### Set up LangSmith API keys
+**2. Set up LangSmith API keys**
+
 This tutorial uses [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox), which provisions sandboxes through `SandboxClient`. That client authenticates with LangSmith using `LANGSMITH_API_KEY` from your environment, so an API key is required to run the tutorial. Setting up LangSmith also allows you to see traces of what happens when your agent runs.
 
 1. [Sign up for a free account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-deep-agent-from-scratch). You can use Google, GitHub, or email.
@@ -63,7 +65,8 @@ export LANGSMITH_API_KEY=...
 export LANGSMITH_TRACING=true
 ```
 
-### Add a model provider API key
+**3. Add a model provider API key**
+
 Export the API key for the model provider you use in the code samples:
 
 **Google**
@@ -361,6 +364,7 @@ upload_stream.output
 ```
 
 > [!NOTE]
+>
 > With [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox), upload paths must be absolute POSIX paths (for example, `/sales.csv`). Relative paths such as `sales.csv` are rejected with `invalid_path` and the file is not written to the sandbox.
 
 Combine the code from the previous steps into one script and run it:
@@ -956,8 +960,6 @@ To work with the pre-assembled version, see [Customize Deep Agents](../deepagent
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/deep-agent-from-scratch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/deep-agent-from-scratch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

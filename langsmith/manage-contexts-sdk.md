@@ -10,9 +10,10 @@ tags: [docs, langsmith, manage-contexts-sdk]
 
 > Use the LangSmith SDK to push, pull, list, and delete agent and skill repos in the Context Hub programmatically.
 
-Use the LangSmith [Python](smith-python-sdk.md) and [TypeScript](smith-js-ts-sdk.md) SDKs to manage **agent repos** and **skill repos** in the [Context Hub](use-the-context-hub.md) programmatically. [Push](#push-an-agent) new versions from CI, [pull](#pull-an-agent) the latest or a pinned commit at runtime to inject context into your agent, and use additional methods to [check existence](#check-whether-a-repo-exists), [list and search](#list-agents-and-skills) repos, and [delete](#delete-an-agent-or-skill) what you no longer need.
+Use the LangSmith [Python](https://docs.langchain.com/langsmith/smith-python-sdk.md) and [TypeScript](https://docs.langchain.com/langsmith/smith-js-ts-sdk.md) SDKs to manage **agent repos** and **skill repos** in the [Context Hub](use-the-context-hub.md) programmatically. [Push](#push-an-agent) new versions from CI, [pull](#pull-an-agent) the latest or a pinned commit at runtime to inject context into your agent, and use additional methods to [check existence](#check-whether-a-repo-exists), [list and search](#list-agents-and-skills) repos, and [delete](#delete-an-agent-or-skill) what you no longer need.
 
 > [!NOTE]
+>
 > Context Hub methods require `langsmith>=0.7.35` (Python) and `langsmith>=0.5.23` (TypeScript).
 
 ## Setup
@@ -44,6 +45,7 @@ Use the LangSmith [Python](smith-python-sdk.md) and [TypeScript](smith-js-ts-sdk
 ```
 
 > [!NOTE]
+>
 > **Python async:** All methods shown on this page are also available on `AsyncClient` (imported from `langsmith`) with identical signatures—just `await` each call. The TypeScript SDK is async by default; there is no separate async client.
 
 ## Push an agent
@@ -213,6 +215,7 @@ Both `push_agent` / `pushAgent` and `push_skill` / `pushSkill` accept the follow
 Pull a snapshot of an agent repo. By default the latest commit is returned; pass a commit hash or tag via `version` (or embed it in the identifier as `owner/name:version`) to pull a specific version:
 
 > [!NOTE]
+>
 > **Identifier formats**: the `identifier` argument accepts three forms:
 >
 > * `name`: resolves against the current workspace owner.
@@ -380,6 +383,7 @@ for await (const skill of client.listSkills({ isPublic: true })) {
 | `query` | `string` (optional) | Search query across repo handle, owner handle, description, and tags. |
 
 > [!NOTE]
+>
 > Python's `list_agents` / `list_skills` return a paginated response object with explicit
 > `limit` and `offset` for manual pagination. TypeScript's `listAgents` / `listSkills`
 > return an `AsyncIterableIterator` that handles pagination automatically as you
@@ -388,6 +392,7 @@ for await (const skill of client.listSkills({ isPublic: true })) {
 ## Delete an agent or skill
 
 > [!WARNING]
+>
 > This operation is permanent and cannot be undone. Deleting a repo also
 > removes its owned child file repos.
 
@@ -417,8 +422,6 @@ await client.deleteSkill("deep-research");
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-contexts-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-contexts-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

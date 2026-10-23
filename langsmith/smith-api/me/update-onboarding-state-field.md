@@ -17,6 +17,9 @@ Valid fields:
 - evaluation_completed_at
 - success_viewed_at
 - agent_platform_welcome_viewed_at
+- get_started_checklist_dismissed_at
+- agent_trace_viewed_at
+- agent_monitoring_viewed_at
 
 ## OpenAPI
 
@@ -170,6 +173,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -178,6 +183,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/me/onboarding_state/{field}:
     put:
@@ -194,6 +200,9 @@ paths:
         - evaluation_completed_at
         - success_viewed_at
         - agent_platform_welcome_viewed_at
+        - get_started_checklist_dismissed_at
+        - agent_trace_viewed_at
+        - agent_monitoring_viewed_at
       operationId: update_onboarding_state_field_api_v1_me_onboarding_state__field__put
       parameters:
         - name: field
@@ -265,6 +274,24 @@ components:
               format: date-time
             - type: 'null'
           title: Agent Platform Welcome Viewed At
+        get_started_checklist_dismissed_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Get Started Checklist Dismissed At
+        agent_trace_viewed_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Agent Trace Viewed At
+        agent_monitoring_viewed_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Agent Monitoring Viewed At
         created_at:
           type: string
           format: date-time

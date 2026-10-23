@@ -22,7 +22,8 @@ LangGraph.
 ```python
 RunnableSeq(
     self,
-    *steps: RunnableLike = (),
+    steps: RunnableLike = (),
+    *,
     name: str | None = None,
     trace_inputs: Callable[[Any], Any] | None = None,
     trace_outputs: Callable[[Any], Any] | None = None,
@@ -45,7 +46,8 @@ RunnableSeq(
 ```python
 __init__(
     self,
-    *steps: RunnableLike = (),
+    steps: RunnableLike = (),
+    *,
     name: str | None = None,
     trace_inputs: Callable[[Any], Any] | None = None,
     trace_outputs: Callable[[Any], Any] | None = None,
@@ -54,6 +56,7 @@ __init__(
 
 | Name | Type |
 |------|------|
+| `steps` | `RunnableLike` |
 | `name` | `str \| None` |
 | `trace_inputs` | `Callable[[Any], Any] \| None` |
 | `trace_outputs` | `Callable[[Any], Any] \| None` |
@@ -74,4 +77,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/_internal/_runnable.py#L584)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/_internal/_runnable.py#L584)

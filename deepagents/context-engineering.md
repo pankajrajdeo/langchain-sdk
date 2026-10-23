@@ -19,6 +19,7 @@ Deep agents include built-in mechanisms for managing context across long-running
 This page provides an overview of the different kinds of context your deep agent has access to and manages.
 
 > [!TIP]
+>
 > New to context engineering? See the [conceptual overview](../concepts/context.md) for the different types of context and when to use them.
 
 ## Types of context
@@ -35,17 +36,21 @@ This page provides an overview of the different kinds of context your deep agent
 
 Input context is information provided to your deep agent at startup that becomes part of its system prompt. The final prompt consists of several sources:
 
-#### [System prompt](#system-prompt)
-Custom instructions you provide plus built-in agent guidance.
+> **[System prompt](#system-prompt)**
+>
+> Custom instructions you provide plus built-in agent guidance.
 
-#### [Memory](#memory)
-Persistent `AGENTS.md` files always loaded when configured.
+> **[Memory](#memory)**
+>
+> Persistent `AGENTS.md` files always loaded when configured.
 
-#### [Skills](#skills)
-On-demand capabilities loaded when relevant (progressive disclosure).
+> **[Skills](#skills)**
+>
+> On-demand capabilities loaded when relevant (progressive disclosure).
 
-#### [Tool prompts](#tool-prompts)
-Instructions for using built-in tools or custom tools.
+> **[Tool prompts](#tool-prompts)**
+>
+> Instructions for using built-in tools or custom tools.
 
 ### System prompt
 
@@ -157,6 +162,7 @@ See [Customization](customization.md#middleware) for the [Deep Agents stack](cus
 You do **not** need middleware when tools alone use context or `runtime.store`; tools receive the [ToolRuntime](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime) object (including `runtime.context` and `runtime.store`) directly. Add middleware only when tools should be packaged with an update to the system prompt.
 
 > [!TIP]
+>
 > To adjust the assembled system prompt for a specific provider or model, use a [harness profile](profiles.md#harness-profiles): `base_system_prompt` replaces the base prompt outright, and `system_prompt_suffix` appends to it.
 
 ### Memory
@@ -341,11 +347,14 @@ def search_orders(
 ```
 
 > [!TIP]
+>
 > To override a built-in or user-supplied tool's description for a specific provider or model, use a [harness profile](profiles.md#harness-profiles)'s `tool_description_overrides` keyed by tool name.
 >
 > Unused built-in tools still send their full schemas on every turn. Use `excluded_tools` to remove tools the agent should never call (for example `write_file` or `execute` on a read-only agent). That shrinks baseline prompt size for the whole run. It is configuration, not the automatic offloading or summarization in [Context compression](#context-compression).
 >
 > See [Harness profiles](profiles.md#harness-profiles) and [Running without the default filesystem tools](overview.md#virtual-filesystem-access).
+>
+> If a tool is related to a skill, you can keep the tool's schema out of the prompt until a skill needs it. For more information, see [Add tools to skills](skills.md#add-tools-to-skills).
 
 See [Overview](overview.md#execution-environment) for built-in capabilities and [Customization](customization.md#tools) for passing tools directly.
 
@@ -592,6 +601,7 @@ Runtime context **propagates to all subagents**. When a subagent runs, it receiv
 ## Custom state schema
 
 > [!NOTE]
+>
 > Custom state schemas require `deepagents>=0.6.6`.
 
 Use a custom state schema when your agent or middleware needs to track data that must persist across the full agent lifecycle and survive checkpointing. Custom state lets you:
@@ -825,11 +835,13 @@ Long-running tasks produce large tool outputs and long conversation history.
 Context compression reduces the size of information in an agent's working memory while preserving details relevant to the task.
 The following techniques are the built-in mechanisms to ensure the context passed to LLMs stays within its context window limit:
 
-#### [Offloading](#offloading)
-Large tool inputs and results are stored in the filesystem and replaced with references.
+> **[Offloading](#offloading)**
+>
+> Large tool inputs and results are stored in the filesystem and replaced with references.
 
-#### [Summarization](#summarization)
-Old messages are compressed into an LLM-generated summary when limits are approached.
+> **[Summarization](#summarization)**
+>
+> Old messages are compressed into an LLM-generated summary when limits are approached.
 
 To shrink the tool schemas sent on every turn before compression ever runs, exclude unused built-in tools via a [harness profile](profiles.md#harness-profiles) (`excluded_tools`). See [Tool prompts](#tool-prompts).
 
@@ -842,13 +854,14 @@ Content offloading happens when tool call inputs or results exceed a token thres
    Since this content is already persisted to the filesystem, it's often redundant.
    As the session context crosses 85% of the model's available window, deep agents truncate older tool calls, replacing them with a pointer to the file on disk and reducing the size of the active context.
 
-   <img src="https://mintcdn.com/langchain-5e9cc07a/0G7fpRWZQ2tFN1wL/oss/images/deepagents/offloading-inputs.png?fit=max&auto=format&n=0G7fpRWZQ2tFN1wL&q=85&s=fa18372080684d661965ea6f5ed1edd0" alt="An example of offloading showing a large input which is saved to disk and the truncated version is used for the tool call" width="1091" height="814" data-path="oss/images/deepagents/offloading-inputs.png" />
+   ![An example of offloading showing a large input which is saved to disk and the truncated version is used for the tool call](https://mintcdn.com/langchain-5e9cc07a/0G7fpRWZQ2tFN1wL/oss/images/deepagents/offloading-inputs.png?fit=max\&auto=format\&n=0G7fpRWZQ2tFN1wL\&q=85\&s=fa18372080684d661965ea6f5ed1edd0)
 
 2. **Tool call results exceed 20,000 tokens**: When this occurs, the deep agent offloads the response to the configured backend and substitutes it with a file path reference and a preview of the first 10 lines. Agents can then re-read or search the content as needed.
 
-   <img src="https://mintcdn.com/langchain-5e9cc07a/0G7fpRWZQ2tFN1wL/oss/images/deepagents/offloading-results.png?fit=max&auto=format&n=0G7fpRWZQ2tFN1wL&q=85&s=11f3da2f37cae63b8aa4c440549f1a67" alt="An example of offloading showing a large tool response that is replaced with a message about the location of the offloaded results and the first 10 lines of the result" width="1360" height="922" data-path="oss/images/deepagents/offloading-results.png" />
+   ![An example of offloading showing a large tool response that is replaced with a message about the location of the offloaded results and the first 10 lines of the result](https://mintcdn.com/langchain-5e9cc07a/0G7fpRWZQ2tFN1wL/oss/images/deepagents/offloading-results.png?fit=max\&auto=format\&n=0G7fpRWZQ2tFN1wL\&q=85\&s=11f3da2f37cae63b8aa4c440549f1a67)
 
 > [!NOTE]
+>
 > Built-in context compression does not resize images, lower image resolution, or generate visual embeddings. For multimodal inputs, tool outputs, and how compression interacts with media, see [Multimodal](multimodal.md).
 
 ### Summarization
@@ -862,7 +875,7 @@ This process has two components:
 
 This dual approach ensures the agent maintains awareness of its goals and progress (via the summary) while preserving the ability to recover text details when needed (via filesystem search).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0G7fpRWZQ2tFN1wL/oss/images/deepagents/summarization.png?fit=max&auto=format&n=0G7fpRWZQ2tFN1wL&q=85&s=a8fea59d4365dd688e49ce118e706e76" alt="An example of summarization showing an agent's conversation history, where several steps get compacted" width="1000" height="587" data-path="oss/images/deepagents/summarization.png" />
+![An example of summarization showing an agent's conversation history, where several steps get compacted](https://mintcdn.com/langchain-5e9cc07a/0G7fpRWZQ2tFN1wL/oss/images/deepagents/summarization.png?fit=max\&auto=format\&n=0G7fpRWZQ2tFN1wL\&q=85\&s=a8fea59d4365dd688e49ce118e706e76)
 
 **Configuration:**
 
@@ -873,9 +886,10 @@ This dual approach ensures the agent maintains awareness of its goals and progre
 * Older messages are summarized by the model
 
 > [!TIP]
+>
 > [Streaming tokens](streaming.md#llm-tokens) from the agent will generally include tokens generated by the summarization step. You can filter out these tokens using their associated metadata:
 >
-> ```python
+```python
 > for token, metadata in agent.stream(
 >     {"messages": [...]},
 >     stream_mode="messages",
@@ -884,7 +898,7 @@ This dual approach ensures the agent maintains awareness of its goals and progre
 >         continue
 >     else:
 >         ...
-> ```
+```
 
 ##### On-demand compaction tool
 
@@ -1257,8 +1271,6 @@ See [Long-term memory](memory.md) for setup and use cases.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/context-engineering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/context-engineering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

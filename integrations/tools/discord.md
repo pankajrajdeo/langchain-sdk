@@ -16,7 +16,7 @@ This guide provides a quick overview for getting started with Discord tooling in
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/langchain_discord) | Version |
+| Class | Package | Serializable | JS support | Version |
 | :- | :- | :-: | :-: | :-: |
 | `DiscordReadMessages`, `DiscordSendMessage` | [`langchain-discord-shikenso`](https://github.com/Shikenso-Analytics/langchain-discord) | N/A | TBD | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-discord-shikenso?style=flat-square\&label=%20) |
 
@@ -153,8 +153,6 @@ for usage details, parameters, and advanced configurations.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/discord.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/discord.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

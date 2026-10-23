@@ -43,6 +43,7 @@ Hashes (not raw data) can be written to either storage option:
 | [`Custodied`](https://agentsystems.ai/notary?utm_source=langchain-docs\&utm_medium=docs) | Managed compliance | Write-once storage, verification UI, signed attestations for audits |
 
 > [!NOTE]
+>
 > [Custodied plans](https://agentsystems.ai/notary?utm_source=langchain-docs\&utm_medium=docs) offer WORM-compliant hash storage, managed signing, and signed attestations.
 
 ## Prerequisites
@@ -53,17 +54,20 @@ pip install agentsystems-notary langchain langchain-anthropic python-dotenv
 
 ## Example (decentralized)
 
-### Generate signing key
+**1. Generate signing key**
+
 ```shell
 openssl genrsa -out arweave-key.pem 4096
 ```
 
 > [!WARNING]
+>
 > Retain this key. It is required to prove ownership of on-chain hashes during verification.
 
 For production, use a [cloud key management service](https://docs.agentsystems.ai/notary/configuration/signing?utm_source=langchain-docs\&utm_medium=docs).
 
-### Create .env file
+**2. Create .env file**
+
 Create a `.env` file in your project root:
 
 ```
@@ -80,7 +84,8 @@ ARWEAVE_PRIVATE_KEY_PATH=./arweave-key.pem
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-### Run the example
+**3. Run the example**
+
 ```python
 import os
 
@@ -166,8 +171,6 @@ Alternatively, the [Verify UI](https://verify.agentsystems.ai?utm_source=langcha
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/callbacks/agentsystems_notary.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/callbacks/agentsystems_notary.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

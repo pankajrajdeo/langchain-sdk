@@ -28,18 +28,26 @@ Before you begin, make sure you have:
 
 **Select the UI or SDK filter for instructions:**
 
-#### UI
+**UI**
+
 ## 1. Set workspace secrets
 
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-set-workspace-secrets), ensure that your API key is set as a [workspace secret](set-up-hierarchy.md#configure-workspace-settings).
 
-1. Navigate to  **Settings** and then move to the **Secrets** tab.
-2. Select **Add secret** and enter the key environment variable (e.g.,`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) and your API key as the **Value**.
-3. Select **Save secret**.
+Adding workspace secrets requires permission to manage secrets in the workspace. If you do not have it, ask a workspace admin to add the secret for you or to grant you access.
 
- When adding workspace secrets in the LangSmith UI, make sure the secret keys match the environment variable names expected by your model provider.
+To add a workspace secret:
 
-If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](model-configurations.md#oauth-client-credentials).
+1. Navigate to  **Settings** > **Integrations** > **Provider secrets**.
+2. Select **+ Secret**.
+3. Under **Provider**, select your model provider. LangSmith names the secret with the environment variable the provider expects, such as `OPENAI_API_KEY`. Enter your secret in that field.
+
+   If your provider is not listed, leave **Custom** as the provider. Enter the environment variable name your provider expects as the **Key** and your API key as the **Value**.
+4. Select **Save**.
+
+> [!NOTE]
+>
+> If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](model-configurations.md#oauth-client-credentials).
 
 ## 2. Create a prompt
 
@@ -60,9 +68,7 @@ The [Playground](prompt-engineering-concepts.md#playground) makes it possible to
 
 2. In the **Select or create a new dataset** dropdown, click the **+ New** button to create a new dataset.
 
-       <img src="https://mintcdn.com/langchain-5e9cc07a/hVPHwyb3hetqtQnG/langsmith/images/playground-system-prompt-light.png?fit=max&auto=format&n=hVPHwyb3hetqtQnG&q=85&s=b068f4407a83e31403da9a5473960fee" alt="Playground with the edited system prompt and new experiment with the dropdown for creating a new dataset." width="1422" height="743" data-path="langsmith/images/playground-system-prompt-light.png" />
-
-       <img src="https://mintcdn.com/langchain-5e9cc07a/hVPHwyb3hetqtQnG/langsmith/images/playground-system-prompt-dark.png?fit=max&auto=format&n=hVPHwyb3hetqtQnG&q=85&s=a114b1a83bf8d0a074b4ce2759207e4d" alt="Playground with the edited system prompt and new experiment with the dropdown for creating a new dataset." width="1421" height="736" data-path="langsmith/images/playground-system-prompt-dark.png" />
+   ![Playground with the edited system prompt and new experiment with the dropdown for creating a new dataset.](https://mintcdn.com/langchain-5e9cc07a/hVPHwyb3hetqtQnG/langsmith/images/playground-system-prompt-light.png?fit=max\&auto=format\&n=hVPHwyb3hetqtQnG\&q=85\&s=b068f4407a83e31403da9a5473960fee)
 
 3. Add the following examples to the dataset:
 
@@ -82,21 +88,22 @@ The [Playground](prompt-engineering-concepts.md#playground) makes it possible to
 
 1. Select  **Start** on the top right to run your evaluation. This will create an [*experiment*](evaluation-concepts.md#experiment) with a preview in the **New Experiment** table. You can view in full by clicking the experiment name.
 
-       <img src="https://mintcdn.com/langchain-5e9cc07a/3SZlGm2zGXjJWzA5/langsmith/images/full-experiment-view-light.png?fit=max&auto=format&n=3SZlGm2zGXjJWzA5&q=85&s=efa004b4032d0e439a58d08567b75478" alt="Full experiment view of the results that used the example dataset." width="1241" height="671" data-path="langsmith/images/full-experiment-view-light.png" />
-
-       <img src="https://mintcdn.com/langchain-5e9cc07a/3SZlGm2zGXjJWzA5/langsmith/images/full-experiment-view-dark.png?fit=max&auto=format&n=3SZlGm2zGXjJWzA5&q=85&s=34c2921eeadd1b7782ac64b579bcef6a" alt="Full experiment view of the results that used the example dataset." width="1241" height="665" data-path="langsmith/images/full-experiment-view-dark.png" />
+   ![Full experiment view of the results that used the example dataset.](https://mintcdn.com/langchain-5e9cc07a/3SZlGm2zGXjJWzA5/langsmith/images/full-experiment-view-light.png?fit=max\&auto=format\&n=3SZlGm2zGXjJWzA5\&q=85\&s=efa004b4032d0e439a58d08567b75478)
 
 ## Next steps
 
 > [!TIP]
+>
 > To learn more about running experiments in LangSmith, read the [evaluation conceptual guide](evaluation-concepts.md).
 
 * For more details on evaluations, refer to the [Evaluation documentation](evaluation.md).
 * Learn how to [create and manage datasets in the UI](manage-datasets-in-application.md#create-a-dataset-and-add-examples).
 * Learn how to [run an evaluation from the Playground](run-evaluation-from-playground.md).
 
-#### SDK
+**SDK**
+
 > [!TIP]
+>
 > This guide uses prebuilt LLM-as-judge evaluators from the open-source [`openevals`](https://github.com/langchain-ai/openevals) package. OpenEvals includes a set of commonly used evaluators and is a great starting point if you're new to evaluations. If you want greater flexibility in how you evaluate your apps, you can also [define completely custom evaluators](code-evaluator-ui.md).
 
 ## 1. Install dependencies
@@ -122,6 +129,7 @@ npx tsc --init
 ```
 
 > [!NOTE]
+>
 > If you are using `yarn` as your package manager, you will also need to manually install `@langchain/core` as a peer dependency of `openevals`. This is not required for LangSmith evals in general, you may define evaluators [using arbitrary custom code](code-evaluator-ui.md).
 
 ## 2. Set up environment variables
@@ -141,6 +149,7 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
 ```
 
 > [!NOTE]
+>
 > If you're using Anthropic, use the [Anthropic wrapper](trace-anthropic.md) to trace your calls. For other providers, use [the traceable wrapper](annotate-code.md#use-%40traceable-%2F-traceable).
 
 ## 3. Create a dataset
@@ -155,78 +164,78 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
 **Python**
 
 ```python
-       # dataset.py
-       from langsmith import Client
+   # dataset.py
+   from langsmith import Client
 
-       def main():
-           client = Client()
+   def main():
+       client = Client()
 
-           # Programmatically create a dataset in LangSmith
-           dataset = client.create_dataset(
-               dataset_name="Sample dataset",
-               description="A sample dataset in LangSmith."
-           )
+       # Programmatically create a dataset in LangSmith
+       dataset = client.create_dataset(
+           dataset_name="Sample dataset",
+           description="A sample dataset in LangSmith."
+       )
 
-           # Create examples
-           examples = [
-               {
-                   "inputs": {"question": "Which country is Mount Kilimanjaro located in?"},
-                   "outputs": {"answer": "Mount Kilimanjaro is located in Tanzania."},
-               },
-               {
-                   "inputs": {"question": "What is Earth's lowest point?"},
-                   "outputs": {"answer": "Earth's lowest point is The Dead Sea."},
-               },
-           ]
+       # Create examples
+       examples = [
+           {
+               "inputs": {"question": "Which country is Mount Kilimanjaro located in?"},
+               "outputs": {"answer": "Mount Kilimanjaro is located in Tanzania."},
+           },
+           {
+               "inputs": {"question": "What is Earth's lowest point?"},
+               "outputs": {"answer": "Earth's lowest point is The Dead Sea."},
+           },
+       ]
 
-           # Add examples to the dataset
-           client.create_examples(dataset_id=dataset.id, examples=examples)
-           print("Created dataset:", dataset.name)
+       # Add examples to the dataset
+       client.create_examples(dataset_id=dataset.id, examples=examples)
+       print("Created dataset:", dataset.name)
 
-       if __name__ == "__main__":
-           main()
+   if __name__ == "__main__":
+       main()
 
 ```
 
 **TypeScript**
 
 ```typescript
-       // dataset.ts
-       import { Client } from "langsmith";
+   // dataset.ts
+   import { Client } from "langsmith";
 
-       async function main() {
-       const client = new Client();
+   async function main() {
+   const client = new Client();
 
-       const dataset = await client.createDataset(
-           "Sample dataset",
-           { description: "A sample dataset in LangSmith." }
-       );
+   const dataset = await client.createDataset(
+       "Sample dataset",
+       { description: "A sample dataset in LangSmith." }
+   );
 
-       // Define examples
-       const inputs = [
-           { question: "Which country is Mount Kilimanjaro located in?" },
-           { question: "What is Earth's lowest point?" },
-       ];
-       const outputs = [
-           { answer: "Mount Kilimanjaro is located in Tanzania." },
-           { answer: "Earth's lowest point is The Dead Sea." },
-       ];
+   // Define examples
+   const inputs = [
+       { question: "Which country is Mount Kilimanjaro located in?" },
+       { question: "What is Earth's lowest point?" },
+   ];
+   const outputs = [
+       { answer: "Mount Kilimanjaro is located in Tanzania." },
+       { answer: "Earth's lowest point is The Dead Sea." },
+   ];
 
-       await client.createExamples({
-           datasetId: dataset.id,
-           inputs,
-           outputs,
-       });
+   await client.createExamples({
+       datasetId: dataset.id,
+       inputs,
+       outputs,
+   });
 
-       console.log("Created dataset:", dataset.name);
-       }
+   console.log("Created dataset:", dataset.name);
+   }
 
-       if (require.main === module) {
-       main().catch((e) => {
-           console.error(e);
-           process.exit(1);
-       });
-       }
+   if (require.main === module) {
+   main().catch((e) => {
+       console.error(e);
+       process.exit(1);
+   });
+   }
 ```
 
 2. In your terminal, run the `dataset` file to create the datasets you'll use to evaluate your app:
@@ -234,13 +243,13 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
 **Python**
 
 ```bash
-       python dataset.py
+   python dataset.py
 ```
 
 **TypeScript**
 
 ```bash
-       npx ts-node dataset.ts
+   npx ts-node dataset.ts
 ```
 
    You'll see the following output:
@@ -269,7 +278,7 @@ openai_client = wrappers.wrap_openai(OpenAI())
 # The SDK will automatically send the inputs from the dataset to your target function
 def target(inputs: dict) -> dict:
     response = openai_client.chat.completions.create(
-        model="gpt-5-mini",
+        model="gpt-6-luna",
         messages=[
             {"role": "system", "content": "Answer the following question accurately"},
             {"role": "user", "content": inputs["question"]},
@@ -291,7 +300,7 @@ const openaiClient = wrapOpenAI(new OpenAI());
 async function target(inputs: Record<string, any>): Promise<Record<string, any>> {
   const question = String(inputs.question ?? "");
   const resp = await openaiClient.chat.completions.create({
-    model: "gpt-5-mini",
+    model: "gpt-6-luna",
     messages: [
       { role: "system", content: "Answer the following question accurately" },
       { role: "user", content: question },
@@ -308,6 +317,7 @@ In this step, you’re telling LangSmith how to grade the answers your app produ
 Import a prebuilt evaluation prompt (`CORRECTNESS_PROMPT`) from [`openevals`](https://github.com/langchain-ai/openevals) and a helper that wraps it into an [*LLM-as-judge evaluator*](evaluation-concepts.md#llm-as-judge), which will score the application's output.
 
 > [!NOTE]
+>
 > `CORRECTNESS_PROMPT` is just an f-string with variables for `"inputs"`, `"outputs"`, and `"reference_outputs"`. See [customizing OpenEvals prompts](https://github.com/langchain-ai/openevals#customizing-prompts) for more information.
 
 The evaluator compares:
@@ -333,7 +343,7 @@ openai_client = wrappers.wrap_openai(OpenAI())
 # The SDK will automatically send the inputs from the dataset to your target function
 def target(inputs: dict) -> dict:
     response = openai_client.chat.completions.create(
-        model="gpt-5-mini",
+        model="gpt-6-luna",
         messages=[
             {"role": "system", "content": "Answer the following question accurately"},
             {"role": "user", "content": inputs["question"]},
@@ -367,7 +377,7 @@ const openaiClient = wrapOpenAI(new OpenAI());
 async function target(inputs: Record<string, any>): Promise<Record<string, any>> {
   const question = String(inputs.question ?? "");
   const resp = await openaiClient.chat.completions.create({
-    model: "gpt-5-mini",
+    model: "gpt-6-luna",
     messages: [
       { role: "system", content: "Answer the following question accurately" },
       { role: "user", content: question },
@@ -411,117 +421,117 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
 **Python**
 
 ```python
-       from langsmith import Client, wrappers
-       from openai import OpenAI
-       from openevals.llm import create_llm_as_judge
-       from openevals.prompts import CORRECTNESS_PROMPT
+   from langsmith import Client, wrappers
+   from openai import OpenAI
+   from openevals.llm import create_llm_as_judge
+   from openevals.prompts import CORRECTNESS_PROMPT
 
-       # Wrap the OpenAI client for LangSmith tracing
-       openai_client = wrappers.wrap_openai(OpenAI())
+   # Wrap the OpenAI client for LangSmith tracing
+   openai_client = wrappers.wrap_openai(OpenAI())
 
-       # Define the application logic you want to evaluate inside a target function
-       # The SDK will automatically send the inputs from the dataset to your target function
-       def target(inputs: dict) -> dict:
-           response = openai_client.chat.completions.create(
-               model="gpt-5-mini",
-               messages=[
-                   {"role": "system", "content": "Answer the following question accurately"},
-                   {"role": "user", "content": inputs["question"]},
-               ],
-           )
-           return {"answer": response.choices[0].message.content.strip()}
+   # Define the application logic you want to evaluate inside a target function
+   # The SDK will automatically send the inputs from the dataset to your target function
+   def target(inputs: dict) -> dict:
+       response = openai_client.chat.completions.create(
+           model="gpt-6-luna",
+           messages=[
+               {"role": "system", "content": "Answer the following question accurately"},
+               {"role": "user", "content": inputs["question"]},
+           ],
+       )
+       return {"answer": response.choices[0].message.content.strip()}
 
-       def correctness_evaluator(inputs: dict, outputs: dict, reference_outputs: dict):
-           evaluator = create_llm_as_judge(
-               prompt=CORRECTNESS_PROMPT,
-               model="openai:o3-mini",
-               feedback_key="correctness",
-           )
-           return evaluator(
-               inputs=inputs,
-               outputs=outputs,
-               reference_outputs=reference_outputs
-           )
+   def correctness_evaluator(inputs: dict, outputs: dict, reference_outputs: dict):
+       evaluator = create_llm_as_judge(
+           prompt=CORRECTNESS_PROMPT,
+           model="openai:o3-mini",
+           feedback_key="correctness",
+       )
+       return evaluator(
+           inputs=inputs,
+           outputs=outputs,
+           reference_outputs=reference_outputs
+       )
 
-       # After running the evaluation, a link will be provided to view the results in langsmith
-       def main():
-           client = Client()
-           experiment_results = client.evaluate(
-               target,
-               data="Sample dataset",
-               evaluators=[
-                   correctness_evaluator,
-                   # can add multiple evaluators here
-               ],
-               experiment_prefix="first-eval-in-langsmith",
-               max_concurrency=2,
-           )
-           print(experiment_results)
+   # After running the evaluation, a link will be provided to view the results in langsmith
+   def main():
+       client = Client()
+       experiment_results = client.evaluate(
+           target,
+           data="Sample dataset",
+           evaluators=[
+               correctness_evaluator,
+               # can add multiple evaluators here
+           ],
+           experiment_prefix="first-eval-in-langsmith",
+           max_concurrency=2,
+       )
+       print(experiment_results)
 
-       if __name__ == "__main__":
-           main()
+   if __name__ == "__main__":
+       main()
 ```
 
 **TypeScript**
 
 ```typescript
-       import { evaluate } from "langsmith/evaluation";
-       import { wrapOpenAI } from "langsmith/wrappers/openai";   // helper to wrap OpenAI client
-       import OpenAI from "openai";                              // model provider
-       import { createLLMAsJudge, CORRECTNESS_PROMPT } from "openevals"; // evaluator tools
+   import { evaluate } from "langsmith/evaluation";
+   import { wrapOpenAI } from "langsmith/wrappers/openai";   // helper to wrap OpenAI client
+   import OpenAI from "openai";                              // model provider
+   import { createLLMAsJudge, CORRECTNESS_PROMPT } from "openevals"; // evaluator tools
 
-       const openaiClient = wrapOpenAI(new OpenAI());
+   const openaiClient = wrapOpenAI(new OpenAI());
 
-       async function target(inputs: Record<string, any>): Promise<Record<string, any>> {
-       const question = String(inputs.question ?? "");
-       const resp = await openaiClient.chat.completions.create({
-           model: "gpt-5-mini",
-           messages: [
-           { role: "system", content: "Answer the following question accurately" },
-           { role: "user", content: question },
-           ],
-       });
-       return { answer: resp.choices[0].message.content?.trim() ?? "" };
-       }
+   async function target(inputs: Record<string, any>): Promise<Record<string, any>> {
+   const question = String(inputs.question ?? "");
+   const resp = await openaiClient.chat.completions.create({
+       model: "gpt-6-luna",
+       messages: [
+       { role: "system", content: "Answer the following question accurately" },
+       { role: "user", content: question },
+       ],
+   });
+   return { answer: resp.choices[0].message.content?.trim() ?? "" };
+   }
 
-       const judge = createLLMAsJudge({
-       prompt: CORRECTNESS_PROMPT,
-       model: "openai:o3-mini",
-       feedbackKey: "correctness",
-       });
+   const judge = createLLMAsJudge({
+   prompt: CORRECTNESS_PROMPT,
+   model: "openai:o3-mini",
+   feedbackKey: "correctness",
+   });
 
-       async function correctnessEvaluator(run: {
-       inputs: Record<string, any>;
-       outputs: Record<string, any>;
-       referenceOutputs?: Record<string, any>;
-       }) {
-       return judge({
-           inputs: run.inputs,
-           outputs: run.outputs,
-           // OpenEvals expects snake_case here:
-           reference_outputs: run.referenceOutputs,
-       });
-       }
+   async function correctnessEvaluator(run: {
+   inputs: Record<string, any>;
+   outputs: Record<string, any>;
+   referenceOutputs?: Record<string, any>;
+   }) {
+   return judge({
+       inputs: run.inputs,
+       outputs: run.outputs,
+       // OpenEvals expects snake_case here:
+       reference_outputs: run.referenceOutputs,
+   });
+   }
 
-       async function main() {
-       const datasetName = process.env.DATASET_NAME ?? "Sample dataset";
+   async function main() {
+   const datasetName = process.env.DATASET_NAME ?? "Sample dataset";
 
-       const results = await evaluate(target, {
-           data: datasetName,
-           evaluators: [correctnessEvaluator],
-           experimentPrefix: "first-eval-in-langsmith",
-           maxConcurrency: 2,
-       });
+   const results = await evaluate(target, {
+       data: datasetName,
+       evaluators: [correctnessEvaluator],
+       experimentPrefix: "first-eval-in-langsmith",
+       maxConcurrency: 2,
+   });
 
-       console.log(results);
-       }
+   console.log(results);
+   }
 
-       if (require.main === module) {
-       main().catch((e) => {
-           console.error(e);
-           process.exit(1);
-       });
-       }
+   if (require.main === module) {
+   main().catch((e) => {
+       console.error(e);
+       process.exit(1);
+   });
+   }
 ```
 
 2. Run your evaluator:
@@ -529,13 +539,13 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
 **Python**
 
 ```bash
-       python eval.py
+   python eval.py
 ```
 
 **TypeScript**
 
 ```bash
-       npx ts-node eval.ts
+   npx ts-node eval.ts
 ```
 
 3. You'll receive a link to view the evaluation results and metadata for the experiment results:
@@ -548,9 +558,7 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
 
 4. Follow the link in the output of your evaluation run to access the **Datasets & Experiments** page in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluation-quickstart), and explore the results of the experiment. This will direct you to the created experiment with a table showing the **Inputs**, **Reference Output**, and **Outputs**. You can select a dataset to open an expanded view of the results.
 
-       <img src="https://mintcdn.com/langchain-5e9cc07a/DDMvkseOvrCjx9sx/langsmith/images/experiment-results-link-light.png?fit=max&auto=format&n=DDMvkseOvrCjx9sx&q=85&s=94341c15219e46866589140d87efb8f6" alt="Experiment results in the UI after following the link." width="1816" height="464" data-path="langsmith/images/experiment-results-link-light.png" />
-
-       <img src="https://mintcdn.com/langchain-5e9cc07a/DDMvkseOvrCjx9sx/langsmith/images/experiment-results-link-dark.png?fit=max&auto=format&n=DDMvkseOvrCjx9sx&q=85&s=d741b33219f7d130e80e1dfb7e743ac6" alt="Experiment results in the UI after following the link." width="1567" height="455" data-path="langsmith/images/experiment-results-link-dark.png" />
+   ![Experiment results in the UI after following the link.](https://mintcdn.com/langchain-5e9cc07a/DDMvkseOvrCjx9sx/langsmith/images/experiment-results-link-light.png?fit=max\&auto=format\&n=DDMvkseOvrCjx9sx\&q=85\&s=94341c15219e46866589140d87efb8f6)
 
 ## Next steps
 
@@ -559,12 +567,10 @@ Here are some topics you might want to explore next:
 * [Evaluation concepts](evaluation-concepts.md) provides descriptions of the key terminology for evaluations in LangSmith.
 * [OpenEvals README](https://github.com/langchain-ai/openevals) to see all available prebuilt evaluators and how to customize them.
 * [Define custom evaluators](code-evaluator-ui.md).
-* [Python](https://docs.smith.langchain.com/reference/python/reference) or [TypeScript](https://docs.smith.langchain.com/reference/js) SDK references for comprehensive descriptions of every class and function.
+* [Python](https://reference.langchain.com/python/langsmith) or [TypeScript](https://reference.langchain.com/javascript/langsmith) SDK references for comprehensive descriptions of every class and function.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

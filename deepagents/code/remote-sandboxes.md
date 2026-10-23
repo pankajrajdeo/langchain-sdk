@@ -14,13 +14,16 @@ Deep Agents Code uses the [sandbox as tool](../sandboxes.md#sandbox-as-tool-patt
 
 For a deeper look at sandbox architecture, integration patterns, and security best practices, see [Sandboxes](../sandboxes.md).
 
-### Install provider dependency
+**1. Install provider dependency**
+
 Each built-in provider ships as an optional extra. Install one from within a session with `/install`, or from the shell with `dcode --install`. Third-party providers such as E2B install as packages with the `--package` flag:
 
-#### LangSmith
+**LangSmith**
+
 Included by default when installing `deepagents-code`. No extra installation needed.
 
-#### AgentCore
+**AgentCore**
+
 **In session**
 
 ```txt
@@ -33,7 +36,8 @@ Included by default when installing `deepagents-code`. No extra installation nee
 dcode --install agentcore
 ```
 
-#### Daytona
+**Daytona**
+
 **In session**
 
 ```txt
@@ -46,7 +50,8 @@ dcode --install agentcore
 dcode --install daytona
 ```
 
-#### Modal
+**Modal**
+
 **In session**
 
 ```txt
@@ -59,7 +64,8 @@ dcode --install daytona
 dcode --install modal
 ```
 
-#### Runloop
+**Runloop**
+
 **In session**
 
 ```txt
@@ -72,7 +78,8 @@ dcode --install modal
 dcode --install runloop
 ```
 
-#### Vercel
+**Vercel**
+
 **In session**
 
 ```txt
@@ -85,7 +92,8 @@ dcode --install runloop
 dcode --install vercel
 ```
 
-#### E2B
+**E2B**
+
 E2B is a [third-party provider](#third-party-providers) published by the `langchain-e2b` package. Install it as a package, not a `deepagents-code` extra:
 
 **In session**
@@ -102,13 +110,16 @@ dcode --install langchain-e2b --package
 
 To install support for every built-in provider at once, use the `all-sandboxes` extra: `/install all-sandboxes` in a session, or `dcode --install all-sandboxes` from the shell. The `all-sandboxes` extra does not include third-party providers such as E2B.
 
-### Set provider credentials
-#### LangSmith
+**2. Set provider credentials**
+
+**LangSmith**
+
 ```bash
 export LANGSMITH_API_KEY="your-key"
 ```
 
-#### AgentCore
+**AgentCore**
+
 ```bash
 export AWS_ACCESS_KEY_ID="your-key"
 export AWS_SECRET_ACCESS_KEY="your-secret"
@@ -118,22 +129,26 @@ export AWS_REGION="us-west-2"
 export AWS_SESSION_TOKEN="session-token"
 ```
 
-#### Daytona
+**Daytona**
+
 ```bash
 export DAYTONA_API_KEY="your-key"
 ```
 
-#### Modal
+**Modal**
+
 ```bash
 modal setup
 ```
 
-#### Runloop
+**Runloop**
+
 ```bash
 export RUNLOOP_API_KEY="your-key"
 ```
 
-#### Vercel
+**Vercel**
+
 ```bash
 export VERCEL_TOKEN="your-token"
 export VERCEL_PROJECT_ID="your-project-id"
@@ -142,43 +157,52 @@ export VERCEL_TEAM_ID="your-team-id"
 
 When running on Vercel, [OIDC](https://vercel.com/docs/oidc) credentials are used automatically instead.
 
-#### E2B
+**E2B**
+
 ```bash
 export E2B_API_KEY="your-key"
 ```
 
-### Run Deep Agents Code with a sandbox
-#### LangSmith
+**3. Run Deep Agents Code with a sandbox**
+
+**LangSmith**
+
 ```bash
 dcode --sandbox langsmith
 ```
 
-#### AgentCore
+**AgentCore**
+
 ```bash
 dcode --sandbox agentcore
 ```
 
-#### Daytona
+**Daytona**
+
 ```bash
 dcode --sandbox daytona
 ```
 
-#### Modal
+**Modal**
+
 ```bash
 dcode --sandbox modal
 ```
 
-#### Runloop
+**Runloop**
+
 ```bash
 dcode --sandbox runloop
 ```
 
-#### Vercel
+**Vercel**
+
 ```bash
 dcode --sandbox vercel
 ```
 
-#### E2B
+**E2B**
+
 ```bash
 dcode --sandbox e2b
 ```
@@ -189,7 +213,7 @@ dcode --sandbox e2b
 | - | - |
 | `--sandbox TYPE` | Sandbox provider to use. Built-ins: `langsmith`, `agentcore`, `daytona`, `modal`, `runloop`, `vercel` (default: `none`). [Third-party](#third-party-providers) and [config-declared](#config-declared-providers) providers are also accepted. Pass `--sandbox` with no value to use `[sandboxes].default` from your config |
 | `--sandbox-id ID` | Reuse an existing sandbox by ID instead of creating a new one. Skips creation and cleanup. Only for providers that support reattaching by ID. Refer to your sandbox documentation for more |
-| `--sandbox-snapshot-name NAME` | Use or create a sandbox snapshot. Supported by `langsmith` and `runloop` (and any third-party provider that advertises snapshot support). Cannot be combined with `--sandbox-id` |
+| `--sandbox-snapshot-name NAME` | Use or create a sandbox snapshot. Supported by `langsmith`, `daytona`, and `runloop` (and any third-party provider that advertises snapshot support). Cannot be combined with `--sandbox-id` |
 | `--sandbox-setup PATH` | Path to a setup script to run inside the sandbox upon creation |
 
 Each provider exposes a default working directory inside the sandbox. Setup scripts and `execute` commands run from this directory unless overridden:
@@ -210,6 +234,9 @@ Examples:
 # Create a new LangSmith sandbox
 dcode --sandbox langsmith
 
+# Boot from a named snapshot (langsmith, daytona, or runloop)
+dcode --sandbox daytona --sandbox-snapshot-name my-env
+
 # Reuse an existing sandbox (skips creation and cleanup)
 dcode --sandbox runloop --sandbox-id dbx_abc123
 
@@ -221,6 +248,7 @@ dcode --sandbox
 ```
 
 > [!NOTE]
+>
 > Because `--sandbox` accepts an optional value, keep the bare form **last** on the command line. Otherwise a following argument (e.g. `dcode --sandbox agents`) is consumed as the flag's value. Pass an explicit provider name to avoid ambiguity.
 
 ## Pluggable providers
@@ -252,48 +280,46 @@ dcode --sandbox e2b
 
 If you pass a `--sandbox` name that is not installed or declared, Deep Agents Code lists the available providers and explains how to install or configure the missing one.
 
-<details>
-<summary>Publishing a sandbox provider</summary>
-
-To distribute a provider so users can run `dcode --sandbox <name>` after installing your package, implement a `SandboxProvider` subclass and register it under the `deepagents_code.sandbox_providers` entry-point group.
-
-Override the `metadata` property so Deep Agents Code can surface your working directory and capability flags without instantiating the provider:
-
+> **Publishing a sandbox provider**
+>
+> To distribute a provider so users can run `dcode --sandbox <name>` after installing your package, implement a `SandboxProvider` subclass and register it under the `deepagents_code.sandbox_providers` entry-point group.
+>
+> Override the `metadata` property so Deep Agents Code can surface your working directory and capability flags without instantiating the provider:
+>
 ```python
-from deepagents_code.integrations.sandbox_provider import (
-    SandboxInstallHint,
-    SandboxProvider,
-    SandboxProviderMetadata,
-)
-
-class AcmeProvider(SandboxProvider):
-    @property
-    def metadata(self) -> SandboxProviderMetadata:
-        return SandboxProviderMetadata(
-            name="acme",
-            working_dir="/workspace",
-            install=SandboxInstallHint(kind="package", name="acme-dcode-sandbox"),
-            supports_sandbox_id=True,
-            supports_snapshot_name=False,
-        )
-
-    def get_or_create(self, *, sandbox_id=None, **kwargs):
-        ...  # return a SandboxBackendProtocol
-
-    def delete(self, *, sandbox_id, **kwargs):
-        ...
+> from deepagents_code.integrations.sandbox_provider import (
+>     SandboxInstallHint,
+>     SandboxProvider,
+>     SandboxProviderMetadata,
+> )
+>
+>
+> class AcmeProvider(SandboxProvider):
+>     @property
+>     def metadata(self) -> SandboxProviderMetadata:
+>         return SandboxProviderMetadata(
+>             name="acme",
+>             working_dir="/workspace",
+>             install=SandboxInstallHint(kind="package", name="acme-dcode-sandbox"),
+>             supports_sandbox_id=True,
+>             supports_snapshot_name=False,
+>         )
+>
+>     def get_or_create(self, *, sandbox_id=None, **kwargs):
+>         ...  # return a SandboxBackendProtocol
+>
+>     def delete(self, *, sandbox_id, **kwargs):
+>         ...
 ```
-
-Implement `get_or_create` and `delete`; async callers are handled by the base class. Then register the entry point in your package's `pyproject.toml`:
-
+>
+> Implement `get_or_create` and `delete`; async callers are handled by the base class. Then register the entry point in your package's `pyproject.toml`:
+>
 ```toml
-[project.entry-points."deepagents_code.sandbox_providers"]
-acme = "acme_sandbox.provider:AcmeProvider"
+> [project.entry-points."deepagents_code.sandbox_providers"]
+> acme = "acme_sandbox.provider:AcmeProvider"
 ```
-
-If you omit the `metadata` property, a generic default (`/workspace`, no snapshot support) is used.
-
-</details>
+>
+> If you omit the `metadata` property, a generic default (`/workspace`, no snapshot support) is used.
 
 ### Config-declared providers
 
@@ -320,27 +346,34 @@ supports_snapshot_name = false
 region = "us-east-1"
 ```
 
-#### `class_path` — `string`
+**class\_path** `string`
+
 Fully-qualified provider class in `module.path:ClassName` format. Deep Agents Code imports and instantiates this class for the provider.
 
-#### `working_dir` — `string`
+**working\_dir** `string`
+
 Default working directory inside the sandbox. Defaults to `/workspace`.
 
-#### `package` — `string`
+**package** `string`
+
 Package name suggested in error messages when the provider's dependencies are missing.
 
-#### `supports_sandbox_id` — `boolean`
+**supports\_sandbox\_id** `boolean`
+
 Whether `--sandbox-id` reattach is allowed for this provider. Defaults to `true`.
 
-#### `supports_snapshot_name` — `boolean`
+**supports\_snapshot\_name** `boolean`
+
 Whether `--sandbox-snapshot-name` is allowed for this provider. Defaults to `false`.
 
-#### `params` — `object`
+**params** `object`
+
 Extra keyword arguments forwarded to the provider's `get_or_create()`.
 
 A config entry that reuses a built-in provider's name **overrides** that built-in while keeping its dependency pre-flight check. Malformed entries are skipped with a warning rather than crashing startup.
 
 > [!WARNING]
+>
 > Setting `class_path` causes Deep Agents Code to import and run arbitrary Python from the named module—module-level code executes on import. This is the same trust model as the model [`class_path`](config-file.md#arbitrary-providers): you control your own machine and your own config file.
 
 ## Setup scripts
@@ -367,12 +400,11 @@ source ~/.bashrc
 Deep Agents Code expands `${VAR}` references in setup scripts using your local environment variables. Store secrets in a local `.env` file for the setup script to access.
 
 > [!WARNING]
+>
 > Sandboxes isolate code execution, but agents remain vulnerable to prompt injection with untrusted inputs. Use human-in-the-loop approval, short-lived secrets, and trusted setup scripts only. See [Security considerations](../sandboxes.md#security-considerations) for details.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/remote-sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/remote-sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

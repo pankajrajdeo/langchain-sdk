@@ -7,7 +7,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 
 # reference/python/langchain/agents/middleware
 
-27 pages here, 460 pages including subdirectories.
+27 pages here, 471 pages including subdirectories.
 
 ## Directories
 
@@ -17,7 +17,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [_trace_policy/](_trace_policy/_index.md) - 1 page
 - [context_editing/](context_editing/_index.md) - 18 pages
 - [file_search/](file_search/_index.md) - 9 pages
-- [human_in_the_loop/](human_in_the_loop/_index.md) - 44 pages
+- [human_in_the_loop/](human_in_the_loop/_index.md) - 52 pages
 - [internal_call_transformer/](internal_call_transformer/_index.md) - 7 pages
 - [model_call_limit/](model_call_limit/_index.md) - 18 pages
 - [model_fallback/](model_fallback/_index.md) - 6 pages
@@ -25,7 +25,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [pii/](pii/_index.md) - 22 pages
 - [provider_tool_search/](provider_tool_search/_index.md) - 7 pages
 - [shell_tool/](shell_tool/_index.md) - 33 pages
-- [summarization/](summarization/_index.md) - 23 pages
+- [summarization/](summarization/_index.md) - 26 pages
 - [todo/](todo/_index.md) - 19 pages
 - [tool_call_limit/](tool_call_limit/_index.md) - 20 pages
 - [tool_emulator/](tool_emulator/_index.md) - 9 pages

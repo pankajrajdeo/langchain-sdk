@@ -19,6 +19,7 @@ If you don't have an Azure account, you can [create a free account](https://azur
 You'll first need to install the [`@langchain/azure-cosmosdb`](https://www.npmjs.com/package/@langchain/azure-cosmosdb) package:
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -32,6 +33,7 @@ You'll also need to have an Azure Cosmos DB for NoSQL instance running. You can 
 Once you have your instance running, make sure you have the connection string. If you are using Managed Identity, you need to have the endpoint. You can find them in the Azure Portal, under the "Settings / Keys" section of your instance.
 
 > [!NOTE]
+>
 > **When using Azure Managed Identity and role-based access control, you must ensure that the database and container have been created beforehand. RBAC does not provide permissions to create databases and containers. You can get more information about the permission model in the [Azure Cosmos DB documentation](https://learn.microsoft.com/azure/cosmos-db/how-to-setup-rbac#permission-model).**
 
 ## Usage example
@@ -90,8 +92,6 @@ console.log(response2);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llm_caching/azure_cosmosdb_nosql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llm_caching/azure_cosmosdb_nosql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

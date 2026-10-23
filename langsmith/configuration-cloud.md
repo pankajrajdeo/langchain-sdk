@@ -59,7 +59,8 @@ For more information on configuration in [LangGraph](../langgraph/overview.md), 
 
 **Select SDK or UI for your workflow:**
 
-#### SDK
+**SDK**
+
 ## Create an assistant
 
 Use the [`assistants.create`](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.AssistantsClient.create) method to create a new assistant. This method requires:
@@ -144,6 +145,7 @@ The API returns an assistant object containing:
 The `assistant_id` (a UUID like `"62e209ca-9154-432a-b9e9-2d75c7a9219b"`) uniquely identifies this assistant configuration. You'll use this ID when running your graph to specify which configuration to apply.
 
 > [!NOTE]
+>
 > **Graph ID vs Assistant ID**
 >
 > When creating an assistant, you specify a **graph ID** (graph name like `"agent"`). This returns an **assistant ID** (UUID like `"62e209ca..."`). You can use either when running your graph:
@@ -266,23 +268,25 @@ Receiving event of type: updates
 ```
 
 > [!NOTE]
+>
 > **Using graph ID vs assistant ID**
 >
 > You can pass either a **graph ID** or **assistant ID** when running your graph:
 >
-> ```python
+```python
 > # Option 1: Use graph ID to get the default assistant
 > client.runs.stream(thread_id, "agent", input=input)
 >
 > # Option 2: Use assistant ID (UUID) for a specific configuration
 > client.runs.stream(thread_id, "62e209ca-9154-432a-b9e9-2d75c7a9219b", input=input)
-> ```
+```
 
 ## Create a new version for your assistant
 
 Use the [`assistants.update`](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.AssistantsClient.update) method to create a new version of an assistant.
 
 > [!WARNING]
+>
 > **Updates require full configuration**
 >
 > You must provide the **entire** configuration when updating. The update endpoint creates new versions from scratch and does not merge with previous versions. Include all configuration fields you want to retain.
@@ -379,7 +383,8 @@ curl --request POST \
 
 After changing the active version, all runs using this assistant ID will use the specified version's configuration.
 
-#### UI
+**UI**
+
 ## Create an assistant
 
 You can create assistants from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-configuration-cloud):
@@ -408,14 +413,16 @@ This opens [Studio](studio.md) with the selected assistant. When you submit an i
 
 To update an assistant and create a new version from the UI, you can use either the Assistants tab or Studio. Either method creates a new version and sets it as the active version:
 
-#### Assistants tab
+**Assistants tab**
+
 1. Navigate to your deployment and select the **Assistants** tab.
 2. Find the assistant you want to edit.
 3. Click **Edit**.
 4. Modify the assistant's name, description, or configuration.
 5. Save your changes.
 
-#### Studio
+**Studio**
+
 1. Open Studio for the assistant.
 2. Click **Manage Assistants**.
 3. Edit the assistant's configuration.
@@ -433,12 +440,11 @@ To set a previous version as active from Studio:
 This updates the assistant to use the selected version for all future runs.
 
 > [!WARNING]
+>
 > Deleting an assistant will delete **all** of its versions. There is currently no way to delete a single version. To skip a version, simply set a different version as active.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configuration-cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configuration-cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

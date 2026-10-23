@@ -13,6 +13,7 @@ Language models have a token limit. You should not exceed the token limit. When 
 ## tiktoken
 
 > [!NOTE]
+>
 > **[tiktoken](https://github.com/openai/tiktoken) is a fast `BPE` tokenizer created by `OpenAI`.**
 
 We can use `tiktoken` to estimate tokens used. It will probably be more accurate for the OpenAI models.
@@ -91,6 +92,7 @@ Some written languages (e.g. Chinese and Japanese) have characters which encode 
 ## spaCy
 
 > [!NOTE]
+>
 > [spaCy](https://spacy.io/) is an open-source software library for advanced natural language processing, written in the programming languages Python and Cython.
 
 LangChain implements splitters based on the [spaCy tokenizer](https://spacy.io/api/tokenizer).
@@ -202,6 +204,7 @@ lorem
 ## NLTK
 
 > [!NOTE]
+>
 > **[The Natural Language Toolkit](https://en.wikipedia.org/wiki/Natural_Language_Toolkit), or more commonly [NLTK](https://www.nltk.org/), is a suite of libraries and programs for symbolic and statistical natural language processing (NLP) for English written in the Python programming language.**
 
 Rather than just splitting on "\n\n", we can use `NLTK` to split based on [NLTK tokenizers](https://www.nltk.org/api/nltk.tokenize.html).
@@ -269,6 +272,7 @@ Groups of citizens blocking tanks with their bodies.
 ## KoNLPY
 
 > [!NOTE]
+>
 > [KoNLPy: Korean NLP in Python](https://konlpy.org/en/latest/) is a Python package for natural language processing (NLP) of the Korean language.
 
 Token splitting involves the segmentation of text into smaller, more manageable units called tokens. These tokens are often words, phrases, symbols, or other meaningful elements crucial for further processing and analysis. In languages like English, token splitting typically involves separating words by spaces and punctuation marks. The effectiveness of token splitting largely depends on the tokenizer's understanding of the language structure, ensuring the generation of meaningful tokens. Since tokenizers designed for the English language are not equipped to understand the unique semantic structures of other languages, such as Korean, they cannot be effectively used for Korean language processing.
@@ -380,8 +384,6 @@ With a duty to one another to the American people to the Constitution.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/split_by_token.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/split_by_token.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -15,11 +15,13 @@ This guide covers two approaches to tracing with the [REST API](smith-api-ref.md
 For a full list of endpoints and request/response schemas, refer to the [API reference](smith-api-ref.md).
 
 > [!WARNING]
-> We strongly recommend using the [Python](smith-python-sdk.md) or [TypeScript](smith-js-ts-sdk.md) SDK to send traces to LangSmith instead of the REST API directly. The SDKs include batching and background sending optimizations that prevent tracing from affecting your application's performance.
+>
+> We strongly recommend using the [Python](https://docs.langchain.com/langsmith/smith-python-sdk.md) or [TypeScript](https://docs.langchain.com/langsmith/smith-js-ts-sdk.md) SDK to send traces to LangSmith instead of the REST API directly. The SDKs include batching and background sending optimizations that prevent tracing from affecting your application's performance.
 >
 > If you cannot use an SDK, note that sending traces synchronously may impact application performance.
 
 > [!NOTE]
+>
 > We recommend using **UUID v7** for run IDs. UUIDv7 embeds a timestamp, which preserves correct time-ordering of runs in a trace. Use `uuid7()` from the LangSmith SDK to generate them, or see [Specify a custom run ID](annotate-code.md#specify-a-custom-run-id) for more details.
 
 ## Basic tracing
@@ -27,6 +29,7 @@ For a full list of endpoints and request/response schemas, refer to the [API ref
 The simplest way to log runs is via the `POST /runs` and `PATCH /runs` endpoints. This approach requires minimal information to establish the trace hierarchy.
 
 > [!NOTE]
+>
 > When using the LangSmith REST API, provide your [API key](create-account-api-key.md) in the request headers as `"x-api-key"`.
 >
 > If your API key is linked to multiple workspaces, specify the workspace in the header with `"x-tenant-id"`.
@@ -101,7 +104,7 @@ post_run(child_run_id, "OpenAI Call", "llm", {"messages": messages}, parent_run_
 # Generate a completion
 client = openai.Client()
 chat_completion = client.chat.completions.create(
-    model="gpt-5.4-mini",
+    model="gpt-6-luna",
     messages=messages
 )
 
@@ -321,8 +324,6 @@ batch_ingest_runs(api_url, api_key, patches=patches)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -11,6 +11,7 @@ tags: [docs, langchain, mcp, tools]
 > Load MCP tools into LangChain agents, control their execution, and handle server results and requests.
 
 > [!NOTE]
+>
 > The `langchain.mcp` namespace requires `langchain[mcp]>=1.4.0` and is in beta. The API may change.
 
 [`MCPAdapter`](https://reference.langchain.com/python/langchain/mcp/adapter/MCPAdapter) bridges MCP servers and LangChain agents: it discovers the tools a server advertises and adapts them into standard LangChain tools. Pass the tools from `list_tools()` to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) as you would any other LangChain tool.
@@ -41,8 +42,9 @@ async def run_agent(server) -> dict:
         )
 ```
 
-#### [View example trace](https://smith.langchain.com/public/025418ad-e7bc-43a3-b700-d1a78b3a4856/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/cdf13577-f7e0-46d5-8399-abfc6400c82b/r)**
+>
+> Open a public LangSmith run for this example.
 
 For general guidance on defining, binding, and using LangChain tools, see [Tools](../tools.md). For several MCP servers and their namespaced tool catalogs, see [Connections](connections.md#multiple-servers).
 
@@ -83,6 +85,10 @@ async def access_multimodal_tool_content(server) -> dict:
     return result
 ```
 
+> **[View example trace](https://smith.langchain.com/public/3102a6bc-697f-42a5-88c7-100c9b9dbd25/r)**
+>
+> Open a public LangSmith run for this example.
+
 ### Structured content
 
 When a tool returns structured content, the adapter attaches it to the [`ToolMessage`](https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage) as an artifact rather than folding it into the model-visible text. Run the agent, then read the `artifact` from the [`ToolMessage`](https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage) instances in the result:
@@ -109,6 +115,10 @@ async def run_agent_structured(server) -> dict:
 
     return result
 ```
+
+> **[View example trace](https://smith.langchain.com/public/339c6cf0-3f24-468e-a465-e514010915d1/r)**
+>
+> Open a public LangSmith run for this example.
 
 The artifact is an `MCPToolArtifact`, whose `structured_content` field holds the tool result's `structuredContent`. A tool that returns no structured content leaves `artifact` as `None`.
 
@@ -195,16 +205,13 @@ Reading annotations lets you gate a tool based on what the server declares about
 Read the destructive hint from metadata once during tool discovery. Then give the human-in-the-loop configuration a `when` predicate that receives each pending tool call and returns whether the call needs approval:
 
 ```python
-from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
 from langchain.agents.middleware.human_in_the_loop import InterruptOnConfig
-from langchain.mcp import MCPAdapter
 from langchain.tools import BaseTool
 from langchain.tools.tool_node import ToolCallRequest
-from langgraph.checkpoint.memory import InMemorySaver
 
 def is_destructive(tool: BaseTool) -> bool:
-    """Read the MCP destructive hint from the adapter's tool metadata."""
+    """Read the MCP destructive hint off the adapter's tool metadata."""
     annotations = (
         (tool.metadata or {}).get("mcp", {}).get("tool", {}).get("annotations", {})
     )
@@ -214,12 +221,14 @@ async def gate_destructive_tools(server):
     async with MCPAdapter(server) as adapter:
         tools = await adapter.list_tools()
 
-        # Read the hint once, then apply the same predicate to every tool call.
+        # Read the destructive hint from metadata once, then let a callable
+        # decide per call. One config covers whatever destructive tools a
+        # server exposes, without hardcoding tool names.
         destructive = {tool.name for tool in tools if is_destructive(tool)}
-    
+
         def needs_approval(request: ToolCallRequest) -> bool:
             return request.tool_call["name"] in destructive
-    
+
         gate = InterruptOnConfig(
             allowed_decisions=["approve", "reject"], when=needs_approval
         )
@@ -272,12 +281,14 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
 
 async def book_with_elicitation(server) -> dict:
-    # When a server needs input mid-call, the adapter surfaces the question
-    # as a LangGraph interrupt.
+    # Elicitation is handled automatically: when a server needs input mid-call,
+    # the adapter surfaces the question as a LangGraph `interrupt()`, so the
+    # person already reviewing the agent's work answers it and the run resumes.
     async with MCPAdapter(server) as adapter:
         tools = await adapter.list_tools()
 
-        # A checkpointer saves the interrupted run so it can resume.
+        # Resuming a paused run needs persistence, so the interrupted run has
+        # somewhere to wait.
         agent = create_agent("claude-sonnet-5", tools, checkpointer=InMemorySaver())
         config: Any = {"configurable": {"thread_id": "booking-1"}}
 
@@ -287,8 +298,8 @@ async def book_with_elicitation(server) -> dict:
         [interrupt] = paused["__interrupt__"]
         [question] = interrupt.value["requests"]
 
-        # Answers are keyed by the server's own request key.
-        # Use `decline` or `cancel` to refuse the request.
+        # Answers are keyed by the server's own request key, so nothing has to
+        # be tracked across the pause. `decline` or `cancel` would refuse.
         answer = {"action": "accept", "content": {"date": "2026-09-14"}}
         return await agent.ainvoke(
             Command(resume={"responses": {question["key"]: answer}}), config
@@ -300,6 +311,7 @@ Elicitation is on by default. The adapter advertises the capability and drives t
 Resume with `Command(resume={"responses": {key: answer}})`. The interrupt payload and answer types live in `langchain.mcp.elicitation`.
 
 > [!NOTE]
+>
 > Resuming reruns the tool from the beginning. Any work performed before the server asks for input can repeat. Make that work safe to repeat without duplicating side effects.
 
 Each answer uses one of these actions:
@@ -313,6 +325,7 @@ The adapter forwards the answer to the server, which decides how the tool call f
 Only elicitation is answered this way. A server that instead asks for [sampling](https://modelcontextprotocol.io/specification/2025-06-18/client/sampling) or [roots](https://modelcontextprotocol.io/specification/2025-06-18/client/roots) raises an error, because the modern, sessionless protocol has no live back-channel for those requests. See [Sampling and roots](../../migrate/langchain-mcp-adapters.md#sampling-and-roots).
 
 > [!NOTE]
+>
 > Interrupt-driven elicitation answers a server that returns its request as an `InputRequiredResult`. A server that only pushes elicitation over a legacy handshake session cannot be answered this way.
 
 ## See also
@@ -335,8 +348,6 @@ Only elicitation is answered this way. A server that instead asks for [sampling]
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -11,6 +11,7 @@ tags: [docs, langsmith, self-host-external-postgres]
 LangSmith uses a PostgreSQL database as the primary data store for transactional workloads and operational data (almost everything besides runs). By default, LangSmith Self-Hosted will use an internal PostgreSQL database. However, you can configure LangSmith to use an external PostgreSQL database. By configuring an external PostgreSQL database, you can more easily manage backups, scaling, and other operational tasks for your database.
 
 > [!TIP]
+>
 > **If you're using a managed PostgreSQL service**, we recommend:
 >
 > * [Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html) (AWS)
@@ -103,6 +104,7 @@ To validate the PostgreSQL server certificate:
 * Use `sslmode=require` or `sslmode=verify-full`, as well as `sslrootcert=system` to your connection URL.
 
 > [!WARNING]
+>
 > Mount a custom CA only when your PostgreSQL server uses an internal or private CA. Publicly trusted CAs do not require this configuration.
 
 **Helm (server TLS)**
@@ -201,10 +203,12 @@ If you need more granular control, add the `fsGroup` to each pod's security cont
 As of LangSmith helm chart version **0.12.34**, we support IAM authentication for PostgreSQL. This allows you to use cloud provider workload identity instead of static passwords.
 
 > [!WARNING]
+>
 > IAM authentication only handles connection authentication. You may still need to run SQL commands in your database to create the IAM user/role and grant it the necessary permissions and privileges to access the LangSmith schema.
 
-#### AWS
-<a id="amazon-rds" />
+**AWS**
+
+<a id="amazon-rds"></a>
 
 ### Amazon RDS IAM authentication
 
@@ -218,6 +222,7 @@ Amazon RDS supports [IAM database authentication](https://docs.aws.amazon.com/Am
 #### Configuration
 
 > [!WARNING]
+>
 > If you switch to a new IAM user after LangSmith has already run initial migrations, you may need to transfer ownership of existing tables to the new IAM user. Otherwise, migrations may fail due to insufficient privileges on tables owned by the previous user.
 
 Set the `iamAuthProvider` to `"aws"` and provide an IAM-compatible connection string (without password):
@@ -242,6 +247,7 @@ stringData:
 ```
 
 > [!WARNING]
+>
 > IAM authentication requires TLS. You must include `sslmode=require` in your connection string.
 
 #### Required annotations
@@ -253,6 +259,7 @@ You must apply the ServiceAccount annotations required by AWS IRSA to all LangSm
 **Jobs:** `migrations`, `authBootstrap`, `feedbackConfigMigration`, `feedbackDataMigration`, `e2eTest`
 
 > [!NOTE]
+>
 > All jobs listed above (except `e2eTest`) use the `backend` service account. The `e2eTest` job uses its own service account and requires separate annotation configuration.
 
 Example configuration for the backend service:
@@ -286,8 +293,9 @@ ingestQueue:
 
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
-#### GCP
-<a id="google-cloud-sql" />
+**GCP**
+
+<a id="google-cloud-sql"></a>
 
 ### Cloud SQL IAM authentication
 
@@ -301,6 +309,7 @@ Cloud SQL supports [IAM authentication](https://cloud.google.com/sql/docs/postgr
 #### Configuration
 
 > [!WARNING]
+>
 > If you switch to a new IAM user after LangSmith has already run initial migrations, you may need to transfer ownership of existing tables to the new IAM user. Otherwise, migrations may fail due to insufficient privileges on tables owned by the previous user.
 
 Set the `iamAuthProvider` to `"gcp"` and provide an IAM-compatible connection string (without password):
@@ -325,6 +334,7 @@ stringData:
 ```
 
 > [!WARNING]
+>
 > IAM authentication requires TLS. You must include `sslmode=require` in your connection string.
 
 #### Required annotations
@@ -336,6 +346,7 @@ You must apply the ServiceAccount annotations required by GCP Workload Identity 
 **Jobs:** `migrations`, `authBootstrap`, `feedbackConfigMigration`, `feedbackDataMigration`, `e2eTest`
 
 > [!NOTE]
+>
 > All jobs listed above (except `e2eTest`) use the `backend` service account. The `e2eTest` job uses its own service account and requires separate annotation configuration.
 
 Example configuration for the backend service:
@@ -369,8 +380,9 @@ ingestQueue:
 
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
-#### Azure
-<a id="azure-database-for-postgresql" />
+**Azure**
+
+<a id="azure-database-for-postgresql"></a>
 
 ### Azure Database for PostgreSQL with Microsoft Entra authentication
 
@@ -384,6 +396,7 @@ Azure Database for PostgreSQL supports [Microsoft Entra authentication](https://
 #### Configuration
 
 > [!WARNING]
+>
 > If you switch to a new IAM user after LangSmith has already run initial migrations, you may need to transfer ownership of existing tables to the new IAM user. Otherwise, migrations may fail due to insufficient privileges on tables owned by the previous user.
 
 Set the `iamAuthProvider` to `"azure"` and provide an IAM-compatible connection string (without password):
@@ -408,6 +421,7 @@ stringData:
 ```
 
 > [!WARNING]
+>
 > IAM authentication requires TLS. You must include `sslmode=require` in your connection string.
 
 #### Required annotations
@@ -419,6 +433,7 @@ You must apply the ServiceAccount annotations and pod labels required by Azure W
 **Jobs:** `migrations`, `authBootstrap`, `feedbackConfigMigration`, `feedbackDataMigration`, `e2eTest`
 
 > [!NOTE]
+>
 > All jobs listed above (except `e2eTest`) use the `backend` service account. For these jobs, you only need to configure pod labels (Azure requires `azure.workload.identity/use: "true"` on pods). The `e2eTest` job uses its own service account and requires separate annotation configuration.
 
 Example configuration for the backend service:
@@ -472,8 +487,6 @@ See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/c
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-external-postgres.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-external-postgres.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

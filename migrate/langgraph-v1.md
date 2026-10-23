@@ -1,6 +1,6 @@
 ---
 title: "LangGraph v1 migration guide"
-description: "Prompt: Migrate a codebase to LangGraph v1. Migrate this codebase to LangGraph v1 (requires langgraph>=1.0.0, langchain-core>=0.3.0)."
+description: "Migrate a codebase to LangGraph v1."
 source: "https://docs.langchain.com/oss/python/migrate/langgraph-v1"
 category: "docs"
 tags: [docs, migrate, langgraph-v1]
@@ -8,7 +8,8 @@ tags: [docs, migrate, langgraph-v1]
 
 # LangGraph v1 migration guide
 
-> **Prompt:** Migrate a codebase to LangGraph v1.
+Migrate a codebase to LangGraph v1.
+
 Migrate this codebase to LangGraph v1 (requires `langgraph>=1.0.0`, `langchain-core>=0.3.0`).
 
 Key changes:
@@ -101,8 +102,6 @@ All LangChain packages now require **Python 3.10 or higher**. Python 3.9 reached
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

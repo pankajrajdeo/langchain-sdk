@@ -13,7 +13,8 @@ tags: [docs, langsmith, javascript, managed-deep-agents-identity]
 Identity controls who can invoke your managed deep agent, such as apps and SDK clients that start runs or send messages.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 Put the identity declaration at the project root:
 
@@ -40,6 +41,7 @@ Supabase and backend identity both give each end user private threads. The diffe
 For more information, see [Project structure](managed-deep-agents-project-structure.md).
 
 > [!NOTE]
+>
 > On hosted deployments, LangSmith Studio reaches the deployment through a separate workspace-authenticated path. A caller with API access to the LangSmith workspace can read and search every thread in the deployment, whichever identity provider you choose. That caller cannot modify threads owned by your end users. Per-user privacy therefore holds against your end users, not against members of your LangSmith workspace.
 
 ## Configure identity with a LangSmith API key
@@ -59,19 +61,23 @@ export const identity = defineIdentity({
 Clients send the key as `x-api-key`. You do not need to add verification endpoint or tenant settings to your project `.env`. LangSmith Cloud supplies those.
 
 > [!WARNING]
+>
 > Anyone with the key can reach the deployment, so treat the key as a secret. This default does not give each end user private threads. If Alice must not see Bob's threads, use [Supabase](#configure-identity-with-supabase) or [your own backend](#configure-identity-with-your-own-backend).
 
 ## Configure identity with Supabase
 
 Use Supabase when a browser or another client calls the deployment as a signed-in entity. Each user gets private threads. Managed Deep Agents configures that ownership for you. For more information on the underlying LangSmith Deployment pattern, see [Make conversations private](../resource-auth.md).
 
-### Enable auth in Supabase
+**1. Enable auth in Supabase**
+
 In the Supabase dashboard, enable the auth provider you will use (for example email/password).
 
-### Copy the project reference
+**2. Copy the project reference**
+
 Copy the project reference: the subdomain before `.supabase.co` in your project URL.
 
-### Declare identity
+**3. Declare identity**
+
 Declare identity with that project reference:
 
 **identity.ts**
@@ -86,7 +92,8 @@ export const identity = defineIdentity({
 
 Pass `url` instead of the project reference for a custom auth domain.
 
-### Send the access token from the client
+**4. Send the access token from the client**
+
 In the client app, set the Supabase project URL and publishable key (labeled `anon` in the Supabase dashboard). Sign the user in, then send the access token on every deployment request:
 
 ```ts
@@ -105,6 +112,7 @@ The publishable key (labeled `anon` in the Supabase dashboard) is only for the c
 Managed Deep Agents verifies the JWT against the project's JWKS URL derived from your project reference (`https://<project-ref>.supabase.co/auth/v1/.well-known/jwks.json`).
 
 > [!NOTE]
+>
 > Adding Supabase identity to an existing deployment does not add owner metadata to existing threads. Plan and test a migration before relying on identity-based access for those threads.
 
 ## Configure identity with your own backend
@@ -113,7 +121,8 @@ Use backend identity when your own API already authenticates users and calls the
 
 The browser never reaches the deployment in this mode. Requests go from the browser to your API, and from your API to the deployment.
 
-### Declare identity
+**1. Declare identity**
+
 **identity.ts**
 
 ```ts
@@ -124,7 +133,8 @@ export const identity = defineIdentity({
 });
 ```
 
-### Generate the ingress secret
+**2. Generate the ingress secret**
+
 Generate a random value and add it to the project `.env` as `MDA_INGRESS_SECRET`:
 
 ```bash
@@ -139,7 +149,8 @@ MDA_INGRESS_SECRET=<MDA_INGRESS_SECRET>
 
 `mda deploy` forwards the value as a hosted deployment secret. A project that declares backend identity without this value fails deploy preflight before any build work, because the deployment would reject every request with 401. For how `.env` values reach a deployment, see [Deploy](managed-deep-agents-deploy.md#secrets-and-environment-files).
 
-### Send both headers from your backend
+**3. Send both headers from your backend**
+
 Authenticate the user in your own API, then send the secret and the resolved user ID on every deployment request:
 
 ```ts
@@ -157,6 +168,7 @@ await fetch(`${deploymentUrl}/threads/${threadId}/runs`, {
 Use the same identifier for `x-mda-user-id` that your own system uses for that user, and keep it stable across sessions. Threads and stored credentials are keyed on this value, so a user who arrives under a new identifier reaches a different set of threads.
 
 > [!WARNING]
+>
 > `MDA_INGRESS_SECRET` is a server-side secret. Managed Deep Agents accepts whatever `x-mda-user-id` accompanies a valid secret, so any holder of the secret can act as any user. Keep it on your backend, never in browser code, a mobile app, or a client bundle.
 
 ## Test and deploy
@@ -167,8 +179,6 @@ Authentication failures return 401. For the LangSmith API-key default, confirm t
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-identity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-identity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

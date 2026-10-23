@@ -9,11 +9,13 @@ tags: [docs, langsmith, trace-with-pipecat]
 # Trace Pipecat applications
 
 > [!NOTE]
+>
 > This integration is in beta, so its API may change.
 
 Trace your [Pipecat](https://pipecat.ai/) voice agents to LangSmith with the LangSmith Pipecat integration. For high-level conventions, see [Voice tracing fundamentals](trace-voice-fundamentals.md).
 
 > [!NOTE]
+>
 > The Pipecat integration requires `langsmith[pipecat]>=0.9.7`.
 
 The integration hooks into the spans Pipecat already emits and maps them onto LangSmith's tracing format, so each conversation becomes a single LangSmith trace, with a span per pipeline stage (STT, LLM, TTS). This covers both the STT/LLM/TTS cascade and speech-to-speech (realtime) models. Realtime models (for example, `OpenAIRealtimeLLMService`) need one extra call to capture the user's transcript. See [When using Pipecat with a realtime model](#when-using-pipecat-with-a-realtime-model).
@@ -68,6 +70,7 @@ task = PipelineTask(
 ```
 
 > [!NOTE]
+>
 > Set `enable_tracing=True`, `enable_turn_tracking=True`, and `enable_metrics=True`. Turn tracking is required for tracing, and metrics drive the latency and token data on each span.
 
 ### Use a LangGraph or LangChain agent as the LLM
@@ -105,6 +108,7 @@ With a speech-to-speech (realtime) model there is no separate speech-to-text sta
 Call `instrument_user_aggregator` once, right after building the context aggregator, so the SDK subscribes to that callback for you and pairs each transcript with its turn. It correlates by the id you pass to `set_thread_id`, so set that first and pass the same id:
 
 > [!NOTE]
+>
 > `instrument_user_aggregator` requires `langsmith[pipecat]>=0.10.6`.
 
 ```python
@@ -181,16 +185,16 @@ The integration attaches the recording to the conversation root when it ends. Fo
 
 ## Next steps
 
-#### [Voice fundamentals](trace-voice-fundamentals.md)
-Core conventions for tracing voice agents.
+> **[Voice fundamentals](trace-voice-fundamentals.md)**
+>
+> Core conventions for tracing voice agents.
 
-#### [Upload files with traces](upload-files-with-traces.md)
-Attach the conversation audio recording to your trace.
+> **[Upload files with traces](upload-files-with-traces.md)**
+>
+> Attach the conversation audio recording to your trace.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-pipecat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-pipecat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

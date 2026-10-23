@@ -15,6 +15,7 @@ tags: [docs, integrations, tools, parallel_search]
 `ParallelSearchTool` calls Parallel's [Search API](https://docs.parallel.ai/search/search-quickstart), which collapses the traditional search → scrape → extract pipeline into one call and returns structured, LLM-optimized excerpts.
 
 > [!NOTE]
+>
 > `ParallelSearchTool` is the canonical class name. The earlier `ParallelWebSearchTool` continues to work as an alias for the same class. Looking for a `BaseRetriever` to drop into a RAG chain instead? See [ParallelSearchRetriever](../retrievers/parallel.md).
 
 ## Overview
@@ -23,7 +24,7 @@ tags: [docs, integrations, tools, parallel_search]
 
 | Class | Package | Serializable | JS support | Package latest |
 | :- | :- | :-: | :-: | :-: |
-| [`ParallelSearchTool`](https://reference.langchain.com/python/langchain-parallel/search_tool/ParallelSearchTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | ❌ | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| [`ParallelSearchTool`](https://reference.langchain.com/python/langchain-parallel/search_tool/ParallelSearchTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | ❌ | [![PyPI - Latest version](https://img.shields.io/pypi/v/langchain-parallel?style=flat-square\&label=%20\&color=orange)](https://pypi.org/project/langchain-parallel/) |
 
 ## Setup
 
@@ -202,6 +203,7 @@ agent.invoke({"messages": [("human", "What are the latest breakthroughs in quant
 ```
 
 > [!NOTE]
+>
 > `ChatParallel` itself does not support tool calling. Use it as a research assistant inside a chain, or use the Parallel search/extract tools alongside another tool-calling model.
 
 ## Response format
@@ -237,8 +239,6 @@ For detailed documentation, head to the [`ParallelSearchTool`](https://reference
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

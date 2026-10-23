@@ -29,6 +29,7 @@ The following sections explain the different ways you can create a dataset in La
 A common pattern for constructing datasets is to convert notable traces from your application into dataset examples. This approach requires that you have [configured tracing to LangSmith](observability-concepts.md).
 
 > [!TIP]
+>
 > A technique to build datasets is to filter the most interesting traces, such as traces that were tagged with poor user feedback, and add them to a dataset. For tips on how to filter traces, refer to the [Filter traces](filter-traces.md) guide.
 
 There are three ways to add data manually from a tracing project to datasets. Navigate to **Tracing** and select a tracing project, or an agent environment.
@@ -59,6 +60,7 @@ A rule's [item type](rules.md#set-the-item-type-to-runs-or-threads) controls wha
 ### From examples in an annotation queue
 
 > [!TIP]
+>
 > If you rely on subject matter experts to build meaningful datasets, use [annotation queues](annotation-queues.md) to provide a streamlined view for reviewers. Human reviewers can optionally modify the inputs/outputs/reference outputs from a trace before it is added to the dataset.
 
 You can set a default dataset for run items in an annotation queue. Thread items do not support default datasets. To add a run or thread to a different dataset, use the dataset switcher. After selecting a dataset, click **Add to Dataset** or press `D`. A run item adds the run, and a thread item adds the full conversation as one example.
@@ -66,9 +68,11 @@ You can set a default dataset for run items in an annotation queue. Thread items
 Changes you make to a run in an annotation queue, including its metadata, are copied to the dataset. You cannot edit thread items. They are added as they were traced.
 
 > [!NOTE]
+>
 > Default datasets are not available for thread items.
 
 > [!TIP]
+>
 > Use [automation rules](rules.md) to add runs or threads that meet specific criteria to an annotation queue.
 
 ### From the Playground
@@ -79,8 +83,9 @@ On the [**Playground**](prompt-engineering-concepts.md#playground) page:
 
 2. Click **+New** if you're starting a new dataset or select from an existing dataset.
 
-> [!NOTE]
->    Creating datasets inline in the Playground is not supported for datasets that have nested keys. In order to add/edit examples with nested keys, you must edit [from the datasets page](#create-a-new-dataset-from-the-datasets-%26-experiments-page).
+   > [!NOTE]
+   >
+   > Creating datasets inline in the Playground is not supported for datasets that have nested keys. In order to add/edit examples with nested keys, you must edit [from the datasets page](#create-a-new-dataset-from-the-datasets-%26-experiments-page).
 
 3. Edit the examples:
 
@@ -113,23 +118,19 @@ In **Generate examples**, do the following:
 
 1. Click **API Key** in the top right of the pane to set your OpenAI API key as a [workspace secret](administration-overview.md#workspaces). If your workspace already has an OpenAI API key set, you can skip this step.
 
-2. Select few-shot examples: Toggle **Automatic** or **Manual** reference examples. You can select these examples manually from your dataset or use the automatic selection option.
+2. Select few-shot examples (A few sample input–output pairs that guide the model on how to perform a task.): Toggle **Automatic** or **Manual** reference examples. You can select these examples manually from your dataset or use the automatic selection option.
 
 3. Enter the number of synthetic examples you want to generate.
 
 4. Click **Generate**.
 
-   <img src="https://mintcdn.com/langchain-5e9cc07a/4E7JL9dL7Pg6moF1/langsmith/images/generate-synthetic-light.png?fit=max&auto=format&n=4E7JL9dL7Pg6moF1&q=85&s=4ec726f80ee38a829ade96caedb61925" alt="The AI-Generated Examples configuration window. Selections for manual and automatic and number of examples to generate." width="689" height="383" data-path="langsmith/images/generate-synthetic-light.png" />
-
-   <img src="https://mintcdn.com/langchain-5e9cc07a/4E7JL9dL7Pg6moF1/langsmith/images/generate-synthetic-dark.png?fit=max&auto=format&n=4E7JL9dL7Pg6moF1&q=85&s=6c0ba9da5bf342e702c23406bdfdf18c" alt="The AI-Generated Examples configuration window. Selections for manual and automatic and number of examples to generate." width="674" height="361" data-path="langsmith/images/generate-synthetic-dark.png" />
+   ![The AI-Generated Examples configuration window. Selections for manual and automatic and number of examples to generate.](https://mintcdn.com/langchain-5e9cc07a/4E7JL9dL7Pg6moF1/langsmith/images/generate-synthetic-light.png?fit=max\&auto=format\&n=4E7JL9dL7Pg6moF1\&q=85\&s=4ec726f80ee38a829ade96caedb61925)
 
 5. The examples will appear on the **Select generated examples** page. Choose which examples to add to your dataset, with the option to edit them before finalizing. Click **Save Examples**.
 
 6. Each example will be validated against your specified dataset schema and tagged as **synthetic** in the source metadata.
 
-   <img src="https://mintcdn.com/langchain-5e9cc07a/mw9POU1xwbwaPxuQ/langsmith/images/select-generated-examples-light.png?fit=max&auto=format&n=mw9POU1xwbwaPxuQ&q=85&s=146c5f6238415bb8d77da15a8a17c839" alt="Select generated examples page with generated examples selected and Save examples button." width="1781" height="856" data-path="langsmith/images/select-generated-examples-light.png" />
-
-   <img src="https://mintcdn.com/langchain-5e9cc07a/mw9POU1xwbwaPxuQ/langsmith/images/select-generated-examples-dark.png?fit=max&auto=format&n=mw9POU1xwbwaPxuQ&q=85&s=1f1235b31b2d86cf5c7c615c84061e9c" alt="Select generated examples page with generated examples selected and Save examples button." width="1779" height="838" data-path="langsmith/images/select-generated-examples-dark.png" />
+   ![Select generated examples page with generated examples selected and Save examples button.](https://mintcdn.com/langchain-5e9cc07a/mw9POU1xwbwaPxuQ/langsmith/images/select-generated-examples-light.png?fit=max\&auto=format\&n=mw9POU1xwbwaPxuQ\&q=85\&s=146c5f6238415bb8d77da15a8a17c839)
 
 ## Manage a dataset
 
@@ -142,6 +143,7 @@ Certain fields in your schema have a `+ Transformations` option. Transformations
 For the full list of available transformations, refer to the [Dataset transformations reference](dataset-transformations.md).
 
 > [!NOTE]
+>
 > If you plan to collect production traces in your dataset from LangChain [ChatModels](../langchain/models.md) or from OpenAI calls using the [LangSmith OpenAI wrapper](annotate-code.md), we offer a prebuilt Chat Model schema that converts messages and tools into industry standard openai formats that can be used downstream with any model for testing. You can also customize the template settings to match your use case.
 >
 > Please see the [dataset transformations reference](dataset-transformations.md) for more information.
@@ -156,7 +158,7 @@ To create and manage splits in the UI:
 2. Click **Add to Split**.
 3. From the resulting popup menu, you can select and unselect splits for the selected examples, or create a new split.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/add-to-split2.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=014aa1fdc735f055c9e66a2a18720d4c" alt="Add to Split" width="1309" height="915" data-path="langsmith/images/add-to-split2.png" />
+![Add to Split](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/add-to-split2.png?fit=max\&auto=format\&n=E8FdemkcQxROovD9\&q=85\&s=014aa1fdc735f055c9e66a2a18720d4c)
 
 ### Edit example metadata
 
@@ -177,12 +179,10 @@ You can filter examples by split, metadata key/value or perform full-text search
 
 You may add multiple filters, and only examples that satisfy all of the filters will be displayed in the table.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/filters-applied.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=2d1f300884d5e886267a137a3cb3e4c7" alt="Filters Applied to Examples" width="1307" height="370" data-path="langsmith/images/filters-applied.png" />
+![Filters Applied to Examples](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/filters-applied.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=2d1f300884d5e886267a137a3cb3e4c7)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets-in-application.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets-in-application.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

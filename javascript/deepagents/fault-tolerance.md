@@ -26,7 +26,8 @@ Different errors need different handling strategies:
 
 The sections below cover each strategy with code examples.
 
-#### Transient errors
+**Transient errors**
+
 Add retry middleware to automatically retry network issues and rate limits. Model calls and tool calls each have their own retry middleware with exponential backoff:
 
 ```typescript
@@ -46,7 +47,8 @@ const agent = createAgent({
 });
 ```
 
-#### User-fixable
+**User-fixable**
+
 Pause and collect information from the user when needed (like account IDs, order numbers, or clarifications). Use `interrupt_on` to pause the agent before specific tool calls:
 
 ```typescript
@@ -64,7 +66,8 @@ const agent = createDeepAgent({
 
 For the full human-in-the-loop guide, see [Human-in-the-loop](human-in-the-loop.md).
 
-#### Provider outage
+**Provider outage**
+
 If your primary model provider goes down entirely, use [ModelFallbackMiddleware](https://reference.langchain.com/javascript/langchain/index/modelFallbackMiddleware) to switch to an alternative model:
 
 ```typescript
@@ -79,7 +82,8 @@ const agent = createAgent({
 });
 ```
 
-#### Excessive calls
+**Excessive calls**
+
 Without limits, a confused agent can burn through your LLM API budget in minutes by looping on the same tool call or making hundreds of model calls. Set caps on both model calls and tool executions per run:
 
 ```typescript
@@ -95,7 +99,8 @@ const agent = createAgent({
 });
 ```
 
-#### Unexpected
+**Unexpected**
+
 Let them bubble up for debugging. Do not catch what you cannot handle. This pattern applies to custom middleware in the JavaScript SDK as well.
 
 ## Rate limiting
@@ -179,8 +184,6 @@ When a tool raises an exception during execution, the agent run halts by default
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

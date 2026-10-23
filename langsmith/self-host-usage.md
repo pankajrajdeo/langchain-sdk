@@ -11,6 +11,7 @@ tags: [docs, langsmith, self-host-usage]
 This guide will walk you through the process of using your self-hosted instance of LangSmith.
 
 > [!NOTE]
+>
 > This guide assumes you have already deployed a self-hosted LangSmith instance. If you have not, please refer to the [kubernetes deployment guide](kubernetes.md).
 
 ### Configuring the application you want to use with LangSmith
@@ -38,7 +39,7 @@ langsmith_client = langsmith.Client(
 )
 ```
 
-After setting the above, you should be able to run your code and see the results in your self-hosted instance. We recommend running through the [*quickstart guide*](https://docs.smith.langchain.com/#quick-start) to get a feel for how to use LangSmith.
+After setting the above, you should be able to run your code and see the results in your self-hosted instance. We recommend running through the [*quickstart guide*](observability-quickstart.md) to get a feel for how to use LangSmith.
 
 ### Self-Signed certificates
 
@@ -69,8 +70,6 @@ To access the API reference, navigate to `http://<host>/api/docs` in your browse
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

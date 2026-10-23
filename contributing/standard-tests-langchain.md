@@ -16,13 +16,16 @@ When creating either a custom class for yourself or to publish in a LangChain in
 
 First, install the required dependencies:
 
-#### [langchain-core](https://github.com/langchain-ai/langchain/tree/master/libs/core#readme)
-Defines the interfaces we want to import to define our custom components
+> **[langchain-core](https://github.com/langchain-ai/langchain/tree/master/libs/core#readme)**
+>
+> Defines the interfaces we want to import to define our custom components
 
-#### [langchain-tests](https://github.com/langchain-ai/langchain/tree/master/libs/standard-tests#readme)
-Provides the standard tests and `pytest` plugins necessary to run them
+> **[langchain-tests](https://github.com/langchain-ai/langchain/tree/master/libs/standard-tests#readme)**
+>
+> Provides the standard tests and `pytest` plugins necessary to run them
 
 > [!WARNING]
+>
 > Because added tests in new versions of `langchain-tests` can break your CI/CD pipelines, we recommend pinning to the latest version of [`langchain-tests`](https://pypi.org/project/langchain-tests/#history) to avoid unexpected changes.
 
 **pip**
@@ -41,27 +44,21 @@ uv add langchain-tests
 
 There are 2 namespaces in the `langchain-tests` package:
 
-<details>
-<summary>Unit tests</summary>
+> **Unit tests**
+>
+> **Location**: `langchain_tests.unit_tests`
+>
+> Designed to test the component in isolation and without access to external services
+>
+> [View API reference](https://reference.langchain.com/python/langchain-tests/unit_tests)
 
-**Location**: `langchain_tests.unit_tests`
-
-Designed to test the component in isolation and without access to external services
-
-[View API reference](https://reference.langchain.com/python/langchain-tests/unit_tests)
-
-</details>
-
-<details>
-<summary>Integration tests</summary>
-
-**Location**: `langchain_tests.integration_tests`
-
-Designed to test the component with access to external services (in particular, the external service that the component is designed to interact with)
-
-[View API reference](https://reference.langchain.com/python/langchain-tests/integration_tests)
-
-</details>
+> **Integration tests**
+>
+> **Location**: `langchain_tests.integration_tests`
+>
+> Designed to test the component with access to external services (in particular, the external service that the component is designed to interact with)
+>
+> [View API reference](https://reference.langchain.com/python/langchain-tests/integration_tests)
 
 Both types of tests are implemented as [`pytest`](https://docs.pytest.org/en/stable/) class-based test suites.
 
@@ -87,6 +84,7 @@ class TestChatParrotLinkStandard(ChatModelIntegrationTests):
 ```
 
 > [!NOTE]
+>
 > You should organize tests in these subdirectories relative to the root of your package:
 >
 > * `tests/unit_tests` for unit tests
@@ -96,21 +94,42 @@ To see the complete list of configurable capabilities and their defaults, visit 
 
 Here are some example implementations of standard tests from popular integrations:
 
-#### Unit tests
-Unit tests
-Unit tests
-Unit tests
+**Unit tests**
 
-#### Integration tests
-Integration tests
-Integration tests
-Integration tests
+> **[ChatOpenAI](https://github.com/langchain-ai/langchain/blob/master/libs/partners/openai/tests/unit_tests/chat_models/test_base_standard.py)**
+>
+> Unit tests
 
-#### Sandbox integration tests
+> **[ChatAnthropic](https://github.com/langchain-ai/langchain/blob/master/libs/partners/anthropic/tests/unit_tests/test_standard.py)**
+>
+> Unit tests
+
+> **[ChatGenAI](https://github.com/langchain-ai/langchain-google/blob/main/libs/genai/tests/unit_tests/test_standard.py)**
+>
+> Unit tests
+
+**Integration tests**
+
+> **[ChatOpenAI](https://github.com/langchain-ai/langchain/blob/master/libs/partners/openai/tests/integration_tests/chat_models/test_base_standard.py)**
+>
+> Integration tests
+
+> **[ChatAnthropic](https://github.com/langchain-ai/langchain/blob/master/libs/partners/anthropic/tests/integration_tests/test_standard.py)**
+>
+> Integration tests
+
+> **[ChatGenAI](https://github.com/langchain-ai/langchain-google/blob/main/libs/genai/tests/integration_tests/test_standard.py)**
+>
+> Integration tests
+
+**Sandbox integration tests**
+
 Ensure your integration passes the standard test suite.
 See the [Daytona integration](https://github.com/langchain-ai/deepagents/blob/main/libs/partners/daytona/tests/integration_tests/test_integration.py) as an example.
 
-Sandbox Integration tests
+> **[Daytona](https://github.com/langchain-ai/deepagents/blob/main/libs/partners/daytona/tests/integration_tests/test_integration.py)**
+>
+> Sandbox Integration tests
 
 ## Sandbox integrations
 
@@ -156,8 +175,6 @@ For a full list of the standard test suites that are available, as well as infor
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/standard-tests-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/standard-tests-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

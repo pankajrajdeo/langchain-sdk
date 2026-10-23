@@ -16,7 +16,8 @@ A revision deploys a version of your application to an existing Cloud deployment
 
 When you [create a deployment](deploy-to-cloud.md), LangSmith creates its first revision. Use the LangSmith UI or LangGraph CLI to create subsequent revisions.
 
-#### LangSmith UI
+**LangSmith UI**
+
 From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deployment-revisions), select **Deployments**, then select a deployment.
 
 1. In the top-right corner of the **Deployment** view, select **+ New Revision**.
@@ -25,7 +26,8 @@ From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=
 4. Add, remove, or update environment variables and secrets. Existing values are prepopulated. For more information, see [Environment variables](env-var-cloud.md).
 5. Select **Submit**. LangSmith queues the revision for deployment.
 
-#### LangGraph CLI
+**LangGraph CLI**
+
 Run `langgraph deploy` again from your project directory. The command finds the existing deployment by name and creates a revision with your latest code changes:
 
 ```shell
@@ -45,6 +47,7 @@ langgraph deploy list
 ```
 
 > [!NOTE]
+>
 > `langgraph deploy` can update only deployments originally created with `langgraph deploy`. Use the LangSmith UI to update deployments created through the UI or GitHub integration.
 
 ## Interrupt a revision
@@ -52,6 +55,7 @@ langgraph deploy list
 Interrupt a revision only when it is stuck and prevents you from deploying another revision.
 
 > [!WARNING]
+>
 > Interrupted revisions have undefined behavior. LangChain might remove this feature in the future.
 
 To interrupt a revision:
@@ -68,8 +72,6 @@ To interrupt a revision:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deployment-revisions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deployment-revisions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

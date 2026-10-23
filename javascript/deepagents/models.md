@@ -85,6 +85,7 @@ const agent = createDeepAgent({ model });
 ```
 
 > [!NOTE]
+>
 > Available parameters vary by provider. See the [chat model integrations](../integrations/chat.md) page for provider-specific configuration options.
 
 ### Provider profiles
@@ -99,6 +100,7 @@ You can register at two levels, and both can coexist:
 See [Profiles](profiles.md) for the full field list, merge semantics, and plugin packaging.
 
 > [!TIP]
+>
 > For shaping how the *agent* behaves once the model is built, use a [harness profile](profiles.md#harness-profiles).
 
 ### OpenAI and the Responses API
@@ -106,6 +108,7 @@ See [Profiles](profiles.md) for the full field list, merge semantics, and plugin
 When you pass an `openai:...` string as the model, Deep Agents uses the built-in OpenAI [provider profile](profiles.md#provider-profiles) to enable the [Responses API](../integrations/chat/openai.md#responses-api) by default. That path supports OpenAI conversation state and related features; see the [OpenAI provider](../integrations/providers/openai.md) and [chat model](../integrations/chat/openai.md) docs for current API options.
 
 > [!NOTE]
+>
 > The built-in OpenAI provider profile applies only to model strings. To set kwargs such as `use_responses_api`, `store`, or `include`, pass a configured model instance, or, in Python, layer them through a [provider profile](profiles.md#provider-profiles) `init_kwargs`. Build the instance with [`init_chat_model`](https://reference.langchain.com/javascript/langchain/chat_models/universal/initChatModel) (Python) or `initChatModel` / `ChatOpenAI` (TypeScript).
 
 Use the [OpenAI chat integration](../integrations/chat/openai.md#responses-api) to choose the Responses API versus Chat Completions (`useResponsesApi`, model kwargs, and any storage or output options your version exposes). Pass the resulting model instance to `createDeepAgent({ model })` so those settings are preserved.
@@ -145,10 +148,12 @@ const result = await agent.invoke(
 );
 ```
 
-#### [View example trace](https://smith.langchain.com/public/89e1089d-632c-4338-b4bb-c019f4c18e14/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/45e09f7e-1d7b-4419-856a-202e800bcb8d/r)**
+>
+> Open a public LangSmith run for this example.
 
 > [!TIP]
+>
 > For more dynamic model patterns (for example routing based on conversation complexity or cost optimization), see [Dynamic model](../langchain/models.md#dynamic-model-selection) in the LangChain agents guide.
 
 ## Learn more
@@ -157,8 +162,6 @@ Open a public LangSmith run for this example.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/models.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/models.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

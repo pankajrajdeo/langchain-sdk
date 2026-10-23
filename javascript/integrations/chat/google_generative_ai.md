@@ -15,6 +15,7 @@ tags: [docs, javascript, integrations, chat, google_generative_ai]
 This will help you getting started with `ChatGoogleGenerativeAI` [chat models](../../langchain/models.md). For detailed documentation of all `ChatGoogleGenerativeAI` features and configurations head to the [API reference](https://reference.langchain.com/javascript/langchain-google-genai/ChatGoogleGenerativeAI).
 
 > [!NOTE]
+>
 > **This library will be deprecated**
 >
 > This library is based on a deprecated library from Google and will
@@ -26,7 +27,7 @@ This will help you getting started with `ChatGoogleGenerativeAI` [chat models](.
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/google_generative_ai) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/google_generative_ai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatGoogleGenerativeAI`](https://reference.langchain.com/javascript/langchain-google-genai/ChatGoogleGenerativeAI) | [`@langchain/google-genai`](https://www.npmjs.com/package/@langchain/google-genai) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/google-genai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/google-genai?style=flat-square\&label=%20&) |
 
@@ -45,6 +46,7 @@ generative models in LangChain through `ChatGoogleGenerativeAI` class in the
 `@langchain/google-genai` integration package.
 
 > [!TIP]
+>
 > You can also access Google's `gemini` family of models via the LangChain `VertexAI` and `VertexAI-web` integrations. See the [Gemini Enterprise Agent Platform docs](google_vertex_ai.md).
 
 ### Credentials
@@ -232,7 +234,7 @@ const fakeBrowserTool = tool((_) => {
 })
 
 const llmWithTool = new ChatGoogleGenerativeAI({
-  model: "gemini-pro",
+  model: "gemini-3.6-flash",
 }).bindTools([fakeBrowserTool]) // Bind your tools to the model
 
 const toolRes = await llmWithTool.invoke([
@@ -632,8 +634,6 @@ For detailed documentation of all `ChatGoogleGenerativeAI` features and configur
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

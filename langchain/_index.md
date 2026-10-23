@@ -1,13 +1,13 @@
 ---
 title: "langchain"
-description: "Index of 35 pages and 7 subdirectories under langchain."
+description: "Index of 33 pages and 7 subdirectories under langchain."
 category: "index"
 tags: [index, langchain]
 ---
 
 # langchain
 
-35 pages here, 84 pages including subdirectories.
+33 pages here, 82 pages including subdirectories.
 
 ## Directories
 
@@ -21,9 +21,7 @@ tags: [index, langchain]
 
 ## Files
 
-- [LangChain Academy](academy.md)
 - [Agents](agents.md) - Build a LangChain agent: a model calling tools in a loop until a task is complete, shaped by a harness of prompt, tools, and middleware.
-- [Changelog](changelog-py.md) - Log of updates and improvements to our Python packages
 - [Component architecture](component-architecture.md) - LangChain's power comes from how its components work together to create sophisticated AI applications. This page provides diagrams showcasing the relationships between different components.
 - [Context engineering in agents](context-engineering.md) - The hard part of building agents (or any LLM application) is making them reliable enough. While they may work for a prototype, they often fail in real-world use cases.
 - [Build a data analysis agent from scratch](deep-agent-from-scratch.md) - Build a data analysis agent step by step using create_agent and Deep Agents middleware.

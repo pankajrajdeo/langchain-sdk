@@ -13,6 +13,7 @@ The various services in a LangSmith deployment emit telemetry data in the form o
 This page describes how to configure an [OTel Collector](https://opentelemetry.io/docs/collector/configuration/) to gather telemetry data from LangSmith. Note that all of the concepts discussed below can be translated to other collectors such as [Fluentd](https://www.fluentd.org/) or [FluentBit](https://fluentbit.io/).
 
 > [!WARNING]
+>
 > **This section is only applicable for Kubernetes deployments.**
 
 # Receivers
@@ -59,6 +60,7 @@ volumeMounts:
 ```
 
 > [!NOTE]
+>
 > **This configuration requires 'get', 'list', and 'watch' permissions on pods in the given namespace.**
 
 ## Metrics
@@ -97,6 +99,7 @@ prometheus:
 ```
 
 > [!NOTE]
+>
 > **This configuration requires 'get', 'list', and 'watch' permissions on pods, services and endpoints in the given namespace.**
 
 ### Traces
@@ -136,6 +139,7 @@ otlphttp/traces:
 ```
 
 > [!NOTE]
+>
 > **The OTel Collector also supports exporting directly to a [Datadog](https://docs.datadoghq.com/opentelemetry/setup/collector_exporter) endpoint.**
 
 # Example collector configuration: Logs sidecar
@@ -266,8 +270,6 @@ config:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-collector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-collector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

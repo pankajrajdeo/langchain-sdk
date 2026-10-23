@@ -1,18 +1,18 @@
 ---
-title: "VoyageAI reranker integration"
-description: "Integrate with the VoyageAI reranker document transformer using LangChain Python."
+title: "VoyageAI by MongoDB reranker integration"
+description: "Integrate with the VoyageAI by MongoDB reranker document transformer using LangChain Python."
 source: "https://docs.langchain.com/oss/python/integrations/document_transformers/voyageai-reranker"
 category: "docs"
 tags: [docs, integrations, document_transformers, voyageai-reranker]
 ---
 
-# VoyageAI reranker integration
+# VoyageAI by MongoDB reranker integration
 
-> Integrate with the VoyageAI reranker document transformer using LangChain Python.
+> Integrate with the VoyageAI by MongoDB reranker document transformer using LangChain Python.
 
-> [Voyage AI](https://www.voyageai.com/) provides cutting-edge embedding/vectorizations models.
+> [VoyageAI by MongoDB](https://www.voyageai.com/) provides cutting-edge embedding/vectorizations models.
 
-This notebook shows how to use [Voyage AI's rerank endpoint](https://api.voyageai.com/v1/rerank) in a retriever. This builds on top of ideas in the ContextualCompressionRetriever.
+This notebook shows how to use [VoyageAI by MongoDB's rerank endpoint](https://api.voyageai.com/v1/rerank) in a retriever. This builds on top of ideas in the ContextualCompressionRetriever.
 
 ```python
 pip install -qU  voyageai
@@ -56,6 +56,7 @@ Let's start by initializing a simple vector store retriever and storing the 2023
 * `voyage-4`
 * `voyage-4-lite`
 * `voyage-code-4`
+* `voyage-context-4`
 * `voyage-context-3`
 * `voyage-3.5`
 * `voyage-3.5-lite`
@@ -70,6 +71,7 @@ Let's start by initializing a simple vector store retriever and storing the 2023
 * `voyage-multilingual-2`
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -301,8 +303,10 @@ One America.
 
 ## Doing reranking with VoyageAIRerank
 
-Now let's wrap our base retriever with a `ContextualCompressionRetriever`. We'll use the Voyage AI reranker to rerank the returned results. You can use any of the following Reranking models: ([source](https://docs.voyageai.com/docs/reranker)):
+Now let's wrap our base retriever with a `ContextualCompressionRetriever`. We'll use the VoyageAI by MongoDB reranker to rerank the returned results. You can use any of the following Reranking models: ([source](https://docs.voyageai.com/docs/reranker)):
 
+* `rerank-3`
+* `rerank-3-lite`
 * `rerank-2.5`
 * `rerank-2.5-lite`
 * `rerank-2`
@@ -317,7 +321,7 @@ from langchain_voyageai import VoyageAIRerank
 
 llm = OpenAI(temperature=0)
 compressor = VoyageAIRerank(
-    model="rerank-lite-1", voyageai_api_key=os.environ["VOYAGE_API_KEY"], top_k=3
+    model="rerank-3", voyageai_api_key=os.environ["VOYAGE_API_KEY"], top_k=3
 )
 compression_retriever = ContextualCompressionRetriever(
     base_compressor=compressor, base_retriever=retriever
@@ -378,8 +382,6 @@ chain({"query": query})
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/voyageai-reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/voyageai-reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

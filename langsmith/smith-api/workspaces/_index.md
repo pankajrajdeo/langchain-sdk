@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api/workspaces"
-description: "Index of 40 pages and 0 subdirectories under langsmith/smith-api/workspaces."
+description: "Index of 42 pages and 0 subdirectories under langsmith/smith-api/workspaces."
 category: "index"
 tags: [index, langsmith, smith-api, workspaces]
 ---
 
 # langsmith/smith-api/workspaces
 
-40 pages here.
+42 pages here.
 
 ## Files
 
@@ -21,6 +21,7 @@ tags: [index, langsmith, smith-api, workspaces]
 - [Create workspace](create-workspace.md) - Create a new workspace.
 - [Delete current workspace member](delete-current-workspace-member.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/members/{identity_id}
 - [Delete current workspace pending member](delete-current-workspace-pending-member.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/members/{identity_id}/pending
+- [Delete current workspace secret](delete-current-workspace-secret.md) - Delete a workspace secret and its allowed hosts. Missing keys succeed.
 - [Delete pending workspace invite](delete-pending-workspace-invite.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/pending/{id}
 - [Delete tag key](delete-tag-key.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/tag-keys/{tag_key_id}
 - [Delete tag value](delete-tag-value.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values/{tag_value_id}
@@ -48,6 +49,7 @@ tags: [index, langsmith, smith-api, workspaces]
 - [Patch current workspace member](patch-current-workspace-member.md) - /langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/current/members/{identity_id}
 - [Patch current workspace pending member](patch-current-workspace-pending-member.md) - Update the role on a pending workspace member invite.
 - [Patch workspace](patch-workspace.md) - Update a workspace.
+- [Put current workspace secret](put-current-workspace-secret.md) - Create or update a workspace secret and the hosts it may be sent to.
 - [Update tag key](update-tag-key.md) - /langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/current/tag-keys/{tag_key_id}
 - [Update tag value](update-tag-value.md) - /langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values/{tag_value_id}
 - [Upsert current workspace secrets](upsert-current-workspace-secrets.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/workspaces/current/secrets

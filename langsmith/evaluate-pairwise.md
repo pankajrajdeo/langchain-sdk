@@ -9,9 +9,10 @@ tags: [docs, langsmith, evaluate-pairwise]
 # How to run a pairwise evaluation
 
 > [!NOTE]
+>
 > Concept: [Pairwise evaluations](evaluation-concepts.md#pairwise)
 
-LangSmith supports evaluating **existing** experiments in a comparative manner. Instead of evaluating one output at a time, you can score the output from multiple experiments against each other. In this guide, you'll use [`evaluate()`](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) with two existing experiments to [define an evaluator](#define-a-pairwise-evaluator) and [run a pairwise evaluation](#run-a-pairwise-evaluation). Finally, you'll use the LangSmith UI to [view the pairwise experiments](#view-pairwise-experiments).
+LangSmith supports evaluating **existing** experiments in a comparative manner. Instead of evaluating one output at a time, you can score the output from multiple experiments against each other. In this guide, you'll use [`evaluate()`](https://reference.langchain.com/python/langsmith/evaluation/_runner/evaluate) with two existing experiments to [define an evaluator](#define-a-pairwise-evaluator) and [run a pairwise evaluation](#run-a-pairwise-evaluation). Finally, you'll use the LangSmith UI to [view the pairwise experiments](#view-pairwise-experiments).
 
 ## Prerequisites
 
@@ -19,7 +20,8 @@ LangSmith supports evaluating **existing** experiments in a comparative manner. 
 * This guide requires `langsmith>=0.2.0` for Python or `langsmith>=0.2.9` for JS.
 
 > [!NOTE]
-> You can also use [`evaluate_comparative()`](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate_comparative) with more than two existing experiments.
+>
+> You can also use [`evaluate_comparative()`](https://reference.langchain.com/python/langsmith/evaluation/_runner/evaluate_comparative) with more than two existing experiments.
 
 ## `evaluate()` comparative args
 
@@ -81,6 +83,7 @@ Note that you should choose a feedback key that is distinct from standard feedba
 The following example uses [a prompt](https://smith.langchain.com/hub/langchain-ai/pairwise-evaluation-2) which asks the LLM to decide which is better between two AI assistant responses. It uses structured output to parse the AI's response: 0, 1, or 2.
 
 > [!NOTE]
+>
 > In the Python example below, we are pulling [this structured prompt](https://smith.langchain.com/hub/langchain-ai/pairwise-evaluation-2) from the [LangChain Hub](manage-prompts.md#public-prompt-hub) and using it with a LangChain chat model wrapper.
 >
 > **Usage of LangChain is totally optional.** To illustrate this point, the TypeScript example uses the OpenAI SDK directly.
@@ -153,7 +156,7 @@ async function rankedPreference({
   };
 
   const output = await openai.chat.completions.create({
-    model: "gpt-4-turbo",
+    model: "gpt-5.5",
     messages: [
       {
         role: "system",
@@ -233,20 +236,18 @@ await evaluate(["earnest-name-40", "reflecting-pump-91"], {
 
 Navigate to the "Pairwise Experiments" tab from the dataset page:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pairwise-from-dataset.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=dddf35fd971055d0d94ae4184c91dea3" alt="Pairwise Experiments Tab" width="3454" height="1912" data-path="langsmith/images/pairwise-from-dataset.png" />
+![Pairwise Experiments Tab](https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pairwise-from-dataset.png?fit=max\&auto=format\&n=H9jA2WRyA-MV4-H0\&q=85\&s=dddf35fd971055d0d94ae4184c91dea3)
 
 Click on a pairwise experiment that you would like to inspect, and you will be brought to the Comparison View:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pairwise-comparison-view.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=8afa7467faf707c0bb5ede23b007beda" alt="Pairwise Comparison View" width="3430" height="1886" data-path="langsmith/images/pairwise-comparison-view.png" />
+![Pairwise Comparison View](https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pairwise-comparison-view.png?fit=max\&auto=format\&n=H9jA2WRyA-MV4-H0\&q=85\&s=8afa7467faf707c0bb5ede23b007beda)
 
 You may filter to runs where the first experiment was better or vice versa by clicking the thumbs up/thumbs down buttons in the table header:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/filter-pairwise.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=677c48099cee9848d2119c154c7b0d88" alt="Pairwise Filtering" width="3454" height="1914" data-path="langsmith/images/filter-pairwise.png" />
+![Pairwise Filtering](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/filter-pairwise.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=677c48099cee9848d2119c154c7b0d88)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-pairwise.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-pairwise.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

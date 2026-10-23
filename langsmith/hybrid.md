@@ -20,10 +20,11 @@ This setup gives you control over where your agent workloads run while letting y
 
 | Component | Where it runs | Who manages it |
 | - | - | - |
-| Agent Servers <br />for [LangSmith Deployment](deployment.md) | Your infrastructure | You |
-| LangSmith <br />(tracing, evaluation, prompts) | Self-hosted in your infrastructure, or LangSmith SaaS | You (self-hosted) or LangSmith (SaaS) |
+| Agent Servers (The server that runs your applications.) for [LangSmith Deployment](deployment.md) | Your infrastructure | You |
+| LangSmith (tracing, evaluation, prompts) | Self-hosted in your infrastructure, or LangSmith SaaS | You (self-hosted) or LangSmith (SaaS) |
 
 > [!NOTE]
+>
 > Hybrid is a platform setup for LangSmith Deployment (agent serving). To set up LangSmith for observability, evaluation, and prompt engineering only, see [Set up LangSmith](platform-setup.md).
 
 ## Workflow
@@ -48,7 +49,7 @@ Agent Servers send traces to LangSmith based on the `LANGSMITH_ENDPOINT` environ
         <th>Region</th>
 
         <th>
-          {protocol_0 === false ? "Host" : "URL"}
+          URL
         </th>
       </tr>
     </thead>
@@ -58,9 +59,7 @@ Agent Servers send traces to LangSmith based on the `LANGSMITH_ENDPOINT` environ
         <td>GCP US</td>
 
         <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
+          `https://api.smith.langchain.com`
         </td>
       </tr>
 
@@ -68,9 +67,7 @@ Agent Servers send traces to LangSmith based on the `LANGSMITH_ENDPOINT` environ
         <td>GCP EU</td>
 
         <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
+          `https://eu.api.smith.langchain.com`
         </td>
       </tr>
 
@@ -78,9 +75,7 @@ Agent Servers send traces to LangSmith based on the `LANGSMITH_ENDPOINT` environ
         <td>GCP APAC</td>
 
         <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
+          `https://apac.api.smith.langchain.com`
         </td>
       </tr>
 
@@ -88,9 +83,7 @@ Agent Servers send traces to LangSmith based on the `LANGSMITH_ENDPOINT` environ
         <td>AWS US</td>
 
         <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
+          `https://aws.api.smith.langchain.com`
         </td>
       </tr>
     </tbody>
@@ -102,8 +95,6 @@ In both cases, authenticate with a [LangSmith API key](create-account-api-key.md
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/hybrid.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/hybrid.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

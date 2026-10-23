@@ -23,7 +23,7 @@ add_texts(
     metadatas: list[dict[str, Any]] | None = None,
     *,
     ids: list[str] | None = None,
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> list[str]
 ```
 
@@ -44,4 +44,4 @@ List of IDs from adding the texts into the `VectorStore`.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/vectorstores/base.py#L46)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/vectorstores/base.py#L46)

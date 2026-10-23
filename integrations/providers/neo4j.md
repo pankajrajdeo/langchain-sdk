@@ -51,6 +51,7 @@ By coupling Diffbot's NLP API with Neo4j, a graph database, you can create power
 These graph structures are fully queryable and can be integrated into various applications.
 
 > [!WARNING]
+>
 > The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
 
 ```python
@@ -84,8 +85,6 @@ with Neo4jSaver.from_conn_string(
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/neo4j.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/neo4j.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

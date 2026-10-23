@@ -16,8 +16,6 @@ This will help you get started with Fireworks embedding models using LangChain. 
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](fireworks.md).
-
 ## Setup
 
 To access Fireworks embedding models you'll need to create a Fireworks account, get an API key, and install the `langchain-fireworks` integration package.
@@ -34,7 +32,7 @@ if not os.getenv("FIREWORKS_API_KEY"):
     os.environ["FIREWORKS_API_KEY"] = getpass.getpass("Enter your Fireworks API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -137,8 +135,6 @@ For detailed documentation of all `FireworksEmbeddings` features and configurati
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

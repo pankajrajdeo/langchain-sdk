@@ -20,7 +20,7 @@ tags: [docs, integrations, tools, parallel_extract]
 
 | Class | Package | Serializable | JS support | Package latest |
 | :- | :- | :-: | :-: | :-: |
-| [`ParallelExtractTool`](https://reference.langchain.com/python/langchain-parallel/extract_tool/ParallelExtractTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | ❌ | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| [`ParallelExtractTool`](https://reference.langchain.com/python/langchain-parallel/extract_tool/ParallelExtractTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | ❌ | [![PyPI - Latest version](https://img.shields.io/pypi/v/langchain-parallel?style=flat-square\&label=%20\&color=orange)](https://pypi.org/project/langchain-parallel/) |
 
 ## Setup
 
@@ -166,6 +166,7 @@ result = tool.invoke(
 ```
 
 > [!NOTE]
+>
 > **`full_content` precedence.** An explicit `FullContentSettings` (or dict) on the call always wins over the tool-level `max_chars_per_extract`. The latter only applies when you pass `full_content=True` as a plain bool.
 
 ### Per-URL error handling
@@ -264,8 +265,6 @@ For detailed documentation, head to the [`ParallelExtractTool`](https://referenc
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_extract.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_extract.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

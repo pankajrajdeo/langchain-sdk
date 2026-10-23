@@ -11,6 +11,7 @@ tags: [docs, langsmith, byoc]
 > Deploy LangSmith services and store data in your own cloud environment while LangChain operates, scales, and upgrades the infrastructure.
 
 > [!NOTE]
+>
 > BYOC is only available for customers on the [Enterprise plan](https://www.langchain.com/pricing).
 
 Bring Your Own Cloud (BYOC) lets you deploy LangSmith services and store data in your own cloud environment, while LangChain operates, scales, and upgrades the infrastructure. BYOC suits organizations that require complete sovereignty over their data, but do not want the overhead of provisioning and managing infrastructure.
@@ -54,8 +55,8 @@ The following features are supported:
 * **[LLM Gateway](llm-gateway.md)**: Call models across providers with one LangSmith API key, with spend, rate limit, and data-protection policies enforced centrally.
 * **[LangSmith MCP](langsmith-remote-mcp.md)**: Connect MCP-compatible clients to LangSmith to query data.
 * **[Fleet](fleet/index.md)**: Build and run no-code agents from templates, connectors, and channels.
-* **[SmithDB](smithdb-sdk-migration.md)**: The purpose-built observability backend for trace data, persisting to S3 in your account.
-* **[Engine](engine-overview.md)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces. Engine runs its models on the LangSmith Intelligence service or on your own model providers. See [Choose how Engine runs its models](engine-self-hosted.md#choose-how-engine-runs-its-models) for details.
+* **[SmithDB](smithdb-sdk-migration.md)**: The purpose-built observability backend for trace data, persisting to S3 in your account. Data planes created on or after October 21, 2026 run SmithDB only. ClickHouse is deprecated, and support ends in LangSmith v0.19.
+* **[Engine](engine.md)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces. On BYOC, Engine runs its models on your own model providers, and you configure your GitHub App and Slack app in the LangSmith UI. See [Engine on BYOC](engine-self-hosted.md#engine-on-byoc).
 
 The following features are planned but not yet supported:
 
@@ -73,8 +74,6 @@ Before LangChain can provision a data plane, you need the following:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

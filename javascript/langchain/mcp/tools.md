@@ -42,6 +42,10 @@ async function main(server: string) {
 }
 ```
 
+> **[View example trace](https://smith.langchain.com/public/595d3842-7630-449c-978b-27f0653155e2/r)**
+>
+> Open a public LangSmith run for this example.
+
 Keep the adapter open while the agent can call its tools, including when resuming an interrupted run. Call `await adapter.close()` when you finish using the agent.
 
 For general guidance on defining, binding, and using LangChain tools, see [Tools](../tools.md). For several MCP servers and their namespaced tool catalogs, see [Connections](connections.md#multiple-servers).
@@ -84,8 +88,8 @@ async function accessMultimodalToolContent(serverUrl: string) {
           } else if (block.type === "image") { // [!code highlight]
             console.log(`Image MIME type: ${block.mimeType}`); // [!code highlight]
             console.log(`Image data: ${String(block.data).slice(0, 50)}...`); // [!code highlight]
-          }
-        }
+          } // [!code highlight]
+        } // [!code highlight]
       }
     }
   } finally {
@@ -93,6 +97,10 @@ async function accessMultimodalToolContent(serverUrl: string) {
   }
 }
 ```
+
+> **[View example trace](https://smith.langchain.com/public/c5bd522f-7c6d-4046-896f-9f7d1fca6590/r)**
+>
+> Open a public LangSmith run for this example.
 
 ### Structured content
 
@@ -132,6 +140,10 @@ async function readStructuredContent(serverUrl: string) {
 }
 ```
 
+> **[View example trace](https://smith.langchain.com/public/b5c7e711-6ef7-4483-a700-73465df2f4ca/r)**
+>
+> Open a public LangSmith run for this example.
+
 The `artifact` is an array of MCP result entries. Structured content appears in the entry with `type: "mcp_structured_content"`, and its `data` field holds the tool result's `structuredContent`.
 
 ### Errors
@@ -170,6 +182,10 @@ async function divideByZero(serverUrl: string) {
   }
 }
 ```
+
+> **[View example trace](https://smith.langchain.com/public/8301dd9e-da25-4d9a-ad13-11330f638f36/r)**
+>
+> Open a public LangSmith run for this example.
 
 If you invoke an adapted tool directly with plain arguments, a server result with `isError: true` throws a `ToolException` instead, with the MCP result in `error.result`.
 
@@ -262,7 +278,8 @@ async function gateDestructiveTools(serverUrl: string) {
 ```
 
 > [!WARNING]
-> `interruptOn` keys must be the adapter's tool names, which include the server prefix (`crm__delete_file`). An unprefixed key never matches, so the tool runs without approval.
+>
+> `interruptOn` keys must be the adapter's tool names, which include the server prefix (`crm_delete_file`). An unprefixed key never matches, so the tool runs without approval.
 
 When the agent calls a tool that the predicate gates, the run pauses. Approve the call to run it, or reject it to skip the tool and tell the model:
 
@@ -345,6 +362,10 @@ async function bookWithElicitation(serverUrl: string) {
 }
 ```
 
+> **[View example trace](https://smith.langchain.com/public/f8769a01-6ca6-45c7-afae-2376a5843c0d/r)**
+>
+> Open a public LangSmith run for this example.
+
 `createMCPElicitationResume` addresses the answer to the interrupt that requested it. The response uses the server's request key. Build every resume value with `createMCPElicitationResume` rather than a bare `{ responses }` object, which does not say which interrupt it answers.
 
 Each interrupt's `value` is an `MCPElicitationInterrupt`: `type: "mcp_elicitation"`, `server`, `tool` (the server's own tool name, without the prefix), `arguments` (the effective tool arguments), and `requests`. Check `type` when the same agent can also raise human-in-the-loop interrupts.
@@ -352,6 +373,7 @@ Each interrupt's `value` is an `MCPElicitationInterrupt`: `type: "mcp_elicitatio
 When several calls pause at once, answer every interrupt. Merge the objects that `createMCPElicitationResume` returns into one `Command({ resume })`, for example `Object.assign({}, ...paused.__interrupt__!.map((q) => createMCPElicitationResume(q, answers)))`, or resume until `__interrupt__` is empty. A resume that answers only the first interrupt leaves the others paused.
 
 > [!NOTE]
+>
 > Resuming reruns the tool from the beginning. Any work performed before the server asks for input can repeat. Make that work safe to repeat without duplicating side effects.
 
 Each answer uses one of these actions:
@@ -365,6 +387,7 @@ The adapter forwards the answer to the server, which decides how the tool call f
 Only elicitation is answered this way. The adapter declares only the elicitation capability on each call, so a tool that needs [sampling](https://modelcontextprotocol.io/specification/2025-06-18/client/sampling) or [roots](https://modelcontextprotocol.io/specification/2025-06-18/client/roots) fails with a `ToolException`, which `createAgent` returns to the model as an error `ToolMessage`. See [Sampling and roots](../../migrate/langchain-mcp-adapters.md#sampling-and-roots).
 
 > [!NOTE]
+>
 > Interrupt-driven elicitation answers a server that returns its request as an `InputRequiredResult`. A server that only pushes elicitation over a legacy handshake session cannot be answered this way.
 
 ## See also
@@ -381,8 +404,6 @@ Only elicitation is answered this way. The adapter declares only the elicitation
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

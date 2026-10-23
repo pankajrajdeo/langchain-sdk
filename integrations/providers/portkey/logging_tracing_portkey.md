@@ -19,7 +19,7 @@ First, let's import Portkey, OpenAI, and Agent tools
 ```python
 import os
 
-from langchain.agents import AgentExecutor, create_openai_tools_agent
+from langchain_classic.agents import AgentExecutor, create_openai_tools_agent
 from langchain_openai import ChatOpenAI
 from portkey_ai import PORTKEY_GATEWAY_URL, createHeaders
 ```
@@ -153,8 +153,6 @@ Track and audit each user interaction in high detail with predefined tags. [Docs
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/portkey/logging_tracing_portkey.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/portkey/logging_tracing_portkey.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

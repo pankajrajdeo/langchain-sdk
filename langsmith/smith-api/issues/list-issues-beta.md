@@ -165,6 +165,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -173,6 +175,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/issues:
     get:
@@ -377,15 +380,6 @@ components:
           type: string
         fix_dispatched_at:
           type: string
-        fix_handoff_bot_user_id:
-          description: >-
-            Non-nil once the issue is handed off to a coding agent; Engine skips
-            its
-
-            own fix run while it is set.
-          anyOf:
-            - type: string
-            - type: 'null'
         fix_pr_number:
           type: integer
         fix_prompt:
@@ -750,6 +744,28 @@ components:
         - prompt_cost
         - completion_cost
         - feedback_score
+        - prompt_token_details.cache_creation
+        - prompt_token_details.cache_read
+        - prompt_token_details.ephemeral_1h_input_tokens
+        - prompt_token_details.ephemeral_5m_input_tokens
+        - prompt_token_details.audio
+        - prompt_token_details.image
+        - prompt_token_details.video
+        - completion_token_details.reasoning
+        - completion_token_details.audio
+        - completion_token_details.image
+        - completion_token_details.video
+        - prompt_cost_details.cache_creation
+        - prompt_cost_details.cache_read
+        - prompt_cost_details.ephemeral_1h_input_tokens
+        - prompt_cost_details.ephemeral_5m_input_tokens
+        - prompt_cost_details.audio
+        - prompt_cost_details.image
+        - prompt_cost_details.video
+        - completion_cost_details.reasoning
+        - completion_cost_details.audio
+        - completion_cost_details.image
+        - completion_cost_details.video
       x-enum-varnames:
         - MetricFieldLatencySeconds
         - MetricFieldFirstTokenSeconds
@@ -760,6 +776,28 @@ components:
         - MetricFieldPromptCost
         - MetricFieldCompletionCost
         - MetricFieldFeedbackScore
+        - MetricFieldPromptTokenDetailsCacheCreation
+        - MetricFieldPromptTokenDetailsCacheRead
+        - MetricFieldPromptTokenDetailsEphemeral1H
+        - MetricFieldPromptTokenDetailsEphemeral5M
+        - MetricFieldPromptTokenDetailsAudio
+        - MetricFieldPromptTokenDetailsImage
+        - MetricFieldPromptTokenDetailsVideo
+        - MetricFieldCompletionTokenDetailsReasoning
+        - MetricFieldCompletionTokenDetailsAudio
+        - MetricFieldCompletionTokenDetailsImage
+        - MetricFieldCompletionTokenDetailsVideo
+        - MetricFieldPromptCostDetailsCacheCreation
+        - MetricFieldPromptCostDetailsCacheRead
+        - MetricFieldPromptCostDetailsEphemeral1H
+        - MetricFieldPromptCostDetailsEphemeral5M
+        - MetricFieldPromptCostDetailsAudio
+        - MetricFieldPromptCostDetailsImage
+        - MetricFieldPromptCostDetailsVideo
+        - MetricFieldCompletionCostDetailsReasoning
+        - MetricFieldCompletionCostDetailsAudio
+        - MetricFieldCompletionCostDetailsImage
+        - MetricFieldCompletionCostDetailsVideo
     runsanalytics.MetricParams:
       type: object
       properties:

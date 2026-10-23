@@ -30,7 +30,7 @@ afrom_examples(
     fetch_k: int = 20,
     example_keys: list[str] | None = None,
     vectorstore_kwargs: dict[str, Any] | None = None,
-    **vectorstore_cls_kwargs: Any = {},
+    vectorstore_cls_kwargs: Any = {},
 ) -> MaxMarginalRelevanceExampleSelector
 ```
 
@@ -56,4 +56,4 @@ The ExampleSelector instantiated, backed by a vector store.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/example_selectors/semantic_similarity.py#L321)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/example_selectors/semantic_similarity.py#L321)

@@ -144,6 +144,15 @@ components:
           type: boolean
           title: Is Default
           default: false
+        status:
+          type: string
+          title: Status
+          default: active
+        status_reason:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Status Reason
         created_at:
           type: string
           format: date-time

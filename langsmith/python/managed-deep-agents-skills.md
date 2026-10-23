@@ -13,7 +13,8 @@ tags: [docs, langsmith, managed-deep-agents-skills]
 Skills package task-specific procedures and supporting files into reusable directories. MDA discovers them automatically. The agent loads a skill's full contents only when the task matches the description in the frontmatter.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 Put each skill under `skills/` at the project root:
 
@@ -31,7 +32,8 @@ For the full project layout, see [Project structure](managed-deep-agents-project
 
 Use skills for procedures the agent should follow only when a task matches the description in the frontmatter:
 
-### Create a skill directory
+**1. Create a skill directory**
+
 Each skill directory needs a `SKILL.md` file with `name` and `description` frontmatter:
 
 **skills/research/SKILL.md**
@@ -55,7 +57,8 @@ For skill authoring patterns and the complete format, see [Skills](../../deepage
 
 To understand progressive disclosure, see [How the agent uses skills](#how-the-agent-uses-skills).
 
-### Add supporting files (Optional)
+**2. Add supporting files (Optional)**
+
 A skill directory can also contain supporting scripts, reference files, and templates. Reference these files from `SKILL.md` so the agent knows when to use them:
 
 ```text
@@ -96,8 +99,6 @@ For more information, see [Project structure](managed-deep-agents-project-struct
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

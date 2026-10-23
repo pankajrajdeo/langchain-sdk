@@ -86,7 +86,7 @@ Documents about animals.
      animals = fetch_documents()
 ```
 
-  4.     
+  4.
 </details>
 
 ### Populating the vector store
@@ -97,7 +97,8 @@ For help on choosing one of the vector stores below, or to add support for your
 vector store, consult the documentation about
 [Adapters and Supported Stores](https://datastax.github.io/graph-rag/guide/adapters/).
 
-#### AstraDB
+**AstraDB**
+
 Install the `langchain-graph-retriever` package with the `astra` extra:
 
 ```bash
@@ -125,7 +126,8 @@ consult the [AstraDB Vector Store Guide](../vectorstores/astradb.md).
 For faster initial testing, consider using the **InMemory** Vector Store.
 :::
 
-#### Chroma
+**Chroma**
+
 Install the `langchain-graph-retriever` package with the `chroma` extra:
 
 ```bash
@@ -153,7 +155,8 @@ it is necessary to use the [`ShreddingTransformer`](https://datastax.github.io/g
 when inserting documents.
 :::
 
-#### InMemory
+**InMemory**
+
 Install the `langchain-graph-retriever` package:
 
 ```bash
@@ -280,8 +283,6 @@ To explore all available parameters and advanced configurations, refer to the
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/graph_rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/graph_rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -27,11 +27,13 @@ By default we will provision the following secrets corresponding to different co
 You will need to create your own Kubernetes secrets that adhere to the structure of the secrets provisioned by the LangSmith Helm Chart.
 
 > [!WARNING]
+>
 > The secrets must have the same structure as the ones provisioned by the LangSmith Helm Chart (refer to the links above to see the specific secrets). If you miss any of the required keys, your LangSmith instance may not work correctly.
 
 An example secret may look like this:
 
 > [!WARNING]
+>
 > Set `api_key_salt` once and do not change it. This value is used to hash all API keys at rest. Rotating it will permanently invalidate every existing API key in your organization, requiring all users to regenerate their keys.
 
 ```yaml
@@ -65,9 +67,9 @@ stringData:
   # Required only when enabling Engine. Signs Engine's usage reports; at least
   # 32 random characters.
   engine_usage_signing_secret: foo
-  # Optional. Ed25519/OKP JWKS (JSON) that signs OAuth Authorization Server /
-  # Remote MCP tokens. Required only to enable the LangSmith Remote MCP server
-  # (see /langsmith/langsmith-remote-mcp); omit it otherwise.
+  # Optional. Ed25519/OKP JWKS (JSON) that signs OAuth Authorization Server and
+  # LLM auth proxy tokens. Required for self-hosted OAuth login, Remote MCP, and
+  # the LLM auth proxy (see /langsmith/kubernetes#configure-a-signing-jwks).
   langsmith_signing_jwks: foo
   # Required only when enabling LangSmith Sandboxes.
   sandbox_x_service_auth_jwt_secret: foo
@@ -113,8 +115,6 @@ CLICKHOUSE_DB:                            <set to the key 'clickhouse_db' in sec
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-using-an-existing-secret.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-using-an-existing-secret.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

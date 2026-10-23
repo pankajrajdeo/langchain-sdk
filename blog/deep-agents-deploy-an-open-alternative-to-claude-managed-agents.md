@@ -95,4 +95,4 @@ If you believe in that as well, try out `deepagents deploy` today.
 **Key Links:**
 
 - [**Documentation**](../deepagents/deploy.md)
-- [**GitHub**](https://github.com/langchain-ai/deepagents/blob/main/deepagents-deploy.md?ref=blog.langchain.com)
+- [**GitHub**](https://github.com/langchain-ai/deepagents/blob/7dd5565e30ab91a2cd2ca10fcd227e590451f13c/deepagents-deploy.md)

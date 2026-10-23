@@ -20,6 +20,7 @@ When working with LangSmith traces, you may need to prevent sensitive informatio
 * [Redact inputs and outputs per request](conditional-tracing.md#conditionally-redact-inputs-and-outputs) using `tracing_context` to mask data only for specific invocations (for example, based on tenant or feature flag) while leaving other traces untouched.
 
 > [!NOTE]
+>
 > If your compliance or privacy requirements mandate that certain operations should never be traced at all (for example, clients with zero-retention policies), consider using [conditional tracing](conditional-tracing.md) to disable tracing selectively for specific requests instead of masking data.
 
 ## Hide inputs and outputs
@@ -184,6 +185,7 @@ client = Client(hide_metadata=add_marker)
 ## Rule-based masking of inputs and outputs
 
 > [!NOTE]
+>
 > This feature is available in the following LangSmith SDK versions:
 >
 > * Python: 0.1.81 and above
@@ -192,6 +194,7 @@ client = Client(hide_metadata=add_marker)
 To mask specific data in inputs and outputs, you can use the `create_anonymizer` / `createAnonymizer` function and pass the newly created anonymizer when instantiating the [Client](https://reference.langchain.com/python/langsmith/client/Client). The anonymizer can be either constructed from a list of regex patterns and the replacement values or from a function that accepts and returns a string value.
 
 > [!TIP]
+>
 > For redacting API keys, tokens, and other credentials, see [Redact secrets from traces](redact-secrets.md) for ready-to-use regex patterns and recipes.
 
 The anonymizer will be skipped for inputs if `LANGSMITH_HIDE_INPUTS = true`. Same applies for outputs if `LANGSMITH_HIDE_OUTPUTS = true`.
@@ -251,9 +254,10 @@ const main = traceable(async (inputs: any) => {
 Please note, that using the anonymizer might incur a performance hit with complex regular expressions or large payloads, as the anonymizer serializes the payload to JSON before processing.
 
 > [!NOTE]
+>
 > Improving the performance of `anonymizer` API is on our roadmap! If you are encountering performance issues, please contact support via [support.langchain.com](https://support.langchain.com).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/hide-inputs-outputs.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=ac9ba9a6729029a7fa38da03e1466a1a" alt="Hide inputs outputs" width="1708" height="717" data-path="langsmith/images/hide-inputs-outputs.png" />
+![Hide inputs outputs](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/hide-inputs-outputs.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=ac9ba9a6729029a7fa38da03e1466a1a)
 
 Older versions of LangSmith SDKs can use the `hide_inputs` and `hide_outputs` parameters to achieve the same effect. You can also use these parameters to process the inputs and outputs more efficiently.
 
@@ -357,6 +361,7 @@ await parent(inputs);
 ## Processing inputs and outputs for a single function
 
 > [!NOTE]
+>
 > The `process_outputs` parameter is available in LangSmith SDK version 0.1.98 and above for Python.
 
 In addition to [Client](https://reference.langchain.com/python/langsmith/client/Client)-level input and output processing, LangSmith provides function-level processing through the `process_inputs` and `process_outputs` parameters of the `@traceable` decorator.
@@ -393,6 +398,7 @@ result = my_function("example")
 In this example, `process_inputs` creates a new dictionary with processed input data, and `process_outputs` transforms the output into a specific format before logging to LangSmith.
 
 > [!WARNING]
+>
 > It's recommended to avoid mutating the source objects in the processor functions. Instead, create and return new objects with the processed data.
 
 For asynchronous functions, the usage is similar:
@@ -413,6 +419,7 @@ You can combine rule-based masking with various anonymizers to scrub sensitive i
 ### Regex
 
 > [!NOTE]
+>
 > The implementation below is not exhaustive and may miss some formats or edge cases. Test any implementation thoroughly before using it in production.
 
 You can use regex to mask inputs and outputs before they are sent to LangSmith. The implementation below masks email addresses, phone numbers, full names, credit card numbers, and SSNs.
@@ -502,13 +509,14 @@ response_without_anonymization = openai_client.chat.completions.create(
 )
 ```
 
-The anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/regex-anonymized.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=d42154587a9440675d2d506e1124b3fe" alt="Anonymized run" width="3178" height="1836" data-path="langsmith/images/regex-anonymized.png" />
+The anonymized run will look like this in LangSmith: ![Anonymized run](https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/regex-anonymized.png?fit=max\&auto=format\&n=Fr2lazPB4XVeEA7l\&q=85\&s=d42154587a9440675d2d506e1124b3fe)
 
-The non-anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/regex-not-anonymized.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=98da1cf86195ebb3be2119cddbf1ae0d" alt="Non-anonymized run" width="3176" height="1830" data-path="langsmith/images/regex-not-anonymized.png" />
+The non-anonymized run will look like this in LangSmith: ![Non-anonymized run](https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/regex-not-anonymized.png?fit=max\&auto=format\&n=Fr2lazPB4XVeEA7l\&q=85\&s=98da1cf86195ebb3be2119cddbf1ae0d)
 
 ### Microsoft Presidio
 
 > [!NOTE]
+>
 > The implementation below provides a general example of how to anonymize sensitive information in messages exchanged between a user and an LLM. It is not exhaustive and does not account for all cases. Test any implementation thoroughly before using it in production.
 
 Microsoft Presidio is a data protection and de-identification SDK. The implementation below uses Presidio to anonymize inputs and outputs before they are sent to LangSmith. For up to date information, please refer to Presidio's [official documentation](https://microsoft.github.io/presidio/).
@@ -615,18 +623,20 @@ response_without_anonymization = openai_client.chat.completions.create(
 )
 ```
 
-The anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/presidio-anonymized.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=100d741a3fb32d0c1f251186f57568ac" alt="Anonymized run" width="3174" height="1830" data-path="langsmith/images/presidio-anonymized.png" />
+The anonymized run will look like this in LangSmith: ![Anonymized run](https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/presidio-anonymized.png?fit=max\&auto=format\&n=H9jA2WRyA-MV4-H0\&q=85\&s=100d741a3fb32d0c1f251186f57568ac)
 
-The non-anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/presidio-not-anonymized.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=2ef3e46591877ffdf23c0c240ec389c2" alt="Non-anonymized run" width="3176" height="1684" data-path="langsmith/images/presidio-not-anonymized.png" />
+The non-anonymized run will look like this in LangSmith: ![Non-anonymized run](https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/presidio-not-anonymized.png?fit=max\&auto=format\&n=H9jA2WRyA-MV4-H0\&q=85\&s=2ef3e46591877ffdf23c0c240ec389c2)
 
 ### Amazon Comprehend
 
 > [!NOTE]
+>
 > The implementation below provides a general example of how to anonymize sensitive information using Amazon Comprehend. It is not exhaustive and does not account for all run shapes or content types. Test any implementation thoroughly before using it in production.
 
 Comprehend is a natural language processing service that can detect personally identifiable information. The implementation below uses Comprehend's [`DetectPiiEntities`](https://docs.aws.amazon.com/comprehend/latest/APIReference/API_DetectPiiEntities.html) API to anonymize inputs and outputs before they are sent to LangSmith.
 
 > [!WARNING]
+>
 > Amazon Comprehend does **not** provide a batch PII endpoint. `detect_pii_entities` processes one document per call, and `batch_detect_entities` detects generic entities (people, places, organizations) — it is not a PII-specific API. To process many documents, either call `detect_pii_entities` in a loop (shown below) or use the asynchronous [`start_pii_entities_detection_job`](https://docs.aws.amazon.com/comprehend/latest/APIReference/API_StartPiiEntitiesDetectionJob.html) on documents in S3.
 
 To use Comprehend, install [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html):
@@ -741,11 +751,12 @@ response_without_anonymization = openai_client.chat.completions.create(
 ```
 
 > [!NOTE]
+>
 > Because `comprehend_anonymize` issues one Comprehend API call per string it encounters, it can become rate-limit-bound on high-throughput traces. For higher throughput, use the [batch processing approach below](#batch-processing-for-high-throughput-masking), or pre-filter with [`contains_pii_entities`](https://docs.aws.amazon.com/comprehend/latest/APIReference/API_ContainsPiiEntities.html) and only call `detect_pii_entities` when PII is present.
 
-The anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/aws-comprehend-anonymized.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=cea182d95ef02e614a6f1bbd7e3a2657" alt="Anonymized run" width="3180" height="1616" data-path="langsmith/images/aws-comprehend-anonymized.png" />
+The anonymized run will look like this in LangSmith: ![Anonymized run](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/aws-comprehend-anonymized.png?fit=max\&auto=format\&n=E8FdemkcQxROovD9\&q=85\&s=cea182d95ef02e614a6f1bbd7e3a2657)
 
-The non-anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/aws-comprehend-not-anonymized.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=ec61e5c8d78268b5b34b6b9c184871cc" alt="Non-anonymized run" width="3180" height="1648" data-path="langsmith/images/aws-comprehend-not-anonymized.png" />
+The non-anonymized run will look like this in LangSmith: ![Non-anonymized run](https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/aws-comprehend-not-anonymized.png?fit=max\&auto=format\&n=E8FdemkcQxROovD9\&q=85\&s=ec61e5c8d78268b5b34b6b9c184871cc)
 
 #### Using `create_anonymizer` with Comprehend
 
@@ -766,7 +777,8 @@ This gives you the same redaction behavior as `comprehend_anonymize` above with 
 ### Batch processing for high-throughput masking
 
 > [!NOTE]
-> [`process_buffered_run_ops`](https://reference.langchain.com/python/langsmith/client/Client) is available in the [Python SDK only](smith-python-sdk.md).
+>
+> [`process_buffered_run_ops`](https://reference.langchain.com/python/langsmith/client/Client) is available in the [Python SDK only](https://docs.langchain.com/langsmith/smith-python-sdk.md).
 
 The previous approaches on this page process each run individually. If your masking logic involves a rate-limited API or model inference—such as the Presidio or Amazon Comprehend examples—processing runs one at a time can create a bottleneck. [`process_buffered_run_ops`](https://reference.langchain.com/python/langsmith/client/Client) lets you intercept a batch of raw run dicts before they are serialized and sent to the API, so you can amortize the cost across multiple runs at once. LangSmith processes these runs in a background thread, which does not block your application.
 
@@ -778,9 +790,11 @@ LangSmith holds runs in an in-memory buffer and flushes them as a batch when eit
 Your function receives the batch as a list of raw run dicts and must return a list of the **same length**, in the **same order**, with **run IDs unchanged**. Breaking either constraint raises a `ValueError`.
 
 > [!NOTE]
+>
 > `run_ops_buffer_size` counts individual run *operations*, not unique runs. Each traced call typically produces two operations: a create (when the run starts) and an update (when it ends with outputs). Set your buffer size accordingly. For example, `run_ops_buffer_size=1000` will buffer approximately 500 traced calls. Because of this, the same run ID may appear twice in a single batch: once with inputs and once with outputs.
 
 > [!WARNING]
+>
 > The buffer only flushes automatically when the size limit is reached or the timeout elapses. Always call `client.flush()` before your program exits to avoid dropping buffered runs.
 
 Each run dict in the batch is either a create operation (with `inputs`, sent when the run starts) or an update operation (with `outputs`, sent when it ends). Here's what a typical pair looks like for a single traced call:
@@ -810,6 +824,7 @@ Each run dict in the batch is either a create operation (with `inputs`, sent whe
 ```
 
 > [!WARNING]
+>
 > Amazon Comprehend does **not** have a batch PII endpoint. `batch_detect_entities` detects generic entities (people, places, organizations), not PII, and is not a drop-in replacement for `detect_pii_entities`. The batch optimization below comes from deduplicating identical strings across runs and from amortizing per-run buffering overhead — not from a single bulk API call. If you need true bulk PII detection, run the asynchronous [`start_pii_entities_detection_job`](https://docs.aws.amazon.com/comprehend/latest/APIReference/API_StartPiiEntitiesDetectionJob.html) over documents in S3 outside of the tracing path.
 
 The following example collects every string across the entire buffer, deduplicates them, and calls Comprehend's [`detect_pii_entities`](https://docs.aws.amazon.com/comprehend/latest/APIReference/API_DetectPiiEntities.html) endpoint once per unique string. For traffic that repeats common prompts, system messages, or tool inputs, this can drastically reduce the number of Comprehend calls compared to a per-run approach. The example walks the full payload recursively so it works for any run shape — chat messages, tool inputs/outputs, retriever spans, etc.
@@ -890,8 +905,6 @@ finally:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/mask-inputs-outputs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/mask-inputs-outputs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

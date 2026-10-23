@@ -166,6 +166,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -174,6 +176,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/gateway-policies/{id}:
     delete:
@@ -210,7 +213,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/gateway_policies.errorResponse'
         '403':
-          description: LLM Gateway not enabled, or caller lacks OrganizationManage
+          description: LLM Gateway not enabled, or caller lacks organization:gateway:manage
           content:
             application/json:
               schema:

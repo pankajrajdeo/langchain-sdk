@@ -22,7 +22,7 @@ Tool(
     name: str,
     func: Callable[..., Any] | None,
     description: str,
-    **kwargs: Any = {},
+    kwargs: Any = {},
 )
 ```
 
@@ -38,7 +38,7 @@ __init__(
     name: str,
     func: Callable[..., Any] | None,
     description: str,
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> None
 ```
 
@@ -47,6 +47,7 @@ __init__(
 | `name` | `str` |
 | `func` | `Callable[..., Any] \| None` |
 | `description` | `str` |
+| `kwargs` | `Any` |
 
 ## Properties
 
@@ -62,4 +63,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/tools/simple.py#L31)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/tools/simple.py#L31)

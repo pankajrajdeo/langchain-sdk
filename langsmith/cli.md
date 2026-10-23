@@ -62,46 +62,52 @@ For JS, use `npx @langchain/langgraph-cli <command>` (or `langgraphjs` if instal
 
 To build and run a valid application, the LangGraph CLI requires a JSON configuration file that follows this [schema](https://raw.githubusercontent.com/langchain-ai/langgraph/refs/heads/main/libs/cli/schemas/schema.json). It contains the following properties:
 
-The LangGraph CLI defaults to using the configuration file named <strong>langgraph.json</strong> in the current directory.
+> [!NOTE]
+>
+> The LangGraph CLI defaults to using the configuration file named **langgraph.json** in the current directory.
 
-#### Python
+**Python**
+
 | Key | Description |
 | - | - |
-| <span>`dependencies`</span> | **Required**. Array of dependencies for LangSmith API server. Dependencies can be one of the following: <ul><li>A single period (`"."`), which will look for local Python packages.</li><li>The directory path where `pyproject.toml`, `setup.py` or `requirements.txt` is located.<br />For example, if `requirements.txt` is located in the root of the project directory, specify `"./"`. If it's located in a subdirectory called `local_package`, specify `"./local_package"`. Do not specify the string `"requirements.txt"` itself.</li><li>A Python package name.</li></ul> |
-| <span>`graphs`</span> | **Required**. Mapping from graph ID to path where the compiled graph or a function that makes a graph is defined. Example: <ul><li>`./your_package/your_file.py:variable`, where `variable` is an instance of `langgraph.graph.state.CompiledStateGraph`</li><li>`./your_package/your_file.py:make_graph`, where `make_graph` is a function that takes a config dictionary (`langchain_core.runnables.RunnableConfig`) and returns an instance of `langgraph.graph.state.StateGraph` or `langgraph.graph.state.CompiledStateGraph`. See [how to rebuild a graph at runtime](graph-rebuild.md) for more details.</li></ul> |
-| <span>`auth`</span> | *(Added in v0.0.11)* Authentication and authorization configuration. Contains: <ul><li>`path` (required): Path to your authentication handler (e.g., `./your_package/auth.py:auth`), where `auth` is an instance of `langgraph_sdk.Auth`. See [authentication guide](auth.md).</li><li>`disable_studio_auth` (optional): If `true`, Studio cannot use LangSmith auth as a fallback. Defaults to `false`.</li><li>`allow_langsmith_api_keys` (optional, Agent Server v0.14.0rc2+): If `true`, run LangSmith API-key auth alongside custom auth. Requests with an `Authorization` header go to custom auth; all others go to LangSmith (`x-api-key`). Custom `@auth.on` handlers still run. Defaults to `false`.</li><li>`openapi` (optional): Security schemes to document in OpenAPI. See [OpenAPI security](openapi-security.md).</li></ul> |
-| <span>`base_image`</span> | Optional. Base image to use for the LangGraph API server. Defaults to `langchain/langgraph-api` or `langchain/langgraphjs-api`. Use this to pin your builds to a particular version of the langgraph API, such as `"langchain/langgraph-server:0.2"`. See [https://hub.docker.com/r/langchain/langgraph-server/tags](https://hub.docker.com/r/langchain/langgraph-server/tags) for more details. (added in `langgraph-cli==0.2.8`) |
-| <span>`image_distro`</span> | Optional. Linux distribution for the base image. Must be one of `"debian"`, `"wolfi"`, `"bookworm"`, or `"bullseye"`. If omitted, defaults to `"debian"`. Available in `langgraph-cli>=0.2.11`. |
-| <span>`env`</span> | Path to `.env` file or a mapping from environment variable to its value. |
-| <span>`store`</span> | Configuration for adding semantic search and/or time-to-live (TTL) to the BaseStore. Contains the following fields: <ul><li>`index` (optional): Configuration for semantic search indexing with fields `embed`, `dims`, and optional `fields`.</li><li>`ttl` (optional): Configuration for item expiration. An object with optional fields: `refresh_on_read` (boolean, defaults to `true`), `default_ttl` (float, lifespan in **minutes**; applied to newly created items only; existing items are unchanged; defaults to no expiration), and `sweep_interval_minutes` (integer, how often to check for expired items, defaults to no sweeping).</li></ul> |
-| <span>`ui`</span> | Optional. Named definitions of UI components emitted by the agent, each pointing to a JS/TS file. (added in `langgraph-cli==0.1.84`) |
-| <span>`python_version`</span> | `3.11`, `3.12`, or `3.13`. Defaults to `3.11`. |
-| <span>`node_version`</span> | Specify `node_version: 20` to use LangGraph.js. |
-| <span>`pip_config_file`</span> | Path to `pip` config file. |
-| <span>`pip_installer`</span> | *(Added in v0.3)* Optional. Python package installer selector. It can be set to `"auto"`, `"pip"`, or `"uv"`. From version 0.3 onward the default strategy is to run `uv pip`, which typically delivers faster builds while remaining a drop-in replacement. In the uncommon situation where `uv` cannot handle your dependency graph or the structure of your `pyproject.toml`, specify `"pip"` here to revert to the earlier behaviour. |
-| <span>`keep_pkg_tools`</span> | *(Added in v0.3.4)* Optional. Control whether to retain Python packaging tools (`pip`, `setuptools`, `wheel`) in the final image. Accepted values: <ul><li><code>true</code> : Keep all three tools (skip uninstall).</li><li><code>false</code> / omitted : Uninstall all three tools (default behaviour).</li><li><code>list\[str]</code> : Names of tools <strong>to retain</strong>. Each value must be one of "pip", "setuptools", "wheel".</li></ul>. By default, all three tools are uninstalled. |
-| <span>`dockerfile_lines`</span> | Array of additional lines to add to Dockerfile following the import from parent image. |
-| <span>`checkpointer`</span> | Configuration for the checkpointer. Supports: <ul><li>`backend` (optional): `"default"`, `"mongo"`, or `"custom"`. Defaults to `"default"` (PostgreSQL). See [Configure checkpointer backend](configure-checkpointer.md).</li><li>`path` (optional): Path to a custom checkpointer factory (when `backend` is `"custom"`). See [Custom checkpointer](custom-checkpointer.md).</li><li>`ttl` (optional): Object with `strategy`, `sweep_interval_minutes`, `default_ttl`, and `sweep_limit` (Agent server v0.8+) controlling checkpoint expiry.</li><li>`serde` (optional, Agent server v0.5+): Object with `allowed_json_modules` and `pickle_fallback` to tune deserialization behavior.</li></ul> |
-| <span>`http`</span> | HTTP server configuration with the following fields: <ul><li>`app`: Path to custom Starlette/FastAPI app (e.g., `"./src/agent/webapp.py:app"`). See [custom routes guide](custom-routes.md).</li><li>`cors`: CORS configuration with fields such as `allow_origins`, `allow_methods`, `allow_headers`, `allow_credentials`, `allow_origin_regex`, `expose_headers`, and `max_age`.</li><li>`configurable_headers`: Define which request headers to expose as configurable values via `includes` / `excludes` patterns.</li><li>`logging_headers`: Mirror of `configurable_headers` for excluding sensitive headers from logs.</li><li>`middleware_order`: Choose how custom middleware and auth interact. `auth_first` runs authentication hooks before custom middleware, while `middleware_first` (default) runs your middleware first.</li><li>`enable_custom_route_auth`: Apply auth checks to routes added through `app`.</li><li>Route disable flags, which selectively turn off groups of built-in endpoints:<ul><li>`disable_meta`: Disables the `/` (root), `/info`, `/metrics`, `/docs`, and `/openapi.json` system routes. The `/ok` health check remains available.</li><li>`disable_assistants`: Disables all `/assistants/*` routes.</li><li>`disable_runs`: Disables all `/runs/*` routes.</li><li>`disable_threads`: Disables all `/threads/*` routes.</li><li>`disable_store`: Disables all `/store/*` routes.</li><li>`disable_ui`: Disables all `/ui/*` routes.</li><li>`disable_mcp`: Disables the `/mcp` endpoint. See [Disable MCP](server-mcp.md#disable-mcp).</li><li>`disable_a2a`: Disables the `/a2a/*` endpoint. See [Disable A2A](server-a2a.md#disable-a2a).</li><li>`disable_webhooks`: Disables webhook delivery on run completion (not a route toggle). See [Disable webhooks](use-webhooks.md#disable-webhooks).</li></ul></li><li>`mount_prefix`: Prefix for mounted routes (e.g., "/my-deployment/api").</li></ul> |
-| <span>`webhooks`</span> | *(Added in v0.5.36)* Configuration for outbound webhook delivery. Contains: <ul><li>`env_prefix`: Required prefix for environment variables referenced in header templates (defaults to `LG_WEBHOOK_`).</li><li>`headers`: Static headers to include with webhook requests. Values may contain templates like `${{ env.VAR }}`.</li><li>`url`: URL validation policy with `allowed_domains`, `allowed_ports`, `require_https`, `disable_loopback`, and `max_url_length`.</li></ul> |
-| <span>`api_version`</span> | *(Added in v0.3.7)* Which semantic version of the LangGraph API server to use (e.g., `"0.3"`). Defaults to latest. Check the server [changelog](agent-server-changelog.md) for details on each release. |
+| `dependencies` | **Required** unless [`source`](#configuration-file) is set. Array of dependencies for LangSmith API server. Dependencies can be one of the following: <ul><li>A single period (`"."`), which will look for local Python packages.</li><li>The directory path where `pyproject.toml`, `setup.py` or `requirements.txt` is located. For example, if `requirements.txt` is located in the root of the project directory, specify `"./"`. If it's located in a subdirectory called `local_package`, specify `"./local_package"`. Do not specify the string `"requirements.txt"` itself.</li><li>A Python package name.</li></ul> |
+| `graphs` | **Required**. Mapping from graph ID to path where the compiled graph or a function that makes a graph is defined. Example: <ul><li>`./your_package/your_file.py:variable`, where `variable` is an instance of `langgraph.graph.state.CompiledStateGraph`</li><li>`./your_package/your_file.py:make_graph`, where `make_graph` is a function that takes a config dictionary (`langchain_core.runnables.RunnableConfig`) and returns an instance of `langgraph.graph.state.StateGraph` or `langgraph.graph.state.CompiledStateGraph`. See [how to rebuild a graph at runtime](graph-rebuild.md) for more details.</li></ul> |
+| `auth` | *(Added in v0.0.11)* Authentication and authorization configuration. Contains: <ul><li>`path` (required): Path to your authentication handler (e.g., `./your_package/auth.py:auth`), where `auth` is an instance of `langgraph_sdk.Auth`. See [authentication guide](auth.md).</li><li>`disable_studio_auth` (optional): If `true`, Studio cannot use LangSmith auth as a fallback. Defaults to `false`.</li><li>`allow_langsmith_api_keys` (optional, Agent Server v0.14.0rc2+): If `true`, run LangSmith API-key auth alongside custom auth. Requests with an `Authorization` header go to custom auth; all others go to LangSmith (`x-api-key`). Custom `@auth.on` handlers still run. Defaults to `false`.</li><li>`openapi` (optional): Security schemes to document in OpenAPI. See [OpenAPI security](openapi-security.md).</li></ul> |
+| `base_image` | Optional. Base image to use for the LangGraph API server. Defaults to `langchain/langgraph-api` or `langchain/langgraphjs-api`. Use this to pin your builds to a particular version of the langgraph API, such as `"langchain/langgraph-server:0.2"`. See [https://hub.docker.com/r/langchain/langgraph-server/tags](https://hub.docker.com/r/langchain/langgraph-server/tags) for more details. (added in `langgraph-cli==0.2.8`) |
+| `image_distro` | Optional. Linux distribution for the base image. Must be one of `"debian"`, `"wolfi"`, `"bookworm"`, or `"bullseye"`. If omitted, defaults to `"debian"`. Available in `langgraph-cli>=0.2.11`. |
+| `env` | Path to `.env` file or a mapping from environment variable to its value. |
+| `store` | Configuration for adding semantic search and/or time-to-live (TTL) to the BaseStore. Contains the following fields: <ul><li>`index` (optional): Configuration for semantic search indexing with fields `embed`, `dims`, and optional `fields`.</li><li>`ttl` (optional): Configuration for item expiration. An object with optional fields: `refresh_on_read` (boolean, defaults to `true`), `default_ttl` (float, lifespan in **minutes**; applied to newly created items only; existing items are unchanged; defaults to no expiration), and `sweep_interval_minutes` (integer, how often to check for expired items, defaults to no sweeping).</li></ul> |
+| `ui` | Optional. Named definitions of UI components emitted by the agent, each pointing to a JS/TS file. (added in `langgraph-cli==0.1.84`) |
+| `python_version` | `3.11`, `3.12`, or `3.13`. Defaults to `3.11`. |
+| `node_version` | Specify `node_version: 20` to use LangGraph.js. |
+| `pip_config_file` | Path to `pip` config file. |
+| `pip_installer` | *(Added in v0.3)* Optional. Python package installer selector for the `dependencies`-based install path. It can be set to `"auto"`, `"pip"`, or `"uv"`. From version 0.3 onward the default strategy is to run `uv pip`, which typically delivers faster builds while remaining a drop-in replacement. In the uncommon situation where `uv` cannot handle your dependency graph or the structure of your `pyproject.toml`, specify `"pip"` here to revert to the earlier behaviour. This field does not control whether the build uses a `uv.lock` file; use [`source`](#configuration-file) for lockfile installs. |
+| `source` | *(Added in `langgraph-cli>=0.4.20`)* Optional. Install Python dependencies from a [uv](https://docs.astral.sh/uv/) project or workspace lockfile instead of from `dependencies`. Object fields: <ul><li>`kind` (required): Must be `"uv"`.</li><li>`root` (optional): Path to the directory that contains `pyproject.toml` and `uv.lock`. Defaults to `"."` (next to `langgraph.json`). Use a relative path such as `"../.."` when `langgraph.json` lives inside a workspace member.</li><li>`package` (optional): Workspace member package name to deploy when `root` is a uv workspace and the target is ambiguous.</li></ul> Requires `python_version`. Mutually exclusive with `dependencies`: omit `dependencies` when `source` is set. The build runs `uv export --frozen` from the lockfile, then installs the exported requirements. Prefer this when the project already manages dependencies with uv so Cloud and local installs use the same pinned versions. |
+| `keep_pkg_tools` | *(Added in v0.3.4)* Optional. Control whether to retain Python packaging tools (`pip`, `setuptools`, `wheel`) in the final image. Accepted values: <ul><li>`true` : Keep all three tools (skip uninstall).</li><li>`false` / omitted : Uninstall all three tools (default behaviour).</li><li>`list[str]` : Names of tools **to retain**. Each value must be one of "pip", "setuptools", "wheel".</li></ul>. By default, all three tools are uninstalled. |
+| `dockerfile_lines` | Array of additional lines to add to Dockerfile following the import from parent image. |
+| `checkpointer` | Configuration for the checkpointer. Supports: <ul><li>`backend` (optional): `"default"`, `"mongo"`, or `"custom"`. Defaults to `"default"` (PostgreSQL). See [Configure checkpointer backend](configure-checkpointer.md).</li><li>`path` (optional): Path to a custom checkpointer factory (when `backend` is `"custom"`). See [Custom checkpointer](custom-checkpointer.md).</li><li>`ttl` (optional): Object with `strategy`, `sweep_interval_minutes`, `default_ttl`, and `sweep_limit` (Agent server v0.8+) controlling checkpoint expiry.</li><li>`serde` (optional, Agent server v0.5+): Object with `allowed_json_modules` and `pickle_fallback` to tune deserialization behavior.</li></ul> |
+| `http` | HTTP server configuration with the following fields: <ul><li>`app`: Path to custom Starlette/FastAPI app (e.g., `"./src/agent/webapp.py:app"`). See [custom routes guide](custom-routes.md).</li><li>`cors`: CORS configuration with fields such as `allow_origins`, `allow_methods`, `allow_headers`, `allow_credentials`, `allow_origin_regex`, `expose_headers`, and `max_age`.</li><li>`configurable_headers`: Define which request headers to expose as configurable values via `includes` / `excludes` patterns.</li><li>`logging_headers`: Mirror of `configurable_headers` for excluding sensitive headers from logs.</li><li>`middleware_order`: Choose how custom middleware and auth interact. `auth_first` runs authentication hooks before custom middleware, while `middleware_first` (default) runs your middleware first.</li><li>`enable_custom_route_auth`: Apply auth checks to routes added through `app`.</li><li>Route disable flags, which selectively turn off groups of built-in endpoints:<ul><li>`disable_meta`: Disables the `/` (root), `/info`, `/metrics`, `/docs`, and `/openapi.json` system routes. The `/ok` health check remains available.</li><li>`disable_assistants`: Disables all `/assistants/*` routes.</li><li>`disable_runs`: Disables all `/runs/*` routes.</li><li>`disable_threads`: Disables all `/threads/*` routes.</li><li>`disable_store`: Disables all `/store/*` routes.</li><li>`disable_ui`: Disables all `/ui/*` routes.</li><li>`disable_mcp`: Disables the `/mcp` endpoint. See [Disable MCP](server-mcp.md#disable-mcp).</li><li>`disable_a2a`: Disables the `/a2a/*` endpoint. See [Disable A2A](server-a2a.md#disable-a2a).</li><li>`disable_webhooks`: Disables webhook delivery on run completion (not a route toggle). See [Disable webhooks](use-webhooks.md#disable-webhooks).</li></ul></li><li>`mount_prefix`: Prefix for mounted routes (e.g., "/my-deployment/api").</li></ul> |
+| `webhooks` | *(Added in v0.5.36)* Configuration for outbound webhook delivery. Contains: <ul><li>`env_prefix`: Required prefix for environment variables referenced in header templates (defaults to `LG_WEBHOOK_`).</li><li>`headers`: Static headers to include with webhook requests. Values may contain templates like `${{ env.VAR }}`.</li><li>`url`: URL validation policy with `allowed_domains`, `allowed_ports`, `require_https`, `disable_loopback`, and `max_url_length`.</li></ul> |
+| `api_version` | *(Added in v0.3.7)* Which semantic version of the LangGraph API server to use (e.g., `"0.3"`). Defaults to latest. Check the server [changelog](agent-server-changelog.md) for details on each release. |
 
-#### JS
+**JS**
+
 | Key | Description |
 | - | - |
-| <span>`graphs`</span> | **Required**. Mapping from graph ID to path where the compiled graph or a function that makes a graph is defined. Example: <ul><li>`./src/graph.ts:variable`, where `variable` is an instance of [`CompiledStateGraph`](https://reference.langchain.com/python/langgraph/graph/state/CompiledStateGraph)</li><li>`./src/graph.ts:makeGraph`, where `makeGraph` is a function that takes a config dictionary (`LangGraphRunnableConfig`) and returns an instance of [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) or [`CompiledStateGraph`](https://reference.langchain.com/python/langgraph/graph/state/CompiledStateGraph). See [how to rebuild a graph at runtime](graph-rebuild.md) for more details.</li></ul> |
-| <span>`env`</span> | Path to `.env` file or a mapping from environment variable to its value. |
-| <span>`store`</span> | Configuration for adding semantic search and/or time-to-live (TTL) to the BaseStore. Contains the following fields: <ul><li>`index` (optional): Configuration for semantic search indexing with fields `embed`, `dims`, and optional `fields`.</li><li>`ttl` (optional): Configuration for item expiration. An object with optional fields: `refresh_on_read` (boolean, defaults to `true`), `default_ttl` (float, lifespan in **minutes**; applied to newly created items only; existing items are unchanged; defaults to no expiration), and `sweep_interval_minutes` (integer, how often to check for expired items, defaults to no sweeping).</li></ul> |
-| <span>`node_version`</span> | Specify `node_version: 20` to use LangGraph.js. |
-| <span>`dockerfile_lines`</span> | Array of additional lines to add to Dockerfile following the import from parent image. |
-| <span>`checkpointer`</span> | Configuration for the checkpointer. Supports: <ul><li>`backend` (optional): `"default"`, `"mongo"`, or `"custom"`. Defaults to `"default"` (PostgreSQL). See [Configure checkpointer backend](configure-checkpointer.md).</li><li>`path` (optional): Path to a custom checkpointer factory (when `backend` is `"custom"`). See [Custom checkpointer](custom-checkpointer.md).</li><li>`ttl` (optional): Object with `strategy`, `sweep_interval_minutes`, `default_ttl`, and `sweep_limit` (Agent server v0.8+) controlling checkpoint expiry.</li><li>`serde` (optional, Agent server v0.5+): Object with `allowed_json_modules` and `pickle_fallback` to tune deserialization behavior.</li></ul> |
-| <span>`http`</span> | HTTP server configuration mirroring the Python options: <ul><li>`cors` with `allow_origins`, `allow_methods`, `allow_headers`, `allow_credentials`, `allow_origin_regex`, `expose_headers`, `max_age`.</li><li>`configurable_headers` and `logging_headers` pattern lists.</li><li>`middleware_order` (`auth_first` or `middleware_first`).</li><li>`enable_custom_route_auth` plus the same boolean route toggles as above.</li></ul> |
-| <span>`webhooks`</span> | *(Added in v0.5.36)* Configuration for outbound webhook delivery. Contains: <ul><li>`env_prefix`: Required prefix for environment variables referenced in header templates (defaults to `LG_WEBHOOK_`).</li><li>`headers`: Static headers to include with webhook requests. Values may contain templates like `${{ env.VAR }}`.</li><li>`url`: URL validation policy with `allowed_domains`, `allowed_ports`, `require_https`, `disable_loopback`, and `max_url_length`.</li></ul> |
-| <span>`api_version`</span> | *(Added in v0.3.7)* Which semantic version of the LangGraph API server to use (e.g., `"0.3"`). Defaults to latest. Check the server [changelog](agent-server-changelog.md) for details on each release. |
+| `graphs` | **Required**. Mapping from graph ID to path where the compiled graph or a function that makes a graph is defined. Example: <ul><li>`./src/graph.ts:variable`, where `variable` is an instance of [`CompiledStateGraph`](https://reference.langchain.com/python/langgraph/graph/state/CompiledStateGraph)</li><li>`./src/graph.ts:makeGraph`, where `makeGraph` is a function that takes a config dictionary (`LangGraphRunnableConfig`) and returns an instance of [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) or [`CompiledStateGraph`](https://reference.langchain.com/python/langgraph/graph/state/CompiledStateGraph). See [how to rebuild a graph at runtime](graph-rebuild.md) for more details.</li></ul> |
+| `env` | Path to `.env` file or a mapping from environment variable to its value. |
+| `store` | Configuration for adding semantic search and/or time-to-live (TTL) to the BaseStore. Contains the following fields: <ul><li>`index` (optional): Configuration for semantic search indexing with fields `embed`, `dims`, and optional `fields`.</li><li>`ttl` (optional): Configuration for item expiration. An object with optional fields: `refresh_on_read` (boolean, defaults to `true`), `default_ttl` (float, lifespan in **minutes**; applied to newly created items only; existing items are unchanged; defaults to no expiration), and `sweep_interval_minutes` (integer, how often to check for expired items, defaults to no sweeping).</li></ul> |
+| `node_version` | Specify `node_version: 20` to use LangGraph.js. |
+| `dockerfile_lines` | Array of additional lines to add to Dockerfile following the import from parent image. |
+| `checkpointer` | Configuration for the checkpointer. Supports: <ul><li>`backend` (optional): `"default"`, `"mongo"`, or `"custom"`. Defaults to `"default"` (PostgreSQL). See [Configure checkpointer backend](configure-checkpointer.md).</li><li>`path` (optional): Path to a custom checkpointer factory (when `backend` is `"custom"`). See [Custom checkpointer](custom-checkpointer.md).</li><li>`ttl` (optional): Object with `strategy`, `sweep_interval_minutes`, `default_ttl`, and `sweep_limit` (Agent server v0.8+) controlling checkpoint expiry.</li><li>`serde` (optional, Agent server v0.5+): Object with `allowed_json_modules` and `pickle_fallback` to tune deserialization behavior.</li></ul> |
+| `http` | HTTP server configuration mirroring the Python options: <ul><li>`cors` with `allow_origins`, `allow_methods`, `allow_headers`, `allow_credentials`, `allow_origin_regex`, `expose_headers`, `max_age`.</li><li>`configurable_headers` and `logging_headers` pattern lists.</li><li>`middleware_order` (`auth_first` or `middleware_first`).</li><li>`enable_custom_route_auth` plus the same boolean route toggles as above.</li></ul> |
+| `webhooks` | *(Added in v0.5.36)* Configuration for outbound webhook delivery. Contains: <ul><li>`env_prefix`: Required prefix for environment variables referenced in header templates (defaults to `LG_WEBHOOK_`).</li><li>`headers`: Static headers to include with webhook requests. Values may contain templates like `${{ env.VAR }}`.</li><li>`url`: URL validation policy with `allowed_domains`, `allowed_ports`, `require_https`, `disable_loopback`, and `max_url_length`.</li></ul> |
+| `api_version` | *(Added in v0.3.7)* Which semantic version of the LangGraph API server to use (e.g., `"0.3"`). Defaults to latest. Check the server [changelog](agent-server-changelog.md) for details on each release. |
 
 ### Examples
 
-#### Python
+**Python**
+
 #### Basic configuration
 
 ```json
@@ -113,6 +119,44 @@ The LangGraph CLI defaults to using the configuration file named <strong>langgra
   }
 }
 ```
+
+#### Install from a uv lockfile
+
+When the project already has a `uv.lock`, set `source.kind` to `"uv"` so image builds install the locked versions. Omit `dependencies` in this mode. The CLI exports requirements with `uv export --frozen` and installs them into the image.
+
+**Single-package project** (`pyproject.toml` and `uv.lock` next to `langgraph.json`):
+
+```json
+{
+  "$schema": "https://langgra.ph/schema.json",
+  "python_version": "3.12",
+  "graphs": {
+    "chat": "./src/agent/graph.py:graph"
+  },
+  "source": {
+    "kind": "uv"
+  }
+}
+```
+
+**uv workspace** (`langgraph.json` inside a member; lockfile at the workspace root):
+
+```json
+{
+  "$schema": "https://langgra.ph/schema.json",
+  "python_version": "3.12",
+  "graphs": {
+    "chat": "./src/agent/graph.py:graph"
+  },
+  "source": {
+    "kind": "uv",
+    "root": "../..",
+    "package": "agent"
+  }
+}
+```
+
+Without `source`, a `"dependencies": ["."]` build re-resolves packages from `pyproject.toml` at image build time and does not use `uv.lock`. Pin versions in `pyproject.toml` or use `source.kind: "uv"` when lockfile reproducibility matters.
 
 #### Using Wolfi base images
 
@@ -157,6 +201,7 @@ The `index.fields` configuration determines which parts of your documents to emb
 ```
 
 > [!NOTE]
+>
 > **Common model dimensions**
 >
 > * `openai:text-embedding-3-large`: 3072
@@ -226,8 +271,6 @@ def embed_texts(texts: list[str]) -> list[list[float]]:
 
 See the [authentication conceptual guide](auth.md) for details, and the [setting up custom authentication](set-up-custom-auth.md) guide for a practical walk through of the process.
 
-<a id="ttl" />
-
 #### Configuring store item Time-to-Live
 
 You can configure default data expiration for items/memories in the BaseStore using the `store.ttl` key. This determines how long items are retained after they are last accessed (with reads potentially refreshing the timer based on `refresh_on_read`). Note that these defaults can be overwritten on a per-call basis by modifying the corresponding arguments in `get`, `search`, etc.
@@ -256,8 +299,6 @@ Here is an example enabling a 7-day TTL (10080 minutes), refreshing on reads, an
   }
 }
 ```
-
-<a id="ttl" />
 
 #### Configuring checkpoint Time-to-Live
 
@@ -333,8 +374,9 @@ The `http` block lets you fine-tune request handling:
   }
 ```
 
-> [!NOTE]
->       Customizing your server's CORS configuration will override the functionality of setting the [`CORS_ALLOW_ORIGINS` environment variable](env-var-cloud.md).
+  > [!NOTE]
+  >
+  > Customizing your server's CORS configuration will override the functionality of setting the [`CORS_ALLOW_ORIGINS` environment variable](env-var-cloud.md).
 
 #### Configuring webhooks
 
@@ -360,8 +402,6 @@ You can configure custom headers and URL restrictions for outbound webhook reque
 ```
 
 See [Use webhooks](use-webhooks.md#add-headers-to-webhook-requests) for details on header configuration, environment variable templating, and URL restrictions.
-
-<a id="api-version" />
 
 #### Pinning API version
 
@@ -412,7 +452,8 @@ The `/ok` health check endpoint remains available even when `disable_meta` is se
 
 Other route disable flags include `disable_assistants`, `disable_runs`, `disable_threads`, `disable_store`, and `disable_ui`. For MCP, A2A, and webhooks, see their respective guides: [Disable MCP](server-mcp.md#disable-mcp), [Disable A2A](server-a2a.md#disable-a2a), [Disable webhooks](use-webhooks.md#disable-webhooks).
 
-#### JS
+**JS**
+
 #### Basic configuration
 
 ```json
@@ -423,8 +464,6 @@ Other route disable flags include `disable_assistants`, `disable_runs`, `disable
   }
 }
 ```
-
-<a id="api-version" />
 
 #### Pinning API version
 
@@ -478,14 +517,16 @@ Other route disable flags include `disable_assistants`, `disable_runs`, `disable
 
 **Usage**
 
-#### Python
+**Python**
+
 The base command for the LangGraph CLI is `langgraph`.
 
 ```
 langgraph [OPTIONS] COMMAND [ARGS]
 ```
 
-#### JS
+**JS**
+
 The base command for the LangGraph.js CLI is `langgraphjs`.
 
 ```
@@ -496,12 +537,16 @@ We recommend using `npx` to always use the latest version of the CLI.
 
 ### `dev`
 
-#### Python
+**Python**
+
 Run LangGraph API server in development mode with hot reloading and debugging capabilities. This lightweight server requires no Docker installation and is suitable for development and testing. State is persisted to a local directory.
 
-Currently, the CLI only supports Python 3.11 or later
+> [!NOTE]
+>
+> Currently, the CLI only supports Python 3.11 or later
 
 > [!TIP]
+>
 > If you need more information on when to use `langgraph dev` vs `langgraph up`, refer to the [Local development & testing guide](local-dev-testing.md) for a detailed comparison.
 
 **Installation**
@@ -526,7 +571,7 @@ langgraph dev [OPTIONS]
 | `--host TEXT` | `127.0.0.1` | Host to bind the server to |
 | `--port INTEGER` | `2024` | Port to bind the server to |
 | `--no-reload` | | Disable auto-reload |
-| `--n-jobs-per-worker INTEGER` | | Number of jobs per worker. Default is 10 |
+| `--n-jobs-per-worker INTEGER` | `1` | Maximum number of concurrent jobs per worker |
 | `--debug-port INTEGER` | | Port for debugger to listen on |
 | `--wait-for-client` | `False` | Wait for a debugger client to connect to the debug port before starting the server |
 | `--no-browser` | | Skip automatically opening the browser when the server starts |
@@ -535,7 +580,8 @@ langgraph dev [OPTIONS]
 | `--tunnel` | `False` | Expose the local server via a public tunnel (Cloudflare) for remote frontend access. This avoids issues with browsers like Safari or networks blocking localhost connections |
 | `--help` | | Display command documentation |
 
-#### JS
+**JS**
+
 Run LangGraph API server in development mode with hot reloading capabilities. This lightweight server requires no Docker installation and is suitable for development and testing. State is persisted to a local directory.
 
 **Usage**
@@ -563,7 +609,8 @@ npx @langchain/langgraph-cli dev [OPTIONS]
 
 ### `build`
 
-#### Python
+**Python**
+
 Build LangSmith API server Docker image.
 
 **Usage**
@@ -586,7 +633,8 @@ langgraph build [OPTIONS]
 
 <sup>\*</sup>Only supported for JS deployments, will have no impact on Python deployments.
 
-#### JS
+**JS**
+
 Build LangSmith API server Docker image.
 
 **Usage**
@@ -607,8 +655,11 @@ npx @langchain/langgraph-cli build [OPTIONS]
 
 ### `deploy`
 
-#### Python
-This command is in [beta](release-stages.md) and under active development. Expect frequent updates and improvements. `langgraph deploy` is not yet supported on LangSmith Cloud (SaaS) in AWS.
+**Python**
+
+> [!NOTE]
+>
+> This command is in [beta](release-stages.md) and under active development. Expect frequent updates and improvements. On LangSmith Cloud (SaaS) in AWS, local builds require `langgraph-cli` 0.4.35 or later.
 
 Build and deploy a LangGraph image directly to [LangSmith Deployments](deployment.md). This command builds a Docker image locally, pushes it to a managed registry, and creates or updates a deployment—all in a single step. If Docker is not installed, it triggers a remote build.
 
@@ -617,7 +668,9 @@ Build and deploy a LangGraph image directly to [LangSmith Deployments](deploymen
 * A [**LangSmith API key**](create-account-api-key.md) with access to Deployments.
 * (Optional) **Docker** must be installed and the Docker daemon must be running for local builds. Not required for remote builds. [Install Docker Desktop](https://docs.docker.com/get-docker/).
 
-On LangSmith Cloud, the CLI pushes to a managed registry. Self-hosted LangSmith, and Cloud workspaces that deploy through a [listener](control-plane.md#listeners) in your own cluster, push to a registry you manage with `--push-to`. See [Deploy from a registry you manage](#deploy-from-a-registry-you-manage).
+> [!NOTE]
+>
+> On LangSmith Cloud, the CLI pushes to a managed registry. Self-hosted LangSmith, and Cloud workspaces that deploy through a [listener](control-plane.md#listeners) in your own cluster, push to a registry you manage with `--push-to`. See [Deploy from a registry you manage](#deploy-from-a-registry-you-manage).
 
 **Usage**
 
@@ -636,19 +689,22 @@ This command also accepts all [`langgraph build`](#build) flags (`--platform`, `
 | `--deployment-id TEXT` | | ID of an existing deployment to update. If omitted, `--name` is used to find or create the deployment. |
 | `--agent-id TEXT` | | Agent to deploy to in an agent-based workspace, by identifier. Requires `--agent-environment`, and cannot be combined with `--name` or `--deployment-id`. Can also be set via `LANGSMITH_AGENT_ID`. See [Deploy to an agent environment](deploy-to-agent-environment.md). Available in `langgraph-cli>=0.4.32`. |
 | `--agent-environment TEXT` | | Environment the deployment reports into: `development`, `staging`, or `production`. Requires `--agent-id`. Can also be set via `LANGSMITH_AGENT_ENVIRONMENT`. Available in `langgraph-cli>=0.4.32`. |
-| `--deployment-type TEXT` | `serverless` | Deployment type when creating a new deployment on Cloud: `serverless` or `dedicated` on the new usage-based pricing; `dev` or `prod` for organizations still on previous pricing. |
+| `--deployment-type TEXT` | `serverless` | Deployment type when creating a new deployment on Cloud. Pass `dedicated` for always-on capacity. Legacy `dev` and `prod` are also accepted. |
 | `--remote / --no-remote` | | Force remote or local build. By default, builds remotely if Docker is not available locally. |
-| `--push-to TEXT` | | Push the image to this repository in a registry you manage (for example `123456789.dkr.ecr.us-east-1.amazonaws.com/agents/my-agent`), then deploy from it. Required for self-hosted LangSmith and for workspaces that deploy through a listener. Uses your existing Docker credentials. Give the tag in the value or with `-t`. Cannot be combined with `--remote`. |
+| `--push-to TEXT` | | Push the image to this repository in a registry you manage (for example `123456789.dkr.ecr.us-east-1.amazonaws.com/agents/my-agent`), then deploy from it. Required for self-hosted LangSmith and for workspaces that deploy through a listener, unless you use `--image-uri` instead. Uses your existing Docker credentials. Give the tag in the value or with `-t`. Cannot be combined with `--remote` or `--image-uri`. |
 | `--image TEXT` | | Use an existing local image (for example `my-agent:dev`) instead of building. The image must target `linux/amd64`. With `--push-to`, the image is retagged and pushed. |
 | `-t, --tag TEXT` | `latest` | Tag for the pushed image. |
+| `--image-uri TEXT` | | Deploy an image that's already in a registry you manage (for example `123456789.dkr.ecr.us-east-1.amazonaws.com/agents/my-agent@sha256:<digest>`), with no build, retag, or push. For self-hosted LangSmith and for workspaces that deploy through a listener. Must include a digest; a mutable tag is rejected, since Kubernetes can cache images by tag and would silently keep running the previous one. Cannot be combined with `--push-to`, `--image`, `-t`, or `--remote`. |
 | `--listener-id TEXT` | | Listener that will run the deployment, for workspaces that deploy through a listener in your own cluster. Used only when creating a deployment with `--push-to`. On LangSmith Cloud, defaults to the workspace's only listener. |
 | `--k8s-namespace TEXT` | | Kubernetes namespace the listener deploys into. Used only when creating a deployment with `--push-to`. Defaults to the listener's only namespace. |
+| `--image-pull-secret TEXT` | | Name of a Kubernetes secret (type `kubernetes.io/dockerconfigjson`) in the deployment's namespace to use for pulling the image from a private registry. Repeat to give more than one. Only used when creating a deployment with `--push-to` or `--image-uri`. |
 | `--no-wait` | `False` | Skip waiting for deployment status after pushing. |
 | `--verbose` | `False` | Show detailed output including Docker build and push logs. |
 | `--help` | | Display command documentation. |
 
 > [!NOTE]
-> On the new usage-based pricing, pass `--deployment-type serverless` or `--deployment-type dedicated`. Organizations still on previous pricing until October 1, 2026 pass `--deployment-type dev` or `--deployment-type prod` to create Development or Production deployments. For the transition timeline, see [Manage billing](billing.md#langsmith-deployment-billing).
+>
+> `langgraph deploy` creates a Serverless deployment by default (`langgraph-cli>=0.4.37`; earlier versions default to the legacy `dev` type). To create a Dedicated deployment, pass `--deployment-type dedicated`. If your CLI only accepts `dev` and `prod`, upgrade it to use the new names.
 
 **Example**
 
@@ -658,6 +714,9 @@ langgraph deploy
 
 # Deploy with inline API key
 LANGSMITH_API_KEY=lsv2_... langgraph deploy
+
+# Create a Dedicated deployment
+langgraph deploy --deployment-type dedicated
 
 # Update an existing deployment
 langgraph deploy --deployment-id abc123
@@ -669,7 +728,9 @@ LANGSMITH_DEPLOYMENT_NAME=my-agent langgraph deploy
 LANGGRAPH_HOST_URL=https://eu.api.host.langchain.com langgraph deploy
 ```
 
-Deployments created through other methods (e.g., the LangSmith UI or GitHub integration) can also be updated with the `langgraph deploy` command.
+> [!NOTE]
+>
+> Deployments created through other methods (e.g., the LangSmith UI or GitHub integration) can also be updated with the `langgraph deploy` command.
 
 #### Deploy from a registry you manage
 
@@ -692,6 +753,18 @@ langgraph deploy --image my-agent:dev --push-to 123456789.dkr.ecr.us-east-1.amaz
 
 The control plane URL is derived from `LANGSMITH_ENDPOINT`, read from the project `.env` file or the environment: `https://<host>/api-host` for a self-hosted instance, and the matching LangSmith Cloud control plane for cloud endpoints. To override it, set the `LANGGRAPH_HOST_URL` environment variable to the full control plane URL, including `/api-host` on a self-hosted instance (for example `https://langsmith.example.com/api-host`).
 
+#### Deploy an image you've already pushed
+
+If your CI/CD pipeline builds and pushes the image in a separate job from the one that deploys, `--push-to` does not work: it always builds (or retags a local `--image`) and pushes, and `--image` requires the image to be present in the local Docker daemon. Use `--image-uri` instead to deploy an image that's already in a registry, with no build, retag, or push at all:
+
+```bash
+langgraph deploy --image-uri 123456789.dkr.ecr.us-east-1.amazonaws.com/agents/my-agent@sha256:1a2b3c4d...
+```
+
+`--image-uri` must include a digest (`@sha256:<digest>`), not a mutable tag. Kubernetes can cache images by tag, so redeploying the same tag could silently keep running the previous image. If your pipeline already captures the digest from its push step, pass it straight through; otherwise resolve it first, for example with `docker buildx imagetools inspect <repository>:<tag> --format '{{json .Manifest.Digest}}'` or your registry's own CLI.
+
+Deployments created with `--image-uri` use the same `external_docker` source as `--push-to`, so either option can update a deployment the other one created.
+
 #### Choose a listener and namespace
 
 When a workspace deploys through a listener, the control plane needs to know which listener runs a new deployment and which Kubernetes namespace it deploys into.
@@ -709,11 +782,28 @@ langgraph deploy --push-to 123456789.dkr.ecr.us-east-1.amazonaws.com/agents/my-a
   --listener-id 2b1f0e9c-2d4a-4f1e-9a3b-2c7d8e5f4a10 --k8s-namespace agents
 ```
 
-On a self-hosted instance, the CLI looks up listeners only when you pass `--listener-id` or `--k8s-namespace`.
+On a self-hosted instance, the CLI looks up listeners only when you pass `--listener-id` or `--k8s-namespace`. To find a listener's id and namespaces ahead of time, for example to pass `--listener-id` from a script without hardcoding it, use [`deploy listeners list`](#deploy-listeners-list) with `--json`:
+
+```bash
+listener_id=$(langgraph deploy listeners list --json | jq -r '.[0].id')
+langgraph deploy --push-to 123456789.dkr.ecr.us-east-1.amazonaws.com/agents/my-agent \
+  --listener-id "$listener_id" --k8s-namespace agents
+```
 
 The listener and the namespace are fixed when the deployment is created and cannot be changed afterward, so both options are refused on an existing deployment. Later revisions need only `--push-to`.
 
 Deployments created with `--push-to` use the `external_docker` source. A deployment created without `--push-to` cannot be switched to it; use a new `--name` instead.
+
+#### Authenticate to a private registry
+
+If the registry you push to with `--push-to` or deploy from with `--image-uri` requires authentication to pull the image, the cluster needs a Kubernetes secret of type `kubernetes.io/dockerconfigjson` in the deployment's namespace. Create it ahead of time (for example with `kubectl create secret docker-registry`), then pass its name with `--image-pull-secret`:
+
+```bash
+langgraph deploy --push-to 123456789.dkr.ecr.us-east-1.amazonaws.com/agents/my-agent \
+  --image-pull-secret regcred
+```
+
+Repeat `--image-pull-secret` to attach more than one secret. Like the listener and namespace, image pull secrets are fixed when the deployment is created; the CLI doesn't support changing them on an existing deployment, but you can update the deployment's `resource_spec` through the API or the LangSmith UI.
 
 #### `deploy list`
 
@@ -730,6 +820,50 @@ langgraph deploy list [OPTIONS]
 | Option | Default | Description |
 | - | - | - |
 | `--name-contains TEXT` | | Only show deployments whose names contain this value. |
+| `--api-key TEXT` | | API key. Can also be set via `LANGGRAPH_HOST_API_KEY`, `LANGSMITH_API_KEY`, or `LANGCHAIN_API_KEY` environment variable or `.env` file. |
+| `--help` | | Show this message and exit. |
+
+#### `deploy listeners`
+
+\[Beta] Inspect listeners available to this workspace.
+
+**Usage**
+
+```bash
+langgraph deploy listeners [OPTIONS] COMMAND [ARGS]...
+```
+
+**Options**
+
+| Option | Default | Description |
+| - | - | - |
+| `--help` | | Show this message and exit. |
+
+**Commands**
+
+| Command | Description |
+| - | - |
+| `list` | \[Beta] List listeners available to this workspace. |
+
+#### `deploy listeners list`
+
+\[Beta] List listeners available to this workspace, with their cluster (`compute_id`) and Kubernetes namespaces.
+
+Pass a listener's id to `langgraph deploy --listener-id` to deploy through it. See [Choose a listener and namespace](#choose-a-listener-and-namespace).
+
+Pass `--json` to get the listeners as a JSON array instead of a table, for scripting (for example, to pipe a listener's id into `--listener-id`).
+
+**Usage**
+
+```bash
+langgraph deploy listeners list [OPTIONS]
+```
+
+**Options**
+
+| Option | Default | Description |
+| - | - | - |
+| `--json` | | Emit the listeners as a JSON array instead of a table. |
 | `--api-key TEXT` | | API key. Can also be set via `LANGGRAPH_HOST_API_KEY`, `LANGSMITH_API_KEY`, or `LANGCHAIN_API_KEY` environment variable or `.env` file. |
 | `--help` | | Show this message and exit. |
 
@@ -824,10 +958,12 @@ langgraph deploy logs [OPTIONS]
 
 ### `up`
 
-#### Python
+**Python**
+
 Start LangGraph API server. For local testing, requires a LangSmith API key with access to LangSmith. Requires a license key for production use.
 
 > [!TIP]
+>
 > If you need more information on when to use `langgraph dev` vs `langgraph up`, refer to the [Local development & testing guide](local-dev-testing.md) for a detailed comparison.
 
 **Usage**
@@ -855,7 +991,8 @@ langgraph up [OPTIONS]
 | `--recreate / --no-recreate` | `no-recreate` | Recreate containers even if their configuration and image haven't changed |
 | `--help` | | Display command documentation. |
 
-#### JS
+**JS**
+
 Start LangGraph API server. For local testing, requires a LangSmith API key with access to LangSmith. Requires a license key for production use.
 
 **Usage**
@@ -868,21 +1005,22 @@ npx @langchain/langgraph-cli up [OPTIONS]
 
 | Option | Default | Description |
 | - | - | - |
-| <span>`--wait`</span> | | Wait for services to start before returning. Implies --detach |
-| <span>`--base-image TEXT`</span> | <span>`langchain/langgraph-api`</span> | Base image to use for the LangGraph API server. Pin to specific versions using version tags. |
-| <span>`--image TEXT`</span> | | Docker image to use for the langgraph-api service. If specified, skips building and uses this image directly. |
-| <span>`--postgres-uri TEXT`</span> | Local database | Postgres URI to use for the database. |
-| <span>`--watch`</span> | | Restart on file changes |
-| <span>`-c, --config FILE`</span> | `langgraph.json` | Path to configuration file declaring dependencies, graphs and environment variables. |
-| <span>`-d, --docker-compose FILE`</span> | | Path to docker-compose.yml file with additional services to launch. |
-| <span>`-p, --port INTEGER`</span> | `8123` | Port to expose. Example: `langgraph up --port 8000` |
-| <span>`--no-pull`</span> | | Use locally built images. Defaults to `false` to build with latest remote Docker image. |
-| <span>`--recreate`</span> | | Recreate containers even if their configuration and image haven't changed |
-| <span>`--help`</span> | | Display command documentation. |
+| `--wait` | | Wait for services to start before returning. Implies --detach |
+| `--base-image TEXT` | `langchain/langgraph-api` | Base image to use for the LangGraph API server. Pin to specific versions using version tags. |
+| `--image TEXT` | | Docker image to use for the langgraph-api service. If specified, skips building and uses this image directly. |
+| `--postgres-uri TEXT` | Local database | Postgres URI to use for the database. |
+| `--watch` | | Restart on file changes |
+| `-c, --config FILE` | `langgraph.json` | Path to configuration file declaring dependencies, graphs and environment variables. |
+| `-d, --docker-compose FILE` | | Path to docker-compose.yml file with additional services to launch. |
+| `-p, --port INTEGER` | `8123` | Port to expose. Example: `langgraph up --port 8000` |
+| `--no-pull` | | Use locally built images. Defaults to `false` to build with latest remote Docker image. |
+| `--recreate` | | Recreate containers even if their configuration and image haven't changed |
+| `--help` | | Display command documentation. |
 
 ### `dockerfile`
 
-#### Python
+**Python**
+
 Generate a Dockerfile for building a LangSmith API server Docker image.
 
 **Usage**
@@ -928,9 +1066,12 @@ RUN PIP_CONFIG_FILE=/pipconfig.txt PYTHONDONTWRITEBYTECODE=1 pip install --no-ca
 ENV LANGSERVE_GRAPHS='{"agent": "/deps/__outer_graphs/src/agent.py:graph", "storm": "/deps/__outer_graphs/src/storm.py:graph"}'
 ```
 
-The `langgraph dockerfile` command translates all the configuration in your `langgraph.json` file into Dockerfile commands. When using this command, you will have to re-run it whenever you update your `langgraph.json` file. Otherwise, your changes will not be reflected when you build or run the dockerfile.
+> [!NOTE]
+>
+> The `langgraph dockerfile` command translates all the configuration in your `langgraph.json` file into Dockerfile commands. When using this command, you will have to re-run it whenever you update your `langgraph.json` file. Otherwise, your changes will not be reflected when you build or run the dockerfile.
 
-#### JS
+**JS**
+
 Generate a Dockerfile for building a LangSmith API server Docker image.
 
 **Usage**
@@ -968,12 +1109,12 @@ WORKDIR /deps/agent
 RUN (test ! -f /api/langgraph_api/js/build.mts && echo "Prebuild script not found, skipping") || tsx /api/langgraph_api/js/build.mts
 ```
 
-The `npx @langchain/langgraph-cli dockerfile` command translates all the configuration in your `langgraph.json` file into Dockerfile commands. When using this command, you will have to re-run it whenever you update your `langgraph.json` file. Otherwise, your changes will not be reflected when you build or run the dockerfile.
+> [!NOTE]
+>
+> The `npx @langchain/langgraph-cli dockerfile` command translates all the configuration in your `langgraph.json` file into Dockerfile commands. When using this command, you will have to re-run it whenever you update your `langgraph.json` file. Otherwise, your changes will not be reflected when you build or run the dockerfile.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

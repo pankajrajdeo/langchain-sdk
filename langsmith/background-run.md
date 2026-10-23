@@ -15,7 +15,8 @@ This can be useful for long running jobs.
 
 First let's set up our client and thread:
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -27,7 +28,8 @@ thread = await client.threads.create()
 print(thread)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -39,7 +41,8 @@ const thread = await client.threads.create();
 console.log(thread);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
   --url <DEPLOYMENT_URL>/threads \
@@ -65,19 +68,22 @@ Output:
 
 If we list the current runs on this thread, we will see that it's empty:
 
-#### Python
+**Python**
+
 ```python
 runs = await client.runs.list(thread["thread_id"])
 print(runs)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 let runs = await client.runs.list(thread['thread_id']);
 console.log(runs);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request GET \
     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs
@@ -93,19 +99,22 @@ Output:
 
 Now let's kick off a run:
 
-#### Python
+**Python**
+
 ```python
 input = {"messages": [{"role": "user", "content": "what's the weather in sf"}]}
 run = await client.runs.create(thread["thread_id"], assistant_id, input=input)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 let input = {"messages": [{"role": "user", "content": "what's the weather in sf"}]};
 let run = await client.runs.create(thread["thread_id"], assistantID, { input });
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
@@ -117,17 +126,20 @@ curl --request POST \
 
 The first time we poll it, we can see `status=pending`:
 
-#### Python
+**Python**
+
 ```python
 print(await client.runs.get(thread["thread_id"], run["run_id"]))
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 console.log(await client.runs.get(thread["thread_id"], run["run_id"]));
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request GET \
     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>
@@ -181,19 +193,22 @@ Output:
 
 Now we can join the run, wait for it to finish and check that status again:
 
-#### Python
+**Python**
+
 ```python
 await client.runs.join(thread["thread_id"], run["run_id"])
 print(await client.runs.get(thread["thread_id"], run["run_id"]))
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 await client.runs.join(thread["thread_id"], run["run_id"]);
 console.log(await client.runs.get(thread["thread_id"], run["run_id"]));
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request GET \
     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/join &&
@@ -249,19 +264,22 @@ Output:
 
 Perfect! The run succeeded as we would expect. We can double check that the run worked as expected by printing out the final state:
 
-#### Python
+**Python**
+
 ```python
 final_result = await client.threads.get_state(thread["thread_id"])
 print(final_result)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 let finalResult = await client.threads.getState(thread["thread_id"]);
 console.log(finalResult);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request GET \
     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/state
@@ -423,17 +441,20 @@ Output:
 
 We can also just print the content of the last AIMessage:
 
-#### Python
+**Python**
+
 ```python
 print(final_result['values']['messages'][-1]['content'][0]['text'])
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 console.log(finalResult['values']['messages'][finalResult['values']['messages'].length-1]['content'][0]['text']);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request GET \
     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/state | jq -r '.values.messages[-1].content.[0].text'
@@ -447,8 +468,6 @@ The search results provide the current weather conditions in San Francisco. Acco
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/background-run.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/background-run.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

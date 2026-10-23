@@ -12,11 +12,12 @@ tags: [docs, langsmith, assistants]
 
 For example, imagine a general-purpose writing agent built on a common graph architecture. While the structure remains the same, different writing styles—such as blog posts and tweets—require tailored configurations to optimize performance. To support these variations, you can create multiple assistants (e.g., one for blogs and another for tweets) that share the underlying graph but differ in model selection and system prompt.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/IMK8wJkjSpMCGODD/langsmith/images/assistants.png?fit=max&auto=format&n=IMK8wJkjSpMCGODD&q=85&s=05402316c8fe86fead077ec774e873f0" alt="assistant versions" width="1824" height="692" data-path="langsmith/images/assistants.png" />
+![assistant versions](https://mintcdn.com/langchain-5e9cc07a/IMK8wJkjSpMCGODD/langsmith/images/assistants.png?fit=max\&auto=format\&n=IMK8wJkjSpMCGODD\&q=85\&s=05402316c8fe86fead077ec774e873f0)
 
 The Agent Server API provides several endpoints for creating and managing assistants and their versions. See the [API reference](server-api-ref.md) for more details.
 
 > [!NOTE]
+>
 > Assistants are a [LangSmith Deployment](deployment.md) concept. They are not available in the open source LangGraph library.
 
 ## How assistants work with deployments
@@ -44,6 +45,7 @@ Assistants have several key features:
 * **[Configuration](#configuration) updates without graph changes**: Update prompts, model selection, and other settings through assistant configurations, enabling rapid iteration without modifying or redeploying your graph code.
 
 > [!NOTE]
+>
 > When invoking an assistant, you can specify either in [`langgraph.json`](application-structure.md#configuration-file):
 >
 > * A **graph ID** (e.g., `"agent"`): Uses the default assistant for that graph
@@ -124,14 +126,13 @@ Assistants support versioning to track changes over time. Once you've created an
 * All versions remain available for reference and rollback.
 
 > [!WARNING]
+>
 > When updating an assistant, you must provide the entire configuration payload. The update endpoint creates new versions from scratch and does not merge with previous versions. Make sure to include all configuration fields you want to retain.
 
 For more details on how to manage assistant versions, refer to the [Manage assistants guide](configuration-cloud.md#create-a-new-version-for-your-assistant).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/assistants.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/assistants.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

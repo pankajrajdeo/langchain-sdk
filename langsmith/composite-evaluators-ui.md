@@ -13,15 +13,14 @@ tags: [docs, langsmith, composite-evaluators-ui]
 This guide shows you how to define a [composite evaluator](evaluation-concepts.md#llm-as-judge) using the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-composite-evaluators-ui).
 
 > [!NOTE]
+>
 > To create composite evaluators programmatically using the SDK, refer to [How to create a composite evaluator (SDK)](composite-evaluators-sdk.md).
 
 ## Create a composite evaluator
 
 You can create composite evaluators on a [tracing project](observability-concepts.md#tracing-projects) (for [online evaluations](evaluation-concepts.md#online-evaluations)) or a [dataset](evaluation-concepts.md#datasets) (for [offline evaluations](evaluation-concepts.md#offline-evaluations)). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/cRRwi1N4-QohYC73/langsmith/images/create_composite_evaluator-light.png?fit=max&auto=format&n=cRRwi1N4-QohYC73&q=85&s=b3859ada8b576ebeaf5399ff15359b10" alt="LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output." width="756" height="594" data-path="langsmith/images/create_composite_evaluator-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/cRRwi1N4-QohYC73/langsmith/images/create_composite_evaluator-dark.png?fit=max&auto=format&n=cRRwi1N4-QohYC73&q=85&s=ac13f4d2d4a5e3b67285284150b7d592" alt="LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output." width="761" height="585" data-path="langsmith/images/create_composite_evaluator-dark.png" />
+![LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output.](https://mintcdn.com/langchain-5e9cc07a/cRRwi1N4-QohYC73/langsmith/images/create_composite_evaluator-light.png?fit=max\&auto=format\&n=cRRwi1N4-QohYC73\&q=85\&s=b3859ada8b576ebeaf5399ff15359b10)
 
 ### 1. Navigate to the tracing project or dataset
 
@@ -40,7 +39,9 @@ To start configuring a composite evaluator, navigate to the **Tracing** or **Dat
 4. Add the weights for the feedback keys. By default, the weights are equal for each feedback key. Adjust the weights to increase or decrease the importance of specific feedback keys in the final score.
 5. Click **Create** to save the evaluator.
 
- If you need to adjust the weights for the composite scores, they can be updated after the evaluator is created. The resulting scores will be updated for all runs that have the evaluator configured. 
+> [!TIP]
+>
+> If you need to adjust the weights for the composite scores, they can be updated after the evaluator is created. The resulting scores will be updated for all runs that have the evaluator configured.
 
 ### 3. View composite evaluator results
 
@@ -57,12 +58,12 @@ Composite scores are attached to a run as **feedback**, similarly to feedback fr
 * View the composite scores in the experiments tab. You can also filter and sort experiments based on the average composite score of their runs.
 * Click into an experiment to view the composite score for each run.
 
- If any of the constituent evaluators are not configured on the run, the composite score will not be calculated for that run. 
+> [!NOTE]
+>
+> If any of the constituent evaluators are not configured on the run, the composite score will not be calculated for that run.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/composite-evaluators-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/composite-evaluators-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

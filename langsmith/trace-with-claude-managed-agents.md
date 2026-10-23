@@ -10,9 +10,10 @@ tags: [docs, langsmith, trace-with-claude-managed-agents]
 
 > Automatically trace Claude Managed Agent sessions and events with LangSmith.
 
-[Claude Managed Agents](https://docs.anthropic.com/en/docs/claude-code/managed-agents) are Anthropic's hosted, cloud-based agents that run in managed environments. LangSmith supports tracing Claude Managed Agent sessions via the `wrapAnthropic` wrapper, giving you visibility into agent creation, session events, and message flows.
+[Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) are Anthropic's hosted, cloud-based agents that run in managed environments. LangSmith supports tracing Claude Managed Agent sessions via the `wrapAnthropic` wrapper, giving you visibility into session events and message flows.
 
 > [!NOTE]
+>
 > Claude Managed Agents tracing is currently supported in **TypeScript only**.
 
 ## Installation
@@ -41,7 +42,7 @@ export ANTHROPIC_API_KEY=<your-anthropic-api-key>
 
 ## Trace Claude Managed Agents
 
-Wrap the Anthropic client with `wrapAnthropic`. The wrapper will automatically trace agent creation, session creation, and all events that flow through the session.
+Wrap the Anthropic client with `wrapAnthropic`. The wrapper traces all events that flow through the session.
 
 **TypeScript**
 
@@ -104,6 +105,7 @@ for await (const event of stream) {
 ```
 
 > [!NOTE]
+>
 > Full tracing of subagents in Anthropic's multi-agent architecture requires
 > tapping into a separate event stream and is not yet supported. Only top-level
 > session events are traced.
@@ -116,8 +118,6 @@ for await (const event of stream) {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-claude-managed-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-claude-managed-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

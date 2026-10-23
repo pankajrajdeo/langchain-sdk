@@ -20,38 +20,44 @@ Query runs from a project with optional filtering and field projection. Returns 
 
 #### Method name
 
-#### Python
+**Python**
+
 | Before | After |
 | - | - |
 | `client.list_runs()` | `client.runs.query()` |
 
 > [!NOTE]
+>
 > `client.runs.query()` is now async. Call it with `await`.
 
 See the [reference](https://reference.langchain.com/python/langsmith/_openapi_client/resources/runs/RunsResource/query_v2) for the full parameter and field list.
 
-#### TypeScript
+**TypeScript**
+
 | Before | After |
 | - | - |
 | `client.listRuns()` | `client.runs.query()` |
 
 See the [reference](https://reference.langchain.com/javascript/langsmith/_openapi_client/Langsmith/Runs/queryV2) for the full parameter and field list.
 
-#### Java
+**Java**
+
 | Before | After |
 | - | - |
 | `client.runs().query()` | `client.runs().queryV2()` |
 
 See the [reference](https://javadoc.io/doc/com.langchain.smith/langsmith-java/latest/com/langchain/smith/services/blocking/RunService.html) for the full parameter list.
 
-#### Go
+**Go**
+
 | Before | After |
 | - | - |
 | `client.Runs.Query()` | `client.Runs.QueryV2()` |
 
 See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#RunService.QueryV2AutoPaging) for the full parameter list.
 
-#### cURL
+**cURL**
+
 | Before | After |
 | - | - |
 | `POST /api/v1/runs/query` | `POST /api/v2/runs/query` |
@@ -60,11 +66,14 @@ See the [API doc](smith-api/runs/query-runs.md) for the full parameter and field
 
 #### Query parameters
 
-#### Python
+**Python**
+
 > [!WARNING]
+>
 > `project_name` is not supported in `runs.query`. Pass `project_ids` with the project UUID instead. To look up a UUID by name, use `client.read_project(project_name="my-project")`, or `await client.aread_project(project_name="my-project")` in async code.
 
 > [!WARNING]
+>
 > `min_start_time` defaults to **1 day ago** when omitted. `list_runs` with no `start_time` returned all historical runs; `runs.query` without `min_start_time` silently scopes the query to the last 24 hours. Pass an explicit `min_start_time` if you need a wider window.
 
 | Before (`list_runs`) | After (`runs.query`) | Notes |
@@ -90,11 +99,14 @@ See the [API doc](smith-api/runs/query-runs.md) for the full parameter and field
 | *(not available)* | `reference_dataset_id` | Alternative to `project_ids`; mutually exclusive |
 | *(not available)* | `cursor` | Pass `next_cursor` from previous response to fetch next page |
 
-#### TypeScript
+**TypeScript**
+
 > [!WARNING]
+>
 > `projectName` is not supported in `client.runs.query`. Pass `project_ids` with the project UUID instead. To look up a UUID by name, use `client.readProject({ projectName: "my-project" })`.
 
 > [!WARNING]
+>
 > `min_start_time` defaults to **1 day ago** when omitted. `listRuns` with no `startTime` returned all historical runs; `client.runs.query` without `min_start_time` silently scopes the query to the last 24 hours. Pass an explicit `min_start_time` if you need a wider window.
 
 | Before (`listRuns`) | After (`client.runs.query`) | Notes |
@@ -122,8 +134,10 @@ See the [API doc](smith-api/runs/query-runs.md) for the full parameter and field
 | *(not available)* | `reference_dataset_id` | Alternative to `project_ids`; mutually exclusive |
 | *(not available)* | `cursor` | Pass `next_cursor` from previous response to fetch next page |
 
-#### Java
+**Java**
+
 > [!WARNING]
+>
 > `minStartTime()` defaults to **1 day ago** when omitted. `query()` with no `startTime()` returned all historical runs; `queryV2()` without `minStartTime()` silently scopes the query to the last 24 hours. Pass an explicit `minStartTime()` if you need a wider window.
 
 | Before (`RunQueryParams`) | After (`RunQueryV2Params`) | Notes |
@@ -150,8 +164,10 @@ See the [API doc](smith-api/runs/query-runs.md) for the full parameter and field
 | *(not available)* | `pageSize()` | Per-request result count (default 100, max 1000) |
 | *(not available)* | `referenceDatasetId()` | Alternative to `projectIds()` |
 
-#### Go
+**Go**
+
 > [!WARNING]
+>
 > `MinStartTime` defaults to **1 day ago** when omitted. `Query()` with no `StartTime` returned all historical runs; `QueryV2()` without `MinStartTime` silently scopes the query to the last 24 hours. Pass an explicit `MinStartTime` if you need a wider window.
 
 | Before (`RunQueryParams`) | After (`RunQueryV2Params`) | Notes |
@@ -178,8 +194,10 @@ See the [API doc](smith-api/runs/query-runs.md) for the full parameter and field
 | *(not available)* | `PageSize` | Per-request result count (default 100, max 1000) |
 | *(not available)* | `ReferenceDatasetID` | Alternative to `ProjectIDs` |
 
-#### cURL
+**cURL**
+
 > [!WARNING]
+>
 > `min_start_time` defaults to **1 day ago** when omitted. `POST /api/v1/runs/query` with no `start_time` returned all historical runs; `POST /api/v2/runs/query` without `min_start_time` silently scopes the query to the last 24 hours. Pass an explicit `min_start_time` if you need a wider window.
 
 | Before (v1 `POST /api/v1/runs/query` body field) | After (v2 `POST /api/v2/runs/query` body field) | Notes |
@@ -206,7 +224,14 @@ See the [API doc](smith-api/runs/query-runs.md) for the full parameter and field
 
 #### Response fields
 
-#### Python
+> [!WARNING]
+>
+> Token and cost fields no longer include child-run usage. In v1, each parent run, including the root run, carried the summed usage of the LLM runs beneath it. In v2, these fields report only the run's own usage. A root or chain run that made no model call of its own returns them empty (`None`, `null`, or omitted from the JSON), not the trace total.
+>
+> To read a trace's total tokens and cost, use [Traces: query](smithdb-sdk-migration-traces.md) and read `total_tokens` and `total_cost` from `trace_aggregates`. `trace_aggregates` has no prompt or completion split.
+
+**Python**
+
 Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS"`) to control which fields are populated on each `Run`; only selected fields are non-`None`. Default `selects` contains only `"ID"`.
 
 | Before (v1 `Run` attribute) | After (v2 `Run` attribute) | Notes |
@@ -233,12 +258,12 @@ Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS
 | `run.feedback_stats` | `run.feedback_stats` | Unchanged |
 | `run.app_path` | `run.app_path` | Unchanged |
 | `run.attachments` | `run.attachments` | v2 returns pre-signed download URLs instead of raw bytes |
-| `run.total_tokens` | `run.total_tokens` | Unchanged |
-| `run.prompt_tokens` | `run.prompt_tokens` | Unchanged |
-| `run.completion_tokens` | `run.completion_tokens` | Unchanged |
-| `run.total_cost` | `run.total_cost` | Unchanged |
-| `run.prompt_cost` | `run.prompt_cost` | Unchanged |
-| `run.completion_cost` | `run.completion_cost` | Unchanged |
+| `run.total_tokens` | `run.total_tokens` | Own usage only; no longer summed from child runs |
+| `run.prompt_tokens` | `run.prompt_tokens` | Own usage only; no longer summed from child runs |
+| `run.completion_tokens` | `run.completion_tokens` | Own usage only; no longer summed from child runs |
+| `run.total_cost` | `run.total_cost` | Own usage only; no longer summed from child runs |
+| `run.prompt_cost` | `run.prompt_cost` | Own usage only; no longer summed from child runs |
+| `run.completion_cost` | `run.completion_cost` | Own usage only; no longer summed from child runs |
 | `run.first_token_time` | `run.first_token_time` | Unchanged |
 | `run.latency` (property) | `run.latency_seconds` | Renamed; was a computed `timedelta` property, now a native `float` field |
 | `run.in_dataset` | `run.is_in_dataset` | Renamed |
@@ -259,7 +284,8 @@ Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS
 | `run.prompt_cost_details` | `run.prompt_cost_details.raw` | Field now wraps the dict; access `.raw` to get `dict[str, float]` (was `dict[str, Decimal]`) |
 | `run.completion_cost_details` | `run.completion_cost_details.raw` | Field now wraps the dict; access `.raw` to get `dict[str, float]` (was `dict[str, Decimal]`) |
 
-#### TypeScript
+**TypeScript**
+
 Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS"`) to control which fields are populated on each `Run`. Default `selects` contains only `"ID"`.
 
 | Before (v1 `Run` property) | After (v2 `Run` property) | Notes |
@@ -286,12 +312,12 @@ Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS
 | `run.feedbackStats` | `run.feedback_stats` | Renamed to `snake_case` |
 | `run.appPath` | `run.app_path` | Renamed to `snake_case` |
 | `run.attachments` | `run.attachments` | v2 returns pre-signed download URLs instead of raw bytes |
-| `run.totalTokens` | `run.total_tokens` | Renamed to `snake_case` |
-| `run.promptTokens` | `run.prompt_tokens` | Renamed to `snake_case` |
-| `run.completionTokens` | `run.completion_tokens` | Renamed to `snake_case` |
-| `run.totalCost` | `run.total_cost` | Renamed to `snake_case` |
-| `run.promptCost` | `run.prompt_cost` | Renamed to `snake_case` |
-| `run.completionCost` | `run.completion_cost` | Renamed to `snake_case` |
+| `run.totalTokens` | `run.total_tokens` | Renamed to `snake_case`; own usage only; no longer summed from child runs |
+| `run.promptTokens` | `run.prompt_tokens` | Renamed to `snake_case`; own usage only; no longer summed from child runs |
+| `run.completionTokens` | `run.completion_tokens` | Renamed to `snake_case`; own usage only; no longer summed from child runs |
+| `run.totalCost` | `run.total_cost` | Renamed to `snake_case`; own usage only; no longer summed from child runs |
+| `run.promptCost` | `run.prompt_cost` | Renamed to `snake_case`; own usage only; no longer summed from child runs |
+| `run.completionCost` | `run.completion_cost` | Renamed to `snake_case`; own usage only; no longer summed from child runs |
 | `run.firstTokenTime` | `run.first_token_time` | Renamed to `snake_case` |
 | `run.latency` | `run.latency_seconds` | Renamed; was a computed property, now a native `number` field (seconds) |
 | `run.inDataset` | `run.is_in_dataset` | Renamed |
@@ -313,7 +339,8 @@ Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS
 | *(not available)* | `run.prompt_cost_details` | New: per-category prompt cost breakdown |
 | *(not available)* | `run.completion_cost_details` | New: per-category completion cost breakdown |
 
-#### Java
+**Java**
+
 Add `RunQueryV2Params.Select` values (eg. `Select.NAME`, `Select.STATUS`) via `.addSelect(...)` to control which fields are populated; unselected fields return empty `Optional` values. `selects()` defaults to `ID` only.
 
 | Before (`RunSchema` method) | After (`Run` method) | Notes |
@@ -341,12 +368,12 @@ Add `RunQueryV2Params.Select` values (eg. `Select.NAME`, `Select.STATUS`) via `.
 | `run.sessionId()` | `run.projectId()` | Renamed; `sessionId()` returned the project UUID |
 | `run.appPath()` | `run.appPath()` | Unchanged |
 | `run.firstTokenTime()` | `run.firstTokenTime()` | Unchanged |
-| `run.totalTokens()` | `run.totalTokens()` | Unchanged |
-| `run.promptTokens()` | `run.promptTokens()` | Unchanged |
-| `run.completionTokens()` | `run.completionTokens()` | Unchanged |
-| `run.totalCost()` | `run.totalCost()` | Return type changed from `Optional` to `Optional` |
-| `run.promptCost()` | `run.promptCost()` | Return type changed from `Optional` to `Optional` |
-| `run.completionCost()` | `run.completionCost()` | Return type changed from `Optional` to `Optional` |
+| `run.totalTokens()` | `run.totalTokens()` | Own usage only; no longer summed from child runs |
+| `run.promptTokens()` | `run.promptTokens()` | Own usage only; no longer summed from child runs |
+| `run.completionTokens()` | `run.completionTokens()` | Own usage only; no longer summed from child runs |
+| `run.totalCost()` | `run.totalCost()` | Return type changed from `Optional` to `Optional`; own usage only; no longer summed from child runs |
+| `run.promptCost()` | `run.promptCost()` | Return type changed from `Optional` to `Optional`; own usage only; no longer summed from child runs |
+| `run.completionCost()` | `run.completionCost()` | Return type changed from `Optional` to `Optional`; own usage only; no longer summed from child runs |
 | `run.promptTokenDetails()` | `run.promptTokenDetails()` | Unchanged |
 | `run.completionTokenDetails()` | `run.completionTokenDetails()` | Unchanged |
 | `run.promptCostDetails()` | `run.promptCostDetails()` | Unchanged |
@@ -378,7 +405,8 @@ Add `RunQueryV2Params.Select` values (eg. `Select.NAME`, `Select.STATUS`) via `.
 | *(not available)* | `run.shareUrl()` | New: public share URL (only set when the run has been shared) |
 | *(not available)* | `run.threadEvaluationTime()` | New |
 
-#### Go
+**Go**
+
 Pass `RunQueryV2ParamsSelect` constants (eg. `RunQueryV2ParamsSelectName`, `RunQueryV2ParamsSelectStatus`) to `Selects` to control which fields are populated; unselected fields are zero-valued on the returned struct. `Selects` defaults to `ID` only.
 
 | Before (`RunSchema` field) | After (`Run` field) | Notes |
@@ -403,16 +431,16 @@ Pass `RunQueryV2ParamsSelect` constants (eg. `RunQueryV2ParamsSelectName`, `RunQ
 | `run.OutputsPreview` | `run.OutputsPreview` | Unchanged |
 | `run.ParentRunIDs` | `run.ParentRunIDs` | Unchanged |
 | `run.PriceModelID` | `run.PriceModelID` | Unchanged |
-| `run.PromptCost` | `run.PromptCost` | Unchanged |
+| `run.PromptCost` | `run.PromptCost` | Own usage only; no longer summed from child runs |
 | `run.PromptCostDetails` | `run.PromptCostDetails.Raw` | Field now wraps the map; access `.Raw` to get `map[string]float64` (was `map[string]string`) |
 | `run.PromptTokenDetails` | `run.PromptTokenDetails.Raw` | Field now wraps the map; access `.Raw` to get `map[string]int64` (element type unchanged) |
-| `run.PromptTokens` | `run.PromptTokens` | Unchanged |
-| `run.CompletionCost` | `run.CompletionCost` | Unchanged |
+| `run.PromptTokens` | `run.PromptTokens` | Own usage only; no longer summed from child runs |
+| `run.CompletionCost` | `run.CompletionCost` | Own usage only; no longer summed from child runs |
 | `run.CompletionCostDetails` | `run.CompletionCostDetails.Raw` | Field now wraps the map; access `.Raw` to get `map[string]float64` (was `map[string]string`) |
 | `run.CompletionTokenDetails` | `run.CompletionTokenDetails.Raw` | Field now wraps the map; access `.Raw` to get `map[string]int64` (element type unchanged) |
-| `run.CompletionTokens` | `run.CompletionTokens` | Unchanged |
-| `run.TotalCost` | `run.TotalCost` | Unchanged |
-| `run.TotalTokens` | `run.TotalTokens` | Unchanged |
+| `run.CompletionTokens` | `run.CompletionTokens` | Own usage only; no longer summed from child runs |
+| `run.TotalCost` | `run.TotalCost` | Own usage only; no longer summed from child runs |
+| `run.TotalTokens` | `run.TotalTokens` | Own usage only; no longer summed from child runs |
 | `run.ReferenceDatasetID` | `run.ReferenceDatasetID` | Unchanged |
 | `run.ReferenceExampleID` | `run.ReferenceExampleID` | Unchanged |
 | `run.Tags` | `run.Tags` | Unchanged |
@@ -447,7 +475,8 @@ Pass `RunQueryV2ParamsSelect` constants (eg. `RunQueryV2ParamsSelectName`, `RunQ
 | *(not available)* | `run.ShareURL` | New: public share URL (only set when the run has been shared) |
 | *(not available)* | `run.ThreadEvaluationTime` | New |
 
-#### cURL
+**cURL**
+
 Field names in the JSON response use `snake_case`.
 
 Pass SCREAMING\_SNAKE\_CASE strings in the `selects` JSON array (eg. `"ID"`, `"NAME"`, `"STATUS"`) to control which fields are populated. Default `selects` contains only `"ID"`.
@@ -474,16 +503,16 @@ Pass SCREAMING\_SNAKE\_CASE strings in the `selects` JSON array (eg. `"ID"`, `"N
 | `outputs_preview` | `outputs_preview` | Unchanged |
 | `parent_run_ids` | `parent_run_ids` | Unchanged |
 | `price_model_id` | `price_model_id` | Unchanged |
-| `prompt_cost` | `prompt_cost` | Unchanged |
+| `prompt_cost` | `prompt_cost` | Own usage only; no longer summed from child runs |
 | `prompt_cost_details` | `prompt_cost_details.raw` | Field now wraps the object; read `.raw` for the same `{category: cost}` mapping, now with numeric values (was strings) |
 | `prompt_token_details` | `prompt_token_details.raw` | Field now wraps the object; read `.raw` for the same `{category: count}` mapping (values unchanged) |
-| `prompt_tokens` | `prompt_tokens` | Unchanged |
-| `completion_cost` | `completion_cost` | Unchanged |
+| `prompt_tokens` | `prompt_tokens` | Own usage only; no longer summed from child runs |
+| `completion_cost` | `completion_cost` | Own usage only; no longer summed from child runs |
 | `completion_cost_details` | `completion_cost_details.raw` | Field now wraps the object; read `.raw` for the same `{category: cost}` mapping, now with numeric values (was strings) |
 | `completion_token_details` | `completion_token_details.raw` | Field now wraps the object; read `.raw` for the same `{category: count}` mapping (values unchanged) |
-| `completion_tokens` | `completion_tokens` | Unchanged |
-| `total_cost` | `total_cost` | Unchanged |
-| `total_tokens` | `total_tokens` | Unchanged |
+| `completion_tokens` | `completion_tokens` | Own usage only; no longer summed from child runs |
+| `total_cost` | `total_cost` | Own usage only; no longer summed from child runs |
+| `total_tokens` | `total_tokens` | Own usage only; no longer summed from child runs |
 | `reference_dataset_id` | `reference_dataset_id` | Unchanged |
 | `reference_example_id` | `reference_example_id` | Unchanged |
 | `tags` | `tags` | Unchanged |
@@ -522,30 +551,35 @@ Pass SCREAMING\_SNAKE\_CASE strings in the `selects` JSON array (eg. `"ID"`, `"N
 
 The SmithDB-backed method has a dedicated, higher rate limit than the method it replaces. Limits apply in Cloud, per API key.
 
-#### Python
+**Python**
+
 | | Before (`client.list_runs()`) | After (`client.runs.query()`) |
 | - | - | - |
-| Limit | 15 requests per 10 seconds | 300 requests per 10 seconds |
+| Limit | 10 requests per 10 seconds | 300 requests per 10 seconds |
 
-#### TypeScript
+**TypeScript**
+
 | | Before (`client.listRuns()`) | After (`client.runs.query()`) |
 | - | - | - |
-| Limit | 15 requests per 10 seconds | 300 requests per 10 seconds |
+| Limit | 10 requests per 10 seconds | 300 requests per 10 seconds |
 
-#### Java
+**Java**
+
 | | Before (`client.runs().query()`) | After (`client.runs().queryV2()`) |
 | - | - | - |
-| Limit | 15 requests per 10 seconds | 300 requests per 10 seconds |
+| Limit | 10 requests per 10 seconds | 300 requests per 10 seconds |
 
-#### Go
+**Go**
+
 | | Before (`client.Runs.Query()`) | After (`client.Runs.QueryV2()`) |
 | - | - | - |
-| Limit | 15 requests per 10 seconds | 300 requests per 10 seconds |
+| Limit | 10 requests per 10 seconds | 300 requests per 10 seconds |
 
-#### cURL
+**cURL**
+
 | | Before (`POST /api/v1/runs/query`) | After (`POST /api/v2/runs/query`) |
 | - | - | - |
-| Limit | 15 requests per 10 seconds | 300 requests per 10 seconds |
+| Limit | 10 requests per 10 seconds | 300 requests per 10 seconds |
 
 The deprecated method is also subject to per-tenant limits that vary by query shape, described in [Query traces using the SDK](export-traces.md#rate-limits). The SmithDB-backed method is not subject to those per-tenant limits.
 
@@ -555,10 +589,12 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 
 #### List all runs in a project
 
-#### Python
+**Python**
+
 `runs.query` does not accept a project name directly. Resolve the project UUID with `client.aread_project()` first, then pass it as a string in `project_ids`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -568,7 +604,8 @@ client = Client()
 runs = client.list_runs(project_name="default")
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -584,10 +621,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `client.runs.query` does not accept a project name directly. Resolve the project UUID with `client.readProject()` first, then pass it as a string in `project_ids`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -597,7 +636,8 @@ const client = new Client();
 const runs = client.listRuns({ projectName: "default" });
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -608,10 +648,12 @@ const project = await client.readProject({ projectName: "default" });
 const runs = client.runs.query({ project_ids: [project.id] });
 ```
 
-#### Java
+**Java**
+
 `queryV2()` does not accept a project name directly. Resolve the project UUID with `client.sessions().list()` first, then pass it as a string in `projectIds()`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -630,7 +672,8 @@ val runs = client.runs().query(
 ).items()
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -649,10 +692,12 @@ val runs = client.runs().queryV2(
 ).items()
 ```
 
-#### Go
+**Go**
+
 `QueryV2()` does not accept a project name directly. Resolve the project UUID with `client.Sessions.List()` first, then pass it as a string in `ProjectIDs`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -678,7 +723,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -704,10 +750,12 @@ runs, err := client.Runs.QueryV2(ctx, langsmith.RunQueryV2Params{
 })
 ```
 
-#### cURL
-`POST /api/v2/runs/query` does not accept a project name directly. Resolve the project UUID with a `GET /api/v1/sessions` request first, then pass it as a string in `project_ids`.
+**cURL**
 
-#### Before
+`POST /api/v2/runs/query` does not accept a project name directly. Resolve the project UUID with a `GET /api/v1/sessions` request first, then pass it as a string in `project_ids`. For an agent environment, an experiment, or the evaluators, [resolve it](resolve-an-agent.md), which is in beta, to get the project UUID.
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -718,7 +766,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" '{"session": [$pid]}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -731,10 +780,12 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 
 #### Selecting fields
 
-#### Python
+**Python**
+
 `list_runs` returns a default set of fields with no selection needed. `runs.query` returns only `id` by default—pass `selects=[...]` to request more. Field names are now uppercase (`"name"` → `"NAME"`).
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -747,7 +798,8 @@ for run in runs:
     print(run.id, run.name, run.run_type, run.status, run.start_time, run.inputs, run.error)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -768,10 +820,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `listRuns` returns a default set of fields with no selection needed. `client.runs.query` returns only `id` by default—pass `selects: [...]` to request more. Field names are now uppercase (`"name"` → `"NAME"`).
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -785,7 +839,8 @@ for await (const run of runs) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -802,10 +857,12 @@ for await (const run of client.runs.query({
 }
 ```
 
-#### Java
+**Java**
+
 `query()` returns a default set of fields with no selection needed. `queryV2()` returns only `id` by default—call `.addSelect(RunQueryV2Params.Select.X)` for each field you need.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -828,7 +885,8 @@ for (run in runs) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -861,10 +919,12 @@ for (run in runs) {
 }
 ```
 
-#### Go
+**Go**
+
 `Query` returns a default set of fields with no selection needed. `QueryV2` returns only `ID` by default—pass `Selects` with the uppercase field constants you need (e.g. `RunQueryV2ParamsSelectName`).
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -895,7 +955,8 @@ for _, run := range runs.Runs {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -935,10 +996,12 @@ for _, run := range runs.Items {
 }
 ```
 
-#### cURL
+**cURL**
+
 `POST /api/v1/runs/query` returns a default set of fields with no selection needed. `POST /api/v2/runs/query` returns only `id` by default—pass `selects` with the uppercase field names you need (e.g. `"NAME"`).
 
-#### Before
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -949,7 +1012,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" '{"session": [$pid]}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -962,10 +1026,12 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 
 #### Filter by run type and time range
 
-#### Python
+**Python**
+
 `start_time` is renamed to `min_start_time`, and `run_type` values are now uppercase (`"llm"` → `"LLM"`).
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -981,7 +1047,8 @@ runs = client.list_runs(
 )
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1002,10 +1069,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `startTime` (camelCase) becomes `min_start_time` (snake\_case, matching the v2 request body), and `runType` values are now uppercase (`"llm"` → `"LLM"`).
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -1019,7 +1088,8 @@ const runs = client.listRuns({
 });
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1035,10 +1105,12 @@ const runs = client.runs.query({
 });
 ```
 
-#### Java
+**Java**
+
 `.startTime()` is renamed to `.minStartTime()`, and `.runType()` now takes the new `RunQueryV2Params.RunType` enum instead of `RunTypeEnum`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -1064,7 +1136,8 @@ val runs = client.runs().query(
 ).items()
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1090,10 +1163,12 @@ val runs = client.runs().queryV2(
 ).items()
 ```
 
-#### Go
+**Go**
+
 `StartTime` is renamed to `MinStartTime`, and `RunType` now takes the new `RunQueryV2ParamsRunType` enum instead of `RunTypeEnum`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -1122,7 +1197,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1151,10 +1227,12 @@ runs, err := client.Runs.QueryV2(ctx, langsmith.RunQueryV2Params{
 })
 ```
 
-#### cURL
+**cURL**
+
 `start_time` is renamed to `min_start_time`, and `run_type` values are now uppercase (`"llm"` → `"LLM"`).
 
-#### Before
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1165,7 +1243,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" '{"session": [$pid], "run_type": "llm", "start_time": "2025-01-01T00:00:00Z"}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1178,10 +1257,12 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 
 #### Filter root runs only
 
-#### Python
+**Python**
+
 `is_root` is unchanged.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -1191,7 +1272,8 @@ client = Client()
 runs = client.list_runs(project_name="default", is_root=True)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1207,10 +1289,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `isRoot` (camelCase) becomes `is_root` (snake\_case, matching the v2 request body).
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -1220,7 +1304,8 @@ const client = new Client();
 const runs = client.listRuns({ projectName: "default", isRoot: true });
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1234,10 +1319,12 @@ const runs = client.runs.query({
 });
 ```
 
-#### Java
+**Java**
+
 `.isRoot()` is unchanged.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -1256,7 +1343,8 @@ val runs = client.runs().query(
 ).items()
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1275,10 +1363,12 @@ val runs = client.runs().queryV2(
 ).items()
 ```
 
-#### Go
+**Go**
+
 `IsRoot` is unchanged.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -1305,7 +1395,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1332,10 +1423,12 @@ runs, err := client.Runs.QueryV2(ctx, langsmith.RunQueryV2Params{
 })
 ```
 
-#### cURL
+**cURL**
+
 `is_root` is unchanged.
 
-#### Before
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1346,7 +1439,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" '{"session": [$pid], "is_root": true}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1357,14 +1451,18 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" '{"project_ids": [$pid], "is_root": true}')"
 ```
 
-To enumerate traces specifically, use `traces.query` instead of `is_root=True`. See [Traces: query](smithdb-sdk-migration-traces.md): it also exposes trace-wide `total_tokens`/`total_cost` via `trace_aggregates`.
+> [!WARNING]
+>
+> To list traces, use `traces.query` instead of `is_root=True`. Root runs from `runs.query` do not carry trace-wide token or cost totals: their token and cost fields cover only the root run's own usage, and are empty when the root made no model call. `traces.query` returns trace-wide `total_tokens` and `total_cost` under `trace_aggregates`. See [Traces: query](smithdb-sdk-migration-traces.md).
 
 #### Fetch runs by ID list
 
-#### Python
+**Python**
+
 `id=[...]` is renamed to `ids=[...]`. `project_ids` is now required even when filtering by run IDs—v1 allowed omitting the project context.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -1374,7 +1472,8 @@ client = Client()
 runs = client.list_runs(id=["<run-id-1>", "<run-id-2>"])
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1393,10 +1492,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `id: [...]` is renamed to `ids: [...]`. `project_ids` is now required even when filtering by run IDs—v1 allowed omitting the project context.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -1406,7 +1507,8 @@ const client = new Client();
 const runs = client.listRuns({ id: ["<run-id-1>", "<run-id-2>"] });
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1420,10 +1522,12 @@ const runs = client.runs.query({
 });
 ```
 
-#### Java
+**Java**
+
 `.addId(...)` is unchanged—call it once per run ID. `.addProjectId(...)` is now required even when filtering by run IDs—v1 allowed omitting the project context.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -1448,7 +1552,8 @@ val runs = client.runs().query(
 ).items()
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1471,10 +1576,12 @@ val runs = client.runs().queryV2(
 ).items()
 ```
 
-#### Go
+**Go**
+
 `ID: [...]` is renamed to `IDs: [...]`. `ProjectIDs` is now required even when filtering by run IDs—v1 allowed omitting the project context.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -1503,7 +1610,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1532,10 +1640,12 @@ runs, err := client.Runs.QueryV2(ctx, langsmith.RunQueryV2Params{
 })
 ```
 
-#### cURL
+**cURL**
+
 `id` is renamed to `ids`. `project_ids` is now required in the request body even when filtering by run IDs—v1 allowed omitting the project context.
 
-#### Before
+**Before**
+
 ```bash
 RUN_ID_1="<run-id-1>"
 RUN_ID_2="<run-id-2>"
@@ -1546,7 +1656,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -d "$(jq -n --arg r1 "$RUN_ID_1" --arg r2 "$RUN_ID_2" '{"id": [$r1, $r2]}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1562,10 +1673,12 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 
 #### Iterate through runs
 
-#### Python
+**Python**
+
 `list_runs` auto-paginates transparently, fetching up to 100 runs per API call and stopping once `limit` results are returned. `runs.query` does not accept a total `limit`; iterate with `async for` and `break` once you have enough, or use the returned page's `has_next_page()`/`get_next_page()` for manual page-by-page control.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -1575,7 +1688,8 @@ client = Client()
 runs = client.list_runs(project_name="default", limit=150)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1597,10 +1711,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `listRuns` auto-paginates transparently. `client.runs.query` returns an async iterable of individual runs—use `for await` and `break` once you have enough.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -1614,7 +1730,8 @@ for await (const run of client.listRuns({ projectName: "default" })) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1631,10 +1748,12 @@ for await (const run of client.runs.query({
 }
 ```
 
-#### Java
+**Java**
+
 `.autoPager()` is used the same way on both `query()` and `queryV2()`—break out of the loop once you have enough runs.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -1657,7 +1776,8 @@ for (run in client.runs().query(
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1680,10 +1800,12 @@ for (run in client.runs().queryV2(
 }
 ```
 
-#### Go
+**Go**
+
 `QueryAutoPaging` is renamed to `QueryV2AutoPaging`; both use the same `iter.Next()`/`iter.Current()` pattern—break out of the loop once you have enough runs.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -1716,7 +1838,8 @@ for iter.Next() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1749,10 +1872,12 @@ for iter.Next() {
 }
 ```
 
-#### cURL
+**cURL**
+
 The v1 API returns all matching runs in one response with no cursor. The v2 API paginates—pass the `cursor` from a response's `next_cursor` field to fetch the next page.
 
-#### Before
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1763,7 +1888,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" '{"session": [$pid], "limit": 150}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1787,10 +1913,12 @@ done
 
 #### Filter runs with errors
 
-#### Python
+**Python**
+
 `error=True/False` is renamed to `has_error=True/False`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -1800,7 +1928,8 @@ client = Client()
 runs = client.list_runs(project_name="default", error=True)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1816,10 +1945,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `error: true/false` is renamed to `has_error: true/false`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -1829,7 +1960,8 @@ const client = new Client();
 const runs = client.listRuns({ projectName: "default", error: true });
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1843,10 +1975,12 @@ const runs = client.runs.query({
 });
 ```
 
-#### Java
+**Java**
+
 `.error(true/false)` is renamed to `.hasError(true/false)`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -1865,7 +1999,8 @@ val runs = client.runs().query(
 ).items()
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1884,10 +2019,12 @@ val runs = client.runs().queryV2(
 ).items()
 ```
 
-#### Go
+**Go**
+
 `Error` is renamed to `HasError`.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -1914,7 +2051,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1941,10 +2079,12 @@ runs, err := client.Runs.QueryV2(ctx, langsmith.RunQueryV2Params{
 })
 ```
 
-#### cURL
+**cURL**
+
 `error` is renamed to `has_error`.
 
-#### Before
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1955,7 +2095,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" '{"session": [$pid], "error": true}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1968,10 +2109,12 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 
 #### Filter by metadata
 
-#### Python
+**Python**
+
 The `filter` string syntax is unchanged: `eq(metadata_key, ...)` checks for key presence, combined with `eq(metadata_value, ...)` to match a specific value.
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -1982,7 +2125,8 @@ filter_str = 'and(eq(metadata_key, "user_id"), eq(metadata_value, "u_123"))'
 runs = client.list_runs(project_name="default", filter=filter_str)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1999,10 +2143,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 The `filter` string syntax is unchanged: `eq(metadata_key, ...)` checks for key presence, combined with `eq(metadata_value, ...)` to match a specific value.
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -2013,7 +2159,8 @@ const filterStr = 'and(eq(metadata_key, "user_id"), eq(metadata_value, "u_123"))
 const runs = client.listRuns({ projectName: "default", filter: filterStr });
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -2028,10 +2175,12 @@ const runs = client.runs.query({
 });
 ```
 
-#### Java
+**Java**
+
 The `.filter(...)` string syntax is unchanged: `eq(metadata_key, ...)` checks for key presence, combined with `eq(metadata_value, ...)` to match a specific value.
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -2051,7 +2200,8 @@ val runs = client.runs().query(
 ).items()
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -2071,10 +2221,12 @@ val runs = client.runs().queryV2(
 ).items()
 ```
 
-#### Go
+**Go**
+
 The `Filter` string syntax is unchanged: `eq(metadata_key, ...)` checks for key presence, combined with `eq(metadata_value, ...)` to match a specific value.
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -2102,7 +2254,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -2130,10 +2283,12 @@ runs, err := client.Runs.QueryV2(ctx, langsmith.RunQueryV2Params{
 })
 ```
 
-#### cURL
+**cURL**
+
 The `filter` string syntax is unchanged: `eq(metadata_key, ...)` checks for key presence, combined with `eq(metadata_value, ...)` to match a specific value.
 
-#### Before
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -2146,7 +2301,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" --arg f "$FILTER" '{"session": [$pid], "filter": $f}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -2161,10 +2317,12 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 
 #### Complex boolean filters
 
-#### Python
-Nested `and()` / `or()` filter expressions are unchanged.
+Nested `and()` / `or()` filter expressions still work. Keep `or()` operands on the same field kind: SmithDB rejects OR across run fields and feedback fields in one expression (for example mixing `status` with `feedback_key`).
 
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -2173,13 +2331,13 @@ from langsmith import Client
 client = Client()
 filter_str = (
     'and(gt(start_time, "2023-07-15T12:34:56Z"),'
-    ' or(neq(status, "error"),'
-    '    and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))'
+    ' or(eq(status, "error"), eq(run_type, "llm")))'
 )
 runs = client.list_runs(project_name="default", filter=filter_str)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -2191,8 +2349,7 @@ async def main():
     client = Client()
     filter_str = (
         'and(gt(start_time, "2023-07-15T12:34:56Z"),'
-        ' or(neq(status, "error"),'
-        '    and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))'
+        ' or(eq(status, "error"), eq(run_type, "llm")))'
     )
     project = await client.aread_project(project_name="default")
     runs = client.runs.query(project_ids=[str(project.id)], filter=filter_str)
@@ -2200,10 +2357,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-Nested `and()` / `or()` filter expressions are unchanged.
+**TypeScript**
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -2212,12 +2369,12 @@ import { Client } from "langsmith";
 const client = new Client();
 const filterStr =
   'and(gt(start_time, "2023-07-15T12:34:56Z"),' +
-  ' or(neq(status, "error"),' +
-  '    and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))';
+  ' or(eq(status, "error"), eq(run_type, "llm")))';
 const runs = client.listRuns({ projectName: "default", filter: filterStr });
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -2226,8 +2383,7 @@ import { Client } from "langsmith";
 const client = new Client();
 const filterStr =
   'and(gt(start_time, "2023-07-15T12:34:56Z"),' +
-  ' or(neq(status, "error"),' +
-  '    and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))';
+  ' or(eq(status, "error"), eq(run_type, "llm")))';
 const project = await client.readProject({ projectName: "default" });
 const runs = client.runs.query({
   project_ids: [project.id],
@@ -2235,10 +2391,10 @@ const runs = client.runs.query({
 });
 ```
 
-#### Java
-Nested `and()` / `or()` filter expressions are unchanged.
+**Java**
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -2253,14 +2409,14 @@ val project = client.sessions().list(
     SessionListParams.builder().name("default").limit(1L).build()
 ).items().first()
 val filterStr = "and(gt(start_time, \"2023-07-15T12:34:56Z\")," +
-    " or(neq(status, \"error\")," +
-    "    and(eq(feedback_key, \"Correctness\"), eq(feedback_score, 0.0))))"
+    " or(eq(status, \"error\"), eq(run_type, \"llm\")))"
 val runs = client.runs().query(
     RunQueryParams.builder().addSession(project.id()).filter(filterStr).build()
 ).items()
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -2275,17 +2431,16 @@ val project = client.sessions().list(
     SessionListParams.builder().name("default").limit(1L).build()
 ).items().first()
 val filterStr = "and(gt(start_time, \"2023-07-15T12:34:56Z\")," +
-    " or(neq(status, \"error\")," +
-    "    and(eq(feedback_key, \"Correctness\"), eq(feedback_score, 0.0))))"
+    " or(eq(status, \"error\"), eq(run_type, \"llm\")))"
 val runs = client.runs().queryV2(
     RunQueryV2Params.builder().addProjectId(project.id()).filter(filterStr).build()
 ).items()
 ```
 
-#### Go
-Nested `and()` / `or()` filter expressions are unchanged.
+**Go**
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -2306,14 +2461,15 @@ sessions, err := client.Sessions.List(ctx, langsmith.SessionListParams{
 })
 project := sessions.Items[0]
 
-filterStr := `and(gt(start_time, "2023-07-15T12:34:56Z"), or(neq(status, "error"), and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))`
+filterStr := `and(gt(start_time, "2023-07-15T12:34:56Z"), or(eq(status, "error"), eq(run_type, "llm")))`
 runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 	Session: langsmith.F([]string{project.ID}),
 	Filter:  langsmith.F(filterStr),
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -2334,22 +2490,22 @@ sessions, err := client.Sessions.List(ctx, langsmith.SessionListParams{
 })
 project := sessions.Items[0]
 
-filterStr := `and(gt(start_time, "2023-07-15T12:34:56Z"), or(neq(status, "error"), and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))`
+filterStr := `and(gt(start_time, "2023-07-15T12:34:56Z"), or(eq(status, "error"), eq(run_type, "llm")))`
 runs, err := client.Runs.QueryV2(ctx, langsmith.RunQueryV2Params{
 	ProjectIDs: langsmith.F([]string{project.ID}),
 	Filter:     langsmith.F(filterStr),
 })
 ```
 
-#### cURL
-Nested `and()` / `or()` filter expressions are unchanged.
+**cURL**
 
-#### Before
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 
-FILTER='and(gt(start_time, "2023-07-15T12:34:56Z"), or(neq(status, "error"), and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))'
+FILTER='and(gt(start_time, "2023-07-15T12:34:56Z"), or(eq(status, "error"), eq(run_type, "llm")))'
 
 curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -H "x-api-key: $LANGSMITH_API_KEY" \
@@ -2357,12 +2513,13 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" --arg f "$FILTER" '{"session": [$pid], "filter": $f}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 
-FILTER='and(gt(start_time, "2023-07-15T12:34:56Z"), or(neq(status, "error"), and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))'
+FILTER='and(gt(start_time, "2023-07-15T12:34:56Z"), or(eq(status, "error"), eq(run_type, "llm")))'
 
 curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
   -H "x-api-key: $LANGSMITH_API_KEY" \
@@ -2372,10 +2529,12 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 
 #### Scoped filters: filter, trace\_filter, tree\_filter
 
-#### Python
+**Python**
+
 `filter`, `trace_filter`, and `tree_filter` are unchanged. `filter` applies to the matched run, `trace_filter` to the root of its trace, and `tree_filter` to other runs in the trace tree (siblings and children).
 
-#### Before
+**Before**
+
 **Before**
 
 ```python
@@ -2390,7 +2549,8 @@ runs = client.list_runs(
 )
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -2411,10 +2571,12 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
+**TypeScript**
+
 `filter`, `trace_filter`, and `tree_filter` are unchanged. `filter` applies to the matched run, `trace_filter` to the root of its trace, and `tree_filter` to other runs in the trace tree (siblings and children).
 
-#### Before
+**Before**
+
 **Before**
 
 ```ts
@@ -2429,7 +2591,8 @@ const runs = client.listRuns({
 });
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -2445,10 +2608,12 @@ const runs = client.runs.query({
 });
 ```
 
-#### Java
+**Java**
+
 `.filter()`, `.traceFilter()`, and `.treeFilter()` are unchanged. `filter` applies to the matched run, `traceFilter` to the root of its trace, and `treeFilter` to other runs in the trace tree (siblings and children).
 
-#### Before
+**Before**
+
 **Before**
 
 ```kotlin
@@ -2472,7 +2637,8 @@ val runs = client.runs().query(
 ).items()
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -2496,10 +2662,12 @@ val runs = client.runs().queryV2(
 ).items()
 ```
 
-#### Go
+**Go**
+
 `Filter`, `TraceFilter`, and `TreeFilter` are unchanged. `Filter` applies to the matched run, `TraceFilter` to the root of its trace, and `TreeFilter` to other runs in the trace tree (siblings and children).
 
-#### Before
+**Before**
+
 **Before**
 
 ```go
@@ -2528,7 +2696,8 @@ runs, err := client.Runs.Query(ctx, langsmith.RunQueryParams{
 })
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -2557,10 +2726,12 @@ runs, err := client.Runs.QueryV2(ctx, langsmith.RunQueryV2Params{
 })
 ```
 
-#### cURL
+**cURL**
+
 `filter`, `trace_filter`, and `tree_filter` are unchanged. `filter` applies to the matched run, `trace_filter` to the root of its trace, and `tree_filter` to other runs in the trace tree (siblings and children).
 
-#### Before
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -2580,7 +2751,8 @@ curl -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
     '{"session": [$pid], "filter": $f, "trace_filter": $tf, "tree_filter": $treef}')"
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -2608,8 +2780,6 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-query-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-query-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

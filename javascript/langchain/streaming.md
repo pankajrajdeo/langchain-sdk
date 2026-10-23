@@ -11,6 +11,7 @@ tags: [docs, javascript, langchain, streaming]
 > Stream real-time updates from agent runs
 
 > [!TIP]
+>
 > For new applications, we recommend [event streaming](event-streaming.md)—the typed-projection API introduced in LangChain v1.3. Event streaming gives you separate iterators per projection (messages, values, tool calls, subgraphs) so you can consume them independently instead of branching on `stream_mode` chunks.
 
 LangChain implements a streaming system to surface real-time updates.
@@ -23,17 +24,17 @@ LangChain's streaming system lets you surface live feedback from agent runs to y
 
 What's possible with LangChain streaming:
 
-*  [**Stream agent progress**](#agent-progress)—get state updates after each agent step.
-*  [**Stream LLM tokens**](#llm-tokens)—stream language model tokens as they're generated.
-*  [**Stream thinking / reasoning tokens**](#streaming-thinking-/-reasoning-tokens)—surface model reasoning as it's generated.
-*  [**Stream custom updates**](#custom-updates)—emit user-defined signals (e.g., `"Fetched 10/100 records"`).
-*  [**Stream multiple modes**](#stream-multiple-modes)—choose from `updates` (agent progress), `messages` (LLM tokens + metadata), or `custom` (arbitrary user data).
+* &#x20;[**Stream agent progress**](#agent-progress)—get state updates after each agent step.
+* &#x20;[**Stream LLM tokens**](#llm-tokens)—stream language model tokens as they're generated.
+* &#x20;[**Stream thinking / reasoning tokens**](#streaming-thinking-/-reasoning-tokens)—surface model reasoning as it's generated.
+* &#x20;[**Stream custom updates**](#custom-updates)—emit user-defined signals (e.g., `"Fetched 10/100 records"`).
+* &#x20;[**Stream multiple modes**](#stream-multiple-modes)—choose from `updates` (agent progress), `messages` (LLM tokens + metadata), or `custom` (arbitrary user data).
 
 See the [common patterns](#common-patterns) section below for additional end-to-end examples.
 
 ## Supported stream modes
 
-Pass one or more of the following stream modes as a list to the [`stream`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.CompiledStateGraph.html#stream) method:
+Pass one or more of the following stream modes as a list to the [`stream`](https://reference.langchain.com/javascript/langchain-langgraph/index/CompiledStateGraph/stream) method:
 
 | Mode | Description |
 | - | - |
@@ -43,7 +44,7 @@ Pass one or more of the following stream modes as a list to the [`stream`](https
 
 ## Agent progress
 
-To stream agent progress, use the [`stream`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.CompiledStateGraph.html#stream) method with `streamMode: "updates"`. This emits an event after every agent step.
+To stream agent progress, use the [`stream`](https://reference.langchain.com/javascript/langchain-langgraph/index/CompiledStateGraph/stream) method with `streamMode: "updates"`. This emits an event after every agent step.
 
 For example, if you have an agent that calls a tool once, you should see the following updates:
 
@@ -57,6 +58,7 @@ Pass a `thread_id` via `configurable` so the conversation is checkpointed and fo
 
 ```ts
 import { createAgent, tool } from "langchain";
+import { uuid7 } from "langsmith";
 import { MemorySaver } from "@langchain/langgraph";
 import z from "zod";
 
@@ -79,7 +81,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 const stream = await agent.streamEvents(
   { messages: [{ role: "user", content: "what is the weather in sf" }] },
@@ -111,6 +113,7 @@ const finalState = await stream.output;
 
 ```ts
 import { createAgent, tool } from "langchain";
+import { uuid7 } from "langsmith";
 import { MemorySaver } from "@langchain/langgraph";
 import z from "zod";
 
@@ -133,7 +136,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 const stream = await agent.streamEvents(
   { messages: [{ role: "user", content: "what is the weather in sf" }] },
@@ -165,6 +168,7 @@ const finalState = await stream.output;
 
 ```ts
 import { createAgent, tool } from "langchain";
+import { uuid7 } from "langsmith";
 import { MemorySaver } from "@langchain/langgraph";
 import z from "zod";
 
@@ -187,7 +191,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 const stream = await agent.streamEvents(
   { messages: [{ role: "user", content: "what is the weather in sf" }] },
@@ -219,6 +223,7 @@ const finalState = await stream.output;
 
 ```ts
 import { createAgent, tool } from "langchain";
+import { uuid7 } from "langsmith";
 import { MemorySaver } from "@langchain/langgraph";
 import z from "zod";
 
@@ -241,7 +246,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 const stream = await agent.streamEvents(
   { messages: [{ role: "user", content: "what is the weather in sf" }] },
@@ -273,6 +278,7 @@ const finalState = await stream.output;
 
 ```ts
 import { createAgent, tool } from "langchain";
+import { uuid7 } from "langsmith";
 import { MemorySaver } from "@langchain/langgraph";
 import z from "zod";
 
@@ -295,7 +301,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 const stream = await agent.streamEvents(
   { messages: [{ role: "user", content: "what is the weather in sf" }] },
@@ -327,6 +333,7 @@ const finalState = await stream.output;
 
 ```ts
 import { createAgent, tool } from "langchain";
+import { uuid7 } from "langsmith";
 import { MemorySaver } from "@langchain/langgraph";
 import z from "zod";
 
@@ -349,7 +356,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 const stream = await agent.streamEvents(
   { messages: [{ role: "user", content: "what is the weather in sf" }] },
@@ -381,6 +388,7 @@ const finalState = await stream.output;
 
 ```ts
 import { createAgent, tool } from "langchain";
+import { uuid7 } from "langsmith";
 import { MemorySaver } from "@langchain/langgraph";
 import z from "zod";
 
@@ -403,7 +411,7 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
-const config = { configurable: { thread_id: crypto.randomUUID() } };
+const config = { configurable: { thread_id: uuid7() } };
 
 const stream = await agent.streamEvents(
   { messages: [{ role: "user", content: "what is the weather in sf" }] },
@@ -431,10 +439,12 @@ const finalState = await stream.output;
 // According to the data I have, the weather in San Francisco is always sunny! Would you like current conditions or a short forecast for today or the next few days?
 ```
 
-#### [View example trace](https://smith.langchain.com/public/20bac62c-c7af-4ee2-9dd3-129e24ce6834/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/d4b012af-7fb4-4417-b327-e770969de2aa/r)**
+>
+> Open a public LangSmith run for this example.
 
 > [!NOTE]
+>
 > Persisting conversation history with `thread_id` requires the agent to be configured with a [checkpointer](long-term-memory.md). On [LangSmith deployments](../../langsmith/deployment.md) a checkpointer is provisioned automatically. Locally, pass one explicitly, for example `createAgent({ ..., checkpointer: new MemorySaver() })`. The remaining snippets on this page omit `thread_id` for brevity, but you should pass it in production.
 
 ## LLM tokens
@@ -473,6 +483,7 @@ for await (const [token, metadata] of await agent.stream(
 ```
 
 > [!NOTE]
+>
 > **Wrapping an agent as a node in a parent `StateGraph`?** [`createAgent`](https://reference.langchain.com/javascript/langchain/index/createAgent) returns a `ReactAgent` wrapper; pass `agent.graph` when adding it as a node. Use `subgraphs: true` so message chunks include the subgraph namespace. See [Subgraph outputs](../langgraph/streaming.md#subgraph-outputs).
 
 ## Custom updates
@@ -520,6 +531,7 @@ Acquired data for city: San Francisco
 ```
 
 > [!NOTE]
+>
 > If you add the `writer` parameter to your tool, you won't be able to invoke the tool outside of a LangGraph execution context without providing a writer function.
 
 ## Stream multiple modes
@@ -574,6 +586,7 @@ Below are examples showing common use cases for streaming.
 Some models perform internal reasoning before producing a final answer. You can stream these thinking / reasoning tokens as they're generated by filtering [standard content blocks](messages.md#standard-content-blocks) for the `type` `"reasoning"`.
 
 > [!NOTE]
+>
 > Reasoning output must be enabled on the model.
 >
 > See the [reasoning section](models.md#reasoning) and your [provider's integration page](../integrations/providers/overview.md) for configuration details.
@@ -620,8 +633,9 @@ for await (const message of stream.messages) {
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/a8cf65f3-e85e-448c-844e-67019558ddbc/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/1c167f24-489a-47da-b7df-0b4b21789d9b/r)**
+>
+> Open a public LangSmith run for this example.
 
 ```shell
 [thinking] The user is asking about the weather in San Francisco. I have a tool
@@ -654,9 +668,11 @@ const model = new ChatOpenAI({
 ```
 
 > [!TIP]
+>
 > When deploying to LangSmith, set `streaming=False` on any models whose output you don't want streamed to the client. This is configured in your graph code before deployment.
 
 > [!NOTE]
+>
 > Not all chat model integrations support the `streaming` parameter. If your model doesn't support it, use `disableStreaming: true` instead. This parameter is available on all chat models via the base class.
 
 See the [LangGraph streaming guide](../langgraph/streaming.md#disable-streaming-for-specific-chat-models) for more details.
@@ -672,8 +688,6 @@ See the [LangGraph streaming guide](../langgraph/streaming.md#disable-streaming-
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -45,6 +45,7 @@ results = client.evaluate(
 ```
 
 > [!TIP]
+>
 > `evaluate()` will automatically trace your target function. This means that if you run any traceable code within your target function, this will also be traced as child runs of the target trace.
 
 ## Example: Single LLM call
@@ -217,19 +218,18 @@ return response;
 ```
 
 > [!TIP]
+>
 > If you have a LangGraph/LangChain agent that accepts the inputs defined in your dataset and that returns the output format you want to use in your evaluators, you can pass that object in as the target directly:
 >
-> ```python
+```python
 > from my_agent import agent
 > from langsmith import Client
 > client = Client()
 > client.evaluate(agent, ...)
-> ```
+```
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/define-target-function.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/define-target-function.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

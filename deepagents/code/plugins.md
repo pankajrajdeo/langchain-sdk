@@ -13,6 +13,7 @@ tags: [docs, deepagents, code, plugins]
 Plugins extend dcode with reusable [skills](memory-and-skills.md), [MCP servers](mcp-tools.md), [hooks](hooks.md), and [Python extensions](extensions.md). Marketplaces provide catalogs for discovering and installing plugins across projects or teams. dcode supports Claude- and Codex-style plugin manifests and marketplace catalogs, as described in [Create a plugin](#create-a-plugin) and [Create a marketplace](#create-a-marketplace).
 
 > [!WARNING]
+>
 > Install plugins and marketplaces only from sources you trust. An enabled plugin can add instructions and run MCP servers, hook commands, or Python extensions with your user permissions.
 
 ## Manage plugins interactively
@@ -31,6 +32,12 @@ To browse marketplaces and manage plugins in a `dcode` session:
 The plugin manager also lets you enable, disable, and uninstall installed plugins. Disabling a plugin keeps it installed but excludes its skills, MCP servers, and hooks after you run `/reload` or start a new session. Python extensions stay loaded in the current graph until you run `/restart` or start a new session.
 
 Removing a marketplace uninstalls its plugins and removes managed cache data. Deep Agents Code preserves the original source when the marketplace came from a local directory or file. Run `/reload` or start a new session to apply the removal to an active session.
+
+## Discover plugins with the agent
+
+The agent can search your configured marketplace catalogs for missing capabilities and report available plugins.
+
+Ask the agent about available, disabled, or not-yet-installed plugins. It reads local catalogs through `dcode plugin list --json` and `dcode plugin marketplace list --json`, using the current profile. It does not search unconnected marketplaces on the internet.
 
 ## Automatically update plugins
 
@@ -172,6 +179,7 @@ Place a hook document at `hooks/hooks.json`, declare a relative `hooks` path, or
 ### Add Python extensions
 
 > [!NOTE]
+>
 > Python extensions require `DEEPAGENTS_CODE_EXPERIMENTAL=1`.
 
 Declare one Python entry file or a list under the Deep Agents Code namespace in the plugin manifest:
@@ -262,8 +270,6 @@ dcode plugin install code-review@acme-tools
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/plugins.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/plugins.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -18,7 +18,7 @@ This guide provides a quick overview for getting started with Pinecone [vector s
 
 ### Integration details
 
-| Class | Package | [PY support](https://python.langchain.com/docs/integrations/vectorstores/pinecone/) | Downloads | Version |
+| Class | Package | [PY support](../../../integrations/vectorstores/pinecone.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`PineconeStore`](https://reference.langchain.com/javascript/langchain-pinecone/PineconeStore) | [`@langchain/pinecone`](https://www.npmjs.com/package/@langchain/pinecone) | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/pinecone?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/pinecone?style=flat-square\&label=%20&) |
 
@@ -227,8 +227,6 @@ For detailed documentation of all `PineconeStore` features and configurations he
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/pinecone.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/pinecone.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

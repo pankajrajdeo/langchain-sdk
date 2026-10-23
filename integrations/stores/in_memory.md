@@ -18,7 +18,7 @@ The `InMemoryByteStore` is a non-persistent implementation of a `ByteStore` that
 
 ### Integration details
 
-| Class | Package | Local | [JS support](https://js.langchain.com/docs/integrations/stores/in_memory/) | Downloads | Version |
+| Class | Package | Local | [JS support](../../javascript/integrations/stores/in_memory.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`InMemoryByteStore`](https://reference.langchain.com/python/langchain-core/stores/InMemoryByteStore) | [`langchain-core`](https://reference.langchain.com/python/langchain-core) | ✅ | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_core?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_core?style=flat-square\&label=%20) |
 
@@ -94,8 +94,6 @@ For detailed documentation of all `InMemoryByteStore` features and configuration
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/in_memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/in_memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

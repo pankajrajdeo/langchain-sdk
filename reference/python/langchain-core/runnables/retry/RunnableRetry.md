@@ -70,7 +70,7 @@ RunnableRetry(
     config_factories: list[Callable[[RunnableConfig], RunnableConfig]] | None = None,
     custom_input_type: type[Input] | BaseModel | None = None,
     custom_output_type: type[Output] | BaseModel | None = None,
-    **other_kwargs: Any = {},
+    other_kwargs: Any = {},
 )
 ```
 
@@ -113,4 +113,4 @@ retryable_chain = chain.with_retry()
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/runnables/retry.py#L48)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/runnables/retry.py#L50)

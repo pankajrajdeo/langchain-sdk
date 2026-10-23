@@ -51,29 +51,36 @@ The [LangSmith CLI](langsmith-cli.md) queries the same SmithDB-backed endpoints 
 
 The before and after change for each method is documented on the page for its area.
 
-#### [Query runs](smithdb-sdk-migration-query-runs.md)
-Search the runs in a project: filters, field projection, sorting, and pagination. The largest surface area in the migration.
+> **[Query runs](smithdb-sdk-migration-query-runs.md)**
+>
+> Search the runs in a project: filters, field projection, sorting, and pagination. The largest surface area in the migration.
 
-#### [Retrieve runs](smithdb-sdk-migration-runs.md)
-Fetch one run by ID, load its child runs, and build the URL of a run in the LangSmith UI.
+> **[Retrieve runs](smithdb-sdk-migration-runs.md)**
+>
+> Fetch one run by ID, load its child runs, and build the URL of a run in the LangSmith UI.
 
-#### [Traces](smithdb-sdk-migration-traces.md)
-Query the traces in a project, read their token and cost aggregates, and list the runs that belong to one trace.
+> **[Traces](smithdb-sdk-migration-traces.md)**
+>
+> Query the traces in a project, read their token and cost aggregates, and list the runs that belong to one trace.
 
-#### [Threads](smithdb-sdk-migration-threads.md)
-Query the threads in a project and list the traces (turns) that belong to one thread.
+> **[Threads](smithdb-sdk-migration-threads.md)**
+>
+> Query the threads in a project and list the traces (turns) that belong to one thread.
 
-#### [Dataset experiment runs](smithdb-sdk-migration-experiments.md)
-Query the runs recorded by an experiment on a dataset, including pagination and sorting by feedback score.
+> **[Dataset experiment runs](smithdb-sdk-migration-experiments.md)**
+>
+> Query the runs recorded by an experiment on a dataset, including pagination and sorting by feedback score.
 
-#### [Feedback and sharing](smithdb-sdk-migration-feedback.md)
-Create feedback on a run, add runs to an annotation queue, and share, unshare, or read publicly shared runs.
+> **[Feedback and sharing](smithdb-sdk-migration-feedback.md)**
+>
+> Create feedback on a run, add runs to an annotation queue, and share, unshare, or read publicly shared runs.
 
 ## Migrate with an AI agent
 
 This guide is written to be fetched and applied directly by an AI coding agent. Copy the following prompt into your agent to migrate your codebase to the SmithDB-backed methods.
 
-> **Prompt:** Migrate LangSmith SDK usage to SmithDB methods
+Migrate LangSmith SDK usage to SmithDB methods
+
 Migrate this codebase's LangSmith SDK usage to the new SmithDB-backed methods.
 
 Fetch [https://docs.langchain.com/langsmith/smithdb-sdk-migration.md](smithdb-sdk-migration.md) first. It
@@ -113,13 +120,19 @@ support.
 3. For each call site, apply the corresponding before/after change from the
    area page for that method, including any added, removed, or renamed
    parameters.
+4. Find code that reads token or cost fields (`total_tokens`, `total_cost`,
+   and the prompt and completion variants) from root or parent runs returned
+   by `runs.query`. These fields no longer include child-run usage, so trace
+   totals silently come back empty. Switch that code to `traces.query` and
+   read `trace_aggregates`, and flag it for review.
 
 If a call site or parameter is not covered by the guide, stop and ask rather
 than guessing.
 
 ## Exceptions
 
-#### Python
+**Python**
+
 The SmithDB-backed methods raise new exception classes instead of the legacy `langsmith.utils` exception classes.
 
 | Before (`langsmith.utils`) | After (`langsmith`) | Notes |
@@ -141,7 +154,8 @@ The SmithDB-backed methods raise new exception classes instead of the legacy `la
 | *(not available)* | `UnprocessableEntityError` | New: 422 |
 | *(not available)* | `APIResponseValidationError` | New: raised when a response does not match the expected schema |
 
-#### TypeScript
+**TypeScript**
+
 The SmithDB-backed methods raise new exception classes instead of plain `Error`.
 
 | Before (plain `Error`) | After (`langsmith`) | Notes |
@@ -160,13 +174,16 @@ The SmithDB-backed methods raise new exception classes instead of plain `Error`.
 | *(not available)* | `UnprocessableEntityError` | 422 |
 | *(not available)* | `APIUserAbortError` | Raised when a request is aborted via an `AbortController` |
 
-#### Java
+**Java**
+
 No change. Error handling is unaffected by this migration.
 
-#### Go
+**Go**
+
 No change. Error handling is unaffected by this migration.
 
-#### cURL
+**cURL**
+
 No change. Error handling is unaffected by this migration.
 
 ## Discontinued
@@ -185,8 +202,6 @@ The following methods are discontinued. They call the retired `/feedback/formula
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -735,8 +735,8 @@ Top 2 reranked results:
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
 * [Tutorials](../../deepagents/rag.md)
-* [How-to: Question and answer with RAG](https://js.langchain.com/docs/how_to/#qa-with-rag)
-* [Retrieval conceptual docs](https://js.langchain.com/docs/concepts/retrieval)
+* [How-to: Question and answer with RAG](../../deepagents/rag.md)
+* [Retrieval conceptual docs](../../langchain/retrieval.md)
 
 ## Standard tables vs. custom tables with vector data
 
@@ -1246,8 +1246,6 @@ Let each of us here tonight in this Chamber send an unmistakable signal to Ukrai
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/sap_hanavector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/sap_hanavector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

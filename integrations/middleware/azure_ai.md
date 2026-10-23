@@ -15,6 +15,7 @@ Middleware specifically designed for Microsoft Foundry and Azure AI Content Safe
 These middleware classes live in the `langchain-azure-ai` package and are exported from `langchain_azure_ai.agents.middleware`.
 
 > [!NOTE]
+>
 > Azure AI Content Safety middleware is currently marked experimental upstream. Expect the API surface to evolve as Azure AI Content Safety and LangChain middleware support continue to mature.
 
 ## Overview
@@ -126,6 +127,7 @@ agent = create_agent(
 ```
 
 > [!TIP]
+>
 > If `AZURE_AI_PROJECT_ENDPOINT` is already set, you can usually omit `project_endpoint` during instantiation.
 
 ## Azure AI Content Safety
@@ -156,31 +158,35 @@ middleware = AzureContentModerationMiddleware(
 )
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `list[str] | None`
-Harm categories to analyze. Valid values are `'Hate'`, `'SelfHarm'`, `'Sexual'`, and `'Violence'`. Defaults to all four categories.
-
-#### `Field` — `int`
-Minimum severity score from `0` to `6` that triggers the configured behavior.
-
-#### `Field` — `string`
-One of `'error'`, `'continue'`, or `'replace'`.
-
-#### `Field` — `bool`
-Whether to screen the last `HumanMessage` before the agent runs.
-
-#### `Field` — `bool`
-Whether to screen the last `AIMessage` after the agent runs.
-
-#### `Field` — `list[str] | None`
-Names of custom blocklists configured in your Azure Content Safety resource.
-
-#### `Field` — `Callable | None`
-Optional callable that extracts the text to screen from agent state and runtime.
-
-</details>
+> **Configuration options**
+>
+> **categories** `list[str] | None`
+>
+> Harm categories to analyze. Valid values are `'Hate'`, `'SelfHarm'`, `'Sexual'`, and `'Violence'`. Defaults to all four categories.
+>
+> **severity\_threshold** `int` (default: 4)
+>
+> Minimum severity score from `0` to `6` that triggers the configured behavior.
+>
+> **exit\_behavior** `string` (default: error)
+>
+> One of `'error'`, `'continue'`, or `'replace'`.
+>
+> **apply\_to\_input** `bool` (default: True)
+>
+> Whether to screen the last `HumanMessage` before the agent runs.
+>
+> **apply\_to\_output** `bool` (default: True)
+>
+> Whether to screen the last `AIMessage` after the agent runs.
+>
+> **blocklist\_names** `list[str] | None`
+>
+> Names of custom blocklists configured in your Azure Content Safety resource.
+>
+> **context\_extractor** `Callable | None`
+>
+> Optional callable that extracts the text to screen from agent state and runtime.
 
 ### Image moderation
 
@@ -208,28 +214,31 @@ middleware = AzureContentModerationForImagesMiddleware(
 )
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `list[str] | None`
-Image harm categories to analyze. Defaults to all four supported categories.
-
-#### `Field` — `int`
-Minimum severity score from `0` to `6` that triggers the configured behavior.
-
-#### `Field` — `string`
-One of `'error'` or `'continue'`.
-
-#### `Field` — `bool`
-Whether to screen images in the latest `HumanMessage`.
-
-#### `Field` — `bool`
-Whether to screen images in the latest `AIMessage`.
-
-#### `Field` — `Callable | None`
-Optional callable that extracts images from agent state and runtime.
-
-</details>
+> **Configuration options**
+>
+> **categories** `list[str] | None`
+>
+> Image harm categories to analyze. Defaults to all four supported categories.
+>
+> **severity\_threshold** `int` (default: 4)
+>
+> Minimum severity score from `0` to `6` that triggers the configured behavior.
+>
+> **exit\_behavior** `string` (default: error)
+>
+> One of `'error'` or `'continue'`.
+>
+> **apply\_to\_input** `bool` (default: True)
+>
+> Whether to screen images in the latest `HumanMessage`.
+>
+> **apply\_to\_output** `bool` (default: False)
+>
+> Whether to screen images in the latest `AIMessage`.
+>
+> **context\_extractor** `Callable | None`
+>
+> Optional callable that extracts images from agent state and runtime.
 
 ### Prompt shield
 
@@ -248,22 +257,23 @@ middleware = AzurePromptShieldMiddleware(
 )
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `string`
-One of `'error'`, `'continue'`, or `'replace'`.
-
-#### `Field` — `bool`
-Whether to screen the latest `HumanMessage` before the agent runs.
-
-#### `Field` — `bool`
-Whether to screen the latest `AIMessage` after the agent runs.
-
-#### `Field` — `Callable | None`
-Optional callable that extracts the user prompt and grounding documents from agent state and runtime.
-
-</details>
+> **Configuration options**
+>
+> **exit\_behavior** `string` (default: error)
+>
+> One of `'error'`, `'continue'`, or `'replace'`.
+>
+> **apply\_to\_input** `bool` (default: True)
+>
+> Whether to screen the latest `HumanMessage` before the agent runs.
+>
+> **apply\_to\_output** `bool` (default: False)
+>
+> Whether to screen the latest `AIMessage` after the agent runs.
+>
+> **context\_extractor** `Callable | None`
+>
+> Optional callable that extracts the user prompt and grounding documents from agent state and runtime.
 
 ### Protected material
 
@@ -284,25 +294,27 @@ middleware = AzureProtectedMaterialMiddleware(
 )
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `string`
-The content type to screen: `'text'` or `'code'`.
-
-#### `Field` — `string`
-One of `'error'`, `'continue'`, or `'replace'`.
-
-#### `Field` — `bool`
-Whether to screen the latest `HumanMessage`.
-
-#### `Field` — `bool`
-Whether to screen the latest `AIMessage`.
-
-#### `Field` — `Callable | None`
-Optional callable that extracts text from agent state and runtime.
-
-</details>
+> **Configuration options**
+>
+> **type** `string` (default: text)
+>
+> The content type to screen: `'text'` or `'code'`.
+>
+> **exit\_behavior** `string` (default: error)
+>
+> One of `'error'`, `'continue'`, or `'replace'`.
+>
+> **apply\_to\_input** `bool` (default: True)
+>
+> Whether to screen the latest `HumanMessage`.
+>
+> **apply\_to\_output** `bool` (default: True)
+>
+> Whether to screen the latest `AIMessage`.
+>
+> **context\_extractor** `Callable | None`
+>
+> Optional callable that extracts text from agent state and runtime.
 
 ### Groundedness
 
@@ -323,22 +335,23 @@ middleware = AzureGroundednessMiddleware(
 )
 ```
 
-<details>
-<summary>Configuration options</summary>
-
-#### `Field` — `string`
-The analysis domain. Supported values are `'Generic'` and `'Medical'`.
-
-#### `Field` — `string`
-The task type for the analysis. Supported values are `'Summarization'` and `'QnA'`.
-
-#### `Field` — `string`
-One of `'error'` or `'continue'`.
-
-#### `Field` — `Callable | None`
-Optional callable that extracts the answer, grounding sources, and optional question from agent state and runtime.
-
-</details>
+> **Configuration options**
+>
+> **domain** `string` (default: Generic)
+>
+> The analysis domain. Supported values are `'Generic'` and `'Medical'`.
+>
+> **task** `string` (default: Summarization)
+>
+> The task type for the analysis. Supported values are `'Summarization'` and `'QnA'`.
+>
+> **exit\_behavior** `string` (default: error)
+>
+> One of `'error'` or `'continue'`.
+>
+> **context\_extractor** `Callable | None`
+>
+> Optional callable that extracts the answer, grounding sources, and optional question from agent state and runtime.
 
 ## API reference
 
@@ -346,8 +359,6 @@ For the full public API, see the middleware exports in [`langchain_azure_ai.agen
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

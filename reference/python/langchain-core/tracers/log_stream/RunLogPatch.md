@@ -19,7 +19,7 @@ Patch to the run log.
 ```python
 RunLogPatch(
     self,
-    *ops: dict[str, Any] = (),
+    ops: dict[str, Any] = (),
 )
 ```
 
@@ -34,9 +34,13 @@ RunLogPatch(
 ```python
 __init__(
     self,
-    *ops: dict[str, Any] = (),
+    ops: dict[str, Any] = (),
 ) -> None
 ```
+
+| Name | Type |
+|------|------|
+| `ops` | `dict[str, Any]` |
 
 ## Properties
 
@@ -44,4 +48,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/tracers/log_stream.py#L115)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/tracers/log_stream.py#L115)

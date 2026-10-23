@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, vectorstores, oracleai]
 > Integrate with the OracleVS vector store using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 
 Oracle AI Database supports AI workloads where you query data by **meaning** (semantics), not just keywords. It combines **semantic search over unstructured content** with **relational filtering over business data** in a single system, so you can build retrieval workflows (like RAG) without introducing a separate vector database and fragmenting data across multiple platforms.
@@ -225,8 +226,6 @@ Run `createIndex` once after loading data (or after `initialize`) and reuse the 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -16,36 +16,42 @@ Source: [`js-nuxt`](https://github.com/langchain-ai/deployment-cookbook/tree/mai
 
 ## Deploy
 
-#### Vercel
-### Import the repository
+**Vercel**
+
+**1. Import the repository**
+
 Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-nuxt&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents" target="_blank" rel="noopener noreferrer">
-  <img src="https://vercel.com/button" alt="Deploy with Vercel" />
-</a>
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook\&root-directory=js-nuxt\&env=OPENAI_API_KEY\&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents)
 
-### Configure the project
+**2. Configure the project**
+
 Set **Root Directory** to `js-nuxt` and add `OPENAI_API_KEY` in project settings.
 
-### Deploy
+**3. Deploy**
+
 Deploy the project. Nuxt detects Vercel automatically and builds Nitro server routes for the Agent Streaming Protocol API.
 
-#### Netlify
-### Import the repository
+**Netlify**
+
+**1. Import the repository**
+
 Click **Deploy to Netlify** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook&base=js-nuxt" target="_blank" rel="noopener noreferrer">
-  <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />
-</a>
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook\&base=js-nuxt)
 
-### Configure the project
+**2. Configure the project**
+
 Set **Base directory** to `js-nuxt`. Netlify runs the Nuxt build from that subdirectory.
 
-### Set environment variables
+**3. Set environment variables**
+
 Add `OPENAI_API_KEY` in the Netlify deploy settings before the first build completes.
 
-#### Node
-### Build for production
+**Node**
+
+**1. Build for production**
+
 ```bash
 cd js-nuxt
 cp .env.example .env   # set OPENAI_API_KEY for local dev
@@ -53,12 +59,14 @@ pnpm install
 pnpm build
 ```
 
-### Set environment variables
+**2. Set environment variables**
+
 Export `OPENAI_API_KEY` on the host. Nitro reads it at runtime from the environment.
 
 Optionally enable LangSmith tracing by adding the variables from [`.env.example`](https://github.com/langchain-ai/deployment-cookbook/blob/main/js-nuxt/.env.example).
 
-### Start the Nitro server
+**3. Start the Nitro server**
+
 ```bash
 node .output/server/index.mjs
 ```
@@ -66,6 +74,7 @@ node .output/server/index.mjs
 Run behind any process manager or container orchestrator that keeps a Node.js process alive.
 
 > [!TIP]
+>
 > `@langchain/vue` discovers subagents from the stream and renders a clickable chip per subagent. Selecting one opens a scoped chat view bound to that subagent's namespaced `messages` and `tools` channels via `useMessages`. Reasoning summaries stream into a collapsible "Thinking" block that auto-expands while streaming.
 
 ## Required API endpoints
@@ -190,37 +199,28 @@ pnpm typecheck  # vue-tsc over the project
 
 ## Project layout
 
-<details>
-<summary>Project structure</summary>
+> **Project structure**
+>
+> * `server/agent/` — deep agent (`createDeepAgent`) with `researcher` and `math-whiz` subagents, mock tools, and `stripReasoningReplay` middleware.
+> * `server/utils/` — protocol server logic: `session.ts` (SSE runs), `threads.ts` (checkpointer-backed state), `serialize.ts`, `runtime.ts`.
+> * `server/api/threads/` — Nitro route handlers for the protocol endpoints above.
+> * `app/components/` — Vue chat UI (`ChatApp`, `Chat`, `ThreadHistory`, `SubagentList`, `MessageReasoning`, …) using `@langchain/vue`.
+> * `app/utils/threads.ts` — server-driven thread helpers and LangGraph SDK bootstrap.
 
-* `server/agent/` — deep agent (`createDeepAgent`) with `researcher` and `math-whiz` subagents, mock tools, and `stripReasoningReplay` middleware.
-* `server/utils/` — protocol server logic: `session.ts` (SSE runs), `threads.ts` (checkpointer-backed state), `serialize.ts`, `runtime.ts`.
-* `server/api/threads/` — Nitro route handlers for the protocol endpoints above.
-* `app/components/` — Vue chat UI (`ChatApp`, `Chat`, `ThreadHistory`, `SubagentList`, `MessageReasoning`, …) using `@langchain/vue`.
-* `app/utils/threads.ts` — server-driven thread helpers and LangGraph SDK bootstrap.
+> **Backend details**
+>
+> * `server/agent/index.ts` — coordinator uses a reasoning model over the Responses API; tool-using subagents use chat-completions (to avoid reasoning item replay through the checkpointer).
+> * `server/agent/middleware.ts` — rebuilds prior assistant messages from `content` + `tool_calls` so stale reasoning ids are never replayed to the Responses API.
+> * `server/utils/session.ts` — `LocalThreadSession` buffers protocol events and fans matching frames out over SSE via `matchesSubscription`.
+> * `server/api/threads/index.get.ts` — `GET /api/threads`, the checkpointer-backed thread list.
+> * `server/api/threads/[threadId]/…` — handlers for `commands`, `stream`, `state` (GET/POST), `history`, and `DELETE`.
 
-</details>
-
-<details>
-<summary>Backend details</summary>
-
-* `server/agent/index.ts` — coordinator uses a reasoning model over the Responses API; tool-using subagents use chat-completions (to avoid reasoning item replay through the checkpointer).
-* `server/agent/middleware.ts` — rebuilds prior assistant messages from `content` + `tool_calls` so stale reasoning ids are never replayed to the Responses API.
-* `server/utils/session.ts` — `LocalThreadSession` buffers protocol events and fans matching frames out over SSE via `matchesSubscription`.
-* `server/api/threads/index.get.ts` — `GET /api/threads`, the checkpointer-backed thread list.
-* `server/api/threads/[threadId]/…` — handlers for `commands`, `stream`, `state` (GET/POST), `history`, and `DELETE`.
-
-</details>
-
-<details>
-<summary>Frontend details</summary>
-
-* `app/components/ChatThread.vue` — builds the `HttpAgentServerAdapter` and calls `provideStream({ transport, threadId })`.
-* `app/components/Chat.vue` — message view with composer and per-subagent detail view (with breadcrumb).
-* `app/components/SubagentList.vue` / `SubagentDetail.vue` — inline subagent cards and scoped subagent chat (`useMessages` bound to namespace).
-* `app/components/MessageReasoning.vue` — collapsible "Thinking" block for reasoning summaries.
-
-</details>
+> **Frontend details**
+>
+> * `app/components/ChatThread.vue` — builds the `HttpAgentServerAdapter` and calls `provideStream({ transport, threadId })`.
+> * `app/components/Chat.vue` — message view with composer and per-subagent detail view (with breadcrumb).
+> * `app/components/SubagentList.vue` / `SubagentDetail.vue` — inline subagent cards and scoped subagent chat (`useMessages` bound to namespace).
+> * `app/components/MessageReasoning.vue` — collapsible "Thinking" block for reasoning summaries.
 
 ## See also
 
@@ -232,8 +232,6 @@ pnpm typecheck  # vue-tsc over the project
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-nuxt.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-nuxt.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

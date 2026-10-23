@@ -30,6 +30,7 @@ my-app/
 ```
 
 > [!TIP]
+>
 > LangSmith Deployment supports deploying a [LangGraph](../langgraph/overview.md) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](deployment.md), scaling, and [observability](observability.md). For more details, refer to [Use any framework with LangSmith Deployment](application-structure.md#use-any-framework-with-langsmith-deployment).
 
 You can also set up with:
@@ -47,15 +48,15 @@ The dependencies below will be included in the image, you can also use them in y
 
 ```
 langgraph>=0.4.10,<2
-langgraph-sdk>=0.3.5
+langgraph-sdk>=0.4.4
 langgraph-checkpoint>=3.0.1,<5
 langchain-core>=0.3.66
 langsmith>=0.7.31
 orjson>=3.9.7
 httpx>=0.25.0
 tenacity>=8.0.0
-uvicorn>=0.26.0
-sse-starlette>=2.1.3,<3.4.0
+uvicorn>=0.29.0
+sse-starlette>=2.1.3,<4.0.0
 uvloop>=0.18.0
 httptools>=0.5.0
 jsonschema-rs>=0.20.0
@@ -111,6 +112,7 @@ my-app/
 ```
 
 > [!TIP]
+>
 > By default, LangSmith follows the `uv`/`pip` behavior of **not** installing prerelease versions unless explicitly allowed. If want to use prereleases, you have the following options:
 >
 > * With `pyproject.toml`: add `allow-prereleases = true` to your `[tool.uv]` section.
@@ -187,6 +189,7 @@ Example `langgraph.json` file:
 Note that the variable name of the `CompiledGraph` appears at the end of the value of each subkey in the top-level `graphs` key (i.e. `:<variable_name>`).
 
 > [!WARNING]
+>
 > **Configuration file location**
 > The configuration file must be placed in a directory that is at the same level or higher than the Python files that contain compiled graphs and associated dependencies.
 
@@ -213,8 +216,6 @@ After you set up your project and place it in a GitHub repository, it's time to 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/setup-app-requirements-txt.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/setup-app-requirements-txt.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -15,9 +15,11 @@ Interpreters give agents a programmable, **in-memory** workspace inside the agen
 Where [sandboxes](sandboxes.md) are a code-first way for acting on an environment (such as running commands, installing dependencies, and editing files), interpreters are a code-first way for composing tools, preserving state, and deciding what information should return to the model.
 
 > [!WARNING]
+>
 > Interpreters are in [**beta**](../versioning.md). APIs and lifecycle behavior may change between releases.
 
 > [!NOTE]
+>
 > Interpreters require `@langchain/quickjs`.
 
 ## Why use interpreters?
@@ -26,17 +28,21 @@ Most agent work alternates between model reasoning and tool calls. A model can f
 
 Interpreters move that orchestration into code so the model reasons about *what* to do, not every intermediate step.
 
-#### [Programmatic tool calling (PTC)](#programmatic-tool-calling-ptc)
-Call selected tools from interpreter code, including loops, retries, branching, and parallel batches.
+> **[Programmatic tool calling (PTC)](#programmatic-tool-calling-ptc)**
+>
+> Call selected tools from interpreter code, including loops, retries, branching, and parallel batches.
 
-#### [Dynamic subagents](#dynamic-subagents)
-Dispatch subagents from code for fan-out, verification, and recursive workflows over large inputs.
+> **[Dynamic subagents](#dynamic-subagents)**
+>
+> Dispatch subagents from code for fan-out, verification, and recursive workflows over large inputs.
 
-#### [Stateful work](#how-interpreters-work)
-Keep intermediate values in runtime state without overloading the model context.
+> **[Stateful work](#how-interpreters-work)**
+>
+> Keep intermediate values in runtime state without overloading the model context.
 
-#### [Deterministic transforms](#how-interpreters-work)
-Sort, group, parse, validate, score, and aggregate structured data without another model turn.
+> **[Deterministic transforms](#how-interpreters-work)**
+>
+> Sort, group, parse, validate, score, and aggregate structured data without another model turn.
 
 ## Choose a pattern
 
@@ -306,6 +312,7 @@ results.join("\n\n");
 ```
 
 > [!WARNING]
+>
 > PTC calls currently execute through the interpreter bridge and do not go through the normal tool calling path. As a result, `interruptOn` approval workflows are not enforced per PTC-invoked tool call.
 
 ## Dynamic subagents
@@ -353,6 +360,7 @@ Every tool you expose through PTC is an outside capability that interpreter code
 | Shell commands, package installs, tests, OS-level execution | No | Use a [sandbox backend](sandboxes.md) |
 
 > [!NOTE]
+>
 > **How code execution works**
 >
 > Interpreter code runs in a WASM-sandboxed QuickJS runtime via [QuickJS-Emscripten](https://github.com/justjake/quickjs-emscripten), not in the host Node.js process. Treat interpreters as a capability-scoped execution layer: bridge only the tools and subagents the agent needs, and keep the PTC allowlist narrow.
@@ -363,7 +371,7 @@ Every tool you expose through PTC is an outside capability that interpreter code
 
 | Option | Default | Purpose |
 | - | - | - |
-| `memoryLimitBytes` | `64 * 1024 * 1024` <br />(64 MB) | Cap QuickJS heap memory per session. |
+| `memoryLimitBytes` | `64 * 1024 * 1024` (64 MB) | Cap QuickJS heap memory per session. |
 | `maxStackSizeBytes` | `320 * 1024` | Cap QuickJS stack size per session. |
 | `executionTimeoutMs` | `5000` | Timeout limit in milliseconds for each `eval` call. Negative values disable the timeout. |
 | `toolName` | `"eval"` | Name of the interpreter tool exposed to the model. |
@@ -376,8 +384,6 @@ Every tool you expose through PTC is an outside capability that interpreter code
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/interpreters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/interpreters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

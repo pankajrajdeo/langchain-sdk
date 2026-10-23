@@ -15,9 +15,11 @@ This doc will help you get started with AWS Bedrock [chat models](../../langchai
 AWS Bedrock maintains a [Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) which provides a unified conversational interface for Bedrock models. This API does not yet support custom models. You can see a list of all [models that are supported here](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html).
 
 > [!NOTE]
+>
 > **We recommend the Converse API for users who do not need to use custom models. It can be accessed using [`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse).**
 
 > [!NOTE]
+>
 > **Anthropic models on Bedrock**
 >
 > For Anthropic models specifically, you can use `ChatAnthropicBedrock` which extends `ChatAnthropic` and provides the same API while running on AWS Bedrock. See the [ChatAnthropicBedrock section](#chatanthropicbedrock) below for details.
@@ -28,7 +30,7 @@ For detailed documentation of all Bedrock features and configurations head to th
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/bedrock) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/chat/bedrock_converse.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatBedrock`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock/ChatBedrock) | [`langchain-aws`](https://reference.langchain.com/python/langchain-aws) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aws?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
 | [`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse) | [`langchain-aws`](https://reference.langchain.com/python/langchain-aws) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aws?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
@@ -61,7 +63,7 @@ Alternatively, `ChatBedrockConverse` will read from the following environment va
 
 You'll also need to turn on model access for your account, which you can do by following [these instructions](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html).
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -153,9 +155,11 @@ llm = ChatBedrockConverse(
 ```
 
 > [!NOTE]
+>
 > Fine-grained tool streaming is supported on Claude 4.5+ models. See the [Claude documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming) for more details.
 
 > [!WARNING]
+>
 > When using fine-grained tool streaming, you may receive invalid or partial JSON inputs. Make sure to account for these edge cases in your code.
 
 ## Extended thinking
@@ -216,6 +220,7 @@ ai_msg.content_blocks
 ## Reasoning effort
 
 > [!NOTE]
+>
 > `reasoning_effort` requires `langchain-aws>=1.7.0`.
 
 [`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse) supports the standard [`reasoning_effort`](../../langchain/models.md#reasoning) parameter for models with configurable reasoning, including Claude (Opus 5, Sonnet 5), Amazon Nova 2, and OpenAI gpt-oss and Moonshot Kimi K2 models on Bedrock. Like `temperature`, it can be set at model construction or per invocation, and it is translated into the request format for the underlying model family:
@@ -245,9 +250,11 @@ An explicit `additional_model_request_fields` value takes precedence over the fi
 Bedrock supports [caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) of elements of your prompts, including messages and tools. This allows you to reuse large documents, instructions, [few-shot documents](../../langsmith/create-few-shot-evaluators.md), and other data to reduce latency and costs.
 
 > [!NOTE]
+>
 > **Not all models support prompt caching. See [Bedrock prompt caching supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models).**
 
 > [!NOTE]
+>
 > For LangChain agents, use [`BedrockPromptCachingMiddleware`](../middleware/aws.md#prompt-caching) to let LangChain optimize stable system prompt and tool content. For direct model calls, use manual `cachePoint` blocks or invocation-level `cache_control`, depending on the model and API.
 
 To enable caching on an element of a prompt, mark its associated content block using the `cachePoint` key. See example below:
@@ -439,8 +446,6 @@ For detailed documentation of all `ChatBedrock`, `ChatBedrockConverse`, and `Cha
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

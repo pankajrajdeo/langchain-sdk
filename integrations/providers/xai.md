@@ -11,6 +11,7 @@ tags: [docs, integrations, providers, xai]
 > Integrate with xAI using LangChain Python.
 
 > [!WARNING]
+>
 > This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](groq.md).
 
 [xAI](https://console.x.ai) offers an API to interact with Grok models. This example goes over how to use LangChain to interact with xAI models.
@@ -50,8 +51,6 @@ for token in stream.text:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

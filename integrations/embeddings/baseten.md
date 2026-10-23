@@ -18,8 +18,6 @@ Baseten provides inference designed for production applications. Built on the Ba
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](baseten.md).
-
 ## Setup
 
 To access Baseten embedding models you'll need to create a Baseten account, get an API key, and install the `langchain-baseten` integration package.
@@ -40,7 +38,7 @@ if not os.getenv("BASETEN_API_KEY"):
     os.environ["BASETEN_API_KEY"] = getpass.getpass("Enter your Baseten API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -140,8 +138,6 @@ for vector in two_vectors:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/baseten.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/baseten.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

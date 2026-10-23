@@ -41,36 +41,43 @@ API keys for:
 
 ## Setup
 
-### Create project directory
+**1. Create project directory**
+
 ```bash
 mkdir deep-research-agent
 cd deep-research-agent
 ```
 
-### Install dependencies
-#### Claude
+**2. Install dependencies**
+
+**Claude**
+
 **npm**
 
 ```bash
 npm install deepagents @langchain/anthropic @langchain/core
 ```
 
-#### Gemini
+**Gemini**
+
 **npm**
 
 ```bash
 npm install deepagents @langchain/google @langchain/core
 ```
 
-### Set API keys
-#### Claude
+**3. Set API keys**
+
+**Claude**
+
 ```bash
 export ANTHROPIC_API_KEY="your_anthropic_api_key"
 export TAVILY_API_KEY="your_tavily_api_key"
 export LANGSMITH_API_KEY="your_langsmith_api_key"   # Optional
 ```
 
-#### Gemini
+**Gemini**
+
 ```bash
 export GOOGLE_API_KEY="your_google_api_key"
 export TAVILY_API_KEY="your_tavily_api_key"
@@ -81,7 +88,8 @@ export LANGSMITH_API_KEY="your_langsmith_api_key"   # Optional
 
 Create `agent.ts` in your project directory:
 
-### Add tools
+**1. Add tools**
+
 Add the custom search tool. The `tavily_search` tool uses Tavily for URL discovery, then fetches full webpage content so the agent can analyze complete sources instead of summaries.
 
 ```ts
@@ -169,7 +177,8 @@ const tavilySearch = tool(
 );
 ```
 
-### Add prompts
+**2. Add prompts**
+
 Add the orchestrator workflow and sub-agent prompt templates to `agent.ts`:
 
 ```ts
@@ -324,7 +333,8 @@ Your role is to coordinate research by delegating tasks from your TODO list to s
 - Bias towards focused research over exhaustive exploration`;
 ```
 
-### Enable task planning
+**3. Enable task planning**
+
 [Task planning](overview.md#task-planning) is opt-in. The research workflow uses `write_todos` to break questions into focused tasks, so pass [`TodoListMiddleware`](https://reference.langchain.com/javascript/langchain/index/todoListMiddleware) when you create the agent.
 
 ```typescript
@@ -333,7 +343,8 @@ import { todoListMiddleware } from "langchain";
 
 You include this middleware in the next step when you create the agent.
 
-### Create the agent
+**4. Create the agent**
+
 Add the model initialization and agent creation to `agent.ts`. Include `todoListMiddleware` so the planning tool is available:
 
 ```ts
@@ -383,7 +394,8 @@ You can run the agent synchronously, meaning it will wait for the full result an
 
 Add the code from the respective tab at the bottom of `agent.ts`:
 
-#### Run synchronously
+**Run synchronously**
+
 ```ts
 {
   async function main() {
@@ -411,7 +423,8 @@ Add the code from the respective tab at the bottom of `agent.ts`:
 }
 ```
 
-#### Stream updates
+**Stream updates**
+
 ```ts
 {
   async function main() {
@@ -466,8 +479,6 @@ For more information on the concepts in this tutorial, check out the following r
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/deep-research.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/deep-research.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

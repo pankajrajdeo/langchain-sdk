@@ -27,12 +27,13 @@ By default, LangSmith Self-Hosted supports the `Authorization Code` flow with `C
 
 You must have the following to complete the [Provider setup](#provider-setup):
 
-* [Self-hosted](self-hosted.md) and on an [Enterprise plan](pricing-plans.md).
+* [Self-hosted](self-hosted.md) and on an [Enterprise plan](https://docs.langchain.com/langsmith/pricing-plans.md).
 * An IdP that supports the `Authorization Code` flow with `Client Secret`.
 * An IdP that supports using an external discovery/issuer URL. LangSmith uses this to fetch the necessary routes and keys for your IdP.
 * The `OIDC`, `email`, and `profile` scopes. LangSmith uses these to fetch the necessary user information and email for your users.
 
 > [!NOTE]
+>
 > LangSmith SSO is only supported over `https`.
 
 ## Configuration
@@ -64,6 +65,7 @@ config:
 Configure Microsoft Entra ID as a single sign-on provider using OAuth2.0 and OIDC. For additional information, refer to Microsoft's [OpenID Connect documentation](https://learn.microsoft.com/en-us/entra/identity-platform/v2-protocols-oidc).
 
 > [!NOTE]
+>
 > Registering the application in Microsoft Entra ID requires the `Application Administrator` or `Cloud Application Administrator` role, or higher, in your tenant.
 
 #### Step 1. Register the application
@@ -81,6 +83,7 @@ From the app's **Overview** page, record the following values for use in Helm co
 * **OIDC issuer URL**: `https://login.microsoftonline.com/<tenant-id>/v2.0`, used as `oauthIssuerUrl`.
 
 > [!WARNING]
+>
 > Include the `/v2.0` suffix in `oauthIssuerUrl`. Without it, login still works, but [SSO Groups Sync](#sso-groups-sync) does not assign roles.
 
 <a id="with-client-secret-recommended"></a>
@@ -124,6 +127,7 @@ config:
 For details about `initialOrgAdminEmail`, refer to the [general configuration section](#configuration).
 
 > [!NOTE]
+>
 > Microsoft Entra ID's `oid` claim is used as the OIDC `sub` claim by default. For details, refer to [Override sub claim](#override-sub-claim).
 
 To assign org and workspace roles from Microsoft Entra ID groups on login, refer to [SSO Groups Sync](#sso-groups-sync).
@@ -133,6 +137,7 @@ To assign org and workspace roles from Microsoft Entra ID groups on login, refer
 You can use Google Workspace as a single sign-on (SSO) provider using [OAuth2.0 and OIDC](https://developers.google.com/identity/openid-connect/openid-connect) without PKCE.
 
 > [!NOTE]
+>
 > You must have administrator-level access to your organization's Google Cloud Platform (GCP) account to create a new project, or permissions to create and configure OAuth 2.0 credentials for an existing project. We recommend that you create a new project for managing access, since each GCP project has a single OAuth consent screen.
 
 1. Create a new GCP project, see the Google documentation topic [creating and managing projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
@@ -181,11 +186,14 @@ You can use Google Workspace as a single sign-on (SSO) provider using [OAuth2.0 
 For additional information, see Okta's [documentation](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_oidc.htm).
 If you have any questions or issues, please contact support via [support.langchain.com](https://support.langchain.com).
 
-<b>Via Okta Integration Network (recommended)</b>
-
-For details on SCIM setup, refer to [Set up SCIM for your organization](user-management.md#set-up-scim-for-your-organization).
+**Via Okta Integration Network (recommended)**
 
 > [!NOTE]
+>
+> For details on SCIM setup, refer to [Set up SCIM for your organization](user-management.md#set-up-scim-for-your-organization).
+
+> [!NOTE]
+>
 > This method of configuration is required in order to use SCIM with Okta.
 
 1. Sign in to [Okta](https://login.okta.com/).
@@ -223,11 +231,14 @@ config:
     oauthScopes: "email,profile,openid"
 ```
 
-For details on SCIM setup, refer to [Set up SCIM for your organization](user-management.md#set-up-scim-for-your-organization).
+> [!NOTE]
+>
+> For details on SCIM setup, refer to [Set up SCIM for your organization](user-management.md#set-up-scim-for-your-organization).
 
-<b>Via Custom App Integration</b>
+**Via Custom App Integration**
 
 > [!WARNING]
+>
 > SCIM is not compatible with this method of configuration. Refer to [**Via Okta Integration Network**](#via-okta-integration-network).
 
 1. Log in to Okta as an administrator, and go to the **Okta Admin console**.
@@ -272,6 +283,7 @@ Users can sign in using the **Login via SSO** button on the LangSmith homepage.
 ### Session length controls
 
 > [!NOTE]
+>
 > All of the environment variables in this section are for the `platform-backend` service and can be added using `platformBackend.deployment.extraEnv` in Helm.
 
 * By default, session length is controlled by the expiration of the identity token returned by the identity provider
@@ -320,6 +332,7 @@ ISSUER_SUB_CLAIM_OVERRIDES='{"https://login.microsoftonline.com/": "oid", "https
 ### SSO Groups Sync
 
 > [!NOTE]
+>
 > SSO Groups Sync on self-hosted requires LangSmith chart version **0.15.0-rc.3** (application version **0.15.2rc1**) or later.
 
 [SSO Groups Sync](user-management.md#sso-groups-sync-alternative) lets LangSmith assign org and workspace roles from a group membership claim on the OIDC token, as a simpler alternative to [SCIM](user-management.md#set-up-scim-for-your-organization). On self-hosted, you must configure the IdP to include groups in the OIDC ID token before LangSmith can read them.
@@ -354,10 +367,12 @@ The exact scope name (`groups`, `roles`, etc.) depends on your IdP. Check your I
 
 Per-provider SSO Groups Sync settings are stored on the SSO provider record and toggled via the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-self-host-sso) or [API](reference.md) (not via Helm values).
 
-#### UI
-Once your IdP emits the groups claim, configure SSO Groups Sync from the UI in **Settings** > **Members and roles** > **SSO Configuration** > **SSO Groups Sync**. The claim name configured in the **Groups claim field** must match the claim emitted by your IdP.
+**UI**
 
-#### API
+Once your IdP emits the groups claim, configure SSO Groups Sync from the UI: go to **Settings** > **SSO configuration** and scroll to the **SSO Groups Sync** section. The claim name configured in the **Groups claim field** must match the claim emitted by your IdP.
+
+**API**
+
 To configure SSO Groups Sync via the API, first `GET` the current SSO settings to retrieve the provider `id`, then `PATCH` using that `id`:
 
 ```bash
@@ -378,6 +393,7 @@ curl -s -X PATCH "$SELF_HOSTED_LANGSMITH_ENDPOINT/api/v1/orgs/current/sso-settin
 ```
 
 > [!WARNING]
+>
 > `DELETE` is also available on this resource but is not covered here. `DELETE` removes the SSO provider entirely and locks out login if the org has **Login via SSO only** enabled, or if no other authentication providers (for example, social login) are configured.
 
 #### Emit the groups claim from Microsoft Entra ID
@@ -385,6 +401,7 @@ curl -s -X PATCH "$SELF_HOSTED_LANGSMITH_ENDPOINT/api/v1/orgs/current/sso-settin
 For OIDC on self-hosted, add the groups claim through the App Registration Manifest. Skip the **Token configuration** > **Add groups claim** flow, which does not support display names for cloud-only security groups.
 
 > [!WARNING]
+>
 > Set the top-level `groupMembershipClaims` property to `"ApplicationGroup"`. Other values change behavior in ways that are hard to diagnose:
 >
 > * Missing or `"None"`: no groups appear in the token.
@@ -459,11 +476,13 @@ If the groups claim is correct but LangSmith does not assign roles, check the to
 We recommend running with a [`Client Secret`](#provider-setup). However, if your IdP does not support this, you can use the `Authorization Code with PKCE` flow.
 
 > [!WARNING]
+>
 > The PKCE workflow is **deprecated as of v16** and will be **fully removed in v17**. A migration path from PKCE to OAuth with client secret will be provided. We recommend migrating to the [client secret flow](#provider-setup) as soon as possible.
 
 ### Requirements
 
 > [!NOTE]
+>
 > This flow does **not** require a `Client Secret`.
 
 There are a couple of requirements for using OAuth SSO with LangSmith:
@@ -486,8 +505,6 @@ config:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-sso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-sso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

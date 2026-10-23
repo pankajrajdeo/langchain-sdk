@@ -15,7 +15,8 @@ Connect a managed deep agent to remote [Model Context Protocol (MCP)](../../java
 Most remote MCP servers require authentication. A [connection](managed-deep-agents-connections.md) supplies it, and declaring the connection as user-owned makes each caller authorize their own account.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 Declare MCP servers in `tools/mcp.ts`:
 
@@ -34,7 +35,8 @@ To implement application logic in the project instead, use an [authored tool](ma
 
 Use an MCP server when tools already live on a remote MCP server and you want MDA to load them without importing them into the agent definition.
 
-### Declare the servers
+**1. Declare the servers**
+
 Use `defineMcp` to declare one or more remote servers:
 
 **tools/mcp.ts**
@@ -58,7 +60,8 @@ Managed Deep Agents supports Streamable HTTP (`"http"`) and legacy SSE (`"sse"`)
 
 For connection options, see [Manage connections](managed-deep-agents-connections.md).
 
-### Select tools (Optional)
+**2. Select tools (Optional)**
+
 By default, Managed Deep Agents exposes every tool from each server. To expose only selected tools, set an allowlist inside that server's configuration:
 
 ```ts
@@ -75,7 +78,8 @@ You can use both options together. The denylist applies after the allowlist, and
 
 Selection uses raw MCP tool names before Managed Deep Agents prefixes them. Tool names are prefixed with the server name by default to avoid collisions. For example, the `search_docs_by_lang_chain` tool from the `langchainDocs` server is exposed as `langchainDocs__search_docs_by_lang_chain`.
 
-### Pass credentials (Optional)
+**3. Pass credentials (Optional)**
+
 If an MCP server requires credentials, declare a connection on the server config and create that connection in the workspace.
 
 * **MCP OAuth**: For servers that advertise OAuth and support automatic client registration, create with `mda connections create <slug>` (inferred from the MCP declaration) or `mda connections create <slug> --mcp <url>`. You do not supply a client ID or secret.
@@ -122,8 +126,6 @@ For more information, see [Project structure](managed-deep-agents-project-struct
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-mcp-connectors.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-mcp-connectors.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

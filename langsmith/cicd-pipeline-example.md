@@ -14,10 +14,10 @@ This guide demonstrates how to implement a comprehensive CI/CD pipeline for AI a
 
 The CI/CD pipeline provides:
 
-*  **Automated testing**: Unit, integration, and end-to-end tests.
-*  **Offline evaluations**: Performance assessment using [AgentEvals](../langchain/test/evals.md), [OpenEvals](openevals.md#setup) and [LangSmith](observability.md).
-*  **Preview and production deployments**: Automated staging and quality-gated production releases using the Control Plane API.
-*  **Monitoring**: Continuous evaluation and alerting.
+* &#x20;**Automated testing**: Unit, integration, and end-to-end tests.
+* &#x20;**Offline evaluations**: Performance assessment using [AgentEvals](../langchain/test/evals.md), [OpenEvals](openevals.md#setup) and [LangSmith](observability.md).
+* &#x20;**Preview and production deployments**: Automated staging and quality-gated production releases using the Control Plane API.
+* &#x20;**Monitoring**: Continuous evaluation and alerting.
 
 ## Pipeline architecture
 
@@ -84,21 +84,21 @@ graph TD
 
 There are multiple ways you can trigger this pipeline, either during development or if your application is already live. The pipeline can be triggered by:
 
-*  **Code changes**: Pushes to main/development branches where you can modify the LangGraph architecture, try different models, update agent logic, or make any code improvements.
-*  **PromptHub updates**: Changes to prompt templates stored in LangSmith PromptHub—whenever there's a new prompt commit, the system triggers a webhook to run the pipeline.
-*  **Online evaluation alerts**: Performance degradation notifications from live deployments
-*  **LangSmith traces webhooks**: Automated triggers based on trace analysis and performance metrics.
-*  **Manual trigger**: Manual initiation of the pipeline for testing or emergency deployments.
+* &#x20;**Code changes**: Pushes to main/development branches where you can modify the LangGraph architecture, try different models, update agent logic, or make any code improvements.
+* &#x20;**PromptHub updates**: Changes to prompt templates stored in LangSmith PromptHub—whenever there's a new prompt commit, the system triggers a webhook to run the pipeline.
+* &#x20;**Online evaluation alerts**: Performance degradation notifications from live deployments
+* &#x20;**LangSmith traces webhooks**: Automated triggers based on trace analysis and performance metrics.
+* &#x20;**Manual trigger**: Manual initiation of the pipeline for testing or emergency deployments.
 
 ### Testing layers
 
 Compared to traditional software, testing AI agent applications also requires assessing response quality, so it is important to test each part of the workflow. The pipeline implements multiple testing layers:
 
-1.  **Unit tests**: Individual node and utility function testing.
-2.  **Integration tests**: Component interaction testing.
-3.  **End-to-end tests**: Full graph execution testing.
-4.  **Offline evaluations**: Performance assessment with real-world scenarios including end-to-end evaluations, single-step evaluations, agent trajectory analysis, and multi-turn simulations.
-5.  **LangGraph dev server tests**: Use the [langgraph-cli](cli.md) tool for spinning up (inside the GitHub Action) a local server to run the LangGraph agent. This polls the `/ok` server API endpoint until it is available and for 30 seconds, after that it throws an error.
+1. &#x20;**Unit tests**: Individual node and utility function testing.
+2. &#x20;**Integration tests**: Component interaction testing.
+3. &#x20;**End-to-end tests**: Full graph execution testing.
+4. &#x20;**Offline evaluations**: Performance assessment with real-world scenarios including end-to-end evaluations, single-step evaluations, agent trajectory analysis, and multi-turn simulations.
+5. &#x20;**LangGraph dev server tests**: Use the [langgraph-cli](cli.md) tool for spinning up (inside the GitHub Action) a local server to run the LangGraph agent. This polls the `/ok` server API endpoint until it is available and for 30 seconds, after that it throws an error.
 
 ## GitHub actions workflow
 
@@ -110,39 +110,27 @@ The workflow includes:
 
 * **Agent deployment revision**: A revision happens when an existing deployment with the same ID is found, or when the PR is merged into main. In the case of merging to main, the preview deployment is deleted and a production deployment is created. This ensures that any updates to the agent are properly deployed and integrated into the production infrastructure.
 
-  <img src="https://mintcdn.com/langchain-5e9cc07a/-UAx6PdOIJpPyTy2/langsmith/images/cicd-new-lgp-revision.png?fit=max&auto=format&n=-UAx6PdOIJpPyTy2&q=85&s=3ef7d51a322b8b5e2f9c2c70579fcc97" alt="Agent Deployment Revision Workflow" width="1022" height="196" data-path="langsmith/images/cicd-new-lgp-revision.png" />
+  ![Agent Deployment Revision Workflow](https://mintcdn.com/langchain-5e9cc07a/-UAx6PdOIJpPyTy2/langsmith/images/cicd-new-lgp-revision.png?fit=max\&auto=format\&n=-UAx6PdOIJpPyTy2\&q=85\&s=3ef7d51a322b8b5e2f9c2c70579fcc97)
 
 * **Testing and evaluation workflow**: In addition to the more traditional testing phases (unit tests, integration tests, end-to-end tests, etc.), the pipeline includes [offline evaluations](evaluation-concepts.md#offline-evaluations) and [Agent dev server testing](local-dev-testing.md) because you want to test the quality of your agent. These evaluations provide comprehensive assessment of the agent's performance using real-world scenarios and data.
 
-  <img src="https://mintcdn.com/langchain-5e9cc07a/MrTet_AXQVddxOlO/langsmith/images/cicd-test-with-results.png?fit=max&auto=format&n=MrTet_AXQVddxOlO&q=85&s=477c3f5ec3d9bb9dfc354b9a57860636" alt="Test with Results Workflow" width="2050" height="996" data-path="langsmith/images/cicd-test-with-results.png" />
+  ![Test with Results Workflow](https://mintcdn.com/langchain-5e9cc07a/MrTet_AXQVddxOlO/langsmith/images/cicd-test-with-results.png?fit=max\&auto=format\&n=MrTet_AXQVddxOlO\&q=85\&s=477c3f5ec3d9bb9dfc354b9a57860636)
 
-<details>
-<summary>Final Response Evaluation</summary>
+  > **Final Response Evaluation**
+  >
+  > Evaluates the final output of your agent against expected results. This is the most common type of evaluation that checks if the agent's final response meets quality standards and answers the user's question correctly.
 
-  Evaluates the final output of your agent against expected results. This is the most common type of evaluation that checks if the agent's final response meets quality standards and answers the user's question correctly.
+  > **Single Step Evaluation**
+  >
+  > Tests individual steps or nodes within your LangGraph workflow. This allows you to validate specific components of your agent's logic in isolation, ensuring each step functions correctly before testing the full pipeline.
 
-</details>
+  > **Agent Trajectory Evaluation**
+  >
+  > Analyzes the complete path your agent takes through the graph, including all intermediate steps and decision points. This helps identify bottlenecks, unnecessary steps, or suboptimal routing in your agent's workflow. It also evaluates whether your agent invoked the right tools in the right order or at the right time.
 
-<details>
-<summary>Single Step Evaluation</summary>
-
-  Tests individual steps or nodes within your LangGraph workflow. This allows you to validate specific components of your agent's logic in isolation, ensuring each step functions correctly before testing the full pipeline.
-
-</details>
-
-<details>
-<summary>Agent Trajectory Evaluation</summary>
-
-  Analyzes the complete path your agent takes through the graph, including all intermediate steps and decision points. This helps identify bottlenecks, unnecessary steps, or suboptimal routing in your agent's workflow. It also evaluates whether your agent invoked the right tools in the right order or at the right time.
-
-</details>
-
-<details>
-<summary>Multi-Turn Evaluation</summary>
-
-  Tests conversational flows where the agent maintains context across multiple interactions. This is crucial for agents that handle follow-up questions, clarifications, or extended dialogues with users.
-
-</details>
+  > **Multi-Turn Evaluation**
+  >
+  > Tests conversational flows where the agent maintains context across multiple interactions. This is crucial for agents that handle follow-up questions, clarifications, or extended dialogues with users.
 
   See the [LangGraph testing documentation](../langgraph/test.md) for specific testing approaches and the [evaluation approaches guide](evaluation-approaches.md) for a comprehensive overview of offline evaluations.
 
@@ -150,20 +138,21 @@ The workflow includes:
 
 Before setting up the CI/CD pipeline, ensure you have:
 
-*  An AI agent application (in this case built using [LangGraph](../langgraph/overview.md))
-*  A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-cicd-pipeline-example)
-*  A [LangSmith API key](create-account-api-key.md) needed to deploy agents and retrieve experiment results
-*  Project-specific environment variables configured in your repository secrets (e.g., LLM model API keys, vector store credentials, database connections)
+* &#x20;An AI agent application (in this case built using [LangGraph](../langgraph/overview.md))
+* &#x20;A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-cicd-pipeline-example)
+* &#x20;A [LangSmith API key](create-account-api-key.md) needed to deploy agents and retrieve experiment results
+* &#x20;Project-specific environment variables configured in your repository secrets (e.g., LLM model API keys, vector store credentials, database connections)
 
 > [!NOTE]
+>
 > While this example uses GitHub, the CI/CD pipeline works with other Git hosting platforms including GitLab, Bitbucket, and others.
 
 ## Deployment options
 
 LangSmith supports multiple deployment methods, depending on how your [LangSmith instance is hosted](platform-setup.md):
 
-*  **Cloud LangSmith**: Direct GitHub integration.
-*  **Self-Hosted/Hybrid**: Container registry-based deployments.
+* &#x20;**Cloud LangSmith**: Direct GitHub integration.
+* &#x20;**Self-Hosted/Hybrid**: Container registry-based deployments.
 
 The deployment flow starts by modifying your agent implementation. At minimum, you must have a [`langgraph.json`](application-structure.md) and dependency file in your project (`requirements.txt` or `pyproject.toml`). Use the `langgraph dev` CLI tool to check for errors—fix any errors; otherwise, the deployment will succeed when deployed to LangSmith Deployment.
 
@@ -228,9 +217,9 @@ graph TD
 
 Before deploying your agent, ensure you have:
 
-1.  **LangGraph graph**: Your agent implementation (e.g., `./agents/simple_text2sql.py:agent`).
-2.  **Dependencies**: Either `requirements.txt` or `pyproject.toml` with all required packages.
-3.  **Configuration**: `langgraph.json` file specifying:
+1. &#x20;**LangGraph graph**: Your agent implementation (e.g., `./agents/simple_text2sql.py:agent`).
+2. &#x20;**Dependencies**: Either `requirements.txt` or `pyproject.toml` with all required packages.
+3. &#x20;**Configuration**: `langgraph.json` file specifying:
    * Path to your agent graph
    * Dependencies location
    * Environment variables
@@ -252,7 +241,7 @@ Example `langgraph.json`:
 
 ### Local development and testing
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-UAx6PdOIJpPyTy2/langsmith/images/cicd-studio-cli.png?fit=max&auto=format&n=-UAx6PdOIJpPyTy2&q=85&s=425460d3401221ab441e21fc706c9cf1" alt="Studio CLI Interface" width="2972" height="1354" data-path="langsmith/images/cicd-studio-cli.png" />
+![Studio CLI Interface](https://mintcdn.com/langchain-5e9cc07a/-UAx6PdOIJpPyTy2/langsmith/images/cicd-studio-cli.png?fit=max\&auto=format\&n=-UAx6PdOIJpPyTy2\&q=85\&s=425460d3401221ab441e21fc706c9cf1)
 
 First, test your agent locally using [Studio](studio.md):
 
@@ -268,6 +257,7 @@ This will:
 * Validate that your agent works correctly before deployment.
 
 > [!NOTE]
+>
 > If your agent runs locally without any errors, it means that deployment to LangSmith will likely succeed. This local testing helps catch configuration issues, dependency problems, and agent logic errors before attempting deployment.
 
 See the [LangGraph CLI documentation](cli.md#dev) for more details.
@@ -283,10 +273,11 @@ Deploy your agent using the LangSmith deployment interface:
 
 **Supported deployments:**
 
-*  **Cloud LangSmith**: Direct GitHub integration with dropdown menu
-*  **Self-Hosted/Hybrid LangSmith**: Specify your image URI in the Image Path field (e.g., `docker.io/username/my-agent:latest`)
+* &#x20;**Cloud LangSmith**: Direct GitHub integration with dropdown menu
+* &#x20;**Self-Hosted/Hybrid LangSmith**: Specify your image URI in the Image Path field (e.g., `docker.io/username/my-agent:latest`)
 
 > [!NOTE]
+>
 > **Benefits:**
 >
 > * Simple UI-based deployment
@@ -316,17 +307,17 @@ You can push to any container registry (Docker Hub, AWS ECR, Azure ACR, Google G
 
 **Supported deployments:**
 
-*  **Cloud LangSmith**: Use the Control Plane API to create deployments from your GitHub repository
-*  **Self-Hosted/Hybrid LangSmith**: Use the Control Plane API to create deployments from your container registry
+* &#x20;**Cloud LangSmith**: Use the Control Plane API to create deployments from your GitHub repository
+* &#x20;**Self-Hosted/Hybrid LangSmith**: Use the Control Plane API to create deployments from your container registry
 
 See the [LangGraph CLI build documentation](cli.md#build) for more details.
 
 ### Connect to your deployed Agent
 
-*  **[LangGraph SDK](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph-sdk-python)**: Use the LangGraph SDK for programmatic integration.
-*  **[RemoteGraph](use-remote-graph.md)**: Connect using RemoteGraph for remote graph connections (to use your graph in other graphs).
-*  **[REST API](server-api-ref.md)**: Use HTTP-based interactions with your deployed agent.
-*  **[Studio](studio.md)**: Access the visual interface for testing and debugging.
+* &#x20;**[LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk.md)**: Use the LangGraph SDK for programmatic integration.
+* &#x20;**[RemoteGraph](use-remote-graph.md)**: Connect using RemoteGraph for remote graph connections (to use your graph in other graphs).
+* &#x20;**[REST API](server-api-ref.md)**: Use HTTP-based interactions with your deployed agent.
+* &#x20;**[Studio](studio.md)**: Access the visual interface for testing and debugging.
 
 ### Environment configuration
 
@@ -358,7 +349,7 @@ For LangSmith API operations (traces, evaluations, datasets):
       <th>Region</th>
 
       <th>
-        {protocol_0 === false ? "Host" : "URL"}
+        URL
       </th>
     </tr>
   </thead>
@@ -368,9 +359,7 @@ For LangSmith API operations (traces, evaluations, datasets):
       <td>GCP US</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://api.smith.langchain.com`
       </td>
     </tr>
 
@@ -378,9 +367,7 @@ For LangSmith API operations (traces, evaluations, datasets):
       <td>GCP EU</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://eu.api.smith.langchain.com`
       </td>
     </tr>
 
@@ -388,9 +375,7 @@ For LangSmith API operations (traces, evaluations, datasets):
       <td>GCP APAC</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://apac.api.smith.langchain.com`
       </td>
     </tr>
 
@@ -398,9 +383,7 @@ For LangSmith API operations (traces, evaluations, datasets):
       <td>AWS US</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://aws.api.smith.langchain.com`
       </td>
     </tr>
   </tbody>
@@ -409,7 +392,8 @@ For LangSmith API operations (traces, evaluations, datasets):
 For self-hosted LangSmith instances, use `http(s)://<langsmith-url>/api` where `<langsmith-url>` is your self-hosted instance URL.
 
 > [!NOTE]
-> If you're setting the endpoint in the `LANGSMITH_ENDPOINT` environment variable, use the full API URL without a trailing slash (e.g., `https://api.smith.langchain.com` or `http(s)://<langsmith-url>/api` if self-hosted). A trailing slash can cause authentication errors with some endpoints.
+>
+> If you set the endpoint in the `LANGSMITH_ENDPOINT` environment variable, use the API URL, such as `https://api.smith.langchain.com` or `http(s)://<langsmith-url>/api` if self-hosted.
 
 #### LangSmith Deployment API (Deployments)
 
@@ -421,7 +405,7 @@ For LangSmith Deployment operations (deployments, revisions):
       <th>Region</th>
 
       <th>
-        {protocol_1 === false ? "Host" : "URL"}
+        URL
       </th>
     </tr>
   </thead>
@@ -431,9 +415,7 @@ For LangSmith Deployment operations (deployments, revisions):
       <td>GCP US</td>
 
       <td>
-        <code>
-          {`${protocol_1 === false ? "" : "https://"}${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-        </code>
+        `https://api.host.langchain.com`
       </td>
     </tr>
 
@@ -441,9 +423,7 @@ For LangSmith Deployment operations (deployments, revisions):
       <td>GCP EU</td>
 
       <td>
-        <code>
-          {`${protocol_1 === false ? "" : "https://"}eu.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-        </code>
+        `https://eu.api.host.langchain.com`
       </td>
     </tr>
 
@@ -451,9 +431,7 @@ For LangSmith Deployment operations (deployments, revisions):
       <td>GCP APAC</td>
 
       <td>
-        <code>
-          {`${protocol_1 === false ? "" : "https://"}apac.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-        </code>
+        `https://apac.api.host.langchain.com`
       </td>
     </tr>
 
@@ -461,9 +439,7 @@ For LangSmith Deployment operations (deployments, revisions):
       <td>AWS US</td>
 
       <td>
-        <code>
-          {`${protocol_1 === false ? "" : "https://"}aws.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-        </code>
+        `https://aws.api.host.langchain.com`
       </td>
     </tr>
   </tbody>
@@ -473,8 +449,6 @@ For self-hosted LangSmith instances, use `http(s)://<langsmith-url>/api-host` wh
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cicd-pipeline-example.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cicd-pipeline-example.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

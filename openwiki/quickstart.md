@@ -14,14 +14,18 @@ OpenWiki is a CLI that writes and maintains a Markdown wiki for your codebase or
 
 ## Install and generate repository docs
 
-### Install the CLI
+**1. Install the CLI**
+
+OpenWiki requires [Node.js 22.22.0 or later](https://nodejs.org).
+
 ```bash
 npm install -g openwiki
 ```
 
 On Windows, prefer `npm` or `pnpm`. Installing with Bun can fall back to compiling the native `better-sqlite3` dependency and may require Visual Studio Build Tools with the Desktop development with C++ workload.
 
-### Initialize in your repository
+**2. Initialize in your repository**
+
 From the repository root, run the following command:
 
 ```bash
@@ -39,10 +43,11 @@ OpenWiki saves its configuration and secrets to `~/.openwiki/.env`.
 
 Running `--init` again regenerates the repository wiki and Claims from scratch while preserving `openwiki/INSTRUCTIONS.md`. Interrupted runs on a persistent checkout resume from `openwiki/.run.json`.
 
-To run OpenWiki inside Codex, Claude Code, OpenCode, or Cursor instead of a standalone model session, see [Coding-agent integrations](integrations.md).
+To run OpenWiki inside a coding agent instead of a standalone model session, see [Coding-agent integrations](integrations.md). After the wiki exists, you can [search it or link related repositories](search-and-link.md).
 
-### Review the generated wiki
-OpenWiki writes documentation to `openwiki/` in the repository, including a quickstart entrypoint and topic pages. It also maintains an `AGENTS.md` and `CLAUDE.md` at the repository root, adding a block that instructs coding agents to consult the wiki for codebase context. Factual pages are grounded with Claims under `openwiki/.claims/`.
+**3. Review the generated wiki**
+
+OpenWiki writes documentation to `openwiki/` in the repository, including a quickstart entrypoint and topic pages. It creates or refreshes `AGENTS.md` at the repository root with a block that instructs coding agents to consult the wiki for codebase context. When `CLAUDE.md` already exists, OpenWiki refreshes a managed block that imports `@AGENTS.md`. Factual pages are grounded with Claims under `openwiki/.claims/`.
 
 Repository-specific wiki instructions live in `openwiki/INSTRUCTIONS.md`. OpenWiki reads this file for scope and priorities. To change it, edit the file, or ask OpenWiki in chat to change the brief (for example, `openwiki "Update openwiki/INSTRUCTIONS.md to focus on the public API"`). Normal `--init` and `--update` runs do not rewrite it.
 
@@ -54,7 +59,8 @@ openwiki visualize
 
 This opens a local interactive node graph with a side-by-side Markdown reader. See [Visualize your wiki](visualize.md).
 
-### Keep docs up to date
+**4. Keep docs up to date**
+
 Refresh documentation after code changes:
 
 ```bash
@@ -104,7 +110,8 @@ To enrich the repository wiki from LangSmith traces (separate from tracing OpenW
 ## Next steps
 
 * [Code mode](code-mode.md): repository wikis, Claims, OKF output, and agent instruction files
-* [Coding-agent integrations](integrations.md): run OpenWiki inside Codex, Claude Code, OpenCode, or Cursor
+* [Coding-agent integrations](integrations.md): run OpenWiki inside Codex, Claude Code, OpenCode, Cursor, IBM Bob, Kiro, Oh My Pi, Antigravity, or Pi
+* [Search and link wikis](search-and-link.md): MCP search and read, plus multi-repo workspaces
 * [Personal mode](personal-mode.md): local brain and connectors
 * [Model providers](providers.md): supported providers and credentials
 * [Automate updates](automate-updates.md): GitHub Actions, GitLab CI, and Bitbucket Pipelines
@@ -112,8 +119,6 @@ To enrich the repository wiki from LangSmith traces (separate from tracing OpenW
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

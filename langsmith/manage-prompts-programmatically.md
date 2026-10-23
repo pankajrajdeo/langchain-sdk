@@ -11,6 +11,7 @@ tags: [docs, langsmith, manage-prompts-programmatically]
 You can use the LangSmith Python, TypeScript, and Java SDKs to manage prompts programmatically.
 
 > [!NOTE]
+>
 > Previously this functionality lived in the `langchainhub` package which is now deprecated. All functionality going forward will live in the `langsmith` package.
 
 ## Install packages
@@ -56,6 +57,7 @@ export LANGSMITH_API_KEY="lsv2_..."
 ```
 
 > [!NOTE]
+>
 > What we refer to as "prompts" used to be called "repos", so any references to "repo" in the code are referring to a prompt.
 
 ## Push a prompt
@@ -270,7 +272,7 @@ prompt = StructuredPrompt.from_messages_and_schema(
     schema=ResponseSchema.model_json_schema(),
 )
 
-model = ChatOpenAI(model="gpt-4o-mini")
+model = ChatOpenAI(model="gpt-5.4-mini")
 chain = prompt | model
 
 client = Client()
@@ -426,6 +428,7 @@ Prompt publicPrompt = promptClient.pull("efriis/my-first-prompt");
 ```
 
 > [!NOTE]
+>
 > For pulling prompts, if you are using Node.js or an environment that supports dynamic imports, we recommend using the `langchain/hub/node` entrypoint, as it handles deserialization of models associated with your prompt configuration automatically.
 >
 > If you are in a non-Node environment, "includeModel" is not supported for non-OpenAI models and you should use the base `langchain/hub` entrypoint.
@@ -445,6 +448,7 @@ export LANGSMITH_GATEWAY="https://eu.gateway.smith.langchain.com"
 ```
 
 > [!NOTE]
+>
 > If you need to use a different API key for gateway calls than your default `LANGSMITH_API_KEY`, set `LANGSMITH_GATEWAY_API_KEY` as an override. It must be a workspace-scoped key with the `gateway:invoke` permission.
 
 Once the environment variables are set, pull and invoke a prompt with a model as normal:
@@ -464,6 +468,7 @@ result = prompt_with_model.invoke({"topic": "cats"})
 ```
 
 > [!NOTE]
+>
 > Gateway routing for LangChain chat models requires Python and a supported `langchain-*` integration package at the minimum version listed in the [gateway quickstart](llm-gateway-quickstart.md). If the integration package is below the minimum version, the call will bypass the gateway and go directly to the provider.
 
 For full configuration options, provider support, and regional endpoints, see the [LLM Gateway quickstart](llm-gateway-quickstart.md).
@@ -787,6 +792,7 @@ promptCacheSingleton.stop();
 ```
 
 > [!NOTE]
+>
 > The background refresh task is only started when you first set a value in the cache, and only if `ttl_seconds` is not `None`. If `ttl_seconds` is `None` (offline mode), no background task is created.
 
 ## Use a prompt without LangChain
@@ -963,7 +969,7 @@ Message message = anthropic.messages().create(
 
 ## List, delete, and like prompts
 
-You can also list, delete, and like/unlike prompts using the `list prompts`, `delete prompt`, `like prompt` and `unlike prompt` methods. See the [LangSmith SDK client](https://github.com/langchain-ai/langsmith-sdk) for extensive documentation on these methods.
+You can also list, delete, and like/unlike prompts using the `list prompts`, `delete prompt`, `like prompt` and `unlike prompt` methods. See the [Python SDK](https://github.com/langchain-ai/langsmith-python) and [JavaScript SDK](https://github.com/langchain-ai/langsmith-javascript) for extensive documentation on these methods.
 
 **Python**
 
@@ -1047,8 +1053,6 @@ client.repos().delete(
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-prompts-programmatically.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-prompts-programmatically.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

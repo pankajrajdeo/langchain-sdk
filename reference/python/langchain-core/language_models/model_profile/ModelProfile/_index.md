@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain-core/language_models/model_profile/ModelProfile"
-description: "Index of 28 pages and 0 subdirectories under reference/python/langchain-core/language_models/model_profile/ModelProfile."
+description: "Index of 30 pages and 0 subdirectories under reference/python/langchain-core/language_models/model_profile/ModelProfile."
 category: "index"
 tags: [index, reference, python, langchain-core, language_models, model_profile, modelprofile]
 ---
 
 # reference/python/langchain-core/language_models/model_profile/ModelProfile
 
-28 pages here.
+30 pages here.
 
 ## Files
 
@@ -21,6 +21,8 @@ tags: [index, reference, python, langchain-core, language_models, model_profile,
 - [last_updated](last_updated.md) - Date the model was last updated (ISO 8601 format).
 - [max_input_tokens](max_input_tokens.md) - Maximum context window (tokens).
 - [max_output_tokens](max_output_tokens.md) - Maximum output tokens.
+- [mid_conversation_system_messages](mid_conversation_system_messages.md) - Whether a SystemMessage after the first turn is sent where it sits.
+- [mid_conversation_tools](mid_conversation_tools.md) - Whether tools can be added mid-conversation.
 - [name](name.md) - Human-readable model name (e.g., 'GPT-5').
 - [open_weights](open_weights.md) - Whether the model weights are openly available.
 - [pdf_inputs](pdf_inputs.md) - Whether PDF inputs are supported.

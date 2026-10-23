@@ -11,6 +11,7 @@ tags: [docs, langsmith, data-export]
 > Export LangSmith trace data to an S3-compatible bucket in Parquet format.
 
 > [!NOTE]
+>
 > **Plan restrictions apply**
 >
 > For customers who signed up after August 3, 2026, bulk export is only available on the [LangSmith Enterprise plan](https://www.langchain.com/pricing-langsmith). Customers who signed up on or before August 3, 2026, can use bulk export on Plus or Enterprise plans until February 1, 2027.
@@ -92,6 +93,7 @@ Save the `id` from the response to monitor the export's progress.
 You can optionally add a `filter` expression to narrow the set of runs exported. Refer to our [filter query language](trace-query-syntax.md#filter-query-language) and [examples](export-traces.md#use-filter-query-language) for syntax. Not setting the `filter` field will export all runs.
 
 > [!NOTE]
+>
 > **LangSmith Cloud limit: 250 bulk export creations per hour per workspace**
 >
 > On [LangSmith cloud](cloud.md), each workspace can create at most 250 bulk exports per hour. This budget includes one-off exports and exports spawned by [scheduled bulk exports](#schedule-recurring-exports), so a workspace with many active schedules consumes part of the hourly budget automatically.
@@ -101,9 +103,6 @@ You can optionally add a `filter` expression to narrow the set of runs exported.
 > [Self-hosted LangSmith](self-hosted.md) does not enforce this limit by default.
 
 ### Export all experiments
-
-> [!NOTE]
-> [Self-hosted](self-hosted.md): currently available only on the `v0.16.1rc1` [preview release](release-versions.md#preview). Wait for the `v0.16.1` stable release before running it in production.
 
 To export every experiment in the workspace instead of targeting a single project with `session_id`, set `all_experiments: true`. LangSmith creates an experiment whenever you run an evaluation against a dataset, any tracing project with `reference_dataset_id` set qualifies.
 
@@ -129,6 +128,7 @@ LangSmith resolves the set of experiment sessions at run time, so the export pic
 The same `all_experiments` flag works with [scheduled exports](#schedule-recurring-exports)—include `interval_hours` and omit `end_time` instead of supplying `end_time`.
 
 > [!NOTE]
+>
 > **Cloud limit: 250 experiments per export**
 >
 > On [LangSmith cloud](cloud.md), each `all_experiments` export includes at most 250 experiments. To export more:
@@ -141,6 +141,7 @@ The same `all_experiments` flag works with [scheduled exports](#schedule-recurri
 ### Schedule recurring exports
 
 > [!NOTE]
+>
 > Requires LangSmith Helm version `0.10.42` or later (application version `0.10.109` or later)
 
 Scheduled exports collect runs periodically and export to the configured destination. To create a scheduled export, include `interval_hours` and omit `end_time`:
@@ -168,6 +169,7 @@ curl --request POST \
 * To stop a scheduled export, [cancel it](data-export-monitor.md#stop-an-export).
 
 > [!NOTE]
+>
 > **LangSmith Cloud limit: 200 scheduled bulk exports per workspace**
 >
 > On [LangSmith cloud](cloud.md), each workspace can have at most 200 active **scheduled** (recurring) bulk exports at a time. That is, exports configured with an `interval_hours` value. The limit caps the number of **schedules**, not the number of times they run: a schedule that has produced thousands of historical export runs still counts as one.
@@ -191,6 +193,7 @@ If a scheduled bulk export is created with `start_time=2025-07-16T00:00:00Z` and
 ### Limit exported fields
 
 > [!NOTE]
+>
 > Requires LangSmith Helm version `0.12.11` or later (application version `0.12.42` or later). Supported in both one-time and scheduled exports.
 
 You can improve export speed and reduce file size by limiting which fields are included using the `export_fields` parameter. If you omit `export_fields`, all fields except `feedbacks` are included.
@@ -215,6 +218,7 @@ curl --request POST \
 ```
 
 > [!TIP]
+>
 > Excluding `inputs` and `outputs` can significantly improve export performance and reduce file sizes, especially for large runs. Only include these fields if you need them for your analysis.
 >
 > If your export includes token or cost fields, which it does by default, setting `is_rollup_disabled` to `true` can also speed it up because LangSmith skips computing trace-level rollups. Root runs then carry their own token and cost values instead of totals for the whole trace. `is_rollup_disabled` defaults to `false` and applies only to exports that read from SmithDB.
@@ -226,7 +230,8 @@ Set the `compression` field to control how exported Parquet files are compressed
 Allowed values: `zstandard`, `gzip`, `snappy`, `none`. Use `snappy` when loading into BigQuery, see [Export trace data to BigQuery](big-query-bulk-export.md).
 
 > [!NOTE]
-> As of LangSmith 0.16.0, [Self-hosted LangSmith](self-hosted.md) also defaults to `zstandard` when `compression` is omitted. This is a breaking change from previous versions, which defaulted to `gzip`. To override the default, set the `FF_BULK_EXPORT_DEFAULT_COMPRESSION` environment variable.
+>
+> As of Helm chart 0.17.0, [Self-hosted LangSmith](self-hosted.md) also defaults to `zstandard` when `compression` is omitted. On chart 0.16 and earlier, self-hosted defaults to `gzip`. To override the default, set the `FF_BULK_EXPORT_DEFAULT_COMPRESSION` environment variable.
 
 ### Exportable fields
 
@@ -276,6 +281,7 @@ By default, bulk exports include the following fields for each run:
 | `feedbacks` | Feedback comments and keys (JSON) |
 
 > [!NOTE]
+>
 > **`feedback_stats` aggregation limitation**
 >
 > The `feedback_stats` field only includes value breakdowns for string-type feedback. Feedback with non-string values (numeric, boolean, complex types) is excluded from these breakdowns. To analyze non-string feedback values, export the raw feedback data separately.
@@ -318,8 +324,6 @@ Refer to [Monitor and troubleshoot bulk exports](data-export-monitor.md) for how
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

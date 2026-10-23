@@ -13,6 +13,7 @@ tags: [docs, javascript, integrations, embeddings]
 ## Overview
 
 > [!NOTE]
+>
 > This overview covers **text-based embedding models**. LangChain does not currently support multimodal embeddings.
 
 Embedding models transform raw text—such as a sentence, paragraph, or tweet—into a fixed-length vector of numbers that captures its **semantic meaning**. These vectors allow machines to compare and search text based on meaning rather than exact words.
@@ -42,375 +43,349 @@ Two main methods are available:
 * `embedQuery(text: string) → number[]`: Embeds a single query.
 
 > [!NOTE]
+>
 > The interface allows queries and documents to be embedded with different strategies, though most providers handle them the same way in practice.
 
 ## Install and use
 
-<details>
-<summary>OpenAI</summary>
-
-Install dependencies:
-
+> **OpenAI**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/openai @langchain/core
+> npm install @langchain/openai @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/openai @langchain/core
+> yarn add @langchain/openai @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/openai @langchain/core
+> pnpm add @langchain/openai @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-OPENAI_API_KEY=your-api-key
+> OPENAI_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { OpenAIEmbeddings } from "@langchain/openai";
-
-const embeddings = new OpenAIEmbeddings({
-  model: "text-embedding-3-large"
-});
+> import { OpenAIEmbeddings } from "@langchain/openai";
+>
+> const embeddings = new OpenAIEmbeddings({
+>   model: "text-embedding-3-large"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Azure</summary>
-
-Install dependencies
-
+> **Azure**
+>
+> Install dependencies
+>
 **npm**
 
 ```bash
-npm install @langchain/openai @langchain/core
+> npm install @langchain/openai @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/openai @langchain/core
+> yarn add @langchain/openai @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/openai @langchain/core
+> pnpm add @langchain/openai @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-AZURE_OPENAI_API_INSTANCE_NAME=<YOUR_INSTANCE_NAME>
-AZURE_OPENAI_API_KEY=<YOUR_KEY>
-AZURE_OPENAI_API_VERSION="2024-02-01"
+> AZURE_OPENAI_API_INSTANCE_NAME=<YOUR_INSTANCE_NAME>
+> AZURE_OPENAI_API_KEY=<YOUR_KEY>
+> AZURE_OPENAI_API_VERSION="2024-02-01"
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { AzureOpenAIEmbeddings } from "@langchain/openai";
-
-const embeddings = new AzureOpenAIEmbeddings({
-  azureOpenAIApiEmbeddingsDeploymentName: "text-embedding-ada-002"
-});
+> import { AzureOpenAIEmbeddings } from "@langchain/openai";
+>
+> const embeddings = new AzureOpenAIEmbeddings({
+>   azureOpenAIApiEmbeddingsDeploymentName: "text-embedding-ada-002"
+> });
 ```
 
-</details>
-
-<details>
-<summary>AWS</summary>
-
-Install dependencies:
-
+> **AWS**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/aws @langchain/core
+> npm install @langchain/aws @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/aws @langchain/core
+> yarn add @langchain/aws @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/aws @langchain/core
+> pnpm add @langchain/aws @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-BEDROCK_AWS_REGION=your-region
+> BEDROCK_AWS_REGION=your-region
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { BedrockEmbeddings } from "@langchain/aws";
-
-const embeddings = new BedrockEmbeddings({
-  model: "amazon.titan-embed-text-v1"
-});
+> import { BedrockEmbeddings } from "@langchain/aws";
+>
+> const embeddings = new BedrockEmbeddings({
+>   model: "amazon.titan-embed-text-v1"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Google Gemini</summary>
-
-Install dependencies:
-
+> **Google Gemini**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/google-genai @langchain/core
+> npm install @langchain/google-genai @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/google-genai @langchain/core
+> yarn add @langchain/google-genai @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/google-genai @langchain/core
+> pnpm add @langchain/google-genai @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-GOOGLE_API_KEY=your-api-key
+> GOOGLE_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
-
-const embeddings = new GoogleGenerativeAIEmbeddings({
-  model: "text-embedding-004"
-});
+> import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+>
+> const embeddings = new GoogleGenerativeAIEmbeddings({
+>   model: "gemini-embedding-001"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Gemini Enterprise Agent Platform</summary>
-
-Install dependencies:
-
+> **Gemini Enterprise Agent Platform**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/google-vertexai @langchain/core
+> npm install @langchain/google-vertexai @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/google-vertexai @langchain/core
+> yarn add @langchain/google-vertexai @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/google-vertexai @langchain/core
+> pnpm add @langchain/google-vertexai @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-GOOGLE_APPLICATION_CREDENTIALS=credentials.json
+> GOOGLE_APPLICATION_CREDENTIALS=credentials.json
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { VertexAIEmbeddings } from "@langchain/google-vertexai";
-
-const embeddings = new VertexAIEmbeddings({
-  model: "gemini-embedding-001"
-});
+> import { VertexAIEmbeddings } from "@langchain/google-vertexai";
+>
+> const embeddings = new VertexAIEmbeddings({
+>   model: "gemini-embedding-001"
+> });
 ```
 
-</details>
-
-<details>
-<summary>MistralAI</summary>
-
-Install dependencies:
-
+> **MistralAI**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/mistralai @langchain/core
+> npm install @langchain/mistralai @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mistralai @langchain/core
+> yarn add @langchain/mistralai @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mistralai @langchain/core
+> pnpm add @langchain/mistralai @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-MISTRAL_API_KEY=your-api-key
+> MISTRAL_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { MistralAIEmbeddings } from "@langchain/mistralai";
-
-const embeddings = new MistralAIEmbeddings({
-  model: "mistral-embed"
-});
+> import { MistralAIEmbeddings } from "@langchain/mistralai";
+>
+> const embeddings = new MistralAIEmbeddings({
+>   model: "mistral-embed"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Cohere</summary>
-
-Install dependencies:
-
+> **Cohere**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/cohere @langchain/core
+> npm install @langchain/cohere @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/cohere @langchain/core
+> yarn add @langchain/cohere @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/cohere @langchain/core
+> pnpm add @langchain/cohere @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-COHERE_API_KEY=your-api-key
+> COHERE_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { CohereEmbeddings } from "@langchain/cohere";
-
-const embeddings = new CohereEmbeddings({
-  model: "embed-english-v3.0"
-});
+> import { CohereEmbeddings } from "@langchain/cohere";
+>
+> const embeddings = new CohereEmbeddings({
+>   model: "embed-english-v3.0"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Ollama</summary>
-
-Install dependencies:
-
+> **Ollama**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/ollama @langchain/core
+> npm install @langchain/ollama @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/ollama @langchain/core
+> yarn add @langchain/ollama @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/ollama @langchain/core
+> pnpm add @langchain/ollama @langchain/core
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { OllamaEmbeddings } from "@langchain/ollama";
-
-const embeddings = new OllamaEmbeddings({
-  model: "llama2",
-  baseUrl: "http://localhost:11434", // Default value
-});
+> import { OllamaEmbeddings } from "@langchain/ollama";
+>
+> const embeddings = new OllamaEmbeddings({
+>   model: "llama2",
+>   baseUrl: "http://localhost:11434", // Default value
+> });
 ```
 
-</details>
-
-<details>
-<summary>Voyage AI</summary>
-
-Install dependencies:
-
+> **Voyage AI**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/mongodb @langchain/core
+> npm install @langchain/mongodb @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mongodb @langchain/core
+> yarn add @langchain/mongodb @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mongodb @langchain/core
+> pnpm add @langchain/mongodb @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-VOYAGE_API_KEY=your-api-key
+> VOYAGE_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { VoyageEmbeddings } from "@langchain/mongodb";
-
-const embeddings = new VoyageEmbeddings({
-  model: "voyage-4"
-});
+> import { VoyageEmbeddings } from "@langchain/mongodb";
+>
+> const embeddings = new VoyageEmbeddings({
+>   model: "voyage-4"
+> });
 ```
-
-</details>
 
 ## Caching
 
@@ -424,9 +399,8 @@ The main supported way to initialize a `CacheBackedEmbeddings` is `fromBytesStor
 * **documentEmbeddingStore**: Any [`BaseStore`](../stores.md) for caching document embeddings.
 * **options.namespace**: (optional, defaults to `""`) The namespace to use for the document cache. Helps avoid collisions (e.g., set it to the embedding model name).
 
-> [!IMPORTANT]
-> - Always set the `namespace` parameter to avoid collisions when using different embedding models.
-> - `CacheBackedEmbeddings` does not cache query embeddings by default. To enable this, specify a `query_embedding_store`.
+- Always set the `namespace` parameter to avoid collisions when using different embedding models.
+- `CacheBackedEmbeddings` does not cache query embeddings by default. To enable this, specify a `query_embedding_store`.
 
 ```typescript
 import { CacheBackedEmbeddings } from "@langchain/classic/embeddings/cache_backed";
@@ -461,31 +435,29 @@ In production, you would typically use a more robust persistent store, such as a
 
 | Integration | Downloads |
 | :- | :- |
-| [`AzureOpenAIEmbeddings`](azure_openai.md) | <span data-sort-value="14480022"><a href="https://www.npmjs.com/package/@langchain/openai" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/openai?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`OpenAIEmbeddings`](openai.md) | <span data-sort-value="14480022"><a href="https://www.npmjs.com/package/@langchain/openai" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/openai?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Bedrock`](bedrock.md) | <span data-sort-value="3181274"><a href="https://www.npmjs.com/package/@langchain/aws" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/aws?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`GoogleGenerativeAIEmbeddings`](google_generative_ai.md) | <span data-sort-value="3132743"><a href="https://www.npmjs.com/package/@langchain/google-genai" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/google-genai?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`VertexAIEmbeddings`](google_vertex_ai.md) | <span data-sort-value="1813550"><a href="https://www.npmjs.com/package/@langchain/google-vertexai" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/google-vertexai?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`OllamaEmbeddings`](ollama.md) | <span data-sort-value="833544"><a href="https://www.npmjs.com/package/@langchain/ollama" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`MistralAIEmbeddings`](mistralai.md) | <span data-sort-value="764540"><a href="https://www.npmjs.com/package/@langchain/mistralai" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/mistralai?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`PineconeEmbeddings`](pinecone.md) | <span data-sort-value="656824"><a href="https://www.npmjs.com/package/@langchain/pinecone" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/pinecone?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`VoyageEmbeddings`](voyageai.md) | <span data-sort-value="496248"><a href="https://www.npmjs.com/package/@langchain/mongodb" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/mongodb?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`CohereEmbeddings`](cohere.md) | <span data-sort-value="494553"><a href="https://www.npmjs.com/package/@langchain/cohere" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Baidu qianfan`](baidu_qianfan.md) | <span data-sort-value="23195"><a href="https://www.npmjs.com/package/@langchain/baidu-qianfan" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/baidu-qianfan?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Nomic`](nomic.md) | <span data-sort-value="20529"><a href="https://www.npmjs.com/package/@langchain/nomic" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/nomic?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`CloudflareWorkersAIEmbeddings`](cloudflare_ai.md) | <span data-sort-value="17423"><a href="https://www.npmjs.com/package/@langchain/cloudflare" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`FireworksEmbeddings`](fireworks.md) | <span data-sort-value="6462"><a href="https://www.npmjs.com/package/@langchain/fireworks" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/fireworks?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`WatsonxEmbeddings`](ibm.md) | <span data-sort-value="3845"><a href="https://www.npmjs.com/package/@langchain/ibm" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`TogetherAIEmbeddings`](togetherai.md) | <span data-sort-value="1237"><a href="https://www.npmjs.com/package/@langchain/together-ai" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/together-ai?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Mixedbread AI`](mixedbread_ai.md) | <span data-sort-value="163"><a href="https://www.npmjs.com/package/@langchain/mixedbread-ai" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/mixedbread-ai?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`SCXEmbeddings`](https://scx.ai/) | <span data-sort-value="27"><a href="https://www.npmjs.com/package/@scx-ai/langchain" target="_blank">  <img src="https://img.shields.io/npm/dm/@scx-ai/langchain?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Minimax`](minimax.md) | <span data-sort-value="-1">N/A</span> |
-| [`OracleEmbeddings`](oracleai.md) | <span data-sort-value="-1">N/A</span> |
+| [`AzureOpenAIEmbeddings`](azure_openai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/openai) |
+| [`OpenAIEmbeddings`](openai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/openai) |
+| [`Bedrock`](bedrock.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/aws?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/aws) |
+| [`GoogleGenerativeAIEmbeddings`](google_generative_ai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google-genai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google-genai) |
+| [`VertexAIEmbeddings`](google_vertex_ai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google-vertexai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google-vertexai) |
+| [`OllamaEmbeddings`](ollama.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ollama) |
+| [`MistralAIEmbeddings`](mistralai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mistralai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mistralai) |
+| [`PineconeEmbeddings`](pinecone.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/pinecone?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/pinecone) |
+| [`VoyageEmbeddings`](voyageai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mongodb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mongodb) |
+| [`CohereEmbeddings`](cohere.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cohere) |
+| [`Baidu qianfan`](baidu_qianfan.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/baidu-qianfan?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/baidu-qianfan) |
+| [`Nomic`](nomic.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/nomic?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/nomic) |
+| [`CloudflareWorkersAIEmbeddings`](cloudflare_ai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
+| [`FireworksEmbeddings`](fireworks.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/fireworks?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/fireworks) |
+| [`WatsonxEmbeddings`](ibm.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ibm) |
+| [`TogetherAIEmbeddings`](togetherai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/together-ai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/together-ai) |
+| [`Mixedbread AI`](mixedbread_ai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mixedbread-ai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mixedbread-ai) |
+| [`SCXEmbeddings`](https://scx.ai/) | [  ![Downloads per month](https://img.shields.io/npm/dm/@scx-ai/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@scx-ai/langchain) |
+| [`Minimax`](minimax.md) | N/A |
+| [`OracleEmbeddings`](oracleai.md) | N/A |
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

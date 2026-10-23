@@ -23,7 +23,7 @@ success or all models exhausted. Primary model specified in `create_agent`.
 ModelFallbackMiddleware(
     self,
     first_model: str | BaseChatModel,
-    *additional_models: str | BaseChatModel = (),
+    additional_models: str | BaseChatModel = (),
 )
 ```
 
@@ -66,13 +66,14 @@ result = await agent.invoke({"messages": [HumanMessage("Hello")]})
 __init__(
     self,
     first_model: str | BaseChatModel,
-    *additional_models: str | BaseChatModel = (),
+    additional_models: str | BaseChatModel = (),
 ) -> None
 ```
 
 | Name | Type |
 |------|------|
 | `first_model` | `str \| BaseChatModel` |
+| `additional_models` | `str \| BaseChatModel` |
 
 ## Properties
 
@@ -85,4 +86,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/be854a130153e51346d83d3b06f959b80f6cbca6/libs/langchain_v1/langchain/agents/middleware/model_fallback.py#L342)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/model_fallback.py#L342)

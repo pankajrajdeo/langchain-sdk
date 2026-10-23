@@ -42,7 +42,8 @@ Use the router pattern when you have distinct verticals (separate knowledge doma
 
 The router classifies the query and directs it to the appropriate agent(s). Use [`Command`](../../langgraph/graph-api.md#command) for single-agent routing or [`Send`](../../langgraph/graph-api.md#send) for parallel fan-out to multiple agents.
 
-#### Single agent
+**Single agent**
+
 Use `Command` to route to a single specialized agent:
 
 ```typescript
@@ -68,7 +69,8 @@ function routeQuery(state: z.infer<typeof ClassificationResult>) {
 }
 ```
 
-#### Multiple agents (parallel)
+**Multiple agents (parallel)**
+
 Use `Send` to fan out to multiple specialized agents in parallel:
 
 ```typescript
@@ -98,8 +100,9 @@ function routeQuery(state: typeof State.State) {
 
 For a complete implementation, see the tutorial below.
 
-#### [Tutorial: Build a multi-source knowledge base with routing](router-knowledge-base.md)
-Build a router that queries GitHub, Notion, and Slack in parallel, then synthesizes results into a coherent answer. Covers state definition, specialized agents, parallel execution with `Send`, and result synthesis.
+> **[Tutorial: Build a multi-source knowledge base with routing](router-knowledge-base.md)**
+>
+> Build a router that queries GitHub, Notion, and Slack in parallel, then synthesizes results into a coherent answer. Covers state definition, specialized agents, parallel execution with `Send`, and result synthesis.
 
 ## Stateless vs. stateful
 
@@ -113,6 +116,7 @@ Two approaches:
 Each request is routed independently—no memory between calls. For multi-turn conversations, see [Stateful routers](#stateful).
 
 > [!TIP]
+>
 > **Router vs. Subagents**: Both patterns can dispatch work to multiple agents, but they differ in how routing decisions are made:
 >
 > * **Router**: A dedicated routing step (often a single LLM call or rule-based logic) that classifies the input and dispatches to agents. The router itself typically doesn't maintain conversation history or perform multi-turn orchestration—it's a preprocessing step.
@@ -156,12 +160,11 @@ const conversationalAgent = createAgent({
 If you need the router itself to maintain state, use [persistence](../short-term-memory.md) to store message history. When routing to an agent, fetch previous messages from state and selectively include them in the agent's context—this is a lever for [context engineering](../context-engineering.md).
 
 > [!WARNING]
+>
 > **Stateful routers require custom history management.** If the router switches between agents across turns, conversations may not feel fluid to end users when agents have different tones or prompts. With parallel invocation, you'll need to maintain history at the router level (inputs and synthesized outputs) and leverage this history in routing logic. Consider the [handoffs pattern](handoffs.md) or [subagents pattern](subagents.md) instead—both provide clearer semantics for multi-turn conversations.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/router.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/router.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

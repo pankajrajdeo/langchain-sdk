@@ -12,38 +12,44 @@ The following sections provide API references and SDK documentation for LangSmit
 
 ## LangSmith SDKs
 
-#### [Python SDK](smith-python-sdk.md)
-Reference documentation for the LangSmith Python SDK.
+> **[Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk.md)**
+>
+> Reference documentation for the LangSmith Python SDK.
 
-#### [JavaScript/TypeScript SDK](smith-js-ts-sdk.md)
-Reference documentation for the LangSmith JavaScript/TypeScript SDK.
+> **[JavaScript/TypeScript SDK](https://docs.langchain.com/langsmith/smith-js-ts-sdk.md)**
+>
+> Reference documentation for the LangSmith JavaScript/TypeScript SDK.
 
-#### [Go SDK](smith-go-sdk.md)
-Reference documentation for the LangSmith Go SDK.
+> **[Go SDK](https://docs.langchain.com/langsmith/smith-go-sdk.md)**
+>
+> Reference documentation for the LangSmith Go SDK.
 
-#### [Java SDK](smith-java-sdk.md)
-Reference documentation for the LangSmith Java SDK.
+> **[Java SDK](https://docs.langchain.com/langsmith/smith-java-sdk.md)**
+>
+> Reference documentation for the LangSmith Java SDK.
 
 ## LangGraph SDKs
 
-#### [LangGraph Python SDK](langgraph-python-sdk.md)
-Reference documentation for deploying LangGraph applications with Python.
+> **[LangGraph Python SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk.md)**
+>
+> Reference documentation for deploying LangGraph applications with Python.
 
-#### [LangGraph JS/TS SDK](langgraph-js-ts-sdk.md)
-Reference documentation for deploying LangGraph applications with JavaScript/TypeScript.
+> **[LangGraph JS/TS SDK](https://docs.langchain.com/langsmith/langgraph-js-ts-sdk.md)**
+>
+> Reference documentation for deploying LangGraph applications with JavaScript/TypeScript.
 
 ## APIs
 
-#### [LangSmith API](smith-api-ref.md)
-Complete REST API reference for LangSmith platform features.
+> **[LangSmith API](smith-api-ref.md)**
+>
+> Complete REST API reference for LangSmith platform features.
 
-#### [Deployment APIs](server-api-ref.md)
-API references for self-hosted and hybrid LangSmith deployments.
+> **[Deployment APIs](server-api-ref.md)**
+>
+> API references for self-hosted and hybrid LangSmith deployments.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

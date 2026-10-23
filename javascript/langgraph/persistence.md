@@ -10,18 +10,6 @@ tags: [docs, javascript, langgraph, persistence]
 
 > LangGraph's persistence layer gives agents short-term memory through checkpointers and long-term memory through stores.
 
-<a id="checkpoints" />
-
-<a id="threads" />
-
-<a id="memory-store" />
-
-<a id="checkpointer-libraries" />
-
-<a id="pending-writes" />
-
-<a id="durability-modes" />
-
 Persistence lets LangGraph applications keep useful information beyond a single graph run. It matters when an agent needs to continue a conversation, resume after an interruption, recover from a failure, or remember information across interactions.
 
 LangGraph provides two complementary persistence systems:
@@ -36,10 +24,10 @@ Most applications can use both: a [checkpointer](checkpointers.md) tracks the cu
 Compile your graph with a checkpointer, a store, or both:
 
 ```typescript
-import { MemorySaver, MemoryStore } from "@langchain/langgraph";
+import { MemorySaver, InMemoryStore } from "@langchain/langgraph";
 
 const checkpointer = new MemorySaver();
-const store = new MemoryStore();
+const store = new InMemoryStore();
 
 const graph = builder.compile({ checkpointer, store });
 
@@ -50,8 +38,11 @@ const result = await graph.invoke(
 ```
 
 > [!NOTE]
+>
 > **Agent Server handles persistence automatically**
 > When using the [Agent Server](../../langsmith/agent-server.md), you do not need to implement or configure checkpointers or stores manually. The server handles persistence infrastructure behind the scenes.
+
+<a id="checkpointer-libraries"></a>
 
 ## Checkpointer vs. store
 
@@ -100,8 +91,6 @@ When a subgraph updates state, the parent graph may not see the changes immediat
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/persistence.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/persistence.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

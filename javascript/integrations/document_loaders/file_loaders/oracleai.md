@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, document_loaders, file_loaders, oracleai]
 > Integrate with the OracleDocLoader document loader using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 
 Oracle Database supports document-centric AI workflows by combining semantic search over unstructured content with relational queries over business data in a single system. This makes it easier to build retrieval workflows (like RAG) without splitting data and vectors across multiple databases.
@@ -24,7 +25,7 @@ If you are just starting with Oracle Database, consider exploring the [free Orac
 
 ### Integration details
 
-| Class | Package | Compatibility | Local | [PY support](https://python.langchain.com/docs/integrations/document_loaders/oracleai) |
+| Class | Package | Compatibility | Local | [PY support](../../../../integrations/document_loaders/oracleai.md) |
 | :- | :- | :-: | :-: | :-: |
 | `OracleDocLoader` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) | Node-only | ✅ | ✅ |
 | `OracleTextSplitter` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) | Node-only | ✅ | ✅ |
@@ -143,8 +144,6 @@ For detailed documentation of all `OracleDocLoader` and `OracleTextSplitter` fea
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/file_loaders/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/file_loaders/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,6 @@
 ---
 title: "run_id"
-description: "Run ID for the current execution on the thread."
+description: "Run ID of the newest run this task knows of on its thread. A queued follow-up's run may not have started yet."
 source: "https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncTask/run_id"
 category: "reference"
 tags: [reference, deepagents, middleware, async_subagents, asynctask, run_id]
@@ -12,7 +12,7 @@ tags: [reference, deepagents, middleware, async_subagents, asynctask, run_id]
 
 📖 [View in docs](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncTask/run_id)
 
-Run ID for the current execution on the thread.
+Run ID of the newest run this task knows of on its thread. A queued follow-up's run may not have started yet.
 
 ## Signature
 
@@ -22,4 +22,4 @@ run_id: str
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/async_subagents.py#L92)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/async_subagents.py#L194)

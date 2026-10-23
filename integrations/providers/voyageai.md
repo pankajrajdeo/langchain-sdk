@@ -1,18 +1,18 @@
 ---
-title: "VoyageAI integrations"
-description: "Integrate with VoyageAI using LangChain Python."
+title: "VoyageAI by MongoDB integrations"
+description: "Integrate with VoyageAI by MongoDB using LangChain Python."
 source: "https://docs.langchain.com/oss/python/integrations/providers/voyageai"
 category: "docs"
 tags: [docs, integrations, providers, voyageai]
 ---
 
-# VoyageAI integrations
+# VoyageAI by MongoDB integrations
 
-> Integrate with VoyageAI using LangChain Python.
+> Integrate with VoyageAI by MongoDB using LangChain Python.
 
-All functionality related to VoyageAI
+All functionality related to VoyageAI by MongoDB
 
-> [VoyageAI](https://www.voyageai.com/) Voyage AI builds embedding models, customized for your domain and company, for better retrieval quality.
+> [VoyageAI by MongoDB](https://www.voyageai.com/) builds embedding models, customized for your domain and company, for better retrieval quality.
 
 ## Installation and setup
 
@@ -30,7 +30,7 @@ pip install langchain-voyageai
 uv add langchain-voyageai
 ```
 
-Get a VoyageAI API key and set it as an environment variable (`VOYAGE_API_KEY`)
+Get a VoyageAI by MongoDB API key and set it as an environment variable (`VOYAGE_API_KEY`)
 
 ## Text embedding model
 
@@ -50,8 +50,6 @@ from langchain_voyageai import VoyageAIRerank
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/voyageai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/voyageai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -45,424 +45,425 @@ with PostgresSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight
     graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
 ```
 
-<details>
-<summary>Example: using Postgres checkpointer</summary>
-
+> **Example: using Postgres checkpointer**
+>
 ```
-pip install -U "psycopg[binary,pool]" langgraph langgraph-checkpoint-postgres
+> pip install -U "psycopg[binary,pool]" langgraph langgraph-checkpoint-postgres
 ```
-
-> [!TIP]
-> You need to call `checkpointer.setup()` the first time you're using Postgres checkpointer
-
-#### Sync
+>
+> > [!TIP]
+> >
+> > You need to call `checkpointer.setup()` the first time you're using Postgres checkpointer
+>
+> **Sync**
+>
 ```python
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.postgres import PostgresSaver  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-DB_URI = "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
-with PostgresSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
-    # checkpointer.setup()
-
-    def call_model(state: MessagesState):
-        response = model.invoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
-
-    config = {
-        "configurable": {
-            "thread_id": "1"  # [!code highlight]
-        }
-    }
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        print(snapshot)
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        print(snapshot)
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.postgres import PostgresSaver  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> DB_URI = "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
+> with PostgresSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
+>     # checkpointer.setup()
+>
+>     def call_model(state: MessagesState):
+>         response = model.invoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1"  # [!code highlight]
+>         }
+>     }
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
 ```
-
-#### Async
+>
+> **Async**
+>
 ```python
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-DB_URI = "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
-async with AsyncPostgresSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
-    # await checkpointer.setup()
-
-    async def call_model(state: MessagesState):
-        response = await model.ainvoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
-
-    config = {
-        "configurable": {
-            "thread_id": "1"  # [!code highlight]
-        }
-    }
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> DB_URI = "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
+> async with AsyncPostgresSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
+>     # await checkpointer.setup()
+>
+>     async def call_model(state: MessagesState):
+>         response = await model.ainvoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1"  # [!code highlight]
+>         }
+>     }
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
 ```
 
-</details>
-
-<details>
-<summary>Example: using MongoDB checkpointer</summary>
-
+> **Example: using MongoDB checkpointer**
+>
 ```
-pip install -U pymongo langgraph langgraph-checkpoint-mongodb
+> pip install -U pymongo langgraph langgraph-checkpoint-mongodb
 ```
-
-> [!TIP]
-> **Setup**
-> To use the [MongoDB checkpointer](https://pypi.org/project/langgraph-checkpoint-mongodb/), you will need a MongoDB cluster. Follow [this guide](https://www.mongodb.com/docs/guides/atlas/cluster/) to create a cluster if you don't already have one. For an agent-focused walkthrough, see [short-term memory with MongoDB Atlas](../integrations/memory/mongodb-short-term-memory.md).
-
-#### Sync
+>
+> > [!TIP]
+> >
+> > **Setup**
+> > To use the [MongoDB checkpointer](https://pypi.org/project/langgraph-checkpoint-mongodb/), you will need a MongoDB cluster. Follow [this guide](https://www.mongodb.com/docs/guides/atlas/cluster/) to create a cluster if you don't already have one. For an agent-focused walkthrough, see [short-term memory with MongoDB Atlas](../integrations/memory/mongodb-short-term-memory.md).
+>
+> **Sync**
+>
 ```python
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.mongodb import MongoDBSaver  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-MONGODB_URI = "localhost:27017"
-with MongoDBSaver.from_conn_string(MONGODB_URI) as checkpointer:  # [!code highlight]
-
-    def call_model(state: MessagesState):
-        response = model.invoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
-
-    config = {
-        "configurable": {
-            "thread_id": "1"  # [!code highlight]
-        }
-    }
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        print(snapshot)
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        print(snapshot)
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.mongodb import MongoDBSaver  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> MONGODB_URI = "localhost:27017"
+> with MongoDBSaver.from_conn_string(MONGODB_URI) as checkpointer:  # [!code highlight]
+>
+>     def call_model(state: MessagesState):
+>         response = model.invoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1"  # [!code highlight]
+>         }
+>     }
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
 ```
-
-#### Async
+>
+> **Async**
+>
 ```python
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.mongodb.aio import AsyncMongoDBSaver  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-MONGODB_URI = "localhost:27017"
-async with AsyncMongoDBSaver.from_conn_string(MONGODB_URI) as checkpointer:  # [!code highlight]
-
-    async def call_model(state: MessagesState):
-        response = await model.ainvoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
-
-    config = {
-        "configurable": {
-            "thread_id": "1"  # [!code highlight]
-        }
-    }
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.mongodb.aio import AsyncMongoDBSaver  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> MONGODB_URI = "localhost:27017"
+> async with AsyncMongoDBSaver.from_conn_string(MONGODB_URI) as checkpointer:  # [!code highlight]
+>
+>     async def call_model(state: MessagesState):
+>         response = await model.ainvoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1"  # [!code highlight]
+>         }
+>     }
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
 ```
 
-</details>
-
-<details>
-<summary>Example: using Redis checkpointer</summary>
-
+> **Example: using Redis checkpointer**
+>
 ```
-pip install -U langgraph langgraph-checkpoint-redis
+> pip install -U langgraph langgraph-checkpoint-redis
 ```
-
-> [!TIP]
-> You need to call `checkpointer.setup()` the first time you're using Redis checkpointer.
-
-#### Sync
+>
+> > [!TIP]
+> >
+> > You need to call `checkpointer.setup()` the first time you're using Redis checkpointer.
+>
+> **Sync**
+>
 ```python
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.redis import RedisSaver  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-DB_URI = "redis://localhost:6379"
-with RedisSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
-    # checkpointer.setup()
-
-    def call_model(state: MessagesState):
-        response = model.invoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
-
-    config = {
-        "configurable": {
-            "thread_id": "1"  # [!code highlight]
-        }
-    }
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        print(snapshot)
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        print(snapshot)
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.redis import RedisSaver  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> DB_URI = "redis://localhost:6379"
+> with RedisSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
+>     # checkpointer.setup()
+>
+>     def call_model(state: MessagesState):
+>         response = model.invoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1"  # [!code highlight]
+>         }
+>     }
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
 ```
-
-#### Async
+>
+> **Async**
+>
 ```python
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.redis.aio import AsyncRedisSaver  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-DB_URI = "redis://localhost:6379"
-async with AsyncRedisSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
-    # await checkpointer.asetup()
-
-    async def call_model(state: MessagesState):
-        response = await model.ainvoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
-
-    config = {
-        "configurable": {
-            "thread_id": "1"  # [!code highlight]
-        }
-    }
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.redis.aio import AsyncRedisSaver  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> DB_URI = "redis://localhost:6379"
+> async with AsyncRedisSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
+>     # await checkpointer.asetup()
+>
+>     async def call_model(state: MessagesState):
+>         response = await model.ainvoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1"  # [!code highlight]
+>         }
+>     }
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
 ```
 
-</details>
-
-<details>
-<summary>Example: using Oracle checkpointer</summary>
-
+> **Example: using Oracle checkpointer**
+>
 ```
-pip install -U langgraph langgraph-oracledb
+> pip install -U langgraph langgraph-oracledb
 ```
-
-> [!NOTE]
-> **Setup**
-> To use the [Oracle checkpointer](https://pypi.org/project/langgraph-oracledb/), you will need an Oracle AI Database instance. A local container (for example `gvenzl/oracle-free:23-slim`) or an Oracle Autonomous Database in OCI both work.
-
-> [!TIP]
-> You need to call `checkpointer.setup()` the first time you're using the Oracle checkpointer.
-
-#### Sync
+>
+> > [!NOTE]
+> >
+> > **Setup**
+> > To use the [Oracle checkpointer](https://pypi.org/project/langgraph-oracledb/), you will need an Oracle AI Database instance. A local container (for example `gvenzl/oracle-free:23-slim`) or an Oracle Autonomous Database in OCI both work.
+>
+> > [!TIP]
+> >
+> > You need to call `checkpointer.setup()` the first time you're using the Oracle checkpointer.
+>
+> **Sync**
+>
 ```python
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph_oracledb.checkpoint.oracle import OracleSaver  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-DB_URI = "user/password@localhost:1521/FREEPDB1"
-with OracleSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
-    # checkpointer.setup()
-
-    def call_model(state: MessagesState):
-        response = model.invoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
-
-    config = {
-        "configurable": {
-            "thread_id": "1"  # [!code highlight]
-        }
-    }
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        print(snapshot)
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        print(snapshot)
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph_oracledb.checkpoint.oracle import OracleSaver  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> DB_URI = "user/password@localhost:1521/FREEPDB1"
+> with OracleSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
+>     # checkpointer.setup()
+>
+>     def call_model(state: MessagesState):
+>         response = model.invoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1"  # [!code highlight]
+>         }
+>     }
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
 ```
-
-#### Async
+>
+> **Async**
+>
 ```python
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph_oracledb.checkpoint.oracle import AsyncOracleSaver  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-DB_URI = "user/password@localhost:1521/FREEPDB1"
-async with AsyncOracleSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
-    # await checkpointer.setup()
-
-    async def call_model(state: MessagesState):
-        response = await model.ainvoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
-
-    config = {
-        "configurable": {
-            "thread_id": "1"  # [!code highlight]
-        }
-    }
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph_oracledb.checkpoint.oracle import AsyncOracleSaver  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> DB_URI = "user/password@localhost:1521/FREEPDB1"
+> async with AsyncOracleSaver.from_conn_string(DB_URI) as checkpointer:  # [!code highlight]
+>     # await checkpointer.setup()
+>
+>     async def call_model(state: MessagesState):
+>         response = await model.ainvoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1"  # [!code highlight]
+>         }
+>     }
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
 ```
-
-</details>
 
 ### Use in subgraphs
 
@@ -525,8 +526,7 @@ Once you compile a graph with a store, LangGraph automatically injects the store
 from dataclasses import dataclass
 from langgraph.runtime import Runtime
 from langgraph.graph import StateGraph, MessagesState, START
-import uuid
-
+from langchain_core.utils.uuid import uuid7
 @dataclass
 class Context:
     user_id: str
@@ -545,7 +545,7 @@ async def call_model(state: MessagesState, runtime: Runtime[Context]):  # [!code
 
     # Store a new memory
     await runtime.store.aput(  # [!code highlight]
-        namespace, str(uuid.uuid4()), {"data": "User prefers dark mode"}
+        namespace, str(uuid7()), {"data": "User prefers dark mode"}
     )
 
 builder = StateGraph(MessagesState, context_schema=Context)  # [!code highlight]
@@ -574,532 +574,526 @@ with PostgresStore.from_conn_string(DB_URI) as store:  # [!code highlight]
     graph = builder.compile(store=store)  # [!code highlight]
 ```
 
-<details>
-<summary>Example: using Postgres store</summary>
-
+> **Example: using Postgres store**
+>
 ```
-pip install -U "psycopg[binary,pool]" langgraph langgraph-checkpoint-postgres
+> pip install -U "psycopg[binary,pool]" langgraph langgraph-checkpoint-postgres
 ```
-
-> [!TIP]
-> You need to call `store.setup()` the first time you're using Postgres store
-
-#### Async
+>
+> > [!TIP]
+> >
+> > You need to call `store.setup()` the first time you're using Postgres store
+>
+> **Async**
+>
 ```python
-from dataclasses import dataclass
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
-from langgraph.store.postgres.aio import AsyncPostgresStore  # [!code highlight]
-from langgraph.runtime import Runtime  # [!code highlight]
-import uuid
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-@dataclass
-class Context:
-    user_id: str
-
-async def call_model(  # [!code highlight]
-    state: MessagesState,
-    runtime: Runtime[Context],  # [!code highlight]
-):
-    user_id = runtime.context.user_id  # [!code highlight]
-    namespace = ("memories", user_id)
-    memories = await runtime.store.asearch(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
-    info = "\n".join([d.value["data"] for d in memories])
-    system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
-
-    # Store new memories if the user asks the model to remember
-    last_message = state["messages"][-1]
-    if "remember" in last_message.content.lower():
-        memory = "User name is Bob"
-        await runtime.store.aput(namespace, str(uuid.uuid4()), {"data": memory})  # [!code highlight]
-
-    response = await model.ainvoke(
-        [{"role": "system", "content": system_msg}] + state["messages"]
-    )
-    return {"messages": response}
-
-DB_URI = "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
-
-async with (
-    AsyncPostgresStore.from_conn_string(DB_URI) as store,  # [!code highlight]
-    AsyncPostgresSaver.from_conn_string(DB_URI) as checkpointer,
-):
-    # await store.setup()
-    # await checkpointer.setup()
-
-    builder = StateGraph(MessagesState, context_schema=Context)  # [!code highlight]
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(
-        checkpointer=checkpointer,
-        store=store,  # [!code highlight]
-    )
-
-    config = {"configurable": {"thread_id": "1"}}
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
-        config,
-        version="v3",
-        context=Context(user_id="1"),  # [!code highlight]
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
-
-    config = {"configurable": {"thread_id": "2"}}
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "what is my name?"}]},
-        config,
-        version="v3",
-        context=Context(user_id="1"),  # [!code highlight]
-    )
-    async for message in stream.messages:
-        async for token in message.text:
-            print(token, end="", flush=True)
+> from dataclasses import dataclass
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
+> from langgraph.store.postgres.aio import AsyncPostgresStore  # [!code highlight]
+> from langgraph.runtime import Runtime  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> @dataclass
+> class Context:
+>     user_id: str
+>
+> async def call_model(  # [!code highlight]
+>     state: MessagesState,
+>     runtime: Runtime[Context],  # [!code highlight]
+> ):
+>     user_id = runtime.context.user_id  # [!code highlight]
+>     namespace = ("memories", user_id)
+>     memories = await runtime.store.asearch(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
+>     info = "\n".join([d.value["data"] for d in memories])
+>     system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
+>
+>     # Store new memories if the user asks the model to remember
+>     last_message = state["messages"][-1]
+>     if "remember" in last_message.content.lower():
+>         memory = "User name is Bob"
+>         await runtime.store.aput(namespace, str(uuid7()), {"data": memory})  # [!code highlight]
+>
+>     response = await model.ainvoke(
+>         [{"role": "system", "content": system_msg}] + state["messages"]
+>     )
+>     return {"messages": response}
+>
+> DB_URI = "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
+>
+> async with (
+>     AsyncPostgresStore.from_conn_string(DB_URI) as store,  # [!code highlight]
+>     AsyncPostgresSaver.from_conn_string(DB_URI) as checkpointer,
+> ):
+>     # await store.setup()
+>     # await checkpointer.setup()
+>
+>     builder = StateGraph(MessagesState, context_schema=Context)  # [!code highlight]
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(
+>         checkpointer=checkpointer,
+>         store=store,  # [!code highlight]
+>     )
+>
+>     config = {"configurable": {"thread_id": "1"}}
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
+>         config,
+>         version="v3",
+>         context=Context(user_id="1"),  # [!code highlight]
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
+>
+>     config = {"configurable": {"thread_id": "2"}}
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "what is my name?"}]},
+>         config,
+>         version="v3",
+>         context=Context(user_id="1"),  # [!code highlight]
+>     )
+>     async for message in stream.messages:
+>         async for token in message.text:
+>             print(token, end="", flush=True)
 ```
-
-#### Sync
+>
+> **Sync**
+>
 ```python
-from dataclasses import dataclass
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.postgres import PostgresSaver
-from langgraph.store.postgres import PostgresStore  # [!code highlight]
-from langgraph.runtime import Runtime  # [!code highlight]
-import uuid
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-@dataclass
-class Context:
-    user_id: str
-
-def call_model(  # [!code highlight]
-    state: MessagesState,
-    runtime: Runtime[Context],  # [!code highlight]
-):
-    user_id = runtime.context.user_id  # [!code highlight]
-    namespace = ("memories", user_id)
-    memories = runtime.store.search(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
-    info = "\n".join([d.value["data"] for d in memories])
-    system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
-
-    # Store new memories if the user asks the model to remember
-    last_message = state["messages"][-1]
-    if "remember" in last_message.content.lower():
-        memory = "User name is Bob"
-        runtime.store.put(namespace, str(uuid.uuid4()), {"data": memory})  # [!code highlight]
-
-    response = model.invoke(
-        [{"role": "system", "content": system_msg}] + state["messages"]
-    )
-    return {"messages": response}
-
-DB_URI = "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
-
-with (
-    PostgresStore.from_conn_string(DB_URI) as store,  # [!code highlight]
-    PostgresSaver.from_conn_string(DB_URI) as checkpointer,
-):
-    # store.setup()
-    # checkpointer.setup()
-
-    builder = StateGraph(MessagesState, context_schema=Context)  # [!code highlight]
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(
-        checkpointer=checkpointer,
-        store=store,  # [!code highlight]
-    )
-
-    config = {"configurable": {"thread_id": "1"}}
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
-        config,
-        version="v3",
-        context=Context(user_id="1"),  # [!code highlight]
-    )
-    for snapshot in stream.values:
-        print(snapshot)
-
-    config = {"configurable": {"thread_id": "2"}}
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "what is my name?"}]},
-        config,
-        version="v3",
-        context=Context(user_id="1"),  # [!code highlight]
-    )
-    for snapshot in stream.values:
-        print(snapshot)
+> from dataclasses import dataclass
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.postgres import PostgresSaver
+> from langgraph.store.postgres import PostgresStore  # [!code highlight]
+> from langgraph.runtime import Runtime  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> @dataclass
+> class Context:
+>     user_id: str
+>
+> def call_model(  # [!code highlight]
+>     state: MessagesState,
+>     runtime: Runtime[Context],  # [!code highlight]
+> ):
+>     user_id = runtime.context.user_id  # [!code highlight]
+>     namespace = ("memories", user_id)
+>     memories = runtime.store.search(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
+>     info = "\n".join([d.value["data"] for d in memories])
+>     system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
+>
+>     # Store new memories if the user asks the model to remember
+>     last_message = state["messages"][-1]
+>     if "remember" in last_message.content.lower():
+>         memory = "User name is Bob"
+>         runtime.store.put(namespace, str(uuid7()), {"data": memory})  # [!code highlight]
+>
+>     response = model.invoke(
+>         [{"role": "system", "content": system_msg}] + state["messages"]
+>     )
+>     return {"messages": response}
+>
+> DB_URI = "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
+>
+> with (
+>     PostgresStore.from_conn_string(DB_URI) as store,  # [!code highlight]
+>     PostgresSaver.from_conn_string(DB_URI) as checkpointer,
+> ):
+>     # store.setup()
+>     # checkpointer.setup()
+>
+>     builder = StateGraph(MessagesState, context_schema=Context)  # [!code highlight]
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(
+>         checkpointer=checkpointer,
+>         store=store,  # [!code highlight]
+>     )
+>
+>     config = {"configurable": {"thread_id": "1"}}
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
+>         config,
+>         version="v3",
+>         context=Context(user_id="1"),  # [!code highlight]
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
+>
+>     config = {"configurable": {"thread_id": "2"}}
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "what is my name?"}]},
+>         config,
+>         version="v3",
+>         context=Context(user_id="1"),  # [!code highlight]
+>     )
+>     for snapshot in stream.values:
+>         print(snapshot)
 ```
 
-</details>
+> **Example: using MongoDB store**
 
-<details>
-<summary>Example: using MongoDB store</summary>
-
-<details>
-<summary>Example: using Redis store</summary>
-
+> **Example: using Redis store**
+>
 ```
-pip install -U langgraph langgraph-checkpoint-redis
+> pip install -U langgraph langgraph-checkpoint-redis
 ```
-
-> [!TIP]
-> You need to call `store.setup()` the first time you're using [Redis store](https://pypi.org/project/langgraph-checkpoint-redis/).
-
-#### Async
+>
+> > [!TIP]
+> >
+> > You need to call `store.setup()` the first time you're using [Redis store](https://pypi.org/project/langgraph-checkpoint-redis/).
+>
+> **Async**
+>
 ```python
-from dataclasses import dataclass
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.redis.aio import AsyncRedisSaver
-from langgraph.store.redis.aio import AsyncRedisStore  # [!code highlight]
-from langgraph.runtime import Runtime  # [!code highlight]
-import uuid
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-@dataclass
-class Context:
-    user_id: str
-
-async def call_model(  # [!code highlight]
-    state: MessagesState,
-    runtime: Runtime[Context],  # [!code highlight]
-):
-    user_id = runtime.context.user_id  # [!code highlight]
-    namespace = ("memories", user_id)
-    memories = await runtime.store.asearch(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
-    info = "\n".join([d.value["data"] for d in memories])
-    system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
-
-    # Store new memories if the user asks the model to remember
-    last_message = state["messages"][-1]
-    if "remember" in last_message.content.lower():
-        memory = "User name is Bob"
-        await runtime.store.aput(namespace, str(uuid.uuid4()), {"data": memory})  # [!code highlight]
-
-    response = await model.ainvoke(
-        [{"role": "system", "content": system_msg}] + state["messages"]
-    )
-    return {"messages": response}
-
-DB_URI = "redis://localhost:6379"
-
-async with (
-    AsyncRedisStore.from_conn_string(DB_URI) as store,  # [!code highlight]
-    AsyncRedisSaver.from_conn_string(DB_URI) as checkpointer,
-):
-    # await store.setup()
-    # await checkpointer.asetup()
-
-    builder = StateGraph(MessagesState, context_schema=Context)  # [!code highlight]
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(
-        checkpointer=checkpointer,
-        store=store,  # [!code highlight]
-    )
-
-    config = {"configurable": {"thread_id": "1"}}
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
-        config,
-        version="v3",
-        context=Context(user_id="1"),  # [!code highlight]
-    )
-    async for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
-
-    config = {"configurable": {"thread_id": "2"}}
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "what is my name?"}]},
-        config,
-        version="v3",
-        context=Context(user_id="1"),  # [!code highlight]
-    )
-    async for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
+> from dataclasses import dataclass
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.redis.aio import AsyncRedisSaver
+> from langgraph.store.redis.aio import AsyncRedisStore  # [!code highlight]
+> from langgraph.runtime import Runtime  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> @dataclass
+> class Context:
+>     user_id: str
+>
+> async def call_model(  # [!code highlight]
+>     state: MessagesState,
+>     runtime: Runtime[Context],  # [!code highlight]
+> ):
+>     user_id = runtime.context.user_id  # [!code highlight]
+>     namespace = ("memories", user_id)
+>     memories = await runtime.store.asearch(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
+>     info = "\n".join([d.value["data"] for d in memories])
+>     system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
+>
+>     # Store new memories if the user asks the model to remember
+>     last_message = state["messages"][-1]
+>     if "remember" in last_message.content.lower():
+>         memory = "User name is Bob"
+>         await runtime.store.aput(namespace, str(uuid7()), {"data": memory})  # [!code highlight]
+>
+>     response = await model.ainvoke(
+>         [{"role": "system", "content": system_msg}] + state["messages"]
+>     )
+>     return {"messages": response}
+>
+> DB_URI = "redis://localhost:6379"
+>
+> async with (
+>     AsyncRedisStore.from_conn_string(DB_URI) as store,  # [!code highlight]
+>     AsyncRedisSaver.from_conn_string(DB_URI) as checkpointer,
+> ):
+>     # await store.setup()
+>     # await checkpointer.asetup()
+>
+>     builder = StateGraph(MessagesState, context_schema=Context)  # [!code highlight]
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(
+>         checkpointer=checkpointer,
+>         store=store,  # [!code highlight]
+>     )
+>
+>     config = {"configurable": {"thread_id": "1"}}
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
+>         config,
+>         version="v3",
+>         context=Context(user_id="1"),  # [!code highlight]
+>     )
+>     async for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
+>
+>     config = {"configurable": {"thread_id": "2"}}
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "what is my name?"}]},
+>         config,
+>         version="v3",
+>         context=Context(user_id="1"),  # [!code highlight]
+>     )
+>     async for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
 ```
-
-#### Sync
+>
+> **Sync**
+>
 ```python
-from dataclasses import dataclass
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.checkpoint.redis import RedisSaver
-from langgraph.store.redis import RedisStore  # [!code highlight]
-from langgraph.runtime import Runtime  # [!code highlight]
-import uuid
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-@dataclass
-class Context:
-    user_id: str
-
-def call_model(  # [!code highlight]
-    state: MessagesState,
-    runtime: Runtime[Context],  # [!code highlight]
-):
-    user_id = runtime.context.user_id  # [!code highlight]
-    namespace = ("memories", user_id)
-    memories = runtime.store.search(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
-    info = "\n".join([d.value["data"] for d in memories])
-    system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
-
-    # Store new memories if the user asks the model to remember
-    last_message = state["messages"][-1]
-    if "remember" in last_message.content.lower():
-        memory = "User name is Bob"
-        runtime.store.put(namespace, str(uuid.uuid4()), {"data": memory})  # [!code highlight]
-
-    response = model.invoke(
-        [{"role": "system", "content": system_msg}] + state["messages"]
-    )
-    return {"messages": response}
-
-DB_URI = "redis://localhost:6379"
-
-with (
-    RedisStore.from_conn_string(DB_URI) as store,  # [!code highlight]
-    RedisSaver.from_conn_string(DB_URI) as checkpointer,
-):
-    store.setup()
-    checkpointer.setup()
-
-    builder = StateGraph(MessagesState, context_schema=Context)  # [!code highlight]
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(
-        checkpointer=checkpointer,
-        store=store,  # [!code highlight]
-    )
-
-    config = {"configurable": {"thread_id": "1"}}
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
-        config,
-        version="v3",
-        context=Context(user_id="1"),  # [!code highlight]
-    )
-    for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
-
-    config = {"configurable": {"thread_id": "2"}}
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "what is my name?"}]},
-        config,
-        version="v3",
-        context=Context(user_id="1"),  # [!code highlight]
-    )
-    for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
+> from dataclasses import dataclass
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.checkpoint.redis import RedisSaver
+> from langgraph.store.redis import RedisStore  # [!code highlight]
+> from langgraph.runtime import Runtime  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> @dataclass
+> class Context:
+>     user_id: str
+>
+> def call_model(  # [!code highlight]
+>     state: MessagesState,
+>     runtime: Runtime[Context],  # [!code highlight]
+> ):
+>     user_id = runtime.context.user_id  # [!code highlight]
+>     namespace = ("memories", user_id)
+>     memories = runtime.store.search(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
+>     info = "\n".join([d.value["data"] for d in memories])
+>     system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
+>
+>     # Store new memories if the user asks the model to remember
+>     last_message = state["messages"][-1]
+>     if "remember" in last_message.content.lower():
+>         memory = "User name is Bob"
+>         runtime.store.put(namespace, str(uuid7()), {"data": memory})  # [!code highlight]
+>
+>     response = model.invoke(
+>         [{"role": "system", "content": system_msg}] + state["messages"]
+>     )
+>     return {"messages": response}
+>
+> DB_URI = "redis://localhost:6379"
+>
+> with (
+>     RedisStore.from_conn_string(DB_URI) as store,  # [!code highlight]
+>     RedisSaver.from_conn_string(DB_URI) as checkpointer,
+> ):
+>     store.setup()
+>     checkpointer.setup()
+>
+>     builder = StateGraph(MessagesState, context_schema=Context)  # [!code highlight]
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(
+>         checkpointer=checkpointer,
+>         store=store,  # [!code highlight]
+>     )
+>
+>     config = {"configurable": {"thread_id": "1"}}
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
+>         config,
+>         version="v3",
+>         context=Context(user_id="1"),  # [!code highlight]
+>     )
+>     for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
+>
+>     config = {"configurable": {"thread_id": "2"}}
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "what is my name?"}]},
+>         config,
+>         version="v3",
+>         context=Context(user_id="1"),  # [!code highlight]
+>     )
+>     for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
 ```
 
-</details>
-
-<details>
-<summary>Example: using Oracle store</summary>
-
+> **Example: using Oracle store**
+>
 ```
-pip install -U langgraph langgraph-oracledb langchain-openai
+> pip install -U langgraph langgraph-oracledb langchain-openai
 ```
-
-> [!NOTE]
-> **Setup**
-> To use the [Oracle store](https://pypi.org/project/langgraph-oracledb/), you will need an Oracle AI Database instance — the vector index used for semantic `search` requires [Oracle AI Vector Search](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/).
-
-> [!TIP]
-> You need to call `store.setup()` and `checkpointer.setup()` the first time you're using the Oracle store and checkpointer.
-
-#### Sync
+>
+> > [!NOTE]
+> >
+> > **Setup**
+> > To use the [Oracle store](https://pypi.org/project/langgraph-oracledb/), you will need an Oracle AI Database instance — the vector index used for semantic `search` requires [Oracle AI Vector Search](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/).
+>
+> > [!TIP]
+> >
+> > You need to call `store.setup()` and `checkpointer.setup()` the first time you're using the Oracle store and checkpointer.
+>
+> **Sync**
+>
 ```python
-import uuid
-
-from langchain.chat_models import init_chat_model
-from langchain.embeddings import init_embeddings
-from langchain_core.runnables import RunnableConfig
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.store.base import BaseStore
-from langgraph_oracledb.checkpoint.oracle import OracleSaver
-from langgraph_oracledb.store.oracle import OracleStore  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-embeddings = init_embeddings("openai:text-embedding-3-small")
-
-DB_URI = "user/password@localhost:1521/FREEPDB1"
-
-with (
-    OracleStore.from_conn_string(  # [!code highlight]
-        DB_URI,
-        index={"embed": embeddings, "dims": 1536},  # [!code highlight]
-    ) as store,
-    OracleSaver.from_conn_string(DB_URI) as checkpointer,
-):
-    store.setup()
-    checkpointer.setup()
-
-    def call_model(
-        state: MessagesState,
-        config: RunnableConfig,
-        *,
-        store: BaseStore,  # [!code highlight]
-    ):
-        user_id = config["configurable"]["user_id"]
-        namespace = ("memories", user_id)
-        memories = store.search(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
-        info = "\n".join([d.value["data"] for d in memories])
-        system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
-
-        # Store new memories if the user asks the model to remember
-        last_message = state["messages"][-1]
-        if "remember" in last_message.content.lower():
-            memory = "User name is Bob"
-            store.put(namespace, str(uuid.uuid4()), {"data": memory})  # [!code highlight]
-
-        response = model.invoke(
-            [{"role": "system", "content": system_msg}] + state["messages"]
-        )
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(
-        checkpointer=checkpointer,
-        store=store,  # [!code highlight]
-    )
-
-    config = {
-        "configurable": {
-            "thread_id": "1",  # [!code highlight]
-            "user_id": "1",  # [!code highlight]
-        }
-    }
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
-
-    config = {
-        "configurable": {
-            "thread_id": "2",  # [!code highlight]
-            "user_id": "1",
-        }
-    }
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "what is my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
+>
+> from langchain.chat_models import init_chat_model
+> from langchain.embeddings import init_embeddings
+> from langchain_core.runnables import RunnableConfig
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.store.base import BaseStore
+> from langgraph_oracledb.checkpoint.oracle import OracleSaver
+> from langgraph_oracledb.store.oracle import OracleStore  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+> embeddings = init_embeddings("openai:text-embedding-3-small")
+>
+> DB_URI = "user/password@localhost:1521/FREEPDB1"
+>
+> with (
+>     OracleStore.from_conn_string(  # [!code highlight]
+>         DB_URI,
+>         index={"embed": embeddings, "dims": 1536},  # [!code highlight]
+>     ) as store,
+>     OracleSaver.from_conn_string(DB_URI) as checkpointer,
+> ):
+>     store.setup()
+>     checkpointer.setup()
+>
+>     def call_model(
+>         state: MessagesState,
+>         config: RunnableConfig,
+>         *,
+>         store: BaseStore,  # [!code highlight]
+>     ):
+>         user_id = config["configurable"]["user_id"]
+>         namespace = ("memories", user_id)
+>         memories = store.search(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
+>         info = "\n".join([d.value["data"] for d in memories])
+>         system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
+>
+>         # Store new memories if the user asks the model to remember
+>         last_message = state["messages"][-1]
+>         if "remember" in last_message.content.lower():
+>             memory = "User name is Bob"
+>             store.put(namespace, str(uuid7()), {"data": memory})  # [!code highlight]
+>
+>         response = model.invoke(
+>             [{"role": "system", "content": system_msg}] + state["messages"]
+>         )
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(
+>         checkpointer=checkpointer,
+>         store=store,  # [!code highlight]
+>     )
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1",  # [!code highlight]
+>             "user_id": "1",  # [!code highlight]
+>         }
+>     }
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "2",  # [!code highlight]
+>             "user_id": "1",
+>         }
+>     }
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "what is my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
 ```
-
-#### Async
+>
+> **Async**
+>
 ```python
-import uuid
-
-from langchain.chat_models import init_chat_model
-from langchain.embeddings import init_embeddings
-from langchain_core.runnables import RunnableConfig
-from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.store.base import BaseStore
-from langgraph_oracledb.checkpoint.oracle import AsyncOracleSaver
-from langgraph_oracledb.store.oracle import AsyncOracleStore  # [!code highlight]
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-embeddings = init_embeddings("openai:text-embedding-3-small")
-
-DB_URI = "user/password@localhost:1521/FREEPDB1"
-
-async with (
-    AsyncOracleStore.from_conn_string(  # [!code highlight]
-        DB_URI,
-        index={"embed": embeddings, "dims": 1536},  # [!code highlight]
-    ) as store,
-    AsyncOracleSaver.from_conn_string(DB_URI) as checkpointer,
-):
-    await store.setup()
-    await checkpointer.setup()
-
-    async def call_model(
-        state: MessagesState,
-        config: RunnableConfig,
-        *,
-        store: BaseStore,  # [!code highlight]
-    ):
-        user_id = config["configurable"]["user_id"]
-        namespace = ("memories", user_id)
-        memories = await store.asearch(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
-        info = "\n".join([d.value["data"] for d in memories])
-        system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
-
-        # Store new memories if the user asks the model to remember
-        last_message = state["messages"][-1]
-        if "remember" in last_message.content.lower():
-            memory = "User name is Bob"
-            await store.aput(namespace, str(uuid.uuid4()), {"data": memory})  # [!code highlight]
-
-        response = await model.ainvoke(
-            [{"role": "system", "content": system_msg}] + state["messages"]
-        )
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(
-        checkpointer=checkpointer,
-        store=store,  # [!code highlight]
-    )
-
-    config = {
-        "configurable": {
-            "thread_id": "1",  # [!code highlight]
-            "user_id": "1",  # [!code highlight]
-        }
-    }
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
-
-    config = {
-        "configurable": {
-            "thread_id": "2",  # [!code highlight]
-            "user_id": "1",
-        }
-    }
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "what is my name?"}]},
-        config,  # [!code highlight]
-        version="v3",
-    )
-    async for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
+>
+> from langchain.chat_models import init_chat_model
+> from langchain.embeddings import init_embeddings
+> from langchain_core.runnables import RunnableConfig
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langgraph.store.base import BaseStore
+> from langgraph_oracledb.checkpoint.oracle import AsyncOracleSaver
+> from langgraph_oracledb.store.oracle import AsyncOracleStore  # [!code highlight]
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+> embeddings = init_embeddings("openai:text-embedding-3-small")
+>
+> DB_URI = "user/password@localhost:1521/FREEPDB1"
+>
+> async with (
+>     AsyncOracleStore.from_conn_string(  # [!code highlight]
+>         DB_URI,
+>         index={"embed": embeddings, "dims": 1536},  # [!code highlight]
+>     ) as store,
+>     AsyncOracleSaver.from_conn_string(DB_URI) as checkpointer,
+> ):
+>     await store.setup()
+>     await checkpointer.setup()
+>
+>     async def call_model(
+>         state: MessagesState,
+>         config: RunnableConfig,
+>         *,
+>         store: BaseStore,  # [!code highlight]
+>     ):
+>         user_id = config["configurable"]["user_id"]
+>         namespace = ("memories", user_id)
+>         memories = await store.asearch(namespace, query=str(state["messages"][-1].content))  # [!code highlight]
+>         info = "\n".join([d.value["data"] for d in memories])
+>         system_msg = f"You are a helpful assistant talking to the user. User info: {info}"
+>
+>         # Store new memories if the user asks the model to remember
+>         last_message = state["messages"][-1]
+>         if "remember" in last_message.content.lower():
+>             memory = "User name is Bob"
+>             await store.aput(namespace, str(uuid7()), {"data": memory})  # [!code highlight]
+>
+>         response = await model.ainvoke(
+>             [{"role": "system", "content": system_msg}] + state["messages"]
+>         )
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(
+>         checkpointer=checkpointer,
+>         store=store,  # [!code highlight]
+>     )
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "1",  # [!code highlight]
+>             "user_id": "1",  # [!code highlight]
+>         }
+>     }
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "Hi! Remember: my name is Bob"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
+>
+>     config = {
+>         "configurable": {
+>             "thread_id": "2",  # [!code highlight]
+>             "user_id": "1",
+>         }
+>     }
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "what is my name?"}]},
+>         config,  # [!code highlight]
+>         version="v3",
+>     )
+>     async for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
 ```
-
-</details>
 
 ### Use semantic search
 
@@ -1126,61 +1120,59 @@ items = store.search(
 )
 ```
 
-<details>
-<summary>Long-term memory with semantic search</summary>
-
+> **Long-term memory with semantic search**
+>
 ```python
-
-from langchain.embeddings import init_embeddings
-from langchain.chat_models import init_chat_model
-from langgraph.store.memory import InMemoryStore
-from langgraph.graph import START, MessagesState, StateGraph
-from langgraph.runtime import Runtime  # [!code highlight]
-
-model = init_chat_model("gpt-5.4-mini")
-
-# Create store with semantic search enabled
-embeddings = init_embeddings("openai:text-embedding-3-small")
-store = InMemoryStore(
-    index={
-        "embed": embeddings,
-        "dims": 1536,
-    }
-)
-
-store.put(("user_123", "memories"), "1", {"text": "I love pizza"})
-store.put(("user_123", "memories"), "2", {"text": "I am a plumber"})
-
-async def chat(state: MessagesState, runtime: Runtime):  # [!code highlight]
-    # Search based on user's last message
-    items = await runtime.store.asearch(  # [!code highlight]
-        ("user_123", "memories"), query=state["messages"][-1].content, limit=2
-    )
-    memories = "\n".join(item.value["text"] for item in items)
-    memories = f"## Memories of user\n{memories}" if memories else ""
-    response = await model.ainvoke(
-        [
-            {"role": "system", "content": f"You are a helpful assistant.\n{memories}"},
-            *state["messages"],
-        ]
-    )
-    return {"messages": [response]}
-
-builder = StateGraph(MessagesState)
-builder.add_node(chat)
-builder.add_edge(START, "chat")
-graph = builder.compile(store=store)
-
-stream = await graph.astream_events(
-    {"messages": [{"role": "user", "content": "I'm hungry"}]},
-    version="v3",
-)
-async for message in stream.messages:
-    async for token in message.text:
-        print(token, end="", flush=True)
+>
+> from langchain.embeddings import init_embeddings
+> from langchain.chat_models import init_chat_model
+> from langgraph.store.memory import InMemoryStore
+> from langgraph.graph import START, MessagesState, StateGraph
+> from langgraph.runtime import Runtime  # [!code highlight]
+>
+> model = init_chat_model("gpt-5.4-mini")
+>
+> # Create store with semantic search enabled
+> embeddings = init_embeddings("openai:text-embedding-3-small")
+> store = InMemoryStore(
+>     index={
+>         "embed": embeddings,
+>         "dims": 1536,
+>     }
+> )
+>
+> store.put(("user_123", "memories"), "1", {"text": "I love pizza"})
+> store.put(("user_123", "memories"), "2", {"text": "I am a plumber"})
+>
+> async def chat(state: MessagesState, runtime: Runtime):  # [!code highlight]
+>     # Search based on user's last message
+>     items = await runtime.store.asearch(  # [!code highlight]
+>         ("user_123", "memories"), query=state["messages"][-1].content, limit=2
+>     )
+>     memories = "\n".join(item.value["text"] for item in items)
+>     memories = f"## Memories of user\n{memories}" if memories else ""
+>     response = await model.ainvoke(
+>         [
+>             {"role": "system", "content": f"You are a helpful assistant.\n{memories}"},
+>             *state["messages"],
+>         ]
+>     )
+>     return {"messages": [response]}
+>
+>
+> builder = StateGraph(MessagesState)
+> builder.add_node(chat)
+> builder.add_edge(START, "chat")
+> graph = builder.compile(store=store)
+>
+> stream = await graph.astream_events(
+>     {"messages": [{"role": "user", "content": "I'm hungry"}]},
+>     version="v3",
+> )
+> async for message in stream.messages:
+>     async for token in message.text:
+>         print(token, end="", flush=True)
 ```
-
-</details>
 
 ## Manage short-term memory
 
@@ -1223,54 +1215,51 @@ builder.add_node(call_model)
 ...
 ```
 
-<details>
-<summary>Full example: trim messages</summary>
-
+> **Full example: trim messages**
+>
 ```python
-from langchain_core.messages.utils import (
-    trim_messages,  # [!code highlight]
-    count_tokens_approximately  # [!code highlight]
-)
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, START, MessagesState
-
-model = init_chat_model("claude-sonnet-4-6")
-summarization_model = model.bind(max_tokens=128)
-
-def call_model(state: MessagesState):
-    messages = trim_messages(  # [!code highlight]
-        state["messages"],
-        strategy="last",
-        token_counter=count_tokens_approximately,
-        max_tokens=128,
-        start_on="human",
-        end_on=("human", "tool"),
-    )
-    response = model.invoke(messages)
-    return {"messages": [response]}
-
-checkpointer = InMemorySaver()
-builder = StateGraph(MessagesState)
-builder.add_node(call_model)
-builder.add_edge(START, "call_model")
-graph = builder.compile(checkpointer=checkpointer)
-
-config = {"configurable": {"thread_id": "1"}}
-graph.invoke({"messages": "hi, my name is bob"}, config)
-graph.invoke({"messages": "write a short poem about cats"}, config)
-graph.invoke({"messages": "now do the same but for dogs"}, config)
-final_response = graph.invoke({"messages": "what's my name?"}, config)
-
-final_response["messages"][-1].pretty_print()
+> from langchain_core.messages.utils import (
+>     trim_messages,  # [!code highlight]
+>     count_tokens_approximately  # [!code highlight]
+> )
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, START, MessagesState
+>
+> model = init_chat_model("claude-sonnet-4-6")
+> summarization_model = model.bind(max_tokens=128)
+>
+> def call_model(state: MessagesState):
+>     messages = trim_messages(  # [!code highlight]
+>         state["messages"],
+>         strategy="last",
+>         token_counter=count_tokens_approximately,
+>         max_tokens=128,
+>         start_on="human",
+>         end_on=("human", "tool"),
+>     )
+>     response = model.invoke(messages)
+>     return {"messages": [response]}
+>
+> checkpointer = InMemorySaver()
+> builder = StateGraph(MessagesState)
+> builder.add_node(call_model)
+> builder.add_edge(START, "call_model")
+> graph = builder.compile(checkpointer=checkpointer)
+>
+> config = {"configurable": {"thread_id": "1"}}
+> graph.invoke({"messages": "hi, my name is bob"}, config)
+> graph.invoke({"messages": "write a short poem about cats"}, config)
+> graph.invoke({"messages": "now do the same but for dogs"}, config)
+> final_response = graph.invoke({"messages": "what's my name?"}, config)
+>
+> final_response["messages"][-1].pretty_print()
 ```
-
+>
 ```
-================================== Ai Message ==================================
-
-Your name is Bob, as you mentioned when you first introduced yourself.
+> ================================== Ai Message ==================================
+>
+> Your name is Bob, as you mentioned when you first introduced yourself.
 ```
-
-</details>
 
 ### Delete messages
 
@@ -1300,67 +1289,65 @@ def delete_messages(state):
 ```
 
 > [!WARNING]
+>
 > When deleting messages, **make sure** that the resulting message history is valid. Check the limitations of the LLM provider you're using. For example:
 >
 > * Some providers expect message history to start with a `user` message
 > * Most providers require `assistant` messages with tool calls to be followed by corresponding `tool` result messages.
 
-<details>
-<summary>Full example: delete messages</summary>
-
+> **Full example: delete messages**
+>
 ```python
-from langchain.messages import RemoveMessage  # [!code highlight]
-
-def delete_messages(state):
-    messages = state["messages"]
-    if len(messages) > 2:
-        # remove the earliest two messages
-        return {"messages": [RemoveMessage(id=m.id) for m in messages[:2]]}  # [!code highlight]
-
-def call_model(state: MessagesState):
-    response = model.invoke(state["messages"])
-    return {"messages": response}
-
-builder = StateGraph(MessagesState)
-builder.add_sequence([call_model, delete_messages])
-builder.add_edge(START, "call_model")
-
-checkpointer = InMemorySaver()
-app = builder.compile(checkpointer=checkpointer)
-config = {"configurable": {"thread_id": "1"}}
-
-stream = app.stream_events(
-    {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-    config,
-    version="v3"
-)
-for snapshot in stream.values:
-    print([(message.type, message.content) for message in snapshot["messages"]])
-
-stream = app.stream_events(
-    {"messages": [{"role": "user", "content": "what's my name?"}]},
-    config,
-    version="v3"
-)
-for snapshot in stream.values:
-    print([(message.type, message.content) for message in snapshot["messages"]])
+> from langchain.messages import RemoveMessage  # [!code highlight]
+>
+> def delete_messages(state):
+>     messages = state["messages"]
+>     if len(messages) > 2:
+>         # remove the earliest two messages
+>         return {"messages": [RemoveMessage(id=m.id) for m in messages[:2]]}  # [!code highlight]
+>
+> def call_model(state: MessagesState):
+>     response = model.invoke(state["messages"])
+>     return {"messages": response}
+>
+> builder = StateGraph(MessagesState)
+> builder.add_sequence([call_model, delete_messages])
+> builder.add_edge(START, "call_model")
+>
+> checkpointer = InMemorySaver()
+> app = builder.compile(checkpointer=checkpointer)
+> config = {"configurable": {"thread_id": "1"}}
+>
+> stream = app.stream_events(
+>     {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>     config,
+>     version="v3"
+> )
+> for snapshot in stream.values:
+>     print([(message.type, message.content) for message in snapshot["messages"]])
+>
+> stream = app.stream_events(
+>     {"messages": [{"role": "user", "content": "what's my name?"}]},
+>     config,
+>     version="v3"
+> )
+> for snapshot in stream.values:
+>     print([(message.type, message.content) for message in snapshot["messages"]])
 ```
-
+>
 ```
-[('human', "hi! I'm bob")]
-[('human', "hi! I'm bob"), ('ai', 'Hi Bob! How are you doing today? Is there anything I can help you with?')]
-[('human', "hi! I'm bob"), ('ai', 'Hi Bob! How are you doing today? Is there anything I can help you with?'), ('human', "what's my name?")]
-[('human', "hi! I'm bob"), ('ai', 'Hi Bob! How are you doing today? Is there anything I can help you with?'), ('human', "what's my name?"), ('ai', 'Your name is Bob.')]
-[('human', "what's my name?"), ('ai', 'Your name is Bob.')]
+> [('human', "hi! I'm bob")]
+> [('human', "hi! I'm bob"), ('ai', 'Hi Bob! How are you doing today? Is there anything I can help you with?')]
+> [('human', "hi! I'm bob"), ('ai', 'Hi Bob! How are you doing today? Is there anything I can help you with?'), ('human', "what's my name?")]
+> [('human', "hi! I'm bob"), ('ai', 'Hi Bob! How are you doing today? Is there anything I can help you with?'), ('human', "what's my name?"), ('ai', 'Your name is Bob.')]
+> [('human', "what's my name?"), ('ai', 'Your name is Bob.')]
 ```
-
-</details>
 
 ### Summarize messages
 
 The problem with trimming or removing messages, as shown above, is that you may lose information from culling of the message queue. Because of this, some applications benefit from a more sophisticated approach of summarizing the message history using a chat model.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/summary.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=c8ed3facdccd4ef5c7e52902c72ba938" alt="Summary" width="609" height="242" data-path="oss/images/summary.png" />
+![Summary](https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/summary.png?fit=max\&auto=format\&n=ybiAaBfoBvFquMDz\&q=85\&s=c8ed3facdccd4ef5c7e52902c72ba938)
 
 Prompting and orchestration logic can be used to summarize the message history. For example, in LangGraph you can extend the [`MessagesState`](graph-api.md#working-with-messages-in-graph-state) to include a `summary` key:
 
@@ -1399,89 +1386,85 @@ def summarize_conversation(state: State):
     return {"summary": response.content, "messages": delete_messages}
 ```
 
-<details>
-<summary>Full example: summarize messages</summary>
-
+> **Full example: summarize messages**
+>
 ```python
-from typing import Any, TypedDict
-
-from langchain.chat_models import init_chat_model
-from langchain.messages import AnyMessage
-from langchain_core.messages.utils import count_tokens_approximately
-from langgraph.graph import StateGraph, START, MessagesState
-from langgraph.checkpoint.memory import InMemorySaver
-from langmem.short_term import SummarizationNode, RunningSummary  # [!code highlight]
-
-model = init_chat_model("claude-sonnet-4-6")
-summarization_model = model.bind(max_tokens=128)
-
-class State(MessagesState):
-    context: dict[str, RunningSummary]  # [!code highlight]
-
-class LLMInputState(TypedDict):  # [!code highlight]
-    summarized_messages: list[AnyMessage]
-    context: dict[str, RunningSummary]
-
-summarization_node = SummarizationNode(  # [!code highlight]
-    token_counter=count_tokens_approximately,
-    model=summarization_model,
-    max_tokens=256,
-    max_tokens_before_summary=256,
-    max_summary_tokens=128,
-)
-
-def call_model(state: LLMInputState):  # [!code highlight]
-    response = model.invoke(state["summarized_messages"])
-    return {"messages": [response]}
-
-checkpointer = InMemorySaver()
-builder = StateGraph(State)
-builder.add_node(call_model)
-builder.add_node("summarize", summarization_node)  # [!code highlight]
-builder.add_edge(START, "summarize")
-builder.add_edge("summarize", "call_model")
-graph = builder.compile(checkpointer=checkpointer)
-
-# Invoke the graph
-config = {"configurable": {"thread_id": "1"}}
-graph.invoke({"messages": "hi, my name is bob"}, config)
-graph.invoke({"messages": "write a short poem about cats"}, config)
-graph.invoke({"messages": "now do the same but for dogs"}, config)
-final_response = graph.invoke({"messages": "what's my name?"}, config)
-
-final_response["messages"][-1].pretty_print()
-print("\nSummary:", final_response["context"]["running_summary"].summary)
+> from typing import Any, TypedDict
+>
+> from langchain.chat_models import init_chat_model
+> from langchain.messages import AnyMessage
+> from langchain_core.messages.utils import count_tokens_approximately
+> from langgraph.graph import StateGraph, START, MessagesState
+> from langgraph.checkpoint.memory import InMemorySaver
+> from langmem.short_term import SummarizationNode, RunningSummary  # [!code highlight]
+>
+> model = init_chat_model("claude-sonnet-4-6")
+> summarization_model = model.bind(max_tokens=128)
+>
+> class State(MessagesState):
+>     context: dict[str, RunningSummary]  # [!code highlight]
+>
+> class LLMInputState(TypedDict):  # [!code highlight]
+>     summarized_messages: list[AnyMessage]
+>     context: dict[str, RunningSummary]
+>
+> summarization_node = SummarizationNode(  # [!code highlight]
+>     token_counter=count_tokens_approximately,
+>     model=summarization_model,
+>     max_tokens=256,
+>     max_tokens_before_summary=256,
+>     max_summary_tokens=128,
+> )
+>
+> def call_model(state: LLMInputState):  # [!code highlight]
+>     response = model.invoke(state["summarized_messages"])
+>     return {"messages": [response]}
+>
+> checkpointer = InMemorySaver()
+> builder = StateGraph(State)
+> builder.add_node(call_model)
+> builder.add_node("summarize", summarization_node)  # [!code highlight]
+> builder.add_edge(START, "summarize")
+> builder.add_edge("summarize", "call_model")
+> graph = builder.compile(checkpointer=checkpointer)
+>
+> # Invoke the graph
+> config = {"configurable": {"thread_id": "1"}}
+> graph.invoke({"messages": "hi, my name is bob"}, config)
+> graph.invoke({"messages": "write a short poem about cats"}, config)
+> graph.invoke({"messages": "now do the same but for dogs"}, config)
+> final_response = graph.invoke({"messages": "what's my name?"}, config)
+>
+> final_response["messages"][-1].pretty_print()
+> print("\nSummary:", final_response["context"]["running_summary"].summary)
 ```
-
-1. We will keep track of our running summary in the `context` field
-
-(expected by the `SummarizationNode`).
-
-1. Define private state that will be used only for filtering
-
-the inputs to `call_model` node.
-
-1. We're passing a private input state here to isolate the messages returned by the summarization node
-
+>
+> 1. We will keep track of our running summary in the `context` field
+>
+> (expected by the `SummarizationNode`).
+>
+> 1. Define private state that will be used only for filtering
+>
+> the inputs to `call_model` node.
+>
+> 1. We're passing a private input state here to isolate the messages returned by the summarization node
+>
 ```
-================================== Ai Message ==================================
-
-From our conversation, I can see that you introduced yourself as Bob. That's the name you shared with me when we began talking.
-
-Summary: In this conversation, I was introduced to Bob, who then asked me to write a poem about cats. I composed a poem titled "The Mystery of Cats" that captured cats' graceful movements, independent nature, and their special relationship with humans. Bob then requested a similar poem about dogs, so I wrote "The Joy of Dogs," which highlighted dogs' loyalty, enthusiasm, and loving companionship. Both poems were written in a similar style but emphasized the distinct characteristics that make each pet special.
+> ================================== Ai Message ==================================
+>
+> From our conversation, I can see that you introduced yourself as Bob. That's the name you shared with me when we began talking.
+>
+> Summary: In this conversation, I was introduced to Bob, who then asked me to write a poem about cats. I composed a poem titled "The Mystery of Cats" that captured cats' graceful movements, independent nature, and their special relationship with humans. Bob then requested a similar poem about dogs, so I wrote "The Joy of Dogs," which highlighted dogs' loyalty, enthusiasm, and loving companionship. Both poems were written in a similar style but emphasized the distinct characteristics that make each pet special.
 ```
-
-</details>
 
 ### Manage checkpoints
 
 You can view and delete the information stored by the checkpointer.
 
-<a id="checkpoint" />
-
 #### View thread state
 
-#### Graph/Functional API
+**Graph/Functional API**
+
 ```python
 config = {
     "configurable": {
@@ -1513,7 +1496,8 @@ StateSnapshot(
 )
 ```
 
-#### Checkpointer API
+**Checkpointer API**
+
 ```python
 config = {
     "configurable": {
@@ -1549,11 +1533,10 @@ CheckpointTuple(
 )
 ```
 
-<a id="checkpoints" />
-
 #### View the history of the thread
 
-#### Graph/Functional API
+**Graph/Functional API**
+
 ```python
 config = {
     "configurable": {
@@ -1628,7 +1611,8 @@ list(graph.get_state_history(config))  # [!code highlight]
 ]
 ```
 
-#### Checkpointer API
+**Checkpointer API**
+
 ```python
 config = {
     "configurable": {
@@ -1744,8 +1728,6 @@ We recommend running migrations as a dedicated deployment step, or you can ensur
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/add-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/add-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

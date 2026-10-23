@@ -1,36 +1,46 @@
 ---
-title: "Connect to a TypeSafe-compatible model provider"
-description: "Point LangSmith decision model evaluators at any server that implements the TypeSafe System One API, such as OpenRouter or a self-hosted model."
+title: "Connect to a compatible decision model provider"
+description: "Point LangSmith decision model evaluators at any server that implements the OpenAI Decisions API or the TypeSafe System One API, such as OpenRouter or a self-hosted model."
 source: "https://docs.langchain.com/langsmith/typesafe-compatible-model"
 category: "docs"
 tags: [docs, langsmith, typesafe-compatible-model]
 ---
 
-# Connect to a TypeSafe-compatible model provider
+# Connect to a compatible decision model provider
 
-> Point LangSmith decision model evaluators at any server that implements the TypeSafe System One API, such as OpenRouter or a self-hosted model.
+> Point LangSmith decision model evaluators at any server that implements the OpenAI Decisions API or the TypeSafe System One API, such as OpenRouter or a self-hosted model.
 
-A TypeSafe-compatible endpoint is a saved [model configuration](model-configurations.md). It sends a decision model evaluator's requests to any server that implements the [TypeSafe System One API](https://docs.typesafe.ai). With a TypeSafe-compatible endpoint, you can call TypeSafe models through another provider, such as OpenRouter, or call a decision model you host yourself. For models that implement the OpenAI API, see [Connect to an OpenAI compliant model provider/proxy](custom-openai-compliant-model.md).
+A compatible endpoint is a saved [model configuration](model-configurations.md) that sends a decision model evaluator's requests to a server you choose. With a compatible endpoint, you can call a decision model through another provider, such as OpenRouter, or call a decision model you host yourself. LangSmith supports two kinds:
 
-TypeSafe-compatible endpoints are available in [decision model evaluators](decision-model-evaluator.md). To use Jev directly from TypeSafe or SemIf through the LLM Gateway, you do not need a compatible endpoint.
+* **OpenAI-Decisions-compatible endpoint**: Calls any server that implements the [OpenAI Decisions API](https://developers.openai.com/api/docs/guides/decisions), with any model name that server serves.
+* **TypeSafe-compatible endpoint**: Calls any server that implements the [TypeSafe System One API](https://docs.typesafe.ai).
+
+Compatible endpoints are available in [decision model evaluators](decision-model-evaluator.md). To use `gpt-6-luna` directly from OpenAI or Jev directly from TypeSafe, you do not need a compatible endpoint. For chat models that implement the OpenAI API, see [Connect to an OpenAI compliant model provider/proxy](custom-openai-compliant-model.md).
 
 ## Configuration
 
-A TypeSafe-compatible endpoint has three settings:
+A compatible endpoint has three settings:
 
-* **Model**: The model ID the server expects. Defaults to `jev-latest`.
-* **API Key Name**: The name of the workspace secret that stores the server's API key. Defaults to `TYPESAFE_API_KEY`.
-* **Base URL**: The root of the server's System One API. See [Base URL format](#base-url-format).
+* **Model**: The model ID the server expects.
+* **API Key Name**: The name of the workspace secret that stores the server's API key.
+* **Base URL**: The root of the server's API. See [Base URL format](#base-url-format).
+
+The defaults depend on the kind of endpoint:
+
+| Setting | OpenAI-Decisions-compatible endpoint | TypeSafe-compatible endpoint |
+| - | - | - |
+| Model | `gpt-6-luna` | `jev-latest` |
+| API Key Name | `OPENAI_API_KEY` | `TYPESAFE_API_KEY` |
 
 ## Use the endpoint in an evaluator
 
-An evaluator can use a TypeSafe-compatible endpoint only after you save the endpoint as a model configuration.
+An evaluator can use a compatible endpoint only after you save the endpoint as a model configuration.
 
-To use a TypeSafe-compatible endpoint in an evaluator:
+To use a compatible endpoint in an evaluator:
 
-1. Add the server's API key as a workspace secret. Go to **Settings > Integrations > Provider secrets**, click **+ Secret**, and select **Custom** to enter your own secret name. To use the default name, select **TypeSafe** instead.
+1. Add the server's API key as a workspace secret. Go to **Settings > Integrations > Provider secrets**, click **+ Secret**, and select **Custom** to enter your own secret name. To use the default name, select **OpenAI** or **TypeSafe** instead.
 2. In the evaluator, under **Prompt & Model**, open **Model Configuration**.
-3. For **Provider**, select **TypeSafe Compatible Endpoint**. It appears under **Other**.
+3. For **Provider**, select **OpenAI Decisions Compatible Endpoint** or **TypeSafe Compatible Endpoint**. Both appear under **Other**.
 4. Enter the **Model**, **API Key Name**, and **Base URL**.
 5. Click **Save as preset** and name the configuration.
 6. Select the saved configuration as the evaluator's model.
@@ -39,9 +49,20 @@ When the evaluator runs, it calls the endpoint with the API key stored in the se
 
 ## Base URL format
 
-The **Base URL** should point to the root of the server's System One API. LangSmith appends `/v1/systemone` automatically. Do not include it in the Base URL.
+The **Base URL** should point to the root of the server's API. The path LangSmith adds depends on the kind of endpoint.
 
-### Example base URLs
+### OpenAI-Decisions-compatible endpoints
+
+LangSmith appends `/v1/decisions` to the Base URL, so do not include it.
+
+| Provider | Model | Example Base URL |
+| - | - | - |
+| [OpenAI](https://developers.openai.com/api/docs/guides/decisions) | `gpt-6-luna` | `https://api.openai.com` |
+| Self-hosted (remote) | Your model ID | `https://decisions.example.com` |
+
+### TypeSafe-compatible endpoints
+
+LangSmith appends `/v1/systemone` to the Base URL, so do not include it. To call the URL exactly as entered, including its path, clear **Append /v1/systemone**.
 
 | Provider | Model | Example Base URL |
 | - | - | - |
@@ -52,13 +73,11 @@ The **Base URL** should point to the root of the server's System One API. LangSm
 ## See also
 
 * [How to define a decision model evaluator](decision-model-evaluator.md): Set up an evaluator that uses a decision model.
-* [Decision models in the LLM Gateway](llm-gateway-decision-models.md): Call SemIf and Jev directly through the LLM Gateway.
+* [Decision models in the LLM Gateway](llm-gateway-decision-models.md): Call decision models through the LLM Gateway from your own application.
 * [Model configurations](model-configurations.md): Manage saved model configurations for your workspace.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/typesafe-compatible-model.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/compatible-decision-model-provider.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

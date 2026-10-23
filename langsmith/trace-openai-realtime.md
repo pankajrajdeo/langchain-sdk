@@ -11,6 +11,7 @@ tags: [docs, langsmith, trace-openai-realtime]
 > Trace OpenAI Realtime voice agents in LangSmith using the LangSmith SDK.
 
 > [!NOTE]
+>
 > This integration is in beta, so its API may change.
 
 OpenAI Realtime is a speech-to-speech model that streams typed events over a WebSocket. Regardless of whether you build it with a raw connection or the OpenAI Agents SDK, the integration captures each conversation as a single LangSmith trace, with a span for every meaningful event (transcripts, model responses, and tool calls) grouped by turn.
@@ -76,11 +77,13 @@ async with client.realtime.connect(model="gpt-realtime-2") as raw, wrap_realtime
 ```
 
 > [!NOTE]
+>
 > Each conversation is captured as its own trace. To group it with related interactions in a LangSmith [thread](threads.md) (for example to continue an earlier session or pick up from a text chat), pass a `thread_id`. Reusing the same ID across traces links their events together.
 
 Any [`@traceable`](annotate-code.md) tools you run while handling an event nest under that event automatically.
 
 > [!NOTE]
+>
 > Enable `input_audio_transcription` and the agent transcript in your `session.update` in order to view a transcript as part of the trace.
 
 ### Record the conversation audio
@@ -111,6 +114,7 @@ async with client.realtime.connect(model="gpt-realtime-2") as raw, wrap_realtime
 ```
 
 > [!NOTE]
+>
 > You should record the agent's audio from the speaker, so that the recording reflects only what was played. During a barge-in, generated audio is discarded before playback and should not be recorded. Doing this keeps the trace aligned with what the user actually heard.
 
 ## Using the OpenAI Agents SDK
@@ -118,6 +122,7 @@ async with client.realtime.connect(model="gpt-realtime-2") as raw, wrap_realtime
 Use this when you build the agent with the [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/realtime/guide/) (`RealtimeAgent` / `RealtimeRunner`), which owns the turn and tool-call loop.
 
 > [!NOTE]
+>
 > The Agents SDK's built-in realtime tracing uploads to OpenAI's own dashboard. Call `agents.set_tracing_disabled(True)` to avoid a second, separate upload path.
 
 ### Set up tracing
@@ -147,6 +152,7 @@ async with wrap_realtime_session(
 The conversation transcript is reconstructed from the session's `history` snapshots, so messages appear even though the SDK streams them as partials.
 
 > [!NOTE]
+>
 > Each conversation is captured as its own trace. To group it with related interactions in a LangSmith [thread](threads.md), for example to continue an earlier session or pick up from a text chat, pass a `thread_id`. Reusing the same ID across traces links their events together.
 
 ### Record the conversation audio
@@ -169,20 +175,21 @@ async for event in conn:
 ```
 
 > [!NOTE]
+>
 > You should record the agent's audio from the speaker, so that the recording reflects only what was played. During a barge-in, generated audio is discarded before playback and should not be recorded. Doing this keeps the trace aligned with what the user actually heard.
 
 ## Next steps
 
-#### [Voice fundamentals](trace-voice-fundamentals.md)
-Core conventions for tracing voice agents.
+> **[Voice fundamentals](trace-voice-fundamentals.md)**
+>
+> Core conventions for tracing voice agents.
 
-#### [Upload files with traces](upload-files-with-traces.md)
-Attach the conversation audio recording to your trace.
+> **[Upload files with traces](upload-files-with-traces.md)**
+>
+> Attach the conversation audio recording to your trace.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-openai-realtime.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-openai-realtime.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

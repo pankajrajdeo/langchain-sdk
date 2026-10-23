@@ -21,7 +21,9 @@ durable. A user can refresh the page, a reviewer can answer from a different
 component, and the agent still resumes from the exact point where execution
 stopped instead of replaying the whole run.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop).
+> [!NOTE]
+>
+> This page uses the default batched interrupt mode. For per-call interrupts (`interrupt_mode="per_call"`), see [Pause once per tool call](../human-in-the-loop.md#pause-once-per-tool-call).
 
 ## How interrupts work
 
@@ -49,6 +51,7 @@ approval card while that value is set, then resume the run with
 approves, rejects, or edits the action.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
 
 **React**
@@ -247,6 +250,7 @@ stream.submit(null, { command: { resume: response } });
 ```
 
 > [!NOTE]
+>
 > When an action is rejected, the agent receives the rejection reason and can
 > decide how to proceed. If you omit `message`, the backend uses a default
 > message that tells the model the tool was not executed and not to retry the
@@ -291,6 +295,7 @@ stream.submit(null, { command: { resume: response } });
 ```
 
 > [!NOTE]
+>
 > Use `respond` when the tool is intentionally a placeholder for human input, for example, an `ask_user` tool that prompts the agent to collect information from the user. Do not use `respond` to deny a proposed action, because it is returned to the model as a successful tool result.
 
 ## Building the ApprovalCard
@@ -349,6 +354,7 @@ After the user makes a decision, the full cycle looks like this:
 4. The `interrupt` property resets to `null` as the agent resumes streaming
 
 > [!TIP]
+>
 > You can chain multiple HITL checkpoints in a single agent run. For example, an
 > agent might ask for approval to search, then ask again before sending an email
 > with the results. Each interrupt is handled independently.
@@ -411,8 +417,6 @@ social post each need a *different* form, with their own fields, validation, and
 copy. For that, raise the `interrupt()` **from inside the tool** and let the
 payload describe the exact form the UI should render. Each tool can surface a
 completely different interface.
-
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop).
 
 ### Describe the form in the interrupt payload
 
@@ -576,6 +580,7 @@ card by reading it back off the message:
 ```
 
 > [!TIP]
+>
 > Because the resolved card lives in the message history, it survives refreshes
 > and is visible to every component reading the thread and the human's decision
 > becomes part of the durable transcript, not just transient UI state.
@@ -601,8 +606,6 @@ Keep these guidelines in mind when implementing HITL workflows:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

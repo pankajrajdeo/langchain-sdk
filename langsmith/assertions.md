@@ -18,10 +18,12 @@ Use assertions when:
 * You want to capture acceptance criteria in plain English without leaving the review flow.
 
 > [!NOTE]
+>
 > Assertions are available on **run** items in [single-run annotation queues](annotation-queues.md#single-run-annotation-queues). They are not available on [thread](observability-concepts.md#threads) items or [pairwise queues](annotation-queues.md#pairwise-annotation-queues). Assertions are available in the LangSmith UI only.
 
 > [!TIP]
-> [LangSmith Engine](engine.md#add-offline-examples) can auto-propose assertions for production traces flagged as recurring issues. Open an issue's offline examples flow to review, edit, or extend the Engine's proposed assertions before saving them to a dataset.
+>
+> [LangSmith Engine](engine-issues.md#add-offline-examples) can auto-propose assertions for production traces flagged as recurring issues. Open an issue's offline examples flow to review, edit, or extend the Engine's proposed assertions before saving them to a dataset.
 
 ## Add assertions
 
@@ -39,9 +41,7 @@ Use assertions when:
 
    The run editor shows the run's inputs and outputs alongside the assertions side panel. As soon as you add at least one assertion, the run editor's **Outputs** panel switches from the run's actual output to a read-only preview of the assertions you've added. This preview is what gets saved to the dataset. The run's actual output is not saved, because assertions describe what a correct answer should include, not what this run produced.
 
-   <img src="https://mintcdn.com/langchain-5e9cc07a/kbN1Ka5QXqhpP8_U/langsmith/images/assertions-example-light.png?fit=max&auto=format&n=kbN1Ka5QXqhpP8_U&q=85&s=e8a7d284293aad69176dd9f6caff0042" alt="Annotation queue run editor with assertions added in the side panel and the Outputs panel showing a read-only preview of those assertions." width="1907" height="856" data-path="langsmith/images/assertions-example-light.png" />
-
-   <img src="https://mintcdn.com/langchain-5e9cc07a/kbN1Ka5QXqhpP8_U/langsmith/images/assertions-example-dark.png?fit=max&auto=format&n=kbN1Ka5QXqhpP8_U&q=85&s=ed7a3ee9efbfa80a58ba76bc37cafda9" alt="Annotation queue run editor with assertions added in the side panel and the Outputs panel showing a read-only preview of those assertions." width="1903" height="849" data-path="langsmith/images/assertions-example-dark.png" />
+   ![Annotation queue run editor with assertions added in the side panel and the Outputs panel showing a read-only preview of those assertions.](https://mintcdn.com/langchain-5e9cc07a/kbN1Ka5QXqhpP8_U/langsmith/images/assertions-example-light.png?fit=max\&auto=format\&n=kbN1Ka5QXqhpP8_U\&q=85\&s=e8a7d284293aad69176dd9f6caff0042)
 
    You can keep editing the run's **Inputs** at any time, for example to refine the prompt before saving the example. The **Outputs** panel stays locked to the assertion preview while any assertions remain.
 
@@ -89,8 +89,6 @@ How you score each claim is up to you. Three patterns are common and can be comb
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/assertions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/assertions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

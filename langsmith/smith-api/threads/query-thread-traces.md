@@ -164,6 +164,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -172,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/threads/{thread_id}/traces:
     get:
@@ -220,18 +223,18 @@ paths:
           name: page_size
           in: query
           schema:
-            minimum: 1
-            maximum: 100
             type: integer
-            default: 20
+            maximum: 100
+            minimum: 1
             title: Page Size
+            default: 20
         - description: '`project_id` is the tracing project UUID (required).'
           name: project_id
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
         - example:
             - NAME

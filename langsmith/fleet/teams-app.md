@@ -17,6 +17,7 @@ With LangSmith Fleet, you can connect your agents to Microsoft Teams by register
 * Access Teams channels and messages through Microsoft Graph API tools.
 
 > [!NOTE]
+>
 > In channel conversations, the bot only responds when explicitly mentioned. In direct messages and group chats, the bot responds to all messages.
 
 ## Prerequisites
@@ -29,7 +30,8 @@ With LangSmith Fleet, you can connect your agents to Microsoft Teams by register
 
 Before registering in Fleet, you need to create an Azure Bot resource and obtain its credentials.
 
-### Create an Azure Bot resource
+**1. Create an Azure Bot resource**
+
 1. Go to the [Azure Portal](https://portal.azure.com).
 2. Search for **Azure Bot** and click **Create**.
 3. Fill in the required fields:
@@ -40,7 +42,8 @@ Before registering in Fleet, you need to create an Azure Bot resource and obtain
    * **Creation type**: Select **Create new Microsoft App ID**.
 4. Click **Review + create**, then **Create**.
 
-### Get your app credentials
+**2. Get your app credentials**
+
 After the resource is created:
 
 1. Navigate to your bot resource and click **Configuration** in the left sidebar.
@@ -50,19 +53,23 @@ After the resource is created:
 5. Copy the **Value** of the new secret immediately — it is only shown once.
 
 > [!WARNING]
+>
 > Copy the client secret value immediately after creation. You cannot retrieve it later. If you lose it, you must create a new one.
 
-### Configure the messaging endpoint
+**3. Configure the messaging endpoint**
+
 You will set the messaging endpoint after registering the bot in Fleet. Skip this field for now—you will return to this step later.
 
 ## Register the bot in Fleet
 
-### Open the integrations page
+**1. Open the integrations page**
+
 1. Navigate to **Fleet** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-teams-app).
 2. Go to the **Integrations** page.
 3. Click **Add Teams App**.
 
-### Enter your credentials
+**2. Enter your credentials**
+
 Fill in the following fields:
 
 * **App Name**: A display name for the bot in Fleet.
@@ -72,10 +79,12 @@ Fill in the following fields:
 
 Click **Create** to register the bot.
 
-### Copy the webhook URL
+**3. Copy the webhook URL**
+
 After registration, Fleet displays a **webhook URL**. Copy this URL—you need it to complete the Azure Bot configuration.
 
-### Set the messaging endpoint in Azure
+**4. Set the messaging endpoint in Azure**
+
 1. Return to your Azure Bot resource in the [Azure Portal](https://portal.azure.com).
 2. Go to **Configuration**.
 3. Paste the webhook URL from Fleet into the **Messaging endpoint** field.
@@ -83,13 +92,15 @@ After registration, Fleet displays a **webhook URL**. Copy this URL—you need i
 
 ## Add the bot to Teams
 
-### Open the Teams channel
+**1. Open the Teams channel**
+
 1. In the Azure Portal, go to your bot resource.
 2. Click **Channels** in the left sidebar.
 3. Select **Microsoft Teams** and click **Apply**.
 4. Agree to the terms of service.
 
-### Install the bot in Teams
+**2. Install the bot in Teams**
+
 1. In Teams, click **Apps** in the left sidebar.
 2. Click **Manage your apps** then **Upload an app**.
 3. Upload a [Teams app manifest](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) that references your Azure App ID, or use the **Open in Teams** link from the Azure Bot Channels page.
@@ -117,6 +128,7 @@ You can link a Teams bot to an agent from the integrations page or from the agen
 Tools let your agent take actions in Teams. To respond to messages and interact with Teams, add the relevant tools.
 
 > [!TIP]
+>
 > You can also ask your agent to add these tools itself. In the agent chat, try: "Add the Teams tools so you can respond to messages."
 
 1. In the sidebar, expand the **Connections** drawer and click **Add connection**.
@@ -129,6 +141,7 @@ Tools let your agent take actions in Teams. To respond to messages and interact 
 3. If prompted, click **Connect** to authorize the Microsoft Graph tools.
 
 > [!NOTE]
+>
 > The `teams_bot_send_proactive_message` tool uses Bot Framework credentials and does not require separate OAuth authorization. The other Teams tools use Microsoft Graph API and may require OAuth consent.
 
 ## Configure agent behavior (optional)
@@ -165,19 +178,20 @@ Adjust the instructions based on your use case—for example, you might want the
 
 ## Next steps
 
-#### [Add more tools](tools.md)
-Connect additional services to your agent
+> **[Add more tools](tools.md)**
+>
+> Connect additional services to your agent
 
-#### [Add more channels](channels.md)
-Set up email, schedule, or webhook channels
+> **[Add more channels](channels.md)**
+>
+> Set up email, schedule, or webhook channels
 
-#### [Use templates](templates.md)
-Start from a prebuilt agent template
+> **[Use templates](templates.md)**
+>
+> Start from a prebuilt agent template
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/teams-app.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/teams-app.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

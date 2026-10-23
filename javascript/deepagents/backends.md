@@ -32,11 +32,13 @@ This page explains how to:
 * [Update existing backends to v2](#update-existing-backends-to-v2)
 
 > [!TIP]
+>
 > When you deploy on [LangSmith Deployment](../../langsmith/deployment.md), a store is provisioned automatically. Use [LangSmith](../../langsmith/observability.md) tracing to debug file paths, permission denials, and cross-thread storage. Follow the [observability quickstart](../../langsmith/observability-quickstart.md) to get set up.
 >
 > We recommend you also set up [LangSmith Engine](../../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
 
 > [!TIP]
+>
 > To generate a durable repository wiki that agents can read through filesystem tools, see [OpenWiki](../../openwiki/overview.md).
 
 ## Quickstart
@@ -45,12 +47,12 @@ Here are a few prebuilt filesystem backends that you can quickly use with your d
 
 | Built-in backend | Description |
 | - | - |
-| [Default](#statebackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash")` <br /> Thread-scoped. The default filesystem backend for an agent is stored in `langgraph` state. Files persist across turns within a thread (via your checkpointer) and are not shared across threads. |
-| [Local filesystem persistence](#filesystembackend-local-disk) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=FilesystemBackend(root_dir="/Users/nh/Desktop/"))` <br />This gives the deep agent access to your local machine's filesystem. You can specify the root directory that the agent has access to. Note that any provided `root_dir` must be an absolute path. Typically, wrap in a [CompositeBackend](#compositebackend-router) to keep internal agent data (offloaded tool results, conversation history) separate from your project files. |
-| [Durable store (LangGraph store)](#storebackend-langgraph-store) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=StoreBackend())` <br />This gives the agent access to long-term storage that is *persisted across threads*. This is great for storing longer term memories or instructions that are applicable to the agent over multiple executions. |
-| [Context Hub](#contexthubbackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=ContextHubBackend("my-agent"))` <br />Stores files durably in a LangSmith Hub repo, without provisioning a separate LangGraph store. |
-| [Sandbox](sandboxes.md) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=sandbox)` <br />Execute code in isolated environments. Sandboxes provide filesystem tools plus the `execute` tool for running shell commands. Choose from LangSmith, AgentCore, Daytona, or other [sandbox integrations](../integrations/sandboxes.md). |
-| [Local shell](#localshellbackend-local-shell) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=LocalShellBackend(root_dir=".", env={"PATH": "/usr/bin:/bin"}))` <br />Filesystem and shell execution directly on the host. No isolation—use only in controlled development environments. See [security considerations](#localshellbackend-local-shell) below. |
+| [Default](#statebackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash")`  Thread-scoped. The default filesystem backend for an agent is stored in `langgraph` state. Files persist across turns within a thread (via your checkpointer) and are not shared across threads. |
+| [Local filesystem persistence](#filesystembackend-local-disk) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=FilesystemBackend(root_dir="/Users/nh/Desktop/"))` This gives the deep agent access to your local machine's filesystem. You can specify the root directory that the agent has access to. Note that any provided `root_dir` must be an absolute path. Typically, wrap in a [CompositeBackend](#compositebackend-router) to keep internal agent data (offloaded tool results, conversation history) separate from your project files. |
+| [Durable store (LangGraph store)](#storebackend-langgraph-store) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=StoreBackend())` This gives the agent access to long-term storage that is *persisted across threads*. This is great for storing longer term memories or instructions that are applicable to the agent over multiple executions. |
+| [Context Hub](#contexthubbackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=ContextHubBackend("my-agent"))` Stores files durably in a LangSmith Hub repo, without provisioning a separate LangGraph store. |
+| [Sandbox](sandboxes.md) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=sandbox)` Execute code in isolated environments. Sandboxes provide filesystem tools plus the `execute` tool for running shell commands. Choose from LangSmith, AgentCore, Daytona, or other [sandbox integrations](../integrations/sandboxes.md). |
+| [Local shell](#localshellbackend-local-shell) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=LocalShellBackend(root_dir=".", env={"PATH": "/usr/bin:/bin"}))` Filesystem and shell execution directly on the host. No isolation—use only in controlled development environments. See [security considerations](#localshellbackend-local-shell) below. |
 | [Composite](#compositebackend-router) | Thread-scoped by default, `/memories/` persisted across threads. The Composite backend is maximally flexible. You can specify different routes in the filesystem to point towards different backends. See Composite routing below for a ready-to-paste example. |
 
 ```mermaid
@@ -108,6 +110,7 @@ const agent2 = createDeepAgent({
 * Persists across multiple agent turns on the same thread via checkpoints. Files are not shared across threads.
 
 > [!WARNING]
+>
 > Designed to be used from within a graph. Calling backend methods (e.g., `state_backend.upload_files(...)`) outside of a graph run won't take effect until the graph executes.
 
 **Best for:**
@@ -123,6 +126,7 @@ even after that subagent's execution is complete. Those files will continue to b
 [`FilesystemBackend`](https://reference.langchain.com/javascript/deepagents/backends/FilesystemBackend) reads and writes real files under a configurable root directory.
 
 > [!WARNING]
+>
 > This backend grants agents direct filesystem read/write access.
 > Use with caution and only in appropriate environments.
 >
@@ -242,11 +246,12 @@ const agent = createDeepAgent({
 For a durable repository wiki that agents can read with these filesystem tools (from `openwiki/`), see [OpenWiki](../../openwiki/overview.md).
 
 > [!TIP]
+>
 > **Wrap `FilesystemBackend` in a `CompositeBackend`** for most use cases. Deep Agents automatically write internal data to the backend, including offloaded large tool results (under `/large_tool_results/`) and conversation history (under `/conversation_history/`). When you use `FilesystemBackend` alone, these internal files are written to real disk under `root_dir`, mixing agent artifacts with your project files.
 >
 > Use a `CompositeBackend` to route your project directory to `FilesystemBackend` while keeping internal paths in ephemeral `StateBackend` storage:
 >
-> ```typescript
+```typescript
 > import { createDeepAgent, CompositeBackend, FilesystemBackend, StateBackend } from "deepagents";
 >
 > const agent = createDeepAgent({
@@ -257,13 +262,14 @@ For a durable repository wiki that agents can read with these filesystem tools (
 >     },
 >   ),
 > });
-> ```
+```
 >
 > This way, agent reads and writes under `/workspace/` go to real disk, while offloaded tool results and other internal data stay in ephemeral state. See [Route to different backends](#route-to-different-backends) for more routing patterns.
 
 ### LocalShellBackend (local shell)
 
 > [!WARNING]
+>
 > This backend grants agents direct filesystem read/write access **and** unrestricted shell execution on your host.
 > Use with extreme caution and only in appropriate environments.
 >
@@ -520,9 +526,11 @@ const agent = createDeepAgent({
 ```
 
 > [!NOTE]
+>
 > When deploying to [LangSmith Deployment](../../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
 
 > [!TIP]
+>
 > The `namespace` parameter controls data isolation. For multi-user deployments, always set a [namespace factory](#namespace-factories) to isolate data per user or tenant.
 
 **How it works:**
@@ -553,6 +561,7 @@ The `Runtime` provides:
 * `rt.executionInfo`—Execution identity information (thread ID, run ID, checkpoint ID)
 
 > [!NOTE]
+>
 > The `Runtime` argument is available in `deepagents>=1.9.1`. Earlier 1.9.x releases passed a `BackendContext` instead—see [migrating from `BackendContext`](#migrating-from-backendcontext) below. `rt.serverInfo` and `rt.executionInfo` require `deepagents>=1.9.0`.
 
 **Common namespace patterns:**
@@ -581,14 +590,17 @@ You can combine multiple components to create more specific scopes—for example
 Namespace components must contain only alphanumeric characters, hyphens, underscores, dots, `@`, `+`, colons, and tildes. Wildcards (`*`, `?`) are rejected to prevent glob injection.
 
 > [!WARNING]
+>
 > The `namespace` parameter will be **required** in v1.9.0. Always set it explicitly for new code.
 
 > [!NOTE]
+>
 > When no namespace factory is provided, the legacy default uses the `assistant_id` from LangGraph config metadata. This means all users of the same [assistant](../../langsmith/assistants.md) share the same storage. For multi-user [going to production](going-to-production.md), always provide a namespace factory.
 
 ### ContextHubBackend
 
 > [!NOTE]
+>
 > **Before you begin:** `ContextHubBackend` requires a Context Hub repo set up in LangSmith. Read the [Context Hub concepts](../../langsmith/context-engineering-concepts.md) page first if you're unfamiliar with agent repos and skill repos.
 
 `ContextHubBackend` stores your agent's filesystem in a LangSmith Context Hub repo. It can use a standalone repo or an agent repo that links out to skill repos.
@@ -600,6 +612,7 @@ This means your agent's context is intentionally spread across repos: one repo p
 Construct it with a repo identifier in `owner/name` or `name` format.
 
 > [!NOTE]
+>
 > Set `LANGSMITH_API_KEY` before using `ContextHubBackend`.
 
 **How it works:**
@@ -807,6 +820,7 @@ const agent = createDeepAgent({
 * If omitted, the default is `new StateBackend()`.
 
 > [!NOTE]
+>
 > Before version 1.9.0, only `BackendProtocol` was supported which is now `BackendProtocolV1`. V1 backends are automatically adapted to V2 at runtime via `adaptBackendProtocol()`. No code changes are required to keep using existing V1 backends. To update to v2, see [update existing backends to v2](#update-existing-backends-to-v2).
 
 ## Route to different backends
@@ -851,6 +865,7 @@ Message history keeps content-addressed references. Before each model call, the 
 Use a backend that stores blobs outside graph state, such as a sandbox or `FilesystemBackend`. Offloading has no effect when the blob path routes to `StateBackend`, including through `CompositeBackend`. If you keep `StateBackend` as the default backend, route the blob directory to external storage.
 
 > [!NOTE]
+>
 > Inline media in user messages is replaced at the next model call. The original input payload still appears in earlier checkpoints. Keep the blob storage available when resuming a thread so the middleware can restore its media.
 
 ## Custom backends
@@ -875,63 +890,60 @@ To also support the `execute` tool (running shell commands), implement [`Sandbox
 
 All methods must return structured Result objects with an optional `error` field—do not throw on missing files or invalid patterns.
 
-<details>
-<summary>Example: S3-style backend skeleton</summary>
-
-This skeleton maps filesystem paths to object keys. Fill in each method with your storage client's list, read, search, upload, and read-modify-write operations.
-
+> **Example: S3-style backend skeleton**
+>
+> This skeleton maps filesystem paths to object keys. Fill in each method with your storage client's list, read, search, upload, and read-modify-write operations.
+>
 ```typescript
-import {
-  type BackendProtocolV2,
-  type EditResult,
-  type GlobResult,
-  type GrepResult,
-  type LsResult,
-  type ReadRawResult,
-  type ReadResult,
-  type WriteResult,
-} from "deepagents";
-
-class S3Backend implements BackendProtocolV2 {
-  constructor(private bucket: string, private prefix: string = "") {
-    this.prefix = prefix.replace(/\/$/, "");
-  }
-
-  private key(path: string): string {
-    return `${this.prefix}${path}`;
-  }
-
-  async ls(path: string): Promise<LsResult> {
-    ...
-  }
-
-  async read(filePath: string, offset?: number, limit?: number): Promise<ReadResult> {
-    ...
-  }
-
-  async readRaw(filePath: string): Promise<ReadRawResult> {
-    ...
-  }
-
-  async grep(pattern: string, path?: string | null, glob?: string | null): Promise<GrepResult> {
-    ...
-  }
-
-  async glob(pattern: string, path = "/"): Promise<GlobResult> {
-    ...
-  }
-
-  async write(filePath: string, content: string): Promise<WriteResult> {
-    ...
-  }
-
-  async edit(filePath: string, oldString: string, newString: string, replaceAll?: boolean): Promise<EditResult> {
-    ...
-  }
-}
+> import {
+>   type BackendProtocolV2,
+>   type EditResult,
+>   type GlobResult,
+>   type GrepResult,
+>   type LsResult,
+>   type ReadRawResult,
+>   type ReadResult,
+>   type WriteResult,
+> } from "deepagents";
+>
+> class S3Backend implements BackendProtocolV2 {
+>   constructor(private bucket: string, private prefix: string = "") {
+>     this.prefix = prefix.replace(/\/$/, "");
+>   }
+>
+>   private key(path: string): string {
+>     return `${this.prefix}${path}`;
+>   }
+>
+>   async ls(path: string): Promise<LsResult> {
+>     ...
+>   }
+>
+>   async read(filePath: string, offset?: number, limit?: number): Promise<ReadResult> {
+>     ...
+>   }
+>
+>   async readRaw(filePath: string): Promise<ReadRawResult> {
+>     ...
+>   }
+>
+>   async grep(pattern: string, path?: string | null, glob?: string | null): Promise<GrepResult> {
+>     ...
+>   }
+>
+>   async glob(pattern: string, path = "/"): Promise<GlobResult> {
+>     ...
+>   }
+>
+>   async write(filePath: string, content: string): Promise<WriteResult> {
+>     ...
+>   }
+>
+>   async edit(filePath: string, oldString: string, newString: string, replaceAll?: boolean): Promise<EditResult> {
+>     ...
+>   }
+> }
 ```
-
-</details>
 
 ## Permissions
 
@@ -1018,6 +1030,7 @@ class PolicyWrapper implements BackendProtocolV2 {
 ## Multimodal and binary files
 
 > [!NOTE]
+>
 > Multi-modal file support (PDFs, audio, video) requires `deepagents>=1.9.0`.
 
 V2 backends support binary files natively. When `read()` encounters a binary file (determined by MIME type from the file extension), it returns a `ReadResult` with `Uint8Array` content and the corresponding `mimeType`. Text files return `string` content.
@@ -1074,6 +1087,7 @@ Backends may encounter either format when reading from state or store. The frame
 ## Migrate from backend factories
 
 > [!WARNING]
+>
 > The backend factory pattern is **deprecated** as of `deepagents` 1.9.0. Pass pre-constructed backend instances directly instead of factory functions.
 
 Previously, backends like `StateBackend` and `StoreBackend` required a factory function that received a runtime object, because they needed runtime context (state, store) to operate. Backends now resolve this context internally via LangGraph's `get_config()`, `get_store()`, and `get_runtime()` helpers, so you can pass instances directly.
@@ -1099,6 +1113,7 @@ Previously, backends like `StateBackend` and `StoreBackend` required a factory f
 | `filesUpdate` field on `WriteResult` and `EditResult` | State writes are now handled internally by the backend |
 
 > [!NOTE]
+>
 > The factory pattern still works at runtime and emits a deprecation warning. Update your code to use direct instances before the next major version.
 
 ### Migration example
@@ -1238,46 +1253,44 @@ Backends implement `BackendProtocolV2`. All query methods return structured Resu
 
 ## Update existing backends to V2
 
-<details>
-<summary>Migration guide</summary>
-
-### Method renames
-
-| V1 method | V2 method | Return type change |
-| - | - | - |
-| `lsInfo(path)` | `ls(path)` | `FileInfo[]` → `LsResult` |
-| `read(filePath, offset, limit)` | `read(filePath, offset, limit)` | `string` → `ReadResult` |
-| `readRaw(filePath)` | `readRaw(filePath)` | `FileData` → `ReadRawResult` |
-| `grepRaw(pattern, path, glob)` | `grep(pattern, path, glob)` | `GrepMatch[] \| string` → `GrepResult` |
-| `globInfo(pattern, path)` | `glob(pattern, path)` | `FileInfo[]` → `GlobResult` |
-| `write(...)` | `write(...)` | Unchanged (`WriteResult`) |
-| `edit(...)` | `edit(...)` | Unchanged (`EditResult`) |
-
-### Type renames
-
-| V1 type | V2 type |
-| - | - |
-| `BackendProtocol` | `BackendProtocolV2` |
-| `SandboxBackendProtocol` | `SandboxBackendProtocolV2` |
-
-### Adaptation utilities
-
-If you have existing V1 backends that you need to use with V2-only code, use the adaptation functions:
-
+> **Migration guide**
+>
+> ### Method renames
+>
+> | V1 method | V2 method | Return type change |
+> | - | - | - |
+> | `lsInfo(path)` | `ls(path)` | `FileInfo[]` → `LsResult` |
+> | `read(filePath, offset, limit)` | `read(filePath, offset, limit)` | `string` → `ReadResult` |
+> | `readRaw(filePath)` | `readRaw(filePath)` | `FileData` → `ReadRawResult` |
+> | `grepRaw(pattern, path, glob)` | `grep(pattern, path, glob)` | `GrepMatch[] \| string` → `GrepResult` |
+> | `globInfo(pattern, path)` | `glob(pattern, path)` | `FileInfo[]` → `GlobResult` |
+> | `write(...)` | `write(...)` | Unchanged (`WriteResult`) |
+> | `edit(...)` | `edit(...)` | Unchanged (`EditResult`) |
+>
+> ### Type renames
+>
+> | V1 type | V2 type |
+> | - | - |
+> | `BackendProtocol` | `BackendProtocolV2` |
+> | `SandboxBackendProtocol` | `SandboxBackendProtocolV2` |
+>
+> ### Adaptation utilities
+>
+> If you have existing V1 backends that you need to use with V2-only code, use the adaptation functions:
+>
 ```typescript
-import { adaptBackendProtocol, adaptSandboxProtocol } from "deepagents";
-
-// Adapt a V1 backend to V2
-const v2Backend = adaptBackendProtocol(v1Backend);
-
-// Adapt a V1 sandbox to V2
-const v2Sandbox = adaptSandboxProtocol(v1Sandbox);
+> import { adaptBackendProtocol, adaptSandboxProtocol } from "deepagents";
+>
+> // Adapt a V1 backend to V2
+> const v2Backend = adaptBackendProtocol(v1Backend);
+>
+> // Adapt a V1 sandbox to V2
+> const v2Sandbox = adaptSandboxProtocol(v1Sandbox);
 ```
-
-> [!NOTE]
-> The framework auto-adapts V1 backends passed to `createDeepAgent()`. Manual adaptation is only needed when calling protocol methods directly.
-
-</details>
+>
+> > [!NOTE]
+> >
+> > The framework auto-adapts V1 backends passed to `createDeepAgent()`. Manual adaptation is only needed when calling protocol methods directly.
 
 ## See also
 
@@ -1287,8 +1300,6 @@ const v2Sandbox = adaptSandboxProtocol(v1Sandbox);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/backends.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/backends.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

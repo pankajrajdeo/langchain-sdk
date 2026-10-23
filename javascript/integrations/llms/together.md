@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, llms, together]
 > Integrate with the TogetherAI LLM using LangChain JavaScript.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of Together AI models as text completion models. Many popular models available on Together AI are [chat completion models](../../langchain/models.md).**
 >
 > You may be looking for [this page instead](../chat/togetherai.md).
@@ -23,7 +24,7 @@ This will help you get started with Together AI text completion models (LLMs) us
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/together/) | Downloads | Version |
+| Class | Package | Local | Serializable | [PY support](../../../integrations/llms/together.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`TogetherAI`](https://reference.langchain.com/javascript/langchain-together-ai/TogetherAI) | [`@langchain/together-ai`](https://www.npmjs.com/package/@langchain/together-ai) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/together-ai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/together-ai?style=flat-square\&label=%20&) |
 
@@ -108,8 +109,6 @@ For detailed documentation of all `TogetherAI` features and configurations head 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/together.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/together.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

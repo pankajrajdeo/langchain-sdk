@@ -10,7 +10,8 @@ tags: [docs, release-policy]
 
 This page explains the LangChain and LangGraph release policies. Click on the tabs below to view the release policies for each:
 
-#### LangChain
+**LangChain**
+
 The LangChain ecosystem is composed of different component packages (e.g., `langchain-core`, `langchain`, partner packages, etc.)
 
 ## Release cadence
@@ -78,7 +79,8 @@ Packages are marked with one of the following statuses:
 * **Support period**: Until December 2026
 * **Support includes**: Security patches and critical bug fixes
 
-#### LangGraph
+**LangGraph**
+
 LangGraph follows a structured release policy to ensure stability and predictability for users building production applications.
 
 ## Release cadence
@@ -186,7 +188,8 @@ Packages are marked with one of the following statuses:
 * [Versioning](versioning.md) - Version numbering and support details
 * [Releases](releases.md) - Version-specific release notes and migration guides
 
-#### Deep Agents
+**Deep Agents**
+
 Deep Agents (`deepagents`) is a rapidly evolving package for building advanced agent architectures.
 
 ## Pre-1.0 status
@@ -231,8 +234,6 @@ After 1.0, Deep Agents will follow the same semantic versioning and LTS policies
 
 ***
 
-> [!NOTE]
-> [Connect these docs](use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/release-policy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/release-policy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

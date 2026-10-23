@@ -9,6 +9,7 @@ tags: [docs, langchain, errors, model_rate_limit]
 # MODEL_RATE_LIMIT
 
 > [!NOTE]
+>
 > Currently only used in `langchainjs` (JavaScript/TypeScript).
 
 You have hit the maximum number of requests that a model provider allows over a given time period and are being temporarily blocked.
@@ -30,8 +31,6 @@ To resolve this error, you can:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_RATE_LIMIT.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_RATE_LIMIT.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

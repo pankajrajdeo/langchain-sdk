@@ -22,15 +22,17 @@ Common use cases include:
 
 You can implement guardrails using [middleware](middleware.md) to intercept execution at strategic points - before the agent starts, after it completes, or around model and tool calls.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max&auto=format&n=RAP6mjwE5G00xYsA&q=85&s=eb4404b137edec6f6f0c8ccb8323eaf1" alt="Middleware flow diagram" width="500" height="560" data-path="oss/images/middleware_final.png" />
+![Middleware flow diagram](https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max\&auto=format\&n=RAP6mjwE5G00xYsA\&q=85\&s=eb4404b137edec6f6f0c8ccb8323eaf1)
 
 Guardrails can be implemented using two complementary approaches:
 
-#### Deterministic guardrails
-Use rule-based logic like regex patterns, keyword matching, or explicit checks. Fast, predictable, and cost-effective, but may miss nuanced violations.
+> **Deterministic guardrails**
+>
+> Use rule-based logic like regex patterns, keyword matching, or explicit checks. Fast, predictable, and cost-effective, but may miss nuanced violations.
 
-#### Model-based guardrails
-Use LLMs or classifiers to evaluate content with semantic understanding. Catch subtle issues that rules miss, but are slower and more expensive.
+> **Model-based guardrails**
+>
+> Use LLMs or classifiers to evaluate content with semantic understanding. Catch subtle issues that rules miss, but are slower and more expensive.
 
 LangChain provides both built-in guardrails (e.g., [PII detection](#pii-detection), [human-in-the-loop](#human-in-the-loop)) and a flexible middleware system for building custom guardrails using either approach.
 
@@ -86,29 +88,26 @@ const result = await agent.invoke({
 });
 ```
 
-<details>
-<summary>Built-in PII types and configuration</summary>
-
-**Built-in PII types:**
-
-* `email` - Email addresses
-* `credit_card` - Credit card numbers (Luhn validated)
-* `ip` - IP addresses
-* `mac_address` - MAC addresses
-* `url` - URLs
-
-**Configuration options:**
-
-| Parameter | Description | Default |
-| - | - | - |
-| `piiType` | Type of PII to detect (built-in or custom) | Required |
-| `strategy` | How to handle detected PII (`"block"`, `"redact"`, `"mask"`, `"hash"`) | `"redact"` |
-| `detector` | Custom detector regex pattern | `undefined` (uses built-in) |
-| `applyToInput` | Check user messages before model call | `true` |
-| `applyToOutput` | Check AI messages after model call | `false` |
-| `applyToToolResults` | Check tool result messages after execution | `false` |
-
-</details>
+> **Built-in PII types and configuration**
+>
+> **Built-in PII types:**
+>
+> * `email` - Email addresses
+> * `credit_card` - Credit card numbers (Luhn validated)
+> * `ip` - IP addresses
+> * `mac_address` - MAC addresses
+> * `url` - URLs
+>
+> **Configuration options:**
+>
+> | Parameter | Description | Default |
+> | - | - | - |
+> | `piiType` | Type of PII to detect (built-in or custom) | Required |
+> | `strategy` | How to handle detected PII (`"block"`, `"redact"`, `"mask"`, `"hash"`) | `"redact"` |
+> | `detector` | Custom detector regex pattern | `undefined` (uses built-in) |
+> | `applyToInput` | Check user messages before model call | `true` |
+> | `applyToOutput` | Check AI messages after model call | `false` |
+> | `applyToToolResults` | Check tool result messages after execution | `false` |
 
 See the [middleware documentation](middleware.md#pii-detection) for complete details on PII detection capabilities.
 
@@ -155,6 +154,7 @@ result = await agent.invoke(
 ```
 
 > [!TIP]
+>
 > See the [human-in-the-loop documentation](human-in-the-loop.md) for complete details on implementing approval workflows.
 
 ## Custom guardrails
@@ -338,8 +338,6 @@ const agent = createAgent({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/guardrails.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/guardrails.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

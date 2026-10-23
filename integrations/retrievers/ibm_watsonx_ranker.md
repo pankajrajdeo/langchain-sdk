@@ -18,7 +18,7 @@ This notebook shows how to use [watsonx's rerank endpoint](https://cloud.ibm.com
 
 ### Integration details
 
-| Class | Package | [JS support](https://js.langchain.com/docs/integrations/document_compressors/ibm/) | Downloads | Version |
+| Class | Package | [JS support](../../javascript/integrations/document_compressors/ibm.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`WatsonxRerank`](https://reference.langchain.com/python/langchain-ibm/WatsonxRerank) | [`langchain-ibm`](https://reference.langchain.com/python/langchain-ibm) | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ibm?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ibm?style=flat-square\&label=%20) |
 
@@ -58,6 +58,7 @@ os.environ["WATSONX_INSTANCE_ID"] = "your instance_id for accessing the CPD clus
 The LangChain IBM integration lives in the `langchain-ibm` package:
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -115,6 +116,7 @@ wx_embeddings = WatsonxEmbeddings(
 ```
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -287,8 +289,6 @@ For detailed documentation of all `WatsonxRerank` features and configurations he
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/ibm_watsonx_ranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/ibm_watsonx_ranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

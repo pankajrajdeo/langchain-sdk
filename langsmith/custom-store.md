@@ -15,6 +15,7 @@ When deploying agents to LangSmith, the server provides a built-in Postgres-back
 You provide a path to an async context manager that yields a `BaseStore` instance, and the server manages the store's lifecycle automatically.
 
 > [!WARNING]
+>
 > Custom stores are in **alpha**. This feature may experience breaking changes in minor version updates.
 
 ## Define the store
@@ -28,6 +29,7 @@ langgraph new --template=new-langgraph-project-python my_new_project
 The async context manager pattern lets the server open and close the store connection at the right points in the application lifecycle. The following example uses `AsyncSqliteStore` with semantic search:
 
 > [!NOTE]
+>
 > SQLite is not recommended for use in production deployments.
 
 ```python
@@ -56,6 +58,7 @@ async def generate_store():
 ```
 
 > [!NOTE]
+>
 > When a custom store is configured, it **replaces** the built-in Postgres store entirely. Capabilities like semantic search and TTL sweeping depend on your implementation.
 
 ## Configure `langgraph.json`
@@ -100,8 +103,6 @@ You can deploy this app as-is to LangSmith or to your self-hosted platform.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-store.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-store.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

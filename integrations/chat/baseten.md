@@ -50,7 +50,7 @@ if "BASETEN_API_KEY" not in os.environ:
     os.environ["BASETEN_API_KEY"] = getpass.getpass("Enter your Baseten API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
+To enable automated tracing (Log each step of a model's execution to debug and improve it) of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 **Enable tracing**
 
@@ -144,12 +144,11 @@ content='Buds yawn open wide—\na robin stitches the hush\nwith threads of firs
 ```
 
 > [!TIP]
+>
 > Full guides are available on [chat model invocation types](../../langchain/models.md#invocation), [message types](../../langchain/messages.md#message-types), and [content blocks](../../langchain/messages.md#standard-content-blocks).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/baseten.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/baseten.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

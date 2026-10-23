@@ -11,21 +11,25 @@ tags: [docs, langsmith, manage-organization-by-api]
 LangSmith's API supports programmatic access via API key to all of the actions available in the UI, with only a few exceptions that are noted in [User-only endpoints](#user-only-endpoints).
 
 > [!TIP]
+>
 > Prefer infrastructure-as-code? Use the [LangSmith Terraform provider](manage-with-terraform.md) to manage workspaces, roles, members, evaluators, and alerts declaratively.
 
 > [!TIP]
+>
 > Before diving into this content, it might be helpful to read the following:
 >
 > * [Conceptual guide on organizations and workspaces](administration-overview.md)
 > * [Organization setup how-to guild](set-up-hierarchy.md#set-up-an-organization)
 
 > [!NOTE]
+>
 > There are a few limitations that will be lifted soon:
 >
 > * The LangSmith SDKs do not support these organization management actions yet.
 > * Organization-scoped [service keys](administration-overview.md#service-keys) with Organization Admin permission may be used for these actions.
 
 > [!WARNING]
+>
 > Use the `X-Tenant-Id` header to specify which workspace to target. If the header is not present, operations will default to the workspace the key was initially created in if it is not organization-scoped.
 >
 > **If `X-Tenant-Id` is not specified when accessing workspace-scoped resources with an organization-scoped service key, the request will fail with `403 Forbidden`.**
@@ -67,9 +71,12 @@ Workspace level:
 * [Remove someone from a workspace](smith-api/workspaces/delete-current-workspace-member.md)
 
 > [!NOTE]
+>
 > These params should be omitted: `read_only` (deprecated), `password` and `full_name` ([basic auth](authentication-methods.md) only)
 
 ## API keys
+
+For tracing-only credentials, refer to [Create, list, and delete tracing keys](create-account-api-key.md#tracing-keys). Creation requires the dedicated workspace permission; organization key managers can use service-account credentials for deletion.
 
 * [Create a service key](smith-api/api-key/generate-api-key.md)
 * [Update a service key role](smith-api/orgs/update-org-service-key.md)
@@ -78,12 +85,15 @@ Workspace level:
 ## Security settings
 
 > [!NOTE]
+>
 > Organization Admin permissions are required to make these changes.
 
 > [!NOTE]
+>
 > "Shared resources" in this context refer to [public prompts](create-a-prompt.md#save-your-prompt), [shared runs](manage-trace.md#share-a-trace), and [shared datasets](manage-datasets.md#share-a-dataset).
 
 > [!WARNING]
+>
 > Updating these settings affects **all resources in the organization**.
 
 You can update these settings under the **Settings > Shared** tab for a workspace, or via API:
@@ -221,8 +231,6 @@ if __name__ == "__main__":
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-organization-by-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-organization-by-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

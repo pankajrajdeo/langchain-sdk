@@ -21,6 +21,10 @@ from `checkpoint_writes`. Callers compute the set via
 `delta_channels_to_snapshot(channels, counters)`; defaults to empty
 (no snapshots) when not provided.
 
+`stored_versions` are the channel versions of the last checkpoint the
+saver stored. A snapshotted channel whose version has not moved since
+then is bumped.
+
 ## Signature
 
 ```python
@@ -33,9 +37,11 @@ create_checkpoint(
     updated_channels: set[str] | None = None,
     get_next_version: GetNextVersion | None = None,
     channels_to_snapshot: set[str] | None = None,
+    stored_versions: ChannelVersions | None = None,
+    trigger_to_nodes: Mapping[str, Sequence[str]] | None = None,
 ) -> Checkpoint
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/_checkpoint.py#L149)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/_checkpoint.py#L268)

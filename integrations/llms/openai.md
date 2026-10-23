@@ -11,6 +11,7 @@ tags: [docs, integrations, llms, openai]
 > Integrate with the OpenAI LLM using LangChain Python.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of OpenAI text completion models. The latest and most popular OpenAI models are [chat completion models](../../langchain/models.md).**
 >
 > Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](../chat/openai.md).
@@ -23,7 +24,7 @@ This example goes over how to use LangChain to interact with OpenAI [models](htt
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/openai) | Downloads | Version |
+| Class | Package | Local | Serializable | [JS support](../../javascript/integrations/chat/openai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) | [`langchain-openai`](https://reference.langchain.com/python/langchain-openai) | ❌ | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-openai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-openai?style=flat-square\&label=%20) |
 
@@ -49,7 +50,7 @@ If you're routing requests through a proxy or service emulator, you can set the 
 2. `OPENAI_API_BASE` — read by LangChain at init.
 3. `OPENAI_BASE_URL` — read by the underlying `openai` SDK client.
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -137,8 +138,6 @@ For detailed documentation of all [`OpenAI`](https://reference.langchain.com/pyt
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

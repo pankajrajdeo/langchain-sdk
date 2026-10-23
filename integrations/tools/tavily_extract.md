@@ -16,7 +16,7 @@ tags: [docs, integrations, tools, tavily_extract]
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/tavily_extract) | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/tools/tavily_extract.md) | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`TavilyExtract`](https://reference.langchain.com/python/langchain-tavily/tavily_extract/TavilyExtract) | [`langchain-tavily`](https://reference.langchain.com/python/langchain-tavily/) | ✅ | ✅ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-tavily?style=flat-square\&label=%20) |
 
@@ -113,8 +113,6 @@ print(tool_msg.content[:400])
 
 We can use our tools directly with an agent executor by binding the tool to the agent. This gives the agent the ability to dynamically set the available arguments to the Tavily search tool.
 
-> **Interactive content:** [View this section in the original documentation](tavily_extract.md).
-
 ```python
 if not os.environ.get("OPENAI_API_KEY"):
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OPENAI_API_KEY:\n")
@@ -192,8 +190,6 @@ For detailed documentation of all Tavily Extract API features and configurations
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/tavily_extract.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/tavily_extract.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

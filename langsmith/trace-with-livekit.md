@@ -9,11 +9,13 @@ tags: [docs, langsmith, trace-with-livekit]
 # Trace LiveKit applications
 
 > [!NOTE]
+>
 > This integration is in beta, so its API may change.
 
 Use the LangSmith LiveKit integration to trace your [LiveKit Agents](https://docs.livekit.io/agents/) voice agents, including their transcripts and audio recordings. For high-level conventions, see [Voice tracing fundamentals](trace-voice-fundamentals.md).
 
 > [!NOTE]
+>
 > This setup requires `langsmith[livekit]>=0.11.2` and `livekit-agents>=1.6`. LiveKit Agents 1.7 and later require `langsmith[livekit]>=0.12.4`.
 
 Each conversation appears as one LangSmith trace with its pipeline events, latency, and token metrics.
@@ -170,6 +172,7 @@ async def my_agent(ctx: agents.JobContext):
 By default, the LiveKit integration will capture the recording from LiveKit if present.
 
 > [!NOTE]
+>
 > In console mode, also pass `--record` on the command line (`python agent.py console --record`). Without it LiveKit creates the recorder but never starts it, so there is no file to attach. The recording reflects what was played to the client, so a barge-in shows up truncated.
 
 ### Record with Egress
@@ -268,20 +271,21 @@ async def my_agent(ctx: agents.JobContext):
 `download_from_storage` represents your storage client's download operation. The default attachment name and MIME type are `recording.ogg` and `audio/ogg`. Set `name` or `mime_type` in `complete_recording` if your Egress output uses another format.
 
 > [!NOTE]
+>
 > Always call `complete_recording`, including on failure with `data=None`. Otherwise, the integration waits for `recording_timeout_seconds` (30 seconds by default) before exporting the trace without audio. Using `complete_recording` to capture Egress recordings requires setting a `thread_id`.
 
 ## Next steps
 
-#### [Voice fundamentals](trace-voice-fundamentals.md)
-Core conventions for tracing voice agents.
+> **[Voice fundamentals](trace-voice-fundamentals.md)**
+>
+> Core conventions for tracing voice agents.
 
-#### [Upload files with traces](upload-files-with-traces.md)
-Attach the conversation audio recording to your trace.
+> **[Upload files with traces](upload-files-with-traces.md)**
+>
+> Attach the conversation audio recording to your trace.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-livekit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-livekit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

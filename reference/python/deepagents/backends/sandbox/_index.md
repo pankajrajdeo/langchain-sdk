@@ -7,11 +7,11 @@ tags: [index, reference, python, deepagents, backends, sandbox]
 
 # reference/python/deepagents/backends/sandbox
 
-7 pages here, 27 pages including subdirectories.
+7 pages here, 28 pages including subdirectories.
 
 ## Directories
 
-- [BaseSandbox/](BaseSandbox/_index.md) - 20 pages
+- [BaseSandbox/](BaseSandbox/_index.md) - 21 pages
 
 ## Files
 

@@ -11,6 +11,7 @@ tags: [docs, langsmith, evaluate-with-opentelemetry]
 This guide shows you how to run an evaluation using OpenTelemetry tracing with LangSmith.
 
 > [!NOTE]
+>
 > [Evaluations](evaluation-concepts.md#evaluation-lifecycle) | [Datasets](evaluation-concepts.md#datasets) | [Trace with OpenTelemetry](trace-with-opentelemetry.md)
 
 If you're already using OpenTelemetry for tracing your LLM application, you can run evaluations by routing traces to an experiment session. This approach is useful when you want to evaluate applications that are instrumented with OpenTelemetry but don't use the LangSmith SDK's [`evaluate()`](https://reference.langchain.com/python/langsmith/client/Client/evaluate) function.
@@ -62,6 +63,7 @@ AWS_REGION_NAME="<your-aws-region>"
 ```
 
 > [!NOTE]
+>
 > If you're [self-hosting LangSmith](self-hosted.md), replace `OTEL_EXPORTER_OTLP_ENDPOINT` with your self-hosted URL and append `/api/v1/otel`. For example: `OTEL_EXPORTER_OTLP_ENDPOINT = "https://ai-company.com/api/v1/otel"`.
 >
 > Replace `LANGSMITH_ENDPOINT` with your LangSmith API endpoint. For example: `LANGSMITH_ENDPOINT = "https://ai-company.com/api/v1"`.
@@ -124,6 +126,7 @@ To learn more about evaluators, see [Evaluators](evaluation-concepts.md#evaluato
 First, you need an application that uses OpenTelemetry for tracing. This example uses a Strands agent, but you can use any OpenTelemetry-instrumented application. Set up OpenTelemetry to route traces to your experiment session by including the experiment ID in the OTEL headers. The general idea in this step is to have an agent or application that has been instrumented with OpenTelemetry.
 
 > [!NOTE]
+>
 > TypeScript examples are not provided for this step as the `Strands TypeScript SDK` does not currently support `OpenTelemetry` observability (as of February 2026).
 
 **Python**
@@ -290,8 +293,6 @@ Navigate to your experiment in the [LangSmith UI](https://smith.langchain.com?ut
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-with-opentelemetry.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-with-opentelemetry.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

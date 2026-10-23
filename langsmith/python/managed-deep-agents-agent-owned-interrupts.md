@@ -15,9 +15,11 @@ An agent-owned interrupt is a pause that your own code creates. A tool posts a S
 This differs from the platform-owned interrupts that `interrupt_on` creates. Those pause before a tool call, and Slack or Studio renders the approval card for you. With an agent-owned interrupt, you own the blocks, the form state, and what happens after the answer arrives. The platform only carries the answer back. For platform-owned interrupts, see [Human-in-the-loop](managed-deep-agents-tools.md#human-in-the-loop).
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 > [!NOTE]
+>
 > Agent-owned interrupts require `managed-deepagents>=0.8.0` and a [Slack channel](managed-deep-agents-channels-slack.md) on a deployed agent. Forms render only in Slack. LangSmith Studio shows the raw interrupt value.
 
 ## How it works
@@ -43,8 +45,7 @@ The built-in Slack channel's `runtime.channel.post` sends text only, so post Blo
 
 ```python
 import json
-import uuid
-
+from langsmith import uuid7
 import httpx
 from langchain.tools import tool
 from langgraph.types import interrupt
@@ -65,7 +66,7 @@ async def request_approval(amount: str, runtime: ManagedDeepAgentRuntime) -> str
     if channel is None or channel.provider != "slack":
         return "Approval forms are available only in Slack."
 
-    correlation_id = str(uuid.uuid4())
+    correlation_id = str(uuid7())
     # The tool runs again when the interrupt resumes. Post only on the first pass.
     if channel.event["type"] != "user_prompt_response":
         await post_approval_form(channel.raw_event, amount, correlation_id)
@@ -225,8 +226,6 @@ Exceeding the last three makes the modal fail to open with nothing shown to the 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-agent-owned-interrupts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-agent-owned-interrupts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

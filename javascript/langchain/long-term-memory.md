@@ -19,7 +19,8 @@ Long-term memory is built on [LangGraph stores](../langgraph/stores.md), which s
 
 To add long-term memory to an agent, create a store and pass it to [`create_agent`](https://reference.langchain.com/javascript/langchain/index/createAgent):
 
-#### InMemoryStore
+**InMemoryStore**
+
 **Google**
 
 ```ts
@@ -132,7 +133,8 @@ const agent = createAgent({
 });
 ```
 
-#### PostgreSQL
+**PostgreSQL**
+
 ```shell
 npm install @langchain/langgraph-checkpoint-postgres
 ```
@@ -271,11 +273,13 @@ const agent = createAgent({
 ```
 
 > [!NOTE]
+>
 > For other store backends, including Redis and MongoDB, see the [store integrations](../integrations/long-term-memory.md) list. For a MongoDB walkthrough, see [long-term memory with MongoDB](../integrations/memory/mongodb-long-term-memory.md).
 
 Tools can then read from and write to the store using the `runtime.store` parameter. See [Read long-term memory in tools](#read-long-term-memory-in-tools) and [Write long-term memory from tools](#write-long-term-memory-from-tools) for examples.
 
 > [!TIP]
+>
 > For a deeper dive into memory types (semantic, episodic, procedural) and strategies for writing memories, see the [Memory conceptual guide](../concepts/memory.md#long-term-memory).
 
 ## Memory storage
@@ -286,7 +290,8 @@ Each memory is organized under a custom `namespace` (similar to a folder) and a 
 
 This structure enables hierarchical organization of memories. Cross-namespace searching is then supported through content filters.
 
-#### InMemoryStore
+**InMemoryStore**
+
 ```ts
 import { InMemoryStore } from "@langchain/langgraph";
 
@@ -319,7 +324,8 @@ const items = await store.search(namespace, {
 });
 ```
 
-#### PostgreSQL
+**PostgreSQL**
+
 ```ts
 import { PostgresStore } from "@langchain/langgraph-checkpoint-postgres/store";
 
@@ -358,7 +364,8 @@ For more information about the memory store, see the [Persistence](../langgraph/
 
 ## Read long-term memory in tools
 
-#### InMemoryStore
+**InMemoryStore**
+
 **Google**
 
 ```ts
@@ -821,10 +828,12 @@ console.log(result.messages.at(-1)?.content);
  */
 ```
 
-#### [View example trace](https://smith.langchain.com/public/e103a798-8829-42a4-9a1a-9e0f8fc04c62/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/402f8832-35d4-4c95-9ebd-cb371af7366f/r)**
+>
+> Open a public LangSmith run for this example.
 
-#### PostgreSQL
+**PostgreSQL**
+
 **Google**
 
 ```ts
@@ -1154,14 +1163,14 @@ await agent.invoke(
 );
 ```
 
-#### [View example trace](https://smith.langchain.com/public/e0440c39-4561-4c13-90b3-5b2ff18037ef/r)
-Open a public LangSmith run for this example.
-
-<a id="write-long-term" />
+> **[View example trace](https://smith.langchain.com/public/3cac0150-fe8c-4346-904f-a67a8d6fb156/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Write long-term memory from tools
 
-#### InMemoryStore
+**InMemoryStore**
+
 **Google**
 
 ```ts
@@ -1575,10 +1584,12 @@ const result = await store.get(["users"], "user_123");
 console.log(result?.value); // Output: { name: "John Smith" }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/b97eea49-0f7a-439c-b94d-2e5224c2fab4/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/1329ec1b-63c9-4cea-99be-74a763a4cc16/r)**
+>
+> Open a public LangSmith run for this example.
 
-#### PostgreSQL
+**PostgreSQL**
+
 **Google**
 
 ```ts
@@ -1901,13 +1912,12 @@ const result = await store.get(["users"], "user_123");
 console.log(result?.value);
 ```
 
-#### [View example trace](https://smith.langchain.com/public/564f79cc-a377-4016-a8d3-9f5752eab516/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/85c902fd-dbd7-4d73-9d11-a09f01dace8f/r)**
+>
+> Open a public LangSmith run for this example.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/long-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/long-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

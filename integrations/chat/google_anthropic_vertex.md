@@ -11,6 +11,7 @@ tags: [docs, integrations, chat, google_anthropic_vertex]
 > Integrate with the ChatAnthropicVertex chat model using LangChain Python.
 
 > [!WARNING]
+>
 > **Claude 3 Haiku deprecation:** Starting August 23, 2026, Anthropic will terminate support for Claude 3 Haiku. Migrate to Claude Haiku 4.5 (`claude-haiku-4-5@20251001`), which is Generally Available on Gemini Enterprise Agent Platform. See [Anthropic's model deprecation policy](https://docs.anthropic.com/en/docs/resources/model-deprecations) for details.
 
 > [Anthropic Claude](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) models on Gemini Enterprise Agent Platform offer fully managed and serverless models as APIs. To use a Claude model on Gemini Enterprise Agent Platform, send a request directly to the Gemini Enterprise Agent Platform API endpoint. Because Anthropic Claude models use a managed API, there's no need to provision or manage infrastructure.
@@ -33,6 +34,7 @@ from langchain_google_vertexai.model_garden import ChatAnthropicVertex
 ```
 
 > [!NOTE]
+>
 > Specify the correct [Claude model versions](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude#claude-opus). Use model identifiers that include a date suffi when possible (e.g., `claude-haiku-4-5@20251001`).
 
 ```python
@@ -114,8 +116,6 @@ for token in stream.text:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_anthropic_vertex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_anthropic_vertex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

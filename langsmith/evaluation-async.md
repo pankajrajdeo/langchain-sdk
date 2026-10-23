@@ -9,11 +9,13 @@ tags: [docs, langsmith, evaluation-async]
 # How to run an evaluation asynchronously
 
 > [!NOTE]
+>
 > [Evaluations](evaluation-concepts.md#evaluation-lifecycle) | [Evaluators](evaluation-concepts.md#evaluators) | [Datasets](evaluation-concepts.md#datasets) | [Experiments](evaluation-concepts.md#experiment)
 
-We can run evaluations asynchronously via the SDK using [aevaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._arunner.aevaluate), which accepts all of the same arguments as [evaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) but expects the application function to be asynchronous. To learn more, see [how to use the `evaluate()` function](evaluate-llm-application.md).
+We can run evaluations asynchronously via the SDK using [aevaluate()](https://reference.langchain.com/python/langsmith/evaluation/_arunner/aevaluate), which accepts all of the same arguments as [evaluate()](https://reference.langchain.com/python/langsmith/evaluation/_runner/evaluate) but expects the application function to be asynchronous. To learn more, see [how to use the `evaluate()` function](evaluate-llm-application.md).
 
 > [!NOTE]
+>
 > This guide is only relevant when using the Python SDK. In JS/TS the `evaluate()` function is already async. For more information, see [Evaluate LLM applications](evaluate-llm-application.md).
 
 ## Use `aevaluate()`
@@ -81,8 +83,6 @@ results = await ls_client.aevaluate(
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-async.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-async.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

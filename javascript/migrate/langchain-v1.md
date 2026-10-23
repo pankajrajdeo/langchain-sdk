@@ -1,6 +1,6 @@
 ---
 title: "LangChain v1 migration guide"
-description: "Prompt: Migrate a codebase to LangChain v1. Migrate this codebase to LangChain v1 (requires langchain and @langchain/core at v1, and Node.js 22+)."
+description: "Migrate a codebase to LangChain v1."
 source: "https://docs.langchain.com/oss/javascript/migrate/langchain-v1"
 category: "docs"
 tags: [docs, javascript, migrate, langchain-v1]
@@ -8,7 +8,8 @@ tags: [docs, javascript, migrate, langchain-v1]
 
 # LangChain v1 migration guide
 
-> **Prompt:** Migrate a codebase to LangChain v1.
+Migrate a codebase to LangChain v1.
+
 Migrate this codebase to LangChain v1 (requires `langchain` and `@langchain/core` at v1, and Node.js 22+).
 
 Key changes:
@@ -604,6 +605,7 @@ const result = await agent.invoke(
 ```
 
 > [!NOTE]
+>
 > The old `config.configurable` pattern still works for backward compatibility, but using the new `context` parameter is recommended for new applications or applications migrating to v1.
 
 ***
@@ -720,6 +722,7 @@ const model = await initChatModel("gpt-5-nano", {
 ```
 
 > [!NOTE]
+>
 > Learn more: [Messages](../langchain/messages.md#message-content) and [Standard content blocks](../langchain/messages.md#standard-content-blocks). See [Multimodal](../langchain/messages.md#multimodal) for input examples.
 
 ***
@@ -797,74 +800,69 @@ Legacy functionality outside the focus of standard interfaces and agents has bee
 
 Methods, functions, and other objects that were already deprecated and slated for removal in 1.0 have been deleted.
 
-<details>
-<summary>View removed deprecated APIs</summary>
-
-The following deprecated APIs have been removed in v1:
-
-#### Core functionality
-
-* `TraceGroup` - Use LangSmith tracing instead
-* `BaseDocumentLoader.loadAndSplit` - Use `.load()` followed by a text splitter
-* `RemoteRunnable` - No longer supported
-
-#### Prompts
-
-* `BasePromptTemplate.serialize` and `.deserialize` - Use JSON serialization directly
-* `ChatPromptTemplate.fromPromptMessages` - Use `ChatPromptTemplate.fromMessages`
-
-#### Retrievers
-
-* `BaseRetrieverInterface.getRelevantDocuments` - Use `.invoke()` instead
-
-#### Runnables
-
-* `Runnable.bind` - Use `.bindTools()` or other specific binding methods
-* `Runnable.map` - Use `.batch()` instead
-* `RunnableBatchOptions.maxConcurrency` - Use `maxConcurrency` in the config object
-
-#### Chat models
-
-* `BaseChatModel.predictMessages` - Use `.invoke()` instead
-* `BaseChatModel.predict` - Use `.invoke()` instead
-* `BaseChatModel.serialize` - Use JSON serialization directly
-* `BaseChatModel.callPrompt` - Use `.invoke()` instead
-* `BaseChatModel.call` - Use `.invoke()` instead
-
-#### LLMs
-
-* `BaseLLMParams.concurrency` - Use `maxConcurrency` in the config object
-* `BaseLLM.call` - Use `.invoke()` instead
-* `BaseLLM.predict` - Use `.invoke()` instead
-* `BaseLLM.predictMessages` - Use `.invoke()` instead
-* `BaseLLM.serialize` - Use JSON serialization directly
-
-#### Streaming
-
-* `createChatMessageChunkEncoderStream` - Use `.stream()` method directly
-
-#### Tracing
-
-* `BaseTracer.runMap` - Use LangSmith tracing APIs
-* `getTracingCallbackHandler` - Use LangSmith tracing
-* `getTracingV2CallbackHandler` - Use LangSmith tracing
-* `LangChainTracerV1` - Use LangSmith tracing
-
-#### Memory and storage
-
-* `BaseListChatMessageHistory.addAIChatMessage` - Use `.addMessage()` with `AIMessage`
-* `BaseStoreInterface` - Use specific store implementations
-
-#### Utilities
-
-* `getRuntimeEnvironmentSync` - Use async `getRuntimeEnvironment()`
-
-</details>
+> **View removed deprecated APIs**
+>
+> The following deprecated APIs have been removed in v1:
+>
+> #### Core functionality
+>
+> * `TraceGroup` - Use LangSmith tracing instead
+> * `BaseDocumentLoader.loadAndSplit` - Use `.load()` followed by a text splitter
+> * `RemoteRunnable` - No longer supported
+>
+> #### Prompts
+>
+> * `BasePromptTemplate.serialize` and `.deserialize` - Use JSON serialization directly
+> * `ChatPromptTemplate.fromPromptMessages` - Use `ChatPromptTemplate.fromMessages`
+>
+> #### Retrievers
+>
+> * `BaseRetrieverInterface.getRelevantDocuments` - Use `.invoke()` instead
+>
+> #### Runnables
+>
+> * `Runnable.bind` - Use `.bindTools()` or other specific binding methods
+> * `Runnable.map` - Use `.batch()` instead
+> * `RunnableBatchOptions.maxConcurrency` - Use `maxConcurrency` in the config object
+>
+> #### Chat models
+>
+> * `BaseChatModel.predictMessages` - Use `.invoke()` instead
+> * `BaseChatModel.predict` - Use `.invoke()` instead
+> * `BaseChatModel.serialize` - Use JSON serialization directly
+> * `BaseChatModel.callPrompt` - Use `.invoke()` instead
+> * `BaseChatModel.call` - Use `.invoke()` instead
+>
+> #### LLMs
+>
+> * `BaseLLMParams.concurrency` - Use `maxConcurrency` in the config object
+> * `BaseLLM.call` - Use `.invoke()` instead
+> * `BaseLLM.predict` - Use `.invoke()` instead
+> * `BaseLLM.predictMessages` - Use `.invoke()` instead
+> * `BaseLLM.serialize` - Use JSON serialization directly
+>
+> #### Streaming
+>
+> * `createChatMessageChunkEncoderStream` - Use `.stream()` method directly
+>
+> #### Tracing
+>
+> * `BaseTracer.runMap` - Use LangSmith tracing APIs
+> * `getTracingCallbackHandler` - Use LangSmith tracing
+> * `getTracingV2CallbackHandler` - Use LangSmith tracing
+> * `LangChainTracerV1` - Use LangSmith tracing
+>
+> #### Memory and storage
+>
+> * `BaseListChatMessageHistory.addAIChatMessage` - Use `.addMessage()` with `AIMessage`
+> * `BaseStoreInterface` - Use specific store implementations
+>
+> #### Utilities
+>
+> * `getRuntimeEnvironmentSync` - Use async `getRuntimeEnvironment()`
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/migrate/langchain-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/migrate/langchain-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

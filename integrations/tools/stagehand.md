@@ -13,6 +13,7 @@ tags: [docs, integrations, tools, stagehand]
 Stagehand is an open-source SDK for browser agents, backed by [Browserbase](https://browserbase.com)—the complete platform to run agents that use the web like humans. The integration ships a ready-made MCP server that exposes three tools—`run`, `snapshot`, and `screenshot`—directly to your Deep Agent, with no custom tool definitions required.
 
 > [!NOTE]
+>
 > Stagehand ships this integration from its own repository. Clone the repo and run the examples from `packages/integrations/deepagents`.
 
 ## Tools
@@ -106,6 +107,7 @@ asyncio.run(main())
 ```
 
 > [!WARNING]
+>
 > Keep the [`MCPAdapter`](https://reference.langchain.com/python/langchain/mcp/adapter/MCPAdapter) context manager open for the duration of the agent run. The browser session and snapshot IDs are tied to the underlying stdio process — closing the adapter ends the session.
 
 ## Server configuration
@@ -121,20 +123,21 @@ asyncio.run(main())
 | `BROWSERBASE_API_KEY` | Unset | Required for Browserbase |
 
 > [!NOTE]
+>
 > The MCP server and the agent run in separate Python environments. Stagehand requires `websockets>=16.1.1` while the current LangGraph SDK requires `websockets<16` — the stdio transport isolates these dependency sets.
 
 ## Related resources
 
-#### [Integration source + examples](https://github.com/browserbase/stagehand/tree/main/packages/integrations/deepagents)
-MCP server, managed tools, and runnable agent examples.
+> **[Integration source + examples](https://github.com/browserbase/stagehand/tree/main/packages/integrations/deepagents)**
+>
+> MCP server, managed tools, and runnable agent examples.
 
-#### [Browserbase provider page](../providers/browserbase.md)
-Full Browserbase provider overview and setup.
+> **[Browserbase provider page](../providers/browserbase.md)**
+>
+> Full Browserbase provider overview and setup.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/stagehand.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/stagehand.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

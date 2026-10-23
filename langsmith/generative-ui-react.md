@@ -9,6 +9,7 @@ tags: [docs, langsmith, generative-ui-react]
 # How to implement generative user interfaces with LangGraph
 
 > [!NOTE]
+>
 > **Prerequisites**
 >
 > * [LangSmith](observability.md)
@@ -17,7 +18,7 @@ tags: [docs, langsmith, generative-ui-react]
 
 Generative user interfaces (Generative UI) allows agents to go beyond text and generate rich user interfaces. This enables creating more interactive and context-aware applications where the UI adapts based on the conversation flow and AI responses.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/generative-ui-sample.jpg?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=105943c6c28853fad0a9bc3b4af3a999" alt="Agent Chat showing a prompt about booking/lodging and a generated set of hotel listing cards (images, titles, prices, locations) rendered inline as UI components." width="1814" height="898" data-path="langsmith/images/generative-ui-sample.jpg" />
+![Agent Chat showing a prompt about booking/lodging and a generated set of hotel listing cards (images, titles, prices, locations) rendered inline as UI components.](https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/generative-ui-sample.jpg?fit=max\&auto=format\&n=JOyLr_spVEW0t2KF\&q=85\&s=105943c6c28853fad0a9bc3b4af3a999)
 
 LangSmith supports colocating your React components with your graph code. This allows you to focus on building specific UI components for your graph while easily plugging into existing chat interfaces such as [Agent Chat](https://agentchat.vercel.app) and loading the code only when actually needed.
 
@@ -57,7 +58,8 @@ LangSmith will automatically bundle your UI components code and styles and serve
 
 CSS and Tailwind 4.x is also supported out of the box, so you can freely use Tailwind classes as well as `shadcn/ui` in your UI components.
 
-#### src/agent/ui.tsx
+**src/agent/ui.tsx**
+
 ```tsx
 import "./styles.css";
 
@@ -70,16 +72,17 @@ export default {
 };
 ```
 
-#### src/agent/styles.css
+**src/agent/styles.css**
+
 ```css
 @import "tailwindcss";
 ```
 
 ### 2. Send the UI components in your graph
 
-#### Python
+**Python**
+
 ```python
-import uuid
 from typing import Annotated, Sequence, TypedDict
 
 from langchain.messages import AIMessage
@@ -105,7 +108,7 @@ async def weather(state: AgentState):
     )
 
     message = AIMessage(
-        id=str(uuid.uuid4()),
+        id=str(uuid7()),
         content=f"Here's the weather for {weather['city']}",
     )
 
@@ -119,10 +122,12 @@ workflow.add_edge("__start__", "weather")
 graph = workflow.compile()
 ```
 
-#### JS
+**JS**
+
 Use the `typedUi` utility to emit UI elements from your agent nodes:
 
 ```typescript
+import { uuid7 } from "langsmith";
 import {
   typedUi,
   uiMessageReducer,
@@ -158,7 +163,7 @@ export const graph = new StateGraph(AgentState)
       .invoke(state.messages);
 
     const response = {
-      id: crypto.randomUUID(),
+      id: uuid7(),
       type: "ai",
       content: `Here's the weather for ${weather.city}`,
     };
@@ -241,7 +246,8 @@ You can provide a fallback UI to be rendered when the components are loading.
 
 By default `LoadExternalComponent` will use the `assistantId` from `useStream()` hook to fetch the code for UI components. You can customise this by providing a `namespace` prop to the `LoadExternalComponent` component.
 
-#### src/app/page.tsx
+**src/app/page.tsx**
+
 ```tsx
 <LoadExternalComponent
   stream={thread}
@@ -250,7 +256,8 @@ By default `LoadExternalComponent` will use the `assistantId` from `useStream()`
 />
 ```
 
-#### langgraph.json
+**langgraph.json**
+
 ```json
 {
   "ui": {
@@ -337,7 +344,8 @@ const { thread, submit } = useStream({
 
 Then you can push updates to the UI component by calling `ui.push()` / `push_ui_message()` with the same ID as the UI message you wish to update.
 
-#### Python
+**Python**
+
 ```python
 from typing import Annotated, Sequence, TypedDict
 
@@ -394,7 +402,8 @@ async def writer_node(state: AgentState):
     return {"messages": [message]}
 ```
 
-#### JS
+**JS**
+
 ```tsx
 import {
   Annotation,
@@ -469,7 +478,8 @@ async function writerNode(
 }
 ```
 
-#### ui.tsx
+**ui.tsx**
+
 ```tsx
 function WriterComponent(props: { title: string; content?: string }) {
   return (
@@ -489,7 +499,8 @@ export default {
 
 Similar to how messages can be removed from the state by appending a RemoveMessage you can remove an UI message from the state by calling `remove_ui_message` / `ui.delete` with the ID of the UI message.
 
-#### Python
+**Python**
+
 ```python
 from langgraph.graph.ui import push_ui_message, delete_ui_message
 
@@ -500,7 +511,8 @@ message = push_ui_message("weather", {"city": "London"})
 delete_ui_message(message["id"])
 ```
 
-#### JS
+**JS**
+
 ```tsx
 // push message
 const message = ui.push({ name: "weather", props: { city: "London" } });
@@ -515,8 +527,6 @@ ui.delete(message.id);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/generative-ui-react.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/generative-ui-react.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

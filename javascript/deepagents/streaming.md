@@ -11,6 +11,7 @@ tags: [docs, javascript, deepagents, streaming]
 > Stream real-time updates from deep agent runs and subagent execution
 
 > [!TIP]
+>
 > For new applications, we recommend [event streaming](event-streaming.md)—the typed-projection API introduced in Deep Agents v0.6. Event streaming gives you separate iterators per projection (subagents, messages, tool calls, values) so you can consume them independently instead of branching on `stream_mode` chunks.
 
 Deep Agents build on LangGraph's streaming infrastructure with first-class support for subagent streams. When a deep agent delegates work to subagents, you can stream updates from each subagent independently—tracking progress, LLM tokens, and tool calls in real time.
@@ -299,8 +300,9 @@ for await (const [namespace, chunk] of await agent.stream(
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/c168526d-4120-4f09-8714-4a45a6446598/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/ba3b5afc-8b2f-4e17-af79-b43c46a2a0a3/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Namespaces
 
@@ -336,8 +338,9 @@ for await (const [namespace, chunk] of await agent.stream(
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/29fabe2e-590d-45a1-bb2e-6d7491103625/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/80ab06ee-385f-4713-864c-c15ab35d76b3/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Subagent progress
 
@@ -735,8 +738,9 @@ for await (const [namespace, chunk] of await agent.stream(
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/6892dbbe-d797-44da-974f-d78cd433299e/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/3ad634a9-907e-49bb-9415-c20c70260b02/r)**
+>
+> Open a public LangSmith run for this example.
 
 ```shell
 Main agent step: model_request
@@ -801,8 +805,9 @@ for await (const [namespace, chunk] of await agent.stream(
 process.stdout.write("\n");
 ```
 
-#### [View example trace](https://smith.langchain.com/public/eae65ae1-ab35-412c-8769-465a7ee1ac0e/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/78ee935c-72fb-4c0d-9b7d-c73825f5ba7a/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Tool calls
 
@@ -863,8 +868,9 @@ for await (const [namespace, chunk] of await agent.stream(
 process.stdout.write("\n");
 ```
 
-#### [View example trace](https://smith.langchain.com/public/b691dfbe-3eea-472b-92a3-7200ce7fd48d/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/319a8e85-061a-40d1-a368-28f222a3e08c/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Custom updates
 
@@ -1402,8 +1408,9 @@ for await (const [namespace, chunk] of await agent.stream(
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/8b328f38-ab1e-42f3-be42-4364118ec3f1/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/8eac6b1d-4f60-437c-b35f-e7f40443033b/r)**
+>
+> Open a public LangSmith run for this example.
 
 ```shell
 [tools:call_abc123] { status: 'fetching', progress: 0 }
@@ -1472,8 +1479,9 @@ for await (const [namespace, mode, data] of await agent.stream(
 process.stdout.write("\n");
 ```
 
-#### [View example trace](https://smith.langchain.com/public/abec3125-178c-474a-b0c4-9e4cb553eb63/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/0f8a930f-c5ba-43e2-9fbb-39bf5066a749/r)**
+>
+> Open a public LangSmith run for this example.
 
 ## Common patterns
 
@@ -1595,8 +1603,9 @@ for (const [id, sub] of activeSubagents) {
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/7c7546e0-f99a-4655-bf0c-550f94ebdff3/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/990d5bae-eb8d-4170-b578-6131293d657b/r)**
+>
+> Open a public LangSmith run for this example.
 
 ### Handle human-in-the-loop interrupts
 
@@ -1662,8 +1671,6 @@ for namespace, mode, data in agent.stream(
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

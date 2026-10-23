@@ -16,7 +16,7 @@ This will help you get started with Mistral [chat models](../../langchain/models
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/mistral) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/chat/mistral.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatMistralAI`](https://reference.langchain.com/python/langchain-mistralai/chat_models/ChatMistralAI) | [`langchain-mistralai`](https://reference.langchain.com/python/langchain-mistralai) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_mistralai?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_mistralai?style=flat-square\&label=%20) |
 
@@ -42,7 +42,7 @@ if "MISTRAL_API_KEY" not in os.environ:
     os.environ["MISTRAL_API_KEY"] = getpass.getpass("Enter your Mistral API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -106,8 +106,6 @@ Head to the [API reference](https://reference.langchain.com/python/langchain-mis
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/mistralai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/mistralai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

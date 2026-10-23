@@ -17,7 +17,8 @@ In an agent-based workspace, running a report against a single [environment](age
 Insights uses hierarchical categorization to make sense of your data and highlight actionable trends.
 
 > [!NOTE]
-> Insights is available for LangSmith Plus and Enterprise [plans](pricing-plans.md).
+>
+> Insights is available for LangSmith Plus and Enterprise [plans](https://docs.langchain.com/langsmith/pricing-plans.md).
 
 ## Prerequisites
 
@@ -27,19 +28,23 @@ Insights uses hierarchical categorization to make sense of your data and highlig
 
 ## Generate your first Insights report
 
-#### UI
+**UI**
+
 1. Navigate to **Tracing** in the left-hand menu and select a tracing project or an agent and environment. In an agent-based workspace, a report runs against one environment rather than the whole agent.
 2. Click **+New** in the top right corner then **New Insights Report** to generate new insights over it.
 3. Enter a name for your job.
 4. If you haven't already, [configure a model](model-configurations.md) for Insights in your workspace settings.
 5. Answer the guided questions to focus your Insights Report on what you want to learn about your agent, then click **Run job**.
 
-Toggle to Manual mode to [configure the job manually](#configure-a-job).
+> [!TIP]
+>
+> Toggle to Manual mode to [configure the job manually](#configure-a-job).
 
 This will kick off a background Insights Report. Reports can take up to 30 minutes to complete.
 
-#### SDK
-You can generate Insights Reports over data stored outside LangSmith using the [Python SDK](smith-python-sdk.md). This allows you to analyze chat histories from your production systems, logs, or other sources.
+**SDK**
+
+You can generate Insights Reports over data stored outside LangSmith using the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk.md). This allows you to analyze chat histories from your production systems, logs, or other sources.
 
 When you call `generate_insights()`, the SDK will:
 
@@ -76,20 +81,35 @@ report = client.generate_insights(
 # client.poll_insights(report=report)
 ```
 
+**CLI**
+
+The [LangSmith CLI](langsmith-cli.md) creates a report from a JSON file that uses the fields of a [manual configuration](#manual-configuration):
+
+```bash
+langsmith insights create --project my-app --config insights.json --wait
+```
+
+For the file format and the commands that run, list, and update saved configurations, see [Manage insights](langsmith-cli.md#manage-insights).
+
 > [!NOTE]
+>
 > Generating insights over 1,000 threads typically costs \$1.00-\$2.00 with OpenAI models and \$3.00-\$4.00 with current Anthropic models. The cost scales with the number of threads sampled and the size of each thread.
 
 ## Understand the results
 
 Once your job has completed, you can navigate to the **Insights** tab where you'll see a table of Insights Report. Each Report contains insights generated over a specific sample of traces from the tracing project.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/lC4dVnXBXgUXGkP0/langsmith/images/insights-job-results.png?fit=max&auto=format&n=lC4dVnXBXgUXGkP0&q=85&s=1a95e426b2984bcf417f92d1c4d739b6" width="2964" height="1814" data-path="langsmith/images/insights-job-results.png" />
+![](https://mintcdn.com/langchain-5e9cc07a/lC4dVnXBXgUXGkP0/langsmith/images/insights-job-results.png?fit=max\&auto=format\&n=lC4dVnXBXgUXGkP0\&q=85\&s=1a95e426b2984bcf417f92d1c4d739b6)
+
+Insights Reports for a single tracing project
 
 Click into your job to see traces organized into a set of auto-generated categories.
 
 You can drill down through categories and subcategories to view the underlying traces, feedback, and run statistics.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4-kFQm9_42J5OnwH/langsmith/images/insights-nav.gif?s=6a22bfd0d94262b7aa78468a8379ea0f" width="800" height="516" data-path="langsmith/images/insights-nav.gif" />
+![](https://mintcdn.com/langchain-5e9cc07a/4-kFQm9_42J5OnwH/langsmith/images/insights-nav.gif?s=6a22bfd0d94262b7aa78468a8379ea0f)
+
+Common topics of conversations with the [https://chat.langchain.com](https://chat.langchain.com) chatbot
 
 ### Executive summary
 
@@ -196,6 +216,7 @@ You must specify what parts of each trace to send to the summarizer using at lea
 You can access nested fields using dot notation. For example, `{{run.inputs.foo.bar}}` includes only the `bar` field within `foo` in the last run's inputs.
 
 > [!NOTE]
+>
 > For projects with [threads](threads.md), Insights analyzes full conversations. Only the most recent root run from each thread is used for `run.*` variables. Use `all_thread_messages` to access the complete conversation history.
 
 #### Attributes
@@ -237,8 +258,6 @@ Select from previously saved configs in the dropdown in the top-left corner of t
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/insights.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/insights.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

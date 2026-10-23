@@ -71,11 +71,11 @@ Austin airport has 98 outgoing routes.
 
 ### Adding message history
 
-The Neptune openCypher QA chain has the ability to be wrapped by [`RunnableWithMessageHistory`](https://python.langchain.com/v0.2/api_reference/core/runnables/langchain_core.runnables.history.RunnableWithMessageHistory.html#langchain_core.runnables.history.RunnableWithMessageHistory). This adds message history to the chain, allowing us to create a chatbot that retains conversation state across multiple invocations.
+The Neptune openCypher QA chain has the ability to be wrapped by [`RunnableWithMessageHistory`](https://reference.langchain.com/python/langchain-core/runnables/history/RunnableWithMessageHistory). This adds message history to the chain, allowing us to create a chatbot that retains conversation state across multiple invocations.
 
 To start, we need a way to store and load the message history. For this purpose, each thread will be created as an instance of [`InMemoryChatMessageHistory`](https://reference.langchain.com/python/langchain-core/chat_history/InMemoryChatMessageHistory), and stored into a dictionary for repeated access.
 
-(Also see: [python.langchain.com/docs/versions/migrating\_memory/chat\_history/#chatmessagehistory](https://python.langchain.com/docs/versions/migrating_memory/chat_history/#chatmessagehistory))
+(Also see: [Short-term memory](../../langchain/short-term-memory.md))
 
 ```python
 from langchain_core.chat_history import InMemoryChatMessageHistory
@@ -156,8 +156,6 @@ The four European destinations you can fly to directly from Austin airport are:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/amazon_neptune_open_cypher.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/amazon_neptune_open_cypher.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

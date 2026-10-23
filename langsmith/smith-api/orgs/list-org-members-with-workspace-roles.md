@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/orgs/current/members:
     get:
@@ -273,7 +276,7 @@ paths:
               schema:
                 type: string
             X-Members-List-All-Workspaces:
-              description: true if caller has organization:manage
+              description: true if caller has organization:members:manage
               schema:
                 type: string
             X-Pagination-Total:

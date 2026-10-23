@@ -10,7 +10,7 @@ tags: [docs, langsmith, control-plane]
 
 The *control plane* is the part of LangSmith that manages deployments. It includes the control plane UI, where users create and update [Agent Servers](agent-server.md), and the control plane APIs, which support the UI and provide programmatic access.
 
-When you make an update through the control plane, the update is stored in the control plane state. The [data plane](data-plane.md) “listener” polls for these updates by calling the control plane APIs. The control plane never connects to the data plane directly.
+When you make an update through the control plane, the update is stored in the control plane state. The [data plane](data-plane.md) listener polls for these updates by calling the control plane APIs. The control plane never connects to the data plane directly.
 
 ## Control plane UI
 
@@ -25,7 +25,7 @@ From the control plane UI, you can:
 * View deployment metrics such as CPU and memory usage.
 * Delete a deployment.
 
-The Control plane UI is embedded in [LangSmith](https://docs.smith.langchain.com).
+The Control plane UI is embedded in [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-control-plane).
 
 ## Control plane API
 
@@ -45,7 +45,7 @@ A revision is an iteration of a deployment. When a new deployment is created, an
 
 ### Listeners
 
-A listener is an instance of a ["listener" application](data-plane.md#listener-application). A listener contains metadata about the application (e.g. version) and metadata about the compute infrastructure where it can deploy to (e.g. Kubernetes namespaces).
+A listener is an instance of a [listener application](data-plane.md#listener-application). A listener contains metadata about the application (e.g. version) and metadata about the compute infrastructure where it can deploy to (e.g. Kubernetes namespaces).
 
 ## Control plane features
 
@@ -59,7 +59,7 @@ Infrastructure for deployments and revisions are provisioned and deployed asynch
 * When a subsequent revision is created for a deployment, there is no database creation step. The deployment time for a subsequent revision is significantly faster compared to the deployment time of the initial revision.
 * The deployment process for each revision contains a build step, which can take up to a few minutes.
 
-The control plane and [data plane](data-plane.md) "listener" application coordinate to achieve asynchronous deployments.
+The control plane and [data plane](data-plane.md) listener application coordinate to achieve asynchronous deployments.
 
 ### Monitoring
 
@@ -82,8 +82,6 @@ When a deployment is deleted, the traces and the tracing project are not deleted
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

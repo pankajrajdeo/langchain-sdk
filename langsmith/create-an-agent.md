@@ -15,7 +15,8 @@ You can create an [agent](agents.md) through four routes. The route you choose s
 Pick a route based on where the agent runs. If you build the agent in LangSmith, LangSmith creates the agent as you build it. If the agent runs on your own machines, LangSmith can create the agent when the agent sends its first trace.
 
 > [!NOTE]
-> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+>
+> Agent-based workspaces are available on [LangSmith Cloud](cloud.md). They are not available on [self-hosted](self-hosted.md) LangSmith. To check whether your workspace is agent-based, look at the control at the top left. In an agent-based workspace, it is a workspace switcher that names your workspace. In a [project-based](observability-concepts.md#tracing-projects) workspace, it shows the LangSmith logo.
 
 ## Compare the four routes
 
@@ -60,7 +61,7 @@ To create the agent before any trace arrives, name it in either of two places:
 
 Both take an **Agent name** and, in its own field, an **Agent ID**, with a note that the ID is used in URLs and API calls and cannot be changed later. Both require permission to create projects. The agent switcher has the same **+** button, beside its search box, for users with the same permission, wherever the switcher appears, and it opens the **New Agent** panel rather than the dialog.
 
-Creating the agent first is optional. [Tracing to an identifier that does not exist](log-traces-to-agent.md#addressing-an-agent-that-does-not-exist) creates the agent under the value you sent, so the dialog is for naming an agent ahead of its first run.
+Creating the agent first is optional. [Tracing to an identifier that does not exist](log-traces-to-agent.md#send-traces-to-an-agent) creates the agent under the value you sent, so the dialog is for naming an agent ahead of its first run.
 
 ## See also
 
@@ -72,8 +73,6 @@ Creating the agent first is optional. [Tracing to an identifier that does not ex
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/create-an-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/create-an-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

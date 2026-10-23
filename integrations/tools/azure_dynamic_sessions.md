@@ -16,7 +16,7 @@ Azure Container Apps dynamic sessions provides a secure and scalable way to run 
 
 By default, the `SessionsPythonREPLTool` tool uses `DefaultAzureCredential` to authenticate with Azure. Locally, it'll use your credentials from the Azure CLI or VS Code. Install the Azure CLI and log in with `az login` to authenticate.
 
-To use the code interpreter you'll also need to create a session pool, which you can do by following the [session pool creation instructions](https://learn.microsoft.com/en-us/azure/container-apps/sessions-code-interpreter?tabs=azure-cli#create-a-session-pool-with-azure-cli). Once that's done you should have a pool management session endpoint, which you'll need to set below:
+To use the code interpreter you'll also need to create a session pool, which you can do by following the [session pool creation instructions](https://learn.microsoft.com/en-us/azure/container-apps/session-pool?tabs=azure-cli#configure-a-pool). Once that's done you should have a pool management session endpoint, which you'll need to set below:
 
 ```python
 import getpass
@@ -157,15 +157,13 @@ img = Image.open(io.BytesIO(base64.decodebytes(bytes(base64_str, "utf-8"))))
 display(img)
 ```
 
-<p>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/azure-dynamic-sessions-plot.png?fit=max&auto=format&n=x_qjL89cw5RbZp-3&q=85&s=fe25680aedf52faef50a8012ac1abba7" width="587" height="453" data-path="images/integrations/azure-dynamic-sessions-plot.png" />
-</p>
+![](https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/azure-dynamic-sessions-plot.png?fit=max\&auto=format\&n=x_qjL89cw5RbZp-3\&q=85\&s=fe25680aedf52faef50a8012ac1abba7)
 
 ## Simple agent example
 
 ```python
 from langchain_classic import hub
-from langchain.agents import AgentExecutor, create_tool_calling_agent
+from langchain_classic.agents import AgentExecutor, create_tool_calling_agent
 from langchain_azure_dynamic_sessions import SessionsPythonREPLTool
 from langchain_openai import ChatOpenAI
 
@@ -219,8 +217,6 @@ For a more complex agent example check out the [LangGraph data analyst example](
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_dynamic_sessions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_dynamic_sessions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

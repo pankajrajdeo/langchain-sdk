@@ -12,14 +12,17 @@ tags: [docs, releases, langgraph-v1]
 
 It's designed to work hand-in-hand with [LangChain v1](langchain-v1.md) (whose `create_agent` is built on LangGraph) so you can start high-level and drop down to granular control when needed.
 
-#### Stable core APIs
-Graph primitives (state, nodes, edges) and the execution/runtime model are unchanged, making upgrades straightforward.
+> **Stable core APIs**
+>
+> Graph primitives (state, nodes, edges) and the execution/runtime model are unchanged, making upgrades straightforward.
 
-#### Reliability, by default
-Durable execution with checkpointing, persistence, streaming, and human-in-the-loop continues to be first-class.
+> **Reliability, by default**
+>
+> Durable execution with checkpointing, persistence, streaming, and human-in-the-loop continues to be first-class.
 
-#### Seamless with LangChain v1
-LangChain's `create_agent` runs on LangGraph. Use LangChain for a fast start; drop to LangGraph for custom orchestration.
+> **Seamless with LangChain v1**
+>
+> LangChain's `create_agent` runs on LangGraph. Use LangChain for a fast start; drop to LangGraph for custom orchestration.
 
 To upgrade,
 
@@ -48,23 +51,29 @@ Please report any issues discovered with 1.0 on [GitHub](https://github.com/lang
 
 ## Additional resources
 
-#### [LangGraph 1.0](https://blog.langchain.com/langchain-langchain-1-0-alpha-releases/)
-Read the announcement
+> **[LangGraph 1.0](https://blog.langchain.com/langchain-langchain-1-0-alpha-releases/)**
+>
+> Read the announcement
 
-#### [Overview](../langgraph/overview.md)
-What LangGraph is and when to use it
+> **[Overview](../langgraph/overview.md)**
+>
+> What LangGraph is and when to use it
 
-#### [Graph API](../langgraph/graph-api.md)
-Build graphs with state, nodes, and edges
+> **[Graph API](../langgraph/graph-api.md)**
+>
+> Build graphs with state, nodes, and edges
 
-#### [LangChain Agents](../langchain/agents.md)
-High-level agents built on LangGraph
+> **[LangChain Agents](../langchain/agents.md)**
+>
+> High-level agents built on LangGraph
 
-#### [Migration guide](../migrate/langgraph-v1.md)
-How to migrate to LangGraph v1
+> **[Migration guide](../migrate/langgraph-v1.md)**
+>
+> How to migrate to LangGraph v1
 
-#### [GitHub](https://github.com/langchain-ai/langgraph)
-Report issues or contribute
+> **[GitHub](https://github.com/langchain-ai/langgraph)**
+>
+> Report issues or contribute
 
 ## See also
 
@@ -73,8 +82,6 @@ Report issues or contribute
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

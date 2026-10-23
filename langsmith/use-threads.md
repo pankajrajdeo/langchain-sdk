@@ -53,18 +53,21 @@ sequenceDiagram
 * Later runs have access to the full conversation history.
 
 > [!NOTE]
-> - **[Assistants](assistants.md)** define the configuration (model, prompts, tools) for how your graph executes. When creating a run, you can specify either a **graph ID** (e.g., `"agent"`) to use the default assistant, or an **assistant ID** (UUID) to use a specific configuration.
-> - **Threads** maintain the state and conversation history.
-> - **Runs** combine an assistant and thread to execute your graph with a specific configuration and state.
+>
+> * **[Assistants](assistants.md)** define the configuration (model, prompts, tools) for how your graph executes. When creating a run, you can specify either a **graph ID** (e.g., `"agent"`) to use the default assistant, or an **assistant ID** (UUID) to use a specific configuration.
+> * **Threads** maintain the state and conversation history.
+> * **Runs** combine an assistant and thread to execute your graph with a specific configuration and state.
 
 > [!TIP]
+>
 > Best practice: When tracing runs in a thread (conversation), ensure that `thread_id` is set on all runs—both parent and child runs. This is required for thread filtering, token counting, and thread-level evaluations to work correctly.
 
 ## Create a thread
 
 To run your graph with state persistence, you must first create a thread:
 
-#### SDK
+**SDK**
+
 ### Empty thread
 
 To create a new thread, use one of:
@@ -325,7 +328,8 @@ Output:
 }
 ```
 
-#### UI
+**UI**
+
 You can also create threads directly from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-use-threads):
 
 1. Navigate to your [deployment](deployment.md).
@@ -338,7 +342,8 @@ The newly created thread will appear in the threads table and can be used for ru
 
 ## List threads
 
-#### SDK
+**SDK**
+
 To list threads, use the `search` method. This will list the threads in the application that match the provided filters:
 
 ### Filter by thread status
@@ -510,7 +515,8 @@ curl --request POST \
 
 The SDK also supports sorting threads by `thread_id`, `status`, `created_at`, and `updated_at` using the `sort_by` and `sort_order` parameters.
 
-#### UI
+**UI**
+
 You can also view and manage threads in a deployment via the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-use-threads):
 
 1. Navigate to your [deployment](deployment.md).
@@ -524,7 +530,8 @@ This will load a table of all threads in your deployment.
 
 ## Inspect threads
 
-#### SDK
+**SDK**
+
 ### Get thread
 
 To view a specific thread given its `thread_id`, use the [`get`](https://reference.langchain.com/python/langgraph-sdk/_async/threads/ThreadsClient#member-get-0) method:
@@ -781,7 +788,8 @@ This method is particularly useful for:
 
 For more information, refer to the [Python](https://reference.langchain.com/python/langgraph-sdk/_async/threads/ThreadsClient/get_history) and [JS](https://reference.langchain.com/python/langgraph-sdk/_async/threads/ThreadsClient/get_history) SDK docs, or the [REST API](agent-server-api/threads/get-thread-history.md) reference.
 
-#### UI
+**UI**
+
 You can also view and inspect threads in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-use-threads):
 
 1. Navigate to your [deployment](deployment.md).
@@ -792,8 +800,6 @@ To view the full thread history and perform detailed debugging, click **Open in 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -16,7 +16,8 @@ This page describes the core workflows you’ll use in Studio. It explains how t
 
 ## Run application
 
-#### Graph
+**Graph**
+
 ### Specify input
 
 1. Define the input to your graph in the **Input** section on the left side of the page, below the graph interface. Studio will attempt to render a form for your input based on the graph's defined [state schema](../langgraph/graph-api.md#schema). To disable this, click the **View Raw** button, which will present you with a JSON editor.
@@ -55,7 +56,8 @@ To submit the run with the specified input and run settings:
 1. Click the **Submit** button. This will add a [run](runs.md) to the existing selected [thread](../langgraph/checkpointers.md#threads). If no thread is currently selected, a new one will be created.
 2. To cancel the ongoing run, click the **Cancel** button.
 
-#### Chat
+**Chat**
+
 Specify the input to your chat application in the bottom of the conversation panel.
 
 1. Click the **Send message** button to submit the input as a Human message and have the response streamed back.
@@ -71,7 +73,8 @@ Studio lets you view and edit your assistants, and allows you to run your graph 
 
 For more conceptual details, refer to the [Assistants overview](assistants.md).
 
-#### Graph
+**Graph**
+
 To view your assistants:
 
 1. Click **Manage Assistants** in the bottom left corner. This opens a modal for you to view all the assistants for the selected graph.
@@ -79,14 +82,16 @@ To view your assistants:
 
 The **Default configuration** option will be active, which reflects the default configuration defined in your graph. Edits made to this configuration will be used to update the run-time configuration, but will not update or create a new assistant unless you click **Create new assistant**.
 
-#### Chat
+**Chat**
+
 Chat mode enables you to switch through the different assistants in your graph via the dropdown selector at the top of the page. To create, edit, or delete assistants, use Graph mode.
 
 ## Manage threads
 
 Studio provides tools to view all [threads](../langgraph/checkpointers.md#threads) saved on the server and edit their state. You can create new threads, switch between threads, and modify past states both in graph mode and chat mode.
 
-#### Graph
+**Graph**
+
 ### View threads
 
 1. In the top of the right-hand pane, select the dropdown menu to view existing threads.
@@ -104,7 +109,8 @@ To edit the state of the thread:
 
 If you instead want to re-run the thread from a given checkpoint without editing the state, click **Re-run from here**. This will again create a new forked run from the selected checkpoint. This is useful for re-running with changes that are not specific to the state, such as the selected assistant.
 
-#### Chat
+**Chat**
+
 1. View all threads in the right-hand pane of the page.
 2. Select the desired thread and the thread history will populate in the center panel.
 3. To create a new thread, click **+** and submit a run.
@@ -124,8 +130,6 @@ Refer to the following guides for more detail on tasks you can complete in Studi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

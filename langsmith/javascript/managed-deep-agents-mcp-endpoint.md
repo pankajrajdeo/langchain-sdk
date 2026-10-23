@@ -15,7 +15,8 @@ Managed Deep Agents deployments run on [LangSmith Agent Server](../agent-server-
 This page covers how to find the Managed Deep Agents URL and authenticate. For protocol behavior and generic Agent Server client setup, see [MCP endpoint in Agent Server](../server-mcp.md).
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 The endpoint is the outbound direction. An [MCP connector](managed-deep-agents-mcp-connectors.md) points the other way: it adds tools from a remote MCP server to your agent. A deployment can use both.
 
@@ -53,9 +54,11 @@ Authentication failures return one of three responses:
 The local server started by `mda dev` requires no credential. It grants every caller an unscoped local service principal, so any client on the machine can call `/mcp` and every other route. Only a deployment enforces the header.
 
 > [!WARNING]
+>
 > Anyone holding the LangSmith API key can reach the deployment, and an MCP client stores the header in its own configuration. Treat a key added to a client config as a shared secret for the whole workspace.
 
 > [!NOTE]
+>
 > Supabase identity expects an access token that a person obtains by signing in to your app. An MCP client that stores only static headers cannot mint one, so use the LangSmith API-key default for deployments that MCP clients call.
 
 ## Understand what the agent exposes
@@ -143,22 +146,24 @@ To retain knowledge across calls, [opt in to durable memory](managed-deep-agents
 
 ## Next steps
 
-#### [Agent Server](../agent-server-overview.md)
-Explore the runtime that hosts every Managed Deep Agents deployment.
+> **[Agent Server](../agent-server-overview.md)**
+>
+> Explore the runtime that hosts every Managed Deep Agents deployment.
 
-#### [Agent Server MCP](../server-mcp.md)
-Read the Agent Server MCP protocol reference.
+> **[Agent Server MCP](../server-mcp.md)**
+>
+> Read the Agent Server MCP protocol reference.
 
-#### [MCP connectors](managed-deep-agents-mcp-connectors.md)
-Add tools from remote MCP servers to the agent.
+> **[MCP connectors](managed-deep-agents-mcp-connectors.md)**
+>
+> Add tools from remote MCP servers to the agent.
 
-#### [Identity](managed-deep-agents-identity.md)
-Authenticate callers to the deployment.
+> **[Identity](managed-deep-agents-identity.md)**
+>
+> Authenticate callers to the deployment.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-mcp-endpoint.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-mcp-endpoint.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /oauth/device/code:
     post:
@@ -229,6 +232,13 @@ components:
         user_code:
           type: string
         verification_uri:
+          type: string
+        verification_uri_complete:
+          description: >-
+            The verification URI with the user code included, so the user
+            confirms
+
+            the code instead of typing it (RFC 8628 §3.3.1).
           type: string
     oauth.TokenErrorResponse:
       type: object

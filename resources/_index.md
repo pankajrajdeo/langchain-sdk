@@ -1,13 +1,13 @@
 ---
 title: "resources"
-description: "Index of 36 pages and 0 subdirectories under resources."
+description: "Index of 37 pages and 0 subdirectories under resources."
 category: "index"
 tags: [index, resources]
 ---
 
 # resources
 
-36 pages here.
+37 pages here.
 
 ## Files
 
@@ -21,6 +21,7 @@ tags: [index, resources]
 - [AI Observability in the Agent Development Lifecycle](ai-observability.md) - An AI agent can look healthy in production and still fail the task. The endpoint returns a 200 response, latency stays within range, and token spend looks normal, but the agent used the wrong tool...
 - [The 6 Best AI Agent Sandboxes for Isolated Code Execution](best-agent-sandboxes.md) - Compare six AI agent sandboxes by isolation, credentials, egress, state, deployment model, and lifecycle cost.
 - [Building Governed Agents: A Framework for Cost, Control, and Compliance.](building-governed-agents-a-framework-for-cost-control-and-compliance.md) - The gateway is the runtime control plane for enterprise AI, turning policy into enforceable decisions across every model call, tool call, and agent hop.
+- [Coding Agent Sandboxes: Why Agents Need Isolated Environments](coding-agent-sandboxes.md) - Coding agents generate code, install dependencies, run tests, and edit files. These capabilities make them useful, but they also give untrusted, model-generated code access to the systems around it.
 - [Customer Experience (CX) Agents in Production](customer-experience-cx-agents-in-production.md) - Lessons from Lyft, Vodafone, and LATAM Airlines
 - [How to Evaluate LLMs and Agents: Benchmarks, Evals, and Guardrails](how-to-evaluate-llms.md) - When GSM8K launched in 2021, GPT-3 solved roughly 35% of its grade school math problems. Today, GPT-5.3 Codex scores 99%, and the benchmark no longer separates good models from great ones. A public...
 - [Guides](index.md) - Thank you! Your submission has been received!Oops! Something went wrong while submitting the form.## ![Scaling Agents in Healthcare & Life Sciences Scaling Agents in Healthcare & Life...

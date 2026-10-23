@@ -1,6 +1,6 @@
 ---
 title: "Create a new data plane"
-description: "Creates a new data plane object. Persists the rendered data plane spec, and returns 202 with the data plane in status=requested. Requires BYOC enabled org and org admin. Uses the organization's..."
+description: "Creates a new data plane object. Persists the rendered data plane spec, and returns 202 with the data plane in status=requested. Requires BYOC enabled org and org admin. The cloud of the control..."
 source: "https://docs.langchain.com/langsmith/smith-api/data_planes/create-a-new-data-plane"
 category: "docs"
 tags: [docs, langsmith, smith-api, data_planes, create-a-new-data-plane]
@@ -9,7 +9,7 @@ tags: [docs, langsmith, smith-api, data_planes, create-a-new-data-plane]
 # Create a new data plane
 
 > Creates a new data plane object. Persists the rendered data plane spec, and returns 202 with the data plane in status=requested. Requires BYOC enabled org and org admin.
-Uses the organization's assigned external ID to assume the AWS role. Configure that ID in the role's trust policy before creating a data plane.
+The cloud of the control plane selects the AWS, the Azure, or the GCP request. For AWS, the control plane uses the organization's assigned external ID to assume the AWS role. Configure that ID in the role's trust policy before creating a data plane. For Azure, the control plane uses the Entra tenant and the resource group in the request. For GCP, the control plane impersonates the provisioner service account in the request. That service account must be in the request's project, and its description must be the organization's assigned external ID.
 
 ## OpenAPI
 
@@ -163,6 +163,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -171,6 +173,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /orgs/current/data-planes:
     post:
@@ -182,16 +185,21 @@ paths:
         and returns 202 with the data plane in status=requested. Requires BYOC
         enabled org and org admin.
 
-        Uses the organization's assigned external ID to assume the AWS role.
-        Configure that ID in the role's trust policy before creating a data
-        plane.
+        The cloud of the control plane selects the AWS, the Azure, or the GCP
+        request. For AWS, the control plane uses the organization's assigned
+        external ID to assume the AWS role. Configure that ID in the role's
+        trust policy before creating a data plane. For Azure, the control plane
+        uses the Entra tenant and the resource group in the request. For GCP,
+        the control plane impersonates the provisioner service account in the
+        request. That service account must be in the request's project, and its
+        description must be the organization's assigned external ID.
       parameters: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/data_planes.CreateDataPlaneRequestAws'
+              $ref: '#/components/schemas/data_planes.CreateDataPlaneRequest'
       responses:
         '202':
           description: Data plane requested
@@ -243,38 +251,11 @@ paths:
         - Bearer Auth: []
 components:
   schemas:
-    data_planes.CreateDataPlaneRequestAws:
-      type: object
-      properties:
-        additional_tags:
-          type: array
-          maxItems: 40
-          items:
-            $ref: '#/components/schemas/aws.ResourceTag'
-        byoiam_enabled:
-          description: >-
-            Use customer-managed IAM roles created by the LangSmith BYOIAM
-            Terraform module.
-          type: boolean
-        byovpc:
-          $ref: '#/components/schemas/data_planes.DataPlaneBYOVPCSettings'
-        eks_api_privatelink_disabled:
-          description: >-
-            Use a public EKS API endpoint restricted to LangSmith control-plane
-            egress IPs instead of creating a managed PrivateLink endpoint
-            service. Defaults to false.
-          type: boolean
-        name:
-          type: string
-        public_load_balancer:
-          type: boolean
-        region:
-          type: string
-        role_arn:
-          type: string
-        vpc_cidr:
-          description: VPCCIDR is used only when LangSmith creates the VPC.
-          type: string
+    data_planes.CreateDataPlaneRequest:
+      oneOf:
+        - $ref: '#/components/schemas/data_planes.CreateDataPlaneRequestAws'
+        - $ref: '#/components/schemas/data_planes.CreateDataPlaneRequestAzure'
+        - $ref: '#/components/schemas/data_planes.CreateDataPlaneRequestGCP'
     data_planes.PublicDataPlane:
       type: object
       properties:
@@ -338,35 +319,119 @@ components:
           type: string
         type:
           type: string
-    aws.ResourceTag:
+    data_planes.CreateDataPlaneRequestAws:
       type: object
       required:
-        - key
+        - name
+        - region
+        - role_arn
       properties:
-        key:
+        additional_tags:
+          type: array
+          maxItems: 40
+          items:
+            $ref: '#/components/schemas/aws.ResourceTag'
+        byoiam:
+          $ref: '#/components/schemas/data_planes.CreateDataPlaneBYOIAMSettings'
+        byovpc:
+          $ref: '#/components/schemas/data_planes.DataPlaneBYOVPCSettings'
+        eks_api_privatelink_disabled:
+          description: >-
+            Use a public EKS API endpoint restricted to LangSmith control-plane
+            egress IPs instead of creating a managed PrivateLink endpoint
+            service. Defaults to false.
+          type: boolean
+        name:
           type: string
-          maxLength: 128
-          minLength: 1
-        value:
+        public_load_balancer:
+          type: boolean
+        region:
           type: string
-          maxLength: 256
-    data_planes.DataPlaneBYOVPCSettings:
+        role_arn:
+          type: string
+        trace_storage:
+          description: TraceStorage selects the run and trace store. Defaults to SMITHDB.
+          allOf:
+            - $ref: '#/components/schemas/data_planes.DataPlaneTraceStorage'
+        vpc_cidr:
+          description: VPCCIDR is used only when LangSmith creates the VPC.
+          type: string
+      additionalProperties: false
+    data_planes.CreateDataPlaneRequestAzure:
       type: object
+      required:
+        - azure_entra_tenant_id
+        - name
+        - region
+        - resource_group_id
+        - vpc_cidr
       properties:
-        private_app_subnet_ids:
-          items:
-            type: string
-          type: array
-        private_db_subnet_ids:
-          items:
-            type: string
-          type: array
-        public_subnet_ids:
-          items:
-            type: string
-          type: array
-        vpc_id:
+        azure_entra_tenant_id:
+          description: EntraTenantID is the Microsoft Entra tenant of the resource group.
           type: string
+        name:
+          type: string
+        public_load_balancer:
+          type: boolean
+        region:
+          type: string
+        resource_group_id:
+          description: >-
+            ResourceGroupID is /subscriptions/<subscription
+            ID>/resourceGroups/<name>:
+
+            the group that the LangSmith BYOC Terraform module created for this
+            data
+
+            plane. It must contain only the data plane Key Vault. LangSmith
+            deletes the
+
+            group when the data plane is deleted.
+          type: string
+        vpc_cidr:
+          description: VPCCIDR is the VNet that LangSmith creates.
+          type: string
+      additionalProperties: false
+    data_planes.CreateDataPlaneRequestGCP:
+      type: object
+      required:
+        - gcp_project_id
+        - name
+        - provisioner_service_account
+        - region
+        - vpc_cidr
+      properties:
+        byoiam_enabled:
+          description: >-
+            Use customer-managed service accounts created by the LangSmith GCP
+            BYOC Terraform module with byo_iam = true.
+          type: boolean
+        gcp_project_id:
+          description: ProjectID is the customer project that hosts the data plane.
+          type: string
+        name:
+          type: string
+        provisioner_service_account:
+          description: >-
+            ProvisionerServiceAccount is the customer service account that the
+
+            control plane impersonates to create the data plane resources. It
+            must be
+
+            in the project, and its description must be the organization's
+            external ID.
+          type: string
+        public_load_balancer:
+          type: boolean
+        region:
+          type: string
+        sandboxes_enabled:
+          description: Deploy LangSmith sandboxes in the data plane. Defaults to false.
+          type: boolean
+        vpc_cidr:
+          description: VPCCIDR is the VPC network that LangSmith creates.
+          type: string
+      additionalProperties: false
     data_planes.DataPlaneFirewallSettings:
       type: object
       required:
@@ -426,22 +491,53 @@ components:
           type: object
           additionalProperties:
             type: string
+        azure_entra_tenant_id:
+          description: EntraTenantID is the Microsoft Entra tenant of the resource group.
+          type: string
+        byoiam:
+          $ref: '#/components/schemas/data_planes.DataPlaneBYOIAMSettings'
         byovpc:
           $ref: '#/components/schemas/data_planes.DataPlaneBYOVPCSettings'
         cloud:
           $ref: '#/components/schemas/data_planes.DataPlaneCloud'
-        is_byoiam_enabled:
-          type: boolean
+        gcp_project_id:
+          description: ProjectID is the customer project that hosts the data plane.
+          type: string
         is_eks_api_privatelink_disabled:
+          type: boolean
+        is_gcp_byoiam_enabled:
+          description: >-
+            IsGCPBYOIAMEnabled is true when the customer created the data plane
+
+            service accounts. It has its own name because AWS has the byoiam
+            object.
           type: boolean
         is_public_load_balancer:
           type: boolean
+        provisioner_service_account:
+          description: |-
+            ProvisionerServiceAccount is the customer service account that the
+            control plane impersonates.
+          type: string
+        resource_group_id:
+          type: string
         role_arn:
           type: string
+        trace_storage:
+          description: >-
+            TraceStorage is the run and trace store. It is SMITHDB when SmithDB
+            is
+
+            enabled and serves queries, and CLICKHOUSE otherwise, including for
+            data
+
+            planes created before this setting existed.
+          allOf:
+            - $ref: '#/components/schemas/data_planes.DataPlaneTraceStorage'
         vpc_cidr:
           description: >-
-            VPCCIDR is the effective VPC CIDR, including for customer-managed
-            VPCs.
+            VPCCIDR is the effective AWS VPC, Azure VNet, or GCP VPC network
+            CIDR, including for customer-managed VPCs.
           type: string
     data_planes.Status:
       type: string
@@ -494,12 +590,88 @@ components:
           type: string
         resource_arn:
           type: string
+    aws.ResourceTag:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          maxLength: 128
+          minLength: 1
+        value:
+          type: string
+          maxLength: 256
+    data_planes.CreateDataPlaneBYOIAMSettings:
+      type: object
+      properties:
+        is_enabled:
+          description: >-
+            Use customer-managed IAM roles created by the LangSmith BYOIAM
+            Terraform module.
+          type: boolean
+        resource_names:
+          description: >-
+            Custom names of the customer-managed IAM resources. Requires
+            is_enabled.
+          allOf:
+            - $ref: '#/components/schemas/data_planes.DataPlaneBYOIAMResourceNames'
+    data_planes.DataPlaneBYOVPCSettings:
+      type: object
+      properties:
+        private_app_subnet_ids:
+          items:
+            type: string
+          type: array
+        private_db_subnet_ids:
+          items:
+            type: string
+          type: array
+        public_subnet_ids:
+          items:
+            type: string
+          type: array
+        vpc_id:
+          type: string
+    data_planes.DataPlaneTraceStorage:
+      type: string
+      enum:
+        - CLICKHOUSE
+        - SMITHDB
+      x-enum-varnames:
+        - DataPlaneTraceStorageClickHouse
+        - DataPlaneTraceStorageSmithDB
+    data_planes.DataPlaneBYOIAMSettings:
+      type: object
+      properties:
+        is_enabled:
+          description: True when the customer created the data plane IAM resources.
+          type: boolean
     data_planes.DataPlaneCloud:
       type: string
       enum:
         - AWS
+        - AZURE
+        - GCP
       x-enum-varnames:
         - DataPlaneCloudAWS
+        - DataPlaneCloudAzure
+        - DataPlaneCloudGCP
+    data_planes.DataPlaneBYOIAMResourceNames:
+      type: object
+      properties:
+        karpenter_instance_profile_name:
+          description: >-
+            Name of the Karpenter node instance profile. Supply the module's
+            karpenter_instance_profile_name output.
+          type: string
+        role_names:
+          description: >-
+            Role names keyed by role, such as eks-cluster-role. Supply the
+            module's role_names output.
+          type: object
+          additionalProperties:
+            type: string
   securitySchemes:
     API Key:
       type: apiKey

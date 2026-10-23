@@ -20,7 +20,7 @@ Create a new `Runnable` that retries the original `Runnable` on exceptions.
 with_retry(
     self,
     *,
-    retry_if_exception_type: tuple[type[BaseException], ...] = (Exception,),
+    retry_if_exception_type: tuple[type[BaseException], ...] | Callable[[BaseException], bool] = (Exception,),
     wait_exponential_jitter: bool = True,
     exponential_jitter_params: ExponentialJitterParams | None = None,
     stop_after_attempt: int = 3,
@@ -60,7 +60,7 @@ assert count == 2
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `retry_if_exception_type` | `tuple[type[BaseException], ...]` | No | A tuple of exception types to retry on. (default: `(Exception,)`) |
+| `retry_if_exception_type` | `tuple[type[BaseException], ...] \| Callable[[BaseException], bool]` | No | A tuple of exception types to retry on, or a callable that receives the raised exception and returns whether to retry it. (default: `(Exception,)`) |
 | `wait_exponential_jitter` | `bool` | No | Whether to add jitter to the wait time between retries. (default: `True`) |
 | `stop_after_attempt` | `int` | No | The maximum number of attempts to make before giving up. (default: `3`) |
 | `exponential_jitter_params` | `ExponentialJitterParams \| None` | No | Parameters for `tenacity.wait_exponential_jitter`. Namely: `initial`, `max`, `exp_base`, and `jitter` (all `float` values). (default: `None`) |
@@ -73,4 +73,4 @@ A new `Runnable` that retries the original `Runnable` on exceptions.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/runnables/base.py#L2101)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/runnables/base.py#L2102)

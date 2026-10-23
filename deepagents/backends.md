@@ -26,11 +26,13 @@ This page explains how to:
 * [Comply with the backend protocol](#protocol-reference)
 
 > [!TIP]
+>
 > When you deploy on [LangSmith Deployment](../langsmith/deployment.md), a store is provisioned automatically. Use [LangSmith](../langsmith/observability.md) tracing to debug file paths, permission denials, and cross-thread storage. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up.
 >
 > We recommend you also set up [LangSmith Engine](../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
 
 > [!TIP]
+>
 > To generate a durable repository wiki that agents can read through filesystem tools, see [OpenWiki](../openwiki/overview.md).
 
 ## Quickstart
@@ -39,12 +41,12 @@ Here are a few prebuilt filesystem backends that you can quickly use with your d
 
 | Built-in backend | Description |
 | - | - |
-| [Default](#statebackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash")` <br /> Thread-scoped. The default filesystem backend for an agent is stored in `langgraph` state. Files persist across turns within a thread (via your checkpointer) and are not shared across threads. |
-| [Local filesystem persistence](#filesystembackend-local-disk) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=FilesystemBackend(root_dir="/Users/nh/Desktop/"))` <br />This gives the deep agent access to your local machine's filesystem. You can specify the root directory that the agent has access to. Note that any provided `root_dir` must be an absolute path. Typically, wrap in a [CompositeBackend](#compositebackend-router) to keep internal agent data (offloaded tool results, conversation history) separate from your project files. |
-| [Durable store (LangGraph store)](#storebackend-langgraph-store) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=StoreBackend())` <br />This gives the agent access to long-term storage that is *persisted across threads*. This is great for storing longer term memories or instructions that are applicable to the agent over multiple executions. |
-| [Context Hub](#contexthubbackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=ContextHubBackend("my-agent"))` <br />Stores files durably in a LangSmith Hub repo, without provisioning a separate LangGraph store. |
-| [Sandbox](sandboxes.md) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=sandbox)` <br />Execute code in isolated environments. Sandboxes provide filesystem tools plus the `execute` tool for running shell commands. Choose from LangSmith, AgentCore, Daytona, or other [sandbox integrations](../integrations/sandboxes.md). |
-| [Local shell](#localshellbackend-local-shell) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=LocalShellBackend(root_dir=".", env={"PATH": "/usr/bin:/bin"}))` <br />Filesystem and shell execution directly on the host. No isolation—use only in controlled development environments. See [security considerations](#localshellbackend-local-shell) below. |
+| [Default](#statebackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash")`  Thread-scoped. The default filesystem backend for an agent is stored in `langgraph` state. Files persist across turns within a thread (via your checkpointer) and are not shared across threads. |
+| [Local filesystem persistence](#filesystembackend-local-disk) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=FilesystemBackend(root_dir="/Users/nh/Desktop/"))` This gives the deep agent access to your local machine's filesystem. You can specify the root directory that the agent has access to. Note that any provided `root_dir` must be an absolute path. Typically, wrap in a [CompositeBackend](#compositebackend-router) to keep internal agent data (offloaded tool results, conversation history) separate from your project files. |
+| [Durable store (LangGraph store)](#storebackend-langgraph-store) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=StoreBackend())` This gives the agent access to long-term storage that is *persisted across threads*. This is great for storing longer term memories or instructions that are applicable to the agent over multiple executions. |
+| [Context Hub](#contexthubbackend) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=ContextHubBackend("my-agent"))` Stores files durably in a LangSmith Hub repo, without provisioning a separate LangGraph store. |
+| [Sandbox](sandboxes.md) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=sandbox)` Execute code in isolated environments. Sandboxes provide filesystem tools plus the `execute` tool for running shell commands. Choose from LangSmith, AgentCore, Daytona, or other [sandbox integrations](../integrations/sandboxes.md). |
+| [Local shell](#localshellbackend-local-shell) | `agent = create_deep_agent(model="google_genai:gemini-3.6-flash", backend=LocalShellBackend(root_dir=".", env={"PATH": "/usr/bin:/bin"}))` Filesystem and shell execution directly on the host. No isolation—use only in controlled development environments. See [security considerations](#localshellbackend-local-shell) below. |
 | [Composite](#compositebackend-router) | Thread-scoped by default, `/memories/` persisted across threads. The Composite backend is maximally flexible. You can specify different routes in the filesystem to point towards different backends. See Composite routing below for a ready-to-paste example. |
 
 ```mermaid
@@ -204,6 +206,7 @@ agent2 = create_deep_agent(
 * Persists across multiple agent turns on the same thread via checkpoints. Files are not shared across threads.
 
 > [!WARNING]
+>
 > Designed to be used from within a graph. Calling backend methods (e.g., `state_backend.upload_files(...)`) outside of a graph run won't take effect until the graph executes.
 
 **Best for:**
@@ -219,6 +222,7 @@ even after that subagent's execution is complete. Those files will continue to b
 [`FilesystemBackend`](https://reference.langchain.com/python/deepagents/backends/filesystem/FilesystemBackend) reads and writes real files under a configurable root directory.
 
 > [!WARNING]
+>
 > This backend grants agents direct filesystem read/write access.
 > Use with caution and only in appropriate environments.
 >
@@ -345,11 +349,12 @@ agent = create_deep_agent(
 For a durable repository wiki that agents can read with these filesystem tools (from `openwiki/`), see [OpenWiki](../openwiki/overview.md).
 
 > [!TIP]
+>
 > **Wrap `FilesystemBackend` in a `CompositeBackend`** for most use cases. Deep Agents automatically write internal data to the backend, including offloaded large tool results (under `/large_tool_results/`) and conversation history (under `/conversation_history/`). When you use `FilesystemBackend` alone, these internal files are written to real disk under `root_dir`, mixing agent artifacts with your project files.
 >
 > Use a `CompositeBackend` to route your project directory to `FilesystemBackend` while keeping internal paths in ephemeral `StateBackend` storage:
 >
-> ```python
+```python
 > from deepagents import create_deep_agent
 > from deepagents.backends import CompositeBackend, StateBackend, FilesystemBackend
 >
@@ -361,13 +366,14 @@ For a durable repository wiki that agents can read with these filesystem tools (
 >         },
 >     )
 > )
-> ```
+```
 >
 > This way, agent reads and writes under `/workspace/` go to real disk, while offloaded tool results and other internal data stay in ephemeral state. See [Route to different backends](#route-to-different-backends) for more routing patterns.
 
 ### LocalShellBackend (local shell)
 
 > [!WARNING]
+>
 > This backend grants agents direct filesystem read/write access **and** unrestricted shell execution on your host.
 > Use with extreme caution and only in appropriate environments.
 >
@@ -610,9 +616,11 @@ agent = create_deep_agent(
 ```
 
 > [!NOTE]
+>
 > When deploying to [LangSmith Deployment](../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
 
 > [!TIP]
+>
 > The `namespace` parameter controls data isolation. For multi-user deployments, always set a [namespace factory](#namespace-factories) to isolate data per user or tenant.
 
 **How it works:**
@@ -641,6 +649,7 @@ The `Runtime` provides:
 * `rt.execution_info`—Execution identity information (thread ID, run ID, checkpoint ID)
 
 > [!NOTE]
+>
 > The `Runtime` argument is available in `deepagents>=0.5.2`. Earlier 0.5.x releases passed a `BackendContext` instead—see [migrating from `BackendContext`](#migrating-from-backendcontext) below. `rt.server_info` and `rt.execution_info` require `deepagents>=0.5.0`.
 
 **Common namespace patterns:**
@@ -673,14 +682,17 @@ You can combine multiple components to create more specific scopes—for example
 Namespace components must contain only alphanumeric characters, hyphens, underscores, dots, `@`, `+`, colons, and tildes. Wildcards (`*`, `?`) are rejected to prevent glob injection.
 
 > [!WARNING]
+>
 > The `namespace` parameter will be **required** in v0.5.0. Always set it explicitly for new code.
 
 > [!NOTE]
+>
 > When no namespace factory is provided, the legacy default uses the `assistant_id` from LangGraph config metadata. This means all users of the same [assistant](../langsmith/assistants.md) share the same storage. For multi-user [going to production](going-to-production.md), always provide a namespace factory.
 
 ### ContextHubBackend
 
 > [!NOTE]
+>
 > **Before you begin:** `ContextHubBackend` requires a Context Hub repo set up in LangSmith. Read the [Context Hub concepts](../langsmith/context-engineering-concepts.md) page first if you're unfamiliar with agent repos and skill repos.
 
 `ContextHubBackend` stores your agent's filesystem in a LangSmith Context Hub repo. It can use a standalone repo or an agent repo that links out to skill repos.
@@ -776,6 +788,7 @@ agent = create_deep_agent(
 Construct it with a repo identifier in `owner/name` or `name` format.
 
 > [!NOTE]
+>
 > Set `LANGSMITH_API_KEY` before using `ContextHubBackend`.
 
 **How it works:**
@@ -983,6 +996,7 @@ Notes:
 Binary content offloading stores inline media in the backend instead of keeping base64 payloads in message history. This reduces checkpoint size for agents that read binary files or receive inline media in user messages. Offloading is opt-in and disabled by default.
 
 > [!NOTE]
+>
 > Binary content offloading requires `deepagents>=0.7.21`.
 
 Set `offload_binary_content=True` on `FilesystemMiddleware` and pass it in the `middleware` list to `create_deep_agent`. Use the same backend for the agent and the middleware.
@@ -994,6 +1008,7 @@ Message history keeps content-addressed references. Before each model call, the 
 Use a backend that stores blobs outside graph state, such as a sandbox or `FilesystemBackend`. Offloading has no effect when the blob path routes to `StateBackend`, including through `CompositeBackend`. If you keep `StateBackend` as the default backend, route the blob directory to external storage.
 
 > [!NOTE]
+>
 > Inline media in user messages is replaced at the next model call. The original input payload still appears in earlier checkpoints. Keep the blob storage available when resuming a thread so the middleware can restore its media.
 
 ## Custom backends
@@ -1018,50 +1033,47 @@ To also support the `execute` tool (running shell commands), implement [`Sandbox
 
 Always return structured result types with an `error` field for failure cases. Do not raise exceptions.
 
-<details>
-<summary>Example: S3-style backend skeleton</summary>
-
-This skeleton maps filesystem paths to object keys. Fill in each method with your storage client's list, read, search, upload, and read-modify-write operations.
-
+> **Example: S3-style backend skeleton**
+>
+> This skeleton maps filesystem paths to object keys. Fill in each method with your storage client's list, read, search, upload, and read-modify-write operations.
+>
 ```python
-from deepagents.backends.protocol import (
-    BackendProtocol,
-    EditResult,
-    GlobResult,
-    GrepResult,
-    LsResult,
-    ReadResult,
-    WriteResult,
-)
-
-class S3Backend(BackendProtocol):
-    def __init__(self, bucket: str, prefix: str = ""):
-        self.bucket = bucket
-        self.prefix = prefix.rstrip("/")
-
-    def _key(self, path: str) -> str:
-        return f"{self.prefix}{path}"
-
-    def ls(self, path: str) -> LsResult:
-        ...
-
-    def read(self, file_path: str, offset: int = 0, limit: int = 2000) -> ReadResult:
-        ...
-
-    def grep(self, pattern: str, path: str | None = None, glob: str | None = None) -> GrepResult:
-        ...
-
-    def glob(self, pattern: str, path: str | None = None) -> GlobResult:
-        ...
-
-    def write(self, file_path: str, content: str) -> WriteResult:
-        ...
-
-    def edit(self, file_path: str, old_string: str, new_string: str, replace_all: bool = False) -> EditResult:
-        ...
+> from deepagents.backends.protocol import (
+>     BackendProtocol,
+>     EditResult,
+>     GlobResult,
+>     GrepResult,
+>     LsResult,
+>     ReadResult,
+>     WriteResult,
+> )
+>
+> class S3Backend(BackendProtocol):
+>     def __init__(self, bucket: str, prefix: str = ""):
+>         self.bucket = bucket
+>         self.prefix = prefix.rstrip("/")
+>
+>     def _key(self, path: str) -> str:
+>         return f"{self.prefix}{path}"
+>
+>     def ls(self, path: str) -> LsResult:
+>         ...
+>
+>     def read(self, file_path: str, offset: int = 0, limit: int = 2000) -> ReadResult:
+>         ...
+>
+>     def grep(self, pattern: str, path: str | None = None, glob: str | None = None) -> GrepResult:
+>         ...
+>
+>     def glob(self, pattern: str, path: str | None = None) -> GlobResult:
+>         ...
+>
+>     def write(self, file_path: str, content: str) -> WriteResult:
+>         ...
+>
+>     def edit(self, file_path: str, old_string: str, new_string: str, replace_all: bool = False) -> EditResult:
+>         ...
 ```
-
-</details>
 
 ## Permissions
 
@@ -1158,6 +1170,7 @@ class PolicyWrapper(BackendProtocol):
 ## Migrate from backend factories
 
 > [!WARNING]
+>
 > The backend factory pattern is **deprecated** as of `deepagents` 0.5.0. Pass pre-constructed backend instances directly instead of factory functions.
 
 Previously, backends like `StateBackend` and `StoreBackend` required a factory function that received a runtime object, because they needed runtime context (state, store) to operate. Backends now resolve this context internally via LangGraph's `get_config()`, `get_store()`, and `get_runtime()` helpers, so you can pass instances directly.
@@ -1183,6 +1196,7 @@ Previously, backends like `StateBackend` and `StoreBackend` required a factory f
 | `Command` wrapping in middleware write/edit tools | Tools return plain strings; no `Command(update=...)` needed |
 
 > [!NOTE]
+>
 > The factory pattern still works at runtime and emits a deprecation warning. Update your code to use direct instances before the next major version.
 
 ### Migration example
@@ -1272,8 +1286,6 @@ Supporting types:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/backends.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/backends.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

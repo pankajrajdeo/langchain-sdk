@@ -22,8 +22,6 @@ With `Knowledge Bases for Amazon Bedrock`, simply point to the location of your 
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](bedrock.md).
-
 ## Setup
 
 Knowledge Bases can be configured through [AWS Console](https://aws.amazon.com/console/) or by using [AWS SDKs](https://aws.amazon.com/developer/tools/). We will need the `knowledge_base_id` to instantiate the retriever.
@@ -153,8 +151,6 @@ For detailed documentation of all `AmazonKnowledgeBasesRetriever` features and c
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

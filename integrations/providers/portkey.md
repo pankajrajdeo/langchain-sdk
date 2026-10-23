@@ -129,13 +129,13 @@ You can find more [Portkey config examples](https://docs.portkey.ai/docs/api-ref
 
 ## **Tracing chains & agents**
 
-Portkey's LangChain integration gives you full visibility into the running of an agent. Let's take an example of a [popular agentic workflow](https://python.langchain.com/docs/use_cases/tool_use/quickstart/#agents).
+Portkey's LangChain integration gives you full visibility into the running of an agent. Let's take an example of a [popular agentic workflow](../../langchain/agents.md).
 
 We only need to modify the [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) class to use the AI Gateway as above.
 
 ```python
 from langchain_classic import hub
-from langchain.agents import AgentExecutor, create_openai_tools_agent
+from langchain_classic.agents import AgentExecutor, create_openai_tools_agent
 from langchain_openai import ChatOpenAI
 from langchain.tools import tool
 from portkey_ai import PORTKEY_GATEWAY_URL, createHeaders
@@ -188,8 +188,6 @@ For detailed information on each feature and how to use it, [please refer to the
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/portkey/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/portkey/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

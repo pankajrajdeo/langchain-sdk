@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, tools, oracleai]
 > Integrate with the OracleSummary tool using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 
 Oracle AI Database supports AI workloads where you query data by **meaning** (semantics), not just keywords. It combines **semantic search over unstructured content** with **relational filtering over business data** in a single system—so you can build retrieval workflows (like RAG) without introducing a separate vector database and fragmenting data across multiple platforms.
@@ -26,7 +27,7 @@ If you are just starting with Oracle Database, consider exploring the [free Orac
 
 ### Integration details
 
-| Class | Package | Local | [PY support](https://python.langchain.com/docs/integrations/tools/oracleai) |
+| Class | Package | Local | [PY support](../../../integrations/tools/oracleai.md) |
 | :- | :- | :-: | :-: |
 | `OracleSummary` | [`@oracle/langchain-oracledb`](https://www.npmjs.com/package/@oracle/langchain-oracledb) | ✅ | ✅ |
 
@@ -165,8 +166,6 @@ For detailed documentation of all `OracleSummary` parameters and return types, s
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

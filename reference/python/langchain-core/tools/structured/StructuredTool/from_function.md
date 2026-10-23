@@ -32,7 +32,7 @@ from_function(
     response_format: Literal['content', 'content_and_artifact'] = 'content',
     parse_docstring: bool = False,
     error_on_invalid_docstring: bool = False,
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> StructuredTool
 ```
 
@@ -60,4 +60,4 @@ The tool.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/tools/structured.py#L187)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/tools/structured.py#L187)

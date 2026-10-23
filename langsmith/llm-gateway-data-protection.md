@@ -11,6 +11,7 @@ tags: [docs, langsmith, llm-gateway-data-protection]
 > Create data policies that redact sensitive data and control trace content in the LLM Gateway.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 The **Data Policy** tab in the LLM Gateway holds data policies. A single data policy covers two areas, matching the two sections of the create form:
@@ -92,6 +93,7 @@ Both fields appear only for organizations with the PII detection entitlement. El
 ## Create a data policy
 
 > [!WARNING]
+>
 > Creating and managing policies requires `organization:manage` permission.
 
 1. In the LangSmith sidebar, click **LLM Gateway**.
@@ -170,8 +172,6 @@ The coverage boundary matters. If your security model requires that sensitive da
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-data-policy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-data-policy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

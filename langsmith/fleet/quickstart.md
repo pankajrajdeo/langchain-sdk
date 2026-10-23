@@ -12,8 +12,7 @@ tags: [docs, langsmith, fleet, quickstart]
 
 By the end of this quickstart, you will have an Executive Assistant that labels the Gmail messages needing your attention and pauses for approval before acting, all set up without code or a model API key and controlled through chat.
 
-> [!NOTE]
-> You interact with your agent through chat, just like texting a helpful assistant.
+You interact with your agent through chat, just like texting a helpful assistant.
 
 You will start from the prebuilt **Executive Assistant** [template](templates.md), which manages your inbox, calendar, and daily brief.
 
@@ -29,21 +28,26 @@ Fleet manages the AI model for you, so you do not need your own model provider A
 
 ## 1. Create your agent
 
-### Navigate to Fleet
+**1. Navigate to Fleet**
+
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-quickstart), click  **Switch to Fleet** at the top of the left-hand navigation.
 
-### Choose a template
+**2. Choose a template**
+
 1. Select **Templates** in the left-hand navigation, or click **+** in **My Agents** and select **From template**.
 2. Select the **Executive Assistant** template to create your agent.
 3. Click **Create Agent** at the top right.
 
 > [!TIP]
+>
 > If you do not want to start with a template, choose **Build with AI** or **New agent** when you create an agent and describe the agent you want. The agent configures itself and pauses at key points for your input.
 
-### Skip channel setup for now
+**3. Skip channel setup for now**
+
 When the agent prompts you to connect a channel, click **Skip for now**. You connect channels in a [later step](#3-configure-your-agent).
 
-### Answer onboarding questions
+**4. Answer onboarding questions**
+
 Provide information so your agent knows how to work the way you prefer.
 
 ## 2. Connect tools
@@ -52,7 +56,8 @@ Your agent asks you to connect to your Gmail and Google Calendar accounts.
 
 A connection gives your agent the [tools](tools.md) to use a service. A [channel](channels.md) lets the service trigger the agent. You connect Gmail and Google Calendar here, then add Gmail as a channel in [Configure your agent](#3-configure-your-agent).
 
-### Connect Gmail
+**1. Connect Gmail**
+
 1. In the **Gmail** row, click **Connect** on the right.
 2. In the dialog, click **+ Connect new account**.
 3. Choose your account and click **Continue**.
@@ -60,7 +65,8 @@ A connection gives your agent the [tools](tools.md) to use a service. A [channel
 5. LangSmith redirects you back to Fleet. Select **Gmail** to expand the row.
 6. Click **Choose account** and select the account you chose in step 3.
 
-### Connect Google Calendar
+**2. Connect Google Calendar**
+
 1. Connecting Gmail authorized your Google account for Gmail only, not Google Calendar. To grant calendar access, click **Update permissions** on the right in the **Google Calendar** row.
 2. In the dialog, click **Reauthorize**.
 3. Choose your account and click **Continue**.
@@ -69,6 +75,7 @@ A connection gives your agent the [tools](tools.md) to use a service. A [channel
 6. Click **Save and continue**.
 
 > [!NOTE]
+>
 > Your agent only accesses your accounts when working on tasks you give it. You can revoke access anytime in the [agent sidebar](essentials.md#agent-sidebar) or your Google account settings.
 
 ## 3. Configure your agent
@@ -80,34 +87,42 @@ There are two ways to configure your agent:
 
 This section describes how to configure your agent using the agent sidebar.
 
-### Open the agent sidebar
-Click ** Configure** at the top right to open the agent sidebar.
+**1. Open the agent sidebar**
 
-### View connections
+Click \*\* Configure\*\* at the top right to open the agent sidebar.
+
+**2. View connections**
+
 Expand the **Connections** drawer. **Gmail** and **Google Calendar** appear as **Connected**. If either shows as not connected, complete [2. Connect tools](#2-connect-tools) before continuing.
 
-### Configure a tool to ask for approval
+**3. Configure a tool to ask for approval**
+
 In the **Connections** drawer, click **Gmail** to view the available tools. By default, the tools are enabled and set to **Auto**, so they run without your approval.
 
 For **Apply Label**, click **Ask**, so your agent pauses and waits for your approval before continuing. You can accept the proposed action, or reject it and tell the agent what to change. For more information, see [Human-in-the-loop](essentials.md#human-in-the-loop).
 
-### Connect channels
+**4. Connect channels**
+
 Expand the **Channels** drawer. Click **Gmail**. Select the account that you set up for **Connections**. Click **Confirm**.
 
-### Save your changes
+**5. Save your changes**
+
 Click **Save** at the top of the sidebar to save your changes, then click **X** to close the panel.
 
 ## 4. Test your agent
 
-### Send your agent a task
+**1. Send your agent a task**
+
 In the agent chat, try out the Executive Assistant, for example:
 
 > *Apply a "Review" label to emails that I receive, which require some kind of review from me.*
 
-### Accept or reject the agent
+**2. Accept or reject the agent's action**
+
 Click **Accept** to approve the agent's proposed action or tell the agent what it did wrong and click **Reject**.
 
-### Check your inbox in Gmail
+**3. Check your inbox in Gmail**
+
 If you clicked **Accept**, emails that need review now have the **Review** label in your inbox.
 
 ## Edit your agent
@@ -124,22 +139,24 @@ You may want to update your agent's instructions or include more tools. You can 
 
 Now that you have created your first agent, here is what to explore:
 
-#### [Try more templates](templates.md)
-Explore prebuilt agents for common tasks
+> **[Try more templates](templates.md)**
+>
+> Explore prebuilt agents for common tasks
 
-#### [Add automation](essentials.md#channels)
-Run your agent automatically with channels (Slack, email, schedules)
+> **[Add automation](essentials.md#channels)**
+>
+> Run your agent automatically with channels (Slack, email, schedules)
 
-#### [Connect more tools](tools.md)
-Add Slack, GitHub, Linear, and more
+> **[Connect more tools](tools.md)**
+>
+> Add Slack, GitHub, Linear, and more
 
-#### [Build complex agents](essentials.md#sub-agents)
-Use sub-agents to break down big tasks
+> **[Build complex agents](essentials.md#sub-agents)**
+>
+> Use sub-agents to break down big tasks
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

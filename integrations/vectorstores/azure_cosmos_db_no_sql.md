@@ -25,6 +25,7 @@ Please refer here for more details:
 [Sign Up](https://azure.microsoft.com/en-us/free/) for lifetime free access to get started today.
 
 > [!NOTE]
+>
 > As of `langchain-azure-cosmosdb` v1.0, all Azure Cosmos DB NoSQL integrations (vector store, semantic cache, chat message history, and the LangGraph checkpointer, cache, and store) ship from the standalone [`langchain-azure-cosmosdb`](https://pypi.org/project/langchain-azure-cosmosdb/) package and import from `langchain_azure_cosmosdb`. Both sync and async clients, as well as Microsoft Entra ID (`DefaultAzureCredential`) auth, are supported.
 
 ```python
@@ -43,6 +44,7 @@ OPENAI_EMBEDDINGS_MODEL_DEPLOYMENT = "text-embedding-ada-002"
 ## Insert data
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -439,8 +441,6 @@ Score 5:  0.8213247840132897
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

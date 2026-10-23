@@ -17,6 +17,7 @@ Ollama bundles model weights, configuration, and data into a single package, def
 For a complete list of supported models and model variants, see the [Ollama model library](https://ollama.com/search).
 
 > [!TIP]
+>
 > **API Reference**
 >
 > For detailed documentation of all features and configuration options, head to the [`ChatOllama`](https://reference.langchain.com/python/langchain-ollama/chat_models/ChatOllama) API reference.
@@ -25,7 +26,7 @@ For a complete list of supported models and model variants, see the [Ollama mode
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/ollama) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/chat/ollama.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatOllama`](https://reference.langchain.com/python/langchain-ollama/chat_models/ChatOllama) | [`langchain-ollama`](https://reference.langchain.com/python/langchain-ollama/) | ❌ | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-ollama?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-ollama?style=flat-square\&label=%20) |
 
@@ -337,8 +338,6 @@ For detailed documentation of all `ChatOllama` features and configuration option
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

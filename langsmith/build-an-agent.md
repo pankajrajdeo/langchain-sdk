@@ -15,9 +15,11 @@ The **Build** tab creates an agent inside LangSmith instead of in code. You fill
 Use it when you want a working agent without a local project or a deployment. Everything it produces is an [agent](agents.md) like any other, so its traces, dashboards, and evaluators behave the same as one you instrumented yourself.
 
 > [!NOTE]
-> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+>
+> Agent-based workspaces are available on [LangSmith Cloud](cloud.md). They are not available on [self-hosted](self-hosted.md) LangSmith. To check whether your workspace is agent-based, look at the control at the top left. In an agent-based workspace, it is a workspace switcher that names your workspace. In a [project-based](observability-concepts.md#tracing-projects) workspace, it shows the LangSmith logo.
 
 > [!NOTE]
+>
 > Creating an agent here requires [computer use](fleet/computer-use.md), which is on the Plus and Enterprise plans. Without it the form still opens, and a banner says agent creation is unavailable.
 
 The **Build** tab appears only in an agent-based workspace. To build an agent from files on your own machine instead, see [Managed Deep Agents](python/managed-deep-agents-overview.md).
@@ -74,8 +76,6 @@ An agent built in the UI has no deployment, because it runs on a Studio runtime 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/build-an-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/build-an-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

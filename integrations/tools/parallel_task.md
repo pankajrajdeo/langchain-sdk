@@ -135,6 +135,7 @@ print(result["output"]["content"])
 ```
 
 > [!NOTE]
+>
 > Deep research runs are not instant. `pro-fast` typically takes a few minutes; `pro` and `ultra` can take longer. Wire up a webhook (see [Webhook signature verification](#webhook-signature-verification)) for production usage rather than blocking on `invoke`.
 
 For typed deep research, pass an `output_schema`:
@@ -263,8 +264,6 @@ For detailed documentation, head to the [`ParallelTaskRunTool`](https://referenc
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_task.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_task.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

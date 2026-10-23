@@ -11,6 +11,7 @@ tags: [docs, langsmith, data-export-destinations]
 > Configure and manage S3-compatible export destinations for LangSmith bulk exports.
 
 > [!NOTE]
+>
 > **For self-hosted, GCP EU, GCP APAC, and AWS US SaaS**
 >
 > Update the LangSmith URL in the requests below for self-hosted installs, GCP EU (`eu.api.smith.langchain.com`), GCP APAC (`apac.api.smith.langchain.com`), or AWS US (`aws.api.smith.langchain.com`).
@@ -144,7 +145,9 @@ Use the returned `id` to reference this destination in subsequent bulk export op
 
 ### Credentials configuration
 
-**Requires LangSmith Helm version `0.10.34` or later (application version `0.10.91` or later)**
+> [!NOTE]
+>
+> **Requires LangSmith Helm version `0.10.34` or later (application version `0.10.91` or later)**
 
 We support the following additional credentials formats besides static `access_key_id` and `secret_access_key`:
 
@@ -327,6 +330,7 @@ AWS IAM role assumption lets GCP-hosted LangSmith SaaS export to S3 without stor
 Pass `aws_role_arn` instead of `credentials` to use IAM role assumption.
 
 > [!NOTE]
+>
 > IAM role assumption is available only on GCP-hosted LangSmith SaaS. It is not available on AWS-hosted SaaS or self-hosted deployments.
 
 ### Create the AWS role
@@ -574,8 +578,6 @@ Here are some common errors:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-destinations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-destinations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

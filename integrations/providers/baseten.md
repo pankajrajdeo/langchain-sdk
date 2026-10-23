@@ -16,16 +16,16 @@ Baseten provides infrastructure for deploying and serving ML models. Access open
 
 ## Model interfaces
 
-#### [ChatBaseten](../chat/baseten.md)
-Baseten chat models.
+> **[ChatBaseten](../chat/baseten.md)**
+>
+> Baseten chat models.
 
-#### [BasetenEmbeddings](../embeddings/baseten.md)
-Baseten embedding models.
+> **[BasetenEmbeddings](../embeddings/baseten.md)**
+>
+> Baseten embedding models.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/baseten.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/baseten.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

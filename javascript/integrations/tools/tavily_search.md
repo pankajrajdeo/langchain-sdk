@@ -16,7 +16,7 @@ tags: [docs, javascript, integrations, tools, tavily_search]
 
 ### Integration details
 
-| Class | Package | [PY support](https://python.langchain.com/docs/integrations/tools/tavily_search) | Downloads | Version |
+| Class | Package | [PY support](../../../integrations/tools/tavily_search.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`TavilySearch`](https://reference.langchain.com/javascript/langchain-tavily/TavilySearch) | [`@langchain/tavily`](https://www.npmjs.com/package/@langchain/tavily) | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/tavily?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/tavily?style=flat-square\&label=%20&) |
 
@@ -192,8 +192,6 @@ For detailed documentation of all Tavily Search API features and configurations 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/tavily_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/tavily_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

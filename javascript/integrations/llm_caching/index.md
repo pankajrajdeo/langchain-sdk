@@ -16,14 +16,12 @@ Below are some integrations that allow you to cache results of individual LLM ca
 
 | Integration | Downloads |
 | :- | :- |
-| [`Azure Cosmos DB NoSQL semantic`](azure_cosmosdb_nosql.md) | <span data-sort-value="3760"><a href="https://www.npmjs.com/package/@langchain/azure-cosmosdb" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`BetterDB Agent Cache`](https://www.betterdb.com/ai) | <span data-sort-value="1193"><a href="https://www.npmjs.com/package/@betterdb/agent-cache" target="_blank">  <img src="https://img.shields.io/npm/dm/@betterdb/agent-cache?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`BetterDB Semantic Cache`](https://www.betterdb.com/ai) | <span data-sort-value="156"><a href="https://www.npmjs.com/package/@betterdb/semantic-cache" target="_blank">  <img src="https://img.shields.io/npm/dm/@betterdb/semantic-cache?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
+| [`Azure Cosmos DB NoSQL semantic`](azure_cosmosdb_nosql.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/azure-cosmosdb) |
+| [`BetterDB Agent Cache`](https://www.betterdb.com/ai) | [  ![Downloads per month](https://img.shields.io/npm/dm/@betterdb/agent-cache?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@betterdb/agent-cache) |
+| [`BetterDB Semantic Cache`](https://www.betterdb.com/ai) | [  ![Downloads per month](https://img.shields.io/npm/dm/@betterdb/semantic-cache?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@betterdb/semantic-cache) |
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llm_caching/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llm_caching/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

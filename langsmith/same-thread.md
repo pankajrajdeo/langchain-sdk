@@ -16,7 +16,8 @@ You'll see that the second assistant will respond using information from the [ch
 
 ## Setup
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -31,7 +32,8 @@ assistants = await client.assistants.search()
 default_assistant = [a for a in assistants if not a["config"]][0]
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -45,7 +47,8 @@ const assistants = await client.assistants.search();
 const defaultAssistant = assistants.find(a => !a.config);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/assistants \
@@ -65,17 +68,20 @@ curl --request POST \
 
 We can see that these assistants are different:
 
-#### Python
+**Python**
+
 ```python
 print(openai_assistant)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 console.log(openAIAssistant);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request GET \
     --url <DEPLOYMENT_URL>/assistants/<OPENAI_ASSISTANT_ID>
@@ -98,17 +104,20 @@ Output:
 }
 ```
 
-#### Python
+**Python**
+
 ```python
 print(default_assistant)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 console.log(defaultAssistant);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request GET \
     --url <DEPLOYMENT_URL>/assistants/<DEFAULT_ASSISTANT_ID>
@@ -135,7 +144,8 @@ Output:
 
 We can now run the OpenAI assistant on the thread first.
 
-#### Python
+**Python**
+
 ```python
 thread = await client.threads.create()
 input = {"messages": [{"role": "user", "content": "who made you?"}]}
@@ -150,7 +160,8 @@ async for event in client.runs.stream(
     print("\n\n")
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 const thread = await client.threads.create();
 let input =  {"messages": [{"role": "user", "content": "who made you?"}]}
@@ -170,7 +181,8 @@ for await (const event of streamResponse) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 thread_id=$(curl --request POST \
     --url <DEPLOYMENT_URL>/threads \
@@ -229,7 +241,8 @@ Receiving event of type: updates
 
 Now, we can run it on the default assistant and see that this second assistant is aware of the initial question, and can answer the question, "and you?":
 
-#### Python
+**Python**
+
 ```python
 input = {"messages": [{"role": "user", "content": "and you?"}]}
 async for event in client.runs.stream(
@@ -243,7 +256,8 @@ async for event in client.runs.stream(
     print("\n\n")
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 let input =  {"messages": [{"role": "user", "content": "and you?"}]}
 
@@ -262,7 +276,8 @@ for await (const event of streamResponse) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream \
@@ -315,8 +330,6 @@ Receiving event of type: updates
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/same-thread.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/same-thread.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

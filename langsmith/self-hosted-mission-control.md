@@ -169,7 +169,8 @@ printf '%s\n' 'your-password' | ./install-script.sh secret -u admin --password-s
 
 Use this path when installer scripts are not allowed. These steps use normal `kubectl`, `helm`, and `curl` commands only.
 
-### Add the Helm repo and get the values file
+**1. Add the Helm repo and get the values file**
+
 Add the LangChain Helm repo:
 
 ```bash
@@ -221,12 +222,14 @@ frontend:
         - ALL
 ```
 
-### Create the namespace
+**2. Create the namespace**
+
 ```bash
 kubectl create namespace langsmith --dry-run=client -o yaml | kubectl apply -f -
 ```
 
-### Create the auth credentials Secret
+**3. Create the auth credentials Secret**
+
 Credentials are stored in a Kubernetes Secret. They are not written to `values.yaml`.
 
 ```bash
@@ -253,7 +256,8 @@ kubectl create secret generic mission-control-auth \
   --dry-run=client -o yaml | kubectl apply -f -
 ```
 
-### Install with Helm
+**4. Install with Helm**
+
 ```bash
 helm upgrade --install mission-control langchain/mission-control \
   --namespace langsmith \
@@ -275,7 +279,8 @@ You can also inspect the pods directly:
 kubectl get pods -n langsmith
 ```
 
-### Access the UI
+**5. Access the UI**
+
 ```bash
 kubectl port-forward svc/mission-control-frontend 3000:3000 -n langsmith
 ```
@@ -381,8 +386,6 @@ Set feature flags to `false` in `values.yaml` to remove the corresponding write 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-mission-control.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-mission-control.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

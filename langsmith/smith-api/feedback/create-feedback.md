@@ -11,9 +11,8 @@ tags: [docs, langsmith, smith-api, feedback, create-feedback]
 > Create a new feedback.
 
 `session_id` identifies the tracing project the feedback belongs to. It is
-required unless the feedback is addressed by `address`, or by `agent_id` and
-`agent_environment`, which name that project through an Agent environment
-that already exists.
+required unless the feedback is addressed by `address`, which names that
+project through an Agent environment that already exists.
 
 ## OpenAPI
 
@@ -167,6 +166,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -175,6 +176,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/feedback:
     post:
@@ -187,13 +189,9 @@ paths:
         `session_id` identifies the tracing project the feedback belongs to. It
         is
 
-        required unless the feedback is addressed by `address`, or by `agent_id`
-        and
+        required unless the feedback is addressed by `address`, which names that
 
-        `agent_environment`, which name that project through an Agent
-        environment
-
-        that already exists.
+        project through an Agent environment that already exists.
       operationId: create_feedback_api_v1_feedback_post
       requestBody:
         required: true
@@ -210,8 +208,8 @@ paths:
                 $ref: '#/components/schemas/FeedbackSchema'
         '400':
           description: >-
-            agent_id or agent_environment is invalid, or no Agent environment
-            matches them. Feedback does not create one.
+            The address is invalid, or no Agent environment matches it. Feedback
+            does not create one.
         '403':
           description: >-
             The feedback key is reserved, or Agent addressing is not enabled for
@@ -300,48 +298,24 @@ components:
             - type: 'null'
           title: Session Id
           description: >-
-            Required unless the feedback is addressed by agent_id and
-            agent_environment. The ID of the tracing project (session) the
-            feedback belongs to.
-        agent_id:
-          anyOf:
-            - type: string
-            - type: 'null'
-          title: Agent Id
-          description: >-
-            Beta. Only supported in workspaces where Agent addressing is
-            enabled; other workspaces get a 403. The Agent's id, not a UUID: 1
-            to 63 lowercase ASCII letters, digits, or hyphens, starting with a
-            letter and ending with a letter or digit (e.g. support-agent).
-            Addresses the tracing project through an Agent instead of
-            session_id. Sent together with agent_environment, and never
-            alongside session_id. The Agent and the environment must already
-            exist; sending feedback does not create them.
-        agent_environment:
-          anyOf:
-            - type: string
-              enum:
-                - LOCAL
-                - DEVELOPMENT
-                - STAGING
-                - PRODUCTION
-            - type: 'null'
-          title: Agent Environment
-          description: >-
-            Beta. Only supported in workspaces where Agent addressing is
-            enabled; other workspaces get a 403. The Agent environment whose
-            tracing project the feedback belongs to. Matched case-insensitively.
-            Sent together with agent_id.
+            Required unless the feedback is addressed by address. The ID of the
+            tracing project (session) the feedback belongs to.
         address:
-          allOf:
-            - $ref: '#/components/schemas/address.AgentAddress'
+          type: string
+          title: Address
           description: >-
             Beta. Only supported in workspaces where Agent addressing is
             enabled; other workspaces get a 403. Addresses the tracing project
-            through an Agent environment instead of session_id. Never combined
-            with agent_id, agent_environment, or session_id. The Agent and the
-            environment must already exist; sending feedback does not create
+            through an Agent environment, as
+            lrn:agents/{id}/environments/{environment}, instead of session_id.
+            The id is 1 to 63 lowercase ASCII letters, digits, or hyphens,
+            starting with a letter and ending with a letter or digit. The
+            environment is local, development, staging, or production, matched
+            case-insensitively. Never combined with session_id. The Agent and
+            the environment must already exist; sending feedback does not create
             them.
+          examples:
+            - lrn:agents/support-agent/environments/production
         trace_id:
           anyOf:
             - type: string
@@ -387,6 +361,23 @@ components:
           anyOf:
             - $ref: '#/components/schemas/FeedbackConfig'
             - type: 'null'
+          description: >-
+            The scale the score is checked against. If the feedback key already
+            has a feedback config, this must match it exactly or the request is
+            rejected; if it has none, this becomes the key's feedback config.
+        feedback_config_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Feedback Config Id
+          description: >-
+            The ID of the feedback config this feedback was written against. It
+            must be a feedback config for this feedback key in the same
+            workspace, or the feedback is rejected. It doesn't change how the
+            score is checked; feedback_config does that. If omitted, the server
+            may record the key's enforced feedback config, or the one created
+            for the key by this request.
         error:
           anyOf:
             - type: boolean
@@ -523,35 +514,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    address.AgentAddress:
-      type: object
-      required:
-        - environment
-        - id
-        - kind
-      properties:
-        environment:
-          description: '`environment` is the Agent environment.'
-          type: string
-          enum:
-            - LOCAL
-            - DEVELOPMENT
-            - STAGING
-            - PRODUCTION
-          example: PRODUCTION
-        id:
-          description: '`id` is the Agent''s user-assigned id.'
-          type: string
-          maxLength: 63
-          minLength: 1
-          example: support-agent
-          pattern: ^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$
-        kind:
-          enum:
-            - AGENT
-          type: string
-          x-stainless-const: true
-      additionalProperties: false
     AppFeedbackSource:
       properties:
         type:

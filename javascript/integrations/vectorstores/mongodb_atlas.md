@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, vectorstores, mongodb_atlas]
 > Integrate with the MongoDB Atlas vector store using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 >
 > You can still create API routes that use MongoDB with Next.js by setting the `runtime` variable to `nodejs` like so:
@@ -25,7 +26,7 @@ This guide provides a quick overview for getting started with MongoDB Atlas [vec
 
 ### Integration details
 
-| Class | Package | [PY support](https://python.langchain.com/docs/integrations/vectorstores/mongodb_atlas/) | Version |
+| Class | Package | [PY support](../../../integrations/vectorstores/mongodb_atlas.md) | Version |
 | :- | :- | :-: | :-: |
 | [`MongoDBAtlasVectorSearch`](https://reference.langchain.com/javascript/langchain-mongodb/MongoDBAtlasVectorSearch) | [`@langchain/mongodb`](https://www.npmjs.com/package/@langchain/mongodb) | ✅ | ![NPM - Version](https://img.shields.io/npm/v/@langchain/mongodb?style=flat-square\&label=%20&) |
 
@@ -107,7 +108,8 @@ In **automated embedding mode**, MongoDB Atlas handles embedding generation serv
 
 ### Installation
 
-#### Manual embedding
+**Manual embedding**
+
 Install the core package plus an embeddings provider:
 
 **npm**
@@ -128,7 +130,8 @@ yarn add @langchain/mongodb mongodb @langchain/core @langchain/openai
 pnpm add @langchain/mongodb mongodb @langchain/core @langchain/openai
 ```
 
-#### Automated embedding
+**Automated embedding**
+
 Only the core package and MongoDB driver are required:
 
 **npm**
@@ -178,7 +181,8 @@ If you want to get automated tracing of your model calls you can also set your [
 
 Once you've set up your cluster and index, initialize your vector store. The constructor accepts two forms depending on whether you use manual or automated embedding.
 
-#### Manual embedding
+**Manual embedding**
+
 Pass an embeddings instance as the first argument:
 
 ```typescript
@@ -203,7 +207,8 @@ const vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
 });
 ```
 
-#### Automated embedding
+**Automated embedding**
+
 Pass only the configuration object (no embeddings argument is needed).
 
 ```typescript
@@ -256,6 +261,7 @@ await vectorStore.addDocuments(documents, { ids: ["1", "2", "3", "4"] });
 ```
 
 > [!NOTE]
+>
 > After adding documents, there is a delay before they become queryable. In automated embedding mode this delay is longer because MongoDB must generate embeddings server-side after insertion. Wait until the Atlas search index reports that documents are indexed before querying.
 
 Adding a document with the same `id` as an existing document will update the existing one.
@@ -404,8 +410,6 @@ For detailed documentation of all `MongoDBAtlasVectorSearch` features and config
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

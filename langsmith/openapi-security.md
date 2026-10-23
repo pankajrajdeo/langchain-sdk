@@ -11,6 +11,7 @@ tags: [docs, langsmith, openapi-security]
 This guide shows how to customize the OpenAPI security schema for your LangSmith API documentation. A well-documented security schema helps API consumers understand how to authenticate with your API and even enables automatic client generation. See the [Authentication & Access Control conceptual guide](auth.md) for more details about LangGraph's authentication system.
 
 > [!NOTE]
+>
 > **Implementation vs Documentation**
 > This guide only covers how to document your security requirements in OpenAPI. To implement the actual authentication logic, see [How to add custom authentication](custom-auth.md).
 
@@ -20,7 +21,7 @@ This guide applies to all LangSmith deployments (Cloud and self-hosted). It does
 
 The default security scheme varies by deployment type:
 
-#### LangSmith
+**LangSmith**
 
 By default, LangSmith requires a LangSmith API key in the `x-api-key` header:
 
@@ -37,7 +38,7 @@ security:
 
 When using one of the LangGraph SDK's, this can be inferred from environment variables.
 
-#### Self-hosted
+**Self-hosted**
 
 By default, self-hosted deployments have no security scheme. This means they are to be deployed only on a secured network or with authentication. To add custom authentication, see [How to add custom authentication](custom-auth.md).
 
@@ -47,7 +48,8 @@ To customize the security schema in your OpenAPI documentation, add an `openapi`
 
 Note that LangSmith does not provide authentication endpoints - you'll need to handle user authentication in your client application and pass the resulting credentials to the LangGraph API.
 
-#### OAuth2 with Bearer Token
+**OAuth2 with Bearer Token**
+
 ```json
 {
   "auth": {
@@ -75,7 +77,8 @@ Note that LangSmith does not provide authentication endpoints - you'll need to h
 }
 ```
 
-#### API Key
+**API Key**
+
 ```json
 {
   "auth": {
@@ -106,8 +109,6 @@ After updating your configuration:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/openapi-security.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/openapi-security.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

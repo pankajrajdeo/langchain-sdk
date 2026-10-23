@@ -100,6 +100,20 @@ components:
           type: object
           title: Metadata
           description: Thread metadata to filter on.
+        exclude_metadata:
+          oneOf:
+            - type: object
+              minProperties: 1
+            - type: array
+              items:
+                type: object
+                minProperties: 1
+              minItems: 1
+          title: Exclude Metadata
+          description: >-
+            Exclude threads whose metadata contains this object, or any object
+            in this list. Uses the same matching as `metadata`; threads missing
+            the keys are not excluded.
         values:
           type: object
           title: Values

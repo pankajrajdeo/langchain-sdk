@@ -36,7 +36,7 @@ task(
     retry_policy: RetryPolicy | Sequence[RetryPolicy] | None = None,
     cache_policy: CachePolicy[Callable[P, str | bytes]] | None = None,
     timeout: float | timedelta | TimeoutPolicy | None = None,
-    **kwargs: Unpack[DeprecatedKwargs] = {},
+    kwargs: Unpack[DeprecatedKwargs] = {},
 ) -> Callable[[Callable[P, Awaitable[T]] | Callable[P, T]], _TaskFunction[P, T]] | _TaskFunction[P, T]
 ```
 
@@ -97,4 +97,4 @@ A callable function when used as a decorator.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/func/__init__.py#L132)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/func/__init__.py#L132)

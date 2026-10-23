@@ -15,21 +15,39 @@ This guide shows you how to use [Functional API](../langgraph/functional-api.md)
 LangSmith Deployment runs any framework. For agents not built on Deep Agents, LangChain, or LangGraph, deploy using either the [`deployments-wrap-sdk`](https://pypi.org/project/deployments-wrap-sdk/) package (Google ADK) or the [LangGraph Functional API](../langgraph/functional-api.md) (Claude Agent SDK, Strands, CrewAI, AutoGen, and other libraries).
 
 > [!TIP]
+>
 > For new builds, consider [Deep Agents](../deepagents/overview.md), an open-source harness for agents that plan, use tools, delegate to subagents, and work over long horizons. Deep Agents deploy directly to LangSmith Deployment, with [Managed Deep Agents](python/managed-deep-agents-overview.md) available for a fully hosted runtime.
 
 ## Supported frameworks
 
 The following frameworks have end-to-end examples in this guide. Each example exports a LangGraph-compatible graph from `agent.py` that [Agent Server](agent-server.md) can serve:
 
-- [Claude Agent SDK](#general-deployment-pattern)
+![](https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/claude.svg?fit=max\&auto=format\&n=ZPKed1feKJ8F6LVo\&q=85\&s=d3cae2da0f353a45594f57b7f2382aba)
 
-- [Strands Agents](#general-deployment-pattern)
+Claude Agent SDK
 
-- [CrewAI](#general-deployment-pattern)
+[Open](#general-deployment-pattern)
 
-- [AutoGen](#general-deployment-pattern)
+![](https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/bedrock.svg?fit=max\&auto=format\&n=ZPKed1feKJ8F6LVo\&q=85\&s=d6fc326f6c429075add5a742c87d12b1)
+
+Strands Agents
+
+[Open](#general-deployment-pattern)
+
+![](https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/crewai.svg?fit=max\&auto=format\&n=ZPKed1feKJ8F6LVo\&q=85\&s=5f262e7fa86dc071770356a652ddee8f)
+
+CrewAI
+
+[Open](#general-deployment-pattern)
+
+![](https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/autogen.svg?fit=max\&auto=format\&n=ZPKed1feKJ8F6LVo\&q=85\&s=4000da450d02b72ba1115c3dcdc2fde4)
+
+AutoGen
+
+[Open](#general-deployment-pattern)
 
 > [!NOTE]
+>
 > Don't see your framework? The Functional API accepts any callable, so you can apply the same pattern shown in the following examples to any agent library. Wrap your agent's entrypoint with `@task` and `@entrypoint`, then deploy.
 
 ## How the Functional API works
@@ -54,10 +72,12 @@ Regardless of framework, you need:
 
 Follow the same steps for each framework. Choose your stack in the tabs inside each step, combine the snippets in one module (for example `agent.py`), and export the `@entrypoint`-decorated function as a module-level variable named `agent`. The [end-to-end example](#end-to-end-example) section shows complete files you can copy.
 
-### Install dependencies
+**1. Install dependencies**
+
 Install Python packages for your framework plus LangGraph and LangSmith.
 
-#### Claude Agent SDK
+**Claude Agent SDK**
+
 For [Claude Agent SDK](https://docs.claude.com/en/api/agent-sdk/overview):
 
 ```bash
@@ -66,7 +86,8 @@ pip install "langsmith[claude-agent-sdk]" langgraph "langgraph-cli[inmem]"
 
 Set `ANTHROPIC_API_KEY` in your environment. For an Anthropic API key, refer to the [Claude console](https://claude.ai/login).
 
-#### Strands Agents
+**Strands Agents**
+
 For [Strands Agents](https://strandsagents.com/docs/):
 
 ```bash
@@ -75,7 +96,8 @@ pip install strands-agents strands-agents-tools langgraph "langsmith[strands-age
 
 Configure AWS credentials if you use Amazon Bedrock as the model provider.
 
-#### CrewAI
+**CrewAI**
+
 For [CrewAI](https://docs.crewai.com/):
 
 ```bash
@@ -84,7 +106,8 @@ pip install crewai langgraph langsmith opentelemetry-instrumentation-crewai open
 
 Set LLM provider credentials in your environment (for example `OPENAI_API_KEY` if you use OpenAI-backed models).
 
-#### AutoGen
+**AutoGen**
+
 For [AutoGen](https://microsoft.github.io/autogen/):
 
 ```bash
@@ -93,20 +116,23 @@ pip install autogen-agentchat autogen-ext langgraph langsmith opentelemetry-inst
 
 Set `OPENAI_API_KEY` (or your model provider credentials) in your environment.
 
-### Define your agent
+**2. Define your agent**
+
 Build your agent using the framework of your choice, exactly as you would outside of LangSmith.
 
-#### Claude Agent SDK
+**Claude Agent SDK**
+
 ```python
 from claude_agent_sdk import ClaudeAgentOptions
 
 options = ClaudeAgentOptions(
-    model="claude-sonnet-4-6",
+    model="claude-sonnet-5-5",
     system_prompt="You are a helpful assistant.",
 )
 ```
 
-#### Strands Agents
+**Strands Agents**
+
 ```python
 from strands import Agent
 
@@ -116,7 +142,8 @@ strands_agent = Agent(
 )
 ```
 
-#### CrewAI
+**CrewAI**
+
 ```python
 from crewai import Agent as CrewAgent, Crew, Task
 
@@ -127,21 +154,24 @@ crew = Crew(
 )
 ```
 
-#### AutoGen
+**AutoGen**
+
 ```python
 from autogen_agentchat.agents import AssistantAgent
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 
 assistant = AssistantAgent(
     name="assistant",
-    model_client=OpenAIChatCompletionClient(model="gpt-4o"),
+    model_client=OpenAIChatCompletionClient(model="gpt-5.5"),
 )
 ```
 
-### Wrap with the Functional API
+**3. Wrap with the Functional API**
+
 Expose your agent through an `@entrypoint`-decorated function named `agent`. Inside, use `@task` for the unit of work that calls into the framework. Use `entrypoint.final()` to return the response and persist conversation history across turns on the same thread.
 
-#### Claude Agent SDK
+**Claude Agent SDK**
+
 ```python
 import operator
 
@@ -169,7 +199,8 @@ async def agent(messages: list[dict], previous: list[dict] | None = None):
     )
 ```
 
-#### Strands Agents
+**Strands Agents**
+
 ```python
 import operator
 
@@ -188,7 +219,8 @@ def agent(messages: list[Message], previous: list[Message] | None = None):
     return entrypoint.final(value=response, save=operator.add(messages, response))
 ```
 
-#### CrewAI
+**CrewAI**
+
 ```python
 import operator
 
@@ -206,7 +238,8 @@ def agent(messages: list[dict], previous: list[dict] | None = None):
     return entrypoint.final(value=[new_message], save=operator.add(history, [new_message]))
 ```
 
-#### AutoGen
+**AutoGen**
+
 ```python
 import operator
 
@@ -225,10 +258,12 @@ async def agent(messages: list[dict], previous: list[dict] | None = None):
     return entrypoint.final(value=[new_message], save=operator.add(history, [new_message]))
 ```
 
-### Configure tracing
+**4. Configure tracing**
+
 Forward the framework's native traces to LangSmith. Call tracing setup once at application startup, before creating or invoking agents.
 
-#### Claude Agent SDK
+**Claude Agent SDK**
+
 ```python
 from langsmith.integrations.claude_agent_sdk import configure_claude_agent_sdk
 
@@ -237,7 +272,8 @@ configure_claude_agent_sdk()
 
 For full setup details, see [Trace Claude Agent SDK applications](trace-claude-agent-sdk.md).
 
-#### Strands Agents
+**Strands Agents**
+
 Set your [LangSmith API key](create-account-api-key.md) and project name. If you use Amazon Bedrock, also configure AWS credentials.
 
 ```python
@@ -247,14 +283,17 @@ setup_langsmith_telemetry()
 ```
 
 > [!NOTE]
+>
 > If you're [self-hosting LangSmith](self-hosted.md), configure the OpenTelemetry OTLP endpoint and headers for your deployment. See [Trace Strands Agents applications](trace-with-strands-agents.md).
 
 > [!NOTE]
+>
 > Strands' OTel tracing contains synchronous code. You may need to set `BG_JOB_ISOLATED_LOOPS=true` when deploying to Agent Server. See [`BG_JOB_ISOLATED_LOOPS`](env-var.md#bg_job_isolated_loops).
 
 For full setup details, see [Trace Strands Agents applications](trace-with-strands-agents.md).
 
-#### CrewAI
+**CrewAI**
+
 Register the LangSmith span processor with the CrewAI and OpenAI instrumentors:
 
 ```python
@@ -278,7 +317,8 @@ OpenAIInstrumentor().instrument(tracer_provider=tracer_provider)
 
 For full setup details, see [Trace CrewAI applications](trace-with-crewai.md).
 
-#### AutoGen
+**AutoGen**
+
 Register the LangSmith span processor with the OpenAI instrumentor:
 
 ```python
@@ -299,7 +339,8 @@ For full setup details, see [Trace AutoGen applications](trace-with-autogen.md).
 
 The following examples combine agent definition, Functional API wrapping, tracing setup, and export of the `agent` symbol in a single `agent.py` file. Pick the tab for your framework.
 
-#### Claude Agent SDK
+**Claude Agent SDK**
+
 **agent.py**
 
 ```python
@@ -312,7 +353,7 @@ from langsmith.integrations.claude_agent_sdk import configure_claude_agent_sdk
 configure_claude_agent_sdk()
 
 options = ClaudeAgentOptions(
-    model="claude-sonnet-4-6",
+    model="claude-sonnet-5-5",
     system_prompt="You are a helpful assistant.",
 )
 
@@ -337,7 +378,8 @@ async def agent(messages: list[dict], previous: list[dict] | None = None):
     )
 ```
 
-#### Strands Agents
+**Strands Agents**
+
 **agent.py**
 
 ```python
@@ -367,7 +409,8 @@ def agent(messages: list[Message], previous: list[Message] | None = None):
     return entrypoint.final(value=response, save=operator.add(messages, response))
 ```
 
-#### CrewAI
+**CrewAI**
+
 **agent.py**
 
 ```python
@@ -410,7 +453,8 @@ def agent(messages: list[dict], previous: list[dict] | None = None):
     return entrypoint.final(value=[new_message], save=operator.add(history, [new_message]))
 ```
 
-#### AutoGen
+**AutoGen**
+
 **agent.py**
 
 ```python
@@ -431,7 +475,7 @@ OpenAIInstrumentor().instrument()
 
 assistant = AssistantAgent(
     name="assistant",
-    model_client=OpenAIChatCompletionClient(model="gpt-4o"),
+    model_client=OpenAIChatCompletionClient(model="gpt-5.5"),
 )
 
 @task
@@ -466,7 +510,8 @@ my-agent/
 
 [`langgraph.json`](application-structure.md#configuration-file-concepts) points Agent Server at the exported symbol:
 
-#### Claude Agent SDK
+**Claude Agent SDK**
+
 **langgraph.json**
 
 ```json
@@ -502,7 +547,8 @@ LANGSMITH_PROJECT=my-claude-agent
 ANTHROPIC_API_KEY=your-anthropic-api-key
 ```
 
-#### Strands Agents
+**Strands Agents**
+
 **langgraph.json**
 
 ```json
@@ -543,7 +589,8 @@ AWS_REGION=your-aws-region
 AWS_PROFILE=your-aws-profile
 ```
 
-#### CrewAI
+**CrewAI**
+
 **langgraph.json**
 
 ```json
@@ -581,7 +628,8 @@ LANGSMITH_PROJECT=my-crewai-agent
 OPENAI_API_KEY=your-openai-api-key
 ```
 
-#### AutoGen
+**AutoGen**
+
 **langgraph.json**
 
 ```json
@@ -627,6 +675,8 @@ From your project directory:
 pip install -e .
 ```
 
+<a id="configure-tracing"></a>
+
 ## Enable tracing
 
 Use the framework-specific `.env` template in [Project layout](#project-layout). Agent Server loads this file when `"env": ".env"` is set in `langgraph.json`.
@@ -644,14 +694,17 @@ langgraph dev
 ```
 
 > [!NOTE]
+>
 > If `langgraph dev` reports that `langgraph-api` is missing, install `langgraph-cli[inmem]` in the same environment.
 
 This serves the agent at `http://127.0.0.1:2024` and opens [LangSmith Studio](studio.md). Send a request with `curl`:
 
 > [!NOTE]
+>
 > `langgraph dev` may serve on a different port. Check the URL in the terminal output and update the `curl` commands below if needed.
 
-#### Claude Agent SDK, CrewAI, AutoGen
+**Claude Agent SDK, CrewAI, AutoGen**
+
 ```bash
 # Create a thread
 THREAD=$(curl -s -X POST http://127.0.0.1:2024/threads \
@@ -666,7 +719,8 @@ curl -s -X POST "http://127.0.0.1:2024/threads/$THREAD/runs/wait" \
   }'
 ```
 
-#### Strands Agents
+**Strands Agents**
+
 ```bash
 # Create a thread
 THREAD=$(curl -s -X POST http://127.0.0.1:2024/threads \
@@ -689,11 +743,13 @@ curl -s -X POST "http://127.0.0.1:2024/threads/$THREAD/runs/wait" \
 ```
 
 > [!NOTE]
+>
 > If this request fails with `NoCredentialsError`, configure AWS credentials for your model provider (for example `AWS_PROFILE` or `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) and restart `langgraph dev`.
 
 Replace `ASSISTANT_ID` with the graph key from your `langgraph.json` `graphs` object. For example, if your config is `"graphs": {"claude_agent": "./agent.py:agent"}`, use `claude_agent`; if your config is `"graphs": {"strands_agent": "./agent.py:agent"}`, use `strands_agent`.
 
 > [!NOTE]
+>
 > [Verify that the LangGraph API runs locally](local-dev-testing.md) before deploying. If `langgraph dev` fails, deployment to LangSmith will fail as well.
 
 ## Deploy to LangSmith
@@ -708,8 +764,6 @@ For environment configuration, deployment types, and revision management, see [D
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-other-frameworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-other-frameworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

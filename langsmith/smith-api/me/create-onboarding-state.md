@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/me/onboarding_state:
     post:
@@ -235,6 +238,24 @@ components:
               format: date-time
             - type: 'null'
           title: Agent Platform Welcome Viewed At
+        get_started_checklist_dismissed_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Get Started Checklist Dismissed At
+        agent_trace_viewed_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Agent Trace Viewed At
+        agent_monitoring_viewed_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Agent Monitoring Viewed At
         created_at:
           type: string
           format: date-time

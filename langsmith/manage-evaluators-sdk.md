@@ -20,6 +20,7 @@ Managing evaluators through the SDK requires:
 * TypeScript: `langsmith>=0.7.16` (npm)
 
 > [!NOTE]
+>
 > For installation and setup, refer to the [Python SDK documentation](https://reference.langchain.com/python/langsmith) and [TypeScript SDK documentation](https://reference.langchain.com/javascript/modules/langsmith.html).
 
 The examples on this page initialize the client with no arguments, so it reads the `LANGSMITH_API_KEY` and `LANGSMITH_ENDPOINT` environment variables. Configure your [API key](create-account-api-key.md) through environment variables rather than hardcoding it.
@@ -80,6 +81,7 @@ console.log("Created evaluator:", evaluatorId);
 An LLM-as-a-judge evaluator references a prompt from the [prompt hub](prompt-engineering-quickstart.md) and maps your run or example fields to the prompt variables.
 
 > [!NOTE]
+>
 > The prompt must be a structured prompt (type `StructuredPrompt`). A `StructuredPrompt` combines a prompt template with an output schema, ensuring the model returns data in a defined structure.
 
 **Python**
@@ -280,6 +282,7 @@ An LLM-as-a-judge evaluator accepts additional settings that control how it scor
 * **`use_corrections_dataset`** and **`num_few_shot_examples`**: Enable few-shot learning from human score corrections. They apply only when the evaluator is attached to a project or dataset and corrections have been submitted.
 
 > [!NOTE]
+>
 > These settings take effect on the next evaluation run, not when you call `update`.
 
 **Python**
@@ -420,6 +423,7 @@ Retrieve estimated USD spend and trace counts for your evaluators:
 * **Empty result**: If no spend is recorded for the window, the returned `groups` list is empty.
 
 > [!NOTE]
+>
 > Pass exactly one of `group_by`, `evaluator_id`, `session_id` (the LangSmith tracing project UUID), or `dataset_id`.
 
 **Python**
@@ -565,8 +569,6 @@ await client.evaluators.delete(evaluatorId, {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-evaluators-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-evaluators-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

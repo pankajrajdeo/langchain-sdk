@@ -25,7 +25,7 @@ npm install -g openwiki
 openwiki --init
 ```
 
-See the [Quickstart](quickstart.md) to choose a model provider, generate docs, and keep them up to date. To run OpenWiki inside Codex, Claude Code, OpenCode, or Cursor instead of a standalone model session, see [Coding-agent integrations](integrations.md).
+See the [Quickstart](quickstart.md) to choose a model provider, generate docs, and keep them up to date. To run OpenWiki inside a coding agent instead of a standalone model session, see [Coding-agent integrations](integrations.md). To search an existing wiki or group related repositories, see [Search and link wikis](search-and-link.md).
 
 ## Modes
 
@@ -40,42 +40,54 @@ Bare `openwiki --init` and `openwiki --update` run in code mode. Use `openwiki p
 
 ## Capabilities
 
-#### [Repository wikis](code-mode.md)
-Generate Markdown docs under `openwiki/`, then wire them into `AGENTS.md` and `CLAUDE.md` so coding agents can find them.
+> **[Repository wikis](code-mode.md)**
+>
+> Generate Markdown docs under `openwiki/`, then wire them into `AGENTS.md` (and `CLAUDE.md` when present) so coding agents can find them.
 
-#### [Coding-agent integrations](integrations.md)
-Run OpenWiki inside Codex, Claude Code, OpenCode, or Cursor using the host model and repository tools.
+> **[Coding-agent integrations](integrations.md)**
+>
+> Run OpenWiki inside Codex, Claude Code, OpenCode, Cursor, IBM Bob, Kiro, Oh My Pi, Antigravity, or Pi.
 
-#### [Personal brain](personal-mode.md)
-Build a local wiki from git repos, Custom MCP, Gmail, Notion, web search, Hacker News, and X/Twitter.
+> **[Search and link](search-and-link.md)**
+>
+> Query wiki pages over MCP and group related repository wikis into workspaces.
 
-#### [Grounded Claims](code-mode.md#grounded-claims)
-Track material facts back to versioned source evidence and refresh pages when that evidence changes.
+> **[Personal brain](personal-mode.md)**
+>
+> Build a local wiki from git repos, Custom MCP, Gmail, Notion, web search, Hacker News, and X/Twitter.
 
-#### [Automatic updates](automate-updates.md)
-Refresh docs from GitHub Actions, GitLab CI, or Bitbucket Pipelines and open a PR when content changes.
+> **[Grounded Claims](code-mode.md#grounded-claims)**
+>
+> Track material facts back to versioned source evidence and refresh pages when that evidence changes.
 
-#### [Model providers](providers.md)
-Use OpenAI, Anthropic, Gemini, Bedrock, OpenRouter, GitHub Copilot, and other providers out of the box.
+> **[Automatic updates](automate-updates.md)**
+>
+> Refresh docs from GitHub Actions, GitLab CI, or Bitbucket Pipelines and open a PR when content changes.
 
-#### [Open Knowledge Format](code-mode.md#open-knowledge-format)
-Emit OKF v0.2 Markdown bundles with front matter, indexes, and linked concepts.
+> **[Model providers](providers.md)**
+>
+> Use OpenAI, Anthropic, Gemini, Bedrock, OpenRouter, GitHub Copilot, IBM Bob, and other providers out of the box.
 
-#### [LangSmith tracing](quickstart.md#trace-with-langsmith)
-Trace documentation runs with LangSmith.
+> **[Open Knowledge Format](code-mode.md#open-knowledge-format)**
+>
+> Emit OKF v0.2 Markdown bundles with front matter, indexes, and linked concepts.
+
+> **[LangSmith tracing](quickstart.md#trace-with-langsmith)**
+>
+> Trace documentation runs with LangSmith.
 
 ## Next steps
 
-#### [Quickstart](quickstart.md)
-Install OpenWiki, configure a provider, and generate your first wiki.
+> **[Quickstart](quickstart.md)**
+>
+> Install OpenWiki, configure a provider, and generate your first wiki.
 
-#### [CLI reference](cli-reference.md)
-Review commands, flags, and connector subcommands.
+> **[CLI reference](cli-reference.md)**
+>
+> Review commands, flags, and connector subcommands.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

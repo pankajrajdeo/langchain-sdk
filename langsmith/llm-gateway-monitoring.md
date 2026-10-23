@@ -11,14 +11,12 @@ tags: [docs, langsmith, llm-gateway-monitoring]
 > View and analyze LLM Gateway costs by user, API key, and model.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 The LLM Gateway **Spend Monitoring** dashboard shows how much LLM cost a [workspace](administration-overview.md#workspaces) has accrued through the gateway. Use it to compare spend over time and identify the users, [API keys](create-account-api-key.md), and models that account for that spend. The dashboard covers one workspace at a time; switch workspaces to compare them.
 
-Viewing the dashboard requires the [Organization Admin](rbac.md#organization-admin) role and a Plus or Enterprise [plan](pricing-plans.md). Without both, the **Usage** tab does not appear.
-
-> [!WARNING]
-> The dashboard is not currently available in the EU, APAC, or AWS environments.
+Viewing the dashboard requires the [Organization Admin](rbac.md#organization-admin) role and a Plus or Enterprise [plan](https://docs.langchain.com/langsmith/pricing-plans.md). Without both, the **Usage** tab does not appear.
 
 ## Open the dashboard
 
@@ -77,6 +75,31 @@ Select a user or API key row to open a detailed view:
 
 The detailed view has its own entity filter, time range, and granularity controls. Changes in this view do not change the controls on the main dashboard.
 
+## Group spend by custom header
+
+Custom-header grouping breaks down an API key's spend by request header value. Use it to compare spend across your end customers or teams under one API key.
+
+This option requires an enabled default API-key spend policy with **Separate limits by custom header** configured. An organization-level policy with a **Custom header condition** does not enable this option. Neither does a default workspace or user policy.
+
+> [!WARNING]
+>
+> The required policy enforces a spend cap for each API-key and header-value pair. It is not an analytics-only setting. Requests that exceed a matching cap are blocked with HTTP `402`, and existing organization-level caps still apply.
+
+To configure custom-header grouping:
+
+1. Go to **LLM Gateway** > **Cost Controls** and click **Create spend limit**, or edit an existing default API-key spend policy.
+2. Select **API Key**, then select the option to apply the limit to every API key by default.
+3. Select **Separate limits by custom header**.
+4. Enter the **Header name** without the `X-Gateway-` prefix. For example, enter `Customer-Id` for the `X-Gateway-Customer-Id` request header. Do not enter a header value: each request supplies its own value.
+5. Set the spend limit and period, save the policy, and ensure it is enabled.
+6. Send the full `X-Gateway-Customer-Id` header on gateway requests from your backend. For request examples, see [Send a customer header on every call](llm-gateway-header-policies.md#step-1-send-a-customer-header-on-every-call).
+7. Return to **Usage**, refresh the page, and select **API Key** from **Breakdown by**.
+8. Select an API-key row. In the detailed view, select **Custom header** from **Group by**.
+
+The detailed view groups spend by the header configured on the default API-key policy. Custom-header grouping is not a top-level **Breakdown by** option. If the option is disabled, check that the default API-key policy is enabled and includes the header name.
+
+For more information about independent limits and requests without the header, see [Separate a default spend limit by header](llm-gateway-header-policies.md#separate-a-default-spend-limit-by-header).
+
 ## See also
 
 * [LLM Gateway overview](llm-gateway.md)
@@ -84,8 +107,6 @@ The detailed view has its own entity filter, time range, and granularity control
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-monitoring.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-monitoring.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

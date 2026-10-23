@@ -1,25 +1,28 @@
 ---
 title: "reference/python/deepagents/middleware/async_subagents"
-description: "Index of 12 pages and 9 subdirectories under reference/python/deepagents/middleware/async_subagents."
+description: "Index of 13 pages and 12 subdirectories under reference/python/deepagents/middleware/async_subagents."
 category: "index"
 tags: [index, reference, python, deepagents, middleware, async_subagents]
 ---
 
 # reference/python/deepagents/middleware/async_subagents
 
-12 pages here, 39 pages including subdirectories.
+13 pages here, 60 pages including subdirectories.
 
 ## Directories
 
-- [AsyncSubAgent/](AsyncSubAgent/_index.md) - 5 pages
-- [AsyncSubAgentMiddleware/](AsyncSubAgentMiddleware/_index.md) - 6 pages
+- [AsyncSubAgent/](AsyncSubAgent/_index.md) - 9 pages
+- [AsyncSubAgentMiddleware/](AsyncSubAgentMiddleware/_index.md) - 12 pages
 - [AsyncSubAgentState/](AsyncSubAgentState/_index.md) - 1 page
-- [AsyncTask/](AsyncTask/_index.md) - 8 pages
+- [AsyncTask/](AsyncTask/_index.md) - 9 pages
 - [CancelAsyncTaskSchema/](CancelAsyncTaskSchema/_index.md) - 1 page
 - [CheckAsyncTaskSchema/](CheckAsyncTaskSchema/_index.md) - 1 page
 - [ListAsyncTasksSchema/](ListAsyncTasksSchema/_index.md) - 1 page
 - [StartAsyncTaskSchema/](StartAsyncTaskSchema/_index.md) - 2 pages
+- [TaskEvent/](TaskEvent/_index.md) - 4 pages
 - [UpdateAsyncTaskSchema/](UpdateAsyncTaskSchema/_index.md) - 2 pages
+- [_ParentReference/](_ParentReference/_index.md) - 2 pages
+- [_TaskUpdate/](_TaskUpdate/_index.md) - 3 pages
 
 ## Files
 
@@ -32,6 +35,7 @@ tags: [index, reference, python, deepagents, middleware, async_subagents]
 - [CheckAsyncTaskSchema](CheckAsyncTaskSchema.md) - Input schema for the check_async_task tool.
 - [ListAsyncTasksSchema](ListAsyncTasksSchema.md) - Input schema for the list_async_tasks tool.
 - [StartAsyncTaskSchema](StartAsyncTaskSchema.md) - Input schema for the start_async_task tool.
+- [TaskEvent](TaskEvent.md) - How an async subagent's task ended or paused, as reported to the agent that started it.
 - [UpdateAsyncTaskSchema](UpdateAsyncTaskSchema.md) - Input schema for the update_async_task tool.
 - [append_to_system_message](append_to_system_message.md) - Append text to a system message.
 - [logger](logger.md) - View source on GitHub

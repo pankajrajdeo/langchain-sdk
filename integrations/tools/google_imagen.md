@@ -60,9 +60,7 @@ img = Image.open(io.BytesIO(base64.decodebytes(bytes(img_base64, "utf-8"))))
 img
 ```
 
-<p>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/imagen-generated-cat.jpg?fit=max&auto=format&n=x_qjL89cw5RbZp-3&q=85&s=7fd0bbd447c38e106e79e99fcd76a578" width="1024" height="1024" data-path="images/integrations/imagen-generated-cat.jpg" />
-</p>
+![](https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/imagen-generated-cat.jpg?fit=max\&auto=format\&n=x_qjL89cw5RbZp-3\&q=85\&s=7fd0bbd447c38e106e79e99fcd76a578)
 
 ## Image editing
 
@@ -123,9 +121,7 @@ edited_img = Image.open(
 edited_img
 ```
 
-<p>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/imagen-edited-cat.jpg?fit=max&auto=format&n=x_qjL89cw5RbZp-3&q=85&s=89c508316ed96bc5e6c2d6874cb37d4f" width="1024" height="1024" data-path="images/integrations/imagen-edited-cat.jpg" />
-</p>
+![](https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/imagen-edited-cat.jpg?fit=max\&auto=format\&n=x_qjL89cw5RbZp-3\&q=85\&s=89c508316ed96bc5e6c2d6874cb37d4f)
 
 ## Image captioning
 
@@ -157,9 +153,7 @@ img
 Generated Cpation : a cat sitting on the beach looking at the camera
 ```
 
-<p>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/imagen-cat-beach.jpg?fit=max&auto=format&n=x_qjL89cw5RbZp-3&q=85&s=620689fa3c5ef5af4aeffd79d7a34f8d" width="1024" height="1024" data-path="images/integrations/imagen-cat-beach.jpg" />
-</p>
+![](https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/imagen-cat-beach.jpg?fit=max\&auto=format\&n=x_qjL89cw5RbZp-3\&q=85\&s=620689fa3c5ef5af4aeffd79d7a34f8d)
 
 ## Visual question answering (VQA)
 
@@ -200,14 +194,10 @@ question : What animal is shown in the image?
 answer : cat
 ```
 
-<p>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/imagen-cat-beach.jpg?fit=max&auto=format&n=x_qjL89cw5RbZp-3&q=85&s=620689fa3c5ef5af4aeffd79d7a34f8d" width="1024" height="1024" data-path="images/integrations/imagen-cat-beach.jpg" />
-</p>
+![](https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/imagen-cat-beach.jpg?fit=max\&auto=format\&n=x_qjL89cw5RbZp-3\&q=85\&s=620689fa3c5ef5af4aeffd79d7a34f8d)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_imagen.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_imagen.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

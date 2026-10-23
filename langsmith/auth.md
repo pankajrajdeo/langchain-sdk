@@ -33,6 +33,7 @@ LangSmith provides different security defaults:
 * Can accept LangSmith API keys alongside custom auth when `auth.allow_langsmith_api_keys` is `true` in [`langgraph.json`](cli.md#configuration-file) (Agent Server v0.14.0rc2+)
 
 > [!NOTE]
+>
 > **Custom auth**
 > Custom auth **is supported** for all plans in LangSmith.
 
@@ -123,23 +124,20 @@ The returned user information is available:
 * To your authorization handlers via [`ctx.user`](https://reference.langchain.com/python/langgraph-sdk/auth/types/AuthContext)
 * In your application via `config["configuration"]["langgraph_auth_user"]`
 
-<details>
-<summary>Supported Parameters</summary>
-
-The [`@auth.authenticate`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth/authenticate) handler can accept any of the following parameters by name:
-
-* request (Request): The raw ASGI request object
-* path (str): The request path, e.g., `"/threads/abcd-1234-abcd-1234/runs/abcd-1234-abcd-1234/stream"`
-* method (str): The HTTP method, e.g., `"GET"`
-* path\_params (dict\[str, str]): URL path parameters, e.g., `{"thread_id": "abcd-1234-abcd-1234", "run_id": "abcd-1234-abcd-1234"}`
-* query\_params (dict\[str, str]): URL query parameters, e.g., `{"stream": "true"}`
-* headers (dict\[bytes, bytes]): Request headers
-* authorization (str | None): The Authorization header value (e.g., `"Bearer <token>"`)
-
-In many of our tutorials, we will just show the "authorization" parameter to be concise, but you can opt to accept more information as needed
-to implement your custom authentication scheme.
-
-</details>
+> **Supported Parameters**
+>
+> The [`@auth.authenticate`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth/authenticate) handler can accept any of the following parameters by name:
+>
+> * request (Request): The raw ASGI request object
+> * path (str): The request path, e.g., `"/threads/abcd-1234-abcd-1234/runs/abcd-1234-abcd-1234/stream"`
+> * method (str): The HTTP method, e.g., `"GET"`
+> * path\_params (dict\[str, str]): URL path parameters, e.g., `{"thread_id": "abcd-1234-abcd-1234", "run_id": "abcd-1234-abcd-1234"}`
+> * query\_params (dict\[str, str]): URL query parameters, e.g., `{"stream": "true"}`
+> * headers (dict\[bytes, bytes]): Request headers
+> * authorization (str | None): The Authorization header value (e.g., `"Bearer <token>"`)
+>
+> In many of our tutorials, we will just show the "authorization" parameter to be concise, but you can opt to accept more information as needed
+> to implement your custom authentication scheme.
 
 ### Agent authentication
 
@@ -239,8 +237,6 @@ async def add_owner(
     return filters
 ```
 
-<a id="resource-specific-handlers" />
-
 ### Resource-specific handlers
 
 You can register handlers for specific resources and actions by chaining the resource and action names together with the [`@auth.on`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) decorator.
@@ -251,6 +247,7 @@ When a request is made, the most specific handler that matches that resource and
 3. All other endpoints (e.g., e.g., delete assistant, crons, store) are disabled for all users.
 
 > [!TIP]
+>
 > **Supported Handlers**
 > For a full list of supported resources and actions, see the [Supported Resources](#supported-resources) section below.
 
@@ -341,8 +338,6 @@ async def on_assistant_create(
 
 Notice that we are mixing global and resource-specific handlers in the above example. Since each request is handled by the most specific handler, a request to create a `thread` would match the `on_thread_create` handler but NOT the `reject_unhandled_requests` handler. A request to `update` a thread, however would be handled by the global handler, since we don't have a more specific handler for that resource and action.
 
-<a id="filter-operations" />
-
 ### Filter operations
 
 Authorization handlers can return `None`, a boolean, or a filter dictionary.
@@ -427,10 +422,11 @@ The most specific matching handler will be used. For example, `@auth.on.threads.
 If a more specific handler is registered, the more general handler will not be called for that resource and action.
 
 > [!TIP]
+>
 > "Type Safety"
 > Each handler has type hints available for its `value` parameter at `Auth.types.on.<resource>.<action>.value`. For example:
 >
-> ```python
+```python
 > @auth.on.threads.create
 > async def on_thread_create(
 > ctx: Auth.types.AuthContext,
@@ -451,11 +447,11 @@ If a more specific handler is registered, the more general handler will not be c
 > value: dict  # Union type of all possible actions
 > ):
 > ...
-> ```
+```
 >
 > More specific handlers provide better type hints since they handle fewer action types.
 
-<a id="supported-actions" />
+<a id="supported-actions"></a>
 
 #### Supported actions and types
 
@@ -489,6 +485,7 @@ Here are all the supported action handlers:
 Store authorization differs from threads and assistants. Handlers must rewrite the mutable `namespace` field in `value` to scope data per user rather than returning metadata filters. For a walkthrough, see [Isolate store per user](store-auth.md).
 
 > [!NOTE]
+>
 > "About Runs"
 >
 > Runs are scoped to their parent thread for access control. This means permissions are typically inherited from the thread, reflecting the conversational nature of the data model. All run operations (reading, listing) except creation are controlled by the thread's handlers.
@@ -503,8 +500,6 @@ For implementation details:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

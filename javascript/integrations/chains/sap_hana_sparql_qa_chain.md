@@ -114,7 +114,8 @@ const qaChain = HanaSparqlQAChain.fromLLM({
 
 **Prerequisite**:
 You must have an SAP HANA Cloud instance with the **triple store** feature enabled.
-For detailed instructions, refer to: [Enable Triple Store](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-knowledge-graph-guide/enable-triple-store/)<br />
+For detailed instructions, refer to: [Enable Triple Store](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-knowledge-graph-guide/enable-triple-store/)\
+
 Load the `kgdocu_movies` example data. See [Knowledge Graph Example](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-knowledge-graph-guide/knowledge-graph-example).
 
 Below we’ll:
@@ -338,8 +339,6 @@ The actors who acted in Blade Runner include Morgan Paull, William Sanderson, Ja
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chains/sap_hana_sparql_qa_chain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chains/sap_hana_sparql_qa_chain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

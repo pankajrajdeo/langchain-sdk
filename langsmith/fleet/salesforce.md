@@ -17,6 +17,7 @@ The Salesforce integration gives your agents read-only access to data in your Sa
 * Pull live context from Salesforce into any thread or scheduled run.
 
 > [!NOTE]
+>
 > Connecting Salesforce is a one-time setup per Salesforce org. A Salesforce System Administrator (or a user with the **Approve Uninstalled Connected Apps** permission) must install the connector before other users can authenticate.
 
 ## Prerequisites
@@ -29,33 +30,42 @@ The Salesforce integration gives your agents read-only access to data in your Sa
 
 The first connection attempt registers the **LangChain Fleet Connector** in your Salesforce org so that an administrator can install it. This initial attempt is expected to fail with an authentication error.
 
-### Open the Integrations page
+**1. Open the Integrations page**
+
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-salesforce), navigate to the [**Fleet** > **Integrations**](https://smith.langchain.com/agents/tools) tab.
 
-### Start the Salesforce connection
+**2. Start the Salesforce connection**
+
 Find the **Salesforce** tool and click **Connect**.
 
-### Sign in to Salesforce
+**3. Sign in to Salesforce**
+
 Sign in with your Salesforce credentials. If your org requires a custom domain or SSO, click **Use Custom Domain** and enter your org's My Domain before signing in. Then click **Allow** to authorize the connection.
 
 > [!NOTE]
+>
 > The first attempt fails by design. The failed request registers the **LangChain Fleet Connector** in your Salesforce org so an administrator can install it in the next step.
 
 > [!TIP]
+>
 > If you are not a Salesforce administrator, stop here and send your admin the link to this page. They need to follow the **Install the connector** and **Grant user access** steps below before you can complete the connection.
 
 ## Install the connector
 
 > [!NOTE]
+>
 > This step must be completed by a Salesforce System Administrator.
 
-### Open Salesforce Setup
+**1. Open Salesforce Setup**
+
 In Salesforce, click the  gear icon and select **Setup**.
 
-### Open Connected Apps OAuth Usage
+**2. Open Connected Apps OAuth Usage**
+
 In the **Quick Find** box, type `Connected Apps OAuth Usage` and open the page.
 
-### Install the connector
+**3. Install the connector**
+
 1. Find **LangChain Fleet Connector** in the list.
 2. Click **Install**.
 3. Confirm the installation on the next page.
@@ -65,15 +75,19 @@ In the **Quick Find** box, type `Connected Apps OAuth Usage` and open the page.
 Granting access through a permission set is the recommended way to control which users can authenticate with Fleet.
 
 > [!NOTE]
+>
 > This step must be completed by a Salesforce System Administrator.
 
-### Open the app policies
+**1. Open the app policies**
+
 From **Connected Apps OAuth Usage**, click **Manage App Policies** next to **LangChain Fleet Connector**.
 
-### Pre-authorize admin-approved users
+**2. Pre-authorize admin-approved users**
+
 Under **OAuth Policies** > **Permitted Users**, select **Admin approved users are pre-authorized**, then click **Save**.
 
-### Assign a permission set
+**3. Assign a permission set**
+
 Use **Manage Permission Sets** to grant access to the users who need to connect the Salesforce tool in Fleet.
 
 ## Connect from Fleet
@@ -110,19 +124,20 @@ Salesforce tools run with the permissions of the connected user. If an agent can
 
 ## Next steps
 
-#### [Add more tools](tools.md)
-Connect additional services to your agent
+> **[Add more tools](tools.md)**
+>
+> Connect additional services to your agent
 
-#### [Agent identity](agent-identity.md)
-Choose whether the agent uses shared or per-user credentials
+> **[Agent identity](agent-identity.md)**
+>
+> Choose whether the agent uses shared or per-user credentials
 
-#### [Human-in-the-loop](essentials.md#human-in-the-loop)
-Require approval before the agent takes sensitive actions
+> **[Human-in-the-loop](essentials.md#human-in-the-loop)**
+>
+> Require approval before the agent takes sensitive actions
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/salesforce.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/salesforce.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

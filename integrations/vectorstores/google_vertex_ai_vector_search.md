@@ -546,7 +546,7 @@ from langchain_google_vertexai import (
 )
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/vertex-ai-vector-search.png?fit=max&auto=format&n=x_qjL89cw5RbZp-3&q=85&s=422e1b75a74d838f469de76501610a1b" alt="Langchainassets.png" width="960" height="540" data-path="images/integrations/vertex-ai-vector-search.png" />
+![Langchainassets.png](https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/vertex-ai-vector-search.png?fit=max\&auto=format\&n=x_qjL89cw5RbZp-3\&q=85\&s=422e1b75a74d838f469de76501610a1b)
 
 ### Create simple vectorstore ( without filters)
 
@@ -780,6 +780,7 @@ print(f"{response['source_documents']}")
 ```
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -927,8 +928,6 @@ vector_store.similarity_search_by_vector_with_score(
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_vertex_ai_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_vertex_ai_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

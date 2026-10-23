@@ -20,7 +20,8 @@ Below are examples for Python and TypeScript.
 
 Starting from an **existing** LangSmith application, add the following custom route code to your app file. If you are starting from scratch, you can create a new app from a template using the CLI.
 
-#### Python
+**Python**
+
 ```bash
 langgraph new --template=new-langgraph-project-python my_new_project
 ```
@@ -38,7 +39,8 @@ def read_root():
     return {"Hello": "World"}
 ```
 
-#### TypeScript
+**TypeScript**
+
 ```bash
 yarn create langgraph
 npm install hono
@@ -66,7 +68,8 @@ The `hono` package must be available in your project dependencies.
 
 Add the following to your `langgraph.json` configuration file. Make sure the path points to the app instance you created in the [previous section](#create-app).
 
-#### Python
+**Python**
+
 ```json
 {
   "dependencies": ["."],
@@ -81,7 +84,8 @@ Add the following to your `langgraph.json` configuration file. Make sure the pat
 }
 ```
 
-#### TypeScript
+**TypeScript**
+
 ```json
 {
   "node_version": "20",
@@ -96,12 +100,14 @@ Add the following to your `langgraph.json` configuration file. Make sure the pat
 
 Test the server out locally:
 
-#### Python
+**Python**
+
 ```bash
 langgraph dev --no-browser
 ```
 
-#### TypeScript
+**TypeScript**
+
 ```bash
 npx @langchain/langgraph-cli@latest dev --no-browser
 ```
@@ -111,6 +117,7 @@ If you navigate to `localhost:2024/hello` in your browser (`2024` is the default
 The TypeScript `http.app` configuration works in both local development with `langgraph dev` and Docker with `langgraph up`.
 
 > [!NOTE]
+>
 > **Shadowing default endpoints**
 > The routes you create in the app are given priority over the system defaults, meaning you can shadow and redefine the behavior of any default endpoint.
 
@@ -124,8 +131,6 @@ Now that you've added a custom route to your deployment, you can use this same t
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-routes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-routes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

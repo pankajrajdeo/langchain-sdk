@@ -13,6 +13,7 @@ tags: [docs, langsmith, log-retriever-trace]
 Many LLM applications retrieve documents from vector databases, knowledge graphs, or other indexes as part of a retrieval-augmented generation (RAG) pipeline. LangSmith provides dedicated rendering for retriever steps, which makes it easier to inspect retrieved documents and diagnose retrieval issues.
 
 > [!NOTE]
+>
 > These steps are **optional**. If you skip them, your retriever data will still be logged, but LangSmith will not render it with retriever-specific formatting.
 
 To enable retriever-specific rendering, complete the following two steps.
@@ -109,8 +110,6 @@ In the LangSmith UI, you'll find each retrieved document with its contents and m
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-retriever-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-retriever-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

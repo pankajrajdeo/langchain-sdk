@@ -11,19 +11,22 @@ tags: [docs, langsmith, trajectory-evals]
 Many agent behaviors only emerge when using a real LLM, such as which tool the agent decides to call, how it formats responses, or whether a prompt modification affects the entire execution trajectory. LangChain's [`agentevals`](https://github.com/langchain-ai/agentevals) package provides evaluators specifically designed for testing agent trajectories with live models.
 
 > [!NOTE]
+>
 > This guide covers the open source [LangChain](../langchain/overview.md) `agentevals` package, which integrates with LangSmith for trajectory evaluation.
 
 AgentEvals allows you to evaluate the trajectory of your agent (the exact sequence of messages, including tool calls) by performing a *trajectory match* or by using an *LLM judge*:
 
-#### [Trajectory match](#trajectory-match-evaluator)
-Hard-code a reference trajectory for a given input and validate the run via a step-by-step comparison.
+> **[Trajectory match](#trajectory-match-evaluator)**
+>
+> Hard-code a reference trajectory for a given input and validate the run via a step-by-step comparison.
+>
+> Ideal for testing well-defined workflows where you know the expected behavior. Use when you have specific expectations about which tools should be called and in what order. This approach is deterministic, fast, and cost-effective since it doesn't require additional LLM calls.
 
-Ideal for testing well-defined workflows where you know the expected behavior. Use when you have specific expectations about which tools should be called and in what order. This approach is deterministic, fast, and cost-effective since it doesn't require additional LLM calls.
-
-#### [LLM-as-judge](#llm-as-judge-evaluator)
-Use an LLM to qualitatively validate your agent's execution trajectory. The "judge" LLM reviews the agent's decisions against a prompt rubric (which can include a reference trajectory).
-
-More flexible and can assess nuanced aspects like efficiency and appropriateness, but requires an LLM call and is less deterministic. Use when you want to evaluate the overall quality and reasonableness of the agent's trajectory without strict tool call or ordering requirements.
+> **[LLM-as-judge](#llm-as-judge-evaluator)**
+>
+> Use an LLM to qualitatively validate your agent's execution trajectory. The "judge" LLM reviews the agent's decisions against a prompt rubric (which can include a reference trajectory).
+>
+> More flexible and can assess nuanced aspects like efficiency and appropriateness, but requires an LLM call and is less deterministic. Use when you want to evaluate the overall quality and reasonableness of the agent's trajectory without strict tool call or ordering requirements.
 
 ## Installing AgentEvals
 
@@ -432,11 +435,13 @@ async function testAgentCallsRequiredToolsPlusExtra() {
 ```
 
 > [!NOTE]
+>
 > You can also customize how the evaluator considers equality between tool calls in the actual trajectory vs. the reference by setting the `tool_args_match_mode` (Python) or `toolArgsMatchMode` (TypeScript) property, as well as the `tool_args_match_overrides` (Python) or `toolArgsMatchOverrides` (TypeScript) property. By default, only tool calls with the same arguments to the same tool are considered equal. Visit the [repository](https://github.com/langchain-ai/agentevals?tab=readme-ov-file#tool-args-match-modes) for more details.
 
 ## LLM-as-judge evaluator
 
 > [!NOTE]
+>
 > This section covers the trajectory-specific LLM-as-a-judge evaluator from the `agentevals` package. For general-purpose LLM-as-a-judge evaluators in LangSmith, refer to the [LLM-as-a-judge evaluator](llm-as-judge.md).
 
 You can also use an LLM to evaluate the agent's execution path. Unlike the trajectory match evaluators, it doesn't require a reference trajectory, but one can be provided if available.
@@ -560,6 +565,7 @@ const evaluation = await evaluator({
 ```
 
 > [!NOTE]
+>
 > For more configurability over how the LLM evaluates the trajectory, visit the [repository](https://github.com/langchain-ai/agentevals?tab=readme-ov-file#trajectory-llm-as-judge).
 
 ## Async support (Python)
@@ -592,8 +598,6 @@ async def test_async_evaluation():
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trajectory-evals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trajectory-evals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -19,11 +19,16 @@ The SDK exposes two methods for working with threads:
 | [`list_threads`](https://reference.langchain.com/python/langsmith/client/Client/list_threads) / [`listThreads`](https://reference.langchain.com/javascript/langsmith/client/Client/listThreads) | You want to browse all threads in a project |
 | [`read_thread`](https://reference.langchain.com/python/langsmith/client/Client/read_thread) / [`readThread`](https://reference.langchain.com/javascript/langsmith/client/Client/readThread) | You already know the thread ID and need its runs |
 
+> [!NOTE]
+>
+> To query the traces of an agent, an experiment, or the evaluators, [find its project ID](resolve-an-agent.md) and pass it as the project ID.
+
 ## How threads work
 
 Each run you create can carry a `thread_id` in its metadata. LangSmith uses this to group runs into threads. The backend looks for `thread_id` in `metadata` (falling back to `session_id`).
 
 > [!NOTE]
+>
 > We recommend using **UUID v7** thread IDs. UUIDv7 embeds a timestamp, which preserves correct time-ordering of threads. The LangSmith SDK exports a uuid7 helper (Python v0.4.43+, JS v0.3.80+):
 >
 > * **Python**: `from langsmith import uuid7`
@@ -131,6 +136,7 @@ A list of thread objects, each containing:
 | `max_start_time` | `string \| null` | ISO timestamp of the most recent run. |
 
 > [!NOTE]
+>
 > `list_threads` always returns root runs only. If you need child runs (e.g., tool calls, sub-chains), use `read_thread` instead, which accepts an `is_root` / `isRoot` parameter you can set to `false`.
 
 ## Read runs for a single thread
@@ -289,8 +295,6 @@ for (const run of runs) {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/query-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/query-threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

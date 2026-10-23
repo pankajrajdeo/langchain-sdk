@@ -306,8 +306,8 @@ Identifies the specific model. Combined with `ls_provider`, matches against pric
 
 **Common values:**
 
-* OpenAI: `"gpt-5.5"`, `"gpt-5.4-mini"`, `"gpt-3.5-turbo"`
-* Anthropic: `"claude-sonnet-4-6"`, `"claude-opus-4-8"`
+* OpenAI: `"gpt-5.5"`, `"gpt-5.4-mini"`
+* Anthropic: `"claude-sonnet-5-5"`, `"claude-opus-4-8"`
 * Custom: Any model identifier
 
 **When to use:**
@@ -320,7 +320,7 @@ When you want automatic [cost tracking](cost-tracking.md) and model identificati
     run_type="llm",
     metadata={
         "ls_provider": "anthropic",
-        "ls_model_name": "claude-3-5-sonnet-20241022"
+        "ls_model_name": "claude-sonnet-5-5"
     }
 )
 def my_claude_call(messages: list):
@@ -701,7 +701,7 @@ Once you've added `ls_` metadata parameters to your traces, you can use them to 
 
 ### Use the API
 
-Use the [`Client`](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client) class with the [`list_runs()`](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.list_runs) method (Python) or [`listRuns()`](https://docs.smith.langchain.com/reference/js/classes/client.Client#listruns) method (TypeScript) to query traces based on metadata values. The [filter syntax](trace-query-syntax.md) supports equality checks, comparisons, and logical operators.
+Use the [`Client`](https://reference.langchain.com/python/langsmith/client/Client) class with the [`list_runs()`](https://reference.langchain.com/python/langsmith/client/Client/list_runs) method (Python) or [`listRuns()`](https://reference.langchain.com/javascript/langsmith/client/Client/listRuns) method (TypeScript) to query traces based on metadata values. The [filter syntax](trace-query-syntax.md) supports equality checks, comparisons, and logical operators.
 
 **Python**
 
@@ -806,8 +806,6 @@ metadata_key = 'ls_run_depth' AND metadata_value = 0
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/ls-metadata-parameters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/ls-metadata-parameters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

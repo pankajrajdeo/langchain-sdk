@@ -21,6 +21,7 @@ LangGraph is focused on the underlying capabilities important for agent orchestr
 One of LangGraph's core strengths is the ability to mix deterministic steps with LLM-driven agentic steps in a single graph. This lets you build bespoke workflows where parts of the logic are fully predictable and auditable while other parts are flexible and model-driven, giving you fine-grained control over exactly where and how AI is applied.
 
 **how LangChain products fit together**
+
 * [Deep Agents](deepagents/overview.md) is an [agent harness](concepts/products.md#agent-harnesses-like-the-deep-agents-sdk): planning, subagents, filesystem tools, and context management on top of LangGraph.
 * [LangChain](langchain/overview.md) is the agent framework: abstractions and integrations for models, tools, and agent loops.
 * [LangGraph](langgraph/overview.md) is the orchestration runtime: durable execution, streaming, human-in-the-loop, and persistence.
@@ -30,7 +31,7 @@ One of LangGraph's core strengths is the ability to mix deterministic steps with
 
 Read [Frameworks, runtimes, and harnesses](concepts/products.md) for a comparison of the open source stack.
 
-##  Install
+## &#x20;Install
 
 **npm**
 
@@ -79,6 +80,7 @@ await graph.invoke({ messages: [{ role: "user", content: "hi!" }] });
 ```
 
 > [!TIP]
+>
 > Use [LangSmith](../langsmith/observability.md) to trace requests, debug agent behavior, and evaluate outputs. Set `LANGSMITH_TRACING=true` and your API key to get started. Follow the [tracing quickstart](../langsmith/trace-with-langchain.md) to get set up.  We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Core benefits
@@ -96,14 +98,17 @@ LangGraph provides low-level supporting infrastructure for *any* long-running, s
 
 While LangGraph can be used standalone, it also integrates seamlessly with any LangChain product, giving developers a full suite of tools for building agents. To improve your LLM application development, pair LangGraph with:
 
-#### [LangSmith Observability](../langsmith/observability.md)
-Trace requests, evaluate outputs, and monitor deployments in one place. Prototype locally with LangGraph, then move to production with integrated observability and evaluation to build more reliable agent systems.
+> **[LangSmith Observability](../langsmith/observability.md)**
+>
+> Trace requests, evaluate outputs, and monitor deployments in one place. Prototype locally with LangGraph, then move to production with integrated observability and evaluation to build more reliable agent systems.
 
-#### [LangSmith Deployment](../langsmith/deployment.md)
-Deploy and scale agents effortlessly with a purpose-built deployment platform for long running, stateful workflows. Discover, reuse, configure, and share agents across teams — and iterate quickly with visual prototyping in Studio.
+> **[LangSmith Deployment](../langsmith/deployment.md)**
+>
+> Deploy and scale agents effortlessly with a purpose-built deployment platform for long running, stateful workflows. Discover, reuse, configure, and share agents across teams — and iterate quickly with visual prototyping in Studio.
 
-#### [LangChain](langchain/overview.md)
-Provides integrations and composable components to streamline LLM application development. Contains agent abstractions built on top of LangGraph.
+> **[LangChain](langchain/overview.md)**
+>
+> Provides integrations and composable components to streamline LLM application development. Contains agent abstractions built on top of LangGraph.
 
 ## Acknowledgements
 
@@ -111,8 +116,6 @@ LangGraph is inspired by [Pregel](https://research.google/pubs/pub37252/) and [A
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

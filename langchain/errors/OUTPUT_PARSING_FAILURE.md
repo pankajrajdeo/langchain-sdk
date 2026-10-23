@@ -11,6 +11,7 @@ tags: [docs, langchain, errors, output_parsing_failure]
 An [output parser](https://reference.langchain.com/python/langchain-core/output_parsers) was unable to handle model output as expected.
 
 > [!NOTE]
+>
 > Some prebuilt constructs like legacy LangChain agents and chains may use output parsers internally, so you may see this error even if you're not visibly instantiating and using an output parser.
 
 ## Troubleshooting
@@ -21,8 +22,6 @@ An [output parser](https://reference.langchain.com/python/langchain-core/output_
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/OUTPUT_PARSING_FAILURE.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/OUTPUT_PARSING_FAILURE.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

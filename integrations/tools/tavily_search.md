@@ -16,7 +16,7 @@ tags: [docs, integrations, tools, tavily_search]
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/tavily_search) | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/tools/tavily_search.md) | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`TavilySearch`](https://reference.langchain.com/python/langchain-tavily/tavily_search/TavilySearch) | [`langchain-tavily`](https://reference.langchain.com/python/langchain-tavily/) | ✅ | ✅ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-tavily?style=flat-square\&label=%20) |
 
@@ -124,8 +124,6 @@ We can use our tools directly with an agent executor by binding the tool to the 
 
 In the below example when we ask the agent to find "What nation hosted the Euro 2024? Include only wikipedia sources." the agent will dynamically set the arguments and invoke Tavily search tool : Invoking `tavily_search` with `{'query': 'Euro 2024 host nation', 'include_domains': ['wikipedia.org']`
 
-> **Interactive content:** [View this section in the original documentation](tavily_search.md).
-
 ```python
 if not os.environ.get("OPENAI_API_KEY"):
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OPENAI_API_KEY:\n")
@@ -190,8 +188,6 @@ For detailed documentation of all Tavily Search API features and configurations 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/tavily_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/tavily_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

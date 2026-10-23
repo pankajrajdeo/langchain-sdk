@@ -12,13 +12,12 @@ tags: [docs, langsmith, fleet, webhooks]
 
 When triggered, a webhook sends a complete package of your agent's configuration and files to the specified endpoint.
 
-> [!NOTE]
-> **Security notes:**
->
-> * Webhook URLs must use HTTPS.
-> * Custom headers (e.g., API keys) are stored encrypted.
-> * Publisher identity is included for audit trails.
-> * Webhooks are only visible to agent owners.
+**Security notes:**
+
+* Webhook URLs must use HTTPS.
+* Custom headers (e.g., API keys) are stored encrypted.
+* Publisher identity is included for audit trails.
+* Webhooks are only visible to agent owners.
 
 ## Add a webhook
 
@@ -143,7 +142,8 @@ The `files.content_base64` field contains a ZIP archive with the following struc
 
 The `config.json` file and `tools.json` files are structured as follows:
 
-#### `config.json`
+**`config.json`**
+
 ```json
 {
   "name": "My Agent",
@@ -153,7 +153,8 @@ The `config.json` file and `tools.json` files are structured as follows:
 }
 ```
 
-#### `tools.json`
+**`tools.json`**
+
 ```json
 {
   "tools": [
@@ -257,8 +258,6 @@ HTTPServer(("", 8000), WebhookHandler).serve_forever()
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

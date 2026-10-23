@@ -18,7 +18,7 @@ The `InMemoryStore` allows for a generic type to be assigned to the values in th
 
 ### Integration details
 
-| Class | Package | Local | [PY support](https://python.langchain.com/docs/integrations/stores/in_memory/) | Downloads | Version |
+| Class | Package | Local | [PY support](../../../integrations/stores/in_memory.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`InMemoryStore`](https://reference.langchain.com/javascript/langchain-core/stores/InMemoryStore) | [`@langchain/core`](https://www.npmjs.com/package/@langchain/core) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/core?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/core?style=flat-square\&label=%20&) |
 
@@ -156,8 +156,6 @@ For detailed documentation of all `InMemoryStore` features and configurations, h
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/stores/in_memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/stores/in_memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

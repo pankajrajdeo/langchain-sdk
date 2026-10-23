@@ -165,6 +165,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -173,6 +175,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/sessions/{session_id}/issues-agent/webhooks/{id}/roll-secret:
     post:
@@ -365,8 +368,16 @@ components:
       type: object
       required:
         - bot_user_id
+        - message
       properties:
         bot_user_id:
+          type: string
+        message:
+          description: >-
+            Message is the custom instruction after the mention; "" means the
+            default
+
+            text ("Investigate this issue and open a fix if needed.").
           type: string
   securitySchemes:
     API Key:

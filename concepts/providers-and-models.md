@@ -163,26 +163,29 @@ model = ChatOpenAI(
 ```
 
 > [!WARNING]
+>
 > `ChatOpenAI` targets [official OpenAI API specifications](https://github.com/openai/openai-openapi) only. Non-standard response fields from third-party providers are not extracted or preserved. Use a dedicated provider package or router when you need access to non-standard features.
 
 ## Next steps
 
-#### [Models guide](../langchain/models.md)
-Learn how to use models: invoke, stream, batch, tool calling, and more.
+> **[Models guide](../langchain/models.md)**
+>
+> Learn how to use models: invoke, stream, batch, tool calling, and more.
 
-#### [Chat model integrations](../integrations/chat.md)
-Browse all chat model integrations and their capabilities.
+> **[Chat model integrations](../integrations/chat.md)**
+>
+> Browse all chat model integrations and their capabilities.
 
-#### [All providers](../integrations/providers/overview.md)
-See the full list of provider packages and integrations.
+> **[All providers](../integrations/providers/overview.md)**
+>
+> See the full list of provider packages and integrations.
 
-#### [Agents](../langchain/agents.md)
-Build agents that use models as their reasoning engine.
+> **[Agents](../langchain/agents.md)**
+>
+> Build agents that use models as their reasoning engine.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/concepts/providers-and-models.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/concepts/providers-and-models.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

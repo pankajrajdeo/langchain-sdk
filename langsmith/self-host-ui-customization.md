@@ -41,7 +41,7 @@ config:
     darkModeLogoUrl: "https://example.com/logo-white-text.svg"
 ```
 
-Each name refers to the scheme the logo appears in. When you set only one value, LangSmith uses it in both schemes. Requires Helm chart version 0.17.0-rc.38 or later.
+Each name refers to the scheme the logo appears in. When you set only one value, LangSmith uses it in both schemes. Requires Helm chart version 0.17.0 or later.
 
 ### Serve a logo from a file
 
@@ -88,6 +88,7 @@ To mount a logo file:
    A `content-type` of `image/svg+xml` confirms the logo is in place. A missing file returns HTTP 200 with the application's HTML rather than a 404, so check the content type and not the status code.
 
 > [!NOTE]
+>
 > When your values already set `frontend.deployment.volumes` or `frontend.deployment.volumeMounts`, append to those lists. Replacing them removes mounts that other settings depend on.
 
 When you serve LangSmith under a base path, include it in the value: `/<base-path>/logos/acme.svg`. For the full list of Helm values, see [Environment variables](self-host-environment-variables.md).
@@ -99,6 +100,7 @@ By default, error messages in LangSmith direct users to the [Support Portal](htt
 When set, all error and support messages throughout the UI will display your custom text instead of the default LangChain support email.
 
 > [!NOTE]
+>
 > The custom message is rendered as **plain text** only. HTML tags will not be interpreted and will display as literal text.
 
 **Helm**
@@ -112,8 +114,6 @@ To revert to the default behavior, remove the setting or set it to an empty stri
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ui-customization.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ui-customization.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

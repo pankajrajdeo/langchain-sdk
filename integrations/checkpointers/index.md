@@ -14,6 +14,15 @@ Checkpointers enable [persistence](../../langgraph/persistence.md) in LangGraph,
 
 To implement your own checkpointer for a custom storage backend, see [Build a custom checkpointer](../../langgraph/checkpointers.md#build-a-custom-checkpointer).
 
+Integration components
+Arrows show a typical retrieval flow. The highlighted component is the one this page covers.
+
+### Typical retrieval flow
+
+### Agent capabilities
+
+### Execution and state
+
 | Backend | Package | Source |
 | - | - | - |
 | [In-memory](https://reference.langchain.com/python/langgraph.checkpoint/memory/InMemorySaver) | [`langgraph-checkpoint`](https://pypi.org/project/langgraph-checkpoint/) | [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph/tree/main/libs/checkpoint) |
@@ -37,8 +46,6 @@ To implement your own checkpointer for a custom storage backend, see [Build a cu
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/checkpointers/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/checkpointers/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

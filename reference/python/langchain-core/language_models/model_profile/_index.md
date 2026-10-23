@@ -7,11 +7,11 @@ tags: [index, reference, python, langchain-core, language_models, model_profile]
 
 # reference/python/langchain-core/language_models/model_profile
 
-3 pages here, 31 pages including subdirectories.
+3 pages here, 33 pages including subdirectories.
 
 ## Directories
 
-- [ModelProfile/](ModelProfile/_index.md) - 28 pages
+- [ModelProfile/](ModelProfile/_index.md) - 30 pages
 
 ## Files
 

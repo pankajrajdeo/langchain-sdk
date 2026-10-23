@@ -37,17 +37,19 @@ export TYPESAFE_API_KEY=...
 ```
 
 > [!NOTE]
+>
 > Optional: Set `TYPESAFE_BASE_URL` to use a compatible gateway, test server, or private deployment. The default is `https://api.typesafe.ai`.
 >
-> ```bash
+```bash
 > export TYPESAFE_BASE_URL=https://gateway.example.com
-> ```
+```
 
 ## Quickstart
 
 Create a `TypeSafeClassifier`, then pass the state and named questions together in each invocation. Questions that share state are evaluated independently and in parallel in one request:
 
 > [!NOTE]
+>
 > Earlier versions configured `questions` on `TypeSafeClassifier` and passed only the state to `invoke`. Pass both `state` and `questions` to `invoke` now.
 
 ```python
@@ -104,6 +106,7 @@ Each question is one of three [primitives](https://docs.typesafe.ai/primitives):
 The package includes two experimental [middleware](../../langchain/middleware/overview.md) that put the classifier on an agent's decision points. Import them from `langchain_typesafe.experimental.middleware`.
 
 > [!NOTE]
+>
 > The middleware are experimental and require `langchain-typesafe[experimental]`. Their APIs may change without notice.
 
 The examples below use OpenAI models. Install the experimental extra and the OpenAI integration before using them:
@@ -196,6 +199,7 @@ print(result["messages"][-1].content)
 Override `instructions`, or pass `criteria=NoulCriteria(true=..., false=...)`, to describe risk for your own tools.
 
 > [!WARNING]
+>
 > Do not put secrets in tool arguments or conversation state unless sending them to TypeSafe is acceptable. This middleware refuses risky calls. It does not request approval. Pair it with [human-in-the-loop middleware](../../langchain/middleware/built-in.md) when you want a person to approve them.
 
 ### Custom middleware
@@ -261,8 +265,6 @@ TypeSafe classifications are traced in [LangSmith](../../langsmith/home.md), so 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/typesafe.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/typesafe.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

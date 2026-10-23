@@ -25,7 +25,8 @@ LangChainTracer(
     tags: list[str] | None = None,
     *,
     metadata: Mapping[str, str] | None = None,
-    **kwargs: Any = {},
+    address: AgentAddress | None = None,
+    kwargs: Any = {},
 )
 ```
 
@@ -34,10 +35,11 @@ LangChainTracer(
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `example_id` | `UUID \| str \| None` | No | The example ID. (default: `None`) |
-| `project_name` | `str \| None` | No | The project name.  Defaults to the tracer project. (default: `None`) |
+| `project_name` | `str \| None` | No | The project name.  Resolved together with `address` from LangSmith config and the environment when no destination is supplied. (default: `None`) |
 | `client` | `Client \| None` | No | The client.  Defaults to the global client. (default: `None`) |
 | `tags` | `list[str] \| None` | No | The tags.  Defaults to an empty list. (default: `None`) |
 | `metadata` | `Mapping[str, str] \| None` | No | Additional metadata to include if it isn't already in the run.  Defaults to None. (default: `None`) |
+| `address` | `AgentAddress \| None` | No | The agent address to send traces to instead of a project.  !!! warning "Beta"     Agent addressing is in beta and must be enabled for the     LangSmith workspace. (default: `None`) |
 | `**kwargs` | `Any` | No | Additional keyword arguments. (default: `{}`) |
 
 ## Extends
@@ -55,7 +57,8 @@ __init__(
     tags: list[str] | None = None,
     *,
     metadata: Mapping[str, str] | None = None,
-    **kwargs: Any = {},
+    address: AgentAddress | None = None,
+    kwargs: Any = {},
 ) -> None
 ```
 
@@ -66,12 +69,15 @@ __init__(
 | `client` | `Client \| None` |
 | `tags` | `list[str] \| None` |
 | `metadata` | `Mapping[str, str] \| None` |
+| `address` | `AgentAddress \| None` |
+| `kwargs` | `Any` |
 
 ## Properties
 
 - `run_inline`
 - `example_id`
 - `project_name`
+- `address`
 - `client`
 - `tags`
 - `latest_run`
@@ -87,4 +93,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/tracers/langchain.py#L134)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/tracers/langchain.py#L137)

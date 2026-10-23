@@ -9,6 +9,7 @@ tags: [docs, langsmith, use-webhooks]
 # Use webhooks
 
 > [!NOTE]
+>
 > This page covers **LangGraph API webhooks**, a way to receive a POST callback when a specific run completes. If you are looking for **LangSmith automation webhooks** (triggered when automation rules match runs or threads), see [Configure webhook notifications for rules](webhooks.md).
 
 Webhooks enable event-driven communication from your LangSmith application to external services. For example, you may want to issue an update to a separate service once an API call to LangSmith has finished running.
@@ -39,7 +40,8 @@ In this guide, we’ll show how to trigger a webhook after streaming a run.
 
 Before making API calls, set up your assistant and thread.
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -49,7 +51,8 @@ thread = await client.threads.create()
 print(thread)
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -59,7 +62,8 @@ const thread = await client.threads.create();
 console.log(thread);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/assistants/search \
@@ -91,7 +95,8 @@ To use a webhook, specify the `webhook` parameter in your API request. When the 
 
 For example, if your server listens for webhook events at `https://my-server.app/my-webhook-endpoint`, include this in your request:
 
-#### Python
+**Python**
+
 ```python
 input = { "messages": [{ "role": "user", "content": "Hello!" }] }
 
@@ -105,7 +110,8 @@ async for chunk in client.runs.stream(
     pass
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```js
 const input = { messages: [{ role: "human", content: "Hello!" }] };
 
@@ -123,7 +129,8 @@ for await (const chunk of streamResponse) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream \
@@ -212,6 +219,7 @@ Your server should extract and validate this token before processing requests.
 ## Add headers to webhook requests
 
 > [!NOTE]
+>
 > Available in `langgraph-api>=0.5.36`.
 
 You can configure static headers to include with all outbound webhook requests. This is useful for authentication, routing, or passing metadata to your webhook endpoint.
@@ -257,11 +265,13 @@ For security, only environment variables starting with `LG_WEBHOOK_` can be refe
 ```
 
 > [!NOTE]
+>
 > Missing required environment variables will block server startup, ensuring you don't deploy with incomplete configuration.
 
 ## Restrict webhook destinations
 
 > [!NOTE]
+>
 > Available in `langgraph-api>=0.5.36`.
 
 For security or compliance purposes, you can restrict which URLs are valid webhook destinations using the `webhooks.url` configuration:
@@ -314,8 +324,6 @@ These tools help you verify that LangSmith is correctly triggering and sending w
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

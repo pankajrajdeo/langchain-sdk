@@ -12,8 +12,7 @@ tags: [docs, langsmith, deploy-to-cloud]
 
 Create a Cloud deployment from a connected GitHub repository or directly from your local project. The LangSmith UI deploys from GitHub, while the `langgraph deploy` CLI builds and pushes from your local machine.
 
-> [!NOTE]
-> For a shorter walkthrough, see the [deployment quickstart](deployment-quickstart.md).
+For a shorter walkthrough, see the [deployment quickstart](deployment-quickstart.md).
 
 ## Prerequisites
 
@@ -22,7 +21,8 @@ Create a Cloud deployment from a connected GitHub repository or directly from yo
 
 ## Create a deployment
 
-#### LangSmith UI
+**LangSmith UI**
+
 A GitHub organization owner or admin must authorize LangChain's `hosted-langserve` GitHub app once for the workspace. After authorization, any user with deployment permissions can create deployments from repositories that the app can access.
 
 To create a deployment:
@@ -35,18 +35,19 @@ To create a deployment:
 6. Select the **Git Branch** to deploy.
 7. Enter the full path to the [LangGraph API configuration file](cli.md#configuration-file), including the file name. For example, enter `langgraph.json` if the file is in the repository root.
 8. Choose whether to enable **Automatically update deployment on push to branch**. You can change this option later in [Deployment Settings](manage-deployment.md#configure-deployment-settings).
-9. Select a deployment type:
-   * **Serverless**: Works well for background, development, testing, and preview workloads. See [Serverless deployments](cloud-platform-features.md#serverless) for scale-to-zero availability.
-   * **Dedicated**: Provides always-on infrastructure, high availability, and automatic database backups for production workloads.
+9. For [deployment type](cloud-platform-features.md#deployment-types), select **Serverless** or **Dedicated**, depending on whether the workload can tolerate cold starts or needs always-on capacity.
 10. Choose whether to make the deployment shareable through [Studio](studio.md).
 11. Add environment variables and secrets. For more information, see [Environment variables](env-var-cloud.md).
 12. Select **Submit**. LangSmith queues the deployment for provisioning. In a project-based workspace, LangSmith also creates a tracing project with the same name as the deployment. In an agent-based workspace, LangSmith instead binds the deployment to an [agent](agents.md), and the deployment reports into one of the agent's [environments](agent-environments.md).
 
 > [!NOTE]
+>
 > The GitHub user who authorizes the `hosted-langserve` app must own the GitHub organization or account. Other users with deployment permissions do not need GitHub administrator access after the initial authorization.
 
-#### LangGraph CLI
+**LangGraph CLI**
+
 > [!NOTE]
+>
 > The `langgraph deploy` command is in [beta](release-stages.md). It requires Docker. On Apple silicon, it also requires Docker Buildx to cross-compile for `linux/amd64`.
 
 To create a deployment:
@@ -69,14 +70,11 @@ To create a deployment:
    langgraph deploy
 ```
 
-   The command creates a Serverless deployment named after the project directory. To set another name or deployment type, pass the corresponding options:
+   The command creates a Serverless deployment named after the project directory. To set another name, or to create a Dedicated [deployment](cloud-platform-features.md#deployment-types) instead:
 
 ```shell
    langgraph deploy --name my-agent --deployment-type dedicated
 ```
-
-> [!NOTE]
->        Organizations on previous pricing use `--deployment-type prod` or `--deployment-type dev` until October 1, 2026. For details, see [`langgraph deploy`](cli.md#deploy) and [Manage billing](billing.md#langsmith-deployment-billing).
 
 LangSmith queues the deployment for provisioning. Manage environment variables through the LangSmith UI or the [`env` field in `langgraph.json`](cli.md#configuration-file).
 
@@ -92,6 +90,8 @@ After you authorize the `hosted-langserve` GitHub app, configure which repositor
 
 The repository list in the **Create New Deployment** panel reflects the updated access.
 
+If you rename or transfer a repository that a deployment uses, [change the deployment's repository](manage-deployment.md#change-the-repository).
+
 ## See also
 
 * [Revisions](deployment-revisions.md)
@@ -100,8 +100,6 @@ The repository list in the **Create New Deployment** panel reflects the updated 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-to-cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-to-cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

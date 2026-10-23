@@ -13,7 +13,8 @@ tags: [docs, langsmith, javascript, managed-deep-agents-sandboxes]
 A sandbox gives a managed deep agent an isolated filesystem and shell for working with files, running code, and executing commands.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 Put the sandbox declaration under `sandbox/`. Add `sandbox/setup.sh` only if you want to provision a snapshot:
 
@@ -187,6 +188,7 @@ The agent uses built-in filesystem tools such as [`ls`](../../javascript/deepage
 [Authored tools](managed-deep-agents-tools.md) and [middleware](managed-deep-agents-middleware.md) reach the sandbox filesystem through `runtime.backend`. Use it when your own code needs a file, rather than prompting the agent to fetch one for you.
 
 > [!NOTE]
+>
 > `runtime.backend` requires `managed-deepagents>=0.8.0`.
 
 Annotate the `runtime` parameter to receive the typed surface:
@@ -318,8 +320,6 @@ For more information, see [Project structure](managed-deep-agents-project-struct
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

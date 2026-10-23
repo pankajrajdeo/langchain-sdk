@@ -13,16 +13,19 @@ tags: [docs, langsmith, fleet, channels]
 Channels define when your agent starts running. Connect your agent to external events so it responds automatically to messages, emails, or other events.
 
 > [!TIP]
+>
 > To trigger an agent on a recurring basis, use [schedules](schedules.md).
 
 ## Add a channel
 
 To add a channel:
 
-### Open your agent
+**1. Open your agent**
+
 Open your agent in the [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-channels) inbox.
 
-### Add the channel
+**2. Add the channel**
+
 1. In the sidebar, expand the **Channels** drawer and click **Connect your first channel**.
 2. Select the channel you want to add, then follow the prompts to authenticate.
 
@@ -31,6 +34,7 @@ Open your agent in the [Fleet](https://smith.langchain.com/agents?utm_source=doc
 The Gmail channel activates your agent when new emails arrive in your inbox. To let your agent read and respond to emails, add Gmail tools in the **Tools** section. Available Gmail tools include reading emails, sending replies, creating drafts, managing labels, and marking messages as read. See [Tool integrations](tools.md) for more information.
 
 > [!WARNING]
+>
 > The Gmail channel only monitors your primary inbox. The following emails do not activate the channel:
 >
 > * **Alias emails**: Messages sent to an email alias rather than your primary address.
@@ -70,8 +74,6 @@ You can manually mark any thread as read or unread at any time.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

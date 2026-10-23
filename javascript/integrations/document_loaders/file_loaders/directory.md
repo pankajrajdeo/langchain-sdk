@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, document_loaders, file_loaders, directory
 > Integrate with the DirectoryLoader document loader using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 
 This notebook provides a quick overview for getting started with `DirectoryLoader` [document loaders](../../document_loaders.md). For detailed documentation of all `DirectoryLoader` features and configurations head to the [API reference](https://reference.langchain.com/javascript/langchain-core/document_loaders/base/BaseDocumentLoader).
@@ -66,6 +67,7 @@ pnpm add langchain @langchain/core
 Now we can instantiate our model object and load documents:
 
 > [!WARNING]
+>
 > The `@langchain/community` package is no longer maintained. Examples that import from `@langchain/community` may be outdated or broken. Use with caution.
 
 ```typescript
@@ -125,8 +127,6 @@ For detailed documentation of all `DirectoryLoader` features and configurations 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/file_loaders/directory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/file_loaders/directory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

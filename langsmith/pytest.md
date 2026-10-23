@@ -20,6 +20,7 @@ Compared to the standard evaluation flow, this is useful when:
 * **You already use pytest to test your app**: Add LangSmith tracking to existing pytest workflows
 
 > [!NOTE]
+>
 > The JS/TS SDK has an analogous [Vitest/Jest integration](vitest-jest.md).
 
 ## Installation
@@ -111,11 +112,11 @@ Each time you run this test suite, LangSmith:
 
 Here's what a test suite dataset looks like:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/simple-pytest-dataset.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=f40d29e4260eebc87838ea7be78bd08d" alt="Dataset" width="1078" height="437" data-path="langsmith/images/simple-pytest-dataset.png" />
+![Dataset](https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/simple-pytest-dataset.png?fit=max\&auto=format\&n=ImHGLQW1HnQYwnJV\&q=85\&s=f40d29e4260eebc87838ea7be78bd08d)
 
 And what an experiment against that test suite looks like:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/simple-pytest.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=09776ac389e88f7f5058f4f7cf44dc72" alt="Experiment" width="1077" height="444" data-path="langsmith/images/simple-pytest.png" />
+![Experiment](https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/simple-pytest.png?fit=max\&auto=format\&n=ImHGLQW1HnQYwnJV\&q=85\&s=09776ac389e88f7f5058f4f7cf44dc72)
 
 ## Log inputs, outputs, and reference outputs
 
@@ -245,7 +246,7 @@ import pytest
 @pytest.fixture(scope="session")
 def langsmith_experiment_metadata():
     return {
-        "model": "gpt-4o",
+        "model": "gpt-5.5",
         "prompt_version": "v2.3",
         "environment": os.environ.get("ENV", "local"),
     }
@@ -258,12 +259,13 @@ The fixture is dynamic (can read env vars, call functions, etc.) and follows pyt
 Set `LANGSMITH_EXPERIMENT_METADATA` to a JSON string. This is useful in CI/CD pipelines where you don't want to modify code:
 
 ```bash
-LANGSMITH_EXPERIMENT_METADATA='{"model":"gpt-4o","env":"staging"}' pytest tests/
+LANGSMITH_EXPERIMENT_METADATA='{"model":"gpt-5.5","env":"staging"}' pytest tests/
 ```
 
 If both the fixture and the env var are set, the fixture takes precedence. System-managed metadata keys (like `revision_id` and git info) always take precedence over user-supplied keys.
 
 > [!NOTE]
+>
 > This feature requires `langsmith>=0.7.13`.
 
 ## Caching
@@ -370,7 +372,7 @@ pytest --langsmith-output tests
 
 You'll get a nice table per test suite that updates live as the results are uploaded to LangSmith:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/rich-pytest-outputs.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=10712bc97e37900ca83cb70df1c9357d" alt="Rich pytest outputs" width="1340" height="548" data-path="langsmith/images/rich-pytest-outputs.png" />
+![Rich pytest outputs](https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/rich-pytest-outputs.png?fit=max\&auto=format\&n=Fr2lazPB4XVeEA7l\&q=85\&s=10712bc97e37900ca83cb70df1c9357d)
 
 Some important notes for using this feature:
 
@@ -378,6 +380,7 @@ Some important notes for using this feature:
 * Rich outputs do not currently work with `pytest-xdist`
 
 > [!NOTE]
+>
 > The custom output removes all the standard pytest outputs. If you're trying to debug some unexpected behavior it's often better to show the regular pytest outputs so to get full error traces.
 
 ## Dry-run mode
@@ -456,8 +459,6 @@ def test_foo() -> None:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/pytest.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/pytest.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

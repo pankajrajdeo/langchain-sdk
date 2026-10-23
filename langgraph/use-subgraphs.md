@@ -31,6 +31,7 @@ uv add langgraph
 ```
 
 > [!TIP]
+>
 > **Set up LangSmith for LangGraph development**
 > Sign up for [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-use-subgraphs) to quickly spot issues and improve the performance of your LangGraph projects. LangSmith lets you use trace data to debug, test, and monitor your LLM apps built with LangGraph—read more about [how to get started with LangSmith](../langsmith/observability.md).
 
@@ -42,8 +43,6 @@ When adding subgraphs, you need to define how the parent graph and the subgraph 
 | - | - | - |
 | [Call a subgraph inside a node](#call-a-subgraph-inside-a-node) | Parent and subgraph have **different state schemas** (no shared keys), or you need to transform state between them | You write a wrapper function that maps parent state to subgraph input and subgraph output back to parent state |
 | [Add a subgraph as a node](#add-a-subgraph-as-a-node) | Parent and subgraph **share state keys**—the subgraph reads from and writes to the same channels as the parent | You pass the compiled subgraph directly to `add_node`—no wrapper function needed |
-
-<a id="invoke-a-graph-from-a-node" />
 
 ### Call a subgraph inside a node
 
@@ -85,163 +84,157 @@ builder.add_edge(START, "node_1")
 graph = builder.compile()
 ```
 
-<details>
-<summary>Full example: different state schemas</summary>
-
+> **Full example: different state schemas**
+>
 ```python
-from typing_extensions import TypedDict
-from langgraph.graph.state import StateGraph, START
-from langgraph.stream import UpdatesTransformer
-
-# Define subgraph
-class SubgraphState(TypedDict):
-    # note that none of these keys are shared with the parent graph state
-    bar: str
-    baz: str
-
-def subgraph_node_1(state: SubgraphState):
-    return {"baz": "baz"}
-
-def subgraph_node_2(state: SubgraphState):
-    return {"bar": state["bar"] + state["baz"]}
-
-subgraph_builder = StateGraph(SubgraphState)
-subgraph_builder.add_node(subgraph_node_1)
-subgraph_builder.add_node(subgraph_node_2)
-subgraph_builder.add_edge(START, "subgraph_node_1")
-subgraph_builder.add_edge("subgraph_node_1", "subgraph_node_2")
-subgraph = subgraph_builder.compile()
-
-# Define parent graph
-class ParentState(TypedDict):
-    foo: str
-
-def node_1(state: ParentState):
-    return {"foo": "hi! " + state["foo"]}
-
-def node_2(state: ParentState):
-    # Transform the state to the subgraph state
-    response = subgraph.invoke({"bar": state["foo"]})
-    # Transform response back to the parent state
-    return {"foo": response["bar"]}
-
-builder = StateGraph(ParentState)
-builder.add_node("node_1", node_1)
-builder.add_node("node_2", node_2)
-builder.add_edge(START, "node_1")
-builder.add_edge("node_1", "node_2")
-graph = builder.compile()
-
-stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])
-for event in stream:
-    if event["method"] == "updates":
-        print(event["params"]["namespace"], event["params"]["data"])
+> from typing_extensions import TypedDict
+> from langgraph.graph.state import StateGraph, START
+> from langgraph.stream import UpdatesTransformer
+>
+> # Define subgraph
+> class SubgraphState(TypedDict):
+>     # note that none of these keys are shared with the parent graph state
+>     bar: str
+>     baz: str
+>
+> def subgraph_node_1(state: SubgraphState):
+>     return {"baz": "baz"}
+>
+> def subgraph_node_2(state: SubgraphState):
+>     return {"bar": state["bar"] + state["baz"]}
+>
+> subgraph_builder = StateGraph(SubgraphState)
+> subgraph_builder.add_node(subgraph_node_1)
+> subgraph_builder.add_node(subgraph_node_2)
+> subgraph_builder.add_edge(START, "subgraph_node_1")
+> subgraph_builder.add_edge("subgraph_node_1", "subgraph_node_2")
+> subgraph = subgraph_builder.compile()
+>
+> # Define parent graph
+> class ParentState(TypedDict):
+>     foo: str
+>
+> def node_1(state: ParentState):
+>     return {"foo": "hi! " + state["foo"]}
+>
+> def node_2(state: ParentState):
+>     # Transform the state to the subgraph state
+>     response = subgraph.invoke({"bar": state["foo"]})
+>     # Transform response back to the parent state
+>     return {"foo": response["bar"]}
+>
+>
+> builder = StateGraph(ParentState)
+> builder.add_node("node_1", node_1)
+> builder.add_node("node_2", node_2)
+> builder.add_edge(START, "node_1")
+> builder.add_edge("node_1", "node_2")
+> graph = builder.compile()
+>
+> stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])
+> for event in stream:
+>     if event["method"] == "updates":
+>         print(event["params"]["namespace"], event["params"]["data"])
+```
+>
+```
+> [] {'node_1': {'foo': 'hi! foo'}}
+> ['node_2:577b710b-64ae-31fb-9455-6a4d4cc2b0b9'] {'subgraph_node_1': {'baz': 'baz'}}
+> ['node_2:577b710b-64ae-31fb-9455-6a4d4cc2b0b9'] {'subgraph_node_2': {'bar': 'hi! foobaz'}}
+> [] {'node_2': {'foo': 'hi! foobaz'}}
 ```
 
-```
-[] {'node_1': {'foo': 'hi! foo'}}
-['node_2:577b710b-64ae-31fb-9455-6a4d4cc2b0b9'] {'subgraph_node_1': {'baz': 'baz'}}
-['node_2:577b710b-64ae-31fb-9455-6a4d4cc2b0b9'] {'subgraph_node_2': {'bar': 'hi! foobaz'}}
-[] {'node_2': {'foo': 'hi! foobaz'}}
-```
-
-</details>
-
-<details>
-<summary>Full example: different state schemas (two levels of subgraphs)</summary>
-
-This is an example with two levels of subgraphs: parent -> child -> grandchild.
-
+> **Full example: different state schemas (two levels of subgraphs)**
+>
+> This is an example with two levels of subgraphs: parent -> child -> grandchild.
+>
 ```python
-# Grandchild graph
-from typing_extensions import TypedDict
-from langgraph.graph.state import StateGraph, START, END
-from langgraph.stream import UpdatesTransformer
-
-class GrandChildState(TypedDict):
-    my_grandchild_key: str
-
-def grandchild_1(state: GrandChildState) -> GrandChildState:
-    # NOTE: child or parent keys will not be accessible here
-    return {"my_grandchild_key": state["my_grandchild_key"] + ", how are you"}
-
-grandchild = StateGraph(GrandChildState)
-grandchild.add_node("grandchild_1", grandchild_1)
-
-grandchild.add_edge(START, "grandchild_1")
-grandchild.add_edge("grandchild_1", END)
-
-grandchild_graph = grandchild.compile()
-
-# Child graph
-class ChildState(TypedDict):
-    my_child_key: str
-
-def call_grandchild_graph(state: ChildState) -> ChildState:
-    # NOTE: parent or grandchild keys won't be accessible here
-    grandchild_graph_input = {"my_grandchild_key": state["my_child_key"]}
-    grandchild_graph_output = grandchild_graph.invoke(grandchild_graph_input)
-    return {"my_child_key": grandchild_graph_output["my_grandchild_key"] + " today?"}
-
-child = StateGraph(ChildState)
-# We're passing a function here instead of just compiled graph (`grandchild_graph`)
-child.add_node("child_1", call_grandchild_graph)
-child.add_edge(START, "child_1")
-child.add_edge("child_1", END)
-child_graph = child.compile()
-
-# Parent graph
-class ParentState(TypedDict):
-    my_key: str
-
-def parent_1(state: ParentState) -> ParentState:
-    # NOTE: child or grandchild keys won't be accessible here
-    return {"my_key": "hi " + state["my_key"]}
-
-def parent_2(state: ParentState) -> ParentState:
-    return {"my_key": state["my_key"] + " bye!"}
-
-def call_child_graph(state: ParentState) -> ParentState:
-    child_graph_input = {"my_child_key": state["my_key"]}
-    child_graph_output = child_graph.invoke(child_graph_input)
-    return {"my_key": child_graph_output["my_child_key"]}
-
-parent = StateGraph(ParentState)
-parent.add_node("parent_1", parent_1)
-# We're passing a function here instead of just a compiled graph (`child_graph`)
-parent.add_node("child", call_child_graph)
-parent.add_node("parent_2", parent_2)
-
-parent.add_edge(START, "parent_1")
-parent.add_edge("parent_1", "child")
-parent.add_edge("child", "parent_2")
-parent.add_edge("parent_2", END)
-
-parent_graph = parent.compile()
-
-stream = parent_graph.stream_events({"my_key": "Bob"}, version="v3", transformers=[UpdatesTransformer])
-for event in stream:
-    if event["method"] == "updates":
-        print(event["params"]["namespace"], event["params"]["data"])
+> # Grandchild graph
+> from typing_extensions import TypedDict
+> from langgraph.graph.state import StateGraph, START, END
+> from langgraph.stream import UpdatesTransformer
+>
+> class GrandChildState(TypedDict):
+>     my_grandchild_key: str
+>
+> def grandchild_1(state: GrandChildState) -> GrandChildState:
+>     # NOTE: child or parent keys will not be accessible here
+>     return {"my_grandchild_key": state["my_grandchild_key"] + ", how are you"}
+>
+>
+> grandchild = StateGraph(GrandChildState)
+> grandchild.add_node("grandchild_1", grandchild_1)
+>
+> grandchild.add_edge(START, "grandchild_1")
+> grandchild.add_edge("grandchild_1", END)
+>
+> grandchild_graph = grandchild.compile()
+>
+> # Child graph
+> class ChildState(TypedDict):
+>     my_child_key: str
+>
+> def call_grandchild_graph(state: ChildState) -> ChildState:
+>     # NOTE: parent or grandchild keys won't be accessible here
+>     grandchild_graph_input = {"my_grandchild_key": state["my_child_key"]}
+>     grandchild_graph_output = grandchild_graph.invoke(grandchild_graph_input)
+>     return {"my_child_key": grandchild_graph_output["my_grandchild_key"] + " today?"}
+>
+> child = StateGraph(ChildState)
+> # We're passing a function here instead of just compiled graph (`grandchild_graph`)
+> child.add_node("child_1", call_grandchild_graph)
+> child.add_edge(START, "child_1")
+> child.add_edge("child_1", END)
+> child_graph = child.compile()
+>
+> # Parent graph
+> class ParentState(TypedDict):
+>     my_key: str
+>
+> def parent_1(state: ParentState) -> ParentState:
+>     # NOTE: child or grandchild keys won't be accessible here
+>     return {"my_key": "hi " + state["my_key"]}
+>
+> def parent_2(state: ParentState) -> ParentState:
+>     return {"my_key": state["my_key"] + " bye!"}
+>
+> def call_child_graph(state: ParentState) -> ParentState:
+>     child_graph_input = {"my_child_key": state["my_key"]}
+>     child_graph_output = child_graph.invoke(child_graph_input)
+>     return {"my_key": child_graph_output["my_child_key"]}
+>
+> parent = StateGraph(ParentState)
+> parent.add_node("parent_1", parent_1)
+> # We're passing a function here instead of just a compiled graph (`child_graph`)
+> parent.add_node("child", call_child_graph)
+> parent.add_node("parent_2", parent_2)
+>
+> parent.add_edge(START, "parent_1")
+> parent.add_edge("parent_1", "child")
+> parent.add_edge("child", "parent_2")
+> parent.add_edge("parent_2", END)
+>
+> parent_graph = parent.compile()
+>
+> stream = parent_graph.stream_events({"my_key": "Bob"}, version="v3", transformers=[UpdatesTransformer])
+> for event in stream:
+>     if event["method"] == "updates":
+>         print(event["params"]["namespace"], event["params"]["data"])
 ```
-
+>
 ```
-[] {'parent_1': {'my_key': 'hi Bob'}}
-['child:2e26e9ce-602f-862c-aa66-1ea5a4655e3b', 'child_1:781bb3b1-3971-84ce-810b-acf819a03f9c'] {'grandchild_1': {'my_grandchild_key': 'hi Bob, how are you'}}
-['child:2e26e9ce-602f-862c-aa66-1ea5a4655e3b'] {'child_1': {'my_child_key': 'hi Bob, how are you today?'}}
-[] {'child': {'my_key': 'hi Bob, how are you today?'}}
-[] {'parent_2': {'my_key': 'hi Bob, how are you today? bye!'}}
+> [] {'parent_1': {'my_key': 'hi Bob'}}
+> ['child:2e26e9ce-602f-862c-aa66-1ea5a4655e3b', 'child_1:781bb3b1-3971-84ce-810b-acf819a03f9c'] {'grandchild_1': {'my_grandchild_key': 'hi Bob, how are you'}}
+> ['child:2e26e9ce-602f-862c-aa66-1ea5a4655e3b'] {'child_1': {'my_child_key': 'hi Bob, how are you today?'}}
+> [] {'child': {'my_key': 'hi Bob, how are you today?'}}
+> [] {'parent_2': {'my_key': 'hi Bob, how are you today? bye!'}}
 ```
-
-</details>
-
-<a id="add-a-graph-as-a-node" />
 
 ### Add a subgraph as a node
 
 When the parent graph and subgraph **share state keys**, you can pass a compiled subgraph directly to `add_node`. No wrapper function is needed—the subgraph reads from and writes to the parent's state channels automatically. For example, in [multi-agent](../langchain/multi-agent.md) systems, the agents often communicate over a shared [messages](graph-api.md#why-use-messages) key.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/subgraph.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=c280df5c968cd4237b0b5d03823d8946" alt="SQL agent graph" width="1177" height="818" data-path="oss/images/subgraph.png" />
+![SQL agent graph](https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/subgraph.png?fit=max\&auto=format\&n=ybiAaBfoBvFquMDz\&q=85\&s=c280df5c968cd4237b0b5d03823d8946)
 
 If your subgraph shares state keys with the parent graph, you can follow these steps to add it to your graph:
 
@@ -273,60 +266,57 @@ builder.add_edge(START, "node_1")
 graph = builder.compile()
 ```
 
-<details>
-<summary>Full example: shared state schemas</summary>
-
+> **Full example: shared state schemas**
+>
 ```python
-from typing_extensions import TypedDict
-from langgraph.graph.state import StateGraph, START
-from langgraph.stream import UpdatesTransformer
-
-# Define subgraph
-class SubgraphState(TypedDict):
-    foo: str  # shared with parent graph state
-    bar: str  # private to SubgraphState
-
-def subgraph_node_1(state: SubgraphState):
-    return {"bar": "bar"}
-
-def subgraph_node_2(state: SubgraphState):
-    # note that this node is using a state key ('bar') that is only available in the subgraph
-    # and is sending update on the shared state key ('foo')
-    return {"foo": state["foo"] + state["bar"]}
-
-subgraph_builder = StateGraph(SubgraphState)
-subgraph_builder.add_node(subgraph_node_1)
-subgraph_builder.add_node(subgraph_node_2)
-subgraph_builder.add_edge(START, "subgraph_node_1")
-subgraph_builder.add_edge("subgraph_node_1", "subgraph_node_2")
-subgraph = subgraph_builder.compile()
-
-# Define parent graph
-class ParentState(TypedDict):
-    foo: str
-
-def node_1(state: ParentState):
-    return {"foo": "hi! " + state["foo"]}
-
-builder = StateGraph(ParentState)
-builder.add_node("node_1", node_1)
-builder.add_node("node_2", subgraph)
-builder.add_edge(START, "node_1")
-builder.add_edge("node_1", "node_2")
-graph = builder.compile()
-
-stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])
-for event in stream:
-    if event["method"] == "updates" and not event["params"]["namespace"]:
-        print(event["params"]["data"])
+> from typing_extensions import TypedDict
+> from langgraph.graph.state import StateGraph, START
+> from langgraph.stream import UpdatesTransformer
+>
+> # Define subgraph
+> class SubgraphState(TypedDict):
+>     foo: str  # shared with parent graph state
+>     bar: str  # private to SubgraphState
+>
+> def subgraph_node_1(state: SubgraphState):
+>     return {"bar": "bar"}
+>
+> def subgraph_node_2(state: SubgraphState):
+>     # note that this node is using a state key ('bar') that is only available in the subgraph
+>     # and is sending update on the shared state key ('foo')
+>     return {"foo": state["foo"] + state["bar"]}
+>
+> subgraph_builder = StateGraph(SubgraphState)
+> subgraph_builder.add_node(subgraph_node_1)
+> subgraph_builder.add_node(subgraph_node_2)
+> subgraph_builder.add_edge(START, "subgraph_node_1")
+> subgraph_builder.add_edge("subgraph_node_1", "subgraph_node_2")
+> subgraph = subgraph_builder.compile()
+>
+> # Define parent graph
+> class ParentState(TypedDict):
+>     foo: str
+>
+> def node_1(state: ParentState):
+>     return {"foo": "hi! " + state["foo"]}
+>
+> builder = StateGraph(ParentState)
+> builder.add_node("node_1", node_1)
+> builder.add_node("node_2", subgraph)
+> builder.add_edge(START, "node_1")
+> builder.add_edge("node_1", "node_2")
+> graph = builder.compile()
+>
+> stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])
+> for event in stream:
+>     if event["method"] == "updates" and not event["params"]["namespace"]:
+>         print(event["params"]["data"])
 ```
-
+>
 ```
-{'node_1': {'foo': 'hi! foo'}}
-{'node_2': {'foo': 'hi! foobar'}}
+> {'node_1': {'foo': 'hi! foo'}}
+> {'node_2': {'foo': 'hi! foobar'}}
 ```
-
-</details>
 
 ## Subgraph persistence
 
@@ -343,9 +333,11 @@ The `checkpointer` parameter on `.compile()` controls subgraph persistence:
 Per-invocation is the right choice for most applications, including [multi-agent](../langchain/multi-agent.md) systems where subagents handle independent requests. Use per-thread when a subagent needs multi-turn conversation memory (for example, a research assistant that builds context over several exchanges).
 
 > [!NOTE]
+>
 > The parent graph must be compiled with a checkpointer for subgraph persistence features (interrupts, state inspection, per-thread memory) to work. See [persistence](persistence.md).
 
 > [!NOTE]
+>
 > The examples below use LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent), which is a common way to build agents. `create_agent` produces a [LangGraph graph](graph-api.md) under the hood, so all subgraph persistence concepts apply directly. If you're building with raw LangGraph `StateGraph`, the same patterns and configuration options apply—see the [Graph API](graph-api.md) for details.
 
 ### Stateful
@@ -355,6 +347,7 @@ Stateful subgraphs inherit the parent graph's checkpointer, which enables [inter
 #### Per-invocation (default)
 
 > [!TIP]
+>
 > This is the recommended mode for most applications, including [multi-agent](../langchain/multi-agent.md) systems where subagents are invoked as tools. It supports [interrupts](interrupts.md), [persistence](persistence.md), and parallel calls while keeping each invocation isolated.
 
 Use per-invocation persistence when each call to the subgraph is independent and the subagent doesn't need to remember anything from previous calls. This is the most common pattern, especially for [multi-agent](../langchain/multi-agent.md) systems where subagents handle one-off requests like "look up this customer's order" or "summarize this document."
@@ -421,7 +414,8 @@ agent = create_agent(
 )
 ```
 
-#### Interrupts
+**Interrupts**
+
 Each invocation can use `interrupt()` to pause and resume. Add `interrupt()` to a tool function to require user approval before proceeding:
 
 ```python
@@ -451,10 +445,12 @@ resumed = agent.stream_events(Command(resume=True), config=config, version="v3")
 final = resumed.output
 ```
 
-#### [View example trace](https://smith.langchain.com/public/b9877a82-7701-4a9b-9430-bf5cb8740be0/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/a97b862b-4007-4c28-8de3-7dadd3246bc2/r)**
+>
+> Open a public LangSmith run for this example.
 
-#### Multi-turn
+**Multi-turn**
+
 Each invocation starts with a fresh subagent state. The subagent does not remember previous calls:
 
 ```python
@@ -475,7 +471,8 @@ response = agent.invoke(
 # Subagent message count: 4 (still fresh!)
 ```
 
-#### Multiple subgraph calls
+**Multiple subgraph calls**
+
 Multiple calls to the same subgraph work without conflicts, since each invocation gets its own checkpoint namespace:
 
 ```python
@@ -497,6 +494,7 @@ Use per-thread persistence when a subagent needs to remember previous interactio
 Compile with `checkpointer=True` to enable this behavior.
 
 > [!WARNING]
+>
 > Per-thread subgraphs do not support parallel tool calls. When an LLM has access to a per-thread subagent as a tool, it may try to call that tool multiple times in parallel (for example, asking the fruit expert about apples and bananas simultaneously). This causes checkpoint conflicts because both calls write to the same namespace.
 >
 > The examples below use LangChain's `ToolCallLimitMiddleware` to prevent this. If you're building with pure LangGraph `StateGraph`, you need to prevent parallel tool calls yourself—for example, by configuring your model to disable parallel tool calling or by adding logic to ensure the same subgraph is not invoked multiple times in parallel.
@@ -546,7 +544,8 @@ agent = create_agent(
 )
 ```
 
-#### Interrupts
+**Interrupts**
+
 Per-thread subagents support `interrupt()` just like per-invocation. Add `interrupt()` to a tool function to require user approval:
 
 ```python
@@ -576,10 +575,12 @@ resumed = agent.stream_events(Command(resume=True), config=config, version="v3")
 final = resumed.output
 ```
 
-#### [View example trace](https://smith.langchain.com/public/b9877a82-7701-4a9b-9430-bf5cb8740be0/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/a97b862b-4007-4c28-8de3-7dadd3246bc2/r)**
+>
+> Open a public LangSmith run for this example.
 
-#### Multi-turn
+**Multi-turn**
+
 State accumulates across invocations—the subagent remembers past conversations:
 
 ```python
@@ -600,7 +601,8 @@ response = agent.invoke(
 # Subagent message count: 8 (accumulated!)
 ```
 
-#### Multiple subgraph calls
+**Multiple subgraph calls**
+
 When you have multiple **different** per-thread subgraphs (for example, a fruit expert and a veggie expert), each one needs its own storage space so their checkpoints don't overwrite each other. This is called **namespace isolation**.
 
 If you [call subgraphs inside a node](#call-a-subgraph-inside-a-node), LangGraph assigns namespaces based on call order (first call, second call, etc.). This means reordering your calls can mix up which subgraph loads which state. To avoid this, wrap each subagent in its own `StateGraph` with a unique node name—this gives each subgraph a stable, unique namespace:
@@ -653,6 +655,7 @@ Subgraphs [added as nodes](#add-a-subgraph-as-a-node) already get name-based nam
 Use this when you want to run a subagent like a plain function call with no checkpointing overhead. The subgraph cannot pause/resume and does not benefit from [durable execution](persistence.md). Compile with `checkpointer=False`.
 
 > [!WARNING]
+>
 > Without checkpointing, the subgraph has no durable execution. If the process crashes mid-run, the subgraph cannot recover and must be re-run from the beginning.
 
 ```python
@@ -673,9 +676,9 @@ subgraph = builder.compile(checkpointer=False)  # or True / None
 | `checkpointer=` | `None` | `True` | `False` |
 | Interrupts (HITL) | ✅ | ✅ | ❌ |
 | Multi-turn memory | ❌ | ✅ | ❌ |
-| Multiple calls (different subgraphs) | ✅ | ⚠️ | ✅ |
+| Multiple calls (different subgraphs) | ✅ | ⚠️ (Calls to multiple per-thread subgraphs in the same node can cause namespace conflicts. Workarounds are available.) | ✅ |
 | Multiple calls (same subgraph) | ✅ | ❌ | ✅ |
-| State inspection | ⚠️ | ✅ | ❌ |
+| State inspection | ⚠️ (State inspection with per-invocation persistence is available for the current invocation only (while interrupted). Each invocation starts fresh, so there is no accumulated state to inspect after the invocation completes.) | ✅ | ❌ |
 
 * **Interrupts (HITL)**: The subgraph can use [interrupt()](interrupts.md) to pause execution and wait for user input, then resume where it left off.
 * **Multi-turn memory**: The subgraph retains its state across multiple invocations within the same [thread](checkpointers.md#threads). Each call picks up where the last one left off rather than starting fresh.
@@ -688,9 +691,11 @@ subgraph = builder.compile(checkpointer=False)  # or True / None
 When you enable [persistence](persistence.md), you can inspect the subgraph state using the subgraphs option. With [stateless](#stateless) checkpointing (`checkpointer=False`), no subgraph checkpoints are saved, so subgraph state is not available.
 
 > [!NOTE]
+>
 > Viewing subgraph state requires that LangGraph can **statically discover** the subgraph—i.e., it is [added as a node](#add-a-subgraph-as-a-node) or [called inside a node](#call-a-subgraph-inside-a-node). It does not work when a subgraph is called inside a [tool](../langchain/tools.md) function or other indirection (e.g., the [subagents](../langchain/multi-agent/subagents.md) pattern). Interrupts still propagate to the top-level graph regardless of nesting.
 
-#### Per-invocation
+**Per-invocation**
+
 Returns subgraph state for the **current invocation only**. Each invocation starts fresh.
 
 ```python
@@ -731,7 +736,8 @@ subgraph_state = graph.get_state(config, subgraphs=True).tasks[0].state  # [!cod
 graph.invoke(Command(resume="bar"), config)
 ```
 
-#### Per-thread
+**Per-thread**
+
 Returns **accumulated** subgraph state across all invocations on this thread.
 
 ```python
@@ -785,67 +791,62 @@ for event in stream:
         print(event["params"]["namespace"], event["params"]["data"])
 ```
 
-<details>
-<summary>Stream from subgraphs</summary>
-
+> **Stream from subgraphs**
+>
 ```python
-from typing_extensions import TypedDict
-from langgraph.graph.state import StateGraph, START
-from langgraph.stream import UpdatesTransformer
-
-# Define subgraph
-class SubgraphState(TypedDict):
-    foo: str
-    bar: str
-
-def subgraph_node_1(state: SubgraphState):
-    return {"bar": "bar"}
-
-def subgraph_node_2(state: SubgraphState):
-    # note that this node is using a state key ('bar') that is only available in the subgraph
-    # and is sending update on the shared state key ('foo')
-    return {"foo": state["foo"] + state["bar"]}
-
-subgraph_builder = StateGraph(SubgraphState)
-subgraph_builder.add_node(subgraph_node_1)
-subgraph_builder.add_node(subgraph_node_2)
-subgraph_builder.add_edge(START, "subgraph_node_1")
-subgraph_builder.add_edge("subgraph_node_1", "subgraph_node_2")
-subgraph = subgraph_builder.compile()
-
-# Define parent graph
-class ParentState(TypedDict):
-    foo: str
-
-def node_1(state: ParentState):
-    return {"foo": "hi! " + state["foo"]}
-
-builder = StateGraph(ParentState)
-builder.add_node("node_1", node_1)
-builder.add_node("node_2", subgraph)
-builder.add_edge(START, "node_1")
-builder.add_edge("node_1", "node_2")
-graph = builder.compile()
-
-stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])  # [!code highlight]
-for event in stream:
-    if event["method"] == "updates":
-        print(event["params"]["namespace"], event["params"]["data"])
+> from typing_extensions import TypedDict
+> from langgraph.graph.state import StateGraph, START
+> from langgraph.stream import UpdatesTransformer
+>
+> # Define subgraph
+> class SubgraphState(TypedDict):
+>     foo: str
+>     bar: str
+>
+> def subgraph_node_1(state: SubgraphState):
+>     return {"bar": "bar"}
+>
+> def subgraph_node_2(state: SubgraphState):
+>     # note that this node is using a state key ('bar') that is only available in the subgraph
+>     # and is sending update on the shared state key ('foo')
+>     return {"foo": state["foo"] + state["bar"]}
+>
+> subgraph_builder = StateGraph(SubgraphState)
+> subgraph_builder.add_node(subgraph_node_1)
+> subgraph_builder.add_node(subgraph_node_2)
+> subgraph_builder.add_edge(START, "subgraph_node_1")
+> subgraph_builder.add_edge("subgraph_node_1", "subgraph_node_2")
+> subgraph = subgraph_builder.compile()
+>
+> # Define parent graph
+> class ParentState(TypedDict):
+>     foo: str
+>
+> def node_1(state: ParentState):
+>     return {"foo": "hi! " + state["foo"]}
+>
+> builder = StateGraph(ParentState)
+> builder.add_node("node_1", node_1)
+> builder.add_node("node_2", subgraph)
+> builder.add_edge(START, "node_1")
+> builder.add_edge("node_1", "node_2")
+> graph = builder.compile()
+>
+> stream = graph.stream_events({"foo": "foo"}, version="v3", transformers=[UpdatesTransformer])  # [!code highlight]
+> for event in stream:
+>     if event["method"] == "updates":
+>         print(event["params"]["namespace"], event["params"]["data"])
 ```
-
+>
 ```
-[] {'node_1': {'foo': 'hi! foo'}}
-['node_2:e58e5673-a661-ebb0-70d4-e298a7fc28b7'] {'subgraph_node_1': {'bar': 'bar'}}
-['node_2:e58e5673-a661-ebb0-70d4-e298a7fc28b7'] {'subgraph_node_2': {'foo': 'hi! foobar'}}
-[] {'node_2': {'foo': 'hi! foobar'}}
+> [] {'node_1': {'foo': 'hi! foo'}}
+> ['node_2:e58e5673-a661-ebb0-70d4-e298a7fc28b7'] {'subgraph_node_1': {'bar': 'bar'}}
+> ['node_2:e58e5673-a661-ebb0-70d4-e298a7fc28b7'] {'subgraph_node_2': {'foo': 'hi! foobar'}}
+> [] {'node_2': {'foo': 'hi! foobar'}}
 ```
-
-</details>
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-subgraphs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-subgraphs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

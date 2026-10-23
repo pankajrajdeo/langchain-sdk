@@ -20,7 +20,7 @@ This guide provides a quick overview for getting started with `DatabricksEmbeddi
 
 | Class | Package |
 | :- | :- |
-| [`DatabricksEmbeddings`](https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_langchain.html#databricks_langchain.DatabricksEmbeddings) | [databricks-langchain](https://python.langchain.com/docs/integrations/providers/databricks/) |
+| [`DatabricksEmbeddings`](https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_langchain.html#databricks_langchain.DatabricksEmbeddings) | [databricks-langchain](../providers/databricks.md) |
 
 ### Supported methods
 
@@ -154,8 +154,6 @@ For detailed documentation on `DatabricksEmbeddings` features and configuration 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/databricks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/databricks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

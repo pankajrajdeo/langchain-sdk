@@ -16,6 +16,7 @@ This ensures that data can be handled consistently regardless of the source.
 All document loaders implement the [BaseLoader](https://reference.langchain.com/javascript/langchain-core/document_loaders/base/BaseDocumentLoader) interface.
 
 > [!WARNING]
+>
 > Community document loaders are user-contributed and unverified. LangChain does not review or endorse these integrations; use them at your own risk.
 
 ## Interface
@@ -44,6 +45,7 @@ LangChain.js categorizes document loaders in two different ways:
 ### File loaders
 
 > [!NOTE]
+>
 > If you'd like to contribute an integration, see [Contributing integrations](../contributing.md#add-a-new-integration).
 
 #### Common file types
@@ -86,20 +88,18 @@ LangChain.js categorizes document loaders in two different ways:
 
 | Integration | Downloads |
 | :- | :- |
-| [`Google cloud SQL for postgresql`](document_loaders/web_loaders/google_cloudsql_pg.md) | <span data-sort-value="619"><a href="https://www.npmjs.com/package/@langchain/google-cloud-sql-pg" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/google-cloud-sql-pg?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Soniox`](document_loaders/web_loaders/soniox.md) | <span data-sort-value="27"><a href="https://www.npmjs.com/package/@soniox/langchain" target="_blank">  <img src="https://img.shields.io/npm/dm/@soniox/langchain?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`DirectoryLoader`](document_loaders/file_loaders/directory.md) | <span data-sort-value="-1">N/A</span> |
-| [`JSON files`](document_loaders/file_loaders/json.md) | <span data-sort-value="-1">N/A</span> |
-| [`Jsonlines files -`](document_loaders/file_loaders/jsonlines.md) | <span data-sort-value="-1">N/A</span> |
-| [`LangSmithLoader`](document_loaders/web_loaders/langsmith.md) | <span data-sort-value="-1">N/A</span> |
-| [`Multiple individual files -`](document_loaders/file_loaders/multi_file.md) | <span data-sort-value="-1">N/A</span> |
-| [`OracleDocLoader`](document_loaders/file_loaders/oracleai.md) | <span data-sort-value="-1">N/A</span> |
-| [`TextLoader`](document_loaders/file_loaders/text.md) | <span data-sort-value="-1">N/A</span> |
+| [`Google cloud SQL for postgresql`](document_loaders/web_loaders/google_cloudsql_pg.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google-cloud-sql-pg?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google-cloud-sql-pg) |
+| [`Soniox`](document_loaders/web_loaders/soniox.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@soniox/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@soniox/langchain) |
+| [`DirectoryLoader`](document_loaders/file_loaders/directory.md) | N/A |
+| [`JSON files`](document_loaders/file_loaders/json.md) | N/A |
+| [`Jsonlines files -`](document_loaders/file_loaders/jsonlines.md) | N/A |
+| [`LangSmithLoader`](document_loaders/web_loaders/langsmith.md) | N/A |
+| [`Multiple individual files -`](document_loaders/file_loaders/multi_file.md) | N/A |
+| [`OracleDocLoader`](document_loaders/file_loaders/oracleai.md) | N/A |
+| [`TextLoader`](document_loaders/file_loaders/text.md) | N/A |
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

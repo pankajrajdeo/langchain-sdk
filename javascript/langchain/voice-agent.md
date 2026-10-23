@@ -189,64 +189,61 @@ async function* sttStream(
 
 The application implements an AssemblyAI client to manage the WebSocket connection and message parsing. See below for implementations; similar adapters can be constructed for other STT providers.
 
-<details>
-<summary>AssemblyAI Client</summary>
-
+> **AssemblyAI Client**
+>
 ```typescript
-export class AssemblyAISTT {
-  protected _bufferIterator = writableIterator<VoiceAgentEvent.STTEvent>();
-  protected _connectionPromise: Promise<WebSocket> | null = null;
-
-  async sendAudio(buffer: Uint8Array): Promise<void> {
-    const conn = await this._connection;
-    conn.send(buffer);
-  }
-
-  async *receiveEvents(): AsyncGenerator<VoiceAgentEvent.STTEvent> {
-    yield* this._bufferIterator;
-  }
-
-  protected get _connection(): Promise<WebSocket> {
-    if (this._connectionPromise) return this._connectionPromise;
-
-    this._connectionPromise = new Promise((resolve, reject) => {
-      const params = new URLSearchParams({
-        sample_rate: this.sampleRate.toString(),
-        format_turns: "true",
-      });
-      const url = `wss://streaming.assemblyai.com/v3/ws?${params}`;
-      const ws = new WebSocket(url, {
-        headers: { Authorization: this.apiKey },
-      });
-
-      ws.on("open", () => resolve(ws));
-
-      ws.on("message", (data) => {
-        const message = JSON.parse(data.toString());
-        if (message.type === "Turn") {
-          if (message.turn_is_formatted) {
-            this._bufferIterator.push({
-              type: "stt_output",
-              transcript: message.transcript,
-              ts: Date.now()
-            });
-          } else {
-            this._bufferIterator.push({
-              type: "stt_chunk",
-              transcript: message.transcript,
-              ts: Date.now()
-            });
-          }
-        }
-      });
-    });
-
-    return this._connectionPromise;
-  }
-}
+> export class AssemblyAISTT {
+>   protected _bufferIterator = writableIterator<VoiceAgentEvent.STTEvent>();
+>   protected _connectionPromise: Promise<WebSocket> | null = null;
+>
+>   async sendAudio(buffer: Uint8Array): Promise<void> {
+>     const conn = await this._connection;
+>     conn.send(buffer);
+>   }
+>
+>   async *receiveEvents(): AsyncGenerator<VoiceAgentEvent.STTEvent> {
+>     yield* this._bufferIterator;
+>   }
+>
+>   protected get _connection(): Promise<WebSocket> {
+>     if (this._connectionPromise) return this._connectionPromise;
+>
+>     this._connectionPromise = new Promise((resolve, reject) => {
+>       const params = new URLSearchParams({
+>         sample_rate: this.sampleRate.toString(),
+>         format_turns: "true",
+>       });
+>       const url = `wss://streaming.assemblyai.com/v3/ws?${params}`;
+>       const ws = new WebSocket(url, {
+>         headers: { Authorization: this.apiKey },
+>       });
+>
+>       ws.on("open", () => resolve(ws));
+>
+>       ws.on("message", (data) => {
+>         const message = JSON.parse(data.toString());
+>         if (message.type === "Turn") {
+>           if (message.turn_is_formatted) {
+>             this._bufferIterator.push({
+>               type: "stt_output",
+>               transcript: message.transcript,
+>               ts: Date.now()
+>             });
+>           } else {
+>             this._bufferIterator.push({
+>               type: "stt_chunk",
+>               transcript: message.transcript,
+>               ts: Date.now()
+>             });
+>           }
+>         }
+>       });
+>     });
+>
+>     return this._connectionPromise;
+>   }
+> }
 ```
-
-</details>
 
 ## 2. LangChain agent
 
@@ -266,6 +263,7 @@ import { HumanMessage } from "@langchain/core/messages";
 import { MemorySaver } from "@langchain/langgraph";
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
+import { uuid7 } from "langsmith";
 
 // Define agent tools
 const addToOrder = tool(
@@ -310,7 +308,7 @@ async function* agentStream(
   eventStream: AsyncIterable<VoiceAgentEvent>
 ): AsyncGenerator<VoiceAgentEvent> {
   // Generate unique thread ID for conversation memory
-  const threadId = crypto.randomUUID();
+  const threadId = uuid7();
 
   for await (const event of eventStream) {
     // Pass through all upstream events
@@ -395,67 +393,64 @@ async function* ttsStream(
 
 The application implements a Cartesia client to manage the WebSocket connection and audio streaming. See below for implementations; similar adapters can be constructed for other TTS providers.
 
-<details>
-<summary>Cartesia Client</summary>
-
+> **Cartesia Client**
+>
 ```typescript
-export class CartesiaTTS {
-  protected _bufferIterator = writableIterator<VoiceAgentEvent.TTSEvent>();
-  protected _connectionPromise: Promise<WebSocket> | null = null;
-
-  async sendText(text: string | null): Promise<void> {
-    if (!text || !text.trim()) return;
-
-    const conn = await this._connection;
-    const payload = { text, try_trigger_generation: false };
-    conn.send(JSON.stringify(payload));
-  }
-
-  async *receiveEvents(): AsyncGenerator<VoiceAgentEvent.TTSEvent> {
-    yield* this._bufferIterator;
-  }
-
-  protected _generateContextId(): string {
-    const timestamp = Date.now();
-    const counter = this._contextCounter++;
-    return `ctx_${timestamp}_${counter}`;
-  }
-
-  protected get _connection(): Promise<WebSocket> {
-    if (this._connectionPromise) return this._connectionPromise;
-
-    this._connectionPromise = new Promise((resolve, reject) => {
-      const params = new URLSearchParams({
-        api_key: this.apiKey,
-        cartesia_version: this.cartesiaVersion,
-      });
-      const url = `wss://api.cartesia.ai/tts/websocket?${params.toString()}`;
-      const ws = new WebSocket(url);
-
-      ws.on("open", () => {
-        resolve(ws);
-      });
-
-      ws.on("message", (data: WebSocket.RawData) => {
-        const message: CartesiaTTSResponse = JSON.parse(data.toString());
-        if (message.data) {
-          this._bufferIterator.push({
-            type: "tts_chunk",
-            audio: message.data,
-            ts: Date.now(),
-          });
-        } else if (message.error) {
-          throw new Error(`Cartesia error: ${message.error}`);
-        }
-      });
-    });
-
-    return this._connectionPromise;
-  }
-}
+> export class CartesiaTTS {
+>   protected _bufferIterator = writableIterator<VoiceAgentEvent.TTSEvent>();
+>   protected _connectionPromise: Promise<WebSocket> | null = null;
+>
+>   async sendText(text: string | null): Promise<void> {
+>     if (!text || !text.trim()) return;
+>
+>     const conn = await this._connection;
+>     const payload = { text, try_trigger_generation: false };
+>     conn.send(JSON.stringify(payload));
+>   }
+>
+>   async *receiveEvents(): AsyncGenerator<VoiceAgentEvent.TTSEvent> {
+>     yield* this._bufferIterator;
+>   }
+>
+>   protected _generateContextId(): string {
+>     const timestamp = Date.now();
+>     const counter = this._contextCounter++;
+>     return `ctx_${timestamp}_${counter}`;
+>   }
+>
+>   protected get _connection(): Promise<WebSocket> {
+>     if (this._connectionPromise) return this._connectionPromise;
+>
+>     this._connectionPromise = new Promise((resolve, reject) => {
+>       const params = new URLSearchParams({
+>         api_key: this.apiKey,
+>         cartesia_version: this.cartesiaVersion,
+>       });
+>       const url = `wss://api.cartesia.ai/tts/websocket?${params.toString()}`;
+>       const ws = new WebSocket(url);
+>
+>       ws.on("open", () => {
+>         resolve(ws);
+>       });
+>
+>       ws.on("message", (data: WebSocket.RawData) => {
+>         const message: CartesiaTTSResponse = JSON.parse(data.toString());
+>         if (message.data) {
+>           this._bufferIterator.push({
+>             type: "tts_chunk",
+>             audio: message.data,
+>             ts: Date.now(),
+>           });
+>         } else if (message.error) {
+>           throw new Error(`Cartesia error: ${message.error}`);
+>         }
+>       });
+>     });
+>
+>     return this._connectionPromise;
+>   }
+> }
 ```
-
-</details>
 
 ### LangSmith
 
@@ -513,8 +508,6 @@ For more on building agents with LangChain, see the [Agents guide](agents.md).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/voice-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/voice-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

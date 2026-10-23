@@ -23,8 +23,7 @@ This page also covers:
 
 For LangChain (Python or JS/TS), refer to the [LangChain-specific instructions](trace-with-langchain.md).
 
-> [!NOTE]
-> If you're using an LLM provider or agent framework with a built-in LangSmith integration, refer to the [integrations overview](integrations.md) instead
+If you're using an LLM provider or agent framework with a built-in LangSmith integration, refer to the [integrations overview](integrations.md) instead
 
 ## Prerequisites
 
@@ -32,8 +31,9 @@ Before tracing, set the following environment variables:
 
 * `LANGSMITH_TRACING=true`: enables tracing. Set this to toggle tracing on and off without changing your code.
 
-> [!NOTE]
->   `LANGSMITH_TRACING` controls the `@traceable` decorator and the `trace` context manager. To override this at runtime for `@traceable` without changing environment variables, use [`tracing_context(enabled=True/False)`](#use-the-trace-context-manager-python-only) (Python) or pass `tracingEnabled` directly to `traceable` (JS/TS). [`RunTree` objects](#use-the-runtree-api) are not affected by any of these controls; they always send data to LangSmith when posted.
+  > [!NOTE]
+  >
+  > `LANGSMITH_TRACING` controls the `@traceable` decorator and the `trace` context manager. To override this at runtime for `@traceable` without changing environment variables, use [`tracing_context(enabled=True/False)`](#use-the-trace-context-manager-python-only) (Python) or pass `tracingEnabled` directly to `traceable` (JS/TS). [`RunTree` objects](#use-the-runtree-api) are not affected by any of these controls; they always send data to LangSmith when posted.
 
 * `LANGSMITH_API_KEY`: your [LangSmith API key](create-account-api-key.md).
 
@@ -209,9 +209,6 @@ public class TraceablePipeline {
 }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/5e686a13-436f-41ec-9e21-7f38d8babcb8/r)
-Open a public LangSmith run for this example.
-
 **Kotlin**
 
 ```kotlin
@@ -278,12 +275,10 @@ val runPipeline =
 println(runPipeline("colorful socks"))
 ```
 
-#### [View example trace](https://smith.langchain.com/public/397a7c30-a236-43bb-b104-89f8d9e3145c/r)
-Open a public LangSmith run for this example.
-
 In the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-annotate-code), you'll find a `run_pipeline` trace with `format_prompt`, `invoke_llm`, and `parse_output` as nested child runs.
 
 > [!NOTE]
+>
 > When you wrap a sync function with `traceable` (e.g., `formatPrompt` in the previous example), use the `await` keyword when calling it to ensure the trace is logged correctly.
 
 ## Use the `trace` context manager (Python only)
@@ -667,6 +662,7 @@ MyClass(13).combine(29)
 By default, LangSmith assigns a random ID to each run. You can override this when you need to know the run ID ahead of time (for example, to attach [feedback](attach-user-feedback.md) immediately after a run), correlate LangSmith runs with IDs from an external system, or make runs idempotent using a deterministic ID.
 
 > [!NOTE]
+>
 > Use **UUID v7** for custom run IDs. UUIDv7 embeds a timestamp, which preserves correct time-ordering of runs in a trace. The LangSmith SDK exports a `uuid7` helper (Python v0.4.43+, JS v0.3.80+):
 >
 > * **Python**: `from langsmith import uuid7`
@@ -784,8 +780,6 @@ LangSmith performs tracing in a background thread to avoid obstructing your prod
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotate-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotate-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

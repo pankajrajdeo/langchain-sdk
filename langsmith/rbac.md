@@ -11,6 +11,7 @@ tags: [docs, langsmith, rbac]
 This reference explains LangSmith's Role-Based Access Control (RBAC) system for managing organization-level and workspace-level permissions.
 
 > [!NOTE]
+>
 > RBAC (Role-Based Access Control) is an Enterprise feature for managing workspace-level permissions. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales). Other plans default to using the Admin role for all users.
 
 LangSmith's RBAC system manages user permissions within workspaces. RBAC allows you to control who can access your LangSmith [workspace](administration-overview.md#workspaces) and what they can do within it.
@@ -26,6 +27,7 @@ On Enterprise plans, organizations can create [custom workspace roles](#custom-r
 To learn how to set up RBAC and assign roles to users, refer to the [User Management guide](user-management.md#set-up-access-control). Your identity provider can also assign roles automatically via [SCIM groups](user-management.md#set-up-scim-for-your-organization) or [SSO Groups Sync](user-management.md#sso-groups-sync-alternative).
 
 > [!NOTE]
+>
 > For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](organization-workspace-operations.md).
 
 ## Role types
@@ -166,6 +168,7 @@ Workspace roles are part of the **Enterprise RBAC feature** and control what use
 | [Workspace Viewer](#workspace-viewer) | Read-only access to all workspace resources |
 
 > [!NOTE]
+>
 > RBAC (Role-Based Access Control) is a feature that is only available to [Enterprise](https://langchain.com/pricing) customers. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales). Other plans default to using the Admin role for all users.
 
 #### Workspace admin
@@ -198,11 +201,14 @@ For a comprehensive list of required permissions along with the operations and r
 For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](organization-workspace-operations.md).
 
 > [!TIP]
+>
 > For step-by-step instructions on assigning workspace roles to users, refer to the [User Management guide](user-management.md#assign-a-role-to-a-user).
 
 ## Custom roles
 
-Creating custom roles is available for organizations on the Enterprise plan.
+> [!NOTE]
+>
+> Creating custom roles is available for organizations on the Enterprise plan.
 
 [Organization Admins](#organization-admin) can create custom roles with specific combinations of permissions tailored to their organization's needs.
 
@@ -229,7 +235,9 @@ Note the following details on custom roles:
 
 ### Restrict roles
 
-Role restriction is available for organizations on the [Enterprise](pricing-plans.md) plan.
+> [!NOTE]
+>
+> Role restriction is available for organizations on the [Enterprise](https://docs.langchain.com/langsmith/pricing-plans.md) plan.
 
 [Organization Admins](#organization-admin) and [Organization Operators](#organization-operator) (roles with the `organization:manage` permission) can mark any role—system or custom—as **restricted**. Restricted roles can only be assigned to workspace members by users who hold the built-in [Workspace Admin](#workspace-admin) role. Users who have the `workspaces:manage-members` permission but do not hold the Workspace Admin role cannot assign restricted roles.
 
@@ -248,6 +256,7 @@ After a role is restricted, users who do not hold the Workspace Admin role canno
 To unrestrict a role, follow the same steps and toggle the **Restricted** setting off.
 
 > [!NOTE]
+>
 > Role restriction applies to both system roles (Workspace Admin, Workspace Editor, Workspace Viewer) and custom roles. It is available on LangSmith [Cloud](cloud.md) and [Self-hosted](self-hosted.md).
 
 ### Understand permission behavior
@@ -264,8 +273,6 @@ Some permissions offer granular control when used in custom roles:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/rbac.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/rbac.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

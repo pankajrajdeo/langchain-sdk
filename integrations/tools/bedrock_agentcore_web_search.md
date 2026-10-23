@@ -16,7 +16,7 @@ tags: [docs, integrations, tools, bedrock_agentcore_web_search]
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/) | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/tools.md) | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`WebSearchToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) | ❌ | ❌ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square\&label=%20) |
 
@@ -232,8 +232,6 @@ For detailed documentation of all features and configurations, see:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_web_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_web_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

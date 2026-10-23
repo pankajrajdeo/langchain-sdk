@@ -18,8 +18,6 @@ This example shows how to communicate with `watsonx.ai` models using `LangChain`
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](ibm_watsonx.md).
-
 ## Setup
 
 To access IBM watsonx.ai models you'll need to create an IBM watsonx.ai account, get an API key, and install the `langchain-ibm` integration package.
@@ -197,8 +195,6 @@ For detailed documentation of all `WatsonxEmbeddings` features and configuration
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

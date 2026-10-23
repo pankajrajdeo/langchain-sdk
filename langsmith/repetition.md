@@ -12,7 +12,7 @@ Running multiple repetitions can give a more accurate estimate of the performanc
 
 ## Configuring repetitions on an experiment
 
-Add the optional `num_repetitions` param to the `evaluate` / `aevaluate` function ([Python](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate), [TypeScript](https://docs.smith.langchain.com/reference/js/interfaces/evaluation.EvaluateOptions#numrepetitions)) to specify how many times to evaluate over each example in your dataset. For instance, if you have 5 examples in the dataset and set `num_repetitions=5`, each example will be run 5 times, for a total of 25 runs.
+Add the optional `num_repetitions` param to the `evaluate` / `aevaluate` function ([Python](https://reference.langchain.com/python/langsmith/evaluation/_runner/evaluate), [TypeScript](https://reference.langchain.com/javascript/langsmith/evaluation/EvaluateOptions)) to specify how many times to evaluate over each example in your dataset. For instance, if you have 5 examples in the dataset and set `num_repetitions=5`, each example will be run 5 times, for a total of 25 runs.
 
 **Python**
 
@@ -45,12 +45,10 @@ await evaluate((inputs) => labelText(inputs["input"]), {
 
 If you've run your experiment with [repetitions](repetition.md), there will be arrows in the output results column so you can view outputs in the table. To view each run from the repetition, hover over the output cell and click the expanded view. When you run an experiment with repetitions, LangSmith displays the average for each feedback score in the table. Click on the feedback score to view the feedback scores from individual runs, or to view the standard deviation across repetitions.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/Tdk8epB4BZgbugRX/langsmith/images/repetitions.png?fit=max&auto=format&n=Tdk8epB4BZgbugRX&q=85&s=15a7c9c1a20042fbcdf1d5f7adcc25de" alt="Repetitions" width="1592" height="922" data-path="langsmith/images/repetitions.png" />
+![Repetitions](https://mintcdn.com/langchain-5e9cc07a/Tdk8epB4BZgbugRX/langsmith/images/repetitions.png?fit=max\&auto=format\&n=Tdk8epB4BZgbugRX\&q=85\&s=15a7c9c1a20042fbcdf1d5f7adcc25de)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/repetition.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/repetition.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

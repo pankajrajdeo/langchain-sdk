@@ -9,6 +9,7 @@ tags: [docs, langsmith, studio]
 # LangSmith Studio
 
 > [!NOTE]
+>
 > **Prerequisites**
 >
 > * [LangSmith](observability.md)
@@ -67,12 +68,10 @@ Go from [testing graphs locally](local-dev-testing.md) in Studio to deploying th
 
 ## Video guide
 
-> **Embedded Content:** [YouTube video player](https://www.youtube.com/embed/Mi1gSlHwZLM?si=oWCeHQ640zPHoLwn)
+[YouTube video player](https://www.youtube.com/embed/Mi1gSlHwZLM?si=oWCeHQ640zPHoLwn)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -16,7 +16,7 @@ This will help you get started with CohereEmbeddings [embedding models](../embed
 
 ### Integration details
 
-| Class | Package | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/cohere/) | Downloads | Version |
+| Class | Package | Local | [Py support](../../../integrations/embeddings/cohere.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`CohereEmbeddings`](https://reference.langchain.com/javascript/langchain-cohere/CohereEmbeddings) | [`@langchain/cohere`](https://www.npmjs.com/package/@langchain/cohere) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/cohere?style=flat-square\&label=%20&) |
 
@@ -236,8 +236,6 @@ For detailed documentation of all `CohereEmbeddings` features and configurations
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

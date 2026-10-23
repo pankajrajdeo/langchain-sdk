@@ -331,7 +331,7 @@ CHUNK 21b4d9517f7ccdc0e3a028ce5043a2a0: page_content='1.1 Landlord.\n <Landlord>
 
 ```python
 from langchain_classic.retrievers.multi_vector import MultiVectorRetriever, SearchType
-from langchain.storage import InMemoryStore
+from langchain_core.stores import InMemoryStore
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 
@@ -414,8 +414,6 @@ for chunk in retrieved_parent_docs:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/docugami.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/docugami.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

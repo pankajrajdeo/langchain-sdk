@@ -24,6 +24,7 @@ More often than not - it's actually the second reason that causes agents to not 
 **Context engineering** is providing the right information and tools in the right format so the LLM can accomplish a task. This is the number one job of AI Engineers. This lack of "right" context is the number one blocker for more reliable agents, and LangChain's agent abstractions are uniquely designed to facilitate context engineering.
 
 > [!TIP]
+>
 > New to context engineering? Start with the [conceptual overview](../concepts/context.md) to understand the different types of context and when to use them.
 
 ### The agent loop
@@ -33,7 +34,7 @@ A typical agent loop consists of two main steps:
 1. **Model call** - calls the LLM with a prompt and available tools, returns either a response or a request to execute tools
 2. **Tool execution** - executes the tools that the LLM requested, returns tool results
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/Tazq8zGc0yYUYrDl/oss/images/core_agent_loop.png?fit=max&auto=format&n=Tazq8zGc0yYUYrDl&q=85&s=ac72e48317a9ced68fd1be64e89ec063" alt="Core agent loop diagram" width="300" height="268" data-path="oss/images/core_agent_loop.png" />
+![Core agent loop diagram](https://mintcdn.com/langchain-5e9cc07a/Tazq8zGc0yYUYrDl/oss/images/core_agent_loop.png?fit=max\&auto=format\&n=Tazq8zGc0yYUYrDl\&q=85\&s=ac72e48317a9ced68fd1be64e89ec063)
 
 This loop continues until the LLM decides to finish.
 
@@ -47,11 +48,13 @@ To build reliable agents, you need to control what happens at each step of the a
 | **[Tool Context](#tool-context)** | What tools can access and produce (reads/writes to state, store, runtime context) | Persistent |
 | **[Life-cycle Context](#life-cycle-context)** | What happens between model and tool calls (summarization, guardrails, logging, etc.) | Persistent |
 
-#### Transient context
-What the LLM sees for a single call. You can modify messages, tools, or prompts without changing what's saved in state.
+> **Transient context**
+>
+> What the LLM sees for a single call. You can modify messages, tools, or prompts without changing what's saved in state.
 
-#### Persistent context
-What gets saved in state across turns. Life-cycle hooks and tool writes modify this permanently.
+> **Persistent context**
+>
+> What gets saved in state across turns. Life-cycle hooks and tool writes modify this permanently.
 
 ### Data sources
 
@@ -78,20 +81,25 @@ Throughout this guide, you'll see frequent use of the middleware API as a means 
 
 Control what goes into each model call - instructions, available tools, which model to use, and output format. These decisions directly impact reliability and cost.
 
-#### [System Prompt](#system-prompt)
-Base instructions from the developer to the LLM.
+> **[System Prompt](#system-prompt)**
+>
+> Base instructions from the developer to the LLM.
 
-#### [Messages](#messages)
-The full list of messages (conversation history) sent to the LLM.
+> **[Messages](#messages)**
+>
+> The full list of messages (conversation history) sent to the LLM.
 
-#### [Tools](#tools)
-Utilities the agent has access to for taking actions.
+> **[Tools](#tools)**
+>
+> Utilities the agent has access to for taking actions.
 
-#### [Model](#model)
-The actual model (including configuration) to be called.
+> **[Model](#model)**
+>
+> The actual model (including configuration) to be called.
 
-#### [Response Format](#response-format)
-Schema specification for the model's final response.
+> **[Response Format](#response-format)**
+>
+> Schema specification for the model's final response.
 
 All of these types of model context can draw from **state** (short-term memory), **store** (long-term memory), or **runtime context** (static configuration).
 
@@ -99,7 +107,8 @@ All of these types of model context can draw from **state** (short-term memory),
 
 The system prompt sets the LLM's behavior and capabilities. Different users, contexts, or conversation stages need different instructions. Successful agents draw on memories, preferences, and configuration to provide the right instructions for the current state of the conversation.
 
-#### State
+**State**
+
 Access message count or conversation context from state:
 
 ```python
@@ -125,7 +134,8 @@ agent = create_agent(
 )
 ```
 
-#### Store
+**Store**
+
 Access user preferences from long-term memory:
 
 ```python
@@ -163,7 +173,8 @@ agent = create_agent(
 )
 ```
 
-#### Runtime Context
+**Runtime Context**
+
 Access user ID or configuration from Runtime Context:
 
 ```python
@@ -207,7 +218,8 @@ agent = create_agent(
 Messages make up the prompt that is sent to the LLM.
 It's critical to manage the content of messages to ensure that the LLM has the right information to respond well.
 
-#### State
+**State**
+
 Inject uploaded file context from State when relevant to current query:
 
 ```python
@@ -253,7 +265,8 @@ agent = create_agent(
 )
 ```
 
-#### Store
+**Store**
+
 Inject user's email writing style from Store to guide drafting:
 
 ```python
@@ -307,7 +320,8 @@ agent = create_agent(
 )
 ```
 
-#### Runtime Context
+**Runtime Context**
+
 Inject compliance rules from Runtime Context based on user's jurisdiction:
 
 ```python
@@ -366,6 +380,7 @@ agent = create_agent(
 ```
 
 > [!NOTE]
+>
 > **Transient vs Persistent Message Updates:**
 >
 > The examples above use `wrap_model_call` to make **transient** updates - modifying what messages are sent to the model for a single call without changing what's saved in state.
@@ -412,7 +427,8 @@ def search_orders(
 
 Not every tool is appropriate for every situation. Too many tools may overwhelm the model (overload context) and increase errors; too few limit capabilities. Dynamic tool selection adapts the available toolset based on authentication state, user permissions, feature flags, or conversation stage.
 
-#### State
+**State**
+
 Enable advanced tools only after certain conversation milestones:
 
 ```python
@@ -449,7 +465,8 @@ agent = create_agent(
 )
 ```
 
-#### Store
+**Store**
+
 Filter tools based on user preferences or feature flags in Store:
 
 ```python
@@ -492,7 +509,8 @@ agent = create_agent(
 )
 ```
 
-#### Runtime Context
+**Runtime Context**
+
 Filter tools based on user permissions from Runtime Context:
 
 ```python
@@ -543,7 +561,8 @@ See [Dynamic tools](tools.md#dynamic-tool-selection) for both filtering pre-regi
 Different models have different strengths, costs, and context windows. Select the right model for the task at hand, which
 might change during an agent run.
 
-#### State
+**State**
+
 Use different models based on conversation length from State:
 
 ```python
@@ -587,7 +606,8 @@ agent = create_agent(
 )
 ```
 
-#### Store
+**Store**
+
 Use user's preferred model from Store:
 
 ```python
@@ -637,7 +657,8 @@ agent = create_agent(
 )
 ```
 
-#### Runtime Context
+**Runtime Context**
+
 Select model based on cost limits or environment from Runtime Context:
 
 ```python
@@ -725,7 +746,8 @@ class CustomerSupportTicket(BaseModel):
 
 Dynamic response format selection adapts schemas based on user preferences, conversation stage, or role—returning simple formats early and detailed formats as complexity increases.
 
-#### State
+**State**
+
 Configure structured output based on conversation state:
 
 ```python
@@ -769,7 +791,8 @@ agent = create_agent(
 )
 ```
 
-#### Store
+**Store**
+
 Configure output format based on user preferences in Store:
 
 ```python
@@ -823,7 +846,8 @@ agent = create_agent(
 )
 ```
 
-#### Runtime Context
+**Runtime Context**
+
 Configure output format based on Runtime Context like user role or environment:
 
 ```python
@@ -887,7 +911,8 @@ Tools can also fetch important information for the model that allows it to perfo
 
 Most real-world tools need more than just the LLM's parameters. They need user IDs for database queries, API keys for external services, or current session state to make decisions. Tools read from state, store, and runtime context to access this information.
 
-#### State
+**State**
+
 Read from State to check current session information:
 
 ```python
@@ -914,7 +939,8 @@ agent = create_agent(
 )
 ```
 
-#### Store
+**Store**
+
 Read from Store to access persisted user preferences:
 
 ```python
@@ -953,7 +979,8 @@ agent = create_agent(
 )
 ```
 
-#### Runtime Context
+**Runtime Context**
+
 Read from Runtime Context for configuration like API keys and user IDs:
 
 ```python
@@ -1005,7 +1032,8 @@ result = agent.invoke(
 Tool results can be used to help an agent complete a given task. Tools can both return results directly to the model
 and update the memory of the agent to make important context available to future steps.
 
-#### State
+**State**
+
 Write to State to track session-specific information using Command:
 
 ```python
@@ -1034,7 +1062,8 @@ agent = create_agent(
 )
 ```
 
-#### Store
+**Store**
+
 Write to Store to persist data across sessions:
 
 ```python
@@ -1088,7 +1117,7 @@ As you've seen in [Model Context](#model-context) and [Tool Context](#tool-conte
 1. **Update context** - Modify state and store to persist changes, update conversation history, or save insights
 2. **Jump in the lifecycle** - Move to different steps in the agent cycle based on context (e.g., skip tool execution if a condition is met, repeat model call with modified context)
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max&auto=format&n=RAP6mjwE5G00xYsA&q=85&s=eb4404b137edec6f6f0c8ccb8323eaf1" alt="Middleware hooks in the agent loop" width="500" height="560" data-path="oss/images/middleware_final.png" />
+![Middleware hooks in the agent loop](https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max\&auto=format\&n=RAP6mjwE5G00xYsA\&q=85\&s=eb4404b137edec6f6f0c8ccb8323eaf1)
 
 ### Example: Summarization
 
@@ -1122,6 +1151,7 @@ When the conversation exceeds the token limit, `SummarizationMiddleware` automat
 The summarized conversation history is permanently updated - future turns will see the summary instead of the original messages.
 
 > [!NOTE]
+>
 > For a complete list of built-in middleware, available hooks, and how to create custom middleware, see the [Middleware documentation](middleware.md).
 
 ## Best practices
@@ -1143,8 +1173,6 @@ The summarized conversation history is permanently updated - future turns will s
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/context-engineering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/context-engineering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

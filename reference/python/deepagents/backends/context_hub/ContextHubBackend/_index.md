@@ -15,7 +15,7 @@ tags: [index, reference, python, deepagents, backends, context_hub, contexthubba
 - [download_files](download_files.md) - Download files as raw bytes. Missing paths return file_not_found.
 - [edit](edit.md) - Replace old_string with new_string in a file.
 - [get_linked_entries](get_linked_entries.md) - Return linked-entry paths mapped to their repo handles.
-- [glob](glob.md) - Return files matching pattern (path unused — flat namespace).
+- [glob](glob.md) - Return files under path matching pattern.
 - [grep](grep.md) - Search contents for pattern (optional path / glob filters).
 - [has_prior_commits](has_prior_commits.md) - Return True if the hub repo already exists with at least one commit.
 - [ls](ls.md) - List immediate files and subdirectories under path (non-recursive).

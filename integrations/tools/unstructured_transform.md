@@ -53,7 +53,7 @@ if "UNSTRUCTURED_API_KEY" not in os.environ:
     os.environ["UNSTRUCTURED_API_KEY"] = getpass.getpass("Enter your Unstructured API key: ")
 ```
 
-It's also helpful (but not needed) to set up LangSmith for best-in-class observability/tracing of your tool calls. To enable automated tracing, set your [LangSmith](../../langsmith/observability.md) API key:
+It's also helpful (but not needed) to set up LangSmith for best-in-class observability/tracing (Log each step of a model's execution to debug and improve it) of your tool calls. To enable automated tracing, set your [LangSmith](../../langsmith/observability.md) API key:
 
 **Enable tracing**
 
@@ -160,8 +160,6 @@ its output, head to the [Unstructured Transform documentation](https://docs.unst
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/unstructured_transform.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/unstructured_transform.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

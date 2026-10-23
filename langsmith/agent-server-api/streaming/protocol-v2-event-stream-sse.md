@@ -108,6 +108,11 @@ paths:
                   `ProtocolEvent` as the `data:` field; `id:` is set to the
                   event's `seq`.
 
+                  If reading the thread's event stream fails, the server ends
+                  the stream with a final frame whose `event:` field is `error`
+                  and whose `data:` field is a `ProtocolError` with `id: null`
+                  and `error: "unknown_error"`. That frame has no `id:` field.
+
                   **Example frame:**
 
                   id: 42
@@ -118,6 +123,18 @@ paths:
                   {"type":"event","event_id":"42","seq":42,"method":"messages","params":{"namespace":[],"timestamp":1700000000000,"data":{...}}}
         '400':
           description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
           content:
             application/json:
               schema:

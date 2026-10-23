@@ -28,9 +28,11 @@ Prompt caching is useful for the following:
 * High-volume deployments where reducing API costs and latency is critical
 
 > [!TIP]
+>
 > For simpler use cases, you can also use [prompt caching](../chat/anthropic.md#prompt-caching) on the chat model by passing `cache_control` at invocation time without middleware. The middleware is recommended when you need explicit control over cache breakpoints on system prompts and tool definitions.
 
 > [!NOTE]
+>
 > Learn more about [Anthropic prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#cache-limitations) strategies and limitations.
 
 ```typescript
@@ -43,58 +45,51 @@ const agent = createAgent({
 });
 ```
 
-<details>
-<summary>Configuration options</summary>
+> **Configuration options**
+>
+> **ttl** `string` (default: 5m)
+>
+> Time to live for cached content. Valid values: `'5m'` or `'1h'`
 
-#### `Field` — `string`
-Time to live for cached content. Valid values: `'5m'` or `'1h'`
-
-</details>
-
-<details>
-<summary>Full example</summary>
-
-The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, significantly reducing costs and latency.
-
-**How it works:**
-
-1. First request: System prompt, tools, and the user message *"Hi, my name is Bob"* are sent to the API and cached
-2. Second request: The cached content (system prompt, tools, and first message) is retrieved from cache. Only the new message *"What's my name?"* needs to be processed, plus the model's response from the first request
-3. This pattern continues for each turn, with each request reusing the cached conversation history
-
+> **Full example**
+>
+> The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, significantly reducing costs and latency.
+>
+> **How it works:**
+>
+> 1. First request: System prompt, tools, and the user message *"Hi, my name is Bob"* are sent to the API and cached
+> 2. Second request: The cached content (system prompt, tools, and first message) is retrieved from cache. Only the new message *"What's my name?"* needs to be processed, plus the model's response from the first request
+> 3. This pattern continues for each turn, with each request reusing the cached conversation history
+>
 ```typescript
-import { createAgent, HumanMessage, anthropicPromptCachingMiddleware } from "langchain";
-
-const LONG_PROMPT = `
-Please be a helpful assistant.
-
-<Lots more context ...>
-`;
-
-const agent = createAgent({
-  model: "claude-sonnet-4-6",
-  prompt: LONG_PROMPT,
-  middleware: [anthropicPromptCachingMiddleware({ ttl: "5m" })],
-});
-
-// First invocation: Creates cache with system prompt, tools, and "Hi, my name is Bob"
-await agent.invoke({
-  messages: [new HumanMessage("Hi, my name is Bob")]
-});
-
-// Second invocation: Reuses cached system prompt, tools, and previous messages
-// Only processes the new message "What's my name?" and the previous AI response
-const result = await agent.invoke({
-  messages: [new HumanMessage("What's my name?")]
-});
+> import { createAgent, HumanMessage, anthropicPromptCachingMiddleware } from "langchain";
+>
+> const LONG_PROMPT = `
+> Please be a helpful assistant.
+>
+> <Lots more context ...>
+> `;
+>
+> const agent = createAgent({
+>   model: "claude-sonnet-4-6",
+>   prompt: LONG_PROMPT,
+>   middleware: [anthropicPromptCachingMiddleware({ ttl: "5m" })],
+> });
+>
+> // First invocation: Creates cache with system prompt, tools, and "Hi, my name is Bob"
+> await agent.invoke({
+>   messages: [new HumanMessage("Hi, my name is Bob")]
+> });
+>
+> // Second invocation: Reuses cached system prompt, tools, and previous messages
+> // Only processes the new message "What's my name?" and the previous AI response
+> const result = await agent.invoke({
+>   messages: [new HumanMessage("What's my name?")]
+> });
 ```
-
-</details>
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/middleware/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/middleware/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -20,18 +20,20 @@ LangSmith Deployment supports cron jobs, which run on a user-defined schedule. T
 
 Note that this sends the same input to the thread every time.
 
-The LangSmith Deployment API provides several endpoints for creating and managing cron jobs. See the [API reference](https://langchain-ai.github.io/langgraph/cloud/reference/api/api_ref/) for more details.
+The LangSmith Deployment API provides several endpoints for creating and managing cron jobs. See the [API reference](server-api-ref.md) for more details.
 
 Sometimes you don't want to run your graph based on user interaction, but rather you would like to schedule your graph to run on a schedule - for example if you wish for your graph to compose and send out a weekly email of to-dos for your team. LangSmith Deployment allows you to do this without having to write your own script by using the `Crons` client. To schedule a graph job, you need to pass a [cron expression](https://crontab.cronhub.io/) to inform the client when you want to run the graph. `Cron` jobs are run in the background and do not interfere with normal invocations of the graph.
 
 > [!NOTE]
+>
 > All cron schedules are interpreted in **UTC**. Make sure to convert your desired execution time to UTC when specifying the schedule.
 
 ## Setup
 
 First, let's set up our SDK client, assistant, and thread:
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -43,7 +45,8 @@ thread = await client.threads.create()
 print(thread)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -55,7 +58,8 @@ const thread = await client.threads.create();
 console.log(thread);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/assistants/search \
@@ -88,7 +92,8 @@ Output:
 
 To create a cron job associated with a specific thread, you can write:
 
-#### Python
+**Python**
+
 ```python
 # This schedules a job to run at 15:27 (3:27PM) UTC every day
 cron_job = await client.crons.create_for_thread(
@@ -99,7 +104,8 @@ cron_job = await client.crons.create_for_thread(
 )
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 // This schedules a job to run at 15:27 (3:27PM) UTC every day
 const cronJob = await client.crons.create_for_thread(
@@ -112,7 +118,8 @@ const cronJob = await client.crons.create_for_thread(
 );
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/crons \
@@ -124,17 +131,20 @@ curl --request POST \
 
 Note that it is **very** important to delete `Cron` jobs that are no longer useful. Otherwise you could rack up unwanted API charges to the LLM! You can delete a `Cron` job using the following code:
 
-#### Python
+**Python**
+
 ```python
 await client.crons.delete(cron_job["cron_id"])
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 await client.crons.delete(cronJob["cron_id"]);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request DELETE \
     --url <DEPLOYMENT_URL>/runs/crons/<CRON_ID>
@@ -144,7 +154,8 @@ curl --request DELETE \
 
 You can also create stateless cron jobs by using the following code. Stateless cron jobs create a new thread for each execution:
 
-#### Python
+**Python**
+
 ```python
 # This schedules a job to run at 15:27 (3:27PM) UTC every day
 cron_job_stateless = await client.crons.create(
@@ -154,7 +165,8 @@ cron_job_stateless = await client.crons.create(
 )
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 // This schedules a job to run at 15:27 (3:27PM) UTC every day
 const cronJobStateless = await client.crons.create(
@@ -166,7 +178,8 @@ const cronJobStateless = await client.crons.create(
 );
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
     --url <DEPLOYMENT_URL>/runs/crons \
@@ -178,17 +191,20 @@ curl --request POST \
 
 Again, remember to delete your job once you are done with it!
 
-#### Python
+**Python**
+
 ```python
 await client.crons.delete(cron_job_stateless["cron_id"])
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 await client.crons.delete(cronJobStateless["cron_id"]);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request DELETE \
     --url <DEPLOYMENT_URL>/runs/crons/<CRON_ID>
@@ -197,6 +213,7 @@ curl --request DELETE \
 ## Thread cleanup for stateless crons
 
 > [!NOTE]
+>
 > This feature requires LangGraph API version **0.5.18** or later and Python SDK **0.3.2** or later, or JavaScript SDK **1.4.0** or later.
 
 Every time a stateless cron is triggered, a new thread is created. Control what happens to that thread after the run completes using the `on_run_completed` parameter:
@@ -206,7 +223,8 @@ Every time a stateless cron is triggered, a new thread is created. Control what 
 
 ### Example: Keeping threads for later retrieval
 
-#### Python
+**Python**
+
 ```python
 # Create a stateless cron that keeps threads after execution.
 # Configure checkpointer.ttl in langgraph.json to auto-delete old threads.
@@ -224,7 +242,8 @@ runs = await client.runs.search(
 )
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 // Create a stateless cron that keeps threads after execution.
 // Configure checkpointer.ttl in langgraph.json to auto-delete old threads.
@@ -244,7 +263,8 @@ const runs = await client.runs.search({
 });
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # Create a stateless cron that keeps threads after execution.
 # Configure checkpointer.ttl in langgraph.json to auto-delete old threads.
@@ -262,8 +282,6 @@ curl --request POST \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cron-jobs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cron-jobs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -19,6 +19,7 @@ This is useful when:
 * You need to decouple feedback collection from your backend.
 
 > [!NOTE]
+>
 > If you are using [Agent Server](agent-server.md), presigned feedback URLs are generated automatically when you include `feedback_keys` in the run request. For that workflow, refer to [Collect user feedback for Agent Server runs](agent-server-feedback.md).
 
 ## Create a presigned feedback token
@@ -256,8 +257,6 @@ for await (const token of client.listPresignedFeedbackTokens(runId)) {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/presigned-feedback-tokens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/presigned-feedback-tokens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

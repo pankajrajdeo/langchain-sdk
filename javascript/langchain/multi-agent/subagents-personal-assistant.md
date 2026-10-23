@@ -78,7 +78,8 @@ process.env.LANGSMITH_API_KEY = "...";
 
 We will need to select a chat model from LangChain's suite of integrations:
 
-#### OpenAI
+**OpenAI**
+
 👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
 **npm**
@@ -126,7 +127,8 @@ const model = new ChatOpenAI({
 });
 ```
 
-#### Anthropic
+**Anthropic**
+
 👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
 **npm**
@@ -174,7 +176,8 @@ const model = new ChatAnthropic({
 });
 ```
 
-#### Azure
+**Azure**
+
 👉 Read the [Azure chat model integration docs](../../integrations/chat/azure.md)
 
 **npm**
@@ -226,7 +229,8 @@ const model = new AzureChatOpenAI({
 });
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 👉 Read the [ChatGoogle chat model integration docs](../../integrations/chat/google.md)
 
 **npm**
@@ -274,7 +278,8 @@ const model = new ChatGoogle({
 });
 ```
 
-#### Bedrock Converse
+**Bedrock Converse**
+
 👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock_converse.md)
 
 **npm**
@@ -682,6 +687,7 @@ The team standup with Alice and Bob is scheduled for tomorrow at 9:00 AM. If you
 The supervisor identifies this as a calendar task, calls `schedule_event`, and the calendar agent handles date parsing and event creation.
 
 > [!TIP]
+>
 > For full transparency into the information flow, including prompts and responses for each chat model call, check out the [LangSmith trace](https://smith.langchain.com/public/91a9a95f-fba9-4e84-aff0-371861ad2f4a/r) for the above run.
 
 ### Example 2: Complex multi-domain request
@@ -744,9 +750,11 @@ Let me know if you'd like to add more details to the meeting or include addition
 The supervisor recognizes this requires both calendar and email actions, calls `schedule_event` for the meeting, then calls `manage_email` for the reminder. Each sub-agent completes its task, and the supervisor synthesizes both results into a coherent response.
 
 > [!NOTE]
+>
 > The supervisor dispatches tasks to subagents sequentially by default. Each tool call completes before the next one starts. However, many LLMs will issue multiple tool calls in a single response (as shown in the trace above, where both `schedule_event` and `manage_email` are called together), which the runtime executes in parallel. You can also configure explicit parallel dispatch. See the [`create_supervisor` reference docs](https://reference.langchain.com/python/langgraph-supervisor/supervisor/create_supervisor) for details.
 
 > [!TIP]
+>
 > Refer to the [LangSmith trace](https://smith.langchain.com/public/95cd00a3-d1f9-4dba-9731-7bf733fb6a3c/r) to see the detailed information flow for the above run, including individual chat model prompts and responses.
 
 ### Complete working example
@@ -754,6 +762,7 @@ The supervisor recognizes this requires both calendar and email actions, calls `
 Here's everything together in a runnable script:
 
 **View complete code**
+
 ```typescript
 /**
  * Personal Assistant Supervisor Example
@@ -1208,6 +1217,7 @@ ${request}
 This allows sub-agents to see the full conversation context, which can be useful for resolving ambiguities like "schedule it for the same time tomorrow" (referencing a previous conversation).
 
 > [!TIP]
+>
 > You can see the full context received by the sub agent in the [chat model call](https://smith.langchain.com/public/c7d54882-afb8-4039-9c5a-4112d0f458b0/r/6803571e-af78-4c68-904a-ecf55771084d) of the LangSmith trace.
 
 ### Control what supervisor receives
@@ -1246,6 +1256,7 @@ const scheduleEvent = tool(
 **Important:** Make sure sub-agent prompts emphasize that their final message should contain all relevant information. A common failure mode is sub-agents that perform tool calls but don't include the results in their final response.
 
 > [!TIP]
+>
 > For a complete working example that demonstrates the full supervisor pattern with human-in-the-loop review and advanced information flow control, check out [`supervisor_complete.ts`](https://github.com/langchain-ai/langchainjs/blob/main/examples/src/createAgent/supervisor.ts) in the LangChain.js examples.
 
 ## 8. Key takeaways
@@ -1253,6 +1264,7 @@ const scheduleEvent = tool(
 The supervisor pattern creates layers of abstraction where each layer has a clear responsibility. When designing a supervisor system, start with clear domain boundaries and give each sub-agent focused tools and prompts. Write clear tool descriptions for the supervisor, test each layer independently before integration, and control information flow based on your specific needs.
 
 > [!TIP]
+>
 > **When to use the supervisor pattern**
 >
 > Use the supervisor pattern when you have multiple distinct domains (calendar, email, CRM, database), each domain has multiple tools or complex logic, you want centralized workflow control, and sub-agents don't need to converse directly with users.
@@ -1265,8 +1277,6 @@ Learn about [handoffs](handoffs.md) for agent-to-agent conversations, explore [c
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/subagents-personal-assistant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/subagents-personal-assistant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

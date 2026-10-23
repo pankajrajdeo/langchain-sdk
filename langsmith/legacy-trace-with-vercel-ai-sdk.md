@@ -9,11 +9,13 @@ tags: [docs, langsmith, legacy-trace-with-vercel-ai-sdk]
 # Trace with the Vercel AI SDK (Legacy)
 
 > [!WARNING]
+>
 > This page documents an older method of tracing AI SDK runs. For a simpler and more general method that does not require OTEL setup, see [the new guide](trace-with-vercel-ai-sdk.md).
 
 You can use LangSmith to trace runs from the Vercel AI SDK using OpenTelemetry (OTEL). This guide will walk through an example.
 
 > [!NOTE]
+>
 > Many popular [OpenTelemetry implementations](https://www.npmjs.com/package/@opentelemetry/sdk-node) in JavaScript are currently experimental,
 > and may behave erratically in production, especially when instrumenting LangSmith alongside other providers. If you are on AI SDK 5,
 > we strongly suggest using [our recommended approach for tracing AI SDK runs](trace-with-vercel-ai-sdk.md).
@@ -84,6 +86,7 @@ const { DEFAULT_LANGSMITH_SPAN_PROCESSOR } = initializeOTEL();
 Afterwards, add the `experimental_telemetry` argument to your AI SDK calls that you want to trace.
 
 > [!NOTE]
+>
 > Do not forget to call `await DEFAULT_LANGSMITH_SPAN_PROCESSOR.shutdown();` before your application shuts down in order to flush any remaining traces to LangSmith.
 
 ```typescript
@@ -93,7 +96,7 @@ import { openai } from "@ai-sdk/openai";
 let result;
 try {
   result = await generateText({
-    model: openai("gpt-5.4-nano"),
+    model: openai("gpt-5.4-mini"),
     prompt: "Write a vegetarian lasagna recipe for 4 people.",
     experimental_telemetry: {
       isEnabled: true,
@@ -114,7 +117,7 @@ import { openai } from "@ai-sdk/openai";
 import { z } from "zod";
 
 await generateText({
-  model: openai("gpt-5.4-nano"),
+  model: openai("gpt-5.4-mini"),
   messages: [
     {
       role: "user",
@@ -164,7 +167,7 @@ const client = new Client();
 const wrappedText = traceable(
   async (content: string) => {
     const { text } = await generateText({
-      model: openai("gpt-5.4-nano"),
+      model: openai("gpt-5.4-mini"),
       messages: [{ role: "user", content }],
       tools: {
         listOrders: tool({
@@ -254,7 +257,7 @@ initializeOTEL();
 
 export async function GET() {
   const { text } = await generateText({
-    model: openai("gpt-5.4-nano"),
+    model: openai("gpt-5.4-mini"),
     messages: [{ role: "user", content: "Why is the sky blue?" }],
     experimental_telemetry: {
       isEnabled: true,
@@ -272,25 +275,26 @@ You can also wrap parts of your code in `traceables` for more granularity.
 If you're using Sentry, you can attach the LangSmith trace exporter to Sentry's default OpenTelemetry instrumentation as show in the example below.
 
 > [!WARNING]
+>
 > At time of writing, Sentry only supports OTEL v1 packages. LangSmith supports both v1 and v2, but you **must** make sure you install OTEL v1 packages in order to make instrumentation work.
 >
-> **npm**
->
-> ```bash
+**npm**
+
+```bash
 > npm install @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
-> ```
+```
 >
-> **yarn**
->
-> ```bash
+**yarn**
+
+```bash
 > yarn add @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
-> ```
+```
 >
-> **pnpm**
->
-> ```bash
+**pnpm**
+
+```bash
 > pnpm add @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
-> ```
+```
 
 ```typescript
 import { initializeOTEL } from "langsmith/experimental/otel/setup";
@@ -319,7 +323,7 @@ initializeOTEL({
 const wrappedText = traceable(
   async (content: string) => {
     const { text } = await generateText({
-      model: openai("gpt-5.4-nano"),
+      model: openai("gpt-5.4-mini"),
       messages: [{ role: "user", content }],
       experimental_telemetry: {
         isEnabled: true,
@@ -348,7 +352,7 @@ import { generateText } from "ai";
 import { openai } from "@ai-sdk/openai";
 
 await generateText({
-  model: openai("gpt-5.4-nano"),
+  model: openai("gpt-5.4-mini"),
   prompt: "Write a vegetarian lasagna recipe for 4 people.",
   experimental_telemetry: {
     isEnabled: true,
@@ -384,8 +388,6 @@ await generateText({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/legacy-trace-with-vercel-ai-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/legacy-trace-with-vercel-ai-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

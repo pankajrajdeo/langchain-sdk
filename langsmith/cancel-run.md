@@ -16,7 +16,8 @@ This guide covers how to cancel runs for your agent via the [LangSmith Deploymen
 
 Create a client and thread:
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -25,7 +26,8 @@ assistant_id = "agent"
 thread = await client.threads.create()
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -34,7 +36,8 @@ const assistantID = "agent";
 const thread = await client.threads.create();
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
   --url <DEPLOYMENT_URL>/threads \
@@ -56,7 +59,8 @@ The following examples create a run, cancel it with different options, and print
 
 Use **interrupt** when you want to stop a run but keep it for debugging, auditing, or resuming from a checkpoint.
 
-#### Python
+**Python**
+
 ```python
 run = await client.runs.create(
     thread["thread_id"],
@@ -69,7 +73,8 @@ run_after = await client.runs.get(thread["thread_id"], run["run_id"], wait=True)
 print(run_after["status"])   # "interrupted"
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 const run = await client.runs.create(
     thread["thread_id"],
@@ -82,7 +87,8 @@ const runAfter = await client.runs.get(thread["thread_id"], run["run_id"]);
 console.log(runAfter["status"]);   // "interrupted"
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # Create a run (use the run_id and thread_id from the response)
 curl --request POST \
@@ -109,7 +115,8 @@ curl --request GET \
 
 Use **rollback** when you want to fully discard a run and its effects (for example, after a user abandons a request and you do not need to keep partial work).
 
-#### Python
+**Python**
+
 ```python
 run = await client.runs.create(
     thread["thread_id"],
@@ -125,7 +132,8 @@ except Exception:
     print("Run was correctly deleted")
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 const run = await client.runs.create(
     thread["thread_id"],
@@ -142,7 +150,8 @@ try {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # Create a run, then cancel with rollback
 curl --request POST \
@@ -162,7 +171,8 @@ curl --request GET \
 
 By default, the cancel request returns after the cancellation is requested and the run is cancelled asynchronously. `wait=True` makes the cancel request block until the run has been fully cancelled. This is useful when you want to know the final state of the run after it has been cancelled (e.g., what checkpoints were created, what the final output was).
 
-#### Python
+**Python**
+
 ```python
 run = await client.runs.create(
     thread["thread_id"],
@@ -181,7 +191,8 @@ run_after = await client.runs.get(thread["thread_id"], run["run_id"])
 print(run_after["status"])  # "interrupted"
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 const run = await client.runs.create(
     thread["thread_id"],
@@ -200,7 +211,8 @@ const runInterrupted = await client.runs.get(thread["thread_id"], run["run_id"])
 console.log(runInterrupted["status"])  // "interrupted"
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # Create a run
 curl --request POST \
@@ -225,7 +237,8 @@ Use the bulk cancel endpoint to cancel multiple runs in one request. Both the in
 
 Cancel specific runs by passing their IDs.
 
-#### Python
+**Python**
+
 ```python
 run1 = await client.runs.create(
     thread["thread_id"],
@@ -252,12 +265,14 @@ for run in runs_after:
         print(run["run_id"], run["status"])  # "interrupted"
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 // Bulk delete by run IDs is not supported in the Javascript SDK
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # Create two runs (capture run_id from each response)
 curl --request POST \
@@ -285,7 +300,8 @@ curl --request GET \
 
 Cancel all runs that match a status across all threads in a deployment. Valid status options are `pending`, `running`, or `all`.
 
-#### Python
+**Python**
+
 ```python
 run1 = await client.runs.create(
     thread["thread_id"],
@@ -311,12 +327,14 @@ run_after2 = await client.runs.get(thread2["thread_id"], run2["run_id"])
 print(run_after2["status"])  # runs are cancelled across all threads
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 // Bulk delete by status is not supported in the Javascript SDK
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # Create a run
 curl --request POST \
@@ -353,7 +371,8 @@ curl --request GET \
 
 When starting a run with streaming or when waiting on a run, you can set `on_disconnect="cancel"` so that the run is cancelled if the client disconnects. This avoids leaving runs in progress when a user closes the app or loses connection.
 
-#### Python
+**Python**
+
 ```python
 # With runs.wait: run is cancelled if the client disconnects
 result = await client.runs.wait(
@@ -393,7 +412,8 @@ async for chunk in client.runs.join_stream(
     print(chunk)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 // With runs.wait: run is cancelled if the client disconnects
 const result = await client.runs.wait(
@@ -425,7 +445,8 @@ for await (const chunk of joinStreamResponse) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # runs.wait: create run and wait for output; cancel if client disconnects
 curl --request POST \
@@ -457,8 +478,6 @@ curl --request GET \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cancel-run.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cancel-run.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

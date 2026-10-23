@@ -20,4 +20,4 @@ tags: [index, reference, python, langgraph, pregel, messages]
 - [StreamMessagesHandler](StreamMessagesHandler.md) - A callback handler that implements stream_mode=messages.
 - [StreamMessagesHandlerV2](StreamMessagesHandlerV2.md) - v2 variant of StreamMessagesHandler.
 - [T](T.md) - View source on GitHub
-- [ensure_message_ids](ensure_message_ids.md) - Coerce message-like write values to typed BaseMessages with stable IDs.
+- [ensure_message_ids](ensure_message_ids.md) - Give the messages written to DeltaChannels stable ids.

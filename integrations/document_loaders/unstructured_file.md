@@ -18,7 +18,7 @@ Please see [Unstructured](../providers/unstructured.md) for more instructions on
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [JS support](https://js.langchain.com/docs/integrations/document_loaders/file_loaders/unstructured/) |
+| Class | Package | Local | Serializable | JS support |
 | :- | :- | :-: | :-: | :-: |
 | [`UnstructuredLoader`](https://reference.langchain.com/python/langchain-unstructured/document_loaders/UnstructuredLoader) | [`langchain-unstructured`](https://reference.langchain.com/python/langchain-unstructured) | ✅ | ❌ | ✅ |
 
@@ -160,7 +160,7 @@ docs[5:10]
 If you want to get up and running with smaller packages and get the most up-to-date partitioning you can `pip install
 unstructured-client` and `pip install langchain-unstructured`. For
 more information about the `UnstructuredLoader`, refer to the
-[Unstructured provider page](https://python.langchain.com/v0.1/docs/integrations/document_loaders/unstructured_file/).
+[Unstructured provider page](../providers/unstructured.md).
 
 The loader will process your document using the hosted Unstructured serverless API when you pass in
 your `api_key` and set `partition_via_api=True`. You can obtain an API key through the [Unstructured platform](https://platform.unstructured.io/).
@@ -230,7 +230,7 @@ Client](https://docs.unstructured.io/api-reference/api-services/accessing-unstru
 
 If you want to customize the client, you will have to pass an `UnstructuredClient` instance to the `UnstructuredLoader`. Below is an example showing how you can customize features of the client such as using your own `requests.Session()`, passing an alternative `server_url`, and customizing the `RetryConfig` object. For more information about customizing the client or what additional parameters the sdk client accepts, refer to the [Unstructured Python SDK](https://docs.unstructured.io/api-reference/api-services/sdk-python) docs and the client section of the [API Parameters](https://docs.unstructured.io/api-reference/api-services/api-parameters) docs. Note that all API Parameters should be passed to the `UnstructuredLoader`.
 
-<div class="alert alert-block alert-warning"><b>Warning:</b> The example below may not use the latest version of the UnstructuredClient and there could be breaking changes in future releases. For the latest examples, refer to the <a href="https://docs.unstructured.io/api-reference/api-services/sdk-python">Unstructured Python SDK</a> docs.</div>
+**Warning:** The example below may not use the latest version of the UnstructuredClient and there could be breaking changes in future releases. For the latest examples, refer to the [Unstructured Python SDK](https://docs.unstructured.io/api-reference/api-services/sdk-python) docs.
 
 ```python
 import requests
@@ -366,8 +366,6 @@ For detailed documentation of all `UnstructuredLoader` features and configuratio
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/unstructured_file.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/unstructured_file.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

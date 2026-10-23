@@ -1,6 +1,6 @@
 ---
 title: "Delete feedback config endpoint"
-description: "Soft delete a feedback config by marking it as deleted."
+description: "Soft delete one feedback config by id, or every config of a feedback key."
 source: "https://docs.langchain.com/langsmith/smith-api/feedback-configs/delete-feedback-config-endpoint"
 category: "docs"
 tags: [docs, langsmith, smith-api, feedback-configs, delete-feedback-config-endpoint]
@@ -8,10 +8,13 @@ tags: [docs, langsmith, smith-api, feedback-configs, delete-feedback-config-endp
 
 # Delete feedback config endpoint
 
-> Soft delete a feedback config by marking it as deleted.
+> Soft delete one feedback config by id, or every config of a feedback key.
 
 The config can be recreated later with the same key (simple reuse pattern).
-Existing feedback records with this key will remain unchanged.
+Existing feedback records with this key will remain unchanged. Deleting an
+enforced config turns off its enforcement instead of removing it, and needs
+the feedback-configs:manage-enforced permission.
+Deleting an unenforced config that an annotation queue uses is refused.
 
 ## OpenAPI
 
@@ -165,6 +168,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -173,6 +178,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/feedback-configs:
     delete:
@@ -180,23 +186,47 @@ paths:
         - feedback-configs
       summary: Delete feedback config endpoint
       description: >-
-        Soft delete a feedback config by marking it as deleted.
+        Soft delete one feedback config by id, or every config of a feedback
+        key.
 
         The config can be recreated later with the same key (simple reuse
         pattern).
 
-        Existing feedback records with this key will remain unchanged.
+        Existing feedback records with this key will remain unchanged. Deleting
+        an
+
+        enforced config turns off its enforcement instead of removing it, and
+        needs
+
+        the feedback-configs:manage-enforced permission.
+
+        Deleting an unenforced config that an annotation queue uses is refused.
       operationId: delete_feedback_config_endpoint_api_v1_feedback_configs_delete
       parameters:
         - name: feedback_key
           in: query
-          required: true
+          required: false
           schema:
-            type: string
+            anyOf:
+              - type: string
+              - type: 'null'
             title: Feedback Key
+        - name: id
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - type: string
+                format: uuid
+              - type: 'null'
+            title: Id
       responses:
         '204':
           description: Successful Response
+        '400':
+          description: Pass exactly one of id or feedback_key.
+        '409':
+          description: An annotation queue uses an unenforced config being deleted.
         '422':
           description: Validation Error
           content:

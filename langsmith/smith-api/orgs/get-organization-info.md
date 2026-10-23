@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/orgs/current:
     get:
@@ -318,6 +321,10 @@ components:
         can_use_audit_logs:
           type: boolean
           title: Can Use Audit Logs
+          default: false
+        can_use_teams:
+          type: boolean
+          title: Can Use Teams
           default: false
         can_add_seats:
           type: boolean

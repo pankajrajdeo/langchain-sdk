@@ -43,6 +43,7 @@ For the full `ls_agent_type` schema and the other values (`subagent`, `middlewar
 When you chain calls to the OpenAI Responses API by passing `previous_response_id`, OpenAI stores conversation state server-side and the LangSmith wrapper has no natural key to group calls into a thread. Set `thread_id` yourself, either per call or at wrapper init time.
 
 > [!NOTE]
+>
 > Use a [UUID v7](https://uuid7.com) for `thread_id`. LangSmith's SDK exports a `uuid7` helper, and UUID v7 sorts by creation time so threads stay ordered in list views.
 
 ### Per-call metadata
@@ -198,7 +199,8 @@ Setting `LS_MESSAGE_VIEW_EXCLUDE` on a run's metadata tells the Trajectory view 
 
 Use it for LLM subspans that are not conversational turns, such as classification calls, embedding lookups, safety filters, or routing/guardrail decisions, that you still want visible elsewhere in LangSmith but do not want cluttering the conversation transcript.
 
-#### Python
+**Python**
+
 **1. On a `@traceable` decorator**: exclude a whole function's run.
 
 ```python
@@ -268,7 +270,8 @@ result = llm.invoke(
 )
 ```
 
-#### TypeScript
+**TypeScript**
+
 **1. On a `traceable` wrapper**: exclude a whole function's run.
 
 ```typescript
@@ -378,8 +381,6 @@ If you trace without one of the wrappers in [Supported integrations](#supported-
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trajectory-view-integrations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trajectory-view-integrations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

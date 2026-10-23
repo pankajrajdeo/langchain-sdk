@@ -14,7 +14,8 @@ MCP support now ships inside LangChain in the `langchain.mcp` namespace, built o
 
 For the full feature documentation, see [Model Context Protocol (MCP)](../langchain/mcp.md).
 
-> **Prompt:** Migrate from langchain-mcp-adapters to langchain.mcp
+Migrate from langchain-mcp-adapters to langchain.mcp
+
 Migrate this codebase from the standalone `langchain-mcp-adapters` package to the built-in `langchain.mcp` namespace.
 
 ## Step 1: Read the guide
@@ -45,6 +46,7 @@ If the codebase uses prompts, resources, sampling, roots, SSE/WebSocket transpor
 * Ask rather than guess when a call site or parameter is not covered by the guide.
 
 > [!NOTE]
+>
 > The `langchain.mcp` namespace requires `langchain[mcp]>=1.4.0` and is in beta. Importing from it raises a `LangChainBetaWarning`. The API may change.
 
 ## Install
@@ -266,8 +268,6 @@ Some `langchain-mcp-adapters` features have no replacement because the MCP proto
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langchain-mcp-adapters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langchain-mcp-adapters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

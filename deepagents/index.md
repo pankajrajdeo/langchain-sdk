@@ -27,8 +27,6 @@ See [Core capabilities](#core-capabilities) for a full breakdown of each compone
 
 ## Try it
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/deepagents).
-
 ## Quickstart
 
 **Google**
@@ -178,31 +176,37 @@ agent.invoke(
 )
 ```
 
-#### [View example trace](https://smith.langchain.com/public/6303999e-5e08-4c66-b14c-ba5648f32f88/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/44780f65-3414-46eb-8239-944c6ee5454f/r)**
+>
+> Open a public LangSmith run for this example.
 
 See the [Quickstart](quickstart.md) and [Customization guide](customization.md) to get started building your own agents and applications with Deep Agents.
 
 > [!TIP]
+>
 > Trace requests, debug agent behavior, and evaluate outputs with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-overview). Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up. When ready for production, see [Going to production](going-to-production.md) for LangSmith deployment options.
 
 ## Core capabilities
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_harness_capabilities.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=0ff671d72badd0844826660dfcb04391" alt="Agent harness capabilities by category" width="1500" height="360" data-path="oss/images/agent_harness_capabilities.svg" />
+![Agent harness capabilities by category](https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_harness_capabilities.svg?fit=max\&auto=format\&n=jtty0O--UJOKG0nK\&q=85\&s=0ff671d72badd0844826660dfcb04391)
 
 Deep Agents is an ["agent harness"](../concepts/products.md#agent-harnesses-like-the-deep-agents-sdk). It is the same core tool calling loop as other agent frameworks, but with built-in capabilities that make agents reliable for real tasks:
 
-#### [Execution environment](#execution-environment)
-Tools, virtual filesystem, optional sandbox, and REPL (interpreter)
+> **[Execution environment](#execution-environment)**
+>
+> Tools, virtual filesystem, optional sandbox, and REPL (interpreter)
 
-#### [Context management](#context-management)
-Skills, memory, summarization, context offloading, and prompt caching
+> **[Context management](#context-management)**
+>
+> Skills, memory, summarization, context offloading, and prompt caching
 
-#### [Delegation](#delegation)
-Subagent spawning and optional task planning
+> **[Delegation](#delegation)**
+>
+> Subagent spawning and optional task planning
 
-#### [Steering](#steering)
-Human-in-the-loop approval and interrupts
+> **[Steering](#steering)**
+>
+> Human-in-the-loop approval and interrupts
 
 [`deepagents`](https://pypi.org/project/deepagents/) is a standalone library built on top of [LangChain](../langchain/index.md)'s core building blocks for agents. It uses the [LangGraph](../langgraph/index.md) runtime for durable execution, streaming, human-in-the-loop, and other features.
 
@@ -254,68 +258,62 @@ The backends support the following file system operations:
 | `grep` | Search file contents with multiple output modes (files only, content with context, or counts) |
 | `execute` | Run shell commands in the environment (available with [sandbox backends](sandboxes.md) only) |
 
-The `delete` tool requires `deepagents>=0.7`. Backends that do not support deletion have the tool automatically hidden from the model.
-
-<details>
-<summary>Supported multimodal file extensions</summary>
-
-| Type | Extensions |
-| - | - |
-| [Image](../langchain/messages.md#multimodal) | `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.heic`, `.heif` |
-| [Video](../langchain/messages.md#multimodal) | `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`, `.3gpp` |
-| [Audio](../langchain/messages.md#multimodal) | `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac` |
-| [File](../langchain/messages.md#multimodal) | `.pdf`, `.ppt`, `.pptx` |
-
-</details>
-
-<details>
-<summary>Running without the default filesystem tools</summary>
-
-To hide the filesystem tools listed above from the model, register a [harness profile](profiles.md#harness-profiles) with `excluded_tools`:
-
-```python
-from deepagents import HarnessProfile, register_harness_profile
-
-register_harness_profile(
-    "anthropic:claude-sonnet-4-6",
-    HarnessProfile(
-        excluded_tools=frozenset(
-            {"ls", "read_file", "write_file", "edit_file", "delete", "glob", "grep"}
-        ),
-    ),
-)
-```
-
-Removing [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) itself via `excluded_middleware` is intentionally rejected—it is required scaffolding in the [Deep Agents stack](customization.md#deep-agents-stack). Use `excluded_tools` to hide only the model-visible tool surface and leave the middleware in place. To remove the `task` tool, see [Running without subagents](subagents.md#running-without-subagents).
-
-</details>
-
-<details>
-<summary>Restricting filesystem tools</summary>
-
 > [!NOTE]
-> The `tools` allowlist on `FilesystemMiddleware` requires `deepagents>=0.7`.
+>
+> The `delete` tool requires `deepagents>=0.7`. Backends that do not support deletion have the tool automatically hidden from the model.
 
-To expose only a subset of the filesystem tools listed above, instead of hiding them all, pass a `tools` allowlist to [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) and provide the instance through `middleware=`. Any built-in filesystem tool left out of the list is removed from the model's tool list.
+> **Supported multimodal file extensions**
+>
+> | Type | Extensions |
+> | - | - |
+> | [Image](../langchain/messages.md#multimodal) | `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.heic`, `.heif` |
+> | [Video](../langchain/messages.md#multimodal) | `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`, `.3gpp` |
+> | [Audio](../langchain/messages.md#multimodal) | `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac` |
+> | [File](../langchain/messages.md#multimodal) | `.pdf`, `.ppt`, `.pptx` |
 
+> **Running without the default filesystem tools**
+>
+> To hide the filesystem tools listed above from the model, register a [harness profile](profiles.md#harness-profiles) with `excluded_tools`:
+>
 ```python
-from deepagents import create_deep_agent
-from deepagents.middleware import FilesystemMiddleware
-
-# Read-only agent: write_file, edit_file, delete, and execute are never shown
-agent = create_deep_agent(
-    model="claude-sonnet-4-6",
-    middleware=[
-        FilesystemMiddleware(backend=backend, tools=["read_file", "ls", "glob", "grep"]),
-    ],
-)
+> from deepagents import HarnessProfile, register_harness_profile
+>
+> register_harness_profile(
+>     "anthropic:claude-sonnet-4-6",
+>     HarnessProfile(
+>         excluded_tools=frozenset(
+>             {"ls", "read_file", "write_file", "edit_file", "delete", "glob", "grep"}
+>         ),
+>     ),
+> )
 ```
+>
+> Removing [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) itself via `excluded_middleware` is intentionally rejected—it is required scaffolding in the [Deep Agents stack](customization.md#deep-agents-stack). Use `excluded_tools` to hide only the model-visible tool surface and leave the middleware in place. To remove the `task` tool, see [Running without subagents](subagents.md#running-without-subagents).
 
-`read_file` must always be included in the list—omitting it raises `ValueError` when the agent is created. The `execute` and `delete` tools are also dropped from the tool surface whenever the configured backend doesn't support them, whether or not you include them in `tools`. Custom tools you add through `create_deep_agent`'s own `tools=` argument are never affected by this allowlist.
-
-Passing your own [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) instance this way replaces the default one for the main agent and the general-purpose subagent inherits the same restriction. See [Override a default middleware instance](customization.md#override-a-default-middleware-instance) for more information. Declarative subagents don't inherit it: include a `FilesystemMiddleware(tools=...)` instance in that subagent's own `middleware` field to restrict it independently.
-
-</details>
+> **Restricting filesystem tools**
+>
+> > [!NOTE]
+> >
+> > The `tools` allowlist on `FilesystemMiddleware` requires `deepagents>=0.7`.
+>
+> To expose only a subset of the filesystem tools listed above, instead of hiding them all, pass a `tools` allowlist to [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) and provide the instance through `middleware=`. Any built-in filesystem tool left out of the list is removed from the model's tool list.
+>
+```python
+> from deepagents import create_deep_agent
+> from deepagents.middleware import FilesystemMiddleware
+>
+> # Read-only agent: write_file, edit_file, delete, and execute are never shown
+> agent = create_deep_agent(
+>     model="claude-sonnet-4-6",
+>     middleware=[
+>         FilesystemMiddleware(backend=backend, tools=["read_file", "ls", "glob", "grep"]),
+>     ],
+> )
+```
+>
+> `read_file` must always be included in the list—omitting it raises `ValueError` when the agent is created. The `execute` and `delete` tools are also dropped from the tool surface whenever the configured backend doesn't support them, whether or not you include them in `tools`. Custom tools you add through `create_deep_agent`'s own `tools=` argument are never affected by this allowlist.
+>
+> Passing your own [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) instance this way replaces the default one for the main agent and the general-purpose subagent inherits the same restriction. See [Override a default middleware instance](customization.md#override-a-default-middleware-instance) for more information. Declarative subagents don't inherit it: include a `FilesystemMiddleware(tools=...)` instance in that subagent's own `middleware` field to restrict it independently.
 
 The virtual filesystem is used by several other harness capabilities such as skills, memory, code execution, and context management.
 You can also use the file system when building custom tools and middleware for Deep Agents.
@@ -521,24 +519,18 @@ For configuration options and behavior details, see [To-do list](../langchain/mi
 ### Subagents
 
 The harness includes a built-in `task` tool that lets the main agent create ephemeral subagents for isolated, long-running, multi-step, or parallel tasks.
+Two subagent types are available: synchronous subagents (the default) block the supervisor until they return a single report, and [async subagents](async-subagents.md) run in parallel and support mid-flight steering via launch, check, update, and cancel tools.
 
 Subagent execution provides:
 
-* **Fresh context**: Each invocation creates a new agent instance with its own context.
+* **Isolated or inherited context**: By default, each invocation creates a new agent instance with its own context (`mode: "isolated"`). Use `mode: "fork"` to inherit the parent's full conversation history instead. See [Forked subagents](subagents.md#forked-subagents).
 * **Autonomous execution**: The subagent runs independently until completion.
 * **Single handoff**: It returns one final report to the main agent.
 * **Configurable strategy**: Use the [default `general-purpose` subagent](subagents.md#default-subagent) (enabled by default) or define [custom subagents](subagents.md#custom-subagents).
 * **Stateless messaging**: Subagents are stateless and cannot send multiple messages back.
 * **Context and token efficiency**: Heavy subtask work stays isolated and is compressed into a compact result.
 
-<details>
-<summary>Running without subagents (no `task` tool)</summary>
-
-To run an agent without the `task` tool, see [Running without subagents](subagents.md#running-without-subagents). Do not try removing [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware) via `excluded_middleware`—that is intentionally rejected. Instead, disable the auto-added subagent via the [harness profile](profiles.md#harness-profiles) and pass no synchronous subagents via `subagents=`. Async subagents are unaffected. See the [full stack](customization.md#full-stack) for the complete ordering.
-
-</details>
-
-For more information, see [Subagents](subagents.md).
+For more information, see [Subagents](subagents.md). To remove the `task` tool, see [Running without subagents](subagents.md#running-without-subagents).
 
 ## Steering
 
@@ -556,25 +548,28 @@ For more information, see [Human-in-the-loop](human-in-the-loop.md).
 
 ## Get started
 
-#### [Quickstart](quickstart.md)
-Build your first deep agent
+> **[Quickstart](quickstart.md)**
+>
+> Build your first deep agent
 
-#### [Customization](customization.md)
-Learn about customization options
+> **[Customization](customization.md)**
+>
+> Learn about customization options
 
-#### [Code](code/overview.md)
-Use Deep Agents Code
+> **[Code](code/overview.md)**
+>
+> Use Deep Agents Code
 
-#### [ACP](acp.md)
-Use deep agents in code editors with ACP
+> **[ACP](acp.md)**
+>
+> Use deep agents in code editors with ACP
 
-#### [Reference](https://reference.langchain.com/python/deepagents/)
-See the `deepagents` API reference
+> **[Reference](https://reference.langchain.com/python/deepagents/)**
+>
+> See the `deepagents` API reference
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

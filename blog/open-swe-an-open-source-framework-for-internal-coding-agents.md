@@ -69,9 +69,9 @@ Deep Agents provides infrastructure that can support these patterns: built-in pl
 
 ### 2. Sandbox: Isolated Cloud Environments
 
-Each task runs in its own isolated cloud sandbox, a remote Linux environment with full shell access. The repository is cloned in, the agent receives complete permissions, and any errors are contained within that environment.
+Each task runs in its own [isolated cloud sandbox](https://www.langchain.com/resources/what-is-an-ai-sandbox), a remote Linux environment with full shell access. The repository is cloned in, the agent receives complete permissions, and any errors are contained within that environment.
 
-Open SWE supports multiple sandbox providers out of the box:
+Open SWE supports multiple [sandbox providers](https://www.langchain.com/resources/best-agent-sandboxes) out of the box:
 
 - [Modal](https://modal.com/?ref=blog.langchain.com)
 - [Daytona](https://www.daytona.io/?ref=blog.langchain.com)
@@ -179,7 +179,7 @@ Open SWE is intended as a customizable foundation rather than a finished product
 
 **Middleware**: Add your own middleware hooks for validation, approval gates, logging, or safety checks.
 
-The [Customization Guide](https://github.com/langchain-ai/open-swe/blob/main/CUSTOMIZATION.md?ref=blog.langchain.com) walks through each of these extension points with examples.
+The [Customization Guide](https://github.com/langchain-ai/open-swe/blob/main/docs/CUSTOMIZATION.md) walks through each of these extension points with examples.
 
 ## Comparison to Internal Implementations
 
@@ -201,9 +201,9 @@ The core patterns are similar. The differences lie in implementation details, in
 
 Open SWE is available now on [GitHub](https://github.com/langchain-ai/open-swe?ref=blog.langchain.com).
 
-[**Installation Guide**](https://github.com/langchain-ai/open-swe/blob/main/INSTALLATION.md?ref=blog.langchain.com): Walks through GitHub App creation, LangSmith setup, Linear/Slack/GitHub triggers, and production deployment.
+[**Installation Guide**](https://github.com/langchain-ai/open-swe/blob/main/docs/INSTALLATION.md): Walks through GitHub App creation, LangSmith setup, Linear/Slack/GitHub triggers, and production deployment.
 
-[**Customization Guide**](https://github.com/langchain-ai/open-swe/blob/main/CUSTOMIZATION.md?ref=blog.langchain.com): Shows how to swap the sandbox, model, tools, triggers, system prompt, and middleware for your organization.
+[**Customization Guide**](https://github.com/langchain-ai/open-swe/blob/main/docs/CUSTOMIZATION.md): Shows how to swap the sandbox, model, tools, triggers, system prompt, and middleware for your organization.
 
 The framework is MIT-licensed. You can fork it, customize it, and deploy it internally. If you build something interesting on top of it, we'd be interested to hear about it.
 
@@ -215,4 +215,4 @@ Several engineering organizations have successfully deployed internal coding age
 
 **Sign up for the LangSmith Sandboxes Waitlist:** [https://www.langchain.com/langsmith-sandboxes-waitlist](https://www.langchain.com/langsmith-sandboxes-waitlist?ref=blog.langchain.com)
 
-**Read the docs**: [Open SWE Documentation](https://github.com/langchain-ai/open-swe/tree/main/apps/docs?ref=blog.langchain.com)
+**Read the docs**: [Open SWE Documentation](https://github.com/langchain-ai/open-swe/tree/main/docs)

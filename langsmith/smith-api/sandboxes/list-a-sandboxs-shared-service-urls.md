@@ -163,6 +163,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -171,6 +173,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/sandboxes/boxes/{name}/service-urls:
     get:
@@ -322,6 +325,13 @@ components:
           description: The LangSmith user who first shared this port, when known.
           type: string
           format: uuid
+        embed_origins:
+          description: >-
+            Origins that may embed a LangSmith login URL in an iframe; omitted
+            when there are none.
+          type: array
+          items:
+            type: string
         expires_at:
           description: >-
             When the share expires. Set only for "token"; a login grant does not

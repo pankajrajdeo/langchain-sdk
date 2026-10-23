@@ -30,34 +30,32 @@ Create a new app from the [`new-langgraph-project-js` template](https://github.c
 npm create langgraph
 ```
 
-<details>
-<summary>Adding LangGraph to an existing project</summary>
-
-If you have an existing project with LangGraph agents, you can automatically generate a `langgraph.json` configuration file using the `config` command:
-
+> **Adding LangGraph to an existing project**
+>
+> If you have an existing project with LangGraph agents, you can automatically generate a `langgraph.json` configuration file using the `config` command:
+>
 ```shell
-npm create langgraph config
+> npm create langgraph config
 ```
-
-This command scans your project for LangGraph agents (such as `createAgent()`, `StateGraph.compile()`, or `workflow.compile()` patterns) and generates a configuration file with all exported agents.
-
-Example output:
-
+>
+> This command scans your project for LangGraph agents (such as `createAgent()`, `StateGraph.compile()`, or `workflow.compile()` patterns) and generates a configuration file with all exported agents.
+>
+> Example output:
+>
 ```json
-{
-  "node_version": "24",
-  "graphs": {
-    "agent": "./src/agent.ts:agent",
-    "searchAgent": "./src/search.ts:searchAgent"
-  },
-  "env": ".env"
-}
+> {
+>   "node_version": "24",
+>   "graphs": {
+>     "agent": "./src/agent.ts:agent",
+>     "searchAgent": "./src/search.ts:searchAgent"
+>   },
+>   "env": ".env"
+> }
 ```
-
-> [!TIP]
-> Only **exported** agents are included in the configuration. If an agent is not exported, the command will warn you so you can add the `export` keyword.
-
-</details>
+>
+> > [!TIP]
+> >
+> > Only **exported** agents are included in the configuration. If an agent is not exported, the command will warn you so you can add the `export` keyword.
 
 ## 3. Install dependencies
 
@@ -119,20 +117,18 @@ For an Agent Server running on a custom host/port, update the `baseUrl` query pa
 https://smith.langchain.com/studio/?baseUrl=http://myhost:3000
 ```
 
-<details>
-<summary>Safari compatibility</summary>
-
-Use the `--tunnel` flag with your command to create a secure tunnel, as Safari has limitations when connecting to localhost servers:
-
+> **Safari compatibility**
+>
+> Use the `--tunnel` flag with your command to create a secure tunnel, as Safari has limitations when connecting to localhost servers:
+>
 ```shell
-langgraph dev --tunnel
+> langgraph dev --tunnel
 ```
-
-</details>
 
 ## 7. Test the API
 
-#### Javascript SDK
+**Javascript SDK**
+
 1. Install the LangGraph JS SDK:
 ```shell
    npm install @langchain/langgraph-sdk
@@ -165,7 +161,8 @@ for await (const chunk of streamResponse) {
 }
 ```
 
-#### Rest API
+**Rest API**
+
 ```bash
 curl -s --request POST \
     --url "http://localhost:2024/runs/stream" \
@@ -196,8 +193,6 @@ Now that you have a LangGraph app running locally, take your journey further by 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/local-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/local-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

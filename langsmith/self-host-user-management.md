@@ -9,6 +9,7 @@ tags: [docs, langsmith, self-host-user-management]
 # Customize user management
 
 > [!NOTE]
+>
 > This guide assumes you have read the [admin guide](administration-overview.md) and [organization setup guide](set-up-hierarchy.md#set-up-an-organization).
 
 LangSmith offers additional customization features for user management using feature flags.
@@ -37,22 +38,25 @@ config:
 
 ### SSO new member login flow
 
-As of helm **v0.11.10**, self-hosted deployments using OAuth SSO will no longer need to manually add members in LangSmith settings for them to join. Deployments will have a <b>default</b> organization, to which new users will automatically be added upon their first login to LangSmith.
+As of helm **v0.11.10**, self-hosted deployments using OAuth SSO will no longer need to manually add members in LangSmith settings for them to join. Deployments will have a **default** organization, to which new users will automatically be added upon their first login to LangSmith.
 
 For your **default** organization, you can set which workspace(s) and workspace role is assigned to new members. For **non-default** organizations, the invitation flow remains the same.
 Once a user joins an organization, any changes to their workspaces or roles beyond the default organization settings must be managed either through LangSmith settings (as before) or via SCIM.
 
 > [!NOTE]
+>
 > By default, all new users are added to the organization’s initially provisioned workspace (**Workspace 1** by default) with the **Workspace Editor** role.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/QEp_iTXiY5U9rQvE/langsmith/images/sso-member-settings-update.png?fit=max&auto=format&n=QEp_iTXiY5U9rQvE&q=85&s=e7274ed7fdd47fe7c4c1f514d78f3ac7" alt="Update SSO Member Settings" width="1769" height="1251" data-path="langsmith/images/sso-member-settings-update.png" />
+![Update SSO Member Settings](https://mintcdn.com/langchain-5e9cc07a/QEp_iTXiY5U9rQvE/langsmith/images/sso-member-settings-update.png?fit=max\&auto=format\&n=QEp_iTXiY5U9rQvE\&q=85\&s=e7274ed7fdd47fe7c4c1f514d78f3ac7)
 
 > [!NOTE]
+>
 > To change your default organization, use **Set Default Organization** in the organization selector dropdown. (Org Admin permissions required in both the source and target organization.)
 
 ### SSO Groups Sync
 
 > [!NOTE]
+>
 > SSO Groups Sync on self-hosted requires LangSmith chart version **0.15.0-rc.3** (application version **0.15.2rc1**) or later.
 
 [SSO Groups Sync](user-management.md#sso-groups-sync-alternative) reads group memberships from the OIDC ID token and assigns org and workspace roles using the [SCIM naming convention](user-management.md#group-naming-convention). It is a simpler alternative to [SCIM](user-management.md#set-up-scim-for-your-organization) for self-hosted organizations whose IdP can include groups in the OIDC token but cannot easily run SCIM provisioning.
@@ -66,6 +70,7 @@ By default, any user can create an organization in LangSmith. For self-hosted cu
 #### Configuration
 
 > [!NOTE]
+>
 > The `userOrgCreationDisabled` feature flag is set to `true` by default for organizations using [basic auth](self-host-basic-auth.md) or [SSO](self-host-sso.md).
 
 **Helm**
@@ -82,6 +87,7 @@ By default, any user who logs in to LangSmith will have a personal organization 
 #### Configuration
 
 > [!NOTE]
+>
 > The `personalOrgsDisabled` feature flag is set to `true` by default for organizations using [basic auth](self-host-basic-auth.md) or [SSO](self-host-sso.md).
 
 **Helm**
@@ -94,6 +100,7 @@ config:
 ### Disabling personal access token creation
 
 > [!NOTE]
+>
 > This feature requires Helm chart version 0.13.12 (application version 0.13.12) or later.
 
 By default, users can create Personal Access Tokens (PATs) in any organization. For self-hosted customers, an admin may want to globally disable PAT creation across all organizations. This environment variable allows an admin to prevent users from creating new PATs in any organization on the instance.
@@ -112,8 +119,6 @@ commonEnv:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-user-management.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-user-management.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

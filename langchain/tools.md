@@ -15,6 +15,7 @@ Tools extend what [agents](agents.md) can do—letting them fetch real-time data
 Under the hood, tools are callable functions with well-defined inputs and outputs that get passed to a [chat model](models.md). The model decides when to invoke a tool based on the conversation context, and what input arguments to provide.
 
 > [!TIP]
+>
 > For details on how models handle tool calls, see [Tool calling](models.md#tool-calling). Trace tool calls and debug errors with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-tools). Follow the [tracing quickstart](../langsmith/trace-with-langchain.md) to get set up.
 >
 > We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
@@ -42,9 +43,11 @@ def search_database(query: str, limit: int = 10) -> str:
 Type hints are **required** as they define the tool's input schema. The docstring should be informative and concise to help the model understand the tool's purpose.
 
 > [!NOTE]
+>
 > **Server-side tool use:** Some chat models feature built-in tools (web search, code interpreters) that are executed server-side. See [Server-side tool use](#server-side-tool-use) for details.
 
 > [!WARNING]
+>
 > Prefer `snake_case` for tool names (e.g., `web_search` instead of `Web Search`). Some model providers have issues with or reject names containing spaces or special characters with errors. Sticking to alphanumeric characters, underscores, and hyphens helps to improve compatibility across providers.
 
 ### Customize tool properties
@@ -243,6 +246,7 @@ def get_user_preference(
 ```
 
 > [!WARNING]
+>
 > The `runtime` parameter is hidden from the model. For the example above, the model only sees `pref_name` in the tool schema.
 
 #### Update state
@@ -275,10 +279,12 @@ def set_user_name(new_name: str, runtime: ToolRuntime[None, CustomState]) -> Com
     )
 ```
 
-#### [View example trace](https://smith.langchain.com/public/c1516e64-17dc-42c3-a4ef-8aa02c439527/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/d77e4082-5e11-4004-b5ac-351caf69c151/r)**
+>
+> Open a public LangSmith run for this example.
 
 > [!TIP]
+>
 > When tools update state variables, consider defining a [reducer](../langgraph/graph-api.md#reducers) for those fields. Since LLMs can call multiple tools in parallel, a reducer determines how to resolve conflicts when the same state field is updated by concurrent tool calls.
 
 ### Context
@@ -286,6 +292,7 @@ Open a public LangSmith run for this example.
 Context provides immutable configuration data that is passed at invocation time. Use it for user IDs, session details, or application-specific settings that shouldn't change during a conversation.
 
 > [!NOTE]
+>
 > While `thread_id` (passed via `config={"configurable": {"thread_id": ...}}`) scopes the *conversation*: message history and checkpoints, `context` carries *per-run* data your tools and middleware read at invocation time. Persistence requires a [checkpointer](short-term-memory.md). In production you typically pass both a stable `thread_id` per conversation and a `context` object on every invoke.
 
 Access context through `runtime.context`. Configure a [checkpointer](short-term-memory.md) and pass `context` with a stable `thread_id` so the conversation persists across invocations:
@@ -360,6 +367,10 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
+> **[View example trace](https://smith.langchain.com/public/1a8a880e-fdc6-4e8c-9035-f41dfab4884b/r)**
+>
+> Open a public LangSmith run for this example.
+
 ### Long-term memory (Store)
 
 The [`BaseStore`](https://reference.langchain.com/python/langchain-core/stores/BaseStore) provides persistent storage that survives across conversations. Unlike state (short-term memory), data saved to the store remains available in future sessions.
@@ -367,6 +378,7 @@ The [`BaseStore`](https://reference.langchain.com/python/langchain-core/stores/B
 Access the store through `runtime.store`. The store uses a namespace/key pattern to organize data:
 
 > [!TIP]
+>
 > For production deployments, use a persistent store implementation like [`PostgresStore`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.postgres.PostgresStore), `MongoDBStore`, or `RedisStore` instead of `InMemoryStore`. See the [memory documentation](../langgraph/add-memory.md) for setup details.
 
 ```python
@@ -437,6 +449,7 @@ def get_weather(city: str, runtime: ToolRuntime) -> str:
 ```
 
 > [!NOTE]
+>
 > If you use `runtime.stream_writer` inside your tool, the tool must be invoked within a LangGraph execution context. See [Streaming](streaming.md) for more details.
 
 ### Execution info
@@ -456,6 +469,7 @@ def log_execution_context(runtime: ToolRuntime) -> str:
 ```
 
 > [!NOTE]
+>
 > Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`).
 
 ### Server info
@@ -479,42 +493,38 @@ def get_assistant_scoped_data(runtime: ToolRuntime) -> str:
 `server_info` is `None` when the tool is not running on LangGraph Server (e.g., during local development or testing).
 
 > [!NOTE]
+>
 > Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`).
 
-<details>
-<summary>Migrate from older injection patterns</summary>
-
-Older examples used `InjectedState`, `InjectedStore`, `get_runtime()`, or `InjectedToolCallId`. Use [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime) instead for one explicit interface to state, context, store, and execution metadata.
-
-#### Previous pattern
-
+> **Migrate from older injection patterns**
+>
+> Older examples used `InjectedState`, `InjectedStore`, `get_runtime()`, or `InjectedToolCallId`. Use [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime) instead for one explicit interface to state, context, store, and execution metadata.
+>
+> #### Previous pattern
+>
 ```python
-from langchain.tools import tool, InjectedState
-
-@tool
-def summarize(state: InjectedState) -> str:
-    """Summarize the conversation."""
-    messages = state["messages"]
-    return f"Conversation length: {len(messages)} messages."
+> from langchain.tools import tool, InjectedState
+>
+> @tool
+> def summarize(state: InjectedState) -> str:
+>     """Summarize the conversation."""
+>     messages = state["messages"]
+>     return f"Conversation length: {len(messages)} messages."
 ```
-
-<a id="migrate-from-older-injection-patterns"></a>
-
-#### Recommended pattern
-
+>
+> #### Recommended pattern
+>
 ```python
-from langchain.tools import tool, ToolRuntime
-
-@tool
-def summarize(runtime: ToolRuntime) -> str:
-    """Summarize the conversation."""
-    messages = runtime.state["messages"]
-    return f"Conversation length: {len(messages)} messages."
+> from langchain.tools import tool, ToolRuntime
+>
+> @tool
+> def summarize(runtime: ToolRuntime) -> str:
+>     """Summarize the conversation."""
+>     messages = runtime.state["messages"]
+>     return f"Conversation length: {len(messages)} messages."
 ```
-
-For agent-level migrations (for example `create_react_agent` and custom state), see the [LangChain v1 migration guide](../migrate/langchain-v1.md).
-
-</details>
+>
+> For agent-level migrations (for example `create_react_agent` and custom state), see the [LangChain v1 migration guide](../migrate/langchain-v1.md).
 
 ## Tool execution
 
@@ -543,8 +553,9 @@ def get_weather(city: str) -> str:
     return f"It is currently sunny in {city}."
 ```
 
-#### [View example trace](https://smith.langchain.com/public/29f72020-12be-4cfc-8cc4-e9d8bdfae60b/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/3d0c3e6d-cb98-44a6-9335-f44180a9d7bd/r)**
+>
+> Open a public LangSmith run for this example.
 
 Behavior:
 
@@ -570,6 +581,10 @@ def get_weather_data(city: str) -> dict:
         "conditions": "sunny",
     }
 ```
+
+> **[View example trace](https://smith.langchain.com/public/ef7c7454-03e6-481c-b5d3-be3862290879/r)**
+>
+> Open a public LangSmith run for this example.
 
 Behavior:
 
@@ -669,8 +684,9 @@ result = agent.invoke({
 # "Order 12345 is shipped and will arrive in 2 days."
 ```
 
-#### [View example trace](https://smith.langchain.com/public/12de6f5b-a35b-46a9-a66e-36ed1e373d84/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/73ccdc9c-8579-4a93-906c-1338c04bf047/r)**
+>
+> Open a public LangSmith run for this example.
 
 Behavior:
 
@@ -685,9 +701,11 @@ Use this when:
 * You need deterministic, unmodified output: the model cannot rephrase, summarize, or act on the tool result.
 
 > [!WARNING]
+>
 > Because the model does not process the tool's output, `return_direct=True` is not suitable for tools whose results require further reasoning, summarization, or chaining with other tool calls.
 
 > [!WARNING]
+>
 > **Mixed parallel calls:** If the model calls a `return_direct=True` tool alongside tools that do not have `return_direct=True`, the agent does **not** exit after that step. It routes back to the model with every `ToolMessage` from the batch, so the model can reason over all results. `return_direct` only short-circuits the loop when every tool call in the step has `return_direct=True`.
 
 #### Return a Command with return\_direct
@@ -940,6 +958,8 @@ agent = create_agent(
 )
 ```
 
+<a id="migrate-from-older-injection-patterns"></a>
+
 ### State injection
 
 Tools access graph state through [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime). See [Access context](#access-context) for state, context, store, and streaming APIs.
@@ -962,10 +982,12 @@ With dynamic tools, the set of tools available to the agent is modified at runti
 
 There are two approaches depending on whether tools are known ahead of time:
 
-#### Filtering pre-registered tools
+**Filtering pre-registered tools**
+
 When all possible tools are known at agent creation time, you can pre-register them and dynamically filter which ones are exposed to the model based on state, permissions, or context.
 
-#### State
+**State**
+
 Enable advanced tools only after certain conversation milestones:
 
 ```python
@@ -1002,7 +1024,8 @@ agent = create_agent(
 )
 ```
 
-#### Store
+**Store**
+
 Filter tools based on user preferences or feature flags in Store:
 
 ```python
@@ -1045,7 +1068,8 @@ agent = create_agent(
 )
 ```
 
-#### Runtime Context
+**Runtime Context**
+
 Filter tools based on user permissions from Runtime Context:
 
 ```python
@@ -1101,7 +1125,8 @@ This approach is best when:
 
 See [Dynamically selecting tools](middleware/custom.md#dynamically-selecting-tools) for more examples.
 
-#### Runtime tool registration
+**Runtime tool registration**
+
 When tools are discovered or created at runtime (e.g., loaded from an MCP server, generated based on user data, or fetched from a remote registry), you need to both register the tools and handle their execution dynamically.
 
 This requires two middleware hooks:
@@ -1155,6 +1180,7 @@ This approach is best when:
 * You're integrating with external tool registries
 
 > [!NOTE]
+>
 > The `wrap_tool_call` hook is required for runtime-registered tools because the agent needs to know how to execute tools that weren't in the original tool list. Without it, the agent won't know how to invoke the dynamically added tool.
 
 ## Headless tools
@@ -1182,14 +1208,16 @@ In both runtimes, the model sees a normal tool it can call, but the actual execu
 4. **Resume** the graph after your app, another service, or a human step performs the action. For browser-based flows, you can mirror the schema in the frontend and attach `.implement(...)` there.
 
 > [!NOTE]
+>
 > If you call `tool(...)` in Python with only `name`, `description`, and `args_schema`, LangChain returns a `HeadlessTool`. There is no `.implement()` API on the Python side.
 
 When the model issues a tool call for one of these tools, the run **interrupts** instead of executing the tool locally. Your app can inspect the payload, perform the action in the right environment (for example a browser, another service, or a human review step), then **resume** the graph with the tool result. When you use the supported JS SDK hooks, they can detect headless-tool interrupts, run the matching client implementation, and submit the resume command for you.
 
 Use the optional **`onTool`** callback to observe lifecycle events (`start`, `success`, `error`) for UI feedback such as spinners or toasts.
 
-#### [Headless tools frontend pattern](frontend/headless-tools.md)
-See an end-to-end example of schema-only tools executed in the client with `useStream`.
+> **[Headless tools frontend pattern](frontend/headless-tools.md)**
+>
+> See an end-to-end example of schema-only tools executed in the client with `useStream`.
 
 ## Prebuilt tools
 
@@ -1213,6 +1241,7 @@ async with MCPAdapter("https://example.com/mcp") as adapter:
 ```
 
 > [!NOTE]
+>
 > The `langchain.mcp` namespace requires `langchain[mcp]>=1.4.0` and is in beta. The API may change.
 
 For transports, authentication, multiple servers, and handling tool results, see [Model Context Protocol (MCP)](mcp.md).
@@ -1225,8 +1254,6 @@ Refer to the individual [chat model integration pages](../integrations/providers
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

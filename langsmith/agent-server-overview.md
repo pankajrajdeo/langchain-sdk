@@ -14,20 +14,25 @@ Configure and build applications on the [Agent Server](agent-server.md) runtime.
 
 ## Capabilities
 
-#### [Develop your application](application-structure.md)
-Structure your app, configure dependencies for Python, JavaScript, and monorepos, and connect agents with RemoteGraph, semantic search, TTLs, and CI/CD.
+> **[Develop your application](application-structure.md)**
+>
+> Structure your app, configure dependencies for Python, JavaScript, and monorepos, and connect agents with RemoteGraph, semantic search, TTLs, and CI/CD.
 
-#### [Agent Server runtime](agent-server.md)
-Work with assistants, threads, runs, and cron jobs. Stream to users, pause for human review, handle concurrent input, and connect via MCP and A2A.
+> **[Agent Server runtime](agent-server.md)**
+>
+> Work with assistants, threads, runs, and cron jobs. Stream to users, pause for human review, handle concurrent input, and connect via MCP and A2A.
 
-#### [Auth & access control](auth.md)
-Authenticate users, enforce resource-level access, and connect external OAuth2 identity providers.
+> **[Auth & access control](auth.md)**
+>
+> Authenticate users, enforce resource-level access, and connect external OAuth2 identity providers.
 
-#### [Server customization](caching.md)
-Add caching, custom stores and checkpointers, lifespan hooks, middleware, custom routes, encryption, and configurable headers and logs.
+> **[Server customization](caching.md)**
+>
+> Add caching, custom stores and checkpointers, lifespan hooks, middleware, custom routes, encryption, and configurable headers and logs.
 
-#### [REST API](server-api-ref.md)
-Full REST API reference for assistants, threads, runs, crons, store, A2A, MCP, and system endpoints.
+> **[REST API](server-api-ref.md)**
+>
+> Full REST API reference for assistants, threads, runs, crons, store, A2A, MCP, and system endpoints.
 
 ## Tutorials
 
@@ -49,8 +54,6 @@ Full REST API reference for assistants, threads, runs, crons, store, A2A, MCP, a
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

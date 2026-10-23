@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, llms, ollama]
 > Integrate with the Ollama LLM using LangChain JavaScript.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of Ollama models as text completion models. Many popular models available on Ollama are [chat completion models](../../langchain/models.md).**
 >
 > You may be looking for [this page instead](../chat/ollama.md).
@@ -28,7 +29,7 @@ Ollama bundles model weights, configuration, and data into a single package, def
 This example goes over how to use LangChain to interact with an Ollama-run Llama 2 7b instance.
 For a complete list of supported models and model variants, see the [Ollama model library](https://github.com/jmorganca/ollama#model-library).
 
-| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/ollama/) | Downloads | Version |
+| Class | Package | Local | Serializable | [PY support](../../../integrations/llms/ollama.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`Ollama`](https://reference.langchain.com/javascript/langchain-ollama/Ollama) | [`@langchain/ollama`](https://npmjs.com/@langchain/ollama) | ✅ | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/ollama?style=flat-square\&label=%20&) |
 
@@ -138,8 +139,6 @@ For detailed documentation of all `Ollama` features and configurations head to t
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

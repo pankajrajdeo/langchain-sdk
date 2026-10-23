@@ -71,6 +71,7 @@ We will cover passing it directly to the loader in the section below.
 * CCG with a specified user
 
 > [!NOTE]
+>
 > **If using JWT authentication, you will need to download the configuration from the Box**
 >
 > developer console after generating your public/private key pair. Place this file in your
@@ -208,8 +209,6 @@ from langchain_box.blob_loaders import BoxBlobLoader
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/box.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/box.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

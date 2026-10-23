@@ -24,6 +24,15 @@ and `server_info` from the node-level `Runtime`, while `tool_call_id` is
 populated from the current tool call. The `tools` argument is not supplied,
 so it uses its default empty list.
 
+In `per_call` mode the predicate runs in `wrap_tool_call` and receives the real
+`ToolCallRequest`, with `tool` and the tool's `ToolRuntime` set.
+
+In both modes the predicate runs again when the run resumes, so it must return the
+same answer for the same call. If it returns `False` on resume, the reviewer's
+answer is skipped and the tool runs, even if they rejected it. In `batched` mode,
+if it flips for only some of the reviewed calls, the decisions no longer line up
+with the calls and resuming raises a `ValueError`.
+
 ## Signature
 
 ```python
@@ -44,4 +53,4 @@ config = InterruptOnConfig(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/be854a130153e51346d83d3b06f959b80f6cbca6/libs/langchain_v1/langchain/agents/middleware/human_in_the_loop.py#L209)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/human_in_the_loop.py#L356)

@@ -14,6 +14,7 @@ tags: [docs, javascript, deepagents, acp]
 With the ACP protocol, you can make use of your custom deep agents with any ACP-compatible client, allowing your code editor to provide project context and receive rich updates.
 
 > [!NOTE]
+>
 > ACP is designed for agent-editor integrations. If you want your agent to call tools hosted by external servers, see [Model Context Protocol (MCP)](../langchain/mcp.md).
 
 ## Quickstart
@@ -60,8 +61,9 @@ You can also use the CLI without writing any code:
 npx deepagents-acp
 ```
 
-#### [Deep Agents ACP on npm](https://www.npmjs.com/package/deepagents-acp)
-The `deepagents-acp` package provides both a CLI and a programmatic API for exposing deep agents over ACP.
+> **[Deep Agents ACP on npm](https://www.npmjs.com/package/deepagents-acp)**
+>
+> The `deepagents-acp` package provides both a CLI and a programmatic API for exposing deep agents over ACP.
 
 ## Clients
 
@@ -456,6 +458,7 @@ const server = new DeepAgentsServer({
 ```
 
 > [!NOTE]
+>
 > Some ACP clients (like Zed) don't currently expose a UI for selecting between agents. In that case, consider running separate server instances with a single agent each.
 
 ### Slash commands
@@ -562,6 +565,7 @@ await startServer({
 ```
 
 > [!NOTE]
+>
 > See the upstream ACP docs for protocol details and editor support:
 >
 > * Introduction: [https://agentclientprotocol.com/get-started/introduction](https://agentclientprotocol.com/get-started/introduction)
@@ -569,8 +573,6 @@ await startServer({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/acp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/acp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

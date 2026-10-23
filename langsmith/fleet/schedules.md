@@ -20,6 +20,7 @@ Common use cases include:
 * **Data monitoring**: Check dashboards, metrics, or feeds on a set cadence and surface anything noteworthy.
 
 > [!TIP]
+>
 > To start an agent based on an event (such as a Slack message or email), use [channels](channels.md) instead.
 
 ## Add a schedule
@@ -30,8 +31,9 @@ To add a schedule:
 
 2. Select when the schedule should run.
 
-> [!NOTE]
->    Schedules are in UTC. Convert your desired execution time to UTC when configuring the schedule.
+   > [!NOTE]
+   >
+   > Schedules are in UTC. Convert your desired execution time to UTC when configuring the schedule.
 
 3. (Optional) Add a **Prompt**. With a custom prompt, you can tell the agent what to do on each scheduled run. For example:
 
@@ -44,8 +46,6 @@ To add a schedule:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/schedules.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/schedules.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

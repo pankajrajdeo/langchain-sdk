@@ -27,6 +27,7 @@ pip install -qU langchain-text-splitters
 ### [HTMLHeaderTextSplitter](#using-htmlheadertextsplitter)
 
 > [!NOTE]
+>
 > **Useful when you want to preserve the hierarchical structure of a document based on its headings.**
 
 **Description**: Splits HTML text based on header tags (e.g., `<h1>`, `<h2>`, `<h3>`, etc.), and adds metadata for each header relevant to any given chunk.
@@ -42,6 +43,7 @@ pip install -qU langchain-text-splitters
 ### [HTMLSectionSplitter](#using-htmlsectionsplitter)
 
 > [!NOTE]
+>
 > Useful when you want to split HTML documents into larger sections, such as `<section>`, `<div>`, or custom-defined sections.
 
 **Description**: Similar to HTMLHeaderTextSplitter but focuses on splitting HTML into sections based on specified tags.
@@ -57,6 +59,7 @@ pip install -qU langchain-text-splitters
 ### [HTMLSemanticPreservingSplitter](#using-htmlsemanticpreservingsplitter)
 
 > [!NOTE]
+>
 > \*\*Ideal when you need to ensure that structured elements are not split across chunks, preserving contextual relevancy. \*\*
 
 **Description**: Splits HTML content into manageable chunks while preserving the semantic structure of important elements like tables, lists, and other HTML components.
@@ -396,6 +399,7 @@ The `HTMLSemanticPreservingSplitter` is essential for splitting HTML content tha
 **IMPORTANT**: `max_chunk_size` is not a definite maximum size of a chunk, the calculation of max size, occurs when the preserved content is not apart of the chunk, to ensure it is not split. When we add the preserved data back in to the chunk, there is a chance the chunk size will exceed the `max_chunk_size`. This is crucial to ensure we maintain the structure of the original document
 
 > [!NOTE]
+>
 > Notes:
 >
 > 1. We have defined a custom handler to re-format the contents of code blocks
@@ -574,7 +578,7 @@ Since our function is called when the tag is discovered, we can override the `<i
 ```python
 """This example assumes you have helper methods `load_image_from_url` and an LLM agent `llm` that can process image data."""
 
-from langchain.agents import AgentExecutor
+from langchain_classic.agents import AgentExecutor
 
 # This example needs to be replaced with your own agent
 llm = AgentExecutor(...)
@@ -640,8 +644,6 @@ With our custom handler written to extract the specific fields from a `<img>` el
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/splitters/split_html.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/splitters/split_html.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

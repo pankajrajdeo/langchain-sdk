@@ -10,10 +10,30 @@ tags: [docs, releases, changelog]
 
 > Log of updates and improvements to our Python packages
 
-> [!NOTE]
-> **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/oss/python/releases/changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
+**Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/oss/python/releases/changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
-## Sep 1, 2026
+**Oct 14, 2026**
+
+<a id="jul-24-2026"></a>
+
+## `langchain` v1.4.6
+
+`HumanInTheLoopMiddleware` can now pause once per tool call. Set `interrupt_mode="per_call"` and each gated call raises its own interrupt, which you answer by interrupt ID. Batched mode is still the default.
+
+```python
+HumanInTheLoopMiddleware(interrupt_on={...}, interrupt_mode="per_call")
+```
+
+### Features
+
+* **Typed answers**: each interrupt carries a `response_schema` listing the decisions that call allows, so a client can build its form from the schema. See [Read the response schema](../langchain/human-in-the-loop.md#read-the-response-schema).
+* **Checked before saving**: LangGraph rejects an invalid answer before it is saved, so you can correct it and answer the same interrupt again. See [Correct an invalid answer](../langchain/human-in-the-loop.md#correct-an-invalid-answer).
+* **Edits stay on the called tool**: an `edit` can't switch tools, and its arguments are checked against the tool's own schema.
+
+Use per-call mode for new agents. LangChain plans to make it the default in the next major release. See [Pause once per tool call](../langchain/human-in-the-loop.md#pause-once-per-tool-call) and the [human-in-the-loop overview](../concepts/human-in-the-loop.md).
+
+**Sep 1, 2026**
+
 ## `langchain` v1.4.0
 
 MCP support now ships inside LangChain in the `langchain.mcp` namespace, built on [FastMCP](https://gofastmcp.com). It replaces the standalone `langchain-mcp-adapters` package. Install it with the `mcp` extra:
@@ -31,6 +51,7 @@ uv add "langchain[mcp]"
 ```
 
 > [!NOTE]
+>
 > The `langchain.mcp` namespace is in beta. Importing from it raises a `LangChainBetaWarning`.
 
 ### Features
@@ -44,7 +65,8 @@ uv add "langchain[mcp]"
 
 Moving from `langchain-mcp-adapters`? `MultiServerMCPClient` is replaced by `MCPAdapter`, and several features have changed or been removed. See the [migration guide](../migrate/langchain-mcp-adapters.md).
 
-## Jul 24, 2026
+**Jul 24, 2026**
+
 ## `deepagents` v0.7.0
 
 A leaner, more configurable harness by default. On a default-agent turn, input tokens drop **65%** (5,395 → 1,895), validated against our [revamped evaluation suite](https://www.langchain.com/blog/how-we-benchmark-deep-agents) with no quality regression.
@@ -68,7 +90,8 @@ A leaner, more configurable harness by default. On a default-agent turn, input t
 
 Copy the following prompt into your AI coding assistant to migrate a codebase for these breaking changes:
 
-> **Prompt:** Migrate a deepagents codebase from v0.6.x to v0.7.
+Migrate a deepagents codebase from v0.6.x to v0.7.
+
 Migrate this codebase from `deepagents` v0.6.x to v0.7 to account for the following breaking changes:
 
 1. `create_deep_agent` no longer includes `TodoListMiddleware` by default. If this codebase relies on the `write_todos` tool, the `todos` state channel, or the todo-planning prompt, restore it by importing `TodoListMiddleware` from `langchain.agents.middleware` (not `deepagents`) and passing it to `create_deep_agent`:
@@ -99,9 +122,8 @@ Migrate this codebase from `deepagents` v0.6.x to v0.7 to account for the follow
 
 Search the codebase for usages of the removed symbols and for parsing logic that depends on the old output formats, apply the necessary changes, and flag anything that needs manual review.
 
-<a id="mar-24-2026"></a>
+**May 12, 2026**
 
-## May 12, 2026
 ## `deepagents` v0.6.0
 
 * **[`CodeInterpreterMiddleware`](../deepagents/interpreters.md)**: (experimental) `deepagents` now supports code execution and programmatic tool calling through a scoped QuickJS runtime.
@@ -109,17 +131,23 @@ Search the codebase for usages of the removed symbols and for parsing logic that
 * **[`DeltaChannel`](../langgraph/pregel.md#deltachannel) (beta)** ([blog](https://www.langchain.com/blog/delta-channels-evolving-agent-runtime)): Deep Agents now uses `DeltaChannel` for message history and agent files. Rather than re-serializing the full accumulated value into every checkpoint, only the incremental delta written at each step is stored — keeping checkpoint sizes small as threads grow long.
 
 > [!WARNING]
+>
 > **Rolling back from v0.6.0 is not supported once threads have persisted.** Deep Agents v0.6.0 changes persisted message history and agent files to `DeltaChannel`, which writes checkpoints in a new format that earlier versions cannot read. Downgrading to an earlier Deep Agents version switches these channels back to non-delta channels, leaving existing delta checkpoints unreadable and causing incomplete or incorrect state reconstruction. If you need to roll back, use the [delta-channel-dump recovery script](https://github.com/langchain-ai/langgraph/tree/main/examples/delta-channel-dump) to migrate affected threads, or discard them, before downgrading. More generally, avoid switching a persisted channel between delta and non-delta representations. See [Version compatibility and channel changes](../langgraph/pregel.md#version-compatibility-and-rollbacks).
 
 * **[Harness profiles](../deepagents/profiles.md)**: Register per-provider or per-model configuration bundles (`HarnessProfile`) that `create_deep_agent` applies automatically when a model is selected — system-prompt tweaks, tool overrides, middleware changes, and subagent defaults — without modifying the call site.
 * **[`ContextHubBackend`](../deepagents/backends.md#contexthubbackend)** ([blog](https://www.langchain.com/blog/introducing-context-hub)): A new filesystem backend backed by LangSmith Hub. Agent files — skills, memories, and other persisted context — are stored as Hub commits, giving you version history on every write and LangSmith-native durability without provisioning a separate LangGraph store.
 
-## May 12, 2026
+**May 12, 2026**
+
 ## `langchain` v1.3.0
 
 This release adds support for `version="v3"` in `stream_events` / `astream_events` for `langchain` agents. Refer to the [event streaming](../langchain/event-streaming.md) guide for details.
 
-## May 12, 2026
+**May 12, 2026**
+
+<a id="mar-10-2026"></a>
+<a id="mar-24-2026"></a>
+
 ## `langgraph` v1.2.0
 
 This release adds finer-grained control over node execution (timeouts, error recovery, and graceful shutdown), a new channel type that cuts checkpoint overhead for long-running threads, and a new content-block-centric streaming API (v3) with typed, per-channel projections.
@@ -136,7 +164,8 @@ This release adds finer-grained control over node execution (timeouts, error rec
 
 Timeouts and error handlers are Python-only; retry policies continue to work in both Python and TypeScript.
 
-## Apr 7, 2026
+**Apr 7, 2026**
+
 ## `deepagents` v0.5.0
 
 * **[Async subagents](../deepagents/async-subagents.md)**: Deep Agents can launch non-blocking background tasks, so users can continue interacting with the agent while subagents work concurrently. Requires [LangSmith Deployment](../langsmith/deployment.md) for sub-agents.
@@ -150,7 +179,8 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
 
 * **Anthropic prompt caching improvements**: We've made some improvements to improve prompt caching performance for Anthropic models.
 
-## Mar 10, 2026
+**Mar 10, 2026**
+
 ## `langgraph` v1.1.0
 
 * **Type-safe streaming (`version="v2"`)**: Pass `version="v2"` to `stream()` / `astream()` for unified `StreamPart` output with `type`, `ns`, and `data` keys on every chunk. Each mode has its own `TypedDict`, all importable from `langgraph.types`. See [streaming docs](../langgraph/streaming.md#stream-output-format-v2).
@@ -163,7 +193,8 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
 
 * **Fully backwards compatible**: `version="v2"` is opt-in. `GraphOutput` supports deprecated dict-style access for gradual migration.
 
-## Feb 10, 2026
+**Feb 10, 2026**
+
 ## `deepagents` v0.4.0
 
 * New integration packages for pluggable sandboxes: [`langchain-modal`](https://pypi.org/project/langchain-modal/), [`langchain-daytona`](https://pypi.org/project/langchain-daytona/), and [`langchain-runloop`](https://pypi.org/project/langchain-runloop/). See [sandboxes guide](../deepagents/sandboxes.md) and example [data analysis tutorial](../deepagents/data-analysis.md).
@@ -172,25 +203,23 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
   * More accurate token counting.
   * Summarization will now automatically trigger if a chat model raises a [`ContextOverflowError`](https://reference.langchain.com/python/langchain-core/exceptions/ContextOverflowError) (defined in `langchain-core`). Currently `langchain-anthropic` and `langchain-openai` support this.
 * We now default to the Responses API for model strings prefixed with `"openai:"`.
-<details>
-<summary>Disable data retention with the Responses API</summary>
-
+  > **Disable data retention with the Responses API**
+  >
 ```python
-    from langchain.chat_models import init_chat_model
-
-    agent = create_deep_agent(
-        model=init_chat_model(
-            "openai:...",
-            use_responses_api=True,
-            store=False,
-            include=["reasoning.encrypted_content"],
-        )
-    )
+  > from langchain.chat_models import init_chat_model
+  >
+  > agent = create_deep_agent(
+  >     model=init_chat_model(
+  >         "openai:...",
+  >         use_responses_api=True,
+  >         store=False,
+  >         include=["reasoning.encrypted_content"],
+  >     )
+  > )
 ```
 
-</details>
+**Dec 15, 2025**
 
-## Dec 15, 2025
 ## `langchain` v1.2.0
 
 * [`create_agent`](../langchain/agents.md): Simplified support for provider-specific tool parameters and definitions via a new [`extras`](https://reference.langchain.com/python/langchain/tools) attribute on [tools](../langchain/tools.md). Examples:
@@ -198,14 +227,16 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
   * Built-in tools that are executed client-side, as supported by [Anthropic](../integrations/chat/anthropic.md#built-in-tools), [OpenAI](../integrations/chat/openai.md#responses-api), and other providers.
 * Support for strict schema-adherence in agent `response_format` (see [`ProviderStrategy`](../langchain/structured-output.md#provider-strategy) docs).
 
-## Dec 8, 2025
+**Dec 8, 2025**
+
 ## `langchain-google-genai` v4.0.0
 
 We've re-written the Google GenAI integration to use Google's consolidated Generative AI SDK, which provides access to the Gemini API and Gemini Enterprise Agent Platform under the same interface. This includes minimal breaking changes as well as deprecated packages in `langchain-google-vertexai`.
 
 See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422) for details.
 
-## Nov 25, 2025
+**Nov 25, 2025**
+
 ## `langchain` v1.1.0
 
 * [Model profiles](../langchain/models.md#model-profiles): Chat models now expose supported features and capabilities through a `.profile` attribute. These data are derived from [models.dev](https://models.dev), an open source project providing model capability data.
@@ -215,7 +246,8 @@ See the full [release notes and migration guide](https://github.com/langchain-ai
 * [Model retry middleware](../langchain/middleware/built-in.md#model-retry): New middleware for automatically retrying failed model calls with configurable exponential backoff.
 * [Content moderation middleware](../integrations/middleware/openai.md#content-moderation): OpenAI content moderation middleware for detecting and handling unsafe content in agent interactions. Supports checking user input, model output, and tool results.
 
-## Oct 20, 2025
+**Oct 20, 2025**
+
 ## v1.0.0
 
 ### `langchain`
@@ -228,13 +260,10 @@ See the full [release notes and migration guide](https://github.com/langchain-ai
 * [Release notes](langgraph-v1.md)
 * [Migration guide](../migrate/langgraph-v1.md)
 
-> [!NOTE]
-> If you encounter any issues or have feedback, please [open an issue](https://github.com/langchain-ai/docs/issues/new?template=01-langchain.yml) so we can improve. To view v0.x documentation, [go to the archived content](https://github.com/langchain-ai/langchain/tree/v0.3/docs/docs) and [API reference](https://reference.langchain.com/v0.3/python/).
+If you encounter any issues or have feedback, please [open an issue](https://github.com/langchain-ai/docs/issues/new?template=01-langchain.yml) so we can improve. To view v0.x documentation, [go to the archived content](https://github.com/langchain-ai/langchain/tree/v0.3/docs/docs) and [API reference](https://reference.langchain.com/v0.3/python/).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

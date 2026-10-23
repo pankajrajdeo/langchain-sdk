@@ -11,7 +11,8 @@ tags: [docs, langsmith, self-host-ttl]
 LangSmith Self-Hosted supports automatic TTL and data retention for traces. Use this to comply with data privacy regulations or to reduce storage by automatically cleaning up old traces. Run rules and other qualifying actions can also extend a trace's retention period automatically.
 
 > [!NOTE]
-> **Self-hosted [Enterprise](pricing-plans.md) customers:** You can configure extended data retention at the workspace level through the UI. No environment variable changes are required. See [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy). The system-wide TTL configuration on this page is still supported.
+>
+> **Self-hosted [Enterprise](https://docs.langchain.com/langsmith/pricing-plans.md) customers:** You can configure extended data retention at the workspace level through the UI. No environment variable changes are required. See [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy). The system-wide TTL configuration on this page is still supported.
 
 ## TTL configuration precedence
 
@@ -56,6 +57,7 @@ config:
 As of version 0.11, a cron job runs on weekends to delete expired data that ClickHouse's built-in TTL mechanism may not have cleaned up.
 
 > [!WARNING]
+>
 > This job uses **mutations** (`ALTER TABLE DELETE`), which are expensive operations that can affect ClickHouse performance. Run them only during off-peak hours (nights and weekends). Testing with **1 concurrent active** mutation (the default) did not produce significant CPU, memory, or latency increases.
 
 ### Default schedule
@@ -94,6 +96,7 @@ queue:
 ```
 
 > [!TIP]
+>
 > To use a single cron schedule, set both `CLICKHOUSE_TTL_CLEANUP_CRON_WEEKEND_EVENING` and `CLICKHOUSE_TTL_CLEANUP_CRON_WEEKEND_MORNING` to the same value. Job locking prevents overlapping executions.
 
 ### Configuring minimum expired rows per part
@@ -141,6 +144,7 @@ queue:
 ```
 
 > [!WARNING]
+>
 > More concurrent `DELETE` operations can significantly slow inserts and reads. Increase this value only if you can tolerate slower insert and read latencies, and monitor the system after you do.
 
 ### Emergency: Stopping running mutations
@@ -172,10 +176,33 @@ Check these directories inside your ClickHouse pod:
 
 If backups are present, copy them to external storage (for example, S3), then clear the directories. Disk space should start releasing within a few minutes.
 
+## Keep run statistics after traces expire
+
+After traces expire, LangSmith keeps their run statistics, such as run counts, latency, and error rates, until the extended (`longlived`) retention period passes. LangSmith then removes the remaining stored data, and those run statistics are no longer available. For how LangSmith resolves the `longlived` period, see [TTL configuration precedence](#ttl-configuration-precedence).
+
+> [!NOTE]
+>
+> This applies to [SmithDB](self-host-smithdb.md) installations on LangSmith 0.18 (Helm chart `0.18.0` or later).
+
+To keep run statistics available for longer, set `SMITHDB_COMPACTION__EXPIRY_CYCLE__RETENTION_CLEANUP_BUFFER` to a duration such as `30d` or `720h`. LangSmith waits this long past the `longlived` period before it removes the data. The default is `0s`.
+
+For example, with the default 400-day `longlived` period and a `30d` buffer, run statistics stay available for at least 430 days after LangSmith receives a trace.
+
+**Helm**
+
+```yaml
+smithdb:
+  compaction:
+    deployment:
+      extraEnv:
+        - name: SMITHDB_COMPACTION__EXPIRY_CYCLE__RETENTION_CLEANUP_BUFFER
+          value: "30d"
+```
+
+If SmithDB runs as a single pod, set the variable under `smithdb.single.deployment.extraEnv` instead.
+
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ttl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ttl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

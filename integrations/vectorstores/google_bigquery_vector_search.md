@@ -17,7 +17,7 @@ This tutorial illustrates how to work with an end-to-end data and embedding mana
 * **BigQuery Vector Search**: with `BigQueryVectorStore` class, which is ideal for rapid prototyping with no infrastructure setup and batch retrieval.
 * **Feature Store Online Store**: with `VertexFSVectorStore` class, enables low-latency retrieval with manual or scheduled data sync. Perfect for production-ready user-facing GenAI applications.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/bigquery-vertex-feature-store.png?fit=max&auto=format&n=x_qjL89cw5RbZp-3&q=85&s=818575b30c466ed0b11dbfe6d7cd587f" alt="Diagram BQ-VertexFS" width="1849" height="878" data-path="images/integrations/bigquery-vertex-feature-store.png" />
+![Diagram BQ-VertexFS](https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/bigquery-vertex-feature-store.png?fit=max\&auto=format\&n=x_qjL89cw5RbZp-3\&q=85\&s=818575b30c466ed0b11dbfe6d7cd587f)
 
 ## Getting started
 
@@ -200,8 +200,6 @@ store.to_vertex_fs_vector_store()  # pass optional VertexFSVectorStore parameter
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_bigquery_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_bigquery_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

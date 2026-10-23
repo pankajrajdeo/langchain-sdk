@@ -13,10 +13,12 @@ tags: [docs, langsmith, deployment-quickstart]
 This quickstart shows you how to deploy an application to LangSmith Cloud in GCP using the [`langgraph deploy`](cli.md#deploy) command. Any app that exports a graph from a [`langgraph.json`](application-structure.md#configuration-file-concepts) config deploys the same way, regardless of which framework you used to author the agent.
 
 > [!TIP]
+>
 > For a comprehensive Cloud deployment guide including GitHub-based deployments and all configuration options, refer to the [Cloud deployment setup guide](deploy-to-cloud.md).
 
 > [!NOTE]
-> The `langgraph deploy` command is in **[beta](release-stages.md)**. `langgraph deploy` is not yet supported on LangSmith Cloud (SaaS) in AWS.
+>
+> The `langgraph deploy` command is in **[beta](release-stages.md)**. On LangSmith Cloud (SaaS) in AWS, local builds require `langgraph-cli` 0.4.35 or later.
 
 ## Prerequisites
 
@@ -35,7 +37,8 @@ Before you begin, ensure you have:
 
 `langgraph deploy` deploys any project whose `langgraph.json` exports a graph. Pick the path that matches how you author your agent:
 
-#### LangGraph template
+**LangGraph template**
+
 Create a new app from the [`new-langgraph-project-python` template](https://github.com/langchain-ai/new-langgraph-project):
 
 ```shell
@@ -44,9 +47,11 @@ cd path/to/your/app
 ```
 
 > [!TIP]
+>
 > Run `langgraph new` without `--template` for an interactive menu of available templates.
 
-#### Bring your own framework
+**Bring your own framework**
+
 Agents authored with Claude Agent SDK, Strands, CrewAI, AutoGen, or Google ADK deploy through the same CLI once they expose a graph from `langgraph.json`. For end-to-end examples, see [Deploy other frameworks](deploy-other-frameworks.md). Once your project exports a graph, return here for the remaining steps.
 
 ## 2. Set your API key
@@ -67,24 +72,24 @@ LANGSMITH_API_KEY=lsv2_... langgraph deploy
 
 Deploy directly from the CLI or via the UI.
 
-#### Deploy from CLI
+**Deploy from CLI**
+
 Run the deploy command from your project directory:
 
 ```shell
 langgraph deploy
 ```
 
-This creates a Serverless deployment named after your project directory by default. Use `--name` or `--deployment-type dedicated` to override.
-
-> [!NOTE]
-> Organizations still on previous pricing until October 1, 2026 use `--deployment-type prod` or `--deployment-type dev` instead. For details, see [`langgraph deploy`](cli.md#deploy) and [Manage billing](billing.md#langsmith-deployment-billing).
+This creates a Serverless deployment named after your project directory. Use `--name` to change the name, or `--deployment-type dedicated` for a [Dedicated deployment](cloud-platform-features.md#deployment-types).
 
 > [!TIP]
+>
 > To update an existing deployment after making code changes, re-run `langgraph deploy`. It finds the existing deployment by name and updates it in place.
 
 You can also use `langgraph deploy list` to see all deployments, `langgraph deploy logs` to tail runtime logs, and `langgraph deploy delete ` to remove a deployment. For details, refer to the [CLI reference](cli.md#deploy).
 
-#### Deploy from Studio
+**Deploy from Studio**
+
 To deploy from studio:
 
 1. Start the [local development server](local-dev-testing.md#langgraph-dev). This will automatically open up [Studio](studio.md), an interactive agent IDE.
@@ -94,7 +99,8 @@ langgraph dev
 ```
 
 2. Click the `deploy` button.
-       <img src="https://mintcdn.com/langchain-5e9cc07a/PcUh5lKODh7-SKGz/langsmith/images/deploy-from-studio.gif?s=a6735796def993c3be3242c6d1e2fd6c" alt="Deploy from Studio" width="1072" height="720" data-path="langsmith/images/deploy-from-studio.gif" />
+
+   ![Deploy from Studio](https://mintcdn.com/langchain-5e9cc07a/PcUh5lKODh7-SKGz/langsmith/images/deploy-from-studio.gif?s=a6735796def993c3be3242c6d1e2fd6c)
 
 ## 4. Test in Studio
 
@@ -110,7 +116,8 @@ Once the deployment is ready:
 
 Copy the **API URL** from the deployment details view, then use it to call your application:
 
-#### Python SDK (Async)
+**Python SDK (Async)**
+
 1. Install the LangGraph Python SDK:
 ```shell
    pip install langgraph-sdk
@@ -137,7 +144,8 @@ Copy the **API URL** from the deployment details view, then use it to call your 
        print("\n\n")
 ```
 
-#### Python SDK (Sync)
+**Python SDK (Sync)**
+
 1. Install the LangGraph Python SDK:
 ```shell
    pip install langgraph-sdk
@@ -164,7 +172,8 @@ Copy the **API URL** from the deployment details view, then use it to call your 
        print("\n\n")
 ```
 
-#### JavaScript SDK
+**JavaScript SDK**
+
 1. Install the LangGraph JS SDK:
 ```shell
    npm install @langchain/langgraph-sdk
@@ -195,7 +204,8 @@ Copy the **API URL** from the deployment details view, then use it to call your 
    }
 ```
 
-#### Rest API
+**Rest API**
+
 ```bash
 curl -s --request POST \
     --url <DEPLOYMENT_URL>/runs/stream \
@@ -217,19 +227,20 @@ curl -s --request POST \
 
 ## Next steps
 
-#### [Assistants](assistants.md)
-Deploy the same graph with different models, prompts, or tools per assistant.
+> **[Assistants](assistants.md)**
+>
+> Deploy the same graph with different models, prompts, or tools per assistant.
 
-#### [Threads](use-threads.md)
-Persist state across multiple runs so your agent remembers context between interactions.
+> **[Threads](use-threads.md)**
+>
+> Persist state across multiple runs so your agent remembers context between interactions.
 
-#### [Runs](background-run.md)
-Kick off background runs for long-running jobs and stream results back to your client.
+> **[Runs](background-run.md)**
+>
+> Kick off background runs for long-running jobs and stream results back to your client.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deployment-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deployment-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

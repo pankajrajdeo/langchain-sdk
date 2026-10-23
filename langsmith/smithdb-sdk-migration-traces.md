@@ -24,45 +24,52 @@ Supports filters (`trace_filter`, `tree_filter`) and field projection (`selects`
 
 #### Method name
 
-#### Python
+**Python**
+
 | Before | After |
 | - | - |
 | `client.list_runs(is_root=True)` (generic) | `client.traces.query()` |
 
 > [!NOTE]
+>
 > `client.traces.query()` is now async. Call it with `await`.
 
 See the [reference](https://reference.langchain.com/python/langsmith/_openapi_client/resources/traces/TracesResource/query) for the full parameter and field list.
 
-#### TypeScript
+**TypeScript**
+
 | Before | After |
 | - | - |
 | `client.listRuns({ isRoot: true })` (generic) | `client.traces.query()` |
 
 See the [reference](https://reference.langchain.com/javascript/langsmith/_openapi_client/Langsmith/Traces/query) for the full parameter and field list.
 
-#### Java
+**Java**
+
 | Before | After |
 | - | - |
 | `client.runs().query()` (generic, `isRoot(true)`) | `client.traces().query()` |
 
 See the [reference](https://javadoc.io/doc/com.langchain.smith/langsmith-java/latest/com/langchain/smith/services/blocking/TraceService.html) for the full parameter list.
 
-#### Go
+**Go**
+
 | Before | After |
 | - | - |
 | `client.Runs.Query()` (generic, `IsRoot: true`) | `client.Traces.Query()` |
 
 See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#TraceService.QueryAutoPaging) for the full parameter list.
 
-#### cURL
+**cURL**
+
 | Before | After |
 | - | - |
 | `POST /api/v1/runs/query` (`is_root=true`) | `POST /api/v2/traces/query` |
 
 #### Query parameters
 
-#### Python
+**Python**
+
 * `session` (a list of project UUIDs) becomes `project_id`, a single UUID; `traces.query` scopes to exactly one project per call.
 * `is_root` is removed: `traces.query` is always scoped to root runs implicitly.
 * The generic `filter` (evaluated against any run) has no direct equivalent; use `trace_filter` or `tree_filter` instead.
@@ -72,7 +79,8 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Trac
 * `max_start_time` is new, defaulting to the request time; `list_runs`'s `end_time` filtered by a run's own end timestamp, not a scan-window bound.
 * `select` is renamed `selects`; entries route to `trace_aggregates` (`total_tokens`, `total_cost`, `first_token_time`) or `root_run` (everything else).
 
-#### TypeScript
+**TypeScript**
+
 * `session` (a list of project UUIDs) becomes `project_id`, a single UUID; `traces.query` scopes to exactly one project per call.
 * `isRoot` is removed: `traces.query` is always scoped to root runs implicitly.
 * The generic `filter` (evaluated against any run) has no direct equivalent; use `trace_filter` or `tree_filter` instead.
@@ -82,7 +90,8 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Trac
 * `max_start_time` is new, defaulting to the request time; `listRuns`'s `endTime` filtered by a run's own end timestamp, not a scan-window bound.
 * `select` is renamed `selects`; entries route to `trace_aggregates` (`total_tokens`, `total_cost`, `first_token_time`) or `root_run` (everything else).
 
-#### Java
+**Java**
+
 * `session` (`List` of project UUIDs) becomes `projectId`, a single UUID; `traces().query()` scopes to exactly one project per call.
 * `isRoot` is removed: `traces().query()` is always scoped to root runs implicitly.
 * The generic `filter` (evaluated against any run) has no direct equivalent; use `traceFilter` or `treeFilter` instead.
@@ -92,7 +101,8 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Trac
 * `maxStartTime` is new, defaulting to the request time; `RunQueryParams`'s `endTime` filtered by a run's own end timestamp, not a scan-window bound.
 * `select` is renamed `selects`; entries route to `traceAggregates` (`totalTokens`, `totalCost`, `firstTokenTime`) or `rootRun` (everything else).
 
-#### Go
+**Go**
+
 * `Session` (`[]string` of project UUIDs) becomes `ProjectID`, a single UUID; `Traces.Query()` scopes to exactly one project per call.
 * `IsRoot` is removed: `Traces.Query()` is always scoped to root runs implicitly.
 * The generic `Filter` (evaluated against any run) has no direct equivalent; use `TraceFilter` or `TreeFilter` instead.
@@ -102,7 +112,8 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Trac
 * `MaxStartTime` is new, defaulting to the request time; `RunQueryParams`'s `EndTime` filtered by a run's own end timestamp, not a scan-window bound.
 * `Select` is renamed `Selects`; entries route to `TraceAggregates` (`TotalTokens`, `TotalCost`, `FirstTokenTime`) or `RootRun` (everything else).
 
-#### cURL
+**cURL**
+
 * `session` (a list of project UUIDs) becomes `project_id`, a single UUID.
 * `is_root` is removed: the endpoint is always scoped to root runs implicitly.
 * The generic `filter` has no direct equivalent; use `trace_filter` or `tree_filter` instead. Both already existed on `POST /api/v1/runs/query`.
@@ -113,27 +124,32 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Trac
 
 #### Response fields
 
-#### Python
+**Python**
+
 * `root_run` carries the same `Run` shape as Runs: query (`id`, `name`, `run_type`, `status`, and so on), gated by `selects`.
 * `total_tokens`/`total_cost` move off `root_run` onto `trace_aggregates`, summed across every run in the trace instead of just the root run. `trace_aggregates` is omitted entirely from the response when no aggregate field was selected.
 * `trace_aggregates.first_token_time` is new
 
-#### TypeScript
+**TypeScript**
+
 * `root_run` carries the same `Run` shape as Runs: query (`id`, `name`, `run_type`, `status`, and so on), gated by `selects`.
 * `total_tokens`/`total_cost` move off `root_run` onto `trace_aggregates`, summed across every run in the trace instead of just the root run. `trace_aggregates` is omitted entirely from the response when no aggregate field was selected.
 * `trace_aggregates.first_token_time` is new
 
-#### Java
+**Java**
+
 * `rootRun()` carries the same `RunSchema` shape as Runs: query (`totalTokens()`, `name()`, `runType()`, `status()`, and so on), gated by `selects`.
 * `totalTokens()`/`totalCost()` move off `rootRun()` onto `traceAggregates()`, summed across every run in the trace instead of just the root run.
 * `traceAggregates().firstTokenTime()` is new
 
-#### Go
+**Go**
+
 * `RootRun` carries the same `Run` shape as Runs: query, gated by `Selects`.
 * `TotalTokens`/`TotalCost` move off `RootRun` onto `TraceAggregates`, summed across every run in the trace instead of just the root run. Check for an absent `TraceAggregates` via `trace.TraceAggregates.JSON.RawJSON() == ""`, since it is a value type, not a pointer.
 * `TraceAggregates.FirstTokenTime` is new
 
-#### cURL
+**cURL**
+
 JSON response fields use `snake_case`, matching the bullets below.
 
 * `root_run` carries the same shape as Runs: query, gated by `selects`.
@@ -146,8 +162,10 @@ JSON response fields use `snake_case`, matching the bullets below.
 
 Fetch every trace (root run) in a project, replacing `list_runs(is_root=True)`.
 
-#### Python
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -161,7 +179,8 @@ for root_run in root_runs:
     print(root_run.trace_id, root_run.name)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -188,8 +207,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-#### Before
+**TypeScript**
+
+**Before**
+
 **Before**
 
 ```ts
@@ -203,7 +224,8 @@ for await (const run of client.listRuns({ projectId: project.id, isRoot: true, l
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -224,8 +246,10 @@ for await (const trace of client.traces.query({
 }
 ```
 
-#### Java
-#### Before
+**Java**
+
+**Before**
+
 **Before**
 
 ```kotlin
@@ -252,7 +276,8 @@ for (run in rootRuns) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -284,8 +309,10 @@ for (trace in traces) {
 }
 ```
 
-#### Go
-#### Before
+**Go**
+
+**Before**
+
 **Before**
 
 ```go
@@ -325,7 +352,8 @@ func main() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -376,8 +404,10 @@ func main() {
 }
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -389,7 +419,8 @@ curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   | jq '(.runs // []) | map({trace_id: .trace_id, name: .name})'
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -412,8 +443,10 @@ curl -X POST "https://api.smith.langchain.com/api/v2/traces/query" \
 
 Read a trace's token and cost totals from `trace_aggregates` instead of the root run, where v1 kept them.
 
-#### Python
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -428,7 +461,8 @@ for root_run in root_runs:
     print(root_run.trace_id, root_run.total_tokens, root_run.total_cost)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -460,8 +494,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-#### Before
+**TypeScript**
+
+**Before**
+
 **Before**
 
 ```ts
@@ -475,7 +511,8 @@ for await (const rootRun of client.listRuns({ projectId: project.id, isRoot: tru
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -498,10 +535,14 @@ for await (const trace of client.traces.query({
 }
 ```
 
-#### Java
-The Before example reads `totalTokens` only. `totalCost` is omitted because reading it on the v1 `RunSchema` type triggers a known deserialization bug in the current Java binding (it expects a string, the API returns a number).
+**Java**
 
-#### Before
+> [!NOTE]
+>
+> The Before example reads `totalTokens` only. `totalCost` is omitted because reading it on the v1 `RunSchema` type triggers a known deserialization bug in the current Java binding (it expects a string, the API returns a number).
+
+**Before**
+
 **Before**
 
 ```kotlin
@@ -532,7 +573,8 @@ for (rootRun in rootRuns) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -573,8 +615,10 @@ for (trace in traces) {
 }
 ```
 
-#### Go
-#### Before
+**Go**
+
+**Before**
+
 **Before**
 
 ```go
@@ -615,7 +659,8 @@ func main() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -672,20 +717,24 @@ func main() {
 }
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 
-curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
+START_TIME=$(date -u -d '-1 month' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-1m +%Y-%m-%dT%H:%M:%SZ)
+RESP=$(curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   -H "x-api-key: $LANGSMITH_API_KEY" \
   -H "Content-Type: application/json" \
-  -d "$(jq -n --arg pid "$PROJECT_ID" '{"session": [$pid], "is_root": true, "limit": 5}')" \
-  | jq '.runs[] | {trace_id, total_tokens, total_cost}'
+  -d "$(jq -n --arg pid "$PROJECT_ID" --arg start "$START_TIME" '{"session": [$pid], "is_root": true, "limit": 5, "start_time": $start}')")
+echo "$RESP" | jq '(.runs // [])[] | {trace_id, total_tokens, total_cost}'
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -708,8 +757,10 @@ curl -X POST "https://api.smith.langchain.com/api/v2/traces/query" \
 
 Filter traces by status (for example, errored) with `trace_filter`, or skip filtering and fetch known traces directly and faster with `trace_ids`.
 
-#### Python
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -730,7 +781,8 @@ for run in error_traces:
     print(run.trace_id)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -769,8 +821,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-#### Before
+**TypeScript**
+
+**Before**
+
 **Before**
 
 ```ts
@@ -791,7 +845,8 @@ for await (const run of client.listRuns({
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -825,8 +880,10 @@ for await (const trace of client.traces.query({
 }
 ```
 
-#### Java
-#### Before
+**Java**
+
+**Before**
+
 **Before**
 
 ```kotlin
@@ -856,7 +913,8 @@ for (run in runs) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -904,8 +962,10 @@ for (trace in knownTraces) {
 }
 ```
 
-#### Go
-#### Before
+**Go**
+
+**Before**
+
 **Before**
 
 ```go
@@ -948,7 +1008,8 @@ func main() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1016,8 +1077,10 @@ func main() {
 }
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1031,7 +1094,8 @@ curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   | jq '(.runs // []) | map(.trace_id)'
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1072,73 +1136,84 @@ Returns runs for a trace ID within min/max start time. Optional `filter`; repeat
 
 #### Method name
 
-#### Python
+**Python**
+
 | Before | After |
 | - | - |
 | `client.list_runs(trace_id=...)` (generic) | `client.traces.list_runs()` |
 
 > [!NOTE]
+>
 > `client.traces.list_runs()` is now async. Call it with `await`.
 
 See the [reference](https://reference.langchain.com/python/langsmith/_openapi_client/resources/traces/TracesResource/list_runs) for the full parameter and field list.
 
-#### TypeScript
+**TypeScript**
+
 | Before | After |
 | - | - |
 | `client.listRuns({ traceId })` (generic) | `client.traces.listRuns()` |
 
 See the [reference](https://reference.langchain.com/javascript/langsmith/_openapi_client/Langsmith/Traces/listRuns) for the full parameter and field list.
 
-#### Java
+**Java**
+
 | Before | After |
 | - | - |
 | `client.runs().query()` (generic, `.trace(traceId)`) | `client.traces().listRuns()` |
 
 See the [reference](https://javadoc.io/doc/com.langchain.smith/langsmith-java/latest/com/langchain/smith/services/blocking/TraceService.html) for the full parameter list.
 
-#### Go
+**Go**
+
 | Before | After |
 | - | - |
 | `client.Runs.Query()` (generic, `Trace: traceID`) | `client.Traces.ListRuns()` |
 
 See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#TraceService.ListRuns) for the full parameter list.
 
-#### cURL
+**cURL**
+
 | Before | After |
 | - | - |
 | `POST /api/v1/runs/query` (`trace` field) | `GET /api/v2/traces/{trace_id}/runs` |
 
 #### Query parameters
 
-#### Python
+**Python**
+
 * `trace_id`/`trace` moves from a query param to a path param.
 * `project_id` is new and **required** (the SmithDB partition key); `list_runs(trace_id=...)` did not need it.
 * `filter` is unchanged.
 * `min_start_time`/`max_start_time` are new. Unlike `traces.query`, neither has a default: omit both and runs are not filtered by time at all. They are individually optional but must be passed together if either is set.
 * `select` is renamed `selects`, using the same 44-value enum as `traces.query`.
 
-#### TypeScript
+**TypeScript**
+
 * `traceId`/`trace` moves from a query param to a path param.
 * `project_id` is new and **required** (the SmithDB partition key); `listRuns({ traceId })` did not need it.
 * `filter` is unchanged.
 * `min_start_time`/`max_start_time` are new. Unlike `traces.query`, neither has a default: omit both and runs are not filtered by time at all. They are individually optional but must be passed together if either is set.
 * `select` is renamed `selects`, using the same 44-value enum as `traces.query`.
 
-#### Java
+**Java**
+
 * `traceId` moves from a query param (`.trace(traceId)`) to a positional path param.
 * `projectId` is new and **required** (the SmithDB partition key); the generic `runs().query()` did not need it.
 * `filter` is unchanged.
 * `minStartTime`/`maxStartTime` are new. Unlike `traces().query()`, neither has a default: omit both and runs are not filtered by time at all. They are individually optional but must be passed together if either is set.
 * `select` is renamed `selects` (44-value enum).
 
-#### Go
+**Go**
+
 * `traceID` moves from a query param (`Trace: traceID`) to a positional path param.
 * `ProjectID` is new and **required** (the SmithDB partition key); the generic `Runs.Query()` did not need it.
 * `Filter` is unchanged.
 * `MinStartTime`/`MaxStartTime` are new. Unlike `Traces.Query()`, neither has a default: omit both and runs are not filtered by time at all. They are individually optional but must be passed together if either is set.
 * `Select` is renamed `Selects`.
 
-#### cURL
+**cURL**
+
 * `trace` moves from a body field to a path segment, `{trace_id}`.
 * `project_id` is new and **required** (the SmithDB partition key); `POST /api/v1/runs/query` did not need it.
 * `filter` is unchanged.
@@ -1147,19 +1222,24 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Trac
 
 #### Response fields
 
-#### Python
+**Python**
+
 The response has a single `items` field: a list of `Run` objects in `start_time` order, same shape as the [Runs: query](smithdb-sdk-migration-query-runs.md) response.
 
-#### TypeScript
+**TypeScript**
+
 The response has a single `items` field: an array of `Run` objects in `start_time` order, same shape as the [Runs: query](smithdb-sdk-migration-query-runs.md) response.
 
-#### Java
+**Java**
+
 The response has a single `items()` method, returning `Optional>`: the trace's runs in `start_time` order, same shape as the [Runs: query](smithdb-sdk-migration-query-runs.md) response.
 
-#### Go
+**Go**
+
 The response has a single `Items` field, typed `[]Run`: the trace's runs in `start_time` order, same shape as the [Runs: query](smithdb-sdk-migration-query-runs.md) response.
 
-#### cURL
+**cURL**
+
 The JSON response has a single `items` array field: the trace's runs in `start_time` order, same shape as the [Runs: query](smithdb-sdk-migration-query-runs.md) response.
 
 ### Examples
@@ -1168,8 +1248,10 @@ The JSON response has a single `items` array field: the trace's runs in `start_t
 
 Fetch all the runs that belong to one trace, given its trace ID.
 
-#### Python
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -1183,7 +1265,8 @@ for run in runs:
     print(run.name, run.run_type, run.status)
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1207,8 +1290,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-#### Before
+**TypeScript**
+
+**Before**
+
 **Before**
 
 ```ts
@@ -1226,7 +1311,8 @@ for (const run of runs) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1244,8 +1330,10 @@ for (const run of response.items ?? []) {
 }
 ```
 
-#### Java
-#### Before
+**Java**
+
+**Before**
+
 **Before**
 
 ```kotlin
@@ -1273,7 +1361,8 @@ for (run in runs) {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1308,8 +1397,10 @@ for (run in response.items().getOrNull() ?: emptyList()) {
 }
 ```
 
-#### Go
-#### Before
+**Go**
+
+**Before**
+
 **Before**
 
 ```go
@@ -1349,7 +1440,8 @@ func main() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1394,8 +1486,10 @@ func main() {
 }
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1408,7 +1502,8 @@ curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   | jq '.runs // []'
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1426,8 +1521,10 @@ curl -G "https://api.smith.langchain.com/api/v2/traces/$TRACE_ID/runs" \
 
 Narrow a trace's runs down to a specific run type, for example just the LLM calls.
 
-#### Python
-#### Before
+**Python**
+
+**Before**
+
 **Before**
 
 ```python
@@ -1445,7 +1542,8 @@ llm_runs = list(
 )
 ```
 
-#### After
+**After**
+
 **After**
 
 ```python
@@ -1469,8 +1567,10 @@ async def main():
 asyncio.run(main())
 ```
 
-#### TypeScript
-#### Before
+**TypeScript**
+
+**Before**
+
 **Before**
 
 ```ts
@@ -1489,7 +1589,8 @@ for await (const run of client.listRuns({
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```ts
@@ -1506,8 +1607,10 @@ const response = await client.traces.listRuns(traceId, {
 const llmRuns = response.items ?? [];
 ```
 
-#### Java
-#### Before
+**Java**
+
+**Before**
+
 **Before**
 
 ```kotlin
@@ -1533,7 +1636,8 @@ client.runs().query(
 ).runs()
 ```
 
-#### After
+**After**
+
 **After**
 
 ```kotlin
@@ -1564,8 +1668,10 @@ client.traces().listRuns(
 )
 ```
 
-#### Go
-#### Before
+**Go**
+
+**Before**
+
 **Before**
 
 ```go
@@ -1602,7 +1708,8 @@ func main() {
 }
 ```
 
-#### After
+**After**
+
 **After**
 
 ```go
@@ -1643,8 +1750,10 @@ func main() {
 }
 ```
 
-#### cURL
-#### Before
+**cURL**
+
+**Before**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1657,7 +1766,8 @@ curl -s -X POST "https://api.smith.langchain.com/api/v1/runs/query" \
   | jq '.runs // []'
 ```
 
-#### After
+**After**
+
 ```bash
 PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
@@ -1679,8 +1789,6 @@ curl -G "https://api.smith.langchain.com/api/v2/traces/$TRACE_ID/runs" \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithdb-sdk-migration-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

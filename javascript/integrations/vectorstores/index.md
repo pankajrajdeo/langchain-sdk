@@ -122,649 +122,603 @@ vectorStore.similaritySearch("query", 2, { source: "tweets" });
 
 **Select embedding model:**
 
-<details>
-<summary>OpenAI</summary>
-
-Install dependencies:
-
+> **OpenAI**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/openai @langchain/core
+> npm install @langchain/openai @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/openai @langchain/core
+> yarn add @langchain/openai @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/openai @langchain/core
+> pnpm add @langchain/openai @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-OPENAI_API_KEY=your-api-key
+> OPENAI_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { OpenAIEmbeddings } from "@langchain/openai";
-
-const embeddings = new OpenAIEmbeddings({
-  model: "text-embedding-3-large"
-});
+> import { OpenAIEmbeddings } from "@langchain/openai";
+>
+> const embeddings = new OpenAIEmbeddings({
+>   model: "text-embedding-3-large"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Azure</summary>
-
-Install dependencies
-
+> **Azure**
+>
+> Install dependencies
+>
 **npm**
 
 ```bash
-npm install @langchain/openai @langchain/core
+> npm install @langchain/openai @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/openai @langchain/core
+> yarn add @langchain/openai @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/openai @langchain/core
+> pnpm add @langchain/openai @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-AZURE_OPENAI_API_INSTANCE_NAME=<YOUR_INSTANCE_NAME>
-AZURE_OPENAI_API_KEY=<YOUR_KEY>
-AZURE_OPENAI_API_VERSION="2024-02-01"
+> AZURE_OPENAI_API_INSTANCE_NAME=<YOUR_INSTANCE_NAME>
+> AZURE_OPENAI_API_KEY=<YOUR_KEY>
+> AZURE_OPENAI_API_VERSION="2024-02-01"
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { AzureOpenAIEmbeddings } from "@langchain/openai";
-
-const embeddings = new AzureOpenAIEmbeddings({
-  azureOpenAIApiEmbeddingsDeploymentName: "text-embedding-ada-002"
-});
+> import { AzureOpenAIEmbeddings } from "@langchain/openai";
+>
+> const embeddings = new AzureOpenAIEmbeddings({
+>   azureOpenAIApiEmbeddingsDeploymentName: "text-embedding-ada-002"
+> });
 ```
 
-</details>
-
-<details>
-<summary>AWS</summary>
-
-Install dependencies:
-
+> **AWS**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm i @langchain/aws
+> npm i @langchain/aws
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/aws
+> yarn add @langchain/aws
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/aws
+> pnpm add @langchain/aws
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-BEDROCK_AWS_REGION=your-region
+> BEDROCK_AWS_REGION=your-region
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { BedrockEmbeddings } from "@langchain/aws";
-
-const embeddings = new BedrockEmbeddings({
-  model: "amazon.titan-embed-text-v1"
-});
+> import { BedrockEmbeddings } from "@langchain/aws";
+>
+> const embeddings = new BedrockEmbeddings({
+>   model: "amazon.titan-embed-text-v1"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Google Gemini</summary>
-
-Install dependencies:
-
+> **Google Gemini**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm i @langchain/google-genai
+> npm i @langchain/google-genai
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/google-genai
+> yarn add @langchain/google-genai
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/google-genai
+> pnpm add @langchain/google-genai
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-GOOGLE_API_KEY=your-api-key
+> GOOGLE_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
-
-const embeddings = new GoogleGenerativeAIEmbeddings({
-  model: "text-embedding-004"
-});
+> import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+>
+> const embeddings = new GoogleGenerativeAIEmbeddings({
+>   model: "gemini-embedding-001"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Gemini Enterprise Agent Platform</summary>
-
-Install dependencies:
-
+> **Gemini Enterprise Agent Platform**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm i @langchain/google-vertexai
+> npm i @langchain/google-vertexai
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/google-vertexai
+> yarn add @langchain/google-vertexai
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/google-vertexai
+> pnpm add @langchain/google-vertexai
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-GOOGLE_APPLICATION_CREDENTIALS=credentials.json
+> GOOGLE_APPLICATION_CREDENTIALS=credentials.json
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { VertexAIEmbeddings } from "@langchain/google-vertexai";
-
-const embeddings = new VertexAIEmbeddings({
-  model: "gemini-embedding-001"
-});
+> import { VertexAIEmbeddings } from "@langchain/google-vertexai";
+>
+> const embeddings = new VertexAIEmbeddings({
+>   model: "gemini-embedding-001"
+> });
 ```
 
-</details>
-
-<details>
-<summary>MistralAI</summary>
-
-Install dependencies:
-
+> **MistralAI**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/mistralai @langchain/core
+> npm install @langchain/mistralai @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mistralai @langchain/core
+> yarn add @langchain/mistralai @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mistralai @langchain/core
+> pnpm add @langchain/mistralai @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-MISTRAL_API_KEY=your-api-key
+> MISTRAL_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { MistralAIEmbeddings } from "@langchain/mistralai";
-
-const embeddings = new MistralAIEmbeddings({
-  model: "mistral-embed"
-});
+> import { MistralAIEmbeddings } from "@langchain/mistralai";
+>
+> const embeddings = new MistralAIEmbeddings({
+>   model: "mistral-embed"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Cohere</summary>
-
-Install dependencies:
-
+> **Cohere**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm i @langchain/cohere
+> npm i @langchain/cohere
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/cohere
+> yarn add @langchain/cohere
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/cohere
+> pnpm add @langchain/cohere
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-COHERE_API_KEY=your-api-key
+> COHERE_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { CohereEmbeddings } from "@langchain/cohere";
-
-const embeddings = new CohereEmbeddings({
-  model: "embed-english-v3.0"
-});
+> import { CohereEmbeddings } from "@langchain/cohere";
+>
+> const embeddings = new CohereEmbeddings({
+>   model: "embed-english-v3.0"
+> });
 ```
 
-</details>
-
-<details>
-<summary>Ollama</summary>
-
-Install dependencies:
-
+> **Ollama**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/ollama @langchain/core
+> npm install @langchain/ollama @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/ollama @langchain/core
+> yarn add @langchain/ollama @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/ollama @langchain/core
+> pnpm add @langchain/ollama @langchain/core
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { OllamaEmbeddings } from "@langchain/ollama";
-
-const embeddings = new OllamaEmbeddings({
-  model: "llama2",
-  baseUrl: "http://localhost:11434", // Default value
-});
+> import { OllamaEmbeddings } from "@langchain/ollama";
+>
+> const embeddings = new OllamaEmbeddings({
+>   model: "llama2",
+>   baseUrl: "http://localhost:11434", // Default value
+> });
 ```
 
-</details>
-
-<details>
-<summary>Voyage AI</summary>
-
-Install dependencies:
-
+> **Voyage AI**
+>
+> Install dependencies:
+>
 **npm**
 
 ```bash
-npm install @langchain/mongodb @langchain/core
+> npm install @langchain/mongodb @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mongodb @langchain/core
+> yarn add @langchain/mongodb @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mongodb @langchain/core
+> pnpm add @langchain/mongodb @langchain/core
 ```
-
-Add environment variables:
-
+>
+> Add environment variables:
+>
 ```bash
-VOYAGE_API_KEY=your-api-key
+> VOYAGE_API_KEY=your-api-key
 ```
-
-Instantiate the model:
-
+>
+> Instantiate the model:
+>
 ```typescript
-import { VoyageEmbeddings } from "@langchain/mongodb";
-
-const embeddings = new VoyageEmbeddings({
-  model: "voyage-4"
-});
+> import { VoyageEmbeddings } from "@langchain/mongodb";
+>
+> const embeddings = new VoyageEmbeddings({
+>   model: "voyage-4"
+> });
 ```
-
-</details>
 
 **Select vector store:**
 
-<details>
-<summary>Memory</summary>
-
+> **Memory**
+>
 ```bash
-npm i langchain
+> npm i langchain
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add langchain
+> yarn add langchain
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add langchain
+> pnpm add langchain
 ```
-
+>
 ```typescript
-import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
-
-const vectorStore = new MemoryVectorStore(embeddings);
+> import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
+>
+> const vectorStore = new MemoryVectorStore(embeddings);
 ```
 
-</details>
-
-<details>
-<summary>MongoDB</summary>
-
-#### Manual embedding
+> **MongoDB**
+>
+> **Manual embedding**
+>
 **npm**
 
 ```bash
-npm install @langchain/mongodb mongodb @langchain/core
+> npm install @langchain/mongodb mongodb @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mongodb mongodb @langchain/core
+> yarn add @langchain/mongodb mongodb @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mongodb mongodb @langchain/core
+> pnpm add @langchain/mongodb mongodb @langchain/core
 ```
-
+>
 ```typescript
-import { MongoDBAtlasVectorSearch } from "@langchain/mongodb"
-import { MongoClient } from "mongodb";
-
-const client = new MongoClient(process.env.MONGODB_ATLAS_URI!);
-const collection = client
-  .db(process.env.MONGODB_ATLAS_DB_NAME)
-  .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
-
-const vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
-  collection,
-  indexName: "vector_index",
-  textKey: "text",
-  embeddingKey: "embedding",
-});
+> import { MongoDBAtlasVectorSearch } from "@langchain/mongodb"
+> import { MongoClient } from "mongodb";
+>
+> const client = new MongoClient(process.env.MONGODB_ATLAS_URI!);
+> const collection = client
+>   .db(process.env.MONGODB_ATLAS_DB_NAME)
+>   .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
+>
+> const vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
+>   collection,
+>   indexName: "vector_index",
+>   textKey: "text",
+>   embeddingKey: "embedding",
+> });
 ```
-
-#### Automated embedding
+>
+> **Automated embedding**
+>
 **npm**
 
 ```bash
-npm install @langchain/mongodb mongodb @langchain/core
+> npm install @langchain/mongodb mongodb @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mongodb mongodb @langchain/core
+> yarn add @langchain/mongodb mongodb @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mongodb mongodb @langchain/core
+> pnpm add @langchain/mongodb mongodb @langchain/core
 ```
-
+>
 ```typescript
-import { MongoDBAtlasVectorSearch } from "@langchain/mongodb"
-import { MongoClient } from "mongodb";
-
-const client = new MongoClient(process.env.MONGODB_ATLAS_URI!);
-const collection = client
-  .db(process.env.MONGODB_ATLAS_DB_NAME)
-  .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
-
-const vectorStore = new MongoDBAtlasVectorSearch({ collection });
+> import { MongoDBAtlasVectorSearch } from "@langchain/mongodb"
+> import { MongoClient } from "mongodb";
+>
+> const client = new MongoClient(process.env.MONGODB_ATLAS_URI!);
+> const collection = client
+>   .db(process.env.MONGODB_ATLAS_DB_NAME)
+>   .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
+>
+> const vectorStore = new MongoDBAtlasVectorSearch({ collection });
 ```
 
-</details>
-
-<details>
-<summary>Pinecone</summary>
-
+> **Pinecone**
+>
 **npm**
 
 ```bash
-npm install @langchain/pinecone @langchain/core @pinecone-database/pinecone
+> npm install @langchain/pinecone @langchain/core @pinecone-database/pinecone
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/pinecone @langchain/core @pinecone-database/pinecone
+> yarn add @langchain/pinecone @langchain/core @pinecone-database/pinecone
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/pinecone @langchain/core @pinecone-database/pinecone
+> pnpm add @langchain/pinecone @langchain/core @pinecone-database/pinecone
 ```
-
+>
 ```typescript
-import { PineconeStore } from "@langchain/pinecone";
-import { Pinecone as PineconeClient } from "@pinecone-database/pinecone";
-
-const pinecone = new PineconeClient();
-const vectorStore = new PineconeStore(embeddings, {
-  pineconeIndex,
-  maxConcurrency: 5,
-});
+> import { PineconeStore } from "@langchain/pinecone";
+> import { Pinecone as PineconeClient } from "@pinecone-database/pinecone";
+>
+> const pinecone = new PineconeClient();
+> const vectorStore = new PineconeStore(embeddings, {
+>   pineconeIndex,
+>   maxConcurrency: 5,
+> });
 ```
 
-</details>
-
-<details>
-<summary>Redis</summary>
-
+> **Redis**
+>
 **npm**
 
 ```bash
-npm install @langchain/redis @langchain/core redis
+> npm install @langchain/redis @langchain/core redis
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/redis @langchain/core redis
+> yarn add @langchain/redis @langchain/core redis
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/redis @langchain/core redis
+> pnpm add @langchain/redis @langchain/core redis
 ```
-
+>
 ```typescript
-import { RedisVectorStore } from "@langchain/redis";
-
-const vectorStore = new RedisVectorStore(embeddings, {
-  redisClient: client,
-  indexName: "langchainjs-testing",
-});
+> import { RedisVectorStore } from "@langchain/redis";
+>
+> const vectorStore = new RedisVectorStore(embeddings, {
+>   redisClient: client,
+>   indexName: "langchainjs-testing",
+> });
 ```
 
-</details>
-
-<details>
-<summary>Qdrant</summary>
-
+> **Qdrant**
+>
 **npm**
 
 ```bash
-npm install @langchain/qdrant @langchain/core
+> npm install @langchain/qdrant @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/qdrant @langchain/core
+> yarn add @langchain/qdrant @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/qdrant @langchain/core
+> pnpm add @langchain/qdrant @langchain/core
 ```
-
+>
 ```typescript
-import { QdrantVectorStore } from "@langchain/qdrant";
-
-const vectorStore = await QdrantVectorStore.fromExistingCollection(embeddings, {
-  url: process.env.QDRANT_URL,
-  collectionName: "langchainjs-testing",
-});
+> import { QdrantVectorStore } from "@langchain/qdrant";
+>
+> const vectorStore = await QdrantVectorStore.fromExistingCollection(embeddings, {
+>   url: process.env.QDRANT_URL,
+>   collectionName: "langchainjs-testing",
+> });
 ```
 
-</details>
-
-<details>
-<summary>Oracle AI Database</summary>
-
+> **Oracle AI Database**
+>
 **npm**
 
 ```bash
-npm i @oracle/langchain-oracledb @langchain/core
+> npm i @oracle/langchain-oracledb @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @oracle/langchain-oracledb @langchain/core
+> yarn add @oracle/langchain-oracledb @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @oracle/langchain-oracledb @langchain/core
+> pnpm add @oracle/langchain-oracledb @langchain/core
 ```
-
+>
 ```typescript
-import oracledb from "oracledb";
-import { OracleEmbeddings, OracleVS } from "@oracle/langchain-oracledb";
-
-const connection = await oracledb.getConnection({
-  user: process.env.ORACLE_USER,
-  password: process.env.ORACLE_PASSWORD,
-  connectionString: process.env.ORACLE_DSN,
-});
-
-const embeddings = new OracleEmbeddings(connection, {
-  provider: "database",
-  model: process.env.DEMO_ONNX_MODEL ?? "DEMO_MODEL",
-});
-
-const vectorStore = new OracleVS(embeddings, {
-  client: connection,
-  tableName: "DEMO_VECTORS",
-  query: "Find support tickets mentioning service outages.",
-  distanceStrategy: "DOT",
-});
-await vectorStore.initialize();
+> import oracledb from "oracledb";
+> import { OracleEmbeddings, OracleVS } from "@oracle/langchain-oracledb";
+>
+> const connection = await oracledb.getConnection({
+>   user: process.env.ORACLE_USER,
+>   password: process.env.ORACLE_PASSWORD,
+>   connectionString: process.env.ORACLE_DSN,
+> });
+>
+> const embeddings = new OracleEmbeddings(connection, {
+>   provider: "database",
+>   model: process.env.DEMO_ONNX_MODEL ?? "DEMO_MODEL",
+> });
+>
+> const vectorStore = new OracleVS(embeddings, {
+>   client: connection,
+>   tableName: "DEMO_VECTORS",
+>   query: "Find support tickets mentioning service outages.",
+>   distanceStrategy: "DOT",
+> });
+> await vectorStore.initialize();
 ```
 
-</details>
-
-<details>
-<summary>Weaviate</summary>
-
+> **Weaviate**
+>
 **npm**
 
 ```bash
-npm install @langchain/weaviate @langchain/core weaviate-client
+> npm install @langchain/weaviate @langchain/core weaviate-client
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/weaviate @langchain/core weaviate-client
+> yarn add @langchain/weaviate @langchain/core weaviate-client
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/weaviate @langchain/core weaviate-client
+> pnpm add @langchain/weaviate @langchain/core weaviate-client
 ```
-
+>
 ```typescript
-import { WeaviateStore } from "@langchain/weaviate";
-
-const vectorStore = new WeaviateStore(embeddings, {
-    client: weaviateClient,
-    indexName: "Langchainjs_test",
-});
+> import { WeaviateStore } from "@langchain/weaviate";
+>
+> const vectorStore = new WeaviateStore(embeddings, {
+>     client: weaviateClient,
+>     indexName: "Langchainjs_test",
+> });
 ```
-
-</details>
 
 LangChain.js integrates with a variety of vector stores. You can check out a full list below:
 
@@ -772,30 +726,28 @@ LangChain.js integrates with a variety of vector stores. You can check out a ful
 
 | Vectorstore | Downloads |
 | :- | :- |
-| [`WeaviateStore`](weaviate.md) | <span data-sort-value="1102864"><a href="https://www.npmjs.com/package/@langchain/weaviate" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/weaviate?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`PineconeStore`](pinecone.md) | <span data-sort-value="656824"><a href="https://www.npmjs.com/package/@langchain/pinecone" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/pinecone?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`QdrantVectorStore`](qdrant.md) | <span data-sort-value="520848"><a href="https://www.npmjs.com/package/@langchain/qdrant" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/qdrant?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`MongoDBAtlasVectorSearch`](mongodb_atlas.md) | <span data-sort-value="496248"><a href="https://www.npmjs.com/package/@langchain/mongodb" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/mongodb?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`RedisVectorStore`](redis.md) | <span data-sort-value="386818"><a href="https://www.npmjs.com/package/@langchain/redis" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/redis?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`OracleVS`](oracleai.md) | <span data-sort-value="169361"><a href="https://www.npmjs.com/package/@oracle/langchain-oracledb" target="_blank">  <img src="https://img.shields.io/npm/dm/@oracle/langchain-oracledb?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`PGVectorStore`](pgvector.md) | <span data-sort-value="27821"><a href="https://www.npmjs.com/package/@langchain/pgvector" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/pgvector?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Cloudflare vectorize`](cloudflare_vectorize.md) | <span data-sort-value="17423"><a href="https://www.npmjs.com/package/@langchain/cloudflare" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Azure Cosmos DB for MongoDB vCore (deprecated)`](azure_cosmosdb_mongodb.md) | <span data-sort-value="3760"><a href="https://www.npmjs.com/package/@langchain/azure-cosmosdb" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Azure Cosmos DB for NoSQL`](azure_cosmosdb_nosql.md) | <span data-sort-value="3760"><a href="https://www.npmjs.com/package/@langchain/azure-cosmosdb" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Azure DocumentDB`](azure_documentdb.md) | <span data-sort-value="3760"><a href="https://www.npmjs.com/package/@langchain/azure-cosmosdb" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`TurbopufferVectorStore`](turbopuffer.md) | <span data-sort-value="2069"><a href="https://www.npmjs.com/package/@langchain/turbopuffer" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/turbopuffer?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Neo4jVectorStore`](neo4jvector.md) | <span data-sort-value="1014"><a href="https://www.npmjs.com/package/@langchain/neo4j" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/neo4j?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Google cloud SQL for postgresql`](google_cloudsql_pg.md) | <span data-sort-value="619"><a href="https://www.npmjs.com/package/@langchain/google-cloud-sql-pg" target="_blank">  <img src="https://img.shields.io/npm/dm/@langchain/google-cloud-sql-pg?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`SAP HANA Cloud Vector Engine`](sap_hanavector.md) | <span data-sort-value="571"><a href="https://www.npmjs.com/package/@sap/hana-langchain" target="_blank">  <img src="https://img.shields.io/npm/dm/@sap/hana-langchain?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`LambdaDB`](https://docs.lambdadb.ai/guides/get-started/quickstart) | <span data-sort-value="312"><a href="https://www.npmjs.com/package/@functional-systems/langchain-lambdadb" target="_blank">  <img src="https://img.shields.io/npm/dm/@functional-systems/langchain-lambdadb?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`YDB`](ydb.md) | <span data-sort-value="22"><a href="https://www.npmjs.com/package/@ydbjs/langchain" target="_blank">  <img src="https://img.shields.io/npm/dm/@ydbjs/langchain?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`Infino`](https://infino.ai/docs) | <span data-sort-value="18"><a href="https://www.npmjs.com/package/@infino-ai/langchain-infino" target="_blank">  <img src="https://img.shields.io/npm/dm/@infino-ai/langchain-infino?style=flat-square&label=%20&" alt="Downloads per month" class="rounded not-prose" /></a></span> |
-| [`langchain`](memory.md) | <span data-sort-value="-1">N/A</span> |
+| [`WeaviateStore`](weaviate.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/weaviate?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/weaviate) |
+| [`PineconeStore`](pinecone.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/pinecone?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/pinecone) |
+| [`QdrantVectorStore`](qdrant.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/qdrant?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/qdrant) |
+| [`MongoDBAtlasVectorSearch`](mongodb_atlas.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mongodb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mongodb) |
+| [`RedisVectorStore`](redis.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/redis?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/redis) |
+| [`OracleVS`](oracleai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@oracle/langchain-oracledb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@oracle/langchain-oracledb) |
+| [`PGVectorStore`](pgvector.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/pgvector?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/pgvector) |
+| [`Cloudflare vectorize`](cloudflare_vectorize.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
+| [`Azure Cosmos DB for MongoDB vCore (deprecated)`](azure_cosmosdb_mongodb.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/azure-cosmosdb) |
+| [`Azure Cosmos DB for NoSQL`](azure_cosmosdb_nosql.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/azure-cosmosdb) |
+| [`Azure DocumentDB`](azure_documentdb.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/azure-cosmosdb) |
+| [`TurbopufferVectorStore`](turbopuffer.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/turbopuffer?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/turbopuffer) |
+| [`Neo4jVectorStore`](neo4jvector.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/neo4j?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/neo4j) |
+| [`Google cloud SQL for postgresql`](google_cloudsql_pg.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google-cloud-sql-pg?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google-cloud-sql-pg) |
+| [`SAP HANA Cloud Vector Engine`](sap_hanavector.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@sap/hana-langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@sap/hana-langchain) |
+| [`LambdaDB`](https://docs.lambdadb.ai/guides/get-started/quickstart) | [  ![Downloads per month](https://img.shields.io/npm/dm/@functional-systems/langchain-lambdadb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@functional-systems/langchain-lambdadb) |
+| [`YDB`](ydb.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@ydbjs/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@ydbjs/langchain) |
+| [`Infino`](https://infino.ai/docs) | [  ![Downloads per month](https://img.shields.io/npm/dm/@infino-ai/langchain-infino?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@infino-ai/langchain-infino) |
+| [`langchain`](memory.md) | N/A |
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

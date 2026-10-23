@@ -12,7 +12,8 @@ tags: [docs, javascript, langchain, quickstart]
 
 This quickstart shows you how to create a fully functional AI agent in just a few minutes.
 
-> **Prompt:** Build the LangChain quickstart agent
+Build the LangChain quickstart agent
+
 Build a basic LangChain agent in this working directory by following the LangChain quickstart.
 
 ## Step 1: Read the guide
@@ -45,44 +46,47 @@ Ask the user if they want tracing. If yes, ask them to set `LANGSMITH_TRACING=tr
 * Ask rather than guess when a secret, provider choice, or project convention is unclear.
 
 > [!TIP]
+>
 > **Using an AI coding assistant?**
 >
 > * Install the [LangChain Docs MCP servers](../../use-these-docs.md) to give your agent access to up-to-date LangChain documentation and examples.
 >
-> > **Prompt:** Connect LangChain docs MCP servers
->     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
+>   Connect LangChain docs MCP servers
 >
->     Servers to add:
+>   Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
 >
->     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
->     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
+>   Servers to add:
 >
->     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../../use-these-docs.md):
+>   * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
+>   * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
 >
->     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
->     * Codex CLI: `codex mcp add` with each server URL.
->     * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
->     * Claude Desktop: add both URLs under Settings > Connectors.
+>   Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](../../use-these-docs.md):
 >
->     Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
+>   * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
+>   * Codex CLI: `codex mcp add` with each server URL.
+>   * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
+>   * Claude Desktop: add both URLs under Settings > Connectors.
+>
+>   Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
 > * Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks.
 >
-> > **Prompt:** Install LangChain Skills
->     Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
+>   Install LangChain Skills
 >
->     Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
+>   Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
 >
-> ```bash
->     npx skills add langchain-ai/langchain-skills --skill '*' --yes
-> ```
+>   Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
 >
->     If I ask for a global install instead, use:
+>   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   npx skills add langchain-ai/langchain-skills --skill '*' --yes
+>   ```
 >
-> ```bash
->     npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
-> ```
+>   If I ask for a global install instead, use:
 >
->     Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
+>   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>   npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
+>   ```
+>
+>   Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
 
 ## Install dependencies
 
@@ -122,7 +126,8 @@ Get an API key from [any supported model provider](../integrations/providers/ove
 
 Set the API keys in your shell or in a `.env` file, for example:
 
-#### OpenAI
+**OpenAI**
+
 **Shell**
 
 ```bash
@@ -135,7 +140,8 @@ export OPENAI_API_KEY="your-api-key"
 OPENAI_API_KEY=your-api-key
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 **Shell**
 
 ```bash
@@ -148,7 +154,8 @@ export GOOGLE_API_KEY="your-api-key"
 GOOGLE_API_KEY=your-api-key
 ```
 
-#### Claude (Anthropic)
+**Claude (Anthropic)**
+
 **Shell**
 
 ```bash
@@ -161,7 +168,8 @@ export ANTHROPIC_API_KEY="your-api-key"
 ANTHROPIC_API_KEY=your-api-key
 ```
 
-#### OpenRouter
+**OpenRouter**
+
 **Shell**
 
 ```bash
@@ -174,7 +182,8 @@ export OPENROUTER_API_KEY="your-api-key"
 OPENROUTER_API_KEY=your-api-key
 ```
 
-#### Fireworks
+**Fireworks**
+
 **Shell**
 
 ```bash
@@ -187,7 +196,8 @@ export FIREWORKS_API_KEY="your-api-key"
 FIREWORKS_API_KEY=your-api-key
 ```
 
-#### Baseten
+**Baseten**
+
 **Shell**
 
 ```bash
@@ -200,7 +210,8 @@ export BASETEN_API_KEY="your-api-key"
 BASETEN_API_KEY=your-api-key
 ```
 
-#### Ollama
+**Ollama**
+
 **Shell**
 
 ```bash
@@ -217,7 +228,8 @@ export OLLAMA_API_KEY="your-api-key"
 OLLAMA_API_KEY=your-api-key
 ```
 
-#### Azure
+**Azure**
+
 **Shell**
 
 ```bash
@@ -234,7 +246,8 @@ AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com
 AZURE_OPENAI_DEPLOYMENT_NAME=your-deployment
 ```
 
-#### AWS Bedrock
+**AWS Bedrock**
+
 **Shell**
 
 ```bash
@@ -251,7 +264,8 @@ AWS_SECRET_ACCESS_KEY=your-secret-key
 AWS_REGION=us-east-1
 ```
 
-#### HuggingFace
+**HuggingFace**
+
 **Shell**
 
 ```bash
@@ -264,12 +278,14 @@ export HUGGINGFACEHUB_API_TOKEN="hf_..."
 HUGGINGFACEHUB_API_TOKEN=hf_...
 ```
 
-#### Other
+**Other**
+
 See the full list of supported [chat model integrations](../integrations/chat.md).
 
 To load a `.env` file, use [`dotenv`](https://www.npmjs.com/package/dotenv) (`import "dotenv/config"`).
 
 > [!TIP]
+>
 > **Using LangSmith Gateway**
 >
 > The [LangSmith Gateway](../../langsmith/llm-gateway.md) routes most major providers through LangSmith. You can [bring your own provider keys](../../langsmith/llm-gateway-quickstart.md#send-a-request), or use [Gateway Credits](../../langsmith/llm-gateway-credits.md) to access models without a provider key.
@@ -543,6 +559,7 @@ When you run the code and prompt the agent to tell you about the weather in San 
 The agent understands that you are asking about the weather for the city San Francisco and therefore calls the weather tool with the provided city name.
 
 > [!TIP]
+>
 > You can use [any supported model](../integrations/providers/overview.md) by changing the model name and setting up the appropriate API key. Trace what is happening inside your agent with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-quickstart). Follow the [tracing quickstart](../../langsmith/trace-with-langchain.md) to get set up.
 >
 > We recommend you also set up [LangSmith Engine](../../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
@@ -559,7 +576,8 @@ Along the way you will explore the following concepts:
 5. **Deep Agents** for built-in features
 6. **Testing** your agent
 
-### Define the system prompt
+**1. Define the system prompt**
+
 The system prompt defines your agent’s role and behavior. Keep it specific and actionable:
 
 ```ts
@@ -571,7 +589,8 @@ const SYSTEM_PROMPT = `You are a literary data assistant.
 Do not guess line counts or positions—ground them in tool results from the saved file.`;
 ```
 
-### Create tools
+**2. Create tools**
+
 [Tools](tools.md) let a model interact with external systems by calling functions you define.
 Tools can depend on [runtime context](runtime.md) and also interact with [agent memory](short-term-memory.md).
 
@@ -613,59 +632,58 @@ const fetchTextFromUrl = tool(
 ```
 
 > [!NOTE]
+>
 > [Zod](https://zod.dev/) is a library for validating and parsing pre-defined schemas. You can use it to define the input schema for your tools to make sure the agent only calls the tool with the correct arguments.
 >
 > Alternatively, you can define the `schema` property as a [JSON schema](https://json-schema.org/overview/what-is-jsonschema) object. Keep in mind that JSON schemas **won't** be validated at runtime.
 >
-> <details>
-> <summary>Example: Using JSON schema for tool input</summary>
->
-> ```ts
-> import { tool } from "@langchain/core/tools";
->
-> const fetchTextFromUrl = tool(
-> async ({ url }: { url: string }): Promise<string> => {
->     const controller = new AbortController();
->     const timeoutId = setTimeout(() => controller.abort(), 120_000);
->     try {
->     const resp = await fetch(url, {
->         headers: {
->         "User-Agent": "Mozilla/5.0 (compatible; quickstart-research/1.0)",
->         },
->         signal: controller.signal,
->     });
->     if (!resp.ok) {
->         return `Fetch failed: HTTP ${resp.status} ${resp.statusText}`;
->     }
->     return await resp.text();
->     } catch (e) {
->     const msg = e instanceof Error ? e.message : String(e);
->     return `Fetch failed: ${msg}`;
->     } finally {
->     clearTimeout(timeoutId);
->     }
-> },
-> {
->     name: "fetch_text_from_url",
->     description: "Fetch the document from a URL.",
->     schema: {
->     type: "object",
->     properties: {
->         url: {
->         type: "string",
->         description: "The URL of the document to fetch.",
->         format: "uri",
->         },
->     },
->     required: ["url"],
->     },
-> },
-> );
-> ```
->
-> </details>
+> > **Example: Using JSON schema for tool input**
+> >
+> > ```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > import { tool } from "@langchain/core/tools";
+> >
+> > const fetchTextFromUrl = tool(
+> > async ({ url }: { url: string }): Promise<string> => {
+> >     const controller = new AbortController();
+> >     const timeoutId = setTimeout(() => controller.abort(), 120_000);
+> >     try {
+> >     const resp = await fetch(url, {
+> >         headers: {
+> >         "User-Agent": "Mozilla/5.0 (compatible; quickstart-research/1.0)",
+> >         },
+> >         signal: controller.signal,
+> >     });
+> >     if (!resp.ok) {
+> >         return `Fetch failed: HTTP ${resp.status} ${resp.statusText}`;
+> >     }
+> >     return await resp.text();
+> >     } catch (e) {
+> >     const msg = e instanceof Error ? e.message : String(e);
+> >     return `Fetch failed: ${msg}`;
+> >     } finally {
+> >     clearTimeout(timeoutId);
+> >     }
+> > },
+> > {
+> >     name: "fetch_text_from_url",
+> >     description: "Fetch the document from a URL.",
+> >     schema: {
+> >     type: "object",
+> >     properties: {
+> >         url: {
+> >         type: "string",
+> >         description: "The URL of the document to fetch.",
+> >         format: "uri",
+> >         },
+> >     },
+> >     required: ["url"],
+> >     },
+> > },
+> > );
+> > ```
 
-### Configure your model
+**3. Configure your model**
+
 Set up your [language model](models.md) with the right parameters for your use case. For example:
 
 **OpenAI**
@@ -778,7 +796,8 @@ const model = await initChatModel("bedrock:gpt-5.5", {
 
 Depending on the model and provider chosen, initialization parameters may vary; refer to their reference pages for details.
 
-### Add memory
+**4. Add memory**
+
 Add [memory](short-term-memory.md) to your agent to maintain state across interactions. This allows
 the agent to remember previous conversations and context.
 
@@ -789,10 +808,12 @@ const checkpointer = new MemorySaver();
 ```
 
 > [!NOTE]
+>
 > In production, use a persistent checkpointer that saves message history to a database.
 > See [Add and manage memory](../langgraph/add-memory.md#manage-short-term-memory) for more details.
 
-### Create and run the agent
+**5. Create and run the agent**
+
 Now assemble your agent with all the components and run it.
 
 There are two different frameworks for creating agents: LangChain agents and deep agents.
@@ -828,6 +849,7 @@ bun add deepagents
 ```
 
 > [!WARNING]
+>
 > This example sends the entire text of The Great Gatsby to the model and may take a minute or two to respond. You can view example output in the next step.
 
 Let's try both:
@@ -889,6 +911,7 @@ main().catch((err) => {
 The following expander has everything together in a runnable script:
 
 **Full example code**
+
 ```ts
 import { MemorySaver } from "@langchain/langgraph";
 import { createDeepAgent } from "deepagents";
@@ -994,10 +1017,12 @@ main().catch((err) => {
 });
 ```
 
-### Review the results
+**6. Review the results**
+
 The results will differ based on the model and the execution.
 
-#### LangChain agents
+**LangChain agents**
+
 ```txt
 **1) Number of lines containing `Gatsby`:** `null`
 
@@ -1010,7 +1035,8 @@ The Great Gatsby follows the mysterious millionaire Jay Gatsby and his obsession
 I successfully fetched the full text of the eBook using the `fetch_text_from_url` tool. However, because I do not have access to a code execution environment (like Python) or text-processing tools (like `grep`), I cannot deterministically split the text by line breaks, iterate through the thousands of lines, and verify the exact line numbers or match counts. LLMs cannot reliably perform exact line-counting or indexing over massive texts within their context window without external computational tools. As instructed, rather than fabricating or guessing a number, I have output `null` for the exact counts and positions.
 ```
 
-#### Deep agents
+**Deep agents**
+
 ```txt
 Based on the text fetched directly from the Gutenberg URL and analyzed using filesystem search tools, here are the answers to your questions:
 
@@ -1055,6 +1081,7 @@ export LANGSMITH_API_KEY="..."
 Once set, run your script again and then inspect what happened during your agent calls on [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-quickstart) .
 
 > [!TIP]
+>
 > To learn more about tracing your agent with LangSmith, see the [LangSmith documentation](../../langsmith/trace-with-langchain.md).
 >
 > We recommend you also set up [LangSmith Engine](../../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
@@ -1077,8 +1104,6 @@ Continue with:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -13,7 +13,8 @@ tags: [docs, langsmith, javascript, managed-deep-agents-context-hub]
 Managed Deep Agents stores deploy-owned instructions and skills, and optional durable memory, in [LangSmith Context Hub](../use-the-context-hub.md). That split lets you change agent behavior without rebuilding application code, while the project remains the source of truth for lasting instruction and skill updates.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## What lives in Context Hub
 
@@ -105,8 +106,6 @@ For more information, see [Develop locally with LangSmith Studio](managed-deep-a
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-context-hub.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-context-hub.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

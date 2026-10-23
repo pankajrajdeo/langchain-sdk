@@ -11,6 +11,7 @@ tags: [docs, javascript, langgraph, use-functional-api]
 The [**Functional API**](functional-api.md) allows you to add LangGraph's key features ([persistence](persistence.md), [memory](add-memory.md), [human-in-the-loop](interrupts.md), and [streaming](streaming.md)) to your applications with minimal changes to your existing code.
 
 > [!TIP]
+>
 > For conceptual information on the functional API, see [Functional API](functional-api.md).
 
 ## Creating a simple workflow
@@ -32,85 +33,79 @@ const myWorkflow = entrypoint(
 await myWorkflow.invoke({ value: 1, anotherValue: 2 });
 ```
 
-<details>
-<summary>Extended example: simple workflow</summary>
-
+> **Extended example: simple workflow**
+>
 ```typescript
-import { v7 as uuid7 } from "uuid";
-import { entrypoint, task, MemorySaver } from "@langchain/langgraph";
-
-// Task that checks if a number is even
-const isEven = task("isEven", async (number: number) => {
-  return number % 2 === 0;
-});
-
-// Task that formats a message
-const formatMessage = task("formatMessage", async (isEven: boolean) => {
-  return isEven ? "The number is even." : "The number is odd.";
-});
-
-// Create a checkpointer for persistence
-const checkpointer = new MemorySaver();
-
-const workflow = entrypoint(
-  { checkpointer, name: "workflow" },
-  async (inputs: { number: number }) => {
-    // Simple workflow to classify a number
-    const even = await isEven(inputs.number);
-    return await formatMessage(even);
-  }
-);
-
-// Run the workflow with a unique thread ID
-const config = { configurable: { thread_id: uuid7() } };
-const result = await workflow.invoke({ number: 7 }, config);
-console.log(result);
+> import { v7 as uuid7 } from "uuid";
+> import { entrypoint, task, MemorySaver } from "@langchain/langgraph";
+>
+> // Task that checks if a number is even
+> const isEven = task("isEven", async (number: number) => {
+>   return number % 2 === 0;
+> });
+>
+> // Task that formats a message
+> const formatMessage = task("formatMessage", async (isEven: boolean) => {
+>   return isEven ? "The number is even." : "The number is odd.";
+> });
+>
+> // Create a checkpointer for persistence
+> const checkpointer = new MemorySaver();
+>
+> const workflow = entrypoint(
+>   { checkpointer, name: "workflow" },
+>   async (inputs: { number: number }) => {
+>     // Simple workflow to classify a number
+>     const even = await isEven(inputs.number);
+>     return await formatMessage(even);
+>   }
+> );
+>
+> // Run the workflow with a unique thread ID
+> const config = { configurable: { thread_id: uuid7() } };
+> const result = await workflow.invoke({ number: 7 }, config);
+> console.log(result);
 ```
 
-</details>
-
-<details>
-<summary>Extended example: Compose an essay with an LLM</summary>
-
-This example demonstrates how to use the `@task` and `@entrypoint` decorators
-syntactically. Given that a checkpointer is provided, the workflow results will
-be persisted in the checkpointer.
-
+> **Extended example: Compose an essay with an LLM**
+>
+> This example demonstrates how to use the `@task` and `@entrypoint` decorators
+> syntactically. Given that a checkpointer is provided, the workflow results will
+> be persisted in the checkpointer.
+>
 ```typescript
-import { v7 as uuid7 } from "uuid";
-import { ChatOpenAI } from "@langchain/openai";
-import { entrypoint, task, MemorySaver } from "@langchain/langgraph";
-
-const model = new ChatOpenAI({ model: "gpt-3.5-turbo" });
-
-// Task: generate essay using an LLM
-const composeEssay = task("composeEssay", async (topic: string) => {
-  // Generate an essay about the given topic
-  const response = await model.invoke([
-    { role: "system", content: "You are a helpful assistant that writes essays." },
-    { role: "user", content: `Write an essay about ${topic}.` }
-  ]);
-  return response.content as string;
-});
-
-// Create a checkpointer for persistence
-const checkpointer = new MemorySaver();
-
-const workflow = entrypoint(
-  { checkpointer, name: "workflow" },
-  async (topic: string) => {
-    // Simple workflow that generates an essay with an LLM
-    return await composeEssay(topic);
-  }
-);
-
-// Execute the workflow
-const config = { configurable: { thread_id: uuid7() } };
-const result = await workflow.invoke("the history of flight", config);
-console.log(result);
+> import { v7 as uuid7 } from "uuid";
+> import { ChatOpenAI } from "@langchain/openai";
+> import { entrypoint, task, MemorySaver } from "@langchain/langgraph";
+>
+> const model = new ChatOpenAI({ model: "gpt-3.5-turbo" });
+>
+> // Task: generate essay using an LLM
+> const composeEssay = task("composeEssay", async (topic: string) => {
+>   // Generate an essay about the given topic
+>   const response = await model.invoke([
+>     { role: "system", content: "You are a helpful assistant that writes essays." },
+>     { role: "user", content: `Write an essay about ${topic}.` }
+>   ]);
+>   return response.content as string;
+> });
+>
+> // Create a checkpointer for persistence
+> const checkpointer = new MemorySaver();
+>
+> const workflow = entrypoint(
+>   { checkpointer, name: "workflow" },
+>   async (topic: string) => {
+>     // Simple workflow that generates an essay with an LLM
+>     return await composeEssay(topic);
+>   }
+> );
+>
+> // Execute the workflow
+> const config = { configurable: { thread_id: uuid7() } };
+> const result = await workflow.invoke("the history of flight", config);
+> console.log(result);
 ```
-
-</details>
 
 ## Parallel execution
 
@@ -129,49 +124,46 @@ const graph = entrypoint(
 );
 ```
 
-<details>
-<summary>Extended example: parallel LLM calls</summary>
-
-This example demonstrates how to run multiple LLM calls in parallel using `@task`. Each call generates a paragraph on a different topic, and results are joined into a single text output.
-
+> **Extended example: parallel LLM calls**
+>
+> This example demonstrates how to run multiple LLM calls in parallel using `@task`. Each call generates a paragraph on a different topic, and results are joined into a single text output.
+>
 ```typescript
-import { v7 as uuid7 } from "uuid";
-import { ChatOpenAI } from "@langchain/openai";
-import { entrypoint, task, MemorySaver } from "@langchain/langgraph";
-
-// Initialize the LLM model
-const model = new ChatOpenAI({ model: "gpt-3.5-turbo" });
-
-// Task that generates a paragraph about a given topic
-const generateParagraph = task("generateParagraph", async (topic: string) => {
-  const response = await model.invoke([
-    { role: "system", content: "You are a helpful assistant that writes educational paragraphs." },
-    { role: "user", content: `Write a paragraph about ${topic}.` }
-  ]);
-  return response.content as string;
-});
-
-// Create a checkpointer for persistence
-const checkpointer = new MemorySaver();
-
-const workflow = entrypoint(
-  { checkpointer, name: "workflow" },
-  async (topics: string[]) => {
-    // Generates multiple paragraphs in parallel and combines them
-    const paragraphs = await Promise.all(topics.map(generateParagraph));
-    return paragraphs.join("\n\n");
-  }
-);
-
-// Run the workflow
-const config = { configurable: { thread_id: uuid7() } };
-const result = await workflow.invoke(["quantum computing", "climate change", "history of aviation"], config);
-console.log(result);
+> import { v7 as uuid7 } from "uuid";
+> import { ChatOpenAI } from "@langchain/openai";
+> import { entrypoint, task, MemorySaver } from "@langchain/langgraph";
+>
+> // Initialize the LLM model
+> const model = new ChatOpenAI({ model: "gpt-3.5-turbo" });
+>
+> // Task that generates a paragraph about a given topic
+> const generateParagraph = task("generateParagraph", async (topic: string) => {
+>   const response = await model.invoke([
+>     { role: "system", content: "You are a helpful assistant that writes educational paragraphs." },
+>     { role: "user", content: `Write a paragraph about ${topic}.` }
+>   ]);
+>   return response.content as string;
+> });
+>
+> // Create a checkpointer for persistence
+> const checkpointer = new MemorySaver();
+>
+> const workflow = entrypoint(
+>   { checkpointer, name: "workflow" },
+>   async (topics: string[]) => {
+>     // Generates multiple paragraphs in parallel and combines them
+>     const paragraphs = await Promise.all(topics.map(generateParagraph));
+>     return paragraphs.join("\n\n");
+>   }
+> );
+>
+> // Run the workflow
+> const config = { configurable: { thread_id: uuid7() } };
+> const result = await workflow.invoke(["quantum computing", "climate change", "history of aviation"], config);
+> console.log(result);
 ```
-
-This example uses LangGraph's concurrency model to improve execution time, especially when tasks involve I/O like LLM completions.
-
-</details>
+>
+> This example uses LangGraph's concurrency model to improve execution time, especially when tasks involve I/O like LLM completions.
 
 ## Calling graphs
 
@@ -200,44 +192,41 @@ const someWorkflow = entrypoint(
 );
 ```
 
-<details>
-<summary>Extended example: calling a simple graph from the functional API</summary>
-
+> **Extended example: calling a simple graph from the functional API**
+>
 ```typescript
-import { v7 as uuid7 } from "uuid";
-import { entrypoint, MemorySaver, StateGraph, StateSchema } from "@langchain/langgraph";
-import * as z from "zod";
-
-// Define the shared state type
-const State = new StateSchema({
-  foo: z.number(),
-});
-
-// Build the graph using the Graph API
-const builder = new StateGraph(State)
-  .addNode("double", (state) => {
-    return { foo: state.foo * 2 };
-  })
-  .addEdge("__start__", "double");
-const graph = builder.compile();
-
-// Define the functional API workflow
-const checkpointer = new MemorySaver();
-
-const workflow = entrypoint(
-  { checkpointer, name: "workflow" },
-  async (x: number) => {
-    const result = await graph.invoke({ foo: x });
-    return { bar: result.foo };
-  }
-);
-
-// Execute the workflow
-const config = { configurable: { thread_id: uuid7() } };
-console.log(await workflow.invoke(5, config)); // Output: { bar: 10 }
+> import { v7 as uuid7 } from "uuid";
+> import { entrypoint, MemorySaver, StateGraph, StateSchema } from "@langchain/langgraph";
+> import * as z from "zod";
+>
+> // Define the shared state type
+> const State = new StateSchema({
+>   foo: z.number(),
+> });
+>
+> // Build the graph using the Graph API
+> const builder = new StateGraph(State)
+>   .addNode("double", (state) => {
+>     return { foo: state.foo * 2 };
+>   })
+>   .addEdge("__start__", "double");
+> const graph = builder.compile();
+>
+> // Define the functional API workflow
+> const checkpointer = new MemorySaver();
+>
+> const workflow = entrypoint(
+>   { checkpointer, name: "workflow" },
+>   async (x: number) => {
+>     const result = await graph.invoke({ foo: x });
+>     return { bar: result.foo };
+>   }
+> );
+>
+> // Execute the workflow
+> const config = { configurable: { thread_id: uuid7() } };
+> console.log(await workflow.invoke(5, config)); // Output: { bar: 10 }
 ```
-
-</details>
 
 ## Call other entrypoints
 
@@ -261,39 +250,36 @@ const myWorkflow = entrypoint(
 );
 ```
 
-<details>
-<summary>Extended example: calling another entrypoint</summary>
-
+> **Extended example: calling another entrypoint**
+>
 ```typescript
-import { v7 as uuid7 } from "uuid";
-import { entrypoint, MemorySaver } from "@langchain/langgraph";
-
-// Initialize a checkpointer
-const checkpointer = new MemorySaver();
-
-// A reusable sub-workflow that multiplies a number
-const multiply = entrypoint(
-  { name: "multiply" },
-  async (inputs: { a: number; b: number }) => {
-    return inputs.a * inputs.b;
-  }
-);
-
-// Main workflow that invokes the sub-workflow
-const main = entrypoint(
-  { checkpointer, name: "main" },
-  async (inputs: { x: number; y: number }) => {
-    const result = await multiply.invoke({ a: inputs.x, b: inputs.y });
-    return { product: result };
-  }
-);
-
-// Execute the main workflow
-const config = { configurable: { thread_id: uuid7() } };
-console.log(await main.invoke({ x: 6, y: 7 }, config)); // Output: { product: 42 }
+> import { v7 as uuid7 } from "uuid";
+> import { entrypoint, MemorySaver } from "@langchain/langgraph";
+>
+> // Initialize a checkpointer
+> const checkpointer = new MemorySaver();
+>
+> // A reusable sub-workflow that multiplies a number
+> const multiply = entrypoint(
+>   { name: "multiply" },
+>   async (inputs: { a: number; b: number }) => {
+>     return inputs.a * inputs.b;
+>   }
+> );
+>
+> // Main workflow that invokes the sub-workflow
+> const main = entrypoint(
+>   { checkpointer, name: "main" },
+>   async (inputs: { x: number; y: number }) => {
+>     const result = await multiply.invoke({ a: inputs.x, b: inputs.y });
+>     return { product: result };
+>   }
+> );
+>
+> // Execute the main workflow
+> const config = { configurable: { thread_id: uuid7() } };
+> console.log(await main.invoke({ x: 6, y: 7 }, config)); // Output: { product: 42 }
 ```
-
-</details>
 
 ## Streaming
 
@@ -314,8 +300,9 @@ for await (const chunk of stream.values) {
 // 10
 ```
 
-#### [View example trace](https://smith.langchain.com/public/8737a21a-1a44-47ce-b3bd-880a15fc7375/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/a8e1b6e9-202c-4541-8faa-5cbc0d8abde3/r)**
+>
+> Open a public LangSmith run for this example.
 
 1. Emit custom data before computation begins.
 2. Emit another custom message after computing the result.
@@ -695,8 +682,6 @@ Short-term memory allows storing information across different **invocations** of
 
 You can view and delete the information stored by the checkpointer.
 
-<a id="checkpoint" />
-
 #### View thread state
 
 ```typescript
@@ -736,8 +721,6 @@ StateSnapshot {
   interrupts: []
 }
 ```
-
-<a id="checkpoints" />
 
 #### View the history of the thread
 
@@ -807,7 +790,7 @@ console.log(await accumulate.invoke(3, config)); // 3
 
 ### Chatbot example
 
-An example of a simple chatbot using the functional API and the [`InMemorySaver`](https://reference.langchain.com/javascript/classes/_langchain_langgraph-checkpoint.MemorySaver.html) checkpointer.
+An example of a simple chatbot using the functional API and the [`InMemorySaver`](https://reference.langchain.com/javascript/langchain-langgraph-checkpoint/index/MemorySaver) checkpointer.
 
 The bot is able to remember the previous conversation and continue from where it left off.
 
@@ -881,8 +864,6 @@ for await (const snapshot of stream2.values) {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-functional-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-functional-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

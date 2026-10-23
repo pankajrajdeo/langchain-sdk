@@ -18,7 +18,7 @@ This will help you getting started with `ChatAnthropic` [chat models](../../lang
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/anthropic/) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/anthropic.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatAnthropic`](https://reference.langchain.com/javascript/langchain-anthropic/ChatAnthropic) | [`@langchain/anthropic`](https://www.npmjs.com/package/@langchain/anthropic) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/anthropic?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/anthropic?style=flat-square\&label=%20&) |
 
@@ -107,6 +107,7 @@ Support by model:
 | `claude-opus-4-6`, `claude-sonnet-4-6`, `claude-haiku-4-5`, and earlier | Accepted |
 
 > [!WARNING]
+>
 > **Upgrading the model string?**
 >
 > Code written as `new ChatAnthropic({ model, temperature: 0 })` breaks when you upgrade the model to one of the newer models above. Remove the sampling parameters rather than adjusting their values. On these models, steer output style through prompting instead. See the [Anthropic migration guide](https://platform.claude.com/docs/en/about-claude/models/migration-guide) for details.
@@ -949,7 +950,7 @@ console.log(JSON.stringify(result.content, null, 2));
 
 ```
 
-Learn more about [how RAG works in LangChain](https://js.langchain.com/docs/concepts/rag/)
+Learn more about [how RAG works in LangChain](../../langchain/retrieval.md)
 
 [Learn more about tool calling](../../langchain/tools.md)
 
@@ -991,7 +992,7 @@ const messageWithSplitDocuments = {
   role: "user",
   content: [
     formatToAnthropicDocuments(documents),
-    { type: "text", text: "Give me a link to LangChain's tutorials. Cite your sources" },
+    { type: "text", text: "Give me a link to LangChain's getting started guide. Cite your sources" },
   ],
 };
 
@@ -1008,15 +1009,15 @@ console.log(JSON.stringify(resWithSplits.content, null, 2));
 [
   {
     "type": "text",
-    "text": "Based on the documentation, I can provide you with a link to LangChain's tutorials:\n\n"
+    "text": "Based on the documentation, I can provide you with a link to LangChain's getting started guide:\n\n"
   },
   {
     "type": "text",
-    "text": "The tutorials can be found at: https://js.langchain.com/docs/tutorials/",
+    "text": "The getting started guide can be found at: https://docs.langchain.com/oss/javascript/langchain/overview",
     "citations": [
       {
         "type": "content_block_location",
-        "cited_text": "[Tutorial](https://js.langchain.com/docs/tutorials/) walkthroughs",
+        "cited_text": "[Getting started](https://docs.langchain.com/oss/javascript/langchain/overview): Installation, setting up the environment, simple examples",
         "document_index": 0,
         "document_title": null,
         "start_block_index": 191,
@@ -1030,6 +1031,7 @@ console.log(JSON.stringify(resWithSplits.content, null, 2));
 ## Mid-conversation system messages
 
 > [!NOTE]
+>
 > Mid-conversation system messages require `@langchain/anthropic>=1.5.11`.
 
 Supported Claude models accept a [system message partway through a conversation](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages). Its instructions apply from that point onward. Adding one leaves the earlier turns unchanged, so it does not invalidate the [prompt cache](#prompt-caching) for them.
@@ -1058,6 +1060,7 @@ For wording guidance and the full placement rules, see the [Claude documentation
 ### Change tools mid-conversation
 
 > [!NOTE]
+>
 > Mid-conversation tool changes require `@langchain/anthropic>=1.5.12`.
 
 A mid-conversation `SystemMessage` can also add or remove tools with Anthropic's [`tool_addition` and `tool_removal`](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages#mid-conversation-tool-changes) content blocks. Editing `tools` on the request invalidates the prompt cache for the whole conversation. These blocks leave `tools` unchanged, so the cached prefix still matches.
@@ -1159,6 +1162,7 @@ Anthropic supports a context editing feature that will automatically manage the 
 See [Anthropic documentation](https://platform.claude.com/docs/en/build-with-claude/context-editing) for details and configuration options.
 
 > [!NOTE]
+>
 > **Context management is supported since `@langchain/anthropic@0.3.29`**
 
 ```typescript
@@ -1185,8 +1189,6 @@ For detailed documentation of all `ChatAnthropic` features and configurations he
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

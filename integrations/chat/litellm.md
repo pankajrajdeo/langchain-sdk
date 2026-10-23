@@ -152,6 +152,7 @@ It is important to note that antibiotics only work against bacterial infections 
 Use Google Search grounding with Gemini Enterprise Agent Platform models (e.g., `gemini-3.6-flash`). Grounding metadata is returned in `response_metadata`, for both batch and streaming calls.
 
 > [!NOTE]
+>
 > Reading streamed grounding metadata from `response_metadata` requires `langchain-litellm>=0.11.0`. Before that, `ChatLiteLLM` returns it in `additional_kwargs`, and `ChatLiteLLMRouter` does not return it when streaming.
 
 **Setup**
@@ -201,6 +202,7 @@ if "provider_specific_fields" in output.response_metadata:
 ### Responses API
 
 > [!NOTE]
+>
 > `use_responses_api` requires `langchain-litellm>=0.10.0`.
 
 Set `use_responses_api=True` to send `ChatLiteLLM` calls to the provider's [Responses API](https://docs.litellm.ai/docs/response_api) instead of Chat Completions. LiteLLM translates each request and reply, so messages, tools, streaming, and structured output work as usual. OpenAI's built-in tools, such as web search, need this route:
@@ -222,6 +224,7 @@ print(response.text)
 #### Reasoning items
 
 > [!NOTE]
+>
 > Keeping reasoning items requires `langchain-litellm>=0.11.0`.
 
 A reasoning model on the Responses API returns its reasoning as [reasoning items](https://developers.openai.com/api/docs/guides/reasoning). Sending a turn's item back on the next request lets the model continue its reasoning through a tool loop rather than start again after each tool call. An item goes back only with its encrypted content, which OpenAI returns by default on stateless requests, sent with `"store": False`. OpenAI also accepts an explicit `include` for that content:
@@ -306,8 +309,6 @@ For detailed documentation of all `ChatLiteLLM` and `ChatLiteLLMRouter` features
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/litellm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/litellm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

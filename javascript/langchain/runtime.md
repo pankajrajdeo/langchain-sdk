@@ -21,6 +21,7 @@ LangGraph exposes a [`Runtime`](https://reference.langchain.com/javascript/langc
 5. **Server info**: server-specific metadata when running on LangGraph Server (assistant ID, graph ID, authenticated user)
 
 > [!TIP]
+>
 > The runtime context is how you thread data through your agent. Rather than storing things in global state, you can attach values—like a database connection, user session, or configuration—to the context and access them inside tools and middleware. This keeps things stateless, testable, and reusable.
 
 You can access the runtime information within [tools](#inside-tools) and [middleware](#inside-middleware).
@@ -132,6 +133,7 @@ const contextAwareTool = tool(
 `serverInfo` is `null` when not running on LangGraph Server (e.g., during local development).
 
 > [!NOTE]
+>
 > Requires `deepagents>=1.9.0` (or `@langchain/langgraph>=1.2.8`) for `runtime.executionInfo` and `runtime.serverInfo`.
 
 ### Inside middleware
@@ -216,12 +218,11 @@ const authGate = createMiddleware({
 ```
 
 > [!NOTE]
+>
 > Requires `deepagents>=1.9.0` (or `@langchain/langgraph>=1.2.8`).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/runtime.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/runtime.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

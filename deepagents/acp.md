@@ -14,6 +14,7 @@ tags: [docs, deepagents, acp]
 With the ACP protocol, you can make use of your custom deep agents with any ACP-compatible client, allowing your code editor to provide project context and receive rich updates.
 
 > [!NOTE]
+>
 > ACP is designed for agent-editor integrations. If you want your agent to call tools hosted by external servers, see [Model Context Protocol (MCP)](../langchain/mcp.md).
 
 ## Quickstart
@@ -225,8 +226,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#### [Example coding agent](https://github.com/langchain-ai/deepagents/blob/main/libs/acp/examples/demo_agent.py)
-The `deepagents-acp` package includes an example coding agent with filesystem and shell that you can run out of the box.
+> **[Example coding agent](https://github.com/langchain-ai/deepagents/blob/main/libs/acp/examples/demo_agent.py)**
+>
+> The `deepagents-acp` package includes an example coding agent with filesystem and shell that you can run out of the box.
 
 ## Clients
 
@@ -286,6 +288,7 @@ toad acp "uv run python path/to/your_server.py" .
 ```
 
 > [!NOTE]
+>
 > See the upstream ACP docs for protocol details and editor support:
 >
 > * Introduction: [https://agentclientprotocol.com/get-started/introduction](https://agentclientprotocol.com/get-started/introduction)
@@ -293,8 +296,6 @@ toad acp "uv run python path/to/your_server.py" .
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/acp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/acp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

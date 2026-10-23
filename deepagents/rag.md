@@ -16,7 +16,7 @@ These applications use a technique known as Retrieval Augmented Generation, or [
 
 [Deep Agents](overview.md) gives you primitives for RAG: custom retrieval tools, a [filesystem backend](backends.md), [subagents](subagents.md), [skills](skills.md), and [grading rubrics](rubric.md). You can combine them in different ways depending on your corpus size, latency requirements, and how strictly answers must be grounded in source data.
 
-This guide introduces several RAG patterns and walks through one end-to-end example: a documentation Q\&A agent that indexes a subset of [docs.langchain.com](../home.md), retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents so the orchestrator context stays clean.
+This guide introduces several RAG patterns and walks through one end-to-end example: a documentation Q\&A agent that indexes a subset of [docs.langchain.com](../index.md), retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents so the orchestrator context stays clean.
 
 ## RAG patterns
 
@@ -28,6 +28,7 @@ Deep Agents allows you to orchestrate retrieval, analysis, and synthesis in seve
 * **Retrieve, offload, and delegate**: The user asks a question. The agent retrieves matching chunks and writes them to the filesystem backend rather than keeping full text in the orchestrator context. Subagents read, search, and summarize individual files in parallel. For large documents, the agent can paginate through files with built-in search tools or run a [code interpreter](code/overview.md) to produce tables, timelines, or visuals from source data.
 
 > [!NOTE]
+>
 > Grading rubrics require `deepagents>=0.6.5` and are currently in [beta](../langsmith/release-stages.md).
 
 This tutorial implements the **retrieve, offload, and delegate** pattern. The same primitives appear in the other patterns: skills often wrap retrieval workflows, rubrics can grade any of these flows, and opt-in todo planning helps break complex questions into focused searches.
@@ -212,8 +213,9 @@ result = baseline_agent.invoke(
 print(result["messages"][-1].text)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/cc30c5b2-c787-41ea-800c-a0f835bdcce5/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/9e5d5ccc-eb86-4a0d-896b-6104d648e7ce/r)**
+>
+> Open a public LangSmith run for this example.
 
 Without retrieval, the agent cannot look up current LangChain documentation. Responses tend to be generic, may omit guidance such as [subagent streaming](frontend/subagent-streaming.md), or include outdated information.
 
@@ -235,13 +237,15 @@ API keys for:
 
 ## Setup
 
-### Create project directory
+**1. Create project directory**
+
 ```bash
 mkdir docs-rag-agent
 cd docs-rag-agent
 ```
 
-### Install dependencies
+**2. Install dependencies**
+
 **pip**
 
 ```bash
@@ -256,7 +260,8 @@ uv add deepagents langchain "langchain[openai]" langchain-text-splitters request
 uv sync
 ```
 
-### Set API keys
+**3. Set API keys**
+
 ```bash
 export OPENAI_API_KEY="your_openai_api_key"
 export ANTHROPIC_API_KEY="your_anthropic_api_key"   # If using Claude
@@ -265,7 +270,8 @@ export GOOGLE_API_KEY="your_google_api_key"         # If using Gemini
 
 For any other provider, please see the respective [chat model](../integrations/chat.md) documentation.
 
-### Set up LangSmith
+**4. Set up LangSmith**
+
 RAG applications run retrieval and generation in sequence. When you run the examples in this tutorial, [LangSmith](../langsmith/observability.md) logs a trace for each query so you can inspect retrieval, tool calls, and model responses.
 After you [sign up for LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-rag), set your environment variables to start logging traces:
 
@@ -285,6 +291,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 ```
 
 > [!TIP]
+>
 > If you are building a production agent, we also recommend you set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Index LangChain documentation
@@ -298,7 +305,7 @@ Indexing commonly works in four steps:
 3. **[Embed](#select-an-embeddings-model)**: [Embeddings](../integrations/embeddings.md) models convert each chunk into a numeric vector that captures its meaning, enabling similarity search over your content.
 4. **[Store](#store-chunks-and-embeddings-in-vectorstore)**: Use a [VectorStore](../integrations/vectorstores.md) to index chunks and their embeddings for retrieval.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/rag_indexing.png?fit=max&auto=format&n=I6RpA28iE233vhYX&q=85&s=21403ce0d0c772da84dcc5b75cff4451" alt="index_diagram" width="2583" height="1299" data-path="images/rag_indexing.png" />
+![index\_diagram](https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/rag_indexing.png?fit=max\&auto=format\&n=I6RpA28iE233vhYX\&q=85\&s=21403ce0d0c772da84dcc5b75cff4451)
 
 In the indexing step, fetch documentation pages, split them into chunks, embed the chunks, and store them in a `VectorStore`. The agent searches this index at runtime; it does not re-fetch the full site on every question.
 
@@ -336,6 +343,7 @@ DOC_PATHS = [
 ```
 
 > [!NOTE]
+>
 > For a more detailed tutorial on indexing, vector stores, and retrieval, see [Semantic search](../langchain/knowledge-base.md).
 
 ### Load documents
@@ -417,7 +425,8 @@ An [embedding](../integrations/embeddings.md) is a numeric vector that captures 
 
 You can choose from many different [embedding integrations](../integrations/embeddings.md) which all use the same [Interface](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings):
 
-#### OpenAI
+**OpenAI**
+
 ```shell
 pip install -U "langchain-openai"
 ```
@@ -434,7 +443,8 @@ from langchain_openai import OpenAIEmbeddings
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 ```
 
-#### Azure
+**Azure**
+
 ```shell
 pip install -U "langchain-openai"
 ```
@@ -455,7 +465,8 @@ embeddings = AzureOpenAIEmbeddings(
 )
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 ```shell
 pip install -qU langchain-google-genai
 ```
@@ -472,7 +483,8 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 ```
 
-#### Gemini Enterprise Agent Platform
+**Gemini Enterprise Agent Platform**
+
 ```shell
 pip install -qU langchain-google-vertexai
 ```
@@ -483,7 +495,8 @@ from langchain_google_vertexai import VertexAIEmbeddings
 embeddings = VertexAIEmbeddings(model="text-embedding-005")
 ```
 
-#### AWS
+**AWS**
+
 ```shell
 pip install -qU langchain-aws
 ```
@@ -494,7 +507,8 @@ from langchain_aws import BedrockEmbeddings
 embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
 ```
 
-#### HuggingFace
+**HuggingFace**
+
 ```shell
 pip install -qU langchain-huggingface
 ```
@@ -508,7 +522,8 @@ embeddings = HuggingFaceEmbeddings(
 )
 ```
 
-#### Ollama
+**Ollama**
+
 ```shell
 pip install -qU langchain-ollama
 ```
@@ -519,7 +534,8 @@ from langchain_ollama import OllamaEmbeddings
 embeddings = OllamaEmbeddings(model="llama3")
 ```
 
-#### Cohere
+**Cohere**
+
 ```shell
 pip install -qU langchain-cohere
 ```
@@ -536,7 +552,8 @@ from langchain_cohere import CohereEmbeddings
 embeddings = CohereEmbeddings(model="embed-english-v3.0")
 ```
 
-#### MistralAI
+**MistralAI**
+
 ```shell
 pip install -qU langchain-mistralai
 ```
@@ -553,7 +570,8 @@ from langchain_mistralai import MistralAIEmbeddings
 embeddings = MistralAIEmbeddings(model="mistral-embed")
 ```
 
-#### Nomic
+**Nomic**
+
 ```shell
 pip install -qU langchain-nomic
 ```
@@ -570,7 +588,8 @@ from langchain_nomic import NomicEmbeddings
 embeddings = NomicEmbeddings(model="nomic-embed-text-v1.5")
 ```
 
-#### NVIDIA
+**NVIDIA**
+
 ```shell
 pip install -qU langchain-nvidia-ai-endpoints
 ```
@@ -587,7 +606,8 @@ from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
 embeddings = NVIDIAEmbeddings(model="NV-Embed-QA")
 ```
 
-#### Voyage AI
+**Voyage AI**
+
 ```shell
 pip install -qU langchain-voyageai
 ```
@@ -599,12 +619,13 @@ import os
 if not os.environ.get("VOYAGE_API_KEY"):
     os.environ["VOYAGE_API_KEY"] = getpass.getpass("Enter API key for Voyage AI: ")
 
-from langchain-voyageai import VoyageAIEmbeddings
+from langchain_voyageai import VoyageAIEmbeddings
 
 embeddings = VoyageAIEmbeddings(model="voyage-3")
 ```
 
-#### IBM watsonx
+**IBM watsonx**
+
 ```shell
 pip install -qU langchain-ibm
 ```
@@ -625,7 +646,8 @@ embeddings = WatsonxEmbeddings(
 )
 ```
 
-#### Fake
+**Fake**
+
 ```shell
 pip install -qU langchain-core
 ```
@@ -636,7 +658,8 @@ from langchain_core.embeddings import DeterministicFakeEmbedding
 embeddings = DeterministicFakeEmbedding(size=4096)
 ```
 
-#### Isaacus
+**Isaacus**
+
 ```shell
 pip install -qU langchain-isaacus
 ```
@@ -646,7 +669,7 @@ import getpass
 import os
 
 if not os.environ.get("ISAACUS_API_KEY"):
-os.environ["ISAACUS_API_KEY"] = getpass.getpass("Enter API key for Isaacus: ")
+    os.environ["ISAACUS_API_KEY"] = getpass.getpass("Enter API key for Isaacus: ")
 
 from langchain_isaacus import IsaacusEmbeddings
 
@@ -659,7 +682,8 @@ A [`VectorStore`](../integrations/vectorstores.md) persists document chunks and 
 You can choose from many different [vector store integrations](../integrations/vectorstores.md) which all use the same [Interface](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore).
 Use the embeddings model that you selected in the previous step to configure your `VectorStore`:
 
-#### In-memory
+**In-memory**
+
 ```shell
 pip install -U "langchain-core"
 ```
@@ -670,7 +694,8 @@ from langchain_core.vectorstores import InMemoryVectorStore
 vector_store = InMemoryVectorStore(embeddings)
 ```
 
-#### Amazon OpenSearch
+**Amazon OpenSearch**
+
 ```shell
 pip install -qU  boto3
 ```
@@ -698,7 +723,8 @@ vector_store = OpenSearchVectorSearch.from_documents(
 )
 ```
 
-#### AstraDB
+**AstraDB**
+
 ```shell
 pip install -U "langchain-astradb"
 ```
@@ -715,7 +741,8 @@ vector_store = AstraDBVectorStore(
 )
 ```
 
-#### Chroma
+**Chroma**
+
 ```shell
 pip install -qU langchain-chroma
 ```
@@ -730,7 +757,8 @@ vector_store = Chroma(
 )
 ```
 
-#### Milvus
+**Milvus**
+
 ```shell
 pip install -qU langchain-milvus
 ```
@@ -747,7 +775,8 @@ vector_store = Milvus(
 )
 ```
 
-#### MongoDB
+**MongoDB**
+
 ```shell
 pip install -qU langchain-mongodb
 ```
@@ -763,7 +792,8 @@ vector_store = MongoDBAtlasVectorSearch(
 )
 ```
 
-#### PGVector
+**PGVector**
+
 ```shell
 pip install -qU langchain-postgres
 ```
@@ -778,7 +808,8 @@ vector_store = PGVector(
 )
 ```
 
-#### PGVectorStore
+**PGVectorStore**
+
 ```shell
 pip install -qU langchain-postgres
 ```
@@ -797,7 +828,8 @@ vector_store = PGVectorStore.create_sync(
 )
 ```
 
-#### Pinecone
+**Pinecone**
+
 ```shell
 pip install -qU langchain-pinecone
 ```
@@ -812,7 +844,8 @@ index = pc.Index(index_name)
 vector_store = PineconeVectorStore(embedding=embeddings, index=index)
 ```
 
-#### Qdrant
+**Qdrant**
+
 ```shell
 pip install -qU langchain-qdrant
 ```
@@ -852,6 +885,7 @@ Indexed 782 chunks.
 ```
 
 > [!TIP]
+>
 > Indexing runs once at startup in this tutorial. In production, persist the vector store to disk or a hosted vector database and refresh it on a schedule when documentation changes.
 
 This completes the **Indexing** portion of the tutorial. You now have a queryable vector store containing chunked LangChain documentation.
@@ -861,20 +895,20 @@ The next step is to build a Deep Agent that searches this index at run time, off
 1. **Retrieve**: Given a user input, relevant splits are retrieved from storage using a [Retriever](../integrations/retrievers.md).
 2. **Generate**: A [model](../langchain/models.md) produces an answer using a prompt that includes both the question and the retrieved data.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/rag_retrieval_generation.png?fit=max&auto=format&n=I6RpA28iE233vhYX&q=85&s=994c3585cece93c80873d369960afd44" alt="retrieval_diagram" width="2532" height="1299" data-path="images/rag_retrieval_generation.png" />
+![retrieval\_diagram](https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/rag_retrieval_generation.png?fit=max\&auto=format\&n=I6RpA28iE233vhYX\&q=85\&s=994c3585cece93c80873d369960afd44)
 
 ## Build the agent
 
 Add this code to `agent.py`:
 
-### Add the search tool
+**1. Add the search tool**
+
 The `search_documentation` tool runs similarity search against the indexed corpus, then writes each retrieved chunk to the agent filesystem under `/retrieved/{batch_id}/`. It returns file paths so the orchestrator can delegate analysis without loading full chunk text into its context.
 
 The tool writes retrieved chunks to the agent backend with `backend.upload_files()`. Pass the same backend instance to `create_deep_agent` so built-in filesystem tools such as `read_file` and `grep` can read the saved paths.
 
 ```python
-import uuid
-
+from langchain_core.utils.uuid import uuid7
 from deepagents.backends import StateBackend
 from langchain.tools import tool
 
@@ -891,7 +925,7 @@ def search_documentation(query: str) -> str:
         File paths where retrieved chunks were saved under /retrieved/.
     """
     retrieved_docs = vector_store.similarity_search(query, k=4)
-    batch_id = uuid.uuid4().hex[:8]
+    batch_id = uuid7().hex[:8]
     uploads: list[tuple[str, bytes]] = []
     saved_paths: list[str] = []
 
@@ -911,7 +945,8 @@ def search_documentation(query: str) -> str:
     )
 ```
 
-### Add prompts
+**2. Add prompts**
+
 Add the orchestrator workflow and subagent prompt templates to `agent.py`:
 
 ```python
@@ -962,7 +997,8 @@ Your role is to coordinate chunk analysis by delegating to the chunk-analyst sub
 - Prefer concrete steps and code-oriented guidance from the documentation."""
 ```
 
-### Create the agent
+**3. Create the agent**
+
 Add model initialization and agent creation to `agent.py`:
 
 **Google**
@@ -1264,6 +1300,7 @@ If you enabled LangSmith in [Setup](#setup), open [LangSmith](https://smith.lang
 ## Security considerations
 
 > [!WARNING]
+>
 > RAG applications are susceptible to **indirect prompt injection**. Retrieved documentation may contain text that resembles instructions. Because retrieved chunks share the context window with your system prompt, models may follow instructions embedded in documentation rather than your intended prompt.
 
 No prompt or delimiter strategy fully prevents indirect prompt injection. The orchestrator and subagent prompts in this tutorial ask the model to treat retrieved content as data only, and the search tool prefixes chunks with a `# Source:` header so analysts can distinguish metadata from body content. These patterns can help in some cases, but they do not provide reliable protection.
@@ -1279,8 +1316,7 @@ The following is the complete script for the agent using one set of example mode
 Save as `agent.py` and run with `python agent.py`:
 
 ```python
-import uuid
-
+from langchain_core.utils.uuid import uuid7
 import requests
 from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
@@ -1353,7 +1389,7 @@ def search_documentation(query: str) -> str:
         File paths where retrieved chunks were saved under /retrieved/.
     """
     retrieved_docs = vector_store.similarity_search(query, k=4)
-    batch_id = uuid.uuid4().hex[:8]
+    batch_id = uuid7().hex[:8]
     uploads: list[tuple[str, bytes]] = []
     saved_paths: list[str] = []
 
@@ -1457,6 +1493,10 @@ if __name__ == "__main__":
             print(msg.text)
 ```
 
+> **[View example trace](https://smith.langchain.com/public/6028e45a-23d0-4073-968c-19d161910ef8/r)**
+>
+> Open a public LangSmith run for this example.
+
 ## Next steps
 
 You implemented one RAG pattern with [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). Combine it with other Deep Agents capabilities or try a different pattern from [RAG patterns](#rag-patterns):
@@ -1469,8 +1509,6 @@ You implemented one RAG pattern with [`create_deep_agent`](https://reference.lan
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/orgs/current/service-keys:
     get:
@@ -180,12 +183,12 @@ paths:
           in: query
           required: false
           schema:
-            type: array
             items:
               type: string
               format: uuid
-            default: []
+            type: array
             title: Workspace Ids
+            default: []
       responses:
         '200':
           description: Successful Response
@@ -284,6 +287,24 @@ components:
             - type: string
             - type: 'null'
           title: Created By
+        is_tracing_key:
+          type: boolean
+          title: Is Tracing Key
+          default: false
+        workspace_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Workspace Ids
+          default: []
+        can_delete:
+          type: boolean
+          title: Can Delete
+          description: >-
+            Whether tracing-key deletion authority has been confirmed. Legacy
+            key responses do not evaluate this capability.
+          default: false
       type: object
       required:
         - id

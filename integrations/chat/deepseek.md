@@ -13,18 +13,20 @@ tags: [docs, integrations, chat, deepseek]
 This will help you get started with DeepSeek's hosted [chat models](../../langchain/models.md).
 
 > [!TIP]
+>
 > **API Reference**
 >
 > For detailed documentation of all features and configuration options, head to the [`ChatDeepSeek`](https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek) API reference.
 
 > [!TIP]
+>
 > **DeepSeek's models are open source and can be run locally (e.g. in [Ollama](ollama.md)) or on other inference providers (e.g. , [Together](together.md)) as well.**
 
 ## Overview
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/deepseek) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/chat/deepseek.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatDeepSeek`](https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek) | [`langchain-deepseek`](https://reference.langchain.com/python/langchain-deepseek/) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-deepseek?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-deepseek?style=flat-square\&label=%20) |
 
@@ -35,6 +37,7 @@ This will help you get started with DeepSeek's hosted [chat models](../../langch
 | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 > [!NOTE]
+>
 > **DeepSeek-R1, specified via `model="deepseek-reasoner"`, does not support tool calling or structured output. Those features [are supported](https://api-docs.deepseek.com/guides/function_calling) by DeepSeek-V3 (specified via `model="deepseek-chat"`).**
 
 ## Setup
@@ -53,7 +56,7 @@ if not os.getenv("DEEPSEEK_API_KEY"):
     os.environ["DEEPSEEK_API_KEY"] = getpass.getpass("Enter your DeepSeek API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -107,8 +110,6 @@ For detailed documentation of all `ChatDeepSeek` features and configurations hea
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/deepseek.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/deepseek.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

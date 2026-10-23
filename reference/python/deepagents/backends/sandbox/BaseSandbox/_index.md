@@ -1,13 +1,13 @@
 ---
 title: "reference/python/deepagents/backends/sandbox/BaseSandbox"
-description: "Index of 20 pages and 0 subdirectories under reference/python/deepagents/backends/sandbox/BaseSandbox."
+description: "Index of 21 pages and 0 subdirectories under reference/python/deepagents/backends/sandbox/BaseSandbox."
 category: "index"
 tags: [index, reference, python, deepagents, backends, sandbox, basesandbox]
 ---
 
 # reference/python/deepagents/backends/sandbox/BaseSandbox
 
-20 pages here.
+21 pages here.
 
 ## Files
 
@@ -26,6 +26,7 @@ tags: [index, reference, python, deepagents, backends, sandbox, basesandbox]
 - [execute_with_offload](execute_with_offload.md) - Run command, offloading large output to a file in the sandbox.
 - [glob](glob.md) - Structured glob matching returning GlobResult.
 - [grep](grep.md) - Search file contents for a literal string using grep -F.
+- [grep_exclude_dirs](grep_exclude_dirs.md) - Directory names grep skips at any depth while searching.
 - [id](id.md) - Unique identifier for the sandbox backend.
 - [ls](ls.md) - Structured listing with file metadata using os.scandir.
 - [read](read.md) - Read file content with server-side line-based pagination.

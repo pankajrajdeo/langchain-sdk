@@ -33,7 +33,7 @@ stream(
     subgraphs: bool = False,
     debug: bool | None = None,
     version: Literal['v1', 'v2'] = 'v1',
-    **kwargs: Unpack[DeprecatedKwargs] = {},
+    kwargs: Unpack[DeprecatedKwargs] = {},
 ) -> Iterator[dict[str, Any] | Any]
 ```
 
@@ -55,4 +55,4 @@ stream(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/main.py#L2655)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/main.py#L2748)

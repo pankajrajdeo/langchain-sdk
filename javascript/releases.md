@@ -10,10 +10,29 @@ tags: [docs, javascript, releases]
 
 > Log of updates and improvements to our JavaScript/TypeScript packages
 
-> [!NOTE]
-> **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/oss/javascript/releases/changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
+**Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/oss/javascript/releases/changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
-## Mar 24, 2026
+**Oct 15, 2026**
+
+## `langchain` v1.5.18
+
+`humanInTheLoopMiddleware` can now pause once per tool call. Set `interruptMode: "per_call"` and each gated call raises its own interrupt, which you answer by interrupt ID. Batched mode is still the default.
+
+```typescript
+humanInTheLoopMiddleware({ interruptOn: {...}, interruptMode: "per_call" });
+```
+
+### Features
+
+* **Typed answers**: each interrupt carries a `response_schema` listing the decisions that call allows, so a client can build its form from the schema. See [Read the response schema](langchain/human-in-the-loop.md#read-the-response-schema).
+* **Checked before saving**: LangGraph rejects an invalid answer before it is saved, so you can correct it and answer the same interrupt again. See [Correct an invalid answer](langchain/human-in-the-loop.md#correct-an-invalid-answer).
+* **Edits stay on the called tool**: an `edit` can't switch tools, and its arguments are checked against the tool's own schema.
+* **`respond` everywhere**: `interruptOn: { tool: true }` now allows every decision, `respond` included, in both modes, as in Python.
+
+Use per-call mode for new agents. LangChain plans to make it the default in the next major release. See [Pause once per tool call](langchain/human-in-the-loop.md#pause-once-per-tool-call) and the [human-in-the-loop overview](concepts/human-in-the-loop.md).
+
+**Mar 24, 2026**
+
 ## `deepagents` v1.9.0-alpha.0
 
 Alpha release of `deepagents` v1.9.0.
@@ -26,7 +45,8 @@ Alpha release of `deepagents` v1.9.0.
   * **Simplified method names**: `lsInfo` -> `ls`, `grepRaw` -> `grep`, `globInfo` -> `glob`.
   * **Backward compatible**: Existing v1 backends can be adapted to the v2 interface using `adaptBackendProtocol`. The v1 interfaces (`BackendProtocolV1`, `SandboxBackendProtocolV1`) are deprecated but retained for compatibility.
 
-## Jan 14, 2026
+**Jan 14, 2026**
+
 ## v1.1.0
 
 ### `@langchain/langgraph`
@@ -92,13 +112,16 @@ const processState = (state: typeof AgentState.State) => {
 
 The existing `Annotation` and zod-based API continues to work unchanged - `StateSchema` is an additional option for those who prefer schema-first definitions.
 
-#### [Learn more about StateSchema](langgraph/graph-api.md#schema)
-See the full documentation for defining graph state with StateSchema, ReducedValue, and UntrackedValue.
+> **[Learn more about StateSchema](langgraph/graph-api.md#schema)**
+>
+> See the full documentation for defining graph state with StateSchema, ReducedValue, and UntrackedValue.
 
-#### [Learn about type utilities](langgraph/graph-api.md#type-utilities)
-Use GraphNode and ConditionalEdgeRouter to type functions outside the graph builder.
+> **[Learn about type utilities](langgraph/graph-api.md#type-utilities)**
+>
+> Use GraphNode and ConditionalEdgeRouter to type functions outside the graph builder.
 
-## Dec 12, 2025
+**Dec 12, 2025**
+
 ## v1.2.0
 
 ### `langchain`
@@ -144,7 +167,8 @@ Use GraphNode and ConditionalEdgeRouter to type functions outside the graph buil
 * **@langchain/google-common:** `jsonSchema` method support in `withStructuredOutput`.
 * **@langchain/core:** Security fixes, better subgraph nesting in Mermaid graphs, UUID7 for run IDs.
 
-## Nov 25, 2025
+**Nov 25, 2025**
+
 ## v1.1.0
 
 * [Model profiles](langchain/models.md#model-profiles): Chat models now expose supported features and capabilities through a `.profile` getter. These data are derived from [models.dev](https://models.dev), an open source project providing model capability data.
@@ -156,7 +180,8 @@ Use GraphNode and ConditionalEdgeRouter to type functions outside the graph buil
 * [Dynamic system prompt middleware](langchain/short-term-memory.md): Return values from `dynamicSystemPromptMiddleware` are now purely additive. When returning a [`SystemMessage`](https://reference.langchain.com/javascript/langchain-core/messages/SystemMessage) or `string`, they are merged with existing system messages rather than replacing them, making it easier to compose multiple middleware that modify the prompt.
 * **Compatibility improvements:** Fixed error handling for Zod v4 validation errors in structured output and tool schemas, ensuring detailed error messages are properly displayed.
 
-## Oct 20, 2025
+**Oct 20, 2025**
+
 ## v1.0.0
 
 ### `langchain`
@@ -169,13 +194,10 @@ Use GraphNode and ConditionalEdgeRouter to type functions outside the graph buil
 * [Release notes](releases/langgraph-v1.md)
 * [Migration guide](migrate/langgraph-v1.md)
 
-> [!NOTE]
-> If you encounter any issues or have feedback, please [open an issue](https://github.com/langchain-ai/docs/issues/new?template=01-langchain.yml) so we can improve. To view v0.x documentation, [go to the archived content](https://github.com/langchain-ai/langchainjs/tree/v0.3/docs/core_docs/docs).
+If you encounter any issues or have feedback, please [open an issue](https://github.com/langchain-ai/docs/issues/new?template=01-langchain.yml) so we can improve. To view v0.x documentation, [go to the archived content](https://github.com/langchain-ai/langchainjs/tree/v0.3/docs/core_docs/docs).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/releases/changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/releases/changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

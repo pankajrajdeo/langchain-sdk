@@ -52,12 +52,11 @@ A **provider** is a third-party service or platform that LangChain integrates wi
 See [all providers](providers/all_providers.md) or search for a provider using the search field.
 
 > [!NOTE]
+>
 > If you'd like to contribute an integration, see [Contributing integrations](../contributing.md#add-a-new-integration).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/providers/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/providers/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

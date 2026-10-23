@@ -14,8 +14,6 @@ tags: [docs, javascript, langchain, frontend, integrations, openui]
 
 This integration is well-suited for data-rich outputs like reports, dashboards, and data explorers, where the model is both the data analyst and the UI designer.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/frontend/integrations/openui).
-
 ## How it works
 
 1. **Generate the system prompt:** call `openuiLibrary.prompt()` once at startup; it produces a complete openui-lang reference that the model uses to write valid component trees
@@ -50,6 +48,7 @@ npm install @langchain/react @openuidev/react-ui @openuidev/react-headless @open
 ```
 
 > [!TIP]
+>
 > OpenUI requires React 19+ and [`zustand`](https://www.npmjs.com/package/zustand). The frontend code is React-only; the LangGraph agent backend can be written in TypeScript or Python.
 
 ## Import the component styles
@@ -701,8 +700,6 @@ Because the SDK keeps subagent token events out of the root store and each `Pane
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/openui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/openui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

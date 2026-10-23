@@ -22,8 +22,6 @@ structure into product UX. Instead of treating the run as a single assistant
 response, you can expose the same checkpoints, node names, state keys, and
 stream metadata that LangGraph uses internally.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/frontend/graph-execution).
-
 ## How graph nodes map to UI cards
 
 A LangGraph graph defines a series of nodes, each responsible for a specific
@@ -66,6 +64,7 @@ current run). Pass each discovered subgraph snapshot to a selector to read the
 messages scoped to that node.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
 
 **React**
@@ -346,6 +345,7 @@ function NodeContent({ stream, node }: { stream: AnyStream; node: SubgraphDiscov
 ```
 
 > [!TIP]
+>
 > Streaming content may include partial tokens or markdown that hasn't been
 > fully formed yet. If you render markdown, make sure your renderer handles
 > incomplete syntax gracefully (e.g., an unclosed bold marker `**`).
@@ -409,6 +409,7 @@ This ensures your UI only shows cards for nodes that are relevant to the
 current execution, avoiding empty placeholder cards.
 
 > [!NOTE]
+>
 > If your graph has conditional branching (e.g., skip "Research" for simple
 > factual queries), skipped nodes will not appear in `stream.subgraphs`. Your
 > pipeline progress bar can render discovered nodes only or dim expected nodes
@@ -436,8 +437,6 @@ current execution, avoiding empty placeholder cards.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/graph-execution.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/graph-execution.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

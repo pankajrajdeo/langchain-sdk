@@ -32,6 +32,7 @@ __init__(
     agent_name: str,
     thread_id: str,
     run_id: str,
+    superseded_run_ids: NotRequired[list[str]],
     status: str,
     created_at: str,
     last_checked_at: str,
@@ -45,6 +46,7 @@ __init__(
 | `agent_name` | `str` |
 | `thread_id` | `str` |
 | `run_id` | `str` |
+| `superseded_run_ids` | `NotRequired[list[str]]` |
 | `status` | `str` |
 | `created_at` | `str` |
 | `last_checked_at` | `str` |
@@ -56,6 +58,7 @@ __init__(
 - `agent_name`
 - `thread_id`
 - `run_id`
+- `superseded_run_ids`
 - `status`
 - `created_at`
 - `last_checked_at`
@@ -63,4 +66,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/async_subagents.py#L80)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/async_subagents.py#L182)

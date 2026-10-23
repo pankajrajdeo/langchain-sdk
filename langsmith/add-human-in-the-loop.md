@@ -12,7 +12,8 @@ To review, edit, and approve tool calls in an agent or workflow, use LangGraph's
 
 ## Dynamic interrupts
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 from langgraph_sdk.schema import Command
@@ -55,7 +56,8 @@ print(await client.runs.wait(
 2. When the graph hits the interrupt, it returns an interrupt object with the payload and metadata.
    3\. The graph is resumed with a `Command(resume=...)`, injecting the human's input and continuing execution.
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 import { Client } from "@langchain/langgraph-sdk";
 const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
@@ -97,7 +99,8 @@ console.log(await client.runs.wait(
 2. When the graph hits the interrupt, it returns an interrupt object with the payload and metadata.
 3. The graph is resumed with a `{ resume: ... }` command object, injecting the human's input and continuing execution.
 
-#### cURL
+**cURL**
+
 Create a thread:
 
 ```bash
@@ -133,177 +136,179 @@ curl --request POST \
  }"
 ```
 
-<details>
-<summary>Extended example: using `interrupt`</summary>
-
-This is an example graph you can run in the Agent Server.
-See [LangSmith quickstart](deployment-quickstart.md) for more details.
-
+> **Extended example: using `interrupt`**
+>
+> This is an example graph you can run in the Agent Server.
+> See [LangSmith quickstart](deployment-quickstart.md) for more details.
+>
 ```python
-from typing import TypedDict
-import uuid
-
-from langgraph.checkpoint.memory import InMemorySaver
-from langgraph.constants import START
-from langgraph.graph import StateGraph
-from langgraph.types import interrupt, Command
-
-class State(TypedDict):
-    some_text: str
-
-def human_node(state: State):
-    value = interrupt( # (1)!
-        {
-            "text_to_revise": state["some_text"] # (2)!
-        }
-    )
-    return {
-        "some_text": value # (3)!
-    }
-
-# Build the graph
-graph_builder = StateGraph(State)
-graph_builder.add_node("human_node", human_node)
-graph_builder.add_edge(START, "human_node")
-
-graph = graph_builder.compile()
+> from typing import TypedDict
+>
+> from langgraph.checkpoint.memory import InMemorySaver
+> from langgraph.constants import START
+> from langgraph.graph import StateGraph
+> from langgraph.types import interrupt, Command
+>
+> class State(TypedDict):
+>     some_text: str
+>
+> def human_node(state: State):
+>     value = interrupt( # (1)!
+>         {
+>             "text_to_revise": state["some_text"] # (2)!
+>         }
+>     )
+>     return {
+>         "some_text": value # (3)!
+>     }
+>
+>
+> # Build the graph
+> graph_builder = StateGraph(State)
+> graph_builder.add_node("human_node", human_node)
+> graph_builder.add_edge(START, "human_node")
+>
+> graph = graph_builder.compile()
 ```
-
-1. `interrupt(...)` pauses execution at `human_node`, surfacing the given payload to a human.
-2. Any JSON serializable value can be passed to the [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) function. Here, a dict containing the text to revise.
-3. Once resumed, the return value of `interrupt(...)` is the human-provided input, which is used to update the state.
-
-Once you have a running Agent Server, you can interact with it using
-[LangGraph SDK](langgraph-python-sdk.md)
-
-#### Python
+>
+> 1. `interrupt(...)` pauses execution at `human_node`, surfacing the given payload to a human.
+> 2. Any JSON serializable value can be passed to the [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) function. Here, a dict containing the text to revise.
+> 3. Once resumed, the return value of `interrupt(...)` is the human-provided input, which is used to update the state.
+>
+> Once you have a running Agent Server, you can interact with it using
+> [LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk.md)
+>
+> **Python**
+>
 ```python
-from langgraph_sdk import get_client
-from langgraph_sdk.schema import Command
-client = get_client(url=<DEPLOYMENT_URL>)
-
-# Using the graph deployed with the name "agent"
-assistant_id = "agent"
-
-# create a thread
-thread = await client.threads.create()
-thread_id = thread["thread_id"]
-
-# Run the graph until the interrupt is hit.
-result = await client.runs.wait(
-    thread_id,
-    assistant_id,
-    input={"some_text": "original text"}   # (1)!
-)
-
-print(result['__interrupt__']) # (2)!
-# > [
-# >     {
-# >         'value': {'text_to_revise': 'original text'},
-# >         'resumable': True,
-# >         'ns': ['human_node:fc722478-2f21-0578-c572-d9fc4dd07c3b'],
-# >         'when': 'during'
-# >     }
-# > ]
-
-# Resume the graph
-print(await client.runs.wait(
-    thread_id,
-    assistant_id,
-    command=Command(resume="Edited text")   # (3)!
-))
-# > {'some_text': 'Edited text'}
+> from langgraph_sdk import get_client
+> from langgraph_sdk.schema import Command
+> client = get_client(url=<DEPLOYMENT_URL>)
+>
+> # Using the graph deployed with the name "agent"
+> assistant_id = "agent"
+>
+> # create a thread
+> thread = await client.threads.create()
+> thread_id = thread["thread_id"]
+>
+> # Run the graph until the interrupt is hit.
+> result = await client.runs.wait(
+>     thread_id,
+>     assistant_id,
+>     input={"some_text": "original text"}   # (1)!
+> )
+>
+> print(result['__interrupt__']) # (2)!
+> # > [
+> # >     {
+> # >         'value': {'text_to_revise': 'original text'},
+> # >         'resumable': True,
+> # >         'ns': ['human_node:fc722478-2f21-0578-c572-d9fc4dd07c3b'],
+> # >         'when': 'during'
+> # >     }
+> # > ]
+>
+>
+> # Resume the graph
+> print(await client.runs.wait(
+>     thread_id,
+>     assistant_id,
+>     command=Command(resume="Edited text")   # (3)!
+> ))
+> # > {'some_text': 'Edited text'}
 ```
-
-1. The graph is invoked with some initial state.
-2. When the graph hits the interrupt, it returns an interrupt object with the payload and metadata.
-   3\. The graph is resumed with a `Command(resume=...)`, injecting the human's input and continuing execution.
-
-#### JavaScript
+>
+> 1. The graph is invoked with some initial state.
+> 2. When the graph hits the interrupt, it returns an interrupt object with the payload and metadata.
+>    3\. The graph is resumed with a `Command(resume=...)`, injecting the human's input and continuing execution.
+>
+> **JavaScript**
+>
 ```javascript
-import { Client } from "@langchain/langgraph-sdk";
-const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
-
-// Using the graph deployed with the name "agent"
-const assistantID = "agent";
-
-// create a thread
-const thread = await client.threads.create();
-const threadID = thread["thread_id"];
-
-// Run the graph until the interrupt is hit.
-const result = await client.runs.wait(
-  threadID,
-  assistantID,
-  { input: { "some_text": "original text" } }   # (1)!
-);
-
-console.log(result['__interrupt__']); # (2)!
-# > [
-# >     {
-# >         'value': {'text_to_revise': 'original text'},
-# >         'resumable': True,
-# >         'ns': ['human_node:fc722478-2f21-0578-c572-d9fc4dd07c3b'],
-# >         'when': 'during'
-# >     }
-# > ]
-
-// Resume the graph
-console.log(await client.runs.wait(
-    threadID,
-    assistantID,
-    { command: { resume: "Edited text" }}   # (3)!
-));
-# > {'some_text': 'Edited text'}
+> import { Client } from "@langchain/langgraph-sdk";
+> const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
+>
+> // Using the graph deployed with the name "agent"
+> const assistantID = "agent";
+>
+> // create a thread
+> const thread = await client.threads.create();
+> const threadID = thread["thread_id"];
+>
+> // Run the graph until the interrupt is hit.
+> const result = await client.runs.wait(
+>   threadID,
+>   assistantID,
+>   { input: { "some_text": "original text" } }   # (1)!
+> );
+>
+> console.log(result['__interrupt__']); # (2)!
+> # > [
+> # >     {
+> # >         'value': {'text_to_revise': 'original text'},
+> # >         'resumable': True,
+> # >         'ns': ['human_node:fc722478-2f21-0578-c572-d9fc4dd07c3b'],
+> # >         'when': 'during'
+> # >     }
+> # > ]
+>
+> // Resume the graph
+> console.log(await client.runs.wait(
+>     threadID,
+>     assistantID,
+>     { command: { resume: "Edited text" }}   # (3)!
+> ));
+> # > {'some_text': 'Edited text'}
 ```
-
-1. The graph is invoked with some initial state.
-2. When the graph hits the interrupt, it returns an interrupt object with the payload and metadata.
-3. The graph is resumed with a `{ resume: ... }` command object, injecting the human's input and continuing execution.
-
-#### cURL
-Create a thread:
-
+>
+> 1. The graph is invoked with some initial state.
+> 2. When the graph hits the interrupt, it returns an interrupt object with the payload and metadata.
+> 3. The graph is resumed with a `{ resume: ... }` command object, injecting the human's input and continuing execution.
+>
+> **cURL**
+>
+> Create a thread:
+>
 ```bash
-curl --request POST \
---url <DEPLOYMENT_URL>/threads \
---header 'Content-Type: application/json' \
---data '{}'
+> curl --request POST \
+> --url <DEPLOYMENT_URL>/threads \
+> --header 'Content-Type: application/json' \
+> --data '{}'
 ```
-
-Run the graph until the interrupt is hit:
-
+>
+> Run the graph until the interrupt is hit:
+>
 ```bash
-curl --request POST \
---url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
---header 'Content-Type: application/json' \
---data "{
-  \"assistant_id\": \"agent\",
-  \"input\": {\"some_text\": \"original text\"}
-}"
+> curl --request POST \
+> --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
+> --header 'Content-Type: application/json' \
+> --data "{
+>   \"assistant_id\": \"agent\",
+>   \"input\": {\"some_text\": \"original text\"}
+> }"
 ```
-
-Resume the graph:
-
+>
+> Resume the graph:
+>
 ```bash
-curl --request POST \
---url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
---header 'Content-Type: application/json' \
---data "{
-  \"assistant_id\": \"agent\",
-  \"command\": {
-    \"resume\": \"Edited text\"
-  }
-}"
+> curl --request POST \
+> --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
+> --header 'Content-Type: application/json' \
+> --data "{
+>   \"assistant_id\": \"agent\",
+>   \"command\": {
+>     \"resume\": \"Edited text\"
+>   }
+> }"
 ```
-
-</details>
 
 ## Static interrupts
 
 Static interrupts (also known as static breakpoints) are triggered either before or after a node executes.
 
 > [!WARNING]
+>
 > Static interrupts are **not** recommended for human-in-the-loop workflows. They are best used for debugging and testing.
 
 You can set static interrupts by specifying `interrupt_before` and `interrupt_after` at compile time:
@@ -321,7 +326,8 @@ graph = graph_builder.compile( # (1)!
 
 Alternatively, you can set static interrupts at run time:
 
-#### Python
+**Python**
+
 ```python
 await client.runs.wait( # (1)!
     thread_id,
@@ -336,7 +342,8 @@ await client.runs.wait( # (1)!
 2. `interrupt_before` specifies the nodes where execution should pause before the node is executed.
 3. `interrupt_after` specifies the nodes where execution should pause after the node is executed.
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 await client.runs.wait( // (1)!
     threadID,
@@ -353,7 +360,8 @@ await client.runs.wait( // (1)!
 2. `interruptBefore` specifies the nodes where execution should pause before the node is executed.
 3. `interruptAfter` specifies the nodes where execution should pause after the node is executed.
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
 --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
@@ -368,7 +376,8 @@ curl --request POST \
 
 The following example shows how to add static interrupts:
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 client = get_client(url=<DEPLOYMENT_URL>)
@@ -398,7 +407,8 @@ await client.runs.wait(
 1. The graph is run until the first breakpoint is hit.
 2. The graph is resumed by passing in `None` for the input. This will run the graph until the next breakpoint is hit.
 
-#### JavaScript
+**JavaScript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
@@ -428,7 +438,8 @@ await client.runs.wait(
 1. The graph is run until the first breakpoint is hit.
 2. The graph is resumed by passing in `null` for the input. This will run the graph until the next breakpoint is hit.
 
-#### cURL
+**cURL**
+
 Create a thread:
 
 ```bash
@@ -468,8 +479,6 @@ curl --request POST \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/add-human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/add-human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -19,6 +19,7 @@ The Agent Server supports the following environment variables when deployed on [
 Set `BG_JOB_ISOLATED_LOOPS` to `True` to execute background runs in an isolated event loop separate from the serving API event loop.
 
 > [!WARNING]
+>
 > Enabling this flag does not remove the underlying problem. It moves synchronous blocking work off the serving API's event loop so health checks stop failing, but the blocking code continues to run on the background loop and **will** continue to cause issues in production, like degraded throughput, tail-latency spikes, starved workers, or connection pool exhaustion (see the pool-size caveat below), and poor scaling under load.
 >
 > To properly resolve those issues, use native async drivers and async code throughout your agent. That means async HTTP clients like `httpx` or `aiohttp` (though we recommend caching the clients to avoid CPU overhead loading the SSL context), async database drivers like `asyncpg` or `psycopg[async]`, and async model SDK's. For unavoidable synchronous libraries, wrap the specific call in `asyncio.to_thread(...)` or `loop.run_in_executor(...)` instead of enabling this flag for the whole deployment.
@@ -26,6 +27,7 @@ Set `BG_JOB_ISOLATED_LOOPS` to `True` to execute background runs in an isolated 
 This environment variable should be set to `True` if the implementation of a graph/node contains synchronous code. In this situation, the synchronous code will block the serving API event loop, which may cause the API to be unavailable. A symptom of an unavailable API is continuous application restarts due to failing health checks.
 
 > [!WARNING]
+>
 > When `BG_JOB_ISOLATED_LOOPS` is enabled, each background worker runs in its own thread with a **separate Postgres connection pool**. The per-worker pool size is `LANGGRAPH_POSTGRES_POOL_MAX_SIZE // N_JOBS_PER_WORKER`. For example, with `LANGGRAPH_POSTGRES_POOL_MAX_SIZE=20` and `N_JOBS_PER_WORKER=15`, each worker gets a pool of only 1 connection. Small per-worker pools are more susceptible to connection failures because a single stale connection represents a large fraction of the pool. If you enable isolated loops, ensure `LANGGRAPH_POSTGRES_POOL_MAX_SIZE` is large enough to provide at least a few connections per worker.
 
 Defaults to `False`.
@@ -59,6 +61,12 @@ For advanced CORS configuration, see [how to add custom CORS configuration](cli.
 
 Defaults to `*` (all origins).
 
+## `DEFAULT_A2A_ASSISTANT_ID`
+
+Set `DEFAULT_A2A_ASSISTANT_ID` to the ID of the assistant whose [agent card](server-a2a.md#agent-card-discovery) the server returns from `/.well-known/agent-card.json` when the request has no `assistant_id` query parameter.
+
+If it is not set, requests to `/.well-known/agent-card.json` without an `assistant_id` query parameter return a `400` error. The `/a2a/{assistant_id}` endpoints take the assistant ID from the path and ignore this variable.
+
 ## Supported Datadog environment variables
 
 Set these environment variables or secrets on the deployment to send Agent Server traces and logs to Datadog. Every variable takes effect only when `DD_API_KEY` is set, which wraps the application process in Datadog's [`ddtrace-run`](https://ddtrace.readthedocs.io/en/stable/installation_quickstart.html) tracer and log-collection agent.
@@ -76,7 +84,30 @@ Set these environment variables or secrets on the deployment to send Agent Serve
 For the full set of tracing options, see the [`DD_*` environment variables](https://ddtrace.readthedocs.io/en/stable/configuration.html) reference.
 
 > [!NOTE]
+>
 > Enabling `DD_API_KEY` (and thus `ddtrace-run`) can override or interfere with other auto-instrumentation solutions (such as OpenTelemetry) that you may have instrumented into your application code.
+
+## `LANGGRAPH_AES_KEY` and `LANGGRAPH_AES_JSON_KEYS`
+
+Set `LANGGRAPH_AES_KEY` to a 16, 24, or 32-byte key to encrypt checkpoints at rest. Set `LANGGRAPH_AES_JSON_KEYS` to a comma-separated list of JSON keys to also encrypt wherever they appear in thread, assistant, run, cron, and store data. `LANGGRAPH_AES_JSON_KEYS` requires `LANGGRAPH_AES_KEY`.
+
+For setup and key rotation, see [Configure AES encryption at rest](aes-encryption.md).
+
+## `LANGGRAPH_API_URL`
+
+Set `LANGGRAPH_API_URL` to the URL that clients use to reach the deployment. The server uses it as:
+
+* The base URL in [A2A agent cards](server-a2a.md#agent-card-discovery).
+* The `servers` entry in the OpenAPI spec served at `/openapi.json`.
+* The `langgraph_api_url` key in each run's metadata.
+
+If it is not set, the server builds agent card URLs from the incoming request. Set it when clients reach the server through a different host, such as a reverse proxy.
+
+## `LANGGRAPH_DEFAULT_RECURSION_LIMIT`
+
+Set `LANGGRAPH_DEFAULT_RECURSION_LIMIT` to the default [recursion limit](../langgraph/graph-api.md#recursion-limit) for runs: the maximum number of supersteps a graph executes before it raises an error. A `recursion_limit` passed in a run's config overrides it.
+
+Defaults to `10011`.
 
 ## `LANGGRAPH_POSTGRES_POOL_MAX_SIZE`
 
@@ -93,6 +124,7 @@ Defaults to `150` connections.
 JSON-valued configuration for deferred checkpoint deletion. When enabled, thread delete and prune operations enqueue checkpoints for background deletion instead of deleting synchronously, moving the I/O off the request hot path. Available in `langgraph-api>=0.8.1`.
 
 > [!NOTE]
+>
 > Only supported with the default PostgreSQL checkpointer backend. Deferred deletes will become the default in a future release.
 
 Accepted fields:
@@ -120,6 +152,7 @@ When set to `"mongo"`, you must also provide the MongoDB connection URI via [`LS
 Set `LANGSMITH_TRACING` to `false` to disable tracing to LangSmith.
 
 > [!NOTE]
+>
 > For selective tracing control based on runtime conditions (such as per-client requirements or data sensitivity), see [Conditional tracing](conditional-tracing.md).
 
 Defaults to `true`.
@@ -176,21 +209,29 @@ OTEL_EXPORTER_OTLP_HEADERS=api-key=<YOUR_INGEST_LICENSE_KEY>
 ```
 
 > [!NOTE]
+>
 > OTel APM tracing was added in Agent Server version `0.5.32` and is currently in Alpha.
 
 <a id="ls_mongodb_uri"></a>
 
 ## `LS_MONGODB_URI`
 
-MongoDB connection URI for the MongoDB checkpointer backend.
+MongoDB connection URI for the MongoDB checkpointer backend. If `LS_MONGODB_URI` is not set, the server reads `MONGODB_URI`.
 
 The URI must point to a replica set member or `mongos` router and must include the database name in the path.
 
 See [Configure checkpointer backend](configure-checkpointer.md) for details.
 
+## `LSD_CACHE_PACKAGES_DISTRIBUTIONS`
+
+When `LSD_CACHE_PACKAGES_DISTRIBUTIONS` is `true`, the server caches the result of `importlib.metadata.packages_distributions()` once per process. Some packages call that function many times at import time, which slows graph loading, especially when Datadog tracing (`ddtrace`) is enabled. Set it to `false` if your deployment installs or removes packages at runtime.
+
+Defaults to `true`.
+
 ## `REDIS_KEY_PREFIX`
 
 > [!NOTE]
+>
 > **Available in API Server version 0.1.9+**
 > This environment variable is supported in API Server version 0.1.9 and above.
 
@@ -201,6 +242,7 @@ Defaults to `''`.
 ## `REDIS_URI_CUSTOM`
 
 > [!NOTE]
+>
 > **Only for Hybrid and Self-Hosted**
 > Custom Redis instances are only available for [Hybrid](hybrid.md) and [Self-Hosted](self-hosted.md) deployments.
 
@@ -225,6 +267,7 @@ See the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk
 Defaults to `120` seconds.
 
 > [!NOTE]
+>
 > Setting a very high value for `RESUMABLE_STREAM_TTL_SECONDS` can result in substantial Redis memory usage when there are many concurrent runs with large or frequent streaming output. Set this value to the minimum value to enable recovery during network interruptions and prefer checkpointing for long term durability and execution snapshotting.
 
 ## `AGENT_POSTGRES_IAM_AUTH_PROVIDER`
@@ -287,6 +330,7 @@ Database Connectivity:
 ## `REDIS_CLUSTER`
 
 > [!WARNING]
+>
 > This feature is in Alpha.
 
 Set `REDIS_CLUSTER` to `True` to enable Redis Cluster mode. When enabled, the system will connect to Redis using cluster mode. This is useful when connecting to a Redis Cluster deployment.
@@ -299,8 +343,6 @@ Specify `REDIS_URI_CUSTOM` to use a custom Redis instance. The value of `REDIS_U
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/env-var-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/env-var-self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

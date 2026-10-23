@@ -13,7 +13,21 @@ tags: [docs, langsmith, sandbox-auth-proxy]
 The auth proxy lets sandbox code call external APIs (OpenAI, Anthropic, GitHub, etc.) without hardcoding credentials. When configured on a sandbox, an egress proxy running outside the sandbox automatically injects authentication headers into matching outbound requests using your workspace secrets or write-only credentials you provide in the proxy config.
 
 > [!WARNING]
+>
 > You must configure your secrets (e.g., `OPENAI_API_KEY`) in your LangSmith [workspace](administration-overview.md#workspaces) settings before creating a sandbox that references them.
+
+## Delegate LangSmith access
+
+Access delegation lets sandbox code call the LangSmith API without an API key inside the sandbox. The auth proxy injects credentials for requests to your LangSmith API host.
+
+Set `access_delegation` in the top-level request body when creating a sandbox with `POST /v2/sandboxes/boxes`:
+
+* **`INHERIT`**: Set `{"mode": "INHERIT"}` to inherit the caller's current delegatable permissions. Do not include `permissions`.
+* **`EXPLICIT`**: Set `{"mode": "EXPLICIT", "permissions": ["sandboxes:read"]}` to restrict access to specific permissions you hold. The list must be nonempty.
+
+Both modes remain capped by the caller's current permissions on every request. Workspace and organization administration permissions cannot be delegated. A workspace service key can also delegate access; narrowing its role narrows the sandbox's access, and deleting the key revokes it.
+
+Inside the sandbox, call the HTTPS LangSmith API endpoint without supplying your own credentials. A sandbox acting under a delegation grant cannot grant access to another sandbox.
 
 ## Egress and network access control
 
@@ -23,12 +37,16 @@ The same `proxy_config` that injects credentials also controls which destination
 
 * **Access control applies to every outbound TCP connection**, HTTP or not.
 * **HTTPS to a host matched by a rule or callback is decrypted by the proxy** so it can inject headers; sandboxes trust the proxy's CA. HTTPS to unmatched hosts and every non-HTTP connection, including PostgreSQL, SSH, and Redis, passes through unchanged. Ports 80 and 443 are reserved for HTTP and TLS; a non-HTTP protocol on either port does not work.
-* **Address destinations by hostname.** A direct raw TCP connection to a literal IP address on a non-HTTP port is dropped, even when that IP is on an `allow_list`. HTTPS to a literal IP is dropped too, because the proxy needs a hostname in the TLS handshake. Only cleartext HTTP on port 80 works against a literal IP.
+* **Use hostnames for direct connections by default.** Raw TCP to a public literal IP requires an explicitly matching IP or CIDR entry in `allow_list` and is unavailable in deny-list mode. HTTPS to a literal IP is dropped because the proxy needs a hostname in the TLS handshake. Cleartext HTTP on port 80 can use a literal IP.
 * **Only TCP leaves the sandbox.** UDP (including QUIC) and ICMP are dropped.
 
 ### Default egress posture
 
-With no `access_control`, **every hostname is reachable on every TCP port**, unless your organization is on [restricted egress](#organization-level-restricted-egress). The only exception is hosts that resolve to private, loopback, or cloud-metadata addresses, which the proxy always refuses to dial. Add an `access_control` to restrict this.
+With no `access_control`, **every hostname is reachable on every TCP port**, unless your organization is on [restricted egress](#organization-level-restricted-egress). The only exception is hosts that resolve to private, loopback, or cloud-metadata addresses, which the proxy refuses to dial. For a sandbox created with `access_delegation`, your LangSmith API host is exempt from the private-address check, so a self-hosted install whose hostname resolves to a private address, such as an internal load balancer, can still serve delegated requests. No other private destination is opened, and loopback and cloud-metadata addresses stay blocked. On a self-hosted installation, an `allow_list` entry that matches a private destination also opens it; see [Reach private services directly](self-host-sandbox-egress-proxy.md#reach-private-services-directly). Add an `access_control` to restrict this.
+
+* **HTTP and HTTPS (ports 80 and 443) to any hostname are allowed.** Outbound HTTP(S) is transparently routed through the proxy, where your `rules` and `callbacks` inject credentials.
+* **Raw TCP to hostnames is allowed.** Connections to non-HTTP ports, such as databases (`psql` or `dbt` on 5432), SSH (22), and Redis (6379), pass through without protocol interception.
+* **Raw TCP to a literal public IP address requires an explicit IP or CIDR entry in an `allow_list`.** Private, reserved, loopback, link-local, and cloud-metadata destinations remain subject to SSRF protections; see the self-hosted and delegation exceptions above.
 
 To allow HTTP and HTTPS to any host while blocking every other port, use a port-qualified allow list. `*` matches every hostname:
 
@@ -42,6 +60,8 @@ To allow HTTP and HTTPS to any host while blocking every other port, use a port-
 
 Add `host:PORT` entries to open specific raw TCP destinations on top of that, such as `db.example.com:5432`.
 
+On a self-hosted installation, this list also lets the Sandbox reach private destinations on ports 80 and 443. List specific public hosts instead when Sandboxes must not reach your internal network.
+
 ### Allow and deny lists
 
 Add an `access_control` object to `proxy_config` with **either** an `allow_list` **or** a `deny_list` (not both—the request is rejected if both are set):
@@ -49,12 +69,17 @@ Add an `access_control` object to `proxy_config` with **either** an `allow_list`
 | Mode | Behavior |
 | - | - |
 | `allow_list` | **Default-deny.** Only listed destinations are reachable, on any protocol. List every host the sandbox needs, including the HTTP(S) hosts your `rules` and `callbacks` target. |
-| `deny_list` | **Default-allow.** Every destination is reachable, on any protocol, except those listed. |
+| `deny_list` | **Default-allow for hostnames.** Hostname-based HTTP, HTTPS, and raw TCP remain reachable except where a matching entry blocks them. You cannot use direct IP connections in deny-list mode, even when the destination IP does not match a deny-list entry. |
 
-Both lists apply to HTTP, HTTPS, and raw TCP alike. Neither mode distinguishes protocols; use a port suffix to restrict an entry to one port.
+> [!NOTE]
+>
+> To enable raw TCP to a literal public IP address, use allow-list mode and allow the IP on every port or on a specific port, such as `8.8.8.8` or `8.8.8.8:53`. A containing CIDR also allows every port in that range. Hostname, glob, and regex entries do not authorize applications that connect to a literal IP address.
+
+Access-control entries are evaluated for HTTP, HTTPS, and raw TCP connections to hostnames alike. Use a port suffix to restrict an entry to one port. Direct IP connections require allow-list mode and an explicit IP or CIDR entry.
 
 > [!WARNING]
-> A `deny_list` only blocks the hosts you list. `{"deny_list": ["example.com"]}` blocks `example.com` on every port and leaves every other host reachable on every port, including DNS, SSH, and database ports. To turn off raw TCP everywhere, use an `allow_list` such as `["*:80", "*:443"]`.
+>
+> A `deny_list` only blocks the hostnames you list. `{"deny_list": ["example.com"]}` blocks `example.com` on every port and leaves every other hostname reachable on every port, including DNS, SSH, and database ports. To turn off raw TCP everywhere, use an `allow_list` such as `["*:80", "*:443"]`.
 
 ### Pattern syntax
 
@@ -62,14 +87,14 @@ Each `allow_list`/`deny_list` entry uses the following forms:
 
 | Pattern | Meaning |
 | - | - |
-| `host` | Bare host → **every port**. |
-| `host:PORT` | Host on exactly `PORT`. `db.example.com:5432` covers only 5432; add another entry for any other port. |
+| `host` | Bare host on every port. |
+| `host:PORT` | Host on exactly `PORT`. `:22` grants only 22, not 80 or 443. List the host separately if you need other ports. |
 | `*.example.com` | Glob (RFC 1034-style). The apex (`example.com`) is **not** included. May carry a port. |
 | `~regex` | Regex matched against the hostname, every port. No port suffix is parsed. |
-| `1.2.3.4` / `[::1]` | Literal IP. May carry a port: `1.2.3.4:443`, `[::1]:22`. |
-| `10.0.0.0/8` | CIDR. Cannot carry a port. |
+| `1.2.3.4` / `1.2.3.4:443` / `[::1]` / `[::1]:22` | Literal IP, optionally qualified by a port. |
+| `10.0.0.0/8` | CIDR. Cannot carry a port. Private and reserved destinations remain blocked by SSRF protections. |
 
-Matching is on the destination exactly as the sandbox addressed it. A hostname entry matches requests made to that hostname; an IP or CIDR entry matches requests made to a literal IP address. Neither is resolved: `deny_list: ["203.0.113.0/24"]` does not block `foo.example.com` even when it resolves into that range, and `allow_list: ["203.0.113.7"]` does not allow it either. Because raw TCP and HTTPS to a literal IP are dropped before access control runs (see [How egress works](#how-egress-works)), IP and CIDR entries only ever affect cleartext HTTP requests on port 80 that name the IP directly.
+Matching is on the destination exactly as the sandbox addressed it. A hostname entry matches requests made to that hostname; an IP or CIDR entry matches requests made to a literal IP address. Neither is resolved: `deny_list: ["203.0.113.0/24"]` does not block `foo.example.com` even when it resolves into that range, and `allow_list: ["203.0.113.7"]` does not allow it either. In allow-list mode, an IP or CIDR entry also permits raw TCP to a matching public literal IP. Direct IP connections are unavailable in deny-list mode, and HTTPS to a literal IP is dropped because the proxy needs a hostname in the TLS handshake. Cleartext HTTP on port 80 can use a literal IP when allowed by the active access control.
 
 Entries that do not parse—`example.com:abc`, `example.com:99999`, or a CIDR with a port—are rejected when the sandbox is created or updated.
 
@@ -119,6 +144,7 @@ curl -X POST "$LANGSMITH_ENDPOINT/v2/sandboxes/boxes" \
 The connection to `db.example.com:5432` is passed through at the TCP layer with no interception, so the PostgreSQL wire protocol—and TLS, host-key checking, and any other end-to-end protocol on top of it—works unchanged.
 
 > [!NOTE]
+>
 > Creating a sandbox boots it and returns once it reports `ready`, so there is no wait step to add. `GET /api/v2/sandboxes/boxes/{name}/status` reports the current state if you need to re-check it later.
 
 ### Configure via SDK
@@ -226,6 +252,7 @@ Use an AWS auth rule when sandbox code needs to call AWS services with an AWS SD
 This is useful when agent code needs to inspect S3 objects, call Bedrock, or use another AWS endpoint without exposing long-lived AWS access keys in sandbox files, environment variables, shell history, or logs. The sandbox receives placeholder `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` values (plus `AWS_EC2_METADATA_DISABLED=true` and `AWS_CA_BUNDLE`) so SDK credential detection works, while the proxy replaces whatever the request carries with a real SigV4 signature. Only `service.region.amazonaws.com` hosts, S3 virtual-hosted and path-style hosts, and a few global endpoints such as `iam`, `sts`, and `s3` are signed; plaintext HTTP to a matched AWS host is rejected with `403`.
 
 > [!WARNING]
+>
 > Do not set real AWS access keys as sandbox environment variables. Configure them as `workspace_secret` or `opaque` proxy values. Plaintext AWS credential values are rejected.
 
 AWS auth rules are different from header injection rules:
@@ -318,6 +345,7 @@ await client.createSandbox({
 After the sandbox is ready, use AWS SDKs or CLIs normally inside the sandbox. The SDK or CLI discovers the placeholder AWS environment variables, and the proxy applies the real SigV4 signature to outbound AWS requests. The proxy does not set a region: set `AWS_REGION` through the sandbox's `env_vars` or the rule's `env_vars`, or most SDK and CLI calls fail before they reach the proxy.
 
 > [!NOTE]
+>
 > Static AWS auth accepts an access key ID and secret access key, but not a caller-supplied session token. Deployments with AWS proxy role authentication enabled also support an IAM role as described below.
 
 ### Authenticate with an IAM role
@@ -327,6 +355,7 @@ An AWS proxy role lets LangSmith assume a customer IAM role and sign supported A
 This option requires deployment support for AWS proxy role authentication. ECR registry role authentication is a separate feature. In **Create sandbox > Network**, enable AWS authentication and select **AWS IAM role**. The form shows the exact LangSmith principal and workspace External ID that the customer role must trust. Follow the linked setup instructions to configure the trust and permissions policies, then enter the customer role in **AWS role ARN**.
 
 > [!NOTE]
+>
 > The SDK examples below require a release that supports `aws_auth(role_arn=...)` in Python or `awsAuth({ roleArn })` in TypeScript. Backend support alone does not add these helpers to an older SDK release.
 
 To configure a role without mounts, pass it in the proxy configuration:
@@ -401,6 +430,7 @@ Use a GCP auth rule when sandbox code needs to call Google APIs with Google SDKs
 This is useful when agent code needs to inspect GCS objects or call another Google API without exposing service account JSON in sandbox files, environment variables, shell history, or logs. The sandbox receives a placeholder `CLOUDSDK_AUTH_ACCESS_TOKEN` (plus `CLOUDSDK_CORE_CUSTOM_CA_CERTS_FILE`) so `gcloud` runs, while the proxy replaces whatever authorization the request carries with a token minted from the configured service account. Google client libraries that discover credentials through Application Default Credentials do not read these variables and fail to find credentials; only `gcloud` and direct HTTPS calls are supported.
 
 > [!WARNING]
+>
 > Do not set real service account JSON as a sandbox environment variable. Configure it as a `workspace_secret` or `opaque` proxy value. Plaintext GCP credential values are rejected.
 
 GCP auth rules are different from header injection rules:
@@ -647,6 +677,7 @@ def configure_github_proxy(sandbox_name: str, github_token: str) -> None:
 Call `configure_github_proxy` after creating or reattaching to a sandbox. GitHub App installation tokens expire, so refresh the proxy config whenever you reuse a sandbox for a new run.
 
 > [!WARNING]
+>
 > `PATCH` replaces the stored `proxy_config` wholesale. If the sandbox also uses `access_control` or `callbacks`, include them in every update or they are dropped. Opaque header values you leave empty are carried over from the current config.
 
 The `github-api` rule sets `GH_TOKEN` to a non-secret placeholder, which satisfies the `gh` CLI's local credential check. Commands then run without a per-command prefix:
@@ -872,8 +903,6 @@ await client.createSandbox({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-auth-proxy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-auth-proxy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -164,6 +164,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -172,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/traces/{trace_id}/runs:
     get:
@@ -217,8 +220,8 @@ paths:
           name: max_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Max Start Time
         - description: >-
             `min_start_time` is the optional inclusive lower bound for run
@@ -227,16 +230,16 @@ paths:
           name: min_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Min Start Time
         - description: '`project_id` is the UUID of the tracing project that owns the trace.'
           name: project_id
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
         - description: >-
             `selects` lists which properties to include on each returned run
@@ -599,6 +602,14 @@ components:
           description: '`prompt_tokens` is the prompt-side token count.'
           type: integer
           example: 200
+        query_metadata:
+          description: >-
+            `query_metadata` describes this query result, including
+            `sem_filter_score` when a semantic filter is used. Returned
+            automatically by run queries, or null when unavailable.
+          anyOf:
+            - type: object
+            - type: 'null'
         reference_dataset_id:
           description: >-
             `reference_dataset_id` is the dataset UUID for the reference

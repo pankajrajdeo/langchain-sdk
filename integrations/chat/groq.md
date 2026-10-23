@@ -11,9 +11,11 @@ tags: [docs, integrations, chat, groq]
 > Integrate with the ChatGroq chat model using LangChain Python.
 
 > [!WARNING]
+>
 > This page makes reference to [Groq](https://console.groq.com/docs/overview), an AI hardware and software company. For information on how to use Grok models (provided by [xAI](https://docs.x.ai/docs/overview)), see the [xAI provider page](../providers/xai.md).
 
 > [!TIP]
+>
 > **API Reference**
 >
 > For detailed documentation of all features and configuration options, head to the [`ChatGroq`](https://reference.langchain.com/python/langchain-groq/chat_models/ChatGroq) API reference.
@@ -24,7 +26,7 @@ For a list of all Groq models, visit their [docs](https://console.groq.com/docs/
 
 ### Integration details
 
-| Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/groq) | Downloads | Version |
+| Class | Package | Serializable | [JS support](../../javascript/integrations/chat/groq.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatGroq`](https://reference.langchain.com/python/langchain-groq/chat_models/ChatGroq) | [`langchain-groq`](https://reference.langchain.com/python/langchain-groq/) | beta | ✅ | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-groq?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-groq?style=flat-square\&label=%20) |
 
@@ -50,7 +52,7 @@ if "GROQ_API_KEY" not in os.environ:
     os.environ["GROQ_API_KEY"] = getpass.getpass("Enter your Groq API key: ")
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -70,6 +72,7 @@ pip install -qU langchain-groq
 Now we can instantiate our model object and generate chat completions.
 
 > [!NOTE]
+>
 > **Reasoning Format**
 >
 > If you choose to set a `reasoning_format`, you must ensure that the model you are using supports it. You can find a list of supported models in the [Groq documentation](https://console.groq.com/docs/reasoning).
@@ -119,6 +122,7 @@ J'aime la programmation.
 Groq supports vision capabilities with select models, allowing you to send images along with text prompts.
 
 > [!NOTE]
+>
 > **Vision-capable models**
 >
 > * `meta-llama/llama-4-scout-17b-16e-instruct`
@@ -147,6 +151,7 @@ print(response.content)
 ```
 
 > [!TIP]
+>
 > **Image URL requirements**
 >
 > Groq fetches images from URLs directly. Ensure your image URLs:
@@ -163,8 +168,6 @@ For detailed documentation of all `ChatGroq` features and configurations head to
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/groq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/groq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

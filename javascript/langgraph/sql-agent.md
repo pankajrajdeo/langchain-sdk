@@ -13,6 +13,7 @@ In this tutorial we will build a custom agent that can answer questions about a 
 LangChain offers built-in [agent](../langchain/agents.md) implementations, implemented using [LangGraph](overview.md) primitives. If deeper customization is required, agents can be implemented directly in LangGraph. This guide demonstrates an example implementation of a SQL agent. For a practical introduction, see [building a SQL agent using higher-level LangChain abstractions](../langchain/sql-agent.md).
 
 > [!WARNING]
+>
 > Building Q\&A systems of SQL databases requires executing model-generated SQL queries. There are inherent risks in doing this. Make sure that your database connection permissions are always scoped as narrowly as possible for your agent's needs. This will mitigate, though not eliminate, the risks of building a model-driven system.
 
 The [prebuilt agent](../langchain/sql-agent.md) lets us get started quickly, but we relied on the system prompt to constrain its behavior—for example, we instructed the agent to always start with the "list tables" tool, and to always run a query-checker tool before executing the query.
@@ -62,7 +63,8 @@ export LANGSMITH_API_KEY="..."
 
 Select a model that supports [tool-calling](../integrations/providers/overview.md):
 
-#### OpenAI
+**OpenAI**
+
 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
 
 **npm**
@@ -110,7 +112,8 @@ const model = new ChatOpenAI({
 });
 ```
 
-#### Anthropic
+**Anthropic**
+
 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
 
 **npm**
@@ -158,7 +161,8 @@ const model = new ChatAnthropic({
 });
 ```
 
-#### Azure
+**Azure**
+
 👉 Read the [Azure chat model integration docs](../integrations/chat/azure.md)
 
 **npm**
@@ -210,7 +214,8 @@ const model = new AzureChatOpenAI({
 });
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 👉 Read the [ChatGoogle chat model integration docs](../integrations/chat/google.md)
 
 **npm**
@@ -258,7 +263,8 @@ const model = new ChatGoogle({
 });
 ```
 
-#### Bedrock Converse
+**Bedrock Converse**
+
 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock_converse.md)
 
 **npm**
@@ -383,6 +389,7 @@ Sample output: [{"ArtistId":1,"Name":"AC/DC"},{"ArtistId":2,"Name":"Accept"},{"A
 ## 3. Add tools for database interactions
 
 > [!WARNING]
+>
 > The following database tools are minimal wrappers for demonstration purposes only. They are not intended to be secure or used in production. Use narrowly scoped database permissions and add application-specific validation before executing model-generated SQL.
 
 We'll create custom tools to interact with the database:
@@ -685,7 +692,7 @@ const imageBuffer = new Uint8Array(await image.arrayBuffer());
 await fs.writeFile("graph.png", imageBuffer);
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/aAi4RLdXQAh8fThS/oss/images/sql-agent-langgraph.png?fit=max&auto=format&n=aAi4RLdXQAh8fThS&q=85&s=1ddd4aae369fb8c143edaccb0a09c81f" alt="SQL agent graph" width="308" height="645" data-path="oss/images/sql-agent-langgraph.png" />
+![SQL agent graph](https://mintcdn.com/langchain-5e9cc07a/aAi4RLdXQAh8fThS/oss/images/sql-agent-langgraph.png?fit=max\&auto=format\&n=aAi4RLdXQAh8fThS\&q=85\&s=1ddd4aae369fb8c143edaccb0a09c81f)
 
 We can now invoke the graph:
 
@@ -781,6 +788,7 @@ The genre with the longest tracks on average is "Sci Fi & Fantasy," with an aver
 ```
 
 > [!TIP]
+>
 > See [LangSmith trace](https://smith.langchain.com/public/a6a96896-686a-4040-b9b5-28d701453d6f/r) for the above run.
 
 ## 6. Implement human-in-the-loop review
@@ -831,6 +839,7 @@ const queryToolWithInterrupt = tool(
 ```
 
 > [!NOTE]
+>
 > The above implementation follows the [tool interrupt example](interrupts.md#interrupts-in-tools) in the broader [human-in-the-loop](interrupts.md) guide. Refer to that guide for details and alternatives.
 
 Let's now re-assemble our graph. We will replace the programmatic check with human review. Note that we now include a [checkpointer](persistence.md); this is required to pause and resume the run.
@@ -941,8 +950,6 @@ Check out the [Evaluate a graph](../../langsmith/evaluate-graph.md) guide for ev
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/sql-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/sql-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

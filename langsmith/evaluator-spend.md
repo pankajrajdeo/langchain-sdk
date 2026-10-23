@@ -15,12 +15,15 @@ Cap weekly LLM spend per evaluator to prevent a single evaluator from exceeding 
 This guide shows you how to view and configure weekly evaluator spend caps.
 
 > [!TIP]
+>
 > LangSmith also offers [per-trace and per-model cost tracking](cost-tracking.md) and [tracing usage limits](administration-overview.md#usage-limits) for cost control.
 
 > [!WARNING]
+>
 > Setting spend limits is available for OpenAI, Anthropic, and Gemini models. Spend limits only enforce against runs on supported models that have [pricing configured](cost-tracking.md#create-a-new-or-modify-an-existing-model-price-entry) in LangSmith. Verify model pricing before relying on a limit. Unsupported models cannot be used in evaluators once a limit is set.
 
 > [!NOTE]
+>
 > The UI labels the week-to-date window as **this week**.
 
 ## How enforcement works
@@ -39,11 +42,13 @@ The agent and the trace are unaffected. Only the evaluator stops producing score
 | [Organization default spend limit](#set-an-organization-default-spend-limit) | Organization **Settings** > **Usage Configuration** | `organization:manage` required to view and edit |
 | [Per-evaluator override](#override-the-default-for-an-attached-project-or-dataset) | Edit evaluator > **Advanced** > **Spend limit** | All members can view, `organization:manage` required to edit |
 
-#### [Set your first limit](#set-an-organization-default-spend-limit)
-Open organization **Settings** and define a single weekly cap that applies to all evaluator attachments to every project and dataset across all workspaces in the organization.
+> **[Set your first limit](#set-an-organization-default-spend-limit)**
+>
+> Open organization **Settings** and define a single weekly cap that applies to all evaluator attachments to every project and dataset across all workspaces in the organization.
 
-#### [Override for one project or dataset](#override-the-default-for-an-attached-project-or-dataset)
-Customize the limit for a specific project or dataset attached to an evaluator.
+> **[Override for one project or dataset](#override-the-default-for-an-attached-project-or-dataset)**
+>
+> Customize the limit for a specific project or dataset attached to an evaluator.
 
 ## View evaluator spend
 
@@ -89,7 +94,9 @@ For attachment management, refer to [Manage evaluators](evaluators.md).
 
 Organization admins set a single weekly cap that applies to every evaluator's attached projects and datasets across every workspace in the organization. There is one default per organization, not one per workspace.
 
-Setting and editing the organization default requires the `organization:manage` [permission](rbac.md).
+> [!NOTE]
+>
+> Setting and editing the organization default requires the `organization:manage`[permission](rbac.md).
 
 1. Open organization **Settings** and navigate to **Usage Configuration**.
 2. For **Evaluator spend limit**, enter a USD amount. The unit is `/ week`. Leave blank for no limit.
@@ -148,8 +155,6 @@ Configure pricing for the models your evaluators use under [Model pricing](cost-
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluator-spend.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluator-spend.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

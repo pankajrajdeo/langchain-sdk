@@ -12,7 +12,9 @@ tags: [docs, langsmith, online-evaluations-code]
 
 Code evaluators allow you to write an evaluator in Python or JavaScript directly in LangSmith. Often used for validating structure or statistical properties of your data.
 
-When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](usage-and-billing.md#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation. 
+> [!NOTE]
+>
+> When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](usage-and-billing.md#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation.
 
 ## View online evaluators
 
@@ -38,9 +40,10 @@ For example, you may want to apply specific evaluators based on:
 
 Evaluators use the filter builder, with the same fields and operators described in [Filter traces (ClickHouse)](filter-traces-in-application.md).
 
-To process feedback from an earlier evaluator, filter this evaluator for the feedback key, then [include extended stats](evaluators.md#include-extended-stats). For example, use `has(feedback_key, "answer_usefulness")` to run when the `answer_usefulness` feedback exists. The filter is based on the feedback key, not the evaluator that produced it, so feedback from any source with that key triggers the code evaluator.
+To process feedback from an earlier evaluator, filter this evaluator for the feedback key, then read the score from `run["feedback"]`, or [include extended stats](evaluators.md#include-extended-stats) to read it from `run["feedback_stats"]`. For example, use `eq(feedback_key, "answer_usefulness")` to run when the `answer_usefulness` feedback exists. The filter is based on the feedback key, not the evaluator that produced it, so feedback from any source with that key triggers the code evaluator. For more information, see [Chain evaluators](evaluators.md#chain-evaluators).
 
 > [!TIP]
+>
 > It's often helpful to inspect runs as you're creating a filter for your evaluator. With the evaluator configuration panel open, you can inspect runs and apply filters to them. Any filters you apply to the runs table will automatically be reflected in filters on your evaluator.
 
 ### 4. (Optional) Configure a sampling rate
@@ -60,17 +63,18 @@ In order to track progress of the backfill, you can view logs for your evaluator
 ## Write your evaluation function
 
 > [!NOTE]
+>
 > **Code evaluators restrictions.**
 >
 > **Allowed Libraries**: You can import all standard library functions, as well as the following public packages:
 >
-> ```
+```
 > numpy (v2.2.2): "numpy"
 > pandas (v1.5.2): "pandas"
 > jsonschema (v4.21.1): "jsonschema"
 > scipy (v1.14.1): "scipy"
 > sklearn (v1.26.4): "scikit-learn"
-> ```
+```
 >
 > **Network Access**: You cannot access the internet from a code evaluator.
 
@@ -152,8 +156,6 @@ If you prefer a video tutorial, check out the [Online Evaluations video](https:/
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

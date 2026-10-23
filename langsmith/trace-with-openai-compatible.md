@@ -21,7 +21,9 @@ Use `wrap_openai` / `wrapOpenAI` for direct API calls. Use [`@traceable`](https:
 | Traces | The API call | The function wrapping it |
 | Metadata | Client-level only (Python); client-level or per-call (TypeScript) | Per-call via [`langsmith_extra`](https://reference.langchain.com/python/langsmith/run_helpers/SupportsLangsmithExtra) |
 
-To trace OpenAI directly, refer to [Trace OpenAI applications](trace-openai.md).
+> [!NOTE]
+>
+> To trace OpenAI directly, refer to [Trace OpenAI applications](trace-openai.md).
 
 ## Setup
 
@@ -88,7 +90,8 @@ console.log(completion.choices[0].message.content);
 
 ## Add metadata
 
-#### Python
+**Python**
+
 Pass `tracing_extra` when wrapping the client. The metadata applies to all calls made with that client.
 
 ```python
@@ -107,7 +110,8 @@ client = wrappers.wrap_openai(
 )
 ```
 
-#### TypeScript
+**TypeScript**
+
 Pass options as the second argument to `wrapOpenAI` for client-level metadata, or pass [`langsmithExtra`](https://reference.langchain.com/javascript/modules/langsmith.html) per call.
 
 ```typescript
@@ -141,8 +145,6 @@ Some providers have dedicated setup guides that use `@traceable` or a native cal
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-openai-compatible.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-openai-compatible.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

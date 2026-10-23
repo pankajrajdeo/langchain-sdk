@@ -322,6 +322,7 @@ The `allowed_decisions` list controls what actions a human can take when reviewi
 Use `reject` when the human denies a proposed action. Use `respond` only when the human is acting as the tool, such as answering an `ask_user` prompt. Do not use `respond` to deny side-effecting tools, because its message may be treated by the model as a successful tool result.
 
 > [!TIP]
+>
 > When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
 
 You can customize which decisions are available for each tool:
@@ -344,6 +345,7 @@ interrupt_on = {
 By default, every tool call listed in `interrupt_on` pauses for review. To pause only some calls, add a `when` predicate to a tool's `InterruptOnConfig`. The predicate receives a [ToolCallRequest](https://reference.langchain.com/python/langgraph.prebuilt/tool_node/ToolCallRequest) and returns `True` to interrupt or `False` to auto-approve, so you can gate on the tool's arguments.
 
 > [!NOTE]
+>
 > Conditional interrupts require `langchain>=1.3.3`.
 
 **Google**
@@ -575,6 +577,7 @@ print(result["messages"][-1].content)  # [!code highlight]
 For real-time UIs, use `.stream()` instead of `.invoke()` to display tokens and tool call progress while handling HITL interrupts. Interrupts appear as `__interrupt__` entries in the `updates` stream. After the stream completes, collect human decisions and resume by streaming again with `Command(resume=...)`.
 
 > [!NOTE]
+>
 > For a typical `interrupt_on` HITL pause, resume with a flat `{"decisions": [...]}` payload, the same shape as with `.invoke()`. When multiple interrupts are pending at once (for example, parallel branches), map each interrupt ID to its resume value instead. See [Handling multiple interrupts](../langgraph/interrupts.md#handling-multiple-interrupts).
 
 ```python
@@ -625,6 +628,7 @@ print()
 ```
 
 > [!TIP]
+>
 > Combine `"messages"` and `"updates"` stream modes to show real-time LLM tokens to the user while still catching HITL interrupts. The `"messages"` mode streams tokens; the `"updates"` mode delivers interrupt payloads.
 
 ## Multiple tool calls
@@ -861,6 +865,7 @@ Execution completed!
 ## Filesystem permission interrupts
 
 > [!NOTE]
+>
 > Filesystem permission interrupts require `deepagents>=0.6.8`.
 
 Beyond `interrupt_on`, you can pause the built-in filesystem tools by marking a [permission rule](permissions.md) with `mode="interrupt"`. When the agent calls `write_file` or `edit_file` on a path that matches an interrupt-mode rule, `create_deep_agent` raises the same human-in-the-loop interrupt as a configured tool, using the filesystem tool's name as the action name.
@@ -980,8 +985,6 @@ interrupt_on = {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

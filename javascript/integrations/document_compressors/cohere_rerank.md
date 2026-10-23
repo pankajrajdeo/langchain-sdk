@@ -19,6 +19,7 @@ Cohere offers an API for reranking documents. In this example we'll show you how
 ## Setup
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 Set your API key:
@@ -220,8 +221,6 @@ console.log(rerankedDocuments);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_compressors/cohere_rerank.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_compressors/cohere_rerank.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

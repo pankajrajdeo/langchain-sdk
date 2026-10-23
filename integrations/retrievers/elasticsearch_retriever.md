@@ -18,8 +18,6 @@ This guide will help you get started with the Elasticsearch [retriever](../../de
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](elasticsearch_retriever.md).
-
 ## Setup
 
 There are two main ways to set up an Elasticsearch instance:
@@ -41,6 +39,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 This retriever lives in the `langchain-elasticsearch` package. For demonstration purposes, we will also install `langchain-community` to generate text [embeddings](../embeddings.md).
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -388,8 +387,6 @@ For detailed documentation of all `ElasticsearchRetriever` features and configur
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/elasticsearch_retriever.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/elasticsearch_retriever.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

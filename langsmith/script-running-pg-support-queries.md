@@ -62,18 +62,27 @@ which will output the count of daily traces by workspace ID and organization ID.
 
 ## Export usage data
 
-All export methods produce the same data: LangSmith trace counts, LangSmith Deployments node usage, and Fleet run counts across all workspaces and organizations.
+The UI and API exports cover all workspaces and organizations, with usage for:
+
+* LangSmith traces
+* LangSmith Deployments
+* Fleet (Agent Builder)
+* Usage snapshots (daily entity counts)
+* Sandboxes
+* LangSmith Engine
+* LangSmith LLM Gateway
 
 > [!NOTE]
+>
 > The UI and API exports require both of the following:
 >
 > * The `organization:manage` permission.
 > * The caller's email must be listed in `USAGE_EXPORT_ADMIN_EMAILS`, or `ORG_ADMINS_INSTALLATION_USAGE_EXPORT_ENABLED` must be set to `true`.
 >
-> ```env
+```env
 > USAGE_EXPORT_ADMIN_EMAILS='["admin@example.com", "admin2@example.com"]'
 > ORG_ADMINS_INSTALLATION_USAGE_EXPORT_ENABLED=true
-> ```
+```
 
 ### Export from the UI (recommended)
 
@@ -93,7 +102,7 @@ curl -OJ \
 
 ### Export via SQL scripts
 
-You can also run SQL scripts directly against your PostgreSQL database to export usage data. This requires database access credentials — no application-level permissions apply.
+You can also run SQL scripts directly against your PostgreSQL database to export trace, node, Fleet, and usage snapshot data. This requires database access credentials. No application-level permissions apply.
 
 To export trace usage (requires Helm chart version 0.11.4 or later):
 
@@ -129,8 +138,6 @@ sh run_support_query_pg.sh <postgres_url> \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-running-pg-support-queries.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-running-pg-support-queries.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

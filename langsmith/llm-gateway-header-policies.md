@@ -11,6 +11,7 @@ tags: [docs, langsmith, llm-gateway-header-policies]
 > Split gateway spend caps and rate limits by a custom request header so each of your end customers gets its own limit under a single API key.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 A [spend policy](llm-gateway-spend-policies.md) can separate a default limit by custom request header, so each header value gets an independent limit. Spend and [rate limit policies](llm-gateway-rate-limit-policies.md) can also match one specific header value. Use these options to cap your own end customers, tenants, or teams without issuing a separate [LangSmith API key](create-account-api-key.md) for each one.
@@ -26,9 +27,11 @@ Header names are normalized before matching: the `X-Gateway-` prefix is stripped
 The gateway stamps caller identity itself and ignores client attempts to override it. Headers that resolve to `organization_id`, `workspace_id`, `workspace_handle`, `user_id`, `user_email`, `api_key_id`, `api_key_short`, `auth_mode`, `user_agent`, `applied_policy_ids`, or `applied_policy_names`, and any header whose normalized name starts with `gateway`, are discarded.
 
 > [!WARNING]
+>
 > The gateway trusts the `X-Gateway-*` headers on an incoming request. Set the header in your own backend after you authenticate the end user, and do not distribute the gateway API key to end users. A caller that controls both the key and the header can choose which limit to use.
 
 > [!WARNING]
+>
 > Creating and managing policies requires the `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
 ## Separate a default spend limit by header
@@ -54,6 +57,8 @@ The policy table displays the header used to separate the default limit. You can
 
 Use an explicit policy instead when different header values need different limits.
 
+To also enable [custom-header grouping in Usage](llm-gateway-monitoring.md#group-spend-by-custom-header), select **API Key** and apply the limit to every API key by default. Keep that policy enabled with **Separate limits by custom header** configured. Default workspace and user policies do not enable this Usage option. This API-key policy enforces a separate cap for each API-key and header-value pair; it is not an analytics-only setting.
+
 ## Add an explicit header condition
 
 An explicit spend or rate limit policy can match one exact header value. Use an explicit policy to assign different limits to different header values.
@@ -74,6 +79,8 @@ Explicit header conditions follow these rules:
 
 You cannot edit the header condition in the UI after the policy is created. To change it, delete the policy and create a new one, or update `subject_matchers` through the API.
 
+An explicit header condition, including one on an organization-level policy, does not enable custom-header grouping in **Usage**. That option requires the enabled default API-key spend policy described in [Separate a default spend limit by header](#separate-a-default-spend-limit-by-header).
+
 ## Cap spend per end customer
 
 A reseller or multi-tenant application usually calls the gateway from its own backend, using one workspace-scoped API key on behalf of many end customers. Use an explicit header condition when each customer needs a different cap. If every customer uses the same cap, [separate one default spend limit by header](#separate-a-default-spend-limit-by-header) instead.
@@ -89,7 +96,7 @@ curl https://gateway.smith.langchain.com/openai/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -H "X-Gateway-Customer-Id: acme" \
-    -d '{"model":"gpt-4o-mini","messages":[{"role":"user","content":"ping"}]}'
+    -d '{"model":"gpt-5.4-mini","messages":[{"role":"user","content":"ping"}]}'
 ```
 
 **OpenAI SDK**
@@ -105,7 +112,7 @@ client = OpenAI(
 )
 customer_id = "acme"
 response = client.chat.completions.create(
-    model="gpt-4o-mini",
+    model="gpt-5.4-mini",
     messages=[{"role": "user", "content": "ping"}],
     extra_headers={"X-Gateway-Customer-Id": customer_id},
 )
@@ -113,6 +120,7 @@ print(response.choices[0].message.content)
 ```
 
 > [!NOTE]
+>
 > If your LangSmith account is on a regional instance, use the corresponding [regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway).
 
 ### Step 2. Create a cap for one customer
@@ -295,8 +303,6 @@ The sync script in [step 3](#step-3-sync-policies-with-your-customer-list) appli
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-header-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-header-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

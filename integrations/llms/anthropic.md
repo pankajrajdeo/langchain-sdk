@@ -11,6 +11,7 @@ tags: [docs, integrations, llms, anthropic]
 > Integrate with the AnthropicLLM using LangChain Python.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of Anthropic legacy Claude 2 models as text completion models. The latest and most popular Anthropic models are [chat completion models](../../langchain/models.md), and the text completion models have been deprecated.**
 >
 > You are probably looking for [this page instead](../chat/anthropic.md).
@@ -60,8 +61,6 @@ chain.invoke({"question": "What is LangChain?"})
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

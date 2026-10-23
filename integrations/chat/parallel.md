@@ -15,6 +15,7 @@ tags: [docs, integrations, chat, parallel]
 `ChatParallel` is an OpenAI-compatible chat interface to Parallel's models. The `speed` model is a low-latency conversational model with no citations; the research models (`lite`, `base`, `core`) browse the web and return per-field citations and structured output via JSON schema.
 
 > [!NOTE]
+>
 > `ChatParallel` is the canonical class name. The earlier `ChatParallelWeb` continues to work as an alias for the same class.
 
 ## Overview
@@ -23,7 +24,7 @@ tags: [docs, integrations, chat, parallel]
 
 | Class | Package | Serializable | JS/TS Support | Downloads | Latest Version |
 | :- | :- | :-: | :-: | :-: | :-: |
-| [`ChatParallel`](https://reference.langchain.com/python/langchain-parallel/chat_models/ChatParallel) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ✅ | ❌ | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-parallel/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| [`ChatParallel`](https://reference.langchain.com/python/langchain-parallel/chat_models/ChatParallel) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ✅ | ❌ | [![Downloads per month](https://static.pepy.tech/badge/langchain-parallel/month)](https://pypi.org/project/langchain-parallel/) | [![PyPI - Latest version](https://img.shields.io/pypi/v/langchain-parallel?style=flat-square\&label=%20\&color=orange)](https://pypi.org/project/langchain-parallel/) |
 
 ### Model features
 
@@ -270,8 +271,6 @@ For detailed documentation, head to the [`ChatParallel`](https://reference.langc
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

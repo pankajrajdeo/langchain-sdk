@@ -24,7 +24,7 @@ The Remote MCP is available on all LangSmith Cloud regions, on [BYOC](byoc.md) d
       <th>Region</th>
 
       <th>
-        {protocol_0 === false ? "Host" : "URL"}
+        URL
       </th>
     </tr>
   </thead>
@@ -34,9 +34,7 @@ The Remote MCP is available on all LangSmith Cloud regions, on [BYOC](byoc.md) d
       <td>GCP US</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://api.smith.langchain.com/mcp`
       </td>
     </tr>
 
@@ -44,9 +42,7 @@ The Remote MCP is available on all LangSmith Cloud regions, on [BYOC](byoc.md) d
       <td>GCP EU</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://eu.api.smith.langchain.com/mcp`
       </td>
     </tr>
 
@@ -54,9 +50,7 @@ The Remote MCP is available on all LangSmith Cloud regions, on [BYOC](byoc.md) d
       <td>GCP APAC</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://apac.api.smith.langchain.com/mcp`
       </td>
     </tr>
 
@@ -64,9 +58,7 @@ The Remote MCP is available on all LangSmith Cloud regions, on [BYOC](byoc.md) d
       <td>AWS US</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://aws.api.smith.langchain.com/mcp`
       </td>
     </tr>
   </tbody>
@@ -106,9 +98,11 @@ Send a [LangSmith API key](create-account-api-key.md) in the `X-Api-Key` header 
 Requests are authorized as the user that owns the API key, scoped to that key's workspace and permissions—the same authorization the key has elsewhere in the LangSmith API. Tools that accept a `workspace_id` argument can target a specific workspace; otherwise the key's own workspace is used.
 
 > [!WARNING]
+>
 > On [BYOC](byoc.md), the API key must be assigned to your LangSmith workspace.
 
 > [!NOTE]
+>
 > The `X-Api-Key` header is specific to the Remote MCP. The [standalone LangSmith MCP Server](langsmith-mcp-server.md) uses a different header, `LANGSMITH-API-KEY`.
 
 ## Quickstart
@@ -214,6 +208,7 @@ Any MCP client supporting the [Streamable HTTP transport](https://spec.modelcont
 ## Known client incompatibilities
 
 > [!NOTE]
+>
 > **OpenAI Codex CLI** does not work with the LangSmith Remote MCP. Codex omits the [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) `resource` parameter required by the [MCP authorization spec](https://modelcontextprotocol.io/specification/draft/basic/authorization) during the OAuth flow, so login appears to succeed but the issued token is not bound to the LangSmith MCP and `initialize` fails with an auth-required error. Two upstream issues affect token exchange and authorize requests in Codex (refer to [openai/codex#20729](https://github.com/openai/codex/issues/20729) and [openai/codex#13891](https://github.com/openai/codex/issues/13891)). In the meantime, use the [LangSmith CLI](langsmith-cli.md) from Codex. The LangSmith CLI supports the same projects, traces, runs, datasets, experiments, and threads as the MCP server, with native OAuth login.
 
 ## Available tools
@@ -243,26 +238,12 @@ If a client loses its session (for example, after revoking access in your LangSm
 
 ### Enabling Remote MCP
 
-The Remote MCP and its OAuth Authorization Server are wired automatically when `config.hostname` is set, but they stay **inert (404)** until you provide a signing JWKS. This is the one piece of configuration LangSmith Cloud handles for you. To enable it:
-
-1. **Generate an Ed25519 (OKP) JWKS.** RSA keys are rejected. For example, with [`step`](https://smallstep.com/docs/step-cli/):
-
-```bash
-   step crypto jwk create /dev/null /tmp/jwk.json --kty OKP --crv Ed25519 --no-password --insecure -f
-   jq -c '{keys:[.]}' /tmp/jwk.json   # wrap the single key in a JWKS
-```
-
-2. **Provide it to the chart** as `config.signingJwks` (stored in the chart secret), or as the key `langsmith_signing_jwks` in your [existing secret](self-host-using-an-existing-secret.md):
+The Remote MCP and its OAuth Authorization Server are wired automatically when `config.hostname` is set, but they stay **inert (404)** until you provide a signing JWKS. Follow [Configure a signing JWKS](kubernetes.md#configure-a-signing-jwks), then set the installation hostname in your LangSmith `values.yaml`:
 
 ```yaml
-   config:
-     hostname: "your-langsmith-host"
-     signingJwks: |
-       {"keys":[ ... ]}
+config:
+  hostname: "your-langsmith-host"
 ```
-
-> [!WARNING]
->    Do not set `LANGSMITH_SIGNING_JWKS` directly via `commonEnv` or `extraEnv`—the chart already wires it from the secret, and a manual copy fails the install with a duplicate environment-variable error. Use `config.signingJwks` or `config.existingSecretName` instead.
 
 After upgrading, the OAuth discovery endpoints and `/api/mcp` become live. Verify with:
 
@@ -274,8 +255,6 @@ For deployments on earlier versions, run the [standalone LangSmith MCP Server](l
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-remote-mcp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-remote-mcp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,6 @@
 ---
 title: "awrap_model_call"
-description: "Inject skills documentation into the system prompt (async version)."
+description: "Inject skills documentation into the system prompt and disclose read skills' tools (async version)."
 source: "https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware/awrap_model_call"
 category: "reference"
 tags: [reference, deepagents, middleware, skills, skillsmiddleware, awrap_model_call]
@@ -12,7 +12,7 @@ tags: [reference, deepagents, middleware, skills, skillsmiddleware, awrap_model_
 
 📖 [View in docs](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware/awrap_model_call)
 
-Inject skills documentation into the system prompt (async version).
+Inject skills documentation into the system prompt and disclose read skills' tools (async version).
 
 ## Signature
 
@@ -21,7 +21,7 @@ awrap_model_call(
     self,
     request: ModelRequest[ContextT],
     handler: Callable[[ModelRequest[ContextT]], Awaitable[ModelResponse[ResponseT]]],
-) -> ModelResponse[ResponseT]
+) -> ModelResponse[ResponseT] | ExtendedModelResponse[ResponseT]
 ```
 
 ## Parameters
@@ -33,10 +33,11 @@ awrap_model_call(
 
 ## Returns
 
-`ModelResponse[ResponseT]`
+`ModelResponse[ResponseT] | ExtendedModelResponse[ResponseT]`
 
-Model response from handler
+Model response from handler, with the skill tools it disclosed recorded
+in state.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/skills.py#L1056)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/skills.py#L1344)

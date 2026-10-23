@@ -14,7 +14,7 @@ In both the [Python](#python) and [TypeScript](#typescript) SDKs, you can add at
 
 ## Python
 
-In the [Python SDK](smith-python-sdk.md), you can use the `Attachment` type to add files to your traces. Each `Attachment` requires:
+In the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk.md), you can use the `Attachment` type to add files to your traces. Each `Attachment` requires:
 
 * `mime_type` (str): The MIME type of the file (e.g., `"image/png"`).
 * `data` (bytes | Path): The binary content of the file, or the file path.
@@ -26,8 +26,9 @@ There are two ways to provide file data:
 * Load the bytes yourself and pass them directly (works in all environments), or
 * Pass a `Path` object and let the SDK read the file by setting `dangerously_allow_filesystem=True` on your `@traceable` decorator.
 
-> [!NOTE]
->   The `dangerously_allow_filesystem` flag exists as a safeguard for server and multi-tenant environments, where user-controlled input could influence a file path. In a trusted environment (a local script or a controlled pipeline where you own the file paths), it is safe to enable.
+  > [!NOTE]
+  >
+  > The `dangerously_allow_filesystem` flag exists as a safeguard for server and multi-tenant environments, where user-controlled input could influence a file path. In a trusted environment (a local script or a controlled pipeline where you own the file paths), it is safe to enable.
 
 Decorate a function with `@traceable` and include your `Attachment` instances as arguments. The following example demonstrates both approaches: loading file bytes manually into an `Attachment`, and passing a `Path` object with `dangerously_allow_filesystem=True`:
 
@@ -87,7 +88,7 @@ result = trace_with_attachments(
 
 ## TypeScript
 
-In the [TypeScript SDK](smith-js-ts-sdk.md), you can add attachments to traces by using `Uint8Array` or `ArrayBuffer` as data types. Each attachment's MIME type is specified within `extractAttachments`:
+In the [TypeScript SDK](https://docs.langchain.com/langsmith/smith-js-ts-sdk.md), you can add attachments to traces by using `Uint8Array` or `ArrayBuffer` as data types. Each attachment's MIME type is specified within `extractAttachments`:
 
 * `Uint8Array`: Useful for handling binary data directly.
 * `ArrayBuffer`: Represents fixed-length binary data, which you can convert to `Uint8Array` as needed.
@@ -95,6 +96,7 @@ In the [TypeScript SDK](smith-js-ts-sdk.md), you can add attachments to traces b
 In the TypeScript SDK, the `extractAttachments` function is an optional parameter in the `traceable` configuration. When the traceable-wrapped function is invoked, it extracts binary data (e.g., images, audio files) from your inputs and logs them alongside other trace data, specifying their MIME types.
 
 > [!NOTE]
+>
 > You cannot directly pass in a file path in the TypeScript SDK, because accessing local files is not supported in all runtime environments.
 
 Wrap your function with `traceable` and include your attachments within the `extractAttachments` option. The signature is:
@@ -177,8 +179,6 @@ const result = await traceableWithAttachments(
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/upload-files-with-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/upload-files-with-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

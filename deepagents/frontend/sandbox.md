@@ -22,8 +22,6 @@ the **custom API routes** that expose the sandbox filesystem to it. For sandbox
 providers, lifecycle scoping, seeding files, secrets, deployment, and production
 `useStream` configuration, see [Going to production](../going-to-production.md).
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/frontend/sandbox).
-
 ## Architecture
 
 This setup has three parts:
@@ -345,6 +343,7 @@ def agent():
 ```
 
 > [!NOTE]
+>
 > Similar to the example in [Going to production](../going-to-production.md#lifecycle), the
 > agent is an async graph factory invoked on each run. Store the sandbox ID on
 > thread metadata so custom `http.app` routes can call the same
@@ -361,6 +360,7 @@ the sandbox. For LangSmith sandboxes, pass `templateName` from a
 [sandbox snapshot](../../langsmith/sandbox-snapshots.md) when creating the container.
 
 > [!TIP]
+>
 > Run `sandbox.execute("cd /app && npm install")` after uploading
 > `package.json` so dependencies are ready before the first agent turn.
 
@@ -417,6 +417,7 @@ async def read_file(
 ```
 
 > [!NOTE]
+>
 > Both the agent's backend and the API server call the same
 > `get_or_create_sandbox_for_thread` function. This ensures they always resolve
 >
@@ -447,6 +448,7 @@ Your custom routes are available at the same host as the LangGraph API. For
 local development with `langgraph dev`, that's `http://localhost:2024`.
 
 > [!NOTE]
+>
 > Custom routes defined in `http.app` take priority over default LangGraph routes. This means you
 > can shadow built-in endpoints if needed, but be careful not to accidentally override routes like
 > `/threads` or `/runs`.
@@ -885,39 +887,45 @@ For backends and sandboxes:
 
 ## Related
 
-#### [Going to production](../going-to-production.md)
-Deploy the agent with persistent sandboxes, auth, guardrails, and production `useStream` settings.
+> **[Going to production](../going-to-production.md)**
+>
+> Deploy the agent with persistent sandboxes, auth, guardrails, and production `useStream` settings.
 
-#### [Sandboxes](../sandboxes.md)
-Sandbox providers, security model, and file transfer APIs.
+> **[Sandboxes](../sandboxes.md)**
+>
+> Sandbox providers, security model, and file transfer APIs.
 
-#### [Frontend overview](overview.md)
-Other deep agent UI patterns: subagent streaming, todo lists, and custom state.
+> **[Frontend overview](overview.md)**
+>
+> Other deep agent UI patterns: subagent streaming, todo lists, and custom state.
 
-#### [Application structure](../../langgraph/application-structure.md)
-Full `langgraph.json` reference, including custom `http.app` routes.
+> **[Application structure](../../langgraph/application-structure.md)**
+>
+> Full `langgraph.json` reference, including custom `http.app` routes.
 
 ## Related LangChain guides
 
 The sandbox IDE builds on core LangChain frontend patterns. These guides cover
 the same `useStream` primitives used in this page:
 
-#### [Tool calling](../../langchain/frontend/tool-calling.md)
-Render file and execution tool calls as purpose-built UI cards with type-safe results.
+> **[Tool calling](../../langchain/frontend/tool-calling.md)**
+>
+> Render file and execution tool calls as purpose-built UI cards with type-safe results.
 
-#### [Headless tools](../../langchain/frontend/headless-tools.md)
-Run browser and device APIs on the client side—useful for embedding live preview or terminal output in the IDE panel.
+> **[Headless tools](../../langchain/frontend/headless-tools.md)**
+>
+> Run browser and device APIs on the client side—useful for embedding live preview or terminal output in the IDE panel.
 
-#### [Open-ended generative UI](../../langchain/frontend/open-ended-generative-ui.md)
-Render sandboxed app previews and MCP-generated interfaces at the open end of the generative UI spectrum.
+> **[Open-ended generative UI](../../langchain/frontend/open-ended-generative-ui.md)**
+>
+> Render sandboxed app previews and MCP-generated interfaces at the open end of the generative UI spectrum.
 
-#### [Join & rejoin streams](../../langchain/frontend/join-rejoin.md)
-Reconnect to a running coding session after a page reload without losing the sandbox state.
+> **[Join & rejoin streams](../../langchain/frontend/join-rejoin.md)**
+>
+> Reconnect to a running coding session after a page reload without losing the sandbox state.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/sandbox.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/sandbox.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -29,6 +29,7 @@ uv add langchain-oci oci
 ## Authentication
 
 > [!NOTE]
+>
 > Initializing [ChatOCIGenAI](#chatocigenai) is resource-intensive. For optimal performance, it is recommended to treat this client as a singleton and reuse the instance across your application.
 
 Four authentication methods are supported for OCI services. All methods follow the [standard OCI SDK authentication](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdk_authentication_methods.htm).
@@ -346,8 +347,6 @@ For comprehensive guides covering all features, see the [langchain-oci samples](
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/oci.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/oci.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -25,19 +25,23 @@ The table below summarizes the split:
 | **Control plane** | LangChain's cloud, `us-east-2` | Authentication, organization and workspace configuration, billing and usage metadata, LangSmith API keys, and the static frontend assets |
 | **Data plane** | Your AWS account, in the region you choose | Traces, prompts, datasets, evaluators, experiments, insights runs, annotation queues, agent deployments, workspace secrets, and other application data |
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/sRMLsyZ-6iriBvN5/langsmith/images/byoc-architecture.png?fit=max&auto=format&n=sRMLsyZ-6iriBvN5&q=85&s=8e65825805f6f2449a623213239c26ee" alt="BYOC architecture diagram. The LangSmith UI and the client apps in your application VPC both reach the data plane over one private connection, using PrivateLink, VPC peering, or Tailscale, which terminates at a network load balancer. The load balancer feeds an Istio ingress in an EKS cluster in your AWS account, which routes to the LangSmith services that run the backend, SmithDB, and sandboxes, and those services read and write S3, RDS, and ElastiCache. The LangChain cloud control plane holds Crossplane, on-call engineers, alerting, and the LangSmith control plane services. It reaches the cluster over PrivateLink for scaling and upgrades, receives auth and telemetry back over a second PrivateLink, and assumes an IAM role in your account to provision resources." width="1580" height="946" data-path="langsmith/images/byoc-architecture.png" />
+![BYOC architecture diagram. The LangSmith UI and the client apps in your application VPC both reach the data plane over one private connection, using PrivateLink, VPC peering, or Tailscale, which terminates at a network load balancer. The load balancer feeds an Istio ingress in an EKS cluster in your AWS account, which routes to the LangSmith services that run the backend, SmithDB, and sandboxes, and those services read and write S3, RDS, and ElastiCache. The LangChain cloud control plane holds Crossplane, on-call engineers, alerting, and the LangSmith control plane services. It reaches the cluster over PrivateLink for scaling and upgrades, receives auth and telemetry back over a second PrivateLink, and assumes an IAM role in your account to provision resources.](https://mintcdn.com/langchain-5e9cc07a/sRMLsyZ-6iriBvN5/langsmith/images/byoc-architecture.png?fit=max\&auto=format\&n=sRMLsyZ-6iriBvN5\&q=85\&s=8e65825805f6f2449a623213239c26ee)
 
 ## Provisioned resources
 
 LangChain provisions the following in your account:
 
 * **VPC**: By default, a dedicated VPC spread across the region's availability zones, with private ingress. It uses VPC endpoints for private communication to AWS services, and PrivateLink for communication between the data plane and the control plane. With [BYOVPC](byoc-byovpc.md), you create and manage the VPC and its base network resources instead.
-* **Managed databases**: RDS for relational workloads, and ElastiCache for caching.
-* **Storage**: S3 buckets for the blob store holding trace data, VPC flow logs, and ClickHouse backups.
+* **Managed databases**: RDS for relational workloads and the SmithDB metastore, and ElastiCache for caching.
+* **Storage**: S3 buckets for the blob store holding trace data, the SmithDB object store, and VPC flow logs.
 * **EKS**: A private EKS cluster with managed add-ons.
 * **Compute**: A system node group for platform workloads, and application node groups through Karpenter.
 * **In-cluster resources**: The LangSmith Helm chart, Istio, KEDA, and other in-cluster resources.
 * **IAM roles**: The roles and permissions required for Kubernetes resources.
+
+> [!NOTE]
+>
+> Data planes created on or after October 21, 2026 store and query traces in [SmithDB](self-host-smithdb.md) only. ClickHouse is deprecated, and support ends in LangSmith v0.19. Data planes created with ClickHouse keep it, along with its S3 backups, until they migrate to SmithDB.
 
 ## Cross-account IAM permissions
 
@@ -73,7 +77,7 @@ Sensitive data does not leave your VPC, and does not pass through LangChain's VP
 
 To ingest or query data programmatically, point your client at your data plane directly. The data flow is always `browser or client → data plane → back to client`.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/sRMLsyZ-6iriBvN5/langsmith/images/byoc-data-flow.png?fit=max&auto=format&n=sRMLsyZ-6iriBvN5&q=85&s=3f85cc69ca981f5ba14ad68a7bae5e7b" alt="Data traffic diagram. A user on their own machine, VPC, or network opens aws.smith.langchain.com in a browser. The browser makes two requests: first it fetches the UI bundle of HTML, CSS, and JavaScript from the static assets in LangChain's cloud, which hold no customer data; second it sends data plane API requests to the network load balancer in your BYOC VPC, which routes to the EKS cluster running LangSmith and on to S3, RDS, and the cache." width="1319" height="638" data-path="langsmith/images/byoc-data-flow.png" />
+![Data traffic diagram. A user on their own machine, VPC, or network opens aws.smith.langchain.com in a browser. The browser makes two requests: first it fetches the UI bundle of HTML, CSS, and JavaScript from the static assets in LangChain's cloud, which hold no customer data; second it sends data plane API requests to the network load balancer in your BYOC VPC, which routes to the EKS cluster running LangSmith and on to S3, RDS, and the cache.](https://mintcdn.com/langchain-5e9cc07a/sRMLsyZ-6iriBvN5/langsmith/images/byoc-data-flow.png?fit=max\&auto=format\&n=sRMLsyZ-6iriBvN5\&q=85\&s=3f85cc69ca981f5ba14ad68a7bae5e7b)
 
 ### Connectivity
 
@@ -98,8 +102,6 @@ Traffic reaches LangSmith through an Istio ingress fronted by an AWS NLB, using 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

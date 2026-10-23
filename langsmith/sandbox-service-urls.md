@@ -12,7 +12,7 @@ tags: [docs, langsmith, sandbox-service-urls]
 
 Service URLs let you access an HTTP service running inside a sandbox (a REST API, a Streamlit app, a Jupyter notebook, API documentation) without tunnels, port forwarding, or CLI tools. Each sandbox + port combination gets its own URL that you can open in a browser, call from code, or share with a teammate.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/JxIMPFSEbdqv0n3F/images/langsmith/sandboxes/sb-service-feature.png?fit=max&auto=format&n=JxIMPFSEbdqv0n3F&q=85&s=17f16908ceed5efff1dcf8620e7aea4a" alt="Service URLs view" width="2220" height="1224" data-path="images/langsmith/sandboxes/sb-service-feature.png" />
+![Service URLs view](https://mintcdn.com/langchain-5e9cc07a/JxIMPFSEbdqv0n3F/images/langsmith/sandboxes/sb-service-feature.png?fit=max\&auto=format\&n=JxIMPFSEbdqv0n3F\&q=85\&s=17f16908ceed5efff1dcf8620e7aea4a)
 
 ## Quick start
 
@@ -72,6 +72,7 @@ svc = sb.service(port=3000, expires_in_seconds=3600)
 ```
 
 > [!NOTE]
+>
 > The service must be running and listening on the specified port before you request a service URL. The URL only routes traffic and does not start a service for you.
 
 ### Make requests
@@ -212,8 +213,6 @@ To share a single file rather than a running service, use a **[download link](sa
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-service-urls.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-service-urls.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

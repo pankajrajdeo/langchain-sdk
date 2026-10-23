@@ -35,7 +35,7 @@ Deep Agents Code integrates automatically with the [following model providers](#
    Run `/install` with no argument to list the valid extras. To preinstall extras during the initial CLI install, set `DEEPAGENTS_CODE_EXTRAS`:
 
 ```bash
-   DEEPAGENTS_CODE_EXTRAS="baseten,groq" curl -LsSf https://langch.in/dcode | bash
+   curl -LsSf https://langch.in/dcode | DEEPAGENTS_CODE_EXTRAS="baseten,groq" bash
 ```
 
 2. **Set credentials**
@@ -84,77 +84,88 @@ Using a provider not listed here? See [Arbitrary providers](config-file.md#arbit
 | OpenRouter | [`langchain-openrouter`](../../integrations/chat/openrouter.md) | `OPENROUTER_API_KEY` | ✅ |
 | LiteLLM | [`langchain-litellm`](../../integrations/chat/litellm.md) | Per-provider (see [docs](https://docs.litellm.ai/)) | ❌ |
 
-<details>
-<summary>Configure Anthropic models on Gemini Enterprise Agent Platform</summary>
-
-The `google_anthropic_vertex` provider runs Claude through Anthropic's Messages API on Gemini Enterprise Agent Platform. It uses Google Cloud Application Default Credentials (ADC) instead of an Anthropic API key.
-
-To use the provider:
-
-1. Install the Gemini Enterprise Agent Platform extra:
-
-**In session**
-
+> **Use Nemotron 3.5 Super VL on NVIDIA Build**
+>
+> Install the NVIDIA provider package, then save your [NVIDIA Build API key](../../integrations/chat/nvidia_ai_endpoints.md#access-the-nvidia-api-catalog) with `/auth`:
+>
+```bash
+> dcode --install nvidia
+> dcode
+```
+>
+> In dcode, run `/auth` and select NVIDIA. If the initial model selector is open, press `Esc` first. Then select Nemotron 3.5 Super VL from the model switcher.
+>
 ```txt
-     /install vertex
+> /model --default nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b
 ```
+>
+> The NVIDIA provider uses the public Build endpoint by default. Check [NVIDIA Build](https://build.nvidia.com/) for model availability. For a configured private endpoint, set `NVIDIA_BASE_URL` or pair its URL with the credential through `dcode auth set nvidia --base-url URL`.
 
-**Shell**
-
-```bash
-     dcode --install vertex
-```
-
-2. [Enable a Claude model in your Google Cloud project](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude), then configure ADC:
-
-```bash
-   gcloud auth application-default login
-```
-
-3. Set your Google Cloud project and location:
-
-```bash
-   export GOOGLE_CLOUD_PROJECT="your-project-id"
-   export GOOGLE_CLOUD_LOCATION="global"
-```
-
-   You can use `DEEPAGENTS_CODE_GOOGLE_CLOUD_PROJECT` and `DEEPAGENTS_CODE_GOOGLE_CLOUD_LOCATION` to scope these values to Deep Agents Code.
-
-4. Select a Claude model with the `google_anthropic_vertex` provider:
-
-**In session**
-
-```txt
-     /model google_anthropic_vertex:claude-sonnet-4-6
-```
-
-**Shell**
-
-```bash
-     dcode --model google_anthropic_vertex:claude-sonnet-4-6
-```
-
-Use `google_vertexai` for Google models. Claude models use Anthropic's Messages API and must use `google_anthropic_vertex` instead.
-
-</details>
+> **Configure Anthropic models on Gemini Enterprise Agent Platform**
+>
+> The `google_anthropic_vertex` provider runs Claude through Anthropic's Messages API on Gemini Enterprise Agent Platform. It uses Google Cloud Application Default Credentials (ADC) instead of an Anthropic API key.
+>
+> To use the provider:
+>
+> 1. Install the Gemini Enterprise Agent Platform extra:
+>
+>    ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>    /install vertex
+>    ```
+>
+>    ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>    dcode --install vertex
+>    ```
+>
+> 2. [Enable a Claude model in your Google Cloud project](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude), then configure ADC:
+>
+>    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>    gcloud auth application-default login
+>    ```
+>
+> 3. Set your Google Cloud project and location:
+>
+>    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>    export GOOGLE_CLOUD_PROJECT="your-project-id"
+>    export GOOGLE_CLOUD_LOCATION="global"
+>    ```
+>
+>    You can use `DEEPAGENTS_CODE_GOOGLE_CLOUD_PROJECT` and `DEEPAGENTS_CODE_GOOGLE_CLOUD_LOCATION` to scope these values to Deep Agents Code.
+>
+> 4. Select a Claude model with the `google_anthropic_vertex` provider:
+>
+>    ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>    /model google_anthropic_vertex:claude-sonnet-4-6
+>    ```
+>
+>    ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+>    dcode --model google_anthropic_vertex:claude-sonnet-4-6
+>    ```
+>
+> Use `google_vertexai` for Google models. Claude models use Anthropic's Messages API and must use `google_anthropic_vertex` instead.
 
 > [!TIP]
+>
 > You can scope any credential to Deep Agents Code by adding a `DEEPAGENTS_CODE_` prefix. For example, `DEEPAGENTS_CODE_OPENAI_API_KEY` takes priority over `OPENAI_API_KEY` within Deep Agents Code without affecting other tools. See [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix) for details.
 
 > [!TIP]
+>
 > [Model profiles](../../langchain/models.md#model-profiles) provide model metadata used by the interactive `/model` switcher. If a model is missing from the switcher, pass the model name directly or add it via `config.toml`.
 
 ### Sign in with ChatGPT
 
 The `openai_codex` provider lets you use OpenAI's Codex models with your paid **ChatGPT** subscription instead of an `OPENAI_API_KEY`. You sign in with your ChatGPT account, and it shows up as its own provider in both `/auth` and the `/model` switcher, separate from the API-key-based `openai` provider.
 
-### Start the sign-in
+**1. Start the sign-in**
+
 Run `/auth` in any session and select **`openai_codex`**. Because ChatGPT signs you in through your browser, this starts a browser sign-in instead of asking for an API key.
 
-### Authorize in your browser
+**2. Authorize in your browser**
+
 Deep Agents Code opens your browser to the ChatGPT sign-in page. If it cannot open a browser (for example, over SSH), it also shows the sign-in URL on screen so you can copy it to a browser on another device.
 
-### Select a Codex model
+**3. Select a Codex model**
+
 Once signed in, the Codex models appear in the `/model` switcher under the `openai_codex` provider. Switch to one directly with its spec:
 
 ```txt
@@ -164,10 +175,14 @@ Once signed in, the Codex models appear in the `/model` switcher under the `open
 Your sign-in persists across sessions. To check your status or sign out, run `/auth`, select `openai_codex`, and choose to re-authenticate or sign out.
 
 > [!NOTE]
+>
 > `openai_codex` is separate from `openai`. To use OpenAI models with a standard API key instead, use the regular `openai` provider (e.g. `/model openai:gpt-5.5`).
 
 > [!NOTE]
+>
 > Some provider-specific account types or key scopes may not work for API access. If a provider appears configured in `/auth` but requests still fail, verify that the account plan and API-key permissions match the provider's API requirements.
+
+<a id="use-nemotron-3-5-super-vl-on-nvidia-build"></a>
 
 ### Model routers and proxies
 
@@ -214,9 +229,9 @@ To switch models in Deep Agents Code, either:
 
 1. **Use the interactive model switcher** with the `/model` command.
 
-> [!NOTE]
->    Not all models appear here. If yours is missing, pass the model name directly (e.g. `/model gpt-5.5`) or add it to `config.toml`.
-
+   > [!NOTE]
+   >
+   > Not all models appear here. If yours is missing, pass the model name directly (e.g. `/model gpt-5.5`) or add it to `config.toml`.
 2. **Specify a model name directly** as an argument, e.g. `/model gpt-5.5`. You can use any model supported by the chosen provider, regardless of whether it appears in the list from option 1. The model name will be passed to the API request.
 3. **Specify the model at launch** via `--model`, e.g.
 
@@ -224,41 +239,36 @@ To switch models in Deep Agents Code, either:
    dcode --model openai:gpt-5.5
 ```
 
-<details>
-<summary>Model resolution order</summary>
-
-When Deep Agents Code launches, it resolves which model to use in the following order:
-
-1. **`--model` flag** always wins when provided.
-2. **`[models].default`** in `~/.deepagents/config.toml`—the user's intentional long-term preference.
-3. **`[models].recent`** in `~/.deepagents/config.toml`—the last model switched to via `/model`. Written automatically; never overwrites `[models].default`.
-4. **Environment auto-detection**: falls back to the first available startup credential, checked in order: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `GOOGLE_CLOUD_PROJECT` (Gemini Enterprise Agent Platform).
-
-This startup fallback intentionally checks only those four credentials. Other supported providers (for example, Groq) are still available via `--model`, `/model`, and saved defaults (`[models].default` / `[models].recent`).
-
-</details>
+> **Model resolution order**
+>
+> When Deep Agents Code launches, it resolves which model to use in the following order:
+>
+> 1. **`--model` flag** always wins when provided.
+> 2. **`[models].default`** in `~/.deepagents/config.toml`—the user's intentional long-term preference.
+> 3. **`[models].recent`** in `~/.deepagents/config.toml`—the last model switched to via `/model`. Written automatically; never overwrites `[models].default`.
+> 4. **Environment auto-detection**: falls back to the first available startup credential, checked in order: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `GOOGLE_CLOUD_PROJECT` (Gemini Enterprise Agent Platform).
+>
+> This startup fallback intentionally checks only those four credentials. Other supported providers (for example, Groq) are still available via `--model`, `/model`, and saved defaults (`[models].default` / `[models].recent`).
 
 ### Which models appear in the switcher
 
 The `/model` selector dynamically builds its list from installed provider packages. Expand below for the full criteria and troubleshooting.
 
-<details>
-<summary>How the switcher builds its model list</summary>
-
-The interactive `/model` selector builds its list from installed provider packages and models configured in `config.toml`.
-
-A model appears when:
-
-1. The provider package is installed.
-2. The model is available from the provider package, a local provider, or your `config.toml`.
-3. The model profile does not mark text input or output as unsupported.
-
-If a model is missing, use `/model <provider>:<model>` directly or add it to [`[models.providers.<name>].models`](/oss/deepagents/code/config-file#adding-models-to-the-interactive-switcher).
-
-> [!TIP]
-> Credential status does **not** affect whether a model is listed. You can still select a model with missing credentials. The provider reports an authentication error at request time.
-
-</details>
+> **How the switcher builds its model list**
+>
+> The interactive `/model` selector builds its list from installed provider packages and models configured in `config.toml`.
+>
+> A model appears when:
+>
+> 1. The provider package is installed.
+> 2. The model is available from the provider package, a local provider, or your `config.toml`.
+> 3. The model profile does not mark text input or output as unsupported.
+>
+> If a model is missing, use `/model <provider>:<model>` directly or add it to [`[models.providers.<name>].models`](/oss/deepagents/code/config-file#adding-models-to-the-interactive-switcher).
+>
+> > [!TIP]
+> >
+> > Credential status does **not** affect whether a model is listed. You can still select a model with missing credentials. The provider reports an authentication error at request time.
 
 ### Open weights models
 
@@ -373,11 +383,12 @@ BASETEN_API_KEY="your-api-key" dcode --model baseten:moonshotai/Kimi-K2.7-Code
 Use the interactive switcher, or pass the model directly with `/model baseten:moonshotai/Kimi-K2.7-Code`.
 
 > [!TIP]
+>
 > If you want a provider preinstalled at the same time as the CLI itself, use `DEEPAGENTS_CODE_EXTRAS` during the initial install:
 >
-> ```bash
-> DEEPAGENTS_CODE_EXTRAS="fireworks" curl -LsSf https://langch.in/dcode | bash
-> ```
+```bash
+> curl -LsSf https://langch.in/dcode | DEEPAGENTS_CODE_EXTRAS="fireworks" bash
+```
 >
 > You can combine multiple providers: `DEEPAGENTS_CODE_EXTRAS="groq,fireworks,ollama"`. If Deep Agents Code is already installed, use `/install <extra>` in a session or `dcode --install <extra>` from the shell instead.
 
@@ -462,9 +473,11 @@ CLI flags override config-file `params` and are session-only (mid-session change
 For retry counts, prefer `--max-retries` or the top-level [`[retries]` config](/oss/deepagents/code/config-file#retries).
 
 > [!TIP]
+>
 > Any kwarg accepted by the underlying chat-model constructor is valid. Refer to the provider's reference docs for the full list—e.g. [`ChatAnthropic`](https://reference.langchain.com/python/langchain-anthropic/langchain_anthropic/chat_models/ChatAnthropic), [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/langchain_openai/chat_models/base/ChatOpenAI), [`ChatOllama`](https://reference.langchain.com/python/langchain-ollama/langchain_ollama/chat_models/ChatOllama). Unknown kwargs are forwarded to the upstream API request, so newly released parameters work without a CLI update.
 
 > [!NOTE]
+>
 > Do not put credentials (`api_key`) in `params`—use [`api_key_env`](config-file.md#provider-configuration) to point at an environment variable instead.
 
 To override fields on the model's runtime *profile* (`max_input_tokens`, `tool_calling`, capability flags)—distinct from constructor params—see [Profile overrides](config-file.md#profile-overrides-advanced).
@@ -475,8 +488,6 @@ For detailed configuration of provider params, profile overrides, custom base UR
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -22,6 +22,7 @@ The agent you build will:
 4. Share results to a Slack channel
 
 > [!TIP]
+>
 > The Slack integration is optional. The agent can be modified to save artifacts locally or share results through other channels.
 
 ### Key concepts
@@ -46,6 +47,7 @@ For this tutorial, we'll use:
 * A [LangSmith sandbox](../../langsmith/sandboxes.md) for code execution
 
 > [!NOTE]
+>
 > These services are optional, though a sandboxed environment is highly recommended for any production use. You can alternatively use the local shell backend (with important [security considerations](backends.md#localshellbackend-local-shell)) or download artifacts directly from the backend.
 
 ### LangSmith
@@ -65,17 +67,18 @@ Deep Agents use [backends](backends.md) to execute code in sandboxed environment
 
 The examples below use a [LangSmith sandbox](../../langsmith/sandboxes.md). For other providers, see [available providers](sandboxes.md#available-providers).
 
-#### LangSmith
+**LangSmith**
+
 **pip**
 
 ```bash
-pip install "langsmith[sandbox]"
+pip install langsmith
 ```
 
 **uv**
 
 ```bash
-uv add "langsmith[sandbox]"
+uv add langsmith
 ```
 
 ```python
@@ -87,8 +90,10 @@ ls_sandbox = client.create_sandbox()
 backend = LangSmithSandbox(sandbox=ls_sandbox)
 ```
 
-#### Local shell
+**Local shell**
+
 > [!WARNING]
+>
 > This backend provides unrestricted filesystem and shell access. Use only in controlled environments for development and testing. See the [security considerations](backends.md#localshellbackend-local-shell) for more details.
 
 ```python
@@ -101,7 +106,8 @@ backend = LocalShellBackend(
 )
 ```
 
-#### AgentCore
+**AgentCore**
+
 **pip**
 
 ```bash
@@ -123,7 +129,8 @@ interpreter.start()
 backend = AgentCoreSandbox(interpreter=interpreter)
 ```
 
-#### Daytona
+**Daytona**
+
 **pip**
 
 ```bash
@@ -153,7 +160,8 @@ print(result)
 # ExecuteResponse(output='ready', exit_code=0, ...)
 ```
 
-#### E2B
+**E2B**
+
 **pip**
 
 ```bash
@@ -174,7 +182,8 @@ e2b_sandbox = Sandbox.create()
 backend = E2BSandbox(sandbox=e2b_sandbox)
 ```
 
-#### Modal
+**Modal**
+
 ```python
 import modal
 
@@ -185,7 +194,8 @@ modal_sandbox = modal.Sandbox.create(app=app)
 backend = ModalSandbox(sandbox=modal_sandbox)
 ```
 
-#### Runloop
+**Runloop**
+
 **pip**
 
 ```bash
@@ -277,6 +287,7 @@ def slack_send_message(text: str, file_path: str | None = None) -> str:
 ```
 
 > [!NOTE]
+>
 > It is generally good practice to avoid adding credentials and other secrets to the sandbox. Here we manage the Slack token outside the sandbox in a tool.
 
 ## Enable task planning
@@ -694,16 +705,20 @@ View the full [LangSmith trace](https://smith.langchain.com/public/ac2443a8-16ad
 
 The agent successfully analyzes the data and shares a comprehensive report with visualizations to Slack:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/7KAsBk-8tguhrRJ6/images/data_analysis_slack_response.png?fit=max&auto=format&n=7KAsBk-8tguhrRJ6&q=85&s=b0a89738510117d55b35fc7a10265053" alt="Sales analysis results in Slack" width="514" height="961" data-path="images/data_analysis_slack_response.png" />
+![Sales analysis results in Slack](https://mintcdn.com/langchain-5e9cc07a/7KAsBk-8tguhrRJ6/images/data_analysis_slack_response.png?fit=max\&auto=format\&n=7KAsBk-8tguhrRJ6\&q=85\&s=b0a89738510117d55b35fc7a10265053)
+
+Agent-generated analysis report and visualization dashboard delivered to Slack
 
 > [!TIP]
+>
 > You can download artifacts directly from the backend without using external tools:
 >
-> ```python
+```python
 > backend.download_files(list_of_filepaths)
-> ```
+```
 
 > [!NOTE]
+>
 > See [provider guides](sandboxes.md#available-providers) for how to clean up the sandbox once finished.
 
 ## Next steps
@@ -719,8 +734,6 @@ Now that you've built a data analysis agent, explore these resources to extend i
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/data-analysis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/data-analysis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

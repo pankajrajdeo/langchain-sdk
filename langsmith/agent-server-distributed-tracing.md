@@ -31,6 +31,7 @@ To opt-in to distributed tracing, both client and server need to opt in.
 To accept distributed trace context, your graph must read the trace headers from the config and set the tracing context. The headers are passed through the `configurable` field as `langsmith-trace` and `langsmith-project`.
 
 > [!WARNING]
+>
 > Distributed-tracing headers (`langsmith-trace`, `baggage`) are consumed as trusted tracing context. Only configure your server to apply inbound trace context for deployments called by trusted, internal services. If your Agent Server receives requests directly from untrusted third parties or the public internet, do not propagate these headers into the tracing context: strip them at your gateway or proxy instead. Trusting `baggage` from an external caller lets them influence how your runs are recorded.
 
 ```python
@@ -67,7 +68,8 @@ Export this `graph` function in your `langgraph.json`:
 
 ## Connect from the client
 
-#### RemoteGraph
+**RemoteGraph**
+
 Set `distributed_tracing=True` when initializing [`RemoteGraph`](https://reference.langchain.com/python/langgraph/pregel/remote/RemoteGraph). This automatically propagates trace headers on all requests.
 
 ```python
@@ -99,7 +101,8 @@ graph = (
 result = graph.invoke("What's the weather in SF?")
 ```
 
-#### SDK
+**SDK**
+
 If you're using the [LangGraph SDK](reference.md) directly, propagate trace headers manually using `run_tree.to_headers()`:
 
 ```python
@@ -130,8 +133,6 @@ result = await call_remote_agent("What's the weather in SF?")
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-distributed-tracing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-distributed-tracing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

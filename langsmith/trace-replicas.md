@@ -41,6 +41,7 @@ Set the `LANGSMITH_RUNS_ENDPOINTS` environment variable to a JSON value. Two for
 ```
 
 > [!WARNING]
+>
 > You cannot use `LANGSMITH_RUNS_ENDPOINTS` alongside `LANGSMITH_ENDPOINT`. If you set both, LangSmith raises an error. Use only one to configure your endpoint.
 
 ## Configure replicas at runtime
@@ -112,6 +113,7 @@ await myPipeline("What is LangSmith?");
 You can also use the `updates` field to merge additional fields (such as [metadata or tags](ls-metadata-parameters.md)) into a run for a specific replica only, leaving the primary trace unchanged. Replica errors are non-fatal: if a replica endpoint is unavailable, LangSmith logs the error without affecting the primary trace.
 
 > [!WARNING]
+>
 > Auth does not propagate in distributed traces. When a trace spans multiple services, LangSmith forwards replica `project_name` and `updates` to downstream services automatically, but not API keys or credentials. Each service must configure its own credentials for replica destinations.
 
 ## Replicate within the same server (project-only replicas)
@@ -298,6 +300,7 @@ if (primaryRunId) {
 ```
 
 > [!NOTE]
+>
 > The `compute_run_id_for_secondary_replica` / `computeRunIdForSecondaryReplica` helper is available in Python SDK 0.10.8 or later and JS SDK 0.8.5 or later. If you are using an earlier SDK version, upgrade to use this feature.
 
 ## Route between LangSmith and OpenTelemetry destinations
@@ -311,6 +314,7 @@ Set the tracing mode using the `tracing_mode` constructor argument or the `LANGS
 * **`"hybrid"` (Python only)**: sends to both LangSmith and an OTel backend from a single replica.
 
 > [!NOTE]
+>
 > If you are using the deprecated `otel_enabled` parameter on `Client` (Python only), migrate to `tracing_mode`: `Client(otel_enabled=True)` → `Client(tracing_mode="hybrid")`. Passing `otel_enabled` still works, but emits a `FutureWarning`.
 
 Pass a configured `Client` directly into a replica to apply the desired mode at runtime:
@@ -333,7 +337,7 @@ openai_client = wrap_openai(openai.Client())
 @traceable()
 def joke():
     response = openai_client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-5.4-mini",
         messages=[{"role": "user", "content": "Tell me a short joke."}],
     )
     return response.choices[0].message.content
@@ -384,7 +388,7 @@ const openaiClient = wrapOpenAI(new OpenAI());
 
 async function jokeImpl() {
   const response = await openaiClient.chat.completions.create({
-    model: "gpt-4o-mini",
+    model: "gpt-5.4-mini",
     messages: [{ role: "user", content: "Tell me a short joke." }],
   });
   return response.choices[0].message.content;
@@ -417,8 +421,6 @@ The `tracing_mode` on each `Client` determines that replica's export path. In Py
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-replicas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-replicas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -11,6 +11,7 @@ tags: [docs, langsmith, llm-gateway-direct-model-access]
 > Access provider APIs directly through provider-specific LLM Gateway paths without using the gateway standardization layer.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 Direct model access exposes each provider API through a provider-specific gateway path. The gateway still handles authentication, provider secrets, policies, and tracing, but it does not translate the request and response into another provider's API format.
@@ -25,12 +26,14 @@ Append a provider path to your regional gateway base URL:
 | - | - | - |
 | Anthropic | `/anthropic` | `ANTHROPIC_API_KEY` |
 | AWS Bedrock | `/bedrock` | `AWS_BEARER_TOKEN_BEDROCK` |
-| Azure Foundry | `/azure` | `AZURE_FOUNDRY_API_KEY`, `AZURE_FOUNDRY_RESOURCE_NAME` |
+| Azure Foundry | `/azure` | `AZURE_FOUNDRY_API_KEY`, `AZURE_FOUNDRY_RESOURCE_NAME`. For Entra ID, see [Provider authentication](llm-gateway-provider-authentication.md#configure-azure-foundry). |
 | Baseten | `/baseten` | `BASETEN_API_KEY` |
 | Fireworks | `/fireworks` | `FIREWORKS_API_KEY` |
 | Google Gemini | `/gemini` | `GOOGLE_API_KEY` |
 | Gemini Enterprise Agent Platform | `/vertex` | `VERTEX_SERVICE_ACCOUNT_JSON` |
 | OpenAI | `/openai` | `OPENAI_API_KEY` |
+| ScaleDown | `/scaledown` | `SCALEDOWN_API_KEY` |
+| TypeSafe | `/typesafe` | `TYPESAFE_API_KEY` |
 | xAI | `/xai` | `XAI_API_KEY` |
 
 [Gateway Credits models](llm-gateway-credits.md) use the standard endpoint rather than a provider-specific path. These hosted models require no provider secret of your own.
@@ -67,7 +70,7 @@ client = OpenAI(
     api_key=os.environ["LANGSMITH_API_KEY"],
 )
 response = client.chat.completions.create(
-    model="gpt-4o-mini",
+    model="gpt-5.4-mini",
     messages=[{"role": "user", "content": "ping"}],
 )
 print(response.choices[0].message.content)
@@ -117,8 +120,6 @@ If your LangSmith account is on a regional instance, use the corresponding [regi
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-direct-model-access.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-direct-model-access.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

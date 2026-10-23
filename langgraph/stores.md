@@ -12,16 +12,19 @@ tags: [docs, langgraph, stores]
 
 Stores let agents persist information across threads, including user preferences, accumulated knowledge, and facts that should survive beyond a single conversation. Unlike [checkpointers](checkpointers.md), which save the full graph state scoped to one thread, stores hold arbitrary key-value data accessible from any thread.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/shared_state.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=354526fb48c5eb11b4b2684a2df40d6c" alt="Model of shared state" width="1482" height="777" data-path="oss/images/shared_state.png" />
+![Model of shared state](https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/shared_state.png?fit=max\&auto=format\&n=dL5Sn6Cmy9pwtY0V\&q=85\&s=354526fb48c5eb11b4b2684a2df40d6c)
 
 > [!NOTE]
+>
 > **Agent Server handles stores automatically**
 > When using the [Agent Server](../langsmith/agent-server.md), you do not need to implement or configure stores manually. The API handles all storage infrastructure for you behind the scenes.
 
 > [!NOTE]
+>
 > [InMemoryStore](https://reference.langchain.com/python/langchain-core/stores/InMemoryStore) is suitable for development and testing. For production, use a persistent store like `PostgresStore`, `MongoDBStore`, `RedisStore`, or `UpstashStore`. All implementations extend [BaseStore](https://reference.langchain.com/python/langchain-core/stores/BaseStore), which is the type annotation to use in node function signatures.
 
 > [!NOTE]
+>
 > See [store integrations](../integrations/long-term-memory/index.md) for the full list of available providers.
 
 ## Basic usage
@@ -43,7 +46,7 @@ namespace_for_memory = (user_id, "memories")
 Use the `store.put` method to save memories to the namespace in the store. Specify the namespace, as defined above, and a key-value pair for the memory: the key is simply a unique identifier for the memory (`memory_id`) and the value (a dictionary) is the memory itself.
 
 ```python
-memory_id = str(uuid.uuid4())
+memory_id = str(uuid7())
 memory = {"food_preference" : "I like pizza"}
 store.put(namespace_for_memory, memory_id, memory)
 ```
@@ -60,7 +63,7 @@ memories[-1].dict()
  'updated_at': '2024-10-02T17:22:31.590605+00:00'}
 ```
 
-Each memory type is a Python class ([`Item`](https://langchain-ai.github.io/langgraph/reference/store/#langgraph.store.base.Item)) with certain attributes. We can access it as a dictionary by converting with `.dict`.
+Each memory type is a Python class ([`Item`](https://reference.langchain.com/python/langgraph.store/base/Item)) with certain attributes. We can access it as a dictionary by converting with `.dict`.
 
 The attributes it has are:
 
@@ -70,8 +73,9 @@ The attributes it has are:
 
 * `namespace`: A tuple of strings, the namespace of this memory type
 
-> [!NOTE]
->   While the type is `tuple[str, ...]`, it may be serialized as a list when converted to JSON (for example, `['1', 'memories']`).
+  > [!NOTE]
+  >
+  > While the type is `tuple[str, ...]`, it may be serialized as a list when converted to JSON (for example, `['1', 'memories']`).
 
 * `created_at`: Timestamp for when this memory was created
 
@@ -147,7 +151,7 @@ You can control which parts of your memories get embedded by configuring the `fi
 # Store with specific fields to embed
 store.put(
     namespace_for_memory,
-    str(uuid.uuid4()),
+    str(uuid7()),
     {
         "food_preference": "I love Italian cuisine",
         "context": "Discussing dinner plans"
@@ -158,7 +162,7 @@ store.put(
 # Store without embedding (still retrievable, but not searchable)
 store.put(
     namespace_for_memory,
-    str(uuid.uuid4()),
+    str(uuid7()),
     {"system_info": "Last updated: 2024-01-01"},
     index=False
 )
@@ -224,7 +228,7 @@ async def update_memory(state: MessagesState, runtime: Runtime[Context]):
     # ... Analyze conversation and create a new memory
 
     # Create a new memory ID
-    memory_id = str(uuid.uuid4())
+    memory_id = str(uuid7())
 
     # We create a new memory
     await runtime.store.aput(namespace, memory_id, {"memory": memory})
@@ -410,8 +414,6 @@ async def test_search_prefix(store, reference):
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/stores.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/stores.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -11,11 +11,13 @@ tags: [docs, integrations, llms, google_vertex_ai]
 > Integrate with the Gemini Enterprise Agent Platform LLM using LangChain Python.
 
 > [!CAUTION]
+>
 > **Deprecated**
 >
 > This integration is deprecated and will be removed in a future release. Please use [`GoogleGenerativeAI`](google_generative_ai.md) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of Gemini Enterprise Agent Platform text completion models. Many models available through Google Cloud are [chat completion models](../../langchain/models.md).**
 >
 > You may be looking for [this page instead](../chat/google_vertex_ai.md).
@@ -250,9 +252,7 @@ i = Image.load_from_file("image_example.jpg")
 i
 ```
 
-<p>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/vertex-ai-image-example.jpg?fit=max&auto=format&n=x_qjL89cw5RbZp-3&q=85&s=50794830baf93129dc9a92f0fa8ab85f" width="602" height="800" data-path="images/integrations/vertex-ai-image-example.jpg" />
-</p>
+![](https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/vertex-ai-image-example.jpg?fit=max\&auto=format\&n=x_qjL89cw5RbZp-3\&q=85\&s=50794830baf93129dc9a92f0fa8ab85f)
 
 You can also pass images as bytes:
 
@@ -608,8 +608,6 @@ AIMessage(content='Prompt:\n<start_of_turn>user\nHow much is 2+2?<end_of_turn>\n
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -112,7 +112,7 @@ async def main() -> None:
     )
 
     options = ClaudeAgentOptions(
-        model="claude-sonnet-4-5-20250929",
+        model="claude-sonnet-5-5",
         system_prompt="You are a friendly travel assistant who helps with weather information.",
         mcp_servers={"weather": weather_server},
         allowed_tools=["mcp__weather__get_weather"],
@@ -167,7 +167,7 @@ const weatherServer = sdk.createSdkMcpServer({
 const query = sdk.query({
   prompt: "What's the weather like in San Francisco and Tokyo?",
   options: {
-    model: 'claude-sonnet-4-5-20250929',
+    model: 'claude-sonnet-5-5',
     systemPrompt:
       'You are a friendly travel assistant who helps with weather information.',
     mcpServers: { weather: weatherServer },
@@ -189,8 +189,6 @@ Once configured, all Claude Agent SDK operations will be automatically traced to
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-claude-agent-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-claude-agent-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

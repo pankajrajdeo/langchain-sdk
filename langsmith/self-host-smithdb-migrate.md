@@ -13,6 +13,7 @@ tags: [docs, langsmith, self-host-smithdb-migrate]
 Run this migration when ClickHouse history must be queryable through SmithDB. If it does not need to be, skip this page and continue with query cutover.
 
 > [!NOTE]
+>
 > Complete stages 1 through 4 of [Install LangSmith with SmithDB](self-host-smithdb-install.md) before starting this guide. Return there for **Switch queries to SmithDB** after migration cleanup.
 
 ## How migration works
@@ -55,91 +56,88 @@ For chart-managed TaskDB, create a Secret in the LangSmith namespace with a stro
 
 Reference the TaskDB Secret and enable migration. The block below collects every migration setting in one place: the `langsmith` flags and the TaskDB Secret are required, and the rest are chart defaults to change only when scaling.
 
-<details>
-<summary>Sample migration Helm values</summary>
-
+> **Sample migration Helm values**
+>
 **LangSmith 0.17**
 
 ```yaml
-smithdb:
-  enabled: true
-  langsmith:
-    ingestion:
-      enabled: true    # required: keep dual ingestion on
-    migration:
-      enabled: true    # required: runs the migration Job and TaskDB
-    query:
-      enabled: false   # required: keep queries on ClickHouse until migration completes
-  migration:
-    job:
-      parallelism: 1   # default: raise to run more migration pods
-      resources:       # default per pod: 32Gi is a practical minimum
-        requests:
-          cpu: "8"
-          memory: "32Gi"
-          ephemeral-storage: "100Gi"
-        limits:
-          cpu: "8"
-          memory: "32Gi"
-          ephemeral-storage: "100Gi"
-    taskdb:
-      postgres:
-        auth:
-          existingSecretName: "smithdb-migration-taskdb"   # required for chart-managed TaskDB
-          passwordSecretKey: "postgres_password"
-        maxConnectionsPerMigrationPod: 10   # default: server limit is (parallelism + 1) × this
-        statefulSet:
-          resources:   # default: raise for high parallelism
-            requests:
-              cpu: "2"
-              memory: "4Gi"
-            limits:
-              cpu: "4"
-              memory: "8Gi"
+> smithdb:
+>   enabled: true
+>   langsmith:
+>     ingestion:
+>       enabled: true    # required: keep dual ingestion on
+>     migration:
+>       enabled: true    # required: runs the migration Job and TaskDB
+>     query:
+>       enabled: false   # required: keep queries on ClickHouse until migration completes
+>   migration:
+>     job:
+>       parallelism: 1   # default: raise to run more migration pods
+>       resources:       # default per pod: 32Gi is a practical minimum
+>         requests:
+>           cpu: "8"
+>           memory: "32Gi"
+>           ephemeral-storage: "100Gi"
+>         limits:
+>           cpu: "8"
+>           memory: "32Gi"
+>           ephemeral-storage: "100Gi"
+>     taskdb:
+>       postgres:
+>         auth:
+>           existingSecretName: "smithdb-migration-taskdb"   # required for chart-managed TaskDB
+>           passwordSecretKey: "postgres_password"
+>         maxConnectionsPerMigrationPod: 10   # default: server limit is (parallelism + 1) × this
+>         statefulSet:
+>           resources:   # default: raise for high parallelism
+>             requests:
+>               cpu: "2"
+>               memory: "4Gi"
+>             limits:
+>               cpu: "4"
+>               memory: "8Gi"
 ```
-
+>
 **LangSmith 0.16**
 
 ```yaml
-smithdb:
-  enabled: true
-  langsmith:
-    ingestion:
-      enabled: true    # required: keep dual ingestion on
-    migration:
-      enabled: true    # required: runs the migration Job and TaskDB
-    query:
-      enabled: false   # required: keep queries on ClickHouse until migration completes
-  migration:
-    job:
-      parallelism: 1   # default: raise to run more migration pods
-    deployment:
-      resources:       # default per pod: 32Gi is a practical minimum
-        requests:
-          cpu: "8"
-          memory: "32Gi"
-          ephemeral-storage: "100Gi"
-        limits:
-          cpu: "8"
-          memory: "32Gi"
-          ephemeral-storage: "100Gi"
-    taskdb:
-      postgres:
-        auth:
-          existingSecretName: "smithdb-migration-taskdb"   # required for chart-managed TaskDB
-          passwordSecretKey: "postgres_password"
-        maxConnectionsPerMigrationPod: 10   # default: server limit is (parallelism + 1) × this
-        statefulSet:
-          resources:   # default: raise for high parallelism
-            requests:
-              cpu: "2"
-              memory: "4Gi"
-            limits:
-              cpu: "4"
-              memory: "8Gi"
+> smithdb:
+>   enabled: true
+>   langsmith:
+>     ingestion:
+>       enabled: true    # required: keep dual ingestion on
+>     migration:
+>       enabled: true    # required: runs the migration Job and TaskDB
+>     query:
+>       enabled: false   # required: keep queries on ClickHouse until migration completes
+>   migration:
+>     job:
+>       parallelism: 1   # default: raise to run more migration pods
+>     deployment:
+>       resources:       # default per pod: 32Gi is a practical minimum
+>         requests:
+>           cpu: "8"
+>           memory: "32Gi"
+>           ephemeral-storage: "100Gi"
+>         limits:
+>           cpu: "8"
+>           memory: "32Gi"
+>           ephemeral-storage: "100Gi"
+>     taskdb:
+>       postgres:
+>         auth:
+>           existingSecretName: "smithdb-migration-taskdb"   # required for chart-managed TaskDB
+>           passwordSecretKey: "postgres_password"
+>         maxConnectionsPerMigrationPod: 10   # default: server limit is (parallelism + 1) × this
+>         statefulSet:
+>           resources:   # default: raise for high parallelism
+>             requests:
+>               cpu: "2"
+>               memory: "4Gi"
+>             limits:
+>               cpu: "4"
+>               memory: "8Gi"
 ```
-
-</details>
 
 Apply the chart through your normal workflow. It creates TaskDB and a one-shot migration Job that runs to completion and exits.
 
@@ -153,8 +151,6 @@ Return to [Install LangSmith with SmithDB](self-host-smithdb-install.md#step-6-s
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-smithdb-migrate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-smithdb-migrate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

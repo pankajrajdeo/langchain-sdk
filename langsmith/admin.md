@@ -14,27 +14,33 @@ Set up your LangSmith account: create API keys, configure your profile, connect 
 
 ## Get started
 
-### Create an account
+**1. Create an account**
+
 Sign up at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-account-api-key-quickstart) (no credit card required).
 You can log in with **Google**, **GitHub**, or **email**.
 
-### Create an API key
+**2. Create an API key**
+
 Go to your [Settings page](https://smith.langchain.com/settings) > **API Keys** > **Create API Key**.
 Copy the key and save it securely.
 
 ## Explore
 
-#### [Profile configuration](profile-configuration.md)
-Configure your personal account settings and preferences.
+> **[Profile configuration](profile-configuration.md)**
+>
+> Configure your personal account settings and preferences.
 
-#### [Integrations](get-started-integrations.md)
-Connect LangSmith to your existing tools and services.
+> **[Integrations](get-started-integrations.md)**
+>
+> Connect LangSmith to your existing tools and services.
 
-#### [Pricing plans](pricing-plans.md)
-Compare plans and choose the right tier for your team.
+> **[Pricing plans](https://docs.langchain.com/langsmith/pricing-plans.md)**
+>
+> Compare plans and choose the right tier for your team.
 
-#### [Enterprise](enterprise.md)
-Enterprise capabilities, support, and onboarding.
+> **[Enterprise](enterprise.md)**
+>
+> Enterprise capabilities, support, and onboarding.
 
 ## Related
 
@@ -42,8 +48,6 @@ Enterprise capabilities, support, and onboarding.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/admin.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/admin.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

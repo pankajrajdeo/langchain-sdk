@@ -12,7 +12,7 @@ tags: [blog, mcp-in-langchain-stateless-protocol-elicitation-and-more]
 
 MCP's official [Tier 1 SDKs](https://modelcontextprotocol.io/docs/2026-07-28/sdk#available-sdks) are pulling close to half a billion [downloads a month,](https://pypistats.org/packages/mcp) and usage is climbing faster still: MCP tool calls from ChatGPT users are [up 98x across 2026](https://x.com/mxstbr/status/2094541583307678165), having more than doubled in August alone.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a99a85ae6d25387709b0017_mcp-tool-call-growth.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a99a85ae6d25387709b0017_mcp-tool-call-growth.png)
 
 Model Context Protocol (MCP) is the most popular way to connect agents to tools. In July, the protocol got its [largest rewrite since launch](https://blog.modelcontextprotocol.io/posts/2026-07-28/). We've revamped MCP support in LangChain to match the new spec and the growing demand behind it.
 
@@ -26,13 +26,13 @@ Three things have changed:
 
 Historically (with the old spec) every MCP call ran through a protocol built around sessions. Calling a tool over MCP used to mean opening a session first. The client and server shook hands, the server handed back a session ID, and every later request had to carry it, which pinned that client to the one server instance that issued it.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a99a89cedef6b0a2f29359a_mcp-request-flow.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a99a89cedef6b0a2f29359a_mcp-request-flow.png)
 
 Running a remote server at any scale meant sticky routing and a shared session store.
 
 This all changed in the new MCP spec, which enabled a stateless core. The MCP team [describes](https://blog.modelcontextprotocol.io/posts/2026-07-28/) the stateless core as one of the most highly-requested features from developers, who wanted better reliability and scalability out of their servers. In the new spec there is nothing left to pin. A redeploy no longer kills live sessions, because there are none.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a99a8aee0028cebca2f82a6_mcp-stateless-topology.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a99a8aee0028cebca2f82a6_mcp-stateless-topology.png)
 
 That opened up two things, and both are now in `langchain.mcp`:
 
@@ -123,7 +123,7 @@ result = await agent.ainvoke(
 )
 ```
 
-`‍`No setup beyond a checkpointer, so the paused run has somewhere to wait. The [elicitation docs](https://docs.langchain.com/oss/python/langchain/mcp/elicitation) cover declining a question, and gating destructive tools behind the same approval flow.
+`‍`No setup beyond a checkpointer, so the paused run has somewhere to wait. The [elicitation docs](../langchain/mcp/tools.md#elicitation) cover declining a question, and gating destructive tools behind the same approval flow.
 
 ## Client-side caching
 

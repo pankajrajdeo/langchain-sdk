@@ -15,7 +15,8 @@ An *environment* records where an agent was running when it produced a trace. Ev
 Because the environment travels with the trace, where the agent was running is a property of the trace itself.
 
 > [!NOTE]
-> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+>
+> Agent-based workspaces are available on [LangSmith Cloud](cloud.md). They are not available on [self-hosted](self-hosted.md) LangSmith. To check whether your workspace is agent-based, look at the control at the top left. In an agent-based workspace, it is a workspace switcher that names your workspace. In a [project-based](observability-concepts.md#tracing-projects) workspace, it shows the LangSmith logo.
 
 ## Environment names
 
@@ -44,7 +45,7 @@ On Deployments, **Local** does not display, and the list adds a **Preview** entr
 
 The list holds only the environments that exist for the agent.
 
-This control drives environment selection on Tracing, Monitoring, alerts, [Engine](engine-overview.md), Studio, and Deployments. [Evaluators](evaluators.md) and [Insights](insights.md) also scope to a single environment, but they do it without this dropdown.
+This control drives environment selection on Tracing, Monitoring, alerts, [Engine](engine.md), Studio, and Deployments. [Evaluators](evaluators.md) and [Insights](insights.md) also scope to a single environment, but they do it without this dropdown.
 
 ## See also
 
@@ -55,8 +56,6 @@ This control drives environment selection on Tracing, Monitoring, alerts, [Engin
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-environments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-environments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

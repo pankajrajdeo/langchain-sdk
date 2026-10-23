@@ -13,6 +13,7 @@ tags: [docs, langsmith, openevals]
 LangSmith integrates with the open-source `openevals` package to provide a suite of evaluation utilities and prompts that you can use as starting points for evaluation.
 
 > [!NOTE]
+>
 > This how-to guide will demonstrate how to set up and run one type of evaluator (LLM-as-a-judge). For a complete list of evaluation utilities and prompts with usage examples, refer to the [openevals](https://github.com/langchain-ai/openevals) and [agentevals](https://github.com/langchain-ai/agentevals) repos.
 
 ## Setup
@@ -37,7 +38,7 @@ You'll also need to set your OpenAI API key as an environment variable, though y
 export OPENAI_API_KEY="your_openai_api_key"
 ```
 
-We'll also use LangSmith's [pytest](pytest.md) integration for Python and [Vitest/Jest](vitest-jest.md) for TypeScript to run our evals. `openevals` also integrates seamlessly with the [`evaluate`](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) method. See the [appropriate guides](pytest.md) for setup instructions.
+We'll also use LangSmith's [pytest](pytest.md) integration for Python and [Vitest/Jest](vitest-jest.md) for TypeScript to run our evals. `openevals` also integrates seamlessly with the [`evaluate`](https://reference.langchain.com/python/langsmith/evaluation/_runner/evaluate) method. See the [appropriate guides](pytest.md) for setup instructions.
 
 ## Running an evaluator
 
@@ -124,7 +125,7 @@ The `feedback_key`/`feedbackKey` parameter will be used as the name of the feedb
 
 Running the eval in your terminal will result in something like the following:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/prebuilt-eval-result.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=c2351acb065520c3cef3c374bd762982" alt="Prebuilt evaluator terminal result" width="2114" height="614" data-path="langsmith/images/prebuilt-eval-result.png" />
+![Prebuilt evaluator terminal result](https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/prebuilt-eval-result.png?fit=max\&auto=format\&n=H9jA2WRyA-MV4-H0\&q=85\&s=c2351acb065520c3cef3c374bd762982)
 
 You can also pass evaluators directly into the `evaluate` method if you have already created a dataset in LangSmith. If using Python, this requires `langsmith>=0.3.11`:
 
@@ -174,8 +175,6 @@ For a complete list of available evaluation utilities and prompts, see the [open
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/openevals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/openevals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -87,7 +87,8 @@ To enable MCP:
 
 Use an MCP-compliant client to connect to the Agent Server. The following examples show how to connect using different programming languages.
 
-#### JavaScript/TypeScript
+**JavaScript/TypeScript**
+
 ```bash
 npm install @modelcontextprotocol/sdk
 ```
@@ -126,7 +127,8 @@ connectClient(serverUrl)
     });
 ```
 
-#### Python
+**Python**
+
 Install LangChain with the MCP extra:
 
 **pip**
@@ -248,6 +250,7 @@ For more details, see the [low-level concepts guide](../langgraph/graph-api.md#s
 ## Use user-scoped MCP tools in your deployment
 
 > [!TIP]
+>
 > **Prerequisites**
 > You have added your own [custom auth middleware](custom-auth.md) that populates the `langgraph_auth_user` object, making it accessible through configurable context for every node in your graph.
 
@@ -306,8 +309,6 @@ This will prevent the server from exposing the `/mcp` endpoint.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/server-mcp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/server-mcp.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

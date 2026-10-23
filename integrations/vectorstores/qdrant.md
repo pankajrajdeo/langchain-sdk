@@ -49,8 +49,6 @@ The Python client provides the option to run the code in local mode without runn
 
 For some testing scenarios and quick experiments, you may prefer to keep all the data in-memory only, so it gets removed when the client is destroyed - usually at the end of your script/notebook.
 
-> **Interactive content:** [View this section in the original documentation](qdrant.md).
-
 ```python
 # | output: false
 # | echo: false
@@ -266,7 +264,7 @@ for res in results:
 Dense vector search involves calculating similarity via vector-based embeddings. To search with only dense vectors:
 
 * The `retrieval_mode` parameter should be set to `RetrievalMode.DENSE`. This is the default behavior.
-* A [dense embeddings](https://python.langchain.com/docs/integrations/embeddings/) value should be provided to the `embedding` parameter.
+* A [dense embeddings](../embeddings.md) value should be provided to the `embedding` parameter.
 
 ```python
 from langchain_qdrant import QdrantVectorStore, RetrievalMode
@@ -350,7 +348,7 @@ found_docs
 To perform a hybrid search using dense and sparse vectors with score fusion,
 
 * The `retrieval_mode` parameter should be set to `RetrievalMode.HYBRID`.
-* A [dense embeddings](https://python.langchain.com/docs/integrations/embeddings/) value should be provided to the `embedding` parameter.
+* A [dense embeddings](../embeddings.md) value should be provided to the `embedding` parameter.
 * An implementation of the [`SparseEmbeddings`](https://github.com/langchain-ai/langchain/blob/master/libs/partners/qdrant/langchain_qdrant/sparse_embeddings.py) interface using any sparse embeddings provider has to be provided as a value to the `sparse_embedding` parameter.
 
 Note that if you've added documents with the `HYBRID` mode, you can switch to any retrieval mode when searching, since both the dense and sparse vectors are available in the collection.
@@ -516,8 +514,6 @@ For detailed documentation of all `QdrantVectorStore` features and configuration
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/qdrant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/qdrant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

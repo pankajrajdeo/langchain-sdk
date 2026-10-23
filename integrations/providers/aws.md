@@ -242,8 +242,9 @@ finally:
 
 ## Sandboxes
 
-#### [AgentCoreSandbox](../sandboxes/aws.md)
-Amazon Bedrock AgentCore Code Interpreter sandbox backend for deepagents.
+> **[AgentCoreSandbox](../sandboxes/aws.md)**
+>
+> Amazon Bedrock AgentCore Code Interpreter sandbox backend for deepagents.
 
 ## Graphs
 
@@ -377,9 +378,8 @@ pip install boto3 nltk
 uv add boto3 nltk
 ```
 
-See a [usage example](https://python.langchain.com/v0.1/docs/guides/productionization/safety/amazon_comprehend_chain/).
-
 > [!WARNING]
+>
 > The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
 
 ```python
@@ -430,8 +430,6 @@ agentcore launch -e your_agent.py
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

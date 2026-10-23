@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, vectorstores, qdrant]
 > Integrate with the QdrantVectorStore using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 
 [Qdrant](https://qdrant.tech/) is a vector similarity search engine. It provides a production-ready service with a convenient API to store, search, and manage points (vectors with an additional payload).
@@ -21,7 +22,7 @@ This guide provides a quick overview for getting started with Qdrant [vector sto
 
 ### Integration details
 
-| Class | Package | [PY support](https://python.langchain.com/docs/integrations/vectorstores/qdrant/) | Downloads | Version |
+| Class | Package | [PY support](../../../integrations/vectorstores/qdrant.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: |
 | [`QdrantVectorStore`](https://reference.langchain.com/javascript/langchain-qdrant/QdrantVectorStore) | [`@langchain/qdrant`](https://www.npmjs.com/package/@langchain/qdrant) | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/qdrant?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/qdrant?style=flat-square\&label=%20&) |
 
@@ -211,8 +212,6 @@ For detailed documentation of all `QdrantVectorStore` features and configuration
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/qdrant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/vectorstores/qdrant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

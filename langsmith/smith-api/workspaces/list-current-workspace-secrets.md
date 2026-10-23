@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/workspaces/current/secrets:
     get:
@@ -175,33 +178,124 @@ paths:
         - workspaces
       summary: List current workspace secrets
       operationId: list_current_workspace_secrets_api_v1_workspaces_current_secrets_get
+      parameters:
+        - name: include_configs
+          in: query
+          required: false
+          schema:
+            type: boolean
+            description: If true, include the hosts each secret may be sent to.
+            default: false
+            title: Include Configs
+          description: If true, include the hosts each secret may be sent to.
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/SecretKey'
                 type: array
+                items:
+                  $ref: '#/components/schemas/WorkspaceSecret'
                 title: >-
                   Response List Current Workspace Secrets Api V1 Workspaces
                   Current Secrets Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    SecretKey:
+    WorkspaceSecret:
       properties:
         key:
           type: string
           title: Key
+        configs:
+          items:
+            $ref: '#/components/schemas/SecretConfig'
+          type: array
+          title: Configs
+          description: >-
+            Hosts the secret may be sent to, with built-in defaults applied.
+            Listed secrets include it only when include_configs is true.
       type: object
       required:
         - key
-      title: SecretKey
+      title: WorkspaceSecret
+      description: >-
+        A workspace secret's key and the hosts it may be sent to. Never the
+        value.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            type: string
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SecretConfig:
+      properties:
+        host_pattern:
+          type: string
+          title: Host Pattern
+          description: Exact host or a leading '*.' wildcard, e.g. 'api.openai.com'.
+        header_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Header Name
+          description: HTTP header the secret is sent in. Null leaves it to the consumer.
+        header_value_template:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Header Value Template
+          description: >-
+            Header value with '{value}' replaced by the secret, e.g. 'Bearer
+            {value}'. Null sends the raw secret.
+        id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Id
+          description: Omitted for a built-in default.
+        source:
+          $ref: '#/components/schemas/SecretConfigSource'
+        created_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Created At
+          description: Omitted for a built-in default.
+        updated_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Updated At
+          description: Omitted for a built-in default.
+      type: object
+      required:
+        - host_pattern
+        - source
+      title: SecretConfig
+    SecretConfigSource:
+      type: string
+      enum:
+        - DEFAULT
+        - CUSTOM
+      title: SecretConfigSource
+      description: Whether a secret config comes from the built-in catalog or an admin.
   securitySchemes:
     API Key:
       type: apiKey

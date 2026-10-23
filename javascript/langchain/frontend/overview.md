@@ -22,6 +22,7 @@ history, and custom state values, so your UI can become a control plane for
 long-running agent work.
 
 > [!NOTE]
+>
 > These patterns use the v1 frontend SDK packages. If you are using an earlier version, see the migration guides for [React](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-react/docs/v1-migration.md), [Vue](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-vue/docs/v1-migration.md), [Svelte](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-svelte/docs/v1-migration.md), and [Angular](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-angular/docs/v1-migration.md).
 
 ## Architecture
@@ -136,44 +137,55 @@ Custom state keys are inferred automatically, no manual interface required.
 
 ### Render messages and output
 
-#### [Markdown messages](markdown-messages.md)
-Parse and render streamed markdown with proper formatting and code highlighting.
+> **[Markdown messages](markdown-messages.md)**
+>
+> Parse and render streamed markdown with proper formatting and code highlighting.
 
-#### [Structured output](structured-output.md)
-Render typed agent responses as custom UI components instead of plain text.
+> **[Structured output](structured-output.md)**
+>
+> Render typed agent responses as custom UI components instead of plain text.
 
-#### [Reasoning tokens](reasoning-tokens.md)
-Display model thinking processes in collapsible blocks.
+> **[Reasoning tokens](reasoning-tokens.md)**
+>
+> Display model thinking processes in collapsible blocks.
 
-#### [Generative UI](generative-ui-overview.md)
-Render agent-generated interfaces across the spectrum from controlled to declarative to open-ended.
+> **[Generative UI](generative-ui-overview.md)**
+>
+> Render agent-generated interfaces across the spectrum from controlled to declarative to open-ended.
 
 ### Display agent actions
 
-#### [Tool calling](tool-calling.md)
-Show tool calls as rich, type-safe UI cards with loading and error states.
+> **[Tool calling](tool-calling.md)**
+>
+> Show tool calls as rich, type-safe UI cards with loading and error states.
 
-#### [Headless tools](headless-tools.md)
-Run browser and device APIs on the client while keeping typed tool schemas on the agent.
+> **[Headless tools](headless-tools.md)**
+>
+> Run browser and device APIs on the client while keeping typed tool schemas on the agent.
 
-#### [Human-in-the-loop](human-in-the-loop.md)
-Pause the agent for human review with approve, reject, and edit workflows.
+> **[Human-in-the-loop](human-in-the-loop.md)**
+>
+> Pause the agent for human review with approve, reject, and edit workflows.
 
 ### Manage conversations
 
-#### [Branching chat](branching-chat.md)
-Edit messages, regenerate responses, and navigate conversation branches.
+> **[Branching chat](branching-chat.md)**
+>
+> Edit messages, regenerate responses, and navigate conversation branches.
 
-#### [Message queues](message-queues.md)
-Queue multiple messages while the agent processes them sequentially.
+> **[Message queues](message-queues.md)**
+>
+> Queue multiple messages while the agent processes them sequentially.
 
 ### Advanced streaming
 
-#### [Join & rejoin streams](join-rejoin.md)
-Disconnect from and reconnect to running agent streams without losing progress.
+> **[Join & rejoin streams](join-rejoin.md)**
+>
+> Disconnect from and reconnect to running agent streams without losing progress.
 
-#### [Time travel](time-travel.md)
-Inspect, navigate, and resume from any checkpoint in the conversation history.
+> **[Time travel](time-travel.md)**
+>
+> Inspect, navigate, and resume from any checkpoint in the conversation history.
 
 ## Choosing a frontend pattern
 
@@ -195,19 +207,20 @@ framework. Component libraries can own the presentation layer while LangChain's
 SDK owns the agent runtime state, resumability, interrupts, and checkpoint
 semantics underneath.
 
-#### [AI Elements](integrations/ai-elements.md)
-Composable shadcn/ui components for AI chat: `Conversation`, `Message`, `Tool`, `Reasoning`.
+> **[AI Elements](integrations/ai-elements.md)**
+>
+> Composable shadcn/ui components for AI chat: `Conversation`, `Message`, `Tool`, `Reasoning`.
 
-#### [assistant-ui](integrations/assistant-ui.md)
-Headless React framework with built-in thread management, branching, and attachment support.
+> **[assistant-ui](integrations/assistant-ui.md)**
+>
+> Headless React framework with built-in thread management, branching, and attachment support.
 
-#### [OpenUI](integrations/openui.md)
-Generative UI library for data-rich reports and dashboards using the openui-lang component DSL.
+> **[OpenUI](integrations/openui.md)**
+>
+> Generative UI library for data-rich reports and dashboards using the openui-lang component DSL.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

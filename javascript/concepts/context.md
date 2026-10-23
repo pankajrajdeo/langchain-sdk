@@ -18,6 +18,7 @@ tags: [docs, javascript, concepts, context]
    * **Cross-conversation context**: Data that persists across multiple conversations or sessions
 
 > [!TIP]
+>
 > Runtime context refers to local context: data and dependencies your code needs to run. It does **not** refer to:
 >
 > * The LLM context, which is the data passed into the LLM's prompt.
@@ -50,7 +51,8 @@ await graph.invoke(
 
 **Dynamic runtime context** represents mutable data that can evolve during a single run and is managed through the LangGraph state object. This includes conversation history, intermediate results, and values derived from tools or LLM outputs. In LangGraph, the state object acts as [short-term memory](memory.md) during a run.
 
-#### In an agent
+**In an agent**
+
 Example shows how to incorporate state into an agent **prompt**.
 
 State can also be accessed by the agent's **tools**, which can read or update the state as needed. See [tool calling guide](../langchain/tools.md#access-context) for details.
@@ -86,7 +88,8 @@ await agent.invoke({
 });
 ```
 
-#### In a workflow
+**In a workflow**
+
 ```typescript
 import { z } from "zod/v4";
 import { StateGraph, StateSchema, MessagesValue, START } from "@langchain/langgraph";
@@ -110,6 +113,7 @@ const graph = builder.compile();
 ```
 
 > [!TIP]
+>
 > **Turning on memory**
 > Please see the [memory guide](../langgraph/add-memory.md) for more details on how to enable memory. This is a powerful feature that allows you to persist the agent's state across multiple invocations. Otherwise, the state is scoped only to a single run.
 
@@ -125,8 +129,6 @@ const graph = builder.compile();
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/concepts/context.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/concepts/context.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,6 +1,6 @@
 ---
 title: "Get Thread History Post"
-description: "Get all past states for a thread."
+description: "Get all past states for a thread. Can return fewer than limit states; page with before to read further."
 source: "https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-history-post"
 category: "docs"
 tags: [docs, langsmith, agent-server-api, threads, get-thread-history-post]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, agent-server-api, threads, get-thread-history-post]
 
 # Get Thread History Post
 
-> Get all past states for a thread.
+> Get all past states for a thread. Can return fewer than `limit` states; page with `before` to read further.
 
 ## OpenAPI
 
@@ -64,7 +64,9 @@ paths:
       tags:
         - Threads
       summary: Get Thread History Post
-      description: Get all past states for a thread.
+      description: >-
+        Get all past states for a thread. Can return fewer than `limit` states;
+        page with `before` to read further.
       operationId: get_thread_history_post_threads__thread_id__history_post
       parameters:
         - description: The ID of the thread.

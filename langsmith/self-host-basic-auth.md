@@ -11,6 +11,7 @@ tags: [docs, langsmith, self-host-basic-auth]
 Basic authentication lets users log in to LangSmith [Self-hosted](self-hosted.md) with an email and password, without configuring an external identity provider. [Organization Admins](rbac.md#organization-admin) manage users directly from LangSmith, so authentication runs self-contained without depending on [OAuth or SSO](self-host-sso.md).
 
 > [!TIP]
+>
 > For a description of the supported authentication methods in LangSmith Self-hosted, refer to the [Authentication methods](authentication-methods.md#self-hosted) page.
 
 ## Considerations
@@ -30,6 +31,7 @@ Basic authentication lets users log in to LangSmith [Self-hosted](self-hosted.md
 ## Migrating from none auth
 
 > [!NOTE]
+>
 > Only supported in [versions 0.7 and later](self-hosted-changelog.md).
 
 Migrating from [None](authentication-methods.md#none) auth mode to basic auth preserves your existing traces, datasets, and other resources. LangSmith replaces the single "default" user with a user created from the basic auth credentials you set up in your [configuration file](#configuration). The pre-existing workspace keeps its ID (`00000000-0000-0000-0000-000000000000`) so existing resources remain bound to it. Aside from the user swap, the resulting migrated installation behaves the same as a fresh basic auth install.
@@ -39,6 +41,7 @@ To migrate, apply the basic auth configuration shown in [Configuration](#configu
 ## Configuration
 
 > [!NOTE]
+>
 > Changing the JWT secret will log out your users.
 
 Enable basic auth by adding the following block to your LangSmith Helm values. On first install, LangSmith uses these values to create the initial Organization Admin user for the `Default` organization:
@@ -59,8 +62,6 @@ Once configured, LangSmith displays a login screen with email and password. Log 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-basic-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-basic-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

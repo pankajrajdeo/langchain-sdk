@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/runs/rules/{rule_id}:
     patch:
@@ -599,6 +602,11 @@ components:
             - type: string
             - type: 'null'
           title: Evaluator Name
+        evaluator_type:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Evaluator Type
         alignment_annotation_queue_id:
           anyOf:
             - type: string
@@ -670,6 +678,13 @@ components:
           type: boolean
           title: Require Attachments
           default: false
+        code_evaluator_input:
+          anyOf:
+            - $ref: '#/components/schemas/CodeEvaluatorInputType'
+            - type: 'null'
+        advanced_features_enabled:
+          type: boolean
+          title: Advanced Features Enabled
       type: object
       required:
         - code
@@ -800,6 +815,16 @@ components:
         - python
         - javascript
       title: CodeEvaluatorLanguage
+    CodeEvaluatorInputType:
+      type: string
+      enum:
+        - thread
+        - all_messages
+        - human_ai_pairs
+        - first_human_last_ai
+        - trajectory
+      title: CodeEvaluatorInputType
+      description: Input provided to a code evaluator.
     RunRulesAlertType:
       type: string
       enum:

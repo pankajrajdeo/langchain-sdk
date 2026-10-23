@@ -11,6 +11,7 @@ tags: [docs, langsmith, llm-gateway-spend-policies]
 > Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 A spend policy defines a cost cap for a specific scope (organization, workspace, API key, or user) over a time window (monthly, weekly, daily, or hourly). The [LLM Gateway](llm-gateway.md) tracks spend in real time and blocks any request that would push spend past the cap, returning a `402` response:
@@ -57,12 +58,13 @@ You can apply multiple time windows to the same scope. For example, a workspace 
 ## Create a spend policy
 
 > [!WARNING]
+>
 > Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
 1. Go to **LLM Gateway** and select **Cost Controls**.
 2. Click **Create spend limit**.
 3. Select the scope (organization, workspace, API key, or user).
-4. (Optional) To apply the same default limit independently to every custom header value, apply the limit to every subject of the selected type by default, select **Separate limits by custom header**, and enter the header name.
+4. (Optional) To separate a default limit by header, select **Workspace**, **User**, or **API Key** and apply the limit to every subject of that type by default. Select **Separate limits by custom header** and enter the header name without `X-Gateway-`, such as `Customer-Id`. Send the full `X-Gateway-Customer-Id` header on requests. Each subject and header-value pair receives an independent limit.
 5. Set the time window (monthly, weekly, daily, or hourly).
 6. Set the spend cap in USD.
 7. Click **Create spend limit**.
@@ -77,6 +79,8 @@ The spend visibility dashboard shows real-time cost rollups so you can understan
 
 From the gateway settings page, you can view how much each policy has spent against its cap.
 
+To [group spend by custom header in Usage](llm-gateway-monitoring.md#group-spend-by-custom-header), configure an enabled default **API Key** spend policy with **Separate limits by custom header**. An organization-level header condition alone does not enable grouping. The default policy also enforces its cap independently for each API-key and header-value pair; it is not an analytics-only setting.
+
 ## Integration with LangSmith Engine
 
 When a spend policy blocks a request, the violation is recorded as metadata on the trace. These violations surface as issues in [LangSmith Engine](engine.md), where you can click through from the issue to the trace to understand what the agent was doing when it hit the limit.
@@ -90,8 +94,6 @@ This is useful for diagnosing whether a blocked request represents a genuine cos
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-spend-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-spend-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

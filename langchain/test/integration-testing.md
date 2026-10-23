@@ -94,6 +94,7 @@ load_dotenv()
 ```
 
 > [!WARNING]
+>
 > Add `.env` to your `.gitignore` to avoid committing credentials. In CI, inject secrets through your provider's secrets management (e.g., GitHub Actions secrets).
 
 ## Assert on structure, not content
@@ -124,6 +125,7 @@ def test_agent_calls_weather_tool():
 ```
 
 > [!TIP]
+>
 > For more rigorous trajectory assertions, use the [AgentEvals](evals.md) evaluators which support fuzzy matching modes like `unordered` and `superset`.
 
 ## Reduce cost and latency
@@ -194,6 +196,7 @@ addopts = "--record-mode=once"
 ```
 
 > [!NOTE]
+>
 > The `--record-mode=once` option records HTTP interactions on the first run and replays them on subsequent runs.
 
 Decorate your tests with the `vcr` marker:
@@ -220,6 +223,7 @@ def test_agent_trajectory():
 The first run makes real network calls and generates a cassette file in `tests/cassettes/`. Subsequent runs replay the recorded responses.
 
 > [!WARNING]
+>
 > When you modify prompts, add new tools, or change expected trajectories, your saved cassettes will become outdated and your existing tests **will fail**. Delete the corresponding cassette files and rerun the tests to record fresh interactions.
 
 ## Next steps
@@ -228,8 +232,6 @@ Learn how to evaluate agent trajectories with deterministic matching or LLM-as-j
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/integration-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/integration-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

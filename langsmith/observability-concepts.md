@@ -18,9 +18,7 @@ In LangSmith, every unit of work an agent performs, such as a model call, tool i
 
 A [*trajectory*](#trajectories) is another way to structure and visualize that data. While a thread groups the traces of a session and keeps their nested structure, a trajectory flattens the entire session into an ordered list of messages that shows the path an agent took from start to finish.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/_6XeQZT2NAQ4WqkK/langsmith/images/thread-trajectory-light.png?fit=max&auto=format&n=_6XeQZT2NAQ4WqkK&q=85&s=e770ae021710ef231582cd59aae3a403" alt="A thread groups a session's traces and keeps their nesting, while a trajectory flattens the same session into an ordered list of messages" width="2160" height="1730" data-path="langsmith/images/thread-trajectory-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/_6XeQZT2NAQ4WqkK/langsmith/images/thread-trajectory-dark.png?fit=max&auto=format&n=_6XeQZT2NAQ4WqkK&q=85&s=b60e198867da6e9a43877a66b0d90e54" alt="A thread groups a session's traces and keeps their nesting, while a trajectory flattens the same session into an ordered list of messages" width="2160" height="1730" data-path="langsmith/images/thread-trajectory-dark.png" />
+![A thread groups a session's traces and keeps their nesting, while a trajectory flattens the same session into an ordered list of messages](https://mintcdn.com/langchain-5e9cc07a/_6XeQZT2NAQ4WqkK/langsmith/images/thread-trajectory-light.png?fit=max\&auto=format\&n=_6XeQZT2NAQ4WqkK\&q=85\&s=e770ae021710ef231582cd59aae3a403)
 
 ### Runs
 
@@ -31,6 +29,7 @@ A *run* represents a single unit of work executed by an agent, such as calling a
 A *trace* is a collection of runs for a single operation. For example, if a user request triggers an agent that calls a model, runs a tool, and then calls the model again, all of those runs belong to the same trace. Runs are bound to a trace by a unique trace ID.
 
 > [!NOTE]
+>
 > Each trace is limited to a maximum of 25,000 runs. Once the trace reaches this limit, LangSmith will reject any additional runs that you send for that trace.
 
 ### Threads
@@ -55,8 +54,7 @@ In LangSmith, a trajectory is a projection over the traces in a thread. It conta
 | Contains | Every run, with full inputs and outputs | Every run in every linked trace | Every message in every linked trace, deduplicated |
 | Reach for it when | You are debugging why one operation failed or ran slow | You are inspecting how the agent behaved across turns, with timing and nesting intact | You are reading what was exchanged in the session, without the execution detail |
 
-> [!NOTE]
-> Use **[Chat](chat.md)** to analyze traces, runs, and threads. Chat helps you understand agent performance, debug issues, and gain insights from conversation threads without manually digging through data.
+Use **[Chat](chat.md)** to analyze traces, runs, and threads. Chat helps you understand agent performance, debug issues, and gain insights from conversation threads without manually digging through data.
 
 ### Trace containers
 
@@ -65,7 +63,8 @@ How LangSmith groups traces depends on which information architecture your works
 #### Agents and environments
 
 > [!NOTE]
-> **Agent-based workspaces ([beta](release-stages.md)).** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](#tracing-projects).
+>
+> **Agent-based workspaces.** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](#tracing-projects).
 
 An *agent* collects the traces of a single application, and it is the unit LangSmith organizes everything else around. An agent's traces divide across *environments* drawn from a fixed set of four: Production, Staging, Development, and Local. Traces land in one environment of one agent, so a query about production behavior never has to exclude test traffic by hand.
 
@@ -74,7 +73,8 @@ An *agent* collects the traces of a single application, and it is the unit LangS
 #### Tracing projects
 
 > [!NOTE]
-> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based, which is in [beta](release-stages.md). Skip this section and read [Agents](agents.md).
+>
+> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based. Skip this section and read [Agents](agents.md).
 
 A *project* is a container for all the traces related to a single application or service.
 
@@ -125,14 +125,13 @@ LangSmith *integrations* provide automatic tracing for popular LLM providers and
 LangSmith (SaaS) retains trace data for 180 days from ingestion. After that, traces are permanently deleted, with limited metadata retained for usage statistics. For details on retention tiers and pricing, refer to [Usage and billing: Data retention](usage-and-billing.md#data-retention).
 
 > [!NOTE]
+>
 > To keep data beyond the retention period, add it to a [dataset](manage-datasets.md). Datasets persist indefinitely, even after the source trace is deleted.
 
 To delete traces before their expiration date, see [Manage a trace](manage-trace.md#delete-a-trace).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

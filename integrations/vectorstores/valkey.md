@@ -29,11 +29,12 @@ uv add langchain-aws --extra valkey
 ```
 
 > [!NOTE]
+>
 > The Valkey integration requires `langchain-aws>=1.5.0`. If you're using an earlier version, install the dependency directly:
 >
-> ```bash
+```bash
 > pip install langchain-aws valkey-glide-sync
-> ```
+```
 
 ## Basic Usage
 
@@ -187,8 +188,6 @@ For detailed API documentation, see [`ValkeyVectorStore`](https://reference.lang
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/valkey.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/valkey.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

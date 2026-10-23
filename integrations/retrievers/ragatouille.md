@@ -20,7 +20,8 @@ We can use this as a [retriever](../../deepagents/retrieval.md). It will show fu
 
 This page covers how to use [RAGatouille](https://github.com/bclavie/RAGatouille) as a retriever in a LangChain chain.
 
-> \[!WARNING]
+> [!WARNING]
+>
 > This integration works when using a ragatouille version less than 0.0.10
 > If you want to use `ColBERT`, you can use [Pylate](https://lightonai.github.io/pylate/) - Checkout the usage [example](https://huggingface.co/LiquidAI/LFM2-ColBERT-350M).
 
@@ -320,8 +321,6 @@ Miyazaki founded Studio Ghibli.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/ragatouille.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/ragatouille.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

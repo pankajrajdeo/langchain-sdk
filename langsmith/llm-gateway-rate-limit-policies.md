@@ -11,6 +11,7 @@ tags: [docs, langsmith, llm-gateway-rate-limit-policies]
 > Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window.
 
 > [!NOTE]
+>
 > The LLM Gateway is in [beta](release-stages.md).
 
 A rate limit policy restricts how many **requests** or **tokens** a subject can consume through the [LLM Gateway](llm-gateway.md) in a short rolling time window. The gateway enforces the limit in real time and blocks any request that would push the subject past it, returning a `429` response with a `Retry-After` header:
@@ -65,6 +66,7 @@ Rules:
 ## Create a rate limit policy
 
 > [!WARNING]
+>
 > Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
 1. Go to **LLM Gateway**.
@@ -86,8 +88,6 @@ A rate limit policy can also carry a condition on a custom request header, so tr
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-rate-limit-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-rate-limit-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

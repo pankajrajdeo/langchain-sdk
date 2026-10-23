@@ -16,7 +16,8 @@ The guide covers the `reject` option for double texting, which rejects the new r
 
 First, we will define a quick helper function for printing out JS and cURL model outputs (you can skip this if using Python):
 
-#### Javascript
+**Javascript**
+
 ```js
 function prettyPrint(m) {
   const padded = " " + m['type'] + " ";
@@ -30,7 +31,8 @@ function prettyPrint(m) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 # PLACE THIS IN A FILE CALLED pretty_print.sh
 pretty_print() {
@@ -53,7 +55,8 @@ pretty_print() {
 
 Now, let's import our required packages and instantiate our client, assistant, and thread.
 
-#### Python
+**Python**
+
 ```python
 import httpx
 from langchain_core.messages import convert_to_messages
@@ -65,7 +68,8 @@ assistant_id = "agent"
 thread = await client.threads.create()
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -75,7 +79,8 @@ const assistantId = "agent";
 const thread = await client.threads.create();
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
   --url <DEPLOYMENT_URL>/threads \
@@ -87,7 +92,8 @@ curl --request POST \
 
 Now we can run a thread and try to run a second one with the "reject" option, which should fail since we have already started a run:
 
-#### Python
+**Python**
+
 ```python
 run = await client.runs.create(
     thread["thread_id"],
@@ -107,7 +113,8 @@ except httpx.HTTPStatusError as e:
     print("Failed to start concurrent run", e)
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 const run = await client.runs.create(
   thread["thread_id"],
@@ -129,7 +136,8 @@ try {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
 --url <DEPLOY<ENT_URL>>/threads/<THREAD_ID>/runs \
@@ -158,7 +166,8 @@ For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/St
 
 We can verify that the original thread finished executing:
 
-#### Python
+**Python**
+
 ```python
 # wait until the original run completes
 await client.runs.join(thread["thread_id"], run["run_id"])
@@ -169,7 +178,8 @@ for m in convert_to_messages(state["values"]["messages"]):
     m.pretty_print()
 ```
 
-#### Javascript
+**Javascript**
+
 ```js
 await client.runs.join(thread["thread_id"], run["run_id"]);
 
@@ -180,7 +190,8 @@ for (const m of state["values"]["messages"]) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 source pretty_print.sh && curl --request GET \
 --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/join && \
@@ -229,8 +240,6 @@ In summary, you can expect mild, foggy mornings giving way to sunny but cool aft
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/reject-concurrent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/reject-concurrent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

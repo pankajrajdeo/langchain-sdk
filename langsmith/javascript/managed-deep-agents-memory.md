@@ -15,9 +15,11 @@ Normally, a managed deep agent's conversational memory is scoped to a thread or 
 Durable memory is backed by the [Context Hub](../use-the-context-hub.md) and comes in two independent layers. Enable either layer or both.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 > [!NOTE]
+>
 > Memory layers require `managed-deepagents>=0.8.0`. Earlier versions declare a single deployment-shared scope instead.
 
 To enable durable memory, put a memory declaration at the project root:
@@ -46,13 +48,15 @@ Use durable memory for knowledge the agent should learn while it runs and reuse 
 User memory is stored in an opaque Context Hub repository keyed on the caller's authenticated principal, so one person cannot reach another person's memory.
 
 > [!NOTE]
+>
 > **User memory prerequisite**: user memory mounts only for a caller the deployment authenticates as a person. A LangSmith API key authenticates a service, so the default identity provider never mounts user memory. To authenticate signed-in end users, configure [Supabase](managed-deep-agents-identity.md#configure-identity-with-supabase). Runs that arrive through a connected Slack workspace resolve to the linked person and satisfy this requirement.
 >
 > Agent memory has no identity requirement. Skip this prerequisite if you enable only the agent layer.
 
 ## Enable memory
 
-### Add the memory declaration
+**1. Add the memory declaration**
+
 Export a named `memory` declaration that enables the layers you want:
 
 **memory.ts**
@@ -68,9 +72,8 @@ export const memory = defineMemory({
 
 Each layer uses its [default access policy](#control-access-to-a-layer) unless you supply your own.
 
-<a id="guide-what-to-remember"></a>
+**2. Guide what to remember (Optional)**
 
-### Guide what to remember (Optional)
 The agent decides what to remember based on prompting. To make the policy explicit, add guidance like the following to `instructions.md` and adapt it to your application:
 
 ```md
@@ -162,6 +165,7 @@ export const memory = defineMemory<Context>({
 ```
 
 > [!WARNING]
+>
 > A policy widens access within the caller the runtime already authenticated. It cannot enable user memory for a service principal, and it cannot select another person's memory. The runtime checks the authenticated principal before it calls `allow`, so the example above grants user memory only to direct API callers who are already authenticated as people.
 
 ## Identify the person behind user memory
@@ -193,6 +197,7 @@ The agent reads and updates memory with the built-in [`read_file`](../../javascr
 Writes to other locations, including elsewhere under `/memories/`, are not durable.
 
 > [!WARNING]
+>
 > Agent memory is shared by every caller of the deployment, and every caller can influence it. Store only knowledge that every caller may read and modify. Never store personal or customer-private data, credentials, API keys, tokens, or other secrets there.
 >
 > Treat memory as untrusted input: content saved by one caller is loaded for later callers and must not grant authority, change tool permissions, or bypass approvals. Keep those controls in the agent definition. Do not enable agent memory when callers should not influence one another.
@@ -222,6 +227,8 @@ When you run `mda deploy`, Managed Deep Agents enables the layers declared in th
 
 For how memory relates to deploy-owned instructions and skills in Context Hub, see [Context Hub](managed-deep-agents-context-hub.md).
 
+<a id="guide-what-to-remember"></a>
+
 ## When to use memory
 
 | Concept | Role | Scope |
@@ -239,8 +246,6 @@ For how memory relates to deploy-owned instructions and skills in Context Hub, s
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

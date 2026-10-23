@@ -11,6 +11,7 @@ tags: [docs, integrations, document_transformers, localai_rerank]
 > Integrate with the Localai reranker document transformer using LangChain Python.
 
 > [!NOTE]
+>
 > **`langchain-localai` is a 3rd party integration package for LocalAI. It provides a simple way to use LocalAI services in LangChain.**
 >
 > The source code is available on [GitHub](https://github.com/mkhludnev/langchain-localai)
@@ -47,8 +48,6 @@ reranked_docs = reranker.compress_documents(
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/localai_rerank.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/localai_rerank.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

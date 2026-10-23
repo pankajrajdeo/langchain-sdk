@@ -20,7 +20,7 @@ This page helps you get started with Groq [chat models](../../langchain/models.m
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/groq) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/groq.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatGroq`](https://reference.langchain.com/javascript/langchain-groq/ChatGroq) | [`@langchain/groq`](https://www.npmjs.com/package/@langchain/groq) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/groq?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/groq?style=flat-square\&label=%20&) |
 
@@ -166,8 +166,6 @@ For detailed documentation of all `ChatGroq` features and configurations head to
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/groq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/groq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

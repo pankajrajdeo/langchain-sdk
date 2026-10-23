@@ -16,8 +16,9 @@ To leverage custom authentication and access user-level metadata in your deploym
 
 1. Implement authentication:
 
-> [!NOTE]
->    Without a custom `@auth.authenticate` handler, LangGraph sees only the API-key owner (usually the developer), so requests aren’t scoped to individual end-users. To propagate custom tokens, you must implement your own handler.
+   > [!NOTE]
+   >
+   > Without a custom `@auth.authenticate` handler, LangGraph sees only the API-key owner (usually the developer), so requests aren’t scoped to individual end-users. To propagate custom tokens, you must implement your own handler.
 
 ```python
    from langgraph_sdk import Auth
@@ -65,7 +66,8 @@ To leverage custom authentication and access user-level metadata in your deploym
 ```
 3. Once you've set up authentication in your server, requests must include the required authorization information based on your chosen scheme. Assuming you are using JWT token authentication, you could access your deployments using any of the following methods:
 
-#### Python Client
+   **Python Client**
+
 ```python
    from langgraph_sdk import get_client
 
@@ -77,7 +79,8 @@ To leverage custom authentication and access user-level metadata in your deploym
    threads = await client.threads.search()
 ```
 
-#### Python RemoteGraph
+   **Python RemoteGraph**
+
 ```python
    from langgraph.pregel.remote import RemoteGraph
 
@@ -90,7 +93,8 @@ To leverage custom authentication and access user-level metadata in your deploym
    threads = await remote-graph.ainvoke(...)
 ```
 
-#### JavaScript Client
+   **JavaScript Client**
+
 ```javascript
    import { Client } from "@langchain/langgraph-sdk";
 
@@ -102,7 +106,8 @@ To leverage custom authentication and access user-level metadata in your deploym
    const threads = await client.threads.search();
 ```
 
-#### JavaScript RemoteGraph
+   **JavaScript RemoteGraph**
+
 ```javascript
    import { RemoteGraph } from "@langchain/langgraph/remote";
 
@@ -115,7 +120,8 @@ To leverage custom authentication and access user-level metadata in your deploym
    const threads = await remoteGraph.invoke(...);
 ```
 
-#### cURL
+   **cURL**
+
 ```bash
    curl -H "Authorization: Bearer ${your-token}" http://localhost:2024/threads
 ```
@@ -137,13 +143,15 @@ def my_node(state, config):
 ```
 
 > [!NOTE]
+>
 > Fetch user credentials from a secure secret store. Storing secrets in graph state is not recommended.
 
 ### Authorizing a user for Studio
 
-By default, if you add custom authorization on your resources, this will also apply to interactions made from [Studio](studio.md). If you want, you can handle logged-in Studio users differently by checking [is\_studio\_user()](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph_sdk.auth.types.StudioUser).
+By default, if you add custom authorization on your resources, this will also apply to interactions made from [Studio](studio.md). If you want, you can handle logged-in Studio users differently by checking [is\_studio\_user()](https://reference.langchain.com/python/langgraph-sdk/auth/types/StudioUser).
 
 > [!NOTE]
+>
 > `is_studio_user` was added in version 0.1.73 of the langgraph-sdk. If you're on an older version, you can still check whether `isinstance(ctx.user, StudioUser)`.
 
 ```python
@@ -175,8 +183,6 @@ Only use this if you want to permit developer access to a graph deployed on the 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

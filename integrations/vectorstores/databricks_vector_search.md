@@ -117,8 +117,6 @@ If you are using a direct-access index or a delta-sync index with self-managed e
 you also need to provide the embedding model and text column in your source table to
 use for the embeddings:
 
-> **Interactive content:** [View this section in the original documentation](databricks_vector_search.md).
-
 ```python
 # | output: false
 # | echo: false
@@ -256,8 +254,6 @@ For detailed documentation of all DatabricksVectorSearch features and configurat
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/databricks_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/databricks_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

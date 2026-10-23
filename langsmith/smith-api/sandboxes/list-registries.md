@@ -1,6 +1,6 @@
 ---
 title: "List registries"
-description: "List sandbox registries for pulling private images."
+description: "List sandbox registries for pulling private images. Page with page_size and cursor, replaying next_cursor until it is null. Results are ordered newest first, with stable ordering for equal creation..."
 source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-registries"
 category: "docs"
 tags: [docs, langsmith, smith-api, sandboxes, list-registries]
@@ -9,6 +9,8 @@ tags: [docs, langsmith, smith-api, sandboxes, list-registries]
 # List registries
 
 > List sandbox registries for pulling private images.
+Page with page_size and cursor, replaying next_cursor until it is null. Results are ordered newest first, with stable ordering for equal creation times. Keep filters unchanged between pages.
+Requests without page_size or cursor retain the legacy default of 50 results. Cursor requests default to 20 results, with a maximum of 100.
 
 ## OpenAPI
 
@@ -162,6 +164,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,21 +174,45 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/sandboxes/registries:
     get:
       tags:
         - sandboxes
       summary: List registries
-      description: List sandbox registries for pulling private images.
+      description: >-
+        List sandbox registries for pulling private images.
+
+        Page with page_size and cursor, replaying next_cursor until it is null.
+        Results are ordered newest first, with stable ordering for equal
+        creation times. Keep filters unchanged between pages.
+
+        Requests without page_size or cursor retain the legacy default of 50
+        results. Cursor requests default to 20 results, with a maximum of 100.
       parameters:
-        - description: Maximum number of registries to return
+        - description: Number of results per cursor page
+          name: page_size
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+            minimum: 1
+            title: Page Size
+            default: 20
+        - description: Opaque cursor from a prior response's next_cursor
+          name: cursor
+          in: query
+          schema:
+            type: string
+            title: Cursor
+        - description: 'Deprecated: use page_size. Maximum number of registries to return'
           name: limit
           in: query
           schema:
             type: integer
             title: Limit
-        - description: Number of registries to skip
+        - description: 'Deprecated: use cursor. Number of registries to skip'
           name: offset
           in: query
           schema:
@@ -204,7 +232,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/sandboxes.RegistryListResponse'
         '400':
-          description: Bad Request
+          description: invalid cursor pagination or mixed pagination parameters
           content:
             application/json:
               schema:
@@ -215,6 +243,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '422':
+          description: out-of-range legacy limit or offset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ValidationErrors'
         '500':
           description: Internal Server Error
           content:
@@ -230,9 +264,21 @@ components:
     sandboxes.RegistryListResponse:
       type: object
       properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.RegistryResponse'
+        next_cursor:
+          anyOf:
+            - type: string
+            - type: 'null'
         offset:
+          description: >-
+            Deprecated: only applies to limit/offset requests. Use next_cursor
+            when paging with a cursor.
           type: integer
         registries:
+          description: 'Deprecated: use items.'
           type: array
           items:
             $ref: '#/components/schemas/sandboxes.RegistryResponse'
@@ -248,6 +294,13 @@ components:
               type: string
             message:
               type: string
+    sandboxes.ValidationErrors:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.ValidationErrorDetail'
     sandboxes.RegistryResponse:
       type: object
       properties:
@@ -286,6 +339,17 @@ components:
         updated_by:
           type: string
         url:
+          type: string
+    sandboxes.ValidationErrorDetail:
+      type: object
+      properties:
+        loc:
+          items:
+            type: string
+          type: array
+        msg:
+          type: string
+        type:
           type: string
   securitySchemes:
     API Key:

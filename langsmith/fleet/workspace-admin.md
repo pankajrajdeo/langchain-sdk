@@ -25,20 +25,21 @@ Fleet uses [workspace secrets](../set-up-hierarchy.md#configure-workspace-settin
 * **MCP server configuration**: Fleet can pull tools from one or more remote [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers. Configure MCP servers and headers in your [workspace](../administration-overview.md#workspaces) settings. Fleet automatically discovers tools and applies the configured headers when calling them. For more information, refer to the [Remote MCP servers](remote-mcp-servers.md) page.
 
 > [!NOTE]
+>
 > Custom models are available for enterprise deployments. See [Custom models](essentials.md#custom-models) for more information.
 
 ### Add a secret
 
+Adding workspace secrets requires permission to manage secrets in the workspace. If you do not have it, ask a workspace admin to add the secret for you or to grant you access.
+
 To add a secret:
 
-1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-workspace-admin), navigate to  **Settings** and then move to the **Secrets** tab.
+1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-workspace-admin), navigate to  **Settings** > **Integrations** > **Provider secrets**.
+2. Select **+ Secret**.
+3. Under **Provider**, select your model provider. LangSmith names the secret with the environment variable the provider expects, such as `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`. Enter your secret in that field.
 
-2. Select **Add secret** and enter the secret **name** (for example, `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) and your key as the **value**.
-
-> [!NOTE]
->    Ensure that the secret keys match the environment variable names expected by your model provider.
-
-3. Select **Save secret**.
+   For tool keys, `FLEET_`-prefixed secrets, or a provider that is not listed, leave **Custom** as the provider. Enter the secret name as the **Key** (for example, `TAVILY_API_KEY` or `FLEET_OPENAI_API_KEY`) and your key as the **Value**.
+4. Select **Save**.
 
 ## Usage and spend limits
 
@@ -78,8 +79,6 @@ You can override the default spend limit for individual agents or users to set a
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/workspace-admin.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/workspace-admin.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

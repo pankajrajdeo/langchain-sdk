@@ -14,6 +14,8 @@ Async subagents let a supervisor agent launch background tasks that return immed
 
 This builds on [subagents](subagents.md), which run synchronously and block the supervisor until completion. Use async subagents when tasks are long-running, parallelizable, or need mid-flight steering.
 
+On an Agent Server, the supervisor also learns when a task finishes, fails, or needs input, so it does not have to check.
+
 ```mermaid
 graph TB
     User([User]) --> Supervisor[Supervisor Agent]
@@ -26,6 +28,7 @@ graph TB
 ```
 
 > [!NOTE]
+>
 > Async subagents communicate with any server that implements the [Agent Protocol](https://github.com/langchain-ai/agent-protocol). You can use [LangSmith Deployments](../langsmith/deployment.md), or self-host any Agent Protocol-compatible server. Each subagent runs independently of the supervisor, which controls them through the SDK to launch, check, update, and cancel.
 
 ## When to use async subagents
@@ -74,6 +77,7 @@ agent = create_deep_agent(
 | `graph_id` | `str` | Required. The graph ID (or assistant ID) on the Agent Protocol server. For LangGraph-based deployments, this must match a graph registered in `langgraph.json`. |
 | `url` | `str` | Optional. When omitted, uses ASGI transport (in-process). When set, uses HTTP transport to a remote Agent Protocol server. |
 | `headers` | `dict[str, str]` | Optional. Additional headers for requests to the remote server. Use for custom authentication with self-hosted Agent Protocol servers. |
+| `mode` | `"isolated" \| "fork"` | Optional. Controls what conversation context the subagent receives at launch. Defaults to `"isolated"`. See [Choose a launch mode](#choose-a-launch-mode). |
 
 For LangGraph-based deployments, register all graphs in the same `langgraph.json` for co-deployed setups:
 
@@ -133,11 +137,82 @@ sequenceDiagram
 * **Cancel** calls `runs.cancel()` on the server and marks the task as `"cancelled"`.
 * **List** iterates over all tracked tasks. For non-terminal tasks, it fetches live status from the server in parallel. Terminal statuses (`success`, `error`, `cancelled`) are returned from cache.
 
+If a subagent paused for input or approval, **check** and **list** report it as `waiting`. Updating a `waiting` task drops its pending request, and cancelling one only marks it as `"cancelled"`, since it has no active run. See [Handle subagents waiting for input](#handle-subagents-waiting-for-input).
+
+When running on an [Agent Protocol](https://github.com/langchain-ai/agent-protocol) server, subagents automatically update the supervisor as they complete. If using a [single deployment](#single-deployment) for the supervisor and subagents, subagents will wake the supervisor if it is idle; otherwise it receives the update at the start of its next run.
+
+> [!NOTE]
+>
+> Task notifications require `deepagents>=0.7.26`. They are in [**beta**](../versioning.md); APIs and behavior may change between releases.
+
+Notifications are returned to the supervisor as a `HumanMessage`. They can include images and other multimodal media. The message carries a [`TaskEvent`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/TaskEvent) (`task_id`, `agent_name`, `status`, `run_id`) in `additional_kwargs["deepagents_notification"]`, so your app can show notifications differently from user messages:
+
+```python
+for message in state["messages"]:
+    if event := message.additional_kwargs.get("deepagents_notification"):
+        print(event["agent_name"], event["status"])  # success, error, timeout, or waiting
+```
+
+## Handle subagents waiting for input
+
+> [!NOTE]
+>
+> The `waiting` status requires `deepagents>=0.7.26`. It is in [**beta**](../versioning.md); APIs and behavior may change between releases.
+
+When a subagent pauses for input or approval with `interrupt()` or [human-in-the-loop](human-in-the-loop.md), the **check** and **list** tools report it as `waiting` with its pending interrupts. The supervisor cannot answer or approve on the user's behalf. The request is for the user.
+
+Your app answers it on the subagent's own thread. The task ID is the subagent's thread ID:
+
+```python
+from langgraph_sdk import get_client
+
+async def answer_waiting_subagent(task_id: str, graph_id: str, answer: object) -> None:
+    client = get_client()  # Pass url=... for a subagent on another deployment
+    thread = await client.threads.get(task_id)  # The task ID is the subagent's thread ID
+    interrupt = next(iter(thread["interrupts"].values()))[0]
+    await client.runs.create(
+        task_id,
+        graph_id,
+        command={"resume": {interrupt["id"]: answer}},
+    )
+```
+
+When the subagent finishes after the answer, the supervisor receives a notification as usual. If a subagent needs information from the supervisor rather than the user, have it ask in its result. The supervisor replies with `update_async_task`.
+
 ## Understand state management
 
 Task metadata is stored in a dedicated state channel (`async_tasks`) on the supervisor's graph, separate from the message history. This is critical because deep agents [compact their message history](context-engineering.md#summarization) when the context window fills up. If task IDs were only in tool messages, they would be lost during compaction. The dedicated channel ensures the supervisor can always recall its tasks through `list_async_tasks`, even after multiple rounds of summarization.
 
 Each tracked task records the task ID, agent name, thread ID, run ID, status, and timestamps (`created_at`, `last_checked_at`, `last_updated_at`).
+
+### Find a supervisor's subagent threads
+
+> [!NOTE]
+>
+> Thread tagging requires `deepagents>=0.7.26`. It is in [**beta**](../versioning.md); APIs and behavior may change between releases.
+
+`start_async_task` creates each subagent thread with `metadata={"parent_thread_id": ...}`, the supervisor's thread ID. Use it to find a supervisor's subagent threads, or to read the supervisor's thread in a subagent's graph factory:
+
+```python
+from langchain_core.runnables import RunnableConfig
+from langgraph_sdk import get_client
+
+from deepagents import create_deep_agent
+
+async def find_subagent_threads(parent_thread_id: str) -> list[dict]:
+    client = get_client()
+    return await client.threads.search(metadata={"parent_thread_id": parent_thread_id})
+
+def researcher(config: RunnableConfig):
+    # Set when a supervisor launched this run with `start_async_task`
+    parent_thread_id = (config.get("metadata") or {}).get("parent_thread_id")
+    return create_deep_agent(
+        model="google_genai:gemini-3.8-flash",
+        system_prompt="You research topics thoroughly.",
+    )
+```
+
+For example, a subagent can reuse the supervisor's [thread-scoped sandbox](sandboxes.md#thread-scoped-default) by looking it up with `parent_thread_id`. Check that the caller may access that thread first, since anyone with access to the thread can edit its metadata.
 
 ## Choose a transport
 
@@ -165,6 +240,40 @@ AsyncSubAgent(
 For LangGraph deployments, authentication is handled by the LangGraph SDK using `LANGSMITH_API_KEY` (or `LANGGRAPH_API_KEY`) from environment variables. Self-hosted Agent Protocol servers may use a different authentication mechanism.
 
 Use HTTP transport when subagents need independent scaling, different resource profiles, or are maintained by a different team.
+
+## Choose a launch mode
+
+The `mode` field on each [`AsyncSubAgent`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncSubAgent) spec controls what conversation context the subagent receives when a task starts.
+
+| Mode | Behavior |
+| - | - |
+| `"isolated"` (default) | Sends only the delegated task description. The subagent starts fresh with no knowledge of the parent's conversation history. |
+| `"fork"` | Sends a snapshot of the parent's conversation at launch, followed by the task description. The subagent can use that context while working in the background. |
+
+`"isolated"` is the right choice for most tasks. Use `"fork"` when the subagent needs established context — for example, a background drafting agent that should write in the style and voice already set up in the conversation.
+
+### Fork mode
+
+> [!WARNING]
+>
+> `mode="fork"` is available in Python only. It is experimental and may change in a future release.
+
+Set `mode="fork"` on any `AsyncSubAgent` spec:
+
+```python
+async_subagents=[
+    {
+        "name": "drafter",
+        "description": "Drafts documents based on the conversation context",
+        "graph_id": "drafter",
+        "mode": "fork",
+    }
+]
+```
+
+At launch, `start_async_task` sends the parent's full conversation history — replayed up to that point — followed by the task description. Later messages from the parent are not forwarded to the child.
+
+**Prompt-cache reuse.** To get cache hits on the forked conversation prefix, configure the remote agent with the same model, system prompt, tools, and prompt-processing middleware as the parent. Fork mode copies conversation history; it does not synchronize those settings. Matching configuration is necessary but not sufficient: the rendered prefix must match, and cache hits depend on the provider.
 
 ## Choose a deployment topology
 
@@ -287,8 +396,6 @@ The [async-deep-agents](https://github.com/langchain-ai/async-deep-agents) repos
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/async-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/async-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

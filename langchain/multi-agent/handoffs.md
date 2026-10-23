@@ -11,6 +11,7 @@ tags: [docs, langchain, multi-agent, handoffs]
 In the **handoffs** architecture, behavior changes dynamically based on state. The core mechanism: [tools](../tools.md) update a state variable (e.g., `current_step` or `active_agent`) that persists across turns, and the system reads this variable to adjust behavior—either applying different configuration (system prompt, tools) or routing to a different [agent](../agents.md). This pattern supports both handoffs between distinct agents and dynamic configuration changes within a single agent.
 
 > [!TIP]
+>
 > The term **handoffs** was coined by [OpenAI](https://openai.github.io/openai-agents-python/handoffs/) for using tool calls (e.g., `transfer_to_sales_agent`) to transfer control between agents or states.
 
 ```mermaid
@@ -71,12 +72,14 @@ def transfer_to_specialist(runtime) -> Command:
 ```
 
 > [!NOTE]
+>
 > **Why include a `ToolMessage`?** When an LLM calls a tool, it expects a response. The `ToolMessage` with matching `tool_call_id` completes this request-response cycle—without it, the conversation history becomes malformed. This is required whenever your handoff tool updates messages.
 
 For a complete implementation, see the tutorial below.
 
-#### [Tutorial: Build customer support with handoffs](handoffs-customer-support.md)
-Learn how to build a customer support agent using the handoffs pattern, where a single agent transitions between different configurations.
+> **[Tutorial: Build customer support with handoffs](handoffs-customer-support.md)**
+>
+> Learn how to build a customer support agent using the handoffs pattern, where a single agent transitions between different configurations.
 
 ## Implementation approaches
 
@@ -111,88 +114,86 @@ def record_warranty_status(
     )
 ```
 
-<details>
-<summary>Complete example: Customer support with middleware</summary>
-
+> **Complete example: Customer support with middleware**
+>
 ```python
-from langchain.agents import AgentState, create_agent
-from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-from langchain.tools import tool, ToolRuntime
-from langchain.messages import ToolMessage
-from langgraph.checkpoint.memory import InMemorySaver
-from langgraph.types import Command
-from typing import Callable
-
-# 1. Define state with current_step tracker
-class SupportState(AgentState):  # [!code highlight]
-    """Track which step is currently active."""
-    current_step: str = "triage"  # [!code highlight]
-    warranty_status: str | None = None
-
-# 2. Tools update current_step via Command
-@tool
-def record_warranty_status(
-    status: str,
-    runtime: ToolRuntime[None, SupportState]
-) -> Command:  # [!code highlight]
-    """Record warranty status and transition to next step."""
-    return Command(update={  # [!code highlight]
-        "messages": [  # [!code highlight]
-            ToolMessage(
-                content=f"Warranty status recorded: {status}",
-                tool_call_id=runtime.tool_call_id
-            )
-        ],
-        "warranty_status": status,
-        # Transition to next step
-        "current_step": "specialist"    # [!code highlight]
-    })
-
-# 3. Middleware applies dynamic configuration based on current_step
-@wrap_model_call  # [!code highlight]
-def apply_step_config(
-    request: ModelRequest,
-    handler: Callable[[ModelRequest], ModelResponse]
-) -> ModelResponse:
-    """Configure agent behavior based on current_step."""
-    step = request.state.get("current_step", "triage")  # [!code highlight]
-
-    # Map steps to their configurations
-    configs = {
-        "triage": {
-            "prompt": "Collect warranty information...",
-            "tools": [record_warranty_status]
-        },
-        "specialist": {
-            "prompt": "Provide solutions based on warranty: {warranty_status}",
-            "tools": [provide_solution, escalate]
-        }
-    }
-
-    config = configs[step]
-    request = request.override(  # [!code highlight]
-        system_prompt=config["prompt"].format(**request.state),  # [!code highlight]
-        tools=config["tools"]  # [!code highlight]
-    )
-    return handler(request)
-
-# 4. Create agent with middleware
-agent = create_agent(
-    model,
-    tools=[record_warranty_status, provide_solution, escalate],
-    state_schema=SupportState,
-    middleware=[apply_step_config],  # [!code highlight]
-    checkpointer=InMemorySaver()  # Persist state across turns  # [!code highlight]
-)
+> from langchain.agents import AgentState, create_agent
+> from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+> from langchain.tools import tool, ToolRuntime
+> from langchain.messages import ToolMessage
+> from langgraph.checkpoint.memory import InMemorySaver
+> from langgraph.types import Command
+> from typing import Callable
+>
+> # 1. Define state with current_step tracker
+> class SupportState(AgentState):  # [!code highlight]
+>     """Track which step is currently active."""
+>     current_step: str = "triage"  # [!code highlight]
+>     warranty_status: str | None = None
+>
+> # 2. Tools update current_step via Command
+> @tool
+> def record_warranty_status(
+>     status: str,
+>     runtime: ToolRuntime[None, SupportState]
+> ) -> Command:  # [!code highlight]
+>     """Record warranty status and transition to next step."""
+>     return Command(update={  # [!code highlight]
+>         "messages": [  # [!code highlight]
+>             ToolMessage(
+>                 content=f"Warranty status recorded: {status}",
+>                 tool_call_id=runtime.tool_call_id
+>             )
+>         ],
+>         "warranty_status": status,
+>         # Transition to next step
+>         "current_step": "specialist"    # [!code highlight]
+>     })
+>
+> # 3. Middleware applies dynamic configuration based on current_step
+> @wrap_model_call  # [!code highlight]
+> def apply_step_config(
+>     request: ModelRequest,
+>     handler: Callable[[ModelRequest], ModelResponse]
+> ) -> ModelResponse:
+>     """Configure agent behavior based on current_step."""
+>     step = request.state.get("current_step", "triage")  # [!code highlight]
+>
+>     # Map steps to their configurations
+>     configs = {
+>         "triage": {
+>             "prompt": "Collect warranty information...",
+>             "tools": [record_warranty_status]
+>         },
+>         "specialist": {
+>             "prompt": "Provide solutions based on warranty: {warranty_status}",
+>             "tools": [provide_solution, escalate]
+>         }
+>     }
+>
+>     config = configs[step]
+>     request = request.override(  # [!code highlight]
+>         system_prompt=config["prompt"].format(**request.state),  # [!code highlight]
+>         tools=config["tools"]  # [!code highlight]
+>     )
+>     return handler(request)
+>
+> # 4. Create agent with middleware
+> agent = create_agent(
+>     model,
+>     tools=[record_warranty_status, provide_solution, escalate],
+>     state_schema=SupportState,
+>     middleware=[apply_step_config],  # [!code highlight]
+>     checkpointer=InMemorySaver()  # Persist state across turns  # [!code highlight]
+> )
 ```
-
-</details>
 
 ### Multiple agent subgraphs
 
 Multiple distinct agents exist as separate nodes in a graph. Handoff tools navigate between agent nodes using `Command.PARENT` to specify which node to execute next.
 
 > [!WARNING]
+>
 > Subgraph handoffs require careful **[context engineering](../context-engineering.md)**. Unlike single-agent middleware (where message history flows naturally), you must explicitly decide what messages pass between agents. Get this wrong and agents receive malformed conversation history or bloated context. See [Context engineering](#context-engineering) below.
 
 ```python
@@ -222,150 +223,157 @@ def transfer_to_sales(
     )
 ```
 
-<details>
-<summary>Complete example: Sales and support with handoffs</summary>
-
-This example shows a multi-agent system with separate sales and support agents. Each agent is a separate graph node, and handoff tools allow agents to transfer conversations to each other.
-
+> **Complete example: Sales and support with handoffs**
+>
+> This example shows a multi-agent system with separate sales and support agents. Each agent is a separate graph node, and handoff tools allow agents to transfer conversations to each other.
+>
 ```python
-from typing import Literal
-
-from langchain.agents import AgentState, create_agent
-from langchain.messages import AIMessage, ToolMessage
-from langchain.tools import tool, ToolRuntime
-from langgraph.graph import StateGraph, START, END
-from langgraph.types import Command
-from typing_extensions import NotRequired
-
-# 1. Define state with active_agent tracker
-class MultiAgentState(AgentState):
-    active_agent: NotRequired[str]
-
-# 2. Create handoff tools
-@tool
-def transfer_to_sales(
-    runtime: ToolRuntime,
-) -> Command:
-    """Transfer to the sales agent."""
-    last_ai_message = next(  # [!code highlight]
-        msg for msg in reversed(runtime.state["messages"]) if isinstance(msg, AIMessage)  # [!code highlight]
-    )  # [!code highlight]
-    transfer_message = ToolMessage(  # [!code highlight]
-        content="Transferred to sales agent from support agent",  # [!code highlight]
-        tool_call_id=runtime.tool_call_id,  # [!code highlight]
-    )  # [!code highlight]
-    return Command(
-        goto="sales_agent",
-        update={
-            "active_agent": "sales_agent",
-            "messages": [last_ai_message, transfer_message],  # [!code highlight]
-        },
-        graph=Command.PARENT,
-    )
-
-@tool
-def transfer_to_support(
-    runtime: ToolRuntime,
-) -> Command:
-    """Transfer to the support agent."""
-    last_ai_message = next(  # [!code highlight]
-        msg for msg in reversed(runtime.state["messages"]) if isinstance(msg, AIMessage)  # [!code highlight]
-    )  # [!code highlight]
-    transfer_message = ToolMessage(  # [!code highlight]
-        content="Transferred to support agent from sales agent",  # [!code highlight]
-        tool_call_id=runtime.tool_call_id,  # [!code highlight]
-    )  # [!code highlight]
-    return Command(
-        goto="support_agent",
-        update={
-            "active_agent": "support_agent",
-            "messages": [last_ai_message, transfer_message],  # [!code highlight]
-        },
-        graph=Command.PARENT,
-    )
-
-# 3. Create agents with handoff tools
-sales_agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
-    tools=[transfer_to_support],
-    system_prompt="You are a sales agent. Help with sales inquiries. If asked about technical issues or support, transfer to the support agent.",
-)
-
-support_agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
-    tools=[transfer_to_sales],
-    system_prompt="You are a support agent. Help with technical issues. If asked about pricing or purchasing, transfer to the sales agent.",
-)
-
-# 4. Create agent nodes that invoke the agents
-def call_sales_agent(state: MultiAgentState) -> Command:
-    """Node that calls the sales agent."""
-    response = sales_agent.invoke(state)
-    return response
-
-def call_support_agent(state: MultiAgentState) -> Command:
-    """Node that calls the support agent."""
-    response = support_agent.invoke(state)
-    return response
-
-# 5. Create router that checks if we should end or continue
-def route_after_agent(
-    state: MultiAgentState,
-) -> Literal["sales_agent", "support_agent", "__end__"]:
-    """Route based on active_agent, or END if the agent finished without handoff."""
-    messages = state.get("messages", [])
-
-    # Check the last message - if it's an AIMessage without tool calls, we're done
-    if messages:
-        last_msg = messages[-1]
-        if isinstance(last_msg, AIMessage) and not last_msg.tool_calls:  # [!code highlight]
-            return "__end__"  # [!code highlight]
-
-    # Otherwise route to the active agent
-    active = state.get("active_agent", "sales_agent")
-    return active if active else "sales_agent"
-
-def route_initial(
-    state: MultiAgentState,
-) -> Literal["sales_agent", "support_agent"]:
-    """Route to the active agent based on state, default to sales agent."""
-    return state.get("active_agent") or "sales_agent"
-
-# 6. Build the graph
-builder = StateGraph(MultiAgentState)
-builder.add_node("sales_agent", call_sales_agent)
-builder.add_node("support_agent", call_support_agent)
-
-# Start with conditional routing based on initial active_agent
-builder.add_conditional_edges(START, route_initial, ["sales_agent", "support_agent"])
-
-# After each agent, check if we should end or route to another agent
-builder.add_conditional_edges(
-    "sales_agent", route_after_agent, ["sales_agent", "support_agent", END]
-)
-builder.add_conditional_edges(
-    "support_agent", route_after_agent, ["sales_agent", "support_agent", END]
-)
-
-graph = builder.compile()
-result = graph.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Hi, I'm having trouble with my account login. Can you help?",
-            }
-        ]
-    }
-)
-
-for msg in result["messages"]:
-    msg.pretty_print()
+> from typing import Literal
+>
+> from langchain.agents import AgentState, create_agent
+> from langchain.messages import AIMessage, ToolMessage
+> from langchain.tools import tool, ToolRuntime
+> from langgraph.graph import StateGraph, START, END
+> from langgraph.types import Command
+> from typing_extensions import NotRequired
+>
+>
+> # 1. Define state with active_agent tracker
+> class MultiAgentState(AgentState):
+>     active_agent: NotRequired[str]
+>
+>
+> # 2. Create handoff tools
+> @tool
+> def transfer_to_sales(
+>     runtime: ToolRuntime,
+> ) -> Command:
+>     """Transfer to the sales agent."""
+>     last_ai_message = next(  # [!code highlight]
+>         msg for msg in reversed(runtime.state["messages"]) if isinstance(msg, AIMessage)  # [!code highlight]
+>     )  # [!code highlight]
+>     transfer_message = ToolMessage(  # [!code highlight]
+>         content="Transferred to sales agent from support agent",  # [!code highlight]
+>         tool_call_id=runtime.tool_call_id,  # [!code highlight]
+>     )  # [!code highlight]
+>     return Command(
+>         goto="sales_agent",
+>         update={
+>             "active_agent": "sales_agent",
+>             "messages": [last_ai_message, transfer_message],  # [!code highlight]
+>         },
+>         graph=Command.PARENT,
+>     )
+>
+>
+> @tool
+> def transfer_to_support(
+>     runtime: ToolRuntime,
+> ) -> Command:
+>     """Transfer to the support agent."""
+>     last_ai_message = next(  # [!code highlight]
+>         msg for msg in reversed(runtime.state["messages"]) if isinstance(msg, AIMessage)  # [!code highlight]
+>     )  # [!code highlight]
+>     transfer_message = ToolMessage(  # [!code highlight]
+>         content="Transferred to support agent from sales agent",  # [!code highlight]
+>         tool_call_id=runtime.tool_call_id,  # [!code highlight]
+>     )  # [!code highlight]
+>     return Command(
+>         goto="support_agent",
+>         update={
+>             "active_agent": "support_agent",
+>             "messages": [last_ai_message, transfer_message],  # [!code highlight]
+>         },
+>         graph=Command.PARENT,
+>     )
+>
+>
+> # 3. Create agents with handoff tools
+> sales_agent = create_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     tools=[transfer_to_support],
+>     system_prompt="You are a sales agent. Help with sales inquiries. If asked about technical issues or support, transfer to the support agent.",
+> )
+>
+> support_agent = create_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     tools=[transfer_to_sales],
+>     system_prompt="You are a support agent. Help with technical issues. If asked about pricing or purchasing, transfer to the sales agent.",
+> )
+>
+>
+> # 4. Create agent nodes that invoke the agents
+> def call_sales_agent(state: MultiAgentState) -> Command:
+>     """Node that calls the sales agent."""
+>     response = sales_agent.invoke(state)
+>     return response
+>
+>
+> def call_support_agent(state: MultiAgentState) -> Command:
+>     """Node that calls the support agent."""
+>     response = support_agent.invoke(state)
+>     return response
+>
+>
+> # 5. Create router that checks if we should end or continue
+> def route_after_agent(
+>     state: MultiAgentState,
+> ) -> Literal["sales_agent", "support_agent", "__end__"]:
+>     """Route based on active_agent, or END if the agent finished without handoff."""
+>     messages = state.get("messages", [])
+>
+>     # Check the last message - if it's an AIMessage without tool calls, we're done
+>     if messages:
+>         last_msg = messages[-1]
+>         if isinstance(last_msg, AIMessage) and not last_msg.tool_calls:  # [!code highlight]
+>             return "__end__"  # [!code highlight]
+>
+>     # Otherwise route to the active agent
+>     active = state.get("active_agent", "sales_agent")
+>     return active if active else "sales_agent"
+>
+>
+> def route_initial(
+>     state: MultiAgentState,
+> ) -> Literal["sales_agent", "support_agent"]:
+>     """Route to the active agent based on state, default to sales agent."""
+>     return state.get("active_agent") or "sales_agent"
+>
+>
+> # 6. Build the graph
+> builder = StateGraph(MultiAgentState)
+> builder.add_node("sales_agent", call_sales_agent)
+> builder.add_node("support_agent", call_support_agent)
+>
+> # Start with conditional routing based on initial active_agent
+> builder.add_conditional_edges(START, route_initial, ["sales_agent", "support_agent"])
+>
+> # After each agent, check if we should end or route to another agent
+> builder.add_conditional_edges(
+>     "sales_agent", route_after_agent, ["sales_agent", "support_agent", END]
+> )
+> builder.add_conditional_edges(
+>     "support_agent", route_after_agent, ["sales_agent", "support_agent", END]
+> )
+>
+> graph = builder.compile()
+> result = graph.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Hi, I'm having trouble with my account login. Can you help?",
+>             }
+>         ]
+>     }
+> )
+>
+> for msg in result["messages"]:
+>     msg.pretty_print()
 ```
 
-</details>
-
 > [!TIP]
+>
 > Use **single agent with middleware** for most handoffs use cases—it's simpler. Only use **multiple agent subgraphs** when you need bespoke agent implementations (e.g., a node that's itself a complex graph with reflection or retrieval steps).
 
 #### Context engineering
@@ -407,6 +415,7 @@ def transfer_to_sales(runtime: ToolRuntime) -> Command:
 ```
 
 > [!NOTE]
+>
 > **Why not pass all subagent messages?** While you could include the full subagent conversation in the handoff, this often creates problems. The receiving agent may become confused by irrelevant internal reasoning, and token costs increase unnecessarily. By passing only the handoff pair, you keep the parent graph's context focused on high-level coordination. If the receiving agent needs additional context, consider summarizing the subagent's work in the ToolMessage content instead of passing raw message history.
 
 **Returning control to the user**
@@ -423,8 +432,6 @@ As you design your multi-agent system, consider:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/handoffs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/handoffs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

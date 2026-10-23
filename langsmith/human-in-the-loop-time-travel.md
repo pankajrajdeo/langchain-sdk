@@ -12,7 +12,7 @@ LangGraph provides the [**time travel**](../langgraph/use-time-travel.md) functi
 
 To time travel using the LangSmith Deployment API (via the LangGraph SDK):
 
-1. **Run the graph** with initial inputs using [LangGraph SDK](langgraph-python-sdk.md)'s [client.runs.wait](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.wait) or [client.runs.stream](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.stream) APIs.
+1. **Run the graph** with initial inputs using [LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk.md)'s [client.runs.wait](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.wait) or [client.runs.stream](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.stream) APIs.
 2. **Identify a checkpoint in an existing thread**: Use [client.threads.get\_history](https://reference.langchain.com/python/langgraph-sdk/_async/threads/ThreadsClient/get_history) method to retrieve the execution history for a specific `thread_id` and locate the desired `checkpoint_id`.
    Alternatively, set a [breakpoint](../langgraph/interrupts.md) before the node(s) where you want execution to pause. You can then find the most recent checkpoint recorded up to that breakpoint.
 3. **(Optional) modify the graph state**: Use the [client.threads.update\_state](https://reference.langchain.com/python/langgraph-sdk/_async/threads/ThreadsClient/update_state) method to modify the graph’s state at the checkpoint and resume execution from alternative state.
@@ -20,54 +20,52 @@ To time travel using the LangSmith Deployment API (via the LangGraph SDK):
 
 ## Use time travel in a workflow
 
-<details>
-<summary>Example graph</summary>
-
+> **Example graph**
+>
 ```python
-from typing_extensions import TypedDict, NotRequired
-from langgraph.graph import StateGraph, START, END
-from langchain.chat_models import init_chat_model
-from langgraph.checkpoint.memory import InMemorySaver
-
-class State(TypedDict):
-    topic: NotRequired[str]
-    joke: NotRequired[str]
-
-model = init_chat_model(
-    "claude-sonnet-4-6",
-    temperature=0,
-)
-
-def generate_topic(state: State):
-    """LLM call to generate a topic for the joke"""
-    msg = model.invoke("Give me a funny topic for a joke")
-    return {"topic": msg.content}
-
-def write_joke(state: State):
-    """LLM call to write a joke based on the topic"""
-    msg = model.invoke(f"Write a short joke about {state['topic']}")
-    return {"joke": msg.content}
-
-# Build workflow
-builder = StateGraph(State)
-
-# Add nodes
-builder.add_node("generate_topic", generate_topic)
-builder.add_node("write_joke", write_joke)
-
-# Add edges to connect nodes
-builder.add_edge(START, "generate_topic")
-builder.add_edge("generate_topic", "write_joke")
-
-# Compile
-graph = builder.compile()
+> from typing_extensions import TypedDict, NotRequired
+> from langgraph.graph import StateGraph, START, END
+> from langchain.chat_models import init_chat_model
+> from langgraph.checkpoint.memory import InMemorySaver
+>
+> class State(TypedDict):
+>     topic: NotRequired[str]
+>     joke: NotRequired[str]
+>
+> model = init_chat_model(
+>     "claude-sonnet-4-6",
+>     temperature=0,
+> )
+>
+> def generate_topic(state: State):
+>     """LLM call to generate a topic for the joke"""
+>     msg = model.invoke("Give me a funny topic for a joke")
+>     return {"topic": msg.content}
+>
+> def write_joke(state: State):
+>     """LLM call to write a joke based on the topic"""
+>     msg = model.invoke(f"Write a short joke about {state['topic']}")
+>     return {"joke": msg.content}
+>
+> # Build workflow
+> builder = StateGraph(State)
+>
+> # Add nodes
+> builder.add_node("generate_topic", generate_topic)
+> builder.add_node("write_joke", write_joke)
+>
+> # Add edges to connect nodes
+> builder.add_edge(START, "generate_topic")
+> builder.add_edge("generate_topic", "write_joke")
+>
+> # Compile
+> graph = builder.compile()
 ```
-
-</details>
 
 ### 1. Run the graph
 
-#### Python
+**Python**
+
 ```python
 from langgraph_sdk import get_client
 client = get_client(url=<DEPLOYMENT_URL>)
@@ -87,7 +85,8 @@ result = await client.runs.wait(
 )
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```js
 import { Client } from "@langchain/langgraph-sdk";
 const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
@@ -107,7 +106,8 @@ const result = await client.runs.wait(
 );
 ```
 
-#### cURL
+**cURL**
+
 Create a thread:
 
 ```bash
@@ -131,7 +131,8 @@ curl --request POST \
 
 ### 2. Identify a checkpoint
 
-#### Python
+**Python**
+
 ```python
 # The states are returned in reverse chronological order.
 states = await client.threads.get_history(thread_id)
@@ -139,7 +140,8 @@ selected_state = states[1]
 print(selected_state)
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```js
 // The states are returned in reverse chronological order.
 const states = await client.threads.getHistory(threadID);
@@ -147,20 +149,20 @@ const selectedState = states[1];
 console.log(selectedState);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request GET \
 --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/history \
 --header 'Content-Type: application/json'
 ```
 
-<a id="optional" />
-
 ### 3. Update the state
 
 [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) will create a new checkpoint. The new checkpoint will be associated with the same thread, but a new checkpoint ID.
 
-#### Python
+**Python**
+
 ```python
 new_config = await client.threads.update_state(
     thread_id,
@@ -170,7 +172,8 @@ new_config = await client.threads.update_state(
 print(new_config)
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```js
 const newConfig = await client.threads.updateState(
   threadID,
@@ -182,7 +185,8 @@ const newConfig = await client.threads.updateState(
 console.log(newConfig);
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
 --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/state \
@@ -196,7 +200,8 @@ curl --request POST \
 
 ### 4. Resume execution from the checkpoint
 
-#### Python
+**Python**
+
 ```python
 await client.runs.wait(
     thread_id,
@@ -206,7 +211,8 @@ await client.runs.wait(
 )
 ```
 
-#### JavaScript
+**JavaScript**
+
 ```javascript
 await client.runs.wait(
   threadID,
@@ -218,7 +224,8 @@ await client.runs.wait(
 );
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
 --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
@@ -235,8 +242,6 @@ curl --request POST \
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/human-in-the-loop-time-travel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/human-in-the-loop-time-travel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

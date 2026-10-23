@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, llms, openai]
 > Integrate with the OpenAI LLM using LangChain JavaScript.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of OpenAI text completion models. The latest and most popular OpenAI models are [chat completion models](../../langchain/models.md).**
 >
 > Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](../chat/openai.md).
@@ -23,7 +24,7 @@ This will help you get started with OpenAI completion models (LLMs) using LangCh
 
 ### Integration details
 
-| Class | Package | Local | Serializable | [PY support](https://python.langchain.com/docs/integrations/llms/openai) | Downloads | Version |
+| Class | Package | Local | Serializable | [PY support](../../../integrations/llms/openai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: | :-: |
 | [`OpenAI`](https://reference.langchain.com/javascript/langchain-openai/OpenAI) | [`@langchain/openai`](https://www.npmjs.com/package/@langchain/openai) | ❌ | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
 
@@ -132,8 +133,6 @@ For detailed documentation of all `OpenAI` features and configurations head to t
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

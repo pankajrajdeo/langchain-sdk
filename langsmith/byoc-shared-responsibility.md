@@ -36,6 +36,7 @@ For the multi-tenant SaaS equivalent, see the [LangSmith shared responsibility m
 For details on how upgrades, autoscaling, and maintenance windows work, see [BYOC operations](byoc-operations.md).
 
 > [!NOTE]
+>
 > With [BYOVPC](byoc-byovpc.md), you also create and maintain:
 >
 > * VPC
@@ -81,8 +82,6 @@ The IAM permissions that scope LangChain access are described in [Cross-account 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-shared-responsibility.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-shared-responsibility.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

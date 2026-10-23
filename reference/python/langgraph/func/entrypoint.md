@@ -55,7 +55,7 @@ entrypoint(
     cache_policy: CachePolicy | None = None,
     retry_policy: RetryPolicy | Sequence[RetryPolicy] | None = None,
     timeout: float | timedelta | TimeoutPolicy | None = None,
-    **kwargs: Unpack[DeprecatedKwargs] = {},
+    kwargs: Unpack[DeprecatedKwargs] = {},
 )
 ```
 
@@ -209,7 +209,7 @@ __init__(
     cache_policy: CachePolicy | None = None,
     retry_policy: RetryPolicy | Sequence[RetryPolicy] | None = None,
     timeout: float | timedelta | TimeoutPolicy | None = None,
-    **kwargs: Unpack[DeprecatedKwargs] = {},
+    kwargs: Unpack[DeprecatedKwargs] = {},
 ) -> None
 ```
 
@@ -222,6 +222,7 @@ __init__(
 | `cache_policy` | `CachePolicy \| None` |
 | `retry_policy` | `RetryPolicy \| Sequence[RetryPolicy] \| None` |
 | `timeout` | `float \| timedelta \| TimeoutPolicy \| None` |
+| `kwargs` | `Unpack[DeprecatedKwargs]` |
 
 ## Properties
 
@@ -235,4 +236,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/func/__init__.py#L262)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/func/__init__.py#L262)

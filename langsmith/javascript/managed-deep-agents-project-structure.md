@@ -13,7 +13,8 @@ tags: [docs, langsmith, javascript, managed-deep-agents-project-structure]
 A Managed Deep Agents project is a normal TypeScript package with one required root agent entry. Other paths are either ordinary modules you import, or files and directories that MDA discovers to enable managed capabilities.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## Project layout
 
@@ -80,18 +81,51 @@ The layout above shows the common `.ts` names. TypeScript managed declarations a
 
 * **Evals**: Managed Deep Agents [evals](managed-deep-agents-evals.md) are Harbor evals. Run `mda evals init -i` and develop tasks with a coding agent and the `eval-engineering` skill. Generated runtime files stay under `.mda/evals/` and are not included in the deployed agent build.
 
+## Share code from outside the project
+
+The build copies only the project directory. To use a package from a sibling directory, declare it as a local dependency:
+
+**npm**
+
+```bash
+npm install ../shared
+```
+
+**pnpm**
+
+```bash
+pnpm add ../shared
+```
+
+```ts
+import { helper } from "@acme/shared";
+```
+
+Put the shared code in its own package. Its `package.json` needs a `name` and a `main` or `exports` entry, which can point to `.ts` files:
+
+**../shared/package.json**
+
+```json
+{
+  "name": "@acme/shared",
+  "main": "./index.ts"
+}
+```
+
+MDA copies the package into the build. `mda dev` reloads when you edit it, and `mda deploy` ships it.
+
 ## Next steps
 
-#### [Quickstart](managed-deep-agents-quickstart.md)
-Create and deploy your first Managed Deep Agent with the `mda` CLI.
+> **[Quickstart](managed-deep-agents-quickstart.md)**
+>
+> Create and deploy your first Managed Deep Agent with the `mda` CLI.
 
-#### [Tutorial](managed-deep-agents-tutorial.md)
-Add durable memory and a daily schedule to the quickstart research assistant.
+> **[Tutorial](managed-deep-agents-tutorial.md)**
+>
+> Add durable memory and a daily schedule to the quickstart research assistant.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-project-structure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-project-structure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

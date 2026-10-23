@@ -120,13 +120,15 @@ middleware = SkillsMiddleware(
 - `MAX_SKILL_NAME_LENGTH`
 - `MAX_SKILL_DESCRIPTION_LENGTH`
 - `MAX_SKILL_COMPATIBILITY_LENGTH`
+- `SkillToolResolver`
 - `SKILLS_SYSTEM_PROMPT`
 
 ## Methods
 
 - [`to_posix_path()`](https://reference.langchain.com/python/deepagents/middleware/skills/to_posix_path)
 - [`append_to_system_message()`](https://reference.langchain.com/python/deepagents/middleware/skills/append_to_system_message)
+- [`disclosed_skill_tool_names()`](https://reference.langchain.com/python/deepagents/middleware/skills/disclosed_skill_tool_names)
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/skills.py)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/skills.py)

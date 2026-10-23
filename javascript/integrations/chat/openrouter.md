@@ -13,6 +13,7 @@ tags: [docs, javascript, integrations, chat, openrouter]
 This will help you get started with OpenRouter [chat models](../../langchain/models.md). OpenRouter is a unified API that provides access to models from multiple providers (OpenAI, Anthropic, Google, Meta, and more) through a single endpoint.
 
 > [!TIP]
+>
 > **API Reference**
 >
 > For detailed documentation of all features and configuration options, head to the [ChatOpenRouter API reference](https://reference.langchain.com/javascript/langchain-openrouter/ChatOpenRouter).
@@ -23,7 +24,7 @@ For a full list of available models, visit the [OpenRouter models page](https://
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/openrouter) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/openrouter.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatOpenRouter`](https://reference.langchain.com/javascript/langchain-openrouter/ChatOpenRouter) | [`@langchain/openrouter`](https://www.npmjs.com/package/@langchain/openrouter) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openrouter?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openrouter?style=flat-square\&label=%20&) |
 
@@ -45,7 +46,7 @@ Head to the [OpenRouter keys page](https://openrouter.ai/settings/keys) to sign 
 export OPENROUTER_API_KEY="your-api-key"
 ```
 
-Optionally, enable tracing of your model calls with [LangSmith](../../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../../langsmith/observability.md) API key:
 
 ```bash
 # export LANGSMITH_TRACING="true"
@@ -192,6 +193,7 @@ For more on binding tools and tool call outputs, head to the [tool calling](../.
 * **`jsonMode`**—asks the model to respond in JSON without strict schema constraints
 
 > [!NOTE]
+>
 > When multi-model routing is active (`models` list or `route: "fallback"`), the method always falls back to `functionCalling` because the actual backend model's capabilities are unknown at request time.
 
 ```typescript
@@ -243,6 +245,7 @@ const strictModel = model.withStructuredOutput(movieSchema, {
 OpenRouter supports [multimodal inputs](../../langchain/messages.md#multimodal) for models that accept them. The available modalities depend on the model you select—check the [OpenRouter models page](https://openrouter.ai/models) for details.
 
 > [!NOTE]
+>
 > Not all models support all modalities. Check the [OpenRouter models page](https://openrouter.ai/models) for model-specific support.
 
 ### Image input
@@ -479,8 +482,6 @@ For more information about OpenRouter's platform, models, and features, see the 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

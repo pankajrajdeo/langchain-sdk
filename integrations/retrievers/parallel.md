@@ -13,6 +13,7 @@ tags: [docs, integrations, retrievers, parallel]
 [`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) is a LangChain [`BaseRetriever`](../../deepagents/retrieval.md) backed by [Parallel](https://platform.parallel.ai/)'s [Search API](https://docs.parallel.ai/search/search-quickstart). It returns `list[Document]` with rich `metadata` (`url`, `title`, `publish_date`, `search_id`, `excerpts`, `query`) and slots into any RAG pipeline.
 
 > [!NOTE]
+>
 > Looking for an LLM-callable tool that returns the raw search response instead of `Document`s? See [ParallelSearchTool](../tools/parallel_search.md).
 
 ## Overview
@@ -21,7 +22,7 @@ tags: [docs, integrations, retrievers, parallel]
 
 | Class | Package | JS support | Package latest |
 | :- | :- | :-: | :-: |
-| [`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
+| [`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) | ❌ | [![PyPI - Latest version](https://img.shields.io/pypi/v/langchain-parallel?style=flat-square\&label=%20\&color=orange)](https://pypi.org/project/langchain-parallel/) |
 
 ## Setup
 
@@ -144,8 +145,6 @@ For detailed documentation, head to the [`ParallelSearchRetriever`](https://refe
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

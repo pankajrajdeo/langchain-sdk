@@ -27,7 +27,8 @@ Different errors need different handling strategies:
 
 The sections below cover each strategy with code examples.
 
-#### Transient errors
+**Transient errors**
+
 Add retry middleware to automatically retry network issues and rate limits. Model calls and tool calls each have their own retry middleware with exponential backoff:
 
 ```python
@@ -48,10 +49,12 @@ agent = create_agent(
 )
 ```
 
-#### LLM-recoverable
+**LLM-recoverable**
+
 Use [ToolErrorMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/tool_error/ToolErrorMiddleware) to catch tool exceptions and convert them into error `ToolMessage`s so the LLM can see what went wrong and try again:
 
 > [!NOTE]
+>
 > `ToolErrorMiddleware` requires `langchain>=1.3.14`.
 
 ```python
@@ -70,7 +73,8 @@ agent = create_agent(
 )
 ```
 
-#### User-fixable
+**User-fixable**
+
 Pause and collect information from the user when needed (like account IDs, order numbers, or clarifications). Use `interrupt_on` to pause the agent before specific tool calls:
 
 ```python
@@ -88,7 +92,8 @@ agent = create_deep_agent(
 
 For the full human-in-the-loop guide, see [Human-in-the-loop](human-in-the-loop.md).
 
-#### Provider outage
+**Provider outage**
+
 If your primary model provider goes down entirely, use [ModelFallbackMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/model_fallback/ModelFallbackMiddleware) to switch to an alternative model:
 
 ```python
@@ -104,7 +109,8 @@ agent = create_agent(
 )
 ```
 
-#### Excessive calls
+**Excessive calls**
+
 Without limits, a confused agent can burn through your LLM API budget in minutes by looping on the same tool call or making hundreds of model calls. Set caps on both model calls and tool executions per run:
 
 ```python
@@ -121,7 +127,8 @@ agent = create_agent(
 )
 ```
 
-#### Unexpected
+**Unexpected**
+
 Let them bubble up for debugging. Do not catch what you cannot handle. [ToolErrorMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/tool_error/ToolErrorMiddleware) only surfaces exceptions you explicitly return content for; everything else propagates unchanged:
 
 ```python
@@ -205,6 +212,7 @@ agent = create_deep_agent(
 Scope [ToolRetryMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/tool_retry/ToolRetryMiddleware) to specific tools rather than retrying everything. A filesystem `read_file` that fails will not benefit from a retry, but a web search that times out probably will. See [ModelRetryMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/model_retry/ModelRetryMiddleware) for the full configuration.
 
 > [!NOTE]
+>
 > Major integration packages raise standard exception types ([ModelAuthenticationError](https://reference.langchain.com/python/langchain-core/exceptions/ModelAuthenticationError), [ModelRateLimitError](https://reference.langchain.com/python/langchain-core/exceptions/ModelRateLimitError), [ModelTimeoutError](https://reference.langchain.com/python/langchain-core/exceptions/ModelTimeoutError), and others) that carry an `is_retryable` flag the retry middleware respects by default. See [Model exceptions](../langchain/models.md#model-exceptions) for the full list.
 
 ## Fallbacks
@@ -231,6 +239,7 @@ See [ModelFallbackMiddleware](https://reference.langchain.com/python/langchain/a
 When a tool raises an exception during execution, the agent run halts by default. Use [ToolErrorMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/tool_error/ToolErrorMiddleware) to catch specific exceptions and convert them into error ToolMessages that the model can see and recover from, instead of crashing the run.
 
 > [!NOTE]
+>
 > `ToolErrorMiddleware` requires `langchain>=1.3.14`.
 
 ```python
@@ -252,8 +261,6 @@ For the full configuration options and usage patterns, including async handlers 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

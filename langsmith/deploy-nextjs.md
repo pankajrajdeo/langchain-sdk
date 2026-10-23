@@ -16,17 +16,18 @@ Source: [`js-next`](https://github.com/langchain-ai/deployment-cookbook/tree/mai
 
 ## Deploy to Vercel
 
-### Import the repository
+**1. Import the repository**
+
 Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-next&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents" target="_blank" rel="noopener noreferrer">
-  <img src="https://vercel.com/button" alt="Deploy with Vercel" />
-</a>
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook\&root-directory=js-next\&env=OPENAI_API_KEY\&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents)
 
-### Configure the project
+**2. Configure the project**
+
 Set **Root Directory** to `js-next` and add `OPENAI_API_KEY` in project settings.
 
-### Deploy
+**3. Deploy**
+
 Deploy the project. Route handlers already set `runtime = "nodejs"` and the SSE route sets `dynamic = "force-dynamic"`, which Vercel needs for streaming.
 
 Optionally enable LangSmith tracing by adding the variables from [`.env.example`](https://github.com/langchain-ai/deployment-cookbook/blob/main/js-next/.env.example).
@@ -168,8 +169,6 @@ pnpm lint    # eslint
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-nextjs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-nextjs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -42,7 +42,7 @@ init_chat_model(
     model_provider: str | None = None,
     configurable_fields: Literal['any'] | list[str] | tuple[str, ...] | None = None,
     config_prefix: str | None = None,
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> BaseChatModel | _ConfigurableModel
 ```
 
@@ -171,4 +171,4 @@ underlying model at runtime once a config is passed in.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/be854a130153e51346d83d3b06f959b80f6cbca6/libs/langchain_v1/langchain/chat_models/base.py#L232)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/chat_models/base.py#L232)

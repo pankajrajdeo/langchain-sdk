@@ -20,10 +20,10 @@ generate_prompt(
     prompts: list[PromptValue],
     stop: list[str] | None = None,
     callbacks: Callbacks | list[Callbacks] | None = None,
-    **kwargs: Any = {},
+    kwargs: Any = {},
 ) -> LLMResult
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/language_models/llms.py#L792)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/language_models/llms.py#L792)

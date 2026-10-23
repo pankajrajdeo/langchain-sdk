@@ -13,7 +13,8 @@ tags: [docs, langsmith, javascript, managed-deep-agents-deploy]
 Deploying a Managed Deep Agent compiles a code-first project into a managed LangGraph app, syncs deploy-owned context to [Context Hub](managed-deep-agents-context-hub.md), uploads the compiled source, and triggers a LangSmith hosted deployment build. The result is an [Agent Server](../agent-server-overview.md) deployment, including the Agent Server API and [MCP endpoint](managed-deep-agents-mcp-endpoint.md).
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 This page covers secrets routing and deploy options. To test the agent before deploying, see [Develop locally with LangSmith Studio](managed-deep-agents-local-development.md). For command flags, the deploy step list, and troubleshooting, see the [CLI reference](managed-deep-agents-cli.md).
 
@@ -23,7 +24,7 @@ Before you deploy, make sure you have:
 
 * A workspace with Managed Deep Agents public beta access.
 
-* A [LangSmith API key](../create-account-api-key.md) for that workspace, either in `.env` or your shell environment.
+* A [LangSmith API key](../create-account-api-key.md) for that workspace, in `.env` or your shell environment. On an interactive terminal, `mda deploy` prompts for a key or signs you in through the browser instead.
 
 * The `mda` CLI installed from `managed-deepagents`.
 
@@ -31,7 +32,34 @@ Before you deploy, make sure you have:
 
 * Model provider credentials, such as `OPENAI_API_KEY`, in `.env`, your shell environment, or LangSmith workspace secrets.
 
-The CLI targets US LangSmith Cloud by default.
+## Select a SaaS region
+
+`LANGSMITH_ENDPOINT` selects the LangSmith region the CLI deploys to. The CLI targets GCP US by default.
+
+Set `LANGSMITH_ENDPOINT` in your project's `.env` or your shell environment before your first deploy:
+
+| Region | Endpoint | Deployment support |
+| - | - | - |
+| GCP US (`smith.langchain.com`) | `https://api.smith.langchain.com` | Supported |
+| GCP EU (`eu.smith.langchain.com`) | `https://eu.api.smith.langchain.com` | Supported |
+| GCP APAC (`apac.smith.langchain.com`) | `https://apac.api.smith.langchain.com` | Supported |
+| AWS US (`aws.smith.langchain.com`) | `https://aws.api.smith.langchain.com` | Supported |
+
+For example, to deploy to GCP EU:
+
+**.env**
+
+```text
+LANGSMITH_ENDPOINT=https://eu.api.smith.langchain.com
+```
+
+Credentials must belong to the target region. Set `LANGSMITH_ENDPOINT` before the first deploy, because it also selects the region that browser sign-in authenticates against. A non-interactive run cannot fall back to browser sign-in, so in CI set `LANGSMITH_API_KEY` for the target region.
+
+For more information on regions, see the [Regions FAQ](../regions-faq.md).
+
+> [!NOTE]
+>
+> LangSmith managed tools are available in GCP US only.
 
 ## Deploy to LangSmith
 
@@ -56,14 +84,15 @@ bunx mda deploy
 ```
 
 > [!TIP]
+>
 > `mda deploy` routes local project inputs to different managed surfaces:
 >
-> ```text
+```text
 > instructions.md + skills/**  -> Context Hub deploy-owned context
 > .env                         -> deploy auth + non-reserved hosted secrets, not archived
 > project source files         -> .mda/build source archive -> hosted deployment
 > schedules/**                 -> LangSmith cron jobs after the deployment is live
-> ```
+```
 
 Set the deployment name explicitly when the directory name is not the name you want:
 
@@ -161,28 +190,32 @@ If a deployment reaches `BUILD_FAILED` or `DEPLOY_FAILED`, open the printed depl
 
 ## Next steps
 
-#### [Agent Server](../agent-server-overview.md)
-Explore the runtime that hosts the deployment.
+> **[Agent Server](../agent-server-overview.md)**
+>
+> Explore the runtime that hosts the deployment.
 
-#### [MCP endpoint](managed-deep-agents-mcp-endpoint.md)
-Expose the deployed agent as a tool to MCP clients.
+> **[MCP endpoint](managed-deep-agents-mcp-endpoint.md)**
+>
+> Expose the deployed agent as a tool to MCP clients.
 
-#### [Identity](managed-deep-agents-identity.md)
-Authenticate callers and provide private threads.
+> **[Identity](managed-deep-agents-identity.md)**
+>
+> Authenticate callers and provide private threads.
 
-#### [Schedules](managed-deep-agents-schedules.md)
-Run agents on managed cron schedules.
+> **[Schedules](managed-deep-agents-schedules.md)**
+>
+> Run agents on managed cron schedules.
 
-#### [Custom tools](managed-deep-agents-tools.md)
-Add authored LangChain tools to the agent definition.
+> **[Custom tools](managed-deep-agents-tools.md)**
+>
+> Add authored LangChain tools to the agent definition.
 
-#### [CLI reference](managed-deep-agents-cli.md)
-Look up every `mda` command and flag.
+> **[CLI reference](managed-deep-agents-cli.md)**
+>
+> Look up every `mda` command and flag.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

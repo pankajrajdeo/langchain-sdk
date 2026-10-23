@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/orgs/current/sso-settings:
     get:
@@ -210,6 +213,10 @@ components:
           type: string
           format: uuid
           title: Provider Id
+        provider_type:
+          $ref: '#/components/schemas/SSOProviderType'
+          default: saml
+          x-extensible-enum: true
         default_workspace_role_id:
           type: string
           format: uuid
@@ -230,6 +237,26 @@ components:
             - type: string
             - type: 'null'
           title: Metadata Xml
+        oidc_issuer_url:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Oidc Issuer Url
+        oidc_client_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Oidc Client Id
+        oidc_scopes:
+          items:
+            type: string
+          type: array
+          title: Oidc Scopes
+        oidc_claim_mapping:
+          additionalProperties:
+            type: string
+          type: object
+          title: Oidc Claim Mapping
         sso_groups_enabled:
           type: boolean
           title: Sso Groups Enabled
@@ -263,6 +290,12 @@ components:
         - default_workspace_role_id
         - default_workspace_ids
       title: SSOProvider
+    SSOProviderType:
+      type: string
+      enum:
+        - saml
+        - oidc
+      title: SSOProviderType
     SupabaseAttributeMapping:
       properties:
         keys:

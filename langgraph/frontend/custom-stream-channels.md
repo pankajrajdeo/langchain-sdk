@@ -21,8 +21,6 @@ The example below is a customer-support agent whose transformer redacts PII
 reaches the browser, and publishes running redaction counts on a
 `redaction-stats` channel. The side panel renders those counts live.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/frontend/custom-stream-channels).
-
 ## How custom channels work
 
 A custom channel has two ends. On the server, a [`StreamTransformer`](https://reference.langchain.com/python/langgraph/stream/_types/StreamTransformer) opens a
@@ -39,6 +37,7 @@ frontend SDK packages (`@langchain/react`, `@langchain/vue`,
 `@langchain/svelte`, `@langchain/angular`).
 
 > [!NOTE]
+>
 > Stream transformers and `StreamChannel` require `langgraph>=1.2`.
 
 ```python
@@ -109,6 +108,7 @@ Wire up [`useStream`](https://reference.langchain.com/javascript/langchain-react
 `stream` handle returned here.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](../../javascript/langchain/frontend/overview.md#type-inference) backends.
 
 **React**
@@ -314,6 +314,7 @@ const rawEvents = useChannel(
 | `replay` | `true` | Replay events already seen on the channel when the selector mounts, instead of only live events. |
 
 > [!NOTE]
+>
 > Prefer the higher-level selectors (`useExtension`, `useMessages`,
 > `useToolCalls`, `useValues`) for common cases. They return typed, unwrapped
 > values and track only what you render. Use `useChannel` when you specifically
@@ -359,8 +360,6 @@ messages, tool calls, or graph state:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/custom-stream-channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/custom-stream-channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

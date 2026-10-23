@@ -9,6 +9,7 @@ tags: [docs, langsmith, fetch-perf-metrics-experiment]
 # How to fetch performance metrics for an experiment
 
 > [!TIP]
+>
 > Tracing projects and experiments use the same underlying data structure in our backend, which is called a "session."
 >
 > You might see these terms interchangeably in our documentation, but they all refer to the same underlying data structure.
@@ -180,8 +181,6 @@ console.log(JSON.stringify(resp, null, 2))
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fetch-perf-metrics-experiment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fetch-perf-metrics-experiment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

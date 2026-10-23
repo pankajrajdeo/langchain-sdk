@@ -19,6 +19,7 @@ You can learn more about Azure OpenAI and its difference with the OpenAI API on 
 This will help you get started with AzureOpenAIEmbeddings [embedding models](../embeddings.md) using LangChain. For detailed documentation on `AzureOpenAIEmbeddings` features and configuration options, please refer to the [API reference](https://reference.langchain.com/javascript/langchain-openai/AzureOpenAIEmbeddings).
 
 > [!NOTE]
+>
 > **Previously, LangChain.js supported integration with Azure OpenAI using the dedicated [Azure OpenAI SDK](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/openai/openai). This SDK is now deprecated in favor of the new Azure integration in the OpenAI SDK, which allows to access the latest OpenAI models and features the same day they are released, and allows seamless transition between the OpenAI API and Azure OpenAI.**
 >
 > If you are using Azure OpenAI with the deprecated SDK, see the [migration guide](#migration-from-azure-openai-sdk) to update to the new API.
@@ -27,7 +28,7 @@ This will help you get started with AzureOpenAIEmbeddings [embedding models](../
 
 ### Integration details
 
-| Class | Package | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/azure_openai/) | Downloads | Version |
+| Class | Package | Local | [Py support](../../../integrations/embeddings/azure_openai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`AzureOpenAIEmbeddings`](https://reference.langchain.com/javascript/langchain-openai/AzureOpenAIEmbeddings) | [`@langchain/openai`](https://www.npmjs.com/package/@langchain/openai) | ❌ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
 
@@ -80,9 +81,11 @@ pnpm add @langchain/openai @langchain/core
 ```
 
 > [!NOTE]
+>
 > **You can find the list of supported API versions in the [Azure OpenAI documentation](https://learn.microsoft.com/azure/ai-services/openai/reference).**
 
 > [!TIP]
+>
 > **If `AZURE_OPENAI_API_EMBEDDINGS_DEPLOYMENT_NAME` is not defined, it will fall back to the value of `AZURE_OPENAI_API_DEPLOYMENT_NAME` for the deployment name. The same applies to the `azureOpenAIApiEmbeddingsDeploymentName` parameter in the `AzureOpenAIEmbeddings` constructor, which will fall back to the value of `azureOpenAIApiDeploymentName` if not defined.**
 
 ## Instantiation
@@ -345,8 +348,6 @@ For detailed documentation of all `AzureOpenAIEmbeddings` features and configura
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/azure_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/azure_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

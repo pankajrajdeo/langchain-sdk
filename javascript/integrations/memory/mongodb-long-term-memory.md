@@ -15,6 +15,7 @@ tags: [docs, javascript, integrations, memory, mongodb-long-term-memory]
 MongoDB stores memories as documents in a collection. With an Atlas Vector Search index, the same store can run semantic search over stored memories.
 
 > [!TIP]
+>
 > For a deeper dive into memory types and strategies for writing memories, see the [Memory conceptual guide](../../concepts/memory.md#long-term-memory).
 
 ## Setup
@@ -231,8 +232,6 @@ console.log(result?.value);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/memory/mongodb-long-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/memory/mongodb-long-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

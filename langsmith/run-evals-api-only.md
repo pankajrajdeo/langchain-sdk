@@ -28,8 +28,7 @@ import requests
 from datetime import datetime
 from langsmith import Client
 from openai import OpenAI
-from uuid import uuid4
-
+from langsmith import uuid7
 client = Client()
 oa_client = OpenAI()
 
@@ -185,7 +184,7 @@ Now create the experiments and run completions on all examples. In the API, an "
 #  An experiment is a collection of runs with a reference to the dataset used
 #  API Reference: https://docs.langchain.com/langsmith/smith-api/tracer-sessions/create-tracer-session
 
-model_names = ("gpt-3.5-turbo", "gpt-5.4-mini")
+model_names = ("gpt-5.4-mini", "gpt-5.5")
 experiment_ids = []
 for model_name in model_names:
     resp = requests.post(
@@ -194,7 +193,7 @@ for model_name in model_names:
             "start_time": datetime.utcnow().isoformat(),
             "reference_dataset_id": str(dataset_id),
             "description": "An optional description for the experiment",
-            "name": f"Toxicity detection - API Example - {model_name} - {str(uuid4())[0:8]}",  # A name for the experiment
+            "name": f"Toxicity detection - API Example - {model_name} - {str(uuid7())[0:8]}",  # A name for the experiment
             "extra": {
                 "metadata": {"foo": "bar"},  # Optional metadata
             },
@@ -289,7 +288,7 @@ resp = requests.post(
     "https://api.smith.langchain.com/api/v1/datasets/comparative",
     json={
         "experiment_ids": experiment_ids,
-        "name": "Toxicity detection - API Example - Comparative - " + str(uuid4())[0:8],
+        "name": "Toxicity detection - API Example - Comparative - " + str(uuid7())[0:8],
         "description": "An optional description for the comparative experiment",
         "extra": {
             "metadata": {"foo": "bar"},  # Optional metadata
@@ -336,7 +335,7 @@ for example_id, runs in example_id_to_runs_map.items():
     print(f"Example ID: {example_id}")
     # Preferentially rank the outputs, in this case we will always prefer the first output
     # In reality, you can use an LLM to rank the outputs
-    feedback_group_id = uuid4()
+    feedback_group_id = uuid7()
 
     # Post a feedback score for each run, with the first run being the preferred one
     # API Reference: https://docs.langchain.com/langsmith/smith-api/feedback/create-feedback
@@ -361,8 +360,6 @@ for example_id, runs in example_id_to_runs_map.items():
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-evals-api-only.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-evals-api-only.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

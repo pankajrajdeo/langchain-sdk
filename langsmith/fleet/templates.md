@@ -13,6 +13,7 @@ tags: [docs, langsmith, fleet, templates]
 LangSmith Fleet includes [starter templates](https://www.langchain.com/templates) to help you create agents quickly. Templates include predefined instructions, [tools](tools.md), and [channels](essentials.md#channels) (if applicable) for common use cases. You can use templates as-is, or as a baseline to customize.
 
 > [!TIP]
+>
 > If you're new to Fleet, start with the step-by-step [quickstart](quickstart.md) to build your first agent using a template.
 
 ## Features
@@ -37,19 +38,20 @@ Templates serve as starting points that you clone to create your own agent. When
 
 ## Available templates
 
-#### Executive Assistant
-Manages your inbox, calendar, and daily brief.
+> **Executive Assistant**
+>
+> Manages your inbox, calendar, and daily brief.
 
-#### Software Engineer
-Ships code from Slack, Linear, and GitHub in a sandbox.
+> **Software Engineer**
+>
+> Ships code from Slack, Linear, and GitHub in a sandbox.
 
 > [!NOTE]
+>
 > The available templates may change over time. For the most up-to-date set, open **Templates** in Fleet or the [templates gallery](https://www.langchain.com/templates).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/templates.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/templates.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -131,12 +131,32 @@ await traceableCallOpenAI(messages);
 ```
 
 > [!TIP]
+>
 > **LangSmith Deployments**: To add metadata dynamically per invocation in Agent Server deployments, we recommend using `tracing_context` in a [factory function](graph-rebuild.md). See [Customize tracing in deployed agents](conditional-tracing.md#customize-tracing-in-deployed-agents) for examples.
+
+## Record the code version on traces
+
+The LangSmith SDKs can record the commit that produced a trace as a `revision_id` key in the metadata of every run.
+
+The SDK reads `revision_id` from the `LANGSMITH_REVISION_ID` environment variable. When that is unset, it reads `LANGCHAIN_REVISION_ID`, the legacy name. A `revision_id` set explicitly in run metadata takes precedence over both.
+
+Set the environment variable when you build or deploy your application. For example, in a Dockerfile:
+
+```dockerfile
+ARG GIT_SHA
+ENV LANGSMITH_REVISION_ID=$GIT_SHA
+```
+
+Then pass the commit when building the image:
+
+```bash
+docker build --build-arg GIT_SHA=$(git rev-parse HEAD) .
+```
+
+To find the traces from a given commit, filter on the `revision_id` metadata key. See [Filter traces](filter-traces.md).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/add-metadata-tags.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/add-metadata-tags.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

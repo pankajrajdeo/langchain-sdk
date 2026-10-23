@@ -66,6 +66,8 @@ __init__(
     tool_calling: bool,
     tool_choice: bool,
     tool_call_streaming: bool,
+    mid_conversation_system_messages: bool,
+    mid_conversation_tools: bool,
     structured_output: bool,
     attachment: bool,
     temperature: bool,
@@ -99,6 +101,8 @@ __init__(
 | `tool_calling` | `bool` |
 | `tool_choice` | `bool` |
 | `tool_call_streaming` | `bool` |
+| `mid_conversation_system_messages` | `bool` |
+| `mid_conversation_tools` | `bool` |
 | `structured_output` | `bool` |
 | `attachment` | `bool` |
 | `temperature` | `bool` |
@@ -130,10 +134,12 @@ __init__(
 - `tool_calling`
 - `tool_choice`
 - `tool_call_streaming`
+- `mid_conversation_system_messages`
+- `mid_conversation_tools`
 - `structured_output`
 - `attachment`
 - `temperature`
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/language_models/model_profile.py#L13)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/language_models/model_profile.py#L13)

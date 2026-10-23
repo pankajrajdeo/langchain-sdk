@@ -49,6 +49,7 @@ const graph = new StateGraph(StateAnnotation)
 ```
 
 > [!WARNING]
+>
 > You **MUST** compile your graph before you can use it.
 
 ## State
@@ -175,8 +176,9 @@ await graph.invoke({ userInput: "My" });
 // { graphOutput: 'My name is Lance' }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/2ec2bda1-e202-4d3f-940b-81bdd0e23be1/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/8fd9e17e-fd75-4829-a402-cb7e0bf18736/r)**
+>
+> Open a public LangSmith run for this example.
 
 There are two subtle and important points to note here:
 
@@ -185,13 +187,14 @@ There are two subtle and important points to note here:
 2. We initialize the graph with `StateGraph({ state: OverallState, input: InputState, output: OutputState })`. How can we write to `PrivateState` in `node2`? How does the graph gain access to this schema if it was not passed in the `StateGraph` initialization? We can do this because *nodes can also declare additional state channels* as long as the state schema definition exists. In this case, the `PrivateState` schema is defined, so we can add `bar` as a new state channel in the graph and write to it.
 
 > [!WARNING]
+>
 > **Private channels are not redacted when streaming.**
 >
 > Input, output, and private schemas constrain what each node *reads* (its input schema) and what `invoke` *returns* (the output schema). They do **not** hide channels from `stream`.
 >
 > When you stream with `streamMode: "values"`, the graph emits **all** of its state channels by default — including private ones — because values streaming defaults to the full set of state channels rather than the output schema. This is why a private channel like `bar` is hidden by `invoke` but visible while streaming:
 >
-> ```ts
+```ts
 > import { END, START, StateGraph, StateSchema } from "@langchain/langgraph";
 > import * as z from "zod";
 >
@@ -245,14 +248,15 @@ There are two subtle and important points to note here:
 > // { foo: 'My name', userInput: 'My' }
 > // { foo: 'My name', userInput: 'My', bar: 'My name is' }            // <-- private channel
 > // { foo: 'My name', userInput: 'My', graphOutput: 'My name is Lance', bar: 'My name is' }
-> ```
+```
 >
-> #### [View example trace](https://smith.langchain.com/public/03351e93-f024-493a-afae-ed5827ec7751/r)
-> Open a public LangSmith run for this example.
+> > **[View example trace](https://smith.langchain.com/public/32188285-dc90-4281-b140-d3bbf033748c/r)**
+> >
+> > Open a public LangSmith run for this example.
 >
 > To restrict the streamed values to a specific set of channels (e.g. only the output schema), pass `outputKeys`:
 >
-> ```typescript
+```typescript
 > const stream = await graph.streamEvents(
 >   { userInput: "My" },
 >   { version: "v3", outputKeys: ["graphOutput"] }  // [!code highlight]
@@ -261,7 +265,7 @@ There are two subtle and important points to note here:
 >   console.log(snapshot);
 > }
 > // { graphOutput: 'My name is Lance' }
-> ```
+```
 >
 > If you only need the channels a node actually produced each step (rather than the full accumulated state), use `streamMode: "updates"` instead.
 
@@ -301,8 +305,9 @@ const State = new StateSchema({
 });
 ```
 
-#### [View example trace](https://smith.langchain.com/public/93ae7eff-5da7-48ae-893a-2e85e87ecd2c/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/c4537752-96b4-4e3a-832b-9733d2486e85/r)**
+>
+> Open a public LangSmith run for this example.
 
 Suppose the state is `{ tags: ["draft"] }` and a node returns `{ tags: ["review"] }`. LangGraph calls:
 
@@ -330,8 +335,9 @@ const State = new StateSchema({
 });
 ```
 
-#### [View example trace](https://smith.langchain.com/public/b3536d55-6b2a-4b92-b956-be768be61b3d/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/62bd5fab-0acd-46c3-9689-42a37da3c7f5/r)**
+>
+> Open a public LangSmith run for this example.
 
 In this example, no reducer functions are specified for any key. Let's assume the input to the graph is:
 
@@ -354,8 +360,9 @@ const State = new StateSchema({
 });
 ```
 
-#### [View example trace](https://smith.langchain.com/public/65abf4d1-0932-4229-9d3f-c21e52d6008c/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/e9ae6a10-b6dc-49c9-bb16-5f307b57d2e4/r)**
+>
+> Open a public LangSmith run for this example.
 
 In this example, we've used `ReducedValue` to specify a reducer function for the second key (`bar`). Note that the first key remains unchanged. Let's assume the input to the graph is `{ foo: 1, bar: ["hi"] }`. Let's then assume the first `Node` returns `{ foo: 2 }`. This is treated as an update to the state. Notice that the `Node` does not need to return the whole `State` schema - just an update. After applying this update, the `State` would then be `{ foo: 2, bar: ["hi"] }`. If the second node returns `{ bar: ["bye"] }` then the `State` would then be `{ foo: 2, bar: ["hi", "bye"] }`. Notice here that the `bar` key is updated by concatenating the two arrays together.
 
@@ -381,8 +388,9 @@ const State = new StateSchema({
 // state.errors is still ["bad sql"]; the empty array is merged in, not cleared
 ```
 
-#### [View example trace](https://smith.langchain.com/public/c65687b5-c6a9-4dca-9f6b-17ff20669c52/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/3bb1b2e1-f021-488d-86ec-0b09f71b4d14/r)**
+>
+> Open a public LangSmith run for this example.
 
 To let a node reset (clear) the field, define a custom reducer that replaces the accumulated value instead of merging it:
 
@@ -400,8 +408,9 @@ const State = new StateSchema({
 // node can now clear the field with { errors: [] }
 ```
 
-#### [View example trace](https://smith.langchain.com/public/f08045e6-6826-46ab-8437-73b120f5f615/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/0ddacd70-2b42-4e9e-97c3-064e5c5d1f4d/r)**
+>
+> Open a public LangSmith run for this example.
 
 Alternatively, wrap the update with `Overwrite` to bypass the reducer for a single update, while keeping the field's normal merging behavior for every other update:
 
@@ -467,6 +476,7 @@ const State = new StateSchema({
 * With `guard: false`: Multiple writes allowed, last value wins
 
 > [!WARNING]
+>
 > Don't use `UntrackedValue` for data you need to persist across interrupts or time travel. Use regular state fields or `ReducedValue` for persistent data.
 
 ### Type utilities
@@ -585,7 +595,9 @@ In many cases, it is helpful to store prior conversation history as a list of me
 
 The `MessagesValue` reducer is vital to telling the graph how to update the list of `Message` objects in the state with each state update. If you don't specify a reducer, every state update will overwrite the list of messages with the most recently provided value. `MessagesValue` handles this correctly: for brand new messages, it appends to the existing list, and for existing messages (matched by ID), it updates them in place.
 
-`MessagesValue` is actually a special case of `ReducedValue`, preconfigured with an internal `messagesStateReducer` that handles message lists and updates. This provides convenient, message-aware state management for chat message history in LangGraph graphs.
+> [!TIP]
+>
+> `MessagesValue` is actually a special case of `ReducedValue`, preconfigured with an internal `messagesStateReducer` that handles message lists and updates. This provides convenient, message-aware state management for chat message history in LangGraph graphs.
 
 #### Serialization
 
@@ -686,9 +698,11 @@ When you compile with a [checkpointer](persistence.md), LangGraph saves checkpoi
 
 If a [node](#nodes) contains multiple operations, you may find it easier to implement each operation as a [**task**](functional-api.md#task) instead of splitting the logic across multiple nodes. Task results are checkpointed when the graph uses a checkpointer, so resuming a thread can skip completed **task** work inside the node.
 
-#### Original
+**Original**
+
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 
 import {
   END,
@@ -719,18 +733,21 @@ const builder = new StateGraph(State)
 const checkpointer = new MemorySaver();
 const graph = builder.compile({ checkpointer });
 
-const threadId = crypto.randomUUID();
+const threadId = uuid7();
 const config = { configurable: { thread_id: threadId } };
 
 await graph.invoke({ url: "https://www.example.com" }, config);
 ```
 
-#### [View example trace](https://smith.langchain.com/public/9a25fd41-1999-46d9-800d-3da14ff1cf7a/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/13308e63-ab5d-47b0-b9ac-9a52389969ed/r)**
+>
+> Open a public LangSmith run for this example.
 
-#### With task
+**With task**
+
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 
 import {
   END,
@@ -767,14 +784,15 @@ const builder = new StateGraph(State)
 const checkpointer = new MemorySaver();
 const graph = builder.compile({ checkpointer });
 
-const threadId = crypto.randomUUID();
+const threadId = uuid7();
 const config = { configurable: { thread_id: threadId } };
 
 await graph.invoke({ urls: ["https://www.example.com"] }, config);
 ```
 
-#### [View example trace](https://smith.langchain.com/public/10423c16-9de8-476c-808f-08a150d19d34/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/8a472619-c051-4137-95d3-1937c6d0855e/r)**
+>
+> Open a public LangSmith run for this example.
 
 ### `START` node
 
@@ -844,11 +862,12 @@ Edges define how the logic is routed and how the graph decides to stop. This is 
 A node can have multiple outgoing edges. If a node has multiple outgoing edges, **all** of those destination nodes will be executed in parallel as a part of the next superstep.
 
 > [!WARNING]
+>
 > For each node, choose one routing mechanism: use normal edges for static routing, or use conditional edges / [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) for dynamic routing. Do not mix normal edges and dynamic routing from the same node, because both paths can execute and make graph behavior harder to reason about.
 
 ### Normal edges
 
-If you **always** want to go from node A to node B, you can use the [`addEdge`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addEdge) method directly.
+If you **always** want to go from node A to node B, you can use the [`addEdge`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph/addEdge) method directly.
 
 ```typescript
 graph.addEdge("nodeA", "nodeB");
@@ -856,7 +875,7 @@ graph.addEdge("nodeA", "nodeB");
 
 ### Conditional edges
 
-If you want to **optionally** route to one or more edges (or optionally terminate), you can use the [`addConditionalEdges`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addConditionalEdges) method. This method accepts the name of a node and a "routing function" to call after that node is executed:
+If you want to **optionally** route to one or more edges (or optionally terminate), you can use the [`addConditionalEdges`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph/addConditionalEdges) method. This method accepts the name of a node and a "routing function" to call after that node is executed:
 
 ```typescript
 graph.addConditionalEdges("nodeA", routingFunction);
@@ -876,11 +895,12 @@ graph.addConditionalEdges("nodeA", routingFunction, {
 ```
 
 > [!TIP]
+>
 > Use [`Command`](#command) instead of conditional edges if you want to combine state updates and routing in a single function.
 
 ### Entry point
 
-The entry point is the first node(s) that are run when the graph starts. You can use the [`addEdge`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addEdge) method from the virtual [`START`](https://reference.langchain.com/javascript/langchain-langgraph/index/START) node to the first node to execute to specify where to enter the graph.
+The entry point is the first node(s) that are run when the graph starts. You can use the [`addEdge`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph/addEdge) method from the virtual [`START`](https://reference.langchain.com/javascript/langchain-langgraph/index/START) node to the first node to execute to specify where to enter the graph.
 
 ```typescript
 import { START } from "@langchain/langgraph";
@@ -890,7 +910,7 @@ graph.addEdge(START, "nodeA");
 
 ### Conditional entry point
 
-A conditional entry point lets you start at different nodes depending on custom logic. You can use [`addConditionalEdges`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addConditionalEdges) from the virtual [`START`](https://reference.langchain.com/javascript/langchain-langgraph/index/START) node to accomplish this.
+A conditional entry point lets you start at different nodes depending on custom logic. You can use [`addConditionalEdges`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph/addConditionalEdges) from the virtual [`START`](https://reference.langchain.com/javascript/langchain-langgraph/index/START) node to accomplish this.
 
 ```typescript
 import { START } from "@langchain/langgraph";
@@ -981,6 +1001,7 @@ builder.addNode("myNode", myNode, {
 ```
 
 > [!WARNING]
+>
 > [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) only adds dynamic edges—static edges defined with `add_edge` / `addEdge` still execute. For example, if `node_a` returns `Command(goto="my_other_node")` and you also have `graph.add_edge("node_a", "node_b")`, both `node_b` and `my_other_node` will run. For each node, use either [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) or static edges to route to the next nodes, not both.
 
 Check out this [how-to guide](use-graph-api.md#combine-control-flow-and-state-updates-with-command) for an end-to-end example of how to use [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command).
@@ -1002,6 +1023,7 @@ graph.addNode("myNode", (state) => {
 ```
 
 > [!NOTE]
+>
 > Setting `graph` to `Command.PARENT` will navigate to the closest parent graph.
 >
 > When you send updates from a subgraph node to a parent graph node for a key that's shared by both parent and subgraph [state schemas](#schema), you **must** define a [reducer](#reducers) for the key you're updating in the parent graph state.
@@ -1011,16 +1033,17 @@ This is particularly useful when implementing [multi-agent handoffs](../langchai
 ### Input to `invoke` or `stream`
 
 > [!WARNING]
+>
 > `new Command({ resume: ... })` is the **only** `Command` pattern intended as input to `invoke()`/`stream()` (optionally combined with `update` to also apply a state change while resuming). Do not use `new Command({ update: ... })` alone as input to continue multi-turn conversations—because passing any `Command` as input resumes from the latest checkpoint (i.e. the last step that ran, not `__start__`), the graph will appear stuck if it already finished. To continue a conversation on an existing thread, pass a plain input object:
 >
-> ```typescript
+```typescript
 > // WRONG - graph resumes from the latest checkpoint
 > // (last step that ran), appears stuck
 > await graph.invoke(new Command({ update: { messages: [{ role: "user", content: "follow up" }] } }), config);  // [!code --]
 >
 > // CORRECT - plain object restarts from __start__
 > await graph.invoke({ messages: [{ role: "user", content: "follow up" }] }, config);  // [!code ++]
-> ```
+```
 
 #### `resume`
 
@@ -1049,6 +1072,7 @@ Check out the [interrupts conceptual guide](interrupts.md) for full details on i
 You can return [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) from tools to update graph state and control flow. Use `update` to modify state (e.g., saving customer information looked up during a conversation) and `goto` to route to a specific node after the tool completes.
 
 > [!WARNING]
+>
 > When used inside tools, `goto` adds a dynamic edge—any static edges already defined on the node that called the tool will still execute. For each node, use either tool-driven dynamic routing or static edges to route to the next nodes, not both.
 
 Refer to [Use inside tools](use-graph-api.md#use-inside-tools) for detail.
@@ -1064,6 +1088,7 @@ LangGraph can easily handle migrations of graph definitions (nodes, edges, and s
 * State keys whose types change in incompatible ways could currently cause issues in threads with state from before the change -- if this is a blocker please reach out and we can prioritize a solution.
 
 > [!TIP]
+>
 > For changes that are technically compatible but alter business logic, such as rewriting the tool set or restructuring conversation flow, see [Business compatibility](backward-compatibility.md#business-compatibility). That page covers pinning a behavioral version in state so existing threads keep the old path while new threads pick up the latest version.
 
 ## Runtime context
@@ -1305,8 +1330,6 @@ To trace, debug and evaluate your agents, use [LangSmith](../../langsmith/observ
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

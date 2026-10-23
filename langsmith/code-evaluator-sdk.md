@@ -11,6 +11,7 @@ tags: [docs, langsmith, code-evaluator-sdk]
 Code evaluators are functions that take a dataset example and the resulting application output, and return one or more metrics. These functions can be passed directly into the [`evaluate()`](https://reference.langchain.com/python/langsmith/client/Client/evaluate) or [`aevaluate()`](https://reference.langchain.com/python/langsmith/client/Client/aevaluate) functions.
 
 > [!TIP]
+>
 > To define code evaluators in the LangSmith UI, refer to [How to define a code evaluator (UI)](code-evaluator-ui.md). To grade outputs against assertions saved on dataset examples, refer to [Use assertions](assertions.md).
 
 ## Basic example
@@ -186,7 +187,7 @@ Answer: ${outputs.answer}
 Reasoning: ${outputs.reasoning}`;
 
     const response = await openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-5.5",
         messages: [
             { role: "system", content: instructions },
             { role: "user", content: msg }
@@ -236,8 +237,6 @@ const results = await evaluate(dummyApp, {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/code-evaluator-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/code-evaluator-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

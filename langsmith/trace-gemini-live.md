@@ -11,6 +11,7 @@ tags: [docs, langsmith, trace-gemini-live]
 > Trace Gemini Live voice agents in LangSmith using the LangSmith SDK.
 
 > [!NOTE]
+>
 > This integration is in beta, so its API may change.
 
 Gemini Live is a speech-to-speech model that streams typed events over a WebSocket. Whether you build with a raw `google-genai` connection or the Google Agent Development Kit (ADK), the integration captures each conversation as a single LangSmith trace with spans for transcripts, model responses, tool calls, turn boundaries, and interruptions.
@@ -61,6 +62,7 @@ uv add "langsmith[google-adk-live]"
 ```
 
 > [!NOTE]
+>
 > The ADK Live integration requires `langsmith[google-adk-live]>=0.9.7`. This extra is separate from the `langsmith[google-adk]` batch integration.
 
 ## Set environment variables
@@ -111,6 +113,7 @@ async with (
 ```
 
 > [!NOTE]
+>
 > Transcription is opt-in. To show transcripts in the trace, set both `input_audio_transcription` and `output_audio_transcription` on `LiveConnectConfig`.
 
 ### Group a conversation into a thread
@@ -205,9 +208,11 @@ async for event in runner.run_live(
 ```
 
 > [!NOTE]
+>
 > Transcription is opt-in. To show transcripts, set both `input_audio_transcription` and `output_audio_transcription` on `RunConfig`.
 
 > [!NOTE]
+>
 > On a graceful end, when the live request queue closes, ADK sends its `after_run` callback and the plugin finalizes the trace.
 >
 > On a cancelled run, such as a console app that stops `run_live` on Ctrl-C, ADK might not send that callback. Call `plugin.finalize(session_id=adk_session.id)` during teardown so the trace and audio attachment are finalized. The call is idempotent, so it does nothing if ADK's callback already ran.
@@ -238,16 +243,16 @@ Record the user's microphone capture before resampling it for ADK, and record th
 
 ## Next steps
 
-#### [Voice fundamentals](trace-voice-fundamentals.md)
-Core conventions for tracing voice agents.
+> **[Voice fundamentals](trace-voice-fundamentals.md)**
+>
+> Core conventions for tracing voice agents.
 
-#### [Upload files with traces](upload-files-with-traces.md)
-Attach the conversation audio recording to your trace.
+> **[Upload files with traces](upload-files-with-traces.md)**
+>
+> Attach the conversation audio recording to your trace.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-gemini-live.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-gemini-live.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -18,8 +18,6 @@ By default, calls to most CLI commands log a single analytics event upon invocat
 
 You can disable all CLI telemetry by setting `LANGGRAPH_CLI_NO_ANALYTICS=1`.
 
-<a id="in-memory-docker" />
-
 ## Agent Server
 
 The [Agent Server](agent-server.md) provides a durable execution runtime that relies on persisting checkpoints of your application state, long-term memories, thread metadata, assistants, and similar resources to the local file system or a database. Unless you have deliberately customized the storage location, this information is either written to local disk (for `langgraph dev`) or a PostgreSQL database (for `langgraph up` and in all deployments).
@@ -29,15 +27,12 @@ The [Agent Server](agent-server.md) provides a durable execution runtime that re
 When running the Agent server (either in-memory or in Docker), LangSmith tracing may be enabled to facilitate faster debugging and offer observability of graph state and LLM prompts in production. You can always disable tracing by setting `LANGSMITH_TRACING=false` in your server's runtime environment.
 
 > [!NOTE]
+>
 > For more granular control, you can use [conditional tracing](conditional-tracing.md) to selectively enable or disable tracing based on runtime conditions, such as client requirements or data sensitivity.
-
-<a id="langgraph-dev" />
 
 ### In-memory development server
 
 `langgraph dev` runs an [in-memory development server](local-dev-testing.md) as a single Python process, designed for quick development and testing. It saves all checkpointing and memory data to disk within a `.langgraph_api` directory in the current working directory. Apart from the telemetry data described in the [CLI](#cli) section, no data leaves the machine unless you have enabled tracing or your graph code explicitly contacts an external service.
-
-<a id="langgraph-up" />
 
 ### Standalone Server
 
@@ -72,8 +67,6 @@ In summary, you can opt-out of server-side telemetry by turning off CLI analytic
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-storage-and-privacy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-storage-and-privacy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/examples/bulk:
     post:
@@ -183,6 +186,10 @@ paths:
           application/json:
             schema:
               items:
+                not:
+                  required:
+                    - outputs
+                    - reference_outputs
                 properties:
                   outputs:
                     anyOf:
@@ -190,6 +197,8 @@ paths:
                         type: object
                       - type: 'null'
                     title: Outputs
+                    deprecated: true
+                    description: 'Deprecated: use reference_outputs instead.'
                   dataset_id:
                     type: string
                     format: uuid
@@ -265,6 +274,12 @@ paths:
                       - type: string
                       - type: 'null'
                     title: Created At
+                  reference_outputs:
+                    anyOf:
+                      - additionalProperties: true
+                        type: object
+                      - type: 'null'
+                    title: Reference Outputs
                 type: object
                 required:
                   - dataset_id

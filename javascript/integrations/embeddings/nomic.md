@@ -19,6 +19,7 @@ In order to use the Nomic API you'll need to [sign up for a Nomic account and cr
 You'll first need to install the [`@langchain/nomic`](https://www.npmjs.com/package/@langchain/nomic) package:
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -51,8 +52,6 @@ console.log(documentRes);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/nomic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/nomic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

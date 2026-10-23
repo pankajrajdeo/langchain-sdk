@@ -78,32 +78,26 @@ agent.invoke({"messages": [{"role": "user", "content": "Send another email"}]})
 
 ## Log to a project
 
-<details>
-<summary>Statically</summary>
-
-You can set a custom project name for your entire application by setting the `LANGSMITH_PROJECT` environment variable:
-
+> **Statically**
+>
+> You can set a custom project name for your entire application by setting the `LANGSMITH_PROJECT` environment variable:
+>
 ```bash
-export LANGSMITH_PROJECT=my-agent-project
+> export LANGSMITH_PROJECT=my-agent-project
 ```
 
-</details>
-
-<details>
-<summary>Dynamically</summary>
-
-You can set the project name programmatically for specific operations:
-
+> **Dynamically**
+>
+> You can set the project name programmatically for specific operations:
+>
 ```python
-import langsmith as ls
-
-with ls.tracing_context(project_name="email-agent-test", enabled=True):
-    response = agent.invoke({
-        "messages": [{"role": "user", "content": "Send a welcome email"}]
-    })
+> import langsmith as ls
+>
+> with ls.tracing_context(project_name="email-agent-test", enabled=True):
+>     response = agent.invoke({
+>         "messages": [{"role": "user", "content": "Send a welcome email"}]
+>     })
 ```
-
-</details>
 
 ## Add metadata to traces
 
@@ -139,12 +133,11 @@ with ls.tracing_context(
 This custom metadata and tags will be attached to the trace in LangSmith.
 
 > [!TIP]
+>
 > To learn more about how to use traces to debug, evaluate, and monitor your agents, see the [LangSmith documentation](../langsmith/observability.md).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

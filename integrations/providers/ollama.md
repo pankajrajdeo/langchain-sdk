@@ -12,27 +12,28 @@ tags: [docs, integrations, providers, ollama]
 
 This page covers all LangChain integrations with [Ollama](https://ollama.com/).
 
-Ollama allows you to run open-source models (like [`gpt-oss`](https://ollama.com/library/gpt-oss)) locally.
+Ollama allows you to run open-source models (like [`gpt-oss`](https://ollama.com/library/gpt-oss)) locally or in the cloud.
 
 For a complete list of supported models and variants, see the [Ollama model library](https://ollama.ai/library).
 
 ## Model interfaces
 
-#### [ChatOllama](../chat/ollama.md)
-Ollama chat models.
+> **[ChatOllama](../chat/ollama.md)**
+>
+> Ollama chat models.
 
-#### [OllamaEmbeddings](../embeddings/ollama.md)
-Ollama embedding models.
+> **[OllamaEmbeddings](../embeddings/ollama.md)**
+>
+> Ollama embedding models.
 
 ## Other
 
-#### [OllamaLLM](../llms/ollama.md)
-(Legacy) Ollama text completion models.
+> **[OllamaLLM](../llms/ollama.md)**
+>
+> (Legacy) Ollama text completion models.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

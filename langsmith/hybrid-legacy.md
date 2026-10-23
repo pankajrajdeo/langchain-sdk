@@ -11,25 +11,28 @@ tags: [docs, langsmith, hybrid-legacy]
 > Legacy hybrid deployment model with a LangChain-managed control plane and a self-managed data plane.
 
 > [!WARNING]
+>
 > This page describes the legacy hybrid deployment model, which uses a LangChain-managed control plane to orchestrate Agent Servers in your cloud. For the current hybrid model, see [Hybrid](hybrid.md).
 
 > [!NOTE]
+>
 > The hybrid option requires an [Enterprise](https://langchain.com/pricing) plan. [Get a demo](https://www.langchain.com/contact-sales) to learn more.
 
 The **hybrid** model splits LangSmith infrastructure between LangChain's cloud and yours:
 
 * **Control plane** (LangSmith UI, APIs, and orchestration) runs in LangChain's cloud, managed by LangChain.
-* **Data plane** (your Agent Servers and agent workloads) runs in your cloud, managed by you.
+* **Data plane** (your Agent Servers (The server that runs your applications.) and agent workloads) runs in your cloud, managed by you.
 
 This combines the convenience of a managed interface with the flexibility of running workloads in your own environment.
 
 > [!NOTE]
+>
 > Learn more about the [control plane](control-plane.md), [data plane](data-plane.md), and [Agent Server](agent-server.md) architecture concepts.
 
 | Component | Responsibilities | Where it runs | Who manages it |
 | - | - | - | - |
-| Control plane | <ul><li>UI for creating deployments and revisions</li><li>APIs for managing deployments</li><li>Observability data storage</li></ul> | LangChain's cloud | LangChain |
-| Data plane | <ul><li>Operator/listener to reconcile deployments</li><li>Agent Servers (agents/graphs)</li><li>Backing services (Postgres, Redis, etc.)</li></ul> | Your cloud | You |
+| Control plane (The LangSmith UI and APIs for managing deployments.) | <ul><li>UI for creating deployments and revisions</li><li>APIs for managing deployments</li><li>Observability data storage</li></ul> | LangChain's cloud | LangChain |
+| Data plane (The runtime environment where your Agent Servers and agents execute.) | <ul><li>Operator/listener to reconcile deployments</li><li>Agent Servers (agents/graphs)</li><li>Backing services (Postgres, Redis, etc.)</li></ul> | Your cloud | You |
 
 When running LangSmith in a hybrid model, you authenticate with a [LangSmith API key](create-account-api-key.md).
 
@@ -40,19 +43,19 @@ When running LangSmith in a hybrid model, you authenticate with a [LangSmith API
 3. Deploy your Agent Server from the [control plane UI](control-plane.md#control-plane-ui).
 
 > [!NOTE]
+>
 > Supported Compute Platforms: [Kubernetes](https://kubernetes.io/). See [Kubernetes setup](#kubernetes-setup) below.
 
 ### Architecture
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/hybrid-with-deployment-light.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=86d548632d33be3644bad7213287ac78" alt="Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes." width="1784" height="1782" data-path="langsmith/images/hybrid-with-deployment-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/hybrid-with-deployment-dark.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=829f0ef40c315c493ef8e30857e9abf5" alt="Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes." width="1784" height="1782" data-path="langsmith/images/hybrid-with-deployment-dark.png" />
+![Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes.](https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/hybrid-with-deployment-light.png?fit=max\&auto=format\&n=JOyLr_spVEW0t2KF\&q=85\&s=86d548632d33be3644bad7213287ac78)
 
 ### Compute platforms
 
 * **Kubernetes**: Hybrid supports running the data plane on any Kubernetes cluster.
 
 > [!TIP]
+>
 > For setup in Kubernetes, see [Kubernetes setup](#kubernetes-setup) below.
 
 ### Egress to LangSmith and the control plane
@@ -62,6 +65,7 @@ In the hybrid deployment model, your self-hosted data plane will send network re
 In order to enable this egress, you may need to update internal firewall rules or cloud resources (such as Security Groups) to [allow certain IP addresses](cloud.md#ingress-into-langchain-saas).
 
 > [!WARNING]
+>
 > AWS/Azure PrivateLink or GCP Private Service Connect is currently not supported. This traffic will go over the internet.
 
 ## Kubernetes setup
@@ -77,8 +81,9 @@ The following steps describe how to connect your self-hosted data plane to the m
      helm install keda kedacore/keda --namespace keda --create-namespace
 ```
 
-> [!NOTE]
->    `KEDA` is used to automatically scale the deployment system based on queue size.
+   > [!NOTE]
+   >
+   > `KEDA` is used to automatically scale the deployment system based on queue size.
 
 2. A valid `Ingress` controller is installed on your cluster. For more information about configuring ingress for your deployment, refer to [Create an ingress for installations](self-host-ingress.md). We highly recommend using the modern [Gateway API](self-host-ingress.md#option-2%3A-gateway-api) in a production setup.
 
@@ -96,7 +101,7 @@ LangSmith Deployment control plane:
       <th>Region</th>
 
       <th>
-        {protocol_0 === false ? "Host" : "URL"}
+        URL
       </th>
     </tr>
   </thead>
@@ -106,9 +111,7 @@ LangSmith Deployment control plane:
       <td>GCP US</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://api.host.langchain.com`
       </td>
     </tr>
 
@@ -116,9 +119,7 @@ LangSmith Deployment control plane:
       <td>GCP EU</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://eu.api.host.langchain.com`
       </td>
     </tr>
 
@@ -126,9 +127,7 @@ LangSmith Deployment control plane:
       <td>GCP APAC</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://apac.api.host.langchain.com`
       </td>
     </tr>
 
@@ -136,9 +135,7 @@ LangSmith Deployment control plane:
       <td>AWS US</td>
 
       <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
+        `https://aws.api.host.langchain.com`
       </td>
     </tr>
   </tbody>
@@ -152,7 +149,7 @@ LangSmith API:
       <th>Region</th>
 
       <th>
-        {protocol_1 === false ? "Host" : "URL"}
+        URL
       </th>
     </tr>
   </thead>
@@ -162,9 +159,7 @@ LangSmith API:
       <td>GCP US</td>
 
       <td>
-        <code>
-          {`${protocol_1 === false ? "" : "https://"}${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-        </code>
+        `https://api.smith.langchain.com`
       </td>
     </tr>
 
@@ -172,9 +167,7 @@ LangSmith API:
       <td>GCP EU</td>
 
       <td>
-        <code>
-          {`${protocol_1 === false ? "" : "https://"}eu.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-        </code>
+        `https://eu.api.smith.langchain.com`
       </td>
     </tr>
 
@@ -182,9 +175,7 @@ LangSmith API:
       <td>GCP APAC</td>
 
       <td>
-        <code>
-          {`${protocol_1 === false ? "" : "https://"}apac.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-        </code>
+        `https://apac.api.smith.langchain.com`
       </td>
     </tr>
 
@@ -192,9 +183,7 @@ LangSmith API:
       <td>AWS US</td>
 
       <td>
-        <code>
-          {`${protocol_1 === false ? "" : "https://"}aws.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
-        </code>
+        `https://aws.api.smith.langchain.com`
       </td>
     </tr>
   </tbody>
@@ -203,19 +192,19 @@ LangSmith API:
 ### Setup
 
 1. Provide your LangSmith organization ID to us. Your LangSmith organization will be configured to deploy the data plane in your cloud.
-2. Create a listener from the LangSmith UI. The `Listener` data model is configured for the actual ["listener" application](data-plane.md#listener-application).
+2. Create a listener from the LangSmith UI. The `Listener` data model is configured for the actual [listener application](data-plane.md#listener-application).
    1. In the left-hand navigation, select `Deployments` > `Listeners`.
    2. In the top-right of the page, select `+ Create Listener`.
    3. Enter a unique `Compute ID` for the listener. The `Compute ID` is a user-defined identifier that should be unique across all listeners in the current LangSmith workspace. The `Compute ID` is displayed to end users when they are creating a new deployment. Ensure that the `Compute ID` provides context to the end user about where their Agent Server deployments will be deployed to. For example, a `Compute ID` can be set to `k8s-cluster-name-dev-01`. In this example, the name of the Kubernetes cluster is `k8s-cluster-name`, `dev` denotes that the cluster is reserved for "development" workloads, and `01` is a numerical suffix to reduce naming collisions.
-   4. Enter one or more Kubernetes namespaces. Later, the "listener" application will be configured to deploy to each of these namespaces.
+   4. Enter one or more Kubernetes namespaces. Later, the listener application will be configured to deploy to each of these namespaces.
    5. In the top-right on the page, select `Submit`.
-   6. After the listener is created, copy the listener ID. You will use it later when installing the actual "listener" application in the Kubernetes cluster (step 5).
-> [!NOTE]
->    **Important**
->    Creating a listener from the LangSmith UI does not install the "listener" application in the Kubernetes cluster.
-
+   6. After the listener is created, copy the listener ID. You will use it later when installing the actual listener application in the Kubernetes cluster (step 5).
+   > [!NOTE]
+   >
+   > **Important**
+   > Creating a listener from the LangSmith UI does not install the listener application in the Kubernetes cluster.
 3. A [Helm chart](https://github.com/langchain-ai/helm/tree/main/charts/langgraph-dataplane) is provided to install the necessary components in your Kubernetes cluster.
-   * `langgraph-dataplane-listener`: This is a service that listens to LangChain's [control plane](control-plane.md) for changes to your deployments and creates/updates downstream CRDs. This is the ["listener" application](data-plane.md#listener-application).
+   * `langgraph-dataplane-listener`: This is a service that listens to LangChain's [control plane](control-plane.md) for changes to your deployments and creates/updates downstream CRDs. This is the [listener application](data-plane.md#listener-application).
    * `LangGraphPlatform CRD`: A CRD for LangSmith Deployment. This contains the spec for managing an instance of a LangSmith Deployment.
    * `langgraph-dataplane-operator`: This operator handles changes to your LangSmith CRDs.
    * `langgraph-dataplane-redis`: A Redis instance is used by the `langgraph-dataplane-listener` to manage various tasks (mainly creating and deleting deployments).
@@ -272,7 +261,7 @@ To create a data plane in a different namespace in the same cluster, repeat the 
 
 ## Listeners
 
-In the hybrid option, one or more ["listener" applications](data-plane.md#listener-application) can run depending on how your LangSmith workspaces and Kubernetes clusters are organized.
+In the hybrid option, one or more [listener applications](data-plane.md#listener-application) can run depending on how your LangSmith workspaces and Kubernetes clusters are organized.
 
 ### Kubernetes cluster organization
 
@@ -310,8 +299,6 @@ Here are some common listener configurations (not strict requirements):
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/hybrid-legacy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/hybrid-legacy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -18,6 +18,7 @@ tags: [docs, langsmith, use-remote-graph]
 * Reusable workflows: Use deployed graphs as nodes or [tools](https://reference.langchain.com/python/langsmith/deployment/remote_graph/#langgraph.pregel.remote.RemoteGraph.as_tool), so that you can reuse and expose complex logic.
 
 > [!WARNING]
+>
 > **Important: Avoid calling the same deployment**
 >
 > `RemoteGraph` is designed to call graphs on other deployments. Do not use `RemoteGraph` to call itself or another graph on the same deployment, as this can lead to deadlocks and resource exhaustion. Instead, use local graph composition or [subgraphs](../langgraph/use-subgraphs.md) for graphs within the same deployment.
@@ -43,6 +44,7 @@ Additionally, you have to provide one of the following:
 * `sync_client`: A `SyncLangGraphClient` instance for interacting with the deployment synchronously (e.g., using `.stream()`, `.invoke()`, `.get_state()`, `.update_state()`).
 
 > [!NOTE]
+>
 > If you pass both `client` or `sync_client` as well as the `url` argument, they will take precedence over the `url` argument. If none of the `client` / `sync_client` / `url` arguments are provided, `RemoteGraph` will raise a `ValueError` at runtime.
 
 ### Use a URL
@@ -124,6 +126,7 @@ const remoteGraph = new RemoteGraph({ graphId: assistantId, client });
 ### Asynchronously
 
 > [!NOTE]
+>
 > To use the graph asynchronously, you must provide either the `url` or `client` when initializing the `RemoteGraph`.
 
 **Python**
@@ -159,6 +162,7 @@ for await (const chunk of await remoteGraph.stream({
 ### Synchronously
 
 > [!NOTE]
+>
 > To use the graph synchronously, you must provide either the `url` or `sync_client` when initializing the `RemoteGraph`.
 
 **Python**
@@ -234,6 +238,7 @@ console.log(threadState);
 ## Use as a subgraph
 
 > [!NOTE]
+>
 > If you need to use a `checkpointer` with a graph that has a `RemoteGraph` subgraph node, make sure to use UUIDs as thread IDs.
 
 A graph can also call out to multiple `RemoteGraph` instances as [*subgraph*](../langgraph/use-subgraphs.md) nodes. This allows for modular, scalable workflows where different responsibilities are split across separate graphs.
@@ -303,8 +308,6 @@ for await (const chunk of await graph.stream({
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-remote-graph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-remote-graph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

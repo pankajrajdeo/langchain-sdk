@@ -166,6 +166,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -174,6 +176,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/sessions/{session_id}/issues-agent:
     patch:
@@ -281,6 +284,8 @@ components:
         linear_integration:
           $ref: '#/components/schemas/agent.LinearIntegrationPatch'
         preview_verify_enabled:
+          type: boolean
+        preview_verify_no_trigger:
           type: boolean
         priorities:
           items:
@@ -404,6 +409,13 @@ components:
             deployments
 
             when issue validation is enabled for its tracing project.
+          type: boolean
+        preview_verify_no_trigger:
+          description: >-
+            PreviewVerifyNoTrigger tells fix verification not to request a
+            preview.
+
+            The deployment builds one itself for the fix commit.
           type: boolean
         priorities:
           items:

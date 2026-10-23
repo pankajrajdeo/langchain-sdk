@@ -7,7 +7,7 @@ tags: [index, reference, python, langgraph-sdk]
 
 # reference/python/langgraph-sdk
 
-1 page here, 358 pages including subdirectories.
+1 page here, 361 pages including subdirectories.
 
 ## Directories
 
@@ -20,7 +20,7 @@ tags: [index, reference, python, langgraph-sdk]
 - [errors/](errors/_index.md) - 14 pages
 - [schema/](schema/_index.md) - 48 pages
 - [sse/](sse/_index.md) - 8 pages
-- [stream/](stream/_index.md) - 65 pages
+- [stream/](stream/_index.md) - 68 pages
 
 ## Files
 

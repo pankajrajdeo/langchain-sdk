@@ -114,7 +114,7 @@ Pregel(
     node_error_handler_map: Mapping[str, str] | None = None,
     name: str = 'LangGraph',
     stream_transformers: Sequence[Callable[[tuple[str, ...]], Any]] | None = None,
-    **deprecated_kwargs: Unpack[DeprecatedKwargs] = {},
+    deprecated_kwargs: Unpack[DeprecatedKwargs] = {},
 )
 ```
 
@@ -331,7 +331,7 @@ __init__(
     node_error_handler_map: Mapping[str, str] | None = None,
     name: str = 'LangGraph',
     stream_transformers: Sequence[Callable[[tuple[str, ...]], Any]] | None = None,
-    **deprecated_kwargs: Unpack[DeprecatedKwargs] = {},
+    deprecated_kwargs: Unpack[DeprecatedKwargs] = {},
 ) -> None
 ```
 
@@ -360,6 +360,7 @@ __init__(
 | `node_error_handler_map` | `Mapping[str, str] \| None` |
 | `name` | `str` |
 | `stream_transformers` | `Sequence[Callable[[tuple[str, ...]], Any]] \| None` |
+| `deprecated_kwargs` | `Unpack[DeprecatedKwargs]` |
 
 ## Properties
 
@@ -425,4 +426,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/main.py#L450)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/main.py#L460)

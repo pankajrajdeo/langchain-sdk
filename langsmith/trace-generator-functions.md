@@ -55,6 +55,7 @@ for (const output of myGenerator()) {
 By default, the `outputs` of the traced function are aggregated into a single array in LangSmith. If you want to customize how it is stored (for instance, concatenating the outputs into a single string), you can use the `aggregate` option (`reduce_fn` in python). This is especially useful for aggregating streamed LLM outputs.
 
 > [!NOTE]
+>
 > Aggregating outputs **only** impacts the traced representation of the outputs. It doesn not alter the values returned by your function.
 
 **Python**
@@ -100,8 +101,6 @@ for (const output of await myGenerator()) {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-generator-functions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-generator-functions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

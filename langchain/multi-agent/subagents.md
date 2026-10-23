@@ -40,6 +40,7 @@ graph LR
 * Parallel execution: The main agent can invoke multiple subagents in a single turn
 
 > [!NOTE]
+>
 > **Supervisor vs. Router**: A supervisor agent (this pattern) is different from a [router](router.md). The supervisor is a full agent that maintains conversation context and dynamically decides which subagents to call across multiple turns. A router is typically a single classification step that dispatches to agents without maintaining ongoing conversation state.
 
 ## When to use
@@ -47,6 +48,7 @@ graph LR
 Use the subagents pattern when you have multiple distinct domains (e.g., calendar, email, CRM, database), subagents don't need to converse directly with users, or you want centralized workflow control. For simpler cases with just a few [tools](../tools.md), use a [single agent](../agents.md).
 
 > [!TIP]
+>
 > **Need user interaction within a subagent?** While subagents typically return results to the main agent rather than conversing directly with users, you can use [interrupts](../../langgraph/interrupts.md#pause-using-interrupt) within a subagent to pause execution and gather user input. This is useful when a subagent needs clarification or approval before proceeding. The main agent remains the orchestrator, but the subagent can collect information from the user mid-task.
 
 ## Basic implementation
@@ -70,8 +72,9 @@ def call_research_agent(query: str):
 main_agent = create_agent(model="google_genai:gemini-3.6-flash", tools=[call_research_agent])
 ```
 
-#### [Tutorial: Build a personal assistant with subagents](subagents-personal-assistant.md)
-Learn how to build a personal assistant using the subagents pattern, where a central main agent (supervisor) coordinates specialized worker agents.
+> **[Tutorial: Build a personal assistant with subagents](subagents-personal-assistant.md)**
+>
+> Learn how to build a personal assistant using the subagents pattern, where a central main agent (supervisor) coordinates specialized worker agents.
 
 ## Design decisions
 
@@ -95,6 +98,7 @@ Subagent execution can be **synchronous** (blocking) or **asynchronous** (backgr
 | **Async** | Continues while subagent runs in background | Independent tasks, user shouldn't wait | Responsive, but more complex |
 
 > [!TIP]
+>
 > Not to be confused with Python's `async`/`await`. Here, "async" means the main agent kicks off a background job (typically in a separate process or service) and continues without blocking.
 
 ### Synchronous (default)
@@ -260,65 +264,63 @@ graph LR
 * Agent discovery: Sub-agents can be discovered via system prompt (listing available agents) or through [progressive disclosure](skills-sql-assistant.md) (loading agent information on-demand via tools)
 
 > [!TIP]
+>
 > An interesting aspect of this approach is that sub-agents may have the exact same capabilities as the main agent. In such cases, invoking a sub-agent is **really about context isolation** as the primary reason—allowing complex, multi-step tasks to run in isolated context windows without bloating the main agent's conversation history. The sub-agent completes its work autonomously and returns only a concise summary, keeping the main thread focused and efficient.
 
-<details>
-<summary>Agent registry with task dispatcher</summary>
-
+> **Agent registry with task dispatcher**
+>
 ```python
-from langchain.tools import tool
-from langchain.agents import create_agent
-
-# Sub-agents developed by different teams
-research_agent = create_agent(
-    model="gpt-5.5",
-    prompt="You are a research specialist..."
-)
-
-writer_agent = create_agent(
-    model="gpt-5.5",
-    prompt="You are a writing specialist..."
-)
-
-# Registry of available sub-agents
-SUBAGENTS = {
-    "research": research_agent,
-    "writer": writer_agent,
-}
-
-@tool
-def task(
-    agent_name: str,
-    description: str
-) -> str:
-    """Launch an ephemeral subagent for a task.
-
-    Available agents:
-    - research: Research and fact-finding
-    - writer: Content creation and editing
-    """
-    agent = SUBAGENTS[agent_name]
-    result = agent.invoke({
-        "messages": [
-            {"role": "user", "content": description}
-        ]
-    })
-    return result["messages"][-1].content
-
-# Main coordinator agent
-main_agent = create_agent(
-    model="gpt-5.5",
-    tools=[task],
-    system_prompt=(
-        "You coordinate specialized sub-agents. "
-        "Available: research (fact-finding), "
-        "writer (content creation). "
-        "Use the task tool to delegate work."
-    ),
-)
+> from langchain.tools import tool
+> from langchain.agents import create_agent
+>
+> # Sub-agents developed by different teams
+> research_agent = create_agent(
+>     model="gpt-5.5",
+>     prompt="You are a research specialist..."
+> )
+>
+> writer_agent = create_agent(
+>     model="gpt-5.5",
+>     prompt="You are a writing specialist..."
+> )
+>
+> # Registry of available sub-agents
+> SUBAGENTS = {
+>     "research": research_agent,
+>     "writer": writer_agent,
+> }
+>
+> @tool
+> def task(
+>     agent_name: str,
+>     description: str
+> ) -> str:
+>     """Launch an ephemeral subagent for a task.
+>
+>     Available agents:
+>     - research: Research and fact-finding
+>     - writer: Content creation and editing
+>     """
+>     agent = SUBAGENTS[agent_name]
+>     result = agent.invoke({
+>         "messages": [
+>             {"role": "user", "content": description}
+>         ]
+>     })
+>     return result["messages"][-1].content
+>
+> # Main coordinator agent
+> main_agent = create_agent(
+>     model="gpt-5.5",
+>     tools=[task],
+>     system_prompt=(
+>         "You coordinate specialized sub-agents. "
+>         "Available: research (fact-finding), "
+>         "writer (content creation). "
+>         "Use the task tool to delegate work."
+>     ),
+> )
 ```
-
-</details>
 
 ## Context engineering
 
@@ -519,13 +521,12 @@ By default, subagents use the **inherited checkpointer** mode—each invocation 
 
 Because subagents are called inside tool functions, LangGraph cannot [statically discover](../../langgraph/use-subgraphs.md#view-subgraph-state) them. This means [`get_state` with `subgraphs`](../../langgraph/use-subgraphs.md#view-subgraph-state) will not return subagent state. If you need to read nested graph state (e.g., during an [interrupt](../../langgraph/interrupts.md#pause-using-interrupt)), invoke the subagent from a [node function](../../langgraph/use-subgraphs.md#call-a-subgraph-inside-a-node) in a custom graph instead. See [subgraph persistence](../../langgraph/use-subgraphs.md#subgraph-persistence) for details on how each mode affects state visibility.
 
-#### [Migrate from langgraph-supervisor](../../migrate/langgraph-supervisor.md)
-The langgraph-supervisor package is no longer actively maintained. Learn how to migrate from create\_supervisor to the subagents pattern, including interrupt and resume flows with external API callbacks.
+> **[Migrate from langgraph-supervisor](../../migrate/langgraph-supervisor.md)**
+>
+> The langgraph-supervisor package is no longer actively maintained. Learn how to migrate from create\_supervisor to the subagents pattern, including interrupt and resume flows with external API callbacks.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

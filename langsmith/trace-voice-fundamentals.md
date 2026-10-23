@@ -15,6 +15,7 @@ tags: [docs, langsmith, trace-voice-fundamentals]
 This page covers the core conventions for tracing voice applications in LangSmith. Follow these patterns regardless of which framework or model provider you use ([OpenAI Realtime](trace-openai-realtime.md), [Gemini Live](trace-gemini-live.md), [LiveKit](trace-with-livekit.md), [Pipecat](trace-with-pipecat.md), or your own).
 
 > [!NOTE]
+>
 > These conventions assume you are exporting traces to LangSmith through one of the supported [tracing setups](observability.md). For audio rendering and playback in the UI, see [Log multimodal traces](log-multimodal-traces.md) and [Upload files with traces](upload-files-with-traces.md).
 
 ## Two architectures, two trace shapes
@@ -83,6 +84,7 @@ conversation                      ← root run (whole conversation; combined aud
 ```
 
 > [!NOTE]
+>
 > A voice agent has no reliable notion of a "turn". Speakers overlap, interrupt, and trail off. Do not group runs into synthetic turns. Trace the real units instead: the model calls in a cascade, or the event payloads in a speech-to-speech stream.
 
 For background on grouping related runs, see [Nest traces](nest-traces.md). To group several separate sessions for one user, use [Threads](threads.md).
@@ -110,6 +112,7 @@ def run_conversation(session_id: str, conversation_audio: bytes):
 ```
 
 > [!TIP]
+>
 > Audio files can be large. For high-volume production workloads, consider downsampling, using a compressed format (such as MP3 or Opus), or sampling which conversations you record in full.
 
 ### Mark the trace as audio
@@ -130,32 +133,37 @@ def run_conversation(session_id: str):
 ```
 
 > [!NOTE]
+>
 > For other `ls_` metadata fields, refer to [Metadata parameters reference](ls-metadata-parameters.md).
 
 ## Next steps
 
-#### [Trace OpenAI Realtime](trace-openai-realtime.md)
-Trace voice agents built on the OpenAI Realtime API.
+> **[Trace OpenAI Realtime](trace-openai-realtime.md)**
+>
+> Trace voice agents built on the OpenAI Realtime API.
 
-#### [Trace Gemini Live](trace-gemini-live.md)
-Trace voice agents built on the Gemini Live API.
+> **[Trace Gemini Live](trace-gemini-live.md)**
+>
+> Trace voice agents built on the Gemini Live API.
 
-#### [Trace LiveKit](trace-with-livekit.md)
-Trace voice agents built with LiveKit Agents.
+> **[Trace LiveKit](trace-with-livekit.md)**
+>
+> Trace voice agents built with LiveKit Agents.
 
-#### [Trace Pipecat](trace-with-pipecat.md)
-Trace voice agents built with Pipecat.
+> **[Trace Pipecat](trace-with-pipecat.md)**
+>
+> Trace voice agents built with Pipecat.
 
-#### [Upload files with traces](upload-files-with-traces.md)
-Attach the conversation audio recording to your trace.
+> **[Upload files with traces](upload-files-with-traces.md)**
+>
+> Attach the conversation audio recording to your trace.
 
-#### [Log multimodal traces](log-multimodal-traces.md)
-Render audio and other media in the LangSmith UI.
+> **[Log multimodal traces](log-multimodal-traces.md)**
+>
+> Render audio and other media in the LangSmith UI.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-voice-fundamentals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-voice-fundamentals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/platform/orgs/current/scim/tokens/{scim_token_id}:
     patch:
@@ -206,7 +209,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/scim.ErrorResponse'
         '403':
-          description: Forbidden - requires OrganizationManage permission
+          description: Forbidden - requires OrganizationAuthenticationManage permission
           content:
             application/json:
               schema:

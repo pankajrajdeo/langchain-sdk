@@ -32,7 +32,7 @@ tags: [docs, langsmith, fleet, comparison]
 | **Model support** | Model-agnostic: any LLM with an OpenAI-compatible or Anthropic-compatible API | Claude only | ❓ | Gemini 3 | Curated OpenAI + Anthropic models; bring-your-own via Azure AI Foundry |
 | **Interface** | Web app, Slack app, Teams app, API | Desktop, mobile, Slack, M365 connectors | Web, desktop, browser extensions, Slack, Teams | Web app, Gmail and Chat sidebars | Teams, M365 apps, web, mobile, Windows, Copilot Studio |
 | **Deployment** | Cloud (LangSmith) or self-hosted | Local by default; remote on Anthropic cloud | Cloud (AWS) | Cloud (Google) | Cloud (Microsoft) |
-| **Self-hosting** | ✅ [beta](../deploy-self-hosted-full-platform.md#enable-fleet-insights-and-chat), [contact our sales team](https://www.langchain.com/contact-sales) for production readiness details | ❌ | ❌ | ❌ | ❌ |
+| **Self-hosting** | ✅ [beta](../enable-self-hosted-fleet.md), [contact our sales team](https://www.langchain.com/contact-sales) for production readiness details | ❌ | ❌ | ❌ | ❌ |
 | **Code export** | ✅ [Export to Deep Agents](code.md) | ❌ | ❌ | ❌ | ❌ |
 | **Observability** | LangSmith tracing and evaluations at scale | OpenTelemetry to SIEM | CloudTrail + run logs | Activity tab + audit logs | App Insights + Purview |
 | **Platform license** | Proprietary | Proprietary | Proprietary | Proprietary | Proprietary |
@@ -108,7 +108,7 @@ Of the platforms compared here, only Fleet works with any OpenAI- or Anthropic-c
 | Feature | **Fleet** | **Claude Cowork** | **Amazon Quick** | **Google Workspace Studio** | **Microsoft Copilot** |
 | - | - | - | - | - | - |
 | Cloud-hosted | ✅ | ⚠️ | ✅ | ✅ | ✅ |
-| Self-hosted | ✅ [beta](../deploy-self-hosted-full-platform.md#enable-fleet-insights-and-chat), [contact our sales team](https://www.langchain.com/contact-sales) for production readiness details | ❌ | ❌ | ❌ | ❌ |
+| Self-hosted | ✅ [beta](../enable-self-hosted-fleet.md), [contact our sales team](https://www.langchain.com/contact-sales) for production readiness details | ❌ | ❌ | ❌ | ❌ |
 | Custom models | ⚠️ [Enterprise only](essentials.md#custom-models) | ❌ | ❌ | ⚠️ | ⚠️ |
 | Call agents from your app | ✅ [API access](code.md) | ✅ | ⚠️ | ❌ | ✅ |
 | Export to code | ✅ [Export to Deep Agents](code.md) | ❌ | ❌ | ❌ | ❌ |
@@ -131,12 +131,11 @@ A ✅ indicates the integration is available; supported actions and depth vary b
 For pricing and SLA information, [contact our sales team](https://www.langchain.com/contact-sales).
 
 > [!NOTE]
+>
 > Last updated May 5, 2026. These products evolve quickly. If something has changed, please [file an issue](https://github.com/langchain-ai/docs/issues) to help us keep this page current.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/comparison.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/comparison.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

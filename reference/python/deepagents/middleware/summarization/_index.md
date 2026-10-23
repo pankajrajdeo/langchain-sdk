@@ -7,12 +7,12 @@ tags: [index, reference, python, deepagents, middleware, summarization]
 
 # reference/python/deepagents/middleware/summarization
 
-16 pages here, 41 pages including subdirectories.
+16 pages here, 42 pages including subdirectories.
 
 ## Directories
 
 - [SummarizationDefaults/](SummarizationDefaults/_index.md) - 3 pages
-- [SummarizationEvent/](SummarizationEvent/_index.md) - 3 pages
+- [SummarizationEvent/](SummarizationEvent/_index.md) - 4 pages
 - [SummarizationToolMiddleware/](SummarizationToolMiddleware/_index.md) - 6 pages
 - [TriggerClause/](TriggerClause/_index.md) - 3 pages
 - [TruncateArgsSettings/](TruncateArgsSettings/_index.md) - 4 pages

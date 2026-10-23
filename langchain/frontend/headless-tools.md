@@ -19,8 +19,6 @@ This pattern is especially useful when data should stay local to the device.
 The playground example on this page uses a small browser-memory toolkit backed
 by IndexedDB plus a geolocation tool that runs entirely on the client.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/headless-tools).
-
 ## How headless tools work
 
 At a high level, headless tools split the tool schema from the browser-only implementation.
@@ -380,8 +378,6 @@ client:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/headless-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/headless-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

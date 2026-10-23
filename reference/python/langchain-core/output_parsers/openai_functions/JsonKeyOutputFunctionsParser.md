@@ -19,8 +19,8 @@ Parse an output as the element of the JSON object.
 ```python
 JsonKeyOutputFunctionsParser(
     self,
-    *args: Any = (),
-    **kwargs: Any = {},
+    args: Any = (),
+    kwargs: Any = {},
 )
 ```
 
@@ -38,4 +38,4 @@ JsonKeyOutputFunctionsParser(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/output_parsers/openai_functions.py#L157)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/output_parsers/openai_functions.py#L157)

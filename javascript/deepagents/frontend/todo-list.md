@@ -18,8 +18,6 @@ the agent works through its plan. It's a progress dashboard built on the same
 `useStream` hook you use for chat. It shows that agent state can power any UI,
 not just message bubbles.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/javascript/deepagents/frontend/todo-list).
-
 ## How it works
 
 Deep agents can expose a **`todos` state** channel when you opt into [`TodoListMiddleware`](https://reference.langchain.com/javascript/langchain/index/todoListMiddleware). That middleware adds the `write_todos` tool and persists task progress as the agent works through its plan. As the agent executes, it updates each
@@ -28,6 +26,7 @@ todo's status from `"pending"` to `"in_progress"` to `"completed"`. The
 renders it reactively.
 
 > [!NOTE]
+>
 > Task planning is opt-in. Without [`TodoListMiddleware`](https://reference.langchain.com/javascript/langchain/index/todoListMiddleware), `stream.values.todos` is not present. See [Task planning](../overview.md#task-planning).
 
 The flow looks like this:
@@ -131,6 +130,7 @@ Then point [`useStream`](https://reference.langchain.com/javascript/langchain-re
 read the `todos` from `stream.values`.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../../langchain/frontend/overview.md#type-inference) or [JavaScript](../../langchain/frontend/overview.md#type-inference) backends.
 
 **React**
@@ -404,6 +404,7 @@ function TodoAgentLayout() {
 ```
 
 > [!TIP]
+>
 > Show the todo list only when `todos.length > 0`. Before the agent creates its
 > plan, there's nothing to display. Showing an empty component wastes space.
 
@@ -477,22 +478,24 @@ The todo list pattern is a specialization of the broader LangChain approach to
 rendering structured agent state. These guides cover related techniques that
 pair well with plan-based agents:
 
-#### [Structured output](../../langchain/frontend/structured-output.md)
-Render any structured agent state—not just todos—with custom UI components instead of plain text.
+> **[Structured output](../../langchain/frontend/structured-output.md)**
+>
+> Render any structured agent state—not just todos—with custom UI components instead of plain text.
 
-#### [Join & rejoin streams](../../langchain/frontend/join-rejoin.md)
-Reconnect to a running plan after a page reload or tab switch without losing progress.
+> **[Join & rejoin streams](../../langchain/frontend/join-rejoin.md)**
+>
+> Reconnect to a running plan after a page reload or tab switch without losing progress.
 
-#### [Message queues](../../langchain/frontend/message-queues.md)
-Queue follow-up tasks while the agent is still working through its current plan.
+> **[Message queues](../../langchain/frontend/message-queues.md)**
+>
+> Queue follow-up tasks while the agent is still working through its current plan.
 
-#### [Human-in-the-Loop](../../langchain/frontend/human-in-the-loop.md)
-Pause and resume plan execution when the agent needs user approval or input.
+> **[Human-in-the-Loop](../../langchain/frontend/human-in-the-loop.md)**
+>
+> Pause and resume plan execution when the agent needs user approval or input.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/todo-list.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/todo-list.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

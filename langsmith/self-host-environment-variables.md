@@ -83,6 +83,7 @@ Duplicate keys detected: [MY_ENV_VAR]
 To resolve this, remove the duplicate from either `commonEnv` or the service's `extraEnv` so each variable name appears exactly once per service.
 
 > [!WARNING]
+>
 > Chart-managed variables (set internally by the Helm chart) count toward duplicate detection. Do not add a variable name to `commonEnv` or `extraEnv` if the chart already manages that variable. Review the [chart values file](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) to see which variables the chart sets by default.
 
 ## Example: set a variable on most services but override it on one
@@ -120,6 +121,7 @@ commonEnv:
 ```
 
 > [!NOTE]
+>
 > Setting this flag to `false` suppresses per-batch success messages only. Errors are still logged.
 
 ## Related pages
@@ -130,8 +132,6 @@ commonEnv:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-environment-variables.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-environment-variables.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

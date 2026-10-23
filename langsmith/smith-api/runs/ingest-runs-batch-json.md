@@ -163,6 +163,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -171,6 +173,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/runs/batch:
     post:
@@ -268,35 +271,17 @@ components:
         address:
           description: >-
             Beta. Addresses the run to an Agent environment in place of
+            session_id or
 
-            session_id or session_name. Cannot be combined with agent_id or
+            session_name, as lrn:agents/{id}/environments/{environment}. The
+            environment is
 
-            agent_environment. Only workspaces enabled for Agent addressing
-            accept
-
-            it; others get a 403.
-          allOf:
-            - $ref: '#/components/schemas/address.AgentAddress'
-        agent_environment:
-          description: >-
-            Beta. The Agent environment the run belongs to, case-insensitive;
-
-            requires agent_id. Only workspaces enabled for Agent addressing
+            case-insensitive. Only workspaces enabled for Agent addressing
             accept it;
 
             others get a 403.
           type: string
-          enum:
-            - LOCAL
-            - DEVELOPMENT
-            - STAGING
-            - PRODUCTION
-        agent_id:
-          description: |-
-            Beta, superseded by address. Addresses the run to an Agent, with
-            agent_environment, in place of session_id or session_name. Only
-            workspaces enabled for Agent addressing accept it; others get a 403.
-          type: string
+          example: lrn:agents/support-agent/environments/production
         dotted_order:
           type: string
         end_time:
@@ -369,35 +354,6 @@ components:
           description: Error message
           type: string
           example: 'Invalid request: missing required fields'
-    address.AgentAddress:
-      type: object
-      required:
-        - environment
-        - id
-        - kind
-      properties:
-        environment:
-          description: '`environment` is the Agent environment.'
-          type: string
-          enum:
-            - LOCAL
-            - DEVELOPMENT
-            - STAGING
-            - PRODUCTION
-          example: PRODUCTION
-        id:
-          description: '`id` is the Agent''s user-assigned id.'
-          type: string
-          maxLength: 63
-          minLength: 1
-          example: support-agent
-          pattern: ^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$
-        kind:
-          enum:
-            - AGENT
-          type: string
-          x-stainless-const: true
-      additionalProperties: false
   securitySchemes:
     API Key:
       type: apiKey

@@ -124,7 +124,7 @@ await pg_engine.ainit_vectorstore_table(
 
 ### Create an embedding class instance
 
-You can use any [LangChain embeddings model](https://python.langchain.com/docs/integrations/embeddings/).
+You can use any [LangChain embeddings model](../embeddings.md).
 
 ```python
 from langchain_cohere import CohereEmbeddings
@@ -484,8 +484,6 @@ For detailed documentation of all `PGVectorStore` features and configurations he
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/pgvectorstore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/pgvectorstore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

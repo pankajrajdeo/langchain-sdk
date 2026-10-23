@@ -79,102 +79,86 @@ Now that we've identified the components in our workflow, let's understand what 
 * `Send Reply`: Dispatch the email response
 
 > [!TIP]
+>
 > Notice that some nodes make decisions about where to go next (`Classify Intent`, `Draft Reply`, `Human Review`), while others always proceed to the same next step (`Read Email` always goes to `Classify Intent`, `Doc Search` always goes to `Draft Reply`).
 
 ## Step 2: Identify what each step needs to do
 
 For each node in your graph, determine what type of operation it represents and what context it needs to work properly.
 
-#### [LLM steps](#llm-steps)
-Use when you need to understand, analyze, generate text, or make reasoning decisions
+> **[LLM steps](#llm-steps)**
+>
+> Use when you need to understand, analyze, generate text, or make reasoning decisions
 
-#### [Data steps](#data-steps)
-Use when you need to retrieve information from external sources
+> **[Data steps](#data-steps)**
+>
+> Use when you need to retrieve information from external sources
 
-#### [Action steps](#action-steps)
-Use when you need to perform external actions
+> **[Action steps](#action-steps)**
+>
+> Use when you need to perform external actions
 
-#### [User input steps](#user-input-steps)
-Use when you need human intervention
+> **[User input steps](#user-input-steps)**
+>
+> Use when you need human intervention
 
 ### LLM steps
 
 When a step needs to understand, analyze, generate text, or make reasoning decisions:
 
-<details>
-<summary>Classify intent</summary>
+> **Classify intent**
+>
+> * Static context (prompt): Classification categories, urgency definitions, response format
+> * Dynamic context (from state): Email content, sender information
+> * Desired outcome: Structured classification that determines routing
 
-* Static context (prompt): Classification categories, urgency definitions, response format
-* Dynamic context (from state): Email content, sender information
-* Desired outcome: Structured classification that determines routing
-
-</details>
-
-<details>
-<summary>Draft reply</summary>
-
-* Static context (prompt): Tone guidelines, company policies, response templates
-* Dynamic context (from state): Classification results, search results, customer history
-* Desired outcome: Professional email response ready for review
-
-</details>
+> **Draft reply**
+>
+> * Static context (prompt): Tone guidelines, company policies, response templates
+> * Dynamic context (from state): Classification results, search results, customer history
+> * Desired outcome: Professional email response ready for review
 
 ### Data steps
 
 When a step needs to retrieve information from external sources:
 
-<details>
-<summary>Document search</summary>
+> **Document search**
+>
+> * Parameters: Query built from intent and topic
+> * Retry strategy: Yes, with exponential backoff for transient failures
+> * Caching: Could cache common queries to reduce API calls
 
-* Parameters: Query built from intent and topic
-* Retry strategy: Yes, with exponential backoff for transient failures
-* Caching: Could cache common queries to reduce API calls
-
-</details>
-
-<details>
-<summary>Customer history lookup</summary>
-
-* Parameters: Customer email or ID from state
-* Retry strategy: Yes, but with fallback to basic info if unavailable
-* Caching: Yes, with time-to-live to balance freshness and performance
-
-</details>
+> **Customer history lookup**
+>
+> * Parameters: Customer email or ID from state
+> * Retry strategy: Yes, but with fallback to basic info if unavailable
+> * Caching: Yes, with time-to-live to balance freshness and performance
 
 ### Action steps
 
 When a step needs to perform an external action:
 
-<details>
-<summary>Send reply</summary>
+> **Send reply**
+>
+> * When to execute node: After approval (human or automated)
+> * Retry strategy: Yes, with exponential backoff for network issues
+> * Should not cache: Each send is a unique action
 
-* When to execute node: After approval (human or automated)
-* Retry strategy: Yes, with exponential backoff for network issues
-* Should not cache: Each send is a unique action
-
-</details>
-
-<details>
-<summary>Bug track</summary>
-
-* When to execute node: Always when intent is "bug"
-* Retry strategy: Yes, critical to not lose bug reports
-* Returns: Ticket ID to include in response
-
-</details>
+> **Bug track**
+>
+> * When to execute node: Always when intent is "bug"
+> * Retry strategy: Yes, critical to not lose bug reports
+> * Returns: Ticket ID to include in response
 
 ### User input steps
 
 When a step needs human intervention:
 
-<details>
-<summary>Human review node</summary>
-
-* Context for decision: Original email, draft response, urgency, classification
-* Expected input format: Approval boolean plus optional edited response
-* When triggered: High urgency, complex issues, or quality concerns
-
-</details>
+> **Human review node**
+>
+> * Context for decision: Original email, draft response, urgency, classification
+> * Expected input format: Approval boolean plus optional edited response
+> * When triggered: High urgency, complex issues, or quality concerns
 
 ## Step 3: Design your state
 
@@ -184,11 +168,13 @@ State is the shared [memory](../concepts/memory.md) accessible to all nodes in y
 
 Ask yourself these questions about each piece of data:
 
-#### Include in state
-Does it need to persist across steps? If yes, it goes in state.
+> **Include in state**
+>
+> Does it need to persist across steps? If yes, it goes in state.
 
-#### Don
-Can you derive it from other data? If yes, compute it when needed instead of storing it in state.
+> **Don't store**
+>
+> Can you derive it from other data? If yes, compute it when needed instead of storing it in state.
 
 For our email agent, we need to track:
 
@@ -201,6 +187,7 @@ For our email agent, we need to track:
 ### Keep state raw, format prompts on-demand
 
 > [!TIP]
+>
 > A key principle: your state should store raw data, not formatted text. Format prompts inside nodes when you need them.
 
 This separation means:
@@ -262,7 +249,8 @@ Different errors need different handling strategies:
 | Recoverable failure after retries | Developer (declarative) | `error_handler` | Run a compensation/recovery branch after retry exhaustion |
 | Unexpected errors | Developer | Let them bubble up | Unknown issues that need debugging |
 
-#### Transient errors
+**Transient errors**
+
 Add a retry policy to automatically retry network issues and rate limits.
 
 ```typescript
@@ -277,7 +265,8 @@ workflow.addNode(
 );
 ```
 
-#### LLM-recoverable
+**LLM-recoverable**
+
 Store the error in state and loop back so the LLM can see what went wrong and try again:
 
 ```typescript
@@ -300,7 +289,8 @@ const executeTool: GraphNode<typeof State> = async (state, config) => {
 }
 ```
 
-#### User-fixable
+**User-fixable**
+
 Pause and collect information from the user when needed (like account IDs, order numbers, or clarifications):
 
 ```typescript
@@ -326,7 +316,8 @@ const lookupCustomerHistory: GraphNode<typeof State> = async (state, config) => 
 }
 ```
 
-#### Unexpected
+**Unexpected**
+
 Let them bubble up for debugging. Don't catch what you can't handle:
 
 ```typescript
@@ -341,215 +332,207 @@ const sendReply: GraphNode<typeof EmailAgentState> = async (state, config) => {
 }
 ```
 
-#### Saga / compensation
+**Saga / compensation**
+
 After retries are exhausted, run a recovery function that updates state and routes to a compensation branch.
 
 ### Implementing our email agent nodes
 
 We'll implement each node as a simple function. Remember: nodes take state, do work, and return updates.
 
-<details>
-<summary>Read and classify nodes</summary>
-
+> **Read and classify nodes**
+>
 ```typescript
-import { StateGraph, START, END, GraphNode, Command } from "@langchain/langgraph";
-import { HumanMessage } from "@langchain/core/messages";
-import { ChatAnthropic } from "@langchain/anthropic";
-
-const llm = new ChatAnthropic({ model: "claude-sonnet-4-6" });
-
-const readEmail: GraphNode<typeof EmailAgentState> = async (state, config) => {
-  // Extract and parse email content
-  // In production, this would connect to your email service
-  console.log(`Processing email: ${state.emailContent}`);
-  return {};
-}
-
-const classifyIntent: GraphNode<typeof EmailAgentState> = async (state, config) => {
-  // Use LLM to classify email intent and urgency, then route accordingly
-
-  // Create structured LLM that returns EmailClassification object
-  const structuredLlm = llm.withStructuredOutput(EmailClassificationSchema);
-
-  // Format the prompt on-demand, not stored in state
-  const classificationPrompt = `
-  Analyze this customer email and classify it:
-
-  Email: ${state.emailContent}
-  From: ${state.senderEmail}
-
-  Provide classification including intent, urgency, topic, and summary.
-  `;
-
-  // Get structured response directly as object
-  const classification = await structuredLlm.invoke(classificationPrompt);
-
-  // Determine next node based on classification
-  let nextNode: "searchDocumentation" | "humanReview" | "draftResponse" | "bugTracking";
-
-  if (classification.intent === "billing" || classification.urgency === "critical") {
-    nextNode = "humanReview";
-  } else if (classification.intent === "question" || classification.intent === "feature") {
-    nextNode = "searchDocumentation";
-  } else if (classification.intent === "bug") {
-    nextNode = "bugTracking";
-  } else {
-    nextNode = "draftResponse";
-  }
-
-  // Store classification as a single object in state
-  return new Command({
-    update: { classification },
-    goto: nextNode,
-  });
-}
+> import { StateGraph, START, END, GraphNode, Command } from "@langchain/langgraph";
+> import { HumanMessage } from "@langchain/core/messages";
+> import { ChatAnthropic } from "@langchain/anthropic";
+>
+> const llm = new ChatAnthropic({ model: "claude-sonnet-4-6" });
+>
+> const readEmail: GraphNode<typeof EmailAgentState> = async (state, config) => {
+>   // Extract and parse email content
+>   // In production, this would connect to your email service
+>   console.log(`Processing email: ${state.emailContent}`);
+>   return {};
+> }
+>
+> const classifyIntent: GraphNode<typeof EmailAgentState> = async (state, config) => {
+>   // Use LLM to classify email intent and urgency, then route accordingly
+>
+>   // Create structured LLM that returns EmailClassification object
+>   const structuredLlm = llm.withStructuredOutput(EmailClassificationSchema);
+>
+>   // Format the prompt on-demand, not stored in state
+>   const classificationPrompt = `
+>   Analyze this customer email and classify it:
+>
+>   Email: ${state.emailContent}
+>   From: ${state.senderEmail}
+>
+>   Provide classification including intent, urgency, topic, and summary.
+>   `;
+>
+>   // Get structured response directly as object
+>   const classification = await structuredLlm.invoke(classificationPrompt);
+>
+>   // Determine next node based on classification
+>   let nextNode: "searchDocumentation" | "humanReview" | "draftResponse" | "bugTracking";
+>
+>   if (classification.intent === "billing" || classification.urgency === "critical") {
+>     nextNode = "humanReview";
+>   } else if (classification.intent === "question" || classification.intent === "feature") {
+>     nextNode = "searchDocumentation";
+>   } else if (classification.intent === "bug") {
+>     nextNode = "bugTracking";
+>   } else {
+>     nextNode = "draftResponse";
+>   }
+>
+>   // Store classification as a single object in state
+>   return new Command({
+>     update: { classification },
+>     goto: nextNode,
+>   });
+> }
 ```
 
-</details>
-
-<details>
-<summary>Search and tracking nodes</summary>
-
+> **Search and tracking nodes**
+>
 ```typescript
-import { Command, GraphNode } from "@langchain/langgraph";
-
-const searchDocumentation: GraphNode<typeof EmailAgentState> = async (state, config) => {
-  // Search knowledge base for relevant information
-
-  // Build search query from classification
-  const classification = state.classification!;
-  const query = `${classification.intent} ${classification.topic}`;
-
-  let searchResults: string[];
-
-  try {
-    // Implement your search logic here
-    // Store raw search results, not formatted text
-    searchResults = [
-      "Reset password via Settings > Security > Change Password",
-      "Password must be at least 12 characters",
-      "Include uppercase, lowercase, numbers, and symbols",
-    ];
-  } catch (error) {
-    // For recoverable search errors, store error and continue
-    searchResults = [`Search temporarily unavailable: ${error}`];
-  }
-
-  return new Command({
-    update: { searchResults },  // Store raw results or error
-    goto: "draftResponse",
-  });
-}
-
-const bugTracking: GraphNode<typeof EmailAgentState> = async (state, config) => {
-  // Create or update bug tracking ticket
-
-  // Create ticket in your bug tracking system
-  const ticketId = "BUG-12345";  // Would be created via API
-
-  return new Command({
-    update: { searchResults: [`Bug ticket ${ticketId} created`] },
-    goto: "draftResponse",
-  });
-}
+> import { Command, GraphNode } from "@langchain/langgraph";
+>
+> const searchDocumentation: GraphNode<typeof EmailAgentState> = async (state, config) => {
+>   // Search knowledge base for relevant information
+>
+>   // Build search query from classification
+>   const classification = state.classification!;
+>   const query = `${classification.intent} ${classification.topic}`;
+>
+>   let searchResults: string[];
+>
+>   try {
+>     // Implement your search logic here
+>     // Store raw search results, not formatted text
+>     searchResults = [
+>       "Reset password via Settings > Security > Change Password",
+>       "Password must be at least 12 characters",
+>       "Include uppercase, lowercase, numbers, and symbols",
+>     ];
+>   } catch (error) {
+>     // For recoverable search errors, store error and continue
+>     searchResults = [`Search temporarily unavailable: ${error}`];
+>   }
+>
+>   return new Command({
+>     update: { searchResults },  // Store raw results or error
+>     goto: "draftResponse",
+>   });
+> }
+>
+> const bugTracking: GraphNode<typeof EmailAgentState> = async (state, config) => {
+>   // Create or update bug tracking ticket
+>
+>   // Create ticket in your bug tracking system
+>   const ticketId = "BUG-12345";  // Would be created via API
+>
+>   return new Command({
+>     update: { searchResults: [`Bug ticket ${ticketId} created`] },
+>     goto: "draftResponse",
+>   });
+> }
 ```
 
-</details>
-
-<details>
-<summary>Response nodes</summary>
-
+> **Response nodes**
+>
 ```typescript
-import { Command, interrupt } from "@langchain/langgraph";
-
-const draftResponse: GraphNode<typeof EmailAgentState> = async (state, config) => {
-  // Generate response using context and route based on quality
-
-  const classification = state.classification!;
-
-  // Format context from raw state data on-demand
-  const contextSections: string[] = [];
-
-  if (state.searchResults) {
-    // Format search results for the prompt
-    const formattedDocs = state.searchResults.map(doc => `- ${doc}`).join("\n");
-    contextSections.push(`Relevant documentation:\n${formattedDocs}`);
-  }
-
-  if (state.customerHistory) {
-    // Format customer data for the prompt
-    contextSections.push(`Customer tier: ${state.customerHistory.tier ?? "standard"}`);
-  }
-
-  // Build the prompt with formatted context
-  const draftPrompt = `
-  Draft a response to this customer email:
-  ${state.emailContent}
-
-  Email intent: ${classification.intent}
-  Urgency level: ${classification.urgency}
-
-  ${contextSections.join("\n\n")}
-
-  Guidelines:
-  - Be professional and helpful
-  - Address their specific concern
-  - Use the provided documentation when relevant
-  `;
-
-  const response = await llm.invoke([new HumanMessage(draftPrompt)]);
-
-  // Determine if human review needed based on urgency and intent
-  const needsReview = (
-    classification.urgency === "high" ||
-    classification.urgency === "critical" ||
-    classification.intent === "complex"
-  );
-
-  // Route to appropriate next node
-  const nextNode = needsReview ? "humanReview" : "sendReply";
-
-  return new Command({
-    update: { responseText: response.content.toString() },  // Store only the raw response
-    goto: nextNode,
-  });
-}
-
-const humanReview: GraphNode<typeof EmailAgentState> = async (state, config) => {
-  // Pause for human review using interrupt and route based on decision
-  const classification = state.classification!;
-
-  // interrupt() must come first - any code before it will re-run on resume
-  const humanDecision = interrupt({
-    emailId: state.emailId,
-    originalEmail: state.emailContent,
-    draftResponse: state.responseText,
-    urgency: classification.urgency,
-    intent: classification.intent,
-    action: "Please review and approve/edit this response",
-  });
-
-  // Now process the human's decision
-  if (humanDecision.approved) {
-    return new Command({
-      update: { responseText: humanDecision.editedResponse || state.responseText },
-      goto: "sendReply",
-    });
-  } else {
-    // Rejection means human will handle directly
-    return new Command({ update: {}, goto: END });
-  }
-}
-
-const sendReply: GraphNode<typeof EmailAgentState> = async (state, config) => {
-  // Send the email response
-  // Integrate with email service
-  console.log(`Sending reply: ${state.responseText!.substring(0, 100)}...`);
-  return {};
-}
+> import { Command, interrupt } from "@langchain/langgraph";
+>
+> const draftResponse: GraphNode<typeof EmailAgentState> = async (state, config) => {
+>   // Generate response using context and route based on quality
+>
+>   const classification = state.classification!;
+>
+>   // Format context from raw state data on-demand
+>   const contextSections: string[] = [];
+>
+>   if (state.searchResults) {
+>     // Format search results for the prompt
+>     const formattedDocs = state.searchResults.map(doc => `- ${doc}`).join("\n");
+>     contextSections.push(`Relevant documentation:\n${formattedDocs}`);
+>   }
+>
+>   if (state.customerHistory) {
+>     // Format customer data for the prompt
+>     contextSections.push(`Customer tier: ${state.customerHistory.tier ?? "standard"}`);
+>   }
+>
+>   // Build the prompt with formatted context
+>   const draftPrompt = `
+>   Draft a response to this customer email:
+>   ${state.emailContent}
+>
+>   Email intent: ${classification.intent}
+>   Urgency level: ${classification.urgency}
+>
+>   ${contextSections.join("\n\n")}
+>
+>   Guidelines:
+>   - Be professional and helpful
+>   - Address their specific concern
+>   - Use the provided documentation when relevant
+>   `;
+>
+>   const response = await llm.invoke([new HumanMessage(draftPrompt)]);
+>
+>   // Determine if human review needed based on urgency and intent
+>   const needsReview = (
+>     classification.urgency === "high" ||
+>     classification.urgency === "critical" ||
+>     classification.intent === "complex"
+>   );
+>
+>   // Route to appropriate next node
+>   const nextNode = needsReview ? "humanReview" : "sendReply";
+>
+>   return new Command({
+>     update: { responseText: response.content.toString() },  // Store only the raw response
+>     goto: nextNode,
+>   });
+> }
+>
+> const humanReview: GraphNode<typeof EmailAgentState> = async (state, config) => {
+>   // Pause for human review using interrupt and route based on decision
+>   const classification = state.classification!;
+>
+>   // interrupt() must come first - any code before it will re-run on resume
+>   const humanDecision = interrupt({
+>     emailId: state.emailId,
+>     originalEmail: state.emailContent,
+>     draftResponse: state.responseText,
+>     urgency: classification.urgency,
+>     intent: classification.intent,
+>     action: "Please review and approve/edit this response",
+>   });
+>
+>   // Now process the human's decision
+>   if (humanDecision.approved) {
+>     return new Command({
+>       update: { responseText: humanDecision.editedResponse || state.responseText },
+>       goto: "sendReply",
+>     });
+>   } else {
+>     // Rejection means human will handle directly
+>     return new Command({ update: {}, goto: END });
+>   }
+> }
+>
+> const sendReply: GraphNode<typeof EmailAgentState> = async (state, config) => {
+>   // Send the email response
+>   // Integrate with email service
+>   console.log(`Sending reply: ${state.responseText!.substring(0, 100)}...`);
+>   return {};
+> }
 ```
-
-</details>
 
 ## Step 5: Wire it together
 
@@ -557,38 +540,35 @@ Now we connect our nodes into a working graph. Since our nodes handle their own 
 
 To enable [human-in-the-loop](interrupts.md) with `interrupt()`, we need to compile with a [checkpointer](persistence.md) to save state between runs:
 
-<details>
-<summary>Graph compilation code</summary>
-
+> **Graph compilation code**
+>
 ```typescript
-import { MemorySaver, RetryPolicy } from "@langchain/langgraph";
-
-// Create the graph
-const workflow = new StateGraph(EmailAgentState)
-  // Add nodes with appropriate error handling
-  .addNode("readEmail", readEmail)
-  .addNode("classifyIntent", classifyIntent)
-  // Add retry policy for nodes that might have transient failures
-  .addNode(
-    "searchDocumentation",
-    searchDocumentation,
-    { retryPolicy: { maxAttempts: 3 } },
-  )
-  .addNode("bugTracking", bugTracking)
-  .addNode("draftResponse", draftResponse)
-  .addNode("humanReview", humanReview)
-  .addNode("sendReply", sendReply)
-  // Add only the essential edges
-  .addEdge(START, "readEmail")
-  .addEdge("readEmail", "classifyIntent")
-  .addEdge("sendReply", END);
-
-// Compile with checkpointer for persistence
-const memory = new MemorySaver();
-const app = workflow.compile({ checkpointer: memory });
+> import { MemorySaver, RetryPolicy } from "@langchain/langgraph";
+>
+> // Create the graph
+> const workflow = new StateGraph(EmailAgentState)
+>   // Add nodes with appropriate error handling
+>   .addNode("readEmail", readEmail)
+>   .addNode("classifyIntent", classifyIntent)
+>   // Add retry policy for nodes that might have transient failures
+>   .addNode(
+>     "searchDocumentation",
+>     searchDocumentation,
+>     { retryPolicy: { maxAttempts: 3 } },
+>   )
+>   .addNode("bugTracking", bugTracking)
+>   .addNode("draftResponse", draftResponse)
+>   .addNode("humanReview", humanReview)
+>   .addNode("sendReply", sendReply)
+>   // Add only the essential edges
+>   .addEdge(START, "readEmail")
+>   .addEdge("readEmail", "classifyIntent")
+>   .addEdge("sendReply", END);
+>
+> // Compile with checkpointer for persistence
+> const memory = new MemorySaver();
+> const app = workflow.compile({ checkpointer: memory });
 ```
-
-</details>
 
 The graph structure is minimal because routing happens inside nodes through `Command` objects. Each node declares where it can go, making the flow explicit and traceable.
 
@@ -596,41 +576,38 @@ The graph structure is minimal because routing happens inside nodes through `Com
 
 Let's run our agent with an urgent billing issue that needs human review:
 
-<details>
-<summary>Testing the agent</summary>
-
+> **Testing the agent**
+>
 ```typescript
-// Test with an urgent billing issue
-const initialState: EmailAgentStateType = {
-  emailContent: "I was charged twice for my subscription! This is urgent!",
-  senderEmail: "customer@example.com",
-  emailId: "email_123"
-};
-
-// Run with a thread_id for persistence
-const config = { configurable: { thread_id: "customer_123" } };
-const result = await app.invoke(initialState, config);
-// The graph will pause at human_review
-console.log(`Draft ready for review: ${result.responseText?.substring(0, 100)}...`);
+> // Test with an urgent billing issue
+> const initialState: EmailAgentStateType = {
+>   emailContent: "I was charged twice for my subscription! This is urgent!",
+>   senderEmail: "customer@example.com",
+>   emailId: "email_123"
+> };
+>
+> // Run with a thread_id for persistence
+> const config = { configurable: { thread_id: "customer_123" } };
+> const result = await app.invoke(initialState, config);
+> // The graph will pause at human_review
+> console.log(`Draft ready for review: ${result.responseText?.substring(0, 100)}...`);
 ```
-
+>
 ```typescript
-import { Command } from "@langchain/langgraph";
-
-// When ready, provide human input to resume
-const humanResponse = new Command({
-  resume: {
-    approved: true,
-    editedResponse: "We sincerely apologize for the double charge. I've initiated an immediate refund...",
-  }
-});
-
-// Resume execution
-const finalResult = await app.invoke(humanResponse, config);
-console.log("Email sent successfully!");
+> import { Command } from "@langchain/langgraph";
+>
+> // When ready, provide human input to resume
+> const humanResponse = new Command({
+>   resume: {
+>     approved: true,
+>     editedResponse: "We sincerely apologize for the double charge. I've initiated an immediate refund...",
+>   }
+> });
+>
+> // Resume execution
+> const finalResult = await app.invoke(humanResponse, config);
+> console.log("Email sent successfully!");
 ```
-
-</details>
 
 The graph pauses when it hits `interrupt()`, saves everything to the checkpointer, and waits. It can resume days later, picking up exactly where it left off. The `thread_id` ensures all state for this conversation is preserved together.
 
@@ -640,84 +617,92 @@ The graph pauses when it hits `interrupt()`, saves everything to the checkpointe
 
 Building this email agent has shown us the LangGraph way of thinking:
 
-#### [Break into discrete steps](#step-1-map-out-your-workflow-as-discrete-steps)
-Each node does one thing well. This decomposition enables streaming progress updates, durable execution that can pause and resume, and clear debugging since you can inspect state between steps.
+> **[Break into discrete steps](#step-1-map-out-your-workflow-as-discrete-steps)**
+>
+> Each node does one thing well. This decomposition enables streaming progress updates, durable execution that can pause and resume, and clear debugging since you can inspect state between steps.
 
-#### [State is shared memory](#step-3-design-your-state)
-Store raw data, not formatted text. This lets different nodes use the same information in different ways.
+> **[State is shared memory](#step-3-design-your-state)**
+>
+> Store raw data, not formatted text. This lets different nodes use the same information in different ways.
 
-#### [Nodes are functions](#step-4-build-your-nodes)
-They take state, do work, and return updates. When they need to make routing decisions, they specify both the state updates and the next destination.
+> **[Nodes are functions](#step-4-build-your-nodes)**
+>
+> They take state, do work, and return updates. When they need to make routing decisions, they specify both the state updates and the next destination.
 
-#### [Errors are part of the flow](#handle-errors-appropriately)
-Transient failures get retries, LLM-recoverable errors loop back with context, user-fixable problems pause for input, and unexpected errors bubble up for debugging.
+> **[Errors are part of the flow](#handle-errors-appropriately)**
+>
+> Transient failures get retries, LLM-recoverable errors loop back with context, user-fixable problems pause for input, and unexpected errors bubble up for debugging.
 
-#### [Human input is first-class](interrupts.md)
-The `interrupt()` function pauses execution indefinitely, saves all state, and resumes exactly where it left off when you provide input. When combined with other operations in a node, it must come first.
+> **[Human input is first-class](interrupts.md)**
+>
+> The `interrupt()` function pauses execution indefinitely, saves all state, and resumes exactly where it left off when you provide input. When combined with other operations in a node, it must come first.
 
-#### [Graph structure emerges naturally](#step-5-wire-it-together)
-You define the essential connections, and your nodes handle their own routing logic. This keeps control flow explicit and traceable - you can always understand what your agent will do next by looking at the current node.
+> **[Graph structure emerges naturally](#step-5-wire-it-together)**
+>
+> You define the essential connections, and your nodes handle their own routing logic. This keeps control flow explicit and traceable - you can always understand what your agent will do next by looking at the current node.
 
 ### Advanced considerations
 
-<details>
-<summary>Node granularity trade-offs</summary>
-
-> [!NOTE]
-> This section explores the trade-offs in node granularity design. Most applications can skip this and use the patterns shown above.
-
-You might wonder: why not combine `Read Email` and `Classify Intent` into one node?
-
-Or why separate Doc Search from Draft Reply?
-
-The answer involves trade-offs between resilience and observability.
-
-**The resilience consideration:** LangGraph's [persistence layer](persistence.md) creates checkpoints at node boundaries. When a workflow resumes after an interruption or failure, it starts from the beginning of the node where execution stopped. Smaller nodes mean more frequent checkpoints, which means less work to repeat if something goes wrong. If you combine multiple operations into one large node, a failure near the end means re-executing everything from the start of that node.
-
-Why we chose this breakdown for the email agent:
-
-* **Isolation of external services:** Doc Search and Bug Track are separate nodes because they call external APIs. If the search service is slow or fails, we want to isolate that from the LLM calls. We can add retry policies to these specific nodes without affecting others.
-
-* **Intermediate visibility:** Having `Classify Intent` as its own node lets us inspect what the LLM decided before taking action. This is valuable for debugging and monitoring—you can see exactly when and why the agent routes to human review.
-
-* **Different failure modes:** LLM calls, database lookups, and email sending have different retry strategies. Separate nodes let you configure these independently.
-
-* **Reusability and testing:** Smaller nodes are easier to test in isolation and reuse in other workflows.
-
-A different valid approach: You could combine `Read Email` and `Classify Intent` into a single node. You'd lose the ability to inspect the raw email before classification and would repeat both operations on any failure in that node. For most applications, the observability and debugging benefits of separate nodes are worth the trade-off.
-
-Application-level concerns: The caching discussion in Step 2 (whether to cache search results) is an application-level decision, not a LangGraph framework feature. You implement caching within your node functions based on your specific requirements—LangGraph doesn't prescribe this.
-
-Performance considerations: More nodes doesn't mean slower execution. LangGraph writes checkpoints in the background by default ([async durability mode](checkpointers.md#durability-modes)), so your graph continues running without waiting for checkpoints to complete. This means you get frequent checkpoints with minimal performance impact. You can adjust this behavior if needed—use `"exit"` mode to checkpoint only at completion, or `"sync"` mode to block execution until each checkpoint is written.
-
-</details>
+> **Node granularity trade-offs**
+>
+> > [!NOTE]
+> >
+> > This section explores the trade-offs in node granularity design. Most applications can skip this and use the patterns shown above.
+>
+> You might wonder: why not combine `Read Email` and `Classify Intent` into one node?
+>
+> Or why separate Doc Search from Draft Reply?
+>
+> The answer involves trade-offs between resilience and observability.
+>
+> **The resilience consideration:** LangGraph's [persistence layer](persistence.md) creates checkpoints at node boundaries. When a workflow resumes after an interruption or failure, it starts from the beginning of the node where execution stopped. Smaller nodes mean more frequent checkpoints, which means less work to repeat if something goes wrong. If you combine multiple operations into one large node, a failure near the end means re-executing everything from the start of that node.
+>
+> Why we chose this breakdown for the email agent:
+>
+> * **Isolation of external services:** Doc Search and Bug Track are separate nodes because they call external APIs. If the search service is slow or fails, we want to isolate that from the LLM calls. We can add retry policies to these specific nodes without affecting others.
+>
+> * **Intermediate visibility:** Having `Classify Intent` as its own node lets us inspect what the LLM decided before taking action. This is valuable for debugging and monitoring—you can see exactly when and why the agent routes to human review.
+>
+> * **Different failure modes:** LLM calls, database lookups, and email sending have different retry strategies. Separate nodes let you configure these independently.
+>
+> * **Reusability and testing:** Smaller nodes are easier to test in isolation and reuse in other workflows.
+>
+> A different valid approach: You could combine `Read Email` and `Classify Intent` into a single node. You'd lose the ability to inspect the raw email before classification and would repeat both operations on any failure in that node. For most applications, the observability and debugging benefits of separate nodes are worth the trade-off.
+>
+> Application-level concerns: The caching discussion in Step 2 (whether to cache search results) is an application-level decision, not a LangGraph framework feature. You implement caching within your node functions based on your specific requirements—LangGraph doesn't prescribe this.
+>
+> Performance considerations: More nodes doesn't mean slower execution. LangGraph writes checkpoints in the background by default ([async durability mode](checkpointers.md#durability-modes)), so your graph continues running without waiting for checkpoints to complete. This means you get frequent checkpoints with minimal performance impact. You can adjust this behavior if needed—use `"exit"` mode to checkpoint only at completion, or `"sync"` mode to block execution until each checkpoint is written.
 
 ### Where to go from here
 
 This was an introduction to thinking about building agents with LangGraph. You can extend this foundation with:
 
-#### [Human-in-the-loop patterns](interrupts.md)
-Learn how to add tool approval before execution, batch approval, and other patterns
+> **[Human-in-the-loop patterns](interrupts.md)**
+>
+> Learn how to add tool approval before execution, batch approval, and other patterns
 
-#### [Subgraphs](use-subgraphs.md)
-Create subgraphs for complex multi-step operations
+> **[Subgraphs](use-subgraphs.md)**
+>
+> Create subgraphs for complex multi-step operations
 
-#### [Streaming](streaming.md)
-Add streaming to show real-time progress to users
+> **[Streaming](streaming.md)**
+>
+> Add streaming to show real-time progress to users
 
-#### [Observability](observability.md)
-Add observability with LangSmith for debugging and monitoring
+> **[Observability](observability.md)**
+>
+> Add observability with LangSmith for debugging and monitoring
 
-#### [Tool Integration](../langchain/tools.md)
-Integrate more tools for web search, database queries, and API calls
+> **[Tool Integration](../langchain/tools.md)**
+>
+> Integrate more tools for web search, database queries, and API calls
 
-#### [Retry Logic](use-graph-api.md#add-retry-policies)
-Implement retry logic with exponential backoff for failed operations
+> **[Retry Logic](use-graph-api.md#add-retry-policies)**
+>
+> Implement retry logic with exponential backoff for failed operations
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/thinking-in-langgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/thinking-in-langgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

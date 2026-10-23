@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, document_loaders, file_loaders, text]
 > Integrate with the TextLoader document loader using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 
 This notebook provides a quick overview for getting started with `TextLoader` [document loaders](../../document_loaders.md). For detailed documentation of all `TextLoader` features and configurations head to the [API reference](https://reference.langchain.com/javascript/langchain-core/document_loaders/base/BaseDocumentLoader).
@@ -94,8 +95,6 @@ For detailed documentation of all `TextLoader` features and configurations head 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/file_loaders/text.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/document_loaders/file_loaders/text.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

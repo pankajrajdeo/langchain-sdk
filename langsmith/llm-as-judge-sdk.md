@@ -13,14 +13,16 @@ LLM applications can be challenging to evaluate since they often generate conver
 This guide shows you how to define an [LLM-as-a-judge evaluator](evaluation-concepts.md#llm-as-judge) for [offline evaluation](evaluation-concepts.md#offline-evaluations) using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
 
 > [!TIP]
+>
 > For a quick start, use [openevals](openevals.md), which provides ready-to-use LLM-as-a-judge evaluators.
 
 > [!NOTE]
-> The SDK does not support [decision model evaluators](decision-model-evaluator.md). These evaluators use a decision model, such as SemIf or Jev, as the judge. To create one, use the UI.
+>
+> The SDK does not support [decision model evaluators](decision-model-evaluator.md). These evaluators use a decision model, such as Jev, as the judge. To create one, use the UI.
 
 ## Create your own LLM-as-a-judge evaluator
 
-For complete control of evaluator logic, create your own LLM-as-a-judge evaluator and run it using the LangSmith SDK ([Python](https://docs.smith.langchain.com/reference/python/reference) / [TypeScript](https://docs.smith.langchain.com/reference/js)).
+For complete control of evaluator logic, create your own LLM-as-a-judge evaluator and run it using the LangSmith SDK ([Python](https://reference.langchain.com/python/langsmith) / [TypeScript](https://reference.langchain.com/javascript/langsmith)).
 
 Requires `langsmith>=0.2.0`
 
@@ -58,7 +60,7 @@ for the answer is logically valid and consistent with the question and the answe
 
     # Call the LLM to judge the output
     response = oai_client.beta.chat.completions.parse(
-        model="gpt-4o",
+        model="gpt-5.5",
         messages=[{"role": "system", "content": instructions}, {"role": "user", "content": msg}],
         response_format=Response
     )
@@ -121,7 +123,7 @@ actual answer is semantically equivalent to the expected answer."""
     )
 
     response = oai_client.beta.chat.completions.parse(
-        model="gpt-4o",
+        model="gpt-5.5",
         messages=[{"role": "system", "content": instructions}, {"role": "user", "content": msg}],
         response_format=Response,
     )
@@ -183,7 +185,7 @@ actual answer is semantically equivalent to the expected answer.`;
   const msg = `Question: ${inputs.question}\nExpected answer: ${referenceOutputs?.answer}\nActual answer: ${outputs.answer}`;
 
   const response = await oaiClient.beta.chat.completions.parse({
-    model: "gpt-4o",
+    model: "gpt-5.5",
     messages: [
       { role: "system", content: instructions },
       { role: "user", content: msg },
@@ -221,8 +223,6 @@ For more information on how to write a custom evaluator, refer to [How to define
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

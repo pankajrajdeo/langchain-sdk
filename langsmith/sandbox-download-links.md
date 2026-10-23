@@ -41,6 +41,7 @@ The token encodes the sandbox, the tenant, the exact file path, and the response
 A link is pinned to that path, not to a snapshot of the file. The file itself is not captured or copied when the link is minted.
 
 > [!WARNING]
+>
 > Do not modify a file after minting a link for it. A later write to that path may or may not be reflected in what the link serves, so treat the file as immutable for the life of the link. When the contents change, write a new file and mint a new link for it.
 
 Links are served from the sandbox service domain, on the sandbox's own host, never from the LangSmith API host. Downloaded content is therefore isolated from your LangSmith session.
@@ -156,6 +157,7 @@ Fetching a link **wakes a stopped sandbox**, so the first request after an idle 
 ## Security considerations
 
 > [!WARNING]
+>
 > A download link is a bearer credential embedded in a URL. Anyone who obtains it can read that one file until it expires. Treat a link like a password: send it over a channel you trust, and prefer a short `expires_in_seconds` for anything sensitive.
 
 * **Links cannot be revoked.** A minted link stays valid until it expires, even if the API key that created it is deleted or loses `sandboxes:exec`. Set an expiry when that matters.
@@ -188,8 +190,6 @@ Use a download link to hand one file to an outside consumer. Use `read()` to pul
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-download-links.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-download-links.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

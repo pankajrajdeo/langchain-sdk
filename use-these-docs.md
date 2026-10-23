@@ -16,15 +16,14 @@ We want to make our documentation as accessible as possible. We've included seve
 
 On any page in our documentation, you'll find a contextual menu dropdown in the top right corner:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/jKM-tvbl7XiR347g/images/copy-page-light.png?fit=max&auto=format&n=jKM-tvbl7XiR347g&q=85&s=81d6cf67dc039d588707bd97ee3f3a72" alt="Copy page light mode" width="1584" height="942" data-path="images/copy-page-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/jKM-tvbl7XiR347g/images/copy-page-dark.png?fit=max&auto=format&n=jKM-tvbl7XiR347g&q=85&s=9257e0b3480b22cdaf56b5c70305124d" alt="Copy page dark mode" width="1578" height="942" data-path="images/copy-page-dark.png" />
+![Copy page light mode](https://mintcdn.com/langchain-5e9cc07a/jKM-tvbl7XiR347g/images/copy-page-light.png?fit=max\&auto=format\&n=jKM-tvbl7XiR347g\&q=85\&s=81d6cf67dc039d588707bd97ee3f3a72)
 
 This includes our `llms.txt`, MCP server connection, and other quick access options such as ChatGPT and Claude.
 
 ## Use our MCP servers
 
-> **Prompt:** Connect LangChain docs MCP servers
+Connect LangChain docs MCP servers
+
 Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
 
 Servers to add:
@@ -60,14 +59,15 @@ claude mcp add --transport http reference-langchain https://reference.langchain.
 ```
 
 > [!NOTE]
+>
 > **Project (local) scoped**
 >
 > The commands above add the MCP servers only to your current project/working directory. To add them globally and access them in all projects, add the user scope by including `--scope user`:
 >
-> ```bash
+```bash
 > claude mcp add --transport http docs-langchain --scope user https://docs.langchain.com/mcp
 > claude mcp add --transport http reference-langchain --scope user https://reference.langchain.com/mcp
-> ```
+```
 
 ### Connect with Claude Desktop
 
@@ -166,8 +166,6 @@ Have questions or feedback? Let us know in our [community forum](https://forum.l
 
 ***
 
-> [!NOTE]
-> [Connect these docs](use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/use-these-docs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/use-these-docs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

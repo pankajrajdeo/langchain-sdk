@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/sso/email-lookup:
     post:
@@ -224,6 +227,10 @@ components:
         organization_display_name:
           type: string
           title: Organization Display Name
+        provider_type:
+          $ref: '#/components/schemas/SSOProviderType'
+          default: saml
+          x-extensible-enum: true
       type: object
       required:
         - provider_id
@@ -239,5 +246,11 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    SSOProviderType:
+      type: string
+      enum:
+        - saml
+        - oidc
+      title: SSOProviderType
 
 ````

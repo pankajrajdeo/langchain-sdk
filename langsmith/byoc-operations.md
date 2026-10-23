@@ -24,6 +24,7 @@ LangChain scales your data plane as load changes, so you do not need to size or 
 Data planes are provisioned for high availability by default. The deployment spans multiple availability zones in your region, and RDS and ElastiCache run Multi-AZ with automatic failover.
 
 > [!NOTE]
+>
 > To run a data plane without high availability, contact the LangChain team.
 
 ## Instance sizes
@@ -41,7 +42,7 @@ Two mechanisms keep upgrades free of downtime:
 
 ## Supporting service upgrades
 
-Background services such as Istio, KEDA, and the ClickHouse operator are upgraded on a regular cadence. These upgrades are non-intrusive, and no service interruption is expected.
+Background services such as Istio and KEDA are upgraded on a regular cadence. Data planes that still run ClickHouse also receive ClickHouse operator upgrades. These upgrades are non-intrusive, and no service interruption is expected.
 
 ## Kubernetes cluster upgrades
 
@@ -70,6 +71,7 @@ The LangChain team has no standing access to your data, and can only manage the 
 * **Break-glass access**: You allowlist a specific engineer to perform the operation. You can revoke that access at any time.
 
 > [!NOTE]
+>
 > If break-glass access is needed, the LangChain team reaches out with instructions.
 
 ## Auditing
@@ -87,8 +89,6 @@ Setting up alerts on those logs is your responsibility.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-operations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-operations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

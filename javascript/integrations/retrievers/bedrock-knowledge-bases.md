@@ -20,7 +20,7 @@ Knowledge Bases for Amazon Bedrock supports popular databases for vector storage
 
 ### Integration details
 
-| Retriever | Self-host | Cloud offering | Package | [Py support](https://python.langchain.com/docs/integrations/retrievers/bedrock/) |
+| Retriever | Self-host | Cloud offering | Package | [Py support](../../../integrations/retrievers/bedrock.md) |
 | :- | :- | :-: | :-: | :-: |
 | [AmazonKnowledgeBaseRetriever](https://reference.langchain.com/javascript/langchain-aws/AmazonKnowledgeBaseRetriever) | 🟠 (see details below) | ✅ | @langchain/aws | ✅ |
 
@@ -101,8 +101,6 @@ For detailed documentation of all `AmazonKnowledgeBaseRetriever` features and co
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/retrievers/bedrock-knowledge-bases.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/retrievers/bedrock-knowledge-bases.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

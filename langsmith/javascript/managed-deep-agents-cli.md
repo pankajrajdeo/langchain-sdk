@@ -15,7 +15,8 @@ The `mda` CLI compiles and deploys code-first [Managed Deep Agents](managed-deep
 It is included with the `managed-deepagents` npm package.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 For the fastest end-to-end path, see the [quickstart](managed-deep-agents-quickstart.md). For workflow guidance, see [Identity](managed-deep-agents-identity.md), [Memory](managed-deep-agents-memory.md), [Evals](managed-deep-agents-evals.md), [Custom tools](managed-deep-agents-tools.md), [Connections](managed-deep-agents-connections.md), [Custom middleware](managed-deep-agents-middleware.md), [Sandboxes](managed-deep-agents-sandboxes.md), [Channels](managed-deep-agents-channels.md), [Schedules](managed-deep-agents-schedules.md), and [Deploy an agent](managed-deep-agents-deploy.md).
 
@@ -272,6 +273,7 @@ bunx mda dev
 | `--hostname HOSTNAME` | Forward a host to the LangGraph dev server. |
 | `--no-browser` | Prevent the dev server from opening Studio in a browser when it starts. |
 | `--no-reload` | Disable the dev server's hot reload. |
+| `--no-schedules` | Do not create the project's schedules on the local server. |
 
 `mda dev` compiles into `.mda/build`, then starts the language-specific LangGraph dev server from that directory:
 
@@ -483,7 +485,7 @@ bunx mda delete
 | `project root ... is not a directory` | Pass a directory path to `mda dev` or `mda deploy`. |
 | `no agent entry file found` | Add `agent.ts` or `agent.tsx` at the project root. |
 | `No LangSmith API key found` | Set `LANGSMITH_API_KEY` or add it to the project `.env`. |
-| Deploy fails with 401 or 403 | Confirm the API key belongs to a workspace with deployments access. See [Pricing plans](../pricing-plans.md). |
+| Deploy fails with 401 or 403 | Confirm the API key belongs to a workspace with deployments access. See [Pricing plans](https://docs.langchain.com/langsmith/pricing-plans.md). |
 | Deploy reports a missing model provider API key | Add the provider key, such as `OPENAI_API_KEY`, to `.env`, export it in your shell, or configure it as a LangSmith workspace secret. |
 | Deploy reports a Context Hub conflict | `instructions.md` or `skills/` changed in Context Hub since the last sync, or the repo changed during sync. In an interactive terminal, answer the overwrite prompt. In a non-interactive shell, re-run with `--context-strategy overwrite` or `--context-strategy keep-hub`. See [Context Hub](managed-deep-agents-context-hub.md#source-of-truth). |
 | The build exceeds 200 MB | Remove generated artifacts or large files from the project before deploying. |
@@ -491,8 +493,6 @@ bunx mda delete
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

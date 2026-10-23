@@ -1,6 +1,6 @@
 ---
 title: "LangChain v1 migration guide"
-description: "Prompt: Migrate a codebase to LangChain v1. Migrate this codebase to LangChain v1 (requires langchain>=1.0.0, langchain-core>=1.0.0, and Python 3.10+)."
+description: "Migrate a codebase to LangChain v1."
 source: "https://docs.langchain.com/oss/python/migrate/langchain-v1"
 category: "docs"
 tags: [docs, migrate, langchain-v1]
@@ -8,7 +8,8 @@ tags: [docs, migrate, langchain-v1]
 
 # LangChain v1 migration guide
 
-> **Prompt:** Migrate a codebase to LangChain v1.
+Migrate a codebase to LangChain v1.
+
 Migrate this codebase to LangChain v1 (requires `langchain>=1.0.0`, `langchain-core>=1.0.0`, and Python 3.10+).
 
 Key changes:
@@ -386,6 +387,7 @@ Custom state extends the default agent state with additional fields. You can def
 2. **Via middleware** - Best for state managed by specific middleware hooks and tools attached to said middleware
 
 > [!NOTE]
+>
 > Defining custom state via middleware is preferred over defining it via [`state_schema`](https://reference.langchain.com/python/langchain/middleware/#langchain.agents.middleware.AgentMiddleware.state_schema) on [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) because it allows you to keep state extensions conceptually scoped to the relevant middleware and tools.
 >
 > `state_schema` is still supported for backwards compatibility on `create_agent`.
@@ -597,6 +599,7 @@ agent = create_agent("gpt-5.4-mini", tools=[some_tool])
 ```
 
 > [!NOTE]
+>
 > Dynamic model functions can return pre-bound models if structured output is *not* used.
 
 ### Tools
@@ -810,6 +813,7 @@ result = agent.invoke(
 ```
 
 > [!NOTE]
+>
 > The old `config["configurable"]` pattern still works for backward compatibility, but using the new `context` parameter is recommended for new applications or applications migrating to v1.
 
 ***
@@ -923,6 +927,7 @@ model = init_chat_model(
 ```
 
 > [!NOTE]
+>
 > Learn more: [Messages](../langchain/messages.md#message-content), [Standard content blocks](../langchain/messages.md#standard-content-blocks), and [Multimodal](../langchain/messages.md#multimodal).
 
 ***
@@ -972,7 +977,7 @@ Existing functionality outside the focus of standard interfaces and agents has b
 
 ### Removal of deprecated APIs
 
-Methods, functions, and other objects that were already deprecated and slated for removal in 1.0 have been deleted. Check the [deprecation notices](https://python.langchain.com/docs/versions/migrating_chains) from previous versions for replacement APIs.
+Methods, functions, and other objects that were already deprecated and slated for removal in 1.0 have been deleted.
 
 ### Text property
 
@@ -1009,8 +1014,6 @@ Old docs are archived for reference:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langchain-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langchain-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

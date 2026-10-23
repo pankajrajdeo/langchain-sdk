@@ -15,7 +15,8 @@ Create and deploy your first Managed Deep Agent: scaffold a project, configure t
 After this quickstart, the [tutorial](managed-deep-agents-tutorial.md) adds durable memory and a daily schedule on the same project.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## Prerequisites
 
@@ -35,7 +36,8 @@ npx skills add langchain-ai/langchain-skills --skill managed-deep-agents --yes
 
 Or paste this prompt into your coding agent:
 
-> **Prompt:** Build a Managed Deep Agent with the quickstart
+Build a Managed Deep Agent with the quickstart
+
 Create and deploy a Managed Deep Agent in this working directory by following the Managed Deep Agents quickstart.
 
 ## Step 1: Read the guide
@@ -68,7 +70,8 @@ Follow the quickstart steps in order: initialize the project with `mda`, configu
 
 ## Create and deploy an agent
 
-### Set up the project
+**1. Set up the project**
+
 Create a project and open its directory:
 
 **npm**
@@ -94,7 +97,8 @@ cd research-assistant
 
 You now have all the scaffolding for your agent.
 
-### Add your keys
+**2. Add your keys**
+
 Add your model provider API key to `.env`:
 
 **.env**
@@ -103,14 +107,19 @@ Add your model provider API key to `.env`:
 OPENAI_API_KEY=<OPENAI_API_KEY>
 # ANTHROPIC_API_KEY=<ANTHROPIC_API_KEY>
 # GOOGLE_API_KEY=<GOOGLE_API_KEY>
+# AZURE_AI_OPENAI_ENDPOINT=https://<resource>.services.ai.azure.com/openai/v1
+# AZURE_OPENAI_API_KEY=<AZURE_OPENAI_API_KEY>
+# AZURE_OPENAI_DEPLOYMENT_NAME=<AZURE_OPENAI_DEPLOYMENT_NAME>
 ```
 
-This quickstart uses OpenAI by default. If you choose Google or Anthropic in the next step, set that provider's API key instead. `mda deploy` adds the provider key to the deployment. You can also use any [other chat provider](../../javascript/integrations/chat.md).
+This quickstart uses OpenAI by default. For Google, Anthropic, or Microsoft Foundry, set the matching values instead. `mda deploy` adds the provider key to the deployment. You can also use any [other chat provider](../../javascript/integrations/chat.md).
 
 > [!WARNING]
+>
 > Do not commit the `.env` file into version control. It contains secrets.
 
-### Set up LangSmith
+**3. Set up LangSmith**
+
 Managed Deep Agents runs on LangSmith. Your LangSmith API key authenticates local development with `mda dev`, deploys the agent with `mda deploy`, and opens the agent in [LangSmith Studio](../studio.md) so you can chat with it and inspect traces.
 
 [Sign up for LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-managed-deep-agents-quickstart) if you do not already have an account.
@@ -125,7 +134,8 @@ Add your LangSmith API key to `.env`:
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
 ```
 
-### Edit the instructions
+**4. Edit the instructions**
+
 Open `instructions.md` and describe how the agent should behave:
 
 **instructions.md**
@@ -139,8 +149,9 @@ keep notes, and return concise answers with citations.
 
 When you deploy, Managed Deep Agents syncs these instructions to [LangSmith Context Hub](managed-deep-agents-context-hub.md), where you can update them without redeploying the agent.
 
-### Configure your model and search
-Now set the model and a built-in web search tool. Google, OpenAI, and Anthropic offer server-side search with no extra package or API key. Pass the provider tool dict that matches your model:
+**5. Configure your model and search**
+
+Now set the model and a built-in web search tool. Google, OpenAI, Anthropic, and Microsoft Foundry offer server-side search without a separate search package or search API key. Pass the provider tool dict that matches your model:
 
 Open `agent.ts`:
 
@@ -183,91 +194,111 @@ export const agent = defineDeepAgent({
 });
 ```
 
-The agent name is also the default deployment name. For model concepts and provider options, see [Models](../../javascript/langchain/models.md).
-
-<details>
-<summary>Using another provider?</summary>
-
-You can use a Tavily search tool instead.
-Add a [Tavily API key](https://app.tavily.com) to `.env`:
-
-**.env**
-
-```text
-TAVILY_API_KEY=<TAVILY_API_KEY>
-```
-
-Install the Tavily client:
-
-**npm**
-
-```bash
-npm install @langchain/tavily
-```
-
-**pnpm**
-
-```bash
-pnpm add @langchain/tavily
-```
-
-**bun**
-
-```bash
-bun add @langchain/tavily
-```
-
-Create a custom `internet_search` tool:
-
-**tools/search.ts**
+**Microsoft Foundry**
 
 ```ts
-import { TavilySearch } from "@langchain/tavily";
-import { tool } from "langchain";
-import { z } from "zod";
-
-export const internetSearch = tool(
-  async ({ query, maxResults = 5, topic = "general" }) => {
-    const tavilySearch = new TavilySearch({
-      maxResults,
-      tavilyApiKey: process.env.TAVILY_API_KEY,
-      topic,
-    });
-    return tavilySearch._call({ query });
-  },
-  {
-    name: "internet_search",
-    description: "Search the internet for relevant sources.",
-    schema: z.object({
-      query: z.string().describe("The search query."),
-      maxResults: z.number().optional().default(5),
-      topic: z.enum(["general", "news", "finance"]).optional().default("general"),
-    }),
-  },
-);
-```
-
-Import the tool and add it to the agent:
-
-**agent.ts**
-
-```ts
+// To use ChatOpenAI, run: npm install @langchain/openai
 import { defineDeepAgent } from "managed-deepagents";
+import { ChatOpenAI } from "@langchain/openai";
 
-import { internetSearch } from "./tools/search";
+const model = new ChatOpenAI({
+  model: process.env.AZURE_OPENAI_DEPLOYMENT_NAME,
+  apiKey: process.env.AZURE_OPENAI_API_KEY,
+  configuration: {
+    baseURL: process.env.AZURE_AI_OPENAI_ENDPOINT,
+  },
+});
 
 export const agent = defineDeepAgent({
   name: "research-assistant",
-  model: "openai:gpt-5.5",
-  tools: [internetSearch],
+  model,
+  tools: [{ type: "web_search" }],
 });
 ```
 
-For more authored tools, see [Custom tools](managed-deep-agents-tools.md).
+The agent name is also the default deployment name. For model concepts and provider options, see [Models](../../javascript/langchain/models.md).
 
-</details>
+> **Using another provider?**
+>
+> You can use a Tavily search tool instead.
+> Add a [Tavily API key](https://app.tavily.com) to `.env`:
+>
+**.env**
 
-### Run locally
+```text
+> TAVILY_API_KEY=<TAVILY_API_KEY>
+```
+>
+> Install the Tavily client:
+>
+**npm**
+
+```bash
+> npm install @langchain/tavily
+```
+>
+**pnpm**
+
+```bash
+> pnpm add @langchain/tavily
+```
+>
+**bun**
+
+```bash
+> bun add @langchain/tavily
+```
+>
+> Create a custom `internet_search` tool:
+>
+**tools/search.ts**
+
+```ts
+> import { TavilySearch } from "@langchain/tavily";
+> import { tool } from "langchain";
+> import { z } from "zod";
+>
+> export const internetSearch = tool(
+>   async ({ query, maxResults = 5, topic = "general" }) => {
+>     const tavilySearch = new TavilySearch({
+>       maxResults,
+>       tavilyApiKey: process.env.TAVILY_API_KEY,
+>       topic,
+>     });
+>     return tavilySearch._call({ query });
+>   },
+>   {
+>     name: "internet_search",
+>     description: "Search the internet for relevant sources.",
+>     schema: z.object({
+>       query: z.string().describe("The search query."),
+>       maxResults: z.number().optional().default(5),
+>       topic: z.enum(["general", "news", "finance"]).optional().default("general"),
+>     }),
+>   },
+> );
+```
+>
+> Import the tool and add it to the agent:
+>
+**agent.ts**
+
+```ts
+> import { defineDeepAgent } from "managed-deepagents";
+>
+> import { internetSearch } from "./tools/search";
+>
+> export const agent = defineDeepAgent({
+>   name: "research-assistant",
+>   model: "openai:gpt-5.5",
+>   tools: [internetSearch],
+> });
+```
+>
+> For more authored tools, see [Custom tools](managed-deep-agents-tools.md).
+
+**6. Run locally**
+
 Install the project dependencies and start the agent:
 
 **npm**
@@ -303,7 +334,8 @@ You should see the agent call the web search tool, then return a concise answer 
 
 For more information, see [Develop locally with LangSmith Studio](managed-deep-agents-local-development.md).
 
-### Deploy the agent
+**7. Deploy the agent**
+
 Deploy the project by running:
 
 **npm**
@@ -330,19 +362,20 @@ Open that URL. You should see the deployment in a ready state. Send the same res
 
 ## Next steps
 
-#### [Tutorial](managed-deep-agents-tutorial.md)
-Add a custom Tavily search tool, durable memory, and a daily schedule.
+> **[Tutorial](managed-deep-agents-tutorial.md)**
+>
+> Add a custom Tavily search tool, durable memory, and a daily schedule.
 
-#### [Custom tools](managed-deep-agents-tools.md)
-Add authored LangChain tools from your project.
+> **[Custom tools](managed-deep-agents-tools.md)**
+>
+> Add authored LangChain tools from your project.
 
-#### [Connections](managed-deep-agents-connections.md)
-Authenticate with external services, as the agent or as the caller.
+> **[Connections](managed-deep-agents-connections.md)**
+>
+> Authenticate with external services, as the agent or as the caller.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

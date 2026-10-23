@@ -107,7 +107,8 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 
 Select a chat model from LangChain's suite of integrations:
 
-#### OpenAI
+**OpenAI**
+
 👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
 **pip**
@@ -144,7 +145,8 @@ os.environ["OPENAI_API_KEY"] = "sk-..."
 model = ChatOpenAI(model="gpt-5.5")
 ```
 
-#### Anthropic
+**Anthropic**
+
 👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
 **pip**
@@ -181,7 +183,8 @@ os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
-#### Azure
+**Azure**
+
 👉 Read the [Azure chat model integration docs](../../integrations/chat/azure_chat_openai.md)
 
 **pip**
@@ -228,7 +231,8 @@ model = AzureChatOpenAI(
 )
 ```
 
-#### Google Gemini
+**Google Gemini**
+
 👉 Read the [Google GenAI chat model integration docs](../../integrations/chat/google_generative_ai.md)
 
 **pip**
@@ -265,7 +269,8 @@ os.environ["GOOGLE_API_KEY"] = "..."
 model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
 ```
 
-#### AWS Bedrock
+**AWS Bedrock**
+
 👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock.md)
 
 **pip**
@@ -302,7 +307,8 @@ from langchain_aws import ChatBedrock
 model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
-#### HuggingFace
+**HuggingFace**
+
 👉 Read the [HuggingFace chat model integration docs](../../integrations/chat/huggingface.md)
 
 **pip**
@@ -349,7 +355,8 @@ llm = HuggingFaceEndpoint(
 model = ChatHuggingFace(llm=llm)
 ```
 
-#### OpenRouter
+**OpenRouter**
+
 👉 Read the [OpenRouter chat model integration docs](../../integrations/chat/openrouter.md)
 
 **pip**
@@ -477,49 +484,46 @@ Notice how `record_warranty_status` and `record_issue_type` return `Command` obj
 
 Define prompts and tools for each step. First, define the prompts for each step:
 
-<details>
-<summary>View complete prompt definitions</summary>
-
+> **View complete prompt definitions**
+>
 ```python
-# Define prompts as constants for easy reference
-WARRANTY_COLLECTOR_PROMPT = """You are a customer support agent helping with device issues.
-
-CURRENT STAGE: Warranty verification
-
-At this step, you need to:
-1. Greet the customer warmly
-2. Ask if their device is under warranty
-3. Use record_warranty_status to record their response and move to the next step
-
-Be conversational and friendly. Don't ask multiple questions at once."""
-
-ISSUE_CLASSIFIER_PROMPT = """You are a customer support agent helping with device issues.
-
-CURRENT STAGE: Issue classification
-CUSTOMER INFO: Warranty status is {warranty_status}
-
-At this step, you need to:
-1. Ask the customer to describe their issue
-2. Determine if it's a hardware issue (physical damage, broken parts) or software issue (app crashes, performance)
-3. Use record_issue_type to record the classification and move to the next step
-
-If unclear, ask clarifying questions before classifying."""
-
-RESOLUTION_SPECIALIST_PROMPT = """You are a customer support agent helping with device issues.
-
-CURRENT STAGE: Resolution
-CUSTOMER INFO: Warranty status is {warranty_status}, issue type is {issue_type}
-
-At this step, you need to:
-1. For SOFTWARE issues: provide troubleshooting steps using provide_solution
-2. For HARDWARE issues:
-   - If IN WARRANTY: explain warranty repair process using provide_solution
-   - If OUT OF WARRANTY: escalate_to_human for paid repair options
-
-Be specific and helpful in your solutions."""
+> # Define prompts as constants for easy reference
+> WARRANTY_COLLECTOR_PROMPT = """You are a customer support agent helping with device issues.
+>
+> CURRENT STAGE: Warranty verification
+>
+> At this step, you need to:
+> 1. Greet the customer warmly
+> 2. Ask if their device is under warranty
+> 3. Use record_warranty_status to record their response and move to the next step
+>
+> Be conversational and friendly. Don't ask multiple questions at once."""
+>
+> ISSUE_CLASSIFIER_PROMPT = """You are a customer support agent helping with device issues.
+>
+> CURRENT STAGE: Issue classification
+> CUSTOMER INFO: Warranty status is {warranty_status}
+>
+> At this step, you need to:
+> 1. Ask the customer to describe their issue
+> 2. Determine if it's a hardware issue (physical damage, broken parts) or software issue (app crashes, performance)
+> 3. Use record_issue_type to record the classification and move to the next step
+>
+> If unclear, ask clarifying questions before classifying."""
+>
+> RESOLUTION_SPECIALIST_PROMPT = """You are a customer support agent helping with device issues.
+>
+> CURRENT STAGE: Resolution
+> CUSTOMER INFO: Warranty status is {warranty_status}, issue type is {issue_type}
+>
+> At this step, you need to:
+> 1. For SOFTWARE issues: provide troubleshooting steps using provide_solution
+> 2. For HARDWARE issues:
+>    - If IN WARRANTY: explain warranty repair process using provide_solution
+>    - If OUT OF WARRANTY: escalate_to_human for paid repair options
+>
+> Be specific and helpful in your solutions."""
 ```
-
-</details>
 
 Then map step names to their configurations using a dictionary:
 
@@ -625,6 +629,7 @@ agent = create_agent(
 ```
 
 > [!NOTE]
+>
 > **Why a checkpointer?** The checkpointer maintains state across conversation turns. Without it, the `current_step` state would be lost between user messages, breaking the workflow.
 
 ## 6. Test the workflow
@@ -768,6 +773,7 @@ See the [short-term memory guide](../short-term-memory.md) for other memory mana
 Some workflows need to allow users to return to previous steps to correct information (e.g., changing warranty status or issue classification). However, not all transitions make sense—for example, you typically can't go back once a refund has been processed. For this support workflow, we'll add tools to return to the warranty verification and issue classification steps.
 
 > [!TIP]
+>
 > If your workflow requires arbitrary transitions between most steps, consider whether you need a structured workflow at all. This pattern works best when steps follow a clear sequential progression with occasional backwards transitions for corrections.
 
 Add "go back" tools to the resolution step:
@@ -826,6 +832,7 @@ result = agent.invoke(
 Here's everything together in a runnable script:
 
 **Complete code**
+
 ```python
 """
 Customer Support State Machine Example
@@ -1057,8 +1064,6 @@ if __name__ == "__main__":
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/handoffs-customer-support.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/handoffs-customer-support.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

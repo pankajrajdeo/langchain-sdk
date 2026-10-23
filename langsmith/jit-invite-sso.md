@@ -30,14 +30,16 @@ The `invites_enabled` setting controls manual user invitations. When enabled, [o
 
 You can update these settings in the LangSmith UI or with the LangSmith API:
 
-#### UI
+**UI**
+
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-jit-invite-sso):
 
 1. Navigate to **Settings** > **Organization** > **Access and Security** > **General**.
 2. Toggle **Enable JIT provisioning** and **Allow invites** as needed.
-3. [Configure SSO default workspaces and roles](#configure-default-sso-settings) in **Settings** > **Organization** > **SSO Configuration**.
+3. [Configure SSO default workspaces and roles](#configure-default-sso-settings) in **Settings** > **SSO configuration**.
 
-#### API
+**API**
+
 Update organization settings programmatically using the [Update organization info](smith-api/orgs/update-current-organization-info.md) endpoint:
 
 ```bash
@@ -64,6 +66,7 @@ Response includes updated current organization configuration:
 ```
 
 > [!NOTE]
+>
 > Consider the following if you are using [LangSmith self-hosted](self-hosted.md):
 >
 > * The JIT provisioning and the invites settings only apply to the default organization (identified by `default_sso_provision=true`). Other organizations must use invites in self-hosted.
@@ -92,6 +95,7 @@ When a user attempts to sign in via SSO, LangSmith follows this decision flow:
 ```
 
 > [!NOTE]
+>
 > When both JIT provisioning and invites are enabled, **invites take precedence**. If a user has a pending invitation, they are added with the invite's contents, not the default SSO settings.
 
 ## Configuration scenarios
@@ -192,7 +196,7 @@ When [JIT provisioning](#jit-provisioning) is enabled, configure default setting
 
 2. Default workspaces. Select one or more workspaces that users are automatically added to. Users receive the same role in all selected workspaces. To configure:
 
-   1. Go to **Settings** > **Organization** > **SSO Configuration**.
+   1. Go to **Settings** > **SSO configuration**.
    2. Set **Default workspace role**.
    3. Select **Default workspaces**.
    4. Save your configuration.
@@ -202,6 +206,7 @@ When [JIT provisioning](#jit-provisioning) is enabled, configure default setting
 If your organization uses [SCIM](user-management.md#set-up-scim-for-your-organization) (System for Cross-domain Identity Management), users can be automatically provisioned and managed through your identity provider. SCIM provides an additional mechanism for user management that works alongside JIT and invite settings.
 
 > [!NOTE]
+>
 > SCIM group membership overrides manually assigned roles or roles assigned via JIT provisioning. If you're using SCIM, consider disabling JIT provisioning to avoid conflicts.
 
 ## SSO Groups Sync
@@ -226,8 +231,6 @@ We recommend choosing one of SCIM or SSO Groups Sync per organization, not both,
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/jit-invite-sso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/jit-invite-sso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

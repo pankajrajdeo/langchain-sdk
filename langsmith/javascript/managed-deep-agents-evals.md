@@ -15,7 +15,8 @@ Managed Deep Agents evals are [Harbor](https://www.harborframework.com/docs/task
 Managed Deep Agents initializes the Harbor workspace. Harbor runs the managed agent against each task in an isolated environment and records the result.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## Prerequisites
 
@@ -37,17 +38,19 @@ npx skills add langchain-ai/langchain-skills --skill eval-engineering --yes
 You can use any coding agent.
 
 > [!TIP]
+>
 > To use [Deep Agents Code](../../deepagents/code/overview.md) (`dcode`), install it with:
 >
-> ```bash
+```bash
 > curl -LsSf https://langch.in/dcode | bash
-> ```
+```
 >
 > See the [Deep Agents Code quickstart](../../deepagents/code/quickstart.md) for provider setup and interactive use.
 
 ## Develop evals with a coding agent
 
-### Initialize the eval workspace
+**1. Initialize the eval workspace**
+
 From the project root, run:
 
 **npm**
@@ -84,20 +87,23 @@ my-agent/
 
 `evals/harbor-job.json` is user-owned. Managed Deep Agents writes it only when it is missing, so later edits are preserved. Files under `.mda/evals/` are generated.
 
-### Start the coding-agent session
+**2. Start the coding-agent session**
+
 The handoff asks the selected coding agent to install the `eval-engineering` skill and use it for the project. If you already added the skill, continue in that session.
 
 Ask the coding agent to follow the skill's review flow and use the Managed Deep Agents task layout:
 
-> **Prompt:** Develop Harbor evals with the eval-engineering skill
+Develop Harbor evals with the eval-engineering skill
+
 Use the eval-engineering skill to develop Harbor evals for this Managed
 Deep Agent. Inspect the project and existing evals first. Draft the Task
 Spec and wait for my review before implementing the approved task directly
-under {'evals/<task>/'}.
+under evals/\<task>/.
 
 Work with the coding agent to review the Task Spec, task instruction, environment, verifier, and reusable project knowledge. The coding agent writes the runnable task after you approve the design.
 
-### Review the Harbor task
+**3. Review the Harbor task**
+
 Each direct child of `evals/` that contains an instruction and tests is a Harbor task:
 
 ```text
@@ -118,7 +124,8 @@ evals/
 
 For the full task format, see the [Harbor task documentation](https://www.harborframework.com/docs/tasks).
 
-### Run the evals
+**4. Run the evals**
+
 The coding-agent handoff includes a command configured for the project and current shell. Run that command from the project root.
 
 On macOS or Linux, it has the following form:
@@ -136,7 +143,8 @@ Replace `my-agent` with the project directory name. The generated command fills 
 
 Re-running the command after editing the agent picks up the project changes.
 
-### Inspect the results
+**5. Inspect the results**
+
 Open the Harbor results:
 
 ```bash
@@ -164,8 +172,6 @@ When `LANGSMITH_API_KEY` is available, the LangSmith plugin records the Harbor r
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-evals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-evals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

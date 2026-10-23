@@ -15,6 +15,7 @@ tags: [docs, langsmith, managed-deep-agents-search]
 LangSmith manages the search infrastructure, so you can add search without hosting a service or creating a separate Parallel account or API key. The integration offers zero data retention.
 
 > [!NOTE]
+>
 > Built-in search is available only on LangSmith Plus and Startup plans. Usage is free during private beta.
 
 ## Before you begin
@@ -51,7 +52,8 @@ You do not need a Parallel API key.
 
 If the file already defines `mcp`, add `Parallel` to the existing `servers` map. Define `mcp` only once.
 
-#### Python
+**Python**
+
 Add `Parallel` to the `servers` map in `tools/mcp.py`.
 
 **tools/mcp.py**
@@ -69,7 +71,8 @@ mcp = define_mcp(
 )
 ```
 
-#### TypeScript
+**TypeScript**
+
 Add `Parallel` to the `servers` map in `tools/mcp.ts`.
 
 **tools/mcp.ts**
@@ -100,8 +103,6 @@ Your use of this integration must comply with Parallel's terms of service, inclu
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

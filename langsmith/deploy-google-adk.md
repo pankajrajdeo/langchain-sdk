@@ -34,6 +34,7 @@ pip install "deployments-wrap-sdk[google-adk]"
 ```
 
 > [!NOTE]
+>
 > The PyPI distribution name is `deployments-wrap-sdk`, but the Python import path is `saf_sdk`. Both refer to the same package.
 
 ## Quickstart
@@ -66,7 +67,7 @@ agent = wrap(
     Runner(
         agent=Agent(
             name="echo_agent",
-            model="gemini-2.5-flash",
+            model="gemini-3.8-flash",
             instruction="Echo the user message.",
             before_model_callback=echo_callback,
         ),
@@ -81,7 +82,7 @@ Two things are essential:
 1. **Pass `LangsmithSessionService()`** as the runner's `session_service`. `wrap()` raises a `TypeError` if you forget. Agent Server needs this hook to load and save ADK session state through its checkpointer.
 2. **Export the wrapped `agent`** as a module-level variable. Agent Server imports this symbol when serving the graph.
 
-For a real agent, drop the `before_model_callback` and configure a model directly. For example, use Gemini by setting `model="gemini-2.5-flash"` with `GOOGLE_API_KEY` set, or use Claude/OpenAI via ADK's LiteLLM adapter (`google.adk.models.lite_llm.LiteLlm`, available through `google-adk[extensions]`).
+For a real agent, drop the `before_model_callback` and configure a model directly. For example, use Gemini by setting `model="gemini-3.8-flash"` with `GOOGLE_API_KEY` set, or use Claude/OpenAI via ADK's LiteLLM adapter (`google.adk.models.lite_llm.LiteLlm`, available through `google-adk[extensions]`).
 
 ## Capabilities and limitations
 
@@ -263,8 +264,6 @@ This means ADK's own session/state semantics are preserved end-to-end while the 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-google-adk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-google-adk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

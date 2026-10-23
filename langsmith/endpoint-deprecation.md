@@ -12,7 +12,9 @@ tags: [docs, langsmith, endpoint-deprecation]
 
 LangSmith deprecates API endpoints and SDK methods before removing them, so you have time to migrate to a replacement. This page describes how deprecations are announced and how long they stay supported.
 
-This policy applies only to public endpoints documented in the [LangSmith API reference](smith-api-ref.md) and the [Agent Server API reference](server-api-ref.md). Internal, undocumented endpoints are not covered and can change, including with breaking changes, at any time.
+> [!NOTE]
+>
+> This policy applies only to public endpoints documented in the [LangSmith API reference](smith-api-ref.md) and the [Agent Server API reference](server-api-ref.md). Internal, undocumented endpoints are not covered and can change, including with breaking changes, at any time.
 
 ## Deprecation lifecycle
 
@@ -55,8 +57,6 @@ A deprecated field is removed at a version boundary, not on a date:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/endpoint-deprecation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/endpoint-deprecation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

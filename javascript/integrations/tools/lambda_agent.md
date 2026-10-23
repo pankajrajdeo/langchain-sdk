@@ -26,6 +26,7 @@ This quick start will demonstrate how an Agent could use a Lambda function to se
 * The IAM role corresponding to those credentials must have permission to invoke the lambda function.
 
 > [!TIP]
+>
 > See [this section for general instructions on installing LangChain packages](../../langchain/install.md).
 
 **npm**
@@ -68,8 +69,6 @@ console.log(result);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/lambda_agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/lambda_agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

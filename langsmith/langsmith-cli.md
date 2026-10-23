@@ -1,6 +1,6 @@
 ---
 title: "LangSmith CLI"
-description: "Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal"
+description: "Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, insights, and threads from the terminal"
 source: "https://docs.langchain.com/langsmith/langsmith-cli"
 category: "docs"
 tags: [docs, langsmith, langsmith-cli]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, langsmith-cli]
 
 # LangSmith CLI
 
-> Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal
+> Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, insights, and threads from the terminal
 
 The LangSmith CLI is a command-line tool for querying and managing your LangSmith data. It's designed for both developers and AI coding agents and outputs human-readable tables by default, with a `--format json` option for scripting. Use it when you need scriptable access to your LangSmith data, such as bulk exports, automation, or giving a coding agent direct access to your [traces, runs, and datasets](observability-concepts.md).
 
@@ -60,6 +60,7 @@ langsmith self-update
 Use the `--dry-run` flag to preview the update without installing.
 
 > [!NOTE]
+>
 > Querying a [SmithDB](smithdb-sdk-migration.md)-backed deployment requires LangSmith CLI `v0.2.44` or later.
 
 ## Authenticate
@@ -69,6 +70,7 @@ Use the `--dry-run` flag to preview the update without installing.
 The recommended local setup is to authenticate with OAuth:
 
 > [!NOTE]
+>
 > `langsmith auth login` also works against self-hosted instances from LangSmith CLI `v0.2.46` and newer, provided the deployment is on LangSmith `0.16` or later with the OAuth authorization server enabled (requires a signing JWKS to be configured). See [Self-hosted instances](#self-hosted-instances). On earlier deployments, or without a signing JWKS, authenticate with an API key or create an API-key profile.
 
 ```bash
@@ -129,8 +131,9 @@ langsmith --api-key lsv2_... trace list --project my-app
 
 Point the CLI at your instance with `--api-url`, or with `LANGSMITH_ENDPOINT`. Both the browser-based login and API keys are supported.
 
-#### OAuth
-Requires LangSmith CLI `v0.2.46` or later and a deployment on LangSmith `0.16` or later, with the OAuth authorization server enabled. The chart exposes the OAuth authorization server under `/api`, but those endpoints stay inert until you configure a signing JWKS. For setup steps, see [Enabling Remote MCP](langsmith-remote-mcp.md#enabling-remote-mcp).
+**OAuth**
+
+Requires LangSmith CLI `v0.2.46` or later and a deployment on LangSmith `0.16` or later, with the OAuth authorization server enabled. The chart exposes the OAuth authorization server under `/api`, but those endpoints stay inert until you [configure a signing JWKS](kubernetes.md#configure-a-signing-jwks).
 
 The OAuth authorization server is enabled automatically when `config.hostname` is set in your Helm chart **and** a signing JWKS is configured (via `config.signingJwks`, or the key `langsmith_signing_jwks` in `config.existingSecretName`). Without the signing JWKS, the OAuth endpoints are inactive and the CLI will receive a `404` — use the API key tab instead.
 
@@ -146,7 +149,8 @@ Tokens are stored under the named profile, so later commands only need `--profil
 langsmith --profile self-hosted project list
 ```
 
-#### API key
+**API key**
+
 Works on every LangSmith version.
 
 ```bash
@@ -164,6 +168,7 @@ LANGSMITH_API_KEY="lsv2_..." langsmith profile create self-hosted \
 ```
 
 > [!WARNING]
+>
 > `LANGSMITH_ENDPOINT` takes precedence over a profile's `api_url`. If it is set in your shell, every profile you select resolves to that endpoint — a common cause of commands unexpectedly reaching LangSmith Cloud while a self-hosted profile is active. Unset it when working with profiles, or pass `--api-url` explicitly.
 
 ## Quickstart
@@ -324,6 +329,63 @@ langsmith experiment list --dataset my-eval-set
 langsmith experiment get my-experiment-2024-01-15
 ```
 
+### Manage insights
+
+`insights` commands create, run, and read [Insights](insights.md) reports, which group a project's traces into categories to surface usage patterns and failure modes. Every `insights` command needs `--project`, `--project-id`, or the `LANGSMITH_PROJECT` environment variable.
+
+> [!NOTE]
+>
+> `insights create`, `insights run`, and `insights config` require LangSmith CLI v0.2.60 or later.
+
+To create a report, define it in a JSON file:
+
+```json
+{
+  "name": "Weekly reliability review",
+  "summary_prompt": "Identify the request and outcome: {{run.inputs}} {{run.outputs}}",
+  "last_n_hours": 168,
+  "filter": "eq(is_root, true)",
+  "model": "openai",
+  "schedule_cron": "0 9 * * 1"
+}
+```
+
+* **`name`** and **`summary_prompt`**: Required. The [summary prompt](insights.md#summary-prompt) is a Mustache template and must reference at least one of `{{run.inputs}}`, `{{run.outputs}}`, `{{run.error}}`, `{{run.feedback}}`, or `{{all_thread_messages}}`. The CLI does not support auto mode, so state what the report should look for in this prompt.
+* **`last_n_hours`**, or **`start_time`** and **`end_time`**: The time range to sample traces from. Use one form, not both.
+* **`model`**: `openai` (default) or `anthropic`. To pick specific models, set **`cluster_model`** and **`summary_model`** together, each to `openai`, `anthropic`, or a [model configuration](model-configurations.md) UUID. Display names are not accepted.
+* **`schedule_cron`**: A cron expression for a recurring report. The first job starts immediately, and later jobs follow the schedule. Omit it for a one-time report.
+
+The file also accepts `filter`, `sample`, `hierarchy`, `partitions`, `attribute_schemas`, and `description`. Unknown fields cause an error.
+
+`insights create` saves the file as a job configuration and starts the first report. Reports run asynchronously and incur model costs. The workspace needs secrets for the selected models. Pass `--wait` to poll until the report succeeds or fails, for up to 30 minutes. Pass `--config -` to read the file from stdin.
+
+```bash
+langsmith insights create --project my-app --config insights.json
+langsmith insights create --project my-app --config insights.json --wait
+```
+
+`insights run` starts a new report from a saved configuration without changing the configuration or its schedule:
+
+```bash
+langsmith insights config list --project my-app
+langsmith insights config list --project my-app --include-prebuilt
+langsmith insights run <config-id> --project my-app --wait
+```
+
+`insights list` returns reports with their status and category counts. `insights get` adds the executive summary, highlighted traces, and per-category statistics:
+
+```bash
+langsmith insights list --project my-app --limit 5
+langsmith insights get <insight-id> --project my-app
+```
+
+`insights config update` replaces a configuration's name and analysis settings from a JSON file in the same format. It does not start a report. Omit `description` or `schedule_cron` to keep the current value, or set `schedule_cron` to `null` to stop the schedule. `insights config delete` removes the configuration and every report it produced.
+
+```bash
+langsmith insights config update <config-id> --project my-app --config insights.json
+langsmith insights config delete <config-id> --project my-app --yes
+```
+
 ### Manage sandboxes
 
 Sandbox commands let you build snapshots, create sandboxes, execute commands, open interactive consoles, and tunnel TCP ports to services running inside sandboxes.
@@ -418,8 +480,6 @@ Most `trace` and `run` commands share these filters:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

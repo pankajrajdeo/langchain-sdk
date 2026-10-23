@@ -10,6 +10,8 @@ tags: [docs, langsmith, smith-api, runs, query-runs]
 
 > Returns a paginated list of runs for the given projects within min/max start_time. Supports filters, cursor pagination, and `selects` to select fields to return.
 
+When `ai_search` is set, `Accept: text/event-stream` is required; requests without it return 406. AI search is unavailable on deployments that route queries to the v1 backend and returns 501 there.
+
 Self-hosted deployments require LangSmith `v0.16` or later.
 
 ## OpenAPI
@@ -164,6 +166,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -172,6 +176,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/runs/query:
     post:
@@ -183,9 +188,15 @@ paths:
         start_time. Supports filters, cursor pagination, and `selects` to select
         fields to return.
 
+        When `ai_search` is set, `Accept: text/event-stream` is required;
+        requests without it return 406. AI search is unavailable on deployments
+        that route queries to the v1 backend and returns 501 there.
+
         Self-hosted deployments require LangSmith `v0.16` or later.
       parameters:
-        - description: application/json or text/event-stream
+        - description: >-
+            application/json, or text/event-stream (required when ai_search is
+            set)
           name: Accept
           in: header
           schema:
@@ -208,58 +219,69 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/query.QueryRunsResponseBody'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/shared.SSEEvent'
         '400':
           description: bad request (malformed JSON or invalid parameters)
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '401':
           description: missing or invalid authentication
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '403':
           description: forbidden (insufficient permission)
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '404':
           description: session not found
           content:
-            application/json:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
+        '406':
+          description: 'not acceptable (ai_search requires Accept: text/event-stream)'
+          content:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '422':
           description: unprocessable entity (e.g. invalid UUID)
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '500':
           description: internal server error
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '501':
-          description: The requested filter syntax is unavailable for this deployment
+          description: >-
+            The requested filter syntax or ai_search is unavailable for this
+            deployment
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '503':
           description: service unavailable
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '504':
           description: gateway timeout or deadline exceeded
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
       security:
@@ -272,6 +294,20 @@ components:
     query.QueryRunsRequestBody:
       type: object
       properties:
+        ai_search:
+          description: >-
+            `ai_search` is a plain-language criterion evaluated against the
+            messages from the agent trajectory scoped to the run.
+
+            AND-ed with the ordinary filters. Requires semantic filtering
+            enabled for the deployment.
+
+            Must contain nonempty text of at most 2000 UTF-8 bytes. Not
+            supported on public dataset queries.
+          type: string
+          maxLength: 2000
+          minLength: 1
+          example: The customer was charged twice
         cursor:
           description: >-
             `cursor` is the opaque string from a previous response's
@@ -313,6 +349,18 @@ components:
             (false).
           type: boolean
           example: true
+        max_feedback_modified_at:
+          description: >-
+            `max_feedback_modified_at` is the exclusive upper bound (RFC3339) on
+            feedback `modified_at`, applied to the feedback conditions in
+            `filter`, `trace_filter`, or `tree_filter` (for example
+            eq(feedback_key, "correctness")).
+
+            Requires at least one feedback condition. Runs must still fall
+            within the `start_time` window.
+          type: string
+          format: date-time
+          example: '2024-12-31T23:59:59Z'
         max_start_time:
           description: >-
             `max_start_time` is the upper bound for run `start_time` (RFC3339).
@@ -320,6 +368,18 @@ components:
           type: string
           format: date-time
           example: '2024-12-31T23:59:59Z'
+        min_feedback_modified_at:
+          description: >-
+            `min_feedback_modified_at` is the inclusive lower bound (RFC3339) on
+            feedback `modified_at`, applied to the feedback conditions in
+            `filter`, `trace_filter`, or `tree_filter` (for example
+            eq(feedback_key, "correctness")).
+
+            Requires at least one feedback condition. Runs must still fall
+            within the `start_time` window.
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00Z'
         min_start_time:
           description: >-
             `min_start_time` is the lower bound for run `start_time` (RFC3339).
@@ -447,6 +507,26 @@ components:
           type: string
           example: >-
             eyJ2IjoxLCJhIjoicnVucy5xdWVyeSIsImsiOiJwYXNzIiwiYiI6InNkYiIsInQiOiJsdChjdXJzb3IsICcyMDI1LTEyLTEyIDE5OjAzOjI4LjQ4MTI1NTAxOWIxM2YyJykifQ
+    shared.SSEEvent:
+      type: object
+      description: One parsed event from a v2 query Server-Sent Events response.
+      required:
+        - event
+        - data
+      properties:
+        event:
+          type: string
+          description: The event name.
+          enum:
+            - data
+            - end
+            - error
+        data:
+          type: string
+          description: >-
+            For data events, a JSON-encoded array of RFC 6902 patch operations;
+            for end events, an empty string; for error events, a JSON-encoded
+            ProblemDetails object.
     shared.ProblemDetails:
       description: RFC 7807 problem details returned on V2 API errors.
       type: object
@@ -782,6 +862,14 @@ components:
           description: '`prompt_tokens` is the prompt-side token count.'
           type: integer
           example: 200
+        query_metadata:
+          description: >-
+            `query_metadata` describes this query result, including
+            `sem_filter_score` when a semantic filter is used. Returned
+            automatically by run queries, or null when unavailable.
+          anyOf:
+            - type: object
+            - type: 'null'
         reference_dataset_id:
           description: >-
             `reference_dataset_id` is the dataset UUID for the reference

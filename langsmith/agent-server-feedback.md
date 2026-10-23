@@ -32,7 +32,8 @@ LangSmith uses feedback to continuously improve the implementation of your agent
 
 Create a run and parse the `feedback` object from the response.
 
-#### Python SDK
+**Python SDK**
+
 ```python
 from langgraph_sdk import get_client
 
@@ -62,7 +63,8 @@ async for event in client.runs.stream(
         print(event.data)
 ```
 
-#### JavaScript SDK
+**JavaScript SDK**
+
 ```javascript
 import { Client } from "@langchain/langgraph-sdk";
 
@@ -92,7 +94,8 @@ for await (const event of streamResponse) {
 }
 ```
 
-#### cURL
+**cURL**
+
 ```bash
 curl --request POST \
   --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream" \
@@ -130,7 +133,8 @@ When the user chooses a feedback option, `POST` to the corresponding URL. `GET` 
 
 For example, if the user clicks a thumbs down button, call the `user_disliked` URL:
 
-#### POST
+**POST**
+
 ```bash
 curl --request POST \
   --url "https://api.smith.langchain.com/api/v1/feedback/tokens/e952734e-c0a0-417b-a04d-fc2209691ed5" \
@@ -144,7 +148,8 @@ curl --request POST \
   }'
 ```
 
-#### GET
+**GET**
+
 `metadata` is not supported with `GET`.
 
 ```bash
@@ -181,8 +186,6 @@ Example high-level implementation:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-feedback.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-feedback.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

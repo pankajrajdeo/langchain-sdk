@@ -1,18 +1,18 @@
 ---
 title: "deepagents"
-description: "Index of 42 pages and 3 subdirectories under deepagents."
+description: "Index of 40 pages and 3 subdirectories under deepagents."
 category: "index"
 tags: [index, deepagents]
 ---
 
 # deepagents
 
-42 pages here, 66 pages including subdirectories.
+40 pages here, 63 pages including subdirectories.
 
 ## Directories
 
 - [cli/](cli/_index.md) - 2 pages
-- [code/](code/_index.md) - 18 pages
+- [code/](code/_index.md) - 17 pages
 - [frontend/](frontend/_index.md) - 4 pages
 
 ## Files
@@ -22,7 +22,6 @@ tags: [index, deepagents]
 - [Agent User Interaction Protocol (AG-UI)](ag-ui.md) - Expose deep agents over the Agent User Interaction Protocol (AG-UI) to stream events to any AG-UI client or frontend.
 - [Async subagents](async-subagents.md) - Launch background subagents that run concurrently while the supervisor continues interacting with the user
 - [Backends](backends.md) - Choose and configure filesystem backends for Deep Agents. You can specify routes to different backends, implement virtual filesystems, and enforce policies.
-- [Changelog](changelog-py.md) - Log of updates and improvements to our Python packages
 - [Deep Agents Code](code.md) - Terminal coding agent built on the Deep Agents SDK
 - [Comparison with Claude Agent SDK](comparison.md) - Compare LangChain Deep Agents with the Claude Agent SDK to choose the right tool for your use case.
 - [Build a content builder agent](content-builder.md) - Build a content writing agent with brand memory, skills, subagents, and image generation
@@ -45,7 +44,6 @@ tags: [index, deepagents]
 - [Prebuilt middleware](middleware.md) - Prebuilt middleware for common agent use cases
 - [Models](models.md) - Configure model providers and parameters for Deep Agents
 - [Multimodal inputs and outputs](multimodal.md) - Use images, audio, video, and documents with Deep Agents when your model supports multimodal inputs and tool results
-- [OpenWiki](openwiki.md) - CLI that writes and maintains agent wikis so coding agents work faster
 - [Deep Agents overview](overview.md) - Build agents that can plan, use subagents, and leverage file systems for complex tasks
 - [Permissions](permissions.md) - Control filesystem access with declarative permission rules for Deep Agents
 - [Profiles](profiles.md) - Package per-provider and per-model defaults that Deep Agents applies when a model is selected

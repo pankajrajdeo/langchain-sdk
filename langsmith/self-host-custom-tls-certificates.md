@@ -18,11 +18,15 @@ This page covers:
 ## Mount internal CAs for TLS
 
 > [!NOTE]
+>
 > You must use Helm chart version 0.11.9 or later to mount internal CAs using the configuration below.
 
 Use this approach to make internal/public CAs trusted system‑wide by LangSmith (Playground model calls and [database/external service connections](self-hosted.md#storage-services)).
 
 1. Create a file containing all CAs required for TLS with databases and external services. If your deployment is communicating directly to `beacon.langchain.com` without a proxy, make sure to include a public trusted CA. All certs should be concatenated in this file with an empty line in between.
+
+   Include every root your databases chain to, public ones as well. Once this bundle is mounted, the database migration jobs trust only this file and not the system CA store, so a missing public root fails upgrades even though the application keeps running. If you use [LangSmith-managed ClickHouse](langsmith-managed-clickhouse.md#tls-certificates), add ISRG Root X1.
+
 ```
    -----BEGIN CERTIFICATE-----
    <PUBLIC_CA>
@@ -55,12 +59,13 @@ Use this approach to make internal/public CAs trusted system‑wide by LangSmith
        customTls: true # Only enable if you want TLS for Postgres.
 ```
 4. Make sure to use TLS supported connection strings:
-   * <b>Postgres</b>: Add `?sslmode=verify-full&sslrootcert=system` to the end.
-   * <b>Redis</b>: Use `rediss://` instead of `redis://` as the prefix.
+   * **Postgres**: Add `?sslmode=verify-full&sslrootcert=system` to the end.
+   * **Redis**: Use `rediss://` instead of `redis://` as the prefix.
 
 ## Use custom TLS certificates for model providers
 
 > [!NOTE]
+>
 > This feature is currently only available for the following model providers:
 >
 > * Azure OpenAI
@@ -81,8 +86,6 @@ Once you have set these environment variables, enter the Playground **Settings**
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-custom-tls-certificates.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-custom-tls-certificates.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

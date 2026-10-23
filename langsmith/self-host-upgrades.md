@@ -9,6 +9,7 @@ tags: [docs, langsmith, self-host-upgrades]
 # Upgrade an installation
 
 > [!WARNING]
+>
 > Downgrades are not officially supported. LangSmith upgrades may include database migrations and other changes that are not backward-compatible. If you need to roll back to a previous version, contact technical support via the [Support Portal](https://support.langchain.com) for guidance.
 
 If you don't have the repo added, run the following command to add it:
@@ -28,6 +29,7 @@ Update your helm chart config file with any updates that are needed in the new v
 Run the following command to upgrade the chart (replace `version` with the version you want to upgrade to):
 
 > [!NOTE]
+>
 > If you are using a namespace other than the default namespace, you will need to specify the namespace in the `helm` and `kubectl` commands by using the `-n <namespace` flag.
 
 Find the latest version of the chart. You can find this in the [LangSmith Helm Chart GitHub repository](https://github.com/langchain-ai/helm/releases) or by running the following command:
@@ -40,19 +42,20 @@ You should see output similar to this:
 
 ```bash
 NAME                             	CHART VERSION	APP VERSION	DESCRIPTION
-langchain/langsmith              	0.15.13      	0.15.18    	Helm chart to deploy the langsmith application ...
-langchain/langsmith              	0.15.12      	0.15.17    	Helm chart to deploy the langsmith application ...
-langchain/langsmith              	0.15.11      	0.15.16    	Helm chart to deploy the langsmith application ...
-langchain/langsmith              	0.15.10      	0.15.15    	Helm chart to deploy the langsmith application ...
-langchain/langsmith              	0.15.9       	0.15.13    	Helm chart to deploy the langsmith application ...
+langchain/langsmith              	0.17.2       	0.17.30    	Helm chart to deploy the langsmith application ...
+langchain/langsmith              	0.17.1       	0.17.30    	Helm chart to deploy the langsmith application ...
+langchain/langsmith              	0.17.0       	0.17.29    	Helm chart to deploy the langsmith application ...
+langchain/langsmith              	0.16.41      	0.16.70    	Helm chart to deploy the langsmith application ...
+langchain/langsmith              	0.16.40      	0.16.70    	Helm chart to deploy the langsmith application ...
 ```
 
 Choose the version you want to upgrade to (generally the latest version is recommended) and note the version number:
 
 > [!NOTE]
+>
 > If your installation is more than one major version behind the latest chart, upgrade one major version at a time. Do not skip major versions. Repeat this upgrade procedure for each intervening major version before upgrading to the latest supported version.
 >
-> For example, to upgrade from `0.13.43` to `0.15.13`, first upgrade to `0.14.5`, then upgrade to `0.15.13`.
+> For example, to upgrade from 0.15 to 0.17, first upgrade to the latest 0.16 chart, then upgrade to the latest 0.17 chart.
 
 ```bash
 helm upgrade <release-name> langchain/langsmith --version <version> --values <path-to-values-file> --wait --debug
@@ -108,12 +111,37 @@ langsmith-queue-d58cb64f7-87d68          1/1     Running     0          15h
 
 3. Visit the external IP for the `langsmith-frontend` service on your browser. The LangSmith UI should be visible and operational.
 
-   <img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/langsmith-ui.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=5310f686e7b9eebaaee4fe2a152a8675" alt="LangSmith UI" width="2886" height="1698" data-path="langsmith/images/langsmith-ui.png" />
+   ![LangSmith UI](https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/langsmith-ui.png?fit=max\&auto=format\&n=4kN8yiLrZX_amfFn\&q=85\&s=5310f686e7b9eebaaee4fe2a152a8675)
+
+## Upgrade from v16 to v17
+
+Chart v17 changes the values for SmithDB, sandboxes, and Engine. Update your values file before you run `helm upgrade`. Chart v17 fails to render the SmithDB, sandbox, and Engine values below until you change them. If you deploy with the Terraform modules, follow the upgrade steps in the [AWS](self-host-terraform-aws-deploy.md#upgrade-from-chart-v16-to-v17), [GCP](self-host-terraform-gcp-deploy.md), or [Azure](self-host-terraform-azure-deploy.md) deploy guide, which apply these changes to the module's values files.
+
+> [!WARNING]
+>
+> Downgrading from chart v17 to v16 is not supported. Back up the database before you upgrade.
+
+* **SmithDB**: Move `smithdb.migration.deployment` to `smithdb.migration.job`. With `smithdb.enabled: true`, move the flat autoscaling keys (`enabled`, `minReplicas`, `maxReplicas`, and the rest) on `query`, `ingestion`, `mutations`, `runRules`, `statsQuery`, and `compactionWorker` under `autoscaling.hpa.*`. For `compactionWorker`, you can use `autoscaling.keda.*` instead, but enable only one scaler. For the cache volume changes, see [Cache storage](self-host-smithdb-infrastructure.md#cache-storage).
+* **Sandboxes**: Chart v17 removes the bundled JuiceFS CSI driver, and `sandbox-host` mounts JuiceFS itself. Chart v17 ignores a leftover `sandboxes.juicefs.csi` block, and its validation then fails with `sandboxes.juicefs.redis.metaURL is required when sandboxes.enabled is true and sandboxes.juicefs.existingSecretName is not set.` Move the settings:
+
+  * `sandboxes.juicefs.csi.existingSecretName` becomes `sandboxes.juicefs.existingSecretName`. The Secret keeps its keys.
+  * The cache options in `sandboxes.juicefs.csi.mountPodPatch` move to `sandboxes.juicefs.hostMount`. `cacheDirs` sets the host paths for the JuiceFS cache and defaults to `/var/cache/juicefs`. If you override it, list at least one absolute path. Set other JuiceFS options in `mountOptions` in the `--flag=value` form, and do not set `--cache-dir` there. The default cache size drops from 300 GiB (`cache-size=307200`) to 50 GiB (`--cache-size=51200`).
+  * Move the IRSA or Workload Identity annotation from `sandboxes.juicefs.csi.node.serviceAccount.annotations` to `sandboxes.sandboxHost.serviceAccount.annotations`. On GKE, `sandbox-host` runs on the host network, and GKE does not give Workload Identity to host-network pods, so the annotation serves only the `juicefs-format` Job. Also grant the sandbox node pool's service account `roles/storage.objectAdmin` on the bucket, limited by an IAM condition to the JuiceFS prefix. Without that grant, the mount gets 403 from Cloud Storage.
+
+  Before the upgrade, drain the JuiceFS volumes while the CSI driver still runs. Otherwise the old `sandbox-host` pods stay in `Terminating`. With the default release name:
+
+```bash
+  kubectl delete -n langsmith deployment.apps/langsmith-sandbox-host
+  kubectl delete -n langsmith persistentvolumeclaim/smithbox-juicefs-csi
+  kubectl delete -n langsmith persistentvolumeclaim/smithbox-juicefs-csi-host
+  kubectl get pods -n langsmith | grep juicefs   # wait until only juicefs-csi-* pods remain
+```
+
+  Running sandboxes stop. Their data stays in object storage and Redis, because both chart v16 PersistentVolumes use the `Retain` reclaim policy.
+* **Engine**: With Engine enabled, set `engine.usageSigningSecret` to a value of at least 32 characters (generate one with `openssl rand -hex 32`), or, when you use `config.existingSecretName`, add an `engine_usage_signing_secret` key to that Secret instead. The default `engine.intelligenceBaseUrl` changes to `https://beacon.langchain.com/intelligence`, which records usage only. To keep running Engine on LangSmith Intelligence models, as on chart v16, keep `https://beacon.aws.langchain.com/intelligence` and select LangSmith Intelligence under **Settings** > **Engine** > **Model providers**. For details, see [LangSmith Engine on Self-hosted](engine-self-hosted.md).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-upgrades.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-upgrades.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

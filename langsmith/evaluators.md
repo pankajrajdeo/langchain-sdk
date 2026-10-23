@@ -15,16 +15,19 @@ tags: [docs, langsmith, evaluators]
 What an evaluator attaches to depends on how your workspace is organized.
 
 > [!NOTE]
-> **Agent-based workspaces ([beta](release-stages.md)).** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](observability-concepts.md#tracing-projects).
+>
+> **Agent-based workspaces.** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](observability-concepts.md#tracing-projects).
 
 An evaluator attaches to an [environment](agent-environments.md#environment-names) of an [agent](agents.md). Attach it to **Production** alone to score production traffic without also scoring local runs.
 
 > [!NOTE]
-> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](observability-concepts.md#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based, which is in [beta](release-stages.md). Skip this section and read [Agents](agents.md).
+>
+> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](observability-concepts.md#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based. Skip this section and read [Agents](agents.md).
 
 An evaluator attaches to a [tracing project](observability-concepts.md#tracing-projects).
 
 > [!TIP]
+>
 > Evaluator scores are a high-priority signal for the [LangSmith Engine](engine.md): it pulls low-scoring traces when choosing what to analyze, so attaching an evaluator to a project sharpens the issues Engine finds there.
 
 ## View evaluators
@@ -55,29 +58,20 @@ You can create an evaluator in the [LangSmith UI](https://smith.langchain.com?ut
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluators), select **Evaluators** in the left sidebar.
 2. Click **+ Evaluator** to open the new evaluator panel.
 3. The panel lets you:
-   * **Create from scratch**: Build a new [LLM-as-a-Judge](llm-as-judge.md) or [Code](online-evaluations-code.md) evaluator. To use a [decision model](decision-model-evaluator.md) as the judge, select **LLM-as-a-Judge Evaluator**, then select a decision model.
+   * **Create from scratch**: Build a new [LLM-as-a-Judge](llm-as-judge.md), [Decision Model](decision-model-evaluator.md), or [Code](online-evaluations-code.md) evaluator.
    * **Add a LangChain Tuned Evaluator**: Attach a [specialized judge managed by LangChain](tuned-evaluators.md) to a compatible tracing project without configuring a prompt, model, or API key.
-   * **Create from a template**: Start from a ready-made evaluator (also known as a prebuilt evaluator) for common evaluation patterns. A **Recommended** section surfaces popular templates first, followed by templates organized by the following categories:
-
-     | Category | Description |
-     | - | - |
-     | Security | Detect leaks, injections, and adversarial inputs. |
-     | Safety | Evaluate content safety and moderation. |
-     | Quality | Measure output quality and accuracy. |
-     | Conversation | Evaluate conversational quality and user experience. |
-     | Trajectory | Evaluate agent tool use and decision paths. |
-     | Image Evaluations | Evaluate image content quality and safety. |
-     | Voice Evaluation | Evaluate voice and audio interaction quality. |
+   * **Create from a template**: Start from a ready-made evaluator (also known as a prebuilt evaluator) for common evaluation patterns. A **Recommended** section lists popular templates first. The rest are grouped by category: Security, Safety, Quality, Conversation, Trajectory, Image Evaluations, and Voice Evaluation. For what each template scores, see [Prebuilt evaluator templates](#prebuilt-evaluator-templates).
 
 You can also add an evaluator directly from a [tracing project](observability-concepts.md#tracing-projects), an agent environment, or a [dataset](evaluation-concepts.md#datasets). In that flow, you can additionally **attach an existing evaluator** from your workspace, or create a [Composite](composite-evaluators-ui.md) evaluator. Refer to [Set up LLM-as-a-judge online evaluators](online-evaluations-llm-as-judge.md) and [Automatically run evaluators on experiments](bind-evaluator-to-dataset.md).
 
 ### Create an evaluator with the SDK
 
-Use the LangSmith SDK to create evaluators programmatically. The SDK is available for [Python](smith-python-sdk.md) and [TypeScript](smith-js-ts-sdk.md). Evaluators created through the SDK appear in the **Evaluators** table alongside those created in the UI.
+Use the LangSmith SDK to create evaluators programmatically. The SDK is available for [Python](https://docs.langchain.com/langsmith/smith-python-sdk.md) and [TypeScript](https://docs.langchain.com/langsmith/smith-js-ts-sdk.md). Evaluators created through the SDK appear in the **Evaluators** table alongside those created in the UI.
 
 The SDK does not support [decision model evaluators](decision-model-evaluator.md) yet. To create one, use the UI.
 
 > [!NOTE]
+>
 > Managing evaluators through the SDK requires `langsmith>=0.9.8` (Python, PyPI) or `langsmith>=0.7.16` (TypeScript, npm).
 
 **Python**
@@ -122,6 +116,100 @@ console.log("Created evaluator:", created.evaluator?.id);
 ```
 
 To create an LLM-as-a-judge evaluator and to retrieve, update, list, or delete evaluators, refer to [Manage evaluators with the SDK](manage-evaluators-sdk.md).
+
+## Prebuilt evaluator templates
+
+Prebuilt evaluator templates are ready-made evaluators for common checks, such as hallucination, prompt injection, and task completion. Each template is a starting point. You can edit its prompt and scoring schema before you save it to your workspace.
+
+Most templates are [LLM-as-a-judge](llm-as-judge.md) evaluators whose prompts come from the open-source [openevals](https://github.com/langchain-ai/openevals) package. Two are exceptions: Assertions uses a prompt defined in LangSmith, and Exact Match is a [code evaluator](online-evaluations-code.md).
+
+Each LLM-as-a-judge template writes a score under its feedback key and a `comment` with the judge's reasoning. Language and Support Intent return a label without a `comment`.
+
+A `true` score does not always mean a pass. Templates that detect a problem return `true` when they find it: the Security and Safety templates, Hallucination, Perceived Error, the Image templates, and Audio Quality. The rest return `true` when the output passes. The **Score** column in each table states what `true` means.
+
+Templates differ in the data they read:
+
+* **Whole threads**: Conversation and Trajectory templates read every message in a thread. When you add one to a tracing project, LangSmith configures it as a thread-level evaluator. For more information, see [Set up multi-turn online evaluators](online-evaluations-multi-turn.md).
+* **Reference outputs**: Correctness, Assertions, and Exact Match compare the output against a reference output, which comes from a [dataset](evaluation-concepts.md#datasets) example.
+* **Plan**: Plan Adherence reads a `plan` variable in addition to the thread messages.
+* **Attachments**: Image and Voice templates read the run's attachments. For more information, see [Evaluate with attachments](evaluate-with-attachments.md).
+
+### Security
+
+Security templates detect leaks, injections, and adversarial inputs.
+
+| Template | What it scores | Score |
+| - | - | - |
+| PII Leakage | Whether the input or output contains personal information that could identify or harm an individual. | `pii_leakage` (boolean): `true` when PII is found. |
+| Prompt Injection | Whether the input contains embedded instructions that target the AI system. Reads the input only. | `prompt_injection` (boolean): `true` when an injection attempt is found. |
+| Code Injection | Whether the input contains executable code embedded in data. Reads the input only. | `code_injection` (boolean): `true` when an injection attempt is found. |
+
+### Safety
+
+Safety templates evaluate content safety and moderation.
+
+| Template | What it scores | Score |
+| - | - | - |
+| Toxicity | Whether the content contains toxic elements, such as personal attacks or hate speech. | `toxicity` (boolean): `true` when toxic content is found. |
+| Bias & Fairness | Whether the content contains stereotyping, exclusionary language, or discriminatory framing. | `fairness` (boolean): `true` when bias or a fairness violation is found. |
+
+### Quality
+
+Quality templates measure output quality and accuracy.
+
+| Template | What it scores | Score |
+| - | - | - |
+| Hallucination | Whether the output contains claims the input context does not support, such as contradictions, speculative details, or inaccurate facts. | `hallucination` (boolean): `true` when the output contains a hallucination. |
+| Correctness | Whether the output is factually accurate, complete, and consistent with the reference output. | `correctness` (boolean): `true` when the output is correct. |
+| Assertions | Whether the output satisfies each assertion in the reference output. The judge reads an `assertions` list from the reference output, where each entry has a `key` and a `comment`. A missing or empty list scores `false`. | `assertions_passed` (boolean): `true` only when every assertion passes. |
+| Conciseness | How efficiently the output conveys the requested information, penalizing hedging, pleasantries, meta-commentary, and redundancy. | `conciseness` (number, 0 to 10): `10` when the output contains only essential information. |
+| Code Checker | Whether the code solves every requirement in the input, handles edge cases, and would run without errors. | `code_checker` (boolean): `true` when the code is complete and correct. |
+| Answer Relevance | Whether the output directly addresses the input question without off-topic tangents. | `answer_relevance` (boolean): `true` when the output is relevant. |
+| Exact Match | Whether the run's outputs exactly equal the reference outputs. This template runs as code and makes no LLM call. | `exact_match` (boolean): `true` when the outputs match. |
+
+### Conversation
+
+Conversation templates evaluate conversational quality and user experience across a whole thread.
+
+| Template | What it scores | Score |
+| - | - | - |
+| Perceived Error | Whether user signals, such as frustration or repeated corrections, show the user perceived the agent making an error. | `perceived_error` (boolean): `true` when the user perceived an error that caused significant frustration. |
+| Language | The primary language of the conversation. | `language` (string): a language name in English, such as `Spanish`. |
+| Support Intent | The primary intent of a support conversation. | `intent` (category): one of `Account & Billing`, `Order Management`, `Technical Support`, `Product Inquiry`, `Policy Inquiry`, `Status Check`, `Complaint & Feedback`, `Escalation`, or `Other`. |
+| User Satisfaction | Whether the user's tone and satisfaction indicators show the user was satisfied. | `user_satisfaction` (boolean): `true` when the user appears satisfied. |
+| Tone | Whether the agent's tone was appropriate for the context and consistent. | `agent_tone` (boolean): `true` when the tone was appropriate. |
+| Task Completion | Whether the agent fully completed every user request in the conversation. | `task_completion` (boolean): `true` when every request was completed. |
+| Knowledge Retention | Whether the agent retained and applied facts from earlier in the conversation, without contradictions or ignored context. | `knowledge_retention` (boolean): `true` when the agent retained earlier facts. |
+
+### Trajectory
+
+Trajectory templates evaluate agent tool use and decision paths across a whole thread.
+
+| Template | What it scores | Score |
+| - | - | - |
+| Plan Adherence | Whether the agent's steps followed its declared plan. | `plan_adherence` (boolean): `true` when the agent followed the plan. |
+| Tool Selection | Whether the agent chose the right tools, in a sensible order, without unnecessary calls. | `tool_selection` (boolean): `true` when tool selection was accurate and efficient. |
+| Trajectory Accuracy | Whether the agent's path was logical, showed clear progress, and was reasonably efficient. | `trajectory_accuracy` (boolean): `true` when the trajectory was accurate and efficient. |
+
+### Image Evaluations
+
+Image templates evaluate image content quality and safety.
+
+| Template | What it scores | Score |
+| - | - | - |
+| Explicit Content | Whether an image contains nudity, sexual content, or graphic violence. | `explicit_content` (boolean): `true` when explicit content is found. |
+| Sensitive Imagery | Whether an image contains harmful, offensive, or inappropriate symbols or depictions. | `sensitive_imagery` (boolean): `true` when sensitive imagery is found. |
+
+### Voice Evaluation
+
+Voice templates evaluate voice and audio interaction quality.
+
+| Template | What it scores | Score |
+| - | - | - |
+| Audio Quality | Whether the audio contains clipping, distortion, or glitches that degrade the listening experience. | `audio_quality` (boolean): `true` when quality issues are found. |
+| Transcription Accuracy | Whether a speech-to-text transcription accurately reflects the spoken content. | `transcription_accuracy` (boolean): `true` when the transcription is accurate. |
+| User Interrupts | Whether the agent handled user interruptions gracefully. | `user_interrupts` (boolean): `true` when interruptions were handled gracefully. |
+| Vocal Affect | Whether the agent's vocal warmth, prosody, and emotional tone were appropriate and natural. | `vocal_affect` (boolean): `true` when vocal affect was appropriate. |
 
 ## View evaluator details
 
@@ -169,11 +257,43 @@ To include extended stats:
 
 [Code evaluators](online-evaluations-code.md) receive these fields in the `run` object, including `feedback_stats`, `total_tokens`, and `total_cost`. They also receive [individual feedback records](feedback-data-format.md) in `run["feedback"]`, regardless of whether you enable extended stats. For [LLM-as-a-judge evaluators](online-evaluations-llm-as-judge.md), map the corresponding `run.*` field to a prompt variable. For example, map `{{correctness_average}}` to `run.feedback_stats.correctness.avg` to include a `correctness` feedback average in the prompt. The available `run.*` fields also include prompt and completion token, cost, and detail fields. For the full run data schema, see [Run data format](run-data-format.md).
 
-### Chain evaluators
+## Chain evaluators
 
-Extended stats can be used to chain evaluators, where a code evaluator reads a score that another evaluator already produced. Filter the second evaluator on the first evaluator's feedback key (for example, `has(feedback_key, "answer_usefulness")`), then enable extended stats. The filter makes the code evaluator run only after the score exists, and extended stats make the score readable at `run["feedback_stats"]["answer_usefulness"]["avg"]`.
+A chained evaluator is an online evaluator that triggers only on runs another evaluator has already scored. Chaining lets you use a more specific evaluator or reserve a more expensive evaluator for the runs that need it. For example, you can run an [LLM-as-a-judge evaluator](online-evaluations-llm-as-judge.md) only when an earlier `correctness` score is below a threshold.
 
-The filter matches on the feedback key rather than the evaluator that produced it, so feedback from any source with that key triggers the code evaluator. To configure the filter, see [Apply a filter to runs that trigger the evaluator](online-evaluations-code.md#configure-online-evaluators).
+The second evaluator must be a run-level evaluator because [multi-turn (thread-level) evaluators](online-evaluations-multi-turn.md) cannot filter on feedback. The first evaluator can be either type. A multi-turn evaluator attaches its feedback to the last run in the thread, so a second evaluator chained onto it evaluates that run, not the full thread.
+
+To chain a second evaluator onto a first:
+
+1. Create or open the second evaluator and expand its filter. For more information, see [Apply a filter to runs that trigger the evaluator](online-evaluations-llm-as-judge.md#apply-a-filter-to-runs-that-trigger-the-evaluator) for LLM-as-a-judge evaluators or [Create a filter](online-evaluations-code.md#3-create-a-filter) for code evaluators.
+
+2. Filter on the first evaluator's feedback key. The filter matches on the key rather than the evaluator that produced it, so feedback from any source with that key triggers the second evaluator, including [user feedback](attach-user-feedback.md). Use a key that only the first evaluator produces.
+   * To trigger on every run the first evaluator scored, filter on the key alone:
+
+```text
+     eq(feedback_key, "correctness")
+```
+
+   * To trigger only when the score meets a condition, combine the key with a `feedback_score` comparison. For example, to trigger only when `correctness` is below `0.5`:
+
+```text
+     and(eq(feedback_key, "correctness"), lt(feedback_score, 0.5))
+```
+
+3. If the second evaluator reads the first score, [include extended stats](#include-extended-stats). LLM-as-a-judge evaluators require it, and code evaluators use it to read the score reliably. For more information, see [Read the first score](#read-the-first-score).
+
+4. Save the evaluator.
+
+The second evaluator picks up a run only after the first evaluator's score is attached to it, so the order in which the evaluators run does not matter. For the full filter syntax, see [Trace query syntax](trace-query-syntax.md).
+
+### Read the first score
+
+How the second evaluator reads the first evaluator's score depends on its type:
+
+* **LLM-as-a-judge evaluators**: [Include extended stats](#include-extended-stats), then map a prompt variable to `run.feedback_stats.<feedback_key>.avg`. For example, map `{{correctness_average}}` to `run.feedback_stats.correctness.avg`.
+* **Code evaluators**: Read the [feedback record](feedback-data-format.md) in `run["feedback"]` whose `key` is the first evaluator's feedback key, and use its `score`. `run["feedback"]` holds at most 100 feedback records across each batch of runs the evaluator processes, and the oldest records are dropped first, so the score can be missing when the batch carries many feedback records. To read the score reliably, include extended stats and read the average from `run["feedback_stats"]["<feedback_key>"]["avg"]`.
+
+The `avg` field averages every feedback record with that key on the run, so it equals the first evaluator's score only when the run has one record with that key. Another record with the same key, such as user feedback, changes the average.
 
 ## Delete an evaluator
 
@@ -186,8 +306,6 @@ You cannot delete an evaluator while it is attached to a trace container or data
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

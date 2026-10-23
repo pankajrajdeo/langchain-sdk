@@ -19,6 +19,7 @@ The most flexible way to make a dataset using the client is by creating examples
 Note that you can add arbitrary metadata to each example, such as a note or a source. The metadata is stored as a dictionary.
 
 > [!TIP]
+>
 > If you have many examples to create, consider using the `create_examples`/`createExamples` method to create multiple examples in a single request. If creating a single example, you can use the `create_example`/`createExample` method.
 
 **Python**
@@ -467,6 +468,7 @@ dataset = client.upload_dataframe(
 You can programmatically fetch datasets from LangSmith using the `list_datasets`/`listDatasets` method in the Python and TypeScript SDKs. Below are some common calls.
 
 > [!NOTE]
+>
 > Initialize the client before running the below code snippets.
 
 **Python**
@@ -607,6 +609,7 @@ var datasets = client.datasets().list(listParams);
 You can programmatically fetch examples from LangSmith using the `list_examples`/`listExamples` method in the Python and TypeScript SDKs. Below are some common calls.
 
 > [!NOTE]
+>
 > Initialize the client before running the below code snippets.
 
 **Python**
@@ -765,6 +768,7 @@ var examples = client.examples().list(listParams);
 Similar to how you can use the structured filter query language to [fetch runs](export-traces.md#use-filter-query-language), you can use it to fetch examples.
 
 > [!NOTE]
+>
 > This is currently only available in v0.1.83 and later of the Python SDK and v0.1.35 and later of the TypeScript SDK.
 >
 > Additionally, the structured filter query language is only supported for `metadata` fields.
@@ -946,8 +950,6 @@ client.examples().bulk().patchAll(bulkParamsBuilder.build());
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets-programmatically.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets-programmatically.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

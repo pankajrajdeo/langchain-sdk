@@ -14,89 +14,111 @@ LangChain has helped form the largest developer community in generative AI, and 
 
 ## Ways to contribute
 
-<details>
-<summary>Report bugs</summary>
-
-Found a bug? Please help us fix it by following these steps:
-
-### Search
-Check if the issue already exists in our GitHub Issues for the respective repo:
-
-Issues
-Issues
-Issues
-
-### Create issue
-If no issue exists, create a new one. When writing, be sure to follow the template provided and to include a [minimal, reproducible, example](https://stackoverflow.com/help/minimal-reproducible-example). Attach any relevant labels to the final issue once created. If a project maintainer is unable to reproduce the issue, it is unlikely to be addressed in a timely manner.
-
-### Wait
-A project maintainer will triage the issue and may ask for additional information. Please be patient as we manage a high volume of issues. Do not bump the issue unless you have new information to provide.
-
-If you are adding an issue, please try to keep it focused on a single topic. If two issues are related, or blocking, please [link them](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) rather than combining them. For example:
-
+> **Report bugs**
+>
+> Found a bug? Please help us fix it by following these steps:
+>
+> **1. Search**
+>
+> Check if the issue already exists in our GitHub Issues for the respective repo:
+>
+> > **[LangChain](https://github.com/langchain-ai/langchain/issues)**
+> >
+> > Issues
+>
+> > **[LangGraph](https://github.com/langchain-ai/langgraph/issues)**
+> >
+> > Issues
+>
+> > **[Deep Agents](https://github.com/langchain-ai/deepagents/issues)**
+> >
+> > Issues
+>
+> **2. Create issue**
+>
+> If no issue exists, create a new one. When writing, be sure to follow the template provided and to include a [minimal, reproducible, example](https://stackoverflow.com/help/minimal-reproducible-example). Attach any relevant labels to the final issue once created. If a project maintainer is unable to reproduce the issue, it is unlikely to be addressed in a timely manner.
+>
+> **3. Wait**
+>
+> A project maintainer will triage the issue and may ask for additional information. Please be patient as we manage a high volume of issues. Do not bump the issue unless you have new information to provide.
+>
+> If you are adding an issue, please try to keep it focused on a single topic. If two issues are related, or blocking, please [link them](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) rather than combining them. For example:
+>
 ```text
-This issue is blocked by #123 and related to #456.
+> This issue is blocked by #123 and related to #456.
 ```
 
-</details>
+> **Suggest features**
+>
+> Have an idea for a new feature or enhancement?
+>
+> **1. Search**
+>
+> Search the issues for the respective repository for existing feature requests:
+>
+> > **[LangChain](https://github.com/langchain-ai/langchain/issues?q=state%3Aopen%20label%3A%22feature%20request%22)**
+> >
+> > Issues
+>
+> > **[LangGraph](https://github.com/langchain-ai/langgraph/issues?q=state%3Aopen%20label%3Aenhancement)**
+> >
+> > Issues
+>
+> > **[Deep Agents](https://github.com/langchain-ai/deepagents/issues?q=is%3Aissue%20state%3Aopen%20label%3Afeature)**
+> >
+> > Issues
+>
+> **2. Discuss**
+>
+> If no requests exist, start a new discussion under the [relevant category](https://forum.langchain.com/c/oss-product-help-lc-and-lg/16) so that project maintainers and the community can provide feedback.
+>
+> **3. Describe**
+>
+> Be sure to describe the use case and why it would be valuable to others. If possible, provide examples or mockups where applicable. Outline test cases that should pass.
 
-<details>
-<summary>Suggest features</summary>
+> **Improve documentation**
+>
+> Documentation improvements are welcome! We strive to keep our docs clear and comprehensive, and your perspective can make a big difference.
+>
+> > **[How to propose changes to the documentation](contributing/documentation.md)**
+> >
+> > Guide
 
-Have an idea for a new feature or enhancement?
+> **Contribute code**
+>
+> With a large userbase, it can be hard for our small team to keep up with all the feature requests and bug fixes. If you have the skills and time, we would love your help!
+>
+> > **[How to make your first Pull Request](contributing/code.md)**
+> >
+> > Guide
+>
+> If you start working on an issue, please assign it to yourself or ask a maintainer to do so. This helps avoid duplicate work.
+>
+> If you are looking for something to work on, check out the issue labeled "help wanted" in our repos:
+>
+> > **[LangChain](https://github.com/langchain-ai/langchain/labels?q=help+wanted)**
+> >
+> > Labels
+>
+> > **[LangGraph](https://github.com/langchain-ai/langgraph/labels?q=help+wanted)**
+> >
+> > Labels
+>
+> > **[Deep Agents](https://github.com/langchain-ai/deepagents/labels?q=help+wanted)**
+> >
+> > Labels
 
-### Search
-Search the issues for the respective repository for existing feature requests:
-
-Issues
-Issues
-Issues
-
-### Discuss
-If no requests exist, start a new discussion under the [relevant category](https://forum.langchain.com/c/oss-product-help-lc-and-lg/16) so that project maintainers and the community can provide feedback.
-
-### Describe
-Be sure to describe the use case and why it would be valuable to others. If possible, provide examples or mockups where applicable. Outline test cases that should pass.
-
-</details>
-
-<details>
-<summary>Improve documentation</summary>
-
-Documentation improvements are welcome! We strive to keep our docs clear and comprehensive, and your perspective can make a big difference.
-
-Guide
-
-</details>
-
-<details>
-<summary>Contribute code</summary>
-
-With a large userbase, it can be hard for our small team to keep up with all the feature requests and bug fixes. If you have the skills and time, we would love your help!
-
-Guide
-
-If you start working on an issue, please assign it to yourself or ask a maintainer to do so. This helps avoid duplicate work.
-
-If you are looking for something to work on, check out the issue labeled "help wanted" in our repos:
-
-Labels
-Labels
-Labels
-
-</details>
-
-<details>
-<summary>Build a new integration</summary>
-
-Anyone can build and publish their own LangChain integration package. New integrations are not accepted as PRs to `langchain-ai` repos — they must be published independently to PyPI or npm.
-
-Guide to building a LangChain integration
-Guide to building a sandbox integration
-
-</details>
-
-<a id="pull-request-requirements" />
+> **Build a new integration**
+>
+> Anyone can build and publish their own LangChain integration package. New integrations are not accepted as PRs to `langchain-ai` repos — they must be published independently to PyPI or npm.
+>
+> > **[LangChain](contributing/integrations-langchain.md)**
+> >
+> > Guide to building a LangChain integration
+>
+> > **[Deep Agents sandboxes](contributing/integrations-langchain.md)**
+> >
+> > Guide to building a sandbox integration
 
 <a id="add-a-new-integration"></a>
 
@@ -105,11 +127,13 @@ Guide to building a sandbox integration
 You can submit pull requests for typos and small fixes directly, without an issue, prior maintainer approval, or assignment.
 
 > [!WARNING]
+>
 > **Larger changes, such as new tutorials, guides, or conceptual pages require a linked issue and maintainer approval before you open a pull request.** Wait until a maintainer has approved your approach and assigned the issue to you. Larger PRs opened before approval and assignment may be closed automatically and are not reviewed until assignment.
 
 All pull requests should demonstrate meaningful effort and contextual understanding. **If the effort required to create a pull request is less than the effort required for maintainers to review it, that contribution should not be submitted.** Low-effort drive-by contributions—regardless of how they are produced—often miss the mark in terms of contextual relevance, accuracy, and quality. Mass automated contributions represent a denial-of-service attack on our human effort.
 
 > [!WARNING]
+>
 > **We prioritize issues motivated by actual usage.** Issue boards are a mechanism for allocating maintainer attention. They are not a comprehensive catalog of every statically-discoverable defect. Please avoid submitting issues discovered by (AI) code-scanning without first personally validating them and grounding them in real usage of LangChain's public APIs. If maintainers suspect an issue has not been validated it may be closed without review, and the authoring account may be blocked.
 
 The following requirements must be met for all external pull requests:
@@ -132,8 +156,6 @@ You may use AI assistants to help draft or revise contributions when you **verif
 
 ***
 
-> [!NOTE]
-> [Connect these docs](use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

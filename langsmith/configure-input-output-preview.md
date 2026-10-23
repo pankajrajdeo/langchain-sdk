@@ -34,9 +34,7 @@ When you select a trace name, LangSmith loads a successful trace example and ren
 * Item counts for arrays (e.g., (3) indicating 3 items).
 * Preview values for strings and numbers displayed inline.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/PK5r912I08t0EBD8/langsmith/images/configure-preview.png?fit=max&auto=format&n=PK5r912I08t0EBD8&q=85&s=0fbc9a7b69a70c39daaf477d93b7623a" alt="Configure Input and Output previews side panel showing the tree view of trace data structure" width="586" height="651" data-path="langsmith/images/configure-preview.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/PK5r912I08t0EBD8/langsmith/images/configure-preview-dark.png?fit=max&auto=format&n=PK5r912I08t0EBD8&q=85&s=2e3c8eec7ae6ddb32c94cf3450805d9b" alt="Configure Input and Output previews side panel showing the tree view of trace data structure" width="583" height="582" data-path="langsmith/images/configure-preview-dark.png" />
+![Configure Input and Output previews side panel showing the tree view of trace data structure](https://mintcdn.com/langchain-5e9cc07a/PK5r912I08t0EBD8/langsmith/images/configure-preview.png?fit=max\&auto=format\&n=PK5r912I08t0EBD8\&q=85\&s=0fbc9a7b69a70c39daaf477d93b7623a)
 
 ### Set the path
 
@@ -102,6 +100,7 @@ Or, use negative indexing for the last message:
 4. Result: `messages[-1].content` (always shows the last message).
 
 > [!NOTE]
+>
 > If you see `"No paths available"` in the tree:
 >
 > * Ensure you have at least one successful trace with the selected trace name in the last 7 days.
@@ -116,8 +115,6 @@ Or, use negative indexing for the last message:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-input-output-preview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-input-output-preview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

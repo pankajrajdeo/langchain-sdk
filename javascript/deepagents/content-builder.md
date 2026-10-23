@@ -46,13 +46,15 @@ Node.js 18 or later.
 
 ## Setup
 
-### Create project directory
+**1. Create project directory**
+
 ```bash
 mkdir content-builder-agent
 cd content-builder-agent
 ```
 
-### Install dependencies
+**2. Install dependencies**
+
 **npm**
 
 ```bash
@@ -69,7 +71,8 @@ Add `tsx` to run `content_writer.ts`. The `--input-type=module` flag applies onl
 
 Install `@langchain/anthropic` so LangChain can load the default Claude model that `createDeepAgent` uses.
 
-### Set API keys
+**3. Set API keys**
+
 ```bash
 export ANTHROPIC_API_KEY="your_anthropic_api_key"
 export GOOGLE_API_KEY="your_google_api_key"
@@ -81,7 +84,8 @@ export LANGSMITH_API_KEY="your_langsmith_api_key"     # Optional
 
 The example keeps behavior in three kinds of files: memory, skills, and subagent definitions.
 
-### Add AGENTS.md
+**1. Add AGENTS.md**
+
 Create `AGENTS.md` in the project root.
 When you later create the agent and specify this file as part of the [memory](memory.md) parameter, it gets loaded this into the system prompt so brand voice and research expectations apply to every run.
 
@@ -132,7 +136,8 @@ Before writing on any topic:
 
 To make this agent comply with your own tone, pillars, and formatting rules, update the text in `AGENTS.md`.
 
-### Add skills
+**2. Add skills**
+
 Create a `skills/` directory. Each skill is a folder containing a `SKILL.md` file with YAML frontmatter (`name`, `description`) and instructions for the skill.
 
 Create `skills/blog-post/SKILL.md` and copy the following text into it which contains information on crating long-form posts, optimizing content for SEO, and generating cover images.
@@ -472,7 +477,8 @@ When you later create the agent and specify the skills folder(s), then the front
 
 Create `content_writer.ts` in the project root. The following sections belong in one file, in order.
 
-### Add tools
+**1. Add tools**
+
 The researcher uses Tavily search. Blog and social workflows use the Google Generative AI SDK for image generation.
 
 ```ts
@@ -584,7 +590,8 @@ const generateSocialImage = tool(
 );
 ```
 
-### Create the agent
+**2. Create the agent**
+
 When creating the deep agent with [createDeepAgent](https://reference.langchain.com/javascript/deepagents/agent/createDeepAgent), pass memory paths, the skills directory, image tools, an inline subagent definition, and a [FilesystemBackend](backends.md) rooted at the example directory so paths like `./AGENTS.md` and `./skills/` resolve correctly.
 
 **Google**
@@ -769,7 +776,8 @@ function createContentWriter() {
 }
 ```
 
-### Add an entry point
+**3. Add an entry point**
+
 ```ts
 const task =
   process.argv.slice(2).join(" ") ||
@@ -790,6 +798,7 @@ for (const msg of messages) {
 ## Run the agent
 
 > [!WARNING]
+>
 > The filesystem backend can read, write, and delete files under `root_dir`. Run only in a dedicated directory and review generated content before publishing.
 
 From the project directory:
@@ -834,8 +843,6 @@ Browse the complete [content-builder-agent example](https://github.com/langchain
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/content-builder.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/content-builder.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

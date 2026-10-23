@@ -23,6 +23,7 @@ These compose in a fixed order: when a node attempt raises any exception (includ
 For stopping a run cleanly at a superstep boundary and resuming later, see [Graceful shutdown](#graceful-shutdown).
 
 > [!NOTE]
+>
 > Per-node timeouts and node-level error handlers require `langgraph>=1.2`.
 
 ```mermaid
@@ -153,6 +154,7 @@ builder.add_edge("my_node", END)
 ## Timeouts
 
 > [!NOTE]
+>
 > Requires `langgraph>=1.2`.
 
 The `timeout=` parameter on [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) caps how long a single node attempt may run. Pass a number (seconds), a `timedelta`, or a [`TimeoutPolicy`](https://reference.langchain.com/python/langgraph/types/TimeoutPolicy) for separate run and idle limits:
@@ -174,6 +176,7 @@ builder.add_node(
 ```
 
 > [!WARNING]
+>
 > Node timeouts only apply to **async** nodes. Sync nodes with a `timeout` are rejected at compile time. To wrap blocking I/O, use `asyncio.to_thread` inside an async node.
 
 ### Run timeout
@@ -303,6 +306,7 @@ If the timeout is omitted on the `Send`, the target node's timeout (set at [`add
 ## Error handling
 
 > [!NOTE]
+>
 > Requires `langgraph>=1.2`.
 
 An error handler runs after a node fails and all retries are exhausted. It receives the current state and can update it or route to a different node using [`Command`](https://reference.langchain.com/python/langgraph/types/Command). This is useful for compensation flows (Saga patterns) where you want to recover gracefully rather than abort the entire graph.
@@ -416,11 +420,13 @@ graph = (
 ### Resume-safe failures
 
 > [!NOTE]
+>
 > Failure provenance is checkpointed. If the graph is interrupted or the process crashes after a node fails but before the handler completes, the handler sees the same `NodeError` context when the graph resumes from its checkpoint.
 
 ### Behavior with `interrupt()`
 
 > [!WARNING]
+>
 > `interrupt()` raised inside a node is **not** routed to the error handler. Interrupts use the `GraphBubbleUp` mechanism to pause graph execution for human-in-the-loop workflows, bypassing both retry policies and error handlers. The graph pauses as usual.
 
 ### Subgraph failures
@@ -430,6 +436,7 @@ If a node wraps a subgraph and the subgraph raises an unhandled exception, that 
 ## Graph defaults
 
 > [!NOTE]
+>
 > Requires `langgraph>=1.2`.
 
 Instead of repeating the same `retry_policy=`, `error_handler=`, `timeout=`, or `cache_policy=` on every `add_node` call, use [`set_node_defaults`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/set_node_defaults) to configure graph-wide defaults in one place:
@@ -587,6 +594,7 @@ The behavior is identical to `add_node`: `NodeTimeoutError` is raised on timeout
 Cooperative shutdown lets you stop an in-flight graph run after the current superstep completes and save a resumable checkpoint. This is useful for handling SIGTERM signals or any external supervisor that needs to reclaim resources without losing work.
 
 > [!NOTE]
+>
 > Requires `langgraph>=1.2`.
 
 Create a [`RunControl`](https://reference.langchain.com/python/langgraph/runtime/RunControl) and pass it as `control=` to `invoke` or `stream`. Call `request_drain()` from any thread to signal that the run should stop:
@@ -662,6 +670,7 @@ except GraphDrained as e:
 ```
 
 > [!NOTE]
+>
 > `request_drain()` does not cancel running asyncio tasks or kill threads. For a hard upper bound, pair drain with a graceful timeout and task cancellation.
 
 ## Limitations
@@ -673,8 +682,6 @@ except GraphDrained as e:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

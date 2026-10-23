@@ -164,6 +164,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -172,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v2/runs/{run_id}/share:
     post:
@@ -248,6 +251,9 @@ components:
   schemas:
     share.CreateShareTokenRequestBody:
       type: object
+      required:
+        - session_id
+        - trace_id
       properties:
         session_id:
           description: session_id is the tracing project UUID containing the trace.

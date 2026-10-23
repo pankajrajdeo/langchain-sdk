@@ -162,6 +162,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -170,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/prompt-webhooks:
     get:
@@ -201,12 +204,17 @@ components:
           minLength: 1
           format: uri
           title: Url
+          description: URL that receives a POST request with the prompt event payload.
         headers:
           anyOf:
             - additionalProperties: true
               type: object
             - type: 'null'
           title: Headers
+          description: >-
+            HTTP headers sent with each request, for example an Authorization
+            header. Values are stored encrypted and are masked in responses to
+            callers who cannot update prompts.
         include_prompts:
           anyOf:
             - items:
@@ -215,6 +223,9 @@ components:
               type: array
             - type: 'null'
           title: Include Prompts
+          description: >-
+            IDs of the prompts whose events fire the webhook. When empty, events
+            from every prompt in the workspace fire it.
         exclude_prompts:
           anyOf:
             - items:
@@ -223,11 +234,15 @@ components:
               type: array
             - type: 'null'
           title: Exclude Prompts
+          description: IDs of prompts whose events never fire the webhook.
         triggers:
           items:
             $ref: '#/components/schemas/EPromptWebhookTrigger'
           type: array
           title: Triggers
+          description: >-
+            Events that fire the webhook: commit (a new prompt commit),
+            tag:create, and tag:update. A webhook with no triggers never fires.
         id:
           type: string
           format: uuid

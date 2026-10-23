@@ -11,6 +11,7 @@ tags: [docs, integrations, llms, google_generative_ai]
 > Get started using legacy Gemini LLMs in LangChain.
 
 > [!WARNING]
+>
 > **You are currently on a page documenting the use of Google models as text completion models. Many popular Google models are [chat completion models](../../langchain/models.md).**
 >
 > You may be looking for [this page instead](../chat/google_generative_ai.md).
@@ -178,8 +179,6 @@ For an enumeration of the categories and thresholds available, see Google's [saf
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

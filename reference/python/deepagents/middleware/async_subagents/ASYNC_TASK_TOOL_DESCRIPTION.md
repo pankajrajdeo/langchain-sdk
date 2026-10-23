@@ -15,9 +15,9 @@ tags: [reference, deepagents, middleware, async_subagents, async_task_tool_descr
 ## Signature
 
 ```python
-ASYNC_TASK_TOOL_DESCRIPTION = 'Start an async subagent on a remote server. The subagent runs in the background and returns a task ID immediately.\n\nAvailable async agent types:\n{available_agents}\n\n## Usage notes:\n1. This tool launches a background task and returns immediately with a task ID. Report the task ID to the user and stop — do NOT immediately check status.\n2. Use `check_async_task` only when the user asks for a status update or result.\n3. Use `update_async_task` to send new instructions to a running task.\n4. Multiple async subagents can run concurrently — launch several and let them run in the background.\n5. The subagent runs on a remote server, so it has its own tools and capabilities.'
+ASYNC_TASK_TOOL_DESCRIPTION = "Start an async subagent on a remote server. The subagent runs in the background and returns a task ID immediately.\n\nAvailable async agent types:\n{available_agents}\n\n## Usage notes:\n1. This tool launches a background task and returns immediately with a task ID. Report the task ID to the user and stop — do NOT immediately check status.\n2. You'll usually be told when a task finishes, fails or needs input, so don't check just to see if it's done; use `check_async_task` when the user asks or a notification says to.\n3. Use `update_async_task` to send new instructions to a running task.\n4. Multiple async subagents can run concurrently — launch several and let them run in the background.\n5. The subagent runs on a remote server, so it has its own tools and capabilities.\n6. A task with status `waiting` is waiting for a human (an approval or an answer). The user answers it directly; you can't answer or approve it for them. Keep working, and tell the user it's waiting if they ask."
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/4394bcd00b8eb46e7c423939643a0dfcfb5d8773/libs/deepagents/deepagents/middleware/async_subagents.py#L173)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/async_subagents.py#L290)

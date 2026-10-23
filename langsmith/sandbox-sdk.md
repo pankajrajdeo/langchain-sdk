@@ -18,10 +18,10 @@ The [LangSmith SDK](reference.md) provides a programmatic interface to create an
 
 ```bash
 # uv
-uv add "langsmith[sandbox]"
+uv add langsmith
 
 # pip
-pip install "langsmith[sandbox]"
+pip install langsmith
 ```
 
 **TypeScript**
@@ -32,7 +32,7 @@ npm install langsmith
 yarn add langsmith
 ```
 
-The `[sandbox]` extra for Python installs `websockets`, which enables real-time streaming and `timeout=0`. Without it, `run()` falls back to HTTP automatically. For TypeScript, install the optional `ws` package for WebSocket streaming:
+The Python SDK includes `websockets`, which enables real-time streaming and `timeout=0`. For TypeScript, install the optional `ws` package for WebSocket streaming:
 
 ```bash
 npm install ws
@@ -364,6 +364,7 @@ Omit the expiry for a link that never expires. Do not modify the file afterwards
 Mount a [Context Hub](use-the-context-hub.md) repo to give sandbox code filesystem access to your agents and skills. The repo's latest commit tree is mirrored into the mount path and kept in sync for the sandbox's lifetime, so a new commit shows up in the running sandbox without a restart.
 
 > [!WARNING]
+>
 > Context Hub mounts are **read-only**. The sync is one-way, from the repo into the sandbox: files an agent writes under the mount path are never pushed back to the repo, and the next sync overwrites them. Write sandbox output to a path outside the mount, and [push it with the SDK](manage-contexts-sdk.md) if it belongs in the repo.
 
 Pass the mount through `mount_config`. The API key that creates the sandbox must have access to the repo, otherwise creation fails with a `403`.
@@ -462,6 +463,7 @@ const sb = await client.createSandbox({
 Sandboxes burst to twice their requested CPU when the host has spare capacity. Resizing an existing sandbox with `update_sandbox` / `updateSandbox` takes effect at its next start, and a resize enforces only the 64 GiB ceiling rather than the per-vCPU ratio.
 
 > [!NOTE]
+>
 > Free-form `labels` (up to 128 per sandbox, 256 bytes per key and 4096 bytes per value) can be set through the REST API on create. Sandboxes inherit their snapshot's labels unless overridden. The `langsmith.sandbox` clients do not expose this field yet.
 
 ## Sandbox lifetime and retention
@@ -735,6 +737,7 @@ try {
 Inside the sandbox, any LangSmith-instrumented code (`@traceable`, LangChain, LangGraph) automatically picks up the tracing configuration from the injected environment variables.
 
 > [!WARNING]
+>
 > Always call `flush()` before the sandbox process exits—`langsmith.Client().flush()` in Python or `await new Client().flush()` in TypeScript. Without it, traces may be lost because the container is destroyed when the command finishes.
 
 ## Error handling
@@ -793,12 +796,11 @@ try {
 ```
 
 > [!NOTE]
-> For more details, see the sandbox SDK reference on GitHub for [Python](https://github.com/langchain-ai/langsmith-sdk/tree/main/python/langsmith/sandbox) or [TypeScript](https://github.com/langchain-ai/langsmith-sdk/tree/main/js/src/sandbox).
+>
+> For more details, see the sandbox SDK reference on GitHub for [Python](https://github.com/langchain-ai/langsmith-python/tree/main/src/langsmith/sandbox) or [TypeScript](https://github.com/langchain-ai/langsmith-javascript/tree/main/src/lib/sandbox).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -26,6 +26,7 @@ atrace_as_chain_group(
     *,
     inputs: dict[str, Any] | None = None,
     project_name: str | None = None,
+    address: AgentAddress | None = None,
     example_id: str | UUID | None = None,
     run_id: UUID | None = None,
     tags: list[str] | None = None,
@@ -60,6 +61,7 @@ async with atrace_as_chain_group(
 | `callback_manager` | `AsyncCallbackManager \| None` | No | The async callback manager to use, which manages tracing and other callback behavior. (default: `None`) |
 | `inputs` | `dict[str, Any] \| None` | No | The inputs to the chain group. (default: `None`) |
 | `project_name` | `str \| None` | No | The name of the project. (default: `None`) |
+| `address` | `AgentAddress \| None` | No | The agent address to send traces to instead of a project.  !!! warning "Beta"     Agent addressing must be enabled for the LangSmith workspace. (default: `None`) |
 | `example_id` | `str \| UUID \| None` | No | The ID of the example. (default: `None`) |
 | `run_id` | `UUID \| None` | No | The ID of the run. (default: `None`) |
 | `tags` | `list[str] \| None` | No | The inheritable tags to apply to all runs. (default: `None`) |
@@ -67,4 +69,4 @@ async with atrace_as_chain_group(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/04ac76c07ec173a44e3e57de54861d0b637e3299/libs/core/langchain_core/callbacks/manager.py#L135)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/bdf0f53ed0aec3c9ae371a549e1a4d2ee4e9f021/libs/core/langchain_core/callbacks/manager.py#L141)

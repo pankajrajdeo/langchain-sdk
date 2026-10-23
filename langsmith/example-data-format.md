@@ -9,6 +9,7 @@ tags: [docs, langsmith, example-data-format]
 # Example data format
 
 > [!TIP]
+>
 > Before diving into this content, it might be helpful to read the following:
 >
 > * [Conceptual guide on evaluation](evaluation-concepts.md)
@@ -31,12 +32,11 @@ LangSmith stores examples in datasets as follows:
 To learn more about how examples are used in evaluation, read our how-to guide on [evaluating LLM applications](evaluate-llm-application.md).
 
 > [!TIP]
+>
 > The `outputs` field can also hold [assertions](assertions.md), free-form claims a reviewer wrote about a correct answer. Offline evaluators read them from `reference_outputs["assertions"]`.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/example-data-format.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/example-data-format.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

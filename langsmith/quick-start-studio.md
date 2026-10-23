@@ -54,9 +54,10 @@ To test your application locally using Studio:
    npx @langchain/langgraph-cli dev
 ```
 
-> [!WARNING]
->    **Browser Compatibility**
->    Safari blocks `localhost` connections to Studio. To work around this, run the command with `--tunnel` to access Studio via a secure tunnel. You'll need to manually add the tunnel URL to allowed origins by clicking **Connect to a local server** in the Studio UI. See the [troubleshooting guide](troubleshooting-studio.md#safari-connection-issues) for steps.
+   > [!WARNING]
+   >
+   > **Browser Compatibility**
+   > Safari blocks `localhost` connections to Studio. To work around this, run the command with `--tunnel` to access Studio via a secure tunnel. You'll need to manually add the tunnel URL to allowed origins by clicking **Connect to a local server** in the Studio UI. See the [troubleshooting guide](troubleshooting-studio.md#safari-connection-issues) for steps.
 
    This will start the Agent Server locally, running in-memory. The server will run in watch mode, listening for and automatically restarting on code changes. Read this [reference](cli.md#dev) to learn about all the options for starting the API server.
 
@@ -105,7 +106,8 @@ langgraph dev --debug-port 5678
 
 Then attach your preferred debugger:
 
-#### VS Code
+**VS Code**
+
 Add this configuration to `launch.json`:
 
 ```json
@@ -120,7 +122,8 @@ Add this configuration to `launch.json`:
 }
 ```
 
-#### PyCharm
+**PyCharm**
+
 1. Go to Run > Edit Configurations
 2. Click + and select "Python Debug Server"
 3. Set IDE host name: `localhost`
@@ -128,6 +131,7 @@ Add this configuration to `launch.json`:
 5. Click "OK" and start debugging
 
 > [!TIP]
+>
 > For issues getting started, refer to the [troubleshooting guide](troubleshooting-studio.md).
 
 ## Next steps
@@ -143,8 +147,6 @@ For more information on how to run Studio, refer to the following guides:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/quick-start-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/quick-start-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

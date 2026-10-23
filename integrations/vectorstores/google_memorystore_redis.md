@@ -110,6 +110,7 @@ Text needs processing and numerical representation before interacting with a vec
 * Text Splitting: The CharacterTextSplitter breaks the text into smaller chunks for embedding models.
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -131,6 +132,7 @@ After text preparation and embedding generation, the following methods insert th
 This approach combines embedding creation and insertion into a single step using the from\_documents classmethod:
 
 > [!WARNING]
+>
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ```python
@@ -239,8 +241,6 @@ RedisVectorStore.drop_index(client=redis_client, index_name="my_vector_index")
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_memorystore_redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_memorystore_redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

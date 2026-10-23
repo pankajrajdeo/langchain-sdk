@@ -15,6 +15,7 @@ This notebook covers how to get started with the `Chroma` vector store.
 > [Chroma](https://docs.trychroma.com/docs/overview/getting-started) is an AI-native open-source vector database focused on developer productivity and happiness. Chroma is licensed under Apache 2.0. View the full docs of `Chroma` at [this page](https://docs.trychroma.com/reference/python/collection), and find the API reference for the LangChain integration at [this page](https://reference.langchain.com/python/langchain-chroma/vectorstores/Chroma).
 
 > [!NOTE]
+>
 > **Chroma Cloud**
 >
 > Chroma Cloud powers serverless vector and full-text search. It's extremely fast, cost-effective, scalable and painless. Create a DB and try it out in under 30 seconds with \$5 of free credits.
@@ -53,8 +54,6 @@ os.environ["LANGSMITH_TRACING"] = "true"
 ### Basic initialization
 
 The following example shows setting up an embedding function for Chroma, followed by configuring local persistence for storing vector data.
-
-> **Interactive content:** [View this section in the original documentation](chroma.md).
 
 ```python
 # | output: false
@@ -381,8 +380,6 @@ For detailed documentation of all `Chroma` vector store features and configurati
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/chroma.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/chroma.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

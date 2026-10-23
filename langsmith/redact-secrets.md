@@ -13,6 +13,7 @@ tags: [docs, langsmith, redact-secrets]
 When your application handles API keys, tokens, or other credentials, those values can appear in LangSmith traces if they are passed as part of inputs or outputs. Use the LangSmith SDK's built-in anonymizer to redact secrets before they are sent to the backend.
 
 > [!NOTE]
+>
 > This page covers redacting secrets (API keys, tokens, credentials) from trace data via the SDK. For redacting personally identifiable information (PII) such as emails, names, or SSNs, see [Prevent logging of sensitive data in traces](mask-inputs-outputs.md). To redact secrets at the LLM Gateway layer, see [Data policy](llm-gateway-data-policy.md).
 >
 > The coding agent tracing plugins for [Claude Code](trace-claude-code.md#secret-redaction), [OpenAI Codex](trace-with-codex.md#secret-redaction), and [Cursor](trace-with-cursor.md#secret-redaction) apply the preset below by default. No SDK code is required for those.
@@ -22,6 +23,7 @@ When your application handles API keys, tokens, or other credentials, those valu
 The SDK ships a curated rule set for common credential formats. Pass `create_secret_anonymizer` to the [Client](https://reference.langchain.com/python/langsmith/client/Client) constructor and it redacts detected secrets from run inputs, outputs, errors, and metadata before they are uploaded. Use it when you want coverage of well-known key formats without writing patterns yourself.
 
 > [!NOTE]
+>
 > The `create_secret_anonymizer` / `createSecretAnonymizer` function requires:
 >
 > * Python SDK: 0.9.0 or later
@@ -124,6 +126,7 @@ The preset favors precision over exhaustive coverage, which has consequences wor
 ## Write custom patterns
 
 > [!NOTE]
+>
 > The `create_anonymizer` / `createAnonymizer` function requires:
 >
 > * Python SDK: 0.1.81 or later
@@ -262,8 +265,6 @@ For more options, including hiding all inputs and outputs, hiding metadata, func
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/redact-secrets.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/redact-secrets.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

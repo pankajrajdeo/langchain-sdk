@@ -16,8 +16,6 @@ This will help you get started with OpenAI embedding models using LangChain. For
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](openai.md).
-
 ## Setup
 
 To access OpenAI embedding models you'll need to create an OpenAI account, get an API key, and install the `langchain-openai` integration package.
@@ -40,7 +38,7 @@ If you're routing requests through a proxy or service emulator, you can set the 
 2. `OPENAI_API_BASE` — read by LangChain at init.
 3. `OPENAI_BASE_URL` — read by the underlying `openai` SDK client.
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -72,6 +70,7 @@ embeddings = OpenAIEmbeddings(
 ```
 
 > [!NOTE]
+>
 > **Azure OpenAI v1 API support**
 >
 > As of `langchain-openai>=1.0.1`, `OpenAIEmbeddings` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1), including support for Microsoft Entra ID authentication. See the [Using with Azure OpenAI](#using-with-azure-openai) section below for details.
@@ -147,6 +146,7 @@ for vector in two_vectors:
 ## Using with Azure OpenAI
 
 > [!NOTE]
+>
 > **Azure OpenAI v1 API support**
 >
 > As of `langchain-openai>=1.0.1`, `OpenAIEmbeddings` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1). This provides a unified way to use OpenAI embeddings whether hosted on OpenAI or Azure.
@@ -195,13 +195,14 @@ vectors = embeddings.embed_documents(["Hello", "World"])
 ```
 
 > [!TIP]
+>
 > **Installation requirements**
 >
 > To use Microsoft Entra ID authentication, install the Azure Identity library:
 >
-> ```bash
+```bash
 > pip install azure-identity
-> ```
+```
 
 You can also pass a token provider callable to the `api_key` parameter when using
 asynchronous functions. You must import DefaultAzureCredential from `azure.identity.aio`:
@@ -223,6 +224,7 @@ vectors = await embeddings_async.aembed_documents(["Hello", "World"])
 ```
 
 > [!NOTE]
+>
 > When using an async callable for the API key, you must use async methods (`aembed_query`, `aembed_documents`). Sync methods will raise an error.
 
 ***
@@ -233,8 +235,6 @@ For detailed documentation on `OpenAIEmbeddings` features and configuration opti
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

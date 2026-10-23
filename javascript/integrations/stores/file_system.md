@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, stores, file_system]
 > Integrate with the LocalFileStore store using LangChain JavaScript.
 
 > [!TIP]
+>
 > **Compatibility**: Only available on Node.js.
 
 This will help you get started with [`LocalFileStore`](../stores.md). For detailed documentation of all `LocalFileStore` features and configurations head to the [API reference](https://reference.langchain.com/javascript/langchain/storage/file_system/LocalFileStore).
@@ -22,16 +23,18 @@ Each key value pair has its own file nested inside the directory passed to the `
 The file name is the key and inside contains the value of the key.
 
 > [!NOTE]
+>
 > **The path passed to the `.fromPath` must be a directory, not a file.**
 
 > [!WARNING]
+>
 > **This file store can alter any text file in the provided directory and any subfolders.**
 >
 > Make sure that the path you specify when initializing the store is free of other files.
 
 ### Integration details
 
-| Class | Package | Local | [PY support](https://python.langchain.com/docs/integrations/stores/file_system/) | Downloads | Version |
+| Class | Package | Local | [PY support](../../../integrations/stores/file_system.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`LocalFileStore`](https://reference.langchain.com/javascript/langchain/storage/file_system/LocalFileStore) | [langchain](https://www.npmjs.com/package/langchain) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/langchain?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/langchain?style=flat-square\&label=%20&) |
 
@@ -169,8 +172,6 @@ For detailed documentation of all `LocalFileStore` features and configurations, 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/stores/file_system.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/stores/file_system.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

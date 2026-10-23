@@ -357,6 +357,7 @@ The steps of constructing a knowledge graph from the text are:
 Besides all the imports in the [setup section](#setting-up), import `LLMGraphTransformer` and [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) which will be used to extract structured information from text.
 
 > [!WARNING]
+>
 > The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
 
 ```python
@@ -415,6 +416,7 @@ graph.add_graph_documents(graph_documents)
 ```
 
 > [!NOTE]
+>
 > The graph construction process is non-deterministic, since LLM which is used to generate nodes and relationships from unstructured data in non-deterministic.
 
 ### Additional options
@@ -486,8 +488,6 @@ Alfred Russel Wallace
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/memgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/memgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -9,6 +9,7 @@ tags: [docs, javascript, langchain, errors, model_not_found]
 # MODEL_NOT_FOUND
 
 > [!NOTE]
+>
 > Currently only used in `langchainjs` (JavaScript/TypeScript).
 
 The model name you have specified is not acknowledged by your provider.
@@ -24,8 +25,6 @@ The error typically stems from either a typo in the model name string itself or 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_NOT_FOUND.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_NOT_FOUND.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -88,7 +88,7 @@ def percentage_change(start: float, end: float) -> float:
     return ((end - start) / start) * 100
 
 async def main():
-    model_client = OpenAIChatCompletionClient(model="gpt-4o")
+    model_client = OpenAIChatCompletionClient(model="gpt-6-luna")
     tracer = trace.get_tracer("autogen-demo")
 
     with tracer.start_as_current_span("run_team"):
@@ -177,8 +177,6 @@ HTTPXClientInstrumentor().instrument()
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-autogen.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-autogen.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

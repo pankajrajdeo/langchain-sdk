@@ -11,6 +11,7 @@ tags: [docs, langchain, mcp, connections]
 > Connection lifecycle, multiple servers, deployment scaling, protocol eras, and caching for MCP in LangChain.
 
 > [!NOTE]
+>
 > The `langchain.mcp` namespace requires `langchain[mcp]>=1.4.0` and is in beta. The API may change.
 
 [`MCPAdapter`](https://reference.langchain.com/python/langchain/mcp/adapter/MCPAdapter) opens an MCP connection, discovers tools, and returns LangChain tools your agent can call. How you pass servers in, and how long you keep the adapter open, depends on the shape of your app. The connection itself is FastMCP's; this page covers the LangChain patterns and links out to FastMCP for transport and client details.
@@ -140,7 +141,10 @@ async def make_graph():
 ```
 
 > [!NOTE]
+>
 > In a `langgraph dev` graph factory, the annotated parameter types and the return type must be importable at runtime, not only under `TYPE_CHECKING`. `langgraph-api` classifies the factory with `typing.get_type_hints()`; if an annotation cannot resolve, it injects a config dict instead of the runtime.
+
+On [Agent Server](../../langsmith/agent-server-overview.md), register that factory in `langgraph.json` instead of exporting a static compiled graph. Tools from `list_tools()` stay callable after the adapter context exits, so returning the agent after discovery is enough for most MCP setups. Use a [context manager factory](../../langsmith/graph-rebuild.md#context-manager-factory) when you need teardown around the run, or when you skip expensive MCP work on schema and state reads with `execution_runtime`.
 
 For a fully worked deployment example, including per-user authentication that mints a token for each caller, see [Authentication](auth.md#per-user-authentication).
 
@@ -235,14 +239,14 @@ For the full negotiation rules, see [Protocol negotiation](https://gofastmcp.com
 
 * [Deploy a LangGraph server](../../langgraph/local-server.md): Graph factories for long-lived deployments.
 
+* [Rebuild a graph at runtime](../../langsmith/graph-rebuild.md): Factory forms for Agent Server, including the context manager pattern.
+
 * [FastMCP connection lifecycle](https://gofastmcp.com/clients/client#connection-lifecycle)
 
 * [MCP configuration format](https://gofastmcp.com/integrations/mcp-json-configuration)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/connections.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/mcp/connections.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

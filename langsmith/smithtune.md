@@ -11,28 +11,35 @@ tags: [docs, langsmith, smithtune]
 > Use Smithtune to fine-tune models on LangSmith conversations and compare the results in LangSmith.
 
 > [!NOTE]
+>
 > Smithtune is in [beta](release-stages.md).
 
 Smithtune is a command-line tool for fine-tuning models on [trajectories](observability-concepts.md#trajectories) recorded in LangSmith. It trains a model with [Fireworks](https://fireworks.ai/) or [Baseten](https://www.baseten.co/) and compares the base and tuned models in a LangSmith [experiment](evaluation-concepts.md#experiment). You can optionally deploy the tuned model as an endpoint for your application.
 
 ## How Smithtune works
 
-### Create a dataset
+**1. Create a dataset**
+
 Select trajectories from a tracing project with a [trace query](trace-query-syntax.md) filter, a model judge, or both.
 
-### Prepare data
+**2. Prepare data**
+
 Validate the trajectories, then split them into training, validation, and test data. Each trajectory stays in one split.
 
-### Train a model
+**3. Train a model**
+
 Preview the run, then fine-tune a supported model with your provider.
 
-### Compare results
+**4. Compare results**
+
 Evaluate the base and tuned models on the test data, then [compare the experiments](compare-experiment-results.md) in LangSmith. Evaluation does not require a deployed endpoint.
 
-### Deploy an endpoint (optional)
+**5. Deploy an endpoint (optional)**
+
 Serve the tuned model for your application. To run an agent that uses it in production, see [LangSmith Deployment](deployment.md).
 
 > [!TIP]
+>
 > To have your coding agent drive the fine-tuning process end to end, use the [Smithtune skill](https://github.com/langchain-ai/smithtune/blob/main/src/smithtune/skills/smithtune/SKILL.md).
 
 Evaluation scores measure how closely each model matches the recorded behavior, not whether it completes tasks end to end. Smithtune does not execute the tool calls the model generates.
@@ -67,8 +74,6 @@ For the commands in each step, see the [README](https://github.com/langchain-ai/
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithtune.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/smithtune.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

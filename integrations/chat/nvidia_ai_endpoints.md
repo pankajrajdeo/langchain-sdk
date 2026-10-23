@@ -39,7 +39,7 @@ For more information on accessing embedding models through this API, refer to th
 ## Install the package
 
 ```bash
-pip install -qU langchain-nvidia-ai-endpoints
+pip install -qU langchain-nvidia-ai-endpoints langchain
 ```
 
 ## Access the NVIDIA API Catalog
@@ -69,7 +69,7 @@ else:
 
 You can now use your key to access endpoints on the NVIDIA API Catalog.
 
-Optionally, enable tracing of your model calls with [LangSmith](../../langsmith/observability.md) by setting the following environment variables:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -140,6 +140,101 @@ response = model.invoke("Solve this step by step: 17 * 23", thinking_mode=True)
 thinking_model = model.with_thinking_mode(enabled=True)
 response = thinking_model.invoke("Solve this step by step: 17 * 23")
 ```
+
+<a id="use-nemotron-3-5-super-vl"></a>
+
+## Use Nemotron 3.5 Super VL
+
+Nemotron 3.5 Super VL accepts text and image input through `ChatNVIDIA`. Use it for chat, structured output, or as the model in a deep agent.
+
+The following examples use the connector's registered model ID, an 8,192-token completion limit, and explicitly enabled thinking:
+
+```python
+from langchain_nvidia_ai_endpoints import ChatNVIDIA
+
+super_model = ChatNVIDIA(
+    model="nvidia/nemotron-3.5-super-vl-120b-a12b",
+    max_completion_tokens=8192,
+    chat_template_kwargs={"enable_thinking": True},
+)
+response = super_model.invoke("Plan a three-step research workflow for competitive analysis.")
+print(response.content_blocks)
+```
+
+### Return structured output
+
+Pass a JSON schema to `with_structured_output` to parse the response into a dictionary:
+
+```python
+schema = {
+    "type": "object",
+    "properties": {"city": {"type": "string"}},
+    "required": ["city"],
+    "additionalProperties": False,
+}
+structured_model = super_model.with_structured_output(schema)
+response = structured_model.invoke("Return Denver as the city.")
+print(response["city"])
+```
+
+To disable thinking for this structured-output runnable, bind the request parameter after calling `with_structured_output`:
+
+```python
+non_thinking_model = structured_model.bind(
+    chat_template_kwargs={"enable_thinking": False}
+)
+response = non_thinking_model.invoke("Return Denver as the city.")
+print(response["city"])
+```
+
+### Describe an image
+
+Encode a local PNG and include it in a [standard image content block](../../langchain/messages.md#multimodal). Replace `photo.png` with the path to your image:
+
+```python
+import base64
+from pathlib import Path
+
+from langchain.messages import HumanMessage
+
+image = base64.b64encode(Path("photo.png").read_bytes()).decode("ascii")
+message = HumanMessage(content=[
+    {"type": "text", "text": "Describe this image."},
+    {"type": "image", "base64": image, "mime_type": "image/png"},
+])
+response = super_model.invoke([message])
+print(response.content_blocks)
+```
+
+### Use with Deep Agents
+
+[Deep Agents](../../deepagents/overview.md) provides a built-in agent loop and tools. Install `deepagents`, then pass `super_model` to `create_deep_agent`:
+
+```bash
+pip install deepagents
+```
+
+```python
+from deepagents import create_deep_agent
+
+agent = create_deep_agent(model=super_model)
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "Plan a three-step research workflow for competitive analysis.",
+    }]
+})
+print(result["messages"][-1].content_blocks)
+```
+
+This example uses the default Deep Agents harness without a model-specific profile. To ask the agent about the image, reuse `message` from the image example:
+
+```python
+result = agent.invoke({"messages": [message]})
+print(result["messages"][-1].content_blocks)
+```
+
+For the terminal coding agent, follow the [Deep Agents Code NVIDIA Build setup](../../deepagents/code/providers.md#use-nemotron-3-5-super-vl-on-nvidia-build).
 
 ## Self-host with NVIDIA NIM Microservices
 
@@ -458,6 +553,7 @@ See [How to use chat models to call tools](../../langchain/tools.md) for additio
 A unique `prefix_id` is auto-generated for every request, enabling the router to track KV cache affinity.
 
 > [!NOTE]
+>
 > This section assumes you have a running [NVIDIA Dynamo deployment](https://docs.nvidia.com/dynamo/latest/).
 
 ### Basic usage
@@ -588,8 +684,6 @@ For detailed documentation of all `ChatNVIDIA` features and configurations head 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/nvidia_ai_endpoints.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/nvidia_ai_endpoints.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -13,7 +13,8 @@ tags: [docs, langsmith, javascript, managed-deep-agents-channels]
 A channel makes a managed deep agent available in an external messaging service. Messages from the service can start agent runs, and the agent's final responses return through the same service.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## Project structure
 
@@ -80,11 +81,15 @@ A channel receives messages that start agent runs and delivers responses. An [MC
 
 ## Supported channels
 
-#### [Slack](managed-deep-agents-channels-slack.md)
-Start runs from Slack mentions, direct messages, and thread replies.
+> **[Slack](managed-deep-agents-channels-slack.md)**
+>
+> Start runs from Slack mentions, direct messages, and thread replies.
 
-#### [HTTP](managed-deep-agents-channels-http.md)
-Start runs from any service that can send a JSON webhook.
+> **[HTTP](managed-deep-agents-channels-http.md)**
+>
+> Start runs from any service that can send a JSON webhook.
+
+An HTTP adapter can also live in a community-maintained package. See [Share a channel adapter as a package](managed-deep-agents-channels-http.md#share-a-channel-adapter-as-a-package) to publish reusable provider code that users import into their channel declarations.
 
 ## See also
 
@@ -95,8 +100,6 @@ Start runs from any service that can send a JSON webhook.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

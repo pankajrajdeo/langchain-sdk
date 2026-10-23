@@ -13,6 +13,7 @@ tags: [docs, langsmith, configure-checkpointer]
 [Agent Server](agent-server.md) persists graph state using a checkpointer backend. By default, LangSmith stores checkpoints in PostgreSQL alongside other server data. You can switch to MongoDB or provide a custom implementation.
 
 > [!NOTE]
+>
 > Regardless of the checkpointer backend, LangSmith always requires PostgreSQL for threads, runs, assistants, crons, and the [memory store](../langgraph/stores.md). The checkpointer backend only controls where checkpoint data is stored.
 
 ## Available backends
@@ -30,6 +31,7 @@ PostgreSQL is the default checkpointer backend. No configuration is needed. To u
 ## Set up MongoDB checkpointing
 
 > [!NOTE]
+>
 > Requires Agent Server v0.7.64 or later.
 
 ### Prerequisites
@@ -93,7 +95,8 @@ mongodb+srv://user:password@cluster.example.net/langgraph
 
 ### Deploy by environment
 
-#### Standalone (Kubernetes)
+**Standalone (Kubernetes)**
+
 The [langgraph-cloud Helm chart](https://github.com/langchain-ai/helm/blob/main/charts/langgraph-cloud/README.md) (v0.2.6+) has built-in MongoDB support. Enable it in your values file:
 
 **Bundled MongoDB** (development and testing):
@@ -133,7 +136,8 @@ mongo:
 
 The secret must contain a `mongodb_connection_url` key.
 
-#### Standalone (Docker)
+**Standalone (Docker)**
+
 If your `langgraph.json` already sets `backend` to `"mongo"`, you only need to provide the URI. Otherwise, set both environment variables:
 
 ```shell
@@ -150,7 +154,8 @@ docker run \
 
 See the [standalone server guide](deploy-standalone-server.md) for a full Docker Compose example with MongoDB.
 
-#### Cloud
+**Cloud**
+
 Set `backend` to `"mongo"` in your `langgraph.json`, then add `LS_MONGODB_URI` as an environment variable in your deployment settings in the LangSmith UI.
 
 Your MongoDB instance must be reachable from the Cloud data plane. A managed service like [MongoDB Atlas](https://www.mongodb.com/atlas) works well for this.
@@ -170,8 +175,6 @@ To use a storage backend other than PostgreSQL or MongoDB, implement a custom [B
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-checkpointer.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-checkpointer.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

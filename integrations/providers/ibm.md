@@ -28,27 +28,33 @@ Watsonx.ai offers:
 
 ### Model interfaces
 
-#### [ChatWatsonx](../chat/ibm_watsonx.md)
-IBM watsonx.ai chat models.
+> **[ChatWatsonx](../chat/ibm_watsonx.md)**
+>
+> IBM watsonx.ai chat models.
 
-#### [WatsonxLLM](../llms/ibm_watsonx.md)
-(Legacy) IBM watsonx.ai text completion models.
+> **[WatsonxLLM](../llms/ibm_watsonx.md)**
+>
+> (Legacy) IBM watsonx.ai text completion models.
 
-#### [WatsonxEmbeddings](../embeddings/ibm_watsonx.md)
-IBM watsonx.ai embedding models.
+> **[WatsonxEmbeddings](../embeddings/ibm_watsonx.md)**
+>
+> IBM watsonx.ai embedding models.
 
 ### Tools and toolkits
 
-#### [WatsonxToolkit](../tools/ibm_watsonx.md)
-IBM watsonx.ai toolkit.
+> **[WatsonxToolkit](../tools/ibm_watsonx.md)**
+>
+> IBM watsonx.ai toolkit.
 
-#### [WatsonxSQLDatabaseToolkit](../tools/ibm_watsonx_sql.md)
-IBM watsonx.ai SQL Database toolkit.
+> **[WatsonxSQLDatabaseToolkit](../tools/ibm_watsonx_sql.md)**
+>
+> IBM watsonx.ai SQL Database toolkit.
 
 ### Retrievers
 
-#### [WatsonxRerank](../retrievers/ibm_watsonx_ranker.md)
-IBM watsonx.ai document retriever.
+> **[WatsonxRerank](../retrievers/ibm_watsonx_ranker.md)**
+>
+> IBM watsonx.ai document retriever.
 
 ## DB2
 
@@ -57,17 +63,17 @@ and vector search. Installation of `langchain-db2` package will give LangChain u
 the support of DB2 vector store and vector search.
 
 > [!NOTE]
+>
 > `langchain-db2` is a separate package for Vector Store feature only, and can be run without the `langchain-ibm` package.
 
 ### Vector stores
 
-#### [DB2VS](https://github.com/langchain-ai/langchain-ibm/tree/main/libs/langchain-db2)
-IBM DB2 Vector Store and Vector Search
+> **[DB2VS](https://github.com/langchain-ai/langchain-ibm/tree/main/libs/langchain-db2)**
+>
+> IBM DB2 Vector Store and Vector Search
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ibm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ibm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

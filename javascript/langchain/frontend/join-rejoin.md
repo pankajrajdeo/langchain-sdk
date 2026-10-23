@@ -12,9 +12,8 @@ tags: [docs, javascript, langchain, frontend, join-rejoin]
 
 Join and rejoin lets you disconnect from a running agent stream without stopping the agent, then reconnect to it later. The agent continues executing server-side while the client is away, and you pick up the stream exactly where you left off.
 
-> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/frontend/join-rejoin).
-
 > [!NOTE]
+>
 > This feature requires the [LangGraph Agent Server](../../langgraph/local-server.md). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](../../../langsmith/deployment.md) to use this pattern.
 
 ## Why join & rejoin?
@@ -39,6 +38,7 @@ The join/rejoin pattern involves three key mechanisms:
 | Remount with the same `threadId` | Reattach to in-flight work for that thread |
 
 > [!NOTE]
+>
 > **Join/rejoin uses `stream.disconnect()`, not `stream.stop()`.** By default, `stream.stop()` **cancels the active run**: it disconnects the client *and* cancels the run on the server. For join/rejoin, call `stream.disconnect()` (alias for `stop({ cancel: false })`) so the agent continues processing while you are away.
 >
 > To cancel execution explicitly from app code, use `stream.stop()` or [`client.runs.cancel`](https://reference.langchain.com/javascript/langchain-langgraph-sdk/client/RunsClient/cancel).
@@ -50,6 +50,7 @@ the same thread ID, the stream attaches to the thread's current state and any
 in-flight run.
 
 > [!NOTE]
+>
 > The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../../langchain/frontend/overview.md#type-inference) or [JavaScript](overview.md#type-inference) backends.
 
 **React**
@@ -296,8 +297,6 @@ After rejoining:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/join-rejoin.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/join-rejoin.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

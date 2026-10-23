@@ -27,6 +27,7 @@ The [LangSmith SDK](reference.md) exports a `uuid7` helper (Python v0.4.43+, JS 
 For instructions, refer to [Add metadata and tags to traces](add-metadata-tags.md).
 
 > [!WARNING]
+>
 > **Important:** To ensure filtering and token counting work correctly across your entire thread, you must set the thread metadata (`session_id` or `thread_id`) on **all runs**, including child runs within a trace.
 >
 > If child runs don't have the thread\_id metadata, they won't be included when:
@@ -537,8 +538,7 @@ You can view threads in the [UI](https://smith.langchain.com?utm_source=docs\&ut
 
 The right panel displays aggregate stats for the project, including thread and trace counts, total and median token usage, error rate, and P50/P99 latency.
 
-> [!NOTE]
-> Use the **[Chat](chat.md)** in thread views to analyze conversation threads, understand user sentiment, identify pain points, and track whether issues were resolved.
+Use the **[Chat](chat.md)** in thread views to analyze conversation threads, understand user sentiment, identify pain points, and track whether issues were resolved.
 
 You can then click into a particular thread. You can view the thread in three different ways:
 
@@ -557,6 +557,7 @@ Within a thread, open the Trajectory view and click the **LLM call** link in a t
 ### Save thread-level filter
 
 > [!NOTE]
+>
 > Thread filters look through all runs and surface a thread if at least 1 run matches the filter.
 
 On the **Threads** tab of a project, you can [save commonly used filters](filter-traces.md#save-a-filter).
@@ -572,8 +573,6 @@ On the **Threads** tab of a project, you can [save commonly used filters](filter
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

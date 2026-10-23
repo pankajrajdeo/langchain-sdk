@@ -29,13 +29,12 @@ Normal `--init` and `--update` runs do not rewrite these files.
 
 ## Agent instruction files
 
-On each code run, OpenWiki maintains `AGENTS.md` and `CLAUDE.md` at the repository root:
+On each code run, OpenWiki maintains agent instruction pointers at the repository root:
 
-* Creates the file if it does not exist
-* Rewrites only the `<!-- OPENWIKI:START -->` … `<!-- OPENWIKI:END -->` block when the file already exists
-* Leaves the rest of your content untouched
+* **`AGENTS.md`**: Created when missing. OpenWiki rewrites only the `<!-- OPENWIKI:START -->` … `<!-- OPENWIKI:END -->` block and leaves the rest of your content untouched
+* **`CLAUDE.md`**: Updated only when the file already exists. The managed block imports `@AGENTS.md` so Claude Code reads the same instructions. OpenWiki does not create `CLAUDE.md` when it is absent, and it leaves a file that is only `@AGENTS.md` unchanged
 
-That block instructs coding agents to consult the generated wiki when they need repository context.
+That managed content tells coding agents when to consult the generated wiki for repository context.
 
 ## Local configuration directory
 
@@ -97,8 +96,6 @@ To inspect exactly what a run would send, add `--telemetry-file=<path>` to any r
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/customize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/customize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

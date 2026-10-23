@@ -16,30 +16,34 @@ Governance also extends to what agents do at runtime: [spend and data-protection
 
 ## Explore
 
-#### [Organization administration](administration-overview.md)
-Organizations, workspaces, applications, billing, and usage.
+> **[Organization administration](administration-overview.md)**
+>
+> Organizations, workspaces, applications, billing, and usage.
 
-#### [Users & access control](user-management.md)
-Manage users, roles (RBAC), attribute-based access (ABAC), and authentication.
+> **[Users & access control](user-management.md)**
+>
+> Manage users, roles (RBAC), attribute-based access (ABAC), and authentication.
 
-#### [Tools](chat.md)
-Administrative tools and the LangSmith CLI.
+> **[Tools](chat.md)**
+>
+> Administrative tools and the LangSmith CLI.
 
-#### [Auditing & compliance](audit-logs.md)
-Audit logs, data storage and privacy, and compliance controls.
+> **[Auditing & compliance](audit-logs.md)**
+>
+> Audit logs, data storage and privacy, and compliance controls.
 
 ## Related
 
-#### [Account setup](admin.md)
-Create an account, manage API keys, configure profiles, and review pricing tiers.
+> **[Account setup](admin.md)**
+>
+> Create an account, manage API keys, configure profiles, and review pricing tiers.
 
-#### [LLM Gateway](llm-gateway.md)
-Proxy LLM calls to enforce spend limits, redact sensitive data, and centrally manage provider credentials.
+> **[LLM Gateway](llm-gateway.md)**
+>
+> Proxy LLM calls to enforce spend limits, redact sensitive data, and centrally manage provider credentials.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/govern-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/govern-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

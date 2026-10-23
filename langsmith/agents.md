@@ -15,7 +15,8 @@ An *agent* is an AI system that completes tasks end to end using tools, skills, 
 Every trace carries its agent and one of that agent's environments, so what produced a trace and where it ran are recorded as it arrives. LangSmith can then act on that context: an alert watches production and stays quiet about local runs, each environment gets its own prebuilt dashboard, and an [Insights](insights.md) report covers the traffic of the environment you run it on.
 
 > [!NOTE]
-> **Beta.** Agent-based workspaces are in [beta](release-stages.md). LangChain enables agent-based workspaces for an organization, and the change applies to workspaces created after that. An existing [project-based](observability-concepts.md#tracing-projects) workspace does not convert automatically, but LangChain can convert it. To ask about access, [contact our sales team](https://www.langchain.com/contact-sales).
+>
+> Agent-based workspaces are available on [LangSmith Cloud](cloud.md). They are not available on [self-hosted](self-hosted.md) LangSmith. To check whether your workspace is agent-based, look at the control at the top left. In an agent-based workspace, it is a workspace switcher that names your workspace. In a [project-based](observability-concepts.md#tracing-projects) workspace, it shows the LangSmith logo.
 
 ```mermaid
 %%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, system-ui, sans-serif","lineColor":"#40668D","primaryColor":"#E5F4FF","primaryTextColor":"#030710","primaryBorderColor":"#006DDD","clusterBkg":"transparent"}}}%%
@@ -55,22 +56,24 @@ The identifier is also what the browser address bar carries, so you can read it 
 
 ## Next steps
 
-#### [Environments](agent-environments.md)
-The four environments an agent's traces divide into, and how to switch between them.
+> **[Environments](agent-environments.md)**
+>
+> The four environments an agent's traces divide into, and how to switch between them.
 
-#### [Navigate agents](navigate-agents.md)
-The agent switcher, the agent list, and the agent Overview.
+> **[Navigate agents](navigate-agents.md)**
+>
+> The agent switcher, the agent list, and the agent Overview.
 
-#### [Log traces to an agent](log-traces-to-agent.md)
-How agent addressing sends traces to an agent and an environment, and why it cannot be combined with project addressing.
+> **[Log traces to an agent](log-traces-to-agent.md)**
+>
+> How agent addressing sends traces to an agent and an environment, and why it cannot be combined with project addressing.
 
-#### [Create an agent](create-an-agent.md)
-The four ways to create an agent, what each route decides about it, and the rules an identifier must follow.
+> **[Create an agent](create-an-agent.md)**
+>
+> The four ways to create an agent, what each route decides about it, and the rules an identifier must follow.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

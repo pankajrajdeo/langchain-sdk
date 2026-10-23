@@ -14,7 +14,7 @@ tags: [docs, integrations, providers, langfuse]
 
 ## Tracing LangChain
 
-[Langfuse Tracing](https://langfuse.com/docs/tracing) integrates with LangChain using LangChain Callbacks ([Python](https://python.langchain.com/docs/how_to/#callbacks), [JS](https://js.langchain.com/docs/how_to/#callbacks)). Thereby, the Langfuse SDK automatically creates a nested trace for every run of your LangChain applications. This allows you to log, analyze and debug your LangChain application.
+[Langfuse Tracing](https://langfuse.com/docs/tracing) integrates with LangChain using LangChain Callbacks ([Python](https://reference.langchain.com/python/langchain-core/callbacks), [JS](https://reference.langchain.com/javascript/langchain-core/callbacks)). Thereby, the Langfuse SDK automatically creates a nested trace for every run of your LangChain applications. This allows you to log, analyze and debug your LangChain application.
 
 You can configure the integration via (1) constructor arguments or (2) environment variables. Get your Langfuse credentials by signing up at [cloud.langfuse.com](https://cloud.langfuse.com) or [self-hosting Langfuse](https://langfuse.com/self-hosting).
 
@@ -191,8 +191,6 @@ Example trace in Langfuse: [https://cloud.langfuse.com/project/cloramnkj0002jz08
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langfuse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langfuse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

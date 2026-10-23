@@ -236,7 +236,9 @@ for activity in stream.extensions["tool_activity"]:
 
 ### Register transformers on middleware
 
-Middleware-registered transformers require `langchain>=1.3.2`.
+> [!NOTE]
+>
+> Middleware-registered transformers require `langchain>=1.3.2`.
 
 Middleware can declare stream transformer factories alongside its hooks and tools. The factory shape differs between languages:
 
@@ -291,8 +293,6 @@ See [Build your own projection](../langgraph/event-streaming.md#build-your-own-p
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

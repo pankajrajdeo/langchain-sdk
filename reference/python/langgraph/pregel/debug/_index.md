@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langgraph/pregel/debug"
-description: "Index of 14 pages and 0 subdirectories under reference/python/langgraph/pregel/debug."
+description: "Index of 15 pages and 0 subdirectories under reference/python/langgraph/pregel/debug."
 category: "index"
 tags: [index, reference, python, langgraph, pregel, debug]
 ---
 
 # reference/python/langgraph/pregel/debug
 
-14 pages here.
+15 pages here.
 
 ## Files
 
@@ -23,5 +23,6 @@ tags: [index, reference, python, langgraph, pregel, debug]
 - [map_task_result_writes](map_task_result_writes.md) - Folds task writes into a result dict and aggregates multiple writes to the same channel.
 - [patch_checkpoint_map](patch_checkpoint_map.md) - View source on GitHub
 - [read_channels](read_channels.md) - View source on GitHub
+- [read_task_statuses](read_task_statuses.md) - Return the status of every task that has recorded writes, keyed by task id.
 - [rm_pregel_keys](rm_pregel_keys.md) - Remove pregel-specific keys from the config.
 - [tasks_w_writes](tasks_w_writes.md) - Apply writes / subgraph states to tasks to be returned in a StateSnapshot.

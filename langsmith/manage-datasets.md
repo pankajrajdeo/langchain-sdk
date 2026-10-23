@@ -18,7 +18,8 @@ LangSmith provides tools for managing and working with your [*datasets*](evaluat
 You'll also learn how to [export filtered traces](#export-filtered-traces-from-experiment-to-dataset) from [experiments](evaluation-concepts.md#experiment) back to datasets for further analysis and iteration.
 
 > [!TIP]
-> The [LangSmith Engine](engine.md) can automatically generate ground truth dataset examples from your production traces.
+>
+> The [LangSmith Engine](engine-issues.md#add-offline-examples) can automatically generate ground truth dataset examples from your production traces.
 
 ## Version a dataset
 
@@ -30,16 +31,17 @@ Any time you add, update, or delete examples in your dataset, a new [version](ev
 
 By default, the version is defined by the timestamp of the change. When you click on a particular version of a dataset (by timestamp) in the **Examples** tab, you will find the state of the dataset at that point in time.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/version-dataset.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=da312a60576f449797be71e24229ea31" alt="Version Datasets" width="2544" height="1241" data-path="langsmith/images/version-dataset.png" />
+![Version Datasets](https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/version-dataset.png?fit=max\&auto=format\&n=1RIJxfRpkszanJLL\&q=85\&s=da312a60576f449797be71e24229ea31)
 
 Note that examples are read-only when viewing a past version of the dataset. You will also see the operations that were between this version of the dataset and the latest version of the dataset.
 
 > [!NOTE]
+>
 > By default, the latest version of the dataset is shown in the **Examples** tab and experiments from all versions are shown in the **Tests** tab.
 
 In the **Tests** tab, you will find the results of tests run on the dataset at different versions.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/version-dataset-tests.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=42c5ac800ef7282fa65013f6de02e45a" alt="Version Datasets" width="2483" height="963" data-path="langsmith/images/version-dataset-tests.png" />
+![Version Datasets](https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/version-dataset-tests.png?fit=max\&auto=format\&n=1RIJxfRpkszanJLL\&q=85\&s=42c5ac800ef7282fa65013f6de02e45a)
 
 ### Tag a version
 
@@ -49,9 +51,9 @@ For example, you might tag a version of your dataset as "prod" and use it to run
 
 You can tag a version of your dataset in the UI by clicking on **+ Tag this version** in the **Examples** tab.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/tag-this-version.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=c3f7a97c92eb645f7b0888f4e35ffd48" alt="Tagging Datasets" width="662" height="124" data-path="langsmith/images/tag-this-version.png" />
+![Tagging Datasets](https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/tag-this-version.png?fit=max\&auto=format\&n=ImHGLQW1HnQYwnJV\&q=85\&s=c3f7a97c92eb645f7b0888f4e35ffd48)
 
-You can also tag versions of your dataset using the SDK. Here's an example of how to tag a version of a dataset using the [Python SDK](https://docs.smith.langchain.com/reference/python/reference):
+You can also tag versions of your dataset using the SDK. Here's an example of how to tag a version of a dataset using the [Python SDK](https://reference.langchain.com/python/langsmith):
 
 ```python
 from langsmith import Client
@@ -71,6 +73,7 @@ To run an evaluation on a particular tagged version of a dataset, refer to the [
 ## Evaluate on a specific dataset version
 
 > [!TIP]
+>
 > You may find it helpful to refer to the following content before you read this section:
 >
 > * [Version a dataset](#version-a-dataset).
@@ -133,6 +136,7 @@ Learn more about how to fetch views of a dataset on the [Create and manage datas
 ## Evaluate on a split / filtered view of a dataset
 
 > [!TIP]
+>
 > You may find it helpful to refer to the following content before you read this section:
 >
 > * [Fetching examples](manage-datasets-programmatically.md#fetch-examples).
@@ -241,21 +245,22 @@ For more details on fetching views of a dataset, refer to the guide on [fetching
 ### Share a dataset publicly
 
 > [!WARNING]
+>
 > Sharing a dataset publicly will make the **dataset examples, experiments and associated runs, and feedback on this dataset accessible to anyone with the link**, even if they don't have a LangSmith account. Make sure you're not sharing sensitive information.
 >
 > This feature is only available in the cloud-hosted version of LangSmith.
 
 From the **Dataset & Experiments** tab, select a dataset, click **⋮** (top right of the page), click **Share Dataset**. This will open a dialog where you can copy the link to the dataset.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/share-dataset.gif?s=3788767dadf1c265968fe61d96bacc2d" alt="Share Dataset" width="1086" height="720" data-path="langsmith/images/share-dataset.gif" />
+![Share Dataset](https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/share-dataset.gif?s=3788767dadf1c265968fe61d96bacc2d)
 
 ### Unshare a dataset
 
-1. Click on **Unshare** by clicking on **Public** in the upper right hand corner of any publicly shared dataset, then **Unshare** in the dialog. <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/unshare-dataset.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=98e1807ba9f9a510f56a435b7f81287c" alt="Unshare Dataset" width="1312" height="803" data-path="langsmith/images/unshare-dataset.png" />
+1. Click on **Unshare** by clicking on **Public** in the upper right hand corner of any publicly shared dataset, then **Unshare** in the dialog. ![Unshare Dataset](https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/unshare-dataset.png?fit=max\&auto=format\&n=1RIJxfRpkszanJLL\&q=85\&s=98e1807ba9f9a510f56a435b7f81287c)
 
 2. Navigate to your organization's list of publicly shared datasets, by clicking on **Settings** -> **Shared URLs** or [this link](https://smith.langchain.com/settings/shared), then click on **Unshare** next to the dataset you want to unshare.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/unshare-trace-list.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=8a7762947b85af17b36f2c71857badf7" alt="Unshare Trace List" width="1125" height="519" data-path="langsmith/images/unshare-trace-list.png" />
+![Unshare Trace List](https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/unshare-trace-list.png?fit=max\&auto=format\&n=1RIJxfRpkszanJLL\&q=85\&s=8a7762947b85af17b36f2c71857badf7)
 
 ## Export a dataset
 
@@ -263,7 +268,7 @@ You can export your LangSmith dataset to a CSV, JSONL, or [OpenAI's fine tuning 
 
 From the **Dataset & Experiments** tab, select a dataset, click **⋮** (top right of the page), click **Download Dataset**.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/export-dataset-button.gif?s=e71b7c55d70528df0a8985b8884f7597" alt="Export Dataset Button" width="1086" height="720" data-path="langsmith/images/export-dataset-button.gif" />
+![Export Dataset Button](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/export-dataset-button.gif?s=e71b7c55d70528df0a8985b8884f7597)
 
 ## Export filtered traces from experiment to dataset
 
@@ -271,24 +276,22 @@ After running an [offline evaluation](evaluation-concepts.md#offline-evaluations
 
 ### View experiment traces
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/export-filtered-trace-to-dataset.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=d05263ae403f7f04e8a00ab956313c01" alt="Export filtered traces" width="3452" height="1224" data-path="langsmith/images/export-filtered-trace-to-dataset.png" />
+![Export filtered traces](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/export-filtered-trace-to-dataset.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=d05263ae403f7f04e8a00ab956313c01)
 
 To do so, first click on the arrow next to your experiment name. This will direct you to a project that contains the traces generated from your experiment.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/experiment-tracing-project.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=6ef0c958b5af1f2fe113b8717e698584" alt="Export filtered traces" width="3452" height="1638" data-path="langsmith/images/experiment-tracing-project.png" />
+![Export filtered traces](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/experiment-tracing-project.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=6ef0c958b5af1f2fe113b8717e698584)
 
 From there, you can filter the traces based on your evaluation criteria. In this example, we're filtering for all traces that received an accuracy score greater than 0.5.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/filtered-traces-from-experiment.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=0a0edc120c230511d10285f80248dab0" alt="Export filtered traces" width="3438" height="1844" data-path="langsmith/images/filtered-traces-from-experiment.png" />
+![Export filtered traces](https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/filtered-traces-from-experiment.png?fit=max\&auto=format\&n=0B2PFrFBMRWNccee\&q=85\&s=0a0edc120c230511d10285f80248dab0)
 
 After applying the filter on the project, we can multi-select runs to add to the dataset, and click **Add to Dataset**.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/Xbr8HuVd9jPi6qTU/langsmith/images/add-filtered-traces-to-dataset.png?fit=max&auto=format&n=Xbr8HuVd9jPi6qTU&q=85&s=d2488fe04acef624c3528ad01c5bedaa" alt="Export filtered traces" width="3364" height="1834" data-path="langsmith/images/add-filtered-traces-to-dataset.png" />
+![Export filtered traces](https://mintcdn.com/langchain-5e9cc07a/Xbr8HuVd9jPi6qTU/langsmith/images/add-filtered-traces-to-dataset.png?fit=max\&auto=format\&n=Xbr8HuVd9jPi6qTU\&q=85\&s=d2488fe04acef624c3528ad01c5bedaa)
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-datasets.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

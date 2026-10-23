@@ -75,7 +75,7 @@ model_id = "anthropic.claude-haiku-4-5-20251001-v1:0"  # Example Bedrock model I
 
 # Decorate the model invocation function to auto-capture a trace with tags/metadata
 @traceable(tags=["aws-bedrock", "langsmith", "integration-test"],
-           metadata={"env": "dev", "model_provider": "bedrock", "model_id": "claude-3-haiku"})
+           metadata={"env": "dev", "model_provider": "bedrock", "model_id": "claude-haiku-4-5"})
 def generate_text(prompt: str) -> str:
     # Prepare a single-turn conversation input for the Converse API
     messages = [
@@ -125,7 +125,7 @@ const invokeBedrock = traceable(
   },
   {
     tags: ["aws-bedrock", "langsmith", "integration-test"],
-    metadata: { env: "dev", model_provider: "bedrock", model_id: "claude-3-haiku" }
+    metadata: { env: "dev", model_provider: "bedrock", model_id: "claude-haiku-4-5" }
   }
 );
 
@@ -134,14 +134,16 @@ const answer = await invokeBedrock("How can I trace AWS Bedrock model outputs to
 console.log(answer);
 ```
 
-#### Python
+**Python**
+
 * `boto3.client("bedrock-runtime")` creates a Bedrock Runtime client.
 * The `converse` method sends a chat prompt (as a list of messages) to the specified model and returns a structured response.
 * The `generate_text` function is decorated with `@traceable`, logging each call to LangSmith as a trace (using the function name as the default trace name).
 * Custom tags (`aws-bedrock`, `langsmith`, `integration-test`) and metadata (environment, model info) are passed into the decorator and attached to the trace record for filtering in the LangSmith UI.
 * When you run this code (with `LANGSMITH_TRACING=true` and your API key set), LangSmith automatically captures the input prompt, model output, token usage, and latency.
 
-#### TypeScript
+**TypeScript**
+
 * `BedrockRuntimeClient` from the AWS SDK v3 provides the Bedrock runtime interface.
 * `ConverseCommand` offers a unified chat interface that sends a user message and returns the assistant's response in a structured format (no manual JSON parsing needed).
 * The Bedrock call is wrapped with LangSmith's `traceable` function, converting `invokeBedrock` into a traced function that logs its execution to LangSmith.
@@ -167,8 +169,6 @@ You can filter traces by tags (e.g., `aws-bedrock` or `integration-test`), searc
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

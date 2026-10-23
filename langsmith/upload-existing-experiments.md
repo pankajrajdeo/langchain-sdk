@@ -254,18 +254,16 @@ Note that the latency and feedback stats in the experiment results are null beca
 
 ## View the experiment in the UI
 
-Now, login to the UI and click on your newly-created dataset! You should see a single experiment: <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-dataset.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=797dd62e7cd3f833cd13bafcedfa5607" alt="Uploaded experiments table" width="3454" height="1914" data-path="langsmith/images/uploaded-dataset.png" />
+Now, login to the UI and click on your newly-created dataset! You should see a single experiment: ![Uploaded experiments table](https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-dataset.png?fit=max\&auto=format\&n=1RIJxfRpkszanJLL\&q=85\&s=797dd62e7cd3f833cd13bafcedfa5607)
 
-Your examples will have been uploaded: <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-dataset-examples.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=093061568ece423d5a2c4cb2b5df2721" alt="Uploaded examples" width="3454" height="1912" data-path="langsmith/images/uploaded-dataset-examples.png" />
+Your examples will have been uploaded: ![Uploaded examples](https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-dataset-examples.png?fit=max\&auto=format\&n=1RIJxfRpkszanJLL\&q=85\&s=093061568ece423d5a2c4cb2b5df2721)
 
-Clicking on your experiment will bring you to the comparison view: <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-experiment.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=d66c9ea1cfbb1acf4f591b11f54a71da" alt="Uploaded experiment comparison view" width="3452" height="1912" data-path="langsmith/images/uploaded-experiment.png" />
+Clicking on your experiment will bring you to the comparison view: ![Uploaded experiment comparison view](https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-experiment.png?fit=max\&auto=format\&n=1RIJxfRpkszanJLL\&q=85\&s=d66c9ea1cfbb1acf4f591b11f54a71da)
 
 As you upload more experiments to your dataset, you will be able to compare the results and easily identify regressions in the comparison view.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/upload-existing-experiments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/upload-existing-experiments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

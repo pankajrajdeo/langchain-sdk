@@ -12,11 +12,11 @@ tags: [index, reference, python, deepagents, middleware, subagents, subagent]
 ## Files
 
 - [description](description.md) - What this subagent does.
-- [interrupt_on](interrupt_on.md) - Configure human-in-the-loop for specific tools.
-- [middleware](middleware.md) - Additional middleware for custom behavior.
+- [interrupt_on](interrupt_on.md) - Configure human-in-the-loop for specific tools. Requires a checkpointer.
+- [middleware](middleware.md) - Additional middleware for custom behavior, logging, or rate limiting.
 - [mode](mode.md) - Context mode. Defaults to isolated, where the subagent only sees the delegated task.
 - [model](model.md) - Override the main agent's model.
-- [name](name.md) - Unique identifier for the subagent.
+- [name](name.md) - Unique identifier used by the main agent when calling the task() tool.
 - [permissions](permissions.md) - List of FilesystemPermission rules for this subagent.
 - [response_format](response_format.md) - Structured output response format for the subagent.
 - [skills](skills.md) - Skill source paths for SkillsMiddleware. Forbidden under mode="fork".

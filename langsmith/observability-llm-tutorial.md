@@ -62,6 +62,7 @@ export OPENAI_API_KEY="<your-openai-api-key>"
 To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](log-traces-to-project.md). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion. In an [agent-based workspace](agents.md), the first trace to a new project name, including the default project, creates an agent named after the project, with the project as its **Production** [environment](agent-environments.md). The agent's identifier is derived from the project name, so it can differ from the project name, and creating the agent requires permission to create projects. To name the agent and the environment directly instead, see [Log traces to an agent](log-traces-to-agent.md).
 
 > [!NOTE]
+>
 > You may see these variables referenced as `LANGCHAIN_*` in other places. Both work, but `LANGSMITH_TRACING` and `LANGSMITH_API_KEY` are the recommended names.
 
 ### Trace LLM calls
@@ -233,9 +234,7 @@ const supportBot = traceable(async function supportBot(question: string): Promis
 
 Calling `support_bot("How many users can I have on the Starter plan?")` now produces a trace of the full RAG pipeline.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-whole-pipeline.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=158b82743e86bc48be7ccbd2ddf79e4a" alt="LangSmith UI showing a trace with an outer application span and a nested LLM call span." width="2502" height="1244" data-path="langsmith/images/trace-whole-pipeline.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-whole-pipeline-dark.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=3aab7ffdd51cee1beefa5d02d8d0c871" alt="LangSmith UI showing a trace with an outer application span and a nested LLM call span." width="2518" height="1214" data-path="langsmith/images/trace-whole-pipeline-dark.png" />
+![LangSmith UI showing a trace with an outer application span and a nested LLM call span.](https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-whole-pipeline.png?fit=max\&auto=format\&n=EKYgNtnIIDPnseTv\&q=85\&s=158b82743e86bc48be7ccbd2ddf79e4a)
 
 ### Check your traces from the terminal
 
@@ -372,6 +371,7 @@ const supportBot = traceable(async function supportBot(question: string): Promis
 ```
 
 > [!NOTE]
+>
 > In production, these two pieces would live in separate locations: the `support_bot` call with `run_id` stays in your app, and `create_feedback` moves to whichever endpoint receives user feedback (for example, a `/feedback` API route). The `run_id` is passed from one to the other so the feedback can be linked to the correct trace. Because feedback also requires the project UUID, pass `session_id` alongside the `run_id`.
 
 The feedback appears in the **Feedback** tab when you inspect the run in the UI. You can then filter runs by feedback score using the filtering controls in the **Runs** table.
@@ -478,13 +478,12 @@ With strong observability in place, you can confidently ship to production. In p
 
 In the UI sidebar, select **Monitoring**, then choose a tracing project from the dropdown at the top left. In an [agent-based workspace](agents.md), **Monitoring** requires an agent, and the dropdown lists one dashboard per [environment](agent-environments.md) under **Environments**. Charts display key metrics for the project over time, including trace count, latency, error rate, feedback scores, and costs. For more on available metrics and chart configuration, refer to [Dashboards](dashboards.md).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/monitoring-page-light.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=43b082b4db51b58f74d98d4d99f747cc" alt="LangSmith UI showing the monitoring page with the trace count chart and available tabs." width="2856" height="1450" data-path="langsmith/images/monitoring-page-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/monitoring-page-dark.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=a5bbd0dd8f6c026cb50dabb059d4b737" alt="LangSmith UI showing the monitoring page with the trace count chart and available tabs." width="2836" height="1442" data-path="langsmith/images/monitoring-page-dark.png" />
+![LangSmith UI showing the monitoring page with the trace count chart and available tabs.](https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/monitoring-page-light.png?fit=max\&auto=format\&n=EKYgNtnIIDPnseTv\&q=85\&s=43b082b4db51b58f74d98d4d99f747cc)
 
 ### A/B testing
 
 > [!NOTE]
+>
 > Group-by functionality requires at least two different values for a given metadata key.
 
 Because you have been logging the `llm` metadata attribute, you can group monitoring charts by that attribute to compare model performance over time. From **Monitoring** in the UI sidebar, click **Group by** in the top left corner, select **Metadata** from the dropdown, then select `llm`. The charts update to show results grouped by that attribute. For more on grouping and custom charts, refer to [Dashboards](dashboards.md).
@@ -493,9 +492,7 @@ Because you have been logging the `llm` metadata attribute, you can group monito
 
 When a monitoring chart shows something unexpected, click a data point to freeze the tooltip, then click the metric name (for example, **Input**) to jump to the filtered runs table for that time window. For more on searching and filtering runs, refer to [Filter traces](filter-traces.md).
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/drilldown-monitoring-light.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=d3e8433d168cfdd019822b93d05f4420" alt="LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted." width="2838" height="814" data-path="langsmith/images/drilldown-monitoring-light.png" />
-
-<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/drilldown-monitoring-dark.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=a011006d13972bdf3dcbaf5326fc5ace" alt="LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted." width="2826" height="824" data-path="langsmith/images/drilldown-monitoring-dark.png" />
+![LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted.](https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/drilldown-monitoring-light.png?fit=max\&auto=format\&n=EKYgNtnIIDPnseTv\&q=85\&s=d3e8433d168cfdd019822b93d05f4420)
 
 ## Conclusion
 
@@ -509,8 +506,6 @@ For more, see:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-llm-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-llm-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

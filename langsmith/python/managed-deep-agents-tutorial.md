@@ -17,14 +17,17 @@ This tutorial continues from the [quickstart](managed-deep-agents-quickstart.md)
 This guide replaces the quickstart's built-in provider search with an authored [Tavily](https://tavily.com) search tool, enables durable memory, adds a daily schedule, then deploys.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 ## Extend the agent
 
-### Add a custom search tool
+**1. Add a custom search tool**
+
 Built-in provider search is convenient for a first run. Authored tools give you more control: choose the search API, tune parameters, and keep the tool code in your project.
 
 > [!NOTE]
+>
 > If you followed the steps to use Tavily in the [Quickstart](managed-deep-agents-quickstart.md), skip to the next step.
 
 Add a [Tavily API key](https://app.tavily.com) to `.env`:
@@ -92,7 +95,8 @@ What were the main announcements from the latest LangChain release?
 
 Confirm the agent calls `internet_search` and returns an answer with citations. For more authored tools, see [Custom tools](managed-deep-agents-tools.md).
 
-### Update the instructions for memory
+**2. Update the instructions for memory**
+
 Extend `instructions.md` so the agent knows what shared knowledge to keep. Keep the research behavior and add a memory policy:
 
 **instructions.md**
@@ -110,7 +114,8 @@ keep notes, and return concise answers with citations.
 - Never store personal data or secrets in memory.
 ```
 
-### Enable and use durable memory
+**3. Enable and use durable memory**
+
 Durable memory is opt-in. Before asking the agent to remember anything, add a memory declaration at the project root:
 
 **memory.py**
@@ -127,7 +132,8 @@ Restart `mda dev` so it discovers the new file. In one thread, ask the agent to 
 
 See [Memory](managed-deep-agents-memory.md) for details.
 
-### Schedule a daily digest
+**4. Schedule a daily digest**
+
 Add a `schedules/` module so the agent runs on a cron cadence without a user message. This schedule runs every weekday at 8am Pacific:
 
 **schedules/daily_digest.py**
@@ -155,7 +161,8 @@ If memory is empty on the first fire, the agent still returns open questions.
 
 For thread behavior and constraints, see [Schedules](managed-deep-agents-schedules.md).
 
-### Deploy and inspect
+**5. Deploy and inspect**
+
 Deploy the project to LangSmith:
 
 ```bash
@@ -174,19 +181,20 @@ For deploy flags and troubleshooting, see [Deploy an agent](managed-deep-agents-
 
 ## Next steps
 
-#### [Custom middleware](managed-deep-agents-middleware.md)
-Add logging, retries, limits, and guardrails around model and tool calls.
+> **[Custom middleware](managed-deep-agents-middleware.md)**
+>
+> Add logging, retries, limits, and guardrails around model and tool calls.
 
-#### [Identity](managed-deep-agents-identity.md)
-Authenticate callers and use verified identity in tools and middleware.
+> **[Identity](managed-deep-agents-identity.md)**
+>
+> Authenticate callers and use verified identity in tools and middleware.
 
-#### [Evals](managed-deep-agents-evals.md)
-Develop Harbor evals with a coding agent and the eval-engineering skill.
+> **[Evals](managed-deep-agents-evals.md)**
+>
+> Develop Harbor evals with a coding agent and the eval-engineering skill.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tutorial.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

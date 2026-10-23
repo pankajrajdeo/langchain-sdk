@@ -15,7 +15,8 @@ Custom tools are application code the agent can call for fetching real-time data
 To load tools from a remote MCP server, see [Connect to MCP servers](managed-deep-agents-mcp-connectors.md).
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
+>
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
 
 Put authored tools under `tools/`, import them into the agent entry, and pass them to the agent definition:
 
@@ -36,7 +37,8 @@ MCP connectors are declared under `tools/` as well, so the `tools/mcp.py` file n
 
 Use authored tools for business logic, private APIs, database access, and other code that belongs in your agent project.
 
-### Define a tool module
+**1. Define a tool module**
+
 **tools/customer.py**
 
 ```python
@@ -54,7 +56,8 @@ def lookup_customer(customer_id: str) -> str:
 
 Use clear, unique tool names to avoid collisions. For more about LangChain tool definitions, see [Tools](../../langchain/tools.md).
 
-### Attach the tool to the agent
+**2. Attach the tool to the agent**
+
 Import the tool into the project-root agent entry and pass it in the `tools` list:
 
 **agent.py**
@@ -73,9 +76,8 @@ agent = define_deep_agent(
 
 Your imports should work the same way they do in a normal local Python project.
 
-<a id="human-in-the-loop"></a>
+**3. Add human-in-the-loop (Optional)**
 
-### Add human-in-the-loop (Optional)
 Pause the agent before sensitive tool calls so a person can approve, edit, or reject them.
 
 Set `interrupt_on` in the agent definition, and optionally set `permissions` to gate tool and filesystem access:
@@ -113,6 +115,8 @@ For per-run values such as request metadata or feature flags, use the normal Lan
 
 `mda dev` and `mda deploy` copy project files into the compiled build, including modules under `tools/`. Tools are not synced to Context Hub; they ship with the agent code.
 
+<a id="human-in-the-loop"></a>
+
 ## When to use tools
 
 | Concept | Kind | How it reaches the agent |
@@ -141,12 +145,12 @@ If a tool requires an API key or OAuth token, use a connection to resolve the cr
 
 For per-run values such as request metadata or feature flags, use the normal LangChain runtime context patterns for tools. See [how to access context from within your tools](../../langchain/tools.md#access-context).
 
+For the caller, channel, and sandbox fields that Managed Deep Agents adds, see [Runtime](managed-deep-agents-runtime.md).
+
 To read or write files in the thread's sandbox from a tool, use `runtime.backend`. See [Read and write sandbox files from code](managed-deep-agents-sandboxes.md#read-and-write-sandbox-files-from-code).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -38,7 +38,7 @@ Channels are used to communicate between actors (PregelNodes). Each channel has 
 
 ### LastValue
 
-[`LastValue`](https://reference.langchain.com/javascript/classes/_langchain_langgraph.channels.LastValue.html) is the default channel type. It stores the last value written to it, overwriting any previous value. Use it for input and output values, or for passing data from one step to the next.
+[`LastValue`](https://reference.langchain.com/javascript/langchain-langgraph/channels) is the default channel type. It stores the last value written to it, overwriting any previous value. Use it for input and output values, or for passing data from one step to the next.
 
 ```typescript
 import { LastValue } from "@langchain/langgraph/channels";
@@ -74,7 +74,8 @@ While most users will interact with Pregel through the [StateGraph](https://refe
 
 Below are a few different examples to give you a sense of the Pregel API.
 
-#### Single node
+**Single node**
+
 ```typescript
 import { EphemeralValue } from "@langchain/langgraph/channels";
 import { Pregel, NodeBuilder } from "@langchain/langgraph/pregel";
@@ -101,7 +102,8 @@ await app.invoke({ a: "foo" });
 { b: 'foofoo' }
 ```
 
-#### Multiple nodes
+**Multiple nodes**
+
 ```typescript
 import { LastValue, EphemeralValue } from "@langchain/langgraph/channels";
 import { Pregel, NodeBuilder } from "@langchain/langgraph/pregel";
@@ -134,7 +136,8 @@ await app.invoke({ a: "foo" });
 { b: 'foofoo', c: 'foofoofoofoo' }
 ```
 
-#### Topic
+**Topic**
+
 ```typescript
 import { EphemeralValue, Topic } from "@langchain/langgraph/channels";
 import { Pregel, NodeBuilder } from "@langchain/langgraph/pregel";
@@ -167,7 +170,8 @@ await app.invoke({ a: "foo" });
 { c: ['foofoo', 'foofoofoofoo'] }
 ```
 
-#### BinaryOperatorAggregate
+**BinaryOperatorAggregate**
+
 This example demonstrates how to use the [`BinaryOperatorAggregate`](https://reference.langchain.com/javascript/langchain-langgraph/channels/BinaryOperatorAggregate) channel to implement a reducer.
 
 ```typescript
@@ -206,7 +210,8 @@ const app = new Pregel({
 await app.invoke({ a: "foo" });
 ```
 
-#### Cycle
+**Cycle**
+
 This example demonstrates how to introduce a cycle in the graph, by having
 a chain write to a channel it subscribes to. Execution will continue
 until a `null` value is written to the channel.
@@ -240,7 +245,8 @@ await app.invoke({ value: "a" });
 
 LangGraph provides two high-level APIs for creating a Pregel application: the [StateGraph (Graph API)](graph-api.md) and the [Functional API](functional-api.md).
 
-#### StateGraph (Graph API)
+**StateGraph (Graph API)**
+
 The [StateGraph (Graph API)](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph) is a higher-level abstraction that simplifies the creation of Pregel applications. It allows you to define a graph of nodes and edges. When you compile the graph, the StateGraph API automatically creates the Pregel application for you.
 
 ```typescript
@@ -321,7 +327,8 @@ You should see something like this
 }
 ```
 
-#### Functional API
+**Functional API**
+
 In the [Functional API](functional-api.md), you can use an [`entrypoint`](https://reference.langchain.com/javascript/langchain-langgraph/index/entrypoint) to create a Pregel application. The `entrypoint` decorator allows you to define a function that takes input and returns output.
 
 ```typescript
@@ -364,8 +371,6 @@ Channels:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/pregel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/pregel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

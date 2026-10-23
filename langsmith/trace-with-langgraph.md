@@ -58,6 +58,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 ```
 
 > [!NOTE]
+>
 > If your account is in a region other than US (the default), also set `LANGSMITH_ENDPOINT` to the API URL for your region. Without this, your API key won't be recognized and requests will fail to authenticate.
 >
 > <table>
@@ -66,7 +67,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <th>Region</th>
 >
 >       <th>
->         {protocol_0 === false ? "Host" : "URL"}
+>         URL
 >       </th>
 >     </tr>
 >   </thead>
@@ -76,9 +77,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <td>GCP US</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://api.smith.langchain.com`
 >       </td>
 >     </tr>
 >
@@ -86,9 +85,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <td>GCP EU</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://eu.api.smith.langchain.com`
 >       </td>
 >     </tr>
 >
@@ -96,9 +93,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <td>GCP APAC</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://apac.api.smith.langchain.com`
 >       </td>
 >     </tr>
 >
@@ -106,17 +101,16 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >       <td>AWS US</td>
 >
 >       <td>
->         <code>
->           {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
->         </code>
+>         `https://aws.api.smith.langchain.com`
 >       </td>
 >     </tr>
 >   </tbody>
 > </table>
 >
-> For example, EU accounts: `export LANGSMITH_ENDPOINT="https://eu.api.smith.langchain.com"`. Do not add a trailing slash to the URL, as this can cause authentication errors.
+> For example, EU accounts: `export LANGSMITH_ENDPOINT="https://eu.api.smith.langchain.com"`.
 
 > [!NOTE]
+>
 > If you are using LangChain.js with LangSmith and are not in a serverless environment, we also recommend setting the following explicitly to reduce latency:
 >
 > `export LANGCHAIN_CALLBACKS_BACKGROUND=true`
@@ -125,7 +119,7 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >
 > `export LANGCHAIN_CALLBACKS_BACKGROUND=false`
 >
-> See [this LangChain.js guide](https://js.langchain.com/docs/how_to/callbacks_serverless) for more information.
+> See [this LangChain.js guide](trace-with-langchain.md#ensure-all-traces-are-submitted-before-exiting) for more information.
 
 ### 3. Log a trace
 
@@ -151,7 +145,7 @@ def search(query: str):
 tools = [search]
 tool_node = ToolNode(tools)
 
-model = ChatOpenAI(model="gpt-5.5", temperature=0).bind_tools(tools)
+model = ChatOpenAI(model="gpt-6-luna").bind_tools(tools)
 
 def should_continue(state: MessagesState) -> Literal["tools", "__end__"]:
     messages = state['messages']
@@ -224,8 +218,7 @@ const tools = [searchTool];
 const toolNode = new ToolNode<AgentState>(tools);
 
 const model = new ChatOpenAI({
-  model: "gpt-5.5",
-  temperature: 0,
+  model: "gpt-6-luna",
 }).bindTools(tools);
 
 function shouldContinue(state: AgentState) {
@@ -315,6 +308,7 @@ export OPENAI_API_KEY=<your-openai-api-key>
 ```
 
 > [!NOTE]
+>
 > If your account is in a region other than US (the default), also set `LANGSMITH_ENDPOINT` to the API URL for your region. Without this, your API key won't be recognized and requests will fail to authenticate.
 >
 > <table>
@@ -323,7 +317,7 @@ export OPENAI_API_KEY=<your-openai-api-key>
 >       <th>Region</th>
 >
 >       <th>
->         {protocol_1 === false ? "Host" : "URL"}
+>         URL
 >       </th>
 >     </tr>
 >   </thead>
@@ -333,9 +327,7 @@ export OPENAI_API_KEY=<your-openai-api-key>
 >       <td>GCP US</td>
 >
 >       <td>
->         <code>
->           {`${protocol_1 === false ? "" : "https://"}${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
->         </code>
+>         `https://api.smith.langchain.com`
 >       </td>
 >     </tr>
 >
@@ -343,9 +335,7 @@ export OPENAI_API_KEY=<your-openai-api-key>
 >       <td>GCP EU</td>
 >
 >       <td>
->         <code>
->           {`${protocol_1 === false ? "" : "https://"}eu.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
->         </code>
+>         `https://eu.api.smith.langchain.com`
 >       </td>
 >     </tr>
 >
@@ -353,9 +343,7 @@ export OPENAI_API_KEY=<your-openai-api-key>
 >       <td>GCP APAC</td>
 >
 >       <td>
->         <code>
->           {`${protocol_1 === false ? "" : "https://"}apac.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
->         </code>
+>         `https://apac.api.smith.langchain.com`
 >       </td>
 >     </tr>
 >
@@ -363,17 +351,16 @@ export OPENAI_API_KEY=<your-openai-api-key>
 >       <td>AWS US</td>
 >
 >       <td>
->         <code>
->           {`${protocol_1 === false ? "" : "https://"}aws.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
->         </code>
+>         `https://aws.api.smith.langchain.com`
 >       </td>
 >     </tr>
 >   </tbody>
 > </table>
 >
-> For example, EU accounts: `export LANGSMITH_ENDPOINT="https://eu.api.smith.langchain.com"`. Do not add a trailing slash to the URL, as this can cause authentication errors.
+> For example, EU accounts: `export LANGSMITH_ENDPOINT="https://eu.api.smith.langchain.com"`.
 
 > [!NOTE]
+>
 > If you are using LangChain.js with LangSmith and are not in a serverless environment, we also recommend setting the following explicitly to reduce latency:
 >
 > `export LANGCHAIN_CALLBACKS_BACKGROUND=true`
@@ -382,7 +369,7 @@ export OPENAI_API_KEY=<your-openai-api-key>
 >
 > `export LANGCHAIN_CALLBACKS_BACKGROUND=false`
 >
-> See [this LangChain.js guide](https://js.langchain.com/docs/how_to/callbacks_serverless) for more information.
+> See [this LangChain.js guide](trace-with-langchain.md#ensure-all-traces-are-submitted-before-exiting) for more information.
 
 ### 3. Log a trace
 
@@ -454,7 +441,7 @@ def call_model(state: State):
     messages = state["messages"]
     # Calling the wrapped client will automatically infer the correct tracing context
     response = wrapped_client.chat.completions.create(
-        messages=messages, model="gpt-5.4-mini", tools=[tool_schema]
+        messages=messages, model="gpt-6-luna", tools=[tool_schema]
     )
     raw_tool_calls = response.choices[0].message.tool_calls
     tool_calls = [tool_call.to_dict() for tool_call in raw_tool_calls] if raw_tool_calls else []
@@ -553,7 +540,7 @@ const callModel = async ({ messages }: GraphState) => {
   // Calling the wrapped client will automatically infer the correct tracing context
   const response = await wrappedClient.chat.completions.create({
     messages,
-    model: "gpt-5.4-mini",
+    model: "gpt-6-luna",
     tools: [toolSchema],
   });
   const responseMessage = {
@@ -612,8 +599,6 @@ The **Trajectory** view in the LangSmith UI shows a simplified conversation hist
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-langgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-langgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

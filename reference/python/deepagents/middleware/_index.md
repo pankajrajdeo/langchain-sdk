@@ -1,32 +1,34 @@
 ---
 title: "reference/python/deepagents/middleware"
-description: "Index of 10 pages and 17 subdirectories under reference/python/deepagents/middleware."
+description: "Index of 10 pages and 19 subdirectories under reference/python/deepagents/middleware."
 category: "index"
 tags: [index, reference, python, deepagents, middleware]
 ---
 
 # reference/python/deepagents/middleware
 
-10 pages here, 329 pages including subdirectories.
+10 pages here, 364 pages including subdirectories.
 
 ## Directories
 
 - [_blob_offload/](_blob_offload/_index.md) - 1 page
 - [_fs_interrupt/](_fs_interrupt/_index.md) - 1 page
 - [_message_eviction/](_message_eviction/_index.md) - 5 pages
+- [_parent_notifier/](_parent_notifier/_index.md) - 1 page
 - [_prompt_caching/](_prompt_caching/_index.md) - 2 pages
+- [_skill_tools/](_skill_tools/_index.md) - 5 pages
 - [_state/](_state/_index.md) - 2 pages
 - [_utils/](_utils/_index.md) - 1 page
 - [_video/](_video/_index.md) - 12 pages
-- [async_subagents/](async_subagents/_index.md) - 39 pages
+- [async_subagents/](async_subagents/_index.md) - 60 pages
 - [filesystem/](filesystem/_index.md) - 83 pages
 - [memory/](memory/_index.md) - 17 pages
 - [patch_tool_calls/](patch_tool_calls/_index.md) - 3 pages
 - [permissions/](permissions/_index.md) - 1 page
 - [rubric/](rubric/_index.md) - 34 pages
-- [skills/](skills/_index.md) - 36 pages
+- [skills/](skills/_index.md) - 43 pages
 - [subagents/](subagents/_index.md) - 37 pages
-- [summarization/](summarization/_index.md) - 41 pages
+- [summarization/](summarization/_index.md) - 42 pages
 - [unsupported_content/](unsupported_content/_index.md) - 4 pages
 
 ## Files

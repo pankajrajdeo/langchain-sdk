@@ -20,7 +20,7 @@ In this tutorial you will:
 2. Index those documents for semantic search and create a retriever tool for the agent.
 3. Build an agentic RAG system that can decide when to use the retriever tool.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/langgraph-hybrid-rag-tutorial.png?fit=max&auto=format&n=I6RpA28iE233vhYX&q=85&s=855348219691485642b22a1419939ea7" alt="Hybrid RAG" width="1615" height="589" data-path="images/langgraph-hybrid-rag-tutorial.png" />
+![Hybrid RAG](https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/langgraph-hybrid-rag-tutorial.png?fit=max\&auto=format\&n=I6RpA28iE233vhYX\&q=85\&s=855348219691485642b22a1419939ea7)
 
 ### Concepts
 
@@ -72,11 +72,13 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 ```
 
 > [!TIP]
+>
 > If you are building a production agent, we also recommend you set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Preprocess documents
 
-### Fetch documents
+**1. Fetch documents**
+
 Use three posts from [Lilian Weng's blog](https://lilianweng.github.io/). Fetch page content with a minimal helper built on `requests` and `BeautifulSoup`.
 
 ```python
@@ -100,7 +102,8 @@ urls = [
 docs = [load_web_page(url) for url in urls]
 ```
 
-### Split documents
+**2. Split documents**
+
 Split the fetched documents into smaller chunks for indexing into the vector store:
 
 ```python
@@ -119,7 +122,8 @@ doc_splits = text_splitter.split_documents(docs_list)
 
 Index the split documents into a vector store for semantic search.
 
-### Index documents
+**1. Index documents**
+
 Use an in-memory vector store and OpenAI embeddings:
 
 ```python
@@ -137,7 +141,8 @@ def _get_retriever():
     return vectorstore.as_retriever()
 ```
 
-### Create the retriever tool
+**2. Create the retriever tool**
+
 Create a retriever tool using the `@tool` decorator:
 
 ```python
@@ -153,7 +158,8 @@ def retrieve_blog_posts(query: str) -> str:
 retriever_tool = retrieve_blog_posts
 ```
 
-### Test the tool
+**3. Test the tool**
+
 ```python
 retriever_tool.invoke({"query": "types of reward hacking"})
 ```
@@ -170,7 +176,8 @@ With the retriever tool ready, start building the agent as a LangGraph graph. In
 
 The first node is the agent decision point. Given the conversation so far, the model either answers the user directly or calls the retriever tool when the question needs blog context. That choice is what makes the system agentic rather than a fixed retrieve-then-generate pipeline: retrieval runs only when the model requests it.
 
-### Build the node
+**1. Build the node**
+
 Build a `generate_query_or_respond` node that calls the model on the current messages and binds the `retriever_tool` with `.bind_tools`:
 
 ```python
@@ -187,7 +194,8 @@ def generate_query_or_respond(state: MessagesState):
     return {"messages": [response]}
 ```
 
-### Try a simple greeting
+**2. Try a simple greeting**
+
 ```python
 input = {"messages": [{"role": "user", "content": "hello!"}]}
 generate_query_or_respond(input)["messages"][-1].pretty_print()
@@ -201,7 +209,8 @@ generate_query_or_respond(input)["messages"][-1].pretty_print()
 Hello! How can I help you today?
 ```
 
-### Ask a retrieval question
+**3. Ask a retrieval question**
+
 Ask a question that requires semantic search:
 
 ```python
@@ -231,7 +240,8 @@ Args:
 
 A normal edge always sends the graph to the same next node. A [conditional edge](graph-api.md#conditional-edges) chooses the next node at runtime by running a function over the current state. After retrieval, use that pattern to grade whether the documents are relevant: continue to answer generation if they are, or rewrite the question and try again if they are not.
 
-### Add document grading
+**1. Add document grading**
+
 Add a `grade_documents` routing function that uses a model with a structured output schema `GradeDocuments`. It returns the name of the next node based on the grading decision (`generate_answer` or `rewrite_question`):
 
 ```python
@@ -275,7 +285,8 @@ def grade_documents(
     return "rewrite_question"
 ```
 
-### Test with irrelevant documents
+**2. Test with irrelevant documents**
+
 Run this with irrelevant documents in the tool response:
 
 ```python
@@ -306,7 +317,8 @@ input = {
 grade_documents(input)
 ```
 
-### Test with relevant documents
+**3. Test with relevant documents**
+
 Confirm that relevant documents are classified as such:
 
 ```python
@@ -343,7 +355,8 @@ grade_documents(input)
 
 If the grader marks the retrieved documents as irrelevant, the graph should not answer from that context. Instead, rewrite the original user question into a clearer search query, then send control back to the generate-query-or-respond node so the agent can retrieve again. This retry loop is how the agent recovers from a weak first retrieval instead of stopping or hallucinating an answer.
 
-### Build the rewrite node
+**1. Build the rewrite node**
+
 Build the `rewrite_question` node to improve the original user question when retrieval misses:
 
 ```python
@@ -366,7 +379,8 @@ def rewrite_question(state: MessagesState):
     return {"messages": [HumanMessage(content=response.content)]}
 ```
 
-### Try it out
+**2. Try it out**
+
 ```python
 input = {
     "messages": convert_to_messages(
@@ -405,7 +419,8 @@ What are the different types of reward hacking described by Lilian Weng, and how
 
 When the grader accepts the retrieved documents, the graph moves to answer generation. This node is the classic RAG step: combine the original user question with the tool message that holds the retrieved context, then ask the model to produce a grounded reply. Keep the prompt tight so the model answers from the provided context instead of inventing details.
 
-### Build the answer node
+**1. Build the answer node**
+
 Build the `generate_answer` node to produce the final reply from the question and retrieved context:
 
 ```python
@@ -429,7 +444,8 @@ def generate_answer(state: MessagesState):
     return {"messages": [response]}
 ```
 
-### Try it
+**2. Try it**
+
 ```python
 input = {
     "messages": convert_to_messages(
@@ -535,7 +551,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/agentic-rag-output.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=ddedbd57514888e614ece260092201df" alt="Agentic RAG graph" width="1245" height="1395" data-path="oss/images/agentic-rag-output.png" />
+![Agentic RAG graph](https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/agentic-rag-output.png?fit=max\&auto=format\&n=-_xGPoyjhyiDWTPJ\&q=85\&s=ddedbd57514888e614ece260092201df)
 
 ## Run the agentic RAG
 
@@ -570,8 +586,6 @@ def run_agentic_rag() -> None:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/agentic-rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/agentic-rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

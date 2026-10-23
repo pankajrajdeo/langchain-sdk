@@ -41,7 +41,7 @@ To explore a personal wiki:
 openwiki visualize ~/.openwiki/wiki
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/BPy4qr0YTTF2625M/oss/images/openwiki/visualizer.gif?s=fe0362d13c1436c8a9f1a95cc864c447" alt="OpenWiki visualizer with an interactive node graph beside a live Markdown reader" width="880" height="498" data-path="oss/images/openwiki/visualizer.gif" />
+![OpenWiki visualizer with an interactive node graph beside a live Markdown reader](https://mintcdn.com/langchain-5e9cc07a/BPy4qr0YTTF2625M/oss/images/openwiki/visualizer.gif?s=fe0362d13c1436c8a9f1a95cc864c447)
 
 The visualizer shows:
 
@@ -61,6 +61,7 @@ openwiki visualize <PATH> --export docs/openwiki-visualizer
 The export contains `index.html`, `client.js`, `client-lib.js`, `styles.css`, and `graph.json`. Its client reads the sibling graph file and does not use live reload, so the directory can be hosted by GitHub Pages, MkDocs, or any other static host.
 
 > [!NOTE]
+>
 > The page loads its graph, Markdown, and diagram libraries from a public CDN, so an internet connection is required for both local and static viewers.
 
 ## See also
@@ -71,8 +72,6 @@ The export contains `index.html`, `client.js`, `client-lib.js`, `styles.css`, an
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/visualize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/visualize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

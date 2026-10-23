@@ -11,6 +11,7 @@ tags: [docs, javascript, integrations, chat, xai]
 > Integrate with the ChatXAI chat model using LangChain JavaScript.
 
 > [!WARNING]
+>
 > This page documents Grok models from [xAI](https://docs.x.ai/docs/overview). Do not confuse xAI with [Groq](https://console.groq.com/docs/overview), a separate inference provider. See the [Groq integration](groq.md).
 
 [xAI](https://x.ai/) develops Grok chat models. See the [xAI model documentation](https://docs.x.ai/docs/models) for available model IDs.
@@ -21,7 +22,7 @@ This guide will help you getting started with `ChatXAI` [chat models](../../lang
 
 ### Integration details
 
-| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/xai/) | Downloads | Version |
+| Class | Package | Serializable | [PY support](../../../integrations/chat/xai.md) | Downloads | Version |
 | :- | :- | :-: | :-: | :-: | :-: |
 | [`ChatXAI`](https://reference.langchain.com/javascript/langchain-xai/ChatXAI) | [`@langchain/xai`](https://www.npmjs.com/package/@langchain/xai) | ✅ | ✅ | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/xai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/xai?style=flat-square\&label=%20&) |
 
@@ -150,8 +151,6 @@ For detailed documentation of all `ChatXAI` features and configurations head to 
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/chat/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

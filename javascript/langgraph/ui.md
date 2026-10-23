@@ -12,9 +12,10 @@ tags: [docs, javascript, langgraph, ui]
 
 Agent Chat UI is open source and can be adapted to your application needs.
 
-> **Embedded Content:** [Agent Chat UI](https://www.youtube.com/embed/lInrwVnZ83o?si=Uw66mPtCERJm0EjU)
+[Agent Chat UI](https://www.youtube.com/embed/lInrwVnZ83o?si=Uw66mPtCERJm0EjU)
 
 > [!TIP]
+>
 > You can use generative UI in the Agent Chat UI. For more information, see [Implement generative user interfaces with LangGraph](../../langsmith/generative-ui-react.md).
 
 ### Quick start
@@ -66,12 +67,11 @@ After starting Agent Chat UI, you'll need to configure it to connect to your age
 Once configured, Agent Chat UI will automatically fetch and display any interrupted threads from your agent.
 
 > [!TIP]
+>
 > Agent Chat UI has out-of-the-box support for rendering tool calls and tool result messages. To customize what messages are shown, see [Hiding Messages in the Chat](https://github.com/langchain-ai/agent-chat-ui?tab=readme-ov-file#hiding-messages-in-the-chat).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -30,7 +30,6 @@ tags: [reference, langgraph, pregel, main]
 - `CONFIG_KEY_STREAM_MESSAGES_V2`
 - `CONFIG_KEY_TASK_ID`
 - `CONFIG_KEY_THREAD_ID`
-- `ERROR`
 - `INPUT`
 - `INTERRUPT`
 - `NS_END`
@@ -71,17 +70,26 @@ tags: [reference, langgraph, pregel, main]
 - [`apply_writes()`](https://reference.langchain.com/python/langgraph/pregel/main/apply_writes)
 - [`local_read()`](https://reference.langchain.com/python/langgraph/pregel/main/local_read)
 - [`prepare_next_tasks()`](https://reference.langchain.com/python/langgraph/pregel/main/prepare_next_tasks)
+- [`task_path_str()`](https://reference.langchain.com/python/langgraph/pregel/main/task_path_str)
 - [`identifier()`](https://reference.langchain.com/python/langgraph/pregel/main/identifier)
 - [`achannels_from_checkpoint()`](https://reference.langchain.com/python/langgraph/pregel/main/achannels_from_checkpoint)
+- [`acheckpoint_superseded()`](https://reference.langchain.com/python/langgraph/pregel/main/acheckpoint_superseded)
 - [`channels_from_checkpoint()`](https://reference.langchain.com/python/langgraph/pregel/main/channels_from_checkpoint)
+- [`checkpoint_superseded()`](https://reference.langchain.com/python/langgraph/pregel/main/checkpoint_superseded)
 - [`copy_checkpoint()`](https://reference.langchain.com/python/langgraph/pregel/main/copy_checkpoint)
 - [`create_checkpoint()`](https://reference.langchain.com/python/langgraph/pregel/main/create_checkpoint)
 - [`create_checkpoint_plan_for_update_state_api()`](https://reference.langchain.com/python/langgraph/pregel/main/create_checkpoint_plan_for_update_state_api)
+- [`delta_channels_overwritten()`](https://reference.langchain.com/python/langgraph/pregel/main/delta_channels_overwritten)
+- [`delta_channels_with_pending_writes()`](https://reference.langchain.com/python/langgraph/pregel/main/delta_channels_with_pending_writes)
 - [`empty_checkpoint()`](https://reference.langchain.com/python/langgraph/pregel/main/empty_checkpoint)
 - [`get_updated_channels_from_tasks()`](https://reference.langchain.com/python/langgraph/pregel/main/get_updated_channels_from_tasks)
+- [`put_writes_accepts_task_path()`](https://reference.langchain.com/python/langgraph/pregel/main/put_writes_accepts_task_path)
+- [`versions_seen_without_bumps()`](https://reference.langchain.com/python/langgraph/pregel/main/versions_seen_without_bumps)
 - [`draw_graph()`](https://reference.langchain.com/python/langgraph/pregel/main/draw_graph)
 - [`map_input()`](https://reference.langchain.com/python/langgraph/pregel/main/map_input)
 - [`read_channels()`](https://reference.langchain.com/python/langgraph/pregel/main/read_channels)
+- [`ensure_message_ids()`](https://reference.langchain.com/python/langgraph/pregel/main/ensure_message_ids)
+- [`read_task_statuses()`](https://reference.langchain.com/python/langgraph/pregel/main/read_task_statuses)
 - [`get_new_channel_versions()`](https://reference.langchain.com/python/langgraph/pregel/main/get_new_channel_versions)
 - [`validate_timeout_supported()`](https://reference.langchain.com/python/langgraph/pregel/main/validate_timeout_supported)
 - [`validate_graph()`](https://reference.langchain.com/python/langgraph/pregel/main/validate_graph)
@@ -93,4 +101,4 @@ tags: [reference, langgraph, pregel, main]
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/49cce0ca852be4cfb567a1cbe0e511ff325a1682/libs/langgraph/langgraph/pregel/main.py)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/pregel/main.py)

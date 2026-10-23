@@ -54,26 +54,29 @@ Sandboxes are especially useful for:
 * Data analysis agents: Load files, install data analysis libraries (pandas, numpy, etc.), run statistical calculations, and create outputs like PowerPoint presentations in a safe, isolated environment
 
 > [!TIP]
+>
 > **Using Deep Agents Code?** Deep Agents Code has built-in sandbox support via the `--sandbox` flag. See [Use remote sandboxes](code/remote-sandboxes.md) for Deep Agents Code-specific setup, flags (`--sandbox-id`, `--sandbox-setup`), and examples.
 
 > [!NOTE]
+>
 > **If you're looking for LangSmith sandboxes:** LangSmith provides first-party managed sandboxes you can use directly from the LangSmith UI or SDK without a third-party account required. For managed sandbox resources, snapshots, service URLs, and the auth proxy, refer to [LangSmith Sandboxes](../langsmith/sandboxes.md).
 
 ## Basic usage
 
 These examples assume you have already created a sandbox/devbox using the provider's SDK and have credentials set up. For signup, authentication, and provider-specific lifecycle details, see [Available providers](#available-providers).
 
-#### LangSmith
+**LangSmith**
+
 **pip**
 
 ```bash
-pip install "langsmith[sandbox]"
+pip install langsmith
 ```
 
 **uv**
 
 ```bash
-uv add "langsmith[sandbox]"
+uv add langsmith
 ```
 
 ```python
@@ -106,10 +109,12 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/9f84b0dd-2df7-4f4d-9ba1-4094e58d429e/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/5c79cd36-6974-4010-8f93-9e81a6ff8c94/r)**
+>
+> Open a public LangSmith run for this example.
 
-#### Daytona
+**Daytona**
+
 **pip**
 
 ```bash
@@ -152,7 +157,12 @@ finally:
     sandbox.stop()
 ```
 
-#### E2B
+> **[View example trace](https://smith.langchain.com/public/571f1de5-c211-47b2-81d3-ea330cb6bc31/r)**
+>
+> Open a public LangSmith run for this example.
+
+**E2B**
+
 **pip**
 
 ```bash
@@ -195,7 +205,8 @@ finally:
     e2b_sandbox.kill()
 ```
 
-#### Modal
+**Modal**
+
 **pip**
 
 ```bash
@@ -238,7 +249,8 @@ finally:
     modal_sandbox.terminate()
 ```
 
-#### Runloop
+**Runloop**
+
 **pip**
 
 ```bash
@@ -285,7 +297,8 @@ finally:
     devbox.shutdown()
 ```
 
-#### Vercel
+**Vercel**
+
 **pip**
 
 ```bash
@@ -329,6 +342,7 @@ finally:
 ```
 
 > [!TIP]
+>
 > [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-sandboxes) traces show which shell commands ran inside a sandbox and how the agent used filesystem tools. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up. For managed sandbox hosting, see [LangSmith Sandboxes](../langsmith/sandboxes.md).
 >
 > We recommend you also set up [LangSmith Engine](../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
@@ -350,6 +364,7 @@ For the full lifecycle table, async [graph factory](../langsmith/graph-rebuild.m
 Each conversation gets its own sandbox. The first run creates it; follow-up turns on the same thread reuse it. When the thread ends or the sandbox TTL expires, the environment goes away. Store the mapping with sandbox names or metadata as in the following example so each run resolves to the same sandbox.
 
 > [!TIP]
+>
 > When users can return after idle time, configure a TTL on the sandbox so the provider deletes or archives idle environments automatically.
 
 **Google**
@@ -574,6 +589,7 @@ async def agent(config: RunnableConfig):
 Every thread on the same assistant reuses one sandbox. Files, installed packages, and cloned repositories persist across conversations.
 
 > [!WARNING]
+>
 > Assistant-scoped sandboxes accumulate in-sandbox state over time. Configure a TTL with your sandbox provider, use snapshots to reset periodically, or implement cleanup logic so disk and memory do not grow without bound.
 
 **Google**
@@ -1051,8 +1067,9 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
-#### [View example trace](https://smith.langchain.com/public/f7f985ac-d3be-4ce3-b23e-ec1b441ee466/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/2b9e8bc1-f9de-41fd-824b-cf6f397eb2f2/r)**
+>
+> Open a public LangSmith run for this example.
 
 The examples in this doc use the sandbox as a tool pattern.
 Choose the agent in sandbox pattern when your provider's SDK handles the communication layer and you want production to mirror local development.
@@ -1104,7 +1121,8 @@ When the agent calls the `execute` tool, it provides a `command` string and gets
 
 You can also call the backend `execute()` method directly in your application code.
 
-#### LangSmith
+**LangSmith**
+
 ```python
 from deepagents.backends.langsmith import LangSmithSandbox
 from langsmith.sandbox import SandboxClient
@@ -1117,7 +1135,8 @@ result = backend.execute("python --version")
 print(result.output)
 ```
 
-#### AgentCore
+**AgentCore**
+
 **pip**
 
 ```bash
@@ -1147,7 +1166,8 @@ finally:
     interpreter.stop()
 ```
 
-#### Daytona
+**Daytona**
+
 **pip**
 
 ```bash
@@ -1172,7 +1192,8 @@ result = backend.execute("python --version")
 print(result.output)
 ```
 
-#### E2B
+**E2B**
+
 **pip**
 
 ```bash
@@ -1199,7 +1220,8 @@ finally:
     e2b_sandbox.kill()
 ```
 
-#### Modal
+**Modal**
+
 ```python
 import modal
 
@@ -1213,7 +1235,8 @@ result = backend.execute("python --version")
 print(result.output)
 ```
 
-#### NVIDIA OpenShell
+**NVIDIA OpenShell**
+
 **pip**
 
 ```bash
@@ -1238,7 +1261,8 @@ with openshell.Sandbox(delete_on_exit=True) as sandbox:
     print(result.output)
 ```
 
-#### Runloop
+**Runloop**
+
 **pip**
 
 ```bash
@@ -1269,7 +1293,8 @@ finally:
     devbox.shutdown()
 ```
 
-#### Vercel
+**Vercel**
+
 **pip**
 
 ```bash
@@ -1358,7 +1383,8 @@ The deepagents sandbox backends support file transfer APIs for moving files betw
 
 Use `upload_files()` to populate the sandbox before the agent runs. Paths must be absolute and contents are `bytes`:
 
-#### LangSmith
+**LangSmith**
+
 ```python
 from deepagents.backends.langsmith import LangSmithSandbox
 from langsmith.sandbox import SandboxClient
@@ -1375,7 +1401,8 @@ backend.upload_files(
 )
 ```
 
-#### AgentCore
+**AgentCore**
+
 **pip**
 
 ```bash
@@ -1406,7 +1433,8 @@ backend.upload_files(
 )
 ```
 
-#### Daytona
+**Daytona**
+
 **pip**
 
 ```bash
@@ -1435,7 +1463,8 @@ backend.upload_files(
 )
 ```
 
-#### E2B
+**E2B**
+
 **pip**
 
 ```bash
@@ -1466,7 +1495,8 @@ finally:
     e2b_sandbox.kill()
 ```
 
-#### Modal
+**Modal**
+
 ```python
 import modal
 
@@ -1484,7 +1514,8 @@ backend.upload_files(
 )
 ```
 
-#### Runloop
+**Runloop**
+
 **pip**
 
 ```bash
@@ -1516,7 +1547,8 @@ backend.upload_files(
 )
 ```
 
-#### Vercel
+**Vercel**
+
 **pip**
 
 ```bash
@@ -1549,7 +1581,8 @@ backend.upload_files(
 
 Use `download_files()` to retrieve files from the sandbox after the agent finishes:
 
-#### LangSmith
+**LangSmith**
+
 ```python
 from deepagents.backends.langsmith import LangSmithSandbox
 from langsmith.sandbox import SandboxClient
@@ -1566,7 +1599,8 @@ for result in results:
         print(f"Failed to download {result.path}: {result.error}")
 ```
 
-#### AgentCore
+**AgentCore**
+
 **pip**
 
 ```bash
@@ -1599,7 +1633,8 @@ for result in results:
 interpreter.stop()
 ```
 
-#### Daytona
+**Daytona**
+
 **pip**
 
 ```bash
@@ -1628,7 +1663,8 @@ for result in results:
         print(f"Failed to download {result.path}: {result.error}")
 ```
 
-#### E2B
+**E2B**
+
 **pip**
 
 ```bash
@@ -1659,7 +1695,8 @@ finally:
     e2b_sandbox.kill()
 ```
 
-#### Modal
+**Modal**
+
 ```python
 import modal
 
@@ -1677,7 +1714,8 @@ for result in results:
         print(f"Failed to download {result.path}: {result.error}")
 ```
 
-#### Runloop
+**Runloop**
+
 **pip**
 
 ```bash
@@ -1709,7 +1747,8 @@ for result in results:
         print(f"Failed to download {result.path}: {result.error}")
 ```
 
-#### Vercel
+**Vercel**
+
 **pip**
 
 ```bash
@@ -1739,6 +1778,7 @@ for result in results:
 ```
 
 > [!NOTE]
+>
 > Inside the sandbox, the agent uses filesystem tools (`read_file`, `write_file`). The `upload_files` and `download_files` methods are for your application code to move files across the boundary between your host and the sandbox.
 
 ## Security considerations
@@ -1746,6 +1786,7 @@ for result in results:
 Sandboxes isolate code execution from your host system, but they don't protect against **context injection**. An attacker who controls part of the agent's input can instruct it to read files, run commands, or exfiltrate data from within the sandbox. This makes credentials inside the sandbox especially dangerous.
 
 > [!WARNING]
+>
 > **Never put secrets inside a sandbox.** API keys, tokens, database credentials, and other secrets injected into a sandbox (via environment variables, mounted files, or the `secrets` option) can be read and exfiltrated by a context-injected agent. This applies even to short-lived or scoped credentials—if an agent can access them, so can an attacker.
 
 ### Handling secrets safely
@@ -1757,6 +1798,7 @@ If your agent needs to call authenticated APIs or access protected resources, yo
 2. **Use a network proxy that injects credentials.** Some sandbox providers support proxies that intercept outgoing HTTP requests from the sandbox and attach credentials (e.g., `Authorization` headers) before forwarding them. The agent never sees the secret—it just makes plain requests to a URL. This approach is not yet widely available across providers.
 
 > [!WARNING]
+>
 > If you must inject secrets into a sandbox (not recommended), take these precautions:
 >
 > * Enable [human-in-the-loop](human-in-the-loop.md) approval for **all** tool calls, not just sensitive ones
@@ -1775,8 +1817,6 @@ If your agent needs to call authenticated APIs or access protected resources, yo
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

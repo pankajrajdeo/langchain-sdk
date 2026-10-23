@@ -13,6 +13,7 @@ tags: [docs, deepagents, comparison]
 This page explains how [LangChain Deep Agents](overview.md) compares to the [Claude Agent SDK](https://platform.anthropic.com/docs/en/agent-sdk/overview). Both are harnesses for building custom agents, but they make different tradeoffs around execution environments, deployment, and vendor coupling.
 
 > [!NOTE]
+>
 > Deep Agents is used in production by [OpenSWE](https://github.com/langchain-ai/open-swe) and [LangSmith Fleet](../langsmith/fleet/index.md).
 
 ## At a glance
@@ -65,6 +66,7 @@ Deep Agents runs in two modes, and your tools, middleware, and subagents carry o
 * **Self-hosted:** run [`langgraph build`](../langsmith/cli.md#build) to produce a [standalone Docker image](../langsmith/deploy-standalone-server.md) you can deploy anywhere, with no changes to the agent.
 
 > [!TIP]
+>
 > For a managed agent platform that works across any model provider, use [LangSmith Fleet](../langsmith/fleet/index.md). [Claude managed agents](https://platform.claude.com/docs/en/managed-agents/overview) is limited to the Anthropic ecosystem.
 
 ### LLM
@@ -83,14 +85,13 @@ The Claude Agent SDK is purpose-built for Claude and Anthropic's product surface
 * **Choose Claude Agent SDK** if you are already invested in the Anthropic ecosystem and wish to self-host and build the API, auth, and multi-tenant layers yourself.
 
 > [!NOTE]
+>
 > **Notice a mistake?**
 >
 > We drafted this comparison on April 16th, 2026. If products have changed, please [file an issue](https://github.com/langchain-ai/docs/issues).
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/comparison.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/comparison.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

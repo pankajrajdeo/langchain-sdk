@@ -62,6 +62,7 @@ Your agent can remember information from previous conversations and use it to ma
 By default, your agent requires approval before saving to the memories folder. When this setting is enabled, the agent pauses and waits for you to accept, edit, or reject each memory update in the Fleet UI before continuing.
 
 > [!TIP]
+>
 > If your agent runs on a [schedule](schedules.md#add-a-schedule) or other automated schedule, disable the memory approval requirement. Otherwise, the agent will pause on every scheduled run that involves a memory update and wait indefinitely for manual approval.
 
 ### Disable required approval for memory updates
@@ -92,6 +93,7 @@ To pause an agent, pause its channels:
 3. Click the **Pause channels** button.
 
 > [!TIP]
+>
 > To resume, click the **Resume channels** button.
 
 ## Delete agent
@@ -104,12 +106,11 @@ To permanently delete an agent:
 4. To confirm the deletion, click the **Delete** button.
 
 > [!WARNING]
+>
 > This action cannot be undone. It will permanently delete the agent, all threads linked to the agent, and unlink any attached channels.
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/manage-agent-settings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/manage-agent-settings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -160,6 +160,8 @@ tags:
     x-group: System
   - name: public
     x-group: System
+  - name: agents
+    x-hidden: true
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
@@ -168,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: usage
 paths:
   /api/v1/feedback-configs:
     get:
@@ -227,6 +230,31 @@ paths:
             type: boolean
             default: false
             title: Read After Write
+        - name: is_enforced
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - type: boolean
+              - type: 'null'
+            description: Only enforced configs when true, only unenforced when false.
+            title: Is Enforced
+          description: Only enforced configs when true, only unenforced when false.
+        - name: include_all_configs
+          in: query
+          required: false
+          schema:
+            type: boolean
+            description: >-
+              Return every config of each key, deleted ones included, instead of
+              one config per key. Pages of up to 100 configs unless ``limit`` is
+              set; ``X-Pagination-Total`` gives the full count.
+            default: false
+            title: Include All Configs
+          description: >-
+            Return every config of each key, deleted ones included, instead of
+            one config per key. Pages of up to 100 configs unless ``limit`` is
+            set; ``X-Pagination-Total`` gives the full count.
       responses:
         '200':
           description: Successful Response
@@ -253,6 +281,10 @@ components:
   schemas:
     FeedbackConfigSchema:
       properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
         feedback_key:
           type: string
           title: Feedback Key
@@ -271,8 +303,21 @@ components:
             - type: boolean
             - type: 'null'
           title: Is Lower Score Better
+        is_enforced:
+          type: boolean
+          title: Is Enforced
+          default: false
+        is_first:
+          type: boolean
+          title: Is First
+          default: false
+        is_deleted:
+          type: boolean
+          title: Is Deleted
+          default: false
       type: object
       required:
+        - id
         - feedback_key
         - feedback_config
         - tenant_id

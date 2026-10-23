@@ -13,6 +13,7 @@ tags: [docs, javascript, integrations, tools, google]
 The `@langchain/google` package supports Gemini's built-in tools, which provide capabilities like web search grounding, code execution, URL context retrieval, and more. These tools are passed as Gemini-native objects to `ChatGoogle` via `bindTools()` or the `tools` call option.
 
 > [!WARNING]
+>
 > You cannot mix Gemini native tools (Google Search, Code Execution, etc.) with standard LangChain tools (Zod-based function tools) in the same request. See the [ChatGoogle](../chat/google.md) page for standard tool calling usage.
 
 ### Google Search
@@ -50,6 +51,7 @@ const llm = new ChatGoogle("gemini-2.5-flash")
 ```
 
 > [!NOTE]
+>
 > The `googleSearchRetrieval` tool is maintained for backwards compatibility, but `googleSearch` is preferred.
 
 For more information, see [Google's Grounding with Google Search documentation](https://ai.google.dev/gemini-api/docs/grounding).
@@ -100,7 +102,7 @@ const llm = new ChatGoogle("gemini-2.5-flash")
     },
   ]);
 
-const res = await llm.invoke("Summarize this page: https://js.langchain.com/");
+const res = await llm.invoke("Summarize this page: https://docs.langchain.com/");
 console.log(res.text);
 ```
 
@@ -258,8 +260,6 @@ For more information, see [Google's Agent Search grounding documentation](https:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/google.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/google.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

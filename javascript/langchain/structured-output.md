@@ -11,6 +11,7 @@ tags: [docs, javascript, langchain, structured-output]
 Structured output allows agents to return data in a specific, predictable format. Instead of parsing natural language responses, you get typed structured data.
 
 > [!TIP]
+>
 > This page covers structured output with agents using `createAgent`. To use structured output directly on a model (outside of agents), see [Models - Structured output](models.md#structured-output).
 
 LangChain's prebuilt ReAct agent `createAgent` handles structured output automatically. The user sets their desired structured output schema, and when the model generates the structured data, it's captured, validated, and returned in the `structuredResponse` key of the agent's state.
@@ -48,15 +49,16 @@ const agent = createAgent({
 The structured response is returned in the `structuredResponse` key of the agent's final state.
 
 > [!TIP]
+>
 > Support for native structured output features is read dynamically from the model's [profile data](models.md#model-profiles) if using `langchain>=1.1`. If data are not available, use another condition or specify manually:
 >
-> ```typescript
+```typescript
 > const customProfile: ModelProfile = {
 >     structuredOutput: true,
 >     // ...
 > }
 > const model = await initChatModel("...", { profile: customProfile });
-> ```
+```
 >
 > If tools are specified, the model must support simultaneous use of tools and structured output.
 
@@ -72,7 +74,8 @@ function providerStrategy<StructuredResponseT>(
 ): ProviderStrategy<StructuredResponseT>
 ```
 
-#### `schema`
+**schema** *required*
+
 The schema defining the structured output format. Supports:
 
 * **Zod Schema**: A zod schema
@@ -169,6 +172,7 @@ console.log(result.structuredResponse);
 Provider-native structured output provides high reliability and strict validation because the model provider enforces the schema. Use it when available.
 
 > [!NOTE]
+>
 > If the provider natively supports structured output for your model choice, it is functionally equivalent to write `responseFormat: contactInfoSchema` instead of `responseFormat: providerStrategy(contactInfoSchema)`.
 >
 > In either case, if structured output is not supported, the agent will fall back to a tool calling strategy.
@@ -190,18 +194,21 @@ function toolStrategy<StructuredResponseT>(
 ): ToolStrategy<StructuredResponseT>
 ```
 
-#### `schema`
+**schema** *required*
+
 The schema defining the structured output format. Supports:
 
 * **Zod Schema**: A zod schema
 * **Standard Schema**: Any schema implementing the [Standard Schema](https://standardschema.dev/) spec
 * **JSON Schema**: A JSON schema object
 
-#### `options.toolMessageContent`
+**options.toolMessageContent**
+
 Custom content for the tool message returned when structured output is generated.
 If not provided, defaults to a message showing the structured response data.
 
-#### `options.handleError`
+**options.handleError**
+
 Options parameter containing an optional `handleError` parameter for customizing the error handling strategy.
 
 * **`true`**: Catch all errors with default error template (default)
@@ -550,8 +557,6 @@ const responseFormat = toolStrategy(ProductRating, {
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

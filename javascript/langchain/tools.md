@@ -15,6 +15,7 @@ Tools extend what [agents](agents.md) can do—letting them fetch real-time data
 Under the hood, tools are callable functions with well-defined inputs and outputs that get passed to a [chat model](models.md). The model decides when to invoke a tool based on the conversation context, and what input arguments to provide.
 
 > [!TIP]
+>
 > For details on how models handle tool calls, see [Tool calling](models.md#tool-calling). Trace tool calls and debug errors with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-tools). Follow the [tracing quickstart](../../langsmith/trace-with-langchain.md) to get set up.
 >
 > We recommend you also set up [LangSmith Engine](../../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
@@ -43,9 +44,11 @@ const searchDatabase = tool(
 ```
 
 > [!NOTE]
+>
 > **Server-side tool use:** Some chat models feature built-in tools (web search, code interpreters) that are executed server-side. See [Server-side tool use](#server-side-tool-use) for details.
 
 > [!WARNING]
+>
 > Prefer `snake_case` for tool names (e.g., `web_search` instead of `Web Search`). Some model providers have issues with or reject names containing spaces or special characters with errors. Sticking to alphanumeric characters, underscores, and hyphens helps to improve compatibility across providers.
 
 ## Access context
@@ -57,12 +60,14 @@ Tools are most powerful when they can access runtime information like conversati
 Context provides immutable configuration data that is passed at invocation time. Use it for user IDs, session details, or application-specific settings that shouldn't change during a conversation.
 
 > [!NOTE]
+>
 > While `thread_id` (passed via `config={"configurable": {"thread_id": ...}}`) scopes the *conversation*: message history and checkpoints, `context` carries *per-run* data your tools and middleware read at invocation time. Persistence requires a [checkpointer](short-term-memory.md). In production you typically pass both a stable `thread_id` per conversation and a `context` object on every invoke.
 
 Tools can access an agent's runtime context through the `config` parameter. Configure a [checkpointer](short-term-memory.md) and pass `context` with a stable `thread_id` so the conversation persists across invocations:
 
 ```ts
 import * as z from "zod";
+import { uuid7 } from "langsmith";
 import { ChatOpenAI } from "@langchain/openai";
 import { MemorySaver } from "@langchain/langgraph";
 import { createAgent, tool } from "langchain";
@@ -89,7 +94,7 @@ const agent = createAgent({
   contextSchema,
 });
 
-const threadId = crypto.randomUUID();
+const threadId = uuid7();
 const threadConfig = {
   configurable: { thread_id: threadId },
   context: { user_name: "John Smith" },
@@ -112,6 +117,10 @@ result = await agent.invoke(
 console.log(result.messages.at(-1)?.content);
 ```
 
+> **[View example trace](https://smith.langchain.com/public/f61429d4-8472-4971-b2c3-ed4e41d859ed/r)**
+>
+> Open a public LangSmith run for this example.
+
 ### Long-term memory (Store)
 
 The [`BaseStore`](https://reference.langchain.com/javascript/langchain-core/stores/BaseStore) provides persistent storage that survives across conversations. Unlike state (short-term memory), data saved to the store remains available in future sessions.
@@ -119,6 +128,7 @@ The [`BaseStore`](https://reference.langchain.com/javascript/langchain-core/stor
 Access the store through `config.store`. The store uses a namespace/key pattern to organize data:
 
 > [!TIP]
+>
 > For production deployments, use a persistent store implementation like [`PostgresStore`](https://reference.langchain.com/javascript/langchain-langgraph-checkpoint-postgres/store/PostgresStore), `MongoDBStore`, or `RedisStore` instead of `InMemoryStore`. See the [memory documentation](../langgraph/add-memory.md) for setup details.
 
 ```ts
@@ -250,6 +260,7 @@ const logExecutionContext = tool(
 ```
 
 > [!NOTE]
+>
 > Requires `deepagents>=1.9.0` (or `@langchain/langgraph>=1.2.8`).
 
 ### Server info
@@ -282,6 +293,7 @@ const getAssistantScopedData = tool(
 `serverInfo` is `null` when the tool is not running on LangGraph Server.
 
 > [!NOTE]
+>
 > Requires `deepagents>=1.9.0` (or `@langchain/langgraph>=1.2.8`).
 
 ## Tool execution
@@ -313,6 +325,10 @@ const getWeather = tool(({ city }) => `It is currently sunny in ${city}.`, {
 });
 ```
 
+> **[View example trace](https://smith.langchain.com/public/04567cb5-57fc-49b6-8737-ec6828fcf20d/r)**
+>
+> Open a public LangSmith run for this example.
+
 Behavior:
 
 * The return value is converted to a `ToolMessage`.
@@ -342,6 +358,10 @@ const getWeatherData = tool(
   },
 );
 ```
+
+> **[View example trace](https://smith.langchain.com/public/7ed64816-9681-4c3b-8c1a-803dff7b5d0e/r)**
+>
+> Open a public LangSmith run for this example.
 
 Behavior:
 
@@ -415,6 +435,10 @@ const setLanguage = tool(
 );
 ```
 
+> **[View example trace](https://smith.langchain.com/public/44d6ee7a-f6cf-4c15-9d19-248e28359eeb/r)**
+>
+> Open a public LangSmith run for this example.
+
 Behavior:
 
 * The command updates state using `update`.
@@ -458,8 +482,9 @@ const result = await agent.invoke({
 // "Order 12345 is shipped and will arrive in 2 days."
 ```
 
-#### [View example trace](https://smith.langchain.com/public/8f9bb682-fa0b-4264-8495-246703f0624b/r)
-Open a public LangSmith run for this example.
+> **[View example trace](https://smith.langchain.com/public/648dc7a3-0190-4546-946b-14fb56a18496/r)**
+>
+> Open a public LangSmith run for this example.
 
 Behavior:
 
@@ -474,9 +499,11 @@ Use this when:
 * You need deterministic, unmodified output: the model cannot rephrase, summarize, or act on the tool result.
 
 > [!WARNING]
+>
 > Because the model does not process the tool's output, `return_direct=True` is not suitable for tools whose results require further reasoning, summarization, or chaining with other tool calls.
 
 > [!WARNING]
+>
 > **Mixed parallel calls:** If the model calls a `return_direct=True` tool alongside tools that do not have `return_direct=True`, the agent does **not** exit after that step. It routes back to the model with every `ToolMessage` from the batch, so the model can reason over all results. `return_direct` only short-circuits the loop when every tool call in the step has `return_direct=True`.
 
 ### Error handling
@@ -677,10 +704,12 @@ With dynamic tools, the set of tools available to the agent is modified at runti
 
 There are two approaches depending on whether tools are known ahead of time:
 
-#### Filtering pre-registered tools
+**Filtering pre-registered tools**
+
 When all possible tools are known at agent creation time, you can pre-register them and dynamically filter which ones are exposed to the model based on state, permissions, or context.
 
-#### State
+**State**
+
 Enable advanced tools only after certain conversation milestones:
 
 ```typescript
@@ -721,7 +750,8 @@ const agent = await createDeepAgent({
 });
 ```
 
-#### Store
+**Store**
+
 Filter tools based on user preferences or feature flags in Store:
 
 ```typescript
@@ -773,7 +803,8 @@ const agent = await createDeepAgent({
 });
 ```
 
-#### Runtime Context
+**Runtime Context**
+
 Filter tools based on user permissions from Runtime Context:
 
 ```typescript
@@ -825,7 +856,8 @@ This approach is best when:
 
 See [Dynamically selecting tools](middleware/custom.md#dynamically-selecting-tools) for more examples.
 
-#### Runtime tool registration
+**Runtime tool registration**
+
 When tools are discovered or created at runtime (e.g., loaded from an MCP server, generated based on user data, or fetched from a remote registry), you need to both register the tools and handle their execution dynamically.
 
 This requires two middleware hooks:
@@ -891,6 +923,7 @@ This approach is best when:
 * You're integrating with external tool registries
 
 > [!NOTE]
+>
 > The `wrap_tool_call` hook is required for runtime-registered tools because the agent needs to know how to execute tools that weren't in the original tool list. Without it, the agent won't know how to invoke the dynamically added tool.
 
 ## Headless tools
@@ -918,14 +951,16 @@ In both runtimes, the model sees a normal tool it can call, but the actual execu
 4. **Pass** the implementation from step 2 to your streaming hook's `tools` option.
 
 > [!NOTE]
+>
 > Put **tool definitions** (`tool({ name, description, schema })`) and **implementations** (`.implement(...)`) in **separate modules**. Import the shared definition file from your server agent and from your frontend so names and schemas stay aligned; keep client-only execute logic in implementation modules the server never loads.
 
 When the model issues a tool call for one of these tools, the run **interrupts** instead of executing the tool locally. Your app can inspect the payload, perform the action in the right environment (for example a browser, another service, or a human review step), then **resume** the graph with the tool result. When you use the supported JS SDK hooks, they can detect headless-tool interrupts, run the matching client implementation, and submit the resume command for you.
 
 Use the optional **`onTool`** callback to observe lifecycle events (`start`, `success`, `error`) for UI feedback such as spinners or toasts.
 
-#### [Headless tools frontend pattern](frontend/headless-tools.md)
-See an end-to-end example of schema-only tools executed in the client with `useStream`.
+> **[Headless tools frontend pattern](frontend/headless-tools.md)**
+>
+> See an end-to-end example of schema-only tools executed in the client with `useStream`.
 
 ## Prebuilt tools
 
@@ -949,8 +984,6 @@ Refer to the individual [chat model integration pages](../integrations/providers
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

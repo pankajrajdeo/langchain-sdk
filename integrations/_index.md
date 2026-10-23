@@ -1,13 +1,13 @@
 ---
 title: "integrations"
-description: "Index of 15 pages and 22 subdirectories under integrations."
+description: "Index of 15 pages and 23 subdirectories under integrations."
 category: "index"
 tags: [index, integrations]
 ---
 
 # integrations
 
-15 pages here, 356 pages including subdirectories.
+15 pages here, 359 pages including subdirectories.
 
 ## Directories
 
@@ -18,14 +18,15 @@ tags: [index, integrations]
 - [chat/](chat/_index.md) - 37 pages
 - [chat_message_histories/](chat_message_histories/_index.md) - 1 page
 - [checkpointers/](checkpointers/_index.md) - 1 page
+- [decision_models/](decision_models/_index.md) - 1 page
 - [document_loaders/](document_loaders/_index.md) - 25 pages
 - [document_transformers/](document_transformers/_index.md) - 5 pages
 - [embeddings/](embeddings/_index.md) - 28 pages
 - [graphs/](graphs/_index.md) - 6 pages
-- [llms/](llms/_index.md) - 14 pages
+- [llms/](llms/_index.md) - 15 pages
 - [long-term-memory/](long-term-memory/_index.md) - 1 page
 - [memory/](memory/_index.md) - 2 pages
-- [middleware/](middleware/_index.md) - 6 pages
+- [middleware/](middleware/_index.md) - 7 pages
 - [providers/](providers/_index.md) - 102 pages
 - [retrievers/](retrievers/_index.md) - 17 pages
 - [sandboxes/](sandboxes/_index.md) - 5 pages

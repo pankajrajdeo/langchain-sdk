@@ -34,6 +34,7 @@ Supported models:
 * **Amazon Nova**
 
 > [!NOTE]
+>
 > Learn more about [AWS Bedrock prompt caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) strategies and limitations. Cached content must exceed 1,024 tokens for a cache checkpoint to take effect, sometimes more depending on model. See [supported models, regions, and limits](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models).
 
 **API reference:** [`BedrockPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-aws/middleware/prompt_caching/BedrockPromptCachingMiddleware)
@@ -66,94 +67,97 @@ agent = create_agent(
 )
 ```
 
-<details>
-<summary>Configuration options</summary>
+> **Configuration options**
+>
+> **type** `string` (default: ephemeral)
+>
+> Cache type. For `ChatBedrock`, only `'ephemeral'` is currently supported. For `ChatBedrockConverse`, this value is ignored as the Converse API always uses `"default"` cache type.
+>
+> **ttl** `string` (default: 5m)
+>
+> Time to live for cached content. Valid values: `'5m'` or `'1h'`. Note that Amazon Nova models only support `'5m'`.
+>
+> **min\_messages\_to\_cache** `number` (default: 0)
+>
+> Minimum number of messages before caching starts.
+>
+> **unsupported\_model\_behavior** `string` (default: warn)
+>
+> Behavior when using unsupported models. Options: `'ignore'`, `'warn'`, or `'raise'`.
 
-#### `Field` — `string`
-Cache type. For `ChatBedrock`, only `'ephemeral'` is currently supported. For `ChatBedrockConverse`, this value is ignored as the Converse API always uses `"default"` cache type.
-
-#### `Field` — `string`
-Time to live for cached content. Valid values: `'5m'` or `'1h'`. Note that Amazon Nova models only support `'5m'`.
-
-#### `Field` — `number`
-Minimum number of messages before caching starts.
-
-#### `Field` — `string`
-Behavior when using unsupported models. Options: `'ignore'`, `'warn'`, or `'raise'`.
-
-</details>
-
-<details>
-<summary>Full example</summary>
-
-The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, reducing costs and latency.
-
-**How it works:**
-
-1. First request: System prompt, tools, and the user message are sent to the API and cached
-2. Second request: The cached content is retrieved from cache. Only the new message needs to be processed
-3. This pattern continues for each turn, with each request reusing the cached conversation history
-
-> [!NOTE]
-> Prompt caching reduces API costs by caching tokens, but does **not** provide conversation memory. To persist conversation history across invocations, use a [checkpointer](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpointer-libraries) like `MemorySaver`.
-
+> **Full example**
+>
+> The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, reducing costs and latency.
+>
+> **How it works:**
+>
+> 1. First request: System prompt, tools, and the user message are sent to the API and cached
+>
+> 2. Second request: The cached content is retrieved from cache. Only the new message needs to be processed
+>
+> 3. This pattern continues for each turn, with each request reusing the cached conversation history
+>
+> > [!NOTE]
+> >
+> > Prompt caching reduces API costs by caching tokens, but does **not** provide conversation memory. To persist conversation history across invocations, use a [checkpointer](../../langgraph/checkpointers.md#checkpointer-libraries) like `MemorySaver`.
+>
 ```python
-from langchain_aws import ChatBedrockConverse
-from langchain_aws.middleware.prompt_caching import BedrockPromptCachingMiddleware
-from langchain.agents import create_agent
-from langchain_core.runnables import RunnableConfig
-from langchain.messages import HumanMessage
-from langchain.tools import tool
-from langgraph.checkpoint.memory import MemorySaver
-
-@tool
-def get_weather(city: str) -> str:
-    """Get the current weather for a city."""
-    return f"The weather in {city} is sunny and 72F."
-
-# System prompt must exceed 1,024 tokens for caching to take effect
-LONG_PROMPT = (
-    "You are a helpful weather assistant with deep expertise in meteorology, "
-    "climate science, and atmospheric phenomena. When answering questions about "
-    "weather, provide accurate and up-to-date information. "
-    + "You should always strive to give the most helpful response possible. " * 85
-)
-
-agent = create_agent(
-    model=ChatBedrockConverse(model="us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
-    system_prompt=LONG_PROMPT,
-    tools=[get_weather],
-    middleware=[BedrockPromptCachingMiddleware(ttl="5m")], # [!code highlight]
-    checkpointer=MemorySaver(),  # Persists conversation history
-)
-
-# Use a thread_id to maintain conversation state
-config: RunnableConfig = {"configurable": {"thread_id": "user-123"}}
-
-# First invocation: Creates cache with system prompt, tools, and user message
-response = agent.invoke(
-    {"messages": [HumanMessage("What is the weather in Miami?")]}, config=config
-)
-
-last_msg = response["messages"][-1]
-print(last_msg.content)
-
-# Check cache token usage
-um = last_msg.usage_metadata
-if um:
-    details = um.get("input_token_details", {})
-    cache_read = details.get("cache_read", 0) or 0
-    cache_write = details.get("cache_creation", 0) or 0
-    print(f"Cache read: {cache_read}, Cache write: {cache_write}")
-
-# Second invocation: Reuses cached system prompt, tools, and previous messages
-response = agent.invoke(
-    {"messages": [HumanMessage("How about Seattle?")]}, config=config
-)
-print(response["messages"][-1].content)
+> from langchain_aws import ChatBedrockConverse
+> from langchain_aws.middleware.prompt_caching import BedrockPromptCachingMiddleware
+> from langchain.agents import create_agent
+> from langchain_core.runnables import RunnableConfig
+> from langchain.messages import HumanMessage
+> from langchain.tools import tool
+> from langgraph.checkpoint.memory import MemorySaver
+>
+>
+> @tool
+> def get_weather(city: str) -> str:
+>     """Get the current weather for a city."""
+>     return f"The weather in {city} is sunny and 72F."
+>
+>
+> # System prompt must exceed 1,024 tokens for caching to take effect
+> LONG_PROMPT = (
+>     "You are a helpful weather assistant with deep expertise in meteorology, "
+>     "climate science, and atmospheric phenomena. When answering questions about "
+>     "weather, provide accurate and up-to-date information. "
+>     + "You should always strive to give the most helpful response possible. " * 85
+> )
+>
+> agent = create_agent(
+>     model=ChatBedrockConverse(model="us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
+>     system_prompt=LONG_PROMPT,
+>     tools=[get_weather],
+>     middleware=[BedrockPromptCachingMiddleware(ttl="5m")], # [!code highlight]
+>     checkpointer=MemorySaver(),  # Persists conversation history
+> )
+>
+> # Use a thread_id to maintain conversation state
+> config: RunnableConfig = {"configurable": {"thread_id": "user-123"}}
+>
+> # First invocation: Creates cache with system prompt, tools, and user message
+> response = agent.invoke(
+>     {"messages": [HumanMessage("What is the weather in Miami?")]}, config=config
+> )
+>
+> last_msg = response["messages"][-1]
+> print(last_msg.content)
+>
+> # Check cache token usage
+> um = last_msg.usage_metadata
+> if um:
+>     details = um.get("input_token_details", {})
+>     cache_read = details.get("cache_read", 0) or 0
+>     cache_write = details.get("cache_creation", 0) or 0
+>     print(f"Cache read: {cache_read}, Cache write: {cache_write}")
+>
+> # Second invocation: Reuses cached system prompt, tools, and previous messages
+> response = agent.invoke(
+>     {"messages": [HumanMessage("How about Seattle?")]}, config=config
+> )
+> print(response["messages"][-1].content)
 ```
-
-</details>
 
 ### Model-specific behavior
 
@@ -169,6 +173,7 @@ The middleware handles differences between APIs and model families automatically
 ## AgentCore Payments
 
 > [!NOTE]
+>
 > AgentCore Payments is currently in preview and requires `bedrock-agentcore>=1.18.0`.
 
 Autonomously handle [x402 Payment Required](https://www.x402.org/) and [MPP (Machine Payments Protocol)](https://mpp.dev) responses in LangGraph agents. When a tool hits a paid API that returns HTTP 402, `AgentCorePaymentsMiddleware` detects the payment requirement, signs the payment via [Amazon Bedrock AgentCore Payments](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/payments.html), enforces session budget limits, and retries the request with payment credentials. This process is transparent to the agent. The protocol is detected automatically from the 402 response, so the same middleware handles both without any per-protocol configuration.
@@ -272,6 +277,7 @@ When a tool returns an HTTP 402 response with an x402 or MPP payload, the middle
 ### Machine Payments Protocol (MPP)
 
 > [!NOTE]
+>
 > MPP support requires `bedrock-agentcore>=1.22.0`.
 
 [MPP](https://mpp.dev) servers answer with `402 Payment Required` and advertise their payment options as `WWW-Authenticate: Payment` challenges. The middleware detects these challenges, selects one your instrument can satisfy, signs it, and retries with an `Authorization: Payment <token>` header. No protocol-specific configuration is required — the same middleware and the same `http_request` tool handle both x402 and MPP.
@@ -314,6 +320,7 @@ config = AgentCorePaymentsConfig(
 The parameter is tri-state and MPP-only: `None` (default) leaves the field unsent so the protocol default (buyer declines) applies, `False` explicitly declines, and `True` authorizes network fees charged to the buyer's wallet. It has no effect on challenges where the seller already sponsors fees, and is ignored on the x402 path.
 
 > [!NOTE]
+>
 > When a 402 advertises both MPP and x402, MPP is preferred. If no advertised MPP challenge is satisfiable by the instrument but the response also carries a usable x402 requirement, the SDK falls back to x402 rather than failing the payment. The fallback applies only to challenge-selection failures (before anything is submitted); a failure after the payment has been sent always propagates.
 
 ### Built-in tools
@@ -796,8 +803,6 @@ Compatible tools that meet the [custom tool integration contract](#custom-tool-i
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

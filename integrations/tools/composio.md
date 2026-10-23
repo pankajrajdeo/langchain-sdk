@@ -22,7 +22,7 @@ The `composio-langchain` package wraps Composio tools as LangChain tools and wor
 | :- | :- | :-: | :-: | :-: |
 | `Composio` | [`composio-langchain`](https://pypi.org/project/composio-langchain/) | No | Yes | ![PyPI - Version](https://img.shields.io/pypi/v/composio-langchain?style=flat-square\&label=%20) |
 
-See the [Composio JS integration docs](https://js.langchain.com/docs/integrations/tools/composio) for JavaScript and TypeScript usage.
+See the [Composio JS integration docs](../../javascript/integrations/tools/composio.md) for JavaScript and TypeScript usage.
 
 ### Tool features
 
@@ -292,8 +292,6 @@ For detailed documentation of Composio features and configuration options, see:
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/composio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/composio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

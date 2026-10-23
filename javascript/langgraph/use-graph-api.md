@@ -19,6 +19,7 @@ npm install @langchain/langgraph
 ```
 
 > [!TIP]
+>
 > **Set up LangSmith for better debugging**
 >
 > Sign up for [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-use-graph-api) to quickly spot issues and improve the performance of your LangGraph projects. LangSmith lets you use trace data to debug, test, and monitor your LLM apps built with LangGraph—read more about how to get started in the [docs](../../langsmith/observability.md).
@@ -48,7 +49,7 @@ const State = new StateSchema({
 });
 ```
 
-This state tracks a list of [message](https://js.langchain.com/docs/concepts/messages/) objects, as well as an extra integer field.
+This state tracks a list of [message](../langchain/messages.md) objects, as well as an extra integer field.
 
 ### Update state
 
@@ -68,6 +69,7 @@ const node: GraphNode<typeof State> = (state) => {
 This node simply appends a message to our message list (the reducer handles concatenation), and populates an extra field.
 
 > [!WARNING]
+>
 > Nodes should return updates to the state directly, instead of mutating the state.
 
 Let's next define a simple graph containing this node. We use [`StateGraph`](graph-api.md#stategraph) to define a graph that operates on this state. We then use [`addNode`](graph-api.md#nodes) populate our graph.
@@ -111,7 +113,7 @@ Note that:
 * We kicked off invocation by updating a single key of the state.
 * We receive the entire state in the invocation result.
 
-For convenience, we frequently inspect the content of [message objects](https://js.langchain.com/docs/concepts/messages/) via logging:
+For convenience, we frequently inspect the content of [message objects](../langchain/messages.md) via logging:
 
 ```typescript
 for (const message of result.messages) {
@@ -179,7 +181,7 @@ ai: Hello!
 In practice, there are additional considerations for updating lists of messages:
 
 * We may wish to update an existing message in the state.
-* We may want to accept short-hands for [message formats](graph-api.md#using-messages-in-your-graph), such as [OpenAI format](https://python.langchain.com/docs/concepts/messages/#openai-format).
+* We may want to accept short-hands for [message formats](graph-api.md#using-messages-in-your-graph), such as [OpenAI format](../langchain/messages.md#message-content).
 
 LangGraph includes the built-in `MessagesValue` that handles these considerations:
 
@@ -218,7 +220,7 @@ human: Hi
 ai: Hello!
 ```
 
-This is a versatile representation of state for applications involving [chat models](https://js.langchain.com/docs/concepts/chat_models/). LangGraph includes the prebuilt `MessagesValue` for convenience, so that we can have:
+This is a versatile representation of state for applications involving [chat models](../langchain/models.md). LangGraph includes the prebuilt `MessagesValue` for convenience, so that we can have:
 
 ```typescript
 import { StateSchema, MessagesValue } from "@langchain/langgraph";
@@ -290,6 +292,7 @@ const replaceMessages = () => {
 ```
 
 > [!WARNING]
+>
 > When nodes execute in parallel, only one node can use `Overwrite` on the same state key in a given super-step. If multiple nodes attempt to overwrite the same key in the same super-step, an `InvalidUpdateError` is raised.
 
 ### Define input and output schemas
@@ -637,134 +640,128 @@ console.log(await graph.invoke({}, { context: { myRuntimeValue: "b" } }));  // [
 { myStateValue: 2 }
 ```
 
-<details>
-<summary>Extended example: specifying LLM at runtime</summary>
-
-Below we demonstrate a practical example in which we configure what LLM to use at runtime. We will use both OpenAI and Anthropic models.
-
+> **Extended example: specifying LLM at runtime**
+>
+> Below we demonstrate a practical example in which we configure what LLM to use at runtime. We will use both OpenAI and Anthropic models.
+>
 ```typescript
-import { ChatOpenAI } from "@langchain/openai";
-import { ChatAnthropic } from "@langchain/anthropic";
-import { StateGraph, StateSchema, MessagesValue, GraphNode, START, END } from "@langchain/langgraph";
-import * as z from "zod";
-
-const ConfigSchema = z.object({
-  modelProvider: z.string().default("anthropic"),
-});
-
-const State = new StateSchema({
-  messages: MessagesValue,
-});
-
-const MODELS = {
-  anthropic: new ChatAnthropic({ model: "claude-haiku-4-5-20251001" }),
-  openai: new ChatOpenAI({ model: "gpt-5.4-mini" }),
-};
-
-const callModel: GraphNode<typeof State> = async (state, config) => {
-  const modelProvider = config?.configurable?.modelProvider || "anthropic";
-  const model = MODELS[modelProvider as keyof typeof MODELS];
-  const response = await model.invoke(state.messages);
-  return { messages: [response] };
-};
-
-const graph = new StateGraph(State, ConfigSchema)
-  .addNode("model", callModel)
-  .addEdge(START, "model")
-  .addEdge("model", END)
-  .compile();
-
-// Usage
-const inputMessage = { role: "user", content: "hi" };
-// With no configuration, uses default (Anthropic)
-const response1 = await graph.invoke({ messages: [inputMessage] });
-// Or, can set OpenAI
-const response2 = await graph.invoke(
-  { messages: [inputMessage] },
-  { configurable: { modelProvider: "openai" } },
-);
-
-console.log(response1.messages.at(-1)?.response_metadata?.model);
-console.log(response2.messages.at(-1)?.response_metadata?.model);
+> import { ChatOpenAI } from "@langchain/openai";
+> import { ChatAnthropic } from "@langchain/anthropic";
+> import { StateGraph, StateSchema, MessagesValue, GraphNode, START, END } from "@langchain/langgraph";
+> import * as z from "zod";
+>
+> const ConfigSchema = z.object({
+>   modelProvider: z.string().default("anthropic"),
+> });
+>
+> const State = new StateSchema({
+>   messages: MessagesValue,
+> });
+>
+> const MODELS = {
+>   anthropic: new ChatAnthropic({ model: "claude-haiku-4-5-20251001" }),
+>   openai: new ChatOpenAI({ model: "gpt-5.4-mini" }),
+> };
+>
+> const callModel: GraphNode<typeof State> = async (state, config) => {
+>   const modelProvider = config?.configurable?.modelProvider || "anthropic";
+>   const model = MODELS[modelProvider as keyof typeof MODELS];
+>   const response = await model.invoke(state.messages);
+>   return { messages: [response] };
+> };
+>
+> const graph = new StateGraph(State, ConfigSchema)
+>   .addNode("model", callModel)
+>   .addEdge(START, "model")
+>   .addEdge("model", END)
+>   .compile();
+>
+> // Usage
+> const inputMessage = { role: "user", content: "hi" };
+> // With no configuration, uses default (Anthropic)
+> const response1 = await graph.invoke({ messages: [inputMessage] });
+> // Or, can set OpenAI
+> const response2 = await graph.invoke(
+>   { messages: [inputMessage] },
+>   { configurable: { modelProvider: "openai" } },
+> );
+>
+> console.log(response1.messages.at(-1)?.response_metadata?.model);
+> console.log(response2.messages.at(-1)?.response_metadata?.model);
+```
+>
+```
+> claude-haiku-4-5-20251001
+> gpt-5.4-mini
 ```
 
-```
-claude-haiku-4-5-20251001
-gpt-5.4-mini
-```
-
-</details>
-
-<details>
-<summary>Extended example: specifying model and system message at runtime</summary>
-
-Below we demonstrate a practical example in which we configure two parameters: the LLM and system message to use at runtime.
-
+> **Extended example: specifying model and system message at runtime**
+>
+> Below we demonstrate a practical example in which we configure two parameters: the LLM and system message to use at runtime.
+>
 ```typescript
-import { ChatOpenAI } from "@langchain/openai";
-import { ChatAnthropic } from "@langchain/anthropic";
-import { SystemMessage } from "@langchain/core/messages";
-import { StateGraph, StateSchema, MessagesValue, GraphNode, START, END } from "@langchain/langgraph";
-import * as z from "zod";
-
-const ConfigSchema = z.object({
-  modelProvider: z.string().default("anthropic"),
-  systemMessage: z.string().optional(),
-});
-
-const State = new StateSchema({
-  messages: MessagesValue,
-});
-
-const MODELS = {
-  anthropic: new ChatAnthropic({ model: "claude-haiku-4-5-20251001" }),
-  openai: new ChatOpenAI({ model: "gpt-5.4-mini" }),
-};
-
-const callModel: GraphNode<typeof State> = async (state, config) => {
-  const modelProvider = config?.configurable?.modelProvider || "anthropic";
-  const systemMessage = config?.configurable?.systemMessage;
-
-  const model = MODELS[modelProvider as keyof typeof MODELS];
-  let messages = state.messages;
-
-  if (systemMessage) {
-    messages = [new SystemMessage(systemMessage), ...messages];
-  }
-
-  const response = await model.invoke(messages);
-  return { messages: [response] };
-};
-
-const graph = new StateGraph(State, ConfigSchema)
-  .addNode("model", callModel)
-  .addEdge(START, "model")
-  .addEdge("model", END)
-  .compile();
-
-// Usage
-const inputMessage = { role: "user", content: "hi" };
-const response = await graph.invoke(
-  { messages: [inputMessage] },
-  {
-    configurable: {
-      modelProvider: "openai",
-      systemMessage: "Respond in Italian."
-    }
-  }
-);
-
-for (const message of response.messages) {
-  console.log(`${message.getType()}: ${message.content}`);
-}
+> import { ChatOpenAI } from "@langchain/openai";
+> import { ChatAnthropic } from "@langchain/anthropic";
+> import { SystemMessage } from "@langchain/core/messages";
+> import { StateGraph, StateSchema, MessagesValue, GraphNode, START, END } from "@langchain/langgraph";
+> import * as z from "zod";
+>
+> const ConfigSchema = z.object({
+>   modelProvider: z.string().default("anthropic"),
+>   systemMessage: z.string().optional(),
+> });
+>
+> const State = new StateSchema({
+>   messages: MessagesValue,
+> });
+>
+> const MODELS = {
+>   anthropic: new ChatAnthropic({ model: "claude-haiku-4-5-20251001" }),
+>   openai: new ChatOpenAI({ model: "gpt-5.4-mini" }),
+> };
+>
+> const callModel: GraphNode<typeof State> = async (state, config) => {
+>   const modelProvider = config?.configurable?.modelProvider || "anthropic";
+>   const systemMessage = config?.configurable?.systemMessage;
+>
+>   const model = MODELS[modelProvider as keyof typeof MODELS];
+>   let messages = state.messages;
+>
+>   if (systemMessage) {
+>     messages = [new SystemMessage(systemMessage), ...messages];
+>   }
+>
+>   const response = await model.invoke(messages);
+>   return { messages: [response] };
+> };
+>
+> const graph = new StateGraph(State, ConfigSchema)
+>   .addNode("model", callModel)
+>   .addEdge(START, "model")
+>   .addEdge("model", END)
+>   .compile();
+>
+> // Usage
+> const inputMessage = { role: "user", content: "hi" };
+> const response = await graph.invoke(
+>   { messages: [inputMessage] },
+>   {
+>     configurable: {
+>       modelProvider: "openai",
+>       systemMessage: "Respond in Italian."
+>     }
+>   }
+> );
+>
+> for (const message of response.messages) {
+>   console.log(`${message.getType()}: ${message.content}`);
+> }
 ```
-
+>
 ```
-human: hi
-ai: Ciao! Come posso aiutarti oggi?
+> human: hi
+> ai: Ciao! Come posso aiutarti oggi?
 ```
-
-</details>
 
 ## Add retry policies
 
@@ -786,61 +783,58 @@ By default, the retry policy retries on any exception except for the following:
 * `SyntaxError`
 * `ReferenceError`
 
-<details>
-<summary>Extended example: customizing retry policies</summary>
-
-Consider an example in which we are reading from a SQL database. Below we pass two different retry policies to nodes:
-
+> **Extended example: customizing retry policies**
+>
+> Consider an example in which we are reading from a SQL database. Below we pass two different retry policies to nodes:
+>
 ```typescript
-import Database from "better-sqlite3";
-import { ChatAnthropic } from "@langchain/anthropic";
-import { StateGraph, StateSchema, MessagesValue, GraphNode, START, END } from "@langchain/langgraph";
-import { AIMessage } from "@langchain/core/messages";
-
-const State = new StateSchema({
-  messages: MessagesValue,
-});
-
-// Create an in-memory database
-const db: typeof Database.prototype = new Database(":memory:");
-
-const model = new ChatAnthropic({ model: "claude-sonnet-4-6" });
-
-const callModel: GraphNode<typeof State> = async (state) => {
-  const response = await model.invoke(state.messages);
-  return { messages: [response] };
-};
-
-const queryDatabase: GraphNode<typeof State> = async (state) => {
-  const queryResult: string = JSON.stringify(
-    db.prepare("SELECT * FROM Artist LIMIT 10;").all(),
-  );
-
-  return { messages: [new AIMessage({ content: "queryResult" })] };
-};
-
-const workflow = new StateGraph(State)
-  // Define the two nodes we will cycle between
-  .addNode("call_model", callModel, { retryPolicy: { maxAttempts: 5 } })
-  .addNode("query_database", queryDatabase, {
-    retryPolicy: {
-      retryOn: (e: any): boolean => {
-        if (e instanceof Database.SqliteError) {
-          // Retry on "SQLITE_BUSY" error
-          return e.code === "SQLITE_BUSY";
-        }
-        return false; // Don't retry on other errors
-      },
-    },
-  })
-  .addEdge(START, "call_model")
-  .addEdge("call_model", "query_database")
-  .addEdge("query_database", END);
-
-const graph = workflow.compile();
+> import Database from "better-sqlite3";
+> import { ChatAnthropic } from "@langchain/anthropic";
+> import { StateGraph, StateSchema, MessagesValue, GraphNode, START, END } from "@langchain/langgraph";
+> import { AIMessage } from "@langchain/core/messages";
+>
+> const State = new StateSchema({
+>   messages: MessagesValue,
+> });
+>
+> // Create an in-memory database
+> const db: typeof Database.prototype = new Database(":memory:");
+>
+> const model = new ChatAnthropic({ model: "claude-sonnet-4-6" });
+>
+> const callModel: GraphNode<typeof State> = async (state) => {
+>   const response = await model.invoke(state.messages);
+>   return { messages: [response] };
+> };
+>
+> const queryDatabase: GraphNode<typeof State> = async (state) => {
+>   const queryResult: string = JSON.stringify(
+>     db.prepare("SELECT * FROM Artist LIMIT 10;").all(),
+>   );
+>
+>   return { messages: [new AIMessage({ content: "queryResult" })] };
+> };
+>
+> const workflow = new StateGraph(State)
+>   // Define the two nodes we will cycle between
+>   .addNode("call_model", callModel, { retryPolicy: { maxAttempts: 5 } })
+>   .addNode("query_database", queryDatabase, {
+>     retryPolicy: {
+>       retryOn: (e: any): boolean => {
+>         if (e instanceof Database.SqliteError) {
+>           // Retry on "SQLITE_BUSY" error
+>           return e.code === "SQLITE_BUSY";
+>         }
+>         return false; // Don't retry on other errors
+>       },
+>     },
+>   })
+>   .addEdge(START, "call_model")
+>   .addEdge("call_model", "query_database")
+>   .addEdge("query_database", END);
+>
+> const graph = workflow.compile();
 ```
-
-</details>
 
 ### Access execution info inside a node
 
@@ -937,11 +931,13 @@ const myNode: GraphNode<typeof State> = async (state, runtime) => {
 `serverInfo` is `null` when the graph is not running on LangGraph Server.
 
 > [!NOTE]
+>
 > Requires `deepagents>=1.9.0` (or `@langchain/langgraph>=1.2.8`) for `runtime.executionInfo` and `runtime.serverInfo`.
 
 ## Create a sequence of steps
 
 > [!NOTE]
+>
 > **Prerequisites**
 > This guide assumes familiarity with the above section on [state](#define-and-update-state).
 
@@ -964,130 +960,129 @@ const builder = new StateGraph(State)
   .addEdge("step2", "step3");
 ```
 
-<details>
-<summary>Why split application steps into a sequence with LangGraph?</summary>
-
-LangGraph makes it easy to add an underlying persistence layer to your application.
-This allows state to be checkpointed in between the execution of nodes, so your LangGraph nodes govern:
-
-* How state updates are [checkpointed](persistence.md)
-* How interruptions are resumed in [human-in-the-loop](interrupts.md) workflows
-* How we can "rewind" and branch-off executions using LangGraph's [time travel](use-time-travel.md) features
-
-They also determine how execution steps are [streamed](streaming.md), and how your application is visualized and debugged using [Studio](../../langsmith/studio.md).
-
-Let's demonstrate an end-to-end example. We will create a sequence of three steps:
-
-1. Populate a value in a key of the state
-2. Update the same value
-3. Populate a different value
-
-Let's first define our [state](graph-api.md#state). This governs the [schema of the graph](graph-api.md#schema), and can also specify how to apply updates. See [Process state updates with reducers](#process-state-updates-with-reducers) for more detail.
-
-In our case, we will just keep track of two values:
-
-```typescript
-import { StateSchema, GraphNode } from "@langchain/langgraph";
-import * as z from "zod";
-
-const State = new StateSchema({
-  value1: z.string(),
-  value2: z.number(),
-});
-```
-
-Our [nodes](graph-api.md#nodes) are just TypeScript functions that read our graph's state and make updates to it. The first argument to this function will always be the state:
-
-```typescript
-const step1: GraphNode<typeof State> = (state) => {
-  return { value1: "a" };
-};
-
-const step2: GraphNode<typeof State> = (state) => {
-  const currentValue1 = state.value1;
-  return { value1: `${currentValue1} b` };
-};
-
-const step3: GraphNode<typeof State> = (state) => {
-  return { value2: 10 };
-};
-```
-
-> [!NOTE]
-> Note that when issuing updates to the state, each node can just specify the value of the key it wishes to update.
+> **Why split application steps into a sequence with LangGraph?**
 >
-> By default, this will **overwrite** the value of the corresponding key. You can also use [reducers](graph-api.md#reducers) to control how updates are processed—for example, you can append successive updates to a key instead. See [Process state updates with reducers](#process-state-updates-with-reducers) for more detail.
-
-Finally, we define the graph. We use [StateGraph](graph-api.md#stategraph) to define a graph that operates on this state.
-
-We will then use [addNode](graph-api.md#nodes) and [addEdge](graph-api.md#edges) to populate our graph and define its control flow.
-
-```typescript
-import { START, StateGraph } from "@langchain/langgraph";
-
-const graph = new StateGraph(State)
-  .addNode("step1", step1)
-  .addNode("step2", step2)
-  .addNode("step3", step3)
-  .addEdge(START, "step1")
-  .addEdge("step1", "step2")
-  .addEdge("step2", "step3")
-  .compile();
-```
-
-> [!TIP]
-> **Specifying custom names**
-> You can specify custom names for nodes using `.addNode`:
+> LangGraph makes it easy to add an underlying persistence layer to your application.
+> This allows state to be checkpointed in between the execution of nodes, so your LangGraph nodes govern:
 >
-> ```typescript
+> * How state updates are [checkpointed](persistence.md)
+> * How interruptions are resumed in [human-in-the-loop](interrupts.md) workflows
+> * How we can "rewind" and branch-off executions using LangGraph's [time travel](use-time-travel.md) features
+>
+> They also determine how execution steps are [streamed](streaming.md), and how your application is visualized and debugged using [Studio](../../langsmith/studio.md).
+>
+> Let's demonstrate an end-to-end example. We will create a sequence of three steps:
+>
+> 1. Populate a value in a key of the state
+> 2. Update the same value
+> 3. Populate a different value
+>
+> Let's first define our [state](graph-api.md#state). This governs the [schema of the graph](graph-api.md#schema), and can also specify how to apply updates. See [Process state updates with reducers](#process-state-updates-with-reducers) for more detail.
+>
+> In our case, we will just keep track of two values:
+>
+```typescript
+> import { StateSchema, GraphNode } from "@langchain/langgraph";
+> import * as z from "zod";
+>
+> const State = new StateSchema({
+>   value1: z.string(),
+>   value2: z.number(),
+> });
+```
+>
+> Our [nodes](graph-api.md#nodes) are just TypeScript functions that read our graph's state and make updates to it. The first argument to this function will always be the state:
+>
+```typescript
+> const step1: GraphNode<typeof State> = (state) => {
+>   return { value1: "a" };
+> };
+>
+> const step2: GraphNode<typeof State> = (state) => {
+>   const currentValue1 = state.value1;
+>   return { value1: `${currentValue1} b` };
+> };
+>
+> const step3: GraphNode<typeof State> = (state) => {
+>   return { value2: 10 };
+> };
+```
+>
+> > [!NOTE]
+> >
+> > Note that when issuing updates to the state, each node can just specify the value of the key it wishes to update.
+> >
+> > By default, this will **overwrite** the value of the corresponding key. You can also use [reducers](graph-api.md#reducers) to control how updates are processed—for example, you can append successive updates to a key instead. See [Process state updates with reducers](#process-state-updates-with-reducers) for more detail.
+>
+> Finally, we define the graph. We use [StateGraph](graph-api.md#stategraph) to define a graph that operates on this state.
+>
+> We will then use [addNode](graph-api.md#nodes) and [addEdge](graph-api.md#edges) to populate our graph and define its control flow.
+>
+```typescript
+> import { START, StateGraph } from "@langchain/langgraph";
+>
 > const graph = new StateGraph(State)
-> .addNode("myNode", step1)
-> .compile();
-> ```
-
-Note that:
-
-* `.addEdge` takes the names of nodes, which for functions defaults to `node.name`.
-* We must specify the entry point of the graph. For this we add an edge with the [START node](graph-api.md#start-node).
-* The graph halts when there are no more nodes to execute.
-
-We next [compile](graph-api.md#compiling-your-graph) our graph. This provides a few basic checks on the structure of the graph (e.g., identifying orphaned nodes). If we were adding persistence to our application via a [checkpointer](persistence.md), it would also be passed in here.
-
-LangGraph provides built-in utilities for visualizing your graph. Let's inspect our sequence. See [Visualize your graph](#visualize-your-graph) for detail on visualization.
-
+>   .addNode("step1", step1)
+>   .addNode("step2", step2)
+>   .addNode("step3", step3)
+>   .addEdge(START, "step1")
+>   .addEdge("step1", "step2")
+>   .addEdge("step2", "step3")
+>   .compile();
+```
+>
+> > [!TIP]
+> >
+> > **Specifying custom names**
+> > You can specify custom names for nodes using `.addNode`:
+> >
+> > ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > const graph = new StateGraph(State)
+> > .addNode("myNode", step1)
+> > .compile();
+> > ```
+>
+> Note that:
+>
+> * `.addEdge` takes the names of nodes, which for functions defaults to `node.name`.
+> * We must specify the entry point of the graph. For this we add an edge with the [START node](graph-api.md#start-node).
+> * The graph halts when there are no more nodes to execute.
+>
+> We next [compile](graph-api.md#compiling-your-graph) our graph. This provides a few basic checks on the structure of the graph (e.g., identifying orphaned nodes). If we were adding persistence to our application via a [checkpointer](persistence.md), it would also be passed in here.
+>
+> LangGraph provides built-in utilities for visualizing your graph. Let's inspect our sequence. See [Visualize your graph](#visualize-your-graph) for detail on visualization.
+>
 ```typescript
-import * as fs from "node:fs/promises";
-
-const drawableGraph = await graph.getGraphAsync();
-const image = await drawableGraph.drawMermaidPng();
-const imageBuffer = new Uint8Array(await image.arrayBuffer());
-
-await fs.writeFile("graph.png", imageBuffer);
+> import * as fs from "node:fs/promises";
+>
+> const drawableGraph = await graph.getGraphAsync();
+> const image = await drawableGraph.drawMermaidPng();
+> const imageBuffer = new Uint8Array(await image.arrayBuffer());
+>
+> await fs.writeFile("graph.png", imageBuffer);
 ```
-
-Let's proceed with a simple invocation:
-
+>
+> Let's proceed with a simple invocation:
+>
 ```typescript
-const result = await graph.invoke({ value1: "c" });
-console.log(result);
+> const result = await graph.invoke({ value1: "c" });
+> console.log(result);
 ```
-
+>
 ```
-{ value1: 'a b', value2: 10 }
+> { value1: 'a b', value2: 10 }
 ```
-
-Note that:
-
-* We kicked off invocation by providing a value for a single state key. We must always provide a value for at least one key.
-* The value we passed in was overwritten by the first node.
-* The second node updated the value.
-* The third node populated a different value.
-
-</details>
+>
+> Note that:
+>
+> * We kicked off invocation by providing a value for a single state key. We must always provide a value for at least one key.
+> * The value we passed in was overwritten by the first node.
+> * The second node updated the value.
+> * The third node populated a different value.
 
 ## Create branches
 
-Parallel execution of nodes is essential to speed up overall graph operation. LangGraph offers native support for parallel execution of nodes, which can significantly enhance the performance of graph-based workflows. This parallelization is achieved through fan-out and fan-in mechanisms, utilizing both standard edges and [conditional\_edges](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addConditionalEdges). Below are some examples showing how to add create branching dataflows that work for you.
+Parallel execution of nodes is essential to speed up overall graph operation. LangGraph offers native support for parallel execution of nodes, which can significantly enhance the performance of graph-based workflows. This parallelization is achieved through fan-out and fan-in mechanisms, utilizing both standard edges and [conditional\_edges](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph/addConditionalEdges). Below are some examples showing how to add create branching dataflows that work for you.
 
 ### Run graph nodes in parallel
 
@@ -1167,33 +1162,32 @@ Adding "D" to ['A', 'B', 'C']
 ```
 
 > [!NOTE]
+>
 > In the above example, nodes `"b"` and `"c"` are executed concurrently in the same [superstep](graph-api.md#graphs). Because they are in the same step, node `"d"` executes after both `"b"` and `"c"` are finished.
 >
 > Importantly, updates from a parallel superstep may not be ordered consistently. If you need a consistent, predetermined ordering of updates from a parallel superstep, you should write the outputs to a separate field in the state together with a value with which to order them.
 
-<details>
-<summary>Exception handling?</summary>
-
-LangGraph executes nodes within [supersteps](graph-api.md#graphs), meaning that while parallel branches are executed in parallel, the entire superstep is **transactional**. If any of these branches raises an exception, **none** of the updates are applied to the state (the entire superstep errors).
-
-Importantly, when using a [checkpointer](persistence.md), results from successful nodes within a superstep are saved, and don't repeat when resumed.
-
-If you have error-prone (perhaps want to handle flakey API calls), LangGraph provides two ways to address this:
-
-1. You can write regular python code within your node to catch and handle exceptions.
-2. You can set a **[`RetryPolicy`](https://reference.langchain.com/python/langgraph/types)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
-
-Together, these let you perform parallel execution and fully control exception handling.
-
-</details>
+> **Exception handling?**
+>
+> LangGraph executes nodes within [supersteps](graph-api.md#graphs), meaning that while parallel branches are executed in parallel, the entire superstep is **transactional**. If any of these branches raises an exception, **none** of the updates are applied to the state (the entire superstep errors).
+>
+> Importantly, when using a [checkpointer](persistence.md), results from successful nodes within a superstep are saved, and don't repeat when resumed.
+>
+> If you have error-prone (perhaps want to handle flakey API calls), LangGraph provides two ways to address this:
+>
+> 1. You can write regular python code within your node to catch and handle exceptions.
+> 2. You can set a **[`RetryPolicy`](https://reference.langchain.com/python/langgraph/types)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
+>
+> Together, these let you perform parallel execution and fully control exception handling.
 
 > [!TIP]
+>
 > **Set max concurrency**
 > You can control the maximum number of concurrent tasks by setting `maxConcurrency` in the [configuration](https://reference.langchain.com/javascript/langchain-langgraph/index/LangGraphRunnableConfig) when invoking the graph. `maxConcurrency` is a standalone config key, so set it at the top level of the config rather than inside `configurable`.
 >
-> ```typescript
+```typescript
 > const result = await graph.invoke({ value1: "c" }, { maxConcurrency: 10 });
-> ```
+```
 
 ### Conditional branching
 
@@ -1267,16 +1261,17 @@ Adding "C" to ['A']
 ```
 
 > [!TIP]
+>
 > Your conditional edges can route to multiple destination nodes. For example:
 >
-> ```typescript
+```typescript
 > const routeBcOrCd: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "b" | "c" | "d" }> = (state) => {
 >   if (state.which === "cd") {
 >     return ["c", "d"];
 >   }
 >   return ["b", "c"];
 > };
-> ```
+```
 
 ## Map-Reduce and the send API
 
@@ -1365,6 +1360,7 @@ You can also set the graph recursion limit when invoking or streaming the graph.
 Let's consider a simple graph with a loop to better understand how these mechanisms work.
 
 > [!TIP]
+>
 > To return the last value of your state instead of receiving a recursion limit error, see the [next section](#impose-a-recursion-limit).
 
 When creating a loop, you can include a conditional edge that specifies a termination condition:
@@ -1570,6 +1566,7 @@ const graph = new StateGraph(State)
 ```
 
 > [!WARNING]
+>
 > You might have noticed that we used `ends` to specify which nodes `nodeA` can navigate to. This is necessary for the graph rendering and tells LangGraph that `nodeA` can navigate to `nodeB` and `nodeC`.
 
 ```typescript
@@ -1612,6 +1609,7 @@ const myNode = (state: State): Command => {
 Let's demonstrate this using the above example. We'll do so by changing `nodeA` in the above example into a single-node graph that we'll add as a subgraph to our parent graph.
 
 > [!WARNING]
+>
 > **State updates with `Command.PARENT`**
 > When you send updates from a subgraph node to a parent graph node for a key that's shared by both parent and subgraph [state schemas](graph-api.md#schema), you **must** define a [reducer](graph-api.md#reducers) for the key you're updating in the parent graph state. See the example below.
 
@@ -1713,6 +1711,7 @@ const lookupUserInfo = tool(
 ```
 
 > [!WARNING]
+>
 > You MUST include `messages` (or any state key used for the message history) in `Command.update` when returning [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) from a tool and the list of messages in `messages` MUST contain a `ToolMessage`. This is necessary for the resulting message history to be valid (LLM providers require AI messages with tool calls to be followed by the tool result messages).
 
 If you are using tools that update state via [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command), we recommend using prebuilt [`ToolNode`](https://reference.langchain.com/javascript/langchain-langgraph/prebuilt/ToolNode) which automatically handles tools returning [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) objects and propagates them to the graph state. If you're writing a custom node that calls tools, you would need to manually propagate [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) objects returned by the tools as the update from the node.
@@ -1802,8 +1801,6 @@ await fs.writeFile("graph.png", imageBuffer);
 
 ***
 
-> [!NOTE]
-> [Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](../../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-> [!NOTE]
-> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
