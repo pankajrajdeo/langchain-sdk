@@ -128,8 +128,8 @@ python3 -m unittest discover -s tests
 
 ## Automatic updates
 
-The `Update LangChain documentation` GitHub Actions workflow runs weekly, on
-Monday, and can also be started manually from the Actions tab. When upstream
+The `Update LangChain documentation` GitHub Actions workflow runs daily at
+04:23 UTC and can also be started manually from the Actions tab. When upstream
 documentation changes, the workflow commits the refreshed mirror to `main`.
 
 Downloads use three request attempts. Pages that still fail are retried after
