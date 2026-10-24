@@ -7,7 +7,7 @@ tags: [index, reference, python, deepagents, middleware]
 
 # reference/python/deepagents/middleware
 
-10 pages here, 364 pages including subdirectories.
+10 pages here, 369 pages including subdirectories.
 
 ## Directories
 
@@ -15,14 +15,14 @@ tags: [index, reference, python, deepagents, middleware]
 - [_fs_interrupt/](_fs_interrupt/_index.md) - 1 page
 - [_message_eviction/](_message_eviction/_index.md) - 5 pages
 - [_parent_notifier/](_parent_notifier/_index.md) - 1 page
-- [_prompt_caching/](_prompt_caching/_index.md) - 2 pages
+- [_prompt_caching/](_prompt_caching/_index.md) - 5 pages
 - [_skill_tools/](_skill_tools/_index.md) - 5 pages
 - [_state/](_state/_index.md) - 2 pages
-- [_utils/](_utils/_index.md) - 1 page
+- [_utils/](_utils/_index.md) - 2 pages
 - [_video/](_video/_index.md) - 12 pages
 - [async_subagents/](async_subagents/_index.md) - 60 pages
 - [filesystem/](filesystem/_index.md) - 83 pages
-- [memory/](memory/_index.md) - 17 pages
+- [memory/](memory/_index.md) - 18 pages
 - [patch_tool_calls/](patch_tool_calls/_index.md) - 3 pages
 - [permissions/](permissions/_index.md) - 1 page
 - [rubric/](rubric/_index.md) - 34 pages

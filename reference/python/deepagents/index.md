@@ -144,6 +144,7 @@ tags: [reference, deepagents]
 - [`create_summarization_middleware()`](https://reference.langchain.com/python/deepagents/middleware/summarization/create_summarization_middleware)
 - [`create_summarization_tool_middleware()`](https://reference.langchain.com/python/deepagents/middleware/summarization/create_summarization_tool_middleware)
 - [`append_to_system_message()`](https://reference.langchain.com/python/deepagents/middleware/_utils/append_to_system_message)
+- [`is_anthropic_chat_model()`](https://reference.langchain.com/python/deepagents/middleware/_utils/is_anthropic_chat_model)
 - [`video_dependencies_available()`](https://reference.langchain.com/python/deepagents/middleware/_video/video_dependencies_available)
 - [`extract_video_frames()`](https://reference.langchain.com/python/deepagents/middleware/_video/extract_video_frames)
 - [`warn_deprecated()`](https://reference.langchain.com/python/deepagents/_api/deprecation/warn_deprecated)

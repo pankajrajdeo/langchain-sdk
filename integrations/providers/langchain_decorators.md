@@ -395,7 +395,7 @@ print(personality.introduce\_your\_self(personality))
 
 <div className="source-links">
 <Callout icon="terminal-2">
-[Connect these docs](/use-these-docs.md) to your agent of choice via MCP for real-time answers.
+[Connect these docs](https://docs.langchain.com/use-these-docs.md) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
 [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langchain_decorators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

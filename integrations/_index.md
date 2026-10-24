@@ -7,7 +7,7 @@ tags: [index, integrations]
 
 # integrations
 
-15 pages here, 359 pages including subdirectories.
+15 pages here, 360 pages including subdirectories.
 
 ## Directories
 
@@ -27,7 +27,7 @@ tags: [index, integrations]
 - [long-term-memory/](long-term-memory/_index.md) - 1 page
 - [memory/](memory/_index.md) - 2 pages
 - [middleware/](middleware/_index.md) - 7 pages
-- [providers/](providers/_index.md) - 102 pages
+- [providers/](providers/_index.md) - 103 pages
 - [retrievers/](retrievers/_index.md) - 17 pages
 - [sandboxes/](sandboxes/_index.md) - 5 pages
 - [splitters/](splitters/_index.md) - 8 pages

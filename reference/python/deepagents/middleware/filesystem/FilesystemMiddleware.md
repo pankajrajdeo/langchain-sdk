@@ -49,6 +49,7 @@ FilesystemMiddleware(
     grep_max_count: int | None = 1000,
     tools: list[FsToolName] | Literal['all'] | None = None,
     offload_binary_content: bool = False,
+    permissions: list[FilesystemPermission] | None = None,
     _permissions: list[FilesystemPermission] | None = None,
 )
 ```
@@ -106,6 +107,7 @@ __init__(
     grep_max_count: int | None = 1000,
     tools: list[FsToolName] | Literal['all'] | None = None,
     offload_binary_content: bool = False,
+    permissions: list[FilesystemPermission] | None = None,
     _permissions: list[FilesystemPermission] | None = None,
 ) -> None
 ```
@@ -121,6 +123,7 @@ __init__(
 | `grep_max_count` | `int \| None` |
 | `tools` | `list[FsToolName] \| Literal['all'] \| None` |
 | `offload_binary_content` | `bool` |
+| `permissions` | `list[FilesystemPermission] \| None` |
 | `_permissions` | `list[FilesystemPermission] \| None` |
 
 ## Properties
@@ -139,4 +142,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/42adc1bca1147715ac58fad49bc74c12fa63bb84/libs/deepagents/deepagents/middleware/filesystem.py#L1819)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/e85c6b98087861512d2c5240305e16cfac68a746/libs/deepagents/deepagents/middleware/filesystem.py#L1820)

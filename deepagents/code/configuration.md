@@ -884,7 +884,7 @@ Precedence order (lowest to highest):
 3. `.deepagents/skills/` — Project Deep Agents Code
 4. `.agents/skills/` — Project tool-agnostic *(highest)*
 
-When a skill is loaded, Deep Agents Code verifies that the resolved file path stays within one of these directories or a previously approved trust entry. Symlinks that resolve outside all trusted roots are rejected until you approve the target directory (interactive) or add it to [`[skills].extra_allowed_dirs`](/oss/deepagents/code/configuration#skill-directory-allowlist) (required for headless runs). See [Invoke a skill mid-session](memory-and-skills.md#invoke-a-skill-mid-session).
+When a skill is loaded, Deep Agents Code verifies that the resolved file path stays within one of these directories or a previously approved trust entry. Symlinks that resolve outside all trusted roots are rejected until you approve the target directory (interactive) or add it to [`[skills].extra_allowed_dirs`](https://docs.langchain.com/oss/deepagents/code/configuration#skill-directory-allowlist) (required for headless runs). See [Invoke a skill mid-session](memory-and-skills.md#invoke-a-skill-mid-session).
 
 #### Subagents
 

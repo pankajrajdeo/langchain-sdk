@@ -20,4 +20,4 @@ kind: Literal['idle', 'run'] = kind
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/41c9c22fdc83d68a2859d0c9a2b627c8615a792f/libs/langgraph/langgraph/errors.py#L240)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/4c52e129eb1ab69a3da58b799f67929f77d81149/libs/langgraph/langgraph/errors.py#L240)

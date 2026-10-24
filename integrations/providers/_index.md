@@ -1,13 +1,13 @@
 ---
 title: "integrations/providers"
-description: "Index of 101 pages and 1 subdirectory under integrations/providers."
+description: "Index of 102 pages and 1 subdirectory under integrations/providers."
 category: "index"
 tags: [index, integrations, providers]
 ---
 
 # integrations/providers
 
-101 pages here, 102 pages including subdirectories.
+102 pages here, 103 pages including subdirectories.
 
 ## Directories
 
@@ -28,6 +28,7 @@ tags: [index, integrations, providers]
 - [Azure AI integrations](azure_ai.md) - Integrate with Azure AI using LangChain Python.
 - [Baseten integrations](baseten.md) - Integrate with Baseten using LangChain Python.
 - [Box integrations](box.md) - Integrate with Box using LangChain Python.
+- [Browser Use integrations](browser_use.md) - Integrate with Browser Use using LangChain Python.
 - [Browserbase integrations](browserbase.md) - Integrate with Browserbase using LangChain Python.
 - [Cerebras integrations](cerebras.md) - Integrate with Cerebras using LangChain Python.
 - [Chroma integrations](chroma.md) - Integrate with Chroma using LangChain Python.

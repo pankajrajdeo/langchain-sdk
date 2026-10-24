@@ -30,7 +30,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acff77d1bd39af709e68bc7_numan-blog.png)Case Studies
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adb940c2b1a77d3a87ae860_dark-52%20characters%20max.png)Deep AgentsConceptual Guide
+
+## Context Engineering Starts with Retrieval
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acfb8492227373b922e7719_Screenshot%202026-10-14%20at%2010.12.17%E2%80%AFAM.png)Jess WengOctober 23, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)11min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acff77d1bd39af709e68bc7_numan-blog.png)Case Studies
 
 ## How Numan built an eval-first AI health coach with LangGraph and LangSmith
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## New in LangSmith: Engine v2, Managed Deep Agents, Fine-Tuning, and More
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e0003a1af368dfae13c23c_jacob-talbot.png)Jacob TalbotSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab452a9ab70e37bfc53e20a_LangSmith%20Engine%20V2.png)LangSmith
-
-## LangSmith Engine v2: Red teaming and automated testing
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a048d6ca69a48036bbf20b5_BenTannyhill.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8dd57932ec9d5fe5ad91d3_1727879885099.jpeg)Ben TannyhillTrammell SaltzgaberSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min1...1 / 34
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e0003a1af368dfae13c23c_jacob-talbot.png)Jacob TalbotSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 34
 
 #### We couldn't find anything matching that.
 

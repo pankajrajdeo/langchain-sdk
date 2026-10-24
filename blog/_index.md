@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 542 pages and 0 subdirectories under blog."
+description: "Index of 543 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-542 pages here.
+543 pages here.
 
 ## Files
 
@@ -100,6 +100,7 @@ tags: [index, blog]
 - [Constructing knowledge graphs from text using OpenAI functions: Leveraging knowledge graphs to power LangChain Applications](constructing-knowledge-graphs-from-text-using-openai-functions.md) - Build knowledge graphs from text using OpenAI functions and LangChain. Extract structured data, power RAG apps, and enable multi-hop Q&amp;A with Neo4j.
 - [Context Engineering: How Deep Agents Remember](context-engineering-deep-agents-remember.md) - Long-running agents degrade as context piles up. Learn how offloading, summarization, skills, subagents, and memory keep your agent&#39;s context window focused.
 - [Context Engineering](context-engineering-for-agents.md) - Context engineering strategies for AI agents: write, select, compress, and isolate context to optimize performance and manage long-running tasks.
+- [Context Engineering Starts with Retrieval](context-engineering-starts-with-retrieval.md) - Agents waste time and context on clumsy searches, oversized results and stale data. Learn the retrieval techniques LangChain&#39;s Deep Agents harness uses to get the right context in.
 - [Context Management for Deep Agents](context-management-for-deepagents.md) - Learn how Deep Agents SDK manages context for long-running AI tasks through offloading, summarization, and filesystem abstraction to prevent context rot.
 - [Continual learning for AI agents](continual-learning-for-ai-agents.md) - Most discussions of continual learning in AI focus on one thing: updating model weights. But for AI agents, learning can happen at three distinct layers: the model, the harness, and the context...
 - [Conversational Retrieval Agents](conversational-retrieval-agents.md) - Build smarter AI apps with conversational retrieval agents. Combine RAG, chat interfaces, and agents for flexible question-answering and better UX.

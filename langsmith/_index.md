@@ -7,14 +7,14 @@ tags: [index, langsmith]
 
 # langsmith
 
-514 pages here, 1238 pages including subdirectories.
+514 pages here, 1240 pages including subdirectories.
 
 ## Directories
 
 - [agent-server-api/](agent-server-api/_index.md) - 73 pages
 - [fleet/](fleet/_index.md) - 24 pages
-- [javascript/](javascript/_index.md) - 28 pages
-- [python/](python/_index.md) - 28 pages
+- [javascript/](javascript/_index.md) - 29 pages
+- [python/](python/_index.md) - 29 pages
 - [smith-api/](smith-api/_index.md) - 571 pages
 
 ## Files
@@ -319,7 +319,7 @@ tags: [index, langsmith]
 - [Organization and workspace operations reference](organization-workspace-operations.md) - This page provides a comprehensive reference table of workspace and organization operations and which roles can perform them.
 - [Redact sensitive data with the OpenTelemetry Gateway architecture](otel-gateway-trace-redaction.md) - Use an OpenTelemetry collector to redact sensitive data from traces before they land in LangSmith.
 - [Set up LangSmith](platform-setup.md) - Host and manage LangSmith infrastructure for observability, evaluation, and prompt engineering.
-- [Model providers](playground-model-providers.md) - The Playground supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
+- [Model providers](playground-model-providers.md) - Configure model providers for the LangSmith Playground and LLM-as-a-judge evaluators.
 - [LangSmith Chat](polly.md) - Use Chat in LangSmith to analyze traces, threads, prompts, and evaluations.
 - [Collect feedback with presigned URLs](presigned-feedback-tokens.md) - Use presigned feedback tokens to collect user feedback from client-side applications without exposing your LangSmith API key.
 - [Preview builds](preview-builds.md) - Create temporary preview deployments for pull requests to test Agent Server changes before merging.

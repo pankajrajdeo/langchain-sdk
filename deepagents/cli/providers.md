@@ -262,7 +262,7 @@ The `/model` selector dynamically builds its list from installed provider packag
 > 2. The model is available from the provider package, a local provider, or your `config.toml`.
 > 3. The model profile does not mark text input or output as unsupported.
 >
-> If a model is missing, use `/model <provider>:<model>` directly or add it to [`[models.providers.<name>].models`](/oss/deepagents/code/config-file#adding-models-to-the-interactive-switcher).
+> If a model is missing, use `/model <provider>:<model>` directly or add it to [`[models.providers.<name>].models`](https://docs.langchain.com/oss/deepagents/code/config-file#adding-models-to-the-interactive-switcher).
 >
 > > [!TIP]
 > >
@@ -468,7 +468,7 @@ Pass extra constructor kwargs to the model—sampling controls, reasoning/thinki
 
 CLI flags override config-file `params` and are session-only (mid-session changes are not persisted). Per-model sub-tables in `config.toml` override provider-level keys (shallow merge—see [Model constructor params](../code/config-file.md#model-constructor-params) for full semantics). `--model-params` cannot be combined with `--default`.
 
-For retry counts, prefer `--max-retries` or the top-level [`[retries]` config](/oss/deepagents/code/config-file#retries).
+For retry counts, prefer `--max-retries` or the top-level [`[retries]` config](https://docs.langchain.com/oss/deepagents/code/config-file#retries).
 
 > [!TIP]
 >

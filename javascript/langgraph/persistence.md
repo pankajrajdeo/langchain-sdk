@@ -43,6 +43,7 @@ const result = await graph.invoke(
 > When using the [Agent Server](../../langsmith/agent-server.md), you do not need to implement or configure checkpointers or stores manually. The server handles persistence infrastructure behind the scenes.
 
 <a id="checkpointer-libraries"></a>
+<a id="checkpoints"></a>
 
 ## Checkpointer vs. store
 

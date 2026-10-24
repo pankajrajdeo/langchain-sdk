@@ -336,6 +336,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > High-performance analytics and data processing.
 
+> **[BotsRatedPreflightTool](https://github.com/botsrated/botsrated/tree/main/integrations/langchain)**
+>
+> Tools that check an x402 seller against BotsRated's latest unpaid probe before an agent pays, plus an optional paid check capped by a budget.
+
 > **[BowmarkToolkit](https://bowmark.ai/docs/langchain)**
 >
 > Tools for live websites: read Bowmark's typed function library for a task or site, or run a short script for structured data.
@@ -351,6 +355,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > **[Brightdata](https://docs.brightdata.com/integrations/langchain)**
 >
 > Web data platform and proxy services.
+
+> **[Browser Use](browser_use.md)**
+>
+> Browser agents and cloud browsers for AI applications.
 
 > **[Browserbase](browserbase.md)**
 >
@@ -634,7 +642,7 @@ Browse the complete collection of integrations available for Python. LangChain P
 
 > **[EmpirioLabs AI](https://docs.empiriolabs.ai)**
 >
-> Frontier open models through one OpenAI-compatible API.
+> Specialized AI model hosting for open, proprietary, and custom stacks through one OpenAI-compatible API, plus GPU Cloud and hosted agents.
 
 > **[EnConvert](https://github.com/enconvert/langchain-enconvert)**
 >
@@ -1059,6 +1067,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > **[LexMex](https://lex-mex.xyz)**
 >
 > Spanish-language Mexican federal law Q\&A with cited articles for LangChain agents.
+
+> **[LFG Alarm](https://github.com/lfg-gm/langchain-lfg#readme)**
+>
+> Tools that set, list and delete alarms that ring on a phone, and ring a phone now, through LFG Alarm.
 
 > **[Lindorm](https://help.aliyun.com/document_detail/174640.html)**
 >
@@ -1932,6 +1944,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Data visualization and business intelligence.
 
+> **[TableJourney](https://tablejourney.com/agents/#langchain)**
+>
+> Tools for verified places to eat, food festivals with dates, and bookable food tours and stays in 224 cities, from TableJourney's public MCP server.
+
 > **[Taiga](https://github.com/Shikenso-Analytics/langchain-taiga)**
 >
 > Project management platform for agile teams.
@@ -2159,6 +2175,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > **[Vectorize](https://docs.vectorize.io/rag-pipelines/retrieval-endpoint#access-tokens)**
 >
 > Vector database and semantic search.
+
+> **[VeqenCallbackHandler](https://github.com/Keyveve/veqen-sdks/tree/main/integrations/langchain#readme)**
+>
+> Veqen records token usage and estimated AI costs by customer and feature, with local budget checks before model calls.
 
 > **[Vequil](https://github.com/nxd914/vequil)**
 >

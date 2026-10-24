@@ -51,7 +51,7 @@ rate_limiter = InMemoryRateLimiter(
     requests_per_second=4.5, check_every_n_seconds=0.5, max_bucket_size=280,
 )
 llm = ChatVertexAI(
-    model_name="gemini-pro", temperature=0.3, rate_limiter=rate_limiter
+    model_name="gemini-3.6-flash", temperature=0.3, rate_limiter=rate_limiter
 )
 ```
 

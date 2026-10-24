@@ -1,13 +1,13 @@
 ---
 title: "langsmith/javascript"
-description: "Index of 28 pages and 0 subdirectories under langsmith/javascript."
+description: "Index of 29 pages and 0 subdirectories under langsmith/javascript."
 category: "index"
 tags: [index, langsmith, javascript]
 ---
 
 # langsmith/javascript
 
-28 pages here.
+29 pages here.
 
 ## Files
 
@@ -19,9 +19,10 @@ tags: [index, langsmith, javascript]
 - [Managed Deep Agents CLI reference](managed-deep-agents-cli.md) - Reference for mda commands, project files, and deploy behavior.
 - [Manage connections](managed-deep-agents-connections.md) - Store API keys and OAuth grants so Managed Deep Agents can authenticate with external services at runtime.
 - [Manage Context Hub for Managed Deep Agents](managed-deep-agents-context-hub.md) - Understand how Managed Deep Agents stores instructions, skills, and durable memory in LangSmith Context Hub.
+- [Build a custom frontend for a Managed Deep Agent](managed-deep-agents-custom-frontend.md) - Call a Managed Deep Agents deployment from your own browser or server application instead of reaching the agent through a channel or LangSmith Studio.
 - [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md) - Test and deploy a Managed Deep Agent with the mda CLI.
 - [Evaluate Managed Deep Agents](managed-deep-agents-evals.md) - Develop Harbor evals for Managed Deep Agents with a coding agent and the eval-engineering skill.
-- [Add identity to Managed Deep Agents](managed-deep-agents-identity.md) - Authenticate callers to a Managed Deep Agents deployment with a LangSmith API key, Supabase, or your own backend.
+- [Add identity to Managed Deep Agents](managed-deep-agents-identity.md) - Authenticate callers to a Managed Deep Agents deployment with a LangSmith API key, Supabase, another JWT provider, or your own backend.
 - [Add instructions to Managed Deep Agents](managed-deep-agents-instructions.md) - Define the system prompt for a managed deep agent in instructions.md.
 - [Develop locally with LangSmith Studio](managed-deep-agents-local-development.md) - Run and test a Managed Deep Agent locally with mda dev and LangSmith Studio.
 - [Connect to MCP servers](managed-deep-agents-mcp-connectors.md) - Add tools from remote MCP servers to a managed deep agent.

@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langgraph-sdk"
-description: "Index of 1 page and 10 subdirectories under reference/python/langgraph-sdk."
+description: "Index of 1 page and 11 subdirectories under reference/python/langgraph-sdk."
 category: "index"
 tags: [index, reference, python, langgraph-sdk]
 ---
 
 # reference/python/langgraph-sdk
 
-1 page here, 361 pages including subdirectories.
+1 page here, 365 pages including subdirectories.
 
 ## Directories
 
@@ -18,6 +18,7 @@ tags: [index, reference, python, langgraph-sdk]
 - [cache/](cache/_index.md) - 5 pages
 - [encryption/](encryption/_index.md) - 8 pages
 - [errors/](errors/_index.md) - 14 pages
+- [priority/](priority/_index.md) - 4 pages
 - [schema/](schema/_index.md) - 48 pages
 - [sse/](sse/_index.md) - 8 pages
 - [stream/](stream/_index.md) - 68 pages

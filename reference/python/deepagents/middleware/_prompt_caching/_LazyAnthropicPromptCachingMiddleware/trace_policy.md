@@ -1,0 +1,23 @@
+---
+title: "trace_policy"
+description: "View source on GitHub"
+source: "https://reference.langchain.com/python/deepagents/middleware/_prompt_caching/_LazyAnthropicPromptCachingMiddleware/trace_policy"
+category: "reference"
+tags: [reference, deepagents, middleware, prompt_caching, lazyanthropicpromptcachingmiddleware, trace_policy]
+---
+
+# trace_policy
+
+> **Attribute** in `deepagents`
+
+📖 [View in docs](https://reference.langchain.com/python/deepagents/middleware/_prompt_caching/_LazyAnthropicPromptCachingMiddleware/trace_policy)
+
+## Signature
+
+```python
+trace_policy = TracePolicy(process_inputs=omit_payload)
+```
+
+---
+
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/e85c6b98087861512d2c5240305e16cfac68a746/libs/deepagents/deepagents/middleware/_prompt_caching.py#L34)

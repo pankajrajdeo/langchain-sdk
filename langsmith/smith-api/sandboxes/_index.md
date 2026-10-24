@@ -30,7 +30,7 @@ tags: [index, langsmith, smith-api, sandboxes]
 - [Execute a sandbox command](execute-a-sandbox-command.md) - Execute a command inside a sandbox and return stdout, stderr, and exit code. Use the streaming execute endpoints for long-running commands that may exceed the synchronous request deadline.
 - [Generate a sandbox file download link](generate-a-sandbox-file-download-link.md) - Generate a tokenized link that downloads a single file from a sandbox with no further authentication. This mints a token rather than creating an addressable resource, so it returns 200 with no...
 - [Generate a service access token](generate-a-service-access-token.md) - Create a short-lived JWT for accessing an HTTP service running on a specific port inside a sandbox. Returns a browser_url (sets auth cookie via redirect), a service_url (for use with the...
-- [Get a browser (Beta)](get-a-browser-beta.md) - Beta: get a browser and the windows attached to it.
+- [Get a browser (Beta)](get-a-browser-beta.md) - /langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/browsers/{name} Beta: get a browser and the windows attached to it.
 - [Get a registry](get-a-registry.md) - Get a sandbox registry by name.
 - [Get a sandbox](get-a-sandbox.md) - Retrieve a sandbox by name. Stale provisioning sandboxes are auto-failed.
 - [Get a snapshot name](get-a-snapshot-name.md) - Get a snapshot name and every tag under it, with the snapshot each tag resolves to. To fetch one snapshot, use /api/v2/sandboxes/snapshots/{snapshot_id}.
