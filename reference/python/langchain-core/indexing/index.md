@@ -1,6 +1,6 @@
 ---
 title: "index"
-description: "Index of block in aggregate response. Used during streaming."
+description: "The index of the tool call in a sequence."
 source: "https://reference.langchain.com/python/langchain-core/indexing/index"
 category: "reference"
 tags: [reference, langchain-core, indexing]
@@ -10,16 +10,18 @@ tags: [reference, langchain-core, indexing]
 
 > **Attribute** in `langchain_core`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain-core/messages/content/TextContentBlock/index)
+📖 [View in docs](https://reference.langchain.com/python/langchain-core/messages/tool/ToolCallChunk/index)
 
-Index of block in aggregate response. Used during streaming.
+The index of the tool call in a sequence.
+
+Used for merging chunks.
 
 ## Signature
 
 ```python
-index: NotRequired[int | str]
+index: int | None
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/messages/content.py#L240)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/messages/tool.py#L293)

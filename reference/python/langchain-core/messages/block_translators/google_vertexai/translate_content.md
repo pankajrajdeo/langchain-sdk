@@ -1,6 +1,6 @@
 ---
 title: "translate_content"
-description: "Derive standard content blocks from a message with Google (GenAI) content."
+description: "Derive standard content blocks from a message with OpenAI content."
 source: "https://reference.langchain.com/python/langchain-core/messages/block_translators/google_vertexai/translate_content"
 category: "reference"
 tags: [reference, langchain-core, messages, block_translators, google_vertexai, translate_content]
@@ -10,9 +10,9 @@ tags: [reference, langchain-core, messages, block_translators, google_vertexai, 
 
 > **Function** in `langchain_core`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain-core/messages/block_translators/google_genai/translate_content)
+📖 [View in docs](https://reference.langchain.com/python/langchain-core/messages/block_translators/openai/translate_content)
 
-Derive standard content blocks from a message with Google (GenAI) content.
+Derive standard content blocks from a message with OpenAI content.
 
 ## Signature
 
@@ -36,4 +36,4 @@ The derived content blocks.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/messages/block_translators/google_genai.py#L574)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/messages/block_translators/openai.py#L1047)

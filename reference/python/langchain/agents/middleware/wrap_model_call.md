@@ -1,6 +1,6 @@
 ---
 title: "wrap_model_call"
-description: "Defer tools before invoking the model."
+description: "Intercept and control model execution via handler callback."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/wrap_model_call"
 category: "reference"
 tags: [reference, langchain, agents, middleware, wrap_model_call]
@@ -10,9 +10,16 @@ tags: [reference, langchain, agents, middleware, wrap_model_call]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/provider_tool_search/ProviderToolSearchMiddleware/wrap_model_call)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware/wrap_model_call)
 
-Defer tools before invoking the model.
+Intercept and control model execution via handler callback.
+
+Async version is `awrap_model_call`
+
+The handler callback executes the model request and returns a `ModelResponse`.
+Middleware can call the handler multiple times for retry logic, skip calling
+it to short-circuit, or modify the request/response. Multiple middleware
+compose with first in list as outermost layer.
 
 ## Signature
 
@@ -21,22 +28,22 @@ wrap_model_call(
     self,
     request: ModelRequest[ContextT],
     handler: Callable[[ModelRequest[ContextT]], ModelResponse[ResponseT]],
-) -> ModelResponse[ResponseT] | AIMessage
+) -> ModelResponse[ResponseT] | AIMessage | ExtendedModelResponse[ResponseT]
 ```
 
 ## Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `request` | `ModelRequest[ContextT]` | Yes | Model request to execute. |
-| `handler` | `Callable[[ModelRequest[ContextT]], ModelResponse[ResponseT]]` | Yes | Callback that executes the model request. |
+| `request` | `ModelRequest[ContextT]` | Yes | Model request to execute (includes state and runtime). |
+| `handler` | `Callable[[ModelRequest[ContextT]], ModelResponse[ResponseT]]` | Yes | Callback that executes the model request and returns `ModelResponse`.  Call this to execute the model.  Can be called multiple times for retry logic.  Can skip calling it to short-circuit. |
 
 ## Returns
 
-`ModelResponse[ResponseT] | AIMessage`
+`ModelResponse[ResponseT] | AIMessage | ExtendedModelResponse[ResponseT]`
 
 The model call result.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/provider_tool_search.py#L156)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/types.py#L503)

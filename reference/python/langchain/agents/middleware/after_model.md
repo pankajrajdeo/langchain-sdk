@@ -1,6 +1,6 @@
 ---
 title: "after_model"
-description: "Check for parallel write_todos tool calls and return errors if detected."
+description: "Logic to run after the model is called."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/after_model"
 category: "reference"
 tags: [reference, langchain, agents, middleware, after_model]
@@ -10,22 +10,16 @@ tags: [reference, langchain, agents, middleware, after_model]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware/after_model)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware/after_model)
 
-Check for parallel write_todos tool calls and return errors if detected.
-
-The todo list is designed to be updated at most once per model turn. Since
-the `write_todos` tool replaces the entire todo list with each call, making
-multiple parallel calls would create ambiguity about which update should take
-precedence. This method prevents such conflicts by rejecting any response that
-contains multiple write_todos tool calls.
+Logic to run after the model is called.
 
 ## Signature
 
 ```python
 after_model(
     self,
-    state: PlanningState[ResponseT],
+    state: StateT,
     runtime: Runtime[ContextT],
 ) -> dict[str, Any] | None
 ```
@@ -34,15 +28,15 @@ after_model(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `state` | `PlanningState[ResponseT]` | Yes | The current agent state containing messages. |
-| `runtime` | `Runtime[ContextT]` | Yes | The LangGraph runtime instance. |
+| `state` | `StateT` | Yes | The current agent state. |
+| `runtime` | `Runtime[ContextT]` | Yes | The runtime context. |
 
 ## Returns
 
 `dict[str, Any] | None`
 
-A dict containing error ToolMessages for each write_todos call if multiple
+Agent state updates to apply after model call.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/todo.py#L285)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/types.py#L479)

@@ -20,7 +20,7 @@ tags: [index, langsmith, smith-api, sandboxes]
 - [Create a sandbox](create-a-sandbox.md) - Create a new sandbox from a snapshot. Provide at most one of snapshot_id or snapshot_name; if neither is provided, the server uses the default snapshot. snapshot_name accepts a Docker-style name or...
 - [Create a snapshot](create-a-snapshot.md) - Create a snapshot from a Docker image (async build). Names use lowercase registry-style components separated by slashes, up to 255 characters. The system/ namespace is read-only.
 - [Create links to a browser window (Beta)](create-links-to-a-browser-window-beta.md) - Beta: mint a view link and an act link for one window, as every attachment response does, with a chosen lifetime and the origins allowed to embed the window's pages in an iframe. Without...
-- [Delete a registry](delete-a-registry.md) - Delete a sandbox registry by name.
+- [Delete a registry](delete-a-registry.md) - /langsmith/langsmith-platform-openapi.json delete /api/v2/sandboxes/registries/{name} Delete a sandbox registry by name.
 - [Delete a sandbox](delete-a-sandbox.md) - Delete a sandbox by name or UUID. Tears down the sandbox runtime and removes the DB record.
 - [Delete a snapshot](delete-a-snapshot.md) - Delete a snapshot by ID or by a Docker-style name[:tag] reference. The underlying storage is reclaimed asynchronously.
 - [Detach a sandbox from a browser (Beta)](detach-a-sandbox-from-a-browser-beta.md) - Beta: close the window and stop the sandbox from making new connections to the browser.
@@ -30,7 +30,7 @@ tags: [index, langsmith, smith-api, sandboxes]
 - [Execute a sandbox command](execute-a-sandbox-command.md) - Execute a command inside a sandbox and return stdout, stderr, and exit code. Use the streaming execute endpoints for long-running commands that may exceed the synchronous request deadline.
 - [Generate a sandbox file download link](generate-a-sandbox-file-download-link.md) - Generate a tokenized link that downloads a single file from a sandbox with no further authentication. This mints a token rather than creating an addressable resource, so it returns 200 with no...
 - [Generate a service access token](generate-a-service-access-token.md) - Create a short-lived JWT for accessing an HTTP service running on a specific port inside a sandbox. Returns a browser_url (sets auth cookie via redirect), a service_url (for use with the...
-- [Get a browser (Beta)](get-a-browser-beta.md) - /langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/browsers/{name} Beta: get a browser and the windows attached to it.
+- [Get a browser (Beta)](get-a-browser-beta.md) - Beta: get a browser and the windows attached to it.
 - [Get a registry](get-a-registry.md) - Get a sandbox registry by name.
 - [Get a sandbox](get-a-sandbox.md) - Retrieve a sandbox by name. Stale provisioning sandboxes are auto-failed.
 - [Get a snapshot name](get-a-snapshot-name.md) - Get a snapshot name and every tag under it, with the snapshot each tag resolves to. To fetch one snapshot, use /api/v2/sandboxes/snapshots/{snapshot_id}.
