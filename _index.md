@@ -7,12 +7,12 @@ tags: [index]
 
 # LangChain mirror
 
-13 pages here, 8960 pages including subdirectories.
+13 pages here, 8961 pages including subdirectories.
 
 ## Directories
 
 - [api-reference/](api-reference/_index.md) - 65 pages
-- [blog/](blog/_index.md) - 543 pages
+- [blog/](blog/_index.md) - 544 pages
 - [breakoutagents/](breakoutagents/_index.md) - 5 pages
 - [concepts/](concepts/_index.md) - 5 pages
 - [contributing/](contributing/_index.md) - 8 pages

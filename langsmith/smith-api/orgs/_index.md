@@ -50,7 +50,7 @@ tags: [index, langsmith, smith-api, orgs]
 - [List org service keys](list-org-service-keys.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/service-keys
 - [List org tracing keys](list-org-tracing-keys.md) - List your tracing keys and keys visible through organization/workspace access.
 - [List organization roles](list-organization-roles.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/roles
-- [List organizations](list-organizations.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs Get all orgs visible to this auth
+- [List organizations](list-organizations.md) - Get all orgs visible to this auth
 - [List pending organization invites](list-pending-organization-invites.md) - Get all pending orgs visible to this auth
 - [List permissions](list-permissions.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/permissions
 - [List TTL settings](list-ttl-settings.md) - List out the configured TTL settings for a given org (org-level and tenant-level).
@@ -60,7 +60,7 @@ tags: [index, langsmith, smith-api, orgs]
 - [Remove member from current org](remove-member-from-current-org.md) - Remove a user from the current organization.
 - [Revoke org personal access token](revoke-org-personal-access-token.md) - Revoke a personal access token, so it stops working but its record remains.
 - [Set company info](set-company-info.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/business-info
-- [Set default SSO provision](set-default-sso-provision.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/orgs/current/set-default-sso-provision Set the current organization as the default for SSO provisioning in self-hosted environments.
+- [Set default SSO provision](set-default-sso-provision.md) - Set the current organization as the default for SSO provisioning in self-hosted environments.
 - [Set role restriction](set-role-restriction.md) - /langsmith/langsmith-platform-openapi.json put /api/v1/orgs/current/roles/{role_id}/restriction
 - [Update allowed login methods](update-allowed-login-methods.md) - Update allowed login methods for the current organization.
 - [Update current org member](update-current-org-member.md) - This is used for updating a user's role (all auth modes) or full_name/password (basic auth)

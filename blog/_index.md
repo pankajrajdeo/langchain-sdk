@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 543 pages and 0 subdirectories under blog."
+description: "Index of 544 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-543 pages here.
+544 pages here.
 
 ## Files
 
@@ -95,6 +95,7 @@ tags: [index, blog]
 - [Command: A new tool for building multi-agent architectures in LangGraph](command-a-new-tool-for-multi-agent-architectures-in-langgraph.md) - Learn about Command, a new tool in LangGraph that helps facilitate multi-agent communication.
 - [The Most Common Questions About Agent Evals, Answered](common-questions-about-agent-evals.md) - Where to start with agent evals, offline vs online evals, evaluator types, LLM judges, benchmarks with Harbor, multi-turn evals, and keeping costs down.
 - [Communication is all you need](communication-is-all-you-need.md) - Discover why effective communication—through prompts, code, and UX—is essential for building reliable AI agents with LangGraph and LangSmith.
+- [The five components of building a &quot;company harness&quot;](components-building-company-harness.md) - Learn how LangChain built internal agents across marketing, sales, and engineering, and how they have completely changed how those teams work.
 - [Composio’s SWE agent advances open-source on SweBench with a 48.6% score using LangGraph and LangSmith](composio-swekit.md) - Build reliable AI coding agents with Composio&#39;s SWE-Kit. Achieved 48.6% on SWeBench using LangGraph state machines for real-world automation.
 - [Connections: Managed credentials and per-caller identity for Managed Deep Agents](connections-managed-credentials-and-per-caller-identity-for-managed-deep-agents.md) - Learn how Connections in Managed Deep Agents securely manage credentials, support per-user OAuth, and let agents act with each caller’s identity.
 - [Constructing knowledge graphs from text using OpenAI functions: Leveraging knowledge graphs to power LangChain Applications](constructing-knowledge-graphs-from-text-using-openai-functions.md) - Build knowledge graphs from text using OpenAI functions and LangChain. Extract structured data, power RAG apps, and enable multi-hop Q&amp;A with Neo4j.

@@ -14,7 +14,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## What does it mean to "own your intelligence"?
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseJuly 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab452a9ab70e37bfc53e20a_LangSmith%20Engine%20V2.png)LangSmith
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseJuly 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)Deep Agents
+
+## The five components of building a "company harness"
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a56f3a3a4a725f72a70441f_caspar-b.jpeg)Harrison ChaseCaspar BroekhuizenOctober 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab452a9ab70e37bfc53e20a_LangSmith%20Engine%20V2.png)LangSmith
 
 ## LangSmith Engine v2: Red teaming and automated testing
 
@@ -22,15 +26,15 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Trajectories now in LangSmith: A readable view of every agent session
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab0bd4025242f1e7ba1cfd0_Winston%20Huynh%20-%20GSB%20Headshot.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab3f899e44af010231031ce_Bonnie%20Pecevich.png)Winston HuynhBonnie PecevichSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab45a5758db5bed65dc7113_LangSmith%20Fine%20Tuning.png)LangChain LabsLangSmith
-
-## Introducing LangSmith Fine-Tuning
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a057b407e8d40398635c89c_Ankush.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a186f27aa3f837f062768ab_JakeStudioHeadshot.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcefac505b6b48827abf84_vivek-trivedy.png)Ankush GolaJake BroekhuizenVivek TrivedySeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab0bd4025242f1e7ba1cfd0_Winston%20Huynh%20-%20GSB%20Headshot.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab3f899e44af010231031ce_Bonnie%20Pecevich.png)Winston HuynhBonnie PecevichSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adb940c2b1a77d3a87ae860_dark-52%20characters%20max.png)Deep AgentsConceptual Guide
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)Deep Agents
+
+## The five components of building a "company harness"
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a56f3a3a4a725f72a70441f_caspar-b.jpeg)Harrison ChaseCaspar BroekhuizenOctober 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adb940c2b1a77d3a87ae860_dark-52%20characters%20max.png)Deep AgentsConceptual Guide
 
 ## Context Engineering Starts with Retrieval
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Building Prod with Jev and LangGraph
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e12735c02bb07c894a067a_hunter-lovell.png)Sydney RunkleHunter LovellSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab57bc134468b379293eaf4_everything%20we%20shipped%20at%20interrupt%20nyc.png)LangSmithCompany Announcements
-
-## New in LangSmith: Engine v2, Managed Deep Agents, Fine-Tuning, and More
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e0003a1af368dfae13c23c_jacob-talbot.png)Jacob TalbotSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 34
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e12735c02bb07c894a067a_hunter-lovell.png)Sydney RunkleHunter LovellSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min1...1 / 34
 
 #### We couldn't find anything matching that.
 

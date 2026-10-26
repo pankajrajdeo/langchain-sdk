@@ -7,8 +7,8 @@ tags: [docs, javascript, integrations, chat, bedrock_converse]
 ---
 
 # ChatBedrockConverse integration
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/javascript/integrations/chat/bedrock_converse)
-Integrate with the ChatBedrockConverse chat model using LangChain JavaScript.
+
+> Integrate with the ChatBedrockConverse chat model using LangChain JavaScript.
 
 [Amazon Bedrock Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) is a fully managed service that makes Foundation Models (FMs) from leading AI startups and Amazon available via an API. You can choose from a wide range of FMs to find the model that is best suited for your use case. It provides a unified conversational interface for Bedrock models.
 
