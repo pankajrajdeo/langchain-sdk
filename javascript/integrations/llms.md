@@ -28,12 +28,12 @@ tags: [docs, javascript, integrations, llms]
 | [`Ollama`](llms/ollama.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ollama) |
 | [`MistralAI`](llms/mistral.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mistralai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mistralai) |
 | [`Cohere`](llms/cohere.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cohere) |
-| [`CloudflareWorkersAI`](llms/cloudflare_workersai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
 | [`Fireworks`](llms/fireworks.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/fireworks?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/fireworks) |
-| [`WatsonxLLM`](llms/ibm.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ibm) |
-| [`Jigsawstack prompt engine`](llms/jigsawstack.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/jigsawstack?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/jigsawstack) |
+| [`CloudflareWorkersAI`](llms/cloudflare_workersai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
 | [`TogetherAI`](llms/together.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/together-ai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/together-ai) |
+| [`WatsonxLLM`](llms/ibm.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ibm) |
 | [`Yandexgpt`](llms/yandex.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/yandex?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/yandex) |
+| [`Jigsawstack prompt engine`](llms/jigsawstack.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/jigsawstack?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/jigsawstack) |
 
 ***
 

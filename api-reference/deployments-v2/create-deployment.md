@@ -169,6 +169,35 @@ components:
           description: >-
             List of Kubernetes Secret references.<br><br>Only applicable for
             `external_docker` source.
+        extra_manifests:
+          anyOf:
+            - items:
+                additionalProperties: true
+                type: object
+              type: array
+            - type: 'null'
+          title: Extra Manifests
+          description: >-
+            Additional Kubernetes objects to apply in the deployment's
+            namespace. Only available on self-hosted installations with extra
+            manifests enabled.<br><br>Supports `v1` `ServiceAccount` and
+            `secrets-store.csi.x-k8s.io/v1` `SecretProviderClass` objects, up to
+            16 objects. `ServiceAccount` objects may only set
+            `automountServiceAccountToken` besides `metadata`. `metadata` may
+            only contain `name`, `labels`, and `annotations`, and
+            `metadata.name` must start with `extra_manifests_name_prefix`. Not
+            supported for deployments on a remote
+            listener.<br><br>`SecretProviderClass` objects must use pod workload
+            identity. `spec` may only contain `provider` and `parameters`;
+            `secretObjects` is rejected. Allowed `parameters`: `aws`: `objects`,
+            `region`, `failoverRegion`, `pathTranslation`, `usePodIdentity`,
+            `preferredAddressType`. `azure`: `clientID` (required), `tenantId`,
+            `keyvaultName`, `cloudName`, `objects`, and `usePodIdentity` or
+            `useVMManagedIdentity` set to `false`. `gcp`: `secrets`, and `auth`
+            set to `pod-adc`.<br><br>Objects are stored in plaintext, so do not
+            include credentials. They are stored per deployment, not per
+            revision. On PATCH, omit or null to leave unchanged; send an empty
+            list to clear previously stored objects.
         shareable:
           type: boolean
           title: Shareable
@@ -248,6 +277,20 @@ components:
           description: >-
             List of Kubernetes Secret references.<br><br>Only applicable for
             `external_docker` source.
+        extra_manifests:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Extra Manifests
+          description: >-
+            Extra Kubernetes objects stored for this deployment, in the format
+            accepted by `extra_manifests` on create and PATCH. An empty list
+            means no objects are stored.<br><br>Returned only by the get
+            deployment endpoint, to user callers with permission to update the
+            deployment, when extra manifests are enabled on this self-hosted
+            installation and the deployment is not on a remote listener. Omitted
+            otherwise.
         shareable:
           type: boolean
           title: Shareable
@@ -262,6 +305,22 @@ components:
             Route OpenAI and Anthropic model calls through the LangSmith LLM
             gateway.
           default: false
+        extra_manifests_configured:
+          type: boolean
+          title: Extra Manifests Configured
+          description: >-
+            Whether extra Kubernetes manifests are stored for this
+            deployment.<br><br>This is a read-only field.
+          default: false
+        extra_manifests_name_prefix:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Extra Manifests Name Prefix
+          description: >-
+            Required `metadata.name` prefix for extra manifests, or null when
+            extra manifests are unavailable for this deployment.<br><br>This is
+            a read-only field.
         id:
           type: string
           format: uuid

@@ -1,6 +1,6 @@
 ---
 title: "Unshare dataset"
-description: "Unshare a dataset."
+description: "Stop sharing a dataset."
 source: "https://docs.langchain.com/langsmith/smith-api/datasets/unshare-dataset"
 category: "docs"
 tags: [docs, langsmith, smith-api, datasets, unshare-dataset]
@@ -8,7 +8,9 @@ tags: [docs, langsmith, smith-api, datasets, unshare-dataset]
 
 # Unshare dataset
 
-> Unshare a dataset.
+> Stop sharing a dataset.
+
+Its share token stops working. Succeeds when the dataset is not shared.
 
 ## OpenAPI
 
@@ -179,7 +181,10 @@ paths:
       tags:
         - datasets
       summary: Unshare dataset
-      description: Unshare a dataset.
+      description: |-
+        Stop sharing a dataset.
+
+        Its share token stops working. Succeeds when the dataset is not shared.
       operationId: unshare_dataset_api_v1_datasets__dataset_id__share_delete
       parameters:
         - name: dataset_id

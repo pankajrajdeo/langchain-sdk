@@ -16,7 +16,7 @@ LangSmith supports three types of API keys with different permissions and lifecy
 
 * [**Personal Access Tokens (PATs)**](administration-overview.md#personal-access-tokens-pats) inherit the permissions of the user who created them. Use PATs for personal scripts or tools.
 * [**Tracing keys**](#tracing-keys) submit traces in selected workspaces without access to stored traces or administrative operations.
-* [**Service keys**](administration-overview.md#service-keys) scope to specific [workspaces](administration-overview.md#workspaces) or the entire [organization](administration-overview.md#organizations). Use service keys for applications and production services.
+* [**Service keys**](administration-overview.md#service-keys) scope to specific [workspaces](administration-overview.md#workspaces) or the entire [organization](administration-overview.md#organizations). Use service keys for agents and production services.
 
 Use a tracing key to log [traces](observability-concepts.md#traces). Use a PAT or service key with the required permissions for [evaluations](evaluation.md) and other API operations.
 
@@ -76,9 +76,11 @@ Service keys can only be deleted, not deactivated. Open the **Service** tab and 
 
 ## Tracing keys
 
-Tracing keys are organization-owned credentials for submitting traces in selected workspaces. They limit an application's access to `runs:create` and `projects:create`.
+Tracing keys are organization-owned credentials for submitting traces in selected workspaces. They limit an agent's access to `runs:create` and `projects:create`.
 
-A tracing key can create projects and submit run updates through the tracing ingestion APIs. It cannot read stored traces, update project configuration, create saved views, run experiments, or manage keys. Project upsert requests are also denied. Use a separate credential for operations that require those permissions.
+A tracing key submits run updates through the tracing ingestion APIs. Before tracing in an agent-based workspace, [register the agent](create-an-agent.md) in the UI or with a PAT or service key that has `projects:create`. Tracing keys cannot call the agent creation API.
+
+A tracing key cannot read stored traces, update agent environment settings, create saved views, run experiments, or manage keys. Legacy project upsert requests are also denied. Use a separate credential for operations that require those permissions.
 
 ### Create a tracing key
 
@@ -153,12 +155,16 @@ npm install langsmith
 
 For full details, refer to the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk.md) or [JS/TS SDK](https://docs.langchain.com/langsmith/smith-js-ts-sdk.md) reference.
 
-Then, set your API key and enable tracing:
+Before tracing in an agent-based workspace, [register an agent](create-an-agent.md). Then, set your API key, enable tracing, and select its identifier and environment:
 
 ```bash
 export LANGSMITH_API_KEY=<your-api-key>
 export LANGSMITH_TRACING=true
+export LANGSMITH_AGENT_ID="<your-agent-id>"
+export LANGSMITH_AGENT_ENVIRONMENT="production"
 ```
+
+Remove legacy destination variables when using agent addressing. In project-based workspaces, including self-hosted LangSmith, use `LANGSMITH_PROJECT` instead of the two agent variables.
 
 You may also need the following additional environment variables:
 

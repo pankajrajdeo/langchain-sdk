@@ -728,22 +728,22 @@ LangChain.js integrates with a variety of vector stores. You can check out a ful
 | :- | :- |
 | [`WeaviateStore`](vectorstores/weaviate.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/weaviate?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/weaviate) |
 | [`PineconeStore`](vectorstores/pinecone.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/pinecone?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/pinecone) |
-| [`QdrantVectorStore`](vectorstores/qdrant.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/qdrant?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/qdrant) |
 | [`MongoDBAtlasVectorSearch`](vectorstores/mongodb_atlas.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mongodb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mongodb) |
+| [`QdrantVectorStore`](vectorstores/qdrant.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/qdrant?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/qdrant) |
 | [`RedisVectorStore`](vectorstores/redis.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/redis?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/redis) |
 | [`OracleVS`](vectorstores/oracleai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@oracle/langchain-oracledb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@oracle/langchain-oracledb) |
 | [`PGVectorStore`](vectorstores/pgvector.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/pgvector?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/pgvector) |
 | [`Cloudflare vectorize`](vectorstores/cloudflare_vectorize.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
+| [`TurbopufferVectorStore`](vectorstores/turbopuffer.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/turbopuffer?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/turbopuffer) |
+| [`Google cloud SQL for postgresql`](vectorstores/google_cloudsql_pg.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google-cloud-sql-pg?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google-cloud-sql-pg) |
 | [`Azure Cosmos DB for MongoDB vCore (deprecated)`](vectorstores/azure_cosmosdb_mongodb.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/azure-cosmosdb) |
 | [`Azure Cosmos DB for NoSQL`](vectorstores/azure_cosmosdb_nosql.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/azure-cosmosdb) |
 | [`Azure DocumentDB`](vectorstores/azure_documentdb.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/azure-cosmosdb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/azure-cosmosdb) |
-| [`TurbopufferVectorStore`](vectorstores/turbopuffer.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/turbopuffer?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/turbopuffer) |
 | [`Neo4jVectorStore`](vectorstores/neo4jvector.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/neo4j?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/neo4j) |
-| [`Google cloud SQL for postgresql`](vectorstores/google_cloudsql_pg.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google-cloud-sql-pg?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google-cloud-sql-pg) |
 | [`SAP HANA Cloud Vector Engine`](vectorstores/sap_hanavector.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@sap/hana-langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@sap/hana-langchain) |
 | [`LambdaDB`](https://docs.lambdadb.ai/guides/get-started/quickstart) | [  ![Downloads per month](https://img.shields.io/npm/dm/@functional-systems/langchain-lambdadb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@functional-systems/langchain-lambdadb) |
-| [`YDB`](vectorstores/ydb.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@ydbjs/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@ydbjs/langchain) |
 | [`Infino`](https://infino.ai/docs) | [  ![Downloads per month](https://img.shields.io/npm/dm/@infino-ai/langchain-infino?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@infino-ai/langchain-infino) |
+| [`YDB`](vectorstores/ydb.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@ydbjs/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@ydbjs/langchain) |
 | [`langchain`](vectorstores/memory.md) | N/A |
 
 ***

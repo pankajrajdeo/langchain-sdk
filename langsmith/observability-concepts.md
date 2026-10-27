@@ -38,6 +38,8 @@ A *thread* is a sequence of traces representing a single multi-turn session. A t
 
 [Learn how to configure threads](threads.md).
 
+<a id="tracing-projects"></a>
+
 ### Trajectories
 
 A *trajectory* is a flat, ordered list of messages that shows the path an agent took from start to finish.
@@ -58,7 +60,7 @@ Use **[Chat](chat.md)** to analyze traces, runs, and threads. Chat helps you und
 
 ### Trace containers
 
-How LangSmith groups traces depends on which information architecture your workspace uses.
+An organization contains workspaces. Each workspace contains agents, and each agent has environments that separate its traces.
 
 #### Agents and environments
 
@@ -66,19 +68,17 @@ How LangSmith groups traces depends on which information architecture your works
 >
 > **Agent-based workspaces.** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](#tracing-projects).
 
-An *agent* collects the traces of a single application, and it is the unit LangSmith organizes everything else around. An agent's traces divide across *environments* drawn from a fixed set of four: Production, Staging, Development, and Local. Traces land in one environment of one agent, so a query about production behavior never has to exclude test traffic by hand.
+An *agent* has a stable identifier within its workspace. Use that identifier to associate traces with the agent that produced them. An agent's traces divide across *environments* drawn from a fixed set of four: Production, Staging, Development, and Local. Traces land in one environment of one agent, so a query about production behavior never has to exclude test traffic by hand.
 
 [Log traces to an agent](log-traces-to-agent.md).
 
-#### Tracing projects
-
-> [!NOTE]
+> **Compatibility with older workspaces and APIs**
 >
-> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based. Skip this section and read [Agents](agents.md).
-
-A *project* is a container for all the traces related to a single application or service.
-
-[Log traces to a project](log-traces-to-project.md).
+> > [!NOTE]
+> >
+> > **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based. Skip this section and read [Agents](agents.md).
+>
+> Older workspaces and self-hosted LangSmith group traces into tracing projects. In an agent-based workspace, each agent environment has its own trace storage: a backing tracing project. Some APIs and integrations still use its name or UUID through fields such as `project_name` and `session_id`. These fields refer to the environment's trace storage, not an additional agent you need to create. See [Resolve an agent environment](resolve-an-agent.md).
 
 ## Trace enrichment
 
@@ -96,7 +96,7 @@ For more on how feedback is stored, refer to the [Feedback data format guide](fe
 
 ### Metadata
 
-*Metadata* is a collection of key-value pairs you can attach to runs. For example, application version, environment, or any other contextual information. Similarly to tags, you can use metadata to filter and group runs.
+*Metadata* is a collection of key-value pairs you can attach to runs. For example, agent version, environment, or any other contextual information. Similarly to tags, you can use metadata to filter and group runs.
 
 [Learn how to add metadata to your traces](add-metadata-tags.md).
 

@@ -1,6 +1,6 @@
 ---
 title: "Update dataset version"
-description: "Set a tag on a dataset version."
+description: "Tag a dataset version."
 source: "https://docs.langchain.com/langsmith/smith-api/datasets/update-dataset-version"
 category: "docs"
 tags: [docs, langsmith, smith-api, datasets, update-dataset-version]
@@ -8,7 +8,13 @@ tags: [docs, langsmith, smith-api, datasets, update-dataset-version]
 
 # Update dataset version
 
-> Set a tag on a dataset version.
+> Tag a dataset version.
+
+Points the tag at the version given by as_of, creating the tag or moving it
+if the dataset already has it. Other tags are unchanged. Requires permission
+to update datasets. Returns the version's time and all of its tags. Returns
+400 if the tag is latest, and 404 if the dataset or the as_of tag does not
+exist.
 
 ## OpenAPI
 
@@ -179,7 +185,22 @@ paths:
       tags:
         - datasets
       summary: Update dataset version
-      description: Set a tag on a dataset version.
+      description: >-
+        Tag a dataset version.
+
+        Points the tag at the version given by as_of, creating the tag or moving
+        it
+
+        if the dataset already has it. Other tags are unchanged. Requires
+        permission
+
+        to update datasets. Returns the version's time and all of its tags.
+        Returns
+
+        400 if the tag is latest, and 404 if the dataset or the as_of tag does
+        not
+
+        exist.
       operationId: update_dataset_version_api_v1_datasets__dataset_id__tags_put
       parameters:
         - name: dataset_id
@@ -202,6 +223,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DatasetVersion'
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: The tag is latest, which is reserved.
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: The dataset or the as_of tag does not exist.
         '422':
           description: Validation Error
           content:
@@ -223,11 +256,22 @@ components:
             - type: string
           title: As Of
           description: >-
-            Only modifications made on or before this time are included. If
-            None, the latest version of the dataset is used.
+            The version to tag: an ISO 8601 timestamp, or the name of an
+            existing tag on this dataset (latest resolves to the most recent
+            example change, and returns 404 for a dataset with no examples). A
+            value that does not parse as a timestamp is treated as a tag name,
+            and an unknown tag name returns 404. Timestamps are not checked
+            against the dataset history: the tag covers every example change
+            made on or before that time, so a future time keeps picking up new
+            changes until it passes. Use the exact as_of of an existing version,
+            since looking up a version by tag returns 404 when the tag's time
+            does not match a version.
         tag:
           type: string
           title: Tag
+          description: >-
+            The tag to set. If the dataset already has this tag, it is moved to
+            the new version. The tag latest is reserved and returns 400.
       type: object
       required:
         - as_of
@@ -251,6 +295,28 @@ components:
         - as_of
       title: DatasetVersion
       description: Dataset version schema.
+    ProblemDetails:
+      properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     HTTPValidationError:
       properties:
         detail:

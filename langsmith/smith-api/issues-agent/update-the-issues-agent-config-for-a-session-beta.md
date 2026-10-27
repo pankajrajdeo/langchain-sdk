@@ -374,13 +374,13 @@ components:
         engine_version:
           type: string
         github_base_branch:
-          description: 'Legacy: aliases the oldest entry in GithubRepos.'
+          description: 'Legacy: aliases the oldest GitHub entry in GithubRepos.'
           type: string
         github_repo_subdir:
-          description: 'Legacy: aliases the oldest entry in GithubRepos.'
+          description: 'Legacy: aliases the oldest GitHub entry in GithubRepos.'
           type: string
         github_repo_url:
-          description: 'Legacy: aliases the oldest entry in GithubRepos.'
+          description: 'Legacy: aliases the oldest GitHub entry in GithubRepos.'
           type: string
         github_repos:
           type: array
@@ -534,6 +534,12 @@ components:
           format: date-time
         id:
           type: string
+        provider:
+          enum:
+            - github
+            - gitlab
+          allOf:
+            - $ref: '#/components/schemas/repohost.Provider'
         repo_url:
           type: string
         subdir:
@@ -587,6 +593,14 @@ components:
           items:
             type: string
           type: array
+    repohost.Provider:
+      type: string
+      enum:
+        - github
+        - gitlab
+      x-enum-varnames:
+        - GitHub
+        - GitLab
   securitySchemes:
     API Key:
       type: apiKey

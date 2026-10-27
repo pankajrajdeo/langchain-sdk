@@ -231,7 +231,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - 0
@@ -239,6 +238,7 @@ paths:
                 - 2
                 - 3
               type: integer
+            type: array
             title: Severity Exact
         - description: Filter by Engine activity (repeatable; OR semantics)
           name: activity
@@ -246,13 +246,13 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - fixing
                 - watching
                 - recurred
               type: string
+            type: array
             title: Activity
         - description: Filter by tag (exact match)
           name: tag
@@ -508,6 +508,8 @@ components:
         - created_at
         - id
         - pr_number
+        - provider
+        - provider_web_base_url
         - repo_url
         - updated_at
       properties:
@@ -523,6 +525,19 @@ components:
         pr_number:
           anyOf:
             - type: integer
+            - type: 'null'
+        provider:
+          enum:
+            - github
+            - gitlab
+          allOf:
+            - $ref: '#/components/schemas/repohost.Provider'
+        provider_web_base_url:
+          description: >-
+            ProviderWebBaseURL is the GitLab instance a GitLab fix lives on;
+            null for GitHub.
+          anyOf:
+            - type: string
             - type: 'null'
         repo_url:
           type: string
@@ -647,6 +662,14 @@ components:
         - series
       x-enum-varnames:
         - EvidenceTypeSeries
+    repohost.Provider:
+      type: string
+      enum:
+        - github
+        - gitlab
+      x-enum-varnames:
+        - GitHub
+        - GitLab
     runsanalytics.MetricDefinition:
       type: object
       required:

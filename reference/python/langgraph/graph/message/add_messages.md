@@ -140,4 +140,4 @@ A new list of messages with the messages from `right` merged into `left`.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/4c52e129eb1ab69a3da58b799f67929f77d81149/libs/langgraph/langgraph/graph/message.py#L63)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/3521f08e21a7d89c28331191374bc85c11ecb6e2/libs/langgraph/langgraph/graph/message.py#L63)

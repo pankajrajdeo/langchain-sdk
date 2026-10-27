@@ -1,18 +1,22 @@
 ---
-title: "Trace OpenAI Agents SDK applications"
-description: "Trace OpenAI Agents SDK Python and JavaScript applications with LangSmith."
+title: "Trace with the OpenAI Agents SDK"
+description: "Trace OpenAI Agents SDK Python and JavaScript agents with LangSmith."
 source: "https://docs.langchain.com/langsmith/trace-with-openai-agents-sdk"
 category: "docs"
 tags: [docs, langsmith, trace-with-openai-agents-sdk]
 ---
 
-# Trace OpenAI Agents SDK applications
+# Trace with the OpenAI Agents SDK
 
-> Trace OpenAI Agents SDK Python and JavaScript applications with LangSmith.
+> Trace OpenAI Agents SDK Python and JavaScript agents with LangSmith.
 
-The OpenAI Agents SDK lets you build agentic applications powered by OpenAI models.
+The OpenAI Agents SDK lets you build agents powered by OpenAI models.
 
 Use LangSmith to trace OpenAI Agents SDK runs, including agent steps, model calls, tool calls, and handoffs.
+
+> [!NOTE]
+>
+> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 **Python**
 
@@ -46,8 +50,9 @@ This installs both the LangSmith library and the OpenAI Agents SDK.
 export LANGSMITH_API_KEY=<your-api-key>
 export OPENAI_API_KEY=<your-openai-api-key>
 
-# Optional: set a project for your traces
-export LANGSMITH_PROJECT=<your-project-name>
+# Select the registered agent and environment
+export LANGSMITH_AGENT_ID="<your-agent-id>"
+export LANGSMITH_AGENT_ENVIRONMENT="production"
 
 # For LangSmith API keys linked to multiple workspaces, set the LANGSMITH_WORKSPACE_ID environment variable to specify which workspace to use.
 export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
@@ -116,8 +121,9 @@ pnpm add langsmith @openai/agents zod
 export LANGSMITH_API_KEY=<your-api-key>
 export OPENAI_API_KEY=<your-openai-api-key>
 
-# Optional: set a project for your traces
-export LANGSMITH_PROJECT=<your-project-name>
+# Select the registered agent and environment
+export LANGSMITH_AGENT_ID="<your-agent-id>"
+export LANGSMITH_AGENT_ENVIRONMENT="production"
 
 # For LangSmith API keys linked to multiple workspaces, set the LANGSMITH_WORKSPACE_ID environment variable to specify which workspace to use.
 export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
@@ -165,7 +171,7 @@ The resulting trace contains the root agent run, response spans, and nested tool
 
 ## Configure the processor
 
-Pass options to the processor to set a LangSmith client, project, tags, metadata, or root trace name.
+Pass options to the processor to set a LangSmith client, tags, metadata, or root trace name. Leave `projectName` unset to use the configured agent and environment.
 
 ```typescript
 import { Agent, run, setTraceProcessors } from "@openai/agents";
@@ -176,7 +182,6 @@ import { OpenAIAgentsTracingProcessor } from "langsmith/wrappers/openai_agents";
 const client = new Client();
 const processor = new OpenAIAgentsTracingProcessor({
   client,
-  projectName: "openai-agents-demo",
   name: "Support agent workflow",
   tags: ["openai-agents"],
   metadata: {

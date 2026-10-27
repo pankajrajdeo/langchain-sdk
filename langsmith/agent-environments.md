@@ -51,7 +51,7 @@ This control drives environment selection on Tracing, Monitoring, alerts, [Engin
 
 * [Agents](agents.md)
 * [Log traces to an agent](log-traces-to-agent.md)
-* [Log traces to a specific project](log-traces-to-project.md)
+* [Configure legacy integrations](create-an-agent.md#use-an-environment-project)
 * [Observability concepts](observability-concepts.md)
 
 ***

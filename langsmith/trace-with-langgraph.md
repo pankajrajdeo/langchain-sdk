@@ -1,14 +1,18 @@
 ---
-title: "Trace LangGraph applications"
+title: "Trace LangGraph agents"
 description: "LangSmith smoothly integrates with LangGraph (Python and JS) to help you trace agents, whether you're using LangChain modules or other SDKs."
 source: "https://docs.langchain.com/langsmith/trace-with-langgraph"
 category: "docs"
 tags: [docs, langsmith, trace-with-langgraph]
 ---
 
-# Trace LangGraph applications
+# Trace LangGraph agents
 
 LangSmith smoothly integrates with LangGraph (Python and JS) to help you trace agents, whether you're using LangChain modules or other SDKs.
+
+> [!NOTE]
+>
+> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## With LangChain
 
@@ -51,6 +55,8 @@ pnpm add @langchain/openai @langchain/langgraph
 ```bash
 export LANGSMITH_TRACING=true
 export LANGSMITH_API_KEY=<your-api-key>
+export LANGSMITH_AGENT_ID="<your-agent-id>"
+export LANGSMITH_AGENT_ENVIRONMENT="production"
 # This example uses OpenAI, but you can use any LLM provider of choice
 export OPENAI_API_KEY=<your-openai-api-key>
 # For LangSmith API keys linked to multiple workspaces, set the LANGSMITH_WORKSPACE_ID environment variable to specify which workspace to use.
@@ -303,6 +309,8 @@ pnpm add openai langsmith @langchain/langgraph
 ```bash
 export LANGSMITH_TRACING=true
 export LANGSMITH_API_KEY=<your-api-key>
+export LANGSMITH_AGENT_ID="<your-agent-id>"
+export LANGSMITH_AGENT_ENVIRONMENT="production"
 # This example uses OpenAI, but you can use any LLM provider of choice
 export OPENAI_API_KEY=<your-openai-api-key>
 ```

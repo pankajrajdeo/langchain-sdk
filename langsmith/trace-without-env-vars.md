@@ -1,6 +1,6 @@
 ---
 title: "Trace without setting environment variables"
-description: "The following environment variables allow you to configure tracing enabled, the API endpoint, the API key, and the tracing project:"
+description: "The following environment variables allow you to configure tracing enabled, the API endpoint, the API key, and the tracing destination:"
 source: "https://docs.langchain.com/langsmith/trace-without-env-vars"
 category: "docs"
 tags: [docs, langsmith, trace-without-env-vars]
@@ -8,14 +8,15 @@ tags: [docs, langsmith, trace-without-env-vars]
 
 # Trace without setting environment variables
 
-The following environment variables allow you to configure tracing enabled, the API endpoint, the API key, and the tracing project:
+The following environment variables allow you to configure tracing enabled, the API endpoint, the API key, and the tracing destination:
 
 * `LANGSMITH_TRACING`
 * `LANGSMITH_API_KEY`
 * `LANGSMITH_ENDPOINT`
-* `LANGSMITH_PROJECT`
+* `LANGSMITH_AGENT_ID`
+* `LANGSMITH_AGENT_ENVIRONMENT`
 
-In an [agent-based workspace](agents.md), the first trace to a new project name creates an agent named after the project, with the project as its Production [environment](agent-environments.md). The agent's identifier is derived from the project name, so it can differ from the project name, and creating the agent requires permission to create projects. A project name that already exists keeps sending traces to that project. To address the agent directly, see [Log traces to an agent](log-traces-to-agent.md).
+In an [agent-based workspace](agents.md), [create the agent](create-an-agent.md) during setup. The examples below use its [agent address](log-traces-to-agent.md) to configure tracing without environment variables.
 
 If you need to trace runs with a custom configuration, are working in an environment that doesn’t support typical environment variables (such as Cloudflare Workers), or prefer not to rely on environment variables, LangSmith allows you to configure tracing programmatically.
 
@@ -30,7 +31,7 @@ If you need to trace runs with a custom configuration, are working in an environ
 
 ```python
 import openai
-from langsmith import Client, tracing_context, traceable
+from langsmith import Client, agent_address, tracing_context, traceable
 from langsmith.wrappers import wrap_openai
 
 langsmith_client = Client(
@@ -58,7 +59,7 @@ def chat_pipeline(question: str):
   return chat_completion.choices[0].message.content
 
 # Can set to False to disable tracing here without changing code structure
-with tracing_context(enabled=True):
+with tracing_context(enabled=True, address=agent_address("<your-agent-id>", "production")):
   # Use langsmith_extra to pass in a custom client
   chat_pipeline("Can you summarize this morning's meetings?", langsmith_extra={"client": langsmith_client})
 ```
@@ -66,7 +67,7 @@ with tracing_context(enabled=True):
 **TypeScript**
 
 ```typescript
-import { Client } from "langsmith";
+import { AgentAddress, Client } from "langsmith";
 import { traceable } from "langsmith/traceable";
 import { wrapOpenAI } from "langsmith/wrappers";
 import { OpenAI } from "openai";
@@ -96,7 +97,7 @@ const pipeline = traceable(
 
         return completion.choices[0].message.content;
     },
-    { name: "Chat", client, tracingEnabled: true }
+    { name: "Chat", client, tracingEnabled: true, address: new AgentAddress("<your-agent-id>", "production") }
 );
 
 await pipeline("Can you summarize this morning's meetings?");

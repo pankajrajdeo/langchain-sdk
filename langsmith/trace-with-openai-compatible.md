@@ -12,7 +12,7 @@ tags: [docs, langsmith, trace-with-openai-compatible]
 
 Many LLM providers accept requests in the same format as the OpenAI API. To trace calls from these providers to LangSmith, construct an OpenAI client pointed at the provider's base URL, then wrap it with [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_openai/wrap_openai) / [`wrapOpenAI`](https://reference.langchain.com/javascript/modules/langsmith.html).
 
-Use `wrap_openai` / `wrapOpenAI` for direct API calls. Use [`@traceable`](https://reference.langchain.com/python/langsmith/run_helpers/traceable) when you need to trace application logic around the call or set metadata per invocation.
+Use `wrap_openai` / `wrapOpenAI` for direct API calls. Use [`@traceable`](https://reference.langchain.com/python/langsmith/run_helpers/traceable) when you need to trace agent logic around the call or set metadata per invocation.
 
 | | `wrap_openai` / `wrapOpenAI` | `@traceable` / `traceable` |
 | - | - | - |
@@ -23,7 +23,11 @@ Use `wrap_openai` / `wrapOpenAI` for direct API calls. Use [`@traceable`](https:
 
 > [!NOTE]
 >
-> To trace OpenAI directly, refer to [Trace OpenAI applications](trace-openai.md).
+> To trace OpenAI directly, refer to [Trace with OpenAI](trace-openai.md).
+
+> [!NOTE]
+>
+> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Setup
 
@@ -41,6 +45,8 @@ npm install langsmith openai
 
 ```bash
 export LANGSMITH_API_KEY=<your-api-key>
+export LANGSMITH_AGENT_ID="<your-agent-id>"
+export LANGSMITH_AGENT_ENVIRONMENT="production"
 export LANGSMITH_TRACING=true
 ```
 

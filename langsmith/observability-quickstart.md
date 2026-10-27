@@ -1,6 +1,6 @@
 ---
 title: "Tracing quickstart"
-description: "Add LangSmith tracing to an LLM application in minutes."
+description: "Add LangSmith tracing to an agent in minutes."
 source: "https://docs.langchain.com/langsmith/observability-quickstart"
 category: "docs"
 tags: [docs, langsmith, observability-quickstart]
@@ -8,13 +8,13 @@ tags: [docs, langsmith, observability-quickstart]
 
 # Tracing quickstart
 
-> Add LangSmith tracing to an LLM application in minutes.
+> Add LangSmith tracing to an agent in minutes.
 
-LangSmith gives you end-to-end visibility into your LLM application by capturing [*traces*](observability-concepts.md#traces); a complete record of every step that ran during a request, from the inputs passed in to the final output returned.
+LangSmith gives you end-to-end visibility into your agent by capturing [*traces*](observability-concepts.md#traces); a complete record of every step that ran during a request, from the inputs passed in to the final output returned.
 
 In this quickstart, you will add tracing to an AI assistant and view the results in LangSmith.
 
-Every trace lands in a container, and which one depends on how your workspace is organized. An agent-based workspace groups traces by [agent and environment](agents.md). A project-based workspace groups them by [tracing project](observability-concepts.md#tracing-projects). The control at the top left tells you which one you are on: in an agent-based workspace it names your workspace, and in a project-based workspace it shows the LangSmith logo. This quickstart configures a tracing project, and the steps below note where the two differ.
+Traces belong to an [agent and one of its environments](agents.md) within a workspace. This quickstart creates the agent in LangSmith, then configures your code to send traces to its identifier and environment. Compatibility instructions cover older workspaces and self-hosted LangSmith.
 
 > [!TIP]
 >
@@ -32,7 +32,7 @@ This example uses OpenAI as the LLM provider. You can adapt it for your own prov
 
 ## 1. Set up your environment
 
-1. Create a project directory, install the dependencies, and configure the required environment variables:
+1. Create a directory for your agent code, install the dependencies, and configure the required environment variables:
 
 **Python**
 
@@ -54,7 +54,7 @@ This example uses OpenAI as the LLM provider. You can adapt it for your own prov
 **Java/Kotlin (Gradle)**
 
 ```kotlin
-   implementation("com.langchain.smith:langsmith-java:0.1.0-alpha.28")
+   implementation("com.langchain.smith:langsmith-java:0.1.0-beta.27")
 ```
 
 2. Export your environment variables in your shell:
@@ -65,7 +65,22 @@ This example uses OpenAI as the LLM provider. You can adapt it for your own prov
    export OPENAI_API_KEY="<your-openai-api-key>"
 ```
 
-   To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](log-traces-to-project.md). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion. In an [agent-based workspace](agents.md), the first trace to a new project name, including the default project, creates an agent named after the project, with the project as its **Production** [environment](agent-environments.md). The agent's identifier is derived from the project name, so it can differ from the project name, and creating the agent requires permission to create projects. To name the agent and the environment directly instead, see [Log traces to an agent](log-traces-to-agent.md).
+   Before sending traces, create the agent in LangSmith:
+
+   1. In an [agent-based workspace](agents.md), open **+ Agent**, choose **Observability**, and create an agent with an **Agent name** and **Agent ID**. This requires the `projects:create` permission. If the agent already exists, reuse it.
+   2. Copy the **Agent ID** and choose an environment: `local`, `development`, `staging`, or `production`.
+   3. Configure [agent addressing](log-traces-to-agent.md) before running the agent:
+
+```bash
+      export LANGSMITH_AGENT_ID="<your-agent-id>"
+      export LANGSMITH_AGENT_ENVIRONMENT="production"
+```
+
+   Register the agent once, not for every trace. Remove `LANGSMITH_PROJECT`, `LANGCHAIN_PROJECT`, and `LANGCHAIN_SESSION` from the environment where your code runs. Do not combine legacy destination settings with agent addressing. To create the agent with an SDK call or API request, see [Create an agent programmatically](create-an-agent.md#create-an-agent-programmatically).
+
+   > **Project-based workspaces and self-hosted LangSmith**
+   >
+   > Agent addressing is available in agent-based workspaces on LangSmith Cloud. In a project-based workspace, including self-hosted LangSmith, set `LANGSMITH_PROJECT` to your tracing project name instead of setting the two agent variables.
 
    > [!NOTE]
    >
@@ -343,11 +358,11 @@ npx tsx index.ts
 
 ## 4. View your trace
 
-In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-observability-quickstart), go to **Tracing** and select your **default** project. In an agent-based workspace, select your agent in the top bar first, then go to **Tracing**. For more information, see [Navigate agents](navigate-agents.md).
+In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-observability-quickstart), select your agent, go to **Tracing**, and select the environment configured during setup. In a project-based workspace, open the project named by `LANGSMITH_PROJECT`. For more information, see [Navigate agents](navigate-agents.md).
 
 Click the `assistant` row to open the trace. The **Trajectory** tab shows the conversation as it was sent to the model. Select the **Details** tab to see the full run tree, including the `assistant` function with the `get_context` tool call and the OpenAI call nested inside it.
 
-![LangSmith UI showing a trace with an outer application span and a nested LLM call span.](https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-quickstart-app.png?fit=max\&auto=format\&n=EKYgNtnIIDPnseTv\&q=85\&s=35b19b5e1e978d13cdbb61058334eeb4)
+![LangSmith UI showing a trace with an outer agent span and a nested LLM call span.](https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-quickstart-app.png?fit=max\&auto=format\&n=EKYgNtnIIDPnseTv\&q=85\&s=35b19b5e1e978d13cdbb61058334eeb4)
 
 The outer span captures your `assistant` function's inputs and outputs. The nested **get\_context** span records the tool call, and the **ChatOpenAI** span records the exact prompt sent to the model and the response returned.
 
@@ -358,12 +373,12 @@ The outer span captures your `assistant` function's inputs and outputs. The nest
 ## Next steps
 
 * [Tracing integrations](integrations.md): LangChain, LangGraph, Anthropic, and other providers.
-* [Trace an LLM application](observability-llm-tutorial.md): a full lifecycle tutorial, from prototyping through production.
-* [Filter traces](filter-traces.md): search and navigate large tracing projects.
-* [Log to a specific project](log-traces-to-project.md): send traces to a named project instead of **default**.
-* [Agents](agents.md): how an agent groups the traces, datasets, and monitors of one application, and how its environments divide them.
+* [Trace an agent](observability-llm-tutorial.md): a full lifecycle tutorial, from prototyping through production.
+* [Filter traces](filter-traces.md): search the traces in an agent environment.
+* [Log traces to an agent](log-traces-to-agent.md): configure the agent and environment in code or with environment variables.
+* [Agents](agents.md): how workspaces organize agents and their environments.
 
-After logging traces, use **[Chat](chat.md)** to analyze them and get AI-powered insights into your application's performance.
+After logging traces, use **[Chat](chat.md)** to analyze them and get AI-powered insights into your agent's performance.
 
 ***
 

@@ -1,14 +1,18 @@
 ---
-title: "Trace OpenAI applications"
+title: "Trace with OpenAI"
 description: "The wrap_openai / wrapOpenAI methods in Python/TypeScript allow you to wrap your OpenAI client in order to automatically log traces -- no decorator or function wrapping required! Using the wrapper..."
 source: "https://docs.langchain.com/langsmith/trace-openai"
 category: "docs"
 tags: [docs, langsmith, trace-openai]
 ---
 
-# Trace OpenAI applications
+# Trace with OpenAI
 
-The [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_openai/wrap_openai) / [`wrapOpenAI`](https://reference.langchain.com/javascript/langsmith/wrappers/wrapOpenAI) methods in Python/TypeScript allow you to wrap your OpenAI client in order to automatically log traces -- no decorator or function wrapping required! Using the wrapper ensures that messages, including tool calls and multimodal content blocks will be rendered nicely in LangSmith. Also note that the wrapper works seamlessly with the [`@traceable`](https://reference.langchain.com/python/langsmith/run_helpers/traceable) decorator or [`traceable`](https://reference.langchain.com/javascript/langsmith/traceable/traceable) function and you can use both in the same application.
+The [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_openai/wrap_openai) / [`wrapOpenAI`](https://reference.langchain.com/javascript/langsmith/wrappers/wrapOpenAI) methods in Python/TypeScript allow you to wrap your OpenAI client in order to automatically log traces -- no decorator or function wrapping required! Using the wrapper ensures that messages, including tool calls and multimodal content blocks will be rendered nicely in LangSmith. Also note that the wrapper works seamlessly with the [`@traceable`](https://reference.langchain.com/python/langsmith/run_helpers/traceable) decorator or [`traceable`](https://reference.langchain.com/javascript/langsmith/traceable/traceable) function and you can use both in the same agent.
+
+> [!NOTE]
+>
+> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 > [!NOTE]
 >
@@ -18,7 +22,7 @@ The [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_o
 >
 > If your LangSmith API key is linked to multiple workspaces, set the `LANGSMITH_WORKSPACE_ID` environment variable to specify which workspace to use.
 >
-> By default, the traces will be logged to a project named `default`. To log traces to a different project, see [Log traces to a specific project](log-traces-to-project.md).
+> Set `LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT` to the registered agent and environment. See [Configure tracing for the agent](create-an-agent.md#configure-tracing-for-the-agent).
 
 **Python**
 

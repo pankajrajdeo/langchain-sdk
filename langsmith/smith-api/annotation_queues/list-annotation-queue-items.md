@@ -212,8 +212,8 @@ paths:
           name: page_size
           in: query
           schema:
-            type: integer
             default: 20
+            type: integer
             title: Page Size
         - description: Opaque pagination cursor
           name: cursor
@@ -252,11 +252,11 @@ paths:
           name: direction
           in: query
           schema:
+            default: forward
             enum:
               - forward
               - backward
             type: string
-            default: forward
             title: Direction
       responses:
         '200':

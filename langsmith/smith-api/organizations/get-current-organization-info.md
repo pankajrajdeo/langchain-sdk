@@ -370,10 +370,10 @@ components:
           description: Indicates whether this org can provision BYOC data planes.
           type: boolean
         byoc_external_id:
+          readOnly: true
           description: >-
             ByocExternalID is the organization's assigned AWS external ID,
             stored only in org config.
-          readOnly: true
           anyOf:
             - type: string
             - type: 'null'

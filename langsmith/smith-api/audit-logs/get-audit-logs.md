@@ -391,6 +391,8 @@ components:
         - upsert_github_app_configuration
         - update_github_app_configuration
         - delete_github_app_configuration
+        - upsert_gitlab_connection
+        - delete_gitlab_connection
         - set_tenant_handle
         - create_tag_key
         - update_tag_key

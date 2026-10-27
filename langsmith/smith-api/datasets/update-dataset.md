@@ -1,6 +1,6 @@
 ---
 title: "Update dataset"
-description: "Update a specific dataset."
+description: "Update a dataset."
 source: "https://docs.langchain.com/langsmith/smith-api/datasets/update-dataset"
 category: "docs"
 tags: [docs, langsmith, smith-api, datasets, update-dataset]
@@ -8,7 +8,16 @@ tags: [docs, langsmith, smith-api, datasets, update-dataset]
 
 # Update dataset
 
-> Update a specific dataset.
+> Update a dataset.
+
+Only the fields in the request change; omitted fields keep their value.
+Setting a schema or transformations checks every existing example against
+the result. Returns 400, leaving the dataset unchanged, if an example does
+not match, the dataset is not a key-value dataset, or a transformation
+points into inputs or outputs that have no schema. The
+X-Updated-Examples-Count response header holds the number of examples
+changed through patch_examples. Returns 404 if the dataset does not exist
+and 409 if the new name is already used.
 
 ## OpenAPI
 
@@ -179,7 +188,27 @@ paths:
       tags:
         - datasets
       summary: Update dataset
-      description: Update a specific dataset.
+      description: >-
+        Update a dataset.
+
+        Only the fields in the request change; omitted fields keep their value.
+
+        Setting a schema or transformations checks every existing example
+        against
+
+        the result. Returns 400, leaving the dataset unchanged, if an example
+        does
+
+        not match, the dataset is not a key-value dataset, or a transformation
+
+        points into inputs or outputs that have no schema. The
+
+        X-Updated-Examples-Count response header holds the number of examples
+
+        changed through patch_examples. Returns 404 if the dataset does not
+        exist
+
+        and 409 if the new name is already used.
       operationId: update_dataset_api_v1_datasets__dataset_id__patch
       parameters:
         - name: dataset_id
@@ -227,6 +256,10 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Name
+          description: >-
+            New dataset name. Must be unique in the workspace; a name already
+            used by another dataset returns 409. Null returns 400. Omit to keep
+            the current name.
           default:
             __missing__: __missing__
         description:
@@ -235,6 +268,9 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Description
+          description: >-
+            New dataset description. Null clears it. Omit to keep the current
+            description.
           default:
             __missing__: __missing__
         inputs_schema_definition:
@@ -244,6 +280,13 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Inputs Schema Definition
+          description: >-
+            JSON Schema that example inputs must match. Replaces the current
+            inputs schema as a whole; null removes it, which returns 400 while
+            transformations still point into inputs. Only key-value datasets
+            support schemas. Every existing example must match the new schema,
+            otherwise the request returns 400 with the IDs of the examples that
+            do not, and nothing is changed. Omit to keep the current schema.
           default:
             __missing__: __missing__
         outputs_schema_definition:
@@ -253,6 +296,13 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Outputs Schema Definition
+          description: >-
+            JSON Schema that example outputs must match. Replaces the current
+            outputs schema as a whole; null removes it, which returns 400 while
+            transformations still point into outputs. Only key-value datasets
+            support schemas. Every existing example must match the new schema,
+            otherwise the request returns 400 with the IDs of the examples that
+            do not, and nothing is changed. Omit to keep the current schema.
           default:
             __missing__: __missing__
         patch_examples:
@@ -264,6 +314,15 @@ components:
               type: object
             - type: 'null'
           title: Patch Examples
+          description: >-
+            Example updates keyed by example ID, applied in the same transaction
+            so existing examples can be fixed to match a new schema. Only used
+            when the request also sets inputs_schema_definition,
+            outputs_schema_definition, or transformations and the dataset ends
+            up with at least one schema; otherwise it is ignored. Each update
+            replaces the inputs, outputs, metadata, or split it sets and keeps
+            the rest; attachment operations are ignored. An ID that is not an
+            example in this dataset returns 404.
         transformations:
           anyOf:
             - items:
@@ -272,6 +331,12 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Transformations
+          description: >-
+            Transformations applied to new examples, each a path into inputs or
+            outputs and a transformation type. Replaces the whole current list;
+            null or an empty list removes all of them. Existing examples are not
+            transformed. Requires a schema on the inputs or outputs the path
+            points into, otherwise returns 400. Omit to keep the current list.
           default:
             __missing__: __missing__
         metadata:
@@ -281,6 +346,10 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Metadata
+          description: >-
+            Dataset metadata as a JSON object. Replaces the current metadata as
+            a whole; keys are not merged. Send an empty object to clear it. Omit
+            to keep the current metadata.
           default:
             __missing__: __missing__
         baseline_experiment_id:
@@ -290,6 +359,11 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Baseline Experiment Id
+          description: >-
+            ID of the experiment used as the baseline when comparing experiments
+            on this dataset. Must be an experiment run on this dataset,
+            otherwise returns 400. Null clears it. Omit to keep the current
+            baseline.
           default:
             __missing__: __missing__
       type: object

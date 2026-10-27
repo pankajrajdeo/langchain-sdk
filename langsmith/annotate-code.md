@@ -10,7 +10,7 @@ tags: [docs, langsmith, annotate-code]
 
 > Instrument your code directly to control which functions are traced and how they appear in LangSmith.
 
-Adding [instrumentation](observability-concepts.md#manual-instrumentation) directly to your code gives you precise control over which functions your application traces, what inputs and outputs are logged, and how your [trace](observability-concepts.md#traces) hierarchy is structured. The three core instrumentation approaches are:
+Adding [instrumentation](observability-concepts.md#manual-instrumentation) directly to your code gives you precise control over which functions your agent traces, what inputs and outputs are logged, and how your [trace](observability-concepts.md#traces) hierarchy is structured. The three core instrumentation approaches are:
 
 * [`@traceable` decorator](#use-%40traceable-%2F-traceable): recommended for most cases
 * [`trace` context manager](#use-the-trace-context-manager-python-only): Python only
@@ -37,7 +37,7 @@ Before tracing, set the following environment variables:
 
 * `LANGSMITH_API_KEY`: your [LangSmith API key](create-account-api-key.md).
 
-* By default, LangSmith logs traces to a project named `default`. To log to a different project, set `LANGSMITH_PROJECT`. For more details, refer to [Log traces to a specific project](log-traces-to-project.md). In an [agent-based workspace](agents.md), the first trace to a new project name creates an agent named after the project, with the project as its Production [environment](agent-environments.md). The agent's identifier is derived from the project name, so it can differ from the project name, and creating the agent requires permission to create projects. To send traces to a specific agent and environment instead, use [agent addressing](log-traces-to-agent.md).
+* Before tracing in an [agent-based workspace](agents.md), [create an agent](create-an-agent.md). Use [agent addressing](log-traces-to-agent.md): set `LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT`. Remove legacy destination variables and overrides when using agent addressing.
 
 <a id="use-@traceable-/-traceable"></a>
 
@@ -290,9 +290,9 @@ In Python, you can use the `trace` context manager to log traces to LangSmith. T
 3. It is not feasible to use a decorator or wrapper.
 4. Any or all of the above.
 
-The context manager integrates seamlessly with the `traceable` decorator and `wrap_openai` wrapper, so you can use them together in the same application.
+The context manager integrates seamlessly with the `traceable` decorator and `wrap_openai` wrapper, so you can use them together in the same agent.
 
-The following example shows all three used together. `wrap_openai` wraps the OpenAI client so its calls are traced automatically. `my_tool` uses `@traceable` with `run_type="tool"` and a custom `name` to appear correctly in the trace. `chat_pipeline` itself is not decorated; instead, `ls.trace` wraps the call, letting you pass the project name and inputs explicitly and set outputs manually via `rt.end()`:
+The following example shows all three used together. `wrap_openai` wraps the OpenAI client so its calls are traced automatically. `my_tool` uses `@traceable` with `run_type="tool"` and a custom `name` to appear correctly in the trace. `chat_pipeline` itself is not decorated; instead, `ls.trace` wraps the call, letting you pass the agent address and inputs explicitly and set outputs manually via `rt.end()`:
 
 ```python
 import openai
@@ -318,7 +318,7 @@ def chat_pipeline(question: str):
 
 app_inputs = {"input": "Can you summarize this morning's meetings?"}
 
-with ls.trace("Chat Pipeline", "chain", project_name="my_test", inputs=app_inputs) as rt:
+with ls.trace("Chat Pipeline", "chain", address=ls.agent_address("<your-agent-id>", "production"), inputs=app_inputs) as rt:
     output = chat_pipeline("Can you summarize this morning's meetings?")
     rt.end(outputs={"output": output})
 ```
@@ -727,7 +727,7 @@ Use one of the following:
 
 ## Ensure all traces are submitted before exiting
 
-LangSmith performs tracing in a background thread to avoid obstructing your production application. This means that your process may end before all traces are successfully posted to LangSmith. Refer to the following options:
+LangSmith performs tracing in a background thread to avoid obstructing your production agent. This means that your process may end before all traces are successfully posted to LangSmith. Refer to the following options:
 
 * If you are using LangChain, refer to the [LangChain tracing guide](trace-with-langchain.md#ensure-all-traces-are-submitted-before-exiting).
 * If you are using the [LangSmith SDK](reference.md) standalone, you can use the `flush` method before exit:
@@ -774,7 +774,7 @@ LangSmith performs tracing in a background thread to avoid obstructing your prod
 * [Run (span) data format](run-data-format.md): schema reference for run fields including `dotted_order`, `trace_id`, and `parent_run_id`
 * [Log user feedback using the SDK](attach-user-feedback.md): common use case for pre-specifying a run ID
 * [Access the current run (span) within a traced function](access-current-span.md): read or modify the active run from inside a trace
-* [Log traces to a specific project](log-traces-to-project.md): route traces to a named project instead of `default`
+* [Configure legacy integrations](create-an-agent.md#use-an-environment-project): configure an integration that requires `project_name`
 * [Trace with API](trace-with-api.md): low-level REST API alternative to the SDK
 * [Tracing Basics video](https://academy.langchain.com/pages/intro-to-langsmith-preview) from the Introduction to LangSmith Course
 

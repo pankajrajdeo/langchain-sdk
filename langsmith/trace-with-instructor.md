@@ -1,19 +1,25 @@
 ---
-title: "Trace Instructor applications"
+title: "Trace with Instructor"
 description: "LangSmith provides a convenient integration with Instructor, a popular open-source library for generating structured output with LLMs."
 source: "https://docs.langchain.com/langsmith/trace-with-instructor"
 category: "docs"
 tags: [docs, langsmith, trace-with-instructor]
 ---
 
-# Trace Instructor applications
+# Trace with Instructor
 
 LangSmith provides a convenient integration with [Instructor](https://python.useinstructor.com/), a popular open-source library for generating structured output with LLMs.
+
+> [!NOTE]
+>
+> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 In order to use, you first need to set your LangSmith API key.
 
 ```shell
 export LANGSMITH_API_KEY=<your-api-key>
+export LANGSMITH_AGENT_ID="<your-agent-id>"
+export LANGSMITH_AGENT_ENVIRONMENT="production"
 # For LangSmith API keys linked to multiple workspaces, set the LANGSMITH_WORKSPACE_ID environment variable to specify which workspace to use.
 export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 ```

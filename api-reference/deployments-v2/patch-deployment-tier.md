@@ -184,6 +184,20 @@ components:
           description: >-
             List of Kubernetes Secret references.<br><br>Only applicable for
             `external_docker` source.
+        extra_manifests:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Extra Manifests
+          description: >-
+            Extra Kubernetes objects stored for this deployment, in the format
+            accepted by `extra_manifests` on create and PATCH. An empty list
+            means no objects are stored.<br><br>Returned only by the get
+            deployment endpoint, to user callers with permission to update the
+            deployment, when extra manifests are enabled on this self-hosted
+            installation and the deployment is not on a remote listener. Omitted
+            otherwise.
         shareable:
           type: boolean
           title: Shareable
@@ -198,6 +212,22 @@ components:
             Route OpenAI and Anthropic model calls through the LangSmith LLM
             gateway.
           default: false
+        extra_manifests_configured:
+          type: boolean
+          title: Extra Manifests Configured
+          description: >-
+            Whether extra Kubernetes manifests are stored for this
+            deployment.<br><br>This is a read-only field.
+          default: false
+        extra_manifests_name_prefix:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Extra Manifests Name Prefix
+          description: >-
+            Required `metadata.name` prefix for extra manifests, or null when
+            extra manifests are unavailable for this deployment.<br><br>This is
+            a read-only field.
         id:
           type: string
           format: uuid

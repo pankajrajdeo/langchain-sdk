@@ -1,6 +1,6 @@
 ---
 title: "Clone dataset"
-description: "Clone a dataset."
+description: "Copy examples from a source dataset into an existing target dataset."
 source: "https://docs.langchain.com/langsmith/smith-api/datasets/clone-dataset"
 category: "docs"
 tags: [docs, langsmith, smith-api, datasets, clone-dataset]
@@ -8,7 +8,15 @@ tags: [docs, langsmith, smith-api, datasets, clone-dataset]
 
 # Clone dataset
 
-> Clone a dataset.
+> Copy examples from a source dataset into an existing target dataset.
+
+Each copied example gets a new ID and keeps the inputs, outputs, metadata,
+and source run ID of its source example. Attachments are copied when blob
+storage is enabled. Copying the same examples twice adds them twice.
+Requires the datasets:clone permission on both datasets. Returns the ID,
+dataset ID, creation and modification times, and source run ID of each new
+example. Without example IDs, a source or target that is not found can
+return an empty list instead of an error.
 
 ## OpenAPI
 
@@ -179,7 +187,25 @@ paths:
       tags:
         - datasets
       summary: Clone dataset
-      description: Clone a dataset.
+      description: >-
+        Copy examples from a source dataset into an existing target dataset.
+
+        Each copied example gets a new ID and keeps the inputs, outputs,
+        metadata,
+
+        and source run ID of its source example. Attachments are copied when
+        blob
+
+        storage is enabled. Copying the same examples twice adds them twice.
+
+        Requires the datasets:clone permission on both datasets. Returns the ID,
+
+        dataset ID, creation and modification times, and source run ID of each
+        new
+
+        example. Without example IDs, a source or target that is not found can
+
+        return an empty list instead of an error.
       operationId: clone_dataset_api_v1_datasets_clone_post
       requestBody:
         content:
@@ -199,6 +225,14 @@ paths:
                   type: object
                 type: array
                 title: Response Clone Dataset Api V1 Datasets Clone Post
+        '404':
+          description: >-
+            Example IDs were given and nothing was copied, because none match or
+            either dataset is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
         '422':
           description: Validation Error
           content:
@@ -217,10 +251,16 @@ components:
           type: string
           format: uuid
           title: Target Dataset Id
+          description: >-
+            ID of the dataset in this workspace that receives the copied
+            examples. Its current examples are kept.
         source_dataset_id:
           type: string
           format: uuid
           title: Source Dataset Id
+          description: >-
+            ID of the dataset in this workspace to copy examples from. It is not
+            modified.
         as_of:
           anyOf:
             - anyOf:
@@ -232,12 +272,22 @@ components:
                 None, the latest version of the dataset is used.
             - type: 'null'
           title: As Of
+          description: >-
+            Version of the source dataset to copy. A value that parses as an ISO
+            8601 date or timestamp copies the examples as they were at that
+            time; latest copies the current examples; any other value is a
+            version tag. Defaults to latest.
         examples:
           items:
             type: string
             format: uuid
           type: array
           title: Examples
+          description: >-
+            IDs of source examples to copy. Defaults to every example in the
+            source version. When IDs are given and nothing is copied, because
+            none match or either dataset is not found, the request fails with
+            404.
           default: []
         split:
           anyOf:
@@ -247,6 +297,10 @@ components:
               type: array
             - type: 'null'
           title: Split
+          description: >-
+            Split name, or list of split names, assigned to every copied example
+            in place of its source splits. Defaults to keeping the source
+            splits.
         tag_value_ids:
           anyOf:
             - items:
@@ -256,11 +310,36 @@ components:
               maxItems: 100
             - type: 'null'
           title: Tag Value Ids
+          description: >-
+            List of resource tag value IDs to attach to the target dataset, up
+            to 100. Requires the datasets:tag_on_create permission.
       type: object
       required:
         - target_dataset_id
         - source_dataset_id
       title: Body_clone_dataset_api_v1_datasets_clone_post
+    ProblemDetails:
+      properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     HTTPValidationError:
       properties:
         detail:

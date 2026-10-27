@@ -437,22 +437,23 @@ In production, you would typically use a more robust persistent store, such as a
 | :- | :- |
 | [`AzureOpenAIEmbeddings`](embeddings/azure_openai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/openai) |
 | [`OpenAIEmbeddings`](embeddings/openai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/openai) |
-| [`Bedrock`](embeddings/bedrock.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/aws?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/aws) |
 | [`GoogleGenerativeAIEmbeddings`](embeddings/google_generative_ai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google-genai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google-genai) |
+| [`Bedrock`](embeddings/bedrock.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/aws?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/aws) |
 | [`VertexAIEmbeddings`](embeddings/google_vertex_ai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google-vertexai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google-vertexai) |
 | [`OllamaEmbeddings`](embeddings/ollama.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ollama) |
 | [`MistralAIEmbeddings`](embeddings/mistralai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mistralai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mistralai) |
 | [`PineconeEmbeddings`](embeddings/pinecone.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/pinecone?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/pinecone) |
 | [`VoyageEmbeddings`](embeddings/voyageai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mongodb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mongodb) |
 | [`CohereEmbeddings`](embeddings/cohere.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cohere) |
-| [`Baidu qianfan`](embeddings/baidu_qianfan.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/baidu-qianfan?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/baidu-qianfan) |
-| [`Nomic`](embeddings/nomic.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/nomic?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/nomic) |
-| [`CloudflareWorkersAIEmbeddings`](embeddings/cloudflare_ai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
 | [`FireworksEmbeddings`](embeddings/fireworks.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/fireworks?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/fireworks) |
-| [`WatsonxEmbeddings`](embeddings/ibm.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ibm) |
+| [`Nomic`](embeddings/nomic.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/nomic?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/nomic) |
+| [`Baidu qianfan`](embeddings/baidu_qianfan.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/baidu-qianfan?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/baidu-qianfan) |
+| [`CloudflareWorkersAIEmbeddings`](embeddings/cloudflare_ai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
 | [`TogetherAIEmbeddings`](embeddings/togetherai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/together-ai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/together-ai) |
+| [`WatsonxEmbeddings`](embeddings/ibm.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ibm) |
 | [`Mixedbread AI`](embeddings/mixedbread_ai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mixedbread-ai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mixedbread-ai) |
 | [`SCXEmbeddings`](https://scx.ai/) | [  ![Downloads per month](https://img.shields.io/npm/dm/@scx-ai/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@scx-ai/langchain) |
+| [`EmpirioLabsEmbeddings`](https://docs.empiriolabs.ai/integrations#langchain) | N/A |
 | [`Minimax`](embeddings/minimax.md) | N/A |
 | [`OracleEmbeddings`](embeddings/oracleai.md) | N/A |
 

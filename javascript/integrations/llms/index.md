@@ -28,12 +28,12 @@ tags: [docs, javascript, integrations, llms]
 | [`Ollama`](ollama.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ollama) |
 | [`MistralAI`](mistral.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mistralai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mistralai) |
 | [`Cohere`](cohere.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cohere) |
-| [`CloudflareWorkersAI`](cloudflare_workersai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
 | [`Fireworks`](fireworks.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/fireworks?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/fireworks) |
-| [`WatsonxLLM`](ibm.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ibm) |
-| [`Jigsawstack prompt engine`](jigsawstack.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/jigsawstack?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/jigsawstack) |
+| [`CloudflareWorkersAI`](cloudflare_workersai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
 | [`TogetherAI`](together.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/together-ai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/together-ai) |
+| [`WatsonxLLM`](ibm.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ibm) |
 | [`Yandexgpt`](yandex.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/yandex?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/yandex) |
+| [`Jigsawstack prompt engine`](jigsawstack.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/jigsawstack?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/jigsawstack) |
 
 ***
 

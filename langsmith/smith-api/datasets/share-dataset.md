@@ -1,6 +1,6 @@
 ---
 title: "Share dataset"
-description: "Share a dataset."
+description: "Share a dataset publicly and return its share token."
 source: "https://docs.langchain.com/langsmith/smith-api/datasets/share-dataset"
 category: "docs"
 tags: [docs, langsmith, smith-api, datasets, share-dataset]
@@ -8,7 +8,12 @@ tags: [docs, langsmith, smith-api, datasets, share-dataset]
 
 # Share dataset
 
-> Share a dataset.
+> Share a dataset publicly and return its share token.
+
+Anyone with the share token can view the dataset, its examples, and its
+experiments, including their runs and feedback, without signing in. When the
+dataset is already shared, returns its existing share token. Fails with 403
+when the organization disables public sharing.
 
 ## OpenAPI
 
@@ -179,7 +184,18 @@ paths:
       tags:
         - datasets
       summary: Share dataset
-      description: Share a dataset.
+      description: >-
+        Share a dataset publicly and return its share token.
+
+        Anyone with the share token can view the dataset, its examples, and its
+
+        experiments, including their runs and feedback, without signing in. When
+        the
+
+        dataset is already shared, returns its existing share token. Fails with
+        403
+
+        when the organization disables public sharing.
       operationId: share_dataset_api_v1_datasets__dataset_id__share_put
       parameters:
         - name: dataset_id
@@ -194,8 +210,16 @@ paths:
           required: false
           schema:
             type: boolean
+            description: >-
+              Deprecated and has no effect. A shared dataset always shows its
+              experiments.
+            deprecated: true
             default: false
             title: Share Projects
+          description: >-
+            Deprecated and has no effect. A shared dataset always shows its
+            experiments.
+          deprecated: true
       responses:
         '200':
           description: Successful Response

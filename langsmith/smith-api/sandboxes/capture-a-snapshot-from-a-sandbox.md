@@ -282,6 +282,19 @@ components:
         fs_capacity_bytes:
           description: required for Docker image export unless the sandbox has a capacity
           type: integer
+        image_config:
+          description: >-
+            ImageConfig sets the command and ports the snapshot records, as a
+            Docker image's ENTRYPOINT, CMD and EXPOSE do. By default a capture
+            keeps
+
+            those of the snapshot the sandbox was created from; each field given
+            here replaces that one, and an empty list clears it. A function
+
+            serving the snapshot runs this command and listens on its one
+            exposed port.
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.SnapshotImageConfig'
         include:
           description: >-
             Sandbox settings to carry into the snapshot. Sandboxes created from
@@ -479,6 +492,26 @@ components:
           type: string
         type:
           type: string
+    sandboxes.SnapshotImageConfig:
+      type: object
+      properties:
+        cmd:
+          description: >-
+            Cmd follows Entrypoint, as CMD: its arguments, or the whole command
+            when Entrypoint is empty.
+          type: array
+          items:
+            type: string
+        entrypoint:
+          description: Entrypoint is the program the command starts with, as ENTRYPOINT.
+          type: array
+          items:
+            type: string
+        exposed_ports:
+          description: ExposedPorts are the TCP ports the command listens on, as EXPOSE.
+          type: array
+          items:
+            type: integer
     sandboxes.Labels:
       type: object
       additionalProperties:

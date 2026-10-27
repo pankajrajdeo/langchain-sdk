@@ -100,6 +100,10 @@ Connect LangGraph agents to front ends and observability platforms.
 >
 > DeepSeek's advanced reasoning and coding models.
 
+> **[EmpirioLabs AI](https://docs.empiriolabs.ai/integrations#langchain)**
+>
+> Specialized AI model hosting for open, proprietary, and custom stacks, plus GPU Cloud and hosted AI agents.
+
 > **[Fake LLM](../chat/fake.md)**
 >
 > Mock chat model for testing and development purposes.
@@ -215,6 +219,10 @@ Connect LangGraph agents to front ends and observability platforms.
 > **[Cohere](../embeddings/cohere.md)**
 >
 > Cohere's multilingual embedding models.
+
+> **[EmpirioLabs](https://docs.empiriolabs.ai/integrations#langchain)**
+>
+> Specialized AI model hosting for open, proprietary, and custom stacks, plus GPU Cloud and hosted AI agents.
 
 > **[Google Generative AI](../embeddings/google_generative_ai.md)**
 >

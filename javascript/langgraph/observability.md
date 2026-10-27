@@ -1,6 +1,6 @@
 ---
 title: "LangSmith Observability"
-description: "Traces are a series of steps that your application takes to go from input to output. Each of these individual steps is represented by a run. You can use LangSmith to visualize these execution steps..."
+description: "Traces are a series of steps that your agent takes to go from input to output. Each of these individual steps is represented by a run. You can use LangSmith to visualize these execution steps. To use..."
 source: "https://docs.langchain.com/oss/javascript/langgraph/observability"
 category: "docs"
 tags: [docs, javascript, langgraph, observability]
@@ -8,11 +8,11 @@ tags: [docs, javascript, langgraph, observability]
 
 # LangSmith Observability
 
-Traces are a series of steps that your application takes to go from input to output. Each of these individual steps is represented by a run. You can use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-observability) to visualize these execution steps. To use it, [enable tracing for your application](../../langsmith/trace-with-langgraph.md). This enables you to do the following:
+Traces are a series of steps that your agent takes to go from input to output. Each of these individual steps is represented by a run. You can use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-observability) to visualize these execution steps. To use it, [enable tracing for your agent](../../langsmith/trace-with-langgraph.md). This enables you to do the following:
 
-* [Debug a locally running application](../../langsmith/observability-studio.md#debug-langsmith-traces).
-* [Evaluate the application performance](../langchain/test/evals.md).
-* [Monitor the application](../../langsmith/dashboards.md).
+* [Debug a locally running agent](../../langsmith/observability-studio.md#debug-langsmith-traces).
+* [Evaluate the agent performance](../langchain/test/evals.md).
+* [Monitor the agent](../../langsmith/dashboards.md).
 
 ## Prerequisites
 
@@ -23,20 +23,26 @@ Before you begin, ensure you have the following:
 
 ## Enable tracing
 
-To enable tracing for your application, set the following environment variables:
+> [!NOTE]
+>
+> In an [agent-based workspace](../../langsmith/agents.md), [create an agent](../../langsmith/create-an-agent.md) once before sending traces. Use [agent addressing](../../langsmith/log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](../../langsmith/create-an-agent.md#use-an-environment-project) as a compatibility value.
 
-```python
+To enable tracing for your agent, set the following environment variables:
+
+```bash
+export LANGSMITH_AGENT_ID="<your-agent-id>"
+export LANGSMITH_AGENT_ENVIRONMENT="production"
 export LANGSMITH_TRACING=true
 export LANGSMITH_API_KEY=<your-api-key>
 ```
 
-By default, the trace will be logged to the project with the name `default`. To configure a custom project name, see [Log to a project](#log-to-a-project).
+Traces appear in the destination configured during setup.
 
 For more information, see [Trace with LangGraph](../../langsmith/trace-with-langgraph.md).
 
 ## Trace selectively
 
-You may opt to trace specific invocations or parts of your application using LangSmith's `tracing_context` context manager:
+You may opt to trace specific invocations or parts of your agent using LangSmith's `tracing_context` context manager:
 
 ```ts
 import { LangChainTracer } from "@langchain/core/tracers/tracer_langchain";
@@ -58,31 +64,13 @@ await agent.invoke(
 );
 ```
 
-## Log to a project
+## Select an agent and environment
 
-> **Statically**
->
-> You can set a custom project name for your entire application by setting the `LANGSMITH_PROJECT` environment variable:
->
-```bash
-> export LANGSMITH_PROJECT=my-agent-project
-```
+Use `LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT` to select the registered agent and environment. For per-request routing, pass an agent address in code. See [Log traces to an agent](../../langsmith/log-traces-to-agent.md).
 
-> **Dynamically**
+> **Project-based workspaces and self-hosted LangSmith**
 >
-> You can set the project name programmatically for specific operations:
->
-```ts
-> import { LangChainTracer } from "@langchain/core/tracers/tracer_langchain";
->
-> const tracer = new LangChainTracer({ projectName: "email-agent-test" });
-> await agent.invoke(
->   {
->     messages: [{role: "user", content: "Send a test email to alice@example.com"}]
->   },
->   { callbacks: [tracer] }
-> );
-```
+> Set `LANGSMITH_PROJECT` to the tracing project name instead of setting the agent variables. For integrations that require `project_name` in an agent-based workspace, use the environment's [`tracer_session_name`](../../langsmith/create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Add metadata to traces
 
@@ -91,7 +79,7 @@ You can annotate your traces with custom metadata and tags:
 ```ts
 import { LangChainTracer } from "@langchain/core/tracers/tracer_langchain";
 
-const tracer = new LangChainTracer({ projectName: "email-agent-test" });
+const tracer = new LangChainTracer();
 await agent.invoke(
   {
     messages: [{role: "user", content: "Send a test email to alice@example.com"}]

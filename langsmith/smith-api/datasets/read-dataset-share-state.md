@@ -1,6 +1,6 @@
 ---
 title: "Read dataset share state"
-description: "Get the state of sharing a dataset"
+description: "Get a dataset's share token."
 source: "https://docs.langchain.com/langsmith/smith-api/datasets/read-dataset-share-state"
 category: "docs"
 tags: [docs, langsmith, smith-api, datasets, read-dataset-share-state]
@@ -8,7 +8,9 @@ tags: [docs, langsmith, smith-api, datasets, read-dataset-share-state]
 
 # Read dataset share state
 
-> Get the state of sharing a dataset
+> Get a dataset's share token.
+
+Returns null when the dataset is not shared.
 
 ## OpenAPI
 
@@ -179,7 +181,10 @@ paths:
       tags:
         - datasets
       summary: Read dataset share state
-      description: Get the state of sharing a dataset
+      description: |-
+        Get a dataset's share token.
+
+        Returns null when the dataset is not shared.
       operationId: read_dataset_share_state_api_v1_datasets__dataset_id__share_get
       parameters:
         - name: dataset_id

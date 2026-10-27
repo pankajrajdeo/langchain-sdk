@@ -155,6 +155,11 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/AuthStatus'
+        provider_display_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Provider Display Name
         url:
           anyOf:
             - type: string

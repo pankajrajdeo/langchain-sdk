@@ -51,7 +51,7 @@ DeltaChannel(
     reducer: Callable[[Any, Sequence[Any]], Any],
     typ: type[Value] | None = None,
     *,
-    snapshot_frequency: int = 1000,
+    snapshot_frequency: int = 100,
 )
 ```
 
@@ -61,7 +61,7 @@ DeltaChannel(
 |------|------|----------|-------------|
 | `reducer` | `Callable[[Any, Sequence[Any]], Any]` | Yes | `(state, list[writes]) -> new_state`. Must be deterministic and batching-invariant as described above. |
 | `typ` | `type[Value] \| None` | No | The value type (e.g. `list`, `dict`). Inferred automatically from the outer type when used inside `Annotated[T, DeltaChannel(...)]`. (default: `None`) |
-| `snapshot_frequency` | `int` | No | Every Nth update to this channel writes a snapshot blob (default `1000`). Must be a positive int. (default: `1000`) |
+| `snapshot_frequency` | `int` | No | Every Nth update to this channel writes a snapshot blob (default `100`). Must be a positive int. (default: `100`) |
 
 ## Extends
 
@@ -76,7 +76,7 @@ __init__(
     reducer: Callable[[Any, Sequence[Any]], Any],
     typ: type[Value] | None = None,
     *,
-    snapshot_frequency: int = 1000,
+    snapshot_frequency: int = 100,
 ) -> None
 ```
 
@@ -107,4 +107,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/4c52e129eb1ab69a3da58b799f67929f77d81149/libs/langgraph/langgraph/channels/delta.py#L25)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/3521f08e21a7d89c28331191374bc85c11ecb6e2/libs/langgraph/langgraph/channels/delta.py#L25)

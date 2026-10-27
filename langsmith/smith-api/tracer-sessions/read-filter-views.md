@@ -182,140 +182,185 @@ paths:
       description: Get all filter views for a session.
       operationId: read_filter_views_api_v1_sessions__session_id__views_get
       parameters:
-        - name: session_id
+        - description: Project ID
+          name: session_id
           in: path
           required: true
           schema:
             type: string
             format: uuid
-            title: Session Id
-        - name: type
+        - description: View type
+          name: type
           in: query
-          required: false
           schema:
-            anyOf:
-              - $ref: '#/components/schemas/FilterViewType'
-              - type: 'null'
             title: Type
+            anyOf:
+              - type: string
+                enum:
+                  - runs
+                  - threads
+                  - single_run
+              - type: 'null'
       responses:
         '200':
-          description: Successful Response
+          description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/FilterView'
-                title: >-
-                  Response Read Filter Views Api V1 Sessions  Session Id  Views
-                  Get
+        '401':
+          description: Missing or invalid authentication
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
+        '403':
+          description: Insufficient permission to read the project
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
         '422':
-          description: Validation Error
+          description: Invalid request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/filterviews.ValidationErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    FilterViewType:
-      type: string
-      enum:
-        - runs
-        - threads
-        - single_run
-      title: FilterViewType
     FilterView:
+      type: object
+      required:
+        - created_at
+        - display_name
+        - id
+        - updated_at
       properties:
-        filter_string:
-          anyOf:
-            - type: string
-            - type: 'null'
-          title: Filter String
-        trace_filter_string:
-          anyOf:
-            - type: string
-            - type: 'null'
-          title: Trace Filter String
-        tree_filter_string:
-          anyOf:
-            - type: string
-            - type: 'null'
-          title: Tree Filter String
-        thread_filter_string:
-          anyOf:
-            - type: string
-            - type: 'null'
-          title: Thread Filter String
-        display_name:
+        created_at:
           type: string
-          title: Display Name
+          format: date-time
         description:
           anyOf:
             - type: string
             - type: 'null'
-          title: Description
-        type:
-          $ref: '#/components/schemas/FilterViewType'
-          default: runs
-        syntax_version:
-          type: integer
-          title: Syntax Version
-          default: 1
-        start_time:
+        display_name:
+          type: string
+        duration:
           anyOf:
             - type: string
-              format: date-time
             - type: 'null'
-          title: Start Time
         end_time:
           anyOf:
             - type: string
               format: date-time
             - type: 'null'
-          title: End Time
-        duration:
+        filter_string:
           anyOf:
             - type: string
             - type: 'null'
-          title: Duration
         id:
           type: string
           format: uuid
-          title: Id
         session_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
-          title: Session Id
-        created_at:
+        start_time:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        syntax_version:
+          type: integer
+          default: 1
+        thread_filter_string:
+          anyOf:
+            - type: string
+            - type: 'null'
+        trace_filter_string:
+          anyOf:
+            - type: string
+            - type: 'null'
+        tree_filter_string:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
           type: string
-          format: date-time
-          title: Created At
+          default: runs
+          enum:
+            - runs
+            - threads
+            - single_run
         updated_at:
           type: string
           format: date-time
-          title: Updated At
+    shared.ProblemDetails:
+      description: RFC 7807 problem details returned on V2 API errors.
+      type: object
+      properties:
+        detail:
+          type: string
+        details:
+          description: >-
+            Details is a LangSmith extension carrying structured fields for
+            ErrorClass.
+          allOf:
+            - $ref: '#/components/schemas/shared.ParseErrorDetails'
+        error_class:
+          description: |-
+            ErrorClass is a LangSmith extension sub-categorizing a status code.
+            Additional values require expanding this enum and adding a oneOf
+            discriminator on Details to keep the class↔details contract typed.
+          type: string
+          enum:
+            - PARSE_FAILURE
+        instance:
+          type: string
+        remedy:
+          description: Remedy is a LangSmith extension for user-recoverable errors.
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+    filterviews.ValidationErrorResponse:
       type: object
       required:
-        - display_name
-        - id
-        - created_at
-        - updated_at
-      title: FilterView
-    HTTPValidationError:
+        - detail
       properties:
         detail:
           items:
             type: string
           type: array
-          title: Detail
+    shared.ParseErrorDetails:
+      description: Structured fields describing an adapter parse failure.
       type: object
-      title: HTTPValidationError
+      required:
+        - adapter
+        - item_type
+      properties:
+        adapter:
+          type: string
+        item_type:
+          type: string
+        run_id:
+          type: string
   securitySchemes:
     API Key:
       type: apiKey

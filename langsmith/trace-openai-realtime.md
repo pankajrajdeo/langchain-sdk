@@ -1,12 +1,12 @@
 ---
-title: "Trace OpenAI Realtime applications"
+title: "Trace OpenAI Realtime agents"
 description: "Trace OpenAI Realtime voice agents in LangSmith using the LangSmith SDK."
 source: "https://docs.langchain.com/langsmith/trace-openai-realtime"
 category: "docs"
 tags: [docs, langsmith, trace-openai-realtime]
 ---
 
-# Trace OpenAI Realtime applications
+# Trace OpenAI Realtime agents
 
 > Trace OpenAI Realtime voice agents in LangSmith using the LangSmith SDK.
 
@@ -17,6 +17,10 @@ tags: [docs, langsmith, trace-openai-realtime]
 OpenAI Realtime is a speech-to-speech model that streams typed events over a WebSocket. Regardless of whether you build it with a raw connection or the OpenAI Agents SDK, the integration captures each conversation as a single LangSmith trace, with a span for every meaningful event (transcripts, model responses, and tool calls) grouped by turn.
 
 Trace your [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) voice agents to LangSmith. For high-level conventions, see [Voice tracing fundamentals](trace-voice-fundamentals.md).
+
+> [!NOTE]
+>
+> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Choose an approach
 
@@ -48,7 +52,8 @@ uv add "langsmith[openai-realtime]"
 ```bash
 LANGSMITH_API_KEY=<your-langsmith-api-key>
 LANGSMITH_TRACING=true
-LANGSMITH_PROJECT=<your-desired-langsmith-project>
+LANGSMITH_AGENT_ID="<your-agent-id>"
+LANGSMITH_AGENT_ENVIRONMENT="production"
 OPENAI_API_KEY=<your-openai-api-key>
 ```
 
@@ -68,7 +73,6 @@ client = AsyncOpenAI()
 
 async with client.realtime.connect(model="gpt-realtime-2") as raw, wrap_realtime(
     raw,
-    project_name="openai-realtime-voice",
 ) as connection:
     await connection.session.update(session={...})  # your existing config
 
@@ -143,7 +147,6 @@ session = await runner.run()
 
 async with wrap_realtime_session(
     session,
-    project_name="openai-realtime-voice",
 ) as conn:
     async for event in conn:
         ...  # your handling: play audio, update UI

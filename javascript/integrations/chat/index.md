@@ -242,8 +242,8 @@ tags: [docs, javascript, integrations, chat]
 | [`ChatOllama`](ollama.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ollama) |
 | [`ChatMistralAI`](mistral.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mistralai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mistralai) |
 | [`ChatGoogle`](google.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google) |
-| [`ChatCohere`](cohere.md) | ✅ | ✅ | ✅ | ❌ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cohere) |
 | [`ChatXAI`](xai.md) | ✅ | ✅ | ✅ | ❌ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/xai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/xai) |
+| [`ChatCohere`](cohere.md) | ✅ | ✅ | ✅ | ❌ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cohere) |
 | [`ChatFireworks`](fireworks.md) | ✅ | ✅ | ✅ | ❌ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/fireworks?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/fireworks) |
 | [`ChatCloudflareWorkersAI`](cloudflare_workersai.md) | ✅ | ❌ | ❌ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cloudflare?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cloudflare) |
 | [`ChatTogetherAI`](togetherai.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/together-ai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/together-ai) |
@@ -278,8 +278,8 @@ Certain model providers offer endpoints that are compatible with OpenAI's (legac
 | [`ChatOllama`](ollama.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ollama?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ollama) |
 | [`ChatMistralAI`](mistral.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/mistralai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/mistralai) |
 | [`ChatGoogle`](google.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/google?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/google) |
-| [`ChatCohere`](cohere.md) | ✅ | ✅ | ✅ | ❌ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cohere) |
 | [`ChatXAI`](xai.md) | ✅ | ✅ | ✅ | ❌ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/xai?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/xai) |
+| [`ChatCohere`](cohere.md) | ✅ | ✅ | ✅ | ❌ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cohere?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cohere) |
 | [`ChatOpenRouter`](openrouter.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/openrouter?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/openrouter) |
 | [`ChatDeepSeek`](deepseek.md) | ✅ | ✅ | ✅ | ❌ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/deepseek?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/deepseek) |
 | [`ChatCerebras`](cerebras.md) | ✅ | ✅ | ✅ | ❌ | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/cerebras?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/cerebras) |
@@ -292,10 +292,11 @@ Certain model providers offer endpoints that are compatible with OpenAI's (legac
 | [`ChatYandexGPT`](yandex.md) | | | | | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/yandex?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/yandex) |
 | [`ChatInterfaze`](https://interfaze.ai/docs) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@interfaze-ai/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@interfaze-ai/langchain) |
 | [`ChatKServe`](https://gitlab.com/bitkaio/langchain/kserve-provider) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@bitkaio/langchain-kserve?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@bitkaio/langchain-kserve) |
+| [`ChatWebLLM`](https://github.com/ykoh42/web-llm-adapters/blob/main/packages/langchain-web-llm/README.md) | ✅ | ✅ | ✅ | | [  ![Downloads per month](https://img.shields.io/npm/dm/langchain-web-llm?style=flat-square\&label=%20&)](https://www.npmjs.com/package/langchain-web-llm) |
 | [`RecallToolkit`](https://recallmem.dev/guides/langchain) | | | | | [  ![Downloads per month](https://img.shields.io/npm/dm/@recall-memory/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@recall-memory/langchain) |
 | [`ChatSCX`](https://scx.ai/) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://img.shields.io/npm/dm/@scx-ai/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@scx-ai/langchain) |
 | [`Auxen`](https://auxen.ai) | ✅ | ✅ | ✅ | ❌ | N/A |
-| [`ChatWebLLM`](https://github.com/ykoh42/web-llm-adapters/blob/main/packages/langchain-web-llm/README.md) | ✅ | ✅ | ✅ | | N/A |
+| [`ChatEmpirioLabs`](https://docs.empiriolabs.ai/integrations#langchain) | ✅ | ✅ | ✅ | ✅ | N/A |
 | [`FakeListChatModel`](fake.md) | | | | | N/A |
 | [`FuturMix`](https://futurmix.ai/) | ✅ | ✅ | ✅ | ✅ | N/A |
 | [`Tuning Engines`](https://www.tuningengines.com/) | ✅ | ✅ | ✅ | ❌ | N/A |

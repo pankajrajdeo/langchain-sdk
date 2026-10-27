@@ -426,6 +426,23 @@ components:
         - snapshots:create
         - snapshots:delete
         - snapshots:update
+        - functions:create
+        - functions:delete
+        - functions:update
+        - workspaces:settings:manage
+        - workspaces:retention:manage
+        - workspaces:usage-controls:manage
+        - workspaces:security-policy:manage
+        - workspaces:resource-tags:manage
+        - workspaces:integrations:manage
+        - workspaces:sandbox-proxy-profiles:manage
+        - workspaces:credentials:manage
+        - workspaces:access-control:assign-restricted
+        - workspaces:credentials:read-metadata
+        - workspaces:integrations:read
+        - workspaces:fleet-feedback:read-all
+        - workspaces:delete
+        - workspaces:credentials:use
         - workspaces:manage-members
         - workspaces:manage-secrets
         - workspaces:manage
@@ -569,6 +586,23 @@ components:
         - SnapshotsCreate
         - SnapshotsDelete
         - SnapshotsUpdate
+        - FunctionsCreate
+        - FunctionsDelete
+        - FunctionsUpdate
+        - WorkspacesSettingsManage
+        - WorkspacesRetentionManage
+        - WorkspacesUsageControlsManage
+        - WorkspacesSecurityPolicyManage
+        - WorkspacesResourceTagsManage
+        - WorkspacesIntegrationsManage
+        - WorkspacesSandboxProxyProfilesManage
+        - WorkspacesCredentialsManage
+        - WorkspacesAccessControlAssignRestricted
+        - WorkspacesCredentialsReadMetadata
+        - WorkspacesIntegrationsRead
+        - WorkspacesFleetFeedbackReadAll
+        - WorkspacesDelete
+        - WorkspacesCredentialsUse
         - WorkspacesManageMembers
         - WorkspacesManageSecrets
         - WorkspacesManage

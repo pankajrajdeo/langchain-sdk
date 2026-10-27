@@ -1,12 +1,19 @@
 ---
 title: "Update dataset splits"
-description: "/langsmith/langsmith-platform-openapi.json put /api/v1/datasets/{dataset_id}/splits"
+description: "Add examples to a split, or remove them from it."
 source: "https://docs.langchain.com/langsmith/smith-api/datasets/update-dataset-splits"
 category: "docs"
 tags: [docs, langsmith, smith-api, datasets, update-dataset-splits]
 ---
 
 # Update dataset splits
+
+> Add examples to a split, or remove them from it.
+
+Returns the IDs of the given examples found in the dataset. Each of them gets
+a new version, even when its splits do not change. An example's other splits
+are kept, and an example without a split counts as being in the base split.
+Removing an example's last split leaves it in no split.
 
 ## OpenAPI
 
@@ -177,6 +184,19 @@ paths:
       tags:
         - datasets
       summary: Update dataset splits
+      description: >-
+        Add examples to a split, or remove them from it.
+
+        Returns the IDs of the given examples found in the dataset. Each of them
+        gets
+
+        a new version, even when its splits do not change. An example's other
+        splits
+
+        are kept, and an example without a split counts as being in the base
+        split.
+
+        Removing an example's last split leaves it in no split.
       operationId: update_dataset_splits_api_v1_datasets__dataset_id__splits_put
       parameters:
         - name: dataset_id
@@ -223,15 +243,20 @@ components:
         split_name:
           type: string
           title: Split Name
+          description: Split to add the examples to, or remove them from.
         examples:
           items:
             type: string
             format: uuid
           type: array
           title: Examples
+          description: >-
+            IDs of the examples to change. IDs of examples in other datasets are
+            ignored.
         remove:
           type: boolean
           title: Remove
+          description: Remove the examples from the split instead of adding them.
           default: false
       type: object
       required:

@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langgraph/pregel/_runner"
-description: "Index of 6 pages and 2 subdirectories under reference/python/langgraph/pregel/_runner."
+description: "Index of 5 pages and 2 subdirectories under reference/python/langgraph/pregel/_runner."
 category: "index"
 tags: [index, reference, python, langgraph, pregel, runner]
 ---
 
 # reference/python/langgraph/pregel/_runner
 
-6 pages here, 24 pages including subdirectories.
+5 pages here, 23 pages including subdirectories.
 
 ## Directories
 
@@ -21,4 +21,3 @@ tags: [index, reference, python, langgraph, pregel, runner]
 - [F](F.md) - View source on GitHub
 - [FuturesDict](FuturesDict.md) - - Generic[F, E] - dict[F, PregelExecutableTask | None]
 - [PregelRunner](PregelRunner.md) - Responsible for executing a set of Pregel tasks concurrently, committing their writes, yielding control to caller when there is output to emit, and interrupting other tasks if appropriate.
-- [SKIP_RERAISE_SET](SKIP_RERAISE_SET.md) - View source on GitHub

@@ -1,12 +1,16 @@
 ---
 title: "Get dataset splits"
-description: "/langsmith/langsmith-platform-openapi.json get /api/v1/datasets/{dataset_id}/splits"
+description: "List the split names a dataset's examples belong to."
 source: "https://docs.langchain.com/langsmith/smith-api/datasets/get-dataset-splits"
 category: "docs"
 tags: [docs, langsmith, smith-api, datasets, get-dataset-splits]
 ---
 
 # Get dataset splits
+
+> List the split names a dataset's examples belong to.
+
+An example whose split was never set counts as the base split.
 
 ## OpenAPI
 
@@ -177,6 +181,10 @@ paths:
       tags:
         - datasets
       summary: Get dataset splits
+      description: |-
+        List the split names a dataset's examples belong to.
+
+        An example whose split was never set counts as the base split.
       operationId: get_dataset_splits_api_v1_datasets__dataset_id__splits_get
       parameters:
         - name: dataset_id

@@ -20,4 +20,4 @@ NULL_TASK_ID = sys.intern('00000000-0000-0000-0000-000000000000')
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/4c52e129eb1ab69a3da58b799f67929f77d81149/libs/langgraph/langgraph/_internal/_constants.py#L96)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/3521f08e21a7d89c28331191374bc85c11ecb6e2/libs/langgraph/langgraph/_internal/_constants.py#L96)

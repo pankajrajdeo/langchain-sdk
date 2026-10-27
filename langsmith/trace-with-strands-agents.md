@@ -1,16 +1,20 @@
 ---
-title: "Trace Strands Agents applications"
-description: "Trace Strands Agents applications with LangSmith."
+title: "Trace with Strands Agents"
+description: "Trace with Strands Agents with LangSmith."
 source: "https://docs.langchain.com/langsmith/trace-with-strands-agents"
 category: "docs"
 tags: [docs, langsmith, trace-with-strands-agents]
 ---
 
-# Trace Strands Agents applications
+# Trace with Strands Agents
 
-> Trace Strands Agents applications with LangSmith.
+> Trace with Strands Agents with LangSmith.
 
 [Strands Agents](https://strandsagents.com/) is an SDK for building model-driven agents. LangSmith provides a Strands Agents integration that exports Strands OpenTelemetry spans in a LangSmith-compatible format, including agent runs, model calls, tool calls, prompts, completions, and token usage.
+
+> [!NOTE]
+>
+> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Installation
 
@@ -34,11 +38,11 @@ This installs LangSmith, Strands Agents, Strands Agents tools, and the OpenTelem
 
 ### 1. Configure environment variables
 
-Set your [LangSmith API key](create-account-api-key.md) and project name. If you use Amazon Bedrock as the model provider for Strands Agents, also configure AWS credentials with your preferred AWS authentication method.
+Set your [LangSmith API key](create-account-api-key.md) and the agent identifier and environment. If you use Amazon Bedrock as the model provider for Strands Agents, also configure AWS credentials with your preferred AWS authentication method.
 
 ```bash
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=https://api.smith.langchain.com/otel/v1/traces
-export OTEL_EXPORTER_OTLP_HEADERS="x-api-key=<your_langsmith_api_key>,Langsmith-Project=<your_project_name>"
+export OTEL_EXPORTER_OTLP_HEADERS="x-api-key=<your_langsmith_api_key>,Langsmith-Agent-Id=<your-agent-id>,Langsmith-Agent-Environment=production"
 
 # Required when using Amazon Bedrock.
 export AWS_REGION=<your_aws_region>
@@ -50,7 +54,7 @@ export AWS_REGION=<your_aws_region>
 
 ### 2. Enable Strands Agents telemetry
 
-Call `setup_langsmith_telemetry()` once at application startup before creating or invoking agents:
+Call `setup_langsmith_telemetry()` once when your process starts, before creating or invoking agents:
 
 ```python
 from langsmith.integrations.strands_agents import setup_langsmith_telemetry
@@ -84,7 +88,7 @@ print(response)
 
 ## View traces in LangSmith
 
-After running your application, open your LangSmith project to view traces that include:
+After running your agent, select your agent and environment in LangSmith, then open **Tracing** to view traces that include:
 
 * Agent invocation spans
 * Event loop cycle spans
@@ -105,7 +109,8 @@ exporter = create_langsmith_exporter(
     endpoint="https://api.smith.langchain.com/otel/v1/traces",
     headers={
         "x-api-key": "<your_langsmith_api_key>",
-        "Langsmith-Project": "<your_project_name>",
+        "Langsmith-Agent-Id": "<your-agent-id>",
+        "Langsmith-Agent-Environment": "production",
     },
 )
 telemetry.tracer_provider.add_span_processor(BatchSpanProcessor(exporter))

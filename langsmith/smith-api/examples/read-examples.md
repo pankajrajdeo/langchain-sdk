@@ -299,6 +299,21 @@ paths:
               - inputs
               - outputs
             title: Select
+        - name: exclude_default_fields
+          in: query
+          required: false
+          schema:
+            type: boolean
+            description: >-
+              Return only the fields in `select`, plus id. Other default fields
+              (created_at, modified_at, inputs, name, dataset_id) are absent
+              unless selected.
+            default: false
+            title: Exclude Default Fields
+          description: >-
+            Return only the fields in `select`, plus id. Other default fields
+            (created_at, modified_at, inputs, name, dataset_id) are absent
+            unless selected.
         - name: descending
           in: query
           required: false

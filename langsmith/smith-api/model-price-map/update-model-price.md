@@ -272,6 +272,13 @@ components:
             - type: string
             - type: 'null'
           title: Provider
+        prompt_tokens_above:
+          anyOf:
+            - type: integer
+              maximum: 9007199254740991
+              minimum: 0
+            - type: 'null'
+          title: Prompt Tokens Above
       type: object
       required:
         - name

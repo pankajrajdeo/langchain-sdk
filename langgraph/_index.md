@@ -35,8 +35,8 @@ tags: [index, langgraph]
 - [LangGraph overview](index.md) - Gain control with LangGraph to design agents that reliably handle complex tasks
 - [Install LangGraph](install.md) - To install the base LangGraph package:
 - [Interrupts](interrupts.md) - Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. This enables human-in-the-loop patterns where you need external input to proceed. When...
-- [Run a local server](local-server.md) - This guide shows you how to run a LangGraph application locally.
-- [LangSmith Observability](observability.md) - Traces are a series of steps that your application takes to go from input to output. Each of these individual steps is represented by a run. You can use LangSmith to visualize these execution steps...
+- [Run a local server](local-server.md) - This guide shows you how to run a LangGraph agent locally.
+- [LangSmith Observability](observability.md) - Traces are a series of steps that your agent takes to go from input to output. Each of these individual steps is represented by a run. You can use LangSmith to visualize these execution steps. To use...
 - [LangGraph overview](overview.md) - Gain control with LangGraph to design agents that reliably handle complex tasks
 - [Persistence](persistence.md) - LangGraph's persistence layer gives agents short-term memory through checkpointers and long-term memory through stores.
 - [LangGraph runtime](pregel.md) - Pregel implements LangGraph's runtime, managing the execution of LangGraph applications.
