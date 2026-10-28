@@ -12,7 +12,7 @@ Multi-agent systems coordinate specialized components to tackle complex workflow
 
 > [!TIP]
 >
-> For built-in multi-agent support, use [Deep Agents](../../deepagents/overview.md): a higher-level harness built on LangChain that ships with [subagents](../../deepagents/subagents.md), [skills](../../deepagents/skills.md), planning, a virtual filesystem, and context management.
+> For built-in multi-agent support, use [Managed Deep Agents](../../langsmith/python/managed-deep-agents-overview.md): a managed higher-level harness built on LangChain that ships with [subagents](../../deepagents/subagents.md), [skills](../../deepagents/skills.md), planning, a virtual filesystem, and context management. Alternatively, for maximum flexibility while using the same Deep Agents harness, use [Deep Agents](../../deepagents/overview.md) and host agents yourself, or run a custom [LangSmith Deployment](../../langsmith/deployment.md).
 
 ## Why multi-agent?
 

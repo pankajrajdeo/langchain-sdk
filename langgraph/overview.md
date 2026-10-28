@@ -22,12 +22,18 @@ One of LangGraph's core strengths is the ability to mix deterministic steps with
 
 **how LangChain products fit together**
 
-* [Deep Agents](../deepagents/overview.md) is an [agent harness](../concepts/products.md#agent-harnesses-like-the-deep-agents-sdk): planning, subagents, filesystem tools, and context management on top of LangGraph.
-* [LangChain](../langchain/overview.md) is the agent framework: abstractions and integrations for models, tools, and agent loops.
-* [LangGraph](overview.md) is the orchestration runtime: durable execution, streaming, human-in-the-loop, and persistence.
-* [LangSmith](../langsmith/observability.md) is the platform for tracing, evaluation, prompts, and deployment across frameworks.
-* [LangSmith Engine](../langsmith/engine.md) detects issues in your LangGraph agent traces and proposes fixes. You can open a pull request with the proposed fix directly from the Engine tab.
-* [LangSmith Fleet](../langsmith/fleet/index.md) is the no-code agent builder for templates, integrations, and routine automation.
+**LangChain vs. LangGraph vs. Deep Agents**
+
+Start with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) for a batteries-included harness (context compression, virtual filesystem, subagents) when you want to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](../deepagents/overview.md#self-host-with-the-sdk) and host agents yourself, or run a custom [LangSmith Deployment](../langsmith/deployment.md). Deep Agents is built on LangChain [agents](../langchain/agents.md), which run on LangGraph.
+
+Use [LangChain](../langchain/agents.md) (`create_agent`) for a highly customizable agent framework with abstractions and integrations for models, tools, and agent loops.
+
+Use [LangGraph](overview.md), the low-level orchestration framework, for advanced needs combining deterministic and agentic workflows.
+LangGraph is the orchestration runtime: durable execution, streaming, human-in-the-loop, and persistence.
+
+Use [LangSmith](../langsmith/observability.md) to trace, debug, and evaluate agents built with any of these frameworks. Follow the [tracing quickstart](../langsmith/trace-with-langchain.md) to get set up. We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes. You can open a pull request with the proposed fix directly from the Engine tab.
+
+Use [LangSmith Fleet](../langsmith/fleet/index.md) for no-code agent building with templates, integrations, and routine automation.
 
 Read [Frameworks, runtimes, and harnesses](../concepts/products.md) for a comparison of the open source stack.
 

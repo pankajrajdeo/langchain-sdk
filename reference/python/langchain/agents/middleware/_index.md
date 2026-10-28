@@ -36,10 +36,10 @@ tags: [index, reference, python, langchain, agents, middleware]
 
 ## Files
 
-- [after_agent](after_agent.md) - Logic to run after the agent execution completes.
-- [after_model](after_model.md) - Logic to run after the model is called.
-- [before_agent](before_agent.md) - Logic to run before the agent execution starts.
-- [before_model](before_model.md) - Logic to run before the model is called.
+- [after_agent](after_agent.md) - Run shutdown commands and release resources when an agent completes.
+- [after_model](after_model.md) - Check for parallel write_todos tool calls and return errors if detected.
+- [before_agent](before_agent.md) - Start the shell session and run startup commands.
+- [before_model](before_model.md) - Process messages before model invocation, potentially triggering summarization.
 - [configure_trace_policy](configure_trace_policy.md) - Set the process-wide default TracePolicy for agent middleware hook spans.
 - [context_editing](context_editing.md) - Context editing middleware.
 - [dynamic_prompt](dynamic_prompt.md) - Decorator used to dynamically generate system prompts for the model.
@@ -61,5 +61,5 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [tool_retry](tool_retry.md) - Tool retry middleware for agents.
 - [tool_selection](tool_selection.md) - LLM-based tool selector middleware.
 - [types](types.md) - Types for middleware and agents.
-- [wrap_model_call](wrap_model_call.md) - Intercept and control model execution via handler callback.
-- [wrap_tool_call](wrap_tool_call.md) - Intercept tool execution for retries, monitoring, or modification.
+- [wrap_model_call](wrap_model_call.md) - Update the system message to include the todo system prompt.
+- [wrap_tool_call](wrap_tool_call.md) - Prepend reviewer-edit guidance to the result of an edited tool call.

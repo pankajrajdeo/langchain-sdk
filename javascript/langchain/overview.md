@@ -16,7 +16,7 @@ tags: [docs, javascript, langchain]
 >
 > **LangChain vs. LangGraph vs. Deep Agents**
 >
-> Start with [Deep Agents](../deepagents/overview.md) for a "batteries-included" agent with features like automatic context compression, a virtual filesystem, and subagent-spawning. Deep Agents are built on LangChain [agents](agents.md) which you can also use directly.
+> Start with [Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-overview.md) for a batteries-included harness (context compression, virtual filesystem, subagents) when you want to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](../deepagents/overview.md#self-host-with-the-sdk) and host agents yourself, or run a custom [LangSmith Deployment](../../langsmith/deployment.md). Deep Agents is built on LangChain [agents](agents.md), which you can also use directly.
 >
 > Use [LangChain](agents.md) (`create_agent`) for a highly customizable harness, easily tailored to your use case and data.
 >

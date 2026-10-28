@@ -44,6 +44,7 @@ You can also implement your own custom store by extending the [`BaseStore`](http
 | [`AstraDBByteStore`](stores/astradb.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-astradb/month)](https://pypi.org/project/langchain-astradb/) |
 | [`ElasticsearchEmbeddingsCache`](stores/elasticsearch.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-elasticsearch/month)](https://pypi.org/project/langchain-elasticsearch/) |
 | [`M3Store`](https://github.com/skynetcmd/m3-memory/blob/main/docs/integrations/LANGCHAIN.md) | [  ![Downloads per month](https://static.pepy.tech/badge/m3-memory/month)](https://pypi.org/project/m3-memory/) |
+| [`CockroachDBStore`](https://cockroachdb.github.io/langchain-cockroachdb/guides/long-term-memory/) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-cockroachdb/month)](https://pypi.org/project/langchain-cockroachdb/) |
 | [`HindsightStore`](https://docs.hindsight.vectorize.io/sdks/integrations/langgraph) | [  ![Downloads per month](https://static.pepy.tech/badge/hindsight-langgraph/month)](https://pypi.org/project/hindsight-langgraph/) |
 | [`OmemStore`](https://infrastructure.omem-cloud.com/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/omem-infrastructure/month)](https://pypi.org/project/omem-infrastructure/) |
 | [`PplStore`](https://github.com/ppl-crm/ppl-memory) | [  ![Downloads per month](https://static.pepy.tech/badge/ppl-memory/month)](https://pypi.org/project/ppl-memory/) |

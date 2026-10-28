@@ -14,7 +14,7 @@ LangChain provides open source, model-agnostic harnesses for building agents. La
 
 > **[Build](build-overview.md)**
 >
-> Build agents with code using LangChain, LangGraph, and Deep Agents.
+> Build agents with Managed Deep Agents, Deep Agents, LangChain, and LangGraph.
 
 > **[Test](langsmith/evaluation.md)**
 >

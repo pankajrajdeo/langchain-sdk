@@ -134,7 +134,7 @@ Read credentials from the environment. Do not hard-code them in client code.
 
 ## Understand session behavior
 
-Agent Server MCP requests are [stateless](../server-mcp.md#session-behavior): separate calls do not share thread state.
+Agent Server MCP requests do not use [sessions](../server-mcp.md#session-behavior): separate tool calls do not share thread state. A tool call that pauses for input keeps its own state until the client answers. For more information, see [Human-in-the-loop over MCP](../server-mcp-elicitation.md).
 
 To retain knowledge across calls, [opt in to durable memory](managed-deep-agents-memory.md). Durable memory is optional and shared by every caller of the deployment. Do not enable it when MCP clients should not influence one another.
 

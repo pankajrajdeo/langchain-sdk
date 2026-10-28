@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 544 pages and 0 subdirectories under blog."
+description: "Index of 545 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-544 pages here.
+545 pages here.
 
 ## Files
 
@@ -164,6 +164,7 @@ tags: [index, blog]
 - [Deep Agents vs LangChain vs LangGraph](deep-agents-vs-langchain-vs-langgraph.md) - Deep Agents, LangChain, and LangGraph each offer distinct approaches to building agents. In this post, we cover the key distinctions between our open source frameworks and when you should reach for...
 - [Deep Agents](deep-agents.md) - Build deep agents that plan and execute complex tasks over longer time horizons. Learn the architecture behind Deep Research and Claude Code.
 - [Delta Channels: Evolving our Runtime for Long-Running Agents](delta-channels-evolving-agent-runtime.md) - Long-running agents have a storage problem: checkpointing full state at every step grows at O(N²). DeltaChannel is a new primitive in LangGraph 1.2 that checkpoints only the diff each step and writes...
+- [How We Built Our Design Agent](design-agent.md) - How LangChain built Content Studio, an open-source design agent in Slack that makes on-brand videos, graphics and decks, and the harness that powers it.
 - [Designing Efficient Verifiers for Legal Agents](designing-efficient-verifiers-for-legal-agents.md) - A Harvey and LangChain Labs study on making LLM verifiers cheaper and more reliable for legal-agent evaluation and post-training.
 - [Documentation Refresh for LangChain v0.2](documentation-refresh-for-langchain-v0-2.md) - Learn about the docs refresh for LangChain v0.2. There&#39;s now versioned docs and a clearer structure — with tutorials, how-to guides, conceptual guides, and API docs
 - [How Dosu Used LangSmith to Achieve a 30% Accuracy Improvement with No Prompt Engineering](dosu-langsmith-no-prompt-eng.md) - Dosu achieved 30% accuracy improvement with LangSmith&#39;s continual in-context learning—no prompt engineering needed. Discover the simple technique.

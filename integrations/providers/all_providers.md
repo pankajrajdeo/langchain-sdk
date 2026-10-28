@@ -88,6 +88,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Agent Pulse prices model, tool, and failed calls in LangChain and LangGraph runs per user, request, and agent, and budgets can stop calls before they are sent.
 
+> **[Agent37](https://www.agent37.com/docs/agents-api/langchain)**
+>
+> Agent37 provides persistent cloud sandboxes for Deep Agents shell execution, file operations, and Deep Agents Code.
+
 > **[agentstate](https://skamalj.github.io/agentstate-reducer/)**
 >
 > DynamoDB, Cosmos DB and Firestore checkpointers with bounded history and a long-term memory hook, plus semantic-search stores.
@@ -231,6 +235,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > **[Apify](https://docs.apify.com/integrations/langchain)**
 >
 > Web scraping and automation platform.
+
+> **[APIVerveToolkit](https://docs.apiverve.com/integrations/langchain)**
+>
+> Toolkit exposing about 380 APIVerve REST APIs (validation, IP and DNS lookups, exchange rates, conversions) as typed tools.
 
 > **[Apple Foundation Models](https://github.com/rajanshxrma/langchain-apple-foundation-models)**
 >
@@ -507,6 +515,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > **[CVFile](https://cvfile.org)**
 >
 > Open .cv PDF/A-3u format with embedded Markdown, HTML, and JSON Resume payloads.
+
+> **[CrawlCheckToolkit](https://github.com/emmanuelorta/crawlcheck-core/tree/main/sdk-python#langchain-and-llamaindex-1100)**
+>
+> Signed allow/warn/block decisions before an agent reads, cites, connects to or pays a website, and checks of a business's published phone, address and hours.
 
 > **[Crawleo](https://crawleo.dev/integrations/langchain)**
 >
@@ -868,6 +880,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Cross-chain asset exchange toolkit with sealed-bid intents for crypto, RWAs, and stablecoins.
 
+> **[Heabsy](https://heabsy.com/integrations/langchain)**
+>
+> OpenAI- and Anthropic-compatible inference API for open-weight models, with per-token pricing.
+
 > **[HWP/HWPX](https://github.com/jaypakdevkr/HWP-Loader)**
 >
 > Load Korean Hangul Word Processor HWP and HWPX documents into LangChain.
@@ -907,6 +923,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > **[HuangtingFlux](https://huangtingflux.com/integrations/langchain)**
 >
 > Remote MCP server that reduces agent token usage via a three-stage SOP workflow.
+
+> **[Hugging Bay](https://pypi.org/project/langchain-hugging-bay/0.1.0/)**
+>
+> Read-only model catalog search, file metadata, runnable discovery, and deployment plans.
 
 > **[Hugging Face](huggingface.md)**
 >

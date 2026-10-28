@@ -7,15 +7,15 @@ tags: [index, javascript]
 
 # javascript
 
-12 pages here, 374 pages including subdirectories.
+12 pages here, 373 pages including subdirectories.
 
 ## Directories
 
 - [concepts/](concepts/_index.md) - 5 pages
 - [contributing/](contributing/_index.md) - 8 pages
-- [deepagents/](deepagents/_index.md) - 38 pages
+- [deepagents/](deepagents/_index.md) - 36 pages
 - [integrations/](integrations/_index.md) - 183 pages
-- [langchain/](langchain/_index.md) - 80 pages
+- [langchain/](langchain/_index.md) - 81 pages
 - [langgraph/](langgraph/_index.md) - 41 pages
 - [migrate/](migrate/_index.md) - 3 pages
 - [reference/](reference/_index.md) - 1 page
@@ -26,8 +26,8 @@ tags: [index, javascript]
 - [Errors](common-errors.md) - This page contains guides around resolving common errors you may find while building with LangChain and LangGraph.
 - [Runtimes, frameworks, and harnesses](concepts.md) - Understand the differences between LangChain, LangGraph, and Deep Agents and when to use each one
 - [Contributing](contributing.md) - Welcome! Thank you for your interest in contributing.
-- [Deep Agents overview](deepagents.md) - Build agents that can plan, use subagents, and leverage file systems for complex tasks
-- [Deep Agents overview](index.md) - Build agents that can plan, use subagents, and leverage file systems for complex tasks
+- [Deep Agents overview](deepagents.md) - Agent harness for planning, subagents, and file-system context, available as Managed Deep Agents or the Deep Agents SDK
+- [Deep Agents overview](index.md) - Agent harness for planning, subagents, and file-system context, available as Managed Deep Agents or the Deep Agents SDK
 - [Middleware overview](langchain.md) - Control and customize agent execution at every step
 - [LangGraph overview](langgraph.md) - Gain control with LangGraph to design agents that reliably handle complex tasks
 - [Learn](learn.md) - Tutorials, conceptual guides, and resources to help you get started.

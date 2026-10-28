@@ -476,6 +476,7 @@ curl --request POST \
 
 * [Human-in-the-loop conceptual guide](../langgraph/interrupts.md): learn more about LangGraph human-in-the-loop features.
 * [Common patterns](../langgraph/interrupts.md#common-patterns): learn how to implement patterns like approving/rejecting actions, requesting user input, tool call review, and validating human input.
+* [Human-in-the-loop over MCP](server-mcp-elicitation.md): answer interrupts from an MCP client.
 
 ***
 

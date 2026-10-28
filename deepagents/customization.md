@@ -157,7 +157,7 @@ For the full parameter list, see the [`create_deep_agent`](https://reference.lan
 
 > [!TIP]
 >
-> As you add tools, subagents, and backends, use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-customization) to trace how each piece behaves together. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up, and see [Going to production](going-to-production.md) for deployment on LangSmith.
+> As you add tools, subagents, and backends, use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-customization) to trace how each piece behaves together. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up.
 >
 > We recommend you also set up [LangSmith Engine](../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
 

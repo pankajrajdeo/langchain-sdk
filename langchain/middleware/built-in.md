@@ -7,8 +7,8 @@ tags: [docs, langchain, middleware, built-in]
 ---
 
 # Prebuilt middleware
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/middleware/built-in)
-Prebuilt middleware for common agent use cases
+
+> Prebuilt middleware for common agent use cases
 
 LangChain provides prebuilt middleware for common use cases. Each middleware is production-ready and configurable for your specific needs.
 

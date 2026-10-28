@@ -1,13 +1,13 @@
 ---
 title: "javascript/langchain"
-description: "Index of 32 pages and 6 subdirectories under javascript/langchain."
+description: "Index of 33 pages and 6 subdirectories under javascript/langchain."
 category: "index"
 tags: [index, javascript, langchain]
 ---
 
 # javascript/langchain
 
-32 pages here, 80 pages including subdirectories.
+33 pages here, 81 pages including subdirectories.
 
 ## Directories
 
@@ -23,6 +23,7 @@ tags: [index, javascript, langchain]
 - [Agents](agents.md) - Build a LangChain agent: a model calling tools in a loop until a task is complete, shaped by a harness of prompt, tools, and middleware.
 - [Component architecture](component-architecture.md) - LangChain's power comes from how its components work together to create sophisticated AI applications. This page provides diagrams showcasing the relationships between different components.
 - [Context engineering in agents](context-engineering.md) - The hard part of building agents (or any LLM application) is making them reliable enough. While they may work for a prototype, they often fail in real-world use cases.
+- [Build a data analysis agent from scratch](deep-agent-from-scratch.md) - Build a data analysis agent step by step using create_agent and Deep Agents middleware.
 - [Deployment](deploy.md) - Deploy LangChain agents to production with LangSmith Cloud or JavaScript frameworks and hosting platforms.
 - [Event streaming](event-streaming.md) - Stream real-time updates from LangChain agent runs
 - [Get help](get-help.md) - Connect with the LangChain community, access learning resources, and get the support you need to build with confidence.

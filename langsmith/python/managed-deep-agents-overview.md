@@ -188,7 +188,7 @@ Managed Deep Agents adds the layer around the agent. The sandbox, durable memory
 
 So `define_deep_agent` takes the same parameters minus the managed ones, plus a required static `name`. Every `define_*` function works this way: declare what the agent needs, and leave the lifecycle to the runtime.
 
-Stay on Deep Agents when you run the agent yourself or need a [backend](../../deepagents/backends.md), store, or checkpointer of your own. For a side-by-side comparison of the two, and the steps to convert an agent you already built, see [Move from Deep Agents](managed-deep-agents-migrate.md).
+Start with Managed Deep Agents to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](../../deepagents/overview.md#self-host-with-the-sdk) and host agents yourself, or run a custom [LangSmith Deployment](../deployment.md). For a side-by-side comparison and steps to convert an agent you already built, see [Move from Deep Agents](managed-deep-agents-migrate.md).
 
 ## Next steps
 

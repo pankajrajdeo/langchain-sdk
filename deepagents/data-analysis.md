@@ -751,6 +751,7 @@ Agent-generated analysis report and visualization dashboard delivered to Slack
 
 Now that you've built a data analysis agent, explore these resources to extend its capabilities:
 
+* [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md): Build deep agents with managed deployment infrastructure
 * [Backends](backends.md): Learn about the Deep Agents backend system
 * [Sandboxes](sandboxes.md): Review backends for sandboxed code execution, including security considerations and advanced configurations
 * [Customization](customization.md): Discover how to customize your agent with different models, tools, prompts, and optional [task planning](overview.md#task-planning)

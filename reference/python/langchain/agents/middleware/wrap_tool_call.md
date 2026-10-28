@@ -1,6 +1,6 @@
 ---
 title: "wrap_tool_call"
-description: "Intercept tool execution for retries, monitoring, or modification."
+description: "Prepend reviewer-edit guidance to the result of an edited tool call."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/wrap_tool_call"
 category: "reference"
 tags: [reference, langchain, agents, middleware, wrap_tool_call]
@@ -10,15 +10,11 @@ tags: [reference, langchain, agents, middleware, wrap_tool_call]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware/wrap_tool_call)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/human_in_the_loop/HumanInTheLoopMiddleware/wrap_tool_call)
 
-Intercept tool execution for retries, monitoring, or modification.
+Prepend reviewer-edit guidance to the result of an edited tool call.
 
-Async version is `awrap_tool_call`
-
-Multiple middleware compose automatically (first defined = outermost).
-
-Exceptions propagate unless `handle_tool_errors` is configured on `ToolNode`.
+In `per_call` mode this is also where the interrupt is raised.
 
 ## Signature
 
@@ -30,25 +26,19 @@ wrap_tool_call(
 ) -> ToolMessage | Command[Any]
 ```
 
-## Description
-
-The handler `Callable` can be invoked multiple times for retry logic.
-
-Each call to handler is independent and stateless.
-
 ## Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `request` | `ToolCallRequest` | Yes | Tool call request with call `dict`, `BaseTool`, state, and runtime.  Access state via `request.state` and runtime via `request.runtime`. |
-| `handler` | `Callable[[ToolCallRequest], ToolMessage \| Command[Any]]` | Yes | `Callable` to execute the tool (can be called multiple times). |
+| `request` | `ToolCallRequest` | Yes | The tool call request being executed. |
+| `handler` | `Callable[[ToolCallRequest], ToolMessage \| Command[Any]]` | Yes | Callable that executes the tool. |
 
 ## Returns
 
 `ToolMessage | Command[Any]`
 
-`ToolMessage` or `Command` (the final result).
+The tool result, with a note prepended when a reviewer edited the call.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/types.py#L674)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/human_in_the_loop.py#L979)

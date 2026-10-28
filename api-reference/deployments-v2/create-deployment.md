@@ -103,9 +103,9 @@ paths:
             application/json:
               example:
                 detail: >-
-                  Local image builds ('internal_docker') are not available on
-                  AWS yet. Run `langgraph deploy --remote` to build from source
-                  instead.
+                  Local image builds ('internal_docker') are not available in
+                  this environment yet. Run `langgraph deploy --remote` to build
+                  from source instead.
       security:
         - API Key: []
         - Tenant ID: []

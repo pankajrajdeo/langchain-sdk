@@ -1,13 +1,13 @@
 ---
 title: "langsmith"
-description: "Index of 513 pages and 5 subdirectories under langsmith."
+description: "Index of 514 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-513 pages here, 1239 pages including subdirectories.
+514 pages here, 1240 pages including subdirectories.
 
 ## Directories
 
@@ -437,6 +437,7 @@ tags: [index, langsmith]
 - [How to add semantic search to your agent deployment](semantic-search.md) - Semantic search lets your agent recall stored memories and documents by meaning rather than exact wording. For example, a query for "UI preferences" surfaces a memory written as "user prefers dark...
 - [A2A endpoint in Agent Server](server-a2a.md) - Use the A2A protocol to enable agent-to-agent communication with distributed tracing in LangSmith.
 - [Agent Server API reference for LangSmith Deployment](server-api-ref.md) - Browse the Agent Server API reference for LangSmith Deployment, available within each deployment at the /docs endpoint.
+- [Human-in-the-loop over MCP](server-mcp-elicitation.md) - Ask an MCP client for input when an agent exposed through the Agent Server MCP endpoint pauses, then resume the tool call with the answers.
 - [MCP endpoint in Agent Server](server-mcp.md) - The Model Context Protocol (MCP) is an open protocol for describing tools and data sources in a model-agnostic format, enabling LLMs to discover and use them via a structured API.
 - [Trace JS functions in serverless environments](serverless-environments.md) - This section is relevant for those using the LangSmith JS SDK version 0.2.0 and higher. If you are tracing using LangChain.js or LangGraph.js in serverless environments, see this guide.
 - [Set up custom authentication](set-up-custom-auth.md) - In this tutorial, we will build a chatbot that only lets specific users access it. We'll start with the LangGraph template and add token-based security step by step. By the end, you'll have a working...

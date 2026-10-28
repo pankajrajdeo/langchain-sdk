@@ -1,13 +1,13 @@
 ---
 title: "javascript/deepagents"
-description: "Index of 34 pages and 1 subdirectory under javascript/deepagents."
+description: "Index of 32 pages and 1 subdirectory under javascript/deepagents."
 category: "index"
 tags: [index, javascript, deepagents]
 ---
 
 # javascript/deepagents
 
-34 pages here, 38 pages including subdirectories.
+32 pages here, 36 pages including subdirectories.
 
 ## Directories
 
@@ -20,30 +20,28 @@ tags: [index, javascript, deepagents]
 - [Agent User Interaction Protocol (AG-UI)](ag-ui.md) - Expose deep agents over the Agent User Interaction Protocol (AG-UI) to stream events to any AG-UI client or frontend.
 - [Async subagents](async-subagents.md) - Launch background subagents that run concurrently while the supervisor continues interacting with the user
 - [Backends](backends.md) - Choose and configure filesystem backends for Deep Agents. You can specify routes to different backends, implement virtual filesystems, and enforce policies.
-- [Comparison with Claude Agent SDK](comparison.md) - Compare LangChain Deep Agents with the Claude Agent SDK to choose the right tool for your use case.
-- [Build a content builder agent](content-builder.md) - Build a content writing agent with brand memory, skills, subagents, and image generation
+- [Comparison with Claude Agent SDK](comparison.md) - Compare LangChain Deep Agents and Managed Deep Agents with the Claude Agent SDK to choose the right tool for your use case.
+- [Build a content builder agent](content-builder.md) - Build a content writing agent with brand voice, skills, subagents, and image generation using Managed Deep Agents or the Deep Agents SDK
 - [Context engineering in Deep Agents](context-engineering.md) - Control what context your deep agent has access to and how it is managed across long-running tasks
 - [Customize Deep Agents](customization.md) - Learn how to customize Deep Agents with system prompts, tools, subagents, and more
-- [Build a data analysis agent](data-analysis.md) - Build an agent that analyzes data files, generates visualizations, and shares results
-- [Build a deep research agent](deep-research.md) - Build a multi-step web research agent with subagent delegation
+- [Build a deep research agent](deep-research.md) - Build a multi-step web research agent with subagent delegation using Managed Deep Agents or the Deep Agents SDK
 - [Dynamic subagents](dynamic-subagents.md) - Use interpreters to dispatch and orchestrate Deep Agents subagents from code
 - [Event streaming](event-streaming.md) - Stream subagents, messages, tool calls, and final output from Deep Agents.
 - [Fault tolerance](fault-tolerance.md) - Make your deep agent resilient with rate limiting, retries, fallbacks, and error handling
 - [Going to production](going-to-production.md) - Take your deep agent to production with persistent memory, sandboxes, resilience middleware, and deployment options
-- [Deep Agents overview](harness.md) - Build agents that can plan, use subagents, and leverage file systems for complex tasks
+- [Deep Agents overview](harness.md) - Agent harness for planning, subagents, and file-system context, available as Managed Deep Agents or the Deep Agents SDK
 - [Human-in-the-loop](human-in-the-loop.md) - Learn how to configure human approval for sensitive tool operations
 - [Interpreters](interpreters.md) - Run lightweight code inside Deep Agents to compose tools, orchestrate subagents, and transform structured data
 - [Model Context Protocol (MCP)](mcp.md) - Connect LangChain agents to MCP servers with MCPAdapter.
 - [Memory](memory.md) - Add persistent memory to agents built with Deep Agents so they learn and improve across conversations
 - [Models](models.md) - Configure model providers and parameters for Deep Agents
 - [Multimodal inputs and outputs](multimodal.md) - Use images, audio, video, and documents with Deep Agents when your model supports multimodal inputs and tool results
-- [Deep Agents overview](overview.md) - Build agents that can plan, use subagents, and leverage file systems for complex tasks
+- [Deep Agents overview](overview.md) - Agent harness for planning, subagents, and file-system context, available as Managed Deep Agents or the Deep Agents SDK
 - [Permissions](permissions.md) - Control filesystem access with declarative permission rules for Deep Agents
 - [Profiles](profiles.md) - Package per-provider and per-model defaults that Deep Agents applies when a model is selected
 - [Quickstart](quickstart.md) - Build your first deep agent in minutes
 - [Retrieval Augmented Generation (RAG) with Deep Agents](rag.md) - RAG patterns for Deep Agents, including skills-guided retrieval, rubric grading, and a tutorial that indexes LangChain docs, offloads chunks to the filesystem, and delegates analysis to subagents
 - [Retrieval](retrieval.md) - Large Language Models (LLMs) are powerful, but they have two key limitations:
-- [Grading rubrics](rubric.md) - LLM-as-a-judge grading for agents that iterate against a rubric until done
 - [Sandboxes](sandboxes.md) - Execute code in isolated environments with sandbox backends
 - [Skills](skills.md) - Learn how to extend your deep agent's capabilities with skills
 - [Streaming](streaming.md) - Stream real-time updates from deep agent runs and subagent execution

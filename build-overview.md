@@ -1,6 +1,6 @@
 ---
 title: "Build"
-description: "Build agents with LangChain, LangGraph, Deep Agents, Managed Deep Agents, and Fleet."
+description: "Build agents with Managed Deep Agents, Deep Agents, LangChain, LangGraph, and Fleet."
 source: "https://docs.langchain.com/build-overview"
 category: "docs"
 tags: [docs, build-overview]
@@ -8,7 +8,7 @@ tags: [docs, build-overview]
 
 # Build
 
-> Build agents with LangChain, LangGraph, Deep Agents, Managed Deep Agents, and Fleet.
+> Build agents with Managed Deep Agents, Deep Agents, LangChain, LangGraph, and Fleet.
 
 # Build
 
@@ -16,17 +16,19 @@ The LangChain open source stack provides the building blocks you need to design,
 
 ## Choose your starting point
 
-Deep Agents, LangChain, and LangGraph share the same open source stack, so choose based on how much control you need. For managed hosting or no-code, start with Managed Deep Agents or Fleet:
+Managed Deep Agents, Deep Agents, LangChain, and LangGraph share the same open source stack, so choose based on how much control you need. For managed hosting or no-code, start with Managed Deep Agents or Fleet:
 
 **Python**
 
-> **[Deep Agents](deepagents/overview.md)**
->
-> Build agents for complex, long-running tasks. A complete agent harness with planning, subagents, a virtual filesystem, and long-term memory built in. The fastest way to start.
-
 > **[Managed Deep Agents](langsmith/python/managed-deep-agents-overview.md)**
 >
-> Build deep agents with managed deployment infrastructure. You write the agent; LangSmith runs the harness and runtime.
+> Build deep agents with managed deployment infrastructure for complex, long-running tasks. A complete agent harness with
+> planning, subagents, a virtual filesystem, and long-term memory built in.
+> The fastest way to write your agent; LangSmith runs the harness and runtime.
+
+> **[Deep Agents](deepagents/overview.md)**
+>
+> The same Deep Agents harness with maximum flexibility. Host agents yourself, or run a custom LangSmith Deployment when you need more control over the runtime.
 
 > **[LangChain](langchain/overview.md)**
 >
@@ -42,13 +44,15 @@ Deep Agents, LangChain, and LangGraph share the same open source stack, so choos
 
 **TypeScript**
 
-> **[Deep Agents](javascript/deepagents/overview.md)**
->
-> Build agents for complex, long-running tasks. A complete agent harness with planning, subagents, a virtual filesystem, and long-term memory built in. The fastest way to start.
-
 > **[Managed Deep Agents](langsmith/javascript/managed-deep-agents-overview.md)**
 >
-> Build deep agents with managed deployment infrastructure. You write the agent; LangSmith runs the harness and runtime.
+> Build deep agents with managed deployment infrastructure for complex, long-running tasks. A complete agent harness with
+> planning, subagents, a virtual filesystem, and long-term memory built in.
+> The fastest way to write your agent; LangSmith runs the harness and runtime.
+
+> **[Deep Agents](javascript/deepagents/overview.md)**
+>
+> The same Deep Agents harness with maximum flexibility. Host agents yourself, or run a custom LangSmith Deployment when you need more control over the runtime.
 
 > **[LangChain](javascript/langchain/overview.md)**
 >

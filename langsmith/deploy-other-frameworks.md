@@ -16,7 +16,7 @@ LangSmith Deployment runs any framework. For agents not built on Deep Agents, La
 
 > [!TIP]
 >
-> For new builds, consider [Deep Agents](../deepagents/overview.md), an open-source harness for agents that plan, use tools, delegate to subagents, and work over long horizons. Deep Agents deploy directly to LangSmith Deployment, with [Managed Deep Agents](python/managed-deep-agents-overview.md) available for a fully hosted runtime.
+> For new builds, consider [Managed Deep Agents](python/managed-deep-agents-overview.md): a managed open-source harness for agents that plan, use tools, delegate to subagents, and work over long horizons. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](../deepagents/overview.md#self-host-with-the-sdk) and host agents yourself, or run a custom [LangSmith Deployment](deployment.md).
 
 ## Supported frameworks
 

@@ -1,6 +1,6 @@
 ---
 title: "wrap_model_call"
-description: "Intercept and control model execution via handler callback."
+description: "Update the system message to include the todo system prompt."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/wrap_model_call"
 category: "reference"
 tags: [reference, langchain, agents, middleware, wrap_model_call]
@@ -10,16 +10,9 @@ tags: [reference, langchain, agents, middleware, wrap_model_call]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware/wrap_model_call)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware/wrap_model_call)
 
-Intercept and control model execution via handler callback.
-
-Async version is `awrap_model_call`
-
-The handler callback executes the model request and returns a `ModelResponse`.
-Middleware can call the handler multiple times for retry logic, skip calling
-it to short-circuit, or modify the request/response. Multiple middleware
-compose with first in list as outermost layer.
+Update the system message to include the todo system prompt.
 
 ## Signature
 
@@ -28,7 +21,7 @@ wrap_model_call(
     self,
     request: ModelRequest[ContextT],
     handler: Callable[[ModelRequest[ContextT]], ModelResponse[ResponseT]],
-) -> ModelResponse[ResponseT] | AIMessage | ExtendedModelResponse[ResponseT]
+) -> ModelResponse[ResponseT] | AIMessage
 ```
 
 ## Parameters
@@ -36,14 +29,14 @@ wrap_model_call(
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `request` | `ModelRequest[ContextT]` | Yes | Model request to execute (includes state and runtime). |
-| `handler` | `Callable[[ModelRequest[ContextT]], ModelResponse[ResponseT]]` | Yes | Callback that executes the model request and returns `ModelResponse`.  Call this to execute the model.  Can be called multiple times for retry logic.  Can skip calling it to short-circuit. |
+| `handler` | `Callable[[ModelRequest[ContextT]], ModelResponse[ResponseT]]` | Yes | Async callback that executes the model request and returns `ModelResponse`. |
 
 ## Returns
 
-`ModelResponse[ResponseT] | AIMessage | ExtendedModelResponse[ResponseT]`
+`ModelResponse[ResponseT] | AIMessage`
 
 The model call result.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/types.py#L503)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/todo.py#L231)

@@ -1501,10 +1501,10 @@ if __name__ == "__main__":
 You implemented one RAG pattern with [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). Combine it with other Deep Agents capabilities or try a different pattern from [RAG patterns](#rag-patterns):
 
 * Add [Skills](skills.md) to package retrieval workflows and domain-specific search guidance
-* Use [Grading rubrics](rubric.md) to verify answers are grounded in retrieved source material
 * [Evaluate a RAG application](../langsmith/evaluate-rag-tutorial.md) with LangSmith datasets and evaluators
 * Read [Context engineering](context-engineering.md) for offloading and subagent isolation strategies
-* Deploy your application with [LangSmith Deployment](../langsmith/deployment.md)
+* Deploy with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, host agents yourself or use a custom [LangSmith Deployment](../langsmith/deployment.md)
+* Use [Grading rubrics](rubric.md) to verify answers are grounded in retrieved source material
 
 ***
 

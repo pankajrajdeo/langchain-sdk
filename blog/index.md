@@ -14,7 +14,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## What does it mean to "own your intelligence"?
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseJuly 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)Deep Agents
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseJuly 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![How We Built Our Design Agent: one Slack prompt fanning into a launch film, slide deck, X post and blog chart](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adda72d5667dffba0fa8595_6adda7178937e3ba40233f86_design-agent-cover-4k.png)Agent ArchitectureDeep Agents
+
+## How We Built Our Design Agent
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa748ac8b001558f0c48c12_amal.jpeg)![Shreya Talegaonkar](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adeccb1dacfad6b3efd098f_6adecc9dddb5d734dd77080d_shreya-talegaonkar.png)Amal IrgashevShreya TalegaonkarOctober 27, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)22min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)Deep Agents
 
 ## The five components of building a "company harness"
 
@@ -22,15 +26,15 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## LangSmith Engine v2: Red teaming and automated testing
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a048d6ca69a48036bbf20b5_BenTannyhill.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8dd57932ec9d5fe5ad91d3_1727879885099.jpeg)Ben TannyhillTrammell SaltzgaberSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab4526c5a37e3b0cd5e208a_Trajectories%20in%20LangSmith.png)LangSmithObservability & Evals
-
-## Trajectories now in LangSmith: A readable view of every agent session
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab0bd4025242f1e7ba1cfd0_Winston%20Huynh%20-%20GSB%20Headshot.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab3f899e44af010231031ce_Bonnie%20Pecevich.png)Winston HuynhBonnie PecevichSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a048d6ca69a48036bbf20b5_BenTannyhill.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8dd57932ec9d5fe5ad91d3_1727879885099.jpeg)Ben TannyhillTrammell SaltzgaberSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)Deep Agents
+![How We Built Our Design Agent: one Slack prompt fanning into a launch film, slide deck, X post and blog chart](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adda72d5667dffba0fa8595_6adda7178937e3ba40233f86_design-agent-cover-4k.png)Agent ArchitectureDeep Agents
+
+## How We Built Our Design Agent
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa748ac8b001558f0c48c12_amal.jpeg)![Shreya Talegaonkar](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adeccb1dacfad6b3efd098f_6adecc9dddb5d734dd77080d_shreya-talegaonkar.png)Amal IrgashevShreya TalegaonkarOctober 27, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)22min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)Deep Agents
 
 ## The five components of building a "company harness"
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## How to Build a Model Router in the Harness
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dd146b49c3ff6f8c05da14_Eugene-Yurtsev%201.png)Sydney RunkleEugene YurtsevOctober 1, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)12min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab6ba616821ea2bd3edd56a_webflow-cover-light-building-prod-jev-langgraph-1600x900.png)Open SourceAgent ArchitectureLangGraph
-
-## Building Prod with Jev and LangGraph
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69e12735c02bb07c894a067a_hunter-lovell.png)Sydney RunkleHunter LovellSeptember 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min1...1 / 34
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dd146b49c3ff6f8c05da14_Eugene-Yurtsev%201.png)Sydney RunkleEugene YurtsevOctober 1, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)12min1...1 / 34
 
 #### We couldn't find anything matching that.
 

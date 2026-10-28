@@ -1,6 +1,6 @@
 ---
 title: "before_model"
-description: "Logic to run before the model is called."
+description: "Process messages before model invocation, potentially triggering summarization."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/before_model"
 category: "reference"
 tags: [reference, langchain, agents, middleware, before_model]
@@ -10,16 +10,16 @@ tags: [reference, langchain, agents, middleware, before_model]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware/before_model)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware/before_model)
 
-Logic to run before the model is called.
+Process messages before model invocation, potentially triggering summarization.
 
 ## Signature
 
 ```python
 before_model(
     self,
-    state: StateT,
+    state: AgentState[Any],
     runtime: Runtime[ContextT],
 ) -> dict[str, Any] | None
 ```
@@ -28,15 +28,15 @@ before_model(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `state` | `StateT` | Yes | The current agent state. |
-| `runtime` | `Runtime[ContextT]` | Yes | The runtime context. |
+| `state` | `AgentState[Any]` | Yes | The agent state. |
+| `runtime` | `Runtime[ContextT]` | Yes | The runtime environment. |
 
 ## Returns
 
 `dict[str, Any] | None`
 
-Agent state updates to apply before model call.
+An updated state with summarized messages if summarization was performed.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/types.py#L455)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/middleware/summarization.py#L484)
