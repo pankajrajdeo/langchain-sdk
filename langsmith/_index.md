@@ -1,20 +1,20 @@
 ---
 title: "langsmith"
-description: "Index of 514 pages and 5 subdirectories under langsmith."
+description: "Index of 516 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-514 pages here, 1240 pages including subdirectories.
+516 pages here, 1246 pages including subdirectories.
 
 ## Directories
 
 - [agent-server-api/](agent-server-api/_index.md) - 73 pages
 - [fleet/](fleet/_index.md) - 24 pages
-- [javascript/](javascript/_index.md) - 29 pages
-- [python/](python/_index.md) - 29 pages
+- [javascript/](javascript/_index.md) - 31 pages
+- [python/](python/_index.md) - 31 pages
 - [smith-api/](smith-api/_index.md) - 571 pages
 
 ## Files
@@ -165,8 +165,8 @@ tags: [index, langsmith]
 - [LangSmith Engine notifications](engine-notifications.md) - Send LangSmith Engine notifications to Slack, Jira Automation, and webhook endpoints.
 - [LangSmith Engine](engine-overview.md) - LangSmith Engine is the agent for agent engineering, turning production traces into tracked issues, fixes, and datasets across the development lifecycle.
 - [Proactively identify issues with Red Teaming](engine-red-teaming.md) - Test a deployed agent with synthetic LangSmith Engine probes to find prompt injection, data exposure, and unsafe tool use before they reach production.
-- [Connect Engine to your repository](engine-repositories.md) - Connect your agent's code repository to LangSmith Engine so it can read your source code when investigating issues and propose fixes as pull requests.
-- [LangSmith Engine security](engine-security.md) - How LangSmith Engine handles your data, the GitHub and model subprocessor controls that govern its access, and its compliance posture.
+- [Connect Engine to your repository](engine-repositories.md) - Connect your agent's GitHub repositories or GitLab projects to LangSmith Engine so it can read your source code when investigating issues and propose fixes as pull or merge requests.
+- [LangSmith Engine security](engine-security.md) - How LangSmith Engine handles your data, the GitHub, GitLab, and model subprocessor controls that govern its access, and its compliance posture.
 - [Configure GitHub for Engine on self-hosted and BYOC](engine-self-hosted-github.md) - Register a GitHub App and configure self-hosted LangSmith or a BYOC data plane so LangSmith Engine can read repositories and open pull requests, on GitHub.com, Enterprise Cloud with data residency...
 - [Configure model providers for Engine on self-hosted and BYOC](engine-self-hosted-model-providers.md) - Choose the model providers LangSmith Engine uses on a self-hosted LangSmith instance, authenticate with credentials or cloud identity, and keep model traffic on private networking.
 - [LangSmith Engine on Self-hosted and BYOC](engine-self-hosted.md) - Set up LangSmith Engine on a self-hosted LangSmith instance or a BYOC data plane, including model provider options and external network requirements.
@@ -338,6 +338,7 @@ tags: [index, langsmith]
 - [LangSmith reference](reference.md) - The following sections provide API references and SDK documentation for LangSmith:
 - [Regions FAQ](regions-faq.md) - See the cloud architecture reference for additional details.
 - [Reject Concurrent](reject-concurrent.md) - This guide assumes knowledge of what double-texting is, which you can learn about in the double-texting conceptual guide.
+- [Relays](relays.md) - Send a sandbox's outbound connections to hosts you choose through a connector in your network, so they reach private services and leave from your network's IP address.
 - [Release stages](release-stages.md) - How LangSmith labels features as alpha, beta, or generally available, and what each stage means for stability, support, and availability
 - [Release policy](release-versions.md) - Release channels, cadence, and version support for self-hosted LangSmith.
 - [How to evaluate with repetitions](repetition.md) - Running multiple repetitions can give a more accurate estimate of the performance of your system since LLM outputs are not deterministic. Outputs can differ from one repetition to the next...
@@ -469,7 +470,8 @@ tags: [index, langsmith]
 - [Trace with Anthropic](trace-anthropic.md) - Send Anthropic traces to LangSmith from the Claude Platform, from the Claude SDKs over OpenTelemetry, or with the LangSmith SDK wrapper.
 - [Trace with Amazon Bedrock](trace-bedrock.md) - This guide shows you how to trace Amazon Bedrock model calls with LangSmith using the native AWS SDKs. LangSmith also works seamlessly with LangChain's Bedrock integrations. Either approach provides...
 - [Trace with the Claude Agent SDK](trace-claude-agent-sdk.md) - The Claude Agent SDK is an SDK for building agents with Claude. LangSmith provides native integration with the Claude Agent SDK to automatically trace your agent executions, tool calls, and...
-- [Trace Claude Code sessions](trace-claude-code.md) - This guide shows you how to send conversations automatically from the Claude Code CLI to LangSmith.
+- [Trace Claude Code sessions](trace-claude-code.md) - The LangSmith tracing plugin sends your Claude Code conversations to LangSmith so you can see what the agent did. Each message becomes a trace, and a session's messages are grouped into a thread.
+- [Trace Claude Cowork sessions](trace-claude-cowork.md) - Send Claude Cowork tasks, tool calls, and skill use to LangSmith with the LangSmith tracing plugin for Claude.
 - [Trace Deep Agents](trace-deep-agents.md) - deepagents is an open-source agent framework built on top of LangGraph, designed for complex, multi-step tasks that require planning, tool usage, and sub-agent delegation. Deep Agents supports native...
 - [Trace with DeepSeek](trace-deepseek.md) - DeepSeek provides high-performance, OpenAI-compatible language models including deepseek-chat (for general conversations) and deepseek-reasoner (for advanced reasoning tasks). Using LangSmith allows...
 - [Trace Gemini Live agents](trace-gemini-live.md) - Trace Gemini Live voice agents in LangSmith using the LangSmith SDK.

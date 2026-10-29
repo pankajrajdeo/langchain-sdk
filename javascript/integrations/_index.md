@@ -1,13 +1,13 @@
 ---
 title: "javascript/integrations"
-description: "Index of 16 pages and 21 subdirectories under javascript/integrations."
+description: "Index of 16 pages and 22 subdirectories under javascript/integrations."
 category: "index"
 tags: [index, javascript, integrations]
 ---
 
 # javascript/integrations
 
-16 pages here, 183 pages including subdirectories.
+16 pages here, 184 pages including subdirectories.
 
 ## Directories
 
@@ -15,6 +15,7 @@ tags: [index, javascript, integrations]
 - [backends/](backends/_index.md) - 1 page
 - [chains/](chains/_index.md) - 1 page
 - [chat/](chat/_index.md) - 24 pages
+- [decision_models/](decision_models/_index.md) - 1 page
 - [document_compressors/](document_compressors/_index.md) - 3 pages
 - [document_loaders/](document_loaders/_index.md) - 12 pages
 - [document_transformers/](document_transformers/_index.md) - 2 pages

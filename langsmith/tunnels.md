@@ -14,7 +14,7 @@ tags: [docs, langsmith, tunnels]
 >
 > Tunnels are in [alpha](release-stages.md). To request access for your organization, [contact our sales team](https://www.langchain.com/contact-sales).
 
-A tunnel lets LangSmith reach a service that runs on your private network, such as a model endpoint or an MCP server, without opening that service to the internet. You run a small connector inside your network. The connector opens an outbound connection to LangSmith, and LangSmith sends requests for your service over that connection.
+A tunnel lets LangSmith reach a service that runs on your private network, such as a model endpoint or an MCP server, without opening that service to the internet. You run a small connector inside your network. The connector opens an outbound connection to LangSmith, and LangSmith sends requests for your service over that connection. To send a sandbox's outbound connections through your network instead, use a [relay](relays.md).
 
 Tunnels are available on [LangSmith Cloud](cloud.md) in every region. They are not available for self-hosted or hybrid deployments.
 
@@ -92,7 +92,7 @@ docker run -d --name langsmith-connector --restart unless-stopped \
   -e LANGSMITH_CONNECTION_ID=<tunnel id> \
   -e LANGSMITH_API_KEY=<api key> \
   -e LANGSMITH_CONNECTOR_TARGETS="litellm=http://litellm.internal:4000" \
-  langchain/langsmith-connector:0.2.0
+  langchain/langsmith-connector:0.3.0
 ```
 
 Add `-e LANGSMITH_ENDPOINT=<endpoint>` for a region other than GCP US. To read the key from a file instead, set `LANGSMITH_API_KEY_FILE` to its path.

@@ -1166,6 +1166,32 @@ finally:
     interpreter.stop()
 ```
 
+**Databricks**
+
+**pip**
+
+```bash
+pip install 'databricks-langchain[deepagents]>=0.22.0'
+```
+
+**uv**
+
+```bash
+uv add 'databricks-langchain[deepagents]>=0.22.0'
+```
+
+```python
+from databricks.sdk import WorkspaceClient
+
+from databricks_langchain import DatabricksSandbox
+
+client = WorkspaceClient()
+backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
+
+result = backend.execute("python --version")
+print(result.output)
+```
+
 **Daytona**
 
 **pip**
@@ -1433,6 +1459,36 @@ backend.upload_files(
 )
 ```
 
+**Databricks**
+
+**pip**
+
+```bash
+pip install 'databricks-langchain[deepagents]>=0.22.0'
+```
+
+**uv**
+
+```bash
+uv add 'databricks-langchain[deepagents]>=0.22.0'
+```
+
+```python
+from databricks.sdk import WorkspaceClient
+
+from databricks_langchain import DatabricksSandbox
+
+client = WorkspaceClient()
+backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
+
+backend.upload_files(
+    [
+        ("/src/index.py", b"print('Hello')\n"),
+        ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
+    ]
+)
+```
+
 **Daytona**
 
 **pip**
@@ -1631,6 +1687,36 @@ for result in results:
         print(f"Failed to download {result.path}: {result.error}")
 
 interpreter.stop()
+```
+
+**Databricks**
+
+**pip**
+
+```bash
+pip install 'databricks-langchain[deepagents]>=0.22.0'
+```
+
+**uv**
+
+```bash
+uv add 'databricks-langchain[deepagents]>=0.22.0'
+```
+
+```python
+from databricks.sdk import WorkspaceClient
+
+from databricks_langchain import DatabricksSandbox
+
+client = WorkspaceClient()
+backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
+
+results = backend.download_files(["/src/index.py", "/output.txt"])
+for result in results:
+    if result.content is not None:
+        print(f"{result.path}: {result.content.decode()}")
+    else:
+        print(f"Failed to download {result.path}: {result.error}")
 ```
 
 **Daytona**

@@ -20,19 +20,19 @@ Here's how we think about that stack, and how to instrument each level with Lang
 
 At its core, an agent is just a model calling tools in a loop until a task is complete.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a317cf80046aaedb90c50c6_loop1%20(1).png)
+![Loop 1: Agent loop diagram](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2624e95697658b1d69ab6_loop-eng-01-agent-loop.png)
 
 This is what LangChain’s [`create_agent`](../langchain/agents.md) gives you. Pick any model, plug in tools, and you have a working agent loop. [Tools](../langchain/tools.md) are what give the agent the power to take action in the real world.
 
 Take our internal docs agent as an example (which we’ll use as a motivating example for the rest of this blog). At the first loop level, it receives a request for a documentation improvement, the model plans and draft changes, and it uses tools to clone repos, read files, write docs, open a pull request, etc.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a317dca401c7eac8f267ab7_docs_writer_agent_loop_white_bg.png)
+![Docs writer agent loop diagram](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2624f95697658b1d69abc_loop-eng-02-docs-writer-agent-loop.png)
 
 ## Level 2: Verification loop
 
 The agent loop gets work done, but it doesn't always produce correct or consistent work on the first pass. When consistency matters, it's often useful to wrap it in a verification loop that checks the output and sends feedback back to the model when it falls short.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a317d145d0b7b0f966909fc_loop2%20(1).png)
+![Loop 2: Verification loop diagram](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2624f95697658b1d69ac1_loop-eng-03-verification-loop.png)
 
 The verification loop adds a grader: something that checks the agent's output against a rubric and, if it fails, sends the result back with feedback. Graders can either be deterministic or agentic ([LLM as a judge](../langsmith/llm-as-judge.md) is a classic example, here).
 
@@ -42,7 +42,7 @@ For our docs writer example, the grader runs tests after each attempt, checking 
 
 One tradeoff: adding verification increases latency and cost per run. It's worth it when quality matters more than speed, which is most production use cases.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a317dd76a131bd58de00fb9_docs_writer_verification_loop_white_bg.png)
+![Docs writer verification loop diagram](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2625095697658b1d69ac6_loop-eng-04-docs-writer-verification-loop.png)
 
 ## Level 3: Event driven loop
 
@@ -50,19 +50,19 @@ One of the most important parts of agent development is the integrations layer: 
 
 The event-driven loop connects your agent to your ecosystem. An event fires — a new document lands, a schedule triggers, a webhook arrives — and the agent runs. The agent isn't something you invoke manually; it's a component running continuously inside a larger system.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a317e69736b32a1e2363865_event_loop_generic_v3_white_bg.png)
+![Loop 3: Event loop diagram](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2625195697658b1d69acb_loop-eng-05-event-loop.png)
 
 [LangSmith Deployment](https://info.langchain.com/agent-development-platform?utm_campaign=evergreen_agent_development_platform_cv&utm_campaign_id=23761370321&utm_ad_group_id=195261126163&utm_ad_id=805594028616&utm_network=g&utm_term=ai%20agent%20development%20platform&utm_campaign=evergreen_agents_cv&utm_source=google&utm_medium=cpc&hsa_acc=7906965105&hsa_cam=23761370321&hsa_grp=195261126163&hsa_ad=805594028616&hsa_src=g&hsa_tgt=kwd-2392721013549&hsa_kw=ai%20agent%20development%20platform&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gad_source=1&gad_campaignid=23761370321&gbraid=0AAAAA-PkievTcIb-6awevyQxCB-9n-H6Z&gclid=CjwKCAjwxb7RBhA5EiwAQ-AAdF5XHKtTYLgQVrVYstdxYjTd0hcrCuqxvuACiKzOOdxcJdTza8HkwxoCDiQQAvD_BwE) supports the trigger infrastructure, including support for [cron schedules](../langsmith/cron-jobs.md) and [webhooks](../langsmith/use-webhooks.md). One popular example of crons in action is “heartbeats” in [openclaw](https://docs.openclaw.ai/gateway/heartbeat), which turn your agent into an always-on, proactive assistant.
 
 Our docs agent is powered by [Fleet](https://www.langchain.com/langsmith/fleet), our no-code agent builder. Fleet's [channels](../langsmith/fleet/channels.md) and [schedules](../langsmith/fleet/schedules.md) handle event-driven and cron-style triggers. We use a channel to fire off the docs agent whenever a message is sent in our `#docs-plz` Slack channel.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a317e185240aaebb95cc7c3_docs_writer_event_loop_white_bg.png)
+![Docs writer event loop diagram](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2625295697658b1d69ad0_loop-eng-06-docs-writer-event-loop.png)
 
 ## Level 4: Hill climbing loop
 
 The first three loops automate work. The fourth (and arguably most important) automates improvement!
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a317e975f50e84a5bf17b80_hill_climbing_loop_generic_v2_white_bg.png)
+![Loop 4: Hill climbing loop diagram](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2625395697658b1d69ad5_loop-eng-07-hill-climbing-loop.png)
 
 Every agent run [produce a trace](../langsmith/observability.md): a record of what the model did, the tools it called, grader feedback, etc. Those traces contain high value signal regarding what's working and what isn't. The hill climbing loop runs an analysis agent over those traces and uses the findings to rewrite the harness with improved configuration. That can include prompt/tool tweaks or grader tweaks.
 
@@ -70,7 +70,7 @@ In LangSmith, you can use [Engine](https://www.langchain.com/langsmith/engine), 
 
 Wrapping up the docs agent analogy, we run engine over the docs agent traces to detect any issues. When multiple traces signal a potential problem, an issue is filed requesting changes to the offending prompt or tool.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a317ea8af8c1790096c468d_docs_writer_hill_climbing_loop_v4_white_bg.png)
+![Docs writer hill climbing loop diagram](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2625395697658b1d69ada_loop-eng-08-docs-writer-hill-climbing-loop.png)
 
 The key move here is that the return arrow doesn't just loop back to the top — it reaches inside and updates the agent loop directly. Each cycle of the outer loop makes the inner loops more effective.
 
@@ -118,5 +118,6 @@ Thanks to [Vivek](https://x.com/Vtrivedy10), [Mason](https://x.com/masondrxy), [
 - [cron jobs](../langsmith/cron-jobs.md), [webhooks](../langsmith/use-webhooks.md)
 - [langsmith engine](https://www.langchain.com/langsmith/engine)
 - [fleet channels](../langsmith/fleet/channels.md)
+- [Loop Engineering with LangChain Deep Agents](https://www.deeplearning.ai/courses/loop-engineering-with-langchain-deep-agents) (DeepLearning.AI course)
 
 ‍

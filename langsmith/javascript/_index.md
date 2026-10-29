@@ -1,18 +1,19 @@
 ---
 title: "langsmith/javascript"
-description: "Index of 29 pages and 0 subdirectories under langsmith/javascript."
+description: "Index of 31 pages and 0 subdirectories under langsmith/javascript."
 category: "index"
 tags: [index, langsmith, javascript]
 ---
 
 # langsmith/javascript
 
-29 pages here.
+31 pages here.
 
 ## Files
 
 - [Define a Managed Deep Agent](managed-deep-agents-agent-definition.md) - Configure the model and core capabilities of a managed deep agent.
 - [Prompt Slack users with agent-owned interrupts](managed-deep-agents-agent-owned-interrupts.md) - Post a Slack form from a Managed Deep Agents tool, pause the run, and resume it when the user submits the form.
+- [Browser use](managed-deep-agents-browser-use.md) - Configure browser sharing, website logins, and human handoff for a managed deep agent.
 - [Connect a Managed Deep Agent over HTTP](managed-deep-agents-channels-http.md) - Start Managed Deep Agents runs from any external service that can send a webhook, and return responses through your own transport.
 - [Connect a Managed Deep Agent to Slack](managed-deep-agents-channels-slack.md) - Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations.
 - [Connect Managed Deep Agents to channels](managed-deep-agents-channels.md) - Connect Managed Deep Agents to external messaging services that can start runs and receive responses.
@@ -38,5 +39,6 @@ tags: [index, langsmith, javascript]
 - [Add schedules to Managed Deep Agents](managed-deep-agents-schedules.md) - Declare managed cron schedules for Managed Deep Agents deployments, or create them at runtime.
 - [Built-in search powered by Parallel](managed-deep-agents-search.md) - Add web search powered by Parallel to Managed Deep Agents without a separate account or API key.
 - [Add skills to Managed Deep Agents](managed-deep-agents-skills.md) - Add reusable task-specific instructions to a managed deep agent.
+- [Subagents](managed-deep-agents-subagents.md) - Delegate work to subagents that run inline or in the background for a managed deep agent.
 - [Add custom tools to Managed Deep Agents](managed-deep-agents-tools.md) - Define authored tools for managed deep agents projects.
 - [Add a custom search tool, memory, and a schedule](managed-deep-agents-tutorial.md) - Replace provider search with a Tavily tool, then add durable memory and a daily schedule to the research assistant from the quickstart.

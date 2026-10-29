@@ -1,13 +1,13 @@
 ---
 title: "deepagents"
-description: "Index of 40 pages and 3 subdirectories under deepagents."
+description: "Index of 41 pages and 3 subdirectories under deepagents."
 category: "index"
 tags: [index, deepagents]
 ---
 
 # deepagents
 
-40 pages here, 63 pages including subdirectories.
+41 pages here, 64 pages including subdirectories.
 
 ## Directories
 
@@ -22,6 +22,7 @@ tags: [index, deepagents]
 - [Agent User Interaction Protocol (AG-UI)](ag-ui.md) - Expose deep agents over the Agent User Interaction Protocol (AG-UI) to stream events to any AG-UI client or frontend.
 - [Async subagents](async-subagents.md) - Launch background subagents that run concurrently while the supervisor continues interacting with the user
 - [Backends](backends.md) - Choose and configure filesystem backends for Deep Agents. You can specify routes to different backends, implement virtual filesystems, and enforce policies.
+- [Browser use](browser-use.md) - Give a deep agent a browser so it can take actions on websites and test web apps end to end.
 - [Deep Agents Code](code.md) - Terminal coding agent built on the Deep Agents SDK
 - [Comparison with Claude Agent SDK](comparison.md) - Compare LangChain Deep Agents and Managed Deep Agents with the Claude Agent SDK to choose the right tool for your use case.
 - [Build a content builder agent](content-builder.md) - Build a content writing agent with brand voice, skills, subagents, and image generation using Managed Deep Agents or the Deep Agents SDK

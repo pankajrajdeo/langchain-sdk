@@ -19,6 +19,7 @@ Databricks embraces the LangChain ecosystem in various ways:
 3. 📊 **MLflow** - [MLflow](https://mlflow.org/) is an open-source platform to manage full the ML lifecycle, including experiment management, evaluation, tracing, deployment, and more. [MLflow's LangChain Integration](mlflow_tracking.md) streamlines the process of developing and operating modern compound ML systems.
 4. 🌐 **SQL Database** - [Databricks SQL](https://www.databricks.com/product/databricks-sql) is integrated with `SQLDatabase` in LangChain, allowing you to access the auto-optimizing, exceptionally performant data warehouse.
 5. 💡 **Open Models** - Databricks open sources models, such as [DBRX](https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm), which are available through the [Hugging Face Hub](https://huggingface.co/databricks/dbrx-instruct). These models can be directly utilized with LangChain, leveraging its integration with the `transformers` library.
+6. 🧪 **Sandbox** - Run [Deep Agents](https://github.com/langchain-ai/deepagents) shell and filesystem tools inside an isolated Databricks sandbox with the `DatabricksSandbox` backend.
 
 ## Installation
 
@@ -113,6 +114,35 @@ llm = HuggingFaceEndpoint(
 )
 llm.invoke("What is DBRX model?")
 ```
+
+## Sandbox
+
+`DatabricksSandbox` runs [Deep Agents](https://github.com/langchain-ai/deepagents) shell and filesystem tools inside an isolated Databricks sandbox. Install the `deepagents` extra, then wrap a running sandbox as a deepagents backend.
+
+**pip**
+
+```bash
+pip install 'databricks-langchain[deepagents]>=0.22.0'
+```
+
+**uv**
+
+```bash
+uv add 'databricks-langchain[deepagents]>=0.22.0'
+```
+
+```
+from databricks.sdk import WorkspaceClient
+
+from databricks_langchain import DatabricksSandbox
+
+client = WorkspaceClient()
+backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
+result = backend.execute("echo hello")
+print(result.output)
+```
+
+See the [usage example](../sandboxes/databricks.md) for provisioning, Deep Agents usage, and lifecycle.
 
 ***
 

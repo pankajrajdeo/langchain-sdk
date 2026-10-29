@@ -28,6 +28,7 @@ chunks_to_events(
     chunks: Iterator[ChatGenerationChunk],
     *,
     message_id: str | None = None,
+    generation_info: dict[str, Any] | None = None,
 ) -> Iterator[MessagesData]
 ```
 
@@ -37,7 +38,8 @@ chunks_to_events(
 |------|------|----------|-------------|
 | `chunks` | `Iterator[ChatGenerationChunk]` | Yes | Iterator of `ChatGenerationChunk` from `_stream()`. |
 | `message_id` | `str \| None` | No | Optional stable message ID. (default: `None`) |
+| `generation_info` | `dict[str, Any] \| None` | No | Optional accumulator for tracing-only gateway metadata. (default: `None`) |
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/language_models/_compat_bridge.py#L585)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/6419339aa163a49f32d9b80ff20d6adc3b446d49/libs/core/langchain_core/language_models/_compat_bridge.py#L586)

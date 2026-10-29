@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 545 pages and 0 subdirectories under blog."
+description: "Index of 547 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-545 pages here.
+547 pages here.
 
 ## Files
 
@@ -71,6 +71,7 @@ tags: [index, blog]
 - [Building a company due diligence agent with Deep Agents, LangSmith and Parallel](building-a-company-due-diligence-agent-with-deep-agents-langsmith-and-parallel.md) - A cookbook for automating company due diligence: Deep Agents orchestrates five research subagents and Parallel&#39;s Task API returns cited, sourced findings.
 - [Building a Harness with Jev](building-a-harness-with-jev.md) - What is Jev? Learn how TypeSafe AI’s System One model makes fast, structured decisions, where it fits in the agent loop, and how to use Jev with LangChain
 - [How We Build Agent Environments &amp; Tasks](building-agent-environments-and-tasks.md) - How we create synthetic agent environments and tasks: a spec generation step, a spec-to-task step, and a world spec that holds shared knowledge.
+- [Building Evidence-Grounded Agent Memory with OpenWiki and Graphs](building-agent-memory-openwiki-graphs.md) - LangChain used OpenWiki, its open-source wiki compiler, and an evidence graph to build a persistent memory layer that preserves knowledge for agents to reuse across tasks. Learn how.
 - [Building Box AI: How an Enterprise Content Platform Went AI-Native with Deep Agents](building-box-ai-how-an-enterprise-content-platform-went-ai-native-with-deep-agents.md) - See how Box built Box Agent on Deep Agents to search, analyze, and synthesize enterprise content while preserving security, permissions, and model flexibility.
 - [Building Chat LangChain](building-chat-langchain-2.md) - Learn to build an AI chatbot with RAG using LangChain. Covers ingestion, retrieval, evaluation, deployment, and monitoring with code examples.
 - [Building Governed Agents: A Framework for Cost, Control, and Compliance](building-governed-agents-a-framework-for-cost-control-and-compliance.md) - The gateway is the runtime control plane for enterprise AI, turning policy into enforceable decisions across every model call, tool call, and agent hop.
@@ -449,6 +450,7 @@ tags: [index, blog]
 - [Polly is generally available everywhere you work in LangSmith](polly-langsmith-ga.md) - Polly LangSmith integration now available everywhere. Debug complex agent traces, write evaluators, compare experiments, and get insights instantly.
 - [🎉 Prem Challenge🎉](prem-challenge-with-langchain.md) - Build privacy-first AI apps with LangChain and Prem&#39;s open-source models. Join the challenge for $10,000 in prizes. Deploy AI locally without sharing data.
 - [Previewing Interrupt 2026: Agents at Enterprise Scale](previewing-interrupt-2026-agents-at-enterprise-scale.md) - This year, we&#39;re doing it again. Interrupt 2026 is May 13–14 at The Midway in San Francisco, and the lineup, the format, and the scale have all leveled up.
+- [Why aren’t you building proactive agents yet?](proactive-agents.md) - Most proactive agents run on a simple cron. Learn what scheduled runs unlock, from memory to smart triage, and how to add them to Managed Deep Agents.
 - [You don’t know what your agent will do until it’s in production](production-monitoring.md) - Production monitoring for LLM agents requires new observability tools. Learn how to trace, evaluate, and improve AI agents at scale.
 - [Prompt Selectors](prompt-selectors.md) - LangChain&#39;s Prompt Selectors automatically choose the right prompt template for any AI model, from ChatGPT to GPT-3, ensuring seamless chains.
 - [Promptim: an experimental library for prompt optimization](promptim.md) - Automate prompt engineering with Promptim&#39;s optimization library. Save time, improve AI performance, and switch models faster.

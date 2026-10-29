@@ -1,17 +1,18 @@
 ---
 title: "integrations/sandboxes"
-description: "Index of 5 pages and 0 subdirectories under integrations/sandboxes."
+description: "Index of 6 pages and 0 subdirectories under integrations/sandboxes."
 category: "index"
 tags: [index, integrations, sandboxes]
 ---
 
 # integrations/sandboxes
 
-5 pages here.
+6 pages here.
 
 ## Files
 
 - [AgentCoreSandbox integration](aws.md) - Integrate with the AgentCoreSandbox sandbox backend using LangChain Python.
+- [DatabricksSandbox integration](databricks.md) - Integrate with the DatabricksSandbox sandbox backend using LangChain Python.
 - [DaytonaSandbox integration](daytona.md) - Integrate with the DaytonaSandbox sandbox backend using LangChain Python.
 - [Sandbox integrations](index.md) - Integrate with sandbox providers using LangChain Python.
 - [LangSmith sandbox integration](langsmith.md) - Integrate with the LangSmithSandbox type using LangChain Python.

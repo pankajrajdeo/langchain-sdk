@@ -41,7 +41,7 @@ tags: [index, integrations, tools]
 - [Parallel Task API integration](parallel_task.md) - Integrate with the ParallelTaskRunTool tool using LangChain Python.
 - [Perplexity search integration](perplexity_search.md) - Integrate with the Perplexity search tool using LangChain Python.
 - [Privy integration](privy.md) - Integrate with the Privy tool using LangChain Python.
-- [Stagehand + Browserbase integration](stagehand.md) - Integrate with Stagehand and Browserbase browser tools using LangChain Python.
+- [Stagehand + Browserbase integration](stagehand.md) - Integrate with StagehandMiddleware browser tools using LangChain Python.
 - [StripeAgentToolkit integration](stripe.md) - Integrate with the StripeAgentToolkit tool using LangChain Python.
 - [Tableau integration](tableau.md) - Integrate with the Tableau tool using LangChain Python.
 - [Tavily crawl integration](tavily_crawl.md) - Integrate with the Tavily crawl tool using LangChain Python.

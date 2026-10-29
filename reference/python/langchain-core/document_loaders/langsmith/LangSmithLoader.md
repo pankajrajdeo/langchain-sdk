@@ -42,7 +42,7 @@ LangSmithLoader(
     dataset_id: uuid.UUID | str | None = None,
     dataset_name: str | None = None,
     example_ids: Sequence[uuid.UUID | str] | None = None,
-    as_of: datetime.datetime | str | None = None,
+    as_of: dt.datetime | str | None = None,
     splits: Sequence[str] | None = None,
     inline_s3_urls: bool = True,
     offset: int = 0,
@@ -65,7 +65,7 @@ LangSmithLoader(
 | `content_key` | `str` | No | The inputs key to set as `Document` page content.  `'.'` characters are interpreted as nested keys, e.g. `content_key="first.second"` will result in `Document(page_content=format_content(example.inputs["first"]["second"]))` (default: `''`) |
 | `format_content` | `Callable[..., str] \| None` | No | Function for converting the content extracted from the example inputs into a string.  Defaults to JSON-encoding the contents. (default: `None`) |
 | `example_ids` | `Sequence[uuid.UUID \| str] \| None` | No | The IDs of the examples to filter by. (default: `None`) |
-| `as_of` | `datetime.datetime \| str \| None` | No | The dataset version tag or timestamp to retrieve the examples as of.  Response examples will only be those that were present at the time of the tagged (or timestamped) version. (default: `None`) |
+| `as_of` | `dt.datetime \| str \| None` | No | The dataset version tag or timestamp to retrieve the examples as of.  Response examples will only be those that were present at the time of the tagged (or timestamped) version. (default: `None`) |
 | `splits` | `Sequence[str] \| None` | No | A list of dataset splits, which are divisions of your dataset such as `train`, `test`, or `validation`.  Returns examples only from the specified splits. (default: `None`) |
 | `inline_s3_urls` | `bool` | No | Whether to inline S3 URLs. (default: `True`) |
 | `offset` | `int` | No | The offset to start from. (default: `0`) |
@@ -88,7 +88,7 @@ __init__(
     dataset_id: uuid.UUID | str | None = None,
     dataset_name: str | None = None,
     example_ids: Sequence[uuid.UUID | str] | None = None,
-    as_of: datetime.datetime | str | None = None,
+    as_of: dt.datetime | str | None = None,
     splits: Sequence[str] | None = None,
     inline_s3_urls: bool = True,
     offset: int = 0,
@@ -107,7 +107,7 @@ __init__(
 | `dataset_id` | `uuid.UUID \| str \| None` |
 | `dataset_name` | `str \| None` |
 | `example_ids` | `Sequence[uuid.UUID \| str] \| None` |
-| `as_of` | `datetime.datetime \| str \| None` |
+| `as_of` | `dt.datetime \| str \| None` |
 | `splits` | `Sequence[str] \| None` |
 | `inline_s3_urls` | `bool` |
 | `offset` | `int` |
@@ -140,4 +140,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/document_loaders/langsmith.py#L17)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/6419339aa163a49f32d9b80ff20d6adc3b446d49/libs/core/langchain_core/document_loaders/langsmith.py#L17)

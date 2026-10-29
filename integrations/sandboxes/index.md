@@ -23,6 +23,7 @@ Arrows show a typical retrieval flow. The highlighted component is the one this 
 
 | Integration | Downloads |
 | :- | :- |
+| [`DatabricksSandbox`](databricks.md) | [  ![Downloads per month](https://static.pepy.tech/badge/databricks-langchain/month)](https://pypi.org/project/databricks-langchain/) |
 | [`DaytonaSandbox`](daytona.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-daytona/month)](https://pypi.org/project/langchain-daytona/) |
 | [`ModalSandbox`](modal.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-modal/month)](https://pypi.org/project/langchain-modal/) |
 | [`AgentCoreSandbox`](aws.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-agentcore-codeinterpreter/month)](https://pypi.org/project/langchain-agentcore-codeinterpreter/) |
@@ -34,15 +35,15 @@ Arrows show a typical retrieval flow. The highlighted component is the one this 
 | [`OpsenSandbox`](https://opsen.dev/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-opsen/month)](https://pypi.org/project/langchain-opsen/) |
 | [`LizardSandbox`](https://github.com/lizard-build/langchain-lizard#readme) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-lizard/month)](https://pypi.org/project/langchain-lizard/) |
 | [`KubernetesSandbox`](https://gitlab.com/bitkaio/langchain/kubernetes-sandbox) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-kubernetes/month)](https://pypi.org/project/langchain-kubernetes/) |
+| [`Agent37Sandbox`](https://www.agent37.com/docs/agents-api/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-agent37/month)](https://pypi.org/project/langchain-agent37/) |
 | [`NonoSandbox`](https://github.com/always-further/langchain-nono) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-nono/month)](https://pypi.org/project/langchain-nono/) |
 | [`IsloSandbox`](https://docs.islo.dev) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-islo/month)](https://pypi.org/project/langchain-islo/) |
 | [`RuntimeSandbox`](https://withruntime.com/docs/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-withruntime/month)](https://pypi.org/project/langchain-withruntime/) |
 | [`NovitaSandbox`](https://github.com/novitalabs/langchain-novita) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-novita/month)](https://pypi.org/project/langchain-novita/) |
 | [`UpstashBoxSandbox`](https://upstash.com/docs/box/overall/quickstart) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-upstash-box/month)](https://pypi.org/project/langchain-upstash-box/) |
-| [`BaponiSandbox`](https://baponi.ai/docs/guides/deep-agents) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-baponi/month)](https://pypi.org/project/langchain-baponi/) |
 | [`Leap0Sandbox`](https://leap0.dev/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-leap0/month)](https://pypi.org/project/langchain-leap0/) |
+| [`BaponiSandbox`](https://baponi.ai/docs/guides/deep-agents) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-baponi/month)](https://pypi.org/project/langchain-baponi/) |
 | [`SuperserveSandbox`](https://docs.superserve.ai/introduction) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-superserve/month)](https://pypi.org/project/langchain-superserve/) |
-| [`Agent37Sandbox`](https://www.agent37.com/docs/agents-api/langchain) | N/A |
 | [`LangSmith sandbox`](langsmith.md) | N/A |
 
 If you'd like to contribute a sandbox, see [Implement a sandbox integration](../../contributing/implement-langchain.md).

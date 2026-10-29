@@ -242,7 +242,7 @@ if __name__ == "__main__":
 
 **TypeScript**
 
-```typescript
+```ts
 import OpenAI from "openai";
 import { wrapOpenAI } from "langsmith/wrappers";
 import { traceable } from "langsmith/traceable";
@@ -429,7 +429,7 @@ if __name__ == "__main__":
 
 **TypeScript**
 
-```typescript
+```ts
 import Anthropic from "@anthropic-ai/sdk";
 import { wrapAnthropic } from "langsmith/wrappers/anthropic";
 import { traceable } from "langsmith/traceable";
@@ -493,7 +493,7 @@ if __name__ == "__main__":
 
 **TypeScript**
 
-```typescript
+```ts
 import { GoogleGenAI } from "@google/genai";
 import { wrapGemini } from "langsmith/wrappers/gemini";
 import { traceable } from "langsmith/traceable";

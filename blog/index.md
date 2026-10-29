@@ -30,7 +30,15 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![How We Built Our Design Agent: one Slack prompt fanning into a launch film, slide deck, X post and blog chart](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adda72d5667dffba0fa8595_6adda7178937e3ba40233f86_design-agent-cover-4k.png)Agent ArchitectureDeep Agents
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae0e3564fd9f8b3ca94389e_Building%20Evidence-Grounded%20Agent%20Memory%20with%20OpenWiki%20and%20Graphs.png)Open Source
+
+## Building Evidence-Grounded Agent Memory with OpenWiki and Graphs
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae0e5bff0ac6d52df9ced30_Eugene%20Liu.jpg)Eugene LiuOctober 28, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae21ba6cf4a24aceb1adef8_proactive-agents-cover-1200x675.png)Agent Architecture
+
+## Why aren’t you building proactive agents yet?
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)Nathan DreznerOctober 28, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![How We Built Our Design Agent: one Slack prompt fanning into a launch film, slide deck, X post and blog chart](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adda72d5667dffba0fa8595_6adda7178937e3ba40233f86_design-agent-cover-4k.png)Agent ArchitectureDeep Agents
 
 ## How We Built Our Design Agent
 
@@ -86,15 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Revamping Skills in Deep Agents
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleOctober 7, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac6882bdbe9afeb231b8b05_Introducing%20Managed%20Deep%20Agents%20v0.9.png)Deep Agents
-
-## Managed Deep Agents v0.9: schedules, per-run configuration, and Slack reactions
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)Nathan DreznerOctober 7, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)4min![How to Build a Model Router in the Harness](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6abdc9fb7390b9da2726672e_model-router-webflow-dark-1200x675.png)Open SourceAgent ArchitectureLangChain
-
-## How to Build a Model Router in the Harness
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dd146b49c3ff6f8c05da14_Eugene-Yurtsev%201.png)Sydney RunkleEugene YurtsevOctober 1, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)12min1...1 / 34
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleOctober 7, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 35
 
 #### We couldn't find anything matching that.
 

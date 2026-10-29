@@ -18,7 +18,7 @@ Context manager for mocking out datetime.now() in unit tests.
 
 ```python
 mock_now(
-    dt_value: datetime.datetime,
+    dt_value: dt.datetime,
 ) -> Iterator[type]
 ```
 
@@ -35,8 +35,8 @@ with mock_now(datetime.datetime(2011, 2, 3, 10, 11)):
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `dt_value` | `datetime.datetime` | Yes | The datetime value to use for datetime.now(). |
+| `dt_value` | `dt.datetime` | Yes | The datetime value to use for datetime.now(). |
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/utils/utils.py#L73)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/6419339aa163a49f32d9b80ff20d6adc3b446d49/libs/core/langchain_core/utils/utils.py#L73)

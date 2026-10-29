@@ -60,6 +60,14 @@ See a [usage example](../embeddings/openai.md)
 import { OpenAIEmbeddings } from "@langchain/openai";
 ```
 
+## Decision model
+
+Typed answers and calibrated probabilities for routing, classification, and agent middleware. See a [usage example](../decision_models/openai.md).
+
+```typescript
+import { OpenAIDecisions } from "@langchain/openai";
+```
+
 ## Chain
 
 ```typescript
@@ -73,6 +81,8 @@ Middleware specifically designed for OpenAI models. Learn more about [middleware
 | Middleware | Description |
 | - | - |
 | [Content moderation](#content-moderation) | Moderate agent traffic using OpenAI's moderation endpoint |
+| [Model routing](../decision_models/openai.md#model-routing) | Route each agent run to a model using the OpenAI Decisions API (beta) |
+| [Tool-risk gating](../decision_models/openai.md#tool-risk-gating) | Block risky tool calls using the OpenAI Decisions API (beta) |
 
 ### Content moderation
 

@@ -844,6 +844,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > GridGain persistence for LangGraph: a checkpointer for short-term thread state, a store for long-term cross-thread memory, and a node cache for compiled graphs.
 
+> **[GridPin](https://github.com/gridpin/gridpin/tree/main/integrations/langchain)**
+>
+> Offline geocoding and reverse geocoding from one local data file per country, with no API key and no network call per query.
+
 > **[Fireworks](fireworks.md)**
 >
 > Fast inference for open and proprietary language models.
@@ -915,6 +919,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > **[HirePulse](https://github.com/edtool79-collab/hirepulse-open-source#langchain-and-crewai-gateway-tools-030)**
 >
 > StructuredTools for public hiring signals, website technologies, jobs, Google Ads transparency, profiles, and bulk lookup quotes.
+
+> **[HouyiVectorStore](https://github.com/houyidb-community/houyidb/blob/main/sdk/python/langchain-houyidb/README.en.md)**
+>
+> Memory-first vector database with HNSW search, metadata filters, and persistent WAL storage.
 
 > **[Hubris](https://hubris.pw/docs/integrations/langchain)**
 >
@@ -2291,6 +2299,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > **[Whoosh](https://github.com/priya-sundaram-dev/whoosh/tree/main/integrations/langchain-whoosh#readme)**
 >
 > Retriever backed by Whoosh, a pure-Python full-text search library with BM25F ranking and on-disk indexes.
+
+> **[WitanToolkit](https://github.com/witanmarkets/langchain-witan#readme)**
+>
+> Read-only tools to look up errors and operational facts other AI agents measured, and to query versioned datasets, on WITAN.
 
 > **[Wity](https://github.com/info-alphanimble/langchain-wity#readme)**
 >

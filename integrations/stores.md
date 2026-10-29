@@ -48,17 +48,17 @@ You can also implement your own custom store by extending the [`BaseStore`](http
 | [`HindsightStore`](https://docs.hindsight.vectorize.io/sdks/integrations/langgraph) | [  ![Downloads per month](https://static.pepy.tech/badge/hindsight-langgraph/month)](https://pypi.org/project/hindsight-langgraph/) |
 | [`OmemStore`](https://infrastructure.omem-cloud.com/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/omem-infrastructure/month)](https://pypi.org/project/omem-infrastructure/) |
 | [`PplStore`](https://github.com/ppl-crm/ppl-memory) | [  ![Downloads per month](https://static.pepy.tech/badge/ppl-memory/month)](https://pypi.org/project/ppl-memory/) |
+| [`PostgresStore`](https://skamalj.github.io/agentstate-reducer/langgraph/stores/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-postgres/month)](https://pypi.org/project/langgraph-store-postgres/) |
 | [`BigtableByteStore`](stores/bigtable.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-google-bigtable/month)](https://pypi.org/project/langchain-google-bigtable/) |
 | [`DynamoDBStore`](https://skamalj.github.io/agentstate-reducer/langgraph/stores/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-dynamodb/month)](https://pypi.org/project/langgraph-store-dynamodb/) |
-| [`PostgresStore`](https://skamalj.github.io/agentstate-reducer/langgraph/stores/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-postgres/month)](https://pypi.org/project/langgraph-store-postgres/) |
 | [`QdrantStore`](https://pypi.org/project/langgraph-store-qdrant/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-qdrant/month)](https://pypi.org/project/langgraph-store-qdrant/) |
 | [`LithtrixStore`](https://docs.lithtrix.ai/integrations/langgraph) | [  ![Downloads per month](https://static.pepy.tech/badge/lithtrix-langgraph/month)](https://pypi.org/project/lithtrix-langgraph/) |
 | [`XNSByteStore`](https://docs.xns.tech) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-xns/month)](https://pypi.org/project/langchain-xns/) |
 | [`CosmosDBStore`](https://skamalj.github.io/agentstate-reducer/langgraph/stores/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-cosmosdb/month)](https://pypi.org/project/langgraph-store-cosmosdb/) |
 | [`FirestoreStore`](https://skamalj.github.io/agentstate-reducer/langgraph/stores/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-firestore/month)](https://pypi.org/project/langgraph-store-firestore/) |
 | [`GridGainCheckpointSaver`](https://pypi.org/project/langgraph-checkpoint-gridgain/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-checkpoint-gridgain/month)](https://pypi.org/project/langgraph-checkpoint-gridgain/) |
-| [`InspeximusStore`](https://dancenitra.github.io/inspeximus/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-inspeximus/month)](https://pypi.org/project/langgraph-store-inspeximus/) |
 | [`UpstashStore`](https://github.com/Tghez/langgraph-store-upstash) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-upstash/month)](https://pypi.org/project/langgraph-store-upstash/) |
+| [`InspeximusStore`](https://dancenitra.github.io/inspeximus/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-inspeximus/month)](https://pypi.org/project/langgraph-store-inspeximus/) |
 | [`TypeDBStore`](https://typedb.com/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-typedb/month)](https://pypi.org/project/langgraph-store-typedb/) |
 | [`InMemoryByteStore`](stores/in_memory.md) | N/A |
 | [`LocalFileStore`](stores/file_system.md) | N/A |

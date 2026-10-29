@@ -21,9 +21,10 @@ achunks_to_events(
     chunks: AsyncIterator[ChatGenerationChunk],
     *,
     message_id: str | None = None,
+    generation_info: dict[str, Any] | None = None,
 ) -> AsyncIterator[MessagesData]
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/f4e6cde98d85910cef5d1f43e26e7a497ae861f3/libs/core/langchain_core/language_models/_compat_bridge.py#L686)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/6419339aa163a49f32d9b80ff20d6adc3b446d49/libs/core/langchain_core/language_models/_compat_bridge.py#L692)
