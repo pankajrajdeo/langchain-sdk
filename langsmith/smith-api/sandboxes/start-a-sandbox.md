@@ -1,6 +1,6 @@
 ---
 title: "Start a sandbox"
-description: "Start a stopped or failed sandbox. This endpoint is not idempotent."
+description: "Start a stopped or failed sandbox. This endpoint is not idempotent. The optional volumes field is beta and requires sandbox volumes to be enabled for your workspace. Omit it to keep attachments, or..."
 source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/start-a-sandbox"
 category: "docs"
 tags: [docs, langsmith, smith-api, sandboxes, start-a-sandbox]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, sandboxes, start-a-sandbox]
 
 # Start a sandbox
 
-> Start a stopped or failed sandbox. This endpoint is not idempotent.
+> Start a stopped or failed sandbox. This endpoint is not idempotent. The optional volumes field is beta and requires sandbox volumes to be enabled for your workspace. Omit it to keep attachments, or send an empty array to detach all volumes. Changing attachments requires a stopped or failed sandbox, runtime access to it (its creator or sandboxes:exec), and, for each newly attached volume, being its creator or holding sandboxes:exec. A start whose volumes differ from those the sandbox's saved memory was captured with fails with 409 unless discard_memory is set, which cold-boots the sandbox without that memory.
 
 ## OpenAPI
 
@@ -179,7 +179,16 @@ paths:
       tags:
         - sandboxes
       summary: Start a sandbox
-      description: Start a stopped or failed sandbox. This endpoint is not idempotent.
+      description: >-
+        Start a stopped or failed sandbox. This endpoint is not idempotent. The
+        optional volumes field is beta and requires sandbox volumes to be
+        enabled for your workspace. Omit it to keep attachments, or send an
+        empty array to detach all volumes. Changing attachments requires a
+        stopped or failed sandbox, runtime access to it (its creator or
+        sandboxes:exec), and, for each newly attached volume, being its creator
+        or holding sandboxes:exec. A start whose volumes differ from those the
+        sandbox's saved memory was captured with fails with 409 unless
+        discard_memory is set, which cold-boots the sandbox without that memory.
       parameters:
         - description: Sandbox display name
           name: name
@@ -187,6 +196,12 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sandboxes.StartSandboxPayload'
       responses:
         '202':
           description: Accepted
@@ -217,6 +232,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '409':
+          description: volumes cannot change now, or would discard saved memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
         '500':
           description: Internal Server Error
           content:
@@ -229,6 +250,23 @@ paths:
         - Bearer Auth: []
 components:
   schemas:
+    sandboxes.StartSandboxPayload:
+      type: object
+      properties:
+        discard_memory:
+          description: >-
+            DiscardMemory cold-boots the sandbox, discarding any memory saved
+            when it stopped.
+          type: boolean
+        volumes:
+          description: >-
+            Volumes, when present, replaces the attached volumes. A start whose
+            volumes differ from those the sandbox's saved memory was captured
+            with fails unless discard_memory is set.
+          type: array
+          maxItems: 4
+          items:
+            $ref: '#/components/schemas/sandboxes.VolumeMountRequest'
     sandboxes.SandboxResponse:
       type: object
       properties:
@@ -263,6 +301,12 @@ components:
           $ref: '#/components/schemas/sandboxes.SandboxMountConfig'
         name:
           type: string
+        persistent:
+          description: >-
+            Persistent reports whether the sandbox keeps its filesystem across
+            stops. When false, its writes are discarded whenever it stops and it
+            is not charged for storage.
+          type: boolean
         preserve_memory_on_stop:
           type: boolean
         proxy_config:
@@ -289,6 +333,14 @@ components:
           type: string
         vcpus:
           type: integer
+        volumes:
+          description: >-
+            Volumes (beta) are the volumes attached to the sandbox, in slot
+            order. Absent when the workspace does not have sandbox volumes
+            enabled.
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.SandboxVolumeResponse'
     sandboxes.ErrorResponse:
       type: object
       properties:
@@ -301,6 +353,25 @@ components:
               type: string
             message:
               type: string
+    sandboxes.VolumeMountRequest:
+      type: object
+      required:
+        - mount_path
+        - volume
+      properties:
+        mount_path:
+          description: >-
+            MountPath is the absolute directory inside the sandbox where the
+            volume appears.
+          type: string
+        read_only:
+          description: >-
+            ReadOnly mounts the volume read-only; many sandboxes may do so at
+            once.
+          type: boolean
+        volume:
+          description: Volume is the volume's ID or name.
+          type: string
     sandboxes.AccessDelegation:
       type: object
       required:
@@ -359,6 +430,17 @@ components:
         user:
           type: string
         work_dir:
+          type: string
+    sandboxes.SandboxVolumeResponse:
+      type: object
+      properties:
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        volume_id:
+          type: string
+        volume_name:
           type: string
     auth.SandboxDelegationMode:
       type: string
@@ -501,21 +583,28 @@ components:
             $ref: '#/components/schemas/sandboxes.ProxyHeader'
         match_headers:
           description: >-
-            MatchHeaders restricts a header injection rule to requests carrying
-            every listed header, each written "name: value" with a lowercase
-            name and an exact value. Pair with headers of the same name to swap
-            a placeholder the sandbox sends (e.g. "authorization: Bearer
-            account-b") for a real credential, so one host can serve several
-            accounts. Rules are evaluated in order and the first match wins.
+            MatchHeaders restricts a header injection or rewrite rule to
+            requests carrying every listed header, each written "name: value"
+            with a lowercase name and an exact value. Pair with headers of the
+            same name to swap a placeholder the sandbox sends (e.g.
+            "authorization: Bearer account-b") for a real credential, so one
+            host can serve several accounts. Rules are evaluated in order and
+            the first match wins.
           type: array
           items:
             type: string
         match_hosts:
           description: >-
-            MatchHosts is only accepted for header injection rules. Provider
-            auth
+            MatchHosts is only accepted for header injection, rewrite, and relay
+            rules.
 
-            rules use built-in host matching.
+            Provider auth rules use built-in host matching. A relay rule may
+            also
+
+            list IP addresses and CIDR blocks (10.0.0.0/8), which match
+            connections
+
+            the sandbox makes to an IP address rather than a name.
           type: array
           items:
             type: string
@@ -525,6 +614,18 @@ components:
           type: array
         name:
           type: string
+        relay_id:
+          description: >-
+            RelayID is the ID of the LangSmith relay (a connection of kind
+            relay) that carries connections to match_hosts when type is relay.
+            Those connections leave from the relay's connector, and its network
+            and IP, instead of the sandbox host. Access control still applies
+            first, the first enabled matching relay rule wins, and a matched
+            host never falls back to a direct connection.
+          type: string
+          format: uuid
+        rewrite:
+          $ref: '#/components/schemas/sandboxapi.ProxyRewriteConfig'
         type:
           type: string
     sandboxes.SandboxAWSMountAuthConfig:
@@ -867,6 +968,38 @@ components:
       oneOf:
         - $ref: '#/components/schemas/sandboxes.ProxyGCPWorkloadIdentityConfig'
         - $ref: '#/components/schemas/sandboxes.ProxyGCPServiceAccountConfig'
+    sandboxapi.ProxyRewriteConfig:
+      type: object
+      required:
+        - port
+      properties:
+        credentials:
+          description: >-
+            Credentials is what happens to credential headers the sandbox sent,
+            such as Authorization and Cookie: "strip" (the default) removes
+            them, "redact" keeps each with its value replaced by "redacted"
+            (after an auth scheme such as "Bearer "), and "keep" forwards them
+            unchanged.
+          type: string
+          enum:
+            - strip
+            - redact
+            - keep
+        host:
+          description: >-
+            Host is an HTTPS destination. Exactly one of host and sandbox is
+            set.
+          type: string
+        port:
+          type: integer
+          maximum: 65535
+          minimum: 1
+        sandbox:
+          description: >-
+            Sandbox is the name or ID of a sandbox to send requests to, over
+            plain HTTP. A sandbox link from this sandbox to that sandbox's port
+            must exist. Exactly one of host and sandbox is set.
+          type: string
     sandboxes.SandboxAWSMountRoleAuthConfig:
       type: object
       properties:

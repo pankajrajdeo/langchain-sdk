@@ -1,23 +1,24 @@
 ---
 title: "langsmith/smith-api/run"
-description: "Index of 23 pages and 0 subdirectories under langsmith/smith-api/run."
+description: "Index of 24 pages and 0 subdirectories under langsmith/smith-api/run."
 category: "index"
 tags: [index, langsmith, smith-api, run]
 ---
 
 # langsmith/smith-api/run
 
-23 pages here.
+24 pages here.
 
 ## Files
 
+- [Create decision model rule](create-decision-model-rule.md) - Create a decision-model evaluator (Jev, SemIf or OpenAI Decisions) from its prompt and questions, and attach it to a project or dataset. Each question's key becomes a feedback key.
 - [Create rule](create-rule.md) - Create a new run rule.
 - [Delete rule](delete-rule.md) - Delete a run rule.
 - [Delete runs abac](delete-runs-abac.md) - Delete specific runs by trace IDs.
 - [Delete runs](delete-runs.md) - DELETE with body payload — removes the runs identified by the request payload.
 - [Generate query for runs](generate-query-for-runs.md) - Get runs filter expression query for a given natural language query.
 - [Get last applied rule](get-last-applied-rule.md) - Get the last applied rule.
-- [Group runs](group-runs.md) - Get runs grouped by an expression
+- [Group runs](group-runs.md) - Deprecated; sunset January 31, 2027. Use POST /api/v2/threads/query to query threads instead.
 - [List rule logs (v2)](list-rule-logs-v2.md) - List logs for a particular rule with cursor-based pagination.
 - [List rule logs](list-rule-logs.md) - List logs for a particular rule
 - [List rules](list-rules.md) - List all run rules.

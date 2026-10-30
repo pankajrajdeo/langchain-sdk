@@ -999,7 +999,7 @@ vector_store.similarity_search(
 | [`Amazon MemoryDB`](vectorstores/memorydb.md) | | | | | | | | | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-aws/month)](https://pypi.org/project/langchain-aws/) |
 | [`ValkeyVectorStore`](vectorstores/valkey.md) | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-aws/month)](https://pypi.org/project/langchain-aws/) |
 | [`PGVector`](vectorstores/pgvector.md) | | | | | | | | | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-postgres/month)](https://pypi.org/project/langchain-postgres/) |
-| [`PGVectorStore`](vectorstores/pgvectorstore.md) | | | | | | | | | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-postgres/month)](https://pypi.org/project/langchain-postgres/) |
+| [`PGVectorStore`](vectorstores/pgvectorstore.md) | ✅ | ✅ | ✅ | ✅ | ✅ | | | ✅ | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-postgres/month)](https://pypi.org/project/langchain-postgres/) |
 | [`MongoDBAtlasVectorSearch`](vectorstores/mongodb_atlas.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-mongodb/month)](https://pypi.org/project/langchain-mongodb/) |
 | [`Chroma`](vectorstores/chroma.md) | | | | | | | | | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-chroma/month)](https://pypi.org/project/langchain-chroma/) |
 | [`QdrantVectorStore`](vectorstores/qdrant.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-qdrant/month)](https://pypi.org/project/langchain-qdrant/) |

@@ -10,12 +10,7 @@ tags: [docs, langsmith, smith-api, run, delete-runs]
 
 > DELETE with body payload — removes the runs identified by the request payload.
 
-Delete runs by trace ID, or every run in a time range.
-
-Supply `session_id` and `trace_ids` to delete a known list of traces, or
-`metadata` with `start_time` to delete matching traces from that time
-onward. Add `end_time` to bound the range; with both bounds set `metadata`
-is optional, and omitting it deletes every trace that started in the range.
+Delete specific runs by supplying `session_id` and `trace_ids`.
 
 ## OpenAPI
 
@@ -190,17 +185,7 @@ paths:
         DELETE with body payload — removes the runs identified by the request
         payload.
 
-        Delete runs by trace ID, or every run in a time range.
-
-        Supply `session_id` and `trace_ids` to delete a known list of traces, or
-
-        `metadata` with `start_time` to delete matching traces from that time
-
-        onward. Add `end_time` to bound the range; with both bounds set
-        `metadata`
-
-        is optional, and omitting it deletes every trace that started in the
-        range.
+        Delete specific runs by supplying `session_id` and `trace_ids`.
       operationId: delete_runs_api_v1_runs_delete_post
       requestBody:
         content:
@@ -241,28 +226,6 @@ components:
               type: array
             - type: 'null'
           title: Trace Ids
-        metadata:
-          anyOf:
-            - additionalProperties: true
-              type: object
-            - type: 'null'
-          title: Metadata
-        delete_examples:
-          type: boolean
-          title: Delete Examples
-          default: false
-        start_time:
-          anyOf:
-            - type: string
-              format: date-time
-            - type: 'null'
-          title: Start Time
-        end_time:
-          anyOf:
-            - type: string
-              format: date-time
-            - type: 'null'
-          title: End Time
       type: object
       title: Body_delete_runs_api_v1_runs_delete_post
     HTTPValidationError:

@@ -1,6 +1,6 @@
 ---
 title: "Query threads"
-description: "Query threads within a project (session), with cursor-based pagination. Returns threads matching the given time range and optional filters."
+description: "GET with body payload — no resources created. Returns the threads in a tracing project matching the query passed as the request payload. Results are filtered by the given time range and optional..."
 source: "https://docs.langchain.com/langsmith/smith-api/threads/query-threads"
 category: "docs"
 tags: [docs, langsmith, smith-api, threads, query-threads]
@@ -8,8 +8,8 @@ tags: [docs, langsmith, smith-api, threads, query-threads]
 
 # Query threads
 
-> Query threads within a project (session), with cursor-based pagination.
-Returns threads matching the given time range and optional filters.
+> GET with body payload — no resources created. Returns the threads in a tracing project matching the query passed as the request payload.
+Results are filtered by the given time range and optional filters, with cursor-based pagination.
 
 When `ai_search` is set, `Accept: text/event-stream` is required; requests without it return 406. AI search is unavailable on deployments that route queries to the v1 backend and returns 501 there.
 
@@ -185,9 +185,11 @@ paths:
         - threads
       summary: Query threads
       description: >-
-        Query threads within a project (session), with cursor-based pagination.
+        GET with body payload — no resources created. Returns the threads in a
+        tracing project matching the query passed as the request payload.
 
-        Returns threads matching the given time range and optional filters.
+        Results are filtered by the given time range and optional filters, with
+        cursor-based pagination.
 
         When `ai_search` is set, `Accept: text/event-stream` is required;
         requests without it return 406. AI search is unavailable on deployments
@@ -224,12 +226,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
-        '401':
-          description: missing or invalid authentication
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
         '403':
           description: forbidden (insufficient permission)
           content:
@@ -242,20 +238,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
-        '406':
-          description: 'not acceptable (ai_search requires Accept: text/event-stream)'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
         '422':
           description: unprocessable entity (e.g. invalid project UUID)
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
-        '500':
-          description: internal server error
           content:
             application/problem+json:
               schema:
@@ -265,18 +249,6 @@ paths:
             V2 filter syntax, thread_filters, or ai_search are unavailable for
             this deployment; use legacy function-style filters without
             thread_filters or set SMITHDB_QUERY_ENABLED=true
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
-        '503':
-          description: service unavailable
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
-        '504':
-          description: gateway timeout or deadline exceeded
           content:
             application/problem+json:
               schema:

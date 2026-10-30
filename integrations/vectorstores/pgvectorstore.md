@@ -12,6 +12,8 @@ tags: [docs, integrations, vectorstores, pgvectorstore]
 
 `PGVectorStore` is an implementation of a LangChain vectorstore using `postgres` as the backend.
 
+It also supports hybrid search, combining vector similarity search with PostgreSQL full-text search through `HybridSearchConfig`.
+
 This notebook goes over how to use the `PGVectorStore` API.
 
 The code lives in an integration package called: [langchain-postgres](https://github.com/langchain-ai/langchain-postgres/).

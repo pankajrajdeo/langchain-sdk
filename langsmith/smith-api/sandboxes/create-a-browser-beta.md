@@ -258,6 +258,12 @@ components:
             Name of the browser sandbox. Generated when omitted, as "browser-"
             followed by the browser's ID.
           type: string
+        proxy_config:
+          description: |-
+            ProxyConfig applies a sandbox's proxy rules to the pages the browser
+            loads: header injection, access control, and relay rules.
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.ProxyConfig'
         vcpus:
           description: >-
             VCPUs and MemBytes size the browser sandbox, as for any sandbox.
@@ -296,6 +302,30 @@ components:
               type: string
             message:
               type: string
+    sandboxes.ProxyConfig:
+      type: object
+      properties:
+        access_control:
+          $ref: '#/components/schemas/sandboxes.AccessControl'
+        callbacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.Callback'
+        description:
+          description: >-
+            Description says what this configuration as a whole lets the sandbox
+            reach, complementing the per-rule descriptions. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
+        no_proxy:
+          items:
+            type: string
+          type: array
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.ProxyRule'
     sandboxes.BrowserAttachment:
       type: object
       properties:
@@ -425,6 +455,124 @@ components:
 
             given one; a window without one keeps Chrome's default of 1280x800.
           type: integer
+    sandboxes.AccessControl:
+      type: object
+      properties:
+        allow_list:
+          items:
+            type: string
+          type: array
+        deny_list:
+          items:
+            type: string
+          type: array
+    sandboxes.Callback:
+      type: object
+      required:
+        - match_hosts
+        - ttl_seconds
+        - url
+      properties:
+        full_request:
+          type: boolean
+        match_hosts:
+          type: array
+          minItems: 1
+          items:
+            type: string
+        request_headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.ProxyHeader'
+        ttl_seconds:
+          type: integer
+          maximum: 3600
+          minimum: 60
+        url:
+          type: string
+    sandboxes.ProxyRule:
+      type: object
+      required:
+        - name
+      properties:
+        aws:
+          $ref: '#/components/schemas/sandboxes.ProxyAWSConfig'
+        azure:
+          $ref: '#/components/schemas/sandboxes.ProxyAzureConfig'
+        description:
+          description: >-
+            Description says what this rule lets the sandbox reach, so an agent
+            driving the sandbox can be told its capabilities. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
+        enabled:
+          type: boolean
+        env_vars:
+          description: >-
+            EnvVars are plaintext env vars set for every command in the sandbox
+            while this rule is enabled. Use them for tools that refuse to run
+            unless a credential env var is present (e.g. gh needs GH_TOKEN) even
+            though this rule injects the real credential on the wire — set a
+            dummy value here so the command starts. Explicit per-sandbox
+            env_vars win over these, and provider-managed (AWS/GCP) vars win
+            over both.
+          type: object
+          additionalProperties:
+            type: string
+        gcp:
+          $ref: '#/components/schemas/sandboxes.ProxyGCPConfig'
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.ProxyHeader'
+        match_headers:
+          description: >-
+            MatchHeaders restricts a header injection or rewrite rule to
+            requests carrying every listed header, each written "name: value"
+            with a lowercase name and an exact value. Pair with headers of the
+            same name to swap a placeholder the sandbox sends (e.g.
+            "authorization: Bearer account-b") for a real credential, so one
+            host can serve several accounts. Rules are evaluated in order and
+            the first match wins.
+          type: array
+          items:
+            type: string
+        match_hosts:
+          description: >-
+            MatchHosts is only accepted for header injection, rewrite, and relay
+            rules.
+
+            Provider auth rules use built-in host matching. A relay rule may
+            also
+
+            list IP addresses and CIDR blocks (10.0.0.0/8), which match
+            connections
+
+            the sandbox makes to an IP address rather than a name.
+          type: array
+          items:
+            type: string
+        match_paths:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        relay_id:
+          description: >-
+            RelayID is the ID of the LangSmith relay (a connection of kind
+            relay) that carries connections to match_hosts when type is relay.
+            Those connections leave from the relay's connector, and its network
+            and IP, instead of the sandbox host. Access control still applies
+            first, the first enabled matching relay rule wins, and a matched
+            host never falls back to a direct connection.
+          type: string
+          format: uuid
+        rewrite:
+          $ref: '#/components/schemas/sandboxapi.ProxyRewriteConfig'
+        type:
+          type: string
     sandboxes.BrowserTab:
       type: object
       properties:
@@ -433,6 +581,368 @@ components:
         title:
           type: string
         url:
+          type: string
+    sandboxes.ProxyHeader:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        is_set:
+          type: boolean
+        name:
+          type: string
+        type:
+          enum:
+            - plaintext
+            - opaque
+            - workspace_secret
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.HeaderType'
+        value:
+          type: string
+    sandboxes.ProxyAWSConfig:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/sandboxes.ProxyAWSRoleConfig'
+        - $ref: '#/components/schemas/sandboxes.ProxyAWSStaticConfig'
+    sandboxes.ProxyAzureConfig:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/sandboxes.ProxyAzureWorkloadIdentityConfig'
+        - $ref: '#/components/schemas/sandboxes.ProxyAzureAccountKeyConfig'
+        - $ref: '#/components/schemas/sandboxes.ProxyAzureSASConfig'
+    sandboxes.ProxyGCPConfig:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/sandboxes.ProxyGCPWorkloadIdentityConfig'
+        - $ref: '#/components/schemas/sandboxes.ProxyGCPServiceAccountConfig'
+    sandboxapi.ProxyRewriteConfig:
+      type: object
+      required:
+        - port
+      properties:
+        credentials:
+          description: >-
+            Credentials is what happens to credential headers the sandbox sent,
+            such as Authorization and Cookie: "strip" (the default) removes
+            them, "redact" keeps each with its value replaced by "redacted"
+            (after an auth scheme such as "Bearer "), and "keep" forwards them
+            unchanged.
+          type: string
+          enum:
+            - strip
+            - redact
+            - keep
+        host:
+          description: >-
+            Host is an HTTPS destination. Exactly one of host and sandbox is
+            set.
+          type: string
+        port:
+          type: integer
+          maximum: 65535
+          minimum: 1
+        sandbox:
+          description: >-
+            Sandbox is the name or ID of a sandbox to send requests to, over
+            plain HTTP. A sandbox link from this sandbox to that sandbox's port
+            must exist. Exactly one of host and sandbox is set.
+          type: string
+    sandboxes.HeaderType:
+      type: string
+      enum:
+        - plaintext
+        - opaque
+        - workspace_secret
+      x-enum-varnames:
+        - HeaderTypePlaintext
+        - HeaderTypeOpaque
+        - HeaderTypeWorkspaceSecret
+    sandboxes.ProxyAWSRoleConfig:
+      type: object
+      properties:
+        role_arn:
+          description: >-
+            IAM role to assume with AssumeRoleWithWebIdentity, using a
+            short-lived OIDC token LangSmith signs for this workspace. The
+            role's trust policy must trust LangSmith's issuer for the token
+            subject. Credentials renew automatically, and access follows the
+            role's effective AWS permissions. Mutually exclusive with static
+            keys, and cannot be changed after creation.
+          type: string
+          minLength: 1
+        subject_scope:
+          description: >-
+            SubjectScope picks the token subject the role trusts: "workspace"
+            (the default) or "tag:<tag value id>", which must be one of the
+            sandbox's tag_value_ids. Only valid with role_arn.
+          type: string
+          pattern: >-
+            ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+      required:
+        - role_arn
+      not:
+        anyOf:
+          - required:
+              - access_key_id
+          - required:
+              - secret_access_key
+    sandboxes.ProxyAWSStaticConfig:
+      type: object
+      properties:
+        access_key_id:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+        role_arn:
+          description: >-
+            IAM role to assume with AssumeRoleWithWebIdentity, using a
+            short-lived OIDC token LangSmith signs for this workspace. The
+            role's trust policy must trust LangSmith's issuer for the token
+            subject. Credentials renew automatically, and access follows the
+            role's effective AWS permissions. Mutually exclusive with static
+            keys, and cannot be changed after creation.
+          type: string
+          enum:
+            - ''
+        secret_access_key:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - access_key_id
+        - secret_access_key
+      not:
+        anyOf:
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+    sandboxes.ProxyAzureWorkloadIdentityConfig:
+      type: object
+      properties:
+        tenant_id:
+          description: >-
+            TenantID is the Entra tenant (directory) ID, a GUID. Setting it
+            selects workload identity: LangSmith signs an OIDC token for this
+            workspace and exchanges it at Entra ID for access tokens of
+            client_id, so no secret is stored. Cannot be changed after creation.
+          type: string
+          minLength: 1
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        client_id:
+          description: >-
+            ClientID is the application (client) ID, a GUID, of the app
+            registration or user-assigned managed identity whose federated
+            identity credential trusts LangSmith's issuer. Required with
+            tenant_id.
+          type: string
+          minLength: 1
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        subject_scope:
+          description: >-
+            SubjectScope picks the token subject the federated credential
+            trusts: "workspace" (the default) or "tag:<tag value id>", which
+            must be one of the sandbox's tag_value_ids. Only valid with
+            tenant_id.
+          type: string
+          pattern: >-
+            ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+        resources:
+          description: >-
+            Resources narrows the Entra resources access tokens are obtained
+            for, from https://storage.azure.com, https://vault.azure.net,
+            https://management.azure.com and
+            https://cognitiveservices.azure.com. Defaults to all of them. Only
+            valid with tenant_id.
+          type: array
+          items:
+            type: string
+            enum:
+              - https://storage.azure.com
+              - https://vault.azure.net
+              - https://management.azure.com
+              - https://cognitiveservices.azure.com
+          uniqueItems: true
+      required:
+        - tenant_id
+        - client_id
+      not:
+        anyOf:
+          - required:
+              - account_key
+          - required:
+              - sas_token
+          - required:
+              - storage_account
+    sandboxes.ProxyAzureAccountKeyConfig:
+      type: object
+      properties:
+        storage_account:
+          minLength: 3
+          description: >-
+            StorageAccount is the storage account static credentials
+            authenticate to: requests to its blob, dfs, queue, table and file
+            endpoints. Requires exactly one of account_key (requests are signed
+            with SharedKey) or sas_token (appended to each request).
+          type: string
+          maxLength: 24
+          pattern: ^[a-z0-9]+$
+        account_key:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - storage_account
+        - account_key
+      not:
+        anyOf:
+          - required:
+              - sas_token
+          - required:
+              - tenant_id
+            properties:
+              tenant_id:
+                minLength: 1
+          - required:
+              - client_id
+            properties:
+              client_id:
+                minLength: 1
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+          - required:
+              - resources
+            properties:
+              resources:
+                minItems: 1
+    sandboxes.ProxyAzureSASConfig:
+      type: object
+      properties:
+        storage_account:
+          minLength: 3
+          description: >-
+            StorageAccount is the storage account static credentials
+            authenticate to: requests to its blob, dfs, queue, table and file
+            endpoints. Requires exactly one of account_key (requests are signed
+            with SharedKey) or sas_token (appended to each request).
+          type: string
+          maxLength: 24
+          pattern: ^[a-z0-9]+$
+        sas_token:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+      required:
+        - storage_account
+        - sas_token
+      not:
+        anyOf:
+          - required:
+              - account_key
+          - required:
+              - tenant_id
+            properties:
+              tenant_id:
+                minLength: 1
+          - required:
+              - client_id
+            properties:
+              client_id:
+                minLength: 1
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+          - required:
+              - resources
+            properties:
+              resources:
+                minItems: 1
+    sandboxes.ProxyGCPWorkloadIdentityConfig:
+      type: object
+      properties:
+        workload_identity_provider:
+          description: >-
+            WorkloadIdentityProvider federates an OIDC token LangSmith signs for
+            this workspace through Workload Identity Federation instead of a
+            service account key. Use the full resource name:
+            //iam.googleapis.com/projects/<number>/locations/global/workloadIdentityPools/<pool>/providers/<provider>.
+            Cannot be changed after creation.
+          type: string
+          minLength: 1
+        service_account_email:
+          description: >-
+            ServiceAccountEmail is the service account to impersonate with the
+            federated token. Omit it to use the federated principal directly.
+          type: string
+        subject_scope:
+          description: >-
+            SubjectScope picks the token subject the provider trusts:
+            "workspace" (the default) or "tag:<tag value id>", which must be one
+            of the sandbox's tag_value_ids. Only valid with
+            workload_identity_provider.
+          type: string
+          pattern: >-
+            ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+        scopes:
+          description: >-
+            Scopes are the OAuth scopes requested for the access token. Omit
+            them to use https://www.googleapis.com/auth/cloud-platform.
+          type: array
+          items:
+            type: string
+      required:
+        - workload_identity_provider
+      not:
+        required:
+          - service_account_json
+    sandboxes.ProxyGCPServiceAccountConfig:
+      type: object
+      properties:
+        service_account_json:
+          $ref: '#/components/schemas/sandboxes.ProxySecretValue'
+        scopes:
+          description: >-
+            Scopes are the OAuth scopes requested for the access token. Omit
+            them to use https://www.googleapis.com/auth/cloud-platform.
+          type: array
+          items:
+            type: string
+      required:
+        - service_account_json
+      not:
+        anyOf:
+          - required:
+              - workload_identity_provider
+            properties:
+              workload_identity_provider:
+                minLength: 1
+          - required:
+              - service_account_email
+            properties:
+              service_account_email:
+                minLength: 1
+          - required:
+              - subject_scope
+            properties:
+              subject_scope:
+                minLength: 1
+    sandboxes.ProxySecretValue:
+      type: object
+      required:
+        - type
+      properties:
+        is_set:
+          type: boolean
+        type:
+          enum:
+            - plaintext
+            - opaque
+            - workspace_secret
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.HeaderType'
+        value:
           type: string
   securitySchemes:
     API Key:

@@ -1,12 +1,17 @@
 ---
 title: "Delete workspace"
-description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/{workspace_id}"
+description: "Delete a workspace and its data."
 source: "https://docs.langchain.com/langsmith/smith-api/workspaces/delete-workspace"
 category: "docs"
 tags: [docs, langsmith, smith-api, workspaces, delete-workspace]
 ---
 
 # Delete workspace
+
+> Delete a workspace and its data.
+
+Only the workspace the request is scoped to (the X-Tenant-Id header, or the API key's workspace)
+can be deleted; any other ID returns 403. Requires the workspace delete permission.
 
 ## OpenAPI
 
@@ -177,6 +182,14 @@ paths:
       tags:
         - workspaces
       summary: Delete workspace
+      description: >-
+        Delete a workspace and its data.
+
+        Only the workspace the request is scoped to (the X-Tenant-Id header, or
+        the API key's workspace)
+
+        can be deleted; any other ID returns 403. Requires the workspace delete
+        permission.
       operationId: delete_workspace_api_v1_workspaces__workspace_id__delete
       parameters:
         - name: workspace_id
@@ -192,6 +205,12 @@ paths:
           content:
             application/json:
               schema: {}
+        '403':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: The workspace is not the one the request is scoped to.
         '422':
           description: Validation Error
           content:
@@ -204,6 +223,28 @@ paths:
         - Bearer Auth: []
 components:
   schemas:
+    ProblemDetails:
+      properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     HTTPValidationError:
       properties:
         detail:

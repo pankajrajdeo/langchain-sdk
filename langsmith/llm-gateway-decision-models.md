@@ -17,7 +17,7 @@ Decision models classify or score text and return structured answers instead of 
 | [TypeSafe (Jev)](#use-typesafe-jev) | System One | `/v1/systemone` | `TYPESAFE_API_KEY` provider secret |
 | [OpenAI decision models](#use-openai-decision-models) | OpenAI Decisions | `/openai/v1/decisions` | `OPENAI_API_KEY` provider secret |
 
-Both models require a workspace-scoped [LangSmith API key](create-account-api-key.md) and the matching workspace [provider secret](llm-gateway-admin-setup.md#1-add-provider-secrets). Set your LangSmith API key before you run the examples on this page:
+Both models require a workspace-scoped LangSmith API key and the matching workspace [provider secret](llm-gateway-provider-authentication.md#add-a-provider-key). For key types, permissions, and the header each client sends, see [Authenticate to the LLM Gateway](llm-gateway-authentication.md). Set your LangSmith API key before you run the examples on this page:
 
 ```bash
 export LANGSMITH_API_KEY="<your-api-key>"
@@ -25,7 +25,7 @@ export LANGSMITH_API_KEY="<your-api-key>"
 
 ## Use TypeSafe (Jev)
 
-The gateway supports TypeSafe decision models with bring-your-own-key (BYOK). Configure `TYPESAFE_API_KEY` as a workspace [provider secret](llm-gateway-admin-setup.md#1-add-provider-secrets). See [TypeSafe setup](../integrations/providers/typesafe.md#setup) to create a key and install the LangChain integration.
+The gateway supports TypeSafe decision models with bring-your-own-key (BYOK). Configure `TYPESAFE_API_KEY` as a workspace [provider secret](llm-gateway-provider-authentication.md#add-a-provider-key). See [TypeSafe setup](../integrations/providers/typesafe.md#setup) to create a key and install the LangChain integration.
 
 TypeSafe (Jev) uses the System One API. Pass the text to evaluate in `state` and one or more named questions in `questions`. System One supports three question types:
 
@@ -111,7 +111,7 @@ curl https://gateway.smith.langchain.com/v1/systemone \
 
 ## Use OpenAI decision models
 
-OpenAI decision models use the OpenAI Decisions API, which has its own request and response format, separate from System One. The gateway supports the OpenAI Decisions API through [direct model access](llm-gateway-direct-model-access.md). Configure `OPENAI_API_KEY` as a workspace [provider secret](llm-gateway-admin-setup.md#1-add-provider-secrets).
+OpenAI decision models use the OpenAI Decisions API, which has its own request and response format, separate from System One. The gateway supports the OpenAI Decisions API through [direct model access](llm-gateway-direct-model-access.md). Configure `OPENAI_API_KEY` as a workspace [provider secret](llm-gateway-provider-authentication.md#add-a-provider-key).
 
 Send requests to `POST /openai/v1/decisions` using your workspace-scoped LangSmith API key. Set `model` to the native OpenAI model name without the `openai/` prefix:
 
@@ -163,7 +163,7 @@ Gateway [access](llm-gateway-model-access-policies.md), [rate-limit](llm-gateway
 
 ## See also
 
-* [Admin setup](llm-gateway-admin-setup.md): Configure provider secrets and grant gateway access.
+* [Set up the LLM Gateway](llm-gateway-admin-setup.md): Configure provider secrets and grant gateway access.
 * [TypeSafe integration](../integrations/providers/typesafe.md): Use TypeSafe decision models through LangChain.
 
 ***

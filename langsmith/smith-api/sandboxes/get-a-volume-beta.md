@@ -1,16 +1,18 @@
 ---
-title: "Create new model price"
-description: "/langsmith/langsmith-platform-openapi.json post /api/v1/model-price-map"
-source: "https://docs.langchain.com/langsmith/smith-api/model-price-map/create-new-model-price"
+title: "Get a volume (Beta)"
+description: "Beta: This API is in active development and may change without notice. Requires sandbox volumes to be enabled for your workspace. Get a sandbox volume by ID or name, with its current attachments."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/get-a-volume-beta"
 category: "docs"
-tags: [docs, langsmith, smith-api, model-price-map, create-new-model-price]
+tags: [docs, langsmith, smith-api, sandboxes, get-a-volume-beta]
 ---
 
-# Create new model price
+# Get a volume (Beta)
+
+> **Beta:** This API is in active development and may change without notice. Requires sandbox volumes to be enabled for your workspace. Get a sandbox volume by ID or name, with its current attachments.
 
 ## OpenAPI
 
-**/langsmith/langsmith-platform-openapi.json post /api/v1/model-price-map**
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/volumes/{volume}**
 
 ````yaml
 openapi: 3.1.0
@@ -172,122 +174,113 @@ tags:
     x-hidden: true
   - name: usage
 paths:
-  /api/v1/model-price-map:
-    post:
+  /api/v2/sandboxes/volumes/{volume}:
+    get:
       tags:
-        - model-price-map
-      summary: Create new model price
-      operationId: create_new_model_price_api_v1_model_price_map_post
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ModelPriceMapCreateSchema'
+        - sandboxes
+      summary: Get a volume (Beta)
+      description: >-
+        **Beta:** This API is in active development and may change without
+        notice. Requires sandbox volumes to be enabled for your workspace. Get a
+        sandbox volume by ID or name, with its current attachments.
+      parameters:
+        - description: Volume ID or name
+          name: volume
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema: {}
-        '422':
-          description: Validation Error
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/sandboxes.VolumeResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    ModelPriceMapCreateSchema:
+    sandboxes.VolumeResponse:
+      type: object
       properties:
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.VolumeAttachmentResponse'
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        labels:
+          $ref: '#/components/schemas/sandboxes.Labels'
         name:
           type: string
-          title: Name
-        start_time:
-          anyOf:
-            - type: string
-              format: date-time
-            - type: 'null'
-          title: Start Time
-        match_path:
-          items:
-            type: string
-          type: array
-          title: Match Path
-          default:
-            - model
-            - model_name
-            - model_id
-            - model_path
-            - endpoint_name
-        match_pattern:
+        size_bytes:
+          type: integer
+        source_volume_id:
           type: string
-          title: Match Pattern
-        prompt_cost:
-          anyOf:
-            - type: number
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Prompt Cost
-        completion_cost:
-          anyOf:
-            - type: number
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Completion Cost
-        prompt_cost_details:
-          anyOf:
-            - additionalProperties:
-                anyOf:
-                  - type: number
-                  - type: string
-                    pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-              type: object
-            - type: 'null'
-          title: Prompt Cost Details
-        completion_cost_details:
-          anyOf:
-            - additionalProperties:
-                anyOf:
-                  - type: number
-                  - type: string
-                    pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-              type: object
-            - type: 'null'
-          title: Completion Cost Details
-        provider:
-          anyOf:
-            - type: string
-            - type: 'null'
-          title: Provider
-        prompt_tokens_above:
-          anyOf:
-            - type: integer
-              maximum: 9007199254740991
-              minimum: 0
-            - type: 'null'
-          title: Prompt Tokens Above
+        status:
+          type: string
+        status_message:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        updated_by:
+          type: string
+    sandboxes.ErrorResponse:
       type: object
-      required:
-        - name
-        - match_pattern
-        - prompt_cost
-        - completion_cost
-      title: ModelPriceMapCreateSchema
-      description: Model price map create schema.
-    HTTPValidationError:
       properties:
         detail:
-          items:
-            type: string
-          type: array
-          title: Detail
+          type: object
+          properties:
+            error:
+              type: string
+            error_id:
+              type: string
+            message:
+              type: string
+    sandboxes.VolumeAttachmentResponse:
       type: object
-      title: HTTPValidationError
+      properties:
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        sandbox_id:
+          type: string
+        sandbox_name:
+          type: string
+    sandboxes.Labels:
+      type: object
+      additionalProperties:
+        type: string
   securitySchemes:
     API Key:
       type: apiKey

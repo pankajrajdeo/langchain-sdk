@@ -254,21 +254,21 @@ paths:
         '400':
           description: Bad Request
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/commits.ErrorResponse'
+                $ref: '#/components/schemas/shared.ProblemDetails'
         '404':
           description: Not Found
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/commits.ErrorResponse'
+                $ref: '#/components/schemas/shared.ProblemDetails'
         '500':
           description: Internal Server Error
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/commits.ErrorResponse'
+                $ref: '#/components/schemas/shared.ProblemDetails'
       security:
         - API Key: []
         - Tenant ID: []
@@ -294,11 +294,36 @@ components:
           type: object
         model_provider:
           type: string
-    commits.ErrorResponse:
+    shared.ProblemDetails:
+      description: RFC 7807 problem details returned on V2 API errors.
       type: object
       properties:
-        error:
-          description: Error message
+        detail:
+          type: string
+        details:
+          description: >-
+            Details is a LangSmith extension carrying structured fields for
+            ErrorClass.
+          allOf:
+            - $ref: '#/components/schemas/shared.ParseErrorDetails'
+        error_class:
+          description: |-
+            ErrorClass is a LangSmith extension sub-categorizing a status code.
+            Additional values require expanding this enum and adding a oneOf
+            discriminator on Details to keep the class↔details contract typed.
+          type: string
+          enum:
+            - PARSE_FAILURE
+        instance:
+          type: string
+        remedy:
+          description: Remedy is a LangSmith extension for user-recoverable errors.
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
           type: string
     commits.ExampleRun:
       type: object
@@ -314,6 +339,19 @@ components:
           type: string
           format: uuid
         start_time:
+          type: string
+    shared.ParseErrorDetails:
+      description: Structured fields describing an adapter parse failure.
+      type: object
+      required:
+        - adapter
+        - item_type
+      properties:
+        adapter:
+          type: string
+        item_type:
+          type: string
+        run_id:
           type: string
   securitySchemes:
     API Key:

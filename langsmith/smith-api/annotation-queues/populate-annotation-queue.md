@@ -211,15 +211,20 @@ components:
           type: string
           format: uuid
           title: Queue Id
+          description: ID of the annotation queue to add runs to.
         session_ids:
           items:
             type: string
             format: uuid
           type: array
           title: Session Ids
+          description: >-
+            Experiments whose runs are added to the queue. Each must be an
+            experiment on a dataset.
         extend_trace_retention:
           type: boolean
           title: Extend Trace Retention
+          description: Upgrade the added traces from short-lived to extended retention.
           default: false
       type: object
       required:

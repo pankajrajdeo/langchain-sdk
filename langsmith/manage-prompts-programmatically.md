@@ -433,9 +433,9 @@ Prompt publicPrompt = promptClient.pull("efriis/my-first-prompt");
 >
 > If you are in a non-Node environment, "includeModel" is not supported for non-OpenAI models and you should use the base `langchain/hub` entrypoint.
 
-## Use with the LangSmith Gateway
+## Use with the LLM Gateway
 
-If your workspace uses the [LangSmith LLM Gateway](llm-gateway.md), you can route prompt model calls through it by setting an environment variable before pulling and invoking your prompt. No other code changes are required.
+If your workspace uses the [LLM Gateway](llm-gateway.md), you can route prompt model calls through it by setting an environment variable before pulling and invoking your prompt. No other code changes are required.
 
 ```bash
 export LANGSMITH_GATEWAY="true"
@@ -449,7 +449,7 @@ export LANGSMITH_GATEWAY="https://eu.gateway.smith.langchain.com"
 
 > [!NOTE]
 >
-> If you need to use a different API key for gateway calls than your default `LANGSMITH_API_KEY`, set `LANGSMITH_GATEWAY_API_KEY` as an override. It must be a workspace-scoped key with the `gateway:invoke` permission.
+> If you need to use a different API key for gateway calls than your default `LANGSMITH_API_KEY`, set `LANGSMITH_GATEWAY_API_KEY` as an override. It must be a workspace-scoped key with the `gateway:invoke` permission. For key types and permissions, see [Authenticate to the LLM Gateway](llm-gateway-authentication.md).
 
 Once the environment variables are set, pull and invoke a prompt with a model as normal:
 
@@ -469,9 +469,9 @@ result = prompt_with_model.invoke({"topic": "cats"})
 
 > [!NOTE]
 >
-> Gateway routing for LangChain chat models requires Python and a supported `langchain-*` integration package at the minimum version listed in the [gateway quickstart](llm-gateway-quickstart.md). If the integration package is below the minimum version, the call will bypass the gateway and go directly to the provider.
+> Gateway routing for LangChain chat models requires Python and a supported `langchain-*` integration package. With an older integration package, the call bypasses the gateway and goes directly to the provider.
 
-For full configuration options, provider support, and regional endpoints, see the [LLM Gateway quickstart](llm-gateway-quickstart.md).
+For supported providers and regional endpoints, see [Configure LangChain and Deep Agents](llm-gateway-direct-model-access.md#configure-langchain-and-deep-agents).
 
 ## Prompt caching
 

@@ -216,6 +216,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - ID
@@ -265,7 +266,6 @@ paths:
                 - FEEDBACK_STATS
                 - LS_USER_ID
               type: string
-            type: array
             title: Selects
         - description: >-
             `start_time` is the run's `start_time` (RFC3339 date-time).

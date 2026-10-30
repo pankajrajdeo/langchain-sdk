@@ -30,7 +30,15 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae0e3564fd9f8b3ca94389e_Building%20Evidence-Grounded%20Agent%20Memory%20with%20OpenWiki%20and%20Graphs.png)Open Source
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae37bc699a519b4b3d501e9_mda-v0.10-blog-cover-4k.png)Agent Architecture
+
+## Managed Deep Agents v0.10: Browser use and asynchronous subagents
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Nathan DreznerSydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)1min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2e4a5ec6ae4604757f269_cover-webflow-1200x675.png)Deep AgentsAgent ArchitectureDeployment
+
+## Browser Use in Managed Deep Agents
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae0e3564fd9f8b3ca94389e_Building%20Evidence-Grounded%20Agent%20Memory%20with%20OpenWiki%20and%20Graphs.png)Open Source
 
 ## Building Evidence-Grounded Agent Memory with OpenWiki and Graphs
 
@@ -86,15 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## How Snyk turned an internal support agent into a customer feature
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac7ce5f2a9c9db0e77b208e_1782961304448.jpeg)Oliver ArmstrongOctober 8, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![Agents that can pay: building Restock with Stripe's Link and Managed Deep Agents](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac718f4c65195ca032e3790_restock-cover.png)Deep AgentsTutorials & How-TosPartner
-
-## Agents that can pay: building Restock with Stripe's Link and Managed Deep Agents
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a4db1f172cf600d53600698_srimanth-t.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)Srimanth TangedipalliSydney RunkleNathan DreznerOctober 8, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![Revamping Skills in Deep Agents](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac686acfa26e17ec695410d_revamping-skills-in-deep-agents-cover-v4.png)Open SourceAgent ArchitectureDeep Agents
-
-## Revamping Skills in Deep Agents
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleOctober 7, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac7ce5f2a9c9db0e77b208e_1782961304448.jpeg)Oliver ArmstrongOctober 8, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min1...1 / 35
 
 #### We couldn't find anything matching that.
 

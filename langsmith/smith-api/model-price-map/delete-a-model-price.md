@@ -1,16 +1,22 @@
 ---
-title: "Update model price"
-description: "/langsmith/langsmith-platform-openapi.json put /api/v1/model-price-map/{id}"
-source: "https://docs.langchain.com/langsmith/smith-api/model-price-map/update-model-price"
+title: "Delete a model price"
+description: "Delete a custom model price from this workspace."
+source: "https://docs.langchain.com/langsmith/smith-api/model-price-map/delete-a-model-price"
 category: "docs"
-tags: [docs, langsmith, smith-api, model-price-map, update-model-price]
+tags: [docs, langsmith, smith-api, model-price-map, delete-a-model-price]
 ---
 
-# Update model price
+# Delete a model price
+
+> Delete a custom model price from this workspace.
+
+Only the workspace's own entries can be deleted; LangSmith default entries
+cannot. Deleting an ID that does not belong to the workspace succeeds
+without changing anything. Existing run costs are not recomputed.
 
 ## OpenAPI
 
-**/langsmith/langsmith-platform-openapi.json put /api/v1/model-price-map/{id}**
+**/langsmith/langsmith-platform-openapi.json delete /api/v1/model-price-map/{id}**
 
 ````yaml
 openapi: 3.1.0
@@ -173,11 +179,20 @@ tags:
   - name: usage
 paths:
   /api/v1/model-price-map/{id}:
-    put:
+    delete:
       tags:
         - model-price-map
-      summary: Update model price
-      operationId: update_model_price_api_v1_model_price_map__id__put
+      summary: Delete a model price
+      description: >-
+        Delete a custom model price from this workspace.
+
+        Only the workspace's own entries can be deleted; LangSmith default
+        entries
+
+        cannot. Deleting an ID that does not belong to the workspace succeeds
+
+        without changing anything. Existing run costs are not recomputed.
+      operationId: delete_model_price_api_v1_model_price_map__id__delete
       parameters:
         - name: id
           in: path
@@ -186,12 +201,6 @@ paths:
             type: string
             format: uuid
             title: Id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ModelPriceMapUpdateSchema'
       responses:
         '200':
           description: Successful Response
@@ -210,83 +219,6 @@ paths:
         - Bearer Auth: []
 components:
   schemas:
-    ModelPriceMapUpdateSchema:
-      properties:
-        name:
-          type: string
-          title: Name
-        start_time:
-          anyOf:
-            - type: string
-              format: date-time
-            - type: 'null'
-          title: Start Time
-        match_path:
-          items:
-            type: string
-          type: array
-          title: Match Path
-          default:
-            - model
-            - model_name
-            - model_id
-            - model_path
-            - endpoint_name
-        match_pattern:
-          type: string
-          title: Match Pattern
-        prompt_cost:
-          anyOf:
-            - type: number
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Prompt Cost
-        completion_cost:
-          anyOf:
-            - type: number
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Completion Cost
-        prompt_cost_details:
-          anyOf:
-            - additionalProperties:
-                anyOf:
-                  - type: number
-                  - type: string
-                    pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-              type: object
-            - type: 'null'
-          title: Prompt Cost Details
-        completion_cost_details:
-          anyOf:
-            - additionalProperties:
-                anyOf:
-                  - type: number
-                  - type: string
-                    pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-              type: object
-            - type: 'null'
-          title: Completion Cost Details
-        provider:
-          anyOf:
-            - type: string
-            - type: 'null'
-          title: Provider
-        prompt_tokens_above:
-          anyOf:
-            - type: integer
-              maximum: 9007199254740991
-              minimum: 0
-            - type: 'null'
-          title: Prompt Tokens Above
-      type: object
-      required:
-        - name
-        - match_pattern
-        - prompt_cost
-        - completion_cost
-      title: ModelPriceMapUpdateSchema
-      description: Model price map update schema.
     HTTPValidationError:
       properties:
         detail:

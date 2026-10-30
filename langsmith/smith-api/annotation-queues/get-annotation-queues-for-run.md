@@ -186,7 +186,9 @@ paths:
           schema:
             type: string
             format: uuid
+            description: ID of the run.
             title: Run Id
+          description: ID of the run.
       responses:
         '200':
           description: Successful Response

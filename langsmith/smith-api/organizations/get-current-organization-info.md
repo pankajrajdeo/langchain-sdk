@@ -269,6 +269,8 @@ components:
           type: boolean
         is_personal:
           type: boolean
+        is_sso_user:
+          type: boolean
         jit_provisioning_enabled:
           type: boolean
         llm_auth_proxy_allowed_urls:
@@ -313,6 +315,12 @@ components:
             - type: 'null'
         member_disabled:
           type: boolean
+        oidc_login_enabled:
+          type: boolean
+          default: false
+        oidc_sso_available:
+          type: boolean
+          default: false
         org_role_id:
           anyOf:
             - type: string
@@ -333,6 +341,9 @@ components:
           type: boolean
         reached_max_workspaces:
           type: boolean
+        restrict_browser_secrets:
+          type: boolean
+          default: false
         scim_group_name_separator:
           type: string
         security_contact:
@@ -370,10 +381,10 @@ components:
           description: Indicates whether this org can provision BYOC data planes.
           type: boolean
         byoc_external_id:
-          readOnly: true
           description: >-
             ByocExternalID is the organization's assigned AWS external ID,
             stored only in org config.
+          readOnly: true
           anyOf:
             - type: string
             - type: 'null'

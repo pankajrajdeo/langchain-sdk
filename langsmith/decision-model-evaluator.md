@@ -20,7 +20,7 @@ This guide shows you how to define a decision model evaluator in the [LangSmith 
 
 > [!NOTE]
 >
-> Decision model evaluators require a LangSmith Plus or Enterprise plan.
+> Decision model evaluators require a LangSmith Plus or Enterprise [plan](https://docs.langchain.com/langsmith/pricing-plans.md). They are not available on [BYOC](byoc.md) deployments.
 
 ## Step 1. Create the evaluator
 
@@ -33,7 +33,7 @@ To create a decision model evaluator:
    * For OpenAI, select **OpenAI** and paste your OpenAI API key. LangSmith stores it as the workspace secret `OPENAI_API_KEY`.
    * For TypeSafe, select **TypeSafe** and paste a key from your TypeSafe account. LangSmith stores it as the workspace secret `TYPESAFE_API_KEY`.
 
-   To store a key under a different name, select **Custom** and enter your own secret name. For more information, see [Add provider secrets](llm-gateway-admin-setup.md#1-add-provider-secrets).
+   To store a key under a different name, select **Custom** and enter your own secret name. For more information, see [Add a provider key](llm-gateway-provider-authentication.md#add-a-provider-key).
 2. In the LangSmith UI, open the **Evaluators** tab of a dataset or tracing project and click **+ Evaluator**.
 3. In the **Configure Evaluator** panel, select **Decision Model Evaluator** under **Create from scratch**.
 4. Name your evaluator.

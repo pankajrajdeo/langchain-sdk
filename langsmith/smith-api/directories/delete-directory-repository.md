@@ -199,42 +199,36 @@ paths:
           name: repo_type
           in: query
           schema:
+            type: string
             enum:
               - agent
               - skill
-            type: string
             title: Repo Type
       responses:
         '204':
           description: No Content
         '400':
-          description: Bad Request
+          description: invalid repo_type, or no owner given for an unauthenticated request
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/directory.errorResponse'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/directory.errorResponse'
         '403':
-          description: Forbidden
+          description: the caller may not delete this repository
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/directory.errorResponse'
         '404':
-          description: Not Found
+          description: the repository does not exist, or is not of the requested repo_type
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/directory.errorResponse'
         '500':
           description: Internal Server Error
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/directory.errorResponse'
       security:

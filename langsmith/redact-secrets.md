@@ -14,7 +14,7 @@ When your application handles API keys, tokens, or other credentials, those valu
 
 > [!NOTE]
 >
-> This page covers redacting secrets (API keys, tokens, credentials) from trace data via the SDK. For redacting personally identifiable information (PII) such as emails, names, or SSNs, see [Prevent logging of sensitive data in traces](mask-inputs-outputs.md). To redact secrets at the LLM Gateway layer, see [Data policy](llm-gateway-data-policy.md).
+> This page covers redacting secrets (API keys, tokens, credentials) from trace data via the SDK. For redacting personally identifiable information (PII) such as emails, names, or SSNs, see [Prevent logging of sensitive data in traces](mask-inputs-outputs.md). To redact secrets at the LLM Gateway layer, see [Data policies](llm-gateway-data-policy.md).
 >
 > The coding agent tracing plugins for [Claude Code](trace-claude-code.md#secret-redaction), [OpenAI Codex](trace-with-codex.md#secret-redaction), and [Cursor](trace-with-cursor.md#secret-redaction) apply the preset below by default. No SDK code is required for those.
 

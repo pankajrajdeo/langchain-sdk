@@ -16,25 +16,27 @@ tags: [docs, langsmith, llm-gateway-direct-model-access]
 
 Direct model access exposes each provider API through a provider-specific gateway path. The gateway still handles authentication, provider secrets, policies, and tracing, but it does not translate the request and response into another provider's API format.
 
-Prefer [standard model access](llm-gateway-quickstart.md) for model calls across providers. Use direct model access when you want to access a provider's API directly, preserve its native request and response behavior, and avoid the gateway's standardization layer.
+Direct model access is the path [LangChain and Deep Agents](#configure-langchain-and-deep-agents) use by default. For other clients, use it when you want a provider's native request and response behavior. To call models across providers in one API format, use the [standard endpoint](llm-gateway-api-formats.md) instead.
 
 ## Choose a provider path
 
-Append a provider path to your regional gateway base URL:
+Append a provider path to your [regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway) base URL, for example `https://eu.gateway.smith.langchain.com/anthropic` for direct Anthropic access in GCP EU:
 
-| Provider | Gateway path | Secret name |
-| - | - | - |
-| Anthropic | `/anthropic` | `ANTHROPIC_API_KEY` |
-| AWS Bedrock | `/bedrock` | `AWS_BEARER_TOKEN_BEDROCK` |
-| Azure Foundry | `/azure` | `AZURE_FOUNDRY_API_KEY`, `AZURE_FOUNDRY_RESOURCE_NAME`. For Entra ID, see [Provider authentication](llm-gateway-provider-authentication.md#configure-azure-foundry). |
-| Baseten | `/baseten` | `BASETEN_API_KEY` |
-| Fireworks | `/fireworks` | `FIREWORKS_API_KEY` |
-| Google Gemini | `/gemini` | `GOOGLE_API_KEY` |
-| Gemini Enterprise Agent Platform | `/vertex` | `VERTEX_SERVICE_ACCOUNT_JSON` |
-| OpenAI | `/openai` | `OPENAI_API_KEY` |
-| ScaleDown | `/scaledown` | `SCALEDOWN_API_KEY` |
-| TypeSafe | `/typesafe` | `TYPESAFE_API_KEY` |
-| xAI | `/xai` | `XAI_API_KEY` |
+| Provider | Gateway path |
+| - | - |
+| Anthropic | `/anthropic` |
+| AWS Bedrock | `/bedrock` |
+| Azure Foundry | `/azure` |
+| Baseten | `/baseten` |
+| Fireworks | `/fireworks` |
+| Google Gemini | `/gemini` |
+| Gemini Enterprise Agent Platform | `/vertex` |
+| OpenAI | `/openai` |
+| ScaleDown | `/scaledown` |
+| TypeSafe | `/typesafe` |
+| xAI | `/xai` |
+
+Each path uses the provider key stored in the caller's workspace. For secret names, see [Provider authentication](llm-gateway-provider-authentication.md#add-a-provider-key).
 
 [Gateway Credits models](llm-gateway-credits.md) use the standard endpoint rather than a provider-specific path. These hosted models require no provider secret of your own.
 
@@ -56,7 +58,7 @@ export GEMINI_API_KEY="$LANGSMITH_API_KEY"
 export GOOGLE_API_KEY="$LANGSMITH_API_KEY"
 ```
 
-The gateway resolves the actual provider key from your workspace's Provider Secrets, so the provider key does not need to be stored locally.
+The gateway resolves the actual provider key provider secrets, so the provider key does not need to be stored locally.
 
 **OpenAI SDK**
 
@@ -106,17 +108,23 @@ export LANGSMITH_API_KEY="lsv2_..."
 export LANGSMITH_GATEWAY="true"
 ```
 
-Each supported integration appends its own provider path, so `ChatAnthropic` calls `https://gateway.smith.langchain.com/anthropic` and `ChatOpenAI` calls `https://gateway.smith.langchain.com/openai/v1`. To route requests through the standard endpoint instead, see the [LLM Gateway quickstart](llm-gateway-quickstart.md#send-a-request).
+Deep Agents Code also requires `LANGSMITH_GATEWAY_API_KEY`. Set it to the same key:
 
-## Use a regional gateway
+```bash
+export LANGSMITH_GATEWAY_API_KEY="$LANGSMITH_API_KEY"
+```
 
-If your LangSmith account is on a regional instance, use the corresponding [regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway) and append the provider path. For example, use `https://eu.gateway.smith.langchain.com/anthropic` for direct Anthropic access in GCP EU.
+> [!NOTE]
+>
+> `LANGSMITH_GATEWAY` support requires these minimum Python package versions: `langchain-anthropic>=1.5.1`, `langchain-baseten>=0.2.3`, `langchain-fireworks>=1.5.1`, `langchain-google-genai>=4.3.2`, and `langchain-openai>=1.4.1`.
+
+Each supported integration appends its own provider path, so `ChatAnthropic` calls `https://gateway.smith.langchain.com/anthropic` and `ChatOpenAI` calls `https://gateway.smith.langchain.com/openai/v1`. To route requests through the standard endpoint instead, see [Send your first LLM Gateway request](llm-gateway-first-request.md#send-a-request-from-your-code).
 
 ## See also
 
-* [Quickstart](llm-gateway-quickstart.md): use the standard API to call models across providers.
-* [Admin setup](llm-gateway-admin-setup.md): configure provider secrets and access.
-* [Traces, Engine, and access control](llm-gateway-access.md): see where gateway traces appear and who can view them.
+* [Send your first LLM Gateway request](llm-gateway-first-request.md): use the standard API to call models across providers.
+* [Set up the LLM Gateway](llm-gateway-admin-setup.md): configure provider secrets and access.
+* [View LLM Gateway traces](llm-gateway-traces.md): see where gateway traces appear and who can view them.
 
 ***
 

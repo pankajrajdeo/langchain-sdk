@@ -30,6 +30,8 @@ tags: [reference, langchain-core, messages]
 - [`convert_to_openai_data_block()`](https://reference.langchain.com/python/langchain-core/messages/convert_to_openai_data_block)
 - [`convert_to_openai_image_block()`](https://reference.langchain.com/python/langchain-core/messages/convert_to_openai_image_block)
 - [`is_data_content_block()`](https://reference.langchain.com/python/langchain-core/messages/is_data_content_block)
+- [`add_notification_metadata()`](https://reference.langchain.com/python/langchain-core/messages/add_notification_metadata)
+- [`get_notification_metadata()`](https://reference.langchain.com/python/langchain-core/messages/get_notification_metadata)
 - [`convert_to_messages()`](https://reference.langchain.com/python/langchain-core/messages/convert_to_messages)
 - [`convert_to_openai_messages()`](https://reference.langchain.com/python/langchain-core/messages/convert_to_openai_messages)
 - [`filter_messages()`](https://reference.langchain.com/python/langchain-core/messages/filter_messages)
@@ -41,4 +43,4 @@ tags: [reference, langchain-core, messages]
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/6419339aa163a49f32d9b80ff20d6adc3b446d49/libs/core/langchain_core/messages/__init__.py)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/864754c5e293fba981302408fa3e2cf2f5f2d889/libs/core/langchain_core/messages/__init__.py)

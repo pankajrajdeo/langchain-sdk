@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 547 pages and 0 subdirectories under blog."
+description: "Index of 549 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-547 pages here.
+549 pages here.
 
 ## Files
 
@@ -66,6 +66,7 @@ tags: [index, blog]
 - [Beyond RAG: Implementing Agent Search with LangGraph for Smarter Knowledge Retrieval](beyond-rag-implementing-agent-search-with-langgraph-for-smarter-knowledge-retrieval.md) - Learn how to implement Agent Search with LangGraph. Best practices for parallelization, state management, and building scalable enterprise AI agents.
 - [Beyond Text: Making GenAI Applications Accessible to All](beyond-text-making-genai-applications-accessible-to-all.md) - Design accessible GenAI interfaces bridging LLM capabilities and user experience. Practical UX strategies for shortcuts, feedback, and anthropomorphism.
 - [Bringing Free OSS Models to the Playground with Fireworks AI](bringing-free-oss-models-to-the-playground-with-fireworks-ai.md) - Try open-source LLMs like Llama 2 free in LangSmith Playground with Fireworks AI integration. Test prompts instantly without API keys or coding required.
+- [Browser Use in Managed Deep Agents](browser-use-in-managed-deep-agents.md) - Managed Deep Agents now runs a browser for your agent, with tools tuned for context-efficient browser use and a handoff so you can sign in yourself.
 - [Building an auditable VC research agent with the Perplexity Agent API and LangGraph](build-an-auditable-vc-research-agent-with-the-perplexity-agent-api-langgraph-and-langsmith.md) - Build a VC research agent that drafts a cited investment memo in about 90 seconds for $0.40, using the Perplexity Agent API, LangGraph, and LangSmith evals.
 - [Building a 100x Cheaper Trace Judge with Fireworks](building-a-100x-cheaper-trace-judge-with-fireworks.md) - LangChain and Fireworks fine-tuned an open model to mine perceived error signals from production traces, matching frontier model performance at a fraction of the cost.
 - [Building a company due diligence agent with Deep Agents, LangSmith and Parallel](building-a-company-due-diligence-agent-with-deep-agents-langsmith-and-parallel.md) - A cookbook for automating company due diligence: Deep Agents orchestrates five research subagents and Parallel&#39;s Task API returns cited, sourced findings.
@@ -400,6 +401,7 @@ tags: [index, blog]
 - [How Lyft Built a Self-Serve AI Agent Platform for Customer Support with LangGraph and LangSmith](lyft-built-a-self-serve-ai-agent-platform-for-customer-support-with-langgraph-and-langsmith.md) - Lyft used LangGraph and LangSmith to build a self-serve AI agent platform for customer support, cutting agent development from months to weeks.
 - [Making Data Ingestion Production Ready: a LangChain-Powered Airbyte Destination](making-data-ingestion-production-ready-a-langchain-powered-airbyte-destination.md) - Scale retrieval apps to production with LangChain&#39;s Airbyte integration. Automate data ingestion with scheduling, text splitting, and 50+ embeddings.
 - [Making it easier to build human-in-the-loop agents with interrupt](making-it-easier-to-build-human-in-the-loop-agents-with-interrupt.md) - Build production-ready AI agents with human oversight using LangGraph&#39;s interrupt function. Pause execution, review actions, and resume seamlessly.
+- [Managed Deep Agents v0.10: Browser use and asynchronous subagents](managed-deep-agents-browser-use-and-asynchronous-subagents.md) - Managed Deep Agents v0.10 adds browser use, so agents can work on sites with no API and hand you the window to sign in, and async subagents for background work.
 - [Managed Deep Agents is now in Public Beta](managed-deep-agents-is-now-in-public-beta.md) - Deploy Deep Agents to a managed LangSmith runtime with durable execution, memory, sandboxes, channels, evals, and production-ready infrastructure.
 - [Managed Deep Agents v0.9: schedules, per-run configuration, and Slack reactions](managed-deep-agents-schedules-per-run-configuration-slack.md) - LangChain just released new capabilities in Managed Deep Agents. Agents can now schedule follow-ups, reconfigure themselves on every run, and react to Slack messages.
 - [March 2026: LangChain Newsletter](march-2026-langchain-newsletter.md) - It feels like spring has sprung here, and so has a new NVIDIA integration, ticket sales for Interrupt 2026, and announcing LangSmith Fleet (formerly Agent Builder).

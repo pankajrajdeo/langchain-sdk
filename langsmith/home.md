@@ -60,6 +60,8 @@ Once your account and API key are ready, set up tracing:
 >
 > Automatically detect recurring issues in your traces, diagnose their root cause, and resolve them with LangSmith Engine.
 
+If your applications call models through the [LLM Gateway](llm-gateway.md), the gateway traces every call itself, with no tracing setup in your code. For where those traces appear and what they record, see [View LLM Gateway traces](llm-gateway-traces.md).
+
 For terminology and core concepts, refer to [Observability concepts](observability-concepts.md). For trace pricing, retention, and limits, see [Usage and billing](usage-and-billing.md).
 
 > [!NOTE]

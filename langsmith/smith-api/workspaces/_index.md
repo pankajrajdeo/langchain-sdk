@@ -26,7 +26,7 @@ tags: [index, langsmith, smith-api, workspaces]
 - [Delete tag key](delete-tag-key.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/tag-keys/{tag_key_id}
 - [Delete tag value](delete-tag-value.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values/{tag_value_id}
 - [Delete tagging](delete-tagging.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/taggings/{tagging_id}
-- [Delete workspace](delete-workspace.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/{workspace_id}
+- [Delete workspace](delete-workspace.md) - Delete a workspace and its data.
 - [Get current active workspace members](get-current-active-workspace-members.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/members/active
 - [Get current pending workspace members](get-current-pending-workspace-members.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/members/pending
 - [Get current workspace encrypted secrets](get-current-workspace-encrypted-secrets.md) - Get encrypted workspace secrets for use with Fleet and external services.
@@ -48,7 +48,7 @@ tags: [index, langsmith, smith-api, workspaces]
 - [List workspaces](list-workspaces.md) - Get all workspaces visible to this auth in the current org. Does not create a new workspace/org.
 - [Patch current workspace member](patch-current-workspace-member.md) - /langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/current/members/{identity_id}
 - [Patch current workspace pending member](patch-current-workspace-pending-member.md) - Update the role on a pending workspace member invite.
-- [Patch workspace](patch-workspace.md) - Update a workspace.
+- [Patch workspace](patch-workspace.md) - Rename a workspace in the current organization.
 - [Put current workspace secret](put-current-workspace-secret.md) - Create or update a workspace secret and the hosts it may be sent to.
 - [Update tag key](update-tag-key.md) - /langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/current/tag-keys/{tag_key_id}
 - [Update tag value](update-tag-value.md) - /langsmith/langsmith-platform-openapi.json patch /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values/{tag_value_id}

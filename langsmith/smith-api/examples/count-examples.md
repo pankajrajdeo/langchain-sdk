@@ -1,6 +1,6 @@
 ---
 title: "Count examples"
-description: "Count all examples by query params"
+description: "Count the examples that match the filters."
 source: "https://docs.langchain.com/langsmith/smith-api/examples/count-examples"
 category: "docs"
 tags: [docs, langsmith, smith-api, examples, count-examples]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, examples, count-examples]
 
 # Count examples
 
-> Count all examples by query params
+> Count the examples that match the filters.
 
 ## OpenAPI
 
@@ -179,7 +179,7 @@ paths:
       tags:
         - examples
       summary: Count examples
-      description: Count all examples by query params
+      description: Count the examples that match the filters.
       operationId: count_examples_api_v1_examples_count_get
       parameters:
         - name: id
@@ -192,7 +192,9 @@ paths:
                   format: uuid
                 type: array
               - type: 'null'
+            description: Only count examples with these IDs.
             title: Id
+          description: Only count examples with these IDs.
         - name: as_of
           in: query
           required: false
@@ -216,7 +218,9 @@ paths:
             anyOf:
               - type: string
               - type: 'null'
+            description: JSON object. Only count examples whose metadata contains it.
             title: Metadata
+          description: JSON object. Only count examples whose metadata contains it.
         - name: full_text_contains
           in: query
           required: false
@@ -226,7 +230,13 @@ paths:
                   type: string
                 type: array
               - type: 'null'
+            description: >-
+              Only count examples whose inputs or outputs contain every one of
+              these terms, ignoring case.
             title: Full Text Contains
+          description: >-
+            Only count examples whose inputs or outputs contain every one of
+            these terms, ignoring case.
         - name: splits
           in: query
           required: false
@@ -236,7 +246,9 @@ paths:
                   type: string
                 type: array
               - type: 'null'
+            description: Only count examples in any of these splits.
             title: Splits
+          description: Only count examples in any of these splits.
         - name: dataset
           in: query
           required: false
@@ -245,7 +257,9 @@ paths:
               - type: string
                 format: uuid
               - type: 'null'
+            description: Only count examples in this dataset.
             title: Dataset
+          description: Only count examples in this dataset.
         - name: filter
           in: query
           required: false
@@ -253,7 +267,9 @@ paths:
             anyOf:
               - type: string
               - type: 'null'
+            description: Filter expression the examples must match.
             title: Filter
+          description: Filter expression the examples must match.
       responses:
         '200':
           description: Successful Response

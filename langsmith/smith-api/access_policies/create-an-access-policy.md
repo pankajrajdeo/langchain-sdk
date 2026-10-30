@@ -328,10 +328,18 @@ components:
     authz_internal.Permission:
       type: string
       enum:
+        - agent-auth-connections:create
+        - agent-auth-connections:delete
+        - agent-auth-connections:read
+        - agent-auth-connections:revoke
+        - agent-auth-connections:update
+        - agent-auth-credentials:use
         - annotation-queues:create
         - annotation-queues:delete
         - annotation-queues:read
         - annotation-queues:update
+        - bulk-exports:manage
+        - bulk-exports:read
         - charts:create
         - charts:delete
         - charts:read
@@ -349,116 +357,49 @@ components:
         - datasets:share
         - datasets:tag-on-create
         - datasets:update
+        - deployments:cancel-runs
         - deployments:create
         - deployments:delete
         - deployments:read
         - deployments:update
-        - deployments:cancel-runs
+        - experiments:run
+        - feedback-configs:create
+        - feedback-configs:delete
+        - feedback-configs:manage-enforced
+        - feedback-configs:update
         - feedback:create
         - feedback:delete
         - feedback:read
         - feedback:update
-        - feedback-configs:create
-        - feedback-configs:update
-        - feedback-configs:delete
-        - feedback-configs:manage-enforced
-        - experiments:run
+        - fleet-agents:create
+        - fleet-agents:delete
+        - fleet-agents:invoke
+        - fleet-agents:read
+        - fleet-agents:update
+        - fleet-skills:create
+        - fleet-skills:delete
+        - fleet-skills:read
+        - fleet-skills:update
+        - fleet:read-admin-config
+        - fleet:write-admin-config
+        - functions:create
+        - functions:delete
+        - functions:update
+        - gateway:invoke
         - issues:create
         - issues:delete
         - issues:read
         - issues:update
-        - projects:create
-        - projects:delete
-        - projects:read
-        - projects:tag-on-create
-        - projects:update
-        - projects:increase-trace-tier
-        - projects:decrease-trace-tier
-        - prompts:create
-        - prompts:delete
-        - prompts:read
-        - prompts:tag-on-create
-        - prompts:update
-        - prompts:share
-        - rules:create
-        - rules:delete
-        - rules:read
-        - rules:update
-        - rules:configure-retention
-        - runs:create
-        - runs:read
-        - runs:read-inputs
-        - runs:read-outputs
-        - runs:read-stats
-        - runs:share
-        - runs:delete
-        - model-price-map:create
-        - model-price-map:read
-        - model-price-map:update
-        - model-price-map:delete
-        - sandboxes:create
-        - sandboxes:delete
-        - sandboxes:read
-        - sandboxes:tag-on-create
-        - sandboxes:update
-        - sandboxes:exec
-        - snapshots:create
-        - snapshots:delete
-        - snapshots:update
-        - functions:create
-        - functions:delete
-        - functions:update
-        - workspaces:settings:manage
-        - workspaces:retention:manage
-        - workspaces:usage-controls:manage
-        - workspaces:security-policy:manage
-        - workspaces:resource-tags:manage
-        - workspaces:integrations:manage
-        - workspaces:sandbox-proxy-profiles:manage
-        - workspaces:credentials:manage
-        - workspaces:access-control:assign-restricted
-        - workspaces:credentials:read-metadata
-        - workspaces:integrations:read
-        - workspaces:fleet-feedback:read-all
-        - workspaces:delete
-        - workspaces:credentials:use
-        - workspaces:manage-members
-        - workspaces:manage-secrets
-        - workspaces:manage
-        - workspaces:manage-model-configs
-        - workspaces:manage-keys
-        - workspaces:tracing-keys:create
-        - workspaces:read
-        - alerts:create
-        - alerts:update
-        - alerts:delete
-        - alerts:read
-        - agent-auth-connections:read
-        - agent-auth-connections:create
-        - agent-auth-connections:update
-        - agent-auth-connections:delete
-        - agent-auth-connections:revoke
-        - agent-auth-credentials:use
-        - bulk-exports:read
-        - bulk-exports:manage
         - mcp-servers:create
         - mcp-servers:create-personal
         - mcp-servers:delete
         - mcp-servers:invoke
         - mcp-servers:read
         - mcp-servers:update
-        - gateway:invoke
-        - fleet:read-admin-config
-        - fleet:write-admin-config
-        - fleet-agents:create
-        - fleet-agents:read
-        - fleet-agents:invoke
-        - fleet-agents:update
-        - fleet-agents:delete
-        - fleet-skills:create
-        - fleet-skills:read
-        - fleet-skills:update
-        - fleet-skills:delete
+        - model-price-map:create
+        - model-price-map:delete
+        - model-price-map:read
+        - model-price-map:update
         - organization:access-control:manage
         - organization:audit-logs:read
         - organization:authentication:manage
@@ -474,24 +415,90 @@ components:
         - organization:installation-usage:manage
         - organization:integrations:manage
         - organization:integrations:read
+        - organization:manage
+        - organization:manage-model-configs
+        - organization:manage-model-secrets
         - organization:members:manage
+        - organization:pats:create
+        - organization:pats:manage
+        - organization:pats:read
+        - organization:read
+        - organization:read-metadata
         - organization:retention:manage
         - organization:security-policy:manage
         - organization:service-key:manage
         - organization:settings:manage
         - organization:usage-controls:manage
         - organization:workspaces:manage
-        - organization:pats:create
-        - organization:read
-        - organization:read-metadata
-        - organization:manage
-        - organization:manage-model-configs
-        - organization:manage-model-secrets
+        - projects:create
+        - projects:decrease-trace-tier
+        - projects:delete
+        - projects:increase-trace-tier
+        - projects:read
+        - projects:tag-on-create
+        - projects:update
+        - prompts:create
+        - prompts:delete
+        - prompts:read
+        - prompts:share
+        - prompts:tag
+        - prompts:tag-on-create
+        - prompts:update
+        - rules:configure-retention
+        - rules:create
+        - rules:delete
+        - rules:read
+        - rules:update
+        - runs:create
+        - runs:delete
+        - runs:read
+        - runs:read-inputs
+        - runs:read-outputs
+        - runs:read-stats
+        - runs:share
+        - sandboxes:create
+        - sandboxes:delete
+        - sandboxes:exec
+        - sandboxes:read
+        - sandboxes:tag-on-create
+        - sandboxes:update
+        - snapshots:create
+        - snapshots:delete
+        - snapshots:update
+        - workspaces:access-control:assign-restricted
+        - workspaces:credentials:manage
+        - workspaces:credentials:read-metadata
+        - workspaces:credentials:use
+        - workspaces:delete
+        - workspaces:fleet-feedback:read-all
+        - workspaces:integrations:manage
+        - workspaces:integrations:read
+        - workspaces:manage
+        - workspaces:manage-keys
+        - workspaces:manage-members
+        - workspaces:manage-model-configs
+        - workspaces:manage-secrets
+        - workspaces:read
+        - workspaces:resource-tags:manage
+        - workspaces:retention:manage
+        - workspaces:sandbox-proxy-profiles:manage
+        - workspaces:security-policy:manage
+        - workspaces:settings:manage
+        - workspaces:tracing-keys:create
+        - workspaces:usage-controls:manage
       x-enum-varnames:
+        - AgentAuthConnectionsCreate
+        - AgentAuthConnectionsDelete
+        - AgentAuthConnectionsRead
+        - AgentAuthConnectionsRevoke
+        - AgentAuthConnectionsUpdate
+        - AgentAuthCredentialsUse
         - AnnotationQueuesCreate
         - AnnotationQueuesDelete
         - AnnotationQueuesRead
         - AnnotationQueuesUpdate
+        - BulkExportsManage
+        - BulkExportsRead
         - ChartsCreate
         - ChartsDelete
         - ChartsRead
@@ -509,116 +516,49 @@ components:
         - DatasetsShare
         - DatasetsTagOnCreate
         - DatasetsUpdate
+        - DeploymentsCancelRuns
         - DeploymentsCreate
         - DeploymentsDelete
         - DeploymentsRead
         - DeploymentsUpdate
-        - DeploymentsCancelRuns
+        - ExperimentsRun
+        - FeedbackConfigsCreate
+        - FeedbackConfigsDelete
+        - FeedbackConfigsManageEnforced
+        - FeedbackConfigsUpdate
         - FeedbackCreate
         - FeedbackDelete
         - FeedbackRead
         - FeedbackUpdate
-        - FeedbackConfigsCreate
-        - FeedbackConfigsUpdate
-        - FeedbackConfigsDelete
-        - FeedbackConfigsManageEnforced
-        - ExperimentsRun
+        - FleetAgentsCreate
+        - FleetAgentsDelete
+        - FleetAgentsInvoke
+        - FleetAgentsRead
+        - FleetAgentsUpdate
+        - FleetSkillsCreate
+        - FleetSkillsDelete
+        - FleetSkillsRead
+        - FleetSkillsUpdate
+        - FleetReadAdminConfig
+        - FleetWriteAdminConfig
+        - FunctionsCreate
+        - FunctionsDelete
+        - FunctionsUpdate
+        - GatewayInvoke
         - IssuesCreate
         - IssuesDelete
         - IssuesRead
         - IssuesUpdate
-        - ProjectsCreate
-        - ProjectsDelete
-        - ProjectsRead
-        - ProjectsTagOnCreate
-        - ProjectsUpdate
-        - ProjectsIncreaseTraceTier
-        - ProjectsDecreaseTraceTier
-        - PromptsCreate
-        - PromptsDelete
-        - PromptsRead
-        - PromptsTagOnCreate
-        - PromptsUpdate
-        - PromptsShare
-        - RulesCreate
-        - RulesDelete
-        - RulesRead
-        - RulesUpdate
-        - RulesConfigureRetention
-        - RunsCreate
-        - RunsRead
-        - RunsReadInputs
-        - RunsReadOutputs
-        - RunsReadStats
-        - RunsShare
-        - RunsDelete
-        - ModelPriceMapCreate
-        - ModelPriceMapRead
-        - ModelPriceMapUpdate
-        - ModelPriceMapDelete
-        - SandboxesCreate
-        - SandboxesDelete
-        - SandboxesRead
-        - SandboxesTagOnCreate
-        - SandboxesUpdate
-        - SandboxesExec
-        - SnapshotsCreate
-        - SnapshotsDelete
-        - SnapshotsUpdate
-        - FunctionsCreate
-        - FunctionsDelete
-        - FunctionsUpdate
-        - WorkspacesSettingsManage
-        - WorkspacesRetentionManage
-        - WorkspacesUsageControlsManage
-        - WorkspacesSecurityPolicyManage
-        - WorkspacesResourceTagsManage
-        - WorkspacesIntegrationsManage
-        - WorkspacesSandboxProxyProfilesManage
-        - WorkspacesCredentialsManage
-        - WorkspacesAccessControlAssignRestricted
-        - WorkspacesCredentialsReadMetadata
-        - WorkspacesIntegrationsRead
-        - WorkspacesFleetFeedbackReadAll
-        - WorkspacesDelete
-        - WorkspacesCredentialsUse
-        - WorkspacesManageMembers
-        - WorkspacesManageSecrets
-        - WorkspacesManage
-        - WorkspacesManageModelConfigs
-        - WorkspacesManageKeys
-        - WorkspacesTracingKeysCreate
-        - WorkspacesRead
-        - AlertsCreate
-        - AlertsUpdate
-        - AlertsDelete
-        - AlertsRead
-        - AgentAuthConnectionsRead
-        - AgentAuthConnectionsCreate
-        - AgentAuthConnectionsUpdate
-        - AgentAuthConnectionsDelete
-        - AgentAuthConnectionsRevoke
-        - AgentAuthCredentialsUse
-        - BulkExportsRead
-        - BulkExportsManage
         - McpServersCreate
         - McpServersCreatePersonal
         - McpServersDelete
         - McpServersInvoke
         - McpServersRead
         - McpServersUpdate
-        - GatewayInvoke
-        - FleetReadAdminConfig
-        - FleetWriteAdminConfig
-        - FleetAgentsCreate
-        - FleetAgentsRead
-        - FleetAgentsInvoke
-        - FleetAgentsUpdate
-        - FleetAgentsDelete
-        - FleetSkillsCreate
-        - FleetSkillsRead
-        - FleetSkillsUpdate
-        - FleetSkillsDelete
+        - ModelPriceMapCreate
+        - ModelPriceMapDelete
+        - ModelPriceMapRead
+        - ModelPriceMapUpdate
         - OrganizationAccessControlManage
         - OrganizationAuditLogsRead
         - OrganizationAuthenticationManage
@@ -634,19 +574,77 @@ components:
         - OrganizationInstallationUsageManage
         - OrganizationIntegrationsManage
         - OrganizationIntegrationsRead
+        - OrganizationManage
+        - OrganizationManageModelConfigs
+        - OrganizationManageModelSecrets
         - OrganizationMembersManage
+        - OrganizationPATsCreate
+        - OrganizationPATsManage
+        - OrganizationPATsRead
+        - OrganizationRead
+        - OrganizationReadMetadata
         - OrganizationRetentionManage
         - OrganizationSecurityPolicyManage
         - OrganizationServiceKeyManage
         - OrganizationSettingsManage
         - OrganizationUsageControlsManage
         - OrganizationWorkspacesManage
-        - OrganizationPATsCreate
-        - OrganizationRead
-        - OrganizationReadMetadata
-        - OrganizationManage
-        - OrganizationManageModelConfigs
-        - OrganizationManageModelSecrets
+        - ProjectsCreate
+        - ProjectsDecreaseTraceTier
+        - ProjectsDelete
+        - ProjectsIncreaseTraceTier
+        - ProjectsRead
+        - ProjectsTagOnCreate
+        - ProjectsUpdate
+        - PromptsCreate
+        - PromptsDelete
+        - PromptsRead
+        - PromptsShare
+        - PromptsTag
+        - PromptsTagOnCreate
+        - PromptsUpdate
+        - RulesConfigureRetention
+        - RulesCreate
+        - RulesDelete
+        - RulesRead
+        - RulesUpdate
+        - RunsCreate
+        - RunsDelete
+        - RunsRead
+        - RunsReadInputs
+        - RunsReadOutputs
+        - RunsReadStats
+        - RunsShare
+        - SandboxesCreate
+        - SandboxesDelete
+        - SandboxesExec
+        - SandboxesRead
+        - SandboxesTagOnCreate
+        - SandboxesUpdate
+        - SnapshotsCreate
+        - SnapshotsDelete
+        - SnapshotsUpdate
+        - WorkspacesAccessControlAssignRestricted
+        - WorkspacesCredentialsManage
+        - WorkspacesCredentialsReadMetadata
+        - WorkspacesCredentialsUse
+        - WorkspacesDelete
+        - WorkspacesFleetFeedbackReadAll
+        - WorkspacesIntegrationsManage
+        - WorkspacesIntegrationsRead
+        - WorkspacesManage
+        - WorkspacesManageKeys
+        - WorkspacesManageMembers
+        - WorkspacesManageModelConfigs
+        - WorkspacesManageSecrets
+        - WorkspacesRead
+        - WorkspacesResourceTagsManage
+        - WorkspacesRetentionManage
+        - WorkspacesSandboxProxyProfilesManage
+        - WorkspacesSecurityPolicyManage
+        - WorkspacesSettingsManage
+        - WorkspacesTracingKeysCreate
+        - WorkspacesUsageControlsManage
     authz_internal.AbacAttributeName:
       type: string
       enum:

@@ -1,6 +1,6 @@
 ---
 title: "Group runs"
-description: "Get runs grouped by an expression"
+description: "Deprecated; sunset January 31, 2027. Use POST /api/v2/threads/query to query threads instead."
 source: "https://docs.langchain.com/langsmith/smith-api/run/group-runs"
 category: "docs"
 tags: [docs, langsmith, smith-api, run, group-runs]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, run, group-runs]
 
 # Group runs
 
-> Get runs grouped by an expression
+> Deprecated; sunset January 31, 2027. Use POST /api/v2/threads/query to query threads instead.
 
 ## OpenAPI
 
@@ -179,7 +179,9 @@ paths:
       tags:
         - run
       summary: Group runs
-      description: Get runs grouped by an expression
+      description: >-
+        Deprecated; sunset January 31, 2027. Use POST /api/v2/threads/query to
+        query threads instead.
       operationId: group_runs_api_v1_runs_group_post
       parameters:
         - name: accept
@@ -208,6 +210,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      deprecated: true
       security:
         - API Key: []
         - Tenant ID: []

@@ -256,6 +256,10 @@ components:
               format: date-time
             - type: 'null'
           title: Agent Monitoring Viewed At
+        get_started_path:
+          anyOf:
+            - $ref: '#/components/schemas/GetStartedPath'
+            - type: 'null'
         created_at:
           type: string
           format: date-time
@@ -271,6 +275,12 @@ components:
         - created_at
         - updated_at
       title: UserOnboardingStateResponse
+    GetStartedPath:
+      type: string
+      enum:
+        - BUILD
+        - CONNECT
+      title: GetStartedPath
   securitySchemes:
     Bearer Auth:
       type: http

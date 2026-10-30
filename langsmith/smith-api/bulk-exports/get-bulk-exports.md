@@ -253,6 +253,15 @@ components:
             - type: string
             - type: 'null'
           title: Filter
+          description: >-
+            LangSmith filter expression that selects the runs to export. Accepts
+            the function-style syntax, for example eq(run_type, "llm"), and, on
+            LangSmith Cloud and self-hosted versions that support it, the v2
+            syntax, for example run_type:llm.
+
+            See
+            https://docs.langchain.com/langsmith/trace-query-syntax#filter-query-language
+            for syntax.
         format:
           $ref: '#/components/schemas/BulkExportFormat'
           default: Parquet

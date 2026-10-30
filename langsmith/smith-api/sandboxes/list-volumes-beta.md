@@ -1,16 +1,18 @@
 ---
-title: "Read model price map"
-description: "/langsmith/langsmith-platform-openapi.json get /api/v1/model-price-map"
-source: "https://docs.langchain.com/langsmith/smith-api/model-price-map/read-model-price-map"
+title: "List volumes (Beta)"
+description: "Beta: This API is in active development and may change without notice. Requires sandbox volumes to be enabled for your workspace. List the workspace's sandbox volumes with their current attachments."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-volumes-beta"
 category: "docs"
-tags: [docs, langsmith, smith-api, model-price-map, read-model-price-map]
+tags: [docs, langsmith, smith-api, sandboxes, list-volumes-beta]
 ---
 
-# Read model price map
+# List volumes (Beta)
+
+> **Beta:** This API is in active development and may change without notice. Requires sandbox volumes to be enabled for your workspace. List the workspace's sandbox volumes with their current attachments.
 
 ## OpenAPI
 
-**/langsmith/langsmith-platform-openapi.json get /api/v1/model-price-map**
+**/langsmith/langsmith-platform-openapi.json get /api/v2/sandboxes/volumes**
 
 ````yaml
 openapi: 3.1.0
@@ -172,186 +174,138 @@ tags:
     x-hidden: true
   - name: usage
 paths:
-  /api/v1/model-price-map:
+  /api/v2/sandboxes/volumes:
     get:
       tags:
-        - model-price-map
-      summary: Read model price map
-      operationId: read_model_price_map_api_v1_model_price_map_get
+        - sandboxes
+      summary: List volumes (Beta)
+      description: >-
+        **Beta:** This API is in active development and may change without
+        notice. Requires sandbox volumes to be enabled for your workspace. List
+        the workspace's sandbox volumes with their current attachments.
       parameters:
-        - name: offset
+        - description: Number of results per page
+          name: page_size
           in: query
-          required: false
           schema:
+            default: 20
             type: integer
-            minimum: 0
-            title: Offset
-            default: 0
-        - name: limit
+            title: Page Size
+        - description: Opaque pagination cursor from a prior response's next_cursor
+          name: cursor
           in: query
-          required: false
           schema:
-            type: integer
-            maximum: 100
-            minimum: 1
-            title: Limit
-            default: 100
-        - name: q
-          in: query
-          required: false
-          schema:
-            anyOf:
-              - type: string
-                maxLength: 200
-              - type: 'null'
-            title: Q
-        - name: provider
-          in: query
-          required: false
-          schema:
-            anyOf:
-              - type: array
-                items:
-                  type: string
-                  minLength: 1
-                maxItems: 20
-              - type: 'null'
-            description: Only return price maps for these providers (case-insensitive).
-            title: Provider
-          description: Only return price maps for these providers (case-insensitive).
-        - name: sort_by
-          in: query
-          required: false
-          schema:
-            anyOf:
-              - const: start_time
-                type: string
-              - type: 'null'
-            description: Field to sort on. Defaults to match priority order.
-            title: Sort By
-          description: Field to sort on. Defaults to match priority order.
-        - name: sort_order
-          in: query
-          required: false
-          schema:
-            enum:
-              - asc
-              - desc
             type: string
-            description: Sort direction for sort_by. Unset start dates sort last.
-            default: desc
-            title: Sort Order
-          description: Sort direction for sort_by. Unset start dates sort last.
+            title: Cursor
+        - description: Filter by name substring
+          name: name_contains
+          in: query
+          schema:
+            type: string
+            title: Name Contains
       responses:
         '200':
-          description: Successful Response
+          description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ModelPriceMapSchema'
-                title: Response Read Model Price Map Api V1 Model Price Map Get
-        '422':
-          description: Validation Error
+                $ref: '#/components/schemas/sandboxes.VolumeListResponse'
+        '400':
+          description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    ModelPriceMapSchema:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        name:
-          type: string
-          title: Name
-        start_time:
-          anyOf:
-            - type: string
-              format: date-time
-            - type: 'null'
-          title: Start Time
-        tenant_id:
-          anyOf:
-            - type: string
-              format: uuid
-            - type: 'null'
-          title: Tenant Id
-        match_path:
-          items:
-            type: string
-          type: array
-          title: Match Path
-          default:
-            - model
-            - model_name
-            - model_id
-            - model_path
-            - endpoint_name
-        match_pattern:
-          type: string
-          title: Match Pattern
-        prompt_cost:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Prompt Cost
-        completion_cost:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Completion Cost
-        prompt_cost_details:
-          anyOf:
-            - additionalProperties:
-                type: string
-                pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-              type: object
-            - type: 'null'
-          title: Prompt Cost Details
-        completion_cost_details:
-          anyOf:
-            - additionalProperties:
-                type: string
-                pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-              type: object
-            - type: 'null'
-          title: Completion Cost Details
-        provider:
-          anyOf:
-            - type: string
-            - type: 'null'
-          title: Provider
-        prompt_tokens_above:
-          anyOf:
-            - type: integer
-              maximum: 9007199254740991
-              minimum: 0
-            - type: 'null'
-          title: Prompt Tokens Above
+    sandboxes.VolumeListResponse:
       type: object
-      required:
-        - name
-        - match_pattern
-        - prompt_cost
-        - completion_cost
-      title: ModelPriceMapSchema
-      description: Model price map schema.
-    HTTPValidationError:
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.VolumeResponse'
+        next_cursor:
+          description: Cursor for the next page, or null on the last page.
+          anyOf:
+            - type: string
+            - type: 'null'
+    sandboxes.ErrorResponse:
+      type: object
       properties:
         detail:
-          items:
-            type: string
-          type: array
-          title: Detail
+          type: object
+          properties:
+            error:
+              type: string
+            error_id:
+              type: string
+            message:
+              type: string
+    sandboxes.VolumeResponse:
       type: object
-      title: HTTPValidationError
+      properties:
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.VolumeAttachmentResponse'
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        labels:
+          $ref: '#/components/schemas/sandboxes.Labels'
+        name:
+          type: string
+        size_bytes:
+          type: integer
+        source_volume_id:
+          type: string
+        status:
+          type: string
+        status_message:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        updated_by:
+          type: string
+    sandboxes.VolumeAttachmentResponse:
+      type: object
+      properties:
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        sandbox_id:
+          type: string
+        sandbox_name:
+          type: string
+    sandboxes.Labels:
+      type: object
+      additionalProperties:
+        type: string
   securitySchemes:
     API Key:
       type: apiKey

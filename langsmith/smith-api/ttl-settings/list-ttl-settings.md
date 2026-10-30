@@ -245,11 +245,11 @@ components:
       title: TTLSettings
       description: TTL settings model.
     TraceTier:
-      type: string
       enum:
         - longlived
         - shortlived
       title: TraceTier
+      type: string
     ConfiguredBy:
       type: string
       enum:

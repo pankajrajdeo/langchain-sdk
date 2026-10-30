@@ -19,7 +19,7 @@ tags: [index, langsmith, smith-api, threads]
 - [Query single thread stats](query-single-thread-stats.md) - Compute aggregate stats for a single thread (turn count, latency percentiles, token/cost sums, and detail breakdowns) within a project.
 - [Query thread stats](query-thread-stats.md) - GET with body payload — no resources created. Returns aggregate statistics for threads in a tracing project. The response includes the thread counts, run counts, latency percentiles, rates, token...
 - [Query thread traces](query-thread-traces.md) - Retrieve all traces belonging to a specific thread within a project.
-- [Query threads](query-threads.md) - Query threads within a project (session), with cursor-based pagination. Returns threads matching the given time range and optional filters.
+- [Query threads](query-threads.md) - GET with body payload — no resources created. Returns the threads in a tracing project matching the query passed as the request payload. Results are filtered by the given time range and optional...
 - [Read a thread's share state](read-a-threads-share-state.md) - Returns the share token for a thread. The token is omitted when the thread is not shared. Gated on runs:share so the control's state matches the control's permission.
 - [Share a thread](share-a-thread.md) - Mints a public share token for a thread. Idempotent: sharing an already-shared thread returns the existing token.
 - [Stream messages for a public shared thread](stream-messages-for-a-public-shared-thread.md) - Streams the thread's conversation as server-sent events. SSE only.

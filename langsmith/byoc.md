@@ -52,7 +52,8 @@ The following features are supported:
 * **[Prompt engineering](prompt-context-hub.md#prompts)**: Prompts and prompt commits.
 * **[LangSmith Deployment](deployment.md)**: The LangSmith Deployment control plane runs inside your data plane's cluster, so both the agent management layer and your agents run in your VPC.
 * **[Sandboxes](sandboxes.md)**: Usage through the CLI and SDK is identical to Cloud, except that you point at your data plane's endpoint.
-* **[LLM Gateway](llm-gateway.md)**: Call models across providers with one LangSmith API key, with spend, rate limit, and data-protection policies enforced centrally.
+* **[LLM Gateway](llm-gateway.md)**: Call models across providers with one LangSmith API key, with spend, rate limit, and data protection policies enforced centrally.
+* **[LLM auth proxy](llm-auth-proxy-self-hosted.md)**: Enforce your own authentication flows for model invocations so provider credentials are never exposed to end users.
 * **[LangSmith MCP](langsmith-remote-mcp.md)**: Connect MCP-compatible clients to LangSmith to query data.
 * **[Fleet](fleet/index.md)**: Build and run no-code agents from templates, connectors, and channels.
 * **[SmithDB](smithdb-sdk-migration.md)**: The purpose-built observability backend for trace data, persisting to S3 in your account. Data planes created on or after October 21, 2026 run SmithDB only. ClickHouse is deprecated, and support ends in LangSmith v0.19.
@@ -61,7 +62,6 @@ The following features are supported:
 The following features are planned but not yet supported:
 
 * **[Managed Deep Agents](python/managed-deep-agents-overview.md)**: LangChain-hosted deep agents with connectors, channels, and schedules.
-* **[LLM auth proxy](llm-auth-proxy-self-hosted.md)**: Enforce your own authentication flows for model invocations so provider credentials are never exposed to end users.
 
 ## Prerequisites
 

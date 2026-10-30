@@ -186,10 +186,10 @@ paths:
           in: query
           required: true
           schema:
+            type: array
             items:
               type: string
               format: uuid
-            type: array
             title: Session Ids
       responses:
         '200':

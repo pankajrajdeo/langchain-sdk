@@ -1,13 +1,13 @@
 ---
 title: "langsmith/python"
-description: "Index of 31 pages and 0 subdirectories under langsmith/python."
+description: "Index of 32 pages and 0 subdirectories under langsmith/python."
 category: "index"
 tags: [index, langsmith, python]
 ---
 
 # langsmith/python
 
-31 pages here.
+32 pages here.
 
 ## Files
 
@@ -34,7 +34,7 @@ tags: [index, langsmith, python]
 - [Managed Deep Agents](managed-deep-agents-overview.md) - Build your agent as a directory of files while LangSmith runs the harness and runtime.
 - [Managed Deep Agents project structure](managed-deep-agents-project-structure.md) - Understand the project layout for Managed Deep Agents.
 - [Managed Deep Agents quickstart](managed-deep-agents-quickstart.md) - Create and deploy your first Managed Deep Agent with the mda CLI.
-- [Managed Deep Agents runtime](managed-deep-agents-runtime.md) - Read run context, the verified caller, the channel delivery, and the sandbox from the native runtime types that agent factories, tools, and middleware receive.
+- [Managed Deep Agents runtime](managed-deep-agents-runtime.md) - Read run context, the verified caller, the thread, and the sandbox from the native runtime types that agent factories, tools, and middleware receive.
 - [Add a sandbox to Managed Deep Agents](managed-deep-agents-sandboxes.md) - Configure an isolated filesystem and shell for a managed deep agent.
 - [Add schedules to Managed Deep Agents](managed-deep-agents-schedules.md) - Declare managed cron schedules for Managed Deep Agents deployments, or create them at runtime.
 - [Built-in search powered by Parallel](managed-deep-agents-search.md) - Add web search powered by Parallel to Managed Deep Agents without a separate account or API key.
@@ -42,3 +42,4 @@ tags: [index, langsmith, python]
 - [Subagents](managed-deep-agents-subagents.md) - Delegate work to subagents that run inline or in the background for a managed deep agent.
 - [Add custom tools to Managed Deep Agents](managed-deep-agents-tools.md) - Define authored tools for managed deep agents projects.
 - [Add a custom search tool, memory, and a schedule](managed-deep-agents-tutorial.md) - Replace provider search with a Tavily tool, then add durable memory and a daily schedule to the research assistant from the quickstart.
+- [Managed Deep Agents](managed-deep-agents.md) - Build your agent as a directory of files while LangSmith runs the harness and runtime.

@@ -1,6 +1,6 @@
 ---
 title: "Patch workspace"
-description: "Update a workspace."
+description: "Rename a workspace in the current organization."
 source: "https://docs.langchain.com/langsmith/smith-api/workspaces/patch-workspace"
 category: "docs"
 tags: [docs, langsmith, smith-api, workspaces, patch-workspace]
@@ -8,7 +8,9 @@ tags: [docs, langsmith, smith-api, workspaces, patch-workspace]
 
 # Patch workspace
 
-> Update a workspace.
+> Rename a workspace in the current organization.
+
+Requires the workspace settings manage permission. A name that is already taken returns 409.
 
 ## OpenAPI
 
@@ -179,7 +181,11 @@ paths:
       tags:
         - workspaces
       summary: Patch workspace
-      description: Update a workspace.
+      description: >-
+        Rename a workspace in the current organization.
+
+        Requires the workspace settings manage permission. A name that is
+        already taken returns 409.
       operationId: patch_workspace_api_v1_workspaces__workspace_id__patch
       parameters:
         - name: workspace_id
@@ -202,6 +208,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/app__schemas__Tenant'
+        '409':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: Another workspace already has this name.
         '422':
           description: Validation Error
           content:
@@ -221,6 +233,7 @@ components:
           minLength: 1
           pattern: ^[a-zA-Z0-9\-_ '@()]+$
           title: Display Name
+          description: New workspace name. Letters, digits, spaces and - _ ' @ ( ) only.
       type: object
       required:
         - display_name
@@ -261,6 +274,16 @@ components:
             - type: string
             - type: 'null'
           title: Data Plane Url
+        data_plane_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Data Plane Name
+        data_plane_region:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Data Plane Region
       type: object
       required:
         - id
@@ -270,6 +293,28 @@ components:
         - is_deleted
       title: Tenant
       description: Tenant schema.
+    ProblemDetails:
+      properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     HTTPValidationError:
       properties:
         detail:

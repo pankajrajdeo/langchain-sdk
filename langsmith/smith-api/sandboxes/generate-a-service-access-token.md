@@ -1,6 +1,6 @@
 ---
 title: "Generate a service access token"
-description: "Create a short-lived JWT for accessing an HTTP service running on a specific port inside a sandbox. Returns a browser_url (sets auth cookie via redirect), a service_url (for use with the..."
+description: "Create a short-lived JWT for accessing an HTTP service running on a specific port inside a sandbox. Returns a browser_url (sets auth cookie via redirect), an embed_url (for an iframe; carries the..."
 source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/generate-a-service-access-token"
 category: "docs"
 tags: [docs, langsmith, smith-api, sandboxes, generate-a-service-access-token]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, sandboxes, generate-a-service-access-token]
 
 # Generate a service access token
 
-> Create a short-lived JWT for accessing an HTTP service running on a specific port inside a sandbox. Returns a browser_url (sets auth cookie via redirect), a service_url (for use with the X-Langsmith-Sandbox-Service-Token header), the raw token, and its expiry. Set access=restricted|workspace to instead enable durable LangSmith login (no token; users authenticate with their normal LangSmith session), or access=off to disable it. With LangSmith login, embed_origins names the pages that may show the URL in an iframe; a viewer signs in from inside the frame through a LangSmith popup. LangSmith login and token access are mutually exclusive per service URL.
+> Create a short-lived JWT for accessing an HTTP service running on a specific port inside a sandbox. Returns a browser_url (sets auth cookie via redirect), an embed_url (for an iframe; carries the token in the URL fragment, so no server or Referer sees it), a service_url (for use with the X-Langsmith-Sandbox-Service-Token header), the raw token, and its expiry. Set access=restricted|workspace to instead enable durable LangSmith login (no token; users authenticate with their normal LangSmith session), or access=off to disable it. embed_origins names the pages that may show the URL in an iframe. In token mode they are bound into the minted token; with LangSmith login they are stored on the grant and a viewer signs in from inside the frame through a LangSmith popup. LangSmith login and token access are mutually exclusive per service URL.
 
 ## OpenAPI
 
@@ -182,13 +182,15 @@ paths:
       description: >-
         Create a short-lived JWT for accessing an HTTP service running on a
         specific port inside a sandbox. Returns a browser_url (sets auth cookie
-        via redirect), a service_url (for use with the
-        X-Langsmith-Sandbox-Service-Token header), the raw token, and its
+        via redirect), an embed_url (for an iframe; carries the token in the URL
+        fragment, so no server or Referer sees it), a service_url (for use with
+        the X-Langsmith-Sandbox-Service-Token header), the raw token, and its
         expiry. Set access=restricted|workspace to instead enable durable
         LangSmith login (no token; users authenticate with their normal
-        LangSmith session), or access=off to disable it. With LangSmith login,
-        embed_origins names the pages that may show the URL in an iframe; a
-        viewer signs in from inside the frame through a LangSmith popup.
+        LangSmith session), or access=off to disable it. embed_origins names the
+        pages that may show the URL in an iframe. In token mode they are bound
+        into the minted token; with LangSmith login they are stored on the grant
+        and a viewer signs in from inside the frame through a LangSmith popup.
         LangSmith login and token access are mutually exclusive per service URL.
       parameters:
         - description: Sandbox display name
@@ -274,17 +276,20 @@ components:
             - 'off'
         embed_origins:
           description: >-
-            EmbedOrigins are the pages allowed to show a LangSmith login service
-            URL
+            EmbedOrigins are the pages allowed to show the service URL in an
+            iframe,
 
-            in an iframe, besides LangSmith itself: at most 5 origins such as
+            besides LangSmith itself: at most 5 origins such as
 
-            https://app.example.com (http only for localhost). Valid only with
-            access
+            https://app.example.com (http only for localhost). In token mode
+            they are
 
-            "restricted" or "workspace". Each call sets the URL's whole list, so
+            bound into the minted token, so they last as long as it does. With
 
-            omitting the field removes any origins set before.
+            access "restricted" or "workspace" each call sets the grant's whole
+            list,
+
+            so omitting the field removes any origins set before.
           type: array
           items:
             type: string
@@ -307,11 +312,22 @@ components:
           type: string
         embed_origins:
           description: >-
-            EmbedOrigins echoes the origins that may embed a LangSmith login
-            URL, normalized; omitted when there are none.
+            EmbedOrigins echoes the origins that may embed the URL, normalized;
+            omitted when there are none.
           type: array
           items:
             type: string
+        embed_url:
+          description: >-
+            EmbedURL opens the service in an iframe: the token rides the URL
+
+            fragment, which no server, log or Referer header sees, and the page
+            it
+
+            loads trades it for the cookie. Append &redirect=/path to land
+
+            elsewhere than /. Omitted in LangSmith login mode.
+          type: string
         expires_at:
           type: string
         service_url:

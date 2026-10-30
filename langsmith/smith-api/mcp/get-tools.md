@@ -249,7 +249,8 @@ paths:
           description: Successful Response
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/McpToolsResponse'
         '422':
           description: Validation Error
           content:
@@ -262,6 +263,34 @@ paths:
         - Bearer Auth: []
 components:
   schemas:
+    McpToolsResponse:
+      properties:
+        tools:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Tools
+        cached:
+          type: boolean
+          title: Cached
+        fetched_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Fetched At
+        server_icon_url:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Server Icon Url
+      type: object
+      required:
+        - tools
+        - cached
+        - fetched_at
+      title: McpToolsResponse
     HTTPValidationError:
       properties:
         detail:

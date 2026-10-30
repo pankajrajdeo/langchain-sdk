@@ -1,14 +1,14 @@
 ---
-title: "Resolve an address to its tracing project (Beta)"
-description: "Beta: This endpoint is in active development and may change without notice. Returns the tracing project (session) an address names. An address is an AGENT (id and environment), an EXPERIMENT (id), or..."
-source: "https://docs.langchain.com/langsmith/smith-api/sessions/resolve-an-address-to-its-tracing-project-beta"
+title: "Resolve an address to its tracing project"
+description: "Returns the tracing project (session) an address names. An address is an AGENT (id and environment), an EXPERIMENT (id), or an EVALUATOR (no id: evaluator traces share one project per workspace)..."
+source: "https://docs.langchain.com/langsmith/smith-api/sessions/resolve-an-address-to-its-tracing-project"
 category: "docs"
-tags: [docs, langsmith, smith-api, sessions, resolve-an-address-to-its-tracing-project-beta]
+tags: [docs, langsmith, smith-api, sessions, resolve-an-address-to-its-tracing-project]
 ---
 
-# Resolve an address to its tracing project (Beta)
+# Resolve an address to its tracing project
 
-> **Beta:** This endpoint is in active development and may change without notice. Returns the tracing project (session) an address names. An address is an AGENT (`id` and `environment`), an EXPERIMENT (`id`), or an EVALUATOR (no `id`: evaluator traces share one project per workspace). Send `kind` and `environment` in upper case, as listed; they are matched case-insensitively, while the Agent `id` is case-sensitive. An address that does not exist, or whose project you cannot read, is a 404. Pass the returned `session_id` to any endpoint that takes a project (session) ID. This is not supported on a BYOC data plane yet, and is a 501 there.
+> Returns the tracing project (session) an address names. An address is an AGENT (`id` and `environment`), an EXPERIMENT (`id`), or an EVALUATOR (no `id`: evaluator traces share one project per workspace). Send `kind` and `environment` in upper case, as listed; they are matched case-insensitively, while the Agent `id` is case-sensitive. An address that does not exist, or whose project you cannot read, is a 404. Pass the returned `session_id` to any endpoint that takes a project (session) ID. This is not supported on a BYOC data plane yet, and is a 501 there. Self-hosted deployments need LangSmith v0.18 or later.
 
 ## OpenAPI
 
@@ -178,29 +178,28 @@ paths:
     get:
       tags:
         - sessions
-      summary: Resolve an address to its tracing project (Beta)
+      summary: Resolve an address to its tracing project
       description: >-
-        **Beta:** This endpoint is in active development and may change without
-        notice. Returns the tracing project (session) an address names. An
-        address is an AGENT (`id` and `environment`), an EXPERIMENT (`id`), or
-        an EVALUATOR (no `id`: evaluator traces share one project per
-        workspace). Send `kind` and `environment` in upper case, as listed; they
-        are matched case-insensitively, while the Agent `id` is case-sensitive.
-        An address that does not exist, or whose project you cannot read, is a
-        404. Pass the returned `session_id` to any endpoint that takes a project
-        (session) ID. This is not supported on a BYOC data plane yet, and is a
-        501 there.
+        Returns the tracing project (session) an address names. An address is an
+        AGENT (`id` and `environment`), an EXPERIMENT (`id`), or an EVALUATOR
+        (no `id`: evaluator traces share one project per workspace). Send `kind`
+        and `environment` in upper case, as listed; they are matched
+        case-insensitively, while the Agent `id` is case-sensitive. An address
+        that does not exist, or whose project you cannot read, is a 404. Pass
+        the returned `session_id` to any endpoint that takes a project (session)
+        ID. This is not supported on a BYOC data plane yet, and is a 501 there.
+        Self-hosted deployments need LangSmith v0.18 or later.
       parameters:
         - description: The kind of address.
           name: kind
           in: query
           required: true
           schema:
+            type: string
             enum:
               - AGENT
               - EXPERIMENT
               - EVALUATOR
-            type: string
             title: Kind
         - description: >-
             The Agent's user-assigned id for AGENT, or the experiment's id for
@@ -214,12 +213,12 @@ paths:
           name: environment
           in: query
           schema:
+            type: string
             enum:
               - LOCAL
               - DEVELOPMENT
               - STAGING
               - PRODUCTION
-            type: string
             title: Environment
       responses:
         '200':

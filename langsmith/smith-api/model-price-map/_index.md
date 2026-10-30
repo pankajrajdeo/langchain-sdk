@@ -11,7 +11,7 @@ tags: [index, langsmith, smith-api, model-price-map]
 
 ## Files
 
-- [Create new model price](create-new-model-price.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/model-price-map
-- [Delete model price](delete-model-price.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/model-price-map/{id}
-- [Read model price map](read-model-price-map.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/model-price-map
-- [Update model price](update-model-price.md) - /langsmith/langsmith-platform-openapi.json put /api/v1/model-price-map/{id}
+- [Create a model price](create-a-model-price.md) - Create a custom model price for this workspace.
+- [Delete a model price](delete-a-model-price.md) - Delete a custom model price from this workspace.
+- [List model prices](list-model-prices.md) - List the model prices LangSmith uses to compute run costs in this workspace.
+- [Replace a model price](replace-a-model-price.md) - Replace every field of a custom model price in this workspace.

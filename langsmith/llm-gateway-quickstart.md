@@ -1,149 +1,122 @@
 ---
-title: "LLM Gateway quickstart"
-description: "Call models across providers with one LangSmith API key, then view the trace and set a spend limit."
+title: "Send your first LLM Gateway request"
+description: "Send your first request through the LLM Gateway from the Simulator, call the gateway from your code, and view the request's trace."
 source: "https://docs.langchain.com/langsmith/llm-gateway-quickstart"
 category: "docs"
 tags: [docs, langsmith, llm-gateway-quickstart]
 ---
 
-<a id="send-a-request"></a>
+# Send your first LLM Gateway request
 
-# LLM Gateway quickstart
-
-> Call models across providers with one LangSmith API key, then view the trace and set a spend limit.
+> Send your first request through the LLM Gateway from the Simulator, call the gateway from your code, and view the request's trace.
 
 > [!NOTE]
 >
 > The LLM Gateway is in [beta](release-stages.md).
 
-The LLM Gateway calls models across configured providers through one endpoint with one [LangSmith API key](create-account-api-key.md). Send a request, view its trace, then set a spend limit.
+The [LLM Gateway](llm-gateway.md) calls models across providers through one endpoint, authenticated with one [LangSmith API key](create-account-api-key.md). Instead of copying each provider's key into every app, your code uses one key and switches providers by changing the model ID, while LangSmith traces every call and applies your team's spend limits.
 
-> [!NOTE]
+On this page, you send a request from the Simulator in the LangSmith UI and from your code. Then, view its trace in LangSmith.
+
+> [!TIP]
 >
-> This quickstart uses LangSmith Cloud in the US region: the gateway at `gateway.smith.langchain.com` and the LangSmith UI at `smith.langchain.com`. Setting `LANGSMITH_GATEWAY="true"` in the Deep Agents examples also resolves to the US gateway.
->
-> * **Other Cloud regions and BYOC**: Replace the gateway hostname in each example with your [regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway) or [BYOC data plane](llm-gateway-how-it-works.md#use-a-byoc-data-plane) base URL. For Deep Agents, set `LANGSMITH_GATEWAY` to that gateway's root URL instead of `true`.
-> * **Self-hosted**: Follow [Enable the LLM Gateway on self-hosted](llm-gateway-self-hosted.md), which includes its own first call.
+> This page is for developers sending requests through the gateway. If you are setting up the gateway for your team, start with [Set up the LLM Gateway](llm-gateway-admin-setup.md).
 
-> [!NOTE]
->
-> An administrator must [enable the gateway, add a provider secret, and grant access](llm-gateway-admin-setup.md) once for your workspace. After that, you need only a workspace-scoped LangSmith API key attached to a role with the `gateway:invoke` and `workspaces:read` [permissions](organization-workspace-operations.md).
+## Before you begin
 
-**1. Send a request**
+You need:
 
-A gateway call is an ordinary model request pointed at the gateway base URL and authenticated with your LangSmith API key. Use Chat completions to call the gateway from an application you already have, or Deep Agents to build an agent that routes through it.
+* **Membership in a LangSmith organization on a paid plan.** On the Developer plan, the Simulator offers only LangChain-hosted models, which bill [Gateway Credits](llm-gateway-credits.md) instead of using a provider key.
+* **An API key for a model provider**, unless your workspace already has one. The Simulator shows which providers are already set up.
 
-**Chat completions**
+## Run a request in the Simulator
 
-Point any OpenAI-compatible client at `https://gateway.smith.langchain.com/v1` and set `model` to a provider-prefixed ID.
+The Simulator sends a sample request through the gateway from your browser, so you can confirm your keys and model work before you change any code.
 
-**cURL**
+The gateway uses two keys:
+
+* Your provider key stays in LangSmith as a [workspace secret](llm-gateway-provider-authentication.md#add-a-provider-key). The gateway uses it to call the provider.
+* Your gateway key is a LangSmith API key, starting with `lsv2_`, that your code sends to the gateway.
+
+To run a request:
+
+1. In [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-first-request), go to **LLM Gateway** and select the **Simulator** tab.
+2. Under **Model routing**, select a model. **Needs key** on a model tile means your workspace has no key for that provider yet.
+3. Click **Run request**. If a key is missing, the Simulator prompts you for it before it sends the request.
+
+The response appears below the request. If the request fails, note the error, and see [Troubleshoot](#troubleshoot).
+
+## Send a request from your code
+
+Compared with calling a provider directly, a gateway request changes two things:
+
+* The base URL points at the gateway instead of the provider's API.
+* The API key is your LangSmith API key instead of the provider's key.
+
+To send a request:
+
+1. Set your LangSmith API key and the gateway's base URL in your environment:
 
 ```bash
-export LANGSMITH_API_KEY="lsv2_..."
-
-curl https://gateway.smith.langchain.com/v1/chat/completions \
-    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d '{"model":"anthropic/claude-opus-5","messages":[{"role":"user","content":"Explain what an LLM gateway does in one sentence."}]}'
+   export LANGSMITH_API_KEY="lsv2_..."
+   export LANGSMITH_GATEWAY_BASE_URL="https://gateway.smith.langchain.com/v1"
 ```
 
-**Python**
+   This is the US gateway. For another region, replace the hostname with your [regional gateway](llm-gateway-how-it-works.md#use-a-regional-gateway). On [BYOC](llm-gateway-how-it-works.md#use-a-byoc-data-plane), use your data plane URL followed by `/gateway/v1`. On [self-hosted LangSmith](llm-gateway-self-hosted.md#make-your-first-call), use your LangSmith URL followed by `/gateway/v1`.
 
-```python
-import os
+2. [List the models](llm-gateway-api-formats.md#list-models) you can call:
 
-from openai import OpenAI
-
-client = OpenAI(
-    base_url="https://gateway.smith.langchain.com/v1",
-    api_key=os.environ["LANGSMITH_API_KEY"],
-)
-response = client.chat.completions.create(
-    model="anthropic/claude-opus-5",
-    messages=[{"role": "user", "content": "Explain what an LLM gateway does in one sentence."}],
-)
-print(response.choices[0].message.content)
+```bash
+   curl "$LANGSMITH_GATEWAY_BASE_URL/models" \
+       -H "Authorization: Bearer $LANGSMITH_API_KEY"
 ```
 
-**TypeScript**
+   Each `id` in the response is a model ID. The list reflects your workspace's provider keys and model access policies.
 
-```typescript
-import OpenAI from "openai";
+3. Send a request. Replace `<MODEL_ID>` with a chat model ID from the list, such as the model you tested in the Simulator:
 
-const client = new OpenAI({
-  baseURL: "https://gateway.smith.langchain.com/v1",
-  apiKey: process.env.LANGSMITH_API_KEY,
-});
-const response = await client.chat.completions.create({
-  model: "anthropic/claude-opus-5",
-  messages: [{ role: "user", content: "Explain what an LLM gateway does in one sentence." }],
-});
-console.log(response.choices[0].message.content);
+```bash
+   curl "$LANGSMITH_GATEWAY_BASE_URL/chat/completions" \
+       -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+       -H "Content-Type: application/json" \
+       -d '{"model":"<MODEL_ID>","messages":[{"role":"user","content":"Explain what an LLM gateway does in one sentence."}]}'
 ```
 
-The same endpoint also accepts Anthropic Messages and OpenAI Responses requests. See [API formats](llm-gateway-api-formats.md).
+   A successful request returns a JSON response that contains a one-sentence answer. If it fails instead, see [Fix authentication errors](llm-gateway-authentication.md#fix-authentication-errors).
 
-**Deep Agents**
+> [!TIP]
+>
+> This request uses the Chat Completions [API format](llm-gateway-api-formats.md). For the same request in Python or TypeScript, or in the Anthropic Messages or Responses format, select the format and language in the Simulator, then click the copy icon. The copied code already uses your deployment's gateway URL.
 
-Set `LANGSMITH_GATEWAY` to route every supported chat model in the process through the gateway.
+[LangChain](../langchain/overview.md) chat models and [Deep Agents](../deepagents/overview.md) need no code changes. Set `LANGSMITH_GATEWAY` to `true` alongside `LANGSMITH_API_KEY`, and every supported chat model in the process calls the gateway in its provider's native API format. For details, see [Direct model access](llm-gateway-direct-model-access.md#configure-langchain-and-deep-agents).
 
-**Python**
+## View the trace
 
-```python
-# pip install "deepagents>=0.1.0"
-# export LANGSMITH_API_KEY="lsv2_..."
-# export LANGSMITH_GATEWAY="true"
-from deepagents import create_deep_agent
+In the Simulator, click **View trace** next to the response. Requests from your code appear in the same **Traces** tab of **LLM Gateway**. By default, a trace records metadata such as token counts and cost. For more information, see [View LLM Gateway traces](llm-gateway-traces.md).
 
-agent = create_deep_agent(model="anthropic:claude-opus-5")
-result = agent.invoke({"messages": [{"role": "user", "content": "Explain what an LLM gateway does in one sentence."}]})
-print(result["messages"][-1].content)
-```
+## Troubleshoot
 
-**TypeScript**
+For `401` and `403` errors, see [Fix authentication errors](llm-gateway-authentication.md#fix-authentication-errors). For `424` errors, see [Fix provider credential errors](llm-gateway-provider-authentication.md#fix-provider-credential-errors).
 
-```typescript
-// npm install deepagents
-// export LANGSMITH_API_KEY="lsv2_..."
-// export LANGSMITH_GATEWAY="true"
-import { createDeepAgent } from "deepagents";
+The Simulator signals missing permissions without an error code:
 
-const agent = createDeepAgent({ model: "anthropic:claude-opus-5" });
-const result = await agent.invoke({
-  messages: [{ role: "user", content: "Explain what an LLM gateway does in one sentence." }],
-});
-console.log(result.messages[result.messages.length - 1].content);
-```
-
-To route specific calls rather than all calls, use the standard endpoint in the Chat completions tab and set `model` to a provider-prefixed ID.
-
-**2. View the trace**
-
-Open [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-quickstart) and go to the tracing project named `gateway` in your workspace. Your request appears there with its token counts, cost, and latency.
-
-**3. Set a spend limit**
-
-Go to **LLM Gateway** in LangSmith and create a spend policy, such as a daily \$10 cap on your API key. Once the cap is reached, the gateway returns a `402` with a message naming the policy that blocked the request:
-
-```json
-{"type": "error", "error": {"message": "request blocked by gateway policies: R&D Spend Cap"}}
-```
-
-For the full guide, see [Spend policies](llm-gateway-spend-policies.md).
+| Symptom | Cause | Fix |
+| - | - | - |
+| No **Run request** button | You lack the `gateway:invoke` permission. | Ask a workspace admin to grant it. |
+| The Simulator asks you to contact an admin | You lack permission to add provider keys. | Ask a workspace admin to add the provider key. |
 
 ## Next steps
 
-* [Overview](llm-gateway.md): what the gateway provides, how credentials are managed, and when to use the standard API.
-* [How the gateway works](llm-gateway-how-it-works.md): what happens to each request, how credentials resolve, and where the gateway is available.
-* [API formats](llm-gateway-api-formats.md): use Chat Completions, Messages, or Responses through the standard endpoint.
+Now that you can send requests through the gateway, explore its other capabilities:
+
+* [Set a spend limit](llm-gateway-spend-policies.md): cap spend by organization, workspace, API key, or user.
+* [Add model fallbacks](llm-gateway-fallbacks.md): retry failed requests on backup models, and test the chain in the Simulator.
+* [API formats](llm-gateway-api-formats.md): send Chat Completions, Messages, or Responses requests.
 * [Set up coding agents](llm-gateway-coding-agents.md): route Claude Code, Codex, Gemini CLI, or Deep Agents Code through the gateway.
-* [Direct model access](llm-gateway-direct-model-access.md): use provider-native request and response formats.
-* [Prompt Hub with the gateway](manage-prompts-programmatically.md#use-with-the-langsmith-gateway): route Prompt Hub model calls through the gateway.
-* [Data policy](llm-gateway-data-policy.md): prevent sensitive data from reaching providers.
+* [Gateway Credits](llm-gateway-credits.md): call LangChain-hosted models without a provider key.
 
 ***
 
 [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-first-request.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

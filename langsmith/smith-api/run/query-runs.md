@@ -851,11 +851,11 @@ components:
       title: RunSchema
       description: Run schema.
     TraceTier:
-      type: string
       enum:
         - longlived
         - shortlived
       title: TraceTier
+      type: string
   securitySchemes:
     API Key:
       type: apiKey

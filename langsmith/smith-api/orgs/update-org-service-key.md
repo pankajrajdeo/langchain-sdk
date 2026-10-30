@@ -252,8 +252,10 @@ components:
 
         role_id: New workspace-level role to apply to every workspace identity
             attached to the key. Optional; omit to leave workspace roles unchanged.
-        org_role_id: New org-level role to apply to the key's org identity. Only
-            valid for org-scoped keys (workspaces=None at creation). Optional.
+        org_role_id: New org-level role to apply to the key's org identity.
+            Workspace-scoped keys accept only the built-in ORGANIZATION_VIEWER
+            or ORGANIZATION_RESTRICTED role.
+            Optional; omit to leave the organization role unchanged.
     APIKeyGetResponse:
       properties:
         created_at:
@@ -352,17 +354,12 @@ components:
         - short_key
         - description
       title: APIKeyGetResponse
-      description: >-
+      description: |-
         API key GET schema.
 
         role_id, org_role_id, and access_scope let clients render the key's
-
         current role state without a second round trip. For workspace-scoped
-
-        keys, org_role_id is null (the api_key's identity_id points at a
-
-        workspace identity, so there is no caller-meaningful org role to
-        surface).
+        service keys, org_role_id comes from the parent organization identity.
     HTTPValidationError:
       properties:
         detail:

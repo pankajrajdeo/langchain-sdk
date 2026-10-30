@@ -1,6 +1,6 @@
 ---
 title: "Create feedback with token post"
-description: "Create a new feedback with a token."
+description: "Submit feedback for the token's run and key. The token is the credential, so anyone with it can submit feedback."
 source: "https://docs.langchain.com/langsmith/smith-api/feedback/create-feedback-with-token-post"
 category: "docs"
 tags: [docs, langsmith, smith-api, feedback, create-feedback-with-token-post]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, feedback, create-feedback-with-token-post]
 
 # Create feedback with token post
 
-> Create a new feedback with a token.
+> Submit feedback for the token's run and key. The token is the credential, so anyone with it can submit feedback.
 
 ## OpenAPI
 
@@ -179,7 +179,9 @@ paths:
       tags:
         - feedback
       summary: Create feedback with token post
-      description: Create a new feedback with a token.
+      description: >-
+        Submit feedback for the token's run and key. The token is the
+        credential, so anyone with it can submit feedback.
       operationId: create_feedback_with_token_post_api_v1_feedback_tokens__token__post
       parameters:
         - name: token
@@ -188,7 +190,13 @@ paths:
           schema:
             type: string
             format: uuid
+            description: >-
+              Feedback ingest token. It's a credential: anyone who has it can
+              submit feedback.
             title: Token
+          description: >-
+            Feedback ingest token. It's a credential: anyone who has it can
+            submit feedback.
       requestBody:
         required: true
         content:

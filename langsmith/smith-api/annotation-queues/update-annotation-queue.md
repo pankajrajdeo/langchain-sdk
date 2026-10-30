@@ -185,7 +185,9 @@ paths:
           schema:
             type: string
             format: uuid
+            description: ID of the annotation queue.
             title: Queue Id
+          description: ID of the annotation queue.
       requestBody:
         required: true
         content:
@@ -217,23 +219,27 @@ components:
             - type: string
             - type: 'null'
           title: Name
+          description: New name for the queue.
         description:
           anyOf:
             - type: string
             - type: 'null'
           title: Description
+          description: New description.
         default_dataset:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Default Dataset
+          description: Dataset that reviewed runs are added to by default.
         num_reviewers_per_item:
           anyOf:
             - type: integer
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Num Reviewers Per Item
+          description: How many reviewers must review each run.
           default:
             __missing__: __missing__
         enable_reservations:
@@ -241,6 +247,9 @@ components:
             - type: boolean
             - $ref: '#/components/schemas/Missing'
           title: Enable Reservations
+          description: >-
+            Whether a reviewer reserves a run while reviewing it, so others skip
+            it.
           default:
             __missing__: __missing__
         reservation_minutes:
@@ -249,6 +258,7 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Reservation Minutes
+          description: How long a reservation lasts, in minutes.
           default:
             __missing__: __missing__
         rubric_items:
@@ -258,11 +268,13 @@ components:
               type: array
             - type: 'null'
           title: Rubric Items
+          description: Feedback keys reviewers fill in for each run.
         rubric_instructions:
           anyOf:
             - type: string
             - type: 'null'
           title: Rubric Instructions
+          description: Instructions shown to reviewers.
         metadata:
           anyOf:
             - additionalProperties: true
@@ -270,6 +282,7 @@ components:
             - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Metadata
+          description: Metadata to store on the queue. Replaces the existing metadata.
           default:
             __missing__: __missing__
         reviewer_access_mode:
@@ -280,6 +293,9 @@ components:
                 - assigned
             - type: 'null'
           title: Reviewer Access Mode
+          description: >-
+            Who completes a run: any (one reviewer is enough) or assigned (every
+            assigned reviewer must submit).
       type: object
       title: AnnotationQueueUpdateSchema
       description: AnnotationQueue update schema.
@@ -331,6 +347,14 @@ components:
             - type: boolean
             - type: 'null'
           title: Is Required
+        required_if:
+          anyOf:
+            - $ref: '#/components/schemas/RubricItemConditions'
+            - type: 'null'
+        visible_if:
+          anyOf:
+            - $ref: '#/components/schemas/RubricItemConditions'
+            - type: 'null'
         is_assertion:
           anyOf:
             - type: boolean
@@ -361,6 +385,25 @@ components:
       required:
         - feedback_key
       title: AnnotationQueueRubricItemSchema
+    RubricItemConditions:
+      properties:
+        join:
+          type: string
+          enum:
+            - all
+            - any
+          title: Join
+        rules:
+          items:
+            $ref: '#/components/schemas/RubricItemConditionRule'
+          type: array
+          minItems: 1
+          title: Rules
+      type: object
+      required:
+        - join
+        - rules
+      title: RubricItemConditions
     FeedbackConfigSchema:
       properties:
         id:
@@ -405,6 +448,30 @@ components:
         - tenant_id
         - modified_at
       title: FeedbackConfigSchema
+    RubricItemConditionRule:
+      properties:
+        key:
+          type: string
+          title: Key
+        op:
+          type: string
+          enum:
+            - is
+            - is_one_of
+            - is_empty
+            - is_not_empty
+          title: Op
+        values:
+          items:
+            type: number
+          type: array
+          title: Values
+          default: []
+      type: object
+      required:
+        - key
+        - op
+      title: RubricItemConditionRule
     FeedbackConfig:
       properties:
         type:
@@ -426,6 +493,13 @@ components:
               type: array
             - type: 'null'
           title: Categories
+        allows_multiple_categories:
+          type: boolean
+          title: Allows Multiple Categories
+          description: >-
+            Whether a reviewer can pick several categories. Categorical feedback
+            only.
+          default: false
       type: object
       required:
         - type

@@ -7,8 +7,8 @@ tags: [docs, langchain, frontend]
 ---
 
 # Overview
-
-> Build generative UIs with real-time streaming from LangChain agents
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/overview)
+Build generative UIs with real-time streaming from LangChain agents
 
 Build rich, interactive frontends for agents created with `createAgent`. These
 patterns cover everything from basic message rendering to advanced workflows

@@ -249,6 +249,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - THREAD_ID
@@ -277,7 +278,6 @@ paths:
                 - ERROR_PREVIEW
                 - TURN_NUMBER
               type: string
-            type: array
             title: Selects
         - description: >-
             `trace_filter` narrows traces by applying a LangSmith filter
@@ -308,12 +308,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
-        '401':
-          description: missing or invalid authentication
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
         '403':
           description: forbidden (insufficient permission)
           content:
@@ -332,26 +326,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
-        '500':
-          description: internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
         '501':
           description: V2 filter syntax or TURN_NUMBER is unavailable for this deployment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
-        '503':
-          description: service unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
-        '504':
-          description: gateway timeout or deadline exceeded
           content:
             application/json:
               schema:

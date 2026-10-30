@@ -14,10 +14,6 @@ Give a managed deep agent a browser to act on websites without a public API, suc
 
 Use a direct API when one supports the task. See [Connections](managed-deep-agents-connections.md) to authenticate API calls with a user's connected account. For browser choices and open source setup, see [Browser use with Deep Agents](../../deepagents/browser-use.md).
 
-> [!NOTE]
->
-> Browser support was added in Managed Deep Agents SDK 0.10. Your workspace also needs access to the LangSmith browser beta. To confirm whether your workspace has access or to request it, contact [LangChain support](https://support.langchain.com) with your workspace ID.
-
 ## Declare a browser
 
 Export a named `browser` at the [project root](managed-deep-agents-project-structure.md):

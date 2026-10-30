@@ -14,7 +14,7 @@ tags: [index, langsmith, smith-api, feedback]
 - [Create feedback formula ep](create-feedback-formula-ep.md) - Create a new feedback formula
 - [Create feedback ingest token](create-feedback-ingest-token.md) - Create a new feedback ingest token.
 - [Create feedback with token get](create-feedback-with-token-get.md) - Create a new feedback with a token.
-- [Create feedback with token post](create-feedback-with-token-post.md) - Create a new feedback with a token.
+- [Create feedback with token post](create-feedback-with-token-post.md) - Submit feedback for the token's run and key. The token is the credential, so anyone with it can submit feedback.
 - [Create feedback](create-feedback.md) - Create a new feedback.
 - [Delete feedback formula endpoint](delete-feedback-formula-endpoint.md) - Delete a feedback formula by id
 - [Delete feedback](delete-feedback.md) - Delete a feedback.

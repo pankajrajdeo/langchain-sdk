@@ -143,7 +143,7 @@ Use the language-specific constructor and push method:
 
 **TypeScript**
 
-```typescript
+```ts
    import { Client } from "langsmith";
    import { ChatPromptTemplate } from "@langchain/core/prompts";
 
@@ -209,7 +209,7 @@ Then, you'll iterate on the prompt by creating a new version. Members of your wo
 
 **TypeScript**
 
-```typescript
+```ts
    import { OpenAI } from "openai";
    import { pull } from "langchain/hub"
    import { convertPromptToOpenAI } from "@langchain/openai";
@@ -265,7 +265,7 @@ Then, you'll iterate on the prompt by creating a new version. Members of your wo
 
 **TypeScript**
 
-```typescript
+```ts
    import { Client } from "langsmith";
    import { ChatPromptTemplate } from "@langchain/core/prompts";
 

@@ -251,6 +251,16 @@ components:
             - type: string
             - type: 'null'
           title: Data Plane Url
+        data_plane_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Data Plane Name
+        data_plane_region:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Data Plane Region
         read_only:
           type: boolean
           title: Read Only

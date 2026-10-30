@@ -271,8 +271,11 @@ components:
             If not provided, uses default role based on read_only flag:
             - WORKSPACE_ADMIN if read_only is False
             - WORKSPACE_READER if read_only is True
-        org_role_id: UUID of a org role for org-scoped keys
-            If not provided, defaults to ORG_USER
+        org_role_id: UUID of an org role for service keys.
+            Workspace-scoped keys accept only the built-in ORGANIZATION_VIEWER
+            or ORGANIZATION_RESTRICTED role.
+            Defaults to ORGANIZATION_VIEWER for workspace-scoped keys,
+            or ORGANIZATION_USER for org-scoped keys.
         default_workspace_id: UUID of the default workspace for PATs.
             If not provided, uses the current logic (first available workspace).
     APIKeyCreateResponse:

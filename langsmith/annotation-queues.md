@@ -14,8 +14,6 @@ tags: [docs, langsmith, annotation-queues]
 >
 > You can also manage annotation queues and feedback configs programmatically with the SDK. Refer to [Manage feedback & annotation queues programmatically](annotation-queues-sdk.md).
 
-To customize how run outputs appear during review, [configure custom output rendering for annotation queues](custom-output-rendering.md#for-annotation-queues).
-
 LangSmith supports two queue styles:
 
 * [**Single-run annotation queues**](#single-run-annotation-queues) present one queue item at a time, either a run or a thread, and let reviewers submit any rubric feedback you configure. For **run** items, single-run queues also support [assertions](assertions.md) to capture acceptance criteria for offline evaluation.
@@ -194,6 +192,10 @@ There are several ways to populate a single-run queue with items:
    > [!TIP]
    >
    > Use the keyboard shortcuts next to each option to review items faster.
+
+### Customize the review pane
+
+A custom view replaces the default trace view in the middle pane with a display you describe to LangSmith Chat, such as a chat transcript without tool calls. One view can serve several queues. For more information, see [Build custom views for annotation queues](annotation-queue-custom-views.md).
 
 ## Pairwise annotation queues
 

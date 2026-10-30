@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, sandboxes, create-links-to-a-browser-window-b
 
 # Create links to a browser window (Beta)
 
-> Beta: mint a view link and an act link for one window, as every attachment response does, with a chosen lifetime and the origins allowed to embed the window's pages in an iframe. Without embed_origins no page may frame them. An embedded page sends its parent window messages when control changes and when it connects or disconnects (see the browser guide). Either link opens the window to anyone who holds it until it expires; detaching the window ends it early. A stopped browser starts when links are minted and when a link is opened, and resumes with its windows. Minting takes being the browser's creator or a role with sandboxes:exec.
+> Beta: mint a view link and an act link for one window, as every attachment response does, with a chosen lifetime and the origins allowed to embed the window's pages in an iframe. Without embed_origins no page may frame them. view_embed_url and act_embed_url carry the same tokens in the URL fragment, for an iframe, so no server sees them. An embedded page sends its parent window messages when control changes and when it connects or disconnects (see the browser guide). Either link opens the window to anyone who holds it until it expires; detaching the window ends it early. A stopped browser starts when links are minted and when a link is opened, and resumes with its windows. Minting takes being the browser's creator or a role with sandboxes:exec.
 
 ## OpenAPI
 
@@ -183,13 +183,14 @@ paths:
         Beta: mint a view link and an act link for one window, as every
         attachment response does, with a chosen lifetime and the origins allowed
         to embed the window's pages in an iframe. Without embed_origins no page
-        may frame them. An embedded page sends its parent window messages when
-        control changes and when it connects or disconnects (see the browser
-        guide). Either link opens the window to anyone who holds it until it
-        expires; detaching the window ends it early. A stopped browser starts
-        when links are minted and when a link is opened, and resumes with its
-        windows. Minting takes being the browser's creator or a role with
-        sandboxes:exec.
+        may frame them. view_embed_url and act_embed_url carry the same tokens
+        in the URL fragment, for an iframe, so no server sees them. An embedded
+        page sends its parent window messages when control changes and when it
+        connects or disconnects (see the browser guide). Either link opens the
+        window to anyone who holds it until it expires; detaching the window
+        ends it early. A stopped browser starts when links are minted and when a
+        link is opened, and resumes with its windows. Minting takes being the
+        browser's creator or a role with sandboxes:exec.
       parameters:
         - description: Browser name or ID
           name: name
@@ -273,6 +274,8 @@ components:
     sandboxes.BrowserWindowLinks:
       type: object
       properties:
+        act_embed_url:
+          type: string
         act_url:
           description: |-
             ActURL also lets the person take control of the window, use it, and
@@ -281,6 +284,18 @@ components:
         expires_at:
           type: string
           format: date-time
+        view_embed_url:
+          description: >-
+            ViewEmbedURL and ActEmbedURL open the same window in an iframe with
+            the
+
+            token in the URL fragment, which no server, log or Referer header
+            sees.
+
+            Viewer options follow the token in the fragment, as in
+
+            {act_embed_url}&fit=follow&zoom=1.
+          type: string
         view_url:
           description: ViewURL shows the window and takes no input.
           type: string

@@ -185,7 +185,9 @@ paths:
           schema:
             type: string
             format: uuid
+            description: ID of the annotation queue.
             title: Queue Id
+          description: ID of the annotation queue.
       responses:
         '200':
           description: Successful Response

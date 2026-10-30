@@ -202,11 +202,11 @@ paths:
           in: query
           required: true
           schema:
+            type: string
             enum:
               - needs_my_review
               - needs_others_review
               - archived
-            type: string
             title: Status
         - description: Page size (max 100)
           name: page_size
@@ -225,10 +225,10 @@ paths:
           name: item_type
           in: query
           schema:
+            type: string
             enum:
               - RUN
               - THREAD
-            type: string
             title: Item Type
         - description: >-
             Only items whose trace start time is at or after this timestamp.
@@ -253,10 +253,10 @@ paths:
           in: query
           schema:
             default: forward
+            type: string
             enum:
               - forward
               - backward
-            type: string
             title: Direction
       responses:
         '200':

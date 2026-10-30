@@ -11,7 +11,7 @@ tags: [index, langsmith, smith-api, examples]
 
 ## Files
 
-- [Count examples](count-examples.md) - Count all examples by query params
+- [Count examples](count-examples.md) - Count the examples that match the filters.
 - [Create example](create-example.md) - Create a new example.
 - [Create examples](create-examples.md) - Create bulk examples.
 - [Delete an example](delete-an-example.md) - Soft-delete an example, preserving prior versions and their attachments. If the latest version is already deleted, the request succeeds without creating another version. Deletion is recorded at the...

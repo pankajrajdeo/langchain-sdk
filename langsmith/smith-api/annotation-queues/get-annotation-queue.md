@@ -185,7 +185,9 @@ paths:
           schema:
             type: string
             format: uuid
+            description: ID of the annotation queue.
             title: Queue Id
+          description: ID of the annotation queue.
       responses:
         '200':
           description: Successful Response
@@ -368,6 +370,14 @@ components:
             - type: boolean
             - type: 'null'
           title: Is Required
+        required_if:
+          anyOf:
+            - $ref: '#/components/schemas/RubricItemConditions'
+            - type: 'null'
+        visible_if:
+          anyOf:
+            - $ref: '#/components/schemas/RubricItemConditions'
+            - type: 'null'
         is_assertion:
           anyOf:
             - type: boolean
@@ -398,6 +408,25 @@ components:
       required:
         - feedback_key
       title: AnnotationQueueRubricItemSchema
+    RubricItemConditions:
+      properties:
+        join:
+          type: string
+          enum:
+            - all
+            - any
+          title: Join
+        rules:
+          items:
+            $ref: '#/components/schemas/RubricItemConditionRule'
+          type: array
+          minItems: 1
+          title: Rules
+      type: object
+      required:
+        - join
+        - rules
+      title: RubricItemConditions
     Missing:
       properties:
         __missing__:
@@ -452,6 +481,30 @@ components:
         - tenant_id
         - modified_at
       title: FeedbackConfigSchema
+    RubricItemConditionRule:
+      properties:
+        key:
+          type: string
+          title: Key
+        op:
+          type: string
+          enum:
+            - is
+            - is_one_of
+            - is_empty
+            - is_not_empty
+          title: Op
+        values:
+          items:
+            type: number
+          type: array
+          title: Values
+          default: []
+      type: object
+      required:
+        - key
+        - op
+      title: RubricItemConditionRule
     FeedbackConfig:
       properties:
         type:
@@ -473,6 +526,13 @@ components:
               type: array
             - type: 'null'
           title: Categories
+        allows_multiple_categories:
+          type: boolean
+          title: Allows Multiple Categories
+          description: >-
+            Whether a reviewer can pick several categories. Categorical feedback
+            only.
+          default: false
       type: object
       required:
         - type

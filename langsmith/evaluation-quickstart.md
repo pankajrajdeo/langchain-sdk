@@ -194,12 +194,11 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
 
    if __name__ == "__main__":
        main()
-
 ```
 
 **TypeScript**
 
-```typescript
+```ts
    // dataset.ts
    import { Client } from "langsmith";
 
@@ -230,12 +229,10 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
    console.log("Created dataset:", dataset.name);
    }
 
-   if (require.main === module) {
    main().catch((e) => {
        console.error(e);
        process.exit(1);
    });
-   }
 ```
 
 2. In your terminal, run the `dataset` file to create the datasets you'll use to evaluate your app:
@@ -289,7 +286,7 @@ def target(inputs: dict) -> dict:
 
 **TypeScript**
 
-```typescript
+```ts
 // eval.ts
 import { evaluate } from "langsmith/evaluation";
 import { wrapOpenAI } from "langsmith/wrappers/openai";
@@ -354,7 +351,7 @@ def target(inputs: dict) -> dict:
 def correctness_evaluator(inputs: dict, outputs: dict, reference_outputs: dict):
     evaluator = create_llm_as_judge(
         prompt=CORRECTNESS_PROMPT,
-        model="openai:o3-mini",
+        model="openai:gpt-5.5",
         feedback_key="correctness",
     )
     return evaluator(
@@ -366,7 +363,7 @@ def correctness_evaluator(inputs: dict, outputs: dict, reference_outputs: dict):
 
 **TypeScript**
 
-```typescript
+```ts
 import { evaluate } from "langsmith/evaluation";
 import { wrapOpenAI } from "langsmith/wrappers/openai";
 import OpenAI from "openai";
@@ -388,7 +385,7 @@ async function target(inputs: Record<string, any>): Promise<Record<string, any>>
 
 const judge = createLLMAsJudge({
   prompt: CORRECTNESS_PROMPT,
-  model: "openai:o3-mini",
+  model: "openai:gpt-5.5",
   feedbackKey: "correctness",
 });
 
@@ -444,7 +441,7 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
    def correctness_evaluator(inputs: dict, outputs: dict, reference_outputs: dict):
        evaluator = create_llm_as_judge(
            prompt=CORRECTNESS_PROMPT,
-           model="openai:o3-mini",
+           model="openai:gpt-5.5",
            feedback_key="correctness",
        )
        return evaluator(
@@ -474,7 +471,7 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
 
 **TypeScript**
 
-```typescript
+```ts
    import { evaluate } from "langsmith/evaluation";
    import { wrapOpenAI } from "langsmith/wrappers/openai";   // helper to wrap OpenAI client
    import OpenAI from "openai";                              // model provider
@@ -496,7 +493,7 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
 
    const judge = createLLMAsJudge({
    prompt: CORRECTNESS_PROMPT,
-   model: "openai:o3-mini",
+   model: "openai:gpt-5.5",
    feedbackKey: "correctness",
    });
 
@@ -526,12 +523,10 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
    console.log(results);
    }
 
-   if (require.main === module) {
    main().catch((e) => {
-       console.error(e);
-       process.exit(1);
+   console.error(e);
+   process.exit(1);
    });
-   }
 ```
 
 2. Run your evaluator:

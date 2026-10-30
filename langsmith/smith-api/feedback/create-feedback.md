@@ -216,8 +216,8 @@ paths:
             this workspace.
         '409':
           description: >-
-            The addressed Agent is archived, or its environment is bound to a
-            tracing project that is not Agent-owned.
+            The addressed Agent environment is bound to a tracing project that
+            is not Agent-owned.
         '422':
           description: Validation Error
           content:
@@ -304,16 +304,14 @@ components:
           type: string
           title: Address
           description: >-
-            Beta. Only supported in workspaces where Agent addressing is
-            enabled; other workspaces get a 403. Addresses the tracing project
-            through an Agent environment, as
+            Addresses the tracing project through an Agent environment, as
             lrn:agents/{id}/environments/{environment}, instead of session_id.
             The id is 1 to 63 lowercase ASCII letters, digits, or hyphens,
             starting with a letter and ending with a letter or digit. The
             environment is local, development, staging, or production, matched
             case-insensitively. Never combined with session_id. The Agent and
             the environment must already exist; sending feedback does not create
-            them.
+            them. Self-hosted deployments need LangSmith v0.18 or later.
           examples:
             - lrn:agents/support-agent/environments/production
         trace_id:
@@ -599,6 +597,13 @@ components:
               type: array
             - type: 'null'
           title: Categories
+        allows_multiple_categories:
+          type: boolean
+          title: Allows Multiple Categories
+          description: >-
+            Whether a reviewer can pick several categories. Categorical feedback
+            only.
+          default: false
       type: object
       required:
         - type

@@ -201,7 +201,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TracerSessionWithoutVirtualFields'
+                $ref: '#/components/schemas/TracerSession'
         '422':
           description: Validation Error
           content:
@@ -251,7 +251,7 @@ components:
       type: object
       title: TracerSessionUpdate
       description: Update class for TracerSession.
-    TracerSessionWithoutVirtualFields:
+    TracerSession:
       properties:
         start_time:
           type: string
@@ -297,21 +297,124 @@ components:
           type: string
           format: uuid
           title: Id
+        run_count:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Run Count
+        latency_p50:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: Latency P50
+        latency_p99:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: Latency P99
+        first_token_p50:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: First Token P50
+        first_token_p99:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: First Token P99
+        total_tokens:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Total Tokens
+        prompt_tokens:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Prompt Tokens
+        completion_tokens:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Completion Tokens
+        total_cost:
+          anyOf:
+            - type: string
+              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: 'null'
+          title: Total Cost
+        prompt_cost:
+          anyOf:
+            - type: string
+              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: 'null'
+          title: Prompt Cost
+        completion_cost:
+          anyOf:
+            - type: string
+              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: 'null'
+          title: Completion Cost
         tenant_id:
           type: string
           format: uuid
           title: Tenant Id
+        last_run_start_time:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Last Run Start Time
         last_run_start_time_live:
           anyOf:
             - type: string
               format: date-time
             - type: 'null'
           title: Last Run Start Time Live
+        feedback_stats:
+          anyOf:
+            - additionalProperties: true
+              type: object
+            - type: 'null'
+          title: Feedback Stats
+        session_feedback_stats:
+          anyOf:
+            - additionalProperties: true
+              type: object
+            - type: 'null'
+          title: Session Feedback Stats
+        run_facets:
+          anyOf:
+            - items:
+                additionalProperties: true
+                type: object
+              type: array
+            - type: 'null'
+          title: Run Facets
+        error_rate:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: Error Rate
+        streaming_rate:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: Streaming Rate
+        test_run_number:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Test Run Number
+        experiment_progress:
+          anyOf:
+            - $ref: '#/components/schemas/ExperimentProgress'
+            - type: 'null'
       type: object
       required:
         - id
         - tenant_id
-      title: TracerSessionWithoutVirtualFields
+      title: TracerSession
       description: TracerSession schema.
     HTTPValidationError:
       properties:
@@ -323,11 +426,30 @@ components:
       type: object
       title: HTTPValidationError
     TraceTier:
-      type: string
       enum:
         - longlived
         - shortlived
       title: TraceTier
+      type: string
+    ExperimentProgress:
+      properties:
+        expected_run_count:
+          type: integer
+          title: Expected Run Count
+        run_progress:
+          type: number
+          title: Run Progress
+        evaluator_progress:
+          additionalProperties:
+            type: number
+          type: object
+          title: Evaluator Progress
+      type: object
+      required:
+        - expected_run_count
+        - run_progress
+        - evaluator_progress
+      title: ExperimentProgress
   securitySchemes:
     API Key:
       type: apiKey

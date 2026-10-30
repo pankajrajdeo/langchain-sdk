@@ -249,6 +249,12 @@ components:
           $ref: '#/components/schemas/sandboxes.SandboxMountConfig'
         name:
           type: string
+        persistent:
+          description: >-
+            Persistent reports whether the sandbox keeps its filesystem across
+            stops. When false, its writes are discarded whenever it stops and it
+            is not charged for storage.
+          type: boolean
         preserve_memory_on_stop:
           type: boolean
         proxy_config:
@@ -275,6 +281,14 @@ components:
           type: string
         vcpus:
           type: integer
+        volumes:
+          description: >-
+            Volumes (beta) are the volumes attached to the sandbox, in slot
+            order. Absent when the workspace does not have sandbox volumes
+            enabled.
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.SandboxVolumeResponse'
     sandboxes.ErrorResponse:
       type: object
       properties:
@@ -345,6 +359,17 @@ components:
         user:
           type: string
         work_dir:
+          type: string
+    sandboxes.SandboxVolumeResponse:
+      type: object
+      properties:
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        volume_id:
+          type: string
+        volume_name:
           type: string
     auth.SandboxDelegationMode:
       type: string
@@ -487,21 +512,28 @@ components:
             $ref: '#/components/schemas/sandboxes.ProxyHeader'
         match_headers:
           description: >-
-            MatchHeaders restricts a header injection rule to requests carrying
-            every listed header, each written "name: value" with a lowercase
-            name and an exact value. Pair with headers of the same name to swap
-            a placeholder the sandbox sends (e.g. "authorization: Bearer
-            account-b") for a real credential, so one host can serve several
-            accounts. Rules are evaluated in order and the first match wins.
+            MatchHeaders restricts a header injection or rewrite rule to
+            requests carrying every listed header, each written "name: value"
+            with a lowercase name and an exact value. Pair with headers of the
+            same name to swap a placeholder the sandbox sends (e.g.
+            "authorization: Bearer account-b") for a real credential, so one
+            host can serve several accounts. Rules are evaluated in order and
+            the first match wins.
           type: array
           items:
             type: string
         match_hosts:
           description: >-
-            MatchHosts is only accepted for header injection rules. Provider
-            auth
+            MatchHosts is only accepted for header injection, rewrite, and relay
+            rules.
 
-            rules use built-in host matching.
+            Provider auth rules use built-in host matching. A relay rule may
+            also
+
+            list IP addresses and CIDR blocks (10.0.0.0/8), which match
+            connections
+
+            the sandbox makes to an IP address rather than a name.
           type: array
           items:
             type: string
@@ -511,6 +543,18 @@ components:
           type: array
         name:
           type: string
+        relay_id:
+          description: >-
+            RelayID is the ID of the LangSmith relay (a connection of kind
+            relay) that carries connections to match_hosts when type is relay.
+            Those connections leave from the relay's connector, and its network
+            and IP, instead of the sandbox host. Access control still applies
+            first, the first enabled matching relay rule wins, and a matched
+            host never falls back to a direct connection.
+          type: string
+          format: uuid
+        rewrite:
+          $ref: '#/components/schemas/sandboxapi.ProxyRewriteConfig'
         type:
           type: string
     sandboxes.SandboxAWSMountAuthConfig:
@@ -853,6 +897,38 @@ components:
       oneOf:
         - $ref: '#/components/schemas/sandboxes.ProxyGCPWorkloadIdentityConfig'
         - $ref: '#/components/schemas/sandboxes.ProxyGCPServiceAccountConfig'
+    sandboxapi.ProxyRewriteConfig:
+      type: object
+      required:
+        - port
+      properties:
+        credentials:
+          description: >-
+            Credentials is what happens to credential headers the sandbox sent,
+            such as Authorization and Cookie: "strip" (the default) removes
+            them, "redact" keeps each with its value replaced by "redacted"
+            (after an auth scheme such as "Bearer "), and "keep" forwards them
+            unchanged.
+          type: string
+          enum:
+            - strip
+            - redact
+            - keep
+        host:
+          description: >-
+            Host is an HTTPS destination. Exactly one of host and sandbox is
+            set.
+          type: string
+        port:
+          type: integer
+          maximum: 65535
+          minimum: 1
+        sandbox:
+          description: >-
+            Sandbox is the name or ID of a sandbox to send requests to, over
+            plain HTTP. A sandbox link from this sandbox to that sandbox's port
+            must exist. Exactly one of host and sandbox is set.
+          type: string
     sandboxes.SandboxAWSMountRoleAuthConfig:
       type: object
       properties:

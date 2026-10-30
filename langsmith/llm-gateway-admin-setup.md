@@ -1,105 +1,70 @@
 ---
-title: "Admin setup"
-description: "One-time organization setup to enable the LLM Gateway and grant user access."
+title: "Set up the LLM Gateway"
+description: "Set up the LLM Gateway for a team by adding provider keys, granting permission to call the gateway, issuing API keys, and setting governance policies."
 source: "https://docs.langchain.com/langsmith/llm-gateway-admin-setup"
 category: "docs"
 tags: [docs, langsmith, llm-gateway-admin-setup]
 ---
 
-# Admin setup
+# Set up the LLM Gateway
 
-> One-time organization setup to enable the LLM Gateway and grant user access.
+> Set up the LLM Gateway for a team by adding provider keys, granting permission to call the gateway, issuing API keys, and setting governance policies.
 
 > [!NOTE]
 >
 > The LLM Gateway is in [beta](release-stages.md).
 
-One-time setup to enable the LLM Gateway for your LangSmith [organization](administration-overview.md#organizations). [Organization admins](rbac.md#organization-admin) should complete this before individual users can route calls through the gateway.
-
-## Prerequisites
-
-You need [`organization:manage` permission](organization-workspace-operations.md) in LangSmith. [Step 2 Option A](#option-a-create-a-custom-workspace-role-recommended) also requires a plan that includes [RBAC](rbac.md) (custom roles).
-
-On self-hosted LangSmith, [enable the gateway in the Helm chart](llm-gateway-self-hosted.md) before you complete these steps.
-
-## 1. Add Provider Secrets
-
-Skip this step for LangChain-hosted models: they use your LangSmith API key, not provider secrets. See [Gateway Credits](llm-gateway-credits.md) for paid chat models. Continue with step 2 to grant gateway access.
-
-The gateway resolves provider credentials from your workspace's Provider Secrets. This lets it proxy calls to upstream providers without individual users needing local copies of provider credentials.
-
-Go to **Settings > Integrations > Provider Secrets** and add the keys for the providers you want to proxy through the gateway:
-
-| Secret name | Provider |
-| - | - |
-| `ANTHROPIC_API_KEY` | Anthropic |
-| `AWS_BEARER_TOKEN_BEDROCK` | AWS Bedrock |
-| `AZURE_FOUNDRY_API_KEY` | Azure Foundry |
-| `AZURE_FOUNDRY_RESOURCE_NAME` | Azure Foundry |
-| `BASETEN_API_KEY` | Baseten |
-| `FIREWORKS_API_KEY` | Fireworks |
-| `GOOGLE_API_KEY` | Google Gemini |
-| `OPENAI_API_KEY` | OpenAI |
-| `SCALEDOWN_API_KEY` | ScaleDown |
-| `VERTEX_SERVICE_ACCOUNT_JSON` | Gemini Enterprise Agent Platform |
-
-Add only the providers your organization uses. The gateway returns an error if a user calls a provider whose credentials have not been added.
+This page walks an admin through preparing the [LLM Gateway](llm-gateway.md) for a team: connecting providers, granting access, issuing API keys, and setting policies. Complete the following sections in order. Each one links to the page that covers its topic in full.
 
 > [!TIP]
 >
-> Azure Foundry also supports Microsoft Entra ID service principal authentication, for resources that disable API keys. For setup steps, see [Provider authentication](llm-gateway-provider-authentication.md#configure-azure-foundry).
+> Some users can start without this setup. A [Workspace Admin](rbac.md#workspace-admin) can already call the gateway, and can add a provider key from the Simulator's **Needs key** prompt. If you are the only user in your organization, go to [Send your first LLM Gateway request](llm-gateway-first-request.md) instead.
 
-## 2. Configure gateway access for users
+## Enable the gateway on self-hosted LangSmith
 
-The built-in roles `WORKSPACE_USER` and `WORKSPACE_VIEWER` do not include the `gateway:invoke` permission and cannot be edited. You have two options for granting gateway access:
+On self-hosted LangSmith, [enable the gateway in the Helm chart](llm-gateway-self-hosted.md) before the other steps. Skip this section on other deployments.
 
-### Option A: Create a custom workspace role (recommended)
+## Add provider keys
 
-Requires an RBAC-enabled plan.
+Adding a provider key requires [permission to manage secrets](rbac.md#workspace-roles) in that workspace.
 
-1. Go to **Settings > Members/Roles**.
-2. Create a new workspace role.
-3. Grant it at minimum `gateway:invoke` and `workspaces:read`.
-4. Assign users who need gateway access to this role.
+The gateway calls each provider with a key stored as a secret in the workspace that the caller's API key belongs to. Add a key for each provider your team calls, in each workspace that calls it. The gateway does not fall back to organization secrets for these calls.
 
-Use this when you want to grant gateway access to specific users without giving them full workspace-admin privileges. This gives you the most control over who can use the gateway.
+Skip this section if your team calls only [Gateway Credits](llm-gateway-credits.md) models, which need no provider key.
 
-### Option B: Use the workspace admin role
+For the steps and the secret name each provider uses, see [Add a provider key](llm-gateway-provider-authentication.md#add-a-provider-key).
 
-No plan requirement.
+## Grant permission to call the gateway
 
-The `WORKSPACE_ADMIN` role already includes both `gateway:invoke` and `workspaces:read` by default. Assign users who need gateway access to this role.
+An API key needs the `gateway:invoke` and `workspaces:read` permissions to call the gateway. On plans without workspace roles, every user has the Workspace Admin role, which includes both, so no action is needed.
 
-Use this if you don't need fine-grained access control, or if you don't have RBAC enabled.
+On the Enterprise plan, the built-in Workspace Editor and Workspace Viewer roles include neither permission. As an [Organization Admin](rbac.md#organization-admin), create a [custom role](rbac.md#custom-roles) with both permissions and assign it to the users who call the gateway, or assign them the Workspace Admin role.
 
-## 3. Configure policies (optional)
+For more information, see [Grant permission to call the gateway](llm-gateway-authentication.md#grant-permission-to-call-the-gateway).
 
-Gateway policy management requires `organization:manage` permission.
+## Decide how developers get API keys
 
-Go to **LLM Gateway** to create governance policies. You can configure:
+Each request authenticates with a workspace-scoped LangSmith API key. Developers can create their own personal access token (PAT), which carries their role, or the Simulator creates one for them. For shared agents or a company-wide rollout through mobile device management (MDM), you can create service keys instead.
 
-* **Spend limits:** hard caps at the organization, workspace, API key, or user level. Refer to [Spend policies](llm-gateway-spend-policies.md).
-* **Data policy:** detect and redact PII and secrets before they reach the model, and control whether request and response bodies are traced. Refer to [Data policy](llm-gateway-data-policy.md).
+For key types and scoping, see [Choose a key type](llm-gateway-authentication.md#choose-a-key-type). For coding agent rollouts, see [Set up coding agents](llm-gateway-coding-agents.md).
 
-Policies are optional during initial setup. The gateway will freely allow invocations until you have configured policies.
+## Optional: Set policies
 
-## 4. Distribute API keys to users
+Creating policies requires the `organization:gateway:manage` permission, which Organization Admins and Organization Operators have by default. On self-hosted LangSmith earlier than application version 0.18.9 (Helm chart versions before 0.18.0-rc.22), it requires `organization:manage` instead.
 
-Create workspace-scoped [Service Keys](administration-overview.md#service-keys) for users who need gateway access. Each key should be attached to a role that includes `gateway:invoke` and `workspaces:read`.
+Use the tabs on the **LLM Gateway** page to create any of these policy types:
 
-Use workspace-scoped keys, not organization-scoped keys. See [API key scoping](llm-gateway-access.md#api-key-scoping) for details.
+* **[Spend limits](llm-gateway-spend-policies.md)**: Hard caps at the organization, workspace, API key, or user level. Your organization may already have a default limit on the **Cost Controls** tab.
+* **[Rate limits](llm-gateway-rate-limit-policies.md)**: Request or token limits in a time window.
+* **[Model access](llm-gateway-model-access-policies.md)**: Which models users can call.
+* **[Header-based policies](llm-gateway-header-policies.md)**: Spend caps, rate limits, and model access scoped by a custom request header, such as a customer or team identifier.
+* **[Data policies](llm-gateway-data-policy.md)**: Detect and redact PII and secrets before they reach the model, and control whether request and response bodies are traced.
 
-Share the key and the gateway endpoint with each user, or distribute them via MDM (mobile device management) for company-wide coding agent rollouts. For per-agent configuration instructions, refer to [Set up coding agents](llm-gateway-coding-agents.md).
+On the Enterprise plan, creating, updating, and deleting policies is recorded in [audit logs](audit-logs.md).
 
-## Verification
+## Send a test request
 
-For bring-your-own-key providers, ask a user to run the [verification cURL from the quickstart](llm-gateway-quickstart.md#send-a-request). A `200` response confirms the gateway, the API key, provider secrets, and role permissions are all configured correctly. The call will appear as a trace in the **gateway** tracing project in the workspace.
-
-## Next steps
-
-* [Quickstart](llm-gateway-quickstart.md): share with your users as the getting-started guide.
-* [Set up coding agents](llm-gateway-coding-agents.md): configure Claude Code, Codex, and other agents org-wide.
-* [Traces, Engine, and access control](llm-gateway-access.md): deep dive on roles, scoped keys, trace routing, and who can see what.
+To confirm the setup, follow [Send your first LLM Gateway request](llm-gateway-first-request.md). It sends a request from the Simulator and from code, and shows its trace. Share the same page with developers as their starting guide.
 
 ***
 

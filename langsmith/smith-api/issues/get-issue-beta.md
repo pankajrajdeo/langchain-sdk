@@ -429,8 +429,8 @@ components:
             - $ref: '#/components/schemas/repohost.Provider'
         provider_web_base_url:
           description: >-
-            ProviderWebBaseURL is the GitLab instance a GitLab fix lives on;
-            null for GitHub.
+            ProviderWebBaseURL is the instance the fix was opened on; null on
+            GitHub fixes from before it was recorded.
           anyOf:
             - type: string
             - type: 'null'

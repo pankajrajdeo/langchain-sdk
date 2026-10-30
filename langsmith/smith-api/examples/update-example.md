@@ -221,28 +221,35 @@ components:
               format: uuid
             - type: 'null'
           title: Dataset Id
+          description: >-
+            The example's current dataset. An example can't move to another
+            dataset.
         inputs:
           anyOf:
             - additionalProperties: true
               type: object
             - type: 'null'
           title: Inputs
+          description: New inputs. Replaces the existing inputs; omit to keep them.
         outputs:
           anyOf:
             - additionalProperties: true
               type: object
             - type: 'null'
           title: Outputs
+          description: New outputs. Replaces the existing outputs; omit to keep them.
         attachments_operations:
           anyOf:
             - $ref: '#/components/schemas/AttachmentsOperations'
             - type: 'null'
+          description: Attachments to rename or keep.
         metadata:
           anyOf:
             - additionalProperties: true
               type: object
             - type: 'null'
           title: Metadata
+          description: New metadata. Replaces the existing metadata; omit to keep it.
         split:
           anyOf:
             - items:
@@ -251,9 +258,11 @@ components:
             - type: string
             - type: 'null'
           title: Split
+          description: Split or splits to put the example in. Replaces its current splits.
         overwrite:
           type: boolean
           title: Overwrite
+          description: Not used.
           default: false
       type: object
       title: ExampleUpdate

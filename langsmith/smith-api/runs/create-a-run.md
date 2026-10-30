@@ -244,16 +244,13 @@ components:
       properties:
         address:
           description: >-
-            Beta. Addresses the run to an Agent environment in place of
-            session_id or
+            Addresses the run to an Agent environment in place of session_id or
 
             session_name, as lrn:agents/{id}/environments/{environment}. The
             environment is
 
-            case-insensitive. Only workspaces enabled for Agent addressing
-            accept it;
-
-            others get a 403.
+            case-insensitive. Self-hosted deployments need LangSmith v0.18 or
+            later.
           type: string
           example: lrn:agents/support-agent/environments/production
         dotted_order:

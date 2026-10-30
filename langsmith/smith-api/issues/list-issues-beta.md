@@ -206,24 +206,24 @@ paths:
           name: status
           in: query
           schema:
+            type: string
             enum:
               - open
               - fixing
               - watching
               - completed
               - ignored
-            type: string
             title: Status
         - description: Filter by severity
           name: severity
           in: query
           schema:
+            type: integer
             enum:
               - 0
               - 1
               - 2
               - 3
-            type: integer
             title: Severity
         - description: Filter by exact severity (repeatable; OR semantics)
           name: severity_exact
@@ -231,6 +231,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - 0
@@ -238,7 +239,6 @@ paths:
                 - 2
                 - 3
               type: integer
-            type: array
             title: Severity Exact
         - description: Filter by Engine activity (repeatable; OR semantics)
           name: activity
@@ -246,13 +246,13 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - fixing
                 - watching
                 - recurred
               type: string
-            type: array
             title: Activity
         - description: Filter by tag (exact match)
           name: tag
@@ -277,6 +277,7 @@ paths:
           name: sort_by
           in: query
           schema:
+            type: string
             enum:
               - default
               - created_at
@@ -285,7 +286,6 @@ paths:
               - last_updated
               - trace_count
               - severity
-            type: string
             title: Sort By
         - description: Group results by issue lifecycle status before applying sort_by
           name: status_first
@@ -534,8 +534,8 @@ components:
             - $ref: '#/components/schemas/repohost.Provider'
         provider_web_base_url:
           description: >-
-            ProviderWebBaseURL is the GitLab instance a GitLab fix lives on;
-            null for GitHub.
+            ProviderWebBaseURL is the instance the fix was opened on; null on
+            GitHub fixes from before it was recorded.
           anyOf:
             - type: string
             - type: 'null'

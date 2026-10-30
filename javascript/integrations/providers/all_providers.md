@@ -108,10 +108,6 @@ Connect LangGraph agents to front ends and observability platforms.
 >
 > Mock chat model for testing and development purposes.
 
-> **[FuturMix](https://futurmix.ai/)**
->
-> Unified AI gateway for 22+ models with OpenAI-compatible API.
-
 > **[Google Gemini](../chat/google.md)**
 >
 > Google's Gemini models via AI Studio and Gemini Enterprise Agent Platform.
@@ -127,6 +123,10 @@ Connect LangGraph agents to front ends and observability platforms.
 > **[Mistral](../chat/mistral.md)**
 >
 > Mistral's efficient and powerful language models.
+
+> **[Obscurify.ai](https://github.com/Obscurify-ai/langchain-obscurify)**
+>
+> Obscurify.ai provides a private OpenAI-compatible API for 200+ models that does not store prompts or responses.
 
 > **[Ollama](../chat/ollama.md)**
 >
@@ -558,6 +558,10 @@ Connect LangGraph agents to front ends and observability platforms.
 >
 > Retrieve status and results of a research task using its request ID.
 
+> **[viaSocket](https://github.com/Walkover-Web-Solution/viasocket-apps#langchain)**
+>
+> viaSocket lets LangChain.js agents run actions in 2,300+ connected apps through each user's own connection.
+
 > **[WebExtract](https://webextract.dev/docs/langchain)**
 >
 > Web page extraction API returning clean Markdown plus fixed-schema JSON for article metadata, product prices and tables.
@@ -652,6 +656,10 @@ Connect LangGraph agents to front ends and observability platforms.
 >
 > Long-term memory for create\_agent agents: adds what Recall learned about the user to the system prompt and records each exchange.
 
+> **[RuthlessSchemaGuard](https://github.com/moltbot-den/openentity/tree/main/integrations/langchain)**
+>
+> Agent middleware that validates tool and HTTP responses against Pydantic or JSON Schema and raises on violations.
+
 ## Callbacks
 
 > **[OpenInference](https://arize.com/docs/ax/integrations/python-agent-frameworks/langchain/langchain-tracing)**
@@ -662,9 +670,9 @@ Connect LangGraph agents to front ends and observability platforms.
 >
 > Trace LangChain.js, LangGraph.js, and Langflow-style callback runs in Respan.
 
-> **[SafePrompt](https://docs.safeprompt.dev/langchain)**
+> **[SafePrompt](https://safeprompt.dev/docs/langchain)**
 >
-> Validate prompts for prompt injection before they reach your model.
+> Callback handler that sends each prompt and tool output to the SafePrompt API and stops the run when it finds a prompt injection.
 
 ***
 

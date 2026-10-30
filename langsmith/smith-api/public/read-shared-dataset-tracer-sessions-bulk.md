@@ -387,11 +387,11 @@ components:
       type: object
       title: HTTPValidationError
     TraceTier:
-      type: string
       enum:
         - longlived
         - shortlived
       title: TraceTier
+      type: string
     ExperimentProgress:
       properties:
         expected_run_count:

@@ -188,7 +188,13 @@ paths:
           schema:
             type: string
             format: uuid
+            description: >-
+              Feedback ingest token. It's a credential: anyone who has it can
+              submit feedback.
             title: Token
+          description: >-
+            Feedback ingest token. It's a credential: anyone who has it can
+            submit feedback.
         - name: score
           in: query
           required: false

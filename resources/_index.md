@@ -1,13 +1,13 @@
 ---
 title: "resources"
-description: "Index of 37 pages and 0 subdirectories under resources."
+description: "Index of 38 pages and 0 subdirectories under resources."
 category: "index"
 tags: [index, resources]
 ---
 
 # resources
 
-37 pages here.
+38 pages here.
 
 ## Files
 
@@ -41,6 +41,7 @@ tags: [index, resources]
 - [LLM Evaluation Metrics: Measuring What Matters for Your Users](llm-evaluation-metrics.md) - Key Takeaways
 - [LLM observability &amp; monitoring: how to evaluate agent behavior](llm-monitoring-observability.md) - Key Takeaways
 - [9 LLM Observability Tools for Production AI Agents](llm-observability-tools.md) - Compare the best LLM observability tools for production AI agents, with practical tradeoffs for traces, evals, debugging, cost, and review workflows.
+- [How to Test LLMs and AI Agents](llm-testing.md) - - Testing AI applications and agents combines code checks, evals, and human review to ensure any changes are safe to release. - Offline evals use curated datasets to test changes before release...
 - [You don’t know what your agent will do until it’s in production](production-monitoring.md) - Create agentsShare
 - [Scaling Agents in Europe &amp; The Middle East: Lessons from Schneider Electric, Vodafone, and monday.com](scaling-agents-in-europe-the-middle-east-lessons-from-schneider-electric-vodafone-and-monday-com.md) - New Guide on Scaling Agents in Europe &amp; the Middle East to see how Schneider Electric, Vodafone, and monday.com are approaching production AI at scale, from establishing shared agent platforms...
 - [Scaling Agents in Healthcare &amp; Life Sciences](scaling-agents-in-healthcare-life-sciences.md) - Agent programs in healthcare and life sciences are being built under a different set of constraints than those in most industries. There’s plenty of upside if the constraints can be resolved. Success...

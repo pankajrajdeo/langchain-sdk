@@ -12,6 +12,10 @@ tags: [docs, langsmith, playground-model-providers]
 
 The [Playground](prompt-engineering-concepts.md#playground) supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
 
+> [!NOTE]
+>
+> To send Playground requests through the [LLM Gateway](llm-gateway.md), select **LangSmith Gateway** as the provider. The providers on this page call the model provider directly with your workspace secrets, so gateway policies and [fallback chains](llm-gateway-fallbacks.md#set-fallbacks-for-a-prompt) do not apply to them.
+
 Use this page for a list of the available providers and their configuration options:
 
 ![](https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/bedrock.svg?fit=max\&auto=format\&n=ZPKed1feKJ8F6LVo\&q=85\&s=d6fc326f6c429075add5a742c87d12b1)

@@ -1,16 +1,18 @@
 ---
-title: "Delete model price"
-description: "/langsmith/langsmith-platform-openapi.json delete /api/v1/model-price-map/{id}"
-source: "https://docs.langchain.com/langsmith/smith-api/model-price-map/delete-model-price"
+title: "Create a volume (Beta)"
+description: "Beta: This API is in active development and may change without notice. Requires sandbox volumes to be enabled for your workspace. Create an empty volume that can be attached to sandboxes at a mount..."
+source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/create-a-volume-beta"
 category: "docs"
-tags: [docs, langsmith, smith-api, model-price-map, delete-model-price]
+tags: [docs, langsmith, smith-api, sandboxes, create-a-volume-beta]
 ---
 
-# Delete model price
+# Create a volume (Beta)
+
+> **Beta:** This API is in active development and may change without notice. Requires sandbox volumes to be enabled for your workspace. Create an empty volume that can be attached to sandboxes at a mount path. The size is rounded up to a whole GiB.
 
 ## OpenAPI
 
-**/langsmith/langsmith-platform-openapi.json delete /api/v1/model-price-map/{id}**
+**/langsmith/langsmith-platform-openapi.json post /api/v2/sandboxes/volumes**
 
 ````yaml
 openapi: 3.1.0
@@ -172,47 +174,143 @@ tags:
     x-hidden: true
   - name: usage
 paths:
-  /api/v1/model-price-map/{id}:
-    delete:
+  /api/v2/sandboxes/volumes:
+    post:
       tags:
-        - model-price-map
-      summary: Delete model price
-      operationId: delete_model_price_api_v1_model_price_map__id__delete
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-            title: Id
+        - sandboxes
+      summary: Create a volume (Beta)
+      description: >-
+        **Beta:** This API is in active development and may change without
+        notice. Requires sandbox volumes to be enabled for your workspace.
+        Create an empty volume that can be attached to sandboxes at a mount
+        path. The size is rounded up to a whole GiB.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sandboxes.CreateVolumePayload'
       responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema: {}
-        '422':
-          description: Validation Error
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: URL of the new volume
+              schema:
+                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/sandboxes.VolumeResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '409':
+          description: a volume with this name exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    HTTPValidationError:
+    sandboxes.CreateVolumePayload:
+      type: object
+      required:
+        - name
+        - size_bytes
+      properties:
+        description:
+          type: string
+          maxLength: 1024
+        labels:
+          $ref: '#/components/schemas/sandboxes.Labels'
+        name:
+          description: Name is unique within the workspace.
+          type: string
+          maxLength: 255
+        size_bytes:
+          description: SizeBytes is the volume's capacity, rounded up to a whole GiB.
+          type: integer
+    sandboxes.VolumeResponse:
+      type: object
+      properties:
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.VolumeAttachmentResponse'
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        labels:
+          $ref: '#/components/schemas/sandboxes.Labels'
+        name:
+          type: string
+        size_bytes:
+          type: integer
+        source_volume_id:
+          type: string
+        status:
+          type: string
+        status_message:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        updated_by:
+          type: string
+    sandboxes.ErrorResponse:
+      type: object
       properties:
         detail:
-          items:
-            type: string
-          type: array
-          title: Detail
+          type: object
+          properties:
+            error:
+              type: string
+            error_id:
+              type: string
+            message:
+              type: string
+    sandboxes.Labels:
       type: object
-      title: HTTPValidationError
+      additionalProperties:
+        type: string
+    sandboxes.VolumeAttachmentResponse:
+      type: object
+      properties:
+        mount_path:
+          type: string
+        read_only:
+          type: boolean
+        sandbox_id:
+          type: string
+        sandbox_name:
+          type: string
   securitySchemes:
     API Key:
       type: apiKey

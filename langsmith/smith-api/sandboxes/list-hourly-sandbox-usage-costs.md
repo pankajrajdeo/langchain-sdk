@@ -209,10 +209,10 @@ paths:
           name: resource_type
           in: query
           schema:
+            type: string
             enum:
               - SANDBOX
               - SNAPSHOT
-            type: string
             title: Resource Type
         - description: Resource UUID filter; repeat this parameter up to 100 times
           name: resource_ids
@@ -220,9 +220,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Resource Ids
         - description: Maximum rows to return
           name: page_size
@@ -240,10 +240,10 @@ paths:
           in: query
           schema:
             default: HOUR
+            type: string
             enum:
               - HOUR
               - RESOURCE
-            type: string
             title: Granularity
         - description: Opaque pagination cursor
           name: cursor
@@ -254,13 +254,25 @@ paths:
         - description: >-
             Include usage totals across the filtered interval (RESOURCE only).
             Omitted when unrestricted resource access cannot be verified or the
-            service does not support totals.
+            service does not support totals. CLI: use --format raw to show this
+            summary.
           name: include_totals
           in: query
           schema:
             default: false
             type: boolean
             title: Include Totals
+        - description: >-
+            Include bounded daily physical usage for the top 10 resources per
+            metric and Other. Requires RESOURCE and include_totals. Omitted when
+            unrestricted access or service support is unavailable. CLI: use
+            --format raw to show this summary.
+          name: include_daily
+          in: query
+          schema:
+            default: false
+            type: boolean
+            title: Include Daily
       responses:
         '200':
           description: OK
@@ -305,6 +317,15 @@ components:
         - items
         - next_cursor
       properties:
+        daily:
+          description: >-
+            Daily usage over the full filtered interval, independent of
+            pagination.
+
+            Omitted unless requested, supported, and unrestricted resource
+            access is verified.
+          allOf:
+            - $ref: '#/components/schemas/sandboxes.SandboxUsageDailyResponse'
         items:
           type: array
           items:
@@ -353,6 +374,15 @@ components:
           type: string
         type:
           type: string
+    sandboxes.SandboxUsageDailyResponse:
+      type: object
+      required:
+        - entries
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.SandboxUsageDaily'
     sandboxes.SandboxUsageCost:
       type: object
       required:
@@ -392,6 +422,14 @@ components:
           type: string
           format: decimal
           example: '0.000123'
+        memory_gib_hours:
+          description: >-
+            Memory usage in GiB-hours, as a decimal string. Available with
+            RESOURCE granularity; null means complete usage is unavailable.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
         period_start:
           type: string
           format: date-time
@@ -400,6 +438,15 @@ components:
           format: uuid
         resource_type:
           $ref: '#/components/schemas/sandboxes.UsageCostResourceType'
+        storage_gib_hours:
+          description: >-
+            Recorded storage usage in GiB-hours from hourly samples, including
+            checkpoints. Available with RESOURCE granularity. Missing intervals
+            are excluded; null means no usable measurements are available.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
         storage_standard_units:
           description: >-
             Allocated storage usage in Standard Units, as a decimal string,
@@ -407,6 +454,14 @@ components:
 
             Null means complete Standard storage usage is unavailable; "0" means
             known zero usage.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
+        vcpu_hours:
+          description: >-
+            CPU usage in vCPU-hours, as a decimal string. Available with
+            RESOURCE granularity; null means complete usage is unavailable.
           anyOf:
             - type: string
               format: decimal
@@ -436,6 +491,23 @@ components:
         lsu:
           type: string
           format: decimal
+        memory_gib_hours:
+          description: >-
+            Memory usage in GiB-hours, as a decimal string. Null means complete
+            usage is unavailable.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
+        storage_gib_hours:
+          description: >-
+            Recorded storage usage in GiB-hours from hourly samples, including
+            checkpoints. Missing intervals are excluded; null means no usable
+            measurements are available.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
         storage_standard_units:
           description: >-
             Total storage usage in Standard Units across the entire filtered
@@ -445,6 +517,14 @@ components:
 
             Null means complete Standard storage usage is unavailable; "0" means
             known zero usage.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
+        vcpu_hours:
+          description: >-
+            CPU usage in vCPU-hours, as a decimal string. Null means complete
+            usage is unavailable.
           anyOf:
             - type: string
               format: decimal
@@ -462,6 +542,50 @@ components:
           type: string
         run_id:
           type: string
+    sandboxes.SandboxUsageDaily:
+      type: object
+      required:
+        - is_other
+        - period_start
+      properties:
+        is_other:
+          description: >-
+            Other combines resources outside the top groups. Their individual
+            IDs are omitted.
+          type: boolean
+        memory_gib_hours:
+          description: >-
+            Memory usage in GiB-hours, as a decimal string. Null means complete
+            usage is unavailable.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
+        period_start:
+          type: string
+          format: date-time
+        resource_id:
+          type: string
+          format: uuid
+        resource_type:
+          $ref: '#/components/schemas/sandboxes.UsageCostResourceType'
+        storage_gib_hours:
+          description: >-
+            Recorded storage usage in GiB-hours from hourly samples. Missing
+            intervals are excluded; null means no usable measurements are
+            available.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
+        vcpu_hours:
+          description: >-
+            CPU usage in vCPU-hours, as a decimal string. Null means complete
+            usage is unavailable.
+          anyOf:
+            - type: string
+              format: decimal
+            - type: 'null'
     sandboxes.UsageCostResourceType:
       type: string
       enum:

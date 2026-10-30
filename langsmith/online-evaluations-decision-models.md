@@ -66,7 +66,7 @@ Question names follow the same limits as other feedback keys and must be unique 
 
 ## Add a decision model online evaluator
 
-Decision model evaluators require a LangSmith Plus or Enterprise plan.
+Decision model evaluators require a LangSmith Plus or Enterprise [plan](https://docs.langchain.com/langsmith/pricing-plans.md). They are not available on [BYOC](byoc.md) deployments.
 
 To add a decision model online evaluator:
 

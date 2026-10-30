@@ -1,13 +1,13 @@
 ---
 title: "integrations/tools"
-description: "Index of 39 pages and 0 subdirectories under integrations/tools."
+description: "Index of 38 pages and 0 subdirectories under integrations/tools."
 category: "index"
 tags: [index, integrations, tools]
 ---
 
 # integrations/tools
 
-39 pages here.
+38 pages here.
 
 ## Files
 
@@ -48,5 +48,4 @@ tags: [index, integrations, tools]
 - [Tavily extract integration](tavily_extract.md) - Integrate with the Tavily extract tool using LangChain Python.
 - [Tavily map integration](tavily_map.md) - Integrate with the Tavily map tool using LangChain Python.
 - [Tavily search integration](tavily_search.md) - Integrate with the Tavily search tool using LangChain Python.
-- [Unstructured Transform integration](unstructured_transform.md) - Integrate with the Unstructured Transform tools using LangChain Python.
 - [Upstage groundedness check integration](upstage_groundedness_check.md) - Integrate with the Upstage groundedness check tool using LangChain Python.

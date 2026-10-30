@@ -226,9 +226,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Resource Id
         - description: >-
             Filter grouped results by evaluator type: 'llm', 'code' or
@@ -254,9 +254,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Tag Value Id
         - description: >-
             Filter grouped results to spend from evaluator attachments on the

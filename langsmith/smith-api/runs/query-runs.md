@@ -343,6 +343,17 @@ components:
           example:
             - 018e4c7e-a9fb-7ef0-a5b6-6ea3a82e9327
             - f47ac10b-58cc-4372-a567-0e02b2c3d479
+        include_subtree_usage:
+          description: >-
+            `include_subtree_usage` enriches selected token and cost fields on
+            root and intermediate runs with subtree totals, and selected
+            `first_token_time` with the earliest observed subtree timestamp.
+
+            Descendants contribute regardless of this request's filters or time
+            bounds. Runs without observed descendants retain their original
+            values. Defaults to false.
+          type: boolean
+          default: false
         is_root:
           description: >-
             `is_root` returns only root runs (true) or only non-root runs

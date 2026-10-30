@@ -78,8 +78,8 @@ Two main methods are available:
 | [`OpenAIEmbeddings`](openai.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-openai/month)](https://pypi.org/project/langchain-openai/) |
 | [`GoogleGenerativeAIEmbeddings`](google_generative_ai.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-google-genai/month)](https://pypi.org/project/langchain-google-genai/) |
 | [`OllamaEmbeddings`](ollama.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-ollama/month)](https://pypi.org/project/langchain-ollama/) |
-| [`MistralAIEmbeddings`](mistralai.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-mistralai/month)](https://pypi.org/project/langchain-mistralai/) |
 | [`HuggingFaceEmbeddings (Sentence Transformers)`](sentence_transformers.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-huggingface/month)](https://pypi.org/project/langchain-huggingface/) |
+| [`MistralAIEmbeddings`](mistralai.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-mistralai/month)](https://pypi.org/project/langchain-mistralai/) |
 | [`CohereEmbeddings`](cohere.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-cohere/month)](https://pypi.org/project/langchain-cohere/) |
 | [`NVIDIAEmbeddings`](nvidia_ai_endpoints.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-nvidia-ai-endpoints/month)](https://pypi.org/project/langchain-nvidia-ai-endpoints/) |
 | [`DatabricksEmbeddings`](databricks.md) | [  ![Downloads per month](https://static.pepy.tech/badge/databricks-langchain/month)](https://pypi.org/project/databricks-langchain/) |
@@ -250,14 +250,14 @@ In production, you would typically use a more robust persistent store, such as a
 | [`GoogleGenerativeAIEmbeddings`](google_generative_ai.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-google-genai/month)](https://pypi.org/project/langchain-google-genai/) |
 | [`BedrockEmbeddings`](bedrock.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-aws/month)](https://pypi.org/project/langchain-aws/) |
 | [`OllamaEmbeddings`](ollama.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-ollama/month)](https://pypi.org/project/langchain-ollama/) |
-| [`MistralAIEmbeddings`](mistralai.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-mistralai/month)](https://pypi.org/project/langchain-mistralai/) |
 | [`BGE on Hugging Face`](bge_huggingface.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-huggingface/month)](https://pypi.org/project/langchain-huggingface/) |
 | [`Hugging Face`](huggingfacehub.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-huggingface/month)](https://pypi.org/project/langchain-huggingface/) |
 | [`HuggingFaceEmbeddings (Sentence Transformers)`](sentence_transformers.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-huggingface/month)](https://pypi.org/project/langchain-huggingface/) |
 | [`Instructor embeddings on Hugging Face`](instruct_embeddings.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-huggingface/month)](https://pypi.org/project/langchain-huggingface/) |
+| [`MistralAIEmbeddings`](mistralai.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-mistralai/month)](https://pypi.org/project/langchain-mistralai/) |
 | [`Text embeddings inference`](text_embeddings_inference.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-huggingface/month)](https://pypi.org/project/langchain-huggingface/) |
-| [`CohereEmbeddings`](cohere.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-cohere/month)](https://pypi.org/project/langchain-cohere/) |
 | [`FireworksEmbeddings`](fireworks.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-fireworks/month)](https://pypi.org/project/langchain-fireworks/) |
+| [`CohereEmbeddings`](cohere.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-cohere/month)](https://pypi.org/project/langchain-cohere/) |
 | [`NVIDIAEmbeddings`](nvidia_ai_endpoints.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-nvidia-ai-endpoints/month)](https://pypi.org/project/langchain-nvidia-ai-endpoints/) |
 | [`DatabricksEmbeddings`](databricks.md) | [  ![Downloads per month](https://static.pepy.tech/badge/databricks-langchain/month)](https://pypi.org/project/databricks-langchain/) |
 | [`Pinecone`](pinecone.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-pinecone/month)](https://pypi.org/project/langchain-pinecone/) |
@@ -282,17 +282,18 @@ In production, you would typically use a more robust persistent store, such as a
 | [`PredictionGuardEmbeddings`](https://docs.predictionguard.com/api-reference/api-reference/embeddings) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-predictionguard/month)](https://pypi.org/project/langchain-predictionguard/) |
 | [`AimlapiEmbeddings`](https://docs.aimlapi.com/) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-aimlapi/month)](https://pypi.org/project/langchain-aimlapi/) |
 | [`DoublewordEmbeddings`](https://docs.doubleword.ai/inference-api/intro-to-doubleword-inference) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-doubleword/month)](https://pypi.org/project/langchain-doubleword/) |
-| [`BrainiallEmbeddings`](https://app.brainiall.com/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-brainiall/month)](https://pypi.org/project/langchain-brainiall/) |
 | [`Modelscope`](https://www.modelscope.cn/docs/sdk/pipelines) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-modelscope-integration/month)](https://pypi.org/project/langchain-modelscope-integration/) |
+| [`BrainiallEmbeddings`](https://app.brainiall.com/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-brainiall/month)](https://pypi.org/project/langchain-brainiall/) |
 | [`PolarDBPGEmbeddings`](https://github.com/polardb/langchain-polardb-pg) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-polardb-pg/month)](https://pypi.org/project/langchain-polardb-pg/) |
 | [`ForgeEmbeddings`](https://voxell.ai/forge) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-voxell/month)](https://pypi.org/project/langchain-voxell/) |
-| [`ANEEmbeddings`](https://github.com/sbryngelson/langchain-aneforge) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-aneforge/month)](https://pypi.org/project/langchain-aneforge/) |
-| [`GreenNodeEmbeddings`](https://greennode.ai/) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-greennode/month)](https://pypi.org/project/langchain-greennode/) |
 | [`TelnyxEmbeddings`](https://developers.telnyx.com/docs/inference/models) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-telnyx/month)](https://pypi.org/project/langchain-telnyx/) |
-| [`Lindorm`](https://help.aliyun.com/en/lindorm/product-overview/product-introduction-overview) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-lindorm-integration/month)](https://pypi.org/project/langchain-lindorm-integration/) |
+| [`GreenNodeEmbeddings`](https://greennode.ai/) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-greennode/month)](https://pypi.org/project/langchain-greennode/) |
+| [`ANEEmbeddings`](https://github.com/sbryngelson/langchain-aneforge) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-aneforge/month)](https://pypi.org/project/langchain-aneforge/) |
 | [`KeiroEmbeddings`](https://github.com/Keirolabs-API/langchain-keiro) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-keiro/month)](https://pypi.org/project/langchain-keiro/) |
-| [`Isaacus`](https://isaacus.com/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-isaacus/month)](https://pypi.org/project/langchain-isaacus/) |
+| [`Lindorm`](https://help.aliyun.com/en/lindorm/product-overview/product-introduction-overview) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-lindorm-integration/month)](https://pypi.org/project/langchain-lindorm-integration/) |
 | [`Netmind`](https://github.com/protagolabs/langchain-netmind) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-netmind/month)](https://pypi.org/project/langchain-netmind/) |
+| [`Isaacus`](https://isaacus.com/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-isaacus/month)](https://pypi.org/project/langchain-isaacus/) |
+| [`LlamayEmbeddings`](https://github.com/kosa8ai/langchain-llamay#readme) | N/A |
 
 ***
 

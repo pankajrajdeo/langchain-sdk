@@ -192,8 +192,8 @@ paths:
           required: false
           schema:
             type: boolean
-            title: Extend Trace Retention
             default: false
+            title: Extend Trace Retention
       requestBody:
         required: true
         content:
@@ -349,11 +349,11 @@ components:
       type: object
       title: HTTPValidationError
     TraceTier:
-      type: string
       enum:
         - longlived
         - shortlived
       title: TraceTier
+      type: string
   securitySchemes:
     API Key:
       type: apiKey

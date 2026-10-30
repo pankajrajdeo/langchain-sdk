@@ -195,8 +195,8 @@ paths:
           required: false
           schema:
             type: boolean
-            title: Extend Trace Retention
             default: false
+            title: Extend Trace Retention
       requestBody:
         required: true
         content:

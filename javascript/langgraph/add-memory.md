@@ -128,7 +128,7 @@ const graph = builder.compile({ checkpointer });
 > > [!TIP]
 > >
 > > **Setup**
-> > To use `MongoDBSaver`, you will need a MongoDB cluster. Follow [this guide](https://www.mongodb.com/docs/guides/atlas/cluster/) to create a cluster if you don't already have one. For an agent-focused walkthrough, see [short-term memory with MongoDB Atlas](../integrations/memory/mongodb-short-term-memory.md).
+> > To use `MongoDBSaver`, you will need a MongoDB cluster. Follow [this guide](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/) to create a cluster if you don't already have one. For an agent-focused walkthrough, see [short-term memory with MongoDB Atlas](../integrations/memory/mongodb-short-term-memory.md).
 >
 ```typescript
 > import { ChatAnthropic } from "@langchain/anthropic";
@@ -599,7 +599,7 @@ const items = await store.search(["user_123", "memories"], {
 >
 > > [!NOTE]
 > >
-> > Auto embedding requires MongoDB Atlas. MongoDB generates embeddings server-side via Voyage AI. See the [Automated Embedding documentation](https://www.mongodb.com/docs/atlas/atlas-vector-search/automated-embedding/) for more information.
+> > Auto embedding requires MongoDB Atlas. MongoDB generates embeddings server-side via Voyage AI. See the [Automated Embedding documentation](https://www.mongodb.com/docs/vector-search/) for more information.
 >
 ```typescript
 > import { StateGraph, StateSchema, MessagesValue, GraphNode, START } from "@langchain/langgraph";

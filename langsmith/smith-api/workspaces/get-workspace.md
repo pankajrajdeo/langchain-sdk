@@ -194,8 +194,10 @@ paths:
           required: false
           schema:
             type: boolean
+            description: Also return the workspace if it has been deleted.
             default: false
             title: Include Deleted
+          description: Also return the workspace if it has been deleted.
         - name: data_plane_id
           in: query
           required: false
@@ -204,7 +206,9 @@ paths:
               - type: string
                 format: uuid
               - type: 'null'
+            description: Accepted only from a data plane service; other callers get 403.
             title: Data Plane Id
+          description: Accepted only from a data plane service; other callers get 403.
       responses:
         '200':
           description: Successful Response
@@ -212,6 +216,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantForUser'
+        '403':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: >-
+            data_plane_id was sent by a caller other than that data plane's
+            service.
         '422':
           description: Validation Error
           content:
@@ -259,6 +271,16 @@ components:
             - type: string
             - type: 'null'
           title: Data Plane Url
+        data_plane_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Data Plane Name
+        data_plane_region:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Data Plane Region
         read_only:
           type: boolean
           title: Read Only
@@ -290,6 +312,28 @@ components:
         - is_personal
         - is_deleted
       title: TenantForUser
+    ProblemDetails:
+      properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     HTTPValidationError:
       properties:
         detail:

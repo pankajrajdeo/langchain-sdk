@@ -313,6 +313,16 @@ components:
           items:
             type: string
           type: array
+        red_team_target:
+          description: >-
+            RedTeamTarget is the external A2A endpoint red-team runs probe
+            instead
+
+            of the validation deployment, or null when none is configured.
+          anyOf:
+            - allOf:
+                - $ref: '#/components/schemas/agent.RedTeamTargetView'
+            - type: 'null'
         run_filter:
           description: >-
             RunFilter is a runs-filter-DSL string scoping which traces Engine
@@ -445,6 +455,15 @@ components:
           type: integer
         synced:
           type: integer
+    agent.RedTeamTargetView:
+      type: object
+      properties:
+        auth:
+          description: Auth describes the headers sent to this endpoint, and only to it.
+          allOf:
+            - $ref: '#/components/schemas/agent.TargetAuthStatus'
+        url:
+          type: string
     agent.TargetAuthStatus:
       type: object
       properties:

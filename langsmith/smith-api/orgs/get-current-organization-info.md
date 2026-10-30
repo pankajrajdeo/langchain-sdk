@@ -261,6 +261,10 @@ components:
           type: boolean
           title: Member Disabled
           default: false
+        is_sso_user:
+          type: boolean
+          title: Is Sso User
+          default: false
         sso_only:
           type: boolean
           title: Sso Only
@@ -339,15 +343,13 @@ components:
           title: Can Export Usage Backfill
           default: false
         llm_auth_proxy_enabled:
-          anyOf:
-            - type: boolean
-            - type: 'null'
+          type: boolean
           title: Llm Auth Proxy Enabled
+          default: false
         oidc_login_enabled:
-          anyOf:
-            - type: boolean
-            - type: 'null'
+          type: boolean
           title: Oidc Login Enabled
+          default: false
         llm_auth_proxy_jwt_audience:
           anyOf:
             - type: string
@@ -368,10 +370,9 @@ components:
           type: array
           title: Disabled Model Providers
         restrict_browser_secrets:
-          anyOf:
-            - type: boolean
-            - type: 'null'
+          type: boolean
           title: Restrict Browser Secrets
+          default: false
         llm_auth_proxy_allowed_urls:
           anyOf:
             - items:
@@ -379,6 +380,10 @@ components:
               type: array
             - type: 'null'
           title: Llm Auth Proxy Allowed Urls
+        oidc_sso_available:
+          type: boolean
+          title: Oidc Sso Available
+          default: false
         managed_evals_enabled:
           anyOf:
             - type: boolean

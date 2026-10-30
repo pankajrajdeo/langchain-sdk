@@ -224,6 +224,8 @@ OAuth-enabled configurations are honored wherever model configurations are consu
 
 When OAuth is enabled on a configuration, LangSmith does not prompt for a workspace secret for that configuration, because the broker supplies the credential at request time.
 
+The [LLM Gateway](llm-gateway-model-configurations.md) does not use OAuth client credentials. A `custom/<name>` gateway request authenticates with the configuration's API key secret.
+
 ### Security and audit
 
 * **Encryption at rest**: client secrets are Fernet-encrypted with the same derivation used for [workspace secrets](administration-overview.md#workspaces).

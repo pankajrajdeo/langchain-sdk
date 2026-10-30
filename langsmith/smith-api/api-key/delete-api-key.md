@@ -306,17 +306,12 @@ components:
         - short_key
         - description
       title: APIKeyGetResponse
-      description: >-
+      description: |-
         API key GET schema.
 
         role_id, org_role_id, and access_scope let clients render the key's
-
         current role state without a second round trip. For workspace-scoped
-
-        keys, org_role_id is null (the api_key's identity_id points at a
-
-        workspace identity, so there is no caller-meaningful org role to
-        surface).
+        service keys, org_role_id comes from the parent organization identity.
     HTTPValidationError:
       properties:
         detail:

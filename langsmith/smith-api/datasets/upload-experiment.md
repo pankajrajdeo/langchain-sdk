@@ -789,6 +789,13 @@ components:
               type: array
             - type: 'null'
           title: Categories
+        allows_multiple_categories:
+          type: boolean
+          title: Allows Multiple Categories
+          description: >-
+            Whether a reviewer can pick several categories. Categorical feedback
+            only.
+          default: false
       type: object
       required:
         - type
@@ -816,11 +823,11 @@ components:
       title: DataType
       description: Enum for dataset data types.
     TraceTier:
-      type: string
       enum:
         - longlived
         - shortlived
       title: TraceTier
+      type: string
     ExperimentProgress:
       properties:
         expected_run_count:

@@ -1,21 +1,21 @@
 ---
 title: "langsmith"
-description: "Index of 516 pages and 5 subdirectories under langsmith."
+description: "Index of 519 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-516 pages here, 1246 pages including subdirectories.
+519 pages here, 1257 pages including subdirectories.
 
 ## Directories
 
 - [agent-server-api/](agent-server-api/_index.md) - 73 pages
 - [fleet/](fleet/_index.md) - 24 pages
 - [javascript/](javascript/_index.md) - 31 pages
-- [python/](python/_index.md) - 31 pages
-- [smith-api/](smith-api/_index.md) - 571 pages
+- [python/](python/_index.md) - 32 pages
+- [smith-api/](smith-api/_index.md) - 578 pages
 
 ## Files
 
@@ -42,6 +42,7 @@ tags: [index, langsmith]
 - [Analyze an experiment](analyze-an-experiment.md) - This page describes some of the essential tasks for working with experiments in LangSmith:
 - [Custom instrumentation](annotate-code.md) - Instrument your code directly to control which functions are traced and how they appear in LangSmith.
 - [Annotate traces and runs inline](annotate-traces-inline.md) - LangSmith allows you to manually annotate traces with feedback within the application. This can be useful for adding context to a trace, such as a user's comment or a note about a specific issue. You...
+- [Build custom views for annotation queues](annotation-queue-custom-views.md) - Build a custom view with LangSmith Chat to control how runs and threads appear to reviewers in an annotation queue.
 - [Manage feedback & annotation queues programmatically](annotation-queues-sdk.md) - Use the LangSmith SDK to manage feedback configurations and annotation queue rubrics programmatically, and to add runs and threads to a queue for review. Define reusable feedback schemas at the...
 - [Use annotation queues](annotation-queues.md) - Annotation queues give human reviewers a focused workflow for attaching feedback to specific runs or threads. While you can always annotate traces inline, annotation queues let you group runs and...
 - [Control plane API reference for LangSmith Deployment](api-ref-control-plane.md) - Use the control plane API to programmatically create, manage, and automate Agent Server deployments in LangSmith Deployment.
@@ -239,29 +240,31 @@ tags: [index, langsmith]
 - [How to define an LLM-as-a-judge evaluator](llm-as-judge-sdk.md) - LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
 - [How to define an LLM-as-a-judge evaluator](llm-as-judge.md) - LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
 - [Set up the LLM auth proxy](llm-auth-proxy-self-hosted.md) - Deploy an Envoy-based auth proxy that validates LangSmith-signed JWTs and routes LLM requests to your upstream provider or gateway.
-- [Traces and access control](llm-gateway-access.md) - Understand where gateway traces land and who can see and configure what.
-- [Admin setup](llm-gateway-admin-setup.md) - One-time organization setup to enable the LLM Gateway and grant user access.
+- [View LLM Gateway traces](llm-gateway-access.md) - Find LLM Gateway traces, read their policy and cost metadata, triage policy violations in LangSmith Engine, and control who can see gateway traces.
+- [Set up the LLM Gateway](llm-gateway-admin-setup.md) - Set up the LLM Gateway for a team by adding provider keys, granting permission to call the gateway, issuing API keys, and setting governance policies.
 - [API formats](llm-gateway-api-formats.md) - Use OpenAI Chat Completions, Anthropic Messages, or OpenAI Responses requests to call models across providers through the LLM Gateway.
+- [Authenticate to the LLM Gateway](llm-gateway-authentication.md) - Choose a LangSmith API key for LLM Gateway requests, grant it permission to call the gateway, send it from your client, and fix authentication errors.
 - [Set up coding agents](llm-gateway-coding-agents.md) - Configure Claude Code, Codex, Gemini CLI, and Deep Agents Code to route LLM calls through the LLM Gateway.
 - [Gateway Credits](llm-gateway-credits.md) - Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
 - [Manage model configurations](llm-gateway-custom-providers.md) - Manage model configurations and control their availability across LangSmith features.
-- [Data policy](llm-gateway-data-policy.md) - Create data policies that redact sensitive data and control trace content in the LLM Gateway.
-- [Data policy](llm-gateway-data-protection.md) - Create data policies that redact sensitive data and control trace content in the LLM Gateway.
+- [Data policies](llm-gateway-data-policy.md) - Create data policies that redact sensitive data and control trace content in the LLM Gateway.
 - [Decision models](llm-gateway-decision-models.md) - Call TypeSafe and OpenAI decision models through the LangSmith LLM Gateway using the System One API or the OpenAI Decisions API.
 - [Direct model access](llm-gateway-direct-model-access.md) - Access provider APIs directly through provider-specific LLM Gateway paths without using the gateway standardization layer.
 - [Model fallbacks](llm-gateway-fallbacks.md) - Automatically retry a request against backup models when the primary model rate-limits, errors, or returns another configured status code.
-- [Per-customer policies](llm-gateway-header-policies.md) - Split gateway spend caps and rate limits by a custom request header so each of your end customers gets its own limit under a single API key.
+- [Send your first LLM Gateway request](llm-gateway-first-request.md) - Send your first request through the LLM Gateway from the Simulator, call the gateway from your code, and view the request's trace.
+- [Header-based policies](llm-gateway-header-policies.md) - Scope gateway spend caps, rate limits, and model access by a custom request header, such as a customer, tenant, or team identifier, under a single API key.
 - [How the LLM Gateway works](llm-gateway-how-it-works.md) - Understand what the LLM Gateway does to each request, how upstream credentials are resolved, and where the gateway is available.
 - [Gateway Credits](llm-gateway-langchain-provider.md) - Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
 - [Model access policies](llm-gateway-model-access-policies.md) - Control which model providers and models are accessible through the LLM Gateway for your organization, workspaces, users, or API keys.
 - [Custom model configurations](llm-gateway-model-configurations.md) - Call saved model configurations through the LLM Gateway to reach custom endpoints and use them in fallback chains.
-- [Monitor LLM Gateway spend](llm-gateway-monitoring.md) - View and analyze LLM Gateway costs by user, API key, and model.
-- [Provider authentication](llm-gateway-provider-authentication.md) - Configure identity-based authentication between the LLM Gateway and model providers that support more than an API key.
-- [LLM Gateway quickstart](llm-gateway-quickstart.md) - Call models across providers with one LangSmith API key, then view the trace and set a spend limit.
-- [Rate limit policies](llm-gateway-rate-limit-policies.md) - Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window.
+- [Monitor LLM Gateway spend](llm-gateway-monitoring.md) - View and analyze LLM Gateway costs by user, API key, model, provider, and request header.
+- [Provider authentication](llm-gateway-provider-authentication.md) - Choose how the LLM Gateway authenticates to each model provider, add provider keys as workspace secrets, and fix provider credential errors.
+- [Send your first LLM Gateway request](llm-gateway-quickstart.md) - Send your first request through the LLM Gateway from the Simulator, call the gateway from your code, and view the request's trace.
+- [Rate limit policies](llm-gateway-rate-limit-policies.md) - Limit the number of requests or tokens an organization, workspace, user, or API key can send through the LLM Gateway in a rolling time window.
 - [Enable the LLM Gateway](llm-gateway-self-hosted.md) - Enable the agent-gateway service on a self-hosted LangSmith install using the Helm chart, then make your first gateway call.
 - [Spend policies](llm-gateway-spend-policies.md) - Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
-- [LLM Gateway](llm-gateway.md) - Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data-protection policies.
+- [View LLM Gateway traces](llm-gateway-traces.md) - Find LLM Gateway traces, read their policy and cost metadata, triage policy violations in LangSmith Engine, and control who can see gateway traces.
+- [LLM Gateway](llm-gateway.md) - Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data protection policies.
 - [Local development & testing](local-dev-testing.md) - Compare langgraph dev and langgraph up for local development and production-like testing of Agent Server applications.
 - [How to run an evaluation locally (Python only)](local.md) - Sometimes it is helpful to run an evaluation locally without uploading any results to LangSmith. For example, if you're quickly iterating on a prompt and want to smoke test it on a few examples, or...
 - [Log LLM calls](log-llm-trace.md) - When you call an LLM directly, outside of LangChain or a LangSmith supported integration, you need to provide specific metadata so that LangSmith can display token counts, calculate costs, and let...

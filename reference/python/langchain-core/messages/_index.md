@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain-core/messages"
-description: "Index of 27 pages and 11 subdirectories under reference/python/langchain-core/messages."
+description: "Index of 30 pages and 12 subdirectories under reference/python/langchain-core/messages."
 category: "index"
 tags: [index, reference, python, langchain-core, messages]
 ---
 
 # reference/python/langchain-core/messages
 
-27 pages here, 331 pages including subdirectories.
+30 pages here, 339 pages including subdirectories.
 
 ## Directories
 
@@ -19,12 +19,14 @@ tags: [index, reference, python, langchain-core, messages]
 - [function/](function/_index.md) - 7 pages
 - [human/](human/_index.md) - 4 pages
 - [modifier/](modifier/_index.md) - 2 pages
+- [notification/](notification/_index.md) - 5 pages
 - [system/](system/_index.md) - 4 pages
 - [tool/](tool/_index.md) - 30 pages
 - [utils/](utils/_index.md) - 15 pages
 
 ## Files
 
+- [add_notification_metadata](add_notification_metadata.md) - Return a copy of message marked as added by the agent harness.
 - [ai](ai.md) - AI message.
 - [base](base.md) - Base message.
 - [block_translators](block_translators.md) - Derivations of standard content blocks from provider content.
@@ -38,6 +40,7 @@ tags: [index, reference, python, langchain-core, messages]
 - [filter_messages](filter_messages.md) - Filter messages based on name, type or id.
 - [function](function.md) - Function Message.
 - [get_buffer_string](get_buffer_string.md) - Convert a sequence of messages to strings and concatenate them into one string.
+- [get_notification_metadata](get_notification_metadata.md) - Return the notification metadata of message.
 - [human](human.md) - Human message.
 - [import_attr](import_attr.md) - Import an attribute from a module located in a package.
 - [is_data_content_block](is_data_content_block.md) - Check if the provided content block is a data content block.
@@ -48,6 +51,7 @@ tags: [index, reference, python, langchain-core, messages]
 - [messages_from_dict](messages_from_dict.md) - Convert a sequence of messages from dicts to Message objects.
 - [messages_to_dict](messages_to_dict.md) - Convert a sequence of Messages to a list of dictionaries.
 - [modifier](modifier.md) - Message responsible for deleting other messages.
+- [notification](notification.md) - Metadata for messages the agent harness adds to a conversation.
 - [system](system.md) - System message.
 - [tool](tool.md) - Messages for tools.
 - [trim_messages](trim_messages.md) - Trim messages to be below a token count.

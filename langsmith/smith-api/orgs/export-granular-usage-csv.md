@@ -288,11 +288,11 @@ components:
         `GET /granular-usage` without a `kind` query param get the same
         response shape they always did.
     TraceTier:
-      type: string
       enum:
         - longlived
         - shortlived
       title: TraceTier
+      type: string
     HTTPValidationError:
       properties:
         detail:

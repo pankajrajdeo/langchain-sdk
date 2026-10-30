@@ -221,10 +221,10 @@ Both build the classifier on first use rather than at import, because
 deployment imports this module to read the channel declaration and the
 classifier needs a key to construct.
 
-Set `TYPESAFE_API_KEY` on the deployment. To route through the LangSmith gateway
+Set `TYPESAFE_API_KEY` on the deployment. To route through the LLM Gateway
 instead, set `TYPESAFE_BASE_URL=https://gateway.smith.langchain.com` and use a
 workspace-scoped LangSmith API key, with `TYPESAFE_API_KEY` in your workspace
-[provider secrets](../llm-gateway-admin-setup.md#1-add-provider-secrets).
+[provider secrets](../llm-gateway-provider-authentication.md#add-a-provider-key).
 
 ## Deploy the agent
 
@@ -305,7 +305,7 @@ Files stay scoped to the Slack thread they arrived in, because every thread gets
 
 * [Channels overview](managed-deep-agents-channels.md): understand how channels connect messaging services to an agent.
 * [Decision models](../llm-gateway-decision-models.md): configure the model that scores reaction emoji.
-* [LLM Gateway setup](../llm-gateway-admin-setup.md): enable the gateway and add the provider secret reactions need.
+* [Set up the LLM Gateway](../llm-gateway-admin-setup.md): add the provider key that reactions need.
 * [Agent-owned interrupts](managed-deep-agents-agent-owned-interrupts.md): post a Slack form from a tool and resume the run on submit.
 * [Sandboxes](managed-deep-agents-sandboxes.md): give the agent the filesystem that file transfers read and write.
 * [Deploy an agent](managed-deep-agents-deploy.md): configure and deploy a managed deep agent.

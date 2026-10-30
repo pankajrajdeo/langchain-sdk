@@ -628,11 +628,24 @@ components:
         - get_sandbox_snapshot
         - create_sandbox_snapshot
         - delete_sandbox_snapshot
+        - list_sandbox_volumes
+        - get_sandbox_volume
+        - create_sandbox_volume
+        - clone_sandbox_volume
+        - update_sandbox_volume
+        - delete_sandbox_volume
         - list_sandbox_registries
         - get_sandbox_registry
         - create_sandbox_registry
         - update_sandbox_registry
         - delete_sandbox_registry
+        - list_sandbox_functions
+        - get_sandbox_function
+        - create_sandbox_function
+        - update_sandbox_function
+        - deploy_sandbox_function
+        - delete_sandbox_function
+        - generate_sandbox_function_token
         - create_data_plane
         - delete_data_plane
         - update_data_plane
@@ -830,6 +843,20 @@ components:
         - create_custom_app_editing_credential
         - create_custom_app_editing_sandbox
         - delete_custom_app_editing_sandbox
+        - create_taskset
+        - update_taskset
+        - delete_taskset
+        - create_taskset_version
+        - download_taskset_bundle
+        - create_taskset_task
+        - create_taskset_task_version
+        - delete_taskset_task
+        - get_taskset_task_file_content
+        - create_taskset_world
+        - create_taskset_world_version
+        - get_taskset_world_file_content
+        - create_taskset_run
+        - cancel_taskset_run
         - test_op_generic
       title: AuditLogOperation
       description: Operations that are logged in audit_logs database table.

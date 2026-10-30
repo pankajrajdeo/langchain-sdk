@@ -118,7 +118,7 @@ tags: [docs, langsmith, byoc-faq]
 
 > **Does LangSmith support customer-managed encryption keys?**
 >
-> Not today. Data is encrypted at rest with cloud provider managed keys. Support for customer-managed encryption keys (CMK) is planned.
+> Yes. Customer-managed encryption keys (CMK) are supported for AWS BYOC deployments on request. Contact the LangChain team to coordinate setup. By default, data is encrypted at rest with cloud provider-managed keys.
 
 > **How do I revoke LangChain's access?**
 >
@@ -276,7 +276,7 @@ tags: [docs, langsmith, byoc-faq]
 
 > **Can I migrate an existing LangSmith instance to BYOC?**
 >
-> Partly. Users, roles, datasets, experiments, prompts, annotation queue configuration, automation rules, dashboards, and Fleet resources can be copied over. Traces are not migrated today. See [Migrate to BYOC](byoc-migration.md).
+> Yes. Users, roles, datasets, experiments, prompts, annotation queue configuration, automation rules, dashboards, and Fleet resources can be copied over. Trace migration is supported on AWS. Contact the LangChain team to arrange it. See [Migrate to BYOC](byoc-migration.md).
 
 ## See also
 

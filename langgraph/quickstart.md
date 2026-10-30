@@ -94,7 +94,7 @@ For conceptual information, see [Graph API overview](graph-api.md) and [Function
 
 > [!NOTE]
 >
-> For this example, you will need to set up a [Claude (Anthropic)](https://www.anthropic.com/) account and get an API key. Then, set the `ANTHROPIC_API_KEY` environment variable in your terminal. See [chat model integrations](../integrations/chat.md) for all available providers. If you use [LangSmith Gateway](../langsmith/llm-gateway.md), you can [bring your own provider keys](../langsmith/llm-gateway-quickstart.md#send-a-request) or use [Gateway Credits](../langsmith/llm-gateway-credits.md) to access models without a provider key.
+> For this example, you will need to set up a [Claude (Anthropic)](https://www.anthropic.com/) account and get an API key. Then, set the `ANTHROPIC_API_KEY` environment variable in your terminal. See [chat model integrations](../integrations/chat.md) for all available providers. Alternatively, If you are using the LangSmith [LLM Gateway](../langsmith/llm-gateway.md), traffic to providers is routed through LangSmith. Use the gateway key as the API key instead.
 
 **Use the Graph API**
 
