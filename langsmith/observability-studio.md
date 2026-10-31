@@ -61,7 +61,7 @@ Define your [configuration](../langgraph/use-graph-api.md#add-runtime-configurat
   )
 ```
 
-> **Full example configuration**
+> [accordion] Full example configuration
 >
 ```python
 > ## Using Pydantic

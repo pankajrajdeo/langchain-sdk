@@ -18,7 +18,7 @@ ABAC complements [Role-Based Access Control (RBAC)](rbac.md) by adding tag-based
 
 > [!NOTE]
 >
-> Roles and resource tags can be managed via the UI or API. ABAC policies are configurable via the [API](https://api.smith.langchain.com/docs#/access_policies). Once configured, policies are automatically enforced in both the API and the UI.
+> Roles, resource tags, and ABAC policies can be managed via the UI or [API](https://api.smith.langchain.com/docs#/access_policies). Once configured, policies are automatically enforced in both the API and the UI.
 
 ## Before you begin
 
@@ -45,7 +45,7 @@ ABAC complements [Role-Based Access Control (RBAC)](rbac.md) by adding tag-based
      >
      > This environment variable has no effect on personal organizations, because [RBAC](rbac.md) is not enabled for personal organizations.
 
-2. Set up authentication. To manage access policies via the API, you need a Personal Access Token (PAT) from an [Organization Admin](rbac.md#organization-admin) user, or an organization-scoped service key with Organization Admin permissions. Set the following environment variables before running any scripts:
+2. Set up authentication. To manage access policies via the API, you need a Personal Access Token (PAT) from a user with `organization:access-control:manage`, such as an [Organization Admin](rbac.md#organization-admin) or [Organization Operator](rbac.md#organization-operator), or an organization-scoped service key with Organization Admin permissions. Set the following environment variables before running any scripts:
 
 ```bash
    export LANGSMITH_API_KEY="your_admin_api_key"
@@ -129,7 +129,7 @@ Each condition group specifies:
 Each condition in the `conditions` array specifies:
 
 * **`attribute_name`** - Currently only `resource_tag_key` is supported
-* **`attribute_key`** - The tag key to match (e.g., `Environment`, `Team`)
+* **`attribute_key`** - The tag key to match (e.g., `Environment`, `Application`)
 * **`operator`** - The comparison operator
 * **`attribute_value`** - The value to compare against
 
@@ -165,11 +165,18 @@ Each operator has an `_if_exists` variant that matches by default when the tag k
 
 The `role_ids` array specifies which workspace roles the policy applies to. When a user with that role accesses a resource, the policy conditions are evaluated.
 
-Policies can be attached to [workspace roles](rbac.md#workspace-roles) (built-in or [custom](rbac.md#custom-roles)) when creating the policy, or attached later via the API.
+Policies can be attached to [workspace roles](rbac.md#workspace-roles) (built-in or [custom](rbac.md#custom-roles)) when creating the policy, or attached later in the UI or with the API.
+
+Policies can also be attached to [teams](teams.md#access-policies). A team's policies apply to its members in the workspaces the team can access.
 
 ## Managing access policies
 
-Access policies are managed via the LangSmith API by [Organization Admins](rbac.md#organization-admin). Before creating policies, [set up resource tags](set-up-resource-tags.md) in your workspace.
+Manage access policies in your organization settings or with the LangSmith API. Creating, editing, or deleting a policy requires `organization:access-control:manage`, which [Organization Admins](rbac.md#organization-admin) and [Organization Operators](rbac.md#organization-operator) hold. Before creating policies, [set up resource tags](set-up-resource-tags.md) in your workspace.
+
+Teams do not create policies. They attach existing ones:
+
+* Attaching a policy to a team requires `organization:teams:manage-policies`.
+* A Workspace Admin can attach an existing policy to a team as a [workspace-only policy](teams.md#add-workspace-only-members-and-policies) in their workspace, with `workspaces:teams:manage-policies`.
 
 ## How ABAC works with RBAC
 
@@ -178,6 +185,8 @@ Access policies are managed via the LangSmith API by [Organization Admins](rbac.
 * ABAC **deny** policies override RBAC permissions
 * ABAC **allow** policies can grant access even without RBAC permissions
 * If no ABAC policies match, the system falls back to RBAC
+
+When a user belongs to [teams](teams.md), LangSmith evaluates the permissions and policies from the user's role and every team together. A matching deny policy from any source still blocks access.
 
 ### Policy evaluation outcomes
 
@@ -207,22 +216,22 @@ Access policies are managed via the LangSmith API by [Organization Admins](rbac.
 
 ## Example scenarios
 
-### 1. Annotator team assignment
+### 1. Restrict annotators to their datasets
 
-Allow annotators to only access datasets tagged for their team:
+Allow annotators to only access datasets tagged for their annotation group:
 
 ```json
 {
-  "name": "Annotator Team A Access",
+  "name": "Annotator Group A Access",
   "effect": "allow",
   "condition_groups": [{
     "permission": "datasets:read",
     "resource_type": "dataset",
     "conditions": [{
       "attribute_name": "resource_tag_key",
-      "attribute_key": "Annotation-Team",
+      "attribute_key": "Annotation-Group",
       "operator": "equals",
-      "attribute_value": "Team-A"
+      "attribute_value": "Group-A"
     }]
   }]
 }

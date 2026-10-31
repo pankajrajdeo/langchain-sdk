@@ -190,7 +190,7 @@ For more on binding tools and tool call outputs, head to the [tool calling](../.
 
 `ChatOpenRouter` supports structured output via the [`with_structured_output`](../../langchain/models.md#structured-output) method. Two methods are available: `function_calling` (default) and `json_schema`.
 
-> **Individual model calls**
+> [accordion] Individual model calls
 >
 > Use `with_structured_output` to generate a structured model response. Specify `method="json_schema"` to use JSON Schema-based structured output; otherwise the method defaults to function calling.
 >
@@ -216,7 +216,7 @@ For more on binding tools and tool call outputs, head to the [tool calling](../.
 > Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
 ```
 
-> **Agent response format**
+> [accordion] Agent response format
 >
 > Specify `response_format` with [`ProviderStrategy`](../../langchain/structured-output.md) to engage structured output when generating the agent's final response.
 >

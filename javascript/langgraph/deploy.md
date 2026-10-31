@@ -109,60 +109,60 @@ Once your application is deployed:
 
 You can now test the API:
 
-**TypeScript**
-
-1. Install LangGraph SDK:
-
+> [tab] TypeScript
+>
+> 1. Install LangGraph SDK:
+>
 ```shell
-npm install @langchain/langgraph-sdk
+> npm install @langchain/langgraph-sdk
 ```
-
-2. Send a message to the agent:
-
+>
+> 2. Send a message to the agent:
+>
 ```ts
-import { Client } from "@langchain/langgraph-sdk";
-
-const client = new Client({ apiUrl: "your-deployment-url", apiKey: "your-langsmith-api-key" });
-
-const streamResponse = client.runs.stream(
-  null,    // Threadless run
-  "agent", // Name of agent. Defined in langgraph.json.
-  {
-    input: {
-      "messages": [
-        { "role": "user", "content": "What is LangGraph?"}
-      ]
-    },
-    streamMode: "messages",
-  }
-);
-
-for await (const chunk of streamResponse) {
-  console.log(`Receiving new event of type: ${chunk.event}...`);
-  console.log(JSON.stringify(chunk.data));
-  console.log("\n\n");
-}
+> import { Client } from "@langchain/langgraph-sdk";
+>
+> const client = new Client({ apiUrl: "your-deployment-url", apiKey: "your-langsmith-api-key" });
+>
+> const streamResponse = client.runs.stream(
+>   null,    // Threadless run
+>   "agent", // Name of agent. Defined in langgraph.json.
+>   {
+>     input: {
+>       "messages": [
+>         { "role": "user", "content": "What is LangGraph?"}
+>       ]
+>     },
+>     streamMode: "messages",
+>   }
+> );
+>
+> for await (const chunk of streamResponse) {
+>   console.log(`Receiving new event of type: ${chunk.event}...`);
+>   console.log(JSON.stringify(chunk.data));
+>   console.log("\n\n");
+> }
 ```
 
-**Rest API**
-
+> [tab] Rest API
+>
 ```bash
-curl -s --request POST \
-    --url <DEPLOYMENT_URL>/runs/stream \
-    --header 'Content-Type: application/json' \
-    --header "X-Api-Key: <LANGSMITH API KEY> \
-    --data "{
-        \"assistant_id\": \"agent\", `# Name of agent. Defined in langgraph.json.`
-        \"input\": {
-            \"messages\": [
-                {
-                    \"role\": \"human\",
-                    \"content\": \"What is LangGraph?\"
-                }
-            ]
-        },
-        \"stream_mode\": \"updates\"
-    }"
+> curl -s --request POST \
+>     --url <DEPLOYMENT_URL>/runs/stream \
+>     --header 'Content-Type: application/json' \
+>     --header "X-Api-Key: <LANGSMITH API KEY> \
+>     --data "{
+>         \"assistant_id\": \"agent\", `# Name of agent. Defined in langgraph.json.`
+>         \"input\": {
+>             \"messages\": [
+>                 {
+>                     \"role\": \"human\",
+>                     \"content\": \"What is LangGraph?\"
+>                 }
+>             ]
+>         },
+>         \"stream_mode\": \"updates\"
+>     }"
 ```
 
 ***

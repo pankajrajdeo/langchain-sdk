@@ -20,13 +20,13 @@ These loaders are used to load files given a filesystem path or a Blob object.
 
 ## All document loaders
 
-> **[Multiple individual files](file_loaders/multi_file.md)**
+> [card] [Multiple individual files](file_loaders/multi_file.md)
 
-> **[JSON files](file_loaders/json.md)**
+> [card] [JSON files](file_loaders/json.md)
 
-> **[JSONLines files](file_loaders/jsonlines.md)**
+> [card] [JSONLines files](file_loaders/jsonlines.md)
 
-> **[TextLoader](file_loaders/text.md)**
+> [card] [TextLoader](file_loaders/text.md)
 
 > [!NOTE]
 >

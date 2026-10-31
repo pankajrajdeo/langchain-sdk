@@ -133,40 +133,40 @@ langsmith --api-key lsv2_... trace list --project "<environment-tracer-session-n
 
 Point the CLI at your instance with `--api-url`, or with `LANGSMITH_ENDPOINT`. Both the browser-based login and API keys are supported.
 
-**OAuth**
-
-Requires LangSmith CLI `v0.2.46` or later and a deployment on LangSmith `0.16` or later, with the OAuth authorization server enabled. The chart exposes the OAuth authorization server under `/api`, but those endpoints stay inert until you [configure a signing JWKS](kubernetes.md#configure-a-signing-jwks).
-
-The OAuth authorization server is enabled automatically when `config.hostname` is set in your Helm chart **and** a signing JWKS is configured (via `config.signingJwks`, or the key `langsmith_signing_jwks` in `config.existingSecretName`). Without the signing JWKS, the OAuth endpoints are inactive and the CLI will receive a `404` — use the API key tab instead.
-
+> [tab] OAuth
+>
+> Requires LangSmith CLI `v0.2.46` or later and a deployment on LangSmith `0.16` or later, with the OAuth authorization server enabled. The chart exposes the OAuth authorization server under `/api`, but those endpoints stay inert until you [configure a signing JWKS](kubernetes.md#configure-a-signing-jwks).
+>
+> The OAuth authorization server is enabled automatically when `config.hostname` is set in your Helm chart **and** a signing JWKS is configured (via `config.signingJwks`, or the key `langsmith_signing_jwks` in `config.existingSecretName`). Without the signing JWKS, the OAuth endpoints are inactive and the CLI will receive a `404` — use the API key tab instead.
+>
 ```bash
-langsmith auth login --api-url https://langsmith.example.com --profile self-hosted
+> langsmith auth login --api-url https://langsmith.example.com --profile self-hosted
+```
+>
+> Pass your instance's base URL. The CLI reads the deployment's authorization server metadata to find the OAuth endpoints, so `https://langsmith.example.com` and `https://langsmith.example.com/api` both work.
+>
+> Tokens are stored under the named profile, so later commands only need `--profile`:
+>
+```bash
+> langsmith --profile self-hosted project list
 ```
 
-Pass your instance's base URL. The CLI reads the deployment's authorization server metadata to find the OAuth endpoints, so `https://langsmith.example.com` and `https://langsmith.example.com/api` both work.
-
-Tokens are stored under the named profile, so later commands only need `--profile`:
-
+> [tab] API key
+>
+> Works on every LangSmith version.
+>
 ```bash
-langsmith --profile self-hosted project list
+> export LANGSMITH_ENDPOINT="https://langsmith.example.com"
+> export LANGSMITH_API_KEY="lsv2_..."
+>
+> langsmith project list
 ```
-
-**API key**
-
-Works on every LangSmith version.
-
+>
+> To save the endpoint and key as a reusable profile instead:
+>
 ```bash
-export LANGSMITH_ENDPOINT="https://langsmith.example.com"
-export LANGSMITH_API_KEY="lsv2_..."
-
-langsmith project list
-```
-
-To save the endpoint and key as a reusable profile instead:
-
-```bash
-LANGSMITH_API_KEY="lsv2_..." langsmith profile create self-hosted \
-  --api-url https://langsmith.example.com --set-current
+> LANGSMITH_API_KEY="lsv2_..." langsmith profile create self-hosted \
+>   --api-url https://langsmith.example.com --set-current
 ```
 
 > [!WARNING]

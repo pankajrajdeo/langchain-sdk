@@ -12,7 +12,7 @@ LangSmith integrates seamlessly with LangChain (Python and JavaScript), the popu
 
 > [!NOTE]
 >
-> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
+> In an [agent-based workspace](agent-registry.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Installation
 
@@ -218,7 +218,7 @@ await chain.invoke(
 
 Use `LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT` to select the registered agent and environment. For per-request routing, pass an agent address in code. See [Log traces to an agent](log-traces-to-agent.md).
 
-> **Project-based workspaces and self-hosted LangSmith**
+> [accordion] Project-based workspaces and self-hosted LangSmith
 >
 > Set `LANGSMITH_PROJECT` to the tracing project name instead of setting the agent variables. For integrations that require `project_name` in an agent-based workspace, use the environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 

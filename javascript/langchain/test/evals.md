@@ -78,7 +78,7 @@ const agent = createAgent({
 });
 ```
 
-> **Strict match**
+> [accordion] Strict match
 >
 > The `strict` mode ensures trajectories contain identical messages in the same order with the same tool calls, though it allows for differences in message content. This is useful when you need to enforce a specific sequence of operations, such as requiring a policy lookup before authorizing an action.
 >
@@ -115,7 +115,7 @@ const agent = createAgent({
 > }
 ```
 
-> **Unordered match**
+> [accordion] Unordered match
 >
 > The `unordered` mode allows the same tool calls in any order. This is helpful when you want to verify that specific information was retrieved but don't care about the sequence. For example, an agent that checks both weather and events for a city with different tool calls.
 >
@@ -173,7 +173,7 @@ const agent = createAgent({
 > }
 ```
 
-> **Subset and superset match**
+> [accordion] Subset and superset match
 >
 > The `superset` and `subset` modes match partial trajectories. The `superset` mode verifies that the agent called at least the tools in the reference trajectory, allowing additional tool calls. The `subset` mode ensures the agent did not call any tools beyond those in the reference.
 >
@@ -234,7 +234,7 @@ const agent = createAgent({
 
 You can use an LLM to evaluate the agent's execution path with the `createTrajectoryLLMAsJudge` function. Unlike trajectory match evaluators, it doesn't require a reference trajectory, but one can be provided if available.
 
-> **Without reference trajectory**
+> [accordion] Without reference trajectory
 >
 ```ts
 > import { createTrajectoryLLMAsJudge, TRAJECTORY_ACCURACY_PROMPT } from "agentevals";
@@ -256,7 +256,7 @@ You can use an LLM to evaluate the agent's execution path with the `createTrajec
 > }
 ```
 
-> **With reference trajectory**
+> [accordion] With reference trajectory
 >
 > If you have a reference trajectory, use the prebuilt `TRAJECTORY_ACCURACY_PROMPT_WITH_REFERENCE` prompt:
 >
@@ -289,7 +289,7 @@ export LANGSMITH_TRACING="true"
 
 LangSmith offers two main approaches for running evaluations: [Vitest/Jest](../../../langsmith/vitest-jest.md) integration and the `evaluate` function.
 
-> **Use vitest/jest integration**
+> [accordion] Use vitest/jest integration
 >
 ```ts
 > import * as ls from "langsmith/vitest";
@@ -349,7 +349,7 @@ LangSmith offers two main approaches for running evaluations: [Vitest/Jest](../.
 > jest test_trajectory.eval.ts
 ```
 
-> **Use the evaluate function**
+> [accordion] Use the evaluate function
 >
 > Create a [LangSmith dataset](../../../langsmith/manage-datasets.md) and use the `evaluate` function. The dataset must have the following schema:
 >

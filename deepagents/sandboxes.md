@@ -65,280 +65,280 @@ Sandboxes are especially useful for:
 
 These examples assume you have already created a sandbox/devbox using the provider's SDK and have credentials set up. For signup, authentication, and provider-specific lifecycle details, see [Available providers](#available-providers).
 
-**LangSmith**
-
-**pip**
-
-```bash
-pip install langsmith
-```
-
-**uv**
-
-```bash
-uv add langsmith
-```
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LangSmithSandbox
-from langchain_anthropic import ChatAnthropic
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    client.delete_sandbox(ls_sandbox.name)
-```
-
-> **[View example trace](https://smith.langchain.com/public/5c79cd36-6974-4010-8f93-9e81a6ff8c94/r)**
+> [tab] LangSmith
 >
-> Open a public LangSmith run for this example.
-
-**Daytona**
-
 **pip**
 
 ```bash
-pip install langchain-daytona
+> pip install langsmith
 ```
-
-**uv**
-
-```bash
-uv add langchain-daytona
-```
-
-```python
-from daytona import Daytona
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
-```
-
-> **[View example trace](https://smith.langchain.com/public/571f1de5-c211-47b2-81d3-ea330cb6bc31/r)**
 >
-> Open a public LangSmith run for this example.
-
-**E2B**
-
-**pip**
-
-```bash
-pip install langchain-e2b
-```
-
 **uv**
 
 ```bash
-uv add langchain-e2b
+> uv add langsmith
 ```
-
+>
 ```python
-from e2b import Sandbox
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_e2b import E2BSandbox
-
-e2b_sandbox = Sandbox.create()
-backend = E2BSandbox(sandbox=e2b_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    e2b_sandbox.kill()
+> from deepagents import create_deep_agent
+> from deepagents.backends import LangSmithSandbox
+> from langchain_anthropic import ChatAnthropic
+> from langsmith.sandbox import SandboxClient
+>
+> client = SandboxClient()
+> ls_sandbox = client.create_sandbox()
+> backend = LangSmithSandbox(sandbox=ls_sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     client.delete_sandbox(ls_sandbox.name)
 ```
+>
+> > [card] [View example trace](https://smith.langchain.com/public/08974a6d-f496-46df-a0cc-29375c842988/r)
+> >
+> > Open a public LangSmith run for this example.
 
-**Modal**
-
+> [tab] Daytona
+>
 **pip**
 
 ```bash
-pip install langchain-modal
+> pip install langchain-daytona
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-modal
+> uv add langchain-daytona
 ```
-
+>
 ```python
-import modal
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_modal import ModalSandbox
-
-app = modal.App.lookup("your-app")
-modal_sandbox = modal.Sandbox.create(app=app)
-backend = ModalSandbox(sandbox=modal_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    modal_sandbox.terminate()
+> from daytona import Daytona
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_daytona import DaytonaSandbox
+>
+> sandbox = Daytona().create()
+> backend = DaytonaSandbox(sandbox=sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+>
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     sandbox.stop()
 ```
+>
+> > [card] [View example trace](https://smith.langchain.com/public/2e58456c-3eac-424e-bffd-83d779f8e5d7/r)
+> >
+> > Open a public LangSmith run for this example.
 
-**Runloop**
-
+> [tab] E2B
+>
 **pip**
 
 ```bash
-pip install langchain-runloop
+> pip install langchain-e2b
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-runloop
+> uv add langchain-e2b
 ```
-
+>
 ```python
-import os
-
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_runloop import RunloopSandbox
-from runloop_api_client import RunloopSDK
-
-client = RunloopSDK(bearer_token=os.environ["RUNLOOP_API_KEY"])
-
-devbox = client.devbox.create()
-backend = RunloopSandbox(devbox=devbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    devbox.shutdown()
+> from e2b import Sandbox
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_e2b import E2BSandbox
+>
+> e2b_sandbox = Sandbox.create()
+> backend = E2BSandbox(sandbox=e2b_sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+>
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     e2b_sandbox.kill()
 ```
 
-**Vercel**
-
+> [tab] Modal
+>
 **pip**
 
 ```bash
-pip install langchain-vercel-sandbox
+> pip install langchain-modal
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-vercel-sandbox
+> uv add langchain-modal
+```
+>
+```python
+> import modal
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_modal import ModalSandbox
+>
+> app = modal.App.lookup("your-app")
+> modal_sandbox = modal.Sandbox.create(app=app)
+> backend = ModalSandbox(sandbox=modal_sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     modal_sandbox.terminate()
 ```
 
+> [tab] Runloop
+>
+**pip**
+
+```bash
+> pip install langchain-runloop
+```
+>
+**uv**
+
+```bash
+> uv add langchain-runloop
+```
+>
 ```python
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_vercel_sandbox import VercelSandbox
-from vercel.sandbox import Sandbox
+> import os
+>
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_runloop import RunloopSandbox
+> from runloop_api_client import RunloopSDK
+>
+> client = RunloopSDK(bearer_token=os.environ["RUNLOOP_API_KEY"])
+>
+> devbox = client.devbox.create()
+> backend = RunloopSandbox(devbox=devbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+>
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     devbox.shutdown()
+```
 
-sandbox = Sandbox.create(runtime="python3.13")
-backend = VercelSandbox(sandbox=sandbox)
+> [tab] Vercel
+>
+**pip**
 
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
+```bash
+> pip install langchain-vercel-sandbox
+```
+>
+**uv**
 
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
+```bash
+> uv add langchain-vercel-sandbox
+```
+>
+```python
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_vercel_sandbox import VercelSandbox
+> from vercel.sandbox import Sandbox
+>
+> sandbox = Sandbox.create(runtime="python3.13")
+> backend = VercelSandbox(sandbox=sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+>
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     sandbox.stop()
 ```
 
 > [!TIP]
@@ -1067,7 +1067,7 @@ finally:
     client.delete_sandbox(ls_sandbox.name)
 ```
 
-> **[View example trace](https://smith.langchain.com/public/2b9e8bc1-f9de-41fd-824b-cf6f397eb2f2/r)**
+> [card] [View example trace](https://smith.langchain.com/public/b2b4ae03-c454-44ae-920b-7f049763cb1c/r)
 >
 > Open a public LangSmith run for this example.
 
@@ -1121,231 +1121,231 @@ When the agent calls the `execute` tool, it provides a `command` string and gets
 
 You can also call the backend `execute()` method directly in your application code.
 
-**LangSmith**
-
+> [tab] LangSmith
+>
 ```python
-from deepagents.backends.langsmith import LangSmithSandbox
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-result = backend.execute("python --version")
-print(result.output)
+> from deepagents.backends.langsmith import LangSmithSandbox
+> from langsmith.sandbox import SandboxClient
+>
+> client = SandboxClient()
+> ls_sandbox = client.create_sandbox()
+> backend = LangSmithSandbox(sandbox=ls_sandbox)
+>
+> result = backend.execute("python --version")
+> print(result.output)
 ```
 
-**AgentCore**
-
+> [tab] AgentCore
+>
 **pip**
 
 ```bash
-pip install langchain-agentcore-codeinterpreter
+> pip install langchain-agentcore-codeinterpreter
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-agentcore-codeinterpreter
+> uv add langchain-agentcore-codeinterpreter
 ```
-
+>
 ```python
-from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
-
-from langchain_agentcore_codeinterpreter import AgentCoreSandbox
-
-interpreter = CodeInterpreter(region="us-west-2")
-interpreter.start()
-
-backend = AgentCoreSandbox(interpreter=interpreter)
-
-try:
-    result = backend.execute("python3 --version")
-    print(result.output)
-finally:
-    interpreter.stop()
+> from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
+>
+> from langchain_agentcore_codeinterpreter import AgentCoreSandbox
+>
+> interpreter = CodeInterpreter(region="us-west-2")
+> interpreter.start()
+>
+> backend = AgentCoreSandbox(interpreter=interpreter)
+>
+> try:
+>     result = backend.execute("python3 --version")
+>     print(result.output)
+> finally:
+>     interpreter.stop()
 ```
 
-**Databricks**
-
+> [tab] Databricks
+>
 **pip**
 
 ```bash
-pip install 'databricks-langchain[deepagents]>=0.22.0'
+> pip install 'databricks-langchain[deepagents]>=0.22.0'
 ```
-
+>
 **uv**
 
 ```bash
-uv add 'databricks-langchain[deepagents]>=0.22.0'
+> uv add 'databricks-langchain[deepagents]>=0.22.0'
 ```
-
+>
 ```python
-from databricks.sdk import WorkspaceClient
-
-from databricks_langchain import DatabricksSandbox
-
-client = WorkspaceClient()
-backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
-
-result = backend.execute("python --version")
-print(result.output)
+> from databricks.sdk import WorkspaceClient
+>
+> from databricks_langchain import DatabricksSandbox
+>
+> client = WorkspaceClient()
+> backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
+>
+> result = backend.execute("python --version")
+> print(result.output)
 ```
 
-**Daytona**
-
+> [tab] Daytona
+>
 **pip**
 
 ```bash
-pip install langchain-daytona
+> pip install langchain-daytona
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-daytona
+> uv add langchain-daytona
 ```
-
+>
 ```python
-from daytona import Daytona
-
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-result = backend.execute("python --version")
-print(result.output)
+> from daytona import Daytona
+>
+> from langchain_daytona import DaytonaSandbox
+>
+> sandbox = Daytona().create()
+> backend = DaytonaSandbox(sandbox=sandbox)
+>
+> result = backend.execute("python --version")
+> print(result.output)
 ```
 
-**E2B**
-
+> [tab] E2B
+>
 **pip**
 
 ```bash
-pip install langchain-e2b
+> pip install langchain-e2b
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-e2b
+> uv add langchain-e2b
 ```
-
+>
 ```python
-from e2b import Sandbox
-from langchain_e2b import E2BSandbox
-
-e2b_sandbox = Sandbox.create()
-sandbox = E2BSandbox(sandbox=e2b_sandbox)
-
-try:
-    result = sandbox.execute("python --version")
-    print(result.output)
-finally:
-    e2b_sandbox.kill()
+> from e2b import Sandbox
+> from langchain_e2b import E2BSandbox
+>
+> e2b_sandbox = Sandbox.create()
+> sandbox = E2BSandbox(sandbox=e2b_sandbox)
+>
+> try:
+>     result = sandbox.execute("python --version")
+>     print(result.output)
+> finally:
+>     e2b_sandbox.kill()
 ```
 
-**Modal**
-
+> [tab] Modal
+>
 ```python
-import modal
-
-from langchain_modal import ModalSandbox
-
-app = modal.App.lookup("your-app")
-modal_sandbox = modal.Sandbox.create(app=app)
-backend = ModalSandbox(sandbox=modal_sandbox)
-
-result = backend.execute("python --version")
-print(result.output)
+> import modal
+>
+> from langchain_modal import ModalSandbox
+>
+> app = modal.App.lookup("your-app")
+> modal_sandbox = modal.Sandbox.create(app=app)
+> backend = ModalSandbox(sandbox=modal_sandbox)
+>
+> result = backend.execute("python --version")
+> print(result.output)
 ```
 
-**NVIDIA OpenShell**
-
+> [tab] NVIDIA OpenShell
+>
 **pip**
 
 ```bash
-pip install langchain-nvidia-openshell
+> pip install langchain-nvidia-openshell
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-nvidia-openshell
+> uv add langchain-nvidia-openshell
 ```
-
+>
 ```python
-import openshell
-
-from langchain_nvidia_openshell import OpenShellSandbox
-
-with openshell.Sandbox(delete_on_exit=True) as sandbox:
-    backend = OpenShellSandbox(sandbox=sandbox)
-
-    result = backend.execute("python3 --version")
-    print(result.output)
+> import openshell
+>
+> from langchain_nvidia_openshell import OpenShellSandbox
+>
+> with openshell.Sandbox(delete_on_exit=True) as sandbox:
+>     backend = OpenShellSandbox(sandbox=sandbox)
+>
+>     result = backend.execute("python3 --version")
+>     print(result.output)
 ```
 
-**Runloop**
-
+> [tab] Runloop
+>
 **pip**
 
 ```bash
-pip install langchain-runloop
+> pip install langchain-runloop
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-runloop
+> uv add langchain-runloop
 ```
-
+>
 ```python
-from runloop_api_client import RunloopSDK
-
-from langchain_runloop import RunloopSandbox
-
-api_key = "..."
-client = RunloopSDK(bearer_token=api_key)
-
-devbox = client.devbox.create()
-backend = RunloopSandbox(devbox=devbox)
-
-try:
-    result = backend.execute("python --version")
-    print(result.output)
-finally:
-    devbox.shutdown()
+> from runloop_api_client import RunloopSDK
+>
+> from langchain_runloop import RunloopSandbox
+>
+> api_key = "..."
+> client = RunloopSDK(bearer_token=api_key)
+>
+> devbox = client.devbox.create()
+> backend = RunloopSandbox(devbox=devbox)
+>
+> try:
+>     result = backend.execute("python --version")
+>     print(result.output)
+> finally:
+>     devbox.shutdown()
 ```
 
-**Vercel**
-
+> [tab] Vercel
+>
 **pip**
 
 ```bash
-pip install langchain-vercel-sandbox
+> pip install langchain-vercel-sandbox
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-vercel-sandbox
+> uv add langchain-vercel-sandbox
 ```
-
+>
 ```python
-from vercel.sandbox import Sandbox
-
-from langchain_vercel_sandbox import VercelSandbox
-
-sandbox = Sandbox.create(runtime="python3.13")
-backend = VercelSandbox(sandbox=sandbox)
-
-try:
-    result = backend.execute("python --version")
-    print(result.output)
-finally:
-    sandbox.stop()
+> from vercel.sandbox import Sandbox
+>
+> from langchain_vercel_sandbox import VercelSandbox
+>
+> sandbox = Sandbox.create(runtime="python3.13")
+> backend = VercelSandbox(sandbox=sandbox)
+>
+> try:
+>     result = backend.execute("python --version")
+>     print(result.output)
+> finally:
+>     sandbox.stop()
 ```
 
 For example:
@@ -1409,458 +1409,459 @@ The deepagents sandbox backends support file transfer APIs for moving files betw
 
 Use `upload_files()` to populate the sandbox before the agent runs. Paths must be absolute and contents are `bytes`:
 
-**LangSmith**
-
+> [tab] LangSmith
+>
 ```python
-from deepagents.backends.langsmith import LangSmithSandbox
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-backend.upload_files(
-    [
-        ("/src/index.py", b"print('Hello')\n"),
-        ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
-    ]
-)
+> from deepagents.backends.langsmith import LangSmithSandbox
+> from langsmith.sandbox import SandboxClient
+>
+> client = SandboxClient()
+> ls_sandbox = client.create_sandbox()
+> backend = LangSmithSandbox(sandbox=ls_sandbox)
+>
+> backend.upload_files(
+>     [
+>         ("/src/index.py", b"print('Hello')\n"),
+>         ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
+>     ]
+> )
 ```
 
-**AgentCore**
-
+> [tab] AgentCore
+>
 **pip**
 
 ```bash
-pip install langchain-agentcore-codeinterpreter
+> pip install langchain-agentcore-codeinterpreter
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-agentcore-codeinterpreter
+> uv add langchain-agentcore-codeinterpreter
 ```
-
+>
 ```python
-from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
-
-from langchain_agentcore_codeinterpreter import AgentCoreSandbox
-
-interpreter = CodeInterpreter(region="us-west-2")
-interpreter.start()
-
-backend = AgentCoreSandbox(interpreter=interpreter)
-
-backend.upload_files(
-    [
-        ("hello.py", b"print('Hello')\n"),
-        ("data.csv", b"name,value\na,1\nb,2\n"),
-    ]
-)
+> from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
+>
+> from langchain_agentcore_codeinterpreter import AgentCoreSandbox
+>
+> interpreter = CodeInterpreter(region="us-west-2")
+> interpreter.start()
+>
+> backend = AgentCoreSandbox(interpreter=interpreter)
+>
+> backend.upload_files(
+>     [
+>         ("hello.py", b"print('Hello')\n"),
+>         ("data.csv", b"name,value\na,1\nb,2\n"),
+>     ]
+> )
 ```
 
-**Databricks**
-
+> [tab] Databricks
+>
 **pip**
 
 ```bash
-pip install 'databricks-langchain[deepagents]>=0.22.0'
+> pip install 'databricks-langchain[deepagents]>=0.22.0'
 ```
-
+>
 **uv**
 
 ```bash
-uv add 'databricks-langchain[deepagents]>=0.22.0'
+> uv add 'databricks-langchain[deepagents]>=0.22.0'
 ```
-
+>
 ```python
-from databricks.sdk import WorkspaceClient
-
-from databricks_langchain import DatabricksSandbox
-
-client = WorkspaceClient()
-backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
-
-backend.upload_files(
-    [
-        ("/src/index.py", b"print('Hello')\n"),
-        ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
-    ]
-)
+> from databricks.sdk import WorkspaceClient
+>
+> from databricks_langchain import DatabricksSandbox
+>
+> client = WorkspaceClient()
+> backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
+>
+> backend.upload_files(
+>     [
+>         ("/src/index.py", b"print('Hello')\n"),
+>         ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
+>     ]
+> )
 ```
 
-**Daytona**
-
+> [tab] Daytona
+>
 **pip**
 
 ```bash
-pip install langchain-daytona
+> pip install langchain-daytona
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-daytona
+> uv add langchain-daytona
 ```
-
+>
 ```python
-from daytona import Daytona
-
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-backend.upload_files(
-    [
-        ("/src/index.py", b"print('Hello')\n"),
-        ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
-    ]
-)
+> from daytona import Daytona
+>
+> from langchain_daytona import DaytonaSandbox
+>
+> sandbox = Daytona().create()
+> backend = DaytonaSandbox(sandbox=sandbox)
+>
+> backend.upload_files(
+>     [
+>         ("/src/index.py", b"print('Hello')\n"),
+>         ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
+>     ]
+> )
 ```
 
-**E2B**
-
+> [tab] E2B
+>
 **pip**
 
 ```bash
-pip install langchain-e2b
+> pip install langchain-e2b
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-e2b
+> uv add langchain-e2b
 ```
-
+>
 ```python
-from e2b import Sandbox
-from langchain_e2b import E2BSandbox
-
-e2b_sandbox = Sandbox.create()
-sandbox = E2BSandbox(sandbox=e2b_sandbox)
-
-try:
-    sandbox.upload_files(
-        [
-            ("/src/index.py", b"print('Hello')\n"),
-            ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
-        ]
-    )
-finally:
-    e2b_sandbox.kill()
+> from e2b import Sandbox
+> from langchain_e2b import E2BSandbox
+>
+> e2b_sandbox = Sandbox.create()
+> sandbox = E2BSandbox(sandbox=e2b_sandbox)
+>
+> try:
+>     sandbox.upload_files(
+>         [
+>             ("/src/index.py", b"print('Hello')\n"),
+>             ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
+>         ]
+>     )
+> finally:
+>     e2b_sandbox.kill()
 ```
 
-**Modal**
-
+> [tab] Modal
+>
 ```python
-import modal
-
-from langchain_modal import ModalSandbox
-
-app = modal.App.lookup("your-app")
-modal_sandbox = modal.Sandbox.create(app=app)
-backend = ModalSandbox(sandbox=modal_sandbox)
-
-backend.upload_files(
-    [
-        ("/src/index.py", b"print('Hello')\n"),
-        ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
-    ]
-)
+> import modal
+>
+> from langchain_modal import ModalSandbox
+>
+> app = modal.App.lookup("your-app")
+> modal_sandbox = modal.Sandbox.create(app=app)
+> backend = ModalSandbox(sandbox=modal_sandbox)
+>
+> backend.upload_files(
+>     [
+>         ("/src/index.py", b"print('Hello')\n"),
+>         ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
+>     ]
+> )
 ```
 
-**Runloop**
-
+> [tab] Runloop
+>
 **pip**
 
 ```bash
-pip install langchain-runloop
+> pip install langchain-runloop
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-runloop
+> uv add langchain-runloop
 ```
-
+>
 ```python
-from runloop_api_client import RunloopSDK
-
-from langchain_runloop import RunloopSandbox
-
-api_key = "..."
-client = RunloopSDK(bearer_token=api_key)
-
-devbox = client.devbox.create()
-backend = RunloopSandbox(devbox=devbox)
-
-backend.upload_files(
-    [
-        ("/src/index.py", b"print('Hello')\n"),
-        ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
-    ]
-)
+> from runloop_api_client import RunloopSDK
+>
+> from langchain_runloop import RunloopSandbox
+>
+> api_key = "..."
+> client = RunloopSDK(bearer_token=api_key)
+>
+> devbox = client.devbox.create()
+> backend = RunloopSandbox(devbox=devbox)
+>
+> backend.upload_files(
+>     [
+>         ("/src/index.py", b"print('Hello')\n"),
+>         ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
+>     ]
+> )
 ```
 
-**Vercel**
-
+> [tab] Vercel
+>
 **pip**
 
 ```bash
-pip install langchain-vercel-sandbox
+> pip install langchain-vercel-sandbox
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-vercel-sandbox
+> uv add langchain-vercel-sandbox
 ```
-
+>
 ```python
-from vercel.sandbox import Sandbox
-
-from langchain_vercel_sandbox import VercelSandbox
-
-sandbox = Sandbox.create(runtime="python3.13")
-backend = VercelSandbox(sandbox=sandbox)
-
-backend.upload_files(
-    [
-        ("/src/index.py", b"print('Hello')\n"),
-        ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
-    ]
-)
+> from vercel.sandbox import Sandbox
+>
+> from langchain_vercel_sandbox import VercelSandbox
+>
+> sandbox = Sandbox.create(runtime="python3.13")
+> backend = VercelSandbox(sandbox=sandbox)
+>
+> backend.upload_files(
+>     [
+>         ("/src/index.py", b"print('Hello')\n"),
+>         ("/pyproject.toml", b"[project]\nname = 'my-app'\n"),
+>     ]
+> )
 ```
 
 ### Retrieving artifacts
 
 Use `download_files()` to retrieve files from the sandbox after the agent finishes:
 
-**LangSmith**
-
+> [tab] LangSmith
+>
 ```python
-from deepagents.backends.langsmith import LangSmithSandbox
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-results = backend.download_files(["/src/index.py", "/output.txt"])
-for result in results:
-    if result.content is not None:
-        print(f"{result.path}: {result.content.decode()}")
-    else:
-        print(f"Failed to download {result.path}: {result.error}")
+> from deepagents.backends.langsmith import LangSmithSandbox
+> from langsmith.sandbox import SandboxClient
+>
+> client = SandboxClient()
+> ls_sandbox = client.create_sandbox()
+> backend = LangSmithSandbox(sandbox=ls_sandbox)
+>
+>
+> results = backend.download_files(["/src/index.py", "/output.txt"])
+> for result in results:
+>     if result.content is not None:
+>         print(f"{result.path}: {result.content.decode()}")
+>     else:
+>         print(f"Failed to download {result.path}: {result.error}")
 ```
 
-**AgentCore**
-
+> [tab] AgentCore
+>
 **pip**
 
 ```bash
-pip install langchain-agentcore-codeinterpreter
+> pip install langchain-agentcore-codeinterpreter
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-agentcore-codeinterpreter
+> uv add langchain-agentcore-codeinterpreter
 ```
-
+>
 ```python
-from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
-
-from langchain_agentcore_codeinterpreter import AgentCoreSandbox
-
-interpreter = CodeInterpreter(region="us-west-2")
-interpreter.start()
-
-backend = AgentCoreSandbox(interpreter=interpreter)
-
-results = backend.download_files(["hello.py"])
-for result in results:
-    if result.content is not None:
-        print(f"{result.path}: {result.content.decode()}")
-    else:
-        print(f"Failed to download {result.path}: {result.error}")
-
-interpreter.stop()
+> from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
+>
+> from langchain_agentcore_codeinterpreter import AgentCoreSandbox
+>
+> interpreter = CodeInterpreter(region="us-west-2")
+> interpreter.start()
+>
+> backend = AgentCoreSandbox(interpreter=interpreter)
+>
+> results = backend.download_files(["hello.py"])
+> for result in results:
+>     if result.content is not None:
+>         print(f"{result.path}: {result.content.decode()}")
+>     else:
+>         print(f"Failed to download {result.path}: {result.error}")
+>
+> interpreter.stop()
 ```
 
-**Databricks**
-
+> [tab] Databricks
+>
 **pip**
 
 ```bash
-pip install 'databricks-langchain[deepagents]>=0.22.0'
+> pip install 'databricks-langchain[deepagents]>=0.22.0'
 ```
-
+>
 **uv**
 
 ```bash
-uv add 'databricks-langchain[deepagents]>=0.22.0'
+> uv add 'databricks-langchain[deepagents]>=0.22.0'
 ```
-
+>
 ```python
-from databricks.sdk import WorkspaceClient
-
-from databricks_langchain import DatabricksSandbox
-
-client = WorkspaceClient()
-backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
-
-results = backend.download_files(["/src/index.py", "/output.txt"])
-for result in results:
-    if result.content is not None:
-        print(f"{result.path}: {result.content.decode()}")
-    else:
-        print(f"Failed to download {result.path}: {result.error}")
+> from databricks.sdk import WorkspaceClient
+>
+> from databricks_langchain import DatabricksSandbox
+>
+> client = WorkspaceClient()
+> backend = DatabricksSandbox(client, "sandboxes/my-sandbox")
+>
+> results = backend.download_files(["/src/index.py", "/output.txt"])
+> for result in results:
+>     if result.content is not None:
+>         print(f"{result.path}: {result.content.decode()}")
+>     else:
+>         print(f"Failed to download {result.path}: {result.error}")
 ```
 
-**Daytona**
-
+> [tab] Daytona
+>
 **pip**
 
 ```bash
-pip install langchain-daytona
+> pip install langchain-daytona
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-daytona
+> uv add langchain-daytona
 ```
-
+>
 ```python
-from daytona import Daytona
-
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-results = backend.download_files(["/src/index.py", "/output.txt"])
-for result in results:
-    if result.content is not None:
-        print(f"{result.path}: {result.content.decode()}")
-    else:
-        print(f"Failed to download {result.path}: {result.error}")
+> from daytona import Daytona
+>
+> from langchain_daytona import DaytonaSandbox
+>
+> sandbox = Daytona().create()
+> backend = DaytonaSandbox(sandbox=sandbox)
+>
+> results = backend.download_files(["/src/index.py", "/output.txt"])
+> for result in results:
+>     if result.content is not None:
+>         print(f"{result.path}: {result.content.decode()}")
+>     else:
+>         print(f"Failed to download {result.path}: {result.error}")
 ```
 
-**E2B**
-
+> [tab] E2B
+>
 **pip**
 
 ```bash
-pip install langchain-e2b
+> pip install langchain-e2b
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-e2b
+> uv add langchain-e2b
 ```
-
+>
 ```python
-from e2b import Sandbox
-from langchain_e2b import E2BSandbox
-
-e2b_sandbox = Sandbox.create()
-sandbox = E2BSandbox(sandbox=e2b_sandbox)
-
-try:
-    results = sandbox.download_files(["/src/index.py", "/output.txt"])
-    for result in results:
-        if result.content is not None:
-            print(f"{result.path}: {result.content.decode()}")
-        else:
-            print(f"Failed to download {result.path}: {result.error}")
-finally:
-    e2b_sandbox.kill()
+> from e2b import Sandbox
+> from langchain_e2b import E2BSandbox
+>
+> e2b_sandbox = Sandbox.create()
+> sandbox = E2BSandbox(sandbox=e2b_sandbox)
+>
+> try:
+>     results = sandbox.download_files(["/src/index.py", "/output.txt"])
+>     for result in results:
+>         if result.content is not None:
+>             print(f"{result.path}: {result.content.decode()}")
+>         else:
+>             print(f"Failed to download {result.path}: {result.error}")
+> finally:
+>     e2b_sandbox.kill()
 ```
 
-**Modal**
-
+> [tab] Modal
+>
 ```python
-import modal
-
-from langchain_modal import ModalSandbox
-
-app = modal.App.lookup("your-app")
-modal_sandbox = modal.Sandbox.create(app=app)
-backend = ModalSandbox(sandbox=modal_sandbox)
-
-results = backend.download_files(["/src/index.py", "/output.txt"])
-for result in results:
-    if result.content is not None:
-        print(f"{result.path}: {result.content.decode()}")
-    else:
-        print(f"Failed to download {result.path}: {result.error}")
+> import modal
+>
+> from langchain_modal import ModalSandbox
+>
+> app = modal.App.lookup("your-app")
+> modal_sandbox = modal.Sandbox.create(app=app)
+> backend = ModalSandbox(sandbox=modal_sandbox)
+>
+> results = backend.download_files(["/src/index.py", "/output.txt"])
+> for result in results:
+>     if result.content is not None:
+>         print(f"{result.path}: {result.content.decode()}")
+>     else:
+>         print(f"Failed to download {result.path}: {result.error}")
 ```
 
-**Runloop**
-
+> [tab] Runloop
+>
 **pip**
 
 ```bash
-pip install langchain-runloop
+> pip install langchain-runloop
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-runloop
+> uv add langchain-runloop
 ```
-
+>
 ```python
-from runloop_api_client import RunloopSDK
-
-from langchain_runloop import RunloopSandbox
-
-api_key = "..."
-client = RunloopSDK(bearer_token=api_key)
-
-devbox = client.devbox.create()
-backend = RunloopSandbox(devbox=devbox)
-
-results = backend.download_files(["/src/index.py", "/output.txt"])
-for result in results:
-    if result.content is not None:
-        print(f"{result.path}: {result.content.decode()}")
-    else:
-        print(f"Failed to download {result.path}: {result.error}")
+> from runloop_api_client import RunloopSDK
+>
+> from langchain_runloop import RunloopSandbox
+>
+> api_key = "..."
+> client = RunloopSDK(bearer_token=api_key)
+>
+> devbox = client.devbox.create()
+> backend = RunloopSandbox(devbox=devbox)
+>
+> results = backend.download_files(["/src/index.py", "/output.txt"])
+> for result in results:
+>     if result.content is not None:
+>         print(f"{result.path}: {result.content.decode()}")
+>     else:
+>         print(f"Failed to download {result.path}: {result.error}")
 ```
 
-**Vercel**
-
+> [tab] Vercel
+>
 **pip**
 
 ```bash
-pip install langchain-vercel-sandbox
+> pip install langchain-vercel-sandbox
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-vercel-sandbox
+> uv add langchain-vercel-sandbox
 ```
-
+>
 ```python
-from vercel.sandbox import Sandbox
-
-from langchain_vercel_sandbox import VercelSandbox
-
-sandbox = Sandbox.create(runtime="python3.13")
-backend = VercelSandbox(sandbox=sandbox)
-
-results = backend.download_files(["/src/index.py", "/output.txt"])
-for result in results:
-    if result.content is not None:
-        print(f"{result.path}: {result.content.decode()}")
-    else:
-        print(f"Failed to download {result.path}: {result.error}")
+> from vercel.sandbox import Sandbox
+>
+> from langchain_vercel_sandbox import VercelSandbox
+>
+> sandbox = Sandbox.create(runtime="python3.13")
+> backend = VercelSandbox(sandbox=sandbox)
+>
+> results = backend.download_files(["/src/index.py", "/output.txt"])
+> for result in results:
+>     if result.content is not None:
+>         print(f"{result.path}: {result.content.decode()}")
+>     else:
+>         print(f"Failed to download {result.path}: {result.error}")
 ```
 
 > [!NOTE]

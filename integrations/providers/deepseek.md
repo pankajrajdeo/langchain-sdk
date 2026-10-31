@@ -14,7 +14,7 @@ tags: [docs, integrations, providers, deepseek]
 
 ## Chat models
 
-> **[ChatDeepSeek](../chat/deepseek.md)**
+> [card] [ChatDeepSeek](../chat/deepseek.md)
 >
 > DeepSeek chat models.
 

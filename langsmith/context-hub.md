@@ -16,23 +16,23 @@ Prompts, retrieval context, skills, and task instructions change more often than
 
 ## Prompts
 
-> **[Create and update prompts](create-a-prompt.md)**
+> [card] [Create and update prompts](create-a-prompt.md)
 >
 > Build prompts via the UI or SDK, configure settings, use tools, add multimodal inputs, and connect model providers.
 
-> **[Manage prompts](manage-prompts.md)**
+> [card] [Manage prompts](manage-prompts.md)
 >
 > Organize with tags, commit changes, trigger webhooks, and share through the public prompt hub.
 
-> **[Explore the prompt hub](manage-prompts.md#public-prompt-hub)**
+> [card] [Explore the prompt hub](manage-prompts.md#public-prompt-hub)
 >
 > Browse and manage prompt tags and discover community prompts from the LangChain Hub.
 
-> **[Open the Playground](prompt-engineering-concepts.md#playground)**
+> [card] [Open the Playground](prompt-engineering-concepts.md#playground)
 >
 > Test and experiment with prompts using custom endpoints and model configurations.
 
-> **[Follow tutorials](optimize-classifier.md)**
+> [card] [Follow tutorials](optimize-classifier.md)
 >
 > Learn step-by-step techniques, like optimizing classifiers and advanced prompt engineering.
 
@@ -40,19 +40,19 @@ Use the **[Chat](chat.md)** in the Playground to optimize prompts, generate tool
 
 ## Context Hub
 
-> **[Concepts](context-engineering-concepts.md)**
+> [card] [Concepts](context-engineering-concepts.md)
 >
 > Learn the core concepts of context engineering: skills, agents, versioning, and sharing.
 
-> **[Use the Context Hub](use-the-context-hub.md)**
+> [card] [Use the Context Hub](use-the-context-hub.md)
 >
 > Create a context, view its files and history, and promote it to an environment.
 
-> **[Manage contexts with the SDK](manage-contexts-sdk.md)**
+> [card] [Manage contexts with the SDK](manage-contexts-sdk.md)
 >
 > Push, pull, list, and delete agent and skill repos in the Context Hub programmatically.
 
-> **[Configure commit webhooks](context-hub-webhooks.md)**
+> [card] [Configure commit webhooks](context-hub-webhooks.md)
 >
 > Send every agent and skill commit in your workspace to an external HTTPS endpoint.
 

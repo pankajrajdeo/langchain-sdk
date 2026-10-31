@@ -31,9 +31,9 @@ The generic nature of the interface allows you to use different types for keys a
 
 ## Built-in stores for local development
 
-> **[InMemoryStore](in_memory.md)**
+> [card] [InMemoryStore](in_memory.md)
 
-> **[LocalFileStore](file_system.md)**
+> [card] [LocalFileStore](file_system.md)
 
 ## Custom stores
 

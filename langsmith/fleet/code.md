@@ -69,72 +69,72 @@ LANGGRAPH_API_KEY=your-personal-access-token
 
 Verify your connection by fetching your agent's configuration:
 
-**Python**
-
+> [tab] Python
+>
 ```python
-import os
-from dotenv import load_dotenv
-from langgraph_sdk.client import get_client
-
-load_dotenv()
-
-agent_id = "your-agent-id"
-
-api_key = os.getenv("LANGGRAPH_API_KEY")
-api_url = "<AGENT-BUILDER-URL>.us.langgraph.app"
-
-client = get_client(
-    url=api_url,
-    api_key=api_key,
-    headers={
-        "X-Auth-Scheme": "langsmith-api-key",
-    },
-)
-
-async def get_assistant(agent_id: str):
-    agent = await client.assistants.get(agent_id)
-    print(agent)
-
-if __name__ == "__main__":
-    import asyncio
-    asyncio.run(get_assistant(agent_id))
+> import os
+> from dotenv import load_dotenv
+> from langgraph_sdk.client import get_client
+>
+> load_dotenv()
+>
+> agent_id = "your-agent-id"
+>
+> api_key = os.getenv("LANGGRAPH_API_KEY")
+> api_url = "<AGENT-BUILDER-URL>.us.langgraph.app"
+>
+> client = get_client(
+>     url=api_url,
+>     api_key=api_key,
+>     headers={
+>         "X-Auth-Scheme": "langsmith-api-key",
+>     },
+> )
+>
+> async def get_assistant(agent_id: str):
+>     agent = await client.assistants.get(agent_id)
+>     print(agent)
+>
+> if __name__ == "__main__":
+>     import asyncio
+>     asyncio.run(get_assistant(agent_id))
 ```
 
-**TypeScript**
-
+> [tab] TypeScript
+>
 ```ts
-import "dotenv/config";
-import { Client } from "@langchain/langgraph-sdk";
-
-const agentId = "your-agent-id";
-
-const apiKey = process.env.LANGGRAPH_API_KEY;
-const apiUrl = "<AGENT-BUILDER-URL>.us.langgraph.app";
-
-const client = new Client({
-  apiUrl,
-  apiKey,
-  defaultHeaders: {
-    "X-Auth-Scheme": "langsmith-api-key",
-  },
-});
-
-async function main(agentId: string) {
-  const agent = await client.assistants.get(agentId);
-  console.log(agent);
-}
-
-main(agentId).catch(console.error);
+> import "dotenv/config";
+> import { Client } from "@langchain/langgraph-sdk";
+>
+> const agentId = "your-agent-id";
+>
+> const apiKey = process.env.LANGGRAPH_API_KEY;
+> const apiUrl = "<AGENT-BUILDER-URL>.us.langgraph.app";
+>
+> const client = new Client({
+>   apiUrl,
+>   apiKey,
+>   defaultHeaders: {
+>     "X-Auth-Scheme": "langsmith-api-key",
+>   },
+> });
+>
+> async function main(agentId: string) {
+>   const agent = await client.assistants.get(agentId);
+>   console.log(agent);
+> }
+>
+> main(agentId).catch(console.error);
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-curl --request GET \
-    --url "<AGENT-BUILDER-URL>.us.langgraph.app/assistants/your-agent-id" \
-    --header 'Content-Type: application/json' \
-    --header 'X-Api-Key: your-personal-access-token' \
-    --header 'X-Auth-Scheme: langsmith-api-key'
+> curl --request GET \
+>     --url "<AGENT-BUILDER-URL>.us.langgraph.app/assistants/your-agent-id" \
+>     --header 'Content-Type: application/json' \
+>     --header 'X-Api-Key: your-personal-access-token' \
+>     --header 'X-Auth-Scheme: langsmith-api-key'
 ```
 
 Use a [Personal Access Token (PAT)](../create-account-api-key.md) tied to your LangSmith account. Set the `X-Auth-Scheme` header to `langsmith-api-key` for authentication.
@@ -147,333 +147,333 @@ The examples below show how to send a message to your agent and receive a respon
 
 A stateless run sends a single request and returns the full response. No conversation history is persisted. This is the simplest way to call your agent:
 
-**Python**
-
+> [tab] Python
+>
 ```python
-import os
-from dotenv import load_dotenv
-from langgraph_sdk.client import get_client
-
-load_dotenv()
-
-agent_id = "your-agent-id"
-
-api_key = os.getenv("LANGGRAPH_API_KEY")
-api_url = "https://<AGENT-BUILDER-URL>.us.langgraph.app"
-
-client = get_client(
-    url=api_url,
-    api_key=api_key,
-    headers={
-        "X-Auth-Scheme": "langsmith-api-key",
-    },
-)
-
-result = await client.runs.wait(
-    None,
-    agent_id,
-    input={
-        "messages": [
-            {"role": "user", "content": "What can you help me with?"}
-        ]
-    },
-)
-print(result)
+> import os
+> from dotenv import load_dotenv
+> from langgraph_sdk.client import get_client
+>
+> load_dotenv()
+>
+> agent_id = "your-agent-id"
+>
+> api_key = os.getenv("LANGGRAPH_API_KEY")
+> api_url = "https://<AGENT-BUILDER-URL>.us.langgraph.app"
+>
+> client = get_client(
+>     url=api_url,
+>     api_key=api_key,
+>     headers={
+>         "X-Auth-Scheme": "langsmith-api-key",
+>     },
+> )
+>
+> result = await client.runs.wait(
+>     None,
+>     agent_id,
+>     input={
+>         "messages": [
+>             {"role": "user", "content": "What can you help me with?"}
+>         ]
+>     },
+> )
+> print(result)
 ```
 
-**TypeScript**
-
+> [tab] TypeScript
+>
 ```ts
-import "dotenv/config";
-import { Client } from "@langchain/langgraph-sdk";
-
-const agentId = "your-agent-id";
-
-const apiKey = process.env.LANGGRAPH_API_KEY;
-const apiUrl = "<AGENT-BUILDER-URL>.us.langgraph.app";
-
-const client = new Client({
-  apiUrl,
-  apiKey,
-  defaultHeaders: {
-    "X-Auth-Scheme": "langsmith-api-key",
-  },
-});
-
-const result = await client.runs.wait(
-  null,
-  agentId,
-  {
-    input: {
-      messages: [
-        { role: "user", content: "What can you help me with?" }
-      ]
-    }
-  }
-);
-console.log(result);
+> import "dotenv/config";
+> import { Client } from "@langchain/langgraph-sdk";
+>
+> const agentId = "your-agent-id";
+>
+> const apiKey = process.env.LANGGRAPH_API_KEY;
+> const apiUrl = "<AGENT-BUILDER-URL>.us.langgraph.app";
+>
+> const client = new Client({
+>   apiUrl,
+>   apiKey,
+>   defaultHeaders: {
+>     "X-Auth-Scheme": "langsmith-api-key",
+>   },
+> });
+>
+> const result = await client.runs.wait(
+>   null,
+>   agentId,
+>   {
+>     input: {
+>       messages: [
+>         { role: "user", content: "What can you help me with?" }
+>       ]
+>     }
+>   }
+> );
+> console.log(result);
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-curl --request POST \
-    --url "<AGENT-BUILDER-URL>.us.langgraph.app/runs/wait" \
-    --header 'Content-Type: application/json' \
-    --header 'X-Api-Key: your-personal-access-token' \
-    --header 'X-Auth-Scheme: langsmith-api-key' \
-    --data '{
-        "assistant_id": "your-agent-id",
-        "input": {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "What can you help me with?"
-                }
-            ]
-        }
-    }'
+> curl --request POST \
+>     --url "<AGENT-BUILDER-URL>.us.langgraph.app/runs/wait" \
+>     --header 'Content-Type: application/json' \
+>     --header 'X-Api-Key: your-personal-access-token' \
+>     --header 'X-Auth-Scheme: langsmith-api-key' \
+>     --data '{
+>         "assistant_id": "your-agent-id",
+>         "input": {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "What can you help me with?"
+>                 }
+>             ]
+>         }
+>     }'
 ```
 
 #### Stateless streaming run
 
 To stream the response as it is generated rather than waiting for the full result, use the streaming endpoint:
 
-**Python**
-
+> [tab] Python
+>
 ```python
-async for chunk in client.runs.stream(
-    None,
-    agent_id,
-    input={
-        "messages": [
-            {"role": "user", "content": "What can you help me with?"}
-        ]
-    },
-    stream_mode="updates",
-):
-    if chunk.data and "run_id" not in chunk.data:
-        print(chunk.data)
+> async for chunk in client.runs.stream(
+>     None,
+>     agent_id,
+>     input={
+>         "messages": [
+>             {"role": "user", "content": "What can you help me with?"}
+>         ]
+>     },
+>     stream_mode="updates",
+> ):
+>     if chunk.data and "run_id" not in chunk.data:
+>         print(chunk.data)
 ```
 
-**TypeScript**
-
+> [tab] TypeScript
+>
 ```ts
-const streamResponse = client.runs.stream(
-  null,
-  agentId,
-  {
-    input: {
-      messages: [
-        { role: "user", content: "What can you help me with?" }
-      ]
-    },
-    streamMode: "updates"
-  }
-);
-for await (const chunk of streamResponse) {
-  if (chunk.data && !("run_id" in chunk.data)) {
-    console.log(chunk.data);
-  }
-}
+> const streamResponse = client.runs.stream(
+>   null,
+>   agentId,
+>   {
+>     input: {
+>       messages: [
+>         { role: "user", content: "What can you help me with?" }
+>       ]
+>     },
+>     streamMode: "updates"
+>   }
+> );
+> for await (const chunk of streamResponse) {
+>   if (chunk.data && !("run_id" in chunk.data)) {
+>     console.log(chunk.data);
+>   }
+> }
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-curl --request POST \
-    --url "<AGENT-BUILDER-URL>.us.langgraph.app/runs/stream" \
-    --header 'Content-Type: application/json' \
-    --header 'X-Api-Key: your-personal-access-token' \
-    --header 'X-Auth-Scheme: langsmith-api-key' \
-    --data '{
-        "assistant_id": "your-agent-id",
-        "input": {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "What can you help me with?"
-                }
-            ]
-        },
-        "stream_mode": [
-            "updates"
-        ]
-    }'
+> curl --request POST \
+>     --url "<AGENT-BUILDER-URL>.us.langgraph.app/runs/stream" \
+>     --header 'Content-Type: application/json' \
+>     --header 'X-Api-Key: your-personal-access-token' \
+>     --header 'X-Auth-Scheme: langsmith-api-key' \
+>     --data '{
+>         "assistant_id": "your-agent-id",
+>         "input": {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "What can you help me with?"
+>                 }
+>             ]
+>         },
+>         "stream_mode": [
+>             "updates"
+>         ]
+>     }'
 ```
 
 #### Stateful run with a thread
 
 To maintain conversation history across multiple interactions, first create a thread and then run your agent on it. Each subsequent run on the same thread has access to the full message history:
 
-**Python**
-
+> [tab] Python
+>
 ```python
-import os
-from dotenv import load_dotenv
-from langgraph_sdk.client import get_client
-
-load_dotenv()
-
-agent_id = "your-agent-id"
-
-api_key = os.getenv("LANGGRAPH_API_KEY")
-api_url = "<AGENT-BUILDER-URL>.us.langgraph.app"
-
-client = get_client(
-    url=api_url,
-    api_key=api_key,
-    headers={
-        "X-Auth-Scheme": "langsmith-api-key",
-    },
-)
-
-thread = await client.threads.create()
-
-async for chunk in client.runs.stream(
-    thread["thread_id"],
-    agent_id,
-    input={
-        "messages": [
-            {"role": "user", "content": "Hi, my name is Alice."}
-        ]
-    },
-    stream_mode="updates",
-):
-    if chunk.data and "run_id" not in chunk.data:
-        print(chunk.data)
-
-async for chunk in client.runs.stream(
-    thread["thread_id"],
-    agent_id,
-    input={
-        "messages": [
-            {"role": "user", "content": "What is my name?"}
-        ]
-    },
-    stream_mode="updates",
-):
-    if chunk.data and "run_id" not in chunk.data:
-        print(chunk.data)
+> import os
+> from dotenv import load_dotenv
+> from langgraph_sdk.client import get_client
+>
+> load_dotenv()
+>
+> agent_id = "your-agent-id"
+>
+> api_key = os.getenv("LANGGRAPH_API_KEY")
+> api_url = "<AGENT-BUILDER-URL>.us.langgraph.app"
+>
+> client = get_client(
+>     url=api_url,
+>     api_key=api_key,
+>     headers={
+>         "X-Auth-Scheme": "langsmith-api-key",
+>     },
+> )
+>
+> thread = await client.threads.create()
+>
+> async for chunk in client.runs.stream(
+>     thread["thread_id"],
+>     agent_id,
+>     input={
+>         "messages": [
+>             {"role": "user", "content": "Hi, my name is Alice."}
+>         ]
+>     },
+>     stream_mode="updates",
+> ):
+>     if chunk.data and "run_id" not in chunk.data:
+>         print(chunk.data)
+>
+> async for chunk in client.runs.stream(
+>     thread["thread_id"],
+>     agent_id,
+>     input={
+>         "messages": [
+>             {"role": "user", "content": "What is my name?"}
+>         ]
+>     },
+>     stream_mode="updates",
+> ):
+>     if chunk.data and "run_id" not in chunk.data:
+>         print(chunk.data)
 ```
 
-**TypeScript**
-
+> [tab] TypeScript
+>
 ```ts
-import "dotenv/config";
-import { Client } from "@langchain/langgraph-sdk";
-
-const agentId = "your-agent-id";
-
-const apiKey = process.env.LANGGRAPH_API_KEY;
-const apiUrl = "<AGENT-BUILDER-URL>.us.langgraph.app";
-
-const client = new Client({
-  apiUrl,
-  apiKey,
-  defaultHeaders: {
-    "X-Auth-Scheme": "langsmith-api-key",
-  },
-});
-
-const thread = await client.threads.create();
-
-let streamResponse = client.runs.stream(
-  thread["thread_id"],
-  agentId,
-  {
-    input: {
-      messages: [
-        { role: "user", content: "Hi, my name is Alice." }
-      ]
-    },
-    streamMode: "updates"
-  }
-);
-for await (const chunk of streamResponse) {
-  if (chunk.data && !("run_id" in chunk.data)) {
-    console.log(chunk.data);
-  }
-}
-
-streamResponse = client.runs.stream(
-  thread["thread_id"],
-  agentId,
-  {
-    input: {
-      messages: [
-        { role: "user", content: "What is my name?" }
-      ]
-    },
-    streamMode: "updates"
-  }
-);
-for await (const chunk of streamResponse) {
-  if (chunk.data && !("run_id" in chunk.data)) {
-    console.log(chunk.data);
-  }
-}
+> import "dotenv/config";
+> import { Client } from "@langchain/langgraph-sdk";
+>
+> const agentId = "your-agent-id";
+>
+> const apiKey = process.env.LANGGRAPH_API_KEY;
+> const apiUrl = "<AGENT-BUILDER-URL>.us.langgraph.app";
+>
+> const client = new Client({
+>   apiUrl,
+>   apiKey,
+>   defaultHeaders: {
+>     "X-Auth-Scheme": "langsmith-api-key",
+>   },
+> });
+>
+> const thread = await client.threads.create();
+>
+> let streamResponse = client.runs.stream(
+>   thread["thread_id"],
+>   agentId,
+>   {
+>     input: {
+>       messages: [
+>         { role: "user", content: "Hi, my name is Alice." }
+>       ]
+>     },
+>     streamMode: "updates"
+>   }
+> );
+> for await (const chunk of streamResponse) {
+>   if (chunk.data && !("run_id" in chunk.data)) {
+>     console.log(chunk.data);
+>   }
+> }
+>
+> streamResponse = client.runs.stream(
+>   thread["thread_id"],
+>   agentId,
+>   {
+>     input: {
+>       messages: [
+>         { role: "user", content: "What is my name?" }
+>       ]
+>     },
+>     streamMode: "updates"
+>   }
+> );
+> for await (const chunk of streamResponse) {
+>   if (chunk.data && !("run_id" in chunk.data)) {
+>     console.log(chunk.data);
+>   }
+> }
 ```
 
-**cURL**
-
-First, create a thread:
-
+> [tab] cURL
+>
+> First, create a thread:
+>
 ```bash
-curl --request POST \
-    --url "<AGENT-BUILDER-URL>.us.langgraph.app/threads" \
-    --header 'Content-Type: application/json' \
-    --header 'X-Api-Key: your-personal-access-token' \
-    --header 'X-Auth-Scheme: langsmith-api-key' \
-    --data '{}'
+> curl --request POST \
+>     --url "<AGENT-BUILDER-URL>.us.langgraph.app/threads" \
+>     --header 'Content-Type: application/json' \
+>     --header 'X-Api-Key: your-personal-access-token' \
+>     --header 'X-Auth-Scheme: langsmith-api-key' \
+>     --data '{}'
 ```
-
-Use the `thread_id` from the response to send messages on the thread:
-
+>
+> Use the `thread_id` from the response to send messages on the thread:
+>
 ```bash
-curl --request POST \
-    --url "<AGENT-BUILDER-URL>.us.langgraph.app/threads/<THREAD_ID>/runs/stream" \
-    --header 'Content-Type: application/json' \
-    --header 'X-Api-Key: your-personal-access-token' \
-    --header 'X-Auth-Scheme: langsmith-api-key' \
-    --data '{
-        "assistant_id": "your-agent-id",
-        "input": {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Hi, my name is Alice."
-                }
-            ]
-        },
-        "stream_mode": [
-            "updates"
-        ]
-    }'
+> curl --request POST \
+>     --url "<AGENT-BUILDER-URL>.us.langgraph.app/threads/<THREAD_ID>/runs/stream" \
+>     --header 'Content-Type: application/json' \
+>     --header 'X-Api-Key: your-personal-access-token' \
+>     --header 'X-Auth-Scheme: langsmith-api-key' \
+>     --data '{
+>         "assistant_id": "your-agent-id",
+>         "input": {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Hi, my name is Alice."
+>                 }
+>             ]
+>         },
+>         "stream_mode": [
+>             "updates"
+>         ]
+>     }'
 ```
-
-Send a follow-up message on the same thread:
-
+>
+> Send a follow-up message on the same thread:
+>
 ```bash
-curl --request POST \
-    --url "<AGENT-BUILDER-URL>.us.langgraph.app/threads/<THREAD_ID>/runs/stream" \
-    --header 'Content-Type: application/json' \
-    --header 'X-Api-Key: your-personal-access-token' \
-    --header 'X-Auth-Scheme: langsmith-api-key' \
-    --data '{
-        "assistant_id": "your-agent-id",
-        "input": {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "What is my name?"
-                }
-            ]
-        },
-        "stream_mode": [
-            "updates"
-        ]
-    }'
+> curl --request POST \
+>     --url "<AGENT-BUILDER-URL>.us.langgraph.app/threads/<THREAD_ID>/runs/stream" \
+>     --header 'Content-Type: application/json' \
+>     --header 'X-Api-Key: your-personal-access-token' \
+>     --header 'X-Auth-Scheme: langsmith-api-key' \
+>     --data '{
+>         "assistant_id": "your-agent-id",
+>         "input": {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "What is my name?"
+>                 }
+>             ]
+>         },
+>         "stream_mode": [
+>             "updates"
+>         ]
+>     }'
 ```
 
 ### REST API reference

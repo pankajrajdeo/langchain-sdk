@@ -77,7 +77,7 @@ def transfer_to_specialist(runtime) -> Command:
 
 For a complete implementation, see the tutorial below.
 
-> **[Tutorial: Build customer support with handoffs](handoffs-customer-support.md)**
+> [card] [Tutorial: Build customer support with handoffs](handoffs-customer-support.md)
 >
 > Learn how to build a customer support agent using the handoffs pattern, where a single agent transitions between different configurations.
 
@@ -114,7 +114,7 @@ def record_warranty_status(
     )
 ```
 
-> **Complete example: Customer support with middleware**
+> [accordion] Complete example: Customer support with middleware
 >
 ```python
 > from langchain.agents import AgentState, create_agent
@@ -223,7 +223,7 @@ def transfer_to_sales(
     )
 ```
 
-> **Complete example: Sales and support with handoffs**
+> [accordion] Complete example: Sales and support with handoffs
 >
 > This example shows a multi-agent system with separate sales and support agents. Each agent is a separate graph node, and handoff tools allow agents to transfer conversations to each other.
 >

@@ -58,10 +58,11 @@ The following features are supported:
 * **[Fleet](fleet/index.md)**: Build and run no-code agents from templates, connectors, and channels.
 * **[SmithDB](smithdb-sdk-migration.md)**: The purpose-built observability backend for trace data, persisting to S3 in your account. Data planes created on or after October 21, 2026 run SmithDB only. ClickHouse is deprecated, and support ends in LangSmith v0.19.
 * **[Engine](engine.md)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces. On BYOC, Engine runs its models on your own model providers, and you configure your GitHub App and Slack app in the LangSmith UI. See [Engine on BYOC](engine-self-hosted.md#engine-on-byoc).
+* **[Managed Deep Agents](python/managed-deep-agents-overview.md)**: Build and run deep agents with connectors, channels, and schedules.
 
-The following features are planned but not yet supported:
-
-* **[Managed Deep Agents](python/managed-deep-agents-overview.md)**: LangChain-hosted deep agents with connectors, channels, and schedules.
+> [!NOTE]
+>
+> Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC. To get started, follow the [Managed Deep Agents quickstart](python/managed-deep-agents-quickstart.md).
 
 ## Prerequisites
 

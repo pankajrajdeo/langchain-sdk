@@ -23,11 +23,11 @@ Use Fleet to:
 
 ## Start building
 
-> **[Build with AI](https://smith.langchain.com/agents)**
+> [card] [Build with AI](https://smith.langchain.com/agents)
 >
 > Describe the agent you want to create and let Fleet build it, pausing at key points for your input.
 
-> **[Build from a template](fleet/quickstart.md)**
+> [card] [Build from a template](fleet/quickstart.md)
 >
 > Start with a pre-configured agent and customize it.
 

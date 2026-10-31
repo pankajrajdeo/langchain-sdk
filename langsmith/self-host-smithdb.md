@@ -18,35 +18,35 @@ SmithDB is a columnar datastore built for agent trace data: deeply nested spans,
 
 Some LangSmith features, such as the Trajectory view, trajectory evaluators, and the filter query syntax, require SmithDB. See [SmithDB feature availability](self-host-smithdb-features.md).
 
-> **[Feature availability](self-host-smithdb-features.md)**
+> [card] [Feature availability](self-host-smithdb-features.md)
 >
 > See which features need SmithDB and what keeps working on ClickHouse.
 
-> **[Install SmithDB](self-host-smithdb-install.md)**
+> [card] [Install SmithDB](self-host-smithdb-install.md)
 >
 > Stage infrastructure, deploy SmithDB services, enable dual ingestion, and switch queries after validation.
 
-> **[Prepare supporting infrastructure](self-host-smithdb-infrastructure.md)**
+> [card] [Prepare supporting infrastructure](self-host-smithdb-infrastructure.md)
 >
 > Provide a dedicated PostgreSQL metastore, object storage, and cache storage.
 
-> **[Configure for scale](self-host-smithdb-scale.md)**
+> [card] [Configure for scale](self-host-smithdb-scale.md)
 >
 > Choose a tested resource tier and size SmithDB workloads.
 
-> **[Configure observability](self-host-smithdb-observability.md)**
+> [card] [Configure observability](self-host-smithdb-observability.md)
 >
 > Scrape SmithDB metrics and export logs and traces to your stack.
 
-> **[Migrate historical data](self-host-smithdb-migrate.md)**
+> [card] [Migrate historical data](self-host-smithdb-migrate.md)
 >
 > Backfill ClickHouse history into SmithDB before query cutover.
 
-> **[Metrics reference](self-host-smithdb-metrics.md)**
+> [card] [Metrics reference](self-host-smithdb-metrics.md)
 >
 > Metrics to watch on each SmithDB component and how to read them.
 
-> **[Troubleshoot SmithDB](self-host-smithdb-troubleshooting.md)**
+> [card] [Troubleshoot SmithDB](self-host-smithdb-troubleshooting.md)
 >
 > Gather context, disable SmithDB, or reset a deployment safely.
 

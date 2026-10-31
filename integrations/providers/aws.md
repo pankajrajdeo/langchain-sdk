@@ -242,7 +242,7 @@ finally:
 
 ## Sandboxes
 
-> **[AgentCoreSandbox](../sandboxes/aws.md)**
+> [card] [AgentCoreSandbox](../sandboxes/aws.md)
 >
 > Amazon Bedrock AgentCore Code Interpreter sandbox backend for deepagents.
 

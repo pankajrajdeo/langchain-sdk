@@ -20,7 +20,7 @@ To time travel using the LangSmith Deployment API (via the LangGraph SDK):
 
 ## Use time travel in a workflow
 
-> **Example graph**
+> [accordion] Example graph
 >
 ```python
 > from typing_extensions import TypedDict, NotRequired
@@ -64,176 +64,176 @@ To time travel using the LangSmith Deployment API (via the LangGraph SDK):
 
 ### 1. Run the graph
 
-**Python**
-
+> [tab] Python
+>
 ```python
-from langgraph_sdk import get_client
-client = get_client(url=<DEPLOYMENT_URL>)
-
-# Using the graph deployed with the name "agent"
-assistant_id = "agent"
-
-# create a thread
-thread = await client.threads.create()
-thread_id = thread["thread_id"]
-
-# Run the graph
-result = await client.runs.wait(
-    thread_id,
-    assistant_id,
-    input={}
-)
+> from langgraph_sdk import get_client
+> client = get_client(url=<DEPLOYMENT_URL>)
+>
+> # Using the graph deployed with the name "agent"
+> assistant_id = "agent"
+>
+> # create a thread
+> thread = await client.threads.create()
+> thread_id = thread["thread_id"]
+>
+> # Run the graph
+> result = await client.runs.wait(
+>     thread_id,
+>     assistant_id,
+>     input={}
+> )
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```js
-import { Client } from "@langchain/langgraph-sdk";
-const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
-
-// Using the graph deployed with the name "agent"
-const assistantID = "agent";
-
-// create a thread
-const thread = await client.threads.create();
-const threadID = thread["thread_id"];
-
-// Run the graph
-const result = await client.runs.wait(
-  threadID,
-  assistantID,
-  { input: {}}
-);
+> import { Client } from "@langchain/langgraph-sdk";
+> const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
+>
+> // Using the graph deployed with the name "agent"
+> const assistantID = "agent";
+>
+> // create a thread
+> const thread = await client.threads.create();
+> const threadID = thread["thread_id"];
+>
+> // Run the graph
+> const result = await client.runs.wait(
+>   threadID,
+>   assistantID,
+>   { input: {}}
+> );
 ```
 
-**cURL**
-
-Create a thread:
-
+> [tab] cURL
+>
+> Create a thread:
+>
 ```bash
-curl --request POST \
---url <DEPLOYMENT_URL>/threads \
---header 'Content-Type: application/json' \
---data '{}'
+> curl --request POST \
+> --url <DEPLOYMENT_URL>/threads \
+> --header 'Content-Type: application/json' \
+> --data '{}'
 ```
-
-Run the graph:
-
+>
+> Run the graph:
+>
 ```bash
-curl --request POST \
---url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
---header 'Content-Type: application/json' \
---data "{
-  \"assistant_id\": \"agent\",
-  \"input\": {}
-}"
+> curl --request POST \
+> --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
+> --header 'Content-Type: application/json' \
+> --data "{
+>   \"assistant_id\": \"agent\",
+>   \"input\": {}
+> }"
 ```
 
 ### 2. Identify a checkpoint
 
-**Python**
-
+> [tab] Python
+>
 ```python
-# The states are returned in reverse chronological order.
-states = await client.threads.get_history(thread_id)
-selected_state = states[1]
-print(selected_state)
+> # The states are returned in reverse chronological order.
+> states = await client.threads.get_history(thread_id)
+> selected_state = states[1]
+> print(selected_state)
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```js
-// The states are returned in reverse chronological order.
-const states = await client.threads.getHistory(threadID);
-const selectedState = states[1];
-console.log(selectedState);
+> // The states are returned in reverse chronological order.
+> const states = await client.threads.getHistory(threadID);
+> const selectedState = states[1];
+> console.log(selectedState);
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-curl --request GET \
---url <DEPLOYMENT_URL>/threads/<THREAD_ID>/history \
---header 'Content-Type: application/json'
+> curl --request GET \
+> --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/history \
+> --header 'Content-Type: application/json'
 ```
 
 ### 3. Update the state
 
 [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) will create a new checkpoint. The new checkpoint will be associated with the same thread, but a new checkpoint ID.
 
-**Python**
-
+> [tab] Python
+>
 ```python
-new_config = await client.threads.update_state(
-    thread_id,
-    {"topic": "chickens"},
-    checkpoint_id=selected_state["checkpoint_id"]
-)
-print(new_config)
+> new_config = await client.threads.update_state(
+>     thread_id,
+>     {"topic": "chickens"},
+>     checkpoint_id=selected_state["checkpoint_id"]
+> )
+> print(new_config)
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```js
-const newConfig = await client.threads.updateState(
-  threadID,
-  {
-    values: { "topic": "chickens" },
-    checkpointId: selectedState["checkpoint_id"]
-  }
-);
-console.log(newConfig);
+> const newConfig = await client.threads.updateState(
+>   threadID,
+>   {
+>     values: { "topic": "chickens" },
+>     checkpointId: selectedState["checkpoint_id"]
+>   }
+> );
+> console.log(newConfig);
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-curl --request POST \
---url <DEPLOYMENT_URL>/threads/<THREAD_ID>/state \
---header 'Content-Type: application/json' \
---data "{
-  \"assistant_id\": \"agent\",
-  \"checkpoint_id\": <CHECKPOINT_ID>,
-  \"values\": {\"topic\": \"chickens\"}
-}"
+> curl --request POST \
+> --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/state \
+> --header 'Content-Type: application/json' \
+> --data "{
+>   \"assistant_id\": \"agent\",
+>   \"checkpoint_id\": <CHECKPOINT_ID>,
+>   \"values\": {\"topic\": \"chickens\"}
+> }"
 ```
 
 ### 4. Resume execution from the checkpoint
 
-**Python**
-
+> [tab] Python
+>
 ```python
-await client.runs.wait(
-    thread_id,
-    assistant_id,
-    input=None,
-    checkpoint_id=new_config["checkpoint_id"]
-)
+> await client.runs.wait(
+>     thread_id,
+>     assistant_id,
+>     input=None,
+>     checkpoint_id=new_config["checkpoint_id"]
+> )
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```javascript
-await client.runs.wait(
-  threadID,
-  assistantID,
-  {
-    input: null,
-    checkpointId: newConfig["checkpoint_id"]
-  }
-);
+> await client.runs.wait(
+>   threadID,
+>   assistantID,
+>   {
+>     input: null,
+>     checkpointId: newConfig["checkpoint_id"]
+>   }
+> );
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-curl --request POST \
---url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
---header 'Content-Type: application/json' \
---data "{
-  \"assistant_id\": \"agent\",
-  \"checkpoint_id\": <CHECKPOINT_ID>
-}"
+> curl --request POST \
+> --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
+> --header 'Content-Type: application/json' \
+> --data "{
+>   \"assistant_id\": \"agent\",
+>   \"checkpoint_id\": <CHECKPOINT_ID>
+> }"
 ```
 
 ## Learn more

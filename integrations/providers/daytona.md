@@ -12,11 +12,11 @@ tags: [docs, integrations, providers, daytona]
 
 [Daytona](https://daytona.io) provides fast-starting sandbox environments with multi-language support. See the [Daytona docs](https://www.daytona.io/docs) for signup, authentication, and platform details.
 
-> **[DaytonaSandbox](../sandboxes/daytona.md)**
+> [card] [DaytonaSandbox](../sandboxes/daytona.md)
 >
 > Daytona sandbox backend for deepagents.
 
-> **[DaytonaDataAnalysisTool](https://github.com/daytonaio/daytona)**
+> [card] [DaytonaDataAnalysisTool](https://github.com/daytonaio/daytona)
 >
 > Data analysis tool powered by Daytona sandboxes.
 

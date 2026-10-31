@@ -137,53 +137,53 @@ Custom state keys are inferred automatically, no manual interface required.
 
 ### Render messages and output
 
-> **[Markdown messages](markdown-messages.md)**
+> [card] [Markdown messages](markdown-messages.md)
 >
 > Parse and render streamed markdown with proper formatting and code highlighting.
 
-> **[Structured output](structured-output.md)**
+> [card] [Structured output](structured-output.md)
 >
 > Render typed agent responses as custom UI components instead of plain text.
 
-> **[Reasoning tokens](reasoning-tokens.md)**
+> [card] [Reasoning tokens](reasoning-tokens.md)
 >
 > Display model thinking processes in collapsible blocks.
 
-> **[Generative UI](generative-ui-overview.md)**
+> [card] [Generative UI](generative-ui-overview.md)
 >
 > Render agent-generated interfaces across the spectrum from controlled to declarative to open-ended.
 
 ### Display agent actions
 
-> **[Tool calling](tool-calling.md)**
+> [card] [Tool calling](tool-calling.md)
 >
 > Show tool calls as rich, type-safe UI cards with loading and error states.
 
-> **[Headless tools](headless-tools.md)**
+> [card] [Headless tools](headless-tools.md)
 >
 > Run browser and device APIs on the client while keeping typed tool schemas on the agent.
 
-> **[Human-in-the-loop](human-in-the-loop.md)**
+> [card] [Human-in-the-loop](human-in-the-loop.md)
 >
 > Pause the agent for human review with approve, reject, and edit workflows.
 
 ### Manage conversations
 
-> **[Branching chat](branching-chat.md)**
+> [card] [Branching chat](branching-chat.md)
 >
 > Edit messages, regenerate responses, and navigate conversation branches.
 
-> **[Message queues](message-queues.md)**
+> [card] [Message queues](message-queues.md)
 >
 > Queue multiple messages while the agent processes them sequentially.
 
 ### Advanced streaming
 
-> **[Join & rejoin streams](join-rejoin.md)**
+> [card] [Join & rejoin streams](join-rejoin.md)
 >
 > Disconnect from and reconnect to running agent streams without losing progress.
 
-> **[Time travel](time-travel.md)**
+> [card] [Time travel](time-travel.md)
 >
 > Inspect, navigate, and resume from any checkpoint in the conversation history.
 
@@ -207,15 +207,15 @@ framework. Component libraries can own the presentation layer while LangChain's
 SDK owns the agent runtime state, resumability, interrupts, and checkpoint
 semantics underneath.
 
-> **[AI Elements](integrations/ai-elements.md)**
+> [card] [AI Elements](integrations/ai-elements.md)
 >
 > Composable shadcn/ui components for AI chat: `Conversation`, `Message`, `Tool`, `Reasoning`.
 
-> **[assistant-ui](integrations/assistant-ui.md)**
+> [card] [assistant-ui](integrations/assistant-ui.md)
 >
 > Headless React framework with built-in thread management, branching, and attachment support.
 
-> **[OpenUI](integrations/openui.md)**
+> [card] [OpenUI](integrations/openui.md)
 >
 > Generative UI library for data-rich reports and dashboards using the openui-lang component DSL.
 

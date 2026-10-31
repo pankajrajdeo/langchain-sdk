@@ -47,7 +47,7 @@ Middleware specifically designed for Anthropic's Claude models. Learn more about
 | Built-in state management | ✅ | ❌ |
 | Custom execute callback | ❌ | ✅ |
 
-> **Example: Middleware vs tools comparison**
+> [accordion] Example: Middleware vs tools comparison
 >
 > **Using middleware** (turnkey solution):
 >
@@ -150,7 +150,7 @@ agent = create_agent(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **type** `string` (default: ephemeral)
 >
@@ -168,7 +168,7 @@ agent = create_agent(
 >
 > Behavior when using non-Anthropic models. Options: `'ignore'`, `'warn'`, or `'raise'`
 
-> **Full example**
+> [accordion] Full example
 >
 > The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, significantly reducing costs and latency.
 >
@@ -254,7 +254,7 @@ agent = create_agent(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > `ClaudeBashToolMiddleware` accepts all parameters from [`ShellToolMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/shell_tool/ShellToolMiddleware), including:
 >
@@ -276,7 +276,7 @@ agent = create_agent(
 >
 > See [Shell tool](../../langchain/middleware/built-in.md#shell-tool) for full configuration details.
 
-> **Full example**
+> [accordion] Full example
 >
 ```python
 > import tempfile
@@ -376,7 +376,7 @@ Claude's text editor tool supports the following commands:
 * `delete` - Delete a file
 * `rename` - Rename/move a file
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **[`StateClaudeTextEditorMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/anthropic_tools/StateClaudeTextEditorMiddleware) (state-based)**
 >
@@ -398,7 +398,7 @@ Claude's text editor tool supports the following commands:
 >
 > Maximum file size in MB
 
-> **Full example: State-based text editor**
+> [accordion] Full example: State-based text editor
 >
 ```python
 > from langchain_anthropic import ChatAnthropic
@@ -434,7 +434,7 @@ Claude's text editor tool supports the following commands:
 > I've created a simple "Hello, World!" program at `/project/hello.py`. The program uses Python's `print()` function to display "Hello, World!" to the console when executed.
 ```
 
-> **Full example: Filesystem-based text editor**
+> [accordion] Full example: Filesystem-based text editor
 >
 ```python
 > import tempfile
@@ -520,7 +520,7 @@ agent_fs = create_agent(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **[`StateClaudeMemoryMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/anthropic_tools/StateClaudeMemoryMiddleware) (state-based)**
 >
@@ -550,7 +550,7 @@ agent_fs = create_agent(
 >
 > System prompt to inject
 
-> **Full example: State-based memory**
+> [accordion] Full example: State-based memory
 >
 > The agent will automatically:
 >
@@ -588,7 +588,7 @@ agent_fs = create_agent(
 > Perfect! I've stored your favorite color as **blue** in my memory system. The information is saved in my user preferences file where I can access it in future conversations.
 ```
 
-> **Full example: Filesystem-based memory**
+> [accordion] Full example: Filesystem-based memory
 >
 > The agent will automatically:
 >
@@ -658,13 +658,13 @@ agent = create_agent(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **state\_key** `str` (default: text\_editor\_files)
 >
 > State key containing files to search. Use `"text_editor_files"` for text editor files or `"memory_files"` for memory files.
 
-> **Full example: Search text editor files**
+> [accordion] Full example: Search text editor files
 >
 > The middleware adds Glob and Grep search tools that work with state-based files.
 >
@@ -727,7 +727,7 @@ agent = create_agent(
 > Would you like me to view the contents of any of these files?
 ```
 
-> **Full example: Search memory files**
+> [accordion] Full example: Search memory files
 >
 ```python
 > from langchain_anthropic import ChatAnthropic

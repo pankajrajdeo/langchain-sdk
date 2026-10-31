@@ -34,10 +34,6 @@ The tool migrates the following resources between a source instance and a destin
 
 Each resource type has its own command, flags, and caveats. For the command reference, see the [tool README](https://github.com/langchain-ai/langsmith-data-migration-tool/blob/main/README.md).
 
-> [!NOTE]
->
-> Resources belonging to a feature that BYOC does not support yet, such as [Managed Deep Agents](python/managed-deep-agents-overview.md), cannot be migrated. See [Available features](byoc.md#available-features).
-
 ## Migrate with the tool
 
 **1. Install the tool**

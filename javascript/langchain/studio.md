@@ -61,7 +61,7 @@ const agent = createAgent({
 
 > [!NOTE]
 >
-> In an [agent-based workspace](../../langsmith/agents.md), [create an agent](../../langsmith/create-an-agent.md) once before sending traces. Use [agent addressing](../../langsmith/log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](../../langsmith/create-an-agent.md#use-an-environment-project) as a compatibility value.
+> In an [agent-based workspace](../../langsmith/agent-registry.md), [create an agent](../../langsmith/create-an-agent.md) once before sending traces. Use [agent addressing](../../langsmith/log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](../../langsmith/create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 Studio requires a LangSmith API key to connect your local agent. Create a `.env` file in the root of your project and add your API key from [LangSmith](https://smith.langchain.com/settings).
 

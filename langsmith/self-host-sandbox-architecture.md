@@ -14,11 +14,11 @@ tags: [docs, langsmith, self-host-sandbox-architecture]
 
 For supported platforms, prerequisites, and installation instructions, see [Enable Sandboxes](enable-self-hosted-sandboxes.md). The architecture below describes the `sandbox-host` runtime. Storage mounting and configuration options can differ across Helm releases.
 
-> **[Scaling and capacity](self-host-sandbox-scaling.md)**
+> [card] [Scaling and capacity](self-host-sandbox-scaling.md)
 >
 > Size the host pool, configure autoscaling, and plan memory and cache capacity.
 
-> **[Upgrades and operations](self-host-sandbox-operations.md)**
+> [card] [Upgrades and operations](self-host-sandbox-operations.md)
 >
 > Understand host draining, failure recovery, and production monitoring.
 

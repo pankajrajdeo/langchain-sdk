@@ -24,7 +24,7 @@ This page covers all LangChain integrations with [Google Gemini](https://ai.goog
 
 Not sure which package to use?
 
-> **Google Generative AI (Gemini API & Gemini Enterprise Agent Platform)**
+> [accordion] Google Generative AI (Gemini API & Gemini Enterprise Agent Platform)
 >
 > Access Google Gemini models via the **[Gemini Developer API](https://ai.google.dev/)** or **[Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform)**. The backend is selected automatically based on your configuration.
 >
@@ -35,7 +35,7 @@ Not sure which package to use?
 >
 > [See integrations.](#google-generative-ai)
 
-> **Google Cloud (Gemini Enterprise Agent Platform Services)**
+> [accordion] Google Cloud (Gemini Enterprise Agent Platform Services)
 >
 > Access Gemini Enterprise Agent Platform-specific services beyond Gemini models: Model Garden (Llama, Mistral, Anthropic), evaluation services, and specialized vision models.
 >
@@ -53,19 +53,19 @@ Access Google Gemini models via the [Gemini Developer API](https://ai.google.dev
 
 ### Chat models
 
-> **[ChatGoogleGenerativeAI](../chat/google_generative_ai.md)**
+> [card] [ChatGoogleGenerativeAI](../chat/google_generative_ai.md)
 >
 > Google Gemini chat models via **Gemini Developer API** or **Gemini Enterprise Agent Platform**.
 
 ### LLMs
 
-> **[GoogleGenerativeAI](../llms/google_generative_ai.md)**
+> [card] [GoogleGenerativeAI](../llms/google_generative_ai.md)
 >
 > Gemini models using the (legacy) LLM text completion interface.
 
 ### Embedding models
 
-> **[GoogleGenerativeAIEmbeddings](../embeddings/google_generative_ai.md)**
+> [card] [GoogleGenerativeAIEmbeddings](../embeddings/google_generative_ai.md)
 >
 > Gemini embedding models via **Gemini Developer API** or **Gemini Enterprise Agent Platform**.
 
@@ -81,11 +81,11 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 
 ### Chat models
 
-> **[ChatAnthropicVertex](../chat/google_anthropic_vertex.md)**
+> [card] [ChatAnthropicVertex](../chat/google_anthropic_vertex.md)
 >
 > Anthropic on Gemini Enterprise Agent Platform Model Garden
 
-> **ChatVertexAI (deprecated)**
+> [accordion] ChatVertexAI (deprecated)
 >
 > **Deprecated**—Use [`ChatGoogleGenerativeAI`](../chat/google_generative_ai.md) for Gemini models instead.
 >
@@ -93,7 +93,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai import ChatVertexAI
 ```
 
-> **VertexModelGardenLlama**
+> [accordion] VertexModelGardenLlama
 >
 > Llama on Gemini Enterprise Agent Platform Model Garden
 >
@@ -101,7 +101,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.model_garden_maas.llama import VertexModelGardenLlama
 ```
 
-> **VertexModelGardenMistral**
+> [accordion] VertexModelGardenMistral
 >
 > Mistral on Gemini Enterprise Agent Platform Model Garden
 >
@@ -109,7 +109,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.model_garden_maas.mistral import VertexModelGardenMistral
 ```
 
-> **GemmaChatLocalHF**
+> [accordion] GemmaChatLocalHF
 >
 > Local Gemma model loaded from HuggingFace.
 >
@@ -117,7 +117,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.gemma import GemmaChatLocalHF
 ```
 
-> **GemmaChatLocalKaggle**
+> [accordion] GemmaChatLocalKaggle
 >
 > Local Gemma model loaded from Kaggle.
 >
@@ -125,7 +125,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.gemma import GemmaChatLocalKaggle
 ```
 
-> **GemmaChatVertexAIModelGarden**
+> [accordion] GemmaChatVertexAIModelGarden
 >
 > Gemma on Gemini Enterprise Agent Platform Model Garden
 >
@@ -133,7 +133,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.gemma import GemmaChatVertexAIModelGarden
 ```
 
-> **VertexAIImageCaptioningChat**
+> [accordion] VertexAIImageCaptioningChat
 >
 > Image captioning model as a chat interface.
 >
@@ -141,7 +141,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.vision_models import VertexAIImageCaptioningChat
 ```
 
-> **VertexAIImageEditorChat**
+> [accordion] VertexAIImageEditorChat
 >
 > Edit images given a prompt. Currently supports mask-free editing only.
 >
@@ -149,7 +149,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.vision_models import VertexAIImageEditorChat
 ```
 
-> **VertexAIImageGeneratorChat**
+> [accordion] VertexAIImageGeneratorChat
 >
 > Generate images from a prompt.
 >
@@ -157,7 +157,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.vision_models import VertexAIImageGeneratorChat
 ```
 
-> **VertexAIVisualQnAChat**
+> [accordion] VertexAIVisualQnAChat
 >
 > Visual question answering model as a chat interface.
 >
@@ -169,11 +169,11 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 
 (Legacy) string-in, string-out LLM interface.
 
-> **[VertexAIModelGarden](../llms/google_vertex_ai.md#vertex-model-garden)**
+> [card] [VertexAIModelGarden](../llms/google_vertex_ai.md#vertex-model-garden)
 >
 > Hundreds of OSS models via Gemini Enterprise Agent Platform Model Garden.
 
-> **VertexAI (deprecated)**
+> [accordion] VertexAI (deprecated)
 >
 > **Deprecated**—Use [`GoogleGenerativeAI`](../llms/google_generative_ai.md) for Gemini models instead.
 >
@@ -181,7 +181,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai import VertexAI
 ```
 
-> **Gemma local from Hugging Face**
+> [accordion] Gemma local from Hugging Face
 >
 > Local Gemma model loaded from HuggingFace.
 >
@@ -189,7 +189,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.gemma import GemmaLocalHF
 ```
 
-> **Gemma local from Kaggle**
+> [accordion] Gemma local from Kaggle
 >
 > Local Gemma model loaded from Kaggle.
 >
@@ -197,13 +197,13 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 > from langchain_google_vertexai.gemma import GemmaLocalKaggle
 ```
 
-> **Gemma on Gemini Enterprise Agent Platform Model Garden**
+> [accordion] Gemma on Gemini Enterprise Agent Platform Model Garden
 >
 ```python
 > from langchain_google_vertexai.gemma import GemmaVertexAIModelGarden
 ```
 
-> **Gemini Enterprise Agent Platform image captioning**
+> [accordion] Gemini Enterprise Agent Platform image captioning
 >
 > Image captioning model as an LLM interface.
 >
@@ -213,7 +213,7 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 
 ### Embedding models
 
-> **VertexAIEmbeddings (deprecated)**
+> [accordion] VertexAIEmbeddings (deprecated)
 >
 > **Deprecated**—Use [`GoogleGenerativeAIEmbeddings`](../embeddings/google_generative_ai.md) instead.
 >
@@ -223,63 +223,63 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 
 ### Document loaders
 
-> **[AlloyDB for PostgreSQL](../document_loaders/google_alloydb.md)**
+> [card] [AlloyDB for PostgreSQL](../document_loaders/google_alloydb.md)
 >
 > PostgreSQL-compatible database on Google Cloud.
 
-> **[BigQuery](../document_loaders/google_bigquery.md)**
+> [card] [BigQuery](../document_loaders/google_bigquery.md)
 >
 > Serverless data warehouse.
 
-> **[Bigtable](../document_loaders/google_bigtable.md)**
+> [card] [Bigtable](../document_loaders/google_bigtable.md)
 >
 > Key-value and wide-column store for structured and semi-structured data.
 
-> **[Cloud SQL for MySQL](../document_loaders/google_cloud_sql_mysql.md)**
+> [card] [Cloud SQL for MySQL](../document_loaders/google_cloud_sql_mysql.md)
 >
 > Managed MySQL database.
 
-> **[Cloud SQL for SQL Server](../document_loaders/google_cloud_sql_mssql.md)**
+> [card] [Cloud SQL for SQL Server](../document_loaders/google_cloud_sql_mssql.md)
 >
 > Managed SQL Server database.
 
-> **[Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)**
+> [card] [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
 >
 > Managed PostgreSQL database.
 
-> **[Cloud Storage (directory)](../document_loaders/google_cloud_storage_directory.md)**
+> [card] [Cloud Storage (directory)](../document_loaders/google_cloud_storage_directory.md)
 >
 > Load documents from a GCS bucket directory.
 
-> **[Cloud Storage (file)](../document_loaders/google_cloud_storage_file.md)**
+> [card] [Cloud Storage (file)](../document_loaders/google_cloud_storage_file.md)
 >
 > Load a single document from GCS.
 
-> **[El Carro for Oracle Workloads](https://github.com/googleapis/langchain-google-el-carro-python/)**
+> [card] [El Carro for Oracle Workloads](https://github.com/googleapis/langchain-google-el-carro-python/)
 >
 > Oracle databases on Kubernetes via El Carro.
 
-> **[Firestore (Native Mode)](../document_loaders/google_firestore.md)**
+> [card] [Firestore (Native Mode)](../document_loaders/google_firestore.md)
 >
 > NoSQL document database.
 
-> **[Firestore (Datastore Mode)](../document_loaders/google_datastore.md)**
+> [card] [Firestore (Datastore Mode)](../document_loaders/google_datastore.md)
 >
 > Firestore in Datastore mode.
 
-> **[Memorystore for Redis](../document_loaders/google_memorystore_redis.md)**
+> [card] [Memorystore for Redis](../document_loaders/google_memorystore_redis.md)
 >
 > Managed Redis service.
 
-> **[Spanner](../document_loaders/google_spanner.md)**
+> [card] [Spanner](../document_loaders/google_spanner.md)
 >
 > Globally distributed relational database.
 
-> **[Speech-to-Text](../document_loaders/google_speech_to_text.md)**
+> [card] [Speech-to-Text](../document_loaders/google_speech_to_text.md)
 >
 > Transcribe audio files.
 
-> **Cloud Vision loader**
+> [accordion] Cloud Vision loader
 >
 > Load data using Google Cloud Vision API.
 >
@@ -289,11 +289,11 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 
 ### Document transformers
 
-> **[Document AI](../document_transformers/google_docai.md)**
+> [card] [Document AI](../document_transformers/google_docai.md)
 >
 > Extract structured data from unstructured documents.
 
-> **[Google Translate](../document_transformers/google_translate.md)**
+> [card] [Google Translate](../document_transformers/google_translate.md)
 >
 > Translate text and HTML via Cloud Translation API.
 
@@ -301,53 +301,53 @@ Access Gemini Enterprise Agent Platform-specific services including Model Garden
 
 Store and search vectors using Google Cloud databases and Vector Search on Gemini Enterprise Agent Platform.
 
-> **[AlloyDB for PostgreSQL](../vectorstores/google_alloydb.md)**
+> [card] [AlloyDB for PostgreSQL](../vectorstores/google_alloydb.md)
 >
 > PostgreSQL-compatible vector store on AlloyDB.
 
-> **[BigQuery Vector Search](../vectorstores/google_bigquery_vector_search.md)**
+> [card] [BigQuery Vector Search](../vectorstores/google_bigquery_vector_search.md)
 >
 > Semantic search using GoogleSQL with vector indexes.
 
-> **[Memorystore for Redis](../vectorstores/google_memorystore_redis.md)**
+> [card] [Memorystore for Redis](../vectorstores/google_memorystore_redis.md)
 >
 > Vector store on Memorystore for Redis.
 
-> **[Spanner](../vectorstores/google_spanner.md)**
+> [card] [Spanner](../vectorstores/google_spanner.md)
 >
 > Vector store on Cloud Spanner.
 
-> **[Bigtable](https://cloud.google.com/bigtable)**
+> [card] [Bigtable](https://cloud.google.com/bigtable)
 >
 > Vector store on Cloud Bigtable.
 
-> **[Firestore (Native Mode)](../vectorstores/google_firestore.md)**
+> [card] [Firestore (Native Mode)](../vectorstores/google_firestore.md)
 >
 > Vector store on Firestore.
 
-> **[Cloud SQL for MySQL](../vectorstores/google_cloud_sql_mysql.md)**
+> [card] [Cloud SQL for MySQL](../vectorstores/google_cloud_sql_mysql.md)
 >
 > Vector store on Cloud SQL for MySQL.
 
-> **[Cloud SQL for PostgreSQL](../vectorstores/google_cloud_sql_pg.md)**
+> [card] [Cloud SQL for PostgreSQL](../vectorstores/google_cloud_sql_pg.md)
 >
 > Vector store on Cloud SQL for PostgreSQL.
 
-> **[Vector Search on Gemini Enterprise Agent Platform](../vectorstores/google_vertex_ai_vector_search.md)**
+> [card] [Vector Search on Gemini Enterprise Agent Platform](../vectorstores/google_vertex_ai_vector_search.md)
 >
 > Formerly known as Vertex AI Matching Engine, provides a low latency vector database. These vector databases are commonly referred to as vector similarity-matching or an approximate nearest neighbor (ANN) service.
 
-> **[Vector Search on Gemini Enterprise Agent Platform + Datastore](../vectorstores/google_vertex_ai_vector_search.md#optional--you-can-also-create-vector-and-store-chunks-in-a-datastore)**
+> [card] [Vector Search on Gemini Enterprise Agent Platform + Datastore](../vectorstores/google_vertex_ai_vector_search.md#optional--you-can-also-create-vector-and-store-chunks-in-a-datastore)
 >
 > Vector search with Datastore for document storage.
 
 ### Retrievers
 
-> **[Agent Search on Gemini Enterprise Agent Platform](../retrievers/google_vertex_ai_search.md)**
+> [card] [Agent Search on Gemini Enterprise Agent Platform](../retrievers/google_vertex_ai_search.md)
 >
 > Generative AI powered search via Agent Search on Gemini Enterprise Agent Platform.
 
-> **[Document AI Warehouse](https://cloud.google.com/document-ai-warehouse)**
+> [card] [Document AI Warehouse](https://cloud.google.com/document-ai-warehouse)
 >
 > Search, store, and manage documents using Document AI Warehouse.
 
@@ -363,7 +363,7 @@ from langchain_google_community import VertexAISearchSummaryTool
 
 Integrate agents with various Google Cloud services.
 
-> **[Text-to-Speech](../tools/google_cloud_texttospeech.md)**
+> [card] [Text-to-Speech](../tools/google_cloud_texttospeech.md)
 >
 > Synthesize natural-sounding speech with 100+ voices.
 
@@ -371,7 +371,7 @@ Integrate agents with various Google Cloud services.
 
 Track LLM/Chat model usage.
 
-> **Gemini Enterprise Agent Platform callback handler**
+> [accordion] Gemini Enterprise Agent Platform callback handler
 >
 > Track `VertexAI` usage info.
 >
@@ -379,7 +379,7 @@ Track LLM/Chat model usage.
 > from langchain_google_vertexai.callbacks import VertexAICallbackHandler
 ```
 
-> **Google BigQuery**
+> [accordion] Google BigQuery
 >
 > See the [documentation](../callbacks/google_bigquery.md) for more details.
 >
@@ -391,7 +391,7 @@ Track LLM/Chat model usage.
 
 Evaluate model outputs using Gemini Enterprise Agent Platform.
 
-> **VertexPairWiseStringEvaluator**
+> [accordion] VertexPairWiseStringEvaluator
 >
 > Pair-wise evaluation using Gemini Enterprise Agent Platform models.
 >
@@ -399,7 +399,7 @@ Evaluate model outputs using Gemini Enterprise Agent Platform.
 > from langchain_google_vertexai.evaluators.evaluation import VertexPairWiseStringEvaluator
 ```
 
-> **VertexStringEvaluator**
+> [accordion] VertexStringEvaluator
 >
 > Single prediction evaluation using Gemini Enterprise Agent Platform models.
 >
@@ -415,35 +415,35 @@ Integrations with various Google services beyond the core Cloud Platform.
 
 ### Document loaders
 
-> **[Google Drive](../document_loaders/google_drive.md)**
+> [card] [Google Drive](../document_loaders/google_drive.md)
 >
 > Load files from Google Drive. Currently supports Google Docs.
 
 ### Retrievers
 
-> **[Google Drive](../retrievers/google_drive.md)**
+> [card] [Google Drive](../retrievers/google_drive.md)
 >
 > Retrieve documents from Google Drive.
 
 ### Tools
 
-> **[Google Search](../tools/google_search.md)**
+> [card] [Google Search](../tools/google_search.md)
 >
 > Web search via Google Custom Search Engine (CSE).
 
-> **[Google Drive](../tools/google_drive.md)**
+> [card] [Google Drive](../tools/google_drive.md)
 >
 > Interact with Google Drive.
 
 ### MCP
 
-> **[MCP Toolbox](../tools/mcp_toolbox.md)**
+> [card] [MCP Toolbox](../tools/mcp_toolbox.md)
 >
 > Connect to databases including Cloud SQL and AlloyDB.
 
 ### Toolkits
 
-> **[Gmail](../tools/google_gmail.md)**
+> [card] [Gmail](../tools/google_gmail.md)
 >
 > Create, search, and send emails via the Gmail API.
 
@@ -455,7 +455,7 @@ Access Google services via unofficial third-party APIs.
 
 ### Search
 
-> **[cloro](https://cloro.dev/docs)**
+> [card] [cloro](https://cloro.dev/docs)
 >
 > Google Search results with AI Overview support.
 

@@ -14,11 +14,11 @@ These loaders are used to load web resources. They do not involve the local file
 
 ## All web loaders
 
-> **[Google Cloud SQL for PostgreSQL](web_loaders/google_cloudsql_pg.md)**
+> [card] [Google Cloud SQL for PostgreSQL](web_loaders/google_cloudsql_pg.md)
 
-> **[LangSmith](web_loaders/langsmith.md)**
+> [card] [LangSmith](web_loaders/langsmith.md)
 
-> **[Soniox](web_loaders/soniox.md)**
+> [card] [Soniox](web_loaders/soniox.md)
 
 > [!NOTE]
 >

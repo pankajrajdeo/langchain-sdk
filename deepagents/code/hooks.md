@@ -358,7 +358,7 @@ The following compatibility fields are recognized but not applied. Deep Agents C
 
 ## Examples
 
-> **Block destructive Bash commands (PreToolUse)**
+> [accordion] Block destructive Bash commands (PreToolUse)
 >
 ```bash
 > #!/usr/bin/env bash
@@ -392,7 +392,7 @@ The following compatibility fields are recognized but not applied. Deep Agents C
 > }
 ```
 
-> **Load project context on session start (SessionStart)**
+> [accordion] Load project context on session start (SessionStart)
 >
 ```bash
 > #!/usr/bin/env bash
@@ -421,7 +421,7 @@ The following compatibility fields are recognized but not applied. Deep Agents C
 > }
 ```
 
-> **Desktop notification when the turn ends on macOS (Stop)**
+> [accordion] Desktop notification when the turn ends on macOS (Stop)
 >
 ```json
 > {
@@ -440,7 +440,7 @@ The following compatibility fields are recognized but not applied. Deep Agents C
 > }
 ```
 
-> **Python handler that reads the payload**
+> [accordion] Python handler that reads the payload
 >
 ```python
 > import json

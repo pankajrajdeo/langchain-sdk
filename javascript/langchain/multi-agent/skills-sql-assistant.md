@@ -132,257 +132,257 @@ process.env.LANGSMITH_API_KEY = "...";
 
 Select a chat model from LangChain's suite of integrations:
 
-**OpenAI**
-
-👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
-
+> [tab] OpenAI
+>
+> 👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/openai
+> npm install @langchain/openai
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/openai
+> pnpm install @langchain/openai
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/openai
+> yarn add @langchain/openai
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/openai
+> bun add @langchain/openai
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-process.env.OPENAI_API_KEY = "your-api-key";
-
-const model = await initChatModel("gpt-5.5");
+> import { initChatModel } from "langchain";
+>
+> process.env.OPENAI_API_KEY = "your-api-key";
+>
+> const model = await initChatModel("gpt-5.5");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatOpenAI } from "@langchain/openai";
-
-const model = new ChatOpenAI({
-  model: "gpt-5.5",
-  apiKey: "your-api-key"
-});
+> import { ChatOpenAI } from "@langchain/openai";
+>
+> const model = new ChatOpenAI({
+>   model: "gpt-5.5",
+>   apiKey: "your-api-key"
+> });
 ```
 
-**Anthropic**
-
-👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
-
+> [tab] Anthropic
+>
+> 👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/anthropic
+> npm install @langchain/anthropic
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/anthropic
+> pnpm install @langchain/anthropic
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/anthropic
+> yarn add @langchain/anthropic
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/anthropic
+> pnpm add @langchain/anthropic
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-process.env.ANTHROPIC_API_KEY = "your-api-key";
-
-const model = await initChatModel("claude-sonnet-4-6");
+> import { initChatModel } from "langchain";
+>
+> process.env.ANTHROPIC_API_KEY = "your-api-key";
+>
+> const model = await initChatModel("claude-sonnet-4-6");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatAnthropic } from "@langchain/anthropic";
-
-const model = new ChatAnthropic({
-  model: "claude-sonnet-4-6",
-  apiKey: "your-api-key"
-});
+> import { ChatAnthropic } from "@langchain/anthropic";
+>
+> const model = new ChatAnthropic({
+>   model: "claude-sonnet-4-6",
+>   apiKey: "your-api-key"
+> });
 ```
 
-**Azure**
-
-👉 Read the [Azure chat model integration docs](../../integrations/chat/azure.md)
-
+> [tab] Azure
+>
+> 👉 Read the [Azure chat model integration docs](../../integrations/chat/azure.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/azure
+> npm install @langchain/azure
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/azure
+> pnpm install @langchain/azure
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/azure
+> yarn add @langchain/azure
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/azure
+> bun add @langchain/azure
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-process.env.AZURE_OPENAI_API_KEY = "your-api-key";
-process.env.AZURE_OPENAI_ENDPOINT = "your-endpoint";
-process.env.OPENAI_API_VERSION = "your-api-version";
-
-const model = await initChatModel("azure_openai:gpt-5.5");
+> import { initChatModel } from "langchain";
+>
+> process.env.AZURE_OPENAI_API_KEY = "your-api-key";
+> process.env.AZURE_OPENAI_ENDPOINT = "your-endpoint";
+> process.env.OPENAI_API_VERSION = "your-api-version";
+>
+> const model = await initChatModel("azure_openai:gpt-5.5");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { AzureChatOpenAI } from "@langchain/openai";
-
-const model = new AzureChatOpenAI({
-  model: "gpt-5.5",
-  azureOpenAIApiKey: "your-api-key",
-  azureOpenAIApiEndpoint: "your-endpoint",
-  azureOpenAIApiVersion: "your-api-version"
-});
+> import { AzureChatOpenAI } from "@langchain/openai";
+>
+> const model = new AzureChatOpenAI({
+>   model: "gpt-5.5",
+>   azureOpenAIApiKey: "your-api-key",
+>   azureOpenAIApiEndpoint: "your-endpoint",
+>   azureOpenAIApiVersion: "your-api-version"
+> });
 ```
 
-**Google Gemini**
-
-👉 Read the [ChatGoogle chat model integration docs](../../integrations/chat/google.md)
-
+> [tab] Google Gemini
+>
+> 👉 Read the [ChatGoogle chat model integration docs](../../integrations/chat/google.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/google
+> npm install @langchain/google
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/google
+> pnpm install @langchain/google
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/google
+> yarn add @langchain/google
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/google
+> bun add @langchain/google
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-process.env.GOOGLE_API_KEY = "your-api-key";
-
-const model = await initChatModel("google:gemini-3.7-flash");
+> import { initChatModel } from "langchain";
+>
+> process.env.GOOGLE_API_KEY = "your-api-key";
+>
+> const model = await initChatModel("google:gemini-3.7-flash");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatGoogle } from "@langchain/google/node";
-
-const model = new ChatGoogle({
-  model: "gemini-3.7-flash",
-  apiKey: "your-api-key"
-});
+> import { ChatGoogle } from "@langchain/google/node";
+>
+> const model = new ChatGoogle({
+>   model: "gemini-3.7-flash",
+>   apiKey: "your-api-key"
+> });
 ```
 
-**Bedrock Converse**
-
-👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock_converse.md)
-
+> [tab] Bedrock Converse
+>
+> 👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock_converse.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/aws
+> npm install @langchain/aws
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/aws
+> pnpm install @langchain/aws
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/aws
+> yarn add @langchain/aws
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/aws
+> bun add @langchain/aws
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-// Follow the steps here to configure your credentials:
-// https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-const model = await initChatModel("bedrock:gpt-5.5");
+> import { initChatModel } from "langchain";
+>
+> // Follow the steps here to configure your credentials:
+> // https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> const model = await initChatModel("bedrock:gpt-5.5");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatBedrockConverse } from "@langchain/aws";
-
-// Follow the steps here to configure your credentials:
-// https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-const model = new ChatBedrockConverse({
-  model: "gpt-5.5",
-  region: "us-east-2"
-});
+> import { ChatBedrockConverse } from "@langchain/aws";
+>
+> // Follow the steps here to configure your credentials:
+> // https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> const model = new ChatBedrockConverse({
+>   model: "gpt-5.5",
+>   region: "us-east-2"
+> });
 ```
 
 ## 1. Define skills
@@ -404,7 +404,7 @@ type Skill = z.infer<typeof SkillSchema>;
 
 Now define example skills for a SQL query assistant. The skills are designed to be **lightweight in description** (shown to the agent upfront) but **detailed in content** (loaded only when needed):
 
-> **View complete skill definitions**
+> [accordion] View complete skill definitions
 >
 ```typescript
 > import { context } from "langchain";
@@ -754,7 +754,7 @@ The agent saw the lightweight skill description in its system prompt, recognized
 
 ## 6. Advanced: Add constraints with custom state
 
-> **Optional: Track loaded skills and enforce tool constraints**
+> [accordion] Optional: Track loaded skills and enforce tool constraints
 >
 > You can add constraints to enforce that certain tools are only available after specific skills have been loaded. This requires tracking which skills have been loaded in custom agent state.
 >
@@ -895,7 +895,7 @@ The agent saw the lightweight skill description in its system prompt, recognized
 
 ## Complete example
 
-> **View complete runnable script**
+> [accordion] View complete runnable script
 >
 > Here's a complete, runnable implementation combining all the pieces from this tutorial:
 >
@@ -1166,7 +1166,7 @@ The agent saw the lightweight skill description in its system prompt, recognized
 
 ## Implementation variations
 
-> **View implementation options and trade-offs**
+> [accordion] View implementation options and trade-offs
 >
 > This tutorial implemented skills as in-memory Python dictionaries loaded through tool calls. However, there are several ways to implement progressive disclosure with skills:
 >
@@ -1200,7 +1200,7 @@ The agent saw the lightweight skill description in its system prompt, recognized
 
 ## Progressive disclosure and context engineering
 
-> **Combining with few-shot prompting and other techniques**
+> [accordion] Combining with few-shot prompting and other techniques
 >
 > Progressive disclosure is fundamentally a **[context engineering](../context-engineering.md) technique** - you're managing what information is available to the agent and when. This tutorial focused on loading database schemas, but the same principles apply to other types of context.
 >

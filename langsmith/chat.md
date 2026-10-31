@@ -208,19 +208,19 @@ In the **Evaluators** builder, Chat helps you write and refine evaluator logic. 
 
 Learn more about the features that Chat helps you explore:
 
-> **[Observability](observability.md)**
+> [card] [Observability](observability.md)
 >
 > Learn more about tracing and monitoring your LLM applications
 
-> **[Threads](threads.md)**
+> [card] [Threads](threads.md)
 >
 > Understand how threads work in LangSmith
 
-> **[Prompt Engineering](prompt-context-hub.md#prompts)**
+> [card] [Prompt Engineering](prompt-context-hub.md#prompts)
 >
 > Create and iterate on prompts in the Playground
 
-> **[Evaluation](evaluation.md)**
+> [card] [Evaluation](evaluation.md)
 >
 > Evaluate and test your applications systematically
 

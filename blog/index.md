@@ -34,7 +34,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Managed Deep Agents v0.10: Browser use and asynchronous subagents
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Nathan DreznerSydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)1min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2e4a5ec6ae4604757f269_cover-webflow-1200x675.png)Deep AgentsAgent ArchitectureDeployment
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Nathan DreznerSydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2e4a5ec6ae4604757f269_cover-webflow-1200x675.png)Deep AgentsAgent ArchitectureDeployment
 
 ## Browser Use in Managed Deep Agents
 

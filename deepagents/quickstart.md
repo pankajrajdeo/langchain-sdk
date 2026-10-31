@@ -125,63 +125,63 @@ uv sync
 
 ## Step 2: Set up your API keys
 
-**Google**
-
+> [tab] Google
+>
 ```bash
-export GOOGLE_API_KEY="your-api-key"
+> export GOOGLE_API_KEY="your-api-key"
 ```
 
-**OpenAI**
-
+> [tab] OpenAI
+>
 ```bash
-export OPENAI_API_KEY="your-api-key"
+> export OPENAI_API_KEY="your-api-key"
 ```
 
-**Anthropic**
-
+> [tab] Anthropic
+>
 ```bash
-export ANTHROPIC_API_KEY="your-api-key"
+> export ANTHROPIC_API_KEY="your-api-key"
 ```
 
-**OpenRouter**
-
+> [tab] OpenRouter
+>
 ```bash
-export OPENROUTER_API_KEY="your-api-key"
-export TAVILY_API_KEY="your-tavily-api-key"
+> export OPENROUTER_API_KEY="your-api-key"
+> export TAVILY_API_KEY="your-tavily-api-key"
 ```
 
-**Fireworks**
-
+> [tab] Fireworks
+>
 ```bash
-export FIREWORKS_API_KEY="your-api-key"
-export TAVILY_API_KEY="your-tavily-api-key"
+> export FIREWORKS_API_KEY="your-api-key"
+> export TAVILY_API_KEY="your-tavily-api-key"
 ```
 
-**Baseten**
-
+> [tab] Baseten
+>
 ```bash
-export BASETEN_API_KEY="your-api-key"
-export TAVILY_API_KEY="your-tavily-api-key"
+> export BASETEN_API_KEY="your-api-key"
+> export TAVILY_API_KEY="your-tavily-api-key"
 ```
 
-**Ollama**
-
+> [tab] Ollama
+>
 ```bash
-# Local: Ollama must be running on your machine
-# Cloud: Set your Ollama API key for hosted inference
-export OLLAMA_API_KEY="your-api-key"
-export TAVILY_API_KEY="your-tavily-api-key"
+> # Local: Ollama must be running on your machine
+> # Cloud: Set your Ollama API key for hosted inference
+> export OLLAMA_API_KEY="your-api-key"
+> export TAVILY_API_KEY="your-tavily-api-key"
 ```
 
-**Other**
-
+> [tab] Other
+>
 ```bash
-# Set the API key for your provider
-export <PROVIDER>_API_KEY="your-api-key"
-export TAVILY_API_KEY="your-tavily-api-key"
+> # Set the API key for your provider
+> export <PROVIDER>_API_KEY="your-api-key"
+> export TAVILY_API_KEY="your-tavily-api-key"
 ```
-
-Deep Agents work with any [LangChain chat model](models.md#supported-models). Set the API key for your provider.
+>
+> Deep Agents work with any [LangChain chat model](models.md#supported-models). Set the API key for your provider.
 
 > [!TIP]
 >
@@ -191,59 +191,60 @@ Deep Agents work with any [LangChain chat model](models.md#supported-models). Se
 
 Google, OpenAI, and Anthropic offer built-in web search tools that run server-side: no extra package or API key needed. Pass a provider tool dict directly to `create_deep_agent`.
 
-**Provider search (recommended)**
-
+> [tab] Provider search (recommended)
+>
 **Google**
 
 ```python
-from deepagents import create_deep_agent
-
-# Google's built-in search — no extra install or API key needed
-internet_search = {"google_search": {}}
+> from deepagents import create_deep_agent
+>
+> # Google's built-in search — no extra install or API key needed
+> internet_search = {"google_search": {}}
 ```
-
+>
 **OpenAI**
 
 ```python
-from deepagents import create_deep_agent
-
-# OpenAI's built-in web search — no extra install or API key needed
-internet_search = {"type": "web_search"}
+> from deepagents import create_deep_agent
+>
+> # OpenAI's built-in web search — no extra install or API key needed
+> internet_search = {"type": "web_search"}
 ```
-
+>
 **Anthropic**
 
 ```python
-from deepagents import create_deep_agent
-
-# Anthropic's built-in web search — no extra install or API key needed
-internet_search = {"type": "web_search_20260209", "name": "web_search"}
+> from deepagents import create_deep_agent
+>
+> # Anthropic's built-in web search — no extra install or API key needed
+> internet_search = {"type": "web_search_20260209", "name": "web_search"}
 ```
 
-**Tavily (any provider)**
-
+> [tab] Tavily (any provider)
+>
 ```python
-import os
-from typing import Literal
-
-from tavily import TavilyClient
-from deepagents import create_deep_agent
-
-tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
-
-def internet_search(
-    query: str,
-    max_results: int = 5,
-    topic: Literal["general", "news", "finance"] = "general",
-    include_raw_content: bool = False,
-):
-    """Run a web search"""
-    return tavily_client.search(
-        query,
-        max_results=max_results,
-        include_raw_content=include_raw_content,
-        topic=topic,
-    )
+> import os
+> from typing import Literal
+>
+> from tavily import TavilyClient
+> from deepagents import create_deep_agent
+>
+> tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+>
+>
+> def internet_search(
+>     query: str,
+>     max_results: int = 5,
+>     topic: Literal["general", "news", "finance"] = "general",
+>     include_raw_content: bool = False,
+> ):
+>     """Run a web search"""
+>     return tavily_client.search(
+>         query,
+>         max_results=max_results,
+>         include_raw_content=include_raw_content,
+>         topic=topic,
+>     )
 ```
 
 ## Step 4: Create a deep agent
@@ -394,7 +395,7 @@ agent = create_deep_agent(
 
 > [!NOTE]
 >
-> In an [agent-based workspace](../langsmith/agents.md), [create an agent](../langsmith/create-an-agent.md) once before sending traces. Use [agent addressing](../langsmith/log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](../langsmith/create-an-agent.md#use-an-environment-project) as a compatibility value.
+> In an [agent-based workspace](../langsmith/agent-registry.md), [create an agent](../langsmith/create-an-agent.md) once before sending traces. Use [agent addressing](../langsmith/log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](../langsmith/create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-quickstart) provides you with visibility into your agent's execution, allowing you to view tool calls, subagent delegation, and LLM responses.
 

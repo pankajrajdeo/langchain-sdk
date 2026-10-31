@@ -16,15 +16,15 @@ Set up **LangSmith** for [observability](observability.md), [evaluation](evaluat
 >
 > If you also want to deploy agents in production, you can use [**LangSmith Deployment**](deployment.md) with Cloud, BYOC, or Self-hosted.
 
-> **[Cloud](cloud.md)**
+> [card] [Cloud](cloud.md)
 >
 > Fully managed observability, evaluation, and prompt engineering.
 
-> **[BYOC](byoc.md)**
+> [card] [BYOC](byoc.md)
 >
 > Full control over your data, while LangChain manages the infrastructure.
 
-> **[Self-hosted](self-hosted.md)**
+> [card] [Self-hosted](self-hosted.md)
 >
 > Full control with observability, evaluation, and prompt engineering in your infrastructure.
 
@@ -51,15 +51,15 @@ Cloud, BYOC, and Self-hosted support [LangSmith Deployment](deployment.md) for a
 
 ## Related
 
-> **[Account setup](admin.md)**
+> [card] [Account setup](admin.md)
 >
 > Create an account, manage API keys, and choose a pricing tier.
 
-> **[Plans and pricing](https://www.langchain.com/pricing)**
+> [card] [Plans and pricing](https://www.langchain.com/pricing)
 >
 > Compare LangSmith plans and tiers.
 
-> **[Observability](observability.md)**
+> [card] [Observability](observability.md)
 >
 > Trace and monitor your LLM applications.
 

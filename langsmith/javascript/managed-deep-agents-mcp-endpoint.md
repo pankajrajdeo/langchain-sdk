@@ -146,19 +146,19 @@ To retain knowledge across calls, [opt in to durable memory](managed-deep-agents
 
 ## Next steps
 
-> **[Agent Server](../agent-server-overview.md)**
+> [card] [Agent Server](../agent-server-overview.md)
 >
 > Explore the runtime that hosts every Managed Deep Agents deployment.
 
-> **[Agent Server MCP](../server-mcp.md)**
+> [card] [Agent Server MCP](../server-mcp.md)
 >
 > Read the Agent Server MCP protocol reference.
 
-> **[MCP connectors](managed-deep-agents-mcp-connectors.md)**
+> [card] [MCP connectors](managed-deep-agents-mcp-connectors.md)
 >
 > Add tools from remote MCP servers to the agent.
 
-> **[Identity](managed-deep-agents-identity.md)**
+> [card] [Identity](managed-deep-agents-identity.md)
 >
 > Authenticate callers to the deployment.
 

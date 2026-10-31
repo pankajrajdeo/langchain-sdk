@@ -122,7 +122,7 @@ vector_store.similarity_search(
 
 **Select embedding model:**
 
-> **OpenAI**
+> [accordion] OpenAI
 >
 **pip**
 
@@ -148,7 +148,7 @@ vector_store.similarity_search(
 > embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 ```
 
-> **Azure**
+> [accordion] Azure
 >
 ```bash
 > pip install -qU langchain-azure-ai
@@ -170,7 +170,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Google Gemini**
+> [accordion] Google Gemini
 >
 ```bash
 > pip install -qU langchain-google-genai
@@ -188,7 +188,7 @@ vector_store.similarity_search(
 > embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 ```
 
-> **Gemini Enterprise Agent Platform**
+> [accordion] Gemini Enterprise Agent Platform
 >
 ```bash
 > pip install -qU langchain-google-vertexai
@@ -200,7 +200,7 @@ vector_store.similarity_search(
 > embeddings = VertexAIEmbeddings(model="text-embedding-005")
 ```
 
-> **AWS**
+> [accordion] AWS
 >
 ```bash
 > pip install -qU langchain-aws
@@ -212,7 +212,7 @@ vector_store.similarity_search(
 > embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
 ```
 
-> **HuggingFace**
+> [accordion] HuggingFace
 >
 ```bash
 > pip install -qU langchain-huggingface
@@ -224,7 +224,7 @@ vector_store.similarity_search(
 > embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 ```
 
-> **Ollama**
+> [accordion] Ollama
 >
 ```bash
 > pip install -qU langchain-ollama
@@ -236,7 +236,7 @@ vector_store.similarity_search(
 > embeddings = OllamaEmbeddings(model="nomic-embed-text")
 ```
 
-> **Cohere**
+> [accordion] Cohere
 >
 ```bash
 > pip install -qU langchain-cohere
@@ -254,7 +254,7 @@ vector_store.similarity_search(
 > embeddings = CohereEmbeddings(model="embed-english-v3.0")
 ```
 
-> **Mistral AI**
+> [accordion] Mistral AI
 >
 ```bash
 > pip install -qU langchain-mistralai
@@ -272,7 +272,7 @@ vector_store.similarity_search(
 > embeddings = MistralAIEmbeddings(model="mistral-embed")
 ```
 
-> **Nomic**
+> [accordion] Nomic
 >
 ```bash
 > pip install -qU langchain-nomic
@@ -290,7 +290,7 @@ vector_store.similarity_search(
 > embeddings = NomicEmbeddings(model="nomic-embed-text-v1.5")
 ```
 
-> **NVIDIA**
+> [accordion] NVIDIA
 >
 ```bash
 > pip install -qU langchain-nvidia-ai-endpoints
@@ -308,7 +308,7 @@ vector_store.similarity_search(
 > embeddings = NVIDIAEmbeddings(model="NV-Embed-QA")
 ```
 
-> **Voyage AI**
+> [accordion] Voyage AI
 >
 ```bash
 > pip install -qU langchain-voyageai
@@ -328,7 +328,7 @@ vector_store.similarity_search(
 >
 > For more information, see the [Voyage AI documentation](https://www.mongodb.com/docs/voyageai/models/text-embeddings/).
 
-> **IBM watsonx**
+> [accordion] IBM watsonx
 >
 ```bash
 > pip install -qU langchain-ibm
@@ -350,7 +350,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Fake**
+> [accordion] Fake
 >
 ```bash
 > pip install -qU langchain-core
@@ -362,7 +362,7 @@ vector_store.similarity_search(
 > embeddings = DeterministicFakeEmbedding(size=4096)
 ```
 
-> **xAI**
+> [accordion] xAI
 >
 ```bash
 > pip install -qU langchain-xai
@@ -380,7 +380,7 @@ vector_store.similarity_search(
 > model = init_chat_model("grok-2", model_provider="xai")
 ```
 
-> **Perplexity**
+> [accordion] Perplexity
 >
 ```bash
 > pip install -qU langchain-perplexity
@@ -398,7 +398,7 @@ vector_store.similarity_search(
 > model = init_chat_model("llama-3.1-sonar-small-128k-online", model_provider="perplexity")
 ```
 
-> **DeepSeek**
+> [accordion] DeepSeek
 >
 ```bash
 > pip install -qU langchain-deepseek
@@ -418,7 +418,7 @@ vector_store.similarity_search(
 
 **Select vector store:**
 
-> **In-memory**
+> [accordion] In-memory
 >
 **pip**
 
@@ -438,7 +438,7 @@ vector_store.similarity_search(
 > vector_store = InMemoryVectorStore(embeddings)
 ```
 
-> **Amazon OpenSearch**
+> [accordion] Amazon OpenSearch
 >
 **pip**
 
@@ -469,7 +469,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Astra DB**
+> [accordion] Astra DB
 >
 **pip**
 
@@ -495,7 +495,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Azure Cosmos DB NoSQL**
+> [accordion] Azure Cosmos DB NoSQL
 >
 **pip**
 
@@ -527,7 +527,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Azure Cosmos DB Mongo vCore**
+> [accordion] Azure Cosmos DB Mongo vCore
 >
 **pip**
 
@@ -554,7 +554,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Chroma**
+> [accordion] Chroma
 >
 **pip**
 
@@ -578,7 +578,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **CockroachDB**
+> [accordion] CockroachDB
 >
 **pip**
 
@@ -610,7 +610,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Elasticsearch**
+> [accordion] Elasticsearch
 >
 > Install the package and start Elasticsearch locally using the [start-local](https://github.com/elastic/start-local) script:
 >
@@ -638,7 +638,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Google AlloyDB**
+> [accordion] Google AlloyDB
 >
 **pip**
 
@@ -670,7 +670,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Milvus**
+> [accordion] Milvus
 >
 **pip**
 
@@ -696,7 +696,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **MongoDB**
+> [accordion] MongoDB
 >
 ```bash
 > pip install -qU langchain-mongodb
@@ -715,7 +715,7 @@ vector_store.similarity_search(
 >
 > For more information, see the [MongoDB LangChain integration docs](https://www.mongodb.com/docs/atlas/ai-integrations/langchain/#vector-store).
 
-> **PGVector**
+> [accordion] PGVector
 >
 **pip**
 
@@ -739,7 +739,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **PGVectorStore**
+> [accordion] PGVectorStore
 >
 **pip**
 
@@ -767,7 +767,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Pinecone**
+> [accordion] Pinecone
 >
 **pip**
 
@@ -791,7 +791,7 @@ vector_store.similarity_search(
 > vector_store = PineconeVectorStore(embedding=embeddings, index=index)
 ```
 
-> **Qdrant**
+> [accordion] Qdrant
 >
 **pip**
 
@@ -826,7 +826,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Redis**
+> [accordion] Redis
 >
 **pip**
 
@@ -853,7 +853,7 @@ vector_store.similarity_search(
 > vector_store = RedisVectorStore(embeddings=embeddings, config=config)
 ```
 
-> **Oracle AI Database**
+> [accordion] Oracle AI Database
 >
 **pip**
 
@@ -891,7 +891,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **turbopuffer**
+> [accordion] turbopuffer
 >
 **pip**
 
@@ -915,7 +915,7 @@ vector_store.similarity_search(
 > vector_store = TurbopufferVectorStore(embedding=embeddings, namespace=ns)
 ```
 
-> **Valkey**
+> [accordion] Valkey
 >
 **pip**
 
@@ -939,7 +939,7 @@ vector_store.similarity_search(
 > )
 ```
 
-> **Weaviate**
+> [accordion] Weaviate
 >
 **pip**
 

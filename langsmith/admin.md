@@ -26,19 +26,19 @@ Copy the key and save it securely.
 
 ## Explore
 
-> **[Profile configuration](profile-configuration.md)**
+> [card] [Profile configuration](profile-configuration.md)
 >
 > Configure your personal account settings and preferences.
 
-> **[Integrations](get-started-integrations.md)**
+> [card] [Integrations](get-started-integrations.md)
 >
 > Connect LangSmith to your existing tools and services.
 
-> **[Pricing plans](https://docs.langchain.com/langsmith/pricing-plans.md)**
+> [card] [Pricing plans](https://docs.langchain.com/langsmith/pricing-plans.md)
 >
 > Compare plans and choose the right tier for your team.
 
-> **[Enterprise](enterprise.md)**
+> [card] [Enterprise](enterprise.md)
 >
 > Enterprise capabilities, support, and onboarding.
 

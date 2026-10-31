@@ -14,7 +14,7 @@ This guide shows you how to integrate DeepSeek with LangSmith in both Python and
 
 > [!NOTE]
 >
-> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
+> In an [agent-based workspace](agent-registry.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Installation
 
@@ -41,6 +41,8 @@ npm install openai langsmith dotenv
 DeepSeek provides an [OpenAI-compatible API](https://api-docs.deepseek.com/), which means you can use the OpenAI SDK to interact with DeepSeek models. The only difference is that you configure the client to point to DeepSeek's base URL (`https://api.deepseek.com/v1`) instead of OpenAI's endpoint.
 
 ## Setup
+
+Sending traces to an agent requires `langsmith>=0.14.9` in Python or `langsmith@>=0.11.0` in TypeScript.
 
 Set your [API keys](create-account-api-key.md), agent identifier, and environment:
 

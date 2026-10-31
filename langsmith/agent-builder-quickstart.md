@@ -139,19 +139,19 @@ You may want to update your agent's instructions or include more tools. You can 
 
 Now that you have created your first agent, here is what to explore:
 
-> **[Try more templates](fleet/templates.md)**
+> [card] [Try more templates](fleet/templates.md)
 >
 > Explore prebuilt agents for common tasks
 
-> **[Add automation](fleet/essentials.md#channels)**
+> [card] [Add automation](fleet/essentials.md#channels)
 >
 > Run your agent automatically with channels (Slack, email, schedules)
 
-> **[Connect more tools](fleet/tools.md)**
+> [card] [Connect more tools](fleet/tools.md)
 >
 > Add Slack, GitHub, Linear, and more
 
-> **[Build complex agents](fleet/essentials.md#sub-agents)**
+> [card] [Build complex agents](fleet/essentials.md#sub-agents)
 >
 > Use sub-agents to break down big tasks
 

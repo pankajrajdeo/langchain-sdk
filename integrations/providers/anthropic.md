@@ -14,17 +14,17 @@ This page covers all LangChain integrations with [Anthropic](https://www.anthrop
 
 ## Model interfaces
 
-> **[ChatAnthropic](../chat/anthropic.md)**
+> [card] [ChatAnthropic](../chat/anthropic.md)
 >
 > Anthropic chat models.
 
-> **[Anthropic middleware](../middleware/anthropic.md)**
+> [card] [Anthropic middleware](../middleware/anthropic.md)
 >
 > Anthropic-specific middleware for Claude models.
 
 ## Other
 
-> **[AnthropicLLM](../llms/anthropic.md)**
+> [card] [AnthropicLLM](../llms/anthropic.md)
 >
 > (Legacy) Anthropic text completion models.
 

@@ -288,7 +288,7 @@ Additionally, there are other ways to evaluate data besides in this "offline" ma
 
 ## Reference code
 
-> **Click to see a consolidated code snippet**
+> [accordion] Click to see a consolidated code snippet
 >
 ```python
 > import openai

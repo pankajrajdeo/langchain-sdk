@@ -12,7 +12,7 @@ tags: [docs, langsmith, filter-traces-in-application]
 
 Tracing projects can accumulate large amounts of data across [threads](observability-concepts.md#threads), [traces](observability-concepts.md#traces), and [runs](observability-concepts.md#runs). LangSmith's filtering tools let you navigate and analyze that data precisely.
 
-In an [agent-based workspace](agents.md), a tracing project is one [environment](agent-environments.md) of one agent, so a filter applies to the environment you have open rather than to the agent as a whole. To filter across an agent's environments, filter each one in turn.
+In an [agent-based workspace](agent-registry.md), a tracing project is one [environment](agent-environments.md) of one agent, so a filter applies to the environment you have open rather than to the agent as a whole. To filter across an agent's environments, filter each one in turn.
 
 > [!NOTE]
 >

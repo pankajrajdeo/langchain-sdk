@@ -286,7 +286,7 @@ async def main():
 
 ## Reference code
 
-> **Click to see a consolidated code snippet**
+> [accordion] Click to see a consolidated code snippet
 >
 ```python
 > import asyncio

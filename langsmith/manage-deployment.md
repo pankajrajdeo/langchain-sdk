@@ -36,32 +36,32 @@ To change the repository through the API, send `source_config.repo_url` in a `PA
 
 ## Delete a deployment
 
-**LangSmith UI**
+> [tab] LangSmith UI
+>
+> To delete a deployment:
+>
+> 1. From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-manage-deployment), select **Deployments**.
+> 2. Select the menu icon for the deployment, then select **Delete**.
+> 3. In the confirmation modal, select **Delete**.
 
-To delete a deployment:
-
-1. From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-manage-deployment), select **Deployments**.
-2. Select the menu icon for the deployment, then select **Delete**.
-3. In the confirmation modal, select **Delete**.
-
-**LangGraph CLI**
-
-To find the deployment ID, run:
-
+> [tab] LangGraph CLI
+>
+> To find the deployment ID, run:
+>
 ```shell
-langgraph deploy list
+> langgraph deploy list
 ```
-
-Delete the deployment by ID:
-
+>
+> Delete the deployment by ID:
+>
 ```shell
-langgraph deploy delete <DEPLOYMENT_ID>
+> langgraph deploy delete <DEPLOYMENT_ID>
 ```
-
-To skip the confirmation prompt, pass `--force`:
-
+>
+> To skip the confirmation prompt, pass `--force`:
+>
 ```shell
-langgraph deploy delete --force <DEPLOYMENT_ID>
+> langgraph deploy delete --force <DEPLOYMENT_ID>
 ```
 
 > [!NOTE]

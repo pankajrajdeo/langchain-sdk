@@ -211,8 +211,8 @@ paths:
           name: include_stats
           in: query
           schema:
-            default: true
             type: boolean
+            default: true
             title: Include Stats
         - description: Limit is the pagination limit
           name: limit

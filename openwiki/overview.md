@@ -40,49 +40,49 @@ Bare `openwiki --init` and `openwiki --update` run in code mode. Use `openwiki p
 
 ## Capabilities
 
-> **[Repository wikis](code-mode.md)**
+> [card] [Repository wikis](code-mode.md)
 >
 > Generate Markdown docs under `openwiki/`, then wire them into `AGENTS.md` (and `CLAUDE.md` when present) so coding agents can find them.
 
-> **[Coding-agent integrations](integrations.md)**
+> [card] [Coding-agent integrations](integrations.md)
 >
 > Run OpenWiki inside Codex, Claude Code, OpenCode, Cursor, IBM Bob, Kiro, Oh My Pi, Antigravity, or Pi.
 
-> **[Search and link](search-and-link.md)**
+> [card] [Search and link](search-and-link.md)
 >
 > Query wiki pages over MCP and group related repository wikis into workspaces.
 
-> **[Personal brain](personal-mode.md)**
+> [card] [Personal brain](personal-mode.md)
 >
 > Build a local wiki from git repos, Custom MCP, Gmail, Notion, web search, Hacker News, and X/Twitter.
 
-> **[Grounded Claims](code-mode.md#grounded-claims)**
+> [card] [Grounded Claims](code-mode.md#grounded-claims)
 >
 > Track material facts back to versioned source evidence and refresh pages when that evidence changes.
 
-> **[Automatic updates](automate-updates.md)**
+> [card] [Automatic updates](automate-updates.md)
 >
 > Refresh docs from GitHub Actions, GitLab CI, or Bitbucket Pipelines and open a PR when content changes.
 
-> **[Model providers](providers.md)**
+> [card] [Model providers](providers.md)
 >
 > Use OpenAI, Anthropic, Gemini, Bedrock, OpenRouter, GitHub Copilot, IBM Bob, and other providers out of the box.
 
-> **[Open Knowledge Format](code-mode.md#open-knowledge-format)**
+> [card] [Open Knowledge Format](code-mode.md#open-knowledge-format)
 >
 > Emit OKF v0.2 Markdown bundles with front matter, indexes, and linked concepts.
 
-> **[LangSmith tracing](quickstart.md#trace-with-langsmith)**
+> [card] [LangSmith tracing](quickstart.md#trace-with-langsmith)
 >
 > Trace documentation runs with LangSmith.
 
 ## Next steps
 
-> **[Quickstart](quickstart.md)**
+> [card] [Quickstart](quickstart.md)
 >
 > Install OpenWiki, configure a provider, and generate your first wiki.
 
-> **[CLI reference](cli-reference.md)**
+> [card] [CLI reference](cli-reference.md)
 >
 > Review commands, flags, and connector subcommands.
 

@@ -10,7 +10,7 @@ tags: [docs, langsmith, deploy-to-agent-environment]
 
 > How the LangGraph and Managed Deep Agents CLIs bind a deployment to an agent and an environment, which values each flag takes, and which CLI versions accept them.
 
-Deploying to an agent environment binds a [deployment](deployment.md) to one [agent](agents.md) and one of that agent's [environments](agent-environments.md). Two flags carry the binding, and the LangGraph CLI and the `mda` CLI both accept them.
+Deploying to an agent environment binds a [deployment](deployment.md) to one [agent](agent-registry.md#agent) and one of that agent's [environments](agent-environments.md). Two flags carry the binding, and the LangGraph CLI and the `mda` CLI both accept them.
 
 Use it to keep a staging build and a production build of the same agent apart, so each one reports into its own environment.
 
@@ -32,7 +32,7 @@ An org-scoped API key also needs the workspace, and each CLI reads it from a dif
 
 Both CLIs take the same two flags:
 
-* **`--agent-id`**: The agent to deploy to. The value is the agent's identifier, not its display name. For which value is which, see [Identifiers and display names](agents.md#identifiers-and-display-names).
+* **`--agent-id`**: The agent to deploy to. The value is the agent's identifier, not its display name. For which value is which, see [Identifiers and display names](agent-registry.md#identifiers-and-display-names).
 * **`--agent-environment`**: The environment the deployment reports into, and one of `development`, `staging`, or `production`. A deployment cannot take `local`. That environment [does not display on deployments](agent-environments.md#select-an-environment) at all, which is the one way this set differs from the four values the [agent variables](log-traces-to-agent.md#using-environment-variables) accept.
 
 The flags name the same pair that agent addressing names on the tracing side. The LangGraph CLI also reads the flags from the same two variables, `LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT`. The `mda` CLI does not read those variables, so pass the flags to it directly.
@@ -116,7 +116,7 @@ If the new deployment has no row, or the Overview has no **Deployments** section
 
 ## See also
 
-* [Agents](agents.md)
+* [Agent Registry](agent-registry.md)
 * [Agent environments](agent-environments.md)
 * [Log traces to an agent](log-traces-to-agent.md)
 * [Deployment](deployment.md)

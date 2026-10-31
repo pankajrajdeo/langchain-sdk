@@ -25,9 +25,9 @@ The list includes API operations in LangSmith along with:
 | Organization-level operations | Workspace-level operations |
 | - | - |
 | **Core management:** • [Organization settings](#organization-settings): Org info and configuration • [Workspaces](#workspaces): Workspace management • [Organization members](#organization-members): Member management • [Roles and permissions](#roles-and-permissions): Custom roles | **Core resources:** • [Projects](#projects): Organize traces and runs • [Runs](#runs): Individual execution traces • [Datasets](#datasets): Test datasets for evaluation • [Examples](#examples): Individual dataset examples • [Experiments](#experiments): Comparative experiments |
-| **Security and authentication:** • [SSO and authentication](#sso-and-authentication): Single sign-on setup • [SCIM](#scim): Identity provisioning • [Access policies](#access-policies): Attribute-based access control | **Monitoring and analysis:** • [Rules](#rules): Automated run rules • [Alerts](#alerts): Alert rules for monitoring • [Feedback](#feedback): Scores and labels on outputs • [Annotation Queues](#annotation-queues): Human review queues • [Charts](#charts): Custom visualizations |
+| **Security and authentication:** • [SSO and authentication](#sso-and-authentication): Single sign-on setup • [SCIM](#scim): Identity provisioning • [Access policies](#access-policies): Attribute-based access control • [Organization teams](#organization-teams): Teams and their workspace access | **Monitoring and analysis:** • [Rules](#rules): Automated run rules • [Alerts](#alerts): Alert rules for monitoring • [Feedback](#feedback): Scores and labels on outputs • [Annotation Queues](#annotation-queues): Human review queues • [Charts](#charts): Custom visualizations |
 | **Billing and accounts:** • [Billing and payments](#billing-and-payments): Subscription management • [API keys](#api-keys): Org-level keys | **Development and configuration:** • [Prompts](#prompts): Prompt templates (LangChain Hub) • [Custom apps](#custom-apps): User-authored mini web apps • [Deployments](#deployments): Deployment configurations • [MCP Servers](#mcp-servers): Model Context Protocol servers • [Fleet](#fleet): Fleet admin operations |
-| **Analytics:** • [Charts and dashboards](#organization-charts-and-dashboards): Org-level visualizations • [Usage and analytics](#usage-and-analytics): Usage tracking and TTL settings | **Workspace management:** • [Model price map](#model-price-map): Per-token model prices • [Workspace settings](#workspace-settings-and-management): Members, settings • [Tags](#tags): Metadata tagging system • [Bulk Exports](#bulk-exports): Data export operations |
+| **Analytics:** • [Charts and dashboards](#organization-charts-and-dashboards): Org-level visualizations • [Usage and analytics](#usage-and-analytics): Usage tracking and TTL settings | **Workspace management:** • [Model price map](#model-price-map): Per-token model prices • [Workspace settings](#workspace-settings-and-management): Members, settings • [Workspace teams](#workspace-teams): Team members and policies for this workspace • [Tags](#tags): Metadata tagging system • [Bulk Exports](#bulk-exports): Data export operations |
 
 **Additional information:**
 
@@ -129,6 +129,19 @@ Attribute-based access control (ABAC) policies for fine-grained permissions.
 | Create access policy | ✓ | ✓ | ✗ | ✗ | ✗ | `organization:manage` |
 | Delete access policy | ✓ | ✓ | ✗ | ✗ | ✗ | `organization:manage` |
 | Attach access policy to role | ✓ | ✓ | ✗ | ✗ | ✗ | `organization:manage` |
+
+### Organization teams
+
+[Teams](teams.md) and their workspace access. `organization:manage` does not allow these operations.
+
+| Operation | Org Admin | Org Operator | Org User | Org Viewer | Required Permission |
+| - | :-: | :-: | :-: | :-: | - |
+| List and view teams, members, and access policies | ✓ | ✓ | ✓ | ✓ | `organization:teams:read` |
+| View a team's workspace access | ✓ | ✓ | ✓ | ✓ | `organization:teams:read` |
+| Create, update, or delete a team | ✓ | ✓ | ✗ | ✗ | `organization:teams:manage` |
+| Add or remove team members | ✓ | ✓ | ✗ | ✗ | `organization:teams:manage-members` |
+| Attach or detach access policies | ✓ | ✓ | ✗ | ✗ | `organization:teams:manage-policies` |
+| Give, change, or remove a team's workspace access | ✓ | ✓ | ✗ | ✗ | `organization:teams:manage-grants` |
 
 ### Billing and payments
 
@@ -572,6 +585,17 @@ Per-token model prices used to compute run costs. See [Cost tracking](cost-track
 | View shared entities | ✓ | ✓ | ✓ | `workspaces:read` |
 | Bulk unshare entities | ✓ | ✗ | ✗ | `workspaces:manage` |
 
+### Workspace teams
+
+[Workspace-only members and access policies](teams.md#add-workspace-only-members-and-policies) that teams have in this workspace. `workspaces:manage` does not allow these operations.
+
+| Operation | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| - | :-: | :-: | :-: | - |
+| View the teams with access to this workspace and their workspace-only members and policies | ✓ | ✓ | ✓ | `workspaces:teams:read` |
+| View a team's role in this workspace | ✓ | ✓ | ✓ | `workspaces:teams:read` |
+| Add or remove workspace-only members | ✓ | ✗ | ✗ | `workspaces:teams:manage-members` |
+| Attach or detach workspace-only access policies | ✓ | ✗ | ✗ | `workspaces:teams:manage-policies` |
+
 ### Tags
 
 | Operation | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
@@ -656,6 +680,7 @@ These operations are available to all authenticated users and don't require spec
 * [Organization Admin](rbac.md#organization-admin) automatically has full permissions in all workspaces.
 * [Organization Operator](rbac.md#organization-operator) only gets workspace access when explicitly added to workspaces with workspace-level roles (or to workspaces they create).
 * [Organization User](rbac.md#organization-user) and [Organization Viewer](rbac.md#organization-viewer) only get workspace access when explicitly added to workspaces with workspace-level roles.
+* A workspace member who belongs to a [team](teams.md) with access to that workspace also receives the team's workspace role.
 * [Organization Restricted](rbac.md#organization-restricted) users only get workspace access when explicitly added to workspaces with workspace-level roles. Workspace-scoped service keys with this role get access only to the workspaces selected for the key.
 
 For detailed role definitions, refer to [Organization roles](rbac.md#organization-roles) and [Workspace roles](rbac.md#workspace-roles).

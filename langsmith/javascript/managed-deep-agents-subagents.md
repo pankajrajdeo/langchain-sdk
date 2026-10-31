@@ -33,45 +33,45 @@ A subagent runs inside the agent's graph. Managed Deep Agents builds each async 
 
 Add subagent definitions to `subagents` in the [agent definition](managed-deep-agents-agent-definition.md). Each one needs a `name` and a `description`; the agent uses the description to decide when to delegate. To make a subagent async, add `async` to its definition:
 
-**Subagent**
-
+> [tab] Subagent
+>
 **agent.ts**
 
 ```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "openai:gpt-5.5",
-  subagents: [
-    {
-      name: "reviewer",
-      description: "Reviews a draft for accuracy and clarity.",
-      systemPrompt: "Review the draft and list concrete fixes.",
-    },
-  ],
-});
+> import { defineDeepAgent } from "managed-deepagents";
+>
+> export const agent = defineDeepAgent({
+>   name: "research-assistant",
+>   model: "openai:gpt-5.5",
+>   subagents: [
+>     {
+>       name: "reviewer",
+>       description: "Reviews a draft for accuracy and clarity.",
+>       systemPrompt: "Review the draft and list concrete fixes.",
+>     },
+>   ],
+> });
 ```
 
-**Async subagent**
-
+> [tab] Async subagent
+>
 **agent.ts**
 
 ```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "openai:gpt-5.5",
-  subagents: [
-    {
-      name: "researcher",
-      description: "Researches a topic in the background.",
-      systemPrompt: "Research the topic and report your findings.",
-      async: true,
-    },
-  ],
-});
+> import { defineDeepAgent } from "managed-deepagents";
+>
+> export const agent = defineDeepAgent({
+>   name: "research-assistant",
+>   model: "openai:gpt-5.5",
+>   subagents: [
+>     {
+>       name: "researcher",
+>       description: "Researches a topic in the background.",
+>       systemPrompt: "Research the topic and report your findings.",
+>       async: true,
+>     },
+>   ],
+> });
 ```
 
 ## Subagents

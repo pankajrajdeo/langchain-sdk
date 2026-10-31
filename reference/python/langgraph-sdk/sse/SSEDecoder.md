@@ -1,6 +1,6 @@
 ---
 title: "SSEDecoder"
-description: "- last_event_id"
+description: "- has_data - last_event_id"
 source: "https://reference.langchain.com/python/langgraph-sdk/sse/SSEDecoder"
 category: "reference"
 tags: [reference, langgraph-sdk, sse, ssedecoder]
@@ -17,6 +17,8 @@ tags: [reference, langgraph-sdk, sse, ssedecoder]
 ```python
 SSEDecoder(
     self,
+    *,
+    last_event_id: str | None = None,
 )
 ```
 
@@ -25,11 +27,18 @@ SSEDecoder(
 ```python
 __init__(
     self,
+    *,
+    last_event_id: str | None = None,
 ) -> None
 ```
 
+| Name | Type |
+|------|------|
+| `last_event_id` | `str \| None` |
+
 ## Properties
 
+- `has_data`
 - `last_event_id`
 
 ## Methods
@@ -38,4 +47,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/3521f08e21a7d89c28331191374bc85c11ecb6e2/libs/sdk-py/langgraph_sdk/sse.py#L78)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5bd231cbfd913e05ebc662f519eb9a655bc766df/libs/sdk-py/langgraph_sdk/sse.py#L74)

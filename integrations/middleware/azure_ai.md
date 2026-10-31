@@ -158,7 +158,7 @@ middleware = AzureContentModerationMiddleware(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **categories** `list[str] | None`
 >
@@ -214,7 +214,7 @@ middleware = AzureContentModerationForImagesMiddleware(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **categories** `list[str] | None`
 >
@@ -257,7 +257,7 @@ middleware = AzurePromptShieldMiddleware(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **exit\_behavior** `string` (default: error)
 >
@@ -294,7 +294,7 @@ middleware = AzureProtectedMaterialMiddleware(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **type** `string` (default: text)
 >
@@ -335,7 +335,7 @@ middleware = AzureGroundednessMiddleware(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **domain** `string` (default: Generic)
 >

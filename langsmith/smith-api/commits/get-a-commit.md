@@ -222,8 +222,8 @@ paths:
         - name: get_examples
           in: query
           schema:
-            default: false
             type: boolean
+            default: false
             title: Get Examples
         - description: 'Comma-separated list of optional fields: "model", "is_draft"'
           name: include
@@ -235,14 +235,14 @@ paths:
           name: include_model
           in: query
           schema:
-            default: false
             type: boolean
+            default: false
             title: Include Model
         - name: is_view
           in: query
           schema:
-            default: false
             type: boolean
+            default: false
             title: Is View
       responses:
         '200':

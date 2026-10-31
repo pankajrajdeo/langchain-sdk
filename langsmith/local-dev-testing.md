@@ -72,7 +72,7 @@ The [`langgraph dev`](cli.md#dev) command runs a lightweight server directly in 
 >
 > The `dev` server is tested with the same integration test suite as production to ensure its behavior is the same during development while using minimal resources.
 
-> **Get started with langgraph dev**
+> [accordion] Get started with langgraph dev
 >
 > Before you begin, ensure you have:
 >
@@ -83,17 +83,17 @@ The [`langgraph dev`](cli.md#dev) command runs a lightweight server directly in 
 >
 > Create a new app from the [`new-langgraph-project-python` template](https://github.com/langchain-ai/new-langgraph-project) or [`new-langgraph-project-js` template](https://github.com/langchain-ai/new-langgraphjs-project). This template demonstrates a single-node application you can extend with your own logic.
 >
-> **Python server**
+> > [tab] Python server
+> >
+> > ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > uvx --from langgraph-cli@latest langgraph new path/to/your/app --template new-langgraph-project-python
+> > ```
 >
-```shell
-> uvx --from langgraph-cli@latest langgraph new path/to/your/app --template new-langgraph-project-python
-```
->
-> **Node server**
->
-```shell
-> npx @langchain/langgraph-cli new path/to/your/app --template new-langgraph-project-js
-```
+> > [tab] Node server
+> >
+> > ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > npx @langchain/langgraph-cli new path/to/your/app --template new-langgraph-project-js
+> > ```
 >
 > > [!TIP]
 > >
@@ -103,33 +103,33 @@ The [`langgraph dev`](cli.md#dev) command runs a lightweight server directly in 
 >
 > **2. Install dependencies**
 >
-> **Python server**
+> > [tab] Python server
+> >
+> > ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > cd path/to/your/app
+> > uv sync --dev -U
+> > ```
 >
-```shell
-> cd path/to/your/app
-> uv sync --dev -U
-```
->
-> **Node server**
->
-```shell
-> cd path/to/your/app
-> yarn install
-```
+> > [tab] Node server
+> >
+> > ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > cd path/to/your/app
+> > yarn install
+> > ```
 >
 > **3. Launch Agent Server**
 >
-> **Python server**
+> > [tab] Python server
+> >
+> > ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > uv run langgraph dev
+> > ```
 >
-```shell
-> uv run langgraph dev
-```
->
-> **Node server**
->
-```shell
-> npx @langchain/langgraph-cli dev
-```
+> > [tab] Node server
+> >
+> > ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > npx @langchain/langgraph-cli dev
+> > ```
 >
 > Sample output:
 >
@@ -145,126 +145,126 @@ The [`langgraph dev`](cli.md#dev) command runs a lightweight server directly in 
 >
 > **4. Test the API**
 >
-> **Python SDK (async)**
+> > [tab] Python SDK (async)
+> >
+> > 1. Install the LangGraph Python SDK:
+> >
+> > ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > pip install langgraph-sdk
+> > ```
+> >
+> > 2. Send a message to the assistant (threadless run):
+> >
+> > ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > from langgraph_sdk import get_client
+> > import asyncio
+> >
+> > client = get_client(url="http://localhost:2024")
+> >
+> > async def main():
+> >     async for chunk in client.runs.stream(
+> >         None,  # Threadless run
+> >         "agent", # Name of assistant. Defined in langgraph.json.
+> >         input={
+> >         "messages": [{
+> >             "role": "human",
+> >             "content": "What is LangGraph?",
+> >             }],
+> >         },
+> >     ):
+> >         print(f"Receiving new event of type: {chunk.event}...")
+> >         print(chunk.data)
+> >         print("\n\n")
+> >
+> > asyncio.run(main())
+> > ```
 >
-> 1. Install the LangGraph Python SDK:
+> > [tab] Python SDK (sync)
+> >
+> > 1. Install the LangGraph Python SDK:
+> >
+> > ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > pip install langgraph-sdk
+> > ```
+> >
+> > 2. Send a message to the assistant (threadless run):
+> >
+> > ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > from langgraph_sdk import get_sync_client
+> >
+> > client = get_sync_client(url="http://localhost:2024")
+> >
+> > for chunk in client.runs.stream(
+> >     None,  # Threadless run
+> >     "agent", # Name of assistant. Defined in langgraph.json.
+> >     input={
+> >         "messages": [{
+> >             "role": "human",
+> >             "content": "What is LangGraph?",
+> >         }],
+> >     },
+> >     stream_mode="messages-tuple",
+> > ):
+> >     print(f"Receiving new event of type: {chunk.event}...")
+> >     print(chunk.data)
+> >     print("\n\n")
+> > ```
 >
-```shell
-> pip install langgraph-sdk
-```
+> > [tab] Javascript SDK
+> >
+> > 1. Install the LangGraph JS SDK:
+> >
+> > ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > npm install @langchain/langgraph-sdk
+> > ```
+> >
+> > 2. Send a message to the assistant (threadless run):
+> >
+> > ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > const { Client } = await import("@langchain/langgraph-sdk");
+> >
+> > // only set the apiUrl if you changed the default port when calling langgraph dev
+> > const client = new Client({ apiUrl: "http://localhost:2024"});
+> >
+> > const streamResponse = client.runs.stream(
+> >     null, // Threadless run
+> >     "agent", // Assistant ID
+> >     {
+> >         input: {
+> >             "messages": [
+> >                 { "role": "user", "content": "What is LangGraph?"}
+> >             ]
+> >         },
+> >         streamMode: "messages-tuple",
+> >     }
+> > );
+> >
+> > for await (const chunk of streamResponse) {
+> >     console.log(`Receiving new event of type: ${chunk.event}...`);
+> >     console.log(JSON.stringify(chunk.data));
+> >     console.log("\n\n");
+> > }
+> > ```
 >
-> 2. Send a message to the assistant (threadless run):
->
-```python
-> from langgraph_sdk import get_client
-> import asyncio
->
-> client = get_client(url="http://localhost:2024")
->
-> async def main():
->     async for chunk in client.runs.stream(
->         None,  # Threadless run
->         "agent", # Name of assistant. Defined in langgraph.json.
->         input={
->         "messages": [{
->             "role": "human",
->             "content": "What is LangGraph?",
->             }],
->         },
->     ):
->         print(f"Receiving new event of type: {chunk.event}...")
->         print(chunk.data)
->         print("\n\n")
->
-> asyncio.run(main())
-```
->
-> **Python SDK (sync)**
->
-> 1. Install the LangGraph Python SDK:
->
-```shell
-> pip install langgraph-sdk
-```
->
-> 2. Send a message to the assistant (threadless run):
->
-```python
-> from langgraph_sdk import get_sync_client
->
-> client = get_sync_client(url="http://localhost:2024")
->
-> for chunk in client.runs.stream(
->     None,  # Threadless run
->     "agent", # Name of assistant. Defined in langgraph.json.
->     input={
->         "messages": [{
->             "role": "human",
->             "content": "What is LangGraph?",
->         }],
->     },
->     stream_mode="messages-tuple",
-> ):
->     print(f"Receiving new event of type: {chunk.event}...")
->     print(chunk.data)
->     print("\n\n")
-```
->
-> **Javascript SDK**
->
-> 1. Install the LangGraph JS SDK:
->
-```shell
-> npm install @langchain/langgraph-sdk
-```
->
-> 2. Send a message to the assistant (threadless run):
->
-```js
-> const { Client } = await import("@langchain/langgraph-sdk");
->
-> // only set the apiUrl if you changed the default port when calling langgraph dev
-> const client = new Client({ apiUrl: "http://localhost:2024"});
->
-> const streamResponse = client.runs.stream(
->     null, // Threadless run
->     "agent", // Assistant ID
->     {
->         input: {
->             "messages": [
->                 { "role": "user", "content": "What is LangGraph?"}
->             ]
->         },
->         streamMode: "messages-tuple",
->     }
-> );
->
-> for await (const chunk of streamResponse) {
->     console.log(`Receiving new event of type: ${chunk.event}...`);
->     console.log(JSON.stringify(chunk.data));
->     console.log("\n\n");
-> }
-```
->
-> **Rest API**
->
-```bash
-> curl -s --request POST \
->     --url "http://localhost:2024/runs/stream" \
->     --header 'Content-Type: application/json' \
->     --data "{
->         \"assistant_id\": \"agent\",
->         \"input\": {
->             \"messages\": [
->                 {
->                     \"role\": \"human\",
->                     \"content\": \"What is LangGraph?\"
->                 }
->             ]
->         },
->         \"stream_mode\": \"messages-tuple\"
->     }"
-```
+> > [tab] Rest API
+> >
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > curl -s --request POST \
+> >     --url "http://localhost:2024/runs/stream" \
+> >     --header 'Content-Type: application/json' \
+> >     --data "{
+> >         \"assistant_id\": \"agent\",
+> >         \"input\": {
+> >             \"messages\": [
+> >                 {
+> >                     \"role\": \"human\",
+> >                     \"content\": \"What is LangGraph?\"
+> >                 }
+> >             ]
+> >         },
+> >         \"stream_mode\": \"messages-tuple\"
+> >     }"
+> > ```
 
 ### Use cases
 
@@ -289,7 +289,7 @@ The [`langgraph up`](cli.md#up) command orchestrates a full Docker-based stack t
 * **Isolated networking**: Realistic container networking.
 * **Production validation**: Verifies deployment readiness.
 
-> **Get started with langgraph up**
+> [accordion] Get started with langgraph up
 >
 ```bash
 > # Ensure Docker is running
@@ -344,71 +344,71 @@ The `dependencies` field tells the [CLI](cli.md) **where** to find your applicat
 * **A specific subdirectory**: `"dependencies": ["./my_agent"]`
 * **A specific package**: `"dependencies": ["my-package==1.0.0"]` (Python) or `"dependencies": ["my-package@1.0.0"]` (JavaScript)
 
-**Python**
-
+> [tab] Python
+>
 ```json
-{
-  "dependencies": ["."],
-  "graphs": {
-    "my_agent": "./my_agent/agent.py:graph"
-  },
-  "env": "./.env"
-}
+> {
+>   "dependencies": ["."],
+>   "graphs": {
+>     "my_agent": "./my_agent/agent.py:graph"
+>   },
+>   "env": "./.env"
+> }
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```json
-{
-  "dependencies": ["."],
-  "graphs": {
-    "my_agent": "./my_agent/agent.js:graph"
-  },
-  "env": "./.env"
-}
+> {
+>   "dependencies": ["."],
+>   "graphs": {
+>     "my_agent": "./my_agent/agent.js:graph"
+>   },
+>   "env": "./.env"
+> }
 ```
 
 ### Package dependency files
 
 These files define **what** packages your application needs:
 
-**Python**
-
-**pyproject.toml example:**
-
+> [tab] Python
+>
+> **pyproject.toml example:**
+>
 ```toml
-[project]
-name = "my-agent"
-version = "0.1.0"
-dependencies = [
-    "langchain-openai",
-    "langchain-anthropic",
-    "langgraph",
-]
+> [project]
+> name = "my-agent"
+> version = "0.1.0"
+> dependencies = [
+>     "langchain-openai",
+>     "langchain-anthropic",
+>     "langgraph",
+> ]
+```
+>
+> **requirements.txt example:**
+>
+```
+> langchain-openai
+> langchain-anthropic
+> langgraph
 ```
 
-**requirements.txt example:**
-
-```
-langchain-openai
-langchain-anthropic
-langgraph
-```
-
-**JavaScript**
-
-**package.json example:**
-
+> [tab] JavaScript
+>
+> **package.json example:**
+>
 ```json
-{
-  "name": "my-agent",
-  "version": "1.0.0",
-  "dependencies": {
-    "@langchain/openai": "^0.3.0",
-    "@langchain/anthropic": "^0.3.0",
-    "@langchain/langgraph": "^0.2.0"
-  }
-}
+> {
+>   "name": "my-agent",
+>   "version": "1.0.0",
+>   "dependencies": {
+>     "@langchain/openai": "^0.3.0",
+>     "@langchain/anthropic": "^0.3.0",
+>     "@langchain/langgraph": "^0.2.0"
+>   }
+> }
 ```
 
 ### Dependency resolution process

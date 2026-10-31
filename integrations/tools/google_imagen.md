@@ -150,7 +150,7 @@ img
 ```
 
 ```text
-Generated Cpation : a cat sitting on the beach looking at the camera
+Generated Caption : a cat sitting on the beach looking at the camera
 ```
 
 ![](https://mintcdn.com/langchain-5e9cc07a/x_qjL89cw5RbZp-3/images/integrations/imagen-cat-beach.jpg?fit=max\&auto=format\&n=x_qjL89cw5RbZp-3\&q=85\&s=620689fa3c5ef5af4aeffd79d7a34f8d)

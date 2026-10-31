@@ -12,15 +12,15 @@ tags: [docs, javascript, releases, langgraph-v1]
 
 It's designed to work hand-in-hand with [LangChain v1](langchain-v1.md) (whose `createAgent` is built on LangGraph) so you can start high-level and drop down to granular control when needed.
 
-> **Stable core APIs**
+> [card] Stable core APIs
 >
 > Graph primitives (state, nodes, edges) and the execution/runtime model are unchanged, making upgrades straightforward.
 
-> **Reliability, by default**
+> [card] Reliability, by default
 >
 > Durable execution with checkpointing, persistence, streaming, and human-in-the-loop continues to be first-class.
 
-> **Seamless with LangChain v1**
+> [card] Seamless with LangChain v1
 >
 > LangChain's `createAgent` runs on LangGraph. Use LangChain for a fast start; drop to LangGraph for custom orchestration.
 
@@ -133,27 +133,27 @@ Please report any issues discovered with 1.0 on [GitHub](https://github.com/lang
 
 ## Additional resources
 
-> **[LangGraph 1.0](https://blog.langchain.com/langchain-langchain-1-0-alpha-releases/)**
+> [card] [LangGraph 1.0](https://blog.langchain.com/langchain-langchain-1-0-alpha-releases/)
 >
 > Read the announcement
 
-> **[Overview](../langgraph/overview.md)**
+> [card] [Overview](../langgraph/overview.md)
 >
 > What LangGraph is and when to use it
 
-> **[Graph API](../langgraph/graph-api.md)**
+> [card] [Graph API](../langgraph/graph-api.md)
 >
 > Build graphs with state, nodes, and edges
 
-> **[LangChain Agents](../langchain/agents.md)**
+> [card] [LangChain Agents](../langchain/agents.md)
 >
 > High-level agents built on LangGraph
 
-> **[Migration guide](../migrate/langgraph-v1.md)**
+> [card] [Migration guide](../migrate/langgraph-v1.md)
 >
 > How to migrate to LangGraph v1
 
-> **[GitHub](https://github.com/langchain-ai/langgraphjs)**
+> [card] [GitHub](https://github.com/langchain-ai/langgraphjs)
 >
 > Report issues or contribute
 

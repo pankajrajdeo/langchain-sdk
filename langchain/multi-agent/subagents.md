@@ -72,7 +72,7 @@ def call_research_agent(query: str):
 main_agent = create_agent(model="google_genai:gemini-3.6-flash", tools=[call_research_agent])
 ```
 
-> **[Tutorial: Build a personal assistant with subagents](subagents-personal-assistant.md)**
+> [card] [Tutorial: Build a personal assistant with subagents](subagents-personal-assistant.md)
 >
 > Learn how to build a personal assistant using the subagents pattern, where a central main agent (supervisor) coordinates specialized worker agents.
 
@@ -267,7 +267,7 @@ graph LR
 >
 > An interesting aspect of this approach is that sub-agents may have the exact same capabilities as the main agent. In such cases, invoking a sub-agent is **really about context isolation** as the primary reason—allowing complex, multi-step tasks to run in isolated context windows without bloating the main agent's conversation history. The sub-agent completes its work autonomously and returns only a concise summary, keeping the main thread focused and efficient.
 
-> **Agent registry with task dispatcher**
+> [accordion] Agent registry with task dispatcher
 >
 ```python
 > from langchain.tools import tool
@@ -521,7 +521,7 @@ By default, subagents use the **inherited checkpointer** mode—each invocation 
 
 Because subagents are called inside tool functions, LangGraph cannot [statically discover](../../langgraph/use-subgraphs.md#view-subgraph-state) them. This means [`get_state` with `subgraphs`](../../langgraph/use-subgraphs.md#view-subgraph-state) will not return subagent state. If you need to read nested graph state (e.g., during an [interrupt](../../langgraph/interrupts.md#pause-using-interrupt)), invoke the subagent from a [node function](../../langgraph/use-subgraphs.md#call-a-subgraph-inside-a-node) in a custom graph instead. See [subgraph persistence](../../langgraph/use-subgraphs.md#subgraph-persistence) for details on how each mode affects state visibility.
 
-> **[Migrate from langgraph-supervisor](../../migrate/langgraph-supervisor.md)**
+> [card] [Migrate from langgraph-supervisor](../../migrate/langgraph-supervisor.md)
 >
 > The langgraph-supervisor package is no longer actively maintained. Learn how to migrate from create\_supervisor to the subagents pattern, including interrupt and resume flows with external API callbacks.
 

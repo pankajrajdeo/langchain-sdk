@@ -17,15 +17,15 @@ tags: [docs, langsmith, deploy-to-cloud-overview]
 
 Agent deployments running on Cloud require a [Plus plan or above](https://www.langchain.com/pricing). Before creating your first agent deployment, verify that your application runs locally with `langgraph dev`. Refer to [Local development and testing](local-dev-testing.md).
 
-> **[Deploy on Cloud](deploy-to-cloud.md)**
+> [card] [Deploy on Cloud](deploy-to-cloud.md)
 >
 > Step-by-step setup guide for creating, configuring, and managing Cloud deployments from the LangSmith UI or the `langgraph deploy` CLI.
 
-> **[Cloud platform features](cloud-platform-features.md)**
+> [card] [Cloud platform features](cloud-platform-features.md)
 >
 > Reference for Cloud-only platform behavior: data regions, static IPs, payload limits, deployment types, and managed database provisioning.
 
-> **[Quickstart](deployment-quickstart.md)**
+> [card] [Quickstart](deployment-quickstart.md)
 >
 > Deploy your first LangGraph application to Cloud in a few minutes.
 
@@ -33,11 +33,11 @@ To deploy a code-first Deep Agent without standing up your own Agent Server, [Ma
 
 ## Next steps
 
-> **[Run the quickstart](deployment-quickstart.md)**
+> [card] [Run the quickstart](deployment-quickstart.md)
 >
 > Deploy a starter LangGraph application end-to-end.
 
-> **[Read the full deploy guide](deploy-to-cloud.md)**
+> [card] [Read the full deploy guide](deploy-to-cloud.md)
 >
 > Configure environment variables, secrets, revisions, and deployment settings.
 

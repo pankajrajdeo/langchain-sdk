@@ -106,7 +106,7 @@ Use this tool when you want explicit tool invocation for image generation in an 
 
 You must deploy an image generation model first, then pass the deployment name in `model`.
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **project\_endpoint** `str`
 >
@@ -175,7 +175,7 @@ result = tool.invoke(
 print(result)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **project\_endpoint** `str`
 >
@@ -221,7 +221,7 @@ response = model_with_code.invoke("Plot a sine wave using Python and explain it"
 print(response)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **file\_ids** `list[str] | None`
 >
@@ -257,7 +257,7 @@ response = model_with_search.invoke(
 print(response)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **search\_context\_size** `'low' | 'medium' | 'high' | None`
 >
@@ -294,7 +294,7 @@ response = model_with_search.invoke(
 print(response)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **vector\_store\_ids** `list[str]` *required*
 >
@@ -336,7 +336,7 @@ response = model_with_images.invoke(
 print(response)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **model\_deployment** `str | None`
 >
@@ -410,7 +410,7 @@ response = model_with_mcp.invoke(
 print(response)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **server\_label** `str` *required*
 >
@@ -476,7 +476,7 @@ The toolbox automatically handles:
 
 Create a toolbox in your Microsoft Foundry project. For documentation see [Toolbox in Foundry](https://learn.microsoft.com/azure/foundry/agents/how-to/tools/toolbox).
 
-> **Configuration parameters**
+> [accordion] Configuration parameters
 >
 > **project\_endpoint** `str`
 >

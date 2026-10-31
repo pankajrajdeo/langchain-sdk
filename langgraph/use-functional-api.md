@@ -28,7 +28,7 @@ def my_workflow(inputs: dict) -> int:
 my_workflow.invoke({"value": 1, "another_value": 2})
 ```
 
-> **Extended example: simple workflow**
+> [accordion] Extended example: simple workflow
 >
 ```python
 > from langchain_core.utils.uuid import uuid7
@@ -60,7 +60,7 @@ my_workflow.invoke({"value": 1, "another_value": 2})
 > print(result)
 ```
 
-> **Extended example: Compose an essay with an LLM**
+> [accordion] Extended example: Compose an essay with an LLM
 >
 > This example demonstrates how to use the `@task` and `@entrypoint` decorators
 > syntactically. Given that a checkpointer is provided, the workflow results will
@@ -112,7 +112,7 @@ def graph(numbers: list[int]) -> list[str]:
     return [f.result() for f in futures]
 ```
 
-> **Extended example: parallel LLM calls**
+> [accordion] Extended example: parallel LLM calls
 >
 > This example demonstrates how to run multiple LLM calls in parallel using `@task`. Each call generates a paragraph on a different topic, and results are joined into a single text output.
 >
@@ -176,7 +176,7 @@ def some_workflow(some_input: dict) -> int:
     }
 ```
 
-> **Extended example: calling a simple graph from the functional API**
+> [accordion] Extended example: calling a simple graph from the functional API
 >
 ```python
 > from langchain_core.utils.uuid import uuid7
@@ -227,7 +227,7 @@ def my_workflow(inputs: dict) -> int:
     return value
 ```
 
-> **Extended example: calling another entrypoint**
+> [accordion] Extended example: calling another entrypoint
 >
 ```python
 > from langchain_core.utils.uuid import uuid7
@@ -269,7 +269,7 @@ for mode, chunk in stream.interleave("values"):
 # values: 10
 ```
 
-> **[View example trace](https://smith.langchain.com/public/6a1d451c-0e3a-4a7b-8e6f-b5cedae52a15/r)**
+> [card] [View example trace](https://smith.langchain.com/public/b2de9987-99f2-40ad-bfb4-6bbf9f01ffb1/r)
 >
 > Open a public LangSmith run for this example.
 

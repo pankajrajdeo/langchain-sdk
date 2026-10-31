@@ -26,15 +26,15 @@ Each module release tag deploys one Helm chart line: the `v0.17.*` tags deploy c
 
 ## Choose a provider
 
-> **[AWS (EKS)](self-host-terraform-aws-deploy.md)**
+> [card] [AWS (EKS)](self-host-terraform-aws-deploy.md)
 >
 > Provision EKS, RDS PostgreSQL, ElastiCache, S3, and networking.
 
-> **[Azure (AKS)](self-host-terraform-azure-deploy.md)**
+> [card] [Azure (AKS)](self-host-terraform-azure-deploy.md)
 >
 > Provision AKS, Azure Database for PostgreSQL, Azure Managed Redis, Blob Storage, and Key Vault.
 
-> **[GCP (GKE)](self-host-terraform-gcp-deploy.md)**
+> [card] [GCP (GKE)](self-host-terraform-gcp-deploy.md)
 >
 > Provision GKE, Cloud SQL, Memorystore, GCS, and Workload Identity.
 

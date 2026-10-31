@@ -12,7 +12,7 @@ The [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) i
 
 > [!NOTE]
 >
-> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
+> In an [agent-based workspace](agent-registry.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Installation
 
@@ -44,7 +44,9 @@ npm install @anthropic-ai/claude-agent-sdk langsmith zod
 
 ## Setup
 
-Set your [API keys](create-account-api-key.md):
+Sending traces to an agent requires `langsmith>=0.14.9` in Python or `langsmith@>=0.11.0` in TypeScript.
+
+Set your [API keys](create-account-api-key.md), agent identifier, and environment:
 
 **shell**
 
@@ -52,7 +54,8 @@ Set your [API keys](create-account-api-key.md):
 export LANGSMITH_TRACING=true
 export LANGSMITH_ENDPOINT=https://api.smith.langchain.com
 export LANGSMITH_API_KEY=<your_langsmith_api_key>
-export LANGSMITH_PROJECT=<your_langsmith_project>
+export LANGSMITH_AGENT_ID="<your-agent-id>"
+export LANGSMITH_AGENT_ENVIRONMENT="production"
 
 export ANTHROPIC_API_KEY=<your_anthropic_api_key>
 ```
@@ -63,7 +66,8 @@ export ANTHROPIC_API_KEY=<your_anthropic_api_key>
 LANGSMITH_TRACING=true
 LANGSMITH_ENDPOINT=https://api.smith.langchain.com
 LANGSMITH_API_KEY=<your_langsmith_api_key>
-LANGSMITH_PROJECT=<your_langsmith_project>
+LANGSMITH_AGENT_ID="<your-agent-id>"
+LANGSMITH_AGENT_ENVIRONMENT="production"
 
 ANTHROPIC_API_KEY=<your_anthropic_api_key>
 ```

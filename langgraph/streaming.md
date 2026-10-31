@@ -40,7 +40,7 @@ Status: thinking of a joke...
 Node generate_joke updated: {'joke': 'Why did the ice cream go to school? To get a sundae education!'}
 ```
 
-> **Full example**
+> [accordion] Full example
 >
 ```python
 > from typing import TypedDict
@@ -193,44 +193,44 @@ graph = (
 )
 ```
 
-**updates**
-
-Use this to stream only the **state updates** returned by the nodes after each step. The streamed outputs include the name of the node as well as the update.
-
+> [tab] updates
+>
+> Use this to stream only the **state updates** returned by the nodes after each step. The streamed outputs include the name of the node as well as the update.
+>
 ```python
-for chunk in graph.stream(
-    {"topic": "ice cream"},
-    stream_mode="updates",  # [!code highlight]
-    version="v2",  # [!code highlight]
-):
-    if chunk["type"] == "updates":
-        for node_name, state in chunk["data"].items():
-            print(f"Node `{node_name}` updated: {state}")
+> for chunk in graph.stream(
+>     {"topic": "ice cream"},
+>     stream_mode="updates",  # [!code highlight]
+>     version="v2",  # [!code highlight]
+> ):
+>     if chunk["type"] == "updates":
+>         for node_name, state in chunk["data"].items():
+>             print(f"Node `{node_name}` updated: {state}")
 ```
-
+>
 ```shell
-Node `refine_topic` updated: {'topic': 'ice cream and cats'}
-Node `generate_joke` updated: {'joke': 'This is a joke about ice cream and cats'}
+> Node `refine_topic` updated: {'topic': 'ice cream and cats'}
+> Node `generate_joke` updated: {'joke': 'This is a joke about ice cream and cats'}
 ```
 
-**values**
-
-Use this to stream the **full state** of the graph after each step.
-
+> [tab] values
+>
+> Use this to stream the **full state** of the graph after each step.
+>
 ```python
-for chunk in graph.stream(
-    {"topic": "ice cream"},
-    stream_mode="values",  # [!code highlight]
-    version="v2",  # [!code highlight]
-):
-    if chunk["type"] == "values":
-        print(f"topic: {chunk['data']['topic']}, joke: {chunk['data']['joke']}")
+> for chunk in graph.stream(
+>     {"topic": "ice cream"},
+>     stream_mode="values",  # [!code highlight]
+>     version="v2",  # [!code highlight]
+> ):
+>     if chunk["type"] == "values":
+>         print(f"topic: {chunk['data']['topic']}, joke: {chunk['data']['joke']}")
 ```
-
+>
 ```shell
-topic: ice cream, joke:
-topic: ice cream and cats, joke:
-topic: ice cream and cats, joke: This is a joke about ice cream and cats
+> topic: ice cream, joke:
+> topic: ice cream and cats, joke:
+> topic: ice cream and cats, joke: This is a joke about ice cream and cats
 ```
 
 ### LLM tokens
@@ -321,7 +321,7 @@ async for chunk in graph.astream(
             print(msg.content, end="|", flush=True)
 ```
 
-> **Extended example: filtering by tags**
+> [accordion] Extended example: filtering by tags
 >
 ```python
 > from typing import TypedDict
@@ -431,7 +431,7 @@ initial_state: State = {"topic": "AI", "answer": "", "notes": ""}
 stream = graph.stream_events(initial_state, version="v3")
 ```
 
-> **[View example trace](https://smith.langchain.com/public/e5687375-a6ad-4b8d-b553-8672cc6da1b3/r)**
+> [card] [View example trace](https://smith.langchain.com/public/e378901c-6fa4-4f1c-8390-d4e59b74306d/r)
 >
 > Open a public LangSmith run for this example.
 
@@ -455,7 +455,7 @@ for chunk in graph.stream(
             ...
 ```
 
-> **Extended example: streaming LLM tokens from specific nodes**
+> [accordion] Extended example: streaming LLM tokens from specific nodes
 >
 ```python
 > from typing import TypedDict
@@ -526,63 +526,64 @@ To send **custom user-defined data** from inside a LangGraph node or tool, follo
 > Instead, add a `writer` parameter to your node or tool and pass it manually.
 > See [Async with Python \< 3.11](#async) for usage examples.
 
-**node**
-
+> [tab] node
+>
 ```python
-from typing import TypedDict
-from langgraph.config import get_stream_writer
-from langgraph.graph import StateGraph, START
-
-class State(TypedDict):
-    query: str
-    answer: str
-
-def node(state: State):
-    # Get the stream writer to send custom data
-    writer = get_stream_writer()
-    # Emit a custom key-value pair (e.g., progress update)
-    writer({"custom_key": "Generating custom data inside node"})
-    return {"answer": "some data"}
-
-graph = (
-    StateGraph(State)
-    .add_node(node)
-    .add_edge(START, "node")
-    .compile()
-)
-
-inputs = {"query": "example"}
-
-# Set stream_mode="custom" to receive the custom data in the stream
-for chunk in graph.stream(inputs, stream_mode="custom", version="v2"):
-    if chunk["type"] == "custom":
-        print(f"Custom event: {chunk['data']['custom_key']}")
+> from typing import TypedDict
+> from langgraph.config import get_stream_writer
+> from langgraph.graph import StateGraph, START
+>
+> class State(TypedDict):
+>     query: str
+>     answer: str
+>
+> def node(state: State):
+>     # Get the stream writer to send custom data
+>     writer = get_stream_writer()
+>     # Emit a custom key-value pair (e.g., progress update)
+>     writer({"custom_key": "Generating custom data inside node"})
+>     return {"answer": "some data"}
+>
+> graph = (
+>     StateGraph(State)
+>     .add_node(node)
+>     .add_edge(START, "node")
+>     .compile()
+> )
+>
+> inputs = {"query": "example"}
+>
+> # Set stream_mode="custom" to receive the custom data in the stream
+> for chunk in graph.stream(inputs, stream_mode="custom", version="v2"):
+>     if chunk["type"] == "custom":
+>         print(f"Custom event: {chunk['data']['custom_key']}")
 ```
 
-**tool**
-
+> [tab] tool
+>
 ```python
-from langchain.tools import tool
-from langgraph.config import get_stream_writer
-
-@tool
-def query_database(query: str) -> str:
-    """Query the database."""
-    # Access the stream writer to send custom data
-    writer = get_stream_writer()  # [!code highlight]
-    # Emit a custom key-value pair (e.g., progress update)
-    writer({"data": "Retrieved 0/100 records", "type": "progress"})  # [!code highlight]
-    # perform query
-    # Emit another custom key-value pair
-    writer({"data": "Retrieved 100/100 records", "type": "progress"})
-    return "some-answer"
-
-graph = ... # define a graph that uses this tool
-
-# Set stream_mode="custom" to receive the custom data in the stream
-for chunk in graph.stream(inputs, stream_mode="custom", version="v2"):
-    if chunk["type"] == "custom":
-        print(f"{chunk['data']['type']}: {chunk['data']['data']}")
+> from langchain.tools import tool
+> from langgraph.config import get_stream_writer
+>
+> @tool
+> def query_database(query: str) -> str:
+>     """Query the database."""
+>     # Access the stream writer to send custom data
+>     writer = get_stream_writer()  # [!code highlight]
+>     # Emit a custom key-value pair (e.g., progress update)
+>     writer({"data": "Retrieved 0/100 records", "type": "progress"})  # [!code highlight]
+>     # perform query
+>     # Emit another custom key-value pair
+>     writer({"data": "Retrieved 100/100 records", "type": "progress"})
+>     return "some-answer"
+>
+>
+> graph = ... # define a graph that uses this tool
+>
+> # Set stream_mode="custom" to receive the custom data in the stream
+> for chunk in graph.stream(inputs, stream_mode="custom", version="v2"):
+>     if chunk["type"] == "custom":
+>         print(f"{chunk['data']['type']}: {chunk['data']['data']}")
 ```
 
 ### Subgraph outputs
@@ -591,32 +592,32 @@ To include outputs from [subgraphs](use-subgraphs.md) in the streamed outputs, y
 
 The outputs will be streamed as tuples `(namespace, data)`, where `namespace` is a tuple with the path to the node where a subgraph is invoked, e.g. `("parent_node:<task_id>", "child_node:<task_id>")`.
 
-**v2 (LangGraph 1.1 or later)**
-
-With `version="v2"`, subgraph events use the same `StreamPart` format. The `ns` field identifies the source:
-
+> [tab] v2 (LangGraph 1.1 or later)
+>
+> With `version="v2"`, subgraph events use the same `StreamPart` format. The `ns` field identifies the source:
+>
 ```python
-for chunk in graph.stream(
-    {"foo": "foo"},
-    subgraphs=True,  # [!code highlight]
-    stream_mode="updates",
-    version="v2", # [!code highlight]
-):
-    print(chunk["type"])  # "updates"
-    print(chunk["ns"])    # () for root, ("node_name:<task_id>",) for subgraph
-    print(chunk["data"])  # {"node_name": {"key": "value"}}
+> for chunk in graph.stream(
+>     {"foo": "foo"},
+>     subgraphs=True,  # [!code highlight]
+>     stream_mode="updates",
+>     version="v2", # [!code highlight]
+> ):
+>     print(chunk["type"])  # "updates"
+>     print(chunk["ns"])    # () for root, ("node_name:<task_id>",) for subgraph
+>     print(chunk["data"])  # {"node_name": {"key": "value"}}
 ```
 
-**v1 (default)**
-
+> [tab] v1 (default)
+>
 ```python
-for chunk in graph.stream(
-    {"foo": "foo"},
-    # Set subgraphs=True to stream outputs from subgraphs
-    subgraphs=True,  # [!code highlight]
-    stream_mode="updates",
-):
-    print(chunk)
+> for chunk in graph.stream(
+>     {"foo": "foo"},
+>     # Set subgraphs=True to stream outputs from subgraphs
+>     subgraphs=True,  # [!code highlight]
+>     stream_mode="updates",
+> ):
+>     print(chunk)
 ```
 
 > [!NOTE]
@@ -646,7 +647,7 @@ for chunk in graph.stream(
 >     print(chunk["data"])  # (token, metadata)
 ```
 
-> **Extended example: streaming from subgraphs**
+> [accordion] Extended example: streaming from subgraphs
 >
 ```python
 > from langgraph.graph import START, StateGraph
@@ -848,7 +849,7 @@ for chunk in graph.stream(
         print(chunk["data"])
 ```
 
-> **Extended example: streaming arbitrary chat model**
+> [accordion] Extended example: streaming arbitrary chat model
 >
 ```python
 > import operator
@@ -976,25 +977,25 @@ models that do not support it.
 
 Set `streaming=False` when initializing the model.
 
-**init\_chat\_model**
-
+> [tab] init\_chat\_model
+>
 ```python
-from langchain.chat_models import init_chat_model
-
-model = init_chat_model(
-    "claude-sonnet-4-6",
-    # Set streaming=False to disable streaming for the chat model
-    streaming=False  # [!code highlight]
-)
+> from langchain.chat_models import init_chat_model
+>
+> model = init_chat_model(
+>     "claude-sonnet-4-6",
+>     # Set streaming=False to disable streaming for the chat model
+>     streaming=False  # [!code highlight]
+> )
 ```
 
-**Chat model interface**
-
+> [tab] Chat model interface
+>
 ```python
-from langchain_openai import ChatOpenAI
-
-# Set streaming=False to disable streaming for the chat model
-model = ChatOpenAI(model="gpt-5.5", streaming=False)
+> from langchain_openai import ChatOpenAI
+>
+> # Set streaming=False to disable streaming for the chat model
+> model = ChatOpenAI(model="gpt-5.5", streaming=False)
 ```
 
 > [!NOTE]
@@ -1088,7 +1089,7 @@ This limits LangGraph ability to automatically propagate context, and affects La
 1. You **must** explicitly pass [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) into async LLM calls (e.g., `ainvoke()`), as callbacks are not automatically propagated.
 2. You **cannot** use [`get_stream_writer`](https://reference.langchain.com/python/langgraph/config/get_stream_writer) in async nodes or tools—you must pass a `writer` argument directly.
 
-> **Extended example: async LLM call with manual config**
+> [accordion] Extended example: async LLM call with manual config
 >
 ```python
 > from typing import TypedDict
@@ -1131,7 +1132,7 @@ This limits LangGraph ability to automatically propagate context, and affects La
 >             print(message_chunk.content, end="|", flush=True)
 ```
 
-> **Extended example: async custom streaming with stream writer**
+> [accordion] Extended example: async custom streaming with stream writer
 >
 ```python
 > from typing import TypedDict

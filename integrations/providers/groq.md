@@ -16,7 +16,7 @@ tags: [docs, integrations, providers, groq]
 
 ## Model interfaces
 
-> **[ChatGroq](../chat/groq.md)**
+> [card] [ChatGroq](../chat/groq.md)
 >
 > Interface to chat models hosted on the Groq platform.
 

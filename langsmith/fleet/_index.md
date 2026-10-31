@@ -30,7 +30,7 @@ tags: [index, langsmith, fleet]
 - [Schedules](schedules.md) - Configure schedules to run your Fleet agents on a recurring basis.
 - [Skills](skills.md) - Use skills to give your agents access to specific capabilities.
 - [Integrate Slack with an agent](slack-app.md) - Connect LangSmith Fleet to your Slack workspace so your agents work as Slack bots your team can tag directly.
-- [Integrate Teams with an agent](teams-app.md) - Connect LangSmith Fleet to Microsoft Teams by bringing your own Azure Bot to let agents communicate with users in Teams.
+- [Integrate Microsoft Teams with an agent](teams-app.md) - Connect LangSmith Fleet to Microsoft Teams by bringing your own Azure Bot to let agents communicate with users in Teams.
 - [Templates](templates.md) - Start faster with curated Fleet templates and customize tools, prompts, and channels.
 - [Tool integrations](tools.md) - Give your agents access to a wide range of tools and services.
 - [Fleet webhooks](webhooks.md) - Integrate agent publishing with external systems, CI/CD pipelines, or custom deployment workflows.

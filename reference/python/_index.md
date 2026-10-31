@@ -7,12 +7,12 @@ tags: [index, reference, python]
 
 # reference/python
 
-0 pages here, 6104 pages including subdirectories.
+0 pages here, 6105 pages including subdirectories.
 
 ## Directories
 
 - [deepagents/](deepagents/_index.md) - 831 pages
 - [langchain/](langchain/_index.md) - 598 pages
 - [langchain-core/](langchain-core/_index.md) - 2907 pages
-- [langgraph/](langgraph/_index.md) - 1403 pages
+- [langgraph/](langgraph/_index.md) - 1404 pages
 - [langgraph-sdk/](langgraph-sdk/_index.md) - 365 pages

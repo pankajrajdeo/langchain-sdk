@@ -714,7 +714,7 @@ You can see what these results look like here: [LangSmith link](https://smith.la
 
 Here's a consolidated script with all the above code:
 
-> **Reference code**
+> [accordion] Reference code
 >
 ````python
 > import json

@@ -14,27 +14,27 @@ Deep Agents Code stores user configuration in its profile directory, which defau
 
 The main config files are:
 
-> **[Config file](config-file.md)**
+> [card] [Config file](config-file.md)
 >
 > Edit `config.toml` for model defaults, provider settings, themes, and update settings.
 
-> **[Managed configuration](#managed-configuration)**
+> [card] [Managed configuration](#managed-configuration)
 >
 > Set administrator-controlled settings for every user with `managed_config.toml`.
 
-> **[Environment variables](#environment-variables)**
+> [card] [Environment variables](#environment-variables)
 >
 > Set global API keys and secrets in `~/.deepagents/.env` or shell exports.
 
-> **[Hooks](hooks.md)**
+> [card] [Hooks](hooks.md)
 >
 > Subscribe external commands to lifecycle events in `hooks.json`.
 
-> **[MCP servers](mcp-tools.md)**
+> [card] [MCP servers](mcp-tools.md)
 >
 > Define global MCP servers in `~/.deepagents/.mcp.json`.
 
-> **[Python extensions](extensions.md)**
+> [card] [Python extensions](extensions.md)
 >
 > Add custom tools, middleware, and storage routes.
 
@@ -91,24 +91,24 @@ At startup, Deep Agents Code reads the nearest project `.env`, found by searchin
 
 To skip the project `.env` entirely (the global `~/.deepagents/.env` still loads), set `startup.read_project_dotenv`.
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[startup]
-read_project_dotenv = false
+> [startup]
+> read_project_dotenv = false
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_READ_PROJECT_DOTENV=0
+> export DEEPAGENTS_CODE_READ_PROJECT_DOTENV=0
 ```
 
 The setting resolves from managed config, the environment variable, and the user `config.toml`. All of those are read before any project `.env` is applied, so a project `.env` cannot turn the toggle off (or back on) for itself.
 
 Deep Agents Code ignores environment variables that could alter executable lookup, interpreter or shell startup, Git behavior, or trust settings when they come from dotenv files.
 
-> **View environment variables blocked in dotenv files**
+> [accordion] View environment variables blocked in dotenv files
 >
 > The following keys cannot be set in either project or global dotenv files:
 >
@@ -202,7 +202,7 @@ theme = "langchain-dark"
 
 For user-defined themes, built-in overrides, and terminal-specific mappings, see the `[themes.*]` and `[ui.terminal_themes]` sections in [Config file](config-file.md) or configure them directly in `config.toml`:
 
-> **User-defined themes, overrides, and terminal mapping**
+> [accordion] User-defined themes, overrides, and terminal mapping
 >
 > ### User-defined themes
 >
@@ -270,17 +270,17 @@ Deep Agents Code automatically checks for and installs updates by default.
 
 To opt out of automatic updates:
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[update]
-auto_update = false
+> [update]
+> auto_update = false
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_AUTO_UPDATE=0
+> export DEEPAGENTS_CODE_AUTO_UPDATE=0
 ```
 
 The environment variable takes precedence over the config file. Setting the environment variable to an empty value disables the feature.
@@ -291,17 +291,17 @@ When enabled (default), Deep Agents Code checks PyPI for a newer version at sess
 
 Deep Agents Code refreshes its model pricing catalog from upstream hourly in the background so cost estimates stay current. To opt out:
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[update]
-prices_auto_update = false
+> [update]
+> prices_auto_update = false
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_PRICES_AUTO_UPDATE=0
+> export DEEPAGENTS_CODE_PRICES_AUTO_UPDATE=0
 ```
 
 ### Custom pricing overrides
@@ -329,17 +329,17 @@ Rates are in USD per million tokens. Restart Deep Agents Code after editing the 
 
 To suppress automatic update checks entirely:
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[update]
-check = false
+> [update]
+> check = false
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_NO_UPDATE_CHECK=1
+> export DEEPAGENTS_CODE_NO_UPDATE_CHECK=1
 ```
 
 Disabling update checks also prevents automatic update installs at startup.
@@ -358,17 +358,17 @@ These `[ui]` keys tune what the terminal UI shows.
 
 Deep Agents Code shows session usage statistics when a session ends (default on):
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[ui]
-show_usage_stats = false
+> [ui]
+> show_usage_stats = false
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_SHOW_USAGE_STATS=0
+> export DEEPAGENTS_CODE_SHOW_USAGE_STATS=0
 ```
 
 The environment variable takes precedence; setting it to an empty value also disables the stats.
@@ -377,34 +377,34 @@ The environment variable takes precedence; setting it to an empty value also dis
 
 Large pastes into the chat input are collapsed into compact placeholders (default on). To keep the full pasted text visible:
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[ui]
-collapse_pastes = false
+> [ui]
+> collapse_pastes = false
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_COLLAPSE_PASTES=0
+> export DEEPAGENTS_CODE_COLLAPSE_PASTES=0
 ```
 
 ## Automatic memory
 
 Deep Agents Code automatically saves learnings to memory. To keep loading memory while stopping automatic saves, change the [automatic memory setting](memory-and-skills.md#automatic-memory):
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[memory]
-auto_save = false
+> [memory]
+> auto_save = false
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_MEMORY_AUTO_SAVE=0
+> export DEEPAGENTS_CODE_MEMORY_AUTO_SAVE=0
 ```
 
 You can still save memories explicitly with `/remember`. The environment variable takes precedence over the config file.
@@ -415,17 +415,17 @@ Offloading a thread with `/offload` writes a markdown archive under `~/.deepagen
 
 Change the retention window, or disable cleanup with `0`:
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[history]
-retention_days = 90   # 0 disables the sweep
+> [history]
+> retention_days = 90   # 0 disables the sweep
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_HISTORY_RETENTION_DAYS=90
+> export DEEPAGENTS_CODE_HISTORY_RETENTION_DAYS=90
 ```
 
 The environment variable takes precedence over the config file. With a `DEEPAGENTS_HOME` profile, archives live under `$DEEPAGENTS_HOME/conversation_history/`.
@@ -528,7 +528,7 @@ source = "https://config.example.com/dcode-policy.toml"
 
 When you configure a remote policy, the local file can contain only the `[managed_config].source` setting. Put the complete policy in the remote TOML file. Deep Agents Code does not combine remote and local policy settings, and the remote file cannot point to another source.
 
-> **View remote policy requirements**
+> [accordion] View remote policy requirements
 >
 > The URL must use HTTPS, contain no credentials or query parameters, and be no more than 2,048 ASCII characters. Deep Agents Code does not follow redirects, use proxy environment variables, or save the remote policy to disk.
 >
@@ -557,7 +557,7 @@ Deep Agents Code stops rather than run without required administrator settings w
 
 If an update fails during a running session, Deep Agents Code continues to use the previous valid policy and reports the failure. A new process cannot start until it can load a valid policy.
 
-> **View settings that fail closed**
+> [accordion] View settings that fail closed
 >
 > An invalid value for any of the following settings stops startup because falling back to a user value could remove a required restriction:
 >

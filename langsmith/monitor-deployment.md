@@ -16,50 +16,50 @@ Monitor a Cloud deployment with build logs, Agent Server logs, and runtime metri
 
 Each revision includes build logs and server logs.
 
-**LangSmith UI**
+> [tab] LangSmith UI
+>
+> From the **Deployments** view:
+>
+> 1. Select a deployment.
+> 2. In the **Revisions** table, select a revision. The details panel opens with the **Build** tab selected.
+> 3. Review the build logs.
+> 4. Select the **Server** tab to view server logs. Server logs become available after LangSmith deploys the revision.
+> 5. Adjust the date and time range as needed. The default range is **Last 7 days**.
 
-From the **Deployments** view:
-
-1. Select a deployment.
-2. In the **Revisions** table, select a revision. The details panel opens with the **Build** tab selected.
-3. Review the build logs.
-4. Select the **Server** tab to view server logs. Server logs become available after LangSmith deploys the revision.
-5. Adjust the date and time range as needed. The default range is **Last 7 days**.
-
-**LangGraph CLI**
-
-To view server logs, run:
-
+> [tab] LangGraph CLI
+>
+> To view server logs, run:
+>
 ```shell
-langgraph deploy logs
+> langgraph deploy logs
 ```
-
-To view build logs, run:
-
+>
+> To view build logs, run:
+>
 ```shell
-langgraph deploy logs --type build
+> langgraph deploy logs --type build
 ```
-
-To stream new logs, run:
-
+>
+> To stream new logs, run:
+>
 ```shell
-langgraph deploy logs --follow
+> langgraph deploy logs --follow
 ```
-
-Filter logs by time range, log level, or search string:
-
+>
+> Filter logs by time range, log level, or search string:
+>
 ```shell
-langgraph deploy logs --start-time 2026-03-01T00:00:00Z --level ERROR
+> langgraph deploy logs --start-time 2026-03-01T00:00:00Z --level ERROR
 ```
-
-To select a deployment, pass its name or ID:
-
+>
+> To select a deployment, pass its name or ID:
+>
 ```shell
-langgraph deploy logs --name my-agent
-langgraph deploy logs --deployment-id <DEPLOYMENT_ID>
+> langgraph deploy logs --name my-agent
+> langgraph deploy logs --deployment-id <DEPLOYMENT_ID>
 ```
-
-For all options, see the [`deploy logs` CLI reference](cli.md#deploy-logs).
+>
+> For all options, see the [`deploy logs` CLI reference](cli.md#deploy-logs).
 
 ## Forward server logs to Datadog
 

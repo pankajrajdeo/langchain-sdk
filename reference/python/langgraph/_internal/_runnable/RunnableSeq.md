@@ -26,7 +26,7 @@ RunnableSeq(
     *,
     name: str | None = None,
     trace_inputs: Callable[[Any], Any] | None = None,
-    trace_outputs: Callable[[Any], Any] | None = None,
+    trace_policy: TracePolicy | None = None,
 )
 ```
 
@@ -36,6 +36,8 @@ RunnableSeq(
 |------|------|----------|-------------|
 | `steps` | `RunnableLike` | No | The steps to include in the sequence. (default: `()`) |
 | `name` | `str \| None` | No | The name of the `Runnable`. (default: `None`) |
+| `trace_inputs` | `Callable[[Any], Any] \| None` | No | Transforms the input every callback handler receives. (default: `None`) |
+| `trace_policy` | `TracePolicy \| None` | No | Processes what tracers record, after `trace_inputs`. (default: `None`) |
 
 ## Extends
 
@@ -50,7 +52,7 @@ __init__(
     *,
     name: str | None = None,
     trace_inputs: Callable[[Any], Any] | None = None,
-    trace_outputs: Callable[[Any], Any] | None = None,
+    trace_policy: TracePolicy | None = None,
 ) -> None
 ```
 
@@ -59,14 +61,14 @@ __init__(
 | `steps` | `RunnableLike` |
 | `name` | `str \| None` |
 | `trace_inputs` | `Callable[[Any], Any] \| None` |
-| `trace_outputs` | `Callable[[Any], Any] \| None` |
+| `trace_policy` | `TracePolicy \| None` |
 
 ## Properties
 
 - `steps`
 - `name`
 - `trace_inputs`
-- `trace_outputs`
+- `trace_policy`
 
 ## Methods
 
@@ -77,4 +79,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/3521f08e21a7d89c28331191374bc85c11ecb6e2/libs/langgraph/langgraph/_internal/_runnable.py#L584)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5bd231cbfd913e05ebc662f519eb9a655bc766df/libs/langgraph/langgraph/_internal/_runnable.py#L616)

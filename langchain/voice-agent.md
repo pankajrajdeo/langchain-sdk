@@ -193,7 +193,7 @@ async def stt_stream(
 
 The application implements an AssemblyAI client to manage the WebSocket connection and message parsing. See below for implementations; similar adapters can be constructed for other STT providers.
 
-> **AssemblyAI Client**
+> [accordion] AssemblyAI Client
 >
 ```python
 > class AssemblyAISTT:
@@ -356,7 +356,7 @@ async def tts_stream(
 
 The application implements a Cartesia client to manage the WebSocket connection and audio streaming. See below for implementations; similar adapters can be constructed for other TTS providers.
 
-> **Cartesia Client**
+> [accordion] Cartesia Client
 >
 ```python
 > import base64

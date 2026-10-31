@@ -397,7 +397,7 @@ The `group_by` parameter determines how usage data is aggregated:
 
 For trace usage, "project" refers to the [LangSmith tracer session](observability-concepts.md). For Deployment usage, "project" refers to the LangSmith Deployment project (a deployed agent).
 
-In an [agent-based workspace](agents.md), grouping by project is the closest the export gets to an agent, because there is no agent or environment dimension. Each trace usage row covers one [environment](agent-environments.md) of one agent, so totaling an agent's usage means summing its environment rows. LangSmith names the tracing project it creates for an environment `<agent>-<environment>`, for example `support-triage-production`, while a project that predates the agent keeps the name it already had.
+In an [agent-based workspace](agent-registry.md), grouping by project is the closest the export gets to an agent, because there is no agent or environment dimension. Each trace usage row covers one [environment](agent-environments.md) of one agent, so totaling an agent's usage means summing its environment rows. LangSmith names the tracing project it creates for an environment `<agent>-<environment>`, for example `support-triage-production`, while a project that predates the agent keeps the name it already had.
 
 ## Related resources
 

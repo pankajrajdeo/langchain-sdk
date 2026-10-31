@@ -16,15 +16,15 @@ LangSmith Engine is the LangSmith agent for agent engineering. Working from your
 
 For each issue, Engine surfaces the contributing traces, proposes a fix, keeps the issue current by attaching new traces that match the same failure pattern, and creates ground truth dataset examples from the production trace inputs.
 
-> **[Build: Open a pull request](engine-issues.md#open-a-pull-request)**
+> [card] [Build: Open a pull request](engine-issues.md#open-a-pull-request)
 >
 > Apply the proposed fix by opening a pull request in your connected repository. Engine can propose code changes to agents built with Deep Agents, LangChain, and LangGraph.
 
-> **[Test: Generate datasets](engine-issues.md#add-offline-examples)**
+> [card] [Test: Generate datasets](engine-issues.md#add-offline-examples)
 >
 > Create ground truth dataset examples from production traces for offline evaluation, so you can verify a fix before it ships.
 
-> **[Monitor: Track recurring issues](engine-issues.md#filter-and-sort-issues)**
+> [card] [Monitor: Track recurring issues](engine-issues.md#filter-and-sort-issues)
 >
 > Scan your tracing projects on a schedule to surface, prioritize, and diagnose recurring issues, and add new matching traces to each issue as they appear.
 
@@ -148,19 +148,19 @@ For offline self-hosted deployments, spend reporting and limit enforcement diffe
 
 ## Get started
 
-> **[Set up Engine](engine-setup.md)**
+> [card] [Set up Engine](engine-setup.md)
 >
 > Enable Engine for your organization and turn it on for a tracing project or agent environment.
 
-> **[Find and fix issues](engine-issues.md)**
+> [card] [Find and fix issues](engine-issues.md)
 >
 > Review the issues Engine detects, open pull requests, and create dataset examples.
 
-> **[Connect Engine to your repository](engine-repositories.md)**
+> [card] [Connect Engine to your repository](engine-repositories.md)
 >
 > Let Engine read your source code and open pull requests with proposed fixes.
 
-> **[Engine notifications](engine-notifications.md)**
+> [card] [Engine notifications](engine-notifications.md)
 >
 > Send detected issues to Slack, Jira, or your incident-management and paging tools.
 

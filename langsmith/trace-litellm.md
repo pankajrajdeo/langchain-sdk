@@ -18,7 +18,7 @@ This guide shows you how to trace LiteLLM calls with LangSmith using:
 
 > [!NOTE]
 >
-> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
+> In an [agent-based workspace](agent-registry.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Installation
 
@@ -55,7 +55,7 @@ LiteLLM supports two ways to send traces to LangSmith, which operate at differen
 
 You can use `LANGSMITH_TRACING=true` together with `@traceable` for predictable traces in LangSmith. This approach ensures that the **Input** and **Output** columns reflect your function arguments and return values, allowing you to preserve the full message structure (including `role` and `content`). It also works reliably in simple synchronous scripts, without requiring an asyncio event loop or additional callback configuration.
 
-1. Set the following environment variables to enable LangSmith tracing for LiteLLM Python SDK usage:
+1. Sending traces to an agent requires `langsmith>=0.14.9`. Set the following environment variables to enable LangSmith tracing for LiteLLM Python SDK usage:
 
 ```bash
    export LANGSMITH_API_KEY="your_api_key"

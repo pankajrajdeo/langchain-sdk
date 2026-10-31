@@ -22,19 +22,19 @@ tags: [docs, langgraph-platform]
 
 LangSmith Deployment is framework-agnostic which means you can deploy agents built with:
 
-> **[LangGraph (and LangChain)](langsmith/deployment-quickstart.md)**
+> [card] [LangGraph (and LangChain)](langsmith/deployment-quickstart.md)
 >
 > Use the LangGraph CLI and app templates to deploy an application to LangSmith.
 
-> **[Google ADK](langsmith/deploy-google-adk.md)**
+> [card] [Google ADK](langsmith/deploy-google-adk.md)
 >
 > Deploy Google Agent Development Kit (ADK) agent as a LangGraph with the `deployments-wrap-sdk` package.
 
-> **[Other frameworks](langsmith/deploy-other-frameworks.md)**
+> [card] [Other frameworks](langsmith/deploy-other-frameworks.md)
 >
 > Deploy Claude Agent SDK, Strands, CrewAI, AutoGen, and other agent frameworks with the Functional API or `deployments-wrap-sdk`.
 
-> **[Looking to deploy Deep Agents?](langsmith/python/managed-deep-agents-overview.md)**
+> [card] [Looking to deploy Deep Agents?](langsmith/python/managed-deep-agents-overview.md)
 >
 > Use Managed Deep Agents: the managed runtime for deploying code-first Deep Agents.
 
@@ -42,19 +42,19 @@ LangSmith Deployment is framework-agnostic which means you can deploy agents bui
 
 Pick an environment based on where you want the [control plane](langsmith/control-plane.md) and [data plane](langsmith/data-plane.md) (Agent Servers and their databases) to run. All infrastructure types use the same [Agent Server](langsmith/agent-server.md) runtime.
 
-> **[Cloud](langsmith/deploy-to-cloud-overview.md)**
+> [card] [Cloud](langsmith/deploy-to-cloud-overview.md)
 >
 > Fully managed by LangChain on AWS and GCP. Create deployments from GitHub in the LangSmith UI or with [`langgraph deploy`](langsmith/cli.md#deploy). Requires a [Plus plan or above](https://www.langchain.com/pricing).
 
-> **[Self-hosted with control plane](langsmith/deploy-with-control-plane.md)**
+> [card] [Self-hosted with control plane](langsmith/deploy-with-control-plane.md)
 >
 > Run the LangSmith Deployment control plane and Agent Servers in your own Kubernetes cluster, alongside self-hosted LangSmith. Requires the [Enterprise plan](https://www.langchain.com/pricing) with LangSmith Deployment enabled.
 
-> **[Hybrid](langsmith/hybrid.md)**
+> [card] [Hybrid](langsmith/hybrid.md)
 >
 > LangChain-managed control plane with Agent Servers and their data plane in your infrastructure. Traces flow to LangSmith Cloud or self-hosted LangSmith.
 
-> **[Standalone server](langsmith/deploy-standalone-server.md)**
+> [card] [Standalone server](langsmith/deploy-standalone-server.md)
 >
 > Deploy Agent Server with Docker, Compose, or Kubernetes. Bring your own PostgreSQL, Redis, and LangSmith license; no control plane. Optional [LangSmith tracing](langsmith/observability.md) to Cloud or a self-hosted instance.
 
@@ -71,15 +71,15 @@ For where the LangSmith platform runs, see [Platform setup](langsmith/platform-s
 
 Once deployed, agents work with [Agent Server](langsmith/assistants.md)'s execution model: **assistants** for configuration, **threads** for state, and **runs** for workloads. For capabilities, tutorials, server customization, and operations, see [Agent Server](langsmith/develop-agents-overview.md).
 
-> **[Update prompts and contexts without redeploying](langsmith/prompt-context-hub.md)**
+> [card] [Update prompts and contexts without redeploying](langsmith/prompt-context-hub.md)
 >
 > Manage the prompts and versioned contexts your deployed agents pull at runtime, so you can change behavior without a full deploy.
 
-> **[Interact with your deployment using RemoteGraph](langsmith/use-remote-graph.md)**
+> [card] [Interact with your deployment using RemoteGraph](langsmith/use-remote-graph.md)
 >
 > Call your deployed graph from client code as if it were a local compiled graph.
 
-> **[Find and fix failures with Engine](langsmith/engine.md)**
+> [card] [Find and fix failures with Engine](langsmith/engine.md)
 >
 > Once agents are in production, use LangSmith Engine to detect recurring failures in their traces, diagnose root causes, and resolve them.
 
@@ -87,7 +87,7 @@ Once deployed, agents work with [Agent Server](langsmith/assistants.md)'s execut
 
 Ship a LangChain.js agent and chat UI together as a single web app. The Vite example uses LangSmith Deployment as the agent backend behind a separate UI. Other examples embed the agent inside the web framework's route handlers and ship to the host platform.
 
-> **[Full-stack web apps](langsmith/deploy-frameworks-and-platforms.md)**
+> [card] [Full-stack web apps](langsmith/deploy-frameworks-and-platforms.md)
 >
 > Ship a LangChain.js chat app: embed the agent in Next.js, SvelteKit, Nuxt, Cloudflare Workers, or Deno Deploy (no Agent Server required), or pair LangSmith Deployment with a Vite + React UI.
 >

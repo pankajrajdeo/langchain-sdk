@@ -1,184 +1,173 @@
 ---
-title: "How to Calibrate LLM-as-Judge with Human Corrections"
+title: "What is LLM-as-a-Judge &amp; How Can it Evaluate AI Agents?"
 description: "Key Takeaways"
 source: "https://www.langchain.com/resources/llm-as-a-judge"
 category: "resources"
-published: "2026-03-10"
+published: "2026-10-30"
 author: "LangChain"
 tags: [resources, llm-as-a-judge]
 ---
 
-# How to Calibrate LLM-as-Judge with Human Corrections
+# What is LLM-as-a-Judge &amp; How Can it Evaluate AI Agents?
 
 **Key Takeaways**
 
-- To build an evaluator you can trust for shipping decisions, you need systematic alignment to human corrections. Prompt iteration alone won't close the gap between a technically correct evaluator and a reliable one.
-- LangSmith's Align Evals feature replaces prompt-guessing with a measurable loop: collect human corrections, build few-shot examples, and track agreement over time.
-- Teams that collect human corrections, build few-shot examples, and track agreement metrics get automated scores they can use to make shipping decisions with confidence.
-
-Early on, developers wrote rubrics and configured LLM judges hoping the scores would hold, but they didn't. Running evaluators in production has taught us that the evaluator prompt directly determines trustworthiness. Getting the prompt right requires systematic alignment to human preferences through deliberate iteration, not intuition.
-
-You need a reliable operational workflow to configure LLM judges and align them to human feedback. Running these judges in production helps you build a data flywheel. Production traces feed your[AI observability](https://www.langchain.com/resources/ai-observability) layer, which surfaces usage pattern insights. Those insights inform datasets. Datasets power evaluations. Evaluations drive improvements. Improvements generate better new traces, and the cycle continues.
+- LLM-as-a-judge uses models to evaluate AI agent outputs against defined criteria, such as helpfulness, accuracy, and compliance.
+- LLM judges can score one response, compare two responses, or assess a conversation when given the evidence needed for the task.
+- Use an LLM judge when quality requires judgment, such as whether a response is helpful or grounded in its sources.
+- As a best practice, validate your judge against human-labeled examples before relying on its scores, then monitor alignment as your agent, rubric, and production traffic evolve.
 
 ## What is LLM-as-a-judge?
 
-LLM-as-a-judge uses a large language model (LLM) to evaluate AI agent outputs as a scalable substitute for human judgment. Traditional NLP metrics measure surface-level text similarity. An LLM judge assesses qualities that actually matter to your users, like helpfulness, accuracy, and tone.
+LLM-as-a-judge is an evaluation method that uses large language models to score an AI system’s output against defined criteria. Teams use these evaluations ([evals](https://www.langchain.com/resources/llm-evals)) to assess qualities that deterministic tests can't reliably measure, such as helpfulness, factual accuracy, instruction following, and tone.
 
-The core idea is straightforward. You give an LLM a prompt describing what "good" looks like alongside the output you want to evaluate. The model returns a score or judgment. LLMs handle evaluating text well when you give them clear criteria because it's a focused classification task, not an open-ended generation problem.
+You can use an LLM judge in offline evaluation to compare agent versions on saved test cases, and in online evaluation against live production traffic.
 
-These evaluators have become the practical default for teams building AI agents. Traditional metrics cannot measure whether an agent followed instructions, avoided hallucinations, or maintained the right tone across a conversation. An LLM judge assesses these qualities across thousands of traces to provide nuanced feedback that would otherwise require expensive human review.
+LLM-as-a-judge is useful because many AI quality problems are not simple pass/fail checks.
 
-## Why LLM-as-a-judge provides reliable evaluations
+## When should you use LLM-as-a-judge?
 
-Evaluating text is fundamentally easier than generating it. When your LLM generates a response, it navigates an enormous space of possible outputs while maintaining coherence, accuracy, and relevance. When that same model evaluates a response, it performs a simpler task. Instead of generating new content, the model compares the output against specific criteria and makes a judgment.
+Use an LLM judge when you want to measure qualitative dimensions of an output, such as if an agent’s response follows a policy or uses the right tone.
 
-An external LLM with a dedicated evaluation prompt performs a different task than the original generation process. Instead of generating creative content, the judge applies a rubric to assess quality. When you add chain-of-thought reasoning to the evaluation prompt, the judge can articulate its scoring rationale. This makes disagreements easier to diagnose. The separation between generation and evaluation means you can use the same model family for both tasks while still getting a useful signal.
+An LLM judge is a good fit when:
 
-[Academic benchmarks](https://www.langchain.com/resources/llm-evaluation-benchmarks) like MT-Bench report that strong LLM judges reach 80% agreement with human evaluators, which is roughly the level of agreement humans reach with each other. This makes LLM-as-a-judge viable for many evaluation tasks. Your specific agreement rate will depend heavily on how well the evaluator prompt captures what "good" means for your use case.
+- The criterion is subjective or context-dependent
+- A response needs to be checked against supplied evidence, such as retrieved documents or a policy, and a variety of wordings could be correct
+- The volume of outputs makes human review of every response impractical
+
+When using an LLM judge, you can pair it with a code evaluator which can verify fixed requirements (such as valid JSON or required fields). Human review is necessary for high-stakes decisions and when teams need labeled examples to validate an LLM judge.
+
+## How LLM-as-a-judge works
+
+An LLM judge needs three things: output to evaluate, evidence to evaluate against, and a rubric that defines how to score the response. It returns a judgment, such as pass/fail, a category assignment, or a numerical score. A short explanation from the LLM can help you see why it assigned that score.
+
+Suppose a return policy states, “Only unused items can be returned.” A customer asks a support agent, “Can I return this item?” The agent might reply, “Yes, you can return it,” without mentioning the condition.
+
+The judge needs the customer’s request, the agent’s response, and the relevant policy to assess whether the response meets the stated conditions. A rubric defines pass/fail rule, while the score records whether the response met that rule and the explanation shows why the judge marked the response as incomplete.
+
+In retrieval-augmented generation (RAG) applications, the judge compares the answer with retrieved documents to assess whether the sources support its claims.
+
+[Evaluator inputs](../langsmith/llm-as-judge.md) should match the question being asked. A judge that only sees the final response can assess response quality, but can't assess tool use without the relevant steps.
 
 ## Types of LLM judges
 
-LLM judges fall into three main approaches, each answering a different evaluation question. Your choice depends on what you need to measure.
+LLM judges typically use individual scoring or pairwise comparison, and either can be run with or without a reference.
 
-###### LLM Judge Approaches
-
-| Judge type | How it works | Best for |
+| Judging format | How it works | Useful for |
 | --- | --- | --- |
-| Pairwise comparison | The judge sees two outputs and selects which is better according to specified criteria | Model selection, A/B testing prompts, comparing versions during development |
-| Criteria-based scoring | The judge scores a single output against defined dimensions (helpfulness, accuracy, tone) | Continuous quality monitoring, [regression testing](../langsmith/evaluation-concepts.md), production evaluation |
-| [Reference-based evaluation](../langsmith/llm-as-judge.md) | The judge compares the output against source documents or ground truth | RAG faithfulness checking, detecting hallucinations, grounding verification. |
+| Individual scoring | The judge scores one response against a rubric | Production monitoring, quality checks, regression testing |
+| Pairwise comparison | The judge compares two responses and chooses the better one | A/B testing and comparing models, prompts, or agent versions |
+| Reference-based evaluation | The judge compares the output against source documents or ground truth | RAG evaluations, detecting hallucinations, correctness checks |
 
-- Pairwise comparisons produce more reliable results than absolute scoring because the judge makes a relative decision rather than calibrating to an abstract scale.
-- Criteria-based scoring works better for production monitoring where you need to evaluate every output individually.
-- Reference-based evaluation is essential for RAG systems where you must verify that responses stay faithful to retrieved documents.
+Individual scoring is useful when you need to decide whether a single output meets a defined standard. Pairwise comparison helps compare two versions of a model, prompt, or agent. Reference-based evaluation is best when correctness depends on a source of truth.
 
-Teams building chatbot experiences often combine scoring approaches to assess both individual response quality and conversation-level coherence.
+These approaches can be combined. For example, a pairwise evaluator might compare answers from two prompt versions against the same retrieved documents.
 
 ## How to configure an LLM-as-a-judge evaluator
 
-An LLM-as-a-judge evaluator is a configured instrument with four components you must deliberately engineer.
+An LLM-as-a-judge evaluator has four core components:
 
-- **Evaluation prompt**: The instructions that tell the judge what to assess and how. This is where you define what "good" means for your specific use case. Many teams start from evaluator templates and customize them for their domain.
-- **Model selection**: Which LLM powers the evaluation. Stronger models generally produce more reliable judgments, but cost and latency matter for production evaluation. You access the judge model through its API.
-- **Variable mapping**: Which parts of the input, output, and any reference materials get passed to the evaluator. For RAG systems, this includes retrieved documents. For AI agents, this includes tool calls and intermediate reasoning.
-- **Feedback configuration (the rubric)**: The scoring criteria your evaluator grades against. In[LangSmith](https://www.langchain.com/langsmith-platform), feedback configuration is added as structured output to the LLM-as-a-judge prompt, which means the rubric becomes part of the engineered output schema.
+- **Instructions.** What the judge should assess and how it should apply your rubric
+- **Model.** The LLM that performs the judgment. Teams usually compare models against human-labeled examples, then weigh accuracy, cost, and latency.
+- **Evidence.** The response, user request, reference answer, retrieved documents, tool calls, or trace data the judge needs to make the judgment.
+- **Score.** The output fields the evaluator returns.
 
-### Rubric design principles
+[LangSmith](https://www.langchain.com/langsmith-platform) has [evaluator templates](../langsmith/llm-as-judge.md#evaluator-templates) that provide a helpful starting point for common workflows. You can customize the instructions, connect the right inputs, define score fields, and record explanations alongside evaluator scores. This lets teams start with a template, then refine the judge for their application.
 
-The rubric requires careful design. When you write a rubric, you are defining structured output that the LLM must produce. This means you need precision in how you specify scoring criteria. Binary or low-precision scoring produces more reliable results than high-precision numerical scales. LLMs struggle to calibrate fine-grained distinctions consistently, so simpler scoring frameworks work better in practice.
+### How to design an LLM judge rubric
 
-A well-designed rubric still won't guarantee alignment with human judgment. Your initial prompt is a hypothesis about what quality means for your use case. When you run that evaluator in production, you will discover edge cases and domain-specific quality dimensions you did not anticipate. Closing the gap between a technically correct prompt and an evaluator you trust for shipping decisions requires systematic alignment to human feedback.
+The rubric defines what "good" means for your use case. Simple rubrics are usually easier for LLM judges to apply consistently. A binary pass/fail score or a small scale with clear definitions often works better than a broad numerical score.
+
+Use finer-grained scores only when the rubric clearly explains the difference between adjacent values. If the judge cannot distinguish, for example, a 70 from an 80 in a repeatable way, the scale is too precise for the task.
+
+An evaluator can use the same model family that powers the agent. Separate prompts give the two tasks different instructions, but the judge may still share blind spots with the model that generated the answer. Using a different model family can help to address this potential bias. Comparing judge scores with human labels helps show whether the rubric or judge model needs improvement.
 
 ## How to align evaluators with human feedback
 
-Most teams get stuck iterating on rubric wording without knowing if the judge is actually improving. LangSmith's[Align Evals feature](https://docs.smith.langchain.com/evaluation/tutorials/aligning_evaluator) replaces that loop with a systematic process: collect human corrections, calibrate with few-shot examples, and track agreement over time. Instead of iterating on prompts by intuition, you follow a structured process that builds confidence in your automated scores.
+Calibration typically requires comparing the judge’s scores with human judgments, then adjusting it to address disagreements.
 
 ### Collecting human corrections
 
-The workflow starts by collecting human annotations on evaluator scores. When your LLM judge scores a trace, human reviewers examine a sample of those judgments and correct any they disagree with. These corrections become the ground truth for measuring and improving evaluator alignment. Annotators with [domain expertise](https://www.langchain.com/resources/ai-observability) are particularly valuable for establishing baseline quality expectations.
+Collecting human corrections starts with comparing a sample of agent responses, supporting evidence, and the judge’s scores. When a reviewer disagrees with a score, they record the correct judgment and explain their reasoning. This can all be done in [annotation queues.](../langsmith/annotation-queues.md)
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a269b0b9e3530f0278454a4_69adf769480a7c585713953c_human-correction-workflow-v3%2520(2)%25201.svg)The human correction workflow: LLM judges produce initial scores, human reviewers correct disagreements, and those corrections feed back into evaluator alignment through few-shot examples.
+Returning to the customer support agent example, a judge might mark the agent’s reply to the return inquiry as helpful. A reviewer can correct that score and explain that the reply omitted the unused-item condition.
 
-Here is what this looks like in practice. Your LLM judge scores a customer support response as helpful, but a domain expert reviews the trace and marks it unhelpful because the response missed a critical policy detail. That correction becomes your training signal.
+![example of a human correction workflow to improve LLM-as-a-judge scoring.](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae52344b45da220863f2992_LLM%20as%20a%20Judge%20human%20review.png)*Human corrections provide examples for refining the judge’s scoring prompt. *
 
-### Building few-shot examples
+### Add few-shot examples
 
-From those corrections, you build few-shot examples that calibrate the judge. Adding examples of correct judgments to the evaluator prompt helps the LLM understand the boundaries of your criteria. [Align Evals](../langsmith/improve-judge-evaluator-feedback.md) make it straightforward to select representative examples and incorporate them into your evaluator configuration.
+Few-shot examples show a judge how to apply a rubric in practice. Each example should include the request, the response, evidence, the correct score, and an explanation of that score.
+
+In LangSmith, [Align Evaluator](../langsmith/improve-judge-evaluator-feedback.md) supports this process by comparing evaluator scores with human labels so you can see where the prompt needs refinement. The [few-shot evaluator guide](../langsmith/create-few-shot-evaluators.md) explains how human corrections can be added as examples, including when LangSmith can insert them automatically.
 
 ### Measuring agreement over time
 
-You can track how often your evaluator agrees with human experts, identify categories of disagreement, and iterate with data rather than guesswork. Instead of guessing at prompt improvements, this approach creates a measurable feedback loop. You collect human corrections on evaluator judgments, use those corrections to build calibrating few-shot examples, and track agreement metrics over time to verify improvement.
+After revising the judge, test it on human-labeled examples omitted from prompt tuning. Held-out human-labeled examples show whether the judge generalizes beyond the examples used to tune it.
+
+Track agreement rates, but do not rely on one overall number. Review false passes and false failures separately; a false pass may let a bad response through, and a false failure may block a good response or create noise. Looking at both helps you decide whether the judge is reliable enough for the decision it supports.
 
 ## Running LLM-as-a-judge in production
 
-[Online evaluations](https://docs.smith.langchain.com/observability/how_to_guides/online_evaluations) give you real-time feedback on your production traces. Online evaluations differ fundamentally from offline evaluation. Offline evaluation tests against curated datasets you control. Online evaluations reveal what your AI agent actually does when users interact with it in production.
+Once an LLM judge has been validated, it can support offline evaluation before release and online evaluation after release.
 
-### Offline Evals: testing against curated datasets
+### Offline evaluation: testing against curated datasets
 
-Before your AI agent reaches production, offline evals let you validate behavior against datasets you control. You define what a correct or acceptable output looks like, build a dataset of representative examples, and run your LLM judge against them. This is where you catch obvious rubric failures before they affect users.
+Offline evaluation runs your agent on a curated dataset of test cases. For the support agent example, each case could contain a customer question, the relevant policy, and any expected conditions the response should mention.
 
-Offline evals work best when you have clear ground truth like a reference answer, a retrieved document, or a set of human-labeled examples to compare against. They're also the right tool for regression testing: when you change your agent's prompt or model, you run offline evals against the same dataset to confirm nothing broke.
+This lets teams compare agent versions on the same examples. When you change a prompt, model, retrieval setup, or tool workflow, the judge scores the new outputs against the same rubric. That makes it easier to catch regressions before users do.
 
-### Online evaluations: monitoring production traffic
+For a valid comparison, keep the judge and rubric fixed when comparing agent versions. Otherwise, a scoring change can look like an agent improvement.
 
-Online evaluations run automatically on live traffic, turning every AI agent interaction into a measurable data point. Instead of manually reviewing traces, you can systematically sample production traffic and assess quality at scale.
+LangSmith supports offline evaluation workflows with [datasets and experiments](../langsmith/evaluation-concepts.md), which organize test cases, agent outputs, and evaluator scores.
 
-**Operational controls**
+### Online evaluation: monitoring production traffic
 
-Production evaluation needs careful controls to balance comprehensive quality monitoring with operational efficiency.
+Online evaluation applies evaluators to production traffic once an agent is live in production. These evals can target particular types of responses and sample a percentage of production traffic, allowing teams to monitor quality while managing evaluation costs.
 
-- **Sampling rates**: Control what percentage of production traces trigger evaluation. This makes continuous evaluation cost-effective, even at high volumes. You can evaluate every trace or sample strategically based on your quality requirements and budget.
-- **Retention and pricing implications**: Running an online evaluator on any run within a trace can automatically upgrade that trace to extended data retention. This affects both how long you store data and your trace pricing. Understanding this relationship helps you plan evaluation strategies that align with your data retention policies.
-- **Filtering and targeting**: Define rules about which traces get evaluated. For example, you can score all customer-facing AI agent interactions while sampling internal testing traces at a lower rate. This targeted approach ensures you allocate evaluation resources where they matter most.
+Online evals help surface quality issues that do not appear in curated datasets. When scores dip, traces help explain what changed. Adding representative production failures back into offline test datasets verifies whether later changes resolve them.
 
-**Real-time quality monitoring**
-
-Online evaluations act as a smoke detector for AI agent quality degradation. You can detect drift or emerging failure patterns in real time rather than discovering problems after user complaints. When online evaluations flag problematic traces,[LangSmith’s Insights Agent](https://blog.langchain.com/insights-agent-multiturn-evals-langsmith/) extracts usage pattern insights. You then route those insights into datasets for evals, driving improvements that generate better new traces.
-
-### LLM-as-a-judge in the evaluation stack
-
-Within your evals setup, LLM-as-a-judge handles the quality dimensions that deterministic checks can't reach. Deterministic rules handle format validation, length constraints, and required elements quickly and cheaply. But they cannot tell you whether your AI agent's response was actually helpful, whether it stayed on-topic across a multi-turn conversation, or whether it avoided a hallucination that technically passed a string-match check. That's where LLM-as-a-judge fits.
+[LangSmith supports this feedback loop](https://www.langchain.com/langsmith/evaluation) across production traces, online evaluators, datasets, and experiments.
 
 ## Evaluating multi-turn conversations and AI agent trajectories
 
-Production monitoring handles individual runs, but your AI agent workflows often span entire conversations. An agent that reaches the correct final answer can still have quality problems if it follows a problematic path to get there. It might call the wrong tools, execute unnecessary loops, or violate constraints during the process.
+[An agent](https://www.langchain.com/blog/what-is-an-agent) can answer individual turns well and still fail across a conversation. [Multi-turn evaluation](https://www.langchain.com/blog/insights-agent-multiturn-evals-langsmith) assesses whether it achieved that goal over the whole exchange.
 
-### Thread-level evaluation
+Agent evaluation also needs to inspect the steps the agent took. An agent might reach the right final answer after calling the wrong tool or violating a constraint, for instance. To judge that behavior, the evaluator needs the relevant tool calls, tool results, and conversation context.
 
-Multi-turn evaluation captures whether the AI agent achieved the user's goal across the full conversation. This includes scoring semantic intent, outcomes, and trajectory. Examining the step-by-step progression reveals patterns that final-answer scoring misses.
-
-LangSmith supports[multi-turn online evaluators](../langsmith/online-evaluations-multi-turn.md) that run once a thread completes. Your LLM-as-a-judge prompt can assess the complete interaction rather than individual turns in isolation.
-
-### System-level behavior patterns
-
-Thread-level evaluation reveals patterns that run-level scoring misses. An AI agent handling individual turns well can still struggle with context switching, memory management, or multi-step reasoning. Evaluating the full trajectory gives you a signal on these system-level behaviors, which is why multi-turn evaluation matters for AI agent quality.
+LangSmith [Trajectories](https://www.langchain.com/blog/langsmith-trajectories-tracing) show user messages, AI responses, and tool calls in sequence, including work from subagents. They let reviewers inspect the full interaction or open an individual trace for more detail. LangSmith’s multi-turn online evaluators assess the conversation as a whole, rather than each turn in isolation.
 
 ## Known biases and limitations with LLM-as-a-judge
 
 LLM judges have well-documented biases that can compromise score reliability. Aligning your evaluator to human judgment is more important than simply choosing the right evaluation protocol. Calibration is the mechanism that helps you overcome these inherent biases and build evaluators you can trust.
 
-###### LLM Judge Approaches
+Agreement depends on the judge model, rubric, data, evaluation format, and domain. Known biases can still skew scores.
 
-| Bias type | What happens | How to mitigate |
+| Bias type | What happens | Example of how to mitigate |
 | --- | --- | --- |
-| Position bias | In pairwise comparison, the judge favors outputs presented in certain positions (first or last) | Randomize presentation order; run evaluations in both orders and check consistency |
-| Verbosity bias | Longer responses get higher scores regardless of actual quality | Add explicit rubric instructions about conciseness; use length-controlled evaluation protocols |
-| Self-enhancement bias | Models score their own outputs higher than outputs from other models | Use a different model for evaluation than generation when possible |
+| Position bias | In pairwise comparison, the judge favors outputs based on their position | Randomize presentation order, evaluate in both orders and check consistency |
+| Verbosity bias | Longer answers may receive higher scores even when they are not better | Define what useful detail means and include examples that vary in length. |
+| Self-enhancement bias | A judge may favor outputs from the same model family that generated the response | Compare judge models against human labels and consider using a separate model family for the judge model |
 | Provenance / recency bias | Judges favor certain stylistic patterns or phrasing associated with recent training data | Calibrate against human judgments from your specific domain |
 
-A judge that correlates well with your human experts has been calibrated past these raw biases. An unvalidated judge might measure verbosity rather than whether the output is high-quality and genuinely helpful.
+Calibration helps identify these problems, but it doesn’t guarantee they disappear. Accuracy and repeatability should be checked separately since a judge can be repeatable and still wrong.
 
-Score inconsistency across evaluation modes also matters.[Research shows](https://arxiv.org/abs/2504.14716) that the same judge can produce contradictory results depending on whether you ask it to score outputs individually or compare them side by side. A judge might even violate transitivity, preferring output A over B, B over C, but then C over A. Systematic alignment to human feedback catches these inconsistencies before they affect your decisions.
+## How LLM judges fit with other evaluation methods
 
-## When to use LLM judges versus alternatives
+Choose the evaluation method that fits the quality you need to measure. You can also use a combination of these methods:
 
-LLM-as-a-judge works best as part of your hybrid evaluation stack. Different evaluation methods suit different quality dimensions in AI agents.
+- **LLM judges** assess helpfulness, tone, and other qualities that require interpreting the response and its supporting evidence
+- **Code evaluators** check fixed requirements
+- **Human reviewers** handle judgments that require domain expertise and provide labels for validating automated evals
+- **Traditional metrics** work well when you have a clear reference answer, such as exact match, precision and recall, or semantic similarity
 
-- **LLM-based judges**: Use these for nuanced quality assessment where "good" requires judgment. They measure helpfulness, accuracy, appropriate tone, and whether the AI agent actually solved the user's problem.
-- **Deterministic rules**: Use these for obvious issues like format validation, length constraints, or the presence of required elements. Rules are fast, cheap, and perfectly reliable for what they measure. Use them as your first pass.
-- **Human evaluation through Annotation Queues**: Use human evaluation when expert judgment is irreplaceable. High-stakes domains like medical, legal, or product decision contexts require this level of scrutiny. Human evaluation also plays a critical role in creating golden datasets and validating that your evaluators align with expert expectations.[LangSmith's Annotation Queues](../langsmith/annotation-queues.md) make it straightforward to route traces to the right reviewers and collect structured feedback at scale.
-- **Traditional metrics**: Apply these for structured tasks with a reference answer. If you have ground truth, semantic similarity or an exact match is sufficient. Don't use an LLM judge when a simpler metric gives you the same signal.
+Human review is essential when an evaluation depends on domain expertise. For example, product managers, clinicians, lawyers, and analysts bring context that automated methods cannot fully capture. [Annotation Queues](../langsmith/annotation-queues.md) in LangSmith let teams route traces to reviewers and collect structured feedback.
 
-Product managers, clinicians, lawyers, and analysts working with AI agents each bring domain expertise that automated evaluation cannot fully replace. The goal is scaling human judgment to handle production volumes while keeping experts involved where their input matters most.
+## Using eval results to improve AI agents
 
-## The data flywheel: from production traces to improved evaluators
+Production traces supply edge cases your test datasets may have missed. Adding those failures to datasets, testing fixes offline, and monitoring the next release connects evaluation to the [Agent Development Lifecycle](https://www.langchain.com/blog/the-agent-development-lifecycle).
 
-LangSmith connects a data flywheel where production data fuels testing and evaluation improvement. This cycle transforms every production interaction into an improvement signal for your AI agents. It connects observability, evaluation, and iteration into a single continuous workflow.
+## Get started building agent evaluators
 
-### How the flywheel works
+Start with one quality criterion and a small set of example responses. Define the rubric, compare the judge’s scores with human labels, and test the revised judge on held-out examples. Then use the judge in offline evaluation and online evaluation to test agent changes and monitor production traffic.
 
-Production traces reveal real-world AI agent behavior. The [Insights Agent](../langsmith/insights.md) analyzes these traces to surface usage pattern insights. Route problematic traces into datasets with a single click, turning them into regression tests. Human corrections on evaluator scores improve alignment. Better-aligned evaluators give you more trustworthy signals for the next round of improvements. Each cycle through this loop makes your evaluators more trustworthy and generates better new traces.
-
-### Shipping faster with production observation
-
-Teams can ship faster by relying on production observation as their primary learning method rather than conducting extensive pre-testing followed by anxious launches. This approach allows problems to surface through systematic evaluation in real time. Instead of waiting for user complaints to identify issues, teams detect and address quality concerns as they emerge through continuous monitoring. This shift transforms how teams think about quality assurance: rather than trying to anticipate every possible failure mode before launch, they build the instrumentation to catch and fix problems quickly in production. The result is faster iteration cycles and more confident shipping decisions.
-
-## Build evaluators you can trust
-
-LLM-as-a-judge becomes reliable when you treat it as production code requiring ongoing calibration and validation.
-
-LangSmith brings this operational model together. LangSmith is framework-agnostic and works with the LangChain framework, LangGraph, Deep Agents, or any other stack you're building with. The Align Evals feature gives you a structured process for tuning judges to human preferences. Online evaluations provide real-time quality monitoring on production traces. Annotation Queues keep human expertise in the loop where it matters most.
-
-Start with[prebuilt evaluators](https://docs.smith.langchain.com/evaluation/how_to_guides/prebuilt_evaluators), collect human corrections, and measure agreement. Build the data flywheel from production traces to continuous improvements.
-
-[Get started with LangSmith today](https://smith.langchain.com/) or[speak with our team](https://www.langchain.com/contact-sales) to build the evaluation workflow your AI agents deserve.
+We built [LangSmith](https://www.langchain.com/langsmith-platform) to support this workflow. [Get started with LangSmith today](https://smith.langchain.com/) or [speak with our team](https://www.langchain.com/contact-sales) about your AI agent evaluation setup.

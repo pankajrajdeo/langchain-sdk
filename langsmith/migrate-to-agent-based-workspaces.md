@@ -10,7 +10,7 @@ tags: [docs, langsmith, migrate-to-agent-based-workspaces]
 
 > What changes when a workspace moves from organizing traces by tracing project to organizing them by agent and environment.
 
-LangSmith organizes a workspace in one of two ways. A *project-based workspace* groups traces by [tracing project](observability-concepts.md#tracing-projects). An *agent-based workspace* groups them by [agent](agents.md), and divides each agent's traces across [environments](agent-environments.md) drawn from a fixed set of four.
+LangSmith organizes a workspace in one of two ways. A *project-based workspace* groups traces by [tracing project](observability-concepts.md#tracing-projects). An *agent-based workspace* groups them by [agent](agent-registry.md#agent), and divides each agent's traces across [environments](agent-environments.md) drawn from a fixed set of four.
 
 Agent-based organization is available on [LangSmith Cloud](cloud.md). It is not available on [self-hosted](self-hosted.md) LangSmith. This page covers what is different in an agent-based workspace, and what changes if yours becomes one.
 
@@ -46,7 +46,7 @@ A new organization on LangSmith Cloud gets agent-based workspaces. In an existin
 
 ## See also
 
-* [Agents](agents.md)
+* [Agent Registry](agent-registry.md)
 * [Agent environments](agent-environments.md)
 * [Workload isolation](workload-isolation.md)
 * [Administration overview](administration-overview.md#agents-and-applications)

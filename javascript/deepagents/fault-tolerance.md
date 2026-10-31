@@ -26,82 +26,82 @@ Different errors need different handling strategies:
 
 The sections below cover each strategy with code examples.
 
-**Transient errors**
-
-Add retry middleware to automatically retry network issues and rate limits. Model calls and tool calls each have their own retry middleware with exponential backoff:
-
+> [tab] Transient errors
+>
+> Add retry middleware to automatically retry network issues and rate limits. Model calls and tool calls each have their own retry middleware with exponential backoff:
+>
 ```typescript
-import { createAgent, modelRetryMiddleware, toolRetryMiddleware } from "langchain";
-
-const agent = createAgent({
-  model: "google:gemini-3.6-flash",
-  tools: [searchTool, fetchUrlTool],
-  middleware: [
-    modelRetryMiddleware({ maxRetries: 3, backoffFactor: 2.0, initialDelayMs: 1000 }),
-    toolRetryMiddleware({
-      maxRetries: 2,
-      tools: ["search", "fetch_url"],
-      retryOn: [TimeoutError, TypeError],
-    }),
-  ],
-});
+> import { createAgent, modelRetryMiddleware, toolRetryMiddleware } from "langchain";
+>
+> const agent = createAgent({
+>   model: "google:gemini-3.6-flash",
+>   tools: [searchTool, fetchUrlTool],
+>   middleware: [
+>     modelRetryMiddleware({ maxRetries: 3, backoffFactor: 2.0, initialDelayMs: 1000 }),
+>     toolRetryMiddleware({
+>       maxRetries: 2,
+>       tools: ["search", "fetch_url"],
+>       retryOn: [TimeoutError, TypeError],
+>     }),
+>   ],
+> });
 ```
 
-**User-fixable**
-
-Pause and collect information from the user when needed (like account IDs, order numbers, or clarifications). Use `interrupt_on` to pause the agent before specific tool calls:
-
+> [tab] User-fixable
+>
+> Pause and collect information from the user when needed (like account IDs, order numbers, or clarifications). Use `interrupt_on` to pause the agent before specific tool calls:
+>
 ```typescript
-import { createDeepAgent } from "deepagents";
+> import { createDeepAgent } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   tools: [sendEmailTool, deleteRecordTool],
+>   interruptOn: {
+>     send_email: true,
+>     delete_record: true,
+>   },
+> });
+```
+>
+> For the full human-in-the-loop guide, see [Human-in-the-loop](human-in-the-loop.md).
 
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  tools: [sendEmailTool, deleteRecordTool],
-  interruptOn: {
-    send_email: true,
-    delete_record: true,
-  },
-});
+> [tab] Provider outage
+>
+> If your primary model provider goes down entirely, use [ModelFallbackMiddleware](https://reference.langchain.com/javascript/langchain/index/modelFallbackMiddleware) to switch to an alternative model:
+>
+```typescript
+> import { createAgent, modelFallbackMiddleware } from "langchain";
+>
+> const agent = createAgent({
+>   model: "google:gemini-3.6-flash",
+>   tools: [searchTool],
+>   middleware: [
+>     modelFallbackMiddleware("gpt-5.5"),
+>   ],
+> });
 ```
 
-For the full human-in-the-loop guide, see [Human-in-the-loop](human-in-the-loop.md).
-
-**Provider outage**
-
-If your primary model provider goes down entirely, use [ModelFallbackMiddleware](https://reference.langchain.com/javascript/langchain/index/modelFallbackMiddleware) to switch to an alternative model:
-
+> [tab] Excessive calls
+>
+> Without limits, a confused agent can burn through your LLM API budget in minutes by looping on the same tool call or making hundreds of model calls. Set caps on both model calls and tool executions per run:
+>
 ```typescript
-import { createAgent, modelFallbackMiddleware } from "langchain";
-
-const agent = createAgent({
-  model: "google:gemini-3.6-flash",
-  tools: [searchTool],
-  middleware: [
-    modelFallbackMiddleware("gpt-5.5"),
-  ],
-});
+> import { createAgent, modelCallLimitMiddleware, toolCallLimitMiddleware } from "langchain";
+>
+> const agent = createAgent({
+>   model: "google:gemini-3.6-flash",
+>   tools: [searchTool],
+>   middleware: [
+>     modelCallLimitMiddleware({ runLimit: 50 }),
+>     toolCallLimitMiddleware({ runLimit: 200 }),
+>   ],
+> });
 ```
 
-**Excessive calls**
-
-Without limits, a confused agent can burn through your LLM API budget in minutes by looping on the same tool call or making hundreds of model calls. Set caps on both model calls and tool executions per run:
-
-```typescript
-import { createAgent, modelCallLimitMiddleware, toolCallLimitMiddleware } from "langchain";
-
-const agent = createAgent({
-  model: "google:gemini-3.6-flash",
-  tools: [searchTool],
-  middleware: [
-    modelCallLimitMiddleware({ runLimit: 50 }),
-    toolCallLimitMiddleware({ runLimit: 200 }),
-  ],
-});
-```
-
-**Unexpected**
-
-Let them bubble up for debugging. Do not catch what you cannot handle. This pattern applies to custom middleware in the JavaScript SDK as well.
+> [tab] Unexpected
+>
+> Let them bubble up for debugging. Do not catch what you cannot handle. This pattern applies to custom middleware in the JavaScript SDK as well.
 
 ## Rate limiting
 

@@ -127,7 +127,7 @@ agent = create_deep_agent(
 | [`context_schema=`](context-engineering.md#runtime-context) | Per-run runtime context schema (user IDs, API keys, feature flags) |
 | [profiles](#profiles) | Per-model defaults as a reusable bundle |
 
-> **Full function signature**
+> [accordion] Full function signature
 >
 ```python
 > create_deep_agent(
@@ -169,415 +169,415 @@ Pass a `model` string in `provider:model` format, or an initialized model instan
 >
 > Use the `provider:model` format (for example `openai:gpt-5.5`) to quickly switch between models.
 
-**OpenAI**
-
-👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
-
+> [tab] OpenAI
+>
+> 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
+>
 **pip**
 
 ```bash
-pip install -U "langchain[openai]"
+> pip install -U "langchain[openai]"
 ```
-
+>
 **uv**
 
 ```bash
-uv add "langchain[openai]"
+> uv add "langchain[openai]"
 ```
-
+>
 **default parameters**
 
 ```python
-import os
-from deepagents import create_deep_agent
-
-os.environ["OPENAI_API_KEY"] = "sk-..."
-
-agent = create_deep_agent(model="openai:gpt-5.5")
-# this calls init_chat_model for the specified model with default parameters
-# to use specific model parameters, use init_chat_model directly
+> import os
+> from deepagents import create_deep_agent
+>
+> os.environ["OPENAI_API_KEY"] = "sk-..."
+>
+> agent = create_deep_agent(model="openai:gpt-5.5")
+> # this calls init_chat_model for the specified model with default parameters
+> # to use specific model parameters, use init_chat_model directly
 ```
-
+>
 **init_chat_model**
 
 ```python
-import os
-from langchain.chat_models import init_chat_model
-from deepagents import create_deep_agent
-
-os.environ["OPENAI_API_KEY"] = "sk-..."
-
-model = init_chat_model(model="openai:gpt-5.5")
-agent = create_deep_agent(model=model)
+> import os
+> from langchain.chat_models import init_chat_model
+> from deepagents import create_deep_agent
+>
+> os.environ["OPENAI_API_KEY"] = "sk-..."
+>
+> model = init_chat_model(model="openai:gpt-5.5")
+> agent = create_deep_agent(model=model)
 ```
-
+>
 **model class**
 
 ```python
-import os
-from langchain_openai import ChatOpenAI
-from deepagents import create_deep_agent
-
-os.environ["OPENAI_API_KEY"] = "sk-..."
-
-model = ChatOpenAI(model="gpt-5.5")
-agent = create_deep_agent(model=model)
+> import os
+> from langchain_openai import ChatOpenAI
+> from deepagents import create_deep_agent
+>
+> os.environ["OPENAI_API_KEY"] = "sk-..."
+>
+> model = ChatOpenAI(model="gpt-5.5")
+> agent = create_deep_agent(model=model)
 ```
 
-**Anthropic**
-
-👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
-
+> [tab] Anthropic
+>
+> 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
+>
 **pip**
 
 ```bash
-pip install -U "langchain[anthropic]"
+> pip install -U "langchain[anthropic]"
 ```
-
+>
 **uv**
 
 ```bash
-uv add "langchain[anthropic]"
+> uv add "langchain[anthropic]"
 ```
-
+>
 **default parameters**
 
 ```python
-import os
-from deepagents import create_deep_agent
-
-os.environ["ANTHROPIC_API_KEY"] = "sk-..."
-
-agent = create_deep_agent(model="anthropic:claude-sonnet-4-6")
-# this calls init_chat_model for the specified model with default parameters
-# to use specific model parameters, use init_chat_model directly
+> import os
+> from deepagents import create_deep_agent
+>
+> os.environ["ANTHROPIC_API_KEY"] = "sk-..."
+>
+> agent = create_deep_agent(model="anthropic:claude-sonnet-4-6")
+> # this calls init_chat_model for the specified model with default parameters
+> # to use specific model parameters, use init_chat_model directly
 ```
-
+>
 **init_chat_model**
 
 ```python
-import os
-from langchain.chat_models import init_chat_model
-from deepagents import create_deep_agent
-
-os.environ["ANTHROPIC_API_KEY"] = "sk-..."
-
-model = init_chat_model(model="claude-sonnet-4-6")
-agent = create_deep_agent(model=model)
+> import os
+> from langchain.chat_models import init_chat_model
+> from deepagents import create_deep_agent
+>
+> os.environ["ANTHROPIC_API_KEY"] = "sk-..."
+>
+> model = init_chat_model(model="claude-sonnet-4-6")
+> agent = create_deep_agent(model=model)
 ```
-
+>
 **model class**
 
 ```python
-import os
-from langchain_anthropic import ChatAnthropic
-from deepagents import create_deep_agent
-
-os.environ["ANTHROPIC_API_KEY"] = "sk-..."
-
-model = ChatAnthropic(model="claude-sonnet-4-6")
-agent = create_deep_agent(model=model)
+> import os
+> from langchain_anthropic import ChatAnthropic
+> from deepagents import create_deep_agent
+>
+> os.environ["ANTHROPIC_API_KEY"] = "sk-..."
+>
+> model = ChatAnthropic(model="claude-sonnet-4-6")
+> agent = create_deep_agent(model=model)
 ```
 
-**Azure**
-
-👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
-
+> [tab] Azure
+>
+> 👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
+>
 **pip**
 
 ```bash
-pip install -U "langchain[openai]"
+> pip install -U "langchain[openai]"
 ```
-
+>
 **uv**
 
 ```bash
-uv add "langchain[openai]"
+> uv add "langchain[openai]"
 ```
-
+>
 **default parameters**
 
 ```python
-import os
-from deepagents import create_deep_agent
-
-os.environ["AZURE_OPENAI_API_KEY"] = "..."
-os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
-os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
-
-agent = create_deep_agent(model="azure_openai:gpt-5.5")
-# this calls init_chat_model for the specified model with default parameters
-# to use specific model parameters, use init_chat_model directly
+> import os
+> from deepagents import create_deep_agent
+>
+> os.environ["AZURE_OPENAI_API_KEY"] = "..."
+> os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
+> os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
+>
+> agent = create_deep_agent(model="azure_openai:gpt-5.5")
+> # this calls init_chat_model for the specified model with default parameters
+> # to use specific model parameters, use init_chat_model directly
 ```
-
+>
 **init_chat_model**
 
 ```python
-import os
-from langchain.chat_models import init_chat_model
-from deepagents import create_deep_agent
-
-os.environ["AZURE_OPENAI_API_KEY"] = "..."
-os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
-os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
-
-model = init_chat_model(
-    model="azure_openai:gpt-5.5",
-    azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
-)
-agent = create_deep_agent(model=model)
+> import os
+> from langchain.chat_models import init_chat_model
+> from deepagents import create_deep_agent
+>
+> os.environ["AZURE_OPENAI_API_KEY"] = "..."
+> os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
+> os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
+>
+> model = init_chat_model(
+>     model="azure_openai:gpt-5.5",
+>     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
+> )
+> agent = create_deep_agent(model=model)
 ```
-
+>
 **model class**
 
 ```python
-import os
-from langchain_openai import AzureChatOpenAI
-from deepagents import create_deep_agent
-
-os.environ["AZURE_OPENAI_API_KEY"] = "..."
-os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
-os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
-
-model = AzureChatOpenAI(
-    model="gpt-5.5",
-    azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
-)
-agent = create_deep_agent(model=model)
+> import os
+> from langchain_openai import AzureChatOpenAI
+> from deepagents import create_deep_agent
+>
+> os.environ["AZURE_OPENAI_API_KEY"] = "..."
+> os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
+> os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
+>
+> model = AzureChatOpenAI(
+>     model="gpt-5.5",
+>     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
+> )
+> agent = create_deep_agent(model=model)
 ```
 
-**Google Gemini**
-
-👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
-
+> [tab] Google Gemini
+>
+> 👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
+>
 **pip**
 
 ```bash
-pip install -U "langchain[google-genai]"
+> pip install -U "langchain[google-genai]"
 ```
-
+>
 **uv**
 
 ```bash
-uv add "langchain[google-genai]"
+> uv add "langchain[google-genai]"
 ```
-
+>
 **default parameters**
 
 ```python
-import os
-from deepagents import create_deep_agent
-
-os.environ["GOOGLE_API_KEY"] = "..."
-
-agent = create_deep_agent(model="google_genai:gemini-3.6-flash")
-# this calls init_chat_model for the specified model with default parameters
-# to use specific model parameters, use init_chat_model directly
+> import os
+> from deepagents import create_deep_agent
+>
+> os.environ["GOOGLE_API_KEY"] = "..."
+>
+> agent = create_deep_agent(model="google_genai:gemini-3.6-flash")
+> # this calls init_chat_model for the specified model with default parameters
+> # to use specific model parameters, use init_chat_model directly
 ```
-
+>
 **init_chat_model**
 
 ```python
-import os
-from langchain.chat_models import init_chat_model
-from deepagents import create_deep_agent
-
-os.environ["GOOGLE_API_KEY"] = "..."
-
-model = init_chat_model(model="google_genai:gemini-3.6-flash")
-agent = create_deep_agent(model=model)
+> import os
+> from langchain.chat_models import init_chat_model
+> from deepagents import create_deep_agent
+>
+> os.environ["GOOGLE_API_KEY"] = "..."
+>
+> model = init_chat_model(model="google_genai:gemini-3.6-flash")
+> agent = create_deep_agent(model=model)
 ```
-
+>
 **model class**
 
 ```python
-import os
-from langchain_google_genai import ChatGoogleGenerativeAI
-from deepagents import create_deep_agent
-
-os.environ["GOOGLE_API_KEY"] = "..."
-
-model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
-agent = create_deep_agent(model=model)
+> import os
+> from langchain_google_genai import ChatGoogleGenerativeAI
+> from deepagents import create_deep_agent
+>
+> os.environ["GOOGLE_API_KEY"] = "..."
+>
+> model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+> agent = create_deep_agent(model=model)
 ```
 
-**AWS Bedrock**
-
-👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
-
+> [tab] AWS Bedrock
+>
+> 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
+>
 **pip**
 
 ```bash
-pip install -U "langchain[aws]"
+> pip install -U "langchain[aws]"
 ```
-
+>
 **uv**
 
 ```bash
-uv add "langchain[aws]"
+> uv add "langchain[aws]"
 ```
-
+>
 **default parameters**
 
 ```python
-from deepagents import create_deep_agent
-
-# Follow the steps here to configure your credentials:
-# https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-agent = create_deep_agent(
-    model="anthropic.claude-sonnet-4-6",
-    model_provider="bedrock_converse",
-)
-# this calls init_chat_model for the specified model with default parameters
-# to use specific model parameters, use init_chat_model directly
+> from deepagents import create_deep_agent
+>
+> # Follow the steps here to configure your credentials:
+> # https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> agent = create_deep_agent(
+>     model="anthropic.claude-sonnet-4-6",
+>     model_provider="bedrock_converse",
+> )
+> # this calls init_chat_model for the specified model with default parameters
+> # to use specific model parameters, use init_chat_model directly
 ```
-
+>
 **init_chat_model**
 
 ```python
-from langchain.chat_models import init_chat_model
-from deepagents import create_deep_agent
-
-# Follow the steps here to configure your credentials:
-# https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-model = init_chat_model(
-    model="anthropic.claude-sonnet-4-6",
-    model_provider="bedrock_converse",
-)
-agent = create_deep_agent(model=model)
+> from langchain.chat_models import init_chat_model
+> from deepagents import create_deep_agent
+>
+> # Follow the steps here to configure your credentials:
+> # https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> model = init_chat_model(
+>     model="anthropic.claude-sonnet-4-6",
+>     model_provider="bedrock_converse",
+> )
+> agent = create_deep_agent(model=model)
 ```
-
+>
 **model class**
 
 ```python
-from langchain_aws import ChatBedrock
-from deepagents import create_deep_agent
-
-# Follow the steps here to configure your credentials:
-# https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-model = ChatBedrock(model="anthropic.claude-sonnet-4-6")
-agent = create_deep_agent(model=model)
+> from langchain_aws import ChatBedrock
+> from deepagents import create_deep_agent
+>
+> # Follow the steps here to configure your credentials:
+> # https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> model = ChatBedrock(model="anthropic.claude-sonnet-4-6")
+> agent = create_deep_agent(model=model)
 ```
 
-**HuggingFace**
-
-👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
-
+> [tab] HuggingFace
+>
+> 👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
+>
 **pip**
 
 ```bash
-pip install -U "langchain[huggingface]"
+> pip install -U "langchain[huggingface]"
 ```
-
+>
 **uv**
 
 ```bash
-uv add "langchain[huggingface]"
+> uv add "langchain[huggingface]"
 ```
-
+>
 **default parameters**
 
 ```python
-import os
-from deepagents import create_deep_agent
-
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
-
-agent = create_deep_agent(
-    model="microsoft/Phi-3-mini-4k-instruct",
-    model_provider="huggingface",
-    temperature=0.7,
-    max_tokens=1024,
-)
-# this calls init_chat_model for the specified model with default parameters
-# to use specific model parameters, use init_chat_model directly
+> import os
+> from deepagents import create_deep_agent
+>
+> os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
+>
+> agent = create_deep_agent(
+>     model="microsoft/Phi-3-mini-4k-instruct",
+>     model_provider="huggingface",
+>     temperature=0.7,
+>     max_tokens=1024,
+> )
+> # this calls init_chat_model for the specified model with default parameters
+> # to use specific model parameters, use init_chat_model directly
 ```
-
+>
 **init_chat_model**
 
 ```python
-import os
-from langchain.chat_models import init_chat_model
-from deepagents import create_deep_agent
-
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
-
-model = init_chat_model(
-    model="microsoft/Phi-3-mini-4k-instruct",
-    model_provider="huggingface",
-    temperature=0.7,
-    max_tokens=1024,
-)
-agent = create_deep_agent(model=model)
+> import os
+> from langchain.chat_models import init_chat_model
+> from deepagents import create_deep_agent
+>
+> os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
+>
+> model = init_chat_model(
+>     model="microsoft/Phi-3-mini-4k-instruct",
+>     model_provider="huggingface",
+>     temperature=0.7,
+>     max_tokens=1024,
+> )
+> agent = create_deep_agent(model=model)
 ```
-
+>
 **model class**
 
 ```python
-import os
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-from deepagents import create_deep_agent
-
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
-
-llm = HuggingFaceEndpoint(
-    repo_id="microsoft/Phi-3-mini-4k-instruct",
-    temperature=0.7,
-    max_length=1024,
-)
-model = ChatHuggingFace(llm=llm)
-agent = create_deep_agent(model=model)
+> import os
+> from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+> from deepagents import create_deep_agent
+>
+> os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
+>
+> llm = HuggingFaceEndpoint(
+>     repo_id="microsoft/Phi-3-mini-4k-instruct",
+>     temperature=0.7,
+>     max_length=1024,
+> )
+> model = ChatHuggingFace(llm=llm)
+> agent = create_deep_agent(model=model)
 ```
 
-**Other**
-
-Pass any [supported model string](models.md#supported-models), or an initialized model instance. For example:
-
+> [tab] Other
+>
+> Pass any [supported model string](models.md#supported-models), or an initialized model instance. For example:
+>
 **pip**
 
 ```bash
-pip install -U "langchain[deepseek]"
+> pip install -U "langchain[deepseek]"
 ```
-
+>
 **uv**
 
 ```bash
-uv add "langchain[deepseek]"
+> uv add "langchain[deepseek]"
 ```
-
+>
 **default parameters**
 
 ```python
-from deepagents import create_deep_agent
-
-agent = create_deep_agent(model="provider:model-name")
+> from deepagents import create_deep_agent
+>
+> agent = create_deep_agent(model="provider:model-name")
 ```
-
+>
 **init_chat_model**
 
 ```python
-from deepagents import create_deep_agent
-from langchain.chat_models import init_chat_model
-
-model = init_chat_model("provider:model-name")
-agent = create_deep_agent(model=model)
+> from deepagents import create_deep_agent
+> from langchain.chat_models import init_chat_model
+>
+> model = init_chat_model("provider:model-name")
+> agent = create_deep_agent(model=model)
 ```
-
+>
 **model class**
 
 ```python
-from langchain_<provider> import Chat<Provider>
-# from langchain_deepseek import ChatDeepSeek
-
-from deepagents import create_deep_agent
-
-model = Chat<Provider>(model="model-name")
-# model = ChatDeepSeek(model="deepseek-v4-pro")
-
-agent = create_deep_agent(model=model)
+> from langchain_<provider> import Chat<Provider>
+> # from langchain_deepseek import ChatDeepSeek
+>
+> from deepagents import create_deep_agent
+>
+> model = Chat<Provider>(model="model-name")
+> # model = ChatDeepSeek(model="deepseek-v4-pro")
+>
+> agent = create_deep_agent(model=model)
 ```
 
 > [!TIP]
@@ -1114,11 +1114,11 @@ agent = create_deep_agent(
 >
 > Besides a string, the main agent also accepts a [`SystemMessage`](https://reference.langchain.com/python/langchain-core/messages/system/SystemMessage) with structured [content blocks](../langchain/messages.md#standard-content-blocks); Deep Agents preserve those blocks ([subagent](subagents.md) dictionary specs remain strings).
 
-> **Subagent prompts**
+> [accordion] Subagent prompts
 >
 > Declarative [subagents](subagents.md) resolve profile overlays against their own model, then apply the resolved profile's `base_system_prompt` / `system_prompt_suffix` to the subagent's authored `system_prompt`. A profile that ships only a `system_prompt_suffix` (the common case for built-in Anthropic / OpenAI profiles) appends to the authored prompt. A profile that sets `base_system_prompt` replaces it outright.
 
-> **General-purpose subagent prompt**
+> [accordion] General-purpose subagent prompt
 >
 > The auto-added [general-purpose subagent](subagents.md#the-general-purpose-subagent) resolves its base prompt as **`general_purpose_subagent.system_prompt` (if set) -> `HarnessProfile.base_system_prompt` (if set) -> SDK general-purpose default**, with the profile suffix layered on top. When both override fields are set, the general-purpose-specific one wins so a caller tuning both fields never sees their GP override silently dropped:
 >
@@ -1563,7 +1563,7 @@ Declarative subagents defined via `subagents=` do not inherit the main agent's m
 
 #### Examples
 
-> **Adjust when summarization triggers**
+> [accordion] Adjust when summarization triggers
 >
 > Override [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware) with custom `trigger` and `keep` thresholds to compact conversation history earlier or later than the default, and control how many recent messages survive each compaction.
 >
@@ -1590,7 +1590,7 @@ Declarative subagents defined via `subagents=` do not inherit the main agent's m
 >
 > `trigger` also accepts `("fraction", ...)` for a percentage of the model's context window, and a list of thresholds combines them with OR semantics. See the [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware) reference for the full set of options.
 
-> **Summarize with a cheaper model**
+> [accordion] Summarize with a cheaper model
 >
 > > [!NOTE]
 > >
@@ -1620,7 +1620,7 @@ Declarative subagents defined via `subagents=` do not inherit the main agent's m
 > )
 ```
 
-> **Update the prompt cache TTL**
+> [accordion] Update the prompt cache TTL
 >
 > Override [`AnthropicPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/prompt_caching/AnthropicPromptCachingMiddleware) to extend the cache lifetime beyond the default `5m` TTL, useful for agents with long gaps between turns. See [Prompt caching](overview.md#prompt-caching) for how caching is applied by default.
 >
@@ -1636,7 +1636,7 @@ Declarative subagents defined via `subagents=` do not inherit the main agent's m
 > )
 ```
 
-> **Restrict the enabled filesystem tools**
+> [accordion] Restrict the enabled filesystem tools
 >
 > > [!NOTE]
 > >
@@ -1663,7 +1663,7 @@ Declarative subagents defined via `subagents=` do not inherit the main agent's m
 >
 > See [Restricting filesystem tools](overview.md#virtual-filesystem-access) for more details.
 
-> **Customize how the skill catalog appears in the system prompt**
+> [accordion] Customize how the skill catalog appears in the system prompt
 >
 > Override [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) with a custom `system_prompt=` template to control how
 > the auto-generated skill catalog is framed — for example, to add surrounding context,
@@ -1712,7 +1712,7 @@ Declarative subagents defined via `subagents=` do not inherit the main agent's m
 > already owns `backend` and `sources`. Any missing slot (`{skills_locations}`,
 > `{skills_list}`, `{skills_load_warnings}`) raises `ValueError` at construction time.
 
-> **Suppress the auto-generated skill catalog**
+> [accordion] Suppress the auto-generated skill catalog
 >
 > Override [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) with `system_prompt=None` to load skills without
 > appending a skills section to the system prompt at all. Skills remain in
@@ -1890,665 +1890,665 @@ Tools for a deep agent can make use of virtual file systems to store, access, an
 
 If you are using [skills](#skills) or [memory](#memory), you must add the expected skill or memory files to the backend before creating the agent.
 
-**StateBackend**
-
-A thread-scoped filesystem backend stored in `langgraph` state.
-
-Files persist across turns within a thread (via your checkpointer) and are not shared across threads.
-
-**Google**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-
-# By default we provide a StateBackend
-agent = create_deep_agent(model="google_genai:gemini-3.6-flash")
-
-# Under the hood, it looks like
-agent2 = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=StateBackend(),
-)
-```
-
-**OpenAI**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-
-# By default we provide a StateBackend
-agent = create_deep_agent(model="openai:gpt-5.5")
-
-# Under the hood, it looks like
-agent2 = create_deep_agent(
-    model="openai:gpt-5.5",
-    backend=StateBackend(),
-)
-```
-
-**Anthropic**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-
-# By default we provide a StateBackend
-agent = create_deep_agent(model="anthropic:claude-sonnet-5")
-
-# Under the hood, it looks like
-agent2 = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    backend=StateBackend(),
-)
-```
-
-**OpenRouter**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-
-# By default we provide a StateBackend
-agent = create_deep_agent(model="openrouter:z-ai/glm-5.2")
-
-# Under the hood, it looks like
-agent2 = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    backend=StateBackend(),
-)
-```
-
-**Fireworks**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-
-# By default we provide a StateBackend
-agent = create_deep_agent(model="fireworks:accounts/fireworks/models/glm-5p2")
-
-# Under the hood, it looks like
-agent2 = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    backend=StateBackend(),
-)
-```
-
-**Baseten**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-
-# By default we provide a StateBackend
-agent = create_deep_agent(model="baseten:zai-org/GLM-5.2")
-
-# Under the hood, it looks like
-agent2 = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    backend=StateBackend(),
-)
-```
-
-**Ollama**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-
-# By default we provide a StateBackend
-agent = create_deep_agent(model="ollama:north-mini-code-1.0")
-
-# Under the hood, it looks like
-agent2 = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    backend=StateBackend(),
-)
-```
-
-**FilesystemBackend**
-
-The local machine's filesystem.
-
-> [!WARNING]
+> [tab] StateBackend
 >
-> This backend grants agents direct filesystem read/write access.
-> Use with caution and only in appropriate environments.
-> For more information, see [`FilesystemBackend`](backends.md#filesystembackend-local-disk).
-
-**Google**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=FilesystemBackend(root_dir=".", virtual_mode=True),
-)
-```
-
-**OpenAI**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-
-agent = create_deep_agent(
-    model="openai:gpt-5.5",
-    backend=FilesystemBackend(root_dir=".", virtual_mode=True),
-)
-```
-
-**Anthropic**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    backend=FilesystemBackend(root_dir=".", virtual_mode=True),
-)
-```
-
-**OpenRouter**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-
-agent = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    backend=FilesystemBackend(root_dir=".", virtual_mode=True),
-)
-```
-
-**Fireworks**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-
-agent = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    backend=FilesystemBackend(root_dir=".", virtual_mode=True),
-)
-```
-
-**Baseten**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-
-agent = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    backend=FilesystemBackend(root_dir=".", virtual_mode=True),
-)
-```
-
-**Ollama**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-
-agent = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    backend=FilesystemBackend(root_dir=".", virtual_mode=True),
-)
-```
-
-> [!TIP]
+> A thread-scoped filesystem backend stored in `langgraph` state.
 >
-> Wrap `FilesystemBackend` in a `CompositeBackend` to prevent internal agent data (offloaded tool results, conversation history) from being written to disk alongside your project files. See the [recommended pattern](backends.md#filesystembackend-local-disk).
-
-**LocalShellBackend**
-
-A filesystem with shell execution directly on the host. Provides filesystem tools plus the `execute` tool for running commands.
-
-> [!WARNING]
+> Files persist across turns within a thread (via your checkpointer) and are not shared across threads.
 >
-> This backend grants agents direct filesystem read/write access **and** unrestricted shell execution on your host.
-> Use with extreme caution and only in appropriate environments.
-> For more information, see [`LocalShellBackend`](backends.md#localshellbackend-local-shell).
-
 **Google**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import LocalShellBackend
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
-)
-```
-
-**OpenAI**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LocalShellBackend
-
-agent = create_deep_agent(
-    model="openai:gpt-5.5",
-    backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
-)
-```
-
-**Anthropic**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LocalShellBackend
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
-)
-```
-
-**OpenRouter**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LocalShellBackend
-
-agent = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
-)
-```
-
-**Fireworks**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LocalShellBackend
-
-agent = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
-)
-```
-
-**Baseten**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LocalShellBackend
-
-agent = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
-)
-```
-
-**Ollama**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import LocalShellBackend
-
-agent = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
-)
-```
-
-**StoreBackend**
-
-A filesystem that provides long-term storage that is *persisted across threads*.
-
-**Google**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=StoreBackend(
-        namespace=lambda rt: (rt.server_info.user.identity,),
-    ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
-)
-```
-
-**OpenAI**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="openai:gpt-5.5",
-    backend=StoreBackend(
-        namespace=lambda rt: (rt.server_info.user.identity,),
-    ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
-)
-```
-
-**Anthropic**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    backend=StoreBackend(
-        namespace=lambda rt: (rt.server_info.user.identity,),
-    ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
-)
-```
-
-**OpenRouter**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    backend=StoreBackend(
-        namespace=lambda rt: (rt.server_info.user.identity,),
-    ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
-)
-```
-
-**Fireworks**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    backend=StoreBackend(
-        namespace=lambda rt: (rt.server_info.user.identity,),
-    ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
-)
-```
-
-**Baseten**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    backend=StoreBackend(
-        namespace=lambda rt: (rt.server_info.user.identity,),
-    ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
-)
-```
-
-**Ollama**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    backend=StoreBackend(
-        namespace=lambda rt: (rt.server_info.user.identity,),
-    ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
-)
-```
-
-> [!NOTE]
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
 >
-> When deploying to [LangSmith Deployment](../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
-
-> [!TIP]
+> # By default we provide a StateBackend
+> agent = create_deep_agent(model="google_genai:gemini-3.6-flash")
 >
-> The `namespace` parameter controls data isolation. For multi-user deployments, always set a [namespace factory](backends.md#namespace-factories) to isolate data per user or tenant.
-
-**ContextHubBackend**
-
-Durable filesystem storage in a LangSmith Hub repo.
-
-**Google**
-
-```python
-from deepagents import create_deep_agent
-from deepagents.backends import ContextHubBackend
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=ContextHubBackend("my-agent"),
-)
+> # Under the hood, it looks like
+> agent2 = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=StateBackend(),
+> )
 ```
-
+>
 **OpenAI**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import ContextHubBackend
-
-agent = create_deep_agent(
-    model="openai:gpt-5.5",
-    backend=ContextHubBackend("my-agent"),
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+>
+> # By default we provide a StateBackend
+> agent = create_deep_agent(model="openai:gpt-5.5")
+>
+> # Under the hood, it looks like
+> agent2 = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     backend=StateBackend(),
+> )
 ```
-
+>
 **Anthropic**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import ContextHubBackend
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    backend=ContextHubBackend("my-agent"),
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+>
+> # By default we provide a StateBackend
+> agent = create_deep_agent(model="anthropic:claude-sonnet-5")
+>
+> # Under the hood, it looks like
+> agent2 = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     backend=StateBackend(),
+> )
 ```
-
+>
 **OpenRouter**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import ContextHubBackend
-
-agent = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    backend=ContextHubBackend("my-agent"),
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+>
+> # By default we provide a StateBackend
+> agent = create_deep_agent(model="openrouter:z-ai/glm-5.2")
+>
+> # Under the hood, it looks like
+> agent2 = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     backend=StateBackend(),
+> )
 ```
-
+>
 **Fireworks**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import ContextHubBackend
-
-agent = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    backend=ContextHubBackend("my-agent"),
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+>
+> # By default we provide a StateBackend
+> agent = create_deep_agent(model="fireworks:accounts/fireworks/models/glm-5p2")
+>
+> # Under the hood, it looks like
+> agent2 = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     backend=StateBackend(),
+> )
 ```
-
+>
 **Baseten**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import ContextHubBackend
-
-agent = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    backend=ContextHubBackend("my-agent"),
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+>
+> # By default we provide a StateBackend
+> agent = create_deep_agent(model="baseten:zai-org/GLM-5.2")
+>
+> # Under the hood, it looks like
+> agent2 = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     backend=StateBackend(),
+> )
 ```
-
+>
 **Ollama**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import ContextHubBackend
-
-agent = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    backend=ContextHubBackend("my-agent"),
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+>
+> # By default we provide a StateBackend
+> agent = create_deep_agent(model="ollama:north-mini-code-1.0")
+>
+> # Under the hood, it looks like
+> agent2 = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     backend=StateBackend(),
+> )
 ```
 
-For more details, see [`ContextHubBackend`](backends.md#contexthubbackend).
-
-**CompositeBackend**
-
-A flexible backend where you can specify different routes in the filesystem to point towards different backends.
-
+> [tab] FilesystemBackend
+>
+> The local machine's filesystem.
+>
+> > [!WARNING]
+> >
+> > This backend grants agents direct filesystem read/write access.
+> > Use with caution and only in appropriate environments.
+> > For more information, see [`FilesystemBackend`](backends.md#filesystembackend-local-disk).
+>
 **Google**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=CompositeBackend(
-        default=StateBackend(),
-        routes={
-            "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
-        },
-    ),
-    store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
+> )
 ```
-
+>
 **OpenAI**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="openai:gpt-5.5",
-    backend=CompositeBackend(
-        default=StateBackend(),
-        routes={
-            "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
-        },
-    ),
-    store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+>
+> agent = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
+> )
 ```
-
+>
 **Anthropic**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    backend=CompositeBackend(
-        default=StateBackend(),
-        routes={
-            "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
-        },
-    ),
-    store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
+> )
 ```
-
+>
 **OpenRouter**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    backend=CompositeBackend(
-        default=StateBackend(),
-        routes={
-            "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
-        },
-    ),
-    store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+>
+> agent = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
+> )
 ```
-
+>
 **Fireworks**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    backend=CompositeBackend(
-        default=StateBackend(),
-        routes={
-            "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
-        },
-    ),
-    store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+>
+> agent = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
+> )
 ```
-
+>
 **Baseten**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-agent = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    backend=CompositeBackend(
-        default=StateBackend(),
-        routes={
-            "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
-        },
-    ),
-    store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+>
+> agent = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
+> )
 ```
-
+>
 **Ollama**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
-from langgraph.store.memory import InMemoryStore
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+>
+> agent = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
+> )
+```
+>
+> > [!TIP]
+> >
+> > Wrap `FilesystemBackend` in a `CompositeBackend` to prevent internal agent data (offloaded tool results, conversation history) from being written to disk alongside your project files. See the [recommended pattern](backends.md#filesystembackend-local-disk).
 
-agent = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    backend=CompositeBackend(
-        default=StateBackend(),
-        routes={
-            "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
-        },
-    ),
-    store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
-)
+> [tab] LocalShellBackend
+>
+> A filesystem with shell execution directly on the host. Provides filesystem tools plus the `execute` tool for running commands.
+>
+> > [!WARNING]
+> >
+> > This backend grants agents direct filesystem read/write access **and** unrestricted shell execution on your host.
+> > Use with extreme caution and only in appropriate environments.
+> > For more information, see [`LocalShellBackend`](backends.md#localshellbackend-local-shell).
+>
+**Google**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import LocalShellBackend
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
+> )
+```
+>
+**OpenAI**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import LocalShellBackend
+>
+> agent = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
+> )
+```
+>
+**Anthropic**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import LocalShellBackend
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
+> )
+```
+>
+**OpenRouter**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import LocalShellBackend
+>
+> agent = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
+> )
+```
+>
+**Fireworks**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import LocalShellBackend
+>
+> agent = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
+> )
+```
+>
+**Baseten**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import LocalShellBackend
+>
+> agent = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
+> )
+```
+>
+**Ollama**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import LocalShellBackend
+>
+> agent = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     backend=LocalShellBackend(root_dir=".", virtual_mode=True, env={"PATH": "/usr/bin:/bin"}),
+> )
+```
+
+> [tab] StoreBackend
+>
+> A filesystem that provides long-term storage that is *persisted across threads*.
+>
+**Google**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=StoreBackend(
+>         namespace=lambda rt: (rt.server_info.user.identity,),
+>     ),
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+> )
+```
+>
+**OpenAI**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     backend=StoreBackend(
+>         namespace=lambda rt: (rt.server_info.user.identity,),
+>     ),
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+> )
+```
+>
+**Anthropic**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     backend=StoreBackend(
+>         namespace=lambda rt: (rt.server_info.user.identity,),
+>     ),
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+> )
+```
+>
+**OpenRouter**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     backend=StoreBackend(
+>         namespace=lambda rt: (rt.server_info.user.identity,),
+>     ),
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+> )
+```
+>
+**Fireworks**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     backend=StoreBackend(
+>         namespace=lambda rt: (rt.server_info.user.identity,),
+>     ),
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+> )
+```
+>
+**Baseten**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     backend=StoreBackend(
+>         namespace=lambda rt: (rt.server_info.user.identity,),
+>     ),
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+> )
+```
+>
+**Ollama**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     backend=StoreBackend(
+>         namespace=lambda rt: (rt.server_info.user.identity,),
+>     ),
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+> )
+```
+>
+> > [!NOTE]
+> >
+> > When deploying to [LangSmith Deployment](../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
+>
+> > [!TIP]
+> >
+> > The `namespace` parameter controls data isolation. For multi-user deployments, always set a [namespace factory](backends.md#namespace-factories) to isolate data per user or tenant.
+
+> [tab] ContextHubBackend
+>
+> Durable filesystem storage in a LangSmith Hub repo.
+>
+**Google**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import ContextHubBackend
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=ContextHubBackend("my-agent"),
+> )
+```
+>
+**OpenAI**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import ContextHubBackend
+>
+> agent = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     backend=ContextHubBackend("my-agent"),
+> )
+```
+>
+**Anthropic**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import ContextHubBackend
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     backend=ContextHubBackend("my-agent"),
+> )
+```
+>
+**OpenRouter**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import ContextHubBackend
+>
+> agent = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     backend=ContextHubBackend("my-agent"),
+> )
+```
+>
+**Fireworks**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import ContextHubBackend
+>
+> agent = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     backend=ContextHubBackend("my-agent"),
+> )
+```
+>
+**Baseten**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import ContextHubBackend
+>
+> agent = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     backend=ContextHubBackend("my-agent"),
+> )
+```
+>
+**Ollama**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import ContextHubBackend
+>
+> agent = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     backend=ContextHubBackend("my-agent"),
+> )
+```
+>
+> For more details, see [`ContextHubBackend`](backends.md#contexthubbackend).
+
+> [tab] CompositeBackend
+>
+> A flexible backend where you can specify different routes in the filesystem to point towards different backends.
+>
+**Google**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=CompositeBackend(
+>         default=StateBackend(),
+>         routes={
+>             "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
+>         },
+>     ),
+>     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
+> )
+```
+>
+**OpenAI**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     backend=CompositeBackend(
+>         default=StateBackend(),
+>         routes={
+>             "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
+>         },
+>     ),
+>     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
+> )
+```
+>
+**Anthropic**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     backend=CompositeBackend(
+>         default=StateBackend(),
+>         routes={
+>             "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
+>         },
+>     ),
+>     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
+> )
+```
+>
+**OpenRouter**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     backend=CompositeBackend(
+>         default=StateBackend(),
+>         routes={
+>             "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
+>         },
+>     ),
+>     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
+> )
+```
+>
+**Fireworks**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     backend=CompositeBackend(
+>         default=StateBackend(),
+>         routes={
+>             "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
+>         },
+>     ),
+>     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
+> )
+```
+>
+**Baseten**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     backend=CompositeBackend(
+>         default=StateBackend(),
+>         routes={
+>             "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
+>         },
+>     ),
+>     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
+> )
+```
+>
+**Ollama**
+
+```python
+> from deepagents import create_deep_agent
+> from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> agent = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     backend=CompositeBackend(
+>         default=StateBackend(),
+>         routes={
+>             "/memories/": StoreBackend(namespace=lambda _rt: ("memories",)),
+>         },
+>     ),
+>     store=InMemoryStore(),  # Store passed to create_deep_agent, not backend
+> )
 ```
 
 For more information, see [Backends](backends.md).
@@ -2560,272 +2560,272 @@ Use a sandbox backend when you want your deep agent to write files, install depe
 
 You configure sandboxes by passing a sandbox backend to `backend` when creating your deep agent:
 
-**LangSmith**
-
+> [tab] LangSmith
+>
 **pip**
 
 ```bash
-pip install langsmith
+> pip install langsmith
 ```
-
+>
 **uv**
 
 ```bash
-uv add langsmith
+> uv add langsmith
 ```
-
+>
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import LangSmithSandbox
-from langchain_anthropic import ChatAnthropic
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    client.delete_sandbox(ls_sandbox.name)
+> from deepagents import create_deep_agent
+> from deepagents.backends import LangSmithSandbox
+> from langchain_anthropic import ChatAnthropic
+> from langsmith.sandbox import SandboxClient
+>
+> client = SandboxClient()
+> ls_sandbox = client.create_sandbox()
+> backend = LangSmithSandbox(sandbox=ls_sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     client.delete_sandbox(ls_sandbox.name)
 ```
 
-**Daytona**
-
+> [tab] Daytona
+>
 **pip**
 
 ```bash
-pip install langchain-daytona
+> pip install langchain-daytona
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-daytona
+> uv add langchain-daytona
 ```
-
+>
 ```python
-from daytona import Daytona
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
+> from daytona import Daytona
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_daytona import DaytonaSandbox
+>
+> sandbox = Daytona().create()
+> backend = DaytonaSandbox(sandbox=sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+>
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     sandbox.stop()
 ```
 
-**E2B**
-
+> [tab] E2B
+>
 **pip**
 
 ```bash
-pip install langchain-e2b
+> pip install langchain-e2b
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-e2b
+> uv add langchain-e2b
 ```
-
+>
 ```python
-from e2b import Sandbox
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_e2b import E2BSandbox
-
-e2b_sandbox = Sandbox.create()
-backend = E2BSandbox(sandbox=e2b_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    e2b_sandbox.kill()
+> from e2b import Sandbox
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_e2b import E2BSandbox
+>
+> e2b_sandbox = Sandbox.create()
+> backend = E2BSandbox(sandbox=e2b_sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+>
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     e2b_sandbox.kill()
 ```
 
-**Modal**
-
+> [tab] Modal
+>
 **pip**
 
 ```bash
-pip install langchain-modal
+> pip install langchain-modal
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-modal
+> uv add langchain-modal
 ```
-
+>
 ```python
-import modal
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_modal import ModalSandbox
-
-app = modal.App.lookup("your-app")
-modal_sandbox = modal.Sandbox.create(app=app)
-backend = ModalSandbox(sandbox=modal_sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    modal_sandbox.terminate()
+> import modal
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_modal import ModalSandbox
+>
+> app = modal.App.lookup("your-app")
+> modal_sandbox = modal.Sandbox.create(app=app)
+> backend = ModalSandbox(sandbox=modal_sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     modal_sandbox.terminate()
 ```
 
-**Runloop**
-
+> [tab] Runloop
+>
 **pip**
 
 ```bash
-pip install langchain-runloop
+> pip install langchain-runloop
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-runloop
+> uv add langchain-runloop
 ```
-
+>
 ```python
-import os
-
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_runloop import RunloopSandbox
-from runloop_api_client import RunloopSDK
-
-client = RunloopSDK(bearer_token=os.environ["RUNLOOP_API_KEY"])
-
-devbox = client.devbox.create()
-backend = RunloopSandbox(devbox=devbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    devbox.shutdown()
+> import os
+>
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_runloop import RunloopSandbox
+> from runloop_api_client import RunloopSDK
+>
+> client = RunloopSDK(bearer_token=os.environ["RUNLOOP_API_KEY"])
+>
+> devbox = client.devbox.create()
+> backend = RunloopSandbox(devbox=devbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+>
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     devbox.shutdown()
 ```
 
-**Vercel**
-
+> [tab] Vercel
+>
 **pip**
 
 ```bash
-pip install langchain-vercel-sandbox
+> pip install langchain-vercel-sandbox
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-vercel-sandbox
+> uv add langchain-vercel-sandbox
 ```
-
+>
 ```python
-from deepagents import create_deep_agent
-from langchain_anthropic import ChatAnthropic
-from langchain_vercel_sandbox import VercelSandbox
-from vercel.sandbox import Sandbox
-
-sandbox = Sandbox.create(runtime="python3.13")
-backend = VercelSandbox(sandbox=sandbox)
-
-agent = create_deep_agent(
-    model=ChatAnthropic(model="claude-sonnet-4-6"),
-    system_prompt="You are a Python coding assistant with sandbox access.",
-    backend=backend,
-)
-
-try:
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "Create a small Python package and run pytest",
-                }
-            ]
-        }
-    )
-finally:
-    sandbox.stop()
+> from deepagents import create_deep_agent
+> from langchain_anthropic import ChatAnthropic
+> from langchain_vercel_sandbox import VercelSandbox
+> from vercel.sandbox import Sandbox
+>
+> sandbox = Sandbox.create(runtime="python3.13")
+> backend = VercelSandbox(sandbox=sandbox)
+>
+> agent = create_deep_agent(
+>     model=ChatAnthropic(model="claude-sonnet-4-6"),
+>     system_prompt="You are a Python coding assistant with sandbox access.",
+>     backend=backend,
+> )
+>
+> try:
+>     result = agent.invoke(
+>         {
+>             "messages": [
+>                 {
+>                     "role": "user",
+>                     "content": "Create a small Python package and run pytest",
+>                 }
+>             ]
+>         }
+>     )
+> finally:
+>     sandbox.stop()
 ```
 
 For more information, see [Sandboxes](sandboxes.md).
@@ -3108,338 +3108,338 @@ For example skills, see [Deep Agents example skills](https://github.com/langchai
 
 To add skills to your deep agent, pass them as an argument to `create_deep_agent`:
 
-**StateBackend**
-
+> [tab] StateBackend
+>
 **Google**
 
 ```python
-from urllib.request import urlopen
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-checkpointer = MemorySaver()
-backend = StateBackend()
-
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
-with urlopen(skill_url) as response:
-    skill_content = response.read().decode('utf-8')
-
-skills_files = {
-    "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
-}
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=backend,
-    skills=["/skills/"],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [{"role": "user", "content": "What is langgraph?"}],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": skills_files,
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> checkpointer = MemorySaver()
+> backend = StateBackend()
+>
+> skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+> with urlopen(skill_url) as response:
+>     skill_content = response.read().decode('utf-8')
+>
+> skills_files = {
+>     "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
+> }
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=backend,
+>     skills=["/skills/"],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [{"role": "user", "content": "What is langgraph?"}],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": skills_files,
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **OpenAI**
 
 ```python
-from urllib.request import urlopen
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-checkpointer = MemorySaver()
-backend = StateBackend()
-
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
-with urlopen(skill_url) as response:
-    skill_content = response.read().decode('utf-8')
-
-skills_files = {
-    "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
-}
-
-agent = create_deep_agent(
-    model="openai:gpt-5.5",
-    backend=backend,
-    skills=["/skills/"],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [{"role": "user", "content": "What is langgraph?"}],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": skills_files,
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> checkpointer = MemorySaver()
+> backend = StateBackend()
+>
+> skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+> with urlopen(skill_url) as response:
+>     skill_content = response.read().decode('utf-8')
+>
+> skills_files = {
+>     "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
+> }
+>
+> agent = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     backend=backend,
+>     skills=["/skills/"],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [{"role": "user", "content": "What is langgraph?"}],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": skills_files,
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Anthropic**
 
 ```python
-from urllib.request import urlopen
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-checkpointer = MemorySaver()
-backend = StateBackend()
-
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
-with urlopen(skill_url) as response:
-    skill_content = response.read().decode('utf-8')
-
-skills_files = {
-    "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
-}
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    backend=backend,
-    skills=["/skills/"],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [{"role": "user", "content": "What is langgraph?"}],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": skills_files,
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> checkpointer = MemorySaver()
+> backend = StateBackend()
+>
+> skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+> with urlopen(skill_url) as response:
+>     skill_content = response.read().decode('utf-8')
+>
+> skills_files = {
+>     "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
+> }
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     backend=backend,
+>     skills=["/skills/"],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [{"role": "user", "content": "What is langgraph?"}],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": skills_files,
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **OpenRouter**
 
 ```python
-from urllib.request import urlopen
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-checkpointer = MemorySaver()
-backend = StateBackend()
-
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
-with urlopen(skill_url) as response:
-    skill_content = response.read().decode('utf-8')
-
-skills_files = {
-    "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
-}
-
-agent = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    backend=backend,
-    skills=["/skills/"],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [{"role": "user", "content": "What is langgraph?"}],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": skills_files,
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> checkpointer = MemorySaver()
+> backend = StateBackend()
+>
+> skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+> with urlopen(skill_url) as response:
+>     skill_content = response.read().decode('utf-8')
+>
+> skills_files = {
+>     "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
+> }
+>
+> agent = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     backend=backend,
+>     skills=["/skills/"],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [{"role": "user", "content": "What is langgraph?"}],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": skills_files,
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Fireworks**
 
 ```python
-from urllib.request import urlopen
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-checkpointer = MemorySaver()
-backend = StateBackend()
-
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
-with urlopen(skill_url) as response:
-    skill_content = response.read().decode('utf-8')
-
-skills_files = {
-    "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
-}
-
-agent = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    backend=backend,
-    skills=["/skills/"],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [{"role": "user", "content": "What is langgraph?"}],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": skills_files,
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> checkpointer = MemorySaver()
+> backend = StateBackend()
+>
+> skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+> with urlopen(skill_url) as response:
+>     skill_content = response.read().decode('utf-8')
+>
+> skills_files = {
+>     "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
+> }
+>
+> agent = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     backend=backend,
+>     skills=["/skills/"],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [{"role": "user", "content": "What is langgraph?"}],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": skills_files,
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Baseten**
 
 ```python
-from urllib.request import urlopen
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-checkpointer = MemorySaver()
-backend = StateBackend()
-
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
-with urlopen(skill_url) as response:
-    skill_content = response.read().decode('utf-8')
-
-skills_files = {
-    "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
-}
-
-agent = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    backend=backend,
-    skills=["/skills/"],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [{"role": "user", "content": "What is langgraph?"}],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": skills_files,
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> checkpointer = MemorySaver()
+> backend = StateBackend()
+>
+> skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+> with urlopen(skill_url) as response:
+>     skill_content = response.read().decode('utf-8')
+>
+> skills_files = {
+>     "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
+> }
+>
+> agent = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     backend=backend,
+>     skills=["/skills/"],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [{"role": "user", "content": "What is langgraph?"}],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": skills_files,
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Ollama**
 
 ```python
-from urllib.request import urlopen
-from deepagents import create_deep_agent
-from deepagents.backends import StateBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-checkpointer = MemorySaver()
-backend = StateBackend()
-
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
-with urlopen(skill_url) as response:
-    skill_content = response.read().decode('utf-8')
-
-skills_files = {
-    "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
-}
-
-agent = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    backend=backend,
-    skills=["/skills/"],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [{"role": "user", "content": "What is langgraph?"}],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": skills_files,
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+> from deepagents import create_deep_agent
+> from deepagents.backends import StateBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> checkpointer = MemorySaver()
+> backend = StateBackend()
+>
+> skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+> with urlopen(skill_url) as response:
+>     skill_content = response.read().decode('utf-8')
+>
+> skills_files = {
+>     "/skills/langgraph-docs/SKILL.md": create_file_data(skill_content),
+> }
+>
+> agent = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     backend=backend,
+>     skills=["/skills/"],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [{"role": "user", "content": "What is langgraph?"}],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": skills_files,
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
 
-**StoreBackend**
-
+> [tab] StoreBackend
+>
 ```python
-from urllib.request import urlopen
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from langgraph.store.memory import InMemoryStore
-
-store = InMemoryStore()
-backend = StoreBackend(
-    namespace=lambda _rt: ("filesystem",),
-    store=store,
-)
-
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
-with urlopen(skill_url) as response:
-    skill_content = response.read().decode('utf-8')
-
-backend.upload_files(
-    [("/skills/langgraph-docs/SKILL.md", skill_content.encode("utf-8"))]
-)
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=backend,
-    store=store,
-    skills=["/skills/"],
-)
-
-result = agent.invoke(
-    {"messages": [{"role": "user", "content": "What is langgraph?"}]},
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from langgraph.store.memory import InMemoryStore
+>
+> store = InMemoryStore()
+> backend = StoreBackend(
+>     namespace=lambda _rt: ("filesystem",),
+>     store=store,
+> )
+>
+> skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+> with urlopen(skill_url) as response:
+>     skill_content = response.read().decode('utf-8')
+>
+> backend.upload_files(
+>     [("/skills/langgraph-docs/SKILL.md", skill_content.encode("utf-8"))]
+> )
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=backend,
+>     store=store,
+>     skills=["/skills/"],
+> )
+>
+> result = agent.invoke(
+>     {"messages": [{"role": "user", "content": "What is langgraph?"}]},
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
 
-**FilesystemBackend**
-
+> [tab] FilesystemBackend
+>
 ```python
-from urllib.request import urlopen
-from deepagents import create_deep_agent
-from deepagents.backends.filesystem import FilesystemBackend
-from langgraph.checkpoint.memory import MemorySaver
-
-# Checkpointer is REQUIRED for human-in-the-loop
-checkpointer = MemorySaver()
-
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
-with urlopen(skill_url) as response:
-    skill_content = response.read().decode('utf-8')
-
-backend = FilesystemBackend(root_dir="/Users/user/{project}", virtual_mode=True)
-backend.upload_files(
-    [("/skills/langgraph-docs/SKILL.md", skill_content.encode("utf-8"))]
-)
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=backend,
-    skills=["/skills/"],
-    interrupt_on={
-        "write_file": True,
-        "read_file": False,
-        "edit_file": True,
-    },
-    checkpointer=checkpointer,  # Required for filesystem operations!
-)
-
-result = agent.invoke(
-    {"messages": [{"role": "user", "content": "What is langgraph?"}]},
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+> from deepagents import create_deep_agent
+> from deepagents.backends.filesystem import FilesystemBackend
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> # Checkpointer is REQUIRED for human-in-the-loop
+> checkpointer = MemorySaver()
+>
+> skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+> with urlopen(skill_url) as response:
+>     skill_content = response.read().decode('utf-8')
+>
+> backend = FilesystemBackend(root_dir="/Users/user/{project}", virtual_mode=True)
+> backend.upload_files(
+>     [("/skills/langgraph-docs/SKILL.md", skill_content.encode("utf-8"))]
+> )
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=backend,
+>     skills=["/skills/"],
+>     interrupt_on={
+>         "write_file": True,
+>         "read_file": False,
+>         "edit_file": True,
+>     },
+>     checkpointer=checkpointer,  # Required for filesystem operations!
+> )
+>
+> result = agent.invoke(
+>     {"messages": [{"role": "user", "content": "What is langgraph?"}]},
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
 
 ## Memory
@@ -3452,850 +3452,850 @@ Use [`AGENTS.md` files](https://agents.md/) to provide extra context to your dee
 
 You can pass one or more file paths to the `memory` parameter when creating your deep agent:
 
-**StateBackend**
-
+> [tab] StateBackend
+>
 **Google**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    memory=[
-        "/AGENTS.md"
-    ],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "123456"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     memory=[
+>         "/AGENTS.md"
+>     ],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "123456"}},
+> )
 ```
-
+>
 **OpenAI**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="openai:gpt-5.5",
-    memory=[
-        "/AGENTS.md"
-    ],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "123456"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     memory=[
+>         "/AGENTS.md"
+>     ],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "123456"}},
+> )
 ```
-
+>
 **Anthropic**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    memory=[
-        "/AGENTS.md"
-    ],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "123456"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     memory=[
+>         "/AGENTS.md"
+>     ],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "123456"}},
+> )
 ```
-
+>
 **OpenRouter**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    memory=[
-        "/AGENTS.md"
-    ],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "123456"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     memory=[
+>         "/AGENTS.md"
+>     ],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "123456"}},
+> )
 ```
-
+>
 **Fireworks**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    memory=[
-        "/AGENTS.md"
-    ],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "123456"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     memory=[
+>         "/AGENTS.md"
+>     ],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "123456"}},
+> )
 ```
-
+>
 **Baseten**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    memory=[
-        "/AGENTS.md"
-    ],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "123456"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     memory=[
+>         "/AGENTS.md"
+>     ],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "123456"}},
+> )
 ```
-
+>
 **Ollama**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends.utils import create_file_data
-from langgraph.checkpoint.memory import MemorySaver
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    memory=[
-        "/AGENTS.md"
-    ],
-    checkpointer=checkpointer,
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "123456"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends.utils import create_file_data
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     memory=[
+>         "/AGENTS.md"
+>     ],
+>     checkpointer=checkpointer,
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         # Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "123456"}},
+> )
 ```
 
-**StoreBackend**
-
+> [tab] StoreBackend
+>
 **Google**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.store.memory import InMemoryStore
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-
-# Create the store and add the file to it
-store = InMemoryStore()
-file_data = create_file_data(agents_md)
-store.put(
-    namespace=("filesystem",),
-    key="/AGENTS.md",
-    value=file_data,
-)
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
-    store=store,
-    memory=["/AGENTS.md"],
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.store.memory import InMemoryStore
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+>
+> # Create the store and add the file to it
+> store = InMemoryStore()
+> file_data = create_file_data(agents_md)
+> store.put(
+>     namespace=("filesystem",),
+>     key="/AGENTS.md",
+>     value=file_data,
+> )
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
+>     store=store,
+>     memory=["/AGENTS.md"],
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **OpenAI**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.store.memory import InMemoryStore
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-
-# Create the store and add the file to it
-store = InMemoryStore()
-file_data = create_file_data(agents_md)
-store.put(
-    namespace=("filesystem",),
-    key="/AGENTS.md",
-    value=file_data,
-)
-
-agent = create_deep_agent(
-    model="openai:gpt-5.5",
-    backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
-    store=store,
-    memory=["/AGENTS.md"],
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.store.memory import InMemoryStore
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+>
+> # Create the store and add the file to it
+> store = InMemoryStore()
+> file_data = create_file_data(agents_md)
+> store.put(
+>     namespace=("filesystem",),
+>     key="/AGENTS.md",
+>     value=file_data,
+> )
+>
+> agent = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
+>     store=store,
+>     memory=["/AGENTS.md"],
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Anthropic**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.store.memory import InMemoryStore
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-
-# Create the store and add the file to it
-store = InMemoryStore()
-file_data = create_file_data(agents_md)
-store.put(
-    namespace=("filesystem",),
-    key="/AGENTS.md",
-    value=file_data,
-)
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
-    store=store,
-    memory=["/AGENTS.md"],
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.store.memory import InMemoryStore
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+>
+> # Create the store and add the file to it
+> store = InMemoryStore()
+> file_data = create_file_data(agents_md)
+> store.put(
+>     namespace=("filesystem",),
+>     key="/AGENTS.md",
+>     value=file_data,
+> )
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
+>     store=store,
+>     memory=["/AGENTS.md"],
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **OpenRouter**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.store.memory import InMemoryStore
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-
-# Create the store and add the file to it
-store = InMemoryStore()
-file_data = create_file_data(agents_md)
-store.put(
-    namespace=("filesystem",),
-    key="/AGENTS.md",
-    value=file_data,
-)
-
-agent = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
-    store=store,
-    memory=["/AGENTS.md"],
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.store.memory import InMemoryStore
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+>
+> # Create the store and add the file to it
+> store = InMemoryStore()
+> file_data = create_file_data(agents_md)
+> store.put(
+>     namespace=("filesystem",),
+>     key="/AGENTS.md",
+>     value=file_data,
+> )
+>
+> agent = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
+>     store=store,
+>     memory=["/AGENTS.md"],
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Fireworks**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.store.memory import InMemoryStore
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-
-# Create the store and add the file to it
-store = InMemoryStore()
-file_data = create_file_data(agents_md)
-store.put(
-    namespace=("filesystem",),
-    key="/AGENTS.md",
-    value=file_data,
-)
-
-agent = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
-    store=store,
-    memory=["/AGENTS.md"],
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.store.memory import InMemoryStore
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+>
+> # Create the store and add the file to it
+> store = InMemoryStore()
+> file_data = create_file_data(agents_md)
+> store.put(
+>     namespace=("filesystem",),
+>     key="/AGENTS.md",
+>     value=file_data,
+> )
+>
+> agent = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
+>     store=store,
+>     memory=["/AGENTS.md"],
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Baseten**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.store.memory import InMemoryStore
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-
-# Create the store and add the file to it
-store = InMemoryStore()
-file_data = create_file_data(agents_md)
-store.put(
-    namespace=("filesystem",),
-    key="/AGENTS.md",
-    value=file_data,
-)
-
-agent = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
-    store=store,
-    memory=["/AGENTS.md"],
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.store.memory import InMemoryStore
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+>
+> # Create the store and add the file to it
+> store = InMemoryStore()
+> file_data = create_file_data(agents_md)
+> store.put(
+>     namespace=("filesystem",),
+>     key="/AGENTS.md",
+>     value=file_data,
+> )
+>
+> agent = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
+>     store=store,
+>     memory=["/AGENTS.md"],
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Ollama**
 
 ```python
-from urllib.request import urlopen
-
-from deepagents import create_deep_agent
-from deepagents.backends import StoreBackend
-from deepagents.backends.utils import create_file_data
-from langgraph.store.memory import InMemoryStore
-
-with urlopen(
-    "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
-) as response:
-    agents_md = response.read().decode("utf-8")
-
-# Create the store and add the file to it
-store = InMemoryStore()
-file_data = create_file_data(agents_md)
-store.put(
-    namespace=("filesystem",),
-    key="/AGENTS.md",
-    value=file_data,
-)
-
-agent = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
-    store=store,
-    memory=["/AGENTS.md"],
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-        "files": {"/AGENTS.md": create_file_data(agents_md)},
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from urllib.request import urlopen
+>
+> from deepagents import create_deep_agent
+> from deepagents.backends import StoreBackend
+> from deepagents.backends.utils import create_file_data
+> from langgraph.store.memory import InMemoryStore
+>
+> with urlopen(
+>     "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md"
+> ) as response:
+>     agents_md = response.read().decode("utf-8")
+>
+> # Create the store and add the file to it
+> store = InMemoryStore()
+> file_data = create_file_data(agents_md)
+> store.put(
+>     namespace=("filesystem",),
+>     key="/AGENTS.md",
+>     value=file_data,
+> )
+>
+> agent = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     backend=StoreBackend(namespace=lambda _rt: ("filesystem",)),
+>     store=store,
+>     memory=["/AGENTS.md"],
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>         "files": {"/AGENTS.md": create_file_data(agents_md)},
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
 
-**FilesystemBackend**
-
+> [tab] FilesystemBackend
+>
 **Google**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-from langgraph.checkpoint.memory import MemorySaver
-
-# Checkpointer is REQUIRED for human-in-the-loop
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
-    backend=FilesystemBackend(root_dir="/Users/user/{project}"),
-    memory=[
-        "./AGENTS.md"
-    ],
-    interrupt_on={
-        "write_file": True,  # Default: approve, edit, reject
-        "read_file": False,  # No interrupts needed
-        "edit_file": True,   # Default: approve, edit, reject
-    },
-    checkpointer=checkpointer,  # Required!
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> # Checkpointer is REQUIRED for human-in-the-loop
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="google_genai:gemini-3.6-flash",
+>     backend=FilesystemBackend(root_dir="/Users/user/{project}"),
+>     memory=[
+>         "./AGENTS.md"
+>     ],
+>     interrupt_on={
+>         "write_file": True,  # Default: approve, edit, reject
+>         "read_file": False,  # No interrupts needed
+>         "edit_file": True,   # Default: approve, edit, reject
+>     },
+>     checkpointer=checkpointer,  # Required!
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **OpenAI**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-from langgraph.checkpoint.memory import MemorySaver
-
-# Checkpointer is REQUIRED for human-in-the-loop
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="openai:gpt-5.5",
-    backend=FilesystemBackend(root_dir="/Users/user/{project}"),
-    memory=[
-        "./AGENTS.md"
-    ],
-    interrupt_on={
-        "write_file": True,  # Default: approve, edit, reject
-        "read_file": False,  # No interrupts needed
-        "edit_file": True,   # Default: approve, edit, reject
-    },
-    checkpointer=checkpointer,  # Required!
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> # Checkpointer is REQUIRED for human-in-the-loop
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="openai:gpt-5.5",
+>     backend=FilesystemBackend(root_dir="/Users/user/{project}"),
+>     memory=[
+>         "./AGENTS.md"
+>     ],
+>     interrupt_on={
+>         "write_file": True,  # Default: approve, edit, reject
+>         "read_file": False,  # No interrupts needed
+>         "edit_file": True,   # Default: approve, edit, reject
+>     },
+>     checkpointer=checkpointer,  # Required!
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Anthropic**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-from langgraph.checkpoint.memory import MemorySaver
-
-# Checkpointer is REQUIRED for human-in-the-loop
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="anthropic:claude-sonnet-5",
-    backend=FilesystemBackend(root_dir="/Users/user/{project}"),
-    memory=[
-        "./AGENTS.md"
-    ],
-    interrupt_on={
-        "write_file": True,  # Default: approve, edit, reject
-        "read_file": False,  # No interrupts needed
-        "edit_file": True,   # Default: approve, edit, reject
-    },
-    checkpointer=checkpointer,  # Required!
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> # Checkpointer is REQUIRED for human-in-the-loop
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="anthropic:claude-sonnet-5",
+>     backend=FilesystemBackend(root_dir="/Users/user/{project}"),
+>     memory=[
+>         "./AGENTS.md"
+>     ],
+>     interrupt_on={
+>         "write_file": True,  # Default: approve, edit, reject
+>         "read_file": False,  # No interrupts needed
+>         "edit_file": True,   # Default: approve, edit, reject
+>     },
+>     checkpointer=checkpointer,  # Required!
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **OpenRouter**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-from langgraph.checkpoint.memory import MemorySaver
-
-# Checkpointer is REQUIRED for human-in-the-loop
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="openrouter:z-ai/glm-5.2",
-    backend=FilesystemBackend(root_dir="/Users/user/{project}"),
-    memory=[
-        "./AGENTS.md"
-    ],
-    interrupt_on={
-        "write_file": True,  # Default: approve, edit, reject
-        "read_file": False,  # No interrupts needed
-        "edit_file": True,   # Default: approve, edit, reject
-    },
-    checkpointer=checkpointer,  # Required!
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> # Checkpointer is REQUIRED for human-in-the-loop
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="openrouter:z-ai/glm-5.2",
+>     backend=FilesystemBackend(root_dir="/Users/user/{project}"),
+>     memory=[
+>         "./AGENTS.md"
+>     ],
+>     interrupt_on={
+>         "write_file": True,  # Default: approve, edit, reject
+>         "read_file": False,  # No interrupts needed
+>         "edit_file": True,   # Default: approve, edit, reject
+>     },
+>     checkpointer=checkpointer,  # Required!
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Fireworks**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-from langgraph.checkpoint.memory import MemorySaver
-
-# Checkpointer is REQUIRED for human-in-the-loop
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="fireworks:accounts/fireworks/models/glm-5p2",
-    backend=FilesystemBackend(root_dir="/Users/user/{project}"),
-    memory=[
-        "./AGENTS.md"
-    ],
-    interrupt_on={
-        "write_file": True,  # Default: approve, edit, reject
-        "read_file": False,  # No interrupts needed
-        "edit_file": True,   # Default: approve, edit, reject
-    },
-    checkpointer=checkpointer,  # Required!
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> # Checkpointer is REQUIRED for human-in-the-loop
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="fireworks:accounts/fireworks/models/glm-5p2",
+>     backend=FilesystemBackend(root_dir="/Users/user/{project}"),
+>     memory=[
+>         "./AGENTS.md"
+>     ],
+>     interrupt_on={
+>         "write_file": True,  # Default: approve, edit, reject
+>         "read_file": False,  # No interrupts needed
+>         "edit_file": True,   # Default: approve, edit, reject
+>     },
+>     checkpointer=checkpointer,  # Required!
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Baseten**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-from langgraph.checkpoint.memory import MemorySaver
-
-# Checkpointer is REQUIRED for human-in-the-loop
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="baseten:zai-org/GLM-5.2",
-    backend=FilesystemBackend(root_dir="/Users/user/{project}"),
-    memory=[
-        "./AGENTS.md"
-    ],
-    interrupt_on={
-        "write_file": True,  # Default: approve, edit, reject
-        "read_file": False,  # No interrupts needed
-        "edit_file": True,   # Default: approve, edit, reject
-    },
-    checkpointer=checkpointer,  # Required!
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> # Checkpointer is REQUIRED for human-in-the-loop
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="baseten:zai-org/GLM-5.2",
+>     backend=FilesystemBackend(root_dir="/Users/user/{project}"),
+>     memory=[
+>         "./AGENTS.md"
+>     ],
+>     interrupt_on={
+>         "write_file": True,  # Default: approve, edit, reject
+>         "read_file": False,  # No interrupts needed
+>         "edit_file": True,   # Default: approve, edit, reject
+>     },
+>     checkpointer=checkpointer,  # Required!
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
-
+>
 **Ollama**
 
 ```python
-from deepagents import create_deep_agent
-from deepagents.backends import FilesystemBackend
-from langgraph.checkpoint.memory import MemorySaver
-
-# Checkpointer is REQUIRED for human-in-the-loop
-checkpointer = MemorySaver()
-
-agent = create_deep_agent(
-    model="ollama:north-mini-code-1.0",
-    backend=FilesystemBackend(root_dir="/Users/user/{project}"),
-    memory=[
-        "./AGENTS.md"
-    ],
-    interrupt_on={
-        "write_file": True,  # Default: approve, edit, reject
-        "read_file": False,  # No interrupts needed
-        "edit_file": True,   # Default: approve, edit, reject
-    },
-    checkpointer=checkpointer,  # Required!
-)
-
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please tell me what's in your memory files.",
-            }
-        ],
-    },
-    config={"configurable": {"thread_id": "12345"}},
-)
+> from deepagents import create_deep_agent
+> from deepagents.backends import FilesystemBackend
+> from langgraph.checkpoint.memory import MemorySaver
+>
+> # Checkpointer is REQUIRED for human-in-the-loop
+> checkpointer = MemorySaver()
+>
+> agent = create_deep_agent(
+>     model="ollama:north-mini-code-1.0",
+>     backend=FilesystemBackend(root_dir="/Users/user/{project}"),
+>     memory=[
+>         "./AGENTS.md"
+>     ],
+>     interrupt_on={
+>         "write_file": True,  # Default: approve, edit, reject
+>         "read_file": False,  # No interrupts needed
+>         "edit_file": True,   # Default: approve, edit, reject
+>     },
+>     checkpointer=checkpointer,  # Required!
+> )
+>
+> result = agent.invoke(
+>     {
+>         "messages": [
+>             {
+>                 "role": "user",
+>                 "content": "Please tell me what's in your memory files.",
+>             }
+>         ],
+>     },
+>     config={"configurable": {"thread_id": "12345"}},
+> )
 ```
 
 ## Profiles
@@ -4379,7 +4379,7 @@ print(result["structured_response"])
 # location='San Francisco, California' temperature=18.3 condition='Sunny' humidity=48 wind_speed=7.6 forecast='Pleasant sunny conditions expected to continue with temperatures around 64°F (18°C) during the day, dropping to around 52°F (11°C) at night. Clear skies with minimal precipitation expected.'
 ```
 
-> **[View example trace](https://smith.langchain.com/public/1f7faa8f-571a-45d4-a549-5510c0feae4e/r)**
+> [card] [View example trace](https://smith.langchain.com/public/3b46bf48-9673-4de4-93a4-9621e7aa4fc7/r)
 >
 > Open a public LangSmith run for this example.
 

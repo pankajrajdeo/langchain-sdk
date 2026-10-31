@@ -115,66 +115,66 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Set `base_url` to your Azure endpoint with `/openai/v1/` appended. With the v1 API you can call any model deployed in [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/) (including OpenAI, Llama, DeepSeek, Mistral, and Phi) through a single interface by pointing `model` at your deployment name.
 
-**Entra ID (recommended)**
-
-Pass the token provider to `api_key`:
-
+> [tab] Entra ID (recommended)
+>
+> Pass the token provider to `api_key`:
+>
 ```python
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI(
-    model="gpt-5.4-mini",  # your Azure deployment name
-    base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
-    api_key=token_provider,  # callable that handles token refresh
-)
+> from langchain_openai import ChatOpenAI
+>
+> llm = ChatOpenAI(
+>     model="gpt-5.4-mini",  # your Azure deployment name
+>     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
+>     api_key=token_provider,  # callable that handles token refresh
+> )
 ```
 
-**API key**
-
+> [tab] API key
+>
 ```python
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI(
-    model="gpt-5.4-mini",  # your Azure deployment name
-    base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
-    api_key="your-azure-api-key",
-)
+> from langchain_openai import ChatOpenAI
+>
+> llm = ChatOpenAI(
+>     model="gpt-5.4-mini",  # your Azure deployment name
+>     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
+>     api_key="your-azure-api-key",
+> )
 ```
 
 ### AzureChatOpenAI
 
 Use [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) when working with traditional Azure OpenAI API versions that require `api_version`.
 
-**Entra ID (recommended)**
-
-Pass the token provider to `azure_ad_token_provider`:
-
+> [tab] Entra ID (recommended)
+>
+> Pass the token provider to `azure_ad_token_provider`:
+>
 ```python
-from langchain_openai import AzureChatOpenAI
-
-llm = AzureChatOpenAI(
-    azure_deployment="gpt-5.4-mini",  # or your deployment
-    api_version="2025-04-01-preview",  # or your api version
-    azure_ad_token_provider=token_provider,
-)
+> from langchain_openai import AzureChatOpenAI
+>
+> llm = AzureChatOpenAI(
+>     azure_deployment="gpt-5.4-mini",  # or your deployment
+>     api_version="2025-04-01-preview",  # or your api version
+>     azure_ad_token_provider=token_provider,
+> )
 ```
 
-**API key**
-
-Reads `AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT` from the environment:
-
+> [tab] API key
+>
+> Reads `AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT` from the environment:
+>
 ```python
-from langchain_openai import AzureChatOpenAI
-
-llm = AzureChatOpenAI(
-    azure_deployment="gpt-5.4-mini",  # or your deployment
-    api_version="2025-04-01-preview",  # or your api version
-    temperature=0,
-    max_tokens=None,
-    timeout=None,
-    max_retries=2,
-    # other params...
-)
+> from langchain_openai import AzureChatOpenAI
+>
+> llm = AzureChatOpenAI(
+>     azure_deployment="gpt-5.4-mini",  # or your deployment
+>     api_version="2025-04-01-preview",  # or your api version
+>     temperature=0,
+>     max_tokens=None,
+>     timeout=None,
+>     max_retries=2,
+>     # other params...
+> )
 ```
 
 ## Invocation
@@ -283,50 +283,50 @@ llm = ChatOpenAI(
 
 Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses), which provides stateful conversations, built-in server-side tools (code interpreter, image generation, file search, and remote MCP), and structured reasoning summaries. [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) automatically routes to the Responses API when you set the `reasoning` parameter, or you can opt in explicitly with `use_responses_api=True`:
 
-**Entra ID (recommended)**
-
+> [tab] Entra ID (recommended)
+>
 ```python
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI(
-    model="gpt-5.4-mini",  # your Azure deployment name
-    base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
-    api_key=token_provider,
-    use_responses_api=True,  # [!code highlight]
-)
-
-# Bind a built-in server-side tool
-llm_with_tools = llm.bind_tools(  # [!code highlight]
-    [{"type": "code_interpreter", "container": {"type": "auto"}}]  # [!code highlight]
-)  # [!code highlight]
-
-response = llm_with_tools.invoke(
-    "Use the code interpreter to compute the 25th Fibonacci number."
-)
-print(response.text)
+> from langchain_openai import ChatOpenAI
+>
+> llm = ChatOpenAI(
+>     model="gpt-5.4-mini",  # your Azure deployment name
+>     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
+>     api_key=token_provider,
+>     use_responses_api=True,  # [!code highlight]
+> )
+>
+> # Bind a built-in server-side tool
+> llm_with_tools = llm.bind_tools(  # [!code highlight]
+>     [{"type": "code_interpreter", "container": {"type": "auto"}}]  # [!code highlight]
+> )  # [!code highlight]
+>
+> response = llm_with_tools.invoke(
+>     "Use the code interpreter to compute the 25th Fibonacci number."
+> )
+> print(response.text)
 ```
 
-**API key**
-
+> [tab] API key
+>
 ```python
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI(
-    model="gpt-5.4-mini",  # your Azure deployment name
-    base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
-    api_key="your-azure-api-key",
-    use_responses_api=True,  # [!code highlight]
-)
-
-# Bind a built-in server-side tool
-llm_with_tools = llm.bind_tools(  # [!code highlight]
-    [{"type": "code_interpreter", "container": {"type": "auto"}}]  # [!code highlight]
-)  # [!code highlight]
-
-response = llm_with_tools.invoke(
-    "Use the code interpreter to compute the 25th Fibonacci number."
-)
-print(response.text)
+> from langchain_openai import ChatOpenAI
+>
+> llm = ChatOpenAI(
+>     model="gpt-5.4-mini",  # your Azure deployment name
+>     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
+>     api_key="your-azure-api-key",
+>     use_responses_api=True,  # [!code highlight]
+> )
+>
+> # Bind a built-in server-side tool
+> llm_with_tools = llm.bind_tools(  # [!code highlight]
+>     [{"type": "code_interpreter", "container": {"type": "auto"}}]  # [!code highlight]
+> )  # [!code highlight]
+>
+> response = llm_with_tools.invoke(
+>     "Use the code interpreter to compute the 25th Fibonacci number."
+> )
+> print(response.text)
 ```
 
 For details on built-in tools and how to use them, see the [Azure OpenAI Responses API docs](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses).

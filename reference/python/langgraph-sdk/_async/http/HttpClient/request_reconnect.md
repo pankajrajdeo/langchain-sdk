@@ -1,6 +1,6 @@
 ---
 title: "request_reconnect"
-description: "Send a request that automatically reconnects to Location header."
+description: "Send a request that reconnects to its Location header if the response is cut off, with backoff between attempts."
 source: "https://reference.langchain.com/python/langgraph-sdk/_async/http/HttpClient/request_reconnect"
 category: "reference"
 tags: [reference, langgraph-sdk, async, http, httpclient, request_reconnect]
@@ -12,7 +12,8 @@ tags: [reference, langgraph-sdk, async, http, httpclient, request_reconnect]
 
 📖 [View in docs](https://reference.langchain.com/python/langgraph-sdk/_async/http/HttpClient/request_reconnect)
 
-Send a request that automatically reconnects to Location header.
+Send a request that reconnects to its Location header if the response is
+cut off, with backoff between attempts.
 
 ## Signature
 
@@ -32,4 +33,4 @@ request_reconnect(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/3521f08e21a7d89c28331191374bc85c11ecb6e2/libs/sdk-py/langgraph_sdk/_async/http.py#L138)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5bd231cbfd913e05ebc662f519eb9a655bc766df/libs/sdk-py/langgraph_sdk/_async/http.py#L143)

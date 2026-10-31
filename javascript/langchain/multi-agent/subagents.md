@@ -81,7 +81,7 @@ const callResearchAgent = tool(
 const mainAgent = createAgent({ model: "google:gemini-3.6-flash", tools: [callResearchAgent] });
 ```
 
-> **[Tutorial: Build a personal assistant with subagents](subagents-personal-assistant.md)**
+> [card] [Tutorial: Build a personal assistant with subagents](subagents-personal-assistant.md)
 >
 > Learn how to build a personal assistant using the subagents pattern, where a central main agent (supervisor) coordinates specialized worker agents.
 
@@ -287,7 +287,7 @@ graph LR
 >
 > An interesting aspect of this approach is that sub-agents may have the exact same capabilities as the main agent. In such cases, invoking a sub-agent is **really about context isolation** as the primary reason—allowing complex, multi-step tasks to run in isolated context windows without bloating the main agent's conversation history. The sub-agent completes its work autonomously and returns only a concise summary, keeping the main thread focused and efficient.
 
-> **Agent registry with task dispatcher**
+> [accordion] Agent registry with task dispatcher
 >
 ```typescript
 > import { tool, createAgent } from "langchain";

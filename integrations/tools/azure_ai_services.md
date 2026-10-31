@@ -170,7 +170,7 @@ result = tool.invoke(
 print(result)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **source** `str`
 >
@@ -209,7 +209,7 @@ result = tool.invoke(
 print(result)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **source** `str`
 >
@@ -249,7 +249,7 @@ result = tool.invoke(
 print(result)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **source** `str`
 >
@@ -285,7 +285,7 @@ result = tool.invoke(
 print(result)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **query** `str`
 >
@@ -319,7 +319,7 @@ result = tool.invoke("path/to/audio.wav")
 print(result)
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **query** `str`
 >
@@ -357,7 +357,7 @@ result = tool.invoke("Hello, this is a test of text to speech synthesis.")
 print(result)  # Returns path to generated WAV file
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **query** `str`
 >

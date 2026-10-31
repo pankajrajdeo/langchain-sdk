@@ -16,15 +16,17 @@ tags: [docs, langsmith, data-export]
 >
 > For customers who signed up after August 3, 2026, bulk export is only available on the [LangSmith Enterprise plan](https://www.langchain.com/pricing-langsmith). Customers who signed up on or before August 3, 2026, can use bulk export on Plus or Enterprise plans until February 1, 2027.
 
-LangSmith's bulk data export lets you export trace data from a specific project and date range to an S3-compatible bucket in [Parquet](https://parquet.apache.org/docs/overview/) format, matching the fields in the [Run data format](run-data-format.md). This is useful for offline analysis in tools like BigQuery, Snowflake, Redshift, or Jupyter Notebooks.
+LangSmith's bulk data export lets you export trace data from a specific project and date range to an S3-compatible bucket in [Parquet](https://parquet.apache.org/docs/overview/) format, matching the fields in the [Run data format](run-data-format.md). This is useful for offline analysis in tools like BigQuery, Snowflake, Redshift, or Jupyter notebooks.
 
 This page covers how to:
 
-* Create an export destination
-* Create and configure an export job, including scheduled exports and field filtering
-* Monitor export progress
+* Create an export destination.
+* Create and configure an export job, including scheduled exports and field filtering.
+* Monitor export progress.
 
-**Before you start:** exports may take some time depending on data volume, and LangSmith limits how many exports can run concurrently. Bulk exports have a 72-hour runtime timeout—refer to [Automatic retry behavior](data-export-monitor.md#automatic-retry-behavior) for details. Once launched, LangSmith handles orchestration and [resilience of the export process](data-export-monitor.md#failure-modes-and-retry-policy) automatically.
+## Before you start
+
+Exports may take some time depending on data volume, and LangSmith limits how many exports can run concurrently. Bulk exports have a 72-hour runtime timeout. Refer to [Automatic retry behavior](data-export-monitor.md#automatic-retry-behavior) for details. Once launched, LangSmith handles orchestration and [resilience of the export process](data-export-monitor.md#failure-modes-and-retry-policy) automatically.
 
 ## 1. Create a destination
 
@@ -68,7 +70,7 @@ Refer to [Manage bulk export destinations](data-export-destinations.md) for perm
 An export job targets a project (or all experiments in a workspace) and a date range. You will need:
 
 * The destination `id` from the [previous step](#1-create-a-destination).
-* Either a project ID (`session_id`) or `"all_experiments": true`—copy the project ID from the individual project view in the [**Tracing Projects** list](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-data-export).
+* Either a project ID (`session_id`) or `"all_experiments": true`. Copy the project ID from the individual project view in the [**Tracing Projects** list](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-data-export).
 * A `start_time` and `end_time` in UTC ISO 8601 format.
 
 ```bash
@@ -90,7 +92,15 @@ The `start_time` is inclusive and `end_time` is exclusive. The export will inclu
 
 Save the `id` from the response to monitor the export's progress.
 
-You can optionally add a `filter` expression to narrow the set of runs exported. Refer to our [filter query language](trace-query-syntax.md#filter-query-language) and [examples](export-traces.md#use-filter-query-language) for syntax. Not setting the `filter` field will export all runs.
+You can optionally add a `filter` expression to narrow the set of runs exported. Refer to the [filter query language](trace-query-syntax.md#filter-query-language) and [examples](export-traces.md#use-filter-query-language) for syntax. Not setting the `filter` field will export all runs.
+
+On exports that read from SmithDB, `filter` also accepts the [search bar query syntax](filter-traces.md#query-syntax), for example `run_type:llm AND status:error`. The filter matches individual runs, like the **Single run** scope.
+
+LangSmith checks the filter when you create the export and rejects an invalid one with a `400` error. Filters can be at most 5,000 characters long.
+
+> [!NOTE]
+>
+> Search bar syntax in bulk export filters is available on LangSmith Cloud and on self-hosted LangSmith with [SmithDB](self-host-smithdb-features.md), Helm version `0.18.0-rc.50` or later (application version `0.18.19rc1` or later). Other installations accept only the [filter query language](trace-query-syntax.md#filter-query-language).
 
 > [!NOTE]
 >

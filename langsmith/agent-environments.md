@@ -10,7 +10,7 @@ tags: [docs, langsmith, agent-environments]
 
 > How an agent's environments divide its traces, how to select one, and which parts of the set are fixed.
 
-An *environment* records where an agent was running when it produced a trace. Every trace an [agent](agents.md) records lands in exactly one of its environments, which are drawn from a fixed set of four.
+An *environment* records where an agent was running when it produced a trace. Every trace an [agent](agent-registry.md#agent) records lands in exactly one of its environments, which are drawn from a fixed set of four.
 
 Because the environment travels with the trace, where the agent was running is a property of the trace itself.
 
@@ -49,7 +49,7 @@ This control drives environment selection on Tracing, Monitoring, alerts, [Engin
 
 ## See also
 
-* [Agents](agents.md)
+* [Agent Registry](agent-registry.md)
 * [Log traces to an agent](log-traces-to-agent.md)
 * [Configure legacy integrations](create-an-agent.md#use-an-environment-project)
 * [Observability concepts](observability-concepts.md)

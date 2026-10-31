@@ -81,11 +81,11 @@ A channel receives messages that start agent runs and delivers responses. An [MC
 
 ## Supported channels
 
-> **[Slack](python/managed-deep-agents-channels-slack.md)**
+> [card] [Slack](python/managed-deep-agents-channels-slack.md)
 >
 > Start runs from Slack mentions, direct messages, and thread replies.
 
-> **[HTTP](python/managed-deep-agents-channels-http.md)**
+> [card] [HTTP](python/managed-deep-agents-channels-http.md)
 >
 > Start runs from any service that can send a JSON webhook.
 

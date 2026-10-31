@@ -150,7 +150,7 @@ agent = create_agent(
 
 ### Parameters
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **subscription\_id** `str` *required*
 >

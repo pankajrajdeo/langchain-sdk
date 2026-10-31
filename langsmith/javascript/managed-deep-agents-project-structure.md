@@ -116,11 +116,11 @@ MDA copies the package into the build. `mda dev` reloads when you edit it, and `
 
 ## Next steps
 
-> **[Quickstart](managed-deep-agents-quickstart.md)**
+> [card] [Quickstart](managed-deep-agents-quickstart.md)
 >
 > Create and deploy your first Managed Deep Agent with the `mda` CLI.
 
-> **[Tutorial](managed-deep-agents-tutorial.md)**
+> [card] [Tutorial](managed-deep-agents-tutorial.md)
 >
 > Add durable memory and a daily schedule to the quickstart research assistant.
 

@@ -189,7 +189,7 @@ async function* sttStream(
 
 The application implements an AssemblyAI client to manage the WebSocket connection and message parsing. See below for implementations; similar adapters can be constructed for other STT providers.
 
-> **AssemblyAI Client**
+> [accordion] AssemblyAI Client
 >
 ```typescript
 > export class AssemblyAISTT {
@@ -393,7 +393,7 @@ async function* ttsStream(
 
 The application implements a Cartesia client to manage the WebSocket connection and audio streaming. See below for implementations; similar adapters can be constructed for other TTS providers.
 
-> **Cartesia Client**
+> [accordion] Cartesia Client
 >
 ```typescript
 > export class CartesiaTTS {

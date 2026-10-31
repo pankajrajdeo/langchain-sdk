@@ -18,4 +18,4 @@ tags: [index, reference, python, langgraph, internal, runnable, runnableseq]
 - [steps](steps.md) - View source on GitHub
 - [stream](stream.md) - View source on GitHub
 - [trace_inputs](trace_inputs.md) - View source on GitHub
-- [trace_outputs](trace_outputs.md) - View source on GitHub
+- [trace_policy](trace_policy.md) - View source on GitHub

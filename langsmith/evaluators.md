@@ -16,13 +16,13 @@ What an evaluator attaches to depends on how your workspace is organized.
 
 > [!NOTE]
 >
-> **Agent-based workspaces.** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](observability-concepts.md#tracing-projects).
+> **Agent-based workspaces.** This section applies if your workspace organizes traces by [agent and environment](agent-registry.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](observability-concepts.md#tracing-projects).
 
-An evaluator attaches to an [environment](agent-environments.md#environment-names) of an [agent](agents.md). Attach it to **Production** alone to score production traffic without also scoring local runs.
+An evaluator attaches to an [environment](agent-environments.md#environment-names) of an [agent](agent-registry.md#agent). Attach it to **Production** alone to score production traffic without also scoring local runs.
 
 > [!NOTE]
 >
-> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](observability-concepts.md#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based. Skip this section and read [Agents](agents.md).
+> **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](observability-concepts.md#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based. Skip this section and read [Agent Registry](agent-registry.md).
 
 An evaluator attaches to a [tracing project](observability-concepts.md#tracing-projects).
 

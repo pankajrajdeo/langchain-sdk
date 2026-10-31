@@ -92,6 +92,8 @@ postgres:
 
 Once configured, you should be able to reinstall your LangSmith instance. If everything is configured correctly, your LangSmith instance should now be using your external PostgreSQL database.
 
+<a id="azure-database-for-postgresql"></a>
+
 ## TLS with PostgreSQL
 
 Use this section to configure TLS for PostgreSQL connections. For mounting internal/public CAs so LangSmith trusts your PostgreSQL server certificate, see [Configure custom TLS certificates](self-host-custom-tls-certificates.md#mount-internal-cas-for-tls).
@@ -135,6 +137,8 @@ stringData:
     <ROOT_OR_INTERMEDIATE_CA_CERT_CHAIN>
     -----END CERTIFICATE-----
 ```
+
+<a id="google-cloud-sql"></a>
 
 ### Mutual TLS with client auth (mTLS)
 
@@ -198,6 +202,8 @@ commonPodSecurityContext:
 
 If you need more granular control, add the `fsGroup` to each pod's security context individually. See the [mTLS configuration example](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/examples/mtls_config.yaml) for a complete reference.
 
+<a id="amazon-rds"></a>
+
 ## IAM authentication
 
 As of LangSmith helm chart version **0.12.34**, we support IAM authentication for PostgreSQL. This allows you to use cloud provider workload identity instead of static passwords.
@@ -206,284 +212,278 @@ As of LangSmith helm chart version **0.12.34**, we support IAM authentication fo
 >
 > IAM authentication only handles connection authentication. You may still need to run SQL commands in your database to create the IAM user/role and grant it the necessary permissions and privileges to access the LangSmith schema.
 
-**AWS**
-
-<a id="amazon-rds"></a>
-
-### Amazon RDS IAM authentication
-
-Amazon RDS supports [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html), which allows you to authenticate to your PostgreSQL instance using AWS IAM credentials instead of database passwords.
-
-#### Prerequisites
-
-1. **Configure workload identity** in your Kubernetes cluster using [AWS IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) or [EKS Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html)
-2. **Enable IAM authentication** on your RDS PostgreSQL instance and grant access to your workload identity
-
-#### Configuration
-
-> [!WARNING]
+> [tab] AWS
 >
-> If you switch to a new IAM user after LangSmith has already run initial migrations, you may need to transfer ownership of existing tables to the new IAM user. Otherwise, migrations may fail due to insufficient privileges on tables owned by the previous user.
-
-Set the `iamAuthProvider` to `"aws"` and provide an IAM-compatible connection string (without password):
-
-```yaml
-postgres:
-  external:
-    enabled: true
-    existingSecretName: "postgres-secret"
-    iamAuthProvider: "aws"
-```
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-secret
-type: Opaque
-stringData:
-  # IAM connection URL - note no password, username is the IAM identity name
-  connection_url: "<iam-identity-name>@<rds-host>:5432/<database>?sslmode=require"
-```
-
-> [!WARNING]
+> ### Amazon RDS IAM authentication
 >
-> IAM authentication requires TLS. You must include `sslmode=require` in your connection string.
-
-#### Required annotations
-
-You must apply the ServiceAccount annotations required by AWS IRSA to all LangSmith components that connect to PostgreSQL:
-
-**Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
-
-**Jobs:** `migrations`, `authBootstrap`, `feedbackConfigMigration`, `feedbackDataMigration`, `e2eTest`
-
-> [!NOTE]
+> Amazon RDS supports [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html), which allows you to authenticate to your PostgreSQL instance using AWS IAM credentials instead of database passwords.
 >
-> All jobs listed above (except `e2eTest`) use the `backend` service account. The `e2eTest` job uses its own service account and requires separate annotation configuration.
-
-Example configuration for the backend service:
-
-```yaml
-backend:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
-
-queue:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
-
-platformBackend:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
-
-hostBackend:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
-
-ingestQueue:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
-```
-
-See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
-
-**GCP**
-
-<a id="google-cloud-sql"></a>
-
-### Cloud SQL IAM authentication
-
-Cloud SQL supports [IAM authentication](https://cloud.google.com/sql/docs/postgres/iam-authentication), which allows you to authenticate using GCP service accounts instead of database passwords.
-
-#### Prerequisites
-
-1. **Configure workload identity** in your Kubernetes cluster using [GCP Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity)
-2. **Enable IAM authentication** on your Cloud SQL instance and grant access to your workload identity
-
-#### Configuration
-
-> [!WARNING]
+> #### Prerequisites
 >
-> If you switch to a new IAM user after LangSmith has already run initial migrations, you may need to transfer ownership of existing tables to the new IAM user. Otherwise, migrations may fail due to insufficient privileges on tables owned by the previous user.
-
-Set the `iamAuthProvider` to `"gcp"` and provide an IAM-compatible connection string (without password):
-
-```yaml
-postgres:
-  external:
-    enabled: true
-    existingSecretName: "postgres-secret"
-    iamAuthProvider: "gcp"
-```
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-secret
-type: Opaque
-stringData:
-  # IAM connection URL - note no password, username is the service account email
-  connection_url: "<service-account>@<project>.iam@<cloud-sql-host>:5432/<database>?sslmode=require"
-```
-
-> [!WARNING]
+> 1. **Configure workload identity** in your Kubernetes cluster using [AWS IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) or [EKS Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html)
+> 2. **Enable IAM authentication** on your RDS PostgreSQL instance and grant access to your workload identity
 >
-> IAM authentication requires TLS. You must include `sslmode=require` in your connection string.
-
-#### Required annotations
-
-You must apply the ServiceAccount annotations required by GCP Workload Identity to all LangSmith components that connect to PostgreSQL:
-
-**Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
-
-**Jobs:** `migrations`, `authBootstrap`, `feedbackConfigMigration`, `feedbackDataMigration`, `e2eTest`
-
-> [!NOTE]
+> #### Configuration
 >
-> All jobs listed above (except `e2eTest`) use the `backend` service account. The `e2eTest` job uses its own service account and requires separate annotation configuration.
-
-Example configuration for the backend service:
-
-```yaml
-backend:
-  serviceAccount:
-    annotations:
-      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
-
-queue:
-  serviceAccount:
-    annotations:
-      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
-
-platformBackend:
-  serviceAccount:
-    annotations:
-      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
-
-hostBackend:
-  serviceAccount:
-    annotations:
-      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
-
-ingestQueue:
-  serviceAccount:
-    annotations:
-      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
-```
-
-See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
-
-**Azure**
-
-<a id="azure-database-for-postgresql"></a>
-
-### Azure Database for PostgreSQL with Microsoft Entra authentication
-
-Azure Database for PostgreSQL supports [Microsoft Entra authentication](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-azure-ad-authentication), which allows you to authenticate using Azure managed identities instead of database passwords.
-
-#### Prerequisites
-
-1. **Configure workload identity** in your Kubernetes cluster using [Azure Workload Identity](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview)
-2. **Enable Microsoft Entra authentication** on your Azure Database for PostgreSQL instance and grant access to your workload identity
-
-#### Configuration
-
-> [!WARNING]
+> > [!WARNING]
+> >
+> > If you switch to a new IAM user after LangSmith has already run initial migrations, you may need to transfer ownership of existing tables to the new IAM user. Otherwise, migrations may fail due to insufficient privileges on tables owned by the previous user.
 >
-> If you switch to a new IAM user after LangSmith has already run initial migrations, you may need to transfer ownership of existing tables to the new IAM user. Otherwise, migrations may fail due to insufficient privileges on tables owned by the previous user.
-
-Set the `iamAuthProvider` to `"azure"` and provide an IAM-compatible connection string (without password):
-
-```yaml
-postgres:
-  external:
-    enabled: true
-    existingSecretName: "postgres-secret"
-    iamAuthProvider: "azure"
-```
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-secret
-type: Opaque
-stringData:
-  # IAM connection URL - note no password, username is the managed identity name
-  connection_url: "<managed-identity-name>@<azure-postgres-host>:5432/<database>?sslmode=require"
-```
-
-> [!WARNING]
+> Set the `iamAuthProvider` to `"aws"` and provide an IAM-compatible connection string (without password):
 >
-> IAM authentication requires TLS. You must include `sslmode=require` in your connection string.
-
-#### Required annotations
-
-You must apply the ServiceAccount annotations and pod labels required by Azure Workload Identity to all LangSmith components that connect to PostgreSQL:
-
-**Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
-
-**Jobs:** `migrations`, `authBootstrap`, `feedbackConfigMigration`, `feedbackDataMigration`, `e2eTest`
-
-> [!NOTE]
->
-> All jobs listed above (except `e2eTest`) use the `backend` service account. For these jobs, you only need to configure pod labels (Azure requires `azure.workload.identity/use: "true"` on pods). The `e2eTest` job uses its own service account and requires separate annotation configuration.
-
-Example configuration for the backend service:
-
 ```yaml
-backend:
-  serviceAccount:
-    annotations:
-      azure.workload.identity/client-id: "<managed-identity-client-id>"
-  deployment:
-    labels:
-      azure.workload.identity/use: "true"
-  migrations:
-    labels:
-      azure.workload.identity/use: "true"
-
-queue:
-  serviceAccount:
-    annotations:
-      azure.workload.identity/client-id: "<managed-identity-client-id>"
-  deployment:
-    labels:
-      azure.workload.identity/use: "true"
-
-platformBackend:
-  serviceAccount:
-    annotations:
-      azure.workload.identity/client-id: "<managed-identity-client-id>"
-  deployment:
-    labels:
-      azure.workload.identity/use: "true"
-
-hostBackend:
-  serviceAccount:
-    annotations:
-      azure.workload.identity/client-id: "<managed-identity-client-id>"
-  deployment:
-    labels:
-      azure.workload.identity/use: "true"
-
-ingestQueue:
-  serviceAccount:
-    annotations:
-      azure.workload.identity/client-id: "<managed-identity-client-id>"
-  deployment:
-    labels:
-      azure.workload.identity/use: "true"
+> postgres:
+>   external:
+>     enabled: true
+>     existingSecretName: "postgres-secret"
+>     iamAuthProvider: "aws"
 ```
+>
+```yaml
+> apiVersion: v1
+> kind: Secret
+> metadata:
+>   name: postgres-secret
+> type: Opaque
+> stringData:
+>   # IAM connection URL - note no password, username is the IAM identity name
+>   connection_url: "<iam-identity-name>@<rds-host>:5432/<database>?sslmode=require"
+```
+>
+> > [!WARNING]
+> >
+> > IAM authentication requires TLS. You must include `sslmode=require` in your connection string.
+>
+> #### Required annotations
+>
+> You must apply the ServiceAccount annotations required by AWS IRSA to all LangSmith components that connect to PostgreSQL:
+>
+> **Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
+>
+> **Jobs:** `migrations`, `authBootstrap`, `feedbackConfigMigration`, `feedbackDataMigration`, `e2eTest`
+>
+> > [!NOTE]
+> >
+> > All jobs listed above (except `e2eTest`) use the `backend` service account. The `e2eTest` job uses its own service account and requires separate annotation configuration.
+>
+> Example configuration for the backend service:
+>
+```yaml
+> backend:
+>   serviceAccount:
+>     annotations:
+>       eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+>
+> queue:
+>   serviceAccount:
+>     annotations:
+>       eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+>
+> platformBackend:
+>   serviceAccount:
+>     annotations:
+>       eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+>
+> hostBackend:
+>   serviceAccount:
+>     annotations:
+>       eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+>
+> ingestQueue:
+>   serviceAccount:
+>     annotations:
+>       eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+```
+>
+> See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
-See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
+> [tab] GCP
+>
+> ### Cloud SQL IAM authentication
+>
+> Cloud SQL supports [IAM authentication](https://cloud.google.com/sql/docs/postgres/iam-authentication), which allows you to authenticate using GCP service accounts instead of database passwords.
+>
+> #### Prerequisites
+>
+> 1. **Configure workload identity** in your Kubernetes cluster using [GCP Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity)
+> 2. **Enable IAM authentication** on your Cloud SQL instance and grant access to your workload identity
+>
+> #### Configuration
+>
+> > [!WARNING]
+> >
+> > If you switch to a new IAM user after LangSmith has already run initial migrations, you may need to transfer ownership of existing tables to the new IAM user. Otherwise, migrations may fail due to insufficient privileges on tables owned by the previous user.
+>
+> Set the `iamAuthProvider` to `"gcp"` and provide an IAM-compatible connection string (without password):
+>
+```yaml
+> postgres:
+>   external:
+>     enabled: true
+>     existingSecretName: "postgres-secret"
+>     iamAuthProvider: "gcp"
+```
+>
+```yaml
+> apiVersion: v1
+> kind: Secret
+> metadata:
+>   name: postgres-secret
+> type: Opaque
+> stringData:
+>   # IAM connection URL - note no password, username is the service account email
+>   connection_url: "<service-account>@<project>.iam@<cloud-sql-host>:5432/<database>?sslmode=require"
+```
+>
+> > [!WARNING]
+> >
+> > IAM authentication requires TLS. You must include `sslmode=require` in your connection string.
+>
+> #### Required annotations
+>
+> You must apply the ServiceAccount annotations required by GCP Workload Identity to all LangSmith components that connect to PostgreSQL:
+>
+> **Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
+>
+> **Jobs:** `migrations`, `authBootstrap`, `feedbackConfigMigration`, `feedbackDataMigration`, `e2eTest`
+>
+> > [!NOTE]
+> >
+> > All jobs listed above (except `e2eTest`) use the `backend` service account. The `e2eTest` job uses its own service account and requires separate annotation configuration.
+>
+> Example configuration for the backend service:
+>
+```yaml
+> backend:
+>   serviceAccount:
+>     annotations:
+>       iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+>
+> queue:
+>   serviceAccount:
+>     annotations:
+>       iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+>
+> platformBackend:
+>   serviceAccount:
+>     annotations:
+>       iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+>
+> hostBackend:
+>   serviceAccount:
+>     annotations:
+>       iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+>
+> ingestQueue:
+>   serviceAccount:
+>     annotations:
+>       iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+```
+>
+> See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
+
+> [tab] Azure
+>
+> ### Azure Database for PostgreSQL with Microsoft Entra authentication
+>
+> Azure Database for PostgreSQL supports [Microsoft Entra authentication](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-azure-ad-authentication), which allows you to authenticate using Azure managed identities instead of database passwords.
+>
+> #### Prerequisites
+>
+> 1. **Configure workload identity** in your Kubernetes cluster using [Azure Workload Identity](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview)
+> 2. **Enable Microsoft Entra authentication** on your Azure Database for PostgreSQL instance and grant access to your workload identity
+>
+> #### Configuration
+>
+> > [!WARNING]
+> >
+> > If you switch to a new IAM user after LangSmith has already run initial migrations, you may need to transfer ownership of existing tables to the new IAM user. Otherwise, migrations may fail due to insufficient privileges on tables owned by the previous user.
+>
+> Set the `iamAuthProvider` to `"azure"` and provide an IAM-compatible connection string (without password):
+>
+```yaml
+> postgres:
+>   external:
+>     enabled: true
+>     existingSecretName: "postgres-secret"
+>     iamAuthProvider: "azure"
+```
+>
+```yaml
+> apiVersion: v1
+> kind: Secret
+> metadata:
+>   name: postgres-secret
+> type: Opaque
+> stringData:
+>   # IAM connection URL - note no password, username is the managed identity name
+>   connection_url: "<managed-identity-name>@<azure-postgres-host>:5432/<database>?sslmode=require"
+```
+>
+> > [!WARNING]
+> >
+> > IAM authentication requires TLS. You must include `sslmode=require` in your connection string.
+>
+> #### Required annotations
+>
+> You must apply the ServiceAccount annotations and pod labels required by Azure Workload Identity to all LangSmith components that connect to PostgreSQL:
+>
+> **Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
+>
+> **Jobs:** `migrations`, `authBootstrap`, `feedbackConfigMigration`, `feedbackDataMigration`, `e2eTest`
+>
+> > [!NOTE]
+> >
+> > All jobs listed above (except `e2eTest`) use the `backend` service account. For these jobs, you only need to configure pod labels (Azure requires `azure.workload.identity/use: "true"` on pods). The `e2eTest` job uses its own service account and requires separate annotation configuration.
+>
+> Example configuration for the backend service:
+>
+```yaml
+> backend:
+>   serviceAccount:
+>     annotations:
+>       azure.workload.identity/client-id: "<managed-identity-client-id>"
+>   deployment:
+>     labels:
+>       azure.workload.identity/use: "true"
+>   migrations:
+>     labels:
+>       azure.workload.identity/use: "true"
+>
+> queue:
+>   serviceAccount:
+>     annotations:
+>       azure.workload.identity/client-id: "<managed-identity-client-id>"
+>   deployment:
+>     labels:
+>       azure.workload.identity/use: "true"
+>
+> platformBackend:
+>   serviceAccount:
+>     annotations:
+>       azure.workload.identity/client-id: "<managed-identity-client-id>"
+>   deployment:
+>     labels:
+>       azure.workload.identity/use: "true"
+>
+> hostBackend:
+>   serviceAccount:
+>     annotations:
+>       azure.workload.identity/client-id: "<managed-identity-client-id>"
+>   deployment:
+>     labels:
+>       azure.workload.identity/use: "true"
+>
+> ingestQueue:
+>   serviceAccount:
+>     annotations:
+>       azure.workload.identity/client-id: "<managed-identity-client-id>"
+>   deployment:
+>     labels:
+>       azure.workload.identity/use: "true"
+```
+>
+> See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
 ***
 

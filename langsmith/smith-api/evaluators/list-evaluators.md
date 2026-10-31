@@ -201,9 +201,9 @@ paths:
           style: form
           explode: false
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Tag Value Id
         - description: Filter by feedback key
           name: feedback_key
@@ -217,9 +217,9 @@ paths:
           style: form
           explode: false
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Resource Id
         - description: >-
             Filter to evaluators attached to the agent's environments or tagged
@@ -245,8 +245,8 @@ paths:
           name: limit
           in: query
           schema:
-            default: 100
             type: integer
+            default: 100
             title: Limit
         - description: Offset for pagination
           name: offset

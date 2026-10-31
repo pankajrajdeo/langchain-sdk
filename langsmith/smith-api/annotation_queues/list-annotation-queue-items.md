@@ -202,18 +202,18 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             enum:
               - needs_my_review
               - needs_others_review
               - archived
+            type: string
             title: Status
         - description: Page size (max 100)
           name: page_size
           in: query
           schema:
-            default: 20
             type: integer
+            default: 20
             title: Page Size
         - description: Opaque pagination cursor
           name: cursor
@@ -225,10 +225,10 @@ paths:
           name: item_type
           in: query
           schema:
-            type: string
             enum:
               - RUN
               - THREAD
+            type: string
             title: Item Type
         - description: >-
             Only items whose trace start time is at or after this timestamp.
@@ -236,8 +236,8 @@ paths:
           name: min_start_time
           in: query
           schema:
-            type: string
             format: date-time
+            type: string
             title: Min Start Time
         - description: >-
             Only items whose trace start time is at or before this timestamp.
@@ -245,18 +245,18 @@ paths:
           name: max_start_time
           in: query
           schema:
-            type: string
             format: date-time
+            type: string
             title: Max Start Time
         - description: Pagination direction. backward requires cursor
           name: direction
           in: query
           schema:
-            default: forward
-            type: string
             enum:
               - forward
               - backward
+            type: string
+            default: forward
             title: Direction
       responses:
         '200':

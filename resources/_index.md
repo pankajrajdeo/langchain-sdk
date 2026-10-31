@@ -34,7 +34,7 @@ tags: [index, resources]
 - [LangSmith vs Datadog: Which platform fits your AI agent engineering stack?](langsmith-vs-datadog-which-platform-fits-your-ai-agent-engineering-stack.md) - Compare LangSmith and Datadog for AI agent observability, evaluation, and deployment. See feature differences, pricing, and which platform fits your needs.
 - [LangSmith vs. Galileo: which feedback loop fits your stack?](langsmith-vs-galileo.md) - Key takeaways
 - [LangSmith vs. Langfuse](langsmith-vs-langfuse.md) - Key Takeaways
-- [How to Calibrate LLM-as-Judge with Human Corrections](llm-as-a-judge.md) - Key Takeaways
+- [What is LLM-as-a-Judge &amp; How Can it Evaluate AI Agents?](llm-as-a-judge.md) - Key Takeaways
 - [LLM Evals: The Feedback Loop Behind Reliable AI Agents](llm-evals.md) - An LLM eval is a structured test that scores what a model or agent produces against a defined expectation, whether that's a reference answer, a policy rule, a functional check, or a quality rubric...
 - [LLM Evaluation Benchmarks: What They Measure and What They Miss](llm-evaluation-benchmarks.md) - Learn what LLM evaluation benchmarks measure and why real-world reliability requires application-specific evals and golden datasets.
 - [LLM Evaluation Framework: Trajectories vs. Outputs](llm-evaluation-framework.md) - Key Takeaways

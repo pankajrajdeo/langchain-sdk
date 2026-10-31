@@ -66,17 +66,17 @@ An organization contains workspaces. Each workspace contains agents, and each ag
 
 > [!NOTE]
 >
-> **Agent-based workspaces.** This section applies if your workspace organizes traces by [agent and environment](agents.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](#tracing-projects).
+> **Agent-based workspaces.** This section applies if your workspace organizes traces by [agent and environment](agent-registry.md). To check, look at the control at the top left: it names your workspace. If it shows the LangSmith logo instead, and the sidebar has an **Application** section with an application picker, your workspace is project-based. Skip this section and read [Tracing projects](#tracing-projects).
 
 An *agent* has a stable identifier within its workspace. Use that identifier to associate traces with the agent that produced them. An agent's traces divide across *environments* drawn from a fixed set of four: Production, Staging, Development, and Local. Traces land in one environment of one agent, so a query about production behavior never has to exclude test traffic by hand.
 
 [Log traces to an agent](log-traces-to-agent.md).
 
-> **Compatibility with older workspaces and APIs**
+> [accordion] Compatibility with older workspaces and APIs
 >
 > > [!NOTE]
 > >
-> > **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based. Skip this section and read [Agents](agents.md).
+> > **Project-based workspaces.** This section applies if your workspace organizes traces by [tracing project](#tracing-projects). To check, look at the control at the top left. In a project-based workspace, it shows the LangSmith logo, and the sidebar has an **Application** section with an application picker. If the control shows your workspace name instead, your workspace is agent-based. Skip this section and read [Agent Registry](agent-registry.md).
 >
 > Older workspaces and self-hosted LangSmith group traces into tracing projects. In an agent-based workspace, each agent environment has its own trace storage: a backing tracing project. Some APIs and integrations still use its name or UUID through fields such as `project_name` and `session_id`. These fields refer to the environment's trace storage, not an additional agent you need to create. See [Resolve an agent environment](resolve-an-agent.md).
 

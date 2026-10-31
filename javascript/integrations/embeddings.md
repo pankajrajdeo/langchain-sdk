@@ -48,7 +48,7 @@ Two main methods are available:
 
 ## Install and use
 
-> **OpenAI**
+> [accordion] OpenAI
 >
 > Install dependencies:
 >
@@ -86,7 +86,7 @@ Two main methods are available:
 > });
 ```
 
-> **Azure**
+> [accordion] Azure
 >
 > Install dependencies
 >
@@ -126,7 +126,7 @@ Two main methods are available:
 > });
 ```
 
-> **AWS**
+> [accordion] AWS
 >
 > Install dependencies:
 >
@@ -164,7 +164,7 @@ Two main methods are available:
 > });
 ```
 
-> **Google Gemini**
+> [accordion] Google Gemini
 >
 > Install dependencies:
 >
@@ -202,7 +202,7 @@ Two main methods are available:
 > });
 ```
 
-> **Gemini Enterprise Agent Platform**
+> [accordion] Gemini Enterprise Agent Platform
 >
 > Install dependencies:
 >
@@ -240,7 +240,7 @@ Two main methods are available:
 > });
 ```
 
-> **MistralAI**
+> [accordion] MistralAI
 >
 > Install dependencies:
 >
@@ -278,7 +278,7 @@ Two main methods are available:
 > });
 ```
 
-> **Cohere**
+> [accordion] Cohere
 >
 > Install dependencies:
 >
@@ -316,7 +316,7 @@ Two main methods are available:
 > });
 ```
 
-> **Ollama**
+> [accordion] Ollama
 >
 > Install dependencies:
 >
@@ -349,7 +349,7 @@ Two main methods are available:
 > });
 ```
 
-> **Voyage AI**
+> [accordion] Voyage AI
 >
 > Install dependencies:
 >

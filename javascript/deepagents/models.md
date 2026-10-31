@@ -7,8 +7,8 @@ tags: [docs, javascript, deepagents, models]
 ---
 
 # Models
-
-> Configure model providers and parameters for Deep Agents
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/javascript/deepagents/models)
+Configure model providers and parameters for Deep Agents
 
 Deep Agents work with any [LangChain chat model](../langchain/models.md) that supports [tool calling](../langchain/models.md#tool-calling).
 
@@ -148,7 +148,7 @@ const result = await agent.invoke(
 );
 ```
 
-> **[View example trace](https://smith.langchain.com/public/45e09f7e-1d7b-4419-856a-202e800bcb8d/r)**
+> [card] [View example trace](https://smith.langchain.com/public/4440a203-58dc-4f45-8a81-4e1733e91016/r)
 >
 > Open a public LangSmith run for this example.
 

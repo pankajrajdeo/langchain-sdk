@@ -156,7 +156,7 @@ If the default data retention is set to **Base** you can optionally use the slid
 
 Data retention settings are adjustable per tracing project. At the project level, you choose between two tiers: base (14 days) or extended (180 days). To customize the extended duration up to 180 days, use [workspace-level configuration](data-purging-compliance.md#customize-extended-retention-policy) (Enterprise only).
 
-In an [agent-based workspace](agents.md), each of an agent's [environments](agent-environments.md) is its own tracing project, so retention is set per environment rather than per agent, and you reach the setting through the agent rather than a **Projects** list.
+In an [agent-based workspace](agent-registry.md), each of an agent's [environments](agent-environments.md) is its own tracing project, so retention is set per environment rather than per agent, and you reach the setting through the agent rather than a **Projects** list.
 
 Navigate to **Projects** > ***Your project name*** > Select **Retention** and select the desired default retention. This will only affect retention (and pricing) for **traces going forward**.
 

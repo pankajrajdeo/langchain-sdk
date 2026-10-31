@@ -27,7 +27,7 @@ Use `wrap_openai` / `wrapOpenAI` for direct API calls. Use [`@traceable`](https:
 
 > [!NOTE]
 >
-> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
+> In an [agent-based workspace](agent-registry.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Setup
 
@@ -96,50 +96,50 @@ console.log(completion.choices[0].message.content);
 
 ## Add metadata
 
-**Python**
-
-Pass `tracing_extra` when wrapping the client. The metadata applies to all calls made with that client.
-
+> [tab] Python
+>
+> Pass `tracing_extra` when wrapping the client. The metadata applies to all calls made with that client.
+>
 ```python
-import os
-
-import openai
-
-from langsmith import wrappers
-
-client = wrappers.wrap_openai(
-    openai.OpenAI(
-        base_url="https://<provider-base-url>/v1",
-        api_key=os.environ["PROVIDER_API_KEY"],
-    ),
-    tracing_extra={"metadata": {"environment": "production"}},
-)
+> import os
+>
+> import openai
+>
+> from langsmith import wrappers
+>
+> client = wrappers.wrap_openai(
+>     openai.OpenAI(
+>         base_url="https://<provider-base-url>/v1",
+>         api_key=os.environ["PROVIDER_API_KEY"],
+>     ),
+>     tracing_extra={"metadata": {"environment": "production"}},
+> )
 ```
 
-**TypeScript**
-
-Pass options as the second argument to `wrapOpenAI` for client-level metadata, or pass [`langsmithExtra`](https://reference.langchain.com/javascript/modules/langsmith.html) per call.
-
+> [tab] TypeScript
+>
+> Pass options as the second argument to `wrapOpenAI` for client-level metadata, or pass [`langsmithExtra`](https://reference.langchain.com/javascript/modules/langsmith.html) per call.
+>
 ```typescript
-import OpenAI from "openai";
-import { wrapOpenAI } from "langsmith/wrappers/openai";
-
-const client = wrapOpenAI(
-  new OpenAI({
-    baseURL: "https://<provider-base-url>/v1",
-    apiKey: process.env.PROVIDER_API_KEY!,
-  }),
-  { metadata: { environment: "production" } }
-);
-
-// Per-call metadata
-const completion = await client.chat.completions.create(
-  {
-    model: "<provider-model-name>",
-    messages: [{ role: "user", content: "Hello!" }],
-  },
-  { langsmithExtra: { metadata: { request_id: "abc123" } } }
-);
+> import OpenAI from "openai";
+> import { wrapOpenAI } from "langsmith/wrappers/openai";
+>
+> const client = wrapOpenAI(
+>   new OpenAI({
+>     baseURL: "https://<provider-base-url>/v1",
+>     apiKey: process.env.PROVIDER_API_KEY!,
+>   }),
+>   { metadata: { environment: "production" } }
+> );
+>
+> // Per-call metadata
+> const completion = await client.chat.completions.create(
+>   {
+>     model: "<provider-model-name>",
+>     messages: [{ role: "user", content: "Hello!" }],
+>   },
+>   { langsmithExtra: { metadata: { request_id: "abc123" } } }
+> );
 ```
 
 ## Related guides

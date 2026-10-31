@@ -18,193 +18,193 @@ For a deeper look at sandbox architecture, integration patterns, and security be
 
 Each built-in provider ships as an optional extra. Install one from within a session with `/install`, or from the shell with `dcode --install`. Third-party providers such as E2B install as packages with the `--package` flag:
 
-**LangSmith**
+> [tab] LangSmith
+>
+> Included by default when installing `deepagents-code`. No extra installation needed.
 
-Included by default when installing `deepagents-code`. No extra installation needed.
-
-**AgentCore**
-
+> [tab] AgentCore
+>
 **In session**
 
 ```txt
-/install agentcore
+> /install agentcore
 ```
-
+>
 **Shell**
 
 ```bash
-dcode --install agentcore
+> dcode --install agentcore
 ```
 
-**Daytona**
-
+> [tab] Daytona
+>
 **In session**
 
 ```txt
-/install daytona
+> /install daytona
 ```
-
+>
 **Shell**
 
 ```bash
-dcode --install daytona
+> dcode --install daytona
 ```
 
-**Modal**
-
+> [tab] Modal
+>
 **In session**
 
 ```txt
-/install modal
+> /install modal
 ```
-
+>
 **Shell**
 
 ```bash
-dcode --install modal
+> dcode --install modal
 ```
 
-**Runloop**
-
+> [tab] Runloop
+>
 **In session**
 
 ```txt
-/install runloop
+> /install runloop
 ```
-
+>
 **Shell**
 
 ```bash
-dcode --install runloop
+> dcode --install runloop
 ```
 
-**Vercel**
-
+> [tab] Vercel
+>
 **In session**
 
 ```txt
-/install vercel
+> /install vercel
 ```
-
+>
 **Shell**
 
 ```bash
-dcode --install vercel
+> dcode --install vercel
 ```
 
-**E2B**
-
-E2B is a [third-party provider](#third-party-providers) published by the `langchain-e2b` package. Install it as a package, not a `deepagents-code` extra:
-
+> [tab] E2B
+>
+> E2B is a [third-party provider](#third-party-providers) published by the `langchain-e2b` package. Install it as a package, not a `deepagents-code` extra:
+>
 **In session**
 
 ```txt
-/install langchain-e2b --package
+> /install langchain-e2b --package
 ```
-
+>
 **Shell**
 
 ```bash
-dcode --install langchain-e2b --package
+> dcode --install langchain-e2b --package
 ```
 
 To install support for every built-in provider at once, use the `all-sandboxes` extra: `/install all-sandboxes` in a session, or `dcode --install all-sandboxes` from the shell. The `all-sandboxes` extra does not include third-party providers such as E2B.
 
 **2. Set provider credentials**
 
-**LangSmith**
-
+> [tab] LangSmith
+>
 ```bash
-export LANGSMITH_API_KEY="your-key"
+> export LANGSMITH_API_KEY="your-key"
 ```
 
-**AgentCore**
-
+> [tab] AgentCore
+>
 ```bash
-export AWS_ACCESS_KEY_ID="your-key"
-export AWS_SECRET_ACCESS_KEY="your-secret"
-export AWS_REGION="us-west-2"
-
-# Only when using temporary/STS credentials:
-export AWS_SESSION_TOKEN="session-token"
+> export AWS_ACCESS_KEY_ID="your-key"
+> export AWS_SECRET_ACCESS_KEY="your-secret"
+> export AWS_REGION="us-west-2"
+>
+> # Only when using temporary/STS credentials:
+> export AWS_SESSION_TOKEN="session-token"
 ```
 
-**Daytona**
-
+> [tab] Daytona
+>
 ```bash
-export DAYTONA_API_KEY="your-key"
+> export DAYTONA_API_KEY="your-key"
 ```
 
-**Modal**
-
+> [tab] Modal
+>
 ```bash
-modal setup
+> modal setup
 ```
 
-**Runloop**
-
+> [tab] Runloop
+>
 ```bash
-export RUNLOOP_API_KEY="your-key"
+> export RUNLOOP_API_KEY="your-key"
 ```
 
-**Vercel**
-
+> [tab] Vercel
+>
 ```bash
-export VERCEL_TOKEN="your-token"
-export VERCEL_PROJECT_ID="your-project-id"
-export VERCEL_TEAM_ID="your-team-id"
+> export VERCEL_TOKEN="your-token"
+> export VERCEL_PROJECT_ID="your-project-id"
+> export VERCEL_TEAM_ID="your-team-id"
 ```
+>
+> When running on Vercel, [OIDC](https://vercel.com/docs/oidc) credentials are used automatically instead.
 
-When running on Vercel, [OIDC](https://vercel.com/docs/oidc) credentials are used automatically instead.
-
-**E2B**
-
+> [tab] E2B
+>
 ```bash
-export E2B_API_KEY="your-key"
+> export E2B_API_KEY="your-key"
 ```
 
 **3. Run Deep Agents Code with a sandbox**
 
-**LangSmith**
-
+> [tab] LangSmith
+>
 ```bash
-dcode --sandbox langsmith
+> dcode --sandbox langsmith
 ```
 
-**AgentCore**
-
+> [tab] AgentCore
+>
 ```bash
-dcode --sandbox agentcore
+> dcode --sandbox agentcore
 ```
 
-**Daytona**
-
+> [tab] Daytona
+>
 ```bash
-dcode --sandbox daytona
+> dcode --sandbox daytona
 ```
 
-**Modal**
-
+> [tab] Modal
+>
 ```bash
-dcode --sandbox modal
+> dcode --sandbox modal
 ```
 
-**Runloop**
-
+> [tab] Runloop
+>
 ```bash
-dcode --sandbox runloop
+> dcode --sandbox runloop
 ```
 
-**Vercel**
-
+> [tab] Vercel
+>
 ```bash
-dcode --sandbox vercel
+> dcode --sandbox vercel
 ```
 
-**E2B**
-
+> [tab] E2B
+>
 ```bash
-dcode --sandbox e2b
+> dcode --sandbox e2b
 ```
 
 ## Sandbox flags and examples
@@ -280,7 +280,7 @@ dcode --sandbox e2b
 
 If you pass a `--sandbox` name that is not installed or declared, Deep Agents Code lists the available providers and explains how to install or configure the missing one.
 
-> **Publishing a sandbox provider**
+> [accordion] Publishing a sandbox provider
 >
 > To distribute a provider so users can run `dcode --sandbox <name>` after installing your package, implement a `SandboxProvider` subclass and register it under the `deepagents_code.sandbox_providers` entry-point group.
 >

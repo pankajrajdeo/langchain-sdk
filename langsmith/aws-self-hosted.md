@@ -36,19 +36,19 @@ Follow the [Kubernetes installation guide](kubernetes.md). LangSmith is tested o
 
 For production deployments, connect to AWS managed services:
 
-> **[Amazon S3](self-host-blob-storage.md#amazon-s3)**
+> [card] [Amazon S3](self-host-blob-storage.md#amazon-s3)
 >
 > Store trace data in S3
 
-> **[Amazon RDS](self-host-external-postgres.md#amazon-rds)**
+> [card] [Amazon RDS](self-host-external-postgres.md#amazon-rds)
 >
 > PostgreSQL database
 
-> **[Amazon ElastiCache](self-host-external-redis.md#amazon-elasticache)**
+> [card] [Amazon ElastiCache](self-host-external-redis.md#amazon-elasticache)
 >
 > Redis or Valkey for caching
 
-> **[ClickHouse Cloud](self-host-external-clickhouse.md)**
+> [card] [ClickHouse Cloud](self-host-external-clickhouse.md)
 >
 > Analytics database
 

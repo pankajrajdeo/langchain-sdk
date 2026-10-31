@@ -20,27 +20,27 @@ Self-hosted deployments require an [Enterprise plan](https://www.langchain.com/p
 
 LangSmith supports three self-hosted topologies that trade off setup complexity against control-plane features. Reference pages for [platform features](self-hosted-platform-features.md), [Agent Server metrics](self-hosted-agent-server-metrics.md), and [diagnostics](diagnostics-self-hosted.md) apply to all three.
 
-> **[Full self-hosted platform](deploy-with-control-plane.md)**
+> [card] [Full self-hosted platform](deploy-with-control-plane.md)
 >
 > The complete LangSmith platform—[control plane](control-plane.md) UI and APIs, [data plane](data-plane.md) listener, observability, evaluation, and agent deployment management. Best for teams that want the LangSmith product experience inside their own network.
 
-> **[Hybrid](hybrid.md)**
+> [card] [Hybrid](hybrid.md)
 >
 > LangChain-hosted control plane with the data plane (Agent Servers and databases) in your infrastructure. Best when you want managed deployment workflows but need agent workloads and customer data to stay inside your VPC.
 
-> **[Standalone server](deploy-standalone-server.md)**
+> [card] [Standalone server](deploy-standalone-server.md)
 >
 > The lightest option—Agent Server containers (API + queue workers) with your own PostgreSQL and Redis. No control plane, no managed UI. Best for embedding the runtime into existing infrastructure or running air-gapped.
 
-> **[Platform features](self-hosted-platform-features.md)**
+> [card] [Platform features](self-hosted-platform-features.md)
 >
 > Reference for self-hosted-only platform behavior: custom Postgres and Redis, listeners, and resource customization.
 
-> **[Agent Server metrics](self-hosted-agent-server-metrics.md)**
+> [card] [Agent Server metrics](self-hosted-agent-server-metrics.md)
 >
 > Prometheus and Datadog export for Agent Server, including Deployment UI metrics and internal metrics.
 
-> **[Diagnostics](diagnostics-self-hosted.md)**
+> [card] [Diagnostics](diagnostics-self-hosted.md)
 >
 > Collect logs, inspect state, and troubleshoot a self-hosted installation.
 
@@ -60,11 +60,11 @@ In return, you can integrate with your own [Postgres](self-hosted-platform-featu
 
 ## Next steps
 
-> **[Pick a topology](deploy-standalone-server.md)**
+> [card] [Pick a topology](deploy-standalone-server.md)
 >
 > Compare standalone server, full platform, and hybrid to find the right fit.
 
-> **[Enable LangSmith Deployment](enable-self-hosted-deployment.md)**
+> [card] [Enable LangSmith Deployment](enable-self-hosted-deployment.md)
 >
 > Add a control plane and data plane to deploy and manage agents on self-hosted LangSmith.
 

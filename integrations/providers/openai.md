@@ -14,37 +14,37 @@ This page covers all LangChain integrations with [OpenAI](https://en.wikipedia.o
 
 ## Model interfaces
 
-> **[ChatOpenAI](../chat/openai.md)**
+> [card] [ChatOpenAI](../chat/openai.md)
 >
 > OpenAI chat models.
 
-> **[Decisions API](../decision_models/openai.md)**
+> [card] [Decisions API](../decision_models/openai.md)
 >
 > Typed answers and calibrated probabilities for routing, classification, and agent middleware.
 
-> **[AzureChatOpenAI](../chat/azure_chat_openai.md)**
+> [card] [AzureChatOpenAI](../chat/azure_chat_openai.md)
 >
 > Azure OpenAI chat models with enterprise features.
 
-> **[OpenAIEmbeddings](../embeddings/openai.md)**
+> [card] [OpenAIEmbeddings](../embeddings/openai.md)
 >
 > OpenAI embedding models.
 
-> **[AzureOpenAIEmbeddings](../embeddings/azure_openai.md)**
+> [card] [AzureOpenAIEmbeddings](../embeddings/azure_openai.md)
 >
 > Azure OpenAI embedding models with enterprise features.
 
 ## Other
 
-> **[OpenAI](../llms/openai.md)**
+> [card] [OpenAI](../llms/openai.md)
 >
 > (Legacy) OpenAI text completion models.
 
-> **[AzureOpenAI](../llms/azure_openai.md)**
+> [card] [AzureOpenAI](../llms/azure_openai.md)
 >
 > Wrapper for (legacy) OpenAI text completion models hosted on Azure.
 
-> **[OpenAIModerationMiddleware](../middleware/openai.md#content-moderation)**
+> [card] [OpenAIModerationMiddleware](../middleware/openai.md#content-moderation)
 >
 > Detect text that could be hateful, violent, etc.
 

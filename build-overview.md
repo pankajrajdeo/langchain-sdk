@@ -18,97 +18,97 @@ The LangChain open source stack provides the building blocks you need to design,
 
 Managed Deep Agents, Deep Agents, LangChain, and LangGraph share the same open source stack, so choose based on how much control you need. For managed hosting or no-code, start with Managed Deep Agents or Fleet:
 
-**Python**
-
-> **[Managed Deep Agents](langsmith/python/managed-deep-agents-overview.md)**
+> [tab] Python
 >
-> Build deep agents with managed deployment infrastructure for complex, long-running tasks. A complete agent harness with
-> planning, subagents, a virtual filesystem, and long-term memory built in.
-> The fastest way to write your agent; LangSmith runs the harness and runtime.
-
-> **[Deep Agents](deepagents/overview.md)**
+> > [card] [Managed Deep Agents](langsmith/python/managed-deep-agents-overview.md)
+> >
+> > Build deep agents with managed deployment infrastructure for complex, long-running tasks. A complete agent harness with
+> > planning, subagents, a virtual filesystem, and long-term memory built in.
+> > The fastest way to write your agent; LangSmith runs the harness and runtime.
 >
-> The same Deep Agents harness with maximum flexibility. Host agents yourself, or run a custom LangSmith Deployment when you need more control over the runtime.
-
-> **[LangChain](langchain/overview.md)**
+> > [card] [Deep Agents](deepagents/overview.md)
+> >
+> > The same Deep Agents harness with maximum flexibility. Host agents yourself, or run a custom LangSmith Deployment when you need more control over the runtime.
 >
-> A minimal, configurable agent framework. Compose exactly what you need from models, tools, prompts, and middleware.
-
-> **[LangGraph](langgraph/overview.md)**
+> > [card] [LangChain](langchain/overview.md)
+> >
+> > A minimal, configurable agent framework. Compose exactly what you need from models, tools, prompts, and middleware.
 >
-> Low-level orchestration for stateful, long-running agents: durable execution, streaming, memory, and human-in-the-loop.
-
-> **[Prefer no-code?](langsmith/fleet.md)**
+> > [card] [LangGraph](langgraph/overview.md)
+> >
+> > Low-level orchestration for stateful, long-running agents: durable execution, streaming, memory, and human-in-the-loop.
 >
-> Build and run agents without writing code using LangSmith Fleet.
+> > [card] [Prefer no-code?](langsmith/fleet.md)
+> >
+> > Build and run agents without writing code using LangSmith Fleet.
 
-**TypeScript**
-
-> **[Managed Deep Agents](langsmith/javascript/managed-deep-agents-overview.md)**
+> [tab] TypeScript
 >
-> Build deep agents with managed deployment infrastructure for complex, long-running tasks. A complete agent harness with
-> planning, subagents, a virtual filesystem, and long-term memory built in.
-> The fastest way to write your agent; LangSmith runs the harness and runtime.
-
-> **[Deep Agents](javascript/deepagents/overview.md)**
+> > [card] [Managed Deep Agents](langsmith/javascript/managed-deep-agents-overview.md)
+> >
+> > Build deep agents with managed deployment infrastructure for complex, long-running tasks. A complete agent harness with
+> > planning, subagents, a virtual filesystem, and long-term memory built in.
+> > The fastest way to write your agent; LangSmith runs the harness and runtime.
 >
-> The same Deep Agents harness with maximum flexibility. Host agents yourself, or run a custom LangSmith Deployment when you need more control over the runtime.
-
-> **[LangChain](javascript/langchain/overview.md)**
+> > [card] [Deep Agents](javascript/deepagents/overview.md)
+> >
+> > The same Deep Agents harness with maximum flexibility. Host agents yourself, or run a custom LangSmith Deployment when you need more control over the runtime.
 >
-> A minimal, configurable agent framework. Compose exactly what you need from models, tools, prompts, and middleware.
-
-> **[LangGraph](javascript/langgraph/overview.md)**
+> > [card] [LangChain](javascript/langchain/overview.md)
+> >
+> > A minimal, configurable agent framework. Compose exactly what you need from models, tools, prompts, and middleware.
 >
-> Low-level orchestration for stateful, long-running agents: durable execution, streaming, memory, and human-in-the-loop.
-
-> **[Prefer no-code?](langsmith/fleet.md)**
+> > [card] [LangGraph](javascript/langgraph/overview.md)
+> >
+> > Low-level orchestration for stateful, long-running agents: durable execution, streaming, memory, and human-in-the-loop.
 >
-> Build and run agents without writing code using LangSmith Fleet.
+> > [card] [Prefer no-code?](langsmith/fleet.md)
+> >
+> > Build and run agents without writing code using LangSmith Fleet.
 
 ## Use a ready-made agent
 
-> **[Deep Agents Code](deepagents/code/overview.md)**
+> [card] [Deep Agents Code](deepagents/code/overview.md)
 >
 > Open source terminal coding agent (`dcode`) built on the Deep Agents SDK. Switch models mid-session, customize skills and memory, and approve shell execution from the CLI.
 
 ## Explore
 
-**Python**
-
-> **[Integrations](integrations/providers/overview.md)**
+> [tab] Python
 >
-> Connect to model providers, vector stores, retrievers, and other components.
-
-> **[Learn](learn.md)**
+> > [card] [Integrations](integrations/providers/overview.md)
+> >
+> > Connect to model providers, vector stores, retrievers, and other components.
 >
-> Follow tutorials and conceptual guides for common agent patterns and use cases.
-
-> **[Reference](reference/overview.md)**
+> > [card] [Learn](learn.md)
+> >
+> > Follow tutorials and conceptual guides for common agent patterns and use cases.
 >
-> API references, error codes, release notes, and migration guides.
-
-> **[Contribute](contributing/overview.md)**
+> > [card] [Reference](reference/overview.md)
+> >
+> > API references, error codes, release notes, and migration guides.
 >
-> Contribute documentation, code, and integrations to the LangChain ecosystem.
+> > [card] [Contribute](contributing/overview.md)
+> >
+> > Contribute documentation, code, and integrations to the LangChain ecosystem.
 
-**TypeScript**
-
-> **[Integrations](javascript/integrations/providers/overview.md)**
+> [tab] TypeScript
 >
-> Connect to model providers, vector stores, retrievers, and other components.
-
-> **[Learn](javascript/learn.md)**
+> > [card] [Integrations](javascript/integrations/providers/overview.md)
+> >
+> > Connect to model providers, vector stores, retrievers, and other components.
 >
-> Follow tutorials and conceptual guides for common agent patterns and use cases.
-
-> **[Reference](javascript/reference/overview.md)**
+> > [card] [Learn](javascript/learn.md)
+> >
+> > Follow tutorials and conceptual guides for common agent patterns and use cases.
 >
-> API references, error codes, release notes, and migration guides.
-
-> **[Contribute](javascript/contributing/overview.md)**
+> > [card] [Reference](javascript/reference/overview.md)
+> >
+> > API references, error codes, release notes, and migration guides.
 >
-> Contribute documentation, code, and integrations to the LangChain ecosystem.
+> > [card] [Contribute](javascript/contributing/overview.md)
+> >
+> > Contribute documentation, code, and integrations to the LangChain ecosystem.
 
 ***
 

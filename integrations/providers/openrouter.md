@@ -14,7 +14,7 @@ tags: [docs, integrations, providers, openrouter]
 
 ## Chat models
 
-> **[ChatOpenRouter](../chat/openrouter.md)**
+> [card] [ChatOpenRouter](../chat/openrouter.md)
 >
 > Access chat models from multiple providers through the OpenRouter unified API.
 

@@ -213,7 +213,7 @@ result = baseline_agent.invoke(
 print(result["messages"][-1].text)
 ```
 
-> **[View example trace](https://smith.langchain.com/public/9e5d5ccc-eb86-4a0d-896b-6104d648e7ce/r)**
+> [card] [View example trace](https://smith.langchain.com/public/7200942f-bb17-4646-a274-1712ac9c2693/r)
 >
 > Open a public LangSmith run for this example.
 
@@ -424,255 +424,255 @@ An [embedding](../integrations/embeddings.md) is a numeric vector that captures 
 
 You can choose from many different [embedding integrations](../integrations/embeddings.md) which all use the same [Interface](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings):
 
-**OpenAI**
-
+> [tab] OpenAI
+>
 ```shell
-pip install -U "langchain-openai"
+> pip install -U "langchain-openai"
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("OPENAI_API_KEY"):
-    os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
-
-from langchain_openai import OpenAIEmbeddings
-
-embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
+> import getpass
+> import os
+>
+> if not os.environ.get("OPENAI_API_KEY"):
+>     os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
+>
+> from langchain_openai import OpenAIEmbeddings
+>
+> embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 ```
 
-**Azure**
-
+> [tab] Azure
+>
 ```shell
-pip install -U "langchain-openai"
+> pip install -U "langchain-openai"
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("AZURE_OPENAI_API_KEY"):
-    os.environ["AZURE_OPENAI_API_KEY"] = getpass.getpass("Enter API key for Azure: ")
-
-from langchain_openai import AzureOpenAIEmbeddings
-
-embeddings = AzureOpenAIEmbeddings(
-    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
-    azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
-    openai_api_version=os.environ["AZURE_OPENAI_API_VERSION"],
-)
+> import getpass
+> import os
+>
+> if not os.environ.get("AZURE_OPENAI_API_KEY"):
+>     os.environ["AZURE_OPENAI_API_KEY"] = getpass.getpass("Enter API key for Azure: ")
+>
+> from langchain_openai import AzureOpenAIEmbeddings
+>
+> embeddings = AzureOpenAIEmbeddings(
+>     azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+>     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
+>     openai_api_version=os.environ["AZURE_OPENAI_API_VERSION"],
+> )
 ```
 
-**Google Gemini**
-
+> [tab] Google Gemini
+>
 ```shell
-pip install -qU langchain-google-genai
+> pip install -qU langchain-google-genai
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("GOOGLE_API_KEY"):
-    os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
-
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-
-embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
+> import getpass
+> import os
+>
+> if not os.environ.get("GOOGLE_API_KEY"):
+>     os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
+>
+> from langchain_google_genai import GoogleGenerativeAIEmbeddings
+>
+> embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 ```
 
-**Gemini Enterprise Agent Platform**
-
+> [tab] Gemini Enterprise Agent Platform
+>
 ```shell
-pip install -qU langchain-google-vertexai
+> pip install -qU langchain-google-vertexai
 ```
-
+>
 ```python
-from langchain_google_vertexai import VertexAIEmbeddings
-
-embeddings = VertexAIEmbeddings(model="text-embedding-005")
+> from langchain_google_vertexai import VertexAIEmbeddings
+>
+> embeddings = VertexAIEmbeddings(model="text-embedding-005")
 ```
 
-**AWS**
-
+> [tab] AWS
+>
 ```shell
-pip install -qU langchain-aws
+> pip install -qU langchain-aws
 ```
-
+>
 ```python
-from langchain_aws import BedrockEmbeddings
-
-embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
+> from langchain_aws import BedrockEmbeddings
+>
+> embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
 ```
 
-**HuggingFace**
-
+> [tab] HuggingFace
+>
 ```shell
-pip install -qU langchain-huggingface
+> pip install -qU langchain-huggingface
 ```
-
+>
 ```python
-from langchain_huggingface import HuggingFaceEmbeddings
-
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-mpnet-base-v2",
-    encode_kwargs={"normalize_embeddings": True},
-)
+> from langchain_huggingface import HuggingFaceEmbeddings
+>
+> embeddings = HuggingFaceEmbeddings(
+>     model_name="sentence-transformers/all-mpnet-base-v2",
+>     encode_kwargs={"normalize_embeddings": True},
+> )
 ```
 
-**Ollama**
-
+> [tab] Ollama
+>
 ```shell
-pip install -qU langchain-ollama
+> pip install -qU langchain-ollama
 ```
-
+>
 ```python
-from langchain_ollama import OllamaEmbeddings
-
-embeddings = OllamaEmbeddings(model="llama3")
+> from langchain_ollama import OllamaEmbeddings
+>
+> embeddings = OllamaEmbeddings(model="llama3")
 ```
 
-**Cohere**
-
+> [tab] Cohere
+>
 ```shell
-pip install -qU langchain-cohere
+> pip install -qU langchain-cohere
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("COHERE_API_KEY"):
-    os.environ["COHERE_API_KEY"] = getpass.getpass("Enter API key for Cohere: ")
-
-from langchain_cohere import CohereEmbeddings
-
-embeddings = CohereEmbeddings(model="embed-english-v3.0")
+> import getpass
+> import os
+>
+> if not os.environ.get("COHERE_API_KEY"):
+>     os.environ["COHERE_API_KEY"] = getpass.getpass("Enter API key for Cohere: ")
+>
+> from langchain_cohere import CohereEmbeddings
+>
+> embeddings = CohereEmbeddings(model="embed-english-v3.0")
 ```
 
-**MistralAI**
-
+> [tab] MistralAI
+>
 ```shell
-pip install -qU langchain-mistralai
+> pip install -qU langchain-mistralai
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("MISTRALAI_API_KEY"):
-    os.environ["MISTRALAI_API_KEY"] = getpass.getpass("Enter API key for MistralAI: ")
-
-from langchain_mistralai import MistralAIEmbeddings
-
-embeddings = MistralAIEmbeddings(model="mistral-embed")
+> import getpass
+> import os
+>
+> if not os.environ.get("MISTRALAI_API_KEY"):
+>     os.environ["MISTRALAI_API_KEY"] = getpass.getpass("Enter API key for MistralAI: ")
+>
+> from langchain_mistralai import MistralAIEmbeddings
+>
+> embeddings = MistralAIEmbeddings(model="mistral-embed")
 ```
 
-**Nomic**
-
+> [tab] Nomic
+>
 ```shell
-pip install -qU langchain-nomic
+> pip install -qU langchain-nomic
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("NOMIC_API_KEY"):
-    os.environ["NOMIC_API_KEY"] = getpass.getpass("Enter API key for Nomic: ")
-
-from langchain_nomic import NomicEmbeddings
-
-embeddings = NomicEmbeddings(model="nomic-embed-text-v1.5")
+> import getpass
+> import os
+>
+> if not os.environ.get("NOMIC_API_KEY"):
+>     os.environ["NOMIC_API_KEY"] = getpass.getpass("Enter API key for Nomic: ")
+>
+> from langchain_nomic import NomicEmbeddings
+>
+> embeddings = NomicEmbeddings(model="nomic-embed-text-v1.5")
 ```
 
-**NVIDIA**
-
+> [tab] NVIDIA
+>
 ```shell
-pip install -qU langchain-nvidia-ai-endpoints
+> pip install -qU langchain-nvidia-ai-endpoints
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("NVIDIA_API_KEY"):
-    os.environ["NVIDIA_API_KEY"] = getpass.getpass("Enter API key for NVIDIA: ")
-
-from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
-
-embeddings = NVIDIAEmbeddings(model="NV-Embed-QA")
+> import getpass
+> import os
+>
+> if not os.environ.get("NVIDIA_API_KEY"):
+>     os.environ["NVIDIA_API_KEY"] = getpass.getpass("Enter API key for NVIDIA: ")
+>
+> from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
+>
+> embeddings = NVIDIAEmbeddings(model="NV-Embed-QA")
 ```
 
-**Voyage AI**
-
+> [tab] Voyage AI
+>
 ```shell
-pip install -qU langchain-voyageai
+> pip install -qU langchain-voyageai
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("VOYAGE_API_KEY"):
-    os.environ["VOYAGE_API_KEY"] = getpass.getpass("Enter API key for Voyage AI: ")
-
-from langchain_voyageai import VoyageAIEmbeddings
-
-embeddings = VoyageAIEmbeddings(model="voyage-3")
+> import getpass
+> import os
+>
+> if not os.environ.get("VOYAGE_API_KEY"):
+>     os.environ["VOYAGE_API_KEY"] = getpass.getpass("Enter API key for Voyage AI: ")
+>
+> from langchain_voyageai import VoyageAIEmbeddings
+>
+> embeddings = VoyageAIEmbeddings(model="voyage-3")
 ```
 
-**IBM watsonx**
-
+> [tab] IBM watsonx
+>
 ```shell
-pip install -qU langchain-ibm
+> pip install -qU langchain-ibm
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("WATSONX_APIKEY"):
-    os.environ["WATSONX_APIKEY"] = getpass.getpass("Enter API key for IBM watsonx: ")
-
-from langchain_ibm import WatsonxEmbeddings
-
-embeddings = WatsonxEmbeddings(
-    model_id="ibm/slate-125m-english-rtrvr",
-    url="https://us-south.ml.cloud.ibm.com",
-    project_id="<WATSONX PROJECT_ID>",
-)
+> import getpass
+> import os
+>
+> if not os.environ.get("WATSONX_APIKEY"):
+>     os.environ["WATSONX_APIKEY"] = getpass.getpass("Enter API key for IBM watsonx: ")
+>
+> from langchain_ibm import WatsonxEmbeddings
+>
+> embeddings = WatsonxEmbeddings(
+>     model_id="ibm/slate-125m-english-rtrvr",
+>     url="https://us-south.ml.cloud.ibm.com",
+>     project_id="<WATSONX PROJECT_ID>",
+> )
 ```
 
-**Fake**
-
+> [tab] Fake
+>
 ```shell
-pip install -qU langchain-core
+> pip install -qU langchain-core
 ```
-
+>
 ```python
-from langchain_core.embeddings import DeterministicFakeEmbedding
-
-embeddings = DeterministicFakeEmbedding(size=4096)
+> from langchain_core.embeddings import DeterministicFakeEmbedding
+>
+> embeddings = DeterministicFakeEmbedding(size=4096)
 ```
 
-**Isaacus**
-
+> [tab] Isaacus
+>
 ```shell
-pip install -qU langchain-isaacus
+> pip install -qU langchain-isaacus
 ```
-
+>
 ```python
-import getpass
-import os
-
-if not os.environ.get("ISAACUS_API_KEY"):
-    os.environ["ISAACUS_API_KEY"] = getpass.getpass("Enter API key for Isaacus: ")
-
-from langchain_isaacus import IsaacusEmbeddings
-
-embeddings = IsaacusEmbeddings(model="kanon-2-embedder")
+> import getpass
+> import os
+>
+> if not os.environ.get("ISAACUS_API_KEY"):
+>     os.environ["ISAACUS_API_KEY"] = getpass.getpass("Enter API key for Isaacus: ")
+>
+> from langchain_isaacus import IsaacusEmbeddings
+>
+> embeddings = IsaacusEmbeddings(model="kanon-2-embedder")
 ```
 
 ### Store chunks and embeddings in VectorStore
@@ -681,193 +681,193 @@ A [`VectorStore`](../integrations/vectorstores.md) persists document chunks and 
 You can choose from many different [vector store integrations](../integrations/vectorstores.md) which all use the same [Interface](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore).
 Use the embeddings model that you selected in the previous step to configure your `VectorStore`:
 
-**In-memory**
-
+> [tab] In-memory
+>
 ```shell
-pip install -U "langchain-core"
+> pip install -U "langchain-core"
 ```
-
+>
 ```python
-from langchain_core.vectorstores import InMemoryVectorStore
-
-vector_store = InMemoryVectorStore(embeddings)
+> from langchain_core.vectorstores import InMemoryVectorStore
+>
+> vector_store = InMemoryVectorStore(embeddings)
 ```
 
-**Amazon OpenSearch**
-
+> [tab] Amazon OpenSearch
+>
 ```shell
-pip install -qU  boto3
+> pip install -qU  boto3
 ```
-
+>
 ```python
-from opensearchpy import RequestsHttpConnection
-
-service = "es"  # must set the service as 'es'
-region = "us-east-2"
-credentials = boto3.Session(
-    aws_access_key_id="xxxxxx", aws_secret_access_key="xxxxx"
-).get_credentials()
-awsauth = AWS4Auth("xxxxx", "xxxxxx", region, service, session_token=credentials.token)
-
-vector_store = OpenSearchVectorSearch.from_documents(
-    docs,
-    embeddings,
-    opensearch_url="host url",
-    http_auth=awsauth,
-    timeout=300,
-    use_ssl=True,
-    verify_certs=True,
-    connection_class=RequestsHttpConnection,
-    index_name="test-index",
-)
+> from opensearchpy import RequestsHttpConnection
+>
+> service = "es"  # must set the service as 'es'
+> region = "us-east-2"
+> credentials = boto3.Session(
+>     aws_access_key_id="xxxxxx", aws_secret_access_key="xxxxx"
+> ).get_credentials()
+> awsauth = AWS4Auth("xxxxx", "xxxxxx", region, service, session_token=credentials.token)
+>
+> vector_store = OpenSearchVectorSearch.from_documents(
+>     docs,
+>     embeddings,
+>     opensearch_url="host url",
+>     http_auth=awsauth,
+>     timeout=300,
+>     use_ssl=True,
+>     verify_certs=True,
+>     connection_class=RequestsHttpConnection,
+>     index_name="test-index",
+> )
 ```
 
-**AstraDB**
-
+> [tab] AstraDB
+>
 ```shell
-pip install -U "langchain-astradb"
+> pip install -U "langchain-astradb"
 ```
-
+>
 ```python
-from langchain_astradb import AstraDBVectorStore
-
-vector_store = AstraDBVectorStore(
-    embedding=embeddings,
-    api_endpoint=ASTRA_DB_API_ENDPOINT,
-    collection_name="astra_vector_langchain",
-    token=ASTRA_DB_APPLICATION_TOKEN,
-    namespace=ASTRA_DB_NAMESPACE,
-)
+> from langchain_astradb import AstraDBVectorStore
+>
+> vector_store = AstraDBVectorStore(
+>     embedding=embeddings,
+>     api_endpoint=ASTRA_DB_API_ENDPOINT,
+>     collection_name="astra_vector_langchain",
+>     token=ASTRA_DB_APPLICATION_TOKEN,
+>     namespace=ASTRA_DB_NAMESPACE,
+> )
 ```
 
-**Chroma**
-
+> [tab] Chroma
+>
 ```shell
-pip install -qU langchain-chroma
+> pip install -qU langchain-chroma
 ```
-
+>
 ```python
-from langchain_chroma import Chroma
-
-vector_store = Chroma(
-    collection_name="example_collection",
-    embedding_function=embeddings,
-    persist_directory="./chroma_langchain_db",  # Where to save data locally, remove if not necessary
-)
+> from langchain_chroma import Chroma
+>
+> vector_store = Chroma(
+>     collection_name="example_collection",
+>     embedding_function=embeddings,
+>     persist_directory="./chroma_langchain_db",  # Where to save data locally, remove if not necessary
+> )
 ```
 
-**Milvus**
-
+> [tab] Milvus
+>
 ```shell
-pip install -qU langchain-milvus
+> pip install -qU langchain-milvus
 ```
-
+>
 ```python
-from langchain_milvus import Milvus
-
-URI = "./milvus_example.db"
-
-vector_store = Milvus(
-    embedding_function=embeddings,
-    connection_args={"uri": URI},
-    index_params={"index_type": "FLAT", "metric_type": "L2"},
-)
+> from langchain_milvus import Milvus
+>
+> URI = "./milvus_example.db"
+>
+> vector_store = Milvus(
+>     embedding_function=embeddings,
+>     connection_args={"uri": URI},
+>     index_params={"index_type": "FLAT", "metric_type": "L2"},
+> )
 ```
 
-**MongoDB**
-
+> [tab] MongoDB
+>
 ```shell
-pip install -qU langchain-mongodb
+> pip install -qU langchain-mongodb
 ```
-
+>
 ```python
-from langchain_mongodb import MongoDBAtlasVectorSearch
-
-vector_store = MongoDBAtlasVectorSearch(
-    embedding=embeddings,
-    collection=MONGODB_COLLECTION,
-    index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME,
-    relevance_score_fn="cosine",
-)
+> from langchain_mongodb import MongoDBAtlasVectorSearch
+>
+> vector_store = MongoDBAtlasVectorSearch(
+>     embedding=embeddings,
+>     collection=MONGODB_COLLECTION,
+>     index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME,
+>     relevance_score_fn="cosine",
+> )
 ```
 
-**PGVector**
-
+> [tab] PGVector
+>
 ```shell
-pip install -qU langchain-postgres
+> pip install -qU langchain-postgres
 ```
-
+>
 ```python
-from langchain_postgres import PGVector
-
-vector_store = PGVector(
-    embeddings=embeddings,
-    collection_name="my_docs",
-    connection="postgresql+psycopg://...",
-)
+> from langchain_postgres import PGVector
+>
+> vector_store = PGVector(
+>     embeddings=embeddings,
+>     collection_name="my_docs",
+>     connection="postgresql+psycopg://...",
+> )
 ```
 
-**PGVectorStore**
-
+> [tab] PGVectorStore
+>
 ```shell
-pip install -qU langchain-postgres
+> pip install -qU langchain-postgres
 ```
-
+>
 ```python
-from langchain_postgres import PGEngine, PGVectorStore
-
-pg_engine = PGEngine.from_connection_string(
-    url="postgresql+psycopg://..."
-)
-
-vector_store = PGVectorStore.create_sync(
-    engine=pg_engine,
-    table_name='test_table',
-    embedding_service=embeddings
-)
+> from langchain_postgres import PGEngine, PGVectorStore
+>
+> pg_engine = PGEngine.from_connection_string(
+>     url="postgresql+psycopg://..."
+> )
+>
+> vector_store = PGVectorStore.create_sync(
+>     engine=pg_engine,
+>     table_name='test_table',
+>     embedding_service=embeddings
+> )
 ```
 
-**Pinecone**
-
+> [tab] Pinecone
+>
 ```shell
-pip install -qU langchain-pinecone
+> pip install -qU langchain-pinecone
 ```
-
+>
 ```python
-from langchain_pinecone import PineconeVectorStore
-from pinecone import Pinecone
-
-pc = Pinecone(api_key=...)
-index = pc.Index(index_name)
-
-vector_store = PineconeVectorStore(embedding=embeddings, index=index)
+> from langchain_pinecone import PineconeVectorStore
+> from pinecone import Pinecone
+>
+> pc = Pinecone(api_key=...)
+> index = pc.Index(index_name)
+>
+> vector_store = PineconeVectorStore(embedding=embeddings, index=index)
 ```
 
-**Qdrant**
-
+> [tab] Qdrant
+>
 ```shell
-pip install -qU langchain-qdrant
+> pip install -qU langchain-qdrant
 ```
-
+>
 ```python
-from qdrant_client.models import Distance, VectorParams
-from langchain_qdrant import QdrantVectorStore
-from qdrant_client import QdrantClient
-
-client = QdrantClient(":memory:")
-
-vector_size = len(embeddings.embed_query("sample text"))
-
-if not client.collection_exists("test"):
-    client.create_collection(
-        collection_name="test",
-        vectors_config=VectorParams(size=vector_size, distance=Distance.COSINE)
-    )
-vector_store = QdrantVectorStore(
-    client=client,
-    collection_name="test",
-    embedding=embeddings,
-)
+> from qdrant_client.models import Distance, VectorParams
+> from langchain_qdrant import QdrantVectorStore
+> from qdrant_client import QdrantClient
+>
+> client = QdrantClient(":memory:")
+>
+> vector_size = len(embeddings.embed_query("sample text"))
+>
+> if not client.collection_exists("test"):
+>     client.create_collection(
+>         collection_name="test",
+>         vectors_config=VectorParams(size=vector_size, distance=Distance.COSINE)
+>     )
+> vector_store = QdrantVectorStore(
+>     client=client,
+>     collection_name="test",
+>     embedding=embeddings,
+> )
 ```
 
 Then, embed and store all document splits using the `vector_store` you initialized above:
@@ -1492,7 +1492,7 @@ if __name__ == "__main__":
             print(msg.text)
 ```
 
-> **[View example trace](https://smith.langchain.com/public/6028e45a-23d0-4073-968c-19d161910ef8/r)**
+> [card] [View example trace](https://smith.langchain.com/public/389c9ff6-14ee-4c07-947a-07085fdb9392/r)
 >
 > Open a public LangSmith run for this example.
 

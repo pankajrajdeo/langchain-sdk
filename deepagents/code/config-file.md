@@ -251,7 +251,7 @@ allowed = []   # no model may be used
 
 Wildcards include models discovered from the bundled provider profile or your configured `models` list. If no models are available for that provider, the wildcard allows none.
 
-> **Allow Amazon Bedrock models**
+> [accordion] Allow Amazon Bedrock models
 >
 > Write Bedrock model IDs as `bedrock:<id>`, including the version colon in the ID:
 >
@@ -266,17 +266,17 @@ With LangSmith tracing enabled, Deep Agents Code redacts detected secrets from a
 
 To disable redaction:
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[tracing]
-langsmith_redact = false
+> [tracing]
+> langsmith_redact = false
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_LANGSMITH_REDACT=false
+> export DEEPAGENTS_CODE_LANGSMITH_REDACT=false
 ```
 
 The environment variable takes precedence over the config file. When redaction is enabled, Deep Agents Code disables tracing for that run if redaction cannot be configured. Secret redaction does not redact general personally identifiable information (PII), trace metadata, or traces emitted by shell processes. For broader options, see [Redact secrets from traces](../../langsmith/redact-secrets.md).
@@ -445,17 +445,17 @@ When [Auto mode](approval-modes.md) is active, the classifier has a time budget 
 
 If reviews are timing out, the first thing to try is [selecting a faster classifier model](#default-and-recent-model) (see `[models].auto_classifier`). If you have already done that and still need more headroom, you can raise the deadline:
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[models]
-auto_classifier_timeout = 60   # seconds; minimum 1, maximum 300
+> [models]
+> auto_classifier_timeout = 60   # seconds; minimum 1, maximum 300
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_AUTO_CLASSIFIER_TIMEOUT=60
+> export DEEPAGENTS_CODE_AUTO_CLASSIFIER_TIMEOUT=60
 ```
 
 The environment variable takes precedence over the config file, which takes precedence over the built-in default. Values below 1 or above 300 are clamped to the floor or ceiling. Non-integer values fall back to the default with a warning.
@@ -483,7 +483,7 @@ max_input_tokens = 8192
 
 Profile overrides are merged into the model's profile after creation. Any feature that reads the profile — context-limit display in the status bar, auto-summarization thresholds, capability checks — will see the overridden values.
 
-> **CLI profile overrides with --profile-override**
+> [accordion] CLI profile overrides with --profile-override
 >
 > To override model profile fields at runtime without editing the config file, pass a JSON object via `--profile-override`:
 >
@@ -783,23 +783,23 @@ Precedence (highest to lowest):
 
 Use `dcode config get runtime.recursion_limit` to see the effective Deep Agents Code value and its source. An unset result leaves the limit to the LangGraph server.
 
-**CLI flag**
-
+> [tab] CLI flag
+>
 ```bash
-dcode --recursion-limit 5000
+> dcode --recursion-limit 5000
 ```
 
-**Environment variable**
-
+> [tab] Environment variable
+>
 ```bash
-export DEEPAGENTS_CODE_RECURSION_LIMIT=5000
+> export DEEPAGENTS_CODE_RECURSION_LIMIT=5000
 ```
 
-**Config file**
-
+> [tab] Config file
+>
 ```toml
-[runtime]
-recursion_limit = 5000
+> [runtime]
+> recursion_limit = 5000
 ```
 
 > [!NOTE]

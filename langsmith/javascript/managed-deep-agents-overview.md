@@ -87,19 +87,19 @@ Start with Managed Deep Agents to run production agents without having to manage
 
 ## Next steps
 
-> **[Quickstart](managed-deep-agents-quickstart.md)**
+> [card] [Quickstart](managed-deep-agents-quickstart.md)
 >
 > Create and deploy your first Managed Deep Agent with the `mda` CLI.
 
-> **[Tutorial](managed-deep-agents-tutorial.md)**
+> [card] [Tutorial](managed-deep-agents-tutorial.md)
 >
 > Add a custom search tool, durable memory, and a daily schedule.
 
-> **[Agent Server](../agent-server-overview.md)**
+> [card] [Agent Server](../agent-server-overview.md)
 >
 > Explore the runtime that hosts Managed Deep Agents deployments.
 
-> **[MCP endpoint](managed-deep-agents-mcp-endpoint.md)**
+> [card] [MCP endpoint](managed-deep-agents-mcp-endpoint.md)
 >
 > Call a deployed agent as a tool from Claude Code or another MCP client.
 

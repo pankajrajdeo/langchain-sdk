@@ -52,7 +52,7 @@ agent = create_agent(
 )
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **model** `ModerationModel` (default: omni-moderation-latest)
 >
@@ -96,7 +96,7 @@ agent = create_agent(
 >
 > Optional pre-configured AsyncOpenAI client to reuse. If not provided, a new async client will be created.
 
-> **Full example**
+> [accordion] Full example
 >
 > The middleware integrates OpenAI's moderation endpoint to check content at different stages:
 >

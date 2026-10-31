@@ -56,7 +56,7 @@ For chart-managed TaskDB, create a Secret in the LangSmith namespace with a stro
 
 Reference the TaskDB Secret and enable migration. The block below collects every migration setting in one place: the `langsmith` flags and the TaskDB Secret are required, and the rest are chart defaults to change only when scaling.
 
-> **Sample migration Helm values**
+> [accordion] Sample migration Helm values
 >
 **LangSmith 0.17**
 

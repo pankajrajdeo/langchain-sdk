@@ -113,15 +113,15 @@ workflow monitor than a plain chat transcript.
 
 ## Patterns
 
-> **[Subagent streaming](subagent-streaming.md)**
+> [card] [Subagent streaming](subagent-streaming.md)
 >
 > Display specialist subagents with streaming content, progress tracking, and collapsible cards.
 
-> **[Todo list](todo-list.md)**
+> [card] [Todo list](todo-list.md)
 >
 > Track progress with a real-time todo list when the agent opts into task planning.
 
-> **[Sandbox](sandbox.md)**
+> [card] [Sandbox](sandbox.md)
 >
 > Build an IDE-like UI with a file browser, code viewer, and diff panel backed by a sandbox.
 

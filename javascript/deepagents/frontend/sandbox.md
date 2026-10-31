@@ -867,19 +867,19 @@ For backends and sandboxes:
 
 ## Related
 
-> **[Going to production](../going-to-production.md)**
+> [card] [Going to production](../going-to-production.md)
 >
 > Deploy the agent with persistent sandboxes, auth, guardrails, and production `useStream` settings.
 
-> **[Sandboxes](../sandboxes.md)**
+> [card] [Sandboxes](../sandboxes.md)
 >
 > Sandbox providers, security model, and file transfer APIs.
 
-> **[Frontend overview](overview.md)**
+> [card] [Frontend overview](overview.md)
 >
 > Other deep agent UI patterns: subagent streaming, todo lists, and custom state.
 
-> **[Application structure](../../langgraph/application-structure.md)**
+> [card] [Application structure](../../langgraph/application-structure.md)
 >
 > Full `langgraph.json` reference, including custom `http.app` routes.
 
@@ -888,19 +888,19 @@ For backends and sandboxes:
 The sandbox IDE builds on core LangChain frontend patterns. These guides cover
 the same `useStream` primitives used in this page:
 
-> **[Tool calling](../../langchain/frontend/tool-calling.md)**
+> [card] [Tool calling](../../langchain/frontend/tool-calling.md)
 >
 > Render file and execution tool calls as purpose-built UI cards with type-safe results.
 
-> **[Headless tools](../../langchain/frontend/headless-tools.md)**
+> [card] [Headless tools](../../langchain/frontend/headless-tools.md)
 >
 > Run browser and device APIs on the client side—useful for embedding live preview or terminal output in the IDE panel.
 
-> **[Open-ended generative UI](../../langchain/frontend/open-ended-generative-ui.md)**
+> [card] [Open-ended generative UI](../../langchain/frontend/open-ended-generative-ui.md)
 >
 > Render sandboxed app previews and MCP-generated interfaces at the open end of the generative UI spectrum.
 
-> **[Join & rejoin streams](../../langchain/frontend/join-rejoin.md)**
+> [card] [Join & rejoin streams](../../langchain/frontend/join-rejoin.md)
 >
 > Reconnect to a running coding session after a page reload without losing the sandbox state.
 

@@ -14,11 +14,11 @@ Fleet turns any agent into a Slack teammate your team can tag in a channel or me
 
 ## Choose a setup path
 
-> **[LangSmith Cloud](#set-up-slack-on-langsmith-cloud)**
+> [card] [LangSmith Cloud](#set-up-slack-on-langsmith-cloud)
 >
 > Connect Slack once, then add a Slack app to any agent in one click.
 
-> **[Self-hosted](#set-up-slack-on-self-hosted)**
+> [card] [Self-hosted](#set-up-slack-on-self-hosted)
 >
 > Configure a Slack OAuth provider, then create a custom Slack app per agent.
 
@@ -311,15 +311,15 @@ On Self-hosted, the **Add Slack App** button in the **Slack Apps** section is di
 
 ## Next steps
 
-> **[Add more tools](tools.md)**
+> [card] [Add more tools](tools.md)
 >
 > Connect additional services to your agent
 
-> **[Add more channels](channels.md)**
+> [card] [Add more channels](channels.md)
 >
 > Set up email, schedule, or webhook channels
 
-> **[Use templates](templates.md)**
+> [card] [Use templates](templates.md)
 >
 > Start from a prebuilt agent template
 

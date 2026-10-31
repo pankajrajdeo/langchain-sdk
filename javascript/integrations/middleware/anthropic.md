@@ -45,13 +45,13 @@ const agent = createAgent({
 });
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **ttl** `string` (default: 5m)
 >
 > Time to live for cached content. Valid values: `'5m'` or `'1h'`
 
-> **Full example**
+> [accordion] Full example
 >
 > The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, significantly reducing costs and latency.
 >

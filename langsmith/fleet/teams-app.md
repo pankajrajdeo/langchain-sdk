@@ -1,12 +1,12 @@
 ---
-title: "Integrate Teams with an agent"
+title: "Integrate Microsoft Teams with an agent"
 description: "Connect LangSmith Fleet to Microsoft Teams by bringing your own Azure Bot to let agents communicate with users in Teams."
 source: "https://docs.langchain.com/langsmith/fleet/teams-app"
 category: "docs"
 tags: [docs, langsmith, fleet, teams-app]
 ---
 
-# Integrate Teams with an agent
+# Integrate Microsoft Teams with an agent
 
 > Connect LangSmith Fleet to Microsoft Teams by bringing your own Azure Bot to let agents communicate with users in Teams.
 
@@ -178,15 +178,15 @@ Adjust the instructions based on your use case—for example, you might want the
 
 ## Next steps
 
-> **[Add more tools](tools.md)**
+> [card] [Add more tools](tools.md)
 >
 > Connect additional services to your agent
 
-> **[Add more channels](channels.md)**
+> [card] [Add more channels](channels.md)
 >
 > Set up email, schedule, or webhook channels
 
-> **[Use templates](templates.md)**
+> [card] [Use templates](templates.md)
 >
 > Start from a prebuilt agent template
 

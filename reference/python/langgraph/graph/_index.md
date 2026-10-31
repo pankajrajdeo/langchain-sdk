@@ -20,6 +20,6 @@ tags: [index, reference, python, langgraph, graph]
 ## Files
 
 - [add_messages](add_messages.md) - Merges two lists of messages, updating existing messages by ID.
-- [message](message.md) - - CONF - CONFIG_KEY_SEND - NS_SEP - REMOVE_ALL_MESSAGES
+- [message](message.md) - - CONF - CONFIG_KEY_SEND - REMOVE_ALL_MESSAGES
 - [state](state.md) - - INTERRUPT - NS_END - NS_SEP - TASKS - EMPTY_SEQ - MISSING - END - START - TAG_HIDDEN - ManagedValueSpec - All - ContextT - InputT - NodeInputT - OutputT - StateT - logger
 - [ui](ui.md) - - CONF

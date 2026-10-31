@@ -29,9 +29,9 @@ All [`BaseStores`](https://reference.langchain.com/python/langchain-core/stores/
 
 ## Built-in stores for local development
 
-> **[InMemoryByteStore](stores/in_memory.md)**
+> [card] [InMemoryByteStore](stores/in_memory.md)
 
-> **[LocalFileStore](stores/file_system.md)**
+> [card] [LocalFileStore](stores/file_system.md)
 
 ## Custom stores
 

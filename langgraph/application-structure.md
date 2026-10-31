@@ -29,38 +29,38 @@ To deploy using LangSmith, the following information should be provided:
 
 Below are examples of directory structures for applications:
 
-**Python (requirements.txt)**
-
+> [tab] Python (requirements.txt)
+>
 ```plaintext
-my-app/
-├── my_agent # all project code lies within here
-│   ├── utils # utilities for your graph
-│   │   ├── __init__.py
-│   │   ├── tools.py # tools for your graph
-│   │   ├── nodes.py # node functions for your graph
-│   │   └── state.py # state definition of your graph
-│   ├── __init__.py
-│   └── agent.py # code for constructing your graph
-├── .env # environment variables
-├── requirements.txt # package dependencies
-└── langgraph.json # configuration file for LangGraph
+> my-app/
+> ├── my_agent # all project code lies within here
+> │   ├── utils # utilities for your graph
+> │   │   ├── __init__.py
+> │   │   ├── tools.py # tools for your graph
+> │   │   ├── nodes.py # node functions for your graph
+> │   │   └── state.py # state definition of your graph
+> │   ├── __init__.py
+> │   └── agent.py # code for constructing your graph
+> ├── .env # environment variables
+> ├── requirements.txt # package dependencies
+> └── langgraph.json # configuration file for LangGraph
 ```
 
-**Python (pyproject.toml)**
-
+> [tab] Python (pyproject.toml)
+>
 ```plaintext
-my-app/
-├── my_agent # all project code lies within here
-│   ├── utils # utilities for your graph
-│   │   ├── __init__.py
-│   │   ├── tools.py # tools for your graph
-│   │   ├── nodes.py # node functions for your graph
-│   │   └── state.py # state definition of your graph
-│   ├── __init__.py
-│   └── agent.py # code for constructing your graph
-├── .env # environment variables
-├── langgraph.json  # configuration file for LangGraph
-└── pyproject.toml # dependencies for your project
+> my-app/
+> ├── my_agent # all project code lies within here
+> │   ├── utils # utilities for your graph
+> │   │   ├── __init__.py
+> │   │   ├── tools.py # tools for your graph
+> │   │   ├── nodes.py # node functions for your graph
+> │   │   └── state.py # state definition of your graph
+> │   ├── __init__.py
+> │   └── agent.py # code for constructing your graph
+> ├── .env # environment variables
+> ├── langgraph.json  # configuration file for LangGraph
+> └── pyproject.toml # dependencies for your project
 ```
 
 > [!NOTE]

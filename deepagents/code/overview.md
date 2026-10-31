@@ -29,49 +29,49 @@ See the [Quickstart](quickstart.md) to add provider credentials, run your first 
 
 ## Capabilities
 
-> **[Remote sandboxes](remote-sandboxes.md)**
+> [card] [Remote sandboxes](remote-sandboxes.md)
 >
 > Run agent tools remotely instead of on your local machine.
 
-> **[Goals and rubrics](goals-and-rubrics.md)**
+> [card] [Goals and rubrics](goals-and-rubrics.md)
 >
 > Define measurable objectives or grading criteria so the agent can check whether work is done.
 
-> **[Subagents](subagents.md)**
+> [card] [Subagents](subagents.md)
 >
 > Delegate work to task-specific subagents for parallel execution.
 
-> **[Memory](memory-and-skills.md#memory)**
+> [card] [Memory](memory-and-skills.md#memory)
 >
 > Store and retrieve information across sessions, including project conventions and learned patterns.
 
-> **[Context compaction](quickstart.md#interactive-mode)**
+> [card] [Context compaction](quickstart.md#interactive-mode)
 >
 > Summarize older messages and offload originals to storage.
 
-> **[Human-in-the-loop](quickstart.md#interactive-mode)**
+> [card] [Human-in-the-loop](quickstart.md#interactive-mode)
 >
 > Require human approval for sensitive tool operations.
 
-> **[Skills](memory-and-skills.md#skills)**
+> [card] [Skills](memory-and-skills.md#skills)
 >
 > Extend agent capabilities with custom expertise and instructions.
 
-> **[MCP tools](mcp-tools.md)**
+> [card] [MCP tools](mcp-tools.md)
 >
 > Load external tools from Model Context Protocol servers.
 
-> **[Tracing](quickstart.md#trace-with-langsmith)**
+> [card] [Tracing](quickstart.md#trace-with-langsmith)
 >
 > Trace agent operations in LangSmith for observability and debugging.
 
 ## Next steps
 
-> **[Quickstart](quickstart.md)**
+> [card] [Quickstart](quickstart.md)
 >
 > Install Deep Agents Code, run your first task, and use interactive or non-interactive modes.
 
-> **[Configuration](configuration.md)**
+> [card] [Configuration](configuration.md)
 >
 > Set up credentials, `config.toml`, environment variables, hooks, and CLI flags.
 

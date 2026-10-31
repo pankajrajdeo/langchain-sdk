@@ -28,31 +28,31 @@ Watsonx.ai offers:
 
 ### Model interfaces
 
-> **[ChatWatsonx](../chat/ibm_watsonx.md)**
+> [card] [ChatWatsonx](../chat/ibm_watsonx.md)
 >
 > IBM watsonx.ai chat models.
 
-> **[WatsonxLLM](../llms/ibm_watsonx.md)**
+> [card] [WatsonxLLM](../llms/ibm_watsonx.md)
 >
 > (Legacy) IBM watsonx.ai text completion models.
 
-> **[WatsonxEmbeddings](../embeddings/ibm_watsonx.md)**
+> [card] [WatsonxEmbeddings](../embeddings/ibm_watsonx.md)
 >
 > IBM watsonx.ai embedding models.
 
 ### Tools and toolkits
 
-> **[WatsonxToolkit](../tools/ibm_watsonx.md)**
+> [card] [WatsonxToolkit](../tools/ibm_watsonx.md)
 >
 > IBM watsonx.ai toolkit.
 
-> **[WatsonxSQLDatabaseToolkit](../tools/ibm_watsonx_sql.md)**
+> [card] [WatsonxSQLDatabaseToolkit](../tools/ibm_watsonx_sql.md)
 >
 > IBM watsonx.ai SQL Database toolkit.
 
 ### Retrievers
 
-> **[WatsonxRerank](../retrievers/ibm_watsonx_ranker.md)**
+> [card] [WatsonxRerank](../retrievers/ibm_watsonx_ranker.md)
 >
 > IBM watsonx.ai document retriever.
 
@@ -68,7 +68,7 @@ the support of DB2 vector store and vector search.
 
 ### Vector stores
 
-> **[DB2VS](https://github.com/langchain-ai/langchain-ibm/tree/main/libs/langchain-db2)**
+> [card] [DB2VS](https://github.com/langchain-ai/langchain-ibm/tree/main/libs/langchain-db2)
 >
 > IBM DB2 Vector Store and Vector Search
 

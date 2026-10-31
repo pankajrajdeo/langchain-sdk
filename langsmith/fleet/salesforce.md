@@ -124,15 +124,15 @@ Salesforce tools run with the permissions of the connected user. If an agent can
 
 ## Next steps
 
-> **[Add more tools](tools.md)**
+> [card] [Add more tools](tools.md)
 >
 > Connect additional services to your agent
 
-> **[Agent identity](agent-identity.md)**
+> [card] [Agent identity](agent-identity.md)
 >
 > Choose whether the agent uses shared or per-user credentials
 
-> **[Human-in-the-loop](essentials.md#human-in-the-loop)**
+> [card] [Human-in-the-loop](essentials.md#human-in-the-loop)
 >
 > Require approval before the agent takes sensitive actions
 

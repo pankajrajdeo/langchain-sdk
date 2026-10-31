@@ -10,7 +10,7 @@ tags: [docs, langsmith, create-an-agent]
 
 > Register an agent before tracing, choose its identifier, and configure an environment with the UI, Python SDK, or REST API.
 
-Creating an [agent](agents.md) in LangSmith gives it an identifier and [environments](agent-environments.md) for its traces. Create it once, then use its identifier and an environment to send traces from your code.
+Creating an [agent](agent-registry.md#agent) in LangSmith gives it an identifier and [environments](agent-environments.md) for its traces. Create it once, then use its identifier and an environment to send traces from your code.
 
 If your agent runs outside LangSmith, first create its record in LangSmith using the UI, SDK, or API. This record organizes its traces. Your code still runs where you host it. Framework functions such as LangChain `create_agent` build the agent that runs in your code. They do not create its LangSmith record.
 
@@ -41,7 +41,7 @@ An identifier is 1 to 63 characters, using lowercase letters, digits, and hyphen
 
 The rules apply wherever you supply the value: in the **Agent ID** field, in SDK and API creation requests, and in the agent ID you deploy to. The Build tab generates an identifier instead. A deployment without an agent ID derives one from the deployment name, appending a suffix when that value is already taken, so a deployed agent can end up with an identifier close to the deployment name rather than equal to it.
 
-An identifier cannot be changed after the agent is created. The display name can. For which value is which, see [Identifiers and display names](agents.md#identifiers-and-display-names).
+An identifier cannot be changed after the agent is created. The display name can. For which value is which, see [Identifiers and display names](agent-registry.md#identifiers-and-display-names).
 
 ## Start from the New Agent panel
 
@@ -75,38 +75,38 @@ Use a [personal access token or service key](create-account-api-key.md) with the
 
 Set `LANGSMITH_API_KEY` to the setup credential. Set `LANGSMITH_WORKSPACE_ID` to the target workspace ID, and `LANGSMITH_ENDPOINT` to your [region's API URL](create-account-api-key.md#configure-the-sdk).
 
-**Python**
-
-Install LangSmith v0.14.12 or later:
-
+> [tab] Python
+>
+> Install LangSmith v0.14.12 or later:
+>
 ```bash
-pip install -U "langsmith>=0.14.12"
+> pip install -U "langsmith>=0.14.12"
 ```
-
-Create the agent and print its identifier:
-
+>
+> Create the agent and print its identifier:
+>
 ```python
-from langsmith import Client
-
-client = Client()
-agent = client.agents.create(
-    id="support-agent",
-    name="Support agent",
-    source_type="EXTERNAL",
-)
-print(agent.id)  # Use as LANGSMITH_AGENT_ID
+> from langsmith import Client
+>
+> client = Client()
+> agent = client.agents.create(
+>     id="support-agent",
+>     name="Support agent",
+>     source_type="EXTERNAL",
+> )
+> print(agent.id)  # Use as LANGSMITH_AGENT_ID
 ```
 
-**REST**
-
-Use the REST API from any language to register the agent. Include `source_type: "EXTERNAL"`:
-
+> [tab] REST
+>
+> Use the REST API from any language to register the agent. Include `source_type: "EXTERNAL"`:
+>
 ```bash
-curl --fail-with-body --request POST "$LANGSMITH_ENDPOINT/api/v1/agents" \
-  --header "x-api-key: $LANGSMITH_API_KEY" \
-  --header "x-tenant-id: $LANGSMITH_WORKSPACE_ID" \
-  --header "Content-Type: application/json" \
-  --data '{"id":"support-agent","name":"Support agent","source_type":"EXTERNAL"}'
+> curl --fail-with-body --request POST "$LANGSMITH_ENDPOINT/api/v1/agents" \
+>   --header "x-api-key: $LANGSMITH_API_KEY" \
+>   --header "x-tenant-id: $LANGSMITH_WORKSPACE_ID" \
+>   --header "Content-Type: application/json" \
+>   --data '{"id":"support-agent","name":"Support agent","source_type":"EXTERNAL"}'
 ```
 
 `id` is the immutable agent identifier. `name` is its editable display name. The creation response includes `environments`, with each environment's `tracer_session_name` and `tracer_session_id`.
@@ -163,7 +163,7 @@ If the integration supports [agent addressing](log-traces-to-agent.md), set the 
 
 ## See also
 
-* [Agents](agents.md)
+* [Agent Registry](agent-registry.md)
 * [Agent environments](agent-environments.md)
 * [Build an agent in the UI](build-an-agent.md)
 * [Deploy to an agent environment](deploy-to-agent-environment.md)

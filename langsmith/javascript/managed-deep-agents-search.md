@@ -52,42 +52,42 @@ You do not need a Parallel API key.
 
 If the file already defines `mcp`, add `Parallel` to the existing `servers` map. Define `mcp` only once.
 
-**Python**
-
-Add `Parallel` to the `servers` map in `tools/mcp.py`.
-
+> [tab] Python
+>
+> Add `Parallel` to the `servers` map in `tools/mcp.py`.
+>
 **tools/mcp.py**
 
 ```python
-from managed_deepagents import define_mcp
-
-mcp = define_mcp(
-    servers={
-        "Parallel": {
-            "transport": "http",
-            "url": "https://api.smith.langchain.com/v1/managed-tools/servers/parallel/mcp",
-        },
-    },
-)
+> from managed_deepagents import define_mcp
+>
+> mcp = define_mcp(
+>     servers={
+>         "Parallel": {
+>             "transport": "http",
+>             "url": "https://api.smith.langchain.com/v1/managed-tools/servers/parallel/mcp",
+>         },
+>     },
+> )
 ```
 
-**TypeScript**
-
-Add `Parallel` to the `servers` map in `tools/mcp.ts`.
-
+> [tab] TypeScript
+>
+> Add `Parallel` to the `servers` map in `tools/mcp.ts`.
+>
 **tools/mcp.ts**
 
 ```typescript
-import { defineMcp } from "managed-deepagents";
-
-export const mcp = defineMcp({
-  servers: {
-    "Parallel": {
-      transport: "http",
-      url: "https://api.smith.langchain.com/v1/managed-tools/servers/parallel/mcp",
-    },
-  },
-});
+> import { defineMcp } from "managed-deepagents";
+>
+> export const mcp = defineMcp({
+>   servers: {
+>     "Parallel": {
+>       transport: "http",
+>       url: "https://api.smith.langchain.com/v1/managed-tools/servers/parallel/mcp",
+>     },
+>   },
+> });
 ```
 
 Your agent can now use Parallel search alongside its other tools.

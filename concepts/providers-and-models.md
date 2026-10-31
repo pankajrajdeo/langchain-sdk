@@ -167,19 +167,19 @@ model = ChatOpenAI(
 
 ## Next steps
 
-> **[Models guide](../langchain/models.md)**
+> [card] [Models guide](../langchain/models.md)
 >
 > Learn how to use models: invoke, stream, batch, tool calling, and more.
 
-> **[Chat model integrations](../integrations/chat.md)**
+> [card] [Chat model integrations](../integrations/chat.md)
 >
 > Browse all chat model integrations and their capabilities.
 
-> **[All providers](../integrations/providers/overview.md)**
+> [card] [All providers](../integrations/providers/overview.md)
 >
 > See the full list of provider packages and integrations.
 
-> **[Agents](../langchain/agents.md)**
+> [card] [Agents](../langchain/agents.md)
 >
 > Build agents that use models as their reasoning engine.
 

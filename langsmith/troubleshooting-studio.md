@@ -14,18 +14,18 @@ Safari blocks plain-HTTP traffic on localhost. When running Studio with `langgra
 
 ### Solution 1: Use Cloudflare Tunnel
 
-**Python**
-
+> [tab] Python
+>
 ```shell
-pip install -U langgraph-cli>=0.2.6
-langgraph dev --tunnel
+> pip install -U langgraph-cli>=0.2.6
+> langgraph dev --tunnel
 ```
 
-**JS**
-
+> [tab] JS
+>
 ```shell
-# Requires @langchain/langgraph-cli>=0.0.26
-npx @langchain/langgraph-cli dev --tunnel
+> # Requires @langchain/langgraph-cli>=0.0.26
+> npx @langchain/langgraph-cli dev --tunnel
 ```
 
 The command outputs a tunnel URL. To connect Studio:
@@ -103,18 +103,18 @@ Disable Brave Shields for LangSmith using the Brave icon in the URL bar.
 
 ### Solution 2: Use Cloudflare Tunnel
 
-**Python**
-
+> [tab] Python
+>
 ```shell
-pip install -U langgraph-cli>=0.2.6
-langgraph dev --tunnel
+> pip install -U langgraph-cli>=0.2.6
+> langgraph dev --tunnel
 ```
 
-**JS**
-
+> [tab] JS
+>
 ```shell
-# Requires @langchain/langgraph-cli>=0.0.26
-npx @langchain/langgraph-cli dev --tunnel
+> # Requires @langchain/langgraph-cli>=0.0.26
+> npx @langchain/langgraph-cli dev --tunnel
 ```
 
 The command outputs a tunnel URL. To connect Studio:
@@ -136,16 +136,16 @@ because without proper definition, Studio assumes the conditional edge could acc
 
 Define a mapping between router outputs and target nodes:
 
-**Python**
-
+> [tab] Python
+>
 ```python
-graph.add_conditional_edges("node_a", routing_function, {True: "node_b", False: "node_c"})
+> graph.add_conditional_edges("node_a", routing_function, {True: "node_b", False: "node_c"})
 ```
 
-**Javascript**
-
+> [tab] Javascript
+>
 ```ts
-graph.addConditionalEdges("node_a", routingFunction, { true: "node_b", false: "node_c" });
+> graph.addConditionalEdges("node_a", routingFunction, { true: "node_b", false: "node_c" });
 ```
 
 ### Solution 2: Router type definition

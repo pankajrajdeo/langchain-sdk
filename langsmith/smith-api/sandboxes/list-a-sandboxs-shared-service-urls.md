@@ -198,8 +198,8 @@ paths:
           name: page_size
           in: query
           schema:
-            default: 20
             type: integer
+            default: 20
             title: Page Size
         - description: Opaque pagination cursor from a prior response's next_cursor
           name: cursor

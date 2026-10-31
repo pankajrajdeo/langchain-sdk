@@ -331,11 +331,11 @@ To change the limit, set these variables in the deployment environment:
 
 ## Next steps
 
-> **[Deploy an agent](managed-deep-agents-deploy.md)**
+> [card] [Deploy an agent](managed-deep-agents-deploy.md)
 >
 > Deploy and reconcile schedule changes.
 
-> **[CLI reference](managed-deep-agents-cli.md)**
+> [card] [CLI reference](managed-deep-agents-cli.md)
 >
 > Look up `mda deploy` flags and troubleshooting.
 

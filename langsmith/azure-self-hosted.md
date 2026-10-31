@@ -36,19 +36,19 @@ Follow the [Kubernetes installation guide](kubernetes.md). LangSmith is tested o
 
 For production deployments, connect to Azure managed services:
 
-> **[Azure Blob Storage](self-host-blob-storage.md#azure-blob-storage)**
+> [card] [Azure Blob Storage](self-host-blob-storage.md#azure-blob-storage)
 >
 > Store trace data in Azure Blob
 
-> **[Azure Database](self-host-external-postgres.md#azure-database-for-postgresql)**
+> [card] [Azure Database](self-host-external-postgres.md#azure-database-for-postgresql)
 >
 > PostgreSQL database
 
-> **[Azure Cache](self-host-external-redis.md#azure-cache-for-redis)**
+> [card] [Azure Cache](self-host-external-redis.md#azure-cache-for-redis)
 >
 > Redis for caching
 
-> **[ClickHouse Cloud](self-host-external-clickhouse.md)**
+> [card] [ClickHouse Cloud](self-host-external-clickhouse.md)
 >
 > Analytics database
 

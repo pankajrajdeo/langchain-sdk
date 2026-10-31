@@ -110,6 +110,8 @@ Amazon Bedrock supports three authentication methods. **IAM trusted entity is th
 
 With IAM trusted entity authentication, you create an IAM role in your AWS account and allow LangSmith to assume it. No access keys are stored in LangSmith. Instead, LangSmith uses [AWS STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) to assume the role on each request.
 
+The `AWS_IAM_ROLE_ARN` secret set here is also read by the [LLM Gateway](llm-gateway-provider-authentication.md#use-an-iam-role). One role covers Playground, LLM-as-a-judge evaluators, and gateway requests.
+
 To set this up:
 
 1. Create an IAM role in your AWS account with permissions to invoke Bedrock models (e.g., `bedrock:InvokeModel`).
@@ -763,11 +765,11 @@ Set this when running experiments or evaluations to avoid hitting rate limits.
 
 ## Next steps
 
-> **[Configure prompt settings](managing-model-configurations.md)**
+> [card] [Configure prompt settings](managing-model-configurations.md)
 >
 > Learn how to create and manage model configurations in the Playground.
 
-> **[Create a prompt](create-a-prompt.md)**
+> [card] [Create a prompt](create-a-prompt.md)
 >
 > Get started building prompts with your chosen model provider.
 

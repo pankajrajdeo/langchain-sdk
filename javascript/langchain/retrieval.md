@@ -30,7 +30,7 @@ If you need a custom knowledge base, you can use LangChain’s document loaders 
 
 For more information, see the following tutorial to build a searchable knowledge base and minimal RAG workflow:
 
-> **[Tutorial: Semantic search](knowledge-base.md)**
+> [card] [Tutorial: Semantic search](knowledge-base.md)
 >
 > Learn how to create a searchable knowledge base from your own data using LangChain’s document loaders, embeddings, and vector stores.
 > In this tutorial, you’ll build a search engine over a PDF, enabling retrieval of passages relevant to a query. You’ll also implement a minimal RAG workflow on top of this engine to see how external knowledge can be integrated into LLM reasoning.
@@ -77,19 +77,19 @@ Each component is modular: you can swap loaders, splitters, embeddings, or vecto
 
 ### Building blocks
 
-> **[Document loaders](../integrations/document_loaders.md)**
+> [card] [Document loaders](../integrations/document_loaders.md)
 >
 > Ingest data from external sources (Google Drive, Slack, Notion, etc.), returning standardized [`Document`](https://reference.langchain.com/javascript/langchain-core/documents/Document) objects.
 
-> **[Embedding models](../integrations/embeddings.md)**
+> [card] [Embedding models](../integrations/embeddings.md)
 >
 > An embedding model turns text into a vector of numbers so that texts with similar meaning land close together in that vector space.
 
-> **[Vector stores](../integrations/vectorstores.md)**
+> [card] [Vector stores](../integrations/vectorstores.md)
 >
 > Specialized databases for storing and searching embeddings.
 
-> **[Retrievers](../integrations/retrievers.md)**
+> [card] [Retrievers](../integrations/retrievers.md)
 >
 > A retriever is an interface that returns documents given an unstructured query.
 
@@ -126,11 +126,11 @@ graph TB
     class B,C process
 ```
 
-> **[Tutorial: Semantic search](knowledge-base.md)**
+> [card] [Tutorial: Semantic search](knowledge-base.md)
 >
 > Build a searchable knowledge base with document loaders, embeddings, and vector stores, then run a minimal retrieve-then-generate RAG workflow on top of it.
 
-> **[Tutorial: Evaluate a RAG application](../../langsmith/evaluate-rag-tutorial.md)**
+> [card] [Tutorial: Evaluate a RAG application](../../langsmith/evaluate-rag-tutorial.md)
 >
 > Build a simple retrieve-then-generate RAG app and measure answer correctness, relevance, groundedness, and retrieval quality with LangSmith.
 
@@ -259,7 +259,7 @@ const response = await agent.invoke({
 console.log(response.messages.at(-1)?.content);
 ```
 
-> **[Tutorial: RAG with Deep Agents](../deepagents/rag.md)**
+> [card] [Tutorial: RAG with Deep Agents](../deepagents/rag.md)
 >
 > Build a documentation Q\&A agent that retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents.
 
@@ -306,7 +306,7 @@ This architecture is suitable for:
 * Systems that require validation or quality control steps
 * Workflows involving multiple sources or iterative refinement
 
-> **[Tutorial: Agentic RAG with Self-Correction](../langgraph/agentic-rag.md)**
+> [card] [Tutorial: Agentic RAG with Self-Correction](../langgraph/agentic-rag.md)
 >
 > An example of **Hybrid RAG** that combines agentic reasoning with retrieval and self-correction.
 

@@ -165,7 +165,7 @@ llm = ChatOpenAI(model="gpt-5.4-mini", stream_usage=True)  # [!code highlight]
 >
 > For the traditional Azure-specific implementation, continue to use [`AzureChatOpenAI`](azure_chat_openai.md).
 
-> **Using Azure OpenAI v1 API with API Key**
+> [accordion] Using Azure OpenAI v1 API with API Key
 >
 > To use `ChatOpenAI` with Azure OpenAI, set the `base_url` to your Azure endpoint with `/openai/v1/` appended:
 >
@@ -182,7 +182,7 @@ llm = ChatOpenAI(model="gpt-5.4-mini", stream_usage=True)  # [!code highlight]
 > print(response.content)
 ```
 
-> **Using Azure OpenAI with Microsoft Entra ID**
+> [accordion] Using Azure OpenAI with Microsoft Entra ID
 >
 > The v1 API adds native support for [Microsoft Entra ID](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/managed-identity) (formerly Azure AD) authentication with automatic token refresh. Pass a token provider callable to the `api_key` parameter:
 >
@@ -398,7 +398,7 @@ Name: execute_code
 [{'type': 'text', 'text': '27', 'annotations': [], 'id': 'msg_68b73371e9e081a0927f54f88f2cd7a20d6082d28f91357a'}]
 ```
 
-> **Context-free grammars**
+> [accordion] Context-free grammars
 >
 > OpenAI supports the specification of a [context-free grammar](https://platform.openai.com/docs/guides/function-calling#context-free-grammars) for custom tool inputs in `lark` or `regex` format. See [OpenAI docs](https://platform.openai.com/docs/guides/function-calling#context-free-grammars) for details. The `format` parameter can be passed into `@custom_tool` as shown below:
 >
@@ -471,7 +471,7 @@ OpenAI supports a native [structured output feature](https://platform.openai.com
 
 You can access this feature in individual model calls, or by specifying the [response format](../../langchain/structured-output.md) of a LangChain [agent](../../langchain/agents.md). See below for examples.
 
-> **Individual model calls**
+> [accordion] Individual model calls
 >
 > Use the [`with_structured_output`](../../langchain/models.md#structured-output) method to generate a structured model response. Specify `method="json_schema"` to enable OpenAI's native structured output feature; otherwise the method defaults to using function calling.
 >
@@ -497,7 +497,7 @@ You can access this feature in individual model calls, or by specifying the [res
 > Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
 ```
 
-> **Agent response format**
+> [accordion] Agent response format
 >
 > Specify `response_format` with [`ProviderStrategy`](../../langchain/structured-output.md) to engage OpenAI's structured output feature when generating its final response.
 >
@@ -763,7 +763,7 @@ OpenAI supports a [tool search](https://developers.openai.com/api/docs/guides/to
 
 To engage tool search, mark tools with `@tool(extras={"defer_loading": True})` and add OpenAI's search tool to available tools. See below for examples.
 
-> **Server-side tool search**
+> [accordion] Server-side tool search
 >
 > OpenAI can search across available tools and return the loaded tool (together with a tool call if appropriate) in the same response:
 >
@@ -870,7 +870,7 @@ To engage tool search, mark tools with `@tool(extras={"defer_loading": True})` a
 > ]
 ```
 
-> **Client-executed tool search**
+> [accordion] Client-executed tool search
 >
 > For full control of the underlying tool search process, you can specify `"execution": "client"` in the search tool definition. If the model elects to search for a tool, it will include a `tool_search_call` block in its response. You can then supply a `tool_search_output` block that includes the tool definition.
 >
@@ -1347,7 +1347,7 @@ response = llm_with_tools.invoke(
 )
 ```
 
-> **MCP Approvals**
+> [accordion] MCP Approvals
 >
 > OpenAI will at times request approval before sharing data with a remote MCP server.
 >
@@ -1680,7 +1680,7 @@ message = {
 
 See below for examples of content blocks.
 
-> **Images**
+> [accordion] Images
 >
 > Refer to examples in the [multimodal messages how-to guide](../../langchain/messages.md#multimodal).
 >
@@ -1719,7 +1719,7 @@ See below for examples of content blocks.
 > }
 ```
 
-> **PDFs**
+> [accordion] PDFs
 >
 > Note: OpenAI requires file-names be specified for PDF inputs. When using LangChain's format, include the `filename` key.
 >
@@ -1748,7 +1748,7 @@ See below for examples of content blocks.
 > }
 ```
 
-> **Audio**
+> [accordion] Audio
 >
 > See [supported models](https://platform.openai.com/docs/models), e.g., `"gpt-4o-audio-preview"`.
 >
@@ -1989,72 +1989,72 @@ OpenAI supports [explicit prompt-cache breakpoints](https://developers.openai.co
 
 To mark a content block as a cache breakpoint, add `"prompt_cache_breakpoint": {"mode": "explicit"}` to the block. Explicit breakpoints require GPT-5.6 or later model families.
 
-**Chat Completions**
-
-```python
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI(
-    model="gpt-5.6-sol",
-    prompt_cache_options={"mode": "explicit"},
-)
-
-messages = [
-    {
-        "role": "system",
-        "content": [
-            {
-                "type": "text",
-                "text": (
-                    "You are a helpful assistant with access to a large knowledge base."
-                ),
-                "prompt_cache_breakpoint": {"mode": "explicit"},  # [!code highlight]
-            }
-        ],
-    },
-    {"role": "user", "content": "Summarize the key points."},
-]
-
-response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
-```
-
-> **[View example trace](https://smith.langchain.com/public/51029da2-85c9-4cda-abe3-45822dac230f/r)**
+> [tab] Chat Completions
 >
-> Open a public LangSmith run for this example.
-
-**Responses API**
-
 ```python
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI(
-    model="gpt-5.6-sol",
-    use_responses_api=True,
-    prompt_cache_options={"mode": "explicit"},
-)
-
-messages = [
-    {
-        "role": "system",
-        "content": [
-            {
-                "type": "text",
-                "text": (
-                    "You are a helpful assistant with access to a large knowledge base."
-                ),
-                "prompt_cache_breakpoint": {"mode": "explicit"},  # [!code highlight]
-            }
-        ],
-    },
-    {"role": "user", "content": "Summarize the key points."},
-]
-
-response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
-```
-
-> **[View example trace](https://smith.langchain.com/public/91982880-efa8-4265-98c0-0b668e801972/r)**
+> from langchain_openai import ChatOpenAI
 >
-> Open a public LangSmith run for this example.
+> llm = ChatOpenAI(
+>     model="gpt-5.6-sol",
+>     prompt_cache_options={"mode": "explicit"},
+> )
+>
+> messages = [
+>     {
+>         "role": "system",
+>         "content": [
+>             {
+>                 "type": "text",
+>                 "text": (
+>                     "You are a helpful assistant with access to a large knowledge base."
+>                 ),
+>                 "prompt_cache_breakpoint": {"mode": "explicit"},  # [!code highlight]
+>             }
+>         ],
+>     },
+>     {"role": "user", "content": "Summarize the key points."},
+> ]
+>
+> response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
+```
+>
+> > [card] [View example trace](https://smith.langchain.com/public/aade8a0b-e869-4583-b0fe-f91d3bc786ad/r)
+> >
+> > Open a public LangSmith run for this example.
+
+> [tab] Responses API
+>
+```python
+> from langchain_openai import ChatOpenAI
+>
+> llm = ChatOpenAI(
+>     model="gpt-5.6-sol",
+>     use_responses_api=True,
+>     prompt_cache_options={"mode": "explicit"},
+> )
+>
+> messages = [
+>     {
+>         "role": "system",
+>         "content": [
+>             {
+>                 "type": "text",
+>                 "text": (
+>                     "You are a helpful assistant with access to a large knowledge base."
+>                 ),
+>                 "prompt_cache_breakpoint": {"mode": "explicit"},  # [!code highlight]
+>             }
+>         ],
+>     },
+>     {"role": "user", "content": "Summarize the key points."},
+> ]
+>
+> response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
+```
+>
+> > [card] [View example trace](https://smith.langchain.com/public/a62d33a8-a1bd-4d34-b40b-5bc442aca92c/r)
+> >
+> > Open a public LangSmith run for this example.
 
 Breakpoints are supported on text, image, and file content blocks. You can also nest `prompt_cache_breakpoint` inside an `extras` dict if you prefer to keep the LangChain content block structure clean:
 
@@ -2066,7 +2066,7 @@ content_block = {
 }
 ```
 
-> **[View example trace](https://smith.langchain.com/public/0fcdc074-95b0-4a30-8f9b-1c44b90ff2dd/r)**
+> [card] [View example trace](https://smith.langchain.com/public/3cbf13f4-abd1-4ac7-a17d-3f20cb97f920/r)
 >
 > Open a public LangSmith run for this example.
 
@@ -2098,7 +2098,7 @@ response = llm.invoke(
 )
 ```
 
-> **[View example trace](https://smith.langchain.com/public/54c3a2ee-add7-4fdf-8213-0b940cf64896/r)**
+> [card] [View example trace](https://smith.langchain.com/public/f89103cb-5a44-4530-8bf9-258c30a76e9c/r)
 >
 > Open a public LangSmith run for this example.
 
@@ -2117,7 +2117,7 @@ print(f"Cache read tokens:     {cache_read}")
 print(f"Cache creation tokens: {cache_creation}")
 ```
 
-> **[View example trace](https://smith.langchain.com/public/e5e294b7-569e-4dd7-b460-081c3cd4639b/r)**
+> [card] [View example trace](https://smith.langchain.com/public/53f314e3-ac7b-4980-8ad9-d9e9229d9f1b/r)
 >
 > Open a public LangSmith run for this example.
 

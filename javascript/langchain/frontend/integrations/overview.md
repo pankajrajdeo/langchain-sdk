@@ -14,19 +14,19 @@ tags: [docs, javascript, langchain, frontend, integrations]
 
 ## Integrations
 
-> **[CopilotKit](copilotkit.md)**
+> [card] [CopilotKit](copilotkit.md)
 >
 > Full AI chat runtime with structured generative UI support. Add a custom CopilotKit endpoint to your LangGraph deployment, then render dynamic component trees in React.
 
-> **[AI Elements](ai-elements.md)**
+> [card] [AI Elements](ai-elements.md)
 >
 > Composable shadcn/ui-based components for AI chat. Drop in `Conversation`, `Message`, `Tool`, and `Reasoning` and wire them directly to `stream.messages`.
 
-> **[assistant-ui](assistant-ui.md)**
+> [card] [assistant-ui](assistant-ui.md)
 >
 > Headless React framework with a full runtime layer. Bridge `useStream` to `AssistantRuntimeProvider` via the `useExternalStoreRuntime` adapter.
 
-> **[OpenUI](openui.md)**
+> [card] [OpenUI](openui.md)
 >
 > Generative UI library that lets the agent produce complete, interactive dashboards in a declarative component DSL. Purpose-built for data-rich, report-style UIs.
 

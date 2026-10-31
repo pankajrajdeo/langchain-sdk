@@ -18,7 +18,7 @@ tags: [docs, javascript, integrations, chat]
 >
 > See [this section for general instructions on installing LangChain packages](../langchain/install.md).
 
-> **OpenAI**
+> [accordion] OpenAI
 >
 > Install:
 >
@@ -58,7 +58,7 @@ tags: [docs, javascript, integrations, chat]
 > await model.invoke("Hello, world!")
 ```
 
-> **Anthropic**
+> [accordion] Anthropic
 >
 > Install:
 >
@@ -101,7 +101,7 @@ tags: [docs, javascript, integrations, chat]
 > await model.invoke("Hello, world!")
 ```
 
-> **Google Gemini**
+> [accordion] Google Gemini
 >
 > Install:
 >
@@ -141,7 +141,7 @@ tags: [docs, javascript, integrations, chat]
 > await model.invoke("Hello, world!")
 ```
 
-> **MistralAI**
+> [accordion] MistralAI
 >
 > Install:
 >
@@ -184,7 +184,7 @@ tags: [docs, javascript, integrations, chat]
 > await model.invoke("Hello, world!")
 ```
 
-> **Groq**
+> [accordion] Groq
 >
 > Install:
 >

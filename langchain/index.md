@@ -79,23 +79,23 @@ The HITL interrupt, summarization, PII redaction, retries, and any custom hooks 
 
 ## Additional resources
 
-> **[Built-in middleware](middleware/built-in.md)**
+> [card] [Built-in middleware](middleware/built-in.md)
 >
 > Explore built-in middleware for common use cases.
 
-> **[Custom middleware](middleware/custom.md)**
+> [card] [Custom middleware](middleware/custom.md)
 >
 > Build your own middleware with hooks and decorators.
 
-> **[Middleware API reference](https://reference.langchain.com/python/langchain/middleware/)**
+> [card] [Middleware API reference](https://reference.langchain.com/python/langchain/middleware/)
 >
 > Complete API reference for middleware.
 
-> **[Middleware integrations](../integrations/middleware.md)**
+> [card] [Middleware integrations](../integrations/middleware.md)
 >
 > Provider-specific middleware for Anthropic, AWS, OpenAI, and more.
 
-> **[Testing agents](test.md)**
+> [card] [Testing agents](test.md)
 >
 > Test your agents with LangSmith.
 

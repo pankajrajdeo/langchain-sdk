@@ -20,4 +20,4 @@ output_schema: type[OutputT] = cast(type[OutputT], output_schema or state_schema
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/3521f08e21a7d89c28331191374bc85c11ecb6e2/libs/langgraph/langgraph/graph/state.py#L263)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5bd231cbfd913e05ebc662f519eb9a655bc766df/libs/langgraph/langgraph/graph/state.py#L263)

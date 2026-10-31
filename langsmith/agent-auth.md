@@ -16,78 +16,78 @@ tags: [docs, langsmith, agent-auth]
 
 ## Installation
 
-**Python**
-
+> [tab] Python
+>
 **pip**
 
 ```bash
-pip install langchain-auth
+> pip install langchain-auth
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-auth
+> uv add langchain-auth
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```bash
-npm install @langchain/auth
+> npm install @langchain/auth
 ```
 
 ## Quickstart
 
 ### 1. Initialize the client
 
-**Python**
-
+> [tab] Python
+>
 ```python
-from langchain_auth import Client
-
-client = Client(api_key="your-langsmith-api-key")
+> from langchain_auth import Client
+>
+> client = Client(api_key="your-langsmith-api-key")
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```javascript
-import { Client } from '@langchain/auth';
-
-const client = new Client({ apiKey: 'your-langsmith-api-key' });
+> import { Client } from '@langchain/auth';
+>
+> const client = new Client({ apiKey: 'your-langsmith-api-key' });
 ```
 
 #### Self-hosted configuration
 
 For self-hosted LangSmith instances, specify the API URL using the `/api-host` path on your instance.
 
-**Environment Variable**
-
+> [tab] Environment Variable
+>
 ```bash
-export LANGSMITH_API_URL="https://your-langsmith-instance.com/api-host"
+> export LANGSMITH_API_URL="https://your-langsmith-instance.com/api-host"
 ```
-
-Then initialize the client normally:
-
+>
+> Then initialize the client normally:
+>
 ```python
-client = Client(api_key="your-langsmith-api-key")
+> client = Client(api_key="your-langsmith-api-key")
 ```
 
-**Explicit Configuration (Python)**
-
+> [tab] Explicit Configuration (Python)
+>
 ```python
-client = Client(
-    api_key="your-langsmith-api-key",
-    api_url="https://your-langsmith-instance.com/api-host"
-)
+> client = Client(
+>     api_key="your-langsmith-api-key",
+>     api_url="https://your-langsmith-instance.com/api-host"
+> )
 ```
 
-**Explicit Configuration (JavaScript)**
-
+> [tab] Explicit Configuration (JavaScript)
+>
 ```javascript
-const client = new Client({
-    apiKey: 'your-langsmith-api-key',
-    apiUrl: 'https://your-langsmith-instance.com/api-host'
-});
+> const client = new Client({
+>     apiKey: 'your-langsmith-api-key',
+>     apiUrl: 'https://your-langsmith-instance.com/api-host'
+> });
 ```
 
 ### 2. Set up OAuth providers
@@ -100,56 +100,56 @@ Before agents can authenticate, you need to configure an OAuth provider using th
 
 3. Set the callback URL in your OAuth provider:
 
-**LangSmith Cloud**
-
+> [tab] LangSmith Cloud
+>
 ```
-https://smith.langchain.com/host-oauth-callback/{provider_id}
+> https://smith.langchain.com/host-oauth-callback/{provider_id}
 ```
-
-For example, if your provider\_id is "github-local-dev", use:
-
+>
+> For example, if your provider\_id is "github-local-dev", use:
+>
 ```
-https://smith.langchain.com/host-oauth-callback/github-local-dev
-```
-
-**Self-hosted**
-
-```
-https://{your-langsmith-instance}/host-oauth-callback/{provider_id}
+> https://smith.langchain.com/host-oauth-callback/github-local-dev
 ```
 
-For example, if your instance is `langsmith.example.com` and provider\_id is "github", use:
-
+> [tab] Self-hosted
+>
 ```
-https://langsmith.example.com/host-oauth-callback/github
+> https://{your-langsmith-instance}/host-oauth-callback/{provider_id}
+```
+>
+> For example, if your instance is `langsmith.example.com` and provider\_id is "github", use:
+>
+```
+> https://langsmith.example.com/host-oauth-callback/github
 ```
 
 4. Use `client.create_oauth_provider()` with the credentials from your OAuth app:
 
-**Python**
-
+> [tab] Python
+>
 ```python
-new_provider = await client.create_oauth_provider(
-    provider_id="{provider_id}",  # Provide any unique ID
-    name="{provider_display_name}",  # Provide any display name
-    client_id="{your_client_id}",
-    client_secret="{your_client_secret}",
-    auth_url="{auth_url_of_your_provider}",
-    token_url="{token_url_of_your_provider}",
-)
+> new_provider = await client.create_oauth_provider(
+>     provider_id="{provider_id}",  # Provide any unique ID
+>     name="{provider_display_name}",  # Provide any display name
+>     client_id="{your_client_id}",
+>     client_secret="{your_client_secret}",
+>     auth_url="{auth_url_of_your_provider}",
+>     token_url="{token_url_of_your_provider}",
+> )
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```javascript
-const newProvider = await client.createOAuthProvider({
-    providerId: '{provider_id}',  // Provide any unique ID
-    name: '{provider_display_name}',  // Provide any display name
-    clientId: '{your_client_id}',
-    clientSecret: '{your_client_secret}',
-    authUrl: '{auth_url_of_your_provider}',
-    tokenUrl: '{token_url_of_your_provider}',
-});
+> const newProvider = await client.createOAuthProvider({
+>     providerId: '{provider_id}',  // Provide any unique ID
+>     name: '{provider_display_name}',  // Provide any display name
+>     clientId: '{your_client_id}',
+>     clientSecret: '{your_client_secret}',
+>     authUrl: '{auth_url_of_your_provider}',
+>     tokenUrl: '{token_url_of_your_provider}',
+> });
 ```
 
 ### 3. Authenticate from an agent
@@ -198,43 +198,43 @@ token = auth_result.token
 
 Provide the `auth_url` to the user for out-of-band OAuth flows.
 
-**Python**
-
+> [tab] Python
+>
 ```python
-auth_result = await client.authenticate(
-    provider="{provider_id}",
-    scopes=["scopeA"],
-    user_id="your_user_id"
-)
-
-if auth_result.status == "pending":
-    print(f"Complete OAuth at: {auth_result.url}")
-    # Wait for user to complete OAuth
-    completed_auth = await client.wait_for_completion(auth_result.auth_id)
-    print("Authentication completed!")
-else:
-    token = auth_result.token
-    print(f"Already authenticated, token: {token}")
+> auth_result = await client.authenticate(
+>     provider="{provider_id}",
+>     scopes=["scopeA"],
+>     user_id="your_user_id"
+> )
+>
+> if auth_result.status == "pending":
+>     print(f"Complete OAuth at: {auth_result.url}")
+>     # Wait for user to complete OAuth
+>     completed_auth = await client.wait_for_completion(auth_result.auth_id)
+>     print("Authentication completed!")
+> else:
+>     token = auth_result.token
+>     print(f"Already authenticated, token: {token}")
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```javascript
-const authResult = await client.authenticate({
-    provider: '{provider_id}',
-    scopes: ['scopeA'],
-    userId: 'your_user_id'
-});
-
-if (authResult.status === 'pending') {
-    console.log(`Complete OAuth at: ${authResult.authUrl}`);
-    // Wait for user to complete OAuth
-    const completedAuth = await client.waitForCompletion(authResult.authId);
-    console.log('Authentication completed!');
-} else {
-    const token = authResult.token;
-    console.log(`Already authenticated, token: ${token}`);
-}
+> const authResult = await client.authenticate({
+>     provider: '{provider_id}',
+>     scopes: ['scopeA'],
+>     userId: 'your_user_id'
+> });
+>
+> if (authResult.status === 'pending') {
+>     console.log(`Complete OAuth at: ${authResult.authUrl}`);
+>     // Wait for user to complete OAuth
+>     const completedAuth = await client.waitForCompletion(authResult.authId);
+>     console.log('Authentication completed!');
+> } else {
+>     const token = authResult.token;
+>     console.log(`Already authenticated, token: ${token}`);
+> }
 ```
 
 ## Troubleshooting

@@ -202,7 +202,7 @@ agent = define_deep_agent(
 
 The agent name is also the default deployment name. For model concepts and provider options, see [Models](../langchain/models.md).
 
-> **Using another provider?**
+> [accordion] Using another provider?
 >
 > You can use a Tavily search tool instead.
 > Add a [Tavily API key](https://app.tavily.com) to `.env`:
@@ -285,7 +285,7 @@ What were the main announcements from the latest LangChain release?
 
 You should see the agent call the web search tool, then return a concise answer that cites sources. If search never appears in the trace, confirm the provider tool dict matches the model you set in `agent.py` or `agent.ts`.
 
-In an [agent-based workspace](agents.md), tracing will result in errors until you register the agent. For details, see [Trace local runs](python/managed-deep-agents-local-development.md#trace-local-runs).
+In an [agent-based workspace](agent-registry.md), tracing will result in errors until you register the agent. For details, see [Trace local runs](python/managed-deep-agents-local-development.md#trace-local-runs).
 
 **7. Deploy the agent**
 
@@ -301,15 +301,15 @@ Open that URL. You should see the deployment in a ready state. Send the same res
 
 ## Next steps
 
-> **[Tutorial](python/managed-deep-agents-tutorial.md)**
+> [card] [Tutorial](python/managed-deep-agents-tutorial.md)
 >
 > Add a custom Tavily search tool, durable memory, and a daily schedule.
 
-> **[Custom tools](python/managed-deep-agents-tools.md)**
+> [card] [Custom tools](python/managed-deep-agents-tools.md)
 >
 > Add authored LangChain tools from your project.
 
-> **[Connections](python/managed-deep-agents-connections.md)**
+> [card] [Connections](python/managed-deep-agents-connections.md)
 >
 > Authenticate with external services, as the agent or as the caller.
 

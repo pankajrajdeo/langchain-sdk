@@ -195,8 +195,8 @@ paths:
           name: page_size
           in: query
           schema:
-            default: 20
             type: integer
+            default: 20
             title: Page Size
         - description: Opaque pagination cursor from a prior response's next_cursor
           name: cursor
@@ -208,8 +208,8 @@ paths:
           name: limit
           in: query
           schema:
-            default: 50
             type: integer
+            default: 50
             title: Limit
         - description: 'Deprecated: use cursor. Pagination offset'
           name: offset
@@ -244,30 +244,30 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Label
         - description: Sort column (name, status, created_at)
           name: sort_by
           in: query
           schema:
-            default: created_at
             type: string
+            default: created_at
             title: Sort By
         - description: Sort direction (asc, desc)
           name: sort_order
           in: query
           schema:
-            default: desc
             type: string
+            default: desc
             title: Sort Order
         - description: 'Deprecated: use sort_order. Sort direction (asc, desc)'
           name: sort_direction
           in: query
           schema:
-            default: desc
             type: string
+            default: desc
             title: Sort Direction
       responses:
         '200':

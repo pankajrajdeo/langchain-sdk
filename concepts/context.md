@@ -49,63 +49,64 @@ graph.invoke(
 )
 ```
 
-**Agent prompt**
-
+> [tab] Agent prompt
+>
 ```python
-from dataclasses import dataclass
-from langchain.agents import create_agent
-from langchain.agents.middleware import dynamic_prompt, ModelRequest
-
-@dataclass
-class ContextSchema:
-    user_name: str
-
-@dynamic_prompt  # [!code highlight]
-def personalized_prompt(request: ModelRequest) -> str:  # [!code highlight]
-    user_name = request.runtime.context.user_name
-    return f"You are a helpful assistant. Address the user as {user_name}."
-
-agent = create_agent(
-    model="claude-sonnet-4-6",
-    tools=[get_weather],
-    middleware=[personalized_prompt],
-    context_schema=ContextSchema
-)
-
-agent.invoke(
-    {"messages": [{"role": "user", "content": "what is the weather in sf"}]},
-    context=ContextSchema(user_name="John Smith")  # [!code highlight]
-)
+> from dataclasses import dataclass
+> from langchain.agents import create_agent
+> from langchain.agents.middleware import dynamic_prompt, ModelRequest
+>
+>
+> @dataclass
+> class ContextSchema:
+>     user_name: str
+>
+> @dynamic_prompt  # [!code highlight]
+> def personalized_prompt(request: ModelRequest) -> str:  # [!code highlight]
+>     user_name = request.runtime.context.user_name
+>     return f"You are a helpful assistant. Address the user as {user_name}."
+>
+> agent = create_agent(
+>     model="claude-sonnet-4-6",
+>     tools=[get_weather],
+>     middleware=[personalized_prompt],
+>     context_schema=ContextSchema
+> )
+>
+> agent.invoke(
+>     {"messages": [{"role": "user", "content": "what is the weather in sf"}]},
+>     context=ContextSchema(user_name="John Smith")  # [!code highlight]
+> )
 ```
+>
+> See [Agents](../langchain/agents.md) for details.
 
-See [Agents](../langchain/agents.md) for details.
-
-**Workflow node**
-
+> [tab] Workflow node
+>
 ```python
-from langgraph.runtime import Runtime
-
-def node(state: State, runtime: Runtime[ContextSchema]):  # [!code highlight]
-    user_name = runtime.context.user_name
-    ...
+> from langgraph.runtime import Runtime
+>
+> def node(state: State, runtime: Runtime[ContextSchema]):  # [!code highlight]
+>     user_name = runtime.context.user_name
+>     ...
 ```
+>
+> * See [the Graph API](../langgraph/use-graph-api.md#add-runtime-configuration) for details.
 
-* See [the Graph API](../langgraph/use-graph-api.md#add-runtime-configuration) for details.
-
-**In a tool**
-
+> [tab] In a tool
+>
 ```python
-from langchain.tools import tool, ToolRuntime
-
-@tool
-def get_user_email(runtime: ToolRuntime[ContextSchema]) -> str:
-    """Retrieve user information based on user ID."""
-    # simulate fetching user info from a database
-    email = get_user_email_from_db(runtime.context.user_name)  # [!code highlight]
-    return email
+> from langchain.tools import tool, ToolRuntime
+>
+> @tool
+> def get_user_email(runtime: ToolRuntime[ContextSchema]) -> str:
+>     """Retrieve user information based on user ID."""
+>     # simulate fetching user info from a database
+>     email = get_user_email_from_db(runtime.context.user_name)  # [!code highlight]
+>     return email
 ```
-
-See the [tool calling guide](../langchain/tools.md#context) for details.
+>
+> See the [tool calling guide](../langchain/tools.md#context) for details.
 
 > [!TIP]
 >
@@ -116,60 +117,61 @@ See the [tool calling guide](../langchain/tools.md#context) for details.
 
 **Dynamic runtime context** represents mutable data that can evolve during a single run and is managed through the LangGraph state object. This includes conversation history, intermediate results, and values derived from tools or LLM outputs. In LangGraph, the state object acts as [short-term memory](memory.md) during a run.
 
-**In an agent**
-
-Example shows how to incorporate state into an agent **prompt**.
-
-State can also be accessed by the agent's **tools**, which can read or update the state as needed. See [tool calling guide](../langchain/tools.md#short-term-memory-state) for details.
-
+> [tab] In an agent
+>
+> Example shows how to incorporate state into an agent **prompt**.
+>
+> State can also be accessed by the agent's **tools**, which can read or update the state as needed. See [tool calling guide](../langchain/tools.md#short-term-memory-state) for details.
+>
 ```python
-from langchain.agents import create_agent
-from langchain.agents.middleware import dynamic_prompt, ModelRequest
-from langchain.agents import AgentState
-
-class CustomState(AgentState):  # [!code highlight]
-    user_name: str
-
-@dynamic_prompt  # [!code highlight]
-def personalized_prompt(request: ModelRequest) -> str:  # [!code highlight]
-    user_name = request.state.get("user_name", "User")
-    return f"You are a helpful assistant. User's name is {user_name}"
-
-agent = create_agent(
-    model="claude-sonnet-4-6",
-    tools=[...],
-    state_schema=CustomState,  # [!code highlight]
-    middleware=[personalized_prompt],  # [!code highlight]
-)
-
-agent.invoke({
-    "messages": "hi!",
-    "user_name": "John Smith"
-})
+> from langchain.agents import create_agent
+> from langchain.agents.middleware import dynamic_prompt, ModelRequest
+> from langchain.agents import AgentState
+>
+>
+> class CustomState(AgentState):  # [!code highlight]
+>     user_name: str
+>
+> @dynamic_prompt  # [!code highlight]
+> def personalized_prompt(request: ModelRequest) -> str:  # [!code highlight]
+>     user_name = request.state.get("user_name", "User")
+>     return f"You are a helpful assistant. User's name is {user_name}"
+>
+> agent = create_agent(
+>     model="claude-sonnet-4-6",
+>     tools=[...],
+>     state_schema=CustomState,  # [!code highlight]
+>     middleware=[personalized_prompt],  # [!code highlight]
+> )
+>
+> agent.invoke({
+>     "messages": "hi!",
+>     "user_name": "John Smith"
+> })
 ```
 
-**In a workflow**
-
+> [tab] In a workflow
+>
 ```python
-from typing_extensions import TypedDict
-from langchain.messages import AnyMessage
-from langgraph.graph import StateGraph
-
-class CustomState(TypedDict):  # [!code highlight]
-    messages: list[AnyMessage]
-    extra_field: int
-
-def node(state: CustomState):  # [!code highlight]
-    messages = state["messages"]
-    ...
-    return {  # [!code highlight]
-        "extra_field": state["extra_field"] + 1  # [!code highlight]
-    }
-
-builder = StateGraph(State)
-builder.add_node(node)
-builder.set_entry_point("node")
-graph = builder.compile()
+> from typing_extensions import TypedDict
+> from langchain.messages import AnyMessage
+> from langgraph.graph import StateGraph
+>
+> class CustomState(TypedDict):  # [!code highlight]
+>     messages: list[AnyMessage]
+>     extra_field: int
+>
+> def node(state: CustomState):  # [!code highlight]
+>     messages = state["messages"]
+>     ...
+>     return {  # [!code highlight]
+>         "extra_field": state["extra_field"] + 1  # [!code highlight]
+>     }
+>
+> builder = StateGraph(State)
+> builder.add_node(node)
+> builder.set_entry_point("node")
+> graph = builder.compile()
 ```
 
 > [!TIP]

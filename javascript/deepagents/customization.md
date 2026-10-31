@@ -143,377 +143,377 @@ Pass a `model` string in `provider:model` format, or an initialized model instan
 >
 > Use the `provider:model` format (for example `openai:gpt-5.5`) to quickly switch between models.
 
-**OpenAI**
-
-👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
-
+> [tab] OpenAI
+>
+> 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/openai deepagents
+> npm install @langchain/openai deepagents
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/openai deepagents
+> pnpm install @langchain/openai deepagents
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/openai deepagents
+> yarn add @langchain/openai deepagents
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/openai deepagents
+> bun add @langchain/openai deepagents
 ```
-
+>
 **default parameters**
 
 ```typescript
-import { createDeepAgent } from "deepagents";
-
-process.env.OPENAI_API_KEY = "your-api-key";
-
-const agent = createDeepAgent({ model: "gpt-5.5" });
-// this calls initChatModel for the specified model with default parameters
-// to use specific model parameters, use initChatModel directly
+> import { createDeepAgent } from "deepagents";
+>
+> process.env.OPENAI_API_KEY = "your-api-key";
+>
+> const agent = createDeepAgent({ model: "gpt-5.5" });
+> // this calls initChatModel for the specified model with default parameters
+> // to use specific model parameters, use initChatModel directly
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-import { createDeepAgent } from "deepagents";
-
-process.env.OPENAI_API_KEY = "your-api-key";
-
-const model = await initChatModel("gpt-5.5");
-const agent = createDeepAgent({
-  model,
-  temperature: 0,
-});
+> import { initChatModel } from "langchain";
+> import { createDeepAgent } from "deepagents";
+>
+> process.env.OPENAI_API_KEY = "your-api-key";
+>
+> const model = await initChatModel("gpt-5.5");
+> const agent = createDeepAgent({
+>   model,
+>   temperature: 0,
+> });
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatOpenAI } from "@langchain/openai";
-import { createDeepAgent } from "deepagents";
-
-const agent = createDeepAgent({
-  model: new ChatOpenAI({
-    model: "gpt-5.5",
-    apiKey: "your-api-key",
-    temperature: 0,
-  }),
-});
+> import { ChatOpenAI } from "@langchain/openai";
+> import { createDeepAgent } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: new ChatOpenAI({
+>     model: "gpt-5.5",
+>     apiKey: "your-api-key",
+>     temperature: 0,
+>   }),
+> });
 ```
 
-**Anthropic**
-
-👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
-
+> [tab] Anthropic
+>
+> 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/anthropic deepagents
+> npm install @langchain/anthropic deepagents
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/anthropic deepagents
+> pnpm install @langchain/anthropic deepagents
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/anthropic deepagents
+> yarn add @langchain/anthropic deepagents
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/anthropic deepagents
+> bun add @langchain/anthropic deepagents
 ```
-
+>
 **default parameters**
 
 ```typescript
-import { createDeepAgent } from "deepagents";
-
-process.env.ANTHROPIC_API_KEY = "your-api-key";
-
-const agent = createDeepAgent({ model: "anthropic:claude-sonnet-4-6" });
-// this calls initChatModel for the specified model with default parameters
-// to use specific model parameters, use initChatModel directly
+> import { createDeepAgent } from "deepagents";
+>
+> process.env.ANTHROPIC_API_KEY = "your-api-key";
+>
+> const agent = createDeepAgent({ model: "anthropic:claude-sonnet-4-6" });
+> // this calls initChatModel for the specified model with default parameters
+> // to use specific model parameters, use initChatModel directly
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-import { createDeepAgent } from "deepagents";
-
-process.env.ANTHROPIC_API_KEY = "your-api-key";
-
-const model = await initChatModel("claude-sonnet-4-6");
-const agent = createDeepAgent({
-  model,
-  temperature: 0,
-});
+> import { initChatModel } from "langchain";
+> import { createDeepAgent } from "deepagents";
+>
+> process.env.ANTHROPIC_API_KEY = "your-api-key";
+>
+> const model = await initChatModel("claude-sonnet-4-6");
+> const agent = createDeepAgent({
+>   model,
+>   temperature: 0,
+> });
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatAnthropic } from "@langchain/anthropic";
-import { createDeepAgent } from "deepagents";
-
-const agent = createDeepAgent({
-  model: new ChatAnthropic({
-    model: "claude-sonnet-4-6",
-    apiKey: "your-api-key",
-    temperature: 0,
-  }),
-});
+> import { ChatAnthropic } from "@langchain/anthropic";
+> import { createDeepAgent } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: new ChatAnthropic({
+>     model: "claude-sonnet-4-6",
+>     apiKey: "your-api-key",
+>     temperature: 0,
+>   }),
+> });
 ```
 
-**Azure**
-
-👉 Read the [Azure chat model integration docs](../integrations/chat/azure.md)
-
+> [tab] Azure
+>
+> 👉 Read the [Azure chat model integration docs](../integrations/chat/azure.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/azure deepagents
+> npm install @langchain/azure deepagents
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/azure deepagents
+> pnpm install @langchain/azure deepagents
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/azure deepagents
+> yarn add @langchain/azure deepagents
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/azure deepagents
+> bun add @langchain/azure deepagents
 ```
-
+>
 **default parameters**
 
 ```typescript
-import { createDeepAgent } from "deepagents";
-
-process.env.AZURE_OPENAI_API_KEY = "your-api-key";
-process.env.AZURE_OPENAI_ENDPOINT = "your-endpoint";
-process.env.OPENAI_API_VERSION = "your-api-version";
-
-const agent = createDeepAgent({ model: "azure_openai:gpt-5.5" });
-// this calls initChatModel for the specified model with default parameters
-// to use specific model parameters, use initChatModel directly
+> import { createDeepAgent } from "deepagents";
+>
+> process.env.AZURE_OPENAI_API_KEY = "your-api-key";
+> process.env.AZURE_OPENAI_ENDPOINT = "your-endpoint";
+> process.env.OPENAI_API_VERSION = "your-api-version";
+>
+> const agent = createDeepAgent({ model: "azure_openai:gpt-5.5" });
+> // this calls initChatModel for the specified model with default parameters
+> // to use specific model parameters, use initChatModel directly
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-import { createDeepAgent } from "deepagents";
-
-process.env.AZURE_OPENAI_API_KEY = "your-api-key";
-process.env.AZURE_OPENAI_ENDPOINT = "your-endpoint";
-process.env.OPENAI_API_VERSION = "your-api-version";
-
-const model = await initChatModel("azure_openai:gpt-5.5");
-const agent = createDeepAgent({
-  model,
-  temperature: 0,
-});
+> import { initChatModel } from "langchain";
+> import { createDeepAgent } from "deepagents";
+>
+> process.env.AZURE_OPENAI_API_KEY = "your-api-key";
+> process.env.AZURE_OPENAI_ENDPOINT = "your-endpoint";
+> process.env.OPENAI_API_VERSION = "your-api-version";
+>
+> const model = await initChatModel("azure_openai:gpt-5.5");
+> const agent = createDeepAgent({
+>   model,
+>   temperature: 0,
+> });
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { AzureChatOpenAI } from "@langchain/openai";
-import { createDeepAgent } from "deepagents";
-
-const agent = createDeepAgent({
-  model: new AzureChatOpenAI({
-    model: "gpt-5.5",
-    azureOpenAIApiKey: "your-api-key",
-    azureOpenAIApiEndpoint: "your-endpoint",
-    azureOpenAIApiVersion: "your-api-version",
-    temperature: 0,
-  }),
-});
+> import { AzureChatOpenAI } from "@langchain/openai";
+> import { createDeepAgent } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: new AzureChatOpenAI({
+>     model: "gpt-5.5",
+>     azureOpenAIApiKey: "your-api-key",
+>     azureOpenAIApiEndpoint: "your-endpoint",
+>     azureOpenAIApiVersion: "your-api-version",
+>     temperature: 0,
+>   }),
+> });
 ```
 
-**Google Gemini**
-
-👉 Read the [ChatGoogle chat model integration docs](../integrations/chat/google.md)
-
+> [tab] Google Gemini
+>
+> 👉 Read the [ChatGoogle chat model integration docs](../integrations/chat/google.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/google deepagents
+> npm install @langchain/google deepagents
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/google deepagents
+> pnpm install @langchain/google deepagents
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/google deepagents
+> yarn add @langchain/google deepagents
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/google deepagents
+> bun add @langchain/google deepagents
 ```
-
+>
 **default parameters**
 
 ```typescript
-import { createDeepAgent } from "deepagents";
-
-process.env.GOOGLE_API_KEY = "your-api-key";
-
-const agent = createDeepAgent({ model: "google:gemini-3.1-pro-preview" });
-// this calls initChatModel for the specified model with default parameters
-// to use specific model parameters, use initChatModel directly
+> import { createDeepAgent } from "deepagents";
+>
+> process.env.GOOGLE_API_KEY = "your-api-key";
+>
+> const agent = createDeepAgent({ model: "google:gemini-3.1-pro-preview" });
+> // this calls initChatModel for the specified model with default parameters
+> // to use specific model parameters, use initChatModel directly
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-import { createDeepAgent } from "deepagents";
-
-process.env.GOOGLE_API_KEY = "your-api-key";
-
-const model = await initChatModel("google:gemini-3.1-pro-preview");
-const agent = createDeepAgent({
-  model,
-  temperature: 0,
-});
+> import { initChatModel } from "langchain";
+> import { createDeepAgent } from "deepagents";
+>
+> process.env.GOOGLE_API_KEY = "your-api-key";
+>
+> const model = await initChatModel("google:gemini-3.1-pro-preview");
+> const agent = createDeepAgent({
+>   model,
+>   temperature: 0,
+> });
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatGoogle } from "@langchain/google/node";
-import { createDeepAgent } from "deepagents";
-
-const agent = createDeepAgent({
-  model: new ChatGoogle({
-    model: "gemini-3.1-pro-preview",
-    apiKey: "your-api-key",
-    temperature: 0,
-  }),
-});
+> import { ChatGoogle } from "@langchain/google/node";
+> import { createDeepAgent } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: new ChatGoogle({
+>     model: "gemini-3.1-pro-preview",
+>     apiKey: "your-api-key",
+>     temperature: 0,
+>   }),
+> });
 ```
 
-**Bedrock Converse**
-
-👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock_converse.md)
-
+> [tab] Bedrock Converse
+>
+> 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock_converse.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/aws deepagents
+> npm install @langchain/aws deepagents
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/aws deepagents
+> pnpm install @langchain/aws deepagents
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/aws deepagents
+> yarn add @langchain/aws deepagents
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/aws deepagents
+> bun add @langchain/aws deepagents
 ```
-
+>
 **default parameters**
 
 ```typescript
-import { createDeepAgent } from "deepagents";
-
-// Follow the steps here to configure your credentials:
-// https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-const agent = createDeepAgent({ model: "bedrock:anthropic.claude-sonnet-4-6" });
-// this calls initChatModel for the specified model with default parameters
-// to use specific model parameters, use initChatModel directly
+> import { createDeepAgent } from "deepagents";
+>
+> // Follow the steps here to configure your credentials:
+> // https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> const agent = createDeepAgent({ model: "bedrock:anthropic.claude-sonnet-4-6" });
+> // this calls initChatModel for the specified model with default parameters
+> // to use specific model parameters, use initChatModel directly
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-import { createDeepAgent } from "deepagents";
-
-// Follow the steps here to configure your credentials:
-// https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-const model = await initChatModel("bedrock:anthropic.claude-sonnet-4-6");
-const agent = createDeepAgent({
-  model,
-  temperature: 0,
-});
+> import { initChatModel } from "langchain";
+> import { createDeepAgent } from "deepagents";
+>
+> // Follow the steps here to configure your credentials:
+> // https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> const model = await initChatModel("bedrock:anthropic.claude-sonnet-4-6");
+> const agent = createDeepAgent({
+>   model,
+>   temperature: 0,
+> });
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatBedrockConverse } from "@langchain/aws";
-import { createDeepAgent } from "deepagents";
-
-// Follow the steps here to configure your credentials:
-// https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-const agent = createDeepAgent({
-  model: new ChatBedrockConverse({
-    model: "anthropic.claude-sonnet-4-6",
-    region: "us-east-2",
-    temperature: 0,
-  }),
-});
+> import { ChatBedrockConverse } from "@langchain/aws";
+> import { createDeepAgent } from "deepagents";
+>
+> // Follow the steps here to configure your credentials:
+> // https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> const agent = createDeepAgent({
+>   model: new ChatBedrockConverse({
+>     model: "anthropic.claude-sonnet-4-6",
+>     region: "us-east-2",
+>     temperature: 0,
+>   }),
+> });
 ```
 
-**Other**
-
-Pass any [supported model string](models.md#supported-models), or an initialized model instance:
-
+> [tab] Other
+>
+> Pass any [supported model string](models.md#supported-models), or an initialized model instance:
+>
 ```typescript
-import { initChatModel } from "langchain";
-import { createDeepAgent } from "deepagents";
-
-const model = await initChatModel("provider:model-name");
-const agent = createDeepAgent({ model });
+> import { initChatModel } from "langchain";
+> import { createDeepAgent } from "deepagents";
+>
+> const model = await initChatModel("provider:model-name");
+> const agent = createDeepAgent({ model });
 ```
 
 > [!TIP]
@@ -1183,11 +1183,11 @@ const agent = createDeepAgent({
 >
 > Besides a string, the main agent also accepts a [`SystemMessage`](https://reference.langchain.com/javascript/langchain-core/messages/SystemMessage) with structured [content blocks](../langchain/messages.md#standard-content-blocks); Deep Agents preserve those blocks ([subagent](subagents.md) dictionary specs remain strings).
 
-> **Subagent prompts**
+> [accordion] Subagent prompts
 >
 > Declarative [subagents](subagents.md) resolve profile overlays against their own model, then apply the resolved profile's `base_system_prompt` / `system_prompt_suffix` to the subagent's authored `system_prompt`. A profile that ships only a `system_prompt_suffix` (the common case for built-in Anthropic / OpenAI profiles) appends to the authored prompt. A profile that sets `base_system_prompt` replaces it outright.
 
-> **General-purpose subagent prompt**
+> [accordion] General-purpose subagent prompt
 >
 > The auto-added [general-purpose subagent](subagents.md#the-general-purpose-subagent) resolves its base prompt as **`general_purpose_subagent.system_prompt` (if set) -> `HarnessProfile.base_system_prompt` (if set) -> SDK general-purpose default**, with the profile suffix layered on top. When both override fields are set, the general-purpose-specific one wins so a caller tuning both fields never sees their GP override silently dropped:
 >
@@ -1719,7 +1719,7 @@ Declarative subagents defined via `subagents` do not inherit the main agent's mi
 
 #### Examples
 
-> **Keep binary file content out of checkpointed history**
+> [accordion] Keep binary file content out of checkpointed history
 >
 > Override [`FilesystemMiddleware`](https://reference.langchain.com/javascript/deepagents/middleware/createFilesystemMiddleware) with `offloadBinaryContent: true` to store binary `read_file` payloads and inline `HumanMessage` media on the backend under `/blobs` instead of in checkpointed message history. State keeps a small reference; model requests are rehydrated from a per-run cache or the backend. This keeps checkpoint size small when the agent reads many binary files across turns.
 >
@@ -2258,523 +2258,523 @@ Tools for a deep agent can make use of virtual file systems to store, access, an
 
 If you are using [skills](#skills) or [memory](#memory), you must add the expected skill or memory files to the backend before creating the agent.
 
-**StateBackend**
-
-A thread-scoped filesystem backend stored in `langgraph` state.
-
-Files persist across turns within a thread (via your checkpointer) and are not shared across threads.
-
+> [tab] StateBackend
+>
+> A thread-scoped filesystem backend stored in `langgraph` state.
+>
+> Files persist across turns within a thread (via your checkpointer) and are not shared across threads.
+>
 ```ts
-import { createDeepAgent, StateBackend } from "deepagents";
-
-// By default we provide a StateBackend
-const agent = createDeepAgent();
-
-// Under the hood, it looks like
-const agent2 = createDeepAgent({
-  backend: new StateBackend(),
-});
+> import { createDeepAgent, StateBackend } from "deepagents";
+>
+> // By default we provide a StateBackend
+> const agent = createDeepAgent();
+>
+> // Under the hood, it looks like
+> const agent2 = createDeepAgent({
+>   backend: new StateBackend(),
+> });
 ```
 
-**FilesystemBackend**
-
-The local machine's filesystem.
-
-> [!WARNING]
+> [tab] FilesystemBackend
 >
-> This backend grants agents direct filesystem read/write access.
-> Use with caution and only in appropriate environments.
-> For more information, see [`FilesystemBackend`](backends.md#filesystembackend-local-disk).
-
+> The local machine's filesystem.
+>
+> > [!WARNING]
+> >
+> > This backend grants agents direct filesystem read/write access.
+> > Use with caution and only in appropriate environments.
+> > For more information, see [`FilesystemBackend`](backends.md#filesystembackend-local-disk).
+>
 **Google**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
-});
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
-});
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
-});
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
-});
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
-});
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
-});
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
-});
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   backend: new FilesystemBackend({ rootDir: ".", virtualMode: true }),
+> });
 ```
-
-> [!TIP]
 >
-> Wrap `FilesystemBackend` in a `CompositeBackend` to prevent internal agent data (offloaded tool results, conversation history) from being written to disk alongside your project files. See the [recommended pattern](backends.md#filesystembackend-local-disk).
+> > [!TIP]
+> >
+> > Wrap `FilesystemBackend` in a `CompositeBackend` to prevent internal agent data (offloaded tool results, conversation history) from being written to disk alongside your project files. See the [recommended pattern](backends.md#filesystembackend-local-disk).
 
-**LocalShellBackend**
-
-A filesystem with shell execution directly on the host. Provides filesystem tools plus the `execute` tool for running commands.
-
-> [!WARNING]
+> [tab] LocalShellBackend
 >
-> This backend grants agents direct filesystem read/write access **and** unrestricted shell execution on your host.
-> Use with extreme caution and only in appropriate environments.
-> For more information, see [`LocalShellBackend`](backends.md#localshellbackend-local-shell).
-
+> A filesystem with shell execution directly on the host. Provides filesystem tools plus the `execute` tool for running commands.
+>
+> > [!WARNING]
+> >
+> > This backend grants agents direct filesystem read/write access **and** unrestricted shell execution on your host.
+> > Use with extreme caution and only in appropriate environments.
+> > For more information, see [`LocalShellBackend`](backends.md#localshellbackend-local-shell).
+>
 **Google**
 
 ```ts
-import { createDeepAgent, LocalShellBackend } from "deepagents";
-
-const backend = new LocalShellBackend({ workingDirectory: "." });
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  backend,
-});
+> import { createDeepAgent, LocalShellBackend } from "deepagents";
+>
+> const backend = new LocalShellBackend({ workingDirectory: "." });
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   backend,
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent, LocalShellBackend } from "deepagents";
-
-const backend = new LocalShellBackend({ workingDirectory: "." });
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  backend,
-});
+> import { createDeepAgent, LocalShellBackend } from "deepagents";
+>
+> const backend = new LocalShellBackend({ workingDirectory: "." });
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   backend,
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent, LocalShellBackend } from "deepagents";
-
-const backend = new LocalShellBackend({ workingDirectory: "." });
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  backend,
-});
+> import { createDeepAgent, LocalShellBackend } from "deepagents";
+>
+> const backend = new LocalShellBackend({ workingDirectory: "." });
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   backend,
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent, LocalShellBackend } from "deepagents";
-
-const backend = new LocalShellBackend({ workingDirectory: "." });
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  backend,
-});
+> import { createDeepAgent, LocalShellBackend } from "deepagents";
+>
+> const backend = new LocalShellBackend({ workingDirectory: "." });
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   backend,
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent, LocalShellBackend } from "deepagents";
-
-const backend = new LocalShellBackend({ workingDirectory: "." });
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  backend,
-});
+> import { createDeepAgent, LocalShellBackend } from "deepagents";
+>
+> const backend = new LocalShellBackend({ workingDirectory: "." });
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   backend,
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent, LocalShellBackend } from "deepagents";
-
-const backend = new LocalShellBackend({ workingDirectory: "." });
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  backend,
-});
+> import { createDeepAgent, LocalShellBackend } from "deepagents";
+>
+> const backend = new LocalShellBackend({ workingDirectory: "." });
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   backend,
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent, LocalShellBackend } from "deepagents";
-
-const backend = new LocalShellBackend({ workingDirectory: "." });
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  backend,
-});
+> import { createDeepAgent, LocalShellBackend } from "deepagents";
+>
+> const backend = new LocalShellBackend({ workingDirectory: "." });
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   backend,
+> });
 ```
 
-**StoreBackend**
-
-A filesystem that provides long-term storage that is *persisted across threads*.
-
+> [tab] StoreBackend
+>
+> A filesystem that provides long-term storage that is *persisted across threads*.
+>
 **Google**
 
 ```ts
-import { createDeepAgent, StoreBackend } from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  backend: new StoreBackend({
-    namespace: (rt) => [rt.serverInfo.user.identity],
-  }),
-  store,
-});
+> import { createDeepAgent, StoreBackend } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   backend: new StoreBackend({
+>     namespace: (rt) => [rt.serverInfo.user.identity],
+>   }),
+>   store,
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent, StoreBackend } from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  backend: new StoreBackend({
-    namespace: (rt) => [rt.serverInfo.user.identity],
-  }),
-  store,
-});
+> import { createDeepAgent, StoreBackend } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   backend: new StoreBackend({
+>     namespace: (rt) => [rt.serverInfo.user.identity],
+>   }),
+>   store,
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent, StoreBackend } from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  backend: new StoreBackend({
-    namespace: (rt) => [rt.serverInfo.user.identity],
-  }),
-  store,
-});
+> import { createDeepAgent, StoreBackend } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   backend: new StoreBackend({
+>     namespace: (rt) => [rt.serverInfo.user.identity],
+>   }),
+>   store,
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent, StoreBackend } from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  backend: new StoreBackend({
-    namespace: (rt) => [rt.serverInfo.user.identity],
-  }),
-  store,
-});
+> import { createDeepAgent, StoreBackend } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   backend: new StoreBackend({
+>     namespace: (rt) => [rt.serverInfo.user.identity],
+>   }),
+>   store,
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent, StoreBackend } from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  backend: new StoreBackend({
-    namespace: (rt) => [rt.serverInfo.user.identity],
-  }),
-  store,
-});
+> import { createDeepAgent, StoreBackend } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   backend: new StoreBackend({
+>     namespace: (rt) => [rt.serverInfo.user.identity],
+>   }),
+>   store,
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent, StoreBackend } from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  backend: new StoreBackend({
-    namespace: (rt) => [rt.serverInfo.user.identity],
-  }),
-  store,
-});
+> import { createDeepAgent, StoreBackend } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   backend: new StoreBackend({
+>     namespace: (rt) => [rt.serverInfo.user.identity],
+>   }),
+>   store,
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent, StoreBackend } from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  backend: new StoreBackend({
-    namespace: (rt) => [rt.serverInfo.user.identity],
-  }),
-  store,
-});
+> import { createDeepAgent, StoreBackend } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   backend: new StoreBackend({
+>     namespace: (rt) => [rt.serverInfo.user.identity],
+>   }),
+>   store,
+> });
 ```
-
-> [!NOTE]
 >
-> When deploying to [LangSmith Deployment](../../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
-
-> [!TIP]
+> > [!NOTE]
+> >
+> > When deploying to [LangSmith Deployment](../../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
 >
-> The `namespace` parameter controls data isolation. For multi-user deployments, always set a [namespace factory](backends.md#namespace-factories) to isolate data per user or tenant.
+> > [!TIP]
+> >
+> > The `namespace` parameter controls data isolation. For multi-user deployments, always set a [namespace factory](backends.md#namespace-factories) to isolate data per user or tenant.
 
-**ContextHubBackend**
+> [tab] ContextHubBackend
+>
+> Durable filesystem storage in a LangSmith Hub repo.
+>
+> For more details, see [`ContextHubBackend`](backends.md#contexthubbackend).
 
-Durable filesystem storage in a LangSmith Hub repo.
-
-For more details, see [`ContextHubBackend`](backends.md#contexthubbackend).
-
-**CompositeBackend**
-
-A flexible backend where you can specify different routes in the filesystem to point towards different backends.
-
+> [tab] CompositeBackend
+>
+> A flexible backend where you can specify different routes in the filesystem to point towards different backends.
+>
 **Google**
 
 ```ts
-import {
-  createDeepAgent,
-  CompositeBackend,
-  StateBackend,
-  StoreBackend,
-} from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore();
-
-const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  backend: new CompositeBackend(new StateBackend(), {
-    "/memories/": new StoreBackend({
-      namespace: () => ["memories"],
-    }),
-  }),
-  store,
-});
+> import {
+>   createDeepAgent,
+>   CompositeBackend,
+>   StateBackend,
+>   StoreBackend,
+> } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore();
+>
+> const agent = createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   backend: new CompositeBackend(new StateBackend(), {
+>     "/memories/": new StoreBackend({
+>       namespace: () => ["memories"],
+>     }),
+>   }),
+>   store,
+> });
 ```
-
+>
 **OpenAI**
 
 ```ts
-import {
-  createDeepAgent,
-  CompositeBackend,
-  StateBackend,
-  StoreBackend,
-} from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore();
-
-const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
-  backend: new CompositeBackend(new StateBackend(), {
-    "/memories/": new StoreBackend({
-      namespace: () => ["memories"],
-    }),
-  }),
-  store,
-});
+> import {
+>   createDeepAgent,
+>   CompositeBackend,
+>   StateBackend,
+>   StoreBackend,
+> } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore();
+>
+> const agent = createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   backend: new CompositeBackend(new StateBackend(), {
+>     "/memories/": new StoreBackend({
+>       namespace: () => ["memories"],
+>     }),
+>   }),
+>   store,
+> });
 ```
-
+>
 **Anthropic**
 
 ```ts
-import {
-  createDeepAgent,
-  CompositeBackend,
-  StateBackend,
-  StoreBackend,
-} from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore();
-
-const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  backend: new CompositeBackend(new StateBackend(), {
-    "/memories/": new StoreBackend({
-      namespace: () => ["memories"],
-    }),
-  }),
-  store,
-});
+> import {
+>   createDeepAgent,
+>   CompositeBackend,
+>   StateBackend,
+>   StoreBackend,
+> } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore();
+>
+> const agent = createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   backend: new CompositeBackend(new StateBackend(), {
+>     "/memories/": new StoreBackend({
+>       namespace: () => ["memories"],
+>     }),
+>   }),
+>   store,
+> });
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import {
-  createDeepAgent,
-  CompositeBackend,
-  StateBackend,
-  StoreBackend,
-} from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore();
-
-const agent = createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  backend: new CompositeBackend(new StateBackend(), {
-    "/memories/": new StoreBackend({
-      namespace: () => ["memories"],
-    }),
-  }),
-  store,
-});
+> import {
+>   createDeepAgent,
+>   CompositeBackend,
+>   StateBackend,
+>   StoreBackend,
+> } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore();
+>
+> const agent = createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   backend: new CompositeBackend(new StateBackend(), {
+>     "/memories/": new StoreBackend({
+>       namespace: () => ["memories"],
+>     }),
+>   }),
+>   store,
+> });
 ```
-
+>
 **Fireworks**
 
 ```ts
-import {
-  createDeepAgent,
-  CompositeBackend,
-  StateBackend,
-  StoreBackend,
-} from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore();
-
-const agent = createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  backend: new CompositeBackend(new StateBackend(), {
-    "/memories/": new StoreBackend({
-      namespace: () => ["memories"],
-    }),
-  }),
-  store,
-});
+> import {
+>   createDeepAgent,
+>   CompositeBackend,
+>   StateBackend,
+>   StoreBackend,
+> } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore();
+>
+> const agent = createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   backend: new CompositeBackend(new StateBackend(), {
+>     "/memories/": new StoreBackend({
+>       namespace: () => ["memories"],
+>     }),
+>   }),
+>   store,
+> });
 ```
-
+>
 **Baseten**
 
 ```ts
-import {
-  createDeepAgent,
-  CompositeBackend,
-  StateBackend,
-  StoreBackend,
-} from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore();
-
-const agent = createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  backend: new CompositeBackend(new StateBackend(), {
-    "/memories/": new StoreBackend({
-      namespace: () => ["memories"],
-    }),
-  }),
-  store,
-});
+> import {
+>   createDeepAgent,
+>   CompositeBackend,
+>   StateBackend,
+>   StoreBackend,
+> } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore();
+>
+> const agent = createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   backend: new CompositeBackend(new StateBackend(), {
+>     "/memories/": new StoreBackend({
+>       namespace: () => ["memories"],
+>     }),
+>   }),
+>   store,
+> });
 ```
-
+>
 **Ollama**
 
 ```ts
-import {
-  createDeepAgent,
-  CompositeBackend,
-  StateBackend,
-  StoreBackend,
-} from "deepagents";
-import { InMemoryStore } from "@langchain/langgraph";
-
-const store = new InMemoryStore();
-
-const agent = createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  backend: new CompositeBackend(new StateBackend(), {
-    "/memories/": new StoreBackend({
-      namespace: () => ["memories"],
-    }),
-  }),
-  store,
-});
+> import {
+>   createDeepAgent,
+>   CompositeBackend,
+>   StateBackend,
+>   StoreBackend,
+> } from "deepagents";
+> import { InMemoryStore } from "@langchain/langgraph";
+>
+> const store = new InMemoryStore();
+>
+> const agent = createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   backend: new CompositeBackend(new StateBackend(), {
+>     "/memories/": new StoreBackend({
+>       namespace: () => ["memories"],
+>     }),
+>   }),
+>   store,
+> });
 ```
 
 For more information, see [Backends](backends.md).
@@ -2905,144 +2905,144 @@ For example skills, see [Deep Agents example skills](https://github.com/langchai
 
 To add skills to your deep agent, pass them as an argument to `create_deep_agent`:
 
-**StateBackend**
-
-```ts
-import { createDeepAgent, StateBackend, type FileData } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-const checkpointer = new MemorySaver();
-const backend = new StateBackend();
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content: content.split("\n"),
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const skillsFiles: Record<string, FileData> = {};
-const skillUrl =
-  "https://raw.githubusercontent.com/langchain-ai/deepagentsjs/refs/heads/main/examples/skills/langgraph-docs/SKILL.md";
-const response = await fetch(skillUrl);
-const skillContent = await response.text();
-
-skillsFiles["/skills/langgraph-docs/SKILL.md"] = createFileData(skillContent);
-
-const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
-  backend,
-  checkpointer, // Required !
-  // IMPORTANT: deepagents skill source paths are virtual (POSIX) paths relative to the backend root.
-  skills: ["/skills/"],
-});
-
-const config = { configurable: { thread_id: `thread-${Date.now()}` } };
-const result = await agent.invoke(
-  {
-    messages: [{ role: "user", content: "what is langraph?" }],
-    files: skillsFiles,
-  },
-  config,
-);
-```
-
-> **[View example trace](https://smith.langchain.com/public/e5b8f897-96f4-42d7-9d88-f2fd8e246bd2/r)**
+> [tab] StateBackend
 >
-> Open a public LangSmith run for this example.
-
-**StoreBackend**
-
 ```ts
-import { createDeepAgent, StoreBackend } from "deepagents";
-import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
-
-const checkpointer = new MemorySaver();
-const store = new InMemoryStore();
-const backend = new StoreBackend({
-  namespace: () => ["filesystem"],
-  store,
-});
-
-const skillUrl =
-  "https://raw.githubusercontent.com/langchain-ai/deepagentsjs/refs/heads/main/examples/skills/langgraph-docs/SKILL.md";
-
-const response = await fetch(skillUrl);
-const skillContent = await response.text();
-
-await backend.uploadFiles([
-  ["/skills/langgraph-docs/SKILL.md", new TextEncoder().encode(skillContent)],
-]);
-
-const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
-  backend,
-  store,
-  checkpointer,
-  // IMPORTANT: deepagents skill source paths are virtual (POSIX) paths relative to the backend root.
-  skills: ["/skills/"],
-});
-
-const config = {
-  recursionLimit: 50,
-  configurable: { thread_id: `thread-${Date.now()}` },
-};
-const result = await agent.invoke(
-  { messages: [{ role: "user", content: "what is langraph?" }] },
-  config,
-);
-```
-
-> **[View example trace](https://smith.langchain.com/public/8c49b6ee-d5e4-4c9d-b136-a561527e37c2/r)**
+> import { createDeepAgent, StateBackend, type FileData } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
 >
-> Open a public LangSmith run for this example.
+> const checkpointer = new MemorySaver();
+> const backend = new StateBackend();
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content: content.split("\n"),
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const skillsFiles: Record<string, FileData> = {};
+> const skillUrl =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagentsjs/refs/heads/main/examples/skills/langgraph-docs/SKILL.md";
+> const response = await fetch(skillUrl);
+> const skillContent = await response.text();
+>
+> skillsFiles["/skills/langgraph-docs/SKILL.md"] = createFileData(skillContent);
+>
+> const agent = await createDeepAgent({
+>   model: "anthropic:claude-sonnet-4-6",
+>   backend,
+>   checkpointer, // Required !
+>   // IMPORTANT: deepagents skill source paths are virtual (POSIX) paths relative to the backend root.
+>   skills: ["/skills/"],
+> });
+>
+> const config = { configurable: { thread_id: `thread-${Date.now()}` } };
+> const result = await agent.invoke(
+>   {
+>     messages: [{ role: "user", content: "what is langraph?" }],
+>     files: skillsFiles,
+>   },
+>   config,
+> );
+```
+>
+> > [card] [View example trace](https://smith.langchain.com/public/5c684c86-25c2-471e-a9f3-c43767036b26/r)
+> >
+> > Open a public LangSmith run for this example.
 
-**FilesystemBackend**
-
+> [tab] StoreBackend
+>
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-const checkpointer = new MemorySaver();
-
-const skillUrl =
-  "https://raw.githubusercontent.com/langchain-ai/deepagentsjs/refs/heads/main/examples/skills/langgraph-docs/SKILL.md";
-const response = await fetch(skillUrl);
-const skillContent = await response.text();
-
-let backend = new FilesystemBackend({
-  rootDir: process.cwd(),
-  virtualMode: true,
-});
-await backend.uploadFiles([
-  ["/skills/langgraph-docs/SKILL.md", new TextEncoder().encode(skillContent)],
-]);
-
-const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
-  backend,
-  // IMPORTANT: deepagents skill source paths are virtual (POSIX) paths relative to the backend root.
-  skills: ["/skills/"],
-  interruptOn: {
-    read_file: true,
-    write_file: true,
-    delete_file: true,
-  },
-  checkpointer, // Required for filesystem operations!
-});
-
-const config = { configurable: { thread_id: `thread-${Date.now()}` } };
-const result = await agent.invoke(
-  { messages: [{ role: "user", content: "what is langraph?" }] },
-  config,
-);
-```
-
-> **[View example trace](https://smith.langchain.com/public/6bad9cac-ea04-4364-b28f-d1bdaf39b8d8/r)**
+> import { createDeepAgent, StoreBackend } from "deepagents";
+> import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
 >
-> Open a public LangSmith run for this example.
+> const checkpointer = new MemorySaver();
+> const store = new InMemoryStore();
+> const backend = new StoreBackend({
+>   namespace: () => ["filesystem"],
+>   store,
+> });
+>
+> const skillUrl =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagentsjs/refs/heads/main/examples/skills/langgraph-docs/SKILL.md";
+>
+> const response = await fetch(skillUrl);
+> const skillContent = await response.text();
+>
+> await backend.uploadFiles([
+>   ["/skills/langgraph-docs/SKILL.md", new TextEncoder().encode(skillContent)],
+> ]);
+>
+> const agent = await createDeepAgent({
+>   model: "anthropic:claude-sonnet-4-6",
+>   backend,
+>   store,
+>   checkpointer,
+>   // IMPORTANT: deepagents skill source paths are virtual (POSIX) paths relative to the backend root.
+>   skills: ["/skills/"],
+> });
+>
+> const config = {
+>   recursionLimit: 50,
+>   configurable: { thread_id: `thread-${Date.now()}` },
+> };
+> const result = await agent.invoke(
+>   { messages: [{ role: "user", content: "what is langraph?" }] },
+>   config,
+> );
+```
+>
+> > [card] [View example trace](https://smith.langchain.com/public/2b64039f-58ff-4bf9-930e-45e57f61c09b/r)
+> >
+> > Open a public LangSmith run for this example.
+
+> [tab] FilesystemBackend
+>
+```ts
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> const checkpointer = new MemorySaver();
+>
+> const skillUrl =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagentsjs/refs/heads/main/examples/skills/langgraph-docs/SKILL.md";
+> const response = await fetch(skillUrl);
+> const skillContent = await response.text();
+>
+> let backend = new FilesystemBackend({
+>   rootDir: process.cwd(),
+>   virtualMode: true,
+> });
+> await backend.uploadFiles([
+>   ["/skills/langgraph-docs/SKILL.md", new TextEncoder().encode(skillContent)],
+> ]);
+>
+> const agent = await createDeepAgent({
+>   model: "anthropic:claude-sonnet-4-6",
+>   backend,
+>   // IMPORTANT: deepagents skill source paths are virtual (POSIX) paths relative to the backend root.
+>   skills: ["/skills/"],
+>   interruptOn: {
+>     read_file: true,
+>     write_file: true,
+>     delete_file: true,
+>   },
+>   checkpointer, // Required for filesystem operations!
+> });
+>
+> const config = { configurable: { thread_id: `thread-${Date.now()}` } };
+> const result = await agent.invoke(
+>   { messages: [{ role: "user", content: "what is langraph?" }] },
+>   config,
+> );
+```
+>
+> > [card] [View example trace](https://smith.langchain.com/public/f81b4363-f551-4eec-a7c2-16fa91834002/r)
+> >
+> > Open a public LangSmith run for this example.
 
 ## Memory
 
@@ -3054,935 +3054,935 @@ Use [`AGENTS.md` files](https://agents.md/) to provide extra context to your dee
 
 You can pass one or more file paths to the `memory` parameter when creating your deep agent:
 
-**StateBackend**
-
-**Google**
-
-```ts
-import { createDeepAgent, type FileData } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-const checkpointer = new MemorySaver();
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const agent = await createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  memory: ["/AGENTS.md"],
-  checkpointer: checkpointer,
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-    // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-    files: { "/AGENTS.md": createFileData(agentsMd) },
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**OpenAI**
-
-```ts
-import { createDeepAgent, type FileData } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-const checkpointer = new MemorySaver();
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const agent = await createDeepAgent({
-  model: "openai:gpt-5.5",
-  memory: ["/AGENTS.md"],
-  checkpointer: checkpointer,
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-    // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-    files: { "/AGENTS.md": createFileData(agentsMd) },
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**Anthropic**
-
-```ts
-import { createDeepAgent, type FileData } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-const checkpointer = new MemorySaver();
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  memory: ["/AGENTS.md"],
-  checkpointer: checkpointer,
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-    // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-    files: { "/AGENTS.md": createFileData(agentsMd) },
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**OpenRouter**
-
-```ts
-import { createDeepAgent, type FileData } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-const checkpointer = new MemorySaver();
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const agent = await createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  memory: ["/AGENTS.md"],
-  checkpointer: checkpointer,
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-    // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-    files: { "/AGENTS.md": createFileData(agentsMd) },
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**Fireworks**
-
-```ts
-import { createDeepAgent, type FileData } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-const checkpointer = new MemorySaver();
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const agent = await createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  memory: ["/AGENTS.md"],
-  checkpointer: checkpointer,
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-    // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-    files: { "/AGENTS.md": createFileData(agentsMd) },
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**Baseten**
-
-```ts
-import { createDeepAgent, type FileData } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-const checkpointer = new MemorySaver();
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const agent = await createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  memory: ["/AGENTS.md"],
-  checkpointer: checkpointer,
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-    // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-    files: { "/AGENTS.md": createFileData(agentsMd) },
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**Ollama**
-
-```ts
-import { createDeepAgent, type FileData } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-const checkpointer = new MemorySaver();
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const agent = await createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  memory: ["/AGENTS.md"],
-  checkpointer: checkpointer,
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-    // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
-    files: { "/AGENTS.md": createFileData(agentsMd) },
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-> **[View example trace](https://smith.langchain.com/public/1f901559-574a-4785-aef7-820229ce4480/r)**
+> [tab] StateBackend
 >
-> Open a public LangSmith run for this example.
-
-**StoreBackend**
-
 **Google**
 
 ```ts
-import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
-import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const store = new InMemoryStore();
-const fileData = createFileData(agentsMd);
-await store.put(["filesystem"], "/AGENTS.md", fileData);
-
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  backend: new StoreBackend({
-    namespace: () => ["filesystem"],
-  }),
-  store: store,
-  checkpointer: checkpointer,
-  memory: ["/AGENTS.md"],
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**OpenAI**
-
-```ts
-import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
-import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const store = new InMemoryStore();
-const fileData = createFileData(agentsMd);
-await store.put(["filesystem"], "/AGENTS.md", fileData);
-
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "openai:gpt-5.5",
-  backend: new StoreBackend({
-    namespace: () => ["filesystem"],
-  }),
-  store: store,
-  checkpointer: checkpointer,
-  memory: ["/AGENTS.md"],
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**Anthropic**
-
-```ts
-import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
-import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const store = new InMemoryStore();
-const fileData = createFileData(agentsMd);
-await store.put(["filesystem"], "/AGENTS.md", fileData);
-
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  backend: new StoreBackend({
-    namespace: () => ["filesystem"],
-  }),
-  store: store,
-  checkpointer: checkpointer,
-  memory: ["/AGENTS.md"],
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**OpenRouter**
-
-```ts
-import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
-import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const store = new InMemoryStore();
-const fileData = createFileData(agentsMd);
-await store.put(["filesystem"], "/AGENTS.md", fileData);
-
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  backend: new StoreBackend({
-    namespace: () => ["filesystem"],
-  }),
-  store: store,
-  checkpointer: checkpointer,
-  memory: ["/AGENTS.md"],
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**Fireworks**
-
-```ts
-import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
-import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const store = new InMemoryStore();
-const fileData = createFileData(agentsMd);
-await store.put(["filesystem"], "/AGENTS.md", fileData);
-
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  backend: new StoreBackend({
-    namespace: () => ["filesystem"],
-  }),
-  store: store,
-  checkpointer: checkpointer,
-  memory: ["/AGENTS.md"],
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**Baseten**
-
-```ts
-import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
-import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const store = new InMemoryStore();
-const fileData = createFileData(agentsMd);
-await store.put(["filesystem"], "/AGENTS.md", fileData);
-
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  backend: new StoreBackend({
-    namespace: () => ["filesystem"],
-  }),
-  store: store,
-  checkpointer: checkpointer,
-  memory: ["/AGENTS.md"],
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-**Ollama**
-
-```ts
-import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
-import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
-
-const AGENTS_MD_URL =
-  "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-  }
-  return await res.text();
-}
-
-const agentsMd = await fetchText(AGENTS_MD_URL);
-
-function createFileData(content: string): FileData {
-  const now = new Date().toISOString();
-  return {
-    content,
-    mimeType: "text/plain",
-    created_at: now,
-    modified_at: now,
-  };
-}
-
-const store = new InMemoryStore();
-const fileData = createFileData(agentsMd);
-await store.put(["filesystem"], "/AGENTS.md", fileData);
-
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  backend: new StoreBackend({
-    namespace: () => ["filesystem"],
-  }),
-  store: store,
-  checkpointer: checkpointer,
-  memory: ["/AGENTS.md"],
-});
-
-const result = await agent.invoke(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Please tell me what's in your memory files.",
-      },
-    ],
-  },
-  { configurable: { thread_id: "12345" } },
-);
-```
-
-> **[View example trace](https://smith.langchain.com/public/ed26e792-56b7-45d3-995b-232979cef08f/r)**
+> import { createDeepAgent, type FileData } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
 >
-> Open a public LangSmith run for this example.
-
-**Filesystem**
-
-**Google**
-
-```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-// Checkpointer is REQUIRED for human-in-the-loop
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "google:gemini-3.6-flash",
-  backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
-  memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
-  interruptOn: {
-    read_file: true,
-    write_file: true,
-    delete_file: true,
-  },
-  checkpointer, // Required!
-});
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+> const checkpointer = new MemorySaver();
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const agent = await createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   memory: ["/AGENTS.md"],
+>   checkpointer: checkpointer,
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>     // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>     files: { "/AGENTS.md": createFileData(agentsMd) },
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
 ```
-
+>
 **OpenAI**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-// Checkpointer is REQUIRED for human-in-the-loop
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "openai:gpt-5.5",
-  backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
-  memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
-  interruptOn: {
-    read_file: true,
-    write_file: true,
-    delete_file: true,
-  },
-  checkpointer, // Required!
-});
+> import { createDeepAgent, type FileData } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+> const checkpointer = new MemorySaver();
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const agent = await createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   memory: ["/AGENTS.md"],
+>   checkpointer: checkpointer,
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>     // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>     files: { "/AGENTS.md": createFileData(agentsMd) },
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
 ```
-
+>
 **Anthropic**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-// Checkpointer is REQUIRED for human-in-the-loop
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "anthropic:claude-sonnet-5",
-  backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
-  memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
-  interruptOn: {
-    read_file: true,
-    write_file: true,
-    delete_file: true,
-  },
-  checkpointer, // Required!
-});
+> import { createDeepAgent, type FileData } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+> const checkpointer = new MemorySaver();
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const agent = await createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   memory: ["/AGENTS.md"],
+>   checkpointer: checkpointer,
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>     // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>     files: { "/AGENTS.md": createFileData(agentsMd) },
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
 ```
-
+>
 **OpenRouter**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-// Checkpointer is REQUIRED for human-in-the-loop
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "openrouter:z-ai/glm-5.2",
-  backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
-  memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
-  interruptOn: {
-    read_file: true,
-    write_file: true,
-    delete_file: true,
-  },
-  checkpointer, // Required!
-});
+> import { createDeepAgent, type FileData } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+> const checkpointer = new MemorySaver();
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const agent = await createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   memory: ["/AGENTS.md"],
+>   checkpointer: checkpointer,
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>     // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>     files: { "/AGENTS.md": createFileData(agentsMd) },
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
 ```
-
+>
 **Fireworks**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-// Checkpointer is REQUIRED for human-in-the-loop
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "fireworks:accounts/fireworks/models/glm-5p2",
-  backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
-  memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
-  interruptOn: {
-    read_file: true,
-    write_file: true,
-    delete_file: true,
-  },
-  checkpointer, // Required!
-});
+> import { createDeepAgent, type FileData } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+> const checkpointer = new MemorySaver();
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const agent = await createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   memory: ["/AGENTS.md"],
+>   checkpointer: checkpointer,
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>     // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>     files: { "/AGENTS.md": createFileData(agentsMd) },
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
 ```
-
+>
 **Baseten**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
-
-// Checkpointer is REQUIRED for human-in-the-loop
-const checkpointer = new MemorySaver();
-
-const agent = await createDeepAgent({
-  model: "baseten:zai-org/GLM-5.2",
-  backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
-  memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
-  interruptOn: {
-    read_file: true,
-    write_file: true,
-    delete_file: true,
-  },
-  checkpointer, // Required!
-});
+> import { createDeepAgent, type FileData } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+> const checkpointer = new MemorySaver();
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const agent = await createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   memory: ["/AGENTS.md"],
+>   checkpointer: checkpointer,
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>     // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>     files: { "/AGENTS.md": createFileData(agentsMd) },
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
 ```
-
+>
 **Ollama**
 
 ```ts
-import { createDeepAgent, FilesystemBackend } from "deepagents";
-import { MemorySaver } from "@langchain/langgraph";
+> import { createDeepAgent, type FileData } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+> const checkpointer = new MemorySaver();
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const agent = await createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   memory: ["/AGENTS.md"],
+>   checkpointer: checkpointer,
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>     // Seed the default StateBackend's in-state filesystem (virtual paths must start with "/").
+>     files: { "/AGENTS.md": createFileData(agentsMd) },
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
+```
+>
+> > [card] [View example trace](https://smith.langchain.com/public/052032cf-2e25-431a-a23a-ba4fc280db51/r)
+> >
+> > Open a public LangSmith run for this example.
 
-// Checkpointer is REQUIRED for human-in-the-loop
-const checkpointer = new MemorySaver();
+> [tab] StoreBackend
+>
+**Google**
 
-const agent = await createDeepAgent({
-  model: "ollama:north-mini-code-1.0",
-  backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
-  memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
-  interruptOn: {
-    read_file: true,
-    write_file: true,
-    delete_file: true,
-  },
-  checkpointer, // Required!
-});
+```ts
+> import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
+> import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const store = new InMemoryStore();
+> const fileData = createFileData(agentsMd);
+> await store.put(["filesystem"], "/AGENTS.md", fileData);
+>
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   backend: new StoreBackend({
+>     namespace: () => ["filesystem"],
+>   }),
+>   store: store,
+>   checkpointer: checkpointer,
+>   memory: ["/AGENTS.md"],
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
+```
+>
+**OpenAI**
+
+```ts
+> import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
+> import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const store = new InMemoryStore();
+> const fileData = createFileData(agentsMd);
+> await store.put(["filesystem"], "/AGENTS.md", fileData);
+>
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   backend: new StoreBackend({
+>     namespace: () => ["filesystem"],
+>   }),
+>   store: store,
+>   checkpointer: checkpointer,
+>   memory: ["/AGENTS.md"],
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
+```
+>
+**Anthropic**
+
+```ts
+> import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
+> import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const store = new InMemoryStore();
+> const fileData = createFileData(agentsMd);
+> await store.put(["filesystem"], "/AGENTS.md", fileData);
+>
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   backend: new StoreBackend({
+>     namespace: () => ["filesystem"],
+>   }),
+>   store: store,
+>   checkpointer: checkpointer,
+>   memory: ["/AGENTS.md"],
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
+```
+>
+**OpenRouter**
+
+```ts
+> import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
+> import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const store = new InMemoryStore();
+> const fileData = createFileData(agentsMd);
+> await store.put(["filesystem"], "/AGENTS.md", fileData);
+>
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   backend: new StoreBackend({
+>     namespace: () => ["filesystem"],
+>   }),
+>   store: store,
+>   checkpointer: checkpointer,
+>   memory: ["/AGENTS.md"],
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
+```
+>
+**Fireworks**
+
+```ts
+> import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
+> import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const store = new InMemoryStore();
+> const fileData = createFileData(agentsMd);
+> await store.put(["filesystem"], "/AGENTS.md", fileData);
+>
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   backend: new StoreBackend({
+>     namespace: () => ["filesystem"],
+>   }),
+>   store: store,
+>   checkpointer: checkpointer,
+>   memory: ["/AGENTS.md"],
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
+```
+>
+**Baseten**
+
+```ts
+> import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
+> import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const store = new InMemoryStore();
+> const fileData = createFileData(agentsMd);
+> await store.put(["filesystem"], "/AGENTS.md", fileData);
+>
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   backend: new StoreBackend({
+>     namespace: () => ["filesystem"],
+>   }),
+>   store: store,
+>   checkpointer: checkpointer,
+>   memory: ["/AGENTS.md"],
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
+```
+>
+**Ollama**
+
+```ts
+> import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
+> import { InMemoryStore, MemorySaver } from "@langchain/langgraph";
+>
+> const AGENTS_MD_URL =
+>   "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/examples/text-to-sql-agent/AGENTS.md";
+>
+> async function fetchText(url: string): Promise<string> {
+>   const res = await fetch(url);
+>   if (!res.ok) {
+>     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+>   }
+>   return await res.text();
+> }
+>
+> const agentsMd = await fetchText(AGENTS_MD_URL);
+>
+> function createFileData(content: string): FileData {
+>   const now = new Date().toISOString();
+>   return {
+>     content,
+>     mimeType: "text/plain",
+>     created_at: now,
+>     modified_at: now,
+>   };
+> }
+>
+> const store = new InMemoryStore();
+> const fileData = createFileData(agentsMd);
+> await store.put(["filesystem"], "/AGENTS.md", fileData);
+>
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   backend: new StoreBackend({
+>     namespace: () => ["filesystem"],
+>   }),
+>   store: store,
+>   checkpointer: checkpointer,
+>   memory: ["/AGENTS.md"],
+> });
+>
+> const result = await agent.invoke(
+>   {
+>     messages: [
+>       {
+>         role: "user",
+>         content: "Please tell me what's in your memory files.",
+>       },
+>     ],
+>   },
+>   { configurable: { thread_id: "12345" } },
+> );
+```
+>
+> > [card] [View example trace](https://smith.langchain.com/public/963e0d61-3d50-40cf-847a-474387d657b6/r)
+> >
+> > Open a public LangSmith run for this example.
+
+> [tab] Filesystem
+>
+**Google**
+
+```ts
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> // Checkpointer is REQUIRED for human-in-the-loop
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "google:gemini-3.6-flash",
+>   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
+>   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
+>   interruptOn: {
+>     read_file: true,
+>     write_file: true,
+>     delete_file: true,
+>   },
+>   checkpointer, // Required!
+> });
+```
+>
+**OpenAI**
+
+```ts
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> // Checkpointer is REQUIRED for human-in-the-loop
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "openai:gpt-5.5",
+>   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
+>   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
+>   interruptOn: {
+>     read_file: true,
+>     write_file: true,
+>     delete_file: true,
+>   },
+>   checkpointer, // Required!
+> });
+```
+>
+**Anthropic**
+
+```ts
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> // Checkpointer is REQUIRED for human-in-the-loop
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "anthropic:claude-sonnet-5",
+>   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
+>   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
+>   interruptOn: {
+>     read_file: true,
+>     write_file: true,
+>     delete_file: true,
+>   },
+>   checkpointer, // Required!
+> });
+```
+>
+**OpenRouter**
+
+```ts
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> // Checkpointer is REQUIRED for human-in-the-loop
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "openrouter:z-ai/glm-5.2",
+>   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
+>   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
+>   interruptOn: {
+>     read_file: true,
+>     write_file: true,
+>     delete_file: true,
+>   },
+>   checkpointer, // Required!
+> });
+```
+>
+**Fireworks**
+
+```ts
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> // Checkpointer is REQUIRED for human-in-the-loop
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "fireworks:accounts/fireworks/models/glm-5p2",
+>   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
+>   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
+>   interruptOn: {
+>     read_file: true,
+>     write_file: true,
+>     delete_file: true,
+>   },
+>   checkpointer, // Required!
+> });
+```
+>
+**Baseten**
+
+```ts
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> // Checkpointer is REQUIRED for human-in-the-loop
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "baseten:zai-org/GLM-5.2",
+>   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
+>   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
+>   interruptOn: {
+>     read_file: true,
+>     write_file: true,
+>     delete_file: true,
+>   },
+>   checkpointer, // Required!
+> });
+```
+>
+**Ollama**
+
+```ts
+> import { createDeepAgent, FilesystemBackend } from "deepagents";
+> import { MemorySaver } from "@langchain/langgraph";
+>
+> // Checkpointer is REQUIRED for human-in-the-loop
+> const checkpointer = new MemorySaver();
+>
+> const agent = await createDeepAgent({
+>   model: "ollama:north-mini-code-1.0",
+>   backend: new FilesystemBackend({ rootDir: "/Users/user/{project}" }),
+>   memory: ["./AGENTS.md", "./.deepagents/AGENTS.md"],
+>   interruptOn: {
+>     read_file: true,
+>     write_file: true,
+>     delete_file: true,
+>   },
+>   checkpointer, // Required!
+> });
 ```
 
 ## Structured output
@@ -4070,7 +4070,7 @@ console.log(result.structuredResponse);
 // }
 ```
 
-> **[View example trace](https://smith.langchain.com/public/0a26dee6-4493-45b0-a48f-d2e05edaa29e/r)**
+> [card] [View example trace](https://smith.langchain.com/public/2f19229d-7862-4819-b022-a56e041b7220/r)
 >
 > Open a public LangSmith run for this example.
 

@@ -693,7 +693,7 @@ ls.test(
 
 Once you have setup your config files (if you are using Vitest or Jest), you can run your tests using the following commands:
 
-> **Config files for Vitest/Jest**
+> [accordion] Config files for Vitest/Jest
 >
 **Vitest**
 
@@ -757,7 +757,7 @@ Remember to also add the config files for Vitest and Jest to your project.
 
 ### Agent
 
-> **Agent code**
+> [accordion] Agent code
 >
 > > [!WARNING]
 > >
@@ -890,7 +890,7 @@ Remember to also add the config files for Vitest and Jest to your project.
 
 ### Tests
 
-> **Test code**
+> [accordion] Test code
 >
 **Pytest**
 

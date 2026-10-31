@@ -108,48 +108,48 @@ In **automated embedding mode**, MongoDB Atlas handles embedding generation serv
 
 ### Installation
 
-**Manual embedding**
-
-Install the core package plus an embeddings provider:
-
+> [tab] Manual embedding
+>
+> Install the core package plus an embeddings provider:
+>
 **npm**
 
 ```bash
-npm install @langchain/mongodb mongodb @langchain/core @langchain/openai
+> npm install @langchain/mongodb mongodb @langchain/core @langchain/openai
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mongodb mongodb @langchain/core @langchain/openai
+> yarn add @langchain/mongodb mongodb @langchain/core @langchain/openai
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mongodb mongodb @langchain/core @langchain/openai
+> pnpm add @langchain/mongodb mongodb @langchain/core @langchain/openai
 ```
 
-**Automated embedding**
-
-Only the core package and MongoDB driver are required:
-
+> [tab] Automated embedding
+>
+> Only the core package and MongoDB driver are required:
+>
 **npm**
 
 ```bash
-npm install @langchain/mongodb mongodb @langchain/core
+> npm install @langchain/mongodb mongodb @langchain/core
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mongodb mongodb @langchain/core
+> yarn add @langchain/mongodb mongodb @langchain/core
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mongodb mongodb @langchain/core
+> pnpm add @langchain/mongodb mongodb @langchain/core
 ```
 
 ### Credentials
@@ -181,49 +181,49 @@ If you want to get automated tracing of your model calls you can also set your [
 
 Once you've set up your cluster and index, initialize your vector store. The constructor accepts two forms depending on whether you use manual or automated embedding.
 
-**Manual embedding**
-
-Pass an embeddings instance as the first argument:
-
+> [tab] Manual embedding
+>
+> Pass an embeddings instance as the first argument:
+>
 ```typescript
-import { MongoDBAtlasVectorSearch } from "@langchain/mongodb";
-import { OpenAIEmbeddings } from "@langchain/openai";
-import { MongoClient } from "mongodb";
-
-const client = new MongoClient(process.env.MONGODB_ATLAS_URI!);
-const collection = client
-  .db(process.env.MONGODB_ATLAS_DB_NAME)
-  .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
-
-const embeddings = new OpenAIEmbeddings({
-  model: "text-embedding-3-small",
-});
-
-const vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
-  collection,
-  indexName: "vector_index", // Defaults to "default"
-  textKey: "text",           // Defaults to "text"
-  embeddingKey: "embedding", // Defaults to "embedding"
-});
+> import { MongoDBAtlasVectorSearch } from "@langchain/mongodb";
+> import { OpenAIEmbeddings } from "@langchain/openai";
+> import { MongoClient } from "mongodb";
+>
+> const client = new MongoClient(process.env.MONGODB_ATLAS_URI!);
+> const collection = client
+>   .db(process.env.MONGODB_ATLAS_DB_NAME)
+>   .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
+>
+> const embeddings = new OpenAIEmbeddings({
+>   model: "text-embedding-3-small",
+> });
+>
+> const vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
+>   collection,
+>   indexName: "vector_index", // Defaults to "default"
+>   textKey: "text",           // Defaults to "text"
+>   embeddingKey: "embedding", // Defaults to "embedding"
+> });
 ```
 
-**Automated embedding**
-
-Pass only the configuration object (no embeddings argument is needed).
-
+> [tab] Automated embedding
+>
+> Pass only the configuration object (no embeddings argument is needed).
+>
 ```typescript
-import { MongoDBAtlasVectorSearch } from "@langchain/mongodb";
-import { MongoClient } from "mongodb";
-
-const client = new MongoClient(process.env.MONGODB_ATLAS_URI!);
-const collection = client
-  .db(process.env.MONGODB_ATLAS_DB_NAME)
-  .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
-
-const vectorStore = new MongoDBAtlasVectorSearch({
-  collection,
-  indexName: "default", // Must match the index name in your Atlas cluster
-});
+> import { MongoDBAtlasVectorSearch } from "@langchain/mongodb";
+> import { MongoClient } from "mongodb";
+>
+> const client = new MongoClient(process.env.MONGODB_ATLAS_URI!);
+> const collection = client
+>   .db(process.env.MONGODB_ATLAS_DB_NAME)
+>   .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
+>
+> const vectorStore = new MongoDBAtlasVectorSearch({
+>   collection,
+>   indexName: "default", // Must match the index name in your Atlas cluster
+> });
 ```
 
 ## Manage vector store

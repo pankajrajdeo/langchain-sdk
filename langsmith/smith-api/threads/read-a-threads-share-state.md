@@ -197,8 +197,8 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
       responses:
         '200':

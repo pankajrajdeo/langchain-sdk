@@ -22,7 +22,7 @@ This page covers secrets routing and deploy options. To test the agent before de
 
 Before you deploy, make sure you have:
 
-* A workspace with Managed Deep Agents public beta access.
+* A LangSmith Cloud workspace.
 
 * A [LangSmith API key](../create-account-api-key.md) for that workspace, in `.env` or your shell environment. On an interactive terminal, `mda deploy` prompts for a key or signs you in through the browser instead.
 
@@ -192,27 +192,27 @@ If a deployment reaches `BUILD_FAILED` or `DEPLOY_FAILED`, open the printed depl
 
 ## Next steps
 
-> **[Agent Server](../agent-server-overview.md)**
+> [card] [Agent Server](../agent-server-overview.md)
 >
 > Explore the runtime that hosts the deployment.
 
-> **[MCP endpoint](managed-deep-agents-mcp-endpoint.md)**
+> [card] [MCP endpoint](managed-deep-agents-mcp-endpoint.md)
 >
 > Expose the deployed agent as a tool to MCP clients.
 
-> **[Identity](managed-deep-agents-identity.md)**
+> [card] [Identity](managed-deep-agents-identity.md)
 >
 > Authenticate callers and provide private threads.
 
-> **[Schedules](managed-deep-agents-schedules.md)**
+> [card] [Schedules](managed-deep-agents-schedules.md)
 >
 > Run agents on managed cron schedules.
 
-> **[Custom tools](managed-deep-agents-tools.md)**
+> [card] [Custom tools](managed-deep-agents-tools.md)
 >
 > Add authored LangChain tools to the agent definition.
 
-> **[CLI reference](managed-deep-agents-cli.md)**
+> [card] [CLI reference](managed-deep-agents-cli.md)
 >
 > Look up every `mda` command and flag.
 

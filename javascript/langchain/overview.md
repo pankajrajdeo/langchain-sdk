@@ -306,19 +306,19 @@ See the [Installation instructions](install.md) and [Quickstart guide](quickstar
 
 ## &#x20;Core benefits
 
-> **[Standard model interface](models.md)**
+> [card] [Standard model interface](models.md)
 >
 > Use one interface for chat models, embeddings, and more across providers. Switch models with minimal code changes and keep your application portable as requirements evolve.
 
-> **[Highly configurable harness](agents.md)**
+> [card] [Highly configurable harness](agents.md)
 >
 > Start with `create_agent` as a minimal harness and add capabilities incrementally through middleware. Compose only what your use case needs, from guardrails and retries to routing and custom tool policies.
 
-> **[Built on top of LangGraph](../langgraph/overview.md)**
+> [card] [Built on top of LangGraph](../langgraph/overview.md)
 >
 > LangChain's agents are built on top of LangGraph. This allows us to take advantage of LangGraph's durable execution, human-in-the-loop support, persistence, and more.
 
-> **[Debug with LangSmith](../../langsmith/observability.md)**
+> [card] [Debug with LangSmith](../../langsmith/observability.md)
 >
 > Inspect traces, tool calls, state transitions, and latency in one place. Find failure modes, evaluate quality, and improve agent behavior with execution data.
 

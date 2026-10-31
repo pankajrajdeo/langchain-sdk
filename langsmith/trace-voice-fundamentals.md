@@ -138,27 +138,27 @@ def run_conversation(session_id: str):
 
 ## Next steps
 
-> **[Trace OpenAI Realtime](trace-openai-realtime.md)**
+> [card] [Trace OpenAI Realtime](trace-openai-realtime.md)
 >
 > Trace voice agents built on the OpenAI Realtime API.
 
-> **[Trace Gemini Live](trace-gemini-live.md)**
+> [card] [Trace Gemini Live](trace-gemini-live.md)
 >
 > Trace voice agents built on the Gemini Live API.
 
-> **[Trace LiveKit](trace-with-livekit.md)**
+> [card] [Trace LiveKit](trace-with-livekit.md)
 >
 > Trace voice agents built with LiveKit Agents.
 
-> **[Trace Pipecat](trace-with-pipecat.md)**
+> [card] [Trace Pipecat](trace-with-pipecat.md)
 >
 > Trace voice agents built with Pipecat.
 
-> **[Upload files with traces](upload-files-with-traces.md)**
+> [card] [Upload files with traces](upload-files-with-traces.md)
 >
 > Attach the conversation audio recording to your trace.
 
-> **[Log multimodal traces](log-multimodal-traces.md)**
+> [card] [Log multimodal traces](log-multimodal-traces.md)
 >
 > Render audio and other media in the LangSmith UI.
 

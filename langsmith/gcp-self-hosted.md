@@ -36,19 +36,19 @@ Follow the [Kubernetes installation guide](kubernetes.md). LangSmith is tested o
 
 For production deployments, connect to GCP managed services:
 
-> **[Google Cloud Storage](self-host-blob-storage.md#google-cloud-storage)**
+> [card] [Google Cloud Storage](self-host-blob-storage.md#google-cloud-storage)
 >
 > Store trace data in GCS
 
-> **[Cloud SQL](self-host-external-postgres.md#google-cloud-sql)**
+> [card] [Cloud SQL](self-host-external-postgres.md#google-cloud-sql)
 >
 > PostgreSQL database
 
-> **[Memorystore](self-host-external-redis.md#google-cloud-memorystore)**
+> [card] [Memorystore](self-host-external-redis.md#google-cloud-memorystore)
 >
 > Redis or Valkey for caching
 
-> **[ClickHouse Cloud](self-host-external-clickhouse.md)**
+> [card] [ClickHouse Cloud](self-host-external-clickhouse.md)
 >
 > Analytics database
 

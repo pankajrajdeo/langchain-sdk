@@ -90,7 +90,7 @@ const weatherResponse = await agent.invoke({
 >
 > Trace MCP tool calls alongside your agent's reasoning steps with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-javascript-langchain-mcp-v1). Follow the [tracing quickstart](../../langsmith/trace-with-langchain.md) to get set up.
 
-> **Example: Query LangChain docs**
+> [accordion] Example: Query LangChain docs
 >
 > The [LangChain docs MCP server](../../use-these-docs.md) is a public HTTP endpoint at `https://docs.langchain.com/mcp`. Connect an agent to it to search and read documentation without writing custom tools.
 >

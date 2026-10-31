@@ -44,6 +44,7 @@ Several rows cover a newer version of a feature that also works without SmithDB.
 | Large trace actions | The paginated trace tree for large traces, downloading a whole trace as JSON, and deleting a whole trace from the trace details page. | Viewing traces, downloading individual runs, and existing deletion workflows. |
 | [LLM Gateway usage](llm-gateway-monitoring.md) | The **Usage** dashboard: spend summary, charts, breakdowns, filters, and drilldowns. | Gateway routing and [policies](llm-gateway-spend-policies.md). |
 | Agent trace volume | Trace-count sparklines on agent overview cards and the trace volume chart on an agent's overview. | Agent deployment, management, and other agent statistics. |
+| [Bulk export filters](data-export.md#2-create-an-export-job) | Filtering exported runs with the `field:value` query syntax. | Filtering exported runs with function-style filters. |
 | [Feedback in bulk exports](data-export.md#limit-exported-fields) | Exporting the `feedbacks` field, which holds feedback keys and comments. | Bulk exports of every other field. |
 
 Tracing, thread listing, datasets, and experiments work on either datastore.

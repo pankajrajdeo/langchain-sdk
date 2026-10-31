@@ -139,24 +139,24 @@ The create, list, and delete endpoints are available over HTTP. Generated SDK ke
 
 Install the SDK for your language:
 
-**Python**
-
+> [tab] Python
+>
 **pip**
 
 ```bash
-pip install langsmith
+> pip install langsmith
 ```
-
+>
 **uv**
 
 ```bash
-uv add langsmith
+> uv add langsmith
 ```
 
-**TypeScript**
-
+> [tab] TypeScript
+>
 ```bash
-npm install langsmith
+> npm install langsmith
 ```
 
 For full details, refer to the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk.md) or [JS/TS SDK](https://docs.langchain.com/langsmith/smith-js-ts-sdk.md) reference.

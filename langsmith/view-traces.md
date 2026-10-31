@@ -12,7 +12,7 @@ tags: [docs, langsmith, view-traces]
 
 From a tracing project, use the **Threads**, **Traces**, or **Runs** tabs to change what appears in the table. To narrow it to specific rows, [apply a filter](filter-traces.md). Click into any row to open the side panel.
 
-In an [agent-based workspace](agents.md), a tracing project is one [environment](agent-environments.md) of one agent. Select the agent, then the environment, to reach the same table.
+In an [agent-based workspace](agent-registry.md), a tracing project is one [environment](agent-environments.md) of one agent. Select the agent, then the environment, to reach the same table.
 
 The side panel is organized around [threads](observability-concepts.md#threads) as the primary unit of navigation. Instead of treating each [run](observability-concepts.md#runs) as an isolated object, the UI keeps the surrounding conversation visible so you can understand where a run fits in the agent's broader execution.
 

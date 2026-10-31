@@ -97,88 +97,88 @@ For help on choosing one of the vector stores below, or to add support for your
 vector store, consult the documentation about
 [Adapters and Supported Stores](https://datastax.github.io/graph-rag/guide/adapters/).
 
-**AstraDB**
-
-Install the `langchain-graph-retriever` package with the `astra` extra:
-
+> [tab] AstraDB
+>
+> Install the `langchain-graph-retriever` package with the `astra` extra:
+>
 ```bash
-pip install "langchain-graph-retriever[astra]"
+> pip install "langchain-graph-retriever[astra]"
 ```
-
-Then create a vector store and load the test documents:
-
+>
+> Then create a vector store and load the test documents:
+>
 ```python
-from langchain_astradb import AstraDBVectorStore
-
-vector_store = AstraDBVectorStore.from_documents(
-    documents=animals,
-    embedding=embeddings,
-    collection_name="animals",
-    api_endpoint=ASTRA_DB_API_ENDPOINT,
-    token=ASTRA_DB_APPLICATION_TOKEN,
-)
+> from langchain_astradb import AstraDBVectorStore
+>
+> vector_store = AstraDBVectorStore.from_documents(
+>     documents=animals,
+>     embedding=embeddings,
+>     collection_name="animals",
+>     api_endpoint=ASTRA_DB_API_ENDPOINT,
+>     token=ASTRA_DB_APPLICATION_TOKEN,
+> )
 ```
+>
+> For the `ASTRA_DB_API_ENDPOINT` and `ASTRA_DB_APPLICATION_TOKEN` credentials,
+> consult the [AstraDB Vector Store Guide](../vectorstores/astradb.md).
+>
+> :::note
+> For faster initial testing, consider using the **InMemory** Vector Store.
+> :::
 
-For the `ASTRA_DB_API_ENDPOINT` and `ASTRA_DB_APPLICATION_TOKEN` credentials,
-consult the [AstraDB Vector Store Guide](../vectorstores/astradb.md).
-
-:::note
-For faster initial testing, consider using the **InMemory** Vector Store.
-:::
-
-**Chroma**
-
-Install the `langchain-graph-retriever` package with the `chroma` extra:
-
+> [tab] Chroma
+>
+> Install the `langchain-graph-retriever` package with the `chroma` extra:
+>
 ```bash
-pip install "langchain-graph-retriever[chroma]"
+> pip install "langchain-graph-retriever[chroma]"
 ```
-
-Then create a vector store and load the test documents:
-
+>
+> Then create a vector store and load the test documents:
+>
 ```python
-from langchain_chroma.vectorstores import Chroma
-from langchain_graph_retriever.transformers import ShreddingTransformer
-
-vector_store = Chroma.from_documents(
-    documents=list(ShreddingTransformer().transform_documents(animals)),
-    embedding=embeddings,
-    collection_name="animals",
-)
+> from langchain_chroma.vectorstores import Chroma
+> from langchain_graph_retriever.transformers import ShreddingTransformer
+>
+> vector_store = Chroma.from_documents(
+>     documents=list(ShreddingTransformer().transform_documents(animals)),
+>     embedding=embeddings,
+>     collection_name="animals",
+> )
 ```
+>
+> For help creating a Chroma connection, consult the [Chroma Vector Store Guide](../vectorstores/chroma.md).
+>
+> :::note
+> Chroma doesn't support searching in nested metadata. Because of this
+> it is necessary to use the [`ShreddingTransformer`](https://datastax.github.io/graph-rag/reference/langchain_graph_retriever/transformers/#langchain_graph_retriever.transformers.shredding.ShreddingTransformer)
+> when inserting documents.
+> :::
 
-For help creating a Chroma connection, consult the [Chroma Vector Store Guide](../vectorstores/chroma.md).
-
-:::note
-Chroma doesn't support searching in nested metadata. Because of this
-it is necessary to use the [`ShreddingTransformer`](https://datastax.github.io/graph-rag/reference/langchain_graph_retriever/transformers/#langchain_graph_retriever.transformers.shredding.ShreddingTransformer)
-when inserting documents.
-:::
-
-**InMemory**
-
-Install the `langchain-graph-retriever` package:
-
+> [tab] InMemory
+>
+> Install the `langchain-graph-retriever` package:
+>
 ```bash
-pip install "langchain-graph-retriever"
+> pip install "langchain-graph-retriever"
 ```
-
-Then create a vector store and load the test documents:
-
+>
+> Then create a vector store and load the test documents:
+>
 ```python
-from langchain_core.vectorstores import InMemoryVectorStore
-
-vector_store = InMemoryVectorStore.from_documents(
-    documents=animals,
-    embedding=embeddings,
-)
+> from langchain_core.vectorstores import InMemoryVectorStore
+>
+> vector_store = InMemoryVectorStore.from_documents(
+>     documents=animals,
+>     embedding=embeddings,
+> )
 ```
-
-:::tip
-Using the `InMemoryVectorStore` is the fastest way to get started with Graph RAG
-but it isn't recommended for production use. Instead it is recommended to use
-**AstraDB** or **OpenSearch**.
-:::
+>
+> :::tip
+> Using the `InMemoryVectorStore` is the fastest way to get started with Graph RAG
+> but it isn't recommended for production use. Instead it is recommended to use
+> **AstraDB** or **OpenSearch**.
+> :::
 
 ### Graph traversal
 

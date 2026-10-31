@@ -97,15 +97,15 @@ Admins can remove the Arcade integration entirely by deleting the workspace conf
 
 ## Next steps
 
-> **[Add more tools](tools.md)**
+> [card] [Add more tools](tools.md)
 >
 > Connect additional services to your agent
 
-> **[Remote MCP servers](remote-mcp-servers.md)**
+> [card] [Remote MCP servers](remote-mcp-servers.md)
 >
 > Connect custom MCP servers to your workspace
 
-> **[Manage agent settings](manage-agent-settings.md)**
+> [card] [Manage agent settings](manage-agent-settings.md)
 >
 > Configure agent behavior and permissions
 

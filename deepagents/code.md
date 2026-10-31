@@ -29,49 +29,49 @@ See the [Quickstart](code/quickstart.md) to add provider credentials, run your f
 
 ## Capabilities
 
-> **[Remote sandboxes](code/remote-sandboxes.md)**
+> [card] [Remote sandboxes](code/remote-sandboxes.md)
 >
 > Run agent tools remotely instead of on your local machine.
 
-> **[Goals and rubrics](code/goals-and-rubrics.md)**
+> [card] [Goals and rubrics](code/goals-and-rubrics.md)
 >
 > Define measurable objectives or grading criteria so the agent can check whether work is done.
 
-> **[Subagents](code/subagents.md)**
+> [card] [Subagents](code/subagents.md)
 >
 > Delegate work to task-specific subagents for parallel execution.
 
-> **[Memory](code/memory-and-skills.md#memory)**
+> [card] [Memory](code/memory-and-skills.md#memory)
 >
 > Store and retrieve information across sessions, including project conventions and learned patterns.
 
-> **[Context compaction](code/quickstart.md#interactive-mode)**
+> [card] [Context compaction](code/quickstart.md#interactive-mode)
 >
 > Summarize older messages and offload originals to storage.
 
-> **[Human-in-the-loop](code/quickstart.md#interactive-mode)**
+> [card] [Human-in-the-loop](code/quickstart.md#interactive-mode)
 >
 > Require human approval for sensitive tool operations.
 
-> **[Skills](code/memory-and-skills.md#skills)**
+> [card] [Skills](code/memory-and-skills.md#skills)
 >
 > Extend agent capabilities with custom expertise and instructions.
 
-> **[MCP tools](code/mcp-tools.md)**
+> [card] [MCP tools](code/mcp-tools.md)
 >
 > Load external tools from Model Context Protocol servers.
 
-> **[Tracing](code/quickstart.md#trace-with-langsmith)**
+> [card] [Tracing](code/quickstart.md#trace-with-langsmith)
 >
 > Trace agent operations in LangSmith for observability and debugging.
 
 ## Next steps
 
-> **[Quickstart](code/quickstart.md)**
+> [card] [Quickstart](code/quickstart.md)
 >
 > Install Deep Agents Code, run your first task, and use interactive or non-interactive modes.
 
-> **[Configuration](code/configuration.md)**
+> [card] [Configuration](code/configuration.md)
 >
 > Set up credentials, `config.toml`, environment variables, hooks, and CLI flags.
 

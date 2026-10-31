@@ -20,7 +20,7 @@ Use these guides when you need to ship an agent-backed product: copy the stack t
 
 The agent runs as a LangSmith Deployment, and a separate web app streams from the Agent Server API.
 
-> **[LangSmith + Vite](deploy-vite-langsmith.md)**
+> [card] [LangSmith + Vite](deploy-vite-langsmith.md)
 >
 > Agent graph on LangSmith Deployment; Vite + React UI streams from the Agent Server API.
 
@@ -28,23 +28,23 @@ The agent runs as a LangSmith Deployment, and a separate web app streams from th
 
 The agent runs inside the framework's route handlers and ships as one deployable app to the host platform.
 
-> **[Next.js](deploy-nextjs.md)**
+> [card] [Next.js](deploy-nextjs.md)
 >
 > App Router route handlers implement the protocol under `/api/threads/...`. Deploy to Vercel with one click.
 
-> **[SvelteKit](deploy-sveltekit.md)**
+> [card] [SvelteKit](deploy-sveltekit.md)
 >
 > SvelteKit server routes on Cloudflare Workers with `@langchain/svelte` and per-thread Durable Objects for SSE replay.
 
-> **[Nuxt](deploy-nuxt.md)**
+> [card] [Nuxt](deploy-nuxt.md)
 >
 > Nitro route handlers and `@langchain/vue` composables in a single deployable Nuxt 4 app.
 
-> **[Cloudflare Workers](deploy-cloudflare-workers.md)**
+> [card] [Cloudflare Workers](deploy-cloudflare-workers.md)
 >
 > Vite + React SPA and Hono API on one Worker with Workers Assets and Durable Objects.
 
-> **[Deno Deploy](deploy-deno.md)**
+> [card] [Deno Deploy](deploy-deno.md)
 >
 > Deno.serve + Hono serves the protocol API and a Vite-built React SPA from one entrypoint.
 

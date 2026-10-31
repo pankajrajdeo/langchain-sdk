@@ -18,6 +18,6 @@ tags: [index, reference, python, langgraph-sdk, sse]
 
 - [BytesLike](BytesLike.md) - Type Alias in langgraph_sdk
 - [BytesLineDecoder](BytesLineDecoder.md) - Handles incrementally reading lines from text.
-- [SSEDecoder](SSEDecoder.md) - - last_event_id
+- [SSEDecoder](SSEDecoder.md) - - has_data - last_event_id
 - [aiter_lines_raw](aiter_lines_raw.md) - View source on GitHub
 - [iter_lines_raw](iter_lines_raw.md) - View source on GitHub

@@ -160,19 +160,19 @@ Treat page content as untrusted input. Keep credentials in your application envi
 
 ## Related resources
 
-> **[Browser use guide](../../deepagents/browser-use.md)**
+> [card] [Browser use guide](../../deepagents/browser-use.md)
 >
 > Use cases, browser scope, and a sandbox testing setup.
 
-> **[Middleware source and examples](https://github.com/langchain-ai/langchain-browserbase)**
+> [card] [Middleware source and examples](https://github.com/langchain-ai/langchain-browserbase)
 >
 > Native LangChain middleware, client lifecycle, and browser tools.
 
-> **[Stagehand Deep Agents docs](https://docs.stagehand.dev/v4/integrations/agent-frameworks/deep-agents)**
+> [card] [Stagehand Deep Agents docs](https://docs.stagehand.dev/v4/integrations/agent-frameworks/deep-agents)
 >
 > Upstream MCP alternative, including use with JavaScript agents.
 
-> **[Browserbase provider page](../providers/browserbase.md)**
+> [card] [Browserbase provider page](../providers/browserbase.md)
 >
 > Browserbase setup, plus Search and Fetch tools.
 

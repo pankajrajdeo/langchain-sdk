@@ -16,33 +16,33 @@ This guide covers how to cancel runs for your agent via the [LangSmith Deploymen
 
 Create a client and thread:
 
-**Python**
-
+> [tab] Python
+>
 ```python
-from langgraph_sdk import get_client
-
-client = get_client(url=<DEPLOYMENT_URL>)
-assistant_id = "agent"
-thread = await client.threads.create()
+> from langgraph_sdk import get_client
+>
+> client = get_client(url=<DEPLOYMENT_URL>)
+> assistant_id = "agent"
+> thread = await client.threads.create()
 ```
 
-**Javascript**
-
+> [tab] Javascript
+>
 ```js
-import { Client } from "@langchain/langgraph-sdk";
-
-const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
-const assistantID = "agent";
-const thread = await client.threads.create();
+> import { Client } from "@langchain/langgraph-sdk";
+>
+> const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
+> const assistantID = "agent";
+> const thread = await client.threads.create();
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads \
-  --header 'Content-Type: application/json' \
-  --data '{}'
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads \
+>   --header 'Content-Type: application/json' \
+>   --data '{}'
 ```
 
 ## Cancel a single run
@@ -59,50 +59,50 @@ The following examples create a run, cancel it with different options, and print
 
 Use **interrupt** when you want to stop a run but keep it for debugging, auditing, or resuming from a checkpoint.
 
-**Python**
-
+> [tab] Python
+>
 ```python
-run = await client.runs.create(
-    thread["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "Long task"}]},
-)
-await client.runs.cancel(thread["thread_id"], run["run_id"])
-
-run_after = await client.runs.get(thread["thread_id"], run["run_id"], wait=True)
-print(run_after["status"])   # "interrupted"
+> run = await client.runs.create(
+>     thread["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "Long task"}]},
+> )
+> await client.runs.cancel(thread["thread_id"], run["run_id"])
+>
+> run_after = await client.runs.get(thread["thread_id"], run["run_id"], wait=True)
+> print(run_after["status"])   # "interrupted"
 ```
 
-**Javascript**
-
+> [tab] Javascript
+>
 ```js
-const run = await client.runs.create(
-    thread["thread_id"],
-    assistantID,
-    { input: { messages: [{ role: "user", content: "Long task" }] } }
-);
-await client.runs.cancel(thread["thread_id"], run["run_id"], wait=true);
-
-const runAfter = await client.runs.get(thread["thread_id"], run["run_id"]);
-console.log(runAfter["status"]);   // "interrupted"
+> const run = await client.runs.create(
+>     thread["thread_id"],
+>     assistantID,
+>     { input: { messages: [{ role: "user", content: "Long task" }] } }
+> );
+> await client.runs.cancel(thread["thread_id"], run["run_id"], wait=true);
+>
+> const runAfter = await client.runs.get(thread["thread_id"], run["run_id"]);
+> console.log(runAfter["status"]);   // "interrupted"
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-# Create a run (use the run_id and thread_id from the response)
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
-  --header 'Content-Type: application/json' \
-  --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Summarize the docs"}]}}'
-
-# Cancel with default action (interrupt)
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/cancel?wait=true
-
-# Get the run to see status "interrupted" and that the run still exists
-curl --request GET \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>
+> # Create a run (use the run_id and thread_id from the response)
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
+>   --header 'Content-Type: application/json' \
+>   --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Summarize the docs"}]}}'
+>
+> # Cancel with default action (interrupt)
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/cancel?wait=true
+>
+> # Get the run to see status "interrupted" and that the run still exists
+> curl --request GET \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>
 ```
 
 ### Cancel with rollback
@@ -115,118 +115,118 @@ curl --request GET \
 
 Use **rollback** when you want to fully discard a run and its effects (for example, after a user abandons a request and you do not need to keep partial work).
 
-**Python**
-
+> [tab] Python
+>
 ```python
-run = await client.runs.create(
-    thread["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "Long task"}]},
-)
-await client.runs.cancel(thread["thread_id"], run["run_id"], action="rollback", wait=True)
-
-# Throws an error because the run is deleted
-try:
-    await client.runs.get(thread["thread_id"], run["run_id"])
-except Exception:
-    print("Run was correctly deleted")
+> run = await client.runs.create(
+>     thread["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "Long task"}]},
+> )
+> await client.runs.cancel(thread["thread_id"], run["run_id"], action="rollback", wait=True)
+>
+> # Throws an error because the run is deleted
+> try:
+>     await client.runs.get(thread["thread_id"], run["run_id"])
+> except Exception:
+>     print("Run was correctly deleted")
 ```
 
-**Javascript**
-
+> [tab] Javascript
+>
 ```js
-const run = await client.runs.create(
-    thread["thread_id"],
-    assistantID,
-    { input: { messages: [{ role: "user", content: "Long task" }] } }
-);
-await client.runs.cancel(thread["thread_id"], run["run_id"], wait=true, action="rollback");
-
-// Throws an error because the run is deleted
-try {
-    await client.runs.get(thread["thread_id"], run["run_id"]);
-} catch (e) {
-    console.log("Run was correctly deleted");
-}
+> const run = await client.runs.create(
+>     thread["thread_id"],
+>     assistantID,
+>     { input: { messages: [{ role: "user", content: "Long task" }] } }
+> );
+> await client.runs.cancel(thread["thread_id"], run["run_id"], wait=true, action="rollback");
+>
+> // Throws an error because the run is deleted
+> try {
+>     await client.runs.get(thread["thread_id"], run["run_id"]);
+> } catch (e) {
+>     console.log("Run was correctly deleted");
+> }
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-# Create a run, then cancel with rollback
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
-  --header 'Content-Type: application/json' \
-  --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Summarize the docs"}]}}'
-
-curl --request POST \
-  --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/cancel?action=rollback"
-
-# Throws an error because the run is deleted
-curl --request GET \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>
+> # Create a run, then cancel with rollback
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
+>   --header 'Content-Type: application/json' \
+>   --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Summarize the docs"}]}}'
+>
+> curl --request POST \
+>   --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/cancel?action=rollback"
+>
+> # Throws an error because the run is deleted
+> curl --request GET \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>
 ```
 
 ### Cancel with wait
 
 By default, the cancel request returns after the cancellation is requested and the run is cancelled asynchronously. `wait=True` makes the cancel request block until the run has been fully cancelled. This is useful when you want to know the final state of the run after it has been cancelled (e.g., what checkpoints were created, what the final output was).
 
-**Python**
-
+> [tab] Python
+>
 ```python
-run = await client.runs.create(
-    thread["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "Long task"}]},
-)
-# Cancel the run asynchronously
-await client.runs.cancel(thread["thread_id"], run["run_id"])
-# Get the status of the run
-run_after = await client.runs.get(thread["thread_id"], run["run_id"])
-print(run_after["status"])  # "pending" or "running"
-
-# Wait for the run to be properly cancelled
-await client.runs.join(thread["thread_id"], run["run_id"])
-run_after = await client.runs.get(thread["thread_id"], run["run_id"])
-print(run_after["status"])  # "interrupted"
+> run = await client.runs.create(
+>     thread["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "Long task"}]},
+> )
+> # Cancel the run asynchronously
+> await client.runs.cancel(thread["thread_id"], run["run_id"])
+> # Get the status of the run
+> run_after = await client.runs.get(thread["thread_id"], run["run_id"])
+> print(run_after["status"])  # "pending" or "running"
+>
+> # Wait for the run to be properly cancelled
+> await client.runs.join(thread["thread_id"], run["run_id"])
+> run_after = await client.runs.get(thread["thread_id"], run["run_id"])
+> print(run_after["status"])  # "interrupted"
 ```
 
-**Javascript**
-
+> [tab] Javascript
+>
 ```js
-const run = await client.runs.create(
-    thread["thread_id"],
-    assistantID,
-    { input: { messages: [{ role: "user", content: "Long task" }] } }
-);
-// Cancel the run asynchronously
-await client.runs.cancel(thread["thread_id"], run["run_id"]);
-// Get the status of the run
-const runRunning = await client.runs.get(thread["thread_id"], run["run_id"])
-console.log(runRunning["status"])  // "pending" or "running"
-
-// Wait for the run to be properly cancelled
-await client.runs.join(thread["thread_id"], run["run_id"])
-const runInterrupted = await client.runs.get(thread["thread_id"], run["run_id"])
-console.log(runInterrupted["status"])  // "interrupted"
+> const run = await client.runs.create(
+>     thread["thread_id"],
+>     assistantID,
+>     { input: { messages: [{ role: "user", content: "Long task" }] } }
+> );
+> // Cancel the run asynchronously
+> await client.runs.cancel(thread["thread_id"], run["run_id"]);
+> // Get the status of the run
+> const runRunning = await client.runs.get(thread["thread_id"], run["run_id"])
+> console.log(runRunning["status"])  // "pending" or "running"
+>
+> // Wait for the run to be properly cancelled
+> await client.runs.join(thread["thread_id"], run["run_id"])
+> const runInterrupted = await client.runs.get(thread["thread_id"], run["run_id"])
+> console.log(runInterrupted["status"])  // "interrupted"
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-# Create a run
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
-  --header 'Content-Type: application/json' \
-  --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Summarize the docs"}]}}'
-
-# Cancel the run asynchronously
-curl --request POST \
-  --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/cancel"
-
-# Get the status of the run, should be "pending" or "running" until cancellation completes, then "interrupted"
-curl --request GET \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>
+> # Create a run
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
+>   --header 'Content-Type: application/json' \
+>   --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Summarize the docs"}]}}'
+>
+> # Cancel the run asynchronously
+> curl --request POST \
+>   --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/cancel"
+>
+> # Get the status of the run, should be "pending" or "running" until cancellation completes, then "interrupted"
+> curl --request GET \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>
 ```
 
 ## Cancel multiple runs
@@ -237,236 +237,236 @@ Use the bulk cancel endpoint to cancel multiple runs in one request. Both the in
 
 Cancel specific runs by passing their IDs.
 
-**Python**
-
+> [tab] Python
+>
 ```python
-run1 = await client.runs.create(
-    thread["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "First request"}]},
-)
-run2 = await client.runs.create(
-    thread["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "Second request"}]},
-    multitask_strategy="enqueue",
-)
-
-await client.runs.cancel_many(
-    thread_id=thread["thread_id"],
-    run_ids=[run1["run_id"], run2["run_id"]]
-)
-
-# Wait for the runs to be cancelled
-await client.runs.join(thread["thread_id"], run2["run_id"])
-runs_after = await client.runs.list(thread["thread_id"])
-for run in runs_after:
-    if run["run_id"] in (run1["run_id"], run2["run_id"]):
-        print(run["run_id"], run["status"])  # "interrupted"
+> run1 = await client.runs.create(
+>     thread["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "First request"}]},
+> )
+> run2 = await client.runs.create(
+>     thread["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "Second request"}]},
+>     multitask_strategy="enqueue",
+> )
+>
+> await client.runs.cancel_many(
+>     thread_id=thread["thread_id"],
+>     run_ids=[run1["run_id"], run2["run_id"]]
+> )
+>
+> # Wait for the runs to be cancelled
+> await client.runs.join(thread["thread_id"], run2["run_id"])
+> runs_after = await client.runs.list(thread["thread_id"])
+> for run in runs_after:
+>     if run["run_id"] in (run1["run_id"], run2["run_id"]):
+>         print(run["run_id"], run["status"])  # "interrupted"
 ```
 
-**Javascript**
-
+> [tab] Javascript
+>
 ```js
-// Bulk delete by run IDs is not supported in the Javascript SDK
+> // Bulk delete by run IDs is not supported in the Javascript SDK
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-# Create two runs (capture run_id from each response)
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
-  --header 'Content-Type: application/json' \
-  --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "First request"}]}}'
-
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
-  --header 'Content-Type: application/json' \
-  --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Second request"}]}}'
-
-# Cancel both by run IDs
-curl --request POST \
-  --url "<DEPLOYMENT_URL>/runs/cancel?action=interrupt" \
-  --header 'Content-Type: application/json' \
-  --data '{"thread_id": "<THREAD_ID>", "run_ids": ["<RUN_ID_1>", "<RUN_ID_2>"]}'
-
-# List runs to confirm
-curl --request GET \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs
+> # Create two runs (capture run_id from each response)
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
+>   --header 'Content-Type: application/json' \
+>   --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "First request"}]}}'
+>
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
+>   --header 'Content-Type: application/json' \
+>   --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Second request"}]}}'
+>
+> # Cancel both by run IDs
+> curl --request POST \
+>   --url "<DEPLOYMENT_URL>/runs/cancel?action=interrupt" \
+>   --header 'Content-Type: application/json' \
+>   --data '{"thread_id": "<THREAD_ID>", "run_ids": ["<RUN_ID_1>", "<RUN_ID_2>"]}'
+>
+> # List runs to confirm
+> curl --request GET \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs
 ```
 
 ### Cancel by status
 
 Cancel all runs that match a status across all threads in a deployment. Valid status options are `pending`, `running`, or `all`.
 
-**Python**
-
+> [tab] Python
+>
 ```python
-run1 = await client.runs.create(
-    thread["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "First request"}]},
-)
-thread2 = await client.threads.create()
-run2 = await client.runs.create(
-    thread2["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "Second request"}]},
-)
-
-await client.runs.cancel_many(
-    status="running",
-)
-
-# Wait for the runs to be cancelled
-await client.runs.join(thread2["thread_id"], run2["run_id"])
-run_after = await client.runs.get(thread["thread_id"], run1["run_id"])
-print(run_after["status"])  # running run is now "interrupted"
-run_after2 = await client.runs.get(thread2["thread_id"], run2["run_id"])
-print(run_after2["status"])  # runs are cancelled across all threads
+> run1 = await client.runs.create(
+>     thread["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "First request"}]},
+> )
+> thread2 = await client.threads.create()
+> run2 = await client.runs.create(
+>     thread2["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "Second request"}]},
+> )
+>
+> await client.runs.cancel_many(
+>     status="running",
+> )
+>
+> # Wait for the runs to be cancelled
+> await client.runs.join(thread2["thread_id"], run2["run_id"])
+> run_after = await client.runs.get(thread["thread_id"], run1["run_id"])
+> print(run_after["status"])  # running run is now "interrupted"
+> run_after2 = await client.runs.get(thread2["thread_id"], run2["run_id"])
+> print(run_after2["status"])  # runs are cancelled across all threads
 ```
 
-**Javascript**
-
+> [tab] Javascript
+>
 ```js
-// Bulk delete by status is not supported in the Javascript SDK
+> // Bulk delete by status is not supported in the Javascript SDK
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-# Create a run
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
-  --header 'Content-Type: application/json' \
-  --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "First request"}]}}'
-
-# Create a second thread
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads \
-  --header 'Content-Type: application/json' \
-  --data '{}'
-
-# Create a run in the second thread
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID_2>/runs \
-  --header 'Content-Type: application/json' \
-  --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Second request"}]}}'
-
-# Cancel all running runs
-curl --request POST \
-  --url "<DEPLOYMENT_URL>/runs/cancel?action=interrupt" \
-  --header 'Content-Type: application/json' \
-  --data '{"status": "running"}'
-
-# Get the status of the runs to confirm
-curl --request GET \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID_1>
-curl --request GET \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID_2>/runs/<RUN_ID_2>
+> # Create a run
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs \
+>   --header 'Content-Type: application/json' \
+>   --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "First request"}]}}'
+>
+> # Create a second thread
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads \
+>   --header 'Content-Type: application/json' \
+>   --data '{}'
+>
+> # Create a run in the second thread
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID_2>/runs \
+>   --header 'Content-Type: application/json' \
+>   --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Second request"}]}}'
+>
+> # Cancel all running runs
+> curl --request POST \
+>   --url "<DEPLOYMENT_URL>/runs/cancel?action=interrupt" \
+>   --header 'Content-Type: application/json' \
+>   --data '{"status": "running"}'
+>
+> # Get the status of the runs to confirm
+> curl --request GET \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID_1>
+> curl --request GET \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID_2>/runs/<RUN_ID_2>
 ```
 
 ## Cancel on disconnect
 
 When starting a run with streaming or when waiting on a run, you can set `on_disconnect="cancel"` so that the run is cancelled if the client disconnects. This avoids leaving runs in progress when a user closes the app or loses connection.
 
-**Python**
-
+> [tab] Python
+>
 ```python
-# With runs.wait: run is cancelled if the client disconnects
-result = await client.runs.wait(
-    thread["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "Long task"}]},
-    on_disconnect="cancel",
-)
-
-# With runs.stream: run is cancelled if the client disconnects
-async for chunk in client.runs.stream(
-    thread["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "Long task"}]},
-    on_disconnect="cancel",
-):
-    print(chunk)
-
-# With runs.join: wait for an existing run; cancel if client disconnects
-run = await client.runs.create(
-    thread["thread_id"],
-    assistant_id,
-    input={"messages": [{"role": "user", "content": "Long task"}]},
-)
-await client.runs.join(
-    thread["thread_id"],
-    run["run_id"],
-    on_disconnect="cancel",
-)
-
-# With runs.join_stream: join an existing run and stream; cancel if client disconnects
-async for chunk in client.runs.join_stream(
-    thread["thread_id"],
-    run["run_id"],
-    on_disconnect="cancel",
-):
-    print(chunk)
+> # With runs.wait: run is cancelled if the client disconnects
+> result = await client.runs.wait(
+>     thread["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "Long task"}]},
+>     on_disconnect="cancel",
+> )
+>
+> # With runs.stream: run is cancelled if the client disconnects
+> async for chunk in client.runs.stream(
+>     thread["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "Long task"}]},
+>     on_disconnect="cancel",
+> ):
+>     print(chunk)
+>
+> # With runs.join: wait for an existing run; cancel if client disconnects
+> run = await client.runs.create(
+>     thread["thread_id"],
+>     assistant_id,
+>     input={"messages": [{"role": "user", "content": "Long task"}]},
+> )
+> await client.runs.join(
+>     thread["thread_id"],
+>     run["run_id"],
+>     on_disconnect="cancel",
+> )
+>
+> # With runs.join_stream: join an existing run and stream; cancel if client disconnects
+> async for chunk in client.runs.join_stream(
+>     thread["thread_id"],
+>     run["run_id"],
+>     on_disconnect="cancel",
+> ):
+>     print(chunk)
 ```
 
-**Javascript**
-
+> [tab] Javascript
+>
 ```js
-// With runs.wait: run is cancelled if the client disconnects
-const result = await client.runs.wait(
-    thread["thread_id"],
-    assistantID,
-    { input: { messages: [{ role: "user", content: "Long task" }] }, onDisconnect: "cancel" }
-);
-
-// With runs.stream: run is cancelled if the client disconnects
-const streamResponse = client.runs.stream(
-    thread["thread_id"],
-    assistantID,
-    { input: { messages: [{ role: "user", content: "Long task" }] }, onDisconnect: "cancel" }
-);
-for await (const chunk of streamResponse) {
-    console.log(chunk);
-}
-
-// With runs.join does not support cancel on disconnect in the Javascript SDK
-
-// With runs.joinStream: join an existing run and stream; cancel if client disconnects
-const joinStreamResponse = client.runs.joinStream(
-    thread["thread_id"],
-    run["run_id"],
-    { cancelOnDisconnect: true }
-);
-for await (const chunk of joinStreamResponse) {
-    console.log(chunk);
-}
+> // With runs.wait: run is cancelled if the client disconnects
+> const result = await client.runs.wait(
+>     thread["thread_id"],
+>     assistantID,
+>     { input: { messages: [{ role: "user", content: "Long task" }] }, onDisconnect: "cancel" }
+> );
+>
+> // With runs.stream: run is cancelled if the client disconnects
+> const streamResponse = client.runs.stream(
+>     thread["thread_id"],
+>     assistantID,
+>     { input: { messages: [{ role: "user", content: "Long task" }] }, onDisconnect: "cancel" }
+> );
+> for await (const chunk of streamResponse) {
+>     console.log(chunk);
+> }
+>
+> // With runs.join does not support cancel on disconnect in the Javascript SDK
+>
+> // With runs.joinStream: join an existing run and stream; cancel if client disconnects
+> const joinStreamResponse = client.runs.joinStream(
+>     thread["thread_id"],
+>     run["run_id"],
+>     { cancelOnDisconnect: true }
+> );
+> for await (const chunk of joinStreamResponse) {
+>     console.log(chunk);
+> }
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-# runs.wait: create run and wait for output; cancel if client disconnects
-curl --request POST \
-  --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
-  --header 'Content-Type: application/json' \
-  --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Long task"}]}, "on_disconnect": "cancel"}'
-
-# Create and stream a run; cancel if client disconnects
-curl --request POST \
-  --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream?on_disconnect=cancel" \
-  --header 'Content-Type: application/json' \
-  --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Long task"}]}}'
-
-# runs.join: wait on an existing run; cancel if client disconnects
-curl --request GET \
-  --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/join?cancel_on_disconnect=cancel"
-
-# runs.join_stream: join an existing run and stream; cancel if client disconnects
-curl --request GET \
-  --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/stream?cancel_on_disconnect=cancel"
+> # runs.wait: create run and wait for output; cancel if client disconnects
+> curl --request POST \
+>   --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/wait \
+>   --header 'Content-Type: application/json' \
+>   --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Long task"}]}, "on_disconnect": "cancel"}'
+>
+> # Create and stream a run; cancel if client disconnects
+> curl --request POST \
+>   --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream?on_disconnect=cancel" \
+>   --header 'Content-Type: application/json' \
+>   --data '{"assistant_id": "agent", "input": {"messages": [{"role": "user", "content": "Long task"}]}}'
+>
+> # runs.join: wait on an existing run; cancel if client disconnects
+> curl --request GET \
+>   --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/join?cancel_on_disconnect=cancel"
+>
+> # runs.join_stream: join an existing run and stream; cancel if client disconnects
+> curl --request GET \
+>   --url "<DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/<RUN_ID>/stream?cancel_on_disconnect=cancel"
 ```
 
 ## Common scenarios

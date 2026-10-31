@@ -233,8 +233,8 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - example:
             - NAME
@@ -249,7 +249,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - THREAD_ID
@@ -278,6 +277,7 @@ paths:
                 - ERROR_PREVIEW
                 - TURN_NUMBER
               type: string
+            type: array
             title: Selects
         - description: >-
             `trace_filter` narrows traces by applying a LangSmith filter

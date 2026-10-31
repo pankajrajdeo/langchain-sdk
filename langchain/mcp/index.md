@@ -51,11 +51,11 @@ async def main():
         return await agent.ainvoke({"messages": [{"role": "user", "content": "..."}]})
 ```
 
-> **[View example trace](https://smith.langchain.com/public/7247701e-2f85-49e6-8434-c43cf1ddbad8/r)**
+> [card] [View example trace](https://smith.langchain.com/public/0a91853f-2126-4329-8e71-981f22114ceb/r)
 >
 > Open a public LangSmith run for this example.
 
-> **LangChain docs MCP server**
+> [accordion] LangChain docs MCP server
 >
 > The [LangChain docs MCP server](../../use-these-docs.md) is a public HTTP endpoint at `https://docs.langchain.com/mcp`.
 >
@@ -128,15 +128,15 @@ A target can be any of the following:
 
 ## Next steps
 
-> **[Tools](tools.md)**
+> [card] [Tools](tools.md)
 >
 > Load MCP tools into agents, control their execution, and handle their outputs.
 
-> **[Connections](connections.md)**
+> [card] [Connections](connections.md)
 >
 > Connection lifecycle, multiple servers, protocol eras, and caching.
 
-> **[Authentication](auth.md)**
+> [card] [Authentication](auth.md)
 >
 > Bearer tokens, OAuth 2.1, and per-user server auth.
 

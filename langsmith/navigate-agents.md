@@ -10,7 +10,7 @@ tags: [docs, langsmith, navigate-agents]
 
 > How the agent switcher moves between the agent list and a single agent, which sections need an agent, and what the agent Overview shows.
 
-To move between the [agents](agents.md) in your workspace, use the agent switcher in the top bar. Select an agent to see counts, charts, and trace lists for that agent only.
+To move between the [agents](agent-registry.md#agent) in your workspace, use the agent switcher in the top bar. Select an agent to see counts, charts, and trace lists for that agent only.
 
 > [!NOTE]
 >
@@ -24,7 +24,7 @@ The agent switcher sits at the left of the top bar, after the workspace switcher
 
 ![The agent switcher open, with a search box above a list of agents and a check mark beside the selected one.](https://mintcdn.com/langchain-5e9cc07a/0GS5eCN4HA5fQwNT/langsmith/images/agent-switcher-open-light.png?fit=max\&auto=format\&n=0GS5eCN4HA5fQwNT\&q=85\&s=0b42353f60159bf455491f6d0a85845c)
 
-The address behind it is `/o/<workspaceId>/a/<agentIdentifier>/...`. The workspace slot takes a UUID, and the agent slot takes the agent's [identifier](agents.md#identifiers-and-display-names). A hyphen in the agent slot means all agents, so `/a/-` is the **All agents** view and `/a/<agentIdentifier>` is a single agent. Either state can be set from the address bar, which is how to link directly to one of the two views.
+The address behind it is `/o/<workspaceId>/a/<agentIdentifier>/...`. The workspace slot takes a UUID, and the agent slot takes the agent's [identifier](agent-registry.md#identifiers-and-display-names). A hyphen in the agent slot means all agents, so `/a/-` is the **All agents** view and `/a/<agentIdentifier>` is a single agent. Either state can be set from the address bar, which is how to link directly to one of the two views.
 
 ## All agents and single-agent views
 
@@ -58,7 +58,7 @@ When you select an agent, LangSmith opens its Overview.
 
 The switcher shows the agent's display name. A field labeled **ID**, with a copy button beside it, holds the identifier, which is also the value the address bar carries. The **ID** field shortens a long identifier in the middle.
 
-Use the copy button beside **ID** when you need the value for tracing. [Agent addressing](log-traces-to-agent.md) takes the identifier, not the display name. For which value is which, see [Identifiers and display names](agents.md#identifiers-and-display-names).
+Use the copy button beside **ID** when you need the value for tracing. [Agent addressing](log-traces-to-agent.md) takes the identifier, not the display name. For which value is which, see [Identifiers and display names](agent-registry.md#identifiers-and-display-names).
 
 Below the **ID** field, the Overview shows the following, in order:
 
@@ -71,7 +71,7 @@ Below the **ID** field, the Overview shows the following, in order:
 
 ## See also
 
-* [Agents](agents.md)
+* [Agent Registry](agent-registry.md)
 * [Create an agent](create-an-agent.md)
 * [Agent environments](agent-environments.md)
 * [Deploy to an agent environment](deploy-to-agent-environment.md)

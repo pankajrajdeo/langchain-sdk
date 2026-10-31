@@ -24,15 +24,15 @@ Agentic applications tend to lean more on integration because they chain multipl
 >
 > Run evaluations at scale, track results over time, and compare experiments with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-test-index). See [Evaluate an LLM application](../../langsmith/evaluate-llm-application.md) to get started.
 
-> **[Unit testing](unit-testing.md)**
+> [card] [Unit testing](unit-testing.md)
 >
 > Mock chat models and use in-memory persistence to test agent logic without API calls.
 
-> **[Integration testing](integration-testing.md)**
+> [card] [Integration testing](integration-testing.md)
 >
 > Test your agent with real LLM APIs. Organize tests, manage keys, handle flakiness, and control costs.
 
-> **[Evals](evals.md)**
+> [card] [Evals](evals.md)
 >
 > Evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators.
 

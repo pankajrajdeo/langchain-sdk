@@ -119,7 +119,7 @@ agent = create_agent(
 
 The Deep Agents summarization middleware accepts the same `summarizer` argument. It also saves the evicted history to a file the agent can read back.
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **instructions** `string | None`
 >
@@ -154,7 +154,7 @@ agent = create_agent(
 
 The request passes through unchanged when the system message is shorter than `min_context_chars`, there is no user message, or the ScaleDown call fails.
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **min\_context\_chars** `number` (default: 2000)
 >
@@ -195,7 +195,7 @@ Your tools do not change, so this works with any tool, including MCP tools. The 
 
 The result passes through unchanged when the model omits `compression_query`, the output is shorter than `min_result_chars`, the result is an error or contains non-text content, or the ScaleDown call fails.
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **tools** `list`
 >
@@ -269,7 +269,7 @@ result["scaledown_extraction"]["fields"]
 
 With a [checkpointer](../../langgraph/persistence.md), extraction re-runs every turn over the whole conversation, so the record fills in as the user gives more detail. Extracted values are user text. If you set `inject_into_prompt=True` so the model can see the fields, that text is added to the system prompt, so only enable it for fields where that is acceptable.
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **entities** `dict` *required*
 >

@@ -106,29 +106,29 @@ langgraph dev --debug-port 5678
 
 Then attach your preferred debugger:
 
-**VS Code**
-
-Add this configuration to `launch.json`:
-
+> [tab] VS Code
+>
+> Add this configuration to `launch.json`:
+>
 ```json
-{
-    "name": "Attach to LangGraph",
-    "type": "debugpy",
-    "request": "attach",
-    "connect": {
-      "host": "0.0.0.0",
-      "port": 5678
-    }
-}
+> {
+>     "name": "Attach to LangGraph",
+>     "type": "debugpy",
+>     "request": "attach",
+>     "connect": {
+>       "host": "0.0.0.0",
+>       "port": 5678
+>     }
+> }
 ```
 
-**PyCharm**
-
-1. Go to Run > Edit Configurations
-2. Click + and select "Python Debug Server"
-3. Set IDE host name: `localhost`
-4. Set port: `5678` (or the port number you chose in the previous step)
-5. Click "OK" and start debugging
+> [tab] PyCharm
+>
+> 1. Go to Run > Edit Configurations
+> 2. Click + and select "Python Debug Server"
+> 3. Set IDE host name: `localhost`
+> 4. Set port: `5678` (or the port number you chose in the previous step)
+> 5. Click "OK" and start debugging
 
 > [!TIP]
 >

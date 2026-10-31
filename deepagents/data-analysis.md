@@ -89,157 +89,157 @@ Deep Agents use [backends](backends.md) to execute code in sandboxed environment
 
 The examples below use a [LangSmith sandbox](../langsmith/sandboxes.md). For other providers, see [available providers](sandboxes.md#available-providers).
 
-**LangSmith**
-
-**pip**
-
-```bash
-pip install langsmith
-```
-
-**uv**
-
-```bash
-uv add langsmith
-```
-
-```python
-from deepagents.backends.langsmith import LangSmithSandbox
-from langsmith.sandbox import SandboxClient
-
-client = SandboxClient()
-ls_sandbox = client.create_sandbox()
-backend = LangSmithSandbox(sandbox=ls_sandbox)
-```
-
-**Local shell**
-
-> [!WARNING]
+> [tab] LangSmith
 >
-> This backend provides unrestricted filesystem and shell access. Use only in controlled environments for development and testing. See the [security considerations](backends.md#localshellbackend-local-shell) for more details.
-
-```python
-from deepagents.backends import LocalShellBackend
-
-backend = LocalShellBackend(
-    root_dir=".",
-    virtual_mode=True,
-    env={"PATH": "/usr/bin:/bin"},
-)
-```
-
-**AgentCore**
-
 **pip**
 
 ```bash
-pip install langchain-agentcore-codeinterpreter
+> pip install langsmith
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-agentcore-codeinterpreter
+> uv add langsmith
 ```
-
+>
 ```python
-from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
-from langchain_agentcore_codeinterpreter import AgentCoreSandbox
-
-interpreter = CodeInterpreter(region="us-west-2")
-interpreter.start()
-backend = AgentCoreSandbox(interpreter=interpreter)
+> from deepagents.backends.langsmith import LangSmithSandbox
+> from langsmith.sandbox import SandboxClient
+>
+> client = SandboxClient()
+> ls_sandbox = client.create_sandbox()
+> backend = LangSmithSandbox(sandbox=ls_sandbox)
 ```
 
-**Daytona**
+> [tab] Local shell
+>
+> > [!WARNING]
+> >
+> > This backend provides unrestricted filesystem and shell access. Use only in controlled environments for development and testing. See the [security considerations](backends.md#localshellbackend-local-shell) for more details.
+>
+```python
+> from deepagents.backends import LocalShellBackend
+>
+> backend = LocalShellBackend(
+>     root_dir=".",
+>     virtual_mode=True,
+>     env={"PATH": "/usr/bin:/bin"},
+> )
+```
 
+> [tab] AgentCore
+>
 **pip**
 
 ```bash
-pip install langchain-daytona
+> pip install langchain-agentcore-codeinterpreter
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-daytona
+> uv add langchain-agentcore-codeinterpreter
 ```
-
+>
 ```python
-from daytona import Daytona
-
-from langchain_daytona import DaytonaSandbox
-
-sandbox = Daytona().create()
-backend = DaytonaSandbox(sandbox=sandbox)
+> from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
+> from langchain_agentcore_codeinterpreter import AgentCoreSandbox
+>
+> interpreter = CodeInterpreter(region="us-west-2")
+> interpreter.start()
+> backend = AgentCoreSandbox(interpreter=interpreter)
 ```
 
-Verify the sandbox is ready:
-
-```python
-result = backend.execute("echo ready")
-print(result)
-# ExecuteResponse(output='ready', exit_code=0, ...)
-```
-
-**E2B**
-
+> [tab] Daytona
+>
 **pip**
 
 ```bash
-pip install langchain-e2b
+> pip install langchain-daytona
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-e2b
+> uv add langchain-daytona
 ```
-
+>
 ```python
-from e2b import Sandbox
-from langchain_e2b import E2BSandbox
-
-e2b_sandbox = Sandbox.create()
-backend = E2BSandbox(sandbox=e2b_sandbox)
+> from daytona import Daytona
+>
+> from langchain_daytona import DaytonaSandbox
+>
+> sandbox = Daytona().create()
+> backend = DaytonaSandbox(sandbox=sandbox)
 ```
-
-**Modal**
-
+>
+> Verify the sandbox is ready:
+>
 ```python
-import modal
-
-from langchain_modal import ModalSandbox
-
-app = modal.App.lookup("your-app")
-modal_sandbox = modal.Sandbox.create(app=app)
-backend = ModalSandbox(sandbox=modal_sandbox)
+> result = backend.execute("echo ready")
+> print(result)
+> # ExecuteResponse(output='ready', exit_code=0, ...)
 ```
 
-**Runloop**
-
+> [tab] E2B
+>
 **pip**
 
 ```bash
-pip install langchain-runloop
+> pip install langchain-e2b
 ```
-
+>
 **uv**
 
 ```bash
-uv add langchain-runloop
+> uv add langchain-e2b
+```
+>
+```python
+> from e2b import Sandbox
+> from langchain_e2b import E2BSandbox
+>
+> e2b_sandbox = Sandbox.create()
+> backend = E2BSandbox(sandbox=e2b_sandbox)
 ```
 
+> [tab] Modal
+>
 ```python
-from runloop_api_client import RunloopSDK
+> import modal
+>
+> from langchain_modal import ModalSandbox
+>
+> app = modal.App.lookup("your-app")
+> modal_sandbox = modal.Sandbox.create(app=app)
+> backend = ModalSandbox(sandbox=modal_sandbox)
+```
 
-from langchain_runloop import RunloopSandbox
+> [tab] Runloop
+>
+**pip**
 
-api_key = "..."
-client = RunloopSDK(bearer_token=api_key)
+```bash
+> pip install langchain-runloop
+```
+>
+**uv**
 
-devbox = client.devbox.create()
-backend = RunloopSandbox(devbox=devbox)
+```bash
+> uv add langchain-runloop
+```
+>
+```python
+> from runloop_api_client import RunloopSDK
+>
+> from langchain_runloop import RunloopSandbox
+>
+> api_key = "..."
+> client = RunloopSDK(bearer_token=api_key)
+>
+> devbox = client.devbox.create()
+> backend = RunloopSandbox(devbox=devbox)
 ```
 
 ### Upload sample data

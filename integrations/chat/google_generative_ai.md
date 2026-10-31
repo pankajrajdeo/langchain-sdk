@@ -69,83 +69,83 @@ The backend is determined as follows:
 
 You can also explicitly set `vertexai=True` or `vertexai=False` to override auto-detection.
 
-**Gemini Developer API**
-
-**Quick setup with API key**
-
-Recommended for individual developers / new users.
-
-Head to [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-key) to generate an API key:
-
+> [tab] Gemini Developer API
+>
+> **Quick setup with API key**
+>
+> Recommended for individual developers / new users.
+>
+> Head to [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-key) to generate an API key:
+>
 ```python
-import getpass
-import os
-
-if "GOOGLE_API_KEY" not in os.environ:
-    os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google AI API key: ")
+> import getpass
+> import os
+>
+> if "GOOGLE_API_KEY" not in os.environ:
+>     os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google AI API key: ")
 ```
+>
+> The integration checks for `GOOGLE_API_KEY` first, then `GEMINI_API_KEY` as a fallback.
 
-The integration checks for `GOOGLE_API_KEY` first, then `GEMINI_API_KEY` as a fallback.
-
-**Gemini Enterprise Agent Platform with API key**
-
-**Gemini Enterprise Agent Platform using API key authentication**
-
-You can use Gemini Enterprise Agent Platform with API key authentication for simpler setup:
-
+> [tab] Gemini Enterprise Agent Platform with API key
+>
+> **Gemini Enterprise Agent Platform using API key authentication**
+>
+> You can use Gemini Enterprise Agent Platform with API key authentication for simpler setup:
+>
 ```bash
-export GEMINI_API_KEY='your-api-key'
-export GOOGLE_GENAI_USE_VERTEXAI=true
-export GOOGLE_CLOUD_PROJECT='your-project-id'
+> export GEMINI_API_KEY='your-api-key'
+> export GOOGLE_GENAI_USE_VERTEXAI=true
+> export GOOGLE_CLOUD_PROJECT='your-project-id'
 ```
-
-Or programmatically:
-
+>
+> Or programmatically:
+>
 ```python
-from langchain_google_genai import ChatGoogleGenerativeAI
-
-llm = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
-    api_key="your-api-key", # [!code highlight]
-    project="your-project-id", # [!code highlight]
-    vertexai=True, # [!code highlight]
-)
+> from langchain_google_genai import ChatGoogleGenerativeAI
+>
+> llm = ChatGoogleGenerativeAI(
+>     model="gemini-3.7-flash",
+>     api_key="your-api-key", # [!code highlight]
+>     project="your-project-id", # [!code highlight]
+>     vertexai=True, # [!code highlight]
+> )
 ```
 
-**Gemini Enterprise Agent Platform with credentials**
-
-**Gemini Enterprise Agent Platform using service account or ADC**
-
-Set up [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials):
-
+> [tab] Gemini Enterprise Agent Platform with credentials
+>
+> **Gemini Enterprise Agent Platform using service account or ADC**
+>
+> Set up [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials):
+>
 ```bash
-gcloud auth application-default login
+> gcloud auth application-default login
 ```
-
-Set your Google Cloud project:
-
+>
+> Set your Google Cloud project:
+>
 ```bash
-export GOOGLE_CLOUD_PROJECT='your-project-id'
-# Optional: set region (defaults to us-central1)
-export GOOGLE_CLOUD_LOCATION='us-central1'
+> export GOOGLE_CLOUD_PROJECT='your-project-id'
+> # Optional: set region (defaults to us-central1)
+> export GOOGLE_CLOUD_LOCATION='us-central1'
 ```
-
-Or use service account credentials:
-
+>
+> Or use service account credentials:
+>
 ```python
-from google.oauth2 import service_account
-from langchain_google_genai import ChatGoogleGenerativeAI
-
-credentials = service_account.Credentials.from_service_account_file(
-    "path/to/service-account.json",
-    scopes=["https://www.googleapis.com/auth/cloud-platform"],
-)
-
-llm = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
-    credentials=credentials, # [!code highlight]
-    project="your-project-id", # [!code highlight]
-)
+> from google.oauth2 import service_account
+> from langchain_google_genai import ChatGoogleGenerativeAI
+>
+> credentials = service_account.Credentials.from_service_account_file(
+>     "path/to/service-account.json",
+>     scopes=["https://www.googleapis.com/auth/cloud-platform"],
+> )
+>
+> llm = ChatGoogleGenerativeAI(
+>     model="gemini-3.7-flash",
+>     credentials=credentials, # [!code highlight]
+>     project="your-project-id", # [!code highlight]
+> )
 ```
 
 #### Environment variables
@@ -169,39 +169,39 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Now we can instantiate our model object and generate responses:
 
-**Gemini Developer API**
-
+> [tab] Gemini Developer API
+>
 ```python
-from langchain_google_genai import ChatGoogleGenerativeAI
-
-model = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
-    temperature=1.0,  # Gemini 3.0+ defaults to 1.0
-    max_tokens=None,
-    timeout=None,
-    max_retries=2,
-    # other params...
-)
+> from langchain_google_genai import ChatGoogleGenerativeAI
+>
+> model = ChatGoogleGenerativeAI(
+>     model="gemini-3.7-flash",
+>     temperature=1.0,  # Gemini 3.0+ defaults to 1.0
+>     max_tokens=None,
+>     timeout=None,
+>     max_retries=2,
+>     # other params...
+> )
 ```
 
-**Gemini Enterprise Agent Platform**
-
+> [tab] Gemini Enterprise Agent Platform
+>
 ```python
-from langchain_google_genai import ChatGoogleGenerativeAI
-
-model = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
-    project="your-project-id", # [!code highlight]
-    location="us-central1",  # Optional, defaults to us-central1 [!code highlight]
-    temperature=1.0,  # Gemini 3.0+ defaults to 1.0
-    max_tokens=None,
-    timeout=None,
-    max_retries=2,
-    # other params...
-)
+> from langchain_google_genai import ChatGoogleGenerativeAI
+>
+> model = ChatGoogleGenerativeAI(
+>     model="gemini-3.7-flash",
+>     project="your-project-id", # [!code highlight]
+>     location="us-central1",  # Optional, defaults to us-central1 [!code highlight]
+>     temperature=1.0,  # Gemini 3.0+ defaults to 1.0
+>     max_tokens=None,
+>     timeout=None,
+>     max_retries=2,
+>     # other params...
+> )
 ```
-
-Providing `project` automatically selects the Gemini Enterprise Agent Platform backend unless you explicitly set `vertexai=False`.
+>
+> Providing `project` automatically selects the Gemini Enterprise Agent Platform backend unless you explicitly set `vertexai=False`.
 
 > [!NOTE]
 >
@@ -1425,7 +1425,7 @@ For an enumeration of the categories and thresholds available, see Google's [saf
 
 Context caching allows you to store and reuse content (e.g., PDFs, images) for faster processing. The `cached_content` parameter accepts a cache name created via the Google Generative AI API.
 
-> **Single file example**
+> [accordion] Single file example
 >
 > This caches a single file and queries it.
 >
@@ -1468,7 +1468,7 @@ Context caching allows you to store and reuse content (e.g., PDFs, images) for f
 > llm.invoke([message])
 ```
 
-> **Multiple files example**
+> [accordion] Multiple files example
 >
 > This caches two files using `Part` and queries them together.
 >

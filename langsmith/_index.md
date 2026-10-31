@@ -1,13 +1,13 @@
 ---
 title: "langsmith"
-description: "Index of 519 pages and 5 subdirectories under langsmith."
+description: "Index of 521 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-519 pages here, 1257 pages including subdirectories.
+521 pages here, 1259 pages including subdirectories.
 
 ## Directories
 
@@ -31,13 +31,13 @@ tags: [index, langsmith]
 - [Quickstart](agent-builder-quickstart.md) - Build an agent from a template
 - [Remote MCP servers](agent-builder-remote-mcp-servers.md) - Connect Fleet to popular remote MCP servers
 - [Agent environments](agent-environments.md) - How an agent's environments divide its traces, how to select one, and which parts of the set are fixed.
+- [Agent Registry](agent-registry.md) - What LangSmith Agent Registry is, what an agent is, how environments divide an agent's traces, and how an identifier differs from a display name.
 - [Agent Server changelog](agent-server-changelog.md) - Subscribe: Our changelog includes an RSS feed that can integrate with Slack, email, Discord bots like Readybot or RSS Feeds to Discord Bot, and other subscription tools.
 - [Distributed tracing with Agent Server](agent-server-distributed-tracing.md) - Unify traces when calling your deployed Agent Server from another service using RemoteGraph or the SDK.
 - [How to collect user feedback for Agent Server runs](agent-server-feedback.md) - This tutorial shows you how to collect user feedback for Agent Server runs and automatically link them to traces in LangSmith. When creating a run, include the keys in the feedback_keys field of the...
 - [Agent Server](agent-server-overview.md) - Configure and operate the LangSmith Agent Server runtime, including capabilities, application structure, auth, and customization.
 - [Configure Agent Server for scale](agent-server-scale.md) - Tune the Agent Server for self-hosted deployments—write load, read load, and example Helm configurations for different load patterns.
 - [Agent Server](agent-server.md) - LangSmith Deployment's Agent Server offers an API for creating and managing agent-based applications. It is built on the concept of assistants, which are agents configured for specific tasks, and...
-- [Agents](agents.md) - What an agent is in LangSmith, how a workspace organizes its agents, how environments divide an agent's traces, and how an identifier differs from a display name.
 - [Alerts in LangSmith](alerts.md) - Self-hosted version requirement: Access to alerts requires Helm chart version 0.10.3 or later.
 - [Analyze an experiment](analyze-an-experiment.md) - This page describes some of the essential tasks for working with experiments in LangSmith:
 - [Custom instrumentation](annotate-code.md) - Instrument your code directly to control which functions are traced and how they appear in LangSmith.
@@ -399,6 +399,7 @@ tags: [index, langsmith]
 - [Route self-hosted Sandbox egress through a forward proxy](self-host-sandbox-egress-proxy.md) - Send outbound connections from self-hosted LangSmith Sandboxes through a corporate HTTP or HTTPS forward proxy, with a bypass list, Basic proxy authentication, and custom CA trust.
 - [Operate self-hosted Sandboxes](self-host-sandbox-operations.md) - Plan self-hosted Sandbox upgrades, understand host drains and failure recovery, protect shared storage, and monitor production capacity.
 - [Scale self-hosted Sandboxes](self-host-sandbox-scaling.md) - Plan self-hosted Sandbox capacity with host autoscaling, Kubernetes node scaling, memory headroom, and shared filesystem caching.
+- [Run self-hosted Sandboxes in a separate cluster](self-host-sandbox-separate-cluster.md) - Run the self-hosted LangSmith Sandbox runtime in a dedicated Kubernetes cluster with the langsmith-sandbox Helm chart, connected to the LangSmith control plane in another cluster.
 - [Configure LangSmith for scale](self-host-scale.md) - Scale a self-hosted LangSmith instance for trace ingestion, evaluation workloads, and concurrent users, with example configurations for different load patterns.
 - [Connect self-hosted and BYOC LangSmith to Slack](self-host-slack.md) - Configure your own Slack app for Engine and alert notifications on self-hosted LangSmith or a BYOC data plane.
 - [SmithDB feature availability](self-host-smithdb-features.md) - LangSmith features that are unavailable on self-hosted installations that query ClickHouse, and what still works without SmithDB.
@@ -467,6 +468,7 @@ tags: [index, langsmith]
 - [Streaming API](streaming.md) - The LangGraph SDK lets you stream outputs from the LangSmith Deployment API in multiple modes, from full state snapshots after each step to token-by-token LLM output. Thread streaming also supports...
 - [LangSmith Studio](studio.md) - Prerequisites
 - [How to define a summary evaluator](summary.md) - Some metrics can only be defined on the entire experiment level as opposed to the individual runs of the experiment. For example, you may want to compute the overall pass rate or f1 score of your...
+- [Teams](teams.md) - Group organization members into teams, then give each team a role and access policies in the workspaces it can access.
 - [Test from the Playground](test-from-playground.md) - Test prompts and model configurations over datasets in the LangSmith Playground without writing code.
 - [Test a ReAct agent with Pytest/Vitest and LangSmith](test-react-agent-pytest.md) - This tutorial will show you how to use LangSmith's integrations with popular testing tools (Pytest, Vitest, and Jest) to evaluate your LLM application. We will create a ReAct agent that answers...
 - [Configure threads](threads.md) - Many LLM applications have a chatbot-like interface in which the user and the LLM application engage in a multi-turn conversation. In order to track these conversations, you can use threads in...

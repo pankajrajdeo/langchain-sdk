@@ -30,33 +30,33 @@ Copy the key and save it securely.
 
 Once your account and API key are ready, set up tracing:
 
-> **[Set up tracing](observability-quickstart.md)**
+> [card] [Set up tracing](observability-quickstart.md)
 >
 > Add tracing to your app in minutes with environment variables, framework integrations, or the SDK.
 
-> **[Trace a RAG application](observability-llm-tutorial.md)**
+> [card] [Trace a RAG application](observability-llm-tutorial.md)
 >
 > Follow a step-by-step tutorial to instrument a retrieval-augmented generation app from start to finish.
 
 ## Investigate and monitor
 
-> **[View traces](view-traces.md)**
+> [card] [View traces](view-traces.md)
 >
 > Inspect threads and runs in the Messages, Turns, and Details views.
 
-> **[Monitor performance](dashboards.md)**
+> [card] [Monitor performance](dashboards.md)
 >
 > Build dashboards and set alerts to track quality and catch issues early.
 
-> **[Configure automations](rules.md)**
+> [card] [Configure automations](rules.md)
 >
 > Automate workflows with rules, webhooks, and online evaluations.
 
-> **[Collect feedback](attach-user-feedback.md)**
+> [card] [Collect feedback](attach-user-feedback.md)
 >
 > Annotate outputs and gather user feedback using queues or inline annotation.
 
-> **[Find and fix failures with Engine](engine.md)**
+> [card] [Find and fix failures with Engine](engine.md)
 >
 > Automatically detect recurring issues in your traces, diagnose their root cause, and resolve them with LangSmith Engine.
 

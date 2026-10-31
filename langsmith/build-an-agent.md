@@ -12,7 +12,7 @@ tags: [docs, langsmith, build-an-agent]
 
 The **Build** tab creates an agent inside LangSmith instead of in code. You fill in a configuration form, and LangSmith creates a [no-code agent](fleet.md) from it when you submit. Nothing is created until you do.
 
-Use it when you want a working agent without a local project or a deployment. Everything it produces is an [agent](agents.md) like any other, so its traces, dashboards, and evaluators behave the same as one you instrumented yourself.
+Use it when you want a working agent without a local project or a deployment. Everything it produces is an [agent](agent-registry.md#agent) like any other, so its traces, dashboards, and evaluators behave the same as one you instrumented yourself.
 
 > [!NOTE]
 >
@@ -69,7 +69,7 @@ An agent built in the UI has no deployment, because it runs on a Studio runtime 
 
 ## See also
 
-* [Agents](agents.md)
+* [Agent Registry](agent-registry.md)
 * [Navigate agents](navigate-agents.md)
 * [No-code agents](fleet.md)
 * [Agent environments](agent-environments.md)

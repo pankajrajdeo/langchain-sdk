@@ -16,5 +16,5 @@ tags: [index, reference, python, langgraph-sdk, sync, http, synchttpclient]
 - [patch](patch.md) - Send a PATCH request.
 - [post](post.md) - Send a POST request.
 - [put](put.md) - Send a PUT request.
-- [request_reconnect](request_reconnect.md) - Send a request that automatically reconnects to Location header.
+- [request_reconnect](request_reconnect.md) - Send a request that reconnects to its Location header if the response is cut off, with backoff between attempts.
 - [stream](stream.md) - Stream the results of a request using SSE.

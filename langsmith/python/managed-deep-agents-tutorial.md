@@ -181,15 +181,15 @@ For deploy flags and troubleshooting, see [Deploy an agent](managed-deep-agents-
 
 ## Next steps
 
-> **[Custom middleware](managed-deep-agents-middleware.md)**
+> [card] [Custom middleware](managed-deep-agents-middleware.md)
 >
 > Add logging, retries, limits, and guardrails around model and tool calls.
 
-> **[Identity](managed-deep-agents-identity.md)**
+> [card] [Identity](managed-deep-agents-identity.md)
 >
 > Authenticate callers and use verified identity in tools and middleware.
 
-> **[Evals](managed-deep-agents-evals.md)**
+> [card] [Evals](managed-deep-agents-evals.md)
 >
 > Develop Harbor evals with a coding agent and the eval-engineering skill.
 

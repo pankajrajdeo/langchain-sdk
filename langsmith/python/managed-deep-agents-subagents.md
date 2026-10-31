@@ -33,45 +33,45 @@ A subagent runs inside the agent's graph. Managed Deep Agents builds each async 
 
 Add subagent definitions to `subagents` in the [agent definition](managed-deep-agents-agent-definition.md). Each one needs a `name` and a `description`; the agent uses the description to decide when to delegate. To make a subagent async, add `async` to its definition:
 
-**Subagent**
-
+> [tab] Subagent
+>
 **agent.py**
 
 ```python
-from managed_deepagents import define_deep_agent
-
-agent = define_deep_agent(
-    name="research-assistant",
-    model="openai:gpt-5.5",
-    subagents=[
-        {
-            "name": "reviewer",
-            "description": "Reviews a draft for accuracy and clarity.",
-            "system_prompt": "Review the draft and list concrete fixes.",
-        },
-    ],
-)
+> from managed_deepagents import define_deep_agent
+>
+> agent = define_deep_agent(
+>     name="research-assistant",
+>     model="openai:gpt-5.5",
+>     subagents=[
+>         {
+>             "name": "reviewer",
+>             "description": "Reviews a draft for accuracy and clarity.",
+>             "system_prompt": "Review the draft and list concrete fixes.",
+>         },
+>     ],
+> )
 ```
 
-**Async subagent**
-
+> [tab] Async subagent
+>
 **agent.py**
 
 ```python
-from managed_deepagents import define_deep_agent
-
-agent = define_deep_agent(
-    name="research-assistant",
-    model="openai:gpt-5.5",
-    subagents=[
-        {
-            "name": "researcher",
-            "description": "Researches a topic in the background.",
-            "system_prompt": "Research the topic and report your findings.",
-            "async": True,
-        },
-    ],
-)
+> from managed_deepagents import define_deep_agent
+>
+> agent = define_deep_agent(
+>     name="research-assistant",
+>     model="openai:gpt-5.5",
+>     subagents=[
+>         {
+>             "name": "researcher",
+>             "description": "Researches a topic in the background.",
+>             "system_prompt": "Research the topic and report your findings.",
+>             "async": True,
+>         },
+>     ],
+> )
 ```
 
 ## Subagents

@@ -209,10 +209,10 @@ paths:
           name: resource_type
           in: query
           schema:
-            type: string
             enum:
               - SANDBOX
               - SNAPSHOT
+            type: string
             title: Resource Type
         - description: Resource UUID filter; repeat this parameter up to 100 times
           name: resource_ids
@@ -220,9 +220,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Resource Ids
         - description: Maximum rows to return
           name: page_size
@@ -239,11 +239,11 @@ paths:
           name: granularity
           in: query
           schema:
-            default: HOUR
-            type: string
             enum:
               - HOUR
               - RESOURCE
+            type: string
+            default: HOUR
             title: Granularity
         - description: Opaque pagination cursor
           name: cursor
@@ -259,8 +259,8 @@ paths:
           name: include_totals
           in: query
           schema:
-            default: false
             type: boolean
+            default: false
             title: Include Totals
         - description: >-
             Include bounded daily physical usage for the top 10 resources per
@@ -270,8 +270,8 @@ paths:
           name: include_daily
           in: query
           schema:
-            default: false
             type: boolean
+            default: false
             title: Include Daily
       responses:
         '200':

@@ -204,7 +204,7 @@ messages = [
 response = model.invoke(messages)
 ```
 
-> **Attributes**
+> [accordion] Attributes
 >
 > **text** `string`
 >
@@ -342,7 +342,7 @@ messages = [
 response = model.invoke(messages)  # Model processes the result
 ```
 
-> **Attributes**
+> [accordion] Attributes
 >
 > **content** `string` *required*
 >
@@ -364,7 +364,7 @@ response = model.invoke(messages)  # Model processes the result
 >
 > The `artifact` field stores supplementary data that won't be sent to the model but can be accessed programmatically. This is useful for storing raw results, debugging information, or data for downstream processing without cluttering the model's context.
 >
-> > **Example: Using artifact for retrieval metadata**
+> > [accordion] Example: Using artifact for retrieval metadata
 > >
 > > For example, a [retrieval](../deepagents/retrieval.md) tool could retrieve a passage from a document for reference by a model. Where message `content` contains text that the model will reference, an `artifact` can contain document identifiers or other metadata that an application can use (e.g., to render a page). See example below:
 > >
@@ -435,54 +435,54 @@ LangChain provides a standard representation for message content that works acro
 
 Message objects implement a `content_blocks` property that will lazily parse the `content` attribute into a standard, type-safe representation. For example, messages generated from [`ChatAnthropic`](../integrations/chat/anthropic.md) or [`ChatOpenAI`](../integrations/chat/openai.md) will include `thinking` or `reasoning` blocks in the format of the respective provider, but can be lazily parsed into a consistent [`ReasoningContentBlock`](#content-block-reference) representation:
 
-**Anthropic**
-
+> [tab] Anthropic
+>
 ```python
-from langchain.messages import AIMessage
-
-message = AIMessage(
-    content=[
-        {"type": "thinking", "thinking": "...", "signature": "WaUjzkyp..."},
-        {"type": "text", "text": "..."},
-    ],
-    response_metadata={"model_provider": "anthropic"}
-)
-message.content_blocks
+> from langchain.messages import AIMessage
+>
+> message = AIMessage(
+>     content=[
+>         {"type": "thinking", "thinking": "...", "signature": "WaUjzkyp..."},
+>         {"type": "text", "text": "..."},
+>     ],
+>     response_metadata={"model_provider": "anthropic"}
+> )
+> message.content_blocks
+```
+>
+```
+> [{'type': 'reasoning',
+>   'reasoning': '...',
+>   'extras': {'signature': 'WaUjzkyp...'}},
+>  {'type': 'text', 'text': '...'}]
 ```
 
-```
-[{'type': 'reasoning',
-  'reasoning': '...',
-  'extras': {'signature': 'WaUjzkyp...'}},
- {'type': 'text', 'text': '...'}]
-```
-
-**OpenAI**
-
+> [tab] OpenAI
+>
 ```python
-from langchain.messages import AIMessage
-
-message = AIMessage(
-    content=[
-        {
-            "type": "reasoning",
-            "id": "rs_abc123",
-            "summary": [
-                {"type": "summary_text", "text": "summary 1"},
-                {"type": "summary_text", "text": "summary 2"},
-            ],
-        },
-        {"type": "text", "text": "...", "id": "msg_abc123"},
-    ],
-    response_metadata={"model_provider": "openai"}
-)
-message.content_blocks
+> from langchain.messages import AIMessage
+>
+> message = AIMessage(
+>     content=[
+>         {
+>             "type": "reasoning",
+>             "id": "rs_abc123",
+>             "summary": [
+>                 {"type": "summary_text", "text": "summary 1"},
+>                 {"type": "summary_text", "text": "summary 2"},
+>             ],
+>         },
+>         {"type": "text", "text": "...", "id": "msg_abc123"},
+>     ],
+>     response_metadata={"model_provider": "openai"}
+> )
+> message.content_blocks
 ```
-
+>
 ```
-[{'type': 'reasoning', 'id': 'rs_abc123', 'reasoning': 'summary 1'},
- {'type': 'reasoning', 'id': 'rs_abc123', 'reasoning': 'summary 2'},
- {'type': 'text', 'text': '...', 'id': 'msg_abc123'}]
+> [{'type': 'reasoning', 'id': 'rs_abc123', 'reasoning': 'summary 1'},
+>  {'type': 'reasoning', 'id': 'rs_abc123', 'reasoning': 'summary 2'},
+>  {'type': 'text', 'text': '...', 'id': 'msg_abc123'}]
 ```
 
 See the [integrations guides](../integrations/providers/overview.md) to get started with the
@@ -651,9 +651,9 @@ message = {
 
 Content blocks are represented (either when creating a message or accessing the `content_blocks` property) as a list of typed dictionaries. Each item in the list must adhere to one of the following block types:
 
-> **Core**
+> [accordion] Core
 >
-> > **TextContentBlock**
+> > [accordion] TextContentBlock
 > >
 > > **Purpose:** Standard text output
 > >
@@ -683,7 +683,7 @@ Content blocks are represented (either when creating a message or accessing the 
 > > }
 > > ```
 >
-> > **ReasoningContentBlock**
+> > [accordion] ReasoningContentBlock
 > >
 > > **Purpose:** Model reasoning steps
 > >
@@ -709,9 +709,9 @@ Content blocks are represented (either when creating a message or accessing the 
 > > }
 > > ```
 
-> **Multimodal**
+> [accordion] Multimodal
 >
-> > **ImageContentBlock**
+> > [accordion] ImageContentBlock
 > >
 > > **Purpose:** Image data
 > >
@@ -735,7 +735,7 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > Image [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `image/jpeg`, `image/png`). Required for base64 data.
 >
-> > **AudioContentBlock**
+> > [accordion] AudioContentBlock
 > >
 > > **Purpose:** Audio data
 > >
@@ -759,7 +759,7 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > Audio [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#audio) (e.g., `audio/mpeg`, `audio/wav`). Required for base64 data.
 >
-> > **VideoContentBlock**
+> > [accordion] VideoContentBlock
 > >
 > > **Purpose:** Video data
 > >
@@ -783,7 +783,7 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > Video [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#video) (e.g., `video/mp4`, `video/webm`). Required for base64 data.
 >
-> > **FileContentBlock**
+> > [accordion] FileContentBlock
 > >
 > > **Purpose:** Generic files (PDF, etc)
 > >
@@ -807,7 +807,7 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > File [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml) (e.g., `application/pdf`). Required for base64 data.
 >
-> > **PlainTextContentBlock**
+> > [accordion] PlainTextContentBlock
 > >
 > > **Purpose:** Document text (`.txt`, `.md`)
 > >
@@ -823,9 +823,9 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml) of the text (e.g., `text/plain`, `text/markdown`)
 
-> **Tool Calling**
+> [accordion] Tool Calling
 >
-> > **ToolCall**
+> > [accordion] ToolCall
 > >
 > > **Purpose:** Function calls
 > >
@@ -856,7 +856,7 @@ Content blocks are represented (either when creating a message or accessing the 
 > > }
 > > ```
 >
-> > **ToolCallChunk**
+> > [accordion] ToolCallChunk
 > >
 > > **Purpose:** Streaming tool call fragments
 > >
@@ -880,7 +880,7 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > Position of this chunk in the stream
 >
-> > **InvalidToolCall**
+> > [accordion] InvalidToolCall
 > >
 > > **Purpose:** Malformed calls, intended to catch JSON parsing errors.
 > >
@@ -900,9 +900,9 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > Description of what went wrong
 
-> **Server-Side Tool Execution**
+> [accordion] Server-Side Tool Execution
 >
-> > **ServerToolCall**
+> > [accordion] ServerToolCall
 > >
 > > **Purpose:** Tool call that is executed server-side.
 > >
@@ -922,7 +922,7 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > Partial tool arguments (may be incomplete JSON)
 >
-> > **ServerToolCallChunk**
+> > [accordion] ServerToolCallChunk
 > >
 > > **Purpose:** Streaming server-side tool call fragments
 > >
@@ -946,7 +946,7 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > Position of this chunk in the stream
 >
-> > **ServerToolResult**
+> > [accordion] ServerToolResult
 > >
 > > **Purpose:** Search results
 > >
@@ -970,9 +970,9 @@ Content blocks are represented (either when creating a message or accessing the 
 > >
 > > Output of the executed tool.
 
-> **Provider-Specific Blocks**
+> [accordion] Provider-Specific Blocks
 >
-> > **NonStandardContentBlock**
+> > [accordion] NonStandardContentBlock
 > >
 > > **Purpose:** Provider-specific escape hatch
 > >

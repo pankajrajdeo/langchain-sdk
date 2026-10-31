@@ -21,7 +21,7 @@ This guide applies to all LangSmith deployments (Cloud and self-hosted). It does
 
 The default security scheme varies by deployment type:
 
-**LangSmith**
+> [tab] LangSmith
 
 By default, LangSmith requires a LangSmith API key in the `x-api-key` header:
 
@@ -38,7 +38,7 @@ security:
 
 When using one of the LangGraph SDK's, this can be inferred from environment variables.
 
-**Self-hosted**
+> [tab] Self-hosted
 
 By default, self-hosted deployments have no security scheme. This means they are to be deployed only on a secured network or with authentication. To add custom authentication, see [How to add custom authentication](custom-auth.md).
 
@@ -48,55 +48,55 @@ To customize the security schema in your OpenAPI documentation, add an `openapi`
 
 Note that LangSmith does not provide authentication endpoints - you'll need to handle user authentication in your client application and pass the resulting credentials to the LangGraph API.
 
-**OAuth2 with Bearer Token**
-
+> [tab] OAuth2 with Bearer Token
+>
 ```json
-{
-  "auth": {
-    "path": "./auth.py:my_auth",  // Implement auth logic here
-    "openapi": {
-      "securitySchemes": {
-        "OAuth2": {
-          "type": "oauth2",
-          "flows": {
-            "implicit": {
-              "authorizationUrl": "https://your-auth-server.com/oauth/authorize",
-              "scopes": {
-                "me": "Read information about the current user",
-                "threads": "Access to create and manage threads"
-              }
-            }
-          }
-        }
-      },
-      "security": [
-        {"OAuth2": ["me", "threads"]}
-      ]
-    }
-  }
-}
+> {
+>   "auth": {
+>     "path": "./auth.py:my_auth",  // Implement auth logic here
+>     "openapi": {
+>       "securitySchemes": {
+>         "OAuth2": {
+>           "type": "oauth2",
+>           "flows": {
+>             "implicit": {
+>               "authorizationUrl": "https://your-auth-server.com/oauth/authorize",
+>               "scopes": {
+>                 "me": "Read information about the current user",
+>                 "threads": "Access to create and manage threads"
+>               }
+>             }
+>           }
+>         }
+>       },
+>       "security": [
+>         {"OAuth2": ["me", "threads"]}
+>       ]
+>     }
+>   }
+> }
 ```
 
-**API Key**
-
+> [tab] API Key
+>
 ```json
-{
-  "auth": {
-    "path": "./auth.py:my_auth",  // Implement auth logic here
-    "openapi": {
-      "securitySchemes": {
-        "apiKeyAuth": {
-          "type": "apiKey",
-          "in": "header",
-          "name": "X-API-Key"
-        }
-      },
-      "security": [
-        {"apiKeyAuth": []}
-      ]
-    }
-  }
-}
+> {
+>   "auth": {
+>     "path": "./auth.py:my_auth",  // Implement auth logic here
+>     "openapi": {
+>       "securitySchemes": {
+>         "apiKeyAuth": {
+>           "type": "apiKey",
+>           "in": "header",
+>           "name": "X-API-Key"
+>         }
+>       },
+>       "security": [
+>         {"apiKeyAuth": []}
+>       ]
+>     }
+>   }
+> }
 ```
 
 ## Testing

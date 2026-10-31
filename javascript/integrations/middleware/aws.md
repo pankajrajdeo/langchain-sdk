@@ -63,7 +63,7 @@ const agent = createAgent({
 });
 ```
 
-> **Configuration options**
+> [accordion] Configuration options
 >
 > **enableCaching** `boolean` (default: true)
 >
@@ -81,7 +81,7 @@ const agent = createAgent({
 >
 > Behavior when using unsupported models. Options: `'ignore'`, `'warn'`, or `'raise'`.
 
-> **Full example**
+> [accordion] Full example
 >
 > The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, reducing costs and latency.
 >

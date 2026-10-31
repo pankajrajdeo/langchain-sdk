@@ -72,257 +72,257 @@ export LANGSMITH_API_KEY="..."
 
 Select a model that supports [tool-calling](../integrations/providers/overview.md):
 
-**OpenAI**
-
-👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
-
+> [tab] OpenAI
+>
+> 👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/openai
+> npm install @langchain/openai
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/openai
+> pnpm install @langchain/openai
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/openai
+> yarn add @langchain/openai
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/openai
+> bun add @langchain/openai
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-process.env.OPENAI_API_KEY = "your-api-key";
-
-const model = await initChatModel("gpt-5.5");
+> import { initChatModel } from "langchain";
+>
+> process.env.OPENAI_API_KEY = "your-api-key";
+>
+> const model = await initChatModel("gpt-5.5");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatOpenAI } from "@langchain/openai";
-
-const model = new ChatOpenAI({
-  model: "gpt-5.5",
-  apiKey: "your-api-key"
-});
+> import { ChatOpenAI } from "@langchain/openai";
+>
+> const model = new ChatOpenAI({
+>   model: "gpt-5.5",
+>   apiKey: "your-api-key"
+> });
 ```
 
-**Anthropic**
-
-👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
-
+> [tab] Anthropic
+>
+> 👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/anthropic
+> npm install @langchain/anthropic
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/anthropic
+> pnpm install @langchain/anthropic
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/anthropic
+> yarn add @langchain/anthropic
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/anthropic
+> pnpm add @langchain/anthropic
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-process.env.ANTHROPIC_API_KEY = "your-api-key";
-
-const model = await initChatModel("claude-sonnet-4-6");
+> import { initChatModel } from "langchain";
+>
+> process.env.ANTHROPIC_API_KEY = "your-api-key";
+>
+> const model = await initChatModel("claude-sonnet-4-6");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatAnthropic } from "@langchain/anthropic";
-
-const model = new ChatAnthropic({
-  model: "claude-sonnet-4-6",
-  apiKey: "your-api-key"
-});
+> import { ChatAnthropic } from "@langchain/anthropic";
+>
+> const model = new ChatAnthropic({
+>   model: "claude-sonnet-4-6",
+>   apiKey: "your-api-key"
+> });
 ```
 
-**Azure**
-
-👉 Read the [Azure chat model integration docs](../integrations/chat/azure.md)
-
+> [tab] Azure
+>
+> 👉 Read the [Azure chat model integration docs](../integrations/chat/azure.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/azure
+> npm install @langchain/azure
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/azure
+> pnpm install @langchain/azure
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/azure
+> yarn add @langchain/azure
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/azure
+> bun add @langchain/azure
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-process.env.AZURE_OPENAI_API_KEY = "your-api-key";
-process.env.AZURE_OPENAI_ENDPOINT = "your-endpoint";
-process.env.OPENAI_API_VERSION = "your-api-version";
-
-const model = await initChatModel("azure_openai:gpt-5.5");
+> import { initChatModel } from "langchain";
+>
+> process.env.AZURE_OPENAI_API_KEY = "your-api-key";
+> process.env.AZURE_OPENAI_ENDPOINT = "your-endpoint";
+> process.env.OPENAI_API_VERSION = "your-api-version";
+>
+> const model = await initChatModel("azure_openai:gpt-5.5");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { AzureChatOpenAI } from "@langchain/openai";
-
-const model = new AzureChatOpenAI({
-  model: "gpt-5.5",
-  azureOpenAIApiKey: "your-api-key",
-  azureOpenAIApiEndpoint: "your-endpoint",
-  azureOpenAIApiVersion: "your-api-version"
-});
+> import { AzureChatOpenAI } from "@langchain/openai";
+>
+> const model = new AzureChatOpenAI({
+>   model: "gpt-5.5",
+>   azureOpenAIApiKey: "your-api-key",
+>   azureOpenAIApiEndpoint: "your-endpoint",
+>   azureOpenAIApiVersion: "your-api-version"
+> });
 ```
 
-**Google Gemini**
-
-👉 Read the [ChatGoogle chat model integration docs](../integrations/chat/google.md)
-
+> [tab] Google Gemini
+>
+> 👉 Read the [ChatGoogle chat model integration docs](../integrations/chat/google.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/google
+> npm install @langchain/google
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/google
+> pnpm install @langchain/google
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/google
+> yarn add @langchain/google
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/google
+> bun add @langchain/google
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-process.env.GOOGLE_API_KEY = "your-api-key";
-
-const model = await initChatModel("google:gemini-3.7-flash");
+> import { initChatModel } from "langchain";
+>
+> process.env.GOOGLE_API_KEY = "your-api-key";
+>
+> const model = await initChatModel("google:gemini-3.7-flash");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatGoogle } from "@langchain/google/node";
-
-const model = new ChatGoogle({
-  model: "gemini-3.7-flash",
-  apiKey: "your-api-key"
-});
+> import { ChatGoogle } from "@langchain/google/node";
+>
+> const model = new ChatGoogle({
+>   model: "gemini-3.7-flash",
+>   apiKey: "your-api-key"
+> });
 ```
 
-**Bedrock Converse**
-
-👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock_converse.md)
-
+> [tab] Bedrock Converse
+>
+> 👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock_converse.md)
+>
 **npm**
 
 ```bash
-npm install @langchain/aws
+> npm install @langchain/aws
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm install @langchain/aws
+> pnpm install @langchain/aws
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/aws
+> yarn add @langchain/aws
 ```
-
+>
 **bun**
 
 ```bash
-bun add @langchain/aws
+> bun add @langchain/aws
 ```
-
+>
 **initChatModel**
 
 ```typescript
-import { initChatModel } from "langchain";
-
-// Follow the steps here to configure your credentials:
-// https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-const model = await initChatModel("bedrock:gpt-5.5");
+> import { initChatModel } from "langchain";
+>
+> // Follow the steps here to configure your credentials:
+> // https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> const model = await initChatModel("bedrock:gpt-5.5");
 ```
-
+>
 **Model Class**
 
 ```typescript
-import { ChatBedrockConverse } from "@langchain/aws";
-
-// Follow the steps here to configure your credentials:
-// https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
-
-const model = new ChatBedrockConverse({
-  model: "gpt-5.5",
-  region: "us-east-2"
-});
+> import { ChatBedrockConverse } from "@langchain/aws";
+>
+> // Follow the steps here to configure your credentials:
+> // https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+>
+> const model = new ChatBedrockConverse({
+>   model: "gpt-5.5",
+>   region: "us-east-2"
+> });
 ```
 
 The output shown in the examples below used OpenAI.
@@ -609,7 +609,7 @@ The agent correctly wrote a query, checked the query, and ran it to inform its f
 
 [Studio](../../langsmith/studio.md) provides a "client side" loop as well as memory so you can run this as a chat interface and query the database. You can ask questions like "Tell me the scheme of the database" or "Show me the invoices for the 5 top customers". You will see the SQL command that is generated and the resulting output. The details of how to get that started are below.
 
-> **Run your agent in Studio**
+> [accordion] Run your agent in Studio
 >
 > In addition to the previously mentioned packages, you will need to:
 >
@@ -1458,7 +1458,7 @@ The agent correctly wrote a query, checked the query, and ran it to inform its f
 > });
 ```
 >
-> > **[View example trace](https://smith.langchain.com/public/3925fa04-8885-4afd-aa45-5ba021acc93b/r)**
+> > [card] [View example trace](https://smith.langchain.com/public/27894271-984e-4463-b6f2-2e820e9bf530/r)
 > >
 > > Open a public LangSmith run for this example.
 

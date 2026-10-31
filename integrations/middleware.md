@@ -25,11 +25,11 @@ Arrows show a typical retrieval flow. The highlighted component is the one this 
 
 Middleware enables context engineering, harness customization, and runtime safety controls. It is a useful extension point in LangChain and we love highlighting what the community builds with it:
 
-> **[Add an official integration](../contributing/implement-langchain.md#middleware)**
+> [card] [Add an official integration](../contributing/implement-langchain.md#middleware)
 >
 > Follow the contributing guide to build and publish a middleware package.
 
-> **[Share a community middleware](https://github.com/langchain-ai/docs)**
+> [card] [Share a community middleware](https://github.com/langchain-ai/docs)
 >
 > Open a PR to the docs repo to add your middleware to the all integrations table.
 

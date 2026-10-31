@@ -124,11 +124,11 @@ chat panel to a full workflow debugger without changing the backend protocol.
 
 ## Patterns
 
-> **[Graph execution](graph-execution.md)**
+> [card] [Graph execution](graph-execution.md)
 >
 > Visualize multi-step graph pipelines with per-node status and streaming content.
 
-> **[Custom stream channels](custom-stream-channels.md)**
+> [card] [Custom stream channels](custom-stream-channels.md)
 >
 > Stream custom server-side data to the frontend and read it with `useExtension` and `useChannel`.
 

@@ -51,7 +51,7 @@ For setup instructions, see [Integrate Slack with an agent](slack-app.md).
 
 The Teams channel activates your agent when messages are sent in Microsoft Teams conversations.
 
-For full setup instructions including Azure Bot creation, credential registration, and tool configuration, see [Integrate Teams with an agent](teams-app.md).
+For full setup instructions including Azure Bot creation, credential registration, and tool configuration, see [Integrate Microsoft Teams with an agent](teams-app.md).
 
 ## Pause and resume channels
 

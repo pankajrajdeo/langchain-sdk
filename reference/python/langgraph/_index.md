@@ -7,7 +7,7 @@ tags: [index, reference, python, langgraph]
 
 # reference/python/langgraph
 
-23 pages here, 1403 pages including subdirectories.
+23 pages here, 1404 pages including subdirectories.
 
 ## Directories
 
@@ -20,7 +20,7 @@ tags: [index, reference, python, langgraph]
 - [func/](func/_index.md) - 18 pages
 - [graph/](graph/_index.md) - 90 pages
 - [managed/](managed/_index.md) - 15 pages
-- [pregel/](pregel/_index.md) - 538 pages
+- [pregel/](pregel/_index.md) - 539 pages
 - [runtime/](runtime/_index.md) - 41 pages
 - [stream/](stream/_index.md) - 152 pages
 - [types/](types/_index.md) - 162 pages

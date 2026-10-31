@@ -20,11 +20,11 @@ Below are tutorials for common use cases, organized by framework.
 
 [Managed Deep Agents](../langsmith/javascript/managed-deep-agents-overview.md) is the recommended way to build and deploy deep agents. You write the agent; LangSmith runs the harness and runtime.
 
-> **[Deep research](deepagents/deep-research.md)**
+> [card] [Deep research](deepagents/deep-research.md)
 >
 > Build a multi-step web research agent with Managed Deep Agents or the Deep Agents SDK.
 
-> **[Content builder](deepagents/content-builder.md)**
+> [card] [Content builder](deepagents/content-builder.md)
 >
 > Build a content writing agent with brand voice, skills, and image tools using Managed Deep Agents or the Deep Agents SDK.
 
@@ -32,11 +32,11 @@ Below are tutorials for common use cases, organized by framework.
 
 For maximum flexibility while using the same Deep Agents harness as [Managed Deep Agents](#managed-deep-agents), use the Deep Agents SDK and host agents yourself, or run a custom [LangSmith Deployment](../langsmith/deployment.md).
 
-> **[Deep research](deepagents/deep-research.md)**
+> [card] [Deep research](deepagents/deep-research.md)
 >
 > Build a multi-step web research agent with Managed Deep Agents or the Deep Agents SDK.
 
-> **[Content builder](deepagents/content-builder.md)**
+> [card] [Content builder](deepagents/content-builder.md)
 >
 > Build a content writing agent with brand voice, skills, and image tools using Managed Deep Agents or the Deep Agents SDK.
 
@@ -44,19 +44,19 @@ For maximum flexibility while using the same Deep Agents harness as [Managed Dee
 
 [LangChain](langchain/overview.md) [agent](langchain/agents.md) implementations make it easy to get started for simple use cases.
 
-> **[Semantic Search](langchain/knowledge-base.md)**
+> [card] [Semantic Search](langchain/knowledge-base.md)
 >
 > Build a semantic search engine over a PDF with LangChain components.
 
-> **[RAG Agent](deepagents/rag.md)**
+> [card] [RAG Agent](deepagents/rag.md)
 >
 > Create a Retrieval Augmented Generation (RAG) agent.
 
-> **[SQL Agent](langchain/sql-agent.md)**
+> [card] [SQL Agent](langchain/sql-agent.md)
 >
 > Build a SQL agent to interact with databases with human-in-the-loop review.
 
-> **[Voice Agent](langchain/voice-agent.md)**
+> [card] [Voice Agent](langchain/voice-agent.md)
 >
 > Build an agent you can speak and listen to.
 
@@ -65,11 +65,11 @@ For maximum flexibility while using the same Deep Agents harness as [Managed Dee
 LangChain's [agent](langchain/agents.md) implementations use [LangGraph](langgraph/overview.md) primitives.
 If deeper customization is required, agents can be implemented directly in LangGraph.
 
-> **[Custom RAG Agent](langgraph/agentic-rag.md)**
+> [card] [Custom RAG Agent](langgraph/agentic-rag.md)
 >
 > Build a RAG agent using LangGraph primitives for fine-grained control.
 
-> **[Custom SQL Agent](langgraph/sql-agent.md)**
+> [card] [Custom SQL Agent](langgraph/sql-agent.md)
 >
 > Implement a SQL agent directly in LangGraph for maximum flexibility.
 
@@ -81,29 +81,29 @@ These tutorials demonstrate [multi-agent patterns](langchain/multi-agent.md), bl
 
 These guides explain the core concepts and APIs underlying LangChain and LangGraph.
 
-> **[Memory](concepts/memory.md)**
+> [card] [Memory](concepts/memory.md)
 >
 > Understand persistence of interactions within and across threads.
 
-> **[Context engineering](concepts/context.md)**
+> [card] [Context engineering](concepts/context.md)
 >
 > Learn methods for providing AI applications the right information and tools to accomplish a task.
 
-> **[Graph API](langgraph/graph-api.md)**
+> [card] [Graph API](langgraph/graph-api.md)
 >
 > Explore LangGraph’s declarative graph-building API.
 
-> **[Functional API](langgraph/functional-api.md)**
+> [card] [Functional API](langgraph/functional-api.md)
 >
 > Build agents as a single function.
 
 ## Additional resources
 
-> **[LangChain Academy](https://academy.langchain.com/)**
+> [card] [LangChain Academy](https://academy.langchain.com/)
 >
 > Courses and exercises to level up your LangChain skills.
 
-> **[Case Studies](langgraph/case-studies.md)**
+> [card] [Case Studies](langgraph/case-studies.md)
 >
 > See how teams are using LangChain and LangGraph in production.
 

@@ -168,92 +168,92 @@ Both sync (`CockroachDBSaver`) and async (`AsyncCockroachDBSaver`) implementatio
 >
 > Call `checkpointer.setup()` (or `await checkpointer.setup()`) the first time you use the CockroachDB checkpointer to create the required tables.
 
-**Sync**
-
+> [tab] Sync
+>
 ```python
-import os
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langchain_cockroachdb import CockroachDBSaver
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-DB_URI = os.environ["COCKROACHDB_URI"]
-# Example: "cockroachdb://user:password@host:26257/defaultdb?sslmode=verify-full"
-with CockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
-    # checkpointer.setup()
-
-    def call_model(state: MessagesState):
-        response = model.invoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)
-
-    config = {"configurable": {"thread_id": "1"}}
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,
-        version="v3",
-    )
-    for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
-
-    stream = graph.stream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,
-        version="v3",
-    )
-    for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
+> import os
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langchain_cockroachdb import CockroachDBSaver
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> DB_URI = os.environ["COCKROACHDB_URI"]
+> # Example: "cockroachdb://user:password@host:26257/defaultdb?sslmode=verify-full"
+> with CockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
+>     # checkpointer.setup()
+>
+>     def call_model(state: MessagesState):
+>         response = model.invoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)
+>
+>     config = {"configurable": {"thread_id": "1"}}
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
+>
+>     stream = graph.stream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,
+>         version="v3",
+>     )
+>     for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
 ```
 
-**Async**
-
+> [tab] Async
+>
 ```python
-import os
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, MessagesState, START
-from langchain_cockroachdb import AsyncCockroachDBSaver
-
-model = init_chat_model(model="claude-haiku-4-5-20251001")
-
-DB_URI = os.environ["COCKROACHDB_URI"]
-# Example: "cockroachdb://user:password@host:26257/defaultdb?sslmode=verify-full"
-async with AsyncCockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
-    # await checkpointer.setup()
-
-    async def call_model(state: MessagesState):
-        response = await model.ainvoke(state["messages"])
-        return {"messages": response}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node(call_model)
-    builder.add_edge(START, "call_model")
-
-    graph = builder.compile(checkpointer=checkpointer)
-
-    config = {"configurable": {"thread_id": "1"}}
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-        config,
-        version="v3",
-    )
-    async for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
-
-    stream = await graph.astream_events(
-        {"messages": [{"role": "user", "content": "what's my name?"}]},
-        config,
-        version="v3",
-    )
-    async for snapshot in stream.values:
-        snapshot["messages"][-1].pretty_print()
+> import os
+> from langchain.chat_models import init_chat_model
+> from langgraph.graph import StateGraph, MessagesState, START
+> from langchain_cockroachdb import AsyncCockroachDBSaver
+>
+> model = init_chat_model(model="claude-haiku-4-5-20251001")
+>
+> DB_URI = os.environ["COCKROACHDB_URI"]
+> # Example: "cockroachdb://user:password@host:26257/defaultdb?sslmode=verify-full"
+> async with AsyncCockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
+>     # await checkpointer.setup()
+>
+>     async def call_model(state: MessagesState):
+>         response = await model.ainvoke(state["messages"])
+>         return {"messages": response}
+>
+>     builder = StateGraph(MessagesState)
+>     builder.add_node(call_model)
+>     builder.add_edge(START, "call_model")
+>
+>     graph = builder.compile(checkpointer=checkpointer)
+>
+>     config = {"configurable": {"thread_id": "1"}}
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+>         config,
+>         version="v3",
+>     )
+>     async for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
+>
+>     stream = await graph.astream_events(
+>         {"messages": [{"role": "user", "content": "what's my name?"}]},
+>         config,
+>         version="v3",
+>     )
+>     async for snapshot in stream.values:
+>         snapshot["messages"][-1].pretty_print()
 ```
 
 > [!NOTE]

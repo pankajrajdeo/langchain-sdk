@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langgraph/pregel/_messages"
-description: "Index of 5 pages and 2 subdirectories under reference/python/langgraph/pregel/_messages."
+description: "Index of 6 pages and 2 subdirectories under reference/python/langgraph/pregel/_messages."
 category: "index"
 tags: [index, reference, python, langgraph, pregel, messages]
 ---
 
 # reference/python/langgraph/pregel/_messages
 
-5 pages here, 24 pages including subdirectories.
+6 pages here, 25 pages including subdirectories.
 
 ## Directories
 
@@ -21,3 +21,4 @@ tags: [index, reference, python, langgraph, pregel, messages]
 - [StreamMessagesHandlerV2](StreamMessagesHandlerV2.md) - v2 variant of StreamMessagesHandler.
 - [T](T.md) - View source on GitHub
 - [ensure_message_ids](ensure_message_ids.md) - Give the messages written to DeltaChannels stable ids.
+- [graph_namespace](graph_namespace.md) - Namespace of the graph a task runs in, from the task's run metadata.

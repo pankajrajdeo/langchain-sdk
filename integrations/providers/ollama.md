@@ -18,17 +18,17 @@ For a complete list of supported models and variants, see the [Ollama model libr
 
 ## Model interfaces
 
-> **[ChatOllama](../chat/ollama.md)**
+> [card] [ChatOllama](../chat/ollama.md)
 >
 > Ollama chat models.
 
-> **[OllamaEmbeddings](../embeddings/ollama.md)**
+> [card] [OllamaEmbeddings](../embeddings/ollama.md)
 >
 > Ollama embedding models.
 
 ## Other
 
-> **[OllamaLLM](../llms/ollama.md)**
+> [card] [OllamaLLM](../llms/ollama.md)
 >
 > (Legacy) Ollama text completion models.
 

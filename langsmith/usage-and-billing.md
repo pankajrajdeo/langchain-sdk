@@ -42,7 +42,7 @@ After the specified retention period, traces are no longer accessible in the tra
 
 **Where the tier is set**
 
-A default retention tier belongs to a tracing project. In an [agent-based workspace](agents.md), each of an agent's [environments](agent-environments.md) is its own tracing project, so the tier is set per environment: one agent can hold production traces at extended retention and development traces at base. To change the tier for a whole agent, set it on each environment. See [Change project-level default retention](billing.md#change-project-level-default-retention).
+A default retention tier belongs to a tracing project. In an [agent-based workspace](agent-registry.md), each of an agent's [environments](agent-environments.md) is its own tracing project, so the tier is set per environment: one agent can hold production traces at extended retention and development traces at base. To change the tier for a whole agent, set it on each environment. See [Change project-level default retention](billing.md#change-project-level-default-retention).
 
 ### Data retention auto-upgrades
 

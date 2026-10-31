@@ -32,35 +32,35 @@ Set the `PARALLEL_API_KEY` environment variable to your Parallel API key. Sign u
 
 ## Chat models
 
-> **[ChatParallel](../chat/parallel.md)**
+> [card] [ChatParallel](../chat/parallel.md)
 >
 > OpenAI-compatible chat model with optional web research and per-field citations on the research tiers.
 
 ## Tools
 
-> **[ParallelSearchTool](../tools/parallel_search.md)**
+> [card] [ParallelSearchTool](../tools/parallel_search.md)
 >
 > Search the web and get structured, LLM-optimized excerpts back.
 
-> **[ParallelExtractTool](../tools/parallel_extract.md)**
+> [card] [ParallelExtractTool](../tools/parallel_extract.md)
 >
 > Extract clean markdown content from a list of URLs.
 
-> **[ParallelFindAllTool](../tools/parallel_findall.md)**
+> [card] [ParallelFindAllTool](../tools/parallel_findall.md)
 >
 > Discover entities that satisfy a set of boolean match conditions.
 
-> **[Task API](../tools/parallel_task.md)**
+> [card] [Task API](../tools/parallel_task.md)
 >
 > Run research-grade tasks: single ad-hoc, deep research, batch enrichment. `ParallelTaskRunTool`, `ParallelDeepResearch`, `ParallelTaskGroup`, `ParallelEnrichment`.
 
-> **[ParallelMonitor](../tools/parallel_monitor.md)**
+> [card] [ParallelMonitor](../tools/parallel_monitor.md)
 >
 > Schedule a query on a recurring cadence and receive events when relevant new content shows up.
 
 ## Retrievers
 
-> **[ParallelSearchRetriever](../retrievers/parallel.md)**
+> [card] [ParallelSearchRetriever](../retrievers/parallel.md)
 >
 > `BaseRetriever` over Parallel Search. Returns `list[Document]` for drop-in use in any RAG pipeline.
 

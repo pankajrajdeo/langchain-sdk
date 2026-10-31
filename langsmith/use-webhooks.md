@@ -40,39 +40,39 @@ In this guide, we’ll show how to trigger a webhook after streaming a run.
 
 Before making API calls, set up your assistant and thread.
 
-**Python**
-
+> [tab] Python
+>
 ```python
-from langgraph_sdk import get_client
-
-client = get_client(url=<DEPLOYMENT_URL>)
-assistant_id = "agent"
-thread = await client.threads.create()
-print(thread)
+> from langgraph_sdk import get_client
+>
+> client = get_client(url=<DEPLOYMENT_URL>)
+> assistant_id = "agent"
+> thread = await client.threads.create()
+> print(thread)
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```js
-import { Client } from "@langchain/langgraph-sdk";
-
-const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
-const assistantID = "agent";
-const thread = await client.threads.create();
-console.log(thread);
+> import { Client } from "@langchain/langgraph-sdk";
+>
+> const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
+> const assistantID = "agent";
+> const thread = await client.threads.create();
+> console.log(thread);
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-curl --request POST \
-    --url <DEPLOYMENT_URL>/assistants/search \
-    --header 'Content-Type: application/json' \
-    --data '{ "limit": 10, "offset": 0 }' | jq -c 'map(select(.config == null or .config == {})) | .[0]' && \
-curl --request POST \
-    --url <DEPLOYMENT_URL>/threads \
-    --header 'Content-Type: application/json' \
-    --data '{}'
+> curl --request POST \
+>     --url <DEPLOYMENT_URL>/assistants/search \
+>     --header 'Content-Type: application/json' \
+>     --data '{ "limit": 10, "offset": 0 }' | jq -c 'map(select(.config == null or .config == {})) | .[0]' && \
+> curl --request POST \
+>     --url <DEPLOYMENT_URL>/threads \
+>     --header 'Content-Type: application/json' \
+>     --data '{}'
 ```
 
 Example response:
@@ -95,51 +95,51 @@ To use a webhook, specify the `webhook` parameter in your API request. When the 
 
 For example, if your server listens for webhook events at `https://my-server.app/my-webhook-endpoint`, include this in your request:
 
-**Python**
-
+> [tab] Python
+>
 ```python
-input = { "messages": [{ "role": "user", "content": "Hello!" }] }
-
-async for chunk in client.runs.stream(
-    thread_id=thread["thread_id"],
-    assistant_id=assistant_id,
-    input=input,
-    stream_mode="events",
-    webhook="https://my-server.app/my-webhook-endpoint"
-):
-    pass
+> input = { "messages": [{ "role": "user", "content": "Hello!" }] }
+>
+> async for chunk in client.runs.stream(
+>     thread_id=thread["thread_id"],
+>     assistant_id=assistant_id,
+>     input=input,
+>     stream_mode="events",
+>     webhook="https://my-server.app/my-webhook-endpoint"
+> ):
+>     pass
 ```
 
-**JavaScript**
-
+> [tab] JavaScript
+>
 ```js
-const input = { messages: [{ role: "human", content: "Hello!" }] };
-
-const streamResponse = client.runs.stream(
-  thread["thread_id"],
-  assistantID,
-  {
-    input: input,
-    webhook: "https://my-server.app/my-webhook-endpoint"
-  }
-);
-
-for await (const chunk of streamResponse) {
-  // Handle stream output
-}
+> const input = { messages: [{ role: "human", content: "Hello!" }] };
+>
+> const streamResponse = client.runs.stream(
+>   thread["thread_id"],
+>   assistantID,
+>   {
+>     input: input,
+>     webhook: "https://my-server.app/my-webhook-endpoint"
+>   }
+> );
+>
+> for await (const chunk of streamResponse) {
+>   // Handle stream output
+> }
 ```
 
-**cURL**
-
+> [tab] cURL
+>
 ```bash
-curl --request POST \
-    --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream \
-    --header 'Content-Type: application/json' \
-    --data '{
-        "assistant_id": <ASSISTANT_ID>,
-        "input": {"messages": [{"role": "user", "content": "Hello!"}]},
-        "webhook": "https://my-server.app/my-webhook-endpoint"
-    }'
+> curl --request POST \
+>     --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream \
+>     --header 'Content-Type: application/json' \
+>     --data '{
+>         "assistant_id": <ASSISTANT_ID>,
+>         "input": {"messages": [{"role": "user", "content": "Hello!"}]},
+>         "webhook": "https://my-server.app/my-webhook-endpoint"
+>     }'
 ```
 
 ## Webhook payload

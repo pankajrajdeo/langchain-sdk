@@ -18,7 +18,7 @@ This guide shows you how to trace [Amazon Bedrock](https://aws.amazon.com/bedroc
 
 > [!NOTE]
 >
-> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
+> In an [agent-based workspace](agent-registry.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Installation
 
@@ -41,6 +41,8 @@ This integration uses the native AWS SDKs with LangSmith's tracing capabilities.
 To enable LangSmith tracing, configure your [LangSmith API key](create-account-api-key.md), agent identifier, and environment. You'll also need to set up your AWS credentials to authenticate with Bedrock.
 
 ### LangSmith configuration
+
+Sending traces to an agent requires `langsmith>=0.14.9` in Python or `langsmith@>=0.11.0` in TypeScript.
 
 ```bash
 export LANGSMITH_API_KEY=<your_langsmith_api_key>
@@ -139,21 +141,21 @@ const answer = await invokeBedrock("How can I trace AWS Bedrock model outputs to
 console.log(answer);
 ```
 
-**Python**
+> [tab] Python
+>
+> * `boto3.client("bedrock-runtime")` creates a Bedrock Runtime client.
+> * The `converse` method sends a chat prompt (as a list of messages) to the specified model and returns a structured response.
+> * The `generate_text` function is decorated with `@traceable`, logging each call to LangSmith as a trace (using the function name as the default trace name).
+> * Custom tags (`aws-bedrock`, `langsmith`, `integration-test`) and metadata (environment, model info) are passed into the decorator and attached to the trace record for filtering in the LangSmith UI.
+> * When you run this code (with `LANGSMITH_TRACING=true` and your API key set), LangSmith automatically captures the input prompt, model output, token usage, and latency.
 
-* `boto3.client("bedrock-runtime")` creates a Bedrock Runtime client.
-* The `converse` method sends a chat prompt (as a list of messages) to the specified model and returns a structured response.
-* The `generate_text` function is decorated with `@traceable`, logging each call to LangSmith as a trace (using the function name as the default trace name).
-* Custom tags (`aws-bedrock`, `langsmith`, `integration-test`) and metadata (environment, model info) are passed into the decorator and attached to the trace record for filtering in the LangSmith UI.
-* When you run this code (with `LANGSMITH_TRACING=true` and your API key set), LangSmith automatically captures the input prompt, model output, token usage, and latency.
-
-**TypeScript**
-
-* `BedrockRuntimeClient` from the AWS SDK v3 provides the Bedrock runtime interface.
-* `ConverseCommand` offers a unified chat interface that sends a user message and returns the assistant's response in a structured format (no manual JSON parsing needed).
-* The Bedrock call is wrapped with LangSmith's `traceable` function, converting `invokeBedrock` into a traced function that logs its execution to LangSmith.
-* Custom tags and metadata are provided in the traceable options object and attached to each trace.
-* When you run this script (with `LANGSMITH_TRACING=true` and your API key configured), check your LangSmith dashboard for trace entries that include the input prompt, model output, timing info, and specified tags/metadata.
+> [tab] TypeScript
+>
+> * `BedrockRuntimeClient` from the AWS SDK v3 provides the Bedrock runtime interface.
+> * `ConverseCommand` offers a unified chat interface that sends a user message and returns the assistant's response in a structured format (no manual JSON parsing needed).
+> * The Bedrock call is wrapped with LangSmith's `traceable` function, converting `invokeBedrock` into a traced function that logs its execution to LangSmith.
+> * Custom tags and metadata are provided in the traceable options object and attached to each trace.
+> * When you run this script (with `LANGSMITH_TRACING=true` and your API key configured), check your LangSmith dashboard for trace entries that include the input prompt, model output, timing info, and specified tags/metadata.
 
 ## View traces in LangSmith
 

@@ -104,39 +104,39 @@ To wire sandboxes into agent code, see the Open Source docs:
 
 ## Resources
 
-> **[Snapshots](sandbox-snapshots.md)**
+> [card] [Snapshots](sandbox-snapshots.md)
 >
 > Build filesystem images from Docker images or capture a running sandbox, then boot sandboxes from them.
 
-> **[Service URLs](sandbox-service-urls.md)**
+> [card] [Service URLs](sandbox-service-urls.md)
 >
 > Access HTTP services running inside sandboxes via authenticated URLs.
 
-> **[Auth proxy](sandbox-auth-proxy.md)**
+> [card] [Auth proxy](sandbox-auth-proxy.md)
 >
 > Inject credentials into outbound API requests without hardcoding secrets.
 
-> **[Mounts](sandbox-mounts.md)**
+> [card] [Mounts](sandbox-mounts.md)
 >
 > Attach S3 buckets, GCS buckets, and public Git repositories to a sandbox filesystem.
 
-> **[Permissions](sandbox-permissions.md)**
+> [card] [Permissions](sandbox-permissions.md)
 >
 > Control which workspace members can interact with a sandbox after it is created.
 
-> **[CLI](sandbox-cli.md)**
+> [card] [CLI](sandbox-cli.md)
 >
 > Build snapshots, manage sandboxes, open consoles, and tunnel TCP ports from the command line.
 
-> **[SDK usage](sandbox-sdk.md)**
+> [card] [SDK usage](sandbox-sdk.md)
 >
 > Create and manage sandboxes programmatically with the Python or TypeScript SDK.
 
-> **[Self-hosted setup](enable-self-hosted-sandboxes.md)**
+> [card] [Self-hosted setup](enable-self-hosted-sandboxes.md)
 >
 > Enable Sandboxes on self-hosted LangSmith deployments with Helm or Terraform.
 
-> **[Harbor](harbor-integrations.md#sandboxes)**
+> [card] [Harbor](harbor-integrations.md#sandboxes)
 >
 > Run Harbor evaluations and rollouts on LangSmith sandboxes.
 

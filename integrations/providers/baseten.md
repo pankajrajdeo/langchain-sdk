@@ -16,11 +16,11 @@ Baseten provides infrastructure for deploying and serving ML models. Access open
 
 ## Model interfaces
 
-> **[ChatBaseten](../chat/baseten.md)**
+> [card] [ChatBaseten](../chat/baseten.md)
 >
 > Baseten chat models.
 
-> **[BasetenEmbeddings](../embeddings/baseten.md)**
+> [card] [BasetenEmbeddings](../embeddings/baseten.md)
 >
 > Baseten embedding models.
 

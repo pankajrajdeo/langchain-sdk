@@ -104,194 +104,194 @@ Vector search stores numeric vectors associated with text. Embed a query as a ve
 
 LangChain supports embeddings from [many providers](../integrations/embeddings.md). Select a model to specify how text should be converted into a numeric vector:
 
-**OpenAI**
-
+> [tab] OpenAI
+>
 **npm**
 
 ```bash
-npm i @langchain/openai
+> npm i @langchain/openai
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/openai
+> yarn add @langchain/openai
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/openai
+> pnpm add @langchain/openai
 ```
-
+>
 ```typescript
-import { OpenAIEmbeddings } from "@langchain/openai";
-
-const embeddings = new OpenAIEmbeddings({
-  model: "text-embedding-3-large"
-});
+> import { OpenAIEmbeddings } from "@langchain/openai";
+>
+> const embeddings = new OpenAIEmbeddings({
+>   model: "text-embedding-3-large"
+> });
 ```
 
-**Azure**
-
+> [tab] Azure
+>
 **npm**
 
 ```bash
-npm i @langchain/openai
+> npm i @langchain/openai
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/openai
+> yarn add @langchain/openai
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/openai
+> pnpm add @langchain/openai
 ```
-
+>
 ```bash
-AZURE_OPENAI_API_INSTANCE_NAME=<YOUR_INSTANCE_NAME>
-AZURE_OPENAI_API_KEY=<YOUR_KEY>
-AZURE_OPENAI_API_VERSION="2024-02-01"
+> AZURE_OPENAI_API_INSTANCE_NAME=<YOUR_INSTANCE_NAME>
+> AZURE_OPENAI_API_KEY=<YOUR_KEY>
+> AZURE_OPENAI_API_VERSION="2024-02-01"
 ```
-
+>
 ```typescript
-import { AzureOpenAIEmbeddings } from "@langchain/openai";
-
-const embeddings = new AzureOpenAIEmbeddings({
-  azureOpenAIApiEmbeddingsDeploymentName: "text-embedding-ada-002"
-});
+> import { AzureOpenAIEmbeddings } from "@langchain/openai";
+>
+> const embeddings = new AzureOpenAIEmbeddings({
+>   azureOpenAIApiEmbeddingsDeploymentName: "text-embedding-ada-002"
+> });
 ```
 
-**AWS**
-
+> [tab] AWS
+>
 **npm**
 
 ```bash
-npm i @langchain/aws
+> npm i @langchain/aws
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/aws
+> yarn add @langchain/aws
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/aws
+> pnpm add @langchain/aws
 ```
-
+>
 ```bash
-BEDROCK_AWS_REGION=your-region
+> BEDROCK_AWS_REGION=your-region
 ```
-
+>
 ```typescript
-import { BedrockEmbeddings } from "@langchain/aws";
-
-const embeddings = new BedrockEmbeddings({
-  model: "amazon.titan-embed-text-v1"
-});
+> import { BedrockEmbeddings } from "@langchain/aws";
+>
+> const embeddings = new BedrockEmbeddings({
+>   model: "amazon.titan-embed-text-v1"
+> });
 ```
 
-**Gemini Enterprise Agent Platform**
-
+> [tab] Gemini Enterprise Agent Platform
+>
 **npm**
 
 ```bash
-npm i @langchain/google-vertexai
+> npm i @langchain/google-vertexai
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/google-vertexai
+> yarn add @langchain/google-vertexai
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/google-vertexai
+> pnpm add @langchain/google-vertexai
 ```
-
+>
 ```bash
-GOOGLE_APPLICATION_CREDENTIALS=credentials.json
+> GOOGLE_APPLICATION_CREDENTIALS=credentials.json
 ```
-
+>
 ```typescript
-import { VertexAIEmbeddings } from "@langchain/google-vertexai";
-
-const embeddings = new VertexAIEmbeddings({
-  model: "gemini-embedding-001"
-});
+> import { VertexAIEmbeddings } from "@langchain/google-vertexai";
+>
+> const embeddings = new VertexAIEmbeddings({
+>   model: "gemini-embedding-001"
+> });
 ```
 
-**MistralAI**
-
+> [tab] MistralAI
+>
 **npm**
 
 ```bash
-npm i @langchain/mistralai
+> npm i @langchain/mistralai
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mistralai
+> yarn add @langchain/mistralai
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mistralai
+> pnpm add @langchain/mistralai
 ```
-
+>
 ```bash
-MISTRAL_API_KEY=your-api-key
+> MISTRAL_API_KEY=your-api-key
 ```
-
+>
 ```typescript
-import { MistralAIEmbeddings } from "@langchain/mistralai";
-
-const embeddings = new MistralAIEmbeddings({
-  model: "mistral-embed"
-});
+> import { MistralAIEmbeddings } from "@langchain/mistralai";
+>
+> const embeddings = new MistralAIEmbeddings({
+>   model: "mistral-embed"
+> });
 ```
 
-**Cohere**
-
+> [tab] Cohere
+>
 **npm**
 
 ```bash
-npm i @langchain/cohere
+> npm i @langchain/cohere
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/cohere
+> yarn add @langchain/cohere
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/cohere
+> pnpm add @langchain/cohere
 ```
-
+>
 ```bash
-COHERE_API_KEY=your-api-key
+> COHERE_API_KEY=your-api-key
 ```
-
+>
 ```typescript
-import { CohereEmbeddings } from "@langchain/cohere";
-
-const embeddings = new CohereEmbeddings({
-  model: "embed-english-v3.0"
-});
+> import { CohereEmbeddings } from "@langchain/cohere";
+>
+> const embeddings = new CohereEmbeddings({
+>   model: "embed-english-v3.0"
+> });
 ```
 
 ```typescript
@@ -317,160 +317,160 @@ LangChain [`VectorStore`](https://reference.langchain.com/javascript/langchain-c
 
 LangChain includes [integrations](../integrations/vectorstores.md) with many vector store technologies. Some are hosted and need credentials, some run in separate infrastructure (local or third-party), and others run in-memory for lightweight workloads. Select a vector store:
 
-**Memory**
-
+> [tab] Memory
+>
 **npm**
 
 ```bash
-npm i @langchain/classic
+> npm i @langchain/classic
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/classic
+> yarn add @langchain/classic
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/classic
+> pnpm add @langchain/classic
 ```
-
+>
 ```typescript
-import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
-
-const vectorStore = new MemoryVectorStore(embeddings);
+> import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
+>
+> const vectorStore = new MemoryVectorStore(embeddings);
 ```
 
-**MongoDB**
-
+> [tab] MongoDB
+>
 **npm**
 
 ```bash
-npm i @langchain/mongodb
+> npm i @langchain/mongodb
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/mongodb
+> yarn add @langchain/mongodb
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/mongodb
+> pnpm add @langchain/mongodb
 ```
-
+>
 ```typescript
-import { MongoDBAtlasVectorSearch } from "@langchain/mongodb"
-import { MongoClient } from "mongodb";
-
-const client = new MongoClient(process.env.MONGODB_ATLAS_URI || "");
-const collection = client
-  .db(process.env.MONGODB_ATLAS_DB_NAME)
-  .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
-
-const vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
-  collection: collection,
-  indexName: "vector_index",
-  textKey: "text",
-  embeddingKey: "embedding",
-});
+> import { MongoDBAtlasVectorSearch } from "@langchain/mongodb"
+> import { MongoClient } from "mongodb";
+>
+> const client = new MongoClient(process.env.MONGODB_ATLAS_URI || "");
+> const collection = client
+>   .db(process.env.MONGODB_ATLAS_DB_NAME)
+>   .collection(process.env.MONGODB_ATLAS_COLLECTION_NAME);
+>
+> const vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
+>   collection: collection,
+>   indexName: "vector_index",
+>   textKey: "text",
+>   embeddingKey: "embedding",
+> });
 ```
 
-**Pinecone**
-
+> [tab] Pinecone
+>
 **npm**
 
 ```bash
-npm i @langchain/pinecone
+> npm i @langchain/pinecone
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/pinecone
+> yarn add @langchain/pinecone
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/pinecone
+> pnpm add @langchain/pinecone
 ```
-
+>
 ```typescript
-import { PineconeStore } from "@langchain/pinecone";
-import { Pinecone as PineconeClient } from "@pinecone-database/pinecone";
-
-const pinecone = new PineconeClient({
-  apiKey: process.env.PINECONE_API_KEY,
-});
-const pineconeIndex = pinecone.Index("your-index-name");
-
-const vectorStore = new PineconeStore(embeddings, {
-  pineconeIndex,
-  maxConcurrency: 5,
-});
+> import { PineconeStore } from "@langchain/pinecone";
+> import { Pinecone as PineconeClient } from "@pinecone-database/pinecone";
+>
+> const pinecone = new PineconeClient({
+>   apiKey: process.env.PINECONE_API_KEY,
+> });
+> const pineconeIndex = pinecone.Index("your-index-name");
+>
+> const vectorStore = new PineconeStore(embeddings, {
+>   pineconeIndex,
+>   maxConcurrency: 5,
+> });
 ```
 
-**Qdrant**
-
+> [tab] Qdrant
+>
 **npm**
 
 ```bash
-npm i @langchain/qdrant
+> npm i @langchain/qdrant
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/qdrant
+> yarn add @langchain/qdrant
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/qdrant
+> pnpm add @langchain/qdrant
 ```
-
+>
 ```typescript
-import { QdrantVectorStore } from "@langchain/qdrant";
-
-const vectorStore = await QdrantVectorStore.fromExistingCollection(embeddings, {
-  url: process.env.QDRANT_URL,
-  collectionName: "langchainjs-testing",
-});
+> import { QdrantVectorStore } from "@langchain/qdrant";
+>
+> const vectorStore = await QdrantVectorStore.fromExistingCollection(embeddings, {
+>   url: process.env.QDRANT_URL,
+>   collectionName: "langchainjs-testing",
+> });
 ```
 
-**Redis**
-
+> [tab] Redis
+>
 **npm**
 
 ```bash
-npm i @langchain/redis
+> npm i @langchain/redis
 ```
-
+>
 **yarn**
 
 ```bash
-yarn add @langchain/redis
+> yarn add @langchain/redis
 ```
-
+>
 **pnpm**
 
 ```bash
-pnpm add @langchain/redis
+> pnpm add @langchain/redis
 ```
-
+>
 ```typescript
-import { RedisVectorStore } from "@langchain/redis";
-
-const vectorStore = new RedisVectorStore(embeddings, {
-  redisClient: client,
-  indexName: "langchainjs-testing",
-});
+> import { RedisVectorStore } from "@langchain/redis";
+>
+> const vectorStore = new RedisVectorStore(embeddings, {
+>   redisClient: client,
+>   indexName: "langchainjs-testing",
+> });
 ```
 
 ## Load and split a PDF

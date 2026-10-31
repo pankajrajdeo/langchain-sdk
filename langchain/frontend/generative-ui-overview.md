@@ -118,15 +118,15 @@ transcript.
 
 ## Explore the spectrum
 
-> **[Controlled](controlled-generative-ui.md)**
+> [card] [Controlled](controlled-generative-ui.md)
 >
 > Author the components; the agent picks which to render and what data to pass.
 
-> **[Declarative](declarative-generative-ui.md)**
+> [card] [Declarative](declarative-generative-ui.md)
 >
 > The agent emits a spec; the frontend composes from a registered catalog.
 
-> **[Open-ended](open-ended-generative-ui.md)**
+> [card] [Open-ended](open-ended-generative-ui.md)
 >
 > Render UI created elsewhere, such as sandboxed MCP Apps.
 

@@ -20,7 +20,7 @@ Trace your [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtim
 
 > [!NOTE]
 >
-> In an [agent-based workspace](agents.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
+> In an [agent-based workspace](agent-registry.md), [create an agent](create-an-agent.md) once before sending traces. Use [agent addressing](log-traces-to-agent.md) to select its identifier and environment. If an integration requires `project_name`, use the selected environment's [`tracer_session_name`](create-an-agent.md#use-an-environment-project) as a compatibility value.
 
 ## Choose an approach
 
@@ -46,6 +46,8 @@ uv add "langsmith[openai-realtime]"
 ```
 
 ## Set environment variables
+
+Sending traces to an agent requires `langsmith>=0.14.9`.
 
 **.env**
 
@@ -183,11 +185,11 @@ async for event in conn:
 
 ## Next steps
 
-> **[Voice fundamentals](trace-voice-fundamentals.md)**
+> [card] [Voice fundamentals](trace-voice-fundamentals.md)
 >
 > Core conventions for tracing voice agents.
 
-> **[Upload files with traces](upload-files-with-traces.md)**
+> [card] [Upload files with traces](upload-files-with-traces.md)
 >
 > Attach the conversation audio recording to your trace.
 
