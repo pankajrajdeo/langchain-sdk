@@ -7,8 +7,8 @@ tags: [docs, javascript, langchain, mcp, auth]
 ---
 
 # Authentication
-
-> Authenticate MCP connections with bearer tokens, OAuth 2.1, or per-user credentials in LangChain.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/mcp/auth)
+Authenticate MCP connections with bearer tokens, OAuth 2.1, or per-user credentials in LangChain.
 
 Most remote MCP servers require authentication. Each HTTP or SSE server under `servers` takes its own `authProvider` and `headers`, and `MCPAdapter` hands the provider object to the MCP SDK transport as-is and sends the headers with each request. Stdio servers take neither. Use a [header or token provider](#bearer-token) for credentials your app manages, or an [OAuth client provider](#oauth-authentication) for OAuth 2.1. When each run should reach the server as its caller, use [per-user authentication](#per-user-authentication).
 

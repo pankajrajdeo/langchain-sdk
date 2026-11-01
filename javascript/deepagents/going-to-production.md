@@ -7,8 +7,8 @@ tags: [docs, javascript, deepagents, going-to-production]
 ---
 
 # Going to production
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/javascript/deepagents/going-to-production)
-Take your deep agent to production with persistent memory, sandboxes, resilience middleware, and deployment options
+
+> Take your deep agent to production with persistent memory, sandboxes, resilience middleware, and deployment options
 
 This guide covers considerations for taking a deep agent from a local prototype to a production deployment with the SDK. To run production agents without having to manage infrastructure, start with [Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-overview.md) or [migrate to Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-migrate.md) instead. The rest of this page walks through scoping memory, configuring execution environments, adding guardrails, and connecting a frontend when you host agents yourself or run a custom [LangSmith Deployment](../../langsmith/deployment.md).
 
