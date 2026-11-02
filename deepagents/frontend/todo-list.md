@@ -7,8 +7,8 @@ tags: [docs, deepagents, frontend, todo-list]
 ---
 
 # Todo list
-
-> Track agent progress with a real-time todo list synced from agent state
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/frontend/todo-list)
+Track agent progress with a real-time todo list synced from agent state
 
 Not every agent interaction is a chat. Sometimes the agent is executing a
 multi-step plan, and the best way to show progress is a **todo list** that

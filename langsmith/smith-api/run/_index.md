@@ -11,7 +11,7 @@ tags: [index, langsmith, smith-api, run]
 
 ## Files
 
-- [Create decision model rule](create-decision-model-rule.md) - Create a decision-model evaluator (Jev, SemIf or OpenAI Decisions) from its prompt and questions, and attach it to a project or dataset. Each question's key becomes a feedback key.
+- [Create decision model rule](create-decision-model-rule.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/runs/rules/decision-models Create a decision-model evaluator (Jev, SemIf or OpenAI Decisions) from its prompt and questions, and attach it to a...
 - [Create rule](create-rule.md) - Create a new run rule.
 - [Delete rule](delete-rule.md) - Delete a run rule.
 - [Delete runs abac](delete-runs-abac.md) - Delete specific runs by trace IDs.

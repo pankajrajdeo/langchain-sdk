@@ -42,7 +42,7 @@ Set your [LangSmith API key](create-account-api-key.md) and the agent identifier
 
 ```bash
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=https://api.smith.langchain.com/otel/v1/traces
-export OTEL_EXPORTER_OTLP_HEADERS="x-api-key=<your_langsmith_api_key>,Langsmith-Agent-Id=<your-agent-id>,Langsmith-Agent-Environment=production"
+export OTEL_EXPORTER_OTLP_HEADERS="x-api-key=<your_langsmith_api_key>,Langsmith-Agent-Id=<your-agent-id>,Langsmith-Agent-Environment=local"
 
 # Required when using Amazon Bedrock.
 export AWS_REGION=<your_aws_region>
@@ -110,7 +110,7 @@ exporter = create_langsmith_exporter(
     headers={
         "x-api-key": "<your_langsmith_api_key>",
         "Langsmith-Agent-Id": "<your-agent-id>",
-        "Langsmith-Agent-Environment": "production",
+        "Langsmith-Agent-Environment": "local",
     },
 )
 telemetry.tracer_provider.add_span_processor(BatchSpanProcessor(exporter))

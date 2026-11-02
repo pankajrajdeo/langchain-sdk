@@ -7,7 +7,7 @@ tags: [index, integrations]
 
 # integrations
 
-15 pages here, 360 pages including subdirectories.
+15 pages here, 361 pages including subdirectories.
 
 ## Directories
 
@@ -31,7 +31,7 @@ tags: [index, integrations]
 - [retrievers/](retrievers/_index.md) - 17 pages
 - [sandboxes/](sandboxes/_index.md) - 6 pages
 - [splitters/](splitters/_index.md) - 8 pages
-- [stores/](stores/_index.md) - 5 pages
+- [stores/](stores/_index.md) - 6 pages
 - [tools/](tools/_index.md) - 38 pages
 - [vectorstores/](vectorstores/_index.md) - 33 pages
 

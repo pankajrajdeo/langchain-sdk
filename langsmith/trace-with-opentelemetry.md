@@ -7,8 +7,8 @@ tags: [docs, langsmith, trace-with-opentelemetry]
 ---
 
 # Trace with OpenTelemetry
-
-> Configure OpenTelemetry tracing in LangSmith, including LANGSMITH_OTEL_ENABLED and OTEL fanout with the OpenTelemetry Collector.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
+Configure OpenTelemetry tracing in LangSmith, including LANGSMITH_OTEL_ENABLED and OTEL fanout with the OpenTelemetry Collector.
 
 LangSmith supports OpenTelemetry-based tracing, allowing you to send traces from any OpenTelemetry-compatible agent. This guide covers both automatic instrumentation for LangChain agents and manual instrumentation for other frameworks.
 
@@ -78,7 +78,7 @@ If you're using LangChain or LangGraph, use the built-in integration to trace yo
    LANGSMITH_ENDPOINT=https://api.smith.langchain.com
    LANGSMITH_API_KEY=<your_langsmith_api_key>
    LANGSMITH_AGENT_ID="<your-agent-id>"
-   LANGSMITH_AGENT_ENVIRONMENT="production"
+   LANGSMITH_AGENT_ENVIRONMENT="local"
    # For LangSmith API keys linked to multiple workspaces, set the LANGSMITH_WORKSPACE_ID environment variable to specify which workspace to use.
 ```
 
@@ -140,7 +140,7 @@ For non-LangChain agents or custom instrumentation, you can trace your agent in 
 
 ```bash
    OTEL_EXPORTER_OTLP_ENDPOINT=https://api.smith.langchain.com/otel
-   OTEL_EXPORTER_OTLP_HEADERS="x-api-key=<your langsmith api key>,Langsmith-Agent-Id=<your-agent-id>,Langsmith-Agent-Environment=production"
+   OTEL_EXPORTER_OTLP_HEADERS="x-api-key=<your langsmith api key>,Langsmith-Agent-Id=<your-agent-id>,Langsmith-Agent-Environment=local"
 ```
 
    > [!NOTE]

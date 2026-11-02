@@ -121,7 +121,7 @@ Use the agent identifier and environment as the tracing destination:
 export LANGSMITH_TRACING=true
 export LANGSMITH_API_KEY="<your-tracing-api-key>"
 export LANGSMITH_AGENT_ID="support-agent"
-export LANGSMITH_AGENT_ENVIRONMENT="production"
+export LANGSMITH_AGENT_ENVIRONMENT="local"
 ```
 
 Use the identifier returned by creation, not the display name. Remove legacy destination variables (`LANGSMITH_PROJECT`, `LANGCHAIN_PROJECT`, and `LANGCHAIN_SESSION`) from the environment where your code runs. For SDK versions and code-based configuration, see [Log traces to an agent](log-traces-to-agent.md).

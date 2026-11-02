@@ -77,7 +77,7 @@ Studio requires a LangSmith API key to connect your local agent. Create a `.env`
 ```bash
 LANGSMITH_API_KEY=lsv2...
 LANGSMITH_AGENT_ID="<your-agent-id>"
-LANGSMITH_AGENT_ENVIRONMENT="production"
+LANGSMITH_AGENT_ENVIRONMENT="local"
 ```
 
 ### 4. Create a LangGraph config file

@@ -106,6 +106,8 @@ The following table shows tools that generate video, image, or audio assets:
 | [`Jigsawstack`](tools/jigsawstack.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/jigsawstack?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/jigsawstack) |
 | [`SIGNA`](https://github.com/codexvritra/signa/tree/main/sdk/langchain) | [  ![Downloads per month](https://img.shields.io/npm/dm/signa-langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/signa-langchain) |
 | [`NiaToolkit`](tools/nia.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@nozomioai/langchain-nia?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@nozomioai/langchain-nia) |
+| [`x402checkToolkit`](https://x402check.dev) | [  ![Downloads per month](https://img.shields.io/npm/dm/x402check-langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/x402check-langchain) |
+| [`HyperresearchAnswerTool`](https://hyperresearch.ai/docs/answers/langchain) | [  ![Downloads per month](https://img.shields.io/npm/dm/@hyperresearch/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@hyperresearch/langchain) |
 | [`Agent with AWS lambda`](tools/lambda_agent.md) | N/A |
 | [`Browserless`](https://browserless.io) | N/A |
 | [`JSON agent toolkit`](tools/json.md) | N/A |
