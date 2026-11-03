@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 549 pages and 0 subdirectories under blog."
+description: "Index of 550 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-549 pages here.
+550 pages here.
 
 ## Files
 
@@ -101,6 +101,7 @@ tags: [index, blog]
 - [Composio’s SWE agent advances open-source on SweBench with a 48.6% score using LangGraph and LangSmith](composio-swekit.md) - Build reliable AI coding agents with Composio&#39;s SWE-Kit. Achieved 48.6% on SWeBench using LangGraph state machines for real-world automation.
 - [Connections: Managed credentials and per-caller identity for Managed Deep Agents](connections-managed-credentials-and-per-caller-identity-for-managed-deep-agents.md) - Learn how Connections in Managed Deep Agents securely manage credentials, support per-user OAuth, and let agents act with each caller’s identity.
 - [Constructing knowledge graphs from text using OpenAI functions: Leveraging knowledge graphs to power LangChain Applications](constructing-knowledge-graphs-from-text-using-openai-functions.md) - Build knowledge graphs from text using OpenAI functions and LangChain. Extract structured data, power RAG apps, and enable multi-hop Q&amp;A with Neo4j.
+- [New context engineering challenges in late 2026](context-engineering-challenges-late-2026.md) - LangChain CEO Harrison Chase shares insights into the biggest harness engineering challenges with the emergence of proactive agents.
 - [Context Engineering: How Deep Agents Remember](context-engineering-deep-agents-remember.md) - Long-running agents degrade as context piles up. Learn how offloading, summarization, skills, subagents, and memory keep your agent&#39;s context window focused.
 - [Context Engineering](context-engineering-for-agents.md) - Context engineering strategies for AI agents: write, select, compress, and isolate context to optimize performance and manage long-running tasks.
 - [Context Engineering Starts with Retrieval](context-engineering-starts-with-retrieval.md) - Agents waste time and context on clumsy searches, oversized results and stale data. Learn the retrieval techniques LangChain&#39;s Deep Agents harness uses to get the right context in.

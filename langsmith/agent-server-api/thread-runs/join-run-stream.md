@@ -101,11 +101,38 @@ paths:
           in: header
         - required: false
           schema:
-            type: string
+            anyOf:
+              - type: string
+                enum:
+                  - values
+                  - messages
+                  - messages-tuple
+                  - tasks
+                  - checkpoints
+                  - updates
+                  - events
+                  - debug
+                  - custom
+                  - tools
+              - items:
+                  type: string
+                  enum:
+                    - values
+                    - messages
+                    - messages-tuple
+                    - tasks
+                    - checkpoints
+                    - updates
+                    - events
+                    - debug
+                    - custom
+                    - tools
+                type: array
             title: Stream Mode
             description: >-
-              The mode to stream the run in. If not provided, the default mode
-              will be used.
+              Stream modes to control which of the run's events are returned.
+              Only modes the run was created with have events. If not provided,
+              all of the run's events are returned.
           name: stream_mode
           in: query
         - required: false

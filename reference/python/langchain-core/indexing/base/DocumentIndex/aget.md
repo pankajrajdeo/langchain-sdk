@@ -50,4 +50,4 @@ List of documents that were found.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/864754c5e293fba981302408fa3e2cf2f5f2d889/libs/core/langchain_core/indexing/base.py#L631)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/indexing/base.py#L631)

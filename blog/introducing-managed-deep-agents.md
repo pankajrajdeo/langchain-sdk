@@ -10,6 +10,8 @@ tags: [blog, introducing-managed-deep-agents]
 
 # Introducing Managed Deep Agents
 
-- **Building agents is getting easier. Operating them is still the hard part.** Long-running agents need durable execution, tool access, sandboxes, memory, and tracing, and assembling that yourself takes time away from building the actual agent.
-- **Managed Deep Agents gives the open-source harness a durable home in LangSmith.** You keep the agent definition in your repo. We handle the runtime: threads, checkpointing, streaming, context, and observability.
-- **Agents that run over time need context that persists over time.** Context Hub gives your agent a managed place to store and update what it knows so it can improve from real usage, not just from what you put in the prompt at deploy time.
+- Managed Deep Agents runs the open-source Deep Agents harness on LangSmith. You write what the agent does, and LangSmith runs it in production.
+- An agent is a project folder. You test it locally with `mda dev` and ship it with `mda deploy`.
+- Production capabilities like durable memory, sandboxes and schedules are files you add to the project rather than services you build and run yourself.
+
+‍

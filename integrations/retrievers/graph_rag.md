@@ -70,24 +70,273 @@ Documents about animals.
 
 ### Prerequisites
 
-<details>
-  <summary>Toggle for Details</summary>
+1. Ensure you have Python 3.10 or later installed.
 
-  1. Ensure you have Python 3.10+ installed
+2. Install the following package that provides sample data:
 
-  2. Install the following package that provides sample data.
 ```bash
-     pip install -qU graph_rag_example_helpers
+   pip install -qU graph_rag_example_helpers
 ```
 
-  3. Download the test documents:
+3. Download the test documents:
+
 ```python
-     from graph_rag_example_helpers.datasets.animals import fetch_documents
-     animals = fetch_documents()
+   from graph_rag_example_helpers.datasets.animals import fetch_documents
+   animals = fetch_documents()
 ```
 
-  4.
-</details>
+4. Select an embedding model. The vector store examples below use the resulting `embeddings` object:
+
+> [tab] OpenAI
+>
+```shell
+> pip install -U "langchain-openai"
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("OPENAI_API_KEY"):
+>     os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
+>
+> from langchain_openai import OpenAIEmbeddings
+>
+> embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
+```
+
+> [tab] Azure
+>
+```shell
+> pip install -U "langchain-openai"
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("AZURE_OPENAI_API_KEY"):
+>     os.environ["AZURE_OPENAI_API_KEY"] = getpass.getpass("Enter API key for Azure: ")
+>
+> from langchain_openai import AzureOpenAIEmbeddings
+>
+> embeddings = AzureOpenAIEmbeddings(
+>     azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+>     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
+>     openai_api_version=os.environ["AZURE_OPENAI_API_VERSION"],
+> )
+```
+
+> [tab] Google Gemini
+>
+```shell
+> pip install -qU langchain-google-genai
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("GOOGLE_API_KEY"):
+>     os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
+>
+> from langchain_google_genai import GoogleGenerativeAIEmbeddings
+>
+> embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
+```
+
+> [tab] Gemini Enterprise Agent Platform
+>
+```shell
+> pip install -qU langchain-google-vertexai
+```
+>
+```python
+> from langchain_google_vertexai import VertexAIEmbeddings
+>
+> embeddings = VertexAIEmbeddings(model="text-embedding-005")
+```
+
+> [tab] AWS
+>
+```shell
+> pip install -qU langchain-aws
+```
+>
+```python
+> from langchain_aws import BedrockEmbeddings
+>
+> embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
+```
+
+> [tab] HuggingFace
+>
+```shell
+> pip install -qU langchain-huggingface
+```
+>
+```python
+> from langchain_huggingface import HuggingFaceEmbeddings
+>
+> embeddings = HuggingFaceEmbeddings(
+>     model_name="sentence-transformers/all-mpnet-base-v2",
+>     encode_kwargs={"normalize_embeddings": True},
+> )
+```
+
+> [tab] Ollama
+>
+```shell
+> pip install -qU langchain-ollama
+```
+>
+```python
+> from langchain_ollama import OllamaEmbeddings
+>
+> embeddings = OllamaEmbeddings(model="llama3")
+```
+
+> [tab] Cohere
+>
+```shell
+> pip install -qU langchain-cohere
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("COHERE_API_KEY"):
+>     os.environ["COHERE_API_KEY"] = getpass.getpass("Enter API key for Cohere: ")
+>
+> from langchain_cohere import CohereEmbeddings
+>
+> embeddings = CohereEmbeddings(model="embed-english-v3.0")
+```
+
+> [tab] MistralAI
+>
+```shell
+> pip install -qU langchain-mistralai
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("MISTRALAI_API_KEY"):
+>     os.environ["MISTRALAI_API_KEY"] = getpass.getpass("Enter API key for MistralAI: ")
+>
+> from langchain_mistralai import MistralAIEmbeddings
+>
+> embeddings = MistralAIEmbeddings(model="mistral-embed")
+```
+
+> [tab] Nomic
+>
+```shell
+> pip install -qU langchain-nomic
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("NOMIC_API_KEY"):
+>     os.environ["NOMIC_API_KEY"] = getpass.getpass("Enter API key for Nomic: ")
+>
+> from langchain_nomic import NomicEmbeddings
+>
+> embeddings = NomicEmbeddings(model="nomic-embed-text-v1.5")
+```
+
+> [tab] NVIDIA
+>
+```shell
+> pip install -qU langchain-nvidia-ai-endpoints
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("NVIDIA_API_KEY"):
+>     os.environ["NVIDIA_API_KEY"] = getpass.getpass("Enter API key for NVIDIA: ")
+>
+> from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
+>
+> embeddings = NVIDIAEmbeddings(model="NV-Embed-QA")
+```
+
+> [tab] Voyage AI
+>
+```shell
+> pip install -qU langchain-voyageai
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("VOYAGE_API_KEY"):
+>     os.environ["VOYAGE_API_KEY"] = getpass.getpass("Enter API key for Voyage AI: ")
+>
+> from langchain_voyageai import VoyageAIEmbeddings
+>
+> embeddings = VoyageAIEmbeddings(model="voyage-3")
+```
+
+> [tab] IBM watsonx
+>
+```shell
+> pip install -qU langchain-ibm
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("WATSONX_APIKEY"):
+>     os.environ["WATSONX_APIKEY"] = getpass.getpass("Enter API key for IBM watsonx: ")
+>
+> from langchain_ibm import WatsonxEmbeddings
+>
+> embeddings = WatsonxEmbeddings(
+>     model_id="ibm/slate-125m-english-rtrvr",
+>     url="https://us-south.ml.cloud.ibm.com",
+>     project_id="<WATSONX PROJECT_ID>",
+> )
+```
+
+> [tab] Fake
+>
+```shell
+> pip install -qU langchain-core
+```
+>
+```python
+> from langchain_core.embeddings import DeterministicFakeEmbedding
+>
+> embeddings = DeterministicFakeEmbedding(size=4096)
+```
+
+> [tab] Isaacus
+>
+```shell
+> pip install -qU langchain-isaacus
+```
+>
+```python
+> import getpass
+> import os
+>
+> if not os.environ.get("ISAACUS_API_KEY"):
+>     os.environ["ISAACUS_API_KEY"] = getpass.getpass("Enter API key for Isaacus: ")
+>
+> from langchain_isaacus import IsaacusEmbeddings
+>
+> embeddings = IsaacusEmbeddings(model="kanon-2-embedder")
+```
 
 ### Populating the vector store
 
@@ -122,9 +371,9 @@ vector store, consult the documentation about
 > For the `ASTRA_DB_API_ENDPOINT` and `ASTRA_DB_APPLICATION_TOKEN` credentials,
 > consult the [AstraDB Vector Store Guide](../vectorstores/astradb.md).
 >
-> :::note
-> For faster initial testing, consider using the **InMemory** Vector Store.
-> :::
+> > [!NOTE]
+> >
+> > For faster initial testing, consider using the **InMemory** Vector Store.
 
 > [tab] Chroma
 >
@@ -149,11 +398,11 @@ vector store, consult the documentation about
 >
 > For help creating a Chroma connection, consult the [Chroma Vector Store Guide](../vectorstores/chroma.md).
 >
-> :::note
-> Chroma doesn't support searching in nested metadata. Because of this
-> it is necessary to use the [`ShreddingTransformer`](https://datastax.github.io/graph-rag/reference/langchain_graph_retriever/transformers/#langchain_graph_retriever.transformers.shredding.ShreddingTransformer)
-> when inserting documents.
-> :::
+> > [!NOTE]
+> >
+> > Chroma doesn't support searching in nested metadata. Because of this
+> > it is necessary to use the [`ShreddingTransformer`](https://datastax.github.io/graph-rag/reference/langchain_graph_retriever/transformers/#langchain_graph_retriever.transformers.shredding.ShreddingTransformer)
+> > when inserting documents.
 
 > [tab] InMemory
 >
@@ -174,11 +423,11 @@ vector store, consult the documentation about
 > )
 ```
 >
-> :::tip
-> Using the `InMemoryVectorStore` is the fastest way to get started with Graph RAG
-> but it isn't recommended for production use. Instead it is recommended to use
-> **AstraDB** or **OpenSearch**.
-> :::
+> > [!TIP]
+> >
+> > Using the `InMemoryVectorStore` is the fastest way to get started with Graph RAG
+> > but it isn't recommended for production use. Instead it is recommended to use
+> > **AstraDB** or **OpenSearch**.
 
 ### Graph traversal
 
@@ -273,8 +522,6 @@ the query.
 ## Usage
 
 Following the examples above, `invoke` is used to initiate retrieval on a query.
-
-***
 
 ## API reference
 

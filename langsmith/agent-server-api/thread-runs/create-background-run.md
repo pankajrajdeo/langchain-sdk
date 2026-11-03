@@ -216,6 +216,7 @@ components:
                   - events
                   - debug
                   - custom
+                  - tools
               type: array
             - type: string
               enum:
@@ -228,6 +229,7 @@ components:
                 - events
                 - debug
                 - custom
+                - tools
           title: Stream Mode
           description: The stream mode(s) to use.
           default:
@@ -383,6 +385,14 @@ components:
             request, a client disconnecting, or a newer run superseding it.
             Server-generated.
           nullable: true
+        priority:
+          type: integer
+          minimum: -5
+          maximum: 5
+          title: Priority
+          description: >-
+            Queue priority level of the run, from -5 to 5. When all workers are
+            busy, runs at a lower level start first.
       type: object
       required:
         - run_id

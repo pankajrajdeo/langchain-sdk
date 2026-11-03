@@ -114,6 +114,27 @@ paths:
               update events.
           name: stream_modes
           in: query
+        - required: false
+          schema:
+            anyOf:
+              - type: string
+                enum:
+                  - lifecycle
+                  - run_modes
+                  - state_update
+              - type: array
+                items:
+                  type: string
+                  enum:
+                    - lifecycle
+                    - run_modes
+                    - state_update
+            title: Stream Mode
+            description: >-
+              Alias of `stream_modes`, the name the SDKs send. Ignored when
+              `stream_modes` is set.
+          name: stream_mode
+          in: query
       responses:
         '200':
           description: Success

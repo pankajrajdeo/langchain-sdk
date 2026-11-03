@@ -16,8 +16,6 @@ This will help you get started with Baseten embedding models using LangChain.
 
 Baseten provides inference designed for production applications. Built on the Baseten Inference Stack, these APIs deliver enterprise-grade performance and reliability for leading open-source or custom models: [https://www.baseten.co/library/](https://www.baseten.co/library/).
 
-### Integration details
-
 ## Setup
 
 To access Baseten embedding models you'll need to create a Baseten account, get an API key, and install the `langchain-baseten` integration package.

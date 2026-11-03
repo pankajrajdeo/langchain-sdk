@@ -1,12 +1,14 @@
 ---
 title: "Overview"
-description: "This overview covers topics related to managing users, organizations, workspaces, agents, and applications within LangSmith."
+description: "Learn how LangSmith organizes organizations, workspaces, and resources, and how API keys, roles, data retention, rate limits, and usage limits work."
 source: "https://docs.langchain.com/langsmith/administration-overview"
 category: "docs"
 tags: [docs, langsmith, administration-overview]
 ---
 
 # Overview
+
+> Learn how LangSmith organizes organizations, workspaces, and resources, and how API keys, roles, data retention, rate limits, and usage limits work.
 
 This overview covers topics related to managing users, organizations, workspaces, agents, and applications within LangSmith.
 
@@ -459,6 +461,8 @@ This 429 is the result of reaching your usage limit as configured by your organi
 This is thrown by our application and varies by organization based on their configured settings.
 
 #### Maximum runs per trace
+
+Each trace is limited to a maximum of 25,000 runs. Once the trace reaches this limit, LangSmith will reject any additional runs that you send for that trace.
 
 #### Run query endpoint
 

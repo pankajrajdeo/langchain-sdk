@@ -18,8 +18,6 @@ Both retrievers subclass `BaseRetriever` and ship in the `langchain-mongodb` pac
 
 This guide helps you get started with the MongoDB Atlas [retriever](../../deepagents/retrieval.md). For detailed documentation of all `MongoDBAtlasHybridSearchRetriever` features and configurations, see the [API reference](https://reference.langchain.com/python/langchain-mongodb/retrievers/MongoDBAtlasHybridSearchRetriever).
 
-### Integration details
-
 ## Setup
 
 You need a running MongoDB Atlas cluster with Atlas Search enabled. Create a cluster in the [Atlas UI](https://www.mongodb.com/cloud/atlas/register) if you do not already have one.

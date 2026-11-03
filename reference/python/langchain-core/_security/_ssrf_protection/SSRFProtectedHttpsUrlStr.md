@@ -20,4 +20,4 @@ SSRFProtectedHttpsUrlStr = Annotated[str, BeforeValidator(_validate_url_ssrf_htt
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/864754c5e293fba981302408fa3e2cf2f5f2d889/libs/core/langchain_core/_security/_ssrf_protection.py#L153)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/_security/_ssrf_protection.py#L153)

@@ -2018,7 +2018,7 @@ To mark a content block as a cache breakpoint, add `"prompt_cache_breakpoint": {
 > response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
 ```
 >
-> > [card] [View example trace](https://smith.langchain.com/public/aade8a0b-e869-4583-b0fe-f91d3bc786ad/r)
+> > [card] [View example trace](https://smith.langchain.com/public/88f69470-7508-462a-b6ea-8c615f85825e/r)
 > >
 > > Open a public LangSmith run for this example.
 
@@ -2052,7 +2052,7 @@ To mark a content block as a cache breakpoint, add `"prompt_cache_breakpoint": {
 > response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
 ```
 >
-> > [card] [View example trace](https://smith.langchain.com/public/a62d33a8-a1bd-4d34-b40b-5bc442aca92c/r)
+> > [card] [View example trace](https://smith.langchain.com/public/9d34cb00-8b64-483f-9df3-05d825919779/r)
 > >
 > > Open a public LangSmith run for this example.
 
@@ -2066,7 +2066,7 @@ content_block = {
 }
 ```
 
-> [card] [View example trace](https://smith.langchain.com/public/3cbf13f4-abd1-4ac7-a17d-3f20cb97f920/r)
+> [card] [View example trace](https://smith.langchain.com/public/c11d0016-51a7-4f34-85bc-56ad0580134e/r)
 >
 > Open a public LangSmith run for this example.
 
@@ -2098,7 +2098,7 @@ response = llm.invoke(
 )
 ```
 
-> [card] [View example trace](https://smith.langchain.com/public/f89103cb-5a44-4530-8bf9-258c30a76e9c/r)
+> [card] [View example trace](https://smith.langchain.com/public/a473bd99-7ae7-4133-88e4-5c6e1562c128/r)
 >
 > Open a public LangSmith run for this example.
 
@@ -2117,7 +2117,7 @@ print(f"Cache read tokens:     {cache_read}")
 print(f"Cache creation tokens: {cache_creation}")
 ```
 
-> [card] [View example trace](https://smith.langchain.com/public/53f314e3-ac7b-4980-8ad9-d9e9229d9f1b/r)
+> [card] [View example trace](https://smith.langchain.com/public/39027941-37f9-47bb-ad72-bb4980db6bf6/r)
 >
 > Open a public LangSmith run for this example.
 

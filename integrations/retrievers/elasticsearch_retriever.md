@@ -16,8 +16,6 @@ The `ElasticsearchRetriever` is a generic wrapper to enable flexible access to a
 
 This guide will help you get started with the Elasticsearch [retriever](../../deepagents/retrieval.md). For detailed documentation of all `ElasticsearchRetriever` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-elasticsearch/retrievers/ElasticsearchRetriever).
 
-### Integration details
-
 ## Setup
 
 There are two main ways to set up an Elasticsearch instance:

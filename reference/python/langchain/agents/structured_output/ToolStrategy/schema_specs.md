@@ -22,4 +22,4 @@ schema_specs: list[_SchemaSpec[Any]] = [_SchemaSpec(s) for s in _iter_variants(s
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/fbb8a35da7023ac0382c3b22f047337861bd3486/libs/langchain_v1/langchain/agents/structured_output.py#L267)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5dcec1858191a6b54cd843dd8e54d856e2e007cc/libs/langchain_v1/langchain/agents/structured_output.py#L268)

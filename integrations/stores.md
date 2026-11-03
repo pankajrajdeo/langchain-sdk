@@ -49,6 +49,7 @@ You can also implement your own custom store by extending the [`BaseStore`](http
 | [`HindsightStore`](https://docs.hindsight.vectorize.io/sdks/integrations/langgraph) | [  ![Downloads per month](https://static.pepy.tech/badge/hindsight-langgraph/month)](https://pypi.org/project/hindsight-langgraph/) |
 | [`OmemStore`](https://infrastructure.omem-cloud.com/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/omem-infrastructure/month)](https://pypi.org/project/omem-infrastructure/) |
 | [`PplStore`](https://github.com/ppl-crm/ppl-memory) | [  ![Downloads per month](https://static.pepy.tech/badge/ppl-memory/month)](https://pypi.org/project/ppl-memory/) |
+| [`MemtomemHybridStore`](https://github.com/memtomem/memtomem/blob/main/docs/guides/langgraph-hybrid-store.md) | [  ![Downloads per month](https://static.pepy.tech/badge/memtomem/month)](https://pypi.org/project/memtomem/) |
 | [`PostgresStore`](https://skamalj.github.io/agentstate-reducer/langgraph/stores/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-postgres/month)](https://pypi.org/project/langgraph-store-postgres/) |
 | [`BigtableByteStore`](stores/bigtable.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-google-bigtable/month)](https://pypi.org/project/langchain-google-bigtable/) |
 | [`DynamoDBStore`](https://skamalj.github.io/agentstate-reducer/langgraph/stores/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-dynamodb/month)](https://pypi.org/project/langgraph-store-dynamodb/) |

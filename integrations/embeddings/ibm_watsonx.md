@@ -14,10 +14,6 @@ tags: [docs, integrations, embeddings, ibm_watsonx]
 
 This example shows how to communicate with `watsonx.ai` models using `LangChain`.
 
-## Overview
-
-### Integration details
-
 ## Setup
 
 To access IBM watsonx.ai models you'll need to create an IBM watsonx.ai account, get an API key, and install the `langchain-ibm` integration package.

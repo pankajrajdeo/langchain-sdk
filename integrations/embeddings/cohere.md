@@ -12,10 +12,6 @@ tags: [docs, integrations, embeddings, cohere]
 
 This will help you get started with Cohere embedding models using LangChain. For detailed documentation on `CohereEmbeddings` features and configuration options, please refer to the [API reference](https://reference.langchain.com/python/langchain-cohere/embeddings/CohereEmbeddings).
 
-## Overview
-
-### Integration details
-
 ## Setup
 
 To access Cohere embedding models you'll need to create a Cohere account, get an API key, and install the `langchain-cohere` integration package.

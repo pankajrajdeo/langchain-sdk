@@ -68,6 +68,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > AI-scored financial news and SEC Form 4 insider events for agents and RAG.
 
+> [card] [AlterLabScrapeTool](https://pypi.org/project/langchain-alterlab/)
+>
+> Web scraping API with anti-bot handling and JavaScript rendering, as LangChain tools and a document loader.
+
 > [card] [Ads4GPTs](https://github.com/ADS4GPTs/ads4gpts)
 >
 > Advertising platform for GPT applications and AI services.
@@ -340,6 +344,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Local prompt-injection and jailbreak detection for LLM apps and agents.
 
+> [card] [BhivedMiddleware](https://bhived.ai/docs/integrations/langchain)
+>
+> Recalls shared lessons from the bhived network before model calls and adds tools to write verified lessons back.
+
 > [card] [Bidda](https://bidda.com/developers)
 >
 > Source-verified regulatory and compliance intelligence for LangChain agents.
@@ -439,6 +447,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [Clearsigned](https://clearsigned.com/integrations#langchain)
 >
 > Verifies a factual claim against live web evidence and returns a stance, confidence, and an offline-verifiable signed receipt.
+
+> [card] [CleaveToolkit](https://cleave.fi/docs/agents/langchain)
+>
+> DEX aggregator tools for split-route and one-step cross-chain swaps on six EVM chains.
 
 > [card] [cloro](https://cloro.dev/docs)
 >
@@ -1260,6 +1272,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Structured, versioned long-term memory for AI agents.
 
+> [card] [MemtomemHybridStore](https://github.com/memtomem/memtomem/blob/main/docs/guides/langgraph-hybrid-store.md)
+>
+> SQLite-backed LangGraph BaseStore with BM25, exact dense, weighted RRF hybrid search, TTL, and search diagnostics.
+
 > [card] [Mengram](https://mengram.io/docs)
 >
 > Long-term agent memory with semantic, episodic, and procedural types.
@@ -1811,6 +1827,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [Runloop](https://docs.runloop.ai/)
 >
 > Disposable devboxes for running code in isolated environments.
+
+> [card] [Runcrate](https://www.runcrate.ai/docs/sdks/langchain?utm_source=langchain\&utm_medium=directory\&utm_campaign=integrations)
+>
+> Runcrate serves open-weight models such as DeepSeek, Qwen, Llama and Kimi through one OpenAI-compatible API, billed per token.
 
 > [card] [Runcycles](https://runcycles.io)
 >

@@ -81,7 +81,7 @@ agent = define_deep_agent(
 )
 ```
 
-Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](managed-deep-agents-project-structure.md). To select the system prompt, skills, MCP servers, or sandbox for each run, see [Select configuration per run](#select-configuration-per-run).
+Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](managed-deep-agents-project-structure.md). To select the system prompt, skills, MCP servers, memory, or sandbox for each run, see [Select configuration per run](#select-configuration-per-run).
 
 `define_deep_agent` does not compile an agent. It returns a definition, and the managed runtime compiles it with [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent) at deploy time. The parameters below are the [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent) surface without the ones the runtime owns. See [Relationship to Deep Agents](managed-deep-agents-overview.md#relationship-to-deep-agents).
 
@@ -156,6 +156,7 @@ A factory can also select the resources that a static agent reads from project f
 | `skills` | Exposes all project skills. | Exposes only the selected skills. | `[]` exposes no skills. |
 | `mcp` | Uses the `mcp` declaration. | Uses only the selected MCP definitions. | `[]` exposes no MCP tools. |
 | `sandbox` | Uses the `sandbox` declaration. | Uses the supplied sandbox. | `None` disables the sandbox. |
+| `memory` | Uses the `memory` declaration. | Uses the selected layers. | `None` disables durable memory. |
 | `browser` | Uses root `browser.py`. | Uses the supplied browser definition. | `None` disables browser tools. |
 
 > [!NOTE]
@@ -194,7 +195,7 @@ def agent(runtime: ManagedServerRuntime[AppContext]):
     )
 ```
 
-Memory is not selected per run. Declare it in the project's memory file, and control access for each run with an `allow` policy. See [Control access to a layer](managed-deep-agents-memory.md#control-access-to-a-layer).
+A memory selection overrides the project's memory declaration for that run. User memory still mounts only for an authenticated person. See [Select layers for each run](managed-deep-agents-memory.md#select-layers-for-each-run).
 
 ### Keep the factory repeatable
 

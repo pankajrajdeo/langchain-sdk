@@ -120,7 +120,7 @@ graph.invoke({"user_input": "My"})
 # {'graph_output': 'My name is Lance'}
 ```
 
-> [card] [View example trace](https://smith.langchain.com/public/844a3f6b-b4d3-482d-bffe-7aab4ce59996/r)
+> [card] [View example trace](https://smith.langchain.com/public/370fbbfd-be69-4403-8123-716a0c2c9be6/r)
 >
 > Open a public LangSmith run for this example.
 
@@ -160,7 +160,7 @@ There are two subtle and important points to note here:
 > # {'foo': 'My name', 'user_input': 'My', 'graph_output': 'My name is Lance', 'bar': 'My name is'}
 ```
 >
-> > [card] [View example trace](https://smith.langchain.com/public/42d73712-132e-4b5b-8555-7cd43054859d/r)
+> > [card] [View example trace](https://smith.langchain.com/public/7d0325bb-3a2a-425f-a551-a636b297d0fb/r)
 > >
 > > Open a public LangSmith run for this example.
 >
@@ -343,108 +343,6 @@ const State = new StateSchema({
 >
 > Don't use `UntrackedValue` for data you need to persist across interrupts or time travel. Use regular state fields or `ReducedValue` for persistent data.
 
-### Type utilities
-
-LangGraph provides several type utilities for better TypeScript type safety when defining nodes and conditional edges.
-
-#### `GraphNode`
-
-Use `GraphNode` to type node functions defined outside the graph builder:
-
-```typescript
-import { GraphNode, StateSchema, Command } from "@langchain/langgraph";
-import { z } from "zod/v4";
-
-const State = new StateSchema({
-  count: z.number().default(0),
-  result: z.string(),
-});
-
-// Basic node - receives state, returns partial update
-const incrementNode: GraphNode<typeof State> = (state) => {
-  return { count: state.count + 1 };
-};
-
-// Async node
-const fetchNode: GraphNode<typeof State> = async (state, config) => {
-  const response = await fetch(`/api/data/${state.count}`);
-  return { result: await response.text() };
-};
-
-// Node with Command routing - specify valid destinations
-const routerNode: GraphNode<{ InputSchema: typeof State; Nodes: "process" | "done" }> = (state) => {
-  if (state.count >= 10) {
-    return new Command({ goto: "done" });
-  }
-  return new Command({
-    update: { count: state.count + 1 },
-    goto: "process"
-  });
-};
-```
-
-#### `State.Node` shorthand
-
-Each `StateSchema` instance has a `Node` property that provides a shorthand for typing nodes:
-
-```typescript
-const State = new StateSchema({
-  messages: MessagesValue,
-  step: z.string(),
-});
-
-// These are equivalent:
-const myNode1: GraphNode<typeof State> = (state) => ({ step: "done" });
-const myNode2: typeof State.Node = (state) => ({ step: "done" });
-```
-
-#### `ConditionalEdgeRouter`
-
-Use `ConditionalEdgeRouter` for routing functions in conditional edges (no state updates, just routing):
-
-```typescript
-import { ConditionalEdgeRouter, END } from "@langchain/langgraph";
-
-const State = new StateSchema({
-  shouldContinue: z.boolean(),
-  step: z.string(),
-});
-
-// Router returns node name(s) or END
-const router: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "process" | "summarize" }> = (state) => {
-  if (!state.shouldContinue) {
-    return END;
-  }
-  return state.step === "initial" ? "process" : "summarize";
-};
-
-// Use in graph
-graph.addConditionalEdges("check", router);
-```
-
-#### `StateSchema.State` and `StateSchema.Update`
-
-Extract the state and update types from a schema for use in custom type definitions:
-
-```typescript
-import { StateSchema } from "@langchain/langgraph";
-
-const MyStateSchema = new StateSchema({
-  messages: MessagesValue,
-  count: z.number().default(0),
-});
-
-// Extract the full state type
-type MyState = typeof MyStateSchema.State;
-// { messages: BaseMessage[], count: number }
-
-// Extract the update type (partial, with reducer input types)
-type MyUpdate = typeof MyStateSchema.Update;
-// { messages?: Messages, count?: number }
-```
-
-:::
-
 ### Working with messages in graph state
 
 #### Why use messages?
@@ -602,7 +500,7 @@ If a [node](#nodes) contains multiple operations, you may find it easier to impl
 > graph.invoke({"url": "https://www.example.com"}, config)
 ```
 >
-> > [card] [View example trace](https://smith.langchain.com/public/f143a551-c1e4-44fd-b87a-c42eaff62f4a/r)
+> > [card] [View example trace](https://smith.langchain.com/public/c8e10751-e588-4561-bf11-172fbe58d2af/r)
 > >
 > > Open a public LangSmith run for this example.
 
@@ -651,7 +549,7 @@ If a [node](#nodes) contains multiple operations, you may find it easier to impl
 > graph.invoke({"urls": ["https://www.example.com"]}, config)
 ```
 >
-> > [card] [View example trace](https://smith.langchain.com/public/3916f855-bb3a-45e3-8c04-bba43c1ca851/r)
+> > [card] [View example trace](https://smith.langchain.com/public/db2e7930-9eb7-46b1-9c8f-6ffced8a1d77/r)
 > >
 > > Open a public LangSmith run for this example.
 
@@ -946,7 +844,7 @@ resumed = graph.stream_events(Command(resume="yes"), config, version="v3")
 final = resumed.output
 ```
 
-> [card] [View example trace](https://smith.langchain.com/public/cbe5c88e-4c15-4ddd-8744-f1d8b4bd3d3b/r)
+> [card] [View example trace](https://smith.langchain.com/public/c382965e-ed0a-4428-923c-ad36c99d3f22/r)
 >
 > Open a public LangSmith run for this example.
 

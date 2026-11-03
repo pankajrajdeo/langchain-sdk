@@ -36,7 +36,7 @@ const zodSchema = z.object({
 });
 
 const metadataTagger = createMetadataTaggerFromZod(zodSchema, {
-  llm: new ChatOpenAI({ model: "gpt-3.5-turbo" }),
+  llm: new ChatOpenAI({ model: "gpt-5.4-mini" }),
 });
 
 const documents = [
@@ -115,7 +115,7 @@ const zodSchema = z.object({
 });
 
 const metadataTagger = createMetadataTaggerFromZod(zodSchema, {
-  llm: new ChatOpenAI({ model: "gpt-3.5-turbo" }),
+  llm: new ChatOpenAI({ model: "gpt-5.4-mini" }),
   prompt: PromptTemplate.fromTemplate(taggingChainTemplate),
 });
 

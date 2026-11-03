@@ -12,10 +12,6 @@ tags: [docs, integrations, embeddings, fireworks]
 
 This will help you get started with Fireworks embedding models using LangChain. For detailed documentation on `FireworksEmbeddings` features and configuration options, please refer to the [API reference](https://reference.langchain.com/python/langchain-fireworks/embeddings/FireworksEmbeddings).
 
-## Overview
-
-### Integration details
-
 ## Setup
 
 To access Fireworks embedding models you'll need to create a Fireworks account, get an API key, and install the `langchain-fireworks` integration package.

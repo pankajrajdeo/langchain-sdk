@@ -215,6 +215,7 @@ components:
                   - events
                   - debug
                   - custom
+                  - tools
               type: array
             - type: string
               enum:
@@ -227,6 +228,7 @@ components:
                 - events
                 - debug
                 - custom
+                - tools
           title: Stream Mode
           description: The stream mode(s) to use.
           default:

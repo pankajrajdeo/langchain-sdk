@@ -119,6 +119,7 @@ paths:
                 - multitask_strategy
                 - langsmith_session_name
                 - cancel_reason
+                - priority
             title: Select
             description: >-
               Specify which fields to return. If not provided, all fields are
@@ -219,6 +220,14 @@ components:
             request, a client disconnecting, or a newer run superseding it.
             Server-generated.
           nullable: true
+        priority:
+          type: integer
+          minimum: -5
+          maximum: 5
+          title: Priority
+          description: >-
+            Queue priority level of the run, from -5 to 5. When all workers are
+            busy, runs at a lower level start first.
       type: object
       required:
         - run_id

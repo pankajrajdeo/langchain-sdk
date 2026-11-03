@@ -76,6 +76,17 @@ paths:
             description: The ID of the thread.
           name: thread_id
           in: path
+        - description: >-
+            If true, delete checkpoints before responding instead of deferring
+            them to background deletion. Use when thread data must be gone on
+            return.
+          required: false
+          schema:
+            type: boolean
+            title: Sync Checkpoint Delete
+            default: false
+          name: sync_checkpoint_delete
+          in: query
       responses:
         '200':
           description: Success

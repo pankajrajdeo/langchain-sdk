@@ -39,4 +39,4 @@ with mock_now(datetime.datetime(2011, 2, 3, 10, 11)):
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/864754c5e293fba981302408fa3e2cf2f5f2d889/libs/core/langchain_core/utils/utils.py#L73)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/utils/utils.py#L73)

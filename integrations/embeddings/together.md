@@ -12,10 +12,6 @@ tags: [docs, integrations, embeddings, together]
 
 This will help you get started with Together embedding models using LangChain. For detailed documentation on `TogetherEmbeddings` features and configuration options, please refer to the [API reference](https://reference.langchain.com/python/langchain-together/embeddings/TogetherEmbeddings).
 
-## Overview
-
-### Integration details
-
 ## Setup
 
 To access Together embedding models you'll need to create a Together account, get an API key, and install the `langchain-together` integration package.

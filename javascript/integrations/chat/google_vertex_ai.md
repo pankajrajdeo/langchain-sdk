@@ -10,7 +10,7 @@ tags: [docs, javascript, integrations, chat, google_vertex_ai]
 
 > Integrate with the ChatVertexAI chat model using LangChain JavaScript.
 
-[Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform) is a service that exposes all foundation models available in Google Cloud, like `gemini-2.5-pro`, `gemini-2.5-flash`, etc.
+[Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform) is a service that exposes all foundation models available in Google Cloud, like `gemini-3.8-flash`, etc.
 It also provides some non-Google models such as [Anthropic's Claude](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude).
 
 This will help you getting started with `ChatVertexAI` [chat models](../../langchain/models.md). For detailed documentation of all `ChatVertexAI` features and configurations head to the [API reference](https://reference.langchain.com/javascript/langchain-google-vertexai/index/ChatVertexAI).
@@ -133,7 +133,7 @@ import { ChatVertexAI } from "@langchain/google-vertexai"
 // import { ChatVertexAI } from "@langchain/google-vertexai-web"
 
 const llm = new ChatVertexAI({
-    model: "gemini-2.5-flash",
+    model: "gemini-3.8-flash",
     temperature: 0,
     maxRetries: 2,
     // For web, authOptions.credentials
@@ -204,7 +204,7 @@ const searchRetrievalTool = {
 };
 
 const searchRetrievalModel = new ChatVertexAI({
-  model: "gemini-2.5-pro",
+  model: "gemini-3.8-flash",
   temperature: 0,
   maxRetries: 0,
 }).bindTools([searchRetrievalTool]);
@@ -250,7 +250,7 @@ const searchRetrievalToolWithDataset = {
 };
 
 const searchRetrievalModelWithDataset = new ChatVertexAI({
-  model: "gemini-2.5-pro",
+  model: "gemini-3.8-flash",
   temperature: 0,
   maxRetries: 0,
 }).bindTools([searchRetrievalToolWithDataset]);
@@ -280,7 +280,7 @@ Once you've created a cache, you can pass its id in as a runtime param as follow
 import { ChatVertexAI } from "@langchain/google-vertexai";
 
 const modelWithCachedContent = new ChatVertexAI({
-  model: "gemini-2.5-pro-002",
+  model: "gemini-3.8-flash",
   location: "us-east5",
 });
 
@@ -294,7 +294,7 @@ You can also bind this field directly onto the model instance:
 
 ```typescript
 const modelWithBoundCachedContent = new ChatVertexAI({
-  model: "gemini-2.5-pro-002",
+  model: "gemini-3.8-flash",
   location: "us-east5",
 }).bind({
   cachedContent:

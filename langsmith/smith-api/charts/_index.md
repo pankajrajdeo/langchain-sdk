@@ -19,7 +19,7 @@ tags: [index, langsmith, smith-api, charts]
 - [Org create chart](org-create-chart.md) - Deprecated: organization usage charts have been retired (HTTP 410).
 - [Org create section](org-create-section.md) - Deprecated: organization usage charts have been retired (HTTP 410).
 - [Org delete chart](org-delete-chart.md) - Deprecated: organization usage charts have been retired (HTTP 410).
-- [Org delete section](org-delete-section.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/org-charts/section/{section_id} Deprecated: organization usage charts have been retired (HTTP 410).
+- [Org delete section](org-delete-section.md) - Deprecated: organization usage charts have been retired (HTTP 410).
 - [Org read chart preview](org-read-chart-preview.md) - Deprecated: organization usage charts have been retired (HTTP 410).
 - [Org read charts](org-read-charts.md) - Deprecated: organization usage charts have been retired (HTTP 410).
 - [Org read sections](org-read-sections.md) - Deprecated: organization usage charts have been retired (HTTP 410).

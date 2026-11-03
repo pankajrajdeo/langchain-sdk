@@ -14,7 +14,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## What does it mean to "own your intelligence"?
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseJuly 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![How We Built Our Design Agent: one Slack prompt fanning into a launch film, slide deck, X post and blog chart](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adda72d5667dffba0fa8595_6adda7178937e3ba40233f86_design-agent-cover-4k.png)Agent ArchitectureDeep Agents
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseJuly 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c3176dbb11c11eaf324b_context-engineering-challenges-blog.png)Harrison's In the Loop
+
+## New context engineering challenges in late 2026
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 2, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![How We Built Our Design Agent: one Slack prompt fanning into a launch film, slide deck, X post and blog chart](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adda72d5667dffba0fa8595_6adda7178937e3ba40233f86_design-agent-cover-4k.png)Agent ArchitectureDeep Agents
 
 ## How We Built Our Design Agent
 
@@ -22,19 +26,19 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## The five components of building a "company harness"
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a56f3a3a4a725f72a70441f_caspar-b.jpeg)Harrison ChaseCaspar BroekhuizenOctober 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab452a9ab70e37bfc53e20a_LangSmith%20Engine%20V2.png)LangSmith
-
-## LangSmith Engine v2: Red teaming and automated testing
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a048d6ca69a48036bbf20b5_BenTannyhill.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8dd57932ec9d5fe5ad91d3_1727879885099.jpeg)Ben TannyhillTrammell SaltzgaberSeptember 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a56f3a3a4a725f72a70441f_caspar-b.jpeg)Harrison ChaseCaspar BroekhuizenOctober 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae37bc699a519b4b3d501e9_mda-v0.10-blog-cover-4k.png)Agent Architecture
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c3176dbb11c11eaf324b_context-engineering-challenges-blog.png)Harrison's In the Loop
+
+## New context engineering challenges in late 2026
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 2, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae37bc699a519b4b3d501e9_mda-v0.10-blog-cover-4k.png)Agent Architecture
 
 ## Managed Deep Agents v0.10: Browser use and asynchronous subagents
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Nathan DreznerSydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae2e4a5ec6ae4604757f269_cover-webflow-1200x675.png)Deep AgentsAgent ArchitectureDeployment
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Nathan DreznerSydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c5c17db7aee10f486fef_webflow-cover-1200x675.png)Deep AgentsAgent ArchitectureDeployment
 
 ## Browser Use in Managed Deep Agents
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Build great out-of-the-box user experiences with Managed Deep Agents
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)Nathan DreznerOctober 9, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac7d36b945be0a5d53cf3b4_Snyk%20blog%20thumbnail.png)Case Studies
-
-## How Snyk turned an internal support agent into a customer feature
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac7ce5f2a9c9db0e77b208e_1782961304448.jpeg)Oliver ArmstrongOctober 8, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)Nathan DreznerOctober 9, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min1...1 / 35
 
 #### We couldn't find anything matching that.
 

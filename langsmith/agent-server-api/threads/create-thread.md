@@ -197,6 +197,25 @@ components:
           type: object
           title: Interrupts
           description: The current interrupts of the thread.
+        run_priority:
+          type: integer
+          minimum: -5
+          maximum: 5
+          title: Run Priority
+          description: >-
+            The queue priority level of the thread's runs, from -5 (highest
+            priority) to 5 (lowest priority). Set at the thread's first run;
+            null until then.
+          nullable: true
+        fairness_group:
+          type: string
+          title: Fairness Group
+          description: >-
+            A label for the thread's runs, such as a tenant or customer ID, kept
+            for sharing workers fairly between tenants; scheduling doesn't use
+            it yet. Set at the thread's first run with a default of "default";
+            null until then.
+          nullable: true
         ttl:
           type: object
           title: TTL Info

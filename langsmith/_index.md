@@ -25,7 +25,7 @@ tags: [index, langsmith]
 - [Human-in-the-loop using server API](add-human-in-the-loop.md) - To review, edit, and approve tool calls in an agent or workflow, use LangGraph's human-in-the-loop features.
 - [Add metadata and tags to traces](add-metadata-tags.md) - LangSmith supports sending arbitrary metadata and tags along with traces.
 - [Account](admin.md) - Set up your LangSmith account, including API keys, profile configuration, integrations, and pricing tiers.
-- [Overview](administration-overview.md) - This overview covers topics related to managing users, organizations, workspaces, agents, and applications within LangSmith.
+- [Overview](administration-overview.md) - Learn how LangSmith organizes organizations, workspaces, and resources, and how API keys, roles, data retention, rate limits, and usage limits work.
 - [Configure AES encryption at rest](aes-encryption.md) - Configure built-in AES encryption and lazy key rotation for Agent Server data.
 - [Set up Agent Auth](agent-auth.md) - Enable secure access from agents to any system using OAuth 2.0 credentials with Agent Auth.
 - [Quickstart](agent-builder-quickstart.md) - Build an agent from a template

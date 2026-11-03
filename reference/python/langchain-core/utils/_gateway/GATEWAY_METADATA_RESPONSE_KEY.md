@@ -20,4 +20,4 @@ GATEWAY_METADATA_RESPONSE_KEY = 'lc_gateway_metadata'
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/864754c5e293fba981302408fa3e2cf2f5f2d889/libs/core/langchain_core/utils/_gateway.py#L29)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/utils/_gateway.py#L29)

@@ -14,7 +14,7 @@ tags: [docs, langsmith, online-evaluations-decision-models]
 
 > [!NOTE]
 >
-> When an online evaluator runs on any run within a trace, LangSmith upgrades the trace to [extended data retention](usage-and-billing.md#data-retention-auto-upgrades). This upgrade affects trace pricing.
+> When an online evaluator runs on any run within a trace, LangSmith upgrades the trace to [extended data retention](usage-and-billing.md#data-retention-auto-upgrades).
 
 ## Decision models
 

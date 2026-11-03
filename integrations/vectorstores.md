@@ -116,9 +116,10 @@ vector_store.similarity_search(
 )
 ```
 
-> [!IMPORTANT]
->   Support for metadata-based filtering varies between implementations.
->   Check the documentation of your chosen vector store for details.
+> [!NOTE]
+>
+> Support for metadata-based filtering varies between implementations.
+> Check the documentation of your chosen vector store for details.
 
 ## Top integrations
 

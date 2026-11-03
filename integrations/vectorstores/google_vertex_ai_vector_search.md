@@ -374,8 +374,9 @@ for doc in results:
     print(f"Content: {doc.page_content}\n")
 ```
 
-!!! note
-Text search does not support filters. Use `semantic_search()` or `similarity_search()` if you need filtering.
+> [!NOTE]
+>
+> Text search does not support filters. Use `semantic_search()` or `similarity_search()` if you need filtering.
 
 ### Hybrid Search
 

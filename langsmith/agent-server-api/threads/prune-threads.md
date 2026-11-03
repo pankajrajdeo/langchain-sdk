@@ -109,6 +109,14 @@ components:
             The prune strategy. 'delete' removes threads entirely. 'keep_latest'
             prunes old checkpoints but keeps threads and their latest state.
           default: delete
+        sync_checkpoint_delete:
+          type: boolean
+          title: Sync Checkpoint Delete
+          description: >-
+            If true, delete checkpoints before responding instead of deferring
+            them to background deletion. Use when thread data must be gone on
+            return.
+          default: false
       required:
         - thread_ids
       type: object

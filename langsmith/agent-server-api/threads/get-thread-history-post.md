@@ -125,6 +125,27 @@ components:
           $ref: '#/components/schemas/CheckpointConfig'
           title: Checkpoint
           description: Return states for this subgraph.
+        select:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                enum:
+                  - values
+                  - next
+                  - tasks
+                  - checkpoint
+                  - metadata
+                  - created_at
+                  - parent_checkpoint
+                  - interrupts
+              - type: string
+                pattern: ^values\.[A-Za-z0-9_-]+$
+          title: Select
+          description: >-
+            Specify which fields of each state to return. Use `values.<key>` to
+            return only that key of the state values, for example
+            `values.messages`. If not provided, all fields are returned.
       type: object
       title: ThreadStateSearch
     ThreadState:
