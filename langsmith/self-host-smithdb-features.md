@@ -54,7 +54,7 @@ Tracing, thread listing, datasets, and experiments work on either datastore.
 * [Enable SmithDB on self-hosted LangSmith](self-host-smithdb.md)
 * [Install SmithDB](self-host-smithdb-install.md)
 * [Migrate ClickHouse history to SmithDB](self-host-smithdb-migrate.md)
-* [Migrate to SmithDB-backed SDK methods](smithdb-sdk-migration.md)
+* [Migrate to SmithDB-backed APIs](smithdb-sdk-migration.md)
 
 ***
 

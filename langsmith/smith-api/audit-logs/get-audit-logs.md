@@ -179,6 +179,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/audit-logs:
@@ -407,6 +408,9 @@ components:
         - update_agent
         - delete_agent
         - create_agent_runtime_binding
+        - create_agent_environment_api_key
+        - delete_agent_environment_api_key
+        - create_tracer_session
         - update_tracer_session
         - delete_tracer_session
         - delete_tracer_sessions
@@ -546,6 +550,9 @@ components:
         - create_mcp_profile
         - update_mcp_profile
         - delete_mcp_profile
+        - create_agent_policy
+        - update_agent_policy
+        - delete_agent_policy
         - create_credential
         - read_credential_secret
         - read_credential_oauth2

@@ -174,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v2/runs/{run_id}/share:

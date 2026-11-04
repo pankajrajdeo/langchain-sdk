@@ -172,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/annotation-queues/{queue_id}/runs/resolve/{queue_run_id}:

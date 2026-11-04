@@ -170,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/orgs/current/roles:
@@ -216,6 +217,14 @@ components:
             type: string
           type: array
           title: Permissions
+          description: >-
+            Permissions to grant. Organization roles do not require
+            organization:read or organization:read-metadata. Omitting these
+            permissions may limit access to organization settings pages.
+        access_scope:
+          $ref: '#/components/schemas/AccessScope'
+          description: Scope of the role. Cannot be changed after creation.
+          default: workspace
       type: object
       required:
         - display_name

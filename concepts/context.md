@@ -91,7 +91,7 @@ graph.invoke(
 >     ...
 ```
 >
-> * See [the Graph API](../langgraph/use-graph-api.md#add-runtime-configuration) for details.
+> * See [the Graph API](../langgraph/graph-api-nodes.md#add-runtime-configuration) for details.
 
 > [tab] In a tool
 >

@@ -172,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/platform/hub/repos/{owner}/{repo}/directories:
@@ -211,31 +212,31 @@ paths:
         '400':
           description: Bad Request
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/directory.errorResponse'
         '401':
           description: Unauthorized
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/directory.errorResponse'
         '403':
           description: Forbidden
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/directory.errorResponse'
         '404':
           description: Not Found
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/directory.errorResponse'
         '500':
           description: Internal Server Error
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/directory.errorResponse'
       security:

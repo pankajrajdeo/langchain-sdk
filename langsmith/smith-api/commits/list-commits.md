@@ -1,6 +1,6 @@
 ---
 title: "List commits"
-description: "List commits for a repository, with pagination support. This endpoint supports both authenticated and unauthenticated access. Authenticated users can access private repositories; unauthenticated..."
+description: "List commits for a repository, newest first, with pagination support. Page with page_size and cursor: pass next_cursor from the previous response as cursor, until next_cursor is null. The limit and..."
 source: "https://docs.langchain.com/langsmith/smith-api/commits/list-commits"
 category: "docs"
 tags: [docs, langsmith, smith-api, commits, list-commits]
@@ -8,7 +8,9 @@ tags: [docs, langsmith, smith-api, commits, list-commits]
 
 # List commits
 
-> List commits for a repository, with pagination support.
+> List commits for a repository, newest first, with pagination support.
+Page with page_size and cursor: pass next_cursor from the previous response as cursor, until next_cursor is null.
+The limit and offset parameters are still accepted but cannot be combined with page_size or cursor.
 This endpoint supports both authenticated and unauthenticated access.
 Authenticated users can access private repositories; unauthenticated users can only access public repositories.
 The include_stats parameter controls whether download and view statistics are computed (defaults to true).
@@ -175,6 +177,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/commits/{owner}/{repo}:
@@ -183,7 +186,13 @@ paths:
         - commits
       summary: List commits
       description: >-
-        List commits for a repository, with pagination support.
+        List commits for a repository, newest first, with pagination support.
+
+        Page with page_size and cursor: pass next_cursor from the previous
+        response as cursor, until next_cursor is null.
+
+        The limit and offset parameters are still accepted but cannot be
+        combined with page_size or cursor.
 
         This endpoint supports both authenticated and unauthenticated access.
 
@@ -206,6 +215,16 @@ paths:
           schema:
             type: string
         - description: >-
+            Cursor is the next_cursor value from a previous response. Omit it to
+            request the first page.
+
+            Cannot be combined with limit or offset.
+          name: cursor
+          in: query
+          schema:
+            type: string
+            title: Cursor
+        - description: >-
             IncludeStats determines whether to compute num_downloads and
             num_views
           name: include_stats
@@ -214,23 +233,38 @@ paths:
             type: boolean
             default: true
             title: Include Stats
-        - description: Limit is the pagination limit
+        - description: 'Limit is the pagination limit. Deprecated: use page_size and cursor.'
           name: limit
           in: query
+          deprecated: true
           schema:
             type: integer
             maximum: 100
             minimum: 1
             default: 20
             title: Limit
-        - description: Offset is the pagination offset
+        - description: >-
+            Offset is the pagination offset. Deprecated: use page_size and
+            cursor.
           name: offset
           in: query
+          deprecated: true
           schema:
             type: integer
             minimum: 0
             title: Offset
             default: 0
+        - description: >-
+            PageSize is the maximum number of commits to return. Cannot be
+            combined with limit or offset.
+          name: page_size
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+            minimum: 1
+            title: Page Size
+            default: 20
         - description: >-
             Tag filters commits to only those with a specific tag (e.g.
             "production", "staging")
@@ -278,6 +312,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/commits.CommitWithLookups'
+        next_cursor:
+          description: >-
+            NextCursor is the cursor for the next page, or null when there are
+            no more commits.
+          anyOf:
+            - type: string
+            - type: 'null'
         total:
           description: Total number of commits
           type: integer

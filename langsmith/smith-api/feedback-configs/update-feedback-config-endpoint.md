@@ -170,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/feedback-configs:
@@ -223,6 +224,16 @@ components:
             - type: boolean
             - type: 'null'
           title: Is Lower Score Better
+        add_categories:
+          items:
+            $ref: '#/components/schemas/FeedbackCategory'
+          type: array
+          title: Add Categories
+        remove_categories:
+          items:
+            type: number
+          type: array
+          title: Remove Categories
       type: object
       required:
         - feedback_key
@@ -312,14 +323,6 @@ components:
       required:
         - type
       title: FeedbackConfig
-    FeedbackType:
-      type: string
-      enum:
-        - continuous
-        - categorical
-        - freeform
-      title: FeedbackType
-      description: Enum for feedback types.
     FeedbackCategory:
       properties:
         value:
@@ -336,6 +339,14 @@ components:
         - value
       title: FeedbackCategory
       description: Specific value and label pair for feedback
+    FeedbackType:
+      type: string
+      enum:
+        - continuous
+        - categorical
+        - freeform
+      title: FeedbackType
+      description: Enum for feedback types.
   securitySchemes:
     API Key:
       type: apiKey

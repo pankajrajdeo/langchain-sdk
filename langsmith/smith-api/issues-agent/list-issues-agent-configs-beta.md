@@ -174,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/platform/issues-agent:
@@ -315,10 +316,10 @@ components:
           type: array
         red_team_target:
           description: >-
-            RedTeamTarget is the external A2A endpoint red-team runs probe
-            instead
+            RedTeamTarget is the external endpoint red-team runs probe instead
+            of
 
-            of the validation deployment, or null when none is configured.
+            the validation deployment, or null when none is configured.
           anyOf:
             - allOf:
                 - $ref: '#/components/schemas/agent.RedTeamTargetView'
@@ -462,6 +463,23 @@ components:
           description: Auth describes the headers sent to this endpoint, and only to it.
           allOf:
             - $ref: '#/components/schemas/agent.TargetAuthStatus'
+        kind:
+          description: >-
+            Kind is the protocol the endpoint speaks: an A2A agent, or an HTTP
+            API
+
+            described by an OpenAPI spec.
+          type: string
+          enum:
+            - a2a
+            - openapi
+        openapi_operations:
+          description: |-
+            OpenAPIOperations are the operations probes may call on an OpenAPI
+            target, by operationId or as "METHOD /path".
+          type: array
+          items:
+            type: string
         url:
           type: string
     agent.TargetAuthStatus:

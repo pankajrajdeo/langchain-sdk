@@ -28,7 +28,7 @@ Studio allows you to edit prompts used inside individual nodes, directly from th
 
 ### Graph configuration
 
-Define your [configuration](../langgraph/use-graph-api.md#add-runtime-configuration) to specify prompt fields and their associated nodes using `langgraph_nodes` and `langgraph_type` keys.
+Define your [configuration](../langgraph/graph-api-nodes.md#add-runtime-configuration) to specify prompt fields and their associated nodes using `langgraph_nodes` and `langgraph_type` keys.
 
 #### `langgraph_nodes`
 

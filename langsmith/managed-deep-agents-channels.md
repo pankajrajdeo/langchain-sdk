@@ -14,7 +14,7 @@ A channel makes a managed deep agent available in an external messaging service.
 
 > [!NOTE]
 >
-> Managed Deep Agents is in **public [beta](release-stages.md)** on [LangSmith Cloud](cloud.md).
+> Managed Deep Agents is in **public [beta](release-stages.md)** on [LangSmith Cloud](cloud.md) and [Bring Your Own Cloud (BYOC)](byoc.md). Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC.
 
 ## Project structure
 

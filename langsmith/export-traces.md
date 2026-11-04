@@ -1,6 +1,6 @@
 ---
 title: "Query traces using the SDK"
-description: "The recommended way to query runs (the span data in LangSmith traces) is to use the list_runs method in the SDK or /runs/query endpoint in the API. LangSmith stores traces in a simple format that is..."
+description: "The recommended way to query runs (the span data in LangSmith traces) is to use the runs.query method in the SDK or the POST /api/v2/runs/query endpoint in the API. LangSmith stores traces in a..."
 source: "https://docs.langchain.com/langsmith/export-traces"
 category: "docs"
 tags: [docs, langsmith, export-traces]
@@ -8,18 +8,22 @@ tags: [docs, langsmith, export-traces]
 
 # Query traces using the SDK
 
-The recommended way to query [runs](observability-concepts.md#runs) (the span data in LangSmith traces) is to use the `list_runs` method in the [SDK](https://reference.langchain.com/python/langsmith/) or `/runs/query` endpoint in the [API](smith-api-ref.md). LangSmith stores traces in a simple format that is specified in the [Run (span) data format](run-data-format.md).
+The recommended way to query [runs](observability-concepts.md#runs) (the span data in LangSmith traces) is to use the `runs.query` method in the [SDK](https://reference.langchain.com/python/langsmith/) or the `POST /api/v2/runs/query` endpoint in the [API](smith-api-ref.md). LangSmith stores traces in a simple format that is specified in the [Run (span) data format](run-data-format.md).
 
 This page covers:
 
 * [Use filter arguments](#use-filter-arguments): keyword-based filtering using SDK parameters.
 * [Use filter query language](#use-filter-query-language): complex queries using LangSmith's filter syntax.
-* [Query trace trees with child-run predicates](#query-trace-trees-with-child-run-predicates): combine server-side narrowing with local child-run traversal.
-* [Rate limits](#rate-limits): per-tenant limits and best practices for staying within them.
+* [Query trace trees with child-run predicates](#query-trace-trees-with-child-run-predicates): combine server-side narrowing with the runs of each trace.
+* [Rate limits](#rate-limits): limits and best practices.
 
 > [!NOTE]
 >
 > If you are looking to export a large volume of traces, we recommend that you use the [Bulk Data Export](data-export.md) functionality, as it will better handle large data volumes and will support automatic retries and parallelization across partitions.
+
+> [!NOTE]
+>
+> `runs.query` replaces `list_runs` / `listRuns` and `read_run` / `readRun`, which are deprecated. LangSmith Cloud removes them on January 31, 2027, and self-hosted LangSmith removes them in v0.19. The new methods require `langsmith>=0.10.15` (Python) or `langsmith>=0.8.9` (TypeScript) and, on self-hosted LangSmith, v0.16 or later. For the full list of changes, see the [migration guide](smithdb-sdk-migration-query-runs.md).
 
 > [!NOTE]
 >
@@ -33,22 +37,33 @@ For simple queries, you don't have to rely on our query syntax. You can use the 
 >
 > **Prerequisites**
 >
-> Initialize the client before running the below code snippets.
+> Initialize the client, look up the project ID, and set a time window before running the below code snippets:
+>
+> * `runs.query` takes project IDs, not a project name.
+> * It only looks back **1 day** unless you pass `min_start_time`. The snippets below use a 7-day window. One query can span at most 401 days.
+> * It returns only the run `ID` unless you pass `selects` (uppercase field names such as `NAME`, `INPUTS`, `OUTPUTS`).
+> * In Python, `client.runs` is async: run the snippets inside an `async` function, for example with `asyncio.run()`. Each query returns an async iterator that pages through the results for you.
 
 **Python**
 
 ```python
+from datetime import datetime, timedelta, timezone
+
 from langsmith import Client
 
 client = Client()
+project_id = str(client.read_project(project_name="<your_project>").id)
+since = datetime.now(timezone.utc) - timedelta(days=7)
 ```
 
 **TypeScript**
 
 ```typescript
-import { Client, Run } from "langsmith";
+import { Client } from "langsmith";
 
 const client = new Client();
+const projectId = (await client.readProject({ projectName: "<your_project>" })).id;
+const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
 ```
 
 **Java**
@@ -56,8 +71,14 @@ const client = new Client();
 ```java
 import com.langchain.smith.client.LangsmithClient;
 import com.langchain.smith.client.okhttp.LangsmithOkHttpClient;
+import com.langchain.smith.models.runs.RunQueryV2Params;
+import java.time.OffsetDateTime;
 
 LangsmithClient client = LangsmithOkHttpClient.fromEnv();
+String projectId = "<your_project_id>";
+OffsetDateTime since = OffsetDateTime.now().minusDays(7);
+
+// Run any of the queries below with: client.runs().queryV2(params)
 ```
 
 Below are some examples of ways to list runs using keyword arguments:
@@ -67,28 +88,39 @@ Below are some examples of ways to list runs using keyword arguments:
 **Python**
 
 ```python
-project_runs = client.list_runs(project_name="<your_project>")
+project_runs = [
+    run
+    async for run in client.runs.query(
+        project_ids=[project_id],
+        min_start_time=since,
+        selects=["ID", "NAME", "RUN_TYPE", "START_TIME"],
+    )
+]
 ```
 
 **TypeScript**
 
 ```typescript
-// Download runs in a project
-const projectRuns: Run[] = [];
-for await (const run of client.listRuns({
-  projectName: "<your_project>",
+const projectRuns = [];
+for await (const run of client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  selects: ["ID", "NAME", "RUN_TYPE", "START_TIME"],
 })) {
   projectRuns.push(run);
-};
+}
 ```
 
 **Java**
 
 ```java
-import com.langchain.smith.models.runs.RunQueryParams;
+import com.langchain.smith.models.runs.RunSelectField;
 
-RunQueryParams projectRuns = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params projectRuns = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
+    .addSelect(RunSelectField.ID)
+    .addSelect(RunSelectField.NAME)
     .build();
 ```
 
@@ -97,37 +129,38 @@ RunQueryParams projectRuns = RunQueryParams.builder()
 **Python**
 
 ```python
-todays_llm_runs = client.list_runs(
-    project_name="<your_project>",
-    start_time=datetime.now() - timedelta(days=1),
-    run_type="llm",
-)
+todays_llm_runs = [
+    run
+    async for run in client.runs.query(
+        project_ids=[project_id],
+        min_start_time=datetime.now(timezone.utc) - timedelta(days=1),
+        run_type="LLM",
+    )
+]
 ```
 
 **TypeScript**
 
 ```typescript
-const todaysLlmRuns: Run[] = [];
-for await (const run of client.listRuns({
-  projectName: "<your_project>",
-  startTime: new Date(Date.now() - 1000 * 60 * 60 * 24),
-  runType: "llm",
+const todaysLlmRuns = [];
+for await (const run of client.runs.query({
+  project_ids: [projectId],
+  min_start_time: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+  run_type: "LLM",
 })) {
   todaysLlmRuns.push(run);
-};
+}
 ```
 
 **Java**
 
 ```java
-OffsetDateTime now = OffsetDateTime.now();
-OffsetDateTime twentyFourHoursAgo = now.minus(24, ChronoUnit.HOURS);
+import com.langchain.smith.models.runs.RunType;
 
-RunQueryParams todaysLlmRuns = RunQueryParams.builder()
-    .runType(RunQueryParams.RunType.LLM)
-    .startTime(twentyFourHoursAgo)
-    .addSession("<your_project>")
-    .limit(50L)
+RunQueryV2Params todaysLlmRuns = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(OffsetDateTime.now().minusDays(1))
+    .runType(RunType.LLM)
     .build();
 ```
 
@@ -138,31 +171,29 @@ Root runs are runs that have no parents. These are assigned a value of `True` fo
 **Python**
 
 ```python
-root_runs = client.list_runs(
-    project_name="<your_project>",
-    is_root=True
+root_runs = client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    is_root=True,
 )
 ```
 
 **TypeScript**
 
 ```typescript
-const rootRuns: Run[] = [];
-for await (const run of client.listRuns({
-  projectName: "<your_project>",
-  isRoot: 1,
-})) {
-  rootRuns.push(run);
-};
+const rootRuns = client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  is_root: true,
+});
 ```
 
 **Java**
 
 ```java
-import com.langchain.smith.models.runs.RunQueryParams;
-
-RunQueryParams rootRuns = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params rootRuns = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .isRoot(true)
     .build();
 ```
@@ -172,47 +203,46 @@ RunQueryParams rootRuns = RunQueryParams.builder()
 **Python**
 
 ```python
-correct_runs = client.list_runs(project_name="<your_project>", error=False)
+correct_runs = client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    has_error=False,
+)
 ```
 
 **TypeScript**
 
 ```typescript
-const correctRuns: Run[] = [];
-for await (const run of client.listRuns({
-  projectName: "<your_project>",
-  error: false,
-})) {
-  correctRuns.push(run);
-};
+const correctRuns = client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  has_error: false,
+});
 ```
 
 **Java**
 
 ```java
-import com.langchain.smith.models.runs.RunQueryParams;
-
-RunQueryParams noErrorRuns = RunQueryParams.builder()
-    .addSession("<your_project>")
-    .error(false)
+RunQueryV2Params noErrorRuns = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
+    .hasError(false)
     .build();
 ```
 
 ### List runs by run ID
 
-> [!WARNING]
->
-> **Ignores Other Arguments**
->
-> If you provide a list of run IDs in the way described above, it will ignore all other filtering arguments like `project_name`, `run_type`, etc. and directly return the runs matching the given IDs.
-
-If you have a list of run IDs, you can list them directly:
+If you have a list of run IDs, you can list them directly. Pass the project ID too; you can combine `ids` with the other filters.
 
 **Python**
 
 ```python
-run_ids = ['a36092d2-4ad5-4fb4-9c0d-0dba9a2ed836','9398e6be-964f-4aa4-8ae9-ad78cd4b7074']
-selected_runs = client.list_runs(id=run_ids)
+run_ids = ["a36092d2-4ad5-4fb4-9c0d-0dba9a2ed836", "9398e6be-964f-4aa4-8ae9-ad78cd4b7074"]
+selected_runs = client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    ids=run_ids,
+)
 ```
 
 **TypeScript**
@@ -222,34 +252,36 @@ const runIds = [
   "a36092d2-4ad5-4fb4-9c0d-0dba9a2ed836",
   "9398e6be-964f-4aa4-8ae9-ad78cd4b7074",
 ];
-const selectedRuns: Run[] = [];
-for await (const run of client.listRuns({
-  id: runIds,
-})) {
-  selectedRuns.push(run);
-};
+const selectedRuns = client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  ids: runIds,
+});
 ```
 
 **Java**
 
 ```java
-import com.langchain.smith.models.runs.RunQueryParams;
-
-RunQueryParams runIdsRuns = RunQueryParams.builder()
-    .addSession("<your_project>")
-    .id(runIds)
+RunQueryV2Params runIdsRuns = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
+    .ids(runIds)
     .build();
 ```
 
 ### Fetch a single run by ID
 
-To fetch a single run (trace) by its ID, use the `read_run` method. This is useful when you have a specific trace ID (for example, from a LangSmith share link like `https://smith.langchain.com/public/<trace-id>/r`) and want to retrieve its full data.
+To fetch a single run by its ID, use the `runs.retrieve` method. It needs the ID of the project the run belongs to. For a run from a public share link, use the [public runs methods](smithdb-sdk-migration-feedback.md) instead.
 
 **Python**
 
 ```python
 run_id = "a36092d2-4ad5-4fb4-9c0d-0dba9a2ed836"
-run = client.read_run(run_id)
+run = await client.runs.retrieve(
+    run_id,
+    project_id=project_id,
+    selects=["NAME", "INPUTS", "OUTPUTS"],
+)
 
 # Access run data
 print(run.inputs)
@@ -261,7 +293,10 @@ print(run.name)
 
 ```typescript
 const runId = "a36092d2-4ad5-4fb4-9c0d-0dba9a2ed836";
-const run = await client.readRun(runId);
+const run = await client.runs.retrieve(runId, {
+  project_id: projectId,
+  selects: ["NAME", "INPUTS", "OUTPUTS"],
+});
 
 // Access run data
 console.log(run.inputs);
@@ -272,12 +307,13 @@ console.log(run.name);
 **Java**
 
 ```java
-import com.langchain.smith.models.runs.RunQueryParams;
+import com.langchain.smith.models.runs.Run;
+import com.langchain.smith.models.runs.RunRetrieveV2Params;
 
-RunQueryParams runIdRun = RunQueryParams.builder()
-    .addSession("<your_project>")
-    .addId(runId)
-    .build();
+Run run = client.runs().retrieveV2(
+    runId,
+    RunRetrieveV2Params.builder().projectId(projectId).build()
+);
 ```
 
 > [!TIP]
@@ -292,7 +328,7 @@ For more complex queries, you can use the filter query language. The following e
 
 ### List all root runs in a conversational thread
 
-This is the way to fetch runs in a conversational thread. For more information on setting up threads, refer to our [how-to guide on setting up threads](threads.md).
+This is the way to fetch runs in a conversational thread. For more information on setting up threads, refer to our [how-to guide on setting up threads](threads.md). To list threads and their traces directly, see [Query threads](query-threads.md).
 Threads are grouped by setting a shared thread ID. The LangSmith UI lets you use either of the following metadata keys: `session_id` or `thread_id`. The session ID is also known as the tracing project ID. The following query matches on either of them.
 
 **Python**
@@ -300,10 +336,11 @@ Threads are grouped by setting a shared thread ID. The LangSmith UI lets you use
 ```python
 group_key = "<your_thread_id>"
 filter_string = f'and(in(metadata_key, ["session_id","thread_id"]), eq(metadata_value, "{group_key}"))'
-thread_runs = client.list_runs(
-    project_name="<your_project>",
+thread_runs = client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
     filter=filter_string,
-    is_root=True
+    is_root=True,
 )
 ```
 
@@ -312,21 +349,17 @@ thread_runs = client.list_runs(
 ```typescript
 const groupKey = "<your_thread_id>";
 const filterString = `and(in(metadata_key, ["session_id","thread_id"]), eq(metadata_value, "${groupKey}"))`;
-const threadRuns: Run[] = [];
-for await (const run of client.listRuns({
-  projectName: "<your_project>",
+const threadRuns = client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
   filter: filterString,
-  isRoot: true
-})) {
-  threadRuns.push(run);
-};
+  is_root: true,
+});
 ```
 
 **Java**
 
 ```java
-import com.langchain.smith.models.runs.RunQueryParams;
-
 String groupKey = "<your_thread_id>";
 
 String filterString = String.format(
@@ -334,9 +367,11 @@ String filterString = String.format(
     groupKey
 );
 
-RunQueryParams threadRuns = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params threadRuns = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter(filterString)
+    .isRoot(true)
     .build();
 ```
 
@@ -345,28 +380,31 @@ RunQueryParams threadRuns = RunQueryParams.builder()
 **Python**
 
 ```python
-client.list_runs(
-    project_name="<your_project>",
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
     filter='eq(name, "extractor")',
-    trace_filter='and(eq(feedback_key, "user_score"), eq(feedback_score, 1))'
+    trace_filter='and(eq(feedback_key, "user_score"), eq(feedback_score, 1))',
 )
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({
-  projectName: "<your_project>",
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
   filter: 'eq(name, "extractor")',
-  traceFilter: 'and(eq(feedback_key, "user_score"), eq(feedback_score, 1))'
-})
+  trace_filter: 'and(eq(feedback_key, "user_score"), eq(feedback_score, 1))',
+});
 ```
 
 **Java**
 
 ```java
-RunQueryParams extractorRuns = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params extractorRuns = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("eq(name, \"extractor\")")
     .traceFilter("and(eq(feedback_key, \"user_score\"), eq(feedback_score, 1))")
     .build();
@@ -377,50 +415,56 @@ RunQueryParams extractorRuns = RunQueryParams.builder()
 **Python**
 
 ```python
-client.list_runs(
-    project_name="<your_project>",
-    filter='and(eq(feedback_key, "star_rating"), gt(feedback_score, 4))'
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter='and(eq(feedback_key, "star_rating"), gt(feedback_score, 4))',
 )
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({
-  projectName: "<your_project>",
-  filter: 'and(eq(feedback_key, "star_rating"), gt(feedback_score, 4))'
-})
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: 'and(eq(feedback_key, "star_rating"), gt(feedback_score, 4))',
+});
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(eq(feedback_key, \"star_rating\"), gt(feedback_score, 4))")
     .build();
 ```
 
 ### List runs that took longer than 5 seconds to complete
 
+Pass the latency as a number of seconds.
+
 **Python**
 
 ```python
-client.list_runs(project_name="<your_project>", filter='gt(latency, "5s")')
+client.runs.query(project_ids=[project_id], min_start_time=since, filter="gt(latency, 5)")
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({projectName: "<your_project>", filter: 'gt(latency, "5s")'})
+client.runs.query({ project_ids: [projectId], min_start_time: since, filter: "gt(latency, 5)" });
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
-    .filter("gt(latency, \"5s\")")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
+    .filter("gt(latency, 5)")
     .build();
 ```
 
@@ -429,43 +473,55 @@ RunQueryParams runs = RunQueryParams.builder()
 **Python**
 
 ```python
-client.list_runs(project_name="<your_project>", filter='neq(status, "error")')
+client.runs.query(project_ids=[project_id], min_start_time=since, filter='neq(status, "error")')
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({projectName: "<your_project>", filter: 'neq(status, "error")'})
+client.runs.query({ project_ids: [projectId], min_start_time: since, filter: 'neq(status, "error")' });
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("neq(status, \"error\")")
     .build();
 ```
 
 ### List all runs where start\_time is greater than a specific timestamp
 
+To bound the time window itself, prefer the `min_start_time` and `max_start_time` arguments; a `start_time` filter only narrows results inside that window.
+
 **Python**
 
 ```python
-client.list_runs(project_name="<your_project>", filter='gt(start_time, "2023-07-15T12:34:56Z")')
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter='gt(start_time, "2023-07-15T12:34:56Z")',
+)
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({projectName: "<your_project>", filter: 'gt(start_time, "2023-07-15T12:34:56Z")'})
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: 'gt(start_time, "2023-07-15T12:34:56Z")',
+});
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("gt(start_time, \"2023-07-15T12:34:56Z\")")
     .build();
 ```
@@ -475,20 +531,21 @@ RunQueryParams runs = RunQueryParams.builder()
 **Python**
 
 ```python
-client.list_runs(project_name="<your_project>", filter='search("substring")')
+client.runs.query(project_ids=[project_id], min_start_time=since, filter='search("substring")')
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({projectName: "<your_project>", filter: 'search("substring")'})
+client.runs.query({ project_ids: [projectId], min_start_time: since, filter: 'search("substring")' });
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("search(\"substring\")")
     .build();
 ```
@@ -498,50 +555,56 @@ RunQueryParams runs = RunQueryParams.builder()
 **Python**
 
 ```python
-client.list_runs(project_name="<your_project>", filter='has(tags, "2aa1cf4")')
+client.runs.query(project_ids=[project_id], min_start_time=since, filter='has(tags, "2aa1cf4")')
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({projectName: "<your_project>", filter: 'has(tags, "2aa1cf4")'})
+client.runs.query({ project_ids: [projectId], min_start_time: since, filter: 'has(tags, "2aa1cf4")' });
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("has(tags, \"2aa1cf4\")")
     .build();
 ```
 
 ### List all runs that started after a specific timestamp and either have a non-error status or a "Correctness" feedback score equal to 0
 
+Pass the timestamp as `min_start_time` and keep the `or` condition in `filter`.
+
 **Python**
 
 ```python
-client.list_runs(
-  project_name="<your_project>",
-  filter='and(gt(start_time, "2023-07-15T12:34:56Z"), or(neq(status, "error"), and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))'
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=datetime(2026, 7, 15, 12, 34, 56, tzinfo=timezone.utc),
+    filter='or(neq(status, "error"), and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0)))',
 )
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({
-  projectName: "<your_project>",
-  filter: 'and(gt(start_time, "2023-07-15T12:34:56Z"), or(neq(status, "error"), and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0))))'
-})
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: "2026-07-15T12:34:56Z",
+  filter: 'or(neq(status, "error"), and(eq(feedback_key, "Correctness"), eq(feedback_score, 0.0)))',
+});
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
-    .filter("and(gt(start_time, \"2023-07-15T12:34:56Z\"), or(neq(status, \"error\"), and(eq(feedback_key, \"Correctness\"), eq(feedback_score, 0.0))))")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(OffsetDateTime.parse("2026-07-15T12:34:56Z"))
+    .filter("or(neq(status, \"error\"), and(eq(feedback_key, \"Correctness\"), eq(feedback_score, 0.0)))")
     .build();
 ```
 
@@ -550,26 +613,29 @@ RunQueryParams runs = RunQueryParams.builder()
 **Python**
 
 ```python
-client.list_runs(
-  project_name="<your_project>",
-  filter='and(or(has(tags, "experimental"), has(tags, "beta")), gt(latency, 2))'
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter='and(or(has(tags, "experimental"), has(tags, "beta")), gt(latency, 2))',
 )
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({
-  projectName: "<your_project>",
-  filter: 'and(or(has(tags, "experimental"), has(tags, "beta")), gt(latency, 2))'
-})
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: 'and(or(has(tags, "experimental"), has(tags, "beta")), gt(latency, 2))',
+});
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(or(has(tags, 'experimental'), has(tags, 'beta')), gt(latency, 2))")
     .build();
 ```
@@ -581,26 +647,29 @@ You can use the `search()` function without any specific field to do a full text
 **Python**
 
 ```python
-client.list_runs(
-  project_name="<your_project>",
-  filter='search("image classification")'
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter='search("image classification")',
 )
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({
-  projectName: "<your_project>",
-  filter: 'search("image classification")'
-})
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: 'search("image classification")',
+});
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("search(\"image classification\")")
     .build();
 ```
@@ -612,19 +681,17 @@ If you want to check for the presence of metadata, you can use the `eq` operator
 **Python**
 
 ```python
-to_search = {
-    "user_id": ""
-}
-
 # Check for any run with the "user_id" metadata key
-client.list_runs(
-  project_name="default",
-  filter="eq(metadata_key, 'user_id')"
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter="eq(metadata_key, 'user_id')",
 )
 # Check for runs with user_id=4070f233-f61e-44eb-bff1-da3c163895a3
-client.list_runs(
-  project_name="default",
-  filter="and(eq(metadata_key, 'user_id'), eq(metadata_value, '4070f233-f61e-44eb-bff1-da3c163895a3'))"
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter="and(eq(metadata_key, 'user_id'), eq(metadata_value, '4070f233-f61e-44eb-bff1-da3c163895a3'))",
 )
 ```
 
@@ -632,27 +699,31 @@ client.list_runs(
 
 ```typescript
 // Check for any run with the "user_id" metadata key
-client.listRuns({
-  projectName: 'default',
-  filter: `eq(metadata_key, 'user_id')`
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: `eq(metadata_key, 'user_id')`,
 });
 // Check for runs with user_id=4070f233-f61e-44eb-bff1-da3c163895a3
-client.listRuns({
-  projectName: 'default',
-  filter: `and(eq(metadata_key, 'user_id'), eq(metadata_value, '4070f233-f61e-44eb-bff1-da3c163895a3'))`
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: `and(eq(metadata_key, 'user_id'), eq(metadata_value, '4070f233-f61e-44eb-bff1-da3c163895a3'))`,
 });
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runsWithUserId = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("eq(metadata_key, 'user_id')")
     .build();
 
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runsForUser = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(eq(metadata_key, 'user_id'), eq(metadata_value, '4070f233-f61e-44eb-bff1-da3c163895a3'))")
     .build();
 ```
@@ -664,26 +735,29 @@ A common pattern is to add environment information to your traces via metadata. 
 **Python**
 
 ```python
-client.list_runs(
-  project_name="default",
-  filter="and(eq(metadata_key, 'environment'), eq(metadata_value, 'production'))"
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter="and(eq(metadata_key, 'environment'), eq(metadata_value, 'production'))",
 )
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({
-  projectName: 'default',
-  filter: `and(eq(metadata_key, 'environment'), eq(metadata_value, 'production'))`
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: `and(eq(metadata_key, 'environment'), eq(metadata_value, 'production'))`,
 });
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(eq(metadata_key, 'environment'), eq(metadata_value, 'production'))")
     .build();
 ```
@@ -695,26 +769,29 @@ A common way to associate traces in the same conversation is by using a shared t
 **Python**
 
 ```python
-client.list_runs(
-  project_name="default",
-  filter="and(eq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))"
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter="and(eq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))",
 )
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({
-  projectName: 'default',
-  filter: `and(eq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))`
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: `and(eq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))`,
 });
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(eq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))")
     .build();
 ```
@@ -727,27 +804,31 @@ You can use negative filtering on metadata, input, and output key-value pairs to
 
 ```python
 # Find all runs where the metadata does not contain a "thread_id" key
-client.list_runs(
-  project_name="default",
-  filter="and(neq(metadata_key, 'thread_id'))"
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter="and(neq(metadata_key, 'thread_id'))",
 )
 
 # Find all runs where the thread_id in metadata is not "a1b2c3d4-e5f6-7890"
-client.list_runs(
-  project_name="default",
-  filter="and(eq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))"
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter="and(eq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))",
 )
 
 # Find all runs where there is no "thread_id" metadata key and the "a1b2c3d4-e5f6-7890" value is not present
-client.list_runs(
-  project_name="default",
-  filter="and(neq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))"
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter="and(neq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))",
 )
 
 # Find all runs where the thread_id metadata key is not present but the "a1b2c3d4-e5f6-7890" value is present
-client.list_runs(
-  project_name="default",
-  filter="and(neq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))"
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter="and(neq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))",
 )
 ```
 
@@ -755,27 +836,31 @@ client.list_runs(
 
 ```typescript
 // Find all runs where the metadata does not contain a "thread_id" key
-client.listRuns({
-  projectName: 'default',
-  filter: `and(neq(metadata_key, 'thread_id'))`
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: `and(neq(metadata_key, 'thread_id'))`,
 });
 
 // Find all runs where the thread_id in metadata is not "a1b2c3d4-e5f6-7890"
-client.listRuns({
-  projectName: 'default',
-  filter: `and(eq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))`
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: `and(eq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))`,
 });
 
 // Find all runs where there is no "thread_id" metadata key and the "a1b2c3d4-e5f6-7890" value is not present
-client.listRuns({
-  projectName: 'default',
-  filter: `and(neq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))`
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: `and(neq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))`,
 });
 
 // Find all runs where the thread_id metadata key is not present but the "a1b2c3d4-e5f6-7890" value is present
-client.listRuns({
-  projectName: 'default',
-  filter: `and(neq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))`
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: `and(neq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))`,
 });
 ```
 
@@ -783,26 +868,30 @@ client.listRuns({
 
 ```java
 // Find all runs where the metadata does not contain a "thread_id" key
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("default")
+RunQueryV2Params runsWithoutThreadId = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(neq(metadata_key, 'thread_id'))")
     .build();
 
 // Find all runs where the thread_id in metadata is not "a1b2c3d4-e5f6-7890"
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("default")
+RunQueryV2Params runsWithOtherThreadId = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(eq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))")
     .build();
 
 // Find all runs where there is no "thread_id" metadata key and the "a1b2c3d4-e5f6-7890" value is not present
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("default")
+RunQueryV2Params runsWithoutThreadIdOrValue = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(neq(metadata_key, 'thread_id'), neq(metadata_value, 'a1b2c3d4-e5f6-7890'))")
     .build();
 
 // Find all runs where the thread_id metadata key is not present but the "a1b2c3d4-e5f6-7890" value is present
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("default")
+RunQueryV2Params runsWithValueNotThreadId = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(neq(metadata_key, 'thread_id'), eq(metadata_value, 'a1b2c3d4-e5f6-7890'))")
     .build();
 ```
@@ -814,26 +903,29 @@ If you want to combine multiple conditions to refine your search, you can use th
 **Python**
 
 ```python
-client.list_runs(
-  project_name="default",
-  filter="and(eq(name, 'ChatOpenAI'), eq(metadata_key, 'thread_id'), eq(metadata_value, '69b12c91-b1e2-46ce-91de-794c077e8151'))"
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
+    filter="and(eq(name, 'ChatOpenAI'), eq(metadata_key, 'thread_id'), eq(metadata_value, '69b12c91-b1e2-46ce-91de-794c077e8151'))",
 )
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({
-  projectName: 'default',
-  filter: `and(eq(name, 'ChatOpenAI'), eq(metadata_key, 'thread_id'), eq(metadata_value, '69b12c91-b1e2-46ce-91de-794c077e8151'))`
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
+  filter: `and(eq(name, 'ChatOpenAI'), eq(metadata_key, 'thread_id'), eq(metadata_value, '69b12c91-b1e2-46ce-91de-794c077e8151'))`,
 });
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("and(eq(name, 'ChatOpenAI'), eq(metadata_key, 'thread_id'), eq(metadata_value, '69b12c91-b1e2-46ce-91de-794c077e8151'))")
     .build();
 ```
@@ -847,30 +939,33 @@ This type of query is useful if you want to extract a specific run conditional o
 **Python**
 
 ```python
-client.list_runs(
-    project_name="<your_project>",
+client.runs.query(
+    project_ids=[project_id],
+    min_start_time=since,
     filter='eq(name, "RetrieveDocs")',
     trace_filter='and(eq(feedback_key, "user_score"), eq(feedback_score, 1))',
-    tree_filter='eq(name, "ExpandQuery")'
+    tree_filter='eq(name, "ExpandQuery")',
 )
 ```
 
 **TypeScript**
 
 ```typescript
-client.listRuns({
-  projectName: "<your_project>",
+client.runs.query({
+  project_ids: [projectId],
+  min_start_time: since,
   filter: 'eq(name, "RetrieveDocs")',
-  traceFilter: 'and(eq(feedback_key, "user_score"), eq(feedback_score, 1))',
-  treeFilter: 'eq(name, "ExpandQuery")'
-})
+  trace_filter: 'and(eq(feedback_key, "user_score"), eq(feedback_score, 1))',
+  tree_filter: 'eq(name, "ExpandQuery")',
+});
 ```
 
 **Java**
 
 ```java
-RunQueryParams runs = RunQueryParams.builder()
-    .addSession("<your_project>")
+RunQueryV2Params runs = RunQueryV2Params.builder()
+    .addProjectId(projectId)
+    .minStartTime(since)
     .filter("eq(name, \"RetrieveDocs\")")
     .traceFilter("and(eq(feedback_key, 'user_score'), eq(feedback_score, 1))")
     .treeFilter("eq(name, 'ExpandQuery')")
@@ -881,87 +976,76 @@ RunQueryParams runs = RunQueryParams.builder()
 
 Use `trace_filter` to match fields on the root run and `tree_filter` to match supported searchable fields on any run in the trace tree. For predicates over arbitrary returned child-run fields, such as nested `inputs`, `outputs`, or `extra` payloads, use the steps below:
 
-1. Narrow candidate root traces server-side with `filter`, `trace_filter`, `tree_filter`, `run_type`, metadata filters, `parent_run_id`, and the `ls_run_depth` [system metadata key](ls-metadata-parameters.md#ls_run_depth).
-2. Hydrate each candidate root trace with child runs by calling `read_run(..., load_child_runs=True)` in Python or `readRun(..., { loadChildRuns: true })` in TypeScript.
-3. Traverse the hydrated `child_runs` tree locally and apply your predicate to the fields that are not available as server-side filter fields.
+1. Narrow candidate root traces server-side with `filter`, `trace_filter`, `tree_filter`, `run_type`, metadata filters, and the `ls_run_depth` [system metadata key](ls-metadata-parameters.md#ls_run_depth).
+2. Fetch the runs of each candidate trace with `traces.list_runs` / `traces.listRuns`.
+3. Apply your predicate locally to the fields that are not available as server-side filter fields.
 
-The following example (Python 0.8 and JS 0.7) returns root traces that contain a tool run whose output contains a specific value. The server-side `tree_filter` narrows candidates to traces that contain the relevant tool run, and the local predicate checks the hydrated `outputs` payload.
+The following example returns root traces that contain a tool run whose output contains a specific value. The server-side `tree_filter` narrows candidates to traces that contain the relevant tool run, and the local predicate checks the `outputs` payload.
 
 **Python**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
+from datetime import datetime, timedelta, timezone
 
 from langsmith import Client
 
-client = Client()
-project_name = "<your_project>"
+async def main():
+    client = Client()
+    project_id = str(client.read_project(project_name="<your_project>").id)
 
-def iter_runs(run):
-    yield run
-    for child in run.child_runs or []:
-        yield from iter_runs(child)
+    matching_trace_ids = []
+    async for candidate in client.runs.query(
+        project_ids=[project_id],
+        min_start_time=datetime.now(timezone.utc) - timedelta(days=7),
+        is_root=True,
+        tree_filter='and(eq(run_type, "tool"), eq(name, "<tool_name>"))',
+        selects=["TRACE_ID"],
+    ):
+        response = await client.traces.list_runs(
+            str(candidate.trace_id),
+            project_id=project_id,
+            selects=["NAME", "RUN_TYPE", "OUTPUTS"],
+        )
+        if any(
+            run.run_type == "tool"
+            and run.name == "<tool_name>"
+            and "<expected_value>" in str(run.outputs or {})
+            for run in response.items
+        ):
+            matching_trace_ids.append(candidate.trace_id)
 
-candidate_roots = client.list_runs(
-    project_name=project_name,
-    is_root=True,
-    start_time=datetime.now() - timedelta(days=7),
-    tree_filter='and(eq(run_type, "tool"), eq(name, "<tool_name>"))',
-    select=["id"],
-)
-
-matching_roots = []
-for candidate in candidate_roots:
-    root = client.read_run(candidate.id, load_child_runs=True)
-    has_matching_child = any(
-        child.id != root.id
-        and child.run_type == "tool"
-        and child.name == "<tool_name>"
-        and "<expected_value>" in str(child.outputs or {})
-        for child in iter_runs(root)
-    )
-    if has_matching_child:
-        matching_roots.append(root)
+asyncio.run(main())
 ```
 
 **TypeScript**
 
 ```typescript
-import { Client, Run } from "langsmith";
+import { Client } from "langsmith";
 
 const client = new Client();
-const projectName = "<your_project>";
+const projectId = (await client.readProject({ projectName: "<your_project>" })).id;
 
-function* iterRuns(run: Run): Generator<Run> {
-  yield run;
-  for (const child of run.child_runs ?? []) {
-    yield* iterRuns(child);
-  }
-}
-
-const candidateRoots: Run[] = [];
-for await (const run of client.listRuns({
-  projectName,
-  isRoot: true,
-  startTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
-  treeFilter: 'and(eq(run_type, "tool"), eq(name, "<tool_name>"))',
-  select: ["id"],
+const matchingTraceIds: string[] = [];
+for await (const candidate of client.runs.query({
+  project_ids: [projectId],
+  min_start_time: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+  is_root: true,
+  tree_filter: 'and(eq(run_type, "tool"), eq(name, "<tool_name>"))',
+  selects: ["TRACE_ID"],
 })) {
-  candidateRoots.push(run);
-}
-
-const matchingRoots: Run[] = [];
-for (const candidate of candidateRoots) {
-  const root = await client.readRun(candidate.id, { loadChildRuns: true });
-  const hasMatchingChild = [...iterRuns(root)].some(
-    (child) =>
-      child.id !== root.id &&
-      child.run_type === "tool" &&
-      child.name === "<tool_name>" &&
-      JSON.stringify(child.outputs ?? {}).includes("<expected_value>"),
+  const response = await client.traces.listRuns(candidate.trace_id!, {
+    project_id: projectId,
+    selects: ["NAME", "RUN_TYPE", "OUTPUTS"],
+  });
+  const hasMatchingChild = (response.items ?? []).some(
+    (run) =>
+      run.run_type === "tool" &&
+      run.name === "<tool_name>" &&
+      JSON.stringify(run.outputs ?? {}).includes("<expected_value>"),
   );
   if (hasMatchingChild) {
-    matchingRoots.push(root);
+    matchingTraceIds.push(candidate.trace_id!);
   }
 }
 ```
@@ -971,88 +1055,63 @@ for (const candidate of candidateRoots) {
 The following Python example demonstrates how to export a flattened view of traces, including information on the tools (from nested runs) used by the agent within each trace.
 This can be used to analyze the behavior of your agents across multiple traces.
 
-This example queries all tool runs within a specified number of days and groups them by their parent (root) run ID. It then fetches the relevant information for each root run, such as the run name, inputs, outputs, and combines that information with the child run information.
+This example queries all tool runs within a specified number of days and groups them by their trace ID. It then fetches the relevant information for each root run, such as the run name, inputs, outputs, and combines that information with the child run information.
 
 To optimize the query, the example:
 
 1. Selects only the necessary fields when querying tool runs to reduce query time.
-2. Fetches root runs in batches while processing tool runs concurrently.
+2. Fetches root runs in batches of IDs. A root run's ID is its trace ID.
 
 **Python**
 
 ```python
+import asyncio
 from collections import defaultdict
-from concurrent.futures import Future, ThreadPoolExecutor
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from langsmith import Client
-from tqdm.auto import tqdm
 
-client = Client()
-project_name = "my-project"
-num_days = 30
+async def main():
+    client = Client()
+    project_id = str(client.read_project(project_name="my-project").id)
+    num_days = 30
+    since = datetime.now(timezone.utc) - timedelta(days=num_days)
 
-# List all tool runs
-tool_runs = client.list_runs(
-    project_name=project_name,
-    start_time=datetime.now() - timedelta(days=num_days),
-    run_type="tool",
-    # We don't need to fetch inputs, outputs, and other values that # may increase the query time
-    select=["trace_id", "name", "run_type"],
-)
+    # Collect all tools invoked within each trace
+    tools_by_trace = defaultdict(set)
+    async for run in client.runs.query(
+        project_ids=[project_id],
+        min_start_time=since,
+        run_type="TOOL",
+        # We don't need inputs, outputs, and other values that may increase the query time
+        selects=["TRACE_ID", "NAME"],
+    ):
+        tools_by_trace[str(run.trace_id)].add(run.name)
 
-data = []
-futures: list[Future] = []
-trace_cursor = 0
-trace_batch_size = 50
-
-tool_runs_by_parent = defaultdict(lambda: defaultdict(set))
-# Do not exceed rate limit
-with ThreadPoolExecutor(max_workers=2) as executor:
-    # Group tool runs by parent run ID
-    for run in tqdm(tool_runs):
-        # Collect all tools invoked within a given trace
-        tool_runs_by_parent[run.trace_id]["tools_involved"].add(run.name)
-        # maybe send a batch of parent run IDs to the server
-        # this lets us query for the root runs in batches
-        # while still processing the tool runs
-        if len(tool_runs_by_parent) % trace_batch_size == 0:
-            if this_batch := list(tool_runs_by_parent.keys())[
-                trace_cursor : trace_cursor + trace_batch_size
-            ]:
-                trace_cursor += trace_batch_size
-                futures.append(
-                    executor.submit(
-                        client.list_runs,
-                        project_name=project_name,
-                        run_ids=this_batch,
-                        select=["name", "inputs", "outputs", "run_type"],
-                    )
-                )
-    if this_batch := list(tool_runs_by_parent.keys())[trace_cursor:]:
-        futures.append(
-            executor.submit(
-                client.list_runs,
-                project_name=project_name,
-                run_ids=this_batch,
-                select=["name", "inputs", "outputs", "run_type"],
+    # Fetch the root runs in batches
+    data = []
+    trace_ids = list(tools_by_trace)
+    trace_batch_size = 50
+    for i in range(0, len(trace_ids), trace_batch_size):
+        async for root_run in client.runs.query(
+            project_ids=[project_id],
+            min_start_time=since,
+            ids=trace_ids[i : i + trace_batch_size],
+            selects=["ID", "NAME", "RUN_TYPE", "INPUTS", "OUTPUTS"],
+        ):
+            data.append(
+                {
+                    "run_id": root_run.id,
+                    "run_name": root_run.name,
+                    "run_type": root_run.run_type,
+                    "inputs": root_run.inputs,
+                    "outputs": root_run.outputs,
+                    "tools_involved": list(tools_by_trace[str(root_run.id)]),
+                }
             )
-        )
+    return data
 
-for future in tqdm(futures):
-    root_runs = future.result()
-    for root_run in root_runs:
-        root_data = tool_runs_by_parent[root_run.id]
-        data.append(
-            {
-                "run_id": root_run.id,
-                "run_name": root_run.name,
-                "run_type": root_run.run_type,
-                "inputs": root_run.inputs,
-                "outputs": root_run.outputs,
-                "tools_involved": list(root_data["tools_involved"]),
-            }
-        )
+data = asyncio.run(main())
 
 # (Optional): Convert to a pandas DataFrame
 import pandas as pd
@@ -1069,107 +1128,75 @@ The following Python example demonstrates how to export retriever inputs and out
 **Python**
 
 ```python
+import asyncio
 from collections import defaultdict
-from concurrent.futures import Future, ThreadPoolExecutor
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
-import pandas as pd
 from langsmith import Client
-from tqdm.auto import tqdm
 
-client = Client()
-project_name = "your-project-name"
-num_days = 1
+async def main():
+    client = Client()
+    project_id = str(client.read_project(project_name="your-project-name").id)
+    num_days = 1
+    since = datetime.now(timezone.utc) - timedelta(days=num_days)
 
-# List all tool runs
-retriever_runs = client.list_runs(
-    project_name=project_name,
-    start_time=datetime.now() - timedelta(days=num_days),
-    run_type="retriever",
-    # This time we do want to fetch the inputs and outputs, since they
-    # may be adjusted by query expansion steps.
-    select=["trace_id", "name", "run_type", "inputs", "outputs"],
-    trace_filter='eq(feedback_key, "user_score")',
-)
-
-data = []
-futures: list[Future] = []
-trace_cursor = 0
-trace_batch_size = 50
-
-retriever_runs_by_parent = defaultdict(lambda: defaultdict(list))
-# Do not exceed rate limit
-with ThreadPoolExecutor(max_workers=2) as executor:
-    # Group retriever runs by parent run ID
-    for run in tqdm(retriever_runs):
-        # Collect all retriever calls invoked within a given trace
-        for k, v in run.inputs.items():
-            retriever_runs_by_parent[run.trace_id][f"retriever.inputs.{k}"].append(v)
+    # List all retriever runs in traces with "user_score" feedback
+    retriever_data = defaultdict(lambda: defaultdict(list))
+    async for run in client.runs.query(
+        project_ids=[project_id],
+        min_start_time=since,
+        run_type="RETRIEVER",
+        # This time we do want to fetch the inputs and outputs, since they
+        # may be adjusted by query expansion steps.
+        selects=["TRACE_ID", "INPUTS", "OUTPUTS"],
+        trace_filter='eq(feedback_key, "user_score")',
+    ):
+        for k, v in (run.inputs or {}).items():
+            retriever_data[str(run.trace_id)][f"retriever.inputs.{k}"].append(v)
         for k, v in (run.outputs or {}).items():
-            # Extend the docs
-            retriever_runs_by_parent[run.trace_id][f"retriever.outputs.{k}"].extend(v)
-        # maybe send a batch of parent run IDs to the server
-        # this lets us query for the root runs in batches
-        # while still processing the retriever runs
-        if len(retriever_runs_by_parent) % trace_batch_size == 0:
-            if this_batch := list(retriever_runs_by_parent.keys())[
-                trace_cursor : trace_cursor + trace_batch_size
-            ]:
-                trace_cursor += trace_batch_size
-                futures.append(
-                    executor.submit(
-                        client.list_runs,
-                        project_name=project_name,
-                        run_ids=this_batch,
-                        select=[
-                            "name",
-                            "inputs",
-                            "outputs",
-                            "run_type",
-                            "feedback_stats",
-                        ],
-                    )
-                )
-    if this_batch := list(retriever_runs_by_parent.keys())[trace_cursor:]:
-        futures.append(
-            executor.submit(
-                client.list_runs,
-                project_name=project_name,
-                run_ids=this_batch,
-                select=["name", "inputs", "outputs", "run_type"],
-            )
-        )
+            retriever_data[str(run.trace_id)][f"retriever.outputs.{k}"].extend(v)
 
-for future in tqdm(futures):
-    root_runs = future.result()
-    for root_run in root_runs:
-        root_data = retriever_runs_by_parent[root_run.id]
-        feedback = {
-            f"feedback.{k}": v.get("avg")
-            for k, v in (root_run.feedback_stats or {}).items()
-        }
-        inputs = {f"inputs.{k}": v for k, v in root_run.inputs.items()}
-        outputs = {f"outputs.{k}": v for k, v in (root_run.outputs or {}).items()}
-        data.append(
-            {
-                "run_id": root_run.id,
-                "run_name": root_run.name,
-                **inputs,
-                **outputs,
-                **feedback,
-                **root_data,
+    # Fetch the root runs, with their feedback, in batches
+    data = []
+    trace_ids = list(retriever_data)
+    trace_batch_size = 50
+    for i in range(0, len(trace_ids), trace_batch_size):
+        async for root_run in client.runs.query(
+            project_ids=[project_id],
+            min_start_time=since,
+            ids=trace_ids[i : i + trace_batch_size],
+            selects=["ID", "NAME", "INPUTS", "OUTPUTS", "FEEDBACK_STATS"],
+        ):
+            feedback = {
+                f"feedback.{k}": v.avg
+                for k, v in (root_run.feedback_stats or {}).items()
             }
-        )
+            inputs = {f"inputs.{k}": v for k, v in (root_run.inputs or {}).items()}
+            outputs = {f"outputs.{k}": v for k, v in (root_run.outputs or {}).items()}
+            data.append(
+                {
+                    "run_id": root_run.id,
+                    "run_name": root_run.name,
+                    **inputs,
+                    **outputs,
+                    **feedback,
+                    **retriever_data[str(root_run.id)],
+                }
+            )
+    return data
+
+data = asyncio.run(main())
 
 # (Optional): Convert to a pandas DataFrame
 import pandas as pd
+
 df = pd.DataFrame(data)
 df.head()
 ```
 
 ## Rate limits
 
-The [`POST /runs/query`](smith-api/run/query-runs.md) endpoint has per-tenant rate limits based on query parameters. See [Run query endpoint rate limits](usage-and-billing.md#run-query-endpoint) for the full table and best practices.
+`runs.query` (`POST /api/v2/runs/query`) has a dedicated, higher rate limit than the deprecated `POST /runs/query` endpoint: 300 requests per 10 seconds per API key in LangSmith Cloud. Requests that exceed it return `429 Too Many Requests`. It is not subject to the per-tenant limits of the deprecated endpoint. For general best practices, see [Run query endpoint rate limits](usage-and-billing.md#run-query-endpoint).
 
 ***
 

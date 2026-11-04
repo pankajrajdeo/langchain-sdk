@@ -16,7 +16,7 @@ You supply two callbacks: one that authenticates the request, and one that conve
 
 > [!NOTE]
 >
-> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md) and [Bring Your Own Cloud (BYOC)](../byoc.md). Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC.
 
 > [!NOTE]
 >

@@ -30,7 +30,19 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c3176dbb11c11eaf324b_context-engineering-challenges-blog.png)Harrison's In the Loop
+![LangSmith Bring Your Own Cloud, now on AWS, Azure, and Google Cloud](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aea10da672af68b149a7fc2_6aea100d5e02bf39048b42b8_byoc-multicloud-cover.png)LangSmith
+
+## LangSmith BYOC is now available on AWS, Azure, and Google Cloud
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab43e723b026a19d87bf6d2_Karthic%20S.jpg)Karthic SubramanianNovember 3, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aea568fd31846818794bb75_human-insight-blog-cover-review-3840x2160.png)Deep AgentsConceptual Guide
+
+## Why human insight is a strategic advantage for building better agents
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aea4e72ef65359ca164ecec_Gowri%20Harish.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aea4e9a64b26074425af028_Sineha%20Manivannan.jpg)Gowri HarishSineha ManivannanNovember 3, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![How We Optimized Browser Use for Deep Agents](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae92cbfdaa7db704c3d4a3d_6ae92ca005e2086fc1f08eb4_browser-use-deep-dive-webflow-cover-1200x675.png)Deep AgentsAgent Architecture
+
+## How We Optimized Browser Use for Deep Agents
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleNovember 3, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c3176dbb11c11eaf324b_context-engineering-challenges-blog.png)Harrison's In the Loop
 
 ## New context engineering challenges in late 2026
 
@@ -82,19 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## How Orange Business Built Live Intelligence on LangChain and LangSmith
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a10d5ed01e84b2e809523b1_sofia-sulikowski.jpeg)Sofia SulikowskiOctober 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acd66ed592eea4558483d0f_Search%20agent%20traces%20by%20behavior%20with%20AI%20Search%20in%20LangSmith-blog.png)Observability & Evals
-
-## Search agent traces by behavior with AI Search in LangSmith
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ace2c2d4c7a9a78b091a4ff_A.%20Natarajan.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dd146b49c3ff6f8c05da14_Eugene-Yurtsev%201.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac988a9cdcd2c5147321cb0_Suraj%20Vathsa.png)Arjun NatarajanEugene YurtsevSuraj VathsaOctober 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min![Building Long-Running Agents with ScaleDown and Deep Agents](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acdaa1c169425259deb72f8_scaledown-blog-cover.png)Open SourceAgent ArchitectureLangChainLangSmith
-
-## Building Long-Running Agents with ScaleDown and Deep Agents
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a4db1f172cf600d53600698_srimanth-t.jpeg)![Neal Patel](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acda7ce9de43aaa57628d89_neal-patel.jpeg)Sydney RunkleSrimanth TangedipalliNeal PatelOctober 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac91132385fb9bbe1cb53b1_mda-reactions-blog-cover-navy-1200x675.png)Deep AgentsTutorials & How-Tos
-
-## Build great out-of-the-box user experiences with Managed Deep Agents
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)Nathan DreznerOctober 9, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a10d5ed01e84b2e809523b1_sofia-sulikowski.jpeg)Sofia SulikowskiOctober 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min1...1 / 35
 
 #### We couldn't find anything matching that.
 

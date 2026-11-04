@@ -1,6 +1,6 @@
 ---
 title: "wrap_tool_call"
-description: "Prepend reviewer-edit guidance to the result of an edited tool call."
+description: "Intercept tool execution and convert handled exceptions to error messages."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/wrap_tool_call"
 category: "reference"
 tags: [reference, langchain, agents, middleware, wrap_tool_call]
@@ -10,11 +10,9 @@ tags: [reference, langchain, agents, middleware, wrap_tool_call]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/human_in_the_loop/HumanInTheLoopMiddleware/wrap_tool_call)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/tool_error/ToolErrorMiddleware/wrap_tool_call)
 
-Prepend reviewer-edit guidance to the result of an edited tool call.
-
-In `per_call` mode this is also where the interrupt is raised.
+Intercept tool execution and convert handled exceptions to error messages.
 
 ## Signature
 
@@ -30,15 +28,15 @@ wrap_tool_call(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `request` | `ToolCallRequest` | Yes | The tool call request being executed. |
-| `handler` | `Callable[[ToolCallRequest], ToolMessage \| Command[Any]]` | Yes | Callable that executes the tool. |
+| `request` | `ToolCallRequest` | Yes | Tool call request with call dict, `BaseTool`, state, and runtime. |
+| `handler` | `Callable[[ToolCallRequest], ToolMessage \| Command[Any]]` | Yes | Callable to execute the tool. |
 
 ## Returns
 
 `ToolMessage | Command[Any]`
 
-The tool result, with a note prepended when a reviewer edited the call.
+`ToolMessage` or `Command` (the final result).
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5dcec1858191a6b54cd843dd8e54d856e2e007cc/libs/langchain_v1/langchain/agents/middleware/human_in_the_loop.py#L980)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5dcec1858191a6b54cd843dd8e54d856e2e007cc/libs/langchain_v1/langchain/agents/middleware/tool_error.py#L133)

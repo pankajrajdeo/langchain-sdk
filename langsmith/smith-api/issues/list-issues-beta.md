@@ -175,6 +175,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/platform/issues:
@@ -206,24 +207,24 @@ paths:
           name: status
           in: query
           schema:
+            type: string
             enum:
               - open
               - fixing
               - watching
               - completed
               - ignored
-            type: string
             title: Status
         - description: Filter by severity
           name: severity
           in: query
           schema:
+            type: integer
             enum:
               - 0
               - 1
               - 2
               - 3
-            type: integer
             title: Severity
         - description: Filter by exact severity (repeatable; OR semantics)
           name: severity_exact
@@ -231,6 +232,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - 0
@@ -238,7 +240,6 @@ paths:
                 - 2
                 - 3
               type: integer
-            type: array
             title: Severity Exact
         - description: Filter by Engine activity (repeatable; OR semantics)
           name: activity
@@ -246,13 +247,13 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - fixing
                 - watching
                 - recurred
               type: string
-            type: array
             title: Activity
         - description: Filter by tag (exact match)
           name: tag
@@ -277,6 +278,7 @@ paths:
           name: sort_by
           in: query
           schema:
+            type: string
             enum:
               - default
               - created_at
@@ -285,7 +287,6 @@ paths:
               - last_updated
               - trace_count
               - severity
-            type: string
             title: Sort By
         - description: Group results by issue lifecycle status before applying sort_by
           name: status_first

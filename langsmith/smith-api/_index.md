@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api"
-description: "Index of 0 pages and 61 subdirectories under langsmith/smith-api."
+description: "Index of 0 pages and 62 subdirectories under langsmith/smith-api."
 category: "index"
 tags: [index, langsmith, smith-api]
 ---
 
 # langsmith/smith-api
 
-0 pages here, 578 pages including subdirectories.
+0 pages here, 595 pages including subdirectories.
 
 ## Directories
 
@@ -65,6 +65,7 @@ tags: [index, langsmith, smith-api]
 - [settings/](settings/_index.md) - 2 pages
 - [tag-transitions/](tag-transitions/_index.md) - 1 page
 - [tags/](tags/_index.md) - 5 pages
+- [teams/](teams/_index.md) - 17 pages
 - [tenant/](tenant/_index.md) - 2 pages
 - [threads/](threads/_index.md) - 13 pages
 - [tools/](tools/_index.md) - 8 pages

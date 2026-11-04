@@ -172,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v2/sandboxes/boxes/{name}:
@@ -524,23 +525,48 @@ components:
             type: string
         match_hosts:
           description: >-
-            MatchHosts is only accepted for header injection, rewrite, and relay
-            rules.
+            MatchHosts lists the hosts a header injection, rewrite, or relay
+            rule
 
-            Provider auth rules use built-in host matching. A relay rule may
-            also
+            covers. AWS and GCP rules match their provider's hosts built in;
+            there
 
-            list IP addresses and CIDR blocks (10.0.0.0/8), which match
-            connections
+            MatchHosts optionally narrows them to the listed hosts (e.g.
 
-            the sandbox makes to an IP address rather than a name.
+            "sts.amazonaws.com", "bigquery.googleapis.com"), and when empty the
+            rule
+
+            covers every host the provider can authenticate. A host no rule
+            covers is
+
+            passed through without TLS interception. Azure rules do not accept
+            it. A
+
+            relay rule may also list IP addresses and CIDR blocks (10.0.0.0/8),
+            which
+
+            match connections the sandbox makes to an IP address rather than a
+            name.
           type: array
           items:
             type: string
         match_paths:
+          description: >-
+            MatchPaths restricts a header injection or rewrite rule to requests
+            whose path matches one of the patterns, so one host can use a
+            different credential per route. The path excludes the query string.
+            A pattern is an exact path (`/v1/runs`); a prefix, written as the
+            prefix followed by a slash and `*` or `**`, which matches any path
+            starting with that prefix (the prefix `/v1` also matches `/v10`); a
+            suffix, written as `*`, a slash, and then the ending, which matches
+            any path that ends with that text (the ending `runs` also matches
+            `/v1/xruns`); or `*` alone for every path. A wildcard in the middle
+            of a path is not supported. An empty list matches every path. Rules
+            are evaluated in order and the first match wins. Rejected on aws,
+            gcp, azure, and relay rules.
+          type: array
           items:
             type: string
-          type: array
         name:
           type: string
         relay_id:
@@ -1175,6 +1201,18 @@ components:
           type: string
           pattern: >-
             ^(workspace|tag:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+        session_tags:
+          description: >-
+            SessionTags are AWS session tags on the role session, for role
+            policies that scope access with ${aws:PrincipalTag/<key>}. The
+            role's trust policy must allow sts:TagSession. At most 50; keys are
+            1-128 and values 1-256 letters, numbers, spaces or _.:=+-@ (keys may
+            also contain /); keys starting with aws: or langsmith: are reserved.
+            Only valid with role_arn, and cannot be changed after creation.
+          type: object
+          additionalProperties:
+            type: string
+          maxProperties: 50
       required:
         - role_arn
       not:
@@ -1211,6 +1249,11 @@ components:
             properties:
               subject_scope:
                 minLength: 1
+          - required:
+              - session_tags
+            properties:
+              session_tags:
+                minProperties: 1
     sandboxes.ProxyAzureWorkloadIdentityConfig:
       type: object
       properties:

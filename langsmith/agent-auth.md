@@ -12,7 +12,7 @@ tags: [docs, langsmith, agent-auth]
 
 > [!NOTE]
 >
-> Agent Auth is in **[beta](release-stages.md)** and under active development. To provide feedback or use this feature, reach out to the [LangChain team](https://forum.langchain.com/c/help/langsmith/).
+> Agent Auth is in **[beta](release-stages.md)** and under active development. To provide feedback or use this feature, reach out to the [LangChain team](https://forum.langchain.com/c/help/langsmith/8).
 
 ## Installation
 

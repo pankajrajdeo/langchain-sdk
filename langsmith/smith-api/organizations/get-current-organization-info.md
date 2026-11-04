@@ -172,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/platform/orgs/current/info:
@@ -381,10 +382,10 @@ components:
           description: Indicates whether this org can provision BYOC data planes.
           type: boolean
         byoc_external_id:
+          readOnly: true
           description: >-
             ByocExternalID is the organization's assigned AWS external ID,
             stored only in org config.
-          readOnly: true
           anyOf:
             - type: string
             - type: 'null'
@@ -728,6 +729,24 @@ components:
           description: >-
             MaxWorkspaces is the maximum number of workspaces allowed in this
             org. -1 means no limit.
+          type: integer
+        message_view_batch_rate_limit_burst:
+          description: >-
+            MessageViewBatchRateLimitBurst is a per-org override of the POST
+            /v2/traces/messages
+
+            burst. nil (or a value <= 0) uses the global default
+            (MESSAGE_VIEW_BATCH_RATE_LIMIT_BURST).
+          type: integer
+        message_view_batch_rate_limit_per_sec:
+          description: >-
+            MessageViewBatchRateLimitPerSec is a per-org override of the POST
+            /v2/traces/messages
+
+            rate limit, which is applied to each workspace separately. nil (or a
+            value <= 0)
+
+            uses the global default (MESSAGE_VIEW_BATCH_RATE_LIMIT_PER_SEC).
           type: integer
         models_connect_via_langsmith_enabled:
           description: >-

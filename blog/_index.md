@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 550 pages and 0 subdirectories under blog."
+description: "Index of 553 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-550 pages here.
+553 pages here.
 
 ## Files
 
@@ -266,7 +266,9 @@ tags: [index, blog]
 - [How We Built LangSmith Engine, Our Agent for Improving Agents](how-we-built-langsmith-engine-our-agent-for-improving-agents.md) - A technical look at LangSmith Engine: how it analyzes traces at scale, turns recurring failures into actionable issues, and proposes evaluators and fixes.
 - [How We Deployed our Multi-Agent Flow to LangGraph Cloud](how-we-deployed-our-multi-agent-flow-to-langgraph-cloud-2.md) - Read this guest blog post on how to create a LangGraph multi-agent flow via React &amp; LangGraph Cloud.
 - [How We Made Coding Agent Spend Predictable](how-we-made-coding-agent-spend-predictable.md) - Learn how LangChain uses LangSmith LLM Gateway to track coding agent spend in real time, set budgets by team and user, and prevent runaway AI costs.
+- [How We Optimized Browser Use for Deep Agents](how-we-optimized-browser-use-for-deep-agents.md) - We compared seven browser toolsets for Deep Agents, picked Stagehand from Browserbase, and tuned it with LangSmith traces and evals. Here&#39;s what we learned.
 - [Human-in-the-loop with OpenGPTs and LangGraph](human-in-the-loop-with-opengpts-and-langgraph.md) - Build stateful LLM applications with human oversight using LangGraph. Add Interrupt and Authorize controls to pause, review, and guide AI workflows.
+- [Why human insight is a strategic advantage for building better agents](human-insight-strategic-advantage-agents.md) - Explore 3 principles for effective human-in-the-loop workflows and how human-review is a strategic imperative for production-ready agents.
 - [Human judgment in the agent improvement loop](human-judgment-in-the-agent-improvement-loop.md) - AI agents work best when they reflect the knowledge and judgment your team has built over time. Some of that is institutional knowledge that’s already documented and easy for an agent to use as-is...
 - [Implementing advanced RAG strategies with Neo4j](implementing-advanced-retrieval-rag-strategies-with-neo4j.md) - Learn advanced RAG strategies with Neo4j: parent document retrieval, hypothetical questions, and summaries for better retrieval accuracy.
 - [Improving Agents is a Data Mining Problem](improving-agents-is-a-data-mining-problem.md) - How LangChain mines agent traces to find failures, fine-tune judge models cheaper than frontier LLMs, and hill-climb performance with evals.
@@ -376,6 +378,7 @@ tags: [index, blog]
 - [LangSmith Agent Builder now in Public Beta](langsmith-agent-builder-now-in-public-beta.md) - Today, we're expanding who can build agents. Now, anyone can create production ready agents without writing code using LangSmith Agent Builder.
 - [Introducing LangSmith’s No Code Agent Builder](langsmith-agent-builder.md) - Build AI agents without code using LangSmith Agent Builder. Create agents with memory, guided prompts, and MCP tools—no technical expertise needed.
 - [Catch production failures early with LangSmith Alerts](langsmith-alerts.md) - Set up real‑time notifications on error rates, run latency &amp; feedback scores to spot failures before your customers do.
+- [LangSmith BYOC is now available on AWS, Azure, and Google Cloud](langsmith-byoc-aws-gc-azure.md) - LangSmith BYOC now runs on AWS (GA), Azure and Google Cloud (Beta). Your traces, evals, and agent deployments stay in your cloud account while LangChain runs it.
 - [LangSmith BYOC is now generally available on AWS](langsmith-byoc-is-now-generally-available-on-aws.md) - LangSmith Bring Your Own Cloud is now generally available on AWS, giving Enterprise teams managed observability, evaluation, and deployment inside their own VPC.
 - [LangSmith CLI &amp; Skills](langsmith-cli-skills.md) - LangSmith CLI and skills give AI coding agents expertise in tracing, debugging, datasets, and evaluation. Boost Claude Code from 17% to 92%.
 - [Introducing LangSmith Custom Apps: Build custom interfaces around your agent data](langsmith-custom-apps.md) - LangSmith Custom Apps lets you build the interface you want with your LangSmith data, publish it into your workspace, and skip the hosting, auth, and permissions work. Learn more.

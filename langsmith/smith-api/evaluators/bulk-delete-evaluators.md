@@ -172,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/platform/evaluators:
@@ -190,9 +191,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Evaluator Ids
         - description: >-
             When true, delete all run rules for this evaluator before deleting

@@ -875,7 +875,7 @@ INTERRUPTED:
 }
 ```
 
-We can accept or edit the tool call using [Command](use-graph-api.md#combine-control-flow-and-state-updates-with-command):
+We can accept or edit the tool call using [Command](graph-api-send-command.md#combine-control-flow-and-state-updates-with-command):
 
 ```python
 from langgraph.types import Command

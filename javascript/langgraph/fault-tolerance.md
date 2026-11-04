@@ -1,6 +1,6 @@
 ---
 title: "Fault tolerance"
-description: "Configure per-node timeouts, retries, and error handlers in LangGraph."
+description: "Configure per-node timeouts, retries, error handlers, and recovery strategies in LangGraph."
 source: "https://docs.langchain.com/oss/javascript/langgraph/fault-tolerance"
 category: "docs"
 tags: [docs, javascript, langgraph, fault-tolerance]
@@ -8,7 +8,7 @@ tags: [docs, javascript, langgraph, fault-tolerance]
 
 # Fault tolerance
 
-> Configure per-node timeouts, retries, and error handlers in LangGraph.
+> Configure per-node timeouts, retries, error handlers, and recovery strategies in LangGraph.
 
 When a node fails—from a slow external API, a transient network error, or an unhandled exception—LangGraph gives you three composable mechanisms to respond:
 
@@ -153,6 +153,73 @@ const graph = new StateGraph(State)
 | `taskId` | `string` | Task ID for the current execution. |
 
 `executionInfo` is available even without a retry policy—`nodeAttempt` defaults to `1`.
+
+## Retry boundaries and idempotency
+
+A [retry](#retries) re-runs the entire node function from the start. That gives **at-least-once** semantics for node execution: when a policy matches, LangGraph invokes the node again. It does not make external side effects happen exactly once.
+
+```text
+attempt 1:  node starts -> call payment API -> payment succeeds -> process crashes
+attempt 2:  node starts -> call payment API -> payment succeeds again
+```
+
+[Checkpoints](checkpointers.md) are written at [super-step](graph-api.md#super-steps) boundaries, not mid-function. Graph writes from a failed attempt are discarded. Side effects during the node (payments, emails, external writes) are outside that boundary. Application code must make those effects idempotent.
+
+The same re-execution model applies after an [interrupt](interrupts.md) or a crash resume. See [Re-execution and idempotency](graph-api.md#re-execution-and-idempotency). To checkpoint work inside a node so resume can skip completed units, wrap each unit in a [task](graph-api.md#using-tasks-in-nodes).
+
+### Protect side effects with an idempotency key
+
+Send a stable idempotency key with the side effect so the provider can deduplicate retries. The key must already be durable **before** the side effect runs. Do not generate it inside the same node and rely on the return value:
+
+```text
+attempt 1:  node starts -> generate key K1 -> charge succeeds -> process dies before returning
+attempt 2:  node starts -> state has no key -> generate key K2 -> charge runs again
+```
+
+`K1` was never checkpointed. Derive the key from state that is already durable:
+
+```typescript
+async function chargeCustomer(state: typeof State.State) {
+  // Same order always produces the same key across retries and resumes.
+  const idempotencyKey = `charge:${state.orderId}`;
+
+  await provider.charge({
+    customerId: state.customerId,
+    amount: state.amount,
+    idempotencyKey,
+  });
+
+  // Observability only. A retry must not depend on this return value.
+  return { lastPaymentKey: idempotencyKey, charged: true };
+}
+```
+
+When no durable business identity exists, persist a generated key in its own node before the side effect. Across a process crash, that only works if the intervening checkpoint is durable. Use [sync durability](checkpointers.md#durability-modes) for that pattern.
+
+```typescript
+import { randomUUID } from "node:crypto";
+
+function reserveKey(state: typeof State.State) {
+  // Own node so the key is checkpointed before anything external runs.
+  return { paymentKey: state.paymentKey ?? randomUUID() };
+}
+
+async function chargeCustomer(state: typeof State.State) {
+  await provider.charge({ ..., idempotencyKey: state.paymentKey });
+  return { charged: true };
+}
+```
+
+Two requirements:
+
+1. **The key is reproducible from durable state.** A retry or a resume in a fresh process reconstructs the same key.
+2. **The external service honors the key.** Check the provider's documentation before relying on it.
+
+### Treat a missing acknowledgement as unknown
+
+If the provider commits and the acknowledgement is lost, the graph has no local record even though the side effect may have happened. A later attempt with the same key avoids blind duplication when the provider deduplicates, but the outcome is still unknown. Treat missing local state as unknown, not as proof the effect did not happen. Query the provider for the operation's status before compensating or continuing.
+
+For side effects that cannot be made idempotent at the API level, move them out of retryable nodes. For example, run them from an [error handler](#error-handling) after retries are exhausted, or from a separate worker that deduplicates by task ID.
 
 ## Timeouts
 
@@ -457,6 +524,84 @@ const graph = new StateGraph(State)
 ### Subgraph failures
 
 If a node wraps a subgraph and the subgraph raises an unhandled exception, that exception surfaces to the parent node. If the parent node has an error handler, the handler fires with the subgraph's exception in `error.error`.
+
+## Recovery strategies
+
+Retries and error handlers cover automatic re-attempts and compensation after exhaustion. Two other common patterns live in your node logic:
+
+| Strategy | Who fixes it | Mechanism |
+| - | - | - |
+| Transient errors | System | [Retry policy](#retries) on the node |
+| Recoverable failure after retries | Developer | [`error_handler` / `errorHandler`](#error-handling) (Saga / compensation) |
+| LLM-recoverable errors | LLM | Store the error in state and route back with [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) |
+| User-fixable errors | Human | Pause with [`interrupt()`](interrupts.md) |
+| Unexpected errors | Developer | Let the exception bubble up and fail the run |
+
+### LLM-recoverable errors
+
+When a tool call or parse fails in a way the model can correct, catch that error in the node, write it into state, and route back to the agent so the LLM can adjust:
+
+```ts
+import { Command, GraphNode, StateSchema } from "@langchain/langgraph";
+import * as z from "zod";
+
+class ToolError extends Error {}
+
+const State = new StateSchema({
+  toolCall: z.string(),
+  toolResult: z.string().optional(),
+});
+
+async function runTool(toolCall: string): Promise<string> {
+  if (toolCall === "bad") {
+    throw new ToolError("invalid args");
+  }
+  return `ok:${toolCall}`;
+}
+
+const executeTool: GraphNode<typeof State> = async (state) => {
+  try {
+    const result = await runTool(state.toolCall);
+    return new Command({
+      update: { toolResult: result },
+      goto: "agent",
+    });
+  } catch (error) {
+    // Let the LLM see what went wrong and try again
+    return new Command({
+      update: { toolResult: `Tool error: ${error}` },
+      goto: "agent",
+    });
+  }
+};
+```
+
+This is application-level control flow, not an `error_handler`. The node handles a known failure mode and keeps the run alive.
+
+### Unexpected errors
+
+Do not catch failures you cannot handle. Without a matching retry policy or error handler, the exception bubbles up and fails the run so you can fix the bug:
+
+```ts
+import { GraphNode, StateSchema } from "@langchain/langgraph";
+import * as z from "zod";
+
+const EmailAgentState = new StateSchema({
+  draftResponse: z.string(),
+});
+
+const emailService = {
+  send: async (body: string) => {
+    throw new Error(`SMTP unavailable while sending: ${body}`);
+  },
+};
+
+const sendReply: GraphNode<typeof EmailAgentState> = async (state) => {
+  // Do not catch unexpected failures here. Let them bubble up and fail the run.
+  await emailService.send(state.draftResponse);
+  return state;
+};
+```
 
 ## Graph defaults
 

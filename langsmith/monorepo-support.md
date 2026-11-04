@@ -68,8 +68,8 @@ Place the langgraph.json file in your agent’s directory (not in the monorepo r
 ```json
 {
   "dependencies": [
-    ".",                    # Current agent package
-    "../../shared-utils"    # Relative path to shared package
+    ".",
+    "../../shared-utils"
   ],
   "graphs": {
     "customer_support": "./agent/graph.py:graph"
@@ -89,6 +89,8 @@ Place the langgraph.json file in your agent’s directory (not in the monorepo r
   "env": ".env"
 }
 ```
+
+In the Python example, `"."` is the current agent package and `"../../shared-utils"` is the relative path to a shared package.
 
 The Python implementation automatically handles packages in parent directories by:
 

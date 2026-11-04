@@ -170,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/orgs/current/roles/{role_id}:
@@ -224,6 +225,10 @@ components:
             type: string
           type: array
           title: Permissions
+          description: >-
+            Permissions to grant. Organization roles do not require
+            organization:read or organization:read-metadata. Omitting these
+            permissions may limit access to organization settings pages.
       type: object
       required:
         - display_name

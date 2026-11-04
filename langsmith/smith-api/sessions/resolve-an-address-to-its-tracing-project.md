@@ -172,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/sessions/resolutions:
@@ -195,11 +196,11 @@ paths:
           in: query
           required: true
           schema:
+            type: string
             enum:
               - AGENT
               - EXPERIMENT
               - EVALUATOR
-            type: string
             title: Kind
         - description: >-
             The Agent's user-assigned id for AGENT, or the experiment's id for
@@ -213,12 +214,12 @@ paths:
           name: environment
           in: query
           schema:
+            type: string
             enum:
               - LOCAL
               - DEVELOPMENT
               - STAGING
               - PRODUCTION
-            type: string
             title: Environment
       responses:
         '200':

@@ -82,7 +82,7 @@ A self-hosted LangSmith installation uses PostgreSQL for operational data, Redis
 
 On 0.17, a new installation can run SmithDB without ClickHouse; see [Install without ClickHouse](self-host-smithdb-install.md#install-without-clickhouse). Retiring ClickHouse from an existing installation is a separate procedure; contact LangChain through the [Support Portal](https://support.langchain.com/) before considering it.
 
-For SDK method changes that work with both ClickHouse and SmithDB, see [Migrate to SmithDB-backed SDK methods](smithdb-sdk-migration.md).
+For SDK method changes that work with both ClickHouse and SmithDB, see [Migrate to SmithDB-backed APIs](smithdb-sdk-migration.md).
 
 ***
 

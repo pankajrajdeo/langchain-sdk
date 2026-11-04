@@ -170,6 +170,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/orgs/current:
@@ -310,6 +311,16 @@ components:
             - type: integer
             - type: 'null'
           title: Code Evaluator Execution Batch Size
+        message_view_batch_rate_limit_per_sec:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Message View Batch Rate Limit Per Sec
+        message_view_batch_rate_limit_burst:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Message View Batch Rate Limit Burst
         can_use_rbac:
           type: boolean
           title: Can Use Rbac

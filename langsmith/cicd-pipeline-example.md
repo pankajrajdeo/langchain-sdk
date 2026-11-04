@@ -323,7 +323,7 @@ See the [LangGraph CLI build documentation](cli.md#build) for more details.
 
 #### Database & cache configuration
 
-By default, LangSmith Deployment create PostgreSQL and Redis instances for you. To use external services, set the following environment variables in your new deployment or revision:
+By default, LangSmith Deployment creates PostgreSQL and Redis instances for you. To use external services, set the following environment variables in your new deployment or revision:
 
 ```bash
 # Set environment variables for external services

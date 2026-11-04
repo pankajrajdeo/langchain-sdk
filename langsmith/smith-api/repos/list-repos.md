@@ -10,6 +10,10 @@ tags: [docs, langsmith, smith-api, repos, list-repos]
 
 > Get all repos.
 
+Page with page_size and cursor: pass next_cursor from the previous response
+as cursor until next_cursor is null. The limit and offset parameters are
+still accepted but cannot be combined with cursor.
+
 ## OpenAPI
 
 **/langsmith/langsmith-platform-openapi.json get /api/v1/repos**
@@ -172,6 +176,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/repos:
@@ -179,9 +184,67 @@ paths:
       tags:
         - repos
       summary: List repos
-      description: Get all repos.
+      description: >-
+        Get all repos.
+
+        Page with page_size and cursor: pass next_cursor from the previous
+        response
+
+        as cursor until next_cursor is null. The limit and offset parameters are
+
+        still accepted but cannot be combined with cursor.
       operationId: list_repos_api_v1_repos_get
       parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            maximum: 100
+            minimum: 1
+            description: 'Deprecated: use page_size and cursor.'
+            deprecated: true
+            default: 20
+            title: Limit
+          description: 'Deprecated: use page_size and cursor.'
+          deprecated: true
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            description: 'Deprecated: use page_size and cursor.'
+            deprecated: true
+            default: 0
+            title: Offset
+          description: 'Deprecated: use page_size and cursor.'
+          deprecated: true
+        - name: page_size
+          in: query
+          required: false
+          schema:
+            type: integer
+            maximum: 100
+            minimum: 1
+            description: Number of repos per page. Max 100.
+            default: 20
+            title: Page Size
+          description: Number of repos per page. Max 100.
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - type: string
+              - type: 'null'
+            description: >-
+              Opaque cursor from the previous response's next_cursor. Omit for
+              the first page. Cannot be combined with offset.
+            title: Cursor
+          description: >-
+            Opaque cursor from the previous response's next_cursor. Omit for the
+            first page. Cannot be combined with offset.
         - name: with_latest_manifest
           in: query
           required: false
@@ -196,23 +259,6 @@ paths:
             type: boolean
             default: false
             title: Include Owners
-        - name: limit
-          in: query
-          required: false
-          schema:
-            type: integer
-            maximum: 100
-            minimum: 1
-            default: 20
-            title: Limit
-        - name: offset
-          in: query
-          required: false
-          schema:
-            type: integer
-            minimum: 0
-            title: Offset
-            default: 0
         - name: tenant_handle
           in: query
           required: false
@@ -414,6 +460,12 @@ components:
         total:
           type: integer
           title: Total
+        next_cursor:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Next Cursor
+          description: Cursor for the next page, or null when no pages remain.
       type: object
       required:
         - repos

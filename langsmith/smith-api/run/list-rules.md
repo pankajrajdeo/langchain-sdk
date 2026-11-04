@@ -172,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/runs/rules:
@@ -523,6 +524,13 @@ components:
           anyOf:
             - $ref: '#/components/schemas/RunRuleSpendLimitSchema-Output'
             - type: 'null'
+        effective_spend_limit:
+          anyOf:
+            - $ref: '#/components/schemas/RunRuleSpendLimitSchema-Output'
+            - type: 'null'
+          description: >-
+            spend_limit if set; otherwise the organization's default evaluator
+            spend limit, once the rule has made its first evaluator call.
         trace_count:
           anyOf:
             - type: integer

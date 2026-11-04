@@ -78,6 +78,8 @@ You can get nested traces by using this wrapped client and decorating those func
 Please see [Custom instrumentation](annotate-code.md) for more information on how to annotate your code for tracing with the `@traceable` decorator.
 
 ```python
+from langsmith import traceable
+
 # You can customize the run name with the `name` keyword argument
 @traceable(name="Extract User Details")
 def my_function(text: str) -> UserDetail:

@@ -54,7 +54,7 @@ side effects.
     @priority.assign
     async def assign(ctx: PriorityContext) -> PrioritySettings | None:
         return {
-            "priority": 3 if "premium" in ctx.permissions else 0,
+            "priority": -3 if "premium" in ctx.permissions else 0,
             # Stored unencrypted, so an opaque ID rather than personal data.
             "fairness_group": ctx.user["org_id"],
         }
@@ -86,4 +86,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5bd231cbfd913e05ebc662f519eb9a655bc766df/libs/sdk-py/langgraph_sdk/priority/__init__.py#L62)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5db97b9ccab6b8d9a5ab1e8f0bebea7c03a8708a/libs/sdk-py/langgraph_sdk/priority/__init__.py#L62)

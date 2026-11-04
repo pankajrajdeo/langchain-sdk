@@ -1,13 +1,13 @@
 ---
 title: "langsmith"
-description: "Index of 521 pages and 5 subdirectories under langsmith."
+description: "Index of 522 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-521 pages here, 1259 pages including subdirectories.
+522 pages here, 1277 pages including subdirectories.
 
 ## Directories
 
@@ -15,7 +15,7 @@ tags: [index, langsmith]
 - [fleet/](fleet/_index.md) - 24 pages
 - [javascript/](javascript/_index.md) - 31 pages
 - [python/](python/_index.md) - 32 pages
-- [smith-api/](smith-api/_index.md) - 578 pages
+- [smith-api/](smith-api/_index.md) - 595 pages
 
 ## Files
 
@@ -202,7 +202,7 @@ tags: [index, langsmith]
 - [Example data format](example-data-format.md) - Before diving into this content, it might be helpful to read the following:
 - [Experiment configuration](experiment-configuration.md) - LangSmith supports several configuration options for experiments:
 - [Export LangSmith telemetry to your observability backend](export-backend.md) - This section is only applicable for Kubernetes deployments.
-- [Query traces using the SDK](export-traces.md) - The recommended way to query runs (the span data in LangSmith traces) is to use the list_runs method in the SDK or /runs/query endpoint in the API. LangSmith stores traces in a simple format that is...
+- [Query traces using the SDK](export-traces.md) - The recommended way to query runs (the span data in LangSmith traces) is to use the runs.query method in the SDK or the POST /api/v2/runs/query endpoint in the API. LangSmith stores traces in a...
 - [Frequently asked questions](faq.md) - You have likely deployed LangSmith without setting up SSO. LangSmith requires SSO to manage users and API keys. You can find more information on setting up SSO in the configuration section.
 - [Feedback data format](feedback-data-format.md) - Before diving into this content, it might be helpful to read the following:
 - [How to fetch performance metrics for an experiment](fetch-perf-metrics-experiment.md) - Tracing projects and experiments use the same underlying data structure in our backend, which is called a "session."
@@ -455,13 +455,14 @@ tags: [index, langsmith]
 - [LangSmith shared responsibility model](shared-responsibility-model.md) - Overview of how LangChain and customers share security responsibilities for the LangSmith platform.
 - [LangSmith skills](skills.md) - Use Agent Skills to work with LangSmith traces, datasets, and evaluators from your coding agent.
 - [LangSmith API reference](smith-api-ref.md) - The LangSmith REST API provides programmatic access to tracing, datasets, experiments, annotations, and other LangSmith platform features.
+- [Get health info](smith-api.md) - Get health information about the current deployment of LangSmith.
 - [Migrate dataset experiment runs to SmithDB](smithdb-sdk-migration-experiments.md) - Migrate the LangSmith SDK dataset experiment run methods to their SmithDB-backed equivalents.
 - [Migrate feedback and sharing methods to SmithDB](smithdb-sdk-migration-feedback.md) - Migrate the LangSmith SDK feedback, annotation queue, and public run methods to their SmithDB-backed equivalents.
 - [Migrate run queries to SmithDB](smithdb-sdk-migration-query-runs.md) - Migrate the LangSmith SDK run query methods to their SmithDB-backed equivalents.
 - [Migrate run retrieval to SmithDB](smithdb-sdk-migration-runs.md) - Migrate the LangSmith SDK methods that retrieve a single run or build a run URL.
 - [Migrate thread methods to SmithDB](smithdb-sdk-migration-threads.md) - Migrate the LangSmith SDK thread methods to their SmithDB-backed equivalents.
 - [Migrate trace methods to SmithDB](smithdb-sdk-migration-traces.md) - Migrate the LangSmith SDK trace methods to their SmithDB-backed equivalents.
-- [Migrate to SmithDB-backed SDK methods](smithdb-sdk-migration.md) - Migrate your existing LangSmith SDK methods to their SmithDB-backed equivalents for faster agent observability.
+- [Migrate to SmithDB-backed APIs](smithdb-sdk-migration.md) - Migrate your existing LangSmith SDK methods to their SmithDB-backed equivalents for faster agent observability.
 - [Fine-tune models with Smithtune](smithtune.md) - Use Smithtune to fine-tune models on LangSmith conversations and compare the results in LangSmith.
 - [Stateless runs](stateless-runs.md) - Most of the time, you provide a thread_id to your client when you run your graph in order to keep track of prior runs through the persistent state implemented in LangSmith Deployment. However, if you...
 - [Isolate store data per user](store-auth.md) - Scope long-term store data to each authenticated user in LangSmith Deployment using auth handlers.

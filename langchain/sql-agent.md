@@ -941,7 +941,7 @@ Tool: sql_db_query
 Args: {'query': 'SELECT g.Name AS Genre, AVG(t.Milliseconds) AS AvgTrackLength FROM Track t JOIN Genre g ON t.GenreId = g.GenreId GROUP BY g.Name ORDER BY AvgTrackLength DESC LIMIT 1;'}
 ```
 
-We can resume execution, in this case accepting the query, using [Command](../langgraph/use-graph-api.md#combine-control-flow-and-state-updates-with-command):
+We can resume execution, in this case accepting the query, using [Command](../langgraph/graph-api-send-command.md#combine-control-flow-and-state-updates-with-command):
 
 ```python
 from langgraph.types import Command # [!code highlight]

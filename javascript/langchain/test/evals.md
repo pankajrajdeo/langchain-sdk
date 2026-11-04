@@ -240,7 +240,7 @@ You can use an LLM to evaluate the agent's execution path with the `createTrajec
 > import { createTrajectoryLLMAsJudge, TRAJECTORY_ACCURACY_PROMPT } from "agentevals";
 >
 > const evaluator = createTrajectoryLLMAsJudge({  // [!code highlight]
->   model: "openai:o3-mini",  // [!code highlight]
+>   model: "openai:gpt-5.4-mini",  // [!code highlight]
 >   prompt: TRAJECTORY_ACCURACY_PROMPT,  // [!code highlight]
 > });  // [!code highlight]
 >
@@ -264,7 +264,7 @@ You can use an LLM to evaluate the agent's execution path with the `createTrajec
 > import { createTrajectoryLLMAsJudge, TRAJECTORY_ACCURACY_PROMPT_WITH_REFERENCE } from "agentevals";
 >
 > const evaluator = createTrajectoryLLMAsJudge({
->   model: "openai:o3-mini",
+>   model: "openai:gpt-5.4-mini",
 >   prompt: TRAJECTORY_ACCURACY_PROMPT_WITH_REFERENCE,
 > });
 >
@@ -298,7 +298,7 @@ LangSmith offers two main approaches for running evaluations: [Vitest/Jest](../.
 > import { createTrajectoryLLMAsJudge, TRAJECTORY_ACCURACY_PROMPT } from "agentevals";
 >
 > const trajectoryEvaluator = createTrajectoryLLMAsJudge({
->   model: "openai:o3-mini",
+>   model: "openai:gpt-5.4-mini",
 >   prompt: TRAJECTORY_ACCURACY_PROMPT,
 > });
 >
@@ -361,7 +361,7 @@ LangSmith offers two main approaches for running evaluations: [Vitest/Jest](../.
 > import { createTrajectoryLLMAsJudge, TRAJECTORY_ACCURACY_PROMPT } from "agentevals";
 >
 > const trajectoryEvaluator = createTrajectoryLLMAsJudge({
->   model: "openai:o3-mini",
+>   model: "openai:gpt-5.4-mini",
 >   prompt: TRAJECTORY_ACCURACY_PROMPT,
 > });
 >

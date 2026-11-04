@@ -236,11 +236,11 @@ print(answer.content)
 
 [CrateDBSemanticCache Example]: https://github.com/crate/langchain-cratedb/blob/main/examples/basic/cache.py
 
-[CrateDBChatMessageHistory Tutorial]: https://github.com/crate/cratedb-examples/blob/main/topic/machine-learning/llm-langchain/conversational_memory.ipynb
+[CrateDBChatMessageHistory Tutorial]: https://github.com/crate/cratedb-examples/blob/main/topic/machine-learning/langchain/conversational_memory.ipynb
 
-[CrateDBLoader Tutorial]: https://github.com/crate/cratedb-examples/blob/main/topic/machine-learning/llm-langchain/document_loader.ipynb
+[CrateDBLoader Tutorial]: https://github.com/crate/cratedb-examples/blob/main/topic/machine-learning/langchain/document_loader.ipynb
 
-[CrateDBVectorStore Tutorial]: https://github.com/crate/cratedb-examples/blob/main/topic/machine-learning/llm-langchain/vector_search.ipynb
+[CrateDBVectorStore Tutorial]: https://github.com/crate/cratedb-examples/blob/main/topic/machine-learning/langchain/vector_search.ipynb
 
 [langchain-cratedb]: https://pypi.org/project/langchain-cratedb/
 

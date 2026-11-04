@@ -1,6 +1,6 @@
 ---
 title: "List data planes for the current organization"
-description: "Returns up to 50 data planes owned by the caller's organization across all lifecycle states. Sorted by status priority (active first), then newest first. Requires BYOC to be enabled for the org."
+description: "Returns up to 50 data planes owned by the caller's organization across all lifecycle states. Sorted by status priority (active first), then newest first. Requires BYOC to be enabled for the org. Omit..."
 source: "https://docs.langchain.com/langsmith/smith-api/data_planes/list-data-planes-for-the-current-organization"
 category: "docs"
 tags: [docs, langsmith, smith-api, data_planes, list-data-planes-for-the-current-organization]
@@ -9,6 +9,7 @@ tags: [docs, langsmith, smith-api, data_planes, list-data-planes-for-the-current
 # List data planes for the current organization
 
 > Returns up to 50 data planes owned by the caller's organization across all lifecycle states. Sorted by status priority (active first), then newest first. Requires BYOC to be enabled for the org.
+Omit view or use view=FULL for the full response (requires organization:infrastructure:read). view=SUMMARY returns only id, name, api_url, status, and workspaces and requires organization:read or organization:infrastructure:read. Without infrastructure read, workspace references are limited to the caller's memberships.
 
 ## OpenAPI
 
@@ -172,6 +173,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /orgs/current/data-planes:
@@ -183,7 +185,23 @@ paths:
         Returns up to 50 data planes owned by the caller's organization across
         all lifecycle states. Sorted by status priority (active first), then
         newest first. Requires BYOC to be enabled for the org.
-      parameters: []
+
+        Omit view or use view=FULL for the full response (requires
+        organization:infrastructure:read). view=SUMMARY returns only id, name,
+        api_url, status, and workspaces and requires organization:read or
+        organization:infrastructure:read. Without infrastructure read, workspace
+        references are limited to the caller's memberships.
+      parameters:
+        - description: Response view. Specify once; omit for the full resource.
+          name: view
+          in: query
+          schema:
+            type: string
+            enum:
+              - FULL
+              - SUMMARY
+            default: FULL
+            title: View
       responses:
         '200':
           description: Data planes
@@ -192,13 +210,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/data_planes.ListPublicDataPlanesResponse'
         '400':
-          description: Invalid organization ID
+          description: Invalid organization ID or view
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/shared.ProblemDetails'
         '401':
           description: Unauthorized
           content:
@@ -208,7 +224,7 @@ paths:
                 additionalProperties:
                   type: string
         '403':
-          description: BYOC not enabled for this organization
+          description: BYOC not enabled or insufficient permissions for the requested view
           content:
             application/json:
               schema:
@@ -220,9 +236,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/shared.ProblemDetails'
       security:
         - API Key: []
         - Organization ID: []
@@ -236,6 +250,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/data_planes.PublicDataPlane'
+    shared.ProblemDetails:
+      description: RFC 7807 problem details returned on V2 API errors.
+      type: object
+      properties:
+        detail:
+          type: string
+        details:
+          description: >-
+            Details is a LangSmith extension carrying structured fields for
+            ErrorClass.
+          allOf:
+            - $ref: '#/components/schemas/shared.ParseErrorDetails'
+        error_class:
+          description: |-
+            ErrorClass is a LangSmith extension sub-categorizing a status code.
+            Additional values require expanding this enum and adding a oneOf
+            discriminator on Details to keep the class↔details contract typed.
+          type: string
+          enum:
+            - PARSE_FAILURE
+        instance:
+          type: string
+        remedy:
+          description: Remedy is a LangSmith extension for user-recoverable errors.
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
     data_planes.PublicDataPlane:
       type: object
       properties:
@@ -267,6 +312,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/data_planes.PublicDataPlaneWorkspace'
+    shared.ParseErrorDetails:
+      description: Structured fields describing an adapter parse failure.
+      type: object
+      required:
+        - adapter
+        - item_type
+      properties:
+        adapter:
+          type: string
+        item_type:
+          type: string
+        run_id:
+          type: string
     data_planes.DataPlaneFirewallSettings:
       type: object
       required:

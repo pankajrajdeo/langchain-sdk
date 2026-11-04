@@ -172,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/platform/orgs/current/roles/{role_id}/access-policies:
@@ -194,9 +195,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Access Policy Ids
       responses:
         '204':

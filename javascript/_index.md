@@ -7,7 +7,7 @@ tags: [index, javascript]
 
 # javascript
 
-12 pages here, 375 pages including subdirectories.
+12 pages here, 385 pages including subdirectories.
 
 ## Directories
 
@@ -16,7 +16,7 @@ tags: [index, javascript]
 - [deepagents/](deepagents/_index.md) - 37 pages
 - [integrations/](integrations/_index.md) - 184 pages
 - [langchain/](langchain/_index.md) - 81 pages
-- [langgraph/](langgraph/_index.md) - 41 pages
+- [langgraph/](langgraph/_index.md) - 51 pages
 - [migrate/](migrate/_index.md) - 3 pages
 - [reference/](reference/_index.md) - 1 page
 - [releases/](releases/_index.md) - 3 pages
@@ -29,7 +29,7 @@ tags: [index, javascript]
 - [Deep Agents overview](deepagents.md) - Agent harness for planning, subagents, and file-system context, available as Managed Deep Agents or the Deep Agents SDK
 - [Deep Agents overview](index.md) - Agent harness for planning, subagents, and file-system context, available as Managed Deep Agents or the Deep Agents SDK
 - [Middleware overview](langchain.md) - Control and customize agent execution at every step
-- [LangGraph overview](langgraph.md) - Gain control with LangGraph to design agents that reliably handle complex tasks
+- [LangGraph overview](langgraph.md) - Low-level orchestration framework and runtime for long-running, stateful agents
 - [Learn](learn.md) - Tutorials, conceptual guides, and resources to help you get started.
 - [Release policy](release-policy.md) - This page explains the LangChain and LangGraph release policies. Click on the tabs below to view the release policies for each:
 - [Changelog](releases.md) - Log of updates and improvements to our JavaScript/TypeScript packages

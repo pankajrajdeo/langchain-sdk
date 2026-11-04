@@ -174,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v2/public/threads/{share_token}/stats:
@@ -205,9 +206,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Selects
       responses:
         '200':

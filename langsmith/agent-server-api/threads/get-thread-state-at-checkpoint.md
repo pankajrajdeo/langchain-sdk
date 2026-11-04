@@ -94,6 +94,30 @@ paths:
             description: Whether to include subgraphs in the response.
           name: subgraphs
           in: query
+        - required: false
+          schema:
+            type: array
+            items:
+              anyOf:
+                - type: string
+                  enum:
+                    - values
+                    - next
+                    - tasks
+                    - checkpoint
+                    - metadata
+                    - created_at
+                    - parent_checkpoint
+                    - interrupts
+                - type: string
+                  pattern: ^values\.[A-Za-z0-9_-]+$
+            title: Select
+            description: >-
+              Specify which fields of the state to return. Use `values.<key>` to
+              return only that key of the state values, for example
+              `values.messages`. If not provided, all fields are returned.
+          name: select
+          in: query
       responses:
         '200':
           description: Success

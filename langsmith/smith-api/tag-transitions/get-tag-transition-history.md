@@ -174,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /repos/{owner}/{repo}/tags/{tag_name}/history:

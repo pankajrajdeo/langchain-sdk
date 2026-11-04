@@ -16,7 +16,7 @@ tags: [docs, langsmith, hybrid-legacy]
 
 > [!NOTE]
 >
-> The hybrid option requires an [Enterprise](https://langchain.com/pricing) plan. [Get a demo](https://www.langchain.com/contact-sales) to learn more.
+> The hybrid option requires an [Enterprise](https://www.langchain.com/pricing) plan. [Get a demo](https://www.langchain.com/contact-sales) to learn more.
 
 The **hybrid** model splits LangSmith infrastructure between LangChain's cloud and yours:
 

@@ -172,6 +172,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v2/sandboxes/usage/costs:
@@ -209,10 +210,10 @@ paths:
           name: resource_type
           in: query
           schema:
+            type: string
             enum:
               - SANDBOX
               - SNAPSHOT
-            type: string
             title: Resource Type
         - description: Resource UUID filter; repeat this parameter up to 100 times
           name: resource_ids
@@ -220,9 +221,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Resource Ids
         - description: Maximum rows to return
           name: page_size
@@ -239,10 +240,10 @@ paths:
           name: granularity
           in: query
           schema:
+            type: string
             enum:
               - HOUR
               - RESOURCE
-            type: string
             default: HOUR
             title: Granularity
         - description: Opaque pagination cursor

@@ -181,6 +181,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/runs/rules/validate:
@@ -299,7 +300,7 @@ components:
         is_tracing_disabled:
           type: boolean
           title: Is Tracing Disabled
-          default: false
+          default: true
         extend_evaluator_trace_retention:
           type: boolean
           title: Extend Evaluator Trace Retention

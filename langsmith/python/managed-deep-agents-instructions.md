@@ -14,7 +14,7 @@ Instructions define always-on agent behavior. They form the core of the agent's 
 
 > [!NOTE]
 >
-> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md) and [Bring Your Own Cloud (BYOC)](../byoc.md). Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC.
 
 Put the instructions for your agent into `instructions.md` at the project root:
 

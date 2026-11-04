@@ -14,7 +14,7 @@ The agent definition selects the model and core capabilities of a managed deep a
 
 > [!NOTE]
 >
-> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md) and [Bring Your Own Cloud (BYOC)](../byoc.md). Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC.
 
 The agent entry lives at the project root:
 

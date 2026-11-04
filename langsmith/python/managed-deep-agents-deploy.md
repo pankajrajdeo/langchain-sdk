@@ -14,7 +14,7 @@ Deploying a Managed Deep Agent compiles a code-first project into a managed Lang
 
 > [!NOTE]
 >
-> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md).
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md) and [Bring Your Own Cloud (BYOC)](../byoc.md). Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC.
 
 This page covers secrets routing and deploy options. To test the agent before deploying, see [Develop locally with LangSmith Studio](managed-deep-agents-local-development.md). For command flags, the deploy step list, and troubleshooting, see the [CLI reference](managed-deep-agents-cli.md).
 
@@ -22,7 +22,7 @@ This page covers secrets routing and deploy options. To test the agent before de
 
 Before you deploy, make sure you have:
 
-* A LangSmith Cloud workspace.
+* A LangSmith Cloud workspace or a workspace in a [BYOC data plane](../byoc-onboarding.md).
 
 * A [LangSmith API key](../create-account-api-key.md) for that workspace, in `.env` or your shell environment. On an interactive terminal, `mda deploy` prompts for a key or signs you in through the browser instead.
 
@@ -60,6 +60,14 @@ For more information on regions, see the [Regions FAQ](../regions-faq.md).
 > [!NOTE]
 >
 > LangSmith managed tools are available in GCP US only.
+
+## Select a BYOC data plane
+
+For BYOC, use version 0.10 of the Managed Deep Agents CLI and SDK. Set `LANGSMITH_ENDPOINT` to your data plane's API URL, not a SaaS regional endpoint. Find the endpoint in **Settings > Data Planes**. See [BYOC usage](../byoc-usage.md).
+
+Set `LANGSMITH_API_KEY` to a key for a workspace inside that data plane. Set `LANGSMITH_WORKSPACE_ID` to the target workspace ID, or pass `--workspace-id` to `mda deploy`. Configure these values in your project's `.env` or shell environment before deploying.
+
+The CLI derives the Deployment API URL from the data plane endpoint. Do not append `/api-host` to `LANGSMITH_ENDPOINT`.
 
 ## Deploy to LangSmith
 

@@ -199,6 +199,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /datasets/{dataset_id}/experiment-view-overrides/{id}:

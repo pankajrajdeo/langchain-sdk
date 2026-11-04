@@ -75,7 +75,7 @@ resume, and fork agent work while it is happening.
 **agent.py**
 
 ```python
-from langchain import create_agent
+from langchain.agents import create_agent
 from langgraph.checkpoint.memory import MemorySaver
 
 agent = create_agent(

@@ -174,6 +174,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v2/threads/{thread_id}/traces:
@@ -249,6 +250,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - THREAD_ID
@@ -277,7 +279,6 @@ paths:
                 - ERROR_PREVIEW
                 - TURN_NUMBER
               type: string
-            type: array
             title: Selects
         - description: >-
             `trace_filter` narrows traces by applying a LangSmith filter

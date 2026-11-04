@@ -181,6 +181,7 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: teams
   - name: usage
 paths:
   /api/v1/model-price-map:
@@ -331,8 +332,28 @@ components:
             - type: 'null'
           title: Tenant Id
           description: >-
-            Workspace that owns the entry. Null for LangSmith default entries,
-            which cannot be updated or deleted.
+            Workspace that owns the entry. Null for organization entries and for
+            LangSmith default entries.
+        organization_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Organization Id
+          description: >-
+            Organization that owns the entry, which every workspace in it prices
+            against unless the workspace overrides it. Null otherwise.
+        scope:
+          type: string
+          enum:
+            - BUILTIN
+            - ORGANIZATION
+            - WORKSPACE
+          title: Scope
+          description: >-
+            Which scope owns the entry. Server-assigned from the route that
+            created it.
+          default: BUILTIN
         match_path:
           items:
             type: string

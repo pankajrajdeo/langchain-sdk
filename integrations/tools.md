@@ -542,12 +542,15 @@ The following table shows tools that generate video, image, or audio assets:
 | [`LiquidVisionToolkit`](https://github.com/lv-analytics/liquidvision-mcp/tree/main/integrations/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-liquidvision/month)](https://pypi.org/project/langchain-liquidvision/) |
 | [`TokenUsageToolkit`](https://tokenusage.dev/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-tokenusage-dev/month)](https://pypi.org/project/langchain-tokenusage-dev/) |
 | [`AlterLabScrapeTool`](https://pypi.org/project/langchain-alterlab/) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-alterlab/month)](https://pypi.org/project/langchain-alterlab/) |
+| [`SealKeeperLookupTool`](https://sealkeeper.run/docs/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-sealkeeper/month)](https://pypi.org/project/langchain-sealkeeper/) |
 | [`Hlido`](https://hlido.eu/docs/) | [  ![Downloads per month](https://static.pepy.tech/badge/hlido-trust/month)](https://pypi.org/project/hlido-trust/) |
 | [`TempGuru`](https://tempguru.co/ai-agents) | [  ![Downloads per month](https://static.pepy.tech/badge/tempguru/month)](https://pypi.org/project/tempguru/) |
 | [`viaSocket`](https://github.com/Walkover-Web-Solution/viasocket-apps/tree/main/python#langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/viasocket/month)](https://pypi.org/project/viasocket/) |
 | [`HyperresearchAnswerTool`](https://hyperresearch.ai/docs/answers/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-hyperresearch/month)](https://pypi.org/project/langchain-hyperresearch/) |
 | [`Solvecha`](https://github.com/Solvecha/solvecha-skills/tree/main/python) | [  ![Downloads per month](https://static.pepy.tech/badge/solvecha/month)](https://pypi.org/project/solvecha/) |
+| [`StophyToolkit`](https://github.com/stophydotdev/stophy/tree/main/sdk/packages/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-stophy/month)](https://pypi.org/project/langchain-stophy/) |
 | [`VideoGenToolkit`](https://github.com/video-gen/langchain-videogen#readme) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-videogen/month)](https://pypi.org/project/langchain-videogen/) |
+| [`X402CleanWebTool`](https://github.com/nohosa001-pixel/x402-cleanweb-agent/tree/main/packages/langchain-x402-cleanweb#readme) | N/A |
 | [`x402checkToolkit`](https://x402check.dev) | N/A |
 | [`AgentLair`](https://agentlair.dev/docs) | N/A |
 | [`Browserless`](https://browserless.io) | N/A |
