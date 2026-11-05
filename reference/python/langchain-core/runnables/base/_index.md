@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain-core/runnables/base"
-description: "Index of 42 pages and 10 subdirectories under reference/python/langchain-core/runnables/base."
+description: "Index of 42 pages and 11 subdirectories under reference/python/langchain-core/runnables/base."
 category: "index"
 tags: [index, reference, python, langchain-core, runnables, base]
 ---
 
 # reference/python/langchain-core/runnables/base
 
-42 pages here, 202 pages including subdirectories.
+42 pages here, 203 pages including subdirectories.
 
 ## Directories
 
@@ -21,6 +21,7 @@ tags: [index, reference, python, langchain-core, runnables, base]
 - [RunnableParallel/](RunnableParallel/_index.md) - 16 pages
 - [RunnableSequence/](RunnableSequence/_index.md) - 21 pages
 - [RunnableSerializable/](RunnableSerializable/_index.md) - 5 pages
+- [_ChunkAccumulator/](_ChunkAccumulator/_index.md) - 1 page
 
 ## Files
 

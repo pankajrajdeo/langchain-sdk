@@ -22,10 +22,11 @@ Parser for JSON output.
 
 ## Methods
 
+- [`raise_if_refused()`](https://reference.langchain.com/python/langchain-core/output_parsers/json/raise_if_refused)
 - [`parse_and_check_json_markdown()`](https://reference.langchain.com/python/langchain-core/output_parsers/json/parse_and_check_json_markdown)
 - [`parse_json_markdown()`](https://reference.langchain.com/python/langchain-core/output_parsers/json/parse_json_markdown)
 - [`parse_partial_json()`](https://reference.langchain.com/python/langchain-core/output_parsers/json/parse_partial_json)
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/output_parsers/json.py)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/output_parsers/json.py)

@@ -12,7 +12,7 @@ tags: [docs, langsmith, byoc-migration]
 
 The [LangSmith data migration tool](https://github.com/langchain-ai/langsmith-data-migration-tool) copies data from an existing LangSmith Cloud organization or [self-hosted](self-hosted.md) instance into a BYOC data plane. The tool copies data (as opposed to moving data over), so the source instance is unchanged and stays available during the move.
 
-Run the migration after your data plane is [active and reachable](byoc-onboarding.md). Trace migration is supported on AWS. Contact the LangChain team to arrange it, and plan the [manual steps](#move-data-the-tool-does-not-migrate) alongside the tool.
+Run the migration after your data plane is [active and reachable](byoc-onboarding-aws.md). Trace migration is supported on AWS. Contact the LangChain team to arrange it, and plan the [manual steps](#move-data-the-tool-does-not-migrate) alongside the tool.
 
 ## Supported resources
 
@@ -48,7 +48,7 @@ langsmith-migrator --help
 
 **2. Create the destination workspaces**
 
-Workspace IDs differ between instances, so create the target workspaces in the data plane first. See the `Create workspaces` section of the [BYOC onboarding docs](byoc-onboarding.md).
+Workspace IDs differ between instances, so create the target workspaces in the data plane first. See the `Create workspaces` section of the [BYOC onboarding docs](byoc-onboarding-aws.md).
 
 Migration commands run per workspace pair. Repeat them for each pair.
 
@@ -75,7 +75,7 @@ export LANGSMITH_VERIFY_SSL=true
 > * **`LANGSMITH_OLD_API_KEY`**: An API key from your current deployment with permission to read all resources you want to migrate. For LangSmith Cloud at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-byoc-migration), create it under **Settings > API Keys**. For another Cloud region or a self-hosted instance, use that deployment's UI.
 > * **`LANGSMITH_NEW_API_KEY`**: An API key created under **Settings > API Keys** at [aws.smith.langchain.com](https://aws.smith.langchain.com). Scope it to a workspace in your destination BYOC data plane. See [Create an API key](create-account-api-key.md#api-keys).
 > * **`LANGSMITH_OLD_BASE_URL`**: Your current deployment's API URL. For LangSmith Cloud in GCP US, use `https://api.smith.langchain.com`. For another Cloud region, use its [regional API URL](create-account-api-key.md#configure-the-sdk). For self-hosted LangSmith, use your instance's API URL.
-> * **`LANGSMITH_NEW_BASE_URL`**: Your destination BYOC data plane's API URL, including `https://`. Find it under **Settings > Data Planes**. See [BYOC onboarding](byoc-onboarding.md).
+> * **`LANGSMITH_NEW_BASE_URL`**: Your destination BYOC data plane's API URL, including `https://`. Find it under **Settings > Data Planes**. See [BYOC onboarding](byoc-onboarding-aws.md).
 
 > [!WARNING]
 >
@@ -156,7 +156,7 @@ For more information, see [LangSmith Deployment](deployment.md).
 
 ## See also
 
-* [BYOC onboarding](byoc-onboarding.md)
+* [BYOC onboarding](byoc-onboarding-aws.md)
 * [BYOC usage](byoc-usage.md)
 * [Bulk export trace data](data-export.md)
 

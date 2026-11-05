@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain-core/messages/content"
-description: "Index of 33 pages and 16 subdirectories under reference/python/langchain-core/messages/content."
+description: "Index of 34 pages and 17 subdirectories under reference/python/langchain-core/messages/content."
 category: "index"
 tags: [index, reference, python, langchain-core, messages, content]
 ---
 
 # reference/python/langchain-core/messages/content
 
-33 pages here, 140 pages including subdirectories.
+34 pages here, 146 pages including subdirectories.
 
 ## Directories
 
@@ -20,6 +20,7 @@ tags: [index, reference, python, langchain-core, messages, content]
 - [NonStandardContentBlock/](NonStandardContentBlock/_index.md) - 4 pages
 - [PlainTextContentBlock/](PlainTextContentBlock/_index.md) - 11 pages
 - [ReasoningContentBlock/](ReasoningContentBlock/_index.md) - 5 pages
+- [RefusalContentBlock/](RefusalContentBlock/_index.md) - 5 pages
 - [ServerToolCall/](ServerToolCall/_index.md) - 6 pages
 - [ServerToolCallChunk/](ServerToolCallChunk/_index.md) - 6 pages
 - [ServerToolResult/](ServerToolResult/_index.md) - 7 pages
@@ -43,6 +44,7 @@ tags: [index, reference, python, langchain-core, messages, content]
 - [NonStandardContentBlock](NonStandardContentBlock.md) - Provider-specific content data.
 - [PlainTextContentBlock](PlainTextContentBlock.md) - Plaintext data (e.g., from a .txt or .md document).
 - [ReasoningContentBlock](ReasoningContentBlock.md) - Reasoning output from a LLM.
+- [RefusalContentBlock](RefusalContentBlock.md) - An explicit refusal reported by the model provider.
 - [ServerToolCall](ServerToolCall.md) - Tool call that is executed server-side.
 - [ServerToolCallChunk](ServerToolCallChunk.md) - A chunk of a server-side tool call (yielded when streaming).
 - [ServerToolResult](ServerToolResult.md) - Result of a server-side tool call.

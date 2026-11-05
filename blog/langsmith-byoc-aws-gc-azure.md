@@ -56,11 +56,12 @@ Each cloud has its own network policies, identity model, and security requiremen
 - [LLM Gateway](../langsmith/llm-gateway.md) is runs in the data plane with support for bringing your own provider keys.
 - [LangSmith deployment](../langsmith/deployment.md) runs in your cluster.
 - [Engine](../langsmith/engine.md) runs over your data on your own model providers.
+- [Sandboxes](../langsmith/sandboxes.md) for isolation within your private cloud
 - On all three clouds, BYOC data planes also run [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) endpoints.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aea28a4284db9a54bf576b8_byoc-cloud-vs-byoc.svg)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aebb260e45ffe2b42dea5ce_image-no-azure.png)
 
-**Azure:** BYOC runs the data plane inside a dedicated virtual network with a [private AKS API endpoint](https://learn.microsoft.com/en-us/azure/aks/private-clusters). We deploy [Istio](https://istio.io/latest/docs/) and [KEDA with Helm](https://keda.sh/docs/latest/deploy/) for ingress routing and event-driven scaling, and system telemetry goes to [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/). Support for [LangSmith Sandboxes](https://www.langchain.com/langsmith/sandboxes) on Azure is coming soon.
+**Azure:** BYOC runs the data plane inside a dedicated virtual network with a [private AKS API endpoint](https://learn.microsoft.com/en-us/azure/aks/private-clusters). We deploy [Istio](https://istio.io/latest/docs/) and [KEDA with Helm](https://keda.sh/docs/latest/deploy/) for ingress routing and event-driven scaling, and system telemetry goes to [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/).
 
 ![LangSmith Data Planes settings page listing two Azure BYOC data planes](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aea10dd672af68b149a7ffd_6aea10239315ae16d38add01_byoc-data-planes-azure.png)
 

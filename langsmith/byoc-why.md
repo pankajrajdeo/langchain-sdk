@@ -44,7 +44,7 @@ To plan a migration, [contact our sales team](https://www.langchain.com/contact-
 ## See also
 
 * [BYOC overview](byoc.md)
-* [BYOC architecture](byoc-architecture.md)
+* [BYOC architecture](byoc-architecture-aws.md)
 * [Self-hosted LangSmith](self-hosted.md)
 
 ***

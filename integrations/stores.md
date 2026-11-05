@@ -61,6 +61,7 @@ You can also implement your own custom store by extending the [`BaseStore`](http
 | [`GridGainCheckpointSaver`](https://pypi.org/project/langgraph-checkpoint-gridgain/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-checkpoint-gridgain/month)](https://pypi.org/project/langgraph-checkpoint-gridgain/) |
 | [`UpstashStore`](https://github.com/Tghez/langgraph-store-upstash) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-upstash/month)](https://pypi.org/project/langgraph-store-upstash/) |
 | [`InspeximusStore`](https://dancenitra.github.io/inspeximus/) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-inspeximus/month)](https://pypi.org/project/langgraph-store-inspeximus/) |
+| [`MemtomemPipelineStore`](https://github.com/memtomem/memtomem/blob/main/packages/langchain-memtomem/README.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-memtomem/month)](https://pypi.org/project/langchain-memtomem/) |
 | [`TypeDBStore`](https://typedb.com/docs) | [  ![Downloads per month](https://static.pepy.tech/badge/langgraph-store-typedb/month)](https://pypi.org/project/langgraph-store-typedb/) |
 | [`InMemoryByteStore`](stores/in_memory.md) | N/A |
 | [`LocalFileStore`](stores/file_system.md) | N/A |

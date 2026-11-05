@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langgraph-sdk/schema"
-description: "Index of 48 pages and 0 subdirectories under reference/python/langgraph-sdk/schema."
+description: "Index of 49 pages and 0 subdirectories under reference/python/langgraph-sdk/schema."
 category: "index"
 tags: [index, reference, python, langgraph-sdk, schema]
 ---
 
 # reference/python/langgraph-sdk/schema
 
-48 pages here.
+49 pages here.
 
 ## Files
 
@@ -55,6 +55,7 @@ tags: [index, reference, python, langgraph-sdk, schema]
 - [TasksStreamPart](TasksStreamPart.md) - Stream part emitted for stream_mode="tasks".
 - [Thread](Thread.md) - Represents a conversation thread.
 - [ThreadState](ThreadState.md) - Represents the state of a thread.
+- [ThreadStateSelectField](ThreadStateSelectField.md) - Type Alias in langgraph_sdk
 - [ThreadTask](ThreadTask.md) - Represents a task within a thread.
 - [ThreadUpdateStateResponse](ThreadUpdateStateResponse.md) - Represents the response from updating a thread's state.
 - [UpdatesStreamPart](UpdatesStreamPart.md) - Stream part emitted for stream_mode="updates".

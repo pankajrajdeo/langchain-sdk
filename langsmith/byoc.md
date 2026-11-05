@@ -20,11 +20,13 @@ BYOC uses a split responsibility model: the control plane runs in LangChain's cl
 
 ## Get started
 
-To deploy LangSmith BYOC, [contact our sales team](https://www.langchain.com/contact-sales). After the LangChain team enables BYOC for your organization, follow the [onboarding guide](byoc-onboarding.md) to create your first data plane.
+To deploy LangSmith BYOC, [contact our sales team](https://www.langchain.com/contact-sales). After the LangChain team enables BYOC for your organization, follow the onboarding guide for [AWS](byoc-onboarding-aws.md), [GCP](byoc-onboarding-gcp.md), or [Azure](byoc-onboarding-azure.md) to create your first data plane.
 
 ## Regions and cloud providers
 
-BYOC is generally available (GA) on AWS. Support for additional cloud providers is planned for the second half of 2026.
+BYOC is generally available (GA) on AWS. BYOC on GCP and Azure is available in [beta](release-stages.md).
+
+### AWS
 
 You can deploy LangSmith BYOC in any of the following AWS regions:
 
@@ -35,28 +37,40 @@ You can deploy LangSmith BYOC in any of the following AWS regions:
 | **EU** | `eu-central-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`, `eu-north-1` |
 | **APAC** | `ap-south-1`, `ap-northeast-1`, `ap-northeast-2`, `ap-northeast-3`, `ap-southeast-1`, `ap-southeast-2` |
 
-The control plane runs in `us-east-2` regardless of where you place your data planes. If you provision a data plane outside the US, your sensitive application data stays in that region while control plane metadata remains in the US:
+The AWS control plane runs in `us-east-2` regardless of where you place your AWS data planes. If you provision a data plane outside the US, your sensitive application data stays in that region while control plane metadata remains in the US:
 
 | Control plane (US) | Data plane (your region) |
 | - | - |
 | Users, roles, billing, organization configuration, SSO configuration, API keys | Traces, experiments, datasets, insights runs, annotation queues, workspace secrets, and all other sensitive application data |
 
+### GCP
+
+BYOC on GCP can run in any GCP region. If the region you need is not enabled yet, contact the LangChain team to add it.
+
+The GCP control plane runs in `us-central1`, on the LangSmith US region at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-byoc). The same split of control plane metadata and data plane application data applies. For setup, see [BYOC onboarding on GCP](byoc-onboarding-gcp.md). For what LangSmith deploys in your project, see [BYOC architecture on GCP](byoc-architecture-gcp.md).
+
+### Azure
+
+BYOC on Azure can run in any Azure region. If the region you need is not enabled yet, contact the LangChain team to add it.
+
+The Azure control plane runs in `centralus`, at [azure.smith.langchain.com](https://azure.smith.langchain.com). The same split of control plane metadata and data plane application data applies. For setup, see [BYOC onboarding on Azure](byoc-onboarding-azure.md). For what LangSmith deploys in your subscription, see [BYOC architecture on Azure](byoc-architecture-azure.md).
+
 ## Available features
 
-The following features are supported:
+The following features are supported on AWS. For GCP and Azure beta feature availability, confirm your requirements with the LangChain team before deployment:
 
 * **[Observability](observability.md)**: Tracing, projects, dashboards, and alerts.
 * **[Evaluation](evaluation.md)**: Datasets, experiments, evaluators, and annotation queues.
 * **[Insights](insights.md)**: Automatic analysis of traces to surface usage patterns, common agent behaviors, and failure modes.
 * **[LangSmith Chat](chat.md)**: Analyze traces, threads, prompts, and evaluations from inside your workspace.
 * **[Prompt engineering](prompt-context-hub.md#prompts)**: Prompts and prompt commits.
-* **[LangSmith Deployment](deployment.md)**: The LangSmith Deployment control plane runs inside your data plane's cluster, so both the agent management layer and your agents run in your VPC.
+* **[LangSmith Deployment](deployment.md)**: The LangSmith Deployment control plane runs inside your data plane's cluster, so both the agent management layer and your agents run in your private network.
 * **[Sandboxes](sandboxes.md)**: Usage through the CLI and SDK is identical to Cloud, except that you point at your data plane's endpoint.
 * **[LLM Gateway](llm-gateway.md)**: Call models across providers with one LangSmith API key, with spend, rate limit, and data protection policies enforced centrally.
 * **[LLM auth proxy](llm-auth-proxy-self-hosted.md)**: Enforce your own authentication flows for model invocations so provider credentials are never exposed to end users.
 * **[LangSmith MCP](langsmith-remote-mcp.md)**: Connect MCP-compatible clients to LangSmith to query data.
 * **[Fleet](fleet/index.md)**: Build and run no-code agents from templates, connectors, and channels.
-* **[SmithDB](smithdb-sdk-migration.md)**: The purpose-built observability backend for trace data, persisting to S3 in your account. Data planes created on or after October 21, 2026 run SmithDB only. ClickHouse is deprecated, and support ends in LangSmith v0.19.
+* **[SmithDB](smithdb-sdk-migration.md)**: The purpose-built observability backend for trace data, persisting to S3 on AWS, Cloud Storage on GCP, or Blob Storage on Azure in your cloud environment. Data planes created on or after October 21, 2026 run SmithDB only. ClickHouse is deprecated, and support ends in LangSmith v0.19.
 * **[Engine](engine.md)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces. On BYOC, Engine runs its models on your own model providers, and you configure your GitHub App and Slack app in the LangSmith UI. See [Engine on BYOC](engine-self-hosted.md#engine-on-byoc).
 * **[Managed Deep Agents](python/managed-deep-agents-overview.md)**: Build and run deep agents with connectors, channels, and schedules.
 
@@ -66,12 +80,16 @@ The following features are supported:
 
 ## Prerequisites
 
-Before LangChain can provision a data plane, you need the following:
+Before LangChain can provision a data plane on AWS, you need the following:
 
 * **A LangSmith organization on AWS**: Create one at [aws.smith.langchain.com](https://aws.smith.langchain.com), then send your organization ID to the LangChain team to enable BYOC.
 * **An AWS account**: LangChain recommends a fresh account dedicated to LangSmith BYOC, but it is not required.
 * **A supported region**: Pick one of the AWS regions listed above.
 * **An IAM role and external ID**: LangChain provides the external ID. Copy it using the button next to the **Data Planes** header in **Settings > Data Planes**, then apply the [`langsmith-byoc-role` Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/langsmith-byoc-role) with this value to create the role LangChain assumes to provision and manage your data plane. You must use this module.
+
+For GCP, see the [prerequisites in BYOC onboarding on GCP](byoc-onboarding-gcp.md#before-you-start).
+
+For Azure, see the [prerequisites in BYOC onboarding on Azure](byoc-onboarding-azure.md#before-you-start).
 
 ***
 

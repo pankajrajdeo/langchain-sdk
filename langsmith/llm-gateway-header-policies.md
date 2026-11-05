@@ -1,6 +1,6 @@
 ---
 title: "Header-based policies"
-description: "Scope gateway spend caps, rate limits, and model access by a custom request header, such as a customer, tenant, or team identifier, under a single API key."
+description: "Scope gateway spend caps, rate limits, and model access by a custom request header, such as a customer, tenant, or cost center identifier, without issuing a separate API key for each value."
 source: "https://docs.langchain.com/langsmith/llm-gateway-header-policies"
 category: "docs"
 tags: [docs, langsmith, llm-gateway-header-policies]
@@ -8,18 +8,20 @@ tags: [docs, langsmith, llm-gateway-header-policies]
 
 # Header-based policies
 
-> Scope gateway spend caps, rate limits, and model access by a custom request header, such as a customer, tenant, or team identifier, under a single API key.
+> Scope gateway spend caps, rate limits, and model access by a custom request header, such as a customer, tenant, or cost center identifier, without issuing a separate API key for each value.
 
 > [!NOTE]
 >
 > The LLM Gateway is in [beta](release-stages.md).
 
-A header-based policy scopes a gateway policy by a request header that your application sends, such as an end customer, tenant, team, or environment identifier. Use one to give each header value its own limit under a single [LangSmith API key](create-account-api-key.md), without issuing a separate key for each value.
+A header-based policy scopes a gateway policy by a request header that your application sends, such as a customer, tenant, or cost center identifier. Use one to give each header value its own limit without issuing a separate [LangSmith API key](create-account-api-key.md) for each value.
+
+The same headers can also attribute spend for chargebacks. On the **Usage** tab, the **Custom Dimension** breakdown groups spend by header value. For this and other ways to attribute spend, see [Attribute spend for chargebacks](llm-gateway-monitoring.md#attribute-spend-for-chargebacks).
 
 A policy uses a header in one of two ways:
 
-* **Default separated by header**: A default [spend](llm-gateway-spend-policies.md) or [rate limit](llm-gateway-rate-limit-policies.md) policy applies its limit independently to every header value. For example, a default workspace spend limit separated by `X-Gateway-Customer-Id` gives `acme` and `globex` independent limits within each [workspace](administration-overview.md#workspaces).
-* **Explicit header condition**: A spend, rate limit, or [model access](llm-gateway-model-access-policies.md) policy matches one exact header value. For example, a policy with the condition `X-Gateway-Customer-Id: acme` limits only requests that carry that value.
+* **Default separated by header**: A default [spend](llm-gateway-spend-policies.md) or [rate limit](llm-gateway-rate-limit-policies.md) policy applies its limit independently to every header value. For example, a default workspace spend limit separated by `X-Gateway-Customer-Id` gives `acme` and `globex` independent limits within each [workspace](administration-overview.md#workspaces). A default applies to every subject of its type, so it cannot target one API key.
+* **Explicit header condition**: A spend, rate limit, or [model access](llm-gateway-model-access-policies.md) policy matches one exact header value. For example, a policy with the condition `X-Gateway-Customer-Id: acme` limits only requests that carry that value. To limit header values on one API key only, scope explicit policies to that key.
 
 > [!WARNING]
 >
@@ -58,6 +60,7 @@ Separated defaults follow these rules:
 * **One header per default**: Enter the header name only. The request supplies the value that identifies the bucket.
 * **Independent limits**: Each subject and header-value pair receives the configured limit. The gateway creates each of these limits the first time a request carries a new header value.
 * **Fallback limit**: Requests without the configured header share a fallback limit for their subject.
+* **Every subject of the type**: A default applies to every workspace, user, or API key in the organization. You cannot separate a limit by header for one API key only. Use [explicit header conditions](#add-an-explicit-header-condition) scoped to that key instead.
 * **One default per subject type**: Creating a default replaces the existing default of the same policy type for the same subject type, even when the two defaults use different headers.
 
 The UI offers header separation on default spend limits only. To separate a default spend limit by header:
@@ -344,6 +347,7 @@ Spend caps and rate limits are separate families, so an end customer can hold on
 * [Spend policies](llm-gateway-spend-policies.md): set cost caps for organizations, workspaces, users, and API keys.
 * [Rate limit policies](llm-gateway-rate-limit-policies.md): limit requests and tokens in a rolling window.
 * [Model access policies](llm-gateway-model-access-policies.md): control which models each subject can call.
+* [Monitor LLM Gateway spend](llm-gateway-monitoring.md): break down spend by header value and attribute it for chargebacks.
 * [View LLM Gateway traces](llm-gateway-traces.md): understand where gateway traces land and who can configure policies.
 
 ***

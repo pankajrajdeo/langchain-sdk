@@ -221,7 +221,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] Before
 > >
-> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > from langsmith import Client
 > >
 > > client = Client()
@@ -232,7 +232,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] After
 > >
-> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import asyncio
 > > from datetime import datetime, timedelta, timezone
 > >
@@ -257,7 +257,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] Before
 > >
-> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -269,7 +269,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] After
 > >
-> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -287,7 +287,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] Before
 > >
-> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import com.langchain.smith.client.LangsmithClient
 > > import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
 > > import com.langchain.smith.models.runs.RunQueryParams
@@ -314,7 +314,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] After
 > >
-> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import java.time.OffsetDateTime
 > >
 > > import com.langchain.smith.client.LangsmithClient
@@ -344,7 +344,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] Before
 > >
-> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -394,7 +394,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] After
 > >
-> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -440,7 +440,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] Before
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > >
@@ -456,7 +456,7 @@ Fetch every thread with activity in a project during a time range.
 >
 > > [tab] After
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > >
@@ -480,7 +480,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] Before
 > >
-> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > from langsmith import Client
 > >
 > > client = Client()
@@ -491,7 +491,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] After
 > >
-> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import asyncio
 > > from datetime import datetime, timedelta, timezone
 > >
@@ -517,7 +517,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] Before
 > >
-> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -532,7 +532,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] After
 > >
-> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -551,7 +551,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] Before
 > >
-> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import com.langchain.smith.client.LangsmithClient
 > > import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
 > > import com.langchain.smith.models.runs.RunQueryParams
@@ -578,7 +578,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] After
 > >
-> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import java.time.OffsetDateTime
 > >
 > > import com.langchain.smith.client.LangsmithClient
@@ -610,7 +610,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] Before
 > >
-> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -660,7 +660,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] After
 > >
-> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -707,7 +707,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] Before
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > >
@@ -720,7 +720,7 @@ Find threads that had a turn end in an error.
 >
 > > [tab] After
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > >
@@ -971,7 +971,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] Before
 > >
-> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > from langsmith import Client
 > >
 > > client = Client()
@@ -982,7 +982,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] After
 > >
-> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import asyncio
 > >
 > > from langsmith import Client
@@ -1005,7 +1005,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] Before
 > >
-> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -1017,7 +1017,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] After
 > >
-> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -1035,7 +1035,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] Before
 > >
-> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > >
 > > import com.langchain.smith.client.LangsmithClient
 > > import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1064,7 +1064,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] After
 > >
-> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > >
 > > import com.langchain.smith.client.LangsmithClient
 > > import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1096,7 +1096,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] Before
 > >
-> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -1137,7 +1137,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] After
 > >
-> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -1180,7 +1180,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] Before
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > > THREAD_ID="<thread-id>"
@@ -1194,7 +1194,7 @@ Fetch all the traces (conversation turns) that belong to one thread.
 >
 > > [tab] After
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > > THREAD_ID="<thread-id>"
@@ -1214,7 +1214,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] Before
 > >
-> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > from langsmith import Client
 > >
 > > client = Client()
@@ -1229,7 +1229,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] After
 > >
-> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import asyncio
 > >
 > > from langsmith import Client
@@ -1254,7 +1254,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] Before
 > >
-> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -1270,7 +1270,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] After
 > >
-> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -1292,7 +1292,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] Before
 > >
-> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > >
 > > import com.langchain.smith.client.LangsmithClient
 > > import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1327,7 +1327,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] After
 > >
-> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > >
 > > import com.langchain.smith.client.LangsmithClient
 > > import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
@@ -1361,7 +1361,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] Before
 > >
-> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -1407,7 +1407,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] After
 > >
-> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -1454,7 +1454,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] Before
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > > THREAD_ID="<thread-id>"
@@ -1468,7 +1468,7 @@ Request just the fields you need instead of every field, to reduce response size
 >
 > > [tab] After
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > > THREAD_ID="<thread-id>"

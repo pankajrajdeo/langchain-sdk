@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langgraph/_internal/_constants"
-description: "Index of 41 pages and 0 subdirectories under reference/python/langgraph/_internal/_constants."
+description: "Index of 42 pages and 0 subdirectories under reference/python/langgraph/_internal/_constants."
 category: "index"
 tags: [index, reference, python, langgraph, internal, constants]
 ---
 
 # reference/python/langgraph/_internal/_constants
 
-41 pages here.
+42 pages here.
 
 ## Files
 
@@ -32,6 +32,7 @@ tags: [index, reference, python, langgraph, internal, constants]
 - [CONFIG_KEY_SEND](CONFIG_KEY_SEND.md) - View source on GitHub
 - [CONFIG_KEY_STREAM](CONFIG_KEY_STREAM.md) - View source on GitHub
 - [CONFIG_KEY_STREAM_MESSAGES_V2](CONFIG_KEY_STREAM_MESSAGES_V2.md) - View source on GitHub
+- [CONFIG_KEY_STRICT_RESUME](CONFIG_KEY_STRICT_RESUME.md) - View source on GitHub
 - [CONFIG_KEY_TASK_ID](CONFIG_KEY_TASK_ID.md) - View source on GitHub
 - [CONFIG_KEY_THREAD_ID](CONFIG_KEY_THREAD_ID.md) - View source on GitHub
 - [CONFIG_KEY_TIMED_ATTEMPT_OBSERVER](CONFIG_KEY_TIMED_ATTEMPT_OBSERVER.md) - View source on GitHub

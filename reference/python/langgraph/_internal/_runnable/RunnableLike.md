@@ -20,4 +20,4 @@ RunnableLike = LCRunnableLike | _RunnableWithWriter[Input, Output] | _RunnableWi
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5bd231cbfd913e05ebc662f519eb9a655bc766df/libs/langgraph/langgraph/_internal/_runnable.py#L320)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a4d4187e82cdb0a73d68c76d70d655dd73a6db0b/libs/langgraph/langgraph/_internal/_runnable.py#L320)

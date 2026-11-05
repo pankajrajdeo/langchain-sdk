@@ -24,6 +24,7 @@ get_state(
     checkpoint_id: str | None = None,
     *,
     subgraphs: bool = False,
+    select: list[ThreadStateSelectField] | None = None,
     headers: Mapping[str, str] | None = None,
     params: QueryParamTypes | None = None,
 ) -> ThreadState
@@ -118,6 +119,15 @@ print(thread_state)
 }
 ```
 
+Fetch only the `messages` state key:
+
+```python
+thread_state = await client.threads.get_state(
+    thread_id="my_thread_id",
+    select=["values.messages"],
+)
+```
+
 ## Parameters
 
 | Name | Type | Required | Description |
@@ -126,6 +136,7 @@ print(thread_state)
 | `checkpoint` | `Checkpoint \| None` | No | The checkpoint to get the state of. (default: `None`) |
 | `checkpoint_id` | `str \| None` | No | (deprecated) The checkpoint ID to get the state of. (default: `None`) |
 | `subgraphs` | `bool` | No | Include subgraphs states. (default: `False`) |
+| `select` | `list[ThreadStateSelectField] \| None` | No | Fields to include in the response. Use `values.<key>` to return a single state key (e.g. `values.messages`), which lets the server skip loading the rest of the state. Defaults to all fields. (default: `None`) |
 | `headers` | `Mapping[str, str] \| None` | No | Optional custom headers to include with the request. (default: `None`) |
 | `params` | `QueryParamTypes \| None` | No | Optional query parameters to include with the request. (default: `None`) |
 
@@ -137,4 +148,4 @@ The thread of the state.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5db97b9ccab6b8d9a5ab1e8f0bebea7c03a8708a/libs/sdk-py/langgraph_sdk/_async/threads.py#L485)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a4d4187e82cdb0a73d68c76d70d655dd73a6db0b/libs/sdk-py/langgraph_sdk/_async/threads.py#L486)

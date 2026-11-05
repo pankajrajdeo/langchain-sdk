@@ -67,6 +67,18 @@ Pick an environment based on where you want the [control plane](control-plane.md
 
 For where the LangSmith platform runs, see [Platform setup](platform-setup.md).
 
+## Understand deployment pricing
+
+Deployments on LangSmith Cloud are billed on the compute and database resources that each deployment requests.
+
+> [!NOTE]
+>
+> Deployments on LangSmith Cloud require a Plus or Enterprise plan. For more information, see the [pricing page](https://www.langchain.com/pricing).
+
+> [card] [LangSmith Deployment billing](billing.md#langsmith-deployment-billing)
+>
+> See the rates, the hourly cost of each deployment size, and ways to reduce deployment costs.
+
 ## After deployment
 
 Once deployed, agents work with [Agent Server](assistants.md)'s execution model: **assistants** for configuration, **threads** for state, and **runs** for workloads. For capabilities, tutorials, server customization, and operations, see [Agent Server](develop-agents-overview.md).

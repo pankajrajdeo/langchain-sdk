@@ -1,6 +1,6 @@
 ---
 title: "remote"
-description: "- CONF - CONFIG_KEY_CHECKPOINT_ID - CONFIG_KEY_CHECKPOINT_MAP - CONFIG_KEY_CHECKPOINT_NS - CONFIG_KEY_STREAM - CONFIG_KEY_TASK_ID - INTERRUPT - NS_SEP - All - StreamMode - StreamPart - logger"
+description: "- CONF - CONFIG_KEY_CHECKPOINT_ID - CONFIG_KEY_CHECKPOINT_MAP - CONFIG_KEY_CHECKPOINT_NS - CONFIG_KEY_STREAM - CONFIG_KEY_STRICT_RESUME - CONFIG_KEY_TASK_ID - INTERRUPT - NS_SEP - All - StreamMode -..."
 source: "https://reference.langchain.com/python/langgraph/pregel/remote"
 category: "reference"
 tags: [reference, langgraph, pregel, remote]
@@ -19,6 +19,7 @@ tags: [reference, langgraph, pregel, remote]
 - `CONFIG_KEY_CHECKPOINT_MAP`
 - `CONFIG_KEY_CHECKPOINT_NS`
 - `CONFIG_KEY_STREAM`
+- `CONFIG_KEY_STRICT_RESUME`
 - `CONFIG_KEY_TASK_ID`
 - `INTERRUPT`
 - `NS_SEP`
@@ -33,4 +34,4 @@ tags: [reference, langgraph, pregel, remote]
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5bd231cbfd913e05ebc662f519eb9a655bc766df/libs/langgraph/langgraph/pregel/remote.py)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a4d4187e82cdb0a73d68c76d70d655dd73a6db0b/libs/langgraph/langgraph/pregel/remote.py)

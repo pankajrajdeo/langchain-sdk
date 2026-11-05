@@ -21,6 +21,7 @@ LangSmith provides several views into your [organization's](administration-overv
 | [Contract usage](#contract-usage) | **Enterprise**: Settings > Usage > Contract usage **Self-serve**: Settings > Billing > Contract usage | Org admins only (`organization:manage`) | Enterprise only |
 | [Invoices](#invoices) | Settings > Billing > Invoices | All org members | Self-serve Cloud only |
 | [Evaluator spend](evaluator-spend.md) | Evaluators page, evaluator detail | All workspace members | Tracked weekly, resetting at Monday 12AM UTC, separate from the monthly billing period below |
+| [LLM Gateway spend](llm-gateway-monitoring.md) | LLM Gateway > Usage | Workspace members with `runs:read-stats` and `projects:read` | Plus and Enterprise |
 
 ## Usage graph
 
@@ -73,7 +74,11 @@ Navigate to **Settings** > **Billing and Usage** > **Invoices** to see how your 
 
 ## Granular usage
 
-Granular usage gives you trace counts broken down by a dimension you choose (workspace, project, user, or API key) over a time range you select. This is useful for internal chargebacks, identifying high-usage teams, or auditing trace activity.
+Granular usage gives trace counts broken down by a dimension you choose (workspace, project, user, or API key) over a time range you select. This is useful for tasks such as charging back trace usage, identifying high-usage users, or auditing trace activity.
+
+> [!NOTE]
+>
+> Granular usage attributes trace counts, which determine your LangSmith trace charges. It does not attribute model spend. To charge back model spend for requests routed through the LLM Gateway, see [Attribute spend for chargebacks](llm-gateway-monitoring.md#attribute-spend-for-chargebacks). For model costs recorded on other traces, see [Cost tracking](cost-tracking.md).
 
 Navigate to **Settings** > **Billing and Usage** > **Granular Usage**, or use the [granular usage API](granular-usage.md).
 
@@ -131,6 +136,7 @@ For programmatic access to trace counts, see [View trace counts across your orga
 * [Manage billing](billing.md)
 * [Data retention and usage limits](usage-and-billing.md#data-retention)
 * [Track and limit evaluator spend](evaluator-spend.md)
+* [Monitor LLM Gateway spend](llm-gateway-monitoring.md)
 * [Organization and workspace operations](organization-workspace-operations.md)
 
 ***

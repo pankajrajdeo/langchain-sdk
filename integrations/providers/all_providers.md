@@ -152,6 +152,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Hosted long-term memory tools and BaseStore for LangChain and LangGraph agents.
 
+> [card] [AgentReaderLoader](https://github.com/agentreader-xyz/agentreader-python/tree/main/langchain-agentreader)
+>
+> AgentReader is a paid read API (small free tier) that turns web page and PDF URLs into Markdown documents with title, author and date metadata.
+
 > [card] [AgentSearch](https://agentsearchhq.com/blog/add-web-search-to-langchain-agent?utm_source=langchain-docs\&utm_medium=integration-listing\&utm_campaign=promo-oct26)
 >
 > Live web search for agents, free by default with no API key, plus pay-per-call Extract and Render for full pages and JS sites.
@@ -423,6 +427,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [Ceki](https://ceki.me)
 >
 > Marketplace of real residential Chrome sessions for AI agents.
+
+> [card] [ChainAnalyzerToolkit](https://github.com/rascal-3/chainanalyzer-mcp/tree/main/packages/langchain-chainanalyzer)
+>
+> Blockchain AML screening tools: sanctions, known-hack exposure, stablecoin freezes, and risk scores across 12 chains (x402 or API key).
 
 > [card] [Cheaper Inference](https://cheaperinference.com/docs)
 >
@@ -755,6 +763,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [FastOCRLoader](https://github.com/fastocr-org/langchain-fastocr#readme)
 >
 > Document loader that reads scanned PDFs and images with FastOCR in 100+ languages and returns text or a searchable PDF.
+
+> [card] [FaxForAgentsToolkit](https://github.com/faxforagents/langchain-faxforagents/blob/main/README.md)
+>
+> Fax for Agents provides fax tools for LangChain and LangGraph agents.
 
 > [card] [Featherless AI](https://github.com/featherlessai/langchain-featherless-ai)
 >
@@ -1132,6 +1144,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Serverless database for RAG and Agents
 
+> [card] [LaneRouterToolkit](https://lanerouter.com/docs#langchain)
+>
+> Live, agent-reported conditions for websites and APIs: check a road before acting, report what happened after, and get legitimate detours.
+
 > [card] [LangChain Decorators](langchain_decorators.md)
 >
 > Syntactic sugar and utilities for LangChain.
@@ -1279,6 +1295,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [MemtomemHybridStore](https://github.com/memtomem/memtomem/blob/main/docs/guides/langgraph-hybrid-store.md)
 >
 > SQLite-backed LangGraph BaseStore with BM25, exact dense, weighted RRF hybrid search, TTL, and search diagnostics.
+
+> [card] [MemtomemPipelineStore](https://github.com/memtomem/memtomem/blob/main/packages/langchain-memtomem/README.md)
+>
+> LangGraph BaseStore that keeps each item as a JSON record with a Markdown projection and ranks query search through the memtomem retrieval pipeline
 
 > [card] [Mengram](https://mengram.io/docs)
 >
@@ -1975,6 +1995,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [SidClaw](https://docs.sidclaw.com/docs/integrations/langchain)
 >
 > Tool-call governance with policy evaluation, human approval, and tamper-evident audit trails.
+
+> [card] [SideQuest](https://sidequestpays.com/docs#langchain)
+>
+> SideQuest is a marketplace where AI agents post paid real-world tasks (store checks, photos, phone calls, translation) for verified people to complete.
 
 > [card] [Signatrust](https://signatrust.net/docs/api)
 >

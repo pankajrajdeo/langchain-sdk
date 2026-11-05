@@ -7,7 +7,7 @@ tags: [index, reference, python, langchain-core, messages]
 
 # reference/python/langchain-core/messages
 
-30 pages here, 339 pages including subdirectories.
+30 pages here, 345 pages including subdirectories.
 
 ## Directories
 
@@ -15,7 +15,7 @@ tags: [index, reference, python, langchain-core, messages]
 - [base/](base/_index.md) - 25 pages
 - [block_translators/](block_translators/_index.md) - 30 pages
 - [chat/](chat/_index.md) - 7 pages
-- [content/](content/_index.md) - 140 pages
+- [content/](content/_index.md) - 146 pages
 - [function/](function/_index.md) - 7 pages
 - [human/](human/_index.md) - 4 pages
 - [modifier/](modifier/_index.md) - 2 pages

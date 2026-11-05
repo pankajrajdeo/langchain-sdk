@@ -40,5 +40,5 @@ tags: [index, reference, python, langgraph, pregel]
 - [debug](debug.md) - - CONF - CONFIG_KEY_CHECKPOINT_NS - ERROR - INTERRUPT - NS_END - NS_SEP - RETURN - MISSING - TAG_HIDDEN - TASK_NAMESPACE - COLOR_MAPPING
 - [main](main.md) - - CACHE_NS_WRITES - CONF - CONFIG_KEY_CACHE - CONFIG_KEY_CHECKPOINT_ID - CONFIG_KEY_CHECKPOINT_NS - CONFIG_KEY_CHECKPOINTER - CONFIG_KEY_DURABILITY - CONFIG_KEY_NODE_FINISHED - CONFIG_KEY_READ -...
 - [protocol](protocol.md) - - All - StreamMode - StreamPart - ContextT - InputT - OutputT - StateT - StreamChunk
-- [remote](remote.md) - - CONF - CONFIG_KEY_CHECKPOINT_ID - CONFIG_KEY_CHECKPOINT_MAP - CONFIG_KEY_CHECKPOINT_NS - CONFIG_KEY_STREAM - CONFIG_KEY_TASK_ID - INTERRUPT - NS_SEP - All - StreamMode - StreamPart - logger
+- [remote](remote.md) - - CONF - CONFIG_KEY_CHECKPOINT_ID - CONFIG_KEY_CHECKPOINT_MAP - CONFIG_KEY_CHECKPOINT_NS - CONFIG_KEY_STREAM - CONFIG_KEY_STRICT_RESUME - CONFIG_KEY_TASK_ID - INTERRUPT - NS_SEP - All - StreamMode -...
 - [types](types.md) - Re-export types moved to langgraph.types

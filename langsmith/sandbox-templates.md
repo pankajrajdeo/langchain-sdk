@@ -208,7 +208,7 @@ AWS IAM role authentication avoids storing an expiring ECR authorization token i
 
 > [!NOTE]
 >
-> **BYOC deployments:** AWS IAM role authentication works on [BYOC](byoc.md) AWS data planes with no extra setup. Follow the steps below. If your data plane uses [bring your own IAM](byoc-byoiam.md), apply the latest version of the [`byoiam` Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/byoiam) first. It grants the workload role permission to assume your ECR role.
+> **BYOC deployments:** AWS IAM role authentication works on [BYOC](byoc.md) AWS data planes with no extra setup. Follow the steps below. If your data plane uses [bring your own IAM](byoc-byoiam-aws.md), apply the latest version of the [`byoiam` Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/byoiam) first. It grants the workload role permission to assume your ECR role.
 
 To register an ECR role:
 

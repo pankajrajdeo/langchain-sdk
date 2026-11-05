@@ -61,6 +61,7 @@ tags: [reference, langgraph]
 - [`ParentCommand`](https://reference.langchain.com/python/langgraph/errors/ParentCommand)
 - [`EmptyInputError`](https://reference.langchain.com/python/langgraph/errors/EmptyInputError)
 - [`TaskNotFound`](https://reference.langchain.com/python/langgraph/errors/TaskNotFound)
+- [`UnknownInterruptError`](https://reference.langchain.com/python/langgraph/errors/UnknownInterruptError)
 - [`NodeError`](https://reference.langchain.com/python/langgraph/errors/NodeError)
 - [`NodeCancelledError`](https://reference.langchain.com/python/langgraph/errors/NodeCancelledError)
 - [`NodeTimeoutError`](https://reference.langchain.com/python/langgraph/errors/NodeTimeoutError)

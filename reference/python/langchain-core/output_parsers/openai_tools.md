@@ -22,6 +22,7 @@ Parse tools for OpenAI tools output.
 
 - [`invalid_tool_call()`](https://reference.langchain.com/python/langchain-core/output_parsers/openai_tools/invalid_tool_call)
 - [`create_tool_call()`](https://reference.langchain.com/python/langchain-core/output_parsers/openai_tools/create_tool_call)
+- [`raise_if_refused()`](https://reference.langchain.com/python/langchain-core/output_parsers/openai_tools/raise_if_refused)
 - [`parse_partial_json()`](https://reference.langchain.com/python/langchain-core/output_parsers/openai_tools/parse_partial_json)
 - [`parse_tool_call()`](https://reference.langchain.com/python/langchain-core/output_parsers/openai_tools/parse_tool_call)
 - [`make_invalid_tool_call()`](https://reference.langchain.com/python/langchain-core/output_parsers/openai_tools/make_invalid_tool_call)
@@ -29,4 +30,4 @@ Parse tools for OpenAI tools output.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/output_parsers/openai_tools.py)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/output_parsers/openai_tools.py)

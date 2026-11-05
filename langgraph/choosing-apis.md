@@ -113,6 +113,7 @@ You can still combine both APIs in one application when a linear Functional API 
 * [Build checklist for the Graph API](use-graph-api.md)
 * [Thinking in the Graph API](thinking-in-graph-api.md)
 * [Graph API overview](graph-api.md)
+* [Choose the unit of work](graph-api.md#choose-the-unit-of-work)
 * [Deploy other frameworks](../langsmith/deploy-other-frameworks.md)
 * [Functional API overview](functional-api.md)
 

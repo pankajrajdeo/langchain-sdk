@@ -20,4 +20,4 @@ AsyncListener = Callable[[Run], Awaitable[None]] | Callable[[Run, RunnableConfig
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/tracers/root_listeners.py#L18)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/tracers/root_listeners.py#L18)

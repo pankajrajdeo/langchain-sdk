@@ -14,13 +14,13 @@ tags: [docs, langsmith, llm-gateway-quickstart]
 >
 > The LLM Gateway is in [beta](release-stages.md).
 
-The [LLM Gateway](llm-gateway.md) calls models across providers through one endpoint, authenticated with one [LangSmith API key](create-account-api-key.md). Instead of copying each provider's key into every app, your code uses one key and switches providers by changing the model ID, while LangSmith traces every call and applies your team's spend limits.
+The [LLM Gateway](llm-gateway.md) calls models across providers through one endpoint, authenticated with one [LangSmith API key](create-account-api-key.md). Instead of copying each provider's key into every app, your code uses one key and switches providers by changing the model ID, while LangSmith traces every call and applies your organization's spend limits.
 
 On this page, you send a request from the Simulator in the LangSmith UI and from your code. Then, view its trace in LangSmith.
 
 > [!TIP]
 >
-> This page is for developers sending requests through the gateway. If you are setting up the gateway for your team, start with [Set up the LLM Gateway](llm-gateway-admin-setup.md).
+> This page is for developers sending requests through the gateway. If you are setting up the gateway for your organization, start with [Set up the LLM Gateway](llm-gateway-admin-setup.md).
 
 ## Before you begin
 

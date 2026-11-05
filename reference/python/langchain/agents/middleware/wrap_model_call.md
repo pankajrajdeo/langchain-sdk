@@ -1,6 +1,6 @@
 ---
 title: "wrap_model_call"
-description: "Filter tools based on LLM selection before invoking the model via handler."
+description: "Update the system message to include the todo system prompt."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/wrap_model_call"
 category: "reference"
 tags: [reference, langchain, agents, middleware, wrap_model_call]
@@ -10,9 +10,9 @@ tags: [reference, langchain, agents, middleware, wrap_model_call]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/tool_selection/LLMToolSelectorMiddleware/wrap_model_call)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware/wrap_model_call)
 
-Filter tools based on LLM selection before invoking the model via handler.
+Update the system message to include the todo system prompt.
 
 ## Signature
 
@@ -39,4 +39,4 @@ The model call result.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5dcec1858191a6b54cd843dd8e54d856e2e007cc/libs/langchain_v1/langchain/agents/middleware/tool_selection.py#L383)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/d1d95b79213b0212613ae1aa4fad38bea6f1dccf/libs/langchain_v1/langchain/agents/middleware/todo.py#L231)

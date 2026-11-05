@@ -81,7 +81,7 @@ Rules:
 
 Policies take effect immediately.
 
-A rate limit policy can also carry a condition on a custom request header, so traffic from a single subject splits into separate limits by header value. Use this to give each end customer, tenant, or team its own throughput allowance under one API key. For more information, see [Header-based policies](llm-gateway-header-policies.md).
+A rate limit policy can also carry a condition on a custom request header, so traffic from a single subject splits into separate limits by header value. Use this to give each end customer, tenant, or cost center its own throughput allowance without issuing a separate API key for each. For more information, see [Header-based policies](llm-gateway-header-policies.md).
 
 ## See also
 

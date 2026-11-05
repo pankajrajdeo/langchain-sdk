@@ -19,9 +19,9 @@ If a block has a type not in this set, it is considered to be provider-specific.
 ## Signature
 
 ```python
-KNOWN_BLOCK_TYPES = {'text', 'reasoning', 'tool_call', 'invalid_tool_call', 'tool_call_chunk', 'image', 'audio', 'file', 'text-plain', 'video', 'server_tool_call', 'server_tool_call_chunk', 'server_tool_result', 'non_standard'}
+KNOWN_BLOCK_TYPES = {'text', 'reasoning', 'refusal', 'tool_call', 'invalid_tool_call', 'tool_call_chunk', 'image', 'audio', 'file', 'text-plain', 'video', 'server_tool_call', 'server_tool_call_chunk', 'server_tool_result', 'non_standard'}
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/messages/content.py#L856)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/messages/content.py#L884)

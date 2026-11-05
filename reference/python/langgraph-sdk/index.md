@@ -209,6 +209,7 @@ tags: [reference, langgraph-sdk]
 
 - [`BytesLike`](https://reference.langchain.com/python/langgraph-sdk/sse/BytesLike)
 - [`Json`](https://reference.langchain.com/python/langgraph-sdk/schema/Json)
+- [`ThreadStateSelectField`](https://reference.langchain.com/python/langgraph-sdk/schema/ThreadStateSelectField)
 - [`PrimitiveData`](https://reference.langchain.com/python/langgraph-sdk/schema/PrimitiveData)
 - [`QueryParamTypes`](https://reference.langchain.com/python/langgraph-sdk/schema/QueryParamTypes)
 - [`DebugPayload`](https://reference.langchain.com/python/langgraph-sdk/schema/DebugPayload)

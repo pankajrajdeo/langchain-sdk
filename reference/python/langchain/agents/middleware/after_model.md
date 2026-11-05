@@ -1,6 +1,6 @@
 ---
 title: "after_model"
-description: "Increment model call counts after a model call."
+description: "Check for parallel write_todos tool calls and return errors if detected."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/after_model"
 category: "reference"
 tags: [reference, langchain, agents, middleware, after_model]
@@ -10,16 +10,22 @@ tags: [reference, langchain, agents, middleware, after_model]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/model_call_limit/ModelCallLimitMiddleware/after_model)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware/after_model)
 
-Increment model call counts after a model call.
+Check for parallel write_todos tool calls and return errors if detected.
+
+The todo list is designed to be updated at most once per model turn. Since
+the `write_todos` tool replaces the entire todo list with each call, making
+multiple parallel calls would create ambiguity about which update should take
+precedence. This method prevents such conflicts by rejecting any response that
+contains multiple write_todos tool calls.
 
 ## Signature
 
 ```python
 after_model(
     self,
-    state: ModelCallLimitState[ResponseT],
+    state: PlanningState[ResponseT],
     runtime: Runtime[ContextT],
 ) -> dict[str, Any] | None
 ```
@@ -28,15 +34,15 @@ after_model(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `state` | `ModelCallLimitState[ResponseT]` | Yes | The current agent state. |
-| `runtime` | `Runtime[ContextT]` | Yes | The langgraph runtime. |
+| `state` | `PlanningState[ResponseT]` | Yes | The current agent state containing messages. |
+| `runtime` | `Runtime[ContextT]` | Yes | The LangGraph runtime instance. |
 
 ## Returns
 
 `dict[str, Any] | None`
 
-State updates with incremented call counts.
+A dict containing error ToolMessages for each write_todos call if multiple
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5dcec1858191a6b54cd843dd8e54d856e2e007cc/libs/langchain_v1/langchain/agents/middleware/model_call_limit.py#L235)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/d1d95b79213b0212613ae1aa4fad38bea6f1dccf/libs/langchain_v1/langchain/agents/middleware/todo.py#L285)

@@ -1,16 +1,16 @@
 ---
 title: "Bring your own VPC on AWS"
 description: "Create a customer-managed VPC for LangSmith BYOC, configure a reduced-permission IAM role, and supply your VPC and subnet IDs."
-source: "https://docs.langchain.com/langsmith/byoc-byovpc"
+source: "https://docs.langchain.com/langsmith/byoc-byovpc-aws"
 category: "docs"
-tags: [docs, langsmith, byoc-byovpc]
+tags: [docs, langsmith, byoc-byovpc-aws]
 ---
 
 # Bring your own VPC on AWS
 
 > Create a customer-managed VPC for LangSmith BYOC, configure a reduced-permission IAM role, and supply your VPC and subnet IDs.
 
-Bring your own VPC (BYOVPC) deploys a LangSmith BYOC data plane into an existing VPC that you create and manage. It lets you control the network configuration while LangChain provisions and operates the EKS cluster, databases, storage, and other workload resources. For a VPC provisioned by LangChain, follow the standard [BYOC onboarding guide](byoc-onboarding.md).
+Bring your own VPC (BYOVPC) deploys a LangSmith BYOC data plane into an existing VPC that you create and manage. It lets you control the network configuration while LangChain provisions and operates the EKS cluster, databases, storage, and other workload resources. For a VPC provisioned by LangChain, follow the standard [BYOC onboarding guide](byoc-onboarding-aws.md).
 
 You own the:
 
@@ -139,7 +139,7 @@ With VPC creation permissions disabled, the role cannot create or manage the bas
 
 ## Supply the VPC and subnet IDs
 
-When creating the data plane, supply the name, AWS region, and IAM role ARN from [onboarding](byoc-onboarding.md), together with the following network values:
+When creating the data plane, supply the name, AWS region, and IAM role ARN from [onboarding](byoc-onboarding-aws.md), together with the following network values:
 
 | Value | Terraform module output | Data plane creation field |
 | - | - | - |
@@ -150,7 +150,7 @@ When creating the data plane, supply the name, AWS region, and IAM role ARN from
 
 LangSmith validates the network before provisioning. Correct any reported network or IAM permission errors, then submit the request again. Validation checks the AWS configuration; you remain responsible for working connectivity through any custom routing, DNS, endpoint policies, and egress filters.
 
-After creation, continue with [provisioning and private connectivity (Step 4)](byoc-onboarding.md).
+After creation, continue with [provisioning and private connectivity (Step 4)](byoc-onboarding-aws.md).
 
 ## Maintain the network
 
@@ -162,8 +162,8 @@ Deleting a data plane removes LangChain-managed resources. Your VPC and other cu
 
 ## See also
 
-* [BYOC onboarding](byoc-onboarding.md)
-* [BYOC architecture](byoc-architecture.md)
+* [BYOC onboarding](byoc-onboarding-aws.md)
+* [BYOC architecture](byoc-architecture-aws.md)
 * [BYOC shared responsibility model](byoc-shared-responsibility.md)
 * [BYOC FAQ](byoc-faq.md)
 
@@ -171,4 +171,4 @@ Deleting a data plane removes LangChain-managed resources. Your VPC and other cu
 
 [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-byovpc.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-byovpc-aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

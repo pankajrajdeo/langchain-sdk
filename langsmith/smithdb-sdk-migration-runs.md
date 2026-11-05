@@ -77,7 +77,7 @@ Fetch a single run by ID. Returns only the run ID by default—specify a field s
 > | `run_id` | `run_id` | Unchanged |
 > | `load_child_runs` | *(removed)* | Fetch the trace's runs with `traces.list_runs` and filter by `parent_run_ids`. See [Load a run's child runs](#load-a-runs-child-runs) |
 > | *(not available)* | `project_id` | **Required**—UUID of the project that owns the run |
-> | *(not available)* | `start_time` | Optional—run's start time (RFC3339); providing it speeds up retrieval |
+> | *(not available)* | `start_time` | Optional—run's start time (RFC3339); providing it speeds up retrieval. Required for SmithDB-only self-hosted below v0.18 |
 > | *(all fields returned by default)* | `selects` | Field projection; defaults to `["ID"]` only; field names are uppercase |
 
 > [tab] TypeScript
@@ -91,7 +91,7 @@ Fetch a single run by ID. Returns only the run ID by default—specify a field s
 > | `runId` | `runId` | Unchanged (positional parameter) |
 > | `options.loadChildRuns` | *(removed)* | Fetch the trace's runs with `client.traces.listRuns` and filter by `parent_run_ids`. See [Load a run's child runs](#load-a-runs-child-runs) |
 > | *(not available)* | `project_id` | **Required**—`snake_case`; UUID of the project that owns the run |
-> | *(not available)* | `start_time` | Optional—`snake_case`; run's start time (RFC3339); providing it speeds up retrieval |
+> | *(not available)* | `start_time` | Optional—`snake_case`; run's start time (RFC3339); providing it speeds up retrieval. Required for SmithDB-only self-hosted below v0.18 |
 > | *(all fields returned by default)* | `selects` | Field projection; defaults to `["ID"]` only; field names are uppercase |
 
 > [tab] Java
@@ -104,7 +104,7 @@ Fetch a single run by ID. Returns only the run ID by default—specify a field s
 > | - | - | - |
 > | `runId()` | `runId()` | Unchanged |
 > | `sessionId()` | *(removed)* | Replaced by `projectId()` |
-> | `startTime()` | `startTime()` | Still optional; providing it speeds up retrieval |
+> | `startTime()` | `startTime()` | Still optional; providing it speeds up retrieval. Required for SmithDB-only self-hosted below v0.18 |
 > | `excludeS3StoredAttributes()` | *(removed)* | No equivalent |
 > | `excludeSerialized()` | *(removed)* | No equivalent |
 > | `includeMessages()` | *(removed)* | No equivalent |
@@ -124,7 +124,7 @@ Fetch a single run by ID. Returns only the run ID by default—specify a field s
 > | `ExcludeSerialized` | *(removed)* | No equivalent |
 > | `IncludeMessages` | *(removed)* | No equivalent |
 > | `SessionID` | *(removed)* | Replaced by `ProjectID` |
-> | `StartTime` | `StartTime` | Still optional; providing it speeds up retrieval |
+> | `StartTime` | `StartTime` | Still optional; providing it speeds up retrieval. Required for SmithDB-only self-hosted below v0.18 |
 > | *(not available)* | `ProjectID` | **Required**—UUID of the project that owns the run |
 > | *(all fields returned by default)* | `Selects` | Field projection; defaults to `["ID"]` only; field name constants are uppercase (e.g., `RunGetV2ParamsSelectName`) |
 
@@ -140,7 +140,7 @@ Fetch a single run by ID. Returns only the run ID by default—specify a field s
 > | - | - | - |
 > | `run_id` (path) | `run_id` (path) | Unchanged |
 > | *(not available)* | `project_id` (query) | **Required**—UUID of the project that owns the run |
-> | `start_time` (query) | `start_time` (query) | Still optional; providing it speeds up retrieval |
+> | `start_time` (query) | `start_time` (query) | Still optional; providing it speeds up retrieval. Required for SmithDB-only self-hosted below v0.18 |
 > | *(all fields returned by default)* | `selects` (query, repeatable) | Field projection; defaults to `["ID"]` only; field names are uppercase |
 
 #### Response fields
@@ -506,7 +506,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > from langsmith import Client
 > >
 > > client = Client()
@@ -516,7 +516,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import asyncio
 > >
 > > from langsmith import Client
@@ -543,7 +543,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -553,7 +553,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -572,7 +572,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import com.langchain.smith.client.LangsmithClient
 > > import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
 > >
@@ -584,7 +584,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import java.time.OffsetDateTime
 > >
 > > import com.langchain.smith.client.LangsmithClient
@@ -615,7 +615,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -633,7 +633,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -661,7 +661,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > RUN_ID="<run-id>"
 > >
 > > curl "https://api.smith.langchain.com/api/v1/runs/$RUN_ID" \
@@ -670,7 +670,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > >
@@ -689,7 +689,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > from langsmith import Client
 > >
 > > client = Client()
@@ -700,7 +700,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import asyncio
 > >
 > > from langsmith import Client
@@ -729,7 +729,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -740,7 +740,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -761,7 +761,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import com.langchain.smith.client.LangsmithClient
 > > import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
 > >
@@ -774,7 +774,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import java.time.OffsetDateTime
 > >
 > > import com.langchain.smith.client.LangsmithClient
@@ -809,7 +809,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -829,7 +829,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -864,7 +864,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > RUN_ID="<run-id>"
 > >
 > > curl "https://api.smith.langchain.com/api/v1/runs/$RUN_ID" \
@@ -873,7 +873,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > >
@@ -892,7 +892,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > from langsmith import Client
 > > from langsmith.utils import LangSmithNotFoundError
 > >
@@ -907,7 +907,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import asyncio
 > >
 > > from langsmith import Client
@@ -939,7 +939,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { uuid7 } from "langsmith";
 > > import { Client } from "langsmith";
 > >
@@ -957,7 +957,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { uuid7 } from "langsmith";
 > > import { Client, NotFoundError } from "langsmith";
 > >
@@ -984,7 +984,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import com.langchain.smith.client.LangsmithClient
 > > import com.langchain.smith.client.okhttp.LangsmithOkHttpClient
 > > import com.langchain.smith.errors.NotFoundException
@@ -1001,7 +1001,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```kotlin After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import java.time.OffsetDateTime
 > >
 > > import com.langchain.smith.client.LangsmithClient
@@ -1037,7 +1037,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -1065,7 +1065,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```go After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > package main
 > >
 > > import (
@@ -1104,7 +1104,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] Before
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > RUN_ID="<run-id>"
 > >
 > > HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
@@ -1118,7 +1118,7 @@ Requests that exceed a limit return `429 Too Many Requests`. For general rate li
 >
 > > [tab] After
 > >
-> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > PROJECT_ID=$(curl -s "https://api.smith.langchain.com/api/v1/sessions?name=default&limit=1" \
 > >   -H "x-api-key: $LANGSMITH_API_KEY" | jq -r '.[0].id')
 > >
@@ -1144,7 +1144,7 @@ The `load_child_runs` flag and the nested `child_runs` field are removed. Fetch 
 >
 > > [tab] Before
 > >
-> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > from langsmith import Client
 > >
 > > client = Client()
@@ -1161,7 +1161,7 @@ The `load_child_runs` flag and the nested `child_runs` field are removed. Fetch 
 >
 > > [tab] After
 > >
-> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import asyncio
 > > from collections import defaultdict
 > >
@@ -1217,7 +1217,7 @@ The `load_child_runs` flag and the nested `child_runs` field are removed. Fetch 
 >
 > > [tab] Before
 > >
-> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -1235,7 +1235,7 @@ The `load_child_runs` flag and the nested `child_runs` field are removed. Fetch 
 >
 > > [tab] After
 > >
-> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -1449,7 +1449,7 @@ Get the LangSmith UI URL for a run.
 >
 > > [tab] Before
 > >
-> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > from langsmith import Client
 > >
 > > client = Client()
@@ -1461,7 +1461,7 @@ Get the LangSmith UI URL for a run.
 >
 > > [tab] After
 > >
-> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```python After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import asyncio
 > >
 > > from langsmith import Client
@@ -1494,7 +1494,7 @@ Get the LangSmith UI URL for a run.
 >
 > > [tab] Before
 > >
-> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts Before theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();
@@ -1505,7 +1505,7 @@ Get the LangSmith UI URL for a run.
 >
 > > [tab] After
 > >
-> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+> > ```ts After theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 > > import { Client } from "langsmith";
 > >
 > > const client = new Client();

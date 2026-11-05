@@ -12,6 +12,8 @@ LangSmith allows you to manually annotate traces with feedback within the applic
 You can annotate a trace either inline or by sending the trace to an annotation queue, which allows you to closely inspect and log feedbacks to runs one at a time.
 Feedback tags are associated with your [workspace](administration-overview.md#workspaces).
 
+To ask [LangSmith Engine](engine.md) to review a trace instead, click **Flag for Engine** in the trace view. For more information, see [Flag a trace for Engine](engine-issues.md#flag-a-trace-for-engine).
+
 > [!NOTE]
 >
 > **You can attach user feedback to ANY intermediate run (span) of the trace, not just the root span.**

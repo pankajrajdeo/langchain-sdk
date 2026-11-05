@@ -14,7 +14,7 @@ tags: [docs, langsmith, byoc-faq]
 
 > [accordion] Which clouds and regions can I deploy to?
 >
-> BYOC is generally available (GA) on AWS with a US control plane. Support for additional cloud providers is planned for the second half of 2026. See [Regions and cloud providers](byoc.md#regions-and-cloud-providers) for the supported AWS regions.
+> BYOC is generally available (GA) on AWS with a US control plane. BYOC on GCP and Azure is available in [beta](release-stages.md). See [Regions and cloud providers](byoc.md#regions-and-cloud-providers) for the supported AWS regions and GCP and Azure region availability.
 
 > [accordion] Do I need a dedicated AWS account?
 >
@@ -22,13 +22,13 @@ tags: [docs, langsmith, byoc-faq]
 
 > [accordion] Can I install BYOC into an existing VPC?
 >
-> Yes. With [Bring your own VPC (BYOVPC)](byoc-byovpc.md), you supply a VPC and subnets. You can create the VPC with the [reference Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/byovpc) or use an existing VPC that meets the network requirements.
+> Yes. With [Bring your own VPC (BYOVPC)](byoc-byovpc-aws.md), you supply a VPC and subnets. You can create the VPC with the [reference Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/byovpc) or use an existing VPC that meets the network requirements.
 >
 > To remove VPC creation permissions from the customer role, set `allow_vpc_creation_permissions = false` in the [`langsmith-byoc-role` Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/langsmith-byoc-role) and include your VPC ID in `vpc_ids`.
 
 > [accordion] Can I deploy multiple data planes in the same VPC?
 >
-> Yes. Deploying multiple data planes in the same VPC requires [Bring your own VPC (BYOVPC)](byoc-byovpc.md). Each data plane must use different subnets. Do not share subnets between data planes.
+> Yes. Deploying multiple data planes in the same VPC requires [Bring your own VPC (BYOVPC)](byoc-byovpc-aws.md). Each data plane must use different subnets. Do not share subnets between data planes.
 
 > [accordion] Can I move an existing data plane into my own VPC?
 >
@@ -89,13 +89,13 @@ tags: [docs, langsmith, byoc-faq]
 > 1. Connect to the network that has private connectivity to the data plane. If your organization uses a corporate VPN, ask your IT team to route the data plane's endpoint through it.
 > 2. Refresh the page.
 >
-> To keep working in the meantime, select **Switch** next to a workspace on a reachable data plane. For more information, see [BYOC onboarding](byoc-onboarding.md) and [BYOC architecture](byoc-architecture.md).
+> To keep working in the meantime, select **Switch** next to a workspace on a reachable data plane. For more information, see [BYOC onboarding](byoc-onboarding-aws.md) and [BYOC architecture](byoc-architecture-aws.md).
 
 > [accordion] Are my service endpoints exposed to the internet?
 >
 > No. Services sit behind a private load balancer by default, reachable only from inside your VPC or through the private connectivity you configure.
 >
-> Data plane endpoints can be made public at provisioning time. See [Onboarding](byoc-onboarding.md).
+> Data plane endpoints can be made public at provisioning time. See [Onboarding](byoc-onboarding-aws.md).
 
 > [accordion] Can I use my own DNS domain?
 >
@@ -113,19 +113,19 @@ tags: [docs, langsmith, byoc-faq]
 >
 > No. When a user opens `aws.smith.langchain.com`, the browser fetches the LangSmith UI bundle from LangChain's cloud. Once loaded, the application routes every request for sensitive data to your VPC.
 >
-> See [Data traffic](byoc-architecture.md#data-traffic).
+> See [Data traffic](byoc-architecture-aws.md#data-traffic).
 
 > [accordion] What can the LangChain team do in my account?
 >
 > LangChain can manage the infrastructure of the resources LangSmith created, and nothing else. Permissions are scoped by the `managed_by=langsmith` tag, so the role cannot act on unrelated resources in your account.
 >
-> The role holds no permissions that grant data access. See [How least privilege is enforced](byoc-architecture.md#how-least-privilege-is-enforced).
+> The role holds no permissions that grant data access. See [How least privilege is enforced](byoc-architecture-aws.md#how-least-privilege-is-enforced).
 
 > [accordion] Can LangChain read my traces or database contents?
 >
 > No. The cross-account role is infrastructure-scoped rather than data-scoped. It can manage the resources that hold your data, but holds no `s3:GetObject` on the trace bucket, no `rds-db:connect` to PostgreSQL, and no `elasticache:Connect` to Redis.
 >
-> Access to the data itself requires you to explicitly grant it, such as during an incident. See [How least privilege is enforced](byoc-architecture.md#how-least-privilege-is-enforced).
+> Access to the data itself requires you to explicitly grant it, such as during an incident. See [How least privilege is enforced](byoc-architecture-aws.md#how-least-privilege-is-enforced).
 
 > [accordion] What access do LangChain employees have to my environment and data?
 >
@@ -160,7 +160,7 @@ tags: [docs, langsmith, byoc-faq]
 > * **Billing and usage metadata**.
 > * **Operational telemetry**.
 >
-> Sensitive data such as traces does not leave your account. It goes only from the data plane to the end user requesting it. See [Data traffic](byoc-architecture.md#data-traffic).
+> Sensitive data such as traces does not leave your account. It goes only from the data plane to the end user requesting it. See [Data traffic](byoc-architecture-aws.md#data-traffic).
 
 > [accordion] Does traffic go over the public internet?
 >
@@ -170,7 +170,7 @@ tags: [docs, langsmith, byoc-faq]
 > * **S3**: Traffic goes over a VPC endpoint, encrypted with HTTPS.
 > * **Container images**: Pulled from the LangChain account over a VPC endpoint.
 >
-> See [Connectivity](byoc-architecture.md#connectivity).
+> See [Connectivity](byoc-architecture-aws.md#connectivity).
 
 > [accordion] Can I restrict outbound network traffic from the data plane?
 >
@@ -183,7 +183,7 @@ tags: [docs, langsmith, byoc-faq]
 > * **Domains**: Fully qualified domain names, such as a model provider API endpoint or a public Docker registry.
 > * **CIDR ranges**: IP ranges, such as an internal service or a private subnet.
 >
-> With BYOVPC, you manage your own firewall and egress controls. Your network must continue to meet the [BYOVPC network requirements](byoc-byovpc.md#meet-the-network-requirements).
+> With BYOVPC, you manage your own firewall and egress controls. Your network must continue to meet the [BYOVPC network requirements](byoc-byovpc-aws.md#meet-the-network-requirements).
 
 > [accordion] Can I use my own private registry?
 >
@@ -193,7 +193,7 @@ tags: [docs, langsmith, byoc-faq]
 >
 > Over AWS PrivateLink. The management path exposes only your cluster's Kubernetes API server, which LangChain uses to install and reconcile the LangSmith components.
 >
-> The EKS cluster is private: the API server endpoint has no public access, and worker nodes have no public IP addresses. Your data is not reachable over that connection, and LangChain does not reach your environment over the public internet. See [Connectivity](byoc-architecture.md#connectivity).
+> The EKS cluster is private: the API server endpoint has no public access, and worker nodes have no public IP addresses. Your data is not reachable over that connection, and LangChain does not reach your environment over the public internet. See [Connectivity](byoc-architecture-aws.md#connectivity).
 
 > [accordion] Where does the control plane run if my data plane is outside the US?
 >
@@ -227,13 +227,13 @@ tags: [docs, langsmith, byoc-faq]
 >
 > LangChain upgrades the LangSmith version in your data plane once a week. Upgrades are rolling, so there is no whole-service downtime. Supporting services such as Istio and KEDA are upgraded on a regular cadence, and LangChain manages all EKS cluster upgrades.
 >
-> Support for release channels is coming soon. See [Operations](byoc-operations.md).
+> Support for release channels is coming soon. See [Operations](byoc-operations-aws.md).
 
 > [accordion] What about Kubernetes upgrades?
 >
 > LangChain owns and performs EKS upgrades proactively, ahead of AWS end-of-support dates, and coordinates the window with you.
 >
-> Control plane upgrades are transparent. Node group upgrades roll nodes one by one with make-before-break semantics, so you might see brief connection resets as pods restart, but no data loss. See [Kubernetes cluster upgrades](byoc-operations.md#kubernetes-cluster-upgrades).
+> Control plane upgrades are transparent. Node group upgrades roll nodes one by one with make-before-break semantics, so you might see brief connection resets as pods restart, but no data loss. See [Kubernetes cluster upgrades](byoc-operations-aws.md#kubernetes-cluster-upgrades).
 
 > [accordion] Do upgrades cause downtime?
 >
@@ -255,7 +255,7 @@ tags: [docs, langsmith, byoc-faq]
 >
 > Data planes are provisioned for high availability by default, running across multiple availability zones within a single region. All stateful components are backed up.
 >
-> A data plane does not span regions, so recovery from the loss of an entire region relies on those backups. See [High availability](byoc-operations.md#high-availability).
+> A data plane does not span regions, so recovery from the loss of an entire region relies on those backups. See [High availability](byoc-operations-aws.md#high-availability).
 
 > [accordion] How are backups handled?
 >
@@ -270,7 +270,7 @@ tags: [docs, langsmith, byoc-faq]
 >
 > No. The data plane runs in your AWS account, so its availability depends on resources you control, including the account itself, the private connectivity you configure to reach the data plane, and the service quotas and policies that apply to the account. LangChain does not commit to an uptime target for infrastructure it does not solely control.
 >
-> LangChain still monitors the data plane for uptime and error recovery, scales it, and applies upgrades and security patches. See [Operations](byoc-operations.md).
+> LangChain still monitors the data plane for uptime and error recovery, scales it, and applies upgrades and security patches. See [Operations](byoc-operations-aws.md).
 
 ## Cost
 
@@ -297,7 +297,7 @@ tags: [docs, langsmith, byoc-faq]
 
 * [BYOC overview](byoc.md)
 * [Why BYOC](byoc-why.md)
-* [BYOC architecture](byoc-architecture.md)
+* [BYOC architecture](byoc-architecture-aws.md)
 
 ***
 

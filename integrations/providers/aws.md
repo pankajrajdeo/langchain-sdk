@@ -66,7 +66,15 @@ See a [usage example](../embeddings/bedrock.md).
 from langchain_aws import BedrockEmbeddings
 ```
 
-## Document loaders
+## Vector stores
+
+### Amazon DynamoDB
+
+[Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is a fully managed NoSQL database. Use DynamoDBVectorStore to store documents as DynamoDB items and query them with a DynamoDB vector index, so operational data and retrieval share one table.
+
+```python
+from langchain_aws.vectorstores import DynamoDBVectorStore
+```
 
 ### Amazon MemoryDB
 
@@ -88,6 +96,16 @@ vds = InMemoryVectorStore.from_documents(
 ```
 
 See a [usage example](../vectorstores/memorydb.md).
+
+### Amazon S3 Vectors
+
+[Amazon S3 Vectors](https://aws.amazon.com/s3/features/vectors/) is cloud object storage with native support for storing and querying vectors. Use AmazonS3Vectors to store and query embeddings in an S3 vector bucket without provisioning infrastructure.
+
+```python
+from langchain_aws.vectorstores import AmazonS3Vectors
+```
+
+See a [usage example](../vectorstores/s3_vectors.md).
 
 ### Valkey
 

@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain-core/exceptions"
-description: "Index of 15 pages and 7 subdirectories under reference/python/langchain-core/exceptions."
+description: "Index of 16 pages and 8 subdirectories under reference/python/langchain-core/exceptions."
 category: "index"
 tags: [index, reference, python, langchain-core, exceptions]
 ---
 
 # reference/python/langchain-core/exceptions
 
-15 pages here, 30 pages including subdirectories.
+16 pages here, 33 pages including subdirectories.
 
 ## Directories
 
@@ -16,6 +16,7 @@ tags: [index, reference, python, langchain-core, exceptions]
 - [ModelConnectionError/](ModelConnectionError/_index.md) - 1 page
 - [ModelError/](ModelError/_index.md) - 1 page
 - [ModelRateLimitError/](ModelRateLimitError/_index.md) - 1 page
+- [ModelRefusalError/](ModelRefusalError/_index.md) - 2 pages
 - [ModelTimeoutError/](ModelTimeoutError/_index.md) - 1 page
 - [OutputParserException/](OutputParserException/_index.md) - 3 pages
 
@@ -32,6 +33,7 @@ tags: [index, reference, python, langchain-core, exceptions]
 - [ModelNotFoundError](ModelNotFoundError.md) - Exception raised when the requested model cannot be found (HTTP 404).
 - [ModelPermissionDeniedError](ModelPermissionDeniedError.md) - Exception raised when credentials lack permission for a request (HTTP 403).
 - [ModelRateLimitError](ModelRateLimitError.md) - Exception raised when a model provider rate limit is exceeded (HTTP 429).
+- [ModelRefusalError](ModelRefusalError.md) - Exception raised when a model declines to produce the requested output.
 - [ModelTimeoutError](ModelTimeoutError.md) - Exception raised when a model request times out.
 - [OutputParserException](OutputParserException.md) - Exception that output parsers should raise to signify a parsing error.
 - [TracerException](TracerException.md) - Base class for exceptions in tracers module.

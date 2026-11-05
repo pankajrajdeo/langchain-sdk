@@ -1,12 +1,12 @@
 ---
-title: "Built-in search powered by Parallel"
+title: "Web search"
 description: "Add web search powered by Parallel to Managed Deep Agents without a separate account or API key."
 source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-search"
 category: "docs"
 tags: [docs, langsmith, managed-deep-agents-search]
 ---
 
-# Built-in search powered by Parallel
+# Web search
 
 > Add web search powered by Parallel to Managed Deep Agents without a separate account or API key.
 

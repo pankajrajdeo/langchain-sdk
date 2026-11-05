@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain-core/output_parsers/openai_tools"
-description: "Index of 10 pages and 3 subdirectories under reference/python/langchain-core/output_parsers/openai_tools."
+description: "Index of 11 pages and 3 subdirectories under reference/python/langchain-core/output_parsers/openai_tools."
 category: "index"
 tags: [index, reference, python, langchain-core, output_parsers, openai_tools]
 ---
 
 # reference/python/langchain-core/output_parsers/openai_tools
 
-10 pages here, 19 pages including subdirectories.
+11 pages here, 20 pages including subdirectories.
 
 ## Directories
 
@@ -27,3 +27,4 @@ tags: [index, reference, python, langchain-core, output_parsers, openai_tools]
 - [parse_partial_json](parse_partial_json.md) - Parse a JSON string that may be missing closing braces.
 - [parse_tool_call](parse_tool_call.md) - Parse a single tool call.
 - [parse_tool_calls](parse_tool_calls.md) - Parse a list of tool calls.
+- [raise_if_refused](raise_if_refused.md) - Raise ModelRefusalError if the model refused instead of answering.

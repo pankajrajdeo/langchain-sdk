@@ -1,9 +1,9 @@
 ---
 title: "BYOC billing"
 description: "How LangSmith BYOC is billed across your AWS account and your LangSmith contract, which AWS services carry cost, and the account quotas to check before you deploy."
-source: "https://docs.langchain.com/langsmith/byoc-billing"
+source: "https://docs.langchain.com/langsmith/byoc-billing-aws"
 category: "docs"
-tags: [docs, langsmith, byoc-billing]
+tags: [docs, langsmith, byoc-billing-aws]
 ---
 
 # BYOC billing
@@ -21,7 +21,7 @@ LangSmith BYOC can integrate with AWS Marketplace.
 
 ## Billable AWS services
 
-The following resources contribute to data plane costs in your account. AWS charges for them at its own rates, independently of your LangSmith contract. With [BYOVPC](byoc-byovpc.md), networking costs depend on the gateways, endpoints, and logging you configure and manage.
+The following resources contribute to data plane costs in your account. AWS charges for them at its own rates, independently of your LangSmith contract. With [BYOVPC](byoc-byovpc-aws.md), networking costs depend on the gateways, endpoints, and logging you configure and manage.
 
 | Service | What it covers | Billing basis |
 | - | - | - |
@@ -44,7 +44,7 @@ The following resources contribute to data plane costs in your account. AWS char
 
 There are a few data transfer cost drivers in BYOC:
 
-* Cross-availability-zone traffic, since the data plane runs [highly available](byoc-operations.md#high-availability) across zones.
+* Cross-availability-zone traffic, since the data plane runs [highly available](byoc-operations-aws.md#high-availability) across zones.
 * Egress through the NAT gateway, for example if calling model providers, or an external API through a webhook.
 * Public IPv4 addresses, which AWS charges per address-hour. The regional NAT gateway uses one, and an internet-facing load balancer uses another when public ingress is enabled.
 
@@ -63,18 +63,18 @@ AWS enforces default quotas per region and per account. Defaults are often too l
 
 For current default values, see [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html).
 
-With BYOVPC, account for existing resource usage and your chosen endpoint and egress configuration when checking quotas. Your supplied subnets must also meet the [subnet size and available IP requirements](byoc-byovpc.md#configure-the-vpc-and-subnets).
+With BYOVPC, account for existing resource usage and your chosen endpoint and egress configuration when checking quotas. Your supplied subnets must also meet the [subnet size and available IP requirements](byoc-byovpc-aws.md#configure-the-vpc-and-subnets).
 
 If provisioning stalls or fails, an exhausted quota is a common cause, alongside missing permissions and service control policies. See [What happens if provisioning fails?](byoc-faq.md).
 
 ## See also
 
-* [BYOC architecture](byoc-architecture.md)
-* [Operations](byoc-operations.md)
+* [BYOC architecture](byoc-architecture-aws.md)
+* [Operations](byoc-operations-aws.md)
 * [BYOC FAQ](byoc-faq.md)
 
 ***
 
 [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-billing-aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

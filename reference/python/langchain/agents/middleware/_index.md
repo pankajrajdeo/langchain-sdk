@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain/agents/middleware"
-description: "Index of 27 pages and 22 subdirectories under reference/python/langchain/agents/middleware."
+description: "Index of 28 pages and 23 subdirectories under reference/python/langchain/agents/middleware."
 category: "index"
 tags: [index, reference, python, langchain, agents, middleware]
 ---
 
 # reference/python/langchain/agents/middleware
 
-27 pages here, 471 pages including subdirectories.
+28 pages here, 475 pages including subdirectories.
 
 ## Directories
 
@@ -21,6 +21,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [internal_call_transformer/](internal_call_transformer/_index.md) - 7 pages
 - [model_call_limit/](model_call_limit/_index.md) - 18 pages
 - [model_fallback/](model_fallback/_index.md) - 6 pages
+- [model_refusal/](model_refusal/_index.md) - 3 pages
 - [model_retry/](model_retry/_index.md) - 15 pages
 - [pii/](pii/_index.md) - 22 pages
 - [provider_tool_search/](provider_tool_search/_index.md) - 7 pages
@@ -37,7 +38,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 ## Files
 
 - [after_agent](after_agent.md) - Run shutdown commands and release resources when an agent completes.
-- [after_model](after_model.md) - Increment model call counts after a model call.
+- [after_model](after_model.md) - Check for parallel write_todos tool calls and return errors if detected.
 - [before_agent](before_agent.md) - Start the shell session and run startup commands.
 - [before_model](before_model.md) - Process messages before model invocation, potentially triggering summarization.
 - [configure_trace_policy](configure_trace_policy.md) - Set the process-wide default TracePolicy for agent middleware hook spans.
@@ -49,6 +50,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [internal_call_transformer](internal_call_transformer.md) - Tag and filter middleware-internal model calls.
 - [model_call_limit](model_call_limit.md) - Call tracking middleware for agents.
 - [model_fallback](model_fallback.md) - Model fallback middleware for agents.
+- [model_refusal](model_refusal.md) - Opt-in error handling for explicit model refusals.
 - [model_retry](model_retry.md) - Model retry middleware for agents.
 - [pii](pii.md) - PII detection and handling middleware for agents.
 - [provider_tool_search](provider_tool_search.md) - Provider-side tool search middleware.
@@ -61,5 +63,5 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [tool_retry](tool_retry.md) - Tool retry middleware for agents.
 - [tool_selection](tool_selection.md) - LLM-based tool selector middleware.
 - [types](types.md) - Types for middleware and agents.
-- [wrap_model_call](wrap_model_call.md) - Filter tools based on LLM selection before invoking the model via handler.
-- [wrap_tool_call](wrap_tool_call.md) - Intercept tool execution and convert handled exceptions to error messages.
+- [wrap_model_call](wrap_model_call.md) - Update the system message to include the todo system prompt.
+- [wrap_tool_call](wrap_tool_call.md) - Prepend reviewer-edit guidance to the result of an edited tool call.

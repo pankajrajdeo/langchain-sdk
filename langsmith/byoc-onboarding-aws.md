@@ -1,18 +1,20 @@
 ---
 title: "BYOC onboarding"
 description: "Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately."
-source: "https://docs.langchain.com/langsmith/byoc-onboarding"
+source: "https://docs.langchain.com/langsmith/byoc-onboarding-aws"
 category: "docs"
-tags: [docs, langsmith, byoc-onboarding]
+tags: [docs, langsmith, byoc-onboarding-aws]
 ---
 
 # BYOC onboarding
 
 > Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately.
 
+This page covers BYOC on AWS. For BYOC on GCP, see [BYOC onboarding on GCP](byoc-onboarding-gcp.md) or [BYOC onboarding on Azure](byoc-onboarding-azure.md).
+
 Before you start, review the [prerequisites](byoc.md#prerequisites).
 
-By default, LangChain creates a VPC for your data plane. To create and manage the network yourself, follow [Bring your own VPC on AWS](byoc-byovpc.md) before creating the IAM role and data plane below.
+By default, LangChain creates a VPC for your data plane. To create and manage the network yourself, follow [Bring your own VPC on AWS](byoc-byovpc-aws.md) before creating the IAM role and data plane below.
 
 **1. Enable BYOC on your organization**
 
@@ -26,7 +28,7 @@ LangChain provides the external ID for the IAM role. Navigate to **Settings > Da
 
 Apply the [`langsmith-byoc-role` Terraform module](https://github.com/langchain-ai/terraform/tree/main/modules/byoc/aws/langsmith-byoc-role) in your AWS account using the copied external ID. This creates the cross-account role LangChain assumes to provision and manage the data plane. The role's trust policy must use this value in its `ExternalId` condition.
 
-For BYOVPC, set `allow_vpc_creation_permissions = false` and supply your VPC ID in `vpc_ids`. See [Create the reduced-permission IAM role](byoc-byovpc.md#create-the-reduced-permission-iam-role).
+For BYOVPC, set `allow_vpc_creation_permissions = false` and supply your VPC ID in `vpc_ids`. See [Create the reduced-permission IAM role](byoc-byovpc-aws.md#create-the-reduced-permission-iam-role).
 
 > [!NOTE]
 >
@@ -39,7 +41,7 @@ Navigate to **Settings > Data Planes** and create a data plane with the followin
 * **Name**: Lowercase letters, digits, and hyphens, up to 24 characters.
 * **AWS region**: One of the [supported regions](byoc.md#regions-and-cloud-providers).
 * **AWS IAM role ARN**: The ARN of the role you created in the previous step, which LangSmith assumes in your account.
-* **Network configuration**: For a LangChain-managed VPC, supply a private RFC 1918 CIDR range from `/16` to `/18`. For BYOVPC, supply the [VPC and subnet IDs](byoc-byovpc.md#supply-the-vpc-and-subnet-ids) instead of a CIDR range.
+* **Network configuration**: For a LangChain-managed VPC, supply a private RFC 1918 CIDR range from `/16` to `/18`. For BYOVPC, supply the [VPC and subnet IDs](byoc-byovpc-aws.md#supply-the-vpc-and-subnet-ids) instead of a CIDR range.
 * **Load balancer access**: Private by default, which keeps the ingress load balancer reachable only from your VPC. Set it to **Public** to make the load balancer internet-facing.
 
 **4. Wait for provisioning**
@@ -85,10 +87,10 @@ For more information, see [Migrate to BYOC](byoc-migration.md).
 ## Next steps
 
 * [Use your data plane](byoc-usage.md) to point applications and API clients at the right endpoint.
-* [BYOC architecture](byoc-architecture.md) covers what LangChain provisions and how the planes communicate.
+* [BYOC architecture](byoc-architecture-aws.md) covers what LangChain provisions and how the planes communicate.
 
 ***
 
 [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-onboarding.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-onboarding-aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

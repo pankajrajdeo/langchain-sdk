@@ -25,6 +25,7 @@ get_history(
     before: str | Checkpoint | None = None,
     metadata: Mapping[str, Any] | None = None,
     checkpoint: Checkpoint | None = None,
+    select: list[ThreadStateSelectField] | None = None,
     headers: Mapping[str, str] | None = None,
     params: QueryParamTypes | None = None,
 ) -> list[ThreadState]
@@ -53,6 +54,7 @@ thread_state = client.threads.get_history(
 | `limit` | `int` | No | The maximum number of states to return. (default: `10`) |
 | `before` | `str \| Checkpoint \| None` | No | Return states before this checkpoint. (default: `None`) |
 | `metadata` | `Mapping[str, Any] \| None` | No | Filter states by metadata key-value pairs. (default: `None`) |
+| `select` | `list[ThreadStateSelectField] \| None` | No | Fields to include in the response. Use `values.<key>` to return a single state key (e.g. `values.messages`), which lets the server skip loading the rest of the state. Defaults to all fields. (default: `None`) |
 | `headers` | `Mapping[str, str] \| None` | No | Optional custom headers to include with the request. (default: `None`) |
 
 ## Returns
@@ -63,4 +65,4 @@ The state history of the `Thread`.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5db97b9ccab6b8d9a5ab1e8f0bebea7c03a8708a/libs/sdk-py/langgraph_sdk/_sync/threads.py#L674)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a4d4187e82cdb0a73d68c76d70d655dd73a6db0b/libs/sdk-py/langgraph_sdk/_sync/threads.py#L694)

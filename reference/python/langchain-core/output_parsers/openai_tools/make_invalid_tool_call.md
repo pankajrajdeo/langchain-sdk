@@ -38,4 +38,4 @@ An `InvalidToolCall` instance with the error message.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/output_parsers/openai_tools.py#L80)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/output_parsers/openai_tools.py#L81)

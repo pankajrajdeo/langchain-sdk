@@ -1,13 +1,13 @@
 ---
 title: "integrations/vectorstores"
-description: "Index of 33 pages and 0 subdirectories under integrations/vectorstores."
+description: "Index of 34 pages and 0 subdirectories under integrations/vectorstores."
 category: "index"
 tags: [index, integrations, vectorstores]
 ---
 
 # integrations/vectorstores
 
-33 pages here.
+34 pages here.
 
 ## Files
 
@@ -40,6 +40,7 @@ tags: [index, integrations, vectorstores]
 - [Pinecone (Sparse) integration](pinecone_sparse.md) - Integrate with the Pinecone (Sparse) vector store using LangChain Python.
 - [Qdrant integration](qdrant.md) - Integrate with the Qdrant vector store using LangChain Python.
 - [Redis integration](redis.md) - Integrate with the Redis vector store using LangChain Python.
+- [Amazon S3 Vectors integration](s3_vectors.md) - Integrate with the Amazon S3 Vectors vector store using LangChain Python.
 - [Sap hana cloud vector engine integration](sap_hanavector.md) - Integrate with the Sap hana cloud vector engine vector store using LangChain Python.
 - [turbopuffer integration](turbopuffer.md) - Integrate with the turbopuffer vector store using LangChain Python.
 - [Valkey](valkey.md) - Valkey is an open source, high-performance key/value datastore that supports workloads such as caching, message queues, and can act as a primary database. Valkey can run as either a standalone daemon...

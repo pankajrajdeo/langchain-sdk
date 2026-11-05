@@ -1,13 +1,13 @@
 ---
 title: "langsmith"
-description: "Index of 522 pages and 5 subdirectories under langsmith."
+description: "Index of 529 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-522 pages here, 1277 pages including subdirectories.
+529 pages here, 1284 pages including subdirectories.
 
 ## Directories
 
@@ -61,15 +61,22 @@ tags: [index, langsmith]
 - [Manage billing in your account](billing.md) - This page describes how to manage billing for your LangSmith organization:
 - [Automatically run evaluators on experiments](bind-evaluator-to-dataset.md) - LangSmith supports two ways to grade experiments created via the SDK:
 - [Build an agent in the UI](build-an-agent.md) - How the Build tab configures an agent from a form, what each section of that form sets, and where the new agent's traces land.
+- [BYOC architecture](byoc-architecture-aws.md) - How a LangSmith BYOC deployment is structured across the LangChain control plane and the data plane in your AWS account.
+- [BYOC architecture on Azure](byoc-architecture-azure.md) - What LangSmith BYOC deploys in your Azure subscription, how the data plane connects to the LangChain control plane, the access LangSmith gets, and how your data is protected.
+- [BYOC architecture on GCP](byoc-architecture-gcp.md) - What LangSmith BYOC deploys in your GCP project, how the data plane connects to the LangChain control plane, and the access LangSmith gets in your project.
 - [BYOC architecture](byoc-architecture.md) - How a LangSmith BYOC deployment is structured across the LangChain control plane and the data plane in your AWS account.
-- [BYOC billing](byoc-billing.md) - How LangSmith BYOC is billed across your AWS account and your LangSmith contract, which AWS services carry cost, and the account quotas to check before you deploy.
-- [Bring your own IAM roles (AWS)](byoc-byoiam.md) - Create customer-managed IAM roles for LangSmith BYOC, remove IAM management permissions from the provisioning role, and deploy with existing roles.
-- [Bring your own VPC on AWS](byoc-byovpc.md) - Create a customer-managed VPC for LangSmith BYOC, configure a reduced-permission IAM role, and supply your VPC and subnet IDs.
-- [AWS data plane cost estimate](byoc-data-plane-cost.md) - Rough AWS cost of a LangSmith BYOC data plane running SmithDB, with a legacy estimate for data planes created with ClickHouse.
+- [BYOC billing](byoc-billing-aws.md) - How LangSmith BYOC is billed across your AWS account and your LangSmith contract, which AWS services carry cost, and the account quotas to check before you deploy.
+- [Bring your own IAM roles (AWS)](byoc-byoiam-aws.md) - Create customer-managed IAM roles for LangSmith BYOC, remove IAM management permissions from the provisioning role, and deploy with existing roles.
+- [Bring your own VPC on AWS](byoc-byovpc-aws.md) - Create a customer-managed VPC for LangSmith BYOC, configure a reduced-permission IAM role, and supply your VPC and subnet IDs.
+- [AWS data plane cost estimate](byoc-data-plane-cost-aws.md) - Rough AWS cost of a LangSmith BYOC data plane running SmithDB, with a legacy estimate for data planes created with ClickHouse.
+- [Azure data plane cost estimate](byoc-data-plane-cost-azure.md) - Rough Azure infrastructure cost of a LangSmith BYOC data plane running SmithDB, with example node counts, sandboxes excluded, and additional charges.
 - [BYOC FAQ](byoc-faq.md) - Answers to common questions about LangSmith BYOC, covering data residency, access, setup, the data plane model, and ongoing operations.
 - [Migrate to BYOC](byoc-migration.md) - Copy users, datasets, prompts, experiments, Fleet resources, and other data from an existing LangSmith instance into a BYOC data plane.
-- [BYOC onboarding](byoc-onboarding.md) - Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately.
-- [BYOC operations](byoc-operations.md) - How LangChain upgrades, patches, and maintains a LangSmith BYOC data plane, and when maintenance requires a scheduled window.
+- [BYOC onboarding](byoc-onboarding-aws.md) - Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately.
+- [BYOC onboarding on Azure](byoc-onboarding-azure.md) - Set up a LangSmith BYOC data plane in your Azure subscription, from granting LangSmith access to a resource group to creating, changing, and deleting the data plane.
+- [BYOC onboarding on GCP](byoc-onboarding-gcp.md) - Set up a LangSmith BYOC data plane in your GCP project, from the provisioner service account to creating, changing, and deleting the data plane with the API.
+- [BYOC operations](byoc-operations-aws.md) - How LangChain upgrades, patches, and maintains a LangSmith BYOC data plane, and when maintenance requires a scheduled window.
+- [BYOC operations on Azure](byoc-operations-azure.md) - How LangChain scales, upgrades, and maintains a LangSmith BYOC data plane on Azure, including instance sizes, maintenance windows, and auditing.
 - [BYOC shared responsibility model](byoc-shared-responsibility.md) - How LangChain and your organization divide responsibility for a LangSmith BYOC deployment across operations, security, support, and compliance.
 - [BYOC usage](byoc-usage.md) - Route tracing and API traffic to a LangSmith BYOC data plane, including tracing to multiple endpoints and the path prefixes for each service.
 - [Why BYOC](byoc-why.md) - Compare LangSmith BYOC with self-hosted LangSmith to decide which deployment model fits your organization.
@@ -241,7 +248,7 @@ tags: [index, langsmith]
 - [How to define an LLM-as-a-judge evaluator](llm-as-judge.md) - LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
 - [Set up the LLM auth proxy](llm-auth-proxy-self-hosted.md) - Deploy an Envoy-based auth proxy that validates LangSmith-signed JWTs and routes LLM requests to your upstream provider or gateway.
 - [View LLM Gateway traces](llm-gateway-access.md) - Find LLM Gateway traces, read their policy and cost metadata, triage policy violations in LangSmith Engine, and control who can see gateway traces.
-- [Set up the LLM Gateway](llm-gateway-admin-setup.md) - Set up the LLM Gateway for a team by adding provider keys, granting permission to call the gateway, issuing API keys, and setting governance policies.
+- [Set up the LLM Gateway](llm-gateway-admin-setup.md) - Set up the LLM Gateway for your organization by adding provider keys, granting permission to call the gateway, issuing API keys, and setting governance policies.
 - [API formats](llm-gateway-api-formats.md) - Use OpenAI Chat Completions, Anthropic Messages, or OpenAI Responses requests to call models across providers through the LLM Gateway.
 - [Authenticate to the LLM Gateway](llm-gateway-authentication.md) - Choose a LangSmith API key for LLM Gateway requests, grant it permission to call the gateway, send it from your client, and fix authentication errors.
 - [Set up coding agents](llm-gateway-coding-agents.md) - Configure Claude Code, Codex, Gemini CLI, and Deep Agents Code to route LLM calls through the LLM Gateway.
@@ -252,7 +259,7 @@ tags: [index, langsmith]
 - [Direct model access](llm-gateway-direct-model-access.md) - Access provider APIs directly through provider-specific LLM Gateway paths without using the gateway standardization layer.
 - [Model fallbacks](llm-gateway-fallbacks.md) - Automatically retry a request against backup models when the primary model rate-limits, errors, or returns another configured status code.
 - [Send your first LLM Gateway request](llm-gateway-first-request.md) - Send your first request through the LLM Gateway from the Simulator, call the gateway from your code, and view the request's trace.
-- [Header-based policies](llm-gateway-header-policies.md) - Scope gateway spend caps, rate limits, and model access by a custom request header, such as a customer, tenant, or team identifier, under a single API key.
+- [Header-based policies](llm-gateway-header-policies.md) - Scope gateway spend caps, rate limits, and model access by a custom request header, such as a customer, tenant, or cost center identifier, without issuing a separate API key for each value.
 - [How the LLM Gateway works](llm-gateway-how-it-works.md) - Understand what the LLM Gateway does to each request, how upstream credentials are resolved, and where the gateway is available.
 - [Gateway Credits](llm-gateway-langchain-provider.md) - Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
 - [Model access policies](llm-gateway-model-access-policies.md) - Control which model providers and models are accessible through the LLM Gateway for your organization, workspaces, users, or API keys.
@@ -264,7 +271,7 @@ tags: [index, langsmith]
 - [Enable the LLM Gateway](llm-gateway-self-hosted.md) - Enable the agent-gateway service on a self-hosted LangSmith install using the Helm chart, then make your first gateway call.
 - [Spend policies](llm-gateway-spend-policies.md) - Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
 - [View LLM Gateway traces](llm-gateway-traces.md) - Find LLM Gateway traces, read their policy and cost metadata, triage policy violations in LangSmith Engine, and control who can see gateway traces.
-- [LLM Gateway](llm-gateway.md) - Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data protection policies.
+- [LLM Gateway](llm-gateway.md) - Route model calls from your agents through one LangSmith endpoint, with each call traced in LangSmith and governed by your organization's policies.
 - [Local development & testing](local-dev-testing.md) - Compare langgraph dev and langgraph up for local development and production-like testing of Agent Server applications.
 - [How to run an evaluation locally (Python only)](local.md) - Sometimes it is helpful to run an evaluation locally without uploading any results to LangSmith. For example, if you're quickly iterating on a prompt and want to smoke test it on a few examples, or...
 - [Log LLM calls](log-llm-trace.md) - When you call an LLM directly, outside of LangChain or a LangSmith supported integration, you need to provide specific metadata so that LangSmith can display token counts, calculate costs, and let...
@@ -337,7 +344,7 @@ tags: [index, langsmith]
 - [Get started with Studio](quick-start-studio.md) - Studio in the LangSmith Deployment UI supports connecting to two types of graphs:
 - [Role-based access control](rbac.md) - This reference explains LangSmith's Role-Based Access Control (RBAC) system for managing organization-level and workspace-level permissions.
 - [How to read experiment results locally](read-local-experiment-results.md) - When running evaluations, you may want to process results programmatically in your script rather than viewing them in the LangSmith UI. This is useful for scenarios like:
-- [Redact secrets from traces](redact-secrets.md) - Prevent API keys, tokens, and other secrets from appearing in LangSmith traces using the SDK anonymizer.
+- [Redact secrets from traces](redact-secrets.md) - Prevent API keys, tokens, and other secrets from appearing in LangSmith traces using marked secrets and the SDK anonymizer.
 - [LangSmith reference](reference.md) - The following sections provide API references and SDK documentation for LangSmith:
 - [Regions FAQ](regions-faq.md) - See the cloud architecture reference for additional details.
 - [Reject Concurrent](reject-concurrent.md) - This guide assumes knowledge of what double-texting is, which you can learn about in the double-texting conceptual guide.

@@ -112,7 +112,7 @@ with_structured_output(
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `schema` | `builtins.dict[str, Any] \| type` | Yes | The output schema. Can be passed in as:  - An OpenAI function/tool schema, - A JSON Schema, - A `TypedDict` class, - Or a Pydantic class.  If `schema` is a Pydantic class then the model output will be a Pydantic instance of that class, and the model-generated fields will be validated by the Pydantic class. Otherwise the model output will be a dict and will not be validated.  See `langchain_core.utils.function_calling.convert_to_openai_tool` for more on how to properly specify types and descriptions of schema fields when specifying a Pydantic or `TypedDict` class. |
-| `include_raw` | `bool` | No |  If `False` then only the parsed structured output is returned.  If an error occurs during model output parsing it will be raised.  If `True` then both the raw model response (a `BaseMessage`) and the parsed model response will be returned.  If an error occurs during output parsing it will be caught and returned as well.  The final output is always a `dict` with keys `'raw'`, `'parsed'`, and `'parsing_error'`. (default: `False`) |
+| `include_raw` | `bool` | No |  If `False` then only the parsed structured output is returned.  If an error occurs during model output parsing it will be raised.  If `True` then both the raw model response (a `BaseMessage`) and the parsed model response will be returned.  If an error occurs during output parsing it will be caught and returned as well.  The final output is always a `dict` with keys `'raw'`, `'parsed'`, and `'parsing_error'`.  If the model refuses, `ModelRefusalError` is raised, or returned as `'parsing_error'` when `include_raw` is `True`. (default: `False`) |
 
 ## Returns
 
@@ -133,4 +133,4 @@ If `include_raw` is `True`, then `Runnable` outputs a `dict` with keys:
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/language_models/chat_models.py#L2428)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/language_models/chat_models.py#L2428)

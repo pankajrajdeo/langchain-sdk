@@ -132,8 +132,8 @@ def handle_request(tenant_id: str, query: str):
 
 ## See also
 
-* [BYOC onboarding](byoc-onboarding.md)
-* [BYOC architecture](byoc-architecture.md)
+* [BYOC onboarding](byoc-onboarding-aws.md)
+* [BYOC architecture](byoc-architecture-aws.md)
 
 ***
 

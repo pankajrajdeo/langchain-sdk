@@ -49,23 +49,23 @@ If more than one credential is set, the plugin uses the first one it finds:
 2. Your `langsmith auth login` sign-in.
 3. A generic `LANGSMITH_API_KEY` from your environment.
 
+A CLI sign-in acts as you so your workspace role needs permission to write traces. You may get a 403 if you switched from a tracing API key (`lsv2_tr_...`) to the CLI sign-in since tracing keys can always write traces whatever your role is. If that happens ask your admin to give you a role that can write traces such as Workspace User and check that no [ABAC deny policy](abac.md) on the project blocks it.
+
 Tracing stops when your sign-in expires or your key is rejected, and turns from that gap are never uploaded. Admins can also [require a working sign-in](#require-a-working-sign-in) for every prompt.
 
 ## Turn on tracing
 
-Tracing is off until you turn it on in `~/.claude/langsmith.json`, unless your admin already turned it on with a [managed file](#lock-settings). Send traces to an [agent](log-traces-to-agent.md#send-traces-to-an-agent) with `agent_id`:
+Tracing is off until you turn it on in `~/.claude/langsmith.json`, unless your admin already turned it on with a [managed file](#lock-settings). In an [agent-based workspace](migrate-to-agent-based-workspaces.md), send traces to an [agent](log-traces-to-agent.md#send-traces-to-an-agent) with `agent_id`:
 
 ```json
 { "enabled": true, "agent_id": "shared-claude" }
 ```
 
-Or send them to a project with `project`:
+In a project-based workspace, use the legacy `project` setting instead:
 
 ```json
 { "enabled": true, "project": "shared-claude" }
 ```
-
-Use either one. If you set both, `agent_id` wins.
 
 Start a Cowork task and open your agent or project in [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-claude-cowork). Skill calls record which skill ran, so you can filter traces by skill.
 
@@ -83,11 +83,14 @@ An admin can lock tracing settings for every user with a managed file at `~/.lan
 
 ```json
 {
-  "api_url": "https://langsmith.example.com",
-  "project": "engineering",
-  "strict_auth": true
+  "api_url": "https://api.smith.langchain.com",
+  "agent_id": "coding-agent",
+  "strict_auth": true,
+  "workspace_id": "<your-workspace-id>"
 }
 ```
+
+Set `workspace_id` as well when your users sign in with the LangSmith CLI. Each user's sign-in may default to a different workspace, so setting it here keeps everyone's traces in one place. API keys ignore this setting so use one scoped to a workspace.
 
 The managed file works on macOS and Linux. The plugin only trusts it when:
 
@@ -95,7 +98,7 @@ The managed file works on macOS and Linux. The plugin only trusts it when:
 * No other user can write to either.
 * Neither is a symlink.
 
-If the file exists but fails these checks, tracing stops and the user sees a message to contact their admin. Locking a setting also locks the settings tied to it, so users cannot route traces around the lock. For example, locking `project` also stops users from adding their own [replicas](trace-replicas.md) or sending traces to an agent with `agent_id`.
+If the file exists but fails these checks, tracing stops and the user sees a message to contact their admin. Locking a setting also locks the settings tied to it, so users cannot route traces around the lock. For example, locking `agent_id` also stops users from sending traces to a project with `project`.
 
 Admins usually install the file on each machine with a mobile device management (MDM) tool such as Jamf or Microsoft Intune. For every setting you can lock, see the [plugin settings guide](https://github.com/langchain-ai/langsmith-plugin-binary/blob/main/docs/settings.md).
 

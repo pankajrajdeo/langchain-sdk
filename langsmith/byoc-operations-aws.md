@@ -1,9 +1,9 @@
 ---
 title: "BYOC operations"
 description: "How LangChain upgrades, patches, and maintains a LangSmith BYOC data plane, and when maintenance requires a scheduled window."
-source: "https://docs.langchain.com/langsmith/byoc-operations"
+source: "https://docs.langchain.com/langsmith/byoc-operations-aws"
 category: "docs"
-tags: [docs, langsmith, byoc-operations]
+tags: [docs, langsmith, byoc-operations-aws]
 ---
 
 # BYOC operations
@@ -78,17 +78,17 @@ The LangChain team has no standing access to your data, and can only manage the 
 
 * **LangSmith audit logs**: Operations on data plane resources are recorded in the data plane and accessible at your data plane endpoint. Control plane actions, such as creating a user, are audited in the control plane. For how to access both, see [Audit logs](audit-logs.md).
 * **EKS audit logs**: Sent to CloudWatch in your account, so you can monitor the commands that were run.
-* **VPC flow logs**: Recorded in an S3 bucket in your account. With [BYOVPC](byoc-byovpc.md), you configure VPC flow logs yourself.
+* **VPC flow logs**: Recorded in an S3 bucket in your account. With [BYOVPC](byoc-byovpc-aws.md), you configure VPC flow logs yourself.
 
 Setting up alerts on those logs is your responsibility.
 
 ## See also
 
-* [BYOC architecture](byoc-architecture.md)
+* [BYOC architecture](byoc-architecture-aws.md)
 * [Using BYOC](byoc-usage.md)
 
 ***
 
 [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-operations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-operations-aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

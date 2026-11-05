@@ -15,11 +15,12 @@ tags: [reference, langchain-core, exceptions, modelerror]
 Base exception for failures related to model invocation.
 
 Subclasses correspond to conditions that model providers report consistently,
-keyed to the HTTP status they surface it with, so the same condition maps to
-the same exception type regardless of provider.
+so the same condition maps to the same exception type regardless of provider.
+Most are keyed to the HTTP status they surface it with; `ModelRefusalError`
+covers successful responses in which the model refused.
 
-Provider integrations raise subclasses that also inherit from the provider
-SDK's own exception type, so code catching either continues to work.
+Provider integrations raise HTTP error subclasses that also inherit from the
+provider SDK's own exception type, so code catching either continues to work.
 
 ## Signature
 
@@ -37,4 +38,4 @@ ModelError()
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/e936943647fe9bd9c4c24122ee3e1812ead82130/libs/core/langchain_core/exceptions.py#L68)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/exceptions.py#L73)

@@ -14,17 +14,19 @@ The **Engine** page lists the issues [LangSmith Engine](engine.md) detects in a 
 
 Click any issue to open its detail panel. At the top, a diagnosis describes the problem and its impact. Each issue has a toolbar for setting its priority, closing or reopening it, opening a pull request, creating a Linear issue, and watching it.
 
-Engine learns from what you do with each issue: closing it, marking it as incorrectly flagged, changing its priority, or opening a pull request, along with any reason you give. For how that feedback shapes later scans, see [How Engine learns from your feedback](engine.md#how-engine-learns-from-your-feedback).
+Engine learns from what you do with each issue: closing it, marking it as incorrectly flagged, changing its priority, or opening a pull request, along with any reason you give. For how those actions shape later scans, see [How Engine learns from your actions on issues](engine.md#how-engine-learns-from-your-actions-on-issues).
 
 ## Review evidence
 
 The **Evidence** section contains traces that support a diagnosis, including a snippet from each trace. From this section, you can:
 
-* **View a trace**: Click **View trace** to open an evidence trace. When Engine identifies the child run that caused the issue, it opens that exact run. The trace view includes a **View issue** link back to the Engine issue.
+* **View a trace**: Click **Open trace** to open an evidence trace. When Engine identifies the child run that caused the issue, it opens that exact run. The trace view includes a **View issue** link back to the Engine issue.
 * **Create offline examples**: Click [**Add offline examples**](#add-offline-examples) to generate custom ground truth [dataset examples](manage-datasets.md) from the production trace inputs for offline evaluation.
 * **View project evidence**: Click **View all in project** to view the evidence in the tracing project.
 
 For more information, see [Manage a trace](manage-trace.md).
+
+When feedback on a trace surfaces or confirms an issue, the issue lists that feedback under **Feedback cited by Engine**, below the diagnosis. Each entry shows a feedback key, such as one written by an online evaluator or a user's thumbs-down rating, and how many evidence traces cite it. Click a key to open the newest trace with that feedback. In the **Evidence** section, each trace that cites feedback also shows the cited feedback values next to **Open trace**. For how Engine uses feedback, see [How Engine selects traces](engine.md#how-engine-selects-traces).
 
 Engine keeps tracking an issue after it is filed. On later scans, any new trace that matches the issue's failure pattern is added to **Evidence** automatically, so the issue reflects how often the failure is still happening without you re-running anything.
 
@@ -32,14 +34,14 @@ The **Proposed Fix** section describes the issue and suggests how to address it,
 
 ## Change priority and status
 
-Select **Low**, **Medium**, or **High** from the priority dropdown to update an issue's priority. You can optionally provide a reason, which Engine [learns from](engine.md#how-engine-learns-from-your-feedback) on later scans.
+Select **Low**, **Medium**, or **High** from the priority dropdown to update an issue's priority. You can optionally provide a reason, which Engine [learns from](engine.md#how-engine-learns-from-your-actions-on-issues) on later scans.
 
 Closing records the outcome of your review. Click:
 
 * **Close** to mark the issue as resolved.
 * **Incorrectly Flagged** to dismiss the issue as not real or not worth fixing.
 
-For either outcome, you can optionally provide a reason, which Engine [learns from](engine.md#how-engine-learns-from-your-feedback) on later scans.
+For either outcome, you can optionally provide a reason, which Engine [learns from](engine.md#how-engine-learns-from-your-actions-on-issues) on later scans.
 
 You can reopen a closed issue at any time. Click **Reopen** to clear any fix in progress and stop watching the issue if it was being watched. Engine also reopens an issue automatically when it detects the same problem recurring in a later trace.
 
@@ -78,6 +80,20 @@ When new traces link to a watched issue, Engine moves it to the top of your list
 >
 > Watching is only available for open issues without a pull request in flight: discard the fix to watch an issue again. Resolving a watched issue, or marking it as incorrectly flagged, automatically stops watching it.
 
+## Flag a trace for Engine
+
+A flagged trace is one you have asked Engine to review directly, for example a trace where your agent went wrong without raising an error or receiving a low score. Engine reviews flagged traces on its next scan. For how flags fit into trace selection, see [How Engine selects traces](engine.md#how-engine-selects-traces).
+
+Flagging a trace requires Engine to be enabled for your organization and the `feedback:create` permission, which the Workspace Admin and Workspace Editor roles include. For more information, see [Feedback permissions](organization-workspace-operations.md#feedback).
+
+To flag a trace:
+
+1. Open the trace and click **Flag for Engine**.
+2. (Optional) Add a note describing what went wrong or what Engine should look for.
+3. Click **Flag for Engine** in the popover.
+
+The button changes to **Queued** and stays that way until Engine links the trace to an issue. Click **Queued** to update your note, or click **Unflag** in the popover to remove the flag. When Engine links the trace to an issue, the trace view hides the button and shows a **View issue** link to that issue. If Engine is not set up yet for the tracing project or [agent environment](agent-environments.md) that contains the trace, the popover offers **Flag and set up Engine**, which saves the flag and opens its **Engine** tab to [finish setup](engine-setup.md).
+
 ## Filter and sort issues
 
 ### In the UI
@@ -105,7 +121,7 @@ langsmith project issues list --project <project-name> --status open --priority 
 
 ## See also
 
-* [LangSmith Engine](engine.md): How Engine detects issues and learns from your feedback.
+* [LangSmith Engine](engine.md): How Engine detects issues and learns from your actions on them.
 * [Set up Engine](engine-setup.md): Turn on Engine for a tracing project and configure what it focuses on.
 * [Validate fixes automatically](engine-fix-validation.md): Confirm that an issue reproduces and that Engine's fix resolves it.
 * [Engine notifications](engine-notifications.md): Get alerted in Slack, Jira, or a webhook when Engine finds issues.

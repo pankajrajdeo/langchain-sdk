@@ -20,4 +20,4 @@ trace_policy = TracePolicy(process_inputs=omit_payload)
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5dcec1858191a6b54cd843dd8e54d856e2e007cc/libs/langchain_v1/langchain/agents/middleware/tool_error.py#L82)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/d1d95b79213b0212613ae1aa4fad38bea6f1dccf/libs/langchain_v1/langchain/agents/middleware/tool_error.py#L82)
