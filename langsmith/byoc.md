@@ -76,7 +76,7 @@ The following features are supported on AWS. For GCP and Azure beta feature avai
 
 > [!NOTE]
 >
-> Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC. To get started, follow the [Managed Deep Agents quickstart](python/managed-deep-agents-quickstart.md).
+> Use Managed Deep Agents CLI and SDK v0.10 or later for BYOC. To get started, follow the [Managed Deep Agents quickstart](python/managed-deep-agents-quickstart.md).
 
 ## Prerequisites
 

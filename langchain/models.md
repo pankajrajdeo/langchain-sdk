@@ -966,6 +966,7 @@ Models can be requested to provide their response in a format matching a given s
 >   * `'json_mode'`: A precursor to `'json_schema'` offered by some providers. Generates valid JSON, but the schema must be described in the prompt.
 > * **Include raw**: Set `include_raw=True` to get both the parsed output and the raw AI message.
 > * **Validation**: Pydantic models provide automatic validation. `TypedDict` and JSON Schema require manual validation.
+> * **Refusals**: If the model refuses, structured output raises `ModelRefusalError`. See [Handle a model refusal](#handle-a-model-refusal) and [Structured output](structured-output.md#model-refusal).
 >
 > See your [provider's integration page](../integrations/providers/overview.md) for supported methods and configuration options.
 
@@ -1034,6 +1035,37 @@ Models can be requested to provide their response in a format matching a given s
 >
 > model_with_structure = model.with_structured_output(MovieDetails)
 ```
+
+### Handle a model refusal
+
+Providers report a refusal, such as a safety-policy refusal, as a successful response rather than an error. A plain model call returns the message with a [`refusal` content block](messages.md#content-block-reference). `with_structured_output` raises [`ModelRefusalError`](https://reference.langchain.com/python/langchain-core/exceptions/ModelRefusalError) from `langchain_core.exceptions` instead of a parsing error. The error's `raw_message` holds the refused response.
+
+```python
+from langchain_core.exceptions import ModelRefusalError
+
+model_with_structure = model.with_structured_output(Movie)
+
+try:
+    response = model_with_structure.invoke("Provide details about the movie Inception")
+except ModelRefusalError as error:
+    print(error)  # Model refused to produce the requested output (category='cyber'): ...
+    refused = error.raw_message
+```
+
+With `include_raw=True`, `with_structured_output` returns the error as `parsing_error` instead of raising it:
+
+```python
+model_with_structure = model.with_structured_output(Movie, include_raw=True)
+response = model_with_structure.invoke("Provide details about the movie Inception")
+if isinstance(response["parsing_error"], ModelRefusalError):
+    refused = response["raw"]
+```
+
+LangChain detects refusals from OpenAI, Anthropic, and Gemini models. For agents, `response_format` in `create_agent` raises `ModelRefusalError` when you add [`ModelRefusalMiddleware`](middleware/built-in.md#model-refusal); see [Structured output](structured-output.md#model-refusal) and [Handle a refusal](middleware/built-in.md#handle-a-refusal).
+
+> [!NOTE]
+>
+> Refusal handling requires `langchain-core>=1.7.5`, and `langchain-google-genai>=4.4.3` for Gemini. If you upgrade `langchain-core` to 1.7.5 or later, also upgrade to `langchain-openai>=1.7.4`. Earlier versions raise a generic `ValueError` instead of `OpenAIRefusalError` for Responses API structured output refusals.
 
 ***
 

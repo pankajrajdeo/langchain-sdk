@@ -92,6 +92,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Signed, independently verifiable action records for agent tool calls, chained planned to confirmed.
 
+> [card] [Agent Data Hub](https://github.com/Jona1245/agentdatahub-python#readme)
+>
+> Tools for official statistics, central bank rates, exchange rates, energy and weather data, with source and licence in every answer.
+
 > [card] [Agent Pulse](https://www.agentspulse.ai/docs/langchain)
 >
 > Agent Pulse prices model, tool, and failed calls in LangChain and LangGraph runs per user, request, and agent, and budgets can stop calls before they are sent.
@@ -440,6 +444,14 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Chat models served locally by llamay, a runtime for macOS, Windows, and Linux, through its Ollama-compatible API.
 
+> [card] [ChatOptiQ](https://github.com/optiq-bot/langchain-optiq)
+>
+> Chat model for OptiQ Cloud, an OpenAI-compatible API serving GLM 5.3, DeepSeek V4.1 Flash and MiniMax M3.1 Flash, with reasoning\_effort control.
+
+> [card] [ChatMeragpt](https://github.com/Sandeep85Das/langchain-meragpt)
+>
+> Chat model for meraGPT Restyler 1, which rewrites machine-written prose to read the way a person writes and is trained to keep facts and formatting.
+
 > [card] [ChatRouter](https://github.com/danielpolok/langchain-model-router)
 >
 > A chat model that sends each request to one of several LangChain chat models, chosen by a routing strategy defined in application code.
@@ -732,6 +744,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Verify an ERC-8004 agent's on-chain identity and reputation feedback, and prepare registry writes as execution plans.
 
+> [card] [EtfiqToolkit](https://github.com/etfiq/etfiq-connectors/tree/main/langchain-etfiq)
+>
+> Tools for free, keyless, dated US ETF data: profiles, holdings, flows, comparisons and benchmarks from ETFIQ.
+
 > [card] [EU Nordic Open Data](https://github.com/itulo/eu-nordic-open-data-mcp/tree/main/packages/langchain-eu-nordic-open-data)
 >
 > LangChain tools for official EU, Finnish, and Norwegian open data via hosted Apify actors.
@@ -819,6 +835,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [FoxNose](https://langchain-foxnose.readthedocs.io/)
 >
 > Retriever, document loader and agent tool for FoxNose collections, with text, vector, hybrid and vector-boosted search over the Flux delivery API.
+
+> [card] [FrameScanTool](https://github.com/Sandeep85Das/langchain-frame)
+>
+> Tools that run the Frame static analysis security scanner on a path and check whether a later change fixed each finding.
 
 > [card] [Future AGI](https://docs.futureagi.com/docs/integrations/traceai/langchain/)
 >
@@ -1594,7 +1614,7 @@ Browse the complete collection of integrations available for Python. LangChain P
 
 > [card] [Oxylabs](https://github.com/oxylabs/langchain-oxylabs)
 >
-> Web scraping and proxy services.
+> Web search, page reading, and scraping tools for agents and RAG, built on the Oxylabs Web API and Web Scraper API.
 
 > [card] [Parallel](parallel.md)
 >
@@ -1687,6 +1707,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [POP](https://github.com/joy7758/persona-object-protocol/tree/main/integrations/langchain-pop)
 >
 > Portable persona loading, legacy migration, and boundary-aware tool filtering for LangChain agents.
+
+> [card] [PopNow](https://popnow.ai/docs/langchain)
+>
+> PopNow API tools for generating images, videos, music and speech with models such as Nano Banana, Kling, MiniMax and Suno, billed in USD.
 
 > [card] [PplStore](https://github.com/ppl-crm/ppl-memory)
 >
@@ -2032,6 +2056,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Cloud data platform and analytics.
 
+> [card] [SofyaSearch](https://sofya.co/docs/langchain)
+>
+> Web search, page and document fetch to markdown, page extraction and cited research tools for agents.
+
 > [card] [Soniox](https://soniox.com/docs/stt/concepts/supported-languages)
 >
 > High-accuracy multilingual speech-to-text API.
@@ -2083,6 +2111,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [StophyToolkit](https://github.com/stophydotdev/stophy/tree/main/sdk/packages/langchain)
 >
 > Stophy tools for web search, reading pages as markdown, and Reddit, Google Maps, Amazon, Indeed and Zillow results.
+
+> [card] [StoreRouterToolkit](https://github.com/octogen-ai/octogen-dev/tree/main/integrations/langchain#readme)
+>
+> Product, store and brand search and lookup across thousands of stores -- hundreds added daily.
 
 > [card] [SubmilliMiddleware](https://submilli.ai/docs/tutorials/connect-deepagents/)
 >

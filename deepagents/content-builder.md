@@ -52,7 +52,7 @@ Start with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overvie
 >
 > > [!NOTE]
 > >
-> > Managed Deep Agents is in **public [beta](../langsmith/release-stages.md)** on [LangSmith Cloud](../langsmith/cloud.md) and [Bring Your Own Cloud (BYOC)](../langsmith/byoc.md). Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC.
+> > Managed Deep Agents is in **public [beta](../langsmith/release-stages.md)** on [LangSmith Cloud](../langsmith/cloud.md) and [Bring Your Own Cloud (BYOC)](../langsmith/byoc.md). Use Managed Deep Agents CLI and SDK v0.10 or later for BYOC.
 >
 > Managed Deep Agents scaffolds a project and hosts the runtime. Brand voice goes in `instructions.md`, skills stay under `skills/`, and you declare tools and the researcher subagent in code. Image tools write under the project directory during `mda dev`.
 >

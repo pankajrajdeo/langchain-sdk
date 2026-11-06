@@ -49,7 +49,7 @@ A new organization on LangSmith Cloud gets agent-based workspaces. In an existin
 * [Agent Registry](agent-registry.md)
 * [Agent environments](agent-environments.md)
 * [Workload isolation](workload-isolation.md)
-* [Administration overview](administration-overview.md#agents-and-applications)
+* [Administration overview](administration-overview.md#agents)
 
 ***
 

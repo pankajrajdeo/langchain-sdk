@@ -39,7 +39,7 @@ Self-hosted and BYOC are available on the [Enterprise plan](https://docs.langcha
 | **Upgrades and patches** | Automatic | Automatic | Manual |
 | **Scaling** | Automatic | Automatic, managed by LangChain | Manual |
 
-[Managed Deep Agents](python/managed-deep-agents-overview.md) is available in public beta on Cloud and BYOC. For BYOC, use version 0.10 of the Managed Deep Agents CLI and SDK.
+[Managed Deep Agents](python/managed-deep-agents-overview.md) is available in public beta on Cloud and BYOC. For BYOC, use Managed Deep Agents CLI and SDK v0.10 or later.
 
 Cloud, BYOC, and Self-hosted support [LangSmith Deployment](deployment.md) for agent workloads. Refer to the [LangSmith Deployment overview](deployment.md) to pick a topology (Cloud managed, BYOC, Hybrid, self-hosted with control plane, or standalone).
 

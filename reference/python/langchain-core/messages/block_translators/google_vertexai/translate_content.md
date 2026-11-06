@@ -1,6 +1,6 @@
 ---
 title: "translate_content"
-description: "Derive standard content blocks from a message with Bedrock content."
+description: "Derive standard content blocks from a message with OpenAI content."
 source: "https://reference.langchain.com/python/langchain-core/messages/block_translators/google_vertexai/translate_content"
 category: "reference"
 tags: [reference, langchain-core, messages, block_translators, google_vertexai, translate_content]
@@ -10,9 +10,9 @@ tags: [reference, langchain-core, messages, block_translators, google_vertexai, 
 
 > **Function** in `langchain_core`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain-core/messages/block_translators/bedrock/translate_content)
+📖 [View in docs](https://reference.langchain.com/python/langchain-core/messages/block_translators/openai/translate_content)
 
-Derive standard content blocks from a message with Bedrock content.
+Derive standard content blocks from a message with OpenAI content.
 
 ## Signature
 
@@ -36,4 +36,4 @@ The derived content blocks.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/messages/block_translators/bedrock.py#L67)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/messages/block_translators/openai.py#L1070)

@@ -1,13 +1,13 @@
 ---
 title: "reference/python/deepagents/middleware/filesystem"
-description: "Index of 49 pages and 12 subdirectories under reference/python/deepagents/middleware/filesystem."
+description: "Index of 50 pages and 12 subdirectories under reference/python/deepagents/middleware/filesystem."
 category: "index"
 tags: [index, reference, python, deepagents, middleware, filesystem]
 ---
 
 # reference/python/deepagents/middleware/filesystem
 
-49 pages here, 83 pages including subdirectories.
+50 pages here, 84 pages including subdirectories.
 
 ## Directories
 
@@ -46,6 +46,7 @@ tags: [index, reference, python, deepagents, middleware, filesystem]
 - [GLOB_TRUNCATION_NOTE](GLOB_TRUNCATION_NOTE.md) - View source on GitHub
 - [GLOB_UNREADABLE_NOTE](GLOB_UNREADABLE_NOTE.md) - View source on GitHub
 - [GREP_GLOB_DESCRIPTION](GREP_GLOB_DESCRIPTION.md) - View source on GitHub
+- [GREP_LINE_CHAR_LIMIT](GREP_LINE_CHAR_LIMIT.md) - Characters of a grep line shown to the model.
 - [GREP_OUTPUT_MODE_DESCRIPTION](GREP_OUTPUT_MODE_DESCRIPTION.md) - View source on GitHub
 - [GREP_TOOL_DESCRIPTION](GREP_TOOL_DESCRIPTION.md) - View source on GitHub
 - [GREP_TRUNCATION_NOTE](GREP_TRUNCATION_NOTE.md) - View source on GitHub

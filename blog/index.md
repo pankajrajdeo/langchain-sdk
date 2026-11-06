@@ -30,7 +30,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![LangSmith Bring Your Own Cloud, now on AWS, Azure, and Google Cloud](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aea10da672af68b149a7fc2_6aea100d5e02bf39048b42b8_byoc-multicloud-cover.png)LangSmith
+![Agents Are Going Async](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aecdf22f0b192d15c132b25_6aecdf0372d986b4c1a140a7_async-subagents-cover-webflow.png)Agent ArchitectureOpen Source
+
+## Agents Are Going Async
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a9f9d4551b6d04251e14de9_T04F8K3FZB5-U0B7C5VFFL0-081c39c8d8b6-512.png)Sydney RunkleThushanth BengreNovember 5, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)4min![LangSmith Bring Your Own Cloud, now on AWS, Azure, and Google Cloud](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aea10da672af68b149a7fc2_6aea100d5e02bf39048b42b8_byoc-multicloud-cover.png)LangSmith
 
 ## LangSmith BYOC is now available on AWS, Azure, and Google Cloud
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Context Engineering: How Deep Agents Remember
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acfb8492227373b922e7719_Screenshot%202026-10-14%20at%2010.12.17%E2%80%AFAM.png)Jess WengOctober 14, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ace61a7c0ff9e14e0649565_orange.png)Case Studies
-
-## How Orange Business Built Live Intelligence on LangChain and LangSmith
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a10d5ed01e84b2e809523b1_sofia-sulikowski.jpeg)Sofia SulikowskiOctober 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acfb8492227373b922e7719_Screenshot%202026-10-14%20at%2010.12.17%E2%80%AFAM.png)Jess WengOctober 14, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min1...1 / 35
 
 #### We couldn't find anything matching that.
 

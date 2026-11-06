@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 553 pages and 0 subdirectories under blog."
+description: "Index of 554 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-553 pages here.
+554 pages here.
 
 ## Files
 
@@ -30,6 +30,7 @@ tags: [index, blog]
 - [Agentic Engineering: How Swarms of AI Agents Are Redefining Software Engineering](agentic-engineering-redefining-software-engineering.md) - Multi-agent systems that mirror real engineering teams — not just code faster — can cut debug time by 93% and compress cross-team delivery. Here&#39;s the architecture built on LangGraph.
 - [Self-Reflective RAG with LangGraph](agentic-rag-with-langgraph.md) - Build self-correcting RAG with LangGraph. Implement advanced retrieval patterns that grade documents, retry queries, and boost generation quality.
 - [The Missing Link Between Agents and Applications](agents-and-applications.md) - Most AI agent tools run on servers, limiting access to browser APIs, device capabilities, and frontend state. Discover how LangChain headless tools enable secure client-side tool execution for modern...
+- [Agents Are Going Async](agents-are-going-async.md) - Async subagents let an agent stay responsive while background workers run long tasks. How the orchestrator, notifications and approvals work in Deep Agents.
 - [Agents need their own computer. Here&#39;s how to give them one safely.](agents-need-their-own-computer.md) - For most of computing history, a developer environment meant a physical machine, then a VM, then a container, with each one shared across the work happening on it, each one requiring deliberate setup...
 - [Autonomous Agents &amp; Agent Simulations](agents-round.md) - Explore how LangChain implements autonomous agents like AutoGPT and BabyAGI. Learn about planning techniques, memory systems, and agent simulations.
 - [Agents that can pay: building Restock with Stripe&#39;s Link and Managed Deep Agents](agents-that-can-pay-with-stripe-link.md) - Build an agent that pays for real purchases. Restock runs in Slack on Managed Deep Agents and pays with Stripe&#39;s Link over the Machine Payments Protocol.

@@ -14,8 +14,11 @@ tags: [reference, deepagents, middleware, async_subagents, taskevent]
 
 How an async subagent's task ended or paused, as reported to the agent that started it.
 
-A notification message carries it in `additional_kwargs["deepagents_notification"]`,
-so apps can tell these messages from the user's.
+A notification message carries it as notification metadata with source
+`"async_subagent"`; read it with `get_notification_metadata(message).get("data")`.
+
+`additional_kwargs["deepagents_notification"]` also carries it; that key is
+deprecated.
 
 !!! warning "Beta"
 
@@ -58,4 +61,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/e85c6b98087861512d2c5240305e16cfac68a746/libs/deepagents/deepagents/middleware/async_subagents.py#L458)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9ea3f1912abd8b7eecb504d78ef99fcf279bf561/libs/deepagents/deepagents/middleware/async_subagents.py#L475)

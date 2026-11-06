@@ -29,6 +29,7 @@ SummarizationEvent()
 ```python
 __init__(
     cutoff_index: int,
+    cutoff_message_id: NotRequired[str | None],
     summary_message: HumanMessage,
     file_path: str | None,
     created_at_index: NotRequired[int],
@@ -38,6 +39,7 @@ __init__(
 | Name | Type |
 |------|------|
 | `cutoff_index` | `int` |
+| `cutoff_message_id` | `NotRequired[str \| None]` |
 | `summary_message` | `HumanMessage` |
 | `file_path` | `str \| None` |
 | `created_at_index` | `NotRequired[int]` |
@@ -45,10 +47,11 @@ __init__(
 ## Properties
 
 - `cutoff_index`
+- `cutoff_message_id`
 - `summary_message`
 - `file_path`
 - `created_at_index`
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/e85c6b98087861512d2c5240305e16cfac68a746/libs/deepagents/deepagents/middleware/summarization.py#L149)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9ea3f1912abd8b7eecb504d78ef99fcf279bf561/libs/deepagents/deepagents/middleware/summarization.py#L158)

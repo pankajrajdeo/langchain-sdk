@@ -16,7 +16,7 @@ This page covers how to find the Managed Deep Agents URL and authenticate. For p
 
 > [!NOTE]
 >
-> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md) and [Bring Your Own Cloud (BYOC)](../byoc.md). Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md) and [Bring Your Own Cloud (BYOC)](../byoc.md). Use Managed Deep Agents CLI and SDK v0.10 or later for BYOC.
 
 The endpoint is the outbound direction. An [MCP connector](managed-deep-agents-mcp-connectors.md) points the other way: it adds tools from a remote MCP server to your agent. A deployment can use both.
 

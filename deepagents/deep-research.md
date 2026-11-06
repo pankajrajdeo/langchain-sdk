@@ -47,7 +47,7 @@ This guide shows how to build this agenet with [Managed Deep Agents](../langsmit
 >
 > > [!NOTE]
 > >
-> > Managed Deep Agents is in **public [beta](../langsmith/release-stages.md)** on [LangSmith Cloud](../langsmith/cloud.md) and [Bring Your Own Cloud (BYOC)](../langsmith/byoc.md). Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC.
+> > Managed Deep Agents is in **public [beta](../langsmith/release-stages.md)** on [LangSmith Cloud](../langsmith/cloud.md) and [Bring Your Own Cloud (BYOC)](../langsmith/byoc.md). Use Managed Deep Agents CLI and SDK v0.10 or later for BYOC.
 >
 > ### Setup
 >

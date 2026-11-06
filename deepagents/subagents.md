@@ -1551,6 +1551,20 @@ Without `response_format`, the parent receives the subagent's last message text 
 
 For full details on schema types and strategies (tool calling vs. provider-native), see [Structured output](../langchain/structured-output.md).
 
+## Model refusals
+
+When a subagent's model refuses, the parent agent receives a short task result that says so, instead of an empty result or a failed run. The parent can then rephrase the task or continue without it:
+
+```txt
+The subagent stopped because a model refused the request. Retrying the same request is unlikely to succeed; rephrase it or continue without it.
+```
+
+For Anthropic models, the result also includes the refusal category, such as `Category: cyber.`
+
+This covers a subagent whose last message is a [`refusal` content block](../langchain/messages.md#content-block-reference), a subagent that raises [`ModelRefusalError`](https://reference.langchain.com/python/langchain-core/exceptions/ModelRefusalError) (for example, one that uses [`ModelRefusalMiddleware`](../langchain/middleware/built-in.md#model-refusal)), and a structured output subagent whose refusal fails to parse. Async subagents report the same result. When the subagent raises, the parent does not receive any state the subagent changed before refusing.
+
+The main agent raises [`ModelRefusalError`](https://reference.langchain.com/python/langchain-core/exceptions/ModelRefusalError) when its own model refuses, because [`ModelRefusalMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/model_refusal/ModelRefusalMiddleware) is in the [Deep Agents stack](customization.md#full-stack). A [`ModelFallbackMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/model_fallback/ModelFallbackMiddleware) you pass catches the refusal first and retries the request on the next model. See [Handle a refusal](../langchain/middleware/built-in.md#handle-a-refusal) for ways to respond.
+
 ## The general-purpose subagent
 
 In addition to any user-defined subagents, every deep agent has access to a `general-purpose` subagent at all times. This subagent:

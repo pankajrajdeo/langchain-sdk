@@ -20,4 +20,4 @@ sorted_routes = sorted(routes.items(), key=lambda x: len(x[0]), reverse=True)
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/e85c6b98087861512d2c5240305e16cfac68a746/libs/deepagents/deepagents/backends/composite.py#L281)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9ea3f1912abd8b7eecb504d78ef99fcf279bf561/libs/deepagents/deepagents/backends/composite.py#L281)

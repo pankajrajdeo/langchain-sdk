@@ -14,7 +14,7 @@ Middleware adds behavior around model calls, tool calls, and the agent lifecycle
 
 > [!NOTE]
 >
-> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md) and [Bring Your Own Cloud (BYOC)](../byoc.md). Use version 0.10 of the Managed Deep Agents CLI and SDK for BYOC.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** on [LangSmith Cloud](../cloud.md) and [Bring Your Own Cloud (BYOC)](../byoc.md). Use Managed Deep Agents CLI and SDK v0.10 or later for BYOC.
 
 Put custom middleware under `middleware/`, import it into the agent entry, and pass it to the agent definition:
 

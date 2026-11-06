@@ -96,7 +96,7 @@ await sandbox.delete();
 
 ### 4. Use sandboxes with your agents
 
-To wire sandboxes into agent code, see the Open Source docs:
+To wire sandboxes into agent code, see the open source documentation:
 
 * **Deep Agents**: [Use `LangSmithSandbox` as a backend](../integrations/sandboxes/langsmith.md), covering installation, backend creation, and cleanup.
 * **Sandboxes as agent backends**: [Configure any sandbox as the execution backend](../deepagents/sandboxes.md) to give your agent `execute` and filesystem tools automatically.

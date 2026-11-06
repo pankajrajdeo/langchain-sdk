@@ -38,7 +38,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 ## Files
 
 - [after_agent](after_agent.md) - Run shutdown commands and release resources when an agent completes.
-- [after_model](after_model.md) - Check for parallel write_todos tool calls and return errors if detected.
+- [after_model](after_model.md) - Increment model call counts after a model call.
 - [before_agent](before_agent.md) - Start the shell session and run startup commands.
 - [before_model](before_model.md) - Process messages before model invocation, potentially triggering summarization.
 - [configure_trace_policy](configure_trace_policy.md) - Set the process-wide default TracePolicy for agent middleware hook spans.
@@ -63,5 +63,5 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [tool_retry](tool_retry.md) - Tool retry middleware for agents.
 - [tool_selection](tool_selection.md) - LLM-based tool selector middleware.
 - [types](types.md) - Types for middleware and agents.
-- [wrap_model_call](wrap_model_call.md) - Update the system message to include the todo system prompt.
-- [wrap_tool_call](wrap_tool_call.md) - Prepend reviewer-edit guidance to the result of an edited tool call.
+- [wrap_model_call](wrap_model_call.md) - Filter tools based on LLM selection before invoking the model via handler.
+- [wrap_tool_call](wrap_tool_call.md) - Intercept tool execution and convert handled exceptions to error messages.

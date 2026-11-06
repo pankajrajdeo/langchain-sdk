@@ -47,6 +47,7 @@ stream(
     params: QueryParamTypes | None = None,
     on_run_created: Callable[[RunCreateMetadata], None] | None = None,
     durability: Durability | None = None,
+    strict_resume: bool | None = None,
     version: StreamVersion = 'v1',
 ) -> AsyncIterator[StreamPart | StreamPartV2]
 ```
@@ -113,6 +114,7 @@ StreamPart(event='end', data={'run_id': '1ef4a9b8-d7da-679a-a45a-872054341df2', 
 | `params` | `QueryParamTypes \| None` | No | Optional query parameters to include with the request. (default: `None`) |
 | `on_run_created` | `Callable[[RunCreateMetadata], None] \| None` | No | Callback when a run is created. (default: `None`) |
 | `durability` | `Durability \| None` | No | The durability to use for the run. Values are "sync", "async", or "exit". "async" means checkpoints are persisted async while next graph step executes, replaces checkpoint_during=True "sync" means checkpoints are persisted sync after graph step executes, replaces checkpoint_during=False "exit" means checkpoints are only persisted when the run exits, does not save intermediate steps (default: `None`) |
+| `strict_resume` | `bool \| None` | No | Refuse a resume that answers an interrupt that isn't waiting, instead of ignoring the answer: the run fails with `UnknownInterruptError` and the thread stays as it was. Takes effect on servers whose `/info` reports `strict_resume`. (default: `None`) |
 | `version` | `StreamVersion` | No | Stream format version. "v1" (default) returns raw SSE StreamPart NamedTuples. "v2" returns typed dicts with `type`, `ns`, and `data` keys. (default: `'v1'`) |
 
 ## Returns
@@ -123,4 +125,4 @@ Asynchronous iterator of stream results.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a4d4187e82cdb0a73d68c76d70d655dd73a6db0b/libs/sdk-py/langgraph_sdk/_async/runs.py#L201)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/5847733bcb186c26b32da5cc822eaf8a89deffeb/libs/sdk-py/langgraph_sdk/_async/runs.py#L203)
