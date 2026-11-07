@@ -12,7 +12,7 @@ tags: [docs, javascript, langgraph, graph-api]
 
 The Graph API defines agent workflows as a graph of [state](#state), [nodes](#nodes), and [edges](#edges). [`Send`](#send) and [`Command`](#command) control how the graph runs work: `Send` dynamically invokes nodes for fan-out, and `Command` updates state while routing to the next node (including resume after an interrupt). Use the Graph API when you want explicit shared state and a visual control flow.
 
-For step-by-step decisions while building, see the [Build checklist for the Graph API](use-graph-api.md). For a guided walkthrough, see [Thinking in the Graph API](thinking-in-graph-api.md). To choose between this and the Functional API, see [Choosing between Graph and Functional APIs](choosing-apis.md).
+For step-by-step decisions while building, see the [Build checklist for the Graph API](use-graph-api.md). For a guided walkthrough, see [Thinking in the Graph API](thinking-in-graph-api.md).
 
 ## Graphs
 
@@ -323,11 +323,11 @@ Ask whether the step decides what happens next, or executes something already de
 | [Subgraph](use-subgraphs.md) | Yes for stateful modes: nodes checkpoint under a namespace of the parent thread. Compile with `checkpointer=False` for no subgraph checkpoints. | Stateful modes resume inside the subgraph at the interrupted or failed node. | The unit has its own routing or state schema, or more than one parent graph reuses it. |
 | Graph node | Yes. A checkpoint follows the [super-step](#super-steps) it runs in. | Resume starts at that node. Earlier nodes do not re-run. | A routing fork is possible after the step, or you need an interrupt, resume, or [time travel](use-time-travel.md) boundary. |
 
-For side effects under retries, see [Retry boundaries and idempotency](fault-tolerance.md#retry-boundaries-and-idempotency). For task retries and timeouts, see [Tasks](functional-api-tasks.md).
+For side effects under retries, see [Retry boundaries and idempotency](fault-tolerance.md#retry-boundaries-and-idempotency). For task retries and timeouts, see [Fault tolerance](fault-tolerance.md).
 
 ### Using tasks in nodes
 
-When one node runs several operations that should checkpoint independently, wrap each operation in a [task](functional-api.md#task) instead of splitting the work across nodes. With a checkpointer, completed task results are saved, so a resumed thread can skip finished work inside the node. For patterns and examples, see [Tasks](functional-api-tasks.md) and [Common pitfalls](functional-api.md#common-pitfalls).
+When one node runs several operations that should checkpoint independently, wrap each operation in a [task](functional-api.md#task) instead of splitting the work across nodes. With a checkpointer, completed task results are saved, so a resumed thread can skip finished work inside the node. For patterns and examples, see [Tasks](functional-api.md#task) and [Common pitfalls](functional-api.md#common-pitfalls).
 
 ### `START` node
 
@@ -611,7 +611,6 @@ For recipes (catching the error, reading `langgraph_step`, and Python `Remaining
 * [Use Send and Command](graph-api-send-command.md)
 * [Configure nodes](graph-api-nodes.md)
 * [Visualize your graph](graph-api-visualize.md)
-* [Functional API overview](functional-api.md)
 
 ***
 

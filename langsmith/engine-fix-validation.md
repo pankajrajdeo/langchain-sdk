@@ -23,7 +23,7 @@ Engine records each validation as an [experiment](evaluation-concepts.md#experim
 
 ## Set the baseline deployment
 
-The baseline deployment is the deployment Engine replays issue traces against. [Red Teaming](engine-red-teaming.md) sends its probes to the same deployment. It must be a ready, non-preview [LangSmith Cloud deployment](deploy-to-cloud.md) of your agent in the same workspace, and selecting it requires `deployments:update` on that deployment.
+The baseline deployment is the deployment Engine replays issue traces against. [Red Teaming](engine-red-teaming.md) sends its probes to the same deployment unless you [configure an external target](engine-red-teaming.md#set-up-an-external-deployment). Fix validation still uses the baseline deployment. It must be a ready, non-preview [LangSmith Cloud deployment](deploy-to-cloud.md) of your agent in the same workspace, and selecting it requires `deployments:update` on that deployment.
 
 To set the baseline deployment:
 

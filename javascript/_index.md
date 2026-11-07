@@ -7,7 +7,7 @@ tags: [index, javascript]
 
 # javascript
 
-12 pages here, 385 pages including subdirectories.
+12 pages here, 377 pages including subdirectories.
 
 ## Directories
 
@@ -16,7 +16,7 @@ tags: [index, javascript]
 - [deepagents/](deepagents/_index.md) - 37 pages
 - [integrations/](integrations/_index.md) - 184 pages
 - [langchain/](langchain/_index.md) - 81 pages
-- [langgraph/](langgraph/_index.md) - 51 pages
+- [langgraph/](langgraph/_index.md) - 43 pages
 - [migrate/](migrate/_index.md) - 3 pages
 - [reference/](reference/_index.md) - 1 page
 - [releases/](releases/_index.md) - 3 pages

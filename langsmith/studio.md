@@ -31,6 +31,7 @@ Key features of Studio:
 * Manage [long term memory](../concepts/memory.md)
 * Debug agent state via [time travel](../langgraph/use-time-travel.md)
 * 1 Click deploy to LangSmith Cloud.
+* [Build a no-code agent](build-an-agent.md) by describing it
 
 ```mermaid
 flowchart
@@ -57,6 +58,10 @@ Graph mode exposes the full feature-set and is useful when you would like as man
 ### Chat mode
 
 Chat mode is a simpler UI for iterating on and testing chat-specific agents. It is useful for business users and those who want to test overall agent behavior. Chat mode is only supported for graph's whose state includes or extends [`MessagesState`](../langgraph/graph-api-state.md#messagesstate).
+
+## Build a no-code agent
+
+Studio also builds no-code agents. Building agents in Studio is available on [LangSmith Cloud](cloud.md) and not on [self-hosted](self-hosted.md) LangSmith. Describe the agent you want, and [LangSmith Chat](chat.md) drafts its name, description, and instructions, then suggests its connections, channels, and schedules. Review and save the configuration, then chat with the agent and watch its traces in the same view. For more information, see [Build an agent with LangSmith Studio](build-an-agent.md).
 
 ## Deploy from Studio
 

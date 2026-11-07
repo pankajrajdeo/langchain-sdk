@@ -115,7 +115,7 @@ These guides explain the core concepts and APIs underlying LangChain and LangGra
 
 > [card] [Functional API](langgraph/functional-api.md)
 >
-> Build agents as a single function.
+> Wrap an agent from another framework for LangSmith Deployment.
 
 ## Additional resources
 

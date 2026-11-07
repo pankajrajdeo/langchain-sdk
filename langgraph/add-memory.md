@@ -1654,7 +1654,7 @@ You can view and delete the information stored by the checkpointer.
 
 #### View thread state
 
-> [tab] Graph/Functional API
+> [tab] Graph API
 >
 ```python
 > config = {
@@ -1726,7 +1726,7 @@ You can view and delete the information stored by the checkpointer.
 
 #### View the history of the thread
 
-> [tab] Graph/Functional API
+> [tab] Graph API
 >
 ```python
 > config = {

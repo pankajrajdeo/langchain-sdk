@@ -27,7 +27,7 @@ The four environments are fixed, and custom names are not supported. The environ
 * **Development**
 * **Local**
 
-How many of the four an agent has depends on [how it was created](create-an-agent.md). An agent created in the UI, through [Build](build-an-agent.md), starts with **Production** alone, and each of the others appears the first time a trace is addressed to it. An agent created any other way starts with all four.
+How many of the four an agent has depends on [how it was created](create-an-agent.md). An agent [built in LangSmith Studio](build-an-agent.md) starts with **Production** alone, and each of the others appears the first time a trace is addressed to it. An agent created any other way starts with all four.
 
 LangSmith attaches no behavior to the choice beyond keeping each environment's traces apart. An environment does not change how an agent is instrumented, and the same build can report into a different environment by changing its [agent addressing](log-traces-to-agent.md).
 

@@ -316,7 +316,7 @@ Managed Deep Agents owns sandbox naming, recipe bake, reuse, recovery, and clean
 | Store durable knowledge across threads | [Memory](managed-deep-agents-memory.md) |
 | Always-on behavior without a filesystem | [Instructions](managed-deep-agents-instructions.md) |
 
-For more information, see [Project structure](managed-deep-agents-project-structure.md).
+For more information, see [Project structure](managed-deep-agents-project-structure.md). For a project that publishes a larger sandbox snapshot before deploy, see the [design agent template](managed-deep-agents-design-agent.md).
 
 ***
 

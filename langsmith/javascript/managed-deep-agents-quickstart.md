@@ -222,13 +222,14 @@ The agent name is also the default deployment name. For model concepts and provi
 
 > [accordion] Using another provider?
 >
-> You can use a Tavily search tool instead.
-> Add a [Tavily API key](https://app.tavily.com) to `.env`:
+> You can use a Tavily search tool instead. Store the key in a [connection](managed-deep-agents-connections.md) so it lives in your LangSmith workspace rather than the project.
+>
+> This accordion uses the connection slug `research-tavily`. For `mda dev`, an agent-owned connection reads its value from `MDA_DEV_`. Add a [Tavily API key](https://app.tavily.com) to `.env` as `MDA_DEV_RESEARCH_TAVILY`:
 >
 **.env**
 
 ```text
-> TAVILY_API_KEY=<TAVILY_API_KEY>
+> MDA_DEV_RESEARCH_TAVILY=<TAVILY_API_KEY>
 ```
 >
 > Install the Tavily client:
@@ -251,20 +252,22 @@ The agent name is also the default deployment name. For model concepts and provi
 > bun add @langchain/tavily
 ```
 >
-> Create a custom `internet_search` tool:
+> Create a custom `internet_search` tool. `connections.get(...)` resolves the key at runtime, so the tool code is the same locally and on the deployment:
 >
 **tools/search.ts**
 
 ```ts
 > import { TavilySearch } from "@langchain/tavily";
 > import { tool } from "langchain";
+> import { connections } from "managed-deepagents";
 > import { z } from "zod";
 >
 > export const internetSearch = tool(
 >   async ({ query, maxResults = 5, topic = "general" }) => {
+>     const tavilyApiKey = await connections.get("research-tavily", { type: "agent" });
 >     const tavilySearch = new TavilySearch({
 >       maxResults,
->       tavilyApiKey: process.env.TAVILY_API_KEY,
+>       tavilyApiKey,
 >       topic,
 >     });
 >     return tavilySearch._call({ query });
@@ -297,7 +300,27 @@ The agent name is also the default deployment name. For model concepts and provi
 > });
 ```
 >
-> For more authored tools, see [Custom tools](managed-deep-agents-tools.md).
+> After you deploy in the agent in the next step, create the agent-owned connection. Agent-owned credentials belong to the deployment, so this command comes after the first successful deploy:
+>
+**npm**
+
+```bash
+> npx mda connections create research-tavily --secret-from-env MDA_DEV_RESEARCH_TAVILY
+```
+>
+**pnpm**
+
+```bash
+> pnpm exec mda connections create research-tavily --secret-from-env MDA_DEV_RESEARCH_TAVILY
+```
+>
+**bun**
+
+```bash
+> bunx mda connections create research-tavily --secret-from-env MDA_DEV_RESEARCH_TAVILY
+```
+>
+> Rotating this value later takes effect on the next run, with no redeploy. For more authored tools, see [Custom tools](managed-deep-agents-tools.md). For other create modes and per-caller credentials, see [Manage connections](managed-deep-agents-connections.md).
 
 **6. Run locally**
 
@@ -369,6 +392,14 @@ Open that URL. You should see the deployment in a ready state. Send the same res
 > [card] [Tutorial](managed-deep-agents-tutorial.md)
 >
 > Add a custom Tavily search tool, durable memory, and a daily schedule.
+
+> [card] [Design agent template](managed-deep-agents-design-agent.md)
+>
+> Deploy LangChain's open-source design agent instead of scaffolding from scratch.
+
+> [card] [Paid media agent template](managed-deep-agents-paid-media-agent.md)
+>
+> Deploy LangChain's open-source paid media agent for Slack campaign analysis.
 
 > [card] [Custom tools](managed-deep-agents-tools.md)
 >

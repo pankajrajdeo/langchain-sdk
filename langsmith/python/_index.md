@@ -1,13 +1,13 @@
 ---
 title: "langsmith/python"
-description: "Index of 32 pages and 0 subdirectories under langsmith/python."
+description: "Index of 34 pages and 0 subdirectories under langsmith/python."
 category: "index"
 tags: [index, langsmith, python]
 ---
 
 # langsmith/python
 
-32 pages here.
+34 pages here.
 
 ## Files
 
@@ -22,6 +22,7 @@ tags: [index, langsmith, python]
 - [Manage Context Hub for Managed Deep Agents](managed-deep-agents-context-hub.md) - Understand how Managed Deep Agents stores instructions, skills, and durable memory in LangSmith Context Hub.
 - [Build a custom frontend for a Managed Deep Agent](managed-deep-agents-custom-frontend.md) - Call a Managed Deep Agents deployment from your own browser or server application instead of reaching the agent through a channel or LangSmith Studio.
 - [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md) - Test and deploy a Managed Deep Agent with the mda CLI.
+- [Deploy the open-source design agent](managed-deep-agents-design-agent.md) - Deploy Content Studio, an open-source design agent, to Slack as a Managed Deep Agents project.
 - [Evaluate Managed Deep Agents](managed-deep-agents-evals.md) - Develop Harbor evals for Managed Deep Agents with a coding agent and the eval-engineering skill.
 - [Add identity to Managed Deep Agents](managed-deep-agents-identity.md) - Authenticate callers to a Managed Deep Agents deployment with a LangSmith API key, Supabase, another JWT provider, or your own backend.
 - [Add instructions to Managed Deep Agents](managed-deep-agents-instructions.md) - Define the system prompt for a managed deep agent in instructions.md.
@@ -32,6 +33,7 @@ tags: [index, langsmith, python]
 - [Add custom middleware to Managed Deep Agents](managed-deep-agents-middleware.md) - Add built-in or custom middleware to a managed deep agent.
 - [Move from Deep Agents to Managed Deep Agents](managed-deep-agents-migrate.md) - Convert an agent built with create_deep_agent into a Managed Deep Agents project.
 - [Managed Deep Agents](managed-deep-agents-overview.md) - Build your agent as a directory of files while LangSmith runs the harness and runtime.
+- [Deploy the open-source paid media agent](managed-deep-agents-paid-media-agent.md) - Deploy the open-source paid media agent to Slack as a Managed Deep Agents project for campaign analysis, scheduled reports, and reviewed changes.
 - [Managed Deep Agents project structure](managed-deep-agents-project-structure.md) - Understand the project layout for Managed Deep Agents.
 - [Managed Deep Agents quickstart](managed-deep-agents-quickstart.md) - Create and deploy your first Managed Deep Agent with the mda CLI.
 - [Managed Deep Agents runtime](managed-deep-agents-runtime.md) - Read run context, the verified caller, the thread, and the sandbox from the native runtime types that agent factories, tools, and middleware receive.

@@ -258,6 +258,8 @@ Files stay scoped to the Slack thread they arrived in, because every thread gets
 ## See also
 
 * [Channels overview](managed-deep-agents-channels.md): understand how channels connect messaging services to an agent.
+* [Design agent template](managed-deep-agents-design-agent.md): deploy a full Slack design agent project.
+* [Paid media agent template](managed-deep-agents-paid-media-agent.md): deploy a full Slack paid media agent project.
 * [Decision models](../llm-gateway-decision-models.md): configure the model that scores reaction emoji.
 * [Set up the LLM Gateway](../llm-gateway-admin-setup.md): add the provider key that reactions need.
 * [Agent-owned interrupts](managed-deep-agents-agent-owned-interrupts.md): post a Slack form from a tool and resume the run on submit.

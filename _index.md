@@ -7,7 +7,7 @@ tags: [index]
 
 # LangChain mirror
 
-13 pages here, 9074 pages including subdirectories.
+13 pages here, 9062 pages including subdirectories.
 
 ## Directories
 
@@ -18,10 +18,10 @@ tags: [index]
 - [contributing/](contributing/_index.md) - 8 pages
 - [deepagents/](deepagents/_index.md) - 64 pages
 - [integrations/](integrations/_index.md) - 362 pages
-- [javascript/](javascript/_index.md) - 385 pages
+- [javascript/](javascript/_index.md) - 377 pages
 - [langchain/](langchain/_index.md) - 82 pages
-- [langgraph/](langgraph/_index.md) - 56 pages
-- [langsmith/](langsmith/_index.md) - 1284 pages
+- [langgraph/](langgraph/_index.md) - 48 pages
+- [langsmith/](langsmith/_index.md) - 1288 pages
 - [migrate/](migrate/_index.md) - 4 pages
 - [openwiki/](openwiki/_index.md) - 12 pages
 - [oss/](oss/_index.md) - 3 pages
@@ -31,7 +31,7 @@ tags: [index]
 
 ## Files
 
-- [Build](build-overview.md) - Build agents with Managed Deep Agents, Deep Agents, LangChain, LangGraph, and Fleet.
+- [Build](build-overview.md) - Build agents with Managed Deep Agents, Deep Agents, LangChain, LangGraph, and Studio.
 - [Errors](common-errors.md) - This page contains guides around resolving common errors you may find while building with LangChain and LangGraph.
 - [Contributing](contributing.md) - Welcome! Thank you for your interest in contributing.
 - [The open agent engineering ecosystem](docs.md) - LangChain provides open source, model-agnostic harnesses for building agents. LangSmith is the framework-agnostic platform for testing, deploying, monitoring, and improving your agents across the...

@@ -95,7 +95,7 @@ For what syncs, what does not, and how to open the repo from a deployment, see [
 | **Skills** | Task-specific procedures | When the agent selects them |
 | **[Memory](managed-deep-agents-memory.md)** | Knowledge the agent can update | When durable memory is enabled |
 
-For more information, see [Project structure](managed-deep-agents-project-structure.md).
+For more information, see [Project structure](managed-deep-agents-project-structure.md). For complete projects that ship many skills, see the [design agent](managed-deep-agents-design-agent.md) and [paid media agent](managed-deep-agents-paid-media-agent.md) templates.
 
 ***
 

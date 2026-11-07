@@ -7,14 +7,14 @@ tags: [index, langsmith]
 
 # langsmith
 
-529 pages here, 1284 pages including subdirectories.
+529 pages here, 1288 pages including subdirectories.
 
 ## Directories
 
 - [agent-server-api/](agent-server-api/_index.md) - 73 pages
 - [fleet/](fleet/_index.md) - 24 pages
-- [javascript/](javascript/_index.md) - 31 pages
-- [python/](python/_index.md) - 32 pages
+- [javascript/](javascript/_index.md) - 33 pages
+- [python/](python/_index.md) - 34 pages
 - [smith-api/](smith-api/_index.md) - 595 pages
 
 ## Files
@@ -60,7 +60,7 @@ tags: [index, langsmith]
 - [Export trace data to BigQuery](big-query-bulk-export.md) - Load LangSmith trace data into BigQuery using bulk export to GCS.
 - [Manage billing in your account](billing.md) - This page describes how to manage billing for your LangSmith organization:
 - [Automatically run evaluators on experiments](bind-evaluator-to-dataset.md) - LangSmith supports two ways to grade experiments created via the SDK:
-- [Build an agent in the UI](build-an-agent.md) - How the Build tab configures an agent from a form, what each section of that form sets, and where the new agent's traces land.
+- [Build an agent with LangSmith Studio](build-an-agent.md) - Describe an agent in Studio, let LangSmith Chat draft its configuration, then review, save, and test it without writing code.
 - [BYOC architecture](byoc-architecture-aws.md) - How a LangSmith BYOC deployment is structured across the LangChain control plane and the data plane in your AWS account.
 - [BYOC architecture on Azure](byoc-architecture-azure.md) - What LangSmith BYOC deploys in your Azure subscription, how the data plane connects to the LangChain control plane, the access LangSmith gets, and how your data is protected.
 - [BYOC architecture on GCP](byoc-architecture-gcp.md) - What LangSmith BYOC deploys in your GCP project, how the data plane connects to the LangChain control plane, and the access LangSmith gets in your project.

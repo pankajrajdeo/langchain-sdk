@@ -109,8 +109,8 @@ LangGraph works on its own. However, you can also pair it with other LangCHain p
 
 * [LangGraph quickstart](langgraph/quickstart.md)
 * [Graph API overview](langgraph/graph-api.md)
-* [Choosing between Graph and Functional APIs](langgraph/choosing-apis.md)
 * [Frameworks, runtimes, and harnesses](concepts/products.md)
+* [Incorporate existing code and other frameworks](../langsmith/deploy-other-frameworks.md) (wrap a non-LangGraph agent for LangSmith Deployment)
 
 ***
 

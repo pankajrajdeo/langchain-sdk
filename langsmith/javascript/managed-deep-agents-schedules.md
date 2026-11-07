@@ -335,6 +335,10 @@ To change the limit, set these variables in the deployment environment:
 >
 > Deploy and reconcile schedule changes.
 
+> [card] [Paid media agent template](managed-deep-agents-paid-media-agent.md)
+>
+> A full project with weekly and monthly report schedules.
+
 > [card] [CLI reference](managed-deep-agents-cli.md)
 >
 > Look up `mda deploy` flags and troubleshooting.

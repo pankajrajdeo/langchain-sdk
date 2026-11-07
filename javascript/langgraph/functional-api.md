@@ -1,6 +1,6 @@
 ---
 title: "Functional API overview"
-description: "Learn Functional API entrypoints and tasks, how checkpointing and replay work, and how to avoid common resume pitfalls."
+description: "Wrap other frameworks with entrypoints and tasks for LangSmith Deployment. Covers checkpointing, resume rules, and common pitfalls."
 source: "https://docs.langchain.com/oss/javascript/langgraph/functional-api"
 category: "docs"
 tags: [docs, javascript, langgraph, functional-api]
@@ -8,27 +8,25 @@ tags: [docs, javascript, langgraph, functional-api]
 
 # Functional API overview
 
-> Learn Functional API entrypoints and tasks, how checkpointing and replay work, and how to avoid common resume pitfalls.
+> Wrap other frameworks with entrypoints and tasks for LangSmith Deployment. Covers checkpointing, resume rules, and common pitfalls.
 
-The **Functional API** adds LangGraph features ([persistence](persistence.md), [memory](add-memory.md), [human-in-the-loop](interrupts.md), and [streaming](streaming.md)) to ordinary functions. Use standard language control flow (`if` / `else`, loops, and function calls) instead of declaring a graph of nodes and edges.
+The **Functional API** wraps ordinary functions with LangGraph runtime features ([persistence](persistence.md), [memory](add-memory.md), [human-in-the-loop](interrupts.md), and [streaming](streaming.md)). Use it when you already have existing code or are using a different framework and want to [deploy it on LangSmith](../../langsmith/deploy-other-frameworks.md) without rewriting that agent as a graph. Prefer the [Graph API](graph-api.md) for building new agents.
 
-This page is the concept reference for entrypoints, tasks, checkpointing, and resume rules. For a design walkthrough, see [Thinking in the Functional API](thinking-in-functional-api.md). For an ordered build path, see the [Build checklist for the Functional API](use-functional-api.md).
+This page is the concept reference for entrypoints, tasks, checkpointing, and resume rules. For the wrap-and-deploy how-to, see [Deploy other frameworks](../../langsmith/deploy-other-frameworks.md).
 
 The Functional API uses two building blocks:
 
 * **`entrypoint`**: Encapsulates workflow logic and manages execution, interrupts, and checkpointing.
 * **`task`**: Marks a discrete unit of work (for example, an API call). Tasks return a `Promise` that you await inside the entrypoint.
 
-## Functional API vs. Graph API
+## When to use the Functional API
 
-This comparison is optional if you already chose the Functional API. For a side-by-side decision guide, see [Choosing between Graph and Functional APIs](choosing-apis.md). Both APIs share the same underlying runtime, so you can use them together in the same application.
+| Build | Use |
+| - | - |
+| New LangGraph agents and workflows | [Graph API](graph-api.md) |
+| Existing agent in another framework (Claude Agent SDK, Strands, CrewAI, AutoGen, and similar) that you want on LangSmith Deployment | Functional API via [Deploy other frameworks](../../langsmith/deploy-other-frameworks.md) |
 
-High-level differences:
-
-* **Control flow**: The Functional API uses standard language constructs. The [Graph API](graph-api.md) uses nodes and edges.
-* **State**: The Graph API requires declaring [state](graph-api.md#state) and often [reducers](graph-api.md#reducers). The Functional API keeps state scoped to the function: tasks pass values as return values, with no shared state schema.
-* **Checkpointing**: The Graph API checkpoints after each [super-step](graph-api.md#super-steps). The Functional API saves task results to the entrypoint checkpoint.
-* **Visualization**: The Graph API supports graph diagrams. The Functional API does not, because the graph is built at runtime.
+Compared with the Graph API, the Functional API uses ordinary language control flow (`if` / `else`, loops, and calls), keeps values scoped to the entrypoint and tasks instead of a shared [state](graph-api.md#state) schema, saves task results on the entrypoint checkpoint rather than after each [super-step](graph-api.md#super-steps), and has no static graph visualization.
 
 ## Entrypoint
 
@@ -67,32 +65,30 @@ await myWorkflow.invoke("Alice", config); // "Hello, Alice"
 
 ### Run and resume
 
-Call `invoke` for a final result. For streams, see [Stream with the Functional API](functional-api-streaming.md).
+Call `invoke` for a final result. For streams, see [Streaming](streaming.md).
 
-Resume after [`interrupt`](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt) by passing a resume value in [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command). For recipes, see [Add human-in-the-loop with the Functional API](functional-api-human-in-the-loop.md).
+Resume after [`interrupt`](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt) by passing a resume value in [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command). For recipes, see [Interrupts](interrupts.md).
 
-After an error, resume the same `thread_id` with `null`. See [Resume after an error](functional-api-tasks.md#resume-after-an-error).
+After an error, resume the same `thread_id` with `null`.
 
 ### Short-term memory
 
 When an `entrypoint` has a `checkpointer`, successive invocations on the same **thread id** store state in [checkpoints](checkpointers.md#checkpoints).
 
-Call `getPreviousState` inside the entrypoint. It returns the last value saved on this thread. On the first run it is `undefined`. To save a different value for the next run, use [`entrypoint.final`](https://reference.langchain.com/javascript/langchain-langgraph/index/entrypoint/final). See [Return a different saved value](functional-api-memory.md#return-a-different-saved-value).
-
-For accumulate and inspecting checkpoints, see [Save state on a thread](functional-api-memory.md#save-state-on-a-thread).
+Call `getPreviousState` inside the entrypoint. It returns the last value saved on this thread. On the first run it is `undefined`. To save a different value for the next run, use [`entrypoint.final`](https://reference.langchain.com/javascript/langchain-langgraph/index/entrypoint/final).
 
 ### Injectable parameters
 
-You can skip this until you add [memory](functional-api-memory.md) or [custom streaming](functional-api-streaming.md).
+You can skip this until you add [memory](add-memory.md) or [custom streaming](streaming.md).
 
 The `entrypoint` function can take a second `config` argument. LangGraph also provides helpers you call inside the function:
 
 | Helper | Description |
 | - | - |
-| **getPreviousState** | The return value from the previous invocation on the same thread (requires a checkpointer). See [short-term memory](functional-api-memory.md#save-state-on-a-thread). |
+| **getPreviousState** | The return value from the previous invocation on the same thread (requires a checkpointer). See [short-term memory](#short-term-memory). |
 | **config** | A `LangGraphRunnableConfig` object with run-time configuration values. |
-| **config.store** | A store instance for [long-term memory](functional-api-memory.md#save-facts-across-threads). |
-| **config.writer** | A writer for custom streaming. See [Stream with the Functional API](functional-api-streaming.md). |
+| **config.store** | A store instance for [long-term memory](add-memory.md). |
+| **config.writer** | A writer for custom streaming. See [Streaming](streaming.md). |
 
 > [accordion] Requesting injectable parameters
 >
@@ -177,7 +173,7 @@ Use **tasks** when you need:
 * **Human-in-the-loop**: Wrap work you should not redo after a pause in a task, for example an LLM call. Resume after an [interrupt](interrupts.md) restores the result. For randomness, see [Determinism](#determinism).
 * **Parallel execution**: Run independent I/O-bound work concurrently.
 * **Observability**: Track discrete steps in [LangSmith](../../langsmith/observability.md).
-* **Retries**: Apply retry policies to discrete units of work. See [Configure Functional API tasks](functional-api-tasks.md).
+* **Retries**: Apply retry policies to discrete units of work. See [Fault tolerance](fault-tolerance.md).
 
 ## Resume and checkpointing
 
@@ -251,7 +247,7 @@ Invoke with a topic such as `"cat"`. The run writes the essay, then pauses at `i
 
 The `writeEssay` task result is restored, not recomputed.
 
-For stream, resume, and tool-call review, see [Add human-in-the-loop with the Functional API](functional-api-human-in-the-loop.md).
+For stream, resume, and tool-call review, see [Interrupts](interrupts.md).
 
 ## Common pitfalls
 
@@ -378,15 +374,12 @@ With multiple [`interrupt`](https://reference.langchain.com/javascript/langchain
 
 ## Learn more
 
-* [Thinking in the Functional API](thinking-in-functional-api.md)
-* [Build checklist for the Functional API](use-functional-api.md)
-* [Compose Functional API workflows](functional-api-workflows.md)
-* [Configure Functional API tasks](functional-api-tasks.md)
-* [Stream with the Functional API](functional-api-streaming.md)
-* [Add human-in-the-loop with the Functional API](functional-api-human-in-the-loop.md)
-* [Add memory with the Functional API](functional-api-memory.md)
+* [Deploy other frameworks](../../langsmith/deploy-other-frameworks.md)
 * [Graph API overview](graph-api.md)
-* [Choosing between Graph and Functional APIs](choosing-apis.md)
+* [Interrupts](interrupts.md)
+* [Streaming](streaming.md)
+* [Fault tolerance](fault-tolerance.md)
+* [Memory](add-memory.md)
 
 ***
 

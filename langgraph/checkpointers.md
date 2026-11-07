@@ -65,7 +65,7 @@ With a checkpointer and an existing thread, choose the invocation for your goal:
 
 New input does not clear the thread. LangGraph applies it using the state's [reducers](graph-api.md#reducers). Use a new `thread_id` to start with empty state.
 
-Resume returns the saved result without running nodes when the latest checkpoint has no unfinished work. For runnable examples, see [Functional API error recovery](functional-api-tasks.md#resume-after-an-error), [resuming interrupts](interrupts.md#resuming-interrupts), and [replaying history](use-time-travel.md#replay).
+Resume returns the saved result without running nodes when the latest checkpoint has no unfinished work. For runnable examples, see [resuming interrupts](interrupts.md#resuming-interrupts) and [replaying history](use-time-travel.md#replay). For entrypoint resume rules when wrapping another framework, see the [Functional API overview](functional-api.md#run-and-resume).
 
 ### Checkpoints
 

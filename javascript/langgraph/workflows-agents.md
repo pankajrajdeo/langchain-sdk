@@ -123,8 +123,6 @@ Prompt chaining is when each LLM call processes the output of the previous call.
 
 ![Prompt chaining](https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/prompt_chain.png?fit=max\&auto=format\&n=dL5Sn6Cmy9pwtY0V\&q=85\&s=762dec147c31b8dc6ebb0857e236fc1f)
 
-**Graph API**
-
 ```typescript
 import { StateGraph, StateSchema, GraphNode, ConditionalEdgeRouter } from "@langchain/langgraph";
 import { z } from "zod/v4";
@@ -201,63 +199,6 @@ if (state.improvedJoke !== undefined) {
 }
 ```
 
-**Functional API**
-
-```typescript
-import { task, entrypoint } from "@langchain/langgraph";
-
-// Tasks
-
-// First LLM call to generate initial joke
-const generateJoke = task("generateJoke", async (topic: string) => {
-  const msg = await llm.invoke(`Write a short joke about ${topic}`);
-  return msg.content;
-});
-
-// Gate function to check if the joke has a punchline
-function checkPunchline(joke: string) {
-  // Simple check - does the joke contain "?" or "!"
-  if (joke.includes("?") || joke.includes("!")) {
-    return "Pass";
-  }
-  return "Fail";
-}
-
-  // Second LLM call to improve the joke
-const improveJoke = task("improveJoke", async (joke: string) => {
-  const msg = await llm.invoke(
-    `Make this joke funnier by adding wordplay: ${joke}`
-  );
-  return msg.content;
-});
-
-// Third LLM call for final polish
-const polishJoke = task("polishJoke", async (joke: string) => {
-  const msg = await llm.invoke(
-    `Add a surprising twist to this joke: ${joke}`
-  );
-  return msg.content;
-});
-
-const workflow = entrypoint(
-  "jokeMaker",
-  async (topic: string) => {
-    const originalJoke = await generateJoke(topic);
-    if (checkPunchline(originalJoke) === "Pass") {
-      return originalJoke;
-    }
-    const improvedJoke = await improveJoke(originalJoke);
-    const polishedJoke = await polishJoke(improvedJoke);
-    return polishedJoke;
-  }
-);
-
-const stream = await workflow.streamEvents("cats", { version: "v3" });
-for await (const snapshot of stream.values) {
-  console.log(snapshot);
-}
-```
-
 ## Parallelization
 
 With parallelization, LLMs work simultaneously on a task. This is either done by running multiple independent subtasks at the same time, or running the same task multiple times to check for different outputs. Parallelization is commonly used to:
@@ -271,8 +212,6 @@ Some examples include:
 * Running a task multiple times that scores a document for accuracy based on different criteria, like the number of citations, the number of sources used, and the quality of the sources
 
 ![parallelization.png](https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/parallelization.png?fit=max\&auto=format\&n=dL5Sn6Cmy9pwtY0V\&q=85\&s=8afe3c427d8cede6fed1e4b2a5107b71)
-
-**Graph API**
 
 ```typescript
 import { StateGraph, StateSchema, GraphNode } from "@langchain/langgraph";
@@ -335,73 +274,11 @@ const result = await parallelWorkflow.invoke({ topic: "cats" });
 console.log(result.combinedOutput);
 ```
 
-**Functional API**
-
-```typescript
-import { task, entrypoint } from "@langchain/langgraph";
-
-// Tasks
-
-// First LLM call to generate initial joke
-const callLlm1 = task("generateJoke", async (topic: string) => {
-  const msg = await llm.invoke(`Write a joke about ${topic}`);
-  return msg.content;
-});
-
-// Second LLM call to generate story
-const callLlm2 = task("generateStory", async (topic: string) => {
-  const msg = await llm.invoke(`Write a story about ${topic}`);
-  return msg.content;
-});
-
-// Third LLM call to generate poem
-const callLlm3 = task("generatePoem", async (topic: string) => {
-  const msg = await llm.invoke(`Write a poem about ${topic}`);
-  return msg.content;
-});
-
-// Combine outputs
-const aggregator = task("aggregator", async (params: {
-  topic: string;
-  joke: string;
-  story: string;
-  poem: string;
-}) => {
-  const { topic, joke, story, poem } = params;
-  return `Here's a story, joke, and poem about ${topic}!\n\n` +
-    `STORY:\n${story}\n\n` +
-    `JOKE:\n${joke}\n\n` +
-    `POEM:\n${poem}`;
-});
-
-// Build workflow
-const workflow = entrypoint(
-  "parallelWorkflow",
-  async (topic: string) => {
-    const [joke, story, poem] = await Promise.all([
-      callLlm1(topic),
-      callLlm2(topic),
-      callLlm3(topic),
-    ]);
-
-    return aggregator({ topic, joke, story, poem });
-  }
-);
-
-// Invoke
-const stream = await workflow.streamEvents("cats", { version: "v3" });
-for await (const snapshot of stream.values) {
-  console.log(snapshot);
-}
-```
-
 ## Routing
 
 Routing workflows process inputs and then directs them to context-specific tasks. This allows you to define specialized flows for complex tasks. For example, a workflow built to answer product related questions might process the type of question first, and then route the request to specific processes for pricing, refunds, returns, etc.
 
 ![routing.png](https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/routing.png?fit=max\&auto=format\&n=dL5Sn6Cmy9pwtY0V\&q=85\&s=272e0e9b681b89cd7d35d5c812c50ee6)
-
-**Graph API**
 
 ```typescript
 import { StateGraph, StateSchema, GraphNode, ConditionalEdgeRouter } from "@langchain/langgraph";
@@ -513,101 +390,6 @@ const state = await routerWorkflow.invoke({
 console.log(state.output);
 ```
 
-**Functional API**
-
-```typescript
-import * as z from "zod";
-import { task, entrypoint } from "@langchain/langgraph";
-
-// Schema for structured output to use as routing logic
-const routeSchema = z.object({
-  step: z.enum(["poem", "story", "joke"]).describe(
-    "The next step in the routing process"
-  ),
-});
-
-// Augment the LLM with schema for structured output
-const router = llm.withStructuredOutput(routeSchema);
-
-// Tasks
-// Write a story
-const llmCall1 = task("generateStory", async (input: string) => {
-  const result = await llm.invoke([{
-    role: "system",
-    content: "You are an expert storyteller.",
-  }, {
-    role: "user",
-    content: input
-  }]);
-  return result.content;
-});
-
-// Write a joke
-const llmCall2 = task("generateJoke", async (input: string) => {
-  const result = await llm.invoke([{
-    role: "system",
-    content: "You are an expert comedian.",
-  }, {
-    role: "user",
-    content: input
-  }]);
-  return result.content;
-});
-
-// Write a poem
-const llmCall3 = task("generatePoem", async (input: string) => {
-  const result = await llm.invoke([{
-    role: "system",
-    content: "You are an expert poet.",
-  }, {
-    role: "user",
-    content: input
-  }]);
-  return result.content;
-});
-
-// Route the input to the appropriate node
-const llmCallRouter = task("router", async (input: string) => {
-  const decision = await router.invoke([
-    {
-      role: "system",
-      content: "Route the input to story, joke, or poem based on the user's request."
-    },
-    {
-      role: "user",
-      content: input
-    },
-  ]);
-  return decision.step;
-});
-
-// Build workflow
-const workflow = entrypoint(
-  "routerWorkflow",
-  async (input: string) => {
-    const nextStep = await llmCallRouter(input);
-
-    let llmCall;
-    if (nextStep === "story") {
-      llmCall = llmCall1;
-    } else if (nextStep === "joke") {
-      llmCall = llmCall2;
-    } else if (nextStep === "poem") {
-      llmCall = llmCall3;
-    }
-
-    const finalResult = await llmCall(input);
-    return finalResult;
-  }
-);
-
-// Invoke
-const stream = await workflow.streamEvents("Write me a joke about cats", { version: "v3" });
-for await (const snapshot of stream.values) {
-  console.log(snapshot);
-}
-```
-
 ## Orchestrator-worker
 
 In an orchestrator-worker configuration, the orchestrator:
@@ -619,8 +401,6 @@ In an orchestrator-worker configuration, the orchestrator:
 ![worker.png](https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/worker.png?fit=max\&auto=format\&n=ybiAaBfoBvFquMDz\&q=85\&s=2e423c67cd4f12e049cea9c169ff0676)
 
 Orchestrator-worker workflows provide more flexibility and are often used when subtasks cannot be predefined the way they can with [parallelization](#parallelization). This is common with workflows that write code or need to update content across multiple files. For example, a workflow that needs to update installation instructions for multiple Python libraries across an unknown number of documents might use this pattern.
-
-**Graph API**
 
 ```typescript
 
@@ -634,78 +414,6 @@ type SectionsSchema = {
 
 // Augment the LLM with schema for structured output
 const planner = llm.withStructuredOutput(sectionsSchema);
-```
-
-**Functional API**
-
-```typescript
-import * as z from "zod";
-import { task, entrypoint } from "@langchain/langgraph";
-
-// Schema for structured output to use in planning
-const sectionSchema = z.object({
-  name: z.string().describe("Name for this section of the report."),
-  description: z.string().describe(
-    "Brief overview of the main topics and concepts to be covered in this section."
-  ),
-});
-
-const sectionsSchema = z.object({
-  sections: z.array(sectionSchema).describe("Sections of the report."),
-});
-
-// Augment the LLM with schema for structured output
-const planner = llm.withStructuredOutput(sectionsSchema);
-
-// Tasks
-const orchestrator = task("orchestrator", async (topic: string) => {
-  // Generate queries
-  const reportSections = await planner.invoke([
-    { role: "system", content: "Generate a plan for the report." },
-    { role: "user", content: `Here is the report topic: ${topic}` },
-  ]);
-
-  return reportSections.sections;
-});
-
-const llmCall = task("sectionWriter", async (section: z.infer<typeof sectionSchema>) => {
-  // Generate section
-  const result = await llm.invoke([
-    {
-      role: "system",
-      content: "Write a report section.",
-    },
-    {
-      role: "user",
-      content: `Here is the section name: ${section.name} and description: ${section.description}`,
-    },
-  ]);
-
-  return result.content;
-});
-
-const synthesizer = task("synthesizer", async (completedSections: string[]) => {
-  // Synthesize full report from sections
-  return completedSections.join("\n\n---\n\n");
-});
-
-// Build workflow
-const workflow = entrypoint(
-  "orchestratorWorker",
-  async (topic: string) => {
-    const sections = await orchestrator(topic);
-    const completedSections = await Promise.all(
-      sections.map((section) => llmCall(section))
-    );
-    return synthesizer(completedSections);
-  }
-);
-
-// Invoke
-const stream = await workflow.streamEvents("Create a report on LLM scaling laws", { version: "v3" });
-for await (const snapshot of stream.values) {
-  console.log(snapshot);
-}
 ```
 
 ### Creating workers in LangGraph
@@ -812,8 +520,6 @@ Evaluator-optimizer workflows are commonly used when there's particular success 
 
 ![evaluator\_optimizer.png](https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/evaluator_optimizer.png?fit=max\&auto=format\&n=-_xGPoyjhyiDWTPJ\&q=85\&s=9bd0474f42b6040b14ed6968a9ab4e3c)
 
-**Graph API**
-
 ```typescript
 import { StateGraph, StateSchema, GraphNode, ConditionalEdgeRouter } from "@langchain/langgraph";
 import * as z from "zod";
@@ -891,72 +597,6 @@ const state = await optimizerWorkflow.invoke({ topic: "Cats" });
 console.log(state.joke);
 ```
 
-**Functional API**
-
-```typescript
-import * as z from "zod";
-import { task, entrypoint } from "@langchain/langgraph";
-
-// Schema for structured output to use in evaluation
-const feedbackSchema = z.object({
-  grade: z.enum(["funny", "not funny"]).describe(
-    "Decide if the joke is funny or not."
-  ),
-  feedback: z.string().describe(
-    "If the joke is not funny, provide feedback on how to improve it."
-  ),
-});
-
-// Augment the LLM with schema for structured output
-const evaluator = llm.withStructuredOutput(feedbackSchema);
-
-// Tasks
-const llmCallGenerator = task("jokeGenerator", async (params: {
-  topic: string;
-  feedback?: z.infer<typeof feedbackSchema>;
-}) => {
-  // LLM generates a joke
-  const msg = params.feedback
-    ? await llm.invoke(
-        `Write a joke about ${params.topic} but take into account the feedback: ${params.feedback.feedback}`
-      )
-    : await llm.invoke(`Write a joke about ${params.topic}`);
-  return msg.content;
-});
-
-const llmCallEvaluator = task("jokeEvaluator", async (joke: string) => {
-  // LLM evaluates the joke
-  return evaluator.invoke(`Grade the joke ${joke}`);
-});
-
-// Build workflow
-const workflow = entrypoint(
-  "optimizerWorkflow",
-  async (topic: string) => {
-    let feedback: z.infer<typeof feedbackSchema> | undefined;
-    let joke: string;
-
-    while (true) {
-      joke = await llmCallGenerator({ topic, feedback });
-      feedback = await llmCallEvaluator(joke);
-
-      if (feedback.grade === "funny") {
-        break;
-      }
-    }
-
-    return joke;
-  }
-);
-
-// Invoke
-const stream = await workflow.streamEvents("Cats", { version: "v3" });
-for await (const snapshot of stream.values) {
-  console.log(snapshot);
-  console.log("\n");
-}
-```
-
 ## Agents
 
 Agents are typically implemented as an LLM performing actions using [tools](../langchain/tools.md). They operate in continuous feedback loops, and are used in situations where problems and solutions are unpredictable. Agents have more autonomy than workflows, and can make decisions about the tools they use and how to solve problems. You can still define the available toolset and guidelines for how agents behave.
@@ -1021,8 +661,6 @@ const tools = [add, multiply, divide];
 const toolsByName = Object.fromEntries(tools.map((tool) => [tool.name, tool]));
 const llmWithTools = llm.bindTools(tools);
 ```
-
-**Graph API**
 
 ```typescript
 import { StateGraph, StateSchema, MessagesValue, GraphNode, ConditionalEdgeRouter } from "@langchain/langgraph";
@@ -1089,65 +727,6 @@ const messages = [{
 }];
 const result = await agentBuilder.invoke({ messages });
 console.log(result.messages);
-```
-
-**Functional API**
-
-```typescript
-import { task, entrypoint, addMessages } from "@langchain/langgraph";
-import { BaseMessageLike, ToolCall } from "@langchain/core/messages";
-
-const callLlm = task("llmCall", async (messages: BaseMessageLike[]) => {
-  // LLM decides whether to call a tool or not
-  return llmWithTools.invoke([
-    {
-      role: "system",
-      content: "You are a helpful assistant tasked with performing arithmetic on a set of inputs."
-    },
-    ...messages
-  ]);
-});
-
-const callTool = task("toolCall", async (toolCall: ToolCall) => {
-  // Performs the tool call
-  const tool = toolsByName[toolCall.name];
-  return tool.invoke(toolCall.args);
-});
-
-const agent = entrypoint(
-  "agent",
-  async (messages) => {
-    let llmResponse = await callLlm(messages);
-
-    while (true) {
-      if (!llmResponse.tool_calls?.length) {
-        break;
-      }
-
-      // Execute tools
-      const toolResults = await Promise.all(
-        llmResponse.tool_calls.map((toolCall) => callTool(toolCall))
-      );
-
-      messages = addMessages(messages, [llmResponse, ...toolResults]);
-      llmResponse = await callLlm(messages);
-    }
-
-    messages = addMessages(messages, [llmResponse]);
-    return messages;
-  }
-);
-
-// Invoke
-const messages = [{
-  role: "user",
-  content: "Add 3 and 4."
-}];
-
-const stream = await agent.streamEvents([messages], { version: "v3" });
-for await (const snapshot of stream.values) {
-  console.log(snapshot);
-}
 ```
 
 ### ToolNode

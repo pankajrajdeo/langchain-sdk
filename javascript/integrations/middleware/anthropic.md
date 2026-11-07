@@ -40,7 +40,7 @@ import { createAgent, anthropicPromptCachingMiddleware } from "langchain";
 
 const agent = createAgent({
   model: "claude-sonnet-4-6",
-  prompt: "<Your long system prompt here>",
+  systemPrompt: "<Your long system prompt here>",
   middleware: [anthropicPromptCachingMiddleware({ ttl: "5m" })],
 });
 ```
@@ -72,7 +72,7 @@ const agent = createAgent({
 >
 > const agent = createAgent({
 >   model: "claude-sonnet-4-6",
->   prompt: LONG_PROMPT,
+>   systemPrompt: LONG_PROMPT,
 >   middleware: [anthropicPromptCachingMiddleware({ ttl: "5m" })],
 > });
 >

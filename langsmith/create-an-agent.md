@@ -24,14 +24,14 @@ An agent can be created in four ways, which differ in how the identifier is set 
 
 | Method | What you do | Identifier | Environments at creation |
 | - | - | - | - |
-| [Build tab](build-an-agent.md) | Build and run an agent inside LangSmith | Generated for you | Production alone |
+| [Studio](build-an-agent.md) | Describe an agent and let LangSmith Chat build it inside LangSmith | Generated for you | Production alone |
 | [UI](#name-an-agent-traced-from-outside-langsmith) | Create an agent record by entering its name and ID in LangSmith | You set it | All four |
 | [SDK or API](#create-an-agent-programmatically) | Create an agent record with an SDK call or API request | You set it | All four |
 | [Deployment](deploy-to-agent-environment.md) | Deploy your agent code to LangSmith | The agent ID you pass, or derived from the deployment name | All four |
 
-Not every agent can have a [deployment](deployment.md). Deploying agent code creates the agent with a deployment from the start. An agent created with the SDK or API, by the Observability option in the [**New Agent** panel](#start-from-the-new-agent-panel), or by the **Create a new agent** dialog has no deployment at first, but you can [deploy to it](deploy-to-agent-environment.md) later. An agent built in the Build tab cannot have a deployment, because it runs on a Studio runtime. After a deployment, the agent's Overview shows a **Deployments** section.
+Not every agent can have a [deployment](deployment.md). Deploying agent code creates the agent with a deployment from the start. An agent created with the SDK or API, or by the [**Connect an agent**](#name-an-agent-traced-from-outside-langsmith) dialog, has no deployment at first, but you can [deploy to it](deploy-to-agent-environment.md) later. An agent built in Studio cannot have a deployment, because it runs on a Studio runtime. After a deployment, the agent's Overview shows a **Deployments** section.
 
-An agent created through the Build tab gains its other environments the first time a trace is addressed to one. For what the four are, see [Agent environments](agent-environments.md#environment-names).
+An agent built in Studio gains its other environments the first time a trace is addressed to one. For what the four are, see [Agent environments](agent-environments.md#environment-names).
 
 When LangSmith builds or deploys an agent through these flows, it handles registration. Reuse that agent for tracing. Do not create a separate external agent for the same deployment.
 
@@ -39,29 +39,26 @@ When LangSmith builds or deploys an agent through these flows, it handles regist
 
 An identifier is 1 to 63 characters, using lowercase letters, digits, and hyphens. It must start with a letter and end with a letter or digit, so `support-agent` and `billing-v2` are valid. Anything else is rejected.
 
-The rules apply wherever you supply the value: in the **Agent ID** field, in SDK and API creation requests, and in the agent ID you deploy to. The Build tab generates an identifier instead. A deployment without an agent ID derives one from the deployment name, appending a suffix when that value is already taken, so a deployed agent can end up with an identifier close to the deployment name rather than equal to it.
+The rules apply wherever you supply the value: in the **Agent ID** field, in SDK and API creation requests, and in the agent ID you deploy to. Studio generates an identifier instead. A deployment without an agent ID derives one from the deployment name, appending a suffix when that value is already taken, so a deployed agent can end up with an identifier close to the deployment name rather than equal to it.
 
 An identifier cannot be changed after the agent is created. The display name can. For which value is which, see [Identifiers and display names](agent-registry.md#identifiers-and-display-names).
 
-## Start from the New Agent panel
+## Start from the new agent menu
 
-Four controls open the **New Agent** panel: **+ Agent** above the agent list, **+ Create new agent** and **Trace existing agent** on a creation card at the end of the list, also titled **New Agent**, and the **+** button beside the search box in the agent switcher, which shows a **New agent** tooltip on hover. **Trace existing agent** opens the panel on the Observability option, and the other three open it on its grid of options. An **All options** button returns to the grid.
+Two controls open the new agent menu: **+ Agent** on the agent list, and the **+** button beside the search box in the agent switcher, which shows a **New agent** tooltip on hover. The switcher button appears only for users with the `projects:create` permission. The menu hands off to three flows:
 
-The panel hands off to four flows. Only Observability creates the agent inside the panel:
-
-* **Builder** ("Build and configure inside LangSmith"): Leaves the panel for the **Build** tab, where submitting the form creates the agent. See [Build an agent in the UI](build-an-agent.md).
-* **Managed Deep Agent** ("Build locally and deploy"): The agent is created when you deploy. See [Managed Deep Agents](python/managed-deep-agents-overview.md). This route requires a paid plan.
-* **Open Source** ("Build an agent with our open source frameworks"): Build your agent with [LangChain](../langchain/overview.md), then create its LangSmith record using the UI or API below.
-* **Observability** ("Trace an existing agent"): Name the agent in the panel, and LangSmith creates it and opens its tracing page, which holds the setup steps. See the [tracing quickstart](observability-quickstart.md).
+* **Build** > **Without code**: Opens Studio, where you describe the agent and LangSmith Chat drafts it. See [Build an agent with LangSmith Studio](build-an-agent.md).
+* **Build** > **With code**: Opens the **Build with code** pane. **Hosted by LangSmith** covers [Managed Deep Agents](python/managed-deep-agents-overview.md), which creates the agent when you deploy and requires a paid plan. **Host it yourself** covers building with the [open source frameworks](../langchain/overview.md), then creating the agent's LangSmith record using the UI or API below.
+* **Connect** > **Connect an existing agent**: Opens the **Connect an agent** dialog, where you name an agent traced from outside LangSmith. See the next section.
 
 ## Name an agent traced from outside LangSmith
 
-Creating an external agent in the UI requires the `projects:create` permission. To register it, name it in either of two places:
+Creating an external agent in the UI requires the `projects:create` permission. To register it, open the **Connect an agent** dialog from either of two places:
 
-* The Observability option in the **New Agent** panel.
-* The **Create a new agent** dialog, opened from **+ New agent** below the agent list on Tracing when no agent is selected.
+* **Connect an existing agent** in the new agent menu.
+* **Connect an agent**, below the agent list on Tracing when no agent is selected.
 
-Both take an **Agent name** and, in its own field, an **Agent ID**, with a note that the ID is used in URLs and API calls and cannot be changed later. The agent switcher has the same **+** button, beside its search box, for users with the `projects:create` permission, wherever the switcher appears, and it opens the **New Agent** panel rather than the dialog.
+The dialog takes an **Agent name** and, in its own field, an **Agent ID**, with a note that the ID is used in URLs and API calls and cannot be changed later. Click **Connect agent**. LangSmith creates the agent and opens it. From the new agent menu, it opens the agent's tracing page. To send the first traces, see the [tracing quickstart](observability-quickstart.md).
 
 After creation, configure your code to [send traces to the agent and environment](log-traces-to-agent.md). For integrations that require `project_name`, use the [compatibility configuration](#use-an-environment-project).
 
@@ -165,7 +162,7 @@ If the integration supports [agent addressing](log-traces-to-agent.md), set the 
 
 * [Agent Registry](agent-registry.md)
 * [Agent environments](agent-environments.md)
-* [Build an agent in the UI](build-an-agent.md)
+* [Build an agent with LangSmith Studio](build-an-agent.md)
 * [Deploy to an agent environment](deploy-to-agent-environment.md)
 * [Log traces to an agent](log-traces-to-agent.md)
 

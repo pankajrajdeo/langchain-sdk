@@ -155,7 +155,7 @@ agent = create_deep_agent(
 For more complex use cases, you can provide your custom subagents with [`CompiledSubAgent`](https://reference.langchain.com/python/deepagents/middleware/subagents/CompiledSubAgent).
 You can create a custom subagent using LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) or by making a custom LangGraph graph using the [graph API](../langgraph/graph-api.md).
 
-If you're creating a custom LangGraph graph, make sure that the graph has a [state key called `"messages"`](../langgraph/quickstart.md#3-define-state):
+If you're creating a custom LangGraph graph, make sure that the graph has a [state key called `"messages"`](../langgraph/quickstart.md#2-define-state):
 
 **Google**
 

@@ -280,6 +280,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > YouTube transcript search and entity resolution tools with timestamped evidence, speaker filters, and sponsored or organic passage classifications.
 
+> [card] [ArcnmToolkit](https://github.com/arcnm/langchain-arcnm#readme)
+>
+> Manufacturing should-cost for machined and sheet-metal parts from a CAD file, with an itemised cost sheet per calculation.
+
 > [card] [ARO](https://github.com/joy7758/langchain-aro)
 >
 > Export and verify portable execution integrity artifacts for LangChain runs.
@@ -391,6 +395,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [Brainiall](https://app.brainiall.com/docs)
 >
 > LLM gateway with LangChain chat model and embeddings integrations.
+
+> [card] [BrewPageToolkit](https://github.com/kochetkov-ma/langchain-brewpage#readme)
+>
+> Tools that publish HTML, Markdown, JSON, key-value stores and files to BrewPage and return a shareable URL.
 
 > [card] [Brightdata](https://docs.brightdata.com/integrations/langchain)
 >
@@ -692,6 +700,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Reasoning observability and regression testing for agent runs.
 
+> [card] [DXMTVectorDB](https://github.com/dxmt/dxmt/tree/main/vectordb/clients/langchain-dxmt)
+>
+> Vector store for DXMT, an open-source memory database for personal agents: vector, BM25 and hybrid search, metadata filters, server-side embedding.
+
 > [card] [DynamicToolSelectorMiddleware](https://github.com/RauhanAhmed/langchain-dynamic-tools-middleware)
 >
 > Agent middleware for sub-100ms hybrid dense and sparse vector tool retrieval over zvec, cutting prompt token overhead from tool lists.
@@ -795,6 +807,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [FiGuard](https://docs.figuard.io)
 >
 > Pre-flight spend authorization for LangChain agents.
+
+> [card] [FinzData](https://pypi.org/project/langchain-finzdata/)
+>
+> Tools for point-in-time, survivorship-free US market data, futures, options gamma, COT, macro vintages and server-side backtests via MCP.
 
 > [card] [Fizzl](https://fizzl.eu/agents/python/)
 >

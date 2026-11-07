@@ -12,8 +12,8 @@ tags: [docs, langsmith, agent-registry]
 
 As an organization builds more agents, it gets harder to know which ones exist and where they run. LangSmith Agent Registry offers a centralized location for registering an agent, providing one place to govern every agent your organization runs, wherever it is hosted. Agent Registry is available on [LangSmith Cloud](cloud.md). Creating an agent registers it, and you can create one in four ways:
 
-* [Build it in the UI](build-an-agent.md).
-* [Create it](create-an-agent.md#name-an-agent-traced-from-outside-langsmith) from the **Create a new agent** dialog, for an agent that runs outside LangSmith.
+* [Build it in LangSmith Studio](build-an-agent.md).
+* [Create it](create-an-agent.md#name-an-agent-traced-from-outside-langsmith) from the **Connect an agent** dialog, for an agent that runs outside LangSmith.
 * [Create it with an SDK call or API request](create-an-agent.md#create-an-agent-programmatically).
 * [Deploy it](deploy-to-agent-environment.md) through LangSmith.
 
@@ -75,7 +75,7 @@ For more information, see [Agent environments](agent-environments.md).
 Every agent has two names, and they do different work:
 
 * **Identifier**: Set when the agent is created, and not editable afterwards. Whether you supply it or LangSmith generates it depends on [how the agent was created](create-an-agent.md). LangSmith uses it to address traces, so it stays stable even when the display name changes.
-* **Display name**: Shown wherever the agent appears in the UI. For an agent [built in the UI](build-an-agent.md), rename it from the **Name** field in its Build configuration. Renaming does not move existing traces or change where new traces land.
+* **Display name**: Shown wherever the agent appears in the UI. For an agent [built in LangSmith Studio](build-an-agent.md), rename it from the **Name** field in its configuration. Renaming does not move existing traces or change where new traces land.
 
 The identifier is also what the browser address bar carries, so you can read it from there or copy it from the **ID** field on the agent's Overview.
 

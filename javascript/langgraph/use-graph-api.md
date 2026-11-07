@@ -10,7 +10,7 @@ tags: [docs, javascript, langgraph, use-graph-api]
 
 > Decide state, control flow, Send, Command, and node options as you build with the Graph API.
 
-This guide walks through the decisions you make when building a graph. For install and an end-to-end agent example, see the [LangGraph quickstart](quickstart.md). For a design walkthrough, see [Thinking in the Graph API](thinking-in-graph-api.md). For concepts, see the [Graph API overview](graph-api.md). To choose between the Graph API and the Functional API, see [Choosing between Graph and Functional APIs](choosing-apis.md).
+This guide walks through the decisions you make when building a graph. For install and an end-to-end agent example, see the [LangGraph quickstart](quickstart.md). For a design walkthrough, see [Thinking in the Graph API](thinking-in-graph-api.md). For concepts, see the [Graph API overview](graph-api.md).
 
 ## Build your graph
 
@@ -159,7 +159,6 @@ See [Visualize your graph](graph-api-visualize.md).
 * [Configure nodes](graph-api-nodes.md)
 * [Visualize your graph](graph-api-visualize.md)
 * [LangGraph quickstart](quickstart.md): End-to-end calculator agent
-* [Choosing between Graph and Functional APIs](choosing-apis.md)
 
 ***
 

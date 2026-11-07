@@ -28,14 +28,14 @@ Built-in provider search is convenient for a first run. Authored tools give you 
 
 > [!NOTE]
 >
-> If you followed the steps to use Tavily in the [Quickstart](managed-deep-agents-quickstart.md), skip to the next step.
+> If you already added the Tavily tool with a [connection](managed-deep-agents-connections.md) in the [quickstart](managed-deep-agents-quickstart.md), skip to the next step.
 
-Add a [Tavily API key](https://app.tavily.com) to `.env`:
+This tutorial uses the connection slug `research-tavily`. For `mda dev`, an agent-owned connection reads its value from `MDA_DEV_`. Add a [Tavily API key](https://app.tavily.com) to `.env` as `MDA_DEV_RESEARCH_TAVILY`:
 
 **.env**
 
 ```text
-TAVILY_API_KEY=<TAVILY_API_KEY>
+MDA_DEV_RESEARCH_TAVILY=<TAVILY_API_KEY>
 ```
 
 Install the Tavily client:
@@ -44,27 +44,27 @@ Install the Tavily client:
 uv add tavily-python
 ```
 
-Create a custom `internet_search` tool:
+Create a custom `internet_search` tool. `connections.get(...)` resolves the key at runtime, so the tool code is the same locally and on the deployment:
 
 **tools/search.py**
 
 ```python
-import os
 from typing import Literal
 
 from langchain.tools import tool
-from tavily import TavilyClient
-
-tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+from managed_deepagents import connections
+from tavily import AsyncTavilyClient
 
 @tool
-def internet_search(
+async def internet_search(
     query: str,
     max_results: int = 5,
     topic: Literal["general", "news", "finance"] = "general",
 ) -> dict:
     """Search the internet for relevant sources."""
-    return tavily_client.search(
+    api_key = await connections.get("research-tavily", {"type": "agent"})
+    tavily_client = AsyncTavilyClient(api_key=api_key)
+    return await tavily_client.search(
         query,
         max_results=max_results,
         topic=topic,
@@ -170,6 +170,14 @@ uv run mda deploy
 ```
 
 On success, the CLI prints the deployment dashboard URL. The deploy syncs the instructions to Context Hub, uploads the compiled project, and reconciles the daily schedule.
+
+Create the Tavily connection for this deployment. Agent-owned credentials belong to the deployment. Run this command after the first successful deploy:
+
+```bash
+uv run mda connections create research-tavily --secret-from-env MDA_DEV_RESEARCH_TAVILY
+```
+
+Rotating this value later takes effect on the next run, with no redeploy. For other create modes and per-caller credentials, see [Manage connections](managed-deep-agents-connections.md).
 
 Open that URL and confirm:
 
