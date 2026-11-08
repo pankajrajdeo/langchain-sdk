@@ -15714,8 +15714,8 @@
       "resolved_markdown": "https://docs.langchain.com/langsmith/create-an-agent.md",
       "sha256": "eff278839b6d9e0d33aef6884763fe28c5b6b926419da407f7cbcd65e3cb3d8e",
       "source": "https://docs.langchain.com/langsmith/create-an-agent",
-      "upstream_bytes": 12763,
-      "upstream_sha256": "cc452e29f4039c79782be0fb26305257ebcfeb60cd8ada9d06fbfa50331823d1"
+      "upstream_bytes": 13047,
+      "upstream_sha256": "d8dc6f572d2c600850aae2821c53846b1f9840694a8526e2a2cb652ca1a2c34c"
     },
     "langsmith/create-few-shot-evaluators.md": {
       "bytes": 5824,
