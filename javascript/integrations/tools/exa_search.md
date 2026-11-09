@@ -229,7 +229,7 @@ const llmForAgent = new ChatOpenAI({
 import Exa from "exa-js";
 import { createRetrieverTool } from "@langchain/classic/tools/retriever";
 import { ExaRetriever } from "@langchain/exa";
-import { createAgent } from "@langchain/classic";
+import { createAgent } from "langchain";
 
 // @lc-ts-ignore
 const agentClient = new Exa(process.env.EXASEARCH_API_KEY);
@@ -251,7 +251,7 @@ const searchToolForAgent = createRetrieverTool(exaRetrieverForAgent, {
 const toolsForAgent = [searchToolForAgent];
 
 const agentExecutor = createAgent({
-  llm: llmForAgent,
+  model: llmForAgent,
   tools: toolsForAgent,
 })
 ```

@@ -1436,10 +1436,13 @@ Handing off tasks to subagents isolates context, keeping the main (supervisor) a
 
 The subagents middleware from [Deep Agents](overview.md) allows you to supply subagents through a `task` tool.
 
+**Google**
+
 ```python
-from langchain.tools import tool
-from langchain.agents import create_agent
+from deepagents.backends import StateBackend
 from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.tools import tool
 
 @tool
 def get_weather(city: str) -> str:
@@ -1447,16 +1450,17 @@ def get_weather(city: str) -> str:
     return f"The weather in {city} is sunny."
 
 agent = create_agent(
-    model="claude-sonnet-4-6",
+    model="google_genai:gemini-3.6-flash",
     middleware=[
         SubAgentMiddleware(
-            default_model="claude-sonnet-4-6",
-            default_tools=[],
+            backend=StateBackend(),
             subagents=[
                 {
                     "name": "weather",
                     "description": "This subagent can get weather in cities.",
-                    "system_prompt": "Use the get_weather tool to get the weather in a city.",
+                    "system_prompt": (
+                        "Use the get_weather tool to get the weather in a city."
+                    ),
                     "tools": [get_weather],
                     "model": "gpt-5.5",
                     "middleware": [],
@@ -1467,20 +1471,240 @@ agent = create_agent(
 )
 ```
 
-A subagent is defined with a **name**, **description**, **system prompt**, and **tools**. You can also provide a subagent with a custom **model**, or with additional **middleware**. This can be particularly useful when you want to give the subagent an additional state key to share with the main agent.
+**OpenAI**
+
+```python
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def get_weather(city: str) -> str:
+    """Get the weather in a city."""
+    return f"The weather in {city} is sunny."
+
+agent = create_agent(
+    model="openai:gpt-5.5",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[
+                {
+                    "name": "weather",
+                    "description": "This subagent can get weather in cities.",
+                    "system_prompt": (
+                        "Use the get_weather tool to get the weather in a city."
+                    ),
+                    "tools": [get_weather],
+                    "model": "gpt-5.5",
+                    "middleware": [],
+                }
+            ],
+        )
+    ],
+)
+```
+
+**Anthropic**
+
+```python
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def get_weather(city: str) -> str:
+    """Get the weather in a city."""
+    return f"The weather in {city} is sunny."
+
+agent = create_agent(
+    model="anthropic:claude-sonnet-5",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[
+                {
+                    "name": "weather",
+                    "description": "This subagent can get weather in cities.",
+                    "system_prompt": (
+                        "Use the get_weather tool to get the weather in a city."
+                    ),
+                    "tools": [get_weather],
+                    "model": "gpt-5.5",
+                    "middleware": [],
+                }
+            ],
+        )
+    ],
+)
+```
+
+**OpenRouter**
+
+```python
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def get_weather(city: str) -> str:
+    """Get the weather in a city."""
+    return f"The weather in {city} is sunny."
+
+agent = create_agent(
+    model="openrouter:z-ai/glm-5.2",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[
+                {
+                    "name": "weather",
+                    "description": "This subagent can get weather in cities.",
+                    "system_prompt": (
+                        "Use the get_weather tool to get the weather in a city."
+                    ),
+                    "tools": [get_weather],
+                    "model": "gpt-5.5",
+                    "middleware": [],
+                }
+            ],
+        )
+    ],
+)
+```
+
+**Fireworks**
+
+```python
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def get_weather(city: str) -> str:
+    """Get the weather in a city."""
+    return f"The weather in {city} is sunny."
+
+agent = create_agent(
+    model="fireworks:accounts/fireworks/models/glm-5p2",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[
+                {
+                    "name": "weather",
+                    "description": "This subagent can get weather in cities.",
+                    "system_prompt": (
+                        "Use the get_weather tool to get the weather in a city."
+                    ),
+                    "tools": [get_weather],
+                    "model": "gpt-5.5",
+                    "middleware": [],
+                }
+            ],
+        )
+    ],
+)
+```
+
+**Baseten**
+
+```python
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def get_weather(city: str) -> str:
+    """Get the weather in a city."""
+    return f"The weather in {city} is sunny."
+
+agent = create_agent(
+    model="baseten:zai-org/GLM-5.2",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[
+                {
+                    "name": "weather",
+                    "description": "This subagent can get weather in cities.",
+                    "system_prompt": (
+                        "Use the get_weather tool to get the weather in a city."
+                    ),
+                    "tools": [get_weather],
+                    "model": "gpt-5.5",
+                    "middleware": [],
+                }
+            ],
+        )
+    ],
+)
+```
+
+**Ollama**
+
+```python
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def get_weather(city: str) -> str:
+    """Get the weather in a city."""
+    return f"The weather in {city} is sunny."
+
+agent = create_agent(
+    model="ollama:north-mini-code-1.0",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[
+                {
+                    "name": "weather",
+                    "description": "This subagent can get weather in cities.",
+                    "system_prompt": (
+                        "Use the get_weather tool to get the weather in a city."
+                    ),
+                    "tools": [get_weather],
+                    "model": "gpt-5.5",
+                    "middleware": [],
+                }
+            ],
+        )
+    ],
+)
+```
+
+A declarative subagent requires a **name**, **description**, **model**, and **tools**. You can also set a **system prompt** and additional **middleware**. This can be particularly useful when you want to give the subagent an additional state key to share with the main agent.
 
 For more complex use cases, you can also provide your own prebuilt LangGraph graph as a subagent.
 
+**Google**
+
 ```python
-from langchain.agents import create_agent
-from deepagents.middleware.subagents import SubAgentMiddleware
 from deepagents import CompiledSubAgent
-from langgraph.graph import StateGraph
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.messages import AIMessage
+from langgraph.graph import END, START, MessagesState, StateGraph
 
 # Create a custom LangGraph graph
 def create_weather_graph():
-    workflow = StateGraph(...)
-    # Build your custom graph
+    workflow = StateGraph(MessagesState)
+
+    def respond(_state: MessagesState):
+        return {"messages": [AIMessage(content="The weather is sunny.")]}
+
+    workflow.add_node("respond", respond)
+    workflow.add_edge(START, "respond")
+    workflow.add_edge("respond", END)
     return workflow.compile()
 
 weather_graph = create_weather_graph()
@@ -1489,22 +1713,273 @@ weather_graph = create_weather_graph()
 weather_subagent = CompiledSubAgent(
     name="weather",
     description="This subagent can get weather in cities.",
-    runnable=weather_graph
+    runnable=weather_graph,
 )
 
 agent = create_agent(
-    model="claude-sonnet-4-6",
+    model="google_genai:gemini-3.6-flash",
     middleware=[
         SubAgentMiddleware(
-            default_model="claude-sonnet-4-6",
-            default_tools=[],
+            backend=StateBackend(),
             subagents=[weather_subagent],
         )
     ],
 )
 ```
 
-In addition to any user-defined subagents, the main agent has access to a `general-purpose` subagent at all times. This subagent has the same instructions as the main agent and all the tools it has access to. The primary purpose of the `general-purpose` subagent is context isolation—the main agent can delegate a complex task to this subagent and get a concise answer back without bloat from intermediate tool calls.
+**OpenAI**
+
+```python
+from deepagents import CompiledSubAgent
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.messages import AIMessage
+from langgraph.graph import END, START, MessagesState, StateGraph
+
+# Create a custom LangGraph graph
+def create_weather_graph():
+    workflow = StateGraph(MessagesState)
+
+    def respond(_state: MessagesState):
+        return {"messages": [AIMessage(content="The weather is sunny.")]}
+
+    workflow.add_node("respond", respond)
+    workflow.add_edge(START, "respond")
+    workflow.add_edge("respond", END)
+    return workflow.compile()
+
+weather_graph = create_weather_graph()
+
+# Wrap it in a CompiledSubAgent
+weather_subagent = CompiledSubAgent(
+    name="weather",
+    description="This subagent can get weather in cities.",
+    runnable=weather_graph,
+)
+
+agent = create_agent(
+    model="openai:gpt-5.5",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[weather_subagent],
+        )
+    ],
+)
+```
+
+**Anthropic**
+
+```python
+from deepagents import CompiledSubAgent
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.messages import AIMessage
+from langgraph.graph import END, START, MessagesState, StateGraph
+
+# Create a custom LangGraph graph
+def create_weather_graph():
+    workflow = StateGraph(MessagesState)
+
+    def respond(_state: MessagesState):
+        return {"messages": [AIMessage(content="The weather is sunny.")]}
+
+    workflow.add_node("respond", respond)
+    workflow.add_edge(START, "respond")
+    workflow.add_edge("respond", END)
+    return workflow.compile()
+
+weather_graph = create_weather_graph()
+
+# Wrap it in a CompiledSubAgent
+weather_subagent = CompiledSubAgent(
+    name="weather",
+    description="This subagent can get weather in cities.",
+    runnable=weather_graph,
+)
+
+agent = create_agent(
+    model="anthropic:claude-sonnet-5",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[weather_subagent],
+        )
+    ],
+)
+```
+
+**OpenRouter**
+
+```python
+from deepagents import CompiledSubAgent
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.messages import AIMessage
+from langgraph.graph import END, START, MessagesState, StateGraph
+
+# Create a custom LangGraph graph
+def create_weather_graph():
+    workflow = StateGraph(MessagesState)
+
+    def respond(_state: MessagesState):
+        return {"messages": [AIMessage(content="The weather is sunny.")]}
+
+    workflow.add_node("respond", respond)
+    workflow.add_edge(START, "respond")
+    workflow.add_edge("respond", END)
+    return workflow.compile()
+
+weather_graph = create_weather_graph()
+
+# Wrap it in a CompiledSubAgent
+weather_subagent = CompiledSubAgent(
+    name="weather",
+    description="This subagent can get weather in cities.",
+    runnable=weather_graph,
+)
+
+agent = create_agent(
+    model="openrouter:z-ai/glm-5.2",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[weather_subagent],
+        )
+    ],
+)
+```
+
+**Fireworks**
+
+```python
+from deepagents import CompiledSubAgent
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.messages import AIMessage
+from langgraph.graph import END, START, MessagesState, StateGraph
+
+# Create a custom LangGraph graph
+def create_weather_graph():
+    workflow = StateGraph(MessagesState)
+
+    def respond(_state: MessagesState):
+        return {"messages": [AIMessage(content="The weather is sunny.")]}
+
+    workflow.add_node("respond", respond)
+    workflow.add_edge(START, "respond")
+    workflow.add_edge("respond", END)
+    return workflow.compile()
+
+weather_graph = create_weather_graph()
+
+# Wrap it in a CompiledSubAgent
+weather_subagent = CompiledSubAgent(
+    name="weather",
+    description="This subagent can get weather in cities.",
+    runnable=weather_graph,
+)
+
+agent = create_agent(
+    model="fireworks:accounts/fireworks/models/glm-5p2",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[weather_subagent],
+        )
+    ],
+)
+```
+
+**Baseten**
+
+```python
+from deepagents import CompiledSubAgent
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.messages import AIMessage
+from langgraph.graph import END, START, MessagesState, StateGraph
+
+# Create a custom LangGraph graph
+def create_weather_graph():
+    workflow = StateGraph(MessagesState)
+
+    def respond(_state: MessagesState):
+        return {"messages": [AIMessage(content="The weather is sunny.")]}
+
+    workflow.add_node("respond", respond)
+    workflow.add_edge(START, "respond")
+    workflow.add_edge("respond", END)
+    return workflow.compile()
+
+weather_graph = create_weather_graph()
+
+# Wrap it in a CompiledSubAgent
+weather_subagent = CompiledSubAgent(
+    name="weather",
+    description="This subagent can get weather in cities.",
+    runnable=weather_graph,
+)
+
+agent = create_agent(
+    model="baseten:zai-org/GLM-5.2",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[weather_subagent],
+        )
+    ],
+)
+```
+
+**Ollama**
+
+```python
+from deepagents import CompiledSubAgent
+from deepagents.backends import StateBackend
+from deepagents.middleware.subagents import SubAgentMiddleware
+from langchain.agents import create_agent
+from langchain.messages import AIMessage
+from langgraph.graph import END, START, MessagesState, StateGraph
+
+# Create a custom LangGraph graph
+def create_weather_graph():
+    workflow = StateGraph(MessagesState)
+
+    def respond(_state: MessagesState):
+        return {"messages": [AIMessage(content="The weather is sunny.")]}
+
+    workflow.add_node("respond", respond)
+    workflow.add_edge(START, "respond")
+    workflow.add_edge("respond", END)
+    return workflow.compile()
+
+weather_graph = create_weather_graph()
+
+# Wrap it in a CompiledSubAgent
+weather_subagent = CompiledSubAgent(
+    name="weather",
+    description="This subagent can get weather in cities.",
+    runnable=weather_graph,
+)
+
+agent = create_agent(
+    model="ollama:north-mini-code-1.0",
+    middleware=[
+        SubAgentMiddleware(
+            backend=StateBackend(),
+            subagents=[weather_subagent],
+        )
+    ],
+)
+```
+
+`SubAgentMiddleware` exposes only the subagents you provide. Configure each subagent's model and tools in its specification. Use `create_deep_agent` to include the default `general-purpose` subagent and the default Deep Agents middleware stack.
 
 ### Rubric grading
 

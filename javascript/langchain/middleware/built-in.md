@@ -1142,7 +1142,9 @@ Handing off tasks to subagents isolates context, keeping the main (supervisor) a
 
 The subagents middleware from [Deep Agents](../../deepagents/overview.md) allows you to supply subagents through a `task` tool.
 
-```typescript
+**Google**
+
+```ts
 import { tool } from "langchain";
 import { createAgent } from "langchain";
 import { createSubAgentMiddleware } from "deepagents";
@@ -1162,7 +1164,259 @@ const getWeather = tool(
 );
 
 const agent = createAgent({
-  model: "claude-sonnet-4-6",
+  model: "google:gemini-3.6-flash",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [
+        {
+          name: "weather",
+          description: "This subagent can get weather in cities.",
+          systemPrompt: "Use the get_weather tool to get the weather in a city.",
+          tools: [getWeather],
+          model: "gpt-5.5",
+          middleware: [],
+        },
+      ],
+    }),
+  ],
+});
+```
+
+**OpenAI**
+
+```ts
+import { tool } from "langchain";
+import { createAgent } from "langchain";
+import { createSubAgentMiddleware } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const agent = createAgent({
+  model: "openai:gpt-5.5",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [
+        {
+          name: "weather",
+          description: "This subagent can get weather in cities.",
+          systemPrompt: "Use the get_weather tool to get the weather in a city.",
+          tools: [getWeather],
+          model: "gpt-5.5",
+          middleware: [],
+        },
+      ],
+    }),
+  ],
+});
+```
+
+**Anthropic**
+
+```ts
+import { tool } from "langchain";
+import { createAgent } from "langchain";
+import { createSubAgentMiddleware } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const agent = createAgent({
+  model: "anthropic:claude-sonnet-5",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [
+        {
+          name: "weather",
+          description: "This subagent can get weather in cities.",
+          systemPrompt: "Use the get_weather tool to get the weather in a city.",
+          tools: [getWeather],
+          model: "gpt-5.5",
+          middleware: [],
+        },
+      ],
+    }),
+  ],
+});
+```
+
+**OpenRouter**
+
+```ts
+import { tool } from "langchain";
+import { createAgent } from "langchain";
+import { createSubAgentMiddleware } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const agent = createAgent({
+  model: "openrouter:z-ai/glm-5.2",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [
+        {
+          name: "weather",
+          description: "This subagent can get weather in cities.",
+          systemPrompt: "Use the get_weather tool to get the weather in a city.",
+          tools: [getWeather],
+          model: "gpt-5.5",
+          middleware: [],
+        },
+      ],
+    }),
+  ],
+});
+```
+
+**Fireworks**
+
+```ts
+import { tool } from "langchain";
+import { createAgent } from "langchain";
+import { createSubAgentMiddleware } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const agent = createAgent({
+  model: "fireworks:accounts/fireworks/models/glm-5p2",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [
+        {
+          name: "weather",
+          description: "This subagent can get weather in cities.",
+          systemPrompt: "Use the get_weather tool to get the weather in a city.",
+          tools: [getWeather],
+          model: "gpt-5.5",
+          middleware: [],
+        },
+      ],
+    }),
+  ],
+});
+```
+
+**Baseten**
+
+```ts
+import { tool } from "langchain";
+import { createAgent } from "langchain";
+import { createSubAgentMiddleware } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const agent = createAgent({
+  model: "baseten:zai-org/GLM-5.2",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [
+        {
+          name: "weather",
+          description: "This subagent can get weather in cities.",
+          systemPrompt: "Use the get_weather tool to get the weather in a city.",
+          tools: [getWeather],
+          model: "gpt-5.5",
+          middleware: [],
+        },
+      ],
+    }),
+  ],
+});
+```
+
+**Ollama**
+
+```ts
+import { tool } from "langchain";
+import { createAgent } from "langchain";
+import { createSubAgentMiddleware } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const agent = createAgent({
+  model: "ollama:north-mini-code-1.0",
   middleware: [
     createSubAgentMiddleware({
       defaultModel: "claude-sonnet-4-6",
@@ -1186,7 +1440,9 @@ A subagent is defined with a **name**, **description**, **system prompt**, and *
 
 For more complex use cases, you can also provide your own prebuilt LangGraph graph as a subagent.
 
-```typescript
+**Google**
+
+```ts
 import { tool, createAgent } from "langchain";
 import { createSubAgentMiddleware, type SubAgent } from "deepagents";
 import { z } from "zod";
@@ -1209,7 +1465,253 @@ const weatherSubagent: SubAgent = {
   description: "This subagent can get weather in cities.",
   systemPrompt: "Use the get_weather tool to get the weather in a city.",
   tools: [getWeather],
-  model: "gpt-5.5",
+  model: "google:gemini-3.6-flash",
+  middleware: [],
+};
+
+const agent = createAgent({
+  model: "claude-sonnet-4-6",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [weatherSubagent],
+    }),
+  ],
+});
+```
+
+**OpenAI**
+
+```ts
+import { tool, createAgent } from "langchain";
+import { createSubAgentMiddleware, type SubAgent } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const weatherSubagent: SubAgent = {
+  name: "weather",
+  description: "This subagent can get weather in cities.",
+  systemPrompt: "Use the get_weather tool to get the weather in a city.",
+  tools: [getWeather],
+  model: "openai:gpt-5.5",
+  middleware: [],
+};
+
+const agent = createAgent({
+  model: "claude-sonnet-4-6",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [weatherSubagent],
+    }),
+  ],
+});
+```
+
+**Anthropic**
+
+```ts
+import { tool, createAgent } from "langchain";
+import { createSubAgentMiddleware, type SubAgent } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const weatherSubagent: SubAgent = {
+  name: "weather",
+  description: "This subagent can get weather in cities.",
+  systemPrompt: "Use the get_weather tool to get the weather in a city.",
+  tools: [getWeather],
+  model: "anthropic:claude-sonnet-5",
+  middleware: [],
+};
+
+const agent = createAgent({
+  model: "claude-sonnet-4-6",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [weatherSubagent],
+    }),
+  ],
+});
+```
+
+**OpenRouter**
+
+```ts
+import { tool, createAgent } from "langchain";
+import { createSubAgentMiddleware, type SubAgent } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const weatherSubagent: SubAgent = {
+  name: "weather",
+  description: "This subagent can get weather in cities.",
+  systemPrompt: "Use the get_weather tool to get the weather in a city.",
+  tools: [getWeather],
+  model: "openrouter:z-ai/glm-5.2",
+  middleware: [],
+};
+
+const agent = createAgent({
+  model: "claude-sonnet-4-6",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [weatherSubagent],
+    }),
+  ],
+});
+```
+
+**Fireworks**
+
+```ts
+import { tool, createAgent } from "langchain";
+import { createSubAgentMiddleware, type SubAgent } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const weatherSubagent: SubAgent = {
+  name: "weather",
+  description: "This subagent can get weather in cities.",
+  systemPrompt: "Use the get_weather tool to get the weather in a city.",
+  tools: [getWeather],
+  model: "fireworks:accounts/fireworks/models/glm-5p2",
+  middleware: [],
+};
+
+const agent = createAgent({
+  model: "claude-sonnet-4-6",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [weatherSubagent],
+    }),
+  ],
+});
+```
+
+**Baseten**
+
+```ts
+import { tool, createAgent } from "langchain";
+import { createSubAgentMiddleware, type SubAgent } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const weatherSubagent: SubAgent = {
+  name: "weather",
+  description: "This subagent can get weather in cities.",
+  systemPrompt: "Use the get_weather tool to get the weather in a city.",
+  tools: [getWeather],
+  model: "baseten:zai-org/GLM-5.2",
+  middleware: [],
+};
+
+const agent = createAgent({
+  model: "claude-sonnet-4-6",
+  middleware: [
+    createSubAgentMiddleware({
+      defaultModel: "claude-sonnet-4-6",
+      defaultTools: [],
+      subagents: [weatherSubagent],
+    }),
+  ],
+});
+```
+
+**Ollama**
+
+```ts
+import { tool, createAgent } from "langchain";
+import { createSubAgentMiddleware, type SubAgent } from "deepagents";
+import { z } from "zod";
+
+const getWeather = tool(
+  async ({ city }: { city: string }) => {
+    return `The weather in ${city} is sunny.`;
+  },
+  {
+    name: "get_weather",
+    description: "Get the weather in a city.",
+    schema: z.object({
+      city: z.string(),
+    }),
+  },
+);
+
+const weatherSubagent: SubAgent = {
+  name: "weather",
+  description: "This subagent can get weather in cities.",
+  systemPrompt: "Use the get_weather tool to get the weather in a city.",
+  tools: [getWeather],
+  model: "ollama:north-mini-code-1.0",
   middleware: [],
 };
 
