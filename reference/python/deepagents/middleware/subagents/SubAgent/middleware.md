@@ -21,9 +21,10 @@ other names are added.
 Avoid middleware that rewrites the inherited system-prompt prefix in the
 fork's model request or changes tool definitions unless you accept reduced
 shared prompt-cache reuse and potentially higher model costs. This is
-distinct from `SubAgent.system_prompt`, which appends instructions to the
-inherited prompt. A `wrap_model_call` hook receives that prompt through
-`request.system_message`. For example, this prepends text before the inherited
+distinct from `SubAgent.system_prompt`, which a fork delivers with its task
+message rather than in the system prompt. A `wrap_model_call` hook receives
+the inherited prompt through `request.system_message`. For example, this
+prepends text before the inherited
 prefix in the fork's request, preventing reuse of that prefix:
 
 ```python
@@ -47,4 +48,4 @@ middleware: NotRequired[list[AgentMiddleware]]
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9ea3f1912abd8b7eecb504d78ef99fcf279bf561/libs/deepagents/deepagents/middleware/subagents.py#L151)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/18930b5463c8a0a432353db5299af280f879973f/libs/deepagents/deepagents/middleware/subagents.py#L160)

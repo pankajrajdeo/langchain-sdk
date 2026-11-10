@@ -50,4 +50,4 @@ State update with `skills_metadata` and `skills_load_errors`, or
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9ea3f1912abd8b7eecb504d78ef99fcf279bf561/libs/deepagents/deepagents/middleware/skills.py#L1212)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/18930b5463c8a0a432353db5299af280f879973f/libs/deepagents/deepagents/middleware/skills.py#L1212)

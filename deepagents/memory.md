@@ -76,6 +76,8 @@ agent = create_deep_agent(
 >
 > Populate the store with initial memories, then invoke the agent across two threads to see it remember and update what it learns.
 >
+> `CompositeBackend` removes each route prefix before forwarding file operations. Seed backend-relative keys such as `/AGENTS.md` and `/langgraph-docs/SKILL.md`, not the agent-facing `/memories/` or `/skills/` paths.
+>
 ```python
 > from langchain_core.utils.uuid import uuid7
 >
@@ -89,7 +91,7 @@ agent = create_deep_agent(
 > # Seed the memory file
 > store.put(
 >     ("my-agent",),
->     "/memories/AGENTS.md",
+>     "/AGENTS.md",
 >     create_file_data("""## Response style
 > - Keep responses concise
 > - Use code examples where possible
@@ -99,7 +101,7 @@ agent = create_deep_agent(
 > # Seed a skill
 > store.put(
 >     ("my-agent",),
->     "/skills/langgraph-docs/SKILL.md",
+>     "/langgraph-docs/SKILL.md",
 >     create_file_data("""---
 > name: langgraph-docs
 > description: Fetch relevant LangGraph documentation to provide accurate guidance.
@@ -115,14 +117,14 @@ agent = create_deep_agent(
 >     model="google_genai:gemini-3.6-flash",
 >     memory=["/memories/AGENTS.md"],
 >     skills=["/skills/"],
->     backend=lambda rt: CompositeBackend(
->         default=StateBackend(rt),
+>     backend=CompositeBackend(
+>         default=StateBackend(),
 >         routes={
 >             "/memories/": StoreBackend(
->                 rt, namespace=lambda rt: ("my-agent",)
+>                 namespace=lambda rt: ("my-agent",)
 >             ),
 >             "/skills/": StoreBackend(
->                 rt, namespace=lambda rt: ("my-agent",)
+>                 namespace=lambda rt: ("my-agent",)
 >             ),
 >         },
 >     ),
@@ -190,7 +192,7 @@ agent = create_deep_agent(
 > # Seed preferences for two users
 > store.put(
 >     ("user-alice",),
->     "/memories/preferences.md",
+>     "/preferences.md",
 >     create_file_data("""## Preferences
 > - Likes concise bullet points
 > - Prefers Python examples
@@ -198,7 +200,7 @@ agent = create_deep_agent(
 > )
 > store.put(
 >     ("user-bob",),
->     "/memories/preferences.md",
+>     "/preferences.md",
 >     create_file_data("""## Preferences
 > - Likes detailed explanations
 > - Prefers TypeScript examples
@@ -208,7 +210,7 @@ agent = create_deep_agent(
 > # Seed a skill for Alice
 > store.put(
 >     ("user-alice",),
->     "/skills/langgraph-docs/SKILL.md",
+>     "/langgraph-docs/SKILL.md",
 >     create_file_data("""---
 > name: langgraph-docs
 > description: Fetch relevant LangGraph documentation to provide accurate guidance.
@@ -224,15 +226,13 @@ agent = create_deep_agent(
 >     model="google_genai:gemini-3.6-flash",
 >     memory=["/memories/preferences.md"],
 >     skills=["/skills/"],
->     backend=lambda rt: CompositeBackend(
->         default=StateBackend(rt),
+>     backend=CompositeBackend(
+>         default=StateBackend(),
 >         routes={
 >             "/memories/": StoreBackend(
->                 rt,
 >                 namespace=lambda rt: (rt.server_info.user.identity,),
 >             ),
 >             "/skills/": StoreBackend(
->                 rt,
 >                 namespace=lambda rt: (rt.server_info.user.identity,),
 >             ),
 >         },

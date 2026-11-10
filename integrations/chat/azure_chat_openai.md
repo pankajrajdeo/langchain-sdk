@@ -50,7 +50,7 @@ You can find information about Azure OpenAI's latest models and their costs, con
 
 ## Setup
 
-To access Azure OpenAI models you'll need to [create an Azure account](https://account.azure.com/signup), create a deployment of an Azure OpenAI model, get the name and endpoint for your deployment, and install the `langchain-openai` integration package.
+To access Azure OpenAI models you'll need to [create an Azure account](https://account.azure.com/signup), [create an Azure deployment](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource), get the name and endpoint for your deployment, and install the `langchain-openai` integration package.
 
 ### Installation
 
@@ -123,7 +123,7 @@ Set `base_url` to your Azure endpoint with `/openai/v1/` appended. With the v1 A
 > from langchain_openai import ChatOpenAI
 >
 > llm = ChatOpenAI(
->     model="gpt-5.4-mini",  # your Azure deployment name
+>     model="gpt-5.5",  # your Azure deployment name
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key=token_provider,  # callable that handles token refresh
 > )
@@ -135,7 +135,7 @@ Set `base_url` to your Azure endpoint with `/openai/v1/` appended. With the v1 A
 > from langchain_openai import ChatOpenAI
 >
 > llm = ChatOpenAI(
->     model="gpt-5.4-mini",  # your Azure deployment name
+>     model="gpt-5.5",  # your Azure deployment name
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key="your-azure-api-key",
 > )
@@ -153,7 +153,7 @@ Use [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/
 > from langchain_openai import AzureChatOpenAI
 >
 > llm = AzureChatOpenAI(
->     azure_deployment="gpt-5.4-mini",  # or your deployment
+>     azure_deployment="gpt-5.5",  # or your deployment
 >     api_version="2025-04-01-preview",  # or your api version
 >     azure_ad_token_provider=token_provider,
 > )
@@ -167,7 +167,7 @@ Use [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/
 > from langchain_openai import AzureChatOpenAI
 >
 > llm = AzureChatOpenAI(
->     azure_deployment="gpt-5.4-mini",  # or your deployment
+>     azure_deployment="gpt-5.5",  # or your deployment
 >     api_version="2025-04-01-preview",  # or your api version
 >     temperature=0,
 >     max_tokens=None,
@@ -209,7 +209,7 @@ class GetWeather(BaseModel):
     location: str = Field(description="The city and state, e.g. San Francisco, CA")
 
 llm = ChatOpenAI(
-    model="gpt-5.4-mini",
+    model="gpt-5.5",
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key="your-azure-api-key",
 )
@@ -238,7 +238,7 @@ from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
-    model="gpt-5.4-mini",
+    model="gpt-5.5",
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key="your-azure-api-key",
 )
@@ -272,7 +272,7 @@ To recover token counts when streaming, set `stream_usage=True` as an initializa
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
-    model="gpt-5.4-mini",
+    model="gpt-5.5",
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key="your-azure-api-key",
     stream_usage=True,  # [!code highlight]
@@ -281,7 +281,49 @@ llm = ChatOpenAI(
 
 ## Responses API
 
-Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses), which provides stateful conversations, built-in server-side tools (code interpreter, image generation, file search, and remote MCP), and structured reasoning summaries. [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) automatically routes to the Responses API when you set the `reasoning` parameter, or you can opt in explicitly with `use_responses_api=True`:
+Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses), which provides stateful conversations, built-in server-side tools (web search, code interpreter, image generation, file search, and remote MCP), and structured reasoning summaries. [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) automatically routes to the Responses API when you set the `reasoning` parameter, or you can opt in explicitly with `use_responses_api=True`:
+
+### Invoke without built-in tools
+
+> [tab] Entra ID (recommended)
+>
+```python
+> from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+> from langchain_openai import ChatOpenAI
+>
+> token_provider = get_bearer_token_provider(
+>     DefaultAzureCredential(),
+>     "https://cognitiveservices.azure.com/.default",
+> )
+>
+> llm = ChatOpenAI(
+>     model="gpt-5.5",
+>     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
+>     api_key=token_provider,
+>     use_responses_api=True,
+> )
+>
+> response = llm.invoke("Summarize the bitter lesson.")
+> print(response.text)
+```
+
+> [tab] API key
+>
+```python
+> from langchain_openai import ChatOpenAI
+>
+> llm = ChatOpenAI(
+>     model="gpt-5.5",
+>     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
+>     api_key="your-azure-api-key",
+>     use_responses_api=True,
+> )
+>
+> response = llm.invoke("Summarize the bitter lesson.")
+> print(response.text)
+```
+
+### Use built-in tools
 
 > [tab] Entra ID (recommended)
 >
@@ -289,7 +331,7 @@ Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azur
 > from langchain_openai import ChatOpenAI
 >
 > llm = ChatOpenAI(
->     model="gpt-5.4-mini",  # your Azure deployment name
+>     model="gpt-5.5",  # your Azure deployment name
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key=token_provider,
 >     use_responses_api=True,  # [!code highlight]
@@ -312,7 +354,7 @@ Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azur
 > from langchain_openai import ChatOpenAI
 >
 > llm = ChatOpenAI(
->     model="gpt-5.4-mini",  # your Azure deployment name
+>     model="gpt-5.5",  # your Azure deployment name
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key="your-azure-api-key",
 >     use_responses_api=True,  # [!code highlight]
@@ -343,7 +385,7 @@ Set `reasoning_effort` to `"low"`, `"medium"`, or `"high"`. Higher settings let 
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
-    model="gpt-5.4-mini",  # your Azure reasoning model deployment
+    model="gpt-5.5",  # your Azure reasoning model deployment
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key=token_provider,
     reasoning_effort="medium",
@@ -370,7 +412,7 @@ reasoning = {
 }
 
 llm = ChatOpenAI(
-    model="gpt-5.4-mini",  # your Azure reasoning model deployment
+    model="gpt-5.5",  # your Azure reasoning model deployment
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key=token_provider,
     reasoning=reasoning,
@@ -407,7 +449,7 @@ When using `AzureChatOpenAI`, Azure OpenAI responses contain a `model_name` resp
 from langchain_openai import AzureChatOpenAI
 
 llm = AzureChatOpenAI(
-    azure_deployment="gpt-5.4-mini",  # or your deployment
+    azure_deployment="gpt-5.5",  # or your deployment
     api_version="2025-04-01-preview",  # or your api version
     model_version="0301",
 )

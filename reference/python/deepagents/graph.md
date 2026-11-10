@@ -29,11 +29,10 @@ subagent, and summarization middleware.
 - [`resolve_model()`](https://reference.langchain.com/python/deepagents/graph/resolve_model)
 - [`append_prompt_caching_middleware()`](https://reference.langchain.com/python/deepagents/graph/append_prompt_caching_middleware)
 - [`private_state_field_names()`](https://reference.langchain.com/python/deepagents/graph/private_state_field_names)
-- [`append_to_system_message()`](https://reference.langchain.com/python/deepagents/graph/append_to_system_message)
 - [`create_summarization_middleware()`](https://reference.langchain.com/python/deepagents/graph/create_summarization_middleware)
 - [`get_default_model()`](https://reference.langchain.com/python/deepagents/graph/get_default_model)
 - [`create_deep_agent()`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent)
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9ea3f1912abd8b7eecb504d78ef99fcf279bf561/libs/deepagents/deepagents/graph.py)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/18930b5463c8a0a432353db5299af280f879973f/libs/deepagents/deepagents/graph.py)

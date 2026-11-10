@@ -14,7 +14,7 @@ tags: [index, langsmith, javascript]
 - [Define a Managed Deep Agent](managed-deep-agents-agent-definition.md) - Configure the model and core capabilities of a managed deep agent.
 - [Prompt Slack users with agent-owned interrupts](managed-deep-agents-agent-owned-interrupts.md) - Post a Slack form from a Managed Deep Agents tool, pause the run, and resume it when the user submits the form.
 - [Browser use](managed-deep-agents-browser-use.md) - Configure browser sharing, website logins, and human handoff for a managed deep agent.
-- [Connect a Managed Deep Agent over HTTP](managed-deep-agents-channels-http.md) - Start Managed Deep Agents runs from any external service that can send a webhook, and return responses through your own transport.
+- [Connect a Managed Deep Agent to a custom channel over HTTP](managed-deep-agents-channels-http.md) - Start Managed Deep Agents runs from any external service that can send a webhook, and return responses through your own transport.
 - [Connect a Managed Deep Agent to Slack](managed-deep-agents-channels-slack.md) - Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations.
 - [Connect Managed Deep Agents to channels](managed-deep-agents-channels.md) - Connect Managed Deep Agents to external messaging services that can start runs and receive responses.
 - [Managed Deep Agents CLI reference](managed-deep-agents-cli.md) - Reference for mda commands, project files, and deploy behavior.

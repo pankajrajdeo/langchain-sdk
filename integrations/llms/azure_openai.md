@@ -81,6 +81,43 @@ credential = ChainedTokenCredential(
 )
 ```
 
+### Configure authentication per client
+
+> [tab] Entra ID (recommended)
+>
+```python
+> from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+> from langchain_openai import AzureOpenAI
+>
+> token_provider = get_bearer_token_provider(
+>     DefaultAzureCredential(),
+>     "https://cognitiveservices.azure.com/.default",
+> )
+>
+> llm = AzureOpenAI(
+>     azure_deployment="gpt-5.5",  # your Azure deployment name
+>     api_version="2025-04-01-preview",
+>     azure_ad_token_provider=token_provider,
+> )
+>
+> print(llm.invoke("Write a haiku about the ocean."))
+```
+
+> [tab] API key
+>
+```python
+> from langchain_openai import AzureOpenAI
+>
+> llm = AzureOpenAI(
+>     azure_deployment="gpt-5.5",  # your Azure deployment name
+>     api_version="2025-04-01-preview",
+>     azure_endpoint="https://YOUR-RESOURCE-NAME.openai.azure.com/",
+>     api_key="your-azure-api-key",
+> )
+>
+> print(llm.invoke("Write a haiku about the ocean."))
+```
+
 ## Deployments
 
 With Azure OpenAI, you set up your own deployments of the common GPT-3 and Codex models.  When calling the API, you need to specify the deployment you want to use.
@@ -102,8 +139,16 @@ response = client.completions.create(
 )
 ```
 
-```python
-pip install -qU  langchain-openai
+**pip**
+
+```bash
+pip install -qU langchain-openai
+```
+
+**uv**
+
+```bash
+uv add langchain-openai
 ```
 
 ```python

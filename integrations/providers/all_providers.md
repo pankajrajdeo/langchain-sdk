@@ -1404,6 +1404,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Efficient open-source language models.
 
+> [card] [MobileboxToolkit](https://github.com/fifteenA/mobilebox/tree/main/packages/python/langchain-mobilebox#readme)
+>
+> Tools that let agents create cloud Android phones, read the screen, tap, type and install apps with Mobilebox.
+
 > [card] [Modal](modal.md)
 >
 > Serverless cloud computing for data science.
@@ -2131,6 +2135,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [Spidra](https://docs.spidra.io)
 >
 > AI-powered web scraping platform with real browsers, CAPTCHA solving, and structured data extraction.
+
+> [card] [SQLiteGraphMemoryRetriever](https://github.com/tonydzi/langchain-sqlite-graph-memory#readme)
+>
+> Local retriever over markdown notes: vector search, 1-hop wikilink graph expansion and cross-encoder rerank, with no server.
 
 > [card] [SRARiskGateMiddleware](https://github.com/sriram1983007-dev/langchain-sra-riskgate#readme)
 >

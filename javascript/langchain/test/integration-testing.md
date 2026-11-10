@@ -256,6 +256,19 @@ Integration tests that call LLM APIs incur real costs. A few practices help keep
 * **Limit test scope**: Test one behavior per test. Avoid end-to-end scenarios that chain many LLM calls when a single-turn test suffices.
 * **Run selectively**: Use the test separation from [above](#separate-unit-and-integration-tests) to run integration tests only in CI or before deploy, not on every file save.
 
+```ts
+import { createAgent, initChatModel } from "langchain";
+
+const model = await initChatModel("google-genai:gemini-3.1-flash-lite", {
+  maxOutputTokens: 256,
+});
+
+const agent = createAgent({
+  model,
+  tools: [getWeather],
+});
+```
+
 ## Next steps
 
 Learn how to evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators in [Evals](evals.md).

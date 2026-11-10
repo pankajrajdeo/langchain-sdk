@@ -29,8 +29,16 @@ This notebook covers how to load document objects from a container on `Azure Blo
 
 ## Setup
 
-```python
+**pip**
+
+```bash
 pip install -qU langchain-azure-storage
+```
+
+**uv**
+
+```bash
+uv add langchain-azure-storage
 ```
 
 ```python

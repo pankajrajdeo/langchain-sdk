@@ -10,7 +10,7 @@ tags: [docs, integrations, middleware, azure_ai]
 
 > Integrate with the Azure AI middleware using LangChain Python.
 
-Middleware specifically designed for Microsoft Foundry and Azure AI Content Safety. Learn more about [middleware](../../langchain/middleware/overview.md).
+Middleware specifically designed for Microsoft Foundry and [Azure AI Content Safety](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/overview). Learn more about [middleware](../../langchain/middleware/overview.md).
 
 These middleware classes live in the `langchain-azure-ai` package and are exported from `langchain_azure_ai.agents.middleware`.
 

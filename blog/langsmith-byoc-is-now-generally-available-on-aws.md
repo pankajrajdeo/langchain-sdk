@@ -49,7 +49,7 @@ Communication between the control plane and data plane uses AWS PrivateLink and 
 
 The management path exposes only the Kubernetes API server for the customer's cluster, which LangChain's control plane uses to install and reconcile LangSmith components in customer data planes. The runtime path lets the data plane call the control plane for authentication, workspace configuration, telemetry, and billing metadata. The Amazon EKS cluster is private, with no public API server endpoint and no public IPs on worker nodes.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a7bb395231c0217a4374115_boyc-boundaries.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a7bb395231c0217a4374115_boyc-boundaries.png)
 
 ## What BYOC offers
 
@@ -92,7 +92,7 @@ LangChain provisions and reconciles the data plane using Crossplane. Customers c
 
 The role is scoped to infrastructure management. Wherever AWS supports it, permissions are limited to resources with the `managed_by=langsmith` tag and specific name prefixes. The role does not include data-read permissions such as `s3:GetObject` on the trace bucket, `rds-db:connect` to PostgreSQL, or `elasticache:Connect` to Redis.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a7bb470c8a145aa43954ec7_byoc-aws-architecture.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a7bb470c8a145aa43954ec7_byoc-aws-architecture.png)
 
 ## LangSmith features available on BYOC
 
@@ -110,7 +110,7 @@ Available today:
 - **Fleet:** build and run no-code agents
 - **SmithDB:** LangChain's observability backend for trace data, persisting to Amazon S3 in the customer account
 
-Managed Deep Agents, the LLM auth proxy, and Engine are planned for BYOC support soon.
+Managed Deep Agents, the LLM auth proxy, and Engine [now support BYOC](../langsmith/byoc.md).
 
 ## Getting started
 

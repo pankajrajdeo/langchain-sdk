@@ -37,4 +37,4 @@ A list of formatted messages with all template variables filled in.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/prompts/few_shot.py#L418)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/1a41b51b0295d7cc6df45cdede199b4a34649b1d/libs/core/langchain_core/prompts/few_shot.py#L418)

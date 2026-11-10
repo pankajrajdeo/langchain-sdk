@@ -137,6 +137,15 @@ Integration tests that call LLM APIs incur real costs. A few practices help keep
 * **Limit test scope**: Test one behavior per test. Avoid end-to-end scenarios that chain many LLM calls when a single-turn test suffices.
 * **Run selectively**: Use the test separation from [above](#separate-unit-and-integration-tests) to run integration tests only in CI or before deploy, not on every file save.
 
+```python
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+
+model = init_chat_model("google_genai:gemini-3.1-flash-lite", max_tokens=256)
+
+agent = create_agent(model, tools=[get_weather])
+```
+
 ## Record and replay HTTP calls
 
 For tests that run frequently in CI, you can record HTTP interactions on the first run and replay them on subsequent runs without making real API calls. This eliminates cost and latency after the initial recording.

@@ -10,6 +10,10 @@ tags: [docs, integrations, tools, stripe]
 
 > Integrate with the StripeAgentToolkit tool using LangChain Python.
 
+> [!WARNING]
+>
+> `stripe-agent-toolkit` is deprecated. Stripe recommends the hosted [Stripe MCP server](https://docs.stripe.com/mcp) instead. See Stripe's [deprecation notice](https://github.com/stripe/ai).
+
 This guide provides a quick overview for getting started with Stripe's agent toolkit.
 
 You can read more about `StripeAgentToolkit` in [Stripe's launch blog](https://stripe.dev/blog/adding-payments-to-your-agentic-workflows) or on the project's [PyPI page](https://pypi.org/project/stripe-agent-toolkit/).
@@ -31,6 +35,10 @@ You can install it, along with langgraph for the following examples, with `pip`:
 ```python
 pip install --quiet -U langgraph stripe-agent-toolkit
 ```
+
+> [!NOTE]
+>
+> If you still need this package, pin `mcp<2`. `stripe-agent-toolkit` 0.7.1 allows any `mcp>=1.0`, and mcp 2.x removed `streamablehttp_client`, which causes an `ImportError` on a fresh install.
 
 ### Credentials
 

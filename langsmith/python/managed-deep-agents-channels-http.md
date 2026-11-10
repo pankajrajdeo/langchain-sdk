@@ -1,12 +1,12 @@
 ---
-title: "Connect a Managed Deep Agent over HTTP"
+title: "Connect a Managed Deep Agent to a custom channel over HTTP"
 description: "Start Managed Deep Agents runs from any external service that can send a webhook, and return responses through your own transport."
 source: "https://docs.langchain.com/langsmith/python/managed-deep-agents-channels-http"
 category: "docs"
 tags: [docs, langsmith, managed-deep-agents-channels-http]
 ---
 
-# Connect a Managed Deep Agent over HTTP
+# Connect a Managed Deep Agent to a custom channel over HTTP
 
 > Start Managed Deep Agents runs from any external service that can send a webhook, and return responses through your own transport.
 

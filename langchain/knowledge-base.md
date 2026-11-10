@@ -580,6 +580,8 @@ LangChain includes [integrations](../integrations/vectorstores.md) with many vec
 
 Load content from a PDF, then split it into smaller chunks before indexing. This example uses [a sample Nike 10-K filing from 2023](https://github.com/langchain-ai/langchain/blob/v0.3/docs/docs/example_data/nke-10k-2023.pdf).
 
+Download the sample PDF before running the example. Set `file_path` (Python) or `filePath` (JavaScript) to the downloaded file's absolute path, or use a path relative to your working directory.
+
 For dedicated PDF document loaders (including `PyPDFLoader` and partner packages), see [PDF document loaders](../integrations/document_loaders.md#pdfs).
 
 ```python

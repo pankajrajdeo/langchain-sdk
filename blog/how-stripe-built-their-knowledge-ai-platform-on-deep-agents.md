@@ -12,6 +12,8 @@ tags: [blog, how-stripe-built-their-knowledge-ai-platform-on-deep-agents]
 
 [Stripe](https://stripe.com/) is the global payments and financial infrastructure platform used by millions of businesses. To support the constant shipping and iterating of products at scale, they’ve built AI tooling that helps employees across Stripe be more productive. Stripe’s AI platform team is responsible for the stack that powers all the AI applications at the company. Their most visible product is *Stripe’s Knowledge AI Platform*, also known as Kai, a company-wide productivity agent built on the LangChain/LangGraph stack and the [Deep Agents](https://www.langchain.com/deep-agents) agent harness.
 
+The two-minute video below covers how Stripe built Kai in one week on Deep Agents.
+
 ## Building an in-house agent harness
 
 As agentic AI adoption accelerated, engineering teams across Stripe began building orchestration layers on top of their existing Ruby and Java stacks. Integrating these systems with Stripe’s internal infrastructure was relatively straightforward, but building a reliable, production-quality agent harness introduced additional challenges.

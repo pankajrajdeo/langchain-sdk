@@ -39,4 +39,4 @@ List of tuples of `(doc, similarity_score)`.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/b4aa7e7d00c452251720ce30b8bc2c41ca44e1f5/libs/core/langchain_core/vectorstores/base.py#L417)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/1a41b51b0295d7cc6df45cdede199b4a34649b1d/libs/core/langchain_core/vectorstores/base.py#L417)

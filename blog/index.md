@@ -30,7 +30,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![Agents Are Going Async](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aecdf22f0b192d15c132b25_6aecdf0372d986b4c1a140a7_async-subagents-cover-webflow.png)Agent ArchitectureOpen Source
+![What is eval-driven development? How to improve AI agents](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af1631684e7ff9e17bf30f3_6af16300f11e821788cff9c5_what-is-eval-driven-development-cover.png)Observability & EvalsLangSmith
+
+## What Is Eval-Driven Development? How to Improve AI Agents
+
+![Divya Santhanam](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac97dfca101bc80e9f2d64d_divya-santhanam.png)Divya SanthanamNovember 9, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min![Agents Are Going Async](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aecdf22f0b192d15c132b25_6aecdf0372d986b4c1a140a7_async-subagents-cover-webflow.png)Agent ArchitectureOpen Source
 
 ## Agents Are Going Async
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## October 2026: LangChain Newsletter
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69d50051c5c24f19b81fd73a_Group%202147239256-2.svg)The LangChain TeamOctober 15, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)4min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac6d12e05f73fc9690266a8_dark-74%20characters%20max.png)Deep AgentsConceptual Guide
-
-## Context Engineering: How Deep Agents Remember
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acfb8492227373b922e7719_Screenshot%202026-10-14%20at%2010.12.17%E2%80%AFAM.png)Jess WengOctober 14, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69d50051c5c24f19b81fd73a_Group%202147239256-2.svg)The LangChain TeamOctober 15, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)4min1...1 / 35
 
 #### We couldn't find anything matching that.
 

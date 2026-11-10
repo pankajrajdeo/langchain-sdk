@@ -49,24 +49,73 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain AzureOpenAI integration lives in the `langchain-openai` package:
 
-```python
+**pip**
+
+```bash
 pip install -qU langchain-openai
+```
+
+**uv**
+
+```bash
+uv add langchain-openai
 ```
 
 ## Instantiation
 
-Now we can instantiate our model object and generate chat completions:
+Create an embeddings model using Entra ID, an API key, or environment variables:
 
+> [tab] Entra ID (recommended)
+>
+```bash
+> pip install azure-identity
+```
+>
 ```python
-from langchain_openai import AzureOpenAIEmbeddings
+> from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+> from langchain_openai import AzureOpenAIEmbeddings
+>
+> token_provider = get_bearer_token_provider(
+>     DefaultAzureCredential(),
+>     "https://cognitiveservices.azure.com/.default",
+> )
+>
+> embeddings = AzureOpenAIEmbeddings(
+>     azure_deployment="text-embedding-3-small",  # your Azure deployment name
+>     api_version="2025-04-01-preview",
+>     azure_ad_token_provider=token_provider,
+> )
+>
+> vector = embeddings.embed_query("LangChain makes agents easy.")
+```
 
-embeddings = AzureOpenAIEmbeddings(
-    model="text-embedding-3-large",
-    # dimensions: Optional[int] = None, # Can specify dimensions with new text-embedding-3 models
-    # azure_endpoint="https://<your-endpoint>.openai.azure.com/", If not provided, will read env variable AZURE_OPENAI_ENDPOINT
-    # api_key=... # Can provide an API key directly. If missing read env variable AZURE_OPENAI_API_KEY
-    # openai_api_version=..., # If not provided, will read env variable AZURE_OPENAI_API_VERSION
-)
+> [tab] API key
+>
+```python
+> from langchain_openai import AzureOpenAIEmbeddings
+>
+> embeddings = AzureOpenAIEmbeddings(
+>     azure_deployment="text-embedding-3-small",  # your Azure deployment name
+>     api_version="2025-04-01-preview",
+>     azure_endpoint="https://YOUR-RESOURCE-NAME.openai.azure.com/",
+>     api_key="your-azure-api-key",
+> )
+>
+> vector = embeddings.embed_query("LangChain makes agents easy.")
+```
+
+> [tab] Environment variables
+>
+```python
+> from langchain_openai import AzureOpenAIEmbeddings
+>
+> embeddings = AzureOpenAIEmbeddings(
+>     model="text-embedding-3-large",
+>     # dimensions: Optional[int] = None, # Can specify dimensions with new text-embedding-3 models
+>     # azure_endpoint="https://<your-endpoint>.openai.azure.com/", If not provided, will read env variable AZURE_OPENAI_ENDPOINT
+>     # api_key=... # Can provide an API key directly. If missing read env variable AZURE_OPENAI_API_KEY
+>     # openai_api_version=..., # If not provided, will read env variable AZURE_OPENAI_API_VERSION
+> )
 ```
 
 ## Indexing and retrieval

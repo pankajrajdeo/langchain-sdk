@@ -576,6 +576,7 @@ The following table shows tools that generate video, image, or audio assets:
 | [`FokalsToolkit`](https://github.com/fokals/langchain-fokals#readme) | N/A |
 | [`FrameScanTool`](https://github.com/Sandeep85Das/langchain-frame) | N/A |
 | [`HuangtingFlux`](https://huangtingflux.com/integrations/langchain) | N/A |
+| [`MobileboxToolkit`](https://github.com/fifteenA/mobilebox/tree/main/packages/python/langchain-mobilebox#readme) | N/A |
 | [`PopNowToolkit`](https://popnow.ai/docs/langchain) | N/A |
 | [`SideQuest`](https://sidequestpays.com/docs#langchain) | N/A |
 | [`Stagehand`](tools/stagehand.md) | N/A |

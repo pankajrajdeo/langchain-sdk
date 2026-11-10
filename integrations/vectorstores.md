@@ -561,19 +561,17 @@ vector_store.similarity_search(
 **pip**
 
 ```bash
-> pip install -qU langchain-azure-ai pymongo
+> pip install -qU langchain-azure-cosmosdb pymongo
 ```
 >
 **uv**
 
 ```bash
-> uv add pymongo
+> uv add langchain-azure-cosmosdb pymongo
 ```
 >
 ```python
-> from langchain_azure_ai.vectorstores.azure_cosmos_db_mongo_vcore import (
->     AzureCosmosDBMongoVCoreVectorSearch,
-> )
+> from langchain_azure_cosmosdb import AzureCosmosDBMongoVCoreVectorSearch
 >
 > vectorstore = AzureCosmosDBMongoVCoreVectorSearch.from_documents(
 >     docs,

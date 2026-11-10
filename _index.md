@@ -12,7 +12,7 @@ tags: [index]
 ## Directories
 
 - [api-reference/](api-reference/_index.md) - 65 pages
-- [blog/](blog/_index.md) - 554 pages
+- [blog/](blog/_index.md) - 555 pages
 - [breakoutagents/](breakoutagents/_index.md) - 5 pages
 - [concepts/](concepts/_index.md) - 5 pages
 - [contributing/](contributing/_index.md) - 8 pages
@@ -25,7 +25,7 @@ tags: [index]
 - [migrate/](migrate/_index.md) - 4 pages
 - [openwiki/](openwiki/_index.md) - 12 pages
 - [oss/](oss/_index.md) - 3 pages
-- [reference/](reference/_index.md) - 6131 pages
+- [reference/](reference/_index.md) - 6130 pages
 - [releases/](releases/_index.md) - 3 pages
 - [resources/](resources/_index.md) - 38 pages
 

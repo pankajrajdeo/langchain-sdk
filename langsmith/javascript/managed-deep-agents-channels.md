@@ -85,7 +85,7 @@ A channel receives messages that start agent runs and delivers responses. An [MC
 >
 > Start runs from Slack mentions, direct messages, and thread replies.
 
-> [card] [HTTP](managed-deep-agents-channels-http.md)
+> [card] [Custom (HTTP)](managed-deep-agents-channels-http.md)
 >
 > Start runs from any service that can send a JSON webhook.
 

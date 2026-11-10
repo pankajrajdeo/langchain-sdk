@@ -30,8 +30,16 @@ POOL_MANAGEMENT_ENDPOINT = getpass.getpass()
 
 You'll also need to install the `langchain-azure-dynamic-sessions` package:
 
-```python
+**pip**
+
+```bash
 pip install -qU langchain-azure-dynamic-sessions langchain-openai langchainhub langchain
+```
+
+**uv**
+
+```bash
+uv add langchain-azure-dynamic-sessions langchain-openai langchainhub langchain
 ```
 
 ## Use tool

@@ -45,7 +45,7 @@ It was during these early days that we turned to evaluation driven development t
 
 ## Evaluation Driven Development
 
-Evaluation driven development (EDD), like test driven development, gives us end goal to develop against. The evaluations — or “evals” — are our baseline for understanding updates and new functionality. EDD helps us understand the impact of any change we make to Dosu’s core logic, models, or prompts.
+[Evaluation driven development (EDD)](https://www.langchain.com/blog/what-is-eval-driven-development), like test driven development, gives us end goal to develop against. The evaluations — or “evals” — are our baseline for understanding updates and new functionality. EDD helps us understand the impact of any change we make to Dosu’s core logic, models, or prompts.
 
 With EDD, we have a well-defined process for improving Dosu:
 
