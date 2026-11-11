@@ -1,6 +1,6 @@
 ---
 title: "Deploy to Cloud"
-description: "Deploy LangSmith agents to LangChain-managed Cloud infrastructure on AWS and GCP."
+description: "Deploy LangSmith agents to LangChain-managed Cloud infrastructure on AWS, Azure, and GCP."
 source: "https://docs.langchain.com/langsmith/deploy-to-cloud-overview"
 category: "docs"
 tags: [docs, langsmith, deploy-to-cloud-overview]
@@ -8,9 +8,9 @@ tags: [docs, langsmith, deploy-to-cloud-overview]
 
 # Deploy to Cloud
 
-> Deploy LangSmith agents to LangChain-managed Cloud infrastructure on AWS and GCP.
+> Deploy LangSmith agents to LangChain-managed Cloud infrastructure on AWS, Azure, and GCP.
 
-[LangSmith Cloud](cloud.md) is a **managed platform for deploying your agents**. LangChain hosts and operates the [control plane](control-plane.md), [data plane](data-plane.md), [Agent Server](agent-server.md) runtime, and supporting databases on AWS and GCP. Push code to a connected GitHub repository or invoke the `langgraph deploy` CLI, and the platform handles build, provisioning, scaling, and ongoing operations. Deployments come in [two types](cloud-platform-features.md#deployment-types):
+[LangSmith Cloud](cloud.md) is a **managed platform for deploying your agents**. LangChain hosts and operates the [control plane](control-plane.md), [data plane](data-plane.md), [Agent Server](agent-server.md) runtime, and supporting databases on AWS, Azure, and GCP. Push code to a connected GitHub repository or invoke the `langgraph deploy` CLI, and the platform handles build, provisioning, scaling, and ongoing operations. Deployments come in [two types](cloud-platform-features.md#deployment-types):
 
 * **Serverless**: Scales to zero when idle. Suits background agents, testing, and latency-tolerant production workloads.
 * **Dedicated**: Stays on and autoscales across replicas. Suits latency-sensitive production workloads.

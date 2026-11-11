@@ -44,7 +44,7 @@ Pick an environment based on where you want the [control plane](langsmith/contro
 
 > [card] [Cloud](langsmith/deploy-to-cloud-overview.md)
 >
-> Fully managed by LangChain on AWS and GCP. Create deployments from GitHub in the LangSmith UI or with [`langgraph deploy`](langsmith/cli.md#deploy). Requires a [Plus plan or above](https://www.langchain.com/pricing).
+> Fully managed by LangChain on AWS, Azure, and GCP. Create deployments from GitHub in the LangSmith UI or with [`langgraph deploy`](langsmith/cli.md#deploy). Requires a [Plus plan or above](https://www.langchain.com/pricing).
 
 > [card] [Self-hosted with control plane](langsmith/deploy-with-control-plane.md)
 >

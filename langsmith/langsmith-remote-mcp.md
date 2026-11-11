@@ -12,11 +12,11 @@ tags: [docs, langsmith, langsmith-remote-mcp]
 
 The LangSmith Remote MCP is a [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) server hosted by LangSmith. It exposes the same tools as the [standalone LangSmith MCP Server](langsmith-mcp-server.md) (conversation history, prompts, runs and traces, datasets, experiments, billing) without a separate deployment. Interactive MCP clients connect over OAuth with no API key or header configuration; programmatic clients can authenticate with a LangSmith API key via the `X-Api-Key` header.
 
-The Remote MCP is available on all LangSmith Cloud regions, on [BYOC](byoc.md) data planes, and on [self-hosted LangSmith](self-hosted.md) deployments running v0.16 or later (self-hosted additionally requires configuring a signing JWKS—see [Self-hosted LangSmith](#self-hosted-langsmith)). Self-hosted deployments on earlier versions should continue to use the [standalone LangSmith MCP Server](langsmith-mcp-server.md).
-
 ## Endpoints
 
-**LangSmith Cloud:**
+Point your MCP client at the Remote MCP endpoint for where your LangSmith runs: one URL per region on LangSmith Cloud, or a path on your own host for BYOC and self-hosted LangSmith.
+
+### LangSmith Cloud
 
 <table>
   <thead>
@@ -61,18 +61,21 @@ The Remote MCP is available on all LangSmith Cloud regions, on [BYOC](byoc.md) d
         `https://aws.api.smith.langchain.com/mcp`
       </td>
     </tr>
+
+    <tr><td>Azure US</td>
+    <td>`https://azure.api.smith.langchain.com/mcp`</td></tr>
   </tbody>
 </table>
 
 The server discovers the rest of its OAuth metadata via [RFC 8414](https://datatracker.ietf.org/doc/html/rfc8414) at `/.well-known/oauth-authorization-server` on the same host, so a compliant MCP client only needs the URL above.
 
-**Self-hosted LangSmith:**
-
-`https://<your-langsmith-host>/api/mcp`, where `<your-langsmith-host>` is the hostname of your LangSmith instance.
-
-**BYOC:**
+### BYOC
 
 `https://<data_plane_url>/api/mcp`, where `<data_plane_url>` is the URL of your [BYOC](byoc.md) data plane.
+
+### Self-hosted
+
+`https://<your-langsmith-host>/api/mcp`, where `<your-langsmith-host>` is the hostname of your LangSmith instance. Requires LangSmith v0.16 or later and a signing JWKS. To turn it on, see [Enabling Remote MCP](#enabling-remote-mcp). Self-hosted deployments on earlier versions should continue to use the [standalone LangSmith MCP Server](langsmith-mcp-server.md).
 
 ## Authentication
 

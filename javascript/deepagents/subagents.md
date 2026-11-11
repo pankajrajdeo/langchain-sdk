@@ -2006,6 +2006,24 @@ Without `response_format`, the parent receives the subagent's last message text 
 
 For full details on schema types and strategies (tool calling vs. provider-native), see [Structured output](../langchain/structured-output.md).
 
+## Model refusals
+
+When a subagent's model refuses, the parent agent receives a short task result with the refusal, instead of an empty result or a failed run. The parent can then rephrase the task or continue without it:
+
+```txt
+The subagent stopped because a model refused the request. Retrying the same request is unlikely to succeed; rephrase it or continue without it.
+```
+
+For Anthropic models, the result also includes the refusal category, such as `Category: cyber.`
+
+This covers a subagent whose last message is a [`refusal` content block](../langchain/messages.md#content-block-reference), a subagent that throws [`ModelRefusalError`](https://reference.langchain.com/javascript/langchain-core/errors/ModelRefusalError) (for example, one that uses [`modelRefusalMiddleware`](../langchain/middleware/built-in.md#model-refusal)), and a structured output subagent whose refusal fails to parse. Async subagents report a refusal in their final message the same way. When the subagent throws, the parent does not receive any state the subagent changed before refusing.
+
+The main agent throws [`ModelRefusalError`](https://reference.langchain.com/javascript/langchain-core/errors/ModelRefusalError) when its own model refuses, because [`modelRefusalMiddleware`](https://reference.langchain.com/javascript/langchain/index/modelRefusalMiddleware) is in the [Deep Agents stack](customization.md#full-stack). A [`modelFallbackMiddleware`](https://reference.langchain.com/javascript/langchain/index/modelFallbackMiddleware) you pass catches the refusal first and retries the request on the next model. See [Handle a refusal](../langchain/middleware/built-in.md#handle-a-refusal) for ways to respond.
+
+> [!NOTE]
+>
+> Subagent refusal results require `deepagents>=1.16.4`.
+
 ## The general-purpose subagent
 
 In addition to any user-defined subagents, every deep agent has access to a `general-purpose` subagent at all times. This subagent:

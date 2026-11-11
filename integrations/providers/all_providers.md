@@ -424,6 +424,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Headless browser automation platform.
 
+> [card] [CAEL provenance tool](https://github.com/Vovala14/CAEL/tree/codex/agent-provenance/examples/agent_provenance)
+>
+> Local logical-premise tool with source quotes, replayable proofs and explicit unknown/conflicting results; separately licensed CAEL engine.
+
 > [card] [CAMB AI](https://docs.camb.ai)
 >
 > Multilingual audio and localization services supporting 140+ languages.
@@ -1240,6 +1244,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Alibaba Cloud's multi-model database service.
 
+> [card] [LinkDigestTool](https://linkdigest.dev/docs#frameworks)
+>
+> Tool that reads Douyin, Xiaohongshu, Bilibili, TikTok, YouTube and X posts as text: timed transcript, on-screen text and image descriptions.
+
 > [card] [LinkUp](https://github.com/LinkupPlatform/langchain-linkup)
 >
 > Real-time job market data and search.
@@ -1644,6 +1652,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Licensed, rights-cleared content for RAG and agents with verifiable license keys.
 
+> [card] [OutcrawlSearchTool](https://github.com/outcrawlai/langchain-outcrawl#readme)
+>
+> Web search and page scrape tools, plus a document loader, for the Outcrawl API.
+
 > [card] [oxidize-pdf](https://github.com/bzsanti/oxidize-pdf-integrations/tree/main/langchain)
 >
 > Rust-powered PDF loader with element-disjoint RAG chunking.
@@ -1987,6 +1999,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [Scrapeless](https://github.com/scrapeless-ai/langchain-scrapeless)
 >
 > Web scraping API and proxy service.
+
+> [card] [ScrapeUnblockerToolkit](https://docs.scrapeunblocker.com/sdks/langchain)
+>
+> ScrapeUnblockerToolkit uses a web data API to load pages in a real browser and return Markdown or structured JSON.
 
 > [card] [ScrapingBee](https://www.scrapingbee.com/documentation/langchain/)
 >

@@ -47,7 +47,7 @@ Use one of the following options to enable teams:
   DEFAULT_ORG_FEATURE_CAN_USE_TEAMS: "true"
 ```
 
-To manage teams in the UI, also [enable ABAC](abac.md#enable-abac-for-self-hosted-deployments).
+To manage teams in the UI, also [enable ABAC](abac.md#enable-abac-on-a-self-hosted-deployment).
 
 ## Create a team
 

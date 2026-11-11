@@ -7,11 +7,11 @@ tags: [index, reference, python, langchain, agents, middleware, tool_selection]
 
 # reference/python/langchain/agents/middleware/tool_selection
 
-6 pages here, 20 pages including subdirectories.
+6 pages here, 19 pages including subdirectories.
 
 ## Directories
 
-- [LLMToolSelectorMiddleware/](LLMToolSelectorMiddleware/_index.md) - 9 pages
+- [LLMToolSelectorMiddleware/](LLMToolSelectorMiddleware/_index.md) - 8 pages
 - [_SelectionRequest/](_SelectionRequest/_index.md) - 5 pages
 
 ## Files

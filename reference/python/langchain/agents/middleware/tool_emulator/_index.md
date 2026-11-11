@@ -7,11 +7,11 @@ tags: [index, reference, python, langchain, agents, middleware, tool_emulator]
 
 # reference/python/langchain/agents/middleware/tool_emulator
 
-3 pages here, 9 pages including subdirectories.
+3 pages here, 8 pages including subdirectories.
 
 ## Directories
 
-- [LLMToolEmulator/](LLMToolEmulator/_index.md) - 6 pages
+- [LLMToolEmulator/](LLMToolEmulator/_index.md) - 5 pages
 
 ## Files
 

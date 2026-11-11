@@ -386,6 +386,9 @@ For LangSmith API operations (traces, evaluations, datasets):
         `https://aws.api.smith.langchain.com`
       </td>
     </tr>
+
+    <tr><td>Azure US</td>
+    <td>`https://azure.api.smith.langchain.com`</td></tr>
   </tbody>
 </table>
 
@@ -442,6 +445,9 @@ For LangSmith Deployment operations (deployments, revisions):
         `https://aws.api.host.langchain.com`
       </td>
     </tr>
+
+    <tr><td>Azure US</td>
+    <td>`https://azure.api.host.langchain.com`</td></tr>
   </tbody>
 </table>
 

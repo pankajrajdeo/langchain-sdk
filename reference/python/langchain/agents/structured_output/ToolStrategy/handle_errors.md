@@ -39,4 +39,4 @@ handle_errors: bool | str | type[Exception] | tuple[type[Exception], ...] | Call
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/d1d95b79213b0212613ae1aa4fad38bea6f1dccf/libs/langchain_v1/langchain/agents/structured_output.py#L252)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c0344e0cee824c1c6489ba972cea171ff193d234/libs/langchain_v1/langchain/agents/structured_output.py#L252)

@@ -12,9 +12,9 @@ tags: [docs, langsmith, data-export-destinations]
 
 > [!NOTE]
 >
-> **For self-hosted, GCP EU, GCP APAC, and AWS US SaaS**
+> **For self-hosted, GCP EU, GCP APAC, AWS US, and Azure US SaaS**
 >
-> Update the LangSmith URL in the requests below for self-hosted installs, GCP EU (`eu.api.smith.langchain.com`), GCP APAC (`apac.api.smith.langchain.com`), or AWS US (`aws.api.smith.langchain.com`).
+> Update the LangSmith URL in the requests below for self-hosted installs, GCP EU (`eu.api.smith.langchain.com`), GCP APAC (`apac.api.smith.langchain.com`), AWS US (`aws.api.smith.langchain.com`), or Azure US (`azure.api.smith.langchain.com`).
 
 A destination is a named configuration that tells LangSmith where to write exported trace data. You [create a destination](data-export.md#1-create-a-destination) once, then reference it by ID when [creating export jobs](data-export.md#2-create-an-export-job). LangSmith currently supports S3 and any S3-compatible bucket (such as GCS or MinIO) as a destination. Exported data is written in [Parquet](https://parquet.apache.org/docs/overview/) columnar format and contains equivalent fields to the [Run data format](run-data-format.md).
 

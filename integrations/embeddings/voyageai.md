@@ -97,16 +97,13 @@ query_embd[:5]
 
 The main feature of the embeddings is that the cosine similarity between two embeddings captures the semantic relatedness of the corresponding original passages. This allows us to use the embeddings to do semantic retrieval / search.
 
-We can find a few closest embeddings in the documents embeddings based on the cosine similarity, and retrieve the corresponding document using the `KNNRetriever` class from LangChain.
-
-> [!WARNING]
->
-> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
+To find the closest document embeddings by cosine similarity and retrieve the corresponding documents, use the `InMemoryVectorStore` class from LangChain.
 
 ```python
-from langchain_community.retrievers import KNNRetriever
+from langchain_core.vectorstores import InMemoryVectorStore
 
-retriever = KNNRetriever.from_texts(documents, embeddings)
+vectorstore = InMemoryVectorStore.from_texts(documents, embedding=embeddings)
+retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
 
 # retrieve the most relevant documents
 result = retriever.invoke(query)

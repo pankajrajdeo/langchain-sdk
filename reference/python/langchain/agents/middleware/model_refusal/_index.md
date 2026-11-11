@@ -7,11 +7,11 @@ tags: [index, reference, python, langchain, agents, middleware, model_refusal]
 
 # reference/python/langchain/agents/middleware/model_refusal
 
-1 page here, 3 pages including subdirectories.
+1 page here, 4 pages including subdirectories.
 
 ## Directories
 
-- [ModelRefusalMiddleware/](ModelRefusalMiddleware/_index.md) - 2 pages
+- [ModelRefusalMiddleware/](ModelRefusalMiddleware/_index.md) - 3 pages
 
 ## Files
 

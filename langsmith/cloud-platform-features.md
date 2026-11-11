@@ -14,7 +14,7 @@ This page describes the platform features that apply only to [Cloud](cloud.md) d
 
 ## Data region
 
-Deployments can be created in two data regions: US and EU.
+Deployments can be created in any [LangSmith Cloud region](cloud.md#regions).
 
 The data region for a deployment is implied by the data region of the LangSmith organization where the deployment is created. Deployments and the underlying database for the deployments cannot be migrated between data regions.
 

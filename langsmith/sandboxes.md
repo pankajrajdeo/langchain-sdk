@@ -16,21 +16,11 @@ From the [LangSmith homepage](https://smith.langchain.com?utm_source=docs\&utm_m
 
 ![Sandboxes overview page](https://mintcdn.com/langchain-5e9cc07a/5nd3ca6haxRbnJZj/images/langsmith/sandboxes/sb-overview.png?fit=max\&auto=format\&n=5nd3ca6haxRbnJZj\&q=85\&s=6c2848ea69c0a99cbdd0930ceb91daa5)
 
-## Environment availability
+## Availability
 
-| Environment | Status |
-| - | - |
-| GCP US (`smith.langchain.com`) | Generally available |
-| GCP EU (`eu.smith.langchain.com`) | Generally available |
-| GCP APAC (`apac.smith.langchain.com`) | Generally available |
-| AWS US (`aws.smith.langchain.com`) | Generally available |
-| [BYOC](byoc.md) (your data plane URL) | Generally available |
+Sandboxes are generally available in all [LangSmith Cloud regions](cloud.md#regional-storage), on [BYOC](byoc.md), and on [self-hosted](enable-self-hosted-sandboxes.md) deployments. On BYOC, use an API key that belongs to a BYOC workspace.
 
-> [!WARNING]
->
-> On BYOC, use an API key that belongs to a BYOC workspace.
-
-For self-hosted LangSmith deployments, see [Enable Sandboxes on self-hosted deployments](enable-self-hosted-sandboxes.md). For the infrastructure model, scaling, and upgrades, see [Self-hosted Sandbox architecture](self-host-sandbox-architecture.md).
+For the self-hosted infrastructure model, scaling, and upgrades, see [Self-hosted Sandbox architecture](self-host-sandbox-architecture.md).
 
 ## Network access
 

@@ -97,6 +97,35 @@ Configure the system prompt, skills, memory, sandbox, identity, channels, and sc
 | `permissions=` | Controls path-level access for filesystem tools. Pass filesystem permission rules to control which paths the agent's built-in filesystem tools can read or write. Cleared when the project declares a [sandbox](managed-deep-agents-sandboxes.md), because a permission rule disables the sandbox `execute` tool. See [Permissions](../../deepagents/permissions.md). |
 | `interrupt_on=` | Pauses before selected tool calls for human approval. Set `interrupt_on` to pause before selected tool calls, so a person can approve, edit, or reject the call before it runs. See [Human-in-the-loop](managed-deep-agents-tools.md#human-in-the-loop). |
 | `response_format=` | Set when the agent must return data that matches a schema instead of an unconstrained text response. See [Structured output](../../langchain/structured-output.md). |
+| `routes=` | Mounts Deep Agents backends at path prefixes. See [Mount your own backends](#mount-your-own-backends). |
+
+## Mount your own backends
+
+`routes` mounts Deep Agents [backends](../../deepagents/backends.md) at path prefixes, the same way [`CompositeBackend`](../../deepagents/backends.md#compositebackend-router) routes do. A path under a prefix goes to that backend with the prefix removed. Every other path stays on the managed backend.
+
+> [!NOTE]
+>
+> `routes` requires `managed-deepagents` 0.10.3 or later.
+
+**agent.py**
+
+```python
+from deepagents.backends import StoreBackend
+from managed_deepagents import define_deep_agent
+
+agent = define_deep_agent(
+    name="research-assistant",
+    routes={
+        "/documents/": StoreBackend(namespace=lambda _rt: ("documents",)),
+    },
+)
+```
+
+With this route, the agent's file tools read and write `/documents/a.md` as `/a.md` in the store backend.
+
+* Each prefix must be an absolute directory that starts and ends with `/`, such as `"/documents/"`.
+* A prefix cannot overlap the paths Managed Deep Agents mounts itself: `/instructions.md`, `/skills/`, and `/memories/`.
+* Routes apply to the file tools only. Shell commands in a [sandbox](managed-deep-agents-sandboxes.md) do not see them.
 
 ## Select configuration per run
 
@@ -207,6 +236,37 @@ Managed Deep Agents calls the factory at the start of each run, and again when a
 * **Model dependencies**: Install the integration package for every model the factory can return. The build does not detect them.
 
 To change behavior between model calls within a run, use [custom middleware](managed-deep-agents-middleware.md).
+
+### Cache compiled graphs
+
+`cached_agent` keeps the graph that a factory compiles and reuses it on later runs with the same parameters. Without it, a factory compiles a new graph on every run, and each run waits for that compile.
+
+`keyed_by` returns the parameters the graph depends on, as a JSON-serializable value. Managed Deep Agents compiles one graph for each distinct value. The factory gets only these parameters, so read per-run data, such as credentials, in tools or middleware.
+
+> [!NOTE]
+>
+> `cached_agent` requires `managed-deepagents>=0.10.2`.
+
+**agent.py**
+
+```python
+from managed_deepagents import ManagedServerRuntime, cached_agent, define_deep_agent
+
+PROMPTS = {"support": "Answer support questions.", "sales": "Answer sales questions."}
+
+def agent_params(runtime: ManagedServerRuntime) -> dict:
+    execution = runtime.execution_runtime
+    context = (execution.context if execution is not None else None) or {}
+    return {"mode": context.get("mode", "support")}
+
+@cached_agent(keyed_by=agent_params)
+def agent(params: dict):
+    return define_deep_agent(
+        name="assistant",
+        model="openai:gpt-5.5",
+        instructions=PROMPTS[params["mode"]],
+    )
+```
 
 ## Use LLM Gateway
 

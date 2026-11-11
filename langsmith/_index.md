@@ -19,7 +19,7 @@ tags: [index, langsmith]
 
 ## Files
 
-- [Attribute-based access control](abac.md) - This reference explains LangSmith's Attribute-Based Access Control (ABAC) system, which enables fine-grained access control based on resource attributes, complementing RBAC. For automated user...
+- [Attribute-based access control](abac.md) - Grant or restrict access to LangSmith resources based on resource tags and root run metadata, using access policies that build on role-based access control.
 - [Access the current run (span) within a traced function](access-current-span.md) - In some cases you will want to access the current run (span) within a traced function. This can be useful for extracting UUIDs, tags, or other information from the current run.
 - [Connect an authentication provider](add-auth-server.md) - In the last tutorial, you added resource authorization to give users private conversations. However, you are still using hard-coded tokens for authentication, which is not secure. Now you'll replace...
 - [Human-in-the-loop using server API](add-human-in-the-loop.md) - To review, edit, and approve tool calls in an agent or workflow, use LangGraph's human-in-the-loop features.
@@ -88,7 +88,7 @@ tags: [index, langsmith]
 - [Implement a CI/CD pipeline using LangSmith Deployment and Evaluation](cicd-pipeline-example.md) - This guide demonstrates how to implement a comprehensive CI/CD pipeline for AI agent applications deployed in LangSmith Deployment. In this example, you'll use the LangGraph open source framework for...
 - [LangGraph CLI](cli.md) - LangGraph CLI is a command-line tool for building and running the Agent Server locally. The resulting server exposes all API endpoints for runs, threads, assistants, etc., and includes supporting...
 - [Cloud platform features](cloud-platform-features.md) - Cloud-only platform features for LangSmith Deployment, including data regions, static IP addresses, payload limits, and deployment types.
-- [Cloud (SaaS)](cloud.md) - The Cloud hosting option is a fully managed model where LangChain hosts and operates all LangSmith infrastructure and services:
+- [Cloud (SaaS)](cloud.md) - Learn how LangChain hosts and operates LangSmith Cloud, including its regions, data storage locations, architecture, IP allowlists, private connectivity, and API rate limits.
 - [How to define a code evaluator](code-evaluator-sdk.md) - Code evaluators are functions that take a dataset example and the resulting application output, and return one or more metrics. These functions can be passed directly into the evaluate() or...
 - [How to define a code evaluator](code-evaluator-ui.md) - Code evaluators in the LangSmith UI allow you to write custom evaluation logic using Python or TypeScript code directly in the interface. Unlike LLM-as-a-judge evaluators that use a model to evaluate...
 - [Coding agent metadata contract](coding-agent-metadata-contract.md) - The metadata schema that standardizes what trace metadata coding agents must emit when sending runs to LangSmith.
@@ -150,7 +150,7 @@ tags: [index, langsmith]
 - [Self-host standalone servers](deploy-standalone-server.md) - Deploy standalone Agent Servers using Docker, Docker Compose, or Kubernetes without the LangSmith control plane.
 - [Deploy with SvelteKit](deploy-sveltekit.md) - Deploy a LangChain deep agent in a SvelteKit project on Cloudflare Workers with streaming chat and thread history.
 - [Deploy to an agent environment](deploy-to-agent-environment.md) - How the LangGraph and Managed Deep Agents CLIs bind a deployment to an agent and an environment, which values each flag takes, and which CLI versions accept them.
-- [Deploy to Cloud](deploy-to-cloud-overview.md) - Deploy LangSmith agents to LangChain-managed Cloud infrastructure on AWS and GCP.
+- [Deploy to Cloud](deploy-to-cloud-overview.md) - Deploy LangSmith agents to LangChain-managed Cloud infrastructure on AWS, Azure, and GCP.
 - [Create a deployment](deploy-to-cloud.md) - Create a LangSmith Cloud deployment from the LangSmith UI or LangGraph CLI.
 - [Deploy to self-hosted](deploy-to-self-hosted-overview.md) - Run the LangSmith Deployment platform on your own infrastructure with full control over data, networking, and resources.
 - [Deploy with LangSmith and Vite](deploy-vite-langsmith.md) - Deploy a LangChain deep agent to LangSmith Deployment and stream from a Vite React chat UI on Vercel, Netlify, or Cloudflare Pages.
@@ -541,7 +541,7 @@ tags: [index, langsmith]
 - [Use threads](use-threads.md) - This guide shows you how to create, view, and inspect threads. Threads work with assistants to enable stateful execution of your deployed graphs.
 - [Use tools in a prompt](use-tools.md) - Tools allow language models to interact with external systems and perform actions beyond just generating text. In the Playground, you can use two types of tools:
 - [Use webhooks](use-webhooks.md) - This page covers LangGraph API webhooks, a way to receive a POST callback when a specific run completes. If you are looking for LangSmith automation webhooks (triggered when automation rules match...
-- [User management](user-management.md) - This page covers user management features in LangSmith, including access control, authentication, and automated user provisioning:
+- [User management](user-management.md) - Configure role-based access control, SAML SSO, and SCIM user provisioning for your LangSmith organization.
 - [View traces](view-traces.md) - Inspect agent threads in LangSmith using the Trajectory view or Details view.
 - [View usage](view-usage.md) - What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted.
 - [How to run evaluations with Vitest/Jest](vitest-jest.md) - LangSmith provides integrations with Vitest and Jest that allow JavaScript and TypeScript developers to define their datasets and evaluate using familiar syntax.

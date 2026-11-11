@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain/agents/middleware/summarization/SummarizationMiddleware"
-description: "Index of 10 pages and 0 subdirectories under reference/python/langchain/agents/middleware/summarization/SummarizationMiddleware."
+description: "Index of 9 pages and 0 subdirectories under reference/python/langchain/agents/middleware/summarization/SummarizationMiddleware."
 category: "index"
 tags: [index, reference, python, langchain, agents, middleware, summarization, summarizationmiddleware]
 ---
 
 # reference/python/langchain/agents/middleware/summarization/SummarizationMiddleware
 
-10 pages here.
+9 pages here.
 
 ## Files
 
@@ -18,6 +18,5 @@ tags: [index, reference, python, langchain, agents, middleware, summarization, s
 - [summarizer](summarizer.md) - View source on GitHub
 - [summary_prompt](summary_prompt.md) - View source on GitHub
 - [token_counter](token_counter.md) - View source on GitHub
-- [transformers](transformers.md) - Keeps the summarization model call's tokens out of run.messages.
 - [trigger](trigger.md) - View source on GitHub
 - [trim_tokens_to_summarize](trim_tokens_to_summarize.md) - View source on GitHub

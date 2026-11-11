@@ -12,7 +12,10 @@ tags: [docs, langsmith, profile-configuration]
 
 LangSmith SDK profiles let you keep [API keys](create-account-api-key.md), endpoints, and workspace IDs in a reusable JSON file instead of setting the same environment variables in every shell session.
 
-Use profiles when you switch between [LangSmith Cloud regions](cloud.md#regional-storage), self-hosted instances, or [workspaces](administration-overview.md#workspaces) often, or when you want a remote runtime to load the same SDK configuration from a mounted file.
+Use profiles when:
+
+* You switch between [LangSmith Cloud regions](cloud.md#regions), self-hosted instances, or [workspaces](administration-overview.md#workspaces) often.
+* You want a remote runtime to load the same SDK configuration from a mounted file.
 
 > [!WARNING]
 >

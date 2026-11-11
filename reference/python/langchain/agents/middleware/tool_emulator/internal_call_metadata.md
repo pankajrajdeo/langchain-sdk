@@ -28,4 +28,4 @@ A mapping to merge into a model call's `config["metadata"]`.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/d1d95b79213b0212613ae1aa4fad38bea6f1dccf/libs/langchain_v1/langchain/agents/middleware/internal_call_transformer.py#L34)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c0344e0cee824c1c6489ba972cea171ff193d234/libs/langchain_v1/langchain/agents/middleware/internal_call_transformer.py#L34)

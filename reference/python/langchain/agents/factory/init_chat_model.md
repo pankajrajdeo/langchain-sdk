@@ -171,4 +171,4 @@ underlying model at runtime once a config is passed in.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/d1d95b79213b0212613ae1aa4fad38bea6f1dccf/libs/langchain_v1/langchain/chat_models/base.py#L232)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c0344e0cee824c1c6489ba972cea171ff193d234/libs/langchain_v1/langchain/chat_models/base.py#L232)

@@ -7,11 +7,11 @@ tags: [index, reference, python, langchain, agents, middleware, summarization]
 
 # reference/python/langchain/agents/middleware/summarization
 
-13 pages here, 26 pages including subdirectories.
+13 pages here, 25 pages including subdirectories.
 
 ## Directories
 
-- [SummarizationMiddleware/](SummarizationMiddleware/_index.md) - 10 pages
+- [SummarizationMiddleware/](SummarizationMiddleware/_index.md) - 9 pages
 - [TriggerClause/](TriggerClause/_index.md) - 3 pages
 
 ## Files

@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 555 pages and 0 subdirectories under blog."
+description: "Index of 556 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-555 pages here.
+556 pages here.
 
 ## Files
 
@@ -268,6 +268,7 @@ tags: [index, blog]
 - [How We Deployed our Multi-Agent Flow to LangGraph Cloud](how-we-deployed-our-multi-agent-flow-to-langgraph-cloud-2.md) - Read this guest blog post on how to create a LangGraph multi-agent flow via React &amp; LangGraph Cloud.
 - [How We Made Coding Agent Spend Predictable](how-we-made-coding-agent-spend-predictable.md) - Learn how LangChain uses LangSmith LLM Gateway to track coding agent spend in real time, set budgets by team and user, and prevent runaway AI costs.
 - [How We Optimized Browser Use for Deep Agents](how-we-optimized-browser-use-for-deep-agents.md) - We compared seven browser toolsets for Deep Agents, picked Stagehand from Browserbase, and tuned it with LangSmith traces and evals. Here&#39;s what we learned.
+- [How Workday Built an Enterprise-Scale AI Agent Platform with LangGraph and LangSmith](how-workday-built-an-enterprise-scale-ai-agent-platform-with-langgraph-and-langsmith.md) - See how Workday used LangGraph and LangSmith to build an internal AI agent platform that cut prototype time from months to less than a day and compliance needs.
 - [Human-in-the-loop with OpenGPTs and LangGraph](human-in-the-loop-with-opengpts-and-langgraph.md) - Build stateful LLM applications with human oversight using LangGraph. Add Interrupt and Authorize controls to pause, review, and guide AI workflows.
 - [Why human insight is a strategic advantage for building better agents](human-insight-strategic-advantage-agents.md) - Explore 3 principles for effective human-in-the-loop workflows and how human-review is a strategic imperative for production-ready agents.
 - [Human judgment in the agent improvement loop](human-judgment-in-the-agent-improvement-loop.md) - AI agents work best when they reflect the knowledge and judgment your team has built over time. Some of that is institutional knowledge that’s already documented and easy for an agent to use as-is...
