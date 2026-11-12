@@ -30,7 +30,7 @@ agent = create_deep_agent(
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[search, fetch_url, run_query],
 )
 ```
@@ -150,7 +150,7 @@ def internet_search(
     )
 
 agent = create_deep_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[internet_search],
 )
 ```
@@ -368,7 +368,7 @@ async def main():
     async with MCPAdapter(config) as adapter:
         tools = await adapter.list_tools()
         agent = create_deep_agent(
-            model="openai:gpt-5.5",
+            model="openai:gpt-6.1-sol",
             tools=tools,
         )
         await agent.ainvoke(

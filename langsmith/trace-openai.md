@@ -45,7 +45,7 @@ def chat_pipeline(question: str):
       { "role": "user", "content": f"Question: {question}\nContext: {context}"}
   ]
   chat_completion = client.chat.completions.create(
-      model="gpt-5.5", messages=messages
+      model="gpt-6.1-sol", messages=messages
   )
   return chat_completion.choices[0].message.content
 
@@ -76,7 +76,7 @@ const chatPipeline = traceable(async (question: string) => {
       { role: "user", content: `Question: ${question} Context: ${context}` },
   ];
   const chatCompletion = await client.chat.completions.create({
-      model: "gpt-5.5",
+      model: "gpt-6.1-sol",
       messages: messages,
   });
   return chatCompletion.choices[0].message.content;

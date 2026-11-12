@@ -1,16 +1,17 @@
 ---
 title: "integrations/retrievers"
-description: "Index of 17 pages and 0 subdirectories under integrations/retrievers."
+description: "Index of 18 pages and 0 subdirectories under integrations/retrievers."
 category: "index"
 tags: [index, integrations, retrievers]
 ---
 
 # integrations/retrievers
 
-17 pages here.
+18 pages here.
 
 ## Files
 
+- [Azure AI Search integration](azure_ai_search.md) - Integrate with the Azure AI Search retriever using LangChain Python.
 - [Bedrock (knowledge bases) integration](bedrock.md) - Integrate with the Bedrock (knowledge bases) retriever using LangChain Python.
 - [BoxRetriever integration](box.md) - Integrate with the BoxRetriever retriever using LangChain Python.
 - [Cohere reranker integration](cohere-reranker.md) - Integrate with the Cohere reranker retriever using LangChain Python.

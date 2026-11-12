@@ -20,7 +20,7 @@ tags: [index, langsmith, python]
 - [Managed Deep Agents CLI reference](managed-deep-agents-cli.md) - Reference for mda commands, project files, and deploy behavior.
 - [Manage connections](managed-deep-agents-connections.md) - Store API keys and OAuth grants so Managed Deep Agents can authenticate with external services at runtime.
 - [Manage Context Hub for Managed Deep Agents](managed-deep-agents-context-hub.md) - Understand how Managed Deep Agents stores instructions, skills, and durable memory in LangSmith Context Hub.
-- [Build a custom frontend for a Managed Deep Agent](managed-deep-agents-custom-frontend.md) - Call a Managed Deep Agents deployment from your own browser or server application instead of reaching the agent through a channel or LangSmith Studio.
+- [Build a custom frontend for a Managed Deep Agent](managed-deep-agents-custom-frontend.md) - Call a Managed Deep Agents deployment from your own web or Python application with the LangChain frontend SDKs and the LangGraph SDK.
 - [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md) - Test and deploy a Managed Deep Agent with the mda CLI.
 - [Deploy the open-source design agent](managed-deep-agents-design-agent.md) - Deploy Content Studio, an open-source design agent, to Slack as a Managed Deep Agents project.
 - [Evaluate Managed Deep Agents](managed-deep-agents-evals.md) - Develop Harbor evals for Managed Deep Agents with a coding agent and the eval-engineering skill.

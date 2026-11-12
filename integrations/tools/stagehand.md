@@ -74,7 +74,7 @@ async def main():
     try:
         stagehand = await Stagehand.create(browser=browser)
         agent = create_deep_agent(
-            model="openai:gpt-5.5-2026-04-23",
+            model="openai:gpt-6.1-sol",
             middleware=[StagehandMiddleware(stagehand=stagehand)],
         )
         result = await agent.ainvoke({
@@ -100,7 +100,7 @@ Keep the same browser setup and replace `create_deep_agent` with [`create_agent`
 from langchain.agents import create_agent
 
 agent = create_agent(
-    model="openai:gpt-5.5-2026-04-23",
+    model="openai:gpt-6.1-sol",
     middleware=[StagehandMiddleware(stagehand=stagehand)],
 )
 ```
@@ -142,7 +142,7 @@ The `screenshot` tool returns images directly to the model. Screenshots saved by
 from langgraph.checkpoint.memory import InMemorySaver
 
 agent = create_deep_agent(
-    model="openai:gpt-5.5-2026-04-23",
+    model="openai:gpt-6.1-sol",
     middleware=[StagehandMiddleware(stagehand=stagehand)],
     interrupt_on={"run": True},
     checkpointer=InMemorySaver(),

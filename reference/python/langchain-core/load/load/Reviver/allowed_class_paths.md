@@ -20,4 +20,4 @@ allowed_class_paths: set[tuple[str, ...]] | None = _get_default_allowed_class_pa
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/1a41b51b0295d7cc6df45cdede199b4a34649b1d/libs/core/langchain_core/load/load.py#L445)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a4b4a7b9a6d8b5eb2352e26e110f1b7beffc6f62/libs/core/langchain_core/load/load.py#L445)

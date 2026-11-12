@@ -80,7 +80,7 @@ The sections below cover each strategy with code examples.
 >   model: "google:gemini-3.6-flash",
 >   tools: [searchTool],
 >   middleware: [
->     modelFallbackMiddleware("gpt-5.5"),
+>     modelFallbackMiddleware("gpt-6.1-sol"),
 >   ],
 > });
 ```
@@ -174,7 +174,7 @@ const agent = createAgent({
   model: "google:gemini-3.6-flash",
   middleware: [
     // If the primary model is fully down, fall back to an alternative
-    modelFallbackMiddleware("gpt-5.5"),
+    modelFallbackMiddleware("gpt-6.1-sol"),
   ],
 });
 ```

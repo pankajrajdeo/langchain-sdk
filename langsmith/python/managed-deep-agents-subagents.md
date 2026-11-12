@@ -42,7 +42,7 @@ Add subagent definitions to `subagents` in the [agent definition](managed-deep-a
 >
 > agent = define_deep_agent(
 >     name="research-assistant",
->     model="openai:gpt-5.5",
+>     model="openai:gpt-6.1-sol",
 >     subagents=[
 >         {
 >             "name": "reviewer",
@@ -62,7 +62,7 @@ Add subagent definitions to `subagents` in the [agent definition](managed-deep-a
 >
 > agent = define_deep_agent(
 >     name="research-assistant",
->     model="openai:gpt-5.5",
+>     model="openai:gpt-6.1-sol",
 >     subagents=[
 >         {
 >             "name": "researcher",

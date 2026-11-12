@@ -123,7 +123,7 @@ class Context:
     user_id: str
 
 agent = create_deep_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     context_schema=Context,
 )
 

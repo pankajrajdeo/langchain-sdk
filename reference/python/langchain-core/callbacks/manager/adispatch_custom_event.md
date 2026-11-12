@@ -62,48 +62,41 @@ await foo_.ainvoke({"a": "1"}, {"callbacks": [CustomCallbackManager()]})
 Example: Use with astream events
 
 ```python
-    from langchain_core.callbacks import (
-        AsyncCallbackHandler,
-        adispatch_custom_event
-    )
-    from langchain_core.runnable import RunnableLambda
+from langchain_core.callbacks import (
+    AsyncCallbackHandler,
+    adispatch_custom_event
+)
+from langchain_core.runnable import RunnableLambda
 
-    class CustomCallbackManager(AsyncCallbackHandler):
-        async def on_custom_event(
-            self,
-            name: str,
-            data: Any,
-            *,
-            run_id: UUID,
-            tags: list[str] | None = None,
-            metadata: dict[str, Any] | None = None,
-            **kwargs: Any,
-        ) -> None:
-            print(f"Received custom event: {name} with data: {data}")
+class CustomCallbackManager(AsyncCallbackHandler):
+    async def on_custom_event(
+        self,
+        name: str,
+        data: Any,
+        *,
+        run_id: UUID,
+        tags: list[str] | None = None,
+        metadata: dict[str, Any] | None = None,
+        **kwargs: Any,
+    ) -> None:
+        print(f"Received custom event: {name} with data: {data}")
 
-    callback = CustomCallbackManager()
+callback = CustomCallbackManager()
 
-    async def foo(inputs):
-        await adispatch_custom_event("event_type_1", {"bar": "buzz})
-        await adispatch_custom_event("event_type_2", 5)
-        return inputs
+async def foo(inputs):
+    await adispatch_custom_event("event_type_1", {"bar": "buzz})
+    await adispatch_custom_event("event_type_2", 5)
+    return inputs
 
-    foo_ = RunnableLambda(foo)
+foo_ = RunnableLambda(foo)
 
-    async for event in foo_.ainvoke_stream(
-        {"a": "1"},
-        version="v2",
-        config={"callbacks": [CustomCallbackManager()]}
-    ):
-        print(event)
+async for event in foo_.ainvoke_stream(
+    {"a": "1"},
+    version="v2",
+    config={"callbacks": [CustomCallbackManager()]}
+):
+    print(event)
 ```
-
-!!! warning
-
-    If using python 3.10 and async, you MUST specify the `config` parameter or the
-    function will raise an error. This is due to a limitation in asyncio for python
-    3.10 that prevents LangChain from automatically propagating the config object on
-    the user's behalf.
 
 ## Parameters
 
@@ -115,4 +108,4 @@ Example: Use with astream events
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/1a41b51b0295d7cc6df45cdede199b4a34649b1d/libs/core/langchain_core/callbacks/manager.py#L2615)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a4b4a7b9a6d8b5eb2352e26e110f1b7beffc6f62/libs/core/langchain_core/callbacks/manager.py#L2591)

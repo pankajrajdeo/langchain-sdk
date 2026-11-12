@@ -167,7 +167,7 @@ Select a chat model from LangChain's suite of integrations:
 >
 > process.env.OPENAI_API_KEY = "your-api-key";
 >
-> const model = await initChatModel("gpt-5.5");
+> const model = await initChatModel("gpt-6.1-sol");
 ```
 >
 **Model Class**
@@ -176,7 +176,7 @@ Select a chat model from LangChain's suite of integrations:
 > import { ChatOpenAI } from "@langchain/openai";
 >
 > const model = new ChatOpenAI({
->   model: "gpt-5.5",
+>   model: "gpt-6.1-sol",
 >   apiKey: "your-api-key"
 > });
 ```
@@ -267,7 +267,7 @@ Select a chat model from LangChain's suite of integrations:
 > process.env.AZURE_OPENAI_ENDPOINT = "your-endpoint";
 > process.env.OPENAI_API_VERSION = "your-api-version";
 >
-> const model = await initChatModel("azure_openai:gpt-5.5");
+> const model = await initChatModel("azure_openai:gpt-6.1-sol");
 ```
 >
 **Model Class**
@@ -276,7 +276,7 @@ Select a chat model from LangChain's suite of integrations:
 > import { AzureChatOpenAI } from "@langchain/openai";
 >
 > const model = new AzureChatOpenAI({
->   model: "gpt-5.5",
+>   model: "gpt-6.1-sol",
 >   azureOpenAIApiKey: "your-api-key",
 >   azureOpenAIApiEndpoint: "your-endpoint",
 >   azureOpenAIApiVersion: "your-api-version"
@@ -368,7 +368,7 @@ Select a chat model from LangChain's suite of integrations:
 > // Follow the steps here to configure your credentials:
 > // https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
 >
-> const model = await initChatModel("bedrock:gpt-5.5");
+> const model = await initChatModel("bedrock:gpt-6.1-sol");
 ```
 >
 **Model Class**
@@ -380,7 +380,7 @@ Select a chat model from LangChain's suite of integrations:
 > // https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
 >
 > const model = new ChatBedrockConverse({
->   model: "gpt-5.5",
+>   model: "gpt-6.1-sol",
 >   region: "us-east-2"
 > });
 ```

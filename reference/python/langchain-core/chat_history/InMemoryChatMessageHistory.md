@@ -49,4 +49,4 @@ Deprecated since version 1.6.4. Will be removed in version 2.0.0. See the short-
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/1a41b51b0295d7cc6df45cdede199b4a34649b1d/libs/core/langchain_core/chat_history.py#L215)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/a4b4a7b9a6d8b5eb2352e26e110f1b7beffc6f62/libs/core/langchain_core/chat_history.py#L215)

@@ -101,7 +101,7 @@ def get_weather(city: str) -> str:
     return f"It's always sunny in {city}!"
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[get_weather],
     checkpointer=InMemorySaver()
 )
@@ -603,7 +603,7 @@ def get_weather(city: str) -> str:
 
     return f"It's always sunny in {city}!"
 
-agent = create_agent("openai:gpt-5.5", tools=[get_weather])
+agent = create_agent("openai:gpt-6.1-sol", tools=[get_weather])
 
 def _render_message_chunk(token: AIMessageChunk) -> None:
     if token.text:
@@ -670,7 +670,7 @@ class ResponseSafety(BaseModel):
     """Evaluate a response as safe or unsafe."""
     evaluation: Literal["safe", "unsafe"]
 
-safety_model = init_chat_model("openai:gpt-5.5")
+safety_model = init_chat_model("openai:gpt-6.1-sol")
 
 @after_agent(can_jump_to=["end"])
 def safety_guardrail(state: AgentState, runtime: Runtime) -> dict[str, Any] | None:
@@ -721,7 +721,7 @@ def get_weather(city: str) -> str:
     return f"It's always sunny in {city}!"
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[get_weather],
     middleware=[safety_guardrail],  # [!code highlight]
 )
@@ -825,7 +825,7 @@ def get_weather(city: str) -> str:
 checkpointer = InMemorySaver()
 
 agent = create_agent(
-    "openai:gpt-5.5",
+    "openai:gpt-6.1-sol",
     tools=[get_weather],
     middleware=[  # [!code highlight]
         HumanInTheLoopMiddleware(interrupt_on={"get_weather": True}),  # [!code highlight]
@@ -1008,7 +1008,7 @@ def get_weather(city: str) -> str:
 
     return f"It's always sunny in {city}!"
 
-weather_model = init_chat_model("openai:gpt-5.5")
+weather_model = init_chat_model("openai:gpt-6.1-sol")
 weather_agent = create_agent(
     model=weather_model,
     tools=[get_weather],
@@ -1022,7 +1022,7 @@ def call_weather_agent(query: str) -> str:
     })
     return result["messages"][-1].text
 
-supervisor_model = init_chat_model("openai:gpt-5.5")
+supervisor_model = init_chat_model("openai:gpt-6.1-sol")
 agent = create_agent(
     model=supervisor_model,
     tools=[call_weather_agent],
@@ -1114,7 +1114,7 @@ Set `streaming=False` when initializing the model.
 from langchain_openai import ChatOpenAI
 
 model = ChatOpenAI(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     streaming=False  # [!code highlight]
 )
 ```

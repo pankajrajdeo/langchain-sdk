@@ -56,13 +56,15 @@ The PII middleware supports multiple strategies for handling detected PII:
 > [!NOTE]
 >
 > With `apply_to_output=True`, `PIIMiddleware` also redacts streamed wire output—text deltas, tool-call args, tool outputs, and state snapshots—via a registered stream transformer. Requires `langchain>=1.3.2`. See [Register transformers on middleware](event-streaming.md#register-transformers-on-middleware).
+>
+> The stream transformer holds back the last 128 characters of each text block, tool-call argument, and tool output until more text arrives or the block finishes, and runs the detector on the held text plus the new delta. A match that is split across deltas is detected before any part of it is sent, as long as the whole match fits in 128 characters. Keep custom detector matches to 128 characters or fewer: the start of a longer match can be sent before the rest of it arrives. For background, see [OWASP AI Exchange: sensitive output handling](https://owaspai.org/go/sensitiveoutputhandling) and [Split-Boundary Leaks in Streaming Guardrails](https://doi.org/10.5281/zenodo.22909585).
 
 ```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import PIIMiddleware
 
 agent = create_agent(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     tools=[customer_service_tool, email_tool],
     middleware=[
         # Redact emails in user input before sending to model
@@ -129,7 +131,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
 
 agent = create_agent(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     tools=[search_tool, send_email_tool, delete_database_tool],
     middleware=[
         HumanInTheLoopMiddleware(
@@ -216,7 +218,7 @@ class ContentFilterMiddleware(AgentMiddleware):
 from langchain.agents import create_agent
 
 agent = create_agent(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     tools=[search_tool, calculator_tool],
     middleware=[
         ContentFilterMiddleware(
@@ -270,7 +272,7 @@ def content_filter(state: AgentState, runtime: Runtime) -> dict[str, Any] | None
 from langchain.agents import create_agent
 
 agent = create_agent(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     tools=[search_tool, calculator_tool],
     middleware=[content_filter],
 )
@@ -326,7 +328,7 @@ class SafetyGuardrailMiddleware(AgentMiddleware):
 from langchain.agents import create_agent
 
 agent = create_agent(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     tools=[search_tool, calculator_tool],
     middleware=[SafetyGuardrailMiddleware()],
 )
@@ -373,7 +375,7 @@ def safety_guardrail(state: AgentState, runtime: Runtime) -> dict[str, Any] | No
 from langchain.agents import create_agent
 
 agent = create_agent(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     tools=[search_tool, calculator_tool],
     middleware=[safety_guardrail],
 )
@@ -392,7 +394,7 @@ from langchain.agents import create_agent
 from langchain.agents.middleware import PIIMiddleware, HumanInTheLoopMiddleware
 
 agent = create_agent(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     tools=[search_tool, send_email_tool],
     middleware=[
         # Layer 1: Deterministic input filter (before agent)

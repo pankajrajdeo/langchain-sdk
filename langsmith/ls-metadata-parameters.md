@@ -116,7 +116,7 @@ For more comprehensive tracking, you can include additional configuration parame
     run_type="llm",
     metadata={
         "ls_provider": "openai",
-        "ls_model_name": "gpt-5.5",
+        "ls_model_name": "gpt-6.1-sol",
         "ls_temperature": 0.7,
         "ls_max_tokens": 4096,
         "ls_stop": ["END"],
@@ -141,7 +141,7 @@ const myConfiguredLlm = traceable(
     run_type: "llm",
     metadata: {
       ls_provider: "openai",
-      ls_model_name: "gpt-5.5",
+      ls_model_name: "gpt-6.1-sol",
       ls_temperature: 0.7,
       ls_max_tokens: 4096,
       ls_stop: ["END"],
@@ -168,7 +168,7 @@ import java.util.function.Function;
 
 Map<String, Object> metadata = new HashMap<>();
 metadata.put("ls_provider", "openai");
-metadata.put("ls_model_name", "gpt-5.5");
+metadata.put("ls_model_name", "gpt-6.1-sol");
 metadata.put("ls_temperature", 0.7);
 metadata.put("ls_max_tokens", 4096);
 metadata.put("ls_stop", Collections.singletonList("END"));
@@ -198,7 +198,7 @@ val myConfiguredLlm =
             .metadata(
                 mapOf(
                     "ls_provider" to "openai",
-                    "ls_model_name" to "gpt-5.5",
+                    "ls_model_name" to "gpt-6.1-sol",
                     "ls_temperature" to 0.7,
                     "ls_max_tokens" to 4096,
                     "ls_stop" to listOf("END"),
@@ -282,7 +282,7 @@ When you want [automatic cost tracking](cost-tracking.md) for custom model wrapp
     run_type="llm",
     metadata={
         "ls_provider": "openai",
-        "ls_model_name": "gpt-5.5"
+        "ls_model_name": "gpt-6.1-sol"
     }
 )
 def my_llm_call(prompt: str):
@@ -306,7 +306,7 @@ Identifies the specific model. Combined with `ls_provider`, matches against pric
 
 **Common values:**
 
-* OpenAI: `"gpt-5.5"`, `"gpt-5.4-mini"`
+* OpenAI: `"gpt-6.1-sol"`, `"gpt-5.4-mini"`
 * Anthropic: `"claude-sonnet-5-5"`, `"claude-opus-4-8"`
 * Custom: Any model identifier
 
@@ -350,7 +350,7 @@ When you want to track model configuration for experiments or debugging.
 ```python
 metadata={
     "ls_provider": "openai",
-    "ls_model_name": "gpt-5.5",
+    "ls_model_name": "gpt-6.1-sol",
     "ls_temperature": 0.7
 }
 ```
@@ -378,7 +378,7 @@ When you want to track model configuration for experiments or debugging.
 ```python
 metadata={
     "ls_provider": "openai",
-    "ls_model_name": "gpt-5.5",
+    "ls_model_name": "gpt-6.1-sol",
     "ls_max_tokens": 4096
 }
 ```
@@ -406,7 +406,7 @@ When you want to track model configuration for experiments or debugging.
 ```python
 metadata={
     "ls_provider": "openai",
-    "ls_model_name": "gpt-5.5",
+    "ls_model_name": "gpt-6.1-sol",
     "ls_stop": ["END", "STOP", "\n\n"]
 }
 ```
@@ -436,7 +436,7 @@ When you need to track additional configuration beyond the standard parameters.
 ```python
 metadata={
     "ls_provider": "openai",
-    "ls_model_name": "gpt-5.5",
+    "ls_model_name": "gpt-6.1-sol",
     "ls_invocation_params": {
         "top_p": 0.9,
         "frequency_penalty": 0.5,
@@ -730,7 +730,7 @@ async def main():
     runs = await query('and(eq(metadata_key, "ls_provider"), eq(metadata_value, "openai"))')
 
     # Filter by specific model
-    runs = await query('and(eq(metadata_key, "ls_model_name"), eq(metadata_value, "gpt-5.5"))')
+    runs = await query('and(eq(metadata_key, "ls_model_name"), eq(metadata_value, "gpt-6.1-sol"))')
 
     # Filter root runs only (top-level traces)
     runs = await query('and(eq(metadata_key, "ls_run_depth"), eq(metadata_value, 0))')
@@ -766,7 +766,7 @@ async function query(filter: string) {
 const runsByProvider = await query('and(eq(metadata_key, "ls_provider"), eq(metadata_value, "openai"))');
 
 // Filter by specific model
-const runsByModel = await query('and(eq(metadata_key, "ls_model_name"), eq(metadata_value, "gpt-5.5"))');
+const runsByModel = await query('and(eq(metadata_key, "ls_model_name"), eq(metadata_value, "gpt-6.1-sol"))');
 
 // Filter root runs only (top-level traces)
 const rootRuns = await query('and(eq(metadata_key, "ls_run_depth"), eq(metadata_value, 0))');
@@ -787,7 +787,7 @@ In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=ct
 
 ```
 metadata_key = 'ls_provider' AND metadata_value = 'openai'
-metadata_key = 'ls_model_name' AND metadata_value = 'gpt-5.5'
+metadata_key = 'ls_model_name' AND metadata_value = 'gpt-6.1-sol'
 metadata_key = 'ls_run_depth' AND metadata_value = 0
 ```
 

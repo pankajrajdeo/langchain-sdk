@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 556 pages and 0 subdirectories under blog."
+description: "Index of 557 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-556 pages here.
+557 pages here.
 
 ## Files
 
@@ -215,6 +215,7 @@ tags: [index, blog]
 - [Gradio &amp; LLM Agents](gradio-llm-agents.md) - Learn how gradio_tools empowers LLM agents by turning Gradio apps into tools. Build smarter AI agents with LangChain integration.
 - [Graph-based metadata filtering for improving vector search in RAG applications](graph-based-metadata-filtering-for-improving-vector-search-in-rag-applications.md) - Learn how to improve RAG application accuracy using graph-based metadata filtering with LangChain and Neo4j to retrieve more relevant documents.
 - [LangSmith&#39;s Latest Feature: Grouped Monitoring Charts](grouped-monitoring-charts.md) - Compare LLM performance side-by-side with LangSmith&#39;s grouped monitoring charts. Track metrics across model versions, tags, and metadata.
+- [How our GTM Agent builds consistent, high-quality sales artifacts](gtm-agent-high-quality-sales-artifacts.md) - Learn how LangChain built GTM Agent on Deep Agents to build high-quality, custom sales artifacts trained on business context.
 - [Handling PII data in LangChain](handling-pii-data-in-langchain.md) - Learn how to handle PII data in LangChain using Microsoft Presidio and OpaquePrompts to anonymize sensitive information and maintain GDPR compliance.
 - [Benchmarking Query Analysis in High Cardinality Situations](high-cardinality.md) - Several key use cases for LLMs involve returning data in a structured format. Extraction is one such use case - we recently highlighted this with updated documentation and a dedicated repo. Query...
 - [How agents can use filesystems for context engineering](how-agents-can-use-filesystems-for-context-engineering.md) - Learn how agents use filesystems for context engineering to store, retrieve, and update context efficiently. Reduce token costs and improve agent performance.

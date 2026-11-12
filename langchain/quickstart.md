@@ -300,7 +300,7 @@ def get_weather(city: str) -> str:
     return f"It's always sunny in {city}!"
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[get_weather],
     system_prompt="You are a helpful assistant",
 )
@@ -449,7 +449,7 @@ def get_weather(city: str) -> str:
     return f"It's always sunny in {city}!"
 
 model = init_chat_model(
-    "azure_openai:gpt-5.5",
+    "azure_openai:gpt-6.1-sol",
     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
 )
 agent = create_agent(
@@ -586,7 +586,7 @@ Set up your [language model](models.md) with the right parameters for your use c
 from langchain.chat_models import init_chat_model
 
 model = init_chat_model(
-    "openai:gpt-5.5",
+    "openai:gpt-6.1-sol",
     temperature=0.5,
     timeout=300,
     max_tokens=25000,
@@ -681,7 +681,7 @@ import os
 from langchain.chat_models import init_chat_model
 
 model = init_chat_model(
-    "azure_openai:gpt-5.5",
+    "azure_openai:gpt-6.1-sol",
     temperature=0.5,
     timeout=300,
     max_tokens=25000,

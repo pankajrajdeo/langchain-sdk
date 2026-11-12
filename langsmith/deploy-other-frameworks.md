@@ -162,7 +162,7 @@ Build your agent using the framework of your choice, exactly as you would outsid
 >
 > assistant = AssistantAgent(
 >     name="assistant",
->     model_client=OpenAIChatCompletionClient(model="gpt-5.5"),
+>     model_client=OpenAIChatCompletionClient(model="gpt-6.1-sol"),
 > )
 ```
 
@@ -475,7 +475,7 @@ The following examples combine agent definition, Functional API wrapping, tracin
 >
 > assistant = AssistantAgent(
 >     name="assistant",
->     model_client=OpenAIChatCompletionClient(model="gpt-5.5"),
+>     model_client=OpenAIChatCompletionClient(model="gpt-6.1-sol"),
 > )
 >
 > @task

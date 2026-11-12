@@ -310,7 +310,7 @@ const getWeather = tool(
 );
 
 const agent = createAgent({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
   tools: [getWeather],
 });
 
@@ -513,7 +513,7 @@ const getWeather = tool(
 );
 
 const agent = createAgent({
-  model: "azure_openai:gpt-5.5",
+  model: "azure_openai:gpt-6.1-sol",
   tools: [getWeather],
 });
 
@@ -542,7 +542,7 @@ const getWeather = tool(
 );
 
 const agent = createAgent({
-  model: "bedrock:gpt-5.5",
+  model: "bedrock:gpt-6.1-sol",
   tools: [getWeather],
 });
 
@@ -689,7 +689,7 @@ Set up your [language model](models.md) with the right parameters for your use c
 ```ts
 import { initChatModel } from "langchain";
 
-const model = await initChatModel("gpt-5.5", {
+const model = await initChatModel("gpt-6.1-sol", {
   temperature: 0.5,
   timeout: 300,
   maxTokens: 25000,
@@ -773,7 +773,7 @@ const model = await initChatModel("ollama:devstral-2", {
 ```ts
 import { initChatModel } from "langchain";
 
-const model = await initChatModel("azure_openai:gpt-5.5", {
+const model = await initChatModel("azure_openai:gpt-6.1-sol", {
   temperature: 0.5,
   timeout: 300,
   maxTokens: 25000,
@@ -785,7 +785,7 @@ const model = await initChatModel("azure_openai:gpt-5.5", {
 ```ts
 import { initChatModel } from "langchain";
 
-const model = await initChatModel("bedrock:gpt-5.5", {
+const model = await initChatModel("bedrock:gpt-6.1-sol", {
   temperature: 0.5,
   timeout: 300,
   maxTokens: 25000,

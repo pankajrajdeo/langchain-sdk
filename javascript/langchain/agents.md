@@ -37,7 +37,7 @@ var agent = createAgent({ model: "google:gemini-3.6-flash", tools });
 ```ts
 import { createAgent } from "langchain";
 
-var agent = createAgent({ model: "openai:gpt-5.5", tools });
+var agent = createAgent({ model: "openai:gpt-6.1-sol", tools });
 ```
 
 **Anthropic**
@@ -107,7 +107,7 @@ var agent = createAgent({ model: "google:gemini-3.6-flash", tools });
 ```ts
 import { createAgent } from "langchain";
 
-var agent = createAgent({ model: "openai:gpt-5.5", tools });
+var agent = createAgent({ model: "openai:gpt-6.1-sol", tools });
 ```
 
 **Anthropic**
@@ -181,7 +181,7 @@ var search = tool(({ query }) => `Results for: ${query}`, {
   schema: z.object({ query: z.string() }),
 });
 
-var agent = createAgent({ model: "openai:gpt-5.5", tools: [search] });
+var agent = createAgent({ model: "openai:gpt-6.1-sol", tools: [search] });
 ```
 
 **Anthropic**
@@ -277,7 +277,7 @@ var agent = createAgent({
 
 ```ts
 var agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools,
   systemPrompt: "You are a helpful assistant. Be concise and accurate.",
 });
@@ -359,7 +359,7 @@ result.structuredResponse; // { summary: ..., confidence: ... }
 const Answer = z.object({ summary: z.string(), confidence: z.number() });
 
 var agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools,
   responseFormat: Answer,
 });
@@ -505,7 +505,7 @@ const stateMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [],
   middleware: [stateMiddleware],
 });
@@ -682,7 +682,7 @@ import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
 const agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [],
   checkpointer: new MemorySaver(),
 });
@@ -922,7 +922,7 @@ const contextSchema = z.object({
 });
 
 const agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [],
   contextSchema,
   checkpointer: new MemorySaver(),
@@ -1215,7 +1215,7 @@ import { createAgent } from "langchain";
 import { createFilesystemMiddleware, StateBackend } from "deepagents";
 
 var agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [search],
   middleware: [createFilesystemMiddleware({ backend: new StateBackend() })],
 });
@@ -1351,7 +1351,7 @@ import {
 } from "deepagents";
 
 var backend = new StateBackend();
-const model = "openai:gpt-5.5";
+const model = "openai:gpt-6.1-sol";
 
 var agent = createAgent({
   model,
@@ -1581,7 +1581,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 var backend = new StateBackend();
 
 var agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [search],
   middleware: [
     createFilesystemMiddleware({ backend }),
@@ -1596,7 +1596,7 @@ var agent = createAgent({
           systemPrompt:
             "Use the search tool to research the question and summarize key points.",
           tools: [search],
-          model: "openai:gpt-5.5",
+          model: "openai:gpt-6.1-sol",
           middleware: [],
         },
       ],
@@ -1867,7 +1867,7 @@ var agent = createAgent({
 
 ```ts
 var agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools,
   name: "research_assistant",
 });
@@ -1972,7 +1972,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [search],
   middleware: [
     modelRetryMiddleware({ maxRetries: 3 }),
@@ -2154,7 +2154,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [search],
   middleware: [piiMiddleware("email")],
 });
@@ -2293,7 +2293,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [search],
   middleware: [humanInTheLoopMiddleware({ interruptOn: { writeFile: true } })],
 });

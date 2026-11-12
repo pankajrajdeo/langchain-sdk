@@ -544,7 +544,7 @@ async function accessMultimodalToolContent(): Promise<void> {
   const { MultiServerMCPClient } = await import("@langchain/mcp-adapters");
   const client = new MultiServerMCPClient({});
   const tools = await client.getTools();
-  const agent = createAgent({ model: "openai:gpt-5.5", tools });
+  const agent = createAgent({ model: "openai:gpt-6.1-sol", tools });
 
   const result = await agent.invoke({
     messages: [

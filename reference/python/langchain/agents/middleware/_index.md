@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain/agents/middleware"
-description: "Index of 28 pages and 23 subdirectories under reference/python/langchain/agents/middleware."
+description: "Index of 30 pages and 25 subdirectories under reference/python/langchain/agents/middleware."
 category: "index"
 tags: [index, reference, python, langchain, agents, middleware]
 ---
 
 # reference/python/langchain/agents/middleware
 
-28 pages here, 473 pages including subdirectories.
+30 pages here, 501 pages including subdirectories.
 
 ## Directories
 
@@ -15,6 +15,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [_redaction/](_redaction/_index.md) - 28 pages
 - [_retry/](_retry/_index.md) - 6 pages
 - [_trace_policy/](_trace_policy/_index.md) - 1 page
+- [auto_mode/](auto_mode/_index.md) - 9 pages
 - [context_editing/](context_editing/_index.md) - 18 pages
 - [file_search/](file_search/_index.md) - 9 pages
 - [human_in_the_loop/](human_in_the_loop/_index.md) - 52 pages
@@ -23,6 +24,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [model_fallback/](model_fallback/_index.md) - 6 pages
 - [model_refusal/](model_refusal/_index.md) - 4 pages
 - [model_retry/](model_retry/_index.md) - 15 pages
+- [model_router/](model_router/_index.md) - 17 pages
 - [pii/](pii/_index.md) - 22 pages
 - [provider_tool_search/](provider_tool_search/_index.md) - 7 pages
 - [shell_tool/](shell_tool/_index.md) - 33 pages
@@ -39,7 +41,8 @@ tags: [index, reference, python, langchain, agents, middleware]
 
 - [after_agent](after_agent.md) - Run shutdown commands and release resources when an agent completes.
 - [after_model](after_model.md) - Increment model call counts after a model call.
-- [before_agent](before_agent.md) - Start the shell session and run startup commands.
+- [auto_mode](auto_mode.md) - Tool-risk middleware driven by a decision model.
+- [before_agent](before_agent.md) - Classify the latest task and store the complete routing answer.
 - [before_model](before_model.md) - Process messages before model invocation, potentially triggering summarization.
 - [configure_trace_policy](configure_trace_policy.md) - Set the process-wide default TracePolicy for agent middleware hook spans.
 - [context_editing](context_editing.md) - Context editing middleware.
@@ -52,6 +55,7 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [model_fallback](model_fallback.md) - Model fallback middleware for agents.
 - [model_refusal](model_refusal.md) - Opt-in error handling for explicit model refusals.
 - [model_retry](model_retry.md) - Model retry middleware for agents.
+- [model_router](model_router.md) - Model-routing middleware driven by a decision model.
 - [pii](pii.md) - PII detection and handling middleware for agents.
 - [provider_tool_search](provider_tool_search.md) - Provider-side tool search middleware.
 - [shell_tool](shell_tool.md) - Middleware that exposes a persistent shell tool to agents.

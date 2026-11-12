@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langchain-core"
-description: "Index of 41 pages and 38 subdirectories under reference/python/langchain-core."
+description: "Index of 42 pages and 39 subdirectories under reference/python/langchain-core."
 category: "index"
 tags: [index, reference, python, langchain-core]
 ---
 
 # reference/python/langchain-core
 
-41 pages here, 2920 pages including subdirectories.
+42 pages here, 2993 pages including subdirectories.
 
 ## Directories
 
@@ -22,6 +22,7 @@ tags: [index, reference, python, langchain-core]
 - [chat_loaders/](chat_loaders/_index.md) - 3 pages
 - [chat_sessions/](chat_sessions/_index.md) - 3 pages
 - [cross_encoders/](cross_encoders/_index.md) - 2 pages
+- [decisions/](decisions/_index.md) - 72 pages
 - [document_loaders/](document_loaders/_index.md) - 31 pages
 - [documents/](documents/_index.md) - 33 pages
 - [embeddings/](embeddings/_index.md) - 16 pages
@@ -60,6 +61,7 @@ tags: [index, reference, python, langchain-core]
 - [chat_loaders](chat_loaders.md) - Chat loaders.
 - [chat_sessions](chat_sessions.md) - Chat Sessions are a collection of messages and function calls.
 - [cross_encoders](cross_encoders.md) - Cross Encoder interface.
+- [decisions](decisions.md) - Decision models: typed probabilistic answers about text, messages, or state.
 - [Document loaders](document-loaders.md) - langchain_core → Document loaders
 - [document_loaders](document_loaders.md) - Document loaders.
 - [Documents](documents.md) - langchain_core → Documents

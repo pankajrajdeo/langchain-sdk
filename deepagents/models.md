@@ -16,7 +16,7 @@ Deep Agents work with any [LangChain chat model](../langchain/models.md) that su
 
 Specify models in `provider:model` format (for example, `google_genai:gemini-3.6-flash`, `openai:gpt-5.4`, or `anthropic:claude-sonnet-4-6`). The provider prefix selects the LangChain integration, and everything after the colon is passed through to that provider as the model identifier. For valid provider strings, see the `model_provider` parameter of [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model). For provider-specific configuration, see [chat model integrations](../integrations/chat.md).
 
-The model identifier must match the format expected by the provider. Some providers use simple names like `gpt-5.5`; others use namespaced IDs or deployment paths like `zai-org/GLM-5.2`, so the full Deep Agents string would be `baseten:zai-org/GLM-5.2`. Check the provider's model catalog or integration docs for the current identifiers.
+The model identifier must match the format expected by the provider. Some providers use simple names like `gpt-6.1-sol`; others use namespaced IDs or deployment paths like `zai-org/GLM-5.2`, so the full Deep Agents string would be `baseten:zai-org/GLM-5.2`. Check the provider's model catalog or integration docs for the current identifiers.
 
 ### Suggested models
 
@@ -107,10 +107,10 @@ register_provider_profile(
     ProviderProfile(init_kwargs={"temperature": 0}),
 )
 
-# Model-level override: gpt-5.5 additionally gets a specific reasoning effort.
+# Model-level override: gpt-6.1-sol additionally gets a specific reasoning effort.
 # Inherits temperature=0 from the provider-level profile above.
 register_provider_profile(
-    "openai:gpt-5.5",
+    "openai:gpt-6.1-sol",
     ProviderProfile(init_kwargs={"reasoning_effort": "medium"}),
 )
 ```
@@ -135,7 +135,7 @@ To use [Chat Completions](https://platform.openai.com/docs/guides/responses-vs-c
 from langchain.chat_models import init_chat_model
 from deepagents import create_deep_agent
 
-model = init_chat_model("openai:gpt-5.5", use_responses_api=False)
+model = init_chat_model("openai:gpt-6.1-sol", use_responses_api=False)
 agent = create_deep_agent(model=model)
 ```
 
@@ -146,7 +146,7 @@ from langchain.chat_models import init_chat_model
 from deepagents import create_deep_agent
 
 model = init_chat_model(
-    "openai:gpt-5.5",
+    "openai:gpt-6.1-sol",
     use_responses_api=True,
     store=False,
     include=["reasoning.encrypted_content"],
@@ -190,7 +190,7 @@ agent = create_deep_agent(
 # Invoke with the user's model selection
 result = agent.invoke(
     {"messages": [{"role": "user", "content": "Hello!"}]},
-    context=Context(model="openai:gpt-5.5"),
+    context=Context(model="openai:gpt-6.1-sol"),
 )
 ```
 

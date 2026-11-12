@@ -69,7 +69,7 @@ from langchain_openai import ChatOpenAI
 mlflow.langchain.autolog()
 
 # Create a simple chain
-llm = ChatOpenAI(model_name="gpt-5.5")
+llm = ChatOpenAI(model_name="gpt-6.1-sol")
 
 prompt = ChatPromptTemplate.from_messages(
     [
@@ -115,7 +115,7 @@ def count_words(text: str) -> str:
     return f"This text contains {word_count} words."
 
 # Create a LangGraph agent
-llm = ChatOpenAI(model="gpt-5.5")
+llm = ChatOpenAI(model="gpt-6.1-sol")
 tools = [count_words]
 graph = create_agent(llm, tools)
 

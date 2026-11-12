@@ -198,7 +198,7 @@ For more on binding tools and tool call outputs, head to the [tool calling](../.
 > from langchain_openrouter import ChatOpenRouter
 > from pydantic import BaseModel, Field
 >
-> model = ChatOpenRouter(model="openai/gpt-5.5")
+> model = ChatOpenRouter(model="openai/gpt-6.1-sol")
 >
 > class Movie(BaseModel):
 >     """A movie with details."""
@@ -234,7 +234,7 @@ For more on binding tools and tool call outputs, head to the [tool calling](../.
 >     return "Sunny and 75 degrees F."
 >
 > agent = create_agent(
->     model="openrouter:openai/gpt-5.5",
+>     model="openrouter:openai/gpt-6.1-sol",
 >     tools=[weather_tool],
 >     response_format=ProviderStrategy(Weather),  # [!code highlight]
 > )

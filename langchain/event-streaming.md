@@ -138,7 +138,7 @@ def get_weather(city: str) -> str:
     return f"It's always sunny in {city}!"
 
 weather_agent = create_agent(
-    model=init_chat_model("openai:gpt-5.5"),
+    model=init_chat_model("openai:gpt-6.1-sol"),
     tools=[get_weather],
     name="weather_agent",
 )
@@ -149,7 +149,7 @@ def call_weather(query: str) -> str:
     return result["messages"][-1].text
 
 supervisor = create_agent(
-    model=init_chat_model("openai:gpt-5.5"),
+    model=init_chat_model("openai:gpt-6.1-sol"),
     tools=[call_weather],
     name="supervisor",
 )

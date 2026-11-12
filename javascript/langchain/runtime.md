@@ -41,7 +41,7 @@ const contextSchema = z.object({ // [!code highlight]
 }); // [!code highlight]
 
 const agent = createAgent({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
   tools: [
     /* ... */
   ],
@@ -182,7 +182,7 @@ const loggingMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
   tools: [
     /* ... */
   ],

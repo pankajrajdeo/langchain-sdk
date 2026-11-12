@@ -16,6 +16,16 @@ tags: [docs, langsmith, byoc-faq]
 >
 > BYOC is generally available (GA) on AWS with a US control plane. BYOC on GCP and Azure is available in [beta](release-stages.md). See [Regions and cloud providers](byoc.md#regions-and-cloud-providers) for the supported AWS regions and GCP and Azure region availability.
 
+> [accordion] Does BYOC support government cloud regions or FIPS-compliant images?
+>
+> No. BYOC does not support government cloud regions, such as AWS GovCloud (US), and does not provide FIPS-compliant container images.
+
+> [accordion] Can a control plane on one cloud manage a data plane on another cloud?
+>
+> No. Cross-cloud deployments are not supported. A data plane must run on the same cloud provider as its control plane. For example, the AWS control plane cannot manage a data plane on GCP.
+>
+> Each cloud provider has its own LangSmith instance, with separate users and organizations. To deploy data planes on more than one cloud provider, create a LangSmith organization on each provider's instance. See [Regions and cloud providers](byoc.md#regions-and-cloud-providers) for the instance URLs.
+
 > [accordion] Do I need a dedicated AWS account?
 >
 > No. LangChain recommends a fresh account for clearer billing, and because some permissions cannot be scoped to specific resources, but it is not required.

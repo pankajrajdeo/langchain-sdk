@@ -66,6 +66,10 @@ Replace `gateway.smith.langchain.com` with the hostname for your LangSmith regio
 | GCP APAC | `apac.gateway.smith.langchain.com` |
 | AWS US | `aws.gateway.smith.langchain.com` |
 
+> [!NOTE]
+>
+> API keys from one region do not work on another region's gateway.
+
 ### Use a BYOC data plane
 
 On BYOC, replace the gateway hostname with your [data plane endpoint](byoc-usage.md#find-your-data-plane-endpoint) and prefix the path with `/gateway`:

@@ -30,7 +30,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af297c8697f15097e2487de_workday-langsmith-agent-platform.png)Case Studies
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af3b3e9c07c79843a4bf1f8_GTM%20Agent.png)Deep Agents
+
+## How our GTM Agent builds consistent, high-quality sales artifacts
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a5e44d7e5ccd8aef77c2f0c_nick_bray_pfp.jpeg)Nick BrayNovember 10, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)11min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af297c8697f15097e2487de_workday-langsmith-agent-platform.png)Case Studies
 
 ## How Workday Built an Enterprise-Scale AI Agent Platform with LangGraph and LangSmith
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## How Numan built an eval-first AI health coach with LangGraph and LangSmith
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb543d21c5bdd01e91ec2_asif-laldin.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb544d21c5bdd01e91ec7_marcus-wadge-dale.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb544d21c5bdd01e91ecc_shubhangi-hora.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb545d21c5bdd01e91ed1_konstantinos-georgakilas.jpeg)Asif LaldinMarcus Wadge-DaleShubhangi HoraKonstantinos GeorgakilasOctober 19, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min![The most common questions about agent evals, answered](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac98333d970ebc162805c63_agent-evals-faq-cover-1200x675.png)Observability & EvalsLangSmith
-
-## The Most Common Questions About Agent Evals, Answered
-
-![Divya Santhanam](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ac97dfca101bc80e9f2d64d_divya-santhanam.png)Divya SanthanamOctober 15, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)16min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb543d21c5bdd01e91ec2_asif-laldin.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb544d21c5bdd01e91ec7_marcus-wadge-dale.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb544d21c5bdd01e91ecc_shubhangi-hora.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb545d21c5bdd01e91ed1_konstantinos-georgakilas.jpeg)Asif LaldinMarcus Wadge-DaleShubhangi HoraKonstantinos GeorgakilasOctober 19, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min1...1 / 35
 
 #### We couldn't find anything matching that.
 

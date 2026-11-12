@@ -1,13 +1,13 @@
 ---
 title: "integrations/vectorstores"
-description: "Index of 34 pages and 0 subdirectories under integrations/vectorstores."
+description: "Index of 35 pages and 0 subdirectories under integrations/vectorstores."
 category: "index"
 tags: [index, integrations, vectorstores]
 ---
 
 # integrations/vectorstores
 
-34 pages here.
+35 pages here.
 
 ## Files
 
@@ -15,6 +15,7 @@ tags: [index, integrations, vectorstores]
 - [Azure Cosmos DB mongo vcore integration](azure_cosmos_db_mongo_vcore.md) - Integrate with the Azure Cosmos DB mongo vcore vector store using LangChain Python.
 - [Azure Cosmos DB NoSQL integration](azure_cosmos_db_no_sql.md) - Integrate with the Azure Cosmos DB NoSQL vector store using LangChain Python.
 - [Azure database for postgresql - flexible server integration](azure_db_for_postgresql.md) - Integrate with the Azure database for postgresql - flexible server vector store using LangChain Python.
+- [Azure AI Search integration](azuresearch.md) - Integrate with the Azure AI Search vector store using LangChain Python.
 - [Chroma integration](chroma.md) - Integrate with the Chroma vector store using LangChain Python.
 - [Databricks vector search integration](databricks_vector_search.md) - Integrate with the Databricks vector search vector store using LangChain Python.
 - [Elasticsearch integration](elasticsearch.md) - Integrate with the Elasticsearch vector store using LangChain Python.

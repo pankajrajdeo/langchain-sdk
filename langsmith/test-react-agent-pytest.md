@@ -231,7 +231,7 @@ const AgentOutputFormatSchema = z.object({
 const tools = [codeTool, searchTool, tickerTool];
 
 const agent = createReactAgent({
-  llm: new ChatOpenAI({ model: "gpt-5.5" }),
+  llm: new ChatOpenAI({ model: "gpt-6.1-sol" }),
   tools: tools,
   responseFormat: AgentOutputFormatSchema,
   stateModifier: "You are a financial expert. Respond to the users query accurately",
@@ -557,7 +557,7 @@ class Grade(TypedDict):
       "Return True if the answer is fully grounded in the source documents, otherwise False.",
   ]
 
-judge_llm = init_chat_model("gpt-5.5").with_structured_output(Grade)
+judge_llm = init_chat_model("gpt-6.1-sol").with_structured_output(Grade)
 
 @pytest.mark.langsmith
 def test_grounded_in_source_info() -> None:
@@ -605,7 +605,7 @@ def test_grounded_in_source_info() -> None:
 
 ```typescript
 // THIS CODE GOES OUTSIDE THE TEST - IT IS JUST A HELPER FUNCTION
-const judgeLLM = new ChatOpenAI({ model: "gpt-5.5" });
+const judgeLLM = new ChatOpenAI({ model: "gpt-6.1-sol" });
 const groundedEvaluator = async (params: {
   answer: string;
   referenceDocuments: string,
@@ -649,7 +649,7 @@ ls.test(
 
 ```typescript
 // THIS CODE GOES OUTSIDE THE TEST - IT IS JUST A HELPER FUNCTION
-const judgeLLM = new ChatOpenAI({ model: "gpt-5.5" });
+const judgeLLM = new ChatOpenAI({ model: "gpt-6.1-sol" });
 const groundedEvaluator = async (params: {
   answer: string;
   referenceDocuments: string,
@@ -879,7 +879,7 @@ Remember to also add the config files for Vitest and Jest to your project.
 > const tools = [codeTool, searchTool, tickerTool];
 >
 > const agent = createReactAgent({
->     llm: new ChatOpenAI({ model: "gpt-5.5" }),
+>     llm: new ChatOpenAI({ model: "gpt-6.1-sol" }),
 >     tools: tools,
 >     responseFormat: AgentOutputFormatSchema,
 >     stateModifier: "You are a financial expert. Respond to the users query accurately",
@@ -981,7 +981,7 @@ Remember to also add the config files for Vitest and Jest to your project.
 >       "Return True if the answer is fully grounded in the source documents, otherwise False.",
 >   ]
 >
-> judge_llm = init_chat_model("gpt-5.5").with_structured_output(Grade)
+> judge_llm = init_chat_model("gpt-6.1-sol").with_structured_output(Grade)
 >
 > @pytest.mark.langsmith
 > def test_grounded_in_source_info() -> None:
@@ -1034,7 +1034,7 @@ Remember to also add the config files for Vitest and Jest to your project.
 > import { AIMessage, ToolMessage } from "@langchain/core/messages";
 > import { ChatOpenAI } from "@langchain/openai";
 >
-> const judgeLLM = new ChatOpenAI({ model: "gpt-5.5" });
+> const judgeLLM = new ChatOpenAI({ model: "gpt-6.1-sol" });
 >
 > const groundedEvaluator = async (params: {
 >   answer: string;
@@ -1144,7 +1144,7 @@ Remember to also add the config files for Vitest and Jest to your project.
 > import { AIMessage } from "@langchain/core/messages";
 > import { ChatOpenAI } from "@langchain/openai";
 >
-> const judgeLLM = new ChatOpenAI({ model: "gpt-5.5" });
+> const judgeLLM = new ChatOpenAI({ model: "gpt-6.1-sol" });
 >
 > const groundedEvaluator = async (params: {
 >   answer: string;

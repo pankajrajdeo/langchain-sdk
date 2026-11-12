@@ -16,4 +16,4 @@ Utils file included for backwards compat imports.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c0344e0cee824c1c6489ba972cea171ff193d234/libs/langchain_v1/langchain/tools/tool_node.py)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c2f4036e4c6ca45a8da8a42d8e07a25d2ea48b8f/libs/langchain_v1/langchain/tools/tool_node.py)

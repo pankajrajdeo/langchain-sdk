@@ -123,7 +123,7 @@ Set `base_url` to your Azure endpoint with `/openai/v1/` appended. With the v1 A
 > from langchain_openai import ChatOpenAI
 >
 > llm = ChatOpenAI(
->     model="gpt-5.5",  # your Azure deployment name
+>     model="gpt-6.1-sol",  # your Azure deployment name
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key=token_provider,  # callable that handles token refresh
 > )
@@ -135,7 +135,7 @@ Set `base_url` to your Azure endpoint with `/openai/v1/` appended. With the v1 A
 > from langchain_openai import ChatOpenAI
 >
 > llm = ChatOpenAI(
->     model="gpt-5.5",  # your Azure deployment name
+>     model="gpt-6.1-sol",  # your Azure deployment name
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key="your-azure-api-key",
 > )
@@ -153,7 +153,7 @@ Use [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/
 > from langchain_openai import AzureChatOpenAI
 >
 > llm = AzureChatOpenAI(
->     azure_deployment="gpt-5.5",  # or your deployment
+>     azure_deployment="gpt-6.1-sol",  # or your deployment
 >     api_version="2025-04-01-preview",  # or your api version
 >     azure_ad_token_provider=token_provider,
 > )
@@ -167,7 +167,7 @@ Use [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/
 > from langchain_openai import AzureChatOpenAI
 >
 > llm = AzureChatOpenAI(
->     azure_deployment="gpt-5.5",  # or your deployment
+>     azure_deployment="gpt-6.1-sol",  # or your deployment
 >     api_version="2025-04-01-preview",  # or your api version
 >     temperature=0,
 >     max_tokens=None,
@@ -209,7 +209,7 @@ class GetWeather(BaseModel):
     location: str = Field(description="The city and state, e.g. San Francisco, CA")
 
 llm = ChatOpenAI(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key="your-azure-api-key",
 )
@@ -238,7 +238,7 @@ from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key="your-azure-api-key",
 )
@@ -272,7 +272,7 @@ To recover token counts when streaming, set `stream_usage=True` as an initializa
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key="your-azure-api-key",
     stream_usage=True,  # [!code highlight]
@@ -297,7 +297,7 @@ Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azur
 > )
 >
 > llm = ChatOpenAI(
->     model="gpt-5.5",
+>     model="gpt-6.1-sol",
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key=token_provider,
 >     use_responses_api=True,
@@ -313,7 +313,7 @@ Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azur
 > from langchain_openai import ChatOpenAI
 >
 > llm = ChatOpenAI(
->     model="gpt-5.5",
+>     model="gpt-6.1-sol",
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key="your-azure-api-key",
 >     use_responses_api=True,
@@ -331,7 +331,7 @@ Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azur
 > from langchain_openai import ChatOpenAI
 >
 > llm = ChatOpenAI(
->     model="gpt-5.5",  # your Azure deployment name
+>     model="gpt-6.1-sol",  # your Azure deployment name
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key=token_provider,
 >     use_responses_api=True,  # [!code highlight]
@@ -354,7 +354,7 @@ Azure OpenAI supports the [Responses API](https://learn.microsoft.com/en-us/azur
 > from langchain_openai import ChatOpenAI
 >
 > llm = ChatOpenAI(
->     model="gpt-5.5",  # your Azure deployment name
+>     model="gpt-6.1-sol",  # your Azure deployment name
 >     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
 >     api_key="your-azure-api-key",
 >     use_responses_api=True,  # [!code highlight]
@@ -385,7 +385,7 @@ Set `reasoning_effort` to `"low"`, `"medium"`, or `"high"`. Higher settings let 
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
-    model="gpt-5.5",  # your Azure reasoning model deployment
+    model="gpt-6.1-sol",  # your Azure reasoning model deployment
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key=token_provider,
     reasoning_effort="medium",
@@ -412,7 +412,7 @@ reasoning = {
 }
 
 llm = ChatOpenAI(
-    model="gpt-5.5",  # your Azure reasoning model deployment
+    model="gpt-6.1-sol",  # your Azure reasoning model deployment
     base_url="https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1/",
     api_key=token_provider,
     reasoning=reasoning,
@@ -449,7 +449,7 @@ When using `AzureChatOpenAI`, Azure OpenAI responses contain a `model_name` resp
 from langchain_openai import AzureChatOpenAI
 
 llm = AzureChatOpenAI(
-    azure_deployment="gpt-5.5",  # or your deployment
+    azure_deployment="gpt-6.1-sol",  # or your deployment
     api_version="2025-04-01-preview",  # or your api version
     model_version="0301",
 )

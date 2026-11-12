@@ -37,7 +37,7 @@ agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools)
 ```python
 from langchain.agents import create_agent
 
-agent = create_agent(model="openai:gpt-5.5", tools=tools)
+agent = create_agent(model="openai:gpt-6.1-sol", tools=tools)
 ```
 
 **Anthropic**
@@ -107,7 +107,7 @@ agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools)
 ```python
 from langchain.agents import create_agent
 
-agent = create_agent(model="openai:gpt-5.5", tools=tools)
+agent = create_agent(model="openai:gpt-6.1-sol", tools=tools)
 ```
 
 **Anthropic**
@@ -179,7 +179,7 @@ def search(query: str) -> str:
     """Search for information."""
     return f"Results for: {query}"
 
-agent = create_agent(model="openai:gpt-5.5", tools=[search])
+agent = create_agent(model="openai:gpt-6.1-sol", tools=[search])
 ```
 
 **Anthropic**
@@ -270,7 +270,7 @@ agent = create_agent(
 
 ```python
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=tools,
     system_prompt="You are a helpful assistant. Be concise and accurate.",
 )
@@ -355,7 +355,7 @@ class Answer(BaseModel):
     summary: str
     confidence: float
 
-agent = create_agent(model="openai:gpt-5.5", tools=tools, response_format=Answer)
+agent = create_agent(model="openai:gpt-6.1-sol", tools=tools, response_format=Answer)
 result = agent.invoke({"messages": [{"role": "user", "content": "Summarize AI trends"}]})
 result["structured_response"]  # Answer(summary=..., confidence=...)
 ```
@@ -475,7 +475,7 @@ class MyState(AgentState):
     call_count: int
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[],
     state_schema=MyState,  # [!code highlight]
 )
@@ -606,7 +606,7 @@ from langchain_core.utils.uuid import uuid7
 from langgraph.checkpoint.memory import InMemorySaver
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[],
     checkpointer=InMemorySaver(),
 )
@@ -811,7 +811,7 @@ class Context:
     user_id: str
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[],
     context_schema=Context,
     checkpointer=InMemorySaver(),
@@ -1060,7 +1060,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[search],
     middleware=[FilesystemMiddleware(backend=StateBackend())],
 )
@@ -1186,7 +1186,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 backend = StateBackend()
-model = "openai:gpt-5.5"
+model = "openai:gpt-6.1-sol"
 
 agent = create_agent(
     model=model,
@@ -1385,7 +1385,7 @@ def search(query: str) -> str:
 backend = StateBackend()
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[search],
     middleware=[
         FilesystemMiddleware(backend=backend),
@@ -1638,7 +1638,7 @@ agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools, name="r
 **OpenAI**
 
 ```python
-agent = create_agent(model="openai:gpt-5.5", tools=tools, name="research_assistant")
+agent = create_agent(model="openai:gpt-6.1-sol", tools=tools, name="research_assistant")
 ```
 
 **Anthropic**
@@ -1710,7 +1710,7 @@ def search(query: str) -> str:
     return f"Search results for: {query}"
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[search],
     middleware=[
         ModelRetryMiddleware(max_retries=3),
@@ -1867,7 +1867,7 @@ def search(query: str) -> str:
     return f"Search results for: {query}"
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[search],
     middleware=[PIIMiddleware("email")],
 )
@@ -2006,7 +2006,7 @@ def search(query: str) -> str:
     return f"Search results for: {query}"
 
 agent = create_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[search],
     middleware=[HumanInTheLoopMiddleware(interrupt_on={"write_file": True})],
 )

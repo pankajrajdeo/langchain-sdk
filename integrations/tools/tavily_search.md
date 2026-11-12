@@ -148,7 +148,7 @@ In the below example when we ask the agent to find "What nation hosted the Euro 
 >
 > os.environ["OPENAI_API_KEY"] = "sk-..."
 >
-> model = init_chat_model("gpt-5.5")
+> model = init_chat_model("gpt-6.1-sol")
 ```
 >
 **Model Class**
@@ -159,7 +159,7 @@ In the below example when we ask the agent to find "What nation hosted the Euro 
 >
 > os.environ["OPENAI_API_KEY"] = "sk-..."
 >
-> model = ChatOpenAI(model="gpt-5.5")
+> model = ChatOpenAI(model="gpt-6.1-sol")
 ```
 
 > [tab] Anthropic
@@ -227,7 +227,7 @@ In the below example when we ask the agent to find "What nation hosted the Euro 
 > os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
 >
 > model = init_chat_model(
->     "azure_openai:gpt-5.5",
+>     "azure_openai:gpt-6.1-sol",
 >     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
 > )
 ```
@@ -243,7 +243,7 @@ In the below example when we ask the agent to find "What nation hosted the Euro 
 > os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
 >
 > model = AzureChatOpenAI(
->     model="gpt-5.5",
+>     model="gpt-6.1-sol",
 >     azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"]
 > )
 ```
@@ -421,7 +421,7 @@ if not os.environ.get("OPENAI_API_KEY"):
 ```python
 from langchain.chat_models import init_chat_model
 
-model = init_chat_model(model="gpt-5.5", model_provider="openai", temperature=0)
+model = init_chat_model(model="gpt-6.1-sol", model_provider="openai", temperature=0)
 ```
 
 We will need to install langgraph:

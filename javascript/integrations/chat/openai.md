@@ -91,7 +91,7 @@ Now we can instantiate our model object and generate chat completions:
 import { ChatOpenAI } from "@langchain/openai"
 
 const llm = new ChatOpenAI({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
   temperature: 0,
   // other params...
 })
@@ -153,7 +153,7 @@ You can customize the base URL the SDK sends requests to by passing a `configura
 import { ChatOpenAI } from "@langchain/openai";
 
 const llmWithCustomURL = new ChatOpenAI({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
   temperature: 0.9,
   configuration: {
     baseURL: "https://your_custom_url.com",
@@ -175,7 +175,7 @@ You can specify custom headers in the same `configuration` field:
 import { ChatOpenAI } from "@langchain/openai";
 
 const llmWithCustomHeaders = new ChatOpenAI({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
   temperature: 0.9,
   configuration: {
     defaultHeaders: {
@@ -195,7 +195,7 @@ Some proxies or third-party providers present largely the same API interface as 
 import { ChatOpenAI } from "@langchain/openai";
 
 const llmWithoutStreamUsage = new ChatOpenAI({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
   temperature: 0.9,
   streamUsage: false,
   configuration: {
@@ -236,7 +236,7 @@ import { ChatOpenAI } from "@langchain/openai";
 
 // See https://cookbook.openai.com/examples/using_logprobs for details
 const llmWithLogprobs = new ChatOpenAI({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
   logprobs: true,
   // topLogprobs: 5,
 });
@@ -333,7 +333,7 @@ const codeTool = customTool(
   }
 );
 
-const model = new ChatOpenAI({ model: "gpt-5.5" });
+const model = new ChatOpenAI({ model: "gpt-6.1-sol" });
 
 const agent = createAgent({
   model,
@@ -380,7 +380,7 @@ console.log(result);
     }
   );
 
-  const model = new ChatOpenAI({ model: "gpt-5.5" });
+  const model = new ChatOpenAI({ model: "gpt-6.1-sol" });
 
   const agent = createAgent({
     model,
@@ -422,7 +422,7 @@ const weatherTool = tool((_) => "no-op", {
 })
 
 const llmWithStrictTrue = new ChatOpenAI({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
 }).bindTools([weatherTool], {
   strict: true,
   tool_choice: weatherTool.name,
@@ -466,7 +466,7 @@ const toolSchema = {
 };
 
 const llmWithStrictTrueTools = new ChatOpenAI({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
 }).bindTools([toolSchema], {
   strict: true,
 });
@@ -761,7 +761,7 @@ ChatOpenAI allows you to bring the built-in [image generation tool](https://plat
 import { ChatOpenAI } from "@langchain/openai";
 
 const llm = new ChatOpenAI({
-  model: "gpt-5.5",
+  model: "gpt-6.1-sol",
   useResponsesApi: true,
 });
 

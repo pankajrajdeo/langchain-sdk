@@ -138,7 +138,7 @@ let agent = createAgent({
 import { createAgent } from "langchain";
 
 let agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [],
 });
 ```
@@ -248,7 +248,7 @@ const sandbox = await client.createSandbox({
 const backend = new LangSmithSandbox({ sandbox });
 
 agent = createAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [],
   middleware: [createFilesystemMiddleware({ backend })],
 });
@@ -439,7 +439,7 @@ agent = createAgent({
 ```ts
 import { createSummarizationMiddleware } from "deepagents";
 
-let model = "openai:gpt-5.5";
+let model = "openai:gpt-6.1-sol";
 
 agent = createAgent({
   model,
@@ -643,7 +643,7 @@ agent = createAgent({
 ```ts
 import { createSkillsMiddleware } from "deepagents";
 
-model = "openai:gpt-5.5";
+model = "openai:gpt-6.1-sol";
 
 agent = createAgent({
   model,
@@ -797,7 +797,7 @@ agent = createAgent({
 import { todoListMiddleware } from "langchain";
 import { createSubAgentMiddleware, type SubAgent } from "deepagents";
 
-model = "openai:gpt-5.5";
+model = "openai:gpt-6.1-sol";
 
 const visualizer: SubAgent = {
   name: "visualizer",

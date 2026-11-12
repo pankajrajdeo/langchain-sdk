@@ -15,7 +15,7 @@ A compatible endpoint is a saved [model configuration](model-configurations.md) 
 * **OpenAI-Decisions-compatible endpoint**: Calls any server that implements the [OpenAI Decisions API](https://developers.openai.com/api/docs/guides/decisions), with any model name that server serves.
 * **TypeSafe-compatible endpoint**: Calls any server that implements the [TypeSafe System One API](https://docs.typesafe.ai).
 
-Compatible endpoints are available in [decision model evaluators](decision-model-evaluator.md). To use `gpt-6-luna` directly from OpenAI or Jev directly from TypeSafe, you do not need a compatible endpoint. For chat models that implement the OpenAI API, see [Connect to an OpenAI compliant model provider/proxy](custom-openai-compliant-model.md).
+Compatible endpoints are available in [decision model evaluators](decision-model-evaluator.md). You can also call a TypeSafe-compatible endpoint through the LLM Gateway as a [custom model configuration](llm-gateway-model-configurations.md). To use `gpt-6-luna` directly from OpenAI or Jev directly from TypeSafe, you do not need a compatible endpoint. For chat models that implement the OpenAI API, see [Connect to an OpenAI compliant model provider/proxy](custom-openai-compliant-model.md).
 
 ## Configuration
 

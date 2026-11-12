@@ -57,7 +57,7 @@ import { z } from "zod";
 import { createAgent } from "langchain";
 import { StateGraph, START, END, StateSchema, MessagesValue } from "@langchain/langgraph";
 
-const agent = createAgent({ model: "openai:gpt-5.5", tools: [...] });
+const agent = createAgent({ model: "openai:gpt-6.1-sol", tools: [...] });
 
 const AgentState = new StateSchema({
   messages: MessagesValue,
@@ -159,11 +159,11 @@ A common use case is combining [retrieval](../../deepagents/retrieval.md) with a
 > );
 >
 > const agent = createAgent({
->   model: "openai:gpt-5.5",
+>   model: "openai:gpt-6.1-sol",
 >   tools: [getLatestNews],
 > });
 >
-> const model = new ChatOpenAI({ model: "gpt-5.5" });
+> const model = new ChatOpenAI({ model: "gpt-6.1-sol" });
 >
 > const RewrittenQuery = z.object({ query: z.string() });
 >

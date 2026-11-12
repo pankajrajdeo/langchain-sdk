@@ -1,6 +1,6 @@
 ---
 title: "before_agent"
-description: "Start the shell session and run startup commands."
+description: "Classify the latest task and store the complete routing answer."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/before_agent"
 category: "reference"
 tags: [reference, langchain, agents, middleware, before_agent]
@@ -10,33 +10,20 @@ tags: [reference, langchain, agents, middleware, before_agent]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/shell_tool/ShellToolMiddleware/before_agent)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/model_router/ModelRouterMiddleware/before_agent)
 
-Start the shell session and run startup commands.
+Classify the latest task and store the complete routing answer.
 
 ## Signature
 
 ```python
 before_agent(
     self,
-    state: ShellToolState[ResponseT],
+    state: _ModelRouterState,
     runtime: Runtime[ContextT],
-) -> dict[str, Any] | None
+) -> dict[str, ChoiceAnswer]
 ```
-
-## Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `state` | `ShellToolState[ResponseT]` | Yes | The current agent state. |
-| `runtime` | `Runtime[ContextT]` | Yes | The runtime context. |
-
-## Returns
-
-`dict[str, Any] | None`
-
-Shell session resources to be stored in the agent state.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c0344e0cee824c1c6489ba972cea171ff193d234/libs/langchain_v1/langchain/agents/middleware/shell_tool.py#L656)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c2f4036e4c6ca45a8da8a42d8e07a25d2ea48b8f/libs/langchain_v1/langchain/agents/middleware/model_router.py#L151)

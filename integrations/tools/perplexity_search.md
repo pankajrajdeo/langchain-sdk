@@ -115,7 +115,7 @@ from langchain.chat_models import init_chat_model
 from langchain_perplexity import PerplexitySearchResults
 
 # Initialize the language model
-model = init_chat_model(model="gpt-5.5", temperature=0)
+model = init_chat_model(model="gpt-6.1-sol", temperature=0)
 
 # Initialize the Perplexity search tool
 perplexity_search = PerplexitySearchResults(

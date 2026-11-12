@@ -7,7 +7,7 @@ tags: [index, integrations]
 
 # integrations
 
-15 pages here, 362 pages including subdirectories.
+15 pages here, 365 pages including subdirectories.
 
 ## Directories
 
@@ -18,7 +18,7 @@ tags: [index, integrations]
 - [chat/](chat/_index.md) - 37 pages
 - [chat_message_histories/](chat_message_histories/_index.md) - 1 page
 - [checkpointers/](checkpointers/_index.md) - 1 page
-- [decision_models/](decision_models/_index.md) - 1 page
+- [decision_models/](decision_models/_index.md) - 2 pages
 - [document_loaders/](document_loaders/_index.md) - 25 pages
 - [document_transformers/](document_transformers/_index.md) - 5 pages
 - [embeddings/](embeddings/_index.md) - 28 pages
@@ -28,12 +28,12 @@ tags: [index, integrations]
 - [memory/](memory/_index.md) - 2 pages
 - [middleware/](middleware/_index.md) - 7 pages
 - [providers/](providers/_index.md) - 103 pages
-- [retrievers/](retrievers/_index.md) - 17 pages
+- [retrievers/](retrievers/_index.md) - 18 pages
 - [sandboxes/](sandboxes/_index.md) - 6 pages
 - [splitters/](splitters/_index.md) - 8 pages
 - [stores/](stores/_index.md) - 6 pages
 - [tools/](tools/_index.md) - 38 pages
-- [vectorstores/](vectorstores/_index.md) - 34 pages
+- [vectorstores/](vectorstores/_index.md) - 35 pages
 
 ## Files
 

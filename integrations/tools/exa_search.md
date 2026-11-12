@@ -124,7 +124,7 @@ from langchain_exa import ExaFindSimilarResults, ExaSearchResults
 from langchain.agents import create_agent
 
 # Initialize the language model
-model = init_chat_model(model="gpt-5.5", model_provider="openai", temperature=0)
+model = init_chat_model(model="gpt-6.1-sol", model_provider="openai", temperature=0)
 
 # Initialize Exa Tools
 exa_search = ExaSearchResults(

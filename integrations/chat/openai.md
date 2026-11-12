@@ -364,7 +364,7 @@ def execute_code(code: str) -> str:
     """Execute python code."""
     return "27"
 
-llm = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
+llm = ChatOpenAI(model="gpt-6.1-sol", use_responses_api=True)
 
 agent = create_agent(llm, [execute_code])
 
@@ -429,7 +429,7 @@ Name: execute_code
 >     return "27"
 >
 >
-> llm = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
+> llm = ChatOpenAI(model="gpt-6.1-sol", use_responses_api=True)
 >
 > agent = create_agent(llm, [do_math])
 >
@@ -479,7 +479,7 @@ You can access this feature in individual model calls, or by specifying the [res
 > from langchain_openai import ChatOpenAI
 > from pydantic import BaseModel, Field
 >
-> llm = ChatOpenAI(model="gpt-5.5")
+> llm = ChatOpenAI(model="gpt-6.1-sol")
 >
 > class Movie(BaseModel):
 >     """A movie with details."""
@@ -515,7 +515,7 @@ You can access this feature in individual model calls, or by specifying the [res
 >     return "Sunny and 75 degrees F."
 >
 > agent = create_agent(
->     model="openai:gpt-5.5",
+>     model="openai:gpt-6.1-sol",
 >     tools=[weather_tool],
 >     response_format=ProviderStrategy(Weather),  # [!code highlight]
 > )
@@ -549,7 +549,7 @@ class OutputSchema(BaseModel):
     answer: str
     justification: str
 
-llm = ChatOpenAI(model="gpt-5.5")
+llm = ChatOpenAI(model="gpt-6.1-sol")
 
 structured_llm = llm.bind_tools(
     [get_weather],
@@ -777,7 +777,7 @@ To engage tool search, mark tools with `@tool(extras={"defer_loading": True})` a
 > def get_recipe(query: str) -> None:
 >     """Get a recipe for chicken soup."""
 >
-> model = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
+> model = ChatOpenAI(model="gpt-6.1-sol", use_responses_api=True)
 >
 > agent = create_agent(
 >     model=model,
@@ -941,7 +941,7 @@ To engage tool search, mark tools with `@tool(extras={"defer_loading": True})` a
 >             return handler(request.override(tool=get_weather))
 >         return handler(request)
 >
-> llm = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
+> llm = ChatOpenAI(model="gpt-6.1-sol", use_responses_api=True)
 >
 > agent = create_agent(
 >     model=llm,
@@ -1259,7 +1259,7 @@ To engage it, pass `{"type": "apply_patch"}` to the model as you would another t
 ```python
 from langchain_openai import ChatOpenAI
 
-llm = ChatOpenAI(model="gpt-5.5")
+llm = ChatOpenAI(model="gpt-6.1-sol")
 
 llm_with_tools = llm.bind_tools([{"type": "apply_patch"}])
 
@@ -1501,7 +1501,7 @@ The Responses API supports automatic [server-side context compaction](https://de
 from langchain_openai import ChatOpenAI
 
 model = ChatOpenAI(
-    model="gpt-5.5",
+    model="gpt-6.1-sol",
     context_management=[  # [!code highlight]
         {"type": "compaction", "compact_threshold": 100_000}  # [!code highlight]
     ],  # [!code highlight]
@@ -1807,7 +1807,7 @@ public class User
 }
 """
 
-llm = ChatOpenAI(model="gpt-5.5")
+llm = ChatOpenAI(model="gpt-6.1-sol")
 query = (
     "Replace the Username property with an Email property. "
     "Respond only with code, and with no markdown formatting."
@@ -1918,7 +1918,7 @@ You can use the `prompt_cache_key` parameter to influence OpenAI's caching and o
 ```python
 from langchain_openai import ChatOpenAI
 
-llm = ChatOpenAI(model="gpt-5.5")
+llm = ChatOpenAI(model="gpt-6.1-sol")
 
 # Use a cache key for repeated prompts
 messages = [

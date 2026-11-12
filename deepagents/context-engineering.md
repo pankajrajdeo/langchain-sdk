@@ -76,7 +76,7 @@ agent = create_deep_agent(
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     system_prompt=(
         "You are a research assistant specializing in scientific literature. "
         "Always cite sources. Use subagents for parallel research on different topics."
@@ -182,7 +182,7 @@ agent = create_deep_agent(
 
 ```python
 agent = create_deep_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     memory=["/project/AGENTS.md", "~/.deepagents/preferences.md"],
 )
 ```
@@ -253,7 +253,7 @@ agent = create_deep_agent(
 
 ```python
 agent = create_deep_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     skills=["/skills/"],
 )
 ```
@@ -430,7 +430,7 @@ def fetch_user_data(query: str, runtime: ToolRuntime[Context]) -> str:
     return f"Data for user {user_id}: {query}"
 
 agent = create_deep_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[fetch_user_data],
     context_schema=Context,
 )
@@ -661,7 +661,7 @@ def cite_page(runtime: ToolRuntime) -> str:
     return runtime.state["page_url"]
 
 agent = create_deep_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     tools=[cite_page],
     state_schema=ResearchState,
 )
@@ -940,7 +940,7 @@ from deepagents.middleware.summarization import create_summarization_tool_middle
 
 backend = StateBackend  # if using default backend
 
-model = "openai:gpt-5.5"
+model = "openai:gpt-6.1-sol"
 agent = create_deep_agent(
     model=model,
     middleware=[  # [!code highlight]
@@ -1118,7 +1118,7 @@ from langgraph.store.memory import InMemoryStore
 store = InMemoryStore()
 
 agent = create_deep_agent(
-    model="openai:gpt-5.5",
+    model="openai:gpt-6.1-sol",
     store=store,
     backend=CompositeBackend(
         default=StateBackend(),

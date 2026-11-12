@@ -109,6 +109,8 @@ The `resource_spec` object sets CPU, memory, and replica counts for a deployment
 
 For self-hosted deployments, the listener in the data plane validates the `resource_spec` again with the rules of its own version. A `PATCH` that returns `200` can still fail at deploy time on an older listener. See [Listener version requirements](self-hosted-platform-features.md#listener-version-requirements).
 
+To mount persistent storage, such as Amazon EFS, into a self-hosted deployment's pods, set `volumes` and `volume_mounts` in `resource_spec`. For more information, see [Volumes](self-hosted-platform-features.md#volumes).
+
 ## Example Code
 
 Below is example Python code that demonstrates how to orchestrate the control plane APIs to create a deployment, update the deployment, and delete the deployment.

@@ -78,7 +78,7 @@ const EXAMPLE_QUERY =
   "How do I stream intermediate tool results from a subagent?";
 
 const baselineAgent = createDeepAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [],
   systemPrompt:
     "You are a helpful LangChain documentation assistant. Answer questions about LangChain APIs and patterns.",
@@ -978,7 +978,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
@@ -1558,7 +1558,7 @@ const chunkAnalystSubagent = {
 };
 
 const agent = createDeepAgent({
-  model: "openai:gpt-5.5",
+  model: "openai:gpt-6.1-sol",
   tools: [searchDocumentation],
   backend,
   systemPrompt: instructions,
