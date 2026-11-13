@@ -16,7 +16,7 @@ tags: [docs, langsmith, enable-self-hosted-fleet]
 
 Fleet requires an [Enterprise](https://langchain.com/pricing) plan and [LangSmith Self-Hosted v0.13](https://changelog.langchain.com/announcements/langsmith-self-hosted-v0-13) or later. This standalone deployment configuration requires v0.15 or later. Install the [base LangSmith platform](kubernetes.md) first.
 
-Fleet provisions an API server, task queue, PostgreSQL, Redis, tool server, and trigger server. It does not require LangSmith Deployment.
+Fleet provisions an API server, task queue, PostgreSQL, Redis, tool server, and trigger server. It does not require Agent Server hosting.
 
 ## Enable Fleet
 

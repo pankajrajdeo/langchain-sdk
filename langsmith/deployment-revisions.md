@@ -1,6 +1,6 @@
 ---
 title: "Revisions"
-description: "Create and manage revisions for a LangSmith Cloud deployment."
+description: "Create and manage revisions for an Agent Server on LangSmith Cloud."
 source: "https://docs.langchain.com/langsmith/deployment-revisions"
 category: "docs"
 tags: [docs, langsmith, deployment-revisions]
@@ -8,39 +8,39 @@ tags: [docs, langsmith, deployment-revisions]
 
 # Revisions
 
-> Create and manage revisions for a LangSmith Cloud deployment.
+> Create and manage revisions for an Agent Server on LangSmith Cloud.
 
-A revision deploys a version of your application to an existing Cloud deployment. Create a revision to release code changes without creating another deployment.
+A revision deploys a version of your application to an existing Agent Server on LangSmith Cloud. Create a revision to release code changes without creating another Agent Server.
 
 ## Create a revision
 
-When you [create a deployment](deploy-to-cloud.md), LangSmith creates its first revision. Use the LangSmith UI or LangGraph CLI to create subsequent revisions.
+When you [create an Agent Server](deploy-to-cloud.md), LangSmith creates its first revision. Use the LangSmith UI or LangGraph CLI to create subsequent revisions.
 
 > [tab] LangSmith UI
 >
-> From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deployment-revisions), select **Deployments**, then select a deployment.
+> From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deployment-revisions), select **Agent Servers**, then select an Agent Server.
 >
-> 1. In the top-right corner of the **Deployment** view, select **+ New Revision**.
+> 1. In the top-right corner of the **Agent Server** view, select **+ New Revision**.
 > 2. In the **New Revision** modal, specify the full path to the [API configuration file](cli.md#configuration-file), including the file name. For example, enter `langgraph.json` if the file is in the repository root.
-> 3. Choose whether to make the deployment shareable through [Studio](studio.md).
+> 3. Choose whether to make the Agent Server shareable through [Studio](studio.md).
 > 4. Add, remove, or update environment variables and secrets. Existing values are prepopulated. For more information, see [Environment variables](env-var-cloud.md).
 > 5. Select **Submit**. LangSmith queues the revision for deployment.
 
 > [tab] LangGraph CLI
 >
-> Run `langgraph deploy` again from your project directory. The command finds the existing deployment by name and creates a revision with your latest code changes:
+> Run `langgraph deploy` again from your project directory. The command finds the existing Agent Server by name and creates a revision with your latest code changes:
 >
 ```shell
 > langgraph deploy
 ```
 >
-> To target a deployment by ID, run:
+> To target an Agent Server by ID, run:
 >
 ```shell
-> langgraph deploy --deployment-id <DEPLOYMENT_ID>
+> langgraph deploy --agent-server-id <AGENT_SERVER_ID>
 ```
 >
-> To view deployment IDs, run:
+> To view Agent Server IDs, run:
 >
 ```shell
 > langgraph deploy list
@@ -48,7 +48,7 @@ When you [create a deployment](deploy-to-cloud.md), LangSmith creates its first 
 >
 > > [!NOTE]
 > >
-> > `langgraph deploy` can update only deployments originally created with `langgraph deploy`. Use the LangSmith UI to update deployments created through the UI or GitHub integration.
+> > CLI update support depends on the Agent Server's source and build mode, not only where it was created. Local builds pushed to the managed registry require an `internal_docker` source. For Agent Servers that use a registry you manage, use `--push-to` or `--image-uri`. See the [CLI reference](cli.md#deploy).
 
 ## Interrupt a revision
 
@@ -60,15 +60,15 @@ Interrupt a revision only when it is stuck and prevents you from deploying anoth
 
 To interrupt a revision:
 
-1. From the **Deployments** view, select a deployment.
+1. From the **Agent Servers** view, select an Agent Server.
 2. In the **Revisions** table, select the menu icon for the revision.
 3. Select **Interrupt**.
 4. Review the confirmation message, then select **Interrupt revision**.
 
 ## See also
 
-* [Monitor a deployment](monitor-deployment.md)
-* [Manage a deployment](manage-deployment.md)
+* [Monitor an Agent Server](monitor-deployment.md)
+* [Manage an Agent Server](manage-deployment.md)
 
 ***
 

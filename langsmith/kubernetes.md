@@ -357,7 +357,7 @@ After completing this guide, your LangSmith instance should be running, but it m
    * Configure LangSmith with [Single Sign-On](self-host-sso.md) to secure your LangSmith instance.
    * Set up [blob storage](self-host-blob-storage.md) for storing large files.
 
-5. Optional: Add Sandboxes, Engine, Fleet, or LangSmith Deployment. Follow only the setup guides your use case requires in [Configure additional self-hosted features](self-host-additional-features.md).
+5. Optional: Add Sandboxes, Engine, Fleet, or Agent Server hosting. Follow only the setup guides your use case requires in [Configure additional self-hosted features](self-host-additional-features.md).
 
 ***
 

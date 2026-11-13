@@ -1503,7 +1503,7 @@ You implemented one RAG pattern with [`create_deep_agent`](https://reference.lan
 * Add [Skills](skills.md) to package retrieval workflows and domain-specific search guidance
 * [Evaluate a RAG application](../langsmith/evaluate-rag-tutorial.md) with LangSmith datasets and evaluators
 * Read [Context engineering](context-engineering.md) for offloading and subagent isolation strategies
-* Deploy with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, host agents yourself or use a custom [LangSmith Deployment](../langsmith/deployment.md)
+* Deploy with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, host agents yourself or use a custom [Agent Server](../langsmith/deployment.md)
 * Use [Grading rubrics](rubric.md) to verify answers are grounded in retrieved source material
 
 ***

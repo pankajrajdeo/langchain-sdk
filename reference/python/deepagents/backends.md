@@ -100,6 +100,7 @@ Backends control how deep agents store files and manage state. Choose a backend 
 - [`GrepResult`](https://reference.langchain.com/python/deepagents/backends/protocol/GrepResult)
 - [`GlobResult`](https://reference.langchain.com/python/deepagents/backends/protocol/GlobResult)
 - [`BackendProtocol`](https://reference.langchain.com/python/deepagents/backends/protocol/BackendProtocol)
+- [`BackendConsumer`](https://reference.langchain.com/python/deepagents/backends/protocol/BackendConsumer)
 - [`ExecuteResponse`](https://reference.langchain.com/python/deepagents/backends/protocol/ExecuteResponse)
 - [`ExecuteArtifact`](https://reference.langchain.com/python/deepagents/backends/protocol/ExecuteArtifact)
 - [`ExecuteOffloadResult`](https://reference.langchain.com/python/deepagents/backends/protocol/ExecuteOffloadResult)

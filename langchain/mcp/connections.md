@@ -237,7 +237,7 @@ For the full negotiation rules, see [Protocol negotiation](https://gofastmcp.com
 
 * [Authentication](auth.md): Bearer, OAuth, and per-user credentials.
 
-* [Deploy a LangGraph server](../../langgraph/local-server.md): Graph factories for long-lived deployments.
+* [Run a local Agent Server](../../langgraph/local-server.md): Graph factories for long-lived deployments.
 
 * [Rebuild a graph at runtime](../../langsmith/graph-rebuild.md): Factory forms for Agent Server, including the context manager pattern.
 

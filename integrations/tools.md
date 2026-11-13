@@ -579,6 +579,7 @@ The following table shows tools that generate video, image, or audio assets:
 | [`X402CleanWebTool`](https://github.com/nohosa001-pixel/x402-cleanweb-agent/tree/main/packages/langchain-x402-cleanweb#readme) | N/A |
 | [`x402checkToolkit`](https://x402check.dev) | N/A |
 | [`AgentLair`](https://agentlair.dev/docs) | N/A |
+| [`AutomSearch`](https://github.com/automdev/langchain-autom#readme) | N/A |
 | [`BrewPageToolkit`](https://github.com/kochetkov-ma/langchain-brewpage#readme) | N/A |
 | [`Browserless`](https://browserless.io) | N/A |
 | [`CleaveToolkit`](https://cleave.fi/docs/agents/langchain) | N/A |
@@ -587,6 +588,7 @@ The following table shows tools that generate video, image, or audio assets:
 | [`FrameScanTool`](https://github.com/Sandeep85Das/langchain-frame) | N/A |
 | [`HuangtingFlux`](https://huangtingflux.com/integrations/langchain) | N/A |
 | [`MobileboxToolkit`](https://github.com/fifteenA/mobilebox/tree/main/packages/python/langchain-mobilebox#readme) | N/A |
+| [`PiloterrGoogleSearch`](https://github.com/piloterr/langchain-piloterr#readme) | N/A |
 | [`PopNowToolkit`](https://popnow.ai/docs/langchain) | N/A |
 | [`ScrapeUnblockerToolkit`](https://docs.scrapeunblocker.com/sdks/langchain) | N/A |
 | [`SideQuest`](https://sidequestpays.com/docs#langchain) | N/A |

@@ -29,7 +29,7 @@ tags: [index, langgraph]
 - [Persistence](durable-execution.md) - LangGraph's persistence layer gives agents short-term memory through checkpointers and long-term memory through stores.
 - [Event streaming](event-streaming.md) - Stream LangGraph runs with typed projections for messages, state, subgraphs, output, and extensions.
 - [Fault tolerance](fault-tolerance.md) - Configure per-node timeouts, retries, error handlers, and recovery strategies in LangGraph.
-- [Functional API overview](functional-api.md) - Wrap other frameworks with entrypoints and tasks for LangSmith Deployment. Covers checkpointing, resume rules, and common pitfalls.
+- [Functional API overview](functional-api.md) - Wrap other frameworks with entrypoints and tasks for LangSmith Agent Server. Covers checkpointing, resume rules, and common pitfalls.
 - [Build sequences, branches, and loops](graph-api-control-flow.md) - Compose sequences, parallel branches, conditional edges, and loops with the LangGraph Graph API.
 - [Configure nodes](graph-api-nodes.md) - Add runtime configuration, retry policies, timeouts, error handling, defaults, and caching to LangGraph nodes.
 - [Use Send and Command](graph-api-send-command.md) - Build map-reduce workflows with Send and combine state updates with routing using Command in LangGraph.

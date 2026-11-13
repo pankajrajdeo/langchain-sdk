@@ -10,7 +10,7 @@ tags: [docs, deepagents, quickstart]
 
 > Build your first deep agent in minutes
 
-This guide walks you through creating your first deep agent with the Deep Agents SDK. Use the SDK for maximum flexibility and host agents yourself or run a custom [LangSmith Deployment](../langsmith/deployment.md). To run agents in production without having to manage infrastructure, see the [Managed Deep Agents quickstart](../langsmith/python/managed-deep-agents-quickstart.md) instead.
+This guide walks you through creating your first deep agent with the Deep Agents SDK. Use the SDK for maximum flexibility and host agents yourself or run a custom [Agent Server](../langsmith/deployment.md). To run agents in production without having to manage infrastructure, see the [Managed Deep Agents quickstart](../langsmith/python/managed-deep-agents-quickstart.md) instead.
 
 You will build a research agent that can conduct research and write reports.
 

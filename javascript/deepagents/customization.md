@@ -2482,7 +2482,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 > import { createDeepAgent, StoreBackend } from "deepagents";
 > import { InMemoryStore } from "@langchain/langgraph";
 >
-> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 >
 > const agent = createDeepAgent({
 >   model: "google:gemini-3.6-flash",
@@ -2499,7 +2499,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 > import { createDeepAgent, StoreBackend } from "deepagents";
 > import { InMemoryStore } from "@langchain/langgraph";
 >
-> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 >
 > const agent = createDeepAgent({
 >   model: "openai:gpt-6.1-sol",
@@ -2516,7 +2516,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 > import { createDeepAgent, StoreBackend } from "deepagents";
 > import { InMemoryStore } from "@langchain/langgraph";
 >
-> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 >
 > const agent = createDeepAgent({
 >   model: "anthropic:claude-sonnet-5",
@@ -2533,7 +2533,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 > import { createDeepAgent, StoreBackend } from "deepagents";
 > import { InMemoryStore } from "@langchain/langgraph";
 >
-> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 >
 > const agent = createDeepAgent({
 >   model: "openrouter:z-ai/glm-5.2",
@@ -2550,7 +2550,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 > import { createDeepAgent, StoreBackend } from "deepagents";
 > import { InMemoryStore } from "@langchain/langgraph";
 >
-> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 >
 > const agent = createDeepAgent({
 >   model: "fireworks:accounts/fireworks/models/glm-5p2",
@@ -2567,7 +2567,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 > import { createDeepAgent, StoreBackend } from "deepagents";
 > import { InMemoryStore } from "@langchain/langgraph";
 >
-> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 >
 > const agent = createDeepAgent({
 >   model: "baseten:zai-org/GLM-5.2",
@@ -2584,7 +2584,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 > import { createDeepAgent, StoreBackend } from "deepagents";
 > import { InMemoryStore } from "@langchain/langgraph";
 >
-> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+> const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 >
 > const agent = createDeepAgent({
 >   model: "ollama:north-mini-code-1.0",
@@ -2597,7 +2597,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 >
 > > [!NOTE]
 > >
-> > When deploying to [LangSmith Deployment](../../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
+> > When deploying to [LangSmith Agent Server](../../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
 >
 > > [!TIP]
 > >

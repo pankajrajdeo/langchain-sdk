@@ -332,6 +332,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Pay-per-call LangChain tools over x402 for OCR, analysis, transcription, browsers, and agent inboxes.
 
+> [card] [AutomSearch](https://github.com/automdev/langchain-autom#readme)
+>
+> Live Google, Bing, Brave, DuckDuckGo and Yahoo search results as a tool and a retriever, through the Autom SERP API.
+
 > [card] [Auxen](https://auxen.ai)
 >
 > Dedicated per-customer LLM endpoints with an OpenAI-compatible API.
@@ -1196,6 +1200,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Web search, embeddings, and retrieval for agents with structured, citable sources.
 
+> [card] [Keln](https://github.com/kris-holy/langchain-keln#readme)
+>
+> Keln is an inference platform for open models, with an OpenAI-compatible API for chat, tool calling and structured output.
+
 > [card] [Kerq](https://kerq.dev/docs)
 >
 > Trust scoring and telemetry for AI tools and MCP servers.
@@ -1739,6 +1747,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [PlainId](plainid.md)
 >
 > Authorization and access control platform.
+
+> [card] [PiloterrGoogleSearch](https://github.com/piloterr/langchain-piloterr#readme)
+>
+> Google search and web page scraping (plain, rendered or unblocked) as tools and a document loader, through the Piloterr web data API.
 
 > [card] [Pinecone](pinecone.md)
 >

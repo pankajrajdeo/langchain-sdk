@@ -22,4 +22,4 @@ SUBAGENT_RESPONSE_FORMAT_CONFIG_KEY = '__deepagents_subagent_response_format'
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/18930b5463c8a0a432353db5299af280f879973f/libs/deepagents/deepagents/middleware/subagents.py#L50)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0ec42441901968a75202a3ef365650eb280a473b/libs/deepagents/deepagents/middleware/subagents.py#L51)

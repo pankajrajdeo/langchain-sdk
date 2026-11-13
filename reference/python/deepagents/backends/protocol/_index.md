@@ -1,16 +1,17 @@
 ---
 title: "reference/python/deepagents/backends/protocol"
-description: "Index of 29 pages and 18 subdirectories under reference/python/deepagents/backends/protocol."
+description: "Index of 30 pages and 19 subdirectories under reference/python/deepagents/backends/protocol."
 category: "index"
 tags: [index, reference, python, deepagents, backends, protocol]
 ---
 
 # reference/python/deepagents/backends/protocol
 
-29 pages here, 102 pages including subdirectories.
+30 pages here, 104 pages including subdirectories.
 
 ## Directories
 
+- [BackendConsumer/](BackendConsumer/_index.md) - 1 page
 - [BackendProtocol/](BackendProtocol/_index.md) - 18 pages
 - [ContextLine/](ContextLine/_index.md) - 2 pages
 - [DeleteResult/](DeleteResult/_index.md) - 2 pages
@@ -34,6 +35,7 @@ tags: [index, reference, python, deepagents, backends, protocol]
 
 - [ASYNC_GLOB_TIMEOUT](ASYNC_GLOB_TIMEOUT.md) - Timeout in seconds for a sandbox glob round-trip.
 - [ASYNC_GREP_TIMEOUT](ASYNC_GREP_TIMEOUT.md) - Timeout in seconds for the async grep wrapper.
+- [BackendConsumer](BackendConsumer.md) - Middleware that works on the agent's backend.
 - [BackendProtocol](BackendProtocol.md) - Protocol for pluggable memory backends (single, unified).
 - [ContextLine](ContextLine.md) - A non-matching line surrounding a grep match, used for context_lines.
 - [DEFAULT_GREP_TIMEOUT](DEFAULT_GREP_TIMEOUT.md) - Default timeout in seconds for one sync grep phase.

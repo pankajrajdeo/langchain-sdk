@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting for self-hosted deployments"
-description: "Diagnostic steps for troubleshooting self-hosted LangSmith Deployment issues before contacting support."
+description: "Diagnostic steps for troubleshooting self-hosted LangSmith Agent Server issues before contacting support."
 source: "https://docs.langchain.com/langsmith/diagnostics-self-hosted"
 category: "docs"
 tags: [docs, langsmith, diagnostics-self-hosted]
@@ -8,9 +8,9 @@ tags: [docs, langsmith, diagnostics-self-hosted]
 
 # Troubleshooting for self-hosted deployments
 
-> Diagnostic steps for troubleshooting self-hosted LangSmith Deployment issues before contacting support.
+> Diagnostic steps for troubleshooting self-hosted LangSmith Agent Server issues before contacting support.
 
-This page provides diagnostic steps to help you troubleshoot issues with self-hosted [LangSmith Deployment](deployment.md) before reaching out to support. Follow these steps systematically to identify and resolve common deployment issues.
+This page provides diagnostic steps to help you troubleshoot issues with self-hosted [LangSmith Agent Server](deployment.md) before reaching out to support. Follow these steps systematically to identify and resolve common deployment issues.
 
 If you complete these diagnostic steps and still need assistance, refer to [Support](#support) at the end of this guide for information on what to gather before reaching out.
 
@@ -60,15 +60,15 @@ kubectl get lgps
 
 Your deployment includes the following core components:
 
-* **`langsmith-frontend`**: The LangSmith frontend UI where you create Agent Server deployments. This app makes API calls to `langsmith-host-backend`. Part of the [control plane](control-plane.md).
-* **`langsmith-host-backend`**: The LangSmith Deployment [control plane](control-plane.md) that receives requests from `langsmith-frontend` and persists deployment requests to the control plane Postgres database.
-* **`langsmith-listener`**: Part of the LangSmith Deployment [data plane](data-plane.md). Polls `langsmith-host-backend` via HTTP API for deployments to create, update, or delete. Enqueues tasks for worker processes to handle.
+* **`langsmith-frontend`**: The LangSmith frontend UI where you create Agent Servers. This app makes API calls to `langsmith-host-backend`. Part of the [control plane](control-plane.md).
+* **`langsmith-host-backend`**: The LangSmith Agent Server [control plane](control-plane.md) that receives requests from `langsmith-frontend` and persists deployment requests to the control plane Postgres database.
+* **`langsmith-listener`**: Part of the LangSmith Agent Server [data plane](data-plane.md). Polls `langsmith-host-backend` via HTTP API for deployments to create, update, or delete. Enqueues tasks for worker processes to handle.
 * **`langsmith-redis`**: The [Redis](data-plane.md#redis) instance serving as the task queue for `langsmith-listener`. The listener enqueues tasks here and workers pull tasks from this queue.
 * **`langsmith-operator`**: The `lgps` Kubernetes operator that reconciles underlying Kubernetes resources for `lgps` resources. Part of the data plane infrastructure.
 
 > [!NOTE]
 >
-> Additional components may be present in your deployment depending on your configuration. For an overview, refer to [LangSmith Deployment components](components.md).
+> Additional components may be present in your deployment depending on your configuration. For an overview, refer to [LangSmith Agent Server components](components.md).
 
 ## Step 2. Enable debug logging
 
@@ -84,21 +84,21 @@ extraEnv:
     value: DEBUG
 ```
 
-### For Agent Server deployments
+### For Agent Servers
 
-If the issue is with an individual Agent Server deployment:
+If the issue is with an individual Agent Server:
 
-1. Navigate to the **Deployments** tab in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-diagnostics-self-hosted).
-2. On a deployment's view, select **+ New Revision**.
+1. Navigate to the **Agent Servers** tab in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-diagnostics-self-hosted).
+2. On an Agent Server's view, select **+ New Revision**.
 3. Add a new environment variable `LOG_LEVEL` and set it to `DEBUG`.
 
 > [!NOTE]
 >
-> You can also find debug logs in the UI on a deployment's view, click on **Server Logs** and select **Debug** for the **Log level: Info** dropdown.
+> You can also find debug logs in the UI on an Agent Server's view, click on **Server Logs** and select **Debug** for the **Log level: Info** dropdown.
 
 ### For widespread issues
 
-If you are unsure where the issue originates, enable `DEBUG` logging everywhere (control plane, data plane, and all Agent Server deployments).
+If you are unsure where the issue originates, enable `DEBUG` logging everywhere (control plane, data plane, and all Agent Servers).
 
 ### Review application logs
 

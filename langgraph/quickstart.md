@@ -10,7 +10,7 @@ tags: [docs, langgraph, quickstart]
 
 This quickstart demonstrates how to build a calculator agent with the LangGraph Graph API.
 
-Already have an agent and want to deploy it? See [LangSmith Deployment](../langsmith/deployment.md).
+Already have an agent and want to deploy it? See [LangSmith Agent Server](../langsmith/deployment.md).
 
 > [!TIP]
 >
@@ -508,7 +508,7 @@ You now have a working calculator agent. Continue with one of the following subj
 * **Add human-in-the-loop**: Pause with [interrupts](interrupts.md) for approval or edits.
 * **Stream results**: Follow [streaming](streaming.md) for tokens and state updates.
 * **Go deeper**: [Workflows and agents](workflows-agents.md).
-* **Deploy**: Host the agent with [LangSmith Deployment](../langsmith/deployment.md).
+* **Deploy**: Host the agent with [LangSmith Agent Server](../langsmith/deployment.md).
 * **Evaluate**: Test behavior with [LangSmith evaluation](../langsmith/evaluation-quickstart.md).
 
 ***

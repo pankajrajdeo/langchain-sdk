@@ -17,7 +17,7 @@ The install runs in two stages:
 1. **Infrastructure**: Terraform provisions AKS, Postgres, Redis, Blob Storage, Key Vault, cert-manager, KEDA, and ingress.
 2. **Application**: Helm installs the LangSmith chart against the cluster.
 
-After the base install, enable optional add-ons (LangSmith Deployment, Fleet, Insights, Polly, SmithDB, and the LLM Gateway) and SSO by setting flags and redeploying.
+After the base install, enable optional add-ons (Agent Server hosting, Fleet, Insights, Polly, SmithDB, and the LLM Gateway) and SSO by setting flags and redeploying.
 
 > [!NOTE]
 >
@@ -464,13 +464,13 @@ Beyond the two federated credentials, the upgrade on Azure only moves the chart 
 
 Each add-on is gated by a flag in `infra/terraform.tfvars`. Set the flag, re-run `make init-values` to regenerate values, then re-run `make deploy`.
 
-### LangSmith Deployment
+### Agent Server hosting
 
-Enables [LangSmith Deployment](enable-self-hosted-deployment.md), which lets you deploy and manage agents as API servers directly from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-self-host-terraform-azure-deploy). This adds three new pods.
+Enables [Agent Server hosting](enable-self-hosted-deployment.md), which lets you deploy and manage agents as API servers directly from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-self-host-terraform-azure-deploy). This adds three new pods.
 
 | Pod | Role | Workload Identity |
 | - | - | - |
-| `langsmith-host-backend` | LangSmith Deployment control plane API. Manages deployment lifecycle, stores state in shared PostgreSQL. | Yes |
+| `langsmith-host-backend` | Agent Server control plane API. Manages deployment lifecycle, stores state in shared PostgreSQL. | Yes |
 | `langsmith-listener` | Watches host-backend, creates and updates `LangGraphPlatform` CRDs in Kubernetes. | Yes |
 | `langsmith-operator` | Reconciles CRDs. Creates per-deployment Deployments, StatefulSets, and Services. | No |
 
@@ -494,7 +494,7 @@ make init-values    # picks up enable_deployments = true → generates add-on ov
 make deploy         # rolls out host-backend + listener + operator
 ```
 
-`make init-values` appends the LangSmith Deployment add-on overlay (`langsmith-values-agent-deploys.yaml`) to the values chain. It automatically injects:
+`make init-values` appends the Agent Server hosting add-on overlay (`langsmith-values-agent-deploys.yaml`) to the values chain. It automatically injects:
 
 ```yaml
 config:
@@ -512,10 +512,10 @@ Without the `https://` protocol in `url`, operator-deployed agents stay stuck in
 # All three pods Running
 kubectl get pods -n langsmith | grep -E "host-backend|listener|operator"
 
-# LangSmith Deployment CRDs registered
+# Agent Server hosting CRDs registered
 kubectl get crd | grep langchain
 
-# List LangSmith Deployments (empty on first deploy, populated when you create a deployment)
+# List Agent Servers (empty on first deploy, populated when you create an Agent Server)
 kubectl get lgp -n langsmith
 ```
 
@@ -576,7 +576,7 @@ make deploy
 
 ### Insights and Polly
 
-Two features, independent of each other; enable either one without the other. Polly runs on LangSmith Deployment, so set `enable_deployments = true` with it. The deploy scripts do not check this.
+Two features, independent of each other; enable either one without the other. Polly runs on Agent Server, so set `enable_deployments = true` with it. The deploy scripts do not check this.
 
 * **Insights**: AI-powered trace analytics. Surfaces patterns and anomalies in LangSmith traces. Runs as static `standalone-insights` api-server and queue pods. The overlay sets top-level `insights.enabled: true`.
 * **Polly**: AI-powered evaluation and monitoring agent. Runs as static `standalone-polly` api-server and queue pods. The overlay sets top-level `polly.enabled: true`.
@@ -585,7 +585,7 @@ No `terraform apply` needed; run `make init-values && make deploy`.
 
 ```hcl
 # infra/terraform.tfvars
-enable_deployments = true    # Polly runs on LangSmith Deployment
+enable_deployments = true    # Polly runs on Agent Server
 enable_insights    = true    # Insights analytics
 enable_polly       = true    # Polly AI evaluation agent
 ```
@@ -612,7 +612,7 @@ helm get values langsmith -n langsmith | grep -A3 insights
 >
 > **Encryption keys must never change after first enable.** Changing `insights_encryption_key` or `polly_encryption_key` permanently corrupts all existing encrypted data. There is no recovery path. These keys live in Key Vault and never rotate automatically.
 
-If the Polly UI shows "Unable to connect to LangGraph server" after the first enable, the frontend started before the `langsmith-polly-config` ConfigMap existed. Run `kubectl rollout restart deployment langsmith-frontend -n langsmith`.
+If the Polly UI shows `Unable to connect to LangGraph server` after the first enable, the frontend started before the `langsmith-polly-config` ConfigMap existed. Run `kubectl rollout restart deployment langsmith-frontend -n langsmith`.
 
 ### SmithDB
 
@@ -701,7 +701,7 @@ To enable SSO:
 | Phase | New pods | Total \~running |
 | - | - | - |
 | Base install | Core LangSmith (backend, frontend, queue, ingest-queue, clickhouse, etc.) | \~17 |
-| LangSmith Deployment | `host-backend`, `listener`, `operator` | \~20 |
+| Agent Server hosting | `host-backend`, `listener`, `operator` | \~20 |
 | Fleet | `fleet-tool-server`, `fleet-trigger-server`, and Fleet's in-cluster Redis | Varies |
 | Insights and Polly | `standalone-insights` and `standalone-polly` api-server and queue pods | Varies |
 | LLM Gateway | `agent-gateway`, plus `presidio-analyzer` with PII redaction | Varies |
@@ -792,7 +792,7 @@ kubectl -n langsmith create secret generic <secret-name> --from-file=ca.crt=ca-b
 * Reference the [Azure variables](self-host-terraform-azure-variables.md) and the [quick reference](self-host-terraform-azure-quick-reference.md).
 * Review the [Azure architecture](self-host-terraform-azure-architecture.md) for module structure, traffic flow, and Workload Identity.
 * When something breaks, check the [Azure troubleshooting guide](self-host-terraform-azure-troubleshooting.md).
-* Enable agent deployment in the UI with [LangSmith Deployment](enable-self-hosted-deployment.md).
+* Enable agent deployment in the UI with [Agent Server hosting](enable-self-hosted-deployment.md).
 
 ***
 

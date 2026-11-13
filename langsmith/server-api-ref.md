@@ -1,14 +1,16 @@
 ---
-title: "Agent Server API reference for LangSmith Deployment"
-description: "Browse the Agent Server API reference for LangSmith Deployment, available within each deployment at the /docs endpoint."
+title: "Agent Server API reference"
+description: "Browse the Agent Server API reference, available within each Agent Server at the /docs endpoint."
 source: "https://docs.langchain.com/langsmith/server-api-ref"
 category: "docs"
 tags: [docs, langsmith, server-api-ref]
 ---
 
-# Agent Server API reference for LangSmith Deployment
+<a id="tag/a2a/post/a2a/\{assistant_id}"></a>
 
-> Browse the Agent Server API reference for LangSmith Deployment, available within each deployment at the /docs endpoint.
+# Agent Server API reference
+
+> Browse the Agent Server API reference, available within each Agent Server at the /docs endpoint.
 
 The Agent Server API reference is available within each [deployment](deployment.md) at the `/docs` endpoint (e.g. `http://localhost:8124/docs`).
 
@@ -23,8 +25,6 @@ Browse the full API reference in the **Agent Server API** section in the sidebar
 * [A2A](agent-server-api/a2a.md) - Agent-to-Agent Protocol endpoints
 * [MCP](agent-server-api/mcp.md) - Model Context Protocol endpoints
 * [System](agent-server-api/system.md) - Health checks and server info
-
-<a id="tag/a2a/post/a2a/\{assistant_id}"></a>
 
 ## Authentication
 

@@ -64,7 +64,7 @@ The following features are supported on AWS. For GCP and Azure beta feature avai
 * **[Insights](insights.md)**: Automatic analysis of traces to surface usage patterns, common agent behaviors, and failure modes.
 * **[LangSmith Chat](chat.md)**: Analyze traces, threads, prompts, and evaluations from inside your workspace.
 * **[Prompt engineering](prompt-context-hub.md#prompts)**: Prompts and prompt commits.
-* **[LangSmith Deployment](deployment.md)**: The LangSmith Deployment control plane runs inside your data plane's cluster, so both the agent management layer and your agents run in your private network.
+* **[LangSmith Agent Server](deployment.md)**: The LangSmith Agent Server control plane runs inside your data plane's cluster, so both the agent management layer and your agents run in your private network.
 * **[Sandboxes](sandboxes.md)**: Usage through the CLI and SDK is identical to Cloud, except that you point at your data plane's endpoint.
 * **[LLM Gateway](llm-gateway.md)**: Call models across providers with one LangSmith API key, with spend, rate limit, and data protection policies enforced centrally.
 * **[LLM auth proxy](llm-auth-proxy-self-hosted.md)**: Enforce your own authentication flows for model invocations so provider credentials are never exposed to end users.

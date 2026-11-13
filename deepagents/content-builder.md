@@ -46,7 +46,7 @@ Python 3.11 or later.
 
 ## Choose your path
 
-Start with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the Deep Agents SDK and host agents yourself, or run a custom [LangSmith Deployment](../langsmith/deployment.md).
+Start with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the Deep Agents SDK and host agents yourself, or run a custom [Agent Server](../langsmith/deployment.md).
 
 > [tab] Managed Deep Agents
 >
@@ -668,7 +668,7 @@ Start with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overvie
 
 > [tab] Deep Agents SDK
 >
-> Use the open source SDK when you want to host the agent yourself or run a custom [LangSmith Deployment](../langsmith/deployment.md). The example keeps behavior in memory files, skills, and subagent definitions, plus a [FilesystemBackend](backends.md).
+> Use the open source SDK when you want to host the agent yourself or run a custom [Agent Server](../langsmith/deployment.md). The example keeps behavior in memory files, skills, and subagent definitions, plus a [FilesystemBackend](backends.md).
 >
 > ### Setup
 >

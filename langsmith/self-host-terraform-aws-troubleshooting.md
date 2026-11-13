@@ -154,7 +154,7 @@ kubectl run s3-test --rm -it --image=amazon/aws-cli -n langsmith \
   s3 ls s3://<bucket-name>
 ```
 
-`make init-values` annotates each component's service account (backend, platform-backend, queue, ingest-queue, playground, and the LangSmith Deployment services). If the annotations are missing, verify `create_langsmith_irsa_role = true` in `terraform.tfvars`, then run `make init-values && make deploy`.
+`make init-values` annotates each component's service account (backend, platform-backend, queue, ingest-queue, playground, and the Agent Server hosting services). If the annotations are missing, verify `create_langsmith_irsa_role = true` in `terraform.tfvars`, then run `make init-values && make deploy`.
 
 ### ElastiCache Redis connection timeout
 
@@ -555,7 +555,7 @@ make tf ARGS="output langsmith_irsa_role_arn"
 aws iam get-role --role-name <irsa-role-name>
 ```
 
-### LangSmith Deployment
+### Agent Server hosting
 
 ```bash
 kubectl get pods -n langsmith | grep -E "host-backend|listener|operator"

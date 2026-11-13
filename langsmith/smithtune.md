@@ -36,7 +36,7 @@ Evaluate the base and tuned models on the test data, then [compare the experimen
 
 **5. Deploy an endpoint (optional)**
 
-Serve the tuned model for your application. To run an agent that uses it in production, see [LangSmith Deployment](deployment.md).
+Serve the tuned model for your application. To run an agent that uses it in production, see [LangSmith Agent Server](deployment.md).
 
 > [!TIP]
 >

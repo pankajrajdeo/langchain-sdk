@@ -288,7 +288,7 @@ The script manages the following SSM parameters:
 | `langsmith-license-key` | Prompt | From [the LangChain sales team](https://www.langchain.com/contact-sales) |
 | `langsmith-admin-password` | Prompt | At least 12 characters, with lowercase, uppercase, and a symbol |
 | `langsmith-admin-email` | Prompt | Initial organization admin |
-| `deployments-encryption-key` | Auto-generated Fernet key | LangSmith Deployment add-on |
+| `deployments-encryption-key` | Auto-generated Fernet key | Agent Server hosting add-on |
 | `agent-builder-encryption-key` | Auto-generated Fernet key | Used by Fleet; the name predates the rename |
 | `insights-encryption-key` | Auto-generated Fernet key | Insights add-on |
 | `polly-encryption-key` | Auto-generated Fernet key | LangSmith Chat (formerly Polly) add-on |
@@ -394,7 +394,7 @@ For every chart change in v17, see [Upgrade from v16 to v17](self-host-upgrades.
 Each add-on is gated by a flag in `infra/terraform.tfvars`. Set the flag, run `make apply`, re-run `make init-values` to copy the matching values file, then re-run `make deploy`. `make apply` is required for add-ons that Terraform provisions: Fleet with external storage (the default), LangSmith Chat or Insights with external storage, sandboxes, and SmithDB. Sandboxes and SmithDB create AWS resources. External storage creates a database on the existing RDS instance and the matching Kubernetes secrets. For the rest, `make apply` makes no changes.
 
 ```hcl
-enable_deployments     = true            # LangSmith Deployment (listener, operator, host-backend)
+enable_deployments     = true            # Agent Server hosting (listener, operator, host-backend)
 enable_fleet           = true            # Fleet (formerly Agent Builder)
 fleet_storage          = "external"      # default; "in-cluster" uses chart StatefulSets
 enable_polly           = true            # LangSmith Chat (formerly Polly)
@@ -414,7 +414,7 @@ make deploy
 
 `enable_agent_builder` was removed in chart v16. Setting it to `true` fails validation at `terraform plan`, so delete it from existing `tfvars` files and use `enable_fleet`. `enable_standalone_polly` and `enable_standalone_insights` remain as legacy shorthand that enables the add-on with external storage (`enable_polly = true` with `polly_storage = "external"`, and the same for Insights).
 
-For details on agent deployment, see [LangSmith Deployment](enable-self-hosted-deployment.md).
+For details on agent deployment, see [Agent Server hosting](enable-self-hosted-deployment.md).
 
 ### Fleet
 
@@ -543,7 +543,7 @@ The manifest targets the `langsmith-agents` namespace; edit it for a different n
 * Reference the [AWS variables](self-host-terraform-aws-variables.md) and the [quick reference](self-host-terraform-aws-quick-reference.md).
 * Review the [AWS architecture](self-host-terraform-aws-architecture.md) for platform layers, IRSA, and module dependencies.
 * When something breaks, check the [AWS troubleshooting guide](self-host-terraform-aws-troubleshooting.md).
-* Enable agent deployment in the UI with [LangSmith Deployment](enable-self-hosted-deployment.md).
+* Enable agent deployment in the UI with [Agent Server hosting](enable-self-hosted-deployment.md).
 
 ***
 

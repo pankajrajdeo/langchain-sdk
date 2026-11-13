@@ -1,6 +1,6 @@
 ---
 title: "Get started with Studio"
-description: "Studio in the LangSmith Deployment UI supports connecting to two types of graphs:"
+description: "Studio in the LangSmith Agent Server UI supports connecting to two types of graphs:"
 source: "https://docs.langchain.com/langsmith/quick-start-studio"
 category: "docs"
 tags: [docs, langsmith, quick-start-studio]
@@ -8,18 +8,18 @@ tags: [docs, langsmith, quick-start-studio]
 
 # Get started with Studio
 
-[Studio](studio.md) in the [LangSmith Deployment UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) supports connecting to two types of graphs:
+[Studio](studio.md) in the [LangSmith Agent Server UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) supports connecting to two types of graphs:
 
 * Graphs deployed on [cloud or self-hosted](#deployed-graphs).
 * Graphs running locally with [Agent Server](#local-development-server).
 
 ## Deployed graphs
 
-Studio is accessed in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) from the **Deployments** navigation.
+Studio is accessed in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) from the **Agent Servers** navigation.
 
-For applications that are [deployed](deployment-quickstart.md), you can access Studio as part of that deployment. To do so, navigate to the deployment in the UI and select **Studio**.
+For applications that are [deployed](deployment-quickstart.md), you can access Studio as part of that Agent Server. To do so, navigate to the Agent Server in the UI and select **Studio**.
 
-This will load Studio connected to your live deployment, allowing you to create, read, and update the [threads](../langgraph/checkpointers.md#threads), [assistants](assistants.md), and [memory](../concepts/memory.md) in that deployment.
+This will load Studio connected to your live Agent Server, allowing you to create, read, and update the [threads](../langgraph/checkpointers.md#threads), [assistants](assistants.md), and [memory](../concepts/memory.md) in that Agent Server.
 
 ## Local development server
 
@@ -78,7 +78,7 @@ To test your application locally using Studio:
 2. For a running server, access the Dbugger with one of the following:
 
    1. Directly navigate to the following URL: `https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024`.
-   2. Navigate to **Deployments** in the UI, click the **Studio** button on a deployment, enter `http://127.0.0.1:2024` and click **Connect**.
+   2. Navigate to **Agent Servers** in the UI, click the **Studio** button on an Agent Server, enter `http://127.0.0.1:2024` and click **Connect**.
 
    If running your server at a different host or port, update the `baseUrl` to match.
 

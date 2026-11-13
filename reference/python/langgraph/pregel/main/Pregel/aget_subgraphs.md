@@ -29,7 +29,7 @@ aget_subgraphs(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `namespace` | `str \| None` | No | The namespace to filter the subgraphs by. (default: `None`) |
+| `namespace` | `str \| None` | No | Yield only the subgraph at this exact namespace, such as `parent\|child` (without task IDs). A nested namespace needs `recurse=True`. (default: `None`) |
 | `recurse` | `bool` | No | Whether to recurse into the subgraphs. If `False`, only the immediate subgraphs will be returned. (default: `False`) |
 
 ## Returns
@@ -40,4 +40,4 @@ An iterator of the `(namespace, subgraph)` pairs.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a4d4187e82cdb0a73d68c76d70d655dd73a6db0b/libs/langgraph/langgraph/pregel/main.py#L1179)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a054ed08dcee7ecc4105706d38c0b4aa0b3c3c32/libs/langgraph/langgraph/pregel/main.py#L1196)

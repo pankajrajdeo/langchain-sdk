@@ -12,7 +12,7 @@ tags: [docs]
 
 Deep Agents is the [agent harness](concepts/products.md#agent-harnesses-like-the-deep-agents-sdk) for complex, multi-step work. It adds planning, a virtual filesystem for context, subagent spawning, and long-term memory on top of LangChain and LangGraph.
 
-Start with [Managed Deep Agents](langsmith/python/managed-deep-agents-overview.md) to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](#self-host-with-the-sdk) and host agents yourself, or run a custom [LangSmith Deployment](langsmith/deployment.md).
+Start with [Managed Deep Agents](langsmith/python/managed-deep-agents-overview.md) to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](#self-host-with-the-sdk) and host agents yourself, or run a custom [Agent Server](langsmith/deployment.md).
 
 ## Choose how to run Deep Agents
 
@@ -22,7 +22,7 @@ Start with [Managed Deep Agents](langsmith/python/managed-deep-agents-overview.m
 
 > [card] [Deep Agents SDK](#self-host-with-the-sdk)
 >
-> The same deep agents harness with maximum flexibility. Host agents yourself, or run a custom LangSmith Deployment when you need more control over the runtime.
+> The same deep agents harness with maximum flexibility. Host agents yourself, or run a custom Agent Server when you need more control over the runtime.
 
 Deep Agents includes the following capabilities:
 
@@ -37,7 +37,7 @@ Optional capabilities such as [task planning](#task-planning) and [skills](#skil
 
 ## Self-host with the SDK
 
-Use the open source SDK when you run the agent in your own process or container, need a custom [backend](deepagents/backends.md), store, or checkpointer, or want a [LangSmith Deployment](langsmith/deployment.md) you configure yourself. For managed deployment instead, see [Managed Deep Agents](langsmith/python/managed-deep-agents-overview.md).
+Use the open source SDK when you run the agent in your own process or container, need a custom [backend](deepagents/backends.md), store, or checkpointer, or want an [Agent Server](langsmith/deployment.md) you configure yourself. For managed deployment instead, see [Managed Deep Agents](langsmith/python/managed-deep-agents-overview.md).
 
 ### Try it
 

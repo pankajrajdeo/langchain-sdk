@@ -67,7 +67,7 @@ Clients send the key as `x-api-key`. You do not need to add verification endpoin
 
 ## Configure identity with Supabase
 
-Use Supabase when a browser or another client calls the deployment as a signed-in entity. Each user gets private threads. Managed Deep Agents configures that ownership for you. For more information on the underlying LangSmith Deployment pattern, see [Make conversations private](../resource-auth.md).
+Use Supabase when a browser or another client calls the deployment as a signed-in entity. Each user gets private threads. Managed Deep Agents configures that ownership for you. For more information on the underlying LangSmith Agent Server pattern, see [Make conversations private](../resource-auth.md).
 
 **1. Enable auth in Supabase**
 

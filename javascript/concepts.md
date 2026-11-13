@@ -123,7 +123,7 @@ Use Deep Agents when:
 * You want to use predefined tools, such as filesystem operations, bash execution, and automated context engineering.
 * You want to use predefined prompts and subagents.
 
-Start with [Managed Deep Agents](../langsmith/javascript/managed-deep-agents-overview.md) to run that harness in production without managing infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](deepagents/overview.md#self-host-with-the-sdk) and host agents yourself, or run a custom [LangSmith Deployment](../langsmith/deployment.md).
+Start with [Managed Deep Agents](../langsmith/javascript/managed-deep-agents-overview.md) to run that harness in production without managing infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](deepagents/overview.md#self-host-with-the-sdk) and host agents yourself, or run a custom [Agent Server](../langsmith/deployment.md).
 
 <a id="document_compressors"></a>
 

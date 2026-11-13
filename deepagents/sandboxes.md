@@ -357,7 +357,7 @@ Most applications choose either one sandbox per [thread](../langsmith/use-thread
 
 Sandboxes consume resources and cost money until they are shut down. Make sure you shut sandboxes down once they are no longer in use.
 
-For the full lifecycle table, async [graph factory](../langsmith/graph-rebuild.md) notes, TTL behavior, LangGraph Deployment wiring, and client-side examples, see [Sandbox lifecycle](going-to-production.md#lifecycle) in Going to production.
+For the full lifecycle table, async [graph factory](../langsmith/graph-rebuild.md) notes, TTL behavior, Agent Server wiring, and client-side examples, see [Sandbox lifecycle](going-to-production.md#lifecycle) in Going to production.
 
 ### Thread-scoped (default)
 

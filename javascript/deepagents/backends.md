@@ -33,7 +33,7 @@ This page explains how to:
 
 > [!TIP]
 >
-> When you deploy on [LangSmith Deployment](../../langsmith/deployment.md), a store is provisioned automatically. Use [LangSmith](../../langsmith/observability.md) tracing to debug file paths, permission denials, and cross-thread storage. Follow the [observability quickstart](../../langsmith/observability-quickstart.md) to get set up.
+> When you deploy on [LangSmith Agent Server](../../langsmith/deployment.md), a store is provisioned automatically. Use [LangSmith](../../langsmith/observability.md) tracing to debug file paths, permission denials, and cross-thread storage. Follow the [observability quickstart](../../langsmith/observability-quickstart.md) to get set up.
 >
 > We recommend you also set up [LangSmith Engine](../../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
 
@@ -412,7 +412,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, StoreBackend } from "deepagents";
 import { InMemoryStore } from "@langchain/langgraph";
 
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 
 const agent = createDeepAgent({
   model: "google:gemini-3.6-flash",
@@ -429,7 +429,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, StoreBackend } from "deepagents";
 import { InMemoryStore } from "@langchain/langgraph";
 
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 
 const agent = createDeepAgent({
   model: "openai:gpt-6.1-sol",
@@ -446,7 +446,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, StoreBackend } from "deepagents";
 import { InMemoryStore } from "@langchain/langgraph";
 
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 
 const agent = createDeepAgent({
   model: "anthropic:claude-sonnet-5",
@@ -463,7 +463,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, StoreBackend } from "deepagents";
 import { InMemoryStore } from "@langchain/langgraph";
 
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 
 const agent = createDeepAgent({
   model: "openrouter:z-ai/glm-5.2",
@@ -480,7 +480,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, StoreBackend } from "deepagents";
 import { InMemoryStore } from "@langchain/langgraph";
 
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 
 const agent = createDeepAgent({
   model: "fireworks:accounts/fireworks/models/glm-5p2",
@@ -497,7 +497,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, StoreBackend } from "deepagents";
 import { InMemoryStore } from "@langchain/langgraph";
 
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 
 const agent = createDeepAgent({
   model: "baseten:zai-org/GLM-5.2",
@@ -514,7 +514,7 @@ const agent = createDeepAgent({
 import { createDeepAgent, StoreBackend } from "deepagents";
 import { InMemoryStore } from "@langchain/langgraph";
 
-const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Deployment
+const store = new InMemoryStore(); // Good for local dev; omit for LangSmith Agent Server
 
 const agent = createDeepAgent({
   model: "ollama:north-mini-code-1.0",
@@ -527,7 +527,7 @@ const agent = createDeepAgent({
 
 > [!NOTE]
 >
-> When deploying to [LangSmith Deployment](../../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
+> When deploying to [LangSmith Agent Server](../../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
 
 > [!TIP]
 >
@@ -540,7 +540,7 @@ const agent = createDeepAgent({
 **Best for:**
 
 * When you already run with a configured LangGraph store (for example, Redis, Postgres, or cloud implementations behind [`BaseStore`](https://reference.langchain.com/javascript/langchain-core/stores/BaseStore)).
-* When you're deploying your agent through [LangSmith Deployment](../../langsmith/deployment.md) (a store is automatically provisioned for your agent).
+* When you're deploying your agent through [LangSmith Agent Server](../../langsmith/deployment.md) (a store is automatically provisioned for your agent).
 
 #### Namespace factories
 
@@ -556,7 +556,7 @@ The `Runtime` provides:
 
 * `rt.context`—User-supplied context passed via LangGraph's [context schema](../langgraph/graph-api.md#runtime-context) (for example, `user_id`)
 
-* `rt.serverInfo`—Server-specific metadata when running on LangGraph Server (assistant ID, graph ID, authenticated user)
+* `rt.serverInfo`—Server-specific metadata when running on Agent Server (assistant ID, graph ID, authenticated user)
 
 * `rt.executionInfo`—Execution identity information (thread ID, run ID, checkpoint ID)
 

@@ -30,7 +30,7 @@ Below are tutorials for common use cases, organized by framework.
 
 ### Deep Agents
 
-For maximum flexibility while using the same Deep Agents harness as [Managed Deep Agents](#managed-deep-agents), use the Deep Agents SDK and host agents yourself, or run a custom [LangSmith Deployment](langsmith/deployment.md).
+For maximum flexibility while using the same Deep Agents harness as [Managed Deep Agents](#managed-deep-agents), use the Deep Agents SDK and host agents yourself, or run a custom [Agent Server](langsmith/deployment.md).
 
 > [card] [Deep research](deepagents/deep-research.md)
 >
@@ -115,7 +115,7 @@ These guides explain the core concepts and APIs underlying LangChain and LangGra
 
 > [card] [Functional API](langgraph/functional-api.md)
 >
-> Wrap an agent from another framework for LangSmith Deployment.
+> Wrap an agent from another framework for LangSmith Agent Server.
 
 ## Additional resources
 

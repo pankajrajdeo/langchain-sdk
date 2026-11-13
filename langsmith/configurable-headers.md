@@ -1,6 +1,6 @@
 ---
 title: "Use HTTP headers for runtime configuration"
-description: "LangGraph allows runtime configuration to modify agent behavior and permissions dynamically. When using LangSmith Deployment, you can pass this configuration in the request body (config) or specific..."
+description: "LangGraph allows runtime configuration to modify agent behavior and permissions dynamically. When using LangSmith Agent Server, you can pass this configuration in the request body (config) or..."
 source: "https://docs.langchain.com/langsmith/configurable-headers"
 category: "docs"
 tags: [docs, langsmith, configurable-headers]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, configurable-headers]
 
 # Use HTTP headers for runtime configuration
 
-LangGraph allows runtime configuration to modify agent behavior and permissions dynamically. When using [LangSmith Deployment](deployment-quickstart.md), you can pass this configuration in the request body (`config`) or specific request headers. This enables adjustments based on user identity or other requests.
+LangGraph allows runtime configuration to modify agent behavior and permissions dynamically. When using [LangSmith Agent Server](deployment-quickstart.md), you can pass this configuration in the request body (`config`) or specific request headers. This enables adjustments based on user identity or other requests.
 
 For privacy, control which headers are passed to the runtime configuration via the `http.configurable_headers` section in your [`langgraph.json`](application-structure.md#configuration-file) file.
 

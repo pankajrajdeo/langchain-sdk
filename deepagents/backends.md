@@ -27,7 +27,7 @@ This page explains how to:
 
 > [!TIP]
 >
-> When you deploy on [LangSmith Deployment](../langsmith/deployment.md), a store is provisioned automatically. Use [LangSmith](../langsmith/observability.md) tracing to debug file paths, permission denials, and cross-thread storage. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up.
+> When you deploy on [LangSmith Agent Server](../langsmith/deployment.md), a store is provisioned automatically. Use [LangSmith](../langsmith/observability.md) tracing to debug file paths, permission denials, and cross-thread storage. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up.
 >
 > We recommend you also set up [LangSmith Engine](../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
 
@@ -515,7 +515,7 @@ agent = create_deep_agent(
     backend=StoreBackend(
         namespace=lambda rt: (rt.server_info.user.identity,),
     ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 )
 ```
 
@@ -531,7 +531,7 @@ agent = create_deep_agent(
     backend=StoreBackend(
         namespace=lambda rt: (rt.server_info.user.identity,),
     ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 )
 ```
 
@@ -547,7 +547,7 @@ agent = create_deep_agent(
     backend=StoreBackend(
         namespace=lambda rt: (rt.server_info.user.identity,),
     ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 )
 ```
 
@@ -563,7 +563,7 @@ agent = create_deep_agent(
     backend=StoreBackend(
         namespace=lambda rt: (rt.server_info.user.identity,),
     ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 )
 ```
 
@@ -579,7 +579,7 @@ agent = create_deep_agent(
     backend=StoreBackend(
         namespace=lambda rt: (rt.server_info.user.identity,),
     ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 )
 ```
 
@@ -595,7 +595,7 @@ agent = create_deep_agent(
     backend=StoreBackend(
         namespace=lambda rt: (rt.server_info.user.identity,),
     ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 )
 ```
 
@@ -611,13 +611,13 @@ agent = create_deep_agent(
     backend=StoreBackend(
         namespace=lambda rt: (rt.server_info.user.identity,),
     ),
-    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+    store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 )
 ```
 
 > [!NOTE]
 >
-> When deploying to [LangSmith Deployment](../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
+> When deploying to [LangSmith Agent Server](../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
 
 > [!TIP]
 >
@@ -630,7 +630,7 @@ agent = create_deep_agent(
 **Best for:**
 
 * When you already run with a configured LangGraph store (for example, Redis, Postgres, or cloud implementations behind [`BaseStore`](https://reference.langchain.com/python/langchain-core/stores/BaseStore)).
-* When you're deploying your agent through [LangSmith Deployment](../langsmith/deployment.md) (a store is automatically provisioned for your agent).
+* When you're deploying your agent through [LangSmith Agent Server](../langsmith/deployment.md) (a store is automatically provisioned for your agent).
 
 #### Namespace factories
 
@@ -645,7 +645,7 @@ NamespaceFactory = Callable[[Runtime], tuple[str, ...]]
 The `Runtime` provides:
 
 * `rt.context`—User-supplied context passed via LangGraph's [context schema](../langgraph/graph-api.md#runtime-context) (for example, `user_id`)
-* `rt.server_info`—Server-specific metadata when running on LangGraph Server (assistant ID, graph ID, authenticated user)
+* `rt.server_info`—Server-specific metadata when running on Agent Server (assistant ID, graph ID, authenticated user)
 * `rt.execution_info`—Execution identity information (thread ID, run ID, checkpoint ID)
 
 > [!NOTE]

@@ -7,7 +7,7 @@ tags: [index]
 
 # LangChain mirror
 
-13 pages here, 9166 pages including subdirectories.
+13 pages here, 9169 pages including subdirectories.
 
 ## Directories
 
@@ -21,11 +21,11 @@ tags: [index]
 - [javascript/](javascript/_index.md) - 377 pages
 - [langchain/](langchain/_index.md) - 82 pages
 - [langgraph/](langgraph/_index.md) - 48 pages
-- [langsmith/](langsmith/_index.md) - 1288 pages
+- [langsmith/](langsmith/_index.md) - 1289 pages
 - [migrate/](migrate/_index.md) - 4 pages
 - [openwiki/](openwiki/_index.md) - 12 pages
 - [oss/](oss/_index.md) - 3 pages
-- [reference/](reference/_index.md) - 6229 pages
+- [reference/](reference/_index.md) - 6231 pages
 - [releases/](releases/_index.md) - 3 pages
 - [resources/](resources/_index.md) - 38 pages
 
@@ -37,7 +37,7 @@ tags: [index]
 - [The open agent engineering ecosystem](docs.md) - LangChain provides open source, model-agnostic harnesses for building agents. LangSmith is the framework-agnostic platform for testing, deploying, monitoring, and improving your agents across the...
 - [The open agent engineering ecosystem](home.md) - LangChain provides open source, model-agnostic harnesses for building agents. LangSmith is the framework-agnostic platform for testing, deploying, monitoring, and improving your agents across the...
 - [Deep Agents overview](index.md) - Agent harness for planning, subagents, and file-system context, available as Managed Deep Agents or the Deep Agents SDK
-- [LangSmith Deployment](langgraph-platform.md) - Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling.
+- [LangSmith Agent Server](langgraph-platform.md) - Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling.
 - [Learn](learn.md) - Tutorials, conceptual guides, and resources to help you get started.
 - [Release policy](release-policy.md) - This page explains the LangChain and LangGraph release policies. Click on the tabs below to view the release policies for each:
 - [Changelog](releases.md) - Log of updates and improvements to our Python packages

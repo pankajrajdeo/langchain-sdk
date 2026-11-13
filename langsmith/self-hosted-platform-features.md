@@ -1,6 +1,6 @@
 ---
 title: "Self-hosted platform features"
-description: "Self-hosted-only platform features for LangSmith Deployment, including custom databases, listeners, and resource customization."
+description: "Self-hosted-only platform features for LangSmith Agent Server, including custom databases, listeners, and resource customization."
 source: "https://docs.langchain.com/langsmith/self-hosted-platform-features"
 category: "docs"
 tags: [docs, langsmith, self-hosted-platform-features]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, self-hosted-platform-features]
 
 # Self-hosted platform features
 
-> Self-hosted-only platform features for LangSmith Deployment, including custom databases, listeners, and resource customization.
+> Self-hosted-only platform features for LangSmith Agent Server, including custom databases, listeners, and resource customization.
 
 This page describes the platform features that apply only to [self-hosted](self-hosted.md) deployments.
 

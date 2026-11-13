@@ -512,7 +512,7 @@ helm history langsmith -n langsmith
 helm get values langsmith -n langsmith
 ```
 
-### LangSmith Deployment
+### Agent Server hosting
 
 ```bash
 kubectl get pods -n langsmith | grep -E "host-backend|listener|operator"

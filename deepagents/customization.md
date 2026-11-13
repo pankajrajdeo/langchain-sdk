@@ -2223,7 +2223,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 >     backend=StoreBackend(
 >         namespace=lambda rt: (rt.server_info.user.identity,),
 >     ),
->     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 > )
 ```
 >
@@ -2239,7 +2239,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 >     backend=StoreBackend(
 >         namespace=lambda rt: (rt.server_info.user.identity,),
 >     ),
->     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 > )
 ```
 >
@@ -2255,7 +2255,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 >     backend=StoreBackend(
 >         namespace=lambda rt: (rt.server_info.user.identity,),
 >     ),
->     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 > )
 ```
 >
@@ -2271,7 +2271,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 >     backend=StoreBackend(
 >         namespace=lambda rt: (rt.server_info.user.identity,),
 >     ),
->     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 > )
 ```
 >
@@ -2287,7 +2287,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 >     backend=StoreBackend(
 >         namespace=lambda rt: (rt.server_info.user.identity,),
 >     ),
->     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 > )
 ```
 >
@@ -2303,7 +2303,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 >     backend=StoreBackend(
 >         namespace=lambda rt: (rt.server_info.user.identity,),
 >     ),
->     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 > )
 ```
 >
@@ -2319,13 +2319,13 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 >     backend=StoreBackend(
 >         namespace=lambda rt: (rt.server_info.user.identity,),
 >     ),
->     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Deployment
+>     store=InMemoryStore(),  # Good for local dev; omit for LangSmith Agent Server
 > )
 ```
 >
 > > [!NOTE]
 > >
-> > When deploying to [LangSmith Deployment](../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
+> > When deploying to [LangSmith Agent Server](../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
 >
 > > [!TIP]
 > >

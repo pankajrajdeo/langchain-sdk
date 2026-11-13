@@ -17,7 +17,7 @@ There are two main ways to use Fleet agents programmatically:
 
 ## Call from code
 
-You can invoke LangSmith Fleet agents from your applications using the [LangGraph SDK](../reference.md) or the REST API. Fleet agents run on [Agent Server](../agent-server.md), so you can use the same API methods as any other [LangSmith deployment](../deployment.md).
+You can invoke LangSmith Fleet agents from your applications using the [LangGraph SDK](../reference.md) or the REST API. Fleet agents run on [Agent Server](../agent-server.md), so you can use the same API methods as any other [Agent Server](../deployment.md).
 
 The REST API lets you call your agent from any language or platform that supports HTTP requests.
 

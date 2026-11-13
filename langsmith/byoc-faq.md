@@ -143,7 +143,7 @@ tags: [docs, langsmith, byoc-faq]
 
 > [accordion] Does LangSmith support customer-managed encryption keys?
 >
-> Yes. Customer-managed encryption keys (CMK) are supported for AWS BYOC deployments on request. Contact the LangChain team to coordinate setup. By default, data is encrypted at rest with cloud provider-managed keys.
+> Yes, on AWS. When you create a data plane, you can encrypt its S3 buckets, EBS volumes, EKS secrets, RDS databases, and ElastiCache with your own AWS KMS keys. See [Bring your own keys](byoc-byok-aws.md). By default, data is encrypted at rest with cloud provider-managed keys.
 
 > [accordion] How do I revoke LangChain's access?
 >

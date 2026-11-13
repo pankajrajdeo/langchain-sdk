@@ -10,7 +10,7 @@ tags: [docs, langsmith, cancel-run]
 
 > Cancel a single run or multiple runs via the API, and choose between interrupt and rollback actions.
 
-This guide covers how to cancel runs for your agent via the [LangSmith Deployment API](server-api-ref.md). You can cancel a single run by ID or cancel multiple runs by thread or status. Cancellation is useful for stopping long-running or stuck runs, or when a user abandons a request.
+This guide covers how to cancel runs for your agent via the [LangSmith Agent Server API](server-api-ref.md). You can cancel a single run by ID or cancel multiple runs by thread or status. Cancellation is useful for stopping long-running or stuck runs, or when a user abandons a request.
 
 ## Setup
 

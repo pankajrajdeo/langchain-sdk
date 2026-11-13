@@ -10,13 +10,13 @@ tags: [docs, langsmith, event-streaming]
 
 > Stream LangSmith deployments with typed projections for messages, state, tool calls, subgraphs, and custom transformers.
 
-Event streaming is the typed-projection streaming model for LangSmith deployments. The LangGraph SDK ([Python](https://docs.langchain.com/langsmith/langgraph-python-sdk.md), [JavaScript](https://docs.langchain.com/langsmith/langgraph-js-ts-sdk.md)) opens a single subscription against the [LangSmith Deployment API](server-api-ref.md) and exposes typed projections—messages, state, tool calls, subgraphs, output, and custom transformer extensions—that can be consumed concurrently from one run.
+Event streaming is the typed-projection streaming model for LangSmith deployments. The LangGraph SDK ([Python](https://docs.langchain.com/langsmith/langgraph-python-sdk.md), [JavaScript](https://docs.langchain.com/langsmith/langgraph-js-ts-sdk.md)) opens a single subscription against the [LangSmith Agent Server API](server-api-ref.md) and exposes typed projections—messages, state, tool calls, subgraphs, output, and custom transformer extensions—that can be consumed concurrently from one run.
 
 Event streaming sits one level above the [streaming API](streaming.md), which exposes raw stream modes.
 
 > [!NOTE]
 >
-> Event streaming requires `langgraph-api>=0.10.0` on the [LangGraph Agent Server](agent-server.md). Managed LangSmith deployments are updated automatically; self-hosted servers must be on a compatible version. The client SDK must be `langgraph-sdk>=0.4.0` with `langchain-core>=1.4.0` (Python) or `@langchain/langgraph-sdk>=1.9.15` (JavaScript). Servers on earlier versions continue to serve the [streaming API](streaming.md).
+> Event streaming requires `langgraph-api>=0.10.0` on the [Agent Server](agent-server.md). Managed LangSmith deployments are updated automatically; self-hosted servers must be on a compatible version. The client SDK must be `langgraph-sdk>=0.4.0` with `langchain-core>=1.4.0` (Python) or `@langchain/langgraph-sdk>=1.9.15` (JavaScript). Servers on earlier versions continue to serve the [streaming API](streaming.md).
 
 ## Quickstart
 
@@ -753,7 +753,7 @@ To resume across a process boundary—a page reload, a worker handoff, or a sepa
 * [LangGraph event streaming](../langgraph/event-streaming.md): the same concepts applied to an in-process LangGraph application.
 * [LangChain agent event streaming](../langchain/event-streaming.md): agent-focused projections for messages, tool calls, and middleware updates.
 * [Deep Agents event streaming](../deepagents/event-streaming.md): subagent streams, nested messages, and subagent tool calls.
-* [LangSmith Deployment API](server-api-ref.md): wire-level reference for `POST /threads/{thread_id}/stream/events` and related endpoints.
+* [LangSmith Agent Server API](server-api-ref.md): wire-level reference for `POST /threads/{thread_id}/stream/events` and related endpoints.
 
 The wire-level event and command formats are defined in the [Agent Protocol](https://github.com/langchain-ai/agent-protocol) repository.
 

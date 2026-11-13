@@ -28,8 +28,9 @@ raised before anything is written, so they can still be answered.
 A single value with no interrupt pending is accepted, because it resumes a
 graph paused at a static breakpoint (`interrupt_before` or `interrupt_after`).
 
-The interrupts one task raises share an id, so an answer retried after the
-task asked its next question answers that question.
+Each `interrupt()` call in a task has its own id, so an answer retried after
+the task asked its next question is refused instead of answering that
+question.
 
 ## Signature
 
@@ -76,4 +77,4 @@ __init__(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a4d4187e82cdb0a73d68c76d70d655dd73a6db0b/libs/langgraph/langgraph/errors.py#L150)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a054ed08dcee7ecc4105706d38c0b4aa0b3c3c32/libs/langgraph/langgraph/errors.py#L150)

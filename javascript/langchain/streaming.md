@@ -445,7 +445,7 @@ const finalState = await stream.output;
 
 > [!NOTE]
 >
-> Persisting conversation history with `thread_id` requires the agent to be configured with a [checkpointer](long-term-memory.md). On [LangSmith deployments](../../langsmith/deployment.md) a checkpointer is provisioned automatically. Locally, pass one explicitly, for example `createAgent({ ..., checkpointer: new MemorySaver() })`. The remaining snippets on this page omit `thread_id` for brevity, but you should pass it in production.
+> Persisting conversation history with `thread_id` requires the agent to be configured with a [checkpointer](long-term-memory.md). On [LangSmith Agent Server](../../langsmith/deployment.md), a checkpointer is provisioned automatically. Locally, pass one explicitly, for example `createAgent({ ..., checkpointer: new MemorySaver() })`. The remaining snippets on this page omit `thread_id` for brevity, but you should pass it in production.
 
 ## LLM tokens
 

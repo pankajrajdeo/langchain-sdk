@@ -1,6 +1,6 @@
 ---
 title: "Stateless runs"
-description: "Most of the time, you provide a thread_id to your client when you run your graph in order to keep track of prior runs through the persistent state implemented in LangSmith Deployment. However, if you..."
+description: "Most of the time, you provide a thread_id to your client when you run your graph in order to keep track of prior runs through the persistent state implemented in LangSmith Agent Server. However, if..."
 source: "https://docs.langchain.com/langsmith/stateless-runs"
 category: "docs"
 tags: [docs, langsmith, stateless-runs]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, stateless-runs]
 
 # Stateless runs
 
-Most of the time, you provide a `thread_id` to your client when you run your graph in order to keep track of prior runs through the persistent state implemented in LangSmith Deployment. However, if you don't need to persist the runs you don't need to use the built-in persistent state and can create stateless runs.
+Most of the time, you provide a `thread_id` to your client when you run your graph in order to keep track of prior runs through the persistent state implemented in LangSmith Agent Server. However, if you don't need to persist the runs you don't need to use the built-in persistent state and can create stateless runs.
 
 ## Setup
 

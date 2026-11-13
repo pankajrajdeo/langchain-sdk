@@ -42,11 +42,11 @@ pip install deepagents "langgraph-cli[inmem]"
 uv add deepagents "langgraph-cli[inmem]"
 ```
 
-A deep agent created with `createDeepAgent` (`create_deep_agent` in Python) is a LangGraph graph. Expose it to AG-UI clients by serving it as a LangGraph server, then point the AG-UI adapter at that server.
+A deep agent created with `createDeepAgent` (`create_deep_agent` in Python) is a LangGraph graph. Expose it to AG-UI clients by serving it with LangSmith Agent Server, then point the AG-UI adapter at that server.
 
 ### Create a deep agent
 
-Define the agent and export the graph so a LangGraph server can load it.
+Define the agent and export the graph so Agent Server can load it.
 
 ```python
 from deepagents import create_deep_agent
@@ -79,7 +79,7 @@ langgraph dev
 
 ### Connect the AG-UI adapter
 
-The TypeScript `@ag-ui/langgraph` adapter wraps the running graph as an AG-UI agent that any client can drive. Point it at the LangGraph server and name the graph to load. This works whether the graph was authored in Python or TypeScript.
+The TypeScript `@ag-ui/langgraph` adapter wraps the running graph as an AG-UI agent that any client can drive. Point it at the running Agent Server and name the graph to load. This works whether the graph was authored in Python or TypeScript.
 
 ```ts
 import { LangGraphAgent } from "@ag-ui/langgraph";
@@ -191,7 +191,7 @@ Any AG-UI client can drive a deep agent exposed over the protocol, so you do not
 
 ## Programmatic API
 
-`LangGraphAgent` connects to a deep agent on a LangGraph server and exposes it as an AG-UI agent. Construct it with the graph to load, then drive it with a few methods.
+`LangGraphAgent` connects to a deep agent on Agent Server and exposes it as an AG-UI agent. Construct it with the graph to load, then drive it with a few methods.
 
 ```ts
 import { LangGraphAgent } from "@ag-ui/langgraph";

@@ -1,6 +1,6 @@
 ---
 title: "Functional API overview"
-description: "Wrap other frameworks with entrypoints and tasks for LangSmith Deployment. Covers checkpointing, resume rules, and common pitfalls."
+description: "Wrap other frameworks with entrypoints and tasks for LangSmith Agent Server. Covers checkpointing, resume rules, and common pitfalls."
 source: "https://docs.langchain.com/oss/python/langgraph/functional-api"
 category: "docs"
 tags: [docs, langgraph, functional-api]
@@ -8,7 +8,7 @@ tags: [docs, langgraph, functional-api]
 
 # Functional API overview
 
-> Wrap other frameworks with entrypoints and tasks for LangSmith Deployment. Covers checkpointing, resume rules, and common pitfalls.
+> Wrap other frameworks with entrypoints and tasks for LangSmith Agent Server. Covers checkpointing, resume rules, and common pitfalls.
 
 The **Functional API** wraps ordinary functions with LangGraph runtime features ([persistence](persistence.md), [memory](add-memory.md), [human-in-the-loop](interrupts.md), and [streaming](streaming.md)). Use it when you already have existing code or are using a different framework and want to [deploy it on LangSmith](../langsmith/deploy-other-frameworks.md) without rewriting that agent as a graph. Prefer the [Graph API](graph-api.md) for building new agents.
 
@@ -24,7 +24,7 @@ The Functional API uses two building blocks:
 | Build | Use |
 | - | - |
 | New LangGraph agents and workflows | [Graph API](graph-api.md) |
-| Existing agent in another framework (Claude Agent SDK, Strands, CrewAI, AutoGen, and similar) that you want on LangSmith Deployment | Functional API via [Deploy other frameworks](../langsmith/deploy-other-frameworks.md) |
+| Existing agent in another framework (Claude Agent SDK, Strands, CrewAI, AutoGen, and similar) that you want on LangSmith Agent Server | Functional API via [Deploy other frameworks](../langsmith/deploy-other-frameworks.md) |
 
 Compared with the Graph API, the Functional API uses ordinary language control flow (`if` / `else`, loops, and calls), keeps values scoped to the entrypoint and tasks instead of a shared [state](graph-api.md#state) schema, saves task results on the entrypoint checkpoint rather than after each [super-step](graph-api.md#super-steps), and has no static graph visualization.
 

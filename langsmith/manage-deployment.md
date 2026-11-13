@@ -1,26 +1,28 @@
 ---
-title: "Manage a deployment"
-description: "Configure the repository, branch, and automatic updates for a LangSmith Cloud deployment, or delete it."
+title: "Manage an Agent Server"
+description: "Configure the repository, branch, and automatic updates for an Agent Server on LangSmith Cloud, or delete it."
 source: "https://docs.langchain.com/langsmith/manage-deployment"
 category: "docs"
 tags: [docs, langsmith, manage-deployment]
 ---
 
-# Manage a deployment
+# Manage an Agent Server
 
-> Configure the repository, branch, and automatic updates for a LangSmith Cloud deployment, or delete it.
+> Configure the repository, branch, and automatic updates for an Agent Server on LangSmith Cloud, or delete it.
 
-Manage the repository, branch, and automatic update settings for a Cloud deployment. You can also delete a deployment when you no longer need it.
+Manage the repository, branch, and automatic update settings for an Agent Server on LangSmith Cloud. You can also delete an Agent Server when you no longer need it.
 
-## Configure deployment settings
+<a id="configure-deployment-settings"></a>
 
-To configure deployment settings:
+## Configure Agent Server settings
 
-1. From the **Deployments** view, select a deployment.
-2. In the top-right corner, select the gear icon (**Deployment Settings**).
+To configure Agent Server settings:
+
+1. From the **Agent Servers** view, select an Agent Server.
+2. In the top-right corner, select the gear icon (**Agent Server Settings**).
 3. (Optional) To build from a different GitHub repository, select **Change repository** and choose the repository. For details, see [Change the repository](#change-the-repository).
-4. Update the **Git Branch** as needed.
-5. Enable or disable **Automatically update deployment on push to branch**.
+4. Update **Git Ref (Branch or Tag)** as needed. Enter a branch name or a full tag ref such as `refs/tags/v1.0.0`.
+5. For a branch, enable or disable **Deploy on push**. This option is unavailable for tags.
 
 Branch and tag creation or deletion events do not trigger revisions. Only pushes to an existing branch trigger an update.
 
@@ -28,49 +30,51 @@ When several pushes occur in quick succession, LangSmith queues the updates. Aft
 
 ### Change the repository
 
-Change the repository after you rename it, transfer it to another GitHub account, or move your agent to a different repository. LangSmith checks that the `hosted-langserve` GitHub app can access the repository and that the repository contains the deployment's configuration file on its Git branch. Saving does not create a revision; the next revision builds from the new repository.
+Change the repository after you rename it, transfer it to another GitHub account, or move your agent to a different repository. LangSmith checks that the `hosted-langserve` GitHub app can access the repository and that the repository contains the Agent Server's configuration file on its Git branch. Saving does not create a revision; the next revision builds from the new repository.
 
 If you transferred the repository to another GitHub account, first [give the app access to it](deploy-to-cloud.md#manage-github-repository-access).
 
 To change the repository through the API, send `source_config.repo_url` in a `PATCH /v2/deployments/{deployment_id}` request. For more information, see the [Control plane API reference](api-ref-control-plane.md).
 
-## Delete a deployment
+<a id="delete-a-deployment"></a>
+
+## Delete an Agent Server
 
 > [tab] LangSmith UI
 >
-> To delete a deployment:
+> To delete an Agent Server:
 >
-> 1. From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-manage-deployment), select **Deployments**.
-> 2. Select the menu icon for the deployment, then select **Delete**.
+> 1. From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-manage-deployment), select **Agent Servers**.
+> 2. Select the menu icon for the Agent Server, then select **Delete**.
 > 3. In the confirmation modal, select **Delete**.
 
 > [tab] LangGraph CLI
 >
-> To find the deployment ID, run:
+> To find the Agent Server ID, run:
 >
 ```shell
 > langgraph deploy list
 ```
 >
-> Delete the deployment by ID:
+> Delete the Agent Server by ID:
 >
 ```shell
-> langgraph deploy delete <DEPLOYMENT_ID>
+> langgraph deploy delete <AGENT_SERVER_ID>
 ```
 >
 > To skip the confirmation prompt, pass `--force`:
 >
 ```shell
-> langgraph deploy delete --force <DEPLOYMENT_ID>
+> langgraph deploy delete --force <AGENT_SERVER_ID>
 ```
 
 > [!NOTE]
 >
-> Deletion is asynchronous. The deployment disappears from the **Deployments** view immediately, but LangSmith removes its infrastructure and metadata in stages. The deployment name might remain unavailable until deletion finishes.
+> Deletion is asynchronous. The Agent Server disappears from the **Agent Servers** view immediately, but LangSmith removes its infrastructure and metadata in stages. The Agent Server name might remain unavailable until deletion finishes.
 
 ## See also
 
-* [Create a deployment](deploy-to-cloud.md)
+* [Create an Agent Server](deploy-to-cloud.md)
 * [Preview builds](preview-builds.md)
 
 ***

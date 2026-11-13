@@ -1,6 +1,6 @@
 ---
 title: "Reference"
-description: "Reference for the LangSmith Deployment SDKs, CLI, and APIs for deploying and interacting with agents."
+description: "Reference for the LangSmith Agent Server SDKs, CLI, and APIs for deploying and interacting with agents."
 source: "https://docs.langchain.com/langsmith/deploy-reference-overview"
 category: "docs"
 tags: [docs, langsmith, deploy-reference-overview]
@@ -8,13 +8,13 @@ tags: [docs, langsmith, deploy-reference-overview]
 
 # Reference
 
-> Reference for the LangSmith Deployment SDKs, CLI, and APIs for deploying and interacting with agents.
+> Reference for the LangSmith Agent Server SDKs, CLI, and APIs for deploying and interacting with agents.
 
 This section is a reference for the SDKs, CLI, and APIs you use to deploy and interact with agents on the [Agent Server](agent-server.md) runtime.
 
 ## SDKs and CLI
 
-> [card] [LangSmith Deployments SDK](https://docs.langchain.com/langsmith/smith-deployments-sdk.md)
+> [card] [LangSmith Agent Server SDK](https://docs.langchain.com/langsmith/smith-deployments-sdk.md)
 >
 > Management of LangSmith deployments and revisions using the LangGraph SDK.
 

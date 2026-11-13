@@ -266,7 +266,7 @@ const logExecutionContext = tool(
 
 ### Server info
 
-When your tool runs on LangGraph Server, access the assistant ID, graph ID, and authenticated user via `runtime.server_info`:
+When your tool runs on Agent Server, access the assistant ID, graph ID, and authenticated user via `runtime.server_info`:
 
 ```ts
 import { tool } from "langchain";
@@ -291,7 +291,7 @@ const getAssistantScopedData = tool(
 );
 ```
 
-`serverInfo` is `null` when the tool is not running on LangGraph Server.
+`serverInfo` is `null` when the tool is not running on Agent Server.
 
 > [!NOTE]
 >

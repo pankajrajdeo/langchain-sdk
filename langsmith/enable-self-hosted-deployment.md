@@ -1,22 +1,26 @@
 ---
-title: "Enable LangSmith Deployment"
+title: "Enable Agent Server hosting"
 description: "Add a control plane and data plane to deploy and manage agents on self-hosted LangSmith."
 source: "https://docs.langchain.com/langsmith/enable-self-hosted-deployment"
 category: "docs"
 tags: [docs, langsmith, enable-self-hosted-deployment]
 ---
 
-# Enable LangSmith Deployment
+# Enable Agent Server hosting
 
 > Add a control plane and data plane to deploy and manage agents on self-hosted LangSmith.
 
-[LangSmith Deployment](deployment.md) adds a [control plane](control-plane.md) and [data plane](data-plane.md) to your installation. It lets you deploy and manage agents through the LangSmith UI.
-
-Deployment is optional for observability and evaluation. Complete the [Kubernetes installation](kubernetes.md) first. For other optional features, see [Configure additional features](self-host-additional-features.md). For Agent Servers without a control plane, see [Standalone servers](deploy-standalone-server.md).
+[LangSmith Agent Server](deployment.md) hosting adds a [control plane](control-plane.md) and [data plane](data-plane.md) to your self-hosted LangSmith installation. It lets you deploy and manage Agent Servers through the LangSmith UI.
 
 > [!NOTE]
 >
-> LangSmith Deployment requires an [Enterprise](https://langchain.com/pricing) plan.
+> LangSmith Deployment is now **LangSmith Agent Server**.
+
+Agent Server hosting is optional for observability and evaluation. Complete the [Kubernetes installation](kubernetes.md) first. For other optional features, see [Configure additional features](self-host-additional-features.md). For Agent Servers without a control plane, see [Standalone servers](deploy-standalone-server.md).
+
+> [!NOTE]
+>
+> Agent Server hosting requires an [Enterprise](https://langchain.com/pricing) plan.
 
 ## Prerequisites
 
@@ -59,20 +63,22 @@ At least one StorageClass should have a `PROVISIONER` value (not `kubernetes.io/
 
 Ensure egress to `https://beacon.langchain.com` is available. See the [egress documentation](self-host-egress.md).
 
-## Enable LangSmith Deployment
+## Enable Agent Server hosting
 
 ### Components
 
-Enabling LangSmith Deployment provisions the following resources in your cluster:
+Enabling Agent Server hosting provisions the following resources in your cluster:
 
 * `listener`: Listens to the [control plane](control-plane.md) for changes to your deployments and creates or updates downstream CRDs.
-* `LangGraphPlatform CRD`: Manages instances of LangSmith Deployment.
+* `LangGraphPlatform CRD`: Manages Agent Server deployments.
 * `operator`: Handles changes to your LangSmith CRDs.
 * `host-backend`: The [control plane](control-plane.md).
 
+<a id="enable-langsmith-deployment"></a>
+
 ### Enable the feature
 
-To enable LangSmith Deployment, update your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts):
+To enable Agent Server hosting, update your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts):
 
 **1. Enable deployment in your config**
 
@@ -336,7 +342,7 @@ EOF
 
 ## Next steps
 
-Once LangSmith Deployment is enabled, see [Deploy with control plane](deploy-with-control-plane.md) to build and deploy your applications via the LangSmith UI.
+Once Agent Server hosting is enabled, see [Deploy with control plane](deploy-with-control-plane.md) to build and deploy your applications via the LangSmith UI.
 
 ***
 

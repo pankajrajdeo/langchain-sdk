@@ -1,6 +1,6 @@
 ---
 title: "Self-hosted LangSmith"
-description: "Run LangSmith in your own Kubernetes cluster, with Insights and Chat enabled by default and optional features such as Sandboxes, Engine, Fleet, LLM Gateway, and LangSmith Deployment."
+description: "Run LangSmith in your own Kubernetes cluster, with Insights and Chat enabled by default and optional features such as Sandboxes, Engine, Fleet, LLM Gateway, and Agent Server hosting."
 source: "https://docs.langchain.com/langsmith/self-hosted"
 category: "docs"
 tags: [docs, langsmith, self-hosted]
@@ -8,13 +8,13 @@ tags: [docs, langsmith, self-hosted]
 
 # Self-hosted LangSmith
 
-> Run LangSmith in your own Kubernetes cluster, with Insights and Chat enabled by default and optional features such as Sandboxes, Engine, Fleet, LLM Gateway, and LangSmith Deployment.
+> Run LangSmith in your own Kubernetes cluster, with Insights and Chat enabled by default and optional features such as Sandboxes, Engine, Fleet, LLM Gateway, and Agent Server hosting.
 
 > [!NOTE]
 >
 > Self-hosted LangSmith is an add-on to the Enterprise plan designed for LangChain's largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want a license key to trial LangSmith in your environment.
 
-Self-hosted LangSmith runs the LangSmith platform in your own infrastructure so that trace and operational data stay in your environment. The base installation includes [observability](observability.md), [evaluation](evaluation.md), [prompt engineering](prompt-context-hub.md#prompts), [Insights](insights.md), and [Chat](chat.md). You can add [Sandboxes](sandboxes.md), [Engine](engine.md), [Fleet](fleet/index.md), [LLM Gateway](llm-gateway.md), and [LangSmith Deployment](deployment.md) when your use case requires them.
+Self-hosted LangSmith runs the LangSmith platform in your own infrastructure so that trace and operational data stay in your environment. The base installation includes [observability](observability.md), [evaluation](evaluation.md), [prompt engineering](prompt-context-hub.md#prompts), [Insights](insights.md), and [Chat](chat.md). You can add [Sandboxes](sandboxes.md), [Engine](engine.md), [Fleet](fleet/index.md), [LLM Gateway](llm-gateway.md), and [Agent Server hosting](deployment.md) when your use case requires them.
 
 ## Features
 
@@ -24,9 +24,9 @@ Self-hosted LangSmith runs the LangSmith platform in your own infrastructure so 
 | [Insights](insights.md) and [Chat](chat.md) (formerly Polly) | Enabled by default in Helm chart version 0.15.1 or later | One encryption key per feature and model access. See [Configure Insights and Chat](self-host-insights-chat.md). |
 | [Sandboxes](enable-self-hosted-sandboxes.md) | Optional | KVM-capable nodes and JuiceFS storage on EKS, GKE, or AKS. |
 | [Engine](engine-self-hosted.md) | Optional | Sandboxes, a license with the Engine entitlement, and Helm chart version 0.16.0 or later. Air-gapped installations require Helm chart version 0.17.0 or later. |
-| [Fleet](enable-self-hosted-fleet.md) | Optional | Fleet services in your cluster. Does not require LangSmith Deployment. |
+| [Fleet](enable-self-hosted-fleet.md) | Optional | Fleet services in your cluster. Does not require Agent Server hosting. |
 | [LLM Gateway](llm-gateway-self-hosted.md) | Optional (beta) | Helm chart version 0.17.1 or later. The `agent-gateway` service needs access to PostgreSQL, Redis, and other LangSmith pods. |
-| [LangSmith Deployment](enable-self-hosted-deployment.md) | Optional | KEDA, an ingress, and a control plane and data plane. To run Agent Servers without a control plane, see [standalone servers](deploy-standalone-server.md). |
+| [Agent Server hosting](enable-self-hosted-deployment.md) | Optional | KEDA, an ingress, and a control plane and data plane. To run Agent Servers without a control plane, see [standalone servers](deploy-standalone-server.md). |
 
 ## Architecture
 

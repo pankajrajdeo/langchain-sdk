@@ -22,4 +22,4 @@ name: Annotated[str, Field(description=_CRITERION_NAME_DESCRIPTION)]
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/18930b5463c8a0a432353db5299af280f879973f/libs/deepagents/deepagents/middleware/rubric.py#L199)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0ec42441901968a75202a3ef365650eb280a473b/libs/deepagents/deepagents/middleware/rubric.py#L199)

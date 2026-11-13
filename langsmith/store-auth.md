@@ -1,6 +1,6 @@
 ---
 title: "Isolate store data per user"
-description: "Scope long-term store data to each authenticated user in LangSmith Deployment using auth handlers."
+description: "Scope long-term store data to each authenticated user in LangSmith Agent Server using auth handlers."
 source: "https://docs.langchain.com/langsmith/store-auth"
 category: "docs"
 tags: [docs, langsmith, store-auth]
@@ -8,11 +8,11 @@ tags: [docs, langsmith, store-auth]
 
 # Isolate store data per user
 
-> Scope long-term store data to each authenticated user in LangSmith Deployment using auth handlers.
+> Scope long-term store data to each authenticated user in LangSmith Agent Server using auth handlers.
 
-Every [LangSmith Deployment](deployment.md) includes a Postgres-backed [store](../langgraph/stores.md) for long-term memory and cross-thread data. By default, store namespaces are shared across all callers. To give each user their own isolated store, configure [custom authentication](custom-auth.md) and add a store [authorization handler](auth.md#authorization) that rewrites namespaces to include the authenticated user's identity.
+Every [Agent Server](deployment.md) includes a Postgres-backed [store](../langgraph/stores.md) for long-term memory and cross-thread data. By default, store namespaces are shared across all callers. To give each user their own isolated store, configure [custom authentication](custom-auth.md) and add a store [authorization handler](auth.md#authorization) that rewrites namespaces to include the authenticated user's identity.
 
-This guide shows how to configure that isolation in LangSmith Deployment. The same pattern works for [self-hosted](self-hosted.md) deployments with custom auth enabled.
+This guide shows how to configure that isolation in LangSmith Agent Server. The same pattern works for [self-hosted](self-hosted.md) deployments with custom auth enabled.
 
 ## How it works
 
@@ -30,10 +30,10 @@ A user who writes to logical namespace `("memories",)` with automatic prefix rew
 
 ## Prerequisites
 
-* A LangSmith Deployment with [custom authentication](set-up-custom-auth.md) configured.
+* An Agent Server with [custom authentication](set-up-custom-auth.md) configured.
 * An `@auth.authenticate` handler that returns a stable, unique `identity` for each end user.
 
-## Configure auth in LangSmith Deployment
+## Configure auth in LangSmith Agent Server
 
 Point your deployment at your auth module in [`langgraph.json`](application-structure.md#configuration-file-concepts):
 

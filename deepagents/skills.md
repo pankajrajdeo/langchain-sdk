@@ -942,7 +942,7 @@ Reset the stored metadata to load every source again at the start of the next ru
 
 > [!NOTE]
 >
-> Local runs often have no checkpointer, so skill edits take effect immediately and skills appear to reload on their own. [LangSmith Deployments](../langsmith/deployment.md) configure a persistent checkpointer automatically, so the same agent holds its skills for the life of a thread once deployed. See [Going to production](going-to-production.md).
+> Local runs often have no checkpointer, so skill edits take effect immediately and skills appear to reload on their own. [LangSmith Agent Server](../langsmith/deployment.md) configures a persistent checkpointer automatically, so the same agent holds its skills for the life of a thread once deployed. See [Going to production](going-to-production.md).
 
 > [!NOTE]
 >
@@ -1101,7 +1101,7 @@ from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.store.memory import InMemoryStore
 
-store = InMemoryStore()  # Good for local dev; omit for LangSmith Deployment
+store = InMemoryStore()  # Good for local dev; omit for LangSmith Agent Server
 
 agent = create_deep_agent(
     model="google_genai:gemini-3.6-flash",
@@ -1132,7 +1132,7 @@ from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.store.memory import InMemoryStore
 
-store = InMemoryStore()  # Good for local dev; omit for LangSmith Deployment
+store = InMemoryStore()  # Good for local dev; omit for LangSmith Agent Server
 
 agent = create_deep_agent(
     model="openai:gpt-6.1-sol",
@@ -1163,7 +1163,7 @@ from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.store.memory import InMemoryStore
 
-store = InMemoryStore()  # Good for local dev; omit for LangSmith Deployment
+store = InMemoryStore()  # Good for local dev; omit for LangSmith Agent Server
 
 agent = create_deep_agent(
     model="anthropic:claude-sonnet-5",
@@ -1194,7 +1194,7 @@ from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.store.memory import InMemoryStore
 
-store = InMemoryStore()  # Good for local dev; omit for LangSmith Deployment
+store = InMemoryStore()  # Good for local dev; omit for LangSmith Agent Server
 
 agent = create_deep_agent(
     model="openrouter:z-ai/glm-5.2",
@@ -1225,7 +1225,7 @@ from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.store.memory import InMemoryStore
 
-store = InMemoryStore()  # Good for local dev; omit for LangSmith Deployment
+store = InMemoryStore()  # Good for local dev; omit for LangSmith Agent Server
 
 agent = create_deep_agent(
     model="fireworks:accounts/fireworks/models/glm-5p2",
@@ -1256,7 +1256,7 @@ from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.store.memory import InMemoryStore
 
-store = InMemoryStore()  # Good for local dev; omit for LangSmith Deployment
+store = InMemoryStore()  # Good for local dev; omit for LangSmith Agent Server
 
 agent = create_deep_agent(
     model="baseten:zai-org/GLM-5.2",
@@ -1287,7 +1287,7 @@ from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.store.memory import InMemoryStore
 
-store = InMemoryStore()  # Good for local dev; omit for LangSmith Deployment
+store = InMemoryStore()  # Good for local dev; omit for LangSmith Agent Server
 
 agent = create_deep_agent(
     model="ollama:north-mini-code-1.0",
@@ -1326,7 +1326,7 @@ from deepagents import FilesystemPermission, create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.store.memory import InMemoryStore
 
-store = InMemoryStore()  # Use for local dev; omit for LangSmith Deployment
+store = InMemoryStore()  # Use for local dev; omit for LangSmith Agent Server
 
 agent = create_deep_agent(
     model="anthropic:claude-sonnet-4-6",

@@ -427,9 +427,9 @@ async def read_file(
 ### Configure `langgraph.json`
 
 Register both the agent graph and the API server. The `http.app` field tells
-the LangGraph platform to serve your custom routes alongside the default ones.
+Agent Server to serve your custom routes alongside the default ones.
 See [application structure](../../langgraph/application-structure.md) and
-[LangSmith Deployments](../going-to-production.md#langsmith-deployments)
+[LangSmith Agent Server](../going-to-production.md#langsmith-deployments)
 for the full set of `langgraph.json` options.
 
 ```json
@@ -460,7 +460,7 @@ chat panel. It uses [`useStream`](https://reference.langchain.com/javascript/lan
 endpoints for file browsing.
 
 For production deployment, point `apiUrl` at your
-[LangSmith Deployment](../../langsmith/deployment.md), and pass a stable
+[Agent Server URL](../../langsmith/deployment.md), and pass a stable
 `thread_id` on each run. See
 [Frontend](../going-to-production.md#frontend) in
 [Going to production](../going-to-production.md) for those settings
